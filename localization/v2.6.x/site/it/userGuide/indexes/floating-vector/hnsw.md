@@ -45,7 +45,7 @@ summary: >-
 <ol>
 <li><p><strong>Punto di ingresso</strong>: La ricerca inizia da un punto di ingresso fisso nel livello superiore, che è un nodo predeterminato del grafo.</p></li>
 <li><p><strong>Ricerca avida</strong>: L'algoritmo si muove avidamente verso il vicino più prossimo del livello corrente, finché non riesce ad avvicinarsi al vettore della domanda. Gli strati superiori hanno una funzione di navigazione, agendo come un filtro grossolano per individuare i potenziali punti di ingresso per la ricerca più fine ai livelli inferiori.</p></li>
-<li><p><strong>Discesa del livello</strong>: Una volta raggiunto un <strong>minimo locale</strong> nel livello corrente, l'algoritmo salta al livello inferiore, utilizzando un collegamento prestabilito, e ripete la ricerca avida.</p></li>
+<li><p><strong>Discesa del livello</strong>: Una volta raggiunto un <strong>minimo locale</strong> nel livello corrente, l'algoritmo salta al livello inferiore, utilizzando una connessione prestabilita, e ripete la ricerca avida.</p></li>
 <li><p><strong>Raffinamento</strong><strong>finale</strong>: Questo processo continua fino al raggiungimento del livello inferiore, dove un'ultima fase di raffinamento identifica i vicini più prossimi.</p></li>
 </ol>
 <p>
@@ -102,7 +102,7 @@ index_params.add_index(
 </ul>
 <p>Per conoscere altri parametri di costruzione disponibili per l'indice <code translate="no">HNSW</code>, fare riferimento a <a href="/docs/it/hnsw.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice al metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

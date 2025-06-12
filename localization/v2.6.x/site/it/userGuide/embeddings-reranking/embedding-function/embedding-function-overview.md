@@ -46,8 +46,8 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Qualsiasi campo di input incorporato dal modulo Function deve sempre contenere un valore; se viene fornito un null, il modulo lancia un errore.</p></li>
-<li><p>Il modulo Function elabora solo i campi definiti esplicitamente nello schema della collezione; non genera incorporazioni per campi dinamici.</p></li>
+<li><p>Qualsiasi campo di input che il modulo Function incorpora deve sempre contenere un valore; se viene fornito un null, il modulo lancia un errore.</p></li>
+<li><p>Il modulo Function elabora solo i campi definiti esplicitamente nello schema della collezione; non genera incorporazioni per i campi dinamici.</p></li>
 <li><p>I campi di input da incorporare devono essere del tipo <code translate="no">VARCHAR</code>.</p></li>
 <li><p>Il modulo Function può incorporare un campo di input in:</p>
 <ul>
@@ -394,7 +394,7 @@ schema.add_function(text_embedding_function)
    </tr>
 </table>
 <div class="alert note">
-<p>Per le raccolte con più campi scalari che richiedono la conversione da testo a vettore, aggiungere funzioni separate allo schema della raccolta, assicurandosi che ogni funzione abbia un nome unico e un valore <code translate="no">output_field_names</code>.</p>
+<p>Per le raccolte con più campi scalari che richiedono la conversione da testo a vettore, aggiungere funzioni separate allo schema della raccolta, assicurandosi che ogni funzione abbia un nome e un valore <code translate="no">output_field_names</code> unici.</p>
 </div>
 <h3 id="Step-3-Configure-index" class="common-anchor-header">Passo 3: Configurare l'indice</h3><p>Dopo aver definito lo schema con i campi necessari e la funzione incorporata, impostare l'indice per la raccolta. Per semplificare questo processo, utilizzare <code translate="no">AUTOINDEX</code> come <code translate="no">index_type</code>, un'opzione che consente a Milvus di scegliere e configurare il tipo di indice più adatto in base alla struttura dei dati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>

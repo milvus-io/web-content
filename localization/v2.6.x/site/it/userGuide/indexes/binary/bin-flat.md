@@ -61,10 +61,10 @@ index_params.add_index(
 <p>In questa configurazione:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Il tipo di indice da costruire. In questo esempio, impostare il valore su <code translate="no">BIN_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Il metodo usato per calcolare la distanza tra i vettori. I valori supportati per le incorporazioni binarie includono <code translate="no">HAMMING</code> (predefinito) e <code translate="no">JACCARD</code>. Per i dettagli, fare riferimento a <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Il metodo usato per calcolare la distanza tra i vettori. I valori supportati per le incorporazioni binarie sono <code translate="no">HAMMING</code> (predefinito) e <code translate="no">JACCARD</code>. Per i dettagli, fare riferimento a <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Per l'indice BIN_FLAT non sono necessari parametri aggiuntivi.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per maggiori dettagli, consultare la sezione <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per maggiori dettagli, consultare la sezione <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

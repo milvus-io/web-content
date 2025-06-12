@@ -2,9 +2,9 @@
 id: configure_proxy.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure proxy for Milvus.
+summary: Imparare a configurare il proxy per Milvus.
 ---
-<h1 id="proxy-related-Configurations" class="common-anchor-header">proxy-related Configurations<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="proxy-related-Configurations" class="common-anchor-header">Configurazioni correlate al proxy<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure proxy for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of proxy, used to validate client requests and reduce the returned results.</p>
+    </button></h1><p>Configurazione correlata del proxy, usata per convalidare le richieste del client e ridurre i risultati restituiti.</p>
 <h2 id="proxytimeTickInterval" class="common-anchor-header"><code translate="no">proxy.timeTickInterval</code><button data-href="#proxytimeTickInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,13 +38,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.timeTickInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval at which proxy synchronizes the time tick, unit: ms.      </td>
+      <td>        L'intervallo di tempo in cui il proxy sincronizza il time tick, unità: ms.      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -67,13 +67,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.healthCheckTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ms, the interval that to do component healthy check      </td>
+      <td>        ms, l'intervallo in cui effettuare il controllo dello stato di salute del componente.      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -96,13 +96,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.msgStream.timeTick.bufSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of messages can be buffered in the timeTick message stream of the proxy when producing messages.      </td>
+      <td>        Il numero massimo di messaggi che possono essere bufferizzati nel flusso di messaggi timeTick del proxy durante la produzione di messaggi.      </td>
       <td>512</td>
     </tr>
   </tbody>
@@ -125,13 +125,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxNameLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum length of the name or alias that can be created in Milvus, including the collection name, collection alias, partition name, and field name.      </td>
+      <td>        La lunghezza massima del nome o dell'alias che può essere creato in Milvus, compreso il nome della collezione, l'alias della collezione, il nome della partizione e il nome del campo.      </td>
       <td>255</td>
     </tr>
   </tbody>
@@ -154,13 +154,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxFieldNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of field can be created when creating in a collection. It is strongly DISCOURAGED to set maxFieldNum >= 64.      </td>
+      <td>        Il numero massimo di campi che possono essere creati quando si crea una collezione. È fortemente sconsigliato impostare maxFieldNum &gt;= 64.      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -183,13 +183,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxVectorFieldNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of vector fields that can be specified in a collection. Value range: [1, 10].      </td>
+      <td>        Il numero massimo di campi vettoriali che possono essere specificati in una collezione. Intervallo di valori: [1, 10].      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -212,13 +212,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxShardNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of shards can be created when creating in a collection.      </td>
+      <td>        Il numero massimo di frammenti che possono essere creati quando si crea una raccolta.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -241,13 +241,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxDimension">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of dimensions of a vector can have when creating in a collection.      </td>
+      <td>        Il numero massimo di dimensioni di un vettore che può essere creato in una collezione.      </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -270,16 +270,16 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ginLogging">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to produce gin logs.\n</li>      
-        <li>please adjust in embedded Milvus: false</li>      </td>
-      <td>true</td>
+        <li>Se produrre o meno i log di gin.\n</li>      
+        <li>regolare in Milvus incorporato: false</li>      </td>
+      <td>vero</td>
     </tr>
   </tbody>
 </table>
@@ -301,13 +301,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ginLogSkipPaths">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        skip url path for gin log      </td>
+      <td>        salta il percorso dell'url per il log di gin   </td>
       <td>/</td>
     </tr>
   </tbody>
@@ -330,13 +330,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxTaskNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of tasks in the task queue of the proxy.      </td>
+      <td>        Il numero massimo di task nella coda dei task del proxy.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ddlConcurrency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The concurrent execution number of DDL at proxy.      </td>
+      <td>        Il numero di esecuzioni simultanee di DDL nel proxy.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -388,13 +388,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.dclConcurrency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The concurrent execution number of DCL at proxy.      </td>
+      <td>        Il numero di esecuzioni simultanee di DCL al proxy.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -417,14 +417,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.mustUsePartitionKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch for whether proxy must use partition key for the collection      </td>
-      <td>false</td>
+      <td>        interruttore per stabilire se il proxy deve usare la chiave di partizione per la collezione      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -446,14 +446,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable the access log feature.      </td>
-      <td>false</td>
+      <td>        Se abilitare la funzione di log degli accessi.      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -475,14 +475,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.minioEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to upload local access log files to MinIO. This parameter can be specified when proxy.accessLog.filename is not empty.      </td>
-      <td>false</td>
+      <td>        Se caricare o meno i file di log degli accessi locali su MinIO. Questo parametro può essere specificato quando proxy.accessLog.filename non è vuoto.      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -504,13 +504,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.localPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The local folder path where the access log file is stored. This parameter can be specified when proxy.accessLog.filename is not empty.      </td>
+      <td>        Il percorso della cartella locale in cui è memorizzato il file di log degli accessi. Questo parametro può essere specificato quando proxy.accessLog.filename non è vuoto.      </td>
       <td>/tmp/milvus_access</td>
     </tr>
   </tbody>
@@ -533,13 +533,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.filename">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The name of the access log file. If you leave this parameter empty, access logs will be printed to stdout.      </td>
+      <td>        Il nome del file di log degli accessi. Se si lascia questo parametro vuoto, i registri degli accessi verranno stampati su stdout.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -562,13 +562,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.maxSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file. Unit: MB.      </td>
+      <td>        La dimensione massima consentita per un singolo file di log degli accessi. Se la dimensione del file di registro raggiunge questo limite, viene attivato un processo di rotazione. Questo processo sigilla il file di log di accesso corrente, crea un nuovo file di log e cancella il contenuto del file di log originale. Unità: MB.      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -591,13 +591,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.rotatedTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum time interval allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one. Unit: seconds      </td>
+      <td>        L'intervallo di tempo massimo consentito per la rotazione di un singolo file di log degli accessi. Al raggiungimento dell'intervallo di tempo specificato, viene attivato un processo di rotazione che porta alla creazione di un nuovo file di log degli accessi e alla chiusura del precedente. Unità: secondi      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -620,13 +620,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.remotePath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The path of the object storage for uploading access log files.      </td>
+      <td>        Il percorso dell'archivio oggetti per il caricamento dei file di log degli accessi.      </td>
       <td>access_log/</td>
     </tr>
   </tbody>
@@ -649,13 +649,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.remoteMaxTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.      </td>
+      <td>        L'intervallo di tempo consentito per il caricamento dei file di log degli accessi. Se il tempo di caricamento di un file di log supera questo intervallo, il file viene cancellato. L'impostazione del valore a 0 disabilita questa funzione.      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -678,13 +678,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.cacheSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Size of log of write cache, in byte. (Close write cache if size was 0)      </td>
+      <td>        Dimensione del log della cache di scrittura, in byte. (Chiudere la cache di scrittura se la dimensione era 0)  </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -707,13 +707,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.cacheFlushInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        time interval of auto flush write cache, in seconds. (Close auto flush if interval was 0)      </td>
+      <td>        intervallo di tempo del lavaggio automatico della cache di scrittura, in secondi. (Chiudere il lavaggio automatico se l'intervallo era 0)  </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -736,13 +736,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.connectionCheckIntervalSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval time(in seconds) for connection manager to scan inactive client info      </td>
+      <td>        intervallo di tempo (in secondi) per la scansione da parte del gestore delle connessioni delle informazioni sui client inattivi.      </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -765,13 +765,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.connectionClientInfoTTLSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        inactive client info TTL duration, in seconds      </td>
+      <td>        durata del TTL delle informazioni sul client inattivo, in secondi      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -794,13 +794,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxConnectionNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the max client info numbers that proxy should manage, avoid too many client infos      </td>
+      <td>        il numero massimo di informazioni sul client che il proxy deve gestire, per evitare un numero eccessivo di informazioni sul client      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -823,13 +823,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        secondi. forzare l'arresto del nodo senza l'arresto di grazia      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -852,13 +852,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.slowQuerySpanInSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        query whose executed time exceeds the `slowQuerySpanInSeconds` can be considered slow, in seconds.      </td>
+      <td>        La query il cui tempo di esecuzione supera il valore `slowQuerySpanInSeconds` può essere considerata lenta, in secondi.      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -881,13 +881,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.queryNodePooling.size">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the size for shardleader(querynode) client pool      </td>
+      <td>        dimensione del pool di client di shardleader(querynode)      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -910,14 +910,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable the http server      </td>
-      <td>true</td>
+      <td>        Se abilitare il server http    </td>
+      <td>vero</td>
     </tr>
   </tbody>
 </table>
@@ -939,13 +939,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.debug_mode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable http server debug mode      </td>
+      <td>        Se abilitare o meno la modalità di debug del server http    </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -968,13 +968,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        high-level restful api      </td>
+      <td>        api restful di alto livello      </td>
       <td></td>
     </tr>
   </tbody>
@@ -997,14 +997,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.acceptTypeAllowInt64">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        high-level restful api, whether http client can deal with int64      </td>
-      <td>true</td>
+      <td>        restful api di alto livello, se il client http può gestire int64     </td>
+      <td>vero</td>
     </tr>
   </tbody>
 </table>
@@ -1026,14 +1026,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.enablePprof">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable pprof middleware on the metrics port      </td>
-      <td>true</td>
+      <td>        Se abilitare il middleware pprof sulla porta delle metriche      </td>
+      <td>vero</td>
     </tr>
   </tbody>
 </table>
@@ -1055,13 +1055,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of proxy. If not specified, use the first unicastable address      </td>
+      <td>        Indirizzo TCP/IP del proxy. Se non viene specificato, viene utilizzato il primo indirizzo unicastable.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1084,13 +1084,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of proxy      </td>
+      <td>        Porta TCP del proxy     </td>
       <td>19530</td>
     </tr>
   </tbody>
@@ -1113,13 +1113,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the proxy can send, unit: byte      </td>
+      <td>        Dimensione massima di ogni richiesta RPC che il proxy può inviare, unità: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1142,13 +1142,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the proxy can receive, unit: byte      </td>
+      <td>        La dimensione massima di ogni richiesta RPC che il proxy può ricevere, unità: byte    </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -1171,13 +1171,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on proxy can send, unit: byte      </td>
+      <td>        La dimensione massima di ogni richiesta RPC che i client sul proxy possono inviare, unità: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1200,13 +1200,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on proxy can receive, unit: byte      </td>
+      <td>        La dimensione massima di ogni richiesta RPC che i client sul proxy possono ricevere, unità: byte    </td>
       <td>67108864</td>
     </tr>
   </tbody>

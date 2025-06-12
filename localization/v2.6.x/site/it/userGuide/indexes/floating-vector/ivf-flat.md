@@ -47,7 +47,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
    </span> <span class="img-wrapper"> <span>Flusso di lavoro IVF FLAT</span> </span></p>
-<p>Questo metodo di indicizzazione accelera il processo di ricerca, ma presenta un potenziale inconveniente: il candidato trovato come più vicino all'incorporazione interrogata potrebbe non essere quello esattamente più vicino. Questo può accadere se l'embedding più vicino all'embedding della query risiede in un cluster diverso da quello selezionato in base al centroide più vicino (si veda la visualizzazione qui sotto).</p>
+<p>Questo metodo di indicizzazione accelera il processo di ricerca, ma presenta un potenziale inconveniente: il candidato trovato come il più vicino all'incorporazione interrogata potrebbe non essere quello esattamente più vicino. Questo può accadere se l'embedding più vicino all'embedding della query risiede in un cluster diverso da quello selezionato in base al centroide più vicino (si veda la visualizzazione qui sotto).</p>
 <p>Per risolvere questo problema, <strong>IVF_FLAT</strong> fornisce due iperparametri che possono essere regolati:</p>
 <ul>
 <li><p><code translate="no">nlist</code>: Specifica il numero di partizioni da creare con l'algoritmo k-means.</p></li>
@@ -93,7 +93,7 @@ index_params.add_index(
 <p>In questa configurazione:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Il tipo di indice da costruire. In questo esempio, impostare il valore su <code translate="no">IVF_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per i dettagli, fare riferimento a <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la creazione dell'indice.</p>
 <ul>
 <li><code translate="no">nlist</code>: Numero di cluster in cui suddividere l'insieme di dati.</li>

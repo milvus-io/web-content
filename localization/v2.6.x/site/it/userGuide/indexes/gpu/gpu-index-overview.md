@@ -70,7 +70,7 @@ summary: >-
    <tr>
      <th><p>Tipo di indice</p></th>
      <th><p>Descrizione</p></th>
-     <th><p>Utilizzo della memoria</p></th>
+     <th><p>Uso della memoria</p></th>
    </tr>
    <tr>
      <td><p><a href="/docs/it/gpu-cagra.md">GPU_CAGRA</a></p></td>
@@ -138,7 +138,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Quando è opportuno utilizzare un indice GPU?</strong></p>
-<p>Un indice GPU è particolarmente vantaggioso in situazioni che richiedono un'elevata velocità di elaborazione o un elevato richiamo. Ad esempio, quando si tratta di batch di grandi dimensioni, il throughput dell'indicizzazione su GPU può superare di ben 100 volte quello dell'indicizzazione su CPU. In scenari con batch più piccoli, gli indici su GPU superano comunque in modo significativo gli indici su CPU in termini di prestazioni. Inoltre, se è richiesto un inserimento rapido dei dati, l'integrazione di una GPU può accelerare notevolmente il processo di creazione degli indici.</p></li>
+<p>Un indice GPU è particolarmente vantaggioso in situazioni che richiedono un'elevata velocità di elaborazione o di richiamo. Ad esempio, quando si tratta di batch di grandi dimensioni, il throughput dell'indicizzazione su GPU può superare di ben 100 volte quello dell'indicizzazione su CPU. In scenari con batch più piccoli, gli indici su GPU superano comunque in modo significativo gli indici su CPU in termini di prestazioni. Inoltre, se è richiesto un inserimento rapido dei dati, l'integrazione di una GPU può accelerare notevolmente il processo di creazione degli indici.</p></li>
 <li><p><strong>In quali scenari sono più adatti gli indici su GPU come GPU_CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT e GPU_BRUTE_FORCE?</strong></p>
 <p><code translate="no">GPU_CAGRA</code> Gli indici GPU sono ideali per gli scenari che richiedono prestazioni migliori, anche se a costo di consumare più memoria. Per gli ambienti in cui la conservazione della memoria è una priorità, l'indice <code translate="no">GPU_IVF_PQ</code> può aiutare a minimizzare i requisiti di memorizzazione, anche se comporta una maggiore perdita di precisione. L'indice <code translate="no">GPU_IVF_FLAT</code> è un'opzione equilibrata, che offre un compromesso tra prestazioni e utilizzo della memoria. Infine, l'indice <code translate="no">GPU_BRUTE_FORCE</code> è progettato per operazioni di ricerca esaustive, garantendo un tasso di richiamo pari a 1 mediante l'esecuzione di ricerche trasversali.</p></li>
 </ul>

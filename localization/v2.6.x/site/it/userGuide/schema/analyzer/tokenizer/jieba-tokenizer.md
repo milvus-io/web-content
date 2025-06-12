@@ -2,8 +2,8 @@
 id: jieba-tokenizer.md
 title: Jieba
 summary: >-
-  The jieba tokenizer processes Chinese text by breaking it down into its
-  component words.
+  Il tokenizer jieba elabora il testo cinese scomponendolo nelle parole che lo
+  compongono.
 ---
 <h1 id="Jieba" class="common-anchor-header">Jieba<button data-href="#Jieba" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">jieba</code> tokenizer processes Chinese text by breaking it down into its component words.</p>
-<h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
+    </button></h1><p>Il tokenizer <code translate="no">jieba</code> elabora il testo cinese scomponendolo nelle parole che lo compongono.</p>
+<h2 id="Configuration" class="common-anchor-header">Configurazione<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,15 +36,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports two configuration approaches for the <code translate="no">jieba</code> tokenizer: a simple configuration and a custom configuration.</p>
-<h3 id="Simple-configuration" class="common-anchor-header">Simple configuration</h3><p>With the simple configuration, you only need to set the tokenizer to <code translate="no">&quot;jieba&quot;</code>. For example:</p>
+    </button></h2><p>Milvus supporta due approcci di configurazione per il tokenizzatore <code translate="no">jieba</code>: una configurazione semplice e una configurazione personalizzata.</p>
+<h3 id="Simple-configuration" class="common-anchor-header">Configurazione semplice</h3><p>Con la configurazione semplice, è sufficiente impostare il tokenizer su <code translate="no">&quot;jieba&quot;</code>. Ad esempio:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Simple configuration: only specifying the tokenizer name</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,  <span class="hljs-comment"># Use the default settings: dict=[&quot;_default_&quot;], mode=&quot;search&quot;, hmm=true</span>
@@ -64,14 +59,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;tokenizer&quot;: &quot;jieba&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This simple configuration is equivalent to the following custom configuration:</p>
+<p>Questa configurazione semplice è equivalente alla seguente configurazione personalizzata:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom configuration equivalent to the simple configuration above</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,          <span class="hljs-comment"># Tokenizer type, fixed as &quot;jieba&quot;</span>
@@ -92,15 +82,10 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For details on parameters, refer to <a href="/docs/jieba-tokenizer.md#Custom-configuration">Custom configuration</a>.</p>
-<h3 id="Custom-configuration" class="common-anchor-header">Custom configuration</h3><p>For more control, you can provide a custom configuration that allows you to specify a custom dictionary, select the segmentation mode, and enable or disable the Hidden Markov Model (HMM). For example:</p>
+<p>Per i dettagli sui parametri, consultare la sezione <a href="/docs/it/jieba-tokenizer.md#Custom-configuration">Configurazione personalizzata</a>.</p>
+<h3 id="Custom-configuration" class="common-anchor-header">Configurazione personalizzata</h3><p>Per un maggiore controllo, è possibile fornire una configurazione personalizzata che consente di specificare un dizionario personalizzato, selezionare la modalità di segmentazione e attivare o disattivare il modello di Markov nascosto (HMM). Ad esempio:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom configuration with user-defined settings</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
@@ -125,43 +110,43 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Default Value</p></th>
+     <th><p>Parametro</p></th>
+     <th><p>Descrizione</p></th>
+     <th><p>Valore predefinito</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>The type of tokenizer. This is fixed to <code translate="no">"jieba"</code>.</p></td>
+     <td><p>Il tipo di tokenizer. È fissato a <code translate="no">"jieba"</code>.</p></td>
      <td><p><code translate="no">"jieba"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>A list of dictionaries that the analyzer will load as its vocabulary source. Built-in options:</p>
+     <td><p>Un elenco di dizionari che l'analizzatore caricherà come fonte di vocabolario. Opzioni integrate:</p>
 <ul>
-<li><p><code translate="no">"_default_"</code>: Loads the engine's built‑in Simplified‑Chinese dictionary. For details, refer to <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li>
-<li><p><code translate="no">"_extend_default_"</code>: Loads everything in <code translate="no">"_default_"</code> plus an additional Traditional‑Chinese supplement. For details, refer to <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p>
-<p>You can also mix the built‑in dictionary with any number of custom dictionaries. Example: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li>
+<li><p><code translate="no">"_default_"</code>: Carica il dizionario integrato del motore in cinese semplificato. Per i dettagli, fare riferimento a <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li>
+<li><p><code translate="no">"_extend_default_"</code>: Carica tutto quello che c'è in <code translate="no">"_default_"</code> più un supplemento di cinese tradizionale. Per i dettagli, fare riferimento a <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p>
+<p>È anche possibile combinare il dizionario integrato con un numero qualsiasi di dizionari personalizzati. Esempio: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li>
 </ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>The segmentation mode. Possible values:</p>
+     <td><p>La modalità di segmentazione. Valori possibili:</p>
 <ul>
-<li><p><code translate="no">"exact"</code>: Tries to segment the sentence in the most precise manner, making it ideal for text analysis.</p></li>
-<li><p><code translate="no">"search"</code>: Builds on exact mode by further breaking down long words to improve recall, making it suitable for search engine tokenization.</p>
-<p>For more information, refer to <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li>
+<li><p><code translate="no">"exact"</code>: Cerca di segmentare la frase nel modo più preciso, il che la rende ideale per l'analisi del testo.</p></li>
+<li><p><code translate="no">"search"</code>: Si basa sulla modalità esatta, suddividendo ulteriormente le parole lunghe per migliorare il richiamo, rendendola adatta alla tokenizzazione dei motori di ricerca.</p>
+<p>Per ulteriori informazioni, consultare il <a href="https://github.com/fxsjy/jieba">progetto GitHub di Jieba</a>.</p></li>
 </ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">hmm</code></p></td>
-     <td><p>A boolean flag indicating whether to enable the Hidden Markov Model (HMM) for probabilistic segmentation of words not found in the dictionary.</p></td>
+     <td><p>Un flag booleano che indica se abilitare il modello Hidden Markov (HMM) per la segmentazione probabilistica delle parole non presenti nel dizionario.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarle a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Questo permette a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,14 +161,9 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before applying the analyzer configuration to your collection schema, verify its behavior using the <code translate="no">run_analyzer</code> method.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Analyzer configuration</h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+    </button></h2><p>Prima di applicare la configurazione dell'analizzatore allo schema di raccolta, verificarne il comportamento con il metodo <code translate="no">run_analyzer</code>.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Configurazione dell'analizzatore</h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
@@ -205,13 +185,8 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verification using <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verifica con <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -250,5 +225,5 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Expected output</h3><pre><code translate="no" class="language-python">[<span class="hljs-string">&#x27;milvus&#x27;</span>, <span class="hljs-string">&#x27;结巴分词器&#x27;</span>, <span class="hljs-string">&#x27;中&#x27;</span>, <span class="hljs-string">&#x27;文&#x27;</span>, <span class="hljs-string">&#x27;测&#x27;</span>, <span class="hljs-string">&#x27;试&#x27;</span>]
+<h3 id="Expected-output" class="common-anchor-header">Risultato atteso</h3><pre><code translate="no" class="language-python">[<span class="hljs-string">&#x27;milvus&#x27;</span>, <span class="hljs-string">&#x27;结巴分词器&#x27;</span>, <span class="hljs-string">&#x27;中&#x27;</span>, <span class="hljs-string">&#x27;文&#x27;</span>, <span class="hljs-string">&#x27;测&#x27;</span>, <span class="hljs-string">&#x27;试&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>

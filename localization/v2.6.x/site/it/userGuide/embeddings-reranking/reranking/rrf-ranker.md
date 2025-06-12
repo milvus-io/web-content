@@ -65,7 +65,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>Raccomandazioni di esperti</p></td>
-     <td><p>Combina le raccomandazioni di più sistemi esperti</p></td>
+     <td><p>Combinazione delle raccomandazioni di più sistemi esperti</p></td>
      <td><p>Crea classifiche di consenso quando sistemi diversi utilizzano metodi di punteggio incomparabili</p></td>
    </tr>
 </table>
@@ -89,7 +89,7 @@ summary: >-
 <ol>
 <li><p><strong>Raccogliere le classifiche di ricerca</strong>: Raccogliere le classifiche dei risultati di ogni percorso di ricerca vettoriale (rank_1, rank_2).</p></li>
 <li><p><strong>Unire le classifiche</strong>: Converte le classifiche di ciascun percorso (rank_rrf_1, rank_rrf_2) secondo una formula.</p>
-<p>La formula di calcolo prevede <em>N</em>, che rappresenta il numero di recuperi. <em>ranki</em><em>(d</em>) è la posizione di classifica del documento <em>d</em> generata dall'<em>i(th)</em> retriever. <em>k</em> è un parametro di smussamento tipicamente impostato a 60.</p></li>
+<p>La formula di calcolo prevede <em>N</em>, che rappresenta il numero di recuperi. <em>ranki</em><em>(d</em>) è la posizione di classifica del documento <em>d</em> generata dall'<em>i(th)</em> retriever. <em>k</em> è un parametro di smoothing tipicamente impostato a 60.</p></li>
 <li><p><strong>Classifica aggregata</strong>: Ri-classifica i risultati della ricerca in base alle classifiche combinate per produrre i risultati finali.</p></li>
 </ol>
 <p>
@@ -171,7 +171,7 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li>Utilizzare la RRF per riordinare le classifiche dei due gruppi di risultati della ricerca. Si supponga che il parametro di lisciatura <code translate="no">k</code> sia impostato a 60.</li>
+<li>Utilizzare la RRF per riordinare le classifiche dei due gruppi di risultati della ricerca. Si supponga che il parametro di smoothing <code translate="no">k</code> sia impostato a 60.</li>
 </ul>
 <table>
    <tr>
@@ -273,7 +273,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando si utilizza la strategia di reranking RRF, è necessario configurare il parametro <code translate="no">k</code>. Si tratta di un parametro di smussamento che può modificare efficacemente i pesi relativi della ricerca full-text rispetto alla ricerca vettoriale. Il valore predefinito di questo parametro è 60 e può essere regolato entro un intervallo di (0, 16384). Il valore deve essere un numero in virgola mobile. Il valore consigliato è compreso tra [10, 100]. Sebbene <code translate="no">k=60</code> sia una scelta comune, il valore ottimale di <code translate="no">k</code> può variare a seconda delle applicazioni e dei set di dati specifici. Si consiglia di testare e regolare questo parametro in base al caso d'uso specifico per ottenere le migliori prestazioni.</p>
+    </button></h2><p>Quando si utilizza la strategia di reranking RRF, è necessario configurare il parametro <code translate="no">k</code>. Si tratta di un parametro di attenuazione che può modificare efficacemente i pesi relativi della ricerca full-text rispetto alla ricerca vettoriale. Il valore predefinito di questo parametro è 60 e può essere regolato entro un intervallo di (0, 16384). Il valore deve essere un numero in virgola mobile. Il valore consigliato è compreso tra [10, 100]. Sebbene <code translate="no">k=60</code> sia una scelta comune, il valore ottimale di <code translate="no">k</code> può variare a seconda delle applicazioni e dei set di dati specifici. Si consiglia di testare e regolare questo parametro in base al caso d'uso specifico per ottenere le migliori prestazioni.</p>
 <h3 id="Create-an-RRF-Ranker" class="common-anchor-header">Creare un classificatore RRF</h3><p>Dopo aver impostato la raccolta con più campi vettoriali, creare un RRF Ranker con un parametro di smoothing appropriato:</p>
 <div class="alert note">
 <p>Milvus 2.6.x e successive consentono di configurare le strategie di reranking direttamente tramite l'API <code translate="no">Function</code>. Se si utilizza una versione precedente (prima della v2.6.0), consultare la documentazione sul <a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">reranking</a> per le istruzioni di configurazione.</p>
@@ -322,7 +322,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Il tipo di Funzione da richiamare; usare <code translate="no">RERANK</code> per specificare una strategia di reranking</p></td>
+     <td><p>Il tipo di Funzione da invocare; usare <code translate="no">RERANK</code> per specificare una strategia di reranking</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>

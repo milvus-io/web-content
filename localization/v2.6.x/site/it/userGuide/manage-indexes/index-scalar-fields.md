@@ -2,11 +2,11 @@
 id: index-scalar-fields.md
 order: 2
 summary: >-
-  This guide will walk you through creating and configuring scalar indexes for
-  fields such as integers, strings, etc.
-title: Index Scalar Fields
+  Questa guida illustra la creazione e la configurazione di indici scalari per
+  campi come numeri interi, stringhe, ecc.
+title: Indici di campi scalari
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">Index Scalar Fields<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">Indici di campi scalari<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ title: Index Scalar Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, a scalar index is used to speed up metafiltering by a specific non-vector field value, similar to a traditional database index. This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">Types of scalar indexing<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+    </button></h1><p>In Milvus, un indice scalare viene utilizzato per velocizzare il metafiltraggio in base a un valore specifico di un campo non vettoriale, in modo simile a un indice tradizionale di un database. Questa guida illustra la creazione e la configurazione di indici scalari per campi come numeri interi, stringhe, ecc.</p>
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipi di indicizzazione scalare<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,10 +38,10 @@ title: Index Scalar Fields
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Auto indexing</a></strong>: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Custom indexing</a></strong>: You specify the exact index type, such as an inverted index or <a href="/docs/bitmap.md">bitmap index</a>. This provides more control over the index type selection.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Indicizzazione automatica</a></strong>: Milvus decide automaticamente il tipo di indice in base al tipo di dati del campo scalare. È adatta quando non è necessario controllare il tipo di indice specifico.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indicizzazione personalizzata</a></strong>: Si specifica il tipo esatto di indice, ad esempio un indice invertito o un <a href="/docs/it/bitmap.md">indice bitmap</a>. In questo modo si ha un maggiore controllo sulla selezione del tipo di indice.</p></li>
 </ul>
-<h2 id="Auto-indexing" class="common-anchor-header">Auto indexing<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
+<h2 id="Auto-indexing" class="common-anchor-header">Indicizzazione automatica<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,20 +57,17 @@ title: Index Scalar Fields
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To use auto indexing, omit the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>Per utilizzare l'indicizzazione automatica, omettere il parametro <strong>index_type</strong> in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>in modo che Milvus possa dedurre il tipo di indice in base al tipo di campo scalare.</p>
 </div>
 <div class="language-java">
-<p>To use auto indexing, omit the <strong>indexType</strong> parameter in <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>Per utilizzare l'indicizzazione automatica, omettere il parametro <strong>indexType</strong> in , in modo che Milvus possa dedurre il <strong>tipo</strong> di indice in base al tipo di campo scalare. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>in modo che Milvus possa dedurre il tipo di indice in base al tipo di campo scalare.</p>
 </div>
 <div class="language-javascript">
-<p>To use auto indexing, omit the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
+<p>Per utilizzare l'indicizzazione automatica, omettere il parametro <strong>index_type</strong> in , in modo che Milvus possa dedurre il <strong>tipo</strong> di indice in base al tipo di campo scalare. <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>in modo che Milvus possa dedurre il tipo di indice in base al tipo di campo scalare.</p>
 </div>
-<p>For mappings between scalar data types and default indexing algorithms, refer to <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">Scalar field indexing algorithms</a>.</p>
+<p>Per le mappature tra i tipi di dati scalari e gli algoritmi di indicizzazione predefiniti, fare riferimento a <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">Algoritmi di indicizzazione dei campi scalari</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Auto indexing</span>
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -115,7 +112,7 @@ client.createIndex(createIndexReq);
     <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">// Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
 })
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Custom-indexing" class="common-anchor-header">Custom indexing<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
+<h2 id="Custom-indexing" class="common-anchor-header">Indicizzazione personalizzata<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,20 +128,17 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To use custom indexing, specify a particular index type using the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>Per usare l'indicizzazione personalizzata, specificare un particolare tipo di indice usando il parametro <strong>index_type</strong> in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>To use custom indexing, specify a particular index type using the <strong>indexType</strong> parameter in <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
+<p>Per usare l'indicizzazione personalizzata, specificare un particolare tipo di indice usando il parametro <strong>indexType</strong> in . <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>To use custom indexing, specify a particular index type using the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>Per utilizzare l'indicizzazione personalizzata, specificare un particolare tipo di indice utilizzando il parametro <strong>index_type</strong> in . <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
-<p>The example below creates an inverted index for the scalar field <code translate="no">scalar_2</code>.</p>
+<p>L'esempio seguente crea un indice invertito per il campo scalare <code translate="no">scalar_2</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
@@ -185,90 +179,73 @@ client.createIndex(createIndexReq);
 })
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>Metodi e parametri</strong></p>
 <ul>
 <li><p><strong>prepare_index_params()</strong></p>
-<p>Prepares an <strong>IndexParams</strong> object.</p></li>
+<p>Prepara un oggetto <strong>IndexParams</strong>.</p></li>
 <li><p><strong>add_index()</strong></p>
-<p>Adds index configurations to the <strong>IndexParams</strong> object.</p>
+<p>Aggiunge le configurazioni dell'indice all'oggetto <strong>IndexParams</strong>.</p>
 <ul>
-<li><p><strong>field_name</strong> (<em>string</em>)</p>
-<p>The name of the scalar field to index.</p></li>
-<li><p><strong>index_type</strong> (<em>string</em>):</p>
-<p>The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.</p>
-<p>For custom indexing, valid values are:</p>
+<li><p><strong>nome_campo</strong><em>(stringa</em>)</p>
+<p>Il nome del campo scalare da indicizzare.</p></li>
+<li><p><strong>index_type</strong><em>(stringa</em>):</p>
+<p>Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro.</p>
+<p>Per l'indicizzazione personalizzata, i valori validi sono:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</p></li>
-<li><p><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
-<li><p><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</p></li>
+<li><p><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, vedere <a href="/docs/it/scalar_index.md">Indice scalare</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Un tipo di indice che memorizza una bitmap di tutti i valori univoci di un campo. Per maggiori dettagli, vedere <a href="/docs/it/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>STL_SORT</strong>: Ordina i campi scalari utilizzando l'algoritmo di ordinamento standard della libreria template. Supporta solo campi numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
+<li><p><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</p></li>
 </ul></li>
-<li><p><strong>index_name</strong> (<em>string</em>)</p>
-<p>The name of the scalar index to create. Each scalar field supports one index.</p></li>
+<li><p><strong>nome_indice</strong><em>(stringa</em>)</p>
+<p>Il nome dell'indice scalare da creare. Ogni campo scalare supporta un indice.</p></li>
 </ul></li>
-<li><p><strong>create_index()</strong></p>
-<p>Creates the index in the specified collection.</p>
+<li><p><strong>crea_indice()</strong></p>
+<p>Crea l'indice nell'insieme specificato.</p>
 <ul>
-<li><p><strong>collection_name</strong> (<em>string</em>)</p>
-<p>The name of the collection for which the index is created.</p></li>
-<li><p><strong>index_params</strong></p>
-<p>The <strong>IndexParams</strong> object that contains index configurations.</p></li>
+<li><p><strong>nome_raccolta</strong><em>(stringa</em>)</p>
+<p>Il nome dell'insieme per il quale viene creato l'indice.</p></li>
+<li><p><strong>parametri_indice</strong></p>
+<p>L'oggetto <strong>IndexParams</strong> che contiene le configurazioni dell'indice.</p></li>
 </ul></li>
 </ul>
 </div>
 <div class="language-java">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>Metodi e parametri</strong></p>
 <ul>
-<li><strong>IndexParam</strong>
-Prepares an IndexParam object.
-<ul>
-<li><strong>fieldName</strong> (<em>String</em>)
-The name of the scalar field to index.</li>
-<li><strong>indexName</strong> (<em>String</em>)
-The name of the scalar index to create. Each scalar field supports one index.</li>
-<li><strong>indexType</strong> (<em>String</em>)
-The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
-For custom indexing, valid values are:
-<ul>
-<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
-<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
+<li><strong>IndexParam</strong>Prepara un oggetto IndexParam.<ul>
+<li><strong>fieldName</strong><em>(String</em>) Il nome del campo scalare da indicizzare.</li>
+<li><strong>indexName</strong><em>(Stringa</em>) Il nome dell'indice scalare da creare. Ogni campo scalare supporta un indice.</li>
+<li><strong>indexType</strong><em>(String</em>) Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro. Per l'indicizzazione personalizzata, i valori validi sono:<ul>
+<li><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</li>
+<li><strong>STL_SORT</strong>: Ordina i campi scalari utilizzando l'algoritmo di ordinamento standard della libreria template. Supporta campi booleani e numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
+<li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq</strong>
-Creates the index in the specified collection.
-<ul>
-<li><strong>collectionName</strong> (<em>String</em>)
-The name of the collection for which the index is created.</li>
-<li><strong>indexParams</strong> (<em>List<IndexParam></em>)
-A list of IndexParam objects that contain index configurations.</li>
+<li><strong>CreateIndexReq</strong>Crea l'indice nella collezione specificata.<ul>
+<li><strong>collectionName</strong><em>(String</em>) Il nome dell'insieme per il quale viene creato l'indice.</li>
+<li><strong>indexParams</strong><em>(Elenco<IndexParam></em>) Un elenco di oggetti IndexParam che contengono le configurazioni dell'indice.</li>
 </ul></li>
 </ul>
 </div>
 <div class="language-javascript">
-<p><strong>Methods and Parameters</strong></p>
+<p><strong>Metodi e parametri</strong></p>
 <ul>
-<li><p><strong>createIndex</strong></p>
-<p>Creates the index in the specified collection.</p>
+<li><p><strong>creaIndice</strong></p>
+<p>Crea l'indice nell'insieme specificato.</p>
 <ul>
-<li><strong>collection_name</strong> (<em>string</em>)
-The name of the collection for which the index is created.</li>
-<li><strong>field_name</strong> (<em>string</em>)
-The name of the scalar field to index.</li>
-<li><strong>index_name</strong> (<em>string</em>)
-The name of the scalar index to create. Each scalar field supports one index.</li>
-<li><strong>index_type</strong> (<em>string</em>)
-The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
-For custom indexing, valid values are:
-<ul>
-<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
-<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
+<li><strong>nome_raccolta</strong><em>(stringa</em>) Il nome della raccolta per la quale viene creato l'indice.</li>
+<li><strong>nome_campo</strong><em>(stringa</em>) Il nome del campo scalare da indicizzare.</li>
+<li><strong>nome_indice</strong><em>(stringa</em>) Il nome dell'indice scalare da creare. Ogni campo scalare supporta un indice.</li>
+<li><strong>index_type</strong><em>(stringa</em>) Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro. Per l'indicizzazione personalizzata, i valori validi sono:<ul>
+<li><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</li>
+<li><strong>STL_SORT</strong>: Ordina i campi scalari utilizzando l'algoritmo di ordinamento standard della libreria template. Supporta campi booleani e numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
+<li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta i campi VARCHAR.</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
-<h2 id="Verifying-the-result" class="common-anchor-header">Verifying the result<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
+<h2 id="Verifying-the-result" class="common-anchor-header">Verifica del risultato<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,19 +261,16 @@ For custom indexing, valid values are:
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> method to verify the creation of scalar indexes:</p>
+<p>Utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> per verificare la creazione di indici scalari:</p>
 </div>
 <div class="language-java">
-<p>Use the <code translate="no">listIndexes()</code> method to verify the creation of scalar indexes:</p>
+<p>Utilizzare il metodo <code translate="no">listIndexes()</code> per verificare la creazione di indici scalari:</p>
 </div>
 <div class="language-javascript">
-<p>Use the <code translate="no">listIndexes()</code> method to verify the creation of scalar indexes:</p>
+<p>Utilizzare il metodo <code translate="no">listIndexes()</code> per verificare la creazione di indici scalari:</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.list_indexes(
     collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>  <span class="hljs-comment"># Specify the collection name</span>
 )

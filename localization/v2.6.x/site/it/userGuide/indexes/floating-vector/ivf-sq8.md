@@ -106,14 +106,14 @@ index_params.add_index(
 <p>In questa configurazione:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Il tipo di indice da costruire. In questo esempio, impostare il valore su <code translate="no">IVF_SQ8</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per i dettagli, fare riferimento a <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la creazione dell'indice.</p>
 <ul>
 <li><code translate="no">nlist</code>: Numero di cluster da creare con l'algoritmo k-means durante la costruzione dell'indice.</li>
 </ul>
 <p>Per ulteriori informazioni sui parametri di costruzione disponibili per l'indice <code translate="no">IVF_SQ8</code>, fare riferimento a <a href="/docs/it/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">Parametri di costruzione dell'indice</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
