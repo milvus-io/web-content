@@ -1,9 +1,9 @@
 ---
 id: tls.md
-title: Encryption in Transit
-summary: Learn how to enable TLS proxy in Milvus.
+title: Шифрование в пути
+summary: 'Узнайте, как включить TLS-прокси в Milvus.'
 ---
-<h1 id="Encryption-in-Transit" class="common-anchor-header">Encryption in Transit<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
+<h1 id="Encryption-in-Transit" class="common-anchor-header">Шифрование в пути<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,12 +18,12 @@ summary: Learn how to enable TLS proxy in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TLS (Transport Layer Security) is an encryption protocol to ensure communication security. Milvus proxy uses TLS one-way and two-way authentication.</p>
-<p>This topic describes how to enable TLS in Milvus proxy for both gRPC and RESTful traffics.</p>
+    </button></h1><p>TLS (Transport Layer Security) - это протокол шифрования, обеспечивающий безопасность связи. Milvus proxy использует TLS для односторонней и двусторонней аутентификации.</p>
+<p>В этой теме описывается, как включить TLS в Milvus proxy для gRPC и RESTful трафика.</p>
 <div class="alert note">
-<p>TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you will need to provide a username, password, and certificate file paths. For information on how to enable user authentication, refer to <a href="/docs/authenticate.md">Authenticate User Access</a>.</p>
+<p>TLS и аутентификация пользователя - это два разных подхода к безопасности. Если вы включили аутентификацию пользователя и TLS в своей системе Milvus, вам нужно будет указать имя пользователя, пароль и путь к файлу сертификата. Информацию о том, как включить аутентификацию пользователей, см. в разделе <a href="/docs/ru/authenticate.md">Аутентификация доступа пользователей</a>.</p>
 </div>
-<h2 id="Create-your-own-certificate" class="common-anchor-header">Create your own certificate<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
+<h2 id="Create-your-own-certificate" class="common-anchor-header">Создание собственного сертификата<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,22 +38,22 @@ summary: Learn how to enable TLS proxy in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prerequisites" class="common-anchor-header">Prerequisites</h3><p>Make sure OpenSSL is installed. If you have not installed it, <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">build and install</a> OpenSSL first.</p>
+    </button></h2><h3 id="Prerequisites" class="common-anchor-header">Необходимые условия</h3><p>Убедитесь, что OpenSSL установлен. Если он не установлен, сначала <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">соберите и установите</a> OpenSSL.</p>
 <pre><code translate="no" class="language-shell">openssl version
 <button class="copy-code-btn"></button></code></pre>
-<p>If OpenSSL is not installed. It can be installed with the following command in Ubuntu.</p>
+<p>Если OpenSSL не установлен. В Ubuntu его можно установить с помощью следующей команды.</p>
 <pre><code translate="no" class="language-shell">sudo apt install openssl
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-files" class="common-anchor-header">Create files</h3><ol>
-<li>Create the <code translate="no">gen.sh</code> file.</li>
+<h3 id="Create-files" class="common-anchor-header">Создайте файлы</h3><ol>
+<li>Создайте файл <code translate="no">gen.sh</code>.</li>
 </ol>
 <pre><code translate="no"><span class="hljs-built_in">mkdir</span> cert &amp;&amp; <span class="hljs-built_in">cd</span> cert
 <span class="hljs-built_in">touch</span> gen.sh
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Copy the following script into the <code translate="no">gen.sh</code>.</li>
+<li>Скопируйте следующий скрипт в папку <code translate="no">gen.sh</code>.</li>
 </ol>
-<p>It is necessary to configure the <code translate="no">CommonName</code> in the <code translate="no">gen.sh</code> file. The <code translate="no">CommonName</code> refers to the server name that the client should specify while connecting.</p>
+<p>Необходимо настроить <code translate="no">CommonName</code> в файле <code translate="no">gen.sh</code>. <code translate="no">CommonName</code> означает имя сервера, которое клиент должен указать при подключении.</p>
 <p><details><summary><code translate="no">gen.sh</code></summary></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">your variables</span>
@@ -97,15 +97,15 @@ openssl req -new -key client.key\
 
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>The variables in the <code translate="no">gen.sh</code> file are crucial to the process of creating a certificate signing request file. The first five variables are the basic signing information, including country, state, location, organization, organization unit. Caution is needed when configuring <code translate="no">CommonName</code> as it will be verified during client-server communication.</p>
-<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Run <code translate="no">gen.sh</code> to generate certificate</h3><p>Run the <code translate="no">gen.sh</code> file to create certificate.</p>
+<p>Переменные в файле <code translate="no">gen.sh</code> имеют решающее значение для процесса создания файла запроса на подписание сертификата. Первые пять переменных - это основная информация о подписи, включая страну, штат, местоположение, организацию, подразделение организации. При настройке <code translate="no">CommonName</code> необходимо соблюдать осторожность, поскольку эта информация будет проверяться во время взаимодействия клиента и сервера.</p>
+<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Запустите файл <code translate="no">gen.sh</code> для создания сертификата</h3><p>Запустите файл <code translate="no">gen.sh</code> для создания сертификата.</p>
 <pre><code translate="no"><span class="hljs-built_in">chmod</span> +x gen.sh
 ./gen.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>The following seven files will be created: <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code>, <code translate="no">server.key</code>, <code translate="no">server.pem</code>, <code translate="no">client.key</code>, <code translate="no">client.pem</code>.</p>
-<p>Be sure to keep the <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> secure in order to renew your certificates later. The <code translate="no">server.key</code> and <code translate="no">server.pem</code> files are used by the server, and the <code translate="no">client.key</code> and <code translate="no">client.pem</code> files are used by the client.</p>
-<h3 id="Renew-certificates-optional" class="common-anchor-header">Renew certificates (optional)</h3><p>If you want to renew the certificates in some cases, for example if they will soon expire. you can use the following script.</p>
-<p>You need <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> in your working directory.</p>
+<p>Будут созданы следующие семь файлов: <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code>, <code translate="no">server.key</code>, <code translate="no">server.pem</code>, <code translate="no">client.key</code>, <code translate="no">client.pem</code>.</p>
+<p>Обязательно сохраните файлы <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code>, чтобы впоследствии обновить сертификаты. Файлы <code translate="no">server.key</code> и <code translate="no">server.pem</code> используются сервером, а файлы <code translate="no">client.key</code> и <code translate="no">client.pem</code> - клиентом.</p>
+<h3 id="Renew-certificates-optional" class="common-anchor-header">Обновление сертификатов (необязательно)</h3><p>Если вы хотите обновить сертификаты в некоторых случаях, например, если срок их действия скоро истечет, вы можете использовать следующий скрипт.</p>
+<p>В рабочем каталоге должны находиться файлы <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code>.</p>
 <p><details><summary><code translate="no">renew.sh</code></summary></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">your variables</span>
@@ -143,11 +143,11 @@ openssl req -new -key client.key\
     -extfile ./openssl.cnf -extensions v3_req
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Run the <code translate="no">renew.sh</code> file to create certificate.</p>
+<p>Запустите файл <code translate="no">renew.sh</code> для создания сертификата.</p>
 <pre><code translate="no"><span class="hljs-built_in">chmod</span> +x renew.sh
 ./renew.sh
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-a-Milvus-server-with-TLS" class="common-anchor-header">Set up a Milvus server with TLS<button data-href="#Set-up-a-Milvus-server-with-TLS" class="anchor-icon" translate="no">
+<h2 id="Set-up-a-Milvus-server-with-TLS" class="common-anchor-header">Настройка сервера Milvus с TLS<button data-href="#Set-up-a-Milvus-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,8 +162,8 @@ openssl req -new -key client.key\
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section outlines the steps to configure a Milvus server with TLS encryption.</p>
-<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">Setup for Docker Compose</h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Modify the Milvus server configuration</h4><p>To enable external TLS, add the following configurations in the <code translate="no">milvus.yaml</code> file:</p>
+    </button></h2><p>В этом разделе описаны шаги по настройке сервера Milvus с шифрованием TLS.</p>
+<h3 id="Setup-for-Docker-Compose" class="common-anchor-header">Настройка для Docker Compose</h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Измените конфигурацию сервера Milvus</h4><p>Чтобы включить внешний TLS, добавьте следующие конфигурации в файл <code translate="no">milvus.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">http:</span>
     <span class="hljs-comment"># for now milvus do not support config restful on same port with grpc</span>
@@ -178,18 +178,17 @@ openssl req -new -key client.key\
   <span class="hljs-attr">security:</span>
     <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Parameters:</p>
+<p>Параметры:</p>
 <ul>
-<li><code translate="no">serverPemPath</code>: The path to the server certificate file.</li>
-<li><code translate="no">serverKeyPath</code>: The path to the server key file.</li>
-<li><code translate="no">caPemPath</code>: The path to the CA certificate file.</li>
-<li><code translate="no">tlsMode</code>: The TLS mode for external service. Valid values:
-<ul>
-<li><code translate="no">1</code>: One-way authentication, where only the server requires a certificate and the client verifies it. This mode requires <code translate="no">server.pem</code> and <code translate="no">server.key</code> from the server side, and <code translate="no">server.pem</code> from the client side.</li>
-<li><code translate="no">2</code>: Two-way authentication, where both the server and the client require certificates to establish a secure connection. This mode requires <code translate="no">server.pem</code>, <code translate="no">server.key</code>, and <code translate="no">ca.pem</code> from the server side, and <code translate="no">client.pem</code>, <code translate="no">client.key</code>, and <code translate="no">ca.pem</code> from the client side.</li>
+<li><code translate="no">serverPemPath</code>: Путь к файлу сертификата сервера.</li>
+<li><code translate="no">serverKeyPath</code>: : Путь к файлу ключа сервера.</li>
+<li><code translate="no">caPemPath</code>: Путь к файлу сертификата центра сертификации.</li>
+<li><code translate="no">tlsMode</code>: Режим TLS для внешнего сервиса. Допустимые значения:<ul>
+<li><code translate="no">1</code>: Односторонняя аутентификация, при которой только сервер требует сертификат, а клиент его проверяет. Для этого режима требуются <code translate="no">server.pem</code> и <code translate="no">server.key</code> со стороны сервера и <code translate="no">server.pem</code> со стороны клиента.</li>
+<li><code translate="no">2</code>: Двусторонняя аутентификация, когда и серверу, и клиенту требуются сертификаты для установления безопасного соединения. Для этого режима требуются <code translate="no">server.pem</code>, <code translate="no">server.key</code> и <code translate="no">ca.pem</code> со стороны сервера и <code translate="no">client.pem</code>, <code translate="no">client.key</code> и <code translate="no">ca.pem</code> со стороны клиента.</li>
 </ul></li>
 </ul>
-<p>To enable internal TLS, add the following configurations in the <code translate="no">milvus.yaml</code> file:</p>
+<p>Чтобы включить внутренний TLS, добавьте следующие конфигурации в файл <code translate="no">milvus.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">internaltls:</span>
   <span class="hljs-attr">serverPemPath:</span> <span class="hljs-string">/milvus/tls/server.pem</span>
   <span class="hljs-attr">serverKeyPath:</span> <span class="hljs-string">/milvus/tls/server.key</span>
@@ -199,14 +198,14 @@ openssl req -new -key client.key\
   <span class="hljs-attr">security:</span>
     <span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
-<p>Parameters:</p>
+<p>Параметры:</p>
 <ul>
-<li><code translate="no">serverPemPath</code>: The path to the server certificate file.</li>
-<li><code translate="no">serverKeyPath</code>: The path to the server key file.</li>
-<li><code translate="no">caPemPath</code>: The path to the CA certificate file.</li>
-<li><code translate="no">internaltlsEnabled</code>: Whether to enable internal TLS. For now only one-way tls is supported.</li>
+<li><code translate="no">serverPemPath</code>: Путь к файлу сертификата сервера.</li>
+<li><code translate="no">serverKeyPath</code>: : Путь к файлу ключа сервера.</li>
+<li><code translate="no">caPemPath</code>: Путь к файлу сертификата центра сертификации.</li>
+<li><code translate="no">internaltlsEnabled</code>: Включать ли внутренний TLS. На данный момент поддерживается только односторонний tls.</li>
 </ul>
-<h4 id="2-Map-certificate-files-to-the-container" class="common-anchor-header">2. Map certificate files to the container</h4><h5 id="Prepare-certificate-files" class="common-anchor-header">Prepare certificate files</h5><p>Create a new folder named <code translate="no">tls</code> in the same directory as your <code translate="no">docker-compose.yaml</code>. Copy the <code translate="no">server.pem</code>, <code translate="no">server.key</code>, and <code translate="no">ca.pem</code> into the <code translate="no">tls</code> folder. Place them in a directory structure as follows:</p>
+<h4 id="2-Map-certificate-files-to-the-container" class="common-anchor-header">2. Соотнесите файлы сертификатов с контейнером</h4><h5 id="Prepare-certificate-files" class="common-anchor-header">Подготовьте файлы сертификатов</h5><p>Создайте новую папку с именем <code translate="no">tls</code> в том же каталоге, что и <code translate="no">docker-compose.yaml</code>. Скопируйте файлы <code translate="no">server.pem</code>, <code translate="no">server.key</code> и <code translate="no">ca.pem</code> в папку <code translate="no">tls</code>. Поместите их в структуру каталогов следующим образом:</p>
 <pre><code translate="no">├── docker-compose.yml
 ├── milvus.yaml
 └── tls
@@ -214,7 +213,7 @@ openssl req -new -key client.key\
      ├── server.key
      └── ca.pem
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Update Docker Compose configuration</h4><p>Edit the <code translate="no">docker-compose.yaml</code> file to map the certificate file paths inside the container as shown below:</p>
+<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Обновление конфигурации Docker Compose</h4><p>Отредактируйте файл <code translate="no">docker-compose.yaml</code>, чтобы указать пути к файлам сертификатов внутри контейнера, как показано ниже:</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:latest</span>
@@ -229,19 +228,19 @@ openssl req -new -key client.key\
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/tls:/milvus/tls</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Deploy Milvus using Docker Compose</h5><p>Execute the following command to deploy Milvus:</p>
+<h5 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Развертывание Milvus с помощью Docker Compose</h5><p>Выполните следующую команду для развертывания Milvus:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">Setup for Milvus Operator</h3><p>Put the certificate files in your working directory. The directory structure should look like this:</p>
+<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">Setup for Milvus Operator</h3><p>Поместите файлы сертификатов в рабочий каталог. Структура каталога должна выглядеть следующим образом:</p>
 <pre><code translate="no">├── milvus.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
 └── ca.pem
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a secret with the certificate files:</p>
+<p>Создайте секрет с файлами сертификатов:</p>
 <pre><code translate="no" class="language-bash">kubectl create secret generic certs --from-file=server.pem --from-file=server.key --from-file=ca.pem
 <button class="copy-code-btn"></button></code></pre>
-<p>To enable external TLS, add the following configurations in the <code translate="no">milvus.yaml</code> file:</p>
+<p>Чтобы включить внешний TLS, добавьте следующие конфигурации в файл <code translate="no">milvus.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -271,8 +270,8 @@ openssl req -new -key client.key\
         <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/certs</span>
         <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To enable internal TLS, add the following configurations in the <code translate="no">milvus.yaml</code> file:</p>
-<p>Remember to replace the <code translate="no">internaltls.sni</code> field with the CommonName in your certificates.</p>
+<p>Чтобы включить внутренний TLS, добавьте следующие конфигурации в файл <code translate="no">milvus.yaml</code>:</p>
+<p>Не забудьте заменить поле <code translate="no">internaltls.sni</code> на CommonName в ваших сертификатах.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -304,19 +303,19 @@ openssl req -new -key client.key\
         <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/certs</span>
         <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>create the Milvus CR:</p>
+<p>создайте Milvus CR:</p>
 <pre><code translate="no" class="language-bash">kubectl create -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">setup for Milvus Helm</h3><p>Put the certificate files in your working directory. The directory structure should look like this:</p>
+<h3 id="setup-for-Milvus-Helm" class="common-anchor-header">настройка для Milvus Helm</h3><p>Поместите файлы сертификатов в рабочий каталог. Структура каталога должна выглядеть следующим образом:</p>
 <pre><code translate="no">├── values.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
 ├── server.<span class="hljs-keyword">key</span>
 └── ca.pem
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a secret with the certificate files:</p>
+<p>Создайте секрет с файлами сертификатов:</p>
 <pre><code translate="no" class="language-bash">kubectl create secret generic certs --from-file=server.pem --from-file=server.key --from-file=ca.pem
 <button class="copy-code-btn"></button></code></pre>
-<p>To enable external TLS, add the following configurations in the <code translate="no">values.yaml</code> file:</p>
+<p>Чтобы включить внешний TLS, добавьте следующие конфигурации в файл <code translate="no">values.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     proxy:
@@ -342,8 +341,8 @@ openssl req -new -key client.key\
     <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/certs</span>
     <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To enable internal TLS, add the following configurations in the <code translate="no">values.yaml</code> file:</p>
-<p>Remember to replace the <code translate="no">internaltls.sni</code> field with the CommonName in your certificates.</p>
+<p>Чтобы включить внутренний TLS, добавьте следующие конфигурации в файл <code translate="no">values.yaml</code>:</p>
+<p>Не забудьте заменить поле <code translate="no">internaltls.sni</code> на CommonName в ваших сертификатах.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
@@ -365,12 +364,12 @@ openssl req -new -key client.key\
     <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/certs</span>
     <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Create the milvus release:</p>
+<p>Создайте выпуск milvus:</p>
 <pre><code translate="no" class="language-bash">helm repo add milvus https://zilliztech.github.io/milvus-helm/
 helm repo update milvus
 helm install my-release milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Verify-Internal-TLS-enabled" class="common-anchor-header">Verify Internal TLS enabled<button data-href="#Verify-Internal-TLS-enabled" class="anchor-icon" translate="no">
+<h2 id="Verify-Internal-TLS-enabled" class="common-anchor-header">Проверка включения внутреннего TLS<button data-href="#Verify-Internal-TLS-enabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -385,8 +384,8 @@ helm install my-release milvus/milvus -f values.yaml
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>It’s difficult to verify internal TLS directly. You can check the Milvus log to see if internal TLS is enabled.</p>
-<p>In the Milvus log, you should see the following message if internal TLS is enabled:</p>
+    </button></h2><p>Проверить внутренний TLS напрямую довольно сложно. Вы можете проверить журнал Milvus, чтобы узнать, включен ли внутренний TLS.</p>
+<p>В журнале Milvus вы должны увидеть следующее сообщение, если внутренний TLS включен:</p>
 <pre><code translate="no"><span class="hljs-selector-attr">[...date time...]</span> <span class="hljs-selector-attr">[INFO]</span> <span class="hljs-selector-attr">[utils/util.go:56]</span> <span class="hljs-selector-attr">[<span class="hljs-string">&quot;Internal TLS Enabled&quot;</span>]</span> <span class="hljs-selector-attr">[value=true]</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-to-the-Milvus-server-with-TLS" class="common-anchor-header">Connect to the Milvus server with TLS<button data-href="#Connect-to-the-Milvus-server-with-TLS" class="anchor-icon" translate="no">
@@ -404,8 +403,8 @@ helm install my-release milvus/milvus -f values.yaml
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For SDK interactions, use the following setups depending on the TLS mode.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">One-way TLS connection</h3><p>Provide the path to <code translate="no">server.pem</code> and ensure the <code translate="no">server_name</code> matches the <code translate="no">CommonName</code> configured in the certificate.</p>
+    </button></h2><p>Для взаимодействия с SDK используйте следующие настройки в зависимости от режима TLS.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Одностороннее TLS-соединение</h3><p>Укажите путь к <code translate="no">server.pem</code> и убедитесь, что <code translate="no">server_name</code> совпадает с <code translate="no">CommonName</code>, указанным в сертификате.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -415,7 +414,7 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">Two-way TLS connection</h3><p>Provide paths to <code translate="no">client.pem</code>, <code translate="no">client.key</code>, and <code translate="no">ca.pem</code>, and ensure the <code translate="no">server_name</code> matches the <code translate="no">CommonName</code> configured in the certificate.</p>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Двустороннее TLS-соединение</h3><p>Укажите пути к <code translate="no">client.pem</code>, <code translate="no">client.key</code> и <code translate="no">ca.pem</code> и убедитесь, что <code translate="no">server_name</code> соответствует <code translate="no">CommonName</code>, указанному в сертификате.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -427,8 +426,8 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>See <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls1.py">example_tls1.py</a> and <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls2.py">example_tls2.py</a> for more information.</p>
-<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Connect to the Milvus RESTful server with TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
+<p>Дополнительные сведения см. в файлах <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls1.py">example_tls1.py</a> и <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls2.py">example_tls2.py</a>.</p>
+<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Подключение к RESTful-серверу Milvus с помощью TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -443,8 +442,8 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For RESTful APIs, you can check tls by using the <code translate="no">curl</code> command.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">One-way TLS connection</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+    </button></h2><p>Для RESTful API можно проверить TLS с помощью команды <code translate="no">curl</code>.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Одностороннее TLS-соединение</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">Two-way TLS connection</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Двустороннее TLS-соединение</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:8080/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>

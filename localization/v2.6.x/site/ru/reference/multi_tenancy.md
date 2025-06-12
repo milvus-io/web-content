@@ -1,11 +1,12 @@
 ---
 id: multi_tenancy.md
-title: Implement Multi-tenancy
+title: Внедрение многопользовательской аренды
 summary: >-
-  In Milvus, multi-tenancy means multiple customers or teams—referred to as
-  tenants— share the same cluster while maintaining isolated data environments.
+  В Milvus многопользовательский режим означает, что несколько клиентов или
+  команд, называемых арендаторами, используют один и тот же кластер, сохраняя
+  при этом изолированные среды данных.
 ---
-<h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implement Multi-tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
+<h1 id="Implement-Multi-tenancy" class="common-anchor-header">Внедрение многопользовательской аренды<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, multi-tenancy means multiple customers or teams—referred to as <strong>tenants</strong>— share the same cluster while maintaining isolated data environments.</p>
-<p>Milvus supports four multi-tenancy strategies, each offering a different trade-off between scalability, data isolation, and flexibility. This guide walks you through each option, helping you choose the most suitable strategy for your use case.</p>
-<h2 id="Multi-tenancy-strategies" class="common-anchor-header">Multi-tenancy strategies<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
+    </button></h1><p>В Milvus многопользовательская среда означает, что несколько клиентов или команд, называемых <strong>арендаторами,</strong>используют один и тот же кластер, сохраняя при этом изолированные среды данных.</p>
+<p>Milvus поддерживает четыре стратегии многопользовательской работы, каждая из которых предлагает различные компромиссы между масштабируемостью, изоляцией данных и гибкостью. В этом руководстве мы рассмотрим каждый вариант и поможем вам выбрать наиболее подходящую стратегию для вашего случая использования.</p>
+<h2 id="Multi-tenancy-strategies" class="common-anchor-header">Стратегии многопользовательской работы<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,60 +38,52 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports multi-tenancy at four levels: <strong>Database</strong>, <strong>Collection</strong>, <strong>Partition</strong>, and <strong>Partition Key</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Database-level multi-tenancy</h3><p>With database-level multi-tenancy, each tenant receives a corresponding <a href="/docs/manage_databases.md">database</a> containing one or more collections.</p>
+    </button></h2><p>Milvus поддерживает многопользовательскую работу на четырех уровнях: <strong>База данных</strong>, <strong>Коллекция</strong>, <strong>Раздел</strong> и <strong>Ключ раздела</strong>.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Мультиарендность на уровне базы данных</h3><p>При многопользовательстве на уровне базы данных каждый арендатор получает соответствующую <a href="/docs/ru/manage_databases.md">базу данных</a>, содержащую одну или несколько коллекций.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
-    <span>Database Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Многоарендность на уровне базы данных</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: The database-level multi-tenancy strategy  supports a maximum of 64 tenants by default.</p></li>
-<li><p><strong>Data isolation</strong>: The data in each database is fully separated, offering enterprise-grade data isolation ideal for regulated environments or customers with strict compliance needs.</p></li>
-<li><p><strong>Flexibility</strong>: Each database can have collections with different schemas, offering highly flexible data organization and allowing each tenant to have its own data schema.</p></li>
-<li><p><strong>Others</strong>: This strategy also supports RBAC, enabling fine-grained control over user access per tenant. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>Масштабируемость</strong>: Стратегия многопользовательской аренды на уровне базы данных по умолчанию поддерживает максимум 64 арендатора.</p></li>
+<li><p><strong>Изоляция данных</strong>: Данные в каждой базе данных полностью разделены, что обеспечивает изоляцию данных корпоративного уровня, идеальную для регулируемых сред или клиентов со строгими требованиями к соблюдению нормативных требований.</p></li>
+<li><p><strong>Гибкость</strong>: В каждой базе данных могут быть коллекции с различными схемами, что обеспечивает гибкую организацию данных и позволяет каждому арендатору иметь собственную схему данных.</p></li>
+<li><p><strong>Другие</strong>: Эта стратегия также поддерживает RBAC, позволяя осуществлять тонкий контроль над доступом пользователей для каждого арендатора. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Collection-level multi-tenancy</h3><p>With collection-level multi-tenancy, each tenant is assigned a <a href="/docs/manage-collections.md">collection</a>, offering strong data isolation.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне коллекции</h3><p>При многопользовательской системе на уровне коллекций каждому арендатору назначается своя <a href="/docs/ru/manage-collections.md">коллекция</a>, что обеспечивает надежную изоляцию данных.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
-    <span>Collection Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Мультиарендность на уровне коллекций</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: Since a cluster can hold up to 65,536 collections by default, this strategy can accommodate the same number of tenants within the cluster.</p></li>
-<li><p><strong>Data isolation</strong>: Collections are physically isolated from one another. This strategy provides strong data isolation.</p></li>
-<li><p><strong>Flexibility</strong>: This strategy allows each collection to have its own schema, accommodating tenants with different data schemas.</p></li>
-<li><p><strong>Others</strong>: This strategy also supports RBAC, allowing for granular access control over tenants. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>Масштабируемость</strong>: Поскольку кластер по умолчанию может содержать до 65 536 коллекций, эта стратегия позволяет разместить такое же количество арендаторов в кластере.</p></li>
+<li><p><strong>Изоляция данных</strong>: Коллекции физически изолированы друг от друга. Эта стратегия обеспечивает надежную изоляцию данных.</p></li>
+<li><p><strong>Гибкость</strong>: Эта стратегия позволяет каждой коллекции иметь собственную схему, что позволяет разместить арендаторов с различными схемами данных.</p></li>
+<li><p><strong>Другие</strong>: Эта стратегия также поддерживает RBAC, позволяя осуществлять гранулярный контроль доступа для арендаторов. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Partition-level multi-tenancy</h3><p>In partition-level multi-tenancy, each tenant is assigned to a manually created <a href="/docs/manage-partitions.md">partition</a> within a shared collection.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне разделов</h3><p>При многопользовательской системе на уровне разделов каждый арендатор назначается на созданный вручную <a href="/docs/ru/manage-partitions.md">раздел</a> в общей коллекции.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
-    <span>Partition Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Многопользовательская аренда на уровне разделов</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: A collection can hold up to 1,024 partitions per collection, allowing for the same number of tenants within it.</p></li>
-<li><p><strong>Data isolation</strong>: The data of each tenant is physically separated by partitions.</p></li>
-<li><p><strong>Flexibility</strong>: This strategy requires all tenants to share the same data schema. And partitions need to be manually created.</p></li>
-<li><p><strong>Others</strong>: RBAC is not supported on the partition level. Tenants can be queried either individually or across multiple partitions, which makes this approach well-suited for scenarios involving aggregated queries or analytics across tenant segments. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>Масштабируемость</strong>: Коллекция может содержать до 1 024 разделов, что позволяет разместить в ней такое же количество арендаторов.</p></li>
+<li><p><strong>Изоляция данных</strong>: Данные каждого арендатора физически разделены разделами.</p></li>
+<li><p><strong>Гибкость</strong>: Эта стратегия требует, чтобы все арендаторы использовали одну и ту же схему данных. А разделы необходимо создавать вручную.</p></li>
+<li><p><strong>Другие</strong>: RBAC не поддерживается на уровне разделов. К арендаторам можно обращаться как по отдельности, так и через несколько разделов, что делает этот подход хорошо подходящим для сценариев с агрегированными запросами или аналитикой по сегментам арендаторов. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Partition key-level multi-tenancy</h3><p>With this strategy, all tenants share a single collection and schema, but each tenant’s data is automatically routed into 16 physically isolated partitions based on the <a href="/docs/use-partition-key.md">partition key</a> value. Although each physical partition can contain multiple tenants, the data from different tenants remains logically separated.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Многопользовательская аренда на уровне ключа раздела</h3><p>При этой стратегии все арендаторы используют единую коллекцию и схему, но данные каждого арендатора автоматически распределяются по 16 физически изолированным разделам на основе значения <a href="/docs/ru/use-partition-key.md">ключа раздела</a>. Хотя каждый физический раздел может содержать несколько арендаторов, данные разных арендаторов остаются логически разделенными.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
-    <span>Partition Key Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Уровень ключа раздела Много арендаторов</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: The partition key-level strategy offers the most scalable approach, supporting millions of tenants.</p></li>
-<li><p><strong>Data isolation</strong>: This strategy offers relatively weak data isolation because multiple tenants can share a physical partition.</p></li>
-<li><p><strong>Flexibility</strong>: Since all tenants must share the same data schema, this strategy offers limited data flexibility.</p></li>
-<li><p><strong>Others</strong>: RBAC is not supported on the partition-key level. Tenants can be queried either individually or across multiple partitions, which makes this approach well-suited for scenarios involving aggregated queries or analytics across tenant segments.</p></li>
+<li><p><strong>Масштабируемость</strong>: Стратегия на уровне ключа раздела предлагает наиболее масштабируемый подход, поддерживающий миллионы арендаторов.</p></li>
+<li><p><strong>Изоляция данных</strong>: Эта стратегия обеспечивает относительно слабую изоляцию данных, поскольку несколько арендаторов могут совместно использовать физический раздел.</p></li>
+<li><p><strong>Гибкость</strong>: Поскольку все арендаторы должны использовать одну и ту же схему данных, эта стратегия обеспечивает ограниченную гибкость данных.</p></li>
+<li><p><strong>Другие</strong>: RBAC не поддерживается на уровне ключей разделов. К арендаторам можно обращаться как по отдельности, так и через несколько разделов, что делает этот подход хорошо подходящим для сценариев с агрегированными запросами или аналитикой по сегментам арендаторов.</p></li>
 </ul>
-<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">Choosing the right multi-tenancy strategy<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
+<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">Выбор правильной стратегии многопользовательской аренды<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,77 +98,77 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The table below offers a comprehensive comparison between the four levels of multi-tenancy strategies.</p>
+    </button></h2><p>В таблице ниже представлено комплексное сравнение между четырьмя уровнями стратегий многопользовательской эксплуатации.</p>
 <table>
    <tr>
      <th></th>
-     <th><p><strong>Database-level</strong></p></th>
-     <th><p><strong>Collection-level</strong></p></th>
-     <th><p><strong>Partition-level</strong></p></th>
-     <th><p><strong>Partition key-level</strong></p></th>
+     <th><p><strong>Уровень базы данных</strong></p></th>
+     <th><p><strong>Уровень коллекции</strong></p></th>
+     <th><p><strong>Уровень разделов</strong></p></th>
+     <th><p><strong>Уровень ключей разделов</strong></p></th>
    </tr>
    <tr>
-     <td><p><strong>Data Isolation</strong></p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical + Logical</p></td>
+     <td><p><strong>Изоляция данных</strong></p></td>
+     <td><p>Физическая</p></td>
+     <td><p>Физическая</p></td>
+     <td><p>Физический</p></td>
+     <td><p>Физический + логический</p></td>
    </tr>
    <tr>
-     <td><p><strong>Max. number of tenants</strong></p></td>
-     <td><p>By default, 64. You can increase it by modifying the <code translate="no">maxDatabaseNum</code> parameter in the Milvus.yaml configuration file. </p></td>
-     <td><p>By default, 65,536. You can increase it by modifying the <code translate="no">maxCollectionNum</code> parameter in the Milvus.yaml configuration file.</p></td>
-     <td><p>Up to 1,024 per collection. </p></td>
-     <td><p>Millions</p></td>
+     <td><p><strong>Максимальное количество арендаторов</strong></p></td>
+     <td><p>По умолчанию 64. Вы можете увеличить его, изменив параметр <code translate="no">maxDatabaseNum</code> в конфигурационном файле Milvus.yaml. </p></td>
+     <td><p>По умолчанию 65 536. Вы можете увеличить его, изменив параметр <code translate="no">maxCollectionNum</code> в конфигурационном файле Milvus.yaml.</p></td>
+     <td><p>До 1 024 на коллекцию. </p></td>
+     <td><p>Миллионы</p></td>
    </tr>
    <tr>
-     <td><p><strong>Data schema flexibility</strong></p></td>
-     <td><p>High</p></td>
-     <td><p>Medium</p></td>
-     <td><p>Low</p></td>
-     <td><p>Low</p></td>
+     <td><p><strong>Гибкость схемы данных</strong></p></td>
+     <td><p>Высокая</p></td>
+     <td><p>Средняя</p></td>
+     <td><p>Низкая</p></td>
+     <td><p>Низкий</p></td>
    </tr>
    <tr>
-     <td><p><strong>RBAC support</strong></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>No</p></td>
-     <td><p>No</p></td>
+     <td><p><strong>Поддержка RBAC</strong></p></td>
+     <td><p>Да</p></td>
+     <td><p>Да</p></td>
+     <td><p>Нет</p></td>
+     <td><p>Нет</p></td>
    </tr>
    <tr>
-     <td><p><strong>Search performance</strong></p></td>
-     <td><p>Strong</p></td>
-     <td><p>Strong</p></td>
-     <td><p>Medium</p></td>
-     <td><p>Medium</p></td>
+     <td><p><strong>Производительность поиска</strong></p></td>
+     <td><p>Сильный</p></td>
+     <td><p>Сильная</p></td>
+     <td><p>Средняя</p></td>
+     <td><p>Средняя</p></td>
    </tr>
    <tr>
-     <td><p><strong>Cross-tenant search support</strong></p></td>
-     <td><p>No</p></td>
-     <td><p>No</p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
+     <td><p><strong>Поддержка межарендного поиска</strong></p></td>
+     <td><p>Нет</p></td>
+     <td><p>Нет</p></td>
+     <td><p>Да</p></td>
+     <td><p>Да</p></td>
    </tr>
    <tr>
-     <td><p><strong>Support for effective handling of hot and cold data</strong></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>No Currently, not supported for the partition key-level strategy.</p></td>
+     <td><p><strong>Поддержка эффективной работы с "горячими" и "холодными" данными</strong></p></td>
+     <td><p>Да</p></td>
+     <td><p>Да</p></td>
+     <td><p>Да</p></td>
+     <td><p>Нет В настоящее время стратегия на уровне ключей разделов не поддерживается.</p></td>
    </tr>
 </table>
-<p>There are several factors to consider when you choose the multi-tenancy strategy in Milvus.</p>
+<p>При выборе стратегии многопользовательской работы в Milvus необходимо учитывать несколько факторов.</p>
 <ol>
-<li><p><strong>Scalability:</strong> Partition Key > Partition > Collection > Database</p>
-<p>If you expect to support a very large number of tenants (millions or more), use the partition key-level strategy.</p></li>
-<li><p><strong>Strong data isolation requirements</strong>: Database = Collection > Partition > Partition Key</p>
-<p>Choose database, collection, or partition-level strategies if you have strict physical data isolation requirements.</p></li>
-<li><p><strong>Flexible data schema for each tenant’s data:</strong> Database > Collection > Partition = Partition Key</p>
-<p>Database-level and collection-level strategies provide full flexibility in data schemas. If your tenants’ data structures are different, choose database-level or collection-level multi-tenancy.</p></li>
-<li><p><strong>Others</strong></p>
+<li><p><strong>Масштабируемость:</strong> Ключ раздела &gt; раздел &gt; коллекция &gt; база данных</p>
+<p>Если вы планируете поддерживать очень большое количество арендаторов (миллионы и более), используйте стратегию на уровне ключа раздела.</p></li>
+<li><p><strong>Сильные требования к изоляции данных</strong>: База данных = Коллекция &gt; Раздел &gt; Ключ раздела</p>
+<p>Выбирайте стратегии на уровне базы данных, коллекции или раздела, если у вас строгие требования к физической изоляции данных.</p></li>
+<li><p><strong>Гибкая схема данных для данных каждого арендатора:</strong> База данных &gt; Коллекция &gt; Раздел = Ключ раздела</p>
+<p>Стратегии на уровне базы данных и на уровне коллекции обеспечивают полную гибкость схем данных. Если структуры данных ваших арендаторов отличаются, выбирайте многопользовательский режим на уровне базы данных или на уровне коллекции.</p></li>
+<li><p><strong>Другие</strong></p>
 <ol>
-<li><p><strong>Performance:</strong> Search performance is determined by various factors, including indexes, search parameters, and machine configurations. Milvus also support performance-tuning. It is recommended to test the actual performance before you select a multi-tenancy strategy.</p></li>
-<li><p><strong>Effective handling of hot and cold data</strong>: Currently, the database-level, collection-level, and partition-level strategies all support hot and cold data handling.</p></li>
-<li><p><strong>Cross-tenant searches</strong>: Only the partition-level and partition-key-level strategies support cross-tenant queries.</p></li>
+<li><p><strong>Производительность:</strong> Производительность поиска определяется различными факторами, включая индексы, параметры поиска и конфигурацию машины. Milvus также поддерживает настройку производительности. Рекомендуется протестировать фактическую производительность перед выбором стратегии многопользовательской работы.</p></li>
+<li><p><strong>Эффективная обработка "горячих" и "холодных" данных</strong>: В настоящее время стратегии на уровне баз данных, коллекций и разделов поддерживают работу с "горячими" и "холодными" данными.</p></li>
+<li><p><strong>Поиск между арендаторами</strong>: Только стратегии на уровне разделов и разделов-ключей поддерживают межпользовательские запросы.</p></li>
 </ol></li>
 </ol>

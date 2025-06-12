@@ -1,11 +1,11 @@
 ---
 id: cross-bucket-backup-and-restore.md
 summary: >-
-  This topic details the process of backing up a collection from one Milvus
-  instance and restoring it to another
-title: Migrate Between Instances Across Buckets
+  В этой теме описывается процесс резервного копирования коллекции из одного
+  экземпляра Milvus и ее восстановления в другом экземпляре.
+title: Миграция между экземплярами с использованием разных ведер
 ---
-<h1 id="Migrate-Between-Instances-Across-Buckets" class="common-anchor-header">Migrate Between Instances Across Buckets<button data-href="#Migrate-Between-Instances-Across-Buckets" class="anchor-icon" translate="no">
+<h1 id="Migrate-Between-Instances-Across-Buckets" class="common-anchor-header">Миграция между экземплярами с использованием разных ведер<button data-href="#Migrate-Between-Instances-Across-Buckets" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,10 +20,8 @@ title: Migrate Between Instances Across Buckets
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic details the process of backing up a collection from one
-Milvus instance and restoring it to another, with each instance using
-different buckets within the same object storage.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>В этой теме описывается процесс резервного копирования коллекции из одного экземпляра Milvus и ее восстановления в другом экземпляре, причем каждый экземпляр использует разные ведра в одном и том же хранилище объектов.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,24 +36,17 @@ different buckets within the same object storage.</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The diagram below illustrates the backup and restore process using
-different buckets within the same object storage.</p>
+    </button></h2><p>На приведенной ниже диаграмме показан процесс резервного копирования и восстановления с использованием разных ведер в одном объектном хранилище.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/cross-bucket-backup-and-restore.png" alt="cross-bucket-backup-and-restore.png" class="doc-image" id="cross-bucket-backup-and-restore.png" />
-    <span>cross-bucket-backup-and-restore.png</span>
-  </span>
-</p>
-<p>Assume we have two Milvus instances, <code translate="no">milvus_A</code> and <code translate="no">milvus_B</code>, both
-utilizing the default MinIO storage engine for object storage. These
-instances use different buckets bucket_A and <code translate="no">bucket_B</code> within the same
-object storage. In this example, our goal is to complete the following
-tasks:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cross-bucket-backup-and-restore.png" alt="cross-bucket-backup-and-restore.png" class="doc-image" id="cross-bucket-backup-and-restore.png" />
+   </span> <span class="img-wrapper"> <span>cross-bucket-backup-and-restore.png</span> </span></p>
+<p>Предположим, что у нас есть два экземпляра Milvus, <code translate="no">milvus_A</code> и <code translate="no">milvus_B</code>, оба используют стандартный механизм хранения MinIO для хранения объектов. Эти экземпляры используют разные ведра bucket_A и <code translate="no">bucket_B</code> в одном и том же объектном хранилище. В этом примере нам необходимо выполнить следующие задачи:</p>
 <ol>
-<li><p>Create a backup (<code translate="no">my_backup</code>) for collection <code translate="no">coll</code> in <code translate="no">bucket_A</code> and store the backup in <code translate="no">bucket_B</code>.</p></li>
-<li><p>In <code translate="no">bucket_B</code>, restore from the backup and name the restored collection <code translate="no">coll_bak</code>.</p></li>
+<li><p>Создать резервную копию (<code translate="no">my_backup</code>) для коллекции <code translate="no">coll</code> в <code translate="no">bucket_A</code> и сохранить ее в <code translate="no">bucket_B</code>.</p></li>
+<li><p>В <code translate="no">bucket_B</code> восстановите из резервной копии и назовите восстановленную коллекцию <code translate="no">coll_bak</code>.</p></li>
 </ol>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites**<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">Необходимые условия**<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,12 +62,10 @@ tasks:</p>
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Ensure the <strong>milvus-backup</strong> tool is installed.</p></li>
-<li><p>Familiarize yourself with configuring Milvus object storage settings.
-For details, refer to <a href="https://milvus.io/docs/deploy_s3.md">Object
-Storage</a>.</p></li>
+<li><p>Убедитесь, что инструмент <strong>milvus-backup</strong> установлен.</p></li>
+<li><p>Ознакомьтесь с настройкой параметров объектного хранилища Milvus. Подробные сведения см. в разделе <a href="https://milvus.io/docs/deploy_s3.md">Объектное хранилище</a>.</p></li>
 </ul>
-<h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">Back up a collection from milvus_A<button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
+<h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">Резервное копирование коллекции из milvus_A<button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,24 +80,22 @@ Storage</a>.</p></li>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Step 1: Prepare configuration</h3><p>Go to the directory of the milvus-backup project and create a directory
-named configs:</p>
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Шаг 1: Подготовьте конфигурацию</h3><p>Перейдите в каталог проекта milvus-backup и создайте каталог с именем configs:</p>
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
-<p>Download the backup config file <code translate="no">backup.yaml</code>:</p>
+<p>Загрузите резервный файл конфигурации <code translate="no">backup.yaml</code>:</p>
 <pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>The file structure looks like this:</p>
+<p>Структура файла выглядит следующим образом:</p>
 <pre><code translate="no">├── configs
 │   └── backup.yaml
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Step 2: Edit configuration file</h3><p>Modify the backup.yaml file to set the appropriate configurations for
-<code translate="no">milvus_A</code>:</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Шаг 2: Редактирование файла конфигурации</h3><p>Измените файл backup.yaml, чтобы установить соответствующие конфигурации для<code translate="no">milvus_A</code>:</p>
 <ul>
-<li><p>Connection configs</p>
+<li><p>Конфиги подключения</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
 <span class="hljs-attr">milvus:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_A</span>
@@ -121,11 +108,10 @@ cd configs
   <span class="hljs-attr">password:</span> <span class="hljs-string">&quot;Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">milvus.address</code>: IP address or hostname of the <code translate="no">milvus_A</code> server.</p></li>
-<li><p><code translate="no">milvus.port</code>: TCP port on which Milvus server is listening (default
-19530).</p></li>
+<li><p><code translate="no">milvus.address</code>: IP-адрес или имя хоста сервера <code translate="no">milvus_A</code>.</p></li>
+<li><p><code translate="no">milvus.port</code>: TCP-порт, на котором прослушивается сервер Milvus (по умолчанию 19530).</p></li>
 </ul></li>
-<li><p>Storage configs (MinIO/S3 settings)</p>
+<li><p>Конфигурации хранилища (настройки MinIO/S3)</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
@@ -149,18 +135,16 @@ cd configs
   <span class="hljs-attr">backupBucketName:</span> <span class="hljs-string">&quot;bucket_B&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><code translate="no">minio.bucketName</code>: Name of the bucket used for data storage in <code translate="no">milvus_A</code>. In this example, set to <code translate="no">bucket_A</code>.</p></li>
-<li><p><code translate="no">minio.rootPath</code>: Root path within the bucket where data from <code translate="no">milvus_A</code> is stored. In this example, set to <code translate="no">files</code>.</p></li>
-<li><p><code translate="no">minio.backupBucketName</code>: Name of the bucket used for backup storage in
-<code translate="no">milvus_B</code>. In this example, <code translate="no">milvus_A</code> and <code translate="no">milvus_B</code> use different buckets. Therefore, set to <code translate="no">bucket_B</code>.</p></li>
-<li><p><code translate="no">minio.backupRootPath</code>: Root path within the bucket designated for storing backup files in <code translate="no">milvus_B</code>. In this example, set to <code translate="no">backup</code>.</p></li>
+<li><p><code translate="no">minio.bucketName</code>: Имя ведра, используемого для хранения данных в <code translate="no">milvus_A</code>. В данном примере установлено значение <code translate="no">bucket_A</code>.</p></li>
+<li><p><code translate="no">minio.rootPath</code>: Корневой путь внутри ведра, в котором хранятся данные из <code translate="no">milvus_A</code>. В данном примере установлено значение <code translate="no">files</code>.</p></li>
+<li><p><code translate="no">minio.backupBucketName</code>: Имя ведра, используемого для хранения резервных копий в<code translate="no">milvus_B</code>. В этом примере <code translate="no">milvus_A</code> и <code translate="no">milvus_B</code> используют разные ведра. Поэтому установите значение <code translate="no">bucket_B</code>.</p></li>
+<li><p><code translate="no">minio.backupRootPath</code>: Корневой путь в ведре, предназначенном для хранения файлов резервных копий в <code translate="no">milvus_B</code>. В данном примере установите значение <code translate="no">backup</code>.</p></li>
 </ul>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">Step 3: Create backup</h3><p>Once backup.yaml is saved, create a backup named <code translate="no">my_backup</code>:</p>
+<h3 id="Step-3-Create-backup" class="common-anchor-header">Шаг 3: Создание резервной копии</h3><p>После сохранения файла backup.yaml создайте резервную копию с именем <code translate="no">my_backup</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
 <button class="copy-code-btn"></button></code></pre>
-<p>This command creates the backup <code translate="no">bucket_B/backup/my_backup</code> in object
-storage for the collection coll.</p>
-<h2 id="Restore-the-backup-to-milvusB" class="common-anchor-header">Restore the backup to milvus_B<button data-href="#Restore-the-backup-to-milvusB" class="anchor-icon" translate="no">
+<p>Эта команда создает резервную копию <code translate="no">bucket_B/backup/my_backup</code> в объектном хранилище для коллекции coll.</p>
+<h2 id="Restore-the-backup-to-milvusB" class="common-anchor-header">Восстановление резервной копии на milvus_B<button data-href="#Restore-the-backup-to-milvusB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,9 +159,8 @@ storage for the collection coll.</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Step 1: Configure restoration settings</h3><p>Repeat step
-2 to modify configs for restoration to <code translate="no">milvus_B</code>, ensuring <code translate="no">minio.bucketName</code> is set to <code translate="no">bucket_B</code>.</p>
-<p>Here’s a sample configuration:</p>
+    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Шаг 1: Настройте параметры восстановления</h3><p>Повторите шаг 2, чтобы изменить конфигурацию для восстановления на <code translate="no">milvus_B</code>, убедившись, что <code translate="no">minio.bucketName</code> установлен на <code translate="no">bucket_B</code>.</p>
+<p>Вот пример конфигурации:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
 <span class="hljs-attr">milvus:</span>
@@ -214,7 +197,7 @@ storage for the collection coll.</p>
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Restore-backup" class="common-anchor-header">Step 2: Restore backup</h3><p>Restore the backup to <code translate="no">milvus_B</code>:</p>
+<h3 id="Step-2-Restore-backup" class="common-anchor-header">Шаг 2: Восстановление резервной копии</h3><p>Восстановите резервную копию на <code translate="no">milvus_B</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
 <button class="copy-code-btn"></button></code></pre>
-<p>This command restores the backup into a new collection named <code translate="no">coll_bak</code> in <code translate="no">milvus_B</code>, with data stored in <code translate="no">bucket_B/files/insert_log/[ID of new collection]</code>.</p>
+<p>Эта команда восстанавливает резервную копию в новую коллекцию с именем <code translate="no">coll_bak</code> в <code translate="no">milvus_B</code>, с данными, хранящимися в <code translate="no">bucket_B/files/insert_log/[ID of new collection]</code>.</p>

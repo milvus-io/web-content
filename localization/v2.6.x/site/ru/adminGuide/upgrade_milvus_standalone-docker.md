@@ -4,11 +4,11 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: Learn how to upgrade Milvus standalone with Docker Compose.
-title: Upgrade Milvus Standalone with Docker Compose
+summary: 'Узнайте, как обновить автономный Milvus с помощью Docker Compose.'
+title: Обновление автономного Milvus с помощью Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="/docs/upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Upgrade Milvus Standalone with Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
+<div class="tab-wrapper"><a href="/docs/ru/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ru/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/ru/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Обновление автономного Milvus с помощью Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,12 +23,12 @@ title: Upgrade Milvus Standalone with Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic describes how to upgrade your Milvus using Docker Compose.</p>
-<p>In normal cases, you can <a href="#Upgrade-Milvus-by-changing-its-image">upgrade Milvus by changing its image</a>. However, you need to <a href="#Migrate-the-metadata">migrate the metadata</a> before any upgrade from v2.1.x to v2.5.12.</p>
+    </button></h1><p>В этой теме описывается, как обновить Milvus с помощью Docker Compose.</p>
+<p>В обычных случаях вы можете <a href="#Upgrade-Milvus-by-changing-its-image">обновить Milvus, изменив его образ</a>. Однако перед обновлением с v2.1.x до v2.5.12 необходимо <a href="#Migrate-the-metadata">перенести метаданные</a>.</p>
 <div class="alter note">
-<p>Due to security concerns, Milvus upgrades its MinIO to RELEASE.2023-03-20T20-16-18Z with the release of v2.2.5. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">this guide</a>.</p>
+<p>По соображениям безопасности Milvus обновляет свой MinIO до RELEASE.2023-03-20T20-16-18Z с выходом v2.2.5. Перед любым обновлением с предыдущих выпусков Milvus Standalone, установленных с помощью Docker Compose, необходимо создать развертывание MinIO с одним узлом и одним диском и перенести существующие настройки и содержимое MinIO в новое развертывание. Подробности см. в <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">этом руководстве</a>.</p>
 </div>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Upgrade Milvus by changing its image<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Обновление Milvus путем изменения его образа<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,20 +43,20 @@ title: Upgrade Milvus Standalone with Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In normal cases, you can upgrade Milvus as follows:</p>
+    </button></h2><p>В обычных случаях вы можете обновить Milvus следующим образом:</p>
 <ol>
-<li><p>Change the Milvus image tag in <code translate="no">docker-compose.yaml</code>.</p>
+<li><p>Измените тег образа Milvus в <code translate="no">docker-compose.yaml</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Run the following commands to perform the upgrade.</p>
+<li><p>Для выполнения обновления выполните следующие команды.</p>
 <pre><code translate="no" class="language-shell">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">Migrate the metadata<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
+<h2 id="Migrate-the-metadata" class="common-anchor-header">Перенос метаданных<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,10 +72,10 @@ docker compose up -d
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Stop all Milvus components.</p>
+<li><p>Остановите все компоненты Milvus.</p>
 <pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Prepare the configuration file <code translate="no">migration.yaml</code> for meta migration.</p>
+<li><p>Подготовьте конфигурационный файл <code translate="no">migration.yaml</code> для миграции метаданных.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 <span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -94,18 +94,18 @@ docker compose up -d
   <span class="hljs-attr">metaSubPath:</span> <span class="hljs-string">meta</span>
   <span class="hljs-attr">kvSubPath:</span> <span class="hljs-string">kv</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Run the migration container.</p>
+<li><p>Запустите контейнер миграции.</p>
 <pre><code translate="no"><span class="hljs-comment"># Suppose your docker-compose run with the default milvus network,</span>
 <span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Start Milvus components again with the new Milvus image.</p>
+<li><p>Снова запустите компоненты Milvus с новым образом Milvus.</p>
 <pre><code translate="no" class="language-shell">// Run the following only after update the milvus image tag in the docker-compose.yaml
 docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,14 +121,12 @@ docker compose up -d
         ></path>
       </svg>
     </button></h2><ul>
-<li>You might also want to learn how to:
-<ul>
-<li><a href="/docs/scaleout.md">Scale a Milvus cluster</a></li>
+<li>Вам также может быть интересно узнать, как:<ul>
+<li><a href="/docs/ru/scaleout.md">Масштабировать кластер Milvus</a></li>
 </ul></li>
-<li>If you are ready to deploy your cluster on clouds:
-<ul>
-<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
-<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
+<li>Если вы готовы развернуть свой кластер в облаке:<ul>
+<li>Узнайте, как <a href="/docs/ru/eks.md">развернуть Milvus на Amazon EKS с помощью Terraform</a>.</li>
+<li>Узнайте, как <a href="/docs/ru/gcp.md">развернуть кластер Milvus на GCP с помощью Kubernetes</a></li>
+<li>Узнайте, как <a href="/docs/ru/azure.md">развернуть Milvus на Microsoft Azure с помощью Kubernetes</a>.</li>
 </ul></li>
 </ul>

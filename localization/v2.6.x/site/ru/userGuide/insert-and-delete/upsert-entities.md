@@ -1,14 +1,13 @@
 ---
 id: upsert-entities.md
-title: Upsert Entities
+title: Сущности Upsert
 summary: >-
-  The Upsert operation combines the actions of updating and inserting data.
-  Milvus determines whether to perform an update or an insert operation by
-  checking if the primary key exists. This section will introduce how to Upsert
-  an Entity and the specific behaviors of the Upsert operation in different
-  scenarios.
+  Операция Upsert объединяет действия по обновлению и вставке данных. Milvus
+  определяет, выполнять ли операцию обновления или вставки, проверяя, существует
+  ли первичный ключ. В этом разделе мы расскажем о том, как выполнить Upsert
+  сущности, а также о том, как операция Upsert ведет себя в различных сценариях.
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Upsert Entities<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">Сущности Upsert<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,11 +22,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Upsert operation combines the actions of updating and inserting data. Milvus determines whether to perform an update or an insert operation by checking if the primary key exists. This section will introduce how to Upsert an Entity and the specific behaviors of the Upsert operation in different scenarios.</p>
+    </button></h1><p>Операция Upsert объединяет действия по обновлению и вставке данных. Milvus определяет, выполнять ли операцию обновления или вставки, проверяя, существует ли первичный ключ. В этом разделе мы расскажем о том, как выполнить Upsert сущности, а также об особенностях поведения операции Upsert в различных сценариях.</p>
 <div class="alert note">
-<p>If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when upserting entities, Milvus automatically populates them with either their defined default values or NULL if defaults are not set. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<p>Если вы динамически добавляете новые поля после создания коллекции и не указываете значения для этих полей при апсертинге сущностей, Milvus автоматически заполняет их либо определенными значениями по умолчанию, либо NULL, если значения по умолчанию не заданы. Подробнее см. в разделе <a href="/docs/ru/add-fields-to-an-existing-collection.md">Добавление полей в существующую коллекцию</a>.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,21 +41,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to update an Entity in a Collection or are not sure whether to update or insert, you can try using the Upsert operation. When using this operation, it is essential to ensure that the Entity included in the Upsert request contains the primary key; otherwise, an error will occur. Upon receiving an Upsert request, Milvus will execute the following process:</p>
+    </button></h2><p>Когда вам нужно обновить сущность в коллекции или вы не уверены, что делать: обновление или вставку, вы можете попробовать использовать операцию Upsert. При использовании этой операции необходимо убедиться, что сущность, включенная в запрос Upsert, содержит первичный ключ; в противном случае возникнет ошибка. Получив запрос Upsert, Milvus выполнит следующий процесс:</p>
 <ol>
-<li><p>Check whether the primary field of the Collection has AutoId enabled.</p>
+<li><p>Проверяет, включено ли в первичном поле Коллекции значение AutoId.</p>
 <ol>
-<li><p>If it is, Milvus will replace the primary key in the Entity with an automatically generated primary key and insert the data.</p></li>
-<li><p>If not, Milvus will use the primary key carried by the Entity to insert the data.</p></li>
+<li><p>Если да, Milvus заменит первичный ключ сущности автоматически сгенерированным первичным ключом и вставит данные.</p></li>
+<li><p>Если нет, Milvus будет использовать первичный ключ сущности для вставки данных.</p></li>
 </ol></li>
-<li><p>Perform a delete operation based on the primary key value of the Entity included in the Upsert request.</p></li>
+<li><p>Выполните операцию удаления на основе значения первичного ключа сущности, включенной в запрос Upsert.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/upsert-entities-workflow.png" alt="Upsert Entities Workflow" class="doc-image" id="upsert-entities-workflow" />
-    <span>Upsert Entities Workflow</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-entities-workflow.png" alt="Upsert Entities Workflow" class="doc-image" id="upsert-entities-workflow" />
+   </span> <span class="img-wrapper"> <span>Рабочий процесс Upsert Entities</span> </span></p>
 <h2 id="Upsert-Entity-in-a-Collection" class="common-anchor-header">Upsert Entity in a Collection<button data-href="#Upsert-Entity-in-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,14 +69,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, you will upsert Entities into a Collection created in the quick-setup manner. A Collection created in this manner has only two fields, named <strong>id</strong> and <strong>vector</strong>. Additionally, this Collection has the dynamic field enabled, so the Entities in the example code include a field called <strong>color</strong> that is not defined in the Schema.</p>
+    </button></h2><p>В этом разделе вы выполните апсерт сущностей в Коллекцию, созданную способом быстрой настройки. Коллекция, созданная таким образом, имеет только два поля, названные <strong>id</strong> и <strong>vector</strong>. Кроме того, в этой Коллекции включено динамическое поле, поэтому сущности в коде примера включают поле с названием <strong>color</strong>, которое не определено в схеме.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -269,7 +261,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-Entities-in-a-Partition" class="common-anchor-header">Upsert Entities in a Partition<button data-href="#Upsert-Entities-in-a-Partition" class="anchor-icon" translate="no">
+<h2 id="Upsert-Entities-in-a-Partition" class="common-anchor-header">Вставка сущностей в раздел<button data-href="#Upsert-Entities-in-a-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,14 +276,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also insert entities into a specified partition. The following code snippets assume that you have a partition named <strong>PartitionA</strong> in your collection.</p>
+    </button></h2><p>Вы также можете вставить сущности в указанный раздел. В следующих фрагментах кода предполагается, что в вашей коллекции есть раздел с именем <strong>PartitionA</strong>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.06998888224297328</span>, <span class="hljs-number">0.8582816610326578</span>, -<span class="hljs-number">0.9657938677934292</span>, <span class="hljs-number">0.6527905683627726</span>, -<span class="hljs-number">0.8668460657158576</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;black_3651&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.6060703043917468</span>, -<span class="hljs-number">0.3765080534566074</span>, -<span class="hljs-number">0.7710758854987239</span>, <span class="hljs-number">0.36993888322346136</span>, <span class="hljs-number">0.5507513364206531</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;grey_2049&quot;</span>},

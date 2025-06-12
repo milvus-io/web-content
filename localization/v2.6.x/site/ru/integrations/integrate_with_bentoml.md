@@ -1,12 +1,12 @@
 ---
 id: integrate_with_bentoml.md
 summary: >-
-  This guide demonstrates how to use an open-source embedding model and
-  large-language model on BentoCloud with Milvus vector database to build a
-  Retrieval Augmented Generation (RAG) application.
-title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
+  В этом руководстве показано, как использовать открытую модель встраивания и
+  крупноязычную модель на BentoCloud с векторной базой данных Milvus для
+  создания приложения Retrieval Augmented Generation (RAG).
+title: Генерация с дополнением к поиску (RAG) с помощью Milvus и BentoML
 ---
-<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and BentoML<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">Генерация с дополнением к поиску (RAG) с помощью Milvus и BentoML<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,7 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<h2 id="Introduction" class="common-anchor-header">Introduction<button data-href="#Introduction" class="anchor-icon" translate="no">
+<h2 id="Introduction" class="common-anchor-header">Введение<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,9 +38,8 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This guide demonstrates how to use an open-source embedding model and large-language model on BentoCloud with Milvus vector database to build a RAG (Retrieval Augmented Generation) application.
-BentoCloud is an AI Inference Platform for fast-moving AI teams, offering fully-managed infrastructure tailored for model inference. It works in conjunction with BentoML, an open-source model serving framework, to facilitate the easy creation and deployment of high-performance model services. In this demo, we use Milvus Lite as vector database, which is the lightweight version of Milvus that can be embedded into your Python application.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+    </button></h2><p>В этом руководстве показано, как использовать открытую модель встраивания и крупноязычную модель на BentoCloud с векторной базой данных Milvus для создания приложения RAG (Retrieval Augmented Generation). BentoCloud - это платформа AI Inference Platform для быстро развивающихся команд ИИ, предлагающая полностью управляемую инфраструктуру, предназначенную для вывода моделей. Она работает в сочетании с BentoML, фреймворком для обслуживания моделей с открытым исходным кодом, чтобы облегчить создание и развертывание высокопроизводительных модельных сервисов. В этой демонстрации мы используем Milvus Lite в качестве базы данных векторов - это облегченная версия Milvus, которая может быть встроена в ваше приложение на Python.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,15 +54,14 @@ BentoCloud is an AI Inference Platform for fast-moving AI teams, offering fully-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite is available on PyPI. You can install it via pip for Python 3.8+:</p>
+    </button></h2><p>Milvus Lite доступен на PyPI. Вы можете установить его через pip для Python 3.8+:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </div>
-<p>After sign in the BentoCloud, we can interact with deployed BentoCloud Services in Deployments, and the corresponding END_POINT and API are located in Playground -> Python.
-You can download the city data <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">here</a>.</p>
-<h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Serving Embeddings with BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
+<p>После входа в BentoCloud мы можем взаимодействовать с развернутыми сервисами BentoCloud Services в Deployments, а соответствующий END_POINT и API находятся в Playground -&gt; Python. Данные о городе можно скачать <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">здесь</a>.</p>
+<h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Обслуживание вкраплений с помощью BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,7 +76,7 @@ You can download the city data <a href="https://github.com/ytang07/bento_octo_mi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use this endpoint, import <code translate="no">bentoml</code> and set up an HTTP client using the <code translate="no">SyncHTTPClient</code> by specifying the endpoint and optionally the token (if you turn on <code translate="no">Endpoint Authorization</code> on BentoCloud). Alternatively, you can use the same model served through BentoML using its <a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a> repository.</p>
+    </button></h2><p>Чтобы использовать эту конечную точку, импортируйте <code translate="no">bentoml</code> и настройте HTTP-клиент, используя <code translate="no">SyncHTTPClient</code>, указав конечную точку и, опционально, токен (если вы включите <code translate="no">Endpoint Authorization</code> в BentoCloud). В качестве альтернативы можно использовать ту же модель, обслуживаемую через BentoML, используя его репозиторий <a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bentoml
 
 BENTO_EMBEDDING_MODEL_END_POINT = <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
@@ -88,8 +86,8 @@ embedding_client = bentoml.SyncHTTPClient(
     BENTO_EMBEDDING_MODEL_END_POINT, token=BENTO_API_TOKEN
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Once we connect to the embedding_client, we need to process our data. We provided several functions to perform data splitting and embedding.</p>
-<p>Read files and preprocess the text into a list of strings.</p>
+<p>После подключения к embedding_client нам нужно обработать наши данные. Мы предоставили несколько функций для выполнения разбиения и встраивания данных.</p>
+<p>Чтение файлов и предварительная обработка текста в список строк.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># naively chunk on newlines</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">chunk_text</span>(<span class="hljs-params">filename: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">list</span>:
     <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:
@@ -97,7 +95,7 @@ embedding_client = bentoml.SyncHTTPClient(
     sentences = text.split(<span class="hljs-string">&quot;\n&quot;</span>)
     <span class="hljs-keyword">return</span> sentences
 <button class="copy-code-btn"></button></code></pre>
-<p>First we need to download the city data.</p>
+<p>Сначала нам нужно загрузить данные о городе.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> urllib.request
@@ -121,7 +119,7 @@ data = response.json()
         file_path = os.path.join(save_dir, item[<span class="hljs-string">&quot;name&quot;</span>])
         urllib.request.urlretrieve(file_url, file_path)
 <button class="copy-code-btn"></button></code></pre>
-<p>Next, we process each of the files we have.</p>
+<p>Затем мы обработаем каждый из имеющихся файлов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># please upload your data directory under this file&#x27;s folder</span>
 cities = os.listdir(<span class="hljs-string">&quot;city_data&quot;</span>)
 <span class="hljs-comment"># store chunked text for each of the cities in a list of dicts</span>
@@ -135,7 +133,7 @@ city_chunks = []
     mapped = {<span class="hljs-string">&quot;city_name&quot;</span>: city.split(<span class="hljs-string">&quot;.&quot;</span>)[<span class="hljs-number">0</span>], <span class="hljs-string">&quot;chunks&quot;</span>: cleaned}
     city_chunks.append(mapped)
 <button class="copy-code-btn"></button></code></pre>
-<p>Splits a list of strings into a list of embeddings, each grouped 25 text strings.</p>
+<p>Разбивает список строк на список вкраплений, в каждом из которых сгруппировано 25 текстовых строк.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_embeddings</span>(<span class="hljs-params">texts: <span class="hljs-built_in">list</span></span>) -&gt; <span class="hljs-built_in">list</span>:
     <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(texts) &gt; <span class="hljs-number">25</span>:
         splits = [texts[x : x + <span class="hljs-number">25</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(texts), <span class="hljs-number">25</span>)]
@@ -148,7 +146,7 @@ city_chunks = []
         sentences=texts,
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, we need to match up embeddings and text chunks. Since the list embeddings and the list of sentences should match by index, we can <code translate="no">enumerate</code> through either list to match them up.</p>
+<p>Теперь нам нужно сопоставить вкрапления и текстовые фрагменты. Поскольку список вкраплений и список предложений должны совпадать по индексу, мы можем пройтись по <code translate="no">enumerate</code> по любому из этих списков, чтобы сопоставить их.</p>
 <pre><code translate="no" class="language-python">entries = []
 <span class="hljs-keyword">for</span> city_dict <span class="hljs-keyword">in</span> city_chunks:
     <span class="hljs-comment"># No need for the embeddings list if get_embeddings already returns a list of lists</span>
@@ -165,7 +163,7 @@ city_chunks = []
         entries.append(entry)
     <span class="hljs-built_in">print</span>(entries)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Inserting-Data-into-a-Vector-Database-for-Retrieval" class="common-anchor-header">Inserting Data into a Vector Database for Retrieval<button data-href="#Inserting-Data-into-a-Vector-Database-for-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Inserting-Data-into-a-Vector-Database-for-Retrieval" class="common-anchor-header">Вставка данных в векторную базу данных для извлечения<button data-href="#Inserting-Data-into-a-Vector-Database-for-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,8 +178,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With our embeddings and data prepared, we can insert the vectors together with metadata into Milvus Lite for vector search later. The first step in this section is to start a client by connecting to Milvus Lite.
-We simply import the <code translate="no">MilvusClient</code> module and initialize a Milvus Lite client that connects to your Milvus Lite vector database. The dimension size comes from the size of the embedding model, e.g. the Sentence Transformer model <code translate="no">all-MiniLM-L6-v2</code> produces vectors of 384 dimension.</p>
+    </button></h2><p>Подготовив вкрапления и данные, мы можем вставить векторы вместе с метаданными в Milvus Lite для последующего поиска векторов. Первый шаг в этом разделе - запуск клиента для подключения к Milvus Lite. Мы просто импортируем модуль <code translate="no">MilvusClient</code> и инициализируем клиент Milvus Lite, который подключается к вашей векторной базе данных Milvus Lite. Размерность определяется размером модели встраивания, например, модель Sentence Transformer <code translate="no">all-MiniLM-L6-v2</code> создает векторы размером 384.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
@@ -191,19 +188,19 @@ DIMENSION = <span class="hljs-number">384</span>
 milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>Что касается аргумента <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Установка <code translate="no">uri</code> в качестве локального файла, например,<code translate="no">./milvus.db</code>, является наиболее удобным методом, так как он автоматически использует <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> для хранения всех данных в этом файле.</li>
+<li>Если у вас большой объем данных, вы можете настроить более производительный сервер Milvus на <a href="https://milvus.io/docs/quickstart.md">docker или kubernetes</a>. В этом случае используйте ури сервера, например<code translate="no">http://localhost:19530</code>, в качестве <code translate="no">uri</code>.</li>
+<li>Если вы хотите использовать <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, полностью управляемый облачный сервис для Milvus, измените <code translate="no">uri</code> и <code translate="no">token</code>, которые соответствуют <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">публичной конечной точке и ключу Api</a> в Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Or with old connections.connect API (not recommended):</p>
+<p>Или с помощью старого API connections.connect (не рекомендуется):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
 connections.connect(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Creating-Your-Milvus-Lite-Collection" class="common-anchor-header">Creating Your Milvus Lite Collection<button data-href="#Creating-Your-Milvus-Lite-Collection" class="anchor-icon" translate="no">
+<h2 id="Creating-Your-Milvus-Lite-Collection" class="common-anchor-header">Создание коллекции Milvus Lite<button data-href="#Creating-Your-Milvus-Lite-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,7 +215,7 @@ connections.connect(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Creating a collection using Milvus Lite involves two steps: first, defining the schema, and second, defining the index. For this section, we need one module: DataType tells us what type of data will be in a field. We also need to use two functions to create schema and add fields. create_schema():  creates a collection schema, add_field(): adds a field to the schema of a collection.</p>
+    </button></h2><p>Создание коллекции с помощью Milvus Lite включает в себя два этапа: во-первых, определение схемы, а во-вторых, определение индекса. Для этого раздела нам понадобится один модуль: DataType, который указывает нам, какой тип данных будет находиться в поле. Также нам понадобятся две функции для создания схемы и добавления полей. create_schema(): создает схему коллекции, add_field(): добавляет поле в схему коллекции.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Collection
 
 <span class="hljs-comment"># Create schema</span>
@@ -231,8 +228,8 @@ schema = MilvusClient.create_schema(
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
-<p>Now that we have created our schema and successfully defined data field, we need to define the index. In terms of search, an “index” defines how we are going to map our data out for retrieval. We use the default choice <a href="https://docs.zilliz.com/docs/autoindex-explained">AUTOINDEX</a> to index our data for this project.</p>
-<p>Next, we create the collection with the previously given name, schema and index. Finally, we insert the previously processed data.</p>
+<p>Теперь, когда мы создали схему и успешно определили поле данных, нам нужно определить индекс. С точки зрения поиска, "индекс" определяет, как мы собираемся отображать наши данные для поиска. Для этого проекта мы используем стандартный вариант <a href="https://docs.zilliz.com/docs/autoindex-explained">AUTOINDEX</a> для индексации данных.</p>
+<p>Далее мы создаем коллекцию с заданными ранее именем, схемой и индексом. Наконец, мы вставляем обработанные ранее данные.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># prepare index parameters</span>
 index_params = milvus_client.prepare_index_params()
 
@@ -253,7 +250,7 @@ milvus_client.create_collection(
 <span class="hljs-comment"># Outside the loop, now you upsert all the entries at once</span>
 milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-Your-LLM-for-RAG" class="common-anchor-header">Set up Your LLM for RAG<button data-href="#Set-up-Your-LLM-for-RAG" class="anchor-icon" translate="no">
+<h2 id="Set-up-Your-LLM-for-RAG" class="common-anchor-header">Настройка LLM для RAG<button data-href="#Set-up-Your-LLM-for-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,12 +265,12 @@ milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build a RAG app, we need to deploy an LLM on BentoCloud. Let’s use the latest Llama3 LLM. Once it is up and running, simply copy the endpoint and token of this model service and set up a client for it.</p>
+    </button></h2><p>Чтобы создать приложение RAG, нам нужно развернуть LLM на BentoCloud. Давайте воспользуемся последней версией Llama3 LLM. Как только он будет запущен, просто скопируйте конечную точку и токен этого модельного сервиса и настройте для него клиента.</p>
 <pre><code translate="no" class="language-python">BENTO_LLM_END_POINT = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
 
 llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="LLM-Instructions" class="common-anchor-header">LLM Instructions<button data-href="#LLM-Instructions" class="anchor-icon" translate="no">
+<h2 id="LLM-Instructions" class="common-anchor-header">Инструкции LLM<button data-href="#LLM-Instructions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -288,7 +285,7 @@ llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now, we set up the LLM instructions with the prompt, context, and the question. Here is the function that behaves as an LLM and it then returns the output from the client in a string format.</p>
+    </button></h2><p>Теперь мы настроим инструкции LLM с подсказкой, контекстом и вопросом. Вот функция, которая ведет себя как LLM и возвращает вывод от клиента в строковом формате.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">dorag</span>(<span class="hljs-params">question: <span class="hljs-built_in">str</span>, context: <span class="hljs-built_in">str</span></span>):
 
     prompt = (
@@ -307,7 +304,7 @@ llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
 
     <span class="hljs-keyword">return</span> res
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="A-RAG-Example" class="common-anchor-header">A RAG Example<button data-href="#A-RAG-Example" class="anchor-icon" translate="no">
+<h2 id="A-RAG-Example" class="common-anchor-header">Пример RAG<button data-href="#A-RAG-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -322,7 +319,7 @@ llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we’re ready to ask a question. This function simply takes a question and then does RAG to generate the relevant context from the background information. Then, we pass the context and the question to dorag() and get the result.</p>
+    </button></h2><p>Теперь мы готовы задать вопрос. Эта функция просто принимает вопрос, а затем выполняет RAG, чтобы сгенерировать соответствующий контекст из фоновой информации. Затем мы передаем контекст и вопрос в dorag() и получаем результат.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What state is Cambridge in?&quot;</span>
 
 
@@ -348,7 +345,7 @@ llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
 context = ask_a_question(question=question)
 <span class="hljs-built_in">print</span>(context)
 <button class="copy-code-btn"></button></code></pre>
-<p>Implement RAG</p>
+<p>Реализация RAG</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(dorag(question=question, context=context))
 <button class="copy-code-btn"></button></code></pre>
-<p>For the example question asking which state Cambridge is in, we can print the entire response from BentoML. However, if we take the time to parse through it, it just looks nicer, and it should tell us that Cambridge is located in Massachusetts.</p>
+<p>Для примера с вопросом о том, в каком штате находится Кембридж, мы можем распечатать весь ответ из BentoML. Однако если мы потратим время на его разбор, он будет выглядеть более симпатично и сообщит нам, что Кембридж находится в штате Массачусетс.</p>

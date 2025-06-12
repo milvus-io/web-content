@@ -2,11 +2,11 @@
 id: milvus-cdc-overview.md
 order: 1
 summary: >-
-  Milvus-CDC is a user-friendly tool that can capture and synchronize
-  incremental data in Milvus instances.
-title: CDC Overview
+  Milvus-CDC - это удобный инструмент для сбора и синхронизации инкрементных
+  данных в экземплярах Milvus.
+title: Обзор CDC
 ---
-<h1 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h1 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ title: CDC Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus-CDC is a user-friendly tool that can capture and synchronize incremental data in Milvus instances. It ensures the reliability of business data by seamlessly transferring it between source and target instances, allowing for easy incremental backup and disaster recovery.</p>
-<h2 id="Key-capabilities" class="common-anchor-header">Key capabilities<button data-href="#Key-capabilities" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus-CDC - это удобный инструмент для захвата и синхронизации инкрементных данных в экземплярах Milvus. Он обеспечивает надежность бизнес-данных, беспрепятственно перенося их между исходным и целевым экземплярами, позволяя легко выполнять инкрементное резервное копирование и аварийное восстановление.</p>
+<h2 id="Key-capabilities" class="common-anchor-header">Ключевые возможности<button data-href="#Key-capabilities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,12 +38,12 @@ title: CDC Overview
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Sequential Data Synchronization</strong>: Ensures data integrity and consistency by synchronizing data changes sequentially between Milvus instances.</p></li>
-<li><p><strong>Incremental Data Replication</strong>: Replicates incremental data, including insertions and deletions, from source Milvus to target Milvus, offering persistent storage.</p></li>
-<li><p><strong>CDC Task Management</strong>: Allows for the management of CDC tasks through OpenAPI requests, including creating, querying status, and deleting CDC tasks.</p></li>
+<li><p><strong>Последовательная синхронизация данных</strong>: Обеспечивает целостность и непротиворечивость данных за счет последовательной синхронизации изменений данных между экземплярами Milvus.</p></li>
+<li><p><strong>Инкрементная репликация данных</strong>: Реплицирует инкрементные данные, включая вставки и удаления, из исходного Milvus в целевой Milvus, обеспечивая постоянное хранение.</p></li>
+<li><p><strong>Управление задачами CDC</strong>: Позволяет управлять задачами CDC с помощью запросов OpenAPI, включая создание, запрос статуса и удаление задач CDC.</p></li>
 </ul>
-<p>Additionally, we are planning to expand our capabilities to include support for integration with stream processing systems in the future.</p>
-<h2 id="Architecture" class="common-anchor-header">Architecture<button data-href="#Architecture" class="anchor-icon" translate="no">
+<p>Кроме того, в будущем мы планируем расширить наши возможности и включить поддержку интеграции с системами потоковой обработки.</p>
+<h2 id="Architecture" class="common-anchor-header">Архитектура<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,19 +58,17 @@ title: CDC Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus-CDC adopts an architecture with two main components - an HTTP server that manages tasks and metadata, and <strong>corelib</strong> that synchronizes task execution with a reader that obtains data from the source Milvus instance and a writer that sends processed data to the target Milvus instance.</p>
+    </button></h2><p>Milvus-CDC использует архитектуру с двумя основными компонентами - HTTP-сервером, который управляет задачами и метаданными, и <strong>corelib</strong>, который синхронизирует выполнение задач с читателем, получающим данные из исходного экземпляра Milvus, и писателем, отправляющим обработанные данные в целевой экземпляр Milvus.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
-    <span>milvus-cdc-architecture</span>
-  </span>
-</p>
-<p>In the preceding diagram,</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   </span> <span class="img-wrapper"> <span>Архитектура milvus-cdc-архитектуры</span> </span></p>
+<p>На предыдущей диаграмме,</p>
 <ul>
-<li><p><strong>HTTP server</strong>: Handles user requests, executes tasks, and maintains metadata. It serves as the control plane for task orchestration within the Milvus-CDC system.</p></li>
-<li><p><strong>Corelib</strong>: Responsible for the actual synchronization of tasks. It includes a reader component that retrieves information from the source Milvus’s etcd and message queue (MQ), and a writer component that translates messages from the MQ into API parameters for the Milvus system and sends these requests to the target Milvus to complete the synchronization process.</p></li>
+<li><p><strong>HTTP-сервер</strong>: Обрабатывает запросы пользователей, выполняет задачи и поддерживает метаданные. Он служит плоскостью управления для оркестровки задач в системе Milvus-CDC.</p></li>
+<li><p><strong>Corelib</strong>: Отвечает за фактическую синхронизацию задач. Он включает в себя компонент чтения, который получает информацию из etcd и очереди сообщений (MQ) исходного Milvus, и компонент записи, который переводит сообщения из MQ в параметры API для системы Milvus и отправляет эти запросы целевому Milvus для завершения процесса синхронизации.</p></li>
 </ul>
-<h2 id="Workflow" class="common-anchor-header">Workflow<button data-href="#Workflow" class="anchor-icon" translate="no">
+<h2 id="Workflow" class="common-anchor-header">Рабочий процесс<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,20 +83,18 @@ title: CDC Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The Milvus-CDC data processing flow involves the following steps:</p>
+    </button></h2><p>Поток обработки данных Milvus-CDC включает в себя следующие шаги:</p>
 <ol>
-<li><p><strong>Task creation</strong>: Users initiate a CDC task via HTTP requests.</p></li>
-<li><p><strong>Metadata retrieval</strong>: The system fetches collection-specific metadata from the source Milvus’s etcd, including channel and checkpoint information for the collection.</p></li>
-<li><p><strong>MQ connection</strong>: With the metadata at hand, the system connects to the MQ to begin subscribing to the data stream.</p></li>
-<li><p><strong>Data processing</strong>: Data from MQ is read, parsed, and either passed on using the Go SDK or processed to replicate operations performed in the source Milvus.</p></li>
+<li><p><strong>Создание задачи</strong>: Пользователи инициируют задачу CDC с помощью HTTP-запросов.</p></li>
+<li><p><strong>Извлечение метаданных</strong>: Система получает метаданные, относящиеся к коллекции, из источника Milvus's etcd, включая информацию о канале и контрольной точке коллекции.</p></li>
+<li><p><strong>Подключение MQ</strong>: Имея под рукой метаданные, система подключается к MQ, чтобы начать подписку на поток данных.</p></li>
+<li><p><strong>Обработка данных</strong>: Данные из MQ считываются, разбираются и либо передаются с помощью Go SDK, либо обрабатываются для повторения операций, выполняемых в исходном Milvus.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
-    <span>milvus-cdc-workflow</span>
-  </span>
-</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   </span> <span class="img-wrapper"> <span>milvus-cdc-workflow</span> </span></p>
+<h2 id="Limits" class="common-anchor-header">Лимиты<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,16 +110,16 @@ title: CDC Overview
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Incremental Data Synchronization</strong>: As of now, Milvus-CDC is designed to synchronize only incremental data. If your business requires a full data backup, please <a href="https://milvus.io/community">reach out to us</a> for assistance.</p></li>
-<li><p><strong>Synchronization Scope</strong>: Currently, Milvus-CDC can synchronize data at the cluster level. We are working on adding support for collection-level data synchronization in upcoming releases.</p></li>
-<li><p><strong>Supported API Requests</strong>: Milvus-CDC currently supports the following API requests. We plan to extend support to additional requests in future releases:</p>
+<li><p><strong>Инкрементная синхронизация данных</strong>: На данный момент Milvus-CDC предназначен для синхронизации только инкрементных данных. Если вашему предприятию требуется полное резервное копирование данных, обратитесь <a href="https://milvus.io/community">к нам</a> за помощью.</p></li>
+<li><p><strong>Объем синхронизации</strong>: В настоящее время Milvus-CDC может синхронизировать данные на уровне кластера. Мы работаем над добавлением поддержки синхронизации данных на уровне коллекции в ближайших выпусках.</p></li>
+<li><p><strong>Поддерживаемые API-запросы</strong>: В настоящее время Milvus-CDC поддерживает следующие API-запросы. Мы планируем расширить поддержку дополнительных запросов в будущих выпусках:</p>
 <ul>
-<li><p>Create/Drop Collection</p></li>
-<li><p>Insert/Delete/Upsert</p></li>
-<li><p>Create/Drop Partition</p></li>
-<li><p>Create/Drop Index</p></li>
-<li><p>Load/Release/Flush</p></li>
-<li><p>Load/Release Partition</p></li>
-<li><p>Create/Drop Database</p></li>
+<li><p>Создание/Удаление коллекции</p></li>
+<li><p>Вставка/удаление/пополнение</p></li>
+<li><p>Создать/Удалить раздел</p></li>
+<li><p>Создание/удаление индекса</p></li>
+<li><p>Загрузка/освобождение/промывка</p></li>
+<li><p>Загрузка/освобождение раздела</p></li>
+<li><p>Создать/удалить базу данных</p></li>
 </ul></li>
 </ul>

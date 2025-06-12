@@ -1,14 +1,15 @@
 ---
 id: integrate_with_airbyte.md
 summary: >-
-  Airbyte is an open-source data movement infrastructure for building extract
-  and load (EL) data pipelines. It is designed for versatility, scalability, and
-  ease of use. Airbyte’s connector catalog comes “out-of-the-box” with over 350
-  pre-built connectors. These connectors can be used to start replicating data
-  from a source to a destination in just a few minutes.
-title: 'Airbyte: Open-Source Data Movement Infrastructure'
+  Airbyte - это инфраструктура перемещения данных с открытым исходным кодом для
+  создания конвейеров извлечения и загрузки данных (EL). Она отличается
+  универсальностью, масштабируемостью и простотой использования. Каталог
+  коннекторов Airbyte поставляется "из коробки" с более чем 350 предварительно
+  созданными коннекторами. С помощью этих коннекторов можно запустить репликацию
+  данных из источника в пункт назначения всего за несколько минут.
+title: 'Airbyte: Инфраструктура перемещения данных с открытым исходным кодом'
 ---
-<h1 id="Airbyte-Open-Source-Data-Movement-Infrastructure" class="common-anchor-header">Airbyte: Open-Source Data Movement Infrastructure<button data-href="#Airbyte-Open-Source-Data-Movement-Infrastructure" class="anchor-icon" translate="no">
+<h1 id="Airbyte-Open-Source-Data-Movement-Infrastructure" class="common-anchor-header">Airbyte: Инфраструктура перемещения данных с открытым исходным кодом<button data-href="#Airbyte-Open-Source-Data-Movement-Infrastructure" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +24,8 @@ title: 'Airbyte: Open-Source Data Movement Infrastructure'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Airbyte is an open-source data movement infrastructure for building extract and load (EL) data pipelines. It is designed for versatility, scalability, and ease of use. Airbyte’s connector catalog comes “out-of-the-box” with over 350 pre-built connectors. These connectors can be used to start replicating data from a source to a destination in just a few minutes.</p>
-<h2 id="Major-Components-of-Airbyte" class="common-anchor-header">Major Components of Airbyte<button data-href="#Major-Components-of-Airbyte" class="anchor-icon" translate="no">
+    </button></h1><p>Airbyte - это инфраструктура перемещения данных с открытым исходным кодом для создания конвейеров извлечения и загрузки данных (EL). Она разработана для обеспечения универсальности, масштабируемости и простоты использования. Каталог коннекторов Airbyte поставляется "из коробки" с более чем 350 предварительно созданными коннекторами. С помощью этих коннекторов можно запустить репликацию данных из источника в пункт назначения всего за несколько минут.</p>
+<h2 id="Major-Components-of-Airbyte" class="common-anchor-header">Основные компоненты Airbyte<button data-href="#Major-Components-of-Airbyte" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +40,14 @@ title: 'Airbyte: Open-Source Data Movement Infrastructure'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Connector-Catalog" class="common-anchor-header">1. Connector Catalog</h3><ul>
-<li><strong>350+ Pre-Built Connectors</strong>: Airbyte’s connector catalog comes “out-of-the-box” with over 350 pre-built connectors. These connectors can be used to start replicating data from a source to a destination in just a few minutes.</li>
-<li><strong>No-Code Connector Builder</strong>: You can easily extend Airbyte’s functionality to support your custom use cases through tools <a href="https://docs.airbyte.com/connector-development/connector-builder-ui/overview">like the No-Code Connector Builder</a>.</li>
+    </button></h2><h3 id="1-Connector-Catalog" class="common-anchor-header">1. Каталог коннекторов</h3><ul>
+<li><strong>350+ готовых коннекторов</strong>: Каталог коннекторов Airbyte поставляется "из коробки" с более чем 350 готовыми коннекторами. Эти коннекторы можно использовать, чтобы начать репликацию данных из источника в пункт назначения всего за несколько минут.</li>
+<li><strong>No-Code Connector Builder</strong>: Вы можете легко расширить функциональность Airbyte для поддержки ваших пользовательских сценариев использования с помощью таких инструментов, <a href="https://docs.airbyte.com/connector-development/connector-builder-ui/overview">как No-Code Connector Builder</a>.</li>
 </ul>
-<h3 id="2-The-Platform" class="common-anchor-header">2. The Platform</h3><p>Airbyte’s platform provides all the horizontal services required to configure and scale data movement operations, available as <a href="https://airbyte.com/product/airbyte-cloud">cloud-managed</a> or <a href="https://airbyte.com/product/airbyte-enterprise">self-managed</a>.</p>
-<h3 id="3-The-User-Interface" class="common-anchor-header">3. The User Interface</h3><p>Airbyte features a UI, <a href="https://docs.airbyte.com/using-airbyte/pyairbyte/getting-started">PyAirbyte</a> (Python library), <a href="https://docs.airbyte.com/api-documentation">API</a>, and <a href="https://docs.airbyte.com/terraform-documentation">Terraform Provider</a> to integrate with your preferred tooling and approach to infrastructure management.</p>
-<p>With the ability of Airbyte, users can integrate data sources into Milvus cluster for similarity search.</p>
-<h2 id="Before-You-Begin" class="common-anchor-header">Before You Begin<button data-href="#Before-You-Begin" class="anchor-icon" translate="no">
+<h3 id="2-The-Platform" class="common-anchor-header">2. Платформа</h3><p>Платформа Airbyte предоставляет все горизонтальные сервисы, необходимые для настройки и масштабирования операций по перемещению данных, и может быть как <a href="https://airbyte.com/product/airbyte-cloud">облачной</a>, так и <a href="https://airbyte.com/product/airbyte-enterprise">самоуправляемой</a>.</p>
+<h3 id="3-The-User-Interface" class="common-anchor-header">3. Пользовательский интерфейс</h3><p>Airbyte имеет пользовательский интерфейс, библиотеку <a href="https://docs.airbyte.com/using-airbyte/pyairbyte/getting-started">PyAirbyte</a> (Python), <a href="https://docs.airbyte.com/api-documentation">API</a> и <a href="https://docs.airbyte.com/terraform-documentation">Terraform Provider</a> для интеграции с предпочитаемыми вами инструментами и подходами к управлению инфраструктурой.</p>
+<p>Благодаря возможностям Airbyte пользователи могут интегрировать источники данных в кластер Milvus для поиска по сходству.</p>
+<h2 id="Before-You-Begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-You-Begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,15 +62,15 @@ title: 'Airbyte: Open-Source Data Movement Infrastructure'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You will need:</p>
+    </button></h2><p>Вам понадобятся:</p>
 <ul>
-<li>Zendesk account (or another data source you want to sync data from)</li>
-<li>Airbyte account or local instance</li>
-<li>OpenAI API key</li>
-<li>Milvus cluster</li>
-<li>Python 3.10 installed locally</li>
+<li>учетная запись Zendesk (или другой источник данных, с которым вы хотите синхронизировать данные)</li>
+<li>Учетная запись Airbyte или локальный экземпляр</li>
+<li>API-ключ OpenAI</li>
+<li>Кластер Milvus</li>
+<li>Python 3.10, установленный локально</li>
 </ul>
-<h2 id="Set-Up-Milvus-Cluster" class="common-anchor-header">Set Up Milvus Cluster<button data-href="#Set-Up-Milvus-Cluster" class="anchor-icon" translate="no">
+<h2 id="Set-Up-Milvus-Cluster" class="common-anchor-header">Настройка кластера Milvus<button data-href="#Set-Up-Milvus-Cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,10 +85,10 @@ title: 'Airbyte: Open-Source Data Movement Infrastructure'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to <a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Deploy-Milvus-Operator">deploy Milvus Operator</a>. If not, you can follow <a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Create-a-K8s-Cluster">the steps</a> to deploy a Milvus cluster with Milvus Operator.</p>
-<p>Individual entities (in our case, support tickets and knowledge base articles) are stored in a “collection” — after your cluster is set up, you need to create a collection. Choose a suitable name and set the Dimension to 1536 to match the vector dimensionality generated by the OpenAI embeddings service.</p>
-<p>After creation, record the endpoint and <a href="https://milvus.io/docs/authenticate.md?tab=docker">authentication</a> info.</p>
-<h2 id="Set-Up-Connection-in-Airbyte" class="common-anchor-header">Set Up Connection in Airbyte<button data-href="#Set-Up-Connection-in-Airbyte" class="anchor-icon" translate="no">
+    </button></h2><p>Если вы уже развернули кластер K8s для производства, вы можете пропустить этот шаг и перейти непосредственно к <a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Deploy-Milvus-Operator">развертыванию Milvus Operator</a>. В противном случае вы можете выполнить <a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Create-a-K8s-Cluster">шаги</a> по развертыванию кластера Milvus с помощью Milvus Operator.</p>
+<p>Отдельные сущности (в нашем случае это тикеты поддержки и статьи базы знаний) хранятся в "коллекции" - после настройки кластера вам нужно создать коллекцию. Выберите подходящее имя и установите значение Dimension равным 1536, чтобы соответствовать размерности вектора, генерируемого сервисом встраивания OpenAI.</p>
+<p>После создания запишите информацию о конечной точке и <a href="https://milvus.io/docs/authenticate.md?tab=docker">аутентификации</a>.</p>
+<h2 id="Set-Up-Connection-in-Airbyte" class="common-anchor-header">Настройка соединения в Airbyte<button data-href="#Set-Up-Connection-in-Airbyte" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,24 +103,24 @@ title: 'Airbyte: Open-Source Data Movement Infrastructure'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Our database is ready, let’s move some data over! To do this, we need to configure a connection in Airbyte. Either sign up for an Airbyte cloud account at <a href="https://cloud.airbyte.com">cloud.airbyte.com</a> or fire up a local instance as described <a href="https://docs.airbyte.com/using-airbyte/getting-started/">in the documentation</a>.</p>
-<h3 id="Set-Up-Source" class="common-anchor-header">Set Up Source</h3><p>Once your instance is running, we need to set up the connection — click “New connection” and pick the “Zendesk Support” connector as the source. After clicking the “Test and Save” button, Airbyte will check whether the connection can be established.</p>
-<p>On Airbyte cloud, you can easily authenticate by clicking the Authenticate button. When using a local Airbyte instance, follow the directions outlined on the <a href="https://docs.airbyte.com/integrations/sources/zendesk-support#airbyte-open-source-enable-api-token-access-and-generate-a-token">documentation</a> page.</p>
-<h3 id="Set-Up-Destination" class="common-anchor-header">Set Up Destination</h3><p>If everything is working correctly, the next step is to set up the destination to move data to. Here, pick the “Milvus” connector.</p>
-<p>The Milvus connector does three things:</p>
+    </button></h2><p>Наша база данных готова, давайте перенесем туда данные! Для этого нам нужно настроить соединение в Airbyte. Либо зарегистрируйте облачный аккаунт Airbyte на <a href="https://cloud.airbyte.com">cloud.airbyte.com</a>, либо запустите локальный экземпляр, как описано <a href="https://docs.airbyte.com/using-airbyte/getting-started/">в документации</a>.</p>
+<h3 id="Set-Up-Source" class="common-anchor-header">Настройка источника</h3><p>После того как ваш экземпляр запущен, нам нужно настроить соединение - нажмите "Новое соединение" и выберите коннектор "Zendesk Support" в качестве источника. После нажатия кнопки "Проверить и сохранить" Airbyte проверит, может ли быть установлено соединение.</p>
+<p>В облаке Airbyte вы можете легко пройти аутентификацию, нажав кнопку Authenticate. При использовании локального экземпляра Airbyte следуйте инструкциям, описанным на странице <a href="https://docs.airbyte.com/integrations/sources/zendesk-support#airbyte-open-source-enable-api-token-access-and-generate-a-token">документации</a>.</p>
+<h3 id="Set-Up-Destination" class="common-anchor-header">Настройка пункта назначения</h3><p>Если все работает правильно, следующим шагом будет настройка места назначения для перемещения данных. Здесь выберите коннектор "Milvus".</p>
+<p>Коннектор Milvus выполняет три задачи:</p>
 <ul>
-<li><strong>Chunking and Formatting</strong> - Split Zendesk records into text and metadata. If the text is larger than the specified chunk size, records are split up into multiple parts that are loaded into the collection individually. The splitting of text (or chunking) can, for example, happen in the case of large support tickets or knowledge articles. By splitting up the text, you can ensure that searches always yield useful results.</li>
+<li><strong>Разбивка и форматирование</strong> - Разбивает записи Zendesk на текст и метаданные. Если размер текста превышает заданный размер чанка, записи разбиваются на несколько частей, которые загружаются в коллекцию по отдельности. Разбивка текста (или чанкинг) может, например, происходить в случае больших тикетов поддержки или статей знаний. Разбив текст на части, можно добиться того, что поиск всегда будет приносить полезные результаты.</li>
 </ul>
-<p>Let’s go with a chunk size of 1000 tokens and text fields of body, title, description, and subject, as these will be present in the data we will receive from Zendesk.</p>
+<p>Возьмем размер фрагмента в 1000 лексем и текстовые поля body, title, description и subject, поскольку именно они будут присутствовать в данных, которые мы получим из Zendesk.</p>
 <ul>
-<li><strong>Embedding</strong> - Using Machine Learning models transforms the text chunks produced by the processing part into vector embeddings that you can then search for semantic similarity. To create the embeddings, you must supply the OpenAI API key. Airbyte will send each chunk to OpenAI and add the resulting vector to the entities loaded into your Milvus cluster.</li>
-<li><strong>Indexing</strong> - Once you have vectorized the chunks, you can load them into the database. To do so, insert the information you got when setting up your cluster and collection in Milvus cluster. <div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_1.png" width="40%"/></div> Clicking “Test and save” will check whether everything is lined up correctly (valid credentials, collection exists and has the same vector dimensionality as the configured embedding, etc.)</li>
+<li><strong>Встраивание</strong> - с помощью моделей машинного обучения текстовые фрагменты, полученные в результате обработки, преобразуются в векторные вкрапления, которые затем можно искать на предмет семантического сходства. Для создания вкраплений необходимо предоставить ключ OpenAI API. Airbyte отправит каждый чанк в OpenAI и добавит полученный вектор к сущностям, загруженным в ваш кластер Milvus.</li>
+<li><strong>Индексирование</strong> - После того как вы векторизировали чанки, вы можете загрузить их в базу данных. Для этого вставьте информацию, которую вы получили при настройке кластера и коллекции в кластере Milvus. <div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_1.png" width="40%"/></div> Нажав кнопку "Проверить и сохранить", вы проверите, все ли правильно выстроено (правильные учетные данные, коллекция существует и имеет ту же векторную размерность, что и настроенное вложение, и т. д.).</li>
 </ul>
-<h3 id="Set-up-stream-sync-flow" class="common-anchor-header">Set up stream sync flow</h3><p>The last step before data is ready to flow is selecting which “streams” to sync. A stream is a collection of records in the source. As Zendesk supports a large number of streams that are not relevant to our use case, let’s only select “tickets” and “articles” and disable all others to save bandwidth and make sure only the relevant information will show up in searches:<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_2.png" width="40%"/></div> You can select which fields to extract from the source by clicking the stream name. The “Incremental | Append + Deduped” sync mode means that subsequent connection runs keep Zendesk and Milvus in sync while transferring minimal data (only the articles and tickets that have changed since the last run).</p>
-<p>As soon as the connection is set up, Airbyte will start syncing data. It can take a few minutes to appear in your Milvus collection.</p>
-<p>If you select a replication frequency, Airbyte will run regularly to keep your Milvus collection up to date with changes to Zendesk articles and newly created issues.</p>
-<h3 id="Check-flow" class="common-anchor-header">Check flow</h3><p>You can check in the Milvus cluster UI how the data is structured in the collection by navigating to the playground and executing a “Query Data” query with a filter set to “_ab_stream == \”tickets\””.<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_3.png" width="40%"/></div> As you can see in the Result view, each record coming from Zendesk is stored as separate entities in Milvus with all the specified metadata. The text chunk the embedding is based on is shown as the “text” property — this is the text that got embedded using OpenAI and will be what we will search on.</p>
-<h2 id="Build-Streamlit-app-querying-the-collection" class="common-anchor-header">Build Streamlit app querying the collection<button data-href="#Build-Streamlit-app-querying-the-collection" class="anchor-icon" translate="no">
+<h3 id="Set-up-stream-sync-flow" class="common-anchor-header">Настройка потока синхронизации</h3><p>Последний шаг перед тем, как данные будут готовы к потоку, - выбор "потоков" для синхронизации. Поток - это коллекция записей в источнике. Поскольку Zendesk поддерживает большое количество потоков, которые не имеют отношения к нашему случаю, давайте выберем только "билеты" и "статьи" и отключим все остальные, чтобы сэкономить пропускную способность и убедиться, что в поиске будет отображаться только релевантная информация:<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_2.png" width="40%"/></div> Вы можете выбрать, какие поля извлекать из источника, щелкнув название потока. Режим синхронизации "Инкрементный | Append + Deduped" означает, что при последующих запусках соединения Zendesk и Milvus синхронизируются, передавая минимум данных (только те статьи и билеты, которые изменились с момента последнего запуска).</p>
+<p>Как только соединение будет установлено, Airbyte начнет синхронизацию данных. Их появление в коллекции Milvus может занять несколько минут.</p>
+<p>Если вы выберете частоту репликации, Airbyte будет запускаться регулярно, чтобы поддерживать коллекцию Milvus в актуальном состоянии с учетом изменений в статьях Zendesk и вновь созданных проблемах.</p>
+<h3 id="Check-flow" class="common-anchor-header">Поток проверок</h3><p>Вы можете проверить в пользовательском интерфейсе кластера Milvus, как структурированы данные в коллекции, перейдя на игровую площадку и выполнив запрос "Query Data" с фильтром, установленным на "_ab_stream == \"tickets\"".<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_3.png" width="40%"/></div> Как вы можете видеть в представлении "Результат", каждая запись, полученная из Zendesk, хранится в Milvus как отдельная сущность со всеми указанными метаданными. Текстовый фрагмент, на котором основано встраивание, показан как свойство "text" - это текст, который был вложен с помощью OpenAI и по которому мы будем искать.</p>
+<h2 id="Build-Streamlit-app-querying-the-collection" class="common-anchor-header">Создание приложения Streamlit для запроса коллекции<button data-href="#Build-Streamlit-app-querying-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -134,17 +135,17 @@ title: 'Airbyte: Open-Source Data Movement Infrastructure'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Our data is ready — now we need to build the application to use it. In this case, the application will be a simple support form for users to submit support cases. When the user hits submit, we will do two things:</p>
+    </button></h2><p>Наши данные готовы - теперь нам нужно создать приложение для их использования. В данном случае приложение будет представлять собой простую форму поддержки, в которую пользователи могут отправлять заявки. Когда пользователь нажмет кнопку "Отправить", мы сделаем две вещи:</p>
 <ul>
-<li>Search for similar tickets submitted by users of the same organization</li>
-<li>Search for knowledge-based articles that might be relevant to the user</li>
+<li>поиск похожих заявок, поданных пользователями той же организации</li>
+<li>Поиск статей, основанных на знаниях, которые могут быть релевантны пользователю.</li>
 </ul>
-<p>In both cases, we will leverage semantic search using OpenAI embeddings. To do this, the description of the problem the user entered is also embedded and used to retrieve similar entities from the Milvus cluster. If there are relevant results, they are shown below the form.</p>
-<h3 id="Set-up-UI-environment" class="common-anchor-header">Set up UI environment</h3><p>You will need a local Python installation as we will use Streamlit to implement the application.</p>
-<p>First, install Streamlit, the Milvus client library, and the OpenAI client library locally:</p>
+<p>В обоих случаях мы будем использовать семантический поиск с помощью вкраплений OpenAI. Для этого описание проблемы, введенное пользователем, также встраивается и используется для извлечения похожих сущностей из кластера Milvus. Если есть соответствующие результаты, они отображаются под формой.</p>
+<h3 id="Set-up-UI-environment" class="common-anchor-header">Настройка среды пользовательского интерфейса</h3><p>Вам понадобится локальная установка Python, так как мы будем использовать Streamlit для реализации приложения.</p>
+<p>Сначала установите Streamlit, клиентскую библиотеку Milvus и клиентскую библиотеку OpenAI локально:</p>
 <pre><code translate="no" class="language-shell">pip install streamlit pymilvus openai
 <button class="copy-code-btn"></button></code></pre>
-<p>To render a basic support form, create a python file <code translate="no">basic_support_form.py</code>:</p>
+<p>Чтобы отобразить базовую форму поддержки, создайте python-файл <code translate="no">basic_support_form.py</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
 
 <span class="hljs-keyword">with</span> st.form(<span class="hljs-string">&quot;my_form&quot;</span>):
@@ -156,11 +157,11 @@ title: 'Airbyte: Open-Source Data Movement Infrastructure'
         <span class="hljs-comment"># TODO check for related support cases and articles</span>
         st.write(<span class="hljs-string">&quot;Submitted!&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>To run your application, use Streamlit run:</p>
+<p>Чтобы запустить приложение, используйте Streamlit run:</p>
 <pre><code translate="no" class="language-shell">streamlit run basic_support_form.py
 <button class="copy-code-btn"></button></code></pre>
-<p>This will render a basic form:<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_4.png" width="40%"/></div>The code for this example can also be found on <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py">GitHub</a>.</p>
-<h3 id="Set-up-backend-query-service" class="common-anchor-header">Set up backend query service</h3><p>Next, let’s check for existing open tickets that might be relevant. To do this, we embed the text the user entered using OpenAI, then did a similarity search on our collection, filtering for still open tickets. If there is one with a very low distance between the supplied ticket and the existing ticket, let the user know and don’t submit:</p>
+<p>Это приведет к отрисовке базовой формы:<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_4.png" width="40%"/></div>Код для этого примера также можно найти на <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py">GitHub</a>.</p>
+<h3 id="Set-up-backend-query-service" class="common-anchor-header">Настройка службы запросов бэкенда</h3><p>Далее проверим существующие открытые тикеты, которые могут быть релевантны. Для этого мы внедрили текст, введенный пользователем с помощью OpenAI, затем выполнили поиск по сходству в нашей коллекции, отфильтровав все еще открытые билеты. Если найдется такой, в котором расстояние между введенным тикетом и существующим очень мало, сообщите об этом пользователю и не отправляйте:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
 <span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> pymilvus
@@ -194,24 +195,24 @@ title: 'Airbyte: Open-Source Data Movement Infrastructure'
             st.write(<span class="hljs-string">&quot;Submitted!&quot;</span>)
             
 <button class="copy-code-btn"></button></code></pre>
-<p>Several things are happening here:</p>
+<p>Здесь происходит несколько вещей:</p>
 <ul>
-<li>The connection to the Milvus cluster is set up.</li>
-<li>The OpenAI service is used to generate an embedding of the description the user entered.</li>
-<li>A similarity search is performed, filtering results by the ticket status and the organization id (as only open tickets of the same organization are relevant).</li>
-<li>If there are results and the distance between the embedding vectors of the existing ticket and the newly entered text is below a certain threshold, call out this fact.</li>
+<li>Устанавливается соединение с кластером Milvus.</li>
+<li>Используется сервис OpenAI для создания вставки описания, введенного пользователем.</li>
+<li>Выполняется поиск сходства, фильтруя результаты по статусу тикета и идентификатору организации (поскольку релевантными являются только открытые тикеты одной организации).</li>
+<li>Если есть результаты и расстояние между векторами вкраплений существующего тикета и вновь введенного текста ниже определенного порога, об этом сообщается.</li>
 </ul>
-<p>To run the new app, you need to set the environment variables for OpenAI and Milvus first:</p>
+<p>Чтобы запустить новое приложение, необходимо сначала установить переменные окружения для OpenAI и Milvus:</p>
 <pre><code translate="no" class="language-shell">export MILVUS_TOKEN=...
 export MILVUS_URL=https://...
 export OPENAI_API_KEY=sk-...
 
 streamlit run app.py
 <button class="copy-code-btn"></button></code></pre>
-<p>When trying to submit a ticket that exists already, this is how the result will look:<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_5.png" width="40%"/></div> The code for this example can also be found on <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub</a>.</p>
-<h3 id="Show-more-relevant-information" class="common-anchor-header">Show more relevant information</h3><p>As you can see in the green debug output hidden in the final version, two tickets matched our search (in status new, from the current organization, and close to the embedding vector). However, the first (relevant) ranked higher than the second (irrelevant in this situation), which is reflected in the lower distance value. This relationship is captured in the embedding vectors without directly matching words, like in a regular full-text search.</p>
-<p>To wrap it up, let’s show helpful information after the ticket gets submitted to give the user as much relevant information upfront as possible.</p>
-<p>To do this, we are going to do a second search after the ticket gets submitted to fetch the top-matching knowledge base articles:</p>
+<p>При попытке отправить билет, который уже существует, результат будет выглядеть так:<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_5.png" width="40%"/></div> Код этого примера также можно найти на <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub</a>.</p>
+<h3 id="Show-more-relevant-information" class="common-anchor-header">Показывать больше релевантной информации</h3><p>Как видно из зеленого отладочного вывода, скрытого в финальной версии, два тикета соответствовали нашему поиску (в статусе new, от текущей организации и близко к вектору встраивания). Однако первый из них (релевантный) ранжировался выше, чем второй (нерелевантный в данной ситуации), что отражается в меньшем значении расстояния. Эта связь фиксируется в векторах встраивания без прямого сопоставления слов, как при обычном полнотекстовом поиске.</p>
+<p>В заключение давайте покажем полезную информацию после отправки билета, чтобы предоставить пользователю как можно больше релевантной информации.</p>
+<p>Для этого мы выполним второй поиск после отправки тикета, чтобы получить наиболее подходящие статьи базы знаний:</p>
 <pre><code translate="no" class="language-python">   ......
    
         <span class="hljs-keyword">else</span>:
@@ -226,8 +227,8 @@ streamlit run app.py
                         st.write(<span class="hljs-string">f&quot;* [<span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;title&#x27;</span>)}</span>](<span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;html_url&#x27;</span>)}</span>)&quot;</span>)
 
 <button class="copy-code-btn"></button></code></pre>
-<p>If there is no open support ticket with a high similarity score, the new ticket gets submitted and relevant knowledge articles are shown below:<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_6.png" width="40%"/></div> The code for this example can also be found on <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github</a>.</p>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<p>Если нет открытого тикета поддержки с высоким показателем сходства, новый тикет отправляется, а соответствующие статьи базы знаний отображаются ниже:<div><img translate="no" src="/docs/v2.6.x/assets/airbyte_with_milvus_6.png" width="40%"/></div> Код этого примера также можно найти на <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github</a>.</p>
+<h2 id="Conclusion" class="common-anchor-header">Заключение<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,6 +243,6 @@ streamlit run app.py
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>While the UI shown here is not an actual support form but an example to illustrate the use case, the combination of Airbyte and Milvus is a very powerful one — it makes it easy to load text from a wide variety of sources (from databases like Postgres over APIs like Zendesk or GitHub over to completely custom sources built using Airbyte’s SDK or visual connector builder) and index it in embedded form in Milvus, a powerful vector search engine being able to scale to huge amounts of data.</p>
-<p>Airbyte and Milvus are open source and completely free to use on your infrastructure, with cloud offerings to offload operations if desired.</p>
-<p>Beyond the classical semantic search use case illustrated in this article, the general setup can also be used to build a question-answering chat bot using the RAG method (Retrieval Augmented Generation), recommender systems, or help make advertising more relevant and efficient.</p>
+    </button></h2><p>Хотя представленный здесь пользовательский интерфейс - это не настоящая форма поддержки, а пример, иллюстрирующий вариант использования, сочетание Airbyte и Milvus очень мощное - оно позволяет легко загружать текст из самых разных источников (от баз данных типа Postgres, API типа Zendesk или GitHub до полностью пользовательских источников, созданных с помощью SDK или визуального конструктора коннекторов Airbyte) и индексировать его во встроенном виде в Milvus, мощной векторной поисковой системе, способной масштабироваться до огромных объемов данных.</p>
+<p>Airbyte и Milvus имеют открытый исходный код и совершенно бесплатны для использования в вашей инфраструктуре, при желании можно воспользоваться облачными предложениями для разгрузки операций.</p>
+<p>Помимо классического варианта использования семантического поиска, описанного в этой статье, общая схема может быть использована для создания чат-бота, отвечающего на вопросы по методу RAG (Retrieval Augmented Generation), рекомендательных систем или для повышения релевантности и эффективности рекламы.</p>
