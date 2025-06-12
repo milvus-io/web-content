@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O índice <strong>HNSW</strong> é um algoritmo de indexação <strong>baseado em grafos</strong> que pode melhorar o desempenho na pesquisa de vectores flutuantes de elevada dimensão. Oferece <strong>uma excelente</strong> precisão de pesquisa e <strong>baixa</strong> latência, embora exija um <strong>elevado</strong> consumo de memória para manter a sua estrutura hierárquica de grafos.</p>
+    </button></h1><p>O índice <strong>HNSW</strong> é um algoritmo de indexação <strong>baseado em grafos</strong> que pode melhorar o desempenho na pesquisa de vectores flutuantes de elevada dimensão. Oferece <strong>uma excelente</strong> precisão de pesquisa e <strong>baixa</strong> latência, embora exija <strong>uma elevada</strong> sobrecarga de memória para manter a sua estrutura hierárquica de grafos.</p>
 <h2 id="Overview" class="common-anchor-header">Síntese<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -166,7 +166,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Número máximo de ligações （ou arestas) que cada nó pode ter no gráfico, incluindo as arestas de saída e de entrada. Este parâmetro afecta diretamente tanto a construção como a pesquisa do índice.</p></td>
+     <td><p>Número máximo de ligações (ou arestas) que cada nó pode ter no gráfico, incluindo as arestas de saída e de entrada. Este parâmetro afecta diretamente tanto a construção como a pesquisa do índice.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Range</strong>: [2, 2048]</p><p><strong>Valor predefinido</strong>: <code translate="no">30</code> (até 30 arestas de saída e 30 arestas de entrada por nó)</p></td>
      <td><p>Um <code translate="no">M</code> maior geralmente leva a uma <strong>maior precisão</strong>, mas <strong>aumenta a sobrecarga de memória</strong> e <strong>torna mais lenta a construção do índice e a pesquisa</strong>. Considere o aumento de <code translate="no">M</code> para conjuntos de dados com elevada dimensionalidade ou quando é crucial uma elevada recuperação.</p><p>Considere diminuir <code translate="no">M</code> quando a utilização da memória e a velocidade de pesquisa forem as principais preocupações.</p><p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [5, 100].</p></td>
    </tr>
@@ -189,6 +189,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">ef</code></p></td>
      <td><p>Controla a amplitude da pesquisa durante a recuperação do vizinho mais próximo. Ele determina quantos nós são visitados e avaliados como possíveis vizinhos mais próximos.  Este parâmetro afecta apenas o processo de pesquisa e aplica-se exclusivamente à camada inferior do gráfico.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, <em>int_max</em>]</p><p><strong>Valor por defeito</strong>: <em>limite</em> (TopK vizinhos mais próximos a devolver)</p></td>
-     <td><p>Um <code translate="no">ef</code> maior conduz geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais vizinhos potenciais. No entanto, isto também <strong>aumenta o tempo de pesquisa</strong>. Considere aumentar <code translate="no">ef</code> quando a obtenção de uma elevada recuperação é crítica e a velocidade de pesquisa é menos preocupante.</p><p>Considere diminuir <code translate="no">ef</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p><p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [K, 10K].</p></td>
+     <td><p>Um <code translate="no">ef</code> maior leva geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais vizinhos potenciais. No entanto, isto também <strong>aumenta o tempo de pesquisa</strong>. Considere aumentar <code translate="no">ef</code> quando a obtenção de uma elevada recuperação é crítica e a velocidade de pesquisa é menos preocupante.</p><p>Considere diminuir <code translate="no">ef</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p><p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [K, 10K].</p></td>
    </tr>
 </table>

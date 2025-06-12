@@ -1,12 +1,13 @@
 ---
 id: rbac.md
-title: RBAC Explained
+title: Explicação do RBAC
 summary: >-
-  RBAC (Role-Based Access Control) is an access control method based on roles.
-  With RBAC, you can finely control the operations users can perform at the
-  collection, database, and instance levels, enhancing data security.
+  O RBAC (Role-Based Access Control) é um método de controlo de acesso baseado
+  em funções. Com o RBAC, é possível controlar com precisão as operações que os
+  utilizadores podem realizar ao nível da coleção, da base de dados e da
+  instância, aumentando a segurança dos dados.
 ---
-<h1 id="RBAC-Explained" class="common-anchor-header">RBAC Explained<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
+<h1 id="RBAC-Explained" class="common-anchor-header">Explicação do RBAC<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,10 +22,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>RBAC (Role-Based Access Control) is an access control method based on roles. With RBAC, you can finely control the operations users can perform at the collection, database, and instance levels, enhancing data security.</p>
-<p>Unlike traditional user access control models, RBAC introduces the concept of <strong>roles</strong>. In the RBAC model, you  grant privileges to roles and then grant those roles to users. Then users can obtain privileges.</p>
-<p>The RBAC model can improve the efficiency of access control management. For example, if multiple users require the same set of privileges, you do not need to manually set the privileges for each user. Instead, you can create a role and assign the role to users. If you want to adjust the privileges of these users, you can just adjust the role privileges and the modification will be applied to all users with this role.</p>
-<h2 id="RBAC-key-concepts" class="common-anchor-header">RBAC key concepts<button data-href="#RBAC-key-concepts" class="anchor-icon" translate="no">
+    </button></h1><p>O RBAC (Role-Based Access Control) é um método de controlo de acesso baseado em funções. Com o RBAC, é possível controlar com precisão as operações que os utilizadores podem efetuar ao nível da coleção, da base de dados e da instância, aumentando a segurança dos dados.</p>
+<p>Ao contrário dos modelos tradicionais de controlo de acesso de utilizadores, o RBAC introduz o conceito de <strong>funções</strong>. No modelo RBAC, são concedidos privilégios às funções e, em seguida, essas funções são concedidas aos utilizadores. Em seguida, os utilizadores podem obter privilégios.</p>
+<p>O modelo RBAC pode melhorar a eficiência da gestão do controlo de acesso. Por exemplo, se vários utilizadores necessitarem do mesmo conjunto de privilégios, não é necessário definir manualmente os privilégios para cada utilizador. Em vez disso, é possível criar uma função e atribuir a função aos utilizadores. Se pretender ajustar os privilégios desses utilizadores, basta ajustar os privilégios da função e a alteração será aplicada a todos os utilizadores com essa função.</p>
+<h2 id="RBAC-key-concepts" class="common-anchor-header">Conceitos-chave do RBAC<button data-href="#RBAC-key-concepts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,20 +41,18 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
-    <span>Users Roles Privileges</span>
-  </span>
-</p>
-<p>There are four major components in the RBAC model.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/users-roles-privileges.png" alt="Users Roles Privileges" class="doc-image" id="users-roles-privileges" />
+   </span> <span class="img-wrapper"> <span>Utilizadores Funções Privilégios</span> </span></p>
+<p>Existem quatro componentes principais no modelo RBAC.</p>
 <ul>
-<li><p><strong>Resource:</strong> The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.</p></li>
-<li><p><strong>Privilege:</strong> The permission to perform certain operations on Milvus resources (eg. create collections, insert data, etc).</p></li>
-<li><p><strong>Privilege group:</strong> A group of multiple privileges.</p></li>
-<li><p><strong>Role:</strong> A role consists of two parts-privileges and resources. Privileges define the type of operations that a role can perform while resources define the target resources that the operations can be performed on. For example, the database administrator role can perform read, write, and manage operations on certain databases.</p></li>
-<li><p><strong>User:</strong> A user is someone who uses Milvus. Each user has a unique ID and is granted a role or multiple roles.</p></li>
+<li><p><strong>Recurso:</strong> A entidade de recurso que pode ser acedida. Existem três níveis de recursos no Milvus - instância, base de dados e coleção.</p></li>
+<li><p><strong>Privilégio:</strong> A permissão para efetuar determinadas operações nos recursos Milvus (por exemplo, criar colecções, inserir dados, etc.).</p></li>
+<li><p><strong>Grupo de privilégios:</strong> Um grupo de múltiplos privilégios.</p></li>
+<li><p><strong>Função:</strong> Uma função é composta por duas partes: privilégios e recursos. Os privilégios definem o tipo de operações que uma função pode executar, enquanto os recursos definem os recursos de destino nos quais as operações podem ser executadas. Por exemplo, a função de administrador da base de dados pode efetuar operações de leitura, escrita e gestão em determinadas bases de dados.</p></li>
+<li><p><strong>Utilizador:</strong> um utilizador é alguém que utiliza o Milvus. Cada utilizador tem um ID único e é-lhe atribuída uma função ou várias funções.</p></li>
 </ul>
-<h2 id="Procedures" class="common-anchor-header">Procedures<button data-href="#Procedures" class="anchor-icon" translate="no">
+<h2 id="Procedures" class="common-anchor-header">Procedimentos<button data-href="#Procedures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,11 +67,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The achieve access control via RBAC, you need to follow the steps below:</p>
+    </button></h2><p>Para obter o controlo de acesso através do RBAC, é necessário seguir os passos abaixo:</p>
 <ol>
-<li><p><strong><a href="/docs/users_and_roles.md#Create-a-user">Create a user</a></strong>: In addition to the default user <code translate="no">root</code> in Milvus, you can create new users and set passwords to protect data security.</p></li>
-<li><p><strong><a href="/docs/users_and_roles.md#Create-a-role">Create a role</a></strong>: You can create customized roles based on your needs. The specific capabilities of a role are determined by its privileges.</p></li>
-<li><p><strong><a href="/docs/privilege_group.md">Create a privilege group</a></strong>: Combine multiple privileges into one privilege group to streamline the process of granting privileges to a role.</p></li>
-<li><p><strong><a href="/docs/grant_privileges.md">Grant privileges or privilege groups to a role</a></strong>: Define the capabilities of a role be granting privileges or privilege groups to this role.</p></li>
-<li><p><strong><a href="/docs/grant_roles.md">Grant roles to users</a></strong>: Grant roles with certain privileges to users so that users can have the privileges of a role. A single role can be granted to multiple users.</p></li>
+<li><p><strong><a href="/docs/pt/users_and_roles.md#Create-a-user">Criar um utilizador</a></strong>: Para além do utilizador predefinido <code translate="no">root</code> no Milvus, é possível criar novos utilizadores e definir palavras-passe para proteger a segurança dos dados.</p></li>
+<li><p><strong><a href="/docs/pt/users_and_roles.md#Create-a-role">Criar uma função</a></strong>: Pode criar funções personalizadas com base nas suas necessidades. As capacidades específicas de uma função são determinadas pelos seus privilégios.</p></li>
+<li><p><strong><a href="/docs/pt/privilege_group.md">Criar um grupo de privilégios</a></strong>: Combine vários privilégios num único grupo de privilégios para simplificar o processo de concessão de privilégios a uma função.</p></li>
+<li><p><strong><a href="/docs/pt/grant_privileges.md">Conceder privilégios ou grupos de privilégios a uma função</a></strong>: Defina as capacidades de uma função concedendo privilégios ou grupos de privilégios a esta função.</p></li>
+<li><p><strong><a href="/docs/pt/grant_roles.md">Atribuir funções aos utilizadores</a></strong>: Conceder funções com determinados privilégios aos utilizadores para que estes possam ter os privilégios de uma função. Uma única função pode ser concedida a vários utilizadores.</p></li>
 </ol>

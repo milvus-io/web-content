@@ -222,7 +222,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">location</code></p></td>
-     <td><p>A região para o serviço do Vertex AI. Atualmente, os embeddings do Vertex AI suportam principalmente us-central1. O padrão é us-central1.</p></td>
+     <td><p>A região para o serviço Vertex AI. Atualmente, os embeddings do Vertex AI suportam principalmente us-central1. O padrão é us-central1.</p></td>
      <td><p>Não</p></td>
      <td><p><code translate="no">"us-central1"</code></p></td>
    </tr>

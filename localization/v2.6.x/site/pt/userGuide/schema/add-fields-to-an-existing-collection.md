@@ -208,7 +208,7 @@ client.create_collection(
     enable_dynamic_field=<span class="hljs-literal">True</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">O que acontece quando adiciono um campo com o mesmo nome de uma chave de campo dinâmico?</h3><p>Quando a sua coleção tem o campo dinâmico ativado (existe<code translate="no">$meta</code> ), pode adicionar campos estáticos com o mesmo nome que as chaves de campo dinâmico existentes. O novo campo estático irá mascarar a chave do campo dinâmico, mas os dados dinâmicos originais serão preservados.</p>
+<h3 id="What-happens-when-I-add-a-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">O que acontece quando adiciono um campo com o mesmo nome de uma chave de campo dinâmico?</h3><p>Quando a sua coleção tem o campo dinâmico ativado (existe<code translate="no">$meta</code> ), pode adicionar campos estáticos com o mesmo nome que as chaves de campo dinâmico existentes. O novo campo estático irá mascarar a chave do campo dinâmico, mas os dados dinâmicos originais são preservados.</p>
 <p><strong>Exemplo de cenário:</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Original collection with dynamic field enabled</span>
 <span class="hljs-comment"># Insert data with dynamic field keys</span>

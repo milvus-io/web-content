@@ -43,7 +43,7 @@ summary: >-
 <li><p><strong>Arquivo invertido (IVF)</strong>: Organiza os dados em clusters, permitindo que o algoritmo de pesquisa se concentre apenas nos subconjuntos de vectores mais relevantes.</p></li>
 <li><p><strong>Quantização escalar (SQ8)</strong>: Comprime os vectores para uma forma mais compacta, reduzindo drasticamente a utilização de memória e mantendo a precisão suficiente para cálculos de semelhança rápidos.</p></li>
 </ul>
-<h3 id="IVF" class="common-anchor-header">FIV</h3><p>A FIV é como criar um índice num livro. Em vez de analisar cada página (ou, no nosso caso, cada vetor), procura palavras-chave específicas (clusters) no índice para encontrar rapidamente as páginas relevantes (vectores). No nosso cenário, os vectores são agrupados em clusters e o algoritmo irá procurar dentro de alguns clusters que estejam próximos do vetor de consulta.</p>
+<h3 id="IVF" class="common-anchor-header">FIV</h3><p>A FIV é como criar um índice num livro. Em vez de analisar todas as páginas (ou, no nosso caso, todos os vectores), procura palavras-chave específicas (clusters) no índice para encontrar rapidamente as páginas relevantes (vectores). No nosso cenário, os vectores são agrupados em clusters e o algoritmo irá procurar dentro de alguns clusters que estejam próximos do vetor de consulta.</p>
 <p>Veja como isso funciona:</p>
 <ol>
 <li><p><strong>Agrupamento:</strong> O seu conjunto de dados vectoriais é dividido num número especificado de clusters, utilizando um algoritmo de agrupamento como o k-means. Cada cluster tem um centroide (um vetor representativo do cluster).</p></li>

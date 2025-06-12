@@ -1,10 +1,10 @@
 ---
 id: scalar_index.md
 related_key: scalar_index
-summary: Scalar index in Milvus.
-title: Scalar Index
+summary: Índice escalar em Milvus.
+title: Índice escalar
 ---
-<h1 id="Scalar-Index" class="common-anchor-header">Scalar Index<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
+<h1 id="Scalar-Index" class="common-anchor-header">Índice escalar<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports filtered searches combining both scalar and vector fields. To enhance the efficiency of searches involving scalar fields, Milvus introduced scalar field indexing starting from version 2.1.0. This article provides an overview of scalar field indexing in Milvus, helping you understand its significance and implementation.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>O Milvus suporta pesquisas filtradas que combinam campos escalares e vectoriais. Para aumentar a eficiência das pesquisas que envolvem campos escalares, o Milvus introduziu a indexação de campos escalares a partir da versão 2.1.0. Este artigo fornece uma visão geral da indexação de campos escalares no Milvus, ajudando-o a compreender o seu significado e implementação.</p>
+<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,16 +35,14 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once conducting vector similarity searches in Milvus, you can use logical operators to organize scalar fields into boolean expressions.</p>
-<p>When Milvus receives a search request with such a boolean expression, it parses the boolean expression into an abstract syntax tree (AST) to generate a physical plan for attribute filtering. Milvus then applies the physical plan in each segment to generate a <a href="/docs/bitset.md">bitset</a> as the filtering result and includes the result as a vector search parameter to narrow down the search scope. In this case, the speed of vector searches relies heavily on the speed of attribute filtering.</p>
+    </button></h2><p>Depois de efetuar pesquisas de semelhança de vectores no Milvus, pode utilizar operadores lógicos para organizar campos escalares em expressões booleanas.</p>
+<p>Quando o Milvus recebe um pedido de pesquisa com uma expressão booleana deste tipo, analisa a expressão booleana numa árvore de sintaxe abstrata (AST) para gerar um plano físico para filtragem de atributos. O Milvus aplica então o plano físico em cada segmento para gerar um <a href="/docs/pt/bitset.md">conjunto de bits</a> como resultado da filtragem e inclui o resultado como parâmetro de pesquisa vetorial para limitar o âmbito da pesquisa. Neste caso, a velocidade das pesquisas vectoriais depende fortemente da velocidade da filtragem de atributos.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
-    <span>Attribute filtering in a segment</span>
-  </span>
-</p>
-<p>Scalar field indexing is a way of ensuring the speed of attribute filtering by sorting scalar field values in a particular way to accelerate information retrieval.</p>
-<h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Scalar field indexing algorithms<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   </span> <span class="img-wrapper"> <span>Filtragem de atributos num segmento</span> </span></p>
+<p>A indexação de campos escalares é uma forma de garantir a velocidade da filtragem de atributos, ordenando os valores dos campos escalares de uma forma específica para acelerar a recuperação de informação.</p>
+<h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Algoritmos de indexação de campos escalares<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,41 +57,39 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus aims to achieve low memory usage, high filtering efficiency, and short loading time with its scalar field indexing algorithms. These algorithms are categorized into two main types: <a href="#auto-indexing">auto indexing</a> and <a href="#inverted-indexing">inverted indexing</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Auto indexing</h3><p>Milvus provides the <code translate="no">AUTOINDEX</code> option to free you from having to manually choose an index type. When calling the <code translate="no">create_index</code> method, if the <code translate="no">index_type</code> is not specified, Milvus automatically selects the most suitable index type based on the data type.</p>
-<p>The following table lists the data types that Milvus supports and their corresponding auto indexing algorithms.</p>
+    </button></h2><p>O objetivo do Milvus é conseguir uma baixa utilização de memória, uma elevada eficiência de filtragem e um tempo de carregamento curto com os seus algoritmos de indexação de campos escalares. Estes algoritmos são classificados em dois tipos principais: <a href="#auto-indexing">indexação automática</a> e <a href="#inverted-indexing">indexação invertida</a>.</p>
+<h3 id="Auto-indexing" class="common-anchor-header">Indexação automática</h3><p>O Milvus fornece a opção <code translate="no">AUTOINDEX</code> para evitar que tenha de escolher manualmente um tipo de índice. Ao chamar o método <code translate="no">create_index</code>, se o <code translate="no">index_type</code> não for especificado, o Milvus seleciona automaticamente o tipo de índice mais adequado com base no tipo de dados.</p>
+<p>A tabela seguinte lista os tipos de dados que o Milvus suporta e os algoritmos de indexação automática correspondentes.</p>
 <table>
 <thead>
-<tr><th>Data type</th><th>Auto indexing algorithm</th></tr>
+<tr><th>Tipo de dados</th><th>Algoritmo de indexação automática</th></tr>
 </thead>
 <tbody>
-<tr><td>VARCHAR</td><td>Inverted index</td></tr>
-<tr><td>INT8</td><td>Inverted index</td></tr>
-<tr><td>INT16</td><td>Inverted index</td></tr>
-<tr><td>INT32</td><td>Inverted index</td></tr>
-<tr><td>INT64</td><td>Inverted index</td></tr>
-<tr><td>FLOAT</td><td>Inverted index</td></tr>
-<tr><td>DOUBLE</td><td>Inverted index</td></tr>
+<tr><td>VARCHAR</td><td>Índice invertido</td></tr>
+<tr><td>INT8</td><td>Índice invertido</td></tr>
+<tr><td>INT16</td><td>Índice invertido</td></tr>
+<tr><td>INT32</td><td>Índice invertido</td></tr>
+<tr><td>INT64</td><td>Índice invertido</td></tr>
+<tr><td>FLOAT</td><td>Índice invertido</td></tr>
+<tr><td>DOUBLE</td><td>Índice invertido</td></tr>
 </tbody>
 </table>
-<h3 id="Inverted-indexing" class="common-anchor-header">Inverted indexing</h3><p>Inverted indexing offers a flexible way to create an index for a scalar field by manually specifying index parameters. This method works well for various scenarios, including point queries, pattern match queries, full-text searches, JSON searches, Boolean searches, and even prefix match queries.</p>
-<p>The inverted indexes implemented in Milvus are powered by <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, a full-text search engine library. Tantivy ensures that inverted indexing in Milvus is both efficient and fast.</p>
-<p>An inverted index has two main components: a term dictionary and an inverted list. The term dictionary includes all tokenized words sorted alphabetically, while the inverted list contains the list of documents where each word appears. This setup makes point queries and range queries much faster and more efficient than brute-force searches.</p>
+<h3 id="Inverted-indexing" class="common-anchor-header">Indexação invertida</h3><p>A indexação invertida oferece uma forma flexível de criar um índice para um campo escalar, especificando manualmente os parâmetros do índice. Este método funciona bem em vários cenários, incluindo consultas pontuais, consultas de correspondência de padrões, pesquisas de texto completo, pesquisas JSON, pesquisas booleanas e até mesmo consultas de correspondência de prefixos.</p>
+<p>Os índices invertidos implementados no Milvus são alimentados por <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, uma biblioteca de motor de pesquisa de texto completo. Tantivy garante que a indexação invertida em Milvus é eficiente e rápida.</p>
+<p>Um índice invertido tem dois componentes principais: um dicionário de termos e uma lista invertida. O dicionário de termos inclui todas as palavras tokenizadas ordenadas alfabeticamente, enquanto a lista invertida contém a lista de documentos onde cada palavra aparece. Esta configuração torna as consultas pontuais e as consultas de intervalo muito mais rápidas e eficientes do que as pesquisas de força bruta.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
-    <span>Inverted index diagram</span>
-  </span>
-</p>
-<p>The advantages of using an inverted index are particularly evident in the following operations:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   </span> <span class="img-wrapper"> <span>Diagrama de índice invertido</span> </span></p>
+<p>As vantagens da utilização de um índice invertido são particularmente evidentes nas seguintes operações:</p>
 <ul>
-<li><strong>Point query</strong>: For example, when searching for documents containing the word <strong>Milvus</strong>, the process begins by checking if <strong>Milvus</strong> is present in the term dictionary. If it is not found, no documents contain the word. However, if it is found, the inverted list associated with <strong>Milvus</strong> is retrieved, indicating the documents that contain the word. This method is far more efficient than a brute-force search through a million documents, as the sorted term dictionary significantly reduces the time complexity of finding the word <strong>Milvus</strong>.</li>
-<li><strong>Range query</strong>: The efficiency of range queries, such as finding documents with words alphabetically greater than <strong>very</strong>, is also enhanced by the sorted term dictionary. This approach is more efficient than a brute-force search, providing quicker and more accurate results.</li>
+<li><strong>Consulta pontual</strong>: Por exemplo, ao procurar documentos que contenham a palavra <strong>Milvus</strong>, o processo começa por verificar se <strong>Milvus</strong> está presente no dicionário de termos. Se não for encontrado, nenhum documento contém a palavra. No entanto, se for encontrada, a lista invertida associada a <strong>Milvus</strong> é recuperada, indicando os documentos que contêm a palavra. Este método é muito mais eficiente do que uma pesquisa de força bruta num milhão de documentos, uma vez que o dicionário de termos ordenado reduz significativamente a complexidade do tempo para encontrar a palavra <strong>Milvus</strong>.</li>
+<li><strong>Consulta de intervalo</strong>: A eficiência das consultas de intervalo, como encontrar documentos com palavras alfabeticamente superiores a <strong>muito</strong>, também é melhorada pelo dicionário de termos ordenados. Esta abordagem é mais eficiente do que uma pesquisa de força bruta, fornecendo resultados mais rápidos e mais exactos.</li>
 </ul>
-<h3 id="Test-results" class="common-anchor-header">Test results</h3><p>To demonstrate the performance improvements provided by scalar indexes in Milvus, an experiment was conducted comparing the performance of several expressions using inverted indexing and brute-force search on raw data.</p>
-<p>The experiment involved testing various expressions under two conditions: with an inverted index and with a brute-force search. To ensure fairness, the same data distribution was maintained across tests, using the same collection each time. Before each test, the collection was released, and the index was dropped and rebuilt. Additionally, a warm query was performed before each test to minimize the impact of cold and hot data, and each query was executed multiple times to ensure accuracy.</p>
-<p>For a dataset of <strong>1 million</strong> records, using an <strong>inverted index</strong> can provide up to a <strong>30x</strong> performance improvement for point queries. The performance gains can be even more significant for larger datasets.</p>
-<h2 id="Performance-recommandations" class="common-anchor-header">Performance recommandations<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
+<h3 id="Test-results" class="common-anchor-header">Resultados dos testes</h3><p>Para demonstrar as melhorias de desempenho proporcionadas pelos índices escalares no Milvus, foi efectuada uma experiência que comparou o desempenho de várias expressões utilizando a indexação invertida e a pesquisa de força bruta em dados brutos.</p>
+<p>A experiência envolveu testar várias expressões em duas condições: com um índice invertido e com uma pesquisa de força bruta. Para garantir a equidade, foi mantida a mesma distribuição de dados entre os testes, utilizando sempre a mesma coleção. Antes de cada teste, a coleção foi libertada e o índice foi eliminado e reconstruído. Além disso, uma consulta quente foi realizada antes de cada teste para minimizar o impacto dos dados frios e quentes, e cada consulta foi executada várias vezes para garantir a precisão.</p>
+<p>Para um conjunto de dados de <strong>1 milhão de</strong> registos, a utilização de um <strong>índice invertido</strong> pode proporcionar uma melhoria de desempenho até <strong>30 vezes</strong> superior para consultas pontuais. Os ganhos de desempenho podem ser ainda mais significativos para conjuntos de dados maiores.</p>
+<h2 id="Performance-recommandations" class="common-anchor-header">Recomendações de desempenho<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,13 +104,13 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To take full advantage of Milvus’ capability in scalar field indexing and unleash its power in vector similarity searches, you may need a model to estimate the size of memory required based on the data you have.</p>
-<p>The following tables list the estimation functions for all the data types that Milvus supports.</p>
+    </button></h2><p>Para tirar o máximo partido da capacidade do Milvus na indexação de campos escalares e libertar o seu poder nas pesquisas de semelhança vetorial, pode ser necessário um modelo para estimar o tamanho da memória necessária com base nos dados que possui.</p>
+<p>As tabelas seguintes listam as funções de estimativa para todos os tipos de dados que o Milvus suporta.</p>
 <ul>
-<li><p>Numeric fields</p>
+<li><p>Campos numéricos</p>
 <table>
 <thead>
-<tr><th>Data type</th><th>Memory estimation function (MB)</th></tr>
+<tr><th>Tipo de dados</th><th>Função de estimativa de memória (MB)</th></tr>
 </thead>
 <tbody>
 <tr><td>INT8</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
@@ -126,10 +122,10 @@ title: Scalar Index
 </tbody>
 </table>
 </li>
-<li><p>String fields</p>
+<li><p>Campos da cadeia de caracteres</p>
 <table>
 <thead>
-<tr><th>String length</th><th>Memory estimation function (MB)</th></tr>
+<tr><th>Comprimento da cadeia</th><th>Função de estimativa de memória (MB)</th></tr>
 </thead>
 <tbody>
 <tr><td>(0, 8]</td><td>numOfRows * <strong>128</strong> / 1024 / 1024</td></tr>
@@ -142,7 +138,7 @@ title: Scalar Index
 </table>
 </li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,12 +154,12 @@ title: Scalar Index
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>To index a scalar field, read <a href="/docs/index-scalar-fields.md">Build an Index on Scalars</a>.</p></li>
-<li><p>To learn more about the related terms and rules mentioned above, read</p>
+<li><p>Para indexar um campo escalar, leia <a href="/docs/pt/index-scalar-fields.md">Criar um índice em escalares</a>.</p></li>
+<li><p>Para saber mais sobre os termos e regras relacionados mencionados acima, leia</p>
 <ul>
-<li><a href="/docs/bitset.md">Bitset</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid search</a></li>
-<li><a href="/docs/boolean.md">Boolean expression rules</a></li>
-<li><a href="/docs/schema.md#Supported-data-type">Supported data types</a></li>
+<li><a href="/docs/pt/bitset.md">Conjunto de bits</a></li>
+<li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
+<li><a href="/docs/pt/boolean.md">Regras de expressão booleana</a></li>
+<li><a href="/docs/pt/schema.md#Supported-data-type">Tipos de dados suportados</a></li>
 </ul></li>
 </ul>

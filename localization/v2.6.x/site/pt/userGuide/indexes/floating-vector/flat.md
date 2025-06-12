@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>O índice <strong>FLAT</strong> é um dos métodos mais simples e diretos para indexar e pesquisar vectores de vírgula flutuante. Baseia-se numa abordagem de força bruta, em que cada vetor de consulta é diretamente comparado com todos os vectores do conjunto de dados, sem qualquer pré-processamento avançado ou estruturação de dados. Esta abordagem garante a exatidão, oferecendo 100% de recuperação, uma vez que cada correspondência potencial é avaliada.</p>
-<p>No entanto, este método de pesquisa exaustiva tem algumas desvantagens. O índice FLAT é a opção de indexação mais lenta, uma vez que efectua uma pesquisa completa do conjunto de dados para cada consulta. Consequentemente, não é adequado para ambientes com conjuntos de dados maciços, onde o desempenho é uma preocupação. A principal vantagem do índice FLAT é a sua simplicidade e fiabilidade, uma vez que não requer formação ou configurações de parâmetros complexas.</p>
+<p>No entanto, este método de pesquisa exaustiva tem algumas desvantagens. O índice FLAT é a opção de indexação mais lenta, uma vez que efectua uma pesquisa completa do conjunto de dados para cada consulta. Por conseguinte, não é adequado para ambientes com conjuntos de dados maciços, onde o desempenho é uma preocupação. A principal vantagem do índice FLAT é a sua simplicidade e fiabilidade, uma vez que não requer formação ou configurações de parâmetros complexas.</p>
 <h2 id="Build-index" class="common-anchor-header">Criar índice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

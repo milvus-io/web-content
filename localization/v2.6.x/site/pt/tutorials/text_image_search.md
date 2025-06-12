@@ -1,11 +1,11 @@
 ---
 id: text_image_search.md
 summary: >-
-  In this tutorial, we will explore how to implement text-based image retrieval
-  using OpenAI’s CLIP (Contrastive Language-Image Pretraining) model and Milvus.
-  We will generate image embeddings with CLIP, store them in Milvus, and perform
-  efficient similarity searches.
-title: Text-to-Image Search with Milvus
+  Neste tutorial, vamos explorar como implementar a recuperação de imagens
+  baseadas em texto usando o modelo CLIP (Contrastive Language-Image
+  Pretraining) da OpenAI e o Milvus. Iremos gerar embeddings de imagens com o
+  CLIP, armazená-las no Milvus e efetuar pesquisas de semelhança eficientes.
+title: Pesquisa de texto para imagem com Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -13,7 +13,7 @@ title: Text-to-Image Search with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">Text-to-Image Search with Milvus<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">Pesquisa de texto para imagem com Milvus<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,9 +28,9 @@ title: Text-to-Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Text-to-image search is an advanced technology that allows users to search for images using natural language text descriptions. It leverages a pretrained multimodal model to convert both text and images into embeddings in a shared semantic space, enabling similarity-based comparisons.</p>
-<p>In this tutorial, we will explore how to implement text-based image retrieval using OpenAI’s CLIP (Contrastive Language-Image Pretraining) model and Milvus. We will generate image embeddings with CLIP, store them in Milvus, and perform efficient similarity searches.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>A pesquisa de texto para imagem é uma tecnologia avançada que permite aos utilizadores pesquisar imagens utilizando descrições de texto em linguagem natural. Esta tecnologia utiliza um modelo multimodal pré-treinado para converter texto e imagens em embeddings num espaço semântico partilhado, permitindo comparações baseadas em semelhanças.</p>
+<p>Neste tutorial, vamos explorar como implementar a recuperação de imagens baseadas em texto usando o modelo CLIP (Contrastive Language-Image Pretraining) da OpenAI e o Milvus. Vamos gerar embeddings de imagens com o CLIP, armazená-los no Milvus e realizar pesquisas de similaridade eficientes.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,33 +45,33 @@ title: Text-to-Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before you start, make sure you have all the required packages and example data ready.</p>
-<h3 id="Install-dependencies" class="common-anchor-header">Install dependencies</h3><ul>
-<li><strong>pymilvus>=2.4.2</strong> for interacting with the Milvus database</li>
-<li><strong>clip</strong> for working with the CLIP model</li>
-<li><strong>pillow</strong> for image processing and visualization</li>
+    </button></h2><p>Antes de começar, certifique-se de que tem todos os pacotes necessários e dados de exemplo prontos.</p>
+<h3 id="Install-dependencies" class="common-anchor-header">Instale as dependências</h3><ul>
+<li><strong>pymilvus&gt;=2.4.2</strong> para interagir com a base de dados Milvus</li>
+<li><strong>clip</strong> para trabalhar com o modelo CLIP</li>
+<li><strong>pillow</strong> para processamento e visualização de imagens</li>
 </ul>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus pillow</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install git+https://github.com/openai/CLIP.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you’re using Google Colab, you may need to <strong>restart the runtime</strong> (Navigate to the “Runtime” menu at the top of the interface, and select “Restart session” from the dropdown menu.)</p>
+<p>Se estiver a utilizar o Google Colab, poderá ter de <strong>reiniciar o tempo de execução</strong> (navegue até ao menu "Tempo de execução" na parte superior da interface e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
-<h3 id="Download-example-data" class="common-anchor-header">Download example data</h3><p>We will use a subset of the <a href="https://www.image-net.org">ImageNet</a> dataset (100 classes, 10 images for each class) as example images. The following command will download the example data and extract it to the local folder <code translate="no">./images_folder</code>:</p>
+<h3 id="Download-example-data" class="common-anchor-header">Descarregar dados de exemplo</h3><p>Iremos utilizar um subconjunto do conjunto de dados <a href="https://www.image-net.org">ImageNet</a> (100 classes, 10 imagens para cada classe) como imagens de exemplo. O comando seguinte descarrega os dados de exemplo e extrai-os para a pasta local <code translate="no">./images_folder</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q reverse_image_search.zip -d images_folder</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-Milvus" class="common-anchor-header">Set up Milvus</h3><p>Before proceeding, set up your Milvus server and connect using your URI (and optionally, a token):</p>
+<h3 id="Set-up-Milvus" class="common-anchor-header">Configurar o Milvus</h3><p>Antes de continuar, configure o seu servidor Milvus e ligue-se utilizando o seu URI (e, opcionalmente, um token):</p>
 <ul>
-<li><p><strong>Milvus Lite (Recommended for Convenience)</strong>: Set the URI to a local file, such as ./milvus.db. This automatically leverages <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in a single file.</p></li>
-<li><p><strong>Docker or Kubernetes (For Large-Scale Data)</strong>: For handling larger datasets, deploy a more performant Milvus server using <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this case, use the server URI, such as http://localhost:19530, to connect.</p></li>
-<li><p><strong>Zilliz Cloud (Managed Service)</strong>: If you’re using <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, Milvus’s fully managed cloud service, set the the Public Endpoint as URI and API Key as token.</p></li>
+<li><p><strong>Milvus Lite (recomendado por conveniência)</strong>: Defina o URI para um ficheiro local, como ./milvus.db. Isso aproveita automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados em um único arquivo.</p></li>
+<li><p><strong>Docker ou Kubernetes (para dados em grande escala)</strong>: Para lidar com conjuntos de dados maiores, implante um servidor Milvus de melhor desempenho usando <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Neste caso, utilize o URI do servidor, como http://localhost:19530, para se ligar.</p></li>
+<li><p><strong>Zilliz Cloud (Serviço Gerido)</strong>: Se estiver a utilizar o <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, o serviço de nuvem totalmente gerido do Milvus, defina o Public Endpoint como URI e a API Key como token.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Getting-Started" class="common-anchor-header">Getting Started<button data-href="#Getting-Started" class="anchor-icon" translate="no">
+<h2 id="Getting-Started" class="common-anchor-header">Começar a utilizar<button data-href="#Getting-Started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,13 +86,13 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that you have the necessary dependencies and data, it’s time to set up feature extractors and start working with Milvus. This section will walk you through the key steps of building a text-to-image search system. Finally, we’ll demonstrate how to retrieve and visualize images based on text queries.</p>
-<h3 id="Define-feature-extractors" class="common-anchor-header">Define feature extractors</h3><p>We will use a pretrained CLIP model to generate image and text embeddings. In this section, we load the pretrained <strong>ViT-B/32</strong> variant of CLIP and define helper functions for encoding image and text:</p>
+    </button></h2><p>Agora que tem as dependências e os dados necessários, está na altura de configurar os extractores de caraterísticas e começar a trabalhar com o Milvus. Esta secção irá guiá-lo através dos principais passos da construção de um sistema de pesquisa de texto para imagem. Por fim, demonstraremos como recuperar e visualizar imagens com base em consultas de texto.</p>
+<h3 id="Define-feature-extractors" class="common-anchor-header">Definir extractores de caraterísticas</h3><p>Utilizaremos um modelo CLIP pré-treinado para gerar embeddings de imagem e texto. Nesta secção, carregamos a variante <strong>ViT-B/32</strong> pré-treinada do CLIP e definimos funções auxiliares para codificar imagem e texto:</p>
 <ul>
-<li><code translate="no">encode_image(image_path)</code>: Processes and encodes images into feature vectors</li>
-<li><code translate="no">encode_text(text)</code>: Encodes text queries into feature vectors</li>
+<li><code translate="no">encode_image(image_path)</code>: Processa e codifica imagens em vectores de caraterísticas</li>
+<li><code translate="no">encode_text(text)</code>: Codifica consultas de texto em vectores de caraterísticas</li>
 </ul>
-<p>Both functions normalize the output features to ensure consistent comparisons by converting vectors to unit length, which is essential for accurate cosine similarity calculations.</p>
+<p>Ambas as funções normalizam as caraterísticas de saída para garantir comparações consistentes, convertendo os vectores para comprimento unitário, o que é essencial para cálculos precisos de semelhança de cosseno.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> clip
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
@@ -122,14 +122,14 @@ model.<span class="hljs-built_in">eval</span>()
     )  <span class="hljs-comment"># Normalize the text features</span>
     <span class="hljs-keyword">return</span> text_features.squeeze().tolist()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Ingestion" class="common-anchor-header">Data Ingestion</h3><p>To enable semantic image search, we first need to generate embeddings for all images and store them in a vector database for efficient indexing and retrieval. This section provides a step-by-step guide to ingesting image data into Milvus.</p>
-<p><strong>1. Create Milvus Collection</strong></p>
-<p>Before storing image embeddings, you need to create a Milvus collection. The following code demonstrates how to create a collection in a quick-setup mode with the default COSINE metric type. The collection includes the following fields:</p>
+<h3 id="Data-Ingestion" class="common-anchor-header">Ingestão de dados</h3><p>Para permitir a pesquisa semântica de imagens, precisamos primeiro de gerar embeddings para todas as imagens e armazená-las numa base de dados de vectores para uma indexação e recuperação eficientes. Esta secção fornece um guia passo-a-passo para ingerir dados de imagens no Milvus.</p>
+<p><strong>1. Criar uma coleção Milvus</strong></p>
+<p>Antes de armazenar os embeddings de imagens, é necessário criar uma coleção Milvus. O código seguinte demonstra como criar uma coleção num modo de configuração rápida com o tipo de métrica COSINE predefinido. A coleção inclui os seguintes campos:</p>
 <ul>
-<li><p><code translate="no">id</code>: A primary field with auto ID enabled.</p></li>
-<li><p><code translate="no">vector</code>: A field for storing floating-point vector embeddings.</p></li>
+<li><p><code translate="no">id</code>: Um campo primário com a ID automática activada.</p></li>
+<li><p><code translate="no">vector</code>: Um campo para armazenar as incorporações de vectores de vírgula flutuante.</p></li>
 </ul>
-<p>If you need a custom schema, refer to the <a href="https://milvus.io/docs/create-collection.md">Milvus documentation</a> for detailed instructions.</p>
+<p>Se precisar de um esquema personalizado, consulte a <a href="https://milvus.io/docs/create-collection.md">documentação do Milvus</a> para obter instruções detalhadas.</p>
 <pre><code translate="no" class="language-python">collection_name = <span class="hljs-string">&quot;image_collection&quot;</span>
 
 <span class="hljs-comment"># Drop the collection if it already exists</span>
@@ -144,11 +144,11 @@ milvus_client.create_collection(
     enable_dynamic_field=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># enable dynamic field for scalar fields</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>2. Insert Data into Milvus</strong></p>
-<p>In this step, we use a predefined image encoder to generate embeddings for all JPEG images in the example data directory. These embeddings are then inserted into the Milvus collection, along with their corresponding file paths. Each entry in the collection consists of:</p>
+<p><strong>2. Inserir dados no Milvus</strong></p>
+<p>Neste passo, usamos um codificador de imagem predefinido para gerar embeddings para todas as imagens JPEG no diretório de dados de exemplo. Estes embeddings são depois inseridos na coleção do Milvus, juntamente com os caminhos dos ficheiros correspondentes. Cada entrada na coleção é composta por:</p>
 <ul>
-<li><strong>Embedding vector</strong>: The numerical representation of the image. Stored in the field <code translate="no">vector</code>.</li>
-<li><strong>File path</strong>: The location of the image file for reference. Stored in the field <code translate="no">filepath</code> as a dynamic field.</li>
+<li><strong>Vetor de incorporação</strong>: A representação numérica da imagem. Armazenado no campo <code translate="no">vector</code>.</li>
+<li><strong>Caminho do ficheiro</strong>: A localização do ficheiro de imagem para referência. Armazenado no campo <code translate="no">filepath</code> como um campo dinâmico.</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
@@ -167,7 +167,7 @@ insert_result = milvus_client.insert(collection_name=collection_name, data=raw_d
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted 1000 images into Milvus.
 </code></pre>
-<h3 id="Peform-a-Search" class="common-anchor-header">Peform a Search</h3><p>Now, let’s run a search using an example text query. This will retrieve the most relevant images based on their semantic similarity to the given text description.</p>
+<h3 id="Peform-a-Search" class="common-anchor-header">Efetuar uma pesquisa</h3><p>Agora, vamos executar uma pesquisa usando uma consulta de texto de exemplo. Isto irá recuperar as imagens mais relevantes com base na sua semelhança semântica com a descrição de texto fornecida.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;a white dog&quot;</span>
 query_embedding = encode_text(query_text)
 
@@ -178,7 +178,7 @@ search_results = milvus_client.search(
     output_fields=[<span class="hljs-string">&quot;filepath&quot;</span>],  <span class="hljs-comment"># return the filepath field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Visualize results:</p>
+<p>Visualize os resultados:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> display
 
 
@@ -207,8 +207,6 @@ display(concatenated_image)
 Search results:
 </code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
-    <span>png</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/text_image_search_with_milvus_20_1.png" alt="png" class="doc-image" id="png" />
+   </span> <span class="img-wrapper"> <span>png</span> </span></p>

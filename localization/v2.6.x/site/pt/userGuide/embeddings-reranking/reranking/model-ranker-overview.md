@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A pesquisa vetorial tradicional classifica os resultados puramente pela similaridade matemática - a proximidade dos vetores no espaço de alta dimensão. Apesar de eficiente, esta abordagem muitas vezes não tem verdadeira relevância semântica. Considere a pesquisa de <strong>"melhores práticas para otimização de bases de dados":</strong> poderá receber documentos com elevada semelhança vetorial que mencionam frequentemente estes termos, mas que não fornecem estratégias de otimização acionáveis.</p>
+    </button></h1><p>A pesquisa vetorial tradicional classifica os resultados puramente pela similaridade matemática - a proximidade dos vetores no espaço de alta dimensão. Apesar de eficiente, esta abordagem muitas vezes não tem verdadeira relevância semântica. Considere a pesquisa por <strong>"melhores práticas para otimização de bases de dados":</strong> poderá receber documentos com elevada semelhança vetorial que mencionam estes termos frequentemente, mas que não fornecem estratégias de otimização acionáveis.</p>
 <p>O Model Ranker transforma a pesquisa do Milvus ao integrar modelos de linguagem avançados que compreendem as relações semânticas entre consultas e documentos. Em vez de se basear apenas na semelhança de vectores, avalia o significado e o contexto do conteúdo para fornecer resultados mais inteligentes e relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ beta: Milvus 2.6.x
 <li><p>Um serviço de modelo externo em execução (vLLM ou TEI) acessível à sua instância Milvus</p></li>
 <li><p>Conectividade de rede apropriada entre Milvus e o serviço de modelo escolhido</p></li>
 </ul>
-<p>Os classificadores de modelos integram-se perfeitamente nas operações de pesquisa vetorial padrão e de pesquisa híbrida. A implementação envolve a criação de um objeto Function que define a sua configuração de reanálise e a sua transmissão às operações de pesquisa.</p>
+<p>Os classificadores de modelos integram-se perfeitamente nas operações de pesquisa vetorial padrão e de pesquisa híbrida. A implementação implica a criação de um objeto Function que define a sua configuração de reanálise e a sua transmissão às operações de pesquisa.</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">Criar um classificador de modelos</h3><p>Para implementar a reclassificação de modelos, comece por definir um objeto Function com a configuração adequada:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
