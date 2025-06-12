@@ -1,11 +1,11 @@
 ---
 id: integrate_with_dspy.md
 summary: >-
-  This guide demonstrates how to use MilvusRM, one of DSPy's retriever modules,
-  to optimize RAG programs.
-title: Integrate Milvus with DSPy
+  Ce guide montre comment utiliser MilvusRM, l'un des modules de récupération de
+  DSPy, pour optimiser les programmes RAG.
+title: Intégrer Milvus à DSPy
 ---
-<h1 id="Integrate-Milvus-with-DSPy" class="common-anchor-header">Integrate Milvus with DSPy<button data-href="#Integrate-Milvus-with-DSPy" class="anchor-icon" translate="no">
+<h1 id="Integrate-Milvus-with-DSPy" class="common-anchor-header">Intégrer Milvus à DSPy<button data-href="#Integrate-Milvus-with-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ title: Integrate Milvus with DSPy
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<h2 id="What-is-DSPy" class="common-anchor-header">What is DSPy<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
+<h2 id="What-is-DSPy" class="common-anchor-header">Qu'est-ce que DSPy ?<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,8 +37,8 @@ title: Integrate Milvus with DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy, introduced by the Stanford NLP Group, stands as a groundbreaking programmatic framework designed to optimize prompts and weights within language models, particularly valuable in scenarios where large language models (LLMs) are integrated across multiple stages of a pipeline. Unlike conventional prompting engineering techniques reliant on manual crafting and tweaking, DSPy adopts a learning-based approach. By assimilating query-answer examples, DSPy generates optimized prompts dynamically, tailored to specific tasks. This innovative methodology enables the seamless reassembly of entire pipelines, eliminating the need for continuous manual prompt adjustments. DSPy’s Pythonic syntax offers various composable and declarative modules, simplifying the instruction of LLMs.</p>
-<h2 id="Benefits-of-using-DSPy" class="common-anchor-header">Benefits of using DSPy<button data-href="#Benefits-of-using-DSPy" class="anchor-icon" translate="no">
+    </button></h2><p>DSPy, introduit par le Stanford NLP Group, est un cadre programmatique révolutionnaire conçu pour optimiser les invites et les poids dans les modèles de langage, particulièrement utile dans les scénarios où de grands modèles de langage (LLM) sont intégrés à plusieurs étapes d'un pipeline. Contrairement aux techniques conventionnelles d'ingénierie des messages-guides qui reposent sur l'élaboration et l'ajustement manuels, DSPy adopte une approche basée sur l'apprentissage. En assimilant des exemples de questions-réponses, DSPy génère dynamiquement des messages optimisés, adaptés à des tâches spécifiques. Cette méthodologie innovante permet de réassembler de manière transparente des pipelines entiers, éliminant ainsi le besoin d'ajustements manuels continus des messages-guides. La syntaxe pythonique de DSPy offre divers modules composables et déclaratifs, ce qui simplifie l'instruction des LLM.</p>
+<h2 id="Benefits-of-using-DSPy" class="common-anchor-header">Avantages de l'utilisation de DSPy<button data-href="#Benefits-of-using-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,11 +54,11 @@ title: Integrate Milvus with DSPy
         ></path>
       </svg>
     </button></h2><ul>
-<li>Programming Approach: DSPy provides a systematic programming approach for LM pipeline development by abstracting pipelines as text transformation graphs instead of just prompting the LLMs. Its declarative modules enable structured design and optimization, replacing the trial-and-error method of traditional prompt templates.</li>
-<li>Performance Improvement: DSPy demonstrates significant performance gains over existing methods. Through case studies, it outperforms standard prompting and expert-created demonstrations, showcasing its versatility and effectiveness even when compiled to smaller LM models.</li>
-<li>Modularized Abstraction: DSPy effectively abstracts intricate aspects of LM pipeline development, such as decomposition, fine-tuning, and model selection. With DSPy, a concise program can seamlessly translate into instructions for various models, such as GPT-4, Llama2-13b, or T5-base, streamlining development and enhancing performance.</li>
+<li>Approche de la programmation : DSPy fournit une approche de programmation systématique pour le développement de pipelines LM en abstrayant les pipelines sous forme de graphes de transformation de texte au lieu de se contenter d'inviter les LLM. Ses modules déclaratifs permettent une conception et une optimisation structurées, remplaçant la méthode d'essai et d'erreur des modèles d'invite traditionnels.</li>
+<li>Amélioration des performances : DSPy démontre des gains de performance significatifs par rapport aux méthodes existantes. Grâce à des études de cas, il surpasse les messages-guides standard et les démonstrations créées par des experts, démontrant ainsi sa polyvalence et son efficacité, même lorsqu'il est compilé dans des modèles LM plus petits.</li>
+<li>Abstraction modulaire : DSPy abstrait efficacement les aspects complexes du développement du pipeline LM, tels que la décomposition, le réglage fin et la sélection du modèle. Avec DSPy, un programme concis peut se traduire de manière transparente en instructions pour différents modèles, tels que GPT-4, Llama2-13b ou T5-base, ce qui simplifie le développement et améliore les performances.</li>
 </ul>
-<h2 id="Modules" class="common-anchor-header">Modules<button data-href="#Modules" class="anchor-icon" translate="no">
+<h2 id="Modules" class="common-anchor-header">Les modules<button data-href="#Modules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,17 +73,13 @@ title: Integrate Milvus with DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>There are numerous components that contribute to constructing an LLM pipeline. Here, we’ll describe some key components to provide a high-level understanding of how DSPy operates.</p>
+    </button></h2><p>Il existe de nombreux composants qui contribuent à la construction d'un pipeline LLM. Nous décrirons ici quelques composants clés afin de fournir une compréhension de haut niveau du fonctionnement de DSPy.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
-    <span>DSPy Modules</span>
-  </span>
-</p>
-<p>Signature: Signatures in DSPy serve as declarative specifications, outlining the input/output behavior of modules, guiding the language model in task execution.
-Module: DSPy modules serve as fundamental components for programs leveraging language models (LMs). They abstract various prompting techniques, such as chain of thought or ReAct, and are adaptable to handle any DSPy Signature. With learnable parameters and the ability to process inputs and produce outputs, these modules can be combined to form larger programs, drawing inspiration from NN modules in PyTorch but tailored for LM applications.
-Optimizer: Optimizers in DSPy fine-tune the parameters of DSPy programs, such as prompts and LLM weights, to maximize specified metrics like accuracy, enhancing program efficiency.</p>
-<h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">Why Milvus in DSPy<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   </span> <span class="img-wrapper"> <span>Modules DSPy</span> </span></p>
+<p>Signature : Les signatures dans DSPy servent de spécifications déclaratives, décrivant le comportement d'entrée/sortie des modules, guidant le modèle de langage dans l'exécution des tâches. Module : Les modules DSPy servent de composants fondamentaux pour les programmes exploitant les modèles de langage (LM). Ils abstraient diverses techniques d'incitation, telles que la chaîne de pensée ou ReAct, et sont adaptables pour gérer n'importe quelle signature DSPy. Avec des paramètres apprenables et la capacité de traiter des entrées et de produire des sorties, ces modules peuvent être combinés pour former des programmes plus importants, en s'inspirant des modules NN de PyTorch, mais adaptés aux applications LM. Optimiseur : Les optimiseurs de DSPy affinent les paramètres des programmes DSPy, tels que les invites et les poids LLM, afin de maximiser les mesures spécifiées telles que la précision, améliorant ainsi l'efficacité du programme.</p>
+<h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">Pourquoi Milvus dans DSPy ?<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,8 +94,8 @@ Optimizer: Optimizers in DSPy fine-tune the parameters of DSPy programs, such as
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy is a powerful programming framework that boosts RAG applications. Such application needs to retrieve useful information to enhance answer quality, which needs vector database. Milvus is a well-known open-source vector database to improve performance and scalability. With MilvusRM, a retriever module in DSPy, integrating Milvus becomes seamless. Now, developers can easily define and optimize RAG programs using DSPy, taking advantage of Milvus’ strong vector search capabilities. This collaboration makes RAG applications more efficient and scalable, combining DSPy’s programming capabilities with Milvus’ search features.</p>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+    </button></h2><p>DSPy est un cadre de programmation puissant qui stimule les applications RAG. Une telle application doit récupérer des informations utiles pour améliorer la qualité des réponses, ce qui nécessite une base de données vectorielle. Milvus est une base de données vectorielle open-source bien connue qui permet d'améliorer les performances et l'évolutivité. Avec MilvusRM, un module de récupération dans DSPy, l'intégration de Milvus devient transparente. Désormais, les développeurs peuvent facilement définir et optimiser les programmes RAG à l'aide de DSPy, en tirant parti des puissantes capacités de recherche vectorielle de Milvus. Cette collaboration rend les applications RAG plus efficaces et évolutives, en combinant les capacités de programmation de DSPy avec les fonctions de recherche de Milvus.</p>
+<h2 id="Examples" class="common-anchor-header">Exemples d'applications<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,15 +110,14 @@ Optimizer: Optimizers in DSPy fine-tune the parameters of DSPy programs, such as
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now, let’s walk through a quick example to demonstrate how to leverage Milvus in DSPy for optimizing a RAG application.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Prerequisites</h3><p>Before building the RAG app, install the DSPy and PyMilvus.</p>
+    </button></h2><p>Voyons maintenant un exemple rapide pour démontrer comment tirer parti de Milvus dans DSPy pour optimiser une application RAG.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Conditions préalables</h3><p>Avant de construire l'application RAG, installez DSPy et PyMilvus.</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
-</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">Loading the dataset</h3><p>In this example, we use the HotPotQA, a collection of complex question-answer pairs, as our training dataset. We can load them through the HotPotQA class.</p>
+Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être **redémarrer le runtime** (Cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</div>
+<h3 id="Loading-the-dataset" class="common-anchor-header">Chargement de l'ensemble de données</h3><p>Dans cet exemple, nous utilisons le HotPotQA, une collection de paires de questions-réponses complexes, comme ensemble de données d'entraînement. Nous pouvons les charger via la classe HotPotQA.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -134,7 +129,7 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Ingest data into the Milvus vector database</h3><p>Ingest the context information into the Milvus collection for vector retrieval. This collection should have an <code translate="no">embedding</code> field and a <code translate="no">text</code> field. We use OpenAI’s <code translate="no">text-embedding-3-small</code> model as the default query embedding function in this case.</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Intégrer les données dans la base de données vectorielles Milvus</h3><p>Intégrer les informations contextuelles dans la collection Milvus pour la recherche de vecteurs. Cette collection doit comporter un champ <code translate="no">embedding</code> et un champ <code translate="no">text</code>. Nous utilisons le modèle <code translate="no">text-embedding-3-small</code> de l'OpenAI comme fonction d'intégration de requête par défaut dans ce cas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -177,7 +172,7 @@ text = requests.get(
         ],
     )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-MilvusRM" class="common-anchor-header">Define MilvusRM.</h3><p>Now, you need to define the MilvusRM.</p>
+<h3 id="Define-MilvusRM" class="common-anchor-header">Définir MilvusRM.</h3><p>Vous devez maintenant définir le MilvusRM.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
@@ -190,7 +185,7 @@ retriever_model = MilvusRM(
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Building-signatures" class="common-anchor-header">Building signatures</h3><p>Now that we have loaded the data, let’s start defining the signatures for the sub-tasks of our pipeline. We can identify our simple input <code translate="no">question</code> and output <code translate="no">answer</code>, but since we are building a RAG pipeline, we’ll retrieve contextual information from Milvus. So let’s define our signature as <code translate="no">context, question --&gt; answer</code>.</p>
+<h3 id="Building-signatures" class="common-anchor-header">Création de signatures</h3><p>Maintenant que nous avons chargé les données, commençons à définir les signatures pour les sous-tâches de notre pipeline. Nous pouvons identifier notre entrée simple <code translate="no">question</code> et notre sortie <code translate="no">answer</code>, mais comme nous construisons un pipeline RAG, nous récupérerons des informations contextuelles de Milvus. Définissons donc notre signature comme <code translate="no">context, question --&gt; answer</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
 
@@ -198,8 +193,8 @@ dspy.settings.configure(lm=turbo)
     question = dspy.InputField()
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>We include short descriptions for the <code translate="no">context</code> and <code translate="no">answer</code> fields to define clearer guidelines on what the model will receive and should generate.</p>
-<h3 id="Building-the-pipeline" class="common-anchor-header">Building the pipeline</h3><p>Now, let’s define the RAG pipeline.</p>
+<p>Nous incluons de courtes descriptions pour les champs <code translate="no">context</code> et <code translate="no">answer</code> afin de définir des lignes directrices plus claires sur ce que le modèle recevra et devrait générer.</p>
+<h3 id="Building-the-pipeline" class="common-anchor-header">Construction du pipeline</h3><p>Définissons maintenant le pipeline RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, rm</span>):
         <span class="hljs-built_in">super</span>().__init__()
@@ -217,13 +212,13 @@ dspy.settings.configure(lm=turbo)
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">Executing the pipeline and getting the results</h3><p>Now, we’ve built this RAG pipeline. Let’s try it out and get results.</p>
+<h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">Exécution du pipeline et obtention des résultats</h3><p>Nous avons maintenant construit ce pipeline RAG. Essayons-le et obtenons des résultats.</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Townes Van Zandt
 </code></pre>
-<p>We can evaluate the quantitative results on the dataset.</p>
+<p>Nous pouvons évaluer les résultats quantitatifs sur le jeu de données.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.evaluate.evaluate <span class="hljs-keyword">import</span> Evaluate
 <span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
@@ -235,11 +230,11 @@ metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Optimizing the pipeline</h3><p>After defining this program, the next step is compilation. This process updates the parameters within each module to enhance performance. The compilation process depends on three critical factors:</p>
+<h3 id="Optimizing-the-pipeline" class="common-anchor-header">Optimisation du pipeline</h3><p>Après avoir défini ce programme, l'étape suivante est la compilation. Ce processus met à jour les paramètres de chaque module afin d'améliorer les performances. Le processus de compilation dépend de trois facteurs essentiels :</p>
 <ul>
-<li>Training Set: We’ll utilize the 20 question-answer examples from our training dataset for this demonstration.</li>
-<li>Validation Metric: We will establish a simple <code translate="no">validate_context_and_answer</code> metric. This metric verifies the accuracy of the predicted answer and ensures that the retrieved context includes the answer.</li>
-<li>Specific Optimizer (Teleprompter): DSPy’s compiler incorporates multiple teleprompters designed to optimize your programs effectively.</li>
+<li>L'ensemble de formation : Nous utiliserons les 20 exemples de questions-réponses de notre ensemble de données de formation pour cette démonstration.</li>
+<li>Mesure de validation : Nous établirons une mesure simple à l'adresse <code translate="no">validate_context_and_answer</code>. Cette mesure permet de vérifier l'exactitude de la réponse prédite et de s'assurer que le contexte récupéré comprend la réponse.</li>
+<li>Optimiseur spécifique (téléprompteur) : Le compilateur de DSPy intègre plusieurs téléprompteurs conçus pour optimiser efficacement vos programmes.</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.teleprompt <span class="hljs-keyword">import</span> BootstrapFewShot
 
@@ -264,8 +259,8 @@ score = evaluate_on_hotpotqa(compiled_rag, metric=metric)
 <span class="hljs-built_in">print</span>(score)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;compile_rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<p>The Ragas score has increased from its previous value of 50.0 to 52.0, indicating an enhancement in answer quality.</p>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<p>Le score de Ragas est passé de 50,0 à 52,0, ce qui indique une amélioration de la qualité des réponses.</p>
+<h2 id="Summary" class="common-anchor-header">Résumé<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -280,4 +275,4 @@ score = evaluate_on_hotpotqa(compiled_rag, metric=metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy marks a leap in language model interactions through its programmable interface, which facilitates algorithmic and automated optimization of model prompts and weights. By leveraging DSPy for RAG implementation, adaptability to varying language models or datasets becomes a breeze, drastically reducing the need for tedious manual interventions.</p>
+    </button></h2><p>DSPy marque un saut dans les interactions entre les modèles de langage grâce à son interface programmable, qui facilite l'optimisation algorithmique et automatisée des invites et des poids des modèles. En tirant parti de DSPy pour la mise en œuvre de RAG, l'adaptabilité à différents modèles linguistiques ou ensembles de données devient un jeu d'enfant, ce qui réduit considérablement le besoin d'interventions manuelles fastidieuses.</p>

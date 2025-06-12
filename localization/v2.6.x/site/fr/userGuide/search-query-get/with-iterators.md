@@ -1,14 +1,15 @@
 ---
 id: with-iterators.md
-title: Search Iterator
+title: Itérateur de recherche
 summary: >-
-  The ANN Search has a maximum limit on the number of entities that can be
-  recalled in a single query, and simply using basic ANN Search may not meet the
-  demands of large-scale retrieval. For ANN Search requests where topK exceeds
-  16,384, it is advisable to consider using the SearchIterator. This section
-  will introduce how to use the SearchIterator and related considerations.
+  La recherche ANN a une limite maximale sur le nombre d'entités qui peuvent
+  être rappelées dans une seule requête, et l'utilisation simple de la recherche
+  ANN de base peut ne pas répondre aux exigences de la recherche à grande
+  échelle. Pour les requêtes de recherche ANN dont le topK dépasse 16 384, il
+  est conseillé d'utiliser le SearchIterator. Cette section présente
+  l'utilisation du SearchIterator et les considérations qui s'y rapportent.
 ---
-<h1 id="Search-Iterator" class="common-anchor-header">Search Iterator<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
+<h1 id="Search-Iterator" class="common-anchor-header">Itérateur de recherche<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The ANN Search has a maximum limit on the number of entities that can be recalled in a single query, and simply using basic ANN Search may not meet the demands of large-scale retrieval. For ANN Search requests where topK exceeds 16,384, it is advisable to consider using the SearchIterator. This section will introduce how to use the SearchIterator and related considerations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>La recherche ANN a une limite maximale sur le nombre d'entités qui peuvent être rappelées dans une seule requête, et l'utilisation simple de la recherche ANN de base peut ne pas répondre aux exigences de la recherche à grande échelle. Pour les requêtes de recherche ANN dont le topK dépasse 16 384, il est conseillé d'utiliser l'itérateur de recherche. Cette section présente l'utilisation du SearchIterator et les considérations qui s'y rapportent.</p>
+<h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +40,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A Search request returns search results, while a SearchIterator returns an iterator. You can call the <strong>next()</strong> method of this iterator to get the search results.</p>
-<p>Specifically, you can use the SearchIterators as follows:</p>
+    </button></h2><p>Une requête Search renvoie des résultats de recherche, tandis qu'un SearchIterator renvoie un itérateur. Vous pouvez appeler la méthode <strong>next()</strong> de cet itérateur pour obtenir les résultats de la recherche.</p>
+<p>Plus précisément, vous pouvez utiliser les itérateurs de recherche de la manière suivante :</p>
 <ol>
-<li><p>Create a SearchIterator and set <strong>the number of entities to return per search request</strong> and <strong>the total number of entities to return</strong>.</p></li>
-<li><p>Call the <strong>next()</strong> method of the SearchIterator in a loop to get the search result in a paginated manner.</p></li>
-<li><p>Call the <strong>close()</strong> method of the iterator to end the loop if the <strong>next()</strong> method returns an empty result.</p></li>
+<li><p>Créez un SearchIterator et définissez le <strong>nombre d'entités à renvoyer par demande de recherche</strong> et le <strong>nombre total d'entités à renvoyer</strong>.</p></li>
+<li><p>Appelez la méthode <strong>next()</strong> du SearchIterator dans une boucle pour obtenir les résultats de la recherche de manière paginée.</p></li>
+<li><p>Appelez la méthode <strong>close()</strong> de l'itérateur pour terminer la boucle si la méthode <strong>next()</strong> renvoie un résultat vide.</p></li>
 </ol>
-<h2 id="Create-SearchIterator" class="common-anchor-header">Create SearchIterator<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
+<h2 id="Create-SearchIterator" class="common-anchor-header">Créer un SearchIterator<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,14 +62,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates how to create a SearchIterator.</p>
+    </button></h2><p>L'extrait de code suivant montre comment créer un SearchIterator.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
 
 connections.connect(
@@ -142,8 +138,8 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above examples, you have set the number of entities to return per search (<strong>batch_size</strong>/<strong>batchSize</strong>) to 50, and the total number of entities to return (<strong>topK</strong>) to 20,000.</p>
-<h2 id="Use-SearchIterator" class="common-anchor-header">Use SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
+<p>Dans les exemples ci-dessus, vous avez fixé le nombre d'entités à renvoyer par recherche<strong>(</strong><strong>batch_size/batchSize</strong>) à 50, et le nombre total d'entités à renvoyer<strong>(topK</strong>) à 20 000.</p>
+<h2 id="Use-SearchIterator" class="common-anchor-header">Utiliser le SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,14 +154,9 @@ iterator = collection.search_iterator(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the SearchIterator is ready, you can call its next() method to get the search results in a paginated manner.</p>
+    </button></h2><p>Une fois que le SearchIterator est prêt, vous pouvez appeler sa méthode next() pour obtenir les résultats de la recherche de manière paginée.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">results = []
 
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
@@ -199,4 +190,4 @@ iterator = collection.search_iterator(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above code examples, you have created an infinite loop and called the <strong>next()</strong> method in the loop to store the search results in a variable and closed the iterator when the <strong>next()</strong> returns nothing.</p>
+<p>Dans les exemples de code ci-dessus, vous avez créé une boucle infinie et appelé la méthode <strong>next()</strong> dans la boucle pour stocker les résultats de la recherche dans une variable et fermer l'itérateur lorsque <strong>next()</strong> ne renvoie rien.</p>

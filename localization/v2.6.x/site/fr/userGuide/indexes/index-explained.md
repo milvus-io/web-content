@@ -124,7 +124,7 @@ summary: >-
 </ul>
 <h3 id="Quantization" class="common-anchor-header">Quantification</h3><p>La quantification réduit l'empreinte mémoire et les coûts de calcul grâce à une représentation plus grossière :</p>
 <ul>
-<li><p>La<strong>quantification scalaire</strong> (par exemple <strong>SQ8</strong>) permet à Milvus de comprimer chaque dimension vectorielle en un seul octet (8 bits), ce qui réduit l'utilisation de la mémoire de 75 % par rapport aux nombres flottants de 32 bits, tout en préservant une précision raisonnable.</p></li>
+<li><p>La<strong>quantification scalaire</strong> (par exemple <strong>SQ8</strong>) permet à Milvus de comprimer chaque dimension vectorielle en un seul octet (8 bits), ce qui réduit l'utilisation de la mémoire de 75 % par rapport aux nombres flottants de 32 bits tout en préservant une précision raisonnable.</p></li>
 <li><p>La<strong>quantification par produit</strong><strong>(PQ)</strong> permet à Milvus de diviser les vecteurs en sous-vecteurs et de les coder à l'aide d'un regroupement basé sur un livre de codes. Cela permet d'obtenir des taux de compression plus élevés (par exemple, 4-32x) au prix d'une réduction marginale du rappel, ce qui le rend adapté aux environnements à mémoire limitée.</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">Affineur</h3><p>La quantification entraîne intrinsèquement des pertes. Pour maintenir le taux de rappel, la quantification produit systématiquement plus de candidats top-K que nécessaire, ce qui permet aux raffineurs d'utiliser une plus grande précision pour sélectionner davantage les résultats top-K parmi ces candidats, améliorant ainsi le taux de rappel.</p>
@@ -284,7 +284,7 @@ summary: >-
 </tr>
 </table></p></li>
 <li><p><strong>Calculer la surcharge de raffinement.</strong></p>
-<p>Les variantes du FVI sont souvent associées à un affineur pour reclasser les candidats. Pour une recherche extrayant les 10 premiers résultats avec un taux d'expansion de 5, le surcoût lié à l'affinage peut être estimé comme suit :</p>
+<p>Les variantes du FVI sont souvent associées à un affineur pour reclasser les candidats. Pour une recherche extrayant les 10 premiers résultats avec un taux d'expansion de 5, la surcharge de raffinement peut être estimée comme suit :</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>

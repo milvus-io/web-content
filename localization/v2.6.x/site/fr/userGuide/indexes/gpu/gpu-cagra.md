@@ -146,7 +146,7 @@ res = MilvusClient.search(
      <td><p>Décide si le jeu de données original doit être mis en cache dans la mémoire du GPU. Valeurs possibles :</p>
 <ul>
 <li><p><code translate="no">"true"</code>: Met en cache l'ensemble de données original pour améliorer le rappel en affinant les résultats de la recherche.</p></li>
-<li><p><code translate="no">"false"</code>: Ne met pas en cache le jeu de données original pour économiser la mémoire du GPU.</p></li>
+<li><p><code translate="no">"false"</code>: Ne met pas en cache l'ensemble de données original pour économiser la mémoire du GPU.</p></li>
 </ul></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>

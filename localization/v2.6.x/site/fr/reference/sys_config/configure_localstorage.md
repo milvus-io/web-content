@@ -2,9 +2,9 @@
 id: configure_localstorage.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure localStorage for Milvus.
+summary: Découvrez comment configurer localStorage pour Milvus.
 ---
-<h1 id="localStorage-related-Configurations" class="common-anchor-header">localStorage-related Configurations<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="localStorage-related-Configurations" class="common-anchor-header">Configurations liées au stockage local<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,16 +37,16 @@ summary: Learn how to configure localStorage for Milvus.
     </button></h2><table id="localStorage.path">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la configuration</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Local path to where vector data are stored during a search or a query to avoid repetitve access to MinIO or S3 service.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      </td>
+        <li>Chemin local vers l'endroit où les données vectorielles sont stockées lors d'une recherche ou d'une requête afin d'éviter les accès répétitifs à MinIO ou au service S3.</li>      
+        <li>Attention : Modifier ce paramètre après avoir utilisé Milvus pendant un certain temps affectera l'accès aux anciennes données.</li>      
+        <li>Il est recommandé de modifier ce paramètre avant de démarrer Milvus pour la première fois.</li>      </td>
       <td>/var/lib/milvus/data/</td>
     </tr>
   </tbody>

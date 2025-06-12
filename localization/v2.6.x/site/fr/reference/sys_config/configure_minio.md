@@ -2,9 +2,9 @@
 id: configure_minio.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure minio for Milvus.
+summary: Apprenez à configurer minio pour Milvus.
 ---
-<h1 id="minio-related-Configurations" class="common-anchor-header">minio-related Configurations<button data-href="#minio-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="minio-related-Configurations" class="common-anchor-header">Configurations liées à Minio<button data-href="#minio-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: Learn how to configure minio for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of MinIO/S3/GCS or any other service supports S3 API, which is responsible for data persistence for Milvus.</p>
-<p>We refer to the storage service as MinIO/S3 in the following description for simplicity.</p>
+    </button></h1><p>La configuration liée à MinIO/S3/GCS ou à tout autre service prend en charge l'API S3, qui est responsable de la persistance des données pour Milvus.</p>
+<p>Par souci de simplicité, nous appelons le service de stockage MinIO/S3 dans la description suivante.</p>
 <h2 id="minioaddress" class="common-anchor-header"><code translate="no">minio.address</code><button data-href="#minioaddress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,17 +40,17 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>IP address of MinIO or S3 service.</li>      
-        <li>Environment variable: MINIO_ADDRESS</li>      
-        <li>minio.address and minio.port together generate the valid access to MinIO or S3 service.</li>      
-        <li>MinIO preferentially acquires the valid IP address from the environment variable MINIO_ADDRESS when Milvus is started.</li>      
-        <li>Default value applies when MinIO or S3 is running on the same network with Milvus.</li>      </td>
+        <li>Adresse IP du service MinIO ou S3.</li>      
+        <li>Variable d'environnement : MINIO_ADDRESS</li>      
+        <li>minio.address et minio.port génèrent ensemble l'accès valide au service MinIO ou S3.</li>      
+        <li>MinIO acquiert de préférence l'adresse IP valide à partir de la variable d'environnement MINIO_ADDRESS au démarrage de Milvus.</li>      
+        <li>La valeur par défaut s'applique lorsque MinIO ou S3 fonctionne sur le même réseau que Milvus.</li>      </td>
       <td>localhost</td>
     </tr>
   </tbody>
@@ -73,13 +73,13 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de l'adresse IP</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Port of MinIO or S3 service.      </td>
+      <td>        Port du service MinIO ou S3.      </td>
       <td>9000</td>
     </tr>
   </tbody>
@@ -102,18 +102,18 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.accessKeyID">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Access key ID that MinIO or S3 issues to user for authorized access.</li>      
-        <li>Environment variable: MINIO_ACCESS_KEY_ID or minio.accessKeyID</li>      
-        <li>minio.accessKeyID and minio.secretAccessKey together are used for identity authentication to access the MinIO or S3 service.</li>      
-        <li>This configuration must be set identical to the environment variable MINIO_ACCESS_KEY_ID, which is necessary for starting MinIO or S3.</li>      
-        <li>The default value applies to MinIO or S3 service that started with the default docker-compose.yml file.</li>      </td>
+        <li>ID de la clé d'accès que MinIO ou S3 délivre à l'utilisateur pour un accès autorisé.</li>      
+        <li>Variable d'environnement : MINIO_ACCESS_KEY_ID ou minio.accessKeyID</li>      
+        <li>minio.accessKeyID et minio.secretAccessKey sont utilisés ensemble pour l'authentification de l'identité afin d'accéder au service MinIO ou S3.</li>      
+        <li>Cette configuration doit être identique à la variable d'environnement MINIO_ACCESS_KEY_ID, qui est nécessaire pour démarrer MinIO ou S3.</li>      
+        <li>La valeur par défaut s'applique au service MinIO ou S3 qui a démarré avec le fichier docker-compose.yml par défaut.</li>      </td>
       <td>minioadmin</td>
     </tr>
   </tbody>
@@ -137,17 +137,17 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Secret key used to encrypt the signature string and verify the signature string on server. It must be kept strictly confidential and accessible only to the MinIO or S3 server and users.</li>      
-        <li>Environment variable: MINIO_SECRET_ACCESS_KEY or minio.secretAccessKey</li>      
-        <li>minio.accessKeyID and minio.secretAccessKey together are used for identity authentication to access the MinIO or S3 service.</li>      
-        <li>This configuration must be set identical to the environment variable MINIO_SECRET_ACCESS_KEY, which is necessary for starting MinIO or S3.</li>      
-        <li>The default value applies to MinIO or S3 service that started with the default docker-compose.yml file.</li>      </td>
+        <li>Clé secrète utilisée pour chiffrer la chaîne de signature et vérifier la chaîne de signature sur le serveur. Elle doit rester strictement confidentielle et n'être accessible qu'au serveur MinIO ou S3 et aux utilisateurs.</li>      
+        <li>Variable d'environnement : MINIO_SECRET_ACCESS_KEY ou minio.secretAccessKey</li>      
+        <li>minio.accessKeyID et minio.secretAccessKey sont utilisés ensemble pour l'authentification de l'identité afin d'accéder au service MinIO ou S3.</li>      
+        <li>Cette configuration doit être identique à la variable d'environnement MINIO_SECRET_ACCESS_KEY, qui est nécessaire pour démarrer MinIO ou S3.</li>      
+        <li>La valeur par défaut s'applique au service MinIO ou S3 qui a démarré avec le fichier docker-compose.yml par défaut.</li>      </td>
       <td>minioadmin</td>
     </tr>
   </tbody>
@@ -171,12 +171,12 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Switch value to control if to access the MinIO or S3 service through SSL.      </td>
+      <td>        Valeur du commutateur permettant de contrôler l'accès au service MinIO ou S3 via SSL.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -200,13 +200,13 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your CACert file      </td>
-      <td>/path/to/public.crt</td>
+      <td>        Chemin d'accès à votre fichier CACert      </td>
+      <td>/chemin/vers/public.crt</td>
     </tr>
   </tbody>
 </table>
@@ -228,19 +228,19 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.bucketName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Name of the bucket where Milvus stores data in MinIO or S3.</li>      
-        <li>Milvus 2.0.0 does not support storing data in multiple buckets.</li>      
-        <li>Bucket with this name will be created if it does not exist. If the bucket already exists and is accessible, it will be used directly. Otherwise, there will be an error.</li>      
-        <li>To share an MinIO instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see Operation FAQs.</li>      
-        <li>The data will be stored in the local Docker if Docker is used to start the MinIO service locally. Ensure that there is sufficient storage space.</li>      
-        <li>A bucket name is globally unique in one MinIO or S3 instance.</li>      </td>
+        <li>Nom du bac dans lequel Milvus stocke les données dans MinIO ou S3.</li>      
+        <li>Milvus 2.0.0 ne prend pas en charge le stockage des données dans plusieurs buckets.</li>      
+        <li>Le seau portant ce nom sera créé s'il n'existe pas. S'il existe déjà et qu'il est accessible, il sera utilisé directement. Dans le cas contraire, une erreur se produira.</li>      
+        <li>Pour partager une instance MinIO entre plusieurs instances Milvus, envisagez de modifier cette valeur pour chaque instance Milvus avant de les démarrer. Pour plus de détails, voir la FAQ sur les opérations.</li>      
+        <li>Les données seront stockées dans le Docker local si Docker est utilisé pour démarrer le service MinIO localement. Assurez-vous que l'espace de stockage est suffisant.</li>      
+        <li>Le nom d'un bucket est globalement unique dans une instance MinIO ou S3.</li>      </td>
       <td>a-bucket</td>
     </tr>
   </tbody>
@@ -264,18 +264,18 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Root prefix of the key to where Milvus stores data in MinIO or S3.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      
-        <li>To share an MinIO instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see Operation FAQs.</li>      
-        <li>Set an easy-to-identify root key prefix for Milvus if etcd service already exists.</li>      
-        <li>Changing this for an already running Milvus instance may result in failures to read legacy data.</li>      </td>
-      <td>files</td>
+        <li>Préfixe racine de la clé dans laquelle Milvus stocke les données dans MinIO ou S3.</li>      
+        <li>Il est recommandé de modifier ce paramètre avant de démarrer Milvus pour la première fois.</li>      
+        <li>Pour partager une instance MinIO entre plusieurs instances Milvus, envisagez de modifier ce paramètre à une valeur différente pour chaque instance Milvus avant de les démarrer. Pour plus de détails, voir la FAQ sur les opérations.</li>      
+        <li>Définir un préfixe de clé racine facile à identifier pour Milvus si le service etcd existe déjà.</li>      
+        <li>La modification de cette valeur pour une instance Milvus déjà en cours d'exécution peut entraîner des échecs de lecture des données héritées.</li>      </td>
+      <td>fichiers</td>
     </tr>
   </tbody>
 </table>
@@ -298,19 +298,19 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to useIAM role to access S3/GCS instead of access/secret keys</li>      
-        <li>For more information, refer to</li>      
-        <li>aws: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html</li>      
-        <li>gcp: https://cloud.google.com/storage/docs/access-control/iam</li>      
-        <li>aliyun (ack): https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/use-rrsa-to-enforce-access-control</li>      
-        <li>aliyun (ecs): https://www.alibabacloud.com/help/en/elastic-compute-service/latest/attach-an-instance-ram-role</li>      </td>
-      <td>false</td>
+        <li>Utiliser ou non le rôle IAM pour accéder à S3/GCS au lieu des clés d'accès/secrètes.</li>      
+        <li>Pour plus d'informations, voir</li>      
+        <li>aws : https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html</li>      
+        <li>gcp : https://cloud.google.com/storage/docs/access-control/iam</li>      
+        <li>aliyun (ack) : https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/use-rrsa-to-enforce-access-control</li>      
+        <li>aliyun (ecs) : https://www.alibabacloud.com/help/en/elastic-compute-service/latest/attach-an-instance-ram-role</li>      </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -332,21 +332,21 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.cloudProvider">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Cloud Provider of S3. Supports: "aws", "gcp", "aliyun".</li>      
-        <li>Cloud Provider of Google Cloud Storage. Supports: "gcpnative".</li>      
-        <li>You can use "aws" for other cloud provider supports S3 API with signature v4, e.g.: minio</li>      
-        <li>You can use "gcp" for other cloud provider supports S3 API with signature v2</li>      
-        <li>You can use "aliyun" for other cloud provider uses virtual host style bucket</li>      
-        <li>You can use "gcpnative" for the Google Cloud Platform provider. Uses service account credentials</li>      
-        <li>for authentication.</li>      
-        <li>When useIAM enabled, only "aws", "gcp", "aliyun" is supported for now</li>      </td>
+        <li>Fournisseur de cloud pour S3. Prend en charge : "aws", "gcp", "aliyun".</li>      
+        <li>Fournisseur en nuage de Google Cloud Storage. Prend en charge : "aws", "gcp", "aliyun" : "gcpnative".</li>      
+        <li>Vous pouvez utiliser "aws" pour les autres fournisseurs de cloud qui prennent en charge l'API S3 avec la signature v4, par exemple : minio.</li>      
+        <li>Vous pouvez utiliser "gcp" pour un autre fournisseur de cloud qui prend en charge l'API S3 avec la signature v2.</li>      
+        <li>Vous pouvez utiliser "aliyun" pour un autre fournisseur de cloud qui utilise un bucket de type hôte virtuel.</li>      
+        <li>Vous pouvez utiliser "gcpnative" pour le fournisseur Google Cloud Platform. Utilise les informations d'identification du compte de service</li>      
+        <li>pour l'authentification.</li>      
+        <li>Lorsque l'option useIAM est activée, seuls "aws", "gcp" et "aliyun" sont pris en charge pour l'instant.</li>      </td>
       <td>aws</td>
     </tr>
   </tbody>
@@ -370,14 +370,14 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The JSON content contains the gcs service account credentials.</li>      
-        <li>Used only for the "gcpnative" cloud provider.</li>      </td>
+        <li>Le contenu JSON contient les informations d'identification du compte du service gcs.</li>      
+        <li>Utilisé uniquement pour le fournisseur de cloud "gcpnative".</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -401,14 +401,14 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Custom endpoint for fetch IAM role credentials. when useIAM is true & cloudProvider is "aws".</li>      
-        <li>Leave it empty if you want to use AWS default endpoint</li>      </td>
+        <li>Point de terminaison personnalisé pour récupérer les informations d'identification du rôle IAM lorsque useIAM est vrai et que cloudProvider est "aws".</li>      
+        <li>Laissez-le vide si vous souhaitez utiliser le point de terminaison par défaut d'AWS.</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -431,13 +431,13 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.logLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Log level for aws sdk log. Supported level:  off, fatal, error, warn, info, debug, trace      </td>
+      <td>        Niveau de journalisation pour le journal du sdk d'aws. Niveaux pris en charge : off, fatal, error, warn, info, debug, trace     </td>
       <td>fatal</td>
     </tr>
   </tbody>
@@ -460,13 +460,13 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.region">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Specify minio storage system location region      </td>
+      <td>        Spécifier la région d'emplacement du système de stockage minio     </td>
       <td></td>
     </tr>
   </tbody>
@@ -490,13 +490,13 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether use virtual host mode for bucket      </td>
-      <td>false</td>
+      <td>        Utiliser ou non le mode hôte virtuel pour le seau    </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -519,12 +519,12 @@ summary: Learn how to configure minio for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minio timeout for request time in milliseconds      </td>
+      <td>        minio timeout pour le temps de requête en millisecondes      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -547,15 +547,15 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.listObjectsMaxKeys">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The maximum number of objects requested per batch in minio ListObjects rpc, </li>      
-        <li>0 means using oss client by default, decrease these configration if ListObjects timeout</li>      </td>
+        <li>Le nombre maximum d'objets demandés par lot dans le rpc minio ListObjects, </li>      
+        <li>0 signifie l'utilisation du client oss par défaut, diminuer cette configration si ListObjects timeout</li>      </td>
       <td>0</td>
     </tr>
   </tbody>

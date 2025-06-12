@@ -185,7 +185,7 @@ res = MilvusClient.search(
      <td><p>Nombre maximal de connexions （ou d'arêtes) que chaque nœud peut avoir dans le graphe, y compris les arêtes sortantes et entrantes. Ce paramètre affecte directement la construction de l'index et la recherche.</p></td>
      <td><p><strong>Type</strong>: Integer (nombre entier) <strong>Plage</strong>: [2, 2048]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">30</code> (jusqu'à 30 arêtes sortantes et 30 arêtes entrantes par nœud)</p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données à haute dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
+     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données de grande dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
 <p>Pensez à diminuer <code translate="no">M</code> lorsque l'utilisation de la mémoire et la vitesse de recherche sont des préoccupations majeures.</p>
 <p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [5, 100].</p></td>
    </tr>
@@ -222,7 +222,7 @@ res = MilvusClient.search(
      <td><p>Contrôle le nombre de sous-quantifieurs résiduels utilisés dans l'étape RQ. Un plus grand nombre de sous-quantificateurs permet d'obtenir une plus grande compression, mais peut entraîner une perte d'informations plus importante.</p></td>
      <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 16]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">2</code></p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">nrq</code> permet des étapes supplémentaires de sous-quantification résiduelle, ce qui peut conduire à une reconstruction plus précise des vecteurs originaux. Toutefois, cela implique également de stocker et de calculer davantage de sous-quantificateurs, ce qui se traduit par une taille d'index plus importante et un surcoût de calcul plus élevé.</p></td>
+     <td><p>Une valeur plus élevée de <code translate="no">nrq</code> permet des étapes supplémentaires de sous-quantification résiduelle, ce qui peut conduire à une reconstruction plus précise des vecteurs originaux. Toutefois, cela signifie également qu'il faut stocker et calculer davantage de sous-quantificateurs, ce qui entraîne une taille d'index plus importante et un surcoût de calcul plus élevé.</p></td>
    </tr>
    <tr>
      <td></td>

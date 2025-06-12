@@ -145,7 +145,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>l'article C passe en première position malgré une similarité moyenne parce qu'il est très récent (publié hier)</p></li>
 <li><p>L'article B passe en troisième position malgré une excellente similarité, car il est relativement ancien.</p></li>
-<li><p>L'article D utilise la distance L2 (plus elle est faible, mieux c'est), et son score est donc normalisé de 1,2 à 0,76 avant l'application de la décroissance.</p></li>
+<li><p>Le document D utilise la distance L2 (plus elle est faible, mieux c'est), de sorte que son score est normalisé de 1,2 à 0,76 avant l'application de la décroissance.</p></li>
 </ul>
 <h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">Choisir le bon classificateur de désintégration<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -260,7 +260,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Champ numérique pour le calcul du score de décroissance. Détermine l'attribut de données qui sera utilisé pour le calcul de la dégradation (par exemple, les horodatages pour la dégradation basée sur le temps, les coordonnées pour la dégradation basée sur l'emplacement). 
+     <td><p>Champ numérique pour le calcul du score de décroissance. Détermine l'attribut de données qui sera utilisé pour calculer la dégradation (par exemple, les horodatages pour la dégradation basée sur le temps, les coordonnées pour la dégradation basée sur l'emplacement). 
  Il doit s'agir d'un champ de votre collection qui contient des valeurs numériques pertinentes. Prend en charge INT8/16/32/64, FLOAT, DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>

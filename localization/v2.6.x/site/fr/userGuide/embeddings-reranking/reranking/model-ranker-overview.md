@@ -75,7 +75,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Récupération des candidats</strong>: Le système identifie l'ensemble initial de documents candidats sur la base de la similarité vectorielle.</p></li>
 <li><p><strong>Évaluation du modèle</strong>: La fonction Model Ranker traite les paires requête-document :</p>
 <ul>
-<li><p>envoie la requête originale et les documents candidats à un service de modèle externe</p></li>
+<li><p>Envoie la requête originale et les documents candidats à un service de modèle externe.</p></li>
 <li><p>Le modèle linguistique évalue la pertinence sémantique entre la requête et chaque document.</p></li>
 <li><p>Chaque document reçoit un score de pertinence basé sur la compréhension sémantique.</p></li>
 </ul></li>

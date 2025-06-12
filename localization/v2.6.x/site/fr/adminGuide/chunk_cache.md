@@ -1,8 +1,8 @@
 ---
 id: chunk_cache.md
-title: Configure Chunk Cache
+title: Configuration du cache de morceaux
 ---
-<h1 id="Configure-Chunk-Cache" class="common-anchor-header">Configure Chunk Cache<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
+<h1 id="Configure-Chunk-Cache" class="common-anchor-header">Configuration du cache de morceaux<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Configure Chunk Cache
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The chunk cache mechanism enables Milvus to pre-load data into cache on the local hard disk of the query nodes before it is needed. This mechanism significantly improves vector retrieval performance by reducing the time it takes to load data from disk to memory.</p>
-<h2 id="Background" class="common-anchor-header">Background<button data-href="#Background" class="anchor-icon" translate="no">
+    </button></h1><p>Le mécanisme de cache de morceaux permet à Milvus de précharger les données en cache sur le disque dur local des nœuds d'interrogation avant qu'elles ne soient nécessaires. Ce mécanisme améliore considérablement les performances de recherche vectorielle en réduisant le temps nécessaire au chargement des données du disque vers la mémoire.</p>
+<h2 id="Background" class="common-anchor-header">Contexte<button data-href="#Background" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,9 +33,9 @@ title: Configure Chunk Cache
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before conducting queries to retrieve vectors, Milvus needs to load the data from object storage to the memory cache on the local hard disk of the query nodes. This is a time-consuming process. Before all data is loaded, Milvus may respond to some vector retrieval requests with a delay.</p>
-<p>To improve the query performance, Milvus provides a chunk cache mechanism to pre-load data from object storage into the cache on the local hard disk before it is needed. When a query request is received, the Segcore first checks if the data is in the cache, instead of the object storage. If the data is in the cache, Segcore can quickly retrieve it from the cache and return the result to the client.</p>
-<h2 id="Configure-Chunk-Cache" class="common-anchor-header">Configure Chunk Cache<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
+    </button></h2><p>Avant d'effectuer des requêtes pour récupérer des vecteurs, Milvus doit charger les données du stockage d'objets dans le cache de la mémoire sur le disque dur local des nœuds d'interrogation. Ce processus prend beaucoup de temps. Avant que toutes les données ne soient chargées, Milvus peut répondre à certaines demandes d'extraction de vecteurs avec un certain retard.</p>
+<p>Pour améliorer les performances des requêtes, Milvus fournit un mécanisme de cache de morceaux pour précharger les données du stockage d'objets dans le cache sur le disque dur local avant qu'elles ne soient nécessaires. Lorsqu'une requête est reçue, le Segcore vérifie d'abord si les données se trouvent dans le cache, au lieu du stockage d'objets. Si les données sont dans le cache, le Segcore peut rapidement les extraire du cache et renvoyer le résultat au client.</p>
+<h2 id="Configure-Chunk-Cache" class="common-anchor-header">Configurer le Chunk Cache<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,28 +50,28 @@ title: Configure Chunk Cache
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This guide provides instructions on how to configure the chunk cache mechanism for a Milvus instance. Configuration varies with the way you install the Milvus instance.</p>
+    </button></h2><p>Ce guide fournit des instructions sur la manière de configurer le mécanisme de cache de morceaux pour une instance Milvus. La configuration varie en fonction du mode d'installation de l'instance Milvus.</p>
 <ul>
-<li><p>For Milvus instances installed using Helm Charts</p>
-<p>Add the configuration to the <code translate="no">values.yaml</code> file under the <code translate="no">config</code> section. For details, refer to <a href="/docs/configure-helm.md">Configure Milvus with Helm Charts</a>.</p></li>
-<li><p>For Milvus instances installed using Docker Compose</p>
-<p>Add the configuration to the <code translate="no">milvus.yaml</code> file you have used to start the Milvus instance. For details, refer to <a href="/docs/configure-docker.md">Configure Milvus with Docker Compose</a>.</p></li>
-<li><p>For Milvus instances installed using Operator</p>
-<p>Add the configuration to the <code translate="no">spec.components</code> section of the <code translate="no">Milvus</code> custom resource. For details, refer to <a href="/docs/configure_operator.md">Configure Milvus with Operator</a>.</p></li>
+<li><p>Pour les instances Milvus installées à l'aide de Helm Charts</p>
+<p>Ajouter la configuration au fichier <code translate="no">values.yaml</code> dans la section <code translate="no">config</code>. Pour plus de détails, voir <a href="/docs/fr/configure-helm.md">Configurer Milvus avec Helm Charts</a>.</p></li>
+<li><p>Pour les instances Milvus installées à l'aide de Docker Compose</p>
+<p>Ajouter la configuration au fichier <code translate="no">milvus.yaml</code> que vous avez utilisé pour démarrer l'instance Milvus. Pour plus de détails, voir <a href="/docs/fr/configure-docker.md">Configurer Milvus avec Docker Compose</a>.</p></li>
+<li><p>Pour les instances Milvus installées à l'aide de Operator</p>
+<p>Ajouter la configuration à la section <code translate="no">spec.components</code> de la ressource personnalisée <code translate="no">Milvus</code>. Pour plus de détails, voir <a href="/docs/fr/configure_operator.md">Configurer Milvus avec Operator</a>.</p></li>
 </ul>
-<h3 id="Configuration-options" class="common-anchor-header">Configuration options</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
+<h3 id="Configuration-options" class="common-anchor-header">Options de configuration</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
     <span class="hljs-attr">cache:</span>
         <span class="hljs-attr">warmup:</span> <span class="hljs-string">async</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">warmup</code> parameter determines whether Milvus pre-loads data from the object storage into the cache on the local hard disk of the query nodes before it is needed. This parameter defaults to <code translate="no">disable</code>. Possible options are as follows:</p>
+<p>Le paramètre <code translate="no">warmup</code> détermine si Milvus précharge les données du stockage d'objets dans le cache du disque dur local des nœuds de requête avant qu'elles ne soient nécessaires. La valeur par défaut de ce paramètre est <code translate="no">disable</code>. Les options possibles sont les suivantes :</p>
 <ul>
-<li><code translate="no">async</code>: Milvus pre-loads data asynchronously in the background, which does not affect the time it takes to load a collection. However, users may experience a delay when retrieving vectors for a short period of time after the load process is complete.  This is the default option.</li>
-<li><code translate="no">sync</code>: Milvus pre-loads data synchronously, which may affect the time it takes to load a collection. However, users can perform queries immediately after the load process is complete without any delay.</li>
-<li><code translate="no">disable</code>: Milvus does not pre-load data into the memory cache.</li>
+<li><code translate="no">async</code>: Milvus précharge les données de manière asynchrone en arrière-plan, ce qui n'affecte pas le temps de chargement d'une collection. Toutefois, les utilisateurs peuvent subir un retard lors de la récupération des vecteurs pendant une courte période après la fin du processus de chargement.  Il s'agit de l'option par défaut.</li>
+<li><code translate="no">sync</code>: Milvus précharge les données de manière synchrone, ce qui peut affecter le temps de chargement d'une collection. Toutefois, les utilisateurs peuvent effectuer des requêtes immédiatement après la fin du processus de chargement, sans délai.</li>
+<li><code translate="no">disable</code>: Milvus ne précharge pas les données dans le cache mémoire.</li>
 </ul>
-<p>Note that the chunk cache settings also apply when new data is inserted into collections or the collection indexes are rebuilt.</p>
+<p>Notez que les paramètres du cache de morceaux s'appliquent également lorsque de nouvelles données sont insérées dans les collections ou que les index des collections sont reconstruits.</p>
 <h3 id="FAQ" class="common-anchor-header">FAQ</h3><ul>
-<li><p><strong>How can I determine whether the chunk cache mechanism is working correctly?</strong></p>
-<p>You are advised to check the latency of a search or query request after loading a collection. If the latency is significantly higher than expected (e.g., several seconds), it may indicate that the chunk cache mechanism is still working.</p>
-<p>If the query latency stays high for a long time. You can check the throughput of the object storage to ensure that the chunk cache is still working. In normal cases, the working chunk cache will generate high throughput on the object storage. Alternatively, you can simply try chunk cache in the <code translate="no">sync</code> mode.</p></li>
+<li><p><strong>Comment puis-je déterminer si le mécanisme de cache de morceaux fonctionne correctement ?</strong></p>
+<p>Il est conseillé de vérifier la latence d'une recherche ou d'une requête après le chargement d'une collection. Si le temps de latence est beaucoup plus long que prévu (par exemple, plusieurs secondes), cela peut indiquer que le mécanisme de cache par morceaux fonctionne encore.</p>
+<p>Si la latence de la requête reste élevée pendant une longue période. Vous pouvez vérifier le débit du stockage d'objets pour vous assurer que le cache de morceaux fonctionne toujours. Dans des cas normaux, le cache de morceaux qui fonctionne génère un débit élevé sur le stockage d'objets. Vous pouvez également essayer le cache de morceaux en mode <code translate="no">sync</code>.</p></li>
 </ul>
