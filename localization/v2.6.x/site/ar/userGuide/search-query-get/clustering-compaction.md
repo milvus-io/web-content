@@ -1,12 +1,12 @@
 ---
 id: clustering-compaction.md
-title: Clustering Compaction
+title: ضغط التجميع
 summary: >-
-  Clustering compaction is designed to improve search performance and reduce
-  costs in large collections. This guide will help you understand clustering
-  compaction and how this feature can improve search performance.
+  تم تصميم ضغط التجميع لتحسين أداء البحث وتقليل التكاليف في المجموعات الكبيرة.
+  سيساعدك هذا الدليل على فهم ضغط المجموعات وكيف يمكن لهذه الميزة تحسين أداء
+  البحث.
 ---
-<h1 id="Clustering-Compaction" class="common-anchor-header">Clustering Compaction<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
+<h1 id="Clustering-Compaction" class="common-anchor-header">ضغط التجميع<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Clustering compaction is designed to improve search performance and reduce costs in large collections. This guide will help you understand clustering compaction and how this feature can improve search performance.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>تم تصميم ضغط التجميع لتحسين أداء البحث وتقليل التكاليف في المجموعات الكبيرة. سيساعدك هذا الدليل على فهم ضغط التجميع وكيف يمكن لهذه الميزة تحسين أداء البحث.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,23 +37,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus stores incoming entities in segments within a collection and seals a segment when it is full. If this happens, a new segment is created to accommodate additional entities. As a result, entities are arbitrarily distributed across segments. This distribution requires Milvus to search multiple segments to find the nearest neighbors to a given query vector.</p>
+    </button></h2><p>يقوم Milvus بتخزين الكيانات الواردة في مقاطع داخل مجموعة ويغلق المقطع عندما يمتلئ. إذا حدث ذلك، يتم إنشاء مقطع جديد لاستيعاب كيانات إضافية. ونتيجة لذلك، يتم توزيع الكيانات بشكل اعتباطي عبر المقاطع. يتطلب هذا التوزيع من Milvus البحث في مقاطع متعددة للعثور على أقرب الجيران إلى متجه استعلام معين.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
-    <span>Without Clustering Compaction</span>
-  </span>
-</p>
-<p>If Milvus can distribute entities among segments based on the values in a specific field, the search scope can be restricted within one segment, thus improving search performance.</p>
-<p><strong>Clustering Compaction</strong> is a feature in Milvus that redistributes entities among segments in a collection based on the values in a scalar field. To enable this feature, you first need to select a scalar field as the <strong>clustering key</strong>. This allows Milvus to redistribute entities into a segment when their clustering key values fall within a specific range. When you trigger a clustering compaction, Milvus generates/updates a global index called <strong>PartitionStats</strong>, which records the mapping relationship between segments and clustering key values.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   </span> <span class="img-wrapper"> <span>بدون ضغط التجميع</span> </span></p>
+<p>إذا كان بإمكان Milvus توزيع الكيانات بين المقاطع بناءً على القيم الموجودة في حقل معين، يمكن تقييد نطاق البحث داخل مقطع واحد، وبالتالي تحسين أداء البحث.</p>
+<p><strong>ضغط التجميع</strong> هو ميزة في Milvus تقوم بإعادة توزيع الكيانات بين المقاطع في مجموعة بناءً على القيم الموجودة في حقل قياسي. لتمكين هذه الميزة، تحتاج أولاً إلى تحديد حقل قياسي <strong>كمفتاح ت</strong>جميع. وهذا يسمح ل Milvus بإعادة توزيع الكيانات في مقطع عندما تقع قيم مفتاح التجميع الخاصة بها ضمن نطاق محدد. عندما تقوم بتشغيل ضغط التجميع، يقوم Milvus بإنشاء/تحديث فهرس عام يسمى <strong>PartitionStats،</strong> والذي يسجل علاقة التعيين بين المقاطع وقيم مفاتيح التجميع.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
-    <span>Clustering Compaction</span>
-  </span>
-</p>
-<p>Using <strong>PartitionStats</strong> as a reference, Milvus can prune irrelevant data upon receiving a search/query request that carries a clustering key value and restricting the search scope within the segments mapping to the value, thus improving search performance. For details on performance improvement, refer to <a href="/docs/clustering-compaction.md#Benchmark-Test">Benchmark tests</a>.</p>
-<h2 id="Use-Clustering-Compaction" class="common-anchor-header">Use Clustering Compaction<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
+   </span> <span class="img-wrapper"> <span>ضغط التجميع</span> </span></p>
+<p>باستخدام <strong>PartitionStats</strong> كمرجع، يمكن ل Milvus تشذيب البيانات غير ذات الصلة عند تلقي طلب بحث/استعلام يحمل قيمة مفتاح تجميع وتقييد نطاق البحث داخل المقاطع التي تم تعيينها إلى القيمة، وبالتالي تحسين أداء البحث. للحصول على تفاصيل حول تحسين الأداء، راجع <a href="/docs/ar/clustering-compaction.md#Benchmark-Test">الاختبارات المعيارية</a>.</p>
+<h2 id="Use-Clustering-Compaction" class="common-anchor-header">استخدام ضغط التجميع<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,8 +64,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The Clustering Compaction feature in Milvus is highly configurable. You can choose to trigger it manually or set it to be triggered automatically at intervals by Milvus. To enable clustering compaction, do as follows:</p>
-<h3 id="Global-Configuration" class="common-anchor-header">Global Configuration</h3><p>You need to modify your Milvus configuration file as shown below.</p>
+    </button></h2><p>ميزة ضغط التجميع في Milvus قابلة للتكوين بدرجة كبيرة. يمكنك اختيار تشغيله يدويًا أو تعيينه ليتم تشغيله تلقائيًا على فترات بواسطة Milvus. لتمكين ضغط التجميع، قم بما يلي:</p>
+<h3 id="Global-Configuration" class="common-anchor-header">التكوين العام</h3><p>تحتاج إلى تعديل ملف تكوين Milvus كما هو موضح أدناه.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">compaction:</span>
     <span class="hljs-attr">clustering:</span>
@@ -93,46 +89,46 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Configure Item</p></th>
-     <th><p>Description</p></th>
-     <th><p>Default Value</p></th>
+     <th><p>تكوين العنصر</p></th>
+     <th><p>الوصف</p></th>
+     <th><p>القيمة الافتراضية</p></th>
    </tr>
    <tr>
      <td colspan="3"><p><code translate="no">dataCoord.compaction.clustering</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">enable</code></p></td>
-     <td><p>Specifies whether to enable clustering compaction. Setting this to <code translate="no">true</code> if you need to enable this feature for every collection having a clustering key.</p></td>
-     <td><p>false</p></td>
+     <td><p>تحديد ما إذا كان سيتم تمكين ضغط التجميع أم لا. تعيين هذا إلى <code translate="no">true</code> إذا كنت بحاجة إلى تمكين هذه الميزة لكل مجموعة لها مفتاح تجميع.</p></td>
+     <td><p>خطأ</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">autoEnable</code></p></td>
-     <td><p>Specifies whether to enable automatically triggered compaction. Setting this to <code translate="no">true</code> indicates that Milvus compacts the collections having a clustering key at the specified intervals.</p></td>
-     <td><p>false</p></td>
+     <td><p>تحديد ما إذا كنت تريد تمكين الضغط الذي يتم تشغيله تلقائياً. يشير تعيين هذا إلى <code translate="no">true</code> إلى أن Milvus يقوم بضغط المجموعات التي تحتوي على مفتاح تجميع في الفواصل الزمنية المحددة.</p></td>
+     <td><p>خطأ</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">triggerInterval</code></p></td>
-     <td><p>Specifies the interval in milliseconds at which Milvus starts clustering compaction. This applies only when you set <code translate="no">autoEnable</code> to <code translate="no">true</code>.</p></td>
+     <td><p>تحديد الفاصل الزمني بالمللي ثانية الذي يبدأ عنده Milvus في ضغط التجميع. ينطبق هذا فقط عند تعيين <code translate="no">autoEnable</code> إلى <code translate="no">true</code>.</p></td>
      <td></td>
    </tr>
    <tr>
      <td><p><code translate="no">minInterval</code></p></td>
-     <td><p>Specifies the minimum interval in milliseconds. This applies only when you set <code translate="no">autoEnable</code> to <code translate="no">true</code>.</p><p>Setting this to an integer greater than <code translate="no">triggerInterval</code> helps avoid repeated compactions within a short period.</p></td>
+     <td><p>يحدد الحد الأدنى للفاصل الزمني بالمللي ثانية. ينطبق هذا فقط عند تعيين <code translate="no">autoEnable</code> إلى <code translate="no">true</code>.</p><p>يساعد تعيين هذا إلى عدد صحيح أكبر من <code translate="no">triggerInterval</code> على تجنب عمليات التجميع المتكررة خلال فترة قصيرة.</p></td>
      <td></td>
    </tr>
    <tr>
      <td><p><code translate="no">maxInterval</code></p></td>
-     <td><p>Specifies the maximum interval in milliseconds. This applies only when you set <code translate="no">autoEnable</code> to <code translate="no">true</code>.</p><p>Once Milvus detects that a collection has not been clustering-compacted for a duration longer than this value, it forces a clustering compaction.</p></td>
+     <td><p>يحدد الحد الأقصى للفاصل الزمني بالمللي ثانية. ينطبق هذا فقط عند تعيين <code translate="no">autoEnable</code> إلى <code translate="no">true</code>.</p><p>بمجرد أن يكتشف Milvus أن المجموعة لم يتم تجميعها-مضغوطة لمدة أطول من هذه القيمة، فإنه يفرض عملية ضغط تجميع.</p></td>
      <td></td>
    </tr>
    <tr>
      <td><p><code translate="no">newDataSizeThreshold</code></p></td>
-     <td><p>Specifies the upper threshold to trigger a clustering compaction. This applies only when you set <code translate="no">autoEnable</code> to <code translate="no">true</code>.</p><p>Once Milvus detects that the data volume in a collection exceeds this value, it initiates a clustering compaction process.</p></td>
+     <td><p>يحدد العتبة العليا لتشغيل ضغط التجميع. ينطبق هذا فقط عندما تقوم بتعيين <code translate="no">autoEnable</code> إلى <code translate="no">true</code>.</p><p>بمجرد أن يكتشف Milvus أن حجم البيانات في مجموعة ما يتجاوز هذه القيمة، فإنه يبدأ عملية ضغط التجميع.</p></td>
      <td></td>
    </tr>
    <tr>
      <td><p><code translate="no">timeout</code></p></td>
-     <td><p>Specifies the timeout duration for a clustering compaction. A clustering compaction fails if its execution time exceeds this value.</p></td>
+     <td><p>تحديد مدة المهلة لضغط التجميع. تفشل عملية ضغط التجميع إذا تجاوز وقت تنفيذها هذه القيمة.</p></td>
      <td></td>
    </tr>
    <tr>
@@ -140,7 +136,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">enableSegmentPrune</code></p></td>
-     <td><p>Specifies whether Milvus prunes data by referring to PartitionStats upon receiving search/query requests. Set this to <code translate="no">true</code> so Milvus can prune data upon receiving search/query requests by referring to PartitionStats.</p></td>
+     <td><p>يحدد ما إذا كان Milvus يقوم بتخفيض البيانات بالرجوع إلى PartitionStats عند تلقي طلبات البحث/الاستعلام. تعيين هذا إلى <code translate="no">true</code> بحيث يمكن لـ Milvus تشذيب البيانات عند تلقي طلبات البحث/الاستعلام بالرجوع إلى PartitionStats.</p></td>
      <td></td>
    </tr>
    <tr>
@@ -148,12 +144,12 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">memoryBufferRatio</code></p></td>
-     <td><p>Specifies the memory buffer ratio for clustering compaction tasks.  Milvus flushes data when the data size exceeds the allocated buffer size calculated using this ratio.</p></td>
+     <td><p>تحديد نسبة المخزن المؤقت للذاكرة لمهام ضغط التجميع.  يقوم Milvus بمسح البيانات عندما يتجاوز حجم البيانات حجم المخزن المؤقت المخصص المحسوب باستخدام هذه النسبة.</p></td>
      <td></td>
    </tr>
    <tr>
      <td><p><code translate="no">workPoolSize</code></p></td>
-     <td><p>Specifies the worker pool size for a clustering compaction task.</p></td>
+     <td><p>يحدد حجم تجمع العاملين لمهمة ضغط التجميع.</p></td>
      <td></td>
    </tr>
    <tr>
@@ -161,19 +157,14 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">usePartitionKeyAsClusteringKey</code></p></td>
-     <td><p>Specifies whether to use the partition key in collections as the clustering key. Setting this to true makes Milvus treat the partition keys in collections as the clustering key. </p><p>You can always override this setting in a collection by explicitly setting a clustering key.</p></td>
+     <td><p>تحديد ما إذا كان سيتم استخدام مفتاح التقسيم في المجموعات كمفتاح تجميع. تعيين هذا إلى صواب يجعل Milvus يعامل مفاتيح التقسيم في المجموعات كمفتاح التجميع. </p><p>يمكنك دائمًا تجاوز هذا الإعداد في المجموعة عن طريق تعيين مفتاح التجميع بشكل صريح.</p></td>
      <td></td>
    </tr>
 </table>
-<p>To apply the above changes to your Milvus cluster, please follow the steps in <a href="/docs/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a> and <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
-<h3 id="Collection-Configuration" class="common-anchor-header">Collection Configuration</h3><p>For clustering compacting in a specific collection, you should select a scalar field from the collection as the clustering key.</p>
+<p>لتطبيق التغييرات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">تكوين التجميع</h3><p>لضغط التجميع في مجموعة معينة، يجب عليك تحديد حقل قياسي من المجموعة كمفتاح التجميع.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -282,16 +273,11 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>You can use the scalar fields of the following data types as the clustering key: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code>, and <code translate="no">VarChar</code>.</p>
+<p>يمكنك استخدام الحقول القياسية لأنواع البيانات التالية كمفتاح التجميع: <code translate="no">Int8</code> و <code translate="no">Int16</code> و و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code> و <code translate="no">VarChar</code>.</p>
 </div>
-<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">Trigger Clustering Compaction</h3><p>If you have enabled automatic clustering compaction, Milvus automatically triggers the compaction at the specified interval. Alternatively, you can manually trigger the compaction as follows:</p>
+<h3 id="Trigger-Clustering-Compaction" class="common-anchor-header">تشغيل ضغط التجميع التجميعي</h3><p>إذا قمت بتمكين الضغط التجميعي التلقائي للتجميع، يقوم برنامج Milvus تلقائيًا بتشغيل الضغط في الفاصل الزمني المحدد. بدلاً من ذلك، يمكنك تشغيل الضغط يدويًا على النحو التالي:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># trigger a manual compaction</span>
 job_id = client.compact(
     collection_name=<span class="hljs-string">&quot;clustering_test&quot;</span>, 
@@ -334,7 +320,7 @@ System.out.println(stateResp.getState());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Benchmark-Test" class="common-anchor-header">Benchmark Test<button data-href="#Benchmark-Test" class="anchor-icon" translate="no">
+<h2 id="Benchmark-Test" class="common-anchor-header">اختبار معياري<button data-href="#Benchmark-Test" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -349,24 +335,24 @@ System.out.println(stateResp.getState());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data volume and query patterns combined determine the performance improvement clustering compaction can bring. An internal benchmark test demonstrates that clustering compaction yields up to a 25-fold improvement in queries per second (QPS).</p>
-<p>The benchmark test is on a collection containing entities from a 20-million, 768-dimensional LAION dataset with the <code translate="no">key</code> field designated as the clustering key. After clustering compaction is triggered in the collection, concurrent searches are sent until the CPU usage reaches a high water level.</p>
+    </button></h2><p>يحدد حجم البيانات وأنماط الاستعلام مجتمعةً تحسين الأداء الذي يمكن أن يحققه ضغط التجميع. يُظهر اختبار معياري داخلي أن ضغط التجميع يؤدي إلى تحسين يصل إلى 25 ضعفًا في الاستعلامات في الثانية (QPS).</p>
+<p>يتم إجراء الاختبار المعياري على مجموعة تحتوي على كيانات من مجموعة بيانات LAION ذات 20 مليونًا و768 بُعدًا مع تعيين الحقل <code translate="no">key</code> كمفتاح تجميع. بعد تشغيل ضغط التجميع في المجموعة، يتم إرسال عمليات البحث المتزامنة حتى يصل استخدام وحدة المعالجة المركزية إلى مستوى عالٍ من وحدة المعالجة المركزية.</p>
 <table>
    <tr>
-     <th rowspan="2"><p>Search filter</p></th>
-     <th rowspan="2"><p>Prune ratio</p></th>
-     <th colspan="5"><p>Latency</p></th>
-     <th rowspan="2"><p>Reqs/s</p></th>
+     <th rowspan="2"><p>مرشح البحث</p></th>
+     <th rowspan="2"><p>نسبة التقليم</p></th>
+     <th colspan="5"><p>الكمون</p></th>
+     <th rowspan="2"><p>الطلبات/الثانية</p></th>
    </tr>
    <tr>
-     <td><p>Avg</p></td>
-     <td><p>Min</p></td>
-     <td><p>Max</p></td>
-     <td><p>Median</p></td>
+     <td><p>متوسط متوسط</p></td>
+     <td><p>الحد الأدنى</p></td>
+     <td><p>الحد الأقصى</p></td>
+     <td><p>المتوسط</p></td>
      <td><p>TP99</p></td>
    </tr>
    <tr>
-     <td><p>N/A</p></td>
+     <td><p>غير متاح</p></td>
      <td><p>0%</p></td>
      <td><p>1685</p></td>
      <td><p>672</p></td>
@@ -376,7 +362,7 @@ System.out.println(stateResp.getState());
      <td><p>17.75</p></td>
    </tr>
    <tr>
-     <td><p>key&gt;200 and key &lt; 800</p></td>
+     <td><p>مفتاح&gt; 200 ومفتاح &lt; 800</p></td>
      <td><p>40.2%</p></td>
      <td><p>1045</p></td>
      <td><p>47</p></td>
@@ -386,7 +372,7 @@ System.out.println(stateResp.getState());
      <td><p>28.38</p></td>
    </tr>
    <tr>
-     <td><p>key&gt;200 and key &lt; 600</p></td>
+     <td><p>مفتاح&gt; 200 ومفتاح &lt; 600</p></td>
      <td><p>59.8%</p></td>
      <td><p>829</p></td>
      <td><p>45</p></td>
@@ -396,7 +382,7 @@ System.out.println(stateResp.getState());
      <td><p>35.78</p></td>
    </tr>
    <tr>
-     <td><p>key&gt;200 and key &lt; 400</p></td>
+     <td><p>مفتاح&gt; 200 ومفتاح &lt; 400</p></td>
      <td><p>79.5%</p></td>
      <td><p>550</p></td>
      <td><p>100</p></td>
@@ -406,7 +392,7 @@ System.out.println(stateResp.getState());
      <td><p>54.00</p></td>
    </tr>
    <tr>
-     <td><p>key==1000</p></td>
+     <td><p>المفتاح==1000</p></td>
      <td><p>99%</p></td>
      <td><p>68</p></td>
      <td><p>24</p></td>
@@ -416,8 +402,8 @@ System.out.println(stateResp.getState());
      <td><p>431.41</p></td>
    </tr>
 </table>
-<p>As the search range narrows in the search filters, the prune ratio increases. This means that more entities are skipped during the search process. When comparing the statistics in the first and last rows, you can see that searches without clustering compaction require scanning the entire collection. On the other hand, searches with clustering compaction using a specific key can achieve up to a 25-fold improvement.</p>
-<h2 id="Best-Practices" class="common-anchor-header">Best Practices<button data-href="#Best-Practices" class="anchor-icon" translate="no">
+<p>كلما ضاق نطاق البحث في مرشحات البحث، تزداد نسبة التقليم. هذا يعني أنه يتم تخطي المزيد من الكيانات أثناء عملية البحث. عند مقارنة الإحصائيات في الصفين الأول والأخير، يمكنك أن ترى أن عمليات البحث بدون ضغط التجميع تتطلب مسح المجموعة بأكملها. من ناحية أخرى، يمكن لعمليات البحث مع ضغط التجميع باستخدام مفتاح محدد أن تحقق تحسنًا يصل إلى 25 ضعفًا.</p>
+<h2 id="Best-Practices" class="common-anchor-header">أفضل الممارسات<button data-href="#Best-Practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -432,13 +418,13 @@ System.out.println(stateResp.getState());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here are some tips for you to use clustering compaction efficiently:</p>
+    </button></h2><p>إليك بعض النصائح لاستخدام ضغط التجميع بكفاءة:</p>
 <ul>
-<li><p>Enable this for collections with large data volumes.</p>
-<p>Search performance improves with larger data volumes in a collection. It is a good choice to enable this feature for collections with over 1 million entities.</p></li>
-<li><p>Choose a proper clustering key.</p>
-<p>You can use scalar fields commonly employed as filtering conditions as the clustering key. For a collection that holds data from multiple tenants, you can utilize the field that distinguishes one tenant from another as the clustering key.</p></li>
-<li><p>Use the partition key as the clustering key.</p>
-<p>You can set <code translate="no">common.usePartitionKeyAsClusteringKey</code> to <code translate="no">true</code> if you want to enable this feature for all collections in your Milvus instance or if you still face performance issues in a large collection with a partition key. By doing so, you will have a clustering key and a partition key when you choose a scalar field in a collection as the partition key.</p>
-<p>Note that this setting does not prevent you from choosing another scalar field as the clustering key. The explicitly designated clustering key always takes precedence.</p></li>
+<li><p>قم بتمكين ذلك للمجموعات ذات أحجام البيانات الكبيرة.</p>
+<p>يتحسن أداء البحث مع وجود أحجام بيانات أكبر في المجموعة. من الجيد تمكين هذه الميزة للمجموعات التي تحتوي على أكثر من مليون كيان.</p></li>
+<li><p>اختر مفتاح تجميع مناسب.</p>
+<p>يمكنك استخدام الحقول القياسية المستخدمة عادةً كشروط تصفية كمفتاح تجميع. بالنسبة للمجموعات التي تحتوي على بيانات من مستأجرين متعددين، يمكنك استخدام الحقل الذي يميز مستأجر عن آخر كمفتاح تجميع.</p></li>
+<li><p>استخدم مفتاح التقسيم كمفتاح التجميع.</p>
+<p>يمكنك تعيين <code translate="no">common.usePartitionKeyAsClusteringKey</code> على <code translate="no">true</code> إذا كنت ترغب في تمكين هذه الميزة لجميع المجموعات في مثيل Milvus الخاص بك أو إذا كنت لا تزال تواجه مشكلات في الأداء في مجموعة كبيرة بمفتاح التقسيم. من خلال القيام بذلك، سيكون لديك مفتاح تجميع ومفتاح تقسيم عندما تختار حقلاً قياسيًا في مجموعة كمفتاح تقسيم.</p>
+<p>لاحظ أن هذا الإعداد لا يمنعك من اختيار حقل قياسي آخر كمفتاح تجميع. تكون الأولوية دائمًا لمفتاح التجميع المعين صراحةً.</p></li>
 </ul>

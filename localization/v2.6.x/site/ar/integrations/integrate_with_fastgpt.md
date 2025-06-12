@@ -1,11 +1,11 @@
 ---
 id: integrate_with_fastgpt.md
 summary: >-
-  This tutorial will guide you on how to swiftly deploy your own exclusive
-  FastGPT application using [Milvus](https://milvus.io/).
-title: Deploying FastGPT with Milvus
+  سيرشدك هذا البرنامج التعليمي إلى كيفية نشر تطبيق FastGPT الحصري الخاص بك بسرعة
+  باستخدام [Milvus] (https://milvus.io/).
+title: نشر FastGPT مع Milvus
 ---
-<h1 id="Deploying-FastGPT-with-Milvus" class="common-anchor-header">Deploying FastGPT with Milvus<button data-href="#Deploying-FastGPT-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Deploying-FastGPT-with-Milvus" class="common-anchor-header">نشر FastGPT مع Milvus<button data-href="#Deploying-FastGPT-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Deploying FastGPT with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://fastgpt.in/">FastGPT</a> is a knowledge-based question and answer system built on the LLM large language model, offering ready-to-use capabilities for data processing and model invocation. Furthermore, it enables workflow orchestration through Flow visualization, thus facilitating complex question and answer scenarios. This tutorial will guide you on how to swiftly deploy your own exclusive FastGPT application using <a href="https://milvus.io/">Milvus</a>.</p>
-<h2 id="Download-docker-composeyml" class="common-anchor-header">Download docker-compose.yml<button data-href="#Download-docker-composeyml" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://fastgpt.in/">FastGPT</a> هو نظام أسئلة وأجوبة قائم على المعرفة مبني على نموذج اللغة الكبيرة LLM، ويوفر إمكانات جاهزة للاستخدام لمعالجة البيانات واستدعاء النموذج. وعلاوةً على ذلك، فهو يتيح تنسيق سير العمل من خلال تصوّر التدفق، مما يسهّل سيناريوهات الأسئلة والأجوبة المعقدة. سيرشدك هذا البرنامج التعليمي إلى كيفية نشر تطبيق FastGPT الحصري الخاص بك بسرعة باستخدام <a href="https://milvus.io/">Milvus</a>.</p>
+<h2 id="Download-docker-composeyml" class="common-anchor-header">قم بتنزيل docker-compose.yml<button data-href="#Download-docker-composeyml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +36,8 @@ title: Deploying FastGPT with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ensure that you have already installed <a href="https://docs.docker.com/compose/">Docker Compose</a>.<br>
-Execute the command below to download the docker-compose.yml file.</p>
+    </button></h2><p>تأكد من أنك قمت بتثبيت <a href="https://docs.docker.com/compose/">Docker Compose</a> بالفعل.<br>
+نفّذ الأمر أدناه لتنزيل ملف docker-compose.yml.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> fastgpt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> fastgpt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -O https://raw.githubusercontent.com/labring/FastGPT/main/projects/app/data/config.json</span>
@@ -48,9 +48,9 @@ Execute the command below to download the docker-compose.yml file.</p>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/main/files/docker/docker-compose-zilliz.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>If you’re using the Zilliz version, adjust the <code translate="no">MILVUS_ADDRESS</code> and <code translate="no">MILVUS_TOKEN</code> link parameters in the docker-compose.yml file, which corresponds to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>إذا كنت تستخدم إصدار <a href="https://zilliz.com/cloud">Zilliz،</a> فقم بتعديل معلمات الرابط <code translate="no">MILVUS_ADDRESS</code> و <code translate="no">MILVUS_TOKEN</code> في ملف docker-compose.yml، والذي يتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 </blockquote>
-<h2 id="Launch-the-Container" class="common-anchor-header">Launch the Container<button data-href="#Launch-the-Container" class="anchor-icon" translate="no">
+<h2 id="Launch-the-Container" class="common-anchor-header">قم بتشغيل الحاوية<button data-href="#Launch-the-Container" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ Execute the command below to download the docker-compose.yml file.</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Execute in the same directory as docker-compose.yml. Ensure that the docker-compose version is ideally above 2.17, as some automation commands may not function otherwise.</p>
+    </button></h2><p>قم بالتشغيل في نفس دليل docker-compose.yml. تأكد من أن إصدار docker-compose أعلى من الإصدار 2.17 بشكل مثالي، حيث أن بعض أوامر الأتمتة قد لا تعمل بخلاف ذلك.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Launch the container</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Wait <span class="hljs-keyword">for</span> 10s, OneAPI typically needs to restart a few <span class="hljs-built_in">times</span> to initially connect to Mysql</span>
@@ -73,7 +73,7 @@ Execute the command below to download the docker-compose.yml file.</p>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display <span class="hljs-string">&#x27;channel not found&#x27;</span> <span class="hljs-keyword">if</span> not restarted, this can be temporarily resolved by manually restarting once, <span class="hljs-keyword">while</span> waiting <span class="hljs-keyword">for</span> the author<span class="hljs-string">&#x27;s fix)</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-string">docker restart oneapi</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Access-OneAPI-to-Add-Models" class="common-anchor-header">Access OneAPI to Add Models<button data-href="#Access-OneAPI-to-Add-Models" class="anchor-icon" translate="no">
+<h2 id="Access-OneAPI-to-Add-Models" class="common-anchor-header">الوصول إلى OneAPI لإضافة نماذج<button data-href="#Access-OneAPI-to-Add-Models" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,11 +88,11 @@ Execute the command below to download the docker-compose.yml file.</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>OneAPI can be accessed at <code translate="no">ip:3001</code>. The default username is root, and the password is 123456. You can alter the password after logging in.<br>
-Using OpenAI’s model as an example, click on the “Channel” tab, and select your chat model and embedding model under "Models".<br>
-Input your <a href="https://platform.openai.com/docs/quickstart">OpenAI API Key</a> in the “Secrets” section.<br>
-For the use of models beyond OpenAI, and further information, please consult <a href="https://doc.fastgpt.in/docs/development/one-api/">One API</a>.</p>
-<h2 id="Setting-Tokens" class="common-anchor-header">Setting Tokens<button data-href="#Setting-Tokens" class="anchor-icon" translate="no">
+    </button></h2><p>يمكن الوصول إلى OneAPI على <code translate="no">ip:3001</code>. اسم المستخدم الافتراضي هو الجذر، وكلمة المرور هي 123456. يمكنك تغيير كلمة المرور بعد تسجيل الدخول.<br>
+باستخدام نموذج OpenAI كمثال، انقر على علامة التبويب "القناة"، وحدد نموذج الدردشة ونموذج التضمين ضمن "النماذج".<br>
+أدخل <a href="https://platform.openai.com/docs/quickstart">مفتاح OpenAI API</a> الخاص بك في قسم "الأسرار".<br>
+لاستخدام النماذج خارج OpenAI، ولمزيد من المعلومات، يُرجى الرجوع إلى <a href="https://doc.fastgpt.in/docs/development/one-api/">One API</a>.</p>
+<h2 id="Setting-Tokens" class="common-anchor-header">إعداد الرموز<button data-href="#Setting-Tokens" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,9 +107,9 @@ For the use of models beyond OpenAI, and further information, please consult <a 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Click on the “Tokens” tab. By default, there is a token <code translate="no">Initial Root Token</code>. You can also create a new token and set a quota on your own.<br>
-Click “Copy” on your token, ensuring that the value of this token matches the <code translate="no">CHAT_API_KEY</code> value set in the docker-compose.yml file.</p>
-<h2 id="Accessing-FastGPT" class="common-anchor-header">Accessing FastGPT<button data-href="#Accessing-FastGPT" class="anchor-icon" translate="no">
+    </button></h2><p>انقر على علامة التبويب "الرموز". بشكل افتراضي، يوجد رمز مميز <code translate="no">Initial Root Token</code>. يمكنك أيضًا إنشاء رمز مميز جديد وتعيين حصة خاصة بك.<br>
+انقر فوق "نسخ" على الرمز المميز الخاص بك، مع التأكد من أن قيمة هذا الرمز المميز تتطابق مع قيمة <code translate="no">CHAT_API_KEY</code> المحددة في ملف docker-compose.yml.</p>
+<h2 id="Accessing-FastGPT" class="common-anchor-header">الوصول إلى FastGPT<button data-href="#Accessing-FastGPT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,8 +124,8 @@ Click “Copy” on your token, ensuring that the value of this token matches th
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>At present, FastGPT can be directly accessed at <code translate="no">ip:3000</code> (please mind the firewall). The login username is root, with the password set to <code translate="no">DEFAULT_ROOT_PSW</code> within the docker-compose.yml environment variable. Should you require domain name access, you would need to install and configure <a href="https://nginx.org/en/">Nginx</a> on your own.</p>
-<h2 id="Stop-the-Container" class="common-anchor-header">Stop the Container<button data-href="#Stop-the-Container" class="anchor-icon" translate="no">
+    </button></h2><p>في الوقت الحالي، يمكن الوصول إلى FastGPT مباشرةً على <code translate="no">ip:3000</code> (يرجى الانتباه إلى جدار الحماية). اسم المستخدم لتسجيل الدخول هو الجذر، مع تعيين كلمة المرور إلى <code translate="no">DEFAULT_ROOT_PSW</code> ضمن متغير البيئة docker-compose.yml. إذا كنت تحتاج إلى الوصول إلى اسم المجال، فستحتاج إلى تثبيت <a href="https://nginx.org/en/">Nginx</a> وتهيئته بنفسك.</p>
+<h2 id="Stop-the-Container" class="common-anchor-header">إيقاف الحاوية<button data-href="#Stop-the-Container" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -140,6 +140,6 @@ Click “Copy” on your token, ensuring that the value of this token matches th
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Run the following command to stop the container.</p>
+    </button></h2><p>قم بتشغيل الأمر التالي لإيقاف الحاوية.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>
 <button class="copy-code-btn"></button></code></pre>

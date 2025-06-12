@@ -2,9 +2,9 @@
 id: configure_etcd.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure etcd for Milvus.
+summary: تعرف على كيفية تهيئة etcd لـ Milvus.
 ---
-<h1 id="etcd-related-Configurations" class="common-anchor-header">etcd-related Configurations<button data-href="#etcd-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="etcd-related-Configurations" class="common-anchor-header">التكوينات المتعلقة بـ etcd<button data-href="#etcd-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure etcd for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of etcd, used to store Milvus metadata & service discovery.</p>
+    </button></h1><p>التكوينات ذات الصلة بـ etcd، والمستخدمة لتخزين البيانات الوصفية لـ Milvus واكتشاف الخدمة.</p>
 <h2 id="etcdendpoints" class="common-anchor-header"><code translate="no">etcd.endpoints</code><button data-href="#etcdendpoints" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,17 +38,17 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.endpoints">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Endpoints used to access etcd service. You can change this parameter as the endpoints of your own etcd cluster.</li>      
-        <li>Environment variable: ETCD_ENDPOINTS</li>      
-        <li>etcd preferentially acquires valid address from environment variable ETCD_ENDPOINTS when Milvus is started.</li>      </td>
-      <td>localhost:2379</td>
+        <li>نقاط النهاية المستخدمة للوصول إلى خدمة إلخd. يمكنك تغيير هذه المعلمة كنقاط النهاية الخاصة بمجموعة إلخd الخاصة بك.</li>      
+        <li>متغير البيئة: ETCD_ENDPOINTS</li>      
+        <li>يكتسب إلخd بشكل تفضيلي عنوانًا صالحًا من متغير البيئة ETCD_ENDPOINTS عند بدء تشغيل Milvus.</li>      </td>
+      <td>المضيف المحلي:2379</td>
     </tr>
   </tbody>
 </table>
@@ -70,19 +70,19 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.rootPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Root prefix of the key to where Milvus stores data in etcd.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      
-        <li>To share an etcd instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them.</li>      
-        <li>Set an easy-to-identify root path for Milvus if etcd service already exists.</li>      
-        <li>Changing this for an already running Milvus instance may result in failures to read legacy data.</li>      </td>
-      <td>by-dev</td>
+        <li>البادئة الجذرية للمفتاح حيث يخزن Milvus البيانات في إلخd.</li>      
+        <li>يوصى بتغيير هذه المعلمة قبل بدء تشغيل ميلفوس للمرة الأولى.</li>      
+        <li>لمشاركة مثيل إلخd بين مثيلات Milvus متعددة، ضع في اعتبارك تغيير هذه القيمة إلى قيمة مختلفة لكل مثيل من مثيلات Milvus قبل بدء تشغيلها.</li>      
+        <li>قم بتعيين مسار جذر يسهل تحديده لـ Milvus إذا كانت خدمة إلخd موجودة بالفعل.</li>      
+        <li>قد يؤدي تغيير هذا لمثيل Milvus قيد التشغيل بالفعل إلى فشل قراءة البيانات القديمة.</li>      </td>
+      <td>بواسطة-مطور</td>
     </tr>
   </tbody>
 </table>
@@ -104,17 +104,17 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.metaSubPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Sub-prefix of the key to where Milvus stores metadata-related information in etcd.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      </td>
-      <td>meta</td>
+        <li>البادئة الفرعية للمفتاح إلى المكان الذي يخزن فيه Milvus المعلومات المتعلقة بالبيانات الوصفية في إلخd.</li>      
+        <li>تحذير: سيؤثر تغيير هذه المعلمة بعد استخدام ملفوس لفترة من الزمن على وصولك إلى البيانات القديمة.</li>      
+        <li>يوصى بتغيير هذه المعلمة قبل بدء تشغيل ملفوس للمرة الأولى.</li>      </td>
+      <td>ميتا</td>
     </tr>
   </tbody>
 </table>
@@ -136,16 +136,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.kvSubPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Sub-prefix of the key to where Milvus stores timestamps in etcd.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended not to change this parameter if there is no specific reason.</li>      </td>
+        <li>البادئة الفرعية للمفتاح إلى حيث يخزن Milvus الطوابع الزمنية في إلخد.</li>      
+        <li>تنبيه: تغيير هذه المعلمة بعد استخدام ملفوس لفترة من الزمن سيؤثر على وصولك إلى البيانات القديمة.</li>      
+        <li>يوصى بعدم تغيير هذه المعلمة إذا لم يكن هناك سبب محدد.</li>      </td>
       <td>kv</td>
     </tr>
   </tbody>
@@ -168,14 +168,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.log.level">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Only supports debug, info, warn, error, panic, or fatal. Default 'info'.      </td>
-      <td>info</td>
+      <td>        تدعم فقط التصحيح، أو المعلومات، أو التحذير، أو الخطأ، أو الذعر، أو القاتلة. افتراضي 'معلومات'.      </td>
+      <td>معلومات</td>
     </tr>
   </tbody>
 </table>
@@ -197,20 +197,20 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.log.path">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>path is one of:</li>      
-        <li> - "default" as os.Stderr,</li>      
-        <li> - "stderr" as os.Stderr,</li>      
-        <li> - "stdout" as os.Stdout,</li>      
-        <li> - file path to append server logs to.</li>      
-        <li>please adjust in embedded Milvus: /tmp/milvus/logs/etcd.log</li>      </td>
-      <td>stdout</td>
+        <li>المسار هو واحد من:</li>      
+        <li> - "افتراضي" كـ os.Stderr,</li>      
+        <li> - "stderr" ك os.Stderr,</li>      
+        <li> - "stdout" ك os.Stdout,</li>      
+        <li> - مسار الملف لإلحاق سجلات الخادم به.</li>      
+        <li>يُرجى التعديل في ملف Milvus المضمن: /tmp/milvus/logs/etcd.log</li>      </td>
+      <td>ستدوت</td>
     </tr>
   </tbody>
 </table>
@@ -232,14 +232,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to support ETCD secure connection mode      </td>
-      <td>false</td>
+      <td>        ما إذا كان يجب دعم وضع الاتصال الآمن ETCD    </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -261,13 +261,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsCert">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your cert file      </td>
+      <td>        المسار إلى ملف الشهادة      </td>
       <td>/path/to/etcd-client.pem</td>
     </tr>
   </tbody>
@@ -290,13 +290,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your key file      </td>
+      <td>        المسار إلى ملف المفتاح الخاص بك    </td>
       <td>/path/to/etcd-client-key.pem</td>
     </tr>
   </tbody>
@@ -319,13 +319,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsCACert">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your CACert file      </td>
+      <td>        المسار إلى ملف CACert الخاص بك    </td>
       <td>/path/to/ca.pem</td>
     </tr>
   </tbody>
@@ -348,16 +348,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsMinVersion">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>TLS min version</li>      
-        <li>Optional values: 1.0, 1.1, 1.2, 1.3。</li>      
-        <li>We recommend using version 1.2 and above.</li>      </td>
+        <li>الإصدار الأدنى من TLS</li>      
+        <li>القيم الاختيارية: 1.0, 1.1, 1.2, 1.3。</li>      
+        <li>نوصي باستخدام الإصدار 1.2 وما فوق.</li>      </td>
       <td>1.3</td>
     </tr>
   </tbody>
@@ -380,13 +380,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.requestTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Etcd operation timeout in milliseconds      </td>
+      <td>        مهلة عملية Etcd بالمللي ثانية      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -409,14 +409,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.use.embed">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable embedded Etcd (an in-process EtcdServer).      </td>
-      <td>false</td>
+      <td>        ما إذا كان سيتم تمكين Etcd المضمّن (خادم EtcdServer داخل العملية).      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -438,14 +438,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.data.dir">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Embedded Etcd only. please adjust in embedded Milvus: /tmp/milvus/etcdData/      </td>
-      <td>default.etcd</td>
+      <td>        Etcd المضمنة فقط. يرجى الضبط في Milvus المضمنة: /tmp/milvus/etcdData/      </td>
+      <td>افتراضي.إلخd</td>
     </tr>
   </tbody>
 </table>
@@ -467,14 +467,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable authentication      </td>
-      <td>false</td>
+      <td>        سواء لتمكين المصادقة      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -496,13 +496,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.userName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        username for etcd authentication      </td>
+      <td>        اسم المستخدم لمصادقة إلخd      </td>
       <td></td>
     </tr>
   </tbody>
@@ -525,13 +525,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.password">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        password for etcd authentication      </td>
+      <td>        كلمة المرور لمصادقة إلخd      </td>
       <td></td>
     </tr>
   </tbody>

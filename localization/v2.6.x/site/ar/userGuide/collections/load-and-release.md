@@ -1,12 +1,11 @@
 ---
 id: load-and-release.md
-title: Load & Release
+title: التحميل والتحرير
 summary: >-
-  Loading a collection is the prerequisite to conducting similarity searches and
-  queries in collections. This page focuses on the procedures for loading and
-  releasing a collection.
+  تحميل مجموعة هو الشرط الأساسي لإجراء عمليات البحث عن التشابه والاستعلامات في
+  المجموعات. تركز هذه الصفحة على إجراءات تحميل مجموعة وتحريرها.
 ---
-<h1 id="Load--Release" class="common-anchor-header">Load & Release<button data-href="#Load--Release" class="anchor-icon" translate="no">
+<h1 id="Load--Release" class="common-anchor-header">التحميل والتحرير<button data-href="#Load--Release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Loading a collection is the prerequisite to conducting similarity searches and queries in collections. This page focuses on the procedures for loading and releasing a collection.</p>
-<h2 id="Load-Collection" class="common-anchor-header">Load Collection<button data-href="#Load-Collection" class="anchor-icon" translate="no">
+    </button></h1><p>تحميل مجموعة هو الشرط الأساسي لإجراء عمليات البحث عن التشابه والاستعلامات في المجموعات. تركز هذه الصفحة على إجراءات تحميل مجموعة وتحريرها.</p>
+<h2 id="Load-Collection" class="common-anchor-header">تحميل مجموعة<button data-href="#Load-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +36,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you load a collection, Milvus loads the index files and the raw data of all fields into memory for rapid response to searches and queries. Entities inserted after a collection load are automatically indexed and loaded.</p>
-<p>The following code snippets demonstrate how to load a collection.</p>
+    </button></h2><p>عند تحميل مجموعة، يقوم برنامج Milvus بتحميل ملفات الفهرس والبيانات الأولية لجميع الحقول في الذاكرة للاستجابة السريعة لعمليات البحث والاستعلامات. تتم فهرسة الكيانات التي يتم إدراجها بعد تحميل المجموعة وتحميلها تلقائيًا.</p>
+<p>توضح مقتطفات التعليمات البرمجية التالية كيفية تحميل مجموعة.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -205,7 +199,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Specific-Fields" class="common-anchor-header">Load Specific Fields<button data-href="#Load-Specific-Fields" class="anchor-icon" translate="no">
+<h2 id="Load-Specific-Fields" class="common-anchor-header">تحميل حقول محددة<button data-href="#Load-Specific-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -220,18 +214,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus can load only the fields involved in searches and queries, reducing memory usage and improving search performance.</p>
+    </button></h2><p>يمكن لـ Milvus تحميل الحقول المتضمنة في عمليات البحث والاستعلامات فقط، مما يقلل من استخدام الذاكرة ويحسن أداء البحث.</p>
 <div class="alert note">
-<p>Partial collection loading is currently in beta and not recommended for production use.</p>
+<p>التحميل الجزئي للمجموعة هو حاليًا في مرحلة تجريبية ولا يوصى باستخدامه في الإنتاج.</p>
 </div>
-<p>The following code snippet assumes that you have created a collection named <strong>my_collection</strong>, and there are two fields named <strong>my_id</strong> and <strong>my_vector</strong> in the collection.</p>
+<p>يفترض مقتطف الشيفرة التالي أنك أنشأت مجموعة باسم <strong>my_collection،</strong> وهناك حقلين باسم <strong>my_id</strong> و <strong>my_vector</strong> في المجموعة.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span></span>
@@ -302,10 +291,10 @@ fmt.Println(state)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># REST</span>
 Not support yet
 <button class="copy-code-btn"></button></code></pre>
-<p>If you choose to load specific fields, it is worth noting that only the fields included in <code translate="no">load_fields</code> can be used as filters and output fields in searches and queries. You should always include the names of the primary field and at least one vector field in <code translate="no">load_fields</code>.</p>
-<p>You can also use <code translate="no">skip_load_dynamic_field</code> to determine whether to load the dynamic field. The dynamic field is a reserved JSON field named <strong>$meta</strong> and saves all non-schema-defined fields and their values in key-value pairs. When loading the dynamic field, all keys in the fields are loaded and available for filtering and output. If all keys in the dynamic field are not involved in metadata filtering and output, set <code translate="no">skip_load_dynamic_field</code> to <code translate="no">True</code>.</p>
-<p>To load more fields after the collection load, you need to release the collection first to avoid possible errors prompted because of index changes.</p>
-<h2 id="Release-Collection" class="common-anchor-header">Release Collection<button data-href="#Release-Collection" class="anchor-icon" translate="no">
+<p>إذا اخترت تحميل حقول محددة، تجدر الإشارة إلى أن الحقول المضمنة في <code translate="no">load_fields</code> فقط يمكن استخدامها كمرشحات وحقول إخراج في عمليات البحث والاستعلامات. يجب عليك دائمًا تضمين أسماء الحقول الأساسية وحقل متجه واحد على الأقل في <code translate="no">load_fields</code>.</p>
+<p>يمكنك أيضًا استخدام <code translate="no">skip_load_dynamic_field</code> لتحديد ما إذا كان سيتم تحميل الحقل الديناميكي أم لا. الحقل الديناميكي عبارة عن حقل JSON محجوز يسمى <strong>$meta</strong> ويحفظ جميع الحقول غير المعرفة من قبل النظام الأساسي وقيمها في أزواج قيمة المفتاح. عند تحميل الحقل الديناميكي، يتم تحميل جميع المفاتيح في الحقول وإتاحتها للتصفية والإخراج. إذا كانت جميع المفاتيح في الحقل الديناميكي غير متضمنة في تصفية البيانات الوصفية والإخراج، قم بتعيين <code translate="no">skip_load_dynamic_field</code> إلى <code translate="no">True</code>.</p>
+<p>لتحميل المزيد من الحقول بعد تحميل المجموعة، تحتاج إلى تحرير المجموعة أولاً لتجنب الأخطاء المحتملة التي قد تحدث بسبب تغييرات الفهرس.</p>
+<h2 id="Release-Collection" class="common-anchor-header">تحرير المجموعة<button data-href="#Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -320,15 +309,10 @@ Not support yet
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Searches and queries are memory-intensive operations. To save the cost, you are advised to release the collections that are currently not in use.</p>
-<p>The following code snippet demonstrates how to release a collection.</p>
+    </button></h2><p>عمليات البحث والاستعلامات هي عمليات تستهلك الكثير من الذاكرة. لتوفير التكلفة، يُنصح بتحرير المجموعات غير المستخدمة حاليًا.</p>
+<p>يوضح مقتطف الشيفرة التالي كيفية تحرير مجموعة.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>

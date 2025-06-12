@@ -45,7 +45,7 @@ summary: >-
 <li><p><strong>الرسم البياني Vamana Graph</strong> - فهرس <strong>قائم على القرص</strong> <strong>قائم على الرسم البياني</strong> يربط نقاط البيانات (أو المتجهات) للتنقل الفعال أثناء البحث.</p></li>
 <li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>في الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">بناء الفهرس</h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات بيانات كبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
+<h3 id="Index-construction" class="common-anchor-header">بناء الفهرس</h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات البيانات الكبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
 <p>يوضح الشكل التالي كيف يتم بناء الرسم البياني لـ Vamana.</p>
 <p>
   
@@ -154,7 +154,7 @@ summary: >-
 <li><p><strong>Milvus SDK:</strong> قم بضبط معلمات DISKANN بدقة باستخدام Milvus SDK أثناء إنشاء الفهرس أو عمليات البحث. يتيح ذلك المزيد من التحكم الدقيق وتعديلات المعلمات الديناميكية بناءً على حالات استخدام محددة.</p></li>
 </ul>
 <div class="alert note">
-<p>يتجاوز التكوين الذي يتم إجراؤه بواسطة SDK أي إعدادات محددة في ملف التكوين، مما يوفر المرونة والتحكم لتطبيقات ومجموعات بيانات محددة.</p>
+<p>يتجاوز التكوين الذي تم إجراؤه بواسطة SDK أي إعدادات محددة في ملف التكوين، مما يوفر المرونة والتحكم لتطبيقات ومجموعات بيانات محددة.</p>
 </div>
 <h3 id="Milvus-configuration-file" class="common-anchor-header">ملف تكوين Milvus</h3><p>فيما يلي مثال على كيفية تعيين معلمات DISKANN في ملف <code translate="no">milvus.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>

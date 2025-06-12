@@ -3,7 +3,7 @@ id: ivf-rabitq.md
 title: IVF_RABITQCompatible with Milvus 2.6.x
 summary: >-
   فهرس IVF_RABITQ عبارة عن خوارزمية فهرسة ثنائية قائمة على التكميم الكمي تقوم
-  بتحويل متجهات FP32 إلى تمثيلات ثنائية. وهي توفر نسبة ضغط قابلة للتكوين بدرجة
+  بتكميم متجهات FP32 إلى تمثيلات ثنائية. وهي توفر نسبة ضغط قابلة للتكوين بدرجة
   كبيرة مع تنقيح اختياري لتحسين معدلات الاسترجاع، مما يجعلها مناسبة للتطبيقات
   التي تتطلب تحسين التخزين بشكل كبير.
 beta: Milvus 2.6.x
@@ -191,7 +191,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>يحدد تمثيل البيانات المستخدم للتنقية عند تمكين <code translate="no">refine</code>.</p></td>
      <td><p><strong>النوع</strong>: سلسلة<br><strong>النطاق</strong>: [<code translate="no">SQ6</code>, <code translate="no">SQ8</code>, , <code translate="no">FP16</code>, <code translate="no">BF16</code>, <code translate="no">FP32</code>]<br><strong>القيمة الافتراضية</strong>: لا يوجد</p></td>
-     <td><p>يتم تقديم القيم المدرجة بالترتيب حسب زيادة معدل الاستدعاء وتقليل QPS وزيادة حجم التخزين. <code translate="no">SQ8</code> كنقطة بداية، مما يوفر توازنًا جيدًا بين الدقة واستخدام الموارد.</p></td>
+     <td><p>يتم عرض القيم المدرجة بالترتيب حسب زيادة معدل الاستدعاء وتقليل QPS وزيادة حجم التخزين. <code translate="no">SQ8</code> كنقطة بداية، مما يوفر توازنًا جيدًا بين الدقة واستخدام الموارد.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/ivf-rabitq.md#Search-on-index">البحث في الفهرس</a>.</p>

@@ -1,15 +1,15 @@
 ---
 id: milvus_and_n8n.md
 summary: >-
-  n8n is a powerful open-source workflow automation platform that allows you to
-  connect various applications, services, and APIs together to create automated
-  workflows without coding. With its node-based visual interface, n8n enables
-  users to build complex automation processes by simply connecting nodes that
-  represent different services or actions. It is self-hostable, highly
-  extensible, and supports both fair-code and enterprise licensing.
-title: Getting Started with Milvus and n8n
+  n8n عبارة عن منصة قوية مفتوحة المصدر لأتمتة سير العمل تتيح لك ربط العديد من
+  التطبيقات والخدمات وواجهات برمجة التطبيقات معًا لإنشاء عمليات سير عمل آلية دون
+  الحاجة إلى الترميز. من خلال واجهته المرئية القائمة على العقد، يمكّن n8n
+  المستخدمين من إنشاء عمليات أتمتة معقدة من خلال ربط العقد التي تمثل خدمات أو
+  إجراءات مختلفة. وهو قابل للاستضافة الذاتية، وقابل للتوسعة بدرجة كبيرة، ويدعم
+  كلاً من الترخيص العادل والترخيص المؤسسي.
+title: البدء باستخدام ميلفوس و n8n
 ---
-<h1 id="Getting-Started-with-Milvus-and-n8n" class="common-anchor-header">Getting Started with Milvus and n8n<button data-href="#Getting-Started-with-Milvus-and-n8n" class="anchor-icon" translate="no">
+<h1 id="Getting-Started-with-Milvus-and-n8n" class="common-anchor-header">الشروع في استخدام ميلفوس و n8n<button data-href="#Getting-Started-with-Milvus-and-n8n" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,7 +24,7 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Introduction-to-n8n-and-the-Milvus-Vector-Store-Node" class="common-anchor-header">Introduction to n8n and the Milvus Vector Store Node<button data-href="#Introduction-to-n8n-and-the-Milvus-Vector-Store-Node" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Introduction-to-n8n-and-the-Milvus-Vector-Store-Node" class="common-anchor-header">مقدمة إلى n8n وعقدة مخزن ميلفوس فيكتور<button data-href="#Introduction-to-n8n-and-the-Milvus-Vector-Store-Node" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,10 +39,10 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://n8n.io/">n8n</a> is a powerful open-source workflow automation platform that allows you to connect various applications, services, and APIs together to create automated workflows without coding. With its node-based visual interface, n8n enables users to build complex automation processes by simply connecting nodes that represent different services or actions. It is self-hostable, highly extensible, and supports both fair-code and enterprise licensing.</p>
-<p>The <strong>Milvus Vector Store</strong> node in n8n integrates <a href="https://milvus.io/">Milvus</a> into your automation workflows. This allows you to perform semantic search, power retrieval-augmented generation (RAG) systems, and build intelligent AI applications—all within the n8n ecosystem.</p>
-<p>This documentation is primarily based on the official <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">n8n Milvus Vector Store documentation</a>. If you find any outdated or inconsistent content, please prioritize the official documentation and feel free to raise an issue for us.</p>
-<h2 id="Key-Features" class="common-anchor-header">Key Features<button data-href="#Key-Features" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://n8n.io/">n8n</a> عبارة عن منصة قوية مفتوحة المصدر لأتمتة سير العمل تتيح لك ربط العديد من التطبيقات والخدمات وواجهات برمجة التطبيقات معًا لإنشاء عمليات سير عمل مؤتمتة دون الحاجة إلى الترميز. من خلال واجهته المرئية القائمة على العقدة، يمكّن n8n المستخدمين من إنشاء عمليات أتمتة معقدة من خلال ربط العقد التي تمثل خدمات أو إجراءات مختلفة. وهو قابل للاستضافة الذاتية، وقابل للتوسعة بدرجة كبيرة، ويدعم كلاً من الترخيص العادل والترخيص المؤسسي.</p>
+<p>تدمج عقدة <strong>متجر Milvus Vector Store</strong> في n8n <a href="https://milvus.io/">Milvus</a> في عمليات سير عمل الأتمتة الخاصة بك. يتيح لك ذلك إجراء البحث الدلالي، وتشغيل أنظمة توليد الاسترجاع المعزز (RAG)، وبناء تطبيقات ذكاء اصطناعي ذكية - كل ذلك ضمن النظام البيئي n8n.</p>
+<p>تعتمد هذه الوثائق بشكل أساسي على <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">وثائق متجر n8n Milvus Vector Store</a> الرسمية. إذا وجدت أي محتوى قديم أو غير متناسق، يُرجى إعطاء الأولوية للوثائق الرسمية ولا تتردد في إثارة مشكلة لنا.</p>
+<h2 id="Key-Features" class="common-anchor-header">الميزات الرئيسية<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,16 +57,16 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With the Milvus Vector Store node in n8n, you can:</p>
+    </button></h2><p>باستخدام عقدة مخزن متجه ميلفوس فيكتور في n8n، يمكنك:</p>
 <ul>
-<li>Interact with your Milvus database as a <a href="https://docs.n8n.io/glossary/#ai-vector-store">vector store</a></li>
-<li>Insert documents into Milvus</li>
-<li>Get documents from Milvus</li>
-<li>Retrieve documents to provide them to a retriever connected to a <a href="https://docs.n8n.io/glossary/#ai-chain">chain</a></li>
-<li>Connect directly to an <a href="https://docs.n8n.io/glossary/#ai-agent">agent</a> as a <a href="https://docs.n8n.io/glossary/#ai-tool">tool</a></li>
-<li>Filter documents based on metadata</li>
+<li>التفاعل مع قاعدة بيانات ملفوس الخاصة بك <a href="https://docs.n8n.io/glossary/#ai-vector-store">كمخزن مت</a>جهات</li>
+<li>إدراج المستندات في ملفوس</li>
+<li>الحصول على المستندات من ملفوس</li>
+<li>استرجاع المستندات لتزويدها إلى مسترجع متصل <a href="https://docs.n8n.io/glossary/#ai-chain">بسلسلة</a></li>
+<li>الاتصال مباشرةً <a href="https://docs.n8n.io/glossary/#ai-agent">بوكيل</a> <a href="https://docs.n8n.io/glossary/#ai-tool">كأداة</a></li>
+<li>تصفية المستندات بناءً على البيانات الوصفية</li>
 </ul>
-<h2 id="Node-Usage-Patterns" class="common-anchor-header">Node Usage Patterns<button data-href="#Node-Usage-Patterns" class="anchor-icon" translate="no">
+<h2 id="Node-Usage-Patterns" class="common-anchor-header">أنماط استخدام العقدة<button data-href="#Node-Usage-Patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,17 +81,17 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can use the Milvus Vector Store node in n8n in the following patterns.</p>
-<h3 id="Use-as-a-regular-node-to-insert-and-retrieve-documents" class="common-anchor-header">Use as a regular node to insert and retrieve documents</h3><p>You can use the Milvus Vector Store as a regular node to insert, or get documents. This pattern places the Milvus Vector Store in the regular connection flow without using an agent.</p>
-<p>See this <a href="https://n8n.io/workflows/3573-create-a-rag-system-with-paul-essays-milvus-and-openai-for-cited-answers/">example template</a> for how to build a system that stores documents in Milvus and retrieves them to support cited, chat-based answers.</p>
-<h3 id="Connect-directly-to-an-AI-agent-as-a-tool" class="common-anchor-header">Connect directly to an AI agent as a tool</h3><p>You can connect the Milvus Vector Store node directly to the tool connector of an <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.agent/">AI agent</a> to use a vector store as a resource when answering queries.</p>
-<p>Here, the connection would be: AI agent (tools connector) -> Milvus Vector Store node. See this <a href="https://n8n.io/workflows/3576-paul-graham-essay-search-and-chat-with-milvus-vector-database/">example template</a> where data is embedded and indexed in Milvus, and the AI Agent uses the vector store as a knowledge tool for question-answering.</p>
-<h3 id="Use-a-retriever-to-fetch-documents" class="common-anchor-header">Use a retriever to fetch documents</h3><p>You can use the <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.retrievervectorstore/">Vector Store Retriever</a> node with the Milvus Vector Store node to fetch documents from the Milvus Vector Store node. This is often used with the <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.chainretrievalqa/">Question and Answer Chain</a> node to fetch documents from the vector store that match the given chat input.</p>
-<p>A typical node connection flow looks like this: Question and Answer Chain (Retriever connector) -> Vector Store Retriever (Vector Store connector) -> Milvus Vector Store.</p>
-<p>Check out this <a href="https://n8n.io/workflows/3574-create-a-paul-graham-essay-qanda-system-with-openai-and-milvus-vector-database/">workflow example</a> to see how to ingest external data into Milvus and build a chat-based semantic Q&A system.</p>
-<h3 id="Use-the-Vector-Store-Question-Answer-Tool-to-answer-questions" class="common-anchor-header">Use the Vector Store Question Answer Tool to answer questions</h3><p>Another pattern uses the <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolvectorstore/">Vector Store Question Answer Tool</a> to summarize results and answer questions from the Milvus Vector Store node. Rather than connecting the Milvus Vector Store directly as a tool, this pattern uses a tool specifically designed to summarizes data in the vector store.</p>
-<p>The connections flow would look like this: AI agent (tools connector) -> Vector Store Question Answer Tool (Vector Store connector) -> Milvus Vector store.</p>
-<h2 id="Node-Operation-Modes" class="common-anchor-header">Node Operation Modes<button data-href="#Node-Operation-Modes" class="anchor-icon" translate="no">
+    </button></h2><p>يمكنك استخدام عقدة مخزن ميلفوس المتجه في n8n بالأنماط التالية.</p>
+<h3 id="Use-as-a-regular-node-to-insert-and-retrieve-documents" class="common-anchor-header">استخدام كعقدة عادية لإدراج المستندات واسترجاعها</h3><p>يمكنك استخدام مخزن Milvus Vector Store كعقدة عادية لإدراج المستندات أو استرجاعها. يضع هذا النمط مخزن Milvus Vector Store في تدفق الاتصال العادي دون استخدام وكيل.</p>
+<p>راجع <a href="https://n8n.io/workflows/3573-create-a-rag-system-with-paul-essays-milvus-and-openai-for-cited-answers/">نموذج المثال</a> هذا لمعرفة كيفية إنشاء نظام يخزن المستندات في Milvus ويسترجعها لدعم الإجابات المستشهد بها والمستندة إلى الدردشة.</p>
+<h3 id="Connect-directly-to-an-AI-agent-as-a-tool" class="common-anchor-header">الاتصال مباشرة بوكيل ذكاء اصطناعي كأداة</h3><p>يمكنك توصيل عقدة مخزن المتجهات Milvus Vector Store مباشرةً بموصل أداة <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.agent/">وكيل الذكاء</a> الاصطناعي لاستخدام مخزن المتجهات كمورد عند الإجابة على الاستفسارات.</p>
+<p>هنا، سيكون الاتصال هنا: وكيل ذكاء اصطناعي (موصل الأدوات) -&gt; عقدة مخزن متجه ميلفوس. انظر <a href="https://n8n.io/workflows/3576-paul-graham-essay-search-and-chat-with-milvus-vector-database/">نموذج المثال</a> هذا حيث يتم تضمين البيانات وفهرستها في Milvus، ويستخدم وكيل الذكاء الاصطناعي مخزن المتجهات كأداة معرفة للإجابة عن الأسئلة.</p>
+<h3 id="Use-a-retriever-to-fetch-documents" class="common-anchor-header">استخدام مسترجع لجلب المستندات</h3><p>يمكنك استخدام عقدة مسترجع <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.retrievervectorstore/">مخزن</a> المتجهات مع عقدة مخزن متجهات Milvus لجلب المستندات من عقدة مخزن متجهات Milvus. يُستخدم هذا غالبًا مع عقدة <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.chainretrievalqa/">سلسلة الأسئلة والأجوبة</a> لجلب المستندات من مخزن المتجهات التي تطابق مدخلات الدردشة المحددة.</p>
+<p>يبدو تدفق اتصال العقدة النموذجي كالتالي: سلسلة الأسئلة والأجوبة (موصل سلسلة الأسئلة والأجوبة) -&gt; مسترجع مخزن المتجهات (موصل مخزن المتجهات) -&gt; مخزن متجه ميلفوس المتجه.</p>
+<p>تحقق من <a href="https://n8n.io/workflows/3574-create-a-paul-graham-essay-qanda-system-with-openai-and-milvus-vector-database/">مثال سير العمل</a> هذا لمعرفة كيفية استيعاب البيانات الخارجية في Milvus وبناء نظام أسئلة وأجوبة دلالي قائم على الدردشة.</p>
+<h3 id="Use-the-Vector-Store-Question-Answer-Tool-to-answer-questions" class="common-anchor-header">استخدم أداة الإجابة عن الأسئلة في مخزن المتجهات للإجابة عن الأسئلة</h3><p>يستخدم نمط آخر <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolvectorstore/">أداة الإجابة عن الأسئلة</a> في <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolvectorstore/">مخزن</a> المتجهات لتلخيص النتائج والإجابة عن الأسئلة من عقدة مخزن المتجهات في Milvus. بدلًا من توصيل مخزن متجه Milvus Vector Store مباشرةً كأداة، يستخدم هذا النمط أداة مصممة خصيصًا لتلخيص البيانات في مخزن المتجهات.</p>
+<p>سيبدو تدفق الاتصالات على النحو التالي عامل الذكاء الاصطناعي (موصل الأدوات) -&gt; أداة الإجابة عن أسئلة مخزن المتجهات (موصل مخزن المتجهات) -&gt; مخزن ميلفوس المتجه.</p>
+<h2 id="Node-Operation-Modes" class="common-anchor-header">أوضاع تشغيل العقدة<button data-href="#Node-Operation-Modes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,22 +106,22 @@ title: Getting Started with Milvus and n8n
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The Milvus Vector Store node supports multiple operation modes, each tailored for different workflow use cases. Understanding these modes helps design more effective workflows.</p>
-<p>We will provide a high-level overview of the available operation modes and options below. For a complete list of input parameters and configuration options for each mode, please refer to the <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">official documentation</a>.</p>
+    </button></h2><p>تدعم عقدة مخزن متجه Milvus Vector Store أوضاع تشغيل متعددة، كل منها مصمم خصيصًا لحالات استخدام سير العمل المختلفة. يساعد فهم هذه الأوضاع في تصميم سير عمل أكثر فعالية.</p>
+<p>سنقدم نظرة عامة عالية المستوى على أوضاع التشغيل المتاحة والخيارات أدناه. للحصول على قائمة كاملة بمعلمات الإدخال وخيارات التكوين لكل وضع، يرجى الرجوع إلى <a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">الوثائق الرسمية</a>.</p>
 <hr>
-<h3 id="Operation-Modes-Overview" class="common-anchor-header">Operation Modes Overview</h3><p>The Milvus Vector Store node supports four distinct modes:</p>
+<h3 id="Operation-Modes-Overview" class="common-anchor-header">نظرة عامة على أوضاع التشغيل</h3><p>تدعم عقدة مخزن متجه ميلفوس المتجه أربعة أوضاع متميزة:</p>
 <ul>
-<li><strong>Get Many</strong>: Retrieve multiple documents based on semantic similarity to a prompt.</li>
-<li><strong>Insert Documents</strong>: Insert new documents into your Milvus collection.</li>
-<li><strong>Retrieve Documents (As Vector Store for Chain/Tool)</strong>: Use the node as a retriever within a chain-based system.</li>
-<li><strong>Retrieve Documents (As Tool for AI Agent)</strong>: Use the node as a tool resource for an AI agent during question-answering tasks.</li>
+<li><strong>الحصول على العديد</strong>: استرداد مستندات متعددة استنادًا إلى التشابه الدلالي مع المطالبة.</li>
+<li><strong>إدراج مستندات</strong>: إدراج مستندات جديدة في مجموعة Milvus الخاصة بك.</li>
+<li><strong>استرجاع المستندات (كمخزن متجه للسلسلة/الأداة)</strong>: استخدم العقدة كمسترجع داخل نظام قائم على سلسلة.</li>
+<li><strong>استرجاع المستندات (كأداة لعامل الذكاء الاصطناعي)</strong>: استخدم العقدة كمورد أداة لوكيل الذكاء الاصطناعي أثناء مهام الإجابة عن الأسئلة.</li>
 </ul>
-<h3 id="Additional-Node-Options" class="common-anchor-header">Additional Node Options</h3><ul>
-<li><strong>Metadata Filter</strong> (Get Many mode only): Filter results based on custom metadata keys. Multiple fields apply an AND condition.</li>
-<li><strong>Clear Collection</strong> (Insert Documents mode only): Remove existing documents from the collection prior to inserting new ones.</li>
+<h3 id="Additional-Node-Options" class="common-anchor-header">خيارات العقدة الإضافية</h3><ul>
+<li><strong>تصفية بيانات التعريف</strong> (وضع الحصول على العديد فقط): تصفية النتائج بناءً على مفاتيح بيانات التعريف المخصصة. تطبق الحقول المتعددة شرط AND.</li>
+<li><strong>مسح المجموعة</strong> (وضع إدراج المستندات فقط): إزالة المستندات الموجودة من المجموعة قبل إدراج مستندات جديدة.</li>
 </ul>
-<h3 id="Related-Resources" class="common-anchor-header">Related Resources</h3><ul>
-<li><a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">n8n Milvus Integration Documentation</a></li>
-<li><a href="https://js.langchain.com/docs/integrations/vectorstores/milvus/">LangChain Milvus Documentation</a></li>
-<li><a href="https://docs.n8n.io/advanced-ai/">n8n Advanced AI Documentation</a></li>
+<h3 id="Related-Resources" class="common-anchor-header">الموارد ذات الصلة</h3><ul>
+<li><a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">وثائق تكامل n8n Milvus</a></li>
+<li><a href="https://js.langchain.com/docs/integrations/vectorstores/milvus/">وثائق سلسلة اللغات Milvus Milvus</a></li>
+<li><a href="https://docs.n8n.io/advanced-ai/">وثائق الذكاء الاصطناعي المتقدم ل n8n</a></li>
 </ul>

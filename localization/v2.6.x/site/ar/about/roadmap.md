@@ -1,12 +1,12 @@
 ---
 id: roadmap.md
-title: Milvus Roadmap
+title: خارطة طريق ميلفوس
 related_key: Milvus roadmap
 summary: >-
-  Milvus is an open-source vector database built to power AI applications. Here
-  is our roadmap to guide our development.
+  Milvus هي قاعدة بيانات متجهة مفتوحة المصدر مصممة لتشغيل تطبيقات الذكاء
+  الاصطناعي. إليك خارطة طريقنا لتوجيه تطويرنا.
 ---
-<h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus Roadmap<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
+<h1 id="Milvus-Roadmap" class="common-anchor-header">خارطة طريق ميلفوس<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Welcome to the Milvus Roadmap! Join us on our continuous journey to enhance and evolve Milvus. We are thrilled to share our accomplishments, future plans, and our vision for what lies ahead. Our roadmap is more than a list of upcoming features—it reflects our commitment to innovation and our dedication to working with the community. We invite you to delve into our roadmap, provide your feedback, and help shape the future of Milvus!</p>
-<h2 id="Roadmap" class="common-anchor-header">Roadmap<button data-href="#Roadmap" class="anchor-icon" translate="no">
+    </button></h1><p>مرحبًا بك في خارطة طريق ميلفوس! انضم إلينا في رحلتنا المستمرة لتعزيز وتطوير ميلفوس. يسعدنا مشاركة إنجازاتنا، وخططنا المستقبلية، ورؤيتنا لما ينتظرنا في المستقبل. خارطة طريقنا هي أكثر من مجرد قائمة بالميزات القادمة - فهي تعكس التزامنا بالابتكار وتفانينا في العمل مع المجتمع. ندعوك للتعمق في خارطة الطريق الخاصة بنا وتقديم ملاحظاتك والمساعدة في تشكيل مستقبل ميلفوس!</p>
+<h2 id="Roadmap" class="common-anchor-header">خارطة الطريق<button data-href="#Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,46 +40,46 @@ summary: >-
     </button></h2><table>
     <thead>
         <tr>
-            <th>Category</th>
-            <th>Milvus 2.5.x (Achieved in recent releases)</th>
-            <th>Next Release - Milvus 2.6 (Middle of CY25)</th>
-            <th>Future Roadmap - Milvus 3.0 (Within 1 year)</th>
+            <th>الفئة</th>
+            <th>ميلفوس 2.5.x (تم تحقيقه في الإصدارات الأخيرة)</th>
+            <th>الإصدار التالي - Milvus 2.6 (منتصف العام الميلادي 25)</th>
+            <th>خارطة الطريق المستقبلية - Milvus 3.0 (خلال عام واحد)</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>AI-Driven Unstructured Data Processing</strong><br/><i>Strengthening the ability to process and analyze unstructured data using AI models and advanced technologies</i></td>
-            <td><strong>Full Text Search</strong><br/><i>Support full text search with Sparse-BM25. The new API accepts text as input and automatically generates sparse vector inside Milvus</i><br/><br/><strong>Sparse Vector (GA)</strong><br/><i>Support efficient storage and indexing method for sparse vector</i><br/></td>
-            <td><strong>Data-In and Data-Out</strong><br/><i>Support major model services to ingest original text</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Support model-based rerankers and user-defined scoring function</i><br/><br/><strong>Iterative Search</strong><br/><i>Revise query vector based on user labeling</i></td>
-            <td><strong>Support Tensors</strong><br/><i>Support list of vectors, typical usage like Colbert, Copali and Video representation</i><br/><br/><strong>Support More Data Types</strong><br/><i>e.g. Datetime, Map, GIS</i></td>
+            <td><strong>معالجة البيانات غير المهيكلة القائمة على الذكاء الاصطناعي</strong><br/><i>تعزيز القدرة على معالجة البيانات غير المهيكلة وتحليلها باستخدام نماذج الذكاء الاصطناعي والتقنيات المتقدمة</i></td>
+            <td><strong>البحث في النص الكامل</strong><br/><i>دعم البحث في النص الكامل باستخدام Sparse-BM25. تقبل واجهة برمجة التطبيقات الجديدة النص كمدخلات وتقوم تلقائيًا بإنشاء متجه متناثر داخل Milvus</i><br/><br/><strong>متجه متناثر (GA)</strong><br/><i>دعم طريقة التخزين والفهرسة الفعالة للمتجهات المتفرقة</i><br/></td>
+            <td><strong>إدخال البيانات وإخراج البيانات</strong><br/><i>دعم خدمات النماذج الرئيسية لاستيعاب النص الأصلي</i><br/><br/><strong>أداة إعادة التصنيف المتقدمة</strong><br/><i>دعم أدوات إعادة التصنيف المستندة إلى النموذج ووظيفة تسجيل النقاط المحددة من قبل المستخدم</i><br/><br/><strong>البحث</strong> التكراري<br/><i>مراجعة متجه الاستعلام بناءً على تصنيف المستخدم</i></td>
+            <td><strong>دعم الموزعات</strong><br/><i>دعم قائمة المتجهات، والاستخدام النموذجي مثل كولبيرت وكوبالي وتمثيل الفيديو</i><br/><br/><strong>دعم المزيد من أنواع البيانات</strong><br/><i>مثل التاريخ والوقت والخريطة ونظم المعلومات الجغرافية</i></td>
         </tr>
         <tr>
-            <td><strong>Search Quality & Performance</strong><br/><i>Deliver accurate, relevant, and fast results by optimizing architecture, algorithms and APIs</i></td>
-            <td><strong>Text Match Function</strong><br/><i>Quickly filter keywords/tokens in text/varchar</i><br/><br/><strong>Grouping Search Enhancement</strong><br/><i>Introduce group_size and add group by support in hybrid search</i><br/><br/><strong>Bitmap Index & Inverted Index</strong><br/><i>Accelerate filtering on tags</i></td>
-            <td><strong>Advanced Match</strong><br/><i>e.g. phrase_match, multi_match </i><br/><br/><strong>Analyzer Enhancement</strong><br/><i>Enhance Analyzer with expanded tokenizer support and improved observability</i><br/><br/><strong>JSON Filtering</strong><br/><i>Optimize JSON indexing and parsing for faster processing</i></td>
-            <td><strong>Sorting Capability</strong><br/><i>Sort by scalar fields during execution</i><br/><br/><strong>Support Data Clustering</strong><br/><i>Data co-locality</i></td>
+            <td><strong>جودة وأداء البحث</strong><br/><i>تقديم نتائج دقيقة وذات صلة وسريعة من خلال تحسين البنية والخوارزميات وواجهات برمجة التطبيقات</i></td>
+            <td><strong>وظيفة مطابقة النص</strong><br/><i>تصفية الكلمات المفتاحية/الرموز بسرعة في النص/المعجم</i><br/><br/><strong>تحسين البحث في المجموعات</strong><br/><i>تقديم حجم المجموعة وإضافة دعم المجموعة حسب البحث المختلط</i><br/><br/><strong>فهرس الصور النقطية والفهرس المقلوب</strong><br/><i>تسريع التصفية على العلامات</i></td>
+            <td><strong>مطابقة متقدمة</strong><br/><i>على سبيل المثال مطابقة العبارات، مطابقة متعددة </i><br/><br/><strong>تحسين المحلل</strong><br/><i>تحسين المحلل مع دعم موسع للرموز الرمزية وتحسين إمكانية الملاحظة</i><br/><br/><strong>تصفية</strong> JSON<br/><i>تحسين فهرسة JSON وتحليلها لمعالجة أسرع</i></td>
+            <td><strong>القدرة على الفرز</strong><br/> الفرز<i>حسب الحقول العددية أثناء التنفيذ</i><br/><br/><strong>دعم ت</strong><i>جميع البيانات</i><br/><i>تجميع البيانات تجميع البيانات المشتركة</i></td>
         </tr>
         <tr>
-            <td><strong>Rich Functionality & Management</strong><br/><i>Developer-friendly and robust data management features</i></td>
-            <td><strong>Support csv files in data import</strong><br/><i>Bulkinsert supports csv format</i><br/><br/><strong>Support Null and Default Value</strong><br/><i>Null and Default types make importing data from other DBMS easier</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Visual management tools for DBAs</i></td>
-            <td><strong>Schema Change</strong><br/><i>e.g. Add/delete field, modify varchar length</i><br/><br/><strong>Aggregations</strong><br/><i>Scalar field aggregations, e.g. count,distinct value, min,max</i><br/><br/><strong>Support UDF</strong><br/><i>User-defined function</i></td>
-            <td><strong>Bulk Update</strong><br/><i>Support bulk updates to a specific field's value</i><br/><br/><strong>Primary Key Deduplication</strong><br/><i>By using the global pk index</i><br/><br/><strong>Data Versioning & Restore</strong><br/><i>Support data versioning by snapshot</i></td>
+            <td><strong>وظائ</strong><i>ف وإدارة غنية</i><br/><i>ميزات إدارة بيانات قوية وسهلة الاستخدام للمطورين</i></td>
+            <td><strong>دعم ملفات csv في استيراد البيانات</strong><br/><i>بولكنسيرت يدعم تنسيق csv</i><br/><br/><strong>دعم القيمة الفارغة والافتراضية</strong><br/><i>الأنواع</i> الفارغة<i>والافتراضية تجعل استيراد البيانات من أنظمة إدارة قواعد البيانات الأخرى أسهل</i><br/><br/><strong>واجهة ويب ميلفوس (بيتا)</strong><br/><i>أدوات الإدارة المرئية لمديري إدارة البيانات</i></td>
+            <td><strong>تغيير المخطط</strong><br/><i>على سبيل المثال إضافة/حذف حقل، تعديل طول متغير</i><br/><br/> التجميعات<br/><i>تجميعات الحقول العددية، على سبيل المثال العد، القيمة المميزة، الحد الأدنى، الحد الأقصى</i><br/><br/><strong>دعم UDF</strong><br/><i>وظيفة محددة من قبل المستخدم</i></td>
+            <td><strong>تحديث جماعي</strong><br/><i>دعم التحديثات المجمعة لقيمة حقل معين</i><br/><br/><strong>إلغاء تكرار المفتاح الأساسي</strong><br/><i>باستخدام فهرس pk العام</i><br/><br/><strong>إصدار البيانات واستعادتها</strong><br/><i>دعم إصدار البيانات عن طريق اللقطة</i></td>
         </tr>
         <tr>
-            <td><strong>Cost Efficiency & Architecture</strong><br/><i>State-of-the-art systems with stability, cost-effectiveness, and streamlined deployment.</i></td>
-            <td><strong>Memory Optimization</strong><br/><i>Reduce OOM and load enhancement</i><br/><br/><strong>Clustering Compaction</strong><br/><i>Data re-distribution based on configuration to accelerate read performance</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Universal formats design and foundation for disk-based data access</i></td>
-            <td><strong>Tiered Storage</strong><br/><i>Support hot and cold storage for cost optimization</i><br/><br/><strong>Stream Node</strong><br/><i>Process streaming data and simplify incremental write flow</i><br/><br/><strong>MixCoord</strong><br/><i>Merge Coord logics into one</i></td>
-            <td><strong>Vector Lake</strong><br/><i>Cost-effective offline solution, spark connector and integrate with iceberg</i><br/><br/><strong>Logstore Component</strong><br/><i>Reduce dependencies on external components like pulsar</i><br/><br/><strong>Data Evict Policy</strong><br/><i>Users can define their own evict policy</i></td>
+            <td><strong>كفاءة التكلفة والبنية</strong><br/><i>أحدث الأنظمة مع الاستقرار والفعالية من حيث التكلفة والنشر المبسط.</i></td>
+            <td><strong>تحسين الذاكرة</strong><br/><i>تقليل التشغيل العشوائي وتحسين التحميل</i><br/><br/><strong>تجميع الضغط</strong><br/><i>إعادة توزيع البيانات بناءً على التكوين لتسريع أداء القراءة</i><br/><br/><strong>تنسيق التخزين V2 (بيتا)</strong><br/><i>تصميم تنسيقات عالمية وأساس للوصول إلى البيانات المستندة إلى القرص</i></td>
+            <td><strong>التخزين المتدرج</strong><br/><i>دعم التخزين الساخن والبارد لتحسين التكلفة</i><br/><br/><strong>عقدة الدفق</strong><br/><i>معالجة البيانات المتدفقة وتبسيط تدفق الكتابة المتزايد</i><br/><br/><strong>MixCoord</strong><br/><i>دمج منطق التنسيق في واحد</i></td>
+            <td><strong>بحيرة المتجهات</strong><br/><i>حل فعال من حيث التكلفة دون اتصال بالإنترنت، وموصل شرارة والتكامل مع جبل الجليد</i><br/><br/><strong>مكون مخزن السجل</strong><br/><i>تقليل التبعيات على المكونات الخارجية مثل بولسار</i><br/><br/><strong>سياسة إخلاء البيانات</strong><br/><i>يمكن للمستخدمين تحديد سياسة الإخلاء الخاصة بهم</i></td>
         </tr>
     </tbody>
 </table>
 <ul>
-<li>Our roadmap is typically structured into three parts: the most recent release, the next upcoming release, and a mid-to-long term vision within the next year.</li>
-<li>As we progress, we continually learn and occasionally adjust our focus, adding or removing items as needed.</li>
-<li>These plans are indicative and subject to change, and may vary based on subscription services.</li>
-<li>We steadfastly adhere to our roadmap, with our <a href="/docs/release_notes.md">release notes</a> serving as a reference.</li>
+<li>تنقسم خارطة الطريق الخاصة بنا عادةً إلى ثلاثة أجزاء: الإصدار الأحدث، والإصدار القادم القادم، ورؤية متوسطة إلى طويلة المدى خلال العام القادم.</li>
+<li>ومع تقدمنا في العمل، نتعلم باستمرار ونقوم بتعديل تركيزنا من حين لآخر، ونضيف أو نحذف العناصر حسب الحاجة.</li>
+<li>هذه الخطط إرشادية وقابلة للتغيير، وقد تختلف بناءً على خدمات الاشتراك.</li>
+<li>نحن نلتزم بثبات بخارطة الطريق الخاصة بنا، مع استخدام <a href="/docs/ar/release_notes.md">ملاحظات الإصدار</a> الخاصة بنا كمرجع.</li>
 </ul>
-<h2 id="How-to-contribute" class="common-anchor-header">How to contribute<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
+<h2 id="How-to-contribute" class="common-anchor-header">كيفية المساهمة<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,16 +94,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>As an open-source project, Milvus thrives on community contributions. Here’s how you can be a part of our journey.</p>
-<h3 id="Share-feedback" class="common-anchor-header">Share feedback</h3><ul>
-<li><p>Issue reporting: Encounter a bug or have a suggestion? Open an issue on our <a href="https://github.com/milvus-io/milvus/issues">GitHub page</a>.</p></li>
-<li><p>Feature suggestions: Have ideas for new features or improvements? Join the conversation in <a href="https://github.com/milvus-io/milvus/discussions/40263">our active discussion thread</a>.</p></li>
+    </button></h2><p>كمشروع مفتوح المصدر، يزدهر ميلفوس بمساهمات المجتمع. إليك كيف يمكنك أن تكون جزءًا من رحلتنا.</p>
+<h3 id="Share-feedback" class="common-anchor-header">مشاركة الملاحظات</h3><ul>
+<li><p>الإبلاغ عن المشكلات: هل واجهت خطأ أو لديك اقتراح؟ افتح مشكلة على <a href="https://github.com/milvus-io/milvus/issues">صفحة GitHub</a> الخاصة بنا.</p></li>
+<li><p>اقتراحات الميزات: هل لديك أفكار لميزات أو تحسينات جديدة؟ انضم إلى المحادثة في <a href="https://github.com/milvus-io/milvus/discussions/40263">سلسلة مناقشاتنا النشطة</a>.</p></li>
 </ul>
-<h3 id="Code-contributions" class="common-anchor-header">Code contributions</h3><ul>
-<li><p>Pull requests: Contribute directly to our <a href="https://github.com/milvus-io/milvus/pulls">codebase</a>. Whether it’s fixing bugs, adding features, or improving documentation, your contributions are welcome.</p></li>
-<li><p>Development guide: Check our <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Contributor’s Guide</a> for guidelines on code contributions.</p></li>
+<h3 id="Code-contributions" class="common-anchor-header">مساهمات الكود</h3><ul>
+<li><p>طلبات السحب: ساهم مباشرةً في <a href="https://github.com/milvus-io/milvus/pulls">قاعدة التعليمات البر</a>مجية الخاصة بنا. سواءً كان ذلك لإصلاح الأخطاء أو إضافة ميزات أو تحسين التوثيق، فإن مساهماتك مرحب بها.</p></li>
+<li><p>دليل التطوير: راجع <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">دليل المساهمين</a> الخاص بنا للاطلاع على الإرشادات الخاصة بالمساهمات البرمجية.</p></li>
 </ul>
-<h3 id="Spread-the-word" class="common-anchor-header">Spread the word</h3><ul>
-<li><p>Social sharing: Love Milvus? Share your use cases and experiences on social media and tech blogs.</p></li>
-<li><p>Star us on GitHub: Show your support by starring our <a href="https://github.com/milvus-io/milvus">GitHub repository</a>.</p></li>
+<h3 id="Spread-the-word" class="common-anchor-header">انشر الكلمة</h3><ul>
+<li><p>المشاركة الاجتماعية: هل تحب ميلفوس؟ شارك حالات استخدامك وتجاربك على وسائل التواصل الاجتماعي والمدونات التقنية.</p></li>
+<li><p>ضع نجمة لنا على GitHub: أظهر دعمك من خلال وضع نجمة على <a href="https://github.com/milvus-io/milvus">مستودع GitHub</a> الخاص بنا.</p></li>
 </ul>

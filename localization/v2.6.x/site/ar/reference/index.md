@@ -1,10 +1,10 @@
 ---
 id: index.md
 related_key: index
-summary: Index mechanism in Milvus.
-title: In-memory Index
+summary: آلية الفهرس في ميلفوس.
+title: الفهرس داخل الذاكرة
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">In-memory Index<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">الفهرس داخل الذاكرة<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,13 +19,12 @@ title: In-memory Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic lists various types of in-memory indexes Milvus supports, scenarios each of them best suits, and parameters users can configure to achieve better search performance. For on-disk indexes, see <strong><a href="/docs/disk_index.md">On-disk Index</a></strong>.</p>
-<p>Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/index-vector-fields.md">specify an index type</a> for each vector field.</p>
+    </button></h1><p>يسرد هذا الموضوع أنواع مختلفة من الفهارس داخل الذاكرة التي يدعمها ملفوس، والسيناريوهات التي تناسب كل منها، والمعلمات التي يمكن للمستخدمين تكوينها لتحقيق أداء بحث أفضل. بالنسبة للفهارس على القرص، راجع <strong><a href="/docs/ar/disk_index.md">الفهرسة على القرص</a></strong>.</p>
+<p>الفهرسة هي عملية تنظيم البيانات بكفاءة، وتلعب دورًا رئيسيًا في جعل البحث عن التشابه مفيدًا من خلال تسريع الاستعلامات التي تستغرق وقتًا طويلاً على مجموعات البيانات الكبيرة بشكل كبير.</p>
+<p>لتحسين أداء الاستعلام، يمكنك <a href="/docs/ar/index-vector-fields.md">تحديد نوع فهرس</a> لكل حقل متجه.</p>
 <div class="alert note">
-Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
-</div>
-<h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS vector indexes<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
+يدعم حقل المتجه حاليًا نوع فهرس واحد فقط. يقوم ميلفوس تلقائيًا بحذف الفهرس القديم عند تبديل نوع الفهرس.</div>
+<h2 id="ANNS-vector-indexes" class="common-anchor-header">فهارس المتجهات ANNS<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,9 +39,9 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS) algorithms. Compared with accurate retrieval, which is usually very time-consuming, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.</p>
-<p>According to the implementation methods, the ANNS vector index can be categorized into four types: Tree-based, Graph-based, Hash-based, and Quantization-based.</p>
-<h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Indexes supported in Milvus<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
+    </button></h2><p>تستخدم معظم أنواع الفهارس المتجهة التي يدعمها Milvus خوارزميات البحث التقريبي الأقرب للجيران (ANNS). وبالمقارنة مع الاسترجاع الدقيق، الذي عادةً ما يستغرق وقتًا طويلاً، فإن الفكرة الأساسية لـ ANNS لم تعد تقتصر على إرجاع النتيجة الأكثر دقة، بل البحث عن جيران الهدف فقط. تعمل ANNS على تحسين كفاءة الاسترجاع من خلال التضحية بالدقة ضمن نطاق مقبول.</p>
+<p>وفقًا لطرق التنفيذ، يمكن تصنيف فهرس متجه ANNS إلى أربعة أنواع: قائم على الشجرة وقائم على الرسم البياني وقائم على التجزئة وقائم على التجزئة الكمية.</p>
+<h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">الفهارس المدعومة في ميلفوس<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,132 +56,129 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports various index types, which are categorized by the type of vector embeddings they handle: <strong>floating-point embeddings</strong> (also known as floating point vectors or dense vectors), <strong>binary embeddings</strong> (also known as binary vectors), and <strong>sparse embeddings</strong> (also known as sparse vectors).</p>
+    </button></h2><p>تدعم Milvus أنواعًا مختلفة من الفهارس، والتي يتم تصنيفها حسب نوع التضمينات المتجهة التي تتعامل معها: <strong>تضمينات الف</strong> اصلة العائمة (المعروفة أيضًا باسم متجهات النقطة العائمة أو المتجهات الكثيفة)، والتضمينات <strong>الثنائية</strong> (المعروفة أيضًا باسم المتجهات الثنائية)، <strong>والتضمينات المتفرقة</strong> (المعروفة أيضًا باسم المتجهات المتفرقة).</p>
 <div class="filter">
-  <a href="#floating">Floating-point embeddings</a>
-  <a href="#binary">Binary embeddings</a>
-  <a href="#sparse">Sparse embeddings</a>
-</div>
+ <a href="#floating">تضمينات الفاصلة العائمة</a> <a href="#binary">التضمينات الثنائية التضمينات الثنائية</a> <a href="#sparse">التضمينات المتفرقة</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indexes for floating-point embeddings</h3><p>For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (<code translate="no">L2</code>) and Inner product (<code translate="no">IP</code>).</p>
-<p>These types of indexes include <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, and <code translate="no">SCANN</code> for CPU-based ANN searches.</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">فهارس لتضمينات الفاصلة العائمة</h3><p>بالنسبة للتضمينات ذات الفاصلة العائمة ذات 128 بُعدًا (المتجهات)، فإن مساحة التخزين التي تشغلها هي 128 * حجم العوامة = 512 بايت. <a href="/docs/ar/metric.md">ومقاييس المسافة</a> المستخدمة لتضمينات الفاصلة العائمة هي المسافة الإقليدية (<code translate="no">L2</code>) والمنتج الداخلي (<code translate="no">IP</code>).</p>
+<p>وتتضمن هذه الأنواع من الفهارس <code translate="no">FLAT</code> و <code translate="no">IVF_FLAT</code> و و <code translate="no">IVF_PQ</code> و <code translate="no">IVF_SQ8</code> و <code translate="no">HNSW</code> و <code translate="no">HNSW_SQ</code> و <code translate="no">HNSW_PQ</code> و <code translate="no">HNSW_PRQ</code> و <code translate="no">SCANN</code> لعمليات البحث في الشبكة العنكبوتية القائمة على وحدة المعالجة المركزية.</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indexes for binary embeddings</h3><p>For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are <code translate="no">JACCARD</code> and <code translate="no">HAMMING</code>.</p>
-<p>This type of indexes include <code translate="no">BIN_FLAT</code> and <code translate="no">BIN_IVF_FLAT</code>.</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">فهارس التضمينات الثنائية</h3><p>بالنسبة للتضمينات الثنائية ذات 128 بُعدًا، تبلغ مساحة التخزين التي تشغلها 128 / 8 = 16 بايت. ومقاييس المسافة المستخدمة للتضمينات الثنائية هي <code translate="no">JACCARD</code> و <code translate="no">HAMMING</code>.</p>
+<p>يتضمن هذا النوع من الفهارس <code translate="no">BIN_FLAT</code> و <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indexes for sparse embeddings</h3><p>Indexes for sparse embeddings support the <code translate="no">IP</code> and <code translate="no">BM25</code> (for full-text search) metrics only.</p>
-<p>Index type supported for sparse embeddings: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">فهارس التضمينات المتفرقة</h3><p>تدعم فهارس التضمينات المتفرقة مقاييس <code translate="no">IP</code> و <code translate="no">BM25</code> (للبحث في النص الكامل) فقط.</p>
+<p>نوع الفهرس المدعوم للتضمينات المتفرقة: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
-<p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility. For more information, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>من الإصدار Milvus 2.5.4 فصاعدًا، تم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق. لمزيد من المعلومات، راجع <a href="/docs/ar/sparse_vector.md#Set-index-params-for-vector-field">متجه متناثر</a>.</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>الفهرس المدعوم</th>
+    <th>التصنيف</th>
+    <th>السيناريو</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>FLAT</td>
-    <td>N/A</td>
+    <td>مسطح</td>
+    <td>غير متاح</td>
     <td>
       <ul>
-        <li>Relatively small dataset</li>
-        <li>Requires a 100% recall rate</li>
+        <li>مجموعة بيانات صغيرة نسبيًا</li>
+        <li>يتطلب معدل استرجاع 100%</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>N/A</td>
+    <td>غير متاح</td>
     <td>
       <ul>
-        <li>High-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
+        <li>استعلام عالي السرعة</li>
+        <li>يتطلب معدل استرجاع عالٍ قدر الإمكان</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>IVF_SQ8</td>
-    <td>Quantization-based index</td>
+    <td>الفهرس القائم على التكميم</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>استعلام عالي السرعة للغاية</li>
+        <li>موارد ذاكرة محدودة</li>
+        <li>يقبل مساومة طفيفة في معدل الاستدعاء</li>
       </ul>
     </td>
   </tr>  
   <tr>
     <td>IVF_PQ</td>
-    <td>Quantization-based index</td>
+    <td>الفهرس المستند إلى التقدير الكمي</td>
     <td>
       <ul>
-        <li>High-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>استعلام عالي السرعة</li>
+        <li>موارد ذاكرة محدودة</li>
+        <li>يقبل تنازلات طفيفة في معدل الاسترجاع</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>HNSW</td>
-    <td>Graph-based index</td>
+    <td>فهرس قائم على الرسم البياني</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Large memory resources</li>
+        <li>استعلام عالي السرعة للغاية</li>
+        <li>يتطلب معدل استرجاع عالٍ قدر الإمكان</li>
+        <li>موارد ذاكرة كبيرة</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>HNSW_SQ</td>
-    <td>Quantization-based index</td>
+    <td>فهرس قائم على القياس الكمي</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>استعلام عالي السرعة للغاية</li>
+        <li>موارد ذاكرة محدودة</li>
+        <li>يقبل تنازلاً بسيطاً في معدل الاسترجاع</li>
       </ul>
     </td>
   </tr>
     <tr>
     <td>HNSW_PQ</td>
-    <td>Quantization-based index</td>
+    <td>الفهرس المستند إلى القياس الكمي</td>
     <td>
       <ul>
-        <li>Medium speed query</li>
-        <li>Very limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>استعلام متوسط السرعة</li>
+        <li>موارد ذاكرة محدودة للغاية</li>
+        <li>يقبل تنازلات طفيفة في معدل الاسترجاع</li>
       </ul>
     </td>
   </tr>
     </tr>
     <tr>
     <td>HNSW_PRQ</td>
-    <td>Quantization-based index</td>
+    <td>الفهرس المستند إلى القياس الكمي</td>
     <td>
       <ul>
-        <li>Medium speed query</li>
-        <li>Very limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>استعلام متوسط السرعة</li>
+        <li>موارد ذاكرة محدودة للغاية</li>
+        <li>يقبل تنازلات طفيفة في معدل الاسترجاع</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>SCANN</td>
-    <td>Quantization-based index</td>
+    <td>فهرس قائم على تحديد الكميات</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Large memory resources</li>
+        <li>استعلام عالي السرعة للغاية</li>
+        <li>يتطلب معدل استرجاع عالٍ قدر الإمكان</li>
+        <li>موارد ذاكرة كبيرة</li>
       </ul>
     </td>
   </tr>
@@ -193,28 +189,28 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <table id="binary">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>الفهرس المدعوم</th>
+    <th>التصنيف</th>
+    <th>السيناريو</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td>BIN_FLAT</td>
-    <td>Quantization-based index</td>
+    <td>فهرس قائم على التحويل الكمي</td>
     <td><ul>
-      <li>Depends on relatively small datasets.</li>
-      <li>Requires perfect accuracy.</li>
-      <li>No compression applies.</li>
-      <li>Guarantee exact search results.</li>
+      <li>يعتمد على مجموعات بيانات صغيرة نسبياً.</li>
+      <li>يتطلب دقة مثالية.</li>
+      <li>لا ينطبق أي ضغط.</li>
+      <li>يضمن نتائج بحث دقيقة.</li>
     </ul></td>
   </tr>
   <tr>
     <td>BIN_IVF_FLAT</td>
-    <td>Quantization-based index</td>
+    <td>فهرس قائم على التكميم</td>
     <td><ul>
-      <li>High-speed query</li>
-      <li>Requires a recall rate as high as possible</li>
+      <li>استعلام عالي السرعة</li>
+      <li>يتطلب معدل استرجاع عالٍ قدر الإمكان</li>
     </ul></td>
   </tr>
 </tbody>
@@ -224,362 +220,362 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <table id="sparse">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>الفهرس المدعوم</th>
+    <th>التصنيف</th>
+    <th>السيناريو</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>SPARSE_INVERTED_INDEX</td>
-    <td>Inverted index</td>
+    <td>الفهرس_المقلوب_المتفرق</td>
+    <td>فهرس مقلوب</td>
     <td><ul>
-      <li>Depends on relatively small datasets.</li>
-      <li>Requires a 100% recall rate.</li>
+      <li>يعتمد على مجموعات بيانات صغيرة نسبيًا.</li>
+      <li>يتطلب معدل استرجاع 100%.</li>
     </ul></td>
   </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.</p>
-<p>FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every set of vectors in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters required for the FLAT index in Milvus, and using it does not need extra index buidling.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>بالنسبة لتطبيقات البحث عن تشابه المتجهات التي تتطلب دقة مثالية وتعتمد على مجموعات بيانات صغيرة نسبيًا (بمقياس مليون)، يعد الفهرس المسطح خيارًا جيدًا. لا يقوم FLAT بضغط المتجهات، وهو الفهرس الوحيد الذي يمكن أن يضمن نتائج بحث دقيقة. يمكن أيضًا استخدام النتائج من FLAT كنقطة مقارنة للنتائج التي تنتجها الفهارس الأخرى التي لديها أقل من 100٪ استدعاء.</p>
+<p>يتميز فهرس FLAT بالدقة لأنه يتبع نهجًا شاملًا للبحث، مما يعني أنه لكل استعلام تتم مقارنة المدخلات المستهدفة بكل مجموعة من المتجهات في مجموعة البيانات. وهذا يجعل FLAT أبطأ فهرس في قائمتنا، وهو غير مناسب للاستعلام عن بيانات المتجهات الضخمة. لا توجد معلمات مطلوبة لفهرس FLAT في Milvus، ولا يحتاج استخدامه إلى بناء فهرس إضافي.</p>
 <ul>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[اختياري] مقياس المسافة المختار.</td><td>انظر <a href="/docs/ar/metric.md">المقاييس المدعومة</a>.</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Results from the <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT performance test</a> demonstrate that query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>يقسم IVF_FLAT بيانات المتجهات إلى <code translate="no">nlist</code> وحدات عنقودية، ثم يقارن المسافات بين متجه الإدخال الهدف ومركز كل مجموعة. اعتمادًا على عدد المجموعات التي تم تعيين النظام للاستعلام عنها (<code translate="no">nprobe</code>)، يتم إرجاع نتائج بحث التشابه بناءً على المقارنات بين المدخلات المستهدفة والمتجهات في المجموعة (المجموعات) الأكثر تشابهًا فقط - مما يقلل وقت الاستعلام بشكل كبير.</p>
+<p>من خلال ضبط <code translate="no">nprobe</code> ، يمكن إيجاد توازن مثالي بين الدقة والسرعة لسيناريو معين. توضح النتائج من <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">اختبار أداء IVF_FLAT</a> أن وقت الاستعلام يزداد بشكل حاد مع زيادة عدد متجهات المدخلات المستهدفة (<code translate="no">nq</code>)، وعدد المجموعات المطلوب البحث عنها (<code translate="no">nprobe</code>).</p>
+<p>إن IVF_FLAT هو فهرس IVF_FLAT الأساسي، والبيانات المشفرة المخزنة في كل وحدة متسقة مع البيانات الأصلية.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td>128</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>عدد وحدات المجموعة</td><td>[1, 65536]</td><td>128</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <ul>
-<li><p>Common search</p>
+<li><p>بحث مشترك</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>عدد الوحدات المطلوب الاستعلام عنها</td><td>[1، ن ليست]</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>بحث النطاق</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>الحد الأقصى لعدد الدلاء التي لا ترجع أي نتائج بحث.<br/>هذه معلمة بحث نطاق وتنهي عملية البحث عندما يصل عدد الدلاء الفارغة المتتالية إلى القيمة المحددة.<br/>يمكن أن تؤدي زيادة هذه القيمة إلى تحسين معدل الاستدعاء على حساب زيادة وقت البحث.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT does not perform any compression, so the index files it produces are roughly the same size as the original, raw non-indexed vector data. For example, if the original 1B SIFT dataset is 476 GB, its IVF_FLAT index files will be slightly smaller (~470 GB). Loading all the index files into memory will consume 470 GB of storage.</p>
-<p>When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option than IVF_FLAT. This index type can convert each FLOAT (4 bytes) to UINT8 (1 byte) by performing Scalar Quantization (SQ). This reduces disk, CPU, and GPU memory consumption by 70–75%. For the 1B SIFT dataset, the IVF_SQ8 index files require just 140 GB of storage.</p>
+<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>لا يقوم IVF_FFLAT بإجراء أي ضغط، لذا فإن ملفات الفهرس التي ينتجها تكون تقريبًا بنفس حجم بيانات المتجه الأصلية غير المفهرسة. على سبيل المثال، إذا كان حجم مجموعة بيانات SIFT 1B الأصلية 476 جيجابايت، فإن ملفات فهرس IVF_SQ8_FLAT الخاصة بها ستكون أصغر قليلاً (حوالي 470 جيجابايت). سيؤدي تحميل جميع ملفات الفهرس في الذاكرة إلى استهلاك 470 جيجابايت من مساحة التخزين.</p>
+<p>عندما تكون موارد ذاكرة القرص أو وحدة المعالجة المركزية أو وحدة معالجة الرسومات محدودة، فإن IVF_SQ8 هو خيار أفضل من IVF_FLAT. يمكن لنوع الفهرس هذا تحويل كل FLOAT (4 بايت) إلى UINT8 (1 بايت) عن طريق إجراء التكميم الكمي Scalar Quantization (SQ). يقلل هذا من استهلاك القرص ووحدة المعالجة المركزية وذاكرة وحدة معالجة الرسومات بنسبة 70-75%. بالنسبة لمجموعة بيانات SIFT 1B، تتطلب ملفات فهرس IVF_SQ8 مساحة تخزين 140 جيجابايت فقط.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>عدد وحدات التجميع</td><td>[1, 65536]</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <ul>
-<li><p>Common search</p>
+<li><p>بحث مشترك</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>عدد الوحدات المطلوب الاستعلام عنها</td><td>[1، ن ليست]</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>بحث النطاق</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>الحد الأقصى لعدد الدلاء التي لا ترجع أي نتائج بحث.<br/>هذه معلمة بحث نطاق وتنهي عملية البحث عندما يصل عدد الدلاء الفارغة المتتالية إلى القيمة المحددة.<br/>يمكن أن تؤدي زيادة هذه القيمة إلى تحسين معدل الاستدعاء على حساب زيادة وقت البحث.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of <code translate="no">m</code> low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.</p>
-<p>IVF_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (التكميم الكمي للمنتج) يحلل بشكل موحد الفضاء المتجه الأصلي عالي الأبعاد إلى نواتج ديكارتية من <code translate="no">m</code> مساحات متجهة منخفضة الأبعاد، ثم يقوم بتكميم المساحات المتجهة منخفضة الأبعاد المتحللة. وبدلاً من حساب المسافات بين المتجه الهدف ومركز جميع الوحدات، يتيح التكميم الكمي للمنتج حساب المسافات بين المتجه الهدف ومركز التجميع لكل فضاء منخفض الأبعاد ويقلل بشكل كبير من تعقيد الوقت وتعقيد المساحة للخوارزمية.</p>
+<p>يقوم IVF_PQ بإجراء تجميع فهرس IVF قبل تكميم حاصل ضرب المتجهات. ملف الفهرس الخاص به أصغر من IVF_SQ8، لكنه يتسبب أيضًا في فقدان الدقة أثناء البحث عن المتجهات.</p>
 <div class="alert note">
-<p>Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.</p>
+<p>تختلف معلمات بناء الفهرس ومعلمات البحث باختلاف توزيع Milvus. حدد توزيع Milvus الخاص بك أولاً.</p>
 </div>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
-<tr><td><code translate="no">m</code></td><td>Number of factors of product quantization</td><td><code translate="no">dim mod m == 0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Optional] Number of bits in which each low-dimensional vector is stored.</td><td>[1, 64] (8 by default)</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>عدد وحدات الكتلة</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">m</code></td><td>عدد عوامل تكميم المنتج</td><td><code translate="no">dim mod m == 0</code></td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[اختياري] عدد البتات التي يتم تخزين كل متجه منخفض الأبعاد فيها.</td><td>[1، 64] (8 افتراضيًا)</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <ul>
-<li><p>Common search</p>
+<li><p>بحث مشترك</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>عدد الوحدات المطلوب الاستعلام عنها</td><td>[1، ن ليست]</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>بحث النطاق</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>الحد الأقصى لعدد الدلاء التي لا ترجع أي نتائج بحث.<br/>هذه معلمة بحث نطاق وتنهي عملية البحث عندما يصل عدد الدلاء الفارغة المتتالية إلى القيمة المحددة.<br/>يمكن أن تؤدي زيادة هذه القيمة إلى تحسين معدل الاستدعاء على حساب زيادة وقت البحث.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>يشبه ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (ScaNN (Scalable Nearest Neighbours) يشبه IVF_PQ من حيث تجميع المتجهات وتكميم المنتج. ما يجعلها مختلفة يكمن في تفاصيل تنفيذ تكميم المنتج واستخدام SIMD (أحادي التعليمات / متعدد البيانات) للحساب الفعال.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
-<tr><td><code translate="no">with_raw_data</code></td><td>Whether to include the raw data in the index</td><td><code translate="no">True</code> or <code translate="no">False</code>. Defaults to <code translate="no">True</code>.</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>عدد وحدات الكتلة</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">with_raw_data</code></td><td>ما إذا كان سيتم تضمين البيانات الأولية في الفهرس</td><td><code translate="no">True</code> أو <code translate="no">False</code>. الافتراضي إلى <code translate="no">True</code>.</td></tr>
 </tbody>
 </table>
   <div class="alert note">
-<p>Unlike IVF_PQ, default values apply to <code translate="no">m</code> and <code translate="no">nbits</code> for optimized performance.</p>
+<p>على عكس IVF_PQ، تنطبق القيم الافتراضية على <code translate="no">m</code> و <code translate="no">nbits</code> لتحسين الأداء.</p>
   </div>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <ul>
-<li><p>Common search</p>
+<li><p>البحث الشائع</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td></td></tr>
-<tr><td><code translate="no">reorder_k</code></td><td>Number of candidate units to query</td><td>[<code translate="no">top_k</code>, ∞]</td><td><code translate="no">top_k</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>عدد الوحدات المطلوب الاستعلام عنها</td><td>[1، nlist]</td><td></td></tr>
+<tr><td><code translate="no">reorder_k</code></td><td>عدد الوحدات المرشحة للاستعلام عنها</td><td>[<code translate="no">top_k</code> ، ∞]</td><td><code translate="no">top_k</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>نطاق البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>الحد الأقصى لعدد الدلاء التي لا ترجع أي نتائج بحث.<br/>هذه معلمة بحث نطاق وتنهي عملية البحث عندما يصل عدد الدلاء الفارغة المتتالية إلى القيمة المحددة.<br/>يمكن أن تؤدي زيادة هذه القيمة إلى تحسين معدل الاستدعاء على حساب زيادة وقت البحث.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.</p>
-<p>In order to improve performance, HNSW limits the maximum degree of nodes on each layer of the graph to <code translate="no">M</code>. In addition, you can use <code translate="no">efConstruction</code> (when building index) or <code translate="no">ef</code> (when searching targets) to specify a search range.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (الرسم البياني الهرمي للعالم الصغير القابل للملاحة) هي خوارزمية فهرسة قائمة على الرسم البياني. وهي تبني بنية تنقل متعددة الطبقات للصورة وفقًا لقواعد معينة. في هذه البنية، تكون الطبقات العليا أكثر تناثرًا والمسافات بين العقد أبعد؛ أما الطبقات السفلى فهي أكثر كثافة والمسافات بين العقد أقرب. يبدأ البحث من الطبقة العليا، ويعثر على العقدة الأقرب إلى الهدف في هذه الطبقة، ثم يدخل إلى الطبقة التالية لبدء بحث آخر. بعد عدة تكرارات، يمكن أن يقترب بسرعة من الموضع المستهدف.</p>
+<p>من أجل تحسين الأداء، يحدّ HNSW من الحد الأقصى لدرجة العقد في كل طبقة من الرسم البياني إلى <code translate="no">M</code>. بالإضافة إلى ذلك، يمكنك استخدام <code translate="no">efConstruction</code> (عند بناء الفهرس) أو <code translate="no">ef</code> (عند البحث عن الأهداف) لتحديد نطاق بحث.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M تحدد الحد الأقصى لعدد الاتصالات الصادرة في الرسم البياني. يؤدي ارتفاع M إلى دقة أعلى/وقت تشغيل أعلى عند بناء ef/efConstruction ثابت.</td><td>[2, 2048]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>يتحكم ef_construction في سرعة البحث عن الفهرس/سرعة البناء. قد تؤدي زيادة معلمة efConstruction إلى تحسين جودة الفهرس، ولكنها تميل أيضًا إلى إطالة وقت الفهرسة.</td><td>[1، int_max]</td><td>لا يوجد</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">ef</code></td><td>معلمة تتحكم في مفاضلة وقت/دقة البحث. يؤدي ارتفاع <code translate="no">ef</code> إلى بحث أكثر دقة ولكن أبطأ.</td><td>[<code translate="no">top_k</code> ، int_max]</td><td>لا يوجد</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>Scalar Quantization (SQ) is a technique used to discretize floating-point data into a finite set of values based on their magnitude. For example, <strong>SQ6</strong> represents quantization into (2^6 = 64) discrete values, where each floating-point number is encoded using 6 bits. Similarly, <strong>SQ8</strong> quantizes the data into (2^8 = 256) discrete values, with each floating-point number represented by 8 bits. This quantization reduces the memory footprint while preserving the essential structure of the data for efficient processing.</p>
-<p>Combined with SQ, HNSW_SQ offers a controllable trade-off between index size and accuracy, while maintaining high query-per-second (QPS) performance. Compared to standard HNSW, it results in a modest increase in index construction time.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>التكمية الكمية العددية (SQ) هي تقنية تُستخدم لتجزئة بيانات الفاصلة العائمة إلى مجموعة محدودة من القيم بناءً على مقدارها. على سبيل المثال، يمثل <strong>SQ6</strong> التكميم الكمي إلى (2^6 = 64) قيم منفصلة، حيث يتم ترميز كل رقم عائم باستخدام 6 بت. وبالمثل، يقوم <strong>SQ8</strong> بتكميم البيانات إلى (2 ^ 8 = 256) قيم منفصلة، حيث يتم تمثيل كل رقم عائم ب 8 بتات. يقلل هذا التكميم من بصمة الذاكرة مع الحفاظ على البنية الأساسية للبيانات من أجل معالجة فعالة.</p>
+<p>وبالاقتران مع SQ، يوفر HNSW_SQ مفاضلة يمكن التحكم فيها بين حجم الفهرس والدقة، مع الحفاظ على أداء استعلام عالٍ في الثانية (QPS). وبالمقارنة مع HNSW القياسي، فإنه يؤدي إلى زيادة متواضعة في وقت بناء الفهرس.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">sq_type</code></td><td>Scalar quantizer type.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M تحدد الحد الأقصى لعدد الاتصالات الصادرة في الرسم البياني. يؤدي ارتفاع M إلى دقة أعلى/وقت تشغيل أعلى عند بناء ef/efConstruction ثابت.</td><td>[2, 2048]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>يتحكم ef_construction في سرعة البحث عن الفهرس/سرعة البناء. قد تؤدي زيادة معلمة efConstruction إلى تحسين جودة الفهرس، ولكنها تميل أيضًا إلى إطالة وقت الفهرسة.</td><td>[1، int_max]</td><td>لا شيء</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>نوع الكميات العددية.</td><td><code translate="no">SQ6</code>،<code translate="no">SQ8</code> ، <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>ما إذا كان يتم حجز البيانات المكررة أثناء إنشاء الفهرس.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>نوع بيانات الفهرس المنقح.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>لا يوجد</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>معلمة تتحكم في مفاضلة وقت/دقة البحث. يؤدي ارتفاع <code translate="no">ef</code> إلى بحث أكثر دقة ولكن أبطأ.</td><td>[<code translate="no">top_k</code> ، int_max]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>عامل التكبير للتكرير مقارنة بـ <em>k</em>.</td><td>[ 1, <em>float_max</em>]</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>The basic idea of PQ is to split the vector into <code translate="no">m</code> sub-vectors, each of which will find 2^{<em>nbits</em>} centroids based on kmeans, and each sub-vector will select the nearest centroid as its approximate sub-vector. Then we record all the centriods, so each subvector can be encoded as <code translate="no">nbits</code>, and a floating vector of length <code translate="no">dim</code> can be encoded as <em>m ⋅ nbits</em> bits.</p>
-<p>Combined with PQ, HNSW_PQ offers a controllable tradeoff between index size and accuracy, but it has a lower QPS value and a higher recall rate than HNSW_SQ for the same compression rate. Compared with HNSW_SQ, it takes longer to build the index.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>تتمثل الفكرة الأساسية لـ PQ في تقسيم المتجه إلى <code translate="no">m</code> متجهات فرعية، كل منها سيجد <em>2^{nbits}</em> مركزيات على أساس kmeans، وسيختار كل متجه فرعي أقرب متجه فرعي كمتجه فرعي تقريبي له. ثم نقوم بتسجيل جميع المئويات، بحيث يمكن ترميز كل متجه فرعي على أنه <code translate="no">nbits</code> ، ويمكن ترميز متجه عائم طوله <code translate="no">dim</code> على أنه <em>م ⋅ nbits</em> بت.</p>
+<p>وبالاقتران مع PQ، يوفر HNSW_PQ مفاضلة يمكن التحكم فيها بين حجم الفهرس والدقة، ولكن لديه قيمة QPS أقل ومعدل استرجاع أعلى من HNSW_SQ لنفس معدل الضغط. بالمقارنة مع HNSW_SQ، يستغرق بناء الفهرس وقتًا أطول.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M تحدد الحد الأقصى لعدد الاتصالات الصادرة في الرسم البياني. يؤدي ارتفاع M إلى دقة أعلى/وقت تشغيل أعلى عند بناء ef/efConstruction ثابت.</td><td>[2, 2048]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>يتحكم ef_construction في سرعة البحث عن الفهرس/سرعة البناء. قد تؤدي زيادة معلمة efConstruction إلى تحسين جودة الفهرس، ولكنها تميل أيضًا إلى إطالة وقت الفهرسة.</td><td>[1، int_max]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">m</code></td><td>عدد مجموعات المتجهات الفرعية المراد تقسيم المتجه إليها.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>عدد البتات التي يتم تقسيم كل مجموعة من المتجهات الفرعية إليها.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>ما إذا كان يتم حجز البيانات المكررة أثناء بناء الفهرس.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>نوع بيانات الفهرس المنقح.</td><td><code translate="no">SQ6</code>، <code translate="no">SQ8</code> ، <code translate="no">BF16</code> ، ، <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>لا يوجد</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>معلمة تتحكم في مفاضلة وقت/دقة البحث. يؤدي ارتفاع <code translate="no">ef</code> إلى بحث أكثر دقة ولكن أبطأ.</td><td>[<code translate="no">top_k</code> ، int_max]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>عامل التكبير للتكرير مقارنة بـ <em>k</em>.</td><td>[ 1, <em>float_max</em>]</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ is similar to PQ, and also divides the vector into <code translate="no">m</code> groups. Each sub-vector will be encoded as <code translate="no">nbits</code>. After completing a pq quantization, it will calculate the residual between the vector and the pq quantized vector, and apply pq quantization to the residual vector. A total of <code translate="no">nrq</code> complete pq quantizations will be performed, so a floating vector of length <code translate="no">dim</code> will be encoded as <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
-<p>Combined with a Product Residual Quantizer (PRQ), HNSW_PRQ offers an even higher controllable tradeoff between index size and accuracy. It has almost equivalent QPS value and a higher recall rate than HNSW_PQ for the same compression rate. Compared with HNSW_PQ, the time to build the index may increase several times.</p>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ مشابه لـ PQ، ويقسم المتجه أيضًا إلى <code translate="no">m</code> مجموعات. سيتم ترميز كل متجه فرعي على أنه <code translate="no">nbits</code>. بعد إكمال تكميم pq، سيحسب المتجه المتبقي بين المتجه والمتجه المكمم pq، ويطبق تكميم pq على المتجه المتبقي. سيتم إجراء ما مجموعه <code translate="no">nrq</code> عملية تكميم pq كاملة، لذا سيتم ترميز متجه عائم طوله <code translate="no">dim</code> على هيئة <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
+<p>يوفر HNSW_PRQ، بالاقتران مع مُكوِّن الكمية المتبقية من المنتج (PRQ)، مفاضلة أعلى يمكن التحكم فيها بين حجم المؤشر والدقة. لديه قيمة QPS مكافئة تقريبًا ومعدل استرجاع أعلى من HNSW_PQ لنفس معدل الضغط. بالمقارنة مع HNSW_PQ، قد يزيد وقت بناء الفهرس عدة مرات.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
-<tr><td><code translate="no">nrq</code></td><td>The number of residual subquantizers.</td><td>[1, 16]</td><td>2</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M تحدد الحد الأقصى لعدد الاتصالات الصادرة في الرسم البياني. يؤدي ارتفاع M إلى دقة أعلى/وقت تشغيل أعلى عند بناء ef/efConstruction ثابت.</td><td>[2, 2048]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>يتحكم ef_construction في سرعة البحث عن الفهرس/سرعة البناء. قد تؤدي زيادة معلمة efConstruction إلى تحسين جودة الفهرس، ولكنها تميل أيضًا إلى إطالة وقت الفهرسة.</td><td>[1، int_max]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">m</code></td><td>عدد مجموعات المتجهات الفرعية المراد تقسيم المتجه إليها.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>عدد البتات التي يتم تقسيم كل مجموعة من المتجهات الفرعية إليها.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>عدد المتجهات الفرعية المتبقية.</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>ما إذا كانت البيانات المكررة محجوزة أثناء بناء الفهرس.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>نوع بيانات الفهرس المنقح.</td><td><code translate="no">SQ6</code>، <code translate="no">SQ8</code> ، <code translate="no">BF16</code> ، ، <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>لا يوجد</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>معلمة تتحكم في مفاضلة وقت/دقة البحث. يؤدي ارتفاع <code translate="no">ef</code> إلى بحث أكثر دقة ولكن أبطأ.</td><td>[<code translate="no">top_k</code> ، int_max]</td><td>لا يوجد</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>عامل التكبير للتكرير مقارنة بـ <em>k</em>.</td><td>[ 1, <em>float_max</em>]</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 </div>
 <div class="filter-binary">
-<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>This index is exactly the same as FLAT except that this can only be used for binary embeddings.</p>
-<p>For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the BIN_FLAT index is a good choice. BIN_FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from BIN_FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.</p>
-<p>BIN_FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to vectors in a dataset. This makes BIN_FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters for the BIN_FLAT index in Milvus, and using it does not require data training or additional storage.</p>
+<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>هذا المؤشر هو نفسه تمامًا مثل FLAT باستثناء أنه يمكن استخدامه فقط للتضمينات الثنائية.</p>
+<p>بالنسبة لتطبيقات البحث عن التشابه المتجهي التي تتطلب دقة مثالية وتعتمد على مجموعات بيانات صغيرة نسبيًا (بمقياس مليون)، يعتبر الفهرس BIN_FLAT خيارًا جيدًا. لا يقوم الفهرس BIN_FLAT بضغط المتجهات، وهو الفهرس الوحيد الذي يمكن أن يضمن نتائج بحث دقيقة. يمكن أيضًا استخدام نتائج الفهرس BIN_FLAT كنقطة مقارنة للنتائج التي تنتجها الفهارس الأخرى التي تقل نسبة استرجاعها عن 100%.</p>
+<p>يتسم BIN_FLAT بالدقة لأنه يتبع نهجًا شاملًا في البحث، وهو ما يعني أنه تتم مقارنة المدخلات المستهدفة لكل استعلام مع المتجهات في مجموعة البيانات. هذا يجعل من BIN_FLAT أبطأ فهرس في قائمتنا، وهو غير مناسب للاستعلام عن بيانات المتجهات الضخمة. لا توجد معلمات لفهرس BIN_FLAT في Milvus، ولا يتطلب استخدامه تدريبًا على البيانات أو تخزينًا إضافيًا.</p>
 <ul>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[اختياري] مقياس المسافة المختار.</td><td>انظر <a href="/docs/ar/metric.md">المقاييس المدعومة</a>.</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>This index is exactly the same as IVF_FLAT except that this can only be used for binary embeddings.</p>
-<p>BIN_IVF_FLAT divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
+<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>هذا المؤشر مماثل تمامًا لـ IVF_FLAT باستثناء أنه لا يمكن استخدامه إلا للتضمينات الثنائية.</p>
+<p>يقسم BIN_IVF_FLAT بيانات المتجه إلى <code translate="no">nlist</code> وحدة عنقودية، ثم يقارن المسافات بين متجه الإدخال الهدف ومركز كل مجموعة. واعتمادًا على عدد المجموعات التي تم تعيين النظام للاستعلام عنها (<code translate="no">nprobe</code>)، يتم إرجاع نتائج البحث عن التشابه بناءً على المقارنات بين المدخلات المستهدفة والمتجهات في المجموعة (المجموعات) الأكثر تشابهًا فقط - مما يقلل وقت الاستعلام بشكل كبير.</p>
+<p>من خلال ضبط <code translate="no">nprobe</code> ، يمكن إيجاد توازن مثالي بين الدقة والسرعة لسيناريو معين. يزداد وقت الاستعلام بشكل حاد مع زيادة عدد متجهات المدخلات المستهدفة (<code translate="no">nq</code>)، وعدد المجموعات المطلوب البحث عنها (<code translate="no">nprobe</code>).</p>
+<p>BIN_IVF_FLAT هو فهرس BIN_IVF الأساسي، وتكون البيانات المشفرة المخزنة في كل وحدة متسقة مع البيانات الأصلية.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>عدد وحدات المجموعة</td><td>[1, 65536]</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <ul>
-<li><p>Common search</p>
+<li><p>بحث مشترك</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>عدد الوحدات المطلوب الاستعلام عنها</td><td>[1، ن ليست]</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>بحث النطاق</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>الحد الأقصى لعدد الدلاء التي لا ترجع أي نتائج بحث.<br/>هذه معلمة بحث نطاق وتنهي عملية البحث عندما يصل عدد الدلاء الفارغة المتتالية إلى القيمة المحددة.<br/>يمكن أن تؤدي زيادة هذه القيمة إلى تحسين معدل الاستدعاء على حساب زيادة وقت البحث.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -587,36 +583,36 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </ul>
 </div>
 <div class="filter-sparse">
-<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX</h3><p>Each dimension maintains a list of vectors that have a non-zero value at that dimension. During search, Milvus iterates through each dimension of the query vector and computes scores for vectors that have non-zero values in those dimensions.</p>
+<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">متناثر_مقلوب_الفهرس</h3><p>يحتفظ كل بُعد بقائمة من المتجهات التي لها قيمة غير صفرية في هذا البُعد. أثناء البحث، يقوم Milvus بالتكرار خلال كل بُعد من أبعاد متجه الاستعلام ويحسب الدرجات للمتجهات التي لها قيم غير صفرية في تلك الأبعاد.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>The algorithm used for building and querying the index. For details, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
-<tr><td><code translate="no">bm25_k1</code></td><td>Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking.</td><td>[1.2, 2.0]</td></tr>
-<tr><td><code translate="no">bm25_b</code></td><td>Controls the extent to which document length is normalized. Defaults to 0.75.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. لمزيد من التفاصيل، راجع <a href="/docs/ar/sparse_vector.md#Set-index-params-for-vector-field">متجه متناثر</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (افتراضي)، <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>يتحكم في تشبع تردد المصطلح. تزيد القيم الأعلى من أهمية ترددات المصطلحات في ترتيب المستندات.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>يتحكم في مدى تطبيع طول المستند. الإعداد الافتراضي هو 0.75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
-<p>The <code translate="no">drop_ratio_build</code> parameter is deprecated since Milvus v2.5.4, which can still be accepted during index building, but will no longer have actual effect on the index.</p>
+<p>تم إهمال المعلمة <code translate="no">drop_ratio_build</code> منذ الإصدار 2.5.4 من Milvus، والتي لا يزال من الممكن قبولها أثناء إنشاء الفهرس، ولكن لن يكون لها تأثير فعلي على الفهرس.</p>
   </div>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for <code translate="no">drop_ratio_search</code>, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>نسبة قيم المتجهات الصغيرة التي يتم استبعادها أثناء عملية البحث. يسمح هذا الخيار بضبط عملية البحث بشكل دقيق من خلال تحديد نسبة أصغر القيم في متجه الاستعلام التي يجب تجاهلها. يساعد في تحقيق التوازن بين دقة البحث والأداء. كلما قلت القيمة المحددة ل <code translate="no">drop_ratio_search</code> ، قلت مساهمة هذه القيم الصغيرة في النتيجة النهائية. من خلال تجاهل بعض القيم الصغيرة، يمكن تحسين أداء البحث بأقل تأثير على الدقة.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 </div>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -632,17 +628,14 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h2><p><details>
-<summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary></p>
-<p>IVF_FLAT index divides a vector space into <code translate="no">nlist</code> clusters. If you keep the default value of <code translate="no">nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code translate="no">nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
-</p>
+<summary><font color="#4fc4f9">ما الفرق بين مؤشر FLAT ومؤشر IVF_FLAT؟</font></summary></p>
+<p>يقسّم الفهرس IVF_FLAT مساحة المتجه إلى <code translate="no">nlist</code> مجموعة. إذا احتفظت بالقيمة الافتراضية <code translate="no">nlist</code> كـ 16384، يقارن Milvus المسافات بين المتجه الهدف ومراكز جميع المجموعات الـ 16384 للحصول على <code translate="no">nprobe</code> أقرب مجموعات. ثم يقارن Milvus المسافات بين المتجه الهدف والمتجهات في المجموعات المحددة للحصول على أقرب المتجهات. على عكس IVF_FLAT، يقارن FLAT مباشرةً المسافات بين المتجه الهدف وكل متجه.</p>
 <p>
-Therefore, when the total number of vectors approximately equals <code translate="no">nlist</code>, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of <code translate="no">nlist</code>, IVF_FLAT index begins to show increasingly greater advantages.
-</p>
+لذلك، عندما يكون العدد الإجمالي للمتجهات يساوي تقريبًا <code translate="no">nlist</code> ، فإن IVF_FLAT و FLAT لا يوجد فرق كبير في طريقة الحساب المطلوبة وأداء البحث. ولكن مع زيادة عدد المتجهات إلى ضعفين أو ثلاثة أضعاف أو ن ضعف <code translate="no">nlist</code> ، يبدأ فهرس IVF_FLAT في إظهار مزايا أكبر بشكل متزايد.</p>
 <p>
-See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">How to Choose an Index in Milvus</a> for more information.
-</p>
+راجع <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">كيفية اختيار فهرس في ميلفوس</a> لمزيد من المعلومات.</p>
 </details>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -658,5 +651,5 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn more about the <a href="/docs/metric.md">Similarity Metrics</a> supported in Milvus.</li>
+<li>تعرف على المزيد حول <a href="/docs/ar/metric.md">مقاييس التشابه</a> المدعومة في ملفوس.</li>
 </ul>

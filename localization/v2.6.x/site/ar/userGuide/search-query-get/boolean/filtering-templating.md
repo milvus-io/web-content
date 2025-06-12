@@ -1,15 +1,15 @@
 ---
 id: filtering-templating.md
-title: Filter Templating
+title: تصميم عامل التصفية
 summary: >-
-  In Milvus, complex filter expressions with numerous elements, especially those
-  involving non-ASCII characters like CJK characters, can significantly affect
-  query performance. To address this, Milvus introduces a filter expression
-  templating mechanism designed to improve efficiency by reducing the time spent
-  parsing complex expressions. This page explains using filter expression
-  templating in search, query, and delete operations.
+  في Milvus، يمكن أن تؤثر تعبيرات التصفية المعقدة التي تحتوي على العديد من
+  العناصر، خاصةً تلك التي تتضمن أحرفًا غير ASCII مثل أحرف CJK، بشكل كبير على
+  أداء الاستعلام. ولمعالجة هذه المشكلة، يقدم ميلفوس آلية نمذجة تعبيرات التصفية
+  المصممة لتحسين الكفاءة من خلال تقليل الوقت المستغرق في تحليل التعبيرات
+  المعقدة. تشرح هذه الصفحة استخدام نموذج تعبير المرشح في عمليات البحث والاستعلام
+  والحذف.
 ---
-<h1 id="Filter-Templating" class="common-anchor-header">Filter Templating<button data-href="#Filter-Templating" class="anchor-icon" translate="no">
+<h1 id="Filter-Templating" class="common-anchor-header">تصميم عامل التصفية<button data-href="#Filter-Templating" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, complex filter expressions with numerous elements, especially those involving non-ASCII characters like CJK characters, can significantly affect query performance. To address this, Milvus introduces a filter expression templating mechanism designed to improve efficiency by reducing the time spent parsing complex expressions. This page explains using filter expression templating in search, query, and delete operations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>في Milvus، يمكن أن تؤثر تعبيرات التصفية المعقدة التي تحتوي على العديد من العناصر، خاصة تلك التي تتضمن أحرفًا غير ASCII مثل أحرف CJK، بشكل كبير على أداء الاستعلام. ولمعالجة هذه المشكلة، يقدم ميلفوس آلية نمذجة تعبيرات التصفية المصممة لتحسين الكفاءة من خلال تقليل الوقت المستغرق في تحليل التعبيرات المعقدة. تشرح هذه الصفحة استخدام نموذج تعبير المرشح في عمليات البحث والاستعلام والحذف.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,19 +40,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filter expression templating allows you to create filter expressions with placeholders, which can be dynamically substituted with values during query execution. Using templating, you avoid embedding large arrays or complex expressions directly into the filter, reducing parsing time and improving query performance.</p>
-<p>Let’s say you have a filter expression involving two fields, <code translate="no">age</code> and <code translate="no">city</code>, and you want to find all people whose age is greater than 25 and who live in either “北京” (Beijing) or “上海” (Shanghai). Instead of directly embedding the values in the filter expression, you can use a template:</p>
+    </button></h2><p>يسمح لك نمذجة تعبير التصفية بإنشاء تعبيرات التصفية مع العناصر النائبة التي يمكن استبدالها ديناميكيًا بالقيم أثناء تنفيذ الاستعلام. باستخدام القالب، يمكنك تجنب تضمين المصفوفات الكبيرة أو التعبيرات المعقدة مباشرةً في عامل التصفية، مما يقلل من وقت التحليل ويحسن أداء الاستعلام.</p>
+<p>لنفترض أن لديك تعبير مرشح يتضمن حقلين، <code translate="no">age</code> و <code translate="no">city</code> ، وتريد العثور على جميع الأشخاص الذين تزيد أعمارهم عن 25 عامًا ويعيشون إما في "北京 海" (بكين) أو "海 海" (شنغهاي). بدلاً من تضمين القيم مباشرة في تعبير المرشح، يمكنك استخدام قالب:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>Here, <code translate="no">{age}</code> and <code translate="no">{city}</code> are placeholders that will be replaced with the actual values in <code translate="no">filter_params</code> when the query is executed.</p>
-<p>Using filter expression templating in Milvus has several key advantages:</p>
+<p>هنا، <code translate="no">{age}</code> و <code translate="no">{city}</code> هي عناصر نائبة سيتم استبدالها بالقيم الفعلية في <code translate="no">filter_params</code> عند تنفيذ الاستعلام.</p>
+<p>يتميز استخدام قالب تعبير المرشح في ميلفوس بالعديد من المزايا الرئيسية:</p>
 <ul>
-<li><p><strong>Reduced Parsing Time</strong>: By replacing large or complex filter expressions with placeholders, the system spends less time parsing and processing the filter.</p></li>
-<li><p><strong>Improved Query Performance</strong>: With reduced parsing overhead, query performance improves, leading to higher QPS and faster response times.</p></li>
-<li><p><strong>Scalability</strong>: As your datasets grow and filter expressions become more complex, templating ensures that performance remains efficient and scalable.</p></li>
+<li><p><strong>تقليل وقت التحليل</strong>: من خلال استبدال تعبيرات التصفية الكبيرة أو المعقدة بالعناصر النائبة، يقضي النظام وقتًا أقل في تحليل المرشح ومعالجته.</p></li>
+<li><p><strong>تحسين أداء الاستعلام</strong>: مع انخفاض تكاليف التحليل الزائدة، يتحسن أداء الاستعلام، مما يؤدي إلى زيادة معدل الاستجابة السريعة وأوقات استجابة أسرع.</p></li>
+<li><p><strong>قابلية التوسع</strong>: مع نمو مجموعات البيانات الخاصة بك وزيادة تعقيد تعبيرات التصفية، يضمن النمذجة أن يظل الأداء فعالاً وقابلاً للتطوير.</p></li>
 </ul>
-<h2 id="Search-Operations" class="common-anchor-header">Search Operations<button data-href="#Search-Operations" class="anchor-icon" translate="no">
+<h2 id="Search-Operations" class="common-anchor-header">عمليات البحث<button data-href="#Search-Operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +67,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For search operations in Milvus, the <code translate="no">filter</code> expression is used to define the filtering condition, and the <code translate="no">filter_params</code> parameter is used to specify the values for the placeholders. The <code translate="no">filter_params</code> dictionary contains the dynamic values that Milvus will use to substitute into the filter expression.</p>
+    </button></h2><p>بالنسبة لعمليات البحث في Milvus، يُستخدم التعبير <code translate="no">filter</code> لتحديد شرط التصفية، وتُستخدم المعلمة <code translate="no">filter_params</code> لتحديد قيم العناصر النائبة. يحتوي القاموس <code translate="no">filter_params</code> على القيم الديناميكية التي سيستخدمها ميلفوس للاستعاضة عنها في تعبير التصفية.</p>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 res = client.search(
@@ -80,8 +80,8 @@ res = client.search(
     filter_params=filter_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus will dynamically replace <code translate="no">{age}</code> with <code translate="no">25</code> and <code translate="no">{city}</code> with <code translate="no">[&quot;北京&quot;, &quot;上海&quot;]</code> when executing the search.</p>
-<h2 id="Query-Operations" class="common-anchor-header">Query Operations<button data-href="#Query-Operations" class="anchor-icon" translate="no">
+<p>في هذا المثال، سيستبدل ميلفوس ديناميكيًا <code translate="no">{age}</code> ب <code translate="no">25</code> و <code translate="no">{city}</code> ب <code translate="no">[&quot;北京&quot;, &quot;上海&quot;]</code> عند تنفيذ البحث.</p>
+<h2 id="Query-Operations" class="common-anchor-header">عمليات الاستعلام<button data-href="#Query-Operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,7 +96,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The same templating mechanism can be applied to query operations in Milvus. In the <code translate="no">query</code> function, you define the filter expression and use the <code translate="no">filter_params</code> to specify the values to substitute.</p>
+    </button></h2><p>يمكن تطبيق آلية النمذجة نفسها على عمليات الاستعلام في ميلفوس. في الدالة <code translate="no">query</code> ، يمكنك تحديد تعبير المرشح واستخدام <code translate="no">filter_params</code> لتحديد القيم المراد استبدالها.</p>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 res = client.query(
@@ -106,8 +106,8 @@ res = client.query(
     filter_params=filter_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>By using <code translate="no">filter_params</code>, Milvus efficiently handles the dynamic insertion of values, improving the speed of query execution.</p>
-<h2 id="Delete-Operations" class="common-anchor-header">Delete Operations<button data-href="#Delete-Operations" class="anchor-icon" translate="no">
+<p>باستخدام <code translate="no">filter_params</code> ، يتعامل ميلفوس بكفاءة مع الإدراج الديناميكي للقيم، مما يحسن من سرعة تنفيذ الاستعلام.</p>
+<h2 id="Delete-Operations" class="common-anchor-header">عمليات الحذف<button data-href="#Delete-Operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,7 +122,7 @@ res = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also use filter expression templating in delete operations. Similar to search and query, the <code translate="no">filter</code> expression defines the conditions, and the <code translate="no">filter_params</code> provides the dynamic values for the placeholders.</p>
+    </button></h2><p>يمكنك أيضًا استخدام قالب تعبير المرشح في عمليات الحذف. على غرار البحث والاستعلام، يحدد تعبير <code translate="no">filter</code> الشروط، ويوفر <code translate="no">filter_params</code> القيم الديناميكية للعناصر النائبة.</p>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 res = client.delete(
@@ -131,8 +131,8 @@ res = client.delete(
     filter_params=filter_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>This approach improves the performance of delete operations, especially when dealing with complex filter conditions.</p>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<p>يعمل هذا الأسلوب على تحسين أداء عمليات الحذف، خاصة عند التعامل مع شروط التصفية المعقدة.</p>
+<h2 id="Conclusion" class="common-anchor-header">الخلاصة<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,4 +147,4 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filter expression templating is an essential tool for optimizing query performance in Milvus. By using placeholders and the <code translate="no">filter_params</code> dictionary, you can significantly reduce the time spent parsing complex filter expressions. This leads to faster query execution and better overall performance.</p>
+    </button></h2><p>يعد نموذج تعبير المرشح أداة أساسية لتحسين أداء الاستعلام في ميلفوس. باستخدام العناصر النائبة والقاموس <code translate="no">filter_params</code> ، يمكنك تقليل الوقت المستغرق في تحليل تعبيرات التصفية المعقدة بشكل كبير. وهذا يؤدي إلى تنفيذ الاستعلام بشكل أسرع وأداء أفضل بشكل عام.</p>

@@ -1,16 +1,16 @@
 ---
 id: full-text-search.md
-title: Full Text Search
+title: البحث في النص الكامل
 summary: >-
-  Full text search is a feature that retrieves documents containing specific
-  terms or phrases in text datasets, then ranking the results based on
-  relevance. This feature overcomes semantic search limitations, which might
-  overlook precise terms, ensuring you receive the most accurate and
-  contextually relevant results. Additionally, it simplifies vector searches by
-  accepting raw text input, automatically converting your text data into sparse
-  embeddings without the need to manually generate vector embeddings.
+  البحث عن النص الكامل هي ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات
+  محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى
+  ملاءمتها. تتغلب هذه الميزة على قيود البحث الدلالي، التي قد تغفل المصطلحات
+  الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة
+  إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات
+  نصية أولية، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى
+  إنشاء تضمينات متجهة يدويًا.
 ---
-<h1 id="Full-Text-Search" class="common-anchor-header">Full Text Search<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search" class="common-anchor-header">البحث في النص الكامل<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,12 +25,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.</p>
-<p>Using the BM25 algorithm for relevance scoring, this feature is particularly valuable in retrieval-augmented generation (RAG) scenarios, where it prioritizes documents that closely match specific search terms.</p>
+    </button></h1><p>البحث بالنص الكامل هي ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى ملاءمتها. تتغلب هذه الميزة على قيود البحث الدلالي التي قد تغفل المصطلحات الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات النص الخام، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات متجهة يدويًا.</p>
+<p>وباستخدام خوارزمية BM25 لتسجيل درجة الملاءمة، تُعد هذه الميزة ذات قيمة خاصة في سيناريوهات التوليد المعزز للاسترجاع (RAG)، حيث تعطي الأولوية للمستندات التي تتطابق بشكل وثيق مع مصطلحات بحث محددة.</p>
 <div class="alert note">
-<p>By integrating full text search with semantic-based dense vector search, you can enhance the accuracy and relevance of search results. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p>
+<p>من خلال دمج البحث النصي الكامل مع البحث المتجه الكثيف القائم على الدلالة، يمكنك تحسين دقة نتائج البحث ومدى ملاءمتها. لمزيد من المعلومات، راجع <a href="/docs/ar/multi-vector-search.md">البحث المختلط</a>.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,27 +45,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Full text search simplifies the process of text-based searching by eliminating the need for manual embedding. This feature operates through the following workflow:</p>
+    </button></h2><p>يعمل البحث بالنص الكامل على تبسيط عملية البحث المستند إلى النص من خلال إلغاء الحاجة إلى التضمين اليدوي. تعمل هذه الميزة من خلال سير العمل التالي:</p>
 <ol>
-<li><p><strong>Text input</strong>: You insert raw text documents or provide query text without any need for manual embedding.</p></li>
-<li><p><strong>Text analysis</strong>: Milvus uses an <a href="/docs/analyzer-overview.md">analyzer</a> to tokenize input text into individual, searchable terms.</p></li>
-<li><p><strong>Function processing</strong>: The built-in function receives tokenized terms and converts them into sparse vector representations.</p></li>
-<li><p><strong>Collection store</strong>: Milvus stores these sparse embeddings in a collection for efficient retrieval.</p></li>
-<li><p><strong>BM25 scoring</strong>: During a search, Milvus applies the BM25 algorithm to calculate scores for the stored documents and ranks matched results based on relevance to the query text.</p></li>
+<li><p><strong>إدخال النص</strong>: يمكنك إدراج مستندات نصية أولية أو توفير نص استعلام دون الحاجة إلى التضمين اليدوي.</p></li>
+<li><p><strong>تحليل النص</strong>: يستخدم ميلفوس <a href="/docs/ar/analyzer-overview.md">محلل</a> لترميز نص الإدخال إلى مصطلحات فردية قابلة للبحث.</p></li>
+<li><p><strong>معالجة الدالة</strong>: تستقبل الدالة المدمجة المصطلحات المرمزة وتحولها إلى تمثيلات متجهة متفرقة.</p></li>
+<li><p><strong>مخزن المجموعة</strong>: يخزن ميلفوس هذه التضمينات المتفرقة في مجموعة لاسترجاعها بكفاءة.</p></li>
+<li><p><strong>تسجيل BM25</strong>: أثناء البحث، يطبّق ميلفوس خوارزمية BM25 لحساب درجات المستندات المخزنة وترتيب النتائج المتطابقة بناءً على مدى صلتها بنص الاستعلام.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/full-text-search.png" alt="Full Text Search" class="doc-image" id="full-text-search" />
-    <span>Full Text Search</span>
-  </span>
-</p>
-<p>To use full text search, follow these main steps:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/full-text-search.png" alt="Full Text Search" class="doc-image" id="full-text-search" />
+   </span> <span class="img-wrapper"> <span>البحث بالنص الكامل</span> </span></p>
+<p>لاستخدام البحث بالنص الكامل، اتبع الخطوات الرئيسية التالية:</p>
 <ol>
-<li><p><a href="/docs/full-text-search.md#Create-a-collection-for-full-text-search">Create a collection</a>: Set up a collection with necessary fields and define a function to convert raw text into sparse embeddings.</p></li>
-<li><p><a href="/docs/full-text-search.md#Insert-text-data">Insert data</a>: Ingest your raw text documents to the collection.</p></li>
-<li><p><a href="/docs/full-text-search.md#Perform-full-text-search">Perform searches</a>: Use query texts to search through your collection and retrieve relevant results.</p></li>
+<li><p><a href="/docs/ar/full-text-search.md#Create-a-collection-for-full-text-search">إنشاء مجموعة</a>: إعداد مجموعة مع الحقول اللازمة وتحديد دالة لتحويل النص الخام إلى تضمينات متفرقة.</p></li>
+<li><p><a href="/docs/ar/full-text-search.md#Insert-text-data">إدراج البيانات</a>: أدخل مستنداتك النصية الأولية في المجموعة.</p></li>
+<li><p><a href="/docs/ar/full-text-search.md#Perform-full-text-search">إجراء عمليات البحث</a>: استخدم نصوص الاستعلام للبحث في مجموعتك واسترداد النتائج ذات الصلة.</p></li>
 </ol>
-<h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">Create a collection for full text search<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">إنشاء مجموعة للبحث في النص الكامل<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,20 +78,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To enable full text search, create a collection with a specific schema. This schema must include three necessary fields:</p>
+    </button></h2><p>لتمكين البحث عن النص الكامل، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية:</p>
 <ul>
-<li><p>The primary field that uniquely identifies each entity in a collection.</p></li>
-<li><p>A <code translate="no">VARCHAR</code> field that stores raw text documents, with the <code translate="no">enable_analyzer</code> attribute set to <code translate="no">True</code>. This allows Milvus to tokenize text into specific terms for function processing.</p></li>
-<li><p>A <code translate="no">SPARSE_FLOAT_VECTOR</code> field reserved to store sparse embeddings that Milvus will automatically generate for the <code translate="no">VARCHAR</code> field.</p></li>
+<li><p>الحقل الأساسي الذي يحدد بشكل فريد كل كيان في المجموعة.</p></li>
+<li><p>حقل <code translate="no">VARCHAR</code> يقوم بتخزين المستندات النصية الخام، مع تعيين السمة <code translate="no">enable_analyzer</code> على <code translate="no">True</code>. وهذا يسمح لـ Milvus بترميز النص إلى مصطلحات محددة لمعالجة الدالة.</p></li>
+<li><p>حقل <code translate="no">SPARSE_FLOAT_VECTOR</code> محجوز لتخزين التضمينات المتفرقة التي سيقوم ميلفوس بإنشائها تلقائيًا للحقل <code translate="no">VARCHAR</code>.</p></li>
 </ul>
-<h3 id="Define-the-collection-schema" class="common-anchor-header">Define the collection schema</h3><p>First, create the schema and add the necessary fields:</p>
+<h3 id="Define-the-collection-schema" class="common-anchor-header">تحديد مخطط المجموعة</h3><p>أولاً، قم بإنشاء المخطط وإضافة الحقول اللازمة:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
@@ -219,20 +212,15 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration,</p>
+<p>في هذا التكوين</p>
 <ul>
-<li><p><code translate="no">id</code>: serves as the primary key and is automatically generated with <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: stores your raw text data for full text search operations. The data type must be <code translate="no">VARCHAR</code>, as <code translate="no">VARCHAR</code> is Milvus string data type for text storage. Set <code translate="no">enable_analyzer=True</code> to allow Milvus to tokenize the text. By default, Milvus uses the <code translate="no">standard</code><a href="/docs/standard-analyzer.md"> analyzer</a> for text analysis. To configure a different analyzer, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p></li>
-<li><p><code translate="no">sparse</code>: a vector field reserved to store internally generated sparse embeddings for full text search operations. The data type must be <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">id</code>: يعمل كمفتاح أساسي ويتم إنشاؤه تلقائيًا باستخدام <code translate="no">auto_id=True</code>.</p></li>
+<li><p><code translate="no">text</code>: يخزن بيانات النص الخام لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات هو <code translate="no">VARCHAR</code> ، حيث أن <code translate="no">VARCHAR</code> هو نوع بيانات سلسلة ميلفوس لتخزين النص. قم بتعيين <code translate="no">enable_analyzer=True</code> للسماح لـ Milvus بترميز النص. بشكل افتراضي، يستخدم ميلفوس<a href="/docs/ar/standard-analyzer.md"> محلل</a> <code translate="no">standard</code><a href="/docs/ar/standard-analyzer.md"></a> لتحليل النص. لتكوين محلل مختلف، ارجع إلى <a href="/docs/ar/analyzer-overview.md">نظرة عامة على المحلل</a>.</p></li>
+<li><p><code translate="no">sparse</code>:: حقل متجه محجوز لتخزين التضمينات المتفرقة التي تم إنشاؤها داخليًا لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
-<p>Now, define a function that will convert your text into sparse vector representations and then add it to the schema:</p>
+<p>الآن، قم بتعريف الدالة التي ستقوم بتحويل النص إلى تمثيلات متجهية متناثرة ثم قم بإضافتها إلى المخطط:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
     input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
@@ -307,37 +295,32 @@ schema.WithFunction(function)
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
+     <th><p>المعلمة</p></th>
+     <th><p>الوصف</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>The name of the function. This function converts your raw text from the <code translate="no">text</code> field into searchable vectors that will be stored in the <code translate="no">sparse</code> field.</p></td>
+     <td><p>اسم الدالة. تقوم هذه الدالة بتحويل النص الخام الخاص بك من الحقل <code translate="no">text</code> إلى متجهات قابلة للبحث سيتم تخزينها في الحقل <code translate="no">sparse</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>The name of the <code translate="no">VARCHAR</code> field requiring text-to-sparse-vector conversion. For <code translate="no">FunctionType.BM25</code>, this parameter accepts only one field name.</p></td>
+     <td><p>اسم الحقل <code translate="no">VARCHAR</code> الذي يتطلب تحويل النص إلى متجهات متفرقة. بالنسبة إلى <code translate="no">FunctionType.BM25</code> ، تقبل هذه المعلمة اسم حقل واحد فقط.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>The name of the field where the internally generated sparse vectors will be stored. For <code translate="no">FunctionType.BM25</code>, this parameter accepts only one field name.</p></td>
+     <td><p>اسم الحقل حيث سيتم تخزين المتجهات المتفرقة التي تم إنشاؤها داخلياً. بالنسبة إلى <code translate="no">FunctionType.BM25</code> ، تقبل هذه المعلمة اسم حقل واحد فقط.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>The type of the function to use. Set the value to <code translate="no">FunctionType.BM25</code>.</p></td>
+     <td><p>نوع الدالة المراد استخدامها. اضبط القيمة على <code translate="no">FunctionType.BM25</code>.</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>For collections with multiple <code translate="no">VARCHAR</code> fields requiring text-to-sparse-vector conversion, add separate functions to the collection schema, ensuring each function has a unique name and <code translate="no">output_field_names</code> value.</p>
+<p>بالنسبة للمجموعات التي تحتوي على حقول متعددة <code translate="no">VARCHAR</code> تتطلب تحويل النص إلى متجهات متناثرة، أضف دوال منفصلة إلى مخطط المجموعة، مع التأكد من أن كل دالة لها اسم فريد وقيمة <code translate="no">output_field_names</code>.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">Configure the index</h3><p>After defining the schema with necessary fields and the built-in function, set up the index for your collection. To simplify this process, use <code translate="no">AUTOINDEX</code> as the <code translate="no">index_type</code>, an option that allows Milvus to choose and configure the most suitable index type based on the structure of your data.</p>
+<h3 id="Configure-the-index" class="common-anchor-header">تكوين الفهرس</h3><p>بعد تحديد المخطط بالحقول الضرورية والدالة المدمجة، قم بإعداد الفهرس لمجموعتك. لتبسيط هذه العملية، استخدم <code translate="no">AUTOINDEX</code> كـ <code translate="no">index_type</code> ، وهو خيار يسمح لـ Milvus باختيار وتكوين نوع الفهرس الأنسب بناءً على بنية بياناتك.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
@@ -383,46 +366,41 @@ indexes.add(IndexParam.builder()
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
+     <th><p>المعلمة</p></th>
+     <th><p>الوصف</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>The name of the vector field to index. For full text search, this should be the field that stores the generated sparse vectors. In this example, set the value to <code translate="no">sparse</code>.</p></td>
+     <td><p>اسم الحقل المتجه المراد فهرسته. للبحث عن النص الكامل، يجب أن يكون هذا هو الحقل الذي يخزن المتجهات المتفرقة التي تم إنشاؤها. في هذا المثال، اضبط القيمة على <code translate="no">sparse</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>The type of the index to create. <code translate="no">AUTOINDEX</code> allows Milvus to automatically optimize index settings. If you need more control over your index settings, you can choose from various index types available for sparse vectors in Milvus. For more information, refer to <a href="/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</p></td>
+     <td><p>نوع الفهرس المراد إنشاؤه. <code translate="no">AUTOINDEX</code> يسمح لـ Milvus بتحسين إعدادات الفهرس تلقائيًا. إذا كنت بحاجة إلى مزيد من التحكم في إعدادات الفهرس الخاص بك، يمكنك الاختيار من بين أنواع الفهارس المختلفة المتاحة للمتجهات المتفرقة في ملفوس. لمزيد من المعلومات، راجع <a href="/docs/ar/index.md#Indexes-supported-in-Milvus">الفهارس المدعومة في ملفوس</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
-     <td><p>The value for this parameter must be set to <code translate="no">BM25</code> specifically for full text search functionality.</p></td>
+     <td><p>يجب تعيين قيمة هذه المعلمة على <code translate="no">BM25</code> خصيصًا لوظيفة البحث عن النص الكامل.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>A dictionary of additional parameters specific to the index.</p></td>
+     <td><p>قاموس المعلمات الإضافية الخاصة بالفهرس.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>The algorithm used for building and querying the index. Valid values:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high <em>k</em> values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small <em>k</em> values or short queries, where skipping is more feasible.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to <code translate="no">DAAT_MAXSCORE</code> and <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), <code translate="no">TAAT_NAIVE</code> dynamically adapts to such changes.</p></li></ul></td>
+     <td><p>الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. قيم صالحة:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. توفر MaxScore أداءً أفضل لقيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: معالجة استعلام DAAT المحسّنة باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. وهذا يجعل WAND أكثر كفاءة للاستعلامات ذات القيم <em>k</em> الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: معالجة استعلام المصطلح الأساسي في الوقت (TAAT). على الرغم من أنها أبطأ مقارنةً بـ <code translate="no">DAAT_MAXSCORE</code> و <code translate="no">DAAT_WAND</code> ، إلا أن <code translate="no">TAAT_NAIVE</code> تقدم ميزة فريدة. على عكس خوارزميات DAAT، التي تستخدم درجات التأثير القصوى المخزنة مؤقتًا والتي تظل ثابتة بغض النظر عن التغييرات التي تطرأ على معلمة التجميع العالمية (avgdl)، يتكيف <code translate="no">TAAT_NAIVE</code> ديناميكيًا مع هذه التغييرات.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
-     <td><p>Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking. Value range: [1.2, 2.0].</p></td>
+     <td><p>يتحكم في تشبع تردد المصطلح. تزيد القيم الأعلى من أهمية ترددات المصطلحات في ترتيب المستندات. نطاق القيمة: [1.2, 2.0].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
-     <td><p>Controls the extent to which document length is normalized. Values between 0 and 1 are typically used, with a common default around 0.75. A value of 1 means no length normalization, while a value of 0 means full normalization.</p></td>
+     <td><p>يتحكم في مدى تطبيع طول المستند. تُستخدم القيم بين 0 و1 عادة، مع وجود قيمة افتراضية شائعة حوالي 0.75. القيمة 1 تعني عدم تطبيع الطول، بينما القيمة 0 تعني التطبيع الكامل.</p></td>
    </tr>
 </table>
-<h3 id="Create-the-collection" class="common-anchor-header">Create the collection</h3><p>Now create the collection using the schema and index parameters defined.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">إنشاء المجموعة</h3><p>الآن أنشئ المجموعة باستخدام المخطط ومعلمات الفهرس المحددة.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
     schema=schema, 
@@ -466,7 +444,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-text-data" class="common-anchor-header">Insert text data<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
+<h2 id="Insert-text-data" class="common-anchor-header">أدخل بيانات نصية<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -481,14 +459,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After setting up your collection and index, you’re ready to insert text data. In this process, you need only to provide the raw text. The built-in function we defined earlier automatically generates the corresponding sparse vector for each text entry.</p>
+    </button></h2><p>بعد إعداد المجموعة والفهرس الخاص بك، أنت جاهز لإدراج البيانات النصية. في هذه العملية، تحتاج فقط إلى توفير النص الخام. تقوم الدالة المضمنة التي حددناها سابقًا تلقائيًا بإنشاء المتجه المتناثر المقابل لكل إدخال نصي.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python">client.insert(<span class="hljs-string">&#x27;my_collection&#x27;</span>, [
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
@@ -536,7 +509,7 @@ client.insert(InsertReq.builder()
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Perform-full-text-search" class="common-anchor-header">Perform full text search<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Perform-full-text-search" class="common-anchor-header">إجراء بحث نصي كامل<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -551,14 +524,9 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you’ve inserted data into your collection, you can perform full text searches using raw text queries. Milvus automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (<code translate="no">limit</code>) results.</p>
+    </button></h2><p>بمجرد إدراج البيانات في مجموعتك، يمكنك إجراء عمليات بحث نصية كاملة باستخدام استعلامات نصية خام. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه متناثر وترتيب نتائج البحث المتطابقة باستخدام خوارزمية BM25، ثم يُرجع أعلىK (<code translate="no">limit</code>) النتائج.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 }
@@ -638,16 +606,16 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
+     <th><p>المعلمة</p></th>
+     <th><p>الوصف</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">search_params</code></p></td>
-     <td><p>A dictionary containing search parameters.</p></td>
+     <td><p>قاموس يحتوي على معلمات البحث.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proportion of low-importance terms to ignore during search. For details, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p></td>
+     <td><p>نسبة المصطلحات منخفضة الأهمية لتجاهلها أثناء البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/sparse_vector.md">Sparse Vector</a>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -655,14 +623,14 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>The raw query text.</p></td>
+     <td><p>نص الاستعلام الخام.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
-     <td><p>The name of the field that contains internally generated sparse vectors.</p></td>
+     <td><p>اسم الحقل الذي يحتوي على متجهات متفرقة تم إنشاؤها داخلياً.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
-     <td><p>Maximum number of top matches to return.</p></td>
+     <td><p>الحد الأقصى لعدد أعلى التطابقات المطلوب إرجاعها.</p></td>
    </tr>
 </table>

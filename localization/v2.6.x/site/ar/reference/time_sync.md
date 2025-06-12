@@ -1,9 +1,9 @@
 ---
 id: time_sync.md
-title: Time Synchronization
-summary: Learn about the time synchronization system in Milvus.
+title: مزامنة الوقت
+summary: تعرف على نظام مزامنة الوقت في ميلفوس.
 ---
-<h1 id="Time-Synchronization" class="common-anchor-header">Time Synchronization<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
+<h1 id="Time-Synchronization" class="common-anchor-header">مزامنة الوقت<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ summary: Learn about the time synchronization system in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic introduces the time synchronization mechanism in Milvus.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>يقدم هذا الموضوع آلية مزامنة الوقت في ميلفوس.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,42 +34,42 @@ summary: Learn about the time synchronization system in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The events in Milvus can be generally categorized in to two types:</p>
+    </button></h2><p>يمكن تصنيف الأحداث في ميلفوس بشكل عام إلى نوعين:</p>
 <ul>
-<li><p>Data definition language (DDL) events: create/drop a collection, create/drop a partition, etc.</p></li>
-<li><p>Data manipulation language (DML) events: insert, search, etc.</p></li>
+<li><p>أحداث لغة تعريف البيانات (DDL): إنشاء/إسقاط مجموعة، إنشاء/إسقاط قسم، إلخ.</p></li>
+<li><p>أحداث لغة معالجة البيانات (DML): إدراج، بحث، إلخ.</p></li>
 </ul>
-<p>Any event, no matter it is DDL or DML event, is marked with a timestamp that can indicate when this event occurs.</p>
-<p>Suppose there are two users who initiate a series of DML and DDL events in Milvus in the time order shown in the following table.</p>
+<p>يتم تمييز أي حدث، بغض النظر عن كونه حدث لغة تعريف البيانات (DDL) أو حدث لغة معالجة البيانات (DML)، بطابع زمني يمكن أن يشير إلى وقت وقوع هذا الحدث.</p>
+<p>لنفترض أن هناك مستخدمين اثنين يقومان ببدء سلسلة من أحداث لغة معالجة البيانات (DML) و DDL في ميلفوس بالترتيب الزمني الموضح في الجدول التالي.</p>
 <table>
 <thead>
-<tr><th style="text-align:center">Timestamp</th><th style="text-align:center">User 1</th><th style="text-align:center">User 2</th></tr>
+<tr><th style="text-align:center">الطابع الزمني</th><th style="text-align:center">المستخدم 1</th><th style="text-align:center">المستخدم 2</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">t0</td><td style="text-align:center">Created a collection named <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
-<tr><td style="text-align:center">t2</td><td style="text-align:center">/</td><td style="text-align:center">Conducted a search on collection <code translate="no">C0</code>.</td></tr>
-<tr><td style="text-align:center">t5</td><td style="text-align:center">Inserted data <code translate="no">A1</code> into collection <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
-<tr><td style="text-align:center">t7</td><td style="text-align:center">/</td><td style="text-align:center">Conducted a search on collection <code translate="no">C0</code>.</td></tr>
-<tr><td style="text-align:center">t10</td><td style="text-align:center">Inserted data <code translate="no">A2</code> into collection <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
-<tr><td style="text-align:center">t12</td><td style="text-align:center">/</td><td style="text-align:center">Conducted a search on collection <code translate="no">C0</code></td></tr>
-<tr><td style="text-align:center">t15</td><td style="text-align:center">Deleted data <code translate="no">A1</code> from collection <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
-<tr><td style="text-align:center">t17</td><td style="text-align:center">/</td><td style="text-align:center">Conducted a search on collection <code translate="no">C0</code></td></tr>
+<tr><td style="text-align:center">t0</td><td style="text-align:center">أنشأ مجموعة باسم <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
+<tr><td style="text-align:center">t2</td><td style="text-align:center">/</td><td style="text-align:center">إجراء بحث على المجموعة <code translate="no">C0</code>.</td></tr>
+<tr><td style="text-align:center">t5</td><td style="text-align:center">تم إدراج البيانات <code translate="no">A1</code> في المجموعة <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
+<tr><td style="text-align:center">t7</td><td style="text-align:center">/</td><td style="text-align:center">إجراء بحث في المجموعة <code translate="no">C0</code>.</td></tr>
+<tr><td style="text-align:center">t10</td><td style="text-align:center">تم إدراج البيانات <code translate="no">A2</code> في المجموعة <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
+<tr><td style="text-align:center">t12</td><td style="text-align:center">/</td><td style="text-align:center">إجراء بحث في المجموعة <code translate="no">C0</code></td></tr>
+<tr><td style="text-align:center">t15</td><td style="text-align:center">تم حذف البيانات <code translate="no">A1</code> من المجموعة <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
+<tr><td style="text-align:center">t17</td><td style="text-align:center">/</td><td style="text-align:center">إجراء بحث في المجموعة <code translate="no">C0</code></td></tr>
 </tbody>
 </table>
-<p>Ideally, user 2 should be able to see:</p>
+<p>من الناحية المثالية، يجب أن يكون المستخدم 2 قادرًا على رؤية</p>
 <ul>
-<li><p>An empty collection <code translate="no">C0</code> at <code translate="no">t2</code>.</p></li>
-<li><p>Data <code translate="no">A1</code> at <code translate="no">t7</code>.</p></li>
-<li><p>Both data <code translate="no">A1</code> and <code translate="no">A2</code> at <code translate="no">t12</code>.</p></li>
-<li><p>Only data <code translate="no">A2</code> at <code translate="no">t17</code> (as data <code translate="no">A1</code> has been deleted from the collection before this point).</p></li>
+<li><p>مجموعة فارغة <code translate="no">C0</code> في <code translate="no">t2</code>.</p></li>
+<li><p>البيانات <code translate="no">A1</code> في <code translate="no">t7</code>.</p></li>
+<li><p>كل من البيانات <code translate="no">A1</code> و <code translate="no">A2</code> على <code translate="no">t12</code>.</p></li>
+<li><p>البيانات فقط <code translate="no">A2</code> في <code translate="no">t17</code> (حيث تم حذف البيانات <code translate="no">A1</code> من المجموعة قبل هذه النقطة).</p></li>
 </ul>
-<p>This ideal scenario can be easily achieved when there is only one single node. However, Milvus is a distributed vector database, and to ensure all DML and DDL operations in different nodes are kept in order, Milvus needs to address the following two issues:</p>
+<p>يمكن تحقيق هذا السيناريو المثالي بسهولة عندما تكون هناك عقدة واحدة فقط. ومع ذلك، فإن ميلفوس عبارة عن قاعدة بيانات متجهة موزعة، ولضمان الحفاظ على جميع عمليات DML وDDL في العقد المختلفة بالترتيب، يحتاج ميلفوس إلى معالجة المشكلتين التاليتين</p>
 <ol>
-<li><p>The time clock is different for the two users in the example above if they are on different nodes. For instance, if user 2 is 24 hours behind user 1, all operations by user 1 are not visible to user 2 until the next day.</p></li>
-<li><p>There can be network latency. If user 2 conducts a search on collection <code translate="no">C0</code> at <code translate="no">t17</code>, Milvus should be able to guarantee that all the operations before <code translate="no">t17</code> are successfully processed and completed. If the delete operation at <code translate="no">t15</code> is delayed due to network latency, it is very likely that user 2 can still see the supposedly deleted data <code translate="no">A1</code> when conducting a search at <code translate="no">t17</code>.</p></li>
+<li><p>تختلف الساعة الزمنية للمستخدمين الاثنين في المثال أعلاه إذا كانا على عقد مختلفة. على سبيل المثال، إذا كان المستخدم 2 متأخرًا بـ 24 ساعة عن المستخدم 1، فإن جميع العمليات التي يقوم بها المستخدم 1 لا تكون مرئية للمستخدم 2 حتى اليوم التالي.</p></li>
+<li><p>يمكن أن يكون هناك تأخير في الشبكة. إذا أجرى المستخدم 2 بحثًا على المجموعة <code translate="no">C0</code> على <code translate="no">t17</code> ، يجب أن يكون ميلفوس قادرًا على ضمان معالجة جميع العمليات قبل <code translate="no">t17</code> وإتمامها بنجاح. إذا تأخرت عملية الحذف على الموقع <code translate="no">t15</code> بسبب زمن انتقال الشبكة، فمن المحتمل جدًا أن يظل بإمكان المستخدم 2 رؤية البيانات المفترض حذفها <code translate="no">A1</code> عند إجراء بحث على <code translate="no">t17</code>.</p></li>
 </ol>
-<p>Therefore, Milvus adopts a time synchronization system (timetick) to solve the issues.</p>
-<h2 id="Timestamp-oracle-TSO" class="common-anchor-header">Timestamp oracle (TSO)<button data-href="#Timestamp-oracle-TSO" class="anchor-icon" translate="no">
+<p>لذلك، يتبنى ميلفوس نظام مزامنة الوقت (timetick) لحل المشكلة.</p>
+<h2 id="Timestamp-oracle-TSO" class="common-anchor-header">أوراكل الطابع الزمني (TSO)<button data-href="#Timestamp-oracle-TSO" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,17 +84,15 @@ summary: Learn about the time synchronization system in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To solve the first issue mentioned in the previous section, Milvus, like other distributed systems, provides a timestamp oracle (TSO) service. This means that all events in Milvus must be allocated with a timestamp from TSO rather than from the local clock.</p>
-<p>The TSO service is provided by the root coordinator in Milvus. Clients can allocate one or more timestamps in a single timestamp allocation request.</p>
-<p>A TSO timestamp is a type of <code translate="no">uint64</code> value that is made up of a physical part and a logical part. The figure below demonstrates the format of a timestamp.</p>
+    </button></h2><p>لحل المشكلة الأولى المذكورة في القسم السابق، يوفر ميلفوس، مثل الأنظمة الموزعة الأخرى، خدمة أوراكل الطابع الزمني (TSO). هذا يعني أنه يجب تخصيص جميع الأحداث في Milvus بطابع زمني من TSO بدلاً من الساعة المحلية.</p>
+<p>يتم توفير خدمة TSO من قبل المنسق الجذر في Milvus. يمكن للعملاء تخصيص طابع زمني واحد أو أكثر في طلب تخصيص طابع زمني واحد.</p>
+<p>الطابع الزمني TSO هو نوع من القيمة <code translate="no">uint64</code> التي تتكون من جزء مادي وجزء منطقي. يوضح الشكل أدناه تنسيق الطابع الزمني.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
-    <span>TSO_Timestamp</span>
-  </span>
-.</p>
-<p>As illustrated, the 46 bits at the beginning is the physical part, namely the UTC time in milliseconds. The last 18 bits is the logical part.</p>
-<h2 id="Time-synchronization-system-timetick" class="common-anchor-header">Time synchronization system (timetick)<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   </span> <span class="img-wrapper"> <span>TSO_Timestamp</span>. </span></p>
+<p>كما هو موضح، فإن ال 46 بت في البداية هي الجزء المادي، أي التوقيت العالمي المنسق بالمللي ثانية. آخر 18 بت هو الجزء المنطقي.</p>
+<h2 id="Time-synchronization-system-timetick" class="common-anchor-header">نظام مزامنة الوقت (timetick)<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -109,49 +107,40 @@ summary: Learn about the time synchronization system in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section uses the example of a data insertion operation to explain the time synchronization mechanism in Milvus.</p>
-<p>When proxy receives a data insertion request from SDK, it divides the insert messages into  different message streams (<code translate="no">MsgStream</code>) according to the hash value of the primary keys.</p>
-<p>Each insert message (<code translate="no">InsertMsg</code>) is assigned a timestamp before being sent to the <code translate="no">MsgStream</code>.</p>
+    </button></h2><p>يستخدم هذا القسم مثالاً لعملية إدخال بيانات لشرح آلية مزامنة الوقت في ميلفوس.</p>
+<p>عندما يتلقى الوكيل طلب إدراج بيانات من SDK، فإنه يقسم رسائل الإدراج إلى تدفقات رسائل مختلفة (<code translate="no">MsgStream</code>) وفقًا لقيمة تجزئة المفاتيح الأساسية.</p>
+<p>يتم تعيين طابع زمني لكل رسالة إدراج (<code translate="no">InsertMsg</code>) قبل إرسالها إلى <code translate="no">MsgStream</code>.</p>
 <div class="alert note">
-  <code translate="no">MsgStream</code> is a wrapper of the message queue, which is Pulsar by default in Milvus 2.0.
-</div>
+  <code translate="no">MsgStream</code> هو عبارة عن غلاف لقائمة انتظار الرسائل، وهو Pulsar افتراضيًا في Milvus 2.0.</div>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
-    <span>timesync_proxy_insert_msg</span>
-  </span>
-</p>
-<p>One general principle is that in the <code translate="no">MsgStream</code>, the timestamps of the<code translate="no">InsertMsgs</code> from the same proxy must be incremental. However, there is no such rule for those of the <code translate="no">InsertMsgs</code> from different proxies.</p>
-<p>The following figure is an example of <code translate="no">InsertMsgs</code> in a <code translate="no">MsgStream</code>. The snippet contains five <code translate="no">InsertMsgs</code>, three of which are from <code translate="no">Proxy1</code> and the rest from <code translate="no">Proxy2</code>.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
+<p>أحد المبادئ العامة هو أنه في <code translate="no">MsgStream</code> ، يجب أن تكون الطوابع الزمنية لـ<code translate="no">InsertMsgs</code> من نفس الوكيل متزايدة. ومع ذلك، لا توجد مثل هذه القاعدة لتلك الخاصة بـ <code translate="no">InsertMsgs</code> من وكلاء مختلفين.</p>
+<p>الشكل التالي هو مثال على <code translate="no">InsertMsgs</code> في <code translate="no">MsgStream</code>. يحتوي المقتطف على خمسة <code translate="no">InsertMsgs</code> ، ثلاثة منها من <code translate="no">Proxy1</code> والباقي من <code translate="no">Proxy2</code>.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
-    <span>msgstream</span>
-  </span>
-</p>
-<p>The timestamps of the three <code translate="no">InsertMsgs</code> from <code translate="no">Proxy1</code> are incremental, and so are the two <code translate="no">InsertMsgs</code> from <code translate="no">Proxy2</code>. However, there is no particular order among <code translate="no">Proxy1</code> and <code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> .</p>
-<p>One possible scenario is that when reading a message with timestamp <code translate="no">110</code> from <code translate="no">Proxy2</code>, Milvus finds that the message with timestamp <code translate="no">80</code> from <code translate="no">Proxy1</code> is still in the <code translate="no">MsgStream</code>. Therefore, Milvus introduces a time synchronization system, timetick, to ensure that when reading a message from <code translate="no">MsgStream</code>, all messages with smaller timestamp values must be consumed.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
+<p>إن الطوابع الزمنية للثلاثة <code translate="no">InsertMsgs</code> من <code translate="no">Proxy1</code> هي طوابع زمنية متزايدة، وكذلك الأمر بالنسبة للاثنين <code translate="no">InsertMsgs</code> من <code translate="no">Proxy2</code>. ومع ذلك، لا يوجد ترتيب معين بين <code translate="no">Proxy1</code> و <code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> .</p>
+<p>يتمثل أحد السيناريوهات المحتملة في أنه عند قراءة رسالة ذات طابع زمني <code translate="no">110</code> من <code translate="no">Proxy2</code> ، يجد ميلفوس أن الرسالة ذات الطابع الزمني <code translate="no">80</code> من <code translate="no">Proxy1</code> لا تزال في <code translate="no">MsgStream</code>. لذلك، يقدم ميلفوس نظام مزامنة الوقت، timetick، لضمان أنه عند قراءة رسالة من <code translate="no">MsgStream</code> ، يجب استهلاك جميع الرسائل ذات قيم الطابع الزمني الأصغر.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
-    <span>time_synchronization</span>
-  </span>
-</p>
-<p>As shown in the figure above,</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   </span> <span class="img-wrapper"> <span>مزامنة_الوقت</span> </span></p>
+<p>كما هو موضح في الشكل أعلاه,</p>
 <ul>
-<li><p>Each proxy periodically (every 200 ms by default) reports the largest timestamp value of the latest <code translate="no">InsertMsg</code> in the <code translate="no">MsgStream</code>to root coord.</p></li>
-<li><p>Root coord identifies the minimum timestamp value on this <code translate="no">Msgstream</code>, no matter to which proxy does the <code translate="no">InsertMsgs</code> belong. Then root coord  inserts this minimum timestamp into the <code translate="no">Msgstream</code>. This timestamp is also called timetick.</p></li>
-<li><p>When the consumer components reads the timetick inserted by root coord, they understand that all insert messages with smaller timestamp values have been consumed. Therefore, relevant requests can be executed safely without interrupting the order.</p></li>
+<li><p>يقوم كل وكيل بشكل دوري (كل 200 مللي ثانية بشكل افتراضي) بالإبلاغ عن أكبر قيمة طابع زمني لأحدث <code translate="no">InsertMsg</code> في <code translate="no">MsgStream</code>إلى التنسيق الجذر.</p></li>
+<li><p>يحدد التنسيق الجذر الحد الأدنى لقيمة الطابع الزمني الأدنى على هذا <code translate="no">Msgstream</code> ، بغض النظر عن الوكيل الذي ينتمي إليه <code translate="no">InsertMsgs</code>. ثم يقوم جذر التنسيق بإدراج هذا الحد الأدنى للطابع الزمني في <code translate="no">Msgstream</code>. يسمى هذا الطابع الزمني أيضًا بالعلامة الزمنية.</p></li>
+<li><p>عندما تقرأ المكونات المستهلكة الطابع الزمني الذي أدرجه جذر التنسيق، فإنها تفهم أن جميع رسائل الإدراج ذات قيم الطابع الزمني الأصغر قد استهلكت. لذلك، يمكن تنفيذ الطلبات ذات الصلة بأمان دون مقاطعة الترتيب.</p></li>
 </ul>
-<p>The following figure is an example of the <code translate="no">Msgstream</code> with a timetick inserted.</p>
+<p>الشكل التالي هو مثال على <code translate="no">Msgstream</code> مع إدراج طابع زمني.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
-    <span>timetick</span>
-  </span>
-</p>
-<p><code translate="no">MsgStream</code> processes the messages in batches according to the time tick to ensure that the output messages meet the requirements of timestamp. In the above example, it will consume all records excepting <code translate="no">InsertMsgs</code> from <code translate="no">Proxy2</code> at <code translate="no">Timestamp: 120</code> as it’s after the latest TimeTick.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   </span> <span class="img-wrapper"> <span>timetick</span> </span></p>
+<p><code translate="no">MsgStream</code> بمعالجة الرسائل على دفعات وفقًا للعلامة الزمنية للتأكد من أن الرسائل الناتجة تفي بمتطلبات الطابع الزمني. في المثال أعلاه، سوف يستهلك جميع السجلات باستثناء <code translate="no">InsertMsgs</code> من <code translate="no">Proxy2</code> على <code translate="no">Timestamp: 120</code> لأنه بعد آخر علامة زمنية.</p>
+<h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -167,6 +156,6 @@ summary: Learn about the time synchronization system in Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn about the concept of <a href="/docs/timestamp.md">timestamp</a>.</li>
-<li>Learn about the <a href="/docs/data_processing.md">data processing workflow</a> in Milvus.</li>
+<li>تعرف على مفهوم <a href="/docs/ar/timestamp.md">الطابع</a> الزمني.</li>
+<li>تعرف على <a href="/docs/ar/data_processing.md">سير عمل معالجة البيانات</a> في ميلفوس.</li>
 </ul>
