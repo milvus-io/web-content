@@ -2,9 +2,9 @@
 id: configure_querycoord.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure queryCoord for Milvus.
+summary: تعرف على كيفية تهيئة الاستعلام عن الاستعلامات لـ Milvus.
 ---
-<h1 id="queryCoord-related-Configurations" class="common-anchor-header">queryCoord-related Configurations<button data-href="#queryCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="queryCoord-related-Configurations" class="common-anchor-header">التكوينات المتعلقة بالاستعلام<button data-href="#queryCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure queryCoord for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of queryCoord, used to manage topology and load balancing for the query nodes, and handoff from growing segments to sealed segments.</p>
+    </button></h1><p>تكوين متعلق بالاستعلامCoord، يُستخدم لإدارة الطوبولوجيا وموازنة التحميل لعقد الاستعلام، والتسليم من المقاطع المتنامية إلى المقاطع المغلقة.</p>
 <h2 id="queryCoordautoHandoff" class="common-anchor-header"><code translate="no">queryCoord.autoHandoff</code><button data-href="#queryCoordautoHandoff" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,16 +38,16 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.autoHandoff">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Switch value to control if to automatically replace a growing segment with the corresponding indexed sealed segment when the growing segment reaches the sealing threshold.</li>      
-        <li>If this parameter is set false, Milvus simply searches the growing segments with brute force.</li>      </td>
-      <td>true</td>
+        <li>تبديل القيمة للتحكم في ما إذا كان سيتم استبدال المقطع المتنامي تلقائياً بالمقطع المغلق المفهرس المقابل عندما يصل المقطع المتنامي إلى حد الإغلاق.</li>      
+        <li>إذا تم تعيين هذه المعلمة خطأ، يبحث ميلفوس ببساطة في المقاطع المتنامية بالقوة الغاشمة.</li>      </td>
+      <td>صواب</td>
     </tr>
   </tbody>
 </table>
@@ -69,14 +69,14 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.autoBalance">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Switch value to control if to automatically balance the memory usage among query nodes by distributing segment loading and releasing operations evenly.      </td>
-      <td>true</td>
+      <td>        تبديل القيمة للتحكم في ما إذا كان سيتم موازنة استخدام الذاكرة تلقائياً بين عقد الاستعلام عن طريق توزيع عمليات تحميل المقطع وتحريره بالتساوي.      </td>
+      <td>صواب</td>
     </tr>
   </tbody>
 </table>
@@ -98,14 +98,14 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.autoBalanceChannel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable auto balance channel      </td>
-      <td>true</td>
+      <td>        تمكين قناة التوازن التلقائي      </td>
+      <td>صواب</td>
     </tr>
   </tbody>
 </table>
@@ -127,14 +127,14 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.balancer">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        auto balancer used for segments on queryNodes      </td>
-      <td>ScoreBasedBalancer</td>
+      <td>        الموازن التلقائي المستخدم للشرائح على عقد الاستعلامات      </td>
+      <td>الموازن المستند إلى النقاط</td>
     </tr>
   </tbody>
 </table>
@@ -156,13 +156,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.globalRowCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the weight used when balancing segments among queryNodes      </td>
+      <td>        الوزن المستخدم عند موازنة المقاطع بين عُقد الاستعلامات      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -185,13 +185,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.scoreUnbalanceTolerationFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the least value for unbalanced extent between from and to nodes when doing balance      </td>
+      <td>        أقل قيمة للمدى غير المتوازن بين العقد من وإلى عند إجراء الموازنة      </td>
       <td>0.05</td>
     </tr>
   </tbody>
@@ -214,13 +214,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.reverseUnBalanceTolerationFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the largest value for unbalanced extent between from and to nodes after doing balance      </td>
+      <td>        أكبر قيمة للمدى غير المتوازن بين العقد من وإلى العقد بعد إجراء التوازن      </td>
       <td>1.3</td>
     </tr>
   </tbody>
@@ -243,13 +243,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.overloadedMemoryThresholdPercentage">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The threshold of memory usage (in percentage) in a query node to trigger the sealed segment balancing.      </td>
+      <td>        عتبة استخدام الذاكرة (بالنسبة المئوية) في عقدة الاستعلام لتشغيل موازنة المقطع المختوم.      </td>
       <td>90</td>
     </tr>
   </tbody>
@@ -272,13 +272,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.balanceIntervalSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval at which query coord balances the memory usage among query nodes.      </td>
+      <td>        الفترة الزمنية التي يوازن عندها تنسيق الاستعلام استخدام الذاكرة بين عقد الاستعلام.      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -301,13 +301,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.memoryUsageMaxDifferencePercentage">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The threshold of memory usage difference (in percentage) between any two query nodes to trigger the sealed segment balancing.      </td>
+      <td>        الحد الأدنى لفرق استخدام الذاكرة (بالنسبة المئوية) بين أي عقدتي استعلام لتشغيل موازنة المقطع المختوم.      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -330,13 +330,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.rowCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the row count weight used when balancing segments among queryNodes      </td>
+      <td>        وزن عدد الصفوف المستخدم عند موازنة المقاطع بين عقد الاستعلامات      </td>
       <td>0.4</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.segmentCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the segment count weight used when balancing segments among queryNodes      </td>
+      <td>        وزن عدد المقاطع المستخدم عند موازنة المقاطع بين عقد الاستعلام      </td>
       <td>0.4</td>
     </tr>
   </tbody>
@@ -388,13 +388,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.globalSegmentCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the segment count weight used when balancing segments among queryNodes      </td>
+      <td>        وزن عدد المقاطع المستخدم عند موازنة المقاطع بين عُقد الاستعلام      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -417,15 +417,15 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.collectionChannelCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>the channel count weight used when balancing channels among queryNodes, </li>      
-        <li>        A higher value reduces the likelihood of assigning channels from the same collection to the same QueryNode. Set to 1 to disable this feature.</li>      </td>
+        <li>وزن عدد القنوات المستخدم عند موازنة القنوات بين عقد الاستعلام, </li>      
+        <li>        تقلل القيمة الأعلى من احتمالية تعيين قنوات من نفس المجموعة إلى نفس عقدة الاستعلام. اضبط على 1 لتعطيل هذه الميزة.</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -448,13 +448,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.segmentCountMaxSteps">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segment count based plan generator max steps      </td>
+      <td>        عدد المقاطع المستندة إلى خطة المولدات المستندة إلى عدد المقاطع كحد أقصى للخطوات      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -477,13 +477,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.rowCountMaxSteps">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segment count based plan generator max steps      </td>
+      <td>        الحد الأقصى لخطوات مولد الخطة المستند إلى عدد المقاطع      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -506,13 +506,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.randomMaxSteps">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segment count based plan generator max steps      </td>
+      <td>        الحد الأقصى لخطوات مولد الخطة المستند إلى عدد المقاطع      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -535,13 +535,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.growingRowCountWeight">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the memory weight of growing segment row count      </td>
+      <td>        وزن الذاكرة لعدد صفوف المقطع المتزايد      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -564,13 +564,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.delegatorMemoryOverloadFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the factor of delegator overloaded memory      </td>
+      <td>        عامل الذاكرة الزائدة للمفوض      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -593,13 +593,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.balanceCostThreshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the threshold of balance cost, if the difference of cluster's cost after executing the balance plan is less than this value, the plan will not be executed      </td>
+      <td>        عتبة تكلفة التوازن، إذا كان فرق تكلفة المجموعة بعد تنفيذ خطة التوازن أقل من هذه القيمة، فلن يتم تنفيذ الخطة      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -622,13 +622,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.channelTaskTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        1 minute      </td>
+      <td>        1 دقيقة      </td>
       <td>60000</td>
     </tr>
   </tbody>
@@ -651,13 +651,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.segmentTaskTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        2 minute      </td>
+      <td>        2 دقيقة      </td>
       <td>120000</td>
     </tr>
   </tbody>
@@ -680,13 +680,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.heartbeatAvailableInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        10s, Only QueryNodes which fetched heartbeats within the duration are available      </td>
+      <td>        10 ثوانٍ، تتوفر فقط عُقد الاستعلام التي جلبت نبضات القلب خلال المدة      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -709,13 +709,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.distRequestTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the request timeout for querycoord fetching data distribution from querynodes, in milliseconds      </td>
+      <td>        مهلة الطلب لتوزيع بيانات الاستعلامات التي تجلب نبضات القلب من عقد الاستعلام، بالمللي ثانية      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -738,13 +738,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.heatbeatWarningLag">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the lag value for querycoord report warning when last heatbeat is too old, in milliseconds      </td>
+      <td>        قيمة التأخر لتحذير تقرير الاستعلام عن الكواريكورد عندما تكون آخر نبضة حرارة قديمة جداً، بالمللي ثانية      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -767,13 +767,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.checkHealthInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        3s, the interval when query coord try to check health of query node      </td>
+      <td>        3 ثوانٍ، الفاصل الزمني عند محاولة تنسيق الاستعلام التحقق من صحة عقدة الاستعلام      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -796,13 +796,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.checkHealthRPCTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        100ms, the timeout of check health rpc to query node      </td>
+      <td>        100 مللي ثانية، المهلة الزمنية للتحقق من صحة rpc لعقدة الاستعلام      </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -825,13 +825,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.brokerTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        5000ms, querycoord broker rpc timeout      </td>
+      <td>        5000 مللي ثانية، مهلة وسيط الاستعلام rpc إلى عقدة الاستعلام      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -854,13 +854,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.collectionRecoverTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if collection recover times reach the limit during loading state, release it      </td>
+      <td>        إذا وصلت أزمنة استرداد المجموعة إلى الحد الأقصى أثناء حالة التحميل، فقم بتحريرها      </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -883,13 +883,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.observerTaskParallel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the parallel observer dispatcher task number      </td>
+      <td>        رقم مهمة مرسل المراقب الموازي      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -912,13 +912,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.checkAutoBalanceConfigInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval of check auto balance config      </td>
+      <td>        الفاصل الزمني لتكوين الرصيد التلقائي للتحقق من التوازن التلقائي      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -941,13 +941,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.checkNodeSessionInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval(in seconds) of check querynode cluster session      </td>
+      <td>        الفاصل الزمني (بالثواني) لجلسة التحقق من مجموعة الاستعلامات      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -970,13 +970,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        ثانية. فرض إيقاف العقدة بدون توقف رشيق      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -999,14 +999,14 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.enableStoppingBalance">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether enable stopping balance      </td>
-      <td>true</td>
+      <td>        ما إذا كان تمكين إيقاف التوازن      </td>
+      <td>صواب</td>
     </tr>
   </tbody>
 </table>
@@ -1028,13 +1028,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.channelExclusiveNodeFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the least node number for enable channel's exclusive mode      </td>
+      <td>        أدنى رقم عقدة لتمكين الوضع الحصري للقناة      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -1057,13 +1057,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.collectionObserverInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval of collection observer      </td>
+      <td>        الفاصل الزمني لمراقب التجميع      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -1086,13 +1086,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.checkExecutedFlagInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval of check executed flag to force to pull dist      </td>
+      <td>        الفاصل الزمني لعلامة التحقق المنفذة لإجبار سحب الهاء      </td>
       <td>100</td>
     </tr>
   </tbody>
@@ -1115,13 +1115,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.updateCollectionLoadStatusInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        5m, max interval of updating collection loaded status for check health      </td>
+      <td>        5 أمتار، الحد الأقصى للفاصل الزمني لتحديث حالة المجموعة المحملة للتحقق من الصحة      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -1144,13 +1144,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.cleanExcludeSegmentInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the time duration of clean pipeline exclude segment which used for filter invalid data, in seconds      </td>
+      <td>        المدة الزمنية لمقطع استبعاد خط الأنابيب النظيف المستخدم لتصفية البيانات غير الصالحة، بالثواني      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1173,13 +1173,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of queryCoord. If not specified, use the first unicastable address      </td>
+      <td>        عنوان TCP/IP الخاص بالاستعلام. إذا لم يتم تحديده، استخدم أول عنوان غير قابل للإرسال      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1202,13 +1202,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of queryCoord      </td>
+      <td>        منفذ TCP الخاص بالاستعلام      </td>
       <td>19531</td>
     </tr>
   </tbody>
@@ -1231,13 +1231,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryCoord can send, unit: byte      </td>
+      <td>        الحد الأقصى لحجم كل طلب RPC الذي يمكن أن يرسله الاستعلام، الوحدة: بايت      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1260,13 +1260,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryCoord can receive, unit: byte      </td>
+      <td>        الحد الأقصى لحجم كل طلب طلب استدعاء طلب تنفيذ أمر الشراء الذي يمكن أن يتلقاه الاستعلام، الوحدة: بايت      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1289,13 +1289,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryCoord can send, unit: byte      </td>
+      <td>        الحد الأقصى لحجم كل طلب RPC الذي يمكن للعملاء في الاستعلام عن طلب الشراء عن طريق النقر فوق النقر أن يرسلوه، الوحدة: بايت      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1318,13 +1318,13 @@ summary: Learn how to configure queryCoord for Milvus.
     </button></h2><table id="queryCoord.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryCoord can receive, unit: byte      </td>
+      <td>        الحد الأقصى لحجم كل طلب طلب استدعاء أوامر الشراء (RPC) الذي يمكن للعملاء على الاستعلام، الوحدة: بايت      </td>
       <td>536870912</td>
     </tr>
   </tbody>

@@ -164,7 +164,7 @@ res = MilvusClient.search(
 </ul></td>
      <td><p><strong>النوع</strong>: سلسلة <strong>النطاق</strong>: [<code translate="no">"true"</code> ، <code translate="no">"false"</code>]</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">"false"</code></p></td>
-     <td><p>يعمل تعيينها على <code translate="no">"true"</code> على تحسين الاستدعاء من خلال تحسين نتائج البحث ولكنه يستخدم المزيد من ذاكرة وحدة معالجة الرسومات. تعيينه إلى <code translate="no">"false"</code> يحافظ على ذاكرة وحدة معالجة الرسومات.</p></td>
+     <td><p>يعمل تعيينها على <code translate="no">"true"</code> على تحسين الاستدعاء من خلال تحسين نتائج البحث ولكنه يستخدم المزيد من ذاكرة وحدة معالجة الرسومات. ضبطه على <code translate="no">"false"</code> يحافظ على ذاكرة وحدة معالجة الرسومات.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/gpu-ivf-pq.md#Search-on-index">البحث في الفهرس</a>.</p>

@@ -1,9 +1,9 @@
 ---
 id: data_processing.md
-summary: Learn about the data processing procedure in Milvus.
-title: Data Processing
+summary: تعرف على إجراءات معالجة البيانات في ميلفوس.
+title: معالجة البيانات
 ---
-<h1 id="Data-Processing" class="common-anchor-header">Data Processing<button data-href="#Data-Processing" class="anchor-icon" translate="no">
+<h1 id="Data-Processing" class="common-anchor-header">معالجة البيانات<button data-href="#Data-Processing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Data Processing
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This article provides a detailed description of the implementation of data insertion, index building, and data query in Milvus.</p>
-<h2 id="Data-insertion" class="common-anchor-header">Data insertion<button data-href="#Data-insertion" class="anchor-icon" translate="no">
+    </button></h1><p>تقدم هذه المقالة وصفًا تفصيليًا لتنفيذ عملية إدخال البيانات وبناء الفهرس والاستعلام عن البيانات في ميلفوس.</p>
+<h2 id="Data-insertion" class="common-anchor-header">إدراج البيانات<button data-href="#Data-insertion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,30 +34,24 @@ title: Data Processing
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can specify a number of shards for each collection in Milvus, each shard corresponding to a virtual channel (<em>vchannel</em>). As the following figure shows, Milvus assigns each vchannel in the log broker a physical channel (<em>pchannel</em>). Any incoming insert/delete request is routed to shards based on the hash value of primary key.</p>
-<p>Validation of DML requests is moved forward to proxy because Milvus does not have complicated transactions. Proxy would request a timestamp for each insert/delete request from TSO (Timestamp Oracle), which is the timing module that colocates with the root coordinator. With the older timestamp being overwritten by the newer one, timestamps are used to determine the sequence of data requests being processed. Proxy retrieves information in batches from data coord including entities’ segments and primary keys to increase overall throughput and avoid overburdening the central node.</p>
+    </button></h2><p>يمكنك تحديد عدد من الأجزاء لكل مجموعة في ملفوس، كل جزء يتوافق مع قناة افتراضية<em>(vchannel</em>). كما يوضح الشكل التالي، يعيّن ميلفوس لكل قناة افتراضية في وسيط السجل قناة فعلية<em>(pchannel</em>). يتم توجيه أي طلب إدراج/حذف وارد إلى أجزاء بناءً على قيمة تجزئة المفتاح الأساسي.</p>
+<p>يتم نقل التحقق من صحة طلبات DML إلى الوكيل لأن ميلفوس ليس لديه معاملات معقدة. سيطلب الوكيل طابعًا زمنيًا لكل طلب إدراج/حذف من TSO (أوراكل الطابع الزمني)، وهي وحدة التوقيت التي تتشارك مع المنسق الجذر. يتم استخدام الطوابع الزمنية لتحديد تسلسل طلبات البيانات التي تتم معالجتها مع استبدال الطابع الزمني الأقدم بالأحدث. يقوم الوكيل باسترداد المعلومات على دفعات من منسق البيانات بما في ذلك شرائح الكيانات والمفاتيح الأساسية لزيادة الإنتاجية الإجمالية وتجنب إثقال كاهل العقدة المركزية.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
-    <span>Channels 1</span>
-  </span>
-</p>
-<p>Both DML (data manipulation language) operations and DDL (data definition language) operations are written to the log sequence, but DDL operations are only assigned one channel because of their low frequency of occurrence.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   </span> <span class="img-wrapper"> <span>القنوات 1</span> </span></p>
+<p>تتم كتابة كل من عمليات DML (لغة معالجة البيانات) وعمليات DDL (لغة تعريف البيانات) في تسلسل السجل، ولكن يتم تعيين قناة واحدة فقط لعمليات DDL بسبب انخفاض تكرار حدوثها.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
-    <span>Channels 2</span>
-  </span>
-</p>
-<p><em>Vchannels</em> are maintained in the underlying log broker nodes. Each channel is physically indivisible and available for any but only one node. When data ingestion rate reaches bottleneck, consider two things: Whether the log broker node is overloaded and needs to be scaled, and whether there are sufficient shards to ensure load balance for each node.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   </span> <span class="img-wrapper"> <span>القنوات 2</span> </span></p>
+<p>يتم الاحتفاظ بقنوات<em>Vchannels</em> في عقد وسيط السجل الأساسية. كل قناة غير قابلة للتجزئة فعليًا ومتاحة لأي عقدة واحدة فقط. عندما يصل معدل استيعاب البيانات إلى عنق الزجاجة، ضع في اعتبارك أمرين: ما إذا كانت عقدة وسيط السجل محملة فوق طاقتها وتحتاج إلى توسيع نطاقها، وما إذا كانت هناك أجزاء كافية لضمان توازن الحمل لكل عقدة.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
-    <span>Write log sequence</span>
-  </span>
-</p>
-<p>The above diagram encapsulates four components involved in the process of writing log sequence: proxy, log broker, data node, and object storage. The process involves four tasks: validation of DML requests, publication-subscription of log sequence, conversion from streaming log to log snapshots, and persistence of log snapshots. The four tasks are decoupled from each other to make sure each task is handled by its corresponding node type. Nodes of the same type are made equal and can be scaled elastically and independently to accommodate various data loads, massive and highly fluctuating streaming data in particular.</p>
-<h2 id="Index-building" class="common-anchor-header">Index building<button data-href="#Index-building" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   </span> <span class="img-wrapper"> <span>تسلسل كتابة السجل</span> </span></p>
+<p>يغلف الرسم البياني أعلاه أربعة مكونات متضمنة في عملية كتابة تسلسل السجل: الوكيل، وسيط السجل، عقدة البيانات، وعقدة البيانات، وتخزين الكائنات. تنطوي العملية على أربع مهام: التحقق من صحة طلبات DML، ونشر-اشتراك تسلسل السجل، والتحويل من سجل التدفق إلى لقطات السجل، واستمرار لقطات السجل. يتم فصل المهام الأربع عن بعضها البعض للتأكد من أن كل مهمة يتم التعامل معها من قبل نوع العقدة المقابلة لها. يتم جعل العقد من نفس النوع متساوية ويمكن تحجيمها بشكل مرن ومستقل لاستيعاب أحمال البيانات المختلفة، والبيانات المتدفقة الضخمة والمتقلبة للغاية على وجه الخصوص.</p>
+<h2 id="Index-building" class="common-anchor-header">بناء الفهرس<button data-href="#Index-building" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,18 +66,16 @@ title: Data Processing
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Index building is performed by index node. To avoid frequent index building for data updates, a collection in Milvus is divided further into segments, each with its own index.</p>
+    </button></h2><p>يتم بناء الفهرس بواسطة عقدة الفهرس. لتجنب بناء الفهرس بشكل متكرر لتحديثات البيانات، يتم تقسيم المجموعة في Milvus إلى أجزاء أخرى، لكل منها فهرسها الخاص.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
-    <span>Index building</span>
-  </span>
-</p>
-<p>Milvus supports building index for each vector field, scalar field and primary field. Both the input and output of index building engage with object storage: The index node loads the log snapshots to index from a segment (which is in object storage) to memory, deserializes the corresponding data and metadata to build index, serializes the index when index building completes, and writes it back to object storage.</p>
-<p>Index building mainly involves vector and matrix operations and hence is computation- and memory-intensive. Vectors cannot be efficiently indexed with traditional tree-based indexes due to their high-dimensional nature, but can be indexed with techniques that are more mature in this subject, such as cluster- or graph-based indexes. Regardless its type, building index involves massive iterative calculations for large-scale vectors, such as Kmeans or graph traverse.</p>
-<p>Unlike indexing for scalar data, building vector index has to take full advantage of SIMD (single instruction, multiple data) acceleration. Milvus has innate support for SIMD instruction sets, e.g., SSE, AVX2, and AVX512. Given the “hiccup” and resource-intensive nature of vector index building, elasticity becomes crucially important to Milvus in economical terms. Future Milvus releases will further explorations in heterogeneous computing and serverless computation to bring down the related costs.</p>
-<p>Besides, Milvus also supports scalar filtering and primary field query. It has inbuilt indexes to improve query efficiency, e.g., Bloom filter indexes, hash indexes, tree-based indexes, and inverted indexes, and plans to introduce more external indexes, e.g., bitmap indexes and rough indexes.</p>
-<h2 id="Data-query" class="common-anchor-header">Data query<button data-href="#Data-query" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   </span> <span class="img-wrapper"> <span>بناء الفهرس</span> </span></p>
+<p>يدعم Milvus بناء الفهرس لكل حقل متجه وحقل قياسي وحقل أساسي. يتفاعل كل من مدخلات ومخرجات بناء الفهرس مع تخزين الكائنات: تقوم عقدة الفهرس بتحميل لقطات السجل للفهرسة من مقطع (موجود في وحدة تخزين الكائنات) إلى الذاكرة، ثم تقوم بإلغاء تسلسل البيانات والبيانات الوصفية المقابلة لبناء الفهرس، ثم تقوم بتسلسل الفهرس عند اكتمال بناء الفهرس، ثم تقوم بكتابته مرة أخرى إلى وحدة تخزين الكائنات.</p>
+<p>يتضمن بناء الفهرس بشكل أساسي عمليات متجهة ومصفوفة، وبالتالي فهو يتطلب عمليات حسابية وذاكرة مكثفة. لا يمكن فهرسة المتجهات بكفاءة باستخدام الفهارس التقليدية القائمة على الأشجار بسبب طبيعتها عالية الأبعاد، ولكن يمكن فهرستها بتقنيات أكثر نضجًا في هذا الموضوع، مثل الفهارس القائمة على المجموعات أو الرسم البياني. وبغض النظر عن نوعها، يتضمن بناء الفهرس عمليات حسابية تكرارية ضخمة للمتجهات واسعة النطاق، مثل Kmeans أو اجتياز الرسم البياني.</p>
+<p>على عكس الفهرسة للبيانات القياسية، يجب أن يستفيد بناء فهرس المتجهات استفادة كاملة من تسريع SIMD (تعليمات واحدة، بيانات متعددة). لدى Milvus دعم فطري لمجموعات تعليمات SIMD، على سبيل المثال، SSE وAVX2 وAVX512. ونظراً لطبيعة "الزوبعة" وطبيعة بناء الفهرس المتجه التي تستهلك الكثير من الموارد، تصبح المرونة مهمة بشكل حاسم لميلفوس من الناحية الاقتصادية. ستعمل إصدارات Milvus المستقبلية على إجراء المزيد من الاستكشافات في الحوسبة غير المتجانسة والحوسبة بدون خادم لخفض التكاليف ذات الصلة.</p>
+<p>إلى جانب ذلك، يدعم Milvus أيضًا التصفية العددية والاستعلام عن الحقل الأساسي. يحتوي على فهارس مدمجة لتحسين كفاءة الاستعلام، على سبيل المثال، فهارس مرشح بلوم، وفهارس التجزئة، والفهارس القائمة على الشجرة، والفهارس المقلوبة، ويخطط لتقديم المزيد من الفهارس الخارجية، مثل فهارس الصور النقطية والفهارس التقريبية.</p>
+<h2 id="Data-query" class="common-anchor-header">استعلام البيانات<button data-href="#Data-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,23 +90,19 @@ title: Data Processing
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data query refers to the process of searching a specified collection for <em>k</em> number of vectors nearest to a target vector or for <em>all</em> vectors within a specified distance range to the vector. Vectors are returned together with their corresponding primary key and fields.</p>
+    </button></h2><p>يشير الاستعلام عن البيانات إلى عملية البحث في مجموعة محددة عن عدد <em>k</em> من المتجهات الأقرب إلى متجه مستهدف أو عن <em>جميع</em> المتجهات ضمن نطاق مسافة محددة إلى المتجه. يتم إرجاع المتجهات مع المفتاح الأساسي والحقول المقابلة لها.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
-    <span>Data query</span>
-  </span>
-</p>
-<p>A collection in Milvus is split into multiple segments, and the query nodes loads indexes by segment. When a search request arrives, it is broadcast to all query nodes for a concurrent search. Each node then prunes the local segments, searches for vectors meeting the criteria, and reduces and returns the search results.</p>
-<p>Query nodes are independent from each other in a data query. Each node is responsible only for two tasks: Load or release segments following the instructions from query coord; conduct a search within the local segments. And proxy is responsible for reducing search results from each query node and returning the final results to the client.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   </span> <span class="img-wrapper"> <span>استعلام البيانات</span> </span></p>
+<p>تنقسم المجموعة في ميلفوس إلى عدة قطاعات، وتقوم عقد الاستعلام بتحميل الفهارس حسب القطاع. عند وصول طلب بحث، يتم بثه إلى جميع عقد الاستعلام لإجراء بحث متزامن. ثم تقوم كل عقدة بعد ذلك بتشذيب المقاطع المحلية والبحث عن المتجهات التي تفي بالمعايير، ثم تقلل نتائج البحث وتعيدها.</p>
+<p>تكون عقد الاستعلام مستقلة عن بعضها البعض في استعلام البيانات. كل عقدة مسؤولة عن مهمتين فقط: تحميل أو تحرير المقاطع باتباع التعليمات من منسق الاستعلام؛ وإجراء بحث داخل المقاطع المحلية. والوكيل مسؤول عن تقليل نتائج البحث من كل عقدة استعلام وإرجاع النتائج النهائية إلى العميل.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
-    <span>Handoff</span>
-  </span>
-</p>
-<p>There are two types of segments, growing segments (for incremental data), and sealed segments (for historical data). Query nodes subscribe to vchannel to receive recent updates (incremental data) as growing segments. When a growing segment reaches a predefined threshold, data coord seals it and index building begins. Then a <em>handoff</em> operation initiated by query coord turns incremental data to historical data. Query coord will distribute sealed segments evenly among all query nodes according to memory usage, CPU overhead, and segment number.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   </span> <span class="img-wrapper"> <span>المناولة</span> </span></p>
+<p>هناك نوعان من المقاطع، المقاطع المتزايدة (للبيانات الإضافية)، والمقاطع المغلقة (للبيانات التاريخية). تشترك عُقد الاستعلام في قناة vchannel لتلقي التحديثات الأخيرة (البيانات التزايدية) كمقاطع متزايدة. عندما يصل المقطع المتنامي إلى عتبة محددة مسبقًا، يقوم منسق البيانات بإغلاقه ويبدأ بناء الفهرس. ثم تقوم عملية <em>تسليم</em> تبدأ من قبل منسق الاستعلام بتحويل البيانات المتزايدة إلى بيانات تاريخية. سيقوم منسق الاستعلام بتوزيع المقاطع المختومة بالتساوي بين جميع عقد الاستعلام وفقًا لاستخدام الذاكرة والنفقات الزائدة لوحدة المعالجة المركزية وعدد المقاطع.</p>
+<h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,7 +118,7 @@ title: Data Processing
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn about how to <a href="https://milvus.io/blog/deep-dive-5-real-time-query.md">use the Milvus vector database for real-time query</a>.</li>
-<li>Learn about <a href="https://milvus.io/blog/deep-dive-4-data-insertion-and-data-persistence.md">data insertion and data persistence in Milvus</a>.</li>
-<li>Learn how <a href="https://milvus.io/blog/deep-dive-3-data-processing.md">data is processed in Milvus</a>.</li>
+<li>تعرف على كيفية <a href="https://milvus.io/blog/deep-dive-5-real-time-query.md">استخدام قاعدة بيانات Milvus المتجهة للاستعلام في الوقت الفعلي</a>.</li>
+<li>تعرف على كيفية <a href="https://milvus.io/blog/deep-dive-4-data-insertion-and-data-persistence.md">إدراج البيانات واستمرار البيانات في ملفوس</a>.</li>
+<li>تعرف على كيفية <a href="https://milvus.io/blog/deep-dive-3-data-processing.md">معالجة البيانات في ملفوس</a>.</li>
 </ul>

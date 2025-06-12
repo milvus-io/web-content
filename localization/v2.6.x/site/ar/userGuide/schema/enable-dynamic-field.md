@@ -1,13 +1,12 @@
 ---
 id: enable-dynamic-field.md
-title: Dynamic Field
+title: الحقل الديناميكي
 summary: >-
-  All fields defined in the schema of a collection must be included in the
-  entities to be inserted. If you want some fields to be optional, consider
-  enabling the dynamic field. This topic describes how to enable and use the
-  dynamic field.
+  يجب تضمين جميع الحقول المحددة في مخطط المجموعة في الكيانات المراد إدراجها. إذا
+  كنت تريد أن تكون بعض الحقول اختيارية، ففكر في تمكين الحقل الديناميكي. يصف هذا
+  الموضوع كيفية تمكين الحقل الديناميكي واستخدامه.
 ---
-<h1 id="Dynamic-Field" class="common-anchor-header">Dynamic Field<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
+<h1 id="Dynamic-Field" class="common-anchor-header">الحقل الديناميكي<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>All fields defined in the schema of a collection must be included in the entities to be inserted. If you want some fields to be optional, consider enabling the dynamic field. This topic describes how to enable and use the dynamic field.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>يجب تضمين جميع الحقول المحددة في مخطط المجموعة في الكيانات المراد إدراجها. إذا كنت تريد أن تكون بعض الحقول اختيارية، ففكر في تمكين الحقل الديناميكي. يصف هذا الموضوع كيفية تمكين الحقل الديناميكي واستخدامه.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,10 +37,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you can create a collection schema by setting the names and data types for each field in the collection. When you add a field to the schema, make sure that this field is included in the entity you intend to insert. If you want some fields to be optional, enabling the dynamic field is one option.</p>
-<p>The dynamic field is a reserved field named <strong>$meta</strong>, which is of the JavaScript Object Notation (JSON) type. Any fields in the entities that are not defined in the schema will be stored in this reserved JSON field as key-value pairs.</p>
-<p>For a collection with the dynamic field enabled, you can use keys in the dynamic field for scalar filtering, just as you would with fields explicitly defined in the schema.</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">Enable dynamic field<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+    </button></h2><p>في ملفوس، يمكنك إنشاء مخطط مجموعة من خلال تعيين الأسماء وأنواع البيانات لكل حقل في المجموعة. عند إضافة حقل إلى المخطط، تأكد من تضمين هذا الحقل في الكيان الذي تنوي إدراجه. إذا كنت تريد أن تكون بعض الحقول اختيارية، فإن تمكين الحقل الديناميكي هو أحد الخيارات.</p>
+<p>الحقل الديناميكي هو حقل محجوز يسمى <strong>$meta،</strong> وهو من نوع JavaScript Object Notation (JSON). سيتم تخزين أي حقول في الكيانات التي لم يتم تعريفها في المخطط في حقل JSON المحجوز هذا كأزواج قيمة مفتاح-قيمة.</p>
+<p>بالنسبة لمجموعة مع تمكين الحقل الديناميكي، يمكنك استخدام المفاتيح في الحقل الديناميكي للتصفية العددية، تمامًا كما تفعل مع الحقول المحددة صراحةً في المخطط.</p>
+<h2 id="Enable-dynamic-field" class="common-anchor-header">تمكين الحقل الديناميكي<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,14 +55,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can enable the dynamic field manually when creating a collection with custom settings.</p>
+    </button></h2><p>يمكنك تمكين الحقل الديناميكي يدويًا عند إنشاء مجموعة بإعدادات مخصصة.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -140,7 +134,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     &quot;enableDynamicField&quot;: true
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-dynamic-field" class="common-anchor-header">Use dynamic field<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="Use-dynamic-field" class="common-anchor-header">استخدام الحقل الديناميكي<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,8 +149,8 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When the dynamic field is enabled in your collection, all fields and their values that are not defined in the schema will be stored as key-value pairs in the dynamic field.</p>
-<p>For example, suppose your collection schema defines only two fields, named <code translate="no">id</code> and <code translate="no">vector</code>, with the dynamic field enabled. Now, insert the following dataset into this collection.</p>
+    </button></h2><p>عندما يتم تمكين الحقل الديناميكي في مجموعتك، سيتم تخزين جميع الحقول وقيمها غير المحددة في المخطط كأزواج مفاتيح-قيم في الحقل الديناميكي.</p>
+<p>على سبيل المثال، لنفترض أن مخطط مجموعتك يحدد حقلين فقط، وهما <code translate="no">id</code> و <code translate="no">vector</code> ، مع تمكين الحقل الديناميكي. الآن، أدخل مجموعة البيانات التالية في هذه المجموعة.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19886812562848388</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.06023560599112088</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6976963061752597</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2614474506242501</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.838729485096104</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -170,15 +164,10 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">9</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.5718280481994695</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24070317428066512</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.3737913482606834</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.06726932177492717</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6980531615588608</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purple_4976&quot;</span><span class="hljs-punctuation">}</span>        
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The dataset above contains 10 entities, each including the fields <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code>. Here, the <code translate="no">color</code> field is not defined in the schema. Since the collection has the dynamic field enabled, the field <code translate="no">color</code> will be stored as a key-value pair within the dynamic field.</p>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>The following code demonstrates how to insert this dataset into the collection.</p>
+<p>تحتوي مجموعة البيانات أعلاه على 10 كيانات، يتضمن كل منها الحقول <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code>. هنا، لم يتم تعريف الحقل <code translate="no">color</code> في المخطط. نظرًا لأن المجموعة تحتوي على الحقل الديناميكي، فسيتم تخزين الحقل <code translate="no">color</code> كزوج من مفتاح وقيمة داخل الحقل الديناميكي.</p>
+<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>يوضح الرمز التالي كيفية إدراج مجموعة البيانات هذه في المجموعة.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -330,26 +319,21 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">Index a scalar field in the dynamic field</h3><p>When you enable a dynamic field, any undefined scalar fields are stored as key-value pairs in JSON format. Milvus supports creating an index on such an undefined scalar field, effectively by building a JSON path index. Here’s how it works:</p>
+<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">فهرسة حقل قياسي في الحقل الديناميكي</h3><p>عندما تقوم بتمكين حقل ديناميكي، يتم تخزين أي حقول قياسية غير محددة كأزواج مفاتيح-قيم بتنسيق JSON. يدعم Milvus إنشاء فهرس على مثل هذا الحقل القياسي غير المعرّف، بشكل فعال من خلال بناء فهرس مسار JSON. إليك كيفية عمل ذلك:</p>
 <ol>
-<li><p><strong>Choose the dynamic field key</strong> you want to index. For example, <code translate="no">&quot;color&quot;</code> in the example above.</p></li>
-<li><p><strong>Decide on a cast type</strong> for the values found at that key. Milvus will parse the dynamic field, extract the values under the specified key, and cast them to the type you configure.</p>
+<li><p><strong>اختر مفتاح الحقل الديناميكي</strong> الذي تريد فهرسته. على سبيل المثال، <code translate="no">&quot;color&quot;</code> في المثال أعلاه.</p></li>
+<li><p><strong>حدّد نوع الجبيرة</strong> للقيم الموجودة في هذا المفتاح. سيقوم ميلفوس بتحليل الحقل الديناميكي، واستخراج القيم الموجودة تحت المفتاح المحدد، وإرسالها إلى النوع الذي قمت بتكوينه.</p>
 <ul>
-<li><p>Supported <code translate="no">json_cast_type</code> values are <code translate="no">bool</code> (or <code translate="no">BOOL</code>), <code translate="no">double</code> (or <code translate="no">DOUBLE</code>), and <code translate="no">varchar</code> (or <code translate="no">VARCHAR</code>).</p></li>
-<li><p>If parsing or casting fails (for example, trying to parse a string as double), those rows will be skipped in the index.</p></li>
+<li><p>القيم <code translate="no">json_cast_type</code> المدعومة هي <code translate="no">bool</code> (أو <code translate="no">BOOL</code>) و <code translate="no">double</code> (أو <code translate="no">DOUBLE</code>) و <code translate="no">varchar</code> (أو <code translate="no">VARCHAR</code>).</p></li>
+<li><p>في حالة فشل التحليل أو الصب (على سبيل المثال، محاولة تحليل سلسلة على أنها مزدوجة)، سيتم تخطي هذه الصفوف في الفهرس.</p></li>
 </ul></li>
-<li><p><strong>Specify the JSON path</strong> to that key as <code translate="no">json_path</code>. Since the dynamic field is stored as JSON, you can specify something like <code translate="no">&quot;color&quot;</code>, or if you have nested structures, you can specify deeper paths (e.g. <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
-<li><p><strong>Create an INVERTED index</strong>. Currently, only <code translate="no">INVERTED</code> type is supported for JSON path indexing.</p></li>
+<li><p><strong>حدد مسار JSON</strong> لهذا المفتاح على أنه <code translate="no">json_path</code>. نظرًا لأن الحقل الديناميكي يتم تخزينه على هيئة JSON، يمكنك تحديد شيء مثل <code translate="no">&quot;color&quot;</code> ، أو إذا كان لديك هياكل متداخلة، يمكنك تحديد مسارات أعمق (على سبيل المثال <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
+<li><p><strong>قم بإنشاء فهرس INVERTED</strong>. حاليًا، يتم دعم نوع <code translate="no">INVERTED</code> فقط لفهرسة مسار JSON.</p></li>
 </ol>
-<p>For details on parameters and considerations, refer to <a href="/docs/use-json-fields.md#Index-a-JSON-field">Index a JSON field</a>.</p>
-<p>Below is an example of how to create an index on the <code translate="no">&quot;color&quot;</code> field:</p>
+<p>للحصول على تفاصيل حول المعلمات والاعتبارات، راجع <a href="/docs/ar/use-json-fields.md#Index-a-JSON-field">فهرسة حقل JSON</a>.</p>
+<p>فيما يلي مثال على كيفية إنشاء فهرس على الحقل <code translate="no">&quot;color&quot;</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -437,14 +421,9 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">Query and search with dynamic field</h3><p>Milvus supports the use of filter expressions during queries and searches, allowing you to specify which fields to include in the results. The following example demonstrates how to perform queries and searches using the <code translate="no">color</code> field, which is not defined in the schema, by using the dynamic field.</p>
+<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">الاستعلام والبحث باستخدام حقل ديناميكي</h3><p>يدعم ميلفوس استخدام تعبيرات التصفية أثناء الاستعلامات وعمليات البحث، مما يسمح لك بتحديد الحقول التي يجب تضمينها في النتائج. يوضح المثال التالي كيفية إجراء الاستعلامات وعمليات البحث باستخدام الحقل <code translate="no">color</code> ، الذي لم يتم تعريفه في المخطط، باستخدام الحقل الديناميكي.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
 res = client.search(
@@ -536,7 +515,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the filter expression used in the code example above, <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>, the conditions specify that the value of the <code translate="no">color</code> field must start with <strong>“red”</strong>. In the sample data, only two entities meet this condition. Thus, when <code translate="no">limit</code> (topK) is set to <code translate="no">3</code> or fewer, both of these entities will be returned.</p>
+<p>في تعبير التصفية المستخدم في مثال الكود أعلاه، <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> ، تحدد الشروط أن قيمة الحقل <code translate="no">color</code> يجب أن تبدأ بـ <strong>"أحمر".</strong> في نموذج البيانات، يستوفي كيانان فقط هذا الشرط. وبالتالي، عندما يتم تعيين <code translate="no">limit</code> (topK) على <code translate="no">3</code> أو أقل، سيتم إرجاع كلا هذين الكيانين.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 

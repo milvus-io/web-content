@@ -1,12 +1,11 @@
 ---
 id: create-collection.md
-title: Create Collection
+title: إنشاء مجموعة
 summary: >-
-  You can create a collection by defining its schema, index parameters, metric
-  type, and whether to load it upon creation. This page introduces how to create
-  a collection from scratch.
+  يمكنك إنشاء مجموعة من خلال تحديد مخططها ومعلمات الفهرس ونوع القياس وما إذا كان
+  سيتم تحميلها عند الإنشاء. تقدم هذه الصفحة كيفية إنشاء مجموعة من البداية.
 ---
-<h1 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+<h1 id="Create-Collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can create a collection by defining its schema, index parameters, metric type, and whether to load it upon creation. This page introduces how to create a collection from scratch.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>يمكنك إنشاء مجموعة من خلال تحديد مخططها ومعلمات الفهرس ونوع القياس وما إذا كان سيتم تحميلها عند الإنشاء. تقدم هذه الصفحة كيفية إنشاء مجموعة من البداية.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +36,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A collection is a two-dimensional table with fixed columns and variant rows. Each column represents a field, and each row represents an entity. A schema is required to implement such structural data management. Every entity to insert has to meet the constraints defined in the schema.</p>
-<p>You can determine every aspect of a collection, including its schema, index parameters, metric type, and whether to load it upon creation to ensure that the collection fully meets your requirements.</p>
-<p>To create a collection, you need to</p>
+    </button></h2><p>المجموعة عبارة عن جدول ثنائي الأبعاد يحتوي على أعمدة ثابتة وصفوف متغيرة. يمثل كل عمود حقلاً، ويمثل كل صف كيانًا. يلزم وجود مخطط لتنفيذ إدارة البيانات الهيكلية هذه. يجب أن يفي كل كيان يتم إدراجه بالقيود المحددة في المخطط.</p>
+<p>ويمكنك تحديد كل جانب من جوانب المجموعة، بما في ذلك مخططها ومعلمات الفهرس ونوع المقياس، وما إذا كان يجب تحميلها عند الإنشاء لضمان أن المجموعة تلبي متطلباتك بالكامل.</p>
+<p>لإنشاء مجموعة، تحتاج إلى</p>
 <ul>
-<li><p><a href="/docs/create-collection.md#Create-Schema">Create schema</a></p></li>
-<li><p><a href="/docs/create-collection.md#Optional-Set-Index-Parameters">Set index parameters</a> (Optional)</p></li>
-<li><p><a href="/docs/create-collection.md#Create-a-Collection">Create collection</a></p></li>
+<li><p><a href="/docs/ar/create-collection.md#Create-Schema">إنشاء مخطط</a></p></li>
+<li><p><a href="/docs/ar/create-collection.md#Optional-Set-Index-Parameters">تعيين معلمات الفهرس</a> (اختياري)</p></li>
+<li><p><a href="/docs/ar/create-collection.md#Create-a-Collection">إنشاء مجموعة</a></p></li>
 </ul>
-<h2 id="Create-Schema" class="common-anchor-header">Create Schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
+<h2 id="Create-Schema" class="common-anchor-header">إنشاء مخطط<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,18 +59,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A schema defines the data structure of a collection. When creating a collection, you need to design the schema based on your requirements. For details, refer to <a href="/docs/schema.md">Schema Explained</a>.</p>
-<p>The following code snippets create a schema with the enabled dynamic field and three mandatory fields named <code translate="no">my_id</code>, <code translate="no">my_vector</code>, and <code translate="no">my_varchar</code>.</p>
+    </button></h2><p>يحدد المخطط بنية بيانات المجموعة. عند إنشاء مجموعة، تحتاج إلى تصميم المخطط بناءً على متطلباتك. لمزيد من التفاصيل، راجع <a href="/docs/ar/schema.md">شرح المخطط</a>.</p>
+<p>تُنشئ مقتطفات التعليمات البرمجية التالية مخططًا مع الحقل الديناميكي الممكّن وثلاثة حقول إلزامية باسم <code translate="no">my_id</code> و <code translate="no">my_vector</code> و <code translate="no">my_varchar</code>.</p>
 <div class="alert note">
-<p>You can set default values for any scalar field and make it nullable. For details, refer to  <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+<p>يمكنك تعيين القيم الافتراضية لأي حقل قياسي وجعلها قابلة للإلغاء. لمزيد من التفاصيل، راجع <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -213,7 +207,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Optional-Set-Index-Parameters" class="common-anchor-header">(Optional) Set Index Parameters<button data-href="#Optional-Set-Index-Parameters" class="anchor-icon" translate="no">
+<h2 id="Optional-Set-Index-Parameters" class="common-anchor-header">(اختياري) تعيين معلمات الفهرس<button data-href="#Optional-Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,17 +222,12 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Creating an index on a specific field accelerates the search against this field. An index records the order of entities within a collection. As shown in the following code snippets, you can use <code translate="no">metric_type</code> and <code translate="no">index_type</code> to select appropriate ways for Milvus to index a field and measure similarities between vector embeddings.</p>
-<p>On Milvus, you can use <code translate="no">AUTOINDEX</code> as the index type for all vector fields, and one of <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code> as the metric type based on your needs.</p>
-<p>As demonstrated in the above code snippet, you need to set both the index type and metric type for vector fields and only the index type for the scalar fields. Indexes are mandatory for vector fields, and you are advised to create indexes on scalar fields frequently used in filtering conditions.</p>
-<p>For details, refer to <a href="/docs/index-vector-fields.md">Index Vector Fields</a> and <a href="/docs/index-scalar-fields.md">Index Scalar Fields</a>.</p>
+    </button></h2><p>يؤدي إنشاء فهرس على حقل معين إلى تسريع البحث في هذا الحقل. يسجل الفهرس ترتيب الكيانات ضمن مجموعة. كما هو موضح في مقتطفات التعليمات البرمجية التالية، يمكنك استخدام <code translate="no">metric_type</code> و <code translate="no">index_type</code> لتحديد الطرق المناسبة لـ Milvus لفهرسة حقل ما وقياس أوجه التشابه بين تضمينات المتجهات.</p>
+<p>في Milvus، يمكنك استخدام <code translate="no">AUTOINDEX</code> كنوع فهرس لجميع الحقول المتجهة، وأحد <code translate="no">COSINE</code> و <code translate="no">L2</code> و <code translate="no">IP</code> كنوع القياس بناءً على احتياجاتك.</p>
+<p>كما هو موضح في مقتطف الكود أعلاه، تحتاج إلى تعيين كل من نوع الفهرس والنوع المتري لحقول المتجهات ونوع الفهرس فقط للحقول القياسية. تعد الفهارس إلزامية للحقول المتجهة، ويُنصح بإنشاء فهارس للحقول القياسية المستخدمة بشكل متكرر في شروط التصفية.</p>
+<p>للتفاصيل، راجع <a href="/docs/ar/index-vector-fields.md">فهرس الحقول المتجهة</a> <a href="/docs/ar/index-scalar-fields.md">وفهرس الحقول القياسية</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -309,7 +298,7 @@ indexOptions := []milvusclient.CreateIndexOption{
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-Collection" class="common-anchor-header">Create a Collection<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-a-Collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -324,15 +313,10 @@ indexOptions := []milvusclient.CreateIndexOption{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have created a collection with index parameters, Milvus automatically loads the collection upon its creation. In this case, all fields mentioned in the index parameters are indexed.</p>
-<p>The following code snippets demonstrate how to create the collection with index parameters and check its load status.</p>
+    </button></h2><p>إذا قمت بإنشاء مجموعة مع معلمات فهرس، يقوم ميلفوس تلقائيًا بتحميل المجموعة عند إنشائها. في هذه الحالة، تتم فهرسة جميع الحقول المذكورة في معلمات الفهرس.</p>
+<p>توضح مقتطفات التعليمات البرمجية التالية كيفية إنشاء المجموعة مع معلمات الفهرس والتحقق من حالة تحميلها.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.5. Create a collection with the index loaded simultaneously</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -421,15 +405,10 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You can also create a collection without any index parameters and add them afterward. In this case, Milvus does not load the collection upon its creation. .</p>
-<p>The following code snippet demonstrates how to create a collection without an index, and the load status of the collection remains unloaded upon creation.</p>
+<p>يمكنك أيضًا إنشاء مجموعة بدون أي معلمات فهرس وإضافتها بعد ذلك. في هذه الحالة، لا يقوم ميلفوس بتحميل المجموعة عند إنشائها. .</p>
+<p>يوضح مقتطف الشيفرة التالي كيفية إنشاء مجموعة بدون فهرس، وتبقى حالة تحميل المجموعة غير محملة عند الإنشاء.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -524,7 +503,7 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Collection-Properties" class="common-anchor-header">Set Collection Properties<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-Properties" class="common-anchor-header">تعيين خصائص المجموعة<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -539,17 +518,12 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set properties for the collection to create to make it fit into your service. The applicable properties are as follows.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Set Shard Number</h3><p>Shards are horizontal slices of a collection. Each shard corresponds to a data input channel. Every collection has a shard by default. You can set the appropriate number of shards when creating a collection based on the expected throughput and the volume of the data to insert into the collection.</p>
-<p>In common cases, consider increasing the shard number by one every time the expected throughput increases by 500 MB/s or the volume of data to insert increases by 100 GB. This suggestion is based on our own experience and may not completely fit in your application scenarios. You can tune this number to fit your own needs or just use the default value.</p>
-<p>The following code snippet demonstrates how to set the shard number when you create a collection.</p>
+    </button></h2><p>يمكنك تعيين خصائص للمجموعة المراد إنشاؤها لجعلها ملائمة لخدمتك. الخصائص القابلة للتطبيق هي كالتالي.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">تعيين رقم الشريحة</h3><p>الأجزاء هي شرائح أفقية للمجموعة. تتوافق كل شريحة مع قناة إدخال بيانات. تحتوي كل مجموعة على شريحة بشكل افتراضي. يمكنك تعيين العدد المناسب من الشرائح عند إنشاء مجموعة استنادًا إلى الإنتاجية المتوقعة وحجم البيانات المراد إدراجها في المجموعة.</p>
+<p>في الحالات الشائعة، ضع في اعتبارك زيادة عدد الأجزاء بمقدار جزء واحد في كل مرة يزيد فيها الإنتاجية المتوقعة بمقدار 500 ميجابايت/ثانية أو يزيد حجم البيانات المراد إدراجها بمقدار 100 جيجابايت. يستند هذا الاقتراح إلى تجربتنا الخاصة وقد لا يتناسب تمامًا مع سيناريوهات تطبيقك. يمكنك ضبط هذا الرقم ليناسب احتياجاتك الخاصة أو استخدام القيمة الافتراضية فقط.</p>
+<p>يوضح مقتطف الشيفرة التالي كيفية تعيين رقم الجزء عند إنشاء مجموعة.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_3&quot;</span>,
@@ -595,14 +569,9 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Enable mmap</h3><p>Milvus enables mmap on all collections by default, allowing Milvus to map raw field data into memory instead of fully loading them. This reduces memory footprints and increases collection capacity. For details on mmap, refer to <a href="/docs/mmap.md">Use mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">تمكين mmap</h3><p>يتيح Milvus تمكين mmap على جميع المجموعات بشكل افتراضي، مما يسمح لـ Milvus بتعيين بيانات الحقل الخام في الذاكرة بدلاً من تحميلها بالكامل. هذا يقلل من آثار أقدام الذاكرة ويزيد من سعة المجموعة. للحصول على تفاصيل حول mmap، راجع <a href="/docs/ar/mmap.md">استخدام mmap</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#plaintext">plaintext</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#plaintext">نص عادي</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_4&quot;</span>,
@@ -653,15 +622,10 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">Set Collection TTL</h3><p>If the data in a collection needs to be dropped for a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes entities in the collection. The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.</p>
-<p>The following code snippet sets the TTL to one day (86400 seconds). You are advised to set the TTL to a couple of days at minimum.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">تعيين TTL للمجموعة</h3><p>إذا كانت البيانات الموجودة في مجموعة تحتاج إلى إسقاطها لفترة محددة، ففكر في تعيين وقت التشغيل (TTL) بالثواني. بمجرد انتهاء مدة TTL، يحذف Milvus الكيانات في المجموعة. يكون الحذف غير متزامن، مما يشير إلى أن عمليات البحث والاستعلامات لا تزال ممكنة قبل اكتمال الحذف.</p>
+<p>يقوم مقتطف الكود التالي بتعيين TTL إلى يوم واحد (86400 ثانية). يُنصح بتعيين TTL إلى يومين كحد أدنى.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With TTL</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_5&quot;</span>,
@@ -714,14 +678,9 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">Set Consistency Level</h3><p>When creating a collection, you can set the consistency level for searches and queries in the collection. You can also change the consistency level of the collection during a specific search or query.</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">تعيين مستوى الاتساق</h3><p>عند إنشاء مجموعة، يمكنك تعيين مستوى الاتساق لعمليات البحث والاستعلامات في المجموعة. يمكنك أيضًا تغيير مستوى اتساق المجموعة أثناء بحث أو استعلام معين.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_6&quot;</span>,
@@ -772,6 +731,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more on consistency levels, see <a href="/docs/tune_consistency.md">Consistency Level</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Enable Dynamic Field</h3><p>The dynamic field in a collection is a reserved JavaScript Object Notation (JSON) field named <strong>$meta</strong>. Once you have enabled this field, Milvus saves all non-schema-defined fields carried in each entity and their values as key-value pairs in the reserved field.</p>
-<p>For details on how to use the dynamic field, refer to <a href="/docs/enable-dynamic-field.md">Dynamic Field</a>.</p>
+<p>لمعرفة المزيد عن مستويات الاتساق، راجع <a href="/docs/ar/tune_consistency.md">مستوى الاتساق</a>.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">تمكين الحقل الديناميكي</h3><p>الحقل الديناميكي في المجموعة هو حقل تدوين كائنات جافا سكريبت (JSON) محجوز باسم <strong>$meta</strong>. بمجرد تمكين هذا الحقل، يحفظ Milvus جميع الحقول غير المعرفة من قبل النظام الأساسي التي يحملها كل كيان وقيمها كأزواج قيمة مفتاح في الحقل المحجوز.</p>
+<p>للحصول على تفاصيل حول كيفية استخدام الحقل الديناميكي، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>

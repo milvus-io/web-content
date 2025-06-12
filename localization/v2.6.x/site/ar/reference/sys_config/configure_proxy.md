@@ -2,9 +2,9 @@
 id: configure_proxy.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure proxy for Milvus.
+summary: تعرف على كيفية تكوين الوكيل لـ Milvus.
 ---
-<h1 id="proxy-related-Configurations" class="common-anchor-header">proxy-related Configurations<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="proxy-related-Configurations" class="common-anchor-header">التكوينات المتعلقة بالوكيل<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure proxy for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of proxy, used to validate client requests and reduce the returned results.</p>
+    </button></h1><p>تكوين متعلق بالوكيل، يُستخدم للتحقق من صحة طلبات العميل وتقليل النتائج التي يتم إرجاعها.</p>
 <h2 id="proxytimeTickInterval" class="common-anchor-header"><code translate="no">proxy.timeTickInterval</code><button data-href="#proxytimeTickInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,13 +38,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.timeTickInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval at which proxy synchronizes the time tick, unit: ms.      </td>
+      <td>        الفاصل الزمني الذي يقوم فيه الوكيل بمزامنة علامة الوقت، الوحدة: مللي ثانية.      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -67,13 +67,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.healthCheckTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ms, the interval that to do component healthy check      </td>
+      <td>        مللي ثانية، الفاصل الزمني الذي يتم فيه التحقق من صحة المكون      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -96,13 +96,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.msgStream.timeTick.bufSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of messages can be buffered in the timeTick message stream of the proxy when producing messages.      </td>
+      <td>        الحد الأقصى لعدد الرسائل التي يمكن تخزينها مؤقتاً في دفق رسائل timeTick للوكيل عند إنتاج الرسائل.      </td>
       <td>512</td>
     </tr>
   </tbody>
@@ -125,13 +125,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxNameLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum length of the name or alias that can be created in Milvus, including the collection name, collection alias, partition name, and field name.      </td>
+      <td>        الحد الأقصى لطول الاسم أو الاسم المستعار الذي يمكن إنشاؤه في Milvus، بما في ذلك اسم المجموعة والاسم المستعار للمجموعة واسم القسم واسم الحقل.      </td>
       <td>255</td>
     </tr>
   </tbody>
@@ -154,13 +154,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxFieldNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of field can be created when creating in a collection. It is strongly DISCOURAGED to set maxFieldNum >= 64.      </td>
+      <td>        الحد الأقصى لعدد الحقول التي يمكن إنشاؤها عند الإنشاء في مجموعة. يُنصح بشدة بتعيين maxFieldNum &gt;= 64.      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -183,13 +183,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxVectorFieldNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of vector fields that can be specified in a collection. Value range: [1, 10].      </td>
+      <td>        الحد الأقصى لعدد الحقول المتجهة التي يمكن تحديدها في مجموعة. نطاق القيمة: [1, 10].      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -212,13 +212,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxShardNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of shards can be created when creating in a collection.      </td>
+      <td>        الحد الأقصى لعدد القطع التي يمكن إنشاؤها عند الإنشاء في مجموعة.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -241,13 +241,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxDimension">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of dimensions of a vector can have when creating in a collection.      </td>
+      <td>        الحد الأقصى لعدد أبعاد المتجه الذي يمكن أن يكون عند الإنشاء في مجموعة.      </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -270,16 +270,16 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ginLogging">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to produce gin logs.\n</li>      
-        <li>please adjust in embedded Milvus: false</li>      </td>
-      <td>true</td>
+        <li>سواء لإنتاج سجلات الجن.</li>      
+        <li>يرجى الضبط في ميلفوس المضمنة: خطأ</li>      </td>
+      <td>صواب</td>
     </tr>
   </tbody>
 </table>
@@ -301,13 +301,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ginLogSkipPaths">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        skip url path for gin log      </td>
+      <td>        تخطي مسار url لسجل الجن      </td>
       <td>/</td>
     </tr>
   </tbody>
@@ -330,13 +330,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxTaskNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of tasks in the task queue of the proxy.      </td>
+      <td>        الحد الأقصى لعدد المهام في قائمة انتظار المهام الخاصة بالوكيل.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ddlConcurrency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The concurrent execution number of DDL at proxy.      </td>
+      <td>        عدد التنفيذ المتزامن لـ DDL في الوكيل.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -388,13 +388,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.dclConcurrency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The concurrent execution number of DCL at proxy.      </td>
+      <td>        رقم التنفيذ المتزامن ل DCL عند الوكيل.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -417,14 +417,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.mustUsePartitionKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch for whether proxy must use partition key for the collection      </td>
-      <td>false</td>
+      <td>        مفتاح تبديل لما إذا كان يجب على الوكيل استخدام مفتاح التقسيم للمجموعة      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -446,14 +446,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable the access log feature.      </td>
-      <td>false</td>
+      <td>        ما إذا كان يجب تمكين ميزة سجل الوصول.      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -475,14 +475,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.minioEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to upload local access log files to MinIO. This parameter can be specified when proxy.accessLog.filename is not empty.      </td>
-      <td>false</td>
+      <td>        ما إذا كان سيتم تحميل ملفات سجل الوصول المحلي إلى MinIO. يمكن تحديد هذه المعلمة عندما يكون proxy.accessLog.filename غير فارغ.      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -504,13 +504,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.localPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The local folder path where the access log file is stored. This parameter can be specified when proxy.accessLog.filename is not empty.      </td>
+      <td>        مسار المجلد المحلي حيث يتم تخزين ملف سجل الوصول. يمكن تحديد هذه المعلمة عندما يكون proxy.accessLog.filename غير فارغ.      </td>
       <td>/tmp/milvus_access</td>
     </tr>
   </tbody>
@@ -533,13 +533,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.filename">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The name of the access log file. If you leave this parameter empty, access logs will be printed to stdout.      </td>
+      <td>        اسم ملف سجل الوصول. إذا تركت هذه المعلمة فارغة، ستتم طباعة سجلات الوصول إلى stdout.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -562,13 +562,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.maxSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file. Unit: MB.      </td>
+      <td>        الحد الأقصى للحجم المسموح به لملف سجل وصول واحد. إذا وصل حجم ملف السجل إلى هذا الحد، سيتم تشغيل عملية تدوير. تقوم هذه العملية بإغلاق ملف سجل الوصول الحالي وإنشاء ملف سجل جديد ومسح محتويات ملف السجل الأصلي. الوحدة: ميغابايت.      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -591,13 +591,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.rotatedTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum time interval allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one. Unit: seconds      </td>
+      <td>        الحد الأقصى للفاصل الزمني المسموح به لتدوير ملف سجل وصول واحد. عند الوصول إلى الفاصل الزمني المحدد، يتم تشغيل عملية تدوير، مما يؤدي إلى إنشاء ملف سجل وصول جديد وإغلاق الملف السابق. الوحدة: ثانية      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -620,14 +620,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.remotePath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The path of the object storage for uploading access log files.      </td>
-      <td>access_log/</td>
+      <td>        مسار تخزين الكائن لتحميل ملفات سجل الوصول.      </td>
+      <td>Access_log/</td>
     </tr>
   </tbody>
 </table>
@@ -649,13 +649,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.remoteMaxTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.      </td>
+      <td>        الفاصل الزمني المسموح به لتحميل ملفات سجل الوصول. إذا تجاوز وقت تحميل ملف السجل هذا الفاصل الزمني، فسيتم حذف الملف. يؤدي تعيين القيمة إلى 0 إلى تعطيل هذه الميزة.      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -678,13 +678,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.cacheSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Size of log of write cache, in byte. (Close write cache if size was 0)      </td>
+      <td>        حجم سجل ذاكرة التخزين المؤقت للكتابة، بالبايت. (إغلاق ذاكرة التخزين المؤقت للكتابة إذا كان الحجم 0)  </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -707,13 +707,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.cacheFlushInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        time interval of auto flush write cache, in seconds. (Close auto flush if interval was 0)      </td>
+      <td>        الفاصل الزمني لذاكرة التخزين المؤقت للكتابة ذات التدفق التلقائي، بالثواني. (إغلاق التدفق التلقائي إذا كان الفاصل الزمني 0)  </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -736,13 +736,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.connectionCheckIntervalSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval time(in seconds) for connection manager to scan inactive client info      </td>
+      <td>        الوقت الفاصل الزمني (بالثواني) لمدير الاتصال لمسح معلومات العميل غير النشطة      </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -765,13 +765,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.connectionClientInfoTTLSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        inactive client info TTL duration, in seconds      </td>
+      <td>        مدة الفاصل الزمني لمعلومات العميل غير النشط، بالثواني      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -794,13 +794,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxConnectionNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the max client info numbers that proxy should manage, avoid too many client infos      </td>
+      <td>        الحد الأقصى لأرقام معلومات العميل التي يجب أن يديرها الوكيل، وتجنب الكثير من معلومات العميل      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -823,13 +823,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        ثانية. فرض إيقاف العقدة بدون توقف رشيق      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -852,13 +852,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.slowQuerySpanInSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        query whose executed time exceeds the `slowQuerySpanInSeconds` can be considered slow, in seconds.      </td>
+      <td>        يمكن اعتبار الاستعلام الذي يتجاوز زمن تنفيذه 'slowQuerySpanInSeconds' بطيئاً، بالثواني.      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -881,13 +881,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.queryNodePooling.size">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the size for shardleader(querynode) client pool      </td>
+      <td>        حجم تجمع عملاء shardleader(querynode)      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -910,14 +910,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable the http server      </td>
-      <td>true</td>
+      <td>        سواء لتمكين خادم http    </td>
+      <td>صواب</td>
     </tr>
   </tbody>
 </table>
@@ -939,14 +939,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.debug_mode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable http server debug mode      </td>
-      <td>false</td>
+      <td>        ما إذا كان سيتم تمكين وضع تصحيح أخطاء خادم http    </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -968,13 +968,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        high-level restful api      </td>
+      <td>        واجهة برمجة تطبيقات مرنة عالية المستوى      </td>
       <td></td>
     </tr>
   </tbody>
@@ -997,14 +997,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.acceptTypeAllowInt64">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        high-level restful api, whether http client can deal with int64      </td>
-      <td>true</td>
+      <td>        واجهة برمجة التطبيقات المريحة عالية المستوى، ما إذا كان بإمكان عميل http التعامل مع int64     </td>
+      <td>صحيح</td>
     </tr>
   </tbody>
 </table>
@@ -1026,14 +1026,14 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.enablePprof">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable pprof middleware on the metrics port      </td>
-      <td>true</td>
+      <td>        ما إذا كان تمكين البرنامج الوسيط pprof على منفذ المقاييس      </td>
+      <td>صواب</td>
     </tr>
   </tbody>
 </table>
@@ -1055,13 +1055,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of proxy. If not specified, use the first unicastable address      </td>
+      <td>        عنوان TCP/IP للوكيل. إذا لم يتم تحديده، استخدم أول عنوان أحادي الإرسال      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1084,13 +1084,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of proxy      </td>
+      <td>        منفذ TCP للوكيل      </td>
       <td>19530</td>
     </tr>
   </tbody>
@@ -1113,13 +1113,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the proxy can send, unit: byte      </td>
+      <td>        الحد الأقصى لحجم كل طلب طلب بروتوكول معالجة طلبات الشراء (RPC) الذي يمكن للوكيل إرساله، الوحدة: بايت      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1142,13 +1142,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the proxy can receive, unit: byte      </td>
+      <td>        الحد الأقصى لحجم كل طلب استدعاء أوامر الشراء عن بُعد الذي يمكن للوكيل استقباله، الوحدة: بايت      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -1171,13 +1171,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on proxy can send, unit: byte      </td>
+      <td>        الحد الأقصى لحجم كل طلب طلب استدعاء أوامر الشراء عن بُعد الذي يمكن للعملاء على الوكيل إرساله، الوحدة: بايت      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1200,13 +1200,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on proxy can receive, unit: byte      </td>
+      <td>        الحد الأقصى لحجم كل طلب طلب استدعاء أوامر الشراء عن بُعد الذي يمكن للعملاء على الوكيل تلقيه، الوحدة: بايت      </td>
       <td>67108864</td>
     </tr>
   </tbody>

@@ -1,11 +1,11 @@
 ---
 id: build_RAG_with_milvus_and_lepton.md
 summary: >-
-  In this tutorial, we will show you how to build a RAG (Retrieval-Augmented
-  Generation) pipeline with Milvus and Lepton AI.
-title: Build RAG with Milvus and Lepton AI
+  في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط
+  أنابيب RAG (جيل الاسترجاع المعزز) باستخدام Milvus و Lepton AI.
+title: بناء RAG مع Milvus و Lepton AI
 ---
-<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">Build RAG with Milvus and Lepton AI<button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">بناء RAG مع Milvus و Lepton AI<button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,10 +26,9 @@ title: Build RAG with Milvus and Lepton AI
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_lepton.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://www.lepton.ai/">Lepton AI</a> enables developers and enterprises to run AI applications efficiently in minutes, and at a production ready scale.
-Lepton AI allows you to build models in a Python native way, debug and test models locally, deploy them to the cloud with a single command, and consume models in any application with a simple, flexible API. It provides a comprehensive environment for deploying various AI models, including large language models (LLMs) and diffusion models, without the need for extensive infrastructure setup.</p>
-<p>In this tutorial, we will show you how to build a RAG (Retrieval-Augmented Generation) pipeline with Milvus and Lepton AI.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>يمكّن<a href="https://www.lepton.ai/">ليبتون</a> للذكاء الاصطناعي المطورين والمؤسسات من تشغيل تطبيقات الذكاء الاصطناعي بكفاءة في دقائق، وعلى نطاق جاهز للإنتاج. يتيح لك ليبتون للذكاء الاصطناعي بناء النماذج بطريقة بايثون الأصلية، وتصحيح واختبار النماذج محلياً، ونشرها على السحابة بأمر واحد، واستهلاك النماذج في أي تطبيق باستخدام واجهة برمجة تطبيقات بسيطة ومرنة. يوفر بيئة شاملة لنشر نماذج الذكاء الاصطناعي المختلفة، بما في ذلك النماذج اللغوية الكبيرة (LLMs) ونماذج الانتشار، دون الحاجة إلى إعداد بنية تحتية واسعة النطاق.</p>
+<p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب RAG (التوليد المعزز للاسترجاع) باستخدام Milvus و Lepton AI.</p>
+<h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,22 +43,22 @@ Lepton AI allows you to build models in a Python native way, debug and test mode
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus[model] openai requests tqdm</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus[model] openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
-<p>Lepton enables the OpenAI-style API. You can login to its official website and prepare the <a href="https://www.lepton.ai/docs">api key</a> <code translate="no">LEPTONAI_TOKEN</code> as an environment variable.</p>
+<p>يُمكّن Lepton واجهة برمجة التطبيقات على غرار OpenAI. يمكنك تسجيل الدخول إلى موقعه الرسمي وإعداد <a href="https://www.lepton.ai/docs">مفتاح واجهة برمجة التطبيقات</a> <code translate="no">LEPTONAI_TOKEN</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;LEPTONAI_TOKEN&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-data" class="common-anchor-header">Prepare the data</h3><p>We use the FAQ pages from the <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download the zip file and extract documents to the folder <code translate="no">milvus_docs</code>.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">إعداد البيانات</h3><p>نستخدم صفحات الأسئلة الشائعة من <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">وثائق ميلفوس 2.4.x</a> كمعرفة خاصة في RAG الخاص بنا، وهو مصدر بيانات جيد لخط أنابيب RAG بسيط.</p>
+<p>قم بتنزيل الملف المضغوط واستخراج المستندات إلى المجلد <code translate="no">milvus_docs</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
+<p>نقوم بتحميل جميع ملفات تخفيض السعر من المجلد <code translate="no">milvus_docs/en/faq</code>. بالنسبة لكل مستند، نستخدم ببساطة "# " لفصل المحتوى في الملف، وهو ما يمكن أن يفصل تقريبًا محتوى كل جزء رئيسي من ملف تخفيض السعر.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -70,7 +69,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Prepare the LLM and Embedding Model</h3><p>Lepton enables the OpenAI-style API, and you can use the same API with minor adjustments to call the LLM.</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">إعداد LLM ونموذج التضمين</h3><p>يمكّن Lepton واجهة برمجة التطبيقات على غرار OpenAI، ويمكنك استخدام واجهة برمجة التطبيقات نفسها مع تعديلات طفيفة لاستدعاء LLM.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 lepton_client = OpenAI(
@@ -78,12 +77,12 @@ lepton_client = OpenAI(
     base_url=<span class="hljs-string">&quot;https://mistral-7b.lepton.run/api/v1/&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Define a embedding model to generate text embeddings using the <code translate="no">milvus_model</code>. We use the <code translate="no">DefaultEmbeddingFunction</code> model as an example, which is a pre-trained and lightweight embedding model.</p>
+<p>حدد نموذج تضمين لتوليد تضمينات نصية باستخدام <code translate="no">milvus_model</code>. نستخدم نموذج <code translate="no">DefaultEmbeddingFunction</code> كمثال، وهو نموذج تضمين خفيف الوزن ومدرب مسبقًا.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model <span class="hljs-keyword">as</span> milvus_model
 
 embedding_model = milvus_model.DefaultEmbeddingFunction()
 <button class="copy-code-btn"></button></code></pre>
-<p>Generate a test embedding and print its dimension and first few elements.</p>
+<p>توليد تضمين اختباري وطباعة أبعاده والعناصر القليلة الأولى.</p>
 <pre><code translate="no" class="language-python">test_embedding = embedding_model.encode_queries([<span class="hljs-string">&quot;This is a test&quot;</span>])[<span class="hljs-number">0</span>]
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -93,7 +92,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 [-0.04836066  0.07163023 -0.01130064 -0.03789345 -0.03320649 -0.01318448
  -0.03041712 -0.02269499 -0.02317863 -0.00426028]
 </code></pre>
-<h2 id="Load-data-into-Milvus" class="common-anchor-header">Load data into Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-data-into-Milvus" class="common-anchor-header">تحميل البيانات في ميلفوس<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,26 +107,26 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Create the Collection</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">إنشاء المجموعة</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>بالنسبة لحجة <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث تستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Check if the collection already exists and drop it if it does.</p>
+<p>تحقق مما إذا كانت المجموعة موجودة بالفعل وأسقطها إذا كانت موجودة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a new collection with specified parameters.</p>
-<p>If we don’t specify any field information, Milvus will automatically create a default <code translate="no">id</code> field for primary key, and a <code translate="no">vector</code> field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.</p>
+<p>قم بإنشاء مجموعة جديدة بمعلمات محددة.</p>
+<p>إذا لم نحدد أي معلومات عن الحقل، سيقوم ميلفوس تلقائيًا بإنشاء حقل افتراضي <code translate="no">id</code> للمفتاح الأساسي، وحقل <code translate="no">vector</code> لتخزين بيانات المتجه. يتم استخدام حقل JSON محجوز لتخزين الحقول غير المعرفة من قبل النظام الأساسي وقيمها.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
@@ -135,8 +134,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>Iterate through the text lines, create embeddings, and then insert the data into Milvus.</p>
-<p>Here is a new field <code translate="no">text</code>, which is a non-defined field in the collection schema. It will be automatically added to the reserved JSON dynamic field, which can be treated as a normal field at a high level.</p>
+<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>قم بتكرار الأسطر النصية وإنشاء التضمينات، ثم أدخل البيانات في ميلفوس.</p>
+<p>هنا حقل جديد <code translate="no">text</code> ، وهو حقل غير محدد في مخطط المجموعة. ستتم إضافته تلقائيًا إلى حقل JSON الديناميكي المحجوز، والذي يمكن التعامل معه كحقل عادي على مستوى عالٍ.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -158,7 +157,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
  'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71],
  'cost': 0}
 </code></pre>
-<h2 id="Build-RAG" class="common-anchor-header">Build RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
+<h2 id="Build-RAG" class="common-anchor-header">بناء RAG<button data-href="#Build-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -173,10 +172,10 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">Retrieve data for a query</h3><p>Let’s specify a frequent question about Milvus.</p>
+    </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">استرجاع البيانات لاستعلام</h3><p>لنحدد سؤالًا متكررًا عن ميلفوس.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Search for the question in the collection and retrieve the semantic top-3 matches.</p>
+<p>ابحث عن السؤال في المجموعة واسترجع أفضل 3 مطابقات دلالية.</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=embedding_model.encode_queries(
@@ -187,7 +186,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s take a look at the search results of the query</p>
+<p>دعونا نلقي نظرة على نتائج البحث عن الاستعلام</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
@@ -210,12 +209,12 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Use LLM to get a RAG response</h3><p>Convert the retrieved documents into a string format.</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">استخدم LLM للحصول على استجابة RAG</h3><p>تحويل المستندات المسترجعة إلى تنسيق سلسلة.</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Define system and user prompts for the Lanage Model. This prompt is assembled with the retrieved documents from Milvus.</p>
+<p>تحديد مطالبات النظام والمستخدم لنموذج لاناج. يتم تجميع هذه المطالبة مع المستندات المسترجعة من ملفوس.</p>
 <pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>
@@ -229,7 +228,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the <code translate="no">mistral-7b</code> model provided by Lepton AI to generate a response based on the prompts.</p>
+<p>استخدم نموذج <code translate="no">mistral-7b</code> الذي يوفره Lepton AI لتوليد استجابة بناءً على المطالبات.</p>
 <pre><code translate="no" class="language-python">response = lepton_client.chat.completions.create(
     model=<span class="hljs-string">&quot;mistral-7b&quot;</span>,
     messages=[
@@ -241,4 +240,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted data in Milvus, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental logs. Milvus supports multiple object storage backends such as MinIO, AWS S3, Google Cloud Storage, Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage (COS). Metadata are generated within Milvus and stored in etcd.
 </code></pre>
-<p>Great! We have successfully built a RAG pipeline with Milvus and Lepton AI.</p>
+<p>عظيم! لقد نجحنا في بناء خط أنابيب RAG مع Milvus و Lepton AI.</p>

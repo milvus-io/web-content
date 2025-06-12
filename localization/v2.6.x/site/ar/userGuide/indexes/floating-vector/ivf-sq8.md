@@ -68,7 +68,7 @@ summary: >-
 <h3 id="IVF-+-SQ8" class="common-anchor-header">IVF + SQ8</h3><p>يجمع فهرس IVF_SQ8 بين IVF و SQ8 لإجراء عمليات بحث التشابه بكفاءة:</p>
 <ol>
 <li><p><strong>يضيّق IVF نطاق البحث</strong>: يتم تقسيم مجموعة البيانات إلى مجموعات، وعندما يتم إصدار استعلام، يقارن IVF أولاً الاستعلام بمراكز المجموعات، ويختار المجموعات الأكثر صلة.</p></li>
-<li><p><strong>يعمل SQ8 على تسريع عمليات حساب المسافة</strong>: ضمن المجموعات المختارة، يقوم SQ8 بضغط المتجهات إلى أعداد صحيحة 8 بت، مما يقلل من استخدام الذاكرة ويسرّع من عمليات حساب المسافة.</p></li>
+<li><p><strong>يعمل SQ8 على تسريع عمليات حساب المسافة</strong>: داخل المجموعات المختارة، يقوم SQ8 بضغط المتجهات إلى أعداد صحيحة 8 بت، مما يقلل من استخدام الذاكرة ويسرّع من عمليات حساب المسافة.</p></li>
 </ol>
 <p>باستخدام IVF لتركيز البحث و SQ8 لتسريع العمليات الحسابية، يحقق IVF_SQ8 كلاً من أوقات البحث السريعة وكفاءة الذاكرة.</p>
 <h2 id="Build-index" class="common-anchor-header">بناء الفهرس<button data-href="#Build-index" class="anchor-icon" translate="no">
@@ -110,7 +110,7 @@ index_params.add_index(
 <ul>
 <li><code translate="no">nlist</code>: عدد المجموعات المراد إنشاؤها باستخدام خوارزمية k-means أثناء بناء الفهرس.</li>
 </ul>
-<p>لمعرفة المزيد من معلمات البناء المتوفرة للفهرس <code translate="no">IVF_SQ8</code> ، راجع <a href="/docs/ar/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">بارامز بناء الف</a>هرس.</p></li>
+<p>لمعرفة المزيد من معلمات البناء المتوفرة للفهرس <code translate="no">IVF_SQ8</code> ، راجع <a href="/docs/ar/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">بارامترات بناء الف</a>هرس.</p></li>
 </ul>
 <p>بمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection.md">إنشاء مجموعة</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">البحث في الفهرس<button data-href="#Search-on-index" class="anchor-icon" translate="no">

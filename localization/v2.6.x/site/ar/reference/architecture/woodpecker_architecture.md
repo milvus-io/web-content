@@ -3,8 +3,8 @@ id: woodpecker_architecture.md
 title: نقار الخشب
 summary: >-
   Woodpecker هو نظام WAL سحابي أصلي في Milvus 2.6. مع بنية خالية من الأقراص
-  ووضعين للنشر، فإنه يوفر إنتاجية عالية، ونفقات تشغيلية منخفضة، وقابلية توسع
-  سلسة على تخزين الكائنات.
+  ووضعين للنشر، فإنه يوفر إنتاجية عالية ونفقات تشغيلية منخفضة وقابلية توسع سلسة
+  على تخزين الكائنات.
 ---
 <h1 id="Woodpecker" class="common-anchor-header">نقار الخشب<button data-href="#Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"

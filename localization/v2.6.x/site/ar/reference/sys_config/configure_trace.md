@@ -2,9 +2,9 @@
 id: configure_trace.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure trace for Milvus.
+summary: تعرف على كيفية تكوين التتبع لـ Milvus.
 ---
-<h1 id="trace-related-Configurations" class="common-anchor-header">trace-related Configurations<button data-href="#trace-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="trace-related-Configurations" class="common-anchor-header">التكوينات المتعلقة بالتتبع<button data-href="#trace-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,16 +37,16 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.exporter">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>trace exporter type, default is stdout,</li>      
-        <li>optional values: ['noop','stdout', 'jaeger', 'otlp']</li>      </td>
-      <td>noop</td>
+        <li>نوع مصدر التتبع، الافتراضي هو stdout,</li>      
+        <li>قيم اختيارية: ['noop'، 'stdout'، 'stdout'، 'jaeger'، 'otlp']</li>      </td>
+      <td>نوب</td>
     </tr>
   </tbody>
 </table>
@@ -68,16 +68,16 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.sampleFraction">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>fraction of traceID based sampler,</li>      
-        <li>optional values: [0, 1]</li>      
-        <li>Fractions >= 1 will always sample. Fractions < 0 are treated as zero.</li>      </td>
+        <li>جزء من أداة أخذ العينات المستندة إلى معرف التتبع,</li>      
+        <li>قيم اختيارية: [0, 1]</li>      
+        <li>الكسور &gt;= 1 سيتم أخذ عينات دائمًا. يتم التعامل مع الكسور &lt;0 على أنها صفر.</li>      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -100,13 +100,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.jaeger.url">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        when exporter is jaeger should set the jaeger's URL      </td>
+      <td>        عندما يكون المصدر هو jaeger يجب تعيين عنوان URL الخاص بـ jaeger      </td>
       <td></td>
     </tr>
   </tbody>
@@ -129,13 +129,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.otlp.endpoint">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        example: "127.0.0.1:4317" for grpc, "127.0.0.1:4318" for http      </td>
+      <td>        مثال "127.0.0.0.1:4317" لـ grpc، "127.0.0.0.1:4318" لـ http    </td>
       <td></td>
     </tr>
   </tbody>
@@ -158,13 +158,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.otlp.method">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        otlp export method, acceptable values: ["grpc", "http"],  using "grpc" by default      </td>
+      <td>        طريقة تصدير otlp، القيم المقبولة: ["grpc"، "http"]، باستخدام "grpc" افتراضيًا      </td>
       <td></td>
     </tr>
   </tbody>
@@ -187,13 +187,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.initTimeoutSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segcore initialization timeout in seconds, preventing otlp grpc hangs forever      </td>
+      <td>        مهلة التهيئة segcore بالثواني، مما يمنع توقف otlp grpc إلى الأبد      </td>
       <td>10</td>
     </tr>
   </tbody>

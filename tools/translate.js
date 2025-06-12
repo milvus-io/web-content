@@ -29,18 +29,18 @@ const LATEST_VERSION = versionJson.version;
 const sourceFilePath = "site/en";
 const sourceLang = "en";
 const targetLangs = [
-  // "zh",
-  // "zh-hant",
-  // "ja",
-  // "ko",
-  // "fr",
-  // "de",
-  // "it",
-  // "pt",
-  // "es",
-  // "ru",
+  "zh",
+  "zh-hant",
+  "ja",
+  "ko",
+  "fr",
+  "de",
+  "it",
+  "pt",
+  "es",
+  "ru",
   "id",
-  // "ar",
+  "ar",
 ];
 const cacheFile = CACHE_FILE;
 let total = 0;

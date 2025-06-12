@@ -1,11 +1,11 @@
 ---
 id: vector_visualization.md
 summary: >-
-  In this example, we will show how to visualize the embeddings(vectors) in
-  Milvus using t-SNE.
-title: Vector Visualization
+  في هذا المثال، سنوضح في هذا المثال كيفية تصور التضمينات (المتجهات) في ميلفوس
+  باستخدام t-SNE.
+title: تصوّر المتجهات
 ---
-<h1 id="Vector-Visualization" class="common-anchor-header">Vector Visualization<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
+<h1 id="Vector-Visualization" class="common-anchor-header">تصوّر المتجهات<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,9 +26,9 @@ title: Vector Visualization
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/vector_visualization.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>In this example, we will show how to visualize the embeddings(vectors) in Milvus using <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
-<p>Dimensionality reduction techniques, such as t-SNE, are invaluable for visualizing complex, high-dimensional data in a 2D or 3D space while preserving the local structure. This enables pattern recognition, enhances understanding of feature relationships, and facilitates the interpretation of machine learning model outcomes. Additionally, it aids in algorithm evaluation by visually comparing clustering results, simplifies data presentation to non-specialist audiences, and can reduce computational costs by working with lower-dimensional representations. Through these applications, t-SNE not only helps in gaining deeper insights into datasets but also supports more informed decision-making processes.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>في هذا المثال، سنوضح في هذا المثال كيفية تصور التضمينات (المتجهات) في ميلفوس باستخدام <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
+<p>تقنيات تقليل الأبعاد، مثل t-SNE، لا تقدر بثمن لتصور البيانات المعقدة عالية الأبعاد في فضاء ثنائي الأبعاد أو ثلاثي الأبعاد مع الحفاظ على البنية المحلية. يتيح ذلك التعرف على الأنماط ويعزز فهم العلاقات بين السمات ويسهل تفسير نتائج نموذج التعلم الآلي. بالإضافة إلى ذلك، يساعد في تقييم الخوارزمية من خلال المقارنة البصرية لنتائج التجميع، ويبسط عرض البيانات للجمهور غير المتخصص، ويمكن أن يقلل من التكاليف الحسابية من خلال العمل مع تمثيلات منخفضة الأبعاد. من خلال هذه التطبيقات، لا يساعد t-SNE في اكتساب رؤى أعمق في مجموعات البيانات فحسب، بل يدعم أيضًا عمليات اتخاذ قرارات أكثر استنارة.</p>
+<h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,14 +43,14 @@ title: Vector Visualization
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>We will use OpenAI’s embedding model in this example. You should prepare the api key OPENAI_API_KEY as an environment variable.</p>
+<p>سنستخدم نموذج تضمين OpenAI في هذا المثال. يجب إعداد مفتاح واجهة برمجة التطبيقات OPENAI_API_KEY كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-data" class="common-anchor-header">Prepare the data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-data" class="common-anchor-header">إعداد البيانات<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,12 +65,12 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We use the FAQ pages from the Milvus <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentation 2.4.x</a> as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download the zip file and extract documents to the folder <code translate="no">milvus_docs</code>.</p>
+    </button></h2><p>نحن نستخدم صفحات الأسئلة الشائعة من <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">وثائق</a> Milvus <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentation 2.4.x</a> كمعرفة خاصة في RAG الخاص بنا، وهو مصدر بيانات جيد لخط أنابيب RAG بسيط.</p>
+<p>قم بتنزيل الملف المضغوط واستخراج المستندات إلى المجلد <code translate="no">milvus_docs</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
+<p>نقوم بتحميل جميع ملفات تخفيض السعر من المجلد <code translate="no">milvus_docs/en/faq</code>. بالنسبة لكل مستند، نستخدم ببساطة "# " لفصل المحتوى في الملف، وهو ما يمكن أن يفصل تقريبًا محتوى كل جزء رئيسي من ملف تخفيض السعر.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -81,7 +81,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-Embedding-Model" class="common-anchor-header">Prepare the Embedding Model<button data-href="#Prepare-the-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-Embedding-Model" class="common-anchor-header">إعداد نموذج التضمين<button data-href="#Prepare-the-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,12 +96,12 @@ text_lines = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We initialize the OpenAI client to prepare the embedding model.</p>
+    </button></h2><p>نقوم بتهيئة عميل OpenAI لإعداد نموذج التضمين.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
-<p>Define a function to generate text embeddings using OpenAI client. We use the <a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-large</a> model as an example.</p>
+<p>نحدد دالة لإنشاء تضمينات نصية باستخدام عميل OpenAI. نستخدم نموذج التضمين <a href="https://platform.openai.com/docs/guides/embeddings">النصي 3-نموذج التضمين الكبير</a> كمثال.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
@@ -109,7 +109,7 @@ openai_client = OpenAI()
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Generate a test embedding and print its dimension and first few elements.</p>
+<p>توليد تضمين اختباري وطباعة أبعاده وعناصره القليلة الأولى.</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -118,7 +118,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">3072
 [-0.015370666049420834, 0.00234124343842268, -0.01011690590530634, 0.044725317507982254, -0.017235849052667618, -0.02880779094994068, -0.026678944006562233, 0.06816216558218002, -0.011376636102795601, 0.021659553050994873]
 </code></pre>
-<h2 id="Load-data-into-Milvus" class="common-anchor-header">Load data into Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-data-into-Milvus" class="common-anchor-header">تحميل البيانات في ميلفوس<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,26 +133,26 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Create the Collection</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">إنشاء المجموعة</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>بالنسبة لحجة <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث تستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ميلفوس لايت</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Check if the collection already exists and drop it if it does.</p>
+<p>تحقق مما إذا كانت المجموعة موجودة بالفعل وأسقطها إذا كانت موجودة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a new collection with specified parameters.</p>
-<p>If we don’t specify any field information, Milvus will automatically create a default <code translate="no">id</code> field for primary key, and a <code translate="no">vector</code> field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.</p>
+<p>قم بإنشاء مجموعة جديدة بمعلمات محددة.</p>
+<p>إذا لم نحدد أي معلومات عن الحقل، سيقوم ميلفوس تلقائيًا بإنشاء حقل افتراضي <code translate="no">id</code> للمفتاح الأساسي، وحقل <code translate="no">vector</code> لتخزين بيانات المتجه. يتم استخدام حقل JSON محجوز لتخزين الحقول غير المعرفة من قبل النظام الأساسي وقيمها.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
@@ -160,7 +160,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,8 +175,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Iterate through the text lines, create embeddings, and then insert the data into Milvus.</p>
-<p>Here is a new field <code translate="no">text</code>, which is a non-defined field in the collection schema. It will be automatically added to the reserved JSON dynamic field, which can be treated as a normal field at a high level.</p>
+    </button></h2><p>قم بتكرار الأسطر النصية وإنشاء التضمينات، ثم أدخل البيانات في ميلفوس.</p>
+<p>هنا حقل جديد <code translate="no">text</code> ، وهو حقل غير محدد في مخطط المجموعة. ستتم إضافته تلقائيًا إلى حقل JSON الديناميكي المحجوز، والذي يمكن التعامل معه كحقل عادي على مستوى عالٍ.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -194,7 +194,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
 
 {'insert_count': 72, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71], 'cost': 0}
 </code></pre>
-<h2 id="Visualizing-Embeddings-in-Vector-Search" class="common-anchor-header">Visualizing Embeddings in Vector Search<button data-href="#Visualizing-Embeddings-in-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Visualizing-Embeddings-in-Vector-Search" class="common-anchor-header">تصوّر التضمينات في البحث عن المتجهات<button data-href="#Visualizing-Embeddings-in-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -209,13 +209,13 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we perform a milvus search and then visualize the query vector and the retrieved vector together in reduced dimension.</p>
-<h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">Retrieve Data for a Query</h3><p>Let’s prepare a question for the search.</p>
+    </button></h2><p>في هذا القسم، نقوم في هذا القسم بإجراء بحث ميليفوس ثم نقوم بتصور متجه الاستعلام والمتجه المسترجع معًا في بُعد مختزل.</p>
+<h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">استرجاع البيانات لاستعلام</h3><p>لنقم بإعداد سؤال للبحث.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Modify the question to test it with your own query!</span>
 
 question = <span class="hljs-string">&quot;How is data stored in Milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Search for the question in the collection and retrieve the semantic top-10 matches.</p>
+<p>ابحث عن السؤال في المجموعة واسترجع أفضل 10 مطابقات دلالية.</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[
@@ -226,7 +226,7 @@ question = <span class="hljs-string">&quot;How is data stored in Milvus?&quot;</
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s take a look at the search results of the query</p>
+<p>دعونا نلقي نظرة على نتائج البحث للاستعلام</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
@@ -277,7 +277,7 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">Dimensionality reduction to 2-d by t-SNE</h3><p>Let’s reduce the dimension of the embeddings to 2-d by t-SNE. We will use the <code translate="no">sklearn</code> library to perform the t-SNE transformation.</p>
+<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">تقليل البُعد إلى 2-د بواسطة t-SNE</h3><p>لنختزل أبعاد التضمينات إلى 2-د بواسطة t-SNE. سنستخدم مكتبة <code translate="no">sklearn</code> لإجراء تحويل t-SNE.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> sklearn.manifold <span class="hljs-keyword">import</span> TSNE
@@ -296,10 +296,7 @@ df_tsne
 <button class="copy-code-btn"></button></code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody t tr tr th:فقط من النوع { محاذاة رأسية: الوسط؛ }<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -374,9 +371,9 @@ df_tsne
     </tr>
   </tbody>
 </table>
-<p>74 rows × 2 columns</p>
+<p>74 صفاً × 2 عمود</p>
 </div>
-<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Visualizing Milvus search results on a 2d plane</h3><p>We will plot the query vector in green, the retrieved vectors in red, and the remaining vectors in blue.</p>
+<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">تمثيل نتائج بحث ميلفوس على مستوى ثنائي الأبعاد</h3><p>سنرسم متجه الاستعلام باللون الأخضر، والمتجهات المسترجعة باللون الأحمر، والمتجهات المتبقية باللون الأزرق.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 
@@ -430,10 +427,8 @@ plt.legend()
 plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
-    <span>png</span>
-  </span>
-</p>
-<p>As we can see, the query vector is close to the retrieved vectors. Although the retrieved vectors are not within a standard circle with a fixed radius centered on the query, we can see that they are still very close to the query vector on the 2D plane.</p>
-<p>Using dimensionality reduction techniques can facilitate the understanding of vectors and troubleshooting. Hope you can get a better understanding of vectors through this tutorial.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   </span> <span class="img-wrapper"> <span>بنج</span> </span></p>
+<p>كما نرى، متجه الاستعلام قريب من المتجهات المسترجعة. على الرغم من أن المتجهات المسترجعة ليست ضمن دائرة قياسية بنصف قطر ثابت مركزها الاستعلام، يمكننا أن نرى أنها لا تزال قريبة جدًا من متجه الاستعلام على المستوى ثنائي الأبعاد.</p>
+<p>يمكن أن يؤدي استخدام تقنيات تقليل الأبعاد إلى تسهيل فهم المتجهات واستكشاف الأخطاء وإصلاحها. آمل أن تتمكن من الحصول على فهم أفضل للمتجهات من خلال هذا البرنامج التعليمي.</p>

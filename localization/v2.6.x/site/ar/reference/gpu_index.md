@@ -1,10 +1,10 @@
 ---
 id: gpu_index.md
 related_key: gpu_index
-summary: GPU index mechanism in Milvus.
-title: GPU Index
+summary: آلية مؤشر GPU في ميلفوس.
+title: فهرس وحدة معالجة الرسومات
 ---
-<h1 id="GPU-Index" class="common-anchor-header">GPU Index<button data-href="#GPU-Index" class="anchor-icon" translate="no">
+<h1 id="GPU-Index" class="common-anchor-header">فهرس وحدة معالجة الرسومات<button data-href="#GPU-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,15 +19,13 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports various GPU index types to accelerate search performance and efficiency, especially in high-throughput, and high-recall scenarios. This topic provides an overview of the GPU index types supported by Milvus, their suitable use cases, and performance characteristics. For information on building indexes with GPU, refer to <a href="/docs/index-with-gpu.md">Index with GPU</a>.</p>
-<p>It’s important to note that using a GPU index may not necessarily reduce latency compared to using a CPU index. If you want to fully maximize throughput, you will need extremely high request pressure or a large number of query vectors.</p>
+    </button></h1><p>يدعم Milvus أنواع فهرس GPU المختلفة لتسريع أداء البحث وكفاءته، خاصةً في سيناريوهات الإنتاجية العالية والاستدعاء العالي. يقدم هذا الموضوع نظرة عامة على أنواع فهارس GPU التي تدعمها Milvus، وحالات الاستخدام المناسبة لها، وخصائص الأداء. للحصول على معلومات حول إنشاء الفهارس باستخدام وحدة معالجة الرسومات، راجع <a href="/docs/ar/index-with-gpu.md">الفهرسة باستخدام وحدة معالجة الرسومات</a>.</p>
+<p>من المهم ملاحظة أن استخدام فهرس GPU قد لا يقلل بالضرورة من زمن الاستجابة مقارنة باستخدام فهرس وحدة المعالجة المركزية. إذا كنت ترغب في زيادة الإنتاجية إلى أقصى حد، فستحتاج إلى ضغط طلب مرتفع للغاية أو عدد كبير من ناقلات الاستعلام.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
-    <span>performance</span>
-  </span>
-</p>
-<p>Milvus’ GPU support is contributed by Nvidia <a href="https://rapids.ai/">RAPIDS</a> team. The following are the GPU index types currently supported by Milvus.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   </span> <span class="img-wrapper"> <span>الأداء</span> </span></p>
+<p>يساهم فريق Nvidia <a href="https://rapids.ai/">RAPIDS</a> في دعم وحدة معالجة الرسومات في ميلفوس. فيما يلي أنواع فهرس GPU المدعومة حاليًا من قبل Milvus.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,46 +41,46 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs to run the Milvus GPU version can be more cost-effective compared to using expensive training-grade GPUs.</p>
+    </button></h2><p>GPU_CAGRA هو فهرس قائم على الرسم البياني مُحسَّن لوحدات معالجة الرسوم البيانية، ويمكن أن يكون استخدام وحدات معالجة الرسومات الاستدلالية لتشغيل إصدار Milvus GPU أكثر فعالية من حيث التكلفة مقارنةً باستخدام وحدات معالجة الرسومات باهظة الثمن من فئة التدريب.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">intermediate_graph_degree</code></td><td>Affects recall and build time by determining the graph’s degree before pruning. Recommended values are <code translate="no">32</code> or <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">graph_degree</code></td><td>Affects search performance and recall by setting the graph’s degree after pruning. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
-<tr><td><code translate="no">build_algo</code></td><td>Selects the graph generation algorithm before pruning. Possible values:</br><code translate="no">IVF_PQ</code>: Offers higher quality but slower build time.</br> <code translate="no">NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</td><td><code translate="no">IVF_PQ</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">“false”</code></td></tr>
-<tr><td><code translate="no">adapt_for_cpu</code></td><td>Decides whether to use GPU for index-building and CPU for search. <br/>Setting this parameter to <code translate="no">true</code> requires the presence of the <code translate="no">ef</code> parameter in the search requests.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">intermediate_graph_degree</code></td><td>تؤثر على الاستدعاء ووقت الإنشاء من خلال تحديد درجة الرسم البياني قبل التقليم. القيم الموصى بها هي <code translate="no">32</code> أو <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">graph_degree</code></td><td>تؤثر على أداء البحث والاستدعاء من خلال تحديد درجة الرسم البياني بعد التقليم. ينتج عن الفرق الأكبر بين هاتين الدرجتين وقت بناء أطول. يجب أن تكون قيمته أصغر من قيمة <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
+<tr><td><code translate="no">build_algo</code></td><td>يحدد خوارزمية إنشاء الرسم البياني قبل التقليم. القيم الممكنة:</br><code translate="no">IVF_PQ</code>: توفر جودة أعلى ولكن وقت بناء أبطأ.</br> <code translate="no">NN_DESCENT</code>: يوفر إنشاء أسرع مع احتمال استرجاع أقل.</td><td><code translate="no">IVF_PQ</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>يقرر ما إذا كان سيتم تخزين مجموعة البيانات الأصلية مؤقتًا في ذاكرة وحدة معالجة الرسومات. القيم الممكنة:</br><code translate="no">“true”</code>: تخزين مجموعة البيانات الأصلية مؤقتًا لتحسين الاستدعاء من خلال تحسين نتائج البحث.</br> <code translate="no">“false”</code>: عدم تخزين مجموعة البيانات الأصلية مؤقتًا لحفظ ذاكرة وحدة معالجة الرسومات.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">adapt_for_cpu</code></td><td>يقرر ما إذا كان سيتم استخدام وحدة معالجة الرسومات لبناء الفهرس ووحدة المعالجة المركزية للبحث. <br/>يتطلب ضبط هذه المعلمة على <code translate="no">true</code> وجود المعلمة <code translate="no">ef</code> في طلبات البحث.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">itopk_size</code></td><td>Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (limit) value and is typically a power of 2 (e.g., 16, 32, 64, 128).</td><td>Empty</td></tr>
-<tr><td><code translate="no">search_width</code></td><td>Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance（e.g. 1, 2, 4, 8, 16, 32).</td><td>Empty</td></tr>
-<tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Controls the search iteration process. By default, they are set to <code translate="no">0</code>, and CAGRA automatically determines the number of iterations based on <code translate="no">itopk_size</code> and <code translate="no">search_width</code>. Adjusting these values manually can help balance performance and accuracy.</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">team_size</code></td><td>Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is <code translate="no">0</code>, where Milvus automatically selects the <code translate="no">team_size</code> based on the vector dimension.</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">ef</code></td><td>Specifies the query time/accuracy trade-off. A higher <code translate="no">ef</code> value leads to more accurate but slower search. <br/>This parameter is mandatory if you set <code translate="no">adapt_for_cpu</code> to <code translate="no">true</code> when you build the index.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
+<tr><td><code translate="no">itopk_size</code></td><td>تحدد حجم النتائج الوسيطة التي يتم الاحتفاظ بها أثناء البحث. قد تؤدي القيمة الأكبر إلى تحسين الاستدعاء على حساب أداء البحث. يجب أن تكون مساوية على الأقل للقيمة النهائية لأعلى k (الحد الأعلى) وعادةً ما تكون قوة 2 (على سبيل المثال، 16، 32، 64، 128).</td><td>فارغة</td></tr>
+<tr><td><code translate="no">search_width</code></td><td>يحدد عدد نقاط الدخول إلى الرسم البياني CAGRA أثناء البحث. يمكن أن تؤدي زيادة هذه القيمة إلى تحسين الاستدعاء ولكنها قد تؤثر على أداء البحث （على سبيل المثال 1، 2، 4، 8، 16، 32).</td><td>فارغة</td></tr>
+<tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>يتحكم في عملية تكرار البحث. بشكل افتراضي، يتم ضبطها على <code translate="no">0</code> ، وتحدد CAGRA تلقائيًا عدد التكرارات بناءً على <code translate="no">itopk_size</code> و <code translate="no">search_width</code>. يمكن أن يساعد ضبط هذه القيم يدويًا في تحقيق التوازن بين الأداء والدقة.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">team_size</code></td><td>يحدد عدد خيوط CUDA المستخدمة لحساب المسافة المترية على وحدة معالجة الرسومات. القيم الشائعة هي قوة 2 حتى 32 (على سبيل المثال 2، 4، 8، 16، 32). لها تأثير طفيف على أداء البحث. القيمة الافتراضية هي <code translate="no">0</code> ، حيث يقوم Milvus تلقائيًا بتحديد <code translate="no">team_size</code> بناءً على بُعد المتجه.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>يحدد مفاضلة وقت/دقة الاستعلام. تؤدي القيمة الأعلى <code translate="no">ef</code> إلى بحث أكثر دقة ولكن أبطأ. <br/>هذه المعلمة إلزامية إذا قمت بتعيين <code translate="no">adapt_for_cpu</code> على <code translate="no">true</code> عند إنشاء الفهرس.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 <ul>
-<li><p>Limits on search</p>
+<li><p>حدود البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= 1024</td></tr>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (أعلى-ك)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (أعلى-ك)</td><td>&lt;=ماكس((<code translate="no">itopk_size</code> + 31)// 32، <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -102,42 +100,42 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Similar to <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, GPU_IVF_FLAT also divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Results from the <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT performance test</a> demonstrate that query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
-<p>When conducting searches, note that you can set the top-K up to 256 for any search against a GPU_IVF_FLAT-indexed collection.</p>
+    </button></h2><p>على غرار <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT،</a> يقسم GPU_IVF_FLAT أيضًا بيانات المتجه إلى <code translate="no">nlist</code> وحدة عنقودية، ثم يقارن المسافات بين متجه الإدخال الهدف ومركز كل مجموعة. اعتمادًا على عدد المجموعات التي تم تعيين النظام للاستعلام عنها (<code translate="no">nprobe</code>)، يتم إرجاع نتائج بحث التشابه بناءً على المقارنات بين المدخلات المستهدفة والمتجهات في المجموعة (المجموعات) الأكثر تشابهًا فقط - مما يقلل وقت الاستعلام بشكل كبير.</p>
+<p>من خلال ضبط <code translate="no">nprobe</code> ، يمكن إيجاد توازن مثالي بين الدقة والسرعة لسيناريو معين. توضح نتائج <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">اختبار أداء IVF_FLAT</a> أن وقت الاستعلام يزداد بشكل حاد مع زيادة عدد متجهات الإدخال المستهدفة (<code translate="no">nq</code>)، وعدد المجموعات المطلوب البحث عنها (<code translate="no">nprobe</code>).</p>
+<p>يعد GPU_IVF_FLAT هو فهرس IVF الأساسي، وتكون البيانات المشفرة المخزنة في كل وحدة متسقة مع البيانات الأصلية.</p>
+<p>عند إجراء عمليات البحث، لاحظ أنه يمكنك تعيين أعلى K حتى 256 لأي بحث مقابل مجموعة مفهرسة GPU_IVF_FLAT.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;flase&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
+<tr><td><code translate="no">nlist</code></td><td>عدد وحدات المجموعة</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>يقرر ما إذا كان سيتم تخزين مجموعة البيانات الأصلية مؤقتًا في ذاكرة وحدة معالجة الرسومات. القيم الممكنة:</br><code translate="no">“true”</code>: تخزين مجموعة البيانات الأصلية مؤقتًا لتحسين الاستدعاء من خلال تحسين نتائج البحث.</br> <code translate="no">“false”</code>: عدم تخزين مجموعة البيانات الأصلية مؤقتًا لحفظ ذاكرة وحدة معالجة الرسومات.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;flase&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <ul>
-<li><p>Common search</p>
+<li><p>بحث شائع</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>عدد الوحدات المطلوب الاستعلام عنها</td><td>[1، ن ليست]</td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
-<li><p>Limits on search</p>
+<li><p>حدود البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (أعلى-ك)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -157,51 +155,51 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">PQ</code> (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of <code translate="no">m</code> low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.</p>
-<p>IVF_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.</p>
+    </button></h2><p><code translate="no">PQ</code> (التكميم الكمي للمنتج) تحلل بشكل موحد الفضاء المتجه الأصلي عالي الأبعاد إلى نواتج ديكارتية من <code translate="no">m</code> مساحات متجهة منخفضة الأبعاد، ثم تقوم بتكميم المساحات المتجهة منخفضة الأبعاد المتحللة. وبدلاً من حساب المسافات بين المتجه الهدف ومركز جميع الوحدات، يتيح التكميم الكمي للمنتج حساب المسافات بين المتجه الهدف ومركز التجميع لكل فضاء منخفض الأبعاد ويقلل بشكل كبير من تعقيد الوقت وتعقيد المساحة للخوارزمية.</p>
+<p>يقوم IVF_PQ بإجراء تجميع فهرس IVF قبل تكميم حاصل ضرب المتجهات. ملف الفهرس الخاص به أصغر من IVF_SQ8، لكنه يتسبب أيضًا في فقدان الدقة أثناء البحث عن المتجهات.</p>
 <div class="alert note">
-<p>Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.</p>
-<p>When conducting searches, note that you can set the top-K up to 8192 for any search against a GPU_IVF_FLAT-indexed collection.</p>
+<p>تختلف معلمات بناء الفهرس ومعلمات البحث باختلاف توزيع Milvus. حدد توزيع ميلفوس الخاص بك أولاً.</p>
+<p>عند إجراء عمليات البحث، لاحظ أنه يمكنك تعيين أعلى K حتى 8192 لأي بحث مقابل مجموعة مفهرسة GPU_IVF_FLAT.</p>
 </div>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>معلمات بناء الفهرس</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">m</code></td><td>Number of factors of product quantization,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Optional] Number of bits in which each low-dimensional vector is stored.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
+<tr><td><code translate="no">nlist</code></td><td>عدد وحدات المجموعة</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">m</code></td><td>عدد عوامل تكميم المنتج,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[اختياري] عدد وحدات البت التي يتم تخزين كل متجه منخفض الأبعاد فيها.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>يقرر ما إذا كان سيتم تخزين مجموعة البيانات الأصلية مؤقتًا في ذاكرة وحدة معالجة الرسومات. القيم الممكنة:</br><code translate="no">“true”</code>: تخزين مجموعة البيانات الأصلية مؤقتًا لتحسين الاستدعاء من خلال تحسين نتائج البحث.</br> <code translate="no">“false”</code>: عدم تخزين مجموعة البيانات الأصلية مؤقتًا لحفظ ذاكرة وحدة معالجة الرسومات.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>معلمات البحث</p>
 <ul>
-<li><p>Common search</p>
+<li><p>بحث شائع</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>عدد الوحدات المطلوب الاستعلام عنها</td><td>[1، ن ليست]</td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
-<li><p>Limits on search</p>
+<li><p>حدود البحث</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>المعلمة</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (أعلى-ك)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h2 id="GPUBRUTEFORCE" class="common-anchor-header">GPU_BRUTE_FORCE<button data-href="#GPUBRUTEFORCE" class="anchor-icon" translate="no">
+<h2 id="GPUBRUTEFORCE" class="common-anchor-header">gpu_brute_FORCE<button data-href="#GPUBRUTEFORCE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -216,9 +214,9 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_BRUTE_FORCE is tailored for cases where extremely high recall is crucial, guaranteeing a recall of 1 by comparing each query with all vectors in the dataset. It only requires the metric type (<code translate="no">metric_type</code>) and top-k (<code translate="no">limit</code>) as index building and search parameters.</p>
-<p>For GPU_BRUTE_FORCE, no addition index building parameters or search parameters are required.</p>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+    </button></h2><p>تم تصميم GPU_BRUTE_FORCE للحالات التي يكون فيها الاستدعاء العالي للغاية أمرًا بالغ الأهمية، مما يضمن استدعاء 1 من خلال مقارنة كل استعلام مع جميع المتجهات في مجموعة البيانات. يتطلب فقط نوع المقياس (<code translate="no">metric_type</code>) و top-k (<code translate="no">limit</code>) كمعلمات بناء الفهرس والبحث.</p>
+<p>بالنسبة إلى GPU_BRUTE_FORCE، لا يلزم إضافة معلمات بناء الفهرس أو معلمات البحث.</p>
+<h2 id="Conclusion" class="common-anchor-header">الخلاصة<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,9 +231,9 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Currently, Milvus loads all indexes into GPU memory for efficient search operations. The amount of data that can be loaded depends on the size of the GPU memory:</p>
+    </button></h2><p>في الوقت الحالي، يقوم Milvus بتحميل جميع الفهارس في ذاكرة وحدة معالجة الرسومات لعمليات بحث فعالة. يعتمد مقدار البيانات التي يمكن تحميلها على حجم ذاكرة وحدة معالجة الرسومات:</p>
 <ul>
-<li><strong>GPU_CAGRA</strong>: Memory usage is approximately 1.8 times that of the original vector data.</li>
-<li><strong>GPU_IVF_FLAT</strong> and <strong>GPU_BRUTE_FORCE</strong>: Requires memory equal to the size of the original data.</li>
-<li><strong>GPU_IVF_PQ</strong>: Utilizes a smaller memory footprint, which depends on the compression parameter settings.</li>
+<li><strong>GPU_CAGRA</strong>: يبلغ استخدام الذاكرة حوالي 1.8 ضعف استخدام البيانات المتجهة الأصلية.</li>
+<li><strong>GPU_IVF_FLAT</strong> و <strong>GPU_BRUTE_FORCE</strong>: يتطلب ذاكرة مساوية لحجم البيانات الأصلية.</li>
+<li><strong>GPU_IVF_PQ</strong>: يستخدم بصمة ذاكرة أصغر، والتي تعتمد على إعدادات معلمة الضغط.</li>
 </ul>

@@ -1,10 +1,10 @@
 ---
 id: deploy-cdc-server.md
 order: 2
-summary: This guide provides a step-by-step process for deploying a Milvus-CDC server.
-title: Deploy CDC Server
+summary: يوفر هذا الدليل عملية خطوة بخطوة لنشر خادم Milvus-CDC.
+title: نشر خادم CDC
 ---
-<h1 id="Deploy-CDC-Server" class="common-anchor-header">Deploy CDC Server<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
+<h1 id="Deploy-CDC-Server" class="common-anchor-header">نشر خادم CDC<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: Deploy CDC Server
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide provides a step-by-step process for deploying a Milvus-CDC server.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>يوفر هذا الدليل عملية خطوة بخطوة لنشر خادم Milvus-CDC.</p>
+<h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,17 +35,17 @@ title: Deploy CDC Server
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ensure the following conditions are met before deploying a Milvus-CDC server:</p>
+    </button></h2><p>تأكد من استيفاء الشروط التالية قبل نشر خادم Milvus-CDC:</p>
 <ul>
-<li><p><strong>Milvus Instances</strong>: Both the source Milvus and at least one target Milvus should be deployed and operational.</p>
+<li><p><strong>مثيلات ميلفوس</strong>: يجب نشر وتشغيل كل من الميلفوس المصدر وميلفوس مستهدف واحد على الأقل.</p>
 <ul>
-<li><p>Both the source and target Milvus versions must be 2.3.2 or higher, preferably 2.4.x. We recommend uisng the same version for the source and target Milvus to ensure compatibility.</p></li>
-<li><p>Set the <code translate="no">common.ttMsgEnabled</code> configuration of the target Milvus to <code translate="no">false</code>.</p></li>
-<li><p>Configure the source and target Milvus with distinct meta and message storage settings to prevent conflicts. For instance, avoid using the same etcd and rootPath configurations, as well as identical Pulsar services and <code translate="no">chanNamePrefix</code> in multiple Milvus instances.</p></li>
+<li><p>يجب أن يكون كلا الإصدارين المصدر والهدف ميلفوس 2.3.2 أو أعلى، ويفضل 2.4.x. نوصي باستخدام نفس الإصدار للمصدر والهدف ميلفوس لضمان التوافق.</p></li>
+<li><p>قم بتعيين التكوين <code translate="no">common.ttMsgEnabled</code> للهدف Milvus على <code translate="no">false</code>.</p></li>
+<li><p>تكوين المصدر والهدف ميلفوس المصدر والهدف مع إعدادات تخزين التعريف والرسائل المختلفة لمنع التعارضات. على سبيل المثال، تجنب استخدام نفس تكوينات إلخd و rootPath، وكذلك خدمات Pulsar و <code translate="no">chanNamePrefix</code> المتطابقة في مثيلات Milvus المتعددة.</p></li>
 </ul></li>
-<li><p><strong>Metastore</strong>: Have an etcd or MySQL database ready for the Milvus-CDC metastore.</p></li>
+<li><p><strong>المخزن الوصفية</strong>: قم بتجهيز قاعدة بيانات إلخd أو قاعدة بيانات MySQL لقاعدة بيانات Milvus-CDC الوصفية.</p></li>
 </ul>
-<h2 id="Steps" class="common-anchor-header">Steps<button data-href="#Steps" class="anchor-icon" translate="no">
+<h2 id="Steps" class="common-anchor-header">الخطوات<button data-href="#Steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,21 +60,21 @@ title: Deploy CDC Server
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">Obtain the Milvus-CDC config file</h3><p>Clone the <a href="https://github.com/zilliztech/milvus-cdc">Milvus-CDC repo</a> and navigate to the <code translate="no">milvus-cdc/server/configs</code> directory to access the <code translate="no">cdc.yaml</code> config file.</p>
+    </button></h2><h3 id="Obtain-the-Milvus-CDC-config-file" class="common-anchor-header">الحصول على ملف تكوين Milvus-CDC</h3><p>استنسخ <a href="https://github.com/zilliztech/milvus-cdc">الريبو Mil</a> vus-CDC وانتقل إلى الدليل <code translate="no">milvus-cdc/server/configs</code> للوصول إلى ملف التكوين <code translate="no">cdc.yaml</code>.</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus-cdc.git
 
 <span class="hljs-built_in">cd</span> milvus-cdc/server/configs
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Edit-the-config-file" class="common-anchor-header">Edit the config file</h3><p>In the <code translate="no">milvus-cdc/server/configs</code> directory, modify the <code translate="no">cdc.yaml</code> file to customize configurations related to the Milvus-CDC metastore and connection details of the source Milvus.</p>
+<h3 id="Edit-the-config-file" class="common-anchor-header">قم بتحرير ملف التكوين</h3><p>في الدليل <code translate="no">milvus-cdc/server/configs</code> ، قم بتعديل الملف <code translate="no">cdc.yaml</code> لتخصيص التكوينات المتعلقة بمخزن ميتاستور Milvus-CDC وتفاصيل الاتصال بمصدر Milvus.</p>
 <ul>
-<li><p><strong>Metastore Configuration</strong>:</p>
+<li><p><strong>تكوين المستودع الوصفية</strong>:</p>
 <ul>
-<li><p><code translate="no">metaStoreConfig.storeType</code>: Type of metastore for Milvus-CDC. Possible values are <code translate="no">etcd</code> or <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Address for connecting to the etcd of Milvus-CDC. Required if <code translate="no">storeType</code> is set to <code translate="no">etcd</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Connection address of the MySQL database for the Milvus-CDC server. Required if <code translate="no">storeType</code> is set to <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Root path of the Milvus-CDC metastore. This configuration enables multi-tenancy, allowing multiple CDC services to utilize the same etcd or MySQL instance while achieving isolation through different root paths.</p></li>
+<li><p><code translate="no">metaStoreConfig.storeType</code>: نوع المخزن الوصفية لـ Milvus-CDC. القيم الممكنة هي <code translate="no">etcd</code> أو <code translate="no">mysql</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: :: عنوان الاتصال بـ إلخd لـ Milvus-CDC. مطلوب إذا تم تعيين <code translate="no">storeType</code> على <code translate="no">etcd</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: عنوان الاتصال لقاعدة بيانات MySQL لخادم Milvus-CDC. مطلوب إذا تم تعيين <code translate="no">storeType</code> على <code translate="no">mysql</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>: المسار الجذر لخادم Milvus-CDC metastore. يتيح هذا التكوين إمكانية تعدد الاستئجار، مما يسمح لخدمات CDC المتعددة باستخدام نفس مثيل إلخd أو MySQL مع تحقيق العزل من خلال مسارات جذر مختلفة.</p></li>
 </ul>
-<p>Example configuration:</p>
+<p>مثال على التكوين:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
 <span class="hljs-attr">metaStoreConfig:</span>
   <span class="hljs-comment"># the metastore type, available value: etcd, mysql</span>
@@ -87,21 +87,21 @@ title: Deploy CDC Server
   <span class="hljs-comment"># meta data prefix, if multiple cdc services use the same store service, you can set different rootPaths to achieve multi-tenancy</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">cdc</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Source Milvus Configuration:</strong></p>
-<p>Specify the connection details of the source Milvus, including etcd and message storage, to establish a connection between the Milvus-CDC server and the source Milvus.</p>
+<li><p><strong>تكوين المصدر Milvus المصدر:</strong></p>
+<p>تحديد تفاصيل الاتصال الخاصة بمصدر Milvus، بما في ذلك مصدر Milvus، بما في ذلك إلخd وتخزين الرسائل، لإنشاء اتصال بين خادم Milvus-CDC ومصدر Milvus.</p>
 <ul>
-<li><p><code translate="no">sourceConfig.etcdAddress</code>: Address for connecting to the etcd of the source Milvus. For more information, refer to <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">etcd-related Configurations</a>.</p></li>
-<li><p><code translate="no">sourceConfig.etcdRootPath</code>: Root prefix of the key where the source Milvus stores data in etcd. The value may vary based on the deployment method of the Milvus instance:</p>
+<li><p><code translate="no">sourceConfig.etcdAddress</code>: عنوان الاتصال بـ إلخd الخاص بالمصدر Milvus. للمزيد من المعلومات، راجع <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">التكوينات المتعلقة بـ إلخd</a>.</p></li>
+<li><p><code translate="no">sourceConfig.etcdRootPath</code>: البادئة الجذرية للمفتاح الذي يخزن فيه المصدر Milvus البيانات في إلخd. قد تختلف القيمة بناءً على طريقة نشر مثيل Milvus:</p>
 <ul>
-<li><p><strong>Helm</strong> or <strong>Docker Compose</strong>: Defaults to <code translate="no">by-dev</code>.</p></li>
-<li><p><strong>Operator</strong>: Defaults to <code translate="no">&lt;release_name&gt;</code>.</p></li>
+<li><p><strong>Helm</strong> أو <strong>Docker Compose</strong>: الإعداد الافتراضي إلى <code translate="no">by-dev</code>.</p></li>
+<li><p><strong>المشغل</strong>: افتراضي إلى <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
-<li><p><code translate="no">replicateChan</code>: milvus replicate channel name, which is <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> in the milvus.yaml file</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: Pulsar configurations for the source Milvus. If the source Milvus uses Kafka for message storage, remove all Pulsar-related configurations. For more information, refer to <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar-related Configurations</a>.</p></li>
-<li><p><code translate="no">sourceConfig.kafka.address</code>: Kafka address for the source Milvus. Uncomment this configuration if the source Milvus uses Kafka for message storage.</p></li>
+<li><p><code translate="no">replicateChan</code>:: اسم قناة النسخ المتماثل لـ milvus، وهو <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> في ملف milvus.yaml</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: تكوينات النابض لمصدر Milvus Milvus. إذا كان المصدر Milvus المصدر يستخدم Kafka لتخزين الرسائل، فقم بإزالة جميع التكوينات المتعلقة بـ Pulsar. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/configure_pulsar.md">التكوينات المتعلقة</a> بـ <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar</a>.</p></li>
+<li><p><code translate="no">sourceConfig.kafka.address</code>: عنوان كافكا للمصدر Milvus. قم بإلغاء هذا التكوين إذا كان المصدر Milvus يستخدم Kafka لتخزين الرسائل.</p></li>
 </ul></li>
 </ul>
-<p>Example configuration:</p>
+<p>مثال على التكوين:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus-source config, these settings are basically the same as the corresponding configuration of milvus.yaml in milvus source.</span>
 <span class="hljs-attr">sourceConfig:</span>
   <span class="hljs-comment"># etcd config</span>
@@ -126,19 +126,19 @@ title: Deploy CDC Server
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compile the Milvus-CDC server</h3><p>After saving the <code translate="no">cdc.yaml</code> file, navigate to the <code translate="no">milvus-cdc</code> directory and run one of the following commands to compile the server:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">تجميع خادم Milvus-CDC</h3><p>بعد حفظ الملف <code translate="no">cdc.yaml</code> ، انتقل إلى الدليل <code translate="no">milvus-cdc</code> وقم بتشغيل أحد الأوامر التالية لتجميع الخادم:</p>
 <ul>
-<li><p>For a binary file:</p>
+<li><p>لملف ثنائي:</p>
 <pre><code translate="no" class="language-bash">make build
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>For a Docker image:</p>
+<li><p>لصورة Docker:</p>
 <pre><code translate="no" class="language-bash">bash build_image.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>For a Docker image, mount the compiled file to <code translate="no">/app/server/configs/cdc.yaml</code> within the container.</p></li>
+<p>بالنسبة لصورة Docker، قم بتحميل الملف المجمّع إلى <code translate="no">/app/server/configs/cdc.yaml</code> داخل الحاوية.</p></li>
 </ul>
-<h3 id="Start-the-server" class="common-anchor-header">Start the server</h3><ul>
-<li><p>Using the binary</p>
-<p>Navigate to the directory containing the <code translate="no">milvus-cdc</code> binary and the <code translate="no">configs</code> directory with the <code translate="no">cdc.yaml</code> file, then start the server:</p>
+<h3 id="Start-the-server" class="common-anchor-header">ابدأ تشغيل الخادم</h3><ul>
+<li><p>باستخدام الملف الثنائي</p>
+<p>انتقل إلى الدليل الذي يحتوي على الملف الثنائي <code translate="no">milvus-cdc</code> والدليل <code translate="no">configs</code> مع الملف <code translate="no">cdc.yaml</code> ، ثم ابدأ تشغيل الخادم:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>
 .
 ├── milvus-cdc <span class="hljs-comment"># build from source code or download from release page</span>
@@ -148,7 +148,7 @@ title: Deploy CDC Server
 <span class="hljs-comment"># start milvus cdc</span>
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Using Docker Compose:</p>
+<li><p>باستخدام Docker Compose:</p>
 <pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

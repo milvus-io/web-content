@@ -1,11 +1,11 @@
 ---
 id: string.md
-title: String Field
+title: حقل السلسلة
 summary: >-
-  In Milvus, VARCHAR is the data type used for storing string data. When you
-  define a VARCHAR field, two parameters are mandatory:
+  في ميلفوس، VARCHAR هو نوع البيانات المستخدم لتخزين بيانات السلسلة. عندما تقوم
+  بتعريف حقل VARCHAR، هناك معلمتان إلزاميتان:
 ---
-<h1 id="String-Field" class="common-anchor-header">String Field<button data-href="#String-Field" class="anchor-icon" translate="no">
+<h1 id="String-Field" class="common-anchor-header">حقل السلسلة<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,15 +20,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> is the data type used for storing string data. When you define a <code translate="no">VARCHAR</code> field, two parameters are mandatory:</p>
+    </button></h1><p>في ميلفوس، <code translate="no">VARCHAR</code> هو نوع البيانات المستخدم لتخزين بيانات السلسلة. عندما تقوم بتعريف حقل <code translate="no">VARCHAR</code> ، هناك معلمتان إلزاميتان:</p>
 <ul>
-<li><p>Set the <code translate="no">datatype</code> to <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Specify the <code translate="no">max_length</code>, which defines the maximum number of bytes the <code translate="no">VARCHAR</code> field can store. The valid range for <code translate="no">max_length</code> is from 1 to 65,535.</p></li>
+<li><p>تعيين <code translate="no">datatype</code> إلى <code translate="no">DataType.VARCHAR</code>.</p></li>
+<li><p>حدد <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل <code translate="no">VARCHAR</code> تخزينها. النطاق الصالح <code translate="no">max_length</code> هو من 1 إلى 65,535 65,535.</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus supports null values and default values for <code translate="no">VARCHAR</code> fields. To enable these features, set <code translate="no">nullable</code> to <code translate="no">True</code> and <code translate="no">default_value</code> to a string value. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+<p>يدعم Milvus القيم الفارغة والقيم الافتراضية للحقول <code translate="no">VARCHAR</code>. لتمكين هذه الميزات، قم بتعيين <code translate="no">nullable</code> إلى <code translate="no">True</code> و <code translate="no">default_value</code> إلى قيمة سلسلة. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
-<h2 id="Add-VARCHAR-field" class="common-anchor-header">Add VARCHAR field<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
+<h2 id="Add-VARCHAR-field" class="common-anchor-header">إضافة حقل VARCHAR<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,21 +43,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To store string data in Milvus, define a <code translate="no">VARCHAR</code> field in your collection schema. Below is an example of defining a collection schema with two <code translate="no">VARCHAR</code> fields:</p>
+    </button></h2><p>لتخزين بيانات السلسلة في Milvus، قم بتعريف حقل <code translate="no">VARCHAR</code> في مخطط مجموعتك. فيما يلي مثال على تعريف مخطط مجموعة بحقلين <code translate="no">VARCHAR</code>:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: stores up to 100 bytes, allows null values, and has a default value of <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: stores up to 200 bytes, allows null values, but does not have a default value.</p></li>
+<li><p><code translate="no">varchar_field1</code>: يخزن ما يصل إلى 100 بايت، ويسمح بالقيم الفارغة، وله قيمة افتراضية <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: يخزن حتى 200 بايت، ويسمح بالقيم الفارغة، ولكن ليس له قيمة افتراضية.</p></li>
 </ul>
 <div class="alert note">
-<p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert scalar fields that were not defined in advance. However, this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">Dynamic Field</a>.</p>
+<p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -237,7 +232,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Set index params<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">تعيين بارامترات الفهرس<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -252,15 +247,10 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Indexing helps improve search and query performance. In Milvus, indexing is mandatory for vector fields but optional for scalar fields.</p>
-<p>The following example creates indexes on the vector field <code translate="no">embedding</code> and the scalar field <code translate="no">varchar_field1</code>, both using the <code translate="no">AUTOINDEX</code> index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to <a href="/docs/index-explained.md">Index Explained</a>.</p>
+    </button></h2><p>تساعد الفهرسة على تحسين أداء البحث والاستعلام. في ميلفوس، الفهرسة إلزامية للحقول المتجهة ولكنها اختيارية للحقول القياسية.</p>
+<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل القياسي <code translate="no">varchar_field1</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -334,7 +324,7 @@ indexParams.<span class="hljs-title function_">push</span>({
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Create collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -349,14 +339,9 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and index are defined, create a collection that includes string fields.</p>
+    </button></h2><p>بمجرد تعريف المخطط والفهرس، قم بإنشاء مجموعة تتضمن حقول سلسلة.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">نودجيز</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -396,7 +381,7 @@ client.createCollection(requestCreate);
 }&quot;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;data&quot;:{}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -411,14 +396,9 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, insert entities that match the schema.</p>
+    </button></h2><p>بعد إنشاء المجموعة، أدرج الكيانات التي تطابق المخطط.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">نودجيز</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -527,7 +507,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">Query with filter expressions<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">الاستعلام باستخدام تعبيرات التصفية<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,15 +522,10 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After inserting entities, use the <code translate="no">query</code> method to retrieve entities that match the specified filter expressions.</p>
-<p>To retrieve entities where the <code translate="no">varchar_field1</code> matches the string <code translate="no">&quot;Product A&quot;</code>:</p>
+    </button></h2><p>بعد إدراج الكيانات، استخدم الأسلوب <code translate="no">query</code> لاسترداد الكيانات التي تطابق تعبيرات التصفية المحددة.</p>
+<p>لاسترداد الكيانات التي يتطابق فيها <code translate="no">varchar_field1</code> مع السلسلة <code translate="no">&quot;Product A&quot;</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter `varchar_field1` with value &quot;Product A&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
@@ -616,14 +591,9 @@ fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryRe
 }&#x27;</span>
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">varchar_field2</code> is null:</p>
+<p>لاسترداد الكيانات التي يكون فيها <code translate="no">varchar_field2</code> فارغًا:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities where `varchar_field2` is null</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>
 
@@ -689,14 +659,9 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where <code translate="no">varchar_field1</code> has the value <code translate="no">&quot;Unknown&quot;</code>, use the following expression below. As the default value of <code translate="no">varchar_field1</code> is <code translate="no">&quot;Unknown&quot;</code>, the expected result should include entities with <code translate="no">varchar_field1</code> explicitly set to <code translate="no">&quot;Unknown&quot;</code> or with <code translate="no">varchar_field1</code> set to null.</p>
+<p>لاسترداد الكيانات حيث <code translate="no">varchar_field1</code> له القيمة <code translate="no">&quot;Unknown&quot;</code> ، استخدم التعبير التالي أدناه. نظرًا لأن القيمة الافتراضية لـ <code translate="no">varchar_field1</code> هي <code translate="no">&quot;Unknown&quot;</code> ، يجب أن تتضمن النتيجة المتوقعة كيانات ذات <code translate="no">varchar_field1</code> تم تعيينها صراحةً إلى <code translate="no">&quot;Unknown&quot;</code> أو مع تعيين <code translate="no">varchar_field1</code> إلى لا شيء.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 
@@ -761,7 +726,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Vector search with filter expressions<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">البحث المتجه مع تعبيرات التصفية<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -776,14 +741,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:</p>
+    </button></h2><p>بالإضافة إلى تصفية الحقل القياسي الأساسي، يمكنك دمج عمليات البحث عن تشابه المتجهات مع مرشحات الحقل القياسي. على سبيل المثال، يوضح الرمز التالي كيفية إضافة عامل تصفية الحقل القياسي إلى بحث متجه:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with string filtering</span>
 
 <span class="hljs-comment"># Filter `varchar_field2` with value &quot;Best seller&quot;</span>

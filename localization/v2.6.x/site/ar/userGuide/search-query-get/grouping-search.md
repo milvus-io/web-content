@@ -1,15 +1,15 @@
 ---
 id: grouping-search.md
-title: Grouping Search
+title: تجميع البحث
 summary: >-
-  A grouping search allows Milvus to group the search results by the values in a
-  specified field to aggregate data at a higher level. For example, you can use
-  a basic ANN search to find books similar to the one at hand, but you can use a
-  grouping search to find the book categories that may involve the topics
-  discussed in that book. This topic describes how to use Grouping Search along
-  with key considerations.
+  يسمح بحث التجميع لميلفوس بتجميع نتائج البحث حسب القيم الموجودة في حقل محدد
+  لتجميع البيانات على مستوى أعلى. على سبيل المثال، يمكنك استخدام بحث التجميع
+  الأساسي للعثور على الكتب المشابهة للكتاب الذي بين يديك، ولكن يمكنك استخدام بحث
+  التجميع للعثور على فئات الكتب التي قد تتضمن المواضيع التي تمت مناقشتها في ذلك
+  الكتاب. يصف هذا الموضوع كيفية استخدام بحث التجميع إلى جانب الاعتبارات
+  الرئيسية.
 ---
-<h1 id="Grouping-Search" class="common-anchor-header">Grouping Search<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
+<h1 id="Grouping-Search" class="common-anchor-header">تجميع البحث<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A grouping search allows Milvus to group the search results by the values in a specified field to aggregate data at a higher level. For example, you can use a basic ANN search to find books similar to the one at hand, but you can use a grouping search to find the book categories that may involve the topics discussed in that book. This topic describes how to use Grouping Search along with key considerations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>يسمح بحث التجميع لميلفوس بتجميع نتائج البحث حسب القيم الموجودة في حقل محدد لتجميع البيانات على مستوى أعلى. على سبيل المثال، يمكنك استخدام بحث التجميع الأساسي للعثور على الكتب المشابهة للكتاب الذي بين يديك، ولكن يمكنك استخدام بحث التجميع للعثور على فئات الكتب التي قد تتضمن الموضوعات التي تمت مناقشتها في ذلك الكتاب. يصف هذا الموضوع كيفية استخدام بحث التجميع إلى جانب الاعتبارات الرئيسية.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,31 +40,27 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When entities in the search results share the same value in a scalar field, this indicates that they are similar in a particular attribute, which may negatively impact the search results.</p>
-<p>Assume a collection stores multiple documents (denoted by <strong>docId</strong>). To retain as much semantic information as possible when converting documents into vectors, each document is split into smaller, manageable paragraphs (or <strong>chunks</strong>) and stored as separate entities. Even though the document is divided into smaller sections, users are often still interested in identifying which documents are most relevant to their needs.</p>
+    </button></h2><p>عندما تشترك الكيانات في نتائج البحث في نفس القيمة في حقل قياسي، فإن هذا يشير إلى أنها متشابهة في سمة معينة، مما قد يؤثر سلبًا على نتائج البحث.</p>
+<p>افترض أن مجموعة تخزن مستندات متعددة (يُشار إليها بـ <strong>docId</strong>). للاحتفاظ بأكبر قدر ممكن من المعلومات الدلالية عند تحويل المستندات إلى متجهات، يتم تقسيم كل مستند إلى فقرات (أو <strong>أجزاء</strong>) أصغر يمكن التحكم فيها وتخزينها ككيانات منفصلة. على الرغم من تقسيم المستند إلى أقسام أصغر، إلا أن المستخدمين غالبًا ما يظلون مهتمين بتحديد المستندات الأكثر صلة باحتياجاتهم.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
-    <span>Ann Search</span>
-  </span>
-</p>
-<p>When performing an Approximate Nearest Neighbor (ANN) search on such a collection, the search results may include several paragraphs from the same document, potentially causing other documents to be overlooked, which may not align with the intended use case.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
+   </span> <span class="img-wrapper"> <span>بحث آن</span> </span></p>
+<p>عند إجراء بحث الجار الأقرب التقريبي (ANN) على مثل هذه المجموعة، قد تتضمن نتائج البحث عدة فقرات من نفس المستند، مما قد يؤدي إلى تجاهل مستندات أخرى، وهو ما قد لا يتماشى مع حالة الاستخدام المقصودة.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
-    <span>Grouping Search</span>
-  </span>
-</p>
-<p>To improve the diversity of search results, you can add the <code translate="no">group_by_field</code> parameter in the search request to enable Grouping Search. As shown in the diagram, you can set <code translate="no">group_by_field</code> to <code translate="no">docId</code>. Upon receiving this request, Milvus will:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
+   </span> <span class="img-wrapper"> <span>تجميع البحث</span> </span></p>
+<p>لتحسين تنوّع نتائج البحث، يمكنك إضافة المعلمة <code translate="no">group_by_field</code> في طلب البحث لتمكين تجميع البحث. كما هو موضح في الرسم التخطيطي، يمكنك تعيين <code translate="no">group_by_field</code> إلى <code translate="no">docId</code>. عند تلقي هذا الطلب، سيقوم ميلفوس بـ</p>
 <ul>
-<li><p>Perform an ANN search based on the provided query vector to find all entities most similar to the query.</p></li>
-<li><p>Group the search results by the specified <code translate="no">group_by_field</code>, such as <code translate="no">docId</code>.</p></li>
-<li><p>Return the top results for each group, as defined by the <code translate="no">limit</code> parameter, with the most similar entity from each group.</p></li>
+<li><p>إجراء بحث ANN استنادًا إلى متجه الاستعلام المقدم للعثور على جميع الكيانات الأكثر تشابهًا مع الاستعلام.</p></li>
+<li><p>تجميع نتائج البحث حسب <code translate="no">group_by_field</code> المحدد، مثل <code translate="no">docId</code>.</p></li>
+<li><p>إرجاع أفضل النتائج لكل مجموعة، كما هو محدد بواسطة المعلمة <code translate="no">limit</code> ، مع الكيان الأكثر تشابهًا من كل مجموعة.</p></li>
 </ul>
 <div class="alert note">
-<p>By default, Grouping Search returns only one entity per group. If you want to increase the number of results to return per group, you can control this with the <code translate="no">group_size</code> and <code translate="no">strict_group_size</code> parameters.</p>
+<p>بشكل افتراضي، يقوم بحث التجميع بإرجاع كيان واحد فقط لكل مجموعة. إذا كنت ترغب في زيادة عدد النتائج المراد إرجاعها لكل مجموعة، يمكنك التحكم في ذلك باستخدام المعلمة <code translate="no">group_size</code> والمعلمة <code translate="no">strict_group_size</code>.</p>
 </div>
-<h2 id="Perform-Grouping-Search" class="common-anchor-header">Perform Grouping Search<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
+<h2 id="Perform-Grouping-Search" class="common-anchor-header">إجراء بحث التجميع<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides example code to demonstrate the use of Grouping Search. The following example assumes the collection includes fields for <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">chunk</code>, and <code translate="no">docId</code>.</p>
+    </button></h2><p>يوفر هذا القسم مثالاً على التعليمات البرمجية لتوضيح استخدام البحث عن التجميع. يفترض المثال التالي أن المجموعة تتضمن حقول <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">chunk</code> و <code translate="no">docId</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">1</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">5</span>},
@@ -94,14 +90,9 @@ summary: >-
 ]
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the search request, set both <code translate="no">group_by_field</code> and <code translate="no">output_fields</code> to <code translate="no">docId</code>. Milvus will group the results by the specified field and return the most similar entity from each group, including the value of <code translate="no">docId</code> for each returned entity.</p>
+<p>في طلب البحث، قم بتعيين كل من <code translate="no">group_by_field</code> و <code translate="no">output_fields</code> إلى <code translate="no">docId</code>. سيقوم Milvus بتجميع النتائج حسب الحقل المحدد وإرجاع الكيان الأكثر تشابهًا من كل مجموعة، بما في ذلك قيمة <code translate="no">docId</code> لكل كيان تم إرجاعه.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -237,8 +228,8 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the request above, <code translate="no">limit=3</code> indicates that the system will return search results from three groups, with each group containing the single most similar entity to the query vector.</p>
-<h2 id="Configure-group-size" class="common-anchor-header">Configure group size<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
+<p>في الطلب أعلاه، <code translate="no">limit=3</code> يشير إلى أن النظام سيعيد نتائج البحث من ثلاث مجموعات، بحيث تحتوي كل مجموعة على الكيان الأكثر تشابهًا مع متجه الاستعلام.</p>
+<h2 id="Configure-group-size" class="common-anchor-header">تكوين حجم المجموعة<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -253,14 +244,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>By default, Grouping Search returns only one entity per group. If you want multiple results per group, adjust the <code translate="no">group_size</code> and <code translate="no">strict_group_size</code> parameters.</p>
+    </button></h2><p>بشكل افتراضي، يُرجع البحث عن المجموعات كيان واحد فقط لكل مجموعة. إذا كنت تريد نتائج متعددة لكل مجموعة، اضبط المعلمات <code translate="no">group_size</code> و <code translate="no">strict_group_size</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Group search results</span>
 
 res = client.search(
@@ -383,13 +369,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above:</p>
+<p>في المثال أعلاه</p>
 <ul>
-<li><p><code translate="no">group_size</code>: Specifies the desired number of entities to return per group. For instance, setting <code translate="no">group_size=2</code> means each group (or each <code translate="no">docId</code>) should ideally return two of the most similar paragraphs (or <strong>chunks</strong>). If <code translate="no">group_size</code> is not set, the system defaults to returning one result per group.</p></li>
-<li><p><code translate="no">strict_group_size</code>: This boolean parameter controls whether the system should strictly enforce the count set by <code translate="no">group_size</code>. When <code translate="no">strict_group_size=True</code>, the system will attempt to include the exact number of entities specified by <code translate="no">group_size</code> in each group (e.g., two paragraphs), unless there isn’t enough data in that group. By default (<code translate="no">strict_group_size=False</code>), the system prioritizes meeting the number of groups specified by the <code translate="no">limit</code> parameter, rather than ensuring each group contains <code translate="no">group_size</code> entities. This approach is generally more efficient in cases where data distribution is uneven.</p></li>
+<li><p><code translate="no">group_size</code>: يحدد عدد الكيانات المطلوب إرجاعها لكل مجموعة. على سبيل المثال، يعني تعيين <code translate="no">group_size=2</code> أن كل مجموعة (أو كل <code translate="no">docId</code>) يجب أن تُرجع بشكل مثالي فقرتين من أكثر الفقرات (أو <strong>القطع</strong>) تشابهًا. إذا لم يتم تعيين <code translate="no">group_size</code> ، يقوم النظام افتراضيًا بإرجاع نتيجة واحدة لكل مجموعة.</p></li>
+<li><p><code translate="no">strict_group_size</code>: تتحكم هذه المعلمة المنطقية فيما إذا كان يجب على النظام فرض العدد الذي تم تعيينه بواسطة <code translate="no">group_size</code>. عند <code translate="no">strict_group_size=True</code> ، سيحاول النظام تضمين العدد الدقيق للكيانات المحددة بواسطة <code translate="no">group_size</code> في كل مجموعة (على سبيل المثال، فقرتان)، ما لم تكن هناك بيانات كافية في تلك المجموعة. بشكل افتراضي (<code translate="no">strict_group_size=False</code>)، يعطي النظام الأولوية لتلبية عدد المجموعات المحددة بواسطة المعلمة <code translate="no">limit</code> ، بدلاً من ضمان احتواء كل مجموعة على <code translate="no">group_size</code> كيانات. هذا النهج أكثر كفاءة بشكل عام في الحالات التي يكون فيها توزيع البيانات غير متساوٍ.</p></li>
 </ul>
-<p>For additional parameter details, refer to <a href="https://docs.zilliz.com/reference/python/python/Vector-search">search</a>.</p>
-<h2 id="Considerations" class="common-anchor-header">Considerations<button data-href="#Considerations" class="anchor-icon" translate="no">
+<p>للحصول على تفاصيل المعلمة الإضافية، راجع <a href="https://docs.zilliz.com/reference/python/python/Vector-search">البحث</a>.</p>
+<h2 id="Considerations" class="common-anchor-header">الاعتبارات<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -405,8 +391,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Indexing</strong>: This grouping feature works only for collections that are indexed with these index types: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
-<li><p><strong>Number of groups</strong>: The <code translate="no">limit</code> parameter controls the number of groups from which search results are returned, rather than the specific number of entities within each group. Setting an appropriate <code translate="no">limit</code> helps control search diversity and query performance. Reducing <code translate="no">limit</code> can reduce computation costs if data is densely distributed or performance is a concern.</p></li>
-<li><p><strong>Entities per group</strong>: The <code translate="no">group_size</code> parameter controls the number of entities returned per group. Adjusting <code translate="no">group_size</code> based on your use case can increase the richness of search results. However, if data is unevenly distributed, some groups may return fewer entities than specified by <code translate="no">group_size</code>, particularly in limited data scenarios.</p></li>
-<li><p><strong>Strict group size</strong>: When <code translate="no">strict_group_size=True</code>, the system will attempt to return the specified number of entities (<code translate="no">group_size</code>) for each group, unless there isn’t enough data in that group. This setting ensures consistent entity counts per group but may lead to performance degradation with uneven data distribution or limited resources. If strict entity counts aren’t required, setting <code translate="no">strict_group_size=False</code> can improve query speed.</p></li>
+<li><p><strong>الفهرسة</strong>: تعمل ميزة التجميع هذه فقط مع المجموعات المفهرسة بأنواع الفهارس هذه: <strong>مسطحة،</strong> ivf_flat، <strong>ivf_flat،</strong><strong>ivf_sq8،</strong> <strong>hnsw،</strong> <strong>hnsw_pq،</strong> <strong>hnsw_prq،</strong> <strong>hnsw_prq، hnsw_sq،</strong> <strong>diskann،</strong> <strong>sparse_inverted_index</strong>.</p></li>
+<li><p><strong>عدد المجموعات</strong>: تتحكم المعلمة <code translate="no">limit</code> في عدد المجموعات التي يتم إرجاع نتائج البحث منها، بدلاً من العدد المحدد للكيانات داخل كل مجموعة. يساعد تعيين <code translate="no">limit</code> المناسب في التحكم في تنوع البحث وأداء الاستعلام. يمكن أن يؤدي تقليل <code translate="no">limit</code> إلى تقليل تكاليف الحوسبة إذا كانت البيانات موزعة بكثافة أو إذا كان الأداء مصدر قلق.</p></li>
+<li><p><strong>الكيانات لكل مجموعة</strong>: تتحكم المعلمة <code translate="no">group_size</code> في عدد الكيانات التي يتم إرجاعها لكل مجموعة. يمكن أن يؤدي ضبط <code translate="no">group_size</code> بناءً على حالة الاستخدام إلى زيادة ثراء نتائج البحث. ومع ذلك، إذا كانت البيانات موزعة بشكل غير متساوٍ، فقد تقوم بعض المجموعات بإرجاع عدد كيانات أقل من المحدد بواسطة <code translate="no">group_size</code> ، خاصة في سيناريوهات البيانات المحدودة.</p></li>
+<li><p><strong>حجم المجموعة الصارم</strong>: عند <code translate="no">strict_group_size=True</code> ، سيحاول النظام إرجاع العدد المحدد من الكيانات (<code translate="no">group_size</code>) لكل مجموعة، ما لم تكن هناك بيانات كافية في تلك المجموعة. يضمن هذا الإعداد عدد كيانات متناسق لكل مجموعة ولكنه قد يؤدي إلى تدهور الأداء مع التوزيع غير المتكافئ للبيانات أو الموارد المحدودة. إذا لم يكن عدد الكيانات الصارم مطلوبًا، يمكن أن يؤدي الإعداد <code translate="no">strict_group_size=False</code> إلى تحسين سرعة الاستعلام.</p></li>
 </ul>
