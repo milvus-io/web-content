@@ -1,12 +1,12 @@
 ---
 id: AIMon_milvus_integration.md
 summary: >-
-  In this tutorial, we'll help you build a retrieval-augmented generation (RAG)
-  chatbot that answers questions.
-title: Improve retrieval quality of your LLM Application with AIMon and Milvus
+  Dalam tutorial ini, kami akan membantu Anda membuat chatbot
+  retrieval-augmented generation (RAG) yang dapat menjawab pertanyaan.
+title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
 ---
 <p><a href="https://colab.research.google.com/drive/1GqAhNZ6_Fm3PN_wX69MiBe7Pc6g2PjtK#scrollTo=cf2bee4f-c0b2-49e1-8a9c-3688c2d5fb55" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<h1 id="Improve-retrieval-quality-of-your-LLM-Application-with-AIMon-and-Milvus" class="common-anchor-header">Improve retrieval quality of your LLM Application with AIMon and Milvus<button data-href="#Improve-retrieval-quality-of-your-LLM-Application-with-AIMon-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Improve-retrieval-quality-of-your-LLM-Application-with-AIMon-and-Milvus" class="common-anchor-header">Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus<button data-href="#Improve-retrieval-quality-of-your-LLM-Application-with-AIMon-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ title: Improve retrieval quality of your LLM Application with AIMon and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +36,14 @@ title: Improve retrieval quality of your LLM Application with AIMon and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this tutorial, we’ll help you build a retrieval-augmented generation (RAG) chatbot that answers questions on a <a href="https://meetingbank.github.io/">meeting bank dataset</a>.</p>
-<p>In this tutorial you will learn to:</p>
+    </button></h2><p>Dalam tutorial ini, kami akan membantu Anda membuat chatbot retrieval-augmented generation (RAG) yang menjawab pertanyaan pada <a href="https://meetingbank.github.io/">dataset bank rapat</a>.</p>
+<p>Dalam tutorial ini Anda akan belajar untuk:</p>
 <ul>
-<li>Build an LLM application that answers a user’s query related to the meeting bank dataset.</li>
-<li>Define and measure the quality of your LLM application.</li>
-<li>Improve the quality of your application using 2 incremental approaches: a vector DB using hybrid search and a state-of-the-art re-ranker.</li>
+<li>Membangun aplikasi LLM yang menjawab pertanyaan pengguna yang terkait dengan dataset bank rapat.</li>
+<li>Mendefinisikan dan mengukur kualitas aplikasi LLM Anda.</li>
+<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangking ulang yang canggih.</li>
 </ul>
-<h2 id="Tech-Stack" class="common-anchor-header">Tech Stack<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
+<h2 id="Tech-Stack" class="common-anchor-header">Tumpukan Teknologi<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,12 +58,12 @@ title: Improve retrieval quality of your LLM Application with AIMon and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Vector Database</em></h4><p>For this application, we will use <a href="https://milvus.io/">Milvus</a> to manage and search large-scale unstructured data, such as text, images, and videos.</p>
-<h4 id="LLM-Framework" class="common-anchor-header"><em>LLM Framework</em></h4><p>LlamaIndex is an open-source data orchestration framework that simplifies building large language model (LLM) applications by facilitating the integration of private data with LLMs, enabling context-augmented generative AI applications through a Retrieval-Augmented Generation (RAG) pipeline. We will use LlamaIndex for this tutorial since it offers a good amount of flexibility and better lower level API abstractions.</p>
-<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM Output Quality Evaluation</em></h4><p><a href="https://www.aimon.ai">AIMon</a> offers proprietary Judge models for Hallucination, Context Quality issues, Instruction Adherence of LLMs, Retrieval Quality and other LLM reliability tasks. We will use AIMon to judge the quality of the LLM application.</p>
+    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Basis Data Vektor</em></h4><p>Untuk aplikasi ini, kita akan menggunakan <a href="https://milvus.io/">Milvus</a> untuk mengelola dan mencari data tak terstruktur berskala besar, seperti teks, gambar, dan video.</p>
+<h4 id="LLM-Framework" class="common-anchor-header"><em>Kerangka Kerja LLM</em></h4><p>LlamaIndex adalah kerangka kerja orkestrasi data sumber terbuka yang menyederhanakan pembuatan aplikasi model bahasa besar (LLM) dengan memfasilitasi integrasi data pribadi dengan LLM, memungkinkan aplikasi AI generatif yang ditambah konteks melalui pipeline Retrieval-Augmented Generation (RAG). Kami akan menggunakan LlamaIndex untuk tutorial ini karena menawarkan fleksibilitas yang baik dan abstraksi API tingkat rendah yang lebih baik.</p>
+<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Evaluasi Kualitas Keluaran LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> menawarkan model Hakim eksklusif untuk masalah Halusinasi, Kualitas Konteks, Kepatuhan Instruksi LLM, Kualitas Pengambilan, dan tugas-tugas keandalan LLM lainnya. Kami akan menggunakan AIMon untuk menilai kualitas aplikasi LLM.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Pre-requisites" class="common-anchor-header">Pre-requisites<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
+<h1 id="Pre-requisites" class="common-anchor-header">Prasyarat<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,18 +79,17 @@ title: Improve retrieval quality of your LLM Application with AIMon and Milvus
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Signup for an <a href="https://docs.aimon.ai/quickstart">AIMon account here</a>.</p>
-<p>Add this secret to the Colab Secrets (the “key” symbol on the left panel)
-If you are in another non-google colab environment, please replace the google colab-related code yourself</p>
+<li><p>Daftar <a href="https://docs.aimon.ai/quickstart">akun AIMon di sini</a>.</p>
+<p>Tambahkan rahasia ini ke Rahasia Colab (simbol "kunci" di panel kiri) Jika Anda berada di lingkungan colab non-google lainnya, harap ganti sendiri kode terkait google colab</p>
 <ul>
 <li>AIMON_API_KEY</li>
 </ul></li>
-<li><p>Signup for an <a href="https://platform.openai.com/docs/overview">OpenAI account here</a> and add the following key in Colab secrets:</p>
+<li><p>Daftar <a href="https://platform.openai.com/docs/overview">akun OpenAI di sini</a> dan tambahkan kunci berikut ini di rahasia Colab:</p>
 <ul>
 <li>OPENAI_API_KEY</li>
 </ul></li>
 </ol>
-<h3 id="Required-API-keys" class="common-anchor-header">Required API keys</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+<h3 id="Required-API-keys" class="common-anchor-header">Kunci API yang diperlukan</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -103,7 +102,7 @@ openai_key = userdata.get(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</
 <span class="hljs-comment"># Set OpenAI key as an environment variable as well</span>
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = openai_key
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Utility-Functions" class="common-anchor-header">Utility Functions<button data-href="#Utility-Functions" class="anchor-icon" translate="no">
+<h2 id="Utility-Functions" class="common-anchor-header">Fungsi Utilitas<button data-href="#Utility-Functions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -118,7 +117,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = openai
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section contains utility functions that we will use throughout the notebook.</p>
+    </button></h2><p>Bagian ini berisi fungsi utilitas yang akan kita gunakan di seluruh buku catatan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 oai_client = OpenAI(api_key=openai_key)
@@ -153,7 +152,7 @@ oai_client = OpenAI(api_key=openai_key)
     <span class="hljs-comment"># Extract and return the response text</span>
     <span class="hljs-keyword">return</span> completion.choices[<span class="hljs-number">0</span>].message.content
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Dataset" class="common-anchor-header">Dataset<button data-href="#Dataset" class="anchor-icon" translate="no">
+<h1 id="Dataset" class="common-anchor-header">Kumpulan data<button data-href="#Dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,8 +167,8 @@ oai_client = OpenAI(api_key=openai_key)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>We will use the <a href="https://meetingbank.github.io/">MeetingBank</a> dataset which is a benchmark dataset created from the city councils of 6 major U.S. cities to supplement existing datasets. It contains 1,366 meetings with over 3,579 hours of video, as well as transcripts, PDF documents of meeting minutes, agenda, and other metadata.</p>
-<p>For this exercise, we have created a smaller dataset. It can be found <a href="https://drive.google.com/drive/folders/1v3vJahKtadi_r-8VJAsDd2eaiSRenmsa?usp=drive_link">here</a>.</p>
+    </button></h1><p>Kami akan menggunakan dataset <a href="https://meetingbank.github.io/">MeetingBank</a> yang merupakan dataset tolok ukur yang dibuat dari dewan kota di 6 kota besar di Amerika Serikat untuk melengkapi dataset yang sudah ada. Dataset ini berisi 1.366 rapat dengan lebih dari 3.579 jam video, serta transkrip, dokumen PDF notulen rapat, agenda, dan metadata lainnya.</p>
+<p>Untuk latihan ini, kami telah membuat set data yang lebih kecil. Dataset ini dapat ditemukan <a href="https://drive.google.com/drive/folders/1v3vJahKtadi_r-8VJAsDd2eaiSRenmsa?usp=drive_link">di sini</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete the dataset folder if it already exists</span>
 
 <span class="hljs-keyword">import</span> shutil
@@ -245,18 +244,18 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">Analysis</h3><p>We have 258 transcripts with a total of about 1M tokens across all these transcripts. We have an average of 3864 number of tokens per transcript.</p>
+<h3 id="Analysis" class="common-anchor-header">Analisis</h3><p>Kami memiliki 258 transkrip dengan total sekitar 1 juta token di semua transkrip ini. Kami memiliki rata-rata 3864 jumlah token per transkrip.</p>
 <table>
 <thead>
-<tr><th>Metric</th><th>Value</th></tr>
+<tr><th>Metrik</th><th>Nilai</th></tr>
 </thead>
 <tbody>
-<tr><td>Number of transcripts</td><td>258</td></tr>
-<tr><td>Total # tokens in the transcripts</td><td>1M</td></tr>
-<tr><td>Avg. # tokens per transcript</td><td>3864</td></tr>
+<tr><td>Jumlah transkrip</td><td>258</td></tr>
+<tr><td>Total # token dalam transkrip</td><td>1M</td></tr>
+<tr><td>Rata-rata # Jumlah token per transkrip</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">Queries</h3><p>Below are the 12 queries that we will run on the transcript above</p>
+<h3 id="Queries" class="common-anchor-header">Kueri</h3><p>Di bawah ini adalah 12 kueri yang akan kami jalankan pada transkrip di atas</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -280,7 +279,7 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
  'What were the decisions made in the meeting?',
  'What did the team decide about the project timeline?']
 </code></pre>
-<h1 id="Metric-Definition" class="common-anchor-header">Metric Definition<button data-href="#Metric-Definition" class="anchor-icon" translate="no">
+<h1 id="Metric-Definition" class="common-anchor-header">Definisi Metrik<button data-href="#Metric-Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -295,12 +294,12 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This quality score metric will help us understand how good the LLM responses are for the set of queries above. To measure quality of our application, we will run a set of queries and aggregate the quality scores across all these queries.</p>
-<p>LLM Application Quality Score is a combination of 3 individual quality metrics from AIMon:</p>
+    </button></h1><p>Metrik skor kualitas ini akan membantu kita memahami seberapa baik tanggapan LLM untuk kumpulan kueri di atas. Untuk mengukur kualitas aplikasi kami, kami akan menjalankan satu set query dan mengumpulkan skor kualitas di semua query ini.</p>
+<p>Skor Kualitas Aplikasi LLM adalah kombinasi dari 3 metrik kualitas individu dari AIMon:</p>
 <ol>
-<li><strong>Hallucination Score</strong> (hall_score): checks if the generated text is grounded in the provided context. A score closer to 1.0 means that there is a strong indication of hallucination and a score closer to 0.0 means a lower indication of hallucination. Hence, we will use (1.0-hall_score) here when computing the final quality score.</li>
-<li><strong>Instruction Adherence Score</strong> (ia_score): checks if all explicit instructions provided have been followed by the LLM. The higher the ia_score the better the adherence to instructions. The lower the score, the poorer the adherence to instructions.</li>
-<li><strong>Retrieval Relevance Score</strong> (rr_score): checks if the retrieved documents are relevant to the query. A score closer to 100.0 means perfect relevance of document to query and a score closer to 0.0 means poor relevance of document to query.</li>
+<li><strong>Skor Halusinasi</strong> (hall_score): memeriksa apakah teks yang dihasilkan sesuai dengan konteks yang diberikan. Skor yang mendekati 1.0 berarti ada indikasi halusinasi yang kuat dan skor yang mendekati 0.0 berarti indikasi halusinasi yang lebih rendah. Oleh karena itu, kami akan menggunakan (1.0-hall_score) di sini saat menghitung skor kualitas akhir.</li>
+<li><strong>Skor Kepatuhan Instruksi</strong> (ia_score): memeriksa apakah semua instruksi eksplisit yang diberikan telah diikuti oleh LLM. Semakin tinggi ia_score, semakin baik kepatuhan terhadap instruksi. Semakin rendah skornya, semakin buruk kepatuhan terhadap instruksi.</li>
+<li><strong>Skor Relevansi Pengambilan</strong> (rr_score): memeriksa apakah dokumen yang diambil relevan dengan kueri. Skor yang mendekati 100,0 berarti relevansi dokumen yang sempurna dengan kueri dan skor yang mendekati 0,0 berarti relevansi dokumen yang buruk dengan kueri.</li>
 </ol>
 <p><code translate="no">quality_score = 0.35 * (1.0 - hall_score) + 0.35 * ia_score + 0.3 * rr_score</code></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># We will check the LLM response against these instructions</span>
@@ -326,7 +325,7 @@ instructions_to_evaluate = <span class="hljs-string">&quot;&quot;&quot;
         + <span class="hljs-number">0.3</span> * (avg_retrieval_relevance_score / <span class="hljs-number">100</span>)
     ) * <span class="hljs-number">100.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Setup-AIMon" class="common-anchor-header">Setup AIMon<button data-href="#Setup-AIMon" class="anchor-icon" translate="no">
+<h1 id="Setup-AIMon" class="common-anchor-header">Pengaturan AIMon<button data-href="#Setup-AIMon" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -341,7 +340,7 @@ instructions_to_evaluate = <span class="hljs-string">&quot;&quot;&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As mentioned previously, AIMon will be used to judge the quality of the LLM application. <a href="https://docs.aimon.ai/">Documentation can be found here</a>.</p>
+    </button></h1><p>Seperti yang telah disebutkan sebelumnya, AIMon akan digunakan untuk menilai kualitas aplikasi LLM. <a href="https://docs.aimon.ai/">Dokumentasi dapat ditemukan di sini</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> aimon <span class="hljs-keyword">import</span> Detect
 
 aimon_config = {
@@ -371,7 +370,7 @@ detect = Detect(
     model_name=<span class="hljs-string">&quot;OpenAI-gpt-4o-mini&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="1-Simple-brute-force-approach" class="common-anchor-header">1. Simple, brute-force approach<button data-href="#1-Simple-brute-force-approach" class="anchor-icon" translate="no">
+<h1 id="1-Simple-brute-force-approach" class="common-anchor-header">1. Pendekatan sederhana, pendekatan brute-force<button data-href="#1-Simple-brute-force-approach" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -386,9 +385,9 @@ detect = Detect(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In this first simple approach, we will use Levenshtein Distance to match a document with a given query. The top 3 documents with the best match will be sent to the LLM as context for answering.</p>
-<p><strong>NOTE: This cell will take about 3 mins to execute</strong></p>
-<p>Enjoy your favorite beverage while you wait :)</p>
+    </button></h1><p>Pada pendekatan sederhana yang pertama ini, kita akan menggunakan Levenshtein Distance untuk mencocokkan dokumen dengan kueri yang diberikan. Tiga dokumen teratas dengan kecocokan terbaik akan dikirim ke LLM sebagai konteks untuk menjawab.</p>
+<p><strong>CATATAN: Sel ini akan membutuhkan waktu sekitar 3 menit untuk dieksekusi</strong></p>
+<p>Nikmati minuman favorit Anda sambil menunggu :)</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> fuzzywuzzy <span class="hljs-keyword">import</span> process
 <span class="hljs-keyword">import</span> time
 
@@ -463,8 +462,8 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for brute force approach: 14.31772340191865
 </code></pre>
-<p>This is a <strong>baseline</strong> LLM app quality score. You can also see the individual metrics like hallucination scores etc. computed by AIMon on the <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">AIMon UI</a></p>
-<h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. Use a VectorDB (Milvus) for document retrieval<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
+<p>Ini adalah skor kualitas aplikasi LLM <strong>dasar</strong>. Anda juga dapat melihat metrik individu seperti skor halusinasi, dll. yang dihitung oleh AIMon di <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">AIMon UI</a></p>
+<h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. Gunakan VectorDB (Milvus) untuk pengambilan dokumen<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -479,15 +478,13 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Now, we will improve the quality score by adding in a vector DB. This will also help improve query latency compared to the previous approach.</p>
-<p>There are two main components we need to be aware of: Ingestion and RAG based Q&A. The ingestion pipeline processes the transcripts from the Meeting Bank dataset and stores it in the Milvus Vector database. The RAG Q&A pipeline processes a user query by first retrieving the relevant documents from the vector store. These documents will then be used as grounding documents for the LLM to generate its response. We leverage AIMon to calculate the quality score and continuously monitor the application for <a href="https://docs.aimon.ai/detectors/hallucination">hallucination</a>, , <a href="https://docs.aimon.ai/detectors/instruction_adherence">instruction adherence</a>,  <a href="https://docs.aimon.ai/checker-models/context_relevance">context relevance</a>. These are the same 3 metrics we used to define the <code translate="no">quality</code> score above.</p>
+    </button></h1><p>Sekarang, kita akan meningkatkan skor kualitas dengan menambahkan DB vektor. Hal ini juga akan membantu meningkatkan latensi kueri dibandingkan dengan pendekatan sebelumnya.</p>
+<p>Ada dua komponen utama yang perlu kita perhatikan: Ingestion dan Tanya Jawab berbasis RAG. Pipeline ingestion memproses transkrip dari dataset Meeting Bank dan menyimpannya dalam database Milvus Vector. Pipeline RAG Q&amp;A memproses pertanyaan pengguna dengan terlebih dahulu mengambil dokumen yang relevan dari penyimpanan vektor. Dokumen-dokumen ini kemudian akan digunakan sebagai dokumen dasar bagi LLM untuk menghasilkan responsnya. Kami memanfaatkan AIMon untuk menghitung skor kualitas dan terus memantau aplikasi untuk <a href="https://docs.aimon.ai/detectors/hallucination">halusinasi</a>, <a href="https://docs.aimon.ai/detectors/instruction_adherence">kepatuhan terhadap instruksi</a>, dan <a href="https://docs.aimon.ai/checker-models/context_relevance">relevansi konteks</a>. Ini adalah 3 metrik yang sama yang kami gunakan untuk menentukan skor <code translate="no">quality</code> di atas.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
-    <span>workflow</span>
-  </span>
-</p>
-<p>Below are some utility functions to pre-process and compute embeddings for documents.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
+   </span> <span class="img-wrapper"> <span>alur kerja</span> </span></p>
+<p>Di bawah ini adalah beberapa fungsi utilitas untuk melakukan pra-pemrosesan dan menghitung penyematan untuk dokumen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -518,14 +515,14 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 
 documents = extract_and_create_documents(train_split[<span class="hljs-string">&quot;transcript&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Setup an Open AI based embedding computation model.</p>
+<p>Siapkan model komputasi sematan berbasis Open AI.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.openai <span class="hljs-keyword">import</span> OpenAIEmbedding
 
 embedding_model = OpenAIEmbedding(
     model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>, embed_batch_size=<span class="hljs-number">100</span>, max_retries=<span class="hljs-number">3</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this cell, we compute the embeddings for the <code translate="no">documents</code> and index them into the MilvusVectorStore.</p>
+<p>Di sel ini, kami menghitung embedding untuk <code translate="no">documents</code> dan mengindeksnya ke dalam MilvusVectorStore.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
 
@@ -546,7 +543,7 @@ index = VectorStoreIndex.from_documents(
 
 Execution time: 38.74 seconds
 </code></pre>
-<p>Now that the VectorDB index has been setup, we will leverage it to answer user queries. In the cells below, we will create a retriever, setup the LLM and build a LLamaIndex Query Engine that interfaces with the retriever and the LLM to answer a user’s questions.</p>
+<p>Setelah indeks VectorDB disiapkan, kita akan memanfaatkannya untuk menjawab pertanyaan pengguna. Pada sel di bawah ini, kita akan membuat retriever, menyiapkan LLM, dan membangun Mesin Query LLamaIndex yang berinteraksi dengan retriever dan LLM untuk menjawab pertanyaan pengguna.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.retrievers <span class="hljs-keyword">import</span> VectorIndexRetriever
 <span class="hljs-keyword">from</span> llama_index.core.query_engine <span class="hljs-keyword">import</span> RetrieverQueryEngine
 
@@ -567,7 +564,7 @@ llm = OpenAI(model=<span class="hljs-string">&quot;gpt-4o-mini&quot;</span>, tem
 
 query_engine = RetrieverQueryEngine.from_args(retriever, llm)
 <button class="copy-code-btn"></button></code></pre>
-<p>At this point, the query engine, retriever and LLM has been setup. Next, we setup AIMon to help us measure quality scores. We use the same <code translate="no">@detect</code> decorator that was created in the previous cells above. The only additional code in <code translate="no">ask_and_validate</code> here is to help AIMon interface with LLamaIndex’s retrieved document "nodes".</p>
+<p>Pada titik ini, mesin kueri, retriever, dan LLM telah disiapkan. Selanjutnya, kita menyiapkan AIMon untuk membantu kita mengukur skor kualitas. Kita menggunakan dekorator <code translate="no">@detect</code> yang sama dengan yang telah dibuat pada sel sebelumnya di atas. Satu-satunya kode tambahan di <code translate="no">ask_and_validate</code> di sini adalah untuk membantu AIMon berinteraksi dengan "node" dokumen yang diambil dari LLamaIndex.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> logging
 
 
@@ -701,8 +698,8 @@ ask_and_validate(<span class="hljs-string">&quot;Councilman Lopez&quot;</span>, 
    publish_response=[]
  ))
 </code></pre>
-<p>Lets run through all the queries through the LlamaIndex query engine in the <code translate="no">queries_df</code> and compute the overall quality score using AIMon.</p>
-<p><strong>NOTE: This will take about 2 mins</strong></p>
+<p>Mari kita jalankan semua kueri melalui mesin kueri LlamaIndex di <code translate="no">queries_df</code> dan menghitung skor kualitas keseluruhan menggunakan AIMon.</p>
+<p><strong>CATATAN: Ini akan memakan waktu sekitar 2 menit</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
 quality_scores_vdb = []
@@ -760,7 +757,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for vector DB approach: 19.296728194100236
 </code></pre>
-<h2 id="🎉-Quality-Score-improved" class="common-anchor-header">🎉 Quality Score improved!<button data-href="#🎉-Quality-Score-improved" class="anchor-icon" translate="no">
+<h2 id="🎉-Quality-Score-improved" class="common-anchor-header">🎉 Skor Kualitas meningkat!<button data-href="#🎉-Quality-Score-improved" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -775,8 +772,8 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Notice that the overall quality score across all queries improved after using a RAG based QA system.</p>
-<h1 id="3-Add-Re-ranking-to-your-retrieval" class="common-anchor-header">3. Add Re-ranking to your retrieval<button data-href="#3-Add-Re-ranking-to-your-retrieval" class="anchor-icon" translate="no">
+    </button></h2><p>Perhatikan bahwa skor kualitas keseluruhan di semua kueri meningkat setelah menggunakan sistem QA berbasis RAG.</p>
+<h1 id="3-Add-Re-ranking-to-your-retrieval" class="common-anchor-header">3. Tambahkan Peringkat Ulang ke pencarian Anda<button data-href="#3-Add-Re-ranking-to-your-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -791,8 +788,8 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Now, we will add in AIMon’s <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">domain adaptable re-ranker</a> using AIMon’s LlamaIndex <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">postprocessor re-rank integration</a>.</p>
-<p>As shown in the figure below, reranking helps bubble up the most relevant documents to the top by using a more advanced Query-Document matching function. The unique feature of AIMon’s re-ranker is the ability to customize it per domain. Similar to how you would prompt engineer an LLM, you can customize reranking performance per domain using the <code translate="no">task_definition</code> field. This state-of-the-art reranker runs at ultra low sub second latency (for a ~2k context) and its performance ranks in the top 5 of the MTEB reranking leaderboard.</p>
+    </button></h1><p>Sekarang, kita akan menambahkan <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">perangking</a> <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">ulang domain yang dapat diadaptasi</a> oleh AIMon menggunakan <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">integrasi perangkingan ulang postprocessor</a> LlamaIndex dari AIMon.</p>
+<p>Seperti yang ditunjukkan pada gambar di bawah ini, pemeringkatan ulang membantu melambungkan dokumen yang paling relevan ke atas dengan menggunakan fungsi pencocokan Query-Document yang lebih canggih. Fitur unik dari pemeringkat ulang AIMon adalah kemampuan untuk menyesuaikannya per domain. Mirip dengan bagaimana Anda akan meminta insinyur LLM, Anda dapat menyesuaikan kinerja pemeringkatan ulang per domain menggunakan bidang <code translate="no">task_definition</code>. Peranker canggih ini berjalan pada latensi sub detik yang sangat rendah (untuk konteks ~2k) dan kinerjanya berada di peringkat 5 besar papan peringkat perankingan ulang MTEB.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
 
@@ -816,9 +813,9 @@ query_engine_with_reranking = RetrieverQueryEngine.from_args(
     retriever, llm, node_postprocessors=[aimon_rerank]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s run through the queries again and recompute the overall quality score to see if there is an improvement.</p>
-<p>✨ <strong>AIMon’s re-ranking should not add additional latency overhead since it actually reduces the amount of context documents that need to be sent to the LLM for generating a response making the operation efficient in terms of network I/O and LLM token processing cost (money and time).</strong></p>
-<p><strong>NOTE: This step will take 2 mins</strong></p>
+<p>Mari kita jalankan kueri lagi dan menghitung ulang skor kualitas secara keseluruhan untuk melihat apakah ada peningkatan.</p>
+<p>✨ <strong>Pemeringkatan ulang AIMon seharusnya tidak menambah overhead latensi tambahan karena sebenarnya mengurangi jumlah dokumen konteks yang perlu dikirim ke LLM untuk menghasilkan respons, sehingga operasi menjadi efisien dalam hal I/O jaringan dan biaya pemrosesan token LLM (uang dan waktu)</strong>.</p>
+<p><strong>CATATAN: Langkah ini akan memakan waktu 2 menit</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
 qual_scores_rr = []
@@ -860,7 +857,7 @@ Avg. Retrieval relevance score across chunks: 41.417109763746396 for query: What
 Avg. Retrieval relevance score across chunks: 43.34866213159572 for query: What did the team decide about the project timeline?
 Time elapsed: 97.93312644958496 seconds
 </code></pre>
-<p>Notice the difference in average document relevance scores when using the reranker v/s when not using the reranker v/s using a naive, brute-force approach.</p>
+<p>Perhatikan perbedaan rata-rata skor relevansi dokumen saat menggunakan reranker v/s ketika tidak menggunakan reranker v/s menggunakan pendekatan naif, brute-force.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># This is the average quality score.</span>
 avg_quality_score_rr = statistics.mean(qual_scores_rr)
 <span class="hljs-built_in">print</span>(
@@ -881,7 +878,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for AIMon Re-ranking approach: 39.794702307038214
 </code></pre>
-<h2 id="🎉-Again-Quality-Score-improved" class="common-anchor-header">🎉 Again, Quality Score improved!<button data-href="#🎉-Again-Quality-Score-improved" class="anchor-icon" translate="no">
+<h2 id="🎉-Again-Quality-Score-improved" class="common-anchor-header">🎉 Sekali lagi, Skor Kualitas meningkat!<button data-href="#🎉-Again-Quality-Score-improved" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -896,16 +893,16 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Notice that the overall quality score across all queries improved after using AIMon’s reranker.</p>
-<p>In sum, as shown in the figure below, we demonstrated the following:</p>
+    </button></h2><p>Perhatikan bahwa skor kualitas secara keseluruhan di semua kueri meningkat setelah menggunakan perankingan AIMon.</p>
+<p>Singkatnya, seperti yang ditunjukkan pada gambar di bawah ini, kami mendemonstrasikan hal berikut:</p>
 <ul>
-<li>Computing a quality score using a weighted combination of 3 different quality metrics: hallucination score, instruction adherence score and retrieval relevance score.</li>
-<li>Established a quality baseline using a brute force string matching approach to match documents to a query and pass that to an LLM.</li>
-<li>Improved the baseline quality using a Vector DB (here, we used Milvus)</li>
-<li>Further improved the quality score using AIMon’s low-latency, domain adaptable re-ranker.</li>
-<li>We also showed how retrieval relevance improves significantly by adding in AIMon’s re-ranker.</li>
+<li>Menghitung skor kualitas menggunakan kombinasi berbobot dari 3 metrik kualitas yang berbeda: skor halusinasi, skor kepatuhan terhadap instruksi, dan skor relevansi pengambilan.</li>
+<li>Menetapkan baseline kualitas menggunakan pendekatan pencocokan string brute force untuk mencocokkan dokumen dengan kueri dan meneruskannya ke LLM.</li>
+<li>Meningkatkan kualitas dasar menggunakan Vector DB (di sini, kami menggunakan Milvus)</li>
+<li>Lebih lanjut meningkatkan skor kualitas menggunakan pemeringkat ulang dengan latensi rendah yang dapat beradaptasi dengan domain dari AIMon.</li>
+<li>Kami juga menunjukkan bagaimana relevansi pencarian meningkat secara signifikan dengan menambahkan pemeringkat ulang AIMon.</li>
 </ul>
-<p>We encourage you to experiment with the different components shown in this notebook to further <strong>increase the quality score</strong>. One idea is to add your own definitions of quality using the <code translate="no">instructions</code> field in the instruction_adherence detector above. Another idea is to add another one of <a href="https://docs.aimon.ai/category/checker-models">AIMon’s checker models</a> as part of the quality metric calculation.</p>
+<p>Kami mendorong Anda untuk bereksperimen dengan berbagai komponen yang ditunjukkan dalam buku catatan ini untuk lebih <strong>meningkatkan skor kualitas</strong>. Salah satu idenya adalah menambahkan definisi kualitas Anda sendiri dengan menggunakan bidang <code translate="no">instructions</code> di detektor kepatuhan_instruksi di atas. Ide lainnya adalah menambahkan salah satu <a href="https://docs.aimon.ai/category/checker-models">model pemeriksa AIMon</a> sebagai bagian dari penghitungan metrik kualitas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(
@@ -943,11 +940,11 @@ df_scores
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Approach</th>
-      <th>Quality Score</th>
-      <th>Retrieval Relevance Score</th>
-      <th>Increase in Quality Score (%)</th>
-      <th>Increase in Retrieval Relevance Score (%)</th>
+      <th>Pendekatan</th>
+      <th>Skor Kualitas</th>
+      <th>Skor Relevansi Pengambilan</th>
+      <th>Peningkatan Skor Kualitas (%)</th>
+      <th>Peningkatan Skor Relevansi Temu Kembali (%)</th>
     </tr>
   </thead>
   <tbody>
@@ -977,5 +974,5 @@ df_scores
     </tr>
   </tbody>
 </table>
-<p>The above table summarizes our results. Your actual numbers will vary depending on various factors such as variations in quality of LLM responses, performance of the nearest neighbor search in the VectorDB etc.</p>
-<p>In conclusion, as shown by the figure below, we evaluated quality score, RAG relevance and instruction following capabilities of your LLM application. We used AIMon’s re-ranker to improve the overall quality of the application and the average relevance of documents retrieved from your RAG.</p>
+<p>Tabel di atas merangkum hasil kami. Angka aktual Anda akan bervariasi tergantung pada berbagai faktor seperti variasi kualitas respons LLM, kinerja pencarian tetangga terdekat di VectorDB, dll.</p>
+<p>Kesimpulannya, seperti yang ditunjukkan oleh gambar di bawah ini, kami mengevaluasi skor kualitas, relevansi RAG, dan kemampuan mengikuti instruksi dari aplikasi LLM Anda. Kami menggunakan pemeringkat ulang AIMon untuk meningkatkan kualitas aplikasi secara keseluruhan dan relevansi rata-rata dokumen yang diambil dari RAG Anda.</p>

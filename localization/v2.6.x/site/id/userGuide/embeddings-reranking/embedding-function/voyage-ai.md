@@ -85,7 +85,7 @@ beta: Milvus 2.6.x
      <td><p>kode-pelayaran-2</p></td>
      <td><p>1,536</p></td>
      <td><p>16,000</p></td>
-     <td><p>Dioptimalkan untuk pengambilan kode (17% lebih baik dari alternatif) / Generasi sebelumnya dari penyematan kode. Lihat <a href="https://blog.voyageai.com/2024/01/23/voyage-code-2-elevate-your-code-retrieval/">postingan blog</a> untuk detailnya.</p></td>
+     <td><p>Dioptimalkan untuk pengambilan kode (17% lebih baik dari alternatif) / Generasi sebelumnya dari penyematan kode. Lihat <a href="https://blog.voyageai.com/2024/01/23/voyage-code-2-elevate-your-code-retrieval/">posting blog</a> untuk detailnya.</p></td>
    </tr>
 </table>
 <p>Untuk detailnya, lihat <a href="https://docs.voyageai.com/reference/embeddings-api">Model penyematan teks</a>.</p>

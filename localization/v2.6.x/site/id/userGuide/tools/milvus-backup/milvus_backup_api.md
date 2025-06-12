@@ -1,9 +1,9 @@
 ---
 id: milvus_backup_api.md
-summary: Learn how to use Milvus Backup through API
-title: Back up and Restore Data Using APIs
+summary: Pelajari cara menggunakan Milvus Backup melalui API
+title: Cadangkan dan Pulihkan Data Menggunakan API
 ---
-<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Back up and Restore Data Using APIs<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
+<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Cadangkan dan Pulihkan Data Menggunakan API<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Back up and Restore Data Using APIs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Backup provides data backup and restoration features to ensure the security of your Milvus data.</p>
-<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Obtain Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus Backup menyediakan fitur backup dan restore data untuk memastikan keamanan data Milvus Anda.</p>
+<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Mendapatkan Cadangan Milvus<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,14 +34,14 @@ title: Back up and Restore Data Using APIs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can either download the compiled binary or build from the source.</p>
-<p>To download the compiled binary, go to the <a href="https://github.com/zilliztech/milvus-backup/releases">release</a> page, where you can find all official releases. Remember, always use the binaries in the release marked as <strong>Latest</strong>.</p>
-<p>To compile from the source, do as follows:</p>
+    </button></h2><p>Anda bisa mengunduh biner yang telah dikompilasi atau membangun dari sumbernya.</p>
+<p>Untuk mengunduh biner yang telah dikompilasi, buka halaman <a href="https://github.com/zilliztech/milvus-backup/releases">rilis</a>, di mana Anda dapat menemukan semua rilis resmi. Ingat, selalu gunakan biner dalam rilis yang ditandai sebagai <strong>Terbaru</strong>.</p>
+<p>Untuk mengkompilasi dari sumbernya, lakukan hal berikut:</p>
 <pre><code translate="no" class="language-shell">git clone git@github.com:zilliztech/milvus-backup.git
 go get
 go build
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-configuration-file" class="common-anchor-header">Prepare configuration file<button data-href="#Prepare-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Prepare-configuration-file" class="common-anchor-header">Siapkan berkas konfigurasi<button data-href="#Prepare-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,9 +56,9 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Download the <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">example configuration file</a> and tailor it to fit your needs.</p>
-<p>Then create a folder alongside the downloaded or built Milvus Backup binary, name the folder <code translate="no">configs</code>, and place the configuration file inside the <code translate="no">configs</code> folder.</p>
-<p>Your folder structure should be similar to the following:</p>
+    </button></h2><p>Unduh <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">contoh berkas konfigurasi</a> dan sesuaikan dengan kebutuhan Anda.</p>
+<p>Kemudian buat sebuah folder di samping berkas biner Milvus Backup yang telah diunduh atau dibuat, beri nama folder tersebut <code translate="no">configs</code>, dan letakkan berkas konfigurasi di dalam folder <code translate="no">configs</code>.</p>
+<p>Struktur folder Anda seharusnya mirip dengan yang berikut ini:</p>
 <pre>
   <code translate="no">
   workspace
@@ -67,20 +67,20 @@ go build
       └── backup.yaml
   </code>
 </pre>
-<p>Because Milvus Backup cannot back up your data to a local path, ensure that Minio settings are correct when tailoring the configuration file.</p>
+<p>Karena Milvus Backup tidak dapat mencadangkan data Anda ke jalur lokal, pastikan pengaturan Minio sudah benar saat menyesuaikan file konfigurasi.</p>
 <div class="alert note">
-<p>The name of the default Minio bucket varies with the way you install Milvus. When making changes to Minio settings, do refer to the following table.</p>
+<p>Nama bucket Minio default bervariasi sesuai dengan cara Anda menginstal Milvus. Ketika membuat perubahan pada pengaturan Minio, lihat tabel berikut.</p>
 <table>
 <thead>
-<tr><th>field</th><th>Docker Compose</th><th>Helm / Milvus Operator</th></tr>
+<tr><th>bidang</th><th>Penulisan Docker</th><th>Helm / Operator Milvus</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">bucketName</code></td><td>a-bucket</td><td>milvus-bucket</td></tr>
-<tr><td><code translate="no">rootPath</code></td><td>files</td><td>file</td></tr>
+<tr><td><code translate="no">rootPath</code></td><td>berkas</td><td>berkas</td></tr>
 </tbody>
 </table>
 </div>
-<h2 id="Start-up-the-API-server" class="common-anchor-header">Start up the API server<button data-href="#Start-up-the-API-server" class="anchor-icon" translate="no">
+<h2 id="Start-up-the-API-server" class="common-anchor-header">Memulai server API<button data-href="#Start-up-the-API-server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,14 +95,14 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Then you can start the API server as follows:</p>
+    </button></h2><p>Kemudian Anda dapat memulai server API sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server
 <button class="copy-code-btn"></button></code></pre>
-<p>The API server listens on port 8080 by default. You can change it by running it with the <code translate="no">-p</code> flag. To start the API server listening on port 443, do as follows:</p>
+<p>Server API mendengarkan pada port 8080 secara default. Anda dapat mengubahnya dengan menjalankannya dengan bendera <code translate="no">-p</code>. Untuk memulai server API yang mendengarkan pada port 443, lakukan hal berikut:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 443
 <button class="copy-code-btn"></button></code></pre>
-<p>You can access the Swagger UI using http://localhost:<port>/api/v1/docs/index.html.</p>
-<h2 id="Prepare-data" class="common-anchor-header">Prepare data<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+<p>Anda dapat mengakses Swagger UI menggunakan http://localhost:<port>/api/v1/docs/index.html.</p>
+<h2 id="Prepare-data" class="common-anchor-header">Menyiapkan data<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,12 +117,12 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you run an empty local Milvus instance listening on the default port 19530, use the example Python scripts to generate some data in your instance. Feel free to make necessary changes to the scripts to fit your needs.</p>
-<p>Obtain the <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">scripts</a>. Then run the scripts to generate the data. Ensure that <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, the official Milvus Python SDK, has been installed.</p>
+    </button></h2><p>Jika Anda menjalankan instans Milvus lokal kosong yang mendengarkan pada port default 19530, gunakan contoh skrip Python untuk menghasilkan beberapa data dalam instans Anda. Jangan ragu untuk membuat perubahan yang diperlukan pada skrip agar sesuai dengan kebutuhan Anda.</p>
+<p>Dapatkan <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">skripnya</a>. Kemudian jalankan skrip untuk menghasilkan data. Pastikan bahwa <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, SDK Python Milvus resmi, telah terinstal.</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>This step is optional. If you skip this, ensure that you already have some data in your Milvus instance.</p>
-<h2 id="Back-up-data" class="common-anchor-header">Back up data<button data-href="#Back-up-data" class="anchor-icon" translate="no">
+<p>Langkah ini bersifat opsional. Jika Anda melewatkan langkah ini, pastikan bahwa Anda sudah memiliki beberapa data dalam instance Milvus Anda.</p>
+<h2 id="Back-up-data" class="common-anchor-header">Mencadangkan data<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,8 +138,8 @@ go build
         ></path>
       </svg>
     </button></h2><div class="tab-wrapper"></div>
-<p>Note that running Milvus Backup against a Milvus instance will not normally affect the running of the instance. Your Milvus instance is fully functional during backup or restore.</p>
-<p>Run the following command to create a backup. Change <code translate="no">collection_names</code> and <code translate="no">backup_name</code> if necessary.</p>
+<p>Perhatikan bahwa menjalankan Milvus Backup terhadap instans Milvus biasanya tidak akan memengaruhi jalannya instans. Instance Milvus Anda akan berfungsi penuh selama pencadangan atau pemulihan.</p>
+<p>Jalankan perintah berikut untuk membuat cadangan. Ubah <code translate="no">collection_names</code> dan <code translate="no">backup_name</code> jika perlu.</p>
 <pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/create&#x27; \
 --header &#x27;Content-Type: application/json&#x27; \
 --data-raw &#x27;{
@@ -150,17 +150,17 @@ go build
   ]
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the command is executed, you can list the backups in the bucket specified in the Minio settings as follows:</p>
+<p>Setelah perintah dijalankan, Anda dapat membuat daftar cadangan dalam bucket yang ditentukan dalam pengaturan Minio sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/list&#x27; \
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>And download the backup files as follows:</p>
+<p>Dan unduh file cadangan sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/get_backup?backup_id=&lt;test_backup_id&gt;&amp;backup_name=my_backup&#x27; \
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>While running the above command, change <code translate="no">backup_id</code> and <code translate="no">backup_name</code> to the one returned by the list API.</p>
-<p>Now, you can save the backup files to a safe place for restoration in the future, or upload them to <a href="https://cloud.zilliz.com">Zilliz Cloud</a> to create a managed vector database with your data. For details, refer to <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrate from Milvus to Zilliz Cloud</a>.</p>
-<h2 id="Restore-data" class="common-anchor-header">Restore data<button data-href="#Restore-data" class="anchor-icon" translate="no">
+<p>Saat menjalankan perintah di atas, ubah <code translate="no">backup_id</code> dan <code translate="no">backup_name</code> ke yang dikembalikan oleh API daftar.</p>
+<p>Sekarang, Anda dapat menyimpan file cadangan ke tempat yang aman untuk pemulihan di masa mendatang, atau mengunggahnya ke <a href="https://cloud.zilliz.com">Zilliz Cloud</a> untuk membuat database vektor terkelola dengan data Anda. Untuk detailnya, lihat <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrasi dari Milvus ke Zilliz Cloud</a>.</p>
+<h2 id="Restore-data" class="common-anchor-header">Memulihkan data<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,7 +176,7 @@ go build
         ></path>
       </svg>
     </button></h2><div class="tab-wrapper"></div>
-<p>You can call the restore API command with a <code translate="no">collection_suffix</code> option to create a new collection by restoring the data from the backup. Change <code translate="no">collection_names</code> and <code translate="no">backup_name</code> if necessary.</p>
+<p>Anda dapat memanggil perintah API restore dengan opsi <code translate="no">collection_suffix</code> untuk membuat koleksi baru dengan memulihkan data dari cadangan. Ubah <code translate="no">collection_names</code> dan <code translate="no">backup_name</code> jika perlu.</p>
 <pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
 --header &#x27;Content-Type: application/json&#x27; \
 --data-raw &#x27;{
@@ -188,11 +188,11 @@ go build
     &quot;backup_name&quot;:&quot;my_backup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">collection_suffix</code> option allows you to set a suffix for the new collection to be created. The above command will create a new collection called <strong>hello_milvus_recover</strong> in your Milvus instance.</p>
-<p>If you prefer to restore the backed-up collection without changing its name, drop the collection before restoring it from the backup. You can now clean the data generated in <a href="#Prepare-data">Prepare data</a> by running the following command.</p>
+<p>Opsi <code translate="no">collection_suffix</code> memungkinkan Anda untuk mengatur akhiran untuk koleksi baru yang akan dibuat. Perintah di atas akan membuat koleksi baru bernama <strong>hello_milvus_recover</strong> di dalam instans Milvus Anda.</p>
+<p>Jika Anda lebih suka memulihkan koleksi yang dicadangkan tanpa mengubah namanya, hapus koleksi sebelum memulihkannya dari cadangan. Anda sekarang dapat membersihkan data yang dihasilkan di <a href="#Prepare-data">Siapkan data</a> dengan menjalankan perintah berikut.</p>
 <pre><code translate="no" class="language-shell">python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>Then run the following command to restore the data from the backup.</p>
+<p>Kemudian jalankan perintah berikut untuk memulihkan data dari cadangan.</p>
 <pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
 --header &#x27;Content-Type: application/json&#x27; \
 --data-raw &#x27;{
@@ -204,12 +204,12 @@ go build
     &quot;backup_name&quot;:&quot;my_backup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>The restore process can be time-consuming depending on the size of the data to be restored. Therefore, all restore tasks are running asynchronously. You can check the status of a restore task by running:</p>
+<p>Proses pemulihan dapat memakan waktu, tergantung pada ukuran data yang akan dipulihkan. Oleh karena itu, semua tugas pemulihan berjalan secara asinkron. Anda dapat memeriksa status tugas pemulihan dengan menjalankannya:</p>
 <pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/get_restore?id=&lt;test_restore_id&gt;&#x27; \
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Remember to change <code translate="no">test_restore_id</code> to the one restored by the restore API.</p>
-<h2 id="Verify-restored-data" class="common-anchor-header">Verify restored data<button data-href="#Verify-restored-data" class="anchor-icon" translate="no">
+<p>Ingatlah untuk mengubah <code translate="no">test_restore_id</code> ke yang dipulihkan oleh API pemulihan.</p>
+<h2 id="Verify-restored-data" class="common-anchor-header">Memverifikasi data yang dipulihkan<button data-href="#Verify-restored-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -224,7 +224,7 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the restore completes, you can verify the restored data by indexing the restored collection as follows:</p>
+    </button></h2><p>Setelah pemulihan selesai, Anda dapat memverifikasi data yang dipulihkan dengan mengindeks koleksi yang dipulihkan sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">python example/verify_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>Note that the above script assumes that you have run the <code translate="no">restore</code> command with the <code translate="no">-s</code> flag and the suffix is set to <code translate="no">-recover</code>. Feel free to make necessary changes to the script to fit your need.</p>
+<p>Perhatikan bahwa skrip di atas mengasumsikan bahwa Anda telah menjalankan perintah <code translate="no">restore</code> dengan bendera <code translate="no">-s</code> dan akhiran disetel ke <code translate="no">-recover</code>. Jangan ragu untuk membuat perubahan yang diperlukan pada skrip agar sesuai dengan kebutuhan Anda.</p>

@@ -2,10 +2,10 @@
 id: rerankers-voyage.md
 order: 5
 summary: >-
-  Milvus supports Voyage reranker model through the `VoyageRerankFunction`
-  class. This functionality allows you to score the relevance of query-document
-  pairs effectively.
-title: Rerankers Voyage
+  Milvus mendukung model perangkingan ulang Voyage melalui kelas
+  `VoyageRerankFunction`. Fungsionalitas ini memungkinkan Anda untuk menilai
+  relevansi pasangan kueri-dokumen secara efektif.
+title: Pelayaran Rerangking
 ---
 <h1 id="Voyage" class="common-anchor-header">Voyage<button data-href="#Voyage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,12 +22,12 @@ title: Rerankers Voyage
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker">Voyage reranker model</a> through the <code translate="no">VoyageRerankFunction</code> class. This functionality allows you to score the relevance of query-document pairs effectively.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p>Milvus mendukung <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker">model perangkingan Voyage</a> melalui kelas <code translate="no">VoyageRerankFunction</code>. Fungsionalitas ini memungkinkan Anda untuk menilai relevansi pasangan kueri-dokumen secara efektif.</p>
+<p>Untuk menggunakan fitur ini, instal dependensi yang diperlukan:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, instantiate the <code translate="no">VoyageRerankFunction</code>:</p>
+<p>Kemudian, instal <code translate="no">VoyageRerankFunction</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> VoyageRerankFunction
 
 <span class="hljs-comment"># Define the rerank function</span>
@@ -36,14 +36,14 @@ voyage_rf = VoyageRerankFunction(
     api_key=VOYAGE_API_KEY <span class="hljs-comment"># Replace with your Voyage API key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong>:</p>
+<p><strong>Parameter</strong>:</p>
 <ul>
-<li><p><code translate="no">model_name</code> (<em>string</em>)</p>
-<p>The name of the Voyage model to use for encoding. If you leave this parameter unspecified, <code translate="no">rerank-lite-1</code> will be used. For a list of available models, refer to <a href="https://docs.voyageai.com/docs/reranker">Rerankers</a>.</p></li>
-<li><p><code translate="no">api_key</code> (<em>string</em>)</p>
-<p>The API key for accessing the Voyage API. For information on how to create an API key, refer to <a href="https://docs.voyageai.com/docs/api-key-and-installation">API Key and Python Client</a>.</p></li>
+<li><p><code translate="no">model_name</code> <em>(string</em>)</p>
+<p>Nama model Voyage yang akan digunakan untuk pengkodean. Jika Anda membiarkan parameter ini tidak ditentukan, <code translate="no">rerank-lite-1</code> akan digunakan. Untuk daftar model yang tersedia, lihat <a href="https://docs.voyageai.com/docs/reranker">Reranker</a>.</p></li>
+<li><p><code translate="no">api_key</code> <em>(string</em>)</p>
+<p>Kunci API untuk mengakses API Voyage. Untuk informasi mengenai cara membuat kunci API, lihat <a href="https://docs.voyageai.com/docs/api-key-and-installation">Kunci API dan Klien Python</a>.</p></li>
 </ul>
-<p>Then, use the following code to rerank documents based on the query:</p>
+<p>Kemudian, gunakan kode berikut untuk memberi peringkat ulang dokumen berdasarkan kueri:</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [
@@ -64,7 +64,7 @@ results = voyage_rf(
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Score: <span class="hljs-subst">{result.score:<span class="hljs-number">.6</span>f}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Text: <span class="hljs-subst">{result.text}</span>\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>Hasil yang diharapkan serupa dengan yang berikut ini:</p>
 <pre><code translate="no" class="language-python">Index: <span class="hljs-number">1</span>
 Score: <span class="hljs-number">0.898438</span>
 Text: The Dartmouth Conference <span class="hljs-keyword">in</span> <span class="hljs-number">1956</span> <span class="hljs-keyword">is</span> considered the birthplace of artificial intelligence <span class="hljs-keyword">as</span> a field; here, John McCarthy <span class="hljs-keyword">and</span> others coined the term <span class="hljs-string">&#x27;artificial intelligence&#x27;</span> <span class="hljs-keyword">and</span> laid out its basic goals.

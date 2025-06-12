@@ -2,9 +2,9 @@
 id: configure_indexnode.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure indexNode for Milvus.
+summary: Pelajari cara mengonfigurasi indexNode untuk Milvus.
 ---
-<h1 id="indexNode-related-Configurations" class="common-anchor-header">indexNode-related Configurations<button data-href="#indexNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="indexNode-related-Configurations" class="common-anchor-header">Konfigurasi terkait indexNode<button data-href="#indexNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.enableDisk">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable index node build disk vector index      </td>
+      <td>        aktifkan indeks node membangun indeks vektor disk    </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -66,13 +66,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of indexNode. If not specified, use the first unicastable address      </td>
+      <td>        Alamat TCP/IP dari indexNode. Jika tidak ditentukan, gunakan alamat pertama yang dapat di-unicast      </td>
       <td></td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of indexNode      </td>
+      <td>        Port TCP dari indexNode      </td>
       <td>21121</td>
     </tr>
   </tbody>
@@ -124,13 +124,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the indexNode can send, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh indexNode, satuan: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -153,13 +153,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the indexNode can receive, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh indexNode, satuan: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on indexNode can send, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh klien di indexNode, satuan: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -211,13 +211,13 @@ summary: Learn how to configure indexNode for Milvus.
     </button></h2><table id="indexNode.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on indexNode can receive, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh klien di indexNode, satuan: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>

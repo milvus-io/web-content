@@ -174,7 +174,7 @@ beta: Milvus 2.6.x
      <td><p>Penurunan bertahap yang terasa alami yang meluas secara moderat</p></td>
      <td><ul>
 <li><p>Pencarian umum yang membutuhkan hasil yang seimbang</p></li>
-<li><p>Aplikasi di mana pengguna memiliki perasaan intuitif tentang jarak</p></li>
+<li><p>Aplikasi di mana pengguna memiliki rasa intuitif terhadap jarak</p></li>
 <li><p>Ketika jarak yang moderat seharusnya tidak terlalu mempengaruhi hasil</p></li>
 </ul></td>
      <td><p>Dalam pencarian restoran, tempat berkualitas yang berjarak 3 km tetap dapat ditemukan, meskipun peringkatnya lebih rendah dari pilihan terdekat</p></td>

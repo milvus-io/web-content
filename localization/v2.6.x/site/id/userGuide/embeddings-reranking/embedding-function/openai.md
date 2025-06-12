@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>penyematan-teks-3-kecil</p></td>
-     <td><p>Standar: 1.536 (dapat dipersingkat menjadi ukuran dimensi di bawah 1.536)</p></td>
+     <td><p>Standar: 1.536 (dapat disingkat menjadi ukuran dimensi di bawah 1.536)</p></td>
      <td><p>8,191</p></td>
      <td><p>Ideal untuk pencarian semantik yang sensitif terhadap biaya dan dapat diskalakan-menawarkan kinerja yang kuat dengan harga yang lebih rendah.</p></td>
    </tr>

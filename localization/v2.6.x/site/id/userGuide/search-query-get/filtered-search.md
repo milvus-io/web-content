@@ -1,15 +1,15 @@
 ---
 id: filtered-search.md
-title: Filtered Search
+title: Pencarian yang Difilter
 summary: >-
-  An ANN search finds vector embeddings most similar to specified vector
-  embeddings. However, the search results may not always be correct. You can
-  include filtering conditions in a search request so that Milvus conducts
-  metadata filtering before conducting ANN searches, reducing the search scope
-  from the whole collection to only the entities matching the specified
-  filtering conditions.
+  Pencarian ANN menemukan penyematan vektor yang paling mirip dengan penyematan
+  vektor yang ditentukan. Namun, hasil pencarian mungkin tidak selalu benar.
+  Anda dapat menyertakan kondisi pemfilteran dalam permintaan pencarian sehingga
+  Milvus melakukan pemfilteran metadata sebelum melakukan pencarian ANN,
+  sehingga mengurangi cakupan pencarian dari seluruh koleksi menjadi hanya
+  entitas yang sesuai dengan kondisi pemfilteran yang ditentukan.
 ---
-<h1 id="Filtered-Search" class="common-anchor-header">Filtered Search<button data-href="#Filtered-Search" class="anchor-icon" translate="no">
+<h1 id="Filtered-Search" class="common-anchor-header">Pencarian yang Difilter<button data-href="#Filtered-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>An ANN search finds vector embeddings most similar to specified vector embeddings. However, the search results may not always be correct. You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Pencarian ANN menemukan penyematan vektor yang paling mirip dengan penyematan vektor yang ditentukan. Namun, hasil pencarian mungkin tidak selalu benar. Anda dapat menyertakan kondisi pemfilteran dalam permintaan pencarian sehingga Milvus melakukan pemfilteran metadata sebelum melakukan pencarian ANN, sehingga mengurangi cakupan pencarian dari seluruh koleksi menjadi hanya entitas yang sesuai dengan kondisi pemfilteran yang ditentukan.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,31 +40,27 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, filtered searches are categorized into two types — <strong>standard filtering</strong> and <strong>iterative filtering</strong> — depending on the stage at which the filtering is applied.</p>
-<h3 id="Standard-filtering" class="common-anchor-header">Standard filtering</h3><p>If a collection contains both vector embeddings and their metadata, you can filter metadata before ANN search to improve the relevancy of the search result. Once Milvus receives a search request carrying a filtering condition, it restricts the search scope within the entities matching the specified filtering condition.</p>
+    </button></h2><p>Di Milvus, penyaringan pencarian dikategorikan ke dalam dua jenis - penyaringan <strong>standar</strong> dan penyaringan <strong>berulang</strong> - tergantung pada tahap penyaringan yang diterapkan.</p>
+<h3 id="Standard-filtering" class="common-anchor-header">Pemfilteran standar</h3><p>Jika koleksi berisi penyematan vektor dan metadatanya, Anda dapat memfilter metadata sebelum pencarian ANN untuk meningkatkan relevansi hasil pencarian. Setelah Milvus menerima permintaan pencarian yang mengandung kondisi penyaringan, Milvus akan membatasi cakupan pencarian di dalam entitas yang cocok dengan kondisi penyaringan yang ditentukan.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
-    <span>Filtered Search</span>
-  </span>
-</p>
-<p>As shown in the above diagram, the search request carries <code translate="no">chunk like &quot;%red%&quot;</code> as the filtering condition, indicating that Milvus should conduct the ANN search within all the entities that have the word <code translate="no">red</code> in the <code translate="no">chunk</code> field. Specifically, Milvus does the following:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
+   </span> <span class="img-wrapper"> <span>Pencarian yang Difilter</span> </span></p>
+<p>Seperti yang ditunjukkan pada diagram di atas, permintaan pencarian membawa <code translate="no">chunk like &quot;%red%&quot;</code> sebagai kondisi pemfilteran, yang menunjukkan bahwa Milvus harus melakukan pencarian ANN di dalam semua entitas yang memiliki kata <code translate="no">red</code> di bidang <code translate="no">chunk</code>. Secara khusus, Milvus melakukan hal berikut:</p>
 <ul>
-<li><p>Filter entities that match the filtering conditions carried in the search request.</p></li>
-<li><p>Conduct the ANN search within the filtered entities.</p></li>
-<li><p>Returns top-K entities.</p></li>
+<li><p>Menyaring entitas yang sesuai dengan kondisi penyaringan yang dibawa dalam permintaan pencarian.</p></li>
+<li><p>Melakukan pencarian ANN di dalam entitas yang difilter.</p></li>
+<li><p>Mengembalikan entitas top-K.</p></li>
 </ul>
-<h3 id="Iterative-filtering" class="common-anchor-header">Iterative filtering</h3><p>The standard filtering process effectively narrows the search scope to a small range. However, overly complex filtering expressions may result in very high search latency. In such cases, iterative filtering can serve as an alternative, helping to reduce the workload of scalar filtering.</p>
+<h3 id="Iterative-filtering" class="common-anchor-header">Pemfilteran berulang</h3><p>Proses pemfilteran standar secara efektif mempersempit cakupan pencarian ke kisaran kecil. Namun, ekspresi pemfilteran yang terlalu rumit dapat menghasilkan latensi pencarian yang sangat tinggi. Dalam kasus seperti itu, pemfilteran berulang dapat berfungsi sebagai alternatif, membantu mengurangi beban kerja pemfilteran skalar.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" />
-    <span>Iterative Filtering</span>
-  </span>
-</p>
-<p>As illustrated in the diagram above, a search with iterative filtering performs the vector search in iterations. Each entity returned by the iterator undergoes scalar filtering, and this process continues until the specified topK results are achieved.</p>
-<p>This method significantly reduces the number of entities subjected to scalar filtering, making it especially beneficial for handling highly complex filtering expressions.</p>
-<p>However, it’s important to note that the iterator processes entities one at a time. This sequential approach can lead to longer processing times or potential performance issues, especially when a large number of entities are subjected to scalar filtering.</p>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" />
+   </span> <span class="img-wrapper"> <span>Pemfilteran Iteratif</span> </span></p>
+<p>Seperti yang diilustrasikan pada diagram di atas, pencarian dengan penyaringan berulang melakukan pencarian vektor dalam beberapa kali iterasi. Setiap entitas yang dikembalikan oleh iterator mengalami pemfilteran skalar, dan proses ini terus berlanjut hingga hasil topK yang ditentukan tercapai.</p>
+<p>Metode ini secara signifikan mengurangi jumlah entitas yang mengalami pemfilteran skalar, sehingga sangat bermanfaat untuk menangani ekspresi pemfilteran yang sangat kompleks.</p>
+<p>Namun, penting untuk dicatat bahwa iterator memproses entitas satu per satu. Pendekatan berurutan ini dapat menyebabkan waktu pemrosesan yang lebih lama atau potensi masalah kinerja, terutama ketika sejumlah besar entitas mengalami pemfilteran skalar.</p>
+<h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section demonstrates how to conduct a filtered search. Code snippets in this section assume  you already have the following entities in your collection. Each entity has four fields, namely <strong>id</strong>, <strong>vector</strong>, <strong>color</strong>, and <strong>likes</strong>.</p>
+    </button></h2><p>Bagian ini mendemonstrasikan cara melakukan pencarian yang difilter. Cuplikan kode di bagian ini mengasumsikan Anda telah memiliki entitas berikut dalam koleksi Anda. Setiap entitas memiliki empat bidang, yaitu <strong>id</strong>, <strong>vektor</strong>, <strong>warna</strong>, dan <strong>suka</strong>.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">165</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19886812562848388</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.06023560599112088</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6976963061752597</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2614474506242501</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.838729485096104</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">25</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -93,14 +89,9 @@ summary: >-
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">9</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.5718280481994695</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24070317428066512</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.3737913482606834</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.06726932177492717</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6980531615588608</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purple_4976&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">765</span><span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-standard-filtering" class="common-anchor-header">Search with standard filtering</h3><p>The following code snippets demonstrate a search with standard filtering, and the request in the following code snippet carries a filtering condition and several output fields.</p>
+<h3 id="Search-with-standard-filtering" class="common-anchor-header">Pencarian dengan pemfilteran standar</h3><p>Cuplikan kode berikut ini mendemonstrasikan pencarian dengan pemfilteran standar, dan permintaan pada cuplikan kode berikut ini membawa kondisi pemfilteran dan beberapa bidang keluaran.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -240,7 +231,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The filtering condition carried in the search request reads <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. It uses the and operator to include two conditions: the first one asks for entities that have a value starting with <code translate="no">red</code> in the <code translate="no">color</code> field, and the other asks for entities with a value greater than <code translate="no">50</code> in the <code translate="no">likes</code> field. There are only two entities meeting these requirements. With the top-K set to <code translate="no">3</code>, Milvus will calculate the distance between these two entities to the query vector and return them as the search results.</p>
+<p>Kondisi pemfilteran yang dibawa dalam permintaan pencarian berbunyi <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Ini menggunakan operator and untuk menyertakan dua kondisi: kondisi pertama meminta entitas yang memiliki nilai yang dimulai dengan <code translate="no">red</code> pada bidang <code translate="no">color</code>, dan kondisi kedua meminta entitas dengan nilai yang lebih besar dari <code translate="no">50</code> pada bidang <code translate="no">likes</code>. Hanya ada dua entitas yang memenuhi persyaratan ini. Dengan setelan top-K ke <code translate="no">3</code>, Milvus akan menghitung jarak antara dua entitas ini ke vektor kueri dan mengembalikannya sebagai hasil pencarian.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> 
@@ -262,15 +253,10 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on the operators you can use in metadata filtering, refer to <a href="/docs/filtering">Filtering</a>.</p>
-<h3 id="Search-with-iterative-filtering" class="common-anchor-header">Search with iterative filtering</h3><p>To conduct a filtered search with iterative filtering, you can do as follows:</p>
+<p>Untuk informasi lebih lanjut tentang operator yang dapat Anda gunakan dalam pemfilteran metadata, lihat <a href="/docs/id/filtering">Pemfilteran</a>.</p>
+<h3 id="Search-with-iterative-filtering" class="common-anchor-header">Mencari dengan pemfilteran berulang</h3><p>Untuk melakukan pencarian yang difilter dengan pemfilteran berulang, Anda dapat melakukan hal berikut:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(

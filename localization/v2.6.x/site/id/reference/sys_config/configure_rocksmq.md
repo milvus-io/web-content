@@ -2,9 +2,9 @@
 id: configure_rocksmq.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure rocksmq for Milvus.
+summary: Pelajari cara mengkonfigurasi rocksmq untuk Milvus.
 ---
-<h1 id="rocksmq-related-Configurations" class="common-anchor-header">rocksmq-related Configurations<button data-href="#rocksmq-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="rocksmq-related-Configurations" class="common-anchor-header">Konfigurasi terkait rocksmq<button data-href="#rocksmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,11 +19,11 @@ summary: Learn how to configure rocksmq for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>If you want to enable kafka, needs to comment the pulsar configs</p>
+    </button></h1><p>Jika Anda ingin mengaktifkan kafka, perlu mengomentari konfigurasi pulsar</p>
 <p>kafka:</p>
 <p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
-<p>saslPassword:</p>
+<p>saslKata Sandi:</p>
 <p>saslMechanisms:</p>
 <p>securityProtocol:</p>
 <p>ssl:</p>
@@ -56,17 +56,17 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     </button></h2><table id="rocksmq.path">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Prefix of the key to where Milvus stores data in RocksMQ.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      
-        <li>Set an easy-to-identify root key prefix for Milvus if etcd service already exists.</li>      </td>
+        <li>Awalan kunci tempat Milvus menyimpan data di RocksMQ.</li>      
+        <li>Perhatian: Mengubah parameter ini setelah menggunakan Milvus untuk jangka waktu tertentu akan mempengaruhi akses Anda ke data lama.</li>      
+        <li>Direkomendasikan untuk mengubah parameter ini sebelum memulai Milvus untuk pertama kalinya.</li>      
+        <li>Tetapkan awalan kunci root yang mudah diidentifikasi untuk Milvus jika layanan etcd sudah ada.</li>      </td>
       <td>/var/lib/milvus/rdb_data</td>
     </tr>
   </tbody>
@@ -89,13 +89,13 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     </button></h2><table id="rocksmq.lrucacheratio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        rocksdb cache memory ratio      </td>
+      <td>        rasio memori cache rocksdb      </td>
       <td>0.06</td>
     </tr>
   </tbody>
@@ -118,13 +118,13 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     </button></h2><table id="rocksmq.rocksmqPageSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of messages in each page in RocksMQ. Messages in RocksMQ are checked and cleared (when expired) in batch based on this parameters. Unit: Byte.      </td>
+      <td>        Ukuran maksimum pesan dalam setiap halaman di RocksMQ. Pesan di RocksMQ diperiksa dan dihapus (ketika kedaluwarsa) dalam batch berdasarkan parameter ini. Unit: Byte.      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -147,13 +147,13 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     </button></h2><table id="rocksmq.retentionTimeInMinutes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum retention time of acked messages in RocksMQ. Acked messages in RocksMQ are retained for the specified period of time and then cleared. Unit: Minute.      </td>
+      <td>        Waktu retensi maksimum pesan yang di-acked di RocksMQ. Pesan yang di-acked di RocksMQ akan disimpan selama jangka waktu yang ditentukan dan kemudian dihapus. Unit: Menit.      </td>
       <td>4320</td>
     </tr>
   </tbody>
@@ -176,13 +176,13 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     </button></h2><table id="rocksmq.retentionSizeInMB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum retention size of acked messages of each topic in RocksMQ. Acked messages in each topic are cleared if their size exceed this parameter. Unit: MB.      </td>
+      <td>        Ukuran retensi maksimum pesan yang di-ack dari setiap topik di RocksMQ. Pesan acked di setiap topik akan dihapus jika ukurannya melebihi parameter ini. Satuan MB.      </td>
       <td>8192</td>
     </tr>
   </tbody>
@@ -205,13 +205,13 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     </button></h2><table id="rocksmq.compactionInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Time interval to trigger rocksdb compaction to remove deleted data. Unit: Second      </td>
+      <td>        Interval waktu untuk memicu pemadatan rocksdb untuk menghapus data yang dihapus. Unit: Detik     </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -234,13 +234,13 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     </button></h2><table id="rocksmq.compressionTypes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        compaction compression type, only support use 0,7. 0 means not compress, 7 will use zstd. Length of types means num of rocksdb level.      </td>
+      <td>        jenis kompresi pemadatan, hanya mendukung penggunaan 0,7. 0 berarti tidak memadatkan, 7 akan menggunakan zstd. Panjang jenis berarti jumlah level batuandb.      </td>
       <td>0,0,7,7,7</td>
     </tr>
   </tbody>

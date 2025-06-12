@@ -1,14 +1,15 @@
 ---
 id: basic-operators.md
-title: Basic Operators
+title: Operator Dasar
 summary: >-
-  Milvus provides a rich set of basic operators to help you filter and query
-  data efficiently. These operators allow you to refine your search conditions
-  based on scalar fields, numeric calculations, logical conditions, and more.
-  Understanding how to use these operators is crucial for building precise
-  queries and maximizing the efficiency of your searches.
+  Milvus menyediakan serangkaian operator dasar yang kaya untuk membantu Anda
+  memfilter dan menanyakan data secara efisien. Operator-operator ini
+  memungkinkan Anda untuk mempersempit kondisi pencarian Anda berdasarkan bidang
+  skalar, perhitungan numerik, kondisi logika, dan banyak lagi. Memahami cara
+  menggunakan operator-operator ini sangat penting untuk membuat kueri yang
+  tepat dan memaksimalkan efisiensi pencarian Anda.
 ---
-<h1 id="Basic-Operators" class="common-anchor-header">Basic Operators<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
+<h1 id="Basic-Operators" class="common-anchor-header">Operator Dasar<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.</p>
-<h2 id="Comparison-operators" class="common-anchor-header">Comparison operators<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus menyediakan serangkaian operator dasar yang kaya untuk membantu Anda memfilter dan menanyakan data secara efisien. Operator-operator ini memungkinkan Anda untuk mempersempit kondisi pencarian Anda berdasarkan bidang skalar, perhitungan numerik, kondisi logika, dan banyak lagi. Memahami cara menggunakan operator-operator ini sangat penting untuk membuat kueri yang tepat dan memaksimalkan efisiensi pencarian Anda.</p>
+<h2 id="Comparison-operators" class="common-anchor-header">Operator perbandingan<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,34 +40,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Comparison operators are used to filter data based on equality, inequality, or size. They are applicable to numeric and text fields.</p>
-<h3 id="Supported-Comparison-Operators" class="common-anchor-header">Supported Comparison Operators:</h3><ul>
-<li><p><code translate="no">==</code> (Equal to)</p></li>
-<li><p><code translate="no">!=</code> (Not equal to)</p></li>
-<li><p><code translate="no">&gt;</code> (Greater than)</p></li>
-<li><p><code translate="no">&lt;</code> (Less than)</p></li>
-<li><p><code translate="no">&gt;=</code> (Greater than or equal to)</p></li>
-<li><p><code translate="no">&lt;=</code> (Less than or equal to)</p></li>
+    </button></h2><p>Operator perbandingan digunakan untuk memfilter data berdasarkan persamaan, ketidaksamaan, atau ukuran. Operator ini dapat digunakan untuk bidang numerik dan teks.</p>
+<h3 id="Supported-Comparison-Operators" class="common-anchor-header">Operator Perbandingan yang Didukung:</h3><ul>
+<li><p><code translate="no">==</code> (Sama dengan)</p></li>
+<li><p><code translate="no">!=</code> (Tidak sama dengan)</p></li>
+<li><p><code translate="no">&gt;</code> (Lebih besar dari)</p></li>
+<li><p><code translate="no">&lt;</code> (Kurang dari)</p></li>
+<li><p><code translate="no">&gt;=</code> (Lebih besar dari atau sama dengan)</p></li>
+<li><p><code translate="no">&lt;=</code> (Kurang dari atau sama dengan)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">Example 1: Filtering with Equal To (<code translate="no">==</code>)</h3><p>Assume you have a field named <code translate="no">status</code> and you want to find all entities where <code translate="no">status</code> is "active". You can use the equality operator <code translate="no">==</code>:</p>
+<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">Contoh 1: Memfilter dengan Sama Dengan (<code translate="no">==</code>)</h3><p>Asumsikan Anda memiliki sebuah bidang bernama <code translate="no">status</code> dan Anda ingin menemukan semua entitas di mana <code translate="no">status</code> "aktif". Anda dapat menggunakan operator penyetaraan <code translate="no">==</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">Example 2: Filtering with Not Equal To (<code translate="no">!=</code>)</h3><p>To find entities where <code translate="no">status</code> is not "inactive":</p>
+<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">Contoh 2: Memfilter dengan Tidak Sama Dengan (<code translate="no">!=</code>)</h3><p>Untuk menemukan entitas di mana <code translate="no">status</code> tidak "tidak aktif":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">Example 3: Filtering with Greater Than (<code translate="no">&gt;</code>)</h3><p>If you want to find all entities with an <code translate="no">age</code> greater than 30:</p>
+<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">Contoh 3: Memfilter dengan Lebih Besar Dari (<code translate="no">&gt;</code>)</h3><p>Jika Anda ingin menemukan semua entitas dengan <code translate="no">age</code> lebih besar dari 30:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">Example 4: Filtering with Less Than</h3><p>To find entities where <code translate="no">price</code> is less than 100:</p>
+<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">Contoh 4: Memfilter dengan Kurang Dari</h3><p>Untuk menemukan entitas dengan <code translate="no">price</code> kurang dari 100:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">Example 5: Filtering with Greater Than or Equal To (<code translate="no">&gt;=</code>)</h3><p>If you want to find all entities with <code translate="no">rating</code> greater than or equal to 4:</p>
+<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">Contoh 5: Memfilter dengan Lebih Besar Dari atau Sama Dengan (<code translate="no">&gt;=</code>)</h3><p>Jika Anda ingin menemukan semua entitas dengan <code translate="no">rating</code> lebih besar dari atau sama dengan 4:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Example 6: Filtering with Less Than or Equal To</h3><p>To find entities with <code translate="no">discount</code> less than or equal to 10%:</p>
+<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Contoh 6: Memfilter dengan Kurang Dari atau Sama Dengan</h3><p>Untuk menemukan entitas dengan <code translate="no">discount</code> kurang dari atau sama dengan 10%:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Range-operators" class="common-anchor-header">Range operators<button data-href="#Range-operators" class="anchor-icon" translate="no">
+<h2 id="Range-operators" class="common-anchor-header">Operator rentang<button data-href="#Range-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,29 +82,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Range operators help filter data based on specific sets or ranges of values.</p>
-<h3 id="Supported-Range-Operators" class="common-anchor-header">Supported Range Operators:</h3><ul>
-<li><p><code translate="no">IN</code>: Used to match values within a specific set or range.</p></li>
-<li><p><code translate="no">LIKE</code>: Used to match a pattern (mostly for text fields).</p></li>
+    </button></h2><p>Operator rentang membantu memfilter data berdasarkan set atau rentang nilai tertentu.</p>
+<h3 id="Supported-Range-Operators" class="common-anchor-header">Operator Rentang yang Didukung:</h3><ul>
+<li><p><code translate="no">IN</code>: Digunakan untuk mencocokkan nilai dalam set atau rentang tertentu.</p></li>
+<li><p><code translate="no">LIKE</code>: Digunakan untuk mencocokkan pola (sebagian besar untuk bidang teks).</p></li>
 </ul>
-<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Example 1: Using <code translate="no">IN</code> to Match Multiple Values</h3><p>If you want to find all entities where the <code translate="no">color</code> is either "red", "green", or "blue":</p>
+<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Contoh 1: Menggunakan <code translate="no">IN</code> untuk Mencocokkan Beberapa Nilai</h3><p>Jika Anda ingin menemukan semua entitas di mana <code translate="no">color</code> adalah "merah", "hijau", atau "biru":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This is useful when you want to check for membership in a list of values.</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Example 2: Using <code translate="no">LIKE</code> for Pattern Matching</h3><p>The <code translate="no">LIKE</code> operator is used for pattern matching in string fields. It can match substrings in different positions within the text: as a <strong>prefix</strong>, <strong>infix</strong>, or <strong>suffix</strong>. The <code translate="no">LIKE</code> operator uses the <code translate="no">%</code> symbol as a wildcard, which can match any number of characters (including zero).</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Prefix Match (Starts With)</h3><p>To perform a <strong>prefix</strong> match, where the string starts with a given pattern, you can place the pattern at the beginning and use <code translate="no">%</code> to match any characters following it. For example, to find all products whose <code translate="no">name</code> starts with "Prod":</p>
+<p>Ini berguna ketika Anda ingin memeriksa keanggotaan dalam daftar nilai.</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Contoh 2: Menggunakan <code translate="no">LIKE</code> untuk Pencocokan Pola</h3><p>Operator <code translate="no">LIKE</code> digunakan untuk pencocokan pola dalam bidang string. Operator ini dapat mencocokkan substring di berbagai posisi dalam teks: sebagai <strong>awalan</strong>, akhiran, atau <strong>akhiran</strong>. Operator <code translate="no">LIKE</code> menggunakan simbol <code translate="no">%</code> sebagai wildcard, yang dapat mencocokkan sejumlah karakter (termasuk nol).</p>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Pencocokan Awalan (Dimulai dengan)</h3><p>Untuk melakukan pencocokan <strong>awalan</strong>, di mana string dimulai dengan pola tertentu, Anda dapat menempatkan pola di awal dan menggunakan <code translate="no">%</code> untuk mencocokkan karakter apa pun yang mengikutinya. Misalnya, untuk menemukan semua produk yang <code translate="no">name</code> -nya dimulai dengan "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name starts with "Prod", such as "Product A", "Product B", etc.</p>
-<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">Suffix Match (Ends With)</h3><p>For a <strong>suffix</strong> match, where the string ends with a given pattern, place the <code translate="no">%</code> symbol at the beginning of the pattern. For example, to find all products whose <code translate="no">name</code> ends with "XYZ":</p>
+<p>Ini akan mencocokkan semua produk yang namanya dimulai dengan "Prod", seperti "Produk A", "Produk B", dll.</p>
+<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">Pencocokan Akhiran (Berakhiran dengan)</h3><p>Untuk pencocokan <strong>akhiran</strong>, di mana string diakhiri dengan pola tertentu, letakkan simbol <code translate="no">%</code> di awal pola. Misalnya, untuk menemukan semua produk yang <code translate="no">name</code> -nya diakhiri dengan "XYZ":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name ends with "XYZ", such as "ProductXYZ", "SampleXYZ", etc.</p>
-<h3 id="Infix-Match-Contains" class="common-anchor-header">Infix Match (Contains)</h3><p>To perform an <strong>infix</strong> match, where the pattern can appear anywhere in the string, you can place the <code translate="no">%</code> symbol at both the beginning and the end of the pattern. For example, to find all products whose <code translate="no">name</code> contains the word "Pro":</p>
+<p>Ini akan mencocokkan semua produk yang namanya diakhiri dengan "XYZ", seperti "ProductXYZ", "SampleXYZ", dll.</p>
+<h3 id="Infix-Match-Contains" class="common-anchor-header">Pencocokan Infiks (Berisi)</h3><p>Untuk melakukan pencocokan <strong>infix</strong>, di mana pola dapat muncul di mana saja dalam string, Anda dapat menempatkan simbol <code translate="no">%</code> di awal dan akhir pola. Misalnya, untuk menemukan semua produk yang <code translate="no">name</code> -nya mengandung kata "Pro":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name contains the substring "Pro", such as "Product", "ProLine", or "SuperPro".</p>
-<h2 id="Arithmetic-Operators" class="common-anchor-header">Arithmetic Operators<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
+<p>Ini akan mencocokkan semua produk yang namanya mengandung substring "Pro", seperti "Produk", "ProLine", atau "SuperPro".</p>
+<h2 id="Arithmetic-Operators" class="common-anchor-header">Operator Aritmatika<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -118,22 +119,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Arithmetic operators allow you to create conditions based on calculations involving numeric fields.</p>
-<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">Supported Arithmetic Operators:</h3><ul>
-<li><p><code translate="no">+</code> (Addition)</p></li>
-<li><p><code translate="no">-</code> (Subtraction)</p></li>
-<li><p><code translate="no">*</code> (Multiplication)</p></li>
-<li><p><code translate="no">/</code> (Division)</p></li>
+    </button></h2><p>Operator aritmatika memungkinkan Anda untuk membuat kondisi berdasarkan perhitungan yang melibatkan bidang numerik.</p>
+<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">Operator Aritmatika yang Didukung:</h3><ul>
+<li><p><code translate="no">+</code> (Penambahan)</p></li>
+<li><p><code translate="no">-</code> (Pengurangan)</p></li>
+<li><p><code translate="no">*</code> (Perkalian)</p></li>
+<li><p><code translate="no">/</code> (Pembagian)</p></li>
 <li><p><code translate="no">%</code> (Modulus)</p></li>
-<li><p><code translate="no">**</code> (Exponentiation)</p></li>
+<li><p><code translate="no">**</code> (Eksponensial)</p></li>
 </ul>
-<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Example 1: Using Modulus (<code translate="no">%</code>)</h3><p>To find entities where the <code translate="no">id</code> is an even number (i.e., divisible by 2):</p>
+<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Contoh 1: Menggunakan Modulus (<code translate="no">%</code>)</h3><p>Untuk menemukan entitas di mana <code translate="no">id</code> adalah bilangan genap (yaitu, habis dibagi 2):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">Example 2: Using Exponentiation (<code translate="no">**</code>)</h3><p>To find entities where <code translate="no">price</code> raised to the power of 2 is greater than 1000:</p>
+<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">Contoh 2: Menggunakan Eksponensial (<code translate="no">**</code>)</h3><p>Untuk menemukan entitas di mana <code translate="no">price</code> yang dipangkatkan dengan pangkat 2 lebih besar dari 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Logical-Operators" class="common-anchor-header">Logical Operators<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
+<h2 id="Logical-Operators" class="common-anchor-header">Operator Logika<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,22 +149,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Logical operators are used to combine multiple conditions into a more complex filter expression. These include <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code>.</p>
-<h3 id="Supported-Logical-Operators" class="common-anchor-header">Supported Logical Operators:</h3><ul>
-<li><p><code translate="no">AND</code>: Combines multiple conditions that must all be true.</p></li>
-<li><p><code translate="no">OR</code>: Combines conditions where at least one must be true.</p></li>
-<li><p><code translate="no">NOT</code>: Negates a condition.</p></li>
+    </button></h2><p>Operator logika digunakan untuk menggabungkan beberapa kondisi ke dalam ekspresi filter yang lebih kompleks. Operator ini termasuk <code translate="no">AND</code>, <code translate="no">OR</code>, dan <code translate="no">NOT</code>.</p>
+<h3 id="Supported-Logical-Operators" class="common-anchor-header">Operator Logika yang didukung:</h3><ul>
+<li><p><code translate="no">AND</code>: Menggabungkan beberapa kondisi yang semuanya harus benar.</p></li>
+<li><p><code translate="no">OR</code>: Menggabungkan kondisi di mana setidaknya satu kondisi harus benar.</p></li>
+<li><p><code translate="no">NOT</code>: Meniadakan sebuah kondisi.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">Example 1: Using <code translate="no">AND</code> to Combine Conditions</h3><p>To find all products where <code translate="no">price</code> is greater than 100 and <code translate="no">stock</code> is greater than 50:</p>
+<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">Contoh 1: Menggunakan <code translate="no">AND</code> untuk Menggabungkan Kondisi</h3><p>Untuk menemukan semua produk di mana <code translate="no">price</code> lebih besar dari 100 dan <code translate="no">stock</code> lebih besar dari 50:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">Example 2: Using <code translate="no">OR</code> to Combine Conditions</h3><p>To find all products where <code translate="no">color</code> is either “red” or "blue":</p>
+<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">Contoh 2: Menggunakan <code translate="no">OR</code> untuk Menggabungkan Kondisi</h3><p>Untuk menemukan semua produk di mana <code translate="no">color</code> adalah "merah" atau "biru":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Example 3: Using <code translate="no">NOT</code> to Exclude a Condition</h3><p>To find all products where <code translate="no">color</code> is not "green":</p>
+<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Contoh 3: Menggunakan <code translate="no">NOT</code> untuk Mengecualikan Kondisi</h3><p>Untuk menemukan semua produk di mana <code translate="no">color</code> tidak berwarna "hijau":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">IS NULL and IS NOT NULL Operators<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
+<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">Operator IS NULL dan IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,36 +179,36 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data).</p>
+    </button></h2><p>Operator <code translate="no">IS NULL</code> dan <code translate="no">IS NOT NULL</code> digunakan untuk memfilter bidang berdasarkan apakah bidang tersebut mengandung nilai null (tidak ada data).</p>
 <ul>
-<li><p><code translate="no">IS NULL</code>: Identifies entities where a specific field contains a null value, i.e., the value is absent or undefined.</p></li>
-<li><p><code translate="no">IS NOT NULL</code>: Identifies entities where a specific field contains any value other than null, meaning the field has a valid, defined value.</p></li>
+<li><p><code translate="no">IS NULL</code>: Mengidentifikasi entitas di mana bidang tertentu berisi nilai null, yaitu nilai tidak ada atau tidak terdefinisi.</p></li>
+<li><p><code translate="no">IS NOT NULL</code>: Mengidentifikasi entitas di mana bidang tertentu berisi nilai apa pun selain null, yang berarti bidang tersebut memiliki nilai yang valid dan terdefinisi.</p></li>
 </ul>
 <div class="alert note">
-<p>The operators are case-insensitive, so you can use <code translate="no">IS NULL</code> or <code translate="no">is null</code>, and <code translate="no">IS NOT NULL</code> or <code translate="no">is not null</code>.</p>
+<p>Operator ini tidak peka huruf besar-kecil, sehingga Anda bisa menggunakan <code translate="no">IS NULL</code> atau <code translate="no">is null</code>, dan <code translate="no">IS NOT NULL</code> atau <code translate="no">is not null</code>.</p>
 </div>
-<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Regular Scalar Fields with Null Values</h3><p>Milvus allows filtering on regular scalar fields, such as strings or numbers, with null values.</p>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Bidang Skalar Biasa dengan Nilai Nol</h3><p>Milvus memungkinkan pemfilteran pada bidang skalar biasa, seperti string atau angka, dengan nilai nol.</p>
 <div class="alert note">
-<p>An empty string <code translate="no">&quot;&quot;</code> is not treated as a null value for a <code translate="no">VARCHAR</code> field.</p>
+<p>String kosong <code translate="no">&quot;&quot;</code> tidak diperlakukan sebagai nilai nol untuk bidang <code translate="no">VARCHAR</code>.</p>
 </div>
-<p>To retrieve entities where the <code translate="no">description</code> field is null:</p>
+<p>Untuk mengambil entitas di mana bidang <code translate="no">description</code> bernilai null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">description</code> field is not null:</p>
+<p>Untuk mengambil entitas yang bidang <code translate="no">description</code> tidak bernilai null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">description</code> field is not null and the <code translate="no">price</code> field is higher than 10:</p>
+<p>Untuk mengambil entitas yang bidang <code translate="no">description</code> tidak bernilai null dan bidang <code translate="no">price</code> lebih tinggi dari 10:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">JSON Fields with Null Values</h3><p>Milvus allows filtering on JSON fields that contain null values. A JSON field is treated as null in the following ways:</p>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">Bidang JSON dengan Nilai Nol</h3><p>Milvus memungkinkan pemfilteran pada bidang JSON yang mengandung nilai null. Bidang JSON diperlakukan sebagai null dengan cara berikut ini:</p>
 <ul>
-<li><p>The entire JSON object is explicitly set to None (null), for example, <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
-<li><p>The JSON field itself is completely missing from the entity.</p></li>
+<li><p>Seluruh objek JSON secara eksplisit disetel ke None (null), misalnya, <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
+<li><p>Bidang JSON itu sendiri benar-benar hilang dari entitas.</p></li>
 </ul>
 <div class="alert note">
-<p>If some elements within a JSON object are null (e.g. individual keys), the field is still considered non-null. For example, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> is not treated as null, even though the <code translate="no">category</code> key is null.</p>
+<p>Jika beberapa elemen dalam objek JSON bernilai null (misalnya kunci individual), bidang tersebut masih dianggap non-null. Sebagai contoh, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> tidak dianggap sebagai null, meskipun key <code translate="no">category</code> adalah null.</p>
 </div>
-<p>To further illustrate how Milvus handles JSON fields with null values, consider the following sample data with a JSON field <code translate="no">metadata</code>:</p>
+<p>Untuk mengilustrasikan lebih lanjut bagaimana Milvus menangani field JSON dengan nilai null, perhatikan contoh data berikut ini dengan field JSON <code translate="no">metadata</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
@@ -230,8 +231,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where <code translate="no">metadata</code> is null</strong></p>
-<p>To find entities where the <code translate="no">metadata</code> field is either missing or explicitly set to None:</p>
+<p><strong>Contoh 1: Mengambil entitas di mana <code translate="no">metadata</code> bernilai null</strong></p>
+<p>Untuk menemukan entitas di mana bidang <code translate="no">metadata</code> tidak ada atau secara eksplisit disetel ke None:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -240,8 +241,8 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where <code translate="no">metadata</code> is not null</strong></p>
-<p>To find entities where the <code translate="no">metadata</code> field is not null:</p>
+<p><strong>Contoh 2: Mengambil entitas di mana <code translate="no">metadata</code> bukan null</strong></p>
+<p>Untuk menemukan entitas di mana bidang <code translate="no">metadata</code> tidak bernilai null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -250,15 +251,15 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">ARRAY Fields with Null Values</h3><p>Milvus allows filtering on ARRAY fields that contain null values. An ARRAY field is treated as null in the following ways:</p>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Bidang ARRAY dengan Nilai Nol</h3><p>Milvus memungkinkan pemfilteran pada bidang ARRAY yang berisi nilai null. Bidang ARRAY diperlakukan sebagai nilai null dengan cara berikut:</p>
 <ul>
-<li><p>The entire ARRAY field is explicitly set to None (null), for example, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
-<li><p>The ARRAY field is completely missing from the entity.</p></li>
+<li><p>Seluruh bidang ARRAY secara eksplisit disetel ke None (null), misalnya, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
+<li><p>Bidang ARRAY benar-benar hilang dari entitas.</p></li>
 </ul>
 <div class="alert note">
-<p>An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
+<p>Bidang ARRAY tidak dapat berisi nilai null parsial karena semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama. Untuk detailnya, lihat <a href="/docs/id/array_data_type.md">Bidang Array</a>.</p>
 </div>
-<p>To further illustrate how Milvus handles ARRAY fields with null values, consider the following sample data with an ARRAY field <code translate="no">tags</code>:</p>
+<p>Untuk mengilustrasikan lebih lanjut bagaimana Milvus menangani field ARRAY dengan nilai null, pertimbangkan contoh data berikut ini dengan field ARRAY <code translate="no">tags</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
@@ -279,8 +280,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where <code translate="no">tags</code> is null</strong></p>
-<p>To retrieve entities where the <code translate="no">tags</code> field is either missing or explicitly set to <code translate="no">None</code>:</p>
+<p><strong>Contoh 1: Mengambil entitas di mana <code translate="no">tags</code> bernilai null</strong></p>
+<p>Untuk mengambil entitas di mana bidang <code translate="no">tags</code> tidak ada atau secara eksplisit disetel ke <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -289,8 +290,8 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where <code translate="no">tags</code> is not null</strong></p>
-<p>To retrieve entities where the <code translate="no">tags</code> field is not null:</p>
+<p><strong>Contoh 2: Mengambil entitas di mana <code translate="no">tags</code> tidak bernilai null</strong></p>
+<p>Untuk mengambil entitas di mana bidang <code translate="no">tags</code> tidak bernilai null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -299,7 +300,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Tips on Using Basic Operators with JSON and ARRAY Fields<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Tips Menggunakan Operator Dasar dengan Bidang JSON dan ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -314,14 +315,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.</p>
-<p>For example, if you have a <code translate="no">product</code> field that contains multiple keys like <code translate="no">price</code>, <code translate="no">model</code>, and <code translate="no">tags</code>, always reference the key directly:</p>
+    </button></h2><p>Meskipun operator dasar di Milvus bersifat serbaguna dan dapat diterapkan pada bidang skalar, operator ini juga dapat digunakan secara efektif dengan kunci dan indeks di bidang JSON dan ARRAY.</p>
+<p>Sebagai contoh, jika Anda memiliki bidang <code translate="no">product</code> yang berisi beberapa kunci seperti <code translate="no">price</code>, <code translate="no">model</code>, dan <code translate="no">tags</code>, selalu rujuk kunci secara langsung:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To find records where the first temperature in an array of recorded temperatures exceeds a certain value, use:</p>
+<p>Untuk menemukan catatan di mana suhu pertama dalam larik suhu yang direkam melebihi nilai tertentu, gunakan:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">Kesimpulan<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -336,4 +337,4 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.</p>
+    </button></h2><p>Milvus menawarkan berbagai operator dasar yang memberikan fleksibilitas dalam memfilter dan menanyakan data Anda. Dengan menggabungkan operator perbandingan, rentang, aritmatika, dan logika, Anda dapat membuat ekspresi filter yang kuat untuk mempersempit hasil pencarian dan mengambil data yang Anda butuhkan secara efisien.</p>

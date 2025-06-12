@@ -1,16 +1,16 @@
 ---
 id: binary-vector.md
-title: Binary Vector
+title: Vektor Biner
 summary: >-
-  Binary vectors are a special form of data representation that convert
-  traditional high-dimensional floating-point vectors into binary vectors
-  containing only 0s and 1s. This transformation not only compresses the size of
-  the vector but also reduces storage and computational costs while retaining
-  semantic information. When precision for non-critical features is not
-  essential, binary vectors can effectively maintain most of the integrity and
-  utility of the original floating-point vectors.
+  Vektor biner adalah bentuk khusus representasi data yang mengubah vektor
+  floating-point berdimensi tinggi tradisional menjadi vektor biner yang hanya
+  berisi 0 dan 1. Transformasi ini tidak hanya memampatkan ukuran vektor tetapi
+  juga mengurangi biaya penyimpanan dan komputasi dengan tetap mempertahankan
+  informasi semantik. Ketika ketepatan untuk fitur yang tidak penting tidak
+  diperlukan, vektor biner dapat secara efektif mempertahankan sebagian besar
+  integritas dan kegunaan vektor floating-point asli.
 ---
-<h1 id="Binary-Vector" class="common-anchor-header">Binary Vector<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
+<h1 id="Binary-Vector" class="common-anchor-header">Vektor Biner<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,9 +25,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Binary vectors are a special form of data representation that convert traditional high-dimensional floating-point vectors into binary vectors containing only 0s and 1s. This transformation not only compresses the size of the vector but also reduces storage and computational costs while retaining semantic information. When precision for non-critical features is not essential, binary vectors can effectively maintain most of the integrity and utility of the original floating-point vectors.</p>
-<p>Binary vectors have a wide range of applications, particularly in situations where computational efficiency and storage optimization are crucial. In large-scale AI systems, such as search engines or recommendation systems, real-time processing of massive amounts of data is key. By reducing the size of the vectors, binary vectors help lower latency and computational costs without significantly sacrificing accuracy. Additionally, binary vectors are useful in resource-constrained environments, such as mobile devices and embedded systems, where memory and processing power are limited. Through the use of binary vectors, complex AI functions can be implemented in these restricted settings while maintaining high performance.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Vektor biner adalah bentuk khusus representasi data yang mengubah vektor floating-point berdimensi tinggi tradisional menjadi vektor biner yang hanya berisi 0 dan 1. Transformasi ini tidak hanya memampatkan ukuran vektor tetapi juga mengurangi biaya penyimpanan dan komputasi dengan tetap mempertahankan informasi semantik. Ketika ketepatan untuk fitur yang tidak penting tidak diperlukan, vektor biner dapat secara efektif mempertahankan sebagian besar integritas dan kegunaan vektor floating-point asli.</p>
+<p>Vektor biner memiliki berbagai macam aplikasi, terutama dalam situasi di mana efisiensi komputasi dan pengoptimalan penyimpanan sangat penting. Dalam sistem AI berskala besar, seperti mesin pencari atau sistem rekomendasi, pemrosesan data dalam jumlah besar secara real-time adalah kuncinya. Dengan mengurangi ukuran vektor, vektor biner membantu menurunkan latensi dan biaya komputasi tanpa mengorbankan akurasi secara signifikan. Selain itu, vektor biner berguna di lingkungan dengan sumber daya terbatas, seperti perangkat seluler dan sistem tertanam, di mana memori dan daya pemrosesan terbatas. Melalui penggunaan vektor biner, fungsi AI yang kompleks dapat diimplementasikan dalam pengaturan terbatas ini dengan tetap mempertahankan kinerja yang tinggi.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,33 +42,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Binary vectors are a method of encoding complex objects (like images, text, or audio) into fixed-length binary values. In Milvus, binary vectors are typically represented as bit arrays or byte arrays. For example, an 8-dimensional binary vector can be represented as <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code>.</p>
-<p>The diagram below shows how binary vectors represent the presence of keywords in text content. In this example, a 10-dimensional binary vector is used to represent two different texts (<strong>Text 1</strong> and <strong>Text 2</strong>), where each dimension corresponds to a word in the vocabulary: 1 indicates the presence of the word in the text, while 0 indicates its absence.</p>
+    </button></h2><p>Vektor biner adalah metode pengkodean objek kompleks (seperti gambar, teks, atau audio) ke dalam nilai biner dengan panjang tetap. Dalam Milvus, vektor biner biasanya direpresentasikan sebagai array bit atau array byte. Sebagai contoh, vektor biner 8 dimensi dapat direpresentasikan sebagai <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code>.</p>
+<p>Diagram di bawah ini menunjukkan bagaimana vektor biner merepresentasikan keberadaan kata kunci dalam konten teks. Dalam contoh ini, vektor biner 10 dimensi digunakan untuk merepresentasikan dua teks yang berbeda<strong>(Teks 1</strong> dan <strong>Teks 2</strong><strong>)</strong>, di mana setiap dimensi sesuai dengan kata dalam kosakata: 1 menunjukkan keberadaan kata tersebut dalam teks, sedangkan 0 menunjukkan ketidakhadirannya.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
-    <span>Binary Vector</span>
-  </span>
-</p>
-<p>Binary vectors have the following characteristics:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   </span> <span class="img-wrapper"> <span>Vektor Biner</span> </span></p>
+<p>Vektor biner memiliki karakteristik sebagai berikut:</p>
 <ul>
-<li><p><strong>Efficient Storage:</strong> Each dimension requires only 1 bit of storage, significantly reducing storage space.</p></li>
-<li><p><strong>Fast Computation:</strong> Similarity between vectors can be quickly calculated using bitwise operations like XOR.</p></li>
-<li><p><strong>Fixed Length:</strong> The length of the vector remains constant regardless of the original text length, making indexing and retrieval easier.</p></li>
-<li><p><strong>Simple and Intuitive:</strong> Directly reflects the presence of keywords, making it suitable for certain specialized retrieval tasks.</p></li>
+<li><p><strong>Penyimpanan yang efisien:</strong> Setiap dimensi hanya membutuhkan 1 bit penyimpanan, sehingga secara signifikan mengurangi ruang penyimpanan.</p></li>
+<li><p><strong>Komputasi Cepat:</strong> Kemiripan antara vektor dapat dengan cepat dihitung menggunakan operasi bitwise seperti XOR.</p></li>
+<li><p><strong>Panjang Tetap:</strong> Panjang vektor tetap konstan terlepas dari panjang teks asli, sehingga memudahkan pengindeksan dan pengambilan.</p></li>
+<li><p><strong>Sederhana dan Intuitif:</strong> Secara langsung mencerminkan keberadaan kata kunci, sehingga cocok untuk tugas pengambilan khusus tertentu.</p></li>
 </ul>
-<p>Binary vectors can be generated through various methods. In text processing, predefined vocabularies can be used to set corresponding bits based on word presence. For image processing, perceptual hashing algorithms (like <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) can generate binary features of images. In machine learning applications, model outputs can be binarized to obtain binary vector representations.</p>
-<p>After binary vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.</p>
+<p>Vektor biner dapat dihasilkan melalui berbagai metode. Dalam pemrosesan teks, kosakata yang telah ditentukan sebelumnya dapat digunakan untuk mengatur bit yang sesuai berdasarkan keberadaan kata. Untuk pemrosesan gambar, algoritme hashing perseptual (seperti <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) dapat menghasilkan fitur biner gambar. Dalam aplikasi pembelajaran mesin, keluaran model dapat dibinerisasi untuk mendapatkan representasi vektor biner.</p>
+<p>Setelah vektorisasi biner, data dapat disimpan di Milvus untuk manajemen dan pengambilan vektor. Diagram di bawah ini menunjukkan proses dasarnya.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
-    <span>Use Binary Vector</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   </span> <span class="img-wrapper"> <span>Menggunakan Vektor Biner</span> </span></p>
 <div class="alert note">
-<p>Although binary vectors excel in specific scenarios, they have limitations in their expressive capability, making it difficult to capture complex semantic relationships. Therefore, in real-world scenarios, binary vectors are often used alongside other vector types to balance efficiency and expressiveness. For more information, refer to <a href="/docs/dense-vector.md">Dense Vector</a> and <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
+<p>Meskipun vektor biner unggul dalam skenario tertentu, vektor biner memiliki keterbatasan dalam kemampuan ekspresifnya, sehingga sulit untuk menangkap hubungan semantik yang kompleks. Oleh karena itu, dalam skenario dunia nyata, vektor biner sering digunakan bersama jenis vektor lain untuk menyeimbangkan efisiensi dan ekspresifitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/dense-vector.md">Vektor Padat</a> dan <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</p>
 </div>
-<h2 id="Use-binary-vectors" class="common-anchor-header">Use binary vectors<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-binary-vectors" class="common-anchor-header">Menggunakan vektor biner<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,18 +79,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Add vector field</h3><p>To use binary vectors in Milvus, first define a vector field for storing binary vectors when creating a collection. This process includes:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Menambahkan bidang vektor</h3><p>Untuk menggunakan vektor biner di Milvus, pertama-tama tentukan bidang vektor untuk menyimpan vektor biner saat membuat koleksi. Proses ini meliputi:</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported binary vector data type, i.e., <code translate="no">BINARY_VECTOR</code>.</p></li>
-<li><p>Specifying the vector’s dimensions using the <code translate="no">dim</code> parameter. Note that <code translate="no">dim</code> must be a multiple of 8 as binary vectors must be converted into a byte array when inserting. Every 8 boolean values (0 or 1) will be packed into 1 byte. For example, if <code translate="no">dim=128</code>, a 16-byte array is required for insertion.</p></li>
+<li><p>Mengatur <code translate="no">datatype</code> ke tipe data vektor biner yang didukung, misalnya, <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>Menentukan dimensi vektor menggunakan parameter <code translate="no">dim</code>. Perhatikan bahwa <code translate="no">dim</code> harus merupakan kelipatan 8 karena vektor biner harus dikonversi menjadi larik byte saat memasukkan. Setiap 8 nilai boolean (0 atau 1) akan dikemas ke dalam 1 byte. Sebagai contoh, jika <code translate="no">dim=128</code>, array 16 byte diperlukan untuk penyisipan.</p></li>
 </ol>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -205,15 +196,10 @@ schema.WithField(entity.NewField().
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, a vector field named <code translate="no">binary_vector</code> is added for storing binary vectors. The data type of this field is <code translate="no">BINARY_VECTOR</code>, with a dimension of 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Set index params for vector field</h3><p>To speed up searches, an index must be created for the binary vector field. Indexing can significantly enhance the retrieval efficiency of large-scale vector data.</p>
+<p>Pada contoh ini, sebuah bidang vektor bernama <code translate="no">binary_vector</code> ditambahkan untuk menyimpan vektor biner. Tipe data dari field ini adalah <code translate="no">BINARY_VECTOR</code>, dengan dimensi 128.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor</h3><p>Untuk mempercepat pencarian, indeks harus dibuat untuk bidang vektor biner. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -256,17 +242,12 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above, an index named <code translate="no">binary_vector_index</code> is created for the <code translate="no">binary_vector</code> field, using the <code translate="no">AUTOINDEX</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">HAMMING</code>, indicating that Hamming distance is used for similarity measurement.</p>
-<p>Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.</p>
-<p>Additionally, Milvus supports other similarity metrics for binary vectors. For more information, refer to <a href="/docs/metric.md">Metric Types</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Create collection</h3><p>Once the binary vector and index settings are complete, create a collection that contains binary vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
+<p>Pada contoh di atas, indeks bernama <code translate="no">binary_vector_index</code> dibuat untuk bidang <code translate="no">binary_vector</code>, menggunakan jenis indeks <code translate="no">AUTOINDEX</code>. <code translate="no">metric_type</code> disetel ke <code translate="no">HAMMING</code>, yang menunjukkan bahwa jarak Hamming digunakan untuk pengukuran kemiripan.</p>
+<p>Milvus menyediakan berbagai jenis indeks untuk pengalaman pencarian vektor yang lebih baik. AUTOINDEX adalah jenis indeks khusus yang dirancang untuk memperlancar kurva pembelajaran pencarian vektor. Ada banyak jenis indeks yang tersedia untuk Anda pilih. Untuk detailnya, lihat xxx.</p>
+<p>Selain itu, Milvus mendukung metrik kemiripan lainnya untuk vektor biner. Untuk informasi lebih lanjut, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi</h3><p>Setelah pengaturan vektor biner dan indeks selesai, buatlah sebuah koleksi yang berisi vektor-vektor biner. Contoh di bawah ini menggunakan metode <code translate="no">create_collection</code> untuk membuat koleksi bernama <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -317,15 +298,10 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>After creating the collection, use the <code translate="no">insert</code> method to add data containing binary vectors. Note that binary vectors should be provided in the form of a byte array, where each byte represents 8 boolean values.</p>
-<p>For example, for a 128-dimensional binary vector, a 16-byte array is required (since 128 bits ÷ 8 bits/byte = 16 bytes). Below is an example code for inserting data:</p>
+<h3 id="Insert-data" class="common-anchor-header">Menyisipkan data</h3><p>Setelah membuat koleksi, gunakan metode <code translate="no">insert</code> untuk menambahkan data yang berisi vektor biner. Perhatikan bahwa vektor biner harus disediakan dalam bentuk larik byte, di mana setiap byte mewakili 8 nilai boolean.</p>
+<p>Sebagai contoh, untuk vektor biner 128 dimensi, diperlukan larik 16 byte (karena 128 bit ÷ 8 bit/byte = 16 byte). Di bawah ini adalah contoh kode untuk memasukkan data:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_bool_list_to_bytes</span>(<span class="hljs-params">bool_list</span>):
     <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(bool_list) % <span class="hljs-number">8</span> != <span class="hljs-number">0</span>:
         <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;The length of a boolean list must be a multiple of 8&quot;</span>)
@@ -417,15 +393,10 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Perform similarity search</h3><p>Similarity search is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search using binary vectors, prepare the query vector and search parameters, then call the <code translate="no">search</code> method.</p>
-<p>During search operations, binary vectors must also be provided in the form of a byte array. Ensure that the dimensionality of the query vector matches the dimension specified when defining <code translate="no">dim</code> and that every 8 boolean values are converted into 1 byte.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Melakukan pencarian kemiripan</h3><p>Pencarian kemiripan adalah salah satu fitur inti dari Milvus, yang memungkinkan Anda untuk dengan cepat menemukan data yang paling mirip dengan vektor kueri berdasarkan jarak antar vektor. Untuk melakukan pencarian kemiripan menggunakan vektor biner, siapkan vektor kueri dan parameter pencarian, lalu panggil metode <code translate="no">search</code>.</p>
+<p>Selama operasi pencarian, vektor biner juga harus disediakan dalam bentuk larik byte. Pastikan dimensi vektor kueri sesuai dengan dimensi yang ditentukan saat mendefinisikan <code translate="no">dim</code> dan setiap 8 nilai boolean diubah menjadi 1 byte.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -523,4 +494,4 @@ curl --request POST \
     \&quot;outputFields\&quot;: [\&quot;pk\&quot;]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic ANN Search</a>.</p>
+<p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/single-vector-search.md">Pencarian ANN Dasar</a>.</p>

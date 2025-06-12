@@ -1,12 +1,12 @@
 ---
 id: use-json-fields.md
-title: JSON Field
+title: Bidang JSON
 summary: >-
-  A JSON field is a scalar field that stores additional information along with
-  vector embeddings, in key-value pairs. Here's an example of how data is stored
-  in JSON format:
+  Bidang JSON adalah bidang skalar yang menyimpan informasi tambahan bersama
+  dengan penyematan vektor, dalam pasangan kunci-nilai. Berikut adalah contoh
+  bagaimana data disimpan dalam format JSON:
 ---
-<h1 id="JSON-Field" class="common-anchor-header">JSON Field<button data-href="#JSON-Field" class="anchor-icon" translate="no">
+<h1 id="JSON-Field" class="common-anchor-header">Bidang JSON<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> field is a scalar field that stores additional information along with vector embeddings, in key-value pairs. Here’s an example of how data is stored in JSON format:</p>
+    </button></h1><p>Bidang <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> adalah bidang skalar yang menyimpan informasi tambahan bersama dengan penyematan vektor, dalam pasangan kunci-nilai. Berikut adalah contoh bagaimana data disimpan dalam format JSON:</p>
 <pre><code translate="no" class="language-python">{
   <span class="hljs-string">&quot;metadata&quot;</span>: {
     <span class="hljs-string">&quot;product_info&quot;</span>: {
@@ -34,7 +34,7 @@ summary: >-
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Batas<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,19 +50,19 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Field Size</strong>: JSON fields are limited to 65,536 bytes in size.</p></li>
-<li><p><strong>Nested Dictionaries</strong>: Any nested dictionaries within JSON field values are treated as plain strings for storage.</p></li>
-<li><p><strong>Default Values</strong>: JSON fields do not support default values. However, you can set the <code translate="no">nullable</code> attribute to <code translate="no">True</code> to allow null values. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p></li>
-<li><p><strong>Type Matching</strong>: If a JSON field’s key value is an integer or float, it can only be compared (via expression filters) with another numeric key of the same type.</p></li>
-<li><p><strong>Naming</strong>: When naming JSON keys, it is recommended to use only letters, numbers, and underscores. Using other characters may cause issues when filtering or searching.</p></li>
-<li><p><strong>String Handling</strong>: Milvus stores string values in JSON fields as entered, without semantic conversion. For example:</p>
+<li><p><strong>Ukuran Bidang</strong>: Bidang JSON dibatasi hingga 65.536 byte.</p></li>
+<li><p><strong>Kamus Bersarang</strong>: Setiap kamus bersarang dalam nilai bidang JSON diperlakukan sebagai string biasa untuk penyimpanan.</p></li>
+<li><p><strong>Nilai Default</strong>: Bidang JSON tidak mendukung nilai default. Namun, Anda dapat menyetel atribut <code translate="no">nullable</code> ke <code translate="no">True</code> untuk mengizinkan nilai null. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
+<li><p><strong>Pencocokan Jenis</strong>: Jika nilai kunci bidang JSON adalah bilangan bulat atau float, nilai tersebut hanya dapat dibandingkan (melalui filter ekspresi) dengan kunci numerik lain dengan jenis yang sama.</p></li>
+<li><p><strong>Penamaan</strong>: Ketika menamai kunci JSON, disarankan untuk hanya menggunakan huruf, angka, dan garis bawah. Menggunakan karakter lain dapat menyebabkan masalah ketika melakukan penyaringan atau pencarian.</p></li>
+<li><p><strong>Penanganan String</strong>: Milvus menyimpan nilai string dalam bidang JSON seperti yang dimasukkan, tanpa konversi semantik. Sebagai contoh</p>
 <ul>
-<li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, and <code translate="no">&quot;a\\&quot;b&quot;</code> are stored exactly as they are.</p></li>
-<li><p><code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid.</p></li>
+<li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, dan <code translate="no">&quot;a\\&quot;b&quot;</code> disimpan persis seperti apa adanya.</p></li>
+<li><p><code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap tidak valid.</p></li>
 </ul></li>
-<li><p><strong>JSON Indexing</strong>: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to <a href="/docs/use-json-fields.md#Considerations-on-JSON-indexing">Considerations on JSON indexing</a>.</p></li>
+<li><p><strong>Pengindeksan JSON</strong>: Saat mengindeks bidang JSON, Anda dapat menentukan satu atau beberapa jalur di bidang JSON untuk mempercepat pemfilteran. Setiap jalur tambahan akan meningkatkan biaya pengindeksan, jadi rencanakan strategi pengindeksan Anda dengan hati-hati. Untuk pertimbangan lebih lanjut tentang pengindeksan bidang JSON, lihat <a href="/docs/id/use-json-fields.md#Considerations-on-JSON-indexing">Pertimbangan pengindeksan JSON</a>.</p></li>
 </ul>
-<h2 id="Add-JSON-field" class="common-anchor-header">Add JSON field<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Add-JSON-field" class="common-anchor-header">Menambahkan bidang JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,14 +77,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To add this JSON field <code translate="no">metadata</code> to your collection schema, use <code translate="no">DataType.JSON</code>. The example below defines a JSON field <code translate="no">metadata</code> that allows null values:</p>
+    </button></h2><p>Untuk menambahkan bidang JSON <code translate="no">metadata</code> ke skema koleksi Anda, gunakan <code translate="no">DataType.JSON</code>. Contoh di bawah ini mendefinisikan bidang JSON <code translate="no">metadata</code> yang mengizinkan nilai nol:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -224,11 +219,11 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Set <code translate="no">enable_dynamic_fields=True</code> if you need to insert additional, undefined fields in the future.</p></li>
-<li><p>Use <code translate="no">nullable=True</code> to allow missing or null JSON objects.</p></li>
+<li><p>Tetapkan <code translate="no">enable_dynamic_fields=True</code> jika Anda perlu menyisipkan bidang tambahan yang tidak terdefinisi di masa mendatang.</p></li>
+<li><p>Gunakan <code translate="no">nullable=True</code> untuk mengizinkan objek JSON yang hilang atau nol.</p></li>
 </ul>
 </div>
-<h2 id="Set-index-params" class="common-anchor-header">Set index params<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Mengatur parameter indeks<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -243,20 +238,15 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Indexing helps Milvus quickly filter or search across large volumes of data. In Milvus, indexing is:</p>
+    </button></h2><p>Pengindeksan membantu Milvus dengan cepat memfilter atau mencari di seluruh volume data yang besar. Di Milvus, pengindeksan adalah:</p>
 <ul>
-<li><p><strong>Mandatory</strong> for vector fields (to efficiently run similarity searches).</p></li>
-<li><p><strong>Optional</strong> for JSON fields (to speed up scalar filters on specific JSON paths).</p></li>
+<li><p><strong>Wajib</strong> untuk bidang vektor (untuk menjalankan pencarian kemiripan secara efisien).</p></li>
+<li><p><strong>Opsional</strong> untuk bidang JSON (untuk mempercepat penyaringan skalar pada jalur JSON tertentu).</p></li>
 </ul>
-<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Index a JSON field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>By default, JSON fields are not indexed, so any filter queries (e.g., <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) must scan all rows. If you want to accelerate queries on specific paths within the <code translate="no">metadata</code> field, you can create an <strong>inverted index</strong> on each path you care about.</p>
-<p>In this example, we will create two indexes on different paths inside the JSON field <code translate="no">metadata</code>:</p>
+<h3 id="Index-a-JSON-field--Milvus-2510+" class="common-anchor-header">Mengindeks bidang JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.10+</span></h3><p>Secara default, bidang JSON tidak diindeks, sehingga kueri filter apa pun (misalnya, <code translate="no">metadata[&quot;price&quot;] &lt; 100</code>) harus memindai semua baris. Jika Anda ingin mempercepat kueri pada jalur tertentu di dalam bidang <code translate="no">metadata</code>, Anda dapat membuat <strong>indeks terbalik</strong> pada setiap jalur yang Anda inginkan.</p>
+<p>Dalam contoh ini, kita akan membuat dua indeks pada jalur yang berbeda di dalam bidang JSON <code translate="no">metadata</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string</span>
@@ -374,70 +364,63 @@ curl --request POST \
 <table>
    <tr>
      <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Example Value</p></th>
+     <th><p>Deskripsi</p></th>
+     <th><p>Contoh Nilai</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">field_name</code></p></td>
-     <td><p>Name of the JSON field in your schema.</p></td>
+     <td><p>Nama bidang JSON di dalam skema Anda.</p></td>
      <td><p><code translate="no">"metadata"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Index type to create; currently only <code translate="no">INVERTED</code> is supported for JSON path indexing.</p></td>
+     <td><p>Jenis indeks yang akan dibuat; saat ini hanya <code translate="no">INVERTED</code> yang didukung untuk pengindeksan jalur JSON.</p></td>
      <td><p><code translate="no">"INVERTED"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
+     <td><p>(Opsional) Nama indeks khusus. Tentukan nama yang berbeda jika Anda membuat beberapa indeks pada bidang JSON yang sama.</p></td>
      <td><p><code translate="no">"json_index_1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code translate="no">metadata["product_info"]["category"]</code> or <code translate="no">metadata["tags"][0]</code>).
- If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
+     <td><p>Menentukan jalur JSON mana yang akan diindeks. Anda dapat menargetkan kunci bersarang, posisi larik, atau keduanya (misalnya, <code translate="no">metadata["product_info"]["category"]</code> atau <code translate="no">metadata["tags"][0]</code>). Jika jalur tidak ada atau elemen larik tidak ada untuk baris tertentu, maka baris tersebut akan dilewati begitu saja saat pengindeksan, dan tidak ada kesalahan yang akan muncul.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
+     <td><p>Tipe data yang akan digunakan Milvus untuk meng-cast nilai JSON yang diekstrak ketika membangun indeks. Nilai yang valid:</p>
 <ul>
-<li><code translate="no">"bool"</code> or <code translate="no">"BOOL"</code></li>
-<li><code translate="no">"double"</code> or <code translate="no">"DOUBLE"</code></li>
-<li><code translate="no">"varchar"</code> or <code translate="no">"VARCHAR"</code>
-<strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If type casting fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</li>
+<li><code translate="no">"bool"</code> atau <code translate="no">"BOOL"</code></li>
+<li><code translate="no">"double"</code> atau <code translate="no">"DOUBLE"</code></li>
+<li><code translate="no">"varchar"</code> atau <code translate="no">"VARCHAR"</code><strong>Catatan</strong>: Untuk nilai bilangan bulat, Milvus secara internal menggunakan double untuk indeks. Bilangan bulat besar di atas 2^53 akan kehilangan presisi. Jika pengecekan tipe gagal (karena ketidakcocokan tipe), tidak ada kesalahan yang dilemparkan, dan nilai baris tersebut tidak diindeks.</li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<h4 id="Considerations-on-JSON-indexing" class="common-anchor-header">Considerations on JSON indexing</h4><ul>
-<li><p><strong>Filtering logic</strong>:</p>
+<h4 id="Considerations-on-JSON-indexing" class="common-anchor-header">Pertimbangan tentang pengindeksan JSON</h4><ul>
+<li><p><strong>Logika pemfilteran</strong>:</p>
 <ul>
-<li><p>If you <strong>create a double-type index</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.</p></li>
-<li><p>If you <strong>create a varchar-type index</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.</p></li>
-<li><p><strong>Boolean</strong> indexing behaves similarly to varchar-type.</p></li>
+<li><p>Jika Anda <strong>membuat indeks tipe ganda</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), hanya kondisi filter tipe numerik yang dapat menggunakan indeks tersebut. Jika filter membandingkan indeks ganda dengan kondisi non-numerik, Milvus akan kembali ke pencarian brute force.</p></li>
+<li><p>Jika Anda <strong>membuat indeks tipe varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), hanya kondisi filter tipe string yang dapat menggunakan indeks tersebut. Jika tidak, Milvus akan kembali ke pencarian brute force.</p></li>
+<li><p>Pengindeksan<strong>boolean</strong> berperilaku serupa dengan tipe varchar.</p></li>
 </ul></li>
-<li><p><strong>Term expressions</strong>:</p>
+<li><p><strong>Ekspresi istilah</strong>:</p>
 <ul>
-<li>You can use <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. However, the index works only for scalar values stored under that path. If <code translate="no">json[&quot;field&quot;]</code> is an array, the query falls back to brute force (array-type indexing is not yet supported).</li>
+<li>Anda dapat menggunakan <code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code>. Namun, indeks hanya bekerja untuk nilai skalar yang disimpan di bawah jalur tersebut. Jika <code translate="no">json[&quot;field&quot;]</code> adalah larik, kueri akan kembali ke pengindeksan brute force (pengindeksan tipe larik belum didukung).</li>
 </ul></li>
-<li><p><strong>Numeric precision</strong>:</p>
+<li><p><strong>Ketepatan numerik</strong>:</p>
 <ul>
-<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>53</mn></msup></mrow><annotation encoding="application/x-tex">2^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, it loses precision, and queries on those out-of-range values may not match exactly.</li>
+<li>Secara internal, Milvus mengindeks semua bidang numerik sebagai ganda. Jika nilai numerik melebihi <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, maka nilai tersebut akan kehilangan presisi, dan kueri pada nilai di luar rentang tersebut mungkin tidak akan cocok dengan tepat.</li>
 </ul></li>
-<li><p><strong>Data integrity</strong>:</p>
+<li><p><strong>Integritas data</strong>:</p>
 <ul>
-<li>Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key <code translate="no">&quot;k&quot;</code> while others store a number), some rows will not be indexed.</li>
+<li>Milvus tidak mem-parsing atau mengubah kunci JSON di luar casting yang Anda tentukan. Jika data sumber tidak konsisten (misalnya, beberapa baris menyimpan string untuk kunci <code translate="no">&quot;k&quot;</code> sementara yang lain menyimpan angka), beberapa baris tidak akan diindeks.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">Index a vector field</h3><p>The following example creates an index on the vector field <code translate="no">embedding</code>, using the <code translate="no">AUTOINDEX</code> index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to <a href="/docs/index-explained.md">Index Explained</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Mengindeks bidang vektor</h3><p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code>, menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe datanya. Anda juga dapat menyesuaikan tipe indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 <span class="hljs-comment"># Index `embedding` with AUTOINDEX and specify similarity metric type</span>
@@ -478,7 +461,7 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Create collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -493,14 +476,9 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and index are defined, create a collection that includes the JSON field.</p>
+    </button></h2><p>Setelah skema dan indeks ditentukan, buatlah koleksi yang menyertakan bidang JSON.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -537,7 +515,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -552,14 +530,9 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, insert entities that match the schema.</p>
+    </button></h2><p>Setelah membuat koleksi, masukkan entitas yang sesuai dengan skema.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {
@@ -723,7 +696,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">Query with filter expressions<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">Kueri dengan ekspresi filter<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -738,18 +711,13 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After inserting entities, use the <code translate="no">query</code> method to retrieve entities that match the specified filter expressions.</p>
+    </button></h2><p>Setelah menyisipkan entitas, gunakan metode <code translate="no">query</code> untuk mengambil entitas yang cocok dengan ekspresi filter yang ditentukan.</p>
 <div class="alert note">
-<p>For JSON fields that allow null values, the field will be treated as null if the entire JSON object is missing or set to <code translate="no">None</code>. For more information, refer to <a href="/docs/basic-operators.md#JSON-Fields-with-Null-Values">JSON Fields with Null Values</a>.</p>
+<p>Untuk bidang JSON yang mengizinkan nilai null, bidang tersebut akan diperlakukan sebagai null jika seluruh objek JSON tidak ada atau disetel ke <code translate="no">None</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/basic-operators.md#JSON-Fields-with-Null-Values">Bidang JSON dengan Nilai Nol</a>.</p>
 </div>
-<p>To retrieve entities where <code translate="no">metadata</code> is not null:</p>
+<p>Untuk mengambil entitas di mana <code translate="no">metadata</code> tidak bernilai null:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to filter out records with null metadata</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata is not null&#x27;</span>
@@ -821,14 +789,9 @@ fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, rs.GetColumn(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1},{&quot;metadata&quot;:&quot;&quot;,&quot;pk&quot;:2},{&quot;metadata&quot;:&quot;&quot;,&quot;pk&quot;:3},{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: null, \&quot;brand\&quot;: \&quot;BrandB\&quot;}, \&quot;price\&quot;: 59.99, \&quot;in_stock\&quot;: null}&quot;,&quot;pk&quot;:4}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where <code translate="no">metadata[&quot;product_info&quot;][&quot;category&quot;]</code> is <code translate="no">&quot;electronics&quot;</code>:</p>
+<p>Untuk mengambil entitas di mana <code translate="no">metadata[&quot;product_info&quot;][&quot;category&quot;]</code> adalah <code translate="no">&quot;electronics&quot;</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 
 res = client.query(
@@ -901,7 +864,7 @@ curl --request POST \
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Vector search with filter expressions<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Pencarian vektor dengan ekspresi filter<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -916,14 +879,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:</p>
+    </button></h2><p>Selain pemfilteran bidang skalar dasar, Anda dapat menggabungkan pencarian kemiripan vektor dengan filter bidang skalar. Sebagai contoh, kode berikut ini menunjukkan cara menambahkan filter bidang skalar ke pencarian vektor:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>
 
 res = client.search(
@@ -1028,4 +986,4 @@ curl --request POST \
 
 <span class="hljs-comment">##{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Additionally, Milvus supports advanced JSON filtering operators such as <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, and <code translate="no">JSON_CONTAINS_ANY</code>, which can further enhance query capabilities. For more details, refer to <a href="/docs/json-operators.md">JSON Operators</a>.</p>
+<p>Selain itu, Milvus mendukung operator pemfilteran JSON tingkat lanjut seperti <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, dan <code translate="no">JSON_CONTAINS_ANY</code>, yang dapat meningkatkan kemampuan kueri. Untuk lebih jelasnya, lihat <a href="/docs/id/json-operators.md">Operator JSON</a>.</p>

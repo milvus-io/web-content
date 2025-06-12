@@ -1,9 +1,9 @@
 ---
 id: comparison.md
-title: Comparison
-summary: This article compares Milvus with other vector search solutions.
+title: Perbandingan
+summary: Artikel ini membandingkan Milvus dengan solusi pencarian vektor lainnya.
 ---
-<h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Comparing Milvus with Alternatives<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
+<h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Membandingkan Milvus dengan Alternatif Lain<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ summary: This article compares Milvus with other vector search solutions.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>When exploring various vector database options, this comprehensive guide will help you understand Milvus’s unique features, ensuring you choose a database that best fits your specific needs. Notably, Milvus is a leading open-source vector database, and <a href="https://zilliz.com/cloud">Zilliz Cloud</a> offers a fully-managed Milvus service. To objectively evaluate Milvus against its competitors, consider using <a href="https://github.com/zilliztech/VectorDBBench#quick-start">benchmark tools</a> to analyze performance metrics.</p>
-<h2 id="Milvus-highlights" class="common-anchor-header">Milvus highlights<button data-href="#Milvus-highlights" class="anchor-icon" translate="no">
+    </button></h1><p>Ketika menjelajahi berbagai opsi database vektor, panduan komprehensif ini akan membantu Anda memahami fitur-fitur unik Milvus, memastikan Anda memilih database yang paling sesuai dengan kebutuhan spesifik Anda. Khususnya, Milvus adalah basis data vektor sumber terbuka terkemuka, dan <a href="https://zilliz.com/cloud">Zilliz Cloud</a> menawarkan layanan Milvus yang dikelola sepenuhnya. Untuk mengevaluasi Milvus secara objektif terhadap para pesaingnya, pertimbangkan untuk menggunakan <a href="https://github.com/zilliztech/VectorDBBench#quick-start">alat tolok ukur</a> untuk menganalisis metrik kinerja.</p>
+<h2 id="Milvus-highlights" class="common-anchor-header">Sorotan Milvus<button data-href="#Milvus-highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,12 +35,12 @@ summary: This article compares Milvus with other vector search solutions.
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Functionality</strong>: Milvus goes beyond basic vector similarity search by supporting advanced functionalities like <a href="https://milvus.io/docs/sparse_vector.md">sparse vector</a>, <a href="https://milvus.io/docs/single-vector-search.md#Bulk-vector-search">bulk-vector</a>, <a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">filtered search</a>, and <a href="https://milvus.io/docs/multi-vector-search.md">hybrid search</a> capabilities.</p></li>
-<li><p><strong>Flexibility</strong>: Milvus accommodates various deployment modes and multiple SDKs, all within a robust, integrated ecosystem.</p></li>
-<li><p><strong>Performance</strong>: Milvus guarantees real-time processing with high throughput and low latency, powered by optimized indexing algorithms such as <a href="https://milvus.io/docs/index.md#HNSW">HNSW</a> and <a href="https://milvus.io/docs/disk_index.md">DiskANN</a>, and advanced <a href="https://milvus.io/docs/gpu_index.md">GPU acceleration</a>.</p></li>
-<li><p><strong>Scalability</strong>: Its bespoke distributed architecture effortlessly scales, accommodating anything from small datasets to collections exceeding 10 billion vectors.</p></li>
+<li><p><strong>Fungsionalitas</strong>: Milvus melampaui pencarian kemiripan vektor dasar dengan mendukung fungsionalitas tingkat lanjut seperti <a href="https://milvus.io/docs/sparse_vector.md">vektor jarang</a>, <a href="https://milvus.io/docs/single-vector-search.md#Bulk-vector-search">vektor massal</a>, <a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">pencarian yang difilter</a>, dan kemampuan <a href="https://milvus.io/docs/multi-vector-search.md">pencarian hibrida</a>.</p></li>
+<li><p><strong>Fleksibilitas</strong>: Milvus mengakomodasi berbagai mode penerapan dan beberapa SDK, semuanya dalam ekosistem yang kuat dan terintegrasi.</p></li>
+<li><p><strong>Kinerja</strong>: Milvus menjamin pemrosesan waktu nyata dengan throughput tinggi dan latensi rendah, didukung oleh algoritme pengindeksan yang dioptimalkan seperti <a href="https://milvus.io/docs/index.md#HNSW">HNSW</a> dan <a href="https://milvus.io/docs/disk_index.md">DiskANN</a>, serta <a href="https://milvus.io/docs/gpu_index.md">akselerasi GPU</a> tingkat lanjut.</p></li>
+<li><p><strong>Skalabilitas</strong>: Arsitektur terdistribusi yang dipesan lebih dahulu dengan mudah diskalakan, mengakomodasi apa pun mulai dari kumpulan data kecil hingga koleksi yang melebihi 10 miliar vektor.</p></li>
 </ul>
-<h2 id="Overall-comparison" class="common-anchor-header">Overall comparison<button data-href="#Overall-comparison" class="anchor-icon" translate="no">
+<h2 id="Overall-comparison" class="common-anchor-header">Perbandingan keseluruhan<button data-href="#Overall-comparison" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,22 +55,22 @@ summary: This article compares Milvus with other vector search solutions.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To compare between Milvus and Pinecone, two vector database solutions, the following table is structured to highlight differences across various features.</p>
+    </button></h2><p>Untuk membandingkan antara Milvus dan Pinecone, dua solusi basis data vektor, tabel berikut ini disusun untuk menyoroti perbedaan di berbagai fitur.</p>
 <table>
 <thead>
-<tr><th>Feature</th><th>Pinecone</th><th>Milvus</th><th>Remarks</th></tr>
+<tr><th>Fitur</th><th>Pinecone</th><th>Milvus</th><th>Keterangan</th></tr>
 </thead>
 <tbody>
-<tr><td>Deployment Modes</td><td>SaaS-only</td><td>Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC</td><td>Milvus offers greater flexibility in deployment modes.</td></tr>
-<tr><td>Supported SDKs</td><td>Python, JavaScript/TypeScript</td><td>Python, Java, NodeJS, Go, Restful API, C#, Rust</td><td>Milvus supports a wider array of programming languages.</td></tr>
-<tr><td>Open-source Status</td><td>Closed</td><td>Open-source</td><td>Milvus is a popular open-source vector database.</td></tr>
-<tr><td>Scalability</td><td>Scale up/down only</td><td>Scale out/in and Scale up/down</td><td>Milvus features a distributed architecture for enhanced scalability.</td></tr>
-<tr><td>Availability</td><td>Pod-based architecture within available zones</td><td>Available zone failover and cross-region HA</td><td>Milvus CDC (Change Data Capture) enables primary/standby modes for higher availability.</td></tr>
-<tr><td>Perf-Cost (Dollar per million queries)</td><td>Starts at $0.178 for a medium dataset, $1.222 for a large dataset</td><td>Zilliz Cloud starts at $0.148 for a medium dataset, $0.635 for a large dataset; free version available</td><td>Refer to <a href="https://zilliz.com/vector-database-benchmark-tool?database=ZillizCloud,Milvus,ElasticCloud,PgVector,Pinecone,QdrantCloud,WeaviateCloud&amp;dataset=medium&amp;filter=none,low,high&amp;tab=2">Cost Ranking report</a>.</td></tr>
-<tr><td>GPU Acceleration</td><td>Not supported</td><td>Support NVIDIA GPU</td><td>GPU acceleration significantly enhances performance, often by orders of magnitude.</td></tr>
+<tr><td>Mode Penerapan</td><td>Hanya SaaS</td><td>Milvus Lite, On-prem Standalone &amp; Cluster, Zilliz Cloud Saas &amp; BYOC</td><td>Milvus menawarkan fleksibilitas yang lebih besar dalam mode penerapan.</td></tr>
+<tr><td>SDK yang didukung</td><td>Python, JavaScript/TypeScript</td><td>Python, Java, NodeJS, Go, Restful API, C#, Rust</td><td>Milvus mendukung lebih banyak bahasa pemrograman.</td></tr>
+<tr><td>Status Sumber Terbuka</td><td>Ditutup</td><td>Sumber terbuka</td><td>Milvus adalah basis data vektor sumber terbuka yang populer.</td></tr>
+<tr><td>Skalabilitas</td><td>Hanya skala naik/turun</td><td>Skala keluar/masuk dan Skala naik/turun</td><td>Milvus memiliki arsitektur terdistribusi untuk meningkatkan skalabilitas.</td></tr>
+<tr><td>Ketersediaan</td><td>Arsitektur berbasis pod dalam zona yang tersedia</td><td>Failover zona yang tersedia dan HA lintas wilayah</td><td>Milvus CDC (Change Data Capture) memungkinkan mode primer/standby untuk ketersediaan yang lebih tinggi.</td></tr>
+<tr><td>Biaya Perf (Dolar per juta kueri)</td><td>Mulai dari $0,178 untuk dataset menengah, $1,222 untuk dataset besar</td><td>Zilliz Cloud mulai dari $0,148 untuk dataset menengah, $0,635 untuk dataset besar; tersedia versi gratis</td><td>Lihat <a href="https://zilliz.com/vector-database-benchmark-tool?database=ZillizCloud,Milvus,ElasticCloud,PgVector,Pinecone,QdrantCloud,WeaviateCloud&amp;dataset=medium&amp;filter=none,low,high&amp;tab=2">laporan Peringkat Biaya</a>.</td></tr>
+<tr><td>Akselerasi GPU</td><td>Tidak didukung</td><td>Mendukung GPU NVIDIA</td><td>Akselerasi GPU secara signifikan meningkatkan kinerja, seringkali dengan urutan besarnya.</td></tr>
 </tbody>
 </table>
-<h2 id="Terminology-comparison" class="common-anchor-header">Terminology comparison<button data-href="#Terminology-comparison" class="anchor-icon" translate="no">
+<h2 id="Terminology-comparison" class="common-anchor-header">Perbandingan terminologi<button data-href="#Terminology-comparison" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,21 +85,21 @@ summary: This article compares Milvus with other vector search solutions.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Although both serve similar functions as vector databases, the domain-specific terminology between Milvus and Pinecone shows slight variations. A detailed terminology comparison is as follows.</p>
+    </button></h2><p>Meskipun keduanya memiliki fungsi yang sama sebagai basis data vektor, terminologi khusus domain antara Milvus dan Pinecone menunjukkan sedikit variasi. Perbandingan terminologi yang terperinci adalah sebagai berikut.</p>
 <table>
 <thead>
-<tr><th>Pinecone</th><th>Milvus</th><th>Remarks</th></tr>
+<tr><th>Pinecone</th><th>Milvus</th><th>Keterangan</th></tr>
 </thead>
 <tbody>
-<tr><td>Index</td><td><a href="https://zilliz.com/comparison">Collection</a></td><td>In Pinecone, an index serves as the organizational unit for storing and managing vectors of identical size, and this index is closely integrated with the hardware, known as pods. In contrast, Milvus collections serve a similar purpose but enable handling multiple collections within a single instance.</td></tr>
-<tr><td>Collection</td><td><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Backup</a></td><td>In Pinecone, a collection is essentially a static snapshot of an index, used mainly for backup purposes and cannot be queried. In Milvus, the equivalent feature for creating backups is more transparent and straightforwardly named.</td></tr>
-<tr><td>Namespace</td><td><a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Partition key</a></td><td>Namespaces allow the partitioning of vectors in an index into subsets. Milvus provides multiple methods like partition or partition key to ensure efficient data isolation within a collection.</td></tr>
-<tr><td>Metadata</td><td><a href="https://milvus.io/docs/boolean.md">Scalar field</a></td><td>Pinecone’s metadata handling relies on key-value pairs, while Milvus allows for complex scalar fields, including standard data types and dynamic JSON fields.</td></tr>
-<tr><td>Query</td><td><a href="https://milvus.io/docs/single-vector-search.md">Search</a></td><td>Name of the method used to find the nearest neighbors for a given vector, possibly with some additional filters applied on top.</td></tr>
-<tr><td>Not available</td><td><a href="https://milvus.io/docs/with-iterators.md">Iterator</a></td><td>Pinecone lacks a feature for iterating through all vectors in an index. Milvus introduces Search Iterator and Query Iterator methods, enhancing data retrieval capabilities across datasets.</td></tr>
+<tr><td>Indeks</td><td><a href="https://zilliz.com/comparison">Koleksi</a></td><td>Dalam Pinecone, indeks berfungsi sebagai unit organisasi untuk menyimpan dan mengelola vektor dengan ukuran yang sama, dan indeks ini terintegrasi erat dengan perangkat keras, yang dikenal sebagai pod. Sebaliknya, koleksi Milvus memiliki tujuan yang sama, tetapi memungkinkan penanganan beberapa koleksi dalam satu instance.</td></tr>
+<tr><td>Koleksi</td><td><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Cadangan</a></td><td>Di Pinecone, koleksi pada dasarnya adalah cuplikan statis dari sebuah indeks, yang digunakan terutama untuk tujuan pencadangan dan tidak dapat ditanyakan. Di Milvus, fitur yang setara untuk membuat cadangan lebih transparan dan diberi nama secara langsung.</td></tr>
+<tr><td>Ruang nama</td><td><a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Kunci partisi</a></td><td>Ruang nama memungkinkan partisi vektor dalam indeks menjadi beberapa subset. Milvus menyediakan beberapa metode seperti partisi atau kunci partisi untuk memastikan isolasi data yang efisien dalam sebuah koleksi.</td></tr>
+<tr><td>Metadata</td><td><a href="https://milvus.io/docs/boolean.md">Bidang skalar</a></td><td>Penanganan metadata Pinecone bergantung pada pasangan key-value, sementara Milvus memungkinkan bidang skalar yang kompleks, termasuk tipe data standar dan bidang JSON dinamis.</td></tr>
+<tr><td>Kueri</td><td><a href="https://milvus.io/docs/single-vector-search.md">Pencarian</a></td><td>Nama metode yang digunakan untuk menemukan tetangga terdekat untuk vektor yang diberikan, mungkin dengan beberapa filter tambahan yang diterapkan di atasnya.</td></tr>
+<tr><td>Tidak tersedia</td><td><a href="https://milvus.io/docs/with-iterators.md">Iterator</a></td><td>Pinecone tidak memiliki fitur untuk mengulang semua vektor dalam sebuah indeks. Milvus memperkenalkan metode Search Iterator dan Query Iterator, yang meningkatkan kemampuan pencarian data di seluruh kumpulan data.</td></tr>
 </tbody>
 </table>
-<h2 id="Capability-comparison" class="common-anchor-header">Capability comparison<button data-href="#Capability-comparison" class="anchor-icon" translate="no">
+<h2 id="Capability-comparison" class="common-anchor-header">Perbandingan kemampuan<button data-href="#Capability-comparison" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -116,28 +116,28 @@ summary: This article compares Milvus with other vector search solutions.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Capability</th><th>Pinecone</th><th>Milvus</th></tr>
+<tr><th>Kemampuan</th><th>Pinecone</th><th>Milvus</th></tr>
 </thead>
 <tbody>
-<tr><td>Deployment Modes</td><td>SaaS-only</td><td>Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC</td></tr>
-<tr><td>Embedding Functions</td><td>Not available</td><td>Support with <a href="https://github.com/milvus-io/milvus-model">pymilvus[model]</a></td></tr>
-<tr><td>Data Types</td><td>String, Number, Bool, List of String</td><td>String, VarChar, Number (Int, Float, Double), Bool, Array, JSON, Float Vector, Binary Vector, BFloat16, Float16, Sparse Vector</td></tr>
-<tr><td>Metric and Index Types</td><td>Cos, Dot, Euclidean<br/>P-family, S-family</td><td>Cosine, IP (Dot), L2 (Euclidean),  Hamming, Jaccard<br/>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, GPU Indexes</td></tr>
-<tr><td>Schema Design</td><td>Flexible mode</td><td>Flexible mode, Strict mode</td></tr>
-<tr><td>Multiple Vector Fields</td><td>N/A</td><td>Multi-vector and hybrid search</td></tr>
-<tr><td>Tools</td><td>Datasets, text utilities, spark connector</td><td>Attu, Birdwatcher, Backup, CLI, CDC, Spark and Kafka connectors</td></tr>
+<tr><td>Mode Penerapan</td><td>Hanya SaaS</td><td>Milvus Lite, On-prem Standalone &amp; Cluster, Zilliz Cloud Saas &amp; BYOC</td></tr>
+<tr><td>Fungsi Penyematan</td><td>Tidak tersedia</td><td>Dukungan dengan <a href="https://github.com/milvus-io/milvus-model">pymilvus [model]</a></td></tr>
+<tr><td>Tipe Data</td><td>String, Angka, Bool, Daftar String</td><td>String, VarChar, Angka (Int, Float, Double), Bool, Larik, JSON, Vektor Float, Vektor Biner, BFloat16, Float16, Vektor Jarang</td></tr>
+<tr><td>Jenis Metrik dan Indeks</td><td>Cos, Dot, Euclidean<br/>Keluarga-P, Keluarga-S</td><td>Cosinus, IP (Dot), L2 (Euclidean), Hamming, Jaccard<br/>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, Indeks GPU</td></tr>
+<tr><td>Desain Skema</td><td>Mode fleksibel</td><td>Mode fleksibel, Mode ketat</td></tr>
+<tr><td>Beberapa Bidang Vektor</td><td>N/A</td><td>Pencarian multi-vektor dan hibrida</td></tr>
+<tr><td>Alat</td><td>Kumpulan data, utilitas teks, konektor spark</td><td>Konektor Attu, Pengamat Burung, Pencadangan, CLI, CDC, Spark, dan Kafka</td></tr>
 </tbody>
 </table>
-<h3 id="Key-insights" class="common-anchor-header">Key insights</h3><ul>
-<li><p><strong>Deployment modes</strong>: Milvus offers a variety of deployment options, including local deployment, Docker, Kubernetes on-premises, Cloud SaaS, and Bring Your Own Cloud (BYOC) for enterprises, whereas Pinecone is limited to SaaS deployment.</p></li>
-<li><p><strong>Embedding functions</strong>: Milvus supports additional embedding libraries, enabling the direct use of embedding models to transform source data into vectors.</p></li>
-<li><p><strong>Data types</strong>: Milvus supports a wider range of data types than Pinecone, including arrays and JSON. Pinecone supports only a flat metadata structure with strings, numbers, booleans, or lists of strings as values, whereas Milvus can handle any JSON object, including nested structures, within a JSON field. Pinecone limits the metadata size to 40KB per vector.</p></li>
-<li><p><strong>Metric and index types</strong>: Milvus supports a broad selection of metric and index types to accommodate various use cases, while Pinecone has a more limited selection. While an index for vector is mandatory in Milvus, an AUTO_INDEX option is available to streamline the configuration process.</p></li>
-<li><p><strong>Schema design</strong>: Milvus offers flexible <code translate="no">create_collection</code> modes for schema design, including a quick setup with a dynamic schema for a schema-less experience similar to Pinecone and a customized setup with predefined schema fields and indexes akin to a relational database management system (RDBMS).</p></li>
-<li><p><strong>Multiple vector fields</strong>: Milvus enables the storage of multiple vector fields within a single collection, which can be either sparse or dense and may vary in dimensionality. Pinecone does not offer a comparable feature.</p></li>
-<li><p><strong>Tools</strong>: Milvus offers a more extensive selection of tools for database management and utilization, such as Attu, Birdwatcher, Backup, CLI, CDC and Spark and Kafka connector.</p></li>
+<h3 id="Key-insights" class="common-anchor-header">Wawasan utama</h3><ul>
+<li><p><strong>Mode penerapan</strong>: Milvus menawarkan berbagai opsi penerapan, termasuk penerapan lokal, Docker, Kubernetes di lokasi, Cloud SaaS, dan Bring Your Own Cloud (BYOC) untuk perusahaan, sedangkan Pinecone terbatas pada penerapan SaaS.</p></li>
+<li><p><strong>Fungsi penyematan</strong>: Milvus mendukung pustaka penyematan tambahan, memungkinkan penggunaan langsung model penyematan untuk mengubah data sumber menjadi vektor.</p></li>
+<li><p><strong>Tipe data</strong>: Milvus mendukung tipe data yang lebih luas daripada Pinecone, termasuk array dan JSON. Pinecone hanya mendukung struktur metadata datar dengan string, angka, boolean, atau daftar string sebagai nilai, sedangkan Milvus dapat menangani objek JSON apa pun, termasuk struktur bersarang, dalam bidang JSON. Pinecone membatasi ukuran metadata hingga 40KB per vektor.</p></li>
+<li><p><strong>Jenis metrik dan indeks</strong>: Milvus mendukung banyak pilihan jenis metrik dan indeks untuk mengakomodasi berbagai kasus penggunaan, sementara Pinecone memiliki pilihan yang lebih terbatas. Meskipun indeks untuk vektor adalah wajib di Milvus, opsi AUTO_INDEX tersedia untuk menyederhanakan proses konfigurasi.</p></li>
+<li><p><strong>Desain skema</strong>: Milvus menawarkan mode <code translate="no">create_collection</code> yang fleksibel untuk desain skema, termasuk pengaturan cepat dengan skema dinamis untuk pengalaman tanpa skema yang mirip dengan Pinecone dan pengaturan yang disesuaikan dengan bidang skema yang telah ditentukan sebelumnya dan indeks yang mirip dengan sistem manajemen basis data relasional (RDBMS).</p></li>
+<li><p><strong>Beberapa bidang vektor</strong>: Milvus memungkinkan penyimpanan beberapa bidang vektor dalam satu koleksi, yang dapat berupa bidang vektor yang jarang atau padat dan dapat bervariasi dalam hal dimensi. Pinecone tidak menawarkan fitur yang sebanding.</p></li>
+<li><p><strong>Alat</strong>: Milvus menawarkan pilihan alat yang lebih luas untuk manajemen dan pemanfaatan basis data, seperti Attu, Birdwatcher, Backup, CLI, CDC dan konektor Spark dan Kafka.</p></li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,7 +153,7 @@ summary: This article compares Milvus with other vector search solutions.
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Trial</strong>: Experience Milvus firsthand by starting with the Milvus <a href="https://milvus.io/docs/quickstart.md">quickstart</a> or <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">signing up for Zilliz Cloud</a>.</p></li>
-<li><p><strong>Learn more</strong>: Dive deeper into Milvus’s features through our comprehensive <a href="/docs/glossary.md">Terminology</a> and <a href="https://milvus.io/docs/manage-collections.md">User Guides</a>.</p></li>
-<li><p><strong>Explore alternatives</strong>: For a broader comparison of vector database options, explore additional resources on <a href="https://zilliz.com/comparison">this page</a>.</p></li>
+<li><p><strong>Uji coba</strong>: Rasakan pengalaman Milvus secara langsung dengan memulai menggunakan <a href="https://milvus.io/docs/quickstart.md">quickstart</a> Milvus atau <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">mendaftar ke Zilliz Cloud</a>.</p></li>
+<li><p><strong>Pelajari lebih lanjut</strong>: Selami lebih dalam fitur-fitur Milvus melalui <a href="/docs/id/glossary.md">Terminologi</a> dan <a href="https://milvus.io/docs/manage-collections.md">Panduan Pengguna</a> kami yang komprehensif.</p></li>
+<li><p><strong>Jelajahi alternatif</strong>: Untuk perbandingan yang lebih luas tentang opsi database vektor, jelajahi sumber daya tambahan di <a href="https://zilliz.com/comparison">halaman ini</a>.</p></li>
 </ul>

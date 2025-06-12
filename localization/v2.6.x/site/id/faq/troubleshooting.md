@@ -1,11 +1,11 @@
 ---
 id: troubleshooting.md
 summary: >-
-  Learn about common issues you may encounter with Milvus and how to overcome
-  them.
-title: Troubleshooting
+  Pelajari tentang masalah umum yang mungkin Anda hadapi dengan Milvus dan cara
+  mengatasinya.
+title: Pemecahan masalah
 ---
-<h1 id="Troubleshooting" class="common-anchor-header">Troubleshooting<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
+<h1 id="Troubleshooting" class="common-anchor-header">Pemecahan masalah<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,14 +20,14 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page lists common issues that may occur when running Milvus, as well as possible troubleshooting tips. Issues on this page fall into the following categories:</p>
+    </button></h1><p>Halaman ini berisi daftar masalah umum yang mungkin terjadi ketika menjalankan Milvus, serta tips pemecahan masalah. Masalah pada halaman ini termasuk dalam kategori berikut:</p>
 <ul>
-<li><a href="#boot_issues">Boot issues</a></li>
-<li><a href="#runtime_issues">Runtime issues</a></li>
-<li><a href="#api_issues">API issues</a></li>
-<li><a href="#etcd_crash_issues">etcd crash issues</a></li>
+<li><a href="#boot_issues">Masalah boot</a></li>
+<li><a href="#runtime_issues">Masalah runtime</a></li>
+<li><a href="#api_issues">Masalah API</a></li>
+<li><a href="#etcd_crash_issues">Masalah kerusakan etcd</a></li>
 </ul>
-<h2 id="Boot-issues" class="common-anchor-header">Boot issues<button data-href="#Boot-issues" class="anchor-icon" translate="no">
+<h2 id="Boot-issues" class="common-anchor-header">Masalah boot<button data-href="#Boot-issues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,10 +42,10 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Boot errors are usually fatal. Run the following command to view error details:</p>
+    </button></h2><p>Kesalahan boot biasanya berakibat fatal. Jalankan perintah berikut untuk melihat detail kesalahan:</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker logs &lt;your milvus container <span class="hljs-built_in">id</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Runtime-issues" class="common-anchor-header">Runtime issues<button data-href="#Runtime-issues" class="anchor-icon" translate="no">
+<h2 id="Runtime-issues" class="common-anchor-header">Masalah waktu proses (runtime)<button data-href="#Runtime-issues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,8 +60,8 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Errors that occur during runtime may cause service breakdown. To troubleshoot this issue, check compatibility between the server and your client before moving forward.</p>
-<h2 id="API-issues" class="common-anchor-header">API issues<button data-href="#API-issues" class="anchor-icon" translate="no">
+    </button></h2><p>Kesalahan yang terjadi selama runtime dapat menyebabkan kerusakan layanan. Untuk mengatasi masalah ini, periksa kompatibilitas antara server dan klien Anda sebelum melanjutkan.</p>
+<h2 id="API-issues" class="common-anchor-header">Masalah API<button data-href="#API-issues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,8 +76,8 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>These issues occur during API method calls between the Milvus server and your client. They will be returned to the client synchronously or asynchronously.</p>
-<h2 id="etcd-crash-issues" class="common-anchor-header">etcd crash issues<button data-href="#etcd-crash-issues" class="anchor-icon" translate="no">
+    </button></h2><p>Masalah ini terjadi selama pemanggilan metode API antara server Milvus dan klien Anda. Mereka akan dikembalikan ke klien secara sinkron atau asinkron.</p>
+<h2 id="etcd-crash-issues" class="common-anchor-header">masalah kerusakan etcd<button data-href="#etcd-crash-issues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,23 +92,23 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. etcd pod pending</h3><p>The etcd cluster uses pvc by default. StorageClass needs to be preconfigured for the Kubernetes cluster.</p>
-<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. etcd pod crash</h3><p>When an etcd pod crashes with <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, you can log into this pod and delete the <code translate="no">/bitnami/etcd/data/member_id</code> file.</p>
-<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Multiple pods keep crashing while <code translate="no">etcd-0</code> is still running</h3><p>You can run the following code if multiple pods keeps crashing while <code translate="no">etcd-0</code> is still running.</p>
+    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. pod etcd tertunda</h3><p>Cluster etcd menggunakan pvc secara default. StorageClass perlu dikonfigurasi sebelumnya untuk kluster Kubernetes.</p>
+<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. kerusakan pod etcd</h3><p>Saat pod etcd mengalami kerusakan pada <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, Anda dapat masuk ke pod ini dan menghapus berkas <code translate="no">/bitnami/etcd/data/member_id</code>.</p>
+<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Beberapa pod terus mengalami kerusakan saat <code translate="no">etcd-0</code> masih berjalan</h3><p>Anda dapat menjalankan kode berikut jika beberapa pod terus mengalami crash saat <code translate="no">etcd-0</code> masih berjalan.</p>
 <pre><code translate="no">kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-operator">-</span>sts<span class="hljs-operator">&gt;</span> <span class="hljs-comment">--replicas=1</span>
 # <span class="hljs-keyword">delete</span> the pvc <span class="hljs-keyword">for</span> etcd<span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> etcd<span class="hljs-number">-2</span>
 kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-operator">-</span>sts<span class="hljs-operator">&gt;</span> <span class="hljs-comment">--replicas=3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="4-All-pods-crash" class="common-anchor-header">4. All pods crash</h3><p>When all pods crash, try copying the <code translate="no">/bitnami/etcd/data/member/snap/db</code> file. Use <code translate="no">https://github.com/etcd-io/bbolt</code> to modify database data.</p>
-<p>All Milvus metadata are kept in the <code translate="no">key</code> bucket. Back up the data in this bucket and run the following commands. Note that the prefix data in the <code translate="no">by-dev/meta/session</code> file does not require a backup.</p>
+<h3 id="4-All-pods-crash" class="common-anchor-header">4. Semua pod mengalami crash</h3><p>Ketika semua pod mengalami crash, coba salin berkas <code translate="no">/bitnami/etcd/data/member/snap/db</code>. Gunakan <code translate="no">https://github.com/etcd-io/bbolt</code> untuk memodifikasi data basis data.</p>
+<p>Semua metadata Milvus disimpan di dalam bucket <code translate="no">key</code>. Cadangkan data di dalam bucket ini dan jalankan perintah berikut. Perhatikan bahwa data awalan dalam file <code translate="no">by-dev/meta/session</code> tidak memerlukan cadangan.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">0</span>
 <span class="hljs-comment"># delete the pvc for etcd-0, etcd-1, etcd-2</span>
 kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">1</span>
 <span class="hljs-comment"># restore the backup data</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><br/></p>
-<p>If you need help solving a problem, feel free to:</p>
+<p>Jika Anda memerlukan bantuan untuk memecahkan masalah, silakan hubungi kami:</p>
 <ul>
-<li>Join our <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack channel</a> and reach out for support from the Milvus team.</li>
-<li><a href="https://github.com/milvus-io/milvus/issues/new/choose">File an Issue</a> on GitHub that includes details about your problem.</li>
+<li>Bergabunglah dengan <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">saluran Slack</a> kami dan minta bantuan dari tim Milvus.</li>
+<li><a href="https://github.com/milvus-io/milvus/issues/new/choose">Ajukan Masalah</a> di GitHub yang menyertakan detail tentang masalah Anda.</li>
 </ul>
