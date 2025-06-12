@@ -45,14 +45,14 @@ const targetLangs = [
 const cacheFile = CACHE_FILE;
 let total = 0;
 const SPLIT_TRANSLATE_FILES = [
+  "v2.6.x/site/en/userGuide/manage-collections.md",
+  "v2.6.x/site/en/userGuide/search-query-get/single-vector-search.md",
+  "v2.6.x/site/en/userGuide/use-json-fields.md",
+  "v2.6.x/site/en/reference/array_data_type.md",
   "v2.5.x/site/en/userGuide/manage-collections.md",
   "v2.5.x/site/en/userGuide/search-query-get/single-vector-search.md",
   "v2.5.x/site/en/userGuide/use-json-fields.md",
   "v2.5.x/site/en/reference/array_data_type.md",
-  "v2.4.x/site/en/userGuide/manage-collections.md",
-  "v2.4.x/site/en/userGuide/search-query-get/single-vector-search.md",
-  "v2.4.x/site/en/userGuide/use-json-fields.md",
-  "v2.4.x/site/en/reference/array_data_type.md",
 ];
 
 async function bootstrap() {
