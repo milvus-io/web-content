@@ -39,7 +39,7 @@ id: home.md
 <div class="start_card_container">
   
    <a href="/docs/ru/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ru/quickstart.md"> <p class="link-btn">Быстрый запуск</p> </a><p>Узнайте, как быстро запустить Milvus с помощью примеров кода.</p>
+   </a> <a href="/docs/ru/quickstart.md"> <p class="link-btn">Быстрый запуск</p> </a><p>Узнайте, как быстро запустить Milvus с помощью примера кода.</p>
 </div>
 <div class="start_card_container">
   

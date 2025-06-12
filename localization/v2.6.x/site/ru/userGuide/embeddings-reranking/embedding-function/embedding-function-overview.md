@@ -147,7 +147,7 @@ beta: Milvus 2.6.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" />
    </span> <span class="img-wrapper"> <span>Обзор функций встраивания</span> </span></p>
-<h3 id="Credential-management" class="common-anchor-header">Управление учетными данными</h3><p>Для подключения к внешним API для встраивания требуются учетные данные для аутентификации (ключи API или пары доступ/секретный ключ). Раскрытие этих учетных данных в коде вашего приложения создает риски безопасности. Milvus решает эту проблему, надежно храня учетные данные в конфигурационном файле Milvus (<code translate="no">milvus.yaml</code>).</p>
+<h3 id="Credential-management" class="common-anchor-header">Управление учетными данными</h3><p>Для подключения к внешним API для встраивания требуются учетные данные для аутентификации (ключи API или пары доступ/секретный ключ). Раскрытие этих учетных данных в коде вашего приложения создает риски безопасности. Milvus решает эту проблему, надежно сохраняя учетные данные в конфигурационном файле Milvus (<code translate="no">milvus.yaml</code>).</p>
 <ol>
 <li><p><strong>Добавьте учетные данные</strong>: В блоке верхнего уровня <code translate="no">credential:</code> присвойте каждой учетной записи уникальную метку; затем укажите на эту метку в блоке <code translate="no">function:</code>.</p></li>
 <li><p><strong>Сервер загружает конфигурацию</strong>: Milvus считывает YAML-файл, кэширует необработанные ключи в памяти и запоминает только их метки (например, <code translate="no">apikey1</code>).</p></li>
@@ -396,7 +396,7 @@ schema.add_function(text_embedding_function)
 <div class="alert note">
 <p>Для коллекций с несколькими скалярными полями, требующими преобразования текста в вектор, добавьте в схему коллекции отдельные функции, обеспечив каждой функции уникальное имя и значение <code translate="no">output_field_names</code>.</p>
 </div>
-<h3 id="Step-3-Configure-index" class="common-anchor-header">Шаг 3: Настройте индекс</h3><p>Определив схему с необходимыми полями и встроенной функцией, настройте индекс для коллекции. Чтобы упростить этот процесс, используйте <code translate="no">AUTOINDEX</code> в качестве <code translate="no">index_type</code>, опция, которая позволяет Milvus выбрать и настроить наиболее подходящий тип индекса на основе структуры ваших данных.</p>
+<h3 id="Step-3-Configure-index" class="common-anchor-header">Шаг 3: Настройте индекс</h3><p>Определив схему с необходимыми полями и встроенной функцией, настройте индекс для коллекции. Чтобы упростить этот процесс, используйте <code translate="no">AUTOINDEX</code> в качестве <code translate="no">index_type</code>, который позволяет Milvus выбрать и настроить наиболее подходящий тип индекса, основываясь на структуре ваших данных.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 

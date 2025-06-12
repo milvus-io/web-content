@@ -1,15 +1,16 @@
 ---
 id: mmap.md
-title: Use mmap
+title: Использование mmap
 summary: >-
-  Memory mapping (Mmap) enables direct memory access to large files on disk,
-  allowing Milvus to store indexes and data in both memory and hard drives. This
-  approach helps optimize data placement policy based on access frequency,
-  expanding storage capacity for collections without significantly impacting
-  search performance. This page helps you understand how Milvus uses mmap to
-  enable fast and efficient data storage and retrieval.
+  Memory mapping (Mmap) обеспечивает прямой доступ из памяти к большим файлам на
+  диске, позволяя Milvus хранить индексы и данные как в памяти, так и на жестких
+  дисках. Такой подход помогает оптимизировать политику размещения данных на
+  основе частоты доступа, увеличивая емкость хранения коллекций без
+  существенного влияния на производительность поиска. Эта страница поможет вам
+  понять, как Milvus использует mmap для обеспечения быстрого и эффективного
+  хранения и извлечения данных.
 ---
-<h1 id="Use-mmap" class="common-anchor-header">Use mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
+<h1 id="Use-mmap" class="common-anchor-header">Использование mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without significantly impacting search performance. This page helps you understand how Milvus uses mmap to enable fast and efficient data storage and retrieval.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Сопоставление памяти (Mmap) обеспечивает прямой доступ из памяти к большим файлам на диске, позволяя Milvus хранить индексы и данные как в памяти, так и на жестких дисках. Такой подход помогает оптимизировать политику размещения данных на основе частоты доступа, увеличивая емкость хранения коллекций без существенного влияния на производительность поиска. Эта страница поможет вам понять, как Milvus использует mmap для обеспечения быстрого и эффективного хранения и извлечения данных.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,18 +41,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus uses collections to organize vector embeddings and their metadata, and each row in the collection represents an entity. As shown in the left figure below, the vector field stores vector embeddings, and the scalar fields store their metadata. When you have created indexes on certain fields and loaded the collection, Milvus loads the created indexes and field raw data into memory.</p>
+    </button></h2><p>Milvus использует коллекции для организации векторных вкраплений и их метаданных, и каждая строка в коллекции представляет собой объект. Как показано на левом рисунке ниже, в поле vector хранятся векторные вкрапления, а в полях scalar - их метаданные. Когда вы создали индексы по определенным полям и загрузили коллекцию, Milvus загружает созданные индексы и исходные данные полей в память.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
-    <span>Mmap Illustrated</span>
-  </span>
-</p>
-<p>Milvus is a memory-intensive database system, and the memory size available determines the capacity of a collection. Loading fields containing a large volume of data into memory is impossible if the data size exceeds the memory capacity, which is the usual case for AI-driven applications.</p>
-<p>To resolve such issues, Milvus introduces mmap to balance the loading of hot and cold data in collections. As shown in the right figure above, you can configure Milvus to memory-maps the raw data in certain fields instead of fully loading them into memory. This way, you can gain direct memory access to the fields without worrying about memory issues and extend the capacity of the collection.</p>
-<p>By comparing the data placement procedures in the left and right figures, you can figure out that the memory usage is much higher in the left figure than in the right one. With mmap enabled, the data that should have been loaded into memory is offloaded into the hard drive and cached in the page cache of the operating system, reducing memory footprint. However, cache hit failures may result in performance degradation. For details, refer to <a href="https://en.wikipedia.org/wiki/Mmap">this article</a>.</p>
-<p>When you configure mmap on Milvus, there is always a principle for you to adhere to: Always keep the frequently accessed data and indexes fully loaded into memory and use mmap for those in the remaining fields.</p>
-<h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Use mmap in Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
+   </span> <span class="img-wrapper"> <span>Иллюстрация Mmap</span> </span></p>
+<p>Milvus - это система баз данных, занимающая много памяти, и объем доступной памяти определяет емкость коллекции. Загрузка в память полей, содержащих большой объем данных, невозможна, если размер данных превышает объем памяти, что обычно бывает в приложениях, управляемых искусственным интеллектом.</p>
+<p>Для решения подобных проблем Milvus вводит mmap для балансировки загрузки "горячих" и "холодных" данных в коллекции. Как показано на правом рисунке выше, вы можете настроить Milvus на отображение в памяти исходных данных в определенных полях вместо их полной загрузки в память. Таким образом, можно получить прямой доступ к полям, не беспокоясь о проблемах с памятью, и расширить емкость коллекции.</p>
+<p>Сравнивая процедуры размещения данных на левом и правом рисунках, можно заметить, что на левом рисунке использование памяти гораздо выше, чем на правом. При включенной функции mmap данные, которые должны были быть загружены в память, выгружаются на жесткий диск и кэшируются в страничном кэше операционной системы, что уменьшает занимаемую память. Однако сбои при попадании в кэш могут привести к снижению производительности. Подробности см. в <a href="https://en.wikipedia.org/wiki/Mmap">этой статье</a>.</p>
+<p>При настройке mmap на Milvus всегда нужно придерживаться одного принципа: Всегда держите часто используемые данные и индексы полностью загруженными в память и используйте mmap для оставшихся полей.</p>
+<h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Использование mmap в Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,8 +65,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides hierarchical mmap settings at global, field, index, and collection levels, where index and field levels take precedence over collection level, and collection level over global level.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">Global mmap settings</h3><p>The cluster-level setting is the global setting and has the lowest precedence. Milvus provides several mmap-related settings in <code translate="no">milvus.yaml</code>. These settings will apply to all collections in the cluster.</p>
+    </button></h2><p>Milvus предоставляет иерархические настройки mmap на глобальном, полевом, индексном и коллекционном уровнях, где индексный и полевой уровни имеют приоритет над коллекционным, а коллекционный - над глобальным.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">Глобальные настройки mmap</h3><p>Настройка на уровне кластера является глобальной и имеет наименьший приоритет. Milvus предоставляет несколько настроек, связанных с mmap, в разделе <code translate="no">milvus.yaml</code>. Эти настройки будут применяться ко всем коллекциям в кластере.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -81,47 +80,42 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Configure Item</p></th>
-     <th><p>Description</p></th>
-     <th><p>Default Value</p></th>
+     <th><p>Конфигурация Элемент</p></th>
+     <th><p>Описание</p></th>
+     <th><p>Значение по умолчанию</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarField</code></p></td>
-     <td><p>Specifies whether to map the raw data of all scalar fields into memory. Setting this to <code translate="no">true</code> makes Milvus map the raw data of scalar field data of a collection into memory instead of fully loading it upon receiving a load request against this collection.</p></td>
+     <td><p>Указывает, следует ли отображать в память исходные данные всех скалярных полей. Установка этого значения в <code translate="no">true</code> заставляет Milvus отображать необработанные данные скалярных полей коллекции в память, а не загружать их полностью при получении запроса на загрузку этой коллекции.</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarIndex</code></p></td>
-     <td><p>Specifies whether to map all scalar field indexes into memory. Setting this to <code translate="no">true</code> makes Milvus map scalar field indexes of a collection into memory instead of fully loading them upon receiving a load request against this collection.</p><p>Currently, only the scalar field using the following index type is supported:</p><ul><li>INVERTED</li></ul></td>
+     <td><p>Указывает, следует ли отображать все индексы скалярных полей в память. Установка этого значения в <code translate="no">true</code> заставляет Milvus отображать индексы скалярных полей коллекции в память вместо их полной загрузки при получении запроса на загрузку этой коллекции.</p><p>В настоящее время поддерживаются только скалярные поля со следующим типом индекса:</p><ul><li>INVERTED</li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorField</code></p></td>
-     <td><p>Specifies whether to map the raw data of all vector fields into memory. Setting this to <code translate="no">true</code> makes Milvus map the raw data of vector field data of a collection into memory instead of fully loading it upon receiving a load request against this collection.</p></td>
+     <td><p>Указывает, следует ли отображать в память исходные данные всех векторных полей. Установка этого значения в <code translate="no">true</code> заставляет Milvus отображать необработанные данные векторных полей коллекции в память вместо полной загрузки при получении запроса на загрузку этой коллекции.</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorIndex</code></p></td>
-     <td><p>Specifies whether to map all vector field indexes into memory. Setting this to <code translate="no">true</code> makes Milvus map vector field indexes of a collection into memory instead of fully loading them upon receiving a load request against this collection.</p><p>Currently, only the vector fields using the following index types are supported:</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>SPARSE_INVERTED_INDEX</p></li><li><p>SPARSE_WAND</p></li></ul></td>
+     <td><p>Указывает, следует ли отображать все индексы векторных полей в память. Установка этого значения в <code translate="no">true</code> заставляет Milvus отображать индексы векторных полей коллекции в память вместо их полной загрузки при получении запроса на загрузку этой коллекции.</p><p>В настоящее время поддерживаются только векторные поля, использующие следующие типы индексов:</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>РАЗРЕЖЕННЫЙ_ИНВЕРТИРОВАННЫЙ_ИНДЕКС</p></li><li><p>SPARSE_WAND</p></li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.mmapDirPath</code></p></td>
-     <td><p>Specifies the path to the memory-mapped files. The default value applies if this is left unspecified. </p><p>The <code translate="no">localStorage.path</code> placeholder in the default value indicates the hard drive of Milvus QueryNodes. Ensure that your QueryNodes have a high-performance hard drive for optimal mmap advantages.</p></td>
+     <td><p>Указывает путь к файлам с отображением памяти. Если это значение не указано, применяется значение по умолчанию. </p><p>Место <code translate="no">localStorage.path</code> в значении по умолчанию указывает на жесткий диск узлов Milvus QueryNodes. Убедитесь, что ваши QueryNodes оснащены высокопроизводительным жестким диском для оптимального использования mmap.</p></td>
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>To apply the above settings to your Milvus cluster, please follow the steps in <a href="/docs/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a> and <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
-<p>Sometimes, global mmap settings are not flexible when facing particular use cases. To apply alternate settings to a specific collection or its indexes, consider configuring mmap specific to a collection, a field, or an index. You need to release and load a collection before the changes to the mmap settings take effect.</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Field-specific mmap settings</h3><p>To configure field-specific mmap, you need to include the <code translate="no">mmap_enabled</code> parameter when you add a field. You can enable mmap on this specific field by setting this parameter to <code translate="no">True</code>.</p>
-<p>The following example demonstrates how to configure field-specific mmap when you add a field.</p>
+<p>Чтобы применить вышеуказанные настройки к вашему кластеру Milvus, выполните действия, описанные в разделах <a href="/docs/ru/configure-helm.md#Configure-Milvus-via-configuration-file">"Настройка Milvus с помощью Helm"</a> и <a href="/docs/ru/configure_operator.md">"Настройка Milvus с помощью Milvus Operators</a>".</p>
+<p>Иногда глобальные настройки mmap не являются гибкими при решении конкретных задач. Чтобы применить альтернативные настройки к конкретной коллекции или ее индексам, рассмотрите возможность настройки mmap для коллекции, поля или индекса. Чтобы изменения настроек mmap вступили в силу, необходимо выпустить и загрузить коллекцию.</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного поля</h3><p>Чтобы настроить mmap для конкретного поля, необходимо включить параметр <code translate="no">mmap_enabled</code> при добавлении поля. Вы можете включить mmap для этого конкретного поля, установив для этого параметра значение <code translate="no">True</code>.</p>
+<p>В следующем примере показано, как настроить mmap для конкретного поля при добавлении поля.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -305,18 +299,13 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Consider enabling mmap for the fields that store large-volume data. Both scalar fields and vector fields are supported.</p>
+<p>Рассмотрите возможность включения mmap для полей, в которых хранятся данные большого объема. Поддерживаются как скалярные, так и векторные поля.</p>
 </div>
-<p>Then, you can create a collection using the above-created schema. Upon receiving a request to load the collection, Milvus uses memory-maps the raw data of the <strong>doc_chunk</strong> field into memory.</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Index-specific mmap settings</h3><p>To configure index-specific mmap, you need to include the <code translate="no">mmap.enable</code> property in the index parameters when you add the index. You can enable mmap on this specific index by setting the property to <code translate="no">true</code>.</p>
-<p>The following example demonstrates how to configure index-specific mmap when you add an index.</p>
+<p>Затем вы можете создать коллекцию, используя созданную выше схему. При получении запроса на загрузку коллекции Milvus использует memory-map для размещения в памяти исходных данных поля <strong>doc_chunk</strong>.</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного индекса</h3><p>Чтобы настроить mmap для конкретного индекса, необходимо включить свойство <code translate="no">mmap.enable</code> в параметры индекса при добавлении индекса. Вы можете включить mmap для этого конкретного индекса, установив для свойства значение <code translate="no">true</code>.</p>
+<p>В следующем примере показано, как настроить mmap для конкретного индекса при добавлении индекса.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a varchar field</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;title&quot;</span>,
@@ -413,18 +402,13 @@ curl --request POST \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>This applies to the indexes of both vector and scalar fields.</p>
+<p>Это относится к индексам как векторных, так и скалярных полей.</p>
 </div>
-<p>Then you can reference the index parameters in a collection. Upon receiving a request to load the collection, Milvus memory-maps the index of the <strong>title</strong> field into memory.</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Collection-specific mmap settings</h3><p>To configure a collection-wide mmap strategy, you need to include the <code translate="no">mmap.enabled</code> property in the request to create a collection. You can enable mmap for a collection by setting this property to <code translate="no">true</code>.</p>
-<p>The following example demonstrates how to enable mmap in a collection named <strong>my_collection</strong> upon its creation. Upon receiving a request to load the collection, Milvus memory-maps the raw data of all fields into memory.</p>
+<p>Затем вы можете ссылаться на параметры индекса в коллекции. При получении запроса на загрузку коллекции Milvus заносит в память индекс поля <strong>title</strong>.</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретной коллекции</h3><p>Чтобы настроить стратегию mmap для всей коллекции, необходимо включить свойство <code translate="no">mmap.enabled</code> в запрос на создание коллекции. Вы можете включить mmap для коллекции, установив для этого свойства значение <code translate="no">true</code>.</p>
+<p>Следующий пример демонстрирует, как включить mmap в коллекции с именем <strong>my_collection</strong> при ее создании. Получив запрос на загрузку коллекции, Milvus отображает в памяти исходные данные всех полей.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Enable mmap when creating a collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -459,14 +443,9 @@ client.createCollection(req);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You can also change the mmap settings of an existing collection.</p>
+<p>Вы также можете изменить настройки mmap для существующей коллекции.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Release collection before change mmap settings</span>
 client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 
@@ -548,4 +527,4 @@ curl --request POST \
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You need to release the collection to make changes to its properties and reload the collection to make the changes take effect.</p>
+<p>Чтобы внести изменения в свойства коллекции, ее нужно освободить, а чтобы изменения вступили в силу - перезагрузить.</p>

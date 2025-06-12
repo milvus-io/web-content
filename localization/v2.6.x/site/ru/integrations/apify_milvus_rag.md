@@ -1,14 +1,14 @@
 ---
 id: apify_milvus_rag.md
 summary: >-
-  This tutorial explains how to crawl websites using Apify's Website Content
-  Crawler and save the data into Milvus/Zilliz vector database to be later used
-  for question answering.
+  В этом руководстве рассказывается о том, как просматривать веб-сайты с помощью
+  Apify's Website Content Crawler и сохранять данные в векторной базе
+  Milvus/Zilliz, чтобы затем использовать их для ответов на вопросы.
 title: >-
-  Retrieval-Augmented Generation: Crawling Websites with Apify and Saving Data
-  to Milvus for Question Answering
+  Генерация с дополненным извлечением: Создание веб-сайтов с помощью Apify и
+  сохранение данных в Milvus для ответов на вопросы
 ---
-<h1 id="Retrieval-Augmented-Generation-Crawling-Websites-with-Apify-and-Saving-Data-to-Milvus-for-Question-Answering" class="common-anchor-header">Retrieval-Augmented Generation: Crawling Websites with Apify and Saving Data to Milvus for Question Answering<button data-href="#Retrieval-Augmented-Generation-Crawling-Websites-with-Apify-and-Saving-Data-to-Milvus-for-Question-Answering" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-Crawling-Websites-with-Apify-and-Saving-Data-to-Milvus-for-Question-Answering" class="common-anchor-header">Генерация с дополненным извлечением: Создание веб-сайтов с помощью Apify и сохранение данных в Milvus для ответов на вопросы<button data-href="#Retrieval-Augmented-Generation-Crawling-Websites-with-Apify-and-Saving-Data-to-Milvus-for-Question-Answering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,11 +24,11 @@ title: >-
         ></path>
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/apify_milvus_rag.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<p>This tutorial explains how to crawl websites using Apify’s Website Content Crawler and save the data into Milvus/Zilliz vector database to be later used for question answering.</p>
-<p><a href="https://apify.com/">Apify</a> is a web scraping and data extraction platform that offers an app marketplace with over two thousand ready-made cloud tools, known as Actors. These tools are ideal for use cases such as extracting structured data from e-commerce websites, social media, search engines, online maps, and more.</p>
-<p>For example, the <a href="https://apify.com/apify/website-content-crawler">Website Content Crawler</a> Actor can deeply crawl websites, clean their HTML by removing a cookies modal, footer, or navigation, and then transform the HTML into Markdown.</p>
-<p>The Apify integration for Milvus/Zilliz makes it easy to upload data from the web to the vector database.</p>
-<h1 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>В этом уроке рассказывается о том, как с помощью Apify's Website Content Crawler просматривать веб-сайты и сохранять данные в векторной базе Milvus/Zilliz, чтобы затем использовать их для ответов на вопросы.</p>
+<p><a href="https://apify.com/">Apify</a> - это платформа для веб-скреппинга и извлечения данных, которая предлагает рынок приложений с более чем двумя тысячами готовых облачных инструментов, известных как Actors. Эти инструменты идеально подходят для таких случаев, как извлечение структурированных данных с сайтов электронной коммерции, социальных сетей, поисковых систем, онлайн-карт и т. д.</p>
+<p>Например, инструмент <a href="https://apify.com/apify/website-content-crawler">Website Content Crawler</a> Actor может глубоко проползать по веб-сайтам, очищать их HTML, удаляя модальные окна cookie, нижний колонтитул или навигацию, а затем преобразовывать HTML в Markdown.</p>
+<p>Интеграция Apify для Milvus/Zilliz позволяет легко загружать данные из Интернета в векторную базу данных.</p>
+<h1 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,14 +43,14 @@ title: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Before running this notebook, make sure you have the following:</p>
+    </button></h1><p>Прежде чем приступить к работе с этим блокнотом, убедитесь, что у вас есть следующее:</p>
 <ul>
-<li><p>an Apify account and <a href="https://docs.apify.com/platform/integrations/api">APIFY_API_TOKEN</a>.</p></li>
-<li><p>an OpenAI account and <a href="https://platform.openai.com/docs/quickstart">OPENAI_API_KEY</a></p></li>
-<li><p>A <a href="https://cloud.zilliz.com">Zilliz Cloud account</a> (a fully managed cloud service for Milvus).</p></li>
-<li><p>The Zilliz database URI and Token</p></li>
+<li><p>учетная запись Apify и <a href="https://docs.apify.com/platform/integrations/api">APIFY_API_TOKEN</a>.</p></li>
+<li><p>учетная запись OpenAI и <a href="https://platform.openai.com/docs/quickstart">OPENAI_API_KEY</a>.</p></li>
+<li><p><a href="https://cloud.zilliz.com">Учетная запись Zilliz Cloud</a> (полностью управляемый облачный сервис для Milvus).</p></li>
+<li><p>URI базы данных Zilliz и токен</p></li>
 </ul>
-<h2 id="Install-dependencies" class="common-anchor-header">Install dependencies<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
+<h2 id="Install-dependencies" class="common-anchor-header">Установите зависимости<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +67,7 @@ title: >-
       </svg>
     </button></h2><pre><code translate="no" class="language-python">$ pip install --upgrade --quiet  apify==<span class="hljs-number">1.7</span><span class="hljs-number">.2</span> langchain-core==<span class="hljs-number">0.3</span><span class="hljs-number">.5</span> langchain-milvus==<span class="hljs-number">0.1</span><span class="hljs-number">.5</span> langchain-openai==<span class="hljs-number">0.2</span><span class="hljs-number">.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-Apify-and-Open-API-keys" class="common-anchor-header">Set up Apify and Open API keys<button data-href="#Set-up-Apify-and-Open-API-keys" class="anchor-icon" translate="no">
+<h2 id="Set-up-Apify-and-Open-API-keys" class="common-anchor-header">Настройка ключей Apify и Open API<button data-href="#Set-up-Apify-and-Open-API-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,7 +91,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = getpas
 <pre><code translate="no">Enter YOUR APIFY_API_TOKEN··········
 Enter YOUR OPENAI_API_KEY··········
 </code></pre>
-<h2 id="Set-up-MilvusZilliz-URI-token-and-collection-name" class="common-anchor-header">Set up Milvus/Zilliz URI, token and collection name<button data-href="#Set-up-MilvusZilliz-URI-token-and-collection-name" class="anchor-icon" translate="no">
+<h2 id="Set-up-MilvusZilliz-URI-token-and-collection-name" class="common-anchor-header">Настройка URI, токена и имени коллекции Milvus/Zilliz<button data-href="#Set-up-MilvusZilliz-URI-token-and-collection-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,12 +106,12 @@ Enter YOUR OPENAI_API_KEY··········
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You need the URI and Token of your Milvus/Zilliz to setup the client.</p>
+    </button></h2><p>Для настройки клиента вам понадобятся URI и токен вашего Milvus/Zilliz.</p>
 <ul>
-<li>If you have self-deployed Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>, use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise leave the token as empty string.</li>
-<li>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>Если вы самостоятельно развернули сервер Milvus на <a href="https://milvus.io/docs/quickstart.md">Docker или Kubernetes</a>, используйте адрес и порт сервера в качестве uri, например,<code translate="no">http://localhost:19530</code>. Если вы включили функцию аутентификации на Milvus, используйте "<your_username>:<your_password>" в качестве токена, в противном случае оставьте токен пустой строкой.</li>
+<li>Если вы используете <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, полностью управляемый облачный сервис для Milvus, настройте <code translate="no">uri</code> и <code translate="no">token</code>, которые соответствуют <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">публичной конечной точке и ключу API</a> в Zilliz Cloud.</li>
 </ul>
-<p>Note that the collection does not need to exist beforehand. It will be automatically created when data is uploaded to the database.</p>
+<p>Обратите внимание, что коллекция не обязательно должна существовать заранее. Она будет создана автоматически при загрузке данных в базу.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;MILVUS_URI&quot;</span>] = getpass(<span class="hljs-string">&quot;Enter YOUR MILVUS_URI&quot;</span>)
 os.environ[<span class="hljs-string">&quot;MILVUS_TOKEN&quot;</span>] = getpass(<span class="hljs-string">&quot;Enter YOUR MILVUS_TOKEN&quot;</span>)
 
@@ -120,7 +120,7 @@ MILVUS_COLLECTION_NAME = <span class="hljs-string">&quot;apify&quot;</span>
 <pre><code translate="no">Enter YOUR MILVUS_URI··········
 Enter YOUR MILVUS_TOKEN··········
 </code></pre>
-<h2 id="Using-the-Website-Content-Crawler-to-scrape-text-content-from-Milvusio" class="common-anchor-header">Using the Website Content Crawler to scrape text content from Milvus.io<button data-href="#Using-the-Website-Content-Crawler-to-scrape-text-content-from-Milvusio" class="anchor-icon" translate="no">
+<h2 id="Using-the-Website-Content-Crawler-to-scrape-text-content-from-Milvusio" class="common-anchor-header">Использование Website Content Crawler для сканирования текстового контента с Milvus.io<button data-href="#Using-the-Website-Content-Crawler-to-scrape-text-content-from-Milvusio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,8 +135,8 @@ Enter YOUR MILVUS_TOKEN··········
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Next, we’ll use the Website Content Crawler with the Apify Python SDK. We’ll start by defining the actor_id and run_input, then specify the information that will be saved to the vector database.</p>
-<p>The <code translate="no">actor_id=&quot;apify/website-content-crawler&quot;</code> is the identifier for the Website Content Crawler. The crawler’s behavior can be fully controlled via the run_input parameters (see the <a href="https://apify.com/apify/website-content-crawler/input-schema">input page</a> for more details). In this example, we’ll be crawling the Milvus documentation, which doesn’t require JavaScript rendering. Therefore, we set <code translate="no">crawlerType=cheerio</code>, define <code translate="no">startUrls</code>, and limit the number of crawled pages by setting <code translate="no">maxCrawlPages=10</code>.</p>
+    </button></h2><p>Далее мы будем использовать Website Content Crawler с Apify Python SDK. Начнем с определения actor_id и run_input, а затем укажем информацию, которая будет сохранена в векторной базе данных.</p>
+<p><code translate="no">actor_id=&quot;apify/website-content-crawler&quot;</code> - это идентификатор для Website Content Crawler. Поведение краулера можно полностью контролировать с помощью параметров run_input (подробнее см. на <a href="https://apify.com/apify/website-content-crawler/input-schema">странице ввода</a> ). В этом примере мы будем просматривать документацию Milvus, которая не требует отрисовки JavaScript. Поэтому мы зададим <code translate="no">crawlerType=cheerio</code>, определим <code translate="no">startUrls</code> и ограничим количество просматриваемых страниц, задав <code translate="no">maxCrawlPages=10</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> apify_client <span class="hljs-keyword">import</span> ApifyClient
 
 client = ApifyClient(os.getenv(<span class="hljs-string">&quot;APIFY_API_TOKEN&quot;</span>))
@@ -150,19 +150,19 @@ run_input = {
 
 actor_call = client.actor(actor_id).call(run_input=run_input)
 <button class="copy-code-btn"></button></code></pre>
-<p>The Website Content Crawler will thoroughly crawl the site until it reaches the predefined limit set by <code translate="no">maxCrawlPages</code>. The scraped data will be stored in a <code translate="no">Dataset</code> on the Apify platform. To access and analyze this data, you can use the <code translate="no">defaultDatasetId</code></p>
+<p>Website Content Crawler будет тщательно просматривать сайт, пока не достигнет заданного предела, установленного в <code translate="no">maxCrawlPages</code>. Собранные данные будут храниться в <code translate="no">Dataset</code> на платформе Apify. Чтобы получить доступ к этим данным и проанализировать их, вы можете воспользоваться функцией <code translate="no">defaultDatasetId</code></p>
 <pre><code translate="no" class="language-python">dataset_id = actor_call[<span class="hljs-string">&quot;defaultDatasetId&quot;</span>]
 dataset_id
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'P9dLFfeJAljlePWnz'
 </code></pre>
-<p>The following code fetches the scraped data from the Apify <code translate="no">Dataset</code> and displays the first scraped website</p>
+<p>Следующий код получает данные из Apify <code translate="no">Dataset</code> и отображает первый отсканированный сайт.</p>
 <pre><code translate="no" class="language-python">item = client.dataset(dataset_id).list_items(limit=<span class="hljs-number">1</span>).items
 item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;text&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'The High-Performance Vector Database Built for Scale\nStart running Milvus in seconds\nfrom pymilvus import MilvusClient client = MilvusClient(&quot;milvus_demo.db&quot;) client.create_collection( collection_name=&quot;demo_collection&quot;, dimension=5 )\nDeployment Options to Match Your Unique Journey\nMilvus Lite\nLightweight, easy to start\nVectorDB-as-a-library runs in notebooks/ laptops with a pip install\nBest for learning and prototyping\nMilvus Standalone\nRobust, single-machine deployment\nComplete vector database for production or testing\nIdeal for datasets with up to millions of vectors\nMilvus Distributed\nScalable, enterprise-grade solution\nHighly reliable and distributed vector database with comprehensive toolkit\nScale horizontally to handle billions of vectors\nZilliz Cloud\nFully managed with minimal operations\nAvailable in both serverless and dedicated cluster\nSaaS and BYOC options for different security and compliance requirements\nTry Free\nLearn more about different Milvus deployment models\nLoved by GenAI developers\nBased on our research, Milvus was selected as the vector database of choice (over Chroma and Pinecone). Milvus is an open-source vector database designed specifically for similarity search on massive datasets of high-dimensional vectors.\nWith its focus on efficient vector similarity search, Milvus empowers you to build robust and scalable image retrieval systems. Whether you’re managing a personal photo library or developing a commercial image search application, Milvus offers a powerful foundation for unlocking the hidden potential within your image collections.\nBhargav Mankad\nSenior Solution Architect\nMilvus is a powerful vector database tailored for processing and searching extensive vector data. It stands out for its high performance and scalability, rendering it perfect for machine learning, deep learning, similarity search tasks, and recommendation systems.\nIgor Gorbenko\nBig Data Architect\nStart building your GenAI app now\nGuided with notebooks developed by us and our community\nRAG\nTry Now\nImage Search\nTry Now\nMultimodal Search\nTry Now\nUnstructured Data Meetups\nJoin a Community of Passionate Developers and Engineers Dedicated to Gen AI.\nRSVP now\nWhy Developers Prefer Milvus for Vector Databases\nScale as needed\nElastic scaling to tens of billions of vectors with distributed architecture.\nBlazing fast\nRetrieve data quickly and accurately with Global Index, regardless of scale.\nReusable Code\nWrite once, and deploy with one line of code into the production environment.\nFeature-rich\nMetadata filtering, hybrid search, multi-vector and more.\nWant to learn more about Milvus? View our documentation\nJoin the community of developers building GenAI apps with Milvus, now with over 25 million downloads\nGet Milvus Updates\nSubscribe to get updates on the latest Milvus releases, tutorials and training from Zilliz, the creator and key maintainer of Milvus.'
 </code></pre>
-<p>To upload data into the Milvus database, we use the <a href="https://apify.com/apify/milvus-integration">Apify Milvus integration</a>. First, we need to set up the parameter for the Milvus database. Next, we select the fields (<code translate="no">datasetFields</code>) that we want to store in the database. In the example below, we are saving the <code translate="no">text</code> field and <code translate="no">metadata.title</code>.</p>
+<p>Для загрузки данных в базу Milvus мы используем <a href="https://apify.com/apify/milvus-integration">интеграцию Apify Milvus</a>. Сначала нам нужно настроить параметры для базы данных Milvus. Затем мы выбираем поля (<code translate="no">datasetFields</code>), которые хотим сохранить в базе данных. В примере ниже мы сохраняем поле <code translate="no">text</code> и <code translate="no">metadata.title</code>.</p>
 <pre><code translate="no" class="language-python">milvus_integration_inputs = {
     <span class="hljs-string">&quot;milvusUri&quot;</span>: os.getenv(<span class="hljs-string">&quot;MILVUS_URI&quot;</span>),
     <span class="hljs-string">&quot;milvusToken&quot;</span>: os.getenv(<span class="hljs-string">&quot;MILVUS_TOKEN&quot;</span>),
@@ -174,13 +174,13 @@ item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;tex
     <span class="hljs-string">&quot;embeddingsProvider&quot;</span>: <span class="hljs-string">&quot;OpenAI&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, we’ll call the <code translate="no">apify/milvus-integration</code> to store the data</p>
+<p>Теперь вызовем <code translate="no">apify/milvus-integration</code> для сохранения данных.</p>
 <pre><code translate="no" class="language-python">actor_call = client.actor(<span class="hljs-string">&quot;apify/milvus-integration&quot;</span>).call(
     run_input=milvus_integration_inputs
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>All the scraped data is now stored in the Milvus database and is ready for retrieval and question answering</p>
-<h1 id="Retrieval-and-LLM-generative-pipeline" class="common-anchor-header">Retrieval and LLM generative pipeline<button data-href="#Retrieval-and-LLM-generative-pipeline" class="anchor-icon" translate="no">
+<p>Теперь все отсканированные данные хранятся в базе данных Milvus и готовы к поиску и ответам на вопросы.</p>
+<h1 id="Retrieval-and-LLM-generative-pipeline" class="common-anchor-header">Поиск и генеративный конвейер LLM<button data-href="#Retrieval-and-LLM-generative-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -195,12 +195,12 @@ item[<span class="hljs-number">0</span>].get(<span class="hljs-string">&quot;tex
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Next, we’ll define the retrieval-augmented pipeline using Langchain. The pipeline works in two stages:</p>
+    </button></h1><p>Далее мы определим конвейер поиска и дополнения с помощью Langchain. Конвейер работает в два этапа:</p>
 <ul>
-<li>Vectorstore (Milvus): Langchain retrieves relevant documents from Milvus by matching query embeddings with stored document embeddings.</li>
-<li>LLM Response: The retrieved documents provide context for the LLM (e.g., GPT-4) to generate an informed answer.</li>
+<li>Векторное хранилище (Milvus): Langchain извлекает релевантные документы из Milvus, сопоставляя вкрапления запроса с вкраплениями хранящихся документов.</li>
+<li>Ответ LLM: Полученные документы обеспечивают контекст для LLM (например, GPT-4), чтобы сгенерировать обоснованный ответ.</li>
 </ul>
-<p>For more details about the RAG chain, please refer to the <a href="https://python.langchain.com/v0.2/docs/tutorials/rag/">Langchain documentation</a>.</p>
+<p>Более подробную информацию о цепочке RAG можно найти в <a href="https://python.langchain.com/v0.2/docs/tutorials/rag/">документации Langchain</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
@@ -239,7 +239,7 @@ rag_chain = (
     | StrOutputParser()
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Once we have the data in the database, we can start asking questions</p>
+<p>Как только мы получили данные в базе данных, мы можем начать задавать вопросы.</p>
 <hr>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What is Milvus database?&quot;</span>
 
@@ -247,7 +247,7 @@ rag_chain.invoke(question)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'Milvus is an open-source vector database specifically designed for billion-scale vector similarity search. It facilitates efficient management and querying of vector data, which is essential for applications involving unstructured data, such as AI and machine learning. Milvus allows users to perform operations like CRUD (Create, Read, Update, Delete) and vector searches, making it a powerful tool for handling large datasets.'
 </code></pre>
-<h1 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h1 id="Conclusion" class="common-anchor-header">Заключение<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -262,6 +262,6 @@ rag_chain.invoke(question)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In this tutorial, we demonstrated how to crawl website content using Apify, store the data in a Milvus vector database, and use a retrieval-augmented pipeline to perform question-answering tasks. By combining Apify’s web scraping capabilities with Milvus/Zilliz for vector storage and Langchain for language models, you can build highly effective information retrieval systems.</p>
-<p>To improve data collection and updates in the database, the Apify integration offers <a href="https://apify.com/apify/milvus-integration#incrementally-update-database-from-the-website-content-crawler">incremental updates</a>, which updates only new or modified data based on checksums. Additionally, it can automatically <a href="https://apify.com/apify/milvus-integration#delete-outdated-expired-data">remove outdated</a> data that hasn’t been crawled within a specified time. These features help keep your vector database optimized and ensure that your retrieval-augmented pipeline remains efficient and up-to-date with minimal manual effort.</p>
-<p>For more details on Apify-Milvus integration, please refer to the <a href="https://docs.apify.com/platform/integrations/milvus">Apify Milvus documentation</a> and the <a href="https://apify.com/apify/milvus-integration">integration README file</a>.</p>
+    </button></h1><p>В этом руководстве мы продемонстрировали, как с помощью Apify можно просматривать содержимое веб-сайтов, хранить данные в векторной базе данных Milvus и использовать конвейер с расширенным поиском для выполнения задач, связанных с ответами на вопросы. Комбинируя возможности Apify по скраппингу веб-сайтов с Milvus/Zilliz для хранения векторов и Langchain для языковых моделей, вы можете создавать высокоэффективные информационно-поисковые системы.</p>
+<p>Для улучшения сбора и обновления данных в базе интеграция с Apify предлагает <a href="https://apify.com/apify/milvus-integration#incrementally-update-database-from-the-website-content-crawler">инкрементное обновление</a>, при котором обновляются только новые или измененные данные на основе контрольных сумм. Кроме того, она может автоматически <a href="https://apify.com/apify/milvus-integration#delete-outdated-expired-data">удалять устаревшие</a> данные, которые не были просмотрены в течение определенного времени. Эти функции помогают оптимизировать базу данных векторов и обеспечивают эффективность и актуальность конвейера с расширенным поиском при минимальных затратах ручного труда.</p>
+<p>Для получения более подробной информации об интеграции Apify-Milvus обратитесь к <a href="https://docs.apify.com/platform/integrations/milvus">документации Apify Milvus</a> и <a href="https://apify.com/apify/milvus-integration">файлу README интеграции</a>.</p>

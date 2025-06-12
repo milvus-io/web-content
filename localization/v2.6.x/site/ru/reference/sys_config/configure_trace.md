@@ -2,9 +2,9 @@
 id: configure_trace.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure trace for Milvus.
+summary: 'Узнайте, как настроить трассировку для Milvus.'
 ---
-<h1 id="trace-related-Configurations" class="common-anchor-header">trace-related Configurations<button data-href="#trace-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="trace-related-Configurations" class="common-anchor-header">Конфигурации, связанные с трассировкой<button data-href="#trace-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +37,15 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.exporter">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>trace exporter type, default is stdout,</li>      
-        <li>optional values: ['noop','stdout', 'jaeger', 'otlp']</li>      </td>
+        <li>тип экспортера трассировки, по умолчанию - stdout,</li>      
+        <li>необязательные значения: ['noop','stdout','jaeger','otlp'].</li>      </td>
       <td>noop</td>
     </tr>
   </tbody>
@@ -68,16 +68,16 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.sampleFraction">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>fraction of traceID based sampler,</li>      
-        <li>optional values: [0, 1]</li>      
-        <li>Fractions >= 1 will always sample. Fractions < 0 are treated as zero.</li>      </td>
+        <li>доля пробоотборника, основанного на traceID,</li>      
+        <li>необязательные значения: [0, 1]</li>      
+        <li>Фракции &gt;= 1 всегда будут отбираться. Фракции &lt; 0 рассматриваются как нулевые.</li>      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -100,13 +100,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.jaeger.url">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        when exporter is jaeger should set the jaeger's URL      </td>
+      <td>        когда экспортером является jaeger, должен установить URL jaeger'а      </td>
       <td></td>
     </tr>
   </tbody>
@@ -129,13 +129,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.otlp.endpoint">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        example: "127.0.0.1:4317" for grpc, "127.0.0.1:4318" for http      </td>
+      <td>        пример: "127.0.0.1:4317" для grpc, "127.0.0.1:4318" для http    </td>
       <td></td>
     </tr>
   </tbody>
@@ -158,13 +158,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.otlp.method">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        otlp export method, acceptable values: ["grpc", "http"],  using "grpc" by default      </td>
+      <td>        Метод экспорта otlp, допустимые значения: ["grpc", "http"], по умолчанию используется "grpc".      </td>
       <td></td>
     </tr>
   </tbody>
@@ -187,13 +187,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.initTimeoutSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segcore initialization timeout in seconds, preventing otlp grpc hangs forever      </td>
+      <td>        таймаут инициализации segcore в секундах, предотвращающий вечное зависание otlp grpc    </td>
       <td>10</td>
     </tr>
   </tbody>

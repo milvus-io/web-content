@@ -1,13 +1,13 @@
 ---
 id: enable-dynamic-field.md
-title: Dynamic Field
+title: Динамическое поле
 summary: >-
-  All fields defined in the schema of a collection must be included in the
-  entities to be inserted. If you want some fields to be optional, consider
-  enabling the dynamic field. This topic describes how to enable and use the
-  dynamic field.
+  Все поля, определенные в схеме коллекции, должны быть включены в вставляемые
+  сущности. Если вы хотите, чтобы некоторые поля были необязательными, подумайте
+  о включении динамического поля. В этой теме описывается, как включить и
+  использовать динамическое поле.
 ---
-<h1 id="Dynamic-Field" class="common-anchor-header">Dynamic Field<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
+<h1 id="Dynamic-Field" class="common-anchor-header">Динамическое поле<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>All fields defined in the schema of a collection must be included in the entities to be inserted. If you want some fields to be optional, consider enabling the dynamic field. This topic describes how to enable and use the dynamic field.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Все поля, определенные в схеме коллекции, должны быть включены в вставляемые сущности. Если вы хотите, чтобы некоторые поля были необязательными, подумайте о включении динамического поля. В этой теме описывается, как включить и использовать динамическое поле.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,10 +38,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you can create a collection schema by setting the names and data types for each field in the collection. When you add a field to the schema, make sure that this field is included in the entity you intend to insert. If you want some fields to be optional, enabling the dynamic field is one option.</p>
-<p>The dynamic field is a reserved field named <strong>$meta</strong>, which is of the JavaScript Object Notation (JSON) type. Any fields in the entities that are not defined in the schema will be stored in this reserved JSON field as key-value pairs.</p>
-<p>For a collection with the dynamic field enabled, you can use keys in the dynamic field for scalar filtering, just as you would with fields explicitly defined in the schema.</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">Enable dynamic field<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+    </button></h2><p>В Milvus вы можете создать схему коллекции, задав имена и типы данных для каждого поля в коллекции. Когда вы добавляете поле в схему, убедитесь, что оно включено в сущность, которую вы собираетесь вставить. Если вы хотите, чтобы некоторые поля были необязательными, одним из вариантов является включение динамического поля.</p>
+<p>Динамическое поле - это зарезервированное поле с именем <strong>$meta</strong>, которое имеет тип JavaScript Object Notation (JSON). Любые поля сущностей, которые не определены в схеме, будут храниться в этом зарезервированном поле JSON в виде пар ключ-значение.</p>
+<p>Для коллекции с включенным динамическим полем вы можете использовать ключи в динамическом поле для скалярной фильтрации, как и для полей, явно определенных в схеме.</p>
+<h2 id="Enable-dynamic-field" class="common-anchor-header">Включение динамического поля<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,14 +56,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can enable the dynamic field manually when creating a collection with custom settings.</p>
+    </button></h2><p>Вы можете включить динамическое поле вручную при создании коллекции с пользовательскими настройками.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -140,7 +135,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     &quot;enableDynamicField&quot;: true
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-dynamic-field" class="common-anchor-header">Use dynamic field<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="Use-dynamic-field" class="common-anchor-header">Использование динамического поля<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,8 +150,8 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When the dynamic field is enabled in your collection, all fields and their values that are not defined in the schema will be stored as key-value pairs in the dynamic field.</p>
-<p>For example, suppose your collection schema defines only two fields, named <code translate="no">id</code> and <code translate="no">vector</code>, with the dynamic field enabled. Now, insert the following dataset into this collection.</p>
+    </button></h2><p>Когда в коллекции включено динамическое поле, все поля и их значения, не определенные в схеме, будут храниться как пары ключ-значение в динамическом поле.</p>
+<p>Например, предположим, что в схеме вашей коллекции определены только два поля <code translate="no">id</code> и <code translate="no">vector</code> с включенным динамическим полем. Теперь вставьте в эту коллекцию следующий набор данных.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19886812562848388</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.06023560599112088</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6976963061752597</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2614474506242501</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.838729485096104</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -170,15 +165,10 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">9</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.5718280481994695</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24070317428066512</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.3737913482606834</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.06726932177492717</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6980531615588608</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purple_4976&quot;</span><span class="hljs-punctuation">}</span>        
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The dataset above contains 10 entities, each including the fields <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code>. Here, the <code translate="no">color</code> field is not defined in the schema. Since the collection has the dynamic field enabled, the field <code translate="no">color</code> will be stored as a key-value pair within the dynamic field.</p>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>The following code demonstrates how to insert this dataset into the collection.</p>
+<p>Приведенный выше набор данных содержит 10 сущностей, каждая из которых включает поля <code translate="no">id</code>, <code translate="no">vector</code> и <code translate="no">color</code>. Здесь поле <code translate="no">color</code> не определено в схеме. Поскольку в коллекции включено динамическое поле, поле <code translate="no">color</code> будет храниться как пара ключ-значение в динамическом поле.</p>
+<h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>Следующий код демонстрирует, как вставить этот набор данных в коллекцию.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -330,26 +320,21 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">Index a scalar field in the dynamic field</h3><p>When you enable a dynamic field, any undefined scalar fields are stored as key-value pairs in JSON format. Milvus supports creating an index on such an undefined scalar field, effectively by building a JSON path index. Here’s how it works:</p>
+<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">Индексирование скалярного поля в динамическом поле</h3><p>Когда вы включаете динамическое поле, все неопределенные скалярные поля хранятся как пары ключ-значение в формате JSON. Milvus поддерживает создание индекса для такого неопределенного скалярного поля, эффективно создавая индекс пути JSON. Вот как это работает:</p>
 <ol>
-<li><p><strong>Choose the dynamic field key</strong> you want to index. For example, <code translate="no">&quot;color&quot;</code> in the example above.</p></li>
-<li><p><strong>Decide on a cast type</strong> for the values found at that key. Milvus will parse the dynamic field, extract the values under the specified key, and cast them to the type you configure.</p>
+<li><p><strong>Выберите ключ динамического поля</strong>, которое вы хотите проиндексировать. Например, <code translate="no">&quot;color&quot;</code> в примере выше.</p></li>
+<li><p><strong>Определите тип приведения</strong> для значений, найденных по этому ключу. Milvus разберет динамическое поле, извлечет значения по указанному ключу и приведет их к тому типу, который вы зададите.</p>
 <ul>
-<li><p>Supported <code translate="no">json_cast_type</code> values are <code translate="no">bool</code> (or <code translate="no">BOOL</code>), <code translate="no">double</code> (or <code translate="no">DOUBLE</code>), and <code translate="no">varchar</code> (or <code translate="no">VARCHAR</code>).</p></li>
-<li><p>If parsing or casting fails (for example, trying to parse a string as double), those rows will be skipped in the index.</p></li>
+<li><p>Поддерживаются следующие значения <code translate="no">json_cast_type</code>: <code translate="no">bool</code> (или <code translate="no">BOOL</code>), <code translate="no">double</code> (или <code translate="no">DOUBLE</code>) и <code translate="no">varchar</code> (или <code translate="no">VARCHAR</code>).</p></li>
+<li><p>Если парсинг или приведение не удается (например, попытка разобрать строку как double), такие строки будут пропущены в индексе.</p></li>
 </ul></li>
-<li><p><strong>Specify the JSON path</strong> to that key as <code translate="no">json_path</code>. Since the dynamic field is stored as JSON, you can specify something like <code translate="no">&quot;color&quot;</code>, or if you have nested structures, you can specify deeper paths (e.g. <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
-<li><p><strong>Create an INVERTED index</strong>. Currently, only <code translate="no">INVERTED</code> type is supported for JSON path indexing.</p></li>
+<li><p><strong>Укажите путь JSON</strong> к этому ключу как <code translate="no">json_path</code>. Поскольку динамическое поле хранится в формате JSON, вы можете указать что-то вроде <code translate="no">&quot;color&quot;</code>, или, если у вас есть вложенные структуры, вы можете указать более глубокие пути (например, <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
+<li><p><strong>Создайте индекс INVERTED</strong>. В настоящее время для индексирования путей JSON поддерживается только тип <code translate="no">INVERTED</code>.</p></li>
 </ol>
-<p>For details on parameters and considerations, refer to <a href="/docs/use-json-fields.md#Index-a-JSON-field">Index a JSON field</a>.</p>
-<p>Below is an example of how to create an index on the <code translate="no">&quot;color&quot;</code> field:</p>
+<p>Подробнее о параметрах и правилах см. в разделе <a href="/docs/ru/use-json-fields.md#Index-a-JSON-field">Индексирование поля JSON</a>.</p>
+<p>Ниже приведен пример создания индекса по полю <code translate="no">&quot;color&quot;</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -437,14 +422,9 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">Query and search with dynamic field</h3><p>Milvus supports the use of filter expressions during queries and searches, allowing you to specify which fields to include in the results. The following example demonstrates how to perform queries and searches using the <code translate="no">color</code> field, which is not defined in the schema, by using the dynamic field.</p>
+<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">Запрос и поиск с динамическим полем</h3><p>Milvus поддерживает использование выражений фильтрации при запросах и поиске, позволяя указывать, какие поля включать в результаты. Следующий пример демонстрирует, как с помощью динамического поля выполнять запросы и поиск по полю <code translate="no">color</code>, которое не определено в схеме.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
 res = client.search(
@@ -536,7 +516,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the filter expression used in the code example above, <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>, the conditions specify that the value of the <code translate="no">color</code> field must start with <strong>“red”</strong>. In the sample data, only two entities meet this condition. Thus, when <code translate="no">limit</code> (topK) is set to <code translate="no">3</code> or fewer, both of these entities will be returned.</p>
+<p>В выражении фильтра, использованном в приведенном выше примере кода, <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>, условия указывают, что значение поля <code translate="no">color</code> должно начинаться с <strong>"red".</strong> В данных примера этому условию удовлетворяют только две сущности. Таким образом, когда <code translate="no">limit</code> (topK) устанавливается на <code translate="no">3</code> или меньше, будут возвращены обе эти сущности.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 

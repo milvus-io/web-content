@@ -46,7 +46,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
    </span> <span class="img-wrapper"> <span>Растровое индексирование</span> </span></p>
-<p>Как показано на рисунке, растровые индексы для <strong>категорий Category</strong> и <strong>Public</strong> будут следующими.</p>
+<p>Как показано на рисунке, растровые индексы для <strong>Category</strong> и <strong>Public</strong> будут следующими.</p>
 <ul>
 <li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], что показывает, что только 1-й и 3-й документы попадают в категорию <strong>Tech</strong>.</p></li>
 <li><p><strong>Public</strong>: [1, 0, 0, 1, 0], что показывает, что только 1-й и 4-й документы открыты для <strong>публики</strong>.</p></li>

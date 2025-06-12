@@ -1,10 +1,10 @@
 ---
 id: message_storage_operator.md
-title: Configure Message Storage with Milvus Operator
+title: Настройка хранилища сообщений в Milvus Operator
 related_key: 'minio, s3, storage, etcd, pulsar'
-summary: Learn how to configure message storage with Milvus Operator.
+summary: 'Узнайте, как настроить хранение сообщений с помощью Milvus Operator.'
 ---
-<h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">Configure Message Storage with Milvus Operator<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">Настройка хранилища сообщений в Milvus Operator<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +19,14 @@ summary: Learn how to configure message storage with Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus uses RocksMQ, Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. This topic introduces how to configure message storage dependencies when you install Milvus with Milvus Operator. For more details, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configure Message Storage with Milvus Operator</a> in the Milvus Operator repository.</p>
-<p>This topic assumes that you have deployed Milvus Operator.</p>
-<div class="alert note">See <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
-<p>You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.</p>
+    </button></h1><p>Milvus использует RocksMQ, Pulsar или Kafka для управления журналами последних изменений, вывода потоковых журналов и предоставления подписок на журналы. В этой теме описывается настройка зависимостей хранилища сообщений при установке Milvus с Milvus Operator. Для получения дополнительной информации см. раздел <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Настройка хранилища сообщений с Milvus Operator</a> в репозитории Milvus Operator.</p>
+<p>В этой теме предполагается, что вы развернули Milvus Operator.</p>
+<div class="alert note">Дополнительные сведения см. в разделе <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Развертывание Milvus Operator</a>. </div>
+<p>Вам нужно указать файл конфигурации для использования Milvus Operator для запуска кластера Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You only need to edit the code template in <code translate="no">milvus_cluster_default.yaml</code> to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+<p>Для настройки сторонних зависимостей достаточно отредактировать шаблон кода в <code translate="no">milvus_cluster_default.yaml</code>. В следующих разделах описывается настройка объектного хранилища, etcd и Pulsar соответственно.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,28 +41,27 @@ summary: Learn how to configure message storage with Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The table below shows whether RocksMQ, NATS, Pulsar, and Kafka are supported in Milvus standalone and cluster mode.</p>
+    </button></h2><p>В таблице ниже показано, поддерживаются ли RocksMQ, NATS, Pulsar и Kafka в автономном и кластерном режиме Milvus.</p>
 <table>
 <thead>
 <tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">NATS</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">Standalone mode</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
-<tr><td style="text-align:center">Cluster mode</td><td style="text-align:center">✖️</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
+<tr><td style="text-align:center">Автономный режим</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
+<tr><td style="text-align:center">Кластерный режим</td><td style="text-align:center">✖️</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
-<p>There are also other limitations for specifying the message storage:</p>
+<p>Существуют и другие ограничения на указание хранилища сообщений:</p>
 <ul>
-<li>Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
-<ul>
-<li>standalone mode:  RocksMQ (default) > Pulsar > Kafka</li>
-<li>cluster mode: Pulsar (default) > Kafka</li>
-<li>Nats introduced in 2.3 do not participate in these priority rules for backward compatibility.</li>
+<li>Поддерживается только одно хранилище сообщений для одного экземпляра Milvus. Однако у нас сохраняется обратная совместимость с несколькими хранилищами сообщений, установленными для одного экземпляра. Приоритет следующий:<ul>
+<li>автономный режим:  RocksMQ (по умолчанию) &gt; Pulsar &gt; Kafka</li>
+<li>кластерный режим: Pulsar (по умолчанию) &gt; Kafka</li>
+<li>Наборы, представленные в версии 2.3, не участвуют в этих правилах приоритета в целях обратной совместимости.</li>
 </ul></li>
-<li>The message storage cannot be changed while the Milvus system is running.</li>
-<li>Only Kafka 2.x or 3.x verison is supported.</li>
+<li>Хранилище сообщений не может быть изменено во время работы системы Milvus.</li>
+<li>Поддерживается только версия Kafka 2.x или 3.x.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">Configure RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">Настройка RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,11 +76,11 @@ summary: Learn how to configure message storage with Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ is the default message storage in Milvus standalone.</p>
+    </button></h2><p>RocksMQ - это хранилище сообщений по умолчанию в автономной системе Milvus.</p>
 <div class="alert note">
-<p>Currently, you can only configure RocksMQ as the message storage for Milvus standalone with Milvus Operator.</p>
+<p>В настоящее время настроить RocksMQ в качестве хранилища сообщений для Milvus standalone можно только с помощью Milvus Operator.</p>
 </div>
-<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a RocksMQ service.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается служба RocksMQ.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -104,16 +103,16 @@ summary: Learn how to configure message storage with Milvus Operator.
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">Key configuration options:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Explicitly sets RocksMQ as the message queue</li>
-<li><code translate="no">persistence.enabled</code>: Enables persistent storage for RocksMQ data</li>
-<li><code translate="no">persistence.pvcDeletion</code>: When true, the PVC will be deleted when the Milvus instance is deleted</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: Standard Kubernetes PVC specification</li>
-<li><code translate="no">accessModes</code>: Typically <code translate="no">ReadWriteOnce</code> for block storage</li>
-<li><code translate="no">storageClassName</code>: Your cluster’s storage class</li>
-<li><code translate="no">storage</code>: Size of the persistent volume</li>
+<h5 id="Key-configuration-options" class="common-anchor-header">Основные параметры конфигурации:</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: Явно устанавливает RocksMQ в качестве очереди сообщений.</li>
+<li><code translate="no">persistence.enabled</code>: Включает постоянное хранение данных RocksMQ.</li>
+<li><code translate="no">persistence.pvcDeletion</code>: При значении true, PVC будет удаляться при удалении экземпляра Milvus.</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Стандартная спецификация Kubernetes PVC</li>
+<li><code translate="no">accessModes</code>: Обычно <code translate="no">ReadWriteOnce</code> для блочного хранилища.</li>
+<li><code translate="no">storageClassName</code>: Класс хранилища вашего кластера</li>
+<li><code translate="no">storage</code>: Размер постоянного тома</li>
 </ul>
-<h2 id="Configure-NATS" class="common-anchor-header">Configure NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h2 id="Configure-NATS" class="common-anchor-header">Настройка NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,8 +127,8 @@ summary: Learn how to configure message storage with Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS is an alternative message storage for NATS.</p>
-<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a NATS service.</p>
+    </button></h2><p>NATS - это альтернативное хранилище сообщений для NATS.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается служба NATS.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -171,25 +170,25 @@ summary: Learn how to configure message storage with Milvus Operator.
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>To migrate the message storage from RocksMQ to NATS, do as follows:</p>
+<p>Чтобы перенести хранилище сообщений с RocksMQ на NATS, сделайте следующее:</p>
 <ol>
-<li><p>Stop all DDL operations.</p></li>
-<li><p>Call the FlushAll API and then stop Milvus once the API call finishes executing.</p></li>
-<li><p>Change <code translate="no">msgStreamType</code> to <code translate="no">natsmq</code> and make necessary changes to NATS settings in <code translate="no">spec.dependencies.natsmq</code>.</p></li>
-<li><p>Start Milvus again and check whether:</p>
+<li><p>Остановите все операции DDL.</p></li>
+<li><p>Вызовите API FlushAll, а затем остановите Milvus после завершения выполнения вызова API.</p></li>
+<li><p>Измените <code translate="no">msgStreamType</code> на <code translate="no">natsmq</code> и внесите необходимые изменения в настройки NATS на <code translate="no">spec.dependencies.natsmq</code>.</p></li>
+<li><p>Снова запустите Milvus и проверьте:</p>
 <ul>
-<li>A log entry that reads <code translate="no">mqType=natsmq</code> is present in the logs.</li>
-<li>A directory named <code translate="no">jetstream</code> is present in the directory specified in <code translate="no">spec.dependencies.natsmq.server.storeDir</code>.</li>
+<li>В журналах присутствует запись с текстом <code translate="no">mqType=natsmq</code>.</li>
+<li>Каталог с именем <code translate="no">jetstream</code> присутствует в каталоге, указанном в <code translate="no">spec.dependencies.natsmq.server.storeDir</code>.</li>
 </ul></li>
-<li><p>(Optional) Back up and clean up the data files in the RocksMQ storage directory.</p></li>
+<li><p>(Необязательно) Создайте резервную копию и очистите файлы данных в каталоге хранения RocksMQ.</p></li>
 </ol>
 <div class="alert note">
-<p><strong>Choose between RocksMQ and NATS?</strong></p>
-<p>RockMQ uses CGO to interact with RocksDB and manages the memory by itself, while the pure-GO NATS embedded in the Milvus installation delegates its memory management to Go’s garbage collector (GC).</p>
-<p>In the scenario where the data packet is smaller than 64 kb, RocksDB outperforms in terms of memory usage, CPU usage, and response time. On the other hand, if the data packet is greater than 64 kb, NATS excels in terms of response time with sufficient memory and ideal GC scheduling.</p>
-<p>Currently, you are advised to use NATS only for experiments.</p>
+<p><strong>Выбор между RocksMQ и NATS?</strong></p>
+<p>RocksMQ использует CGO для взаимодействия с RocksDB и самостоятельно управляет памятью, в то время как NATS, встроенный в Milvus, делегирует управление памятью сборщику мусора (GC) Go.</p>
+<p>В сценарии, когда пакет данных меньше 64 кб, RocksDB превосходит по использованию памяти, загрузке процессора и времени отклика. С другой стороны, если пакет данных больше 64 кб, NATS превосходит по времени отклика при достаточном объеме памяти и идеальном планировании GC.</p>
+<p>В настоящее время рекомендуется использовать NATS только для экспериментов.</p>
 </div>
-<h2 id="Configure-Pulsar" class="common-anchor-header">Configure Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
+<h2 id="Configure-Pulsar" class="common-anchor-header">Настройка Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,15 +203,14 @@ summary: Learn how to configure message storage with Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar manages logs of recent changes, outputs stream logs, and provides log subscriptions. Configuring Pulsar for message storage is supported in both Milvus standalone and Milvus cluster. However, with Milvus Operator, you can only configure Pulsar as message storage for Milvus cluster. Add required fields under <code translate="no">spec.dependencies.pulsar</code> to configure Pulsar.</p>
-<p><code translate="no">pulsar</code> supports <code translate="no">external</code> and <code translate="no">inCluster</code>.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">External Pulsar</h3><p><code translate="no">external</code> indicates using an external Pulsar service.
-Fields used to configure an external Pulsar service include:</p>
+    </button></h2><p>Pulsar управляет журналами последних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar для хранения сообщений поддерживается как в автономном Milvus, так и в кластере Milvus. Однако в Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Для настройки Pulsar добавьте необходимые поля в поле <code translate="no">spec.dependencies.pulsar</code>.</p>
+<p><code translate="no">pulsar</code> Поддерживаются <code translate="no">external</code> и <code translate="no">inCluster</code>.</p>
+<h3 id="External-Pulsar" class="common-anchor-header">Внешний Pulsar</h3><p><code translate="no">external</code> указывает на использование внешней службы Pulsar. Поля, используемые для настройки внешней службы Pulsar, включают:</p>
 <ul>
-<li><code translate="no">external</code>:  A <code translate="no">true</code> value indicates that Milvus uses an external Pulsar service.</li>
-<li><code translate="no">endpoints</code>: The endpoints of Pulsar.</li>
+<li><code translate="no">external</code>:  Значение <code translate="no">true</code> указывает на то, что Milvus использует внешнюю службу Pulsar.</li>
+<li><code translate="no">endpoints</code>: Конечные точки Pulsar.</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external Pulsar service.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается внешняя служба Pulsar.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -231,8 +229,8 @@ Fields used to configure an external Pulsar service include:</p>
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">Internal Pulsar</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, a Pulsar service starts automatically in the cluster.</p>
-<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal Pulsar service.</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">Внутренний Pulsar</h3><p><code translate="no">inCluster</code> указывает, что при запуске кластера Milvus в нем автоматически запускается служба Pulsar.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается внутренняя служба Pulsar.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -271,12 +269,12 @@ Fields used to configure an external Pulsar service include:</p>
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
-<div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Add configuration items as needed under <code translate="no">pulsar.inCluster.values</code> as shown in the preceding example.</div>
-<p>Assuming that the configuration file is named <code translate="no">milvuscluster.yaml</code>, run the following command to apply the configuration.</p>
+<div class="alert note">В этом примере указывается количество реплик каждого компонента Pulsar, вычислительные ресурсы Pulsar BookKeeper и другие конфигурации.</div>
+<div class="alert note">Полный набор элементов конфигурации для настройки внутреннего сервиса Pulsar находится в <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Добавьте необходимые элементы конфигурации в файл <code translate="no">pulsar.inCluster.values</code>, как показано в предыдущем примере.</div>
+<p>Предполагая, что файл конфигурации имеет имя <code translate="no">milvuscluster.yaml</code>, выполните следующую команду, чтобы применить конфигурацию.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-Kafka" class="common-anchor-header">Configure Kafka<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">
+<h2 id="Configure-Kafka" class="common-anchor-header">Настройка Kafka<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -291,15 +289,15 @@ Fields used to configure an external Pulsar service include:</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar is the default message storage in a Milvus cluster. If you want to use Kafka, add the optional field <code translate="no">msgStreamType</code> to configure Kafka.</p>
-<p><code translate="no">kafka</code> supports <code translate="no">external</code> and <code translate="no">inCluster</code>.</p>
-<h3 id="External-Kafka" class="common-anchor-header">External Kafka</h3><p><code translate="no">external</code> indicates using an external Kafka service.</p>
-<p>Fields used to configure an external Kafka service include:</p>
+    </button></h2><p>Pulsar - это хранилище сообщений по умолчанию в кластере Milvus. Если вы хотите использовать Kafka, добавьте необязательное поле <code translate="no">msgStreamType</code> для настройки Kafka.</p>
+<p><code translate="no">kafka</code> Поддерживаются <code translate="no">external</code> и <code translate="no">inCluster</code>.</p>
+<h3 id="External-Kafka" class="common-anchor-header">Внешняя Kafka</h3><p><code translate="no">external</code> указывает на использование внешней службы Kafka.</p>
+<p>Поля, используемые для настройки внешнего сервиса Kafka, включают:</p>
 <ul>
-<li><code translate="no">external</code>: A <code translate="no">true</code> value indicates that Milvus uses an external Kafka service.</li>
-<li><code translate="no">brokerList</code>: The list of brokers to send the messages to.</li>
+<li><code translate="no">external</code>: Значение <code translate="no">true</code> указывает на то, что Milvus использует внешнюю службу Kafka.</li>
+<li><code translate="no">brokerList</code>: Список брокеров для отправки сообщений.</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external Kafka service.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается внешний сервис Kafka.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -327,10 +325,10 @@ Fields used to configure an external Pulsar service include:</p>
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>SASL configurations are supported in operator v0.8.5 or higher version.</p>
+<p>Конфигурации SASL поддерживаются в версии оператора v0.8.5 или выше.</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">Internal Kafka</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, a Kafka service starts automatically in the cluster.</p>
-<h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal Kafka service.</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">Внутренний Kafka</h3><p><code translate="no">inCluster</code> указывает, что при запуске кластера Milvus в нем автоматически запускается служба Kafka.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается внутренняя служба Kafka.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -346,11 +344,11 @@ Fields used to configure an external Pulsar service include:</p>
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Find the complete configuration items to configure an internal Kafka service <a href="https://artifacthub.io/packages/helm/bitnami/kafka">here</a>. Add configuration items as needed under <code translate="no">kafka.inCluster.values</code>.</p>
-<p>Assuming that the configuration file is named <code translate="no">milvuscluster.yaml</code>, run the following command to apply the configuration.</p>
+<p>Полный список элементов конфигурации для настройки внутренней службы Kafka можно найти <a href="https://artifacthub.io/packages/helm/bitnami/kafka">здесь</a>. Добавьте необходимые элементы конфигурации по адресу <code translate="no">kafka.inCluster.values</code>.</p>
+<p>Предполагая, что файл конфигурации имеет имя <code translate="no">milvuscluster.yaml</code>, выполните следующую команду, чтобы применить конфигурацию.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -365,8 +363,8 @@ Fields used to configure an external Pulsar service include:</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Learn how to configure other Milvus dependencies with Milvus Operator:</p>
+    </button></h2><p>Узнайте, как настроить другие зависимости Milvus с помощью Milvus Operator:</p>
 <ul>
-<li><a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
-<li><a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
+<li><a href="/docs/ru/object_storage_operator.md">Настройка объектного хранилища с помощью Milvus Operator</a></li>
+<li><a href="/docs/ru/meta_storage_operator.md">Настройка метахранилища с помощью Milvus Operator</a></li>
 </ul>

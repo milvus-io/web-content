@@ -1,10 +1,10 @@
 ---
 id: gpu_index.md
 related_key: gpu_index
-summary: GPU index mechanism in Milvus.
-title: GPU Index
+summary: Механизм индексации GPU в Milvus.
+title: Индекс GPU
 ---
-<h1 id="GPU-Index" class="common-anchor-header">GPU Index<button data-href="#GPU-Index" class="anchor-icon" translate="no">
+<h1 id="GPU-Index" class="common-anchor-header">Индекс GPU<button data-href="#GPU-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,15 +19,13 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports various GPU index types to accelerate search performance and efficiency, especially in high-throughput, and high-recall scenarios. This topic provides an overview of the GPU index types supported by Milvus, their suitable use cases, and performance characteristics. For information on building indexes with GPU, refer to <a href="/docs/index-with-gpu.md">Index with GPU</a>.</p>
-<p>It’s important to note that using a GPU index may not necessarily reduce latency compared to using a CPU index. If you want to fully maximize throughput, you will need extremely high request pressure or a large number of query vectors.</p>
+    </button></h1><p>Milvus поддерживает различные типы GPU-индексов для повышения производительности и эффективности поиска, особенно в сценариях с высокой пропускной способностью и большим количеством обращений. В этой теме представлен обзор типов GPU-индексов, поддерживаемых Milvus, их подходящих вариантов использования и характеристик производительности. Информацию о создании индексов с помощью GPU см. в разделе <a href="/docs/ru/index-with-gpu.md">Индекс с GPU</a>.</p>
+<p>Важно отметить, что использование GPU-индекса не обязательно снизит задержку по сравнению с использованием CPU-индекса. Если вы хотите полностью увеличить пропускную способность, вам потребуется очень высокое давление запросов или большое количество векторов запросов.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
-    <span>performance</span>
-  </span>
-</p>
-<p>Milvus’ GPU support is contributed by Nvidia <a href="https://rapids.ai/">RAPIDS</a> team. The following are the GPU index types currently supported by Milvus.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   </span> <span class="img-wrapper"> <span>производительность</span> </span></p>
+<p>Поддержка GPU в Milvus обеспечивается командой Nvidia <a href="https://rapids.ai/">RAPIDS</a>. Ниже перечислены типы GPU-индексов, поддерживаемые Milvus в настоящее время.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,46 +41,46 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs to run the Milvus GPU version can be more cost-effective compared to using expensive training-grade GPUs.</p>
+    </button></h2><p>GPU_CAGRA - это графовый индекс, оптимизированный для GPU. Использование GPU класса inference для запуска GPU-версии Milvus может быть более экономичным по сравнению с использованием дорогих GPU класса training.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Параметры построения индекса</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>Параметр</th><th>Описание</th><th>Значение по умолчанию</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">intermediate_graph_degree</code></td><td>Affects recall and build time by determining the graph’s degree before pruning. Recommended values are <code translate="no">32</code> or <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">graph_degree</code></td><td>Affects search performance and recall by setting the graph’s degree after pruning. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
-<tr><td><code translate="no">build_algo</code></td><td>Selects the graph generation algorithm before pruning. Possible values:</br><code translate="no">IVF_PQ</code>: Offers higher quality but slower build time.</br> <code translate="no">NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</td><td><code translate="no">IVF_PQ</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">“false”</code></td></tr>
-<tr><td><code translate="no">adapt_for_cpu</code></td><td>Decides whether to use GPU for index-building and CPU for search. <br/>Setting this parameter to <code translate="no">true</code> requires the presence of the <code translate="no">ef</code> parameter in the search requests.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">intermediate_graph_degree</code></td><td>Влияет на запоминание и время построения, определяя степень графа перед обрезкой. Рекомендуемые значения: <code translate="no">32</code> или <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">graph_degree</code></td><td>Влияет на производительность поиска и запоминание, определяя степень графа после обрезки. Большая разница между этими двумя степенями приводит к увеличению времени построения. Его значение должно быть меньше значения <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
+<tr><td><code translate="no">build_algo</code></td><td>Выбирает алгоритм генерации графа перед обрезкой. Возможные значения:</br><code translate="no">IVF_PQ</code>: : Обеспечивает более высокое качество, но меньшее время построения.</br> <code translate="no">NN_DESCENT</code>: Обеспечивает более быстрое построение с потенциально более низким отзывом.</td><td><code translate="no">IVF_PQ</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Решает, кэшировать ли исходный набор данных в памяти GPU. Возможные значения:</br><code translate="no">“true”</code>: Кэширует исходный набор данных, чтобы повысить запоминаемость за счет уточнения результатов поиска.</br> <code translate="no">“false”</code>: Не кэширует исходный набор данных для экономии памяти GPU.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">adapt_for_cpu</code></td><td>Определяет, использовать ли GPU для построения индексов и CPU для поиска. <br/>Установка этого параметра в значение <code translate="no">true</code> требует наличия параметра <code translate="no">ef</code> в поисковых запросах.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Параметры поиска</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>Параметр</th><th>Описание</th><th>Значение по умолчанию</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">itopk_size</code></td><td>Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (limit) value and is typically a power of 2 (e.g., 16, 32, 64, 128).</td><td>Empty</td></tr>
-<tr><td><code translate="no">search_width</code></td><td>Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance（e.g. 1, 2, 4, 8, 16, 32).</td><td>Empty</td></tr>
-<tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Controls the search iteration process. By default, they are set to <code translate="no">0</code>, and CAGRA automatically determines the number of iterations based on <code translate="no">itopk_size</code> and <code translate="no">search_width</code>. Adjusting these values manually can help balance performance and accuracy.</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">team_size</code></td><td>Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is <code translate="no">0</code>, where Milvus automatically selects the <code translate="no">team_size</code> based on the vector dimension.</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">ef</code></td><td>Specifies the query time/accuracy trade-off. A higher <code translate="no">ef</code> value leads to more accurate but slower search. <br/>This parameter is mandatory if you set <code translate="no">adapt_for_cpu</code> to <code translate="no">true</code> when you build the index.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
+<tr><td><code translate="no">itopk_size</code></td><td>Определяет размер промежуточных результатов, сохраняемых во время поиска. Большее значение может улучшить запоминание за счет снижения производительности поиска. Оно должно быть, по крайней мере, равно конечному значению top-k (limit) и, как правило, равно 2 (например, 16, 32, 64, 128).</td><td>Пустой</td></tr>
+<tr><td><code translate="no">search_width</code></td><td>Определяет количество точек входа в граф CAGRA во время поиска. Увеличение этого значения может улучшить запоминание, но может повлиять на производительность поиска (например, 1, 2, 4, 8, 16, 32).</td><td>Empty</td></tr>
+<tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Управляет процессом итерации поиска. По умолчанию они установлены на <code translate="no">0</code>, и CAGRA автоматически определяет количество итераций на основе <code translate="no">itopk_size</code> и <code translate="no">search_width</code>. Настройка этих значений вручную может помочь сбалансировать производительность и точность.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">team_size</code></td><td>Указывает количество потоков CUDA, используемых для вычисления метрического расстояния на GPU. Обычные значения - от 2 до 32 (например, 2, 4, 8, 16, 32). Это значение незначительно влияет на производительность поиска. По умолчанию используется значение <code translate="no">0</code>, при котором Milvus автоматически выбирает <code translate="no">team_size</code> в зависимости от размерности вектора.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>Определяет компромисс между временем запроса и точностью. Более высокое значение <code translate="no">ef</code> приводит к более точному, но более медленному поиску. <br/>Этот параметр обязателен, если при построении индекса вы установили <code translate="no">adapt_for_cpu</code> на <code translate="no">true</code>.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 <ul>
-<li><p>Limits on search</p>
+<li><p>Ограничения на поиск</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>Параметр</th><th>Диапазон</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= 1024</td></tr>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -102,42 +100,42 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Similar to <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, GPU_IVF_FLAT also divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Results from the <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT performance test</a> demonstrate that query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
-<p>When conducting searches, note that you can set the top-K up to 256 for any search against a GPU_IVF_FLAT-indexed collection.</p>
+    </button></h2><p>Подобно <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, GPU_IVF_FLAT также делит векторные данные на кластеры <code translate="no">nlist</code>, а затем сравнивает расстояния между целевым входным вектором и центром каждого кластера. В зависимости от количества кластеров, к которым система настроена на запрос (<code translate="no">nprobe</code>), результаты поиска сходства возвращаются на основе сравнений между целевым входным вектором и векторами только в наиболее похожих кластерах, что значительно сокращает время запроса.</p>
+<p>Настраивая <code translate="no">nprobe</code>, можно найти идеальный баланс между точностью и скоростью для конкретного сценария. Результаты <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">тестирования производительности IVF_FLAT</a> показывают, что время выполнения запроса резко увеличивается как при увеличении количества векторов целевого входа (<code translate="no">nq</code>), так и при увеличении количества кластеров для поиска (<code translate="no">nprobe</code>).</p>
+<p>GPU_IVF_FLAT - это самый базовый ЭКО-индекс, и закодированные данные, хранящиеся в каждом блоке, соответствуют исходным данным.</p>
+<p>При проведении поиска следует учитывать, что для любого поиска по коллекции, проиндексированной GPU_IVF_FLAT, можно задать top-K до 256.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Параметры построения индекса</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Параметр</th><th>Описание</th><th>Диапазон</th><th>Значение по умолчанию</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;flase&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
+<tr><td><code translate="no">nlist</code></td><td>Количество единиц кластера</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Определяет, нужно ли кэшировать исходный набор данных в памяти GPU. Возможные значения:</br><code translate="no">“true”</code>: Кэширует исходный набор данных для улучшения запоминания путем уточнения результатов поиска.</br> <code translate="no">“false”</code>: Не кэшировать исходный набор данных для экономии памяти графического процессора.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;flase&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Параметры поиска</p>
 <ul>
-<li><p>Common search</p>
+<li><p>Общий поиск</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Параметр</th><th>Описание</th><th>Диапазон</th><th>Значение по умолчанию</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>Количество единиц для запроса</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
-<li><p>Limits on search</p>
+<li><p>Ограничения на поиск</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>Параметр</th><th>Диапазон</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -157,46 +155,46 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">PQ</code> (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of <code translate="no">m</code> low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.</p>
-<p>IVF_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.</p>
+    </button></h2><p><code translate="no">PQ</code> (Product Quantization) равномерно разлагает исходное высокоразмерное векторное пространство на декартово произведение <code translate="no">m</code> низкоразмерных векторных пространств, а затем квантует разложенные низкоразмерные векторные пространства. Вместо вычисления расстояний между целевым вектором и центром всех единиц, квантование по продуктам позволяет вычислять расстояния между целевым вектором и центром кластеризации каждого низкоразмерного пространства и значительно сокращает временную и пространственную сложность алгоритма.</p>
+<p>IVF_PQ выполняет кластеризацию индекса ЭКО перед квантованием произведения векторов. Его индексный файл еще меньше, чем у IVF_SQ8, но это также приводит к потере точности при поиске векторов.</p>
 <div class="alert note">
-<p>Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.</p>
-<p>When conducting searches, note that you can set the top-K up to 8192 for any search against a GPU_IVF_FLAT-indexed collection.</p>
+<p>Параметры построения индекса и параметры поиска зависят от дистрибутива Milvus. Сначала выберите свой дистрибутив Milvus.</p>
+<p>При поиске обратите внимание, что для любого поиска по коллекции, проиндексированной GPU_IVF_FLAT, можно установить top-K до 8192.</p>
 </div>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Параметры построения индекса</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Параметр</th><th>Описание</th><th>Диапазон</th><th>Значение по умолчанию</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">m</code></td><td>Number of factors of product quantization,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Optional] Number of bits in which each low-dimensional vector is stored.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decides whether to cache the original dataset in GPU memory. Possible values:</br><code translate="no">“true”</code>: Caches the original dataset to enhance recall by refining search results.</br> <code translate="no">“false”</code>: Does not cache the original dataset to save gpu memory.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
+<tr><td><code translate="no">nlist</code></td><td>Количество единиц кластера</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">m</code></td><td>Количество коэффициентов квантования произведения,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[Необязательно] Количество бит, в которых хранится каждый низкоразмерный вектор.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Определяет, нужно ли кэшировать исходный набор данных в памяти GPU. Возможные значения:</br><code translate="no">“true”</code>: Кэширует исходный набор данных для улучшения запоминания путем уточнения результатов поиска.</br> <code translate="no">“false”</code>: Не кэшировать исходный набор данных для экономии памяти графического процессора.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Параметры поиска</p>
 <ul>
-<li><p>Common search</p>
+<li><p>Общий поиск</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Параметр</th><th>Описание</th><th>Диапазон</th><th>Значение по умолчанию</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>Количество единиц для запроса</td><td>[1, nlist]</td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
-<li><p>Limits on search</p>
+<li><p>Ограничения на поиск</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Range</th></tr>
+<tr><th>Параметр</th><th>Диапазон</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">limit</code> (top-K)</td><td><= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -216,9 +214,9 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_BRUTE_FORCE is tailored for cases where extremely high recall is crucial, guaranteeing a recall of 1 by comparing each query with all vectors in the dataset. It only requires the metric type (<code translate="no">metric_type</code>) and top-k (<code translate="no">limit</code>) as index building and search parameters.</p>
-<p>For GPU_BRUTE_FORCE, no addition index building parameters or search parameters are required.</p>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+    </button></h2><p>GPU_BRUTE_FORCE предназначен для случаев, когда очень важен высокий отзыв, гарантируя отзыв, равный 1, путем сравнения каждого запроса со всеми векторами в наборе данных. В качестве параметров построения индекса и поиска ему требуются только тип метрики (<code translate="no">metric_type</code>) и top-k (<code translate="no">limit</code>).</p>
+<p>Для GPU_BRUTE_FORCE дополнительные параметры построения индекса и поиска не требуются.</p>
+<h2 id="Conclusion" class="common-anchor-header">Заключение<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,9 +231,9 @@ title: GPU Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Currently, Milvus loads all indexes into GPU memory for efficient search operations. The amount of data that can be loaded depends on the size of the GPU memory:</p>
+    </button></h2><p>В настоящее время Milvus загружает все индексы в память GPU для эффективной работы поиска. Объем загружаемых данных зависит от размера памяти GPU:</p>
 <ul>
-<li><strong>GPU_CAGRA</strong>: Memory usage is approximately 1.8 times that of the original vector data.</li>
-<li><strong>GPU_IVF_FLAT</strong> and <strong>GPU_BRUTE_FORCE</strong>: Requires memory equal to the size of the original data.</li>
-<li><strong>GPU_IVF_PQ</strong>: Utilizes a smaller memory footprint, which depends on the compression parameter settings.</li>
+<li><strong>GPU_CAGRA</strong>: использование памяти примерно в 1,8 раза больше, чем исходные векторные данные.</li>
+<li><strong>GPU_IVF_FLAT</strong> и <strong>GPU_BRUTE_FORCE</strong>: Требуется память, равная размеру исходных данных.</li>
+<li><strong>GPU_IVF_PQ</strong>: Использует меньший объем памяти, который зависит от настроек параметров сжатия.</li>
 </ul>

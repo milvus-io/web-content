@@ -1,13 +1,13 @@
 ---
 id: number.md
-title: Number Field
+title: Числовое поле
 summary: >-
-  A number field is a scalar field that stores numeric values. These values can
-  be whole numbers (integers) or decimal numbers (floating-point numbers). They
-  are typically used to represent quantities, measurements, or any data that
-  needs to be mathematically processed.
+  Числовое поле - это скалярное поле, в котором хранятся числовые значения. Эти
+  значения могут быть целыми числами (целые числа) или десятичными числами
+  (числа с плавающей точкой). Обычно они используются для представления величин,
+  измерений или любых данных, которые необходимо математически обработать.
 ---
-<h1 id="Number-Field" class="common-anchor-header">Number Field<button data-href="#Number-Field" class="anchor-icon" translate="no">
+<h1 id="Number-Field" class="common-anchor-header">Числовое поле<button data-href="#Number-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,47 +22,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A number field is a scalar field that stores numeric values. These values can be whole numbers (<strong>integers</strong>) or decimal numbers (<strong>floating-point numbers</strong>). They are typically used to represent quantities, measurements, or any data that needs to be mathematically processed.</p>
-<p>The table below describes the data types of number fields available in Milvus.</p>
+    </button></h1><p>Числовое поле - это скалярное поле, в котором хранятся числовые значения. Эти значения могут быть целыми числами<strong>(целые числа</strong>) или десятичными числами<strong>(числа с плавающей точкой</strong>). Обычно они используются для представления величин, измерений или любых данных, которые необходимо математически обработать.</p>
+<p>В таблице ниже описаны типы данных числовых полей, доступных в Milvus.</p>
 <table>
    <tr>
-     <th><p>Field Type</p></th>
-     <th><p>Description</p></th>
+     <th><p>Тип поля</p></th>
+     <th><p>Описание</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">BOOL</code></p></td>
-     <td><p>Boolean type for storing <code translate="no">true</code> or <code translate="no">false</code>, suitable for describing binary states.</p></td>
+     <td><p>Булев тип для хранения <code translate="no">true</code> или <code translate="no">false</code>, подходит для описания двоичных состояний.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8</code></p></td>
-     <td><p>8-bit integer, suitable for storing small-range integer data.</p></td>
+     <td><p>8-битное целое число, подходит для хранения целочисленных данных малого диапазона.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT16</code></p></td>
-     <td><p>16-bit integer, for medium-range integer data.</p></td>
+     <td><p>16-битное целое число, для хранения целочисленных данных среднего диапазона.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT32</code></p></td>
-     <td><p>32-bit integer, ideal for general integer data storage like product quantities or user IDs.</p></td>
+     <td><p>32-битное целое число, идеально подходит для хранения общих целочисленных данных, таких как количество продуктов или идентификаторы пользователей.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT64</code></p></td>
-     <td><p>64-bit integer, suitable for storing large-range data like timestamps or identifiers.</p></td>
+     <td><p>64-битное целое число, подходящее для хранения данных большого диапазона, таких как временные метки или идентификаторы.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT</code></p></td>
-     <td><p>32-bit floating-point number, for data requiring general precision, such as ratings or temperature.</p></td>
+     <td><p>32-битное число с плавающей точкой - для данных, требующих общей точности, таких как номиналы или температура.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">DOUBLE</code></p></td>
-     <td><p>64-bit double-precision floating-point number, for high-precision data like financial information or scientific calculations.</p></td>
+     <td><p>64-битное число с плавающей точкой двойной точности - для высокоточных данных, таких как финансовая информация или научные расчеты.</p></td>
    </tr>
 </table>
-<p>To declare a number field, simply set the <code translate="no">datatype</code> to one of the available numeric data types. For example, <code translate="no">DataType.INT64</code> for an integer field or <code translate="no">DataType.FLOAT</code> for a floating-point field.</p>
+<p>Чтобы объявить числовое поле, просто установите <code translate="no">datatype</code> в один из доступных числовых типов данных. Например, <code translate="no">DataType.INT64</code> для целочисленного поля или <code translate="no">DataType.FLOAT</code> для поля с плавающей точкой.</p>
 <div class="alert note">
-<p>Milvus supports null values and default values for number fields. To enable these features, set <code translate="no">nullable</code> to <code translate="no">True</code> and <code translate="no">default_value</code> to a numeric value. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+<p>Milvus поддерживает нулевые значения и значения по умолчанию для числовых полей. Чтобы включить эти функции, установите <code translate="no">nullable</code> на <code translate="no">True</code> и <code translate="no">default_value</code> на числовое значение. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Нулевые значения и значения по умолчанию</a>.</p>
 </div>
-<h2 id="Add-number-field" class="common-anchor-header">Add number field<button data-href="#Add-number-field" class="anchor-icon" translate="no">
+<h2 id="Add-number-field" class="common-anchor-header">Добавление числового поля<button data-href="#Add-number-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,21 +77,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To store numeric data, define a number field in your collection schema. Below is an example of a collection schema with two number fields:</p>
+    </button></h2><p>Чтобы хранить числовые данные, определите числовое поле в схеме коллекции. Ниже приведен пример схемы коллекции с двумя числовыми полями:</p>
 <ul>
-<li><p><code translate="no">age</code>: stores integer data, allows null values, and has a default value of <code translate="no">18</code>.</p></li>
-<li><p><code translate="no">price</code>: stores float data, allows null values, but does not have a default value.</p></li>
+<li><p><code translate="no">age</code>: хранит целочисленные данные, допускает нулевые значения и имеет значение по умолчанию <code translate="no">18</code>.</p></li>
+<li><p><code translate="no">price</code>: хранит данные о плавающих числах, допускает нулевые значения, но не имеет значения по умолчанию.</p></li>
 </ul>
 <div class="alert note">
-<p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert scalar fields that were not defined in advance. However, this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">Dynamic Field</a>.</p>
+<p>Если при определении схемы задать <code translate="no">enable_dynamic_fields=True</code>, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может повысить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -254,7 +249,7 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Set index params<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Установка параметров индекса<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -269,15 +264,10 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Indexing helps improve search and query performance. In Milvus, indexing is mandatory for vector fields but optional for scalar fields.</p>
-<p>The following example creates indexes on the vector field <code translate="no">embedding</code> and the scalar field <code translate="no">age</code>, both using the <code translate="no">AUTOINDEX</code> index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to <a href="/docs/index-explained.md">Index Explained</a>.</p>
+    </button></h2><p>Индексирование помогает повысить производительность поиска и запросов. В Milvus индексирование является обязательным для векторных полей и необязательным для скалярных.</p>
+<p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и скалярного поля <code translate="no">age</code>, оба с использованием типа индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/index-explained.md">"Объяснение индекса</a>".</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -343,7 +333,7 @@ indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Create collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -358,14 +348,9 @@ indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and indexes are defined, create a collection that includes number fields.</p>
+    </button></h2><p>После того как схема и индексы определены, создайте коллекцию, включающую числовые поля.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -404,7 +389,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Вставка данных<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -419,14 +404,9 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, insert entities that match the schema.</p>
+    </button></h2><p>После создания коллекции вставьте сущности, соответствующие схеме.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = [
     {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},
@@ -511,7 +491,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-with-filter-expressions" class="common-anchor-header">Query with filter expressions<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Query-with-filter-expressions" class="common-anchor-header">Запрос с использованием выражений фильтрации<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -526,15 +506,10 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After inserting entities, use the <code translate="no">query</code> method to retrieve entities that match the specified filter expressions.</p>
-<p>To retrieve entities where the <code translate="no">age</code> is greater than 30:</p>
+    </button></h2><p>После вставки сущностей используйте метод <code translate="no">query</code> для получения сущностей, соответствующих заданным выражениям фильтра.</p>
+<p>Чтобы получить сущности, в которых <code translate="no">age</code> больше 30:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 
 res = client.query(
@@ -600,14 +575,9 @@ fmt.Println(<span class="hljs-string">&quot;price&quot;</span>, queryResult.GetC
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;pk&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:35,&quot;pk&quot;:3,&quot;price&quot;:199.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">price</code> is null:</p>
+<p>Чтобы получить сущности, для которых <code translate="no">price</code> равен null:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price is null&#x27;</span>
 
 res = client.query(
@@ -683,14 +653,9 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;age&quot;, &quot;price&quot;, &quot;pk&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where <code translate="no">age</code> has the value <code translate="no">18</code>, use the following expression below. As the default value of <code translate="no">age</code> is <code translate="no">18</code>, the expected result should include entities with <code translate="no">age</code> explicitly set to <code translate="no">18</code> or with <code translate="no">age</code> set to null.</p>
+<p>Чтобы получить сущности, в которых <code translate="no">age</code> имеет значение <code translate="no">18</code>, используйте следующее выражение. Поскольку по умолчанию значение <code translate="no">age</code> равно <code translate="no">18</code>, ожидаемый результат должен включать сущности, у которых <code translate="no">age</code> явно установлено на <code translate="no">18</code> или у которых <code translate="no">age</code> установлено на null.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age == 18&#x27;</span>
 
 res = client.query(
@@ -762,7 +727,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;age&quot;, &quot;price&quot;, &quot;pk&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Vector search with filter expressions<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">Векторный поиск с помощью выражений фильтрации<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -777,14 +742,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In addition to basic number field filtering, you can combine vector similarity searches with number field filters. For example, the following code shows how to add a number field filter to a vector search:</p>
+    </button></h2><p>Помимо базовой фильтрации по числовым полям, вы можете комбинировать векторный поиск по сходству с фильтрами по числовым полям. Например, в следующем коде показано, как добавить фильтр по полю чисел к векторному поиску:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;25 &lt;= age &lt;= 35&quot;</span>
 
 res = client.search(
@@ -878,4 +838,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we first define a query vector and add a filter condition <code translate="no">25 &lt;= age &lt;= 35</code> during the search. This ensures that the search results are not only similar to the query vector but also meet the specified age range. For more information, refer to <a href="/docs/filtering">Filtering</a>.</p>
+<p>В этом примере мы сначала определяем вектор запроса и добавляем условие фильтра <code translate="no">25 &lt;= age &lt;= 35</code> во время поиска. Это гарантирует, что результаты поиска будут не только похожи на вектор запроса, но и будут соответствовать заданному возрастному диапазону. Дополнительные сведения см. в разделе <a href="/docs/ru/filtering">Фильтрация</a>.</p>
