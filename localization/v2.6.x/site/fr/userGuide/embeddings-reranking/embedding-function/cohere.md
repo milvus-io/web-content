@@ -88,7 +88,7 @@ beta: Milvus 2.6.x
      <td><p>Fournit une classification multilingue et un support d'intégration. <a href="https://docs.cohere.com/docs/supported-languages">Voir les langues prises en charge ici</a>.</p></td>
    </tr>
 </table>
-<p>Pour plus de détails, consultez <a href="https://docs.cohere.com/docs/cohere-embed">les modèles d'intégration de Cohere</a>.</p>
+<p>Pour plus de détails, reportez-vous aux <a href="https://docs.cohere.com/docs/cohere-embed">modèles d'intégration de Cohere</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurer les informations d'identification<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

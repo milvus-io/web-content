@@ -1,11 +1,12 @@
 ---
 id: view-collections.md
-title: View Collections
+title: Voir les collections
 summary: >-
-  You can obtain the name list of all the collections in the currently connected
-  database, and check the details of a specific collection.
+  Vous pouvez obtenir la liste des noms de toutes les collections de la base de
+  données actuellement connectée et vérifier les détails d'une collection
+  spécifique.
 ---
-<h1 id="View-Collections" class="common-anchor-header">View Collections<button data-href="#View-Collections" class="anchor-icon" translate="no">
+<h1 id="View-Collections" class="common-anchor-header">Voir les collections<button data-href="#View-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can obtain the name list of all the collections in the currently connected database, and check the details of a specific collection.</p>
-<h2 id="List-Collections" class="common-anchor-header">List Collections<button data-href="#List-Collections" class="anchor-icon" translate="no">
+    </button></h1><p>Vous pouvez obtenir la liste des noms de toutes les collections de la base de données actuellement connectée et vérifier les détails d'une collection spécifique.</p>
+<h2 id="List-Collections" class="common-anchor-header">Liste des collections<button data-href="#List-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +37,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to obtain the name list of all collections in the currently connected database.</p>
+    </button></h2><p>L'exemple suivant montre comment obtenir la liste des noms de toutes les collections de la base de données actuellement connectée.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
@@ -115,10 +111,10 @@ fmt.Println(collectionNames)
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>If you have already created a collection named <code translate="no">quick_setup</code>, the result of the above example should be similar to the following.</p>
+<p>Si vous avez déjà créé une collection nommée <code translate="no">quick_setup</code>, le résultat de l'exemple ci-dessus devrait être similaire à ce qui suit.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;quick_setup&quot;</span><span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-Collection" class="common-anchor-header">Describe Collection<button data-href="#Describe-Collection" class="anchor-icon" translate="no">
+<h2 id="Describe-Collection" class="common-anchor-header">Décrire une collection<button data-href="#Describe-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,14 +129,9 @@ fmt.Println(collectionNames)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also obtain the details of a specific collection. The following example assumes that you have already created a collection named quick_setup.</p>
+    </button></h2><p>Vous pouvez également obtenir les détails d'une collection spécifique. L'exemple suivant suppose que vous avez déjà créé une collection nommée quick_setup.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.describe_collection(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
 )
@@ -178,7 +169,7 @@ fmt.Println(collection)
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The result of the above example should be similar to the following.</p>
+<p>Le résultat de l'exemple ci-dessus devrait être similaire à ce qui suit.</p>
 <pre><code translate="no" class="language-plaintext">{
     &#x27;collection_name&#x27;: &#x27;quick_setup&#x27;, 
     &#x27;auto_id&#x27;: False, 

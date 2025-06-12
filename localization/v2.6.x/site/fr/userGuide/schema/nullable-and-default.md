@@ -1,15 +1,16 @@
 ---
 id: nullable-and-default.md
-title: Nullable & Default
+title: Nullable et par défaut
 summary: >-
-  Milvus allows you to set the nullable attribute and default values for scalar
-  fields, except the primary field. For fields marked as nullable=True, you can
-  skip the field when inserting data, or set it directly to a null value, and
-  the system will treat it as null without causing an error. When a field has a
-  default value, the system will automatically apply this value if no data is
-  specified for the field during insertion.
+  Milvus vous permet de définir l'attribut nullable et les valeurs par défaut
+  pour les champs scalaires, à l'exception du champ primaire. Pour les champs
+  marqués comme nullable=True, vous pouvez ignorer le champ lors de l'insertion
+  de données, ou lui attribuer directement une valeur nulle, et le système le
+  traitera comme tel sans provoquer d'erreur. Lorsqu'un champ a une valeur par
+  défaut, le système applique automatiquement cette valeur si aucune donnée
+  n'est spécifiée pour le champ lors de l'insertion.
 ---
-<h1 id="Nullable--Default" class="common-anchor-header">Nullable & Default<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
+<h1 id="Nullable--Default" class="common-anchor-header">Nullable et par défaut<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,9 +25,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus allows you to set the <code translate="no">nullable</code> attribute and default values for scalar fields, except the primary field. For fields marked as <code translate="no">nullable=True</code>, you can skip the field when inserting data, or set it directly to a null value, and the system will treat it as null without causing an error. When a field has a default value, the system will automatically apply this value if no data is specified for the field during insertion.</p>
-<p>The default value and nullable attributes streamline data migration from other database systems to Milvus by allowing handling of datasets with null values and preserving default value settings. When creating a collection, you can also enable nullable or set default values for fields where values might be uncertain.</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus vous permet de définir l'attribut <code translate="no">nullable</code> et les valeurs par défaut pour les champs scalaires, à l'exception du champ primaire. Pour les champs marqués comme <code translate="no">nullable=True</code>, vous pouvez ignorer le champ lors de l'insertion de données ou lui attribuer directement une valeur nulle, et le système le traitera comme tel sans provoquer d'erreur. Lorsqu'un champ a une valeur par défaut, le système applique automatiquement cette valeur si aucune donnée n'est spécifiée pour le champ lors de l'insertion.</p>
+<p>Les attributs valeur par défaut et nullable rationalisent la migration des données d'autres systèmes de base de données vers Milvus en permettant le traitement d'ensembles de données avec des valeurs nulles et en préservant les paramètres de valeur par défaut. Lors de la création d'une collection, vous pouvez également activer l'attribut nullable ou définir des valeurs par défaut pour les champs dont les valeurs peuvent être incertaines.</p>
+<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,15 +43,15 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Only scalar fields, excluding the primary field, support default values and the nullable attribute.</p></li>
-<li><p>JSON and Array fields do not support default values.</p></li>
-<li><p>Default values or the nullable attribute can only be configured during collection creation and cannot be modified afterward.</p></li>
-<li><p>Scalar fields with the nullable attribute enabled cannot be used as <code translate="no">group_by_field</code> in Grouping Search. For more information about grouping search, refer to <a href="/docs/grouping-search.md">Grouping Search</a>.</p></li>
-<li><p>Fields marked as nullable cannot be used as partition keys. For more information about partition keys, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p></li>
-<li><p>When creating an index on a scalar field with the nullable attribute enabled, null values will be excluded from the index.</p></li>
-<li><p><strong>JSON and ARRAY fields</strong>: When using <code translate="no">IS NULL</code> or <code translate="no">IS NOT NULL</code> operators to filter on JSON or ARRAY fields, these operators work at the column level, which indicates they only evaluate whether the entire JSON object or array is null. For instance, if a key inside a JSON object is null, it will not be recognized by the <code translate="no">IS NULL</code> filter. For more information, refer to <a href="/docs/basic-operators.md">Basic Operators</a>.</p></li>
+<li><p>Seuls les champs scalaires, à l'exception du champ primaire, prennent en charge les valeurs par défaut et l'attribut nullable.</p></li>
+<li><p>Les champs JSON et les tableaux ne prennent pas en charge les valeurs par défaut.</p></li>
+<li><p>Les valeurs par défaut ou l'attribut nullable ne peuvent être configurés que lors de la création de la collection et ne peuvent pas être modifiés par la suite.</p></li>
+<li><p>Les champs scalaires dont l'attribut nullable est activé ne peuvent pas être utilisés en tant que <code translate="no">group_by_field</code> dans la recherche groupée. Pour plus d'informations sur la recherche par regroupement, voir <a href="/docs/fr/grouping-search.md">Recherche par regroupement</a>.</p></li>
+<li><p>Les champs marqués comme nullables ne peuvent pas être utilisés comme clés de partition. Pour plus d'informations sur les clés de partition, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utiliser une clé de partition</a>.</p></li>
+<li><p>Lors de la création d'un index sur un champ scalaire dont l'attribut nullable est activé, les valeurs nulles seront exclues de l'index.</p></li>
+<li><p><strong>Champs JSON et ARRAY</strong>: Lorsque vous utilisez les opérateurs <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code> pour filtrer les champs JSON ou ARRAY, ces opérateurs fonctionnent au niveau de la colonne, ce qui signifie qu'ils évaluent uniquement si l'ensemble de l'objet JSON ou du tableau est nul. Par exemple, si une clé à l'intérieur d'un objet JSON est nulle, elle ne sera pas reconnue par le filtre <code translate="no">IS NULL</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/basic-operators.md">Opérateurs de base</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Nullable attribute<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Attribut Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,15 +66,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">nullable</code> attribute allows you to store null values in a collection, providing flexibility when handling unknown data.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Set the nullable attribute</h3><p>When creating a collection, use <code translate="no">nullable=True</code> to define nullable fields (defaults to <code translate="no">False</code>). The following example creates a collection named <code translate="no">my_collection</code> and sets the <code translate="no">age</code> field as nullable:</p>
+    </button></h2><p>L'attribut <code translate="no">nullable</code> vous permet de stocker des valeurs nulles dans une collection, ce qui offre une certaine souplesse lors de la manipulation de données inconnues.</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Définir l'attribut nullable</h3><p>Lors de la création d'une collection, utilisez <code translate="no">nullable=True</code> pour définir les champs nullables (la valeur par défaut est <code translate="no">False</code>). L'exemple suivant crée une collection nommée <code translate="no">my_collection</code> et définit le champ <code translate="no">age</code> comme nullable :</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>)
@@ -273,14 +269,9 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Insert entities</h3><p>When you insert data into a nullable field, insert null or directly omit this field:</p>
+<h3 id="Insert-entities" class="common-anchor-header">Insérer des entités</h3><p>Lorsque vous insérez des données dans un champ nullable, insérez null ou omettez directement ce champ :</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>},
@@ -349,14 +340,9 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Search and query with null values</h3><p>When using the <code translate="no">search</code> method, if a field contains <code translate="no">null</code> values, the search result will return the field as null:</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Recherche et interrogation avec des valeurs nulles</h3><p>Lorsque vous utilisez la méthode <code translate="no">search</code>, si un champ contient des valeurs <code translate="no">null</code>, le résultat de la recherche renverra le champ comme étant nul :</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],
@@ -439,14 +425,9 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>When you use the <code translate="no">query</code> method for scalar filtering, the filtering results for null values are all false, indicating that they will not be selected.</p>
+<p>Lorsque vous utilisez la méthode <code translate="no">query</code> pour le filtrage scalaire, les résultats du filtrage pour les valeurs nulles sont tous faux, ce qui indique qu'elles ne seront pas sélectionnées.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:</span>
 <span class="hljs-comment"># {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, ..., 0.128], &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, ..., 0.129], &quot;age&quot;: None}</span>
@@ -507,17 +488,12 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To return entities with <code translate="no">null</code> values, query without any scalar filtering condition as follows:</p>
+<p>Pour renvoyer des entités avec des valeurs <code translate="no">null</code>, effectuez une requête sans condition de filtrage scalaire comme suit :</p>
 <div class="alert note">
-<p>The <code translate="no">query</code> method, when used without any filtering conditions, retrieves all entities in the collection, including those with null values. To restrict the number of returned entities, the <code translate="no">limit</code> parameter must be specified.</p>
+<p>La méthode <code translate="no">query</code>, lorsqu'elle est utilisée sans condition de filtrage, récupère toutes les entités de la collection, y compris celles dont les valeurs sont nulles. Pour limiter le nombre d'entités retournées, le paramètre <code translate="no">limit</code> doit être spécifié.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">null_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,     <span class="hljs-comment"># Query without any filtering condition</span>
@@ -568,7 +544,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;id&quot;:3}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Default-values" class="common-anchor-header">Default values<button data-href="#Default-values" class="anchor-icon" translate="no">
+<h2 id="Default-values" class="common-anchor-header">Valeurs par défaut<button data-href="#Default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -583,15 +559,10 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Default values are preset values assigned to scalar fields. If you do not provide a value for a field with a default during insertion, the system automatically uses the default value.</p>
-<h3 id="Set-default-values" class="common-anchor-header">Set default values</h3><p>When creating a collection, use the <code translate="no">default_value</code> parameter to define the default value for a field. The following example shows how to set the default value of <code translate="no">age</code> to <code translate="no">18</code> and <code translate="no">status</code> to <code translate="no">&quot;active&quot;</code>:</p>
+    </button></h2><p>Les valeurs par défaut sont des valeurs prédéfinies attribuées aux champs scalaires. Si vous ne fournissez pas de valeur pour un champ ayant une valeur par défaut lors de l'insertion, le système utilise automatiquement la valeur par défaut.</p>
+<h3 id="Set-default-values" class="common-anchor-header">Définir les valeurs par défaut</h3><p>Lors de la création d'une collection, utilisez le paramètre <code translate="no">default_value</code> pour définir la valeur par défaut d'un champ. L'exemple suivant montre comment définir la valeur par défaut de <code translate="no">age</code> à <code translate="no">18</code> et de <code translate="no">status</code> à <code translate="no">&quot;active&quot;</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_schema=<span class="hljs-literal">True</span>,
@@ -800,14 +771,9 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Insert entities</h3><p>When inserting data, if you omit fields with a default value or set their value to null, the system uses the default value:</p>
+<h3 id="Insert-entities" class="common-anchor-header">Insérer des entités</h3><p>Lors de l'insertion de données, si vous omettez les champs ayant une valeur par défaut ou si vous leur attribuez la valeur null, le système utilise la valeur par défaut :</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ..., <span class="hljs-number">0.128</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, ..., <span class="hljs-number">0.129</span>]},  <span class="hljs-comment"># `age` and `status` use default values</span>
@@ -884,17 +850,12 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For more information on how nullable and default value settings take effect, refer to <a href="/docs/nullable-and-default.md#Applicable-rules">Applicable rules</a>.</p>
+<p>Pour plus d'informations sur la manière dont les paramètres de valeur nulle et de valeur par défaut prennent effet, voir <a href="/docs/fr/nullable-and-default.md#Applicable-rules">Règles applicables.</a></p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Search and query with default values</h3><p>Entities that contain default values are treated the same as any other entities during vector searches and scalar filtering. You can include default values as part of your <code translate="no">search</code> and <code translate="no">query</code> operations.</p>
-<p>For example, in a <code translate="no">search</code> operation, entities with <code translate="no">age</code> set to the default value of <code translate="no">18</code> will be included in the results:</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Recherche et interrogation avec des valeurs par défaut</h3><p>Les entités qui contiennent des valeurs par défaut sont traitées de la même manière que les autres entités lors des recherches vectorielles et du filtrage scalaire. Vous pouvez inclure des valeurs par défaut dans vos opérations <code translate="no">search</code> et <code translate="no">query</code>.</p>
+<p>Par exemple, dans une opération <code translate="no">search</code>, les entités dont la valeur par défaut de <code translate="no">age</code> est <code translate="no">18</code> seront incluses dans les résultats :</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>]],
@@ -984,14 +945,9 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In a <code translate="no">query</code> operation, you can match or filter by default values directly:</p>
+<p>Dans une opération <code translate="no">query</code>, vous pouvez faire correspondre ou filtrer les valeurs par défaut directement :</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query all entities where `age` equals the default value (18)</span>
 default_age_results = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -1092,7 +1048,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:25,&quot;id&quot;:3,&quot;status&quot;:&quot;active&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Applicable-rules" class="common-anchor-header">Applicable rules<button data-href="#Applicable-rules" class="anchor-icon" translate="no">
+<h2 id="Applicable-rules" class="common-anchor-header">Règles applicables<button data-href="#Applicable-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1107,54 +1063,54 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following table summarizes the behavior of nullable columns and default values under different configuration combinations. These rules determine how Milvus handles data when attempting to insert null values or if field values are not provided.</p>
+    </button></h2><p>Le tableau suivant résume le comportement des colonnes nullables et des valeurs par défaut selon différentes combinaisons de configuration. Ces règles déterminent la manière dont Milvus traite les données en cas de tentative d'insertion de valeurs nulles ou si les valeurs de champ ne sont pas fournies.</p>
 <table>
    <tr>
-     <th><p>Nullable</p></th>
-     <th><p>Default Value</p></th>
-     <th><p>Default Value Type</p></th>
-     <th><p>User Input</p></th>
-     <th><p>Result</p></th>
-     <th><p>Example</p></th>
+     <th><p>Nulle</p></th>
+     <th><p>Valeur par défaut</p></th>
+     <th><p>Valeur par défaut Type</p></th>
+     <th><p>Entrée utilisateur</p></th>
+     <th><p>Résultat</p></th>
+     <th><p>Exemple</p></th>
    </tr>
    <tr>
      <td><p>✅</p></td>
      <td><p>✅</p></td>
-     <td><p>Non-null</p></td>
-     <td><p>None/null</p></td>
-     <td><p>Uses the default value</p></td>
-     <td><p>Field: <code translate="no">age</code> Default value: <code translate="no">18</code></p><p>User input: null</p><p>Result: stored as <code translate="no">18</code></p></td>
+     <td><p>Non nul</p></td>
+     <td><p>Non/nul</p></td>
+     <td><p>Utilise la valeur par défaut</p></td>
+     <td><p>Champ : <code translate="no">age</code> Valeur par défaut : <code translate="no">18</code></p><p>Entrée utilisateur : null</p><p>Résultat : stocké en tant que <code translate="no">18</code></p></td>
    </tr>
    <tr>
      <td><p>✅</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
-     <td><p>None/null</p></td>
-     <td><p>Stored as null</p></td>
-     <td><p>Field: <code translate="no">middle_name</code> Default value: -</p><p>User input: null</p><p>Result: stored as null</p></td>
+     <td><p>Aucun/nul</p></td>
+     <td><p>Enregistré comme nul</p></td>
+     <td><p>Champ : <code translate="no">middle_name</code> Valeur par défaut : -</p><p>Valeur saisie par l'utilisateur : null</p><p>Résultat : stocké comme nul</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>Non-null</p></td>
-     <td><p>None/null</p></td>
-     <td><p>Uses the default value</p></td>
-     <td><p>Field: <code translate="no">status</code> Default value: <code translate="no">"active"</code></p><p>User input: null</p><p>Result: stored as <code translate="no">"active"</code></p></td>
+     <td><p>Non nul</p></td>
+     <td><p>Non-nul</p></td>
+     <td><p>Utilise la valeur par défaut</p></td>
+     <td><p>Champ : <code translate="no">status</code> Valeur par défaut : <code translate="no">"active"</code></p><p>Entrée utilisateur : null</p><p>Résultat : stocké en tant que <code translate="no">"active"</code></p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>-</p></td>
-     <td><p>None/null</p></td>
-     <td><p>Throws an error</p></td>
-     <td><p>Field: <code translate="no">email</code> Default value: -</p><p>User input: null</p><p>Result: Operation rejected, system throws an error</p></td>
+     <td><p>Aucun/nul</p></td>
+     <td><p>Lance une erreur</p></td>
+     <td><p>Champ : <code translate="no">email</code> Valeur par défaut : -</p><p>Valeur saisie par l'utilisateur : null</p><p>Résultat : L'opération est rejetée, le système lance une erreur</p></td>
    </tr>
    <tr>
      <td><p>❌</p></td>
      <td><p>✅</p></td>
-     <td><p>Null</p></td>
-     <td><p>None/null</p></td>
-     <td><p>Throws an error</p></td>
-     <td><p>Field: <code translate="no">username</code> Default value: null</p><p>User input: null</p><p>Result: Operation rejected, system throws an error</p></td>
+     <td><p>Nul</p></td>
+     <td><p>Aucun/nul</p></td>
+     <td><p>Lance une erreur</p></td>
+     <td><p>Champ : <code translate="no">username</code> Valeur par défaut : null</p><p>Valeur saisie par l'utilisateur : null</p><p>Résultat : L'opération est rejetée, le système lance une erreur</p></td>
    </tr>
 </table>

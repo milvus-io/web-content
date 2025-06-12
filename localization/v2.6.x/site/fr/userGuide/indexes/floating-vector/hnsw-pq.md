@@ -49,7 +49,7 @@ summary: >-
 <ol>
 <li><p><strong>Compression des données</strong>: PQ divise chaque vecteur en plusieurs sous-vecteurs et les quantifie à l'aide d'un livre de codes de centroïdes, contrôlé par des paramètres tels que <code translate="no">m</code> (nombre de sous-vecteurs) et <code translate="no">nbits</code> (bits par sous-vecteur).</p></li>
 <li><p><strong>Construction du graphique</strong>: Les vecteurs compressés sont ensuite utilisés pour construire un graphe HNSW. Comme les vecteurs sont stockés sous une forme compressée, le graphe résultant est généralement plus petit, nécessite moins de mémoire et peut être parcouru plus rapidement, ce qui accélère considérablement l'étape de recherche des candidats.</p></li>
-<li><p><strong>Recherche de candidats</strong>: Lorsqu'une requête est exécutée, l'algorithme utilise les données compressées du graphe HNSW pour identifier efficacement un ensemble de voisins candidats. Cette recherche basée sur le graphe réduit considérablement le nombre de vecteurs à prendre en compte, améliorant ainsi la latence de la requête par rapport à une recherche brute.</p></li>
+<li><p><strong>Recherche de candidats</strong>: Lorsqu'une requête est exécutée, l'algorithme utilise les données compressées du graphe HNSW pour identifier efficacement un ensemble de voisins candidats. Cette recherche basée sur le graphe réduit considérablement le nombre de vecteurs à prendre en compte, améliorant ainsi la latence de la requête par rapport aux recherches brutes.</p></li>
 <li><p><strong>Affinage des résultats (facultatif)</strong>: Les résultats initiaux des candidats peuvent être affinés pour une meilleure précision, en fonction des paramètres suivants :</p>
 <ul>
 <li><p><code translate="no">refine</code>: Contrôle si cette étape d'affinage est activée. Lorsqu'il est défini sur <code translate="no">true</code>, le système recalcule les distances à l'aide de représentations non compressées ou de précision supérieure.</p></li>
@@ -184,7 +184,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>PQ</p></td>
      <td><p><code translate="no">m</code></p></td>
-     <td><p>Nombre de sous-vecteurs (utilisés pour la quantification) à diviser en chaque vecteur de haute dimension pendant le processus de quantification.</p></td>
+     <td><p>Le nombre de sous-vecteurs (utilisés pour la quantification) à diviser chaque vecteur de haute dimension pendant le processus de quantification.</p></td>
      <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 65536]</p>
 <p><strong>Valeur par défaut</strong>: Aucune</p></td>
      <td><p>Une valeur plus élevée de <code translate="no">m</code> peut améliorer la précision, mais elle augmente également la complexité du calcul et l'utilisation de la mémoire. <code translate="no">m</code> doit être un diviseur de la dimension du vecteur<em>(D)</em> pour garantir une décomposition correcte. Une valeur couramment recommandée est <em>m = D/2</em>.</p>

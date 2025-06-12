@@ -91,7 +91,7 @@ summary: >-
 <li><p><strong>Collecte des classements de recherche</strong>: Collecte des classements des résultats de chaque chemin de recherche vectorielle (rang_1, rang_2).</p></li>
 <li><p><strong>Fusionner les classements</strong>: Convertir les classements de chaque chemin (rang_rrf_1, rang_rrf_2) selon une formule .</p>
 <p>La formule de calcul fait intervenir <em>N</em>, qui représente le nombre d'extractions. <em>ranki</em><em>(d)</em> est la position de classement du document <em>d</em> généré par le <em>i(ème</em> ) extracteur. <em>k</em> est un paramètre de lissage généralement fixé à 60.</p></li>
-<li><p><strong>Agrégation des classements</strong>: Reclasser les résultats de la recherche sur la base des classements combinés pour produire les résultats finaux.</p></li>
+<li><p><strong>Classement agrégé</strong>: Reclasser les résultats de la recherche sur la base des classements combinés pour produire les résultats finaux.</p></li>
 </ol>
 <p>
   

@@ -1,9 +1,9 @@
 ---
 id: milvus_lite.md
-summary: Get started with Milvus Lite.
-title: Run Milvus Lite Locally
+summary: Commencez avec Milvus Lite.
+title: Exécution locale de Milvus Lite
 ---
-<h1 id="Run-Milvus-Lite-Locally" class="common-anchor-header">Run Milvus Lite Locally<button data-href="#Run-Milvus-Lite-Locally" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-Lite-Locally" class="common-anchor-header">Exécution locale de Milvus Lite<button data-href="#Run-Milvus-Lite-Locally" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Run Milvus Lite Locally
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page illustrates how to run Milvus locally with Milvus Lite. Milvus Lite is the lightweight version of <a href="https://github.com/milvus-io/milvus">Milvus</a>, an open-source vector database that powers AI applications with vector embeddings and similarity search.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Cette page explique comment exécuter Milvus localement avec Milvus Lite. Milvus Lite est la version allégée de <a href="https://github.com/milvus-io/milvus">Milvus</a>, une base de données vectorielles open-source qui alimente les applications d'intelligence artificielle avec des embeddings vectoriels et des recherches de similarité.</p>
+<h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,15 +34,15 @@ title: Run Milvus Lite Locally
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite can be imported into your Python application, providing the core vector search functionality of Milvus. Milvus Lite is already included in the <a href="https://github.com/milvus-io/pymilvus">Python SDK of Milvus</a>. It can be simply deployed with <code translate="no">pip install pymilvus</code>.</p>
-<p>With Milvus Lite, you can start building an AI application with vector similarity search within minutes! Milvus Lite is good for running in the following environment:</p>
+    </button></h2><p>Milvus Lite peut être importé dans votre application Python, fournissant la fonctionnalité principale de recherche vectorielle de Milvus. Milvus Lite est déjà inclus dans le <a href="https://github.com/milvus-io/pymilvus">SDK Python de Milvus</a>. Il peut être simplement déployé à l'aide de <code translate="no">pip install pymilvus</code>.</p>
+<p>Avec Milvus Lite, vous pouvez commencer à créer une application d'IA avec recherche de similarités vectorielles en quelques minutes ! Milvus Lite peut être exécuté dans l'environnement suivant :</p>
 <ul>
 <li>Jupyter Notebook / Google Colab</li>
-<li>Laptops</li>
-<li>Edge Devices</li>
+<li>Ordinateurs portables</li>
+<li>Périphériques Edge</li>
 </ul>
-<p>Milvus Lite shares the same API with Milvus Standalone and Distributed, and covers most of the features such as vector data persistence and management, vector CRUD operations, sparse and dense vector search, metadata filtering, multi-vector and hybrid_search. Together, they provide a consistent experience across different types of environments, from edge devices to clusters in cloud, fitting use cases of different size. With the same client-side code, you can run GenAI apps with Milvus Lite on a laptop or Jupyter Notebook, or Milvus Standalone on Docker container, or Milvus Distributed on massive scale Kubernetes cluster serving billions of vectors in production.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<p>Milvus Lite partage la même API que Milvus Standalone et Distributed, et couvre la plupart des fonctionnalités telles que la persistance et la gestion des données vectorielles, les opérations CRUD vectorielles, la recherche vectorielle dense et éparse, le filtrage des métadonnées, la recherche multi-vectorielle et hybride. Ensemble, ils offrent une expérience cohérente dans différents types d'environnements, des appareils périphériques aux clusters dans le nuage, en s'adaptant à des cas d'utilisation de différentes tailles. Avec le même code côté client, vous pouvez exécuter des applications GenAI avec Milvus Lite sur un ordinateur portable ou un bloc-notes Jupyter, ou Milvus Standalone sur un conteneur Docker, ou Milvus Distributed sur un cluster Kubernetes à grande échelle desservant des milliards de vecteurs en production.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,13 +57,13 @@ title: Run Milvus Lite Locally
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite currently supports the following environmnets:</p>
+    </button></h2><p>Milvus Lite prend actuellement en charge les environnements suivants :</p>
 <ul>
-<li>Ubuntu >= 20.04 (x86_64 and arm64)</li>
-<li>MacOS >= 11.0 (Apple Silicon M1/M2 and x86_64)</li>
+<li>Ubuntu &gt;= 20.04 (x86_64 et arm64)</li>
+<li>MacOS &gt;= 11.0 (Apple Silicon M1/M2 et x86_64)</li>
 </ul>
-<p>Please note that Milvus Lite is only suitable for small scale vector search use cases. For a large scale use case, we recommend using <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> or <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. You can also consider the fully-managed Milvus on <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
-<h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Set up Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
+<p>Veuillez noter que Milvus Lite n'est adapté qu'aux cas d'utilisation de la recherche vectorielle à petite échelle. Pour un cas d'utilisation à grande échelle, nous recommandons d'utiliser <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> ou <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Vous pouvez également envisager l'utilisation de Milvus entièrement géré sur <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configurer Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,9 +80,9 @@ title: Run Milvus Lite Locally
       </svg>
     </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
-<p>We recommend using <code translate="no">pymilvus</code>. Since <code translate="no">milvus-lite</code> is included in <code translate="no">pymilvus</code> version 2.4.2 or above, you can <code translate="no">pip install</code> with <code translate="no">-U</code> to force update to the latest version and <code translate="no">milvus-lite</code> is automatically installed.</p>
-<p>If you want to explicitly install <code translate="no">milvus-lite</code> package, or you have installed an older version of <code translate="no">milvus-lite</code> and would like to update it, you can do <code translate="no">pip install -U milvus-lite</code>.</p>
-<h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Connect to Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
+<p>Nous recommandons d'utiliser <code translate="no">pymilvus</code>. Comme <code translate="no">milvus-lite</code> est inclus dans <code translate="no">pymilvus</code> version 2.4.2 ou supérieure, vous pouvez <code translate="no">pip install</code> avec <code translate="no">-U</code> pour forcer la mise à jour vers la dernière version et <code translate="no">milvus-lite</code> est automatiquement installé.</p>
+<p>Si vous souhaitez installer explicitement le paquet <code translate="no">milvus-lite</code>, ou si vous avez installé une ancienne version de <code translate="no">milvus-lite</code> et souhaitez la mettre à jour, vous pouvez utiliser <code translate="no">pip install -U milvus-lite</code>.</p>
+<h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Connexion à Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,16 +97,15 @@ title: Run Milvus Lite Locally
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In <code translate="no">pymilvus</code>, specify a local file name as uri parameter of MilvusClient will use Milvus Lite.</p>
+    </button></h2><p>Dans <code translate="no">pymilvus</code>, spécifiez un nom de fichier local comme paramètre uri de MilvusClient pour utiliser Milvus Lite.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>After running the above code snippet, a database file named <strong>milvus_demo.db</strong> will be generated in the current folder.</p>
+<p>Après avoir exécuté l'extrait de code ci-dessus, un fichier de base de données nommé <strong>milvus_demo.db</strong> sera généré dans le dossier actuel.</p>
 <blockquote>
-<p><strong><em>NOTE:</em></strong>  Note that the same API also applies to Milvus Standalone, Milvus Distributed and Zilliz Cloud, the only difference is to replace local file name to remote server endpoint and credentials, e.g.
-<code translate="no">client = MilvusClient(uri=&quot;http://localhost:19530&quot;, token=&quot;username:password&quot;)</code>.</p>
+<p><strong><em>REMARQUE :</em></strong> la même API s'applique également à Milvus Standalone, Milvus Distributed et Zilliz Cloud, la seule différence étant de remplacer le nom du fichier local par le point d'extrémité du serveur distant et les informations d'identification, par exemple<code translate="no">client = MilvusClient(uri=&quot;http://localhost:19530&quot;, token=&quot;username:password&quot;)</code>.</p>
 </blockquote>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,8 +120,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Following is a simple demo showing how to use Milvus Lite for text search. There are more comprehensive <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">examples</a> for using Milvus Lite to build applications
-such as <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>, <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb">image search</a>, and using Milvus Lite in popular RAG framework such as <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a> and <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a>!</p>
+    </button></h2><p>Voici une démonstration simple montrant comment utiliser Milvus Lite pour la recherche de texte. Il existe des <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">exemples</a> plus complets d'utilisation de Milvus Lite pour construire des applications telles que <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>, la <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb">recherche d'images</a>, et l'utilisation de Milvus Lite dans les cadres RAG populaires tels que <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a> et <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a>!</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -172,7 +170,7 @@ res = client.delete(
 )
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,13 +185,13 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When running Milvus Lite, note that some features are not supported. The following tables summarize the usage limits on Milvus Lite.</p>
+    </button></h2><p>Lors de l'utilisation de Milvus Lite, certaines fonctionnalités ne sont pas prises en charge. Les tableaux suivants résument les limites d'utilisation de Milvus Lite.</p>
 <h3 id="Collection" class="common-anchor-header">Collection</h3><table>
 <thead>
-<tr><th>Method / Parameter</th><th>Supported in Milvus Lite</th></tr>
+<tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a></td><td>Prise en charge avec des paramètres limités</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">dimension</code></td><td>Y</td></tr>
 <tr><td><code translate="no">primary_field_name</code></td><td>Y</td></tr>
@@ -207,33 +205,33 @@ res = client.delete(
 <tr><td><code translate="no">num_shards</code></td><td>N</td></tr>
 <tr><td><code translate="no">partition_key_field</code></td><td>N</td></tr>
 <tr><td><code translate="no">num_partitions</code></td><td>N</td></tr>
-<tr><td><code translate="no">consistency_level</code></td><td>N (Only supports <code translate="no">Strong</code>; Any configuration will be treated as <code translate="no">Strong</code>.)</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a></td><td>Supports getting collection statistics.</td></tr>
+<tr><td><code translate="no">consistency_level</code></td><td>N (Ne prend en charge que <code translate="no">Strong</code>; Toute configuration sera traitée comme <code translate="no">Strong</code>.)</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a></td><td>Prend en charge l'obtention des statistiques de la collection.</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a></td><td><code translate="no">num_shards</code>, <code translate="no">consistency_level</code>, and <code translate="no">collection_id</code> in response are invalid.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a></td><td><code translate="no">num_shards</code>, <code translate="no">consistency_level</code>, et <code translate="no">collection_id</code> dans la réponse ne sont pas valides.</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/has_collection.md">has_collection()</a></td><td>Supports checking if a collection exists.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/has_collection.md">has_collection()</a></td><td>Permet de vérifier l'existence d'une collection.</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_collections()</a></td><td>Supports listing all collections.</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md">drop_collection()</a></td><td>Supports dropping a collection.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_collections()</a></td><td>Permet de dresser la liste de toutes les collections.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md">drop_collection()</a></td><td>Permet de supprimer une collection.</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md">rename_collection()</a></td><td>Renaming a collection is not supported.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md">rename_collection()</a></td><td>Il n'est pas possible de renommer une collection.</td></tr>
 </tbody>
 </table>
-<h3 id="Field--Schema" class="common-anchor-header">Field & Schema</h3><table>
+<h3 id="Field--Schema" class="common-anchor-header">Champ et schéma</h3><table>
 <thead>
-<tr><th>Method / Parameter</th><th>Supported in Milvus Lite</th></tr>
+<tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema()</a></td><td>Prise en charge avec des paramètres limités</td></tr>
 <tr><td><code translate="no">auto_id</code></td><td>Y</td></tr>
 <tr><td><code translate="no">enable_dynamic_field</code></td><td>Y</td></tr>
 <tr><td><code translate="no">primary_field</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_key_field</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md">add_field()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md">add_field()</a></td><td>Prise en charge avec des paramètres limités</td></tr>
 <tr><td><code translate="no">field_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">datatype</code></td><td>Y</td></tr>
 <tr><td><code translate="no">is_primary</code></td><td>Y</td></tr>
@@ -244,12 +242,12 @@ res = client.delete(
 <tr><td><code translate="no">is_partition_key</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Insert--Search" class="common-anchor-header">Insert & Search</h3><table>
+<h3 id="Insert--Search" class="common-anchor-header">Insertion et recherche</h3><table>
 <thead>
-<tr><th>Method / Parameter</th><th>Supported in Milvus Lite</th></tr>
+<tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a></td><td>Prise en charge avec des paramètres limités</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">data</code></td><td>Y</td></tr>
 <tr><td><code translate="no">filter</code></td><td>Y</td></tr>
@@ -259,40 +257,40 @@ res = client.delete(
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_names</code></td><td>N</td></tr>
 <tr><td><code translate="no">anns_field</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">query()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">query()</a></td><td>Prise en charge de paramètres limités</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">filter</code></td><td>Y</td></tr>
 <tr><td><code translate="no">output_fields</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><code translate="no">ids</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_names</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md">get()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md">get()</a></td><td>Prise en charge avec des paramètres limités</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">ids</code></td><td>Y</td></tr>
 <tr><td><code translate="no">output_fields</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_names</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md">delete()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md">supprimer()</a></td><td>Prise en charge avec des paramètres limités</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">ids</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><code translate="no">filter</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md">insert()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md">insert()</a></td><td>Prise en charge avec des paramètres limités</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">data</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md">upsert()</a></td><td>Support with limited parameters</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md">upsert()</a></td><td>Prise en charge avec des paramètres limités</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">data</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Load--Release" class="common-anchor-header">Load & Release</h3><table>
+<h3 id="Load--Release" class="common-anchor-header">Chargement et libération</h3><table>
 <thead>
-<tr><th>Method / Parameter</th><th>Supported in Milvus Lite</th></tr>
+<tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md">load_collection()</a></td><td>Y</td></tr>
@@ -301,38 +299,38 @@ res = client.delete(
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md">release_collection()</a></td><td>Y</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a></td><td>Getting load status is not supported.</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>Loading the unloaded data of a loaded collection is not supported.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a></td><td>L'obtention de l'état de chargement n'est pas prise en charge.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>Le chargement des données non chargées d'une collection chargée n'est pas supporté.</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md">close()</a></td><td>Y</td></tr>
 </tbody>
 </table>
 <h3 id="Index" class="common-anchor-header">Index</h3><table>
 <thead>
-<tr><th>Method / Parameter</th><th>Supported in Milvus Lite</th></tr>
+<tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_indexes()</a></td><td>Listing indexes is supported.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_indexes()</a></td><td>L'énumération des index est prise en charge.</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">field_name</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index()</a></td><td>Only supports <code translate="no">FLAT</code> index type.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index()</a></td><td>Prend en charge uniquement le type d'index <code translate="no">FLAT</code>.</td></tr>
 <tr><td><code translate="no">index_params</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md">drop_index()</a></td><td>Dropping indexes is supported.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md">drop_index()</a></td><td>La suppression d'index est prise en charge.</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">index_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a></td><td>Describing indexes is supported.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a></td><td>La description des index est prise en charge.</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">index_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 </tbody>
 </table>
-<h3 id="Vector-Index-Types" class="common-anchor-header">Vector Index Types</h3><p>Milvus Lite only supports <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a> index type. It uses FLAT type regardless of the specified index type in collection.</p>
-<h3 id="Search-Features" class="common-anchor-header">Search Features</h3><p>Milvus Lite supports Sparse Vector, Multi-vector, Hybrid Search.</p>
-<h3 id="Partition" class="common-anchor-header">Partition</h3><p>Milvus Lite does not support partitions and partition-related methods.</p>
-<h3 id="Users--Roles" class="common-anchor-header">Users & Roles</h3><p>Milvus Lite does not support users and roles and related methods.</p>
-<h3 id="Alias" class="common-anchor-header">Alias</h3><p>Milvus Lite does not support aliases and alias-related methods.</p>
-<h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migrating data from Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
+<h3 id="Vector-Index-Types" class="common-anchor-header">Types d'index vectoriels</h3><p>Milvus Lite ne prend en charge que le type d'index <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Il utilise le type FLAT quel que soit le type d'index spécifié dans la collection.</p>
+<h3 id="Search-Features" class="common-anchor-header">Fonctionnalités de recherche</h3><p>Milvus Lite prend en charge les recherches vectorielles éparses, multivectorielles et hybrides.</p>
+<h3 id="Partition" class="common-anchor-header">Partition</h3><p>Milvus Lite ne prend pas en charge les partitions et les méthodes liées aux partitions.</p>
+<h3 id="Users--Roles" class="common-anchor-header">Utilisateurs et rôles</h3><p>La Milvus Lite ne prend pas en charge les utilisateurs, les rôles et les méthodes associées.</p>
+<h3 id="Alias" class="common-anchor-header">Alias</h3><p>La version Lite de Milvus ne prend pas en charge les alias et les méthodes liées aux alias.</p>
+<h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migration des données de Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -347,8 +345,8 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>All data stored in Milvus Lite can be easily exported and loaded into other types of Milvus deployment, such as Milvus Standalone on Docker, Milvus Distributed on K8s, or fully-managed Milvus on <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
-<p>Milvus Lite provides a command line tool that can dump data into a json file, which can be imported into <a href="https://github.com/milvus-io/milvus">milvus</a> and <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(the fully managed cloud service for Milvus). The milvus-lite command will be installed together with milvus-lite python package</p>
+    </button></h2><p>Toutes les données stockées dans Milvus Lite peuvent être facilement exportées et chargées dans d'autres types de déploiement Milvus, tels que Milvus Standalone sur Docker, Milvus Distributed sur K8s ou Milvus entièrement géré sur <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>Milvus Lite fournit un outil de ligne de commande qui peut décharger des données dans un fichier json, qui peut être importé dans <a href="https://github.com/milvus-io/milvus">milvus</a> et <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(le service cloud entièrement géré pour Milvus). La commande milvus-lite sera installée avec le paquet python milvus-lite.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
 pip install -U &quot;pymilvus[bulk_writer]&quot;
 
@@ -364,15 +362,15 @@ optional arguments:
                         collection that need to be dumped
   -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
-<p>The following example dumps all data from <code translate="no">demo_collection</code> collection that’s stored in <code translate="no">./milvus_demo.db</code> (Milvus Lite database file)</p>
-<p>To export data:</p>
+<p>L'exemple suivant extrait toutes les données de la collection <code translate="no">demo_collection</code> stockées dans <code translate="no">./milvus_demo.db</code> (fichier de base de données Milvus Lite).</p>
+<p>Pour exporter des données :</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
 <span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
 <span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>With the dump file, you can upload data to Zilliz Cloud via <a href="https://docs.zilliz.com/docs/data-import">Data Import</a>, or upload data to Milvus servers via <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<p>Avec le fichier de vidage, vous pouvez télécharger les données vers Zilliz Cloud via <a href="https://docs.zilliz.com/docs/data-import">Data Import</a>, ou télécharger les données vers les serveurs Milvus via <a href="https://milvus.io/docs/import-data.md">Bulk Insert.</a></p>
+<h2 id="Whats-next" class="common-anchor-header">Ce qui suit<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -387,28 +385,28 @@ optional arguments:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Having connected to Milvus Lite, you can:</p>
+    </button></h2><p>Après vous être connecté à Milvus Lite, vous pouvez :</p>
 <ul>
-<li><p>Check <a href="/docs/quickstart.md">Quickstart</a> to see what Milvus can do.</p></li>
-<li><p>Learn the basic operations of Milvus:</p>
+<li><p>Consulter <a href="/docs/fr/quickstart.md">Quickstart</a> pour voir ce que Milvus peut faire.</p></li>
+<li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>
+<li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
+<li><a href="/docs/fr/manage-partitions.md">Gérer les partitions</a></li>
+<li><a href="/docs/fr/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
+<li><a href="/docs/fr/single-vector-search.md">Recherche à vecteur unique</a></li>
+<li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
-<li><p>Deploy your Milvus cluster on clouds:</p>
+<li><p><a href="/docs/fr/upgrade_milvus_cluster-helm.md">Mise à niveau de Milvus à l'aide de Helm Chart</a>.</p></li>
+<li><p><a href="/docs/fr/scaleout.md">Faire évoluer votre cluster Milvus</a>.</p></li>
+<li><p>Déployer votre cluster Milvus sur des clouds :</p>
 <ul>
-<li><a href="/docs/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/fr/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/fr/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/fr/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
-<li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p>Découvrez <a href="/docs/fr/milvus_backup_overview.md">Milvus Backup</a>, un outil open-source pour les sauvegardes de données Milvus.</p></li>
+<li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open-source pour le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
+<li><p>Découvrez <a href="https://github.com/zilliztech/attu">Attu</a>, un outil GUI open-source pour la gestion intuitive de Milvus.</p></li>
+<li><p><a href="/docs/fr/monitor.md">Surveiller Milvus avec Prometheus</a>.</p></li>
 </ul>

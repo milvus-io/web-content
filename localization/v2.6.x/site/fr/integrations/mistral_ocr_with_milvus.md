@@ -1,9 +1,9 @@
 ---
 id: mistral_ocr_with_milvus.md
 summary: >-
-  This tutorial demonstrates how to build a document understanding system using
-  Milvus and Mistral OCR.
-title: Document Understanding with Mistral OCR and Milvus
+  Ce tutoriel montre comment construire un système de compréhension de documents
+  en utilisant Milvus et Mistral OCR.
+title: Compréhension de documents avec Mistral OCR et Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,7 +11,7 @@ title: Document Understanding with Mistral OCR and Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/mistral_ocr_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Document Understanding with Mistral OCR and Milvus<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Document-Understanding-with-Mistral-OCR-and-Milvus" class="common-anchor-header">Compréhension de documents avec Mistral OCR et Milvus<button data-href="#Document-Understanding-with-Mistral-OCR-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,7 +26,7 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This tutorial demonstrates how to build a document understanding system using:</p>
+    </button></h1><p>Ce tutoriel montre comment construire un système de compréhension de documents en utilisant :</p>
 <h2 id="Mistral-OCR" class="common-anchor-header">Mistral OCR<button data-href="#Mistral-OCR" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,12 +42,12 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A powerful optical character recognition service that:</p>
+    </button></h2><p>Un puissant service de reconnaissance optique de caractères qui :</p>
 <ul>
-<li>Processes PDFs, images, and other document formats</li>
-<li>Preserves document structure and formatting</li>
-<li>Handles multi-page documents</li>
-<li>Recognizes tables, lists, and other complex elements</li>
+<li>traite les PDF, les images et d'autres formats de documents</li>
+<li>Préserve la structure et le formatage des documents</li>
+<li>Traite les documents multipages</li>
+<li>Reconnaît les tableaux, les listes et autres éléments complexes.</li>
 </ul>
 <h2 id="Mistral-Embeddings" class="common-anchor-header">Mistral Embeddings<button data-href="#Mistral-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,13 +65,13 @@ title: Document Understanding with Mistral OCR and Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Transforms text into numerical representations:</li>
-<li>Converts text into 1024-dimensional vectors</li>
-<li>Captures semantic relationships between concepts</li>
-<li>Enables similarity matching based on meaning</li>
-<li>Provides foundation for semantic search</li>
+<li>Transforme le texte en représentations numériques :</li>
+<li>Convertit le texte en vecteurs à 1024 dimensions</li>
+<li>Capture les relations sémantiques entre les concepts</li>
+<li>Permet la mise en correspondance des similitudes sur la base de la signification</li>
+<li>Fournit une base pour la recherche sémantique</li>
 </ul>
-<h2 id="Milvus-Vector-Database" class="common-anchor-header">Milvus Vector Database<button data-href="#Milvus-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Milvus-Vector-Database" class="common-anchor-header">Base de données vectorielles Milvus<button data-href="#Milvus-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,23 +86,23 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Specialized database for vector similarity search:</p>
+    </button></h2><p>Base de données spécialisée pour la recherche de similarités vectorielles :</p>
 <ul>
 <li>Open-Source</li>
-<li>Performs efficient Vector Search</li>
-<li>Scales to large document collections</li>
-<li>Supports hybrid search (vector similarity + metadata filtering)</li>
-<li>Optimized for AI applications</li>
+<li>Effectue une recherche vectorielle efficace</li>
+<li>S'adapte aux grandes collections de documents</li>
+<li>Supporte la recherche hybride (similarité vectorielle + filtrage des métadonnées)</li>
+<li>Optimisé pour les applications d'intelligence artificielle</li>
 </ul>
-<p>By the end of this tutorial, you’ll have a system that can:</p>
+<p>À la fin de ce tutoriel, vous disposerez d'un système capable de.. :</p>
 <ol>
-<li>Process documents (PDFs/images) via URLs</li>
-<li>Extract text using OCR</li>
-<li>Store the text and vector embeddings in Milvus</li>
-<li>Perform semantic search across your document collection</li>
+<li>traiter des documents (PDF/images) via des URL</li>
+<li>Extraire du texte à l'aide de l'OCR</li>
+<li>Stocker le texte et les encastrements vectoriels dans Milvus</li>
+<li>Effectuer une recherche sémantique dans votre collection de documents</li>
 </ol>
 <hr>
-<h2 id="Setup-and-Dependencies" class="common-anchor-header">Setup and Dependencies<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
+<h2 id="Setup-and-Dependencies" class="common-anchor-header">Installation et dépendances<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,10 +117,10 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>First, let’s install the required packages:</p>
+    </button></h2><p>Commençons par installer les paquets nécessaires :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mistralai pymilvus python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Environment-Setup" class="common-anchor-header">Environment Setup<button data-href="#Environment-Setup" class="anchor-icon" translate="no">
+<h2 id="Environment-Setup" class="common-anchor-header">Configuration de l'environnement<button data-href="#Environment-Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,12 +135,12 @@ title: Document Understanding with Mistral OCR and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You’ll need:</p>
+    </button></h2><p>Vous aurez besoin de :</p>
 <ol>
-<li>A Mistral API key (get one at https://console.mistral.ai/)</li>
-<li>Milvus running locally through <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> or with <a href="https://zilliz.com">Zilliz Cloud</a></li>
+<li>Une clé API Mistral (obtenez-en une à l'adresse https://console.mistral.ai/)</li>
+<li>Milvus exécuté localement via <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> ou avec <a href="https://zilliz.com">Zilliz Cloud</a></li>
 </ol>
-<p>Let’s set up our environment:</p>
+<p>Configurons notre environnement :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> re
@@ -177,7 +177,7 @@ COLLECTION_NAME = <span class="hljs-string">&quot;document_ocr&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Connected to Mistral API and Milvus at http://localhost:19530
 </code></pre>
-<h2 id="Setting-Up-Milvus-Collection" class="common-anchor-header">Setting Up Milvus Collection<button data-href="#Setting-Up-Milvus-Collection" class="anchor-icon" translate="no">
+<h2 id="Setting-Up-Milvus-Collection" class="common-anchor-header">Configuration de la collection Milvus<button data-href="#Setting-Up-Milvus-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,13 +192,13 @@ COLLECTION_NAME = <span class="hljs-string">&quot;document_ocr&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now, let’s create a Milvus collection to store our document data. The collection will have the following fields:</p>
+    </button></h2><p>Maintenant, créons une collection Milvus pour stocker les données de nos documents. La collection aura les champs suivants :</p>
 <ul>
-<li><code translate="no">id</code>: Primary key (auto-generated)</li>
-<li><code translate="no">url</code>: Source URL of the document</li>
-<li><code translate="no">page_num</code>: Page number within the document</li>
-<li><code translate="no">content</code>: Extracted text content</li>
-<li><code translate="no">embedding</code>: Vector representation of the content (1024 dimensions)</li>
+<li><code translate="no">id</code>: Clé primaire (générée automatiquement)</li>
+<li><code translate="no">url</code>: URL source du document</li>
+<li><code translate="no">page_num</code>: Numéro de page dans le document</li>
+<li><code translate="no">content</code>: Contenu du texte extrait</li>
+<li><code translate="no">embedding</code>: Représentation vectorielle du contenu (1024 dimensions)</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_milvus_collection</span>():
     <span class="hljs-string">&quot;&quot;&quot;Create Milvus collection if it doesn&#x27;t exist.&quot;&quot;&quot;</span>
@@ -244,7 +244,7 @@ setup_milvus_collection()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Collection 'document_ocr' already exists.
 </code></pre>
-<h2 id="Core-Functionality" class="common-anchor-header">Core Functionality<button data-href="#Core-Functionality" class="anchor-icon" translate="no">
+<h2 id="Core-Functionality" class="common-anchor-header">Fonctionnalité de base<button data-href="#Core-Functionality" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -259,7 +259,7 @@ setup_milvus_collection()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s implement the core functions for our document understanding system:</p>
+    </button></h2><p>Mettons en œuvre les fonctions de base de notre système de compréhension de documents :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Generate embeddings using Mistral</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_embedding</span>(<span class="hljs-params">text</span>):
     <span class="hljs-string">&quot;&quot;&quot;Generate embedding for text using Mistral embedding model.&quot;&quot;&quot;</span>
@@ -349,7 +349,7 @@ setup_milvus_collection()
     ocr_result = perform_ocr(url)
     <span class="hljs-keyword">return</span> ocr_result
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Search-Functionality" class="common-anchor-header">Search Functionality<button data-href="#Search-Functionality" class="anchor-icon" translate="no">
+<h2 id="Search-Functionality" class="common-anchor-header">Fonctionnalité de recherche<button data-href="#Search-Functionality" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -364,7 +364,7 @@ setup_milvus_collection()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now, let’s implement the search functionality to retrieve relevant document content:</p>
+    </button></h2><p>Mettons maintenant en œuvre la fonctionnalité de recherche pour récupérer le contenu pertinent des documents :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">search_documents</span>(<span class="hljs-params">query, limit=<span class="hljs-number">5</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;Search Milvus for similar content to the query.&quot;&quot;&quot;</span>
     <span class="hljs-comment"># Check if collection exists</span>
@@ -438,7 +438,7 @@ setup_milvus_collection()
         <span class="hljs-string">&quot;documents&quot;</span>: <span class="hljs-built_in">list</span>(unique_urls),
     }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Demo-Processing-Documents" class="common-anchor-header">Demo: Processing Documents<button data-href="#Demo-Processing-Documents" class="anchor-icon" translate="no">
+<h2 id="Demo-Processing-Documents" class="common-anchor-header">Démonstration : Traitement des documents<button data-href="#Demo-Processing-Documents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -453,7 +453,7 @@ setup_milvus_collection()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s process some example documents. You can replace these URLs with your own documents.</p>
+    </button></h2><p>Traitons quelques exemples de documents. Vous pouvez remplacer ces URL par vos propres documents.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example PDF URL (Mistral AI paper)</span>
 pdf_url = <span class="hljs-string">&quot;https://arxiv.org/pdf/2310.06825.pdf&quot;</span>
 
@@ -482,7 +482,7 @@ Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra 
 
 We introduce Mistral 7B, a 7-billion-parameter language model engineered for superior performance and efficiency. Mistral 7B outperforms the best open 13B model (Llama 2) across all evaluated benchmarks, and the best released 34B model (Llama 1) in reasoning, mathematics, and code generation. Our model leverages grouped-query attention (GQA) for faster inference, coupled with sliding window attention (SWA) to effectively handle sequences of arbitrary length with a reduced inference cost. We also provide a model fine-tuned to follow instructions, Mistral 7B - Instruct, that surpasses Llama 2 13B - chat mod...
 </code></pre>
-<p>Let’s process an image as well:</p>
+<p>Traitons également une image :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example image URL (replace with your own)</span>
 image_url = <span class="hljs-string">&quot;https://s3.eu-central-1.amazonaws.com/readcoop.cis.public-assets.prod/hero/old-german-scripts.png&quot;</span>
 
@@ -533,7 +533,7 @@ Image OCR Result:
 ![img-29.jpeg](img-29.jpeg)
 ![img-30.jpeg](img-30.jpeg)
 </code></pre>
-<h2 id="Demo-Searching-Documents" class="common-anchor-header">Demo: Searching Documents<button data-href="#Demo-Searching-Documents" class="anchor-icon" translate="no">
+<h2 id="Demo-Searching-Documents" class="common-anchor-header">Démonstration : Recherche de documents<button data-href="#Demo-Searching-Documents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -548,7 +548,7 @@ Image OCR Result:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that we’ve processed some documents, let’s search through them:</p>
+    </button></h2><p>Maintenant que nous avons traité quelques documents, effectuons une recherche dans ceux-ci :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get document statistics</span>
 stats = get_document_stats()
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Total pages stored: <span class="hljs-subst">{stats[<span class="hljs-string">&#x27;total_pages&#x27;</span>]}</span>&quot;</span>)
@@ -603,7 +603,7 @@ Albert Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra 
 
 We introduce Mistral 7B, a 7-billion-parameter language model engineered for superior performance and efficiency. Mistral 7...
 </code></pre>
-<p>Try another search query:</p>
+<p>Essayons une autre requête de recherche :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search for more specific information</span>
 query = <span class="hljs-string">&quot;What are the capabilities of Mistral&#x27;s language models?&quot;</span>
 results = search_documents(query, limit=<span class="hljs-number">3</span>)
@@ -650,12 +650,12 @@ Content: | Model | Answer |
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this tutorial, we’ve built a complete document understanding system using Mistral OCR and Milvus. This system can:</p>
+    </button></h2><p>Dans ce tutoriel, nous avons construit un système complet de compréhension de documents en utilisant Mistral OCR et Milvus. Ce système peut :</p>
 <ol>
-<li>Process documents from URLs</li>
-<li>Extract text using Mistral’s OCR capabilities</li>
-<li>Generate vector embeddings for the content</li>
-<li>Store both text and vectors in Milvus</li>
-<li>Perform semantic search across all processed documents</li>
+<li>traiter des documents à partir d'URL</li>
+<li>Extraire du texte en utilisant les capacités d'OCR de Mistral</li>
+<li>Générer des encastrements vectoriels pour le contenu</li>
+<li>Stocker le texte et les vecteurs dans Milvus</li>
+<li>Effectuer une recherche sémantique dans tous les documents traités</li>
 </ol>
-<p>This approach enables powerful document understanding capabilities that go beyond simple keyword matching, allowing users to find information based on meaning rather than exact text matches.</p>
+<p>Cette approche offre de puissantes capacités de compréhension des documents qui vont au-delà de la simple correspondance de mots-clés, permettant aux utilisateurs de trouver des informations en se basant sur le sens plutôt que sur des correspondances de texte exactes.</p>

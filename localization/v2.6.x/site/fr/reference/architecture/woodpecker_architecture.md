@@ -4,7 +4,7 @@ title: Woodpecker
 summary: >-
   Woodpecker est un système WAL natif dans Milvus 2.6. Avec une architecture
   sans disque et deux modes de déploiement, il offre un débit élevé, une faible
-  surcharge opérationnelle et une évolutivité transparente sur le stockage
+  charge opérationnelle et une évolutivité transparente sur le stockage
   d'objets.
 ---
 <h1 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">

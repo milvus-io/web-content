@@ -1,11 +1,12 @@
 ---
 id: multi_tenancy.md
-title: Implement Multi-tenancy
+title: Mise en œuvre de la multi-location
 summary: >-
-  In Milvus, multi-tenancy means multiple customers or teams—referred to as
-  tenants— share the same cluster while maintaining isolated data environments.
+  Dans Milvus, la multi-location signifie que plusieurs clients ou équipes
+  (appelés locataires) partagent le même cluster tout en conservant des
+  environnements de données isolés.
 ---
-<h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implement Multi-tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
+<h1 id="Implement-Multi-tenancy" class="common-anchor-header">Mise en œuvre de la multi-location<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, multi-tenancy means multiple customers or teams—referred to as <strong>tenants</strong>— share the same cluster while maintaining isolated data environments.</p>
-<p>Milvus supports four multi-tenancy strategies, each offering a different trade-off between scalability, data isolation, and flexibility. This guide walks you through each option, helping you choose the most suitable strategy for your use case.</p>
-<h2 id="Multi-tenancy-strategies" class="common-anchor-header">Multi-tenancy strategies<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
+    </button></h1><p>Dans Milvus, la multi-location signifie que plusieurs clients ou équipes (appelés <strong>locataires)</strong>partagent le même cluster tout en conservant des environnements de données isolés.</p>
+<p>Milvus prend en charge quatre stratégies de multi-location, chacune offrant un compromis différent entre l'évolutivité, l'isolation des données et la flexibilité. Ce guide vous présente chaque option et vous aide à choisir la stratégie la plus adaptée à votre cas d'utilisation.</p>
+<h2 id="Multi-tenancy-strategies" class="common-anchor-header">Stratégies multi-tenant<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,60 +38,52 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports multi-tenancy at four levels: <strong>Database</strong>, <strong>Collection</strong>, <strong>Partition</strong>, and <strong>Partition Key</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Database-level multi-tenancy</h3><p>With database-level multi-tenancy, each tenant receives a corresponding <a href="/docs/manage_databases.md">database</a> containing one or more collections.</p>
+    </button></h2><p>Milvus prend en charge le multi-tenant à quatre niveaux : <strong>Base de données</strong>, <strong>Collection</strong>, <strong>Partition</strong> et <strong>Clé de partition</strong>.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la base de données</h3><p>Avec la location multiple au niveau de la base de données, chaque locataire reçoit une <a href="/docs/fr/manage_databases.md">base de données</a> correspondante contenant une ou plusieurs collections.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
-    <span>Database Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Multi-tenance au niveau de la base de données</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: The database-level multi-tenancy strategy  supports a maximum of 64 tenants by default.</p></li>
-<li><p><strong>Data isolation</strong>: The data in each database is fully separated, offering enterprise-grade data isolation ideal for regulated environments or customers with strict compliance needs.</p></li>
-<li><p><strong>Flexibility</strong>: Each database can have collections with different schemas, offering highly flexible data organization and allowing each tenant to have its own data schema.</p></li>
-<li><p><strong>Others</strong>: This strategy also supports RBAC, enabling fine-grained control over user access per tenant. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>Évolutivité</strong>: La stratégie de multi-location au niveau de la base de données prend en charge un maximum de 64 locataires par défaut.</p></li>
+<li><p><strong>Isolation des données</strong>: Les données de chaque base sont entièrement séparées, offrant une isolation des données de niveau entreprise, idéale pour les environnements réglementés ou les clients ayant des besoins de conformité stricts.</p></li>
+<li><p><strong>Flexibilité</strong>: Chaque base de données peut avoir des collections avec des schémas différents, offrant une organisation des données très flexible et permettant à chaque locataire d'avoir son propre schéma de données.</p></li>
+<li><p><strong>Autres</strong>: Cette stratégie prend également en charge le RBAC, ce qui permet de contrôler finement l'accès des utilisateurs par locataire. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Collection-level multi-tenancy</h3><p>With collection-level multi-tenancy, each tenant is assigned a <a href="/docs/manage-collections.md">collection</a>, offering strong data isolation.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau de la collection</h3><p>Avec la multi-location au niveau de la collection, chaque locataire se voit attribuer une <a href="/docs/fr/manage-collections.md">collection</a>, ce qui permet d'isoler fortement les données.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
-    <span>Collection Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Multi-tenance au niveau de la collection</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: Since a cluster can hold up to 65,536 collections by default, this strategy can accommodate the same number of tenants within the cluster.</p></li>
-<li><p><strong>Data isolation</strong>: Collections are physically isolated from one another. This strategy provides strong data isolation.</p></li>
-<li><p><strong>Flexibility</strong>: This strategy allows each collection to have its own schema, accommodating tenants with different data schemas.</p></li>
-<li><p><strong>Others</strong>: This strategy also supports RBAC, allowing for granular access control over tenants. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>Évolutivité</strong>: Étant donné qu'un cluster peut contenir jusqu'à 65 536 collections par défaut, cette stratégie peut s'adapter au même nombre de locataires au sein du cluster.</p></li>
+<li><p><strong>Isolation des données</strong>: Les collections sont physiquement isolées les unes des autres. Cette stratégie assure une forte isolation des données.</p></li>
+<li><p><strong>Flexibilité</strong>: Cette stratégie permet à chaque collection d'avoir son propre schéma, ce qui permet d'accueillir des locataires ayant des schémas de données différents.</p></li>
+<li><p><strong>Autres</strong>: Cette stratégie prend également en charge le RBAC, ce qui permet un contrôle d'accès granulaire sur les locataires. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Partition-level multi-tenancy</h3><p>In partition-level multi-tenancy, each tenant is assigned to a manually created <a href="/docs/manage-partitions.md">partition</a> within a shared collection.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenance au niveau des partitions</h3><p>Dans la multi-location au niveau des partitions, chaque locataire est assigné à une <a href="/docs/fr/manage-partitions.md">partition</a> créée manuellement au sein d'une collection partagée.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
-    <span>Partition Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Multi-locations au niveau des partitions</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: A collection can hold up to 1,024 partitions per collection, allowing for the same number of tenants within it.</p></li>
-<li><p><strong>Data isolation</strong>: The data of each tenant is physically separated by partitions.</p></li>
-<li><p><strong>Flexibility</strong>: This strategy requires all tenants to share the same data schema. And partitions need to be manually created.</p></li>
-<li><p><strong>Others</strong>: RBAC is not supported on the partition level. Tenants can be queried either individually or across multiple partitions, which makes this approach well-suited for scenarios involving aggregated queries or analytics across tenant segments. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
+<li><p><strong>Évolutivité</strong>: Une collection peut contenir jusqu'à 1 024 partitions par collection, ce qui permet d'avoir le même nombre de locataires.</p></li>
+<li><p><strong>Isolation des données</strong>: Les données de chaque locataire sont physiquement séparées par des partitions.</p></li>
+<li><p><strong>Flexibilité</strong>: Cette stratégie exige que tous les locataires partagent le même schéma de données. De plus, les partitions doivent être créées manuellement.</p></li>
+<li><p><strong>Autres</strong>: Le RBAC n'est pas pris en charge au niveau des partitions. Les locataires peuvent être interrogés individuellement ou à travers plusieurs partitions, ce qui rend cette approche bien adaptée aux scénarios impliquant des requêtes agrégées ou des analyses à travers des segments de locataires. En outre, vous pouvez charger ou libérer des données de manière flexible pour des locataires spécifiques afin de gérer efficacement les données chaudes et froides.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Partition key-level multi-tenancy</h3><p>With this strategy, all tenants share a single collection and schema, but each tenant’s data is automatically routed into 16 physically isolated partitions based on the <a href="/docs/use-partition-key.md">partition key</a> value. Although each physical partition can contain multiple tenants, the data from different tenants remains logically separated.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-location au niveau de la clé de partition</h3><p>Avec cette stratégie, tous les locataires partagent une collection et un schéma uniques, mais les données de chaque locataire sont automatiquement acheminées vers 16 partitions physiquement isolées en fonction de la valeur de <a href="/docs/fr/use-partition-key.md">la clé de partition</a>. Bien que chaque partition physique puisse contenir plusieurs locataires, les données des différents locataires restent logiquement séparées.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
-    <span>Partition Key Level Multi Tenancy</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>Niveau de la clé de partition Multi-locataires</span> </span></p>
 <ul>
-<li><p><strong>Scalability</strong>: The partition key-level strategy offers the most scalable approach, supporting millions of tenants.</p></li>
-<li><p><strong>Data isolation</strong>: This strategy offers relatively weak data isolation because multiple tenants can share a physical partition.</p></li>
-<li><p><strong>Flexibility</strong>: Since all tenants must share the same data schema, this strategy offers limited data flexibility.</p></li>
-<li><p><strong>Others</strong>: RBAC is not supported on the partition-key level. Tenants can be queried either individually or across multiple partitions, which makes this approach well-suited for scenarios involving aggregated queries or analytics across tenant segments.</p></li>
+<li><p><strong>Évolutivité</strong>: La stratégie au niveau de la clé de partition offre l'approche la plus évolutive, prenant en charge des millions de locataires.</p></li>
+<li><p><strong>Isolation des données</strong>: Cette stratégie offre une isolation des données relativement faible car plusieurs locataires peuvent partager une partition physique.</p></li>
+<li><p><strong>Flexibilité</strong>: Étant donné que tous les locataires doivent partager le même schéma de données, cette stratégie offre une flexibilité limitée en matière de données.</p></li>
+<li><p><strong>Autres</strong>: Le RBAC n'est pas pris en charge au niveau de la clé de partition. Les locataires peuvent être interrogés individuellement ou à travers plusieurs partitions, ce qui rend cette approche bien adaptée aux scénarios impliquant des requêtes agrégées ou des analyses à travers des segments de locataires.</p></li>
 </ul>
-<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">Choosing the right multi-tenancy strategy<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
+<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">Choisir la bonne stratégie de multi-location<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,77 +98,77 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The table below offers a comprehensive comparison between the four levels of multi-tenancy strategies.</p>
+    </button></h2><p>Le tableau ci-dessous propose une comparaison complète entre les quatre niveaux de stratégies de multi-location.</p>
 <table>
    <tr>
      <th></th>
-     <th><p><strong>Database-level</strong></p></th>
-     <th><p><strong>Collection-level</strong></p></th>
-     <th><p><strong>Partition-level</strong></p></th>
-     <th><p><strong>Partition key-level</strong></p></th>
+     <th><p><strong>Niveau base de données</strong></p></th>
+     <th><p><strong>Niveau collection</strong></p></th>
+     <th><p><strong>Niveau partition</strong></p></th>
+     <th><p><strong>Niveau de la clé de partition</strong></p></th>
    </tr>
    <tr>
-     <td><p><strong>Data Isolation</strong></p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical</p></td>
-     <td><p>Physical + Logical</p></td>
+     <td><p><strong>Isolation des données</strong></p></td>
+     <td><p>Physique</p></td>
+     <td><p>Physique</p></td>
+     <td><p>Physique</p></td>
+     <td><p>Physique + logique</p></td>
    </tr>
    <tr>
-     <td><p><strong>Max. number of tenants</strong></p></td>
-     <td><p>By default, 64. You can increase it by modifying the <code translate="no">maxDatabaseNum</code> parameter in the Milvus.yaml configuration file. </p></td>
-     <td><p>By default, 65,536. You can increase it by modifying the <code translate="no">maxCollectionNum</code> parameter in the Milvus.yaml configuration file.</p></td>
-     <td><p>Up to 1,024 per collection. </p></td>
+     <td><p><strong>Nombre maximal de locataires</strong></p></td>
+     <td><p>Par défaut, 64. Vous pouvez l'augmenter en modifiant le paramètre <code translate="no">maxDatabaseNum</code> dans le fichier de configuration Milvus.yaml. </p></td>
+     <td><p>Par défaut, 65 536. Vous pouvez l'augmenter en modifiant le paramètre <code translate="no">maxCollectionNum</code> dans le fichier de configuration Milvus.yaml.</p></td>
+     <td><p>Jusqu'à 1 024 par collection. </p></td>
      <td><p>Millions</p></td>
    </tr>
    <tr>
-     <td><p><strong>Data schema flexibility</strong></p></td>
-     <td><p>High</p></td>
-     <td><p>Medium</p></td>
-     <td><p>Low</p></td>
-     <td><p>Low</p></td>
+     <td><p><strong>Flexibilité du schéma de données</strong></p></td>
+     <td><p>Élevée</p></td>
+     <td><p>Moyenne</p></td>
+     <td><p>Faible</p></td>
+     <td><p>Faible</p></td>
    </tr>
    <tr>
-     <td><p><strong>RBAC support</strong></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>No</p></td>
-     <td><p>No</p></td>
+     <td><p><strong>Prise en charge RBAC</strong></p></td>
+     <td><p>Oui</p></td>
+     <td><p>Oui</p></td>
+     <td><p>Non</p></td>
+     <td><p>Non</p></td>
    </tr>
    <tr>
-     <td><p><strong>Search performance</strong></p></td>
-     <td><p>Strong</p></td>
-     <td><p>Strong</p></td>
-     <td><p>Medium</p></td>
-     <td><p>Medium</p></td>
+     <td><p><strong>Performances de recherche</strong></p></td>
+     <td><p>Forte</p></td>
+     <td><p>Forte</p></td>
+     <td><p>Moyenne</p></td>
+     <td><p>Moyenne</p></td>
    </tr>
    <tr>
-     <td><p><strong>Cross-tenant search support</strong></p></td>
-     <td><p>No</p></td>
-     <td><p>No</p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
+     <td><p><strong>Prise en charge de la recherche inter-locataires</strong></p></td>
+     <td><p>Non</p></td>
+     <td><p>Non</p></td>
+     <td><p>Oui</p></td>
+     <td><p>Oui</p></td>
    </tr>
    <tr>
-     <td><p><strong>Support for effective handling of hot and cold data</strong></p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>Yes</p></td>
-     <td><p>No Currently, not supported for the partition key-level strategy.</p></td>
+     <td><p><strong>Prise en charge du traitement efficace des données chaudes et froides</strong></p></td>
+     <td><p>Oui</p></td>
+     <td><p>Oui</p></td>
+     <td><p>Oui</p></td>
+     <td><p>Non Actuellement, la stratégie au niveau des clés de partition n'est pas prise en charge.</p></td>
    </tr>
 </table>
-<p>There are several factors to consider when you choose the multi-tenancy strategy in Milvus.</p>
+<p>Plusieurs facteurs doivent être pris en compte lors du choix de la stratégie de multi-location dans Milvus.</p>
 <ol>
-<li><p><strong>Scalability:</strong> Partition Key > Partition > Collection > Database</p>
-<p>If you expect to support a very large number of tenants (millions or more), use the partition key-level strategy.</p></li>
-<li><p><strong>Strong data isolation requirements</strong>: Database = Collection > Partition > Partition Key</p>
-<p>Choose database, collection, or partition-level strategies if you have strict physical data isolation requirements.</p></li>
-<li><p><strong>Flexible data schema for each tenant’s data:</strong> Database > Collection > Partition = Partition Key</p>
-<p>Database-level and collection-level strategies provide full flexibility in data schemas. If your tenants’ data structures are different, choose database-level or collection-level multi-tenancy.</p></li>
-<li><p><strong>Others</strong></p>
+<li><p><strong>Évolutivité :</strong> Clé de partition &gt; Partition &gt; Collection &gt; Base de données</p>
+<p>Si vous prévoyez de prendre en charge un très grand nombre de locataires (des millions ou plus), utilisez la stratégie au niveau de la clé de partition.</p></li>
+<li><p><strong>Exigences élevées en matière d'isolation des données</strong>: Base de données = Collection &gt; Partition &gt; Clé de partition</p>
+<p>Choisissez les stratégies au niveau de la base de données, de la collection ou de la partition si vous avez des exigences strictes en matière d'isolation physique des données.</p></li>
+<li><p><strong>Schéma de données flexible pour les données de chaque locataire :</strong> Base de données &gt; Collection &gt; Partition = Clé de partition</p>
+<p>Les stratégies au niveau de la base de données et de la collection offrent une flexibilité totale en matière de schémas de données. Si les structures de données de vos locataires sont différentes, choisissez la multi-location au niveau de la base de données ou de la collection.</p></li>
+<li><p><strong>Autres</strong></p>
 <ol>
-<li><p><strong>Performance:</strong> Search performance is determined by various factors, including indexes, search parameters, and machine configurations. Milvus also support performance-tuning. It is recommended to test the actual performance before you select a multi-tenancy strategy.</p></li>
-<li><p><strong>Effective handling of hot and cold data</strong>: Currently, the database-level, collection-level, and partition-level strategies all support hot and cold data handling.</p></li>
-<li><p><strong>Cross-tenant searches</strong>: Only the partition-level and partition-key-level strategies support cross-tenant queries.</p></li>
+<li><p><strong>Performances :</strong> Les performances de recherche sont déterminées par divers facteurs, notamment les index, les paramètres de recherche et les configurations des machines. Milvus prend également en charge le réglage des performances. Il est recommandé de tester les performances réelles avant de choisir une stratégie de multi-location.</p></li>
+<li><p><strong>Traitement efficace des données chaudes et froides</strong>: Actuellement, les stratégies au niveau de la base de données, de la collection et de la partition prennent toutes en charge la gestion des données chaudes et froides.</p></li>
+<li><p><strong>Recherches inter-locataires</strong>: Seules les stratégies au niveau de la partition et de la clé de partition prennent en charge les requêtes inter-locataires.</p></li>
 </ol></li>
 </ol>

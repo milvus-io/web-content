@@ -1,11 +1,11 @@
 ---
 id: dify_with_milvus.md
 summary: >-
-  In this tutorial, we will show you how to deploy Dify with Milvus, to enable
-  efficient retrieval and RAG engine.
-title: Deploying Dify with Milvus
+  Dans ce tutoriel, nous vous montrerons comment déployer Dify avec Milvus, pour
+  permettre une recherche efficace et un moteur RAG.
+title: Déploiement de Dify avec Milvus
 ---
-<h1 id="Deploying-Dify-with-Milvus" class="common-anchor-header">Deploying Dify with Milvus<button data-href="#Deploying-Dify-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Deploying-Dify-with-Milvus" class="common-anchor-header">Déploiement de Dify avec Milvus<button data-href="#Deploying-Dify-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +20,9 @@ title: Deploying Dify with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://dify.ai/">Dify</a> is an open-source platform designed to simplify building AI applications by combining Backend-as-a-Service with LLMOps. It supports mainstream LLMs, offers an intuitive prompt orchestration interface, high-quality RAG engines, and a flexible AI agent framework. With low-code workflows, easy-to-use interfaces, and APIs, Dify enables both developers and non-technical users to focus on creating innovative, real-world AI solutions without dealing with complexity.</p>
-<p>In this tutorial, we will show you how to deploy Dify with Milvus, to enable efficient retrieval and RAG engine.</p>
-<h2 id="Clone-the-Repository" class="common-anchor-header">Clone the Repository<button data-href="#Clone-the-Repository" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://dify.ai/">Dify</a> est une plateforme open-source conçue pour simplifier la création d'applications d'IA en combinant Backend-as-a-Service et LLMOps. Elle prend en charge les LLM les plus courants, offre une interface d'orchestration intuitive, des moteurs RAG de haute qualité et un cadre d'agent d'IA flexible. Avec des flux de travail à code bas, des interfaces et des API faciles à utiliser, Dify permet aux développeurs et aux utilisateurs non techniques de se concentrer sur la création de solutions d'IA innovantes et réalistes sans avoir à gérer la complexité.</p>
+<p>Dans ce tutoriel, nous allons vous montrer comment déployer Dify avec Milvus, pour permettre une récupération efficace et un moteur RAG.</p>
+<h2 id="Clone-the-Repository" class="common-anchor-header">Cloner le référentiel<button data-href="#Clone-the-Repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,10 +37,10 @@ title: Deploying Dify with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Clone the Dify source code to your local machine:</p>
+    </button></h2><p>Clonez le code source de Dify sur votre machine locale :</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/langgenius/dify.git
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-the-Environment-Variables" class="common-anchor-header">Set the Environment Variables<button data-href="#Set-the-Environment-Variables" class="anchor-icon" translate="no">
+<h2 id="Set-the-Environment-Variables" class="common-anchor-header">Définir les variables d'environnement<button data-href="#Set-the-Environment-Variables" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,21 +55,21 @@ title: Deploying Dify with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Navigate to the Docker directory in the Dify source code</p>
+    </button></h2><p>Naviguez vers le répertoire Docker dans le code source de Dify</p>
 <pre><code translate="no" class="language-shell">cd dify/docker
 <button class="copy-code-btn"></button></code></pre>
-<p>Copy the environment configuration file</p>
+<p>Copier le fichier de configuration de l'environnement</p>
 <pre><code translate="no" class="language-shell">cp .env.example .env
 <button class="copy-code-btn"></button></code></pre>
-<p>Change the value <code translate="no">VECTOR_STORE</code> in the <code translate="no">.env</code> file</p>
+<p>Modifier la valeur <code translate="no">VECTOR_STORE</code> dans le fichier <code translate="no">.env</code> </p>
 <pre><code translate="no"><span class="hljs-attr">VECTOR_STORE</span>=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Make sure the Milvus configuration in the <code translate="no">.env</code> file has the following line:</p>
+<p>Assurez-vous que la configuration Milvus dans le fichier <code translate="no">.env</code> contient la ligne suivante :</p>
 <pre><code translate="no"><span class="hljs-attr">MILVUS_URI</span>=http://host.docker.internal:<span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Note that by specifying <code translate="no">VECTOR_STORE=milvus</code>, Dify will bring up a Milvus Standalone server in docker. Even though you can access the server from outside of the Docker through <code translate="no">http://localhost:19530</code>, for other Dify containers to talk to it inside Docker environment, they need to connect to the special DNS name <code translate="no">host.docker.internal</code>. Thus we set <code translate="no">http://host.docker.internal:19530</code> as <code translate="no">MILVUS_URI</code>.</p>
-<p>For production deployment you may want to customize the authentication. For more information about how to set token or username and password in Milvus, you can refer the <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticate page</a>.</p>
-<h2 id="Start-the-Docker-Containers" class="common-anchor-header">Start the Docker Containers<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
+<p>Notez qu'en spécifiant <code translate="no">VECTOR_STORE=milvus</code>, Dify fera apparaître un serveur Milvus Standalone dans Docker. Même si vous pouvez accéder au serveur depuis l'extérieur de Docker via <code translate="no">http://localhost:19530</code>, pour que d'autres conteneurs Dify puissent lui parler dans l'environnement Docker, ils doivent se connecter au nom DNS spécial <code translate="no">host.docker.internal</code>. Nous définissons donc <code translate="no">http://host.docker.internal:19530</code> comme <code translate="no">MILVUS_URI</code>.</p>
+<p>Pour un déploiement en production, il se peut que vous souhaitiez personnaliser l'authentification. Pour plus d'informations sur la manière de définir un jeton ou un nom d'utilisateur et un mot de passe dans Milvus, vous pouvez consulter la <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">page authentifier</a>.</p>
+<h2 id="Start-the-Docker-Containers" class="common-anchor-header">Démarrer les conteneurs Docker<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,14 +84,14 @@ title: Deploying Dify with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Choose the appropriate command to start the containers based on the Docker Compose version on your system. You can use the <code translate="no">$ docker compose version</code> command to check the version, and refer to the Docker documentation for more information:</p>
-<p>If you have Docker Compose V2, use the following command:</p>
+    </button></h2><p>Choisissez la commande appropriée pour démarrer les conteneurs en fonction de la version de Docker Compose sur votre système. Vous pouvez utiliser la commande <code translate="no">$ docker compose version</code> pour vérifier la version et vous référer à la documentation Docker pour plus d'informations :</p>
+<p>Si vous disposez de Docker Compose V2, utilisez la commande suivante :</p>
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<p>If you have Docker Compose V1, use the following command:</p>
+<p>Si vous avez Docker Compose V1, utilisez la commande suivante :</p>
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Log-in-to-Dify" class="common-anchor-header">Log in to Dify<button data-href="#Log-in-to-Dify" class="anchor-icon" translate="no">
+<h2 id="Log-in-to-Dify" class="common-anchor-header">Connectez-vous à Dify<button data-href="#Log-in-to-Dify" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,7 +106,5 @@ title: Deploying Dify with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Open your browser and go to the Dify installation page, and you can set your admin account here:
-<code translate="no">http://localhost/install</code> ,
-And then log in the main Dify page for further usage.</p>
-<p>For further usage and guidance, please refer to the <a href="https://docs.dify.ai/">Dify documentation</a>.</p>
+    </button></h2><p>Ouvrez votre navigateur et allez sur la page d'installation de Dify, et vous pouvez configurer votre compte administrateur ici :<code translate="no">http://localhost/install</code>, Puis connectez-vous à la page principale de Dify pour une utilisation ultérieure.</p>
+<p>Pour plus d'informations sur l'utilisation et les conseils, veuillez vous référer à la <a href="https://docs.dify.ai/">documentation de Dify</a>.</p>

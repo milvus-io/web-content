@@ -413,7 +413,7 @@ title: Notes de mise à jour
 <li>Correction d'un problème où l'abandon des propriétés de la base de données via RESTful échouait<a href="https://github.com/milvus-io/milvus/pull/40260">(#40260</a>)</li>
 <li>Utilisation d'un type de message différent pour l'API <code translate="no">OperatePrivilegeV2</code> <a href="https://github.com/milvus-io/milvus/pull/40193">(#40193</a>)</li>
 <li>Correction d'une course aux données dans le cache delta des tâches<a href="https://github.com/milvus-io/milvus/pull/40262">(#40262</a>)</li>
-<li>Résolution d'une fuite dans le cache delta des tâches causée par des ID de tâches dupliqués<a href="https://github.com/milvus-io/milvus/pull/40184">(#40184</a>)</li>
+<li>Résolution d'une fuite du cache delta des tâches causée par des ID de tâches dupliqués<a href="https://github.com/milvus-io/milvus/pull/40184">(#40184</a>)</li>
 </ul>
 <h2 id="v255" class="common-anchor-header">v2.5.5<button data-href="#v255" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -473,7 +473,7 @@ title: Notes de mise à jour
 <li>Correction de l'échec de l'arrêt gracieux de Rootcoord et des ressources limitées de CI<a href="https://github.com/milvus-io/milvus/pull/39793">(#39793</a>)</li>
 <li>[2.5] Suppression de la vérification de la taille des champs de chargement et des colonnes du schéma<a href="https://github.com/milvus-io/milvus/pull/39834">(#39834</a>, <a href="https://github.com/milvus-io/milvus/pull/39835">#39835</a>)</li>
 <li>[2.5] Suppression du paramètre mmap.enable dans le paramètre type lors de la création d'un index<a href="https://github.com/milvus-io/milvus/pull/39806">(#39806</a>)</li>
-<li>[2.5] Ne transmettait pas le nom de l'index lors de l'abandon des propriétés<a href="https://github.com/milvus-io/milvus/pull/39679">(#39679</a>)</li>
+<li>[2.5] Ne transmettait pas le nom de l'index lors de la suppression des propriétés<a href="https://github.com/milvus-io/milvus/pull/39679">(#39679</a>)</li>
 <li>[2.5] Les segments renvoient des résultats croissants et scellés<a href="https://github.com/milvus-io/milvus/pull/39789">(#39789</a>)</li>
 <li>[2.5] Correction d'un problème de carte simultanée<a href="https://github.com/milvus-io/milvus/pull/39776">(#39776</a>)</li>
 <li>[2.5] Résolution d'un conflit sur le test de la tâche QC<a href="https://github.com/milvus-io/milvus/pull/39797">(#39797</a>)</li>
