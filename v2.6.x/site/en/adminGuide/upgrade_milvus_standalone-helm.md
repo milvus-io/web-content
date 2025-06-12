@@ -15,6 +15,12 @@ title: Upgrade Milvus Standalone with Helm Chart
 
 This guide describes how to upgrade your Milvus standalone with Milvus Helm charts. 
 
+<div class="alert note">
+
+Upgrading from Milvus 2.5.x (or earlier versions) to v2.6.0-rc1 involves significant architectural changes that make this upgrade **irreversible**. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, **you cannot roll back to a previous version once the upgrade is completed**. For details on the architectural changes introduced in v2.6.0-rc1, refer to [Milvus Architecture Overview](architecture_overview.md).
+
+</div>
+
 ## Prerequisites
 - Helm version >= 3.14.0
 - Kubernetes version >= 1.20.0
@@ -86,11 +92,11 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 
 You can choose the upgrade path for your Milvus as follows:
 
-<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.5.12.</div>
+<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to vv2.6.0-rc1.</div>
 
-- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.5.12.
+- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to vv2.6.0-rc1.
 
-- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.5.12.
+- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to vv2.6.0-rc1.
 
 <div style="display:none;">
 
@@ -112,10 +118,10 @@ The script applies only to the upgrade of Milvus installed with Helm. The follow
 | `w`          | New Milvus image tag                                      | `milvusdb/milvus:v2.2.3`         | True                    |
 | `o`          | Operation                                                 | `update`                         | False                   |
 
-Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.5.12.
+Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to v2.6.0-rc1.
 
 ```shell
-sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w 'milvusdb/milvus:v2.5.12'
+sh rollingUpdate.sh -n default -i my-release -o update -t v2.6.0-rc1 -w 'milvusdb/milvus:vv2.6.0-rc1'
 ```
 
 <div class="alert note">
@@ -203,42 +209,42 @@ The following table lists the operations you can do for meta migration.
 4. Migrate the Milvus metadata.
 5. Start Milvus components with a new image.
 
-#### 2. Upgrade Milvus from v2.1.x to 2.5.12
+#### 2. Upgrade Milvus from v2.1.x to v2.6.0-rc1
 
-The following commands assume that you upgrade Milvus from v2.1.4 to 2.5.12. Change them to the versions that fit your needs.
+The following commands assume that you upgrade Milvus from v2.1.4 to v2.6.0-rc1. Change them to the versions that fit your needs.
 
 1. Specify Milvus instance name, source Milvus version, and target Milvus version.
 
     ```
-    ./migrate.sh -i my-release -s 2.1.4 -t 2.5.12
+    ./migrate.sh -i my-release -s 2.1.4 -t v2.6.0-rc1
     ```
 
 2. Specify the namespace with `-n` if your Milvus is not installed in the default K8s namespace.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t v2.6.0-rc1
     ```
 
 3. Specify the root path with `-r` if your Milvus is installed with the custom `rootpath`.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t v2.6.0-rc1 -r by-dev
     ```
 
 4. Specify the image tag with `-w` if your Milvus is installed with a custom `image`.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -w milvusdb/milvus:v2.5.12
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t v2.6.0-rc1 -r by-dev -w milvusdb/milvus:vv2.6.0-rc1
     ```
 
 5. Set `-d true` if you want to automatically remove the migration pod after the migration is completed.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -w milvusdb/milvus:v2.5.12 -d true
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t v2.6.0-rc1 -w milvusdb/milvus:vv2.6.0-rc1 -d true
     ```
 
 6. Rollback and migrate again if the migration fails.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -o migrate -w milvusdb/milvus:v2.5.12
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t v2.6.0-rc1 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t v2.6.0-rc1 -r by-dev -o migrate -w milvusdb/milvus:vv2.6.0-rc1
