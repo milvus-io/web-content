@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
 <ol>
 <li><p><strong>Coarse Filtering</strong>: IVF unterteilt den Vektorraum in Cluster, wodurch der Suchumfang durch die Konzentration auf die relevantesten Clusterregionen erheblich reduziert wird.</p></li>
 <li><p><strong>Binäre Quantisierung</strong>: Innerhalb jedes Clusters komprimiert RaBitQ die Vektoren in binäre Darstellungen, wobei wesentliche Abstandsbeziehungen durch theoretische Garantien erhalten bleiben.</p></li>
-<li><p><strong>Optionale Verfeinerung</strong>: Wenn diese Option aktiviert ist, speichert der Index zusätzliche verfeinerte Daten in Formaten mit höherer Genauigkeit (SQ6, SQ8, FP16, BF16 oder FP32), um die Wiederauffindungsrate auf Kosten eines größeren Speicherplatzes zu verbessern.</p></li>
+<li><p><strong>Optionale Verfeinerung</strong>: Wenn diese Option aktiviert ist, speichert der Index zusätzliche verfeinerte Daten in Formaten mit höherer Genauigkeit (SQ6, SQ8, FP16, BF16 oder FP32), um die Wiederauffindungsrate zu verbessern, was allerdings mit mehr Speicherplatz verbunden ist.</p></li>
 </ol>
 <p>Milvus implementiert IVF_RABITQ unter Verwendung der folgenden FAISS-Fabrikstrings:</p>
 <ul>
@@ -187,7 +187,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine</code></p></td>
      <td><p>Aktiviert den Verfeinerungsprozess und speichert die verfeinerten Daten.</p></td>
      <td><p><strong>Typ</strong>: Boolesch<br><strong>Bereich</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]<br><strong>Standardwert</strong>: <code translate="no">false</code></p></td>
-     <td><p>Auf <code translate="no">true</code> gesetzt, wenn eine Wiederfindungsrate von 0,9+ benötigt wird. Die Aktivierung der Verfeinerung verbessert die Genauigkeit, erhöht jedoch die Speicheranforderungen und die Zeit für den Indexaufbau.</p></td>
+     <td><p>Auf <code translate="no">true</code> gesetzt, wenn eine Wiederfindungsrate von 0,9+ erforderlich ist. Die Aktivierung der Verfeinerung verbessert die Genauigkeit, erhöht jedoch die Speicheranforderungen und die Zeit für den Indexaufbau.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">refine_type</code></p></td>

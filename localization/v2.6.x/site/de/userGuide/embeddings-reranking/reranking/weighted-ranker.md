@@ -5,11 +5,11 @@ summary: >-
   Der Weighted Ranker kombiniert und priorisiert auf intelligente Weise
   Ergebnisse aus mehreren Suchpfaden, indem er ihnen eine unterschiedliche
   Gewichtung zuweist. Ähnlich wie ein geschickter Koch mehrere Zutaten zu einem
-  perfekten Gericht kombiniert, wägt Weighted Ranker verschiedene Suchergebnisse
-  ab, um die relevantesten kombinierten Ergebnisse zu liefern. Dieser Ansatz ist
-  ideal für die Suche in mehreren Vektorfeldern oder Modalitäten, bei denen
-  bestimmte Felder einen größeren Beitrag zum endgültigen Ranking leisten
-  sollten als andere.
+  perfekten Gericht kombiniert, gleicht Weighted Ranker verschiedene
+  Suchergebnisse aus, um die relevantesten kombinierten Ergebnisse zu liefern.
+  Dieser Ansatz ist ideal für die Suche in mehreren Vektorfeldern oder
+  Modalitäten, bei denen bestimmte Felder einen größeren Beitrag zum endgültigen
+  Ranking leisten sollten als andere.
 ---
 <h1 id="Weighted-Ranker" class="common-anchor-header">Gewichteter Ranker<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -269,7 +269,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bei der Verwendung der WeightedRanker-Strategie ist es erforderlich, Gewichtungswerte einzugeben. Die Anzahl der einzugebenden Gewichtungswerte sollte der Anzahl der grundlegenden ANN-Suchanfragen in der Hybrid Search entsprechen. Die eingegebenen Gewichtungswerte sollten im Bereich von [0,1] liegen, wobei Werte näher an 1 eine größere Bedeutung anzeigen.</p>
+    </button></h2><p>Bei der Verwendung der WeightedRanker-Strategie ist es erforderlich, Gewichtungswerte einzugeben. Die Anzahl der einzugebenden Gewichtungswerte sollte der Anzahl der ANN-Basissuchanfragen in der Hybrid Search entsprechen. Die eingegebenen Gewichtungswerte sollten im Bereich [0,1] liegen, wobei Werte, die näher an 1 liegen, eine größere Bedeutung anzeigen.</p>
 <h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">Einen gewichteten Ranker erstellen</h3><p>Angenommen, es gibt zwei grundlegende ANN-Suchanfragen in einer hybriden Suche: Textsuche und Bildsuche. Wenn die Textsuche als wichtiger angesehen wird, sollte ihr ein höheres Gewicht zugewiesen werden.</p>
 <div class="alert note">
 <p>Ab Milvus 2.6.x können Sie Reranking-Strategien direkt über die <code translate="no">Function</code> API konfigurieren. Wenn Sie eine frühere Version (vor v2.6.0) verwenden, finden Sie in der <a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Reranking-Dokumentation</a> Anweisungen zur Einrichtung.</p>

@@ -2,9 +2,9 @@
 id: configure_localstorage.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure localStorage for Milvus.
+summary: 'Erfahren Sie, wie Sie localStorage für Milvus konfigurieren.'
 ---
-<h1 id="localStorage-related-Configurations" class="common-anchor-header">localStorage-related Configurations<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="localStorage-related-Configurations" class="common-anchor-header">localStorage-bezogene Konfigurationen<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,16 +37,16 @@ summary: Learn how to configure localStorage for Milvus.
     </button></h2><table id="localStorage.path">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Local path to where vector data are stored during a search or a query to avoid repetitve access to MinIO or S3 service.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      </td>
+        <li>Lokaler Pfad zu dem Ort, an dem die Vektordaten während einer Suche oder einer Abfrage gespeichert werden, um einen wiederholten Zugriff auf den MinIO- oder S3-Dienst zu vermeiden.</li>      
+        <li>Vorsicht! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine Zeit lang verwendet haben, wird der Zugriff auf alte Daten beeinträchtigt.</li>      
+        <li>Es wird empfohlen, diesen Parameter zu ändern, bevor Sie Milvus zum ersten Mal starten.</li>      </td>
       <td>/var/lib/milvus/data/</td>
     </tr>
   </tbody>

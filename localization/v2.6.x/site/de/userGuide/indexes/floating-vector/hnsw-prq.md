@@ -73,7 +73,7 @@ summary: >-
 <li><p><code translate="no">refine_k</code>: Wirkt wie ein Vergrößerungsfaktor. Wenn z. B. Ihr Top <em>k</em> 100 und <code translate="no">refine_k</code> 2 ist, ordnet das System die 200 besten Kandidaten neu und gibt die besten 100 zurück, was die Gesamtgenauigkeit erhöht.</p></li>
 </ul></li>
 </ol>
-<p>Eine vollständige Liste der Parameter und gültigen Werte finden Sie unter <a href="/docs/de/hnsw-prq.md#Index-params">Indexparameter</a>.</p>
+<p>Eine vollständige Liste der Parameter und der gültigen Werte finden Sie unter <a href="/docs/de/hnsw-prq.md#Index-params">Indexparametern</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,7 +221,7 @@ res = MilvusClient.search(
      <td><p>Legt fest, wie viele Restunterquantisierer in der RQ-Stufe verwendet werden. Mit mehr Unterquantisierern wird möglicherweise eine stärkere Komprimierung erreicht, aber es kann zu einem größeren Informationsverlust kommen.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 16]</p>
 <p><strong>Standardwert</strong>: <code translate="no">2</code></p></td>
-     <td><p>Ein höherer Wert von <code translate="no">nrq</code> ermöglicht zusätzliche Subquantisierungsschritte, was zu einer präziseren Rekonstruktion der ursprünglichen Vektoren führen kann. Allerdings bedeutet dies auch, dass mehr Subquantisierer gespeichert und berechnet werden müssen, was zu einer größeren Indexgröße und einem höheren Rechenaufwand führt.</p></td>
+     <td><p>Ein höherer Wert von <code translate="no">nrq</code> erlaubt zusätzliche Subquantisierungsschritte, was zu einer genaueren Rekonstruktion der ursprünglichen Vektoren führen kann. Allerdings bedeutet dies auch, dass mehr Subquantisierer gespeichert und berechnet werden müssen, was zu einer größeren Indexgröße und einem höheren Rechenaufwand führt.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -257,7 +257,7 @@ res = MilvusClient.search(
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Standardwert</strong>: <em>limit</em> (TopK nächste Nachbarn, die zurückgegeben werden)</p></td>
      <td><p>Eine größere <code translate="no">ef</code> führt im Allgemeinen zu einer <strong>höheren Suchgenauigkeit</strong>, da mehr potenzielle Nachbarn berücksichtigt werden. Allerdings <strong>erhöht sich</strong> dadurch auch <strong>die Suchzeit</strong>. <code translate="no">ef</code> sollte erhöht werden, wenn eine hohe Wiederfindungsrate entscheidend ist und die Suchgeschwindigkeit weniger wichtig ist.</p>
-<p>Ziehen Sie in Erwägung, <code translate="no">ef</code> zu verringern, um schnelleren Suchen den Vorrang zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p>
+<p>Ziehen Sie in Erwägung, <code translate="no">ef</code> zu verringern, um schnelleren Suchen den Vorzug zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p>
 <p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [K, 10K].</p></td>
    </tr>
    <tr>

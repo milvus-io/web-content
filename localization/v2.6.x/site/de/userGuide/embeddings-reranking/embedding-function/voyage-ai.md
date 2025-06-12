@@ -136,7 +136,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>Dies bindet einen bestimmten Schlüssel an jede Anfrage, die Milvus an den Voyage AI-Einbettungsendpunkt sendet.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Umgebungsvariable</h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose betreiben und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Umgebungsvariable</h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose ausführen und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
 <p>Milvus greift nur dann auf die Umgebungsvariable zurück, wenn unter <code translate="no">milvus.yaml</code> kein Schlüssel für den Anbieter gefunden wird.</p>
 <table>
    <tr>

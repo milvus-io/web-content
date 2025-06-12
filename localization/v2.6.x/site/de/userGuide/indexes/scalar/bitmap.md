@@ -116,7 +116,7 @@ client.create_index(​
 <li><p><code translate="no">FLOAT</code> <code translate="no">DOUBLE</code>: Fließkomma-Typen sind nicht mit der binären Natur von Bitmap-Indizes kompatibel.</p></li>
 <li><p><code translate="no">JSON</code>: JSON-Datentypen haben eine komplexe Struktur, die mit Bitmap-Indizes nicht effizient dargestellt werden kann.</p></li>
 </ul></li>
-<li><p>Bitmap-Indizes eignen sich nicht für Felder mit hoher Kardinalität (d. h. Felder mit einer großen Anzahl unterschiedlicher Werte).</p>
+<li><p>Bitmap-Indizes sind nicht für Felder mit hoher Kardinalität geeignet (d. h. Felder mit einer großen Anzahl unterschiedlicher Werte).</p>
 <ul>
 <li><p>Als allgemeine Richtlinie gilt, dass Bitmap-Indizes am effektivsten sind, wenn die Kardinalität eines Feldes weniger als 500 beträgt.</p></li>
 <li><p>Wenn die Kardinalität über diesen Schwellenwert hinaus ansteigt, nehmen die Leistungsvorteile von Bitmap-Indizes ab, und der Speicher-Overhead wird erheblich.</p></li>

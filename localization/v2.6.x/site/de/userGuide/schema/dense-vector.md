@@ -1,18 +1,20 @@
 ---
 id: dense-vector.md
-title: Dense Vector
+title: Dichter Vektor
 summary: >-
-  Dense vectors are numerical data representations widely used in machine
-  learning and data analysis. They consist of arrays with real numbers, where
-  most or all elements are non-zero. Compared to sparse vectors, dense vectors
-  contain more information at the same dimensional level, as each dimension
-  holds meaningful values. This representation can effectively capture complex
-  patterns and relationships, making data easier to analyze and process in
-  high-dimensional spaces. Dense vectors typically have a fixed number of
-  dimensions, ranging from a few dozen to several hundred or even thousands,
-  depending on the specific application and requirements.
+  Dichte Vektoren sind numerische Datendarstellungen, die häufig beim
+  maschinellen Lernen und bei der Datenanalyse verwendet werden. Sie bestehen
+  aus Arrays mit reellen Zahlen, bei denen die meisten oder alle Elemente
+  ungleich Null sind. Im Vergleich zu spärlichen Vektoren enthalten dichte
+  Vektoren mehr Informationen auf der gleichen Dimensionsebene, da jede
+  Dimension sinnvolle Werte enthält. Mit dieser Darstellung können komplexe
+  Muster und Beziehungen effektiv erfasst werden, was die Analyse und
+  Verarbeitung von Daten in hochdimensionalen Räumen erleichtert. Dichte
+  Vektoren haben in der Regel eine feste Anzahl von Dimensionen, die je nach
+  Anwendung und Anforderungen von einigen Dutzend bis zu mehreren Hundert oder
+  sogar Tausend reichen.
 ---
-<h1 id="Dense-Vector" class="common-anchor-header">Dense Vector<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
+<h1 id="Dense-Vector" class="common-anchor-header">Dichter Vektor<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,9 +29,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dense vectors are numerical data representations widely used in machine learning and data analysis. They consist of arrays with real numbers, where most or all elements are non-zero. Compared to sparse vectors, dense vectors contain more information at the same dimensional level, as each dimension holds meaningful values. This representation can effectively capture complex patterns and relationships, making data easier to analyze and process in high-dimensional spaces. Dense vectors typically have a fixed number of dimensions, ranging from a few dozen to several hundred or even thousands, depending on the specific application and requirements.</p>
-<p>Dense vectors are mainly used in scenarios that require understanding the semantics of data, such as semantic search and recommendation systems. In semantic search, dense vectors help capture the underlying connections between queries and documents, improving the relevance of search results. In recommendation systems, they aid in identifying similarities between users and items, offering more personalized suggestions.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Dichte Vektoren sind numerische Datendarstellungen, die häufig beim maschinellen Lernen und bei der Datenanalyse verwendet werden. Sie bestehen aus Arrays mit reellen Zahlen, bei denen die meisten oder alle Elemente ungleich Null sind. Im Vergleich zu spärlichen Vektoren enthalten dichte Vektoren mehr Informationen auf der gleichen Dimensionsebene, da jede Dimension sinnvolle Werte enthält. Mit dieser Darstellung können komplexe Muster und Beziehungen effektiv erfasst werden, was die Analyse und Verarbeitung von Daten in hochdimensionalen Räumen erleichtert. Dichte Vektoren haben in der Regel eine feste Anzahl von Dimensionen, die je nach Anwendung und Anforderungen von einigen Dutzend bis zu mehreren Hundert oder sogar Tausend reichen.</p>
+<p>Dichte Vektoren werden hauptsächlich in Szenarien verwendet, die ein Verständnis der Semantik von Daten erfordern, wie z. B. bei der semantischen Suche und bei Empfehlungssystemen. Bei der semantischen Suche helfen dichte Vektoren, die zugrundeliegenden Verbindungen zwischen Abfragen und Dokumenten zu erfassen und so die Relevanz der Suchergebnisse zu verbessern. In Empfehlungssystemen helfen sie bei der Erkennung von Ähnlichkeiten zwischen Nutzern und Objekten und bieten so personalisierte Vorschläge.</p>
+<h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,20 +46,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dense vectors are typically represented as arrays of floating-point numbers with a fixed length, such as <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. The dimensionality of these vectors usually ranges from hundreds to thousands, such as 128, 256, 768, or 1024. Each dimension captures specific semantic features of an object, making it applicable to various scenarios through similarity calculations.</p>
+    </button></h2><p>Dichte Vektoren werden in der Regel als Arrays von Fließkommazahlen mit einer festen Länge dargestellt, z. B. <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. Die Dimensionalität dieser Vektoren reicht in der Regel von Hunderten bis Tausenden, z. B. 128, 256, 768 oder 1024. Jede Dimension erfasst spezifische semantische Merkmale eines Objekts und macht es durch Ähnlichkeitsberechnungen für verschiedene Szenarien anwendbar.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
-    <span>Dense Vector</span>
-  </span>
-</p>
-<p>The image above illustrates the representation of dense vectors in a 2D space. Although dense vectors in real-world applications often have much higher dimensions, this 2D illustration effectively conveys several key concepts:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
+   </span> <span class="img-wrapper"> <span>Dichter Vektor</span> </span></p>
+<p>Das obige Bild zeigt die Darstellung von dichten Vektoren in einem 2D-Raum. Obwohl dichte Vektoren in realen Anwendungen oft viel höhere Dimensionen haben, vermittelt diese 2D-Darstellung effektiv mehrere Schlüsselkonzepte:</p>
 <ul>
-<li><p><strong>Multidimensional Representation:</strong> Each point represents a conceptual object (like <strong>Milvus</strong>, <strong>vector database</strong>, <strong>retrieval system</strong>, etc.), with its position determined by the values of its dimensions.</p></li>
-<li><p><strong>Semantic Relationships:</strong> The distances between points reflect the semantic similarity between concepts. Closer points indicate concepts that are more semantically related.</p></li>
-<li><p><strong>Clustering Effect:</strong> Related concepts (such as <strong>Milvus</strong>, <strong>vector database</strong>, and <strong>retrieval system</strong>) are positioned close to each other in space, forming a semantic cluster.</p></li>
+<li><p><strong>Mehrdimensionale Darstellung:</strong> Jeder Punkt repräsentiert ein konzeptionelles Objekt (wie <strong>Milvus</strong>, eine <strong>Vektordatenbank</strong>, ein <strong>Retrievalsystem</strong> usw.), wobei seine Position durch die Werte seiner Dimensionen bestimmt wird.</p></li>
+<li><p><strong>Semantische Beziehungen:</strong> Die Abstände zwischen den Punkten spiegeln die semantische Ähnlichkeit zwischen den Konzepten wider. Näher beieinander liegende Punkte weisen auf Konzepte hin, die semantisch enger miteinander verwandt sind.</p></li>
+<li><p><strong>Clustering-Effekt:</strong> Verwandte Konzepte (wie <strong>Milvus</strong>, <strong>Vektordatenbank</strong> und <strong>Retrievalsystem</strong>) liegen im Raum nahe beieinander und bilden einen semantischen Cluster.</p></li>
 </ul>
-<p>Below is an example of a real dense vector representing the text <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
+<p>Unten sehen Sie ein Beispiel für einen echten dichten Vektor, der den Text <code translate="no">&quot;Milvus is an efficient vector database&quot;</code> darstellt:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>
     <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>
@@ -71,18 +71,16 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Dense vectors can be generated using various <a href="https://en.wikipedia.org/wiki/Embedding">embedding</a> models, such as CNN models (like <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) for images and language models (like <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) for text. These models transform raw data into points in high-dimensional space, capturing the semantic features of the data. Additionally, Milvus offers convenient methods to help users generate and process dense vectors, as detailed in Embeddings.</p>
-<p>Once data is vectorized, it can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.</p>
+<p>Dichte Vektoren können mit verschiedenen <a href="https://en.wikipedia.org/wiki/Embedding">Einbettungsmodellen</a> erzeugt werden, z. B. CNN-Modelle (wie <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) für Bilder und Sprachmodelle (wie <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) für Text. Diese Modelle wandeln Rohdaten in Punkte im hochdimensionalen Raum um und erfassen die semantischen Merkmale der Daten. Darüber hinaus bietet Milvus bequeme Methoden zur Erzeugung und Verarbeitung dichter Vektoren, wie unter Einbettungen beschrieben.</p>
+<p>Sobald die Daten vektorisiert sind, können sie in Milvus zur Verwaltung und zum Abruf der Vektoren gespeichert werden. Das folgende Diagramm zeigt den grundlegenden Prozess.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
-    <span>Use Dense Vector</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
+   </span> <span class="img-wrapper"> <span>Dichter Vektor verwenden</span> </span></p>
 <div class="alert note">
-<p>Besides dense vectors, Milvus also supports sparse vectors and binary vectors. Sparse vectors are suitable for precise matches based on specific terms, such as keyword search and term matching, while binary vectors are commonly used for efficiently handling binarized data, such as image pattern matching and certain hashing applications. For more information, refer to <a href="/docs/binary-vector.md">Binary Vector</a> and <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
+<p>Neben dichten Vektoren unterstützt Milvus auch spärliche Vektoren und binäre Vektoren. Dünne Vektoren eignen sich für präzise Übereinstimmungen auf der Grundlage spezifischer Begriffe, z. B. bei der Suche nach Schlüsselwörtern und dem Abgleich von Begriffen, während binäre Vektoren in der Regel für den effizienten Umgang mit binarisierten Daten verwendet werden, z. B. beim Abgleich von Bildmustern und bestimmten Hashing-Anwendungen. Weitere Informationen finden Sie unter <a href="/docs/de/binary-vector.md">Binäre Vektoren</a> und <a href="/docs/de/sparse_vector.md">dichte Vektoren</a>.</p>
 </div>
-<h2 id="Use-dense-vectors" class="common-anchor-header">Use dense vectors<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-dense-vectors" class="common-anchor-header">Dichte Vektoren verwenden<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,19 +95,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Add vector field</h3><p>To use dense vectors in Milvus, first define a vector field for storing dense vectors when creating a collection. This process includes:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Vektorfeld hinzufügen</h3><p>Um dichte Vektoren in Milvus zu verwenden, definieren Sie zunächst ein Vektorfeld zum Speichern von dichten Vektoren, wenn Sie eine Sammlung erstellen. Dieser Prozess beinhaltet:</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to a supported dense vector data type. For supported dense vector data types, see Data Types.</p></li>
-<li><p>Specifying the dimensions of the dense vector using the <code translate="no">dim</code> parameter.</p></li>
+<li><p>Einstellen von <code translate="no">datatype</code> auf einen unterstützten dichten Vektordatentyp. Unterstützte Datentypen für dichte Vektoren finden Sie unter Datentypen.</p></li>
+<li><p>Angeben der Dimensionen des dichten Vektors mit dem Parameter <code translate="no">dim</code>.</p></li>
 </ol>
-<p>In the example below, we add a vector field named <code translate="no">dense_vector</code> to store dense vectors. The field’s data type is <code translate="no">FLOAT_VECTOR</code>, with a dimension of <code translate="no">4</code>.</p>
+<p>Im folgenden Beispiel fügen wir ein Vektorfeld mit dem Namen <code translate="no">dense_vector</code> hinzu, um dichte Vektoren zu speichern. Der Datentyp des Felds ist <code translate="no">FLOAT_VECTOR</code> mit einer Dimension von <code translate="no">4</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -219,37 +212,32 @@ schema.WithField(entity.NewField().
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Supported data types for dense vector fields</strong>:</p>
+<p><strong>Unterstützte Datentypen für dichte Vektorfelder</strong>:</p>
 <table>
    <tr>
-     <th><p>Data Type</p></th>
-     <th><p>Description</p></th>
+     <th><p>Datentyp</p></th>
+     <th><p>Beschreibung</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-     <td><p>Stores 32-bit floating-point numbers, commonly used for representing real numbers in scientific computations and machine learning. Ideal for scenarios requiring high precision, such as distinguishing similar vectors.</p></td>
+     <td><p>Speichert 32-Bit-Gleitkommazahlen, die üblicherweise zur Darstellung von reellen Zahlen bei wissenschaftlichen Berechnungen und maschinellem Lernen verwendet werden. Ideal für Szenarien, die eine hohe Präzision erfordern, z. B. zur Unterscheidung ähnlicher Vektoren.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>Stores 16-bit half-precision floating-point numbers, used for deep learning and GPU computations. It saves storage space in scenarios where precision is less critical, such as in the low-precision recall phase of recommendation systems.</p></td>
+     <td><p>Speichert 16-Bit-Gleitkommazahlen mit halber Genauigkeit, die für Deep Learning und GPU-Berechnungen verwendet werden. Es spart Speicherplatz in Szenarien, in denen die Genauigkeit weniger kritisch ist, wie z. B. in der Recall-Phase von Empfehlungssystemen mit geringer Genauigkeit.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>Stores 16-bit Brain Floating Point (bfloat16) numbers, offering the same range of exponents as Float32 but with reduced precision. Suitable for scenarios that need to process large volumes of vectors quickly, such as large-scale image retrieval.</p></td>
+     <td><p>Speichert 16-Bit-Gehirn-Fließkommazahlen (bfloat16), die den gleichen Exponentenbereich wie Float32 bieten, aber eine geringere Genauigkeit aufweisen. Geeignet für Szenarien, in denen große Mengen von Vektoren schnell verarbeitet werden müssen, wie z. B. bei der Suche nach Bildern in großem Maßstab.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Stores vectors whose individual elements in each dimension are 8-bit integers (int8), with each element ranging from –128 to 127. Designed for quantized deep learning models (e.g., ResNet, EfficientNet), INT8_VECTOR reduces model size and speeds up inference with minimal precision loss.</p></td>
+     <td><p>Speichert Vektoren, deren einzelne Elemente in jeder Dimension 8-Bit-Ganzzahlen (int8) sind, wobei jedes Element von -128 bis 127 reicht. INT8_VECTOR wurde für quantisierte Deep-Learning-Modelle (z. B. ResNet, EfficientNet) entwickelt und reduziert die Modellgröße und beschleunigt die Inferenz mit minimalem Präzisionsverlust.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Set index params for vector field</h3><p>To accelerate semantic searches, an index must be created for the vector field. Indexing can significantly improve the retrieval efficiency of large-scale vector data.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Index-Parameter für Vektorfeld festlegen</h3><p>Um die semantische Suche zu beschleunigen, muss ein Index für das Vektorfeld erstellt werden. Die Indexierung kann die Abfrageeffizienz von großen Vektordaten erheblich verbessern.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -291,17 +279,12 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above, an index named <code translate="no">dense_vector_index</code> is created for the <code translate="no">dense_vector</code> field using the <code translate="no">AUTOINDEX</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">IP</code>, indicating that inner product will be used as the distance metric.</p>
-<p>Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.</p>
-<p>Milvus supports other metric types. For more information, refer to <a href="/docs/metric.md">Metric Types</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Create collection</h3><p>Once the dense vector and index param settings are complete, you can create a collection containing dense vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
+<p>Im obigen Beispiel wird ein Index namens <code translate="no">dense_vector_index</code> für das Feld <code translate="no">dense_vector</code> unter Verwendung des Index-Typs <code translate="no">AUTOINDEX</code> erstellt. <code translate="no">metric_type</code> wird auf <code translate="no">IP</code> gesetzt, was anzeigt, dass das innere Produkt als Abstandsmetrik verwendet wird.</p>
+<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Einzelheiten finden Sie unter xxx.</p>
+<p>Milvus unterstützt andere metrische Typen. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für den dichten Vektor und die Index-Parameter abgeschlossen sind, können Sie eine Sammlung erstellen, die dichte Vektoren enthält. Das folgende Beispiel verwendet die Methode <code translate="no">create_collection</code>, um eine Sammlung namens <code translate="no">my_collection</code> zu erstellen.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -353,14 +336,9 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>After creating the collection, use the <code translate="no">insert</code> method to add data containing dense vectors. Ensure that the dimensionality of the dense vectors being inserted matches the <code translate="no">dim</code> value defined when adding the dense vector field.</p>
+<h3 id="Insert-data" class="common-anchor-header">Daten einfügen</h3><p>Nachdem Sie die Sammlung erstellt haben, fügen Sie mit der Methode <code translate="no">insert</code> Daten mit dichten Vektoren hinzu. Stellen Sie sicher, dass die Dimensionalität der eingefügten dichten Vektoren mit dem Wert <code translate="no">dim</code> übereinstimmt, der beim Hinzufügen des dichten Vektorfeldes definiert wurde.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]},
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>]},
@@ -421,14 +399,9 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Perform similarity search</h3><p>Semantic search based on dense vectors is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search, prepare the query vector and search parameters, then call the <code translate="no">search</code> method.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die semantische Suche auf der Basis von dichten Vektoren ist eine der Kernfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -524,4 +497,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic ANN Search</a>.</p>
+<p>Weitere Informationen zu Parametern für die Ähnlichkeitssuche finden Sie unter <a href="/docs/de/single-vector-search.md">Grundlegende ANN-Suche</a>.</p>
