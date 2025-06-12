@@ -1,14 +1,14 @@
 ---
 id: how_to_enhance_your_rag.md
 summary: >-
-  With the increasing popularity of Retrieval Augmented Generation RAG
-  applications, there is a growing concern about improving their performance.
-  This article presents all possible ways to optimize RAG pipelines and provides
-  corresponding illustrations to help you quickly understand the mainstream RAG
-  optimization strategies.
-title: How to Enhance the Performance of Your RAG Pipeline
+  С ростом популярности приложений Retrieval Augmented Generation RAG все чаще
+  возникает вопрос об улучшении их производительности. В этой статье
+  представлены все возможные способы оптимизации конвейеров RAG и приведены
+  соответствующие иллюстрации, которые помогут вам быстро понять основные
+  стратегии оптимизации RAG.
+title: Как повысить производительность конвейера RAG
 ---
-<h1 id="How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="common-anchor-header">How to Enhance the Performance of Your RAG Pipeline<button data-href="#How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="anchor-icon" translate="no">
+<h1 id="How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="common-anchor-header">Как повысить производительность конвейера RAG<button data-href="#How-to-Enhance-the-Performance-of-Your-RAG-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>With the increasing popularity of Retrieval Augmented Generation (<a href="https://zilliz.com/learn/Retrieval-Augmented-Generation">RAG</a>) applications, there is a growing concern about improving their performance. This article presents all possible ways to optimize RAG pipelines and provides corresponding illustrations to help you quickly understand the mainstream RAG optimization strategies.</p>
-<p>It’s important to note that we’ll only provide a high-level exploration of these strategies and techniques, focusing on how they integrate into a RAG system. However, we won’t delve into intricate details or guide you through step-by-step implementation.</p>
-<h2 id="A-Standard-RAG-Pipeline" class="common-anchor-header">A Standard RAG Pipeline<button data-href="#A-Standard-RAG-Pipeline" class="anchor-icon" translate="no">
+    </button></h1><p>С ростом популярности приложений Retrieval Augmented Generation<a href="https://zilliz.com/learn/Retrieval-Augmented-Generation">(RAG</a>) все чаще возникает вопрос о повышении их производительности. В этой статье представлены все возможные способы оптимизации конвейеров RAG и приведены соответствующие иллюстрации, которые помогут вам быстро понять основные стратегии оптимизации RAG.</p>
+<p>Важно отметить, что мы лишь в общих чертах рассмотрим эти стратегии и методы, сосредоточившись на том, как они интегрируются в систему RAG. Однако мы не будем углубляться в сложные детали или проводить вас через пошаговое внедрение.</p>
+<h2 id="A-Standard-RAG-Pipeline" class="common-anchor-header">Стандартный конвейер RAG<button data-href="#A-Standard-RAG-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,14 +40,14 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The diagram below shows the most straightforward vanilla RAG pipeline. First, document chunks are loaded into a vector store (such as <a href="https://milvus.io/docs">Milvus</a> or <a href="https://zilliz.com/cloud">Zilliz cloud</a>). Then, the vector store retrieves the Top-K most relevant chunks related to the query. These relevant chunks are then injected into the <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a>'s context prompt, and finally, the LLM returns the final answer.</p>
+    </button></h2><p>На схеме ниже показан самый простой стандартный конвейер RAG. Сначала фрагменты документов загружаются в векторное хранилище (например, в <a href="https://zilliz.com/cloud">облако</a> <a href="https://milvus.io/docs">Milvus</a> или <a href="https://zilliz.com/cloud">Zilliz</a>). Затем из векторного хранилища извлекается Top-K наиболее релевантных фрагментов, связанных с запросом. Эти релевантные фрагменты затем вводятся в контекстную подсказку <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a>, и, наконец, LLM возвращает окончательный ответ.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="Various-Types-of-RAG-Enhancement-Techniques" class="common-anchor-header">Various Types of RAG Enhancement Techniques<button data-href="#Various-Types-of-RAG-Enhancement-Techniques" class="anchor-icon" translate="no">
+<h2 id="Various-Types-of-RAG-Enhancement-Techniques" class="common-anchor-header">Различные типы техник улучшения RAG<button data-href="#Various-Types-of-RAG-Enhancement-Techniques" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,16 +62,16 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We can classify different RAG enhancement approaches based on their roles in the RAG pipeline stages.</p>
+    </button></h2><p>Мы можем классифицировать различные подходы к улучшению RAG в зависимости от их роли на этапах конвейера RAG.</p>
 <ul>
-<li><strong>Query Enhancement</strong>: Modifying and manipulating the query process of the RAG input to better express or process the query intent.</li>
-<li><strong>Indexing Enhancement</strong>: Optimizing the creation of chunking indexes using techniques such as multi-chunking, step-wise indexing, or multi-way indexing.</li>
-<li><strong>Retriever Enhancement</strong>: Applying optimization techniques and strategies during the retrieval process.</li>
-<li><strong>Generator Enhancement</strong>: Adjusting and optimizing prompts when assembling prompts for the LLM to provide better responses.</li>
-<li><strong>RAG Pipeline Enhancement</strong>: Dynamically switching processes within the entire RAG pipeline, including using agents or tools to optimize key steps in the RAG pipeline.</li>
+<li><strong>Улучшение запросов</strong>: Модификация и манипулирование процессом запроса на входе RAG для лучшего выражения или обработки намерения запроса.</li>
+<li><strong>Улучшение индексирования</strong>: Оптимизация создания индексов с кусками с помощью таких методов, как многокусковое индексирование, пошаговое индексирование или многоходовое индексирование.</li>
+<li><strong>Улучшение ретривера</strong>: Применение методов и стратегий оптимизации в процессе поиска.</li>
+<li><strong>Усовершенствование генератора</strong>: Корректировка и оптимизация подсказок при сборке подсказок для LLM с целью получения более качественных ответов.</li>
+<li><strong>Улучшение конвейера RAG</strong>: Динамическое переключение процессов в рамках всего конвейера RAG, включая использование агентов или инструментов для оптимизации ключевых этапов конвейера RAG.</li>
 </ul>
-<p>Next, we will introduce specific methods under each of these categories.</p>
-<h2 id="Query-Enhancement" class="common-anchor-header">Query Enhancement<button data-href="#Query-Enhancement" class="anchor-icon" translate="no">
+<p>Далее мы представим конкретные методы в каждой из этих категорий.</p>
+<h2 id="Query-Enhancement" class="common-anchor-header">Улучшение запросов<button data-href="#Query-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,51 +86,51 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s explore four effective methods to enhance your query experience: Hypothetical Questions, Hypothetical Document Embeddings, Sub-Queries, and Stepback Prompts.</p>
-<h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">Creating Hypothetical Questions</h3><p>Creating hypothetical questions involves utilizing an LLM to generate multiple questions that users might ask about the content within each document chunk. Before the user’s actual query reaches the LLM, the vector store retrieves the most relevant hypothetical questions related to the real query, along with their corresponding document chunks, and forwards them to the LLM.</p>
+    </button></h2><p>Давайте рассмотрим четыре эффективных метода улучшения работы с запросами: Гипотетические вопросы, вкрапления гипотетических документов, подзапросы и пошаговые подсказки.</p>
+<h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">Создание гипотетических вопросов</h3><p>Создание гипотетических вопросов предполагает использование LLM для генерации множества вопросов, которые пользователи могут задать по поводу содержимого каждого блока документов. Прежде чем реальный запрос пользователя дойдет до LLM, векторное хранилище извлекает наиболее релевантные гипотетические вопросы, связанные с реальным запросом, вместе с соответствующими фрагментами документов и направляет их в LLM.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This methodology bypasses the cross-domain asymmetry problem in the vector search process by directly engaging in query-to-query searches, alleviating the burden on vector searches. However, it introduces additional overhead and uncertainty in generating hypothetical questions.</p>
-<h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Hypothetical Document Embeddings)</h3><p>HyDE stands for Hypothetical Document Embeddings. It leverages an LLM to craft a "<strong><em>Hypothetical Document</em></strong>" or a <strong><em>fake</em></strong> answer in response to a user query devoid of contextual information. This fake answer is then converted into vector embeddings and employed to query the most relevant document chunks within a vector database. Subsequently, the vector database retrieves the Top-K most relevant document chunks and transmits them to the LLM and the original user query to generate the final answer.</p>
+<p>Эта методология позволяет обойти проблему междоменной асимметрии в процессе векторного поиска, напрямую участвуя в поиске между запросами, что облегчает нагрузку на векторный поиск. Однако это влечет за собой дополнительные накладные расходы и неопределенность при генерации гипотетических вопросов.</p>
+<h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Hypothetical Document Embeddings)</h3><p>HyDE расшифровывается как Hypothetical Document Embeddings. Он использует LLM для создания<strong><em>"гипотетического документа</em></strong>" или <strong><em>фальшивого</em></strong> ответа в ответ на запрос пользователя, лишенного контекстной информации. Затем этот фальшивый ответ преобразуется в векторные вкрапления и используется для запроса наиболее релевантных фрагментов документов в векторной базе данных. Затем векторная база данных извлекает Top-K наиболее релевантных фрагментов документов и передает их в LLM и исходный запрос пользователя для создания окончательного ответа.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This method is similar to the hypothetical question technique in addressing cross-domain asymmetry in vector searches. However, it also has drawbacks, such as the added computational costs and uncertainties of generating fake answers.</p>
-<p>For more information, refer to the <a href="https://arxiv.org/abs/2212.10496">HyDE</a> paper.</p>
-<h3 id="Creating-Sub-Queries" class="common-anchor-header">Creating Sub-Queries</h3><p>When a user query is too complicated, we can use an LLM to break it down into simpler sub-queries before passing them on to the vector database and the LLM. Let’s take a look at an example.</p>
-<p>Imagine a user asking: "<strong><em>What are the differences in features between Milvus and Zilliz Cloud?</em></strong>" This question is quite complex and might not have a straightforward answer in our knowledge base. To tackle this issue, we can split it into two simpler sub-queries:</p>
+<p>Этот метод похож на метод гипотетического вопроса в решении проблемы междоменной асимметрии в векторном поиске. Однако у него есть и недостатки, такие как дополнительные вычислительные затраты и неопределенность при генерации фальшивых ответов.</p>
+<p>Более подробную информацию можно найти в статье <a href="https://arxiv.org/abs/2212.10496">HyDE</a>.</p>
+<h3 id="Creating-Sub-Queries" class="common-anchor-header">Создание подзапросов</h3><p>Когда пользовательский запрос слишком сложен, мы можем использовать LLM для разбиения его на более простые подзапросы перед передачей их в векторную базу данных и LLM. Давайте рассмотрим пример.</p>
+<p>Представьте, что пользователь спрашивает:<strong><em>"В чем разница в возможностях между Milvus и Zilliz Cloud?</em></strong>". Этот вопрос довольно сложный и, возможно, не имеет прямого ответа в нашей базе знаний. Чтобы решить эту проблему, мы можем разделить его на два более простых подзапроса:</p>
 <ul>
-<li>Sub-query 1: “What are the features of Milvus?”</li>
-<li>Sub-query 2: “What are the features of Zilliz Cloud?”</li>
+<li>Подзапрос 1: "Каковы особенности Milvus?"</li>
+<li>Подзапрос 2: "Каковы особенности Zilliz Cloud?".</li>
 </ul>
-<p>Once we have these sub-queries, we send them all to the vector database after converting them into vector embeddings. The vector database then finds the Top-K document chunks most relevant to each sub-query. Finally, the LLM uses this information to generate a better answer.</p>
+<p>Получив эти подзапросы, мы отправляем их в векторную базу данных после преобразования в векторные вкрапления. Затем векторная база данных находит фрагменты документов Top-K, наиболее релевантные каждому подзапросу. Наконец, LLM использует эту информацию для генерации лучшего ответа.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>By breaking down the user query into sub-queries, we make it easier for our system to find relevant information and provide accurate answers, even to complex questions.</p>
-<h3 id="Creating-Stepback-Prompts" class="common-anchor-header">Creating Stepback Prompts</h3><p>Another way to simplify complex user queries is by creating <strong><em>stepback prompts</em></strong>. This technique involves abstracting complicated user queries into <em><em>"</em>stepback questions</em>"** using an LLM. Then, a vector database uses these stepback questions to retrieve the most relevant document chunks. Finally, the LLM generates a more accurate answer based on these retrieved document chunks.</p>
-<p>Let’s illustrate this technique with an example. Consider the following query, which is quite complex and not straightforward to answer directly:</p>
-<p><strong><em>Original User Query: “I have a dataset with 10 billion records and want to store it in Milvus for querying. Is it possible?”</em></strong></p>
-<p>To simplify this user query, we can use an LLM to generate a more straightforward stepback question:</p>
-<p><strong><em>Stepback Question: “What is the dataset size limit that Milvus can handle?”</em></strong></p>
+<p>Разбив запрос пользователя на подзапросы, мы облегчаем нашей системе поиск релевантной информации и предоставление точных ответов даже на сложные вопросы.</p>
+<h3 id="Creating-Stepback-Prompts" class="common-anchor-header">Создание пошаговых подсказок</h3><p>Еще один способ упростить сложные пользовательские запросы - создать <strong><em>пошаговые подсказки</em></strong>. Эта техника предполагает абстрагирование сложных запросов пользователя в <em><em>"</em>пошаговые вопросы</em>"** с помощью LLM. Затем векторная база данных использует эти пошаговые вопросы для извлечения наиболее релевантных фрагментов документов. И наконец, LLM генерирует более точный ответ на основе этих полученных фрагментов документов.</p>
+<p>Проиллюстрируем эту технику на примере. Рассмотрим следующий запрос, который является довольно сложным и не простым для прямого ответа:</p>
+<p><strong><em>Исходный запрос пользователя: "У меня есть набор данных с 10 миллиардами записей, и я хочу хранить его в Milvus для запросов. Возможно ли это?"</em></strong></p>
+<p>Чтобы упростить этот пользовательский запрос, мы можем использовать LLM для генерации более простого пошагового вопроса:</p>
+<p><strong><em>Stepback Question: "Каков предельный размер набора данных, с которым может работать Milvus?".</em></strong></p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This method can help us get better and more accurate answers to complex queries. It breaks down the original question into a simpler form, making it easier for our system to find relevant information and provide accurate responses.</p>
-<h2 id="Indexing-Enhancement" class="common-anchor-header">Indexing Enhancement<button data-href="#Indexing-Enhancement" class="anchor-icon" translate="no">
+<p>Этот метод может помочь нам получить более точные ответы на сложные запросы. Он разбивает исходный вопрос на более простые формы, облегчая нашей системе поиск релевантной информации и предоставление точных ответов.</p>
+<h2 id="Indexing-Enhancement" class="common-anchor-header">Улучшение индексации<button data-href="#Indexing-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -145,33 +145,33 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Enhancing indexing is another strategy for enhancing the performance of your RAG applications. Let’s explore three indexing enhancement techniques.</p>
-<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Merging Document Chunks Automatically</h3><p>When building an index, we can employ two granularity levels: child chunks and their corresponding parent chunks. Initially, we search for child chunks at a finer level of detail. Then, we apply a merging strategy: if a specific number, <strong><em>n</em></strong>, of child chunks from the first <strong><em>k</em></strong> child chunks belong to the same parent chunk, we provide this parent chunk to the LLM as contextual information.</p>
+    </button></h2><p>Улучшение индексации - еще одна стратегия повышения производительности приложений RAG. Давайте рассмотрим три метода улучшения индексации.</p>
+<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Автоматическое объединение фрагментов документов</h3><p>При построении индекса мы можем использовать два уровня детализации: дочерние и соответствующие им родительские блоки. Сначала мы ищем дочерние блоки на более тонком уровне детализации. Затем мы применяем стратегию слияния: если определенное количество, <strong><em>n</em></strong>, дочерних чанков из первых <strong><em>k</em></strong> дочерних чанков принадлежат одному и тому же родительскому чанку, мы предоставляем этот родительский чанк в LLM в качестве контекстной информации.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This methodology has been implemented in <a href="https://docs.llamaindex.ai/en/stable/examples/retrievers/recursive_retriever_nodes.html">LlamaIndex</a>.</p>
-<h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">Constructing Hierarchical Indices</h3><p>When creating indices for documents, we can establish a two-level index: one for document summaries and another for document chunks. The vector search process comprises two stages: initially, we filter relevant documents based on the summary, and subsequently, we retrieve corresponding document chunks exclusively within these relevant documents.</p>
+<p>Эта методология была реализована в <a href="https://docs.llamaindex.ai/en/stable/examples/retrievers/recursive_retriever_nodes.html">LlamaIndex</a>.</p>
+<h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">Построение иерархических индексов</h3><p>При создании индексов для документов мы можем создать двухуровневый индекс: один для резюме документов, другой - для их фрагментов. Процесс векторного поиска состоит из двух этапов: сначала мы фильтруем релевантные документы на основе резюме, а затем извлекаем соответствующие фрагменты документов исключительно из этих релевантных документов.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach proves beneficial in situations involving extensive data volumes or instances where data is hierarchical, such as content retrieval within a library collection.</p>
-<h3 id="Hybrid-Retrieval-and-Reranking" class="common-anchor-header">Hybrid Retrieval and Reranking</h3><p>The Hybrid Retrieval and Reranking technique integrates one or more supplementary retrieval methods with <a href="https://zilliz.com/learn/vector-similarity-search">vector similarity retrieval</a>. Then, a <a href="https://zilliz.com/learn/optimize-rag-with-rerankers-the-role-and-tradeoffs#What-is-a-Reranker">reranker</a> reranks the retrieved results based on their relevancy to the user query.</p>
-<p>Common supplementary retrieval algorithms include lexical frequency-based methods like <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a> or big models utilizing sparse embeddings like <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Re-ranking algorithms include RRF or more sophisticated models such as <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, which resembles BERT-like architectures.</p>
+<p>Этот подход оказывается полезным в ситуациях с большими объемами данных или в случаях, когда данные иерархичны, например, при поиске контента в библиотечной коллекции.</p>
+<h3 id="Hybrid-Retrieval-and-Reranking" class="common-anchor-header">Гибридный поиск и реранжирование</h3><p>Метод гибридного поиска и реранжирования объединяет один или несколько дополнительных методов поиска с <a href="https://zilliz.com/learn/vector-similarity-search">поиском по векторному сходству</a>. Затем <a href="https://zilliz.com/learn/optimize-rag-with-rerankers-the-role-and-tradeoffs#What-is-a-Reranker">реранжировщик</a> ранжирует полученные результаты на основе их релевантности запросу пользователя.</p>
+<p>К распространенным алгоритмам дополнительного поиска относятся методы, основанные на лексической частоте, например <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>, или большие модели, использующие разреженные вкрапления, например <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Алгоритмы повторного ранжирования включают RRF или более сложные модели, такие как <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, которые напоминают BERT-подобные архитектуры.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach leverages diverse retrieval methods to improve retrieval quality and address potential gaps in vector recall.</p>
-<h2 id="Retriever-Enhancement" class="common-anchor-header">Retriever Enhancement<button data-href="#Retriever-Enhancement" class="anchor-icon" translate="no">
+<p>Этот подход использует различные методы поиска для улучшения качества поиска и устранения потенциальных пробелов в векторном отзыве.</p>
+<h2 id="Retriever-Enhancement" class="common-anchor-header">Усовершенствование ретривера<button data-href="#Retriever-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,23 +186,23 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Refinement of the retriever component within the RAG system can also improve RAG applications. Let’s explore some effective methods for enhancing the retriever.</p>
-<h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Sentence Window Retrieval</h3><p>In a basic RAG system, the document chunk given to the LLM is a larger window encompassing the retrieved embedding chunk. This ensures that the information provided to the LLM includes a broader range of contextual details, minimizing information loss. The Sentence Window Retrieval technique decouples the document chunk used for embedding retrieval from the chunk provided to the LLM.</p>
+    </button></h2><p>Усовершенствование компонента ретривера в системе RAG также может улучшить работу приложений RAG. Давайте рассмотрим некоторые эффективные методы улучшения ретривера.</p>
+<h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Поиск в окне предложения</h3><p>В базовой системе RAG фрагмент документа, передаваемый LLM, представляет собой более крупное окно, охватывающее извлеченный фрагмент вставки. Это гарантирует, что информация, предоставляемая LLM, включает в себя более широкий спектр контекстных деталей, минимизируя потерю информации. Техника Sentence Window Retrieval позволяет отделить фрагмент документа, используемый для поиска вкраплений, от фрагмента, предоставляемого LLM.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>However, expanding the window size may introduce additional interfering information. We can adjust the size of the window expansion based on the specific business needs.</p>
-<h3 id="Meta-data-Filtering" class="common-anchor-header">Meta-data Filtering</h3><p>To ensure more precise answers, we can refine the retrieved documents by filtering metadata like time and category before passing them to the LLM. For instance, if financial reports spanning multiple years are retrieved, filtering based on the desired year will refine the information to meet specific requirements. This method proves effective in situations with extensive data and detailed metadata, such as content retrieval in library collections.</p>
+<p>Однако увеличение размера окна может привести к появлению дополнительной мешающей информации. Мы можем регулировать размер расширения окна в зависимости от конкретных потребностей бизнеса.</p>
+<h3 id="Meta-data-Filtering" class="common-anchor-header">Фильтрация метаданных</h3><p>Чтобы обеспечить более точные ответы, мы можем уточнить полученные документы, отфильтровав метаданные, такие как время и категория, перед передачей их в LLM. Например, если получены финансовые отчеты за несколько лет, фильтрация по нужному году позволит уточнить информацию в соответствии с конкретными требованиями. Этот метод эффективен в ситуациях с обширными данными и подробными метаданными, например при поиске контента в библиотечных фондах.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="Generator-Enhancement" class="common-anchor-header">Generator Enhancement<button data-href="#Generator-Enhancement" class="anchor-icon" translate="no">
+<h2 id="Generator-Enhancement" class="common-anchor-header">Расширение возможностей генератора<button data-href="#Generator-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -217,24 +217,24 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s explore more RAG optimizing techniques by improving the generator within a RAG system.</p>
-<h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">Compressing the LLM prompt</h3><p>The noise information within retrieved document chunks can significantly impact the accuracy of RAG’s final answer. The limited prompt window in LLMs also presents a hurdle for more accurate answers. To address this challenge, we can compress irrelevant details, emphasize key paragraphs, and reduce the overall context length of retrieved document chunks.</p>
+    </button></h2><p>Давайте рассмотрим другие методы оптимизации RAG, улучшив генератор в системе RAG.</p>
+<h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">Сжатие запроса LLM</h3><p>Шумовая информация в извлеченных фрагментах документов может существенно повлиять на точность окончательного ответа RAG. Ограниченное окно подсказки в LLM также является препятствием для получения более точных ответов. Чтобы решить эту проблему, мы можем сжать нерелевантные детали, подчеркнуть ключевые абзацы и уменьшить общую длину контекста в найденных фрагментах документов.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach is similar to the earlier discussed hybrid retrieval and reranking method, wherein a reranker is utilized to sift out irrelevant document chunks.</p>
-<h3 id="Adjusting-the-chunk-order-in-the-prompt" class="common-anchor-header">Adjusting the chunk order in the prompt</h3><p>In the paper "<a href="https://arxiv.org/abs/2307.03172">Lost in the middle</a>," researchers observed that LLMs often overlook information in the middle of given documents during the reasoning process. Instead, they tend to rely more on the information presented at the beginning and end of the documents.</p>
-<p>Based on this observation, we can adjust the order of retrieved chunks to improve the answer quality: when retrieving multiple knowledge chunks, chunks with relatively low confidence are placed in the middle, and chunks with relatively high confidence are positioned at both ends.</p>
+<p>Этот подход похож на рассмотренный ранее гибридный метод поиска и реранжирования, в котором реранжировщик используется для отсеивания нерелевантных фрагментов документов.</p>
+<h3 id="Adjusting-the-chunk-order-in-the-prompt" class="common-anchor-header">Корректировка порядка расположения фрагментов в подсказке</h3><p>В статье<a href="https://arxiv.org/abs/2307.03172">"Lost in the middle</a>" исследователи заметили, что LLM часто не обращают внимания на информацию в середине документов в процессе рассуждения. Вместо этого они склонны больше полагаться на информацию, представленную в начале и конце документов.</p>
+<p>Основываясь на этом наблюдении, мы можем изменить порядок извлечения фрагментов, чтобы улучшить качество ответа: при извлечении нескольких фрагментов знаний фрагменты с относительно низким уровнем доверия размещаются в середине, а фрагменты с относительно высоким уровнем доверия - на обоих концах.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<h2 id="RAG-Pipeline-Enhancement" class="common-anchor-header">RAG Pipeline Enhancement<button data-href="#RAG-Pipeline-Enhancement" class="anchor-icon" translate="no">
+<h2 id="RAG-Pipeline-Enhancement" class="common-anchor-header">Улучшение конвейера RAG<button data-href="#RAG-Pipeline-Enhancement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -249,18 +249,18 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We can also improve the performance of your RAG applications by enhancing the whole RAG pipeline.</p>
-<h3 id="Self-reflection" class="common-anchor-header">Self-reflection</h3><p>This approach incorporates the concept of self-reflection within AI agents. Then, how does this technique work?</p>
-<p>Some initially retrieved Top-K document chunks are ambiguous and may not answer the user question directly. In such cases, we can conduct a second round of reflection to verify whether these chunks can genuinely address the query.</p>
-<p>We can conduct the reflection using efficient reflection methods such as Natural Language Inference(NLI) models or additional tools like internet searches for verification.</p>
+    </button></h2><p>Мы также можем повысить производительность ваших приложений RAG, улучшив весь конвейер RAG.</p>
+<h3 id="Self-reflection" class="common-anchor-header">Саморефлексия</h3><p>Этот подход включает в себя концепцию саморефлексии в агентах ИИ. Как же работает эта техника?</p>
+<p>Некоторые первоначально полученные фрагменты документов Top-K неоднозначны и могут не давать прямого ответа на вопрос пользователя. В таких случаях мы можем провести второй раунд размышлений, чтобы проверить, действительно ли эти фрагменты могут отвечать на запрос.</p>
+<p>Для проверки можно использовать эффективные методы, такие как модели Natural Language Inference (NLI), или дополнительные инструменты, например поиск в Интернете.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This concept of self-reflection has been explored in several papers or projects, including <a href="https://arxiv.org/pdf/2310.11511.pdf">Self-RAG</a>, <a href="https://arxiv.org/pdf/2401.15884.pdf">Corrective RAG</a>, <a href="https://github.com/langchain-ai/langgraph/blob/main/examples/reflexion/reflexion.ipynb">LangGraph</a>, etc.</p>
-<h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">Query Routing with an Agent</h3><p>Sometimes, we don’t have to use a RAG system to answer simple questions as it might result in more misunderstanding and inference from misleading information. In such cases, we can use an agent as a router at the querying stage. This agent assesses whether the query needs to go through the RAG pipeline. If it does, the subsequent RAG pipeline is initiated; otherwise, the LLM directly addresses the query.</p>
+<p>Эта концепция саморефлексии была исследована в нескольких работах и проектах, включая <a href="https://arxiv.org/pdf/2310.11511.pdf">Self-RAG</a>, <a href="https://arxiv.org/pdf/2401.15884.pdf">Corrective RAG</a>, <a href="https://github.com/langchain-ai/langgraph/blob/main/examples/reflexion/reflexion.ipynb">LangGraph</a> и т. д.</p>
+<h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">Маршрутизация запросов с помощью агента</h3><p>Иногда нам не нужно использовать систему RAG для ответа на простые вопросы, так как это может привести к еще большему непониманию и выводам на основе недостоверной информации. В таких случаях мы можем использовать агента в качестве маршрутизатора на этапе запроса. Этот агент оценивает, должен ли запрос пройти через конвейер RAG. Если да, то запускается последующий конвейер RAG; в противном случае LLM обращается к запросу напрямую.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
@@ -273,10 +273,10 @@ title: How to Enhance the Performance of Your RAG Pipeline
     <span></span>
   </span>
 </p>
-<p>The agent could take various forms, including an LLM, a small classification model, or even a set of rules.</p>
-<p>By routing queries based on user intent, you can redirect a portion of the queries, leading to a significant boost in response time and a noticeable reduction in unnecessary noise.</p>
-<p>We can extend the query routing technique to other processes within the RAG system, such as determining when to utilize tools like web searches, conducting sub-queries, or searching for images. This approach ensures that each step in the RAG system is optimized based on the specific requirements of the query, leading to more efficient and accurate information retrieval.</p>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<p>Агент может принимать различные формы, включая LLM, небольшую классификационную модель или даже набор правил.</p>
+<p>Маршрутизация запросов на основе намерений пользователя позволяет перенаправить часть запросов, что приводит к значительному увеличению времени отклика и заметному уменьшению ненужного шума.</p>
+<p>Мы можем распространить технику маршрутизации запросов на другие процессы в системе RAG, например определить, когда использовать такие инструменты, как веб-поиск, выполнение подзапросов или поиск изображений. Такой подход гарантирует, что каждый шаг в системе RAG будет оптимизирован на основе конкретных требований запроса, что приведет к более эффективному и точному поиску информации.</p>
+<h2 id="Summary" class="common-anchor-header">Резюме<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -291,6 +291,6 @@ title: How to Enhance the Performance of Your RAG Pipeline
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>While a vanilla RAG pipeline may appear simple, achieving optimal business performance often requires more sophisticated optimization techniques.</p>
-<p>This article summarizes various popular approaches to enhancing the performance of your RAG applications. We also provided clear illustrations to help you quickly understand these concepts and techniques and expedite their implementation and optimization.</p>
-<p>You can get the simple implementations of the major approaches listed in this article at this <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag">GitHub link</a>.</p>
+    </button></h2><p>Хотя ванильный конвейер RAG может показаться простым, для достижения оптимальной производительности бизнеса часто требуются более сложные методы оптимизации.</p>
+<p>В этой статье мы обобщили различные популярные подходы к повышению производительности ваших RAG-приложений. Мы также привели наглядные иллюстрации, чтобы помочь вам быстро понять эти концепции и методы и ускорить их внедрение и оптимизацию.</p>
+<p>Вы можете получить простые реализации основных подходов, перечисленных в статье, по этой <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag">ссылке на GitHub</a>.</p>

@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Индекс <strong>GPU_IVF_PQ</strong> основывается на концепции <strong>IVF_PQ</strong>, объединяя инвертированную кластеризацию файлов с Product Quantization (PQ), которая разбивает высокоразмерные векторы на более мелкие подпространства и квантует их для эффективного поиска сходства. Разработанный исключительно для сред GPU, GPU_IVF_PQ использует параллельную обработку для ускорения вычислений и эффективной работы с большими векторными данными. Для получения дополнительной информации об основополагающих концепциях см. раздел <a href="/docs/ru/ivf-pq.md">IVF_PQ</a>.</p>
+    </button></h1><p>Индекс <strong>GPU_IVF_PQ</strong> основывается на концепции <strong>IVF_PQ</strong>, объединяя инвертированную кластеризацию файлов с Product Quantization (PQ), которая разбивает высокоразмерные векторы на более мелкие подпространства и квантует их для эффективного поиска сходства. Разработанный исключительно для сред GPU, GPU_IVF_PQ использует параллельную обработку для ускорения вычислений и эффективной работы с большими векторными данными. Для получения дополнительной информации об основополагающих концепциях обратитесь к разделу <a href="/docs/ru/ivf-pq.md">IVF_PQ</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Построение индекса<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы построить индекс <code translate="no">GPU_IVF_PQ</code> для векторного поля в Milvus, используйте метод <code translate="no">add_index()</code>, указав <code translate="no">index_type</code>, <code translate="no">metric_type</code> и дополнительные параметры для индекса.</p>
+    </button></h2><p>Чтобы построить индекс <code translate="no">GPU_IVF_PQ</code> по векторному полю в Milvus, используйте метод <code translate="no">add_index()</code>, указав <code translate="no">index_type</code>, <code translate="no">metric_type</code> и дополнительные параметры для индекса.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -165,7 +165,7 @@ res = MilvusClient.search(
 </ul></td>
      <td><p><strong>Тип</strong>: Строка <strong>Диапазон</strong>: [<code translate="no">"true"</code>, <code translate="no">"false"</code>].</p>
 <p><strong>Значение по умолчанию</strong>: <code translate="no">"false"</code></p></td>
-     <td><p>Установка значения <code translate="no">"true"</code> улучшает отзыв за счет уточнения результатов поиска, но использует больше памяти GPU. Установка значения <code translate="no">"false"</code> экономит память GPU.</p></td>
+     <td><p>Установка значения <code translate="no">"true"</code> улучшает запоминание за счет уточнения результатов поиска, но использует больше памяти GPU. Установка значения <code translate="no">"false"</code> экономит память GPU.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/gpu-ivf-pq.md#Search-on-index">поиске по индексу</a>.</p>
@@ -183,7 +183,7 @@ res = MilvusClient.search(
      <td><p>Количество кластеров для поиска кандидатов.</p></td>
      <td><p><strong>Тип</strong>: Целое число <strong>Диапазон</strong>: [1, <em>nlist</em>].</p>
 <p><strong>Значение по умолчанию</strong>: <code translate="no">8</code></p></td>
-     <td><p>Более высокие значения позволяют искать больше кластеров, что улучшает запоминание за счет расширения области поиска, но ценой увеличения задержки запроса. Установите <code translate="no">nprobe</code> пропорционально <code translate="no">nlist</code>, чтобы сбалансировать скорость и точность.</p>
+     <td><p>Более высокие значения позволяют искать больше кластеров, что улучшает запоминание за счет расширения области поиска, но ценой увеличения задержки запроса. Установите значение <code translate="no">nprobe</code> пропорционально <code translate="no">nlist</code>, чтобы сбалансировать скорость и точность.</p>
 <p>В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [1, nlist].</p></td>
    </tr>
 </table>

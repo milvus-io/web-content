@@ -2,9 +2,9 @@
 id: configure_localstorage.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure localStorage for Milvus.
+summary: 'Узнайте, как настроить localStorage для Milvus.'
 ---
-<h1 id="localStorage-related-Configurations" class="common-anchor-header">localStorage-related Configurations<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="localStorage-related-Configurations" class="common-anchor-header">Конфигурации, связанные с localStorage<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,16 +37,16 @@ summary: Learn how to configure localStorage for Milvus.
     </button></h2><table id="localStorage.path">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Local path to where vector data are stored during a search or a query to avoid repetitve access to MinIO or S3 service.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      </td>
+        <li>Локальный путь к месту хранения векторных данных во время поиска или запроса, чтобы избежать повторного обращения к службе MinIO или S3.</li>      
+        <li>Внимание: Изменение этого параметра после использования Milvus в течение некоторого времени повлияет на доступ к старым данным.</li>      
+        <li>Рекомендуется изменять этот параметр перед первым запуском Milvus.</li>      </td>
       <td>/var/lib/milvus/data/</td>
     </tr>
   </tbody>

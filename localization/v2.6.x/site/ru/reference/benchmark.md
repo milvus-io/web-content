@@ -1,9 +1,9 @@
 ---
 id: benchmark.md
-summary: Learn about the benchmark result of Milvus.
-title: Milvus 2.2 Benchmark Test Report
+summary: Узнайте об эталонном результате Милвуса.
+title: Отчет о тестировании Milvus 2.2 Benchmark
 ---
-<h1 id="Milvus-22-Benchmark-Test-Report" class="common-anchor-header">Milvus 2.2 Benchmark Test Report<button data-href="#Milvus-22-Benchmark-Test-Report" class="anchor-icon" translate="no">
+<h1 id="Milvus-22-Benchmark-Test-Report" class="common-anchor-header">Отчет о тестировании Milvus 2.2 Benchmark<button data-href="#Milvus-22-Benchmark-Test-Report" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +18,7 @@ title: Milvus 2.2 Benchmark Test Report
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This report shows the major test results of Milvus 2.2.0. It aims to provide a picture of Milvus 2.2.0 search performance, especially in the capability to scale up and scale out.</p>
+    </button></h1><p>В этом отчете представлены основные результаты тестирования Milvus 2.2.0. Его цель - дать представление о производительности поиска Milvus 2.2.0, особенно в части возможности расширения и масштабирования.</p>
 <div class="alert note">
   <div style="display: flex;">
       <div style="flex:0.3;">
@@ -26,17 +26,17 @@ title: Milvus 2.2 Benchmark Test Report
       </div>
   </div>
   <div style="flex:1;padding: 10px;">
-    <p>We have recently run a benchmark against Milvus 2.2.3 and have the following key findings:</p>
+    <p>Недавно мы провели сравнение с Milvus 2.2.3 и получили следующие основные результаты:</p>
     <ul>
-      <li>A 2.5x reduction in search latency</li>
-      <li>A 4.5x increase in QPS</li>
-      <li>Billion-scale similarity search with little performance degradation</li>
-      <li>Linear scalability when using multiple replicas</li>
+      <li>2,5-кратное сокращение задержки при поиске</li>
+      <li>Увеличение QPS в 4,5 раза</li>
+      <li>Поиск сходства в миллиардных масштабах с незначительным снижением производительности</li>
+      <li>Линейная масштабируемость при использовании нескольких реплик.</li>
     </ul>
-    <p>For details, welcome referring to <a href="https://zilliz.com/resources/whitepaper/milvus-performance-benchmark">this whitepaper</a> and <a href="https://github.com/zilliztech/VectorDBBench">related benchmark test code</a>. </p>
+    <p>Для получения более подробной информации, пожалуйста, обратитесь к <a href="https://zilliz.com/resources/whitepaper/milvus-performance-benchmark">этому техническому описанию</a> и <a href="https://github.com/zilliztech/VectorDBBench">соответствующему тестовому коду бенчмарка</a>. </p>
   </div>
 </div>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<h2 id="Summary" class="common-anchor-header">Резюме<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,14 +52,13 @@ title: Milvus 2.2 Benchmark Test Report
         ></path>
       </svg>
     </button></h2><ul>
-<li>Comparing with Milvus 2.1, the QPS of Milvus 2.2.0 increases over 48% in cluster mode and over 75% in standalone mode.</li>
-<li>Milvus 2.2.0 has an impressive capability to scale up and scale out:
-<ul>
-<li>QPS increases linearly when expanding CPU cores from 8 to 32.</li>
-<li>QPS increases linearly when expanding Querynode replicas from 1 to 8.</li>
+<li>По сравнению с Milvus 2.1, QPS Milvus 2.2.0 увеличивается более чем на 48 % в кластерном режиме и более чем на 75 % в автономном режиме.</li>
+<li>Milvus 2.2.0 обладает впечатляющей способностью к увеличению и уменьшению масштаба:<ul>
+<li>QPS линейно увеличивается при увеличении числа ядер процессора с 8 до 32.</li>
+<li>QPS линейно увеличивается при увеличении количества реплик Querynode с 1 до 8.</li>
 </ul></li>
 </ul>
-<h2 id="Terminology" class="common-anchor-header">Terminology<button data-href="#Terminology" class="anchor-icon" translate="no">
+<h2 id="Terminology" class="common-anchor-header">Терминология<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,39 +74,39 @@ title: Milvus 2.2 Benchmark Test Report
         ></path>
       </svg>
     </button></h2><p><details>
-<summary>Click to see the details of the terms used in the test</summary>
+<summary>Нажмите, чтобы узнать подробности терминов, использованных в тесте</summary>
 <table class="terminology">
 <thead>
 <tr>
-<th>Term</th>
-<th>Description</th>
+<th>Термин</th>
+<th>Описание</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>nq</td>
-<td>Number of vectors to be searched in one search request</td>
+<td>Количество векторов для поиска в одном поисковом запросе</td>
 </tr>
 <tr>
 <td>topk</td>
-<td>Number of the nearest vectors to be retrieved for each vector (in nq) in a search request</td>
+<td>Число ближайших векторов, которые будут найдены для каждого вектора (в nq) в поисковом запросе</td>
 </tr>
 <tr>
 <td>ef</td>
-<td>A search parameter specific to <a href="https://milvus.io/docs/v2.2.x/index.md">HNSW index</a></td>
+<td>Параметр поиска, специфичный для <a href="https://milvus.io/docs/v2.2.x/index.md">индекса HNSW</a></td>
 </tr>
 <tr>
 <td>RT</td>
-<td>Response time from sending the request to receiving the response</td>
+<td>Время от отправки запроса до получения ответа</td>
 </tr>
 <tr>
 <td>QPS</td>
-<td>Number of search requests that are successfully processed per second</td>
+<td>Количество успешно обработанных поисковых запросов в секунду</td>
 </tr>
 </tbody>
 </table>
 </details></p>
-<h2 id="Test-environment" class="common-anchor-header">Test environment<button data-href="#Test-environment" class="anchor-icon" translate="no">
+<h2 id="Test-environment" class="common-anchor-header">Тестовая среда<button data-href="#Test-environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,35 +121,35 @@ title: Milvus 2.2 Benchmark Test Report
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>All tests are performed under the following environments.</p>
-<h3 id="Hardware-environment" class="common-anchor-header">Hardware environment</h3><table>
+    </button></h2><p>Все тесты проводятся в следующих средах.</p>
+<h3 id="Hardware-environment" class="common-anchor-header">Аппаратная среда</h3><table>
 <thead>
-<tr><th>Hardware</th><th>Specification</th></tr>
+<tr><th>Аппаратное обеспечение</th><th>Спецификация</th></tr>
 </thead>
 <tbody>
-<tr><td>CPU</td><td>Intel® Xeon® Gold 6226R CPU @ 2.90GHz</td></tr>
-<tr><td>Memory</td><td>16*\32 GB RDIMM, 3200 MT/s</td></tr>
-<tr><td>SSD</td><td>SATA 6 Gbps</td></tr>
+<tr><td>ПРОЦЕССОР</td><td>Центральный процессор Intel® Xeon® Gold 6226R @ 2,90 ГГц</td></tr>
+<tr><td>Память</td><td>16*\32 ГБ RDIMM, 3200 MT/s</td></tr>
+<tr><td>ТВЕРДОТЕЛЬНЫЙ НАКОПИТЕЛЬ</td><td>SATA 6 Гбит/с</td></tr>
 </tbody>
 </table>
-<h3 id="Software-environment" class="common-anchor-header">Software environment</h3><table>
+<h3 id="Software-environment" class="common-anchor-header">Программная среда</h3><table>
 <thead>
-<tr><th>Software</th><th>Version</th></tr>
+<tr><th>Программное обеспечение</th><th>Версия</th></tr>
 </thead>
 <tbody>
 <tr><td>Milvus</td><td>v2.2.0</td></tr>
 <tr><td>Milvus GO SDK</td><td>v2.2.0</td></tr>
 </tbody>
 </table>
-<h3 id="Deployment-scheme" class="common-anchor-header">Deployment scheme</h3><ul>
-<li>Milvus instances (standalone or cluster) are deployed via <a href="https://milvus.io/docs/install_standalone-helm.md">Helm</a> on a Kubernetes cluster based on physical or virtual machines.</li>
-<li>Different tests merely vary in the number of CPU cores, the size of memory, and the number of replicas (worker nodes), which only applies to Milvus clusters.</li>
-<li>Unspecified configurations are identical to <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml">default configurations</a>.</li>
-<li>Milvus dependencies (MinIO, Pulsar and Etcd) store data on the local SSD in each node.</li>
-<li>Search requests are sent to the Milvus instances via <a href="https://github.com/milvus-io/milvus-sdk-go/tree/master/tests">Milvus GO SDK</a>.</li>
+<h3 id="Deployment-scheme" class="common-anchor-header">Схема развертывания</h3><ul>
+<li>Экземпляры Milvus (автономные или кластерные) разворачиваются через <a href="https://milvus.io/docs/install_standalone-helm.md">Helm</a> на кластере Kubernetes на базе физических или виртуальных машин.</li>
+<li>Различные тесты могут отличаться количеством ядер процессора, объемом памяти и количеством реплик (рабочих узлов), что относится только к кластерам Milvus.</li>
+<li>Неопределенные конфигурации идентичны <a href="https://github.com/milvus-io/milvus-helm/blob/master/charts/milvus/values.yaml">конфигурациям по умолчанию</a>.</li>
+<li>Зависимости Milvus (MinIO, Pulsar и Etcd) хранят данные на локальном SSD в каждом узле.</li>
+<li>Поисковые запросы отправляются на экземпляры Milvus через <a href="https://github.com/milvus-io/milvus-sdk-go/tree/master/tests">Milvus GO SDK</a>.</li>
 </ul>
-<h3 id="Data-sets" class="common-anchor-header">Data sets</h3><p>The test uses the open-source dataset SIFT (128 dimensions) from <a href="https://github.com/erikbern/ann-benchmarks/#data-sets">ANN-Benchmarks</a>.</p>
-<h2 id="Test-pipeline" class="common-anchor-header">Test pipeline<button data-href="#Test-pipeline" class="anchor-icon" translate="no">
+<h3 id="Data-sets" class="common-anchor-header">Наборы данных</h3><p>В тесте используется открытый набор данных SIFT (128 измерений) из <a href="https://github.com/erikbern/ann-benchmarks/#data-sets">ANN-Benchmarks</a>.</p>
+<h2 id="Test-pipeline" class="common-anchor-header">Конвейер тестирования<button data-href="#Test-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,14 +165,14 @@ title: Milvus 2.2 Benchmark Test Report
         ></path>
       </svg>
     </button></h2><ol>
-<li>Start a Milvus instance by Helm with respective server configurations as listed in each test.</li>
-<li>Connect to the Milvus instance via Milvus GO SDK and get the corresponding test results.</li>
-<li>Create a collection.</li>
-<li>Insert 1 million SIFT vectors. Build an HNSW index and configure the index parameters by setting <code translate="no">M</code> to <code translate="no">8</code> and <code translate="no">efConstruction</code> to <code translate="no">200</code>.</li>
-<li>Load the collection.</li>
-<li>Search with different concurrent numbers with search parameters <code translate="no">nq=1, topk=1, ef=64</code>, the duration of each concurrency is at least 1 hour.</li>
+<li>Запустите экземпляр Milvus с помощью Helm с соответствующими конфигурациями сервера, указанными в каждом тесте.</li>
+<li>Подключитесь к экземпляру Milvus с помощью Milvus GO SDK и получите соответствующие результаты тестирования.</li>
+<li>Создайте коллекцию.</li>
+<li>Вставьте 1 миллион векторов SIFT. Создайте индекс HNSW и настройте параметры индекса, установив <code translate="no">M</code> на <code translate="no">8</code> и <code translate="no">efConstruction</code> на <code translate="no">200</code>.</li>
+<li>Загрузите коллекцию.</li>
+<li>Выполните поиск с различным числом одновременных запросов с параметрами поиска <code translate="no">nq=1, topk=1, ef=64</code>, длительность каждого одновременного запроса не менее 1 часа.</li>
 </ol>
-<h2 id="Test-results" class="common-anchor-header">Test results<button data-href="#Test-results" class="anchor-icon" translate="no">
+<h2 id="Test-results" class="common-anchor-header">Результаты тестирования<button data-href="#Test-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -188,14 +187,12 @@ title: Milvus 2.2 Benchmark Test Report
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Milvus-220-vs-Milvus-210" class="common-anchor-header">Milvus 2.2.0 v.s. Milvus 2.1.0</h3><h4 id="Cluster" class="common-anchor-header">Cluster</h4><p><details>
-<summary><b>Server configurations (cluster)</b></summary>
-<code translate="no">yaml queryNode: replicas: 1 resources: limits: cpu: &quot;12.0&quot; memory: 8Gi requests: cpu: &quot;12.0&quot; memory: 8Gi</code>
-</details></p>
-<p><strong>Search performance</strong></p>
+    </button></h2><h3 id="Milvus-220-vs-Milvus-210" class="common-anchor-header">Milvus 2.2.0 против Milvus 2.1.0</h3><h4 id="Cluster" class="common-anchor-header">Кластер</h4><p><details>
+<summary><b>Конфигурации серверов (кластер)</b></summary><code translate="no">yaml queryNode: replicas: 1 resources: limits: cpu: &quot;12.0&quot; memory: 8Gi requests: cpu: &quot;12.0&quot; memory: 8Gi</code></details></p>
+<p><strong>Производительность поиска</strong></p>
 <table>
 <thead>
-<tr><th>Milvus</th><th>QPS</th><th>RT(TP99) / ms</th><th>RT(TP50) / ms</th><th>fail/s</th></tr>
+<tr><th>Milvus</th><th>QPS</th><th>RT(TP99) / мс</th><th>RT(TP50) / мс</th><th>отказ/с</th></tr>
 </thead>
 <tbody>
 <tr><td>2.1.0</td><td>6904</td><td>59</td><td>28</td><td>0</td></tr>
@@ -203,19 +200,15 @@ title: Milvus 2.2 Benchmark Test Report
 </tbody>
 </table>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/cluster_search_performance_210_vs_220.png" alt="Cluster search performance" class="doc-image" id="cluster-search-performance" />
-    <span>Cluster search performance</span>
-  </span>
-</p>
-<h4 id="Standalone" class="common-anchor-header">Standalone</h4><p><details>
-<summary><b>Server configurations (standalone)</b></summary>
-<code translate="no">yaml standalone: replicas: 1 resources: limits: cpu: &quot;12.0&quot; memory: 16Gi requests: cpu: &quot;12.0&quot; memory: 16Gi</code>
-</details></p>
-<p><strong>Search performance</strong></p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cluster_search_performance_210_vs_220.png" alt="Cluster search performance" class="doc-image" id="cluster-search-performance" />
+   </span> <span class="img-wrapper"> <span>Производительность кластерного поиска</span> </span></p>
+<h4 id="Standalone" class="common-anchor-header">Автономный</h4><p><details>
+<summary><b>Конфигурации серверов (автономные)</b></summary><code translate="no">yaml standalone: replicas: 1 resources: limits: cpu: &quot;12.0&quot; memory: 16Gi requests: cpu: &quot;12.0&quot; memory: 16Gi</code></details></p>
+<p><strong>Производительность поиска</strong></p>
 <table>
 <thead>
-<tr><th>Milvus</th><th>QPS</th><th>RT(TP99) / ms</th><th>RT(TP50) / ms</th><th>fail/s</th></tr>
+<tr><th>Milvus</th><th>QPS</th><th>RT(TP99) / мс</th><th>RT(TP50) / мс</th><th>отказ/с</th></tr>
 </thead>
 <tbody>
 <tr><td>2.1.0</td><td>4287</td><td>104</td><td>76</td><td>0</td></tr>
@@ -223,20 +216,16 @@ title: Milvus 2.2 Benchmark Test Report
 </tbody>
 </table>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/standalone_search_performance_210_vs_220.png" alt="Standalone search performance" class="doc-image" id="standalone-search-performance" />
-    <span>Standalone search performance</span>
-  </span>
-</p>
-<h3 id="Milvus-220-Scale-up" class="common-anchor-header">Milvus 2.2.0 Scale-up</h3><p>Expand the CPU cores in one Querynode to check the capability to scale up.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/standalone_search_performance_210_vs_220.png" alt="Standalone search performance" class="doc-image" id="standalone-search-performance" />
+   </span> <span class="img-wrapper"> <span>Производительность автономного поиска</span> </span></p>
+<h3 id="Milvus-220-Scale-up" class="common-anchor-header">Milvus 2.2.0 Масштабирование</h3><p>Увеличьте количество процессорных ядер в одном Querynode, чтобы проверить возможность масштабирования.</p>
 <p><details>
-<summary><b>Server configurations (cluster)</b></summary>
-<code translate="no">yaml queryNode: replicas: 1 resources: limits: cpu: &quot;8.0&quot; /&quot;12.0&quot; /&quot;16.0&quot; /&quot;32.0&quot; memory: 8Gi requests: cpu: &quot;8.0&quot; /&quot;12.0&quot; /&quot;16.0&quot; /&quot;32.0&quot; memory: 8Gi</code>
-</details></p>
-<p><strong>Search Performance</strong></p>
+<summary><b>Конфигурации серверов (кластер)</b></summary><code translate="no">yaml queryNode: replicas: 1 resources: limits: cpu: &quot;8.0&quot; /&quot;12.0&quot; /&quot;16.0&quot; /&quot;32.0&quot; memory: 8Gi requests: cpu: &quot;8.0&quot; /&quot;12.0&quot; /&quot;16.0&quot; /&quot;32.0&quot; memory: 8Gi</code></details></p>
+<p><strong>Производительность поиска</strong></p>
 <table>
 <thead>
-<tr><th>CPU cores</th><th>Concurrent Number</th><th>QPS</th><th>RT(TP99) / ms</th><th>RT(TP50) / ms</th><th>fail/s</th></tr>
+<tr><th>Ядра процессора</th><th>Количество одновременных</th><th>QPS</th><th>RT(TP99) / мс</th><th>RT(TP50) / мс</th><th>отказ/с</th></tr>
 </thead>
 <tbody>
 <tr><td>8</td><td>500</td><td>7153</td><td>127</td><td>83</td><td>0</td></tr>
@@ -246,22 +235,18 @@ title: Milvus 2.2 Benchmark Test Report
 </tbody>
 </table>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/search_performance_by_querynode_cpu_cores.png" alt="Search performance by Querynode CPU cores" class="doc-image" id="search-performance-by-querynode-cpu-cores" />
-    <span>Search performance by Querynode CPU cores</span>
-  </span>
-</p>
-<h3 id="Milvus-220-Scale-out" class="common-anchor-header">Milvus 2.2.0 Scale-out</h3><p>Expand more replicas with more Querynodes to check the capability to scale out.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/search_performance_by_querynode_cpu_cores.png" alt="Search performance by Querynode CPU cores" class="doc-image" id="search-performance-by-querynode-cpu-cores" />
+   </span> <span class="img-wrapper"> <span>Производительность поиска по процессорным ядрам Querynode</span> </span></p>
+<h3 id="Milvus-220-Scale-out" class="common-anchor-header">Milvus 2.2.0 Масштабирование</h3><p>Расширьте количество реплик с помощью большего числа Querynodes, чтобы проверить возможность масштабирования.</p>
 <div class="alert note">
-<p>Note: the number of Querynodes equals the <code translate="no">replica_number</code> when loading the collection.</p>
+<p>Примечание: количество Querynodes равно <code translate="no">replica_number</code> при загрузке коллекции.</p>
 </div>
 <p><details>
-<summary><b>Server configurations (cluster)</b></summary>
-<code translate="no">yaml queryNode: replicas: 1 / 2 / 4 / 8 resources: limits: cpu: &quot;8.0&quot; memory: 8Gi requests: cpu: &quot;8.0&quot; memory: 8Gi</code>
-</details></p>
+<summary><b>Конфигурации сервера (кластера)</b></summary><code translate="no">yaml queryNode: replicas: 1 / 2 / 4 / 8 resources: limits: cpu: &quot;8.0&quot; memory: 8Gi requests: cpu: &quot;8.0&quot; memory: 8Gi</code></details></p>
 <table>
 <thead>
-<tr><th>Replicas</th><th>Concurrent Number</th><th>QPS</th><th>RT(TP99) / ms</th><th>RT(TP50) / ms</th><th>fail/s</th></tr>
+<tr><th>Реплики</th><th>Количество одновременных</th><th>QPS</th><th>RT(TP99) / мс</th><th>RT(TP50) / мс</th><th>отказ/с</th></tr>
 </thead>
 <tbody>
 <tr><td>1</td><td>500</td><td>7153</td><td>127</td><td>83</td><td>0</td></tr>
@@ -271,12 +256,10 @@ title: Milvus 2.2 Benchmark Test Report
 </tbody>
 </table>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/search_performance_by_querynode_replicas.png" alt="Search performance by Querynode replicas" class="doc-image" id="search-performance-by-querynode-replicas" />
-    <span>Search performance by Querynode replicas</span>
-  </span>
-</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/search_performance_by_querynode_replicas.png" alt="Search performance by Querynode replicas" class="doc-image" id="search-performance-by-querynode-replicas" />
+   </span> <span class="img-wrapper"> <span>Производительность поиска по репликам Querynode</span> </span></p>
+<h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -292,5 +275,5 @@ title: Milvus 2.2 Benchmark Test Report
         ></path>
       </svg>
     </button></h2><ul>
-<li>Try performing Milvus 2.2.0 benchmark tests on your own by referring to <a href="https://milvus.io/blog/2022-08-16-A-Quick-Guide-to-Benchmarking-Milvus-2-1.md">this guide</a>, except that you should instead use Milvus 2.2 and Pymilvus 2.2 in this guide.</li>
+<li>Попробуйте самостоятельно выполнить эталонные тесты Milvus 2.2.0, обратившись к <a href="https://milvus.io/blog/2022-08-16-A-Quick-Guide-to-Benchmarking-Milvus-2-1.md">этому руководству</a>, за исключением того, что в данном руководстве следует использовать Milvus 2.2 и Pymilvus 2.2.</li>
 </ul>

@@ -2,9 +2,9 @@
 id: configure_natsmq.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure natsmq for Milvus.
+summary: 'Узнайте, как настроить natsmq для Milvus.'
 ---
-<h1 id="natsmq-related-Configurations" class="common-anchor-header">natsmq-related Configurations<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="natsmq-related-Configurations" class="common-anchor-header">Конфигурации, связанные с natsmq<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: Learn how to configure natsmq for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>natsmq configuration.</p>
-<p>more detail: https://docs.nats.io/running-a-nats-service/configuration</p>
+    </button></h1><p>конфигурация natsmq.</p>
+<p>подробнее: https://docs.nats.io/running-a-nats-service/configuration</p>
 <h2 id="natsmqserverport" class="common-anchor-header"><code translate="no">natsmq.server.port</code><button data-href="#natsmqserverport" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,13 +39,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Listening port of the NATS server.      </td>
+      <td>        Порт прослушивания сервера NATS.      </td>
       <td>4222</td>
     </tr>
   </tbody>
@@ -68,13 +68,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.storeDir">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Directory to use for JetStream storage of nats      </td>
+      <td>        Каталог, используемый для хранения nats в JetStream      </td>
       <td>/var/lib/milvus/nats</td>
     </tr>
   </tbody>
@@ -97,13 +97,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.maxFileStore">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum size of the 'file' storage      </td>
+      <td>        Максимальный размер хранилища 'file'      </td>
       <td>17179869184</td>
     </tr>
   </tbody>
@@ -126,13 +126,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.maxPayload">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of bytes in a message payload      </td>
+      <td>        Максимальное количество байт в полезной нагрузке сообщения      </td>
       <td>8388608</td>
     </tr>
   </tbody>
@@ -155,13 +155,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.maxPending">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of bytes buffered for a connection Applies to client connections      </td>
+      <td>        Максимальное количество байт, буферизуемых для соединения Применяется для клиентских соединений      </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -184,13 +184,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.initializeTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        waiting for initialization of natsmq finished      </td>
+      <td>        ожидание завершения инициализации natsmq      </td>
       <td>4000</td>
     </tr>
   </tbody>
@@ -213,13 +213,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.monitor.trace">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        If true enable protocol trace log messages      </td>
+      <td>        Если true, включить сообщения журнала трассировки протокола      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -242,13 +242,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.monitor.debug">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        If true enable debug log messages      </td>
+      <td>        Если true, включить сообщения журнала отладки      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -271,13 +271,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.monitor.logTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        If set to false, log without timestamps.      </td>
+      <td>        Если установлено значение false, журнал будет вестись без временных меток.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -300,13 +300,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.monitor.logFile">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Log file path relative to .. of milvus binary if use relative path      </td>
+      <td>        Путь к файлу журнала относительно ... двоичного файла milvus, если используется относительный путь      </td>
       <td>/tmp/milvus/logs/nats.log</td>
     </tr>
   </tbody>
@@ -329,13 +329,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.monitor.logSizeLimit">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Size in bytes after the log file rolls over to a new one      </td>
+      <td>        Размер в байтах после переноса файла журнала на новый файл.      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -358,13 +358,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.retention.maxAge">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum age of any message in the P-channel      </td>
+      <td>        Максимальный возраст любого сообщения в P-канале      </td>
       <td>4320</td>
     </tr>
   </tbody>
@@ -387,13 +387,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.retention.maxBytes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size      </td>
+      <td>        Сколько байт может содержать один P-канал. Удаление самых старых сообщений, если P-канал превышает этот размер      </td>
       <td></td>
     </tr>
   </tbody>
@@ -416,13 +416,13 @@ summary: Learn how to configure natsmq for Milvus.
     </button></h2><table id="natsmq.server.retention.maxMsgs">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit      </td>
+      <td>        Сколько сообщений может содержать один P-канал. Удаление самых старых сообщений, если P-канал превышает этот предел      </td>
       <td></td>
     </tr>
   </tbody>
