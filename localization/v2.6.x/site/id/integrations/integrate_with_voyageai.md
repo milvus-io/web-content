@@ -1,9 +1,11 @@
 ---
 id: integrate_with_voyageai.md
-title: Semantic Search with Milvus and VoyageAI
-summary: This page discusses vector database integration with VoyageAI's embedding API.
+title: Pencarian Semantik dengan Milvus dan VoyageAI
+summary: >-
+  Halaman ini membahas integrasi basis data vektor dengan API penyematan
+  VoyageAI.
 ---
-<h1 id="Semantic-Search-with-Milvus-and-VoyageAI" class="common-anchor-header">Semantic Search with Milvus and VoyageAI<button data-href="#Semantic-Search-with-Milvus-and-VoyageAI" class="anchor-icon" translate="no">
+<h1 id="Semantic-Search-with-Milvus-and-VoyageAI" class="common-anchor-header">Pencarian Semantik dengan Milvus dan VoyageAI<button data-href="#Semantic-Search-with-Milvus-and-VoyageAI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +22,8 @@ summary: This page discusses vector database integration with VoyageAI's embeddi
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>This guide showcases how <a href="https://docs.voyageai.com/docs/embeddings">VoyageAI’s Embedding API</a> can be used with Milvus vector database to conduct semantic search on text.</p>
-<h2 id="Getting-started" class="common-anchor-header">Getting started<button data-href="#Getting-started" class="anchor-icon" translate="no">
+<p>Panduan ini menunjukkan bagaimana <a href="https://docs.voyageai.com/docs/embeddings">API Embedding VoyageAI</a> dapat digunakan dengan basis data vektor Milvus untuk melakukan pencarian semantik pada teks.</p>
+<h2 id="Getting-started" class="common-anchor-header">Memulai<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,16 +38,16 @@ summary: This page discusses vector database integration with VoyageAI's embeddi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before you start, make sure you have the Voyage API key ready, or you get one from the <a href="https://dash.voyageai.com/api-keys">VoyageAI website</a>.</p>
-<p>The data used in this example are book titles. You can download the dataset <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">here</a> and put it in the same directory where you run the following code.</p>
-<p>First, install the package for Milvus and Voyage AI:</p>
+    </button></h2><p>Sebelum memulai, pastikan Anda telah menyiapkan kunci API Voyage, atau Anda bisa mendapatkannya dari <a href="https://dash.voyageai.com/api-keys">situs web VoyageAI</a>.</p>
+<p>Data yang digunakan dalam contoh ini adalah judul buku. Anda dapat mengunduh dataset <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">di sini</a> dan menaruhnya di direktori yang sama dengan tempat Anda menjalankan kode berikut.</p>
+<p>Pertama, instal paket untuk Milvus dan Voyage AI:</p>
 <pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong>. (Klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
 </div>
-<p>With this, we’re ready to generate embeddings and use vector database to conduct semantic search.</p>
-<h2 id="Searching-book-titles-with-VoyageAI--Milvus" class="common-anchor-header">Searching book titles with VoyageAI & Milvus<button data-href="#Searching-book-titles-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
+<p>Dengan ini, kita siap untuk membuat sematan dan menggunakan basis data vektor untuk melakukan pencarian semantik.</p>
+<h2 id="Searching-book-titles-with-VoyageAI--Milvus" class="common-anchor-header">Mencari judul buku dengan VoyageAI &amp; Milvus<button data-href="#Searching-book-titles-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +62,7 @@ summary: This page discusses vector database integration with VoyageAI's embeddi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the following example, we load book title data from the downloaded CSV file, use Voyage AI embedding model to generate vector representations, and store them in Milvus vector database for semantic search.</p>
+    </button></h2><p>Pada contoh berikut, kita memuat data judul buku dari file CSV yang diunduh, menggunakan model penyematan Voyage AI untuk menghasilkan representasi vektor, dan menyimpannya di basis data vektor Milvus untuk pencarian semantik.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> voyageai
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -102,14 +104,14 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>Adapun argumen dari <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Menetapkan <code translate="no">uri</code> sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
+<li>Jika Anda memiliki data dalam skala besar, Anda dapat mengatur server Milvus yang lebih berkinerja pada <a href="https://milvus.io/docs/quickstart.md">docker atau kubernetes</a>. Dalam pengaturan ini, silakan gunakan uri server, misalnya<code translate="no">http://localhost:19530</code>, sebagai <code translate="no">uri</code>.</li>
+<li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">kunci Public Endpoint dan Api</a> di Zilliz Cloud.</li>
 </ul>
 </div>
-<p>With all data in Milvus vector database, we can now perform semantic search by generating vector embedding for the query and conduct vector search.</p>
+<p>Dengan semua data dalam basis data vektor Milvus, kita sekarang dapat melakukan pencarian semantik dengan membuat penyematan vektor untuk kueri dan melakukan pencarian vektor.</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded?&quot;</span>]
 
 query_vectors = voyage_client.embed(
@@ -132,7 +134,7 @@ res = milvus_client.search(
 <pre><code translate="no">Query: When was artificial intelligence founded?
 [{'id': 0, 'distance': 0.7196218371391296, 'entity': {'text': 'Artificial intelligence was founded as an academic discipline in 1956.', 'subject': 'history'}}, {'id': 1, 'distance': 0.6297335028648376, 'entity': {'text': 'Alan Turing was the first person to conduct substantial research in AI.', 'subject': 'history'}}]
 </code></pre>
-<h2 id="Searching-images-with-VoyageAI--Milvus" class="common-anchor-header">Searching images with VoyageAI & Milvus<button data-href="#Searching-images-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
+<h2 id="Searching-images-with-VoyageAI--Milvus" class="common-anchor-header">Mencari gambar dengan VoyageAI &amp; Milvus<button data-href="#Searching-images-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -194,7 +196,7 @@ res = milvus_client.search(
 
 DIMENSION = <span class="hljs-number">1024</span>  <span class="hljs-comment"># Dimension of vector embedding</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then we need to prepare the input data for Milvus. Let’s reuse the VoyageAI client we created in the previous chapter. For the available VoyageAI multimodal embedding model check this <a href="https://docs.voyageai.com/docs/multimodal-embeddings">page</a>.</p>
+<p>Selanjutnya kita perlu menyiapkan data masukan untuk Milvus. Mari kita gunakan kembali klien VoyageAI yang telah kita buat pada bab sebelumnya. Untuk model penyematan multimodal VoyageAI yang tersedia, lihat <a href="https://docs.voyageai.com/docs/multimodal-embeddings">halaman</a> ini.</p>
 <pre><code translate="no" class="language-python">pages = pdf_url_to_screenshots(<span class="hljs-string">&quot;https://www.fdrlibrary.org/documents/356632/390886/readingcopy.pdf&quot;</span>, zoom=<span class="hljs-number">3.0</span>)
 inputs = [[img] <span class="hljs-keyword">for</span> img <span class="hljs-keyword">in</span> pages]
 
@@ -208,7 +210,7 @@ data = [
     <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(inputs))
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Next, we create a Milvus database connection and insert the embeddings to the Milvus database.</p>
+<p>Selanjutnya, kita membuat koneksi database Milvus dan memasukkan embedding ke database Milvus.</p>
 <pre><code translate="no" class="language-python">milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus_voyage_multi_demo.db&quot;</span>)
 COLLECTION_NAME = <span class="hljs-string">&quot;demo_collection&quot;</span>  <span class="hljs-comment"># Milvus collection name</span>
 <span class="hljs-comment"># Create a collection to store the vectors and text.</span>
@@ -221,8 +223,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Now we are ready to search the images. Here, the query is a string, but we can query with images as well. (check the documentation for the multimodal API <a href="https://docs.voyageai.com/docs/multimodal-embeddings">here</a>).
-We use matplotlib to show the result images.</p>
+<p>Sekarang kita siap untuk mencari gambar. Di sini, kueri adalah sebuah string, tetapi kita juga dapat melakukan kueri dengan gambar. (lihat dokumentasi untuk API multimodal <a href="https://docs.voyageai.com/docs/multimodal-embeddings">di sini</a>). Kita menggunakan matplotlib untuk menampilkan gambar yang dihasilkan.</p>
 <pre><code translate="no" class="language-python">queries = [[<span class="hljs-string">&quot;The consequences of a dictator&#x27;s peace&quot;</span>]]
 
 query_vectors = client.multimodal_embed(

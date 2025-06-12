@@ -1,15 +1,16 @@
 ---
 id: json-operators.md
-title: JSON Operators
+title: Operator JSON
 summary: >-
-  Milvus supports advanced operators for querying and filtering JSON fields,
-  making them perfect for managing complex, structured data. These operators
-  enable highly effective querying of JSON documents, allowing you to retrieve
-  entities based on specific elements, values, or conditions within the JSON
-  fields. This section will guide you through using JSON-specific operators in
-  Milvus, providing practical examples to illustrate their functionality.
+  Milvus mendukung operator tingkat lanjut untuk melakukan kueri dan memfilter
+  bidang JSON, menjadikannya sempurna untuk mengelola data yang kompleks dan
+  terstruktur. Operator-operator ini memungkinkan kueri yang sangat efektif pada
+  dokumen JSON, memungkinkan Anda untuk mengambil entitas berdasarkan elemen,
+  nilai, atau kondisi tertentu di dalam bidang JSON. Bagian ini akan memandu
+  Anda dalam menggunakan operator khusus JSON di Milvus, dengan memberikan
+  contoh-contoh praktis untuk mengilustrasikan fungsionalitasnya.
 ---
-<h1 id="JSON-Operators" class="common-anchor-header">JSON Operators<button data-href="#JSON-Operators" class="anchor-icon" translate="no">
+<h1 id="JSON-Operators" class="common-anchor-header">Operator JSON<button data-href="#JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,11 +25,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports advanced operators for querying and filtering JSON fields, making them perfect for managing complex, structured data. These operators enable highly effective querying of JSON documents, allowing you to retrieve entities based on specific elements, values, or conditions within the JSON fields. This section will guide you through using JSON-specific operators in Milvus, providing practical examples to illustrate their functionality.</p>
+    </button></h1><p>Milvus mendukung operator tingkat lanjut untuk melakukan kueri dan memfilter bidang JSON, menjadikannya sempurna untuk mengelola data yang kompleks dan terstruktur. Operator-operator ini memungkinkan kueri yang sangat efektif untuk dokumen JSON, memungkinkan Anda untuk mengambil entitas berdasarkan elemen, nilai, atau kondisi tertentu di dalam bidang JSON. Bagian ini akan memandu Anda dalam menggunakan operator khusus JSON di Milvus, dengan memberikan contoh-contoh praktis untuk mengilustrasikan fungsionalitasnya.</p>
 <div class="alert note">
-<p>JSON fields cannot deal with complex, nested structures and treats all nested structures as plain strings. Therefore, when working with JSON fields, it is advisable to avoid excessively deep nesting and ensure that your data structures are as flat as possible for optimal performance.</p>
+<p>Field JSON tidak dapat menangani struktur bersarang yang kompleks dan memperlakukan semua struktur bersarang sebagai string biasa. Oleh karena itu, ketika bekerja dengan bidang JSON, disarankan untuk menghindari penumpukan yang terlalu dalam dan memastikan bahwa struktur data Anda serata mungkin untuk kinerja yang optimal.</p>
 </div>
-<h2 id="Available-JSON-Operators" class="common-anchor-header">Available JSON Operators<button data-href="#Available-JSON-Operators" class="anchor-icon" translate="no">
+<h2 id="Available-JSON-Operators" class="common-anchor-header">Operator JSON yang Tersedia<button data-href="#Available-JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,13 +44,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides several powerful JSON operators that help filter and query JSON data, and these operators are:</p>
+    </button></h2><p>Milvus menyediakan beberapa operator JSON yang kuat untuk membantu memfilter dan meminta data JSON, dan operator-operator tersebut adalah:</p>
 <ul>
-<li><p><code translate="no">JSON_CONTAINS(identifier, expr)</code>: Filters entities where the specified JSON expression is found within the field.</p></li>
-<li><p><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code>: Ensures that all elements of the specified JSON expression are present in the field.</p></li>
-<li><p><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code>: Filters entities where at least one member of the JSON expression exists within the field.</p></li>
+<li><p><code translate="no">JSON_CONTAINS(identifier, expr)</code>: Memfilter entitas di mana ekspresi JSON yang ditentukan ditemukan di dalam field.</p></li>
+<li><p><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code>: Memastikan bahwa semua elemen dari ekspresi JSON yang ditentukan ada di dalam field.</p></li>
+<li><p><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code>: Memfilter entitas di mana setidaknya satu anggota ekspresi JSON ada di dalam field.</p></li>
 </ul>
-<p>Let’s explore these operators with examples to see how they can be applied in real-world scenarios.</p>
+<p>Mari kita jelajahi operator ini dengan contoh untuk melihat bagaimana operator ini dapat diterapkan dalam skenario dunia nyata.</p>
 <h2 id="JSONCONTAINS" class="common-anchor-header">JSON_CONTAINS<button data-href="#JSONCONTAINS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,13 +66,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">json_contains</code> operator checks if a specific element or subarray exists within a JSON field. It’s useful when you want to ensure that a JSON array or object contains a particular value.</p>
-<p><strong>Example</strong></p>
-<p>Imagine you have a collection of products, each with a <code translate="no">tags</code> field that contains a JSON array of strings, such as <code translate="no">[&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]</code>. You want to filter products that have the tag <code translate="no">&quot;sale&quot;</code>.</p>
+    </button></h2><p>Operator <code translate="no">json_contains</code> memeriksa apakah elemen atau sub-larik tertentu ada di dalam bidang JSON. Operator ini berguna ketika Anda ingin memastikan bahwa larik atau objek JSON berisi nilai tertentu.</p>
+<p><strong>Contoh</strong></p>
+<p>Bayangkan Anda memiliki koleksi produk, masing-masing dengan bidang <code translate="no">tags</code> yang berisi larik JSON berisi string, seperti <code translate="no">[&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]</code>. Anda ingin memfilter produk yang memiliki tag <code translate="no">&quot;sale&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains(product[&quot;tags&quot;], &quot;sale&quot;)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus will return all products where the <code translate="no">tags</code> field contains the element <code translate="no">&quot;sale&quot;</code>.</p>
+<p>Dalam contoh ini, Milvus akan mengembalikan semua produk yang bidang <code translate="no">tags</code> berisi elemen <code translate="no">&quot;sale&quot;</code>.</p>
 <h2 id="JSONCONTAINSALL" class="common-anchor-header">JSON_CONTAINS_ALL<button data-href="#JSONCONTAINSALL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,14 +88,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">json_contains_all</code> operator ensures that all elements of a specified JSON expression are present in the target field. It is particularly useful when you need to match multiple values within a JSON array.</p>
-<p><strong>Example</strong></p>
-<p>Continuing with the product tags scenario, if you want to find all products that have the tags <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, and <code translate="no">&quot;new&quot;</code>, you can use the <code translate="no">json_contains_all</code> operator.</p>
+    </button></h2><p>Operator <code translate="no">json_contains_all</code> memastikan bahwa semua elemen dari ekspresi JSON yang ditentukan ada di bidang target. Operator ini sangat berguna ketika Anda perlu mencocokkan beberapa nilai dalam larik JSON.</p>
+<p><strong>Contoh</strong></p>
+<p>Melanjutkan skenario tag produk, jika Anda ingin menemukan semua produk yang memiliki tag <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, dan <code translate="no">&quot;new&quot;</code>, Anda dapat menggunakan operator <code translate="no">json_contains_all</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;, &quot;discount&quot;]}</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_all(product[&quot;tags&quot;], [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This query will return all products where the <code translate="no">tags</code> array contains all three specified elements: <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, and <code translate="no">&quot;new&quot;</code>.</p>
-<h2 id="JSONCONTAINSANY" class="common-anchor-header">JSON_CONTAINS_ANY<button data-href="#JSONCONTAINSANY" class="anchor-icon" translate="no">
+<p>Kueri ini akan mengembalikan semua produk yang larik <code translate="no">tags</code> berisi ketiga elemen yang ditentukan: <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, dan <code translate="no">&quot;new&quot;</code>.</p>
+<h2 id="JSONCONTAINSANY" class="common-anchor-header">JSON_BERISI_APA SAJA<button data-href="#JSONCONTAINSANY" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -109,10 +110,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">json_contains_any</code> operator filters entities where at least one member of the JSON expression exists within the field. This is useful when you want to match entities based on any one of several possible values.</p>
-<p><strong>Example</strong></p>
-<p>Let’s say you want to filter products that have at least one of the tags <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, or <code translate="no">&quot;new&quot;</code>. You can use the <code translate="no">json_contains_any</code> operator to achieve this.</p>
+    </button></h2><p>Operator <code translate="no">json_contains_any</code> menyaring entitas di mana setidaknya satu anggota ekspresi JSON ada di dalam bidang. Ini berguna ketika Anda ingin mencocokkan entitas berdasarkan salah satu dari beberapa nilai yang mungkin.</p>
+<p><strong>Contoh</strong></p>
+<p>Katakanlah Anda ingin memfilter produk yang memiliki setidaknya salah satu tag <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, atau <code translate="no">&quot;new&quot;</code>. Anda dapat menggunakan operator <code translate="no">json_contains_any</code> untuk mencapai hal ini.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this case, Milvus will return all products that have at least one of the tags in the list <code translate="no">[&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;]</code>. Even if a product only has one of these tags, it will be included in the result.</p>
+<p>Dalam hal ini, Milvus akan mengembalikan semua produk yang memiliki setidaknya salah satu tag dalam daftar <code translate="no">[&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;]</code>. Meskipun sebuah produk hanya memiliki salah satu dari tag tersebut, produk tersebut akan disertakan dalam hasil pencarian.</p>
