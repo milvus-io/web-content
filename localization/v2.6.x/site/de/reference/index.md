@@ -1,10 +1,10 @@
 ---
 id: index.md
 related_key: index
-summary: Index mechanism in Milvus.
-title: In-memory Index
+summary: Indexmechanismus in Milvus.
+title: In-Memory-Index
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">In-memory Index<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">In-Memory-Index<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,13 +19,12 @@ title: In-memory Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic lists various types of in-memory indexes Milvus supports, scenarios each of them best suits, and parameters users can configure to achieve better search performance. For on-disk indexes, see <strong><a href="/docs/disk_index.md">On-disk Index</a></strong>.</p>
-<p>Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/index-vector-fields.md">specify an index type</a> for each vector field.</p>
+    </button></h1><p>Dieses Thema listet verschiedene Arten von In-Memory-Indizes auf, die von Milvus unterstützt werden, die Szenarien, für die jeder von ihnen am besten geeignet ist, und die Parameter, die Benutzer konfigurieren können, um eine bessere Suchleistung zu erzielen. Für On-Disk-Indizes, siehe <strong><a href="/docs/de/disk_index.md">On-Disk-Index</a></strong>.</p>
+<p>Indizierung ist der Prozess der effizienten Organisation von Daten und spielt eine wichtige Rolle, wenn es darum geht, die Ähnlichkeitssuche nützlich zu machen, indem zeitaufwändige Abfragen auf großen Datenbeständen drastisch beschleunigt werden.</p>
+<p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/index-vector-fields.md">einen Indextyp angeben</a>.</p>
 <div class="alert note">
-Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
-</div>
-<h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS vector indexes<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
+Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automatisch den alten Index, wenn der Indextyp gewechselt wird.</div>
+<h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS-Vektorindizes<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,9 +39,9 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Most of the vector index types supported by Milvus use approximate nearest neighbors search (ANNS) algorithms. Compared with accurate retrieval, which is usually very time-consuming, the core idea of ANNS is no longer limited to returning the most accurate result, but only searching for neighbors of the target. ANNS improves retrieval efficiency by sacrificing accuracy within an acceptable range.</p>
-<p>According to the implementation methods, the ANNS vector index can be categorized into four types: Tree-based, Graph-based, Hash-based, and Quantization-based.</p>
-<h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Indexes supported in Milvus<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
+    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden Algorithmen zur approximativen Suche nach den nächsten Nachbarn (ANNS). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwändig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
+<p>Je nach Implementierungsmethode kann der ANNS-Vektorindex in vier Typen eingeteilt werden: Baum-basiert, Graph-basiert, Hash-basiert und Quantisierungs-basiert.</p>
+<h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">In Milvus unterstützte Indizes<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,132 +56,129 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports various index types, which are categorized by the type of vector embeddings they handle: <strong>floating-point embeddings</strong> (also known as floating point vectors or dense vectors), <strong>binary embeddings</strong> (also known as binary vectors), and <strong>sparse embeddings</strong> (also known as sparse vectors).</p>
+    </button></h2><p>Milvus unterstützt verschiedene Indextypen, die nach der Art der Vektoreinbettungen, die sie verarbeiten, kategorisiert werden: <strong>Fließkomma-Einbettungen</strong> (auch bekannt als Fließkomma-Vektoren oder dichte Vektoren), <strong>binäre Einbettungen</strong> (auch bekannt als binäre Vektoren) und <strong>spärliche Einbettungen</strong> (auch bekannt als spärliche Vektoren).</p>
 <div class="filter">
-  <a href="#floating">Floating-point embeddings</a>
-  <a href="#binary">Binary embeddings</a>
-  <a href="#sparse">Sparse embeddings</a>
-</div>
+ <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Embeddings</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indexes for floating-point embeddings</h3><p>For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (<code translate="no">L2</code>) and Inner product (<code translate="no">IP</code>).</p>
-<p>These types of indexes include <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, and <code translate="no">SCANN</code> for CPU-based ANN searches.</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der Speicherplatzbedarf 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
+<p>Diese Arten von Indizes umfassen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code> und <code translate="no">SCANN</code> für CPU-basierte ANN-Suchen.</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indexes for binary embeddings</h3><p>For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are <code translate="no">JACCARD</code> and <code translate="no">HAMMING</code>.</p>
-<p>This type of indexes include <code translate="no">BIN_FLAT</code> and <code translate="no">BIN_IVF_FLAT</code>.</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indizes für binäre Einbettungen</h3><p>Für 128-dimensionale binäre Einbettungen beträgt der Speicherplatzbedarf 128 / 8 = 16 Bytes. Und die für binäre Einbettungen verwendeten Abstandsmetriken sind <code translate="no">JACCARD</code> und <code translate="no">HAMMING</code>.</p>
+<p>Zu dieser Art von Indizes gehören <code translate="no">BIN_FLAT</code> und <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indexes for sparse embeddings</h3><p>Indexes for sparse embeddings support the <code translate="no">IP</code> and <code translate="no">BM25</code> (for full-text search) metrics only.</p>
-<p>Index type supported for sparse embeddings: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indizes für spärliche Einbettungen</h3><p>Indizes für spärliche Einbettungen unterstützen nur die Metriken <code translate="no">IP</code> und <code translate="no">BM25</code> (für Volltextsuche).</p>
+<p>Unterstützter Index-Typ für spärliche Einbettungen: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
-<p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility. For more information, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>Ab Milvus 2.5.4 wird <code translate="no">SPARSE_WAND</code> veraltet sein. Stattdessen wird empfohlen, <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um Äquivalenz und Kompatibilität zu gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>Unterstützter Index</th>
+    <th>Klassifizierung</th>
+    <th>Szenario</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td>FLAT</td>
-    <td>N/A</td>
+    <td>K.A.</td>
     <td>
       <ul>
-        <li>Relatively small dataset</li>
-        <li>Requires a 100% recall rate</li>
+        <li>Relativ kleiner Datensatz</li>
+        <li>Erfordert eine Wiedererkennungsrate von 100%.</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>N/A</td>
+    <td>K.A.</td>
     <td>
       <ul>
-        <li>High-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
+        <li>Hochgeschwindigkeitsabfrage</li>
+        <li>Erfordert eine möglichst hohe Wiederfindungsrate</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>IVF_SQ8</td>
-    <td>Quantization-based index</td>
+    <td>Quantisierungsbasierter Index</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>Abfrage mit sehr hoher Geschwindigkeit</li>
+        <li>Begrenzte Speicherressourcen</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
       </ul>
     </td>
   </tr>  
   <tr>
     <td>IVF_PQ</td>
-    <td>Quantization-based index</td>
+    <td>Quantisierungsbasierter Index</td>
     <td>
       <ul>
-        <li>High-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>Hochgeschwindigkeitsabfrage</li>
+        <li>Begrenzte Speicherressourcen</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>HNSW</td>
-    <td>Graph-based index</td>
+    <td>Graph-basierter Index</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Large memory resources</li>
+        <li>Abfrage mit sehr hoher Geschwindigkeit</li>
+        <li>Erfordert eine möglichst hohe Abrufrate</li>
+        <li>Große Speicherressourcen</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>HNSW_SQ</td>
-    <td>Quantization-based index</td>
+    <td>Quantisierungsbasierter Index</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>Abfrage mit sehr hoher Geschwindigkeit</li>
+        <li>Begrenzte Speicherressourcen</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
       </ul>
     </td>
   </tr>
     <tr>
     <td>HNSW_PQ</td>
-    <td>Quantization-based index</td>
+    <td>Quantisierungsbasierter Index</td>
     <td>
       <ul>
-        <li>Medium speed query</li>
-        <li>Very limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>Abfrage mit mittlerer Geschwindigkeit</li>
+        <li>Sehr begrenzte Speicherressourcen</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
       </ul>
     </td>
   </tr>
     </tr>
     <tr>
     <td>HNSW_PRQ</td>
-    <td>Quantization-based index</td>
+    <td>Quantisierungsbasierter Index</td>
     <td>
       <ul>
-        <li>Medium speed query</li>
-        <li>Very limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>Mittelschnelle Abfrage</li>
+        <li>Sehr begrenzte Speicherressourcen</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>SCANN</td>
-    <td>Quantization-based index</td>
+    <td>Quantisierungsbasierter Index</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
-        <li>Requires a recall rate as high as possible</li>
-        <li>Large memory resources</li>
+        <li>Abfrage mit sehr hoher Geschwindigkeit</li>
+        <li>Erfordert eine möglichst hohe Wiederfindungsrate</li>
+        <li>Große Speicherressourcen</li>
       </ul>
     </td>
   </tr>
@@ -193,28 +189,28 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <table id="binary">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>Unterstützter Index</th>
+    <th>Klassifizierung</th>
+    <th>Szenario</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td>BIN_FLAT</td>
-    <td>Quantization-based index</td>
+    <td>Quantisierungsbasierter Index</td>
     <td><ul>
-      <li>Depends on relatively small datasets.</li>
-      <li>Requires perfect accuracy.</li>
-      <li>No compression applies.</li>
-      <li>Guarantee exact search results.</li>
+      <li>Hängt von relativ kleinen Datensätzen ab.</li>
+      <li>Erfordert perfekte Genauigkeit.</li>
+      <li>Es findet keine Komprimierung statt.</li>
+      <li>Garantiert exakte Suchergebnisse.</li>
     </ul></td>
   </tr>
   <tr>
     <td>BIN_IVF_FLAT</td>
-    <td>Quantization-based index</td>
+    <td>Quantisierungsbasierter Index</td>
     <td><ul>
-      <li>High-speed query</li>
-      <li>Requires a recall rate as high as possible</li>
+      <li>Hochgeschwindigkeitsabfrage</li>
+      <li>Erfordert eine möglichst hohe Wiederfindungsrate</li>
     </ul></td>
   </tr>
 </tbody>
@@ -224,362 +220,362 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <table id="sparse">
 <thead>
   <tr>
-    <th>Supported index</th>
-    <th>Classification</th>
-    <th>Scenario</th>
+    <th>Unterstützter Index</th>
+    <th>Klassifizierung</th>
+    <th>Szenario</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>SPARSE_INVERTED_INDEX</td>
-    <td>Inverted index</td>
+    <td>SPÄRLICHER_INVERTIERTER_INDEX</td>
+    <td>Invertierter Index</td>
     <td><ul>
-      <li>Depends on relatively small datasets.</li>
-      <li>Requires a 100% recall rate.</li>
+      <li>Hängt von relativ kleinen Datensätzen ab.</li>
+      <li>Erfordert eine Wiedererkennungsrate von 100%.</li>
     </ul></td>
   </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.</p>
-<p>FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every set of vectors in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters required for the FLAT index in Milvus, and using it does not need extra index buidling.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Für Anwendungen der Vektorähnlichkeitssuche, die perfekte Genauigkeit erfordern und von relativ kleinen Datensätzen (im Millionenbereich) abhängen, ist der FLAT-Index eine gute Wahl. FLAT komprimiert die Vektoren nicht und ist der einzige Index, der exakte Suchergebnisse garantieren kann. Die Ergebnisse von FLAT können auch als Vergleichspunkt für Ergebnisse anderer Indizes verwendet werden, die weniger als 100 % Recall haben.</p>
+<p>FLAT ist genau, weil er einen erschöpfenden Suchansatz verfolgt, d. h. für jede Abfrage wird die Zieleingabe mit jedem Satz von Vektoren in einem Datensatz verglichen. Dadurch ist FLAT der langsamste Index auf unserer Liste und eignet sich schlecht für die Abfrage umfangreicher Vektordaten. Für den FLAT-Index in Milvus sind keine Parameter erforderlich, und seine Verwendung erfordert keine zusätzliche Indexerstellung.</p>
 <ul>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] Die gewählte Distanzmetrik.</td><td>Siehe <a href="/docs/de/metric.md">Unterstützte Metriken</a>.</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Results from the <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT performance test</a> demonstrate that query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT unterteilt Vektordaten in <code translate="no">nlist</code> Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Ziel-Eingangsvektor und dem Zentrum jedes Clusters. Abhängig von der Anzahl der Cluster, die das System abfragt (<code translate="no">nprobe</code>), werden die Ergebnisse der Ähnlichkeitssuche nur auf der Grundlage von Vergleichen zwischen der Zieleingabe und den Vektoren in den ähnlichsten Clustern zurückgegeben, was die Abfragezeit drastisch reduziert.</p>
+<p>Durch die Anpassung von <code translate="no">nprobe</code> kann ein ideales Gleichgewicht zwischen Genauigkeit und Geschwindigkeit für ein bestimmtes Szenario gefunden werden. Die Ergebnisse des <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT-Leistungstests</a> zeigen, dass die Abfragezeit stark ansteigt, wenn sowohl die Anzahl der Zieleingangsvektoren (<code translate="no">nq</code>) als auch die Anzahl der zu durchsuchenden Cluster (<code translate="no">nprobe</code>) zunimmt.</p>
+<p>IVF_FLAT ist der einfachste IVF-Index, und die in jeder Einheit gespeicherten kodierten Daten stimmen mit den Originaldaten überein.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td><td>128</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>Anzahl der Cluster-Einheiten</td><td>[1, 65536]</td><td>128</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <ul>
-<li><p>Common search</p>
+<li><p>Gemeinsame Suche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>Anzahl der abzufragenden Einheiten</td><td>[1, nlist]</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>Bereichssuche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT does not perform any compression, so the index files it produces are roughly the same size as the original, raw non-indexed vector data. For example, if the original 1B SIFT dataset is 476 GB, its IVF_FLAT index files will be slightly smaller (~470 GB). Loading all the index files into memory will consume 470 GB of storage.</p>
-<p>When disk, CPU, or GPU memory resources are limited, IVF_SQ8 is a better option than IVF_FLAT. This index type can convert each FLOAT (4 bytes) to UINT8 (1 byte) by performing Scalar Quantization (SQ). This reduces disk, CPU, and GPU memory consumption by 70–75%. For the 1B SIFT dataset, the IVF_SQ8 index files require just 140 GB of storage.</p>
+<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT führt keine Komprimierung durch, so dass die erzeugten Indexdateien ungefähr die gleiche Größe haben wie die ursprünglichen, nicht indizierten Vektordaten. Wenn z. B. der ursprüngliche 1B-SIFT-Datensatz 476 GB groß ist, sind die IVF_FLAT-Indexdateien etwas kleiner (~470 GB). Wenn alle Indexdateien in den Speicher geladen werden, werden 470 GB Speicherplatz verbraucht.</p>
+<p>Wenn Festplatten-, CPU- oder GPU-Speicherressourcen begrenzt sind, ist IVF_SQ8 eine bessere Option als IVF_FLAT. Dieser Indextyp kann jedes FLOAT (4 Byte) in UINT8 (1 Byte) umwandeln, indem er eine Skalarquantisierung (SQ) durchführt. Dies reduziert den Festplatten-, CPU- und GPU-Speicherverbrauch um 70-75 %. Für den 1B-SIFT-Datensatz benötigen die IVF_SQ8-Indexdateien nur 140 GB Speicherplatz.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für die Indexerstellung</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>Anzahl der Cluster-Einheiten</td><td>[1, 65536]</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <ul>
-<li><p>Common search</p>
+<li><p>Gemeinsame Suche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>Anzahl der abzufragenden Einheiten</td><td>[1, nlist]</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>Bereichssuche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) uniformly decomposes the original high-dimensional vector space into Cartesian products of <code translate="no">m</code> low-dimensional vector spaces, and then quantizes the decomposed low-dimensional vector spaces. Instead of calculating the distances between the target vector and the center of all the units, product quantization enables the calculation of distances between the target vector and the clustering center of each low-dimensional space and greatly reduces the time complexity and space complexity of the algorithm.</p>
-<p>IVF_PQ performs IVF index clustering before quantizing the product of vectors. Its index file is even smaller than IVF_SQ8, but it also causes a loss of accuracy during searching vectors.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Produktquantisierung) zerlegt den ursprünglichen hochdimensionalen Vektorraum gleichmäßig in kartesische Produkte von <code translate="no">m</code> niedrigdimensionalen Vektorräumen und quantisiert dann die zerlegten niedrigdimensionalen Vektorräume. Anstatt die Abstände zwischen dem Zielvektor und dem Zentrum aller Einheiten zu berechnen, ermöglicht die Produktquantisierung die Berechnung der Abstände zwischen dem Zielvektor und dem Clustering-Zentrum jedes niedrigdimensionalen Raums und reduziert die Zeit- und Raumkomplexität des Algorithmus erheblich.</p>
+<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist sogar noch kleiner als IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
 <div class="alert note">
-<p>Index building parameters and search parameters vary with Milvus distribution. Select your Milvus distribution first.</p>
+<p>Die Parameter für die Indexerstellung und die Suchparameter variieren je nach Milvus-Verteilung. Wählen Sie zunächst Ihre Milvus-Distribution aus.</p>
 </div>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
-<tr><td><code translate="no">m</code></td><td>Number of factors of product quantization</td><td><code translate="no">dim mod m == 0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Optional] Number of bits in which each low-dimensional vector is stored.</td><td>[1, 64] (8 by default)</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>Anzahl der Cluster-Einheiten</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">m</code></td><td>Anzahl der Faktoren der Produktquantisierung</td><td><code translate="no">dim mod m == 0</code></td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[Optional] Anzahl der Bits, in denen jeder niedrigdimensionale Vektor gespeichert wird.</td><td>[1, 64] (8 als Standard)</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <ul>
-<li><p>Common search</p>
+<li><p>Allgemeine Suche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>Anzahl der abzufragenden Einheiten</td><td>[1, nlist]</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>Bereichssuche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) is similar to IVF_PQ in terms of vector clustering and product quantization. What makes them different lies in the implementation details of product quantization and the use of SIMD (Single-Instruction / Multi-data) for efficient calculation.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) ähnelt IVF_PQ in Bezug auf Vektor-Clustering und Produktquantisierung. Der Unterschied liegt in den Implementierungsdetails der Produktquantisierung und der Verwendung von SIMD (Single-Instruction / Multi-data) für eine effiziente Berechnung.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für die Indexbildung</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
-<tr><td><code translate="no">with_raw_data</code></td><td>Whether to include the raw data in the index</td><td><code translate="no">True</code> or <code translate="no">False</code>. Defaults to <code translate="no">True</code>.</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>Anzahl der Cluster-Einheiten</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">with_raw_data</code></td><td>Angabe, ob die Rohdaten in den Index aufgenommen werden sollen</td><td><code translate="no">True</code> oder <code translate="no">False</code>. Der Standardwert ist <code translate="no">True</code>.</td></tr>
 </tbody>
 </table>
   <div class="alert note">
-<p>Unlike IVF_PQ, default values apply to <code translate="no">m</code> and <code translate="no">nbits</code> for optimized performance.</p>
+<p>Im Gegensatz zu IVF_PQ gelten die Standardwerte für <code translate="no">m</code> und <code translate="no">nbits</code>, um die Leistung zu optimieren.</p>
   </div>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <ul>
-<li><p>Common search</p>
+<li><p>Allgemeine Suche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td></td></tr>
-<tr><td><code translate="no">reorder_k</code></td><td>Number of candidate units to query</td><td>[<code translate="no">top_k</code>, ∞]</td><td><code translate="no">top_k</code></td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>Anzahl der abzufragenden Einheiten</td><td>[1, nlist]</td><td></td></tr>
+<tr><td><code translate="no">reorder_k</code></td><td>Anzahl der abzufragenden Einheiten</td><td>[<code translate="no">top_k</code>, ∞]</td><td><code translate="no">top_k</code></td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>Bereichssuche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) is a graph-based indexing algorithm. It builds a multi-layer navigation structure for an image according to certain rules. In this structure, the upper layers are more sparse and the distances between nodes are farther; the lower layers are denser and the distances between nodes are closer. The search starts from the uppermost layer, finds the node closest to the target in this layer, and then enters the next layer to begin another search. After multiple iterations, it can quickly approach the target position.</p>
-<p>In order to improve performance, HNSW limits the maximum degree of nodes on each layer of the graph to <code translate="no">M</code>. In addition, you can use <code translate="no">efConstruction</code> (when building index) or <code translate="no">ef</code> (when searching targets) to specify a search range.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) ist ein graphbasierter Indizierungsalgorithmus. Er baut eine mehrschichtige Navigationsstruktur für ein Bild nach bestimmten Regeln auf. In dieser Struktur sind die oberen Schichten spärlicher und die Abstände zwischen den Knoten größer; die unteren Schichten sind dichter und die Abstände zwischen den Knoten sind kleiner. Die Suche beginnt in der obersten Schicht, findet den Knoten, der dem Ziel in dieser Schicht am nächsten liegt, und begibt sich dann in die nächste Schicht, um eine weitere Suche zu beginnen. Nach mehreren Iterationen kann sie sich schnell der Zielposition nähern.</p>
+<p>Um die Leistung zu verbessern, begrenzt HNSW den maximalen Grad der Knoten auf jeder Ebene des Graphen auf <code translate="no">M</code>. Außerdem können Sie <code translate="no">efConstruction</code> (beim Indexaufbau) oder <code translate="no">ef</code> (bei der Suche nach Zielen) verwenden, um einen Suchbereich anzugeben.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>Scalar Quantization (SQ) is a technique used to discretize floating-point data into a finite set of values based on their magnitude. For example, <strong>SQ6</strong> represents quantization into (2^6 = 64) discrete values, where each floating-point number is encoded using 6 bits. Similarly, <strong>SQ8</strong> quantizes the data into (2^8 = 256) discrete values, with each floating-point number represented by 8 bits. This quantization reduces the memory footprint while preserving the essential structure of the data for efficient processing.</p>
-<p>Combined with SQ, HNSW_SQ offers a controllable trade-off between index size and accuracy, while maintaining high query-per-second (QPS) performance. Compared to standard HNSW, it results in a modest increase in index construction time.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>Skalarquantisierung (SQ) ist eine Technik zur Diskretisierung von Fließkommadaten in eine endliche Menge von Werten auf der Grundlage ihres Betrags. <strong>SQ6</strong> steht beispielsweise für die Quantisierung in (2^6 = 64) diskrete Werte, wobei jede Fließkommazahl mit 6 Bits kodiert wird. In ähnlicher Weise quantisiert <strong>SQ8</strong> die Daten in (2^8 = 256) diskrete Werte, wobei jede Fließkommazahl durch 8 Bits dargestellt wird. Durch diese Quantisierung wird der Speicherplatzbedarf reduziert, während die wesentliche Struktur der Daten für eine effiziente Verarbeitung erhalten bleibt.</p>
+<p>In Kombination mit SQ bietet HNSW_SQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, wobei eine hohe Abfrageleistung pro Sekunde (QPS) beibehalten wird. Im Vergleich zu Standard-HNSW führt dies zu einer bescheidenen Erhöhung der Indexaufbauzeit.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">sq_type</code></td><td>Scalar quantizer type.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>Skalarer Quantisierer-Typ.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob verfeinerte Daten während des Indexaufbaus reserviert werden.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des verfeinerten Indexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>The basic idea of PQ is to split the vector into <code translate="no">m</code> sub-vectors, each of which will find 2^{<em>nbits</em>} centroids based on kmeans, and each sub-vector will select the nearest centroid as its approximate sub-vector. Then we record all the centriods, so each subvector can be encoded as <code translate="no">nbits</code>, and a floating vector of length <code translate="no">dim</code> can be encoded as <em>m ⋅ nbits</em> bits.</p>
-<p>Combined with PQ, HNSW_PQ offers a controllable tradeoff between index size and accuracy, but it has a lower QPS value and a higher recall rate than HNSW_SQ for the same compression rate. Compared with HNSW_SQ, it takes longer to build the index.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>Die Grundidee von PQ besteht darin, den Vektor in <code translate="no">m</code> Untervektoren aufzuteilen, von denen jeder <em>2^{nbits}</em> Zentroide auf der Grundlage von kmeans findet, und jeder Untervektor wählt den nächstgelegenen Zentroid als seinen ungefähren Untervektor. Dann zeichnen wir alle Zentroide auf, so dass jeder Untervektor als <code translate="no">nbits</code> kodiert werden kann und ein fließender Vektor der Länge <code translate="no">dim</code> als <em>m ⋅ nbits</em> Bits kodiert werden kann.</p>
+<p>In Kombination mit PQ bietet HNSW_PQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, hat aber einen niedrigeren QPS-Wert und eine höhere Wiederfindungsrate als HNSW_SQ bei gleicher Kompressionsrate. Im Vergleich zu HNSW_SQ dauert es länger, den Index aufzubauen.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">m</code></td><td>Die Anzahl der Untervektorgruppen, in die der Vektor aufgeteilt werden soll.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Die Anzahl der Bits, in die jede Gruppe von Untervektoren quantisiert wird.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob verfeinerte Daten während des Indexaufbaus reserviert werden.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des verfeinerten Indexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ is similar to PQ, and also divides the vector into <code translate="no">m</code> groups. Each sub-vector will be encoded as <code translate="no">nbits</code>. After completing a pq quantization, it will calculate the residual between the vector and the pq quantized vector, and apply pq quantization to the residual vector. A total of <code translate="no">nrq</code> complete pq quantizations will be performed, so a floating vector of length <code translate="no">dim</code> will be encoded as <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
-<p>Combined with a Product Residual Quantizer (PRQ), HNSW_PRQ offers an even higher controllable tradeoff between index size and accuracy. It has almost equivalent QPS value and a higher recall rate than HNSW_PQ for the same compression rate. Compared with HNSW_PQ, the time to build the index may increase several times.</p>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ ist ähnlich wie PQ und unterteilt den Vektor ebenfalls in <code translate="no">m</code> Gruppen. Jeder Untervektor wird als <code translate="no">nbits</code> kodiert. Nach Abschluss einer pq-Quantisierung wird der Rest zwischen dem Vektor und dem pq-quantisierten Vektor berechnet und die pq-Quantisierung auf den Restvektor angewendet. Insgesamt werden <code translate="no">nrq</code> vollständige pq-Quantisierungen durchgeführt, so dass ein gleitender Vektor der Länge <code translate="no">dim</code> als <em>m ⋅ nbits ⋅ nrq</em> bits kodiert wird.</p>
+<p>In Kombination mit einem Product Residual Quantizer (PRQ) bietet HNSW_PRQ einen noch besser kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit. Es hat einen fast gleichwertigen QPS-Wert und eine höhere Wiederfindungsrate als HNSW_PQ bei gleicher Kompressionsrate. Im Vergleich zu HNSW_PQ kann sich die Zeit für den Aufbau des Index um ein Vielfaches erhöhen.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
-<tr><td><code translate="no">nrq</code></td><td>The number of residual subquantizers.</td><td>[1, 16]</td><td>2</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">m</code></td><td>Die Anzahl der Untervektorgruppen, in die der Vektor aufgeteilt werden soll.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Die Anzahl der Bits, in die jede Gruppe von Untervektoren quantisiert wird.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>Die Anzahl der restlichen Unterquantisierer.</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob verfeinerte Daten während der Indexerstellung reserviert werden.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des verfeinerten Indexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 </div>
 <div class="filter-binary">
-<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>This index is exactly the same as FLAT except that this can only be used for binary embeddings.</p>
-<p>For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the BIN_FLAT index is a good choice. BIN_FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from BIN_FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.</p>
-<p>BIN_FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to vectors in a dataset. This makes BIN_FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters for the BIN_FLAT index in Milvus, and using it does not require data training or additional storage.</p>
+<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>Dieser Index ist genau dasselbe wie FLAT, außer dass er nur für binäre Einbettungen verwendet werden kann.</p>
+<p>Für Anwendungen der Vektorähnlichkeitssuche, die perfekte Genauigkeit erfordern und von relativ kleinen Datensätzen (im Millionenbereich) abhängen, ist der Index BIN_FLAT eine gute Wahl. BIN_FLAT komprimiert keine Vektoren und ist der einzige Index, der exakte Suchergebnisse garantieren kann. Die Ergebnisse von BIN_FLAT können auch als Vergleichspunkt für Ergebnisse anderer Indizes verwendet werden, die weniger als 100 % Recall haben.</p>
+<p>BIN_FLAT ist genau, weil er einen erschöpfenden Suchansatz verfolgt, d. h. für jede Abfrage wird die Zieleingabe mit Vektoren in einem Datensatz verglichen. Dadurch ist BIN_FLAT der langsamste Index auf unserer Liste und eignet sich schlecht für die Abfrage umfangreicher Vektordaten. Es gibt keine Parameter für den BIN_FLAT-Index in Milvus, und seine Verwendung erfordert kein Datentraining oder zusätzlichen Speicherplatz.</p>
 <ul>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] Die gewählte Abstandsmetrik.</td><td>Siehe <a href="/docs/de/metric.md">Unterstützte Metriken</a>.</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>This index is exactly the same as IVF_FLAT except that this can only be used for binary embeddings.</p>
-<p>BIN_IVF_FLAT divides vector data into <code translate="no">nlist</code> cluster units, and then compares distances between the target input vector and the center of each cluster. Depending on the number of clusters the system is set to query (<code translate="no">nprobe</code>), similarity search results are returned based on comparisons between the target input and the vectors in the most similar cluster(s) only — drastically reducing query time.</p>
-<p>By adjusting <code translate="no">nprobe</code>, an ideal balance between accuracy and speed can be found for a given scenario. Query time increases sharply as both the number of target input vectors (<code translate="no">nq</code>), and the number of clusters to search (<code translate="no">nprobe</code>), increase.</p>
-<p>BIN_IVF_FLAT is the most basic BIN_IVF index, and the encoded data stored in each unit is consistent with the original data.</p>
+<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Dieser Index ist genau derselbe wie IVF_FLAT, außer dass er nur für binäre Einbettungen verwendet werden kann.</p>
+<p>BIN_IVF_FLAT unterteilt die Vektordaten in <code translate="no">nlist</code> Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Ziel-Eingangsvektor und dem Zentrum jedes Clusters. Abhängig von der Anzahl der Cluster, die das System abfragt (<code translate="no">nprobe</code>), werden die Ergebnisse der Ähnlichkeitssuche nur auf der Grundlage von Vergleichen zwischen der Zieleingabe und den Vektoren in den ähnlichsten Clustern zurückgegeben, was die Abfragezeit drastisch reduziert.</p>
+<p>Durch die Anpassung von <code translate="no">nprobe</code> kann ein ideales Gleichgewicht zwischen Genauigkeit und Geschwindigkeit für ein bestimmtes Szenario gefunden werden. Die Abfragezeit steigt stark an, wenn sowohl die Anzahl der Zieleingangsvektoren (<code translate="no">nq</code>) als auch die Anzahl der zu durchsuchenden Cluster (<code translate="no">nprobe</code>) zunimmt.</p>
+<p>BIN_IVF_FLAT ist der einfachste BIN_IVF-Index, und die in jeder Einheit gespeicherten kodierten Daten stimmen mit den Originaldaten überein.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>Anzahl der Cluster-Einheiten</td><td>[1, 65536]</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <ul>
-<li><p>Common search</p>
+<li><p>Gemeinsame Suche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Number of units to query</td><td>[1, nlist]</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>Anzahl der abzufragenden Einheiten</td><td>[1, nlist]</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>Range search</p>
+<li><p>Bereichssuche</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximum number of buckets not returning any search results.<br/>This is a range-search parameter and terminates the search process whilst the number of consecutive empty buckets reaches the specified value.<br/>Increasing this value can improve recall rate at the cost of increased search time.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -587,30 +583,30 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </ul>
 </div>
 <div class="filter-sparse">
-<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX</h3><p>Each dimension maintains a list of vectors that have a non-zero value at that dimension. During search, Milvus iterates through each dimension of the query vector and computes scores for vectors that have non-zero values in those dimensions.</p>
+<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX</h3><p>Für jede Dimension wird eine Liste von Vektoren geführt, die in dieser Dimension einen Wert ungleich Null haben. Während der Suche iteriert Milvus durch jede Dimension des Abfragevektors und berechnet die Punktzahlen für Vektoren, die in diesen Dimensionen Werte ungleich Null haben.</p>
 <ul>
-<li><p>Index building parameters</p>
+<li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>The algorithm used for building and querying the index. For details, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
-<tr><td><code translate="no">bm25_k1</code></td><td>Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking.</td><td>[1.2, 2.0]</td></tr>
-<tr><td><code translate="no">bm25_b</code></td><td>Controls the extent to which document length is normalized. Defaults to 0.75.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>Der für den Aufbau und die Abfrage des Index verwendete Algorithmus. Details finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (Standard), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>Steuert die Sättigung der Termhäufigkeit. Höhere Werte erhöhen die Bedeutung der Termhäufigkeit in der Dokumentenbewertung.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>Steuert das Ausmaß, in dem die Dokumentlänge normalisiert wird. Der Standardwert ist 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
-<p>The <code translate="no">drop_ratio_build</code> parameter is deprecated since Milvus v2.5.4, which can still be accepted during index building, but will no longer have actual effect on the index.</p>
+<p>Der Parameter <code translate="no">drop_ratio_build</code> ist seit Milvus v2.5.4 veraltet. Er kann immer noch bei der Indexerstellung akzeptiert werden, hat aber keine Auswirkungen mehr auf den Index.</p>
   </div>
 </li>
-<li><p>Search parameters</p>
+<li><p>Suchparameter</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for <code translate="no">drop_ratio_search</code>, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Suchvorgangs ausgeschlossen werden. Diese Option ermöglicht eine Feinabstimmung des Suchprozesses, indem sie das Verhältnis der kleinsten Werte im Abfragevektor angibt, die ignoriert werden sollen. Sie hilft, ein Gleichgewicht zwischen Suchgenauigkeit und Leistung herzustellen. Je kleiner der Wert für <code translate="no">drop_ratio_search</code> eingestellt wird, desto weniger tragen diese kleinen Werte zur endgültigen Bewertung bei. Durch das Ignorieren einiger kleiner Werte kann die Suchleistung bei minimalen Auswirkungen auf die Genauigkeit verbessert werden.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>
@@ -632,17 +628,14 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h2><p><details>
-<summary><font color="#4fc4f9">What is the difference between FLAT index and IVF_FLAT index?</font></summary></p>
-<p>IVF_FLAT index divides a vector space into <code translate="no">nlist</code> clusters. If you keep the default value of <code translate="no">nlist</code> as 16384, Milvus compares the distances between the target vector and the centers of all 16384 clusters to get <code translate="no">nprobe</code> nearest clusters. Then Milvus compares the distances between the target vector and the vectors in the selected clusters to get the nearest vectors. Unlike IVF_FLAT, FLAT directly compares the distances between the target vector and each and every vector.
-</p>
+<summary><font color="#4fc4f9">Was ist der Unterschied zwischen dem FLAT-Index und dem IVF_FLAT-Index?</font></summary></p>
+<p>Der IVF_FLAT-Index unterteilt einen Vektorraum in <code translate="no">nlist</code> -Cluster. Wenn Sie den Standardwert von <code translate="no">nlist</code> mit 16384 beibehalten, vergleicht Milvus die Abstände zwischen dem Zielvektor und den Zentren aller 16384 Cluster, um <code translate="no">nprobe</code> nächstgelegene Cluster zu erhalten. Anschließend vergleicht Milvus die Abstände zwischen dem Zielvektor und den Vektoren in den ausgewählten Clustern, um die nächstgelegenen Vektoren zu ermitteln. Im Gegensatz zu IVF_FLAT vergleicht FLAT direkt die Abstände zwischen dem Zielvektor und jedem einzelnen Vektor.</p>
 <p>
-Therefore, when the total number of vectors approximately equals <code translate="no">nlist</code>, IVF_FLAT and FLAT has little difference in the way of calculation required and search performance. But as the number of vectors grows to two times, three times, or n times of <code translate="no">nlist</code>, IVF_FLAT index begins to show increasingly greater advantages.
-</p>
+Wenn die Gesamtzahl der Vektoren ungefähr <code translate="no">nlist</code> beträgt, unterscheiden sich IVF_FLAT und FLAT daher kaum in der Art der erforderlichen Berechnungen und der Suchleistung. Aber wenn die Anzahl der Vektoren auf das Zwei-, Drei- oder n-fache von <code translate="no">nlist</code> ansteigt, beginnt der IVF_FLAT-Index immer größere Vorteile zu zeigen.</p>
 <p>
-See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">How to Choose an Index in Milvus</a> for more information.
-</p>
+Weitere Informationen finden Sie unter <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">Wie man einen Index in Milvus auswählt</a>.</p>
 </details>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -658,5 +651,5 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn more about the <a href="/docs/metric.md">Similarity Metrics</a> supported in Milvus.</li>
+<li>Erfahren Sie mehr über die in Milvus unterstützten <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a>.</li>
 </ul>

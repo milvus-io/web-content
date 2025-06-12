@@ -2,9 +2,9 @@
 id: configure_metastore.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure metastore for Milvus.
+summary: 'Erfahren Sie, wie Sie den Metaspeicher für Milvus konfigurieren.'
 ---
-<h1 id="metastore-related-Configurations" class="common-anchor-header">metastore-related Configurations<button data-href="#metastore-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="metastore-related-Configurations" class="common-anchor-header">metastore-bezogene Konfigurationen<button data-href="#metastore-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure metastore for Milvus.
     </button></h2><table id="metastore.type">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Default value: etcd, Valid values: [etcd, tikv]      </td>
+      <td>        Standardwert: etcd, Gültige Werte: [etcd, tikv]     </td>
       <td>etcd</td>
     </tr>
   </tbody>
@@ -66,13 +66,13 @@ summary: Learn how to configure metastore for Milvus.
     </button></h2><table id="metastore.snapshot.ttl">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        snapshot ttl in seconds      </td>
+      <td>        snapshot ttl in Sekunden      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure metastore for Milvus.
     </button></h2><table id="metastore.snapshot.reserveTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        snapshot reserve time in seconds      </td>
+      <td>        Snapshot-Reservezeit in Sekunden      </td>
       <td>3600</td>
     </tr>
   </tbody>

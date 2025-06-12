@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ein Index ist eine zusätzliche Struktur, die über den Daten aufgebaut wird. Seine interne Struktur hängt von dem verwendeten Algorithmus für die ungefähre Suche nach dem nächsten Nachbarn ab. Ein Index beschleunigt die Suche, verursacht aber zusätzliche Vorverarbeitungszeit, Speicherplatz und RAM während der Suche. Außerdem wird durch die Verwendung eines Indexes in der Regel die Wiederfindungsrate gesenkt (auch wenn der Effekt vernachlässigbar ist, ist er dennoch von Bedeutung). In diesem Artikel wird daher erläutert, wie die Kosten für die Verwendung eines Indexes minimiert und gleichzeitig der Nutzen maximiert werden kann.</p>
+    </button></h1><p>Ein Index ist eine zusätzliche Struktur, die über den Daten aufgebaut wird. Seine interne Struktur hängt von dem verwendeten Algorithmus für die ungefähre Suche nach dem nächsten Nachbarn ab. Ein Index beschleunigt die Suche, verursacht aber zusätzliche Vorverarbeitungszeit, Speicherplatz und RAM während der Suche. Außerdem wird durch die Verwendung eines Indexes in der Regel die Wiederfindungsrate gesenkt (obwohl der Effekt vernachlässigbar ist, ist er dennoch von Bedeutung). In diesem Artikel wird daher erläutert, wie die Kosten für die Verwendung eines Indexes minimiert und gleichzeitig der Nutzen maximiert werden kann.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,7 +113,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomie des Vektorindex</span> </span></p>
-<p>Während der Indexerstellung kombiniert Milvus die gewählte Datenstruktur und die Quantisierungsmethode, um eine optimale <strong>Expansionsrate</strong> zu bestimmen. Zum Zeitpunkt der Abfrage ruft das System <code translate="no">topK × expansion rate</code> Kandidatenvektoren ab, wendet den Refiner an, um die Abstände mit höherer Genauigkeit neu zu berechnen, und gibt schließlich die genauesten Ergebnisse zurück <code translate="no">topK</code>. Dieser hybride Ansatz stellt ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit her, indem er die ressourcenintensive Verfeinerung auf eine gefilterte Teilmenge von Kandidaten beschränkt.</p>
+<p>Während der Indexerstellung kombiniert Milvus die gewählte Datenstruktur und die Quantisierungsmethode, um eine optimale <strong>Expansionsrate</strong> zu ermitteln. Zum Zeitpunkt der Abfrage ruft das System <code translate="no">topK × expansion rate</code> Kandidatenvektoren ab, wendet den Refiner an, um die Abstände mit höherer Genauigkeit neu zu berechnen, und gibt schließlich die genauesten Ergebnisse zurück <code translate="no">topK</code>. Dieser hybride Ansatz stellt ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit her, indem er die ressourcenintensive Verfeinerung auf eine gefilterte Teilmenge von Kandidaten beschränkt.</p>
 <h3 id="Data-structure" class="common-anchor-header">Datenstruktur</h3><p>Die Datenstruktur bildet die grundlegende Schicht des Indexes. Übliche Typen sind:</p>
 <ul>
 <li><p><strong>Invertierte Datei (IVF)</strong></p>
@@ -131,7 +131,7 @@ summary: >-
 <h3 id="Refiner" class="common-anchor-header">Verfeinerungsprogramm</h3><p>Quantisierung ist von Natur aus verlustbehaftet. Um die Wiederfindungsrate aufrechtzuerhalten, produziert die Quantisierung durchweg mehr Top-K-Kandidaten als nötig, so dass die Verfeinerer eine höhere Präzision verwenden können, um die Top-K-Ergebnisse aus diesen Kandidaten weiter auszuwählen, was die Wiederfindungsrate erhöht.</p>
 <p>Der FP32-Verfeinerer bearbeitet beispielsweise die von der Quantisierung zurückgegebenen Suchergebniskandidaten, indem er die Abstände unter Verwendung der FP32-Präzision anstelle der quantisierten Werte neu berechnet.</p>
 <p>Dies ist von entscheidender Bedeutung für Anwendungen, bei denen ein Kompromiss zwischen Sucheffizienz und Präzision erforderlich ist, wie z. B. bei der semantischen Suche oder bei Empfehlungssystemen, bei denen geringfügige Abstandsabweichungen die Ergebnisqualität erheblich beeinträchtigen.</p>
-<h3 id="Summary" class="common-anchor-header">Zusammenfassung</h3><p>Diese mehrstufige Architektur - grobe Filterung über Datenstrukturen, effiziente Berechnung durch Quantisierung und Präzisionsabstimmung durch Verfeinerung - ermöglicht Milvus eine adaptive Optimierung des Kompromisses zwischen Genauigkeit und Leistung.</p>
+<h3 id="Summary" class="common-anchor-header">Zusammenfassung</h3><p>Diese mehrstufige Architektur - grobe Filterung über Datenstrukturen, effiziente Berechnung durch Quantisierung und Präzisionsabstimmung über Verfeinerung - ermöglicht Milvus eine adaptive Optimierung des Kompromisses zwischen Genauigkeit und Leistung.</p>
 <h2 id="Performance-trade-offs" class="common-anchor-header">Leistungsabwägungen<button data-href="#Performance-trade-offs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,7 +174,7 @@ summary: >-
 </div>
 <h3 id="Performance" class="common-anchor-header">Leistung</h3><p>Die Leistung einer Suche bezieht sich in der Regel auf das Top-K, das sich auf die Anzahl der Datensätze bezieht, die die Suche zurückgibt. Wenn es um die Leistung geht, ist Folgendes zu beachten:</p>
 <ul>
-<li><p>Bei einer Suche mit einem kleinen Top-K (z. B. 2.000), die eine hohe Recall-Rate erfordert, sind graphbasierte Indextypen besser als IVF-Varianten.</p></li>
+<li><p>Bei einer Suche mit einem kleinen Top-K (z.B. 2.000), die eine hohe Recall-Rate erfordert, sind graphbasierte Indextypen besser als IVF-Varianten.</p></li>
 <li><p>Bei einer Suche mit einem großen Top-K (im Vergleich zur Gesamtzahl der Vektoreinbettungen) sind IVF-Varianten die bessere Wahl als graphbasierte Indextypen.</p></li>
 <li><p>Für eine Suche mit einem mittleren Top-K und einem hohen Filterverhältnis sind IVF-Varianten die bessere Wahl.</p></li>
 </ul>
@@ -203,7 +203,7 @@ summary: >-
    <tr>
      <td><p>Hohes Filterverhältnis (&gt;95%)</p></td>
      <td><p>Brute-Force (FLAT)</p></td>
-     <td><p>Vermeidet Index-Overhead für kleine Kandidatenmengen.</p></td>
+     <td><p>Vermeidet Index-Overhead für kleine Kandidatengruppen.</p></td>
    </tr>
    <tr>
      <td><p>Große <code translate="no">k</code> (≥1% des Datensatzes)</p></td>
@@ -247,7 +247,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Berechnen Sie die durch die Quantisierung verursachte Kompression.</strong></p>
-<p>IVF-Varianten verwenden in der Regel PQ und SQ8, und der Speicherbedarf kann wie folgt geschätzt werden:</p>
+<p>IVF-Varianten verwenden in der Regel PQ und SQ8, und der Speicherverbrauch kann wie folgt geschätzt werden:</p>
 <ul>
 <li><p>Verwendung von PQ mit 8 Unterquantisierern</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8.0 MB
@@ -305,7 +305,7 @@ summary: >-
 <p>Die Quantisierung reduziert die Vektorgröße. Beispielsweise führt die Verwendung von PQ mit 8 Unterquantisierern (8 Byte pro Vektor) zu einer drastischen Kompression. Der von den komprimierten Vektoreinbettungen verbrauchte Speicher kann wie folgt berechnet werden:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
-<p>Im Vergleich zu den unkomprimierten Vektoreinbettungen wird eine 64-fache Komprimierungsrate erreicht, und der vom Index-Typ <strong>HNSWPQ</strong> verwendete Gesamtspeicher beträgt <strong>128 MB (Graph) + 8 MB (komprimierter Vektor) = 136 MB</strong>.</p></li>
+<p>Im Vergleich zu den unkomprimierten Vektoreinbettungen wird eine 64-fache Komprimierungsrate erreicht, und der vom <strong>HNSWPQ-Indextyp</strong> verwendete Gesamtspeicher beträgt <strong>128 MB (Graph) + 8 MB (komprimierter Vektor) = 136 MB</strong>.</p></li>
 <li><p><strong>Berechnen Sie den Verfeinerungs-Overhead.</strong></p>
 <p>Bei der Verfeinerung, z. B. bei der Neueinordnung mit Rohvektoren, werden vorübergehend hochpräzise Daten in den Speicher geladen. Für eine Suche, die die 10 besten Ergebnisse mit einer Expansionsrate von 5 abruft, kann der Verfeinerungs-Overhead wie folgt geschätzt werden:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
@@ -316,4 +316,4 @@ summary: >-
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN ist ein auf einem Vamana-Graphen basierender Index, der Datenpunkte für eine effiziente Navigation während der Suche miteinander verbindet und gleichzeitig PQ anwendet, um die Größe der Vektoren zu reduzieren und eine schnelle Berechnung des ungefähren Abstands zwischen Vektoren zu ermöglichen.</p>
 <p>Der Vamana-Graph wird auf der Festplatte gespeichert, so dass DiskANN große Datensätze verarbeiten kann, die andernfalls nicht in den Speicher passen würden. Dies ist besonders nützlich für Datensätze mit Milliarden von Punkten.</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">Speicherabbildende Dateien (mmap)</h4><p>Memory-Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, so dass Milvus Indizes und Daten sowohl im Speicher als auch auf den Festplatten speichern kann. Dieser Ansatz trägt zur Optimierung von E/A-Vorgängen bei, indem er den Overhead von E/A-Aufrufen auf der Grundlage der Zugriffshäufigkeit reduziert und so die Speicherkapazität für Sammlungen erweitert, ohne die Suchleistung wesentlich zu beeinträchtigen.</p>
-<p>Insbesondere können Sie Milvus so konfigurieren, dass die Rohdaten in bestimmten Feldern im Speicher abgebildet werden, anstatt sie vollständig in den Speicher zu laden. Auf diese Weise erhalten Sie direkten Speicherzugriff auf die Felder, ohne sich über Speicherprobleme Gedanken machen zu müssen, und können die Kapazität der Sammlung erweitern.</p>
+<p>Insbesondere können Sie Milvus so konfigurieren, dass die Rohdaten in bestimmten Feldern im Speicher abgebildet werden, anstatt sie vollständig in den Speicher zu laden. Auf diese Weise können Sie direkten Speicherzugriff auf die Felder erhalten, ohne sich über Speicherprobleme Gedanken machen zu müssen, und die Kapazität der Sammlung erweitern.</p>

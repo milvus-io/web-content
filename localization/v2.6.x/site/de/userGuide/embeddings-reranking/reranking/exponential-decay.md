@@ -6,7 +6,7 @@ summary: >-
   von einem langen Schwanz in Ihren Suchergebnissen. Ähnlich wie bei einem
   Nachrichtenzyklus, bei dem die Relevanz zunächst rapide abnimmt, einige
   Meldungen aber im Laufe der Zeit ihre Bedeutung behalten, werden durch den
-  exponentiellen Verfall Artikel, die knapp jenseits Ihres idealen Bereichs
+  exponentiellen Verfall Artikel, die knapp außerhalb Ihres idealen Bereichs
   liegen, stark benachteiligt, während weiter entfernte Artikel weiterhin
   auffindbar bleiben. Dieser Ansatz ist ideal, wenn Sie der Nähe oder Aktualität
   einen hohen Stellenwert einräumen, aber weiter entfernte Optionen nicht

@@ -98,7 +98,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>Einsatz des Specht-Speichermodus</span> </span></p>
 <h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Optimiert für niedrige Latenzzeiten und hohe Ausfallsicherheit</h3><p>Der QuorumBuffer-Modus wurde für latenzempfindliche, hochfrequente Lese-/Schreib-Workloads entwickelt, die sowohl Reaktionsfähigkeit in Echtzeit als auch hohe Fehlertoleranz erfordern. In diesem Modus fungiert Woodpecker als Hochgeschwindigkeits-Schreibpuffer mit drei Quorum-Schreibvorgängen, die eine starke Konsistenz und hohe Verfügbarkeit gewährleisten.</p>
-<p>Ein Schreibvorgang gilt als erfolgreich, wenn er auf mindestens zwei der drei Knoten repliziert wurde, was in der Regel innerhalb eines einstelligen Millisekundenbereichs geschieht. Anschließend werden die Daten asynchron in den Cloud-Objektspeicher übertragen, um eine langfristige Haltbarkeit zu gewährleisten. Diese Architektur minimiert den Knotenstatus, macht große lokale Festplattenvolumina überflüssig und vermeidet komplexe Anti-Entropie-Reparaturen, wie sie in herkömmlichen Quorum-basierten Systemen häufig erforderlich sind.</p>
+<p>Ein Schreibvorgang gilt als erfolgreich, wenn er auf mindestens zwei der drei Knoten repliziert wurde, was in der Regel innerhalb eines einstelligen Millisekundenbereichs geschieht. Anschließend werden die Daten asynchron in den Cloud-Objektspeicher übertragen, um eine langfristige Haltbarkeit zu gewährleisten. Diese Architektur minimiert den Knotenzustand, macht große lokale Festplattenvolumina überflüssig und vermeidet komplexe Anti-Entropie-Reparaturen, wie sie in herkömmlichen Quorum-basierten Systemen häufig erforderlich sind.</p>
 <p>Das Ergebnis ist eine schlanke, robuste WAL-Schicht, die sich ideal für geschäftskritische Produktionsumgebungen eignet, in denen Konsistenz, Verfügbarkeit und schnelle Wiederherstellung unerlässlich sind.</p>
 <p>
   
@@ -161,7 +161,7 @@ summary: >-
 <h3 id="Simplified-infrastructure-management" class="common-anchor-header">Vereinfachte Verwaltung der Infrastruktur</h3><ul>
 <li><strong>Keine lokale Speicherverwaltung:</strong> Die Verwaltung von Festplattenvolumes, RAID oder Festplattenausfällen entfällt.</li>
 <li><strong>Geringere Hardware-Abhängigkeit:</strong> Hardwarekonfiguration und -überwachung entfallen; Haltbarkeit und Verfügbarkeit werden vom Cloud Object Storage übernommen.</li>
-<li><strong>Vereinfachte Kapazitätsplanung:</strong> Der Speicher skaliert automatisch mit Cloud Object Storage, so dass keine manuellen Prognosen mehr erforderlich sind.</li>
+<li><strong>Vereinfachte Kapazitätsplanung:</strong> Mit Cloud Object Storage skaliert der Speicher automatisch, so dass keine manuellen Prognosen mehr erforderlich sind.</li>
 </ul>
 <h3 id="Simplified-deployment" class="common-anchor-header">Vereinfachte Bereitstellung</h3><ul>
 <li><strong>MemoryBuffer-Modus:</strong> Verwendet nur minimale Ressourcen und ist in den Cloud-Speicher integriert, ideal für Entwicklung und Produktion in kleinem Maßstab.</li>

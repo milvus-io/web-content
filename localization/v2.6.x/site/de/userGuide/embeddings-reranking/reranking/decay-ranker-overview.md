@@ -88,7 +88,7 @@ beta: Milvus 2.6.x
 <p>Im Falle einer hybriden Suche (Kombination mehrerer Vektorfelder) nimmt Milvus die maximale normalisierte Ähnlichkeitsbewertung unter den Suchanfragen:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn beispielsweise eine Forschungsarbeit bei einer hybriden Suche 0,82 bei der Vektorähnlichkeit und 0,91 beim BM25-basierten Text-Retrieval erreicht, verwendet Milvus 0,91 als Basisähnlichkeitswert, bevor der Decay-Faktor angewendet wird.</p>
+<p>Wenn beispielsweise eine Forschungsarbeit bei einer hybriden Suche 0,82 bei der Vektorähnlichkeit und 0,91 beim BM25-basierten Text-Retrieval erzielt, verwendet Milvus 0,91 als Basisähnlichkeitswert, bevor der Decay-Faktor angewendet wird.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Decay-Ranking in Aktion</h3><p>Schauen wir uns das Decay-Ranking in einem praktischen Szenario an - bei der Suche nach <strong>"AI-Forschungsarbeiten"</strong> mit zeitbasiertem Decay:</p>
 <div class="alert note">
 <p>In diesem Beispiel spiegeln die Decay-Scores wider, wie die Relevanz mit der Zeit abnimmt - neuere Arbeiten erhalten Scores, die näher an 1,0 liegen, ältere Arbeiten erhalten niedrigere Scores. Diese Werte werden mit Hilfe eines speziellen Zerfalls-Rankers berechnet. Weitere Informationen finden Sie unter <a href="/docs/de/decay-ranker-overview.md#Choose-the-right-decay-ranker">Wählen Sie den richtigen Decay Ranker</a>.</p>
@@ -161,7 +161,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus bietet verschiedene Decay Ranker an - <code translate="no">gauss</code>, <code translate="no">exp</code>, <code translate="no">linear</code>, die jeweils für spezifische Anwendungsfälle entwickelt wurden:</p>
+    </button></h2><p>Milvus bietet verschiedene Decay Ranker an - <code translate="no">gauss</code>, <code translate="no">exp</code>, <code translate="no">linear</code>, die jeweils für spezielle Anwendungsfälle entwickelt wurden:</p>
 <table>
    <tr>
      <th><p>Abkling-Rangierer</p></th>
@@ -259,7 +259,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Numerisches Feld für die Berechnung der Abklingrate. Legt fest, welches Datenattribut für die Berechnung des Verfalls verwendet wird (z. B. Zeitstempel für zeitbasierten Verfall, Koordinaten für ortsbezogenen Verfall). 
+     <td><p>Numerisches Feld für die Berechnung der Abklingrate. Bestimmt, welches Datenattribut für die Berechnung des Verfalls verwendet wird (z. B. Zeitstempel für zeitbasierten Verfall, Koordinaten für ortsbezogenen Verfall). 
  Muss ein Feld in Ihrer Sammlung sein, das relevante numerische Werte enthält. Unterstützt INT8/16/32/64, FLOAT, DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
@@ -272,7 +272,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Gibt die zu verwendende Ranking-Methode an. Muss auf <code translate="no">"decay"</code> gesetzt werden, um die Funktion "decay ranking" zu aktivieren.</p></td>
+     <td><p>Gibt die zu verwendende Ranking-Methode an. Muss auf <code translate="no">"decay"</code> gesetzt werden, um die Decay-Ranking-Funktionalität zu aktivieren.</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
