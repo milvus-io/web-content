@@ -61,7 +61,7 @@ summary: >-
 <p>Isso garante que todos os valores sejam mapeados proporcionalmente dentro de um intervalo padronizado, preparando-os para a compactação.</p></li>
 <li><p><strong>Compressão de 8 bits:</strong> Multiplique o valor normalizado por 255 (o valor máximo para um número inteiro de 8 bits) e arredonde o resultado para o número inteiro mais próximo. Isso comprime efetivamente cada valor em uma representação de 8 bits.</p></li>
 </ol>
-<p>Suponha que você tenha um valor de dimensão de 1,2, com um valor mínimo de -1,7 e um valor máximo de 2,3. A figura seguinte mostra como o SQ8 é aplicado para converter um valor float32 num inteiro int8.</p>
+<p>Suponha que você tenha um valor de dimensão de 1,2, com um valor mínimo de -1,7 e um valor máximo de 2,3. A figura seguinte mostra como o SQ8 é aplicado para converter um valor float32 num número inteiro int8.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-sq8.png" alt="Ivf Sq8" class="doc-image" id="ivf-sq8" />

@@ -107,7 +107,7 @@ res = MilvusClient.search(
 <ul>
 <li><p><code translate="no">params</code>: Options de configuration supplémentaires pour la recherche sur l'index.</p>
 <ul>
-<li><code translate="no">drop_ratio_search</code>: Permet d'affiner les performances de la recherche en spécifiant la proportion de petites valeurs vectorielles à ignorer au cours du processus de recherche. Par exemple, avec <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, les 20 % de valeurs les plus petites du vecteur de la requête seront ignorées lors de la recherche.</li>
+<li><code translate="no">drop_ratio_search</code>: Permet d'affiner les performances de la recherche en spécifiant la proportion de petites valeurs vectorielles à ignorer pendant le processus de recherche. Par exemple, avec <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, les 20 % de valeurs les plus petites du vecteur de la requête seront ignorées lors de la recherche.</li>
 </ul>
 <p>Pour en savoir plus sur les paramètres de recherche disponibles pour l'index <code translate="no">SPARSE_INVERTED_INDEX</code>, reportez-vous à <a href="/docs/fr/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Paramètres de recherche spécifiques à l'index</a>.</p></li>
 </ul>

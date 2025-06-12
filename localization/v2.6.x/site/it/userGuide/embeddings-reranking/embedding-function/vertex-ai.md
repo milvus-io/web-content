@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <li><p>text-embedding-005 (ultimo modello di incorporamento del testo)</p></li>
 <li><p>text-multilingual-embedding-002 (ultimo modello di incorporazione del testo multilingue).</p></li>
 </ul>
-<p>Per i dettagli, consultare il <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">riferimento ai modelli di incorporamento del testo di Vertex AI</a>.</p>
+<p>Per maggiori dettagli, consultare il <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">riferimento ai modelli di incorporamento del testo di Vertex AI</a>.</p>
 <h2 id="Vertex-AI-deployment" class="common-anchor-header">Distribuzione di Vertex AI<button data-href="#Vertex-AI-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

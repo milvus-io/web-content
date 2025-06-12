@@ -117,6 +117,6 @@ client.create_index(​
 <ul>
 <li><p>一般来说，当字段的 Cardinality 小于 500 时，位图索引最为有效。</p></li>
 <li><p>当 Cardinality 超过这个临界值时，位图索引的性能优势就会减弱，存储开销也会变得很大。</p></li>
-<li><p>对于高 Cardinality 字段，可根据具体的使用情况和查询要求，考虑使用其他索引技术，如反转索引。</p></li>
+<li><p>对于高 Cardinality 字段，可根据具体使用情况和查询要求，考虑使用其他索引技术，如倒排索引。</p></li>
 </ul></li>
 </ul>

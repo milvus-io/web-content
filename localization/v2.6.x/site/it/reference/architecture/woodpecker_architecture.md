@@ -73,7 +73,7 @@ summary: >-
 <ul>
 <li><strong>Client</strong>: Livello di interfaccia per l'emissione di richieste di lettura e scrittura</li>
 <li><strong>LogStore</strong>: Gestisce il buffering di scrittura ad alta velocità, i caricamenti asincroni sullo storage e la compattazione dei registri</li>
-<li><strong>Backend di archiviazione</strong>: Supporta servizi di storage scalabili e a basso costo, come S3, GCS e file system come EFS</li>
+<li><strong>Backend di archiviazione</strong>: Supporta servizi di archiviazione scalabili e a basso costo come S3, GCS e file system come EFS</li>
 <li><strong>Etcd</strong>: Memorizza i metadati e coordina lo stato dei log tra i nodi distribuiti.</li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">Modalità di distribuzione<button data-href="#Deployment-modes" class="anchor-icon" translate="no">

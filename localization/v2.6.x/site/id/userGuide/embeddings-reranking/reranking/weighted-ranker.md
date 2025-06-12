@@ -4,12 +4,12 @@ title: Pemeringkat Tertimbang
 summary: >-
   Weighted Ranker secara cerdas menggabungkan dan memprioritaskan hasil dari
   beberapa jalur pencarian dengan memberikan bobot kepentingan yang berbeda
-  untuk masing-masing. Mirip dengan cara koki yang terampil menyeimbangkan
-  berbagai bahan untuk menciptakan hidangan yang sempurna, Weighted Ranker
-  menyeimbangkan hasil pencarian yang berbeda untuk memberikan hasil gabungan
-  yang paling relevan. Pendekatan ini sangat ideal ketika mencari di beberapa
-  bidang vektor atau modalitas di mana bidang tertentu harus berkontribusi lebih
-  signifikan terhadap peringkat akhir daripada yang lain.
+  untuk masing-masing. Mirip dengan bagaimana seorang koki yang terampil
+  menyeimbangkan berbagai bahan untuk menciptakan hidangan yang sempurna,
+  Weighted Ranker menyeimbangkan hasil pencarian yang berbeda untuk memberikan
+  hasil gabungan yang paling relevan. Pendekatan ini sangat ideal ketika mencari
+  di beberapa bidang vektor atau modalitas di mana bidang tertentu harus
+  berkontribusi lebih signifikan terhadap peringkat akhir daripada yang lain.
 ---
 <h1 id="Weighted-Ranker" class="common-anchor-header">Pemeringkat Tertimbang<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"

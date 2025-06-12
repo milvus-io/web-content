@@ -103,7 +103,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Depois de implantar suas credenciais do Vertex AI, você precisará configurar a função de incorporação. O Milvus oferece suporte a vários métodos para configurar credenciais de autenticação para o Vertex AI, aplicados na seguinte ordem de precedência:</p>
 <ul>
-<li><p><strong>Ficheiro de configuração do Milvus (milvus.yaml)</strong> - Prioridade mais elevada</p></li>
+<li><p><strong>Ficheiro de configuração do Milvus (milvus.yaml)</strong> - Prioridade máxima</p></li>
 <li><p><strong>Variáveis de ambiente</strong> - prioridade mais baixa</p></li>
 </ul>
 <p><strong>Arquivo de configuração do Milvus (milvus.yaml)</strong></p>

@@ -2,7 +2,7 @@
 id: gpu-brute-force.md
 title: GPU_BRUTE_FORCE
 summary: >-
-  GPU環境に特化したGPU_BRUTE_FORCEインデックスは、妥協のない精度が不可欠なシナリオのために設計されています。GPU_BRUTE_FORCEインデックスは、各クエリをデータセット内のすべてのベクトルと徹底的に比較し、一致する可能性のあるベクトルが見落とされないようにすることで、再現率1を保証します。GPUアクセラレーションを活用したGPU_BRUTE_FORCEは、ベクトル類似検索に絶対的な精度を要求するアプリケーションに適しています。
+  GPU環境に特化したGPU_BRUTE_FORCEインデックスは、妥協のない精度が不可欠なシナリオのために設計されています。GPU_BRUTE_FORCEインデックスは、各クエリをデータセット内のすべてのベクトルと徹底的に比較することで、リコール1を保証し、一致する可能性のあるベクトルが見落とされないようにします。GPUアクセラレーションを活用したGPU_BRUTE_FORCEは、ベクトル類似検索に絶対的な精度を要求するアプリケーションに適しています。
 ---
 <h1 id="GPUBRUTEFORCE" class="common-anchor-header">GPU_BRUTE_FORCE<button data-href="#GPUBRUTEFORCE" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +51,7 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>この設定では</p>
 <ul>
-<li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">GPU_BRUTE_FORCE</code> とします。</p></li>
+<li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では、<code translate="no">GPU_BRUTE_FORCE</code> とします。</p></li>
 <li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
 <li><p><code translate="no">params</code>:GPU_BRUTE_FORCE インデックスには追加のパラメータは必要ありません。</p></li>
 </ul>

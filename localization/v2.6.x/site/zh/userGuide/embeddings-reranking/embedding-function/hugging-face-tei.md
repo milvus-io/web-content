@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>Hugging Face<a href="https://huggingface.co/docs/text-embeddings-inference/en/index">文本嵌入推理（TEI）</a>是专为文本嵌入模型设计的高性能推理服务器。本指南介绍了如何将 Hugging Face TEI 与 Milvus 结合使用，以高效生成文本嵌入。</p>
-<p>TEI 可与 Hugging Face 中枢的许多文本嵌入模型配合使用，包括</p>
+<p>TEI 可与 Hugging Face Hub 的许多文本嵌入模型配合使用，包括</p>
 <ul>
 <li><p>BAAI/bge-* 系列</p></li>
 <li><p>Sentence-transformers/* 系列</p></li>
@@ -105,7 +105,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>部署 TEI 服务后，您需要在定义 TEI Embeddings 功能时提供其端点。在大多数情况下，不需要额外的配置，因为 TEI 在 Milvus 中是默认启用的。</p>
-<p>不过，如果您的 TEI 服务在部署时使用了 API 密钥验证 (<code translate="no">--api-key</code> flag)，则需要配置 Milvus 以使用此密钥：</p>
+<p>不过，如果您的 TEI 服务是使用 API 密钥验证（<code translate="no">--api-key</code> 标志）部署的，则需要配置 Milvus 以使用此密钥：</p>
 <ol>
 <li><p><strong>在<code translate="no">credential</code> 部分定义 API 密钥：</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>

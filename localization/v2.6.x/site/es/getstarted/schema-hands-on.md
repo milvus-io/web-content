@@ -57,7 +57,7 @@ summary: >-
 </ul></li>
 <li><p><strong>Métodos de búsqueda:</strong> Elija las técnicas de búsqueda apropiadas que se ajusten a los tipos de consultas que realizarán sus usuarios. Los distintos métodos sirven para diferentes propósitos y a menudo pueden combinarse para obtener resultados más potentes:</p>
 <ul>
-<li><p><strong>Búsqueda semántica</strong>: Utiliza la similitud de vectores densos para encontrar elementos con significado similar, ideal para datos no estructurados como texto o imágenes.</p></li>
+<li><p><strong>Búsqueda semántica</strong>: Utiliza la similitud vectorial densa para encontrar elementos con significado similar, ideal para datos no estructurados como texto o imágenes.</p></li>
 <li><p><strong>Búsqueda de texto completo</strong>: Complementa la búsqueda semántica con la concordancia de palabras clave.  La búsqueda de texto completo puede utilizar el análisis léxico para evitar dividir palabras largas en tokens fragmentados, captando los términos especiales durante la recuperación.</p></li>
 <li><p><strong>Filtrado de metadatos</strong>: Además de la búsqueda vectorial, aplica restricciones como intervalos de fechas, categorías o etiquetas.</p></li>
 </ul></li>

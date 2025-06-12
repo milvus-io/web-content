@@ -98,7 +98,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>implantação do modo de memória woodpecker</span> </span></p>
 <h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Optimizado para baixa latência e alta durabilidade</h3><p>O modo QuorumBuffer foi projetado para cargas de trabalho de leitura/gravação sensíveis à latência e de alta freqüência, que requerem capacidade de resposta em tempo real e forte tolerância a falhas. Nesse modo, o Woodpecker funciona como um buffer de gravação de alta velocidade com três réplicas de gravações de quorum, garantindo forte consistência e alta disponibilidade.</p>
-<p>Uma gravação é considerada bem-sucedida quando é replicada para pelo menos dois dos três nós, normalmente concluindo em milissegundos de um dígito, após o que os dados são descarregados de forma assíncrona no armazenamento de objetos na nuvem para durabilidade de longo prazo. Esta arquitetura minimiza o estado no nó, elimina a necessidade de grandes volumes de disco locais e evita reparações complexas de anti-entropia frequentemente necessárias nos sistemas tradicionais baseados em quorum.</p>
+<p>Uma gravação é considerada bem-sucedida quando é replicada para pelo menos dois dos três nós, normalmente concluindo em milissegundos de um dígito, após o que os dados são descarregados de forma assíncrona no armazenamento de objetos na nuvem para durabilidade de longo prazo. Esta arquitetura minimiza o estado no nó, elimina a necessidade de grandes volumes de disco locais e evita reparações complexas de anti-entropia frequentemente necessárias em sistemas tradicionais baseados em quorum.</p>
 <p>O resultado é uma camada WAL simplificada e robusta, ideal para ambientes de produção de missão crítica em que a consistência, a disponibilidade e a recuperação rápida são essenciais.</p>
 <p>
   
@@ -137,7 +137,7 @@ summary: >-
 </ul>
 <p>Notavelmente, o Woodpecker atingiu consistentemente 60-80% da taxa de transferência máxima possível para cada backend - um nível de eficiência excecional para middleware.</p>
 <h3 id="Key-performance-insights" class="common-anchor-header">Principais informações sobre desempenho</h3><ul>
-<li>Modo de sistema de arquivos local: O Woodpecker atingiu 450 MB/s - 3,5 vezes mais rápido que o Kafka e 4,2 vezes mais rápido que o Pulsar - com latência ultrabaixa de apenas 1,8 ms, o que o torna ideal para implantações de nó único de alto desempenho.</li>
+<li>Modo de sistema de arquivos local: O Woodpecker alcançou 450 MB/s - 3,5 vezes mais rápido que o Kafka e 4,2 vezes mais rápido que o Pulsar - com latência ultrabaixa de apenas 1,8 ms, o que o torna ideal para implantações de nó único de alto desempenho.</li>
 <li>Modo de armazenamento em nuvem (S3): Ao gravar diretamente no S3, o Woodpecker atingiu 750 MB/s (cerca de 68% do limite teórico do S3), 5,8 vezes mais rápido que o Kafka e 7 vezes mais rápido que o Pulsar. Embora a latência seja maior (166 ms), essa configuração fornece uma taxa de transferência excecional para cargas de trabalho orientadas por lote.</li>
 <li>Modo de armazenamento de objetos (MinIO): Mesmo com o MinIO, o Woodpecker atingiu 71 MB/s - cerca de 65% da capacidade do MinIO. Esse desempenho é comparável ao do Kafka e do Pulsar, mas com requisitos de recursos significativamente menores.</li>
 </ul>

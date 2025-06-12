@@ -84,7 +84,7 @@ summary: >-
     </button></h2><p>RRFRanker 策略的主要工作流程如下：</p>
 <ol>
 <li><p><strong>收集搜索排名</strong>：收集向量搜索各路径的结果排名（rank_1、rank_2）。</p></li>
-<li><p><strong>合并排名</strong>：根据公式转换各路径的排名（rank_rrf_1，rank_rrf_2）。</p>
+<li><p><strong>合并排名</strong>：根据计算公式转换各路径的排名（rank_rrf_1，rank_rrf_2）。</p>
 <p>计算公式中的<em>N</em> 代表检索次数，<em>ranki</em><em>(d</em> <em>)</em>是<em>第 i 个</em>检索器生成的文档<em>d</em>的排名位置，<em>k</em>是平滑参数，通常设置为 60。</p></li>
 <li><p><strong>汇总排名</strong>：根据综合排名对搜索结果重新排序，得出最终结果。</p></li>
 </ol>

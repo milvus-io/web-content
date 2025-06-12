@@ -59,7 +59,7 @@ index_params.add_index(
 <ul>
 <li><code translate="no">nlist</code>:データセットを分割するクラスタ数。</li>
 </ul>
-<p><code translate="no">BIN_IVF_FLAT</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/bin-ivf-flat.md#Index-building-params">インデックス構築パラメータ</a> を参照。</p></li>
+<p><code translate="no">BIN_IVF_FLAT</code> インデックスで利用可能な構築パラメータについては、<a href="/docs/ja/bin-ivf-flat.md#Index-building-params">インデックス構築パラメータ</a> を参照。</p></li>
 </ul>
 <p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
 <h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -116,7 +116,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/bin-ivf-flat.md#Index-building-params">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/bin-ivf-flat.md#Index-building-params">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>

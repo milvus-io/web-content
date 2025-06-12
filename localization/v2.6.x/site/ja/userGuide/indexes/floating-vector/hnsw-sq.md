@@ -170,7 +170,7 @@ res = MilvusClient.search(
      <td><p>各ノードがグラフ内で持つことのできる接続(またはエッジ)の最大数。 このパラメータはインデックスの構築と検索の両方に直接影響する。</p></td>
      <td><p><strong>型</strong>：整数<strong>：</strong>[2, 2048]</p>
 <p><strong>デフォルト値</strong>:<code translate="no">30</code> (ノードあたり最大 30 の送信エッジと 30 の受信エッジ)</p></td>
-     <td><p><code translate="no">M</code> を大きくすると、一般的に<strong>精度は高く</strong>なるが、<strong>メモリ・オーバーヘッドが増加</strong>し、<strong>インデックス構築と検索の両方が遅くなる</strong>。 次元性の高いデータセットや、高い再現性が重要な場合は、<code translate="no">M</code> を大きくすることを検討する。</p>
+     <td><p><code translate="no">M</code> を大きくすると、一般的に<strong>精度が高く</strong>なるが、<strong>メモリ・オーバーヘッドが増加</strong>し、<strong>インデックス構築と検索の両方が遅くなる</strong>。 次元性の高いデータセットや、高い再現性が重要な場合は、<code translate="no">M</code> を大きくすることを検討する。</p>
 <p>メモリ使用量と検索速度が最大の関心事である場合は、<code translate="no">M</code> を減らすことを検討する。</p>
 <p>ほとんどの場合、この範囲内の値を設定することを推奨する：[5, 100].</p></td>
    </tr>
@@ -180,7 +180,7 @@ res = MilvusClient.search(
      <td><p>インデックス構築時に接続を考慮する近隣候補の数。 より多くの候補が新しい要素ごとに評価されますが、 実際に確立される接続の最大数は<code translate="no">M</code> によって制限されます。</p></td>
      <td><p><strong>型</strong>：整数<strong>：</strong>[1,<em>int_max</em>] です。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">360</code></p></td>
-     <td><p>より多くの接続候補が探索されるため、<code translate="no">efConstruction</code> を大きくすると、<strong>通常より正確なインデックスが</strong>得られる。しかし、これは<strong>インデックス作成時間の延長と、</strong>作成中の<strong>メモリ使用量の増加にも</strong>つながります。 特にインデックス作成時間がそれほど重要でないシナリオでは、精度を向上させるために<code translate="no">efConstruction</code> を増加させることを検討してください。</p>
+     <td><p>より多くの接続候補が探索されるため、<code translate="no">efConstruction</code> を大きくすると、<strong>通常より正確なインデックスが</strong>得られる。しかし、これは<strong>インデックス作成時間の延長と、</strong>作成中の<strong>メモリ使用量の増加にも</strong>つながります。 特にインデックス作成時間がそれほど重要でないシナリオでは、精度を向上させるために<code translate="no">efConstruction</code> を増やすことを検討してください。</p>
 <p>リ ソ ース制約が懸念 さ れ る 場合には、<code translate="no">efConstruction</code> を減らして イ ンデ ッ ク ス作成を高速化す る こ と を検討 し て く だ さ い。</p>
 <p>ほとんどの場合、この範囲内の値を設定することを推奨します：[50, 500].</p></td>
    </tr>
@@ -204,7 +204,7 @@ res = MilvusClient.search(
      <td><p>検索時に絞り込みステップを適用するかどうかを制御するブーリアン・フラグ。refinementは、クエリベクタと候補の間の正確な距離を計算することによって、最初の結果を再ランク付けすることを含む。</p></td>
      <td><p><strong>タイプ</strong>：Boolean<strong>Range</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">false</code></p></td>
-     <td><p>高精度が必須で、検索時間が多少遅くても許容できる場合は、<code translate="no">true</code> に設定する。スピードを優先し、精度の多少の妥協が許容できる場合は<code translate="no">false</code> を使用する。</p></td>
+     <td><p>高い精度が必須で、検索時間が多少遅くても許容できる場合は、<code translate="no">true</code> に設定する。スピードを優先し、精度の多少の妥協が許容できる場合は<code translate="no">false</code> を使用する。</p></td>
    </tr>
    <tr>
      <td></td>

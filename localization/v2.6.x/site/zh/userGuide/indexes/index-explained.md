@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>索引是建立在数据之上的附加结构。其内部结构取决于所使用的近似近邻搜索算法。索引可以加快搜索速度，但在搜索过程中会产生额外的预处理时间、空间和 RAM。此外，使用索引通常会降低召回率（虽然影响可以忽略不计，但仍然很重要）。因此，本文将解释如何最大限度地减少使用索引的成本，同时最大限度地提高索引的效益。</p>
-<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概览<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -295,7 +295,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>当您使用 HNSW 对 100 万 128 维向量嵌入进行索引时，使用的总内存为<strong>128 MB（图形）+ 512 MB（向量）= 640 MB</strong>。</p></li>
 <li><p><strong>计算量化带来的压缩。</strong></p>
-<p>量化可以减小向量大小。例如，使用带有 8 个子量化器（每个向量 8 字节）的 PQ 会导致大幅压缩。压缩后的向量 Embeddings 所消耗的内存可计算如下：</p>
+<p>量化可以减小向量大小。例如，使用带有 8 个子量化器（每个向量 8 字节）的 PQ 会导致大幅压缩。压缩后的向量 Embeddings 所消耗的内存可以计算如下：</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
 <p>与原始向量嵌入相比，这实现了 64 倍的压缩率，<strong>HNSWPQ</strong>索引类型使用的总内存将为<strong>128 MB（图）+ 8 MB（压缩向量）= 136 MB</strong>。</p></li>
@@ -306,7 +306,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h3 id="Other-considerations" class="common-anchor-header">其他考虑因素</h3><p>IVF 和基于图的索引可通过量化优化内存使用，而内存映射文件（mmap）和 DiskANN 则可解决数据集超出可用随机存取内存（RAM）的情况。</p>
-<h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是一种基于 Vamana 图的索引，它将数据点连接起来，以便在搜索过程中高效导航，同时应用 PQ 来缩小向量的大小，并能快速计算向量之间的近似距离。</p>
+<h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是一种基于 Vamana 图的索引，它将数据点连接起来，以便在搜索过程中高效导航，同时应用 PQ 来减小向量的大小，并能快速计算向量之间的近似距离。</p>
 <p>Vamana 图存储在磁盘上，这使得 DiskANN 能够处理那些内存无法容纳的大型数据集。这对十亿点数据集尤其有用。</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">内存映射文件 (mmap)</h4><p>内存映射（Mmap）可实现对磁盘上大型文件的直接内存访问，从而允许 Milvus 在内存和硬盘中同时存储索引和数据。这种方法可根据访问频率减少 I/O 调用的开销，有助于优化 I/O 操作，从而在不对搜索性能造成重大影响的情况下扩大 Collections 的存储容量。</p>
-<p>具体来说，你可以配置 Milvus 对某些字段中的原始数据进行内存映射，而不是将它们完全加载到内存中。这样，你就可以获得对字段的直接内存访问，而不必担心内存问题，并扩展了 Collections 的容量。</p>
+<p>具体来说，你可以配置 Milvus 对某些字段中的原始数据进行内存映射，而不是将它们完全加载到内存中。这样，你就可以直接对字段进行内存访问，而不必担心内存问题，并扩展了 Collections 的容量。</p>

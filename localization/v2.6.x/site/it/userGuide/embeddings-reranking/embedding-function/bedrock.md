@@ -52,7 +52,7 @@ beta: Milvus 2.6.x
      <td><p>RAG, ricerca di documenti, reranking, classificazione, ecc.</p></td>
    </tr>
 </table>
-<p>Per maggiori dettagli, consultare i <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">modelli Amazon Titan Text Embeddings</a>.</p>
+<p>Per maggiori dettagli, consultare i <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html">modelli di Text Embeddings di Amazon Titan</a>.</p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurare le credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +91,7 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">secret_access_key:</span> <span class="hljs-string">&lt;YOUR_PROD_SECRET_ACCESS_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Mettere le credenziali qui le rende persistenti tra i vari riavvii e permette di cambiare le credenziali semplicemente cambiando un'etichetta.</p></li>
-<li><p><strong>Indicare a Milvus quale credenziale utilizzare per le chiamate di servizio</strong></p>
+<li><p><strong>Indicare a Milvus quale credenziale usare per le chiamate di servizio</strong></p>
 <p>Nello stesso file, si indica al provider Bedrock l'etichetta che si desidera utilizzare.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
@@ -153,7 +153,7 @@ beta: Milvus 2.6.x
 <li><p>Un campo scalare che memorizza i dati grezzi da incorporare.</p></li>
 <li><p>Un campo vettoriale riservato a memorizzare le incorporazioni vettoriali che la funzione genererà per il campo scalare.</p></li>
 </ul>
-<p>L'esempio seguente definisce uno schema con un campo scalare <code translate="no">&quot;document&quot;</code> per memorizzare i dati testuali e un campo vettoriale <code translate="no">&quot;dense&quot;</code> per memorizzare gli embeddings che saranno generati dal modulo Function. Ricordarsi di impostare la dimensione del vettore (<code translate="no">dim</code>) in modo che corrisponda all'output del modello di embedding scelto.</p>
+<p>L'esempio seguente definisce uno schema con un campo scalare <code translate="no">&quot;document&quot;</code> per memorizzare i dati testuali e un campo vettoriale <code translate="no">&quot;dense&quot;</code> per memorizzare le incorporazioni che saranno generate dal modulo Function. Ricordarsi di impostare la dimensione del vettore (<code translate="no">dim</code>) in modo che corrisponda all'output del modello di embedding scelto.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>

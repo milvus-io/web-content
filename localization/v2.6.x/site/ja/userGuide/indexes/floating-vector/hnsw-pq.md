@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_PQは</strong>、HNSW（Hierarchical Navigable Small World）グラフとPQ（Product Quantization）を活用し、サイズと精度のトレードオフを制御可能な高度なベクトルインデックス作成手法である。<a href="/docs/ja/hnsw-sq.md">HNSW_SQと</a>比較して、このインデックスタイプは、クエリ処理速度の低下とインデックス構築時間の延長はあるものの、同じ圧縮レベルでより高い想起率を実現している。</p>
+    </button></h1><p><strong>HNSW_PQは</strong>、HNSW（Hierarchical Navigable Small World）グラフとPQ（Product Quantization）を活用し、サイズと精度のトレードオフを制御可能な高度なベクトルインデックス作成手法を実現する。<a href="/docs/ja/hnsw-sq.md">HNSW_SQと</a>比較して、このインデックスタイプは、クエリ処理速度の低下とインデックス構築時間の延長はあるものの、同じ圧縮レベルでより高い想起率を実現している。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,12 +200,12 @@ res = MilvusClient.search(
      <td><p>検索時に絞り込みステップを適用するかどうかを制御するブーリアン・フラグ。refinementは、クエリベクタと候補の間の正確な距離を計算することにより、最初の結果を再ランク付けすることを含む。</p></td>
      <td><p><strong>タイプ</strong>：ブール値の<strong>範囲</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">false</code></p></td>
-     <td><p>高精度が必須で、検索時間が多少遅くても許容できる場合は、<code translate="no">true</code> に設定する。スピードを優先し、精度の多少の妥協が許容できる場合は<code translate="no">false</code> を使用します。</p></td>
+     <td><p>高い精度が必須で、検索時間が多少遅くても許容できる場合は、<code translate="no">true</code> に設定する。スピードを優先し、精度の多少の妥協が許容できる場合は<code translate="no">false</code> を使用する。</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>精緻化処理で使用するデータの精度を決定します。 この精度は、圧縮されたベクトル（<code translate="no">m</code> と<code translate="no">nbits</code> パラメータで設定）の精度よりも高くなければなりません。</p></td>
+     <td><p>この精度は，圧縮ベクトル（<code translate="no">m</code> と<code translate="no">nbits</code> パラメータで設定）の精度よりも高くなければならない。</p></td>
      <td><p><strong>型</strong>：String<strong>Range:[</strong> <code translate="no">SQ6</code><strong>,</strong> <code translate="no">SQ8</code><strong>,</strong> <code translate="no">BF16</code><strong>,</strong> <code translate="no">FP16</code><strong>,</strong> <code translate="no">FP32</code> <strong>]。</strong></p>
 <p><strong>デフォルト値</strong>：なし</p></td>
      <td><p>より高いメモリコストで最大の精度を得るには<code translate="no">FP32</code> を使用し、より良い圧縮を得るには<code translate="no">SQ6</code>/<code translate="no">SQ8</code> を使用する。<code translate="no">BF16</code> と<code translate="no">FP16</code> は、バランスの取れた代替案を提供する。</p></td>

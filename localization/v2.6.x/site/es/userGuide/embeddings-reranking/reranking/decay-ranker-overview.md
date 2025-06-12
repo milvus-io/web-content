@@ -92,7 +92,7 @@ beta: Milvus 2.6.x
 <p>Por ejemplo, si un artículo de investigación obtiene una puntuación de 0,82 a partir de la similitud vectorial y de 0,91 a partir de la recuperación de texto basada en BM25 en una búsqueda híbrida, Milvus utiliza 0,91 como puntuación de similitud base antes de aplicar el factor de decaimiento.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Decay ranking en acción</h3><p>Veamos la clasificación por decaimiento en un escenario práctico: la búsqueda de <strong>"artículos de investigación sobre inteligencia artificial"</strong> con un decaimiento basado en el tiempo:</p>
 <div class="alert note">
-<p>En este ejemplo, las puntuaciones reflejan cómo disminuye la relevancia con el tiempo: los artículos más recientes reciben puntuaciones cercanas a 1,0 y los más antiguos, puntuaciones más bajas. Estos valores se calculan utilizando un clasificador de decaimiento específico. Para más información, consulte <a href="/docs/es/decay-ranker-overview.md#Choose-the-right-decay-ranker">Elegir el clasificador de deterioro adecuado</a>.</p>
+<p>En este ejemplo, las puntuaciones reflejan cómo disminuye la relevancia con el tiempo: los artículos más recientes reciben puntuaciones cercanas a 1,0 y los más antiguos, puntuaciones más bajas. Estos valores se calculan utilizando un clasificador de decaimiento específico. Para más detalles, consulte <a href="/docs/es/decay-ranker-overview.md#Choose-the-right-decay-ranker">Elegir el clasificador de deterioro adecuado</a>.</p>
 </div>
 <table>
    <tr>
@@ -178,7 +178,7 @@ beta: Milvus 2.6.x
 <li><p>Aplicaciones en las que los usuarios tienen un sentido intuitivo de la distancia</p></li>
 <li><p>Cuando una distancia moderada no debería penalizar gravemente los resultados</p></li>
 </ul></td>
-     <td><p>En una búsqueda de restaurantes, los locales de calidad situados a 3 km de distancia siguen siendo localizables, aunque con una clasificación inferior a las opciones cercanas</p></td>
+     <td><p>En una búsqueda de restaurantes, los locales de calidad situados a 3 km siguen siendo localizables, aunque con una clasificación inferior a las opciones cercanas</p></td>
    </tr>
    <tr>
      <td><p>Exponencial (<code translate="no">exp</code>)</p></td>

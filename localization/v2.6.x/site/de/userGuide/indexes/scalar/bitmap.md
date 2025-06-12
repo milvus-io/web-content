@@ -41,7 +41,7 @@ summary: >-
       </svg>
     </button></h2><p>Der Begriff Bitmap setzt sich aus zwei Wörtern zusammen: <strong>Bit</strong> und <strong>Map</strong>. Ein Bit stellt die kleinste Dateneinheit in einem Computer dar, die nur einen Wert von <strong>0</strong> oder <strong>1</strong> annehmen kann. Eine Map bezieht sich in diesem Zusammenhang auf den Prozess der Umwandlung und Organisation von Daten entsprechend dem Wert, der 0 und 1 zugewiesen werden soll.</p>
 <p>Ein Bitmap-Index besteht aus zwei Hauptkomponenten: Bitmaps und Schlüssel. Die Schlüssel stellen die eindeutigen Werte im indizierten Feld dar. Für jeden eindeutigen Wert gibt es eine entsprechende Bitmap. Die Länge dieser Bitmaps ist gleich der Anzahl der Datensätze in der Sammlung. Jedes Bit in der Bitmap entspricht einem Datensatz in der Sammlung. Wenn der Wert des indizierten Feldes in einem Datensatz mit dem Schlüssel übereinstimmt, wird das entsprechende Bit auf <strong>1</strong> gesetzt; andernfalls wird es auf <strong>0</strong> gesetzt.</p>
-<p>Betrachten wir eine Sammlung von Dokumenten mit den Feldern <strong>Kategorie</strong> und <strong>Öffentlich</strong>. Wir möchten Dokumente abrufen, die in die Kategorie <strong>"Technik"</strong> fallen und für die <strong>Öffentlichkeit</strong> zugänglich sind. In diesem Fall sind die Schlüssel für unsere Bitmap-Indizes <strong>Tech</strong> und <strong>Public</strong>.</p>
+<p>Betrachten wir eine Sammlung von Dokumenten mit den Feldern <strong>Kategorie</strong> und <strong>Öffentlich</strong>. Wir möchten Dokumente abrufen, die in die Kategorie <strong>Technik</strong> fallen und für die <strong>Öffentlichkeit</strong> zugänglich sind. In diesem Fall sind die Schlüssel für unsere Bitmap-Indizes <strong>Tech</strong> und <strong>Public</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
@@ -116,10 +116,10 @@ client.create_index(​
 <li><p><code translate="no">FLOAT</code> <code translate="no">DOUBLE</code>: Fließkomma-Typen sind nicht mit der binären Natur von Bitmap-Indizes kompatibel.</p></li>
 <li><p><code translate="no">JSON</code>: JSON-Datentypen haben eine komplexe Struktur, die mit Bitmap-Indizes nicht effizient dargestellt werden kann.</p></li>
 </ul></li>
-<li><p>Bitmap-Indizes sind nicht für Felder mit hoher Kardinalität geeignet (d. h. Felder mit einer großen Anzahl unterschiedlicher Werte).</p>
+<li><p>Bitmap-Indizes eignen sich nicht für Felder mit hoher Kardinalität (d. h. Felder mit einer großen Anzahl unterschiedlicher Werte).</p>
 <ul>
 <li><p>Als allgemeine Richtlinie gilt, dass Bitmap-Indizes am effektivsten sind, wenn die Kardinalität eines Feldes weniger als 500 beträgt.</p></li>
-<li><p>Wenn die Kardinalität über diesen Schwellenwert hinaus ansteigt, nehmen die Leistungsvorteile von Bitmap-Indizes ab, und der Speicher-Overhead wird erheblich.</p></li>
+<li><p>Wenn die Kardinalität über diesen Schwellenwert hinausgeht, nehmen die Leistungsvorteile von Bitmap-Indizes ab, und der Speicher-Overhead wird erheblich.</p></li>
 <li><p>Für Felder mit hoher Kardinalität sollten Sie je nach Anwendungsfall und Abfrageanforderungen alternative Indizierungstechniken wie z. B. invertierte Indizes in Betracht ziehen.</p></li>
 </ul></li>
 </ul>

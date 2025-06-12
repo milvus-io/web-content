@@ -73,7 +73,7 @@ summary: >-
      <td><ul><li>INVERTITO</li><li>STL_SORT</li></ul></td>
    </tr>
    <tr>
-     <td><ul><li>FIORITO</li><li>DOPPIO</li></ul></td>
+     <td><ul><li>FIAT</li><li>DOPPIO</li></ul></td>
      <td><p>INVERTITO</p></td>
    </tr>
    <tr>
@@ -176,7 +176,7 @@ summary: >-
 <li><p>Per una ricerca con un top-K elevato (rispetto al numero totale di incorporazioni vettoriali), le varianti IVF sono una scelta migliore rispetto ai tipi di indice basati su grafi.</p></li>
 <li><p>Per una ricerca con un top-K medio e un elevato rapporto di filtraggio, le varianti FIV sono la scelta migliore.</p></li>
 </ul>
-<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matrice decisionale: Scelta del tipo di indice più appropriato</h3><p>La tabella seguente è una matrice decisionale a cui fare riferimento per la scelta del tipo di indice più appropriato.</p>
+<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matrice decisionale: Scelta del tipo di indice più appropriato</h3><p>La seguente tabella è una matrice decisionale a cui fare riferimento per la scelta del tipo di indice più appropriato.</p>
 <table>
    <tr>
      <th><p>Scenario</p></th>
@@ -185,7 +185,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>I dati grezzi sono memorizzabili</p></td>
-     <td><p>HNSW, IVF + raffinamento</p></td>
+     <td><p>HNSW, FIV + raffinamento</p></td>
      <td><p>Utilizzare HNSW per un basso<code translate="no">k</code>/alto richiamo.</p></td>
    </tr>
    <tr>
@@ -290,7 +290,7 @@ summary: >-
 </ol>
 <h3 id="Graph-based-index-memory-usage" class="common-anchor-header">Utilizzo della memoria degli indici a grafo</h3><p>Gli indici basati su grafi, come HNSW, richiedono una memoria significativa per memorizzare sia la struttura del grafo sia le incorporazioni vettoriali grezze. Di seguito è riportata una ripartizione dettagliata della memoria consumata da 1 milione di vettori a 128 dimensioni indicizzati con il tipo di indice HNSW.</p>
 <ol>
-<li><p><strong>Calcolo della memoria utilizzata dalla struttura del grafo.</strong></p>
+<li><p><strong>Calcolo della memoria utilizzata dalla struttura a grafo.</strong></p>
 <p>Ogni vettore in HNSW mantiene le connessioni con i suoi vicini. Con un grado del grafo (bordi per nodo) di 32, la memoria consumata può essere calcolata come segue:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 32 links × 4 bytes (for 32-bit integer storage) = 128 MB  
 <button class="copy-code-btn"></button></code></pre></li>
@@ -312,6 +312,6 @@ summary: >-
 </ol>
 <h3 id="Other-considerations" class="common-anchor-header">Altre considerazioni</h3><p>Mentre la FIV e gli indici a grafo ottimizzano l'uso della memoria attraverso la quantizzazione, i file mappati in memoria (mmap) e DiskANN affrontano scenari in cui gli insiemi di dati superano la memoria ad accesso casuale (RAM) disponibile.</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN è un indice basato sul grafo Vamana che collega i punti di dati per una navigazione efficiente durante la ricerca, applicando al contempo PQ per ridurre le dimensioni dei vettori e consentire un rapido calcolo approssimativo della distanza tra i vettori.</p>
-<p>Il grafo di Vamana è memorizzato su disco, il che consente a DiskANN di gestire insiemi di dati di grandi dimensioni che altrimenti sarebbero troppo grandi per essere memorizzati. Ciò è particolarmente utile per insiemi di dati da un miliardo di punti.</p>
+<p>Il grafo di Vamana è memorizzato su disco, il che consente a DiskANN di gestire insiemi di dati di grandi dimensioni che altrimenti sarebbero troppo grandi per essere memorizzati. Ciò è particolarmente utile per gli insiemi di dati da un miliardo di punti.</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">File mappati in memoria (mmap)</h4><p>La mappatura della memoria (Mmap) consente l'accesso diretto alla memoria a file di grandi dimensioni su disco, permettendo a Milvus di memorizzare indici e dati sia nella memoria che sul disco rigido. Questo approccio consente di ottimizzare le operazioni di I/O riducendo l'overhead delle chiamate di I/O in base alla frequenza di accesso, ampliando così la capacità di archiviazione delle raccolte senza incidere significativamente sulle prestazioni di ricerca.</p>
 <p>In particolare, è possibile configurare Milvus per mappare in memoria i dati grezzi di alcuni campi invece di caricarli completamente in memoria. In questo modo, è possibile ottenere l'accesso diretto alla memoria dei campi senza preoccuparsi dei problemi di memoria ed estendere la capacità della raccolta.</p>

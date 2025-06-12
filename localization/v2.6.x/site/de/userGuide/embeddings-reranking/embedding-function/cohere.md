@@ -106,7 +106,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Milvus muss Ihren Cohere API-Schlüssel kennen, bevor es Einbettungen anfordern kann. Milvus bietet zwei Methoden zur Konfiguration von Anmeldeinformationen:</p>
 <ul>
-<li><p><strong>Konfigurationsdatei (empfohlen):</strong> Speichern Sie den API-Schlüssel in <code translate="no">milvus.yaml</code>, damit er bei jedem Neustart und jedem Knoten automatisch übernommen wird.</p></li>
+<li><p><strong>Konfigurationsdatei (empfohlen):</strong> Speichern Sie den API-Schlüssel in <code translate="no">milvus.yaml</code>, damit er bei jedem Neustart und Knoten automatisch übernommen wird.</p></li>
 <li><p><strong>Umgebungsvariablen:</strong> Injizieren Sie den Schlüssel zum Zeitpunkt der Bereitstellung - ideal für Docker Compose.</p></li>
 </ul>
 <p>Entscheiden Sie sich für eine der beiden Methoden: Die Konfigurationsdatei ist auf Bare-Metal- und VM-Systemen einfacher zu verwalten, während die Umgebungsvariablen-Route für Container-Workflows geeignet ist.</p>
@@ -126,7 +126,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn Sie die API-Schlüssel hier angeben, bleiben sie über Neustarts hinweg bestehen und Sie können die Schlüssel einfach durch Ändern einer Bezeichnung wechseln.</p></li>
 <li><p><strong>Sagen Sie Milvus, welchen Schlüssel es für OpenAI-Aufrufe verwenden soll</strong></p>
-<p>In derselben Datei verweisen Sie den Cohere-Anbieter auf das Label, das er verwenden soll.</p>
+<p>In der gleichen Datei verweisen Sie den Cohere-Anbieter auf das Label, das er verwenden soll.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
@@ -136,7 +136,7 @@ beta: Milvus 2.6.x
 <button class="copy-code-btn"></button></code></pre>
 <p>Dies bindet einen bestimmten Schlüssel an jede Anfrage, die Milvus an den Cohere-Embedding-Endpunkt sendet.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Umgebungsvariable</h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose betreiben und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2: Umgebungsvariable</h3><p>Verwenden Sie diese Methode, wenn Sie Milvus mit Docker Compose ausführen und es vorziehen, Geheimnisse aus Dateien und Images herauszuhalten.</p>
 <p>Milvus greift nur dann auf die Umgebungsvariable zurück, wenn unter <code translate="no">milvus.yaml</code> kein Schlüssel für den Anbieter gefunden wird.</p>
 <table>
    <tr>

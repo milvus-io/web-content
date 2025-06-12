@@ -82,7 +82,7 @@ beta: Milvus 2.6.x
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">ステージ 3: 最終スコアの計算</h3><p>最後に、Milvusは正規化された類似度スコアと減衰スコアを組み合わせ、最終的なランキングスコアを算出します：</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>ハイブリッド検索（複数のベクトルフィールドを組み合わせる）の場合、Milvusは検索リクエストの中で正規化類似度スコアが最大のものを採用する：</p>
+<p>ハイブリッド検索（複数のベクトルフィールドを組み合わせる）の場合、Milvusは検索リクエストの中から正規化類似度スコアの最大値を取ります：</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>例えば、ある研究論文がベクトル類似度で0.82、BM25ベースのテキスト検索で0.91のハイブリッド検索を行った場合、Milvusは減衰係数を適用する前に0.91を基本類似度スコアとして使用します。</p>

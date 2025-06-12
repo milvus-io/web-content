@@ -128,7 +128,7 @@ summary: >-
 </ul>
 <h3 id="Refiner" class="common-anchor-header">Pemurni</h3><p>Kuantisasi pada dasarnya bersifat lossy. Untuk mempertahankan tingkat penarikan, kuantisasi secara konsisten menghasilkan lebih banyak kandidat top-K daripada yang diperlukan, memungkinkan refiner menggunakan presisi yang lebih tinggi untuk lebih memilih hasil top-K dari kandidat-kandidat ini, sehingga meningkatkan tingkat penarikan.</p>
 <p>Sebagai contoh, refiner FP32 beroperasi pada kandidat hasil pencarian yang dikembalikan oleh kuantisasi dengan menghitung ulang jarak menggunakan presisi FP32 daripada nilai yang dikuantisasi.</p>
-<p>Hal ini sangat penting untuk aplikasi yang membutuhkan keseimbangan antara efisiensi pencarian dan presisi, seperti pencarian semantik atau sistem rekomendasi, di mana variasi jarak yang kecil secara signifikan berdampak pada kualitas hasil.</p>
+<p>Hal ini sangat penting untuk aplikasi yang membutuhkan pertukaran antara efisiensi pencarian dan presisi, seperti pencarian semantik atau sistem rekomendasi, di mana variasi jarak yang kecil secara signifikan berdampak pada kualitas hasil.</p>
 <h3 id="Summary" class="common-anchor-header">Ringkasan</h3><p>Arsitektur berjenjang ini - pemfilteran kasar melalui struktur data, komputasi yang efisien melalui kuantisasi, dan penyetelan presisi melalui penyempurnaan - memungkinkan Milvus untuk mengoptimalkan pertukaran akurasi-kinerja secara adaptif.</p>
 <h2 id="Performance-trade-offs" class="common-anchor-header">Pengorbanan kinerja<button data-href="#Performance-trade-offs" class="anchor-icon" translate="no">
       <svg translate="no"

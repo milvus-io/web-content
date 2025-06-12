@@ -151,7 +151,7 @@ res = MilvusClient.search(
      <td><p>Die Anzahl der Cluster, in denen nach Kandidaten gesucht werden soll. Höhere Werte ermöglichen die Suche in mehr Clustern, was die Wiederauffindbarkeit durch die Erweiterung des Suchbereichs verbessert, allerdings auf Kosten einer erhöhten Abfragelatenz.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>nlist</em>]</p>
 <p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
-     <td><p>Eine Erhöhung dieses Wertes verbessert die Wiederauffindbarkeit, kann aber die Suche verlangsamen. <code translate="no">nprobe</code> sollte proportional zu <code translate="no">nlist</code> eingestellt werden, um Geschwindigkeit und Genauigkeit auszugleichen.</p>
+     <td><p>Eine Erhöhung dieses Wertes verbessert die Wiederauffindbarkeit, kann aber die Suche verlangsamen. <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> einstellen, um ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit herzustellen.</p>
 <p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
    </tr>
 </table>

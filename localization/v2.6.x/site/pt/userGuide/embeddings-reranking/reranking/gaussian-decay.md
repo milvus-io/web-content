@@ -102,10 +102,10 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><code translate="no">origin</code> (0 km): A sua localização atual, onde a relevância está no máximo (1,0).</p></li>
 <li><p><code translate="no">offset</code> (±300 m): A "zona de pontuação perfeita" à sua volta - todos os restaurantes num raio de 300 metros mantêm pontuações de relevância total (1,0), garantindo que as opções muito próximas não são penalizadas desnecessariamente por pequenas diferenças de distância.</p></li>
-<li><p><code translate="no">scale</code> (±2 km): A distância a que a relevância cai para o valor de decaimento - os restaurantes a exatamente 2 quilómetros de distância têm as suas pontuações de relevância reduzidas para metade (0,5).</p></li>
+<li><p><code translate="no">scale</code> (±2 km): A distância à qual a relevância cai para o valor de decaimento - os restaurantes a exatamente 2 quilómetros de distância têm as suas pontuações de relevância reduzidas para metade (0,5).</p></li>
 <li><p><code translate="no">decay</code> (0.5): A pontuação na distância da escala - este parâmetro controla essencialmente a rapidez com que as pontuações diminuem com a distância.</p></li>
 </ul>
-<p>Como pode ver na curva, os restaurantes a mais de 2 km continuam a diminuir a sua relevância, mas nunca chegam a zero. Mesmo os restaurantes a 4-5 quilómetros de distância mantêm alguma relevância mínima, permitindo que restaurantes excelentes mas distantes ainda apareçam nos resultados (embora com uma classificação inferior).</p>
+<p>Como pode ver na curva, os restaurantes a mais de 2 km continuam a diminuir a sua relevância, mas nunca chegam a zero. Mesmo os restaurantes a 4-5 quilómetros de distância mantêm alguma relevância mínima, permitindo que restaurantes excelentes, mas distantes, ainda apareçam nos seus resultados (embora com uma classificação inferior).</p>
 <p>Este comportamento imita a forma como as pessoas pensam naturalmente sobre a relevância da distância - os locais próximos são preferidos, mas estamos dispostos a viajar mais longe para opções excepcionais.</p>
 <h2 id="Formula" class="common-anchor-header">Fórmula<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"

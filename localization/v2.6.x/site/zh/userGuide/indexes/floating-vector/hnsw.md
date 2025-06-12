@@ -164,7 +164,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>图中每个节点可拥有的最大连接数（或边），包括出边和入边。该参数直接影响索引构建和搜索。</p></td>
      <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[2, 2048]</p><p><strong>默认值</strong>：<code translate="no">30</code> （每个节点最多有 30 条出边和 30 条入边）</p></td>
-     <td><p>较大的<code translate="no">M</code> 通常会<strong>提高准确率</strong>，但会<strong>增加内存开销</strong>，并<strong>减慢索引构建和搜索速度</strong>。对于高维度数据集或高召回率至关重要时，可考虑提高<code translate="no">M</code> 。</p><p>当内存使用和搜索速度是首要考虑因素时，可考虑降低<code translate="no">M</code> 。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：[5, 100].</p></td>
+     <td><p>较大的<code translate="no">M</code> 通常会<strong>提高准确率</strong>，但会<strong>增加内存开销</strong>，<strong>减慢索引构建和搜索速度</strong>。对于高维度数据集或高召回率至关重要时，可考虑提高<code translate="no">M</code> 。</p><p>当内存使用和搜索速度是首要考虑因素时，可考虑降低<code translate="no">M</code> 。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：[5, 100].</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">efConstruction</code></p></td>

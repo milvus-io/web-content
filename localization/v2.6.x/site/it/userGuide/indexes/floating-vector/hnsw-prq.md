@@ -56,7 +56,7 @@ summary: >-
 <li><p><strong>Quantizzazione del prodotto (PQ)</strong></p>
 <p>In questa fase, il vettore originale viene diviso in sottovettori più piccoli e ogni sottovettore viene mappato al centroide più vicino in un codebook appreso. Questa mappatura riduce significativamente le dimensioni dei dati, ma introduce un certo errore di arrotondamento, poiché ogni sottovettore è approssimato da un singolo centroide. Per maggiori dettagli, consultare <a href="/docs/it/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
 <li><p><strong>Quantizzazione residua (RQ)</strong></p>
-<p>Dopo la fase PQ, RQ quantizza il residuo - la differenza tra il vettore originale e la sua approssimazione basata su PQ - utilizzando codebook aggiuntivi. Poiché questo residuo è in genere molto più piccolo, può essere codificato in modo più preciso senza un grande aumento di memoria.</p>
+<p>Dopo la fase PQ, RQ quantizza il residuo - la differenza tra il vettore originale e la sua approssimazione basata su PQ - utilizzando codebook aggiuntivi. Poiché questo residuo è in genere molto più piccolo, può essere codificato in modo più preciso senza un grande aumento della memoria.</p>
 <p>Il parametro <code translate="no">nrq</code> determina il numero di volte in cui il residuo viene quantizzato iterativamente, consentendo di regolare con precisione l'equilibrio tra efficienza di compressione e accuratezza.</p></li>
 <li><p><strong>Rappresentazione finale della compressione</strong></p>
 <p>Una volta che RQ ha terminato la quantizzazione del residuo, i codici interi di PQ e RQ vengono combinati in un unico indice compresso. Catturando dettagli raffinati che la sola PQ potrebbe tralasciare, la RQ migliora l'accuratezza senza causare un aumento significativo della memoria. Questa sinergia tra PQ e RQ è ciò che definisce il PRQ.</p></li>
@@ -70,7 +70,7 @@ summary: >-
 <ul>
 <li><p><code translate="no">refine</code>: Controlla se questa fase di raffinamento è attivata. Se impostato su <code translate="no">true</code>, il sistema ricalcola le distanze utilizzando rappresentazioni di maggiore precisione o non compresse.</p></li>
 <li><p><code translate="no">refine_type</code>: Specifica il livello di precisione dei dati utilizzati durante il raffinamento (ad esempio, SQ6, SQ8, BF16). Una scelta di precisione superiore, come <code translate="no">FP32</code>, può dare risultati più accurati, ma richiede più memoria. Il livello di precisione deve essere superiore alla precisione dell'insieme di dati compresso originale di <code translate="no">sq_type</code>.</p></li>
-<li><p><code translate="no">refine_k</code>: Agisce come fattore di ingrandimento. Ad esempio, se il top <em>k</em> è 100 e <code translate="no">refine_k</code> è 2, il sistema classifica nuovamente i 200 candidati migliori e restituisce i 100 migliori, migliorando la precisione complessiva.</p></li>
+<li><p><code translate="no">refine_k</code>: Agisce come fattore di ingrandimento. Ad esempio, se il top <em>k</em> è 100 e <code translate="no">refine_k</code> è 2, il sistema classifica nuovamente i 200 candidati migliori e restituisce i 100 migliori, migliorando l'accuratezza complessiva.</p></li>
 </ul></li>
 </ol>
 <p>Per un elenco completo dei parametri e dei valori validi, consultare la sezione <a href="/docs/it/hnsw-prq.md#Index-params">Parametri dell'indice</a>.</p>
@@ -117,7 +117,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per i dettagli, fare riferimento a <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la costruzione dell'indice. Per i dettagli, fare riferimento a <a href="/docs/it/hnsw-prq.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p></li>
 </ul>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, si può creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per i dettagli, fare riferimento a <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,7 +185,7 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [2, 2048]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 bordi uscenti e 30 bordi entranti per nodo)</p></td>
      <td><p>Un valore maggiore di <code translate="no">M</code> porta generalmente a una <strong>maggiore accuratezza</strong>, ma <strong>aumenta l'overhead di memoria</strong> e <strong>rallenta sia la costruzione dell'indice che la ricerca</strong>. Considerare di aumentare <code translate="no">M</code> per i set di dati con elevata dimensionalità o quando è fondamentale un richiamo elevato.</p>
-<p>Si consiglia di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
+<p>Considerare di diminuire <code translate="no">M</code> quando l'uso della memoria e la velocità di ricerca sono le principali preoccupazioni.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [5, 100].</p></td>
    </tr>
    <tr>
@@ -194,7 +194,7 @@ res = MilvusClient.search(
      <td><p>Numero di vicini candidati considerati per la connessione durante la costruzione dell'indice. Per ogni nuovo elemento viene valutato un pool più ampio di candidati, ma il numero massimo di connessioni effettivamente stabilite è ancora limitato da <code translate="no">M</code>.</p></td>
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">360</code></p></td>
-     <td><p>Un valore più alto di <code translate="no">efConstruction</code> si traduce tipicamente in un <strong>indice più accurato</strong>, poiché vengono esplorate più connessioni potenziali. Tuttavia, questo comporta anche <strong>tempi di indicizzazione più lunghi e un maggiore utilizzo della memoria</strong> durante la costruzione. Considerare l'aumento di <code translate="no">efConstruction</code> per migliorare l'accuratezza, soprattutto in scenari in cui il tempo di indicizzazione è meno critico.</p>
+     <td><p>Un valore più alto di <code translate="no">efConstruction</code> si traduce tipicamente in un <strong>indice più accurato</strong>, poiché vengono esplorate più connessioni potenziali. Tuttavia, questo comporta anche <strong>tempi di indicizzazione più lunghi e un maggiore utilizzo della memoria</strong> durante la costruzione. Considerare di aumentare <code translate="no">efConstruction</code> per migliorare l'accuratezza, soprattutto in scenari in cui il tempo di indicizzazione è meno critico.</p>
 <p>Considerare di diminuire <code translate="no">efConstruction</code> per accelerare la costruzione dell'indice quando le risorse sono limitate.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [50, 500].</p></td>
    </tr>

@@ -51,7 +51,7 @@ summary: >-
 <li><p><strong>効率化のための洗練：</strong>初期のランダム・グラフは、検索効率を高めるために最適化プロセスを経ます。これには2つの重要なステップがある：</p>
 <ul>
 <li><p><strong>冗長なエッジの刈り込み：</strong>冗長なエッジの刈り込み：このアルゴリズムは、ノード間の距離に基づいて不要な接続を削除します。このステップは、より質の高いエッジを優先する。</p>
-<p><code translate="no">max_degree</code> パラメータは、ノードあたりの最大エッジ数を制限します。<code translate="no">max_degree</code> が高いほどグラフが密になり、より関連性の高い近傍を発見できる可能性がある（より高い想起）が、メモリ使用量と検索時間が増加する。</p></li>
+<p><code translate="no">max_degree</code> パラメータは、ノードあたりの最大エッジ数を制限します。<code translate="no">max_degree</code> を高くすると、グラフが密になり、より関連性の高い近傍を発見できる可能性があるが（より高い想起）、メモリ使用量と検索時間が増加する。</p></li>
 <li><p><strong>戦略的ショートカットの追加：</strong>Vamanaは長距離エッジを導入し、ベクトル空間内で離れたデータポイント同士を接続する。これらのショートカットにより、検索はグラフを素早く飛び越え、中間ノードを迂回し、ナビゲーションを大幅に高速化する。</p>
 <p><code translate="no">search_list_size</code> パラメータは、グラフ精密化処理の幅を決定する。<code translate="no">search_list_size</code> を高くすると、構築中の近傍探索が拡張され、最終的な精度が向上しますが、インデックス構築時間が長くなります。</p></li>
 </ul></li>
@@ -71,14 +71,14 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
-   </span> <span class="img-wrapper"> <span>ディスカン2</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>クエリーとエントリーポイント：</strong>最も近い近傍を見つけるためにクエリーベクトルが提供される。DISKANNは、Vamanaグラフの選択されたエントリーポイント（多くの場合、データセットのグローバルセントロイドに近いノード）から開始する。グローバルセントロイドは全ベクトルの平均を表し、これはグラフを走査して希望する近傍を見つける距離を最小化するのに役立つ。</p></li>
 <li><p><strong>近傍探索：</strong>アルゴリズムは、現在のノードのエッジから潜在的な近傍候補（図中の赤丸）を収集し、メモリ内のPQコードを活用して、これらの候補とクエリーベクトル間の距離を近似する。これらの潜在的な隣接候補は、Vamanaグラフのエッジを介して選択されたエントリーポイントに直接接続されているノードです。</p></li>
-<li><p><strong>正確な距離計算のためのノードの選択：</strong>近似結果から、最も有望な近隣ノードのサブセット（図中の緑色の丸）が、圧縮されていない元のベクトルを使用して正確な距離評価のために選択されます。これにはディスクからデータを読み込む必要があり、時間がかかります。DISKANNはこの精度とスピードの微妙なバランスをコントロールするために2つのパラメータを使用します：</p>
+<li><p><strong>正確な距離計算のためのノードの選択：</strong>近似結果から、最も有望な近隣ノードのサブセット（図中の緑色の丸）が、圧縮されていない元のベクトルを使用して正確な距離評価のために選択されます。このためにはディスクからデータを読み込む必要があり、時間がかかります。DISKANNはこの精度と速度の微妙なバランスを制御するために2つのパラメータを使用します：</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>:探索の幅を制御する比率で、近傍探索のためにいくつの近傍候補が並列に選択されるかを決定する。<code translate="no">beam_width_ratio</code> を大きくすると探索範囲が広くなり、精度が向上する可能性がありますが、計算コストとディスクI/Oが増加します。ビーム幅、つまり選択されるノードの数は、以下の式で決定されます：<code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>:頻繁にアクセスされるディスクデータをキャッシュするために割り当てられるメモリの割合。このキャッシングはディスクI/Oを最小化するのに役立ち、データがすでにメモリ内にあるため、繰り返しの検索が速くなります。</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>:頻繁にアクセスされるディスクデータをキャッシュするために割り当てられるメモリの割合。このキャッシングはディスクI/Oを最小化するのに役立ち、データがすでにメモリ内にあるため、繰り返しの検索がより速くなります。</p></li>
 </ul>
 <p>パラメータチューニングの詳細については、<a href="/docs/ja/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configsを</a>参照してください。</p></li>
 <li><p><strong>反復探索：</strong>十分な数の近傍が見つかるまで、近似評価（PQを使用）と正確なチェック（ディスクから元のベクトルを使用）を繰り返しながら、候補の集合を繰り返し改良します。</p></li>
@@ -124,7 +124,7 @@ summary: >-
 <li><p><strong>Milvusクラスタ</strong></p>
 <ul>
 <li><p>QueryNodeとIndexNodeコンテナの両方で、MilvusデータディレクトリをNVMe SSDにマウントします。これは、コンテナ・オーケストレーション・セットアップで実現できます。</p></li>
-<li><p>両方のノードタイプでNVMe SSDにデータをマウントすることで、検索とインデックス作成の両方の操作で高速な読み取り速度と書き込み速度を確保できます。</p></li>
+<li><p>両方のノードタイプでNVMe SSDにデータをマウントすることで、検索とインデックス作成の両方の操作で高速な読み取りと書き込み速度を確保できます。</p></li>
 </ul></li>
 </ul>
 <p>これらの変更を行ったら、Milvusインスタンスを再起動して設定を有効にします。これで、MilvusはDISKANNの機能を活用して大規模なデータセットを処理し、効率的でスケーラブルなベクトル検索を実現します。</p>
@@ -227,8 +227,8 @@ res = MilvusClient.search(
    <tr>
      <td><p>Vamana</p></td>
      <td><p><code translate="no">max_degree</code></p></td>
-     <td><p>Vamanaグラフで各データポイントが持つことのできる最大接続（エッジ）数を制御する。</p></td>
-     <td><p><strong>タイプ</strong>整数<strong>：</strong>[1, 512]</p>
+     <td><p>Vamanaグラフで各データポイントが持つことのできる接続（エッジ）の最大数を制御する。</p></td>
+     <td><p><strong>タイプ</strong>整数<strong>Range</strong>：[1, 512]</p>
 <p><strong>デフォルト値</strong>：<code translate="no">56</code></p></td>
      <td><p>値を大きくするとグラフが密になり、リコール（より関連性の高い結果を見つけること）が増加する可能性がありますが、メモリ使用量とビルド時間も増加します。 
  ほとんどの場合、この範囲内の値を設定することをお勧めします：[10, 100].</p></td>
@@ -273,7 +273,7 @@ res = MilvusClient.search(
      <td><p>Vamana</p></td>
      <td><p><code translate="no">beam_width_ratio</code></p></td>
      <td><p>利用可能なCPUコア数に対する並列ディスクI/Oリクエストの最大数を決定することにより、検索中の並列性の程度を制御する。</p></td>
-     <td><p><strong>タイプ</strong>Float<strong>レンジ</strong>：[1, max(128 / CPU数, 16)] です。</p>
+     <td><p><strong>タイプ</strong>Float<strong>レンジ</strong>：[1, max(128 / CPU数, 16)] を指定する。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">4.0</code></p></td>
      <td><p>値を高くすると並列性が高まり、強力な CPU と SSD を持つシステムでの検索を高速化できる。ほとんどの場合、この範囲内の値を設定することを推奨する：[1.0, 4.0].</p></td>
    </tr>

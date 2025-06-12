@@ -137,5 +137,5 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
 <li><p><strong>何时适合使用 GPU 索引？</strong></p>
 <p>GPU 索引尤其适用于需要高吞吐量或高召回率的情况。例如，在处理大批量数据时，GPU 索引的吞吐量可比 CPU 索引高出 100 倍之多。在批量较小的情况下，GPU 索引在性能上仍明显优于 CPU 索引。此外，如果需要快速插入数据，采用 GPU 可以大大加快索引的建立过程。</p></li>
 <li><p><strong>GPU_CAGRA、GPU_IVF_PQ、GPU_IVF_FLAT 和 GPU_BRUTE_FORCE 等 GPU 索引最适合哪些应用场景？</strong></p>
-<p><code translate="no">GPU_CAGRA</code> GPU_IVF_FLAT、GPU_BRUTE_FORCE 和 GPU_CAGRA 索引非常适合需要增强性能的应用场景，尽管代价是消耗更多内存。对于优先考虑节省内存的环境， 索引可以帮助最大限度地减少存储需求，不过这也会带来较高的精度损失。 索引是一个平衡的选择，在性能和内存使用之间提供了一个折中方案。最后， 索引专为穷举搜索操作而设计，通过执行遍历搜索可保证召回率为 1。<code translate="no">GPU_IVF_PQ</code> <code translate="no">GPU_IVF_FLAT</code> <code translate="no">GPU_BRUTE_FORCE</code> </p></li>
+<p><code translate="no">GPU_CAGRA</code> GPU_IVF_FLAT、GPU_BRUTE_FORCE 和 GPU_CAGRA 索引非常适合需要增强性能的应用场景，尽管代价是消耗更多内存。对于优先考虑节省内存的环境， 索引可以帮助最大限度地减少存储需求，不过这也会带来较高的精度损失。 索引是一个平衡的选择，在性能和内存使用之间提供了一个折中方案。最后， 索引专为穷举搜索操作而设计，通过执行遍历搜索来保证召回率为 1。<code translate="no">GPU_IVF_PQ</code> <code translate="no">GPU_IVF_FLAT</code> <code translate="no">GPU_BRUTE_FORCE</code> </p></li>
 </ul>

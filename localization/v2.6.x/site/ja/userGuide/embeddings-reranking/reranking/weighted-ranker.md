@@ -267,7 +267,7 @@ summary: >-
     </button></h2><p>WeightedRankerストラテジーを使用する場合、重み値を入力する必要がある。入力する重み値の数は、ハイブリッド検索における基本ANN検索要求の数に対応させる必要がある。入力する重み値は[0,1]の範囲にあるべきで、1に近いほど重要度が高いことを示す。</p>
 <h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">重み付きランカーの作成</h3><p>例えば、ハイブリッド検索にテキスト検索と画像検索の2つの基本ANN検索リクエストがあるとする。テキスト検索がより重要であると考えられる場合、より大きなウェイトが割り当てられるはずです。</p>
 <div class="alert note">
-<p>Milvus 2.6.x以降では、<code translate="no">Function</code> APIを介して直接リランキング戦略を設定することができます。それ以前のリリース（v2.6.0以前）を使用している場合は、<a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Rerankingの</a>ドキュメントを参照して設定を行ってください。</p>
+<p>Milvus 2.6.x以降では、<code translate="no">Function</code> APIを介して直接リランキング戦略を設定することができます。それ以前のリリース（v2.6.0以前）をお使いの場合は、<a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Rerankingの</a>ドキュメントを参照して設定を行ってください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

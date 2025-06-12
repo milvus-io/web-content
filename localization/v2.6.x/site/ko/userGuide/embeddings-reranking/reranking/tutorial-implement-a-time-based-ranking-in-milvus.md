@@ -317,7 +317,7 @@ linear_ranker = Function(
 <p>앞의 코드에서</p>
 <ul>
 <li><p><code translate="no">reranker</code>: 시간 기반 감쇠 함수의 경우 <code translate="no">decay</code> 로 설정</p></li>
-<li><p><code translate="no">function</code>: 감쇠 함수 유형(가우스, 노출 또는 선형)</p></li>
+<li><p><code translate="no">function</code>: 감쇠 함수의 유형(가우스, 노출 또는 선형)</p></li>
 <li><p><code translate="no">origin</code>: 기준점(보통 현재 시간)</p></li>
 <li><p><code translate="no">offset</code>: 문서가 완전한 관련성을 유지하는 기간</p></li>
 <li><p><code translate="no">scale</code>: 오프셋 이후 연관성이 얼마나 빨리 감소하는지를 제어합니다.</p></li>

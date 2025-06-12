@@ -100,7 +100,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">HNSW_SQ</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详细信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
 <li><p><code translate="no">params</code>:用于构建索引的附加配置选项。详情请参阅<a href="/docs/zh/hnsw-sq.md#Index-building-params">索引构建参数</a>。</p></li>
 </ul>
 <p>配置好索引参数后，可直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中传递索引参数来创建索引。详情请参阅<a href="/docs/zh/create-collection.md">创建 Collections</a>。</p>
@@ -192,9 +192,9 @@ res = MilvusClient.search(
 <li><p><code translate="no">SQ6</code>:使用 6 位整数编码向量。</p></li>
 <li><p><code translate="no">SQ8</code>:使用 8 位整数编码向量。</p></li>
 <li><p><code translate="no">BF16</code>:使用 Bfloat16 格式。</p></li>
-<li><p><code translate="no">FP16</code>:使用标准 16 位浮点格式。</p></li>
+<li><p><code translate="no">FP16</code>:使用标准的 16 位浮点格式。</p></li>
 </ul></td>
-     <td><p><strong>类型</strong>： 字符串字符串<strong>范围</strong>[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> ]</p>
+     <td><p><strong>类型</strong>： 字符串字符串<strong>范围</strong>：[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> ]</p>
 <p><strong>默认值</strong>：<code translate="no">SQ8</code></p></td>
      <td><p><code translate="no">sq_type</code> 的选择取决于具体应用的需求。如果内存效率是首要考虑因素，<code translate="no">SQ6</code> 或<code translate="no">SQ8</code> 可能比较合适。另一方面，如果精度是最重要的，<code translate="no">BF16</code> 或<code translate="no">FP16</code> 可能是首选。</p></td>
    </tr>

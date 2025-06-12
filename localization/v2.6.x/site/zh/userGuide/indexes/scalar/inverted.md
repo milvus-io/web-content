@@ -176,7 +176,7 @@ index_params.add_index(
 <li><p><code translate="no">"bool"</code> 或<code translate="no">"BOOL"</code></p></li>
 <li><p><code translate="no">"double"</code> 或<code translate="no">"DOUBLE"</code></p></li>
 <li><p><code translate="no">"varchar"</code> 或<code translate="no">"VARCHAR"</code></p>
-<p><strong>注意</strong>：对于整数值，Milvus 内部使用 double 作为索引。超过 2^53 的大整数会失去精度。如果投递失败（由于类型不匹配），不会抛出错误，也不会索引该行的值。</p></li>
+<p><strong>注意</strong>：对于整数值，Milvus 内部使用 double 作为索引。超过 2^53 的大整数将失去精度。如果投递失败（由于类型不匹配），不会抛出错误，也不会索引该行的值。</p></li>
 </ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>

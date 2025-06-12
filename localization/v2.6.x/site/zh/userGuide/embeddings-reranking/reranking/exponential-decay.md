@@ -74,7 +74,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>用户希望最近或附近的项目在搜索结果中占主导地位</p></li>
 <li><p>较旧或较远的项目如果特别相关，仍应可被发现</p></li>
-<li><p>相关性下降应该是前负荷的（开始时较陡峭，之后较缓慢）</p></li>
+<li><p>相关性下降应该是前负荷的（开始时较陡，之后较缓）</p></li>
 </ul>
 <h2 id="Sharp-drop-off-principle" class="common-anchor-header">急剧下降原则<button data-href="#Sharp-drop-off-principle" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -103,7 +103,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">decay</code> (0.5):尺度距离上的得分--该参数控制得分随时间减少的幅度。</p></li>
 <li><p><code translate="no">scale</code> (24小时）：相关性下降到衰减值的时间段--24 小时前的新闻相关性得分减半 (0.5)。</p></li>
 </ul>
-<p>从曲线中可以看出，超过 24 小时的新闻文章相关性持续下降，但从未达到零。即使是几天前的新闻也能保持最低的相关性，使重要但较旧的新闻仍能出现在您的 feed 中（尽管排名较低）。</p>
+<p>从曲线中可以看出，超过 24 小时的新闻文章相关性持续下降，但从未达到零。即使是几天前的新闻也能保持最低的相关性，使重要但较旧的新闻仍能出现在您的推送中（尽管排名较低）。</p>
 <p>这种行为模仿了新闻相关性的典型运作方式--非常新的新闻占据主导地位，但重要的旧新闻如果与用户的兴趣特别相关，仍然可以突围而出。</p>
 <h2 id="Formula" class="common-anchor-header">计算公式<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"

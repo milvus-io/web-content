@@ -1027,6 +1027,6 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
 <li><p>Produktlisten im elektronischen Handel</p></li>
 <li><p>Feeds für Inhalte sozialer Medien</p></li>
 <li><p>Wissensdatenbanken und Dokumentationssysteme</p></li>
-<li><p>Repositories für Forschungsarbeiten</p></li>
+<li><p>Repositorien für Forschungsarbeiten</p></li>
 </ul>
-<p>Wenn Sie die Mathematik hinter den Abklingfunktionen verstehen und mit verschiedenen Parametern experimentieren, können Sie Ihr Suchsystem so abstimmen, dass es ein optimales Gleichgewicht zwischen Relevanz und Aktualität für Ihren speziellen Anwendungsfall bietet.</p>
+<p>Wenn Sie die Mathematik hinter den Abklingfunktionen verstehen und mit verschiedenen Parametern experimentieren, können Sie Ihr Suchsystem so abstimmen, dass es ein optimales Gleichgewicht zwischen Relevanz und Aktualität für Ihren spezifischen Anwendungsfall bietet.</p>

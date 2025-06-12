@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <li><p>ユーザーの問題と適切な解決策をマッチングさせる必要のあるカスタマーサポートシステム</p></li>
 <li><p>商品属性とユーザーの意図を理解する必要があるEコマース検索</p></li>
 </ul>
-<p>vLLM Rankerは、<a href="/docs/ja/tei-ranker.md">TEI Rankerと</a>比較して、モデルの選択とカスタマイズの柔軟性が高く、追加設定オプションが大きなメリットをもたらす、特殊で複雑な検索アプリケーションに最適です。</p>
+<p><a href="/docs/ja/tei-ranker.md">TEI Rankerと</a>比較して、vLLM Rankerはモデル選択とカスタマイズの柔軟性が高いため、追加設定オプションが大きなメリットをもたらす、特殊で複雑な検索アプリケーションに最適です。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

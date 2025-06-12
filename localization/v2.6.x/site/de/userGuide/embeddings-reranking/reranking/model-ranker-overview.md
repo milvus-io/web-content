@@ -46,7 +46,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>Model Rankers können nicht mit gruppierenden Suchen verwendet werden.</p></li>
-<li><p>Felder, die für Model Ranker verwendet werden, müssen vom Typ Text sein (<code translate="no">VARCHAR</code>).</p></li>
+<li><p>Die für das Model-Ranking verwendeten Felder müssen vom Typ Text sein (<code translate="no">VARCHAR</code>).</p></li>
 <li><p>Jeder Model Ranker kann jeweils nur ein <code translate="no">VARCHAR</code> Feld für die Auswertung verwenden.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Wie funktioniert das?<button data-href="#How-it-works" class="anchor-icon" translate="no">
