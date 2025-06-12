@@ -1,11 +1,11 @@
 ---
 id: integrate_with_jina.md
 summary: >-
-  This guide demonstrates how to use Jina embeddings and Milvus to conduct
-  similarity search and retrieval tasks.
-title: Integrate Milvus with Jina
+  يوضّح هذا الدليل كيفية استخدام تضمينات جينا وميلفوس لإجراء مهام البحث عن
+  التشابه واسترجاعه.
+title: دمج ميلفوس مع جينا
 ---
-<h1 id="Integrate-Milvus-with-Jina-AI" class="common-anchor-header">Integrate Milvus with Jina AI<button data-href="#Integrate-Milvus-with-Jina-AI" class="anchor-icon" translate="no">
+<h1 id="Integrate-Milvus-with-Jina-AI" class="common-anchor-header">دمج ميلفوس مع جينا للذكاء الاصطناعي<button data-href="#Integrate-Milvus-with-Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ title: Integrate Milvus with Jina
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_with_Jina.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>This guide demonstrates how to use Jina AI embeddings and Milvus to conduct similarity search and retrieval tasks.</p>
-<h2 id="Who-is-Jina-AI" class="common-anchor-header">Who is Jina AI<button data-href="#Who-is-Jina-AI" class="anchor-icon" translate="no">
+<p>يوضح هذا الدليل كيفية استخدام تضمينات جينا للذكاء الاصطناعي وميلفوس لإجراء مهام البحث عن التشابه واسترجاعه.</p>
+<h2 id="Who-is-Jina-AI" class="common-anchor-header">من هي جينا للذكاء الاصطناعي<button data-href="#Who-is-Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,9 +38,8 @@ title: Integrate Milvus with Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI, founded in 2020 in Berlin, is a pioneering AI company focused on revolutionizing the future of artificial intelligence through its search foundation. Specializing in multimodal AI, Jina AI aims to empower businesses and developers to harness the power of multimodal data for value creation and cost savings through its integrated suite of components, including embeddings, rerankers, prompt ops, and core infrastructure.
-Jina AI’s cutting-edge embeddings boast top-tier performance, featuring an 8192 token-length model ideal for comprehensive data representation. Offering multilingual support and seamless integration with leading platforms like OpenAI, these embeddings facilitate cross-lingual applications.</p>
-<h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Milvus and Jina AI’s Embedding<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
+    </button></h2><p>جينا للذكاء الاصطناعي، التي تأسست في عام 2020 في برلين، هي شركة رائدة في مجال الذكاء الاصطناعي تركز على إحداث ثورة في مستقبل الذكاء الاصطناعي من خلال مؤسسة البحث الخاصة بها. تهدف شركة Jina AI، المتخصصة في الذكاء الاصطناعي متعدد الوسائط، إلى تمكين الشركات والمطورين من تسخير قوة البيانات متعددة الوسائط لخلق القيمة وتوفير التكاليف من خلال مجموعة متكاملة من المكونات، بما في ذلك التضمينات، وإعادة التضمين، والعمليات الفورية، والبنية التحتية الأساسية. تتميز تضمينات Jina AI المتطورة بأداء من الدرجة الأولى، وتتميز بنموذج بطول 8192 رمزًا رمزيًا مثاليًا لتمثيل البيانات الشاملة. ومن خلال تقديم دعم متعدد اللغات والتكامل السلس مع منصات رائدة مثل OpenAI، تسهّل هذه التضمينات التطبيقات متعددة اللغات.</p>
+<h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">تضمين ميلفوس وجينا للذكاء الاصطناعي<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,8 +54,8 @@ Jina AI’s cutting-edge embeddings boast top-tier performance, featuring an 819
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In order to store and search these embeddings efficiently for speed and scale, specific infrastructure designed for this purpose is required. Milvus is a widely known advanced open-source vector database capable of handling large-scale vector data. Milvus enables fast and accurate vector(embedding) search according plenty of metrics. Its scalability allows for seamless handling of massive volumes of image data, ensuring high-performance search operations even as datasets grow.</p>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+    </button></h2><p>من أجل تخزين هذه التضمينات والبحث فيها بكفاءة من أجل السرعة والتوسع، يلزم وجود بنية تحتية محددة مصممة لهذا الغرض. Milvus عبارة عن قاعدة بيانات متجهية متقدمة مفتوحة المصدر معروفة على نطاق واسع وقادرة على التعامل مع البيانات المتجهة واسعة النطاق. تتيح Milvus إمكانية البحث السريع والدقيق عن المتجهات (التضمينات) وفقًا للكثير من المقاييس. تسمح قابليته للتوسع بالتعامل السلس مع أحجام هائلة من بيانات الصور، مما يضمن عمليات بحث عالية الأداء حتى مع نمو مجموعات البيانات.</p>
+<h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,15 +70,15 @@ Jina AI’s cutting-edge embeddings boast top-tier performance, featuring an 819
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina embeddings have been integrated into the PyMilvus model library. Now, we will demonstrate code examples to show how to use Jina embeddings in action.</p>
-<p>Before we start, we need to install model library for PyMilvus.</p>
+    </button></h2><p>تم دمج تضمينات جينا في مكتبة نماذج PyMilvus. والآن، سنقوم بعرض أمثلة برمجية لتوضيح كيفية استخدام تضمينات جينا في العمل.</p>
+<p>قبل أن نبدأ، نحتاج إلى تثبيت مكتبة النماذج لـ PyMilvus.</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong>. (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، واختر "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
-<h2 id="General-Purpose-Embedding" class="common-anchor-header">General-Purpose Embedding<button data-href="#General-Purpose-Embedding" class="anchor-icon" translate="no">
+<h2 id="General-Purpose-Embedding" class="common-anchor-header">التضمين للأغراض العامة<button data-href="#General-Purpose-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +93,7 @@ $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI’s core embedding model, excels in understanding detailed text, making it ideal for semantic search, content classification thus supports advanced sentiment analysis, text summarization, and personalized recommendation systems.</p>
+    </button></h2><p>يتفوق نموذج التضمين الأساسي في Jina AI في فهم النص التفصيلي، مما يجعله مثاليًا للبحث الدلالي، وبالتالي تصنيف المحتوى، وبالتالي يدعم تحليل المشاعر المتقدم، وتلخيص النصوص، وأنظمة التوصيات المخصصة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
@@ -111,7 +110,7 @@ doc = <span class="hljs-string">&quot;Information retrieval is the process of fi
 qvecs = ef.encode_queries([query])  <span class="hljs-comment"># This method uses `retrieval.query` as the task</span>
 dvecs = ef.encode_documents([doc])  <span class="hljs-comment"># This method uses `retrieval.passage` as the task</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Bilingual-Embeddings" class="common-anchor-header">Bilingual Embeddings<button data-href="#Bilingual-Embeddings" class="anchor-icon" translate="no">
+<h2 id="Bilingual-Embeddings" class="common-anchor-header">التضمينات ثنائية اللغة<button data-href="#Bilingual-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,7 +125,7 @@ dvecs = ef.encode_documents([doc])  <span class="hljs-comment"># This method use
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI’s bilingual models enhance multilingual platforms, global support, and cross-lingual content discovery. Designed for German-English and Chinese-English translations, they foster understanding among diverse linguistic groups, simplifying interactions across languages.</p>
+    </button></h2><p>تعمل نماذج Jina AI ثنائية اللغة على تعزيز المنصات متعددة اللغات والدعم العالمي واكتشاف المحتوى متعدد اللغات. وهي مصممة للترجمة بين الألمانية-الإنجليزية والصينية-الإنجليزية، وتعزز التفاهم بين المجموعات اللغوية المتنوعة، مما يسهل التفاعلات بين اللغات.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
@@ -138,7 +137,7 @@ doc = <span class="hljs-string">&quot;Information Retrieval ist der Prozess, rel
 qvecs = ef.encode_queries([query])
 dvecs = ef.encode_documents([doc])
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Code-Embeddings" class="common-anchor-header">Code Embeddings<button data-href="#Code-Embeddings" class="anchor-icon" translate="no">
+<h2 id="Code-Embeddings" class="common-anchor-header">تضمين الرموز<button data-href="#Code-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,7 +152,7 @@ dvecs = ef.encode_documents([doc])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI’s code embedding model provides searching ability through code and documentation. It supports English and 30 popular programming languages that can be used for enhancing code navigation, streamlined code review and automated documentation assistance.</p>
+    </button></h2><p>يوفر نموذج تضمين الكود الخاص بـ Jina AI إمكانية البحث من خلال الكود والوثائق. وهو يدعم اللغة الإنجليزية و30 لغة برمجة شائعة يمكن استخدامها لتحسين التنقل في التعليمات البرمجية ومراجعة التعليمات البرمجية بشكل مبسط والمساعدة الآلية في التوثيق.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
@@ -191,7 +190,7 @@ Milvus collections support dynamic fields (i.e., fields not pre-defined in the s
 qvecs = ef.encode_queries([query])
 dvecs = ef.encode_documents([doc])
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Semantic-Search-with-Jina--Milvus" class="common-anchor-header">Semantic Search with Jina & Milvus<button data-href="#Semantic-Search-with-Jina--Milvus" class="anchor-icon" translate="no">
+<h2 id="Semantic-Search-with-Jina--Milvus" class="common-anchor-header">البحث الدلالي مع جينا وميلفوس<button data-href="#Semantic-Search-with-Jina--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -206,7 +205,7 @@ dvecs = ef.encode_documents([doc])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With the powerful vector embedding function, we can combine the embeddings retrieved by utilizing Jina AI models with Milvus Lite vector database to perform semantic search.</p>
+    </button></h2><p>مع وظيفة التضمين المتجه القوية، يمكننا الجمع بين التضمينات المسترجعة باستخدام نماذج Jina AI مع قاعدة بيانات Milvus Lite المتجهة لإجراء بحث دلالي.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -245,14 +244,14 @@ res = milvus_client.insert(collection_name=COLLECTION_NAME, data=data)
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>أما بالنسبة لحجة <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ملف Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
 </div>
-<p>With all data in Milvus vector database, we can now perform semantic search by generating vector embedding for the query and conduct vector search.</p>
+<p>مع وجود جميع البيانات في قاعدة بيانات Milvus vector، يمكننا الآن إجراء بحث دلالي من خلال إنشاء تضمين متجه للاستعلام وإجراء بحث متجه.</p>
 <pre><code translate="no" class="language-python">queries = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 qvecs = ef.encode_queries([queries]) <span class="hljs-comment"># This method uses `retrieval.query` as the task</span>
 
@@ -268,7 +267,7 @@ res = milvus_client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'id': 1, 'distance': 0.8802614808082581, 'entity': {'text': &quot;The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term 'artificial intelligence' and laid out its basic goals.&quot;, 'subject': 'history'}}
 </code></pre>
-<h2 id="Jina-Reranker" class="common-anchor-header">Jina Reranker<button data-href="#Jina-Reranker" class="anchor-icon" translate="no">
+<h2 id="Jina-Reranker" class="common-anchor-header">إعادة تصنيف جينا<button data-href="#Jina-Reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -283,7 +282,7 @@ res = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina Ai also provides rerankers to further enhance retrieval quality after searching using embeddings.</p>
+    </button></h2><p>يوفر Jina Ai أيضًا أداة إعادة التصنيف لتعزيز جودة الاسترجاع بعد البحث باستخدام التضمينات.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> JinaRerankFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>

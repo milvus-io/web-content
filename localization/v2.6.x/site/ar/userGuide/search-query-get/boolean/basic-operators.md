@@ -1,14 +1,14 @@
 ---
 id: basic-operators.md
-title: Basic Operators
+title: المشغلات الأساسية
 summary: >-
-  Milvus provides a rich set of basic operators to help you filter and query
-  data efficiently. These operators allow you to refine your search conditions
-  based on scalar fields, numeric calculations, logical conditions, and more.
-  Understanding how to use these operators is crucial for building precise
-  queries and maximizing the efficiency of your searches.
+  يوفر Milvus مجموعة غنية من العوامل الأساسية لمساعدتك في تصفية البيانات
+  والاستعلام عنها بكفاءة. تسمح لك هذه العوامل بتحسين شروط البحث الخاصة بك
+  استنادًا إلى الحقول القياسية والحسابات الرقمية والشروط المنطقية وغيرها. يعد
+  فهم كيفية استخدام هذه العوامل أمرًا بالغ الأهمية لبناء استعلامات دقيقة وزيادة
+  كفاءة عمليات البحث الخاصة بك.
 ---
-<h1 id="Basic-Operators" class="common-anchor-header">Basic Operators<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
+<h1 id="Basic-Operators" class="common-anchor-header">المشغلات الأساسية<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.</p>
-<h2 id="Comparison-operators" class="common-anchor-header">Comparison operators<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
+    </button></h1><p>يوفر ميلفوس مجموعة غنية من العوامل الأساسية لمساعدتك في تصفية البيانات والاستعلام عنها بكفاءة. تسمح لك هذه المعاملات بتحسين شروط البحث الخاصة بك بناءً على الحقول القياسية والحسابات الرقمية والشروط المنطقية وغيرها. يعد فهم كيفية استخدام هذه العوامل أمرًا بالغ الأهمية لبناء استعلامات دقيقة وزيادة كفاءة عمليات البحث الخاصة بك.</p>
+<h2 id="Comparison-operators" class="common-anchor-header">عوامل المقارنة<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,34 +39,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Comparison operators are used to filter data based on equality, inequality, or size. They are applicable to numeric and text fields.</p>
-<h3 id="Supported-Comparison-Operators" class="common-anchor-header">Supported Comparison Operators:</h3><ul>
-<li><p><code translate="no">==</code> (Equal to)</p></li>
-<li><p><code translate="no">!=</code> (Not equal to)</p></li>
-<li><p><code translate="no">&gt;</code> (Greater than)</p></li>
-<li><p><code translate="no">&lt;</code> (Less than)</p></li>
-<li><p><code translate="no">&gt;=</code> (Greater than or equal to)</p></li>
-<li><p><code translate="no">&lt;=</code> (Less than or equal to)</p></li>
+    </button></h2><p>تُستخدم عوامل المقارنة لتصفية البيانات بناءً على التساوي أو عدم المساواة أو الحجم. وهي قابلة للتطبيق على الحقول الرقمية والنصية.</p>
+<h3 id="Supported-Comparison-Operators" class="common-anchor-header">عوامل المقارنة المدعومة:</h3><ul>
+<li><p><code translate="no">==</code> (يساوي)</p></li>
+<li><p><code translate="no">!=</code> (لا يساوي)</p></li>
+<li><p><code translate="no">&gt;</code> (أكبر من)</p></li>
+<li><p><code translate="no">&lt;</code> (أقل من)</p></li>
+<li><p><code translate="no">&gt;=</code> (أكبر من أو يساوي)</p></li>
+<li><p><code translate="no">&lt;=</code> (أقل من أو يساوي)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">Example 1: Filtering with Equal To (<code translate="no">==</code>)</h3><p>Assume you have a field named <code translate="no">status</code> and you want to find all entities where <code translate="no">status</code> is "active". You can use the equality operator <code translate="no">==</code>:</p>
+<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">مثال 1: التصفية باستخدام يساوي إلى (<code translate="no">==</code>)</h3><p>افترض أن لديك حقلًا باسم <code translate="no">status</code> وتريد العثور على جميع الكيانات التي يكون فيها <code translate="no">status</code> "نشط". يمكنك استخدام عامل المساواة <code translate="no">==</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">Example 2: Filtering with Not Equal To (<code translate="no">!=</code>)</h3><p>To find entities where <code translate="no">status</code> is not "inactive":</p>
+<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">مثال 2: التصفية باستخدام لا يساوي (<code translate="no">!=</code>)</h3><p>للعثور على الكيانات حيث <code translate="no">status</code> ليس "غير نشط":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">Example 3: Filtering with Greater Than (<code translate="no">&gt;</code>)</h3><p>If you want to find all entities with an <code translate="no">age</code> greater than 30:</p>
+<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">مثال 3: التصفية باستخدام أكبر من (<code translate="no">&gt;</code>)</h3><p>إذا كنت تريد العثور على جميع الكيانات التي تحتوي على <code translate="no">age</code> أكبر من 30</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">Example 4: Filtering with Less Than</h3><p>To find entities where <code translate="no">price</code> is less than 100:</p>
+<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">مثال 4: التصفية باستخدام أقل من</h3><p>للعثور على الكيانات التي يكون فيها <code translate="no">price</code> أقل من 100:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">Example 5: Filtering with Greater Than or Equal To (<code translate="no">&gt;=</code>)</h3><p>If you want to find all entities with <code translate="no">rating</code> greater than or equal to 4:</p>
+<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">مثال 5: التصفية باستخدام أكبر من أو يساوي (<code translate="no">&gt;=</code>)</h3><p>إذا كنت تريد العثور على جميع الكيانات ذات <code translate="no">rating</code> أكبر من أو يساوي 4</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Example 6: Filtering with Less Than or Equal To</h3><p>To find entities with <code translate="no">discount</code> less than or equal to 10%:</p>
+<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">مثال 6: التصفية باستخدام أقل من أو يساوي إلى</h3><p>للعثور على الكيانات التي تحتوي على <code translate="no">discount</code> أقل من أو يساوي 10٪:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Range-operators" class="common-anchor-header">Range operators<button data-href="#Range-operators" class="anchor-icon" translate="no">
+<h2 id="Range-operators" class="common-anchor-header">عوامل النطاق<button data-href="#Range-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,29 +81,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Range operators help filter data based on specific sets or ranges of values.</p>
-<h3 id="Supported-Range-Operators" class="common-anchor-header">Supported Range Operators:</h3><ul>
-<li><p><code translate="no">IN</code>: Used to match values within a specific set or range.</p></li>
-<li><p><code translate="no">LIKE</code>: Used to match a pattern (mostly for text fields).</p></li>
+    </button></h2><p>تساعد عوامل المدى في تصفية البيانات بناءً على مجموعات أو نطاقات محددة من القيم.</p>
+<h3 id="Supported-Range-Operators" class="common-anchor-header">معاملات النطاق المدعومة:</h3><ul>
+<li><p><code translate="no">IN</code>: تستخدم لمطابقة القيم ضمن مجموعة أو نطاق محدد.</p></li>
+<li><p><code translate="no">LIKE</code>: يُستخدم لمطابقة نمط (غالبًا للحقول النصية).</p></li>
 </ul>
-<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Example 1: Using <code translate="no">IN</code> to Match Multiple Values</h3><p>If you want to find all entities where the <code translate="no">color</code> is either "red", "green", or "blue":</p>
+<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">مثال 1: استخدام <code translate="no">IN</code> لمطابقة قيم متعددة</h3><p>إذا كنت تريد العثور على جميع الكيانات التي يكون فيها <code translate="no">color</code> إما "أحمر" أو "أخضر" أو "أزرق":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This is useful when you want to check for membership in a list of values.</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Example 2: Using <code translate="no">LIKE</code> for Pattern Matching</h3><p>The <code translate="no">LIKE</code> operator is used for pattern matching in string fields. It can match substrings in different positions within the text: as a <strong>prefix</strong>, <strong>infix</strong>, or <strong>suffix</strong>. The <code translate="no">LIKE</code> operator uses the <code translate="no">%</code> symbol as a wildcard, which can match any number of characters (including zero).</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Prefix Match (Starts With)</h3><p>To perform a <strong>prefix</strong> match, where the string starts with a given pattern, you can place the pattern at the beginning and use <code translate="no">%</code> to match any characters following it. For example, to find all products whose <code translate="no">name</code> starts with "Prod":</p>
+<p>يكون هذا مفيدًا عندما تريد التحقق من العضوية في قائمة من القيم.</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">مثال 2: استخدام <code translate="no">LIKE</code> لمطابقة الأنماط</h3><p>يُستخدم المشغل <code translate="no">LIKE</code> لمطابقة الأنماط في حقول السلاسل. يمكنه مطابقة السلاسل الفرعية في مواضع مختلفة داخل النص: <strong>كبادئة</strong> أو <strong>لاحقة</strong> أو <strong>لاحقة</strong>. يستخدم المشغل <code translate="no">LIKE</code> الرمز <code translate="no">%</code> كحرف بدل، والذي يمكن أن يطابق أي عدد من الأحرف (بما في ذلك الصفر).</p>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">مطابقة البادئة (يبدأ بـ)</h3><p>لإجراء مطابقة <strong>البادئة،</strong> حيث تبدأ السلسلة بنمط معين، يمكنك وضع النمط في البداية واستخدام <code translate="no">%</code> لمطابقة أي أحرف تليه. على سبيل المثال، للعثور على جميع المنتجات التي يبدأ اسمها <code translate="no">name</code> بـ "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name starts with "Prod", such as "Product A", "Product B", etc.</p>
-<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">Suffix Match (Ends With)</h3><p>For a <strong>suffix</strong> match, where the string ends with a given pattern, place the <code translate="no">%</code> symbol at the beginning of the pattern. For example, to find all products whose <code translate="no">name</code> ends with "XYZ":</p>
+<p>سوف يطابق هذا أي منتج يبدأ اسمه بـ "Prod"، مثل "المنتج أ"، "المنتج ب"، إلخ.</p>
+<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">مطابقة لاحقة (تنتهي بـ)</h3><p>لمطابقة <strong>اللاحقة،</strong> حيث تنتهي السلسلة بنمط معين، ضع الرمز <code translate="no">%</code> في بداية النمط. على سبيل المثال، للعثور على جميع المنتجات التي ينتهي اسمها <code translate="no">name</code> بـ "XYZ":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name ends with "XYZ", such as "ProductXYZ", "SampleXYZ", etc.</p>
-<h3 id="Infix-Match-Contains" class="common-anchor-header">Infix Match (Contains)</h3><p>To perform an <strong>infix</strong> match, where the pattern can appear anywhere in the string, you can place the <code translate="no">%</code> symbol at both the beginning and the end of the pattern. For example, to find all products whose <code translate="no">name</code> contains the word "Pro":</p>
+<p>سيؤدي هذا إلى مطابقة أي منتج ينتهي اسمه بـ "XYZ"، مثل "ProductXYZ" أو "SampleXYZ"، إلخ.</p>
+<h3 id="Infix-Match-Contains" class="common-anchor-header">مطابقة لاحقة (يحتوي على)</h3><p>لإجراء تطابق <strong>لاحق،</strong> حيث يمكن أن يظهر النمط في أي مكان في السلسلة، يمكنك وضع الرمز <code translate="no">%</code> في بداية النمط ونهايته. على سبيل المثال، للعثور على جميع المنتجات التي يحتوي <code translate="no">name</code> على كلمة "Pro":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name contains the substring "Pro", such as "Product", "ProLine", or "SuperPro".</p>
-<h2 id="Arithmetic-Operators" class="common-anchor-header">Arithmetic Operators<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
+<p>سيتطابق هذا مع أي منتج يحتوي اسمه على السلسلة الفرعية "Pro"، مثل "منتج" أو "ProLine" أو "ProPro" أو "SuperPro".</p>
+<h2 id="Arithmetic-Operators" class="common-anchor-header">المعاملات الحسابية<button data-href="#Arithmetic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -118,22 +118,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Arithmetic operators allow you to create conditions based on calculations involving numeric fields.</p>
-<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">Supported Arithmetic Operators:</h3><ul>
-<li><p><code translate="no">+</code> (Addition)</p></li>
-<li><p><code translate="no">-</code> (Subtraction)</p></li>
-<li><p><code translate="no">*</code> (Multiplication)</p></li>
-<li><p><code translate="no">/</code> (Division)</p></li>
-<li><p><code translate="no">%</code> (Modulus)</p></li>
-<li><p><code translate="no">**</code> (Exponentiation)</p></li>
+    </button></h2><p>تسمح لك العوامل الحسابية بإنشاء شروط تستند إلى عمليات حسابية تتضمن حقول رقمية.</p>
+<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">المعاملات الحسابية المدعومة:</h3><ul>
+<li><p><code translate="no">+</code> (الجمع)</p></li>
+<li><p><code translate="no">-</code> (الطرح)</p></li>
+<li><p><code translate="no">*</code> (الضرب)</p></li>
+<li><p><code translate="no">/</code> (القسمة)</p></li>
+<li><p><code translate="no">%</code> (المقياس)</p></li>
+<li><p><code translate="no">**</code> (الأس)</p></li>
 </ul>
-<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Example 1: Using Modulus (<code translate="no">%</code>)</h3><p>To find entities where the <code translate="no">id</code> is an even number (i.e., divisible by 2):</p>
+<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">مثال 1: استخدام المقياس (<code translate="no">%</code>)</h3><p>لإيجاد الكيانات التي يكون فيها <code translate="no">id</code> عددًا زوجيًا (أي يقبل القسمة على 2):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">Example 2: Using Exponentiation (<code translate="no">**</code>)</h3><p>To find entities where <code translate="no">price</code> raised to the power of 2 is greater than 1000:</p>
+<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">مثال 2: استخدام الأس (<code translate="no">**</code>)</h3><p>للعثور على الكيانات التي يكون فيها <code translate="no">price</code> مرفوعًا للقوة 2 أكبر من 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Logical-Operators" class="common-anchor-header">Logical Operators<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
+<h2 id="Logical-Operators" class="common-anchor-header">المعاملات المنطقية<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,22 +148,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Logical operators are used to combine multiple conditions into a more complex filter expression. These include <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code>.</p>
-<h3 id="Supported-Logical-Operators" class="common-anchor-header">Supported Logical Operators:</h3><ul>
-<li><p><code translate="no">AND</code>: Combines multiple conditions that must all be true.</p></li>
-<li><p><code translate="no">OR</code>: Combines conditions where at least one must be true.</p></li>
-<li><p><code translate="no">NOT</code>: Negates a condition.</p></li>
+    </button></h2><p>تُستخدم العوامل المنطقية لدمج شروط متعددة في تعبير مرشح أكثر تعقيدًا. وتشمل هذه <code translate="no">AND</code> و <code translate="no">OR</code> و <code translate="no">NOT</code>.</p>
+<h3 id="Supported-Logical-Operators" class="common-anchor-header">المعاملات المنطقية المدعومة:</h3><ul>
+<li><p><code translate="no">AND</code>: يجمع بين عدة شروط يجب أن تكون جميعها صحيحة.</p></li>
+<li><p><code translate="no">OR</code>: يجمع بين شروط يجب أن يكون أحدها على الأقل صحيحًا.</p></li>
+<li><p><code translate="no">NOT</code>: ينفي الشرط.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">Example 1: Using <code translate="no">AND</code> to Combine Conditions</h3><p>To find all products where <code translate="no">price</code> is greater than 100 and <code translate="no">stock</code> is greater than 50:</p>
+<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">مثال 1: استخدام <code translate="no">AND</code> للجمع بين الشروط</h3><p>للعثور على جميع المنتجات التي يكون فيها <code translate="no">price</code> أكبر من 100 و <code translate="no">stock</code> أكبر من 50:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">Example 2: Using <code translate="no">OR</code> to Combine Conditions</h3><p>To find all products where <code translate="no">color</code> is either “red” or "blue":</p>
+<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">مثال 2: استخدام <code translate="no">OR</code> لدمج الشروط</h3><p>للعثور على جميع المنتجات التي يكون فيها <code translate="no">color</code> إما "أحمر" أو "أزرق":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Example 3: Using <code translate="no">NOT</code> to Exclude a Condition</h3><p>To find all products where <code translate="no">color</code> is not "green":</p>
+<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">مثال 3: استخدام <code translate="no">NOT</code> لاستبعاد شرط</h3><p>للعثور على جميع المنتجات حيث <code translate="no">color</code> ليس "أخضر":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">IS NULL and IS NOT NULL Operators<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
+<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">المشغلان IS NULL و IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,36 +178,36 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data).</p>
+    </button></h2><p>يتم استخدام المشغّلين <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> لتصفية الحقول بناءً على ما إذا كانت تحتوي على قيمة فارغة (عدم وجود بيانات).</p>
 <ul>
-<li><p><code translate="no">IS NULL</code>: Identifies entities where a specific field contains a null value, i.e., the value is absent or undefined.</p></li>
-<li><p><code translate="no">IS NOT NULL</code>: Identifies entities where a specific field contains any value other than null, meaning the field has a valid, defined value.</p></li>
+<li><p><code translate="no">IS NULL</code>: يحدد الكيانات التي يحتوي فيها حقل معين على قيمة فارغة، أي أن القيمة غير موجودة أو غير محددة.</p></li>
+<li><p><code translate="no">IS NOT NULL</code>: يحدد الكيانات التي يحتوي فيها حقل معين على أي قيمة أخرى غير فارغة، أي أن الحقل يحتوي على قيمة صحيحة ومحددة.</p></li>
 </ul>
 <div class="alert note">
-<p>The operators are case-insensitive, so you can use <code translate="no">IS NULL</code> or <code translate="no">is null</code>, and <code translate="no">IS NOT NULL</code> or <code translate="no">is not null</code>.</p>
+<p>العوامل غير حساسة لحالة الأحرف، لذا يمكنك استخدام <code translate="no">IS NULL</code> أو <code translate="no">is null</code> ، و <code translate="no">IS NOT NULL</code> أو <code translate="no">is not null</code>.</p>
 </div>
-<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Regular Scalar Fields with Null Values</h3><p>Milvus allows filtering on regular scalar fields, such as strings or numbers, with null values.</p>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">الحقول العددية العادية ذات القيم الفارغة</h3><p>يسمح ميلفوس بالتصفية على الحقول العددية العادية، مثل السلاسل أو الأرقام، ذات القيم الفارغة.</p>
 <div class="alert note">
-<p>An empty string <code translate="no">&quot;&quot;</code> is not treated as a null value for a <code translate="no">VARCHAR</code> field.</p>
+<p>لا يتم التعامل مع السلسلة الفارغة <code translate="no">&quot;&quot;</code> كقيمة فارغة لحقل <code translate="no">VARCHAR</code>.</p>
 </div>
-<p>To retrieve entities where the <code translate="no">description</code> field is null:</p>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">description</code> فارغًا:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">description</code> field is not null:</p>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">description</code> غير فارغ:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To retrieve entities where the <code translate="no">description</code> field is not null and the <code translate="no">price</code> field is higher than 10:</p>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">description</code> غير فارغ والحقل <code translate="no">price</code> أعلى من 10:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">JSON Fields with Null Values</h3><p>Milvus allows filtering on JSON fields that contain null values. A JSON field is treated as null in the following ways:</p>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">حقول JSON ذات القيم الفارغة</h3><p>يسمح Milvus بالتصفية على حقول JSON التي تحتوي على قيم فارغة. يتم التعامل مع حقل JSON على أنه فارغ بالطرق التالية:</p>
 <ul>
-<li><p>The entire JSON object is explicitly set to None (null), for example, <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
-<li><p>The JSON field itself is completely missing from the entity.</p></li>
+<li><p>يتم تعيين كائن JSON بأكمله بشكل صريح إلى لا شيء (فارغ)، على سبيل المثال، <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
+<li><p>يكون حقل JSON نفسه مفقودًا تمامًا من الكيان.</p></li>
 </ul>
 <div class="alert note">
-<p>If some elements within a JSON object are null (e.g. individual keys), the field is still considered non-null. For example, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> is not treated as null, even though the <code translate="no">category</code> key is null.</p>
+<p>إذا كانت بعض العناصر داخل كائن JSON فارغة (مثل المفاتيح الفردية)، يظل الحقل يعتبر غير فارغ. على سبيل المثال، لا يتم التعامل مع <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> على أنه فارغ، على الرغم من أن المفتاح <code translate="no">category</code> فارغ.</p>
 </div>
-<p>To further illustrate how Milvus handles JSON fields with null values, consider the following sample data with a JSON field <code translate="no">metadata</code>:</p>
+<p>لمزيد من التوضيح لكيفية تعامل Milvus مع حقول JSON ذات القيم الفارغة، انظر إلى نموذج البيانات التالي مع حقل JSON <code translate="no">metadata</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
@@ -230,8 +230,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where <code translate="no">metadata</code> is null</strong></p>
-<p>To find entities where the <code translate="no">metadata</code> field is either missing or explicitly set to None:</p>
+<p><strong>مثال 1: استرداد الكيانات التي يكون فيها <code translate="no">metadata</code> فارغًا</strong></p>
+<p>للعثور على الكيانات التي يكون فيها الحقل <code translate="no">metadata</code> إما مفقودًا أو تم تعيينه صراحةً إلى لا شيء:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -240,8 +240,8 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where <code translate="no">metadata</code> is not null</strong></p>
-<p>To find entities where the <code translate="no">metadata</code> field is not null:</p>
+<p><strong>مثال 2: استرداد الكيانات حيث <code translate="no">metadata</code> ليس فارغًا</strong></p>
+<p>للعثور على الكيانات التي يكون فيها الحقل <code translate="no">metadata</code> غير فارغ:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -250,15 +250,15 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">ARRAY Fields with Null Values</h3><p>Milvus allows filtering on ARRAY fields that contain null values. An ARRAY field is treated as null in the following ways:</p>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">حقول ARRAY ذات القيم الفارغة</h3><p>يسمح Milvus بالتصفية على حقول ARRAY التي تحتوي على قيم فارغة. يتم التعامل مع حقل ARRAY على أنه فارغ بالطرق التالية:</p>
 <ul>
-<li><p>The entire ARRAY field is explicitly set to None (null), for example, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
-<li><p>The ARRAY field is completely missing from the entity.</p></li>
+<li><p>يتم تعيين حقل ARRAY بالكامل إلى لا شيء (فارغ)، على سبيل المثال، <code translate="no">&quot;tags&quot;: None</code>.</p></li>
+<li><p>يكون حقل ARRAY مفقودًا تمامًا من الكيان.</p></li>
 </ul>
 <div class="alert note">
-<p>An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
+<p>لا يمكن أن يحتوي حقل ARRAY على قيم فارغة جزئية لأن جميع العناصر في حقل ARRAY يجب أن يكون لها نفس نوع البيانات. لمزيد من التفاصيل، راجع <a href="/docs/ar/array_data_type.md">حقل المصفوفة</a>.</p>
 </div>
-<p>To further illustrate how Milvus handles ARRAY fields with null values, consider the following sample data with an ARRAY field <code translate="no">tags</code>:</p>
+<p>لمزيد من التوضيح لكيفية تعامل Milvus مع حقول ARRAY ذات القيم الفارغة، انظر نموذج البيانات التالي مع حقل ARRAY <code translate="no">tags</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
@@ -279,8 +279,8 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where <code translate="no">tags</code> is null</strong></p>
-<p>To retrieve entities where the <code translate="no">tags</code> field is either missing or explicitly set to <code translate="no">None</code>:</p>
+<p><strong>مثال 1: استرداد الكيانات حيث <code translate="no">tags</code> فارغة</strong></p>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">tags</code> إما مفقودًا أو تم تعيينه صراحةً إلى <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -289,8 +289,8 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where <code translate="no">tags</code> is not null</strong></p>
-<p>To retrieve entities where the <code translate="no">tags</code> field is not null:</p>
+<p><strong>مثال 2: استرداد الكيانات حيث <code translate="no">tags</code> ليس فارغًا</strong></p>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">tags</code> غير فارغ:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>
@@ -299,7 +299,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Tips on Using Basic Operators with JSON and ARRAY Fields<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">نصائح حول استخدام عوامل التشغيل الأساسية مع حقول JSON و ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -314,14 +314,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.</p>
-<p>For example, if you have a <code translate="no">product</code> field that contains multiple keys like <code translate="no">price</code>, <code translate="no">model</code>, and <code translate="no">tags</code>, always reference the key directly:</p>
+    </button></h2><p>في حين أن المشغلات الأساسية في ميلفوس متعددة الاستخدامات ويمكن تطبيقها على الحقول القياسية، إلا أنه يمكن استخدامها بفعالية مع المفاتيح والفهارس في حقلي JSON و ARRAY.</p>
+<p>على سبيل المثال، إذا كان لديك حقل <code translate="no">product</code> يحتوي على مفاتيح متعددة مثل <code translate="no">price</code> و <code translate="no">model</code> و <code translate="no">tags</code> ، فقم دائمًا بالرجوع إلى المفتاح مباشرةً:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To find records where the first temperature in an array of recorded temperatures exceeds a certain value, use:</p>
+<p>للعثور على السجلات التي تتجاوز فيها درجة الحرارة الأولى في مصفوفة من درجات الحرارة المسجلة قيمة معينة، استخدم:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">خاتمة<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -336,4 +336,4 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.</p>
+    </button></h2><p>يقدم Milvus مجموعة من العوامل الأساسية التي تمنحك المرونة في تصفية بياناتك والاستعلام عنها. من خلال الجمع بين المقارنة والنطاق والعوامل الحسابية والمنطقية، يمكنك إنشاء تعبيرات تصفية قوية لتضييق نطاق نتائج البحث واسترداد البيانات التي تحتاجها بكفاءة.</p>

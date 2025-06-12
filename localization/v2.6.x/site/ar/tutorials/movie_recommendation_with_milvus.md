@@ -1,15 +1,15 @@
 ---
 id: movie_recommendation_with_milvus.md
 summary: >-
-  In this notebook, we will explore how to generate embeddings of movie
-  descriptions using OpenAI and leverage those embeddings within Milvus to
-  recommend movies that match your preferences. To enhance our search results,
-  we will utilize filtering to perform metadata searches. The dataset used in
-  this example is sourced from HuggingFace datasets and contains over 8,000
-  movie entries, providing a rich pool of options for movie recommendations.
-title: Movie Recommendation with Milvus
+  سنستكشف في هذا الدفتر كيفية إنشاء تضمينات لأوصاف الأفلام باستخدام OpenAI
+  والاستفادة من تلك التضمينات داخل Milvus للتوصية بالأفلام التي تتوافق مع
+  تفضيلاتك. ولتحسين نتائج البحث، سنستخدم التصفية لإجراء عمليات البحث عن البيانات
+  الوصفية. يتم الحصول على مجموعة البيانات المستخدمة في هذا المثال من مجموعات
+  بيانات HuggingFace وتحتوي على أكثر من 8000 مدخل فيلم، مما يوفر مجموعة غنية من
+  الخيارات لتوصيات الأفلام.
+title: توصيات الأفلام مع ميلفوس
 ---
-<h1 id="Movie-Recommendation-with-Milvus" class="common-anchor-header">Movie Recommendation with Milvus<button data-href="#Movie-Recommendation-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Movie-Recommendation-with-Milvus" class="common-anchor-header">توصيات الأفلام مع ميلفوس<button data-href="#Movie-Recommendation-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -30,8 +30,8 @@ title: Movie Recommendation with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>In this notebook, we will explore how to generate embeddings of movie descriptions using OpenAI and leverage those embeddings within Milvus to recommend movies that match your preferences. To enhance our search results, we will utilize filtering to perform metadata searches. The dataset used in this example is sourced from HuggingFace datasets and contains over 8,000 movie entries, providing a rich pool of options for movie recommendations.</p>
-<h2 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+<p>في هذا الدفتر، سنستكشف في هذا الدفتر كيفية إنشاء تضمينات لأوصاف الأفلام باستخدام OpenAI والاستفادة من تلك التضمينات داخل Milvus للتوصية بالأفلام التي تتوافق مع تفضيلاتك. لتحسين نتائج البحث، سنستخدم التصفية لإجراء عمليات البحث عن البيانات الوصفية. يتم الحصول على مجموعة البيانات المستخدمة في هذا المثال من مجموعات بيانات HuggingFace وتحتوي على أكثر من 8000 مدخل فيلم، مما يوفر مجموعة غنية من الخيارات لتوصيات الأفلام.</p>
+<h2 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,18 +46,18 @@ title: Movie Recommendation with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can install the dependencies by running the following command:</p>
+    </button></h2><p>يمكنك تثبيت التبعيات عن طريق تشغيل الأمر التالي:</p>
 <pre><code translate="no" class="language-python">$ pip install openai pymilvus datasets tqdm
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
-<p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
+<p>سنستخدم OpenAI باعتباره LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Initialize-OpenAI-client-and-Milvus" class="common-anchor-header">Initialize OpenAI client and Milvus<button data-href="#Initialize-OpenAI-client-and-Milvus" class="anchor-icon" translate="no">
+<h2 id="Initialize-OpenAI-client-and-Milvus" class="common-anchor-header">تهيئة عميل OpenAI و Milvus<button data-href="#Initialize-OpenAI-client-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,36 +72,36 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Initialize the OpenAI client.</p>
+    </button></h2><p>قم بتهيئة عميل OpenAI.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
-<p>Set the collection name and dimension for the embeddings.</p>
+<p>قم بتعيين اسم المجموعة والبعد للتضمينات.</p>
 <pre><code translate="no" class="language-python">COLLECTION_NAME = <span class="hljs-string">&quot;movie_search&quot;</span>
 DIMENSION = <span class="hljs-number">1536</span>
 
 BATCH_SIZE = <span class="hljs-number">1000</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Connect to Milvus.</p>
+<p>الاتصال بـ Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Connect to Milvus Database</span>
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">url</code> and <code translate="no">token</code>:</p>
+<p>بالنسبة لحجة <code translate="no">url</code> و <code translate="no">token</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام عنوان الخادم والمنفذ كـ uri، على سبيل المثال<code translate="no">http://localhost:19530</code>. إذا قمت بتمكين ميزة المصادقة على Milvus، استخدم "<your_username>:<your_password>" كرمز مميز، وإلا فلا تقم بتعيين الرمز المميز.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فاضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Remove collection if it already exists</span>
 <span class="hljs-keyword">if</span> client.has_collection(COLLECTION_NAME):
     client.drop_collection(COLLECTION_NAME)
 <button class="copy-code-btn"></button></code></pre>
-<p>Define the fields for the collection, which include the id, title, type, release year, rating, and description.</p>
+<p>حدد الحقول الخاصة بالمجموعة، والتي تتضمن المعرف والعنوان والنوع وسنة الإصدار والتصنيف والوصف.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
 
 <span class="hljs-comment"># Create collection which includes the id, title, and embedding.</span>
@@ -124,7 +124,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</spa
 <span class="hljs-comment"># 3. Create collection with the schema</span>
 client.create_collection(collection_name=COLLECTION_NAME, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create the index on the collection and load it.</p>
+<p>إنشاء الفهرس على المجموعة وتحميله.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the index on the collection and load it.</span>
 
 <span class="hljs-comment"># 1. Prepare index parameters</span>
@@ -144,7 +144,7 @@ client.create_index(collection_name=COLLECTION_NAME, index_params=index_params)
 <span class="hljs-comment"># 4. Load collection</span>
 client.load_collection(collection_name=COLLECTION_NAME, replica_number=<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Dataset" class="common-anchor-header">Dataset<button data-href="#Dataset" class="anchor-icon" translate="no">
+<h2 id="Dataset" class="common-anchor-header">مجموعة البيانات<button data-href="#Dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,12 +159,12 @@ client.load_collection(collection_name=COLLECTION_NAME, replica_number=<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With Milvus up and running we can begin grabbing our data. <code translate="no">Hugging Face Datasets</code> is a hub that holds many different user datasets, and for this example we are using HuggingLearners’s netflix-shows dataset. This dataset contains movies and their metadata pairs for over 8 thousand movies. We are going to embed each description and store it within Milvus along with its title, type, release_year and rating.</p>
+    </button></h2><p>مع تشغيل Milvus، يمكننا البدء في الحصول على بياناتنا. <code translate="no">Hugging Face Datasets</code> هو مركز يحتوي على العديد من مجموعات بيانات المستخدمين المختلفة، وفي هذا المثال نستخدم في هذا المثال مجموعة بيانات netflix-shows الخاصة بـ Netflix-shows. تحتوي مجموعة البيانات هذه على أفلام وأزواج بياناتها الوصفية لأكثر من 8 آلاف فيلم. سنقوم بتضمين كل وصف وتخزينه داخل Milvus مع عنوانه ونوعه وسنة_الإصدار والتقييم.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
 
 dataset = load_dataset(<span class="hljs-string">&quot;hugginglearners/netflix-shows&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-the-Data" class="common-anchor-header">Insert the Data<button data-href="#Insert-the-Data" class="anchor-icon" translate="no">
+<h2 id="Insert-the-Data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,12 +179,12 @@ dataset = load_dataset(<span class="hljs-string">&quot;hugginglearners/netflix-s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that we have our data on our machine we can begin embedding it and inserting it into Milvus. The embedding function takes in text and returns the embeddings in a list format.</p>
+    </button></h2><p>الآن بعد أن أصبح لدينا بياناتنا على جهازنا يمكننا البدء في تضمينها وإدراجها في Milvus. تأخذ دالة التضمين في النص وتعيد التضمينات بتنسيق قائمة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_texts</span>(<span class="hljs-params">texts</span>):
     res = openai_client.embeddings.create(<span class="hljs-built_in">input</span>=texts, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
     <span class="hljs-keyword">return</span> [res_data.embedding <span class="hljs-keyword">for</span> res_data <span class="hljs-keyword">in</span> res.data]
 <button class="copy-code-btn"></button></code></pre>
-<p>This next step does the actual inserting. We iterate through all the entries and create batches that we insert once we hit our set batch size. After the loop is over we insert the last remaning batch if it exists.</p>
+<p>هذه الخطوة التالية تقوم بالإدراج الفعلي. نقوم بتكرار جميع الإدخالات وإنشاء دفعات نقوم بإدراجها بمجرد أن نصل إلى حجم الدفعة المحدد. بعد انتهاء الحلقة نقوم بإدراج آخر دفعة متبقية إذا كانت موجودة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 <span class="hljs-comment"># batch (data to be inserted) is a list of dictionaries</span>
@@ -211,7 +211,7 @@ batch = []
         client.insert(collection_name=COLLECTION_NAME, data=batch)
         batch = []
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query-the-Database" class="common-anchor-header">Query the Database<button data-href="#Query-the-Database" class="anchor-icon" translate="no">
+<h2 id="Query-the-Database" class="common-anchor-header">الاستعلام عن قاعدة البيانات<button data-href="#Query-the-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -226,7 +226,7 @@ batch = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With our data safely inserted into Milvus, we can now perform a query. The query takes in a tuple of the movie description you are searching for and the filter to use. More info about the filter can be found <a href="https://milvus.io/docs/boolean.md">here</a>. The search first prints out your description and filter expression. After that for each result we print the score, title, type, release year, rating and description of the result movies.</p>
+    </button></h2><p>بعد إدراج بياناتنا بأمان في ميلفوس، يمكننا الآن إجراء استعلام. يأخذ الاستعلام مجموعة من وصف الفيلم الذي تبحث عنه والمرشح الذي ستستخدمه. يمكن العثور على مزيد من المعلومات حول الفلتر <a href="https://milvus.io/docs/boolean.md">هنا</a>. يطبع البحث أولاً الوصف وتعبير المرشح. بعد ذلك لكل نتيجة نقوم بطباعة النتيجة والعنوان والنوع وسنة الإصدار والتقييم ووصف الأفلام الناتجة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 

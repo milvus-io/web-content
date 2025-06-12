@@ -122,7 +122,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p><code translate="no">MILVUSAI_AZURE_OPENAI_API_KEY</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>جعل مفتاح Azure OpenAI متاحًا داخل كل حاوية Milvus <em>(يتم تجاهله عند وجود مفتاح Azure OpenAI في <code translate="no">milvus.yaml</code></em> )</p></td>
+     <td><p>يجعل مفتاح Azure OpenAI متاحًا داخل كل حاوية Milvus <em>(يتم تجاهله عند وجود مفتاح Azure OpenAI في <code translate="no">milvus.yaml</code></em> )</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">MILVUSAI_AZURE_OPENAI_RESOURCE_NAME</code></p></td>

@@ -47,7 +47,7 @@ summary: >-
 </ul>
 <p>ويقسمها إلى كلمات فريدة (على سبيل المثال، " <em>ميلفوس</em>"، <em>هي</em> <em>قاعدة</em> <em>بيانات</em> <em>سحابية</em> أصلية، <em>قاعدة بيانات</em> <em>متجهة،</em> <em>قاعدة بيان</em>ات، <em>جيد</em> <em>جداً،</em> جيد، <em>في،</em> <em>أداء</em>).</p></li>
 <li><p><strong>بناء قاموس المصطلحات</strong>: يتم تخزين هذه الكلمات الفريدة في قائمة مرتبة تسمى <strong>قاموس</strong> المصطلحات. يتيح هذا القاموس لـ Milvus التحقق بسرعة من وجود كلمة ما وتحديد موقعها في الفهرس.</p></li>
-<li><p><strong>إنشاء القائمة المقلوبة</strong>: لكل كلمة في قاموس المصطلحات، يحتفظ ميلفوس <strong>بقائمة</strong> مقلوبة توضح المستندات التي تحتوي على تلك الكلمة. على سبيل المثال، تظهر <strong>كلمة "ميلفوس"</strong> في كلتا الجملتين، لذا فإن القائمة المقلوبة تشير إلى كلا معرفي المستندين.</p></li>
+<li><p><strong>إنشاء القائمة المقلوبة</strong>: لكل كلمة في قاموس المصطلحات، يحتفظ ميلفوس <strong>بقائمة</strong> مقلوبة توضح المستندات التي تحتوي على تلك الكلمة. على سبيل المثال، تظهر <strong>كلمة "Milvus"</strong> في كلتا الجملتين، لذا فإن القائمة المقلوبة تشير إلى كلا معرفي المستندين.</p></li>
 </ol>
 <p>
   
@@ -69,7 +69,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالنسبة للحقول القياسية مثل <strong>BOOL</strong> و <strong>INT8</strong> و <strong>INT16</strong> و <strong>INT32</strong> و <strong>INT64</strong> و <strong>FLOAT و FLOAT</strong> و <strong>DOUBLE</strong> و <strong>VARCHAR</strong> و <strong>ARRAY،</strong> فإن إنشاء فهرس مقلوب أمر بسيط ومباشر. استخدم الأسلوب <code translate="no">create_index()</code> مع ضبط المعلمة <code translate="no">index_type</code> على <code translate="no">&quot;INVERTED&quot;</code>.</p>
+    </button></h2><p>بالنسبة للحقول العددية مثل <strong>BOOL</strong> و <strong>INT8</strong> و <strong>INT16</strong> و <strong>INT32</strong> و <strong>INT64</strong> و <strong>FLOAT و FLOAT</strong> و <strong>DOUBLE</strong> و <strong>VARCHAR</strong> و <strong>ARRAY،</strong> فإن إنشاء فهرس مقلوب أمر بسيط ومباشر. استخدم الأسلوب <code translate="no">create_index()</code> مع ضبط المعلمة <code translate="no">index_type</code> على <code translate="no">&quot;INVERTED&quot;</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(

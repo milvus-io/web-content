@@ -2,9 +2,9 @@
 id: configure_common.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure common for Milvus.
+summary: تعلم كيفية تهيئة المشترك لميلفوس.
 ---
-<h1 id="common-related-Configurations" class="common-anchor-header">common-related Configurations<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="common-related-Configurations" class="common-anchor-header">التكوينات المشتركة ذات الصلة<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,14 +37,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.defaultPartitionName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Name of the default partition when a collection is created      </td>
-      <td>_default</td>
+      <td>        اسم القسم الافتراضي عند إنشاء مجموعة ما    </td>
+      <td>_افتراضي</td>
     </tr>
   </tbody>
 </table>
@@ -66,13 +66,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.defaultIndexName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Name of the index when it is created with name unspecified      </td>
+      <td>        اسم الفهرس عندما يتم إنشاؤه باسم غير محدد      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.entityExpiration">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Entity expiration in seconds, CAUTION -1 means never expire      </td>
+      <td>        انتهاء صلاحية الكيان بالثواني، تنبيه -1 يعني عدم انتهاء الصلاحية أبدًا      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -124,13 +124,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.indexSliceSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Index slice size in MB      </td>
+      <td>        حجم شريحة الفهرس بالميجابايت      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -153,13 +153,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.highPriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">القيمة الافتراضية</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in high priority pool      </td>
+      <td>        تحدد هذه المعلمة عدد مرات عدد الخيوط التي تمثل عدد النوى في تجمع الأولوية العالية      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.middlePriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in middle priority pool      </td>
+      <td>        تحدد هذه المعلمة عدد المرات التي يكون فيها عدد الخيوط هو عدد النوى في تجمع الأولوية المتوسطة      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -211,13 +211,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.lowPriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in low priority pool      </td>
+      <td>        تحدد هذه المعلمة عدد المرات التي يكون فيها عدد مؤشرات الترابط هو عدد النوى في تجمع الأولوية المنخفضة      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -240,13 +240,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.gracefulTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        milliseconds. it represents the interval (in ms) by which the request arrival time needs to be subtracted in the case of Bounded Consistency.      </td>
+      <td>        بالمللي ثانية. تمثل الفاصل الزمني (بالمللي ثانية) الذي يجب طرح وقت وصول الطلب في حالة الاتساق المحدود.      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -269,13 +269,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. it will force quit the server if the graceful stop process is not completed during this time.      </td>
+      <td>        ثانية. سيؤدي ذلك إلى فرض إنهاء الخادم إذا لم تكتمل عملية الإيقاف الآمن خلال هذا الوقت.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -298,14 +298,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.storageType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        please adjust in embedded Milvus: local, available values are [local, remote, opendal], value minio is deprecated, use remote instead      </td>
-      <td>remote</td>
+      <td>        يرجى الضبط في ميلفوس المضمنة: محلي، القيم المتوفرة هي [محلي، بعيد، أوبندال]، القيمة مينيو مهملة، استخدم بعيد بدلاً منها      </td>
+      <td>بعيد</td>
     </tr>
   </tbody>
 </table>
@@ -327,17 +327,17 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.simdType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Default value: auto</li>      
-        <li>Valid values: [auto, avx512, avx2, avx, sse4_2]</li>      
-        <li>This configuration is only used by querynode and indexnode, it selects CPU instruction set for Searching and Index-building.</li>      </td>
-      <td>auto</td>
+        <li>القيمة الافتراضية: تلقائي</li>      
+        <li>القيم الصالحة: [تلقائي، avx512، avx2، avx2، avx، sse4_2]</li>      
+        <li>يتم استخدام هذا التكوين فقط من قبل querynode و indexnode، فهو يحدد مجموعة تعليمات وحدة المعالجة المركزية للبحث وبناء الفهرس.</li>      </td>
+      <td>تلقائي</td>
     </tr>
   </tbody>
 </table>
@@ -359,15 +359,15 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.superUsers">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The superusers will ignore some system check processes,</li>      
-        <li>like the old password verification when updating the credential</li>      </td>
+        <li>سيتجاهل المستخدمون الفائقون بعض عمليات التحقق من النظام,</li>      
+        <li>مثل التحقق من كلمة المرور القديمة عند تحديث بيانات الاعتماد</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -390,14 +390,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.defaultRootPassword">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        default password for root user. The maximum length is 72 characters, and double quotes are required.      </td>
-      <td>Milvus</td>
+      <td>        كلمة المرور الافتراضية للمستخدم الجذر. الحد الأقصى للطول هو 72 حرفاً، ويلزم وجود علامات اقتباس مزدوجة.      </td>
+      <td>ميلفوس</td>
     </tr>
   </tbody>
 </table>
@@ -419,14 +419,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rootShouldBindRole">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether the root user should bind a role when the authorization is enabled.      </td>
-      <td>false</td>
+      <td>        ما إذا كان يجب ربط المستخدم الجذر بدور عند تمكين التخويل.      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -448,14 +448,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.overrideBuiltInPrivilegeGroups.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to override build-in privilege groups      </td>
-      <td>false</td>
+      <td>        ما إذا كان يجب تجاوز مجموعات الامتيازات المضمنة      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -477,14 +477,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level readonly privileges      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups</td>
+      <td>        امتيازات للقراءة فقط على مستوى المجموعة      </td>
+      <td>سرد قواعد البيانات,تحديدالملكية,تحديدالملكية,تحديد المستخدم,وصفمجموعة الموارد,سرد مجموعات الموارد,سرد مجموعات الامتيازات</td>
     </tr>
   </tbody>
 </table>
@@ -506,14 +506,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level readwrite privileges      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+      <td>        امتيازات الكتابة للقراءة على مستوى المجموعة      </td>
+      <td>ListDatabase,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
     </tr>
   </tbody>
 </table>
@@ -535,14 +535,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level admin privileges      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,DropDatabase,CreateOwnership,DropOwnership,ManageOwnership,CreateResourceGroup,DropResourceGroup,UpdateUser,RenameCollection,CreatePrivilegeGroup,DropPrivilegeGroup,OperatePrivilegeGroup</td>
+      <td>        امتيازات المسؤول على مستوى المجموعة      </td>
+      <td>ListDatabase,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,إسقاط قاعدة البيانات،إنشاء الملكية،إسقاط الملكية،إسقاط الملكية،إدارة الملكية،إنشاءمجموعة الموارد،إسقاط مجموعة الموارد،تحديثالمستخدم،إعادة تسمية المجموعة،إنشاءمجموعة الامتياز،إسقاط مجموعة الامتياز،تشغيل مجموعة الامتياز</td>
     </tr>
   </tbody>
 </table>
@@ -564,14 +564,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level readonly privileges      </td>
-      <td>ShowCollections,DescribeDatabase</td>
+      <td>        امتيازات للقراءة فقط على مستوى قاعدة البيانات      </td>
+      <td>إظهار المجموعات، وصف قاعدة البيانات</td>
     </tr>
   </tbody>
 </table>
@@ -593,14 +593,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level readwrite privileges      </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase</td>
+      <td>        امتيازات الكتابة للقراءة على مستوى قاعدة البيانات      </td>
+      <td>إظهار المجموعات,وصف قاعدة البيانات,وصف قاعدة البيانات,تعديل قاعدة البيانات</td>
     </tr>
   </tbody>
 </table>
@@ -622,14 +622,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level admin privileges      </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase,CreateCollection,DropCollection</td>
+      <td>        امتيازات المسؤول على مستوى قاعدة البيانات      </td>
+      <td>إظهار المجموعات، وصف قاعدة البيانات، وصف قاعدة البيانات، تغيير قاعدة البيانات، إنشاء مجموعة، إسقاط مجموعة</td>
     </tr>
   </tbody>
 </table>
@@ -651,14 +651,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level readonly privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases</td>
+      <td>        امتيازات مستوى المجموعة للقراءة فقط      </td>
+      <td>استعلام،بحث،تفصيل الفهرس،حصول على حالة التدفق،حصول على حالة التحميل،حصول على تقدم التحميل،وجود قسم،إظهار الأقسام،وصف المجموعة،وصف الخواص ،حصول على الإحصائيات،قائمة الخواص</td>
     </tr>
   </tbody>
 </table>
@@ -680,14 +680,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level readwrite privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition</td>
+      <td>        امتيازات الكتابة للقراءة على مستوى المجموعة      </td>
+      <td>استعلام، بحث، بحث، تفاصيل الفهرس، احصل على حالة التدفق، احصل على حالة التحميل، احصل على تقدم التحميل، لديها قسم، اعرض الأقسام، وصف المجموعة، وصف البوليصة، احصل على الإحصائيات، قائمة البواليع، تحميل، تحرير، تحرير، إدراج، حذف، حذف، رفع، استيراد، تدفق، ضغط، ضغط، تحميل توازن، إنشاء فهرس، إسقاط فهرس، إنشاء قسم، إسقاط قسم</td>
     </tr>
   </tbody>
 </table>
@@ -709,14 +709,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level admin privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition,CreateAlias,DropAlias</td>
+      <td>        امتيازات مسؤول مستوى المجموعة      </td>
+      <td>استعلام، بحث، بحث، تفاصيل الفهرس، احصل على حالة التدفق، احصل على حالة التحميل، احصل على حالة التحميل، احصل على تقدم التحميل، يحتوي على قسم، إظهار الأقسام، وصف المجموعة، وصف الخواص، الحصول على الإحصائيات، قائمة الخواص ،تحميل،إطلاق،إدراج،إدراج، حذف،إدراج، استيراد، استيراد، تدفُّق، ضغط، تحميل توازن، إنشاء فهرس، إسقاط فهرس، إنشاء قسم، إسقاط قسم، إنشاء خواص، إسقاط خواص</td>
     </tr>
   </tbody>
 </table>
@@ -738,13 +738,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.session.ttl">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ttl value when session granting a lease to register service      </td>
+      <td>        قيمة ttl عند منح جلسة العمل عقد إيجار لتسجيل الخدمة      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -767,13 +767,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.session.retryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry times when session sending etcd requests      </td>
+      <td>        أوقات إعادة المحاولة عند إرسال جلسة العمل لطلبات إلخd      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -796,14 +796,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.metrics.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether gather statistics for metrics locks      </td>
-      <td>false</td>
+      <td>        ما إذا كان جمع الإحصائيات لأقفال المقاييس      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -825,13 +825,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.threshold.info">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum milliseconds for printing durations in info level      </td>
+      <td>        الحد الأدنى بالمللي ثانية لطباعة المدد الزمنية في مستوى المعلومات      </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -854,13 +854,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.threshold.warn">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum milliseconds for printing durations in warn level      </td>
+      <td>        الحد الأدنى بالمللي ثانية لمدد الطباعة في مستوى التحذير      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -883,13 +883,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.maxWLockConditionalWaitTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum seconds for waiting wlock conditional      </td>
+      <td>        الحد الأقصى للثواني لانتظار Wlock الشرطي      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -912,17 +912,17 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.ttMsgEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to disable the internal time messaging mechanism for the system. </li>      
-        <li>If disabled (set to false), the system will not allow DML operations, including insertion, deletion, queries, and searches. </li>      
-        <li>This helps Milvus-CDC synchronize incremental data</li>      </td>
-      <td>true</td>
+        <li>ما إذا كان سيتم تعطيل آلية المراسلة الزمنية الداخلية للنظام. </li>      
+        <li>في حالة تعطيلها (تعيينها إلى خطأ)، لن يسمح النظام بعمليات DML، بما في ذلك الإدراج والحذف والاستعلامات وعمليات البحث. </li>      
+        <li>هذا يساعد Milvus-CDC على مزامنة البيانات الإضافية</li>      </td>
+      <td>صحيح</td>
     </tr>
   </tbody>
 </table>
@@ -944,13 +944,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.traceLogMode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        trace request info      </td>
+      <td>        تتبع معلومات الطلب      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -973,13 +973,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter initial size      </td>
+      <td>        الحجم الأولي لمرشح التفتح      </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -1002,14 +1002,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
-      <td>BlockedBloomFilter</td>
+      <td>        نوع فلتر التفتح، دعم BasicBloomFilter و BlockedBloomFilter      </td>
+      <td>فلتر التفتح المحظور</td>
     </tr>
   </tbody>
 </table>
@@ -1031,13 +1031,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.maxBloomFalsePositive">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max false positive rate for bloom filter      </td>
+      <td>        أقصى معدل إيجابي كاذب لمرشح التفتح      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -1060,13 +1060,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterApplyBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        batch size when to apply pk to bloom filter      </td>
+      <td>        حجم الدُفعة عند تطبيق pk على مرشح التفتح      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1089,14 +1089,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.collectionReplicateEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable collection replication.      </td>
-      <td>false</td>
+      <td>        سواء لتمكين النسخ المتماثل للتجميع.      </td>
+      <td>خاطئة</td>
     </tr>
   </tbody>
 </table>
@@ -1118,14 +1118,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.usePartitionKeyAsClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, do clustering compaction and segment prune on partition key field      </td>
-      <td>false</td>
+      <td>        إذا كانت صواب، القيام بضغط التجميع وتشذيب المقطع في حقل مفتاح التقسيم      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -1147,14 +1147,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.useVectorAsClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, do clustering compaction and segment prune on vector field      </td>
-      <td>false</td>
+      <td>        إذا كان صواباً، القيام بضغط التجميع وتقليم المقاطع على حقل المتجه      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -1176,14 +1176,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.enableVectorClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, enable vector clustering key and vector clustering compaction      </td>
-      <td>false</td>
+      <td>        إذا كانت صواب، تمكين مفتاح تجميع المتجهات وضغط تجميع المتجهات      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -1205,14 +1205,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.localRPCEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable local rpc for internal communication when mix or standalone mode.      </td>
-      <td>false</td>
+      <td>        تمكين rpc المحلي للاتصال الداخلي عند المزج أو الوضع المستقل.      </td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -1234,13 +1234,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.sync.taskPoolReleaseTimeoutSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum time to wait for the task to finish and release resources in the pool      </td>
+      <td>        الحد الأقصى لوقت انتظار انتهاء المهمة وتحرير الموارد في المجموعة      </td>
       <td>60</td>
     </tr>
   </tbody>

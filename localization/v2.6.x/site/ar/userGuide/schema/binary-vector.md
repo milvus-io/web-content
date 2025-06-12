@@ -1,16 +1,15 @@
 ---
 id: binary-vector.md
-title: Binary Vector
+title: المتجهات الثنائية
 summary: >-
-  Binary vectors are a special form of data representation that convert
-  traditional high-dimensional floating-point vectors into binary vectors
-  containing only 0s and 1s. This transformation not only compresses the size of
-  the vector but also reduces storage and computational costs while retaining
-  semantic information. When precision for non-critical features is not
-  essential, binary vectors can effectively maintain most of the integrity and
-  utility of the original floating-point vectors.
+  المتجهات الثنائية هي شكل خاص من أشكال تمثيل البيانات التي تحول متجهات الفاصلة
+  العائمة التقليدية عالية الأبعاد إلى متجهات ثنائية تحتوي على 0 و1 فقط. لا يؤدي
+  هذا التحويل إلى ضغط حجم المتجه فحسب، بل يقلل أيضًا من تكاليف التخزين والتكاليف
+  الحسابية مع الاحتفاظ بالمعلومات الدلالية. عندما لا تكون الدقة للخصائص غير
+  الحرجة ضرورية، يمكن للمتجهات الثنائية أن تحافظ بشكل فعال على معظم سلامة وفائدة
+  متجهات الفاصلة العائمة الأصلية.
 ---
-<h1 id="Binary-Vector" class="common-anchor-header">Binary Vector<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
+<h1 id="Binary-Vector" class="common-anchor-header">المتجهات الثنائية<button data-href="#Binary-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,9 +24,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Binary vectors are a special form of data representation that convert traditional high-dimensional floating-point vectors into binary vectors containing only 0s and 1s. This transformation not only compresses the size of the vector but also reduces storage and computational costs while retaining semantic information. When precision for non-critical features is not essential, binary vectors can effectively maintain most of the integrity and utility of the original floating-point vectors.</p>
-<p>Binary vectors have a wide range of applications, particularly in situations where computational efficiency and storage optimization are crucial. In large-scale AI systems, such as search engines or recommendation systems, real-time processing of massive amounts of data is key. By reducing the size of the vectors, binary vectors help lower latency and computational costs without significantly sacrificing accuracy. Additionally, binary vectors are useful in resource-constrained environments, such as mobile devices and embedded systems, where memory and processing power are limited. Through the use of binary vectors, complex AI functions can be implemented in these restricted settings while maintaining high performance.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>المتجهات الثنائية هي شكل خاص من أشكال تمثيل البيانات التي تحول متجهات الفاصلة العائمة التقليدية عالية الأبعاد إلى متجهات ثنائية تحتوي على 0 و1 فقط. لا يؤدي هذا التحويل إلى ضغط حجم المتجه فحسب، بل يقلل أيضًا من تكاليف التخزين والتكاليف الحسابية مع الاحتفاظ بالمعلومات الدلالية. عندما لا تكون الدقة للخصائص غير الحرجة ضرورية، يمكن للمتجهات الثنائية أن تحافظ بشكل فعال على معظم سلامة وفائدة متجهات الفاصلة العائمة الأصلية.</p>
+<p>تتمتع المتجهات الثنائية بمجموعة واسعة من التطبيقات، خاصة في الحالات التي تكون فيها الكفاءة الحسابية وتحسين التخزين أمرًا بالغ الأهمية. في أنظمة الذكاء الاصطناعي واسعة النطاق، مثل محركات البحث أو أنظمة التوصية، تعتبر المعالجة الآنية لكميات هائلة من البيانات أمرًا أساسيًا. من خلال تقليل حجم المتجهات، تساعد المتجهات الثنائية في تقليل زمن الاستجابة والتكاليف الحسابية دون التضحية بالدقة بشكل كبير. بالإضافة إلى ذلك، تُعدّ المتجهات الثنائية مفيدة في البيئات المحدودة الموارد، مثل الأجهزة المحمولة والأنظمة المدمجة، حيث تكون الذاكرة وقوة المعالجة محدودة. من خلال استخدام المتجهات الثنائية، يمكن تنفيذ وظائف الذكاء الاصطناعي المعقدة في هذه البيئات المحدودة مع الحفاظ على الأداء العالي.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,33 +41,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Binary vectors are a method of encoding complex objects (like images, text, or audio) into fixed-length binary values. In Milvus, binary vectors are typically represented as bit arrays or byte arrays. For example, an 8-dimensional binary vector can be represented as <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code>.</p>
-<p>The diagram below shows how binary vectors represent the presence of keywords in text content. In this example, a 10-dimensional binary vector is used to represent two different texts (<strong>Text 1</strong> and <strong>Text 2</strong>), where each dimension corresponds to a word in the vocabulary: 1 indicates the presence of the word in the text, while 0 indicates its absence.</p>
+    </button></h2><p>المتجهات الثنائية هي طريقة لترميز الكائنات المعقدة (مثل الصور أو النصوص أو الصوت) إلى قيم ثنائية ذات طول ثابت. في ميلفوس، يتم تمثيل المتجهات الثنائية عادةً كمصفوفات بت أو مصفوفات بايت. على سبيل المثال، يمكن تمثيل متجه ثنائي ثنائي 8 أبعاد على شكل <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code>.</p>
+<p>يوضح الرسم البياني أدناه كيف تمثل المتجهات الثنائية وجود كلمات رئيسية في محتوى النص. في هذا المثال، يتم استخدام متجه ثنائي مكون من 10 أبعاد لتمثيل نصين مختلفين<strong>(النص 1</strong> <strong>والنص 2</strong>)، حيث يتوافق كل بُعد مع كلمة في المفردات: 1 يشير إلى وجود الكلمة في النص، بينما يشير 0 إلى غيابها.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
-    <span>Binary Vector</span>
-  </span>
-</p>
-<p>Binary vectors have the following characteristics:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   </span> <span class="img-wrapper"> <span>المتجه الثنائي</span> </span></p>
+<p>تتميز المتجهات الثنائية بالخصائص التالية:</p>
 <ul>
-<li><p><strong>Efficient Storage:</strong> Each dimension requires only 1 bit of storage, significantly reducing storage space.</p></li>
-<li><p><strong>Fast Computation:</strong> Similarity between vectors can be quickly calculated using bitwise operations like XOR.</p></li>
-<li><p><strong>Fixed Length:</strong> The length of the vector remains constant regardless of the original text length, making indexing and retrieval easier.</p></li>
-<li><p><strong>Simple and Intuitive:</strong> Directly reflects the presence of keywords, making it suitable for certain specialized retrieval tasks.</p></li>
+<li><p><strong>كفاءة التخزين:</strong> يتطلب كل بُعد تخزين بت واحد فقط، مما يقلل من مساحة التخزين بشكل كبير.</p></li>
+<li><p><strong>الحساب السريع:</strong> يمكن حساب التشابه بين المتجهات بسرعة باستخدام عمليات معرفية مثل XOR.</p></li>
+<li><p><strong>طول ثابت:</strong> يظل طول المتجه ثابتًا بغض النظر عن طول النص الأصلي، مما يجعل الفهرسة والاسترجاع أسهل.</p></li>
+<li><p><strong>بسيط وبديهي:</strong> يعكس مباشرةً وجود الكلمات الرئيسية، مما يجعله مناسبًا لبعض مهام الاسترجاع المتخصصة.</p></li>
 </ul>
-<p>Binary vectors can be generated through various methods. In text processing, predefined vocabularies can be used to set corresponding bits based on word presence. For image processing, perceptual hashing algorithms (like <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) can generate binary features of images. In machine learning applications, model outputs can be binarized to obtain binary vector representations.</p>
-<p>After binary vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.</p>
+<p>يمكن إنشاء المتجهات الثنائية من خلال طرق مختلفة. في معالجة النصوص، يمكن استخدام المفردات المحددة مسبقًا لتعيين البتات المقابلة بناءً على وجود الكلمات. في معالجة الصور، يمكن لخوارزميات التجزئة الإدراكية (مثل <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) توليد ميزات ثنائية للصور. في تطبيقات التعلّم الآلي، يمكن تحويل مخرجات النماذج إلى ثنائية للحصول على تمثيلات متجهات ثنائية.</p>
+<p>بعد تحويلها إلى متجهات ثنائية، يمكن تخزين البيانات في ميلفوس للإدارة واسترجاع المتجهات. يوضح الرسم البياني أدناه العملية الأساسية.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
-    <span>Use Binary Vector</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   </span> <span class="img-wrapper"> <span>استخدام المتجهات الثنائية</span> </span></p>
 <div class="alert note">
-<p>Although binary vectors excel in specific scenarios, they have limitations in their expressive capability, making it difficult to capture complex semantic relationships. Therefore, in real-world scenarios, binary vectors are often used alongside other vector types to balance efficiency and expressiveness. For more information, refer to <a href="/docs/dense-vector.md">Dense Vector</a> and <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
+<p>على الرغم من أن المتجهات الثنائية تتفوق في سيناريوهات محددة، إلا أن لها قيودًا في قدرتها التعبيرية، مما يجعل من الصعب التقاط العلاقات الدلالية المعقدة. لذلك، في سيناريوهات العالم الحقيقي، غالبًا ما تُستخدم المتجهات الثنائية جنبًا إلى جنب مع أنواع المتجهات الأخرى لتحقيق التوازن بين الكفاءة والتعبير. لمزيد من المعلومات، راجع <a href="/docs/ar/dense-vector.md">المتجهات الكثيفة</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
 </div>
-<h2 id="Use-binary-vectors" class="common-anchor-header">Use binary vectors<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
+<h2 id="Use-binary-vectors" class="common-anchor-header">استخدام المتجهات الثنائية<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,18 +78,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Add vector field</h3><p>To use binary vectors in Milvus, first define a vector field for storing binary vectors when creating a collection. This process includes:</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">إضافة حقل متجه</h3><p>لاستخدام المتجهات الثنائية في ميلفوس، قم أولاً بتعريف حقل متجه لتخزين المتجهات الثنائية عند إنشاء مجموعة. تتضمن هذه العملية:</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported binary vector data type, i.e., <code translate="no">BINARY_VECTOR</code>.</p></li>
-<li><p>Specifying the vector’s dimensions using the <code translate="no">dim</code> parameter. Note that <code translate="no">dim</code> must be a multiple of 8 as binary vectors must be converted into a byte array when inserting. Every 8 boolean values (0 or 1) will be packed into 1 byte. For example, if <code translate="no">dim=128</code>, a 16-byte array is required for insertion.</p></li>
+<li><p>تعيين <code translate="no">datatype</code> إلى نوع بيانات المتجه الثنائي المدعوم، أي <code translate="no">BINARY_VECTOR</code>.</p></li>
+<li><p>تحديد أبعاد المتجه باستخدام المعلمة <code translate="no">dim</code>. لاحظ أنه يجب أن يكون <code translate="no">dim</code> من مضاعفات العدد 8 حيث يجب تحويل المتجهات الثنائية إلى مصفوفة بايت عند الإدراج. سيتم تعبئة كل 8 قيم منطقية (0 أو 1) في بايت واحد. على سبيل المثال، إذا كان <code translate="no">dim=128</code> ، يلزم وجود مصفوفة 16 بايت للإدراج.</p></li>
 </ol>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -205,15 +195,10 @@ schema.WithField(entity.NewField().
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, a vector field named <code translate="no">binary_vector</code> is added for storing binary vectors. The data type of this field is <code translate="no">BINARY_VECTOR</code>, with a dimension of 128.</p>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Set index params for vector field</h3><p>To speed up searches, an index must be created for the binary vector field. Indexing can significantly enhance the retrieval efficiency of large-scale vector data.</p>
+<p>في هذا المثال، تمت إضافة حقل متجه باسم <code translate="no">binary_vector</code> لتخزين المتجهات الثنائية. نوع بيانات هذا الحقل هو <code translate="no">BINARY_VECTOR</code> ، ببعد 128.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجه</h3><p>لتسريع عمليات البحث، يجب إنشاء فهرس لحقل المتجه الثنائي. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -256,17 +241,12 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above, an index named <code translate="no">binary_vector_index</code> is created for the <code translate="no">binary_vector</code> field, using the <code translate="no">AUTOINDEX</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">HAMMING</code>, indicating that Hamming distance is used for similarity measurement.</p>
-<p>Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.</p>
-<p>Additionally, Milvus supports other similarity metrics for binary vectors. For more information, refer to <a href="/docs/metric.md">Metric Types</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Create collection</h3><p>Once the binary vector and index settings are complete, create a collection that contains binary vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
+<p>في المثال أعلاه، يتم إنشاء فهرس باسم <code translate="no">binary_vector_index</code> للحقل <code translate="no">binary_vector</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. تم تعيين <code translate="no">metric_type</code> على <code translate="no">HAMMING</code> ، مما يشير إلى استخدام مسافة هامينج لقياس التشابه.</p>
+<p>يوفر Milvus أنواعًا مختلفة من الفهارس للحصول على تجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل منحنى تعلم البحث المتجه. هناك الكثير من أنواع الفهارس المتاحة لتختار من بينها. لمزيد من التفاصيل، راجع xxx.</p>
+<p>بالإضافة إلى ذلك، يدعم ميلفوس مقاييس تشابه أخرى للمتجهات الثنائية. لمزيد من المعلومات، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p>
+<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجهات الثنائية والفهرس، قم بإنشاء مجموعة تحتوي على متجهات ثنائية. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -317,15 +297,10 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>After creating the collection, use the <code translate="no">insert</code> method to add data containing binary vectors. Note that binary vectors should be provided in the form of a byte array, where each byte represents 8 boolean values.</p>
-<p>For example, for a 128-dimensional binary vector, a 16-byte array is required (since 128 bits ÷ 8 bits/byte = 16 bytes). Below is an example code for inserting data:</p>
+<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>بعد إنشاء المجموعة، استخدم الطريقة <code translate="no">insert</code> لإضافة بيانات تحتوي على متجهات ثنائية. لاحظ أنه يجب توفير المتجهات الثنائية على شكل مصفوفة بايت، حيث يمثل كل بايت 8 قيم منطقية.</p>
+<p>على سبيل المثال، بالنسبة إلى متجه ثنائي مكون من 128 بُعدًا، يلزم توفير مصفوفة من 16 بايت (بما أن 128 بت ÷ 8 بت/بايت = 16 بايت). فيما يلي مثال على شيفرة لإدخال البيانات:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_bool_list_to_bytes</span>(<span class="hljs-params">bool_list</span>):
     <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(bool_list) % <span class="hljs-number">8</span> != <span class="hljs-number">0</span>:
         <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;The length of a boolean list must be a multiple of 8&quot;</span>)
@@ -417,15 +392,10 @@ client.<span class="hljs-title function_">insert</span>({
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Perform similarity search</h3><p>Similarity search is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search using binary vectors, prepare the query vector and search parameters, then call the <code translate="no">search</code> method.</p>
-<p>During search operations, binary vectors must also be provided in the form of a byte array. Ensure that the dimensionality of the query vector matches the dimension specified when defining <code translate="no">dim</code> and that every 8 boolean values are converted into 1 byte.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">إجراء بحث التشابه</h3><p>البحث عن التشابه هو أحد الميزات الأساسية في ميلفوس، مما يسمح لك بالعثور بسرعة على البيانات الأكثر تشابهًا مع متجه الاستعلام بناءً على المسافة بين المتجهات. لإجراء بحث تشابه باستخدام متجهات ثنائية، قم بإعداد متجه الاستعلام ومعلمات البحث، ثم قم باستدعاء الطريقة <code translate="no">search</code>.</p>
+<p>أثناء عمليات البحث، يجب أيضًا توفير المتجهات الثنائية في شكل مصفوفة بايت. تأكد من أن بُعد متجه الاستعلام يطابق البعد المحدد عند تحديد <code translate="no">dim</code> وأن كل 8 قيم منطقية يتم تحويلها إلى بايت واحد.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
@@ -523,4 +493,4 @@ curl --request POST \
     \&quot;outputFields\&quot;: [\&quot;pk\&quot;]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic ANN Search</a>.</p>
+<p>لمزيد من المعلومات حول معلمات البحث عن التشابه، راجع <a href="/docs/ar/single-vector-search.md">بحث ANN الأساسي</a>.</p>

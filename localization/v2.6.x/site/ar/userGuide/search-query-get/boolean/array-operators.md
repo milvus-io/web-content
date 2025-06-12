@@ -1,11 +1,11 @@
 ---
 id: array-operators.md
-title: ARRAY Operators
+title: مشغلات المصفوفات
 summary: >-
-  Milvus provides powerful operators to query array fields, allowing you to
-  filter and retrieve entities based on the contents of arrays.
+  يوفر Milvus مشغلات قوية للاستعلام عن حقول المصفوفات، مما يسمح لك بتصفية
+  الكيانات واسترجاعها بناءً على محتويات المصفوفات.
 ---
-<h1 id="ARRAY-Operators" class="common-anchor-header">ARRAY Operators<button data-href="#ARRAY-Operators" class="anchor-icon" translate="no">
+<h1 id="ARRAY-Operators" class="common-anchor-header">مشغلات المصفوفات<button data-href="#ARRAY-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,11 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides powerful operators to query array fields, allowing you to filter and retrieve entities based on the contents of arrays.</p>
+    </button></h1><p>يوفر ميلفوس مشغلات قوية للاستعلام عن حقول المصفوفات، مما يسمح لك بتصفية واسترجاع الكيانات بناءً على محتويات المصفوفات.</p>
 <div class="alert note">
-<p>All elements within an array must be the same type, and nested structures within arrays are treated as plain strings. Therefore, when working with ARRAY fields, it is advisable to avoid excessively deep nesting and ensure that your data structures are as flat as possible for optimal performance.</p>
+<p>يجب أن تكون جميع العناصر داخل المصفوفة من نفس النوع، ويتم التعامل مع البنى المتداخلة داخل المصفوفات كسلاسل عادية. ولذلك، عند العمل مع حقول ARRAY، يُنصح بتجنب التداخل العميق بشكل مفرط والتأكد من أن بنيات البيانات الخاصة بك مسطحة قدر الإمكان لتحقيق الأداء الأمثل.</p>
 </div>
-<h2 id="Available-ARRAY-Operators" class="common-anchor-header">Available ARRAY Operators<button data-href="#Available-ARRAY-Operators" class="anchor-icon" translate="no">
+<h2 id="Available-ARRAY-Operators" class="common-anchor-header">معاملات ARRAY المتاحة<button data-href="#Available-ARRAY-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,12 +39,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The ARRAY operators allow for fine-grained querying of array fields in Milvus. These operators are:</p>
+    </button></h2><p>تسمح مشغلات ARRAY بالاستعلام الدقيق لحقول المصفوفات في ميلفوس. هذه المعاملات هي:</p>
 <ul>
-<li><p><code translate="no">ARRAY_CONTAINS(identifier, expr)</code>: checks if a specific element exists in an array field.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code>: ensures that all elements of the specified list are present in the array field.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code>: checks if any of the elements from the specified list are present in the array field.</p></li>
-<li><p><code translate="no">ARRAY_LENGTH(identifier, expr)</code>: allows you to filter entities based on the number of elements in an array field.</p></li>
+<li><p><code translate="no">ARRAY_CONTAINS(identifier, expr)</code>: التحقق من وجود عنصر معين في حقل مصفوفة.</p></li>
+<li><p><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code>: يضمن وجود جميع عناصر القائمة المحددة في حقل المصفوفة.</p></li>
+<li><p><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code>: يتحقق من وجود أي عنصر من القائمة المحددة في حقل المصفوفة.</p></li>
+<li><p><code translate="no">ARRAY_LENGTH(identifier, expr)</code>: يسمح لك بتصفية الكيانات بناءً على عدد العناصر في حقل مصفوفة.</p></li>
 </ul>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,13 +61,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">ARRAY_CONTAINS</code> operator checks if a specific element exists in an array field. It’s useful when you want to find entities where a given element is present in the array.</p>
-<p><strong>Example</strong></p>
-<p>Suppose you have an array field <code translate="no">history_temperatures</code>, which contains the recorded lowest temperatures for different years. To find all entities where the array contains the value <code translate="no">23</code>, you can use the following filter expression:</p>
+    </button></h2><p>يتحقق المشغل <code translate="no">ARRAY_CONTAINS</code> من وجود عنصر محدد في حقل مصفوفة. يكون مفيدًا عندما تريد العثور على كيانات حيث يوجد عنصر معين في المصفوفة.</p>
+<p><strong>مثال</strong></p>
+<p>لنفترض أن لديك حقل مصفوفة <code translate="no">history_temperatures</code> ، والذي يحتوي على أدنى درجات الحرارة المسجلة لسنوات مختلفة. للعثور على جميع الكيانات التي تحتوي فيها المصفوفة على القيمة <code translate="no">23</code> ، يمكنك استخدام تعبير التصفية التالي:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_CONTAINS(history_temperatures, 23)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will return all entities where the <code translate="no">history_temperatures</code> array contains the value <code translate="no">23</code>.</p>
-<h2 id="ARRAYCONTAINSALL" class="common-anchor-header">ARRAY_CONTAINS_ALL<button data-href="#ARRAYCONTAINSALL" class="anchor-icon" translate="no">
+<p>سيعيد هذا جميع الكيانات حيث تحتوي المصفوفة <code translate="no">history_temperatures</code> على القيمة <code translate="no">23</code>.</p>
+<h2 id="ARRAYCONTAINSALL" class="common-anchor-header">array_contains_all<button data-href="#ARRAYCONTAINSALL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,13 +82,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">ARRAY_CONTAINS_ALL</code> operator ensures that all elements of the specified list are present in the array field. This operator is useful when you want to match entities that contain multiple values in the array.</p>
-<p><strong>Example</strong></p>
-<p>If you want to find all entities where the <code translate="no">history_temperatures</code> array contains both <code translate="no">23</code> and <code translate="no">24</code>, you can use:</p>
+    </button></h2><p>يضمن المشغل <code translate="no">ARRAY_CONTAINS_ALL</code> وجود جميع عناصر القائمة المحددة في حقل المصفوفة. يكون هذا العامل مفيدًا عندما تريد مطابقة الكيانات التي تحتوي على قيم متعددة في المصفوفة.</p>
+<p><strong>مثال</strong></p>
+<p>إذا كنت تريد العثور على جميع الكيانات التي تحتوي فيها المصفوفة <code translate="no">history_temperatures</code> على كل من <code translate="no">23</code> و <code translate="no">24</code> ، يمكنك استخدام:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will return all entities where the <code translate="no">history_temperatures</code> array contains both of the specified values.</p>
-<h2 id="ARRAYCONTAINSANY" class="common-anchor-header">ARRAY_CONTAINS_ANY<button data-href="#ARRAYCONTAINSANY" class="anchor-icon" translate="no">
+<p>سيؤدي هذا إلى إرجاع جميع الكيانات حيث تحتوي المصفوفة <code translate="no">history_temperatures</code> على كل من القيم المحددة.</p>
+<h2 id="ARRAYCONTAINSANY" class="common-anchor-header">مصفوفة_تحتوي_على_أي<button data-href="#ARRAYCONTAINSANY" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,12 +103,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">ARRAY_CONTAINS_ANY</code> operator checks if any of the elements from the specified list are present in the array field. This is useful when you want to match entities that contain at least one of the specified values in the array.</p>
-<p><strong>Example</strong></p>
-<p>To find all entities where the <code translate="no">history_temperatures</code> array contains either <code translate="no">23</code> or <code translate="no">24</code>, you can use:</p>
+    </button></h2><p>يتحقق المشغل <code translate="no">ARRAY_CONTAINS_ANY</code> مما إذا كان أي من عناصر القائمة المحددة موجودًا في حقل المصفوفة. هذا مفيد عندما تريد مطابقة الكيانات التي تحتوي على قيمة واحدة على الأقل من القيم المحددة في المصفوفة.</p>
+<p><strong>مثال</strong></p>
+<p>للعثور على جميع الكيانات حيث تحتوي المصفوفة <code translate="no">history_temperatures</code> على <code translate="no">23</code> أو <code translate="no">24</code> ، يمكنك استخدام:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will return all entities where the <code translate="no">history_temperatures</code> array contains at least one of the values <code translate="no">23</code> or <code translate="no">24</code>.</p>
+<p>سيؤدي هذا إلى إرجاع جميع الكيانات حيث تحتوي المصفوفة <code translate="no">history_temperatures</code> على واحدة على الأقل من القيمتين <code translate="no">23</code> أو <code translate="no">24</code>.</p>
 <h2 id="ARRAYLENGTH" class="common-anchor-header">ARRAY_LENGTH<button data-href="#ARRAYLENGTH" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,9 +124,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">ARRAY_LENGTH</code> operator allows you to filter entities based on the number of elements in an array field. This is useful when you need to find entities with arrays of a certain length.</p>
-<p><strong>Example</strong></p>
-<p>If you want to find all entities where the <code translate="no">history_temperatures</code> array has fewer than 10 elements, you can use:</p>
+    </button></h2><p>يسمح لك المشغل <code translate="no">ARRAY_LENGTH</code> بتصفية الكيانات بناءً على عدد العناصر في حقل مصفوفة. هذا مفيد عندما تحتاج إلى العثور على كيانات ذات مصفوفات ذات طول معين.</p>
+<p><strong>مثال</strong></p>
+<p>إذا كنت تريد العثور على جميع الكيانات التي تحتوي المصفوفة <code translate="no">history_temperatures</code> على أقل من 10 عناصر، يمكنك استخدام:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_LENGTH(history_temperatures) &lt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will return all entities where the <code translate="no">history_temperatures</code> array has fewer than 10 elements.</p>
+<p>سيؤدي هذا إلى إرجاع جميع الكيانات التي تحتوي المصفوفة <code translate="no">history_temperatures</code> على أقل من 10 عناصر.</p>

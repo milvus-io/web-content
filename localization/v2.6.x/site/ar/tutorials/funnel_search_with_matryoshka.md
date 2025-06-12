@@ -1,13 +1,12 @@
 ---
 id: funnel_search_with_matryoshka.md
 summary: >-
-  In this notebook, we examine how to use Matryoshka embeddings with Milvus for
-  semantic search. We illustrate an algorithm called "funnel search" that allows
-  us to perform similarity search over a small subset of our embedding
-  dimensions without a drastic drop in recall.
-title: Funnel Search with Matryoshka Embeddings
+  ندرس في هذا الدفتر كيفية استخدام تضمينات ماتريوشكا مع ميلفوس للبحث الدلالي.
+  نوضح خوارزمية تسمى "البحث القمعي" التي تسمح لنا بإجراء بحث التشابه على مجموعة
+  فرعية صغيرة من أبعاد التضمين دون انخفاض كبير في التذكر.
+title: البحث القمعي باستخدام تضمينات ماتريوشكا
 ---
-<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">Funnel Search with Matryoshka Embeddings<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
+<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">البحث القمعي باستخدام تضمينات ماتريوشكا<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,12 +22,11 @@ title: Funnel Search with Matryoshka Embeddings
         ></path>
       </svg>
     </button></h1><div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.6.x/assets/funnel-search.png' width='100%'></div>
-When building efficient vector search systems, one key challenge is managing storage costs while maintaining acceptable latency and recall. Modern embedding models output vectors with hundreds or thousands of dimensions, creating significant storage and computational overhead for the raw vector and index.
-<p>Traditionally, the storage requirements are reduced by applying a quantization or dimensionality reduction method just before building the index. For instance, we can save storage by lowering the precision using Product Quantization (PQ) or the number of dimensions using Principal Component Analysis (PCA). These methods analyze the entire vector set to find a more compact one that maintains the semantic relationships between vectors.</p>
-<p>While effective, these standard approaches reduce precision or dimensionality only once and at a single scale. But what if we could maintain multiple layers of detail simultaneously, like a pyramid of increasingly precise representations?</p>
-<p>Enter Matryoshka embeddings. Named after Russian nesting dolls (see illustration), these clever constructs embed multiple scales of representation within a single vector. Unlike traditional post-processing methods, Matryoshka embeddings learn this multi-scale structure during the initial training process. The result is remarkable: not only does the full embedding capture input semantics, but each nested subset prefix (first half, first quarter, etc.) provides a coherent, if less detailed, representation.</p>
-<p>In this notebook, we examine how to use Matryoshka embeddings with Milvus for semantic search. We illustrate an algorithm called “funnel search” that allows us to perform similarity search over a small subset of our embedding dimensions without a drastic drop in recall.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+عند إنشاء أنظمة بحث متجهات فعالة، يتمثل أحد التحديات الرئيسية في إدارة تكاليف التخزين مع الحفاظ على زمن استجابة واستدعاء مقبول. تُخرج نماذج التضمين الحديثة متجهات ذات مئات أو آلاف الأبعاد، مما يؤدي إلى إنشاء مساحة تخزين كبيرة ونفقات حسابية كبيرة للمتجه الخام والفهرس.<p>وتقليديًا، يتم تقليل متطلبات التخزين من خلال تطبيق طريقة التكميم أو تقليل الأبعاد قبل إنشاء الفهرس مباشرةً. على سبيل المثال، يمكننا توفير مساحة التخزين عن طريق تقليل الدقة باستخدام التكميم الكمي للمنتج (PQ) أو عدد الأبعاد باستخدام تحليل المكونات الرئيسية (PCA). تقوم هذه الطرق بتحليل مجموعة المتجهات بأكملها للعثور على مجموعة أكثر إحكامًا تحافظ على العلاقات الدلالية بين المتجهات.</p>
+<p>رغم فعاليتها، فإن هذه الأساليب القياسية تقلل من الدقة أو الأبعاد مرة واحدة فقط وعلى مقياس واحد. ولكن ماذا لو تمكنا من الحفاظ على طبقات متعددة من التفاصيل في وقت واحد، مثل هرم من التمثيلات المتزايدة الدقة؟</p>
+<p>أدخل تضمينات ماتريوشكا. سُميت على اسم الدمى الروسية المتداخلة (انظر الرسم التوضيحي)، حيث تقوم هذه التركيبات الذكية بتضمين مقاييس متعددة للتمثيل داخل متجه واحد. على عكس طرق المعالجة اللاحقة التقليدية، تتعلم تضمينات ماتريوشكا هذه البنية متعددة المقاييس أثناء عملية التدريب الأولية. والنتيجة ملحوظة: لا يقتصر الأمر على أن التضمين الكامل لا يلتقط دلالات المدخلات فحسب، بل إن كل بادئة مجموعة فرعية متداخلة (النصف الأول، الربع الأول، إلخ) توفر تمثيلاً متماسكاً، وإن كان أقل تفصيلاً.</p>
+<p>ندرس في هذا الدفتر كيفية استخدام تضمينات ماتريوشكا مع ميلفوس للبحث الدلالي. نوضح خوارزمية تسمى "البحث القمعي" التي تسمح لنا بإجراء بحث التشابه على مجموعة فرعية صغيرة من أبعاد التضمين دون انخفاض كبير في التذكر.</p>
+<h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,13 +43,13 @@ When building efficient vector search systems, one key challenge is managing sto
       </svg>
     </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install datasets numpy pandas pymilvus sentence-transformers tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For CPU-Only:</p>
+<p>لوحدة المعالجة المركزية فقط:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For CUDA 11.8:</p>
+<p>لـ CUDA 11.8</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Installation command of CUDA 11.8 is only an example. Please confirm your CUDA version when installing PyTorch.</p>
+<p>أمر التثبيت لـ CUDA 11.8 هو مثال فقط. يرجى تأكيد إصدار CUDA الخاص بك عند تثبيت PyTorch.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
@@ -65,7 +63,7 @@ When building efficient vector search systems, one key challenge is managing sto
 <span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Load Matryoshka Embedding Model<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">تحميل نموذج تضمين Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +78,7 @@ When building efficient vector search systems, one key challenge is managing sto
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Instead of using a standard embedding model such as <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>, we use <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">a model from Nomic</a> trained especially to produce Matryoshka embeddings.</p>
+    </button></h2><p>بدلاً من استخدام نموذج تضمين قياسي مثل <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>نستخدم <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">نموذجًا من Nomic</a> مدربًا خصيصًا لإنتاج تضمينات ماتريوشكا.</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -90,7 +88,7 @@ When building efficient vector search systems, one key challenge is managing sto
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&lt;All keys matched successfully&gt;
 </code></pre>
-<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Loading Dataset, Embedding Items, and Building Vector Database<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">تحميل مجموعة البيانات، وتضمين العناصر، وبناء قاعدة بيانات المتجهات<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,7 +103,7 @@ When building efficient vector search systems, one key challenge is managing sto
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code is a modification of that from the documentation page <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search with Sentence Transformers and Milvus”</a>. First, we load the dataset from HuggingFace. It contains around 35k entries, each corresponding to a movie having a Wikipedia article. We will use the <code translate="no">Title</code> and <code translate="no">PlotSummary</code> fields in this example.</p>
+    </button></h2><p>الكود التالي هو تعديل لذلك من صفحة التوثيق <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"البحث عن الأفلام باستخدام محولات الجمل وميلفوس".</a> أولاً، نقوم بتحميل مجموعة البيانات من HuggingFace. وهي تحتوي على حوالي 35 ألف مدخل، كل منها يتوافق مع فيلم له مقالة في ويكيبيديا. سنستخدم الحقلين <code translate="no">Title</code> و <code translate="no">PlotSummary</code> في هذا المثال.</p>
 <pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
@@ -114,7 +112,7 @@ When building efficient vector search systems, one key challenge is managing sto
     num_rows: 34886
 })
 </code></pre>
-<p>Next, we connect to a Milvus Lite database, specify the data schema, and create a collection with this schema. We will store both the unnormalized embedding and the first sixth of the embedding in separate fields. The reason for this is that we need the first 1/6th of the Matryoshka embedding for performing a similarity search, and the remaining 5/6ths of the embeddings for reranking and improving the search results.</p>
+<p>بعد ذلك، نتصل بقاعدة بيانات Milvus Lite، ونحدد مخطط البيانات، وننشئ مجموعة بهذا المخطط. سنقوم بتخزين كل من التضمين غير الطبيعي والسدس الأول من التضمين في حقول منفصلة. والسبب في ذلك هو أننا نحتاج إلى أول 1/6 من تضمين ماتريوشكا لإجراء بحث التشابه، والخمسة أسداس المتبقية من التضمينات لإعادة ترتيب نتائج البحث وتحسينها.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-number">768</span>
 search_dim = <span class="hljs-number">128</span>
 collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
@@ -133,9 +131,9 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus does not currently support searching over subsets of embeddings, so we break the embeddings into two parts: the head represents the initial subset of the vector to index and search, and the tail is the remainder. The model is trained for cosine distance similarity search, so we normalize the head embeddings. However, in order to calculate similarities for larger subsets later on, we need to store the norm of the head embedding, so we can unnormalize it before joining to the tail.</p>
-<p>To perform search via the first 1/6th of the embedding, we will need to create a vector search index over the <code translate="no">head_embedding</code> field. Later on, we will compare the results of “funnel search” with a regular vector search, and so build a search index over the full embedding also.</p>
-<p><em>Importantly, we use the <code translate="no">COSINE</code> rather than the <code translate="no">IP</code> distance metric, because otherwise we would need to keep track of the embedding norms, which would complicate the implementation (this will make more sense once the funnel search algorithm has been described).</em></p>
+<p>لا يدعم برنامج Milvus حاليًا البحث على مجموعات فرعية من التضمينات، لذلك نقوم بتقسيم التضمينات إلى جزأين: يمثل الرأس المجموعة الفرعية الأولية من المتجه للفهرسة والبحث، والذيل هو الباقي. تم تدريب النموذج على البحث عن تشابه مسافة جيب التمام، لذلك نقوم بتطبيع تضمينات الرأس. ومع ذلك، من أجل حساب أوجه التشابه لمجموعات فرعية أكبر لاحقًا، نحتاج إلى تخزين معيار تضمين الرأس، حتى نتمكن من عدم تطبيعه قبل الانضمام إلى الذيل.</p>
+<p>لإجراء البحث عن طريق أول 1/6 من التضمين الأول، سنحتاج إلى إنشاء فهرس بحث متجه على الحقل <code translate="no">head_embedding</code>. في وقت لاحق، سنقارن نتائج "البحث القمعي" بالبحث المتجه العادي، ومن ثم ننشئ فهرس بحث على التضمين الكامل أيضًا.</p>
+<p><em>من المهم أن نستخدم <code translate="no">COSINE</code> بدلاً من مقياس المسافة <code translate="no">IP</code> ، لأنه بخلاف ذلك سنحتاج إلى تتبع معايير التضمين، مما سيعقد التنفيذ (سيكون هذا أكثر منطقية بمجرد وصف خوارزمية البحث القمعي).</em></p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
@@ -143,7 +141,7 @@ index_params.add_index(
 index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
 client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, we encode the plot summaries for all 35k movies and enter the corresponding embeddings in to the database.</p>
+<p>أخيراً، نقوم بترميز ملخصات الحبكة لجميع الأفلام الـ 35 ألفاً وإدخال التضمينات المقابلة في قاعدة البيانات.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
     <span class="hljs-comment"># This particular model requires us to prefix &#x27;search_document:&#x27; to stored entities</span>
     plot_summary = [<span class="hljs-string">&quot;search_document: &quot;</span> + x.strip() <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> batch[<span class="hljs-string">&quot;PlotSummary&quot;</span>]]
@@ -164,7 +162,7 @@ client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">100%|██████████| 69/69 [05:57&lt;00:00,  5.18s/it]
 </code></pre>
-<h2 id="Performing-Funnel-Search" class="common-anchor-header">Performing Funnel Search<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
+<h2 id="Performing-Funnel-Search" class="common-anchor-header">إجراء بحث قمعي<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,7 +177,7 @@ client.create_index(collection_name, index_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s now implement a “funnel search” using the first 1/6th of the Matryoshka embedding dimensions. I have three movies in mind for retrieval and have produced my own plot summary for querying the database. We embed the queries, then perform a vector search on the <code translate="no">head_embedding</code> field, retrieving 128 result candidates.</p>
+    </button></h2><p>لننفذ الآن "بحثاً قمعياً" باستخدام أول 1/6 من أبعاد تضمين ماتريوشكا. لديّ ثلاثة أفلام في الاعتبار لاسترجاعها وقمت بإنتاج ملخص الرسم البياني الخاص بي للاستعلام عن قاعدة البيانات. نقوم بتضمين الاستعلامات، ثم نجري بحثًا متجهًا على الحقل <code translate="no">head_embedding</code> ، ونسترجع 128 نتيجة مرشحة.</p>
 <pre><code translate="no" class="language-python">queries = [
     <span class="hljs-string">&quot;An archaeologist searches for ancient artifacts while fighting Nazis.&quot;</span>,
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>,
@@ -209,7 +207,7 @@ res = client.search(
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;head_embedding&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>At this point, we have performed search over a much smaller vector space, and are therefore likely to have lowered latency and lessened storage requirements for the index relative to search over the full space. Let’s examine the top 5 matches for each query:</p>
+<p>عند هذه النقطة، نكون قد أجرينا بحثًا على مساحة متجه أصغر بكثير، وبالتالي من المحتمل أن يكون زمن الاستجابة أقل ومتطلبات تخزين أقل للفهرس مقارنة بالبحث على المساحة الكاملة. دعونا نفحص أفضل 5 مطابقات لكل استعلام:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(queries, res):
     rows = [x[<span class="hljs-string">&quot;entity&quot;</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> hits][:<span class="hljs-number">5</span>]
 
@@ -243,8 +241,8 @@ The Ref
 Impact
 The House in Marsh Road
 </code></pre>
-<p>As we can see, recall has suffered as a consequence of truncating the embeddings during search. Funnel search fixes this with a clever trick: we can use the remainder of the embedding dimensions to rerank and prune our candidate list to recover retrieval performance without running any additional expensive vector searches.</p>
-<p>For ease of exposition of the funnel search algorithm, we convert the Milvus search hits for each query into a Pandas dataframe.</p>
+<p>كما نرى، تأثر التذكر نتيجة لاقتطاع التضمينات أثناء البحث. يعمل البحث القمعي على إصلاح ذلك باستخدام حيلة ذكية: يمكننا استخدام ما تبقى من أبعاد التضمين لإعادة ترتيب قائمة المرشحين وتشذيبها لاستعادة أداء الاسترجاع دون إجراء أي عمليات بحث إضافية مكلفة عن المتجهات.</p>
+<p>لتسهيل شرح خوارزمية البحث القمعي نقوم بتحويل نتائج بحث ميلفوس لكل استعلام إلى إطار بيانات بانداس.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
     Convert a Milvus search result to a Pandas dataframe. This function is specific to our data schema.
@@ -259,8 +257,8 @@ The House in Marsh Road
 
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, to perform funnel search we iterate over the increasingly larger subsets of the embeddings. At each iteration, we rerank the candidates according to the new similarities and prune some fraction of the lowest ranked ones.</p>
-<p>To make this concrete, from the previous step we have retrieved 128 candidates using 1/6 of the embedding and query dimensions. The first step in performing funnel search is to recalculate the similarities between the queries and candidates using <em>the first 1/3 of the dimensions</em>. The bottom 64 candidates are pruned. Then we repeat this process with <em>the first 2/3 of the dimensions</em>, and then <em>all of the dimensions</em>, successively pruning to 32 and 16 candidates.</p>
+<p>والآن، لإجراء البحث القمعي نقوم بالتكرار على مجموعات فرعية أكبر بشكل متزايد من التضمينات. في كل عملية تكرار، نعيد ترتيب المرشحين وفقًا لأوجه التشابه الجديدة ونشذب جزءًا من أقلها مرتبة.</p>
+<p>لتوضيح ذلك، استرجعنا من الخطوة السابقة 128 مرشحًا باستخدام 1/6 من أبعاد التضمين والاستعلام. تتمثل الخطوة الأولى في إجراء البحث القمعي في إعادة حساب أوجه التشابه بين الاستعلامات والمرشحين باستخدام <em>الثلث الأول من الأبعاد</em>. يتم تشذيب ال 64 مرشحًا السفلي. ثم نكرر هذه العملية مع <em>أول 2/3 من</em> الأبعاد، ثم <em>جميع الأبعاد،</em> مع تشذيب 32 و16 مرشحًا على التوالي.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
     emb = F.normalize(row[<span class="hljs-string">&quot;embedding&quot;</span>][:dims], dim=-<span class="hljs-number">1</span>)
@@ -323,8 +321,8 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>We have been able to restore recall without performing any additional vector searches! Qualitatively, these results seem to have higher recall for “Raiders of the Lost Ark” and “The Shining” than the standard vector search in the tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search using Milvus and Sentence Transformers”</a>, which uses a different embedding model. However, it is unable to find "Ferris Bueller’s Day Off", which we will return to later in the notebook. (See the paper <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> for more quantitative experiments and benchmarking.)</p>
-<h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Comparing Funnel Search to Regular Search<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
+<p>لقد تمكنا من استعادة التذكر دون إجراء أي عمليات بحث إضافية للمتجهات! من الناحية النوعية، يبدو أن هذه النتائج تتمتع باستدعاء أعلى لفيلمي "Raiders of the Lost Ark" و"The Shining" من البحث المتجه القياسي في البرنامج التعليمي، <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"البحث عن الأفلام باستخدام ميلفوس ومحوّلات الجمل"،</a> والذي يستخدم نموذج تضمين مختلف. ومع ذلك، فإنه غير قادر على العثور على فيلم "Ferris Bueller's Day Off"، والذي سنعود إليه لاحقًا في هذا الدفتر. (راجع بحث <a href="https://arxiv.org/abs/2205.13147">"تعلم تمثيل ماتريوشكا</a> " للاطلاع على المزيد من التجارب الكمية والقياس المعياري).</p>
+<h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">مقارنة البحث القمعي بالبحث العادي<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -339,7 +337,7 @@ Name: title, dtype: object
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s compare the results of our funnel search to a standard vector search <em>on the same dataset with the same embedding model</em>. We perform a search on the full embeddings.</p>
+    </button></h2><p>لنقارن نتائج بحثنا القمعي بالبحث المتجه القياسي <em>على نفس مجموعة البيانات بنفس نموذج التضمين</em>. نجري بحثًا على التضمينات الكاملة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search on entire embeddings</span>
 res = client.search(
     collection_name=collection_name,
@@ -382,8 +380,8 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>With the exception of the results for "A teenager fakes illness to get off school…", the results under funnel search are almost identical to the full search, even though the funnel search was performed on a search space of 128 dimensions vs 768 dimensions for the regular one.</p>
-<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Investigating Funnel Search Recall Failure for Ferris Bueller’s Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
+<p>باستثناء نتائج البحث عن "مراهق يدّعي المرض للتملص من المدرسة..."، فإن النتائج في إطار البحث القمعي مطابقة تقريبًا للبحث الكامل، على الرغم من أن البحث القمعي أُجري على مساحة بحث من 128 بُعدًا مقابل 768 بُعدًا للبحث العادي.</p>
+<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">التحقيق في فشل استرجاع البحث القمعي في يوم عطلة فيريس بويلر<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -398,7 +396,7 @@ Home Alone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Why didn’t funnel search succeed in retrieving Ferris Bueller’s Day Off? Let’s examine whether or not it was in the original candidate list or was mistakenly filtered out.</p>
+    </button></h2><p>لماذا لم ينجح البحث القمعي في استرجاع فيلم Ferris Bueller's Day Off؟ دعونا نفحص ما إذا كان موجودًا في قائمة المرشحين الأصلية أم أنه تمت تصفيته عن طريق الخطأ.</p>
 <pre><code translate="no" class="language-python">queries2 = [
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>
 ]
@@ -434,7 +432,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>We see that the issue was that the initial candidate list was not large enough, or rather, the desired hit is not similar enough to the query at the highest level of granularity. Changing it from <code translate="no">128</code> to <code translate="no">256</code> results in successful retrieval. <em>We should form a rule-of-thumb to set the number of candidates on a held-out set to empirically evaluate the trade-off between recall and latency.</em></p>
+<p>نرى أن المشكلة تكمن في أن قائمة المرشحين الأولية لم تكن كبيرة بما فيه الكفاية، أو بالأحرى أن النتيجة المطلوبة ليست مشابهة بما فيه الكفاية للاستعلام على أعلى مستوى من التفصيل. يؤدي تغييره من <code translate="no">128</code> إلى <code translate="no">256</code> إلى استرجاع ناجح. <em>يجب أن نشكل قاعدة عامة لتعيين عدد المرشحين في مجموعة المرشحين المحتجزة لتقييم المفاضلة بين الاسترجاع وزمن الاستجابة تجريبيًا.</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -454,7 +452,7 @@ On the Edge of Innocence
               Unfriended
               Simon Says 
 </code></pre>
-<h2 id="Does-the-order-matter-Prefix-vs-suffix-embeddings" class="common-anchor-header">Does the order matter? Prefix vs suffix embeddings.<button data-href="#Does-the-order-matter-Prefix-vs-suffix-embeddings" class="anchor-icon" translate="no">
+<h2 id="Does-the-order-matter-Prefix-vs-suffix-embeddings" class="common-anchor-header">هل الترتيب مهم؟ تضمين البادئة مقابل تضمين اللاحقة.<button data-href="#Does-the-order-matter-Prefix-vs-suffix-embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -469,7 +467,7 @@ On the Edge of Innocence
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The model was trained to perform well matching recursively smaller prefixes of the embeddings. Does the order of the dimensions we use matter? For instance, could we also take subsets of the embeddings that are suffixes? In this experiment, we reverse the order of the dimensions in the Matryoshka embeddings and perform a funnel search.</p>
+    </button></h2><p>لقد تم تدريب النموذج على الأداء الجيد لمطابقة البادئات الأصغر بشكل متكرر للبادئات المضمنة. هل ترتيب الأبعاد التي نستخدمها مهم؟ على سبيل المثال، هل يمكننا أيضًا أخذ مجموعات فرعية من التضمينات التي هي عبارة عن لاحقات؟ في هذه التجربة، نقوم بعكس ترتيب الأبعاد في تضمينات ماتريوشكا ونجري بحثًا قمعيًا.</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;./wikiplots-matryoshka-flipped.db&quot;</span>)
 
 fields = [
@@ -571,8 +569,8 @@ Leopard in the Snow
          Unfaithful
      Always a Bride 
 </code></pre>
-<p>Recall is much poorer than funnel search or regular search as expected (the embedding model was trained by contrastive learning on prefixes of the embedding dimensions, not suffixes).</p>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<p>يكون التذكر أضعف بكثير من البحث القمعي أو البحث العادي كما هو متوقع (تم تدريب نموذج التضمين عن طريق التعلم التبايني على بادئات أبعاد التضمين وليس اللواحق).</p>
+<h2 id="Summary" class="common-anchor-header">ملخص<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -587,8 +585,8 @@ Leopard in the Snow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here is a comparison of our search results across methods:</p>
+    </button></h2><p>فيما يلي مقارنة لنتائج بحثنا عبر الطرق:</p>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
 <div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.6.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.6.x/assets/results-the-shining.png' width='100%'></div>
-We have shown how to use Matryoshka embeddings with Milvus for performing a more efficient semantic search algorithm called "funnel search." We also explored the importance of the reranking and pruning steps of the algorithm, as well as a failure mode when the initial candidate list is too small. Finally, we discussed how the order of the dimensions is important when forming sub-embeddings - it must be in the same way for which the model was trained. Or rather, it is only because the model was trained in a certain way that prefixes of the embeddings are meaningful. Now you know how to implement Matryoshka embeddings and funnel search to reduce the storage costs of semantic search without sacrificing too much retrieval performance!
+لقد أوضحنا كيفية استخدام تضمينات ماتريوشكا مع ميلفوس لإجراء خوارزمية بحث دلالي أكثر كفاءة تسمى "البحث القمعي". كما استكشفنا أيضًا أهمية خطوات إعادة الترتيب والتشذيب في الخوارزمية، بالإضافة إلى وضع الفشل عندما تكون قائمة المرشحين الأولية صغيرة جدًا. وأخيرًا، ناقشنا مدى أهمية ترتيب الأبعاد عند تكوين التضمينات الفرعية - يجب أن يكون بنفس الطريقة التي تم تدريب النموذج عليها. أو بالأحرى، فقط لأن النموذج قد تم تدريبه بطريقة معينة بحيث تكون البادئات من التضمينات ذات معنى. أنت تعرف الآن كيفية تنفيذ تضمينات ماتريوشكا والبحث القمعي لتقليل تكاليف تخزين البحث الدلالي دون التضحية بالكثير من أداء الاسترجاع!

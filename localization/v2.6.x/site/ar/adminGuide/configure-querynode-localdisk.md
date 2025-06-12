@@ -1,10 +1,10 @@
 ---
 id: configure-querynode-localdisk.md
-title: Configure Milvus QueryNode with Local Disk
+title: تكوين Milvus QueryNode مع القرص المحلي
 related_key: 'querynode, query node, local disk'
-summary: Learn how to configure Milvus QueryNode to use local disk.
+summary: تعرف على كيفية تهيئة Milvus QueryNode لاستخدام القرص المحلي.
 ---
-<h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">Configure Milvus QueryNode with Local Disk<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
+<h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">تكوين Milvus QueryNode مع القرص المحلي<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: Learn how to configure Milvus QueryNode to use local disk.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This article describes how to configure Milvus QueryNode to use local disk storage.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>توضح هذه المقالة كيفية تكوين Milvus QueryNode Milvus QueryNode لاستخدام تخزين القرص المحلي.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,32 +35,32 @@ summary: Learn how to configure Milvus QueryNode to use local disk.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus is an AI-focused vector database tailored for efficient storage and retrieval of vast quantities of vector data. It is ideal for tasks such as image and video analysis, natural language processing, and recommendation systems. To ensure optimal performance, it is crucial to minimize disk read latency. Using local NVMe SSDs is highly recommended to prevent delays and maintain system stability.</p>
-<p>Key features where local disk storage comes into play include:</p>
+    </button></h2><p>Milvus هي قاعدة بيانات متجهة تركز على الذكاء الاصطناعي مصممة خصيصًا لتخزين واسترجاع كميات هائلة من البيانات المتجهة بكفاءة. وهي مثالية لمهام مثل تحليل الصور والفيديو ومعالجة اللغة الطبيعية وأنظمة التوصيات. لضمان الأداء الأمثل، من الضروري تقليل زمن انتقال القراءة على القرص إلى الحد الأدنى. يوصى بشدة باستخدام محركات أقراص NVMe SSD المحلية لمنع التأخير والحفاظ على استقرار النظام.</p>
+<p>تتضمن الميزات الرئيسية التي يتم فيها تشغيل تخزين القرص المحلي ما يلي:</p>
 <ul>
-<li><a href="/docs/chunk_cache.md"><strong>Chunk cache</strong></a>: Preloads data into local disk cache for faster search.</li>
-<li><a href="/docs/mmap.md"><strong>MMap</strong></a>: Maps file contents directly into memory for better memory efficiency.</li>
-<li><a href="/docs/disk_index.md"><strong>DiskANN Index</strong></a>: Requires disk storage for efficient index management.</li>
+<li><a href="/docs/ar/chunk_cache.md"><strong>ذاكرة التخزين المؤقت للقطع</strong></a>: التحميل المسبق للبيانات في ذاكرة التخزين المؤقت للقرص المحلي للبحث بشكل أسرع.</li>
+<li><a href="/docs/ar/mmap.md"><strong>MMap</strong></a>: تعيين محتويات الملف مباشرة في الذاكرة لتحسين كفاءة الذاكرة.</li>
+<li><a href="/docs/ar/disk_index.md"><strong>فهرس DiskANN</strong></a>: يتطلب تخزين القرص لإدارة الفهرس بكفاءة.</li>
 </ul>
-<p>In this article, we will focus on deploying <a href="/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a> on cloud platforms, and how to configure the QueryNode to use NVMe disk storage. The following table lists the recommended machine types of various cloud providers.</p>
+<p>في هذه المقالة، سنركز على نشر <a href="/docs/ar/install-overview.md#Milvus-Distributed">Milvus Distributed</a> على المنصات السحابية، وكيفية تكوين QueryNode لاستخدام تخزين القرص NVMe. يسرد الجدول التالي أنواع الأجهزة الموصى بها لمختلف موفري السحابة.</p>
 <table>
 <thead>
-<tr><th style="text-align:center">Cloud Provider</th><th style="text-align:center">Machine Type</th></tr>
+<tr><th style="text-align:center">مزود السحابة</th><th style="text-align:center">نوع الجهاز</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">AWS</td><td style="text-align:center">R6id series</td></tr>
-<tr><td style="text-align:center">GCP</td><td style="text-align:center">N2 series</td></tr>
-<tr><td style="text-align:center">Azure</td><td style="text-align:center">Lsv3  series</td></tr>
-<tr><td style="text-align:center">Alibaba Cloud</td><td style="text-align:center">i3 series</td></tr>
-<tr><td style="text-align:center">Tencent Cloud</td><td style="text-align:center">IT5 series</td></tr>
+<tr><td style="text-align:center">AWS</td><td style="text-align:center">سلسلة R6id</td></tr>
+<tr><td style="text-align:center">GCP</td><td style="text-align:center">سلسلة N2</td></tr>
+<tr><td style="text-align:center">أزور</td><td style="text-align:center">سلسلة Lsv3</td></tr>
+<tr><td style="text-align:center">علي بابا كلاود</td><td style="text-align:center">سلسلة i3</td></tr>
+<tr><td style="text-align:center">سحابة تينسنت</td><td style="text-align:center">سلسلة IT5</td></tr>
 </tbody>
 </table>
-<p>These machine types provide NVMe disk storage. You can use the <code translate="no">lsblk</code> command on the instances of these machine types to check if they have NVMe disk storage. If they do, you can proceed to the next step.</p>
+<p>توفر أنواع الأجهزة هذه تخزين قرص NVMe. يمكنك استخدام الأمر <code translate="no">lsblk</code> في مثيلات هذه الأنواع من الأجهزة للتحقق مما إذا كانت تحتوي على وحدة تخزين قرص NVMe. إذا كان لديهم ذلك، يمكنك المتابعة إلى الخطوة التالية.</p>
 <pre><code translate="no" class="language-bash">$ lsblk | grep nvme
 nvme0n1     259:0    0 250.0G  0 disk 
 nvme1n1     259:1    0 250.0G  0 disk 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-Kubernetes-to-use-local-disk" class="common-anchor-header">Configure Kubernetes to use local disk<button data-href="#Configure-Kubernetes-to-use-local-disk" class="anchor-icon" translate="no">
+<h2 id="Configure-Kubernetes-to-use-local-disk" class="common-anchor-header">تكوين Kubernetes لاستخدام القرص المحلي<button data-href="#Configure-Kubernetes-to-use-local-disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,8 +75,8 @@ nvme1n1     259:1    0 250.0G  0 disk
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To configure the QueryNode of Milvus Distributed to use NVMe disk storage, you need to configure the worker nodes of the target Kubernetes clusters to store the containers and images on an NVMe disk. The procedure for this varies depending on the cloud providers.</p>
-<h3 id="AWS" class="common-anchor-header">AWS</h3><p>When using Amazon EKS, you can customize managed nodes with launch templates, in which you can specify configuration settings for your node groups. The following is an example of how to mount an NVMe disk on the worker nodes of your Amazon EKS cluster:</p>
+    </button></h2><p>لتهيئة QueryNode من Milvus Distributed لاستخدام تخزين قرص NVMe، تحتاج إلى تكوين العقد العاملة لمجموعات Kubernetes المستهدفة لتخزين الحاويات والصور على قرص NVMe. يختلف الإجراء الخاص بذلك اعتمادًا على موفري السحابة.</p>
+<h3 id="AWS" class="common-anchor-header">AWS</h3><p>عند استخدام Amazon EKS، يمكنك تخصيص العُقد المُدارة باستخدام قوالب التشغيل، حيث يمكنك تحديد إعدادات التكوين لمجموعات العقد الخاصة بك. فيما يلي مثال على كيفية تركيب قرص NVMe على العقد العاملة في مجموعة Amazon EKS الخاصة بك:</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
 
@@ -102,17 +102,17 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>In the above example, we assume that the NVMe disk is <code translate="no">/dev/nvme1n1</code>. You need to modify the script to match your specific configuration.</p>
+<p>في المثال أعلاه، نفترض أن قرص NVMe هو <code translate="no">/dev/nvme1n1</code>. تحتاج إلى تعديل البرنامج النصي ليتوافق مع التكوين الخاص بك.</p>
 </div>
-<p>For details, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">Customizing managed nodes with launch templates</a>.</p>
-<h3 id="GCP" class="common-anchor-header">GCP</h3><p>To provision Local SSD storage on Google Kubernetes Engine (GKE) clusters, and configure workloads to consume data from Local SSD-backed ephemeral storage attached to nodes in your cluster, run the following command:</p>
+<p>للحصول على التفاصيل، راجع <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data">تخصيص العقد المدارة باستخدام قوالب التشغيل</a>.</p>
+<h3 id="GCP" class="common-anchor-header">GCP</h3><p>لتوفير تخزين محلي SSD على مجموعات محرك Google Kubernetes Engine (GKE)، وتكوين أحمال العمل لاستهلاك البيانات من التخزين المؤقت المدعوم بـ SSD المحلي المدعوم بـ SSD والمتصل بالعقد في مجموعتك، قم بتشغيل الأمر التالي:</p>
 <pre><code translate="no" class="language-bash">gcloud container node-pools create <span class="hljs-variable">${POOL_NAME}</span> \
     --cluster=<span class="hljs-variable">${CLUSTER_NAME}</span> \
     --ephemeral-storage-local-ssd count=<span class="hljs-variable">${NUMBER_OF_DISKS}</span> \
     --machine-type=<span class="hljs-variable">${MACHINE_TYPE}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For details, see <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">Provisioning Local SSD storage on GKE</a>.</p>
-<h3 id="Azure" class="common-anchor-header">Azure</h3><p>To create a virtual machine scale set (VMSS) with local NVMe disk storage, you need to pass custom data to the VM instances. The following is an example of how to attach an NVMe disk to the VM instances in the VMSS:</p>
+<p>لمزيد من التفاصيل، راجع <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd">توفير تخزين SSD محلي على GKE</a>.</p>
+<h3 id="Azure" class="common-anchor-header">أزور</h3><p>لإنشاء مجموعة مقياس آلة افتراضية (VMSS) مع وحدة تخزين أقراص NVMe محلية، تحتاج إلى تمرير بيانات مخصصة إلى مثيلات الآلة الافتراضية. فيما يلي مثال على كيفية إرفاق قرص NVMe بمثيلات الآلة الافتراضية في VMSS:</p>
 <pre><code translate="no" class="language-bash">mdadm -Cv /dev/md0 -l0 -n2 /dev/nvme0n1 /dev/nvme1n1
 mdadm -Ds &gt; /etc/mdadm/mdadm.conf 
 update-initramfs -u
@@ -123,9 +123,9 @@ mkfs.xfs /dev/md0
 mount -a
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>In the above example, we assume that the NVMe disks are <code translate="no">/dev/nvme0n1</code> and <code translate="no">/dev/nvme1n1</code>. You need to modify the script to match your specific configuration.</p>
+<p>في المثال أعلاه، نفترض أن أقراص NVMe هي <code translate="no">/dev/nvme0n1</code> و <code translate="no">/dev/nvme1n1</code>. تحتاج إلى تعديل البرنامج النصي لمطابقة التكوين الخاص بك.</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud & TecentCloud</h3><p>To create a node pool that uses Local SSD volumes, we need to pass Custom Data. The following is an example of custom data.</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">علي بابا كلاود وتيسنت كلاود</h3><p>لإنشاء تجمع عقدة يستخدم وحدات تخزين SSD محلية، نحتاج إلى تمرير بيانات مخصصة. فيما يلي مثال على البيانات المخصصة.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -144,29 +144,29 @@ mount -a
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>In the above example, we assume that the NVMe disk is <code translate="no">/dev/nvme0n1</code>. You need to modify the script to match your specific configuration.</p>
+<p>في المثال أعلاه، نفترض أن قرص NVMe هو <code translate="no">/dev/nvme0n1</code>. تحتاج إلى تعديل البرنامج النصي لمطابقة التكوين الخاص بك.</p>
 </div>
-<h3 id="Your-own-IDC" class="common-anchor-header">Your own IDC</h3><p>If you are running your own IDC and want to configure your containers to use the filesystem on a newly mounted NVMe disk by default in containerd, follow these steps:</p>
+<h3 id="Your-own-IDC" class="common-anchor-header">IDC الخاص بك</h3><p>إذا كنت تقوم بتشغيل IDC الخاص بك وتريد تكوين الحاويات الخاصة بك لاستخدام نظام الملفات على قرص NVMe المثبت حديثًا بشكل افتراضي في الحاوية (Contirond)، فاتبع الخطوات التالية:</p>
 <ul>
-<li><p><strong>Mount the NVMe disks.</strong></p>
-<p>Ensure that your NVMe disk is properly mounted on your host machine. You can mount it to a directory of your choice. For instance, if you mount it to <code translate="no">/mnt/nvme</code>, make sure it is correctly set up and you can see the disk available at <code translate="no">/mnt/nvme</code> by running <code translate="no">lsblk</code> or <code translate="no">df -h</code>.</p></li>
-<li><p><strong>Update containerd configuration.</strong></p>
-<p>Modify the containerd configuration to use the new mount as the root directory for container storage.</p>
+<li><p><strong>قم بتركيب أقراص NVMe.</strong></p>
+<p>تأكد من تركيب قرص NVMe بشكل صحيح على جهازك المضيف. يمكنك تحميله إلى دليل من اختيارك. على سبيل المثال، إذا قمت بتحميله على <code translate="no">/mnt/nvme</code> ، فتأكد من إعداده بشكل صحيح ويمكنك رؤية القرص متاحًا على <code translate="no">/mnt/nvme</code> عن طريق تشغيل <code translate="no">lsblk</code> أو <code translate="no">df -h</code>.</p></li>
+<li><p><strong>تحديث تكوين الحاويةd.</strong></p>
+<p>قم بتعديل تكوين containerd لاستخدام التثبيت الجديد كدليل جذر لتخزين الحاوية.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /mnt/nvme/containerd /mnt/nvme/containerd/state
 <span class="hljs-built_in">sudo</span> vim /etc/containerd/config.toml
 <button class="copy-code-btn"></button></code></pre>
-<p>Locate the <code translate="no">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</code> section, and modify the <code translate="no">snapshotter</code> and <code translate="no">root</code> settings as follows：</p>
+<p>حدد موقع قسم <code translate="no">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</code> ، وقم بتعديل إعدادات <code translate="no">snapshotter</code> و <code translate="no">root</code> على النحو التالي ：</p>
 <pre><code translate="no" class="language-toml"><span class="hljs-section">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</span>
 <span class="hljs-attr">snapshotter</span> = <span class="hljs-string">&quot;overlayfs&quot;</span>
 <span class="hljs-attr">root</span> = <span class="hljs-string">&quot;/mnt/nvme/containerd&quot;</span>
 <span class="hljs-attr">state</span> = <span class="hljs-string">&quot;/mnt/nvme/containerd/state&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Restart containerd.</strong></p>
-<p>Restart the containerd service to apply the changes.</p>
+<li><p><strong>أعد تشغيل الحاوية.</strong></p>
+<p>أعد تشغيل خدمة containerd لتطبيق التغييرات.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> systemctl restart containerd
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Verify-disk-performance" class="common-anchor-header">Verify disk performance<button data-href="#Verify-disk-performance" class="anchor-icon" translate="no">
+<h2 id="Verify-disk-performance" class="common-anchor-header">التحقق من أداء القرص<button data-href="#Verify-disk-performance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,12 +181,12 @@ mount -a
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You are advised to verify the disk performance using <a href="https://github.com/axboe/fio">Fio</a>, which is a popular tool for benchmarking disk performance. The following is an example of how to run Fio to test the disk performance.</p>
+    </button></h2><p>يُنصح بالتحقق من أداء القرص باستخدام <a href="https://github.com/axboe/fio">Fio،</a> وهي أداة شائعة لقياس أداء القرص. فيما يلي مثال على كيفية تشغيل Fio لاختبار أداء القرص.</p>
 <ul>
-<li><p><strong>Deploy the test pod to the node with the NVMe disk.</strong></p>
+<li><p><strong>انشر جراب الاختبار على العقدة مع قرص NVMe.</strong></p>
 <pre><code translate="no" class="language-bash">kubectl create -f ubuntu.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">ubuntu.yaml</code> file is as follows:</p>
+<p>الملف <code translate="no">ubuntu.yaml</code> على النحو التالي:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Pod</span>
 <span class="hljs-attr">metadata:</span>
@@ -203,7 +203,7 @@ mount -a
     <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">data-volume</span>
     <span class="hljs-attr">emptyDir:</span> {}
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Run Fio to test the disk performance.</strong></p>
+<li><p><strong>قم بتشغيل Fio لاختبار أداء القرص.</strong></p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># enter the container</span>
 kubectl <span class="hljs-built_in">exec</span> pod/ubuntu -it bash
 
@@ -221,7 +221,7 @@ fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numj
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
 fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>And the output should look like this:</p>
+<p>ويجب أن يبدو الإخراج هكذا:</p>
 <pre><code translate="no" class="language-bash">Jobs: 128 (f=128): [r(128)][100.0%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=0, <span class="hljs-built_in">jobs</span>=128): err= 0: pid=768: Mon Jun 24 09:35:06 2024
 <span class="hljs-built_in">read</span>: IOPS=349k, BW=1364MiB/s (1430MB/s)(160GiB/120067msec)
@@ -249,7 +249,7 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
     latency   : target=0, window=0, percentile=100.00%, depth=64
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Deploy-Milvus-Distributed" class="common-anchor-header">Deploy Milvus Distributed<button data-href="#Deploy-Milvus-Distributed" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus-Distributed" class="common-anchor-header">نشر ميلفوس الموزع<button data-href="#Deploy-Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -264,10 +264,10 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the verification results are satisfactory, you can deploy Milvus Distributed with the following steps:</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Tips for deploying Milvus Distributed using Helm</h3><p>The QueryNode pod uses NVMe disks as EmptyDir volumes by default. You are advised to mount NVMe disks to <code translate="no">/var/lib/milvus/data</code> within the QueryNode pods to ensure optimal performance.</p>
-<p>For details on how to deploy Milvus Distributed using Helm, see <a href="/docs/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a>.</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Tips for deploying Milvus Distributed using Milvus Operator</h3><p>The Milvus Operator automatically configures the QueryNode pod to use NVMe disks as EmptyDir volumes. You are advised to add the following configurations to the <code translate="no">MilvusCluster</code> custom resource:</p>
+    </button></h2><p>بمجرد أن تكون نتائج التحقق مرضية، يمكنك نشر Milvus Distributed بالخطوات التالية:</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">نصائح لنشر Milvus Distributed باستخدام Helm</h3><p>تستخدم كبسولة QueryNode أقراص NVMe كوحدات تخزين EmptyDir بشكل افتراضي. يُنصح بتحميل أقراص NVMe على <code translate="no">/var/lib/milvus/data</code> داخل كبسولات QueryNode لضمان الأداء الأمثل.</p>
+<p>للحصول على تفاصيل حول كيفية نشر Milvus Distributed باستخدام Helm، راجع <a href="/docs/ar/install_cluster-helm.md">تشغيل Milvus في Kubernetes باستخدام Helm</a>.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">نصائح لنشر ميلفوس الموزع باستخدام مشغل ميلفوس</h3><p>يقوم مشغل Milvus تلقائيًا بتكوين جراب QueryNode تلقائيًا لاستخدام أقراص NVMe كوحدات تخزين EmptyDir. يُنصح بإضافة التكوينات التالية إلى المورد المخصص <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
@@ -279,4 +279,4 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
       <span class="hljs-bullet">-</span> <span class="hljs-attr">emptyDir:</span>
         <span class="hljs-attr">name:</span> <span class="hljs-string">data</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This will ensure that the QueryNode pod uses the NVMe disk as the data volume. For details on how to deploy Milvus Distributed using Milvus Operator, see <a href="/docs/install_cluster-milvusoperator.md">Run Milvus in Kubernetes with Milvus Operator</a>.</p>
+<p>سيضمن ذلك أن تستخدم جراب QueryNode قرص NVMe كوحدة تخزين بيانات. للحصول على تفاصيل حول كيفية نشر ميلفوس الموزعة باستخدام مشغل ميلفوس، راجع <a href="/docs/ar/install_cluster-milvusoperator.md">تشغيل ميلفوس في Kubernetes باستخدام مشغل ميلفوس</a>.</p>
