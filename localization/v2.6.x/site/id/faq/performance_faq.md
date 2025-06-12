@@ -1,11 +1,11 @@
 ---
 id: performance_faq.md
 summary: >-
-  Find answers to frequently asked questions about search performance,
-  performance enhancements, and other performance related issues.
-title: Performance FAQ
+  Temukan jawaban atas pertanyaan yang sering diajukan tentang performa
+  pencarian, peningkatan performa, dan masalah terkait performa lainnya.
+title: Pertanyaan Umum tentang Kinerja
 ---
-<h1 id="Performance-FAQ" class="common-anchor-header">Performance FAQ<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
+<h1 id="Performance-FAQ" class="common-anchor-header">Pertanyaan Umum tentang Kinerja<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,40 +20,32 @@ title: Performance FAQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="How-to-set-nlist-and-nprobe-for-IVF-indexes" class="common-anchor-header">How to set <code translate="no">nlist</code> and <code translate="no">nprobe</code> for IVF indexes?</h4><p>Setting <code translate="no">nlist</code> is scenario-specific. As a rule of thumb, the recommended value of <code translate="no">nlist</code> is <code translate="no">4 × sqrt(n)</code>, where <code translate="no">n</code> is the total number of entities in a segment.</p>
-<p>The size of each segment is determined by the <code translate="no">datacoord.segment.maxSize</code> parameter, which is set to 512 MB by default. The total number of entities in a segment n can be estimated by dividing <code translate="no">datacoord.segment.maxSize</code> by the size of each entity.</p>
-<p>Setting <code translate="no">nprobe</code> is specific to the dataset and scenario, and involves a trade-off between accuracy and query performance. We recommend finding the ideal value through repeated experimentation.</p>
-<p>The following charts are results from a test running on the sift50m dataset and IVF_SQ8 index, which compares recall and query performance of different <code translate="no">nlist</code>/<code translate="no">nprobe</code> pairs.</p>
+    </button></h1><h4 id="How-to-set-nlist-and-nprobe-for-IVF-indexes" class="common-anchor-header">Bagaimana cara mengatur <code translate="no">nlist</code> dan <code translate="no">nprobe</code> untuk indeks IVF?</h4><p>Menyetel <code translate="no">nlist</code> bersifat spesifik untuk setiap skenario. Sebagai patokan, nilai yang disarankan untuk <code translate="no">nlist</code> adalah <code translate="no">4 × sqrt(n)</code>, di mana <code translate="no">n</code> adalah jumlah total entitas dalam sebuah segmen.</p>
+<p>Ukuran setiap segmen ditentukan oleh parameter <code translate="no">datacoord.segment.maxSize</code>, yang disetel ke 512 MB secara default. Jumlah total entitas dalam segmen n dapat diperkirakan dengan membagi <code translate="no">datacoord.segment.maxSize</code> dengan ukuran masing-masing entitas.</p>
+<p>Pengaturan <code translate="no">nprobe</code> khusus untuk dataset dan skenario, dan melibatkan pertukaran antara akurasi dan kinerja kueri. Kami merekomendasikan untuk menemukan nilai yang ideal melalui eksperimen berulang kali.</p>
+<p>Grafik berikut ini adalah hasil dari uji coba yang dilakukan pada dataset sift50m dan indeks IVF_SQ8, yang membandingkan performa recall dan kueri dari pasangan <code translate="no">nlist</code>/<code translate="no">nprobe</code> yang berbeda.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
-    <span>Accuracy test</span>
-  </span>
-
-
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" />
-    <span>Performance test</span>
-  </span>
-</p>
-<h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">Why do queries sometimes take longer on smaller datasets?</h4><p>Query operations are conducted on segments. Indexes reduce the amount of time it takes to query a segment. If a segment has not been indexed, Milvus resorts to brute-force search on the raw data—drastically increasing query time.</p>
-<p>Therefore, it usually takes longer to query on a small dataset (collection) because it has not built index. This is because the sizes of its segments have not reached the index-building threshold set by <code translate="no">rootCoord.minSegmentSizeToEnableindex</code>. Call <code translate="no">create_index()</code> to force Milvus to index segments that have reached the threshold but not yet been automatically indexed, significantly improving query performance.</p>
-<h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">What factors impact CPU usage?</h4><p>CPU usage increases when Milvus is building indexes or running queries. In general, index building is CPU intensive except when using Annoy, which runs on a single thread.</p>
-<p>When running queries, CPU usage is affected by <code translate="no">nq</code> and <code translate="no">nprobe</code>. When <code translate="no">nq</code> and <code translate="no">nprobe</code> are small, concurrency is low and CPU usage stays low.</p>
-<h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">Does simultaneously inserting data and searching impact query performance?</h4><p>Insert operations are not CPU intensive. However, because new segments may not have reached the threshold for index building, Milvus resorts to brute-force search—significantly impacting query performance.</p>
-<p>The <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> parameter determines the index-building threshold for a segment, and is set to 1024 rows by default. See <a href="/docs/system_configuration.md">System Configuration</a> for more information.</p>
-<h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">Can indexing a VARCHAR field improve deletion speed?</h4><p>Indexing a VARCHAR field can speed up “Delete By Expression” operations, but only under certain conditions:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
+   </span> <span class="img-wrapper"> <span>Uji akurasi</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>Uji kinerja</span> </span></p>
+<h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">Mengapa kueri terkadang membutuhkan waktu lebih lama pada set data yang lebih kecil?</h4><p>Operasi kueri dilakukan pada segmen. Indeks mengurangi jumlah waktu yang diperlukan untuk melakukan kueri pada sebuah segmen. Jika sebuah segmen belum diindeks, Milvus menggunakan pencarian brute-force pada data mentah - meningkatkan waktu kueri secara drastis.</p>
+<p>Oleh karena itu, biasanya diperlukan waktu lebih lama untuk melakukan kueri pada kumpulan data yang kecil (koleksi) karena belum membangun indeks. Hal ini karena ukuran segmen-segmennya belum mencapai ambang batas pembangunan indeks yang ditetapkan oleh <code translate="no">rootCoord.minSegmentSizeToEnableindex</code>. Hubungi <code translate="no">create_index()</code> untuk memaksa Milvus mengindeks segmen yang telah mencapai ambang batas tetapi belum diindeks secara otomatis, sehingga secara signifikan meningkatkan kinerja kueri.</p>
+<h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">Faktor-faktor apa saja yang memengaruhi penggunaan CPU?</h4><p>Penggunaan CPU meningkat ketika Milvus membangun indeks atau menjalankan kueri. Secara umum, pembuatan indeks menggunakan CPU yang intensif kecuali ketika menggunakan Annoy, yang berjalan pada satu thread.</p>
+<p>Ketika menjalankan kueri, penggunaan CPU dipengaruhi oleh <code translate="no">nq</code> dan <code translate="no">nprobe</code>. Ketika <code translate="no">nq</code> dan <code translate="no">nprobe</code> kecil, konkurensi rendah dan penggunaan CPU tetap rendah.</p>
+<h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">Apakah memasukkan data dan pencarian secara bersamaan memengaruhi kinerja kueri?</h4><p>Operasi penyisipan tidak menggunakan CPU secara intensif. Namun, karena segmen baru mungkin belum mencapai ambang batas untuk pembuatan indeks, Milvus menggunakan pencarian brute-force - yang secara signifikan memengaruhi kinerja kueri.</p>
+<p>Parameter <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> menentukan ambang batas pembuatan indeks untuk sebuah segmen, dan diatur ke 1024 baris secara default. Lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a> untuk informasi lebih lanjut.</p>
+<h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">Apakah mengindeks bidang VARCHAR dapat meningkatkan kecepatan penghapusan?</h4><p>Mengindeks bidang VARCHAR dapat mempercepat operasi "Hapus Berdasarkan Ekspresi", tetapi hanya dalam kondisi tertentu:</p>
 <ul>
-<li><strong>INVERTED Index</strong>: This index helps for <code translate="no">IN</code> or <code translate="no">==</code> expressions on non-primary key VARCHAR fields.</li>
-<li><strong>Trie Index</strong>: This index helps for prefix queries (e.g., <code translate="no">LIKE prefix%</code>) on non-primary VARCHAR fields.</li>
+<li><strong>Indeks Terbalik</strong>: Indeks ini membantu untuk ekspresi <code translate="no">IN</code> atau <code translate="no">==</code> pada field VARCHAR non-kunci utama.</li>
+<li><strong>Indeks Trie</strong>: Indeks ini membantu untuk kueri awalan (misalnya, <code translate="no">LIKE prefix%</code>) pada bidang VARCHAR non-kunci utama.</li>
 </ul>
-<p>However, indexing a VARCHAR field does not speed up:</p>
+<p>Namun, mengindeks bidang VARCHAR tidak mempercepat:</p>
 <ul>
-<li><strong>Deleting by IDs</strong>: When the VARCHAR field is the primary key.</li>
-<li><strong>Unrelated Expressions</strong>: When the VARCHAR field isn’t part of the delete expression.</li>
+<li><strong>Menghapus berdasarkan ID</strong>: Ketika bidang VARCHAR adalah kunci utama.</li>
+<li><strong>Ekspresi yang tidak terkait</strong>: Ketika bidang VARCHAR bukan bagian dari ekspresi penghapusan.</li>
 </ul>
-<h4 id="Still-have-questions" class="common-anchor-header">Still have questions?</h4><p>You can:</p>
+<h4 id="Still-have-questions" class="common-anchor-header">Masih memiliki pertanyaan?</h4><p>Anda bisa:</p>
 <ul>
-<li>Check out <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> on GitHub. Feel free to ask questions, share ideas, and help others.</li>
-<li>Join our <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> to find support and engage with our open-source community.</li>
+<li>Lihat <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> di GitHub. Jangan ragu untuk bertanya, berbagi ide, dan membantu orang lain.</li>
+<li>Bergabunglah dengan <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Saluran Slack</a> kami untuk mendapatkan dukungan dan terlibat dengan komunitas sumber terbuka kami.</li>
 </ul>

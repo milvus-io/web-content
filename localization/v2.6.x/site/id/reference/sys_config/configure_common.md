@@ -2,9 +2,9 @@
 id: configure_common.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure common for Milvus.
+summary: Pelajari cara mengonfigurasi umum untuk Milvus.
 ---
-<h1 id="common-related-Configurations" class="common-anchor-header">common-related Configurations<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="common-related-Configurations" class="common-anchor-header">Konfigurasi terkait umum<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.defaultPartitionName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Name of the default partition when a collection is created      </td>
+      <td>        Nama partisi default saat koleksi dibuat      </td>
       <td>_default</td>
     </tr>
   </tbody>
@@ -66,13 +66,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.defaultIndexName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Name of the index when it is created with name unspecified      </td>
+      <td>        Nama indeks ketika dibuat dengan nama yang tidak ditentukan      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.entityExpiration">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Entity expiration in seconds, CAUTION -1 means never expire      </td>
+      <td>        Masa berlaku entitas dalam hitungan detik, PERHATIAN -1 berarti tidak pernah kedaluwarsa      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -124,13 +124,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.indexSliceSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Index slice size in MB      </td>
+      <td>        Ukuran irisan indeks dalam MB  </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -153,13 +153,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.highPriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in high priority pool      </td>
+      <td>        Parameter ini menentukan berapa kali jumlah thread adalah jumlah core dalam pool prioritas tinggi      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.middlePriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in middle priority pool      </td>
+      <td>        Parameter ini menentukan berapa kali jumlah thread adalah jumlah core dalam pool prioritas menengah      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -211,13 +211,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.lowPriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in low priority pool      </td>
+      <td>        Parameter ini menentukan berapa kali jumlah thread adalah jumlah core dalam pool prioritas rendah      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -240,13 +240,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.gracefulTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        milliseconds. it represents the interval (in ms) by which the request arrival time needs to be subtracted in the case of Bounded Consistency.      </td>
+      <td>        milidetik. ini mewakili interval (dalam ms) di mana waktu kedatangan permintaan perlu dikurangi dalam kasus Bounded Consistency.      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -269,13 +269,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. it will force quit the server if the graceful stop process is not completed during this time.      </td>
+      <td>        detik. ini akan memaksa keluar dari server jika proses penghentian secara perlahan tidak selesai selama waktu ini.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -298,14 +298,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.storageType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        please adjust in embedded Milvus: local, available values are [local, remote, opendal], value minio is deprecated, use remote instead      </td>
-      <td>remote</td>
+      <td>        silakan sesuaikan di Milvus yang disematkan: lokal, nilai yang tersedia adalah [lokal, jarak jauh, opendal], nilai minio sudah tidak digunakan, gunakan jarak jauh sebagai gantinya      </td>
+      <td>jarak jauh</td>
     </tr>
   </tbody>
 </table>
@@ -327,16 +327,16 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.simdType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Default value: auto</li>      
-        <li>Valid values: [auto, avx512, avx2, avx, sse4_2]</li>      
-        <li>This configuration is only used by querynode and indexnode, it selects CPU instruction set for Searching and Index-building.</li>      </td>
+        <li>Nilai default: otomatis</li>      
+        <li>Nilai yang valid: [auto, avx512, avx2, avx, sse4_2]</li>      
+        <li>Konfigurasi ini hanya digunakan oleh querynode dan indexnode, konfigurasi ini memilih set instruksi CPU untuk pencarian dan pembuatan indeks.</li>      </td>
       <td>auto</td>
     </tr>
   </tbody>
@@ -359,15 +359,15 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.superUsers">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The superusers will ignore some system check processes,</li>      
-        <li>like the old password verification when updating the credential</li>      </td>
+        <li>Pengguna super akan mengabaikan beberapa proses pemeriksaan sistem,</li>      
+        <li>seperti verifikasi kata sandi lama saat memperbarui kredensial</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -390,13 +390,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.defaultRootPassword">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        default password for root user. The maximum length is 72 characters, and double quotes are required.      </td>
+      <td>        kata sandi default untuk pengguna root. Panjang maksimum adalah 72 karakter, dan harus menggunakan tanda kutip ganda.      </td>
       <td>Milvus</td>
     </tr>
   </tbody>
@@ -419,13 +419,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rootShouldBindRole">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether the root user should bind a role when the authorization is enabled.      </td>
+      <td>        Apakah pengguna root harus mengikat peran saat otorisasi diaktifkan.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -448,13 +448,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.overrideBuiltInPrivilegeGroups.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to override build-in privilege groups      </td>
+      <td>        Apakah akan mengesampingkan grup hak istimewa bawaan      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -477,14 +477,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level readonly privileges      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups</td>
+      <td>        Hak istimewa hanya-baca tingkat cluster      </td>
+      <td>DaftarDatabase, PilihKepemilikan, PilihPengguna, JelaskanKelompokSumberDaya, DaftarKelompokSumberDaya, DaftarKelompokHakKhusus</td>
     </tr>
   </tbody>
 </table>
@@ -506,13 +506,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level readwrite privileges      </td>
+      <td>        Hak istimewa baca-tulis tingkat cluster      </td>
       <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
     </tr>
   </tbody>
@@ -535,14 +535,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.cluster.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Cluster level admin privileges      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,DropDatabase,CreateOwnership,DropOwnership,ManageOwnership,CreateResourceGroup,DropResourceGroup,UpdateUser,RenameCollection,CreatePrivilegeGroup,DropPrivilegeGroup,OperatePrivilegeGroup</td>
+      <td>        Hak istimewa admin tingkat cluster      </td>
+      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,JatuhkanBasis Data, BuatKepemilikan, JatuhkanKepemilikan, KelolaKepemilikan, BuatKelompokSumberDaya, JatuhkanKelompokSumberDaya, PerbaruiPengguna, GantiNamaKoleksi, BuatKelompokHakKhusus, JatuhkanKelompokHakKhusus, OperasikanKelompokHakKhusus</td>
     </tr>
   </tbody>
 </table>
@@ -564,14 +564,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level readonly privileges      </td>
-      <td>ShowCollections,DescribeDatabase</td>
+      <td>        Hak istimewa hanya-baca tingkat basis data    </td>
+      <td>TampilkanKoleksi,JelaskanDatabase</td>
     </tr>
   </tbody>
 </table>
@@ -593,14 +593,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level readwrite privileges      </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase</td>
+      <td>        Hak istimewa baca-tulis tingkat basis data    </td>
+      <td>TampilkanKoleksi, JelaskanDatabase, UbahDatabase</td>
     </tr>
   </tbody>
 </table>
@@ -622,14 +622,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.database.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Database level admin privileges      </td>
-      <td>ShowCollections,DescribeDatabase,AlterDatabase,CreateCollection,DropCollection</td>
+      <td>        Hak istimewa admin tingkat basis data    </td>
+      <td>TampilkanKoleksi, JelaskanDatabase, UbahDatabase, BuatKoleksi, HapusKoleksi</td>
     </tr>
   </tbody>
 </table>
@@ -651,14 +651,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.readonly.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level readonly privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases</td>
+      <td>        Hak istimewa hanya-baca tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAlias</td>
     </tr>
   </tbody>
 </table>
@@ -680,14 +680,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.readwrite.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level readwrite privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition</td>
+      <td>        Hak istimewa baca-tulis tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAliases, Load, Release, Insert, Delete, Upsert, Import, Flush, Compaction, LoadBalance, CreateIndex, DropIndex, CreatePartition, DropPartition</td>
     </tr>
   </tbody>
 </table>
@@ -709,14 +709,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.rbac.collection.admin.privileges">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Collection level admin privileges      </td>
-      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition,CreateAlias,DropAlias</td>
+      <td>        Keistimewaan admin tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAlias, Load, Release, Insert, Delete, Upsert, Import, Flush, Compaction, LoadBalance, CreateIndex, DropIndex, CreatePartition, DropPartition, CreateAlias, DropAlias</td>
     </tr>
   </tbody>
 </table>
@@ -738,13 +738,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.session.ttl">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ttl value when session granting a lease to register service      </td>
+      <td>        nilai ttl saat sesi memberikan sewa untuk mendaftarkan layanan      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -767,13 +767,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.session.retryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry times when session sending etcd requests      </td>
+      <td>        waktu coba ulang saat sesi mengirim permintaan etcd    </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -796,13 +796,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.metrics.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether gather statistics for metrics locks      </td>
+      <td>        apakah mengumpulkan statistik untuk kunci metrik      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -825,13 +825,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.threshold.info">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum milliseconds for printing durations in info level      </td>
+      <td>        milidetik minimum untuk durasi pencetakan di tingkat info    </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -854,13 +854,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.threshold.warn">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum milliseconds for printing durations in warn level      </td>
+      <td>        milidetik minimum untuk durasi pencetakan dalam tingkat peringatan      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -883,13 +883,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.maxWLockConditionalWaitTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum seconds for waiting wlock conditional      </td>
+      <td>        detik maksimum untuk menunggu wlock bersyarat      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -912,17 +912,17 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.ttMsgEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to disable the internal time messaging mechanism for the system. </li>      
-        <li>If disabled (set to false), the system will not allow DML operations, including insertion, deletion, queries, and searches. </li>      
-        <li>This helps Milvus-CDC synchronize incremental data</li>      </td>
-      <td>true</td>
+        <li>Apakah akan menonaktifkan mekanisme pengiriman pesan waktu internal untuk sistem. </li>      
+        <li>Jika dinonaktifkan (diatur ke false), sistem tidak akan mengizinkan operasi DML, termasuk penyisipan, penghapusan, kueri, dan pencarian. </li>      
+        <li>Hal ini membantu Milvus-CDC menyinkronkan data tambahan</li>      </td>
+      <td>benar</td>
     </tr>
   </tbody>
 </table>
@@ -944,13 +944,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.traceLogMode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        trace request info      </td>
+      <td>        melacak info permintaan      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -973,13 +973,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter initial size      </td>
+      <td>        ukuran awal filter mekar     </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -1002,14 +1002,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
-      <td>BlockedBloomFilter</td>
+      <td>        jenis filter mekar, mendukung BasicBloomFilter dan BlockedBloomFilter      </td>
+      <td>Filter Mekar yang Diblokir (BlockedBloomFilter)</td>
     </tr>
   </tbody>
 </table>
@@ -1031,13 +1031,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.maxBloomFalsePositive">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max false positive rate for bloom filter      </td>
+      <td>        tingkat positif palsu maksimum untuk filter mekar     </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -1060,13 +1060,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterApplyBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        batch size when to apply pk to bloom filter      </td>
+      <td>        ukuran batch kapan harus menerapkan pk ke filter bloom     </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1089,13 +1089,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.collectionReplicateEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable collection replication.      </td>
+      <td>        Apakah akan mengaktifkan replikasi koleksi.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1118,13 +1118,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.usePartitionKeyAsClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, do clustering compaction and segment prune on partition key field      </td>
+      <td>        jika benar, lakukan pemadatan clustering dan pemangkasan segmen pada bidang kunci partisi      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1147,13 +1147,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.useVectorAsClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, do clustering compaction and segment prune on vector field      </td>
+      <td>        jika benar, lakukan pemadatan clustering dan pemangkasan segmen pada bidang vektor      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1176,13 +1176,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.enableVectorClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, enable vector clustering key and vector clustering compaction      </td>
+      <td>        jika benar, aktifkan kunci pengelompokan vektor dan pemadatan pengelompokan vektor      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1205,13 +1205,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.localRPCEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable local rpc for internal communication when mix or standalone mode.      </td>
+      <td>        aktifkan rpc lokal untuk komunikasi internal saat mode campuran atau mandiri.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1234,13 +1234,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.sync.taskPoolReleaseTimeoutSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum time to wait for the task to finish and release resources in the pool      </td>
+      <td>        Waktu maksimum untuk menunggu tugas selesai dan melepaskan sumber daya dalam pool    </td>
       <td>60</td>
     </tr>
   </tbody>

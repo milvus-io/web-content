@@ -1,11 +1,11 @@
 ---
 id: privilege_group.md
-title: Create Privilege Group
+title: Membuat Grup Hak Istimewa
 summary: >-
-  To streamline the process of granting privileges, it is recommended that you
-  combine multiple privileges into a privilege group.
+  Untuk menyederhanakan proses pemberian hak istimewa, Anda disarankan untuk
+  menggabungkan beberapa hak istimewa ke dalam grup hak istimewa.
 ---
-<h1 id="Create-Privilege-Group" class="common-anchor-header">Create Privilege Group<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
+<h1 id="Create-Privilege-Group" class="common-anchor-header">Membuat Grup Hak Istimewa<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>To streamline the process of granting privileges, it is recommended that you combine multiple privileges into a privilege group.</p>
-<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">Privilege group vs. privileges<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
+    </button></h1><p>Untuk menyederhanakan proses pemberian hak istimewa, Anda disarankan untuk menggabungkan beberapa hak istimewa ke dalam grup hak istimewa.</p>
+<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">Grup hak istimewa vs hak istimewa<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,20 +36,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A privilege group consists of multiple privileges.</p>
+    </button></h2><p>Grup hak istimewa terdiri dari beberapa hak istimewa.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
-    <span>Privilege Group Illustrated</span>
-  </span>
-</p>
-<p>As shown in the figure above, suppose you need to grant three different privileges to a role.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
+   </span> <span class="img-wrapper"> <span>Ilustrasi Grup Hak Istimewa</span> </span></p>
+<p>Seperti yang ditunjukkan pada gambar di atas, misalkan Anda perlu memberikan tiga hak istimewa yang berbeda pada sebuah peran.</p>
 <ul>
-<li><p>If you do not use a privilege group, you need to grant the privileges three times.</p></li>
-<li><p>If you use a privilege group, you only need to create a privilege group and add the three privileges to this privilege group and grant the privilege group to Role A.</p></li>
+<li><p>Jika Anda tidak menggunakan grup hak istimewa, Anda perlu memberikan hak istimewa tiga kali.</p></li>
+<li><p>Jika Anda menggunakan grup hak istimewa, Anda hanya perlu membuat grup hak istimewa dan menambahkan tiga hak istimewa ke grup hak istimewa ini dan memberikan grup hak istimewa tersebut kepada Role A.</p></li>
 </ul>
-<p>By using a privilege group, you can grant multiple privileges in bulk to a role.</p>
-<h2 id="Built-in-privilege-groups" class="common-anchor-header">Built-in privilege groups<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
+<p>Dengan menggunakan grup hak istimewa, Anda dapat memberikan beberapa hak istimewa secara massal ke sebuah peran.</p>
+<h2 id="Built-in-privilege-groups" class="common-anchor-header">Grup hak istimewa bawaan<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,32 +62,32 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For ease-of-use, Milvus provides a total of 9 built-in privileges on the collection, database, and instance level: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW and Cluster_Admin.</p>
+    </button></h2><p>Untuk kemudahan penggunaan, Milvus menyediakan total 9 hak istimewa bawaan di tingkat koleksi, basis data, dan instance: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW, dan Cluster_Admin.</p>
 <div class="alert note">
-<p>The three levels of built-in privilege groups do not have a cascading relationship. Setting a privilege group at the instance level does not automatically set permissions for all databases and collections under that instance. Privileges at the database and collection levels need to be set manually.</p>
+<p>Tiga tingkat grup hak istimewa bawaan tidak memiliki hubungan berjenjang. Menetapkan grup hak istimewa pada tingkat instance tidak secara otomatis menetapkan izin untuk semua database dan koleksi di bawah instance tersebut. Hak istimewa di tingkat database dan koleksi perlu diatur secara manual.</p>
 </div>
-<p>The following tables explains the privileges includes in each of the built-in privilege group.</p>
-<h3 id="Collection-level" class="common-anchor-header">Collection level</h3><ul>
-<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: includes privileges to read collection data</p></li>
-<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: includes privileges to read and write collection data</p></li>
-<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: includes privileges to read and write collection data and manage collections.</p></li>
+<p>Tabel berikut ini menjelaskan hak istimewa yang disertakan dalam setiap grup hak istimewa bawaan.</p>
+<h3 id="Collection-level" class="common-anchor-header">Tingkat koleksi</h3><ul>
+<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: mencakup hak istimewa untuk membaca data koleksi</p></li>
+<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: mencakup hak istimewa untuk membaca dan menulis data koleksi</p></li>
+<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: mencakup hak istimewa untuk membaca dan menulis data koleksi dan mengelola koleksi.</p></li>
 </ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the collection level:</p>
+<p>Tabel di bawah ini mencantumkan hak istimewa khusus yang termasuk dalam tiga kelompok hak istimewa bawaan pada tingkat koleksi:</p>
 <table>
    <tr>
-     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>Hak istimewa</strong></p></th>
      <th><p><strong>CollectionReadOnly</strong></p></th>
-     <th><p><strong>CollectionReadWrite</strong></p></th>
+     <th><p><strong>KoleksiBacaTulis</strong></p></th>
      <th><p><strong>CollectionAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>Query</p></td>
+     <td><p>Permintaan</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Search</p></td>
+     <td><p>Pencarian</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -119,31 +117,31 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>HasPartition</p></td>
+     <td><p>MemilikiPartisi</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ShowPartitions</p></td>
+     <td><p>TampilkanPartisi</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ListAliases</p></td>
+     <td><p>DaftarAliases</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeCollection</p></td>
+     <td><p>JelaskanKoleksi</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeAlias</p></td>
+     <td><p>JelaskanAlias</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -167,73 +165,73 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreatePartition</p></td>
+     <td><p>BuatPartisi</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropPartition</p></td>
+     <td><p>JatuhkanPartisi</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Load</p></td>
+     <td><p>Memuat</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Release</p></td>
+     <td><p>Lepaskan</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Insert</p></td>
+     <td><p>Sisipkan</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Delete</p></td>
+     <td><p>Menghapus</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Upsert</p></td>
+     <td><p>Upsert.</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Import</p></td>
+     <td><p>Impor</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Flush</p></td>
+     <td><p>Siram</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Compaction</p></td>
+     <td><p>Pemadatan</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>LoadBalance</p></td>
+     <td><p>Keseimbangan Beban</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateAlias</p></td>
+     <td><p>BuatAlias</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -245,33 +243,33 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">Database level</h3><ul>
-<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: includes privileges to read database data</p></li>
-<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: includes privileges to read and write database data</p></li>
-<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: includes privileges to read and write database data and manage databases.</p></li>
+<h3 id="Database-level" class="common-anchor-header">Tingkat basis data</h3><ul>
+<li><p><strong>DatabaseReadOnly (DB_RO</strong>): mencakup hak istimewa untuk membaca data basis data</p></li>
+<li><p><strong>DatabaseReadWrite (DB_RW</strong>): mencakup hak istimewa untuk membaca dan menulis data basis data</p></li>
+<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: mencakup hak istimewa untuk membaca dan menulis data basis data dan mengelola basis data.</p></li>
 </ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the database level:</p>
+<p>Tabel di bawah ini mencantumkan hak istimewa khusus yang termasuk dalam tiga kelompok hak istimewa bawaan pada tingkat basis data:</p>
 <table>
    <tr>
-     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>Hak istimewa</strong></p></th>
      <th><p><strong>DatabaseReadOnly</strong></p></th>
      <th><p><strong>DatabaseReadWrite</strong></p></th>
      <th><p><strong>DatabaseAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>ShowCollections</p></td>
+     <td><p>TampilkanKoleksi</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeDatabase</p></td>
+     <td><p>JelaskanDatabase</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateCollection</p></td>
+     <td><p>MembuatKoleksi</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -289,63 +287,63 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">Cluster level</h3><ul>
-<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: includes privileges to read instance data</p></li>
-<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: includes privileges to read and write instance data</p></li>
-<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: includes privileges to read and write instance data and manage instances.</p></li>
+<h3 id="Cluster-level" class="common-anchor-header">Tingkat cluster</h3><ul>
+<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: mencakup hak istimewa untuk membaca data contoh</p></li>
+<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: mencakup hak istimewa untuk membaca dan menulis data instance</p></li>
+<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: mencakup hak istimewa untuk membaca dan menulis data instance dan mengelola instance.</p></li>
 </ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the instance level:</p>
+<p>Tabel di bawah ini mencantumkan hak istimewa spesifik yang termasuk dalam tiga grup hak istimewa bawaan di tingkat instance:</p>
 <table>
    <tr>
-     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>Hak istimewa</strong></p></th>
      <th><p><strong>ClusterReadOnly</strong></p></th>
      <th><p><strong>ClusterReadWrite</strong></p></th>
      <th><p><strong>ClusterAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>ListDatabases</p></td>
+     <td><p>DaftarDatabase</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>RenameCollection</p></td>
+     <td><p>Ganti NamaKoleksi</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateOwnership</p></td>
+     <td><p>BuatKepemilikan</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>UpdateUser</p></td>
+     <td><p>PerbaruiPengguna</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropOwnership</p></td>
+     <td><p>JatuhkanKepemilikan</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>SelectOwnership</p></td>
+     <td><p>PilihKepemilikan</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ManageOwnership</p></td>
+     <td><p>KelolaKepemilikan</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>SelectUser</p></td>
+     <td><p>PilihPengguna</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -357,37 +355,37 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>RestoreRBAC</p></td>
+     <td><p>PulihkanRBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateResourceGroup</p></td>
+     <td><p>Membuat Grup Sumber Daya</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropResourceGroup</p></td>
+     <td><p>Menghapus Grup Sumber Daya (DropResourceGroup)</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>UpdateResourceGroups</p></td>
+     <td><p>Perbarui Grup Sumber Daya</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeResourceGroup</p></td>
+     <td><p>JelaskanKelompokSumberDaya</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ListResourceGroups</p></td>
+     <td><p>DaftarKelompokSumberDaya</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -399,13 +397,13 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>TransferReplica</p></td>
+     <td><p>TransferReplika</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateDatabase</p></td>
+     <td><p>MembuatDatabase</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -423,31 +421,31 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreatePrivilegeGroup</p></td>
+     <td><p>BuatKelompokHakKhusus (CreatePrivilegeGroup)</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropPrivilegeGroup</p></td>
+     <td><p>HapusKeistimewaanGrup</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ListPrivilegeGroups</p></td>
+     <td><p>DaftarKelompokHakKhusus</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>OperatePrivilegeGroup</p></td>
+     <td><p>MengoperasikanKelompokHakIlmu (OperatePrivilegeGroup)</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h2 id="Procedures" class="common-anchor-header">Procedures<button data-href="#Procedures" class="anchor-icon" translate="no">
+<h2 id="Procedures" class="common-anchor-header">Prosedur<button data-href="#Procedures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -462,15 +460,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create a privilege group and then add privileges to the privilege group.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">Create a privilege group</h3><p>The following example demonstrates how to create a privilege group named <code translate="no">privilege_group_1</code>.</p>
+    </button></h2><p>Anda dapat membuat grup hak istimewa dan kemudian menambahkan hak istimewa ke grup hak istimewa.</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">Membuat grup hak istimewa</h3><p>Contoh berikut ini mendemonstrasikan cara membuat grup hak istimewa bernama <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）
 <button class="copy-code-btn"></button></code></pre>
@@ -500,14 +493,9 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Add privileges to a privilege group</h3><p>The following example demonstrates how to add privileges <code translate="no">PrivilegeBackupRBAC</code> and <code translate="no">PrivilegeRestoreRBAC</code> to the privilege group <code translate="no">privilege_group_1</code> that is just created.</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Menambahkan hak istimewa ke grup hak istimewa</h3><p>Contoh berikut ini menunjukkan cara menambahkan hak istimewa <code translate="no">PrivilegeBackupRBAC</code> dan <code translate="no">PrivilegeRestoreRBAC</code> ke grup hak istimewa <code translate="no">privilege_group_1</code> yang baru saja dibuat.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
@@ -542,14 +530,9 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Remove privileges from a privilege group</h3><p>The following example demonstrates how to remove the privilege <code translate="no">PrivilegeRestoreRBAC</code> from the privilege group <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Menghapus hak istimewa dari grup hak istimewa</h3><p>Contoh berikut ini mendemonstrasikan cara menghapus hak istimewa <code translate="no">PrivilegeRestoreRBAC</code> dari grup hak istimewa <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -582,14 +565,9 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">List privilege groups</h3><p>The following example demonstrates how to list all existing privilege groups.</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">Membuat daftar grup hak istimewa</h3><p>Contoh berikut ini menunjukkan cara membuat daftar semua grup hak istimewa yang ada.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.list_privilege_groups()
 <button class="copy-code-btn"></button></code></pre>
@@ -617,17 +595,12 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output.</p>
+<p>Di bawah ini adalah contoh keluaran.</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">Drop a privilege group</h3><p>The following example demonstrates how to drop the privilege group <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">Menghapus grup hak istimewa</h3><p>Contoh berikut ini menunjukkan cara menghapus grup hak istimewa <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>

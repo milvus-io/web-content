@@ -1,9 +1,9 @@
 ---
 id: four_layers.md
-summary: Storage/computing disaggregation structure in Milvus.
-title: Storage/Computing Disaggregation
+summary: Struktur pemilahan penyimpanan/komputasi di Milvus.
+title: Pemilahan Penyimpanan/Komputasi
 ---
-<h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Storage/Computing Disaggregation<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
+<h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Pemilahan Penyimpanan/Komputasi<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Following the principle of data plane and control plane disaggregation, Milvus comprises four layers that are mutually independent in terms of scalability and disaster recovery.</p>
-<h2 id="Access-layer" class="common-anchor-header">Access layer<button data-href="#Access-layer" class="anchor-icon" translate="no">
+    </button></h1><p>Mengikuti prinsip disagregasi bidang data dan bidang kontrol, Milvus terdiri dari empat lapisan yang saling independen dalam hal skalabilitas dan pemulihan bencana.</p>
+<h2 id="Access-layer" class="common-anchor-header">Lapisan akses<button data-href="#Access-layer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,12 +34,12 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Composed of a group of stateless proxies, the access layer is the front layer of the system and endpoint to users. It validates client requests and reduces the returned results:</p>
+    </button></h2><p>Terdiri dari sekelompok proksi tanpa kewarganegaraan, lapisan akses adalah lapisan depan sistem dan titik akhir bagi pengguna. Lapisan ini memvalidasi permintaan klien dan mengurangi hasil yang dikembalikan:</p>
 <ul>
-<li>Proxy is in itself stateless. It provides a unified service address using load balancing components such as Nginx, Kubernetes Ingress, NodePort, and LVS.</li>
-<li>As Milvus employs a massively parallel processing (MPP) architecture, the proxy aggregates and post-process the intermediate results before returning the final results to the client.</li>
+<li>Proxy dengan sendirinya tidak memiliki kewarganegaraan. Ia menyediakan alamat layanan terpadu menggunakan komponen penyeimbang beban seperti Nginx, Kubernetes Ingress, NodePort, dan LVS.</li>
+<li>Karena Milvus menggunakan arsitektur pemrosesan paralel masif (MPP), proksi mengumpulkan dan memproses hasil antara sebelum mengembalikan hasil akhir ke klien.</li>
 </ul>
-<h2 id="Coordinator-service" class="common-anchor-header">Coordinator service<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
+<h2 id="Coordinator-service" class="common-anchor-header">Layanan koordinator<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,12 +54,12 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The coordinator service assigns tasks to the worker nodes and functions as the system’s brain. The tasks it takes on include cluster topology management, load balancing, timestamp generation, data declaration, and data management.</p>
-<p>There are three coordinator types: root coordinator (root coord), data coordinator (data coord), and query coordinator (query coord).</p>
-<h3 id="Root-coordinator-root-coord" class="common-anchor-header">Root coordinator (root coord)</h3><p>Root coord handles data definition language (DDL) and data control language (DCL) requests, such as create or delete collections, partitions, or indexes, as well as manage TSO (timestamp Oracle) and time ticker issuing.</p>
-<h3 id="Query-coordinator-query-coord" class="common-anchor-header">Query coordinator (query coord)</h3><p>Query coord manages topology and load balancing for the query nodes, and handoff from growing segments to sealed segments.</p>
-<h3 id="Data-coordinator-data-coord" class="common-anchor-header">Data coordinator (data coord)</h3><p>Data coord manages topology of the data nodes and index nodes, maintains metadata, and triggers flush, compact, and index building and other background data operations.</p>
-<h2 id="Worker-nodes" class="common-anchor-header">Worker nodes<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
+    </button></h2><p>Layanan koordinator memberikan tugas kepada node pekerja dan berfungsi sebagai otak sistem. Tugas-tugas yang dilakukannya meliputi manajemen topologi cluster, penyeimbangan beban, pembuatan stempel waktu, deklarasi data, dan manajemen data.</p>
+<p>Ada tiga jenis koordinator: koordinator akar (root coord), koordinator data (data coord), dan koordinator kueri (query coord).</p>
+<h3 id="Root-coordinator-root-coord" class="common-anchor-header">Koordinator akar (root coord)</h3><p>Root coord menangani permintaan bahasa definisi data (DDL) dan bahasa kontrol data (DCL), seperti membuat atau menghapus koleksi, partisi, atau indeks, serta mengelola TSO (stempel waktu Oracle) dan penerbitan penunjuk waktu.</p>
+<h3 id="Query-coordinator-query-coord" class="common-anchor-header">Koordinator kueri (query coord)</h3><p>Query coord mengelola topologi dan penyeimbangan beban untuk node kueri, dan melakukan handoff dari segmen yang sedang berkembang ke segmen yang disegel.</p>
+<h3 id="Data-coordinator-data-coord" class="common-anchor-header">Koordinator data (data coord)</h3><p>Data coord mengelola topologi node data dan node indeks, memelihara metadata, dan memicu flush, compact, dan pembangunan indeks serta operasi data latar belakang lainnya.</p>
+<h2 id="Worker-nodes" class="common-anchor-header">Simpul pekerja<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,11 +74,11 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The arms and legs. Worker nodes are dumb executors that follow instructions from the coordinator service and execute data manipulation language (DML) commands from the proxy. Worker nodes are stateless thanks to separation of storage and computation, and can facilitate system scale-out and disaster recovery when deployed on Kubernetes. There are three types of worker nodes:</p>
-<h3 id="Query-node" class="common-anchor-header">Query node</h3><p>Query node retrieves incremental log data and turn them into growing segments by subscribing to the log broker, loads historical data from the object storage, and runs hybrid search between vector and scalar data.</p>
-<h3 id="Data-node" class="common-anchor-header">Data node</h3><p>Data node retrieves incremental log data by subscribing to the log broker, processes mutation requests, and packs log data into log snapshots and stores them in the object storage.</p>
-<h3 id="Index-node" class="common-anchor-header">Index node</h3><p>Index node builds indexes.  Index nodes do not need to be memory resident, and can be implemented with the serverless framework.</p>
-<h2 id="Storage" class="common-anchor-header">Storage<button data-href="#Storage" class="anchor-icon" translate="no">
+    </button></h2><p>Lengan dan kaki. Node pekerja adalah eksekutor bodoh yang mengikuti instruksi dari layanan koordinator dan menjalankan perintah bahasa manipulasi data (DML) dari proksi. Node pekerja tidak memiliki kewarganegaraan berkat pemisahan penyimpanan dan komputasi, dan dapat memfasilitasi perluasan sistem dan pemulihan bencana saat digunakan di Kubernetes. Ada tiga jenis simpul pekerja:</p>
+<h3 id="Query-node" class="common-anchor-header">Node kueri</h3><p>Node kueri mengambil data log tambahan dan mengubahnya menjadi segmen yang terus bertambah dengan berlangganan log broker, memuat data historis dari penyimpanan objek, dan menjalankan pencarian hibrida antara data vektor dan skalar.</p>
+<h3 id="Data-node" class="common-anchor-header">Simpul data</h3><p>Simpul data mengambil data log tambahan dengan berlangganan ke log broker, memproses permintaan mutasi, dan mengemas data log ke dalam snapshot log dan menyimpannya di penyimpanan objek.</p>
+<h3 id="Index-node" class="common-anchor-header">Simpul indeks</h3><p>Simpul indeks membangun indeks.  Node indeks tidak perlu menjadi residen memori, dan dapat diimplementasikan dengan kerangka kerja tanpa server.</p>
+<h2 id="Storage" class="common-anchor-header">Penyimpanan<button data-href="#Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,13 +93,13 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Storage is the bone of the system, responsible for data persistence. It comprises meta storage, log broker, and object storage.</p>
-<h3 id="Meta-storage" class="common-anchor-header">Meta storage</h3><p>Meta storage stores snapshots of metadata such as collection schema, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check.</p>
-<h3 id="Object-storage" class="common-anchor-header">Object storage</h3><p>Object storage stores snapshot files of logs, index files for scalar and vector data, and intermediate query results. Milvus uses MinIO as object storage and can be readily deployed on AWS S3 and Azure Blob, two of the world’s most popular, cost-effective storage services. However, object storage has high access latency and charges by the number of queries. To improve its performance and lower the costs, Milvus plans to implement cold-hot data separation on a memory- or SSD-based cache pool.</p>
-<h3 id="WAL-storage" class="common-anchor-header">WAL storage</h3><p>Write-Ahead Log (WAL) storage is the foundation of data durability and consistency in distributed systems. Before any change is committed, it’s first recorded in a log—ensuring that, in the event of a failure, you can recover exactly where you left off.</p>
-<p>Common WAL implementations include Kafka, Pulsar, and Woodpecker. Unlike traditional disk-based solutions, Woodpecker adopts a cloud-native, zero-disk design that writes directly to object storage. This approach scales effortlessly with your needs and simplifies operations by removing the overhead of managing local disks.</p>
-<p>By logging every write operation ahead of time, the WAL layer guarantees a reliable, system-wide mechanism for recovery and consistency—no matter how complex your distributed environment grows.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+    </button></h2><p>Penyimpanan adalah tulang punggung sistem, yang bertanggung jawab atas persistensi data. Ini terdiri dari penyimpanan meta, perantara log, dan penyimpanan objek.</p>
+<h3 id="Meta-storage" class="common-anchor-header">Penyimpanan meta</h3><p>Penyimpanan meta menyimpan snapshot metadata seperti skema koleksi, dan pos pemeriksaan konsumsi pesan. Menyimpan metadata menuntut ketersediaan yang sangat tinggi, konsistensi yang kuat, dan dukungan transaksi, sehingga Milvus memilih etcd untuk meta store. Milvus juga menggunakan etcd untuk registrasi layanan dan pemeriksaan kesehatan.</p>
+<h3 id="Object-storage" class="common-anchor-header">Penyimpanan objek</h3><p>Penyimpanan objek menyimpan file snapshot dari log, file indeks untuk data skalar dan vektor, dan hasil kueri menengah. Milvus menggunakan MinIO sebagai penyimpanan objek dan dapat dengan mudah digunakan di AWS S3 dan Azure Blob, dua layanan penyimpanan yang paling populer dan hemat biaya di dunia. Namun, penyimpanan objek memiliki latensi akses yang tinggi dan biaya berdasarkan jumlah permintaan. Untuk meningkatkan kinerjanya dan menurunkan biaya, Milvus berencana untuk menerapkan pemisahan data dingin-panas pada cache pool berbasis memori atau SSD.</p>
+<h3 id="WAL-storage" class="common-anchor-header">Penyimpanan WAL</h3><p>Penyimpanan Write-Ahead Log (WAL) adalah fondasi ketahanan dan konsistensi data dalam sistem terdistribusi. Sebelum perubahan apa pun dilakukan, perubahan tersebut terlebih dahulu dicatat dalam log-memastikan bahwa, jika terjadi kegagalan, Anda dapat memulihkan tepat di tempat yang Anda tinggalkan.</p>
+<p>Implementasi WAL yang umum termasuk Kafka, Pulsar, dan Woodpecker. Tidak seperti solusi berbasis disk tradisional, Woodpecker mengadopsi desain cloud-native, tanpa disk yang menulis langsung ke penyimpanan objek. Pendekatan ini dapat disesuaikan dengan kebutuhan Anda dengan mudah dan menyederhanakan operasi dengan menghilangkan biaya tambahan untuk mengelola disk lokal.</p>
+<p>Dengan mencatat setiap operasi penulisan sebelumnya, lapisan WAL menjamin mekanisme pemulihan dan konsistensi di seluruh sistem yang andal dan dapat diandalkan - tidak peduli seberapa rumitnya lingkungan terdistribusi Anda.</p>
+<h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,5 +115,5 @@ title: Storage/Computing Disaggregation
         ></path>
       </svg>
     </button></h2><ul>
-<li>Read <a href="/docs/main_components.md">Main Components</a> for more details about the Milvus architecture.</li>
+<li>Baca <a href="/docs/id/main_components.md">Komponen Utama</a> untuk detail lebih lanjut tentang arsitektur Milvus.</li>
 </ul>

@@ -2,9 +2,9 @@
 id: configure_indexcoord.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure indexCoord for Milvus.
+summary: Pelajari cara mengonfigurasi indexCoord untuk Milvus.
 ---
-<h1 id="indexCoord-related-Configurations" class="common-anchor-header">indexCoord-related Configurations<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="indexCoord-related-Configurations" class="common-anchor-header">Konfigurasi terkait indexCoord<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure indexCoord for Milvus.
     </button></h2><table id="indexCoord.segment.minSegmentNumRowsToEnableIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        It's a threshold. When the segment num rows is less than this value, the segment will not be indexed      </td>
+      <td>        Ini adalah ambang batas. Ketika baris num segmen kurang dari nilai ini, segmen tidak akan diindeks      </td>
       <td>1024</td>
     </tr>
   </tbody>

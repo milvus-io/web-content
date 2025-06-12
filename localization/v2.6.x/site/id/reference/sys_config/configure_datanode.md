@@ -2,9 +2,9 @@
 id: configure_datanode.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure dataNode for Milvus.
+summary: Pelajari cara mengonfigurasi dataNode untuk Milvus.
 ---
-<h1 id="dataNode-related-Configurations" class="common-anchor-header">dataNode-related Configurations<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="dataNode-related-Configurations" class="common-anchor-header">Konfigurasi terkait dataNode<button data-href="#dataNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.flowGraph.maxQueueLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum length of task queue in flowgraph      </td>
+      <td>        Panjang maksimum antrean tugas dalam diagram alir    </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -66,13 +66,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.flowGraph.maxParallelism">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of tasks executed in parallel in the flowgraph      </td>
+      <td>        Jumlah maksimum tugas yang dieksekusi secara paralel dalam diagram alir    </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.maxParallelSyncMgrTasks">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The max concurrent sync task number of datanode sync mgr globally      </td>
+      <td>        Jumlah tugas sinkronisasi serentak maksimum dari mgr sinkronisasi datanode secara global      </td>
       <td>256</td>
     </tr>
   </tbody>
@@ -124,14 +124,14 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.skipMode.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Support skip some timetick message to reduce CPU usage      </td>
-      <td>true</td>
+      <td>        Mendukung melewatkan beberapa pesan tanda waktu untuk mengurangi penggunaan CPU   </td>
+      <td>benar</td>
     </tr>
   </tbody>
 </table>
@@ -153,13 +153,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.skipMode.skipNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Consume one for every n records skipped      </td>
+      <td>        Konsumsi satu untuk setiap n catatan yang dilewati      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.dataSync.skipMode.coldTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Turn on skip mode after there are only timetick msg for x seconds      </td>
+      <td>        Aktifkan mode lewati setelah hanya ada msg tanda waktu selama x detik     </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -211,16 +211,16 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.segment.insertBufSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The maximum size of each binlog file in a segment buffered in memory. Binlog files whose size exceeds this value are then flushed to MinIO or S3 service.</li>      
-        <li>Unit: Byte</li>      
-        <li>Setting this parameter too small causes the system to store a small amount of data too frequently. Setting it too large increases the system's demand for memory.</li>      </td>
+        <li>Ukuran maksimum setiap file binlog dalam segmen yang disangga dalam memori. File binlog yang ukurannya melebihi nilai ini akan dibuang ke layanan MinIO atau S3.</li>      
+        <li>Satuan Byte</li>      
+        <li>Mengatur parameter ini terlalu kecil menyebabkan sistem terlalu sering menyimpan data dalam jumlah kecil. Mengaturnya terlalu besar akan meningkatkan permintaan memori sistem.</li>      </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -243,13 +243,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.segment.deleteBufBytes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Max buffer size in bytes to flush del for a single channel, default as 16MB      </td>
+      <td>        Ukuran buffer maksimum dalam byte untuk melakukan flush del untuk satu saluran, defaultnya adalah 16MB    </td>
       <td>16777216</td>
     </tr>
   </tbody>
@@ -272,13 +272,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.segment.syncPeriod">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The period to sync segments if buffer is not empty.      </td>
+      <td>        Periode untuk menyinkronkan segmen jika buffer tidak kosong.      </td>
       <td>600</td>
     </tr>
   </tbody>
@@ -301,13 +301,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.memory.forceSyncEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Set true to force sync if memory usage is too high      </td>
+      <td>        Tetapkan true untuk memaksa sinkronisasi jika penggunaan memori terlalu tinggi      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -330,13 +330,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.memory.forceSyncSegmentNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        number of segments to sync, segments with top largest buffer will be synced.      </td>
+      <td>        jumlah segmen yang akan disinkronkan, segmen dengan buffer terbesar akan disinkronkan.      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.memory.checkInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interal to check datanode memory usage, in milliseconds      </td>
+      <td>        interal untuk memeriksa penggunaan memori datanode, dalam milidetik      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -388,13 +388,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.memory.forceSyncWatermark">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        memory watermark for standalone, upon reaching this watermark, segments will be synced.      </td>
+      <td>        tanda air memori untuk mandiri, setelah mencapai tanda air ini, segmen akan disinkronkan.      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -417,16 +417,16 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.workPoolSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>specify the size of global work pool of all channels</li>      
-        <li>if this parameter <= 0, will set it as the maximum number of CPUs that can be executing</li>      
-        <li>suggest to set it bigger on large collection numbers to avoid blocking</li>      </td>
+        <li>tentukan ukuran kumpulan kerja global dari semua saluran</li>      
+        <li>jika parameter ini &lt;= 0, akan menetapkannya sebagai jumlah maksimum CPU yang dapat dieksekusi</li>      
+        <li>menyarankan untuk mengaturnya lebih besar pada jumlah koleksi yang besar untuk menghindari pemblokiran</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -449,15 +449,15 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.updateChannelCheckpointMaxParallel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>specify the size of global work pool for channel checkpoint updating</li>      
-        <li>if this parameter <= 0, will set it as 10</li>      </td>
+        <li>tentukan ukuran kumpulan kerja global untuk pembaruan pos pemeriksaan saluran</li>      
+        <li>jika parameter ini &lt;= 0, akan menetapkannya sebagai 10</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -480,13 +480,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.updateChannelCheckpointInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval duration(in seconds) for datanode to update channel checkpoint of each channel      </td>
+      <td>        durasi interval (dalam detik) untuk datanode untuk memperbarui pos pemeriksaan saluran dari setiap saluran      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -509,13 +509,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.updateChannelCheckpointRPCTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        timeout in seconds for UpdateChannelCheckpoint RPC call      </td>
+      <td>        batas waktu dalam detik untuk panggilan RPC UpdateChannelCheckpoint      </td>
       <td>20</td>
     </tr>
   </tbody>
@@ -538,13 +538,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.maxChannelCheckpointsPerPRC">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of channel checkpoints per UpdateChannelCheckpoint RPC.      </td>
+      <td>        Jumlah maksimum titik pemeriksaan saluran per RPC UpdateChannelCheckpoint.      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -567,13 +567,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.channel.channelCheckpointUpdateTickInSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The frequency, in seconds, at which the channel checkpoint updater executes updates.      </td>
+      <td>        Frekuensi, dalam detik, di mana pemutakhiran pos pemeriksaan saluran mengeksekusi pembaruan.      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -596,13 +596,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.import.maxConcurrentTaskNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of import/pre-import tasks allowed to run concurrently on a datanode.      </td>
+      <td>        Jumlah maksimum tugas impor/pra-impor yang diizinkan untuk dijalankan secara bersamaan pada datanode.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -625,13 +625,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.import.maxImportFileSizeInGB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum file size (in GB) for an import file, where an import file refers to either a Row-Based file or a set of Column-Based files.      </td>
+      <td>        Ukuran file maksimum (dalam GB) untuk file impor, di mana file impor mengacu pada file Berbasis Baris atau sekumpulan file Berbasis Kolom.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -654,13 +654,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.import.readBufferSizeInMB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The data block size (in MB) read from chunk manager by the datanode during import.      </td>
+      <td>        Ukuran blok data (dalam MB) yang dibaca dari manajer chunk oleh datanode selama impor.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -683,13 +683,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.import.maxTaskSlotNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of slots occupied by each import/pre-import task.      </td>
+      <td>        Jumlah maksimum slot yang ditempati oleh setiap tugas impor/pra-impor.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -712,13 +712,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.compaction.levelZeroBatchMemoryRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The minimal memory ratio of free memory for level zero compaction executing in batch mode      </td>
+      <td>        Rasio memori minimal dari memori bebas untuk pemadatan level nol yang dijalankan dalam mode batch     </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -741,13 +741,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.compaction.levelZeroMaxBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Max batch size refers to the max number of L1/L2 segments in a batch when executing L0 compaction. Default to -1, any value that is less than 1 means no limit. Valid range: >= 1.      </td>
+      <td>        Ukuran batch maksimum mengacu pada jumlah maksimum segmen L1/L2 dalam batch saat menjalankan pemadatan L0. Default ke -1, nilai apa pun yang kurang dari 1 berarti tidak ada batas. Rentang yang valid: &gt;= 1.  </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -770,13 +770,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.compaction.useMergeSort">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable mergeSort mode when performing mixCompaction.      </td>
+      <td>        Apakah akan mengaktifkan mode penggabunganSortir saat melakukan pemadatan campuran.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -799,13 +799,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.compaction.maxSegmentMergeSort">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of segments to be merged in mergeSort mode.      </td>
+      <td>        Jumlah maksimum segmen yang akan digabungkan dalam mode mergeSort.      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -828,13 +828,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        detik. paksa berhenti simpul tanpa berhenti dengan lembut      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -857,13 +857,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.slot.slotCap">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of tasks(e.g. compaction, importing) allowed to run concurrently on a datanode      </td>
+      <td>        Jumlah maksimum tugas (mis. pemadatan, pengimporan) yang diizinkan untuk berjalan secara bersamaan pada sebuah datanode      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -886,13 +886,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.clusteringCompaction.memoryBufferRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The ratio of memory buffer of clustering compaction. Data larger than threshold will be flushed to storage.      </td>
+      <td>        Rasio buffer memori untuk pemadatan pengelompokan. Data yang lebih besar dari ambang batas akan dibuang ke penyimpanan.      </td>
       <td>0.3</td>
     </tr>
   </tbody>
@@ -915,13 +915,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.clusteringCompaction.workPoolSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        worker pool size for one clustering compaction job.      </td>
+      <td>        ukuran kumpulan pekerja untuk satu pekerjaan pemadatan pengelompokan.      </td>
       <td>8</td>
     </tr>
   </tbody>
@@ -944,13 +944,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.bloomFilterApplyParallelFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
+      <td>        faktor paralel saat menerapkan pk ke filter bloom, default ke 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -973,13 +973,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.storage.deltalog">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        deltalog format, options: [json, parquet]      </td>
+      <td>        format deltalog, opsi: [json, parket]      </td>
       <td>json</td>
     </tr>
   </tbody>
@@ -1002,13 +1002,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of dataNode. If not specified, use the first unicastable address      </td>
+      <td>        Alamat TCP/IP dari dataNode. Jika tidak ditentukan, gunakan alamat pertama yang dapat di-unicast      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1031,13 +1031,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of dataNode      </td>
+      <td>        Port TCP dari dataNode      </td>
       <td>21124</td>
     </tr>
   </tbody>
@@ -1060,13 +1060,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the dataNode can send, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh dataNode, satuan: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1089,13 +1089,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the dataNode can receive, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh dataNode, satuan: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1118,13 +1118,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on dataNode can send, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh klien pada dataNode, satuan: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1147,13 +1147,13 @@ summary: Learn how to configure dataNode for Milvus.
     </button></h2><table id="dataNode.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on dataNode can receive, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh klien di dataNode, satuan: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>

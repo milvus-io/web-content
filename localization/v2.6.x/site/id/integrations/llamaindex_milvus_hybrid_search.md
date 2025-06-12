@@ -1,12 +1,14 @@
 ---
 id: llamaindex_milvus_hybrid_search.md
-title: RAG using Hybrid Search with Milvus and LlamaIndex
+title: RAG menggunakan Pencarian Hibrida dengan Milvus dan LlamaIndex
 related_key: LlamaIndex
 summary: >-
-  This notebook demonstrates how to use Milvus for hybrid search in
-  [LlamaIndex](https://www.llamaindex.ai/) RAG pipelines. We'll begin with the
-  recommended default hybrid search (semantic + BM25) and then explore other
-  alternative sparse embedding methods and customization of hybrid reranker.
+  Buku catatan ini mendemonstrasikan bagaimana menggunakan Milvus untuk
+  pencarian hibrida di dalam pipeline RAG
+  [LlamaIndex](https://www.llamaindex.ai/). Kita akan mulai dengan pencarian
+  hibrida default yang direkomendasikan (semantik + BM25) dan kemudian
+  mengeksplorasi metode-metode alternatif lain yang jarang digunakan dan
+  kustomisasi perangkai hibrida.
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -14,7 +16,7 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_hybrid_search.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="common-anchor-header">RAG using Hybrid Search with Milvus and LlamaIndex<button data-href="#RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
+<h1 id="RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="common-anchor-header">RAG menggunakan Pencarian Hibrida dengan Milvus dan LlamaIndex<button data-href="#RAG-using-Hybrid-Search-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,9 +31,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Hybrid search leverages the strengths of both semantic retrieval and keyword matching to deliver more accurate and contextually relevant results. By combining the advantages of semantic search and keyword matching, hybrid search is particularly effective in complex information retrieval tasks.</p>
-<p>This notebook demonstrates how to use Milvus for hybrid search in <a href="https://www.llamaindex.ai/">LlamaIndex</a> RAG pipelines. We’ll begin with the recommended default hybrid search (semantic + BM25) and then explore other alternative sparse embedding methods and customization of hybrid reranker.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>Pencarian hibrida memanfaatkan kekuatan pencarian semantik dan pencocokan kata kunci untuk memberikan hasil yang lebih akurat dan relevan secara kontekstual. Dengan menggabungkan keunggulan pencarian semantik dan pencocokan kata kunci, pencarian hibrida sangat efektif dalam tugas-tugas pencarian informasi yang kompleks.</p>
+<p>Buku catatan ini mendemonstrasikan cara menggunakan Milvus untuk pencarian hibrida di pipeline <a href="https://www.llamaindex.ai/">LlamaIndex</a> RAG. Kita akan mulai dengan pencarian hibrida default yang direkomendasikan (semantik + BM25) dan kemudian mengeksplorasi metode-metode penyematan jarang alternatif lainnya dan kustomisasi perangking hibrida.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,34 +48,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Install dependencies</strong></p>
-<p>Before getting started, make sure you have the following dependencies installed:</p>
+    </button></h2><p><strong>Instal dependensi</strong></p>
+<p>Sebelum memulai, pastikan Anda telah menginstal dependensi berikut ini:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-embeddings-openai</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-llms-openai</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you’re using Google Colab, you may need to <strong>restart the runtime</strong> (Navigate to the “Runtime” menu at the top of the interface, and select “Restart session” from the dropdown menu.)</p>
+<p>Jika Anda menggunakan Google Colab, Anda mungkin perlu <strong>memulai ulang runtime</strong> (Navigasikan ke menu "Runtime" di bagian atas antarmuka, dan pilih "Mulai ulang sesi" dari menu tarik-turun).</p>
 </div>
-<p><strong>Set up accounts</strong></p>
-<p>This tutorial uses OpenAI for text embeddings and answer generation. You need to prepare the <a href="https://platform.openai.com/api-keys">OpenAI API key</a>.</p>
+<p><strong>Menyiapkan akun</strong></p>
+<p>Tutorial ini menggunakan OpenAI untuk penyematan teks dan pembuatan jawaban. Anda perlu menyiapkan <a href="https://platform.openai.com/api-keys">kunci API OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
 openai.api_key = <span class="hljs-string">&quot;sk-&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To use the Milvus vector store, specify your Milvus server <code translate="no">URI</code> (and optionally with the <code translate="no">TOKEN</code>). To start a Milvus server, you can set up a Milvus server by following the <a href="https://milvus.io/docs/install-overview.md">Milvus installation guide</a> or simply trying <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a> for free.</p>
+<p>Untuk menggunakan penyimpanan vektor Milvus, tentukan server Milvus Anda <code translate="no">URI</code> (dan secara opsional dengan <code translate="no">TOKEN</code>). Untuk memulai server Milvus, Anda dapat mengatur server Milvus dengan mengikuti <a href="https://milvus.io/docs/install-overview.md">panduan instalasi Milvus</a> atau mencoba <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud</a> secara gratis.</p>
 <blockquote>
-<p>Full-text search is currently supported in Milvus Standalone, Milvus Distributed, and Zilliz Cloud, but not yet in Milvus Lite (planned for future implementation). Reach out support@zilliz.com for more information.</p>
+<p>Pencarian teks lengkap saat ini didukung di Milvus Standalone, Milvus Distributed, dan Zilliz Cloud, tetapi belum di Milvus Lite (direncanakan untuk implementasi di masa mendatang). Hubungi support@zilliz.com untuk informasi lebih lanjut.</p>
 </blockquote>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = &quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Load example data</strong></p>
-<p>Run the following commands to download sample documents into the “data/paul_graham” directory:</p>
+<p><strong>Memuat data contoh</strong></p>
+<p>Jalankan perintah berikut untuk mengunduh dokumen contoh ke dalam direktori "data/paul_graham":</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/paul_graham/&#x27;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham/paul_graham_essay.txt&#x27;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then use <code translate="no">SimpleDirectoryReaderLoad</code> to load the essay “What I Worked On” by Paul Graham:</p>
+<p>Kemudian gunakan <code translate="no">SimpleDirectoryReaderLoad</code> untuk memuat esai "What I Worked On" oleh Paul Graham:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
 documents = SimpleDirectoryReader(<span class="hljs-string">&quot;./data/paul_graham/&quot;</span>).load_data()
@@ -90,7 +92,7 @@ write then, and probably still are: short stories. My stories were
 awful. They had hardly any plot, just characters with strong feelings,
 which I ...
 </code></pre>
-<h2 id="Hybrid-Search-with-BM25" class="common-anchor-header">Hybrid Search with BM25<button data-href="#Hybrid-Search-with-BM25" class="anchor-icon" translate="no">
+<h2 id="Hybrid-Search-with-BM25" class="common-anchor-header">Pencarian Gabungan dengan BM25<button data-href="#Hybrid-Search-with-BM25" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,11 +107,11 @@ which I ...
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section shows how to perform a hybrid search using BM25. To get started, we will initialize the <code translate="no">MilvusVectorStore</code> and create an index for the example documents. The default configuration uses:</p>
+    </button></h2><p>Bagian ini menunjukkan cara melakukan pencarian gabungan menggunakan BM25. Untuk memulai, kita akan menginisialisasi <code translate="no">MilvusVectorStore</code> dan membuat indeks untuk dokumen contoh. Konfigurasi default yang digunakan:</p>
 <ul>
-<li>Dense embeddings from the default embedding model (OpenAI’s <code translate="no">text-embedding-ada-002</code>)</li>
-<li>BM25 for full-text search if enable_sparse is True</li>
-<li>RRFRanker with k=60 for combining results if hybrid search is enabled</li>
+<li>Penyematan padat dari model penyematan default ( <code translate="no">text-embedding-ada-002</code> milik OpenAI)</li>
+<li>BM25 untuk pencarian teks lengkap jika enable_sparse bernilai True</li>
+<li>RRFRanker dengan k = 60 untuk menggabungkan hasil jika pencarian hibrida diaktifkan</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documnts</span>
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -130,24 +132,24 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 Sparse embedding function is not provided, using default.
 Default sparse embedding function: BM25BuiltInFunction(input_field_names='text', output_field_names='sparse_embedding').
 </code></pre>
-<p>Here is more information about the arguments for configuring dense and sparse fields in the <code translate="no">MilvusVectorStore</code>:</p>
-<p><strong>dense field</strong></p>
+<p>Berikut adalah informasi lebih lanjut tentang argumen untuk mengonfigurasi bidang padat dan bidang jarang di <code translate="no">MilvusVectorStore</code>:</p>
+<p><strong>bidang padat</strong></p>
 <ul>
-<li><code translate="no">enable_dense (bool)</code>: A boolean flag to enable or disable dense embedding. Defaults to True.</li>
-<li><code translate="no">dim (int, optional)</code>: The dimension of the embedding vectors for the collection.</li>
-<li><code translate="no">embedding_field (str, optional)</code>: The name of the dense embedding field for the collection, defaults to DEFAULT_EMBEDDING_KEY.</li>
-<li><code translate="no">index_config (dict, optional)</code>: The configuration used for building the dense embedding index. Defaults to None.</li>
-<li><code translate="no">search_config (dict, optional)</code>: The configuration used for searching the Milvus dense index. Note that this must be compatible with the index type specified by <code translate="no">index_config</code>. Defaults to None.</li>
-<li><code translate="no">similarity_metric (str, optional)</code>: The similarity metric to use for dense embedding, currently supports IP, COSINE and L2.</li>
+<li><code translate="no">enable_dense (bool)</code>: Bendera boolean untuk mengaktifkan atau menonaktifkan penyematan padat. Nilai defaultnya adalah True (Benar).</li>
+<li><code translate="no">dim (int, optional)</code>: Dimensi vektor penyematan untuk koleksi.</li>
+<li><code translate="no">embedding_field (str, optional)</code>: Nama bidang penyematan padat untuk koleksi, nilai defaultnya adalah DEFAULT_EMBEDDING_KEY.</li>
+<li><code translate="no">index_config (dict, optional)</code>: Konfigurasi yang digunakan untuk membangun indeks embedding padat. Defaultnya adalah Tidak Ada.</li>
+<li><code translate="no">search_config (dict, optional)</code>: Konfigurasi yang digunakan untuk mencari indeks padat Milvus. Perhatikan bahwa ini harus kompatibel dengan jenis indeks yang ditentukan oleh <code translate="no">index_config</code>. Setelan default untuk Tidak Ada.</li>
+<li><code translate="no">similarity_metric (str, optional)</code>: Metrik kemiripan yang digunakan untuk penyematan padat, saat ini mendukung IP, COSINE, dan L2.</li>
 </ul>
 <p><strong>sparse field</strong></p>
 <ul>
-<li><code translate="no">enable_sparse (bool)</code>: A boolean flag to enable or disable sparse embedding. Defaults to False.</li>
-<li><code translate="no">sparse_embedding_field (str)</code>: The name of sparse embedding field, defaults to DEFAULT_SPARSE_EMBEDDING_KEY.</li>
-<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: If enable_sparse is True, this object should be provided to convert text to a sparse embedding. If None, the default sparse embedding function (BM25BuiltInFunction) will be used, or use BGEM3SparseEmbedding given existing collection without built-in functions.</li>
-<li><code translate="no">sparse_index_config (dict, optional)</code>: The configuration used to build the sparse embedding index. Defaults to None.</li>
+<li><code translate="no">enable_sparse (bool)</code>: Bendera boolean untuk mengaktifkan atau menonaktifkan penyematan jarang. Defaultnya adalah False.</li>
+<li><code translate="no">sparse_embedding_field (str)</code>: Nama bidang penyematan jarang, defaultnya adalah DEFAULT_SPARSE_EMBEDDING_KEY.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: Jika enable_sparse bernilai True, objek ini harus disediakan untuk mengonversi teks ke sematan jarang. Jika Tidak Ada, fungsi penyematan jarang default (BM25BuiltInFunction) akan digunakan, atau gunakan BGEM3SparseEmbedding jika koleksi yang ada tidak memiliki fungsi bawaan.</li>
+<li><code translate="no">sparse_index_config (dict, optional)</code>: Konfigurasi yang digunakan untuk membangun indeks sematan jarang. Defaultnya adalah Tidak Ada.</li>
 </ul>
-<p>To enable hybrid search during the querying stage, set <code translate="no">vector_store_query_mode</code> to "hybrid". This will combine and rerank search results from both semantic search and full-text search. Let’s test with a sample query: "What did the author learn at Viaweb?":</p>
+<p>Untuk mengaktifkan pencarian hibrida selama tahap kueri, setel <code translate="no">vector_store_query_mode</code> ke "hibrida". Ini akan menggabungkan dan memberi peringkat ulang hasil pencarian dari pencarian semantik dan pencarian teks lengkap. Mari kita uji dengan contoh kueri: "Apa yang dipelajari penulis di Viaweb?":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 query_engine = index.as_query_engine(
@@ -159,9 +161,9 @@ response = query_engine.query(<span class="hljs-string">&quot;What did the autho
 <pre><code translate="no">The author learned about retail, the importance of user feedback, and the significance of growth
 rate as the ultimate test of a startup at Viaweb.
 </code></pre>
-<h3 id="Customize-text-analyzer" class="common-anchor-header">Customize text analyzer</h3><p>Analyzers play a vital role in full-text search by breaking sentences into tokens and performing lexical processing, such as stemming and stop-word removal. They are typically language-specific. For more details, refer to <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Milvus Analyzer Guide</a>.</p>
-<p>Milvus supports two types of analyzers: <strong>Built-in Analyzers</strong> and <strong>Custom Analyzers</strong>. By default, if <code translate="no">enable_sparse</code> is set to True, <code translate="no">MilvusVectorStore</code> utilizes the <code translate="no">BM25BuiltInFunction</code> with default configurations, employing the standard built-in analyzer that tokenizes text based on punctuation.</p>
-<p>To use a different analyzer or customize the existing one, you can provide values to the <code translate="no">analyzer_params</code> argument when building the <code translate="no">BM25BuiltInFunction</code>. Then, set this function as the <code translate="no">sparse_embedding_function</code> in <code translate="no">MilvusVectorStore</code>.</p>
+<h3 id="Customize-text-analyzer" class="common-anchor-header">Menyesuaikan penganalisis teks</h3><p>Penganalisis memainkan peran penting dalam pencarian teks lengkap dengan memecah kalimat menjadi token dan melakukan pemrosesan leksikal, seperti stemming dan penghilangan kata berimbuhan. Penganalisis biasanya bersifat spesifik untuk bahasa tertentu. Untuk lebih jelasnya, lihat <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">Panduan Penganalisis Milvus</a>.</p>
+<p>Milvus mendukung dua jenis penganalisis: <strong>Penganalisis bawaan</strong> dan <strong>Penganalisis Khusus</strong>. Secara default, jika <code translate="no">enable_sparse</code> diatur ke True, <code translate="no">MilvusVectorStore</code> menggunakan <code translate="no">BM25BuiltInFunction</code> dengan konfigurasi default, menggunakan penganalisis bawaan standar yang menandai teks berdasarkan tanda baca.</p>
+<p>Untuk menggunakan penganalisis yang berbeda atau menyesuaikan yang sudah ada, Anda dapat memberikan nilai pada argumen <code translate="no">analyzer_params</code> saat membuat <code translate="no">BM25BuiltInFunction</code>. Kemudian, tetapkan fungsi ini sebagai <code translate="no">sparse_embedding_function</code> di <code translate="no">MilvusVectorStore</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BM25BuiltInFunction
 
 bm25_function = BM25BuiltInFunction(
@@ -187,7 +189,7 @@ vector_store = MilvusVectorStore(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-04-17 03:38:48,085 [DEBUG][_create_connection]: Created new connection using: 61afd81600cb46ee89f887f16bcbfe55 (async_milvus_client.py:547)
 </code></pre>
-<h2 id="Hybrid-Search-with-Other-Sparse-Embedding" class="common-anchor-header">Hybrid Search with Other Sparse Embedding<button data-href="#Hybrid-Search-with-Other-Sparse-Embedding" class="anchor-icon" translate="no">
+<h2 id="Hybrid-Search-with-Other-Sparse-Embedding" class="common-anchor-header">Pencarian Hibrida dengan Penyematan Jarang Lainnya<button data-href="#Hybrid-Search-with-Other-Sparse-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -202,11 +204,11 @@ vector_store = MilvusVectorStore(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Besides combining semantic search with BM25, Milvus also supports hybrid search using a sparse embedding function such as <a href="https://arxiv.org/abs/2402.03216">BGE-M3</a>. The following example uses the built-in <code translate="no">BGEM3SparseEmbeddingFunction</code> to generate sparse embeddings.</p>
-<p>First, we need to install the <code translate="no">FlagEmbedding</code> package:</p>
+    </button></h2><p>Selain menggabungkan pencarian semantik dengan BM25, Milvus juga mendukung pencarian hibrida menggunakan fungsi sematan jarang seperti <a href="https://arxiv.org/abs/2402.03216">BGE-M3</a>. Contoh berikut ini menggunakan <code translate="no">BGEM3SparseEmbeddingFunction</code> bawaan untuk menghasilkan sematan jarang.</p>
+<p>Pertama, kita perlu menginstal paket <code translate="no">FlagEmbedding</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -q FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then let’s build the vector store and index using the default OpenAI model for densen embedding and the built-in BGE-M3 for sparse embedding:</p>
+<p>Kemudian mari kita buat penyimpanan vektor dan indeks menggunakan model OpenAI bawaan untuk embedding densen dan BGE-M3 bawaan untuk embedding jarang:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BGEM3SparseEmbeddingFunction
 
 vector_store = MilvusVectorStore(
@@ -225,7 +227,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 2025-04-17 03:39:02,074 [DEBUG][_create_connection]: Created new connection using: ff4886e2f8da44e08304b748d9ac9b51 (async_milvus_client.py:547)
 Chunks: 100%|██████████| 1/1 [00:00&lt;00:00,  1.07it/s]
 </code></pre>
-<p>Now let’s perform a hybrid search query with a sample question:</p>
+<p>Sekarang mari kita lakukan kueri penelusuran hibrida dengan contoh pertanyaan:</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine(
     vector_store_query_mode=<span class="hljs-string">&quot;hybrid&quot;</span>, similarity_top_k=<span class="hljs-number">5</span>
 )
@@ -239,13 +241,13 @@ The author learned about retail, the importance of user feedback, the value of g
 startup, the significance of pricing strategy, the benefits of working on things that weren't
 prestigious, and the challenges and rewards of running a startup.
 </code></pre>
-<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Customize Sparse Embedding Function</h3><p>You can also customize the sparse embedding function as long as it inherits from <code translate="no">BaseSparseEmbeddingFunction</code>, including the following methods:</p>
+<h3 id="Customize-Sparse-Embedding-Function" class="common-anchor-header">Menyesuaikan Fungsi Penyematan Jarang</h3><p>Anda juga dapat menyesuaikan fungsi sematan jarang selama fungsi tersebut diwarisi dari <code translate="no">BaseSparseEmbeddingFunction</code>, termasuk metode berikut ini:</p>
 <ul>
-<li><code translate="no">encode_queries</code>: This method converts texts into list of sparse embeddings for queries.</li>
-<li><code translate="no">encode_documents</code>: This method converts text into list of sparse embeddings for documents.</li>
+<li><code translate="no">encode_queries</code>: Metode ini mengubah teks menjadi daftar sematan jarang untuk kueri.</li>
+<li><code translate="no">encode_documents</code>: Metode ini mengubah teks menjadi daftar sematan jarang untuk dokumen.</li>
 </ul>
-<p>The output of each method should follow the format of the sparse embedding, which is a list of dictionaries. Each dictionary should have a key (an integer) representing the dimension, and a corresponding value (a float) representing the embedding’s magnitude in that dimension (e.g., {1: 0.5, 2: 0.3}).</p>
-<p>For example, here’s a custom sparse embedding function implementation using BGE-M3:</p>
+<p>Keluaran dari setiap metode harus mengikuti format sematan jarang, yaitu daftar kamus. Setiap kamus harus memiliki kunci (bilangan bulat) yang mewakili dimensi, dan nilai yang sesuai (float) yang mewakili besarnya penyematan dalam dimensi tersebut (misalnya, {1: 0.5, 2: 0.3}).</p>
+<p>Sebagai contoh, berikut ini adalah implementasi fungsi penyematan jarang kustom menggunakan BGE-M3:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> FlagEmbedding <span class="hljs-keyword">import</span> BGEM3FlagModel
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus.utils <span class="hljs-keyword">import</span> BaseSparseEmbeddingFunction
@@ -279,7 +281,7 @@ prestigious, and the challenges and rewards of running a startup.
             result[<span class="hljs-built_in">int</span>(k)] = raw_output[k]
         <span class="hljs-keyword">return</span> result
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Customize-hybrid-reranker" class="common-anchor-header">Customize hybrid reranker<button data-href="#Customize-hybrid-reranker" class="anchor-icon" translate="no">
+<h2 id="Customize-hybrid-reranker" class="common-anchor-header">Menyesuaikan reranker hibrida<button data-href="#Customize-hybrid-reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -294,22 +296,17 @@ prestigious, and the challenges and rewards of running a startup.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports two types of <a href="https://milvus.io/docs/weighted-ranker.md">reranking strategies</a>: Reciprocal Rank Fusion (RRF) and Weighted Scoring. The default ranker in <code translate="no">MilvusVectorStore</code> hybrid search is RRF with k=60. To customize the hybrid ranker, modify the following parameters:</p>
+    </button></h2><p>Milvus mendukung dua jenis <a href="https://milvus.io/docs/weighted-ranker.md">strategi perankingan ulang</a>: Reciprocal Rank Fusion (RRF) dan Penilaian Tertimbang. Pemeringkat default dalam pencarian hybrid <code translate="no">MilvusVectorStore</code> adalah RRF dengan k=60. Untuk menyesuaikan pemeringkat hibrida, ubah parameter berikut ini:</p>
 <ul>
-<li><code translate="no">hybrid_ranker (str)</code>: Specifies the type of ranker used in hybrid search queries. Currently only supports ["RRFRanker", “WeightedRanker”]. Defaults to "RRFRanker".</li>
-<li><code translate="no">hybrid_ranker_params (dict, optional)</code>: Configuration parameters for the hybrid ranker. The structure of this dictionary depends on the specific ranker being used:
-<ul>
-<li>For "RRFRanker", it should include:
-<ul>
-<li>“k” (int): A parameter used in Reciprocal Rank Fusion (RRF). This value is used to calculate the rank scores as part of the RRF algorithm, which combines multiple ranking strategies into a single score to improve search relevance. The default value is 60 if not specified.</li>
+<li><code translate="no">hybrid_ranker (str)</code>: Menentukan jenis pemeringkat yang digunakan dalam kueri penelusuran hibrida. Saat ini hanya mendukung ["RRFRanker", "WeightedRanker"]. Defaultnya adalah "RRFRanker".</li>
+<li><code translate="no">hybrid_ranker_params (dict, optional)</code>: Parameter konfigurasi untuk pemeringkat hibrida. Struktur kamus ini tergantung pada pemeringkat spesifik yang digunakan:<ul>
+<li>Untuk "RRFRanker", harus menyertakan:<ul>
+<li>"k" (int): Parameter yang digunakan dalam Reciprocal Rank Fusion (RRF). Nilai ini digunakan untuk menghitung skor peringkat sebagai bagian dari algoritme RRF, yang menggabungkan beberapa strategi peringkat menjadi satu skor untuk meningkatkan relevansi penelusuran. Nilai defaultnya adalah 60 jika tidak ditentukan.</li>
 </ul></li>
-<li>For "WeightedRanker", it expects:
-<ul>
-<li>“weights” (list of float): A list of exactly two weights:
-<ol>
-<li>The weight for the dense embedding component.</li>
-<li>The weight for the sparse embedding component.
-These weights are used to balance the significance of the dense and sparse components of the embeddings in the hybrid retrieval process. The default weights are [1.0, 1.0] if not specified.</li>
+<li>Untuk "WeightedRanker", diharapkan:<ul>
+<li>"bobot" (daftar mengambang): Daftar yang terdiri dari dua bobot:<ol>
+<li>Bobot untuk komponen penyematan padat.</li>
+<li>Bobot untuk komponen penyematan yang jarang. Bobot ini digunakan untuk menyeimbangkan signifikansi komponen penyematan yang padat dan jarang dalam proses pengambilan hibrida. Bobot default adalah [1.0, 1.0] jika tidak ditentukan.</li>
 </ol></li>
 </ul></li>
 </ul></li>

@@ -2,9 +2,9 @@
 id: configure_proxy.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure proxy for Milvus.
+summary: Pelajari cara mengonfigurasi proxy untuk Milvus.
 ---
-<h1 id="proxy-related-Configurations" class="common-anchor-header">proxy-related Configurations<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="proxy-related-Configurations" class="common-anchor-header">Konfigurasi terkait proxy<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure proxy for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of proxy, used to validate client requests and reduce the returned results.</p>
+    </button></h1><p>Konfigurasi terkait proxy, digunakan untuk memvalidasi permintaan klien dan mengurangi hasil yang dikembalikan.</p>
 <h2 id="proxytimeTickInterval" class="common-anchor-header"><code translate="no">proxy.timeTickInterval</code><button data-href="#proxytimeTickInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,13 +38,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.timeTickInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval at which proxy synchronizes the time tick, unit: ms.      </td>
+      <td>        Interval di mana proxy menyinkronkan detak waktu, unit: ms.      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -67,13 +67,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.healthCheckTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ms, the interval that to do component healthy check      </td>
+      <td>        ms, interval untuk melakukan pemeriksaan kesehatan komponen      </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -96,13 +96,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.msgStream.timeTick.bufSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of messages can be buffered in the timeTick message stream of the proxy when producing messages.      </td>
+      <td>        Jumlah maksimum pesan yang dapat disangga dalam aliran pesan timeTick dari proxy saat memproduksi pesan.      </td>
       <td>512</td>
     </tr>
   </tbody>
@@ -125,13 +125,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxNameLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum length of the name or alias that can be created in Milvus, including the collection name, collection alias, partition name, and field name.      </td>
+      <td>        Panjang maksimum nama atau alias yang dapat dibuat di Milvus, termasuk nama koleksi, alias koleksi, nama partisi, dan nama bidang.      </td>
       <td>255</td>
     </tr>
   </tbody>
@@ -154,13 +154,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxFieldNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of field can be created when creating in a collection. It is strongly DISCOURAGED to set maxFieldNum >= 64.      </td>
+      <td>        Jumlah maksimum field yang dapat dibuat saat membuat koleksi. Sangat TIDAK DIANJURKAN untuk mengatur maxFieldNum &gt;= 64.      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -183,13 +183,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxVectorFieldNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of vector fields that can be specified in a collection. Value range: [1, 10].      </td>
+      <td>        Jumlah maksimum bidang vektor yang dapat ditentukan dalam koleksi. Rentang nilai: [1, 10].      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -212,13 +212,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxShardNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of shards can be created when creating in a collection.      </td>
+      <td>        Jumlah maksimum pecahan yang dapat dibuat saat membuat dalam koleksi.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -241,13 +241,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxDimension">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of dimensions of a vector can have when creating in a collection.      </td>
+      <td>        Jumlah maksimum dimensi vektor yang dapat dimiliki saat membuat dalam koleksi.      </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -270,16 +270,16 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ginLogging">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to produce gin logs.\n</li>      
-        <li>please adjust in embedded Milvus: false</li>      </td>
-      <td>true</td>
+        <li>Apakah akan menghasilkan log gin.\n</li>      
+        <li>harap sesuaikan di Milvus yang disematkan: false</li>      </td>
+      <td>benar</td>
     </tr>
   </tbody>
 </table>
@@ -301,13 +301,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ginLogSkipPaths">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        skip url path for gin log      </td>
+      <td>        lewati jalur url untuk log gin   </td>
       <td>/</td>
     </tr>
   </tbody>
@@ -330,13 +330,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxTaskNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum number of tasks in the task queue of the proxy.      </td>
+      <td>        Jumlah maksimum tugas dalam antrean tugas proxy.      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ddlConcurrency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The concurrent execution number of DDL at proxy.      </td>
+      <td>        Nomor eksekusi bersamaan dari DDL di proxy.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -388,13 +388,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.dclConcurrency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The concurrent execution number of DCL at proxy.      </td>
+      <td>        Nomor eksekusi bersamaan dari DCL di proxy.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -417,13 +417,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.mustUsePartitionKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch for whether proxy must use partition key for the collection      </td>
+      <td>        sakelar untuk menentukan apakah proxy harus menggunakan kunci partisi untuk koleksi      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -446,13 +446,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable the access log feature.      </td>
+      <td>        Apakah akan mengaktifkan fitur log akses.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -475,13 +475,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.minioEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to upload local access log files to MinIO. This parameter can be specified when proxy.accessLog.filename is not empty.      </td>
+      <td>        Apakah akan mengunggah file log akses lokal ke MinIO. Parameter ini dapat ditentukan ketika proxy.accessLog.filename tidak kosong.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -504,13 +504,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.localPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The local folder path where the access log file is stored. This parameter can be specified when proxy.accessLog.filename is not empty.      </td>
+      <td>        Jalur folder lokal tempat file log akses disimpan. Parameter ini dapat ditentukan bila proxy.accessLog.filename tidak kosong.      </td>
       <td>/tmp/milvus_access</td>
     </tr>
   </tbody>
@@ -533,13 +533,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.filename">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The name of the access log file. If you leave this parameter empty, access logs will be printed to stdout.      </td>
+      <td>        Nama file log akses. Jika Anda membiarkan parameter ini kosong, log akses akan dicetak ke stdout.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -562,13 +562,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.maxSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file. Unit: MB.      </td>
+      <td>        Ukuran maksimum yang diizinkan untuk satu file log akses. Jika ukuran file log mencapai batas ini, proses rotasi akan dipicu. Proses ini akan menyegel file log akses saat ini, membuat file log baru, dan menghapus isi file log asli. Satuan MB.      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -591,13 +591,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.rotatedTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum time interval allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one. Unit: seconds      </td>
+      <td>        Interval waktu maksimum yang diizinkan untuk merotasi file log akses tunggal. Setelah mencapai interval waktu yang ditentukan, proses rotasi akan dipicu, sehingga menghasilkan pembuatan file log akses baru dan menyegel file log akses sebelumnya. Satuan: detik     </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -620,13 +620,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.remotePath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The path of the object storage for uploading access log files.      </td>
+      <td>        Jalur penyimpanan objek untuk mengunggah file log akses.      </td>
       <td>access_log/</td>
     </tr>
   </tbody>
@@ -649,13 +649,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.remoteMaxTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.      </td>
+      <td>        Interval waktu yang diizinkan untuk mengunggah file log akses. Jika waktu pengunggahan file log melebihi interval ini, file akan dihapus. Mengatur nilai ke 0 akan menonaktifkan fitur ini.      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -678,13 +678,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.cacheSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Size of log of write cache, in byte. (Close write cache if size was 0)      </td>
+      <td>        Ukuran log cache tulis, dalam byte. (Tutup cache tulis jika ukurannya 0)  </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -707,13 +707,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.accessLog.cacheFlushInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        time interval of auto flush write cache, in seconds. (Close auto flush if interval was 0)      </td>
+      <td>        interval waktu flush cache tulis otomatis, dalam detik. (Tutup flush otomatis jika intervalnya 0)  </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -736,13 +736,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.connectionCheckIntervalSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval time(in seconds) for connection manager to scan inactive client info      </td>
+      <td>        interval waktu (dalam detik) bagi manajer koneksi untuk memindai info klien yang tidak aktif     </td>
       <td>120</td>
     </tr>
   </tbody>
@@ -765,13 +765,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.connectionClientInfoTTLSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        inactive client info TTL duration, in seconds      </td>
+      <td>        durasi TTL info klien tidak aktif, dalam detik     </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -794,13 +794,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.maxConnectionNum">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the max client info numbers that proxy should manage, avoid too many client infos      </td>
+      <td>        jumlah info klien maksimum yang harus dikelola proxy, hindari terlalu banyak info klien     </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -823,13 +823,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        detik. paksa hentikan simpul tanpa penghentian yang anggun      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -852,13 +852,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.slowQuerySpanInSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        query whose executed time exceeds the `slowQuerySpanInSeconds` can be considered slow, in seconds.      </td>
+      <td>        kueri yang waktu eksekusinya melebihi `slowQuerySpanInSeconds` dapat dianggap lambat, dalam hitungan detik.      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -881,13 +881,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.queryNodePooling.size">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the size for shardleader(querynode) client pool      </td>
+      <td>        ukuran untuk kumpulan klien shardleader (node kueri)      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -910,13 +910,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable the http server      </td>
+      <td>        Apakah akan mengaktifkan server http    </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -939,13 +939,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.debug_mode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable http server debug mode      </td>
+      <td>        Apakah akan mengaktifkan mode debug server http    </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -968,13 +968,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        high-level restful api      </td>
+      <td>        api istirahat tingkat tinggi      </td>
       <td></td>
     </tr>
   </tbody>
@@ -997,13 +997,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.acceptTypeAllowInt64">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        high-level restful api, whether http client can deal with int64      </td>
+      <td>        high-level restful api, apakah klien http dapat menangani int64     </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1026,13 +1026,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.http.enablePprof">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable pprof middleware on the metrics port      </td>
+      <td>        Apakah akan mengaktifkan middleware pprof pada port metrik      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1055,13 +1055,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of proxy. If not specified, use the first unicastable address      </td>
+      <td>        Alamat TCP/IP proxy. Jika tidak ditentukan, gunakan alamat pertama yang dapat di-unicast      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1084,13 +1084,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of proxy      </td>
+      <td>        Port TCP proxy     </td>
       <td>19530</td>
     </tr>
   </tbody>
@@ -1113,13 +1113,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the proxy can send, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh proxy, satuan: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1142,13 +1142,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the proxy can receive, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh proxy, satuan: byte    </td>
       <td>67108864</td>
     </tr>
   </tbody>
@@ -1171,13 +1171,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on proxy can send, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh klien pada proxy, satuan: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1200,13 +1200,13 @@ summary: Learn how to configure proxy for Milvus.
     </button></h2><table id="proxy.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on proxy can receive, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh klien pada proxy, satuan: byte    </td>
       <td>67108864</td>
     </tr>
   </tbody>

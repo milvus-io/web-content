@@ -2,9 +2,9 @@
 id: configure_localstorage.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure localStorage for Milvus.
+summary: Pelajari cara mengonfigurasi localStorage untuk Milvus.
 ---
-<h1 id="localStorage-related-Configurations" class="common-anchor-header">localStorage-related Configurations<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="localStorage-related-Configurations" class="common-anchor-header">Konfigurasi yang terkait dengan localStorage<button data-href="#localStorage-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,16 +37,16 @@ summary: Learn how to configure localStorage for Milvus.
     </button></h2><table id="localStorage.path">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Local path to where vector data are stored during a search or a query to avoid repetitve access to MinIO or S3 service.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      </td>
+        <li>Jalur lokal ke tempat penyimpanan data vektor selama pencarian atau kueri untuk menghindari akses berulang ke layanan MinIO atau S3.</li>      
+        <li>Perhatian: Mengubah parameter ini setelah menggunakan Milvus untuk jangka waktu tertentu akan mempengaruhi akses Anda ke data lama.</li>      
+        <li>Disarankan untuk mengubah parameter ini sebelum memulai Milvus untuk pertama kalinya.</li>      </td>
       <td>/var/lib/milvus/data/</td>
     </tr>
   </tbody>

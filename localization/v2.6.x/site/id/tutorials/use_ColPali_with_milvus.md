@@ -1,12 +1,13 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  In this notebook, we refer to this kind of multi-vector representation as
-  "ColBERT embeddings" for generality. However, the actual model being used is
-  the ColPali model. We will demonstrate how to use Milvus for multi-vector
-  retrieval. Building on that, we will introduce how to use ColPali for
-  retrieving pages based on a given query.
-title: Use ColPali for Multi-Modal Retrieval with Milvus
+  Dalam buku catatan ini, kami menyebut representasi multi-vektor semacam ini
+  sebagai "embeddings ColBERT" untuk keumuman. Namun, model sebenarnya yang
+  digunakan adalah model ColPali. Kami akan mendemonstrasikan cara menggunakan
+  Milvus untuk pengambilan multi-vektor. Selanjutnya, kami akan memperkenalkan
+  cara menggunakan ColPali untuk mengambil halaman berdasarkan kueri yang
+  diberikan.
+title: Gunakan ColPali untuk Pengambilan Multi-Modal dengan Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -14,7 +15,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Use ColPali for Multi-Modal Retrieval with Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="common-anchor-header">Gunakan ColPali untuk Pengambilan Multi-Modal dengan Milvus<button data-href="#Use-ColPali-for-Multi-Modal-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,17 +30,17 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a “MaxSim” operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.</p>
+    </button></h1><p>Model pengambilan modern biasanya menggunakan satu penyematan untuk merepresentasikan teks atau gambar. Akan tetapi, ColBERT adalah model neural yang menggunakan daftar penyematan untuk setiap contoh data dan menggunakan operasi "MaxSim" untuk menghitung kemiripan antara dua teks. Selain data tekstual, gambar, tabel, dan diagram juga mengandung informasi yang kaya, yang sering diabaikan dalam pencarian informasi berbasis teks.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>MaxSim function compares a query with a document (what you’re searching in) by looking at their token embeddings. For each word in the query, it picks the most similar word from the document (using cosine similarity or squared L2 distance) and sums these maximum similarities across all words in the query</p>
-<p>ColPali is a method that combines ColBERT’s multi-vector representation with PaliGemma (a multimodal large language model) to leverage its strong understanding capabilities. This approach enables a page with both text and images to be represented using a unified multi-vector embedding. The embeddings within this multi-vector representation can capture detailed information, improving the performance of retrieval-augmented generation (RAG) for multimodal data.</p>
-<p>In this notebook, we refer to this kind of multi-vector representation as “ColBERT embeddings” for generality. However, the actual model being used is the <strong>ColPali model</strong>. We will demonstrate how to use Milvus for multi-vector retrieval. Building on that, we will introduce how to use ColPali for retrieving pages based on a given query.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>Fungsi MaxSim membandingkan kueri dengan dokumen (yang Anda cari) dengan melihat penyematan tokennya. Untuk setiap kata dalam kueri, ia memilih kata yang paling mirip dari dokumen (menggunakan cosine similarity atau jarak L2 kuadrat) dan menjumlahkan kemiripan maksimum ini di semua kata dalam kueri</p>
+<p>ColPali adalah metode yang menggabungkan representasi multi-vektor ColBERT dengan PaliGemma (model bahasa besar multimodal) untuk meningkatkan kemampuan pemahamannya yang kuat. Pendekatan ini memungkinkan sebuah halaman dengan teks dan gambar direpresentasikan menggunakan penyematan multi-vektor terpadu. Penyematan dalam representasi multi-vektor ini dapat menangkap informasi yang terperinci, meningkatkan kinerja pengambilan-penambahan generasi (RAG) untuk data multimodal.</p>
+<p>Dalam buku catatan ini, kami menyebut representasi multi-vektor semacam ini sebagai "embeddings ColBERT" untuk keumumannya. Namun, model sebenarnya yang digunakan adalah <strong>model ColPali</strong>. Kami akan mendemonstrasikan bagaimana cara menggunakan Milvus untuk pengambilan multi-vektor. Selanjutnya, kami akan memperkenalkan cara menggunakan ColPali untuk mengambil halaman berdasarkan kueri yang diberikan.</p>
+<h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +61,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pillow</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-data" class="common-anchor-header">Prepare the data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-data" class="common-anchor-header">Siapkan data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +76,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will use PDF RAG as our example. You can download <a href="https://arxiv.org/pdf/2004.12832">ColBERT</a> paper and put it into <code translate="no">./pdf</code>. ColPali does not process text directly; instead, the entire page is rasterized into an image. The ColPali model excels at understanding the textual information contained within these images. Therefore, we will convert each PDF page into an image for processing.</p>
+    </button></h2><p>Kita akan menggunakan PDF RAG sebagai contoh. Anda dapat mengunduh dokumen <a href="https://arxiv.org/pdf/2004.12832">ColBERT</a> dan memasukkannya ke dalam <code translate="no">./pdf</code>. ColPali tidak memproses teks secara langsung; sebaliknya, seluruh halaman di-raster menjadi sebuah gambar. Model ColPali unggul dalam memahami informasi tekstual yang terkandung di dalam gambar-gambar ini. Oleh karena itu, kita akan mengubah setiap halaman PDF menjadi gambar untuk diproses.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pdf2image <span class="hljs-keyword">import</span> convert_from_path
 
 pdf_path = <span class="hljs-string">&quot;pdfs/2004.12832v2.pdf&quot;</span>
@@ -84,7 +85,7 @@ images = convert_from_path(pdf_path)
 <span class="hljs-keyword">for</span> i, image <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(images):
     image.save(<span class="hljs-string">f&quot;pages/page_<span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>.png&quot;</span>, <span class="hljs-string">&quot;PNG&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Next, we will initialize a database using Milvus Lite. You can easily switch to a full Milvus instance by setting the uri to the appropriate address where your Milvus service is hosted.</p>
+<p>Selanjutnya, kita akan menginisialisasi database menggunakan Milvus Lite. Anda dapat dengan mudah beralih ke instance Milvus penuh dengan mengatur uri ke alamat yang sesuai di mana layanan Milvus Anda dihosting.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> concurrent.futures
@@ -93,13 +94,13 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
-<li>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>Jika Anda hanya membutuhkan basis data vektor lokal untuk data skala kecil atau pembuatan prototipe, mengatur uri sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
+<li>Jika Anda memiliki data berskala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan alamat dan port server sebagai uri Anda, misalnya<code translate="no">http://localhost:19530</code>. Jika Anda mengaktifkan fitur autentikasi pada Milvus, gunakan "<your_username>:<your_password>" sebagai token, jika tidak, jangan setel token.</li>
+<li>Jika Anda menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint dan API key</a> di Zilliz Cloud.</li>
 </ul>
 </div>
-<p>We will define a MilvusColbertRetriever class to wrap around the Milvus client for multi-vector data retrieval. The implementation flattens ColBERT embeddings and inserts them into a collection, where each row represents an individual embedding from the ColBERT embedding list. It also records the doc_id and seq_id to trace the origin of each embedding.</p>
-<p>When searching with a ColBERT embedding list, multiple searches will be conducted—one for each ColBERT embedding. The retrieved doc_ids will then be deduplicated. A reranking process will be performed, where the full embeddings for each doc_id are fetched, and the MaxSim score is calculated to produce the final ranked results.</p>
+<p>Kita akan mendefinisikan kelas MilvusColbertRetriever untuk membungkus klien Milvus untuk pengambilan data multi-vektor. Implementasi ini meratakan penyematan ColBERT dan memasukkannya ke dalam sebuah koleksi, di mana setiap baris mewakili penyematan individu dari daftar penyematan ColBERT. Implementasi ini juga mencatat doc_id dan seq_id untuk melacak asal usul setiap embedding.</p>
+<p>Ketika mencari dengan daftar embedding ColBERT, beberapa pencarian akan dilakukan-satu untuk setiap embedding ColBERT. Doc_id yang diambil kemudian akan diduplikasi. Proses pemeringkatan ulang akan dilakukan, di mana penyematan lengkap untuk setiap doc_id diambil, dan skor MaxSim dihitung untuk menghasilkan hasil peringkat akhir.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
         <span class="hljs-comment"># Initialize the retriever with a Milvus client, collection name, and dimensionality of the vector embeddings.</span>
@@ -240,7 +241,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>
             ],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p>We will use the <a href="https://github.com/illuin-tech/colpali">colpali_engine</a> to extract embedding lists for two queries and retrieve the relevant information from the PDF pages.</p>
+<p>Kita akan menggunakan <a href="https://github.com/illuin-tech/colpali">colpali_engine</a> untuk mengekstrak daftar sematan untuk dua kueri dan mengambil informasi yang relevan dari halaman PDF.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> colpali_engine.models <span class="hljs-keyword">import</span> ColPali
 <span class="hljs-keyword">from</span> colpali_engine.models.paligemma.colpali.processing_colpali <span class="hljs-keyword">import</span> ColPaliProcessor
 <span class="hljs-keyword">from</span> colpali_engine.utils.processing_utils <span class="hljs-keyword">import</span> BaseVisualRetrieverProcessor
@@ -279,7 +280,7 @@ qs: <span class="hljs-type">List</span>[torch.Tensor] = []
         embeddings_query = model(**batch_query)
     qs.extend(<span class="hljs-built_in">list</span>(torch.unbind(embeddings_query.to(<span class="hljs-string">&quot;cpu&quot;</span>))))
 <button class="copy-code-btn"></button></code></pre>
-<p>Additionally, we will need to extract the embedding list for each page and it shows there are 1030 128-dimensional embeddings for each page.</p>
+<p>Selain itu, kita perlu mengekstrak daftar penyematan untuk setiap halaman dan ini menunjukkan bahwa ada 1030 penyematan 128 dimensi untuk setiap halaman.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 <span class="hljs-keyword">import</span> os
@@ -308,12 +309,12 @@ ds: <span class="hljs-type">List</span>[torch.Tensor] = []
 
 torch.Size([1030, 128])
 </code></pre>
-<p>We will create a collection called “colpali” using MilvusColbertRetriever.</p>
+<p>Kita akan membuat koleksi bernama "colpali" menggunakan MilvusColbertRetriever.</p>
 <pre><code translate="no" class="language-python">retriever = MilvusColbertRetriever(collection_name=<span class="hljs-string">&quot;colpali&quot;</span>, milvus_client=client)
 retriever.create_collection()
 retriever.create_index()
 <button class="copy-code-btn"></button></code></pre>
-<p>We will insert embedding lists to the Milvus database.</p>
+<p>Kita akan memasukkan daftar penyematan ke dalam basis data Milvus.</p>
 <pre><code translate="no" class="language-python">filepaths = [<span class="hljs-string">&quot;./pages/&quot;</span> + name <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> os.listdir(<span class="hljs-string">&quot;./pages&quot;</span>)]
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(filepaths)):
     data = {
@@ -323,7 +324,7 @@ retriever.create_index()
     }
     retriever.insert(data)
 <button class="copy-code-btn"></button></code></pre>
-<p>Now we can search the most relevant page using query embedding list.</p>
+<p>Sekarang kita dapat mencari halaman yang paling relevan menggunakan daftar sematan kueri.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query <span class="hljs-keyword">in</span> qs:
     query = query.<span class="hljs-built_in">float</span>().numpy()
     result = retriever.search(query, topk=<span class="hljs-number">1</span>)
@@ -332,4 +333,4 @@ retriever.create_index()
 <pre><code translate="no">./pages/page_5.png
 ./pages/page_7.png
 </code></pre>
-<p>Finally, we retrieve the original page name. With ColPali, we can retrieve multimodal documents without the need for complex processing techniques to extract text and images from the documents. By leveraging large vision models, more information—such as tables and figures—can be analyzed without significant information loss.</p>
+<p>Terakhir, kita mengambil nama halaman asli. Dengan ColPali, kita dapat mengambil dokumen multimodal tanpa memerlukan teknik pemrosesan yang rumit untuk mengekstrak teks dan gambar dari dokumen. Dengan memanfaatkan model visi besar, lebih banyak informasi - seperti tabel dan gambar - dapat dianalisis tanpa kehilangan informasi yang signifikan.</p>

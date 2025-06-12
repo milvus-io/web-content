@@ -213,7 +213,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">truncation_direction</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Efektif bila truncate bernilai true. Menentukan apakah akan memotong dari kiri atau kanan. Nilai default ke kanan.</p></td>
+     <td><p>Berlaku jika truncate bernilai true. Menentukan apakah akan memotong dari kiri atau kanan. Nilai default ke kanan.</p></td>
      <td><p>"left"</p></td>
    </tr>
    <tr>

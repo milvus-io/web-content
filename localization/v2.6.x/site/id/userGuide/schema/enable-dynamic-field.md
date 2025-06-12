@@ -1,13 +1,13 @@
 ---
 id: enable-dynamic-field.md
-title: Dynamic Field
+title: Bidang Dinamis
 summary: >-
-  All fields defined in the schema of a collection must be included in the
-  entities to be inserted. If you want some fields to be optional, consider
-  enabling the dynamic field. This topic describes how to enable and use the
-  dynamic field.
+  Semua field yang didefinisikan dalam skema koleksi harus disertakan dalam
+  entitas yang akan disisipkan. Jika Anda ingin beberapa bidang menjadi
+  opsional, pertimbangkan untuk mengaktifkan bidang dinamis. Topik ini
+  menjelaskan cara mengaktifkan dan menggunakan bidang dinamis.
 ---
-<h1 id="Dynamic-Field" class="common-anchor-header">Dynamic Field<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
+<h1 id="Dynamic-Field" class="common-anchor-header">Bidang Dinamis<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>All fields defined in the schema of a collection must be included in the entities to be inserted. If you want some fields to be optional, consider enabling the dynamic field. This topic describes how to enable and use the dynamic field.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Semua field yang didefinisikan dalam skema koleksi harus disertakan dalam entitas yang akan disisipkan. Jika Anda ingin beberapa bidang menjadi opsional, pertimbangkan untuk mengaktifkan bidang dinamis. Topik ini menjelaskan cara mengaktifkan dan menggunakan bidang dinamis.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,10 +38,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you can create a collection schema by setting the names and data types for each field in the collection. When you add a field to the schema, make sure that this field is included in the entity you intend to insert. If you want some fields to be optional, enabling the dynamic field is one option.</p>
-<p>The dynamic field is a reserved field named <strong>$meta</strong>, which is of the JavaScript Object Notation (JSON) type. Any fields in the entities that are not defined in the schema will be stored in this reserved JSON field as key-value pairs.</p>
-<p>For a collection with the dynamic field enabled, you can use keys in the dynamic field for scalar filtering, just as you would with fields explicitly defined in the schema.</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">Enable dynamic field<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+    </button></h2><p>Di Milvus, Anda dapat membuat skema koleksi dengan mengatur nama dan tipe data untuk setiap field di dalam koleksi. Ketika Anda menambahkan field ke dalam skema, pastikan bahwa field tersebut sudah termasuk dalam entitas yang ingin Anda masukkan. Jika Anda ingin beberapa field menjadi opsional, mengaktifkan field dinamis adalah salah satu pilihan.</p>
+<p>Bidang dinamis adalah bidang yang dicadangkan bernama <strong>$meta</strong>, yang merupakan tipe JavaScript Object Notation (JSON). Setiap field dalam entitas yang tidak didefinisikan dalam skema akan disimpan dalam field JSON yang dicadangkan ini sebagai pasangan kunci-nilai.</p>
+<p>Untuk koleksi dengan bidang dinamis yang diaktifkan, Anda dapat menggunakan kunci dalam bidang dinamis untuk pemfilteran skalar, sama seperti yang Anda lakukan dengan bidang yang secara eksplisit didefinisikan dalam skema.</p>
+<h2 id="Enable-dynamic-field" class="common-anchor-header">Mengaktifkan bidang dinamis<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,14 +56,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can enable the dynamic field manually when creating a collection with custom settings.</p>
+    </button></h2><p>Anda dapat mengaktifkan bidang dinamis secara manual saat membuat koleksi dengan pengaturan khusus.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -140,7 +135,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     &quot;enableDynamicField&quot;: true
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-dynamic-field" class="common-anchor-header">Use dynamic field<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="Use-dynamic-field" class="common-anchor-header">Menggunakan bidang dinamis<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,8 +150,8 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When the dynamic field is enabled in your collection, all fields and their values that are not defined in the schema will be stored as key-value pairs in the dynamic field.</p>
-<p>For example, suppose your collection schema defines only two fields, named <code translate="no">id</code> and <code translate="no">vector</code>, with the dynamic field enabled. Now, insert the following dataset into this collection.</p>
+    </button></h2><p>Ketika bidang dinamis diaktifkan di dalam koleksi Anda, semua bidang dan nilainya yang tidak didefinisikan di dalam skema akan disimpan sebagai pasangan nilai-kunci di dalam bidang dinamis.</p>
+<p>Sebagai contoh, misalkan skema koleksi Anda hanya mendefinisikan dua field, bernama <code translate="no">id</code> dan <code translate="no">vector</code>, dengan field dinamis diaktifkan. Sekarang, masukkan kumpulan data berikut ke dalam koleksi ini.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19886812562848388</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.06023560599112088</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6976963061752597</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2614474506242501</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.838729485096104</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -170,15 +165,10 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">9</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.5718280481994695</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24070317428066512</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.3737913482606834</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.06726932177492717</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6980531615588608</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purple_4976&quot;</span><span class="hljs-punctuation">}</span>        
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The dataset above contains 10 entities, each including the fields <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code>. Here, the <code translate="no">color</code> field is not defined in the schema. Since the collection has the dynamic field enabled, the field <code translate="no">color</code> will be stored as a key-value pair within the dynamic field.</p>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>The following code demonstrates how to insert this dataset into the collection.</p>
+<p>Kumpulan data di atas berisi 10 entitas, masing-masing termasuk bidang <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code>. Di sini, bidang <code translate="no">color</code> tidak didefinisikan dalam skema. Karena koleksi ini memiliki bidang dinamis yang diaktifkan, bidang <code translate="no">color</code> akan disimpan sebagai pasangan nilai-kunci di dalam bidang dinamis.</p>
+<h3 id="Insert-data" class="common-anchor-header">Menyisipkan data</h3><p>Kode berikut ini menunjukkan cara menyisipkan kumpulan data ke dalam koleksi.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -330,26 +320,21 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">Index a scalar field in the dynamic field</h3><p>When you enable a dynamic field, any undefined scalar fields are stored as key-value pairs in JSON format. Milvus supports creating an index on such an undefined scalar field, effectively by building a JSON path index. Here’s how it works:</p>
+<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">Mengindeks bidang skalar dalam bidang dinamis</h3><p>Ketika Anda mengaktifkan bidang dinamis, setiap bidang skalar yang tidak terdefinisi akan disimpan sebagai pasangan nilai-kunci dalam format JSON. Milvus mendukung pembuatan indeks pada bidang skalar yang tidak terdefinisi, secara efektif dengan membangun indeks jalur JSON. Berikut cara kerjanya:</p>
 <ol>
-<li><p><strong>Choose the dynamic field key</strong> you want to index. For example, <code translate="no">&quot;color&quot;</code> in the example above.</p></li>
-<li><p><strong>Decide on a cast type</strong> for the values found at that key. Milvus will parse the dynamic field, extract the values under the specified key, and cast them to the type you configure.</p>
+<li><p><strong>Pilih kunci bidang dinamis yang</strong> ingin Anda indeks. Misalnya, <code translate="no">&quot;color&quot;</code> pada contoh di atas.</p></li>
+<li><p><strong>Tentukan jenis cast</strong> untuk nilai yang ditemukan pada kunci tersebut. Milvus akan mem-parsing bidang dinamis, mengekstrak nilai di bawah kunci yang ditentukan, dan meng-cast-nya ke tipe yang Anda konfigurasikan.</p>
 <ul>
-<li><p>Supported <code translate="no">json_cast_type</code> values are <code translate="no">bool</code> (or <code translate="no">BOOL</code>), <code translate="no">double</code> (or <code translate="no">DOUBLE</code>), and <code translate="no">varchar</code> (or <code translate="no">VARCHAR</code>).</p></li>
-<li><p>If parsing or casting fails (for example, trying to parse a string as double), those rows will be skipped in the index.</p></li>
+<li><p>Nilai <code translate="no">json_cast_type</code> yang didukung adalah <code translate="no">bool</code> (atau <code translate="no">BOOL</code>), <code translate="no">double</code> (atau <code translate="no">DOUBLE</code>), dan <code translate="no">varchar</code> (atau <code translate="no">VARCHAR</code>).</p></li>
+<li><p>Jika penguraian atau casting gagal (misalnya, mencoba mengurai string sebagai ganda), baris tersebut akan dilewati dalam indeks.</p></li>
 </ul></li>
-<li><p><strong>Specify the JSON path</strong> to that key as <code translate="no">json_path</code>. Since the dynamic field is stored as JSON, you can specify something like <code translate="no">&quot;color&quot;</code>, or if you have nested structures, you can specify deeper paths (e.g. <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
-<li><p><strong>Create an INVERTED index</strong>. Currently, only <code translate="no">INVERTED</code> type is supported for JSON path indexing.</p></li>
+<li><p><strong>Tentukan jalur JSON</strong> ke kunci tersebut sebagai <code translate="no">json_path</code>. Karena bidang dinamis disimpan sebagai JSON, Anda dapat menentukan sesuatu seperti <code translate="no">&quot;color&quot;</code>, atau jika Anda memiliki struktur bertingkat, Anda dapat menentukan jalur yang lebih dalam (mis. <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
+<li><p><strong>Membuat indeks INVERTED</strong>. Saat ini, hanya tipe <code translate="no">INVERTED</code> yang didukung untuk pengindeksan jalur JSON.</p></li>
 </ol>
-<p>For details on parameters and considerations, refer to <a href="/docs/use-json-fields.md#Index-a-JSON-field">Index a JSON field</a>.</p>
-<p>Below is an example of how to create an index on the <code translate="no">&quot;color&quot;</code> field:</p>
+<p>Untuk detail tentang parameter dan pertimbangan, lihat <a href="/docs/id/use-json-fields.md#Index-a-JSON-field">Mengindeks bidang JSON</a>.</p>
+<p>Di bawah ini adalah contoh cara membuat indeks pada bidang <code translate="no">&quot;color&quot;</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -437,14 +422,9 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">Query and search with dynamic field</h3><p>Milvus supports the use of filter expressions during queries and searches, allowing you to specify which fields to include in the results. The following example demonstrates how to perform queries and searches using the <code translate="no">color</code> field, which is not defined in the schema, by using the dynamic field.</p>
+<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">Kueri dan pencarian dengan bidang dinamis</h3><p>Milvus mendukung penggunaan ekspresi filter selama kueri dan pencarian, sehingga Anda dapat menentukan bidang mana yang akan disertakan dalam hasil. Contoh berikut ini menunjukkan cara melakukan kueri dan pencarian menggunakan bidang <code translate="no">color</code>, yang tidak didefinisikan dalam skema, dengan menggunakan bidang dinamis.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
 res = client.search(
@@ -536,7 +516,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the filter expression used in the code example above, <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>, the conditions specify that the value of the <code translate="no">color</code> field must start with <strong>“red”</strong>. In the sample data, only two entities meet this condition. Thus, when <code translate="no">limit</code> (topK) is set to <code translate="no">3</code> or fewer, both of these entities will be returned.</p>
+<p>Pada ekspresi filter yang digunakan dalam contoh kode di atas, <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>, ketentuannya menetapkan bahwa nilai bidang <code translate="no">color</code> harus dimulai dengan <strong>"merah"</strong>. Pada contoh data, hanya ada dua entitas yang memenuhi kondisi ini. Dengan demikian, ketika <code translate="no">limit</code> (topK) disetel ke <code translate="no">3</code> atau lebih sedikit, kedua entitas ini akan dikembalikan.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 

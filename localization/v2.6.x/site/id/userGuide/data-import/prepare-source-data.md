@@ -1,12 +1,12 @@
 ---
 id: prepare-source-data.md
 order: 0
-title: Prepare Source Data
+title: Menyiapkan Data Sumber
 summary: >-
-  This page discusses something you should consider before you start
-  bulk-inserting data into your collection.
+  Halaman ini membahas sesuatu yang harus Anda pertimbangkan sebelum Anda mulai
+  memasukkan data secara massal ke dalam koleksi Anda.
 ---
-<h1 id="Prepare-Source-Data" class="common-anchor-header">Prepare Source Data<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
+<h1 id="Prepare-Source-Data" class="common-anchor-header">Menyiapkan Data Sumber<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page discusses something you should consider before you start bulk-inserting data into your collection.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>Halaman ini membahas sesuatu yang harus Anda pertimbangkan sebelum mulai memasukkan data secara massal ke dalam koleksi Anda.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Sebelum Anda mulai<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,33 +37,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The target collection requires mapping the source data to its schema. The diagram below shows how acceptable source data is mapped to the schema of a target collection.</p>
+    </button></h2><p>Koleksi target memerlukan pemetaan data sumber ke skema. Diagram di bawah ini menunjukkan bagaimana data sumber yang dapat diterima dipetakan ke skema koleksi target.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
-    <span>Map data to schema</span>
-  </span>
-</p>
-<p>You should carefully examine your data and design the schema of the target collection accordingly.</p>
-<p>Taking the JSON data in the above diagram as an example, there are two entities in the rows list, each row having six fields. The collection schema selectively includes four: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong>, and <strong>scalar_2</strong>.</p>
-<p>There are two more things to consider when designing the schema:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   </span> <span class="img-wrapper"> <span>Memetakan data ke skema</span> </span></p>
+<p>Anda harus memeriksa data Anda dengan cermat dan merancang skema koleksi target yang sesuai.</p>
+<p>Mengambil data JSON pada diagram di atas sebagai contoh, ada dua entitas dalam daftar baris, setiap baris memiliki enam bidang. Skema koleksi secara selektif mencakup empat: <strong>id</strong>, <strong>vektor</strong>, <strong>skalar_1</strong>, dan <strong>skalar_2</strong>.</p>
+<p>Ada dua hal lagi yang perlu dipertimbangkan ketika mendesain skema:</p>
 <ul>
-<li><p><strong>Whether to enable AutoID</strong></p>
-<p>The <strong>id</strong> field serves as the primary field of the collection. To make the primary field automatically increment, you can enable <strong>AutoID</strong> in the schema. In this case, you should exclude the <strong>id</strong> field from each row in the source data.</p></li>
-<li><p><strong>Whether to enable dynamic fields</strong></p>
-<p>The target collection can also store fields not included in its pre-defined schema if the schema enables dynamic fields. The <strong>$meta</strong> field is a reserved JSON field to hold dynamic fields and their values in key-value pairs. In the above diagram, the fields <strong>dynamic_field_1</strong> and <strong>dynamic_field_2</strong> and the values will be saved as key-value pairs in the <strong>$meta</strong> field.</p></li>
+<li><p><strong>Apakah akan mengaktifkan AutoID</strong></p>
+<p>Bidang <strong>id</strong> berfungsi sebagai bidang utama koleksi. Untuk membuat field utama bertambah secara otomatis, Anda dapat mengaktifkan <strong>AutoID</strong> dalam skema. Dalam hal ini, Anda harus mengecualikan field <strong>id</strong> dari setiap baris dalam data sumber.</p></li>
+<li><p><strong>Apakah akan mengaktifkan bidang dinamis</strong></p>
+<p>Koleksi target juga dapat menyimpan bidang yang tidak termasuk dalam skema yang telah ditentukan sebelumnya jika skema tersebut mengaktifkan bidang dinamis. Bidang <strong>$meta</strong> adalah bidang JSON yang dicadangkan untuk menyimpan bidang dinamis dan nilainya dalam pasangan kunci-nilai. Pada diagram di atas, bidang <strong>dynamic_field_1</strong> dan <strong>dynamic_field_2</strong> serta nilainya akan disimpan sebagai pasangan kunci-nilai dalam bidang <strong>$meta</strong>.</p></li>
 </ul>
-<p>The following code shows how to set up the schema for the collection illustrated in the above diagram.</p>
+<p>Kode berikut ini menunjukkan cara mengatur skema untuk koleksi yang diilustrasikan dalam diagram di atas.</p>
 <div class="language-python">
-<p>To obtain more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> in the SDK reference.</p>
+<p>Untuk mendapatkan informasi lebih lanjut, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> dalam referensi SDK.</p>
 </div>
 <div class="language-java">
-<p>To obtain more information, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> in the SDK reference.</p>
+<p>Untuk mendapatkan informasi lebih lanjut, lihat <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> dalam referensi SDK.</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># You need to work out a collection schema out of your dataset.</span>
@@ -210,7 +206,7 @@ schema.verify()
     <span class="hljs-keyword">return</span> schema;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-BulkWriter" class="common-anchor-header">Set up BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
+<h2 id="Set-up-BulkWriter" class="common-anchor-header">Menyiapkan BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -225,17 +221,15 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter</strong> is a tool designed to convert raw datasets into a format suitable for importing via the RESTful Import API. It offers two types of writers:</p>
+    </button></h2><p><strong>BulkWriter</strong> adalah alat yang dirancang untuk mengonversi set data mentah menjadi format yang cocok untuk mengimpor melalui RESTful Import API. Alat ini menawarkan dua jenis penulis:</p>
 <ul>
-<li><strong>LocalBulkWriter</strong>: Reads the designated dataset and transforms it into an easy-to-use format.</li>
-<li><strong>RemoteBulkWriter</strong>: Performs the same task as the LocalBulkWriter but additionally transfers the converted data files to a specified remote object storage bucket.</li>
+<li><strong>LocalBulkWriter</strong>: Membaca kumpulan data yang ditentukan dan mengubahnya menjadi format yang mudah digunakan.</li>
+<li><strong>RemoteBulkWriter</strong>: Melakukan tugas yang sama dengan LocalBulkWriter tetapi juga mentransfer file data yang dikonversi ke ember penyimpanan objek jarak jauh yang ditentukan.</li>
 </ul>
-<p><strong>RemoteBulkWriter</strong> differs from <strong>LocalBulkWriter</strong> in that <strong>RemoteBulkWriter</strong> transfers the converted data files to a target object storage bucket.</p>
-<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Set up LocalBulkWriter</h3><p>A <strong>LocalBulkWriter</strong> appends rows from the source dataset and commits them to a local file of the specified format.</p>
+<p><strong>RemoteBulkWriter</strong> berbeda dengan <strong>LocalBulkWriter</strong> karena <strong>RemoteBulkWriter</strong> mentransfer file data yang dikonversi ke ember penyimpanan objek target.</p>
+<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Menyiapkan LocalBulkWriter</h3><p><strong>LocalBulkWriter</strong> menambahkan baris dari kumpulan data sumber dan mengomitnya ke file lokal dengan format yang ditentukan.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -261,30 +255,28 @@ writer = LocalBulkWriter(
 <span class="hljs-type">LocalBulkWriter</span> <span class="hljs-variable">localBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LocalBulkWriter</span>(localBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>When creating a <strong>LocalBulkWriter</strong>, you should:</p>
+<p>Ketika membuat <strong>LocalBulkWriter</strong>, Anda harus:</p>
 <ul>
-<li>Reference the created schema in <code translate="no">schema</code>.</li>
-<li>Set <code translate="no">local_path</code> to the output directory.</li>
-<li>Set <code translate="no">file_type</code> to the output file type.</li>
-<li>If your dataset contains a large number of records, you are advised to segment your data by setting <code translate="no">segment_size</code> to a proper value.</li>
+<li>Merujuk skema yang dibuat di <code translate="no">schema</code>.</li>
+<li>Tetapkan <code translate="no">local_path</code> ke direktori keluaran.</li>
+<li>Atur <code translate="no">file_type</code> ke jenis file keluaran.</li>
+<li>Jika dataset Anda berisi sejumlah besar rekaman, Anda disarankan untuk menyegmentasikan data dengan mengatur <code translate="no">segment_size</code> ke nilai yang tepat.</li>
 </ul>
-<p>For details on parameter settings, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> in the SDK reference.</p>
+<p>Untuk detail mengenai pengaturan parameter, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> dalam referensi SDK.</p>
 </div>
 <div class="language-java">
-<p>When creating a <strong>LocalBulkWriter</strong>, you should:</p>
+<p>Ketika membuat <strong>LocalBulkWriter</strong>, Anda harus:</p>
 <ul>
-<li>Reference the created schema in <code translate="no">CollectionSchema()</code>.</li>
-<li>Set the output directory in <code translate="no">withLocalPath()</code>.</li>
-<li>Set the output file type in <code translate="no">withFileType()</code>.</li>
-<li>If your dataset contains a large number of records, you are advised to segment your data by setting <code translate="no">withChunkSize()</code> to a proper value.</li>
+<li>Merujuk skema yang dibuat di <code translate="no">CollectionSchema()</code>.</li>
+<li>Mengatur direktori keluaran di <code translate="no">withLocalPath()</code>.</li>
+<li>Mengatur jenis file keluaran di <code translate="no">withFileType()</code>.</li>
+<li>Jika dataset Anda berisi sejumlah besar catatan, Anda disarankan untuk menyegmentasikan data dengan mengatur <code translate="no">withChunkSize()</code> ke nilai yang tepat.</li>
 </ul>
-<p>For details on parameter settings, refer to LocalBulkWriter in the SDK reference.</p>
+<p>Untuk detail tentang pengaturan parameter, lihat LocalBulkWriter di referensi SDK.</p>
 </div>
-<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Set up RemoteBulkWriter</h3><p>Instead of committing appended data to a local file, a <strong>RemoteBulkWriter</strong> commits them to a remote bucket. Therefore, you should set up a <strong>ConnectParam</strong> object before creating a <strong>RemoteBulkWriter</strong>.</p>
+<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Menyiapkan RemoteBulkWriter</h3><p>Alih-alih menambahkan data yang ditambahkan ke berkas lokal, <strong>RemoteBulkWriter</strong> menambahkannya ke bucket jarak jauh. Oleh karena itu, Anda harus menyiapkan objek <strong>ConnectParam</strong> sebelum membuat <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -332,11 +324,9 @@ writer = RemoteBulkWriter(
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(bulkWriterParam);
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the connection parameters are ready, you can reference it in the <strong>RemoteBulkWriter</strong> as follows:</p>
+<p>Setelah parameter koneksi siap, Anda bisa mereferensikannya di <strong>RemoteBulkWriter</strong> sebagai berikut:</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -362,12 +352,12 @@ writer = RemoteBulkWriter(
 <span class="hljs-type">RemoteBulkWriter</span> <span class="hljs-variable">remoteBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(remoteBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>The parameters for creating a <strong>RemoteBulkWriter</strong> are barely the same as those for a <strong>LocalBulkWriter</strong>, except <code translate="no">connect_param</code>. For details on parameter settings, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> in the SDK reference.</p>
+<p>Parameter untuk membuat <strong>RemoteBulkWriter</strong> hampir sama dengan parameter untuk <strong>LocalBulkWriter</strong>, kecuali <code translate="no">connect_param</code>. Untuk detail tentang pengaturan parameter, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> dalam referensi SDK.</p>
 </div>
 <div class="language-java">
-<p>The parameters for creating a <strong>RemoteBulkWriter</strong> are barely the same as those for a <strong>LocalBulkWriter</strong>, except <code translate="no">StorageConnectParam</code>. For details on parameter settings, refer to RemoteBulkWriter and StorageConnectParam in the SDK reference.</p>
+<p>Parameter untuk membuat <strong>RemoteBulkWriter</strong> hampir sama dengan parameter untuk <strong>LocalBulkWriter</strong>, kecuali <code translate="no">StorageConnectParam</code>. Untuk detail pengaturan parameter, lihat RemoteBulkWriter dan StorageConnectParam dalam referensi SDK.</p>
 </div>
-<h2 id="Start-writing" class="common-anchor-header">Start writing<button data-href="#Start-writing" class="anchor-icon" translate="no">
+<h2 id="Start-writing" class="common-anchor-header">Mulai menulis<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -383,16 +373,14 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>A <strong>BulkWriter</strong> has two methods: <code translate="no">append_row()</code> adds a row from a source dataset, and <code translate="no">commit()</code> commits added rows to a local file or a remote bucket.</p>
+<p><strong>BulkWriter</strong> memiliki dua metode: <code translate="no">append_row()</code> menambahkan baris dari kumpulan data sumber, dan <code translate="no">commit()</code> mengomit baris yang ditambahkan ke file lokal atau bucket jarak jauh.</p>
 </div>
 <div class="language-java">
-<p>A <strong>BulkWriter</strong> has two methods: <code translate="no">appendRow()</code> adds a row from a source dataset, and <code translate="no">commit()</code> commits added rows to a local file or a remote bucket.</p>
+<p><strong>BulkWriter</strong> memiliki dua metode: <code translate="no">appendRow()</code> menambahkan baris dari kumpulan data sumber, dan <code translate="no">commit()</code> mengomit baris yang ditambahkan ke berkas lokal atau remote bucket.</p>
 </div>
-<p>For demonstration purposes, the following code appends randomly generated data.</p>
+<p>Untuk tujuan demonstrasi, kode berikut ini menambahkan data yang dibuat secara acak.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
@@ -589,7 +577,7 @@ writer = RemoteBulkWriter(
     List&lt;List&lt;String&gt;&gt; batchFiles = uploadData();
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Verify-the-results" class="common-anchor-header">Verify the results<button data-href="#Verify-the-results" class="anchor-icon" translate="no">
+<h2 id="Verify-the-results" class="common-anchor-header">Memverifikasi hasil<button data-href="#Verify-the-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -605,15 +593,13 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To check the results, you can get the actual output path by printing the <code translate="no">batch_files</code> property of the writer.</p>
+<p>Untuk memeriksa hasilnya, Anda dapat memperoleh jalur keluaran yang sebenarnya dengan mencetak properti <code translate="no">batch_files</code> milik penulis.</p>
 </div>
 <div class="language-java">
-<p>To check the results, you can get the actual output path by printing the <code translate="no">getBatchFiles()</code> method of the writer.</p>
+<p>Untuk memeriksa hasilnya, Anda bisa mendapatkan jalur keluaran yang sebenarnya dengan mencetak metode <code translate="no">getBatchFiles()</code> dari penulis.</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
 <span class="hljs-comment"># [[&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/1.parquet&#x27;],</span>
@@ -633,8 +619,8 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>BulkWriter</strong> generates a UUID, creates a sub-folder using the UUID in the provided output directory, and places all generated files in the sub-folder. <a href="https://assets.zilliz.com/bulk_writer.zip">Click here</a> to download the prepared sample data.</p>
-<p>Possible folder structures are as follows:</p>
+<p><strong>BulkWriter</strong> menghasilkan UUID, membuat sub-folder menggunakan UUID di direktori output yang disediakan, dan menempatkan semua file yang dihasilkan di sub-folder. <a href="https://assets.zilliz.com/bulk_writer.zip">Klik di sini</a> untuk mengunduh data sampel yang telah disiapkan.</p>
+<p>Struktur folder yang mungkin adalah sebagai berikut:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b

@@ -1,10 +1,10 @@
 ---
 id: lindera-tokenizer.md
-title: Lindera
+title: LinderaCompatible with Milvus 2.5.11+
 summary: >-
-  The lindera tokenizer performs dictionary-based morphological analysis. It is
-  a good choice for languages—such as Japanese, Korean, and Chinese—whose words
-  are not separated by spaces.
+  Lindera Tokenizer melakukan analisis morfologi berbasis kamus. Ini adalah
+  pilihan yang baik untuk bahasa-seperti bahasa Jepang, Korea, dan Cina-yang
+  kata-katanya tidak dipisahkan oleh spasi.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Lindera" class="common-anchor-header">Lindera<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Lindera" class="anchor-icon" translate="no">
@@ -22,8 +22,8 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">lindera</code> tokenizer performs dictionary-based morphological analysis. It is a good choice for languages—such as Japanese, Korean, and Chinese—whose words are not separated by spaces.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>Tokenizer <code translate="no">lindera</code> melakukan analisis morfologi berbasis kamus. Ini adalah pilihan yang baik untuk bahasa-seperti bahasa Jepang, Korea, dan Cina-yang kata-katanya tidak dipisahkan oleh spasi.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,15 +38,15 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use the <code translate="no">lindera</code> tokenizer, you need to use a specially compiled Milvus version. All dictionaries must be explicitly enabled during compilation to be used.</p>
-<p>To enable specific dictionaries, include them in the compilation command:</p>
+    </button></h2><p>Untuk menggunakan <code translate="no">lindera</code> tokenizer, Anda harus menggunakan versi Milvus yang dikompilasi secara khusus. Semua kamus harus diaktifkan secara eksplisit selama kompilasi agar dapat digunakan.</p>
+<p>Untuk mengaktifkan kamus tertentu, sertakan kamus tersebut dalam perintah kompilasi:</p>
 <pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
 <button class="copy-code-btn"></button></code></pre>
-<p>The complete list of available dictionaries is: <code translate="no">lindera-ipadic</code>, <code translate="no">lindera-ipadic-neologd</code>, <code translate="no">lindera-unidic</code>, <code translate="no">lindera-ko-dic</code>, <code translate="no">lindera-cc-cedict</code>.</p>
-<p>For example, to enable all dictionaries:</p>
+<p>Daftar lengkap kamus yang tersedia adalah: <code translate="no">lindera-ipadic</code>, <code translate="no">lindera-ipadic-neologd</code>, <code translate="no">lindera-unidic</code>, <code translate="no">lindera-ko-dic</code>, <code translate="no">lindera-cc-cedict</code>.</p>
+<p>Sebagai contoh, untuk mengaktifkan semua kamus:</p>
 <pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ipadic-neologd,lindera-unidic,lindera-ko-dic,lindera-cc-cedict
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
+<h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,12 +61,9 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To configure an analyzer using the <code translate="no">lindera</code> tokenizer, set <code translate="no">tokenizer.type</code> to <code translate="no">lindera</code> and choose a dictionary with <code translate="no">dict_kind</code>.</p>
+    </button></h2><p>Untuk mengonfigurasi penganalisis menggunakan <code translate="no">lindera</code> tokenizer, setel <code translate="no">tokenizer.type</code> ke <code translate="no">lindera</code> dan pilih kamus dengan <code translate="no">dict_kind</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
@@ -86,27 +83,27 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 <table>
    <tr>
      <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
+     <th><p>Deskripsi</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>The type of tokenizer. This is fixed to <code translate="no">"lindera"</code>.</p></td>
+     <td><p>Jenis tokenizer. Ini ditetapkan ke <code translate="no">"lindera"</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dict_kind</code></p></td>
-     <td><p>A dictionary used to define vocabulary. Possible values:</p>
+     <td><p>Kamus yang digunakan untuk mendefinisikan kosakata. Nilai yang mungkin:</p>
 <ul>
-<li><p><code translate="no">ko-dic</code>: Korean - Korean morphological dictionary (<a href="https://bitbucket.org/eunjeon/mecab-ko-dic">MeCab Ko-dic</a>)</p></li>
-<li><p><code translate="no">ipadic</code>: Japanese - Standard morphological dictionary (<a href="https://taku910.github.io/mecab/">MeCab IPADIC</a>)</p></li>
-<li><p><code translate="no">ipadic-neologd</code>: Japanese with neologism dictionary (extended) - Includes new words and proper nouns (<a href="https://github.com/neologd/mecab-ipadic-neologd">IPADIC NEologd</a>)</p></li>
-<li><p><code translate="no">unidic</code>: Japanese UniDic (extended) - Academic standard dictionary with detailed linguistic information (<a href="https://clrd.ninjal.ac.jp/unidic/">UniDic</a>)</p></li>
-<li><p><code translate="no">cc-cedict</code>: Mandarin Chinese (traditional/simplified) - Community-maintained Chinese-English dictionary (<a href="https://cc-cedict.org/wiki/">CC-CEDICT</a>)</p>
-<p><strong>Note:</strong> All dictionaries must be enabled during Milvus compilation to be available for use.</p></li>
+<li><p><code translate="no">ko-dic</code>: Bahasa Korea - Kamus morfologi bahasa Korea<a href="https://bitbucket.org/eunjeon/mecab-ko-dic">(MeCab Ko-dic</a>)</p></li>
+<li><p><code translate="no">ipadic</code>: Bahasa Jepang - Kamus morfologi standar<a href="https://taku910.github.io/mecab/">(MeCab IPADIC</a>)</p></li>
+<li><p><code translate="no">ipadic-neologd</code>: Bahasa Jepang dengan kamus neologisme (diperluas) - Mencakup kata-kata baru dan kata benda yang tepat<a href="https://github.com/neologd/mecab-ipadic-neologd">(IPADIC NEologd</a>)</p></li>
+<li><p><code translate="no">unidic</code>: Bahasa Jepang UniDic (diperluas) - Kamus standar akademis dengan informasi linguistik yang terperinci<a href="https://clrd.ninjal.ac.jp/unidic/">(UniDic</a>)</p></li>
+<li><p><code translate="no">cc-cedict</code>: Bahasa Mandarin (tradisional/sederhana) - Kamus bahasa Mandarin-Inggris yang dikelola oleh komunitas<a href="https://cc-cedict.org/wiki/">(CC-CEDICT</a>)</p>
+<p><strong>Catatan:</strong> Semua kamus harus diaktifkan selama kompilasi Milvus agar dapat digunakan.</p></li>
 </ul></td>
    </tr>
 </table>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> ketika mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
+<h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,12 +118,9 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before applying the analyzer configuration to your collection schema, verify its behavior using the <code translate="no">run_analyzer</code> method.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Analyzer configuration</h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-</div>
+    </button></h2><p>Sebelum menerapkan konfigurasi penganalisis ke skema koleksi Anda, verifikasi perilakunya menggunakan metode <code translate="no">run_analyzer</code>.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Konfigurasi penganalisis</h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
@@ -143,11 +137,8 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>, <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verification using <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-</div>
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verifikasi menggunakan <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -208,5 +199,5 @@ result, err := client.RunAnalyzer(ctx, option)
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Expected output</h3><pre><code translate="no" class="language-plaintext">{tokens: [&#x27;東京&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;の&#x27;, &#x27;最寄り駅&#x27;, &#x27;は&#x27;, &#x27;とう&#x27;, &#x27;きょう&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;駅&#x27;, &#x27;で&#x27;]} 
+<h3 id="Expected-output" class="common-anchor-header">Keluaran yang diharapkan</h3><pre><code translate="no" class="language-plaintext">{tokens: [&#x27;東京&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;の&#x27;, &#x27;最寄り駅&#x27;, &#x27;は&#x27;, &#x27;とう&#x27;, &#x27;きょう&#x27;, &#x27;スカイ&#x27;, &#x27;ツリー&#x27;, &#x27;駅&#x27;, &#x27;で&#x27;]} 
 <button class="copy-code-btn"></button></code></pre>

@@ -1,15 +1,17 @@
 ---
 id: grouping-search.md
-title: Grouping Search
+title: Pencarian Pengelompokan
 summary: >-
-  A grouping search allows Milvus to group the search results by the values in a
-  specified field to aggregate data at a higher level. For example, you can use
-  a basic ANN search to find books similar to the one at hand, but you can use a
-  grouping search to find the book categories that may involve the topics
-  discussed in that book. This topic describes how to use Grouping Search along
-  with key considerations.
+  Pencarian pengelompokan memungkinkan Milvus untuk mengelompokkan hasil
+  pencarian berdasarkan nilai dalam bidang tertentu untuk mengumpulkan data pada
+  tingkat yang lebih tinggi. Sebagai contoh, Anda dapat menggunakan pencarian
+  ANN dasar untuk menemukan buku yang mirip dengan buku yang sedang dicari,
+  tetapi Anda dapat menggunakan pencarian pengelompokan untuk menemukan kategori
+  buku yang mungkin melibatkan topik-topik yang dibahas dalam buku tersebut.
+  Topik ini menjelaskan cara menggunakan Pencarian Pengelompokan bersama dengan
+  pertimbangan utama.
 ---
-<h1 id="Grouping-Search" class="common-anchor-header">Grouping Search<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
+<h1 id="Grouping-Search" class="common-anchor-header">Pencarian Pengelompokan<button data-href="#Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +26,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A grouping search allows Milvus to group the search results by the values in a specified field to aggregate data at a higher level. For example, you can use a basic ANN search to find books similar to the one at hand, but you can use a grouping search to find the book categories that may involve the topics discussed in that book. This topic describes how to use Grouping Search along with key considerations.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Pencarian pengelompokan memungkinkan Milvus mengelompokkan hasil pencarian berdasarkan nilai dalam bidang tertentu untuk mengumpulkan data pada tingkat yang lebih tinggi. Sebagai contoh, Anda dapat menggunakan pencarian ANN dasar untuk menemukan buku yang mirip dengan buku yang sedang dicari, tetapi Anda dapat menggunakan pencarian pengelompokan untuk menemukan kategori buku yang mungkin melibatkan topik-topik yang dibahas dalam buku tersebut. Topik ini menjelaskan cara menggunakan Pencarian Pengelompokan bersama dengan pertimbangan-pertimbangan utama.</p>
+<h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,31 +42,27 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When entities in the search results share the same value in a scalar field, this indicates that they are similar in a particular attribute, which may negatively impact the search results.</p>
-<p>Assume a collection stores multiple documents (denoted by <strong>docId</strong>). To retain as much semantic information as possible when converting documents into vectors, each document is split into smaller, manageable paragraphs (or <strong>chunks</strong>) and stored as separate entities. Even though the document is divided into smaller sections, users are often still interested in identifying which documents are most relevant to their needs.</p>
+    </button></h2><p>Ketika entitas dalam hasil pencarian memiliki nilai yang sama dalam bidang skalar, hal ini mengindikasikan bahwa entitas tersebut memiliki kemiripan dalam atribut tertentu, yang dapat berdampak negatif pada hasil pencarian.</p>
+<p>Anggaplah sebuah koleksi menyimpan beberapa dokumen (dilambangkan dengan <strong>docId</strong>). Untuk mempertahankan informasi semantik sebanyak mungkin saat mengubah dokumen menjadi vektor, setiap dokumen dipecah menjadi paragraf yang lebih kecil dan mudah diatur (atau <strong>potongan</strong>) dan disimpan sebagai entitas terpisah. Meskipun dokumen dibagi menjadi bagian yang lebih kecil, pengguna sering kali masih tertarik untuk mengidentifikasi dokumen mana yang paling relevan dengan kebutuhan mereka.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
-    <span>Ann Search</span>
-  </span>
-</p>
-<p>When performing an Approximate Nearest Neighbor (ANN) search on such a collection, the search results may include several paragraphs from the same document, potentially causing other documents to be overlooked, which may not align with the intended use case.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
+   </span> <span class="img-wrapper"> <span>Pencarian Ann</span> </span></p>
+<p>Ketika melakukan pencarian Approximate Nearest Neighbor (ANN) pada koleksi seperti itu, hasil pencarian dapat mencakup beberapa paragraf dari dokumen yang sama, yang berpotensi menyebabkan dokumen lain terlewatkan, yang mungkin tidak selaras dengan kasus penggunaan yang dimaksudkan.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
-    <span>Grouping Search</span>
-  </span>
-</p>
-<p>To improve the diversity of search results, you can add the <code translate="no">group_by_field</code> parameter in the search request to enable Grouping Search. As shown in the diagram, you can set <code translate="no">group_by_field</code> to <code translate="no">docId</code>. Upon receiving this request, Milvus will:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
+   </span> <span class="img-wrapper"> <span>Mengelompokkan Pencarian</span> </span></p>
+<p>Untuk meningkatkan keragaman hasil pencarian, Anda dapat menambahkan parameter <code translate="no">group_by_field</code> dalam permintaan pencarian untuk mengaktifkan Pencarian Pengelompokan. Seperti yang ditunjukkan pada diagram, Anda dapat mengatur <code translate="no">group_by_field</code> ke <code translate="no">docId</code>. Setelah menerima permintaan ini, Milvus akan:</p>
 <ul>
-<li><p>Perform an ANN search based on the provided query vector to find all entities most similar to the query.</p></li>
-<li><p>Group the search results by the specified <code translate="no">group_by_field</code>, such as <code translate="no">docId</code>.</p></li>
-<li><p>Return the top results for each group, as defined by the <code translate="no">limit</code> parameter, with the most similar entity from each group.</p></li>
+<li><p>Melakukan pencarian ANN berdasarkan vektor kueri yang disediakan untuk menemukan semua entitas yang paling mirip dengan kueri.</p></li>
+<li><p>Mengelompokkan hasil pencarian berdasarkan <code translate="no">group_by_field</code> yang ditentukan, seperti <code translate="no">docId</code>.</p></li>
+<li><p>Mengembalikan hasil teratas untuk setiap kelompok, seperti yang ditentukan oleh parameter <code translate="no">limit</code>, dengan entitas yang paling mirip dari setiap kelompok.</p></li>
 </ul>
 <div class="alert note">
-<p>By default, Grouping Search returns only one entity per group. If you want to increase the number of results to return per group, you can control this with the <code translate="no">group_size</code> and <code translate="no">strict_group_size</code> parameters.</p>
+<p>Secara default, Pencarian Pengelompokan hanya mengembalikan satu entitas per grup. Jika Anda ingin menambah jumlah hasil yang dikembalikan per grup, Anda dapat mengontrolnya dengan parameter <code translate="no">group_size</code> dan <code translate="no">strict_group_size</code>.</p>
 </div>
-<h2 id="Perform-Grouping-Search" class="common-anchor-header">Perform Grouping Search<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
+<h2 id="Perform-Grouping-Search" class="common-anchor-header">Melakukan Pencarian Pengelompokan<button data-href="#Perform-Grouping-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,7 +77,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section provides example code to demonstrate the use of Grouping Search. The following example assumes the collection includes fields for <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">chunk</code>, and <code translate="no">docId</code>.</p>
+    </button></h2><p>Bagian ini memberikan contoh kode untuk mendemonstrasikan penggunaan Pencarian Pengelompokan. Contoh berikut ini mengasumsikan koleksi mencakup bidang untuk <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">chunk</code>, dan <code translate="no">docId</code>.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">1</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;chunk&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;docId&quot;</span>: <span class="hljs-number">5</span>},
@@ -94,14 +92,9 @@ summary: >-
 ]
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the search request, set both <code translate="no">group_by_field</code> and <code translate="no">output_fields</code> to <code translate="no">docId</code>. Milvus will group the results by the specified field and return the most similar entity from each group, including the value of <code translate="no">docId</code> for each returned entity.</p>
+<p>Dalam permintaan pencarian, setel <code translate="no">group_by_field</code> dan <code translate="no">output_fields</code> ke <code translate="no">docId</code>. Milvus akan mengelompokkan hasil berdasarkan bidang yang ditentukan dan mengembalikan entitas yang paling mirip dari setiap kelompok, termasuk nilai <code translate="no">docId</code> untuk setiap entitas yang dikembalikan.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -237,8 +230,8 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the request above, <code translate="no">limit=3</code> indicates that the system will return search results from three groups, with each group containing the single most similar entity to the query vector.</p>
-<h2 id="Configure-group-size" class="common-anchor-header">Configure group size<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
+<p>Pada permintaan di atas, <code translate="no">limit=3</code> menunjukkan bahwa sistem akan mengembalikan hasil pencarian dari tiga grup, dengan masing-masing grup berisi entitas tunggal yang paling mirip dengan vektor kueri.</p>
+<h2 id="Configure-group-size" class="common-anchor-header">Mengonfigurasi ukuran grup<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -253,14 +246,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>By default, Grouping Search returns only one entity per group. If you want multiple results per group, adjust the <code translate="no">group_size</code> and <code translate="no">strict_group_size</code> parameters.</p>
+    </button></h2><p>Secara default, Pencarian Pengelompokan hanya mengembalikan satu entitas per grup. Jika Anda menginginkan beberapa hasil per grup, sesuaikan parameter <code translate="no">group_size</code> dan <code translate="no">strict_group_size</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Group search results</span>
 
 res = client.search(
@@ -383,13 +371,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above:</p>
+<p>Dalam contoh di atas:</p>
 <ul>
-<li><p><code translate="no">group_size</code>: Specifies the desired number of entities to return per group. For instance, setting <code translate="no">group_size=2</code> means each group (or each <code translate="no">docId</code>) should ideally return two of the most similar paragraphs (or <strong>chunks</strong>). If <code translate="no">group_size</code> is not set, the system defaults to returning one result per group.</p></li>
-<li><p><code translate="no">strict_group_size</code>: This boolean parameter controls whether the system should strictly enforce the count set by <code translate="no">group_size</code>. When <code translate="no">strict_group_size=True</code>, the system will attempt to include the exact number of entities specified by <code translate="no">group_size</code> in each group (e.g., two paragraphs), unless there isn’t enough data in that group. By default (<code translate="no">strict_group_size=False</code>), the system prioritizes meeting the number of groups specified by the <code translate="no">limit</code> parameter, rather than ensuring each group contains <code translate="no">group_size</code> entities. This approach is generally more efficient in cases where data distribution is uneven.</p></li>
+<li><p><code translate="no">group_size</code>: Menentukan jumlah entitas yang diinginkan untuk dikembalikan per grup. Misalnya, pengaturan <code translate="no">group_size=2</code> berarti setiap grup (atau setiap <code translate="no">docId</code>) idealnya mengembalikan dua paragraf (atau <strong>potongan</strong>) yang paling mirip. Jika <code translate="no">group_size</code> tidak disetel, sistem secara default mengembalikan satu hasil per grup.</p></li>
+<li><p><code translate="no">strict_group_size</code>: Parameter boolean ini mengontrol apakah sistem harus secara ketat memberlakukan hitungan yang ditetapkan oleh <code translate="no">group_size</code>. Ketika <code translate="no">strict_group_size=True</code>, sistem akan berusaha memasukkan jumlah entitas yang tepat yang ditentukan oleh <code translate="no">group_size</code> dalam setiap grup (misalnya, dua paragraf), kecuali jika tidak ada cukup data dalam grup tersebut. Secara default (<code translate="no">strict_group_size=False</code>), sistem akan memprioritaskan untuk memenuhi jumlah grup yang ditentukan oleh parameter <code translate="no">limit</code>, daripada memastikan setiap grup berisi entitas <code translate="no">group_size</code>. Pendekatan ini umumnya lebih efisien dalam kasus-kasus di mana distribusi data tidak merata.</p></li>
 </ul>
-<p>For additional parameter details, refer to <a href="https://docs.zilliz.com/reference/python/python/Vector-search">search</a>.</p>
-<h2 id="Considerations" class="common-anchor-header">Considerations<button data-href="#Considerations" class="anchor-icon" translate="no">
+<p>Untuk detail parameter tambahan, lihat <a href="https://docs.zilliz.com/reference/python/python/Vector-search">pencarian</a>.</p>
+<h2 id="Considerations" class="common-anchor-header">Pertimbangan<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -405,8 +393,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Indexing</strong>: This grouping feature works only for collections that are indexed with these index types: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
-<li><p><strong>Number of groups</strong>: The <code translate="no">limit</code> parameter controls the number of groups from which search results are returned, rather than the specific number of entities within each group. Setting an appropriate <code translate="no">limit</code> helps control search diversity and query performance. Reducing <code translate="no">limit</code> can reduce computation costs if data is densely distributed or performance is a concern.</p></li>
-<li><p><strong>Entities per group</strong>: The <code translate="no">group_size</code> parameter controls the number of entities returned per group. Adjusting <code translate="no">group_size</code> based on your use case can increase the richness of search results. However, if data is unevenly distributed, some groups may return fewer entities than specified by <code translate="no">group_size</code>, particularly in limited data scenarios.</p></li>
-<li><p><strong>Strict group size</strong>: When <code translate="no">strict_group_size=True</code>, the system will attempt to return the specified number of entities (<code translate="no">group_size</code>) for each group, unless there isn’t enough data in that group. This setting ensures consistent entity counts per group but may lead to performance degradation with uneven data distribution or limited resources. If strict entity counts aren’t required, setting <code translate="no">strict_group_size=False</code> can improve query speed.</p></li>
+<li><p><strong>Pengindeksan</strong>: Fitur pengelompokan ini hanya berfungsi untuk koleksi yang diindeks dengan jenis indeks berikut: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>HNSW_PQ</strong>, <strong>HNSW_PRQ</strong>, <strong>HNSW_SQ</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
+<li><p><strong>Jumlah kelompok</strong>: Parameter <code translate="no">limit</code> mengontrol jumlah grup dari mana hasil pencarian dikembalikan, dan bukan jumlah spesifik entitas dalam setiap grup. Menetapkan <code translate="no">limit</code> yang sesuai membantu mengontrol keragaman pencarian dan kinerja kueri. Mengurangi <code translate="no">limit</code> dapat mengurangi biaya komputasi jika data terdistribusi secara padat atau kinerja menjadi perhatian.</p></li>
+<li><p><strong>Entitas per grup</strong>: Parameter <code translate="no">group_size</code> mengontrol jumlah entitas yang dikembalikan per grup. Menyesuaikan <code translate="no">group_size</code> berdasarkan kasus penggunaan Anda dapat meningkatkan kekayaan hasil pencarian. Namun, jika data tidak terdistribusi secara merata, beberapa grup mungkin mengembalikan lebih sedikit entitas daripada yang ditentukan oleh <code translate="no">group_size</code>, terutama dalam skenario data terbatas.</p></li>
+<li><p><strong>Ukuran kelompok yang ketat</strong>: Ketika <code translate="no">strict_group_size=True</code>, sistem akan berusaha mengembalikan jumlah entitas yang ditentukan (<code translate="no">group_size</code>) untuk setiap grup, kecuali jika tidak ada cukup data dalam grup tersebut. Pengaturan ini memastikan jumlah entitas yang konsisten per grup, tetapi dapat menyebabkan penurunan kinerja dengan distribusi data yang tidak merata atau sumber daya yang terbatas. Jika jumlah entitas yang ketat tidak diperlukan, pengaturan <code translate="no">strict_group_size=False</code> dapat meningkatkan kecepatan kueri.</p></li>
 </ul>

@@ -1,12 +1,12 @@
 ---
 id: shared-bucket-backup-and-restore.md
 summary: >-
-  This topic details the process of backing up a collection from one Milvus
-  instance and restoring it to another while using a shared bucket for object
-  storage
-title: Migrate Between Instances in One Bucket (Different Root Paths)
+  Topik ini merinci proses mencadangkan koleksi dari satu instans Milvus dan
+  mengembalikannya ke instans lain saat menggunakan bucket bersama untuk
+  penyimpanan objek
+title: Migrasi Antar Instance dalam Satu Bucket (Jalur Root yang Berbeda)
 ---
-<h1 id="Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="common-anchor-header">Migrate Between Instances in One Bucket (Different Root Paths)<button data-href="#Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="anchor-icon" translate="no">
+<h1 id="Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="common-anchor-header">Migrasi Antar Instance dalam Satu Bucket (Jalur Root yang Berbeda)<button data-href="#Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,10 +21,8 @@ title: Migrate Between Instances in One Bucket (Different Root Paths)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic details the process of backing up a collection from one
-Milvus instance and restoring it to another while using a shared bucket
-for object storage, with distinct root paths for each instance.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Topik ini merinci proses mencadangkan koleksi dari satu instans Milvus dan mengembalikannya ke instans lain saat menggunakan bucket bersama untuk penyimpanan objek, dengan jalur root yang berbeda untuk setiap instans.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,25 +37,17 @@ for object storage, with distinct root paths for each instance.</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The diagram below illustrates the backup and restore process using a
-shared bucket.</p>
+    </button></h2><p>Diagram di bawah ini mengilustrasikan proses pencadangan dan pemulihan menggunakan shared bucket.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/shared-bucket-backup-and-restore.png" alt="shared-bucket-backup-and-restore.png" class="doc-image" id="shared-bucket-backup-and-restore.png" />
-    <span>shared-bucket-backup-and-restore.png</span>
-  </span>
-</p>
-<p>Assume we have Milvus instances, <code translate="no">milvus_A</code> and <code translate="no">milvus_B</code>, both utilizing
-the default MinIO storage engine for object storage. These instances
-share the same bucket, <code translate="no">bucket_A</code>, but store their data in different root
-paths: <code translate="no">files_A</code> for <code translate="no">milvus_A</code> and files_B for <code translate="no">milvus_B</code>. In this example,
-our goal is to complete the following tasks:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/shared-bucket-backup-and-restore.png" alt="shared-bucket-backup-and-restore.png" class="doc-image" id="shared-bucket-backup-and-restore.png" />
+   </span> <span class="img-wrapper"> <span>shared-bucket-backup-and-restore.png</span> </span></p>
+<p>Asumsikan kita memiliki instance Milvus, <code translate="no">milvus_A</code> dan <code translate="no">milvus_B</code>, keduanya menggunakan mesin penyimpanan MinIO default untuk penyimpanan objek. Kedua contoh ini berbagi bucket yang sama, <code translate="no">bucket_A</code>, tetapi menyimpan datanya di jalur root yang berbeda: <code translate="no">files_A</code> untuk <code translate="no">milvus_A</code> dan files_B untuk <code translate="no">milvus_B</code>. Pada contoh ini, tujuan kita adalah menyelesaikan tugas-tugas berikut:</p>
 <ol>
-<li><p>Create a backup (my_backup) for collection coll that is stored under the
-<code translate="no">files_A</code> path for <code translate="no">milvus_A</code>.</p></li>
-<li><p>Restore from the backup and store it to files_B for <code translate="no">milvus_B</code>.</p></li>
+<li><p>Membuat cadangan (my_backup) untuk koleksi coll yang disimpan di bawah jalur<code translate="no">files_A</code> untuk <code translate="no">milvus_A</code>.</p></li>
+<li><p>Pulihkan dari cadangan dan simpan ke files_B untuk <code translate="no">milvus_B</code>.</p></li>
 </ol>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,12 +63,10 @@ our goal is to complete the following tasks:</p>
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Ensure the <strong>milvus-backup</strong> tool is installed.</p></li>
-<li><p>Familiarize yourself with configuring Milvus object storage settings.
-For details, refer to <a href="https://milvus.io/docs/deploy_s3.md">Object
-Storage</a>.</p></li>
+<li><p>Pastikan alat <strong>milvus-backup</strong> sudah terpasang.</p></li>
+<li><p>Biasakan diri Anda dengan mengonfigurasi pengaturan penyimpanan objek Milvus. Untuk detailnya, lihat <a href="https://milvus.io/docs/deploy_s3.md">Penyimpanan Objek</a>.</p></li>
 </ul>
-<h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">Back up a collection from <code translate="no">milvus_A</code><button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
+<h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">Mencadangkan koleksi dari <code translate="no">milvus_A</code><button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,24 +81,22 @@ Storage</a>.</p></li>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Step 1: Prepare configuration</h3><p>Go to the directory of the milvus-backup project and create a directory
-named configs:</p>
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Langkah 1: Siapkan konfigurasi</h3><p>Masuk ke direktori proyek milvus-backup dan buat direktori bernama configs:</p>
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
-<p>Download the backup config file backup.yaml:</p>
+<p>Unduh file konfigurasi pencadangan backup.yaml:</p>
 <pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>The file structure looks like this:</p>
+<p>Struktur file terlihat seperti ini:</p>
 <pre><code translate="no">├── configs
 │   └── backup.yaml
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Step 2: Edit configuration file</h3><p>Modify the backup.yaml file to set the appropriate configurations for
-<code translate="no">milvus_A</code>:</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Langkah 2: Edit file konfigurasi</h3><p>Ubah file backup.yaml untuk mengatur konfigurasi yang sesuai untuk<code translate="no">milvus_A</code>:</p>
 <ul>
-<li><p>Connection configs</p>
+<li><p>Konfigurasi koneksi</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
 <span class="hljs-attr">milvus:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_A</span>
@@ -123,11 +109,10 @@ cd configs
   <span class="hljs-attr">password:</span> <span class="hljs-string">&quot;Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">milvus.address</code>: IP address or hostname of the <code translate="no">milvus_A</code> server.</p></li>
-<li><p><code translate="no">milvus.port</code>: TCP port on which Milvus server is listening (default
-19530).</p></li>
+<li><p><code translate="no">milvus.address</code>: Alamat IP atau nama host server <code translate="no">milvus_A</code>.</p></li>
+<li><p><code translate="no">milvus.port</code>: Port TCP yang didengarkan server Milvus (default 19530).</p></li>
 </ul></li>
-<li><p>Storage configs (MinIO/S3 settings)</p>
+<li><p>Konfigurasi penyimpanan (pengaturan MinIO/S3)</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
@@ -152,21 +137,17 @@ cd configs
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">minio.bucketName</code>: Name of the bucket used for <code translate="no">milvus_A</code> storage. In this
-example, set to <code translate="no">bucket_A</code>.</p></li>
-<li><p><code translate="no">minio.rootPath</code>: Root path within the bucket where data from <code translate="no">milvus_A</code> is stored. In this example, set to <code translate="no">files_A</code>.</p></li>
-<li><p><code translate="no">minio.backupBucketName</code>: Name of the bucket used for storage. In this
-example, <code translate="no">milvus_A</code> and <code translate="no">milvus_B</code> share the bucket. Therefore, set to
-<code translate="no">bucket_A</code>.</p></li>
-<li><p><code translate="no">minio.backupRootPath</code>: Root path within the bucket designated for storing backup files in <code translate="no">milvus_B</code>. In this example, use a different path from <code translate="no">milvus_A</code>. Therefore, set to <code translate="no">backup</code>.</p></li>
+<li><p><code translate="no">minio.bucketName</code>: Nama bucket yang digunakan untuk penyimpanan <code translate="no">milvus_A</code>. Dalam contoh ini, diatur ke <code translate="no">bucket_A</code>.</p></li>
+<li><p><code translate="no">minio.rootPath</code>: Jalur root di dalam bucket tempat data dari <code translate="no">milvus_A</code> disimpan. Dalam contoh ini, setel ke <code translate="no">files_A</code>.</p></li>
+<li><p><code translate="no">minio.backupBucketName</code>: Nama bucket yang digunakan untuk penyimpanan. Pada contoh ini, <code translate="no">milvus_A</code> dan <code translate="no">milvus_B</code> berbagi bucket. Oleh karena itu, setel ke<code translate="no">bucket_A</code>.</p></li>
+<li><p><code translate="no">minio.backupRootPath</code>: Jalur root di dalam bucket yang ditetapkan untuk menyimpan file cadangan di <code translate="no">milvus_B</code>. Dalam contoh ini, gunakan jalur yang berbeda dari <code translate="no">milvus_A</code>. Oleh karena itu, atur ke <code translate="no">backup</code>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">Step 3: Create backup</h3><p>Once <code translate="no">backup.yaml</code> is saved, create a backup named my_backup:</p>
+<h3 id="Step-3-Create-backup" class="common-anchor-header">Langkah 3: Buat cadangan</h3><p>Setelah <code translate="no">backup.yaml</code> disimpan, buat cadangan bernama my_backup:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
 <button class="copy-code-btn"></button></code></pre>
-<p>This command creates the backup <code translate="no">bucket_A/backup/my_backup</code> in object
-storage for the collection <code translate="no">coll</code>.</p>
-<h2 id="Restore-the-backup-to-milvusB" class="common-anchor-header">Restore the backup to <code translate="no">milvus_B</code><button data-href="#Restore-the-backup-to-milvusB" class="anchor-icon" translate="no">
+<p>Perintah ini akan membuat cadangan <code translate="no">bucket_A/backup/my_backup</code> di penyimpanan objek untuk koleksi <code translate="no">coll</code>.</p>
+<h2 id="Restore-the-backup-to-milvusB" class="common-anchor-header">Kembalikan cadangan ke <code translate="no">milvus_B</code><button data-href="#Restore-the-backup-to-milvusB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,9 +162,8 @@ storage for the collection <code translate="no">coll</code>.</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Step 1: Configure restoration settings</h3><p>Repeat step
-2 to modify configs for restoration to <code translate="no">milvus_B</code>, ensuring <code translate="no">minio.bucketName</code> is set to <code translate="no">bucket_A</code> and <code translate="no">minio.rootPath</code> to <code translate="no">files_B</code> to distinguish storage locations between the two instances.</p>
-<p>Here’s a sample configuration:</p>
+    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Langkah 1: Konfigurasikan pengaturan pemulihan</h3><p>Ulangi langkah 2 untuk memodifikasi konfigurasi untuk pemulihan ke <code translate="no">milvus_B</code>, memastikan <code translate="no">minio.bucketName</code> diatur ke <code translate="no">bucket_A</code> dan <code translate="no">minio.rootPath</code> ke <code translate="no">files_B</code> untuk membedakan lokasi penyimpanan di antara dua instans.</p>
+<p>Berikut ini contoh konfigurasinya:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
 <span class="hljs-attr">milvus:</span>
@@ -213,7 +193,7 @@ storage for the collection <code translate="no">coll</code>.</p>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files_B&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Restore-backup" class="common-anchor-header">Step 2: Restore backup</h3><p>Restore the backup to <code translate="no">milvus_B</code>:</p>
+<h3 id="Step-2-Restore-backup" class="common-anchor-header">Langkah 2: Pulihkan cadangan</h3><p>Pulihkan cadangan ke <code translate="no">milvus_B</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
 <button class="copy-code-btn"></button></code></pre>
-<p>This command restores the backup into a new collection named <code translate="no">coll_bak</code> in <code translate="no">milvus_B</code>, with data stored in <code translate="no">bucket_A/files_B/insert_log/[ID of new collection]</code>.</p>
+<p>Perintah ini mengembalikan cadangan ke dalam koleksi baru bernama <code translate="no">coll_bak</code> di <code translate="no">milvus_B</code>, dengan data yang disimpan di <code translate="no">bucket_A/files_B/insert_log/[ID of new collection]</code>.</p>
