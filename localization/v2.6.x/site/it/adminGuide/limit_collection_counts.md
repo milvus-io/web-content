@@ -1,8 +1,8 @@
 ---
 id: limit_collection_counts.md
-title: Set Limits on Collection Number
+title: Stabilire limiti al numero di raccolte
 ---
-<h1 id="Limit-Collection-Counts" class="common-anchor-header">Limit Collection Counts<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
+<h1 id="Limit-Collection-Counts" class="common-anchor-header">Limitare il numero di raccolte<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,18 +17,18 @@ title: Set Limits on Collection Number
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A Milvus instance allows up to 65,536 collections. However, too many collections may result in performance issues. Therefore, it is recommended to limit the number of collections created in a Milvus instance.</p>
-<p>This guide provides instructions on how to set limits on the number of collections in a Milvus instance.</p>
-<p>Configuration varies with the way you install the Milvus instance.</p>
+    </button></h1><p>Un'istanza Milvus consente fino a 65.536 raccolte. Tuttavia, un numero eccessivo di raccolte può causare problemi di prestazioni. Pertanto, si consiglia di limitare il numero di raccolte create in un'istanza Milvus.</p>
+<p>Questa guida fornisce istruzioni su come impostare i limiti al numero di raccolte in un'istanza Milvus.</p>
+<p>La configurazione varia a seconda del modo in cui si installa l'istanza Milvus.</p>
 <ul>
-<li><p>For Milvus instances installed using Helm Charts</p>
-<p>Add the configuration to the <code translate="no">values.yaml</code> file under the <code translate="no">config</code> section. For details, refer to <a href="/docs/configure-helm.md">Configure Milvus with Helm Charts</a>.</p></li>
-<li><p>For Milvus instances installed using Docker Compose</p>
-<p>Add the configuration to the <code translate="no">milvus.yaml</code> file you have used to start the Milvus instance. For details, refer to <a href="/docs/configure-docker.md">Configure Milvus with Docker Compose</a>.</p></li>
-<li><p>For Milvus instances installed using Operator</p>
-<p>Add the configuration to the <code translate="no">spec.components</code> section of the <code translate="no">Milvus</code> custom resource. For details, refer to <a href="/docs/configure_operator.md">Configure Milvus with Operator</a>.</p></li>
+<li><p>Per le istanze Milvus installate utilizzando Helm Charts</p>
+<p>Aggiungere la configurazione al file <code translate="no">values.yaml</code> nella sezione <code translate="no">config</code>. Per i dettagli, consultare <a href="/docs/it/configure-helm.md">Configurazione di Milvus con Helm Charts</a>.</p></li>
+<li><p>Per le istanze Milvus installate usando Docker Compose</p>
+<p>Aggiungere la configurazione al file <code translate="no">milvus.yaml</code> utilizzato per avviare l'istanza Milvus. Per i dettagli, fate riferimento a <a href="/docs/it/configure-docker.md">Configurare Milvus con Docker Compose</a>.</p></li>
+<li><p>Per le istanze Milvus installate con Operator</p>
+<p>Aggiungere la configurazione alla sezione <code translate="no">spec.components</code> della risorsa personalizzata <code translate="no">Milvus</code>. Per i dettagli, vedere <a href="/docs/it/configure_operator.md">Configurazione di Milvus con Operator</a>.</p></li>
 </ul>
-<h2 id="Configuration-options" class="common-anchor-header">Configuration options<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+<h2 id="Configuration-options" class="common-anchor-header">Opzioni di configurazione<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,8 +46,8 @@ title: Set Limits on Collection Number
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
     <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">65536</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">maxGeneralCapacity</code> parameter sets the maximum number of collections that the current Milvus instance can hold. The default value is <code translate="no">65536</code>.</p>
-<h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Calculating the number of collections<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
+<p>Il parametro <code translate="no">maxGeneralCapacity</code> imposta il numero massimo di collezioni che l'istanza Milvus corrente può contenere. Il valore predefinito è <code translate="no">65536</code>.</p>
+<h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Calcolo del numero di collezioni<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,11 +62,11 @@ title: Set Limits on Collection Number
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In a collection, you can set up multiple shards and partitions. Shards are logical units used to distribute data write operations among multiple data nodes. Partitions are logical units used to improve data retrieval efficiency by loading only a subset of collection data. When calculating the number of collections in the current Milvus instance, you also need to count the shards and partitions.</p>
-<p>For example, let’s assume you have already created <strong>100</strong> collections, with <strong>2</strong> shards and <strong>4</strong> partitions in <strong>60</strong> of them and with <strong>1</strong> shard and <strong>12</strong> partitions in the rest <strong>40</strong> collections. The total number of collection units (calculated as <code translate="no">shards × partitions</code>) can be determined as follows:</p>
+    </button></h2><p>In una raccolta è possibile impostare più shard e partizioni. Gli shard sono unità logiche utilizzate per distribuire le operazioni di scrittura dei dati tra più nodi di dati. Le partizioni sono unità logiche utilizzate per migliorare l'efficienza del recupero dei dati caricando solo un sottoinsieme dei dati della raccolta. Quando si calcola il numero di raccolte nell'istanza Milvus corrente, è necessario contare anche gli shard e le partizioni.</p>
+<p>Ad esempio, supponiamo di aver già creato <strong>100</strong> raccolte, con <strong>2</strong> shard e <strong>4</strong> partizioni in <strong>60</strong> di esse e con <strong>1</strong> shard e <strong>12</strong> partizioni nelle altre <strong>40</strong> raccolte. Il numero totale di unità di raccolta (calcolato come <code translate="no">shards × partitions</code>) può essere determinato come segue:</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, the calculated total of 960 collection units represents the current usage. The <code translate="no">maxGeneralCapacity</code> defines the maximum number of collection units an instance can support, which is set to <code translate="no">65536</code> by default. This means the instance can accommodate up to 65,536 collection units. If the total number exceeds this limit, the system will display the following error message:</p>
+<p>In questo esempio, il totale calcolato di 960 unità di raccolta rappresenta l'utilizzo attuale. Il parametro <code translate="no">maxGeneralCapacity</code> definisce il numero massimo di unità di raccolta che un'istanza può supportare, che per impostazione predefinita è <code translate="no">65536</code>. Ciò significa che l'istanza può ospitare fino a 65.536 unità di raccolta. Se il numero totale supera questo limite, il sistema visualizza il seguente messaggio di errore:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>To avoid this error, you can either reduce the number of shards or partitions in existing or new collections, delete some collections, or increase the <code translate="no">maxGeneralCapacity</code> value.</p>
+<p>Per evitare questo errore, è possibile ridurre il numero di frammenti o partizioni nelle raccolte esistenti o nuove, eliminare alcune raccolte o aumentare il valore <code translate="no">maxGeneralCapacity</code>.</p>

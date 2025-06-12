@@ -43,7 +43,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>I classificatori di decadimento consentono di aumentare o penalizzare i documenti in base a valori numerici (come i timestamp) rispetto a un punto di riferimento. Per il ranking basato sul tempo, questo significa che i documenti più recenti possono ricevere punteggi più alti di quelli più vecchi, anche quando la loro rilevanza semantica è simile.</p>
+    </button></h2><p>I classificatori di decadimento consentono di aumentare o penalizzare i documenti in base a valori numerici (come i timestamp) rispetto a un punto di riferimento. Per i ranking basati sul tempo, ciò significa che i documenti più recenti possono ricevere punteggi più alti di quelli più vecchi, anche quando la loro rilevanza semantica è simile.</p>
 <p>Milvus supporta tre tipi di classificatori di decadimento:</p>
 <ul>
 <li><p><strong>Gaussiano</strong> (<code translate="no">gauss</code>): Una curva a campana che fornisce un decadimento dolce e graduale.</p></li>
@@ -151,7 +151,7 @@ bm25_function = Function(
 )
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
-<p>Per maggiori dettagli sull'uso delle funzioni di incorporamento di Milvus, consultare <a href="/docs/it/embedding-function-overview.md">Panoramica delle funzioni di incorporamento</a>.</p>
+<p>Per maggiori dettagli sull'uso delle funzioni di incorporamento di Milvus, consultare la sezione <a href="/docs/it/embedding-function-overview.md">Panoramica delle funzioni di incorporamento</a>.</p>
 <h2 id="Step-3-Configure-index-parameters" class="common-anchor-header">Passo 3: Configurare i parametri dell'indice<button data-href="#Step-3-Configure-index-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

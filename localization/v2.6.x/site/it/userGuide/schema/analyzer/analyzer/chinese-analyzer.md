@@ -1,11 +1,11 @@
 ---
 id: chinese-analyzer.md
-title: Chinese
+title: Cinese
 summary: >-
-  The chinese analyzer is designed specifically to handle Chinese text,
-  providing effective segmentation and tokenization.
+  L'analizzatore cinese è stato progettato specificamente per gestire il testo
+  cinese, fornendo una segmentazione e una tokenizzazione efficaci.
 ---
-<h1 id="Chinese" class="common-anchor-header">Chinese<button data-href="#Chinese" class="anchor-icon" translate="no">
+<h1 id="Chinese" class="common-anchor-header">Cinese<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,20 +20,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">chinese</code> analyzer is designed specifically to handle Chinese text, providing effective segmentation and tokenization.</p>
-<h3 id="Definition" class="common-anchor-header">Definition</h3><p>The <code translate="no">chinese</code> analyzer consists of:</p>
+    </button></h1><p>L'analizzatore <code translate="no">chinese</code> è stato progettato specificamente per gestire il testo cinese, fornendo una segmentazione e una tokenizzazione efficaci.</p>
+<h3 id="Definition" class="common-anchor-header">Definizione</h3><p>L'analizzatore <code translate="no">chinese</code> è composto da:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">jieba</code> tokenizer to segment Chinese text into tokens based on vocabulary and context. For more information, refer to <a href="/docs/jieba-tokenizer.md">Jieba</a>.</p></li>
-<li><p><strong>Filter</strong>: Uses the <code translate="no">cnalphanumonly</code> filter to remove tokens that contain any non-Chinese characters. For more information, refer to <a href="/docs/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><strong>Tokenizzatore</strong>: Utilizza il tokenizer di <code translate="no">jieba</code> per segmentare il testo cinese in token basati sul vocabolario e sul contesto. Per ulteriori informazioni, consultare <a href="/docs/it/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>Filtro</strong>: Utilizza il filtro di <code translate="no">cnalphanumonly</code> per rimuovere i token che contengono caratteri non cinesi. Per ulteriori informazioni, consultare <a href="/docs/it/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
-<p>The functionality of the <code translate="no">chinese</code> analyzer is equivalent to the following custom analyzer configuration:</p>
+<p>La funzionalità dell'analizzatore <code translate="no">chinese</code> è equivalente alla seguente configurazione di analizzatore personalizzato:</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;cnalphanumonly&quot;</span>]
@@ -59,14 +54,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuration" class="common-anchor-header">Configuration</h3><p>To apply the <code translate="no">chinese</code> analyzer to a field, simply set <code translate="no">type</code> to <code translate="no">chinese</code> in <code translate="no">analyzer_params</code>.</p>
+<h3 id="Configuration" class="common-anchor-header">Configurazione</h3><p>Per applicare l'analizzatore <code translate="no">chinese</code> a un campo, è sufficiente impostare <code translate="no">type</code> su <code translate="no">chinese</code> in <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>,
 }
@@ -86,9 +76,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>The <code translate="no">chinese</code> analyzer does not accept any optional parameters.</p>
+<p>L'analizzatore <code translate="no">chinese</code> non accetta alcun parametro opzionale.</p>
 </div>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,14 +93,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before applying the analyzer configuration to your collection schema, verify its behavior using the <code translate="no">run_analyzer</code> method.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Analyzer configuration</h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+    </button></h2><p>Prima di applicare la configurazione dell'analizzatore allo schema della collezione, verificarne il comportamento con il metodo <code translate="no">run_analyzer</code>.</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">Configurazione dell'analizzatore</h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>,
 }
@@ -124,13 +109,8 @@ analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span clas
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verification using <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verifica con <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -169,5 +149,5 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Expected output</h3><pre><code translate="no" class="language-python">Chinese analyzer output: [<span class="hljs-string">&#x27;Milvus&#x27;</span>, <span class="hljs-string">&#x27;是&#x27;</span>, <span class="hljs-string">&#x27;一个&#x27;</span>, <span class="hljs-string">&#x27;高性&#x27;</span>, <span class="hljs-string">&#x27;性能&#x27;</span>, <span class="hljs-string">&#x27;高性能&#x27;</span>, <span class="hljs-string">&#x27;可&#x27;</span>, <span class="hljs-string">&#x27;扩展&#x27;</span>, <span class="hljs-string">&#x27;的&#x27;</span>, <span class="hljs-string">&#x27;向量&#x27;</span>, <span class="hljs-string">&#x27;数据&#x27;</span>, <span class="hljs-string">&#x27;据库&#x27;</span>, <span class="hljs-string">&#x27;数据库&#x27;</span>]
+<h3 id="Expected-output" class="common-anchor-header">Risultato atteso</h3><pre><code translate="no" class="language-python">Chinese analyzer output: [<span class="hljs-string">&#x27;Milvus&#x27;</span>, <span class="hljs-string">&#x27;是&#x27;</span>, <span class="hljs-string">&#x27;一个&#x27;</span>, <span class="hljs-string">&#x27;高性&#x27;</span>, <span class="hljs-string">&#x27;性能&#x27;</span>, <span class="hljs-string">&#x27;高性能&#x27;</span>, <span class="hljs-string">&#x27;可&#x27;</span>, <span class="hljs-string">&#x27;扩展&#x27;</span>, <span class="hljs-string">&#x27;的&#x27;</span>, <span class="hljs-string">&#x27;向量&#x27;</span>, <span class="hljs-string">&#x27;数据&#x27;</span>, <span class="hljs-string">&#x27;据库&#x27;</span>, <span class="hljs-string">&#x27;数据库&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>

@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Prima di configurare Milvus con la funzione TEI, è necessario disporre di un servizio TEI funzionante. Milvus supporta due approcci per la distribuzione TEI:</p>
 <h3 id="Standard-deployment-external" class="common-anchor-header">Distribuzione standard (esterna)</h3><p>È possibile distribuire TEI come servizio autonomo utilizzando i metodi ufficiali di Hugging Face. Questo approccio offre la massima flessibilità e controllo sul servizio TEI.</p>
 <p>Per istruzioni dettagliate sulla distribuzione di TEI utilizzando Docker o altri metodi, consultare la <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">documentazione ufficiale di Hugging Face Text Embeddings Inference</a>.</p>
-<p>Dopo la distribuzione, prendere nota dell'endpoint del servizio TEI (ad esempio, <code translate="no">http://localhost:8080</code>), poiché ne avrete bisogno quando <a href="/docs/it/hugging-face-tei.md#Use-embedding-function-">userete la funzione TEI in Milvus</a>.</p>
+<p>Dopo la distribuzione, prendere nota dell'endpoint del servizio TEI (ad esempio, <code translate="no">http://localhost:8080</code>), in quanto sarà necessario quando si <a href="/docs/it/hugging-face-tei.md#Use-embedding-function-">utilizzerà la funzione TEI in Milvus</a>.</p>
 <h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Distribuzione di Milvus Helm Chart (integrato)</h3><p>Per gli ambienti Kubernetes, Milvus offre un'opzione di distribuzione integrata attraverso il grafico Helm. Questo semplifica il processo di distribuzione e configurazione di TEI insieme a Milvus.</p>
 <p>Per abilitare TEI nella distribuzione di Milvus Helm:</p>
 <ol>

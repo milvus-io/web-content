@@ -105,7 +105,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (±2 km): La distanza alla quale la rilevanza scende al valore di decadimento: i ristoranti che distano esattamente 2 chilometri hanno il punteggio di rilevanza dimezzato (0,5).</p></li>
 <li><p><code translate="no">decay</code> (0.5): Il punteggio alla distanza di scala: questo parametro controlla essenzialmente la velocità con cui i punteggi diminuiscono con la distanza.</p></li>
 </ul>
-<p>Come si può vedere dalla curva, i ristoranti oltre i 2 km continuano a diminuire la loro rilevanza, ma non raggiungono mai lo zero. Anche i ristoranti a 4-5 chilometri di distanza mantengono un minimo di rilevanza, consentendo a ristoranti eccellenti ma distanti di apparire comunque nei risultati (anche se classificati più in basso).</p>
+<p>Come si può vedere dalla curva, i ristoranti oltre i 2 km continuano a diminuire la loro rilevanza, ma non raggiungono mai lo zero. Anche i ristoranti a 4-5 chilometri di distanza mantengono un minimo di rilevanza, consentendo a ristoranti eccellenti ma distanti di apparire ancora nei risultati (anche se classificati più in basso).</p>
 <p>Questo comportamento imita il modo in cui le persone pensano naturalmente alla rilevanza della distanza: i posti vicini sono preferiti, ma siamo disposti a viaggiare più lontano per avere opzioni eccezionali.</p>
 <h2 id="Formula" class="common-anchor-header">La formula<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -212,4 +212,4 @@ hybrid_results = milvus_client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sulle operazioni di ricerca ibride, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida multivettoriale</a>.</p>
+<p>Per ulteriori informazioni sulle operazioni di ricerca ibrida, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida multivettoriale</a>.</p>

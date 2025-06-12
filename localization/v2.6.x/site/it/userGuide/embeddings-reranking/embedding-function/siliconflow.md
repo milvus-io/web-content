@@ -73,7 +73,7 @@ beta: Milvus 2.6.x
      <td><p>Pro/BAAI/bge-m3</p></td>
      <td><p>1,024</p></td>
      <td><p>8,192</p></td>
-     <td><p>Un modello di incorporazione del testo multifunzionale, multilingue e multigranulare. Supporta tre funzioni di reperimento comuni: reperimento denso, reperimento multivettoriale e reperimento rado. Il modello può elaborare input in oltre 100 lingue ed è in grado di gestire diverse granularità.</p></td>
+     <td><p>Un modello di incorporazione del testo multifunzionale, multilingue e multigranulare. Supporta tre funzioni di reperimento comuni: reperimento denso, reperimento multivettore e reperimento rado. Il modello può elaborare input in oltre 100 lingue ed è in grado di gestire diverse granularità.</p></td>
    </tr>
 </table>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurazione delle credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">

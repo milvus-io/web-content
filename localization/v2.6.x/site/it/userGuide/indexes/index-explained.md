@@ -49,7 +49,7 @@ summary: >-
      <th><p>Tipi di indice applicabili</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>VETTORE_FIAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
+     <td><ul><li><p>VETTORE_FLAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
      <td><ul><li><p>PIATTO</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
    </tr>
    <tr>
@@ -58,7 +58,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>VETTORE_FLAT SPARSE</p></td>
-     <td><p>INDICE SPARSO_INVERTITO</p></td>
+     <td><p>INDICE SPARSE_INVERTITO</p></td>
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
@@ -185,7 +185,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>I dati grezzi sono memorizzabili</p></td>
-     <td><p>HNSW, FIV + raffinamento</p></td>
+     <td><p>HNSW, IVF + raffinamento</p></td>
      <td><p>Utilizzare HNSW per un basso<code translate="no">k</code>/alto richiamo.</p></td>
    </tr>
    <tr>
@@ -282,7 +282,7 @@ summary: >-
 <td><p>515,0 MB</p></td>
 </tr>
 </table></p></li>
-<li><p><strong>Calcolare l'overhead di raffinamento.</strong></p>
+<li><p><strong>Calcolare l'overhead di raffinazione.</strong></p>
 <p>Le varianti FIV sono spesso abbinate a un raffinatore per riordinare i candidati. Per una ricerca che recupera i primi 10 risultati con un tasso di espansione di 5, il refinement overhead può essere stimato come segue:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
@@ -312,6 +312,6 @@ summary: >-
 </ol>
 <h3 id="Other-considerations" class="common-anchor-header">Altre considerazioni</h3><p>Mentre la FIV e gli indici a grafo ottimizzano l'uso della memoria attraverso la quantizzazione, i file mappati in memoria (mmap) e DiskANN affrontano scenari in cui gli insiemi di dati superano la memoria ad accesso casuale (RAM) disponibile.</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN è un indice basato sul grafo Vamana che collega i punti di dati per una navigazione efficiente durante la ricerca, applicando al contempo PQ per ridurre le dimensioni dei vettori e consentire un rapido calcolo approssimativo della distanza tra i vettori.</p>
-<p>Il grafo di Vamana è memorizzato su disco, il che consente a DiskANN di gestire insiemi di dati di grandi dimensioni che altrimenti sarebbero troppo grandi per essere memorizzati. Ciò è particolarmente utile per gli insiemi di dati da un miliardo di punti.</p>
+<p>Il grafo di Vamana è memorizzato su disco, il che consente a DiskANN di gestire insiemi di dati di grandi dimensioni che altrimenti sarebbero troppo grandi per essere memorizzati. Ciò è particolarmente utile per insiemi di dati da un miliardo di punti.</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">File mappati in memoria (mmap)</h4><p>La mappatura della memoria (Mmap) consente l'accesso diretto alla memoria a file di grandi dimensioni su disco, permettendo a Milvus di memorizzare indici e dati sia nella memoria che sul disco rigido. Questo approccio consente di ottimizzare le operazioni di I/O riducendo l'overhead delle chiamate di I/O in base alla frequenza di accesso, ampliando così la capacità di archiviazione delle raccolte senza incidere significativamente sulle prestazioni di ricerca.</p>
 <p>In particolare, è possibile configurare Milvus per mappare in memoria i dati grezzi di alcuni campi invece di caricarli completamente in memoria. In questo modo, è possibile ottenere l'accesso diretto alla memoria dei campi senza preoccuparsi dei problemi di memoria ed estendere la capacità della raccolta.</p>

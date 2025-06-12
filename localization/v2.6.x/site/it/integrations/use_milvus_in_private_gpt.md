@@ -1,11 +1,11 @@
 ---
 id: use_milvus_in_private_gpt.md
 summary: >-
-  In this tutorial, we will show you how to use Milvus as the backend vector
-  database for PrivateGPT.
-title: Use Milvus in PrivateGPT
+  In questa guida vi mostreremo come utilizzare Milvus come database vettoriale
+  di backend per PrivateGPT.
+title: Utilizzare Milvus in PrivateGPT
 ---
-<h1 id="Use-Milvus-in-PrivateGPT" class="common-anchor-header">Use Milvus in PrivateGPT<button data-href="#Use-Milvus-in-PrivateGPT" class="anchor-icon" translate="no">
+<h1 id="Use-Milvus-in-PrivateGPT" class="common-anchor-header">Utilizzare Milvus in PrivateGPT<button data-href="#Use-Milvus-in-PrivateGPT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,12 +20,12 @@ title: Use Milvus in PrivateGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://privategpt.dev/">PrivateGPT</a> is a production-ready AI project that enables users to ask questions about their documents using Large Language Models without an internet connection while ensuring 100% privacy. PrivateGPT offers an API divided into high-level and low-level blocks. It also provides a Gradio UI client and useful tools like bulk model download scripts and ingestion scripts. Conceptually, PrivateGPT wraps a RAG pipeline and exposes its primitives, being ready to use and providing a full implementation of the API and RAG pipeline.</p>
-<p>In this tutorial, we will show you how to use Milvus as the backend vector database for PrivateGPT.</p>
+    </button></h1><p><a href="https://privategpt.dev/">PrivateGPT</a> è un progetto di intelligenza artificiale pronto per la produzione che consente agli utenti di porre domande sui loro documenti utilizzando modelli linguistici di grandi dimensioni senza una connessione a Internet e garantendo il 100% di privacy. PrivateGPT offre un'API suddivisa in blocchi di alto livello e di basso livello. Fornisce inoltre un client UI Gradio e strumenti utili come gli script per il download massivo dei modelli e gli script di ingestione. Concettualmente, PrivateGPT avvolge una pipeline RAG ed espone le sue primitive, essendo pronto all'uso e fornendo un'implementazione completa dell'API e della pipeline RAG.</p>
+<p>In questo tutorial vi mostreremo come utilizzare Milvus come database vettoriale di backend per PrivateGPT.</p>
 <div class="alert note">
-<p>This tutorial is mainly referred to the <a href="https://docs.privategpt.dev/installation/getting-started/installation">PrivateGPT</a> official installation guide. If you find that this tutorial has outdated parts, you can prioritize following the official guide and create an issue to us.</p>
+<p>Questo tutorial fa principalmente riferimento alla guida ufficiale all'installazione di <a href="https://docs.privategpt.dev/installation/getting-started/installation">PrivateGPT</a>. Se vi accorgete che questo tutorial ha parti obsolete, potete seguire prioritariamente la guida ufficiale e creare un problema con noi.</p>
 </div>
-<h2 id="Base-requirements-to-run-PrivateGPT" class="common-anchor-header">Base requirements to run PrivateGPT<button data-href="#Base-requirements-to-run-PrivateGPT" class="anchor-icon" translate="no">
+<h2 id="Base-requirements-to-run-PrivateGPT" class="common-anchor-header">Requisiti di base per l'esecuzione di PrivateGPT<button data-href="#Base-requirements-to-run-PrivateGPT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,20 +40,19 @@ title: Use Milvus in PrivateGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Clone-the-PrivateGPT-Repository" class="common-anchor-header">1. Clone the PrivateGPT Repository</h3><p>Clone the repository and navigate to it:</p>
+    </button></h2><h3 id="1-Clone-the-PrivateGPT-Repository" class="common-anchor-header">1. Clonare il repository PrivateGPT</h3><p>Clonate il repository e navigate al suo interno:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zylon-ai/private-gpt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> private-gpt</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Install-Poetry" class="common-anchor-header">2. Install Poetry</h3><p>Install <a href="https://python-poetry.org/docs/#installing-with-the-official-installer">Poetry</a> for dependency management: Follow the instructions on the official Poetry website to install it.</p>
-<h3 id="3-Optional-Install-make" class="common-anchor-header">3. (Optional) Install make</h3><p>To run various scripts, you need to install make.</p>
-<p>macOS (Using Homebrew):</p>
+<h3 id="2-Install-Poetry" class="common-anchor-header">2. Installare Poetry</h3><p>Installare <a href="https://python-poetry.org/docs/#installing-with-the-official-installer">Poetry</a> per la gestione delle dipendenze: Seguire le istruzioni sul sito ufficiale di Poetry per installarlo.</p>
+<h3 id="3-Optional-Install-make" class="common-anchor-header">3. (Opzionale) Installare make</h3><p>Per eseguire vari script, è necessario installare make.</p>
+<p>macOS (usando Homebrew):</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">brew install make</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Windows
-(Using Chocolatey):</p>
+<p>Windows (usando Chocolatey):</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">choco install make</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Install-Available-Modules" class="common-anchor-header">Install Available Modules<button data-href="#Install-Available-Modules" class="anchor-icon" translate="no">
+<h2 id="Install-Available-Modules" class="common-anchor-header">Installare i moduli disponibili<button data-href="#Install-Available-Modules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,18 +67,18 @@ title: Use Milvus in PrivateGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PrivateGPT allows customization of the setup for some modules e.g. LLM, Embeddings, Vector Stores, UI.</p>
-<p>In this tutorial, we will use the following modules:</p>
+    </button></h2><p>PrivateGPT consente di personalizzare la configurazione di alcuni moduli, come LLM, Embeddings, Vector Stores, UI.</p>
+<p>In questo tutorial utilizzeremo i seguenti moduli:</p>
 <ul>
 <li><strong>LLM</strong>: Ollama</li>
 <li><strong>Embeddings</strong>: Ollama</li>
-<li><strong>Vector Stores</strong>: Milvus</li>
+<li><strong>Archivi vettoriali</strong>: Milvus</li>
 <li><strong>UI</strong>: Gradio</li>
 </ul>
-<p>Run the following command to use poetry to install the required module dependencies:</p>
+<p>Eseguire il seguente comando per utilizzare la poesia per installare le dipendenze del modulo richiesto:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">poetry install --extras <span class="hljs-string">&quot;llms-ollama embeddings-ollama vector-stores-milvus ui&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Start-Ollama-service" class="common-anchor-header">Start Ollama service<button data-href="#Start-Ollama-service" class="anchor-icon" translate="no">
+<h2 id="Start-Ollama-service" class="common-anchor-header">Avviare il servizio Ollama<button data-href="#Start-Ollama-service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,19 +93,19 @@ title: Use Milvus in PrivateGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Go to <a href="https://ollama.com/">ollama.ai</a> and follow the instructions to install Ollama on your machine.</p>
-<p>After the installation, make sure the Ollama desktop app is closed.</p>
-<p>Now, start Ollama service (it will start a local inference server, serving both the LLM and the Embeddings):</p>
+    </button></h2><p>Andare su <a href="https://ollama.com/">ollama.ai</a> e seguire le istruzioni per installare Ollama sul proprio computer.</p>
+<p>Dopo l'installazione, assicurarsi che l'applicazione desktop Ollama sia chiusa.</p>
+<p>A questo punto, avviare il servizio Ollama (avvierà un server di inferenza locale, che servirà sia l'LLM che gli Embeddings):</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ollama serve</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Install the models to be used, the default <code translate="no">settings-ollama.yaml</code> is configured to user <code translate="no">llama3.1</code> 8b LLM (~4GB) and <code translate="no">nomic-embed-text</code> Embeddings (~275MB)</p>
-<p>By default, PrivateGPT will automatically pull models as needed. This behavior can be changed by modifying the <code translate="no">ollama.autopull_models</code> property.</p>
-<p>In any case, if you want to manually pull models, run the following commands:</p>
+<p>Installare i modelli da utilizzare; <code translate="no">settings-ollama.yaml</code> è configurato per l'utente <code translate="no">llama3.1</code> 8b LLM (~4GB) e <code translate="no">nomic-embed-text</code> Embeddings (~275MB).</p>
+<p>Per impostazione predefinita, PrivateGPT preleva automaticamente i modelli quando necessario. Questo comportamento può essere cambiato modificando la proprietà <code translate="no">ollama.autopull_models</code>.</p>
+<p>In ogni caso, se si desidera prelevare manualmente i modelli, eseguire i seguenti comandi:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ollama pull llama3.1</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">ollama pull nomic-embed-text</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You can optionally change to your favorite models in the <code translate="no">settings-ollama.yaml</code> file and pull them manually.</p>
-<h2 id="Change-Milvus-Settings" class="common-anchor-header">Change Milvus Settings<button data-href="#Change-Milvus-Settings" class="anchor-icon" translate="no">
+<p>È possibile modificare i modelli preferiti nel file <code translate="no">settings-ollama.yaml</code> ed estrarli manualmente.</p>
+<h2 id="Change-Milvus-Settings" class="common-anchor-header">Modifica delle impostazioni di Milvus<button data-href="#Change-Milvus-Settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,29 +120,28 @@ title: Use Milvus in PrivateGPT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the file <code translate="no">settings-ollama.yaml</code>, set the vectorstore to milvus:</p>
+    </button></h2><p>Nel file <code translate="no">settings-ollama.yaml</code>, impostare il vectorstore su milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">vectorstore:</span>
   <span class="hljs-attr">database:</span> <span class="hljs-string">milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You can also add some cumstom Milvus configuration to specify your settings.
-Like this:</p>
+<p>È anche possibile aggiungere una configurazione cumstom di Milvus per specificare le proprie impostazioni, ad esempio:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">milvus:</span>
   <span class="hljs-attr">uri:</span> <span class="hljs-string">http://localhost:19530</span>
   <span class="hljs-attr">collection_name:</span> <span class="hljs-string">my_collection</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The available configuration options are:</p>
+<p>Le opzioni di configurazione disponibili sono:</p>
 <table>
 <thead>
-<tr><th>Field Option</th><th>Description</th></tr>
+<tr><th>Campo Opzione</th><th>Descrizione</th></tr>
 </thead>
 <tbody>
-<tr><td>uri</td><td>Default is set to “local_data/private_gpt/milvus/milvus_local.db” as a local file; you can also set up a more performant Milvus server on docker or k8s e.g.http://localhost:19530, as your uri; To use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, adjust the uri and token to <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</td></tr>
-<tr><td>token</td><td>Pair with Milvus server on docker or k8s or zilliz cloud api key.</td></tr>
-<tr><td>collection_name</td><td>The name of the collection, set to default “milvus_db”.</td></tr>
-<tr><td>overwrite</td><td>Overwrite the data in collection if it existed, set to default as True.</td></tr>
+<tr><td>uri</td><td>L'impostazione predefinita è "local_data/private_gpt/milvus/milvus_local.db" come file locale; è anche possibile impostare un server Milvus più performante su docker o k8s, ad esempio http://localhost:19530, come uri; per utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, adattare l'uri e il token a <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e API key</a> in Zilliz Cloud.</td></tr>
+<tr><td>token</td><td>Coppia con il server Milvus su docker o k8s o con la chiave API di Zilliz Cloud.</td></tr>
+<tr><td>nome_raccolta</td><td>Il nome della raccolta, impostato come predefinito "milvus_db".</td></tr>
+<tr><td>sovrascrivere</td><td>Sovrascrive i dati della raccolta, se già esistenti; l'impostazione predefinita è True.</td></tr>
 </tbody>
 </table>
-<h2 id="Start-PrivateGPT" class="common-anchor-header">Start PrivateGPT<button data-href="#Start-PrivateGPT" class="anchor-icon" translate="no">
+<h2 id="Start-PrivateGPT" class="common-anchor-header">Avviare PrivateGPT<button data-href="#Start-PrivateGPT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,15 +156,15 @@ Like this:</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once all settings are done, you can run PrivateGPT with a Gradio UI.</p>
+    </button></h2><p>Una volta effettuate tutte le impostazioni, è possibile avviare PrivateGPT con l'interfaccia utente di Gradio.</p>
 <pre><code translate="no" class="language-shell">PGPT_PROFILES=ollama make run
 <button class="copy-code-btn"></button></code></pre>
-<p>The UI will be available at <code translate="no">http://0.0.0.0:8001</code>.</p>
+<p>L'interfaccia utente sarà disponibile all'indirizzo <code translate="no">http://0.0.0.0:8001</code>.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/private_gpt_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>You can play around with the UI and ask questions about your documents.</p>
-<p>For further details, please refer to the <a href="https://docs.privategpt.dev/">PrivateGPT</a> official documentation.</p>
+<p>È possibile giocare con l'interfaccia utente e porre domande sui propri documenti.</p>
+<p>Per ulteriori dettagli, consultare la documentazione ufficiale di <a href="https://docs.privategpt.dev/">PrivateGPT</a>.</p>
