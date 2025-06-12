@@ -2,7 +2,7 @@
 id: vllm-ranker.md
 title: Classificador vLLMCompatible with Milvus 2.6.x
 summary: >-
-  O vLLM Ranker utiliza a estrutura de inferência vLLM para melhorar a
+  O vLLM Ranker aproveita a estrutura de inferência vLLM para melhorar a
   relevância da pesquisa através da classificação semântica. Representa uma
   abordagem avançada à ordenação de resultados de pesquisa que vai além da
   tradicional semelhança de vectores.
@@ -69,7 +69,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Uma resposta bem-sucedida deve retornar os documentos classificados por pontuações de relevância, semelhante à resposta da API de classificação do OpenAI.</p>
-<p>Consulte a <a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">documentação do servidor compatível com vLLM OpenAI</a> para obter mais argumentos e opções do servidor.</p></li>
+<p>Consulte a <a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">documentação</a> do <a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">servidor compatível com vLLM OpenAI</a> para obter mais argumentos e opções do servidor.</p></li>
 </ul>
 <h2 id="Create-a-vLLM-ranker-function" class="common-anchor-header">Criar uma função do vLLM ranker<button data-href="#Create-a-vLLM-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"

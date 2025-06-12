@@ -24,7 +24,7 @@ summary: >-
       </svg>
     </button></h1><p>A indexação Bitmap é uma técnica de indexação eficiente concebida para melhorar o desempenho das consultas em campos escalares de baixa cardinalidade. A cardinalidade refere-se ao número de valores distintos num campo. Os campos com menos elementos distintos são considerados de baixa cardinalidade.</p>
 <p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices bitmap têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando lidam com campos de baixa cardinalidade.</p>
-<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O termo Bitmap combina duas palavras: <strong>Bit</strong> e <strong>Mapa</strong>. Um bit representa a unidade mais pequena de dados num computador, que só pode conter um valor de <strong>0</strong> ou <strong>1</strong>. Um mapa, neste contexto, refere-se ao processo de transformação e organização de dados de acordo com o valor que deve ser atribuído a 0 e 1.</p>
+    </button></h2><p>O termo Bitmap combina duas palavras: <strong>Bit</strong> e <strong>Mapa</strong>. Um bit representa a unidade de dados mais pequena num computador, que só pode conter um valor de <strong>0</strong> ou <strong>1</strong>. Um mapa, neste contexto, refere-se ao processo de transformação e organização de dados de acordo com o valor que deve ser atribuído a 0 e 1.</p>
 <p>Um índice bitmap é constituído por dois componentes principais: bitmaps e chaves. As chaves representam os valores únicos no campo indexado. Para cada valor único, existe um mapa de bits correspondente. O comprimento destes mapas de bits é igual ao número de registos na coleção. Cada bit no mapa de bits corresponde a um registo na coleção. Se o valor do campo indexado num registo corresponder à chave, o bit correspondente é definido como <strong>1</strong>; caso contrário, é definido como <strong>0</strong>.</p>
 <p>Considere uma coleção de documentos com os campos <strong>Categoria</strong> e <strong>Público</strong>. Queremos obter documentos que se enquadrem na categoria <strong>Técnico</strong> e que estejam abertos ao <strong>Público</strong>. Neste caso, as chaves para os nossos índices de mapa de bits são <strong>Técnico</strong> e <strong>Público</strong>.</p>
 <p>
@@ -114,7 +114,7 @@ client.create_index(​
 <li><p>Os índices de bitmap não suportam os seguintes tipos de dados.</p>
 <ul>
 <li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Os tipos de vírgula flutuante não são compatíveis com a natureza binária dos índices de bitmap.</p></li>
-<li><p><code translate="no">JSON</code>: Os tipos de dados JSON têm uma estrutura complexa que não pode ser representada de forma eficiente utilizando índices de bitmap.</p></li>
+<li><p><code translate="no">JSON</code>: Os tipos de dados JSON têm uma estrutura complexa que não pode ser representada de forma eficiente utilizando índices bitmap.</p></li>
 </ul></li>
 <li><p>Os índices bitmap não são adequados para campos com elevada cardinalidade (ou seja, campos com um grande número de valores distintos).</p>
 <ul>

@@ -139,7 +139,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">inverted_index_algo</code></p></td>
      <td><p>O algoritmo utilizado para construir e consultar o índice. Determina como o índice processa as consultas.</p></td>
      <td><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição), <code translate="no">"DAAT_WAND"</code>, <code translate="no">"TAAT_NAIVE"</code></p></td>
-     <td><p>Utilize <code translate="no">"DAAT_MAXSCORE"</code> para cenários com valores k elevados ou consultas com muitos termos, que podem beneficiar da omissão de documentos não competitivos. 
+     <td><p>Utilize <code translate="no">"DAAT_MAXSCORE"</code> para cenários com valores k elevados ou consultas com muitos termos, que podem beneficiar do facto de ignorar documentos não competitivos. 
  Escolha <code translate="no">"DAAT_WAND"</code> para consultas com valores k pequenos ou consultas curtas para aproveitar a omissão mais eficiente.</p>
 <p>Utilize <code translate="no">"TAAT_NAIVE"</code> se for necessário um ajuste dinâmico às alterações da coleção (por exemplo, avgdl).</p></td>
    </tr>

@@ -1,17 +1,18 @@
 ---
 id: contextual_retrieval_with_milvus.md
 summary: >-
-  Contextal Retrieval is an advanced retrieval method proposed by Anthropic to
-  address the issue of semantic isolation of chunks, which arises in current
-  Retrieval-Augmented Generation (RAG) solutions. In the current practical RAG
-  paradigm, documents are divided into several chunks, and a vector database is
-  used to search for the query, retrieving the most relevant chunks. An LLM then
-  responds to the query using these retrieved chunks. However, this chunking
-  process can result in the loss of contextual information, making it difficult
-  for the retriever to determine relevance.
-title: Contextual Retrieval with Milvus
+  A recuperação contextual é um método avançado de recuperação proposto pela
+  Anthropic para resolver o problema do isolamento semântico dos fragmentos, que
+  surge nas actuais soluções de geração aumentada de recuperação (RAG). No atual
+  paradigma prático de RAG, os documentos são divididos em várias partes e é
+  utilizada uma base de dados vetorial para procurar a consulta, recuperando as
+  partes mais relevantes. Em seguida, um LLM responde à consulta usando esses
+  pedaços recuperados. No entanto, este processo de fragmentação pode resultar
+  na perda de informação contextual, dificultando a determinação da relevância
+  pelo recuperador.
+title: Recuperação contextual com Milvus
 ---
-<h1 id="Contextual-Retrieval-with-Milvus" class="common-anchor-header">Contextual Retrieval with Milvus<button data-href="#Contextual-Retrieval-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Contextual-Retrieval-with-Milvus" class="common-anchor-header">Recuperação contextual com Milvus<button data-href="#Contextual-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,19 +30,16 @@ title: Contextual Retrieval with Milvus
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/contextual_retrieval_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/contextual_retrieval_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
-    <span>image</span>
-  </span>
-
-<a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrieval</a> is an advanced retrieval method proposed by Anthropic to address the issue of semantic isolation of chunks, which arises in current Retrieval-Augmented Generation (RAG) solutions. In the current practical RAG paradigm, documents are divided into several chunks, and a vector database is used to search for the query, retrieving the most relevant chunks. An LLM then responds to the query using these retrieved chunks. However, this chunking process can result in the loss of contextual information, making it difficult for the retriever to determine relevance.</p>
-<p>Contextual Retrieval improves traditional retrieval systems by adding relevant context to each document chunk before embedding or indexing, boosting accuracy and reducing retrieval errors. Combined with techniques like hybrid retrieval and reranking, it enhances Retrieval-Augmented Generation (RAG) systems, especially for large knowledge bases. Additionally, it offers a cost-effective solution when paired with prompt caching, significantly reducing latency and operational costs, with contextualized chunks costing approximately $1.02 per million document tokens. This makes it a scalable and efficient approach for handling large knowledge bases. Anthropic’s solution shows two insightful aspects:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/pics/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
+   </span><a href="https://www.anthropic.com/news/contextual-retrieval">A recuperação contextual</a> <span class="img-wrapper"> <span>de imagens</span> </span>é um método avançado de recuperação proposto pela Anthropic para resolver o problema do isolamento semântico dos fragmentos, que surge nas soluções actuais de geração aumentada de recuperação (RAG). No atual paradigma prático de RAG, os documentos são divididos em várias partes e é utilizada uma base de dados vetorial para procurar a consulta, recuperando as partes mais relevantes. Em seguida, um LLM responde à consulta usando esses pedaços recuperados. No entanto, este processo de recuperação de fragmentos pode resultar na perda de informação contextual, tornando difícil para o recuperador determinar a relevância.</p>
+<p>A recuperação contextual melhora os sistemas de recuperação tradicionais, adicionando contexto relevante a cada fragmento de documento antes da incorporação ou indexação, aumentando a precisão e reduzindo os erros de recuperação. Combinada com técnicas como a recuperação híbrida e o reranking, melhora os sistemas RAG (Retrieval-Augmented Generation), especialmente para grandes bases de conhecimento. Além disso, oferece uma solução económica quando combinada com o caching imediato, reduzindo significativamente a latência e os custos operacionais, com os pedaços contextualizados a custarem aproximadamente 1,02 dólares por milhão de tokens de documentos. Isso o torna uma abordagem escalável e eficiente para lidar com grandes bases de conhecimento. A solução da Anthropic mostra dois aspectos perspicazes:</p>
 <ul>
-<li><code translate="no">Document Enhancement</code>: Query rewriting is a crucial technique in modern information retrieval, often using auxiliary information to make the query more informative. Similarly, to achieve better performance in RAG, preprocessing documents with an LLM (e.g., cleaning the data source, complementing lost information, summarizing, etc.) before indexing can significantly improve the chances of retrieving relevant documents. In other words, this preprocessing step helps bring the documents closer to the queries in terms of relevance.</li>
-<li><code translate="no">Low-Cost Processing by Caching Long Context</code>: One common concern when using LLMs to process documents is the cost. The KVCache is a popular solution that allows reuse of intermediate results for the same preceding context. While most hosted LLM vendors make this feature transparent to user, Anthropic gives users control over the caching process. When a cache hit occurs, most computations can be saved (this is common when the long context remains the same, but the instruction for each query changes). For more details, click <a href="https://www.anthropic.com/news/prompt-caching">here</a>.</li>
+<li><code translate="no">Document Enhancement</code>: A reescrita de consultas é uma técnica crucial na recuperação de informação moderna, utilizando frequentemente informações auxiliares para tornar a consulta mais informativa. Do mesmo modo, para obter um melhor desempenho em RAG, o pré-processamento de documentos com um LLM (por exemplo, limpar a fonte de dados, complementar a informação perdida, resumir, etc.) antes da indexação pode melhorar significativamente as hipóteses de recuperar documentos relevantes. Por outras palavras, este passo de pré-processamento ajuda a aproximar os documentos das consultas em termos de relevância.</li>
+<li><code translate="no">Low-Cost Processing by Caching Long Context</code>: Uma preocupação comum ao usar LLMs para processar documentos é o custo. A KVCache é uma solução popular que permite a reutilização de resultados intermédios para o mesmo contexto anterior. Enquanto a maioria dos fornecedores de LLMs hospedados torna esta caraterística transparente para o utilizador, o Anthropic dá-lhe controlo sobre o processo de cache. Quando ocorre um acerto no cache, a maioria dos cálculos pode ser salva (isso é comum quando o contexto longo permanece o mesmo, mas a instrução para cada consulta muda). Para obter mais detalhes, clique <a href="https://www.anthropic.com/news/prompt-caching">aqui</a>.</li>
 </ul>
-<p>In this notebook, we will demonstrate how to perform contextual retrieval using Milvus with an LLM, combining dense-sparse hybrid retrieval and a reranker to create a progressively more powerful retrieval system. The data and experimental setup are based on the <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">contextual retrieval</a>.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>Neste caderno, vamos demonstrar como efetuar a recuperação contextual usando o Milvus com um LLM, combinando a recuperação híbrida densa e esparsa e um reranker para criar um sistema de recuperação progressivamente mais poderoso. Os dados e a configuração experimental são baseados na <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">recuperação contextual</a>.</p>
+<h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,15 +54,15 @@ title: Contextual Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Install Dependencies</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Instalar dependências</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install tqdm</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install anthropic</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
-<p>You will need API keys from Cohere, Voyage, and Anthropic to run the code.</p>
-<h2 id="Download-Data" class="common-anchor-header">Download Data<button data-href="#Download-Data" class="anchor-icon" translate="no">
+<p>Necessitará de chaves de API do Cohere, Voyage e Anthropic para executar o código.</p>
+<h2 id="Download-Data" class="common-anchor-header">Descarregar dados<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,11 +77,11 @@ title: Contextual Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following command will download the example data used in original Anthropic <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demo</a>.</p>
+    </button></h2><p>O comando a seguir fará o download dos dados de exemplo usados na <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demonstração</a> original do Anthropic.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-Retriever" class="common-anchor-header">Define Retriever<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
+<h2 id="Define-Retriever" class="common-anchor-header">Definir o Recuperador<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,7 +96,7 @@ title: Contextual Retrieval with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This class is designed to be flexible, allowing you to choose between different retrieval modes based on your needs. By specifying options in the initialization method, you can determine whether to use contextual retrieval, hybrid search (combining dense and sparse retrieval methods), or a reranker for enhanced results.</p>
+    </button></h2><p>Esta classe foi concebida para ser flexível, permitindo-lhe escolher entre diferentes modos de recuperação com base nas suas necessidades. Especificando opções no método de inicialização, pode determinar se pretende utilizar a recuperação contextual, a pesquisa híbrida (combinando métodos de recuperação densos e esparsos) ou um reranker para obter resultados melhorados.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CohereRerankFunction
@@ -442,7 +440,7 @@ title: Contextual Retrieval with Milvus
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Total Score: <span class="hljs-subst">{results[<span class="hljs-string">&#x27;average_score&#x27;</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Total queries: <span class="hljs-subst">{results[<span class="hljs-string">&#x27;total_queries&#x27;</span>]}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Now you need to initialize these models for the following experiments. You can easily switch to other models using the PyMilvus model library.</p>
+<p>Agora é necessário inicializar estes modelos para as experiências seguintes. Pode facilmente mudar para outros modelos usando a biblioteca de modelos PyMilvus.</p>
 <pre><code translate="no" class="language-python">dense_ef = VoyageEmbeddingFunction(api_key=<span class="hljs-string">&quot;your-voyage-api-key&quot;</span>, model_name=<span class="hljs-string">&quot;voyage-2&quot;</span>)
 sparse_ef = BGEM3EmbeddingFunction()
 cohere_rf = CohereRerankFunction(api_key=<span class="hljs-string">&quot;your-cohere-api-key&quot;</span>)
@@ -453,7 +451,7 @@ cohere_rf = CohereRerankFunction(api_key=<span class="hljs-string">&quot;your-co
 <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:
     dataset = json.load(f)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Experiment-I-Standard-Retrieval" class="common-anchor-header">Experiment I: Standard Retrieval<button data-href="#Experiment-I-Standard-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Experiment-I-Standard-Retrieval" class="common-anchor-header">Experiência I: Recuperação padrão<button data-href="#Experiment-I-Standard-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -468,7 +466,7 @@ cohere_rf = CohereRerankFunction(api_key=<span class="hljs-string">&quot;your-co
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Standard retrieval uses only dense embeddings to retrieve related documents. In this experiment, we will use Pass@5 to reproduce the results from the original repo.</p>
+    </button></h2><p>A recuperação padrão usa apenas embeddings densos para recuperar documentos relacionados. Nesta experiência, utilizaremos Pass@5 para reproduzir os resultados do repositório original.</p>
 <pre><code translate="no" class="language-python">standard_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;standard.db&quot;</span>, collection_name=<span class="hljs-string">&quot;standard&quot;</span>, dense_embedding_function=dense_ef
 )
@@ -495,7 +493,7 @@ Pass@5: 80.92%
 Total Score: 0.8091877880184332
 Total queries: 248
 </code></pre>
-<h2 id="Experiment-II-Hybrid-Retrieval" class="common-anchor-header">Experiment II: Hybrid Retrieval<button data-href="#Experiment-II-Hybrid-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Experiment-II-Hybrid-Retrieval" class="common-anchor-header">Experiência II: Recuperação híbrida<button data-href="#Experiment-II-Hybrid-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -510,7 +508,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that we’ve obtained promising results with the Voyage embedding, we will move on to performing hybrid retrieval using the BGE-M3 model which generates powerful sparse embeddings. The results from dense retrieval and sparse retrieval will be combined using the Reciprocal Rank Fusion (RRF) method to produce a hybrid result.</p>
+    </button></h2><p>Agora que obtivemos resultados promissores com o embedding Voyage, vamos passar à recuperação híbrida utilizando o modelo BGE-M3 que gera embeddings esparsos poderosos. Os resultados da recuperação densa e da recuperação esparsa serão combinados utilizando o método Reciprocal Rank Fusion (RRF) para produzir um resultado híbrido.</p>
 <pre><code translate="no" class="language-python">hybrid_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;hybrid.db&quot;</span>,
     collection_name=<span class="hljs-string">&quot;hybrid&quot;</span>,
@@ -541,7 +539,7 @@ Pass@5: 84.69%
 Total Score: 0.8469182027649771
 Total queries: 248
 </code></pre>
-<h2 id="Experiment-III-Contextual-Retrieval" class="common-anchor-header">Experiment III: Contextual Retrieval<button data-href="#Experiment-III-Contextual-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Experiment-III-Contextual-Retrieval" class="common-anchor-header">Experiência III: Recuperação contextual<button data-href="#Experiment-III-Contextual-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -556,7 +554,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Hybrid retrieval shows an improvement, but the results can be further enhanced by applying a contextual retrieval method. To achieve this, we will use Anthropic’s language model to prepend the context from whole document for each chunk.</p>
+    </button></h2><p>A recuperação híbrida mostra uma melhoria, mas os resultados podem ser melhorados aplicando um método de recuperação contextual. Para o efeito, utilizaremos o modelo de linguagem do Anthropic para acrescentar o contexto de todo o documento para cada fragmento.</p>
 <pre><code translate="no" class="language-python">anthropic_client = anthropic.Anthropic(
     api_key=<span class="hljs-string">&quot;your-anthropic-api-key&quot;</span>,
 )
@@ -594,7 +592,7 @@ Pass@5: 87.14%
 Total Score: 0.8713517665130568
 Total queries: 248 
 </code></pre>
-<h2 id="Experiment-IV-Contextual-Retrieval-with-Reranker" class="common-anchor-header">Experiment IV: Contextual Retrieval with Reranker<button data-href="#Experiment-IV-Contextual-Retrieval-with-Reranker" class="anchor-icon" translate="no">
+<h2 id="Experiment-IV-Contextual-Retrieval-with-Reranker" class="common-anchor-header">Experiência IV: Recuperação contextual com Reranker<button data-href="#Experiment-IV-Contextual-Retrieval-with-Reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -609,7 +607,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The results can be further improved by adding a Cohere reranker. Without initializing a new retriever with reranker separately, we can simply configure the existing retriever to use the reranker for enhanced performance.</p>
+    </button></h2><p>Os resultados podem ser melhorados adicionando um reranker Cohere. Sem inicializar um novo recuperador com o reranker separadamente, podemos simplesmente configurar o recuperador existente para utilizar o reranker para melhorar o desempenho.</p>
 <pre><code translate="no" class="language-python">contextual_retriever.use_reranker = <span class="hljs-literal">True</span>
 contextual_retriever.rerank_function = cohere_rf
 <button class="copy-code-btn"></button></code></pre>
@@ -620,4 +618,4 @@ Pass@5: 90.91%
 Total Score: 0.9090821812596005
 Total queries: 248
 </code></pre>
-<p>We have demonstrated several methods to improve retrieval performance. With more ad-hoc design tailored to the scenario, contextual retrieval shows significant potential to preprocess documents at a low cost, leading to a better RAG system.</p>
+<p>Demonstrámos vários métodos para melhorar o desempenho da recuperação. Com uma conceção mais ad-hoc adaptada ao cenário, a recuperação contextual mostra um potencial significativo para pré-processar documentos a baixo custo, conduzindo a um melhor sistema RAG.</p>

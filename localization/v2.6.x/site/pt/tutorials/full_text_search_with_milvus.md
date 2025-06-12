@@ -1,15 +1,18 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Full-text search is a traditional method for retrieving documents by matching
-  specific keywords or phrases in the text. It ranks results based on relevance
-  scores calculated from factors like term frequency. While semantic search is
-  better at understanding meaning and context, full-text search excels at
-  precise keyword matching, making it a useful complement to semantic search. A
-  common approach to constructing a Retrieval-Augmented Generation (RAG)
-  pipeline involves retrieving documents through both semantic search and
-  full-text search, followed by a reranking process to refine the results.
-title: Full Text Search with Milvus
+  A pesquisa de texto integral é um método tradicional de recuperação de
+  documentos através da correspondência de palavras-chave ou frases específicas
+  no texto. Classifica os resultados com base em pontuações de relevância
+  calculadas a partir de factores como a frequência de termos. Enquanto a
+  pesquisa semântica é melhor na compreensão do significado e do contexto, a
+  pesquisa de texto integral é excelente na correspondência exacta de
+  palavras-chave, o que a torna um complemento útil da pesquisa semântica. Uma
+  abordagem comum para a construção de um pipeline RAG (Retrieval-Augmented
+  Generation) envolve a recuperação de documentos através da pesquisa semântica
+  e da pesquisa em texto integral, seguida de um processo de reclassificação
+  para refinar os resultados.
+title: Pesquisa de texto integral com Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -17,7 +20,7 @@ title: Full Text Search with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Full Text Search with Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Pesquisa de texto integral com Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -32,21 +35,21 @@ title: Full Text Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Full-text search</a> is a traditional method for retrieving documents by matching specific keywords or phrases in the text. It ranks results based on relevance scores calculated from factors like term frequency. While semantic search is better at understanding meaning and context, full-text search excels at precise keyword matching, making it a useful complement to semantic search. A common approach to constructing a Retrieval-Augmented Generation (RAG) pipeline involves retrieving documents through both semantic search and full-text search, followed by a reranking process to refine the results.</p>
+    </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">A pesquisa de texto integral</a> é um método tradicional de recuperação de documentos através da correspondência de palavras-chave ou frases específicas no texto. Classifica os resultados com base em pontuações de relevância calculadas a partir de factores como a frequência dos termos. Enquanto a pesquisa semântica é melhor na compreensão do significado e do contexto, a pesquisa de texto integral é excelente na correspondência exacta de palavras-chave, o que a torna um complemento útil da pesquisa semântica. Uma abordagem comum para a construção de um pipeline RAG (Retrieval-Augmented Generation) envolve a recuperação de documentos através da pesquisa semântica e da pesquisa em texto integral, seguida de um processo de reclassificação para refinar os resultados.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>This approach converts text into sparse vectors for BM25 scoring. To ingest documents, users can simply input raw text without computing the sparse vector manually. Milvus will automatically generate and store the sparse vectors. To search documents, users just need to specify the text search query. Milvus will compute BM25 scores internally and return ranked results.</p>
-<p>Milvus also supports hybrid retrieval by combining full-text search with dense vector based semantic search. It usually improves search quality and delivers better results to users by balancing keyword matching and semantic understanding.</p>
+<p>Esta abordagem converte o texto em vectores esparsos para pontuação BM25. Para ingerir documentos, os utilizadores podem simplesmente introduzir texto em bruto sem calcular o vetor esparso manualmente. O Milvus gera e armazena automaticamente os vectores esparsos. Para pesquisar documentos, os utilizadores só precisam de especificar a consulta de pesquisa de texto. O Milvus calcula internamente as pontuações BM25 e apresenta resultados ordenados.</p>
+<p>O Milvus também suporta a recuperação híbrida, combinando a pesquisa de texto integral com a pesquisa semântica baseada em vectores densos. Normalmente, melhora a qualidade da pesquisa e fornece melhores resultados aos utilizadores, equilibrando a correspondência de palavras-chave e a compreensão semântica.</p>
 <div class="alert note">
 <ul>
-<li>Full-text search is currently available in Milvus Standalone, Milvus Distributed, and Zilliz Cloud, though not yet supported in Milvus Lite (which has this feature planned for future implementation). Reach out support@zilliz.com for more information.</li>
+<li>A pesquisa de texto integral está atualmente disponível no Milvus Standalone, Milvus Distributed e Zilliz Cloud, embora ainda não seja suportada no Milvus Lite (que tem esta funcionalidade planeada para implementação futura). Para mais informações, contactar support@zilliz.com.</li>
 </ul>
 </div>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,17 +64,17 @@ title: Full Text Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-PyMilvus" class="common-anchor-header">Install PyMilvus</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus -U</span>
+    </button></h2><h3 id="Install-PyMilvus" class="common-anchor-header">Instalar o PyMilvus</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus -U</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
-<h3 id="Set-OpenAI-API-Key" class="common-anchor-header">Set OpenAI API Key</h3><p>We will use the models from OpenAI for creating vector embeddings and generation response. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<h3 id="Set-OpenAI-API-Key" class="common-anchor-header">Definir a chave da API OpenAI</h3><p>Utilizaremos os modelos do OpenAI para criar embeddings vectoriais e gerar resposta. Você deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave da API</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Setup-and-Configuration" class="common-anchor-header">Setup and Configuration<button data-href="#Setup-and-Configuration" class="anchor-icon" translate="no">
+<h2 id="Setup-and-Configuration" class="common-anchor-header">Instalação e configuração<button data-href="#Setup-and-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,7 +89,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Import the necessary libraries</p>
+    </button></h2><p>Importar as bibliotecas necessárias</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
@@ -99,20 +102,20 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
     RRFRanker,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>We’ll use the MilvusClient to establish a connection to the Milvus server.</p>
+<p>Vamos utilizar o MilvusClient para estabelecer uma ligação ao servidor Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 collection_name = <span class="hljs-string">&quot;full_text_demo&quot;</span>
 client = MilvusClient(uri=uri)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For the connection_args:</p>
+<p>Para os connection_args:</p>
 <ul>
-<li>You can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server address, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Nesta configuração, utilize o endereço do servidor, por exemplo,<code translate="no">http://localhost:19530</code>, como o seu <code translate="no">uri</code>.</li>
+<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Ponto de extremidade público e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
 </div>
-<h2 id="Collection-Setup-for-Full-Text-Search" class="common-anchor-header">Collection Setup for Full-Text Search<button data-href="#Collection-Setup-for-Full-Text-Search" class="anchor-icon" translate="no">
+<h2 id="Collection-Setup-for-Full-Text-Search" class="common-anchor-header">Configuração da coleção para pesquisa de texto integral<button data-href="#Collection-Setup-for-Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,14 +130,14 @@ client = MilvusClient(uri=uri)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setting up a collection for full-text search requires several configuration steps. Let’s go through them one by one.</p>
-<h3 id="Text-Analysis-Configuration" class="common-anchor-header">Text Analysis Configuration</h3><p>For full-text search, we define how text should be processed. Analyzers are essential in full-text search by breaking sentences into tokens and performing lexical analysis like stemming and stop word removal. Here we simply define an analyzer.</p>
+    </button></h2><p>A configuração de uma coleção para pesquisa de texto integral requer vários passos de configuração. Vamos analisá-las uma a uma.</p>
+<h3 id="Text-Analysis-Configuration" class="common-anchor-header">Configuração de análise de texto</h3><p>Para a pesquisa de texto integral, definimos como o texto deve ser processado. Os analisadores são essenciais na pesquisa de texto integral, dividindo as frases em tokens e efectuando a análise lexical, como a remoção de palavras de origem e de paragem. Aqui, limitamo-nos a definir um analisador.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define tokenizer parameters for text analysis</span>
 analyzer_params = {<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>For more concept details about analyzer, please refer to the <a href="https://milvus.io/docs/analyzer-overview.md">analyzer documentation</a>.</p>
-<h3 id="Collection-Schema-and-BM25-Function" class="common-anchor-header">Collection Schema and BM25 Function</h3><p>Now we define the schema with fields for primary key, text content, sparse vectors (for full-text search), dense vectors (for semantic search), and metadata. We also configure the BM25 function for full-text search.</p>
-<p>The BM25 function automatically converts text content into sparse vectors, allowing Milvus to handle the complexity of full-text search without requiring manual sparse embedding generation.</p>
+<p>Para mais pormenores sobre o conceito de analisador, consulte a <a href="https://milvus.io/docs/analyzer-overview.md">documentação do analisador</a>.</p>
+<h3 id="Collection-Schema-and-BM25-Function" class="common-anchor-header">Esquema de coleção e função BM25</h3><p>Agora definimos o esquema com campos para chave primária, conteúdo de texto, vectores esparsos (para pesquisa de texto completo), vectores densos (para pesquisa semântica) e metadados. Também configuramos a função BM25 para pesquisa de texto completo.</p>
+<p>A função BM25 converte automaticamente o conteúdo do texto em vectores esparsos, permitindo ao Milvus lidar com a complexidade da pesquisa de texto integral sem necessitar de geração manual de incorporação esparsa.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create schema</span>
 schema = MilvusClient.create_schema()
 schema.add_field(
@@ -173,7 +176,7 @@ schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 100}, 'is_primary': True, 'auto_id': True}, {'name': 'content', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase']}}}, {'name': 'sparse_vector', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}, {'name': 'dense_vector', 'description': '', 'type': &lt;DataType.FLOAT_VECTOR: 101&gt;, 'params': {'dim': 1536}}, {'name': 'metadata', 'description': '', 'type': &lt;DataType.JSON: 23&gt;}], 'enable_dynamic_field': False, 'functions': [{'name': 'bm25', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['content'], 'output_field_names': ['sparse_vector'], 'params': {}}]}
 </code></pre>
-<h3 id="Indexing-and-Collection-Creation" class="common-anchor-header">Indexing and Collection Creation</h3><p>To optimize search performance, we create indexes for both sparse and dense vector fields, then create the collection in Milvus.</p>
+<h3 id="Indexing-and-Collection-Creation" class="common-anchor-header">Indexação e criação de colecções</h3><p>Para otimizar o desempenho da pesquisa, criamos índices para os campos vectoriais esparsos e densos e, em seguida, criamos a coleção no Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define indexes</span>
 index_params = MilvusClient.prepare_index_params()
 index_params.add_index(
@@ -196,7 +199,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Collection 'full_text_demo' created successfully
 </code></pre>
-<h2 id="Insert-Data" class="common-anchor-header">Insert Data<button data-href="#Insert-Data" class="anchor-icon" translate="no">
+<h2 id="Insert-Data" class="common-anchor-header">Inserir dados<button data-href="#Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -211,7 +214,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After setting up the collection, we insert data by preparing entities with both text content and their vector representations. Let’s define an embedding function and then insert data into the collection.</p>
+    </button></h2><p>Depois de configurar a coleção, inserimos dados preparando entidades com conteúdo de texto e as suas representações vectoriais. Vamos definir uma função de incorporação e, em seguida, inserir dados na coleção.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up OpenAI for embeddings</span>
 openai_client = OpenAI(api_key=os.environ.get(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>))
 model_name = <span class="hljs-string">&quot;text-embedding-3-small&quot;</span>
@@ -225,7 +228,7 @@ model_name = <span class="hljs-string">&quot;text-embedding-3-small&quot;</span>
     response = openai_client.embeddings.create(<span class="hljs-built_in">input</span>=texts, model=model_name)
     <span class="hljs-keyword">return</span> [embedding.embedding <span class="hljs-keyword">for</span> embedding <span class="hljs-keyword">in</span> response.data]
 <button class="copy-code-btn"></button></code></pre>
-<p>Insert example documents into the collection.</p>
+<p>Inserir documentos de exemplo na coleção.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example documents to insert</span>
 documents = [
     {
@@ -262,7 +265,7 @@ client.insert(collection_name, entities)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted 3 documents
 </code></pre>
-<h2 id="Perform-Retrieval" class="common-anchor-header">Perform Retrieval<button data-href="#Perform-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Perform-Retrieval" class="common-anchor-header">Efetuar a recuperação<button data-href="#Perform-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -277,8 +280,8 @@ client.insert(collection_name, entities)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can flexibly use the <code translate="no">search()</code> or <code translate="no">hybrid_search()</code> methods to implement full-text search (sparse), semantic search (dense), and hybrid search to lead to more robust and accurate search results.</p>
-<h3 id="Full-Text-Search" class="common-anchor-header">Full-Text Search</h3><p>Sparse search leverages the BM25 algorithm to find documents containing specific keywords or phrases. This traditional search method excels at precise term matching and is particularly effective when users know exactly what they’re looking for.</p>
+    </button></h2><p>Pode utilizar de forma flexível os métodos <code translate="no">search()</code> ou <code translate="no">hybrid_search()</code> para implementar a pesquisa de texto integral (esparsa), a pesquisa semântica (densa) e a pesquisa híbrida para obter resultados de pesquisa mais robustos e precisos.</p>
+<h3 id="Full-Text-Search" class="common-anchor-header">Pesquisa de texto completo</h3><p>A pesquisa esparsa utiliza o algoritmo BM25 para encontrar documentos que contenham palavras-chave ou frases específicas. Este método de pesquisa tradicional é excelente na correspondência precisa de termos e é particularmente eficaz quando os utilizadores sabem exatamente o que estão à procura.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for keyword search</span>
 query = <span class="hljs-string">&quot;full-text search keywords&quot;</span>
 
@@ -304,7 +307,7 @@ sparse_results = results[<span class="hljs-number">0</span>]
 2. Score: 0.1836, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
 3. Score: 0.1335, Content: Milvus is a vector database built for embedding similarity search and AI applications.
 </code></pre>
-<h3 id="Semantic-Search" class="common-anchor-header">Semantic Search</h3><p>Dense search uses vector embeddings to find documents with similar meaning, even if they don’t share the exact same keywords. This approach helps understand context and semantics, making it ideal for more natural language queries.</p>
+<h3 id="Semantic-Search" class="common-anchor-header">Pesquisa semântica</h3><p>A pesquisa densa utiliza a incorporação de vectores para encontrar documentos com significado semelhante, mesmo que não partilhem exatamente as mesmas palavras-chave. Esta abordagem ajuda a compreender o contexto e a semântica, tornando-a ideal para consultas em linguagem mais natural.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for semantic search</span>
 query = <span class="hljs-string">&quot;How does Milvus help with similarity search?&quot;</span>
 
@@ -333,8 +336,8 @@ dense_results = results[<span class="hljs-number">0</span>]
 2. Score: 0.6501, Content: Full-text search in Milvus allows you to search using keywords and phrases.
 3. Score: 0.4371, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
 </code></pre>
-<h3 id="Hybrid-Search" class="common-anchor-header">Hybrid Search</h3><p>Hybrid search combines both full-text search and semantic dense retrieval. This balanced approach improves search accuracy and robustness by leveraging the strengths of both methods.</p>
-<p>Hybrid search is especially valuable in Retrieval-Augmented Generation (RAG) applications, where both semantic understanding and precise keyword matching contribute to better retrieval results.</p>
+<h3 id="Hybrid-Search" class="common-anchor-header">Pesquisa híbrida</h3><p>A pesquisa híbrida combina a pesquisa de texto integral e a recuperação semântica densa. Esta abordagem equilibrada melhora a precisão e a robustez da pesquisa, aproveitando os pontos fortes de ambos os métodos.</p>
+<p>A pesquisa híbrida é especialmente valiosa em aplicações RAG (Retrieval-Augmented Generation), em que tanto a compreensão semântica como a correspondência exacta de palavras-chave contribuem para melhores resultados de recuperação.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for hybrid search</span>
 query = <span class="hljs-string">&quot;what is hybrid search&quot;</span>
 
@@ -375,7 +378,7 @@ hybrid_results = results[<span class="hljs-number">0</span>]
 2. Score: 0.0320, Content: Milvus is a vector database built for embedding similarity search and AI applications.
 3. Score: 0.0320, Content: Full-text search in Milvus allows you to search using keywords and phrases.
 </code></pre>
-<h2 id="Answer-Generation" class="common-anchor-header">Answer Generation<button data-href="#Answer-Generation" class="anchor-icon" translate="no">
+<h2 id="Answer-Generation" class="common-anchor-header">Geração de respostas<button data-href="#Answer-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -390,7 +393,7 @@ hybrid_results = results[<span class="hljs-number">0</span>]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After retrieving relevant documents with hybrid search, we can use an LLM to generate a comprehensive answer based on the retrieved information. This is the final step in a RAG (Retrieval Augmented Generation) pipeline.</p>
+    </button></h2><p>Após a recuperação de documentos relevantes com a pesquisa híbrida, podemos utilizar um LLM para gerar uma resposta abrangente com base na informação recuperada. Esta é a etapa final de um pipeline RAG (Retrieval Augmented Generation).</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Format retrieved documents into context</span>
 context = <span class="hljs-string">&quot;\n\n&quot;</span>.join([doc[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>] <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> hybrid_results])
 
@@ -421,4 +424,4 @@ response = openai_client.chat.completions.create(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
 </code></pre>
-<p>That’s it! Now you’ve just build RAG with hybrid retrieval that combines the power of BM25-based full-text search and dense vector based semantic search.</p>
+<p>E pronto! Agora acabou de construir o RAG com recuperação híbrida que combina o poder da pesquisa de texto completo baseada em BM25 e da pesquisa semântica baseada em vectores densos.</p>

@@ -1,11 +1,11 @@
 ---
 id: openai_agents_milvus.md
 summary: >-
-  This notebook shows how to create an agent that can query Milvus using natural
-  language through Function Calling. We'll combine OpenAI's Agents framework
-  with Milvus's powerful vector search capabilities to create a nice search
-  experience.
-title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
+  Este notebook mostra como criar um agente que pode consultar o Milvus usando
+  linguagem natural através de Chamada de Função. Vamos combinar a estrutura de
+  agentes da OpenAI com as poderosas capacidades de pesquisa vetorial do Milvus
+  para criar uma experiência de pesquisa agradável.
+title: 'Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo'
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/openai_agents_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -13,7 +13,7 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/openai_agents_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Milvus Integration with OpenAI Agents: A Step-by-Step Guide<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
+<h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,8 +28,8 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This notebook shows how to create an agent that can query Milvus using natural language through Function Calling. We’ll combine OpenAI’s Agents framework with Milvus’s powerful vector search capabilities to create a nice search experience.</p>
-<h2 id="OpenAI-Agents" class="common-anchor-header">OpenAI Agents<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
+    </button></h1><p>Este caderno mostra como criar um agente que pode consultar o Milvus usando linguagem natural através de Chamada de Função. Vamos combinar a estrutura de Agentes da OpenAI com as poderosas capacidades de pesquisa vetorial do Milvus para criar uma experiência de pesquisa agradável.</p>
+<h2 id="OpenAI-Agents" class="common-anchor-header">Agentes OpenAI<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,13 +44,13 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The OpenAI Agents SDK enables you to build agentic AI apps in a lightweight, easy-to-use package with very few abstractions. It’s a production-ready upgrade of their previous experimentation for agents, Swarm. The Agents SDK has a very small set of primitives:</p>
+    </button></h2><p>O OpenAI Agents SDK permite-lhe criar aplicações de IA agêntica num pacote leve e fácil de utilizar com muito poucas abstracções. É uma atualização pronta para produção de sua experimentação anterior para agentes, Swarm. O Agents SDK tem um conjunto muito pequeno de primitivas:</p>
 <ul>
-<li>Agents, which are LLMs equipped with instructions and tools</li>
-<li>Handoffs, which allow agents to delegate to other agents for specific tasks</li>
-<li>Guardrails, which enable the inputs to agents to be validated</li>
+<li>Agentes, que são LLMs equipados com instruções e ferramentas</li>
+<li>Handoffs, que permitem que os agentes deleguem a outros agentes tarefas específicas</li>
+<li>Guardrails, que permitem validar as entradas dos agentes</li>
 </ul>
-<p>In combination with Python, these primitives are powerful enough to express complex relationships between tools and agents, and allow you to build real-world applications without a steep learning curve. In addition, the SDK comes with built-in tracing that lets you visualize and debug your agentic flows, as well as evaluate them and even fine-tune models for your application.</p>
+<p>Em combinação com Python, estas primitivas são suficientemente poderosas para expressar relações complexas entre ferramentas e agentes, e permitem-lhe construir aplicações do mundo real sem uma curva de aprendizagem acentuada. Além disso, o SDK vem com rastreamento integrado que permite visualizar e depurar seus fluxos agênticos, bem como avaliá-los e até mesmo ajustar modelos para sua aplicação.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
@@ -72,8 +72,8 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus is a high-performance, highly scalable Open-Source vector database that runs efficiently across a wide range of environments, from a laptop to large-scale distributed systems. It is available as both open-source software and a <a href="https://zilliz.com/">Cloud Offering</a>.</p>
-<h2 id="Setup-and-Dependencies" class="common-anchor-header">Setup and Dependencies<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
+    </button></h2><p>O Milvus é uma base de dados vetorial de código aberto de elevado desempenho e altamente escalável que funciona eficientemente numa vasta gama de ambientes, desde um computador portátil a sistemas distribuídos de grande escala. Ele está disponível como software de código aberto e como uma <a href="https://zilliz.com/">oferta de nuvem</a>.</p>
+<h2 id="Setup-and-Dependencies" class="common-anchor-header">Configuração e dependências<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,11 +88,11 @@ title: 'Milvus Integration with OpenAI Agents: A Step-by-Step Guide'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>First, we need to set up our environment with the necessary libraries and initialize asyncio for Jupyter compatibility.</p>
+    </button></h2><p>Primeiro, precisamos de configurar o nosso ambiente com as bibliotecas necessárias e inicializar o asyncio para compatibilidade com o Jupyter.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> asyncio
 <span class="hljs-keyword">import</span> nest_asyncio
@@ -102,12 +102,12 @@ load_dotenv()
 
 nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
-<p>We will use the models from OpenAI. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>Vamos utilizar os modelos do OpenAI. Deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave api</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Connecting to Milvus and Creating a Schema<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
+<h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Ligação ao Milvus e criação de um esquema<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,19 +122,19 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we’ll connect to our Milvus instance and create a schema for our collection. This schema will define the structure of our data, including:</p>
+    </button></h2><p>Agora vamos ligar-nos à nossa instância Milvus e criar um esquema para a nossa coleção. Este esquema definirá a estrutura dos nossos dados, incluindo:</p>
 <ul>
-<li>An ID field as the primary key</li>
-<li>A text field to store our document content</li>
-<li>A sparse vector field to store the BM25 embeddings</li>
+<li>Um campo de ID como chave primária</li>
+<li>Um campo de texto para armazenar o conteúdo do nosso documento</li>
+<li>Um campo vetorial esparso para armazenar os embeddings BM25</li>
 </ul>
-<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Full-Text Search in Milvus 2.5</h3><ul>
-<li>Unified system for both vector and keyword search (unified APIs)</li>
-<li>Built-in sparse-BM25 algorithm (similar as Elasticsearch use but vector based)</li>
-<li>No need to manually generate embeddings for keyword search</li>
+<h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Pesquisa de texto completo no Milvus 2.5</h3><ul>
+<li>Sistema unificado para pesquisa vetorial e por palavra-chave (APIs unificadas)</li>
+<li>Algoritmo esparso-BM25 incorporado (semelhante à utilização do Elasticsearch, mas baseado em vectores)</li>
+<li>Não é necessário gerar manualmente embeddings para pesquisa de palavras-chave</li>
 </ul>
 <p><img translate="no" src="https://milvus.io/docs/v2.5.x/assets/full-text-search.png" width="70%" alt="img"></p>
-<h2 id="Install-Milvus-with-Docker" class="common-anchor-header">Install Milvus with Docker<button data-href="#Install-Milvus-with-Docker" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus-with-Docker" class="common-anchor-header">Instalar o Milvus com o Docker<button data-href="#Install-Milvus-with-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,7 +149,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before running this example, make sure to install Milvus and start it with Docker, have a look at our documentation - https://milvus.io/docs/install_standalone-docker.md</p>
+    </button></h2><p>Antes de executar este exemplo, certifique-se de que instala o Milvus e o inicia com o Docker, consulte a nossa documentação - https://milvus.io/docs/install_standalone-docker.md</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FunctionType, MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -167,7 +167,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.INT64: 5&gt;, 'is_primary': True, 'auto_id': True}, {'name': 'text', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 1000, 'enable_analyzer': True}}, {'name': 'sparse', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;}], 'enable_dynamic_field': False}
 </code></pre>
-<h2 id="Setting-Up-BM25-for-Full-Text-Search" class="common-anchor-header">Setting Up BM25 for Full-Text Search<button data-href="#Setting-Up-BM25-for-Full-Text-Search" class="anchor-icon" translate="no">
+<h2 id="Setting-Up-BM25-for-Full-Text-Search" class="common-anchor-header">Configurar o BM25 para pesquisa de texto completo<button data-href="#Setting-Up-BM25-for-Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -182,7 +182,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports full-text search through BM25 functions. Here we define a function that will automatically convert our text data into sparse vector representations optimized for text search.</p>
+    </button></h2><p>O Milvus suporta pesquisa de texto completo através de funções BM25. Aqui definimos uma função que converterá automaticamente nossos dados de texto em representações vetoriais esparsas otimizadas para pesquisa de texto.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function
 
 <span class="hljs-comment"># Milvus handles tokenization and BM25 conversion</span>
@@ -199,7 +199,7 @@ schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.INT64: 5&gt;, 'is_primary': True, 'auto_id': True}, {'name': 'text', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 1000, 'enable_analyzer': True}}, {'name': 'sparse', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}], 'enable_dynamic_field': False, 'functions': [{'name': 'text_bm25_emb', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['text'], 'output_field_names': ['sparse'], 'params': {}}]}
 </code></pre>
-<h2 id="Creating-the-Collection-and-Loading-Sample-Data" class="common-anchor-header">Creating the Collection and Loading Sample Data<button data-href="#Creating-the-Collection-and-Loading-Sample-Data" class="anchor-icon" translate="no">
+<h2 id="Creating-the-Collection-and-Loading-Sample-Data" class="common-anchor-header">Criando a coleção e carregando dados de amostra<button data-href="#Creating-the-Collection-and-Loading-Sample-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,7 +214,7 @@ schema.add_function(bm25_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we’ll create our collection with the schema and index parameters, then load some sample data about information retrieval and Milvus.</p>
+    </button></h2><p>Agora vamos criar a nossa coleção com os parâmetros de esquema e índice e, em seguida, carregar alguns dados de amostra sobre a recuperação de informação e o Milvus.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, metric_type=<span class="hljs-string">&quot;BM25&quot;</span>)
@@ -328,7 +328,7 @@ client.insert(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'insert_count': 37, 'ids': [456486814660619140, 456486814660619141, 456486814660619142, 456486814660619143, 456486814660619144, 456486814660619145, 456486814660619146, 456486814660619147, 456486814660619148, 456486814660619149, 456486814660619150, 456486814660619151, 456486814660619152, 456486814660619153, 456486814660619154, 456486814660619155, 456486814660619156, 456486814660619157, 456486814660619158, 456486814660619159, 456486814660619160, 456486814660619161, 456486814660619162, 456486814660619163, 456486814660619164, 456486814660619165, 456486814660619166, 456486814660619167, 456486814660619168, 456486814660619169, 456486814660619170, 456486814660619171, 456486814660619172, 456486814660619173, 456486814660619174, 456486814660619175, 456486814660619176], 'cost': 0}
 </code></pre>
-<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">Defining Output Types for Structured Results<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
+<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">Definindo tipos de saída para resultados estruturados<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -343,7 +343,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To make our search results more structured and easier to work with, we’ll define Pydantic models that specify the format of our search results.</p>
+    </button></h2><p>Para tornar os nossos resultados de pesquisa mais estruturados e fáceis de trabalhar, vamos definir modelos Pydantic que especificam o formato dos nossos resultados de pesquisa.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pydantic <span class="hljs-keyword">import</span> BaseModel
 
 
@@ -357,7 +357,7 @@ client.insert(
     results: <span class="hljs-built_in">list</span>[MilvusSearchResult]
     query: <span class="hljs-built_in">str</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Creating-a-Custom-Search-Tool" class="common-anchor-header">Creating a Custom Search Tool<button data-href="#Creating-a-Custom-Search-Tool" class="anchor-icon" translate="no">
+<h2 id="Creating-a-Custom-Search-Tool" class="common-anchor-header">Criar uma ferramenta de pesquisa personalizada<button data-href="#Creating-a-Custom-Search-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -372,11 +372,11 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Next, we’ll create a custom function tool that our agent can use to search the Milvus database. This tool will:</p>
+    </button></h2><p>De seguida, vamos criar uma ferramenta de função personalizada que o nosso agente pode utilizar para pesquisar na base de dados Milvus. Esta ferramenta irá:</p>
 <ol>
-<li>Accept a collection name, query text, and limit parameter</li>
-<li>Execute a BM25 search against the Milvus collection</li>
-<li>Return the results in a structured format</li>
+<li>Aceitar um nome de coleção, texto de consulta e parâmetro de limite</li>
+<li>Executar uma pesquisa BM25 na coleção Milvus</li>
+<li>Devolver os resultados num formato estruturado</li>
 </ol>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Any</span>
@@ -419,7 +419,7 @@ client.insert(
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Exception is: <span class="hljs-subst">{e}</span>&quot;</span>)
         <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;Error searching Milvus: <span class="hljs-subst">{<span class="hljs-built_in">str</span>(e)}</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Building-the-Agent" class="common-anchor-header">Building the Agent<button data-href="#Building-the-Agent" class="anchor-icon" translate="no">
+<h2 id="Building-the-Agent" class="common-anchor-header">Criar o agente<button data-href="#Building-the-Agent" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -434,7 +434,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we’ll create an agent that can use our search tool. We’ll give it instructions on how to handle search requests and specify that it should return results in our structured format.</p>
+    </button></h2><p>Agora vamos criar um agente que pode usar a nossa ferramenta de pesquisa. Dar-lhe-emos instruções sobre como lidar com os pedidos de pesquisa e especificaremos que deve devolver os resultados no nosso formato estruturado.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> agents <span class="hljs-keyword">import</span> Agent, Runner, WebSearchTool, trace
 
 
