@@ -108,6 +108,14 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>If you have installed Milvus Operator before, upgrade it using the following command:</p>
+<pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
+  -n milvus-operator --create-namespace \
+  --wait --wait-for-jobs \
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1/milvus-operator-1.3.0-rc1.tgz
+<button class="copy-code-btn"></button></code></pre>
+</div>
 <h3 id="Install-with-kubectl" class="common-anchor-header">Install with kubectl</h3><p>Run the following command to install Milvus Operator with <code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
