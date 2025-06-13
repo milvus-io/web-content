@@ -74,6 +74,19 @@ More samples can be found in https://github.com/zilliztech/milvus-operator/tree/
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 ```
 
+<div class="alert note">
+
+If you have installed Milvus Operator before, upgrade it using the following command:
+
+```shell
+helm upgrade milvus-operator \
+  -n milvus-operator --create-namespace \
+  --wait --wait-for-jobs \
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1/milvus-operator-1.3.0-rc1.tgz
+```
+
+</div>
+
 ### Install with kubectl
 
 Run the following command to install Milvus Operator with `kubectl`.

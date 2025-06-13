@@ -10,7 +10,7 @@ title: Upgrade Milvus Cluster with Docker Compose
 
 This topic describes how to upgrade your Milvus using Docker Compose. 
 
-In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to vv2.6.0-rc1.
+In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.6.0-rc1.
 
 ## Upgrade Milvus by changing its image
 
@@ -24,35 +24,35 @@ In normal cases, you can upgrade Milvus as follows:
     ...
     rootcoord:
       container_name: milvus-rootcoord
-      image: milvusdb/milvus:vv2.6.0-rc1
+      image: milvusdb/milvus:v2.6.0-rc1
     ...
     proxy:
       container_name: milvus-proxy
-      image: milvusdb/milvus:vv2.6.0-rc1
+      image: milvusdb/milvus:v2.6.0-rc1
     ...
     querycoord:
       container_name: milvus-querycoord
-      image: milvusdb/milvus:vv2.6.0-rc1  
+      image: milvusdb/milvus:v2.6.0-rc1  
     ...
     querynode:
       container_name: milvus-querynode
-      image: milvusdb/milvus:vv2.6.0-rc1
+      image: milvusdb/milvus:v2.6.0-rc1
     ...
     indexcoord:
       container_name: milvus-indexcoord
-      image: milvusdb/milvus:vv2.6.0-rc1
+      image: milvusdb/milvus:v2.6.0-rc1
     ...
     indexnode:
       container_name: milvus-indexnode
-      image: milvusdb/milvus:vv2.6.0-rc1 
+      image: milvusdb/milvus:v2.6.0-rc1 
     ...
     datacoord:
       container_name: milvus-datacoord
-      image: milvusdb/milvus:vv2.6.0-rc1   
+      image: milvusdb/milvus:v2.6.0-rc1   
     ...
     datanode:
       container_name: milvus-datanode
-      image: milvusdb/milvus:vv2.6.0-rc1
+      image: milvusdb/milvus:v2.6.0-rc1
     ```
 
 2. Run the following commands to perform the upgrade.
@@ -80,7 +80,7 @@ In normal cases, you can upgrade Milvus as follows:
       runWithBackup: true
     config:
       sourceVersion: 2.1.4   # Specify your milvus version
-      targetVersion: v2.6.0-rc1
+      targetVersion: 2.6.0-rc1
       backupFilePath: /tmp/migration.bak
     metastore:
       type: etcd
