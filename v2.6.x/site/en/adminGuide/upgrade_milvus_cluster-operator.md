@@ -50,8 +50,8 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 Once you have upgraded your Milvus operator to the latest version, you have the following choices:
 
 - To upgrade Milvus from v2.2.3, you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
-- To upgrade Milvus from a minor release before v2.2.3 to v2.6.0-rc1, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image).
-- To upgrade Milvus from v2.1.x to v2.6.0-rc1, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
+- To upgrade Milvus from a minor release before v2.2.3 to 2.6.0-rc1, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image).
+- To upgrade Milvus from v2.1.x to 2.6.0-rc1, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
 
 > **Note**: It's highly recommended to upgrade one minor version at a time, and to use the latest stable release of that minor version. For example, if you are upgrading from v2.4.x to v2.6.x, you should first upgrade to the latest v2.4.x, then to the latest v2.5.x, and finally to v2.6.x. This ensures that you are using the latest stable release of each minor version, which is more likely to be compatible with your existing data and configurations.
 
@@ -72,10 +72,10 @@ spec:
   components:
     enableRollingUpdate: true
     imageUpdateMode: rollingUpgrade # Default value, can be omitted
-    image: milvusdb/milvus:vv2.6.0-rc1
+    image: milvusdb/milvus:v2.6.0-rc1
     # Milvus Operator recognizes the image tag as a semantic version, and decides what to do based on the version.
     # So in case you're using a non-sermantic verison image tag, you may also need to set the `version` field so that Milvus Operator can recognize the version correctly
-    version: vv2.6.0-rc1
+    version: v2.6.0-rc1
 ```
 
 In this above configuration file, set `spec.components.enableRollingUpdate` to `true` and set `spec.components.image` to the desired Milvus version.
@@ -91,7 +91,7 @@ spec:
   components:
     enableRollingUpdate: true
     imageUpdateMode: all
-    image: milvusdb/milvus:vv2.6.0-rc1
+    image: milvusdb/milvus:v2.6.0-rc1
 ```
 
 You can set `spec.components.imageUpdateMode` to `rollingDowngrade` to have Milvus replace coordinator pod images with a lower version.
@@ -129,7 +129,7 @@ metadata:
 spec:
   # Omit other fields ...
   components:
-   image: milvusdb/milvus:vv2.6.0-rc1
+   image: milvusdb/milvus:v2.6.0-rc1
 ```
 
 Then run the following to perform the upgrade:
@@ -140,11 +140,11 @@ kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge
 
 ## Migrate the metadata
 
-Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus v2.6.0-rc1.
+Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus 2.6.0-rc1.
 
 ### 1. Create a `.yaml` file for metadata migration
 
-Create a metadata migration file. The following is an example. You need to specify the `name`, `sourceVersion`, and `targetVersion` in the configuration file. The following example sets the `name` to `my-release-upgrade`, `sourceVersion` to `v2.1.4`, and `targetVersion` to `vv2.6.0-rc1`. This means that your Milvus cluster will be upgraded from v2.1.4 to vv2.6.0-rc1.
+Create a metadata migration file. The following is an example. You need to specify the `name`, `sourceVersion`, and `targetVersion` in the configuration file. The following example sets the `name` to `my-release-upgrade`, `sourceVersion` to `v2.1.4`, and `targetVersion` to `v2.6.0-rc1`. This means that your Milvus cluster will be upgraded from v2.1.4 to v2.6.0-rc1.
 
 ```
 apiVersion: milvus.io/v1beta1
@@ -156,9 +156,9 @@ spec:
     namespace: default
     name: my-release
   sourceVersion: "v2.1.4"
-  targetVersion: "vv2.6.0-rc1"
+  targetVersion: "v2.6.0-rc1"
   # below are some omit default values:
-  # targetImage: "milvusdb/milvus:vv2.6.0-rc1"
+  # targetImage: "milvusdb/milvus:v2.6.0-rc1"
   # toolImage: "milvusdb/meta-migration:v2.2.0"
   # operation: upgrade
   # rollbackIfFailed: true

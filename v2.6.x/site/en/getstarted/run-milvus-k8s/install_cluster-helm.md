@@ -73,13 +73,53 @@ You can always run this command to fetch the latest Milvus Helm charts.
 
 Once you have installed the Helm chart, you can start Milvus on Kubernetes. This section will guide you through the steps to starting Milvus.
 
-```shell
-$ helm install my-release milvus/milvus
-```
+- To deploy a Milvus instance in standalone mode, run the following command:
+
+  ```bash
+  helm install my-release milvus/milvus \
+    --set image.all.tag=v{{ milvus_release_version }} \
+    --set cluster.enabled=false \
+    --set pulsarv3.enabled=false \
+    --set standalone.messageQueue=woodpecker \
+    --set woodpecker.enabled=true \
+    --set streaming.enabled=true
+  ```
+
+  <div class="alert note">
+
+  Starting from Milvus 2.6.x, the following architecture changes have been made in standalone mode:
+
+  - The default message queue (MQ) is **Woodpecker**.
+  - The **Streaming Node** component is introduced and enabled by default.
+
+  For details, refer to the [Architecture Overview](architecture_overview.md).
+
+  </div>
+
+- To deploy a Milvus instance in cluster mode, run the following command:
+
+  ```bash
+  helm install my-release milvus/milvus \
+    --set image.all.tag=v{{ milvus_release_version }} \
+    --set streaming.enabled=true \
+    --set indexNode.enabled=false
+  ```
+
+  <div class="alert note">
+
+  Starting from Milvus 2.6.x, the following architecture changes have been made in cluster mode:
+
+  - The default MQ is still **Pulsar**.
+  - The **Streaming Node** component is introduced and enabled by default.
+  - The **Index Node** and **Data Node** are merged into a single **Data Node** component.
+
+  For details, refer to the [Architecture Overview](architecture_overview.md).
+
+  </div>
 
 In the above command, `my-release` is the release name, and `milvus/milvus` is the locally installed chart repository. To use a different name, replace `my-release` with the one you see fit.
 
-The command above deploys a Milvus cluster with its components and dependencies using default configurations. To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
+The commands above deploy a Milvus instance with its components and dependencies using default configurations. To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
 
 <div class="alert note">
   <ul>
