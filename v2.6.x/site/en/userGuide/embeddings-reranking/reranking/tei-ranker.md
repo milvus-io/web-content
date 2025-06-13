@@ -52,7 +52,7 @@ To apply TEI Ranker to a standard vector search:
 
 ```python
 # Execute search with vLLM reranking
-results = milvus_client.search(
+results = client.search(
     collection_name="your_collection",
     data=["AI Research Progress", "What is AI"],  # Search queries
     anns_field="dense_vector",                   # Vector field to search
@@ -88,7 +88,7 @@ sparse_search = AnnSearchRequest(
 )
 
 # Execute hybrid search with vLLM reranking
-hybrid_results = milvus_client.hybrid_search(
+hybrid_results = client.hybrid_search(
     collection_name="your_collection",
     [dense_search, sparse_search],              # Multiple search requests
     #  highlight-next-line
