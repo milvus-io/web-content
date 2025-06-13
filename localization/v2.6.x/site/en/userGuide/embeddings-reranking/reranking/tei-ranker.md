@@ -99,7 +99,7 @@ tei_ranker = Function(
       </svg>
     </button></h2><p>To apply TEI Ranker to a standard vector search:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
-results = milvus_client.search(
+results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],  <span class="hljs-comment"># Search queries</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
@@ -144,7 +144,7 @@ sparse_search = AnnSearchRequest(
 )
 
 <span class="hljs-comment"># Execute hybrid search with vLLM reranking</span>
-hybrid_results = milvus_client.hybrid_search(
+hybrid_results = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                        <span class="hljs-comment"># Apply tei reranking to combined results</span></span>
