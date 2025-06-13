@@ -114,10 +114,44 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
         ></path>
       </svg>
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Deploy a Milvus cluster</h3><p>Once you have installed the Helm chart, you can start Milvus on Kubernetes. This section will guide you through the steps to starting Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install my-release milvus/milvus</span>
+<ul>
+<li><p>To deploy a Milvus instance in standalone mode, run the following command:</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v{{ milvus_release_version }} \
+  --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
+  --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+  <div class="alert note">
+<p>Starting from Milvus 2.6.x, the following architecture changes have been made in standalone mode:</p>
+<ul>
+<li>The default message queue (MQ) is <strong>Woodpecker</strong>.</li>
+<li>The <strong>Streaming Node</strong> component is introduced and enabled by default.</li>
+</ul>
+<p>For details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
+  </div>
+</li>
+<li><p>To deploy a Milvus instance in cluster mode, run the following command:</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v{{ milvus_release_version }} \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
+<button class="copy-code-btn"></button></code></pre>
+  <div class="alert note">
+<p>Starting from Milvus 2.6.x, the following architecture changes have been made in cluster mode:</p>
+<ul>
+<li>The default MQ is still <strong>Pulsar</strong>.</li>
+<li>The <strong>Streaming Node</strong> component is introduced and enabled by default.</li>
+<li>The <strong>Index Node</strong> and <strong>Data Node</strong> are merged into a single <strong>Data Node</strong> component.</li>
+</ul>
+<p>For details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
+  </div>
+</li>
+</ul>
 <p>In the above command, <code translate="no">my-release</code> is the release name, and <code translate="no">milvus/milvus</code> is the locally installed chart repository. To use a different name, replace <code translate="no">my-release</code> with the one you see fit.</p>
-<p>The command above deploys a Milvus cluster with its components and dependencies using default configurations. To customize these settings, we recommend you use the <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to <a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklist</a>.</p>
+<p>The commands above deploy a Milvus instance with its components and dependencies using default configurations. To customize these settings, we recommend you use the <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to <a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklist</a>.</p>
 <div class="alert note">
   <ul>
     <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
