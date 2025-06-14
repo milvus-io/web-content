@@ -3,6 +3,7 @@ id: authenticate.md
 summary: Milvusでユーザー認証を管理する方法をご紹介します。
 title: ユーザアクセスの認証
 ---
+
 <h1 id="Authenticate-User-Access" class="common-anchor-header">ユーザアクセスの認証<button data-href="#Authenticate-User-Access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: ユーザアクセスの認証
     </button></h1><p>このガイドでは、認証の有効化、ユーザーとしての接続、ユーザー認証情報の変更など、Milvusにおけるユーザー認証の管理方法について説明します。</p>
 <div class="alert note">
 <ul>
-<li><p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザ認証とTLSの両方を有効にした場合、ユーザ名、パスワード、証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、<a href="/docs/ja/tls.md">Encryption in Transitを</a>参照してください。</p></li>
+<li><p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザ認証とTLSの両方を有効にした場合、ユーザ名、パスワード、証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、<a href="/docs/ja/v2.5.x/tls.md">Encryption in Transitを</a>参照してください。</p></li>
 <li><p>このページのコードスニペットでは、新しい<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a>(Python)を使用してMilvusと対話します。他の言語用の新しいMilvusClient SDKは今後のアップデートでリリースされる予定です。</p></li>
 </ul>
 </div>
@@ -100,10 +101,11 @@ spec:
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-) 
+uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 認証を有効にしてMilvusに接続する際に有効なトークンを提供できない場合、gRPCエラーが発生します。</div>
 <h2 id="Create-a-new-user" class="common-anchor-header">新規ユーザの作成<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
@@ -135,6 +137,7 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>ユーザ作成の詳細については、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a> を参照してください。</p>
 <h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">新規ユーザでのMilvus接続<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,10 +158,11 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># connect to milvus with the newly created user</span>
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Update-user-password" class="common-anchor-header">ユーザパスワードの更新<button data-href="#Update-user-password" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,11 +182,12 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># update password</span>
 
 client.update_password(
-    user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
-    old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
-    new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
+user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
+old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
+new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>ユーザパスワードの更新については、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>を参照してください。</p>
 <p>古いパスワードを忘れてしまった場合、Milvusは特定のユーザーをスーパーユーザーとして指定できる設定項目を提供しています。これにより、パスワード再設定時に古いパスワードを入力する必要がなくなります。</p>
 <p>デフォルトでは、Milvus設定ファイルの<code translate="no">common.security.superUsers</code> フィールドは空です。つまり、全てのユーザはパスワードリセット時に古いパスワードを入力する必要があります。ただし、特定のユーザーをスーパーユーザーとして指定することで、古いパスワードを入力する必要がなくなります。以下のスニペットでは、<code translate="no">root</code> と<code translate="no">foo</code> がスーパーユーザーとして指定されています。</p>
@@ -231,6 +236,7 @@ client.update_password(
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Limitations" class="common-anchor-header">制限事項<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,11 +273,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>次の方法もご覧ください：<ul>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
+<li><a href="/docs/ja/v2.5.x/scaleout.md">Milvusクラスタのスケール</a></li>
 </ul></li>
 <li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法もご覧ください：<ul>
-<li><a href="/docs/ja/eks.md">Terraformを使用してAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使用してMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.5.x/eks.md">Terraformを使用してAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.5.x/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.5.x/azure.md">Kubernetesを使用してMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>
 </ul>

@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>O Milvus usa o MinIO para armazenamento de objetos por padrão, mas também suporta o uso do <a href="https://aws.amazon.com/s3/">Amazon Simple Storage Service (S3)</a> como armazenamento persistente de objetos para arquivos de log e índice. Este tópico descreve como configurar o S3 para o Milvus. Você pode pular este tópico se estiver satisfeito com o MinIO.</p>
-<p>Você pode configurar o S3 com o <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> ou no K8s.</p>
+<p>É possível configurar o S3 com o <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> ou no K8s.</p>
 <h2 id="Configure-S3-with-Docker-Compose" class="common-anchor-header">Configurar o S3 com o Docker Compose<button data-href="#Configure-S3-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -129,6 +129,6 @@ summary: >-
       </svg>
     </button></h2><p>Saiba como configurar outras dependências do Milvus com o Docker Compose ou o Helm:</p>
 <ul>
-<li><a href="/docs/pt/deploy_etcd.md">Configurar o armazenamento de meta com o Docker Compose ou o Helm</a></li>
+<li><a href="/docs/pt/deploy_etcd.md">Configurar o armazenamento de meta com o Docker Compose ou Helm</a></li>
 <li><a href="/docs/pt/deploy_pulsar.md">Configurar o armazenamento de mensagens com o Docker Compose ou o Helm</a></li>
 </ul>

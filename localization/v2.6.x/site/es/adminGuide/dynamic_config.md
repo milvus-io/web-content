@@ -43,7 +43,7 @@ title: Configurar Milvus sobre la marcha
 </ul>
 <div class="alert note">
 <ul>
-<li>Los ejemplos de esta guía cambian el valor de <code translate="no">proxy.minPasswordLength</code> a <code translate="no">8</code>. Puede reemplazar la clave por las que correspondan, listadas en <a href="/docs/es/dynamic_config.md#Applicable-configuration-items">Elementos de configuración aplicables</a>.</li>
+<li>Los ejemplos de esta guía cambian el valor de <code translate="no">proxy.minPasswordLength</code> a <code translate="no">8</code>. Puede reemplazar la clave por las que correspondan que se enumeran en <a href="/docs/es/dynamic_config.md#Applicable-configuration-items">Elementos de configuración aplicables</a>.</li>
 <li>Los ejemplos de esta guía asumen que la ruta raíz de su Milvus es <code translate="no">by-dev</code>. Todas las configuraciones se listan bajo la ruta <code translate="no">by-dev/config</code>. La ruta raíz de Milvus varía según la forma en que lo instale. Para las instancias instaladas utilizando las tablas Helm, la ruta raíz por defecto es <code translate="no">by-dev</code>. Si no conoce la ruta raíz, consulte <a href="/docs/es/birdwatcher_usage_guides.md#Connect-to-etcd">Conectarse a etcd</a>.</li>
 </ul>
 </div>

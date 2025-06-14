@@ -6,6 +6,7 @@ summary: >-
   метрики и необходимость загрузки при создании. На этой странице описано, как
   создать коллекцию с нуля.
 ---
+
 <h1 id="Create-Collection" class="common-anchor-header">Создать коллекцию<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,9 +42,9 @@ summary: >-
 <p>Вы можете определить каждый аспект коллекции, включая ее схему, параметры индекса, тип метрики и необходимость ее загрузки при создании, чтобы убедиться, что коллекция полностью соответствует вашим требованиям.</p>
 <p>Чтобы создать коллекцию, необходимо</p>
 <ul>
-<li><p><a href="/docs/ru/create-collection.md#Create-Schema">Создать схему</a></p></li>
-<li><p><a href="/docs/ru/create-collection.md#Optional-Set-Index-Parameters">Задать параметры индекса</a> (необязательно)</p></li>
-<li><p><a href="/docs/ru/create-collection.md#Create-a-Collection">Создать коллекцию</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/create-collection.md#Create-Schema">Создать схему</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/create-collection.md#Optional-Set-Index-Parameters">Задать параметры индекса</a> (необязательно)</p></li>
+<li><p><a href="/docs/ru/v2.5.x/create-collection.md#Create-a-Collection">Создать коллекцию</a></p></li>
 </ul>
 <h2 id="Create-Schema" class="common-anchor-header">Создать схему<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,10 +61,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Схема определяет структуру данных коллекции. При создании коллекции необходимо разработать схему в соответствии с вашими требованиями. Для получения подробной информации см. раздел <a href="/docs/ru/schema.md">"Объяснение схемы"</a>.</p>
+    </button></h2><p>Схема определяет структуру данных коллекции. При создании коллекции необходимо разработать схему в соответствии с вашими требованиями. Для получения подробной информации см. раздел <a href="/docs/ru/v2.5.x/schema.md">"Объяснение схемы"</a>.</p>
 <p>Следующие фрагменты кода создают схему с динамическим полем enabled и тремя обязательными полями <code translate="no">my_id</code>, <code translate="no">my_vector</code> и <code translate="no">my_varchar</code>.</p>
 <div class="alert note">
-<p>Вы можете установить значения по умолчанию для любого скалярного поля и сделать его нулевым. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Вы можете установить значения по умолчанию для любого скалярного поля и сделать его нулевым. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -71,14 +72,14 @@ summary: >-
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 <span class="hljs-comment"># 3.1. Create schema</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># 3.2. Add fields to schema</span>
@@ -86,6 +87,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;my_id&quot;</span>, 
 schema.add_field(field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -226,7 +228,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>Создание индекса для определенного поля ускоряет поиск по этому полю. Индекс записывает порядок следования сущностей в коллекции. Как показано в следующих фрагментах кода, вы можете использовать <code translate="no">metric_type</code> и <code translate="no">index_type</code> для выбора подходящих способов индексации поля в Milvus и измерения сходства между векторными вкраплениями.</p>
 <p>В Milvus вы можете использовать <code translate="no">AUTOINDEX</code> в качестве типа индекса для всех векторных полей и один из <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code> в качестве типа метрики в зависимости от ваших потребностей.</p>
 <p>Как показано в приведенном выше фрагменте кода, для векторных полей необходимо задать как тип индекса, так и тип метрики, а для скалярных полей - только тип индекса. Индексы обязательны для векторных полей, и рекомендуется создавать индексы для скалярных полей, часто используемых в условиях фильтрации.</p>
-<p>Подробнее см. в разделах <a href="/docs/ru/index-vector-fields.md">Индексные векторные поля</a> и <a href="/docs/ru/index-scalar-fields.md">Индексные скалярные поля</a>.</p>
+<p>Подробнее см. в разделах <a href="/docs/ru/v2.5.x/index-vector-fields.md">Индексные векторные поля</a> и <a href="/docs/ru/v2.5.x/index-scalar-fields.md">Индексные скалярные поля</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -234,16 +236,17 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># 3.4. Add indexes</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
+field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -326,7 +329,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -334,9 +337,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 
@@ -417,7 +421,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -425,9 +429,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.6 Create a collection and index it separately</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq2</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
@@ -568,12 +573,13 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+\&quot;collectionName\&quot;: \&quot;customized_setup_3\&quot;,
+\&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Включить mmap</h3><p>Milvus по умолчанию включает mmap для всех коллекций, что позволяет Milvus отображать необработанные данные полей в память вместо их полной загрузки. Это уменьшает объем занимаемой памяти и увеличивает емкость коллекции. Подробнее о mmap читайте в разделе <a href="/docs/ru/mmap.md">Использование mmap</a>.</p>
+
+<h3 id="Enable-mmap" class="common-anchor-header">Включить mmap</h3><p>Milvus по умолчанию включает mmap для всех коллекций, что позволяет Milvus отображать необработанные данные полей в память вместо их полной загрузки. Это уменьшает объем занимаемой памяти и увеличивает емкость коллекции. Подробнее о mmap читайте в разделе <a href="/docs/ru/v2.5.x/mmap.md">Использование mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">plaintext</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -588,13 +594,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With MMap</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq4</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_4&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
+.build();
 client.createCollection(customizedSetupReq4);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">create_collection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_4&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -647,13 +654,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With TTL</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq5</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;86400&quot;</span>)
+.build();
 client.createCollection(customizedSetupReq5);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_5&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -704,13 +712,14 @@ client.create_collection(
 
 <span class="hljs-comment">// With consistency level</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq6</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
-        .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .consistencyLevel(ConsistencyLevel.BOUNDED)
-        .build();
+.collectionName(<span class="hljs-string">&quot;customized_setup_6&quot;</span>)
+.collectionSchema(schema)
+<span class="hljs-comment">// highlight-next-line</span>
+.consistencyLevel(ConsistencyLevel.BOUNDED)
+.build();
 client.createCollection(customizedSetupReq6);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_6&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
@@ -746,6 +755,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Подробнее об уровнях согласованности см. в разделе <a href="/docs/ru/tune_consistency.md">Уровень согласованности</a>.</p>
+<p>Подробнее об уровнях согласованности см. в разделе <a href="/docs/ru/v2.5.x/tune_consistency.md">Уровень согласованности</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Включение динамического поля</h3><p>Динамическое поле в коллекции - это зарезервированное поле JavaScript Object Notation (JSON) с именем <strong>$meta</strong>. После включения этого поля Milvus сохраняет все не определенные схемой поля, содержащиеся в каждой сущности, и их значения в виде пар ключ-значение в зарезервированном поле.</p>
-<p>Подробнее о том, как использовать динамическое поле, читайте в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
+<p>Подробнее о том, как использовать динамическое поле, читайте в разделе <a href="/docs/ru/v2.5.x/enable-dynamic-field.md">Динамическое поле</a>.</p>

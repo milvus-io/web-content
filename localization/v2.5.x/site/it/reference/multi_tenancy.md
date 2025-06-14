@@ -5,6 +5,7 @@ summary: >-
   In Milvus, multi-tenancy significa che più clienti o team, detti tenant,
   condividono lo stesso cluster mantenendo ambienti di dati isolati.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implementare la multi-tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus supporta la multi-tenancy a quattro livelli: <strong>Database</strong>, <strong>Collezione</strong>, <strong>Partizione</strong> e <strong>Chiave di partizione</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di database</h3><p>Con la multi-tenancy a livello di database, ogni tenant riceve un <a href="/docs/it/manage_databases.md">database</a> corrispondente contenente una o più collezioni.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di database</h3><p>Con la multi-tenancy a livello di database, ogni tenant riceve un <a href="/docs/it/v2.5.x/manage_databases.md">database</a> corrispondente contenente una o più collezioni.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -49,7 +50,7 @@ summary: >-
 <li><p><strong>Flessibilità</strong>: Ogni database può avere collezioni con schemi diversi, offrendo un'organizzazione dei dati altamente flessibile e consentendo a ogni tenant di avere il proprio schema di dati.</p></li>
 <li><p><strong>Altri</strong>: Questa strategia supporta anche RBAC, consentendo un controllo a grana fine sull'accesso degli utenti per tenant. Inoltre, è possibile caricare o rilasciare in modo flessibile i dati per tenant specifici, per gestire efficacemente i dati caldi e freddi.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di collezione</h3><p>Con la multi-tenancy a livello di collezione, a ogni tenant viene assegnata una <a href="/docs/it/manage-collections.md">collezione</a>, offrendo un forte isolamento dei dati.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di collezione</h3><p>Con la multi-tenancy a livello di collezione, a ogni tenant viene assegnata una <a href="/docs/it/v2.5.x/manage-collections.md">collezione</a>, offrendo un forte isolamento dei dati.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -60,7 +61,7 @@ summary: >-
 <li><p><strong>Flessibilità</strong>: Questa strategia consente a ogni raccolta di avere il proprio schema, per accogliere tenant con schemi di dati diversi.</p></li>
 <li><p><strong>Altri</strong>: Questa strategia supporta anche RBAC, consentendo un controllo granulare dell'accesso ai tenant. Inoltre, è possibile caricare o rilasciare in modo flessibile i dati per tenant specifici, per gestire efficacemente i dati caldi e freddi.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di partizione</h3><p>Nella multi-tenancy a livello di partizione, ogni tenant viene assegnato a una <a href="/docs/it/manage-partitions.md">partizione</a> creata manualmente all'interno di una raccolta condivisa.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di partizione</h3><p>Nella multi-tenancy a livello di partizione, ogni tenant viene assegnato a una <a href="/docs/it/v2.5.x/manage-partitions.md">partizione</a> creata manualmente all'interno di una raccolta condivisa.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -71,7 +72,7 @@ summary: >-
 <li><p><strong>Flessibilità</strong>: Questa strategia richiede che tutti i tenant condividano lo stesso schema di dati. E le partizioni devono essere create manualmente.</p></li>
 <li><p><strong>Altri</strong>: RBAC non è supportato a livello di partizione. I tenant possono essere interrogati singolarmente o su più partizioni, il che rende questo approccio adatto a scenari che prevedono query aggregate o analisi su segmenti di tenant. Inoltre, è possibile caricare o rilasciare in modo flessibile i dati per tenant specifici, per gestire efficacemente i dati caldi e freddi.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di chiave di partizione</h3><p>Con questa strategia, tutti i tenant condividono un'unica raccolta e un unico schema, ma i dati di ciascun tenant vengono automaticamente instradati in 16 partizioni fisicamente isolate in base al valore della <a href="/docs/it/use-partition-key.md">chiave di partizione</a>. Anche se ogni partizione fisica può contenere più tenant, i dati dei diversi tenant rimangono logicamente separati.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multi-tenancy a livello di chiave di partizione</h3><p>Con questa strategia, tutti i tenant condividono un'unica raccolta e un unico schema, ma i dati di ciascun tenant vengono automaticamente instradati in 16 partizioni fisicamente isolate in base al valore della <a href="/docs/it/v2.5.x/use-partition-key.md">chiave di partizione</a>. Anche se ogni partizione fisica può contenere più tenant, i dati dei diversi tenant rimangono logicamente separati.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

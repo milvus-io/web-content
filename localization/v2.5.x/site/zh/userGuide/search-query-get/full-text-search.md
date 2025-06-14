@@ -4,6 +4,7 @@ title: 全文搜索
 summary: >-
   全文搜索是一种在文本数据集中检索包含特定术语或短语的文档，然后根据相关性对结果进行排序的功能。该功能克服了语义搜索的局限性（语义搜索可能会忽略精确的术语），确保您获得最准确且与上下文最相关的结果。此外，它还能接受原始文本输入，自动将文本数据转换为稀疏嵌入，无需手动生成向量嵌入，从而简化了向量搜索。
 ---
+
 <h1 id="Full-Text-Search" class="common-anchor-header">全文搜索<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ summary: >-
     </button></h1><p>全文搜索是一种在文本数据集中检索包含特定术语或短语的文档，然后根据相关性对结果进行排序的功能。该功能克服了语义搜索的局限性（语义搜索可能会忽略精确的术语），确保您获得最准确且与上下文最相关的结果。此外，它还通过接受原始文本输入来简化向量搜索，自动将您的文本数据转换为稀疏嵌入，而无需手动生成向量嵌入。</p>
 <p>该功能使用 BM25 算法进行相关性评分，在检索增强生成 (RAG) 场景中尤为重要，它能优先处理与特定搜索词密切匹配的文档。</p>
 <div class="alert note">
-<p>通过将全文检索与基于语义的密集向量搜索相结合，可以提高搜索结果的准确性和相关性。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
+<p>通过将全文检索与基于语义的密集向量搜索相结合，可以提高搜索结果的准确性和相关性。更多信息，请参阅<a href="/docs/zh/v2.5.x/multi-vector-search.md">混合搜索</a>。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +43,7 @@ summary: >-
     </button></h2><p>全文搜索无需手动嵌入，从而简化了基于文本的搜索过程。该功能通过以下工作流程进行操作符：</p>
 <ol>
 <li><p><strong>文本输入</strong>：插入原始文本文档或提供查询文本，无需手动嵌入。</p></li>
-<li><p><strong>文本分析</strong>：Milvus 使用<a href="/docs/zh/analyzer-overview.md">分析器</a>将输入文本标记为可搜索的单个术语。</p></li>
+<li><p><strong>文本分析</strong>：Milvus 使用<a href="/docs/zh/v2.5.x/analyzer-overview.md">分析器</a>将输入文本标记为可搜索的单个术语。</p></li>
 <li><p><strong>函数处理</strong>：内置函数接收标记化术语，并将其转换为稀疏向量表示。</p></li>
 <li><p><strong>Collections 存储</strong>：Milvus 将这些稀疏嵌入存储在 Collections 中，以便高效检索。</p></li>
 <li><p><strong>BM25 评分</strong>：在搜索过程中，Milvus 应用 BM25 算法为存储的文档计算分数，并根据与查询文本的相关性对匹配结果进行排序。</p></li>
@@ -53,9 +54,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>全文搜索</span> </span></p>
 <p>要使用全文搜索，请遵循以下主要步骤：</p>
 <ol>
-<li><p><a href="/docs/zh/full-text-search.md#Create-a-collection-for-full-text-search">创建 Collections</a>：设置带有必要字段的 Collections，并定义一个将原始文本转换为稀疏嵌入的函数。</p></li>
-<li><p><a href="/docs/zh/full-text-search.md#Insert-text-data">插入数据</a>：将原始文本文档输入 Collections。</p></li>
-<li><p><a href="/docs/zh/full-text-search.md#Perform-full-text-search">执行搜索</a>：使用查询文本搜索你的 Collections 并检索相关结果。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/full-text-search.md#Create-a-collection-for-full-text-search">创建 Collections</a>：设置带有必要字段的 Collections，并定义一个将原始文本转换为稀疏嵌入的函数。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/full-text-search.md#Insert-text-data">插入数据</a>：将原始文本文档输入 Collections。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/full-text-search.md#Perform-full-text-search">执行搜索</a>：使用查询文本搜索你的 Collections 并检索相关结果。</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">创建用于全文搜索的 Collections<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,8 +85,8 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = MilvusClient.create_schema()
@@ -94,6 +95,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, dat
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -209,7 +211,7 @@ schema.WithField(entity.NewField().
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">id</code>: 作为主键，并通过<code translate="no">auto_id=True</code> 自动生成。</p></li>
-<li><p><code translate="no">text</code>:存储原始文本数据，用于全文搜索操作。数据类型必须是<code translate="no">VARCHAR</code> ，因为<code translate="no">VARCHAR</code> 是 Milvus 用于文本存储的字符串数据类型。设置<code translate="no">enable_analyzer=True</code> 以允许 Milvus 对文本进行标记化。默认情况下，Milvus 使用<code translate="no">standard</code><a href="/docs/zh/standard-analyzer.md"> 分析器</a>进行文本分析。要配置不同的分析器，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>。</p></li>
+<li><p><code translate="no">text</code>:存储原始文本数据，用于全文搜索操作。数据类型必须是<code translate="no">VARCHAR</code> ，因为<code translate="no">VARCHAR</code> 是 Milvus 用于文本存储的字符串数据类型。设置<code translate="no">enable_analyzer=True</code> 以允许 Milvus 对文本进行标记化。默认情况下，Milvus 使用<code translate="no">standard</code><a href="/docs/zh/v2.5.x/standard-analyzer.md"> 分析器</a>进行文本分析。要配置不同的分析器，请参阅<a href="/docs/zh/v2.5.x/analyzer-overview.md">分析器概述</a>。</p></li>
 <li><p><code translate="no">sparse</code>矢量字段：用于存储内部生成的稀疏嵌入的矢量字段，以进行全文搜索操作。数据类型必须是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 </ul>
 <p>现在，定义一个将文本转换为稀疏向量表示的函数，然后将其添加到 Schema 中：</p>
@@ -224,6 +226,7 @@ schema.WithField(entity.NewField().
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -318,7 +321,7 @@ schema.WithFunction(function)
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
+field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
@@ -330,6 +333,7 @@ index_params.add_index(
 
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
@@ -369,7 +373,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>要创建的索引类型。<code translate="no">AUTOINDEX</code> 允许 Milvus 自动优化索引设置。如果需要对索引设置进行更多控制，可以从 Milvus 中稀疏向量可用的各种索引类型中进行选择。更多信息，请参阅<a href="/docs/zh/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</p></td>
+     <td><p>要创建的索引类型。<code translate="no">AUTOINDEX</code> 允许 Milvus 自动优化索引设置。如果需要对索引设置进行更多控制，可以从 Milvus 中稀疏向量可用的各种索引类型中进行选择。更多信息，请参阅<a href="/docs/zh/v2.5.x/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -404,12 +408,13 @@ indexes.add(IndexParam.builder()
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.collectionSchema(schema)
+.indexParams(indexes)
+.build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
@@ -469,16 +474,17 @@ curl --request POST \
 
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 List&lt;JsonObject&gt; rows = Arrays.asList(
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
+gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
 );
 
 client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(rows)
-        .build());
+.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+.data(rows)
+.build());
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
@@ -526,13 +532,14 @@ client.insert(InsertReq.builder()
 }
 
 client.search(
-    collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
-    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
-    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
-    limit=<span class="hljs-number">3</span>,
-    search_params=search_params
+collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
+data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
+anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
+limit=<span class="hljs-number">3</span>,
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -609,7 +616,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>搜索过程中要忽略的低重要性词的比例。详情请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p></td>
+     <td><p>搜索过程中要忽略的低重要性词的比例。详情请参阅<a href="/docs/zh/v2.5.x/sparse_vector.md">稀疏向量</a>。</p></td>
    </tr>
    <tr>
      <td></td>

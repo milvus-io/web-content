@@ -61,11 +61,11 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>非結構化資料、嵌入與 Milvus</span> </span></p>
-<p>Milvus 提供三種部署模式，涵蓋各種資料規模 - 從 Jupyter Notebooks 中的本機原型，到管理數百億向量的大型 Kubernetes 集群：</p>
+<p>Milvus 提供三種部署模式，涵蓋廣泛的資料規模 - 從 Jupyter Notebooks 中的本機原型，到管理數百億向量的大型 Kubernetes 集群：</p>
 <ul>
 <li>Milvus Lite 是一個 Python 函式庫，可輕鬆整合至您的應用程式。Milvus Lite 是 Milvus 的輕量版，非常適合在 Jupyter Notebooks 中快速建立原型，或在資源有限的邊緣裝置上執行。<a href="/docs/zh-hant/milvus_lite.md">瞭解更多資訊</a>。</li>
 <li>Milvus Standalone 是單機伺服器部署，所有元件都綁定在單一 Docker 映像檔中，方便部署。<a href="/docs/zh-hant/install_standalone-docker.md">進一步瞭解</a>。</li>
-<li>Milvus Distributed 可部署在 Kubernetes 集群上，其雲端原生架構專為十億級或更大規模的場景而設計。此架構可確保關鍵元件的備援。<a href="/docs/zh-hant/install_cluster-milvusoperator.md">進一步瞭解</a>。</li>
+<li>Milvus Distributed 可部署在 Kubernetes 集群上，其雲端原生架構專為十億級或更大規模的情境所設計。此架構可確保關鍵元件的備援。<a href="/docs/zh-hant/install_cluster-milvusoperator.md">進一步瞭解</a>。</li>
 </ul>
 <h2 id="What-Makes-Milvus-so-Fast" class="common-anchor-header">是什麼讓 Milvus 如此快速？<button data-href="#What-Makes-Milvus-so-Fast" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Milvus 高度解耦的系統架構</span> </span></p>
-<p>Milvus 本身是完全無狀態的，因此可借助 Kubernetes 或公有雲輕鬆擴展。此外，Milvus 各個元件都有很好的解耦功能，其中最重要的三個任務 - 搜尋、資料插入和索引/壓縮 - 都被設計成容易並行化的流程，並將複雜的邏輯分離出來。這可確保相對應的查詢節點、資料節點和索引節點都能獨立擴充，以最佳化效能和成本效益。</p>
+<p>Milvus 本身是完全無狀態的，因此可借助 Kubernetes 或公有雲輕鬆擴展。此外，Milvus 各個元件都有很好的解耦功能，其中最重要的三項任務 - 搜尋、資料插入和索引/壓縮 - 都被設計成容易並行化的流程，並將複雜的邏輯分離出來。這可確保相對應的查詢節點、資料節點和索引節點都能獨立擴充，以最佳化效能和成本效益。</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus 支援的搜尋類型<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -131,7 +131,7 @@ summary: >-
 <li><a href="/docs/zh-hant/single-vector-search.md#Range-search">範圍搜尋</a>：尋找距離您的查詢向量指定半徑範圍內的向量。</li>
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>：根據多向量領域進行 ANN 搜尋。</li>
 <li><a href="/docs/zh-hant/full-text-search.md">全文搜尋</a>：根據 BM25 進行全文搜尋。</li>
-<li><a href="/docs/zh-hant/reranking.md">重新排序</a>：根據附加條件或輔助演算法調整搜尋結果的順序，精煉最初的 ANN 搜尋結果。</li>
+<li><a href="/docs/zh-hant/weighted-ranker.md">重新排序</a>：根據附加條件或輔助演算法調整搜尋結果的順序，精煉最初的 ANN 搜尋結果。</li>
 <li><a href="/docs/zh-hant/get-and-scalar-query.md#Get-Entities-by-ID">擷取</a>：依據主鍵擷取資料。</li>
 <li><a href="/docs/zh-hant/get-and-scalar-query.md#Use-Basic-Operators">查詢</a>：使用特定的表達方式擷取資料。</li>
 </ul>

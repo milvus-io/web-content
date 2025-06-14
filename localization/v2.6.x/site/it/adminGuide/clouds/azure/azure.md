@@ -4,7 +4,7 @@ title: Distribuzione di Milvus su Microsoft Azure con Kubernetes
 related_key: cluster
 summary: Scoprite come distribuire un cluster Milvus su Azure.
 ---
-<h1 id="Deploy-Milvus-on-Azure-with-AKS" class="common-anchor-header">Distribuire Milvus su Azure con AKS<button data-href="#Deploy-Milvus-on-Azure-with-AKS" class="anchor-icon" translate="no">
+<h1 id="Deploy-Milvus-on-Azure-with-AKS" class="common-anchor-header">Distribuzione di Milvus su Azure con AKS<button data-href="#Deploy-Milvus-on-Azure-with-AKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,7 +242,7 @@ helm repo update
 helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Nei comandi precedenti, aggiungiamo il repo dei grafici di Milvus Helm in locale e aggiorniamo il repo per recuperare i grafici più recenti. Poi installiamo un'istanza di Milvus e la chiamiamo <strong>my-release</strong>.</p>
-<p>Notate il valore di config <code translate="no">service.type</code>, che indica che vogliamo esporre l'istanza Milvus attraverso un bilanciatore di carico Layer-4.</p>
+<p>Notate il valore config <code translate="no">service.type</code>, che indica che vogliamo esporre l'istanza Milvus attraverso un bilanciatore di carico Layer-4.</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">Verificare la distribuzione<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

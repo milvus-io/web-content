@@ -7,6 +7,7 @@ summary: >-
   Verbesserung der Abfrageleistung bei skalaren Feldern mit geringer
   Kardinalität.
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">BITMAP<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,8 +88,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>In diesem Beispiel erstellen wir einen Bitmap-Index für das Feld <code translate="no">category</code> der Sammlung <code translate="no">my_collection</code>. Die Methode <code translate="no">add_index()</code> wird verwendet, um den Feldnamen, den Indextyp und den Indexnamen anzugeben.</p>
-<p>Sobald der Bitmap-Index erstellt ist, können Sie den Parameter <code translate="no">filter</code> in Abfrageoperationen verwenden, um eine skalare Filterung auf der Grundlage des indizierten Feldes durchzuführen. Auf diese Weise können Sie die Suchergebnisse mithilfe des Bitmap-Indexes effizient eingrenzen. Weitere Informationen finden Sie unter <a href="/docs/de/boolean.md">Metadatenfilterung</a>.</p>
+<p>Sobald der Bitmap-Index erstellt ist, können Sie den Parameter <code translate="no">filter</code> in Abfrageoperationen verwenden, um eine skalare Filterung auf der Grundlage des indizierten Feldes durchzuführen. Auf diese Weise können Sie die Suchergebnisse mithilfe des Bitmap-Indexes effizient eingrenzen. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/boolean.md">Metadatenfilterung</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Begrenzungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

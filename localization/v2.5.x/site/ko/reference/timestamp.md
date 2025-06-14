@@ -3,6 +3,7 @@ id: timestamp.md
 title: Milvus의 타임스탬프
 summary: 타임스탬프의 개념과 Milvus 벡터 데이터베이스의 네 가지 주요 타임스탬프 관련 매개변수에 대해 알아보세요.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">타임스탬프<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,5 +104,5 @@ summary: 타임스탬프의 개념과 Milvus 벡터 데이터베이스의 네 �
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/consistency.md">보증 타임스탬프를 통해 Milvus에서 일관성을 조정하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.5.x/consistency.md">보증 타임스탬프를 통해 Milvus에서 일관성을 조정하는</a> 방법 알아보기</li>
 </ul>

@@ -3,6 +3,7 @@ id: multi_tenancy.md
 title: 멀티 테넌시 구현
 summary: Milvus에서 멀티테넌트란 여러 고객 또는 팀(테넌트라고 함)이 격리된 데이터 환경을 유지하면서 동일한 클러스터를 공유한다는 의미입니다.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">멀티 테넌시 구현<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ summary: Milvus에서 멀티테넌트란 여러 고객 또는 팀(테넌트라�
         ></path>
       </svg>
     </button></h2><p>Milvus는 4가지 수준의 멀티 테넌시를 지원합니다: <strong>데이터베이스</strong>, <strong>컬렉션</strong>, <strong>파티션</strong> 및 <strong>파티션 키</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">데이터베이스 수준 멀티 테넌시</h3><p>데이터베이스 수준 멀티테넌시를 사용하면 각 테넌트는 하나 이상의 컬렉션이 포함된 해당 <a href="/docs/ko/manage_databases.md">데이터베이스를</a> 받게 됩니다.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">데이터베이스 수준 멀티 테넌시</h3><p>데이터베이스 수준 멀티테넌시를 사용하면 각 테넌트는 하나 이상의 컬렉션이 포함된 해당 <a href="/docs/ko/v2.5.x/manage_databases.md">데이터베이스를</a> 받게 됩니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -47,7 +48,7 @@ summary: Milvus에서 멀티테넌트란 여러 고객 또는 팀(테넌트라�
 <li><p><strong>유연성</strong>: 각 데이터베이스는 서로 다른 스키마를 가진 컬렉션을 가질 수 있어 매우 유연한 데이터 구성을 제공하고 각 테넌트가 고유한 데이터 스키마를 가질 수 있습니다.</p></li>
 <li><p><strong>기타</strong>: 이 전략은 RBAC도 지원하므로 테넌트별 사용자 액세스를 세밀하게 제어할 수 있습니다. 또한 특정 테넌트에 대한 데이터를 유연하게 로드하거나 해제하여 핫 데이터와 콜드 데이터를 효과적으로 관리할 수 있습니다.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">컬렉션 수준 멀티 테넌시</h3><p>컬렉션 수준 멀티 테넌시를 사용하면 각 테넌트에 <a href="/docs/ko/manage-collections.md">컬렉션이</a> 할당되어 강력한 데이터 격리가 가능합니다.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">컬렉션 수준 멀티 테넌시</h3><p>컬렉션 수준 멀티 테넌시를 사용하면 각 테넌트에 <a href="/docs/ko/v2.5.x/manage-collections.md">컬렉션이</a> 할당되어 강력한 데이터 격리가 가능합니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -58,7 +59,7 @@ summary: Milvus에서 멀티테넌트란 여러 고객 또는 팀(테넌트라�
 <li><p><strong>유연성</strong>: 이 전략을 사용하면 각 컬렉션이 자체 스키마를 가질 수 있으므로 서로 다른 데이터 스키마를 가진 테넌트를 수용할 수 있습니다.</p></li>
 <li><p><strong>기타</strong>: 이 전략은 RBAC도 지원하므로 테넌트에 대한 세분화된 액세스 제어가 가능합니다. 또한 특정 테넌트에 대한 데이터를 유연하게 로드하거나 해제하여 핫 데이터와 콜드 데이터를 효과적으로 관리할 수 있습니다.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">파티션 수준 멀티 테넌시</h3><p>파티션 수준 멀티 테넌시에서는 각 테넌트가 공유 컬렉션 내에서 수동으로 생성된 <a href="/docs/ko/manage-partitions.md">파티션에</a> 할당됩니다.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">파티션 수준 멀티 테넌시</h3><p>파티션 수준 멀티 테넌시에서는 각 테넌트가 공유 컬렉션 내에서 수동으로 생성된 <a href="/docs/ko/v2.5.x/manage-partitions.md">파티션에</a> 할당됩니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -69,7 +70,7 @@ summary: Milvus에서 멀티테넌트란 여러 고객 또는 팀(테넌트라�
 <li><p><strong>유연성</strong>: 이 전략을 사용하려면 모든 테넌트가 동일한 데이터 스키마를 공유해야 합니다. 그리고 파티션을 수동으로 만들어야 합니다.</p></li>
 <li><p><strong>기타</strong>: 파티션 수준에서는 RBAC가 지원되지 않습니다. 테넌트를 개별적으로 또는 여러 파티션에 걸쳐 쿼리할 수 있으므로 이 접근 방식은 테넌트 세그먼트 전반에서 집계된 쿼리 또는 분석과 관련된 시나리오에 적합합니다. 또한 특정 테넌트에 대한 데이터를 유연하게 로드하거나 해제하여 핫 데이터와 콜드 데이터를 효과적으로 관리할 수 있습니다.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">키 수준 멀티테넌시 파티션</h3><p>이 전략을 사용하면 모든 테넌트가 단일 컬렉션과 스키마를 공유하지만, 각 테넌트의 데이터는 <a href="/docs/ko/use-partition-key.md">파티션 키</a> 값에 따라 물리적으로 격리된 16개의 파티션으로 자동 라우팅됩니다. 각 물리적 파티션에는 여러 테넌트가 포함될 수 있지만, 서로 다른 테넌트의 데이터는 논리적으로 분리된 상태로 유지됩니다.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">키 수준 멀티테넌시 파티션</h3><p>이 전략을 사용하면 모든 테넌트가 단일 컬렉션과 스키마를 공유하지만, 각 테넌트의 데이터는 <a href="/docs/ko/v2.5.x/use-partition-key.md">파티션 키</a> 값에 따라 물리적으로 격리된 16개의 파티션으로 자동 라우팅됩니다. 각 물리적 파티션에는 여러 테넌트가 포함될 수 있지만, 서로 다른 테넌트의 데이터는 논리적으로 분리된 상태로 유지됩니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

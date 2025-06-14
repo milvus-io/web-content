@@ -5,6 +5,7 @@ related_key: Docker
 summary: Découvrez comment installer Milvus de manière autonome avec Docker.
 title: Exécuter Milvus dans Docker (Linux)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">Exécuter Milvus dans Docker (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: Exécuter Milvus dans Docker (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Installer Docker</a>.</li>
-<li><a href="/docs/fr/prerequisite-docker.md">Vérifier la configuration matérielle et logicielle requise</a> avant l'installation.</li>
+<li><a href="/docs/fr/v2.5.x/prerequisite-docker.md">Vérifier la configuration matérielle et logicielle requise</a> avant l'installation.</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">Installer Milvus dans Docker<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +74,7 @@ title: Exécuter Milvus dans Docker (Linux)
 <li>Pour modifier la configuration par défaut de Milvus, ajoutez vos paramètres au fichier <strong>user.yaml</strong> dans le dossier actuel, puis redémarrez le service.</li>
 <li>Le volume de données Milvus est mappé sur <strong>volumes/milvus</strong> dans le dossier actuel.</li>
 </ul>
-<p>Vous pouvez accéder à l'interface Web Milvus à l'adresse <code translate="no">http://127.0.0.1:9091/webui/</code> pour en savoir plus sur votre instance Milvus. Pour plus de détails, voir <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Vous pouvez accéder à l'interface Web Milvus à l'adresse <code translate="no">http://127.0.0.1:9091/webui/</code> pour en savoir plus sur votre instance Milvus. Pour plus de détails, voir <a href="/docs/fr/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Arrêt et suppression de Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,27 +118,27 @@ title: Exécuter Milvus dans Docker (Linux)
       </svg>
     </button></h2><p>Après avoir installé Milvus dans Docker, vous pouvez.. :</p>
 <ul>
-<li><p>Consulter <a href="/docs/fr/quickstart.md">Quickstart</a> pour voir ce que Milvus peut faire.</p></li>
+<li><p>Consulter <a href="/docs/fr/v2.5.x/quickstart.md">Quickstart</a> pour voir ce que Milvus peut faire.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
-<li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>
-<li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
-<li><a href="/docs/fr/manage-partitions.md">Gérer les partitions</a></li>
-<li><a href="/docs/fr/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
-<li><a href="/docs/fr/single-vector-search.md">Recherche à vecteur unique</a></li>
-<li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
+<li><a href="/docs/fr/v2.5.x/manage_databases.md">Gérer les bases de données</a></li>
+<li><a href="/docs/fr/v2.5.x/manage-collections.md">Gérer les collections</a></li>
+<li><a href="/docs/fr/v2.5.x/manage-partitions.md">Gérer les partitions</a></li>
+<li><a href="/docs/fr/v2.5.x/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
+<li><a href="/docs/fr/v2.5.x/single-vector-search.md">Recherche à vecteur unique</a></li>
+<li><a href="/docs/fr/v2.5.x/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
-<li><p><a href="/docs/fr/upgrade_milvus_cluster-helm.md">Mise à niveau de Milvus à l'aide de Helm Chart</a>.</p></li>
-<li><p><a href="/docs/fr/scaleout.md">Faire évoluer votre cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/fr/v2.5.x/upgrade_milvus_cluster-helm.md">Mise à niveau de Milvus à l'aide de Helm Chart</a>.</p></li>
+<li><p><a href="/docs/fr/v2.5.x/scaleout.md">Faire évoluer votre cluster Milvus</a>.</p></li>
 <li><p>Déployer votre cluster Milvus sur des clouds :</p>
 <ul>
-<li><a href="/docs/fr/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/fr/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/fr/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/fr/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/fr/v2.5.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/fr/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Découvrez <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour l'observabilité et la gestion de Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/milvus_backup_overview.md">Milvus Backup</a>, un outil open-source pour les sauvegardes de données Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open-source pour le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.5.x/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour l'observabilité et la gestion de Milvus.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.5.x/milvus_backup_overview.md">Milvus Backup</a>, un outil open-source pour les sauvegardes de données Milvus.</p></li>
+<li><p>Découvrez <a href="/docs/fr/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>, un outil open-source pour le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
 <li><p>Découvrez <a href="https://github.com/zilliztech/attu">Attu</a>, un outil GUI open-source pour la gestion intuitive de Milvus.</p></li>
-<li><p><a href="/docs/fr/monitor.md">Surveiller Milvus avec Prometheus</a>.</p></li>
+<li><p><a href="/docs/fr/v2.5.x/monitor.md">Surveiller Milvus avec Prometheus</a>.</p></li>
 </ul>

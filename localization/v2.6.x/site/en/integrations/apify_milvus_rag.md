@@ -23,7 +23,7 @@ title: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/apify_milvus_rag.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/apify_milvus_rag.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
 <p>This tutorial explains how to crawl websites using Apify’s Website Content Crawler and save the data into Milvus/Zilliz vector database to be later used for question answering.</p>
 <p><a href="https://apify.com/">Apify</a> is a web scraping and data extraction platform that offers an app marketplace with over two thousand ready-made cloud tools, known as Actors. These tools are ideal for use cases such as extracting structured data from e-commerce websites, social media, search engines, online maps, and more.</p>
 <p>For example, the <a href="https://apify.com/apify/website-content-crawler">Website Content Crawler</a> Actor can deeply crawl websites, clean their HTML by removing a cookies modal, footer, or navigation, and then transform the HTML into Markdown.</p>

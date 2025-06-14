@@ -3,6 +3,7 @@ id: integrate_with_voxel51.md
 summary: 이 페이지에서는 voxel51과의 통합에 대해 설명합니다.
 title: Milvus와 FiftyOne으로 비전 검색 수행하기
 ---
+
 <h1 id="Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="common-anchor-header">Milvus와 FiftyOne으로 비전 검색 수행하기<button data-href="#Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +38,7 @@ title: Milvus와 FiftyOne으로 비전 검색 수행하기
       </svg>
     </button></h2><p>시작하기 전에 다음이 준비되어 있는지 확인하세요:</p>
 <ul>
-<li>실행 중인 <a href="/docs/ko/install_standalone-docker.md">Milvus 서버</a>.</li>
+<li>실행 중인 <a href="/docs/ko/v2.5.x/install_standalone-docker.md">Milvus 서버</a>.</li>
 <li><code translate="no">pymilvus</code> 및 <code translate="no">fiftyone</code> 이 설치된 Python 환경.</li>
 <li>검색할 이미지 <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">데이터 세트</a>.</li>
 </ul>
@@ -108,11 +109,12 @@ dataset = foz.load_zoo_dataset(<span class="hljs-string">&quot;quickstart&quot;<
 
 <span class="hljs-comment"># Steps 2 and 3: Compute embeddings and create a similarity index</span>
 milvus_index = fob.compute_similarity(
-    dataset,
-    brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
-    backend=<span class="hljs-string">&quot;milvus&quot;</span>,
+dataset,
+brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
+backend=<span class="hljs-string">&quot;milvus&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2. 비전 유사도 검색 수행</h3><p>이제 Milvus 유사성 지수를 사용하여 데이터 세트에서 비전 유사성 검색을 수행할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 4: Query your data</span>
 query = dataset.first().<span class="hljs-built_in">id</span>  <span class="hljs-comment"># query by sample ID</span>
@@ -130,6 +132,7 @@ milvus_index.cleanup()
 <span class="hljs-comment"># Delete run record from FiftyOne</span>
 dataset.delete_brain_run(<span class="hljs-string">&quot;milvus_index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="3-Delete-the-index" class="common-anchor-header">3. 인덱스 삭제하기</h3><p>Milvus 유사도 인덱스가 더 이상 필요하지 않은 경우 다음 코드를 사용하여 삭제할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 5: Delete the index</span>
 milvus_index.delete()
@@ -155,6 +158,7 @@ milvus_index.delete()
 
 fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>또는 다음 환경 변수를 설정하여 Milvus 백엔드를 사용하도록 FiftyOne을 영구적으로 구성할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">FIFTYONE_BRAIN_DEFAULT_SIMILARITY_BACKEND</span>=milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -194,6 +198,7 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
 <span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_PEM_PATH=XXXXXX
 <span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="FiftyOne-Brain-config" class="common-anchor-header">피프티원 브레인 설정</h3><p><code translate="no">~/.fiftyone/brain_config.json</code> 에 위치한 <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">뇌 구성에</a> 자격 증명을 저장할 수도 있습니다:</p>
 <pre><code translate="no" class="language-python">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
@@ -213,19 +218,21 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
             <span class="hljs-string">&quot;server_name&quot;</span>: <span class="hljs-string">&quot;XXXXXX&quot;</span>
         }
     }
+
 }
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 파일은 생성할 때까지 존재하지 않는다는 점에 유의하세요.</p>
 <h3 id="Keyword-arguments" class="common-anchor-header">키워드 인수</h3><p>다음과 같은 메서드를 호출할 때마다 Milvus 자격 증명을 키워드 인자로 수동으로 제공할 수 있습니다. <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> 와 같은 메서드를 호출할 때마다 키워드 인자로 Milvus 자격 증명을 수동으로 제공할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 
 milvus_index = fob.compute_similarity(
-    ...
-    backend=<span class="hljs-string">&quot;milvus&quot;</span>,
-    brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
-    uri=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
-    user=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
-    password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+...
+backend=<span class="hljs-string">&quot;milvus&quot;</span>,
+brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
+uri=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+user=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
 
     <span class="hljs-comment"># also available if necessary</span>
     secure=<span class="hljs-literal">True</span>,
@@ -236,8 +243,10 @@ milvus_index = fob.compute_similarity(
     ca_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 전략을 사용하는 경우 나중에 인덱스를 로드할 때 다음을 통해 자격 증명을 수동으로 제공해야 합니다. <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.load_brain_results"><code translate="no">load_brain_results()</code></a>:</p>
 <pre><code translate="no" class="language-python">milvus_index = dataset.load_brain_results(
     <span class="hljs-string">&quot;milvus_index&quot;</span>,
@@ -254,15 +263,17 @@ milvus_index = fob.compute_similarity(
     ca_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Milvus-config-parameters" class="common-anchor-header">Milvus 구성 매개변수</h3><p>Milvus 백엔드는 유사도 쿼리를 사용자 정의하는 데 사용할 수 있는 다양한 쿼리 매개변수를 지원합니다. 이러한 매개변수는 다음과 같습니다:</p>
 <ul>
 <li><p><strong>collection_name</strong><em>(없음</em>): 사용하거나 생성할 Milvus 컬렉션의 이름입니다. 아무것도 제공되지 않으면 새 컬렉션이 생성됩니다.</p></li>
 <li><p><strong>metric</strong> (<em>"dotproduct")</em>: 새 인덱스를 생성할 때 사용할 임베딩 거리 메트릭입니다. 지원되는 값은 (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>일관성_레벨</strong> (<em>"세션")</em>: 사용할 일관성 수준입니다. 지원되는 값은 (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>) 입니다.</p></li>
 </ul>
-<p>이러한 매개변수에 대한 자세한 내용은 <a href="/docs/ko/authenticate.md">Milvus 인증 문서</a> 및 <a href="/docs/ko/consistency.md">Milvus 일관성 수준 문서를</a> 참조하세요.</p>
+<p>이러한 매개변수에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/authenticate.md">Milvus 인증 문서</a> 및 <a href="/docs/ko/v2.5.x/consistency.md">Milvus 일관성 수준 문서를</a> 참조하세요.</p>
 <p>이전 섹션에서 설명한 전략 중 하나를 통해 이러한 매개변수를 지정할 수 있습니다. 다음은 사용 가능한 모든 파라미터를 포함하는 <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">브레인 구성의</a> 예입니다:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
@@ -311,11 +322,12 @@ dataset.list_brain_runs(<span class="hljs-built_in">type</span>=fob.Similarity)
 
 <span class="hljs-comment"># Only list specific similarity runs</span>
 dataset.list_brain_runs(
-    <span class="hljs-built_in">type</span>=fob.Similarity,
-    patches_field=<span class="hljs-string">&quot;ground_truth&quot;</span>,
-    supports_prompts=<span class="hljs-literal">True</span>,
+<span class="hljs-built_in">type</span>=fob.Similarity,
+patches_field=<span class="hljs-string">&quot;ground_truth&quot;</span>,
+supports_prompts=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>또는 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.get_brain_info"><code translate="no">get_brain_info()</code></a> 를 사용하여 브레인 런의 구성에 대한 정보를 검색할 수 있습니다:</p>
 <pre><code translate="no" class="language-python">info = dataset.get_brain_info(brain_key)
 <span class="hljs-built_in">print</span>(info)

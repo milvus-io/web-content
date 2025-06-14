@@ -58,7 +58,7 @@ go build
       </svg>
     </button></h2><p>下載<a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">範例組態檔案</a>，並依您的需求進行調整。</p>
 <p>然後在已下載或已建立的 Milvus Backup 二進位檔旁邊建立一個資料夾，將資料夾名稱為<code translate="no">configs</code> ，並將設定檔放在<code translate="no">configs</code> 資料夾內。</p>
-<p>您的資料夾結構應與以下相似：</p>
+<p>您的資料夾結構應該與下面相似：</p>
 <pre>
   <code translate="no">
   workspace

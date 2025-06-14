@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Elasticsearch, das auf Apache Lucene basiert, ist eine führende Open-Source-Suchmaschine. In modernen KI-Anwendungen ist sie jedoch mit Herausforderungen konfrontiert, darunter hohe Aktualisierungskosten, schlechte Echtzeit-Performance, ineffizientes Shard-Management, ein nicht cloud-natives Design und übermäßiger Ressourcenbedarf. Als Cloud-native Vektordatenbank überwindet Milvus diese Probleme mit entkoppelter Speicherung und Berechnung, effizienter Indexierung für hochdimensionale Daten und nahtloser Integration in moderne Infrastrukturen. Sie bietet überlegene Leistung und Skalierbarkeit für KI-Workloads.</p>
+    </button></h1><p>Elasticsearch, das auf Apache Lucene basiert, ist eine führende Open-Source-Suchmaschine. In modernen KI-Anwendungen ist sie jedoch mit Herausforderungen konfrontiert, darunter hohe Aktualisierungskosten, schlechte Echtzeit-Performance, ineffizientes Shard-Management, ein nicht cloud-natives Design und übermäßiger Ressourcenbedarf. Als Cloud-native Vektordatenbank überwindet Milvus diese Probleme mit entkoppelter Speicherung und Berechnung, effizienter Indexierung für hochdimensionale Daten und nahtloser Integration in moderne Infrastrukturen. Sie bietet eine überragende Leistung und Skalierbarkeit für KI-Workloads.</p>
 <p>Dieser Artikel zielt darauf ab, die Migration Ihrer Codebasis von Elasticsearch zu Milvus zu erleichtern und bietet verschiedene Beispiele für die Konvertierung von Abfragen.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Elasticsearch erzeugen Operationen im Abfragekontext Relevanzwerte, während Operationen im Filterkontext dies nicht tun. In ähnlicher Weise erzeugen Milvus-Suchen Ähnlichkeitsbewertungen, während die filterähnlichen Abfragen dies nicht tun. Bei der Migration Ihrer Codebasis von Elasticsearch nach Milvus ist das Schlüsselprinzip die Konvertierung von Feldern, die im Abfragekontext von Elasticsearch verwendet werden, in Vektorfelder, um die Generierung von Ähnlichkeitsbewertungen zu ermöglichen.</p>
+    </button></h2><p>In Elasticsearch erzeugen die Operationen im Abfragekontext Relevanzwerte, während die Operationen im Filterkontext keine Relevanzwerte erzeugen. In ähnlicher Weise erzeugen Milvus-Suchen Ähnlichkeitsbewertungen, während die filterähnlichen Abfragen dies nicht tun. Bei der Migration Ihrer Codebasis von Elasticsearch nach Milvus ist das Schlüsselprinzip die Konvertierung von Feldern, die im Abfragekontext von Elasticsearch verwendet werden, in Vektorfelder, um die Generierung von Ähnlichkeitsbewertungen zu ermöglichen.</p>
 <p>In der folgenden Tabelle sind einige Elasticsearch-Abfragemuster und ihre entsprechenden Entsprechungen in Milvus aufgeführt.</p>
 <table>
    <tr>
@@ -462,7 +462,7 @@ res = client.query(
 <li><p>Eine kNN-Suche nach dem Feld <code translate="no">vector</code> unter Verwendung des bereitgestellten Abfragevektors.</p></li>
 </ul>
 <p>Jeder Retriever trägt bis zu 50 Top-Treffer bei, die von RRF neu eingestuft werden, und die 10 besten Ergebnisse werden zurückgegeben.</p>
-<p>In Milvus können Sie eine ähnliche hybride Suche durchführen, indem Sie Suchen über mehrere Vektorfelder kombinieren, eine Reranking-Strategie anwenden und die Top-K-Ergebnisse aus der kombinierten Liste abrufen. Milvus unterstützt sowohl RRF- als auch gewichtete Reranker-Strategien. Weitere Einzelheiten finden Sie unter <a href="/docs/de/reranking.md">Reranking</a>.</p>
+<p>In Milvus können Sie eine ähnliche hybride Suche durchführen, indem Sie Suchen über mehrere Vektorfelder kombinieren, eine Reranking-Strategie anwenden und die Top-K-Ergebnisse aus der kombinierten Liste abrufen. Milvus unterstützt sowohl RRF- als auch gewichtete Reranker-Strategien. Weitere Einzelheiten finden Sie unter <a href="/docs/de/weighted-ranker.md">Reranking</a>.</p>
 <p>Das folgende Beispiel ist eine nicht-strikte Äquivalenz des obigen Elasticsearch-Beispiels in Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

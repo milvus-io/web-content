@@ -5,6 +5,7 @@ summary: >-
   O tokenizador jieba processa o texto chinês dividindo-o nas palavras que o
   compõem.
 ---
+
 <h1 id="Jieba" class="common-anchor-header">Jieba<button data-href="#Jieba" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +83,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter detalhes sobre os parâmetros, consulte <a href="/docs/pt/jieba-tokenizer.md#Custom-configuration">Configuração personalizada</a>.</p>
+<p>Para obter detalhes sobre os parâmetros, consulte <a href="/docs/pt/v2.5.x/jieba-tokenizer.md#Custom-configuration">Configuração personalizada</a>.</p>
 <h3 id="Custom-configuration" class="common-anchor-header">Configuração personalizada</h3><p>Para obter mais controle, é possível fornecer uma configuração personalizada que permite especificar um dicionário personalizado, selecionar o modo de segmentação e ativar ou desativar o Modelo de Markov Oculto (HMM). Por exemplo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -145,7 +146,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-las a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para obter detalhes, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de uso</a>.</p>
+<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-las a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para obter detalhes, consulte <a href="/docs/pt/v2.5.x/analyzer-overview.md#Example-use">Exemplo de uso</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,6 +201,7 @@ sample_text = <span class="hljs-string">&quot;milvus结巴分词器中文测试&
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

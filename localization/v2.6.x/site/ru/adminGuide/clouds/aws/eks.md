@@ -486,7 +486,7 @@ query after delete by expr=`pk in [&quot;0&quot; , &quot;1&quot;]` -&gt; result:
 <pre><code translate="no" class="language-shell">eksctl delete cluster --name milvus-eks-cluster --region us-east-2
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Удалите ведро AWS S3 и связанные с ним политики IAM.</p>
-<p><strong>Замените имя ведра и ARN политики на свои собственные.</strong></p>
+<p><strong>Вам следует заменить имя ведра и ARN политики на свои собственные.</strong></p>
 <pre><code translate="no" class="language-shell">aws s3 rm s3://milvus-bucket-039dd013c0712f085d60e21f --recursive
 
 aws s3api delete-bucket --bucket milvus-bucket-039dd013c0712f085d60e21f --region us-east-2

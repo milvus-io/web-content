@@ -6,7 +6,6 @@ summary: >-
   эффективный способ управления и организации данных и поддерживая
   многопользовательский режим.
 ---
-
 <h1 id="Database" class="common-anchor-header">База данных<button data-href="#Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,15 +59,14 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.create_database(
-db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.database.request.*;
@@ -157,13 +155,12 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database_2&quot;,
-&quot;properties&quot;: {
-&quot;database.replica.number&quot;: 3
-}
+    &quot;dbName&quot;: &quot;my_database_2&quot;,
+    &quot;properties&quot;: {
+        &quot;database.replica.number&quot;: 3
+    }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="View-databases" class="common-anchor-header">Просмотр баз данных<button data-href="#View-databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,13 +187,12 @@ client.list_databases()
 
 <span class="hljs-comment"># Check database details</span>
 client.describe_database(
-db_name=<span class="hljs-string">&quot;default&quot;</span>
+    db_name=<span class="hljs-string">&quot;default&quot;</span>
 )
 
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># {&quot;name&quot;: &quot;default&quot;}</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.database.response.*;
 
 <span class="hljs-type">ListDatabasesResp</span> <span class="hljs-variable">listDatabasesResp</span> <span class="hljs-operator">=</span> client.listDatabases();
@@ -321,13 +317,12 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;,
-&quot;properties&quot;: {
-&quot;database.max.collections&quot;: 10
-}
+    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;properties&quot;: {
+        &quot;database.max.collections&quot;: 10
+    }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h3 id="Drop-database-properties" class="common-anchor-header">Сбросить свойства базы данных</h3><p>Вы также можете сбросить свойство базы данных, сбросив его следующим образом. В следующем примере снимается ограничение на количество коллекций, которые можно создать в базе данных.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -361,13 +356,12 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;,
-&quot;propertyKeys&quot;: [
-&quot;database.max.collections&quot;
-]
+    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;propertyKeys&quot;: [
+        &quot;database.max.collections&quot;
+    ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Use-database" class="common-anchor-header">Использовать базу данных<button data-href="#Use-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -455,6 +449,6 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;
+    &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -24,7 +24,7 @@ title: OpenAI
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد ذلك، قم بإنشاء <strong>OpenAIEmbeddingFunction</strong>:</p>
+<p>ثم، قم بإنشاء <strong>OpenAIEmbeddingFunction</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 openai_ef = model.dense.OpenAIEmbeddingFunction(

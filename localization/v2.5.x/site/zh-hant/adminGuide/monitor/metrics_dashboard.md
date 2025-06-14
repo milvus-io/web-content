@@ -3,6 +3,7 @@ id: metrics_dashboard.md
 title: Milvus 指標儀表板
 summary: 本主題介紹 Milvus Dashboard 中顯示的監控指標。
 ---
+
 <h1 id="Milvus-Metrics-Dashboard" class="common-anchor-header">Milvus 指標儀表板<button data-href="#Milvus-Metrics-Dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ summary: 本主題介紹 Milvus Dashboard 中顯示的監控指標。
       </svg>
     </button></h1><p>Milvus 會在執行期間輸出詳細的時間序列指標清單。您可以使用<a href="https://prometheus.io/">Prometheus</a>和<a href="https://grafana.com/">Grafana</a>來視覺化這些指標。本主題介紹 Grafana Milvus Dashboard 中顯示的監控指標。</p>
 <p>本主題中的時間單位為毫秒。而本主題中的「第 99 百分位數」是指 99% 的時間統計都控制在某個數值之內。</p>
-<p>我們建議先閱讀<a href="/docs/zh-hant/monitor_overview.md">Milvus 監控框架概述</a>，以瞭解 Prometheus 的度量指標。</p>
+<p>我們建議先閱讀<a href="/docs/zh-hant/v2.5.x/monitor_overview.md">Milvus 監控框架概述</a>，以瞭解 Prometheus 的度量指標。</p>
 <p><details><summary>代理</summary></p>
 <table>
 <thead>

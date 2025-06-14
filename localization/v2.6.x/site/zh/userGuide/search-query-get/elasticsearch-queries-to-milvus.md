@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>基于 Apache Lucene 构建的 Elasticsearch 是领先的开源搜索引擎。然而，它在现代人工智能应用中面临着各种挑战，包括更新成本高、实时性差、碎片管理效率低、非云原生设计以及资源需求过高。作为云原生向量数据库，Milvus 通过解耦存储和计算、高效的高维数据索引以及与现代基础设施的无缝集成，克服了这些问题。它为人工智能工作负载提供了卓越的性能和可扩展性。</p>
+    </button></h1><p>基于 Apache Lucene 构建的 Elasticsearch 是领先的开源搜索引擎。然而，它在现代人工智能应用中面临着各种挑战，包括更新成本高、实时性差、分片管理效率低、非云原生设计以及资源需求过高。作为云原生向量数据库，Milvus 通过解耦存储和计算、高效的高维数据索引以及与现代基础设施的无缝集成，克服了这些问题。它为人工智能工作负载提供了卓越的性能和可扩展性。</p>
 <p>本文旨在帮助您将代码库从 Elasticsearch 迁移到 Milvus，并提供中间转换查询的各种示例。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -117,7 +117,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 Elasticsearch 中，全文查询使您能够搜索分析过的文本字段，如电子邮件正文。查询字符串将使用索引过程中应用于字段的相同分析器进行处理。</p>
-<h3 id="Match-query" class="common-anchor-header">匹配查询</h3><p>在 Elasticsearch 中，匹配查询会返回与提供的文本、数字、日期或布尔值相匹配的文档。在匹配之前会对所提供的文本进行分析。</p>
+<h3 id="Match-query" class="common-anchor-header">匹配查询</h3><p>在 Elasticsearch 中，匹配查询会返回与所提供的文本、数字、日期或布尔值相匹配的文档。在匹配之前会对所提供的文本进行分析。</p>
 <p>下面是一个使用匹配查询的 Elasticsearch 搜索请求示例。</p>
 <pre><code translate="no" class="language-bash">resp = client.search(
     query={
@@ -456,7 +456,7 @@ res = client.query(
 <li><p>使用提供的查询向量对<code translate="no">vector</code> 字段进行 kNN 检索。</p></li>
 </ul>
 <p>每个检索器最多可贡献 50 个最匹配结果，RRF 会对这些结果进行重新排序，并返回最终的前 10 个结果。</p>
-<p>在 Milvus 中，您可以通过组合多个向量字段的搜索、应用重新排序策略并从组合列表中检索前 K 结果来实现类似的混合搜索。Milvus 支持 RRF 和加权重排序策略。更多详情，请参阅<a href="/docs/zh/reranking.md">Rerankers</a>。</p>
+<p>在 Milvus 中，您可以通过组合多个向量字段的搜索、应用重新排序策略并从组合列表中检索前 K 结果来实现类似的混合搜索。Milvus 支持 RRF 和加权重排序策略。更多详情，请参阅<a href="/docs/zh/weighted-ranker.md">Rerankers</a>。</p>
 <p>下面是上述 Elasticsearch 示例在 Milvus 中的非严格等价。</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

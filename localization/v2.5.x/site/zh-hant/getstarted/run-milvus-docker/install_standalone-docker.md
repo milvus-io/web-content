@@ -5,6 +5,7 @@ related_key: Docker
 summary: 了解如何使用 Docker 獨立安裝 Milvus。
 title: 在 Docker 中執行 Milvus (Linux)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">在 Docker 中執行 Milvus (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: 在 Docker 中執行 Milvus (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">安裝 Docker</a>。</li>
-<li>安裝前<a href="/docs/zh-hant/prerequisite-docker.md">請檢查硬體和軟體的需求</a>。</li>
+<li>安裝前<a href="/docs/zh-hant/v2.5.x/prerequisite-docker.md">請檢查硬體和軟體的需求</a>。</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">在 Docker 中安裝 Milvus<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +74,7 @@ title: 在 Docker 中執行 Milvus (Linux)
 <li>若要變更預設的 Milvus 設定，請將您的設定新增到目前資料夾中的<strong>user.yaml</strong>檔案，然後再重新啟動服務。</li>
 <li>Milvus 資料卷會映射到目前資料夾中的<strong>volumes/milvus</strong>。</li>
 </ul>
-<p>您可以存取 Milvus WebUI，網址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，以瞭解更多關於您的 Milvus 實例的資訊。詳情請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>您可以存取 Milvus WebUI，網址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，以瞭解更多關於您的 Milvus 實例的資訊。詳情請參閱<a href="/docs/zh-hant/v2.5.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止和刪除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,27 +118,27 @@ title: 在 Docker 中執行 Milvus (Linux)
       </svg>
     </button></h2><p>在 Docker 中安裝 Milvus 後，您可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh-hant/quickstart.md">Quickstart</a>了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh-hant/v2.5.x/quickstart.md">Quickstart</a>了解 Milvus 的功能。</p></li>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh-hant/manage_databases.md">管理資料庫</a></li>
-<li><a href="/docs/zh-hant/manage-collections.md">管理資料集</a></li>
-<li><a href="/docs/zh-hant/manage-partitions.md">管理分割區</a></li>
-<li><a href="/docs/zh-hant/insert-update-delete.md">插入、倒置及刪除</a></li>
-<li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
-<li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage_databases.md">管理資料庫</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-collections.md">管理資料集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">管理分割區</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/insert-update-delete.md">插入、倒置及刪除</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/single-vector-search.md">單向量搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
 <li><p>在雲上部署您的 Milvu 集群：</p>
 <ul>
-<li><a href="/docs/zh-hant/eks.md">亞馬遜 EKS</a></li>
-<li><a href="/docs/zh-hant/gcp.md">谷歌雲</a></li>
-<li><a href="/docs/zh-hant/azure.md">微軟 Azure</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/eks.md">亞馬遜 EKS</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/gcp.md">谷歌雲</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/azure.md">微軟 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，Milvus 可觀察與管理的直覺式網頁介面。</p></li>
-<li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus 備份</a>，Milvus 資料備份的開放原始碼工具。</p></li>
-<li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態組態更新的開放原始碼工具。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.5.x/milvus-webui.md">Milvus WebUI</a>，Milvus 可觀察與管理的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.5.x/milvus_backup_overview.md">Milvus 備份</a>，Milvus 資料備份的開放原始碼工具。</p></li>
+<li><p>探索<a href="/docs/zh-hant/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態組態更新的開放原始碼工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一個開放源碼 GUI 工具，用於直觀的 Milvus 管理。</p></li>
-<li><p><a href="/docs/zh-hant/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.5.x/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

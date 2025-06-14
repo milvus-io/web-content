@@ -46,7 +46,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>クラスタリングコンパクション</span> </span></p>
-<p><strong>PartitionStatsを</strong>参照として、Milvusはクラスタリングキー値を持つ検索/クエリリクエストを受信した際に無関係なデータを刈り込み、その値にマッピングされたセグメント内で検索範囲を制限することで、検索パフォーマンスを向上させることができます。性能向上の詳細については、<a href="/docs/ja/clustering-compaction.md#Benchmark-Test">ベンチマーク</a>テストを参照してください。</p>
+<p><strong>PartitionStatsを</strong>参照として、Milvusはクラスタリングキー値を持つ検索/クエリリクエストを受信した際に無関係なデータを刈り込み、その値にマッピングされたセグメント内で検索範囲を制限することで、検索パフォーマンスを向上させることができます。性能向上の詳細については、<a href="/docs/ja/v2.5.x/clustering-compaction.md#Benchmark-Test">ベンチマーク</a>テストを参照してください。</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">クラスタリング・コンパクションの使用<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -159,7 +159,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>上記の変更をMilvusクラスタに適用するには、<a href="/docs/ja/configure-helm.md#Configure-Milvus-via-configuration-file">HelmによるMilvusの設定</a>および<a href="/docs/ja/configure_operator.md">Milvus OperatorsによるMilvusの</a>設定の手順に従ってください。</p>
+<p>上記の変更をMilvusクラスタに適用するには、<a href="/docs/ja/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">HelmによるMilvusの設定</a>および<a href="/docs/ja/v2.5.x/configure_operator.md">Milvus OperatorsによるMilvusの</a>設定の手順に従ってください。</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">コレクションの構成</h3><p>特定のコレクションでクラスタリングコンパクトを行うには、クラスタリングキーとしてコレクションからスカラーフィールドを選択する必要があります。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -400,7 +400,7 @@ System.out.println(stateResp.getState());
      <td><p>431.41</p></td>
    </tr>
 </table>
-<p>検索フィルターで検索範囲を狭めると、プルーンの比率が高くなる。これは、検索プロセスでより多くのエンティティがスキップされることを意味します。最初の行と最後の行の統計値を比較すると、クラスタリング・コンパクションなしの検索では、コレクション全体をスキャンする必要があることがわかります。一方、特定のキーを使用してクラスタリング・コンパクションを行う検索では、最大25倍の改善が得られます。</p>
+<p>検索フィルターで検索範囲を狭めると、プルーンの比率が高くなる。これは、検索プロセスでより多くのエンティティがスキップされることを意味します。最初の行と最後の行の統計値を比較すると、クラスタリング・コンパクションを使用しない検索では、コ レクション全体をスキャンする必要があることがわかります。一方、特定のキーを使用してクラスタリング・コンパクションを行う検索では、最大25倍の改善が得られます。</p>
 <h2 id="Best-Practices" class="common-anchor-header">ベストプラクティス<button data-href="#Best-Practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -127,6 +127,6 @@ summary: Saiba como criar um alerta para os serviços Milvus no Grafana.
 <li>Saiba como <a href="/docs/pt/allocate.md#standalone">alocar recursos</a></li>
 </ul></li>
 <li>Se está à procura de informações sobre como escalar um cluster Milvus:<ul>
-<li>Aprenda a <a href="/docs/pt/scaleout.md">escalar um cluster Milvus</a></li>
+<li>Aprenda <a href="/docs/pt/scaleout.md">a escalar um cluster Milvus</a></li>
 </ul></li>
 </ul>

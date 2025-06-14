@@ -73,7 +73,7 @@ summary: Pelajari cara mengonfigurasi knowhere untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Derajat maksimum dari grafik Vamana      </td>
+      <td>        Derajat maksimum grafik Vamana      </td>
       <td>56</td>
     </tr>
   </tbody>

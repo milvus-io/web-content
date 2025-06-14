@@ -5,6 +5,7 @@ summary: >-
   표준 분석기는 Milvus의 기본 분석기로, 분석기를 지정하지 않으면 텍스트 필드에 자동으로 적용됩니다. 문법 기반 토큰화를 사용하므로
   대부분의 언어에 효과적입니다.
 ---
+
 <h1 id="Standard-Analyzer" class="common-anchor-header">표준 분석기<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +39,8 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">standard</code> 분석기는 다음으로 구성됩니다:</p>
 <ul>
-<li><p><strong>토큰화 도구</strong>: <code translate="no">standard</code> 토큰화 도구를 사용하여 문법 규칙에 따라 텍스트를 개별 단어 단위로 분할합니다. 자세한 내용은 <a href="/docs/ko/standard-tokenizer.md">표준을</a> 참조하세요.</p></li>
-<li><p><strong>필터</strong>: <code translate="no">lowercase</code><a href="/docs/ko/lowercase-filter.md"> 필터를</a> 사용하여 모든 토큰을 소문자로 변환하여 대소문자를 구분하지 않고 검색할 수 있도록 합니다. 자세한 내용은 다음을 참조하세요.</p></li>
+<li><p><strong>토큰화 도구</strong>: <code translate="no">standard</code> 토큰화 도구를 사용하여 문법 규칙에 따라 텍스트를 개별 단어 단위로 분할합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/standard-tokenizer.md">표준을</a> 참조하세요.</p></li>
+<li><p><strong>필터</strong>: <code translate="no">lowercase</code><a href="/docs/ko/v2.5.x/lowercase-filter.md"> 필터를</a> 사용하여 모든 토큰을 소문자로 변환하여 대소문자를 구분하지 않고 검색할 수 있도록 합니다. 자세한 내용은 다음을 참조하세요.</p></li>
 </ul>
 <p><code translate="no">standard</code> 분석기의 기능은 다음 사용자 지정 분석기 구성과 동일합니다:</p>
 <div class="multipleCode">
@@ -136,7 +137,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 효율적인 토큰화 및 필터링을 위해 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
+<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 효율적인 토큰화 및 필터링을 위해 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,6 +192,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

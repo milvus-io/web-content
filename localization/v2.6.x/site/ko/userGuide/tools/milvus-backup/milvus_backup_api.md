@@ -69,7 +69,7 @@ go build
 </pre>
 <p>Milvus Backup은 데이터를 로컬 경로에 백업할 수 없으므로 구성 파일을 조정할 때 Minio 설정이 올바른지 확인하세요.</p>
 <div class="alert note">
-<p>기본 Minio 버킷의 이름은 Milvus 설치 방식에 따라 다릅니다. Minio 설정을 변경할 때는 다음 표를 참조하세요.</p>
+<p>기본 Minio 버킷의 이름은 Milvus를 설치하는 방식에 따라 다릅니다. Minio 설정을 변경할 때는 다음 표를 참조하세요.</p>
 <table>
 <thead>
 <tr><th>필드</th><th>도커 컴포즈</th><th>헬름/밀버스 오퍼레이터</th></tr>

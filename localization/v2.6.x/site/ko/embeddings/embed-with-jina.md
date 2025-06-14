@@ -73,7 +73,7 @@ print(&quot;Embeddings:&quot;, docs_embeddings)
 # Print dimension and shape of embeddings
 print(&quot;Dim:&quot;, jina_ef.dim, docs_embeddings[0].shape)
 </code></pre>
-<p>예상 출력은 다음과 유사합니다:</p>
+<p>예상 출력은 다음과 비슷합니다:</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">9.80641991e-02</span>, -<span class="hljs-number">8.51697400e-02</span>,  <span class="hljs-number">7.36531913e-02</span>,  <span class="hljs-number">1.42558888e-02</span>,
        -<span class="hljs-number">2.23589484e-02</span>,  <span class="hljs-number">1.68494112e-03</span>, -<span class="hljs-number">3.50753777e-02</span>, -<span class="hljs-number">3.11530549e-02</span>,
        -<span class="hljs-number">3.26012149e-02</span>,  <span class="hljs-number">5.04568312e-03</span>,  <span class="hljs-number">3.69836427e-02</span>,  <span class="hljs-number">3.48948985e-02</span>,

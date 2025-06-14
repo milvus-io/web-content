@@ -10,6 +10,7 @@ summary: >-
   Anda juga dapat menerapkan filter-filter ini dalam permintaan pencarian dan
   penghapusan.
 ---
+
 <h1 id="Filtering-Explained" class="common-anchor-header">Penjelasan Pemfilteran<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +58,7 @@ summary: >-
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Contoh: Memfilter Bidang Array</h3><p>Jika Anda memiliki bidang larik <code translate="no">history_temperatures</code> yang berisi catatan suhu rata-rata yang dilaporkan oleh observatorium sejak tahun 2000, dan ingin menemukan observatorium yang memiliki suhu pada tahun 2009 (catatan ke-10) melebihi 23°C, gunakan ekspresi ini:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk informasi lebih lanjut tentang operator dasar ini, lihat <a href="/docs/id/basic-operators.md">Operator Dasar</a>.</p>
+<p>Untuk informasi lebih lanjut tentang operator dasar ini, lihat <a href="/docs/id/v2.5.x/basic-operators.md">Operator Dasar</a>.</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">Templat ekspresi penyaringan<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +83,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>Pendekatan ini mengurangi overhead penguraian dan meningkatkan kecepatan kueri. Untuk informasi lebih lanjut, lihat <a href="/docs/id/filtering-templating.md">Filter Templating</a>.</p>
+<p>Pendekatan ini mengurangi overhead penguraian dan meningkatkan kecepatan kueri. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/filtering-templating.md">Filter Templating</a>.</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">Operator khusus tipe data<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,7 +113,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk detail lebih lanjut tentang operator JSON, lihat <a href="/docs/id/json-operators.md">Operator JSON</a>.</p>
+<p>Untuk detail lebih lanjut tentang operator JSON, lihat <a href="/docs/id/v2.5.x/json-operators.md">Operator JSON</a>.</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">Operator khusus bidang ARRAY</h3><p>Milvus menyediakan operator pemfilteran tingkat lanjut untuk bidang larik, seperti <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, dan <code translate="no">ARRAY_LENGTH</code>, yang memungkinkan kontrol yang lebih baik atas data larik:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: Memfilter entitas yang mengandung elemen tertentu.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
@@ -126,7 +127,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>: Memfilter berdasarkan panjang larik.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk detail lebih lanjut tentang operator larik, lihat <a href="/docs/id/array-operators.md">Operator</a> Larik.</p>
+<p>Untuk detail lebih lanjut tentang operator larik, lihat <a href="/docs/id/v2.5.x/array-operators.md">Operator</a> Larik.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Operator khusus bidang VARCHAR</h3><p>Milvus menyediakan operator khusus untuk pencarian berbasis teks yang tepat pada field VARCHAR:</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operator</h4><p>Operator <code translate="no">TEXT_MATCH</code> memungkinkan pengambilan dokumen yang tepat berdasarkan istilah kueri tertentu. Operator ini sangat berguna untuk pencarian terfilter yang menggabungkan filter skalar dengan pencarian kemiripan vektor. Tidak seperti pencarian semantik, Pencocokan Teks berfokus pada kemunculan istilah yang tepat.</p>
 <p>Milvus menggunakan Tantivy untuk mendukung pengindeksan terbalik dan pencarian teks berbasis istilah. Prosesnya melibatkan:</p>
@@ -134,4 +135,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>Penganalisis</strong>: Memberi tanda dan memproses teks masukan.</p></li>
 <li><p><strong>Pengindeksan</strong>: Membuat indeks terbalik yang memetakan token unik ke dokumen.</p></li>
 </ol>
-<p>Untuk lebih jelasnya, lihat <a href="/docs/id/keyword-match.md">Pencocokan Teks</a>.</p>
+<p>Untuk lebih jelasnya, lihat <a href="/docs/id/v2.5.x/keyword-match.md">Pencocokan Teks</a>.</p>

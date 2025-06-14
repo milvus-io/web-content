@@ -40,11 +40,11 @@ ef = InstructorEmbeddingFunction(
 <p><strong>Parametri</strong>:</p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(stringa</em>)</p>
-<p>Il nome del modello di incorporamento Mistral AI da usare per la codifica. Il valore predefinito è <code translate="no">hkunlp/instructor-xl</code>. Per ulteriori informazioni, consultare l'<a href="https://github.com/xlang-ai/instructor-embedding?tab=readme-ov-file#model-list">Elenco dei modelli</a>.</p></li>
+<p>Il nome del modello di incorporazione Mistral AI da usare per la codifica. Il valore predefinito è <code translate="no">hkunlp/instructor-xl</code>. Per ulteriori informazioni, consultare l'<a href="https://github.com/xlang-ai/instructor-embedding?tab=readme-ov-file#model-list">Elenco dei modelli</a>.</p></li>
 <li><p><code translate="no">query_instruction</code> <em>(stringa</em>)</p>
 <p>Istruzioni specifiche del compito che guidano il modello su come generare un embedding per una query o una domanda.</p></li>
 <li><p><code translate="no">doc_instruction</code> <em>(stringa</em>)</p>
-<p>Istruzione specifica del compito che guida il modello a generare un'incorporamento per un documento.</p></li>
+<p>Istruzione specifica che guida il modello a generare un'incorporamento per un documento.</p></li>
 </ul>
 <p>Per creare le incorporazioni per i documenti, utilizzare il metodo <code translate="no">encode_documents()</code>:</p>
 <pre><code translate="no" class="language-python">docs = [

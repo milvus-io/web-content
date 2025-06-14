@@ -26,7 +26,7 @@ title: 将 Milvus 的脉冲星从 V2 升级到 V3
 <ol>
 <li><p>升级过程需要短暂的服务中断（通常需要几分钟到十多分钟，视数据量而定）。</p></li>
 <li><p>操作前，需要停止所有正在运行的客户端向 Milvus 写入数据。否则，写入的数据可能会丢失。</p></li>
-<li><p>本文假定 Milvus 安装在命名空间<code translate="no">default</code> 并命名为<code translate="no">my-release</code> 。在执行从本页复制的命令时，请将参数更改为您自己的命名空间和发布名称。</p></li>
+<li><p>本文假设 Milvus 安装在命名空间<code translate="no">default</code> 并命名为<code translate="no">my-release</code> 。在执行从本页复制的命令时，请将参数更改为自己的命名空间和发布名称。</p></li>
 <li><p>确保您的工作环境在 Kubernetes 集群的上述命名空间下拥有权限，并安装了以下命令。</p>
 <p>a. <code translate="no">kubectl</code> &gt;= 1.20</p>
 <p>b. <code translate="no">helm</code> &gt;= 3.14.0</p>

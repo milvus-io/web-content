@@ -64,7 +64,7 @@ aws acm import-certificate --certificate fileb://Certificate.pem \
 <p>然后，将该文件应用于 EKS 群集，即可创建 Ingress。</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>现在，等待 AWS 设置 Layer-7 负载均衡器。您可以运行</p>
+<p>现在，等待 AWS 设置 Layer-7 负载平衡器。您可以运行</p>
 <pre><code translate="no" class="language-bash">kubectl -f ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
 <p>输出结果应与下图类似：</p>

@@ -4,6 +4,7 @@ title: 小写
 summary: >-
   小写过滤器将标记符号生成器生成的术语转换为小写，使搜索不区分大小写。例如，它可以将["高"、"性能"、"向量"、"数据库"]转换为["高"、"性能"、"向量"、"数据库"]。
 ---
+
 <h1 id="Lowercase" class="common-anchor-header">小写<button data-href="#Lowercase" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +64,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">lowercase</code> 过滤器对标记符生成的术语进行操作，因此必须与标记符结合使用。</p>
-<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/v2.5.x/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,6 +113,7 @@ sample_text = <span class="hljs-string">&quot;The Lowercase Filter Ensures Unifo
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

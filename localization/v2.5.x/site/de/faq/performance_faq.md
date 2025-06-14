@@ -5,6 +5,7 @@ summary: >-
   Leistungsverbesserungen und zu anderen leistungsbezogenen Themen.
 title: Leistung FAQ
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">Leistung FAQ<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -33,7 +34,7 @@ title: Leistung FAQ
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">Welche Faktoren beeinflussen die CPU-Auslastung?</h4><p>Die CPU-Auslastung steigt, wenn Milvus Indizes aufbaut oder Abfragen ausführt. Im Allgemeinen ist die Indexerstellung CPU-intensiv, außer bei Verwendung von Annoy, das auf einem einzigen Thread läuft.</p>
 <p>Bei der Ausführung von Abfragen wird die CPU-Auslastung durch <code translate="no">nq</code> und <code translate="no">nprobe</code> beeinflusst. Wenn <code translate="no">nq</code> und <code translate="no">nprobe</code> klein sind, ist die Gleichzeitigkeit gering und die CPU-Auslastung bleibt niedrig.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">Wirkt sich das gleichzeitige Einfügen von Daten und Suchen auf die Abfrageleistung aus?</h4><p>Einfügevorgänge sind nicht CPU-intensiv. Da jedoch neue Segmente möglicherweise noch nicht den Schwellenwert für den Indexaufbau erreicht haben, greift Milvus auf eine Brute-Force-Suche zurück, was die Abfrageleistung erheblich beeinträchtigt.</p>
-<p>Der Parameter <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> bestimmt den Schwellenwert für die Indexerstellung für ein Segment und ist standardmäßig auf 1024 Zeilen eingestellt. Siehe <a href="/docs/de/system_configuration.md">Systemkonfiguration</a> für weitere Informationen.</p>
+<p>Der Parameter <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> bestimmt den Schwellenwert für die Indexerstellung für ein Segment und ist standardmäßig auf 1024 Zeilen eingestellt. Siehe <a href="/docs/de/v2.5.x/system_configuration.md">Systemkonfiguration</a> für weitere Informationen.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">Kann die Indizierung eines VARCHAR-Feldes die Löschgeschwindigkeit verbessern?</h4><p>Die Indizierung eines VARCHAR-Feldes kann die "Delete By Expression"-Operationen beschleunigen, allerdings nur unter bestimmten Bedingungen:</p>
 <ul>
 <li><strong>INVERTED Index</strong>: Dieser Index hilft bei <code translate="no">IN</code> oder <code translate="no">==</code> Ausdrücken auf VARCHAR-Feldern mit nicht primären Schlüsseln.</li>

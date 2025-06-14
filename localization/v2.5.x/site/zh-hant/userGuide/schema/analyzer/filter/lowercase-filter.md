@@ -5,6 +5,7 @@ summary: >-
   小寫篩選器會將 tokenizer 產生的詞彙轉換為小寫，使搜尋不區分大小寫。例如，它可以將 ["High", "Performance",
   "Vector", "Database「] 轉換為 [」high", "performance", "vector", "database"] 。
 ---
+
 <h1 id="Lowercase" class="common-anchor-header">小寫<button data-href="#Lowercase" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +65,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">lowercase</code> 過濾器會在 tokenizer 產生的詞彙上運作，因此必須與 tokenizer 結合使用。</p>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效率的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效率的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,6 +114,7 @@ sample_text = <span class="hljs-string">&quot;The Lowercase Filter Ensures Unifo
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

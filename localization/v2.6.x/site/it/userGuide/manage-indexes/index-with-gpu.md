@@ -6,7 +6,6 @@ summary: >-
   migliorare le prestazioni di ricerca.
 title: Indice con GPU
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">Indice con GPU<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +38,7 @@ title: Indice con GPU
         ></path>
       </svg>
     </button></h2><p>Milvus utilizza un pool di memoria grafica globale per allocare la memoria della GPU.</p>
-<p>Supporta due parametri <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> nel <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">file di configurazione di Milvus</a>. La dimensione del pool è inizialmente impostata su <code translate="no">initMemSize</code> e verrà automaticamente espansa a <code translate="no">maxMemSize</code> dopo aver superato questo limite.</p>
+<p>Supporta due parametri <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> nel <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">file di configurazione di Milvus</a>. La dimensione del pool è inizialmente impostata su <code translate="no">initMemSize</code> e viene automaticamente espansa a <code translate="no">maxMemSize</code> dopo aver superato questo limite.</p>
 <p>Il valore predefinito di <code translate="no">initMemSize</code> è pari a 1/2 della memoria della GPU disponibile all'avvio di Milvus, mentre il valore predefinito di <code translate="no">maxMemSize</code> è pari a tutta la memoria della GPU disponibile.</p>
 <p>Fino a Milvus 2.4.1 (compresa la versione 2.4.1), Milvus utilizzava un pool di memoria GPU unificato. Per le versioni precedenti alla 2.4.1 (inclusa la versione 2.4.1), si raccomandava di impostare entrambi i valori a 0.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
@@ -94,7 +93,7 @@ title: Indice con GPU
 <li><p><strong>IVF_PQ</strong>: Offre una qualità superiore ma un tempo di costruzione più lento.</p></li>
 <li><p><strong>NN_DESCENT</strong>: Fornisce una costruzione più rapida con un richiamo potenzialmente inferiore.</p></li>
 </ul></li>
-<li><p><strong>cache_dataset_on_device</strong><em>(stringa</em>, <strong>"true"</strong> | <strong>"false")</strong>: Decide se mettere in cache il dataset originale nella memoria della GPU. Impostando <strong>"true"</strong> si migliora il richiamo raffinando i risultati della ricerca, mentre impostando <strong>"false" si</strong> conserva la memoria della GPU.</p></li>
+<li><p><strong>cache_dataset_on_device</strong><em>(stringa</em>, <strong>"true"</strong> | <strong>"false")</strong>: Decide se mettere in cache il dataset originale nella memoria della GPU. Impostando <strong>"true"</strong> si migliora il richiamo affinando i risultati della ricerca, mentre impostando <strong>"false" si</strong> conserva la memoria della GPU.</p></li>
 </ul></li>
 <li><p>Indice<strong>GPU_IVF_FLAT</strong> o <strong>GPU_IVF_PQ</strong> </p>
 <pre><code translate="no" class="language-python">index_params = {
@@ -120,11 +119,10 @@ title: Indice con GPU
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">Ricerca<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +147,7 @@ index_params=index_params
     <span class="hljs-string">&quot;params&quot;</span>: {}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Non sono necessarie configurazioni <strong>di parametri</strong> aggiuntivi.</p></li>
+<p>Non sono richieste configurazioni <strong>di parametri</strong> aggiuntivi.</p></li>
 <li><p>Indice<strong>GPU_CAGRA</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
@@ -166,7 +164,7 @@ index_params=index_params
 <ul>
 <li><p><strong>itopk_size</strong>: Determina la dimensione dei risultati intermedi conservati durante la ricerca. Un valore maggiore può migliorare la ricerca a scapito delle prestazioni. Deve essere almeno uguale al valore finale top-k<strong>(limite</strong>) ed è tipicamente una potenza di 2 (ad esempio, 16, 32, 64, 128).</p></li>
 <li><p><strong>search_width</strong>: Specifica il numero di punti di ingresso nel grafo CAGRA durante la ricerca. L'aumento di questo valore può migliorare il richiamo, ma può influire sulle prestazioni della ricerca.</p></li>
-<li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Questi parametri controllano il processo di iterazione della ricerca. Per impostazione predefinita, sono impostati su <strong>0</strong> e CAGRA determina automaticamente il numero di iterazioni in base a <strong>itopk_size</strong> e <strong>search_width</strong>. La regolazione manuale di questi valori può aiutare a bilanciare prestazioni e precisione.</p></li>
+<li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Questi parametri controllano il processo di iterazione della ricerca. Per impostazione predefinita, sono impostati su <strong>0</strong> e CAGRA determina automaticamente il numero di iterazioni in base a <strong>itopk_size</strong> e <strong>search_width</strong>. La regolazione manuale di questi valori può aiutare a bilanciare prestazioni e accuratezza.</p></li>
 <li><p><strong>team_size</strong>: Specifica il numero di thread CUDA utilizzati per calcolare la distanza metrica sulla GPU. I valori più comuni sono una potenza di 2 fino a 32 (ad esempio, 2, 4, 8, 16, 32). Ha un impatto minimo sulle prestazioni della ricerca. Il valore predefinito è <strong>0</strong>, dove Milvus seleziona automaticamente il <strong>team_size</strong> in base alla dimensione del vettore.</p></li>
 </ul></li>
 <li><p>Indice<strong>GPU_IVF_FLAT</strong> o <strong>GPU_IVF_PQ</strong> </p>
@@ -182,13 +180,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -207,10 +204,10 @@ limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number o
     </button></h2><p>Quando si usano gli indici GPU, occorre tenere conto di alcuni vincoli:</p>
 <ul>
 <li><p>Per <strong>GPU_IVF_FLAT</strong>, il valore massimo per il <strong>limite</strong> è 1024.</p></li>
-<li><p>Per <strong>GPU_IVF_PQ</strong> e <strong>GPU_CAGRA</strong>, il valore massimo di <strong>limit</strong> è 1024.</p></li>
+<li><p>Per <strong>GPU_IVF_PQ</strong> e <strong>GPU_CAGRA</strong>, il valore massimo per <strong>limit</strong> è 1024.</p></li>
 <li><p>Sebbene non sia stato fissato un limite per <strong>GPU_BRUTE_FORCE</strong>, si consiglia di non superare i 4096 per evitare potenziali problemi di prestazioni.</p></li>
 <li><p>Attualmente, gli indici GPU non supportano la distanza COSINE. Se è necessaria la distanza COSINE, i dati devono essere prima normalizzati e poi si può usare la distanza del prodotto interno (IP) come sostituto.</p></li>
-<li><p>Il caricamento della protezione OOM per gli indici GPU non è completamente supportato, una quantità eccessiva di dati potrebbe causare un arresto anomalo del QueryNode.</p></li>
+<li><p>Il caricamento della protezione OOM per gli indici GPU non è pienamente supportato, una quantità eccessiva di dati potrebbe causare l'arresto anomalo del QueryNode.</p></li>
 <li><p>Gli indici GPU non supportano funzioni di ricerca come la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">ricerca per intervallo</a> e la <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">ricerca per raggruppamento</a>.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -232,5 +229,5 @@ limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number o
 <li><p><strong>Quando è opportuno utilizzare un indice GPU?</strong></p>
 <p>Un indice GPU è particolarmente vantaggioso in situazioni che richiedono un throughput elevato o un richiamo elevato. Ad esempio, quando si tratta di batch di grandi dimensioni, il throughput dell'indicizzazione su GPU può superare di 100 volte quello dell'indicizzazione su CPU. In scenari con batch più piccoli, gli indici su GPU superano comunque in modo significativo gli indici su CPU in termini di prestazioni. Inoltre, se è richiesto un inserimento rapido dei dati, l'integrazione di una GPU può accelerare notevolmente il processo di creazione degli indici.</p></li>
 <li><p><strong>In quali scenari sono più adatti gli indici su GPU come CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT e GPU_BRUTE_FORCE?</strong></p>
-<p>Gli indici CAGRA sono ideali per gli scenari che richiedono prestazioni migliori, anche se a costo di consumare più memoria. Per gli ambienti in cui la conservazione della memoria è una priorità, l'indice <strong>GPU_IVF_PQ</strong> può contribuire a ridurre al minimo i requisiti di memorizzazione, anche se comporta una maggiore perdita di precisione. L'indice <strong>GPU_IVF_FLAT</strong> è un'opzione equilibrata, che offre un compromesso tra prestazioni e utilizzo della memoria. Infine, l'indice <strong>GPU_BRUTE_FORCE</strong> è progettato per le operazioni di ricerca esaustiva e garantisce un tasso di richiamo pari a 1 eseguendo ricerche trasversali.</p></li>
+<p>Gli indici CAGRA sono ideali per gli scenari che richiedono prestazioni migliori, anche se a costo di consumare più memoria. Per gli ambienti in cui la conservazione della memoria è una priorità, l'indice <strong>GPU_IVF_PQ</strong> può aiutare a minimizzare i requisiti di memorizzazione, anche se comporta una maggiore perdita di precisione. L'indice <strong>GPU_IVF_FLAT</strong> è un'opzione equilibrata, che offre un compromesso tra prestazioni e utilizzo della memoria. Infine, l'indice <strong>GPU_BRUTE_FORCE</strong> è progettato per le operazioni di ricerca esaustiva e garantisce un tasso di richiamo pari a 1 eseguendo ricerche trasversali.</p></li>
 </ul>

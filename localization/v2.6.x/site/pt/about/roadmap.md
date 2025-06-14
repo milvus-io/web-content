@@ -44,14 +44,14 @@ summary: >-
             <th>Categoria</th>
             <th>Milvus 2.5.x (Alcançado em versões recentes)</th>
             <th>Próximo lançamento - Milvus 2.6 (meados de CY25)</th>
-            <th>Roteiro futuro - Milvus 3.0 (Dentro de 1 ano)</th>
+            <th>Roteiro futuro - Milvus 3.0 (dentro de 1 ano)</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><strong>Processamento de dados não estruturados com base em IA</strong><br/><i>Reforço da capacidade de processar e analisar dados não estruturados utilizando modelos de IA e tecnologias avançadas</i></td>
             <td><strong>Pesquisa de texto integral</strong><br/><i>Suporta pesquisa de texto integral com Sparse-BM25. A nova API aceita texto como entrada e gera automaticamente um vetor esparso dentro do Milvus</i><br/><br/><strong>Vetor esparso (GA)</strong><br/><i>Apoiar o armazenamento eficiente e o método de indexação para vetor esparso</i><br/></td>
-            <td><strong>Entrada e saída de dados</strong><br/><i>Suporta os principais serviços de modelo para ingerir texto original</i><br/><br/><strong>Reranker avançado</strong><br/><i>Suporta rerankers baseados em modelos e função de pontuação definida pelo utilizador</i><br/><br/><strong>Pesquisa</strong> iterativa<br/><i>Revê o vetor de consulta com base na rotulagem do utilizador</i></td>
+            <td><strong>Entrada e saída de dados</strong><br/><i>Suporta os principais serviços de modelos para ingerir texto original</i><br/><br/><strong>Reranker avançado</strong><br/><i>Suporta rerankers baseados em modelos e função de pontuação definida pelo utilizador</i><br/><br/><strong>Pesquisa</strong> iterativa<br/><i>Revê o vetor de consulta com base na rotulagem do utilizador</i></td>
             <td><strong>Tensores</strong><i>de suporte</i><br/><i>Suportar lista de vectores, utilização típica como Colbert, Copali e representação de vídeo</i><br/><br/><strong>Suportar mais tipos de dados</strong><br/><i>por exemplo, data e hora, mapa, GIS</i></td>
         </tr>
         <tr>
@@ -67,7 +67,7 @@ summary: >-
             <td><strong>Atualização</strong><i>em massa</i><br/><i>Suporta actualizações em massa do valor de um campo específico</i><br/><br/><strong>Desduplicação da chave primária</strong><br/><i>Utilizando o índice pk global</i><br/><br/><strong>Controlo de versão e restauro</strong><i>de dados</i><br/><i>Suporta controlo de versão de dados por instantâneo</i></td>
         </tr>
         <tr>
-            <td><strong>Eficiência de custos e arquitetura</strong><br/><i>Sistemas topo de gama com estabilidade, eficiência de custos e implementação simplificada.</i></td>
+            <td><strong>Eficiência de custos e arquitetura</strong><br/><i>Sistemas topo de gama com estabilidade, rentabilidade e implementação simplificada.</i></td>
             <td><strong>Otimização da memória</strong><br/><i>Reduzir o OOM e melhorar a carga</i><br/><br/><strong>Compactação de clusters</strong><br/><i>Redistribuição de dados com base na configuração para acelerar o desempenho de leitura</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Design de formatos universais e base para acesso a dados baseados em disco</i></td>
             <td><strong>Armazenamento em camadas</strong><br/><i>Suporte para armazenamento quente e frio para otimização de custos</i><br/><br/><strong>Stream Node</strong><br/><i>Processar dados de streaming e simplificar o fluxo de escrita incremental</i><br/><br/><strong>MixCoord</strong><br/><i>Fundir lógicas Coord numa só</i></td>
             <td><strong>Vetor Lake</strong><br/><i>Solução offline rentável, conetor spark e integração com iceberg</i><br/><br/><strong>Componente Logstore</strong><br/><i>Reduzir as dependências de componentes externos como o pulsar</i><br/><br/><strong>Política de evicção de dados</strong><br/><i>Os utilizadores podem definir a sua própria política de evicção</i></td>
@@ -76,7 +76,7 @@ summary: >-
 </table>
 <ul>
 <li>O nosso roteiro está normalmente estruturado em três partes: a versão mais recente, a próxima versão e uma visão de médio a longo prazo para o próximo ano.</li>
-<li>À medida que progredimos, aprendemos continuamente e, ocasionalmente, ajustamos o nosso foco, adicionando ou removendo itens conforme necessário.</li>
+<li>À medida que avançamos, aprendemos continuamente e, ocasionalmente, ajustamos o nosso foco, adicionando ou removendo itens conforme necessário.</li>
 <li>Estes planos são indicativos e estão sujeitos a alterações, podendo variar consoante os serviços de subscrição.</li>
 <li>Cumprimos rigorosamente o nosso roteiro, com as nossas <a href="/docs/pt/release_notes.md">notas de lançamento</a> a servirem de referência.</li>
 </ul>

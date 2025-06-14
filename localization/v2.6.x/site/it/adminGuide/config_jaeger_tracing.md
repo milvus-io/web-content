@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa guida fornisce istruzioni su come configurare Jaeger per raccogliere le tracce per Milvus.</p>
+    </button></h1><p>Questa guida fornisce istruzioni su come configurare Jaeger per raccogliere tracce per Milvus.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Sono stati installati gli strumenti necessari, tra cui <a href="https://helm.sh/docs/intro/install/">Helm</a> e <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
+<li>Sono stati installati gli strumenti necessari, compresi <a href="https://helm.sh/docs/intro/install/">Helm</a> e <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
 <li>È necessario installare Cert-manager versione 1.6.1 o superiore. Una guida all'installazione è disponibile <a href="https://cert-manager.io/v1.6-docs/installation/#default-static-install">qui</a>.</li>
 </ul>
 <h2 id="Deply-Jaeger" class="common-anchor-header">Installare Jaeger<button data-href="#Deply-Jaeger" class="anchor-icon" translate="no">
@@ -67,7 +67,7 @@ summary: >-
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-operator   1         1         1            1           48s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Distribuire Jaeger</h3><p>Il modo più semplice per creare un'istanza di Jaeger è creare un file YAML come nell'esempio seguente. Questo installerà la strategia AllInOne predefinita, che distribuisce l'immagine <strong>all-in-one</strong> (che combina <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) in un singolo pod, utilizzando per impostazione predefinita lo <strong>storage in-memory</strong>.</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Distribuire Jaeger</h3><p>Il modo più semplice per creare un'istanza di Jaeger è creare un file YAML come nell'esempio seguente. Questo installerà la strategia predefinita AllInOne, che distribuisce l'immagine <strong>all-in-one</strong> (che combina <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) in un singolo pod, utilizzando per impostazione predefinita lo <strong>storage in-memory</strong>.</p>
 <p>Se si desidera memorizzare le tracce per un lungo periodo, fare riferimento a <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">jaegertracing.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Jaeger</span>
@@ -145,4 +145,4 @@ jaeger-query   &lt;none&gt;   *       192.168.122.34  80      14m
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
-   </span> <span class="img-wrapper"> <span>Traccia della richiesta di raccolta del carico</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Richiesta di raccolta del carico</span> </span></p>

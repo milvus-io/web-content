@@ -90,7 +90,7 @@ title: إدارة مجموعات الموارد
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.5.6. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
+<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.5.10. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
 </div>
 <ol>
 <li><p>إنشاء مجموعة موارد.</p>
@@ -136,7 +136,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>نقل العقد بين مجموعات الموارد.</p>
-<p>قد تلاحظ أن مجموعة الموارد الموصوفة لا تحتوي على أي عقدة استعلام بعد. انقل بعض العُقد من مجموعة الموارد الافتراضية إلى المجموعة التي تقوم بإنشائها على النحو التالي: بافتراض وجود عقدة استعلام واحدة حاليًا في <strong>_مجموعة الموارد _المجموعة_الافتراضية_المجموعة_المجموعة_الموصفة،</strong> ونريد نقل عقدة واحدة إلى <strong>rg</strong> المنشأة.<code translate="no">update_resource_groups</code> يضمن الذرية لتغييرات التكوين المتعددة، لذلك لن تكون هناك حالات وسيطة مرئية لـ Milvus.</p>
+<p>قد تلاحظ أن مجموعة الموارد الموصوفة لا تحتوي على أي عقدة استعلام بعد. انقل بعض العُقد من مجموعة الموارد الافتراضية إلى المجموعة التي تقوم بإنشائها على النحو التالي: بافتراض وجود عقدة استعلام واحدة حاليًا في <strong>_مجموعة الموارد _المجموعة_الافتراضية_المجموعة_المجموعة_الموارد،</strong> ونريد نقل عقدة واحدة إلى <strong>rg</strong> المنشأة.<code translate="no">update_resource_groups</code> يضمن الذرية لتغييرات التكوين المتعددة، لذلك لن تكون هناك حالات وسيطة مرئية لـ Milvus.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -213,7 +213,7 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
+<p>لمزيد من التفاصيل، يُرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق المجموعة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

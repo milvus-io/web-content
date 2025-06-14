@@ -6,6 +6,7 @@ summary: >-
   metrik jarak yang tepat dapat membantu meningkatkan kinerja klasifikasi dan
   pengelompokan secara signifikan.
 ---
+
 <h1 id="Metric-Types" class="common-anchor-header">Jenis Metrik<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +65,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>Untuk bidang vektor dengan tipe <code translate="no">SPARSE\_FLOAT\_VECTOR</code>, gunakan tipe metrik <code translate="no">BM25</code> hanya saat melakukan pencarian teks lengkap. Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
+<li><p>Untuk bidang vektor dengan tipe <code translate="no">SPARSE\_FLOAT\_VECTOR</code>, gunakan tipe metrik <code translate="no">BM25</code> hanya saat melakukan pencarian teks lengkap. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
 <li><p>Untuk bidang vektor jenis <code translate="no">BINARY_VECTOR</code>, nilai dimensi (<code translate="no">dim</code>) harus kelipatan 8.</p></li>
 </ul>
 </div>
@@ -247,7 +248,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 adalah metode pengukuran relevansi teks yang banyak digunakan, yang dirancang khusus untuk <a href="/docs/id/full-text-search.md">pencarian teks lengkap</a>. Metode ini menggabungkan tiga faktor kunci berikut:</p>
+    </button></h2><p>BM25 adalah metode pengukuran relevansi teks yang banyak digunakan, yang dirancang khusus untuk <a href="/docs/id/v2.5.x/full-text-search.md">pencarian teks lengkap</a>. Metode ini menggabungkan tiga faktor kunci berikut:</p>
 <ul>
 <li><p><strong>Frekuensi Istilah (TF):</strong> Mengukur seberapa sering sebuah istilah muncul dalam sebuah dokumen. Meskipun frekuensi yang lebih tinggi sering kali mengindikasikan kepentingan yang lebih besar, BM25 menggunakan parameter saturasi <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> untuk mencegah istilah yang terlalu sering muncul mendominasi skor relevansi.</p></li>
 <li><p><strong>Frekuensi Dokumen Terbalik (Inverse Document Frequency, IDF):</strong> Mencerminkan pentingnya sebuah istilah di seluruh korpus. Istilah yang muncul di lebih sedikit dokumen menerima nilai IDF yang lebih tinggi, yang mengindikasikan kontribusi yang lebih besar terhadap relevansi.</p></li>

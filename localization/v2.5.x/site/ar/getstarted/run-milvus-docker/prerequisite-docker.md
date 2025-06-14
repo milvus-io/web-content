@@ -5,6 +5,7 @@ related_key: Docker
 summary: تعرف على الاستعدادات اللازمة قبل تثبيت Milvus مع Docker Compose.
 title: متطلبات تثبيت Milvus باستخدام Docker Compose
 ---
+
 <h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">متطلبات تثبيت Milvus باستخدام Docker Compose<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,6 +107,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>إذا كانت أجهزتك وبرامجك تستوفي المتطلبات المذكورة أعلاه، يمكنك</p>
 <ul>
-<li><a href="/docs/ar/install_standalone-docker.md">تشغيل Milvus في Docker</a></li>
-<li><a href="/docs/ar/install_standalone-docker-compose.md">تشغيل Milvus باستخدام Docker Compose</a></li>
+<li><a href="/docs/ar/v2.5.x/install_standalone-docker.md">تشغيل Milvus في Docker</a></li>
+<li><a href="/docs/ar/v2.5.x/install_standalone-docker-compose.md">تشغيل Milvus باستخدام Docker Compose</a></li>
 </ul>

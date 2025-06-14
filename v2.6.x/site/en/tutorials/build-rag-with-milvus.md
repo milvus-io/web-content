@@ -6,11 +6,11 @@ title: Build RAG with Milvus
 
 # Build RAG with Milvus
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
 
 
-<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/rag_search_with_milvus/pics/rag_demo.png"/>
+<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/rag_search_with_milvus/pics/rag_demo.png"/>
 
 In this tutorial, we will show you how to build a RAG(Retrieval-Augmented Generation) pipeline with Milvus.
 
@@ -281,5 +281,5 @@ print(response.choices[0].message.content)
 
 ## Quick Deploy
 
-To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/rag_search_with_milvus).
+To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/rag_search_with_milvus).
 

@@ -36,7 +36,7 @@ title: 标量索引
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中进行向量相似性搜索时，可以使用逻辑操作符将标量字段组织成布尔表达式。</p>
-<p>当 Milvus 收到带有这种布尔表达式的搜索请求时，它会将布尔表达式解析为抽象语法树（AST），以生成用于属性筛选的物理计划。然后，Milvus 在每个分段中应用物理计划，生成一个<a href="/docs/zh/bitset.md">比特集</a>作为过滤结果，并将结果作为向量搜索参数，以缩小搜索范围。在这种情况下，向量搜索的速度在很大程度上依赖于属性过滤的速度。</p>
+<p>当 Milvus 收到带有这种布尔表达式的搜索请求时，它会将布尔表达式解析为抽象语法树（AST），以生成用于属性筛选的物理计划。然后，Milvus 在每个分段中应用物理计划，生成一个<a href="/docs/zh/v2.5.x/bitset.md">比特集</a>作为过滤结果，并将结果作为向量搜索参数，以缩小搜索范围。在这种情况下，向量搜索的速度在很大程度上依赖于属性过滤的速度。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -87,7 +87,7 @@ title: 标量索引
 <li><strong>范围查询</strong>：范围查询（如查找单词字母大于<strong>very 的</strong>文档）的效率也能通过排序术语字典得到提高。这种方法比暴力搜索更有效，能提供更快、更准确的结果。</li>
 </ul>
 <h3 id="Test-results" class="common-anchor-header">测试结果</h3><p>为了证明标量索引在 Milvus 中提供的性能改进，我们进行了一项实验，比较了在原始数据上使用倒排索引和暴力搜索的几种表达式的性能。</p>
-<p>实验包括在两种条件下测试各种表达式：倒排索引和暴力搜索。为确保公平性，每次测试都使用相同的 Collections，保持相同的数据分布。每次测试前，都会释放 Collections，并丢弃和重建索引。此外，每次测试前都会执行一次热查询，以尽量减少冷数据和热数据的影响，并且每次查询都会执行多次，以确保准确性。</p>
+<p>实验包括在两种条件下测试各种表达式：倒排索引和暴力搜索。为确保公平性，每次测试都使用相同的 Collections，保持相同的数据分布。每次测试前，都会释放 Collections，删除并重建索引。此外，每次测试前都会执行一次热查询，以尽量减少冷数据和热数据的影响，并且每次查询都会执行多次，以确保准确性。</p>
 <p>对于包含<strong>100 万条</strong>记录的数据集，使用<strong>反转索引</strong>最多可将点查询的性能提高<strong>30 倍</strong>。对于更大的数据集，性能提升可能会更显著。</p>
 <h2 id="Performance-recommandations" class="common-anchor-header">性能建议<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -154,12 +154,12 @@ title: 标量索引
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>要为标量字段<a href="/docs/zh/index-scalar-fields.md">建立</a>索引，请阅读<a href="/docs/zh/index-scalar-fields.md">在标量上建立索引</a>。</p></li>
+<li><p>要为标量字段<a href="/docs/zh/v2.5.x/index-scalar-fields.md">建立</a>索引，请阅读<a href="/docs/zh/v2.5.x/index-scalar-fields.md">在标量上建立索引</a>。</p></li>
 <li><p>要进一步了解上述相关术语和规则，请阅读</p>
 <ul>
-<li><a href="/docs/zh/bitset.md">比特集</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
-<li><a href="/docs/zh/boolean.md">布尔表达式规则</a></li>
-<li><a href="/docs/zh/schema.md#Supported-data-type">支持的数据类型</a></li>
+<li><a href="/docs/zh/v2.5.x/bitset.md">比特集</a></li>
+<li><a href="/docs/zh/v2.5.x/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/boolean.md">布尔表达式规则</a></li>
+<li><a href="/docs/zh/v2.5.x/schema.md#Supported-data-type">支持的数据类型</a></li>
 </ul></li>
 </ul>

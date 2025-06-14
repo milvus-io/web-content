@@ -98,7 +98,7 @@ summary: Découvrez comment créer une alerte pour les services Milvus dans Graf
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>Message de notification</span> </span></p>
-<p>Pour supprimer une alerte, allez dans le panneau "Alerte" et cliquez sur le bouton "Supprimer".</p>
+<p>Pour supprimer une alerte, allez dans le panneau "Alerte" et cliquez sur le bouton de suppression.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />

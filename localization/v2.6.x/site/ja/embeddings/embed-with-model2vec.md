@@ -20,7 +20,7 @@ title: モデル2Vec
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/MinishLab/model2vec">Model2Vecは</a>、Sentence Transformerモデルをコンパクトな静的モデルに変換する、軽量で高性能な埋め込み技術です。モデルサイズを最大50倍縮小し、推論を最大500倍高速化します。Model2Vecは、リソースに制約のあるデバイスに最適です。</p>
-<p>MilvusはModel2<strong>VecEmbeddingFunction</strong>クラスを介してModel2Vecのモデルと統合します。このクラスは、事前に学習されたModel2Vecモデルを用いて文書やクエリをエンコードし、Milvusのインデックスと互換性のある密なベクトルとしてエンベッディングを返すためのメソッドを提供します。</p>
+<p>MilvusはModel2<strong>VecEmbeddingFunction</strong>クラスを介してModel2Vecのモデルと統合します。このクラスは、事前に学習されたModel2Vecモデルを使って文書やクエリをエンコードし、Milvusのインデックスと互換性のある密なベクトルとしてエンベッディングを返すためのメソッドを提供します。</p>
 <p>Hugging Face HubからのモデルのロードとローカルのModel2Vecモデルのアップロードの両方をサポートしており、様々な環境での展開に柔軟性を提供します。</p>
 <p>この機能を使うには、必要な依存関係をインストールする：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus

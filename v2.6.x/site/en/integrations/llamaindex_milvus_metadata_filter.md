@@ -5,10 +5,10 @@ related_key: LlamaIndex
 summary: This notebook illustrates the use of the Milvus vector store in LlamaIndex, focusing on metadata filtering capabilities. You will learn how to index documents with metadata, perform vector searches with LlamaIndex's built-in metadata filters, and apply Milvus's native filtering expressions to the vector store.
 ---
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/llamaindex_milvus_metadata_filter.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 

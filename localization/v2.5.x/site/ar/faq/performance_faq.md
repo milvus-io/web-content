@@ -5,6 +5,7 @@ summary: >-
   المشكلات المتعلقة بالأداء.
 title: الأسئلة الشائعة حول الأداء
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">الأسئلة الشائعة حول الأداء<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -33,7 +34,7 @@ title: الأسئلة الشائعة حول الأداء
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">ما هي العوامل التي تؤثر على استخدام وحدة المعالجة المركزية؟</h4><p>يزداد استخدام وحدة المعالجة المركزية عندما يقوم ميلفوس ببناء الفهارس أو تشغيل الاستعلامات. بشكل عام، يكون إنشاء الفهرس مكثفًا لوحدة المعالجة المركزية إلا عند استخدام Annoy، الذي يعمل على مؤشر ترابط واحد.</p>
 <p>عند تشغيل الاستعلامات، يتأثر استخدام وحدة المعالجة المركزية <code translate="no">nq</code> و <code translate="no">nprobe</code>. عندما يكون <code translate="no">nq</code> و <code translate="no">nprobe</code> صغيرًا، يكون التزامن منخفضًا ويظل استخدام وحدة المعالجة المركزية منخفضًا.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">هل يؤثر إدراج البيانات والبحث في نفس الوقت على أداء الاستعلام؟</h4><p>عمليات الإدراج ليست كثيفة الاستخدام لوحدة المعالجة المركزية. ومع ذلك، نظرًا لأن المقاطع الجديدة قد لا تصل إلى الحد الأدنى لبناء الفهرس، يلجأ ميلفوس إلى البحث بالقوة الغاشمة - مما يؤثر بشكل كبير على أداء الاستعلام.</p>
-<p>تحدد المعلمة <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> عتبة بناء الفهرس للمقطع، ويتم تعيينها إلى 1024 صفًا افتراضيًا. راجع <a href="/docs/ar/system_configuration.md">تكوين النظام</a> لمزيد من المعلومات.</p>
+<p>تحدد المعلمة <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> عتبة بناء الفهرس للمقطع، ويتم تعيينها إلى 1024 صفًا افتراضيًا. راجع <a href="/docs/ar/v2.5.x/system_configuration.md">تكوين النظام</a> لمزيد من المعلومات.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">هل يمكن أن تؤدي فهرسة حقل VARCHAR إلى تحسين سرعة الحذف؟</h4><p>يمكن أن تؤدي فهرسة حقل VARCHAR إلى تسريع عمليات "الحذف حسب التعبير"، ولكن في ظل ظروف معينة فقط:</p>
 <ul>
 <li><strong>الفهرس المقلوب</strong>: يساعد هذا الفهرس في فهرسة <code translate="no">IN</code> أو <code translate="no">==</code> التعبيرات على حقول VARCHAR غير الأساسية.</li>

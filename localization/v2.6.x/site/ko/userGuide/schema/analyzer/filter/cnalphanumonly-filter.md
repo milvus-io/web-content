@@ -1,9 +1,8 @@
 ---
 id: cnalphanumonly-filter.md
 title: Cnalphanumonly
-summary: "한자, 영문자 또는 숫자 이외의 문자가 포함된 토큰을 제거하는 필터는 cnalphanumonly입니다."
+summary: '한자, 영문자 또는 숫자 이외의 문자가 포함된 토큰을 제거하는 필터는 cnalphanumonly입니다.'
 ---
-
 <h1 id="Cnalphanumonly" class="common-anchor-header">Cnalphanumonly<button data-href="#Cnalphanumonly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +96,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。&quot;</span>
@@ -106,7 +105,6 @@ sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Founda
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

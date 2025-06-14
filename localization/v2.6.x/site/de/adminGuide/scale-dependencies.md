@@ -47,7 +47,7 @@ title: Skalenabhängigkeiten
 <p>Nachdem Sie die Datei gespeichert haben, wenden Sie die Änderungen mit dem folgenden Befehl an:</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können auch die Festplattenkapazität für den MioIO-Cluster erhöhen, indem Sie den Wert von <code translate="no">spec.resources.requests.storage</code> für jeden MioIO Persistent Volume Claim (PVC) manuell ändern. Beachten Sie, dass Ihre Standardspeicherklasse eine Volume-Erweiterung ermöglichen sollte.</p>
+<p>Sie können die Festplattenkapazität für den MioIO-Cluster auch erhöhen, indem Sie den Wert von <code translate="no">spec.resources.requests.storage</code> für jeden MioIO Persistent Volume Claim (PVC) manuell ändern. Beachten Sie, dass Ihre Standardspeicherklasse eine Volume-Erweiterung ermöglichen sollte.</p>
 <h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Fügen Sie einen zusätzlichen MinIO-Serverpool hinzu (empfohlen)</h3><p>Wir empfehlen Ihnen, einen zusätzlichen MioIO-Server-Pool für Ihre Milvus-Instanz hinzuzufügen.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 <span class="hljs-attr">minio:</span>

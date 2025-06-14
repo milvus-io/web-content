@@ -6,6 +6,7 @@ summary: >-
   dalam cluster Milvus.
 title: Menetapkan Skala Cluster Milvus
 ---
+
 <h1 id="Scale-a-Milvus-Cluster" class="common-anchor-header">Menetapkan Skala Cluster Milvus<button data-href="#Scale-a-Milvus-Cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: Menetapkan Skala Cluster Milvus
         ></path>
       </svg>
     </button></h1><p>Milvus mendukung penskalaan horizontal pada komponen-komponennya. Ini berarti Anda dapat menambah atau mengurangi jumlah node pekerja dari setiap jenis sesuai dengan kebutuhan Anda.</p>
-<p>Topik ini menjelaskan cara untuk melakukan scale out dan scale in pada cluster Milvus. Kami mengasumsikan bahwa Anda telah <a href="/docs/id/install_cluster-helm.md">menginstal cluster Milvus</a> sebelum melakukan penskalaan. Selain itu, kami sarankan untuk membiasakan diri Anda dengan <a href="/docs/id/architecture_overview.md">arsitektur Milvus</a> sebelum memulai.</p>
+<p>Topik ini menjelaskan cara untuk melakukan scale out dan scale in pada cluster Milvus. Kami mengasumsikan bahwa Anda telah <a href="/docs/id/v2.5.x/install_cluster-helm.md">menginstal cluster Milvus</a> sebelum melakukan penskalaan. Selain itu, kami sarankan untuk membiasakan diri Anda dengan <a href="/docs/id/v2.5.x/architecture_overview.md">arsitektur Milvus</a> sebelum memulai.</p>
 <p>Tutorial ini menggunakan penskalaan tiga node kueri sebagai contoh. Untuk menskalakan jenis node lainnya, ganti <code translate="no">queryNode</code> dengan jenis node yang sesuai pada baris perintah.</p>
 <div class="alert note">
 <p>Untuk informasi tentang cara menskalakan cluster dengan Milvus Operator, lihat Menskalakan <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Cluster dengan Milvus Operator</a>.</p>
@@ -52,7 +53,7 @@ title: Menetapkan Skala Cluster Milvus
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Peningkatan</span> </span></p>
-<p>Menurut <a href="/docs/id/architecture_overview.md">arsitektur Milvus</a>, node pekerja tanpa kewarganegaraan meliputi node kueri, node data, node indeks, dan proxy. Oleh karena itu, Anda dapat melakukan scale out node jenis ini agar sesuai dengan kebutuhan bisnis dan skenario aplikasi Anda. Anda dapat menskalakan cluster Milvus secara manual atau otomatis.</p>
+<p>Menurut <a href="/docs/id/v2.5.x/architecture_overview.md">arsitektur Milvus</a>, node pekerja tanpa kewarganegaraan meliputi node kueri, node data, node indeks, dan proxy. Oleh karena itu, Anda dapat melakukan scale out node jenis ini agar sesuai dengan kebutuhan bisnis dan skenario aplikasi Anda. Anda dapat menskalakan cluster Milvus secara manual atau otomatis.</p>
 <p>Umumnya, Anda perlu melakukan scale out cluster Milvus yang Anda buat jika cluster tersebut digunakan secara berlebihan. Di bawah ini adalah beberapa situasi umum di mana Anda mungkin perlu melakukan scale out cluster Milvus:</p>
 <ul>
 <li>Pemanfaatan CPU dan memori tinggi untuk jangka waktu tertentu.</li>
@@ -116,7 +117,7 @@ Milvus hanya mendukung penambahan node pekerja dan tidak mendukung penambahan ko
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat melakukan penskalaan pada cluster Milvus Anda secara manual atau otomatis. Untuk penskalaan otomatis dengan Horizontal Pod Autoscaling (HPA), lihat <a href="/docs/id/hpa.md">Mengkonfigurasi HPA untuk Milvus</a>. Jika penskalaan otomatis diaktifkan, cluster Milvus akan menyusut atau meluas secara otomatis ketika konsumsi sumber daya CPU dan memori mencapai nilai yang Anda tetapkan.</p>
+    </button></h2><p>Anda dapat melakukan penskalaan pada cluster Milvus Anda secara manual atau otomatis. Untuk penskalaan otomatis dengan Horizontal Pod Autoscaling (HPA), lihat <a href="/docs/id/v2.5.x/hpa.md">Mengkonfigurasi HPA untuk Milvus</a>. Jika penskalaan otomatis diaktifkan, cluster Milvus akan menyusut atau meluas secara otomatis ketika konsumsi sumber daya CPU dan memori mencapai nilai yang Anda tetapkan.</p>
 <p>Saat ini, Milvus 2.1.0 hanya mendukung penskalaan masuk dan keluar secara manual.</p>
 <h4 id="Scaling-out" class="common-anchor-header">Mengecilkan skala</h4><p>Jalankan <code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> untuk memperkecil node kueri secara manual.</p>
 <p>Jika berhasil, tiga pod yang sedang berjalan pada node kueri akan ditambahkan seperti yang ditunjukkan pada contoh berikut.</p>
@@ -168,16 +169,16 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
     </button></h2><ul>
 <li><p>Jika Anda ingin mempelajari cara memonitor layanan Milvus dan membuat peringatan:</p>
 <ul>
-<li>Pelajari Memantau <a href="/docs/id/monitor.md">Milvus dengan Operator Prometheus di Kubernetes</a></li>
+<li>Pelajari Memantau <a href="/docs/id/v2.5.x/monitor.md">Milvus dengan Operator Prometheus di Kubernetes</a></li>
 </ul></li>
 <li><p>Jika Anda siap untuk men-deploy cluster Anda di awan:</p>
 <ul>
-<li>Pelajari cara <a href="/docs/id/eks.md">Menerapkan Milvus di Amazon EKS dengan Terraform</a></li>
-<li>Pelajari cara <a href="/docs/id/gcp.md">Menerapkan Cluster Milvus di GCP dengan Kubernetes</a></li>
-<li>Pelajari cara <a href="/docs/id/azure.md">Menerapkan Milvus di Microsoft Azure dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.5.x/eks.md">Menerapkan Milvus di Amazon EKS dengan Terraform</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.5.x/gcp.md">Menerapkan Cluster Milvus di GCP dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/v2.5.x/azure.md">Menerapkan Milvus di Microsoft Azure dengan Kubernetes</a></li>
 </ul></li>
 <li><p>Jika Anda mencari petunjuk tentang cara mengalokasikan sumber daya:</p>
 <ul>
-<li><a href="/docs/id/allocate.md#standalone">Mengalokasikan Sumber Daya di Kubernetes</a></li>
+<li><a href="/docs/id/v2.5.x/allocate.md#standalone">Mengalokasikan Sumber Daya di Kubernetes</a></li>
 </ul></li>
 </ul>

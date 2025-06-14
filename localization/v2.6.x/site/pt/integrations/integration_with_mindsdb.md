@@ -74,7 +74,7 @@ title: Integrar o Milvus com o MindsDB
 </ul>
 <p>Estas são utilizadas para as consultas <code translate="no">CREATE</code>:</p>
 <ul>
-<li><code translate="no">create_auto_id</code>: se é necessário gerar automaticamente o id quando se inserem registos sem ID (pré-definição=False)</li>
+<li><code translate="no">create_auto_id</code>: se se deve gerar automaticamente o id quando se inserem registos sem ID (pré-definição=False)</li>
 <li><code translate="no">create_id_max_len</code>: comprimento máximo do campo id ao criar uma tabela (predefinição=64)</li>
 <li><code translate="no">create_embedding_dim</code>: dimensão de incorporação para criar uma tabela (predefinição=8)</li>
 <li><code translate="no">create_dynamic_field</code>: se as tabelas criadas têm ou não campos dinâmicos (predefinição=Verdadeiro)</li>
@@ -117,7 +117,7 @@ title: Integrar o Milvus com o MindsDB
 <ul>
 <li>Se apenas necessitar de uma base de dados vetorial local para dados de pequena escala ou prototipagem, definir o uri como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Para dados de maior escala e tráfego em produção, pode configurar um servidor Milvus em <a href="https://milvus.io/docs/install-overview.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu <code translate="no">uri</code>, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, defina o <code translate="no">token</code> como <code translate="no">&quot;&lt;your_username&gt;:&lt;your_password&gt;&quot;</code>, caso contrário não é necessário definir o token.</li>
-<li>Também pode utilizar o Milvus totalmente gerido no <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Basta definir <code translate="no">uri</code> e <code translate="no">token</code> para o <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e a chave API</a> da sua instância Zilliz Cloud.</li>
+<li>Também pode utilizar o Milvus totalmente gerido no <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Basta definir os endereços <code translate="no">uri</code> e <code translate="no">token</code> para o <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e a chave API</a> da sua instância Zilliz Cloud.</li>
 </ul>
 </blockquote>
 <h3 id="Dropping-connection" class="common-anchor-header">Abandonar a ligação</h3><p>Para abandonar a ligação, utilize este comando</p>

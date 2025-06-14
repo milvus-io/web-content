@@ -97,7 +97,7 @@ analyzerParams := map[string]any{"tokenizer": "standard", "filter": []any{"lower
 # restful
 ```
 
-### Verification using `run_analyzer`
+### Verification using `run_analyzer` | Milvus 2.5.11+
 
 <div class="multipleCode">
     <a href="#python">Python</a>

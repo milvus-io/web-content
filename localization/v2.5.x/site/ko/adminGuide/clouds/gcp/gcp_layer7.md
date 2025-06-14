@@ -4,6 +4,7 @@ title: GCP에서 Milvus용 레이어 7 로드 밸런서 설정하기
 related_key: cluster
 summary: GCP의 Layer-7 로드 밸런서 뒤에 Milvus 클러스터를 배포하는 방법을 알아보세요.
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">GCP에서 Milvus용 레이어 7 로드 밸런서 설정하기<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -26,9 +27,9 @@ summary: GCP의 Layer-7 로드 밸런서 뒤에 Milvus 클러스터를 배포하
 <p>프로젝트를 생성하려면 <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">프로젝트 생성 및 관리하기를</a> 참조하세요. 이 가이드에서 사용된 프로젝트 이름은 <strong>milvus-testing-nonprod입니다</strong>.</p></li>
 <li><p>로컬로 <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> 및 <a href="https://helm.sh/docs/intro/install/">Helm을</a> 설치했거나 대신 브라우저 기반 <a href="https://cloud.google.com/shell">Cloud Shell을</a> 사용하기로 결정했습니다.</p></li>
 <li><p>GCP 계정 자격 증명으로 <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">gcloud CLI를 초기화했습니다</a>.</p></li>
-<li><p><a href="/docs/ko/gcp.md">GCP의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를 배포했습니다</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/gcp.md">GCP의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를 배포했습니다</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정</h3><p>이 가이드에서는 <a href="/docs/ko/gcp.md">GCP의 레이어 4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/gcp.md">배포했다고</a> 가정합니다.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정</h3><p>이 가이드에서는 <a href="/docs/ko/v2.5.x/gcp.md">GCP의 레이어 4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/v2.5.x/gcp.md">배포했다고</a> 가정합니다.</p>
 <p>이 Milvus 클러스터에 대해 Layer-7 로드 밸런서를 설정하기 전에 다음 명령을 실행하여 Layer-4 로드 밸런서를 제거하세요.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -82,11 +83,12 @@ openssl genrsa -<span class="hljs-keyword">out</span> tls.key <span class="hljs-
 
 <span class="hljs-meta"># Creates a certificate and signs it with the preceding key.</span>
 openssl req -<span class="hljs-keyword">new</span> -key tls.key -<span class="hljs-keyword">out</span> tls.csr \
-    -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
+ -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
 
 openssl x509 -req -days <span class="hljs-number">99999</span> -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
-    -<span class="hljs-keyword">out</span> tls.crt
+ -<span class="hljs-keyword">out</span> tls.crt
 <button class="copy-code-btn"></button></code></pre>
+
 <p>그런 다음 나중에 사용할 수 있도록 이 파일로 GKE 클러스터에 비밀을 만듭니다.</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
@@ -205,6 +207,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <span class="hljs-comment"># For Google-managed certificates, there is not need to do so.</span>
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;34.111.144.65&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;my-release.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li><strong>호스트</strong> 및 <strong>포트의</strong> IP 주소와 <strong>포트</strong> 번호는 <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">계층 7 로드 밸런서를 생성하려면 인그레스 만들기</a> 끝에 나열된 것과 일치해야 합니다.</li>

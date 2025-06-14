@@ -163,7 +163,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3.Milvusログの照会</h3><p>Lokiをデータソースとして追加したら、GrafanaでMilvusのログを照会する：</p>
 <ol>
 <li>左側のメニューで、<strong>Exploreを</strong>クリックする。</li>
-<li>ページの左上隅で、loki データソースを選択する。</li>
+<li>ページの左上で、loki データソースを選択する。</li>
 <li><strong>Label browserを</strong>使用してラベルを選択し、ログをクエリする。</li>
 </ol>
 <p>

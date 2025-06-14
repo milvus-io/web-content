@@ -5,6 +5,7 @@ summary: >-
   파티션은 컬렉션의 하위 집합입니다. 각 파티션은 상위 컬렉션과 동일한 데이터 구조를 공유하지만 컬렉션에 있는 데이터의 하위 집합만
   포함합니다. 이 페이지는 파티션 관리 방법을 이해하는 데 도움이 됩니다.
 ---
+
 <h1 id="Manage-Partitions" class="common-anchor-header">파티션 관리<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +42,7 @@ summary: >-
 <p>컬렉션에는 최대 1,024개의 파티션을 만들 수 있습니다.</p>
 <div class="alert note">
 <p><strong>파티션 키</strong> 기능은 파티션을 기반으로 한 검색 최적화 기능으로, 특정 스칼라 필드의 값에 따라 Milvus가 엔티티를 여러 파티션으로 분배할 수 있게 해줍니다. 이 기능은 파티션 지향 멀티테넌시를 구현하고 검색 성능을 개선하는 데 도움이 됩니다.</p>
-<p>이 기능에 대해서는 이 페이지에서 설명하지 않습니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p>
+<p>이 기능에 대해서는 이 페이지에서 설명하지 않습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p>
 </div>
 <h2 id="List-Partitions" class="common-anchor-header">목록 파티션<button data-href="#List-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,12 +65,12 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 res = client.list_partitions(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -78,6 +79,7 @@ res = client.list_partitions(
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [&quot;_default&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ListPartitionsReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -190,7 +192,7 @@ curl --request POST \
 )
 
 res = client.list_partitions(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -199,6 +201,7 @@ res = client.list_partitions(
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [&quot;_default&quot;, &quot;partitionA&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.CreatePartitionReq;
 
 <span class="hljs-type">CreatePartitionReq</span> <span class="hljs-variable">createPartitionReq</span> <span class="hljs-operator">=</span> CreatePartitionReq.builder()
@@ -319,6 +322,7 @@ curl --request POST \
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># True</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.HasPartitionReq;
 
 <span class="hljs-type">HasPartitionReq</span> <span class="hljs-variable">hasPartitionReq</span> <span class="hljs-operator">=</span> HasPartitionReq.builder()
@@ -397,17 +401,18 @@ curl --request POST \
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.LoadPartitionsReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 
@@ -509,8 +514,8 @@ curl --request POST \
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -518,9 +523,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ReleasePartitionsReq;
 
 <span class="hljs-type">ReleasePartitionsReq</span> <span class="hljs-variable">releasePartitionsReq</span> <span class="hljs-operator">=</span> ReleasePartitionsReq.builder()
@@ -622,14 +628,14 @@ curl --request POST \
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">엔티티 삽입 및 삭제</h3><p>특정 작업에서 삽입, 업서트 및 삭제 작업을 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
 <ul>
-<li><p><a href="/docs/ko/insert-update-delete.md#Insert-Entities-into-a-Partition">파티션에 엔티티 삽입</a></p></li>
-<li><p><a href="/docs/ko/upsert-entities.md#Upsert-Entities-in-a-Partition">파티션에 엔티티 삽입</a></p></li>
-<li><p><a href="/docs/ko/delete-entities.md#Delete-Entities-from-Partitions">파티션에서 엔티티 삭제</a></p></li>
+<li><p><a href="/docs/ko/v2.5.x/insert-update-delete.md#Insert-Entities-into-a-Partition">파티션에 엔티티 삽입</a></p></li>
+<li><p><a href="/docs/ko/v2.5.x/upsert-entities.md#Upsert-Entities-in-a-Partition">파티션에 엔티티 삽입</a></p></li>
+<li><p><a href="/docs/ko/v2.5.x/delete-entities.md#Delete-Entities-from-Partitions">파티션에서 엔티티 삭제</a></p></li>
 </ul>
 <h3 id="Search-and-Query" class="common-anchor-header">검색 및 쿼리</h3><p>특정 파티션 내에서 검색 및 쿼리를 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
 <ul>
-<li><p><a href="/docs/ko/single-vector-search.md#ANN-Search-in-Partition">파티션 내에서 ANN 검색 수행하기</a></p></li>
-<li><p><a href="/docs/ko/get-and-scalar-query.md#Queries-in-Partitions">파티션 내에서 메타데이터 필터링 수행하기</a></p></li>
+<li><p><a href="/docs/ko/v2.5.x/single-vector-search.md#ANN-Search-in-Partition">파티션 내에서 ANN 검색 수행하기</a></p></li>
+<li><p><a href="/docs/ko/v2.5.x/get-and-scalar-query.md#Queries-in-Partitions">파티션 내에서 메타데이터 필터링 수행하기</a></p></li>
 </ul>
 <h2 id="Drop-Partition" class="common-anchor-header">파티션 삭제<button data-href="#Drop-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -655,18 +661,19 @@ curl --request POST \
 )
 
 client.drop_partition(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 res = client.list_partitions(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># [&quot;_default&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.DropPartitionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ReleasePartitionsReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ListPartitionsReq;

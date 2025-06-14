@@ -43,7 +43,7 @@ summary: EKS에 Milvus 클러스터를 배포하는 방법 알아보기
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html"><code translate="no">eksctl</code></a></li>
 </ul></li>
 <li>AWS IAM 권한이 올바르게 부여되었습니다. 사용 중인 IAM 보안 주체는 Amazon EKS IAM 역할, 서비스 관련 역할, AWS CloudFormation, VPC 및 기타 관련 리소스를 사용할 수 있는 권한을 가지고 있어야 합니다. 다음 방법 중 하나를 사용하여 보안 담당자에게 적절한 권한을 부여할 수 있습니다.<ul>
-<li>(권장하지 않음) 사용 중인 사용자/역할의 연결 정책을 AWS 관리 정책에 설정하기만 하면 됩니다 <code translate="no">AdministratorAccess</code>.</li>
+<li>(권장하지 않음) 사용하던 사용자/역할의 연결 정책을 AWS 관리 정책에 설정하기만 하면 됩니다 <code translate="no">AdministratorAccess</code>.</li>
 <li>(적극 권장) 최소 권한 원칙을 구현하려면 다음과 같이 하세요:<ul>
 <li><p><code translate="no">eksctl</code> 에 대한 권한을 설정하려면 <a href="https://eksctl.io/usage/minimum-iam-policies/"> <code translate="no">eksctl</code> 에 대한 최소 권한을</a> 참조하세요.</p></li>
 <li><p>AWS S3 버킷을 생성/삭제하기 위한 권한을 설정하려면 다음 권한 설정을 참조하세요:</p>

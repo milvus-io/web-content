@@ -2,6 +2,7 @@
 id: limit_collection_counts.md
 title: Tetapkan Batas Jumlah Penagihan
 ---
+
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">Batasi Jumlah Koleksi<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,11 +23,11 @@ title: Tetapkan Batas Jumlah Penagihan
 <p>Konfigurasi bervariasi tergantung pada cara Anda menginstal instans Milvus.</p>
 <ul>
 <li><p>Untuk instans Milvus yang diinstal menggunakan Helm Charts</p>
-<p>Tambahkan konfigurasi ke file <code translate="no">values.yaml</code> di bawah bagian <code translate="no">config</code>. Untuk detailnya, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>.</p></li>
+<p>Tambahkan konfigurasi ke file <code translate="no">values.yaml</code> di bawah bagian <code translate="no">config</code>. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>.</p></li>
 <li><p>Untuk instans Milvus yang diinstal menggunakan Docker Compose</p>
-<p>Tambahkan konfigurasi ke berkas <code translate="no">milvus.yaml</code> yang Anda gunakan untuk memulai instans Milvus. Untuk detailnya, lihat <a href="/docs/id/configure-docker.md">Mengkonfigurasi Milvus dengan Docker Compose</a>.</p></li>
+<p>Tambahkan konfigurasi ke berkas <code translate="no">milvus.yaml</code> yang Anda gunakan untuk memulai instans Milvus. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/configure-docker.md">Mengkonfigurasi Milvus dengan Docker Compose</a>.</p></li>
 <li><p>Untuk instans Milvus yang diinstal menggunakan Operator</p>
-<p>Tambahkan konfigurasi ke bagian <code translate="no">spec.components</code> pada sumber daya kustom <code translate="no">Milvus</code>. Untuk detailnya, lihat <a href="/docs/id/configure_operator.md">Mengkonfigurasi Milvus dengan Operator</a>.</p></li>
+<p>Tambahkan konfigurasi ke bagian <code translate="no">spec.components</code> pada sumber daya kustom <code translate="no">Milvus</code>. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/configure_operator.md">Mengkonfigurasi Milvus dengan Operator</a>.</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Opsi konfigurasi<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

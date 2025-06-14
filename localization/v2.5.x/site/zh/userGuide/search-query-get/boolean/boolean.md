@@ -5,6 +5,7 @@ summary: >-
   Milvus 提供强大的过滤功能，可对数据进行精确查询。过滤表达式允许你针对特定的标量字段，用不同的条件细化搜索结果。本指南介绍如何在 Milvus
   中使用过滤表达式，并以查询操作符为例进行说明。您还可以在搜索和删除请求中应用这些过滤器。
 ---
+
 <h1 id="Filtering-Explained" class="common-anchor-header">过滤说明<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +53,7 @@ summary: >-
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">示例：过滤数组字段</h3><p>如果有一个数组字段<code translate="no">history_temperatures</code> ，其中包含自 2000 年以来各观测站报告的平均气温记录，要查找 2009 年（第 10 次记录）气温超过 23°C 的观测站，请使用此表达式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关这些基本操作符的更多信息，请参阅<a href="/docs/zh/basic-operators.md">基本操作符</a>。</p>
+<p>有关这些基本操作符的更多信息，请参阅<a href="/docs/zh/v2.5.x/basic-operators.md">基本操作符</a>。</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">过滤表达式模板<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +78,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>这种方法可减少解析开销，提高查询速度。更多信息，请参阅<a href="/docs/zh/filtering-templating.md">过滤器模板</a>。</p>
+<p>这种方法可减少解析开销，提高查询速度。更多信息，请参阅<a href="/docs/zh/v2.5.x/filtering-templating.md">过滤器模板</a>。</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">特定数据类型操作符<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关 JSON 操作符的更多详情，请参阅<a href="/docs/zh/json-operators.md">JSON 操作符</a>。</p>
+<p>有关 JSON 操作符的更多详情，请参阅<a href="/docs/zh/v2.5.x/json-operators.md">JSON 操作符</a>。</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY 字段特定操作符</h3><p>Milvus 为数组字段提供了高级过滤操作符，如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code>, 和<code translate="no">ARRAY_LENGTH</code> ，可对数组数据进行细粒度控制：</p>
 <p><code translate="no">ARRAY_CONTAINS</code>:过滤包含特定元素的实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
@@ -121,7 +122,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>:根据数组的长度进行过滤。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关数组操作符的更多详情，请参阅<a href="/docs/zh/array-operators.md">ARRAY Operators</a>。</p>
+<p>有关数组操作符的更多详情，请参阅<a href="/docs/zh/v2.5.x/array-operators.md">ARRAY Operators</a>。</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR 字段专用操作符</h3><p>Milvus 提供专门的操作符，用于对 VARCHAR 字段进行基于文本的精确搜索：</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> 操作符</h4><p><code translate="no">TEXT_MATCH</code> 操作符允许根据特定查询词精确检索文档。它对于结合标量过滤器和向量相似性搜索的过滤搜索特别有用。与语义搜索不同，文本匹配侧重于精确的术语出现。</p>
 <p>Milvus 使用 Tantivy 支持倒排索引和基于术语的文本搜索。过程包括</p>
@@ -129,4 +130,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>分析器</strong>：标记化和处理输入文本。</p></li>
 <li><p><strong>索引</strong>：创建将唯一标记映射到文档的倒排索引。</p></li>
 </ol>
-<p>更多详情，请参阅<a href="/docs/zh/keyword-match.md">文本匹配</a>。</p>
+<p>更多详情，请参阅<a href="/docs/zh/v2.5.x/keyword-match.md">文本匹配</a>。</p>

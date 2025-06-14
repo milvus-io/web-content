@@ -1,10 +1,11 @@
 ---
 id: phrase-match.md
-title: 短語匹配
+title: 短語匹配Compatible with Milvus 2.6.x
 summary: >-
-  短語匹配可讓您搜尋包含完全相同的查詢字詞的文件。預設情況下，詞彙必須以相同順序出現，且彼此直接相鄰。例如，查詢「機器人機器學習」會匹配類似「...典型的機器人機器學習模型...」的文字，其中「機器人」、「機器」和「學習」依序出現，而它們之間沒有其他字詞。
+  短語匹配可讓您搜尋包含完全相同的查詢字詞的文件。預設情況下，詞彙必須以相同順序出現，並且彼此直接相鄰。例如，查詢「機器人機器學習」會匹配類似「...典型的機器人機器學習模型...」的文字，其中「機器人」、「機器」和「學習」依序出現，而它們之間沒有其他字詞。
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">短語匹配<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">短語匹配<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,7 +43,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
    </span> <span class="img-wrapper"> <span>短語匹配工作流程</span> </span></p>
 <ol>
-<li><p><strong>文件標記化</strong>：當您插入文件到 Milvus 時，文本會使用分析器分割成標記（單個單詞或術語），並記錄每個標記的位置資訊。例如，<strong>doc_1</strong>被標記化為<strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong> 。有關分析器的詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器概述</a>。</p></li>
+<li><p><strong>文件標記化</strong>：當您插入文件到 Milvus 時，文本會使用分析器分割成標記（單個單詞或術語），並記錄每個標記的位置資訊。例如，<strong>doc_1</strong>被標記為<strong>["machine" (pos=0), "learning" (pos=1), "boosts" (pos=2), "efficiency" (pos=3)]</strong> 。有關分析器的詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器概述</a>。</p></li>
 <li><p><strong>反向索引建立</strong>：Milvus 會建立反向索引，將每個符記映射到它出現的文件，以及符記在這些文件中的位置。</p></li>
 <li><p><strong>詞組匹配</strong>：當執行詞組查詢時，Milvus 在倒排索引中查找每個標記，並檢查它們的位置，以確定它們是否以正確的順序和相近程度出現。<code translate="no">slop</code> 參數控制匹配標記之間允許的最大位置數目：</p>
 <ul>
@@ -133,7 +134,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦您在收集模式中啟用了<code translate="no">VARCHAR</code> 欄位的匹配，您就可以使用<code translate="no">PHRASE_MATCH</code> 表達式執行短語匹配。</p>
+    </button></h2><p>一旦您在收集模式中為<code translate="no">VARCHAR</code> 欄位啟用匹配，您可以使用<code translate="no">PHRASE_MATCH</code> 表達式執行短語匹配。</p>
 <div class="alert note">
 <p><code translate="no">PHRASE_MATCH</code> 表達式不區分大小寫。您可以使用<code translate="no">PHRASE_MATCH</code> 或<code translate="no">phrase_match</code> 。</p>
 </div>
@@ -174,7 +175,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>「學習先進的機器演算法可擴展人工智能能力」</p></td>
+     <td><p>「學習先進的機器演算法，擴展人工智能能力」</p></td>
    </tr>
 </table>
 <h3 id="Query-with-phrase-match" class="common-anchor-header">使用短語匹配進行查詢</h3><p>使用<code translate="no">query()</code> 方法時，<strong>PHRASE_MATCH 充當</strong>標量篩選器。只有包含指定短語的文件 (受限於允許的 slop) 才會被傳回。</p>

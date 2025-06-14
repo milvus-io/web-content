@@ -3,6 +3,7 @@ id: performance_faq.md
 summary: 検索パフォーマンス、パフォーマンス強化、その他のパフォーマンスに関するよくある質問への回答をご覧いただけます。
 title: パフォーマンスFAQ
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">パフォーマンスFAQ<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -31,7 +32,7 @@ title: パフォーマンスFAQ
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">CPU使用率に影響を与える要因は何ですか?</h4><p>Milvusがインデックスを構築したり、クエリを実行したりすると、CPU使用率が増加します。一般的に、インデックス構築はシングルスレッドで実行されるAnnoyを使用する場合を除き、CPUを集中的に使用します。</p>
 <p>クエリを実行する場合、CPU使用率は<code translate="no">nq</code> と<code translate="no">nprobe</code> の影響を受けます。<code translate="no">nq</code> と<code translate="no">nprobe</code> が小さい場合、同時実行性は低く、CPU使用率は低く保たれる。</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">データの挿入と検索を同時に行うと、クエリのパフォーマンスに影響しますか？</h4><p>挿入操作に CPU が集中することはありません。しかし、新しいセグメントがインデックス構築のしきい値に達していない可能性があるため、milvusは総当たり検索に頼り、クエリ性能に大きな影響を与えます。</p>
-<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> パラメータはセグメントのインデックス構築しきい値を決定し、デフォルトでは1024行に設定されています。詳細は<a href="/docs/ja/system_configuration.md">システム構成を</a>参照してください。</p>
+<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> パラメータはセグメントのインデックス構築しきい値を決定し、デフォルトでは1024行に設定されています。詳細は<a href="/docs/ja/v2.5.x/system_configuration.md">システム構成を</a>参照してください。</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">VARCHARフィールドにインデックスを作成すると削除速度が向上しますか？</h4><p>VARCHARフィールドにインデックスを作成すると、"Delete By Expression "操作を高速化できますが、特定の条件下でのみ可能です：</p>
 <ul>
 <li><strong>INVERTEDインデックス</strong>：INVERTED インデックス：このインデックスは、プライマリ・キーでない VARCHAR フィールドの<code translate="no">IN</code> または<code translate="no">==</code> 式に役立ちます。</li>

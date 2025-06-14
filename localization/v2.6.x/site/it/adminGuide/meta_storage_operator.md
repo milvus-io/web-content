@@ -92,10 +92,10 @@ summary: Scoprite come configurare il metaconservazione con Milvus Operator.
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">L'esempio precedente specifica il numero di repliche come <code translate="no">5</code> e limita le risorse di calcolo per etcd.</div>
 <div class="alert note">Le voci di configurazione complete per configurare un servizio etcd interno si trovano in <a href="https://github.com/bitnami/charts/blob/ba6f8356e725a8342fe738a3b73ae40d5488b2ad/bitnami/etcd/values.yaml">values.yaml</a>. Aggiungere le voci di configurazione necessarie sotto <code translate="no">etcd.inCluster.values</code>, come mostrato nell'esempio precedente.</div>
-<p>Supponendo che il file di configurazione sia denominato <code translate="no">milvuscluster.yaml</code>, eseguire il comando seguente per applicare la configurazione.</p>
+<p>Supponendo che il file di configurazione sia denominato <code translate="no">milvuscluster.yaml</code>, eseguire il seguente comando per applicare la configurazione.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Il prossimo passo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,6 +112,6 @@ summary: Scoprite come configurare il metaconservazione con Milvus Operator.
       </svg>
     </button></h2><p>Imparare a configurare altre dipendenze di Milvus con Milvus Operator:</p>
 <ul>
-<li><a href="/docs/it/object_storage_operator.md">Configurare la memorizzazione degli oggetti con Milvus Operator</a></li>
-<li><a href="/docs/it/message_storage_operator.md">Configurazione della memorizzazione dei messaggi con Milvus Operator</a></li>
+<li><a href="/docs/it/object_storage_operator.md">Configurare l'archiviazione degli oggetti con Milvus Operator</a></li>
+<li><a href="/docs/it/message_storage_operator.md">Configurare l'archiviazione dei messaggi con Milvus Operator</a></li>
 </ul>

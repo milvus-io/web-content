@@ -49,7 +49,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Compactación de clustering</span> </span></p>
-<p>Utilizando <strong>PartitionStats</strong> como referencia, Milvus puede eliminar datos irrelevantes al recibir una solicitud de búsqueda/consulta que contenga un valor de clave de agrupación y restringir el ámbito de búsqueda dentro de los segmentos que corresponden al valor, mejorando así el rendimiento de la búsqueda. Para obtener más información sobre la mejora del rendimiento, consulte <a href="/docs/es/clustering-compaction.md#Benchmark-Test">Pruebas comparativas</a>.</p>
+<p>Utilizando <strong>PartitionStats</strong> como referencia, Milvus puede eliminar datos irrelevantes al recibir una solicitud de búsqueda/consulta que contenga un valor de clave de agrupación y restringir el ámbito de búsqueda dentro de los segmentos que corresponden al valor, mejorando así el rendimiento de la búsqueda. Para obtener más información sobre la mejora del rendimiento, consulte <a href="/docs/es/v2.5.x/clustering-compaction.md#Benchmark-Test">Pruebas comparativas</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utilizar la compactación de clústeres<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,7 +162,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>Para aplicar los cambios anteriores a su cluster Milvus, por favor siga los pasos en <a href="/docs/es/configure-helm.md#Configure-Milvus-via-configuration-file">Configurar Milvus con Helm</a> y <a href="/docs/es/configure_operator.md">Configurar Milvus con Milvus Operators</a>.</p>
+<p>Para aplicar los cambios anteriores a su cluster Milvus, por favor siga los pasos en <a href="/docs/es/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configurar Milvus con Helm</a> y <a href="/docs/es/v2.5.x/configure_operator.md">Configurar Milvus con Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Configuración de la colección</h3><p>Para la compactación de clústeres en una colección específica, debe seleccionar un campo escalar de la colección como clave de clúster.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -403,7 +403,7 @@ System.out.println(stateResp.getState());
      <td><p>431.41</p></td>
    </tr>
 </table>
-<p>A medida que se reduce el rango de búsqueda en los filtros de búsqueda, aumenta el porcentaje de exclusión. Esto significa que se omiten más entidades durante el proceso de búsqueda. Si se comparan las estadísticas de la primera y la última fila, se observa que las búsquedas sin compactación por agrupación requieren escanear toda la colección. Por otro lado, las búsquedas con compactación por agrupación utilizando una clave específica pueden lograr una mejora de hasta 25 veces.</p>
+<p>A medida que se reduce el ámbito de búsqueda en los filtros de búsqueda, aumenta el porcentaje de exclusión. Esto significa que se omiten más entidades durante el proceso de búsqueda. Si se comparan las estadísticas de la primera y la última fila, se observa que las búsquedas sin compactación por agrupación requieren escanear toda la colección. Por otro lado, las búsquedas con compactación de agrupación utilizando una clave específica pueden lograr una mejora de hasta 25 veces.</p>
 <h2 id="Best-Practices" class="common-anchor-header">Buenas prácticas<button data-href="#Best-Practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -426,6 +426,6 @@ System.out.println(stateResp.getState());
 <li><p>Elija una clave de agrupación adecuada.</p>
 <p>Puede utilizar campos escalares empleados habitualmente como condiciones de filtrado como clave de agrupación. Para una colección que contiene datos de varios inquilinos, puede utilizar el campo que distingue a un inquilino de otro como clave de agrupación.</p></li>
 <li><p>Utilice la clave de partición como clave de agrupación.</p>
-<p>Puede configurar <code translate="no">common.usePartitionKeyAsClusteringKey</code> en <code translate="no">true</code> si desea habilitar esta función para todas las colecciones en su instancia de Milvus o si todavía tiene problemas de rendimiento en una colección grande con una clave de partición. Al hacerlo, tendrá una clave de agrupación y una clave de partición cuando elija un campo escalar en una colección como clave de partición.</p>
+<p>Puede configurar <code translate="no">common.usePartitionKeyAsClusteringKey</code> en <code translate="no">true</code> si desea habilitar esta función para todas las colecciones en su instancia de Milvus o si aún tiene problemas de rendimiento en una colección grande con una clave de partición. Al hacerlo, tendrá una clave de agrupación y una clave de partición cuando elija un campo escalar en una colección como clave de partición.</p>
 <p>Tenga en cuenta que esta configuración no le impide elegir otro campo escalar como clave de agrupación. La clave de agrupación designada explícitamente siempre tiene prioridad.</p></li>
 </ul>

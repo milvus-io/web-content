@@ -2,6 +2,7 @@
 id: scale-dependencies.md
 title: تبعيات المقياس
 ---
+
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">تبعيات مقياس ميلفوس<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: تبعيات المقياس
       </svg>
     </button></h1><p>يعتمد ميلفوس على العديد من التبعيات مثل MinIO وKafka وPulsar و إلخ. يمكن أن يؤدي توسيع نطاق هذه المكونات إلى تعزيز قدرة ميلفوس على التكيف مع المتطلبات المختلفة.</p>
 <div class="alert note">
-<p>بالنسبة لمستخدمي مشغل Milvus، راجع <a href="/docs/ar/object_storage_operator.md">تكوين تخزين الكائنات باستخدام مشغل Mil</a>vus، <a href="/docs/ar/meta_storage_operator.md">وتكوين التخزين التعريفي باستخدام مشغل Milvus،</a> <a href="/docs/ar/message_storage_operator.md">وتكوين تخزين الرسائل باستخدام مشغل Milvus</a>.</p>
+<p>بالنسبة لمستخدمي مشغل Milvus، راجع <a href="/docs/ar/v2.5.x/object_storage_operator.md">تكوين تخزين الكائنات باستخدام مشغل Mil</a>vus، <a href="/docs/ar/v2.5.x/meta_storage_operator.md">وتكوين التخزين التعريفي باستخدام مشغل Milvus،</a> <a href="/docs/ar/v2.5.x/message_storage_operator.md">وتكوين تخزين الرسائل باستخدام مشغل Milvus</a>.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">توسيع نطاق MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 2.5 introduce una nuova versione dell'API che semplifica l'operazione di assegnazione. Non è più necessario cercare il tipo di oggetto quando si concede un privilegio a un ruolo. Di seguito sono riportati i parametri e le relative spiegazioni.</p>
 <ul>
-<li><p><strong>nome_ruolo:</strong> il nome del ruolo di destinazione a cui devono essere concessi i privilegi o i gruppi di privilegi.</p></li>
+<li><p><strong>nome_ruolo:</strong> il nome del ruolo di destinazione al quale devono essere concessi i privilegi o i gruppi di privilegi.</p></li>
 <li><p><strong>Risorsa</strong>: La risorsa di destinazione di un privilegio, che può essere un'istanza specifica, un database o una raccolta.</p></li>
 </ul>
 <p>La tabella seguente spiega come specificare la risorsa nel metodo <code translate="no">client.grantV2()</code>.</p>
@@ -189,7 +189,7 @@ summary: >-
 </tr>
 <tr>
 <td><p>CreaCollezione</p></td>
-<td><p>Crea una raccolta</p></td>
+<td><p>Crea una collezione</p></td>
 <td><p><a href="/docs/it/create-collection.md">CreaCollezione</a></p></td>
 </tr>
 <tr>
@@ -307,7 +307,7 @@ summary: >-
 </tr>
 <tr>
 <td><p>TrasferisciNodo</p></td>
-<td><p>Trasferire nodi tra gruppi di risorse</p></td>
+<td><p>Trasferisce i nodi tra i gruppi di risorse</p></td>
 <td><p><a href="/docs/it/resource_group.md">TrasferisciNodo</a></p></td>
 </tr>
 <tr>
@@ -404,7 +404,7 @@ summary: >-
 </tr>
 <tr>
 <td><p>OperareGruppoPrivilegio</p></td>
-<td><p>Aggiungere privilegi a un gruppo di privilegi o rimuoverli da esso</p></td>
+<td><p>Aggiungere o rimuovere privilegi da un gruppo di privilegi</p></td>
 <td><p><a href="/docs/it/privilege_group.md">Operare il gruppo di privilegi</a></p></td>
 </tr>
 </table></p></li>

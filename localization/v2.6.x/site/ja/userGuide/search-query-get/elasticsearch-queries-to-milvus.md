@@ -59,7 +59,7 @@ summary: >-
    <tr>
      <td><p><a href="/docs/ja/elasticsearch-queries-to-milvus.md#IDs">ID</a></p></td>
      <td><p><code translate="no">in</code> 演算子</p></td>
-     <td rowspan="6"><p>これらの Elasticsearch クエリがフィルタコンテキストで使用される場合、どちらも同じか類似の機能セットを提供します。</p></td>
+     <td rowspan="6"><p>これらの Elasticsearch クエリがフィルタコンテキストで使用される場合、どちらも同じか同様の機能を提供します。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ja/elasticsearch-queries-to-milvus.md#Prefix-query">プレフィックスクエリ</a></p></td>
@@ -455,7 +455,7 @@ res = client.query(
 <li><p>提供されたクエリベクトルを使った、<code translate="no">vector</code> フィールドに対するkNN検索。</p></li>
 </ul>
 <p>各検索エンジンは最大50のトップマッチを提供し、それらはRRFによって再ランク付けされ、最終的にトップ10の結果が返される。</p>
-<p>Milvusでは、複数のベクターフィールドの検索を組み合わせ、再ランク付け戦略を適用し、組み合わせたリストからトップKの結果を取得することで、同様のハイブリッド検索を実現することができます。MilvusはRRFと重み付きリランカー戦略の両方をサポートしています。詳細は<a href="/docs/ja/reranking.md">リランキングを</a>参照。</p>
+<p>Milvusでは、複数のベクターフィールドの検索を組み合わせ、再ランク付け戦略を適用し、組み合わせたリストからトップKの結果を取得することで、同様のハイブリッド検索を実現することができます。MilvusはRRFと重み付きリランカー戦略の両方をサポートしています。詳細は<a href="/docs/ja/weighted-ranker.md">リランキングを</a>参照。</p>
 <p>以下は上記のElasticsearchの例をMilvusで非厳格に等価化したものです。</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

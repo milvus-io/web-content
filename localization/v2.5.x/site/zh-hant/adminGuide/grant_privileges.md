@@ -3,6 +3,7 @@ id: grant_privileges.md
 title: 授予角色特權或特權群組
 summary: 建立角色後，就可以授予角色權限。本指南將介紹如何授予角色權限或權限群組。
 ---
+
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">授予角色特權或特權群組<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
    </tr>
 </table>
 <ul>
-<li><p><strong>權限</strong>：您需要賦予角色的特定權限或<a href="/docs/zh-hant/privilege_group.md">權限群</a>。目前，Milvus 提供 56 種可授予的特權。下表列出了 Milvus 中的特權。</p>
+<li><p><strong>權限</strong>：您需要賦予角色的特定權限或<a href="/docs/zh-hant/v2.5.x/privilege_group.md">權限群</a>。目前，Milvus 提供 56 種可授予的特權。下表列出了 Milvus 中的特權。</p>
 <p><div class="alert note"></p>
 <p>下表中的類型欄是用戶為了方便您快速查找特權，僅用於分類目的。在授予特權時，您不需要瞭解其類型。您只需輸入相應的特權。</p>
 <p></div></p>
@@ -122,27 +123,27 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <td rowspan="5"><p>資料庫權限</p></td>
 <td><p>列出資料庫</p></td>
 <td><p>檢視目前實例中的所有資料庫</p></td>
-<td><p><a href="/docs/zh-hant/manage_databases.md">列出資料庫</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage_databases.md">列出資料庫</a></p></td>
 </tr>
 <tr>
 <td><p>描述資料庫</p></td>
 <td><p>檢視資料庫的詳細資訊</p></td>
-<td><p><a href="/docs/zh-hant/manage_databases.md">描述資料庫</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage_databases.md">描述資料庫</a></p></td>
 </tr>
 <tr>
 <td><p>建立資料庫</p></td>
 <td><p>建立資料庫</p></td>
-<td><p><a href="/docs/zh-hant/manage_databases.md">建立資料庫</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage_databases.md">建立資料庫</a></p></td>
 </tr>
 <tr>
 <td><p>丟棄資料庫</p></td>
 <td><p>丟棄資料庫</p></td>
-<td><p><a href="/docs/zh-hant/manage_databases.md">刪除資料庫</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage_databases.md">刪除資料庫</a></p></td>
 </tr>
 <tr>
 <td><p>更改資料庫</p></td>
 <td><p>修改資料庫的屬性</p></td>
-<td><p><a href="/docs/zh-hant/manage_databases.md">更改資料庫</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage_databases.md">更改資料庫</a></p></td>
 </tr>
 <tr>
 <td rowspan="18"><p>收集權限</p></td>
@@ -163,7 +164,7 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <tr>
 <td><p>顯示收藏集</p></td>
 <td><p>檢視所有具有收藏權限的收藏集</p></td>
-<td><p><a href="/docs/zh-hant/view-collections.md">顯示收藏集</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/view-collections.md">顯示收藏集</a></p></td>
 </tr>
 <tr>
 <td><p>列出別名</p></td>
@@ -188,12 +189,12 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <tr>
 <td><p>建立集合</p></td>
 <td><p>建立一個集合</p></td>
-<td><p><a href="/docs/zh-hant/create-collection.md">建立集合</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/create-collection.md">建立集合</a></p></td>
 </tr>
 <tr>
 <td><p>丟棄集合</p></td>
 <td><p>丟棄收藏集</p></td>
-<td><p><a href="/docs/zh-hant/drop-collection.md">丟棄收藏集</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/drop-collection.md">丟棄收藏集</a></p></td>
 </tr>
 <tr>
 <td><p>載入</p></td>
@@ -203,7 +204,7 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <tr>
 <td><p>釋放</p></td>
 <td><p>釋放集合</p></td>
-<td><p><a href="/docs/zh-hant/load-and-release.md">釋放集合</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/load-and-release.md">釋放集合</a></p></td>
 </tr>
 <tr>
 <td><p>刷新</p></td>
@@ -218,17 +219,17 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <tr>
 <td><p>重新命名集合</p></td>
 <td><p>重新命名一個集合</p></td>
-<td><p><a href="/docs/zh-hant/modify-collection.md">重新命名集合</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/modify-collection.md">重新命名集合</a></p></td>
 </tr>
 <tr>
 <td><p>建立別名</p></td>
 <td><p>為集合建立別名</p></td>
-<td><p><a href="/docs/zh-hant/manage-aliases.md">建立別名</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage-aliases.md">建立別名</a></p></td>
 </tr>
 <tr>
 <td><p>刪除別名</p></td>
 <td><p>刪除集合的別名</p></td>
-<td><p><a href="/docs/zh-hant/manage-aliases.md">刪除別名</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage-aliases.md">刪除別名</a></p></td>
 </tr>
 <tr>
 <td><p>全部清除</p></td>
@@ -239,44 +240,44 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <td rowspan="4"><p>分區權限</p></td>
 <td><p>有分割區</p></td>
 <td><p>檢查磁碟分割是否存在</p></td>
-<td><p><a href="/docs/zh-hant/manage-partitions.md">HasPartition</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
 <td><p>顯示分割區</p></td>
 <td><p>檢視集合中的所有磁碟分割</p></td>
-<td><p><a href="/docs/zh-hant/manage-partitions.md">顯示分割區</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">顯示分割區</a></p></td>
 </tr>
 <tr>
 <td><p>建立磁碟分割</p></td>
 <td><p>建立磁碟分割</p></td>
-<td><p><a href="/docs/zh-hant/manage-partitions.md">建立磁碟分割</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">建立磁碟分割</a></p></td>
 </tr>
 <tr>
 <td><p>丟棄磁碟分割</p></td>
 <td><p>刪除磁碟分割</p></td>
-<td><p><a href="/docs/zh-hant/manage-partitions.md">刪除分割區</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">刪除分割區</a></p></td>
 </tr>
 <tr>
 <td rowspan="3"><p>索引權限</p></td>
 <td><p>索引詳細資料</p></td>
 <td><p>檢視索引的詳細資訊</p></td>
-<td><p><a href="/docs/zh-hant/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
 </tr>
 <tr>
 <td><p>建立索引</p></td>
 <td><p>建立索引</p></td>
-<td><p><a href="/docs/zh-hant/index-vector-fields.md">建立索引</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/index-vector-fields.md">建立索引</a></p></td>
 </tr>
 <tr>
 <td><p>刪除索引</p></td>
 <td><p>刪除索引</p></td>
-<td><p><a href="/docs/zh-hant/index-vector-fields.md">刪除索引</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/index-vector-fields.md">刪除索引</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>資源管理權限</p></td>
 <td><p>負載平衡</p></td>
 <td><p>達成負載平衡</p></td>
-<td><p><a href="/docs/zh-hant/resource_group.md">負載平衡</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/resource_group.md">負載平衡</a></p></td>
 </tr>
 <tr>
 <td><p>建立資源群組</p></td>
@@ -286,32 +287,32 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <tr>
 <td><p>丟棄資源群組</p></td>
 <td><p>刪除資源群組</p></td>
-<td><p><a href="/docs/zh-hant/resource_group.md">刪除資源群組</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/resource_group.md">刪除資源群組</a></p></td>
 </tr>
 <tr>
 <td><p>更新資源群組</p></td>
 <td><p>更新資源群組</p></td>
-<td><p><a href="/docs/zh-hant/resource_group.md">更新資源群組</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/resource_group.md">更新資源群組</a></p></td>
 </tr>
 <tr>
 <td><p>描述資源群組</p></td>
 <td><p>檢視資源群組的詳細資訊</p></td>
-<td><p><a href="/docs/zh-hant/resource_group.md">描述資源群組</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/resource_group.md">描述資源群組</a></p></td>
 </tr>
 <tr>
 <td><p>列出資源群組</p></td>
 <td><p>檢視目前實例的所有資源群組</p></td>
-<td><p><a href="/docs/zh-hant/resource_group.md">列出資源群組</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/resource_group.md">列出資源群組</a></p></td>
 </tr>
 <tr>
 <td><p>轉移節點</p></td>
 <td><p>在資源群組之間轉移節點</p></td>
-<td><p><a href="/docs/zh-hant/resource_group.md">轉移節點</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/resource_group.md">轉移節點</a></p></td>
 </tr>
 <tr>
 <td><p>傳送複本</p></td>
 <td><p>在資源群組之間傳輸複本</p></td>
-<td><p><a href="/docs/zh-hant/resource_group.md">傳輸複本</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/resource_group.md">傳輸複本</a></p></td>
 </tr>
 <tr>
 <td><p>備份 RBAC</p></td>
@@ -327,83 +328,83 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <td rowspan="6"><p>實體權限</p></td>
 <td><p>查詢</p></td>
 <td><p>進行查詢</p></td>
-<td><p><a href="/docs/zh-hant/get-and-scalar-query.md">查詢</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/get-and-scalar-query.md">查詢</a></p></td>
 </tr>
 <tr>
 <td><p>搜尋</p></td>
 <td><p>進行搜尋</p></td>
-<td><p><a href="/docs/zh-hant/single-vector-search.md">搜尋</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/single-vector-search.md">搜尋</a></p></td>
 </tr>
 <tr>
 <td><p>插入</p></td>
 <td><p>插入實體</p></td>
-<td><p><a href="/docs/zh-hant/insert-update-delete.md">插入</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/insert-update-delete.md">插入</a></p></td>
 </tr>
 <tr>
 <td><p>刪除</p></td>
 <td><p>刪除實體</p></td>
-<td><p><a href="/docs/zh-hant/delete-entities.md">刪除</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/delete-entities.md">刪除</a></p></td>
 </tr>
 <tr>
 <td><p>上移</p></td>
 <td><p>插入實體</p></td>
-<td><p><a href="/docs/zh-hant/upsert-entities.md">上傳</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/upsert-entities.md">上傳</a></p></td>
 </tr>
 <tr>
 <td><p>匯入</p></td>
 <td><p>大量插入或匯入實體</p></td>
-<td><p><a href="/docs/zh-hant/import-data.md">大量插入/匯入</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/import-data.md">大量插入/匯入</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>RBAC 權限</p></td>
 <td><p>建立所有權</p></td>
 <td><p>建立使用者或角色</p></td>
-<td><p><a href="/docs/zh-hant/users_and_roles.md">建立使用者/建立角色</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/users_and_roles.md">建立使用者/建立角色</a></p></td>
 </tr>
 <tr>
 <td><p>更新使用者</p></td>
 <td><p>更新使用者的密碼</p></td>
-<td><p><a href="/docs/zh-hant/users_and_roles.md">更新憑證</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/users_and_roles.md">更新憑證</a></p></td>
 </tr>
 <tr>
 <td><p>刪除所有權</p></td>
 <td><p>刪除使用者密碼或角色</p></td>
-<td><p><a href="/docs/zh-hant/drop_users_roles.md">刪除憑證/刪除角色</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/drop_users_roles.md">刪除憑證/刪除角色</a></p></td>
 </tr>
 <tr>
 <td><p>選擇所有權</p></td>
 <td><p>檢視授予特定角色的所有使用者</p></td>
-<td><p><a href="/docs/zh-hant/grant_roles.md">選擇角色/選擇授予</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/grant_roles.md">選擇角色/選擇授予</a></p></td>
 </tr>
 <tr>
 <td><p>管理所有權</p></td>
 <td><p>管理使用者或角色，或授予使用者角色</p></td>
-<td><p><a href="/docs/zh-hant/privilege_group.md">操作使用者角色/操作權限/操作權限 V2</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/privilege_group.md">操作使用者角色/操作權限/操作權限 V2</a></p></td>
 </tr>
 <tr>
 <td><p>選擇使用者</p></td>
 <td><p>檢視授予使用者的所有角色</p></td>
-<td><p><a href="/docs/zh-hant/grant_roles.md">選擇使用者</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/grant_roles.md">選擇使用者</a></p></td>
 </tr>
 <tr>
 <td><p>建立特權群組</p></td>
 <td><p>建立特權群組</p></td>
-<td><p><a href="/docs/zh-hant/privilege_group.md">建立特權群組</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/privilege_group.md">建立特權群組</a></p></td>
 </tr>
 <tr>
 <td><p>刪除特權群組</p></td>
 <td><p>刪除特權群組</p></td>
-<td><p><a href="/docs/zh-hant/privilege_group.md">刪除特權群組</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/privilege_group.md">刪除特權群組</a></p></td>
 </tr>
 <tr>
 <td><p>列出特權群組</p></td>
 <td><p>檢視目前實例中的所有特權群組</p></td>
-<td><p><a href="/docs/zh-hant/privilege_group.md">列出特權群組</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/privilege_group.md">列出特權群組</a></p></td>
 </tr>
 <tr>
 <td><p>操作特權群組</p></td>
 <td><p>在特權群組中加入特權或移除特權</p></td>
-<td><p><a href="/docs/zh-hant/privilege_group.md">操作特權群組</a></p></td>
+<td><p><a href="/docs/zh-hant/v2.5.x/privilege_group.md">操作特權群組</a></p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -413,31 +414,32 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
-)
-    
-client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+)
+
+client.grant_privilege_v2(
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
 
 client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
@@ -582,6 +584,7 @@ curl --request POST \
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.response.DescribeRoleResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq
 
@@ -657,12 +660,13 @@ client.revoke_privilege_v2(
 )
 
 client.revoke_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
 
 client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()

@@ -186,7 +186,7 @@ mc ls my_minio
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>下載備份檔案後，您可以將檔案上傳至<code translate="no">milvus_B</code> 使用的物件儲存空間，以便日後還原。另外，您也可以將備份上傳至<a href="https://cloud.zilliz.com/">Zilliz Cloud</a>，以您的資料建立受管理的向量資料庫。詳情請參閱<a href="https://zilliz.com/doc/migrate_from_milvus-2x">從 Milvus 遷移到 Zilliz Cloud</a>。</p>
+<p>下載備份檔案後，您可以將檔案上傳至<code translate="no">milvus_B</code> 使用的物件儲存空間，以便日後還原。或者，您也可以將備份上傳至<a href="https://cloud.zilliz.com/">Zilliz Cloud</a>，以您的資料建立受管理的向量資料庫。詳情請參閱<a href="https://zilliz.com/doc/migrate_from_milvus-2x">從 Milvus 遷移到 Zilliz Cloud</a>。</p>
 <h2 id="Restore-from-the-backup-to-milvusB" class="common-anchor-header">從備份還原到 milvus_B<button data-href="#Restore-from-the-backup-to-milvusB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

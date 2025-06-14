@@ -1,11 +1,12 @@
 ---
 id: configure-querynode-localdisk.md
 title: Milvus QueryNode mit lokaler Festplatte konfigurieren
-related_key: 'querynode, query node, local disk'
+related_key: "querynode, query node, local disk"
 summary: >-
   Erfahren Sie, wie Sie Milvus QueryNode für die Verwendung einer lokalen
   Festplatte konfigurieren.
 ---
+
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">Milvus QueryNode mit lokaler Festplatte konfigurieren<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,11 +41,11 @@ summary: >-
     </button></h2><p>Milvus ist eine auf künstliche Intelligenz ausgerichtete Vektordatenbank, die auf die effiziente Speicherung und Abfrage großer Mengen von Vektordaten zugeschnitten ist. Sie ist ideal für Aufgaben wie Bild- und Videoanalyse, natürliche Sprachverarbeitung und Empfehlungssysteme. Um eine optimale Leistung zu gewährleisten, ist es von entscheidender Bedeutung, die Festplattenleselatenz zu minimieren. Die Verwendung lokaler NVMe-SSDs wird dringend empfohlen, um Verzögerungen zu vermeiden und die Systemstabilität zu erhalten.</p>
 <p>Zu den wichtigsten Funktionen, bei denen lokale Festplattenspeicher ins Spiel kommen, gehören:</p>
 <ul>
-<li><a href="/docs/de/chunk_cache.md"><strong>Chunk-Cache</strong></a>: Vorladen von Daten in den lokalen Festplatten-Cache für eine schnellere Suche.</li>
-<li><a href="/docs/de/mmap.md"><strong>MMap</strong></a>: Ordnet den Dateiinhalt direkt im Speicher zu, um die Speichereffizienz zu verbessern.</li>
-<li><a href="/docs/de/disk_index.md"><strong>DiskANN-Index</strong></a>: Erfordert Festplattenspeicher für eine effiziente Indexverwaltung.</li>
+<li><a href="/docs/de/v2.5.x/chunk_cache.md"><strong>Chunk-Cache</strong></a>: Vorladen von Daten in den lokalen Festplatten-Cache für eine schnellere Suche.</li>
+<li><a href="/docs/de/v2.5.x/mmap.md"><strong>MMap</strong></a>: Ordnet den Dateiinhalt direkt im Speicher zu, um die Speichereffizienz zu verbessern.</li>
+<li><a href="/docs/de/v2.5.x/disk_index.md"><strong>DiskANN-Index</strong></a>: Erfordert Festplattenspeicher für eine effiziente Indexverwaltung.</li>
 </ul>
-<p>In diesem Artikel konzentrieren wir uns auf den Einsatz von <a href="/docs/de/install-overview.md#Milvus-Distributed">Milvus Distributed</a> auf Cloud-Plattformen und auf die Konfiguration des QueryNode zur Verwendung von NVMe-Plattenspeicher. In der folgenden Tabelle sind die empfohlenen Maschinentypen der verschiedenen Cloud-Anbieter aufgeführt.</p>
+<p>In diesem Artikel konzentrieren wir uns auf den Einsatz von <a href="/docs/de/v2.5.x/install-overview.md#Milvus-Distributed">Milvus Distributed</a> auf Cloud-Plattformen und auf die Konfiguration des QueryNode zur Verwendung von NVMe-Plattenspeicher. In der folgenden Tabelle sind die empfohlenen Maschinentypen der verschiedenen Cloud-Anbieter aufgeführt.</p>
 <table>
 <thead>
 <tr><th style="text-align:center">Cloud-Anbieter</th><th style="text-align:center">Maschinentyp</th></tr>
@@ -88,21 +89,22 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <span class="hljs-comment">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Running custom user data script&quot;</span>
 <span class="hljs-keyword">if</span> ( lsblk | fgrep -q nvme1n1 ); <span class="hljs-keyword">then</span>
-    <span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
-    mkfs.xfs /dev/nvme1n1
-    mount /dev/nvme1n1 /mnt/data
-    <span class="hljs-built_in">chmod</span> 0755 /mnt/data
-    <span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
-    <span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
-    <span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
-    UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
-    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span>     /mnt/data   xfs    defaults,noatime  1   1&quot;</span> &gt;&gt; /etc/fstab
+<span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
+mkfs.xfs /dev/nvme1n1
+mount /dev/nvme1n1 /mnt/data
+<span class="hljs-built_in">chmod</span> 0755 /mnt/data
+<span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
+<span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
+<span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
+<span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
+UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span> /mnt/data xfs defaults,noatime 1 1&quot;</span> &gt;&gt; /etc/fstab
 <span class="hljs-keyword">fi</span>
 <span class="hljs-built_in">echo</span> 10485760 &gt; /proc/sys/fs/aio-max-nr
 
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>Im obigen Beispiel nehmen wir an, dass die NVMe-Platte <code translate="no">/dev/nvme1n1</code> ist. Sie müssen das Skript an Ihre spezifische Konfiguration anpassen.</p>
 </div>
@@ -124,6 +126,7 @@ mkfs.xfs /dev/md0
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/dev/md0 /var/lib/kubelet xfs defaults 0 0&#x27;</span> &gt;&gt; /etc/fstab
 mount -a
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>Im obigen Beispiel gehen wir davon aus, dass die NVMe-Festplatten <code translate="no">/dev/nvme0n1</code> und <code translate="no">/dev/nvme1n1</code> sind. Sie müssen das Skript an Ihre spezifische Konfiguration anpassen.</p>
 </div>
@@ -136,7 +139,7 @@ mkfs.xfs /dev/nvme0n1
 mount -a
 
 <span class="hljs-built_in">mkdir</span> -p /mnt/data/kubelet /mnt/data/containerd /mnt/data/log/pods
-<span class="hljs-built_in">mkdir</span> -p  /var/lib/kubelet /var/lib/containerd /var/log/pods
+<span class="hljs-built_in">mkdir</span> -p /var/lib/kubelet /var/lib/containerd /var/log/pods
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/kubelet /var/lib/kubelet none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/containerd /var/lib/containerd none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
@@ -145,6 +148,7 @@ mount -a
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>Im obigen Beispiel wird angenommen, dass die NVMe-Festplatte <code translate="no">/dev/nvme0n1</code> ist. Sie müssen das Skript an Ihre spezifische Konfiguration anpassen.</p>
 </div>
@@ -221,8 +225,9 @@ fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numj
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
-fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
+fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1 --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Und die Ausgabe sollte wie folgt aussehen:</p>
 <pre><code translate="no" class="language-bash">Jobs: <span class="hljs-number">128</span> (f=<span class="hljs-number">128</span>): [r(<span class="hljs-number">128</span>)][<span class="hljs-number">100.0</span>%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=<span class="hljs-number">0</span>, jobs=<span class="hljs-number">128</span>): err= <span class="hljs-number">0</span>: pid=<span class="hljs-number">768</span>: Mon Jun <span class="hljs-number">24</span> 09:<span class="hljs-number">35</span>:06 <span class="hljs-number">2024</span>
@@ -268,7 +273,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>Sobald die Überprüfungsergebnisse zufriedenstellend sind, können Sie Milvus Distributed mit den folgenden Schritten bereitstellen:</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Tipps für den Einsatz von Milvus Distributed mit Helm</h3><p>Der QueryNode-Pod verwendet standardmäßig NVMe-Festplatten als EmptyDir-Volumes. Es wird empfohlen, NVMe-Festplatten unter <code translate="no">/var/lib/milvus/data</code> innerhalb des QueryNode-Pods zu mounten, um eine optimale Leistung zu gewährleisten.</p>
-<p>Einzelheiten zur Bereitstellung von Milvus Distributed mit Helm finden Sie unter <a href="/docs/de/install_cluster-helm.md">Ausführen von Milvus in Kubernetes mit Helm</a>.</p>
+<p>Einzelheiten zur Bereitstellung von Milvus Distributed mit Helm finden Sie unter <a href="/docs/de/v2.5.x/install_cluster-helm.md">Ausführen von Milvus in Kubernetes mit Helm</a>.</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Tipps für die Bereitstellung von Milvus Distributed mit Milvus Operator</h3><p>Der Milvus Operator konfiguriert den QueryNode-Pod automatisch für die Verwendung von NVMe-Festplatten als EmptyDir-Volumes. Wir empfehlen Ihnen, die folgenden Konfigurationen zur benutzerdefinierten Ressource <code translate="no">MilvusCluster</code> hinzuzufügen:</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:
@@ -281,4 +286,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>Dadurch wird sichergestellt, dass der QueryNode-Pod die NVMe-Festplatte als Datenvolumen verwendet. Einzelheiten zur Bereitstellung von Milvus Distributed mit Milvus Operator finden Sie unter <a href="/docs/de/install_cluster-milvusoperator.md">Ausführen von Milvus in Kubernetes mit Milvus Operator</a>.</p>
+<p>Dadurch wird sichergestellt, dass der QueryNode-Pod die NVMe-Festplatte als Datenvolumen verwendet. Einzelheiten zur Bereitstellung von Milvus Distributed mit Milvus Operator finden Sie unter <a href="/docs/de/v2.5.x/install_cluster-milvusoperator.md">Ausführen von Milvus in Kubernetes mit Milvus Operator</a>.</p>

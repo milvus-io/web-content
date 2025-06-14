@@ -24,4 +24,4 @@ summary: تعرف على الشركات التي اعتمدت Milvus في تطب
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
    </span> <span class="img-wrapper"> <span>متبنو ميلفوس</span> </span></p>
-<p>تفضل بزيارة <a href="https://milvus.io/use-cases">صفحة حالة استخدام Milvus</a> لاكتشاف كيفية استفادة رواد الصناعة من Milvus لتعزيز تطبيقات الذكاء الاصطناعي الخاصة بهم وتسريع نمو أعمالهم.</p>
+<p>قم بزيارة <a href="https://milvus.io/use-cases">صفحة حالة استخدام Milvus</a> لاكتشاف كيفية استفادة رواد الصناعة من Milvus لتعزيز تطبيقات الذكاء الاصطناعي الخاصة بهم وتسريع نمو أعمالهم.</p>

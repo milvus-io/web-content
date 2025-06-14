@@ -5,6 +5,7 @@ summary: >-
   migrazione dei dati da Elasticsearch a Milvus 2.x.
 title: Da Elasticsearch
 ---
+
 <h1 id="From-Elasticsearch" class="common-anchor-header">Da Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ title: Da Elasticsearch
 <li>Per i dettagli sull'installazione, fare riferimento a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Installazione di Elasticsearch</a> e <a href="https://milvus.io/docs/install_standalone-docker.md">Installazione di Milvus</a>.</li>
 </ul></li>
 <li><strong>Strumenti necessari</strong>:<ul>
-<li>Strumento di<a href="https://github.com/zilliztech/milvus-migration">migrazione Milvus</a>. Per i dettagli sull'installazione, fare riferimento a <a href="/docs/it/milvusdm_install.md">Installare lo strumento di migrazione</a>.</li>
+<li>Strumento di<a href="https://github.com/zilliztech/milvus-migration">migrazione Milvus</a>. Per i dettagli sull'installazione, fare riferimento a <a href="/docs/it/v2.5.x/milvusdm_install.md">Installare lo strumento di migrazione</a>.</li>
 </ul></li>
 <li><strong>Tipi di dati supportati per la migrazione</strong>: I campi da migrare dall'indice Elasticsearch di origine sono dei seguenti tipi: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>. I tipi di dati non elencati non sono attualmente supportati per la migrazione. Per informazioni dettagliate sulle <a href="#field-mapping-reference">mappature</a> dei dati tra le raccolte Milvus e gli indici Elasticsearch, consultare il <a href="#field-mapping-reference">riferimento</a> alla <a href="#field-mapping-reference">mappatura dei campi</a>.</li>
 <li><strong>Requisiti dell'indice Elasticsearch</strong>:<ul>

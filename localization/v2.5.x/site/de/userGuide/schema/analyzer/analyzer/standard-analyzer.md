@@ -7,6 +7,7 @@ summary: >-
   verwendet eine grammatikbasierte Tokenisierung und ist daher für die meisten
   Sprachen geeignet.
 ---
+
 <h1 id="Standard-Analyzer" class="common-anchor-header">Standard-Analysator<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,8 +41,8 @@ summary: >-
       </svg>
     </button></h2><p>Der <code translate="no">standard</code> Analyzer besteht aus:</p>
 <ul>
-<li><p><strong>Tokenisierer</strong>: Verwendet den <code translate="no">standard</code> Tokenizer, um Text auf der Grundlage von Grammatikregeln in diskrete Worteinheiten aufzuteilen. Weitere Informationen finden Sie unter <a href="/docs/de/standard-tokenizer.md">Standard</a>.</p></li>
-<li><p><strong>Filter</strong>: Verwendet den <code translate="no">lowercase</code><a href="/docs/de/lowercase-filter.md"> Filter</a>, um alle Token in Kleinbuchstaben umzuwandeln und so eine Suche ohne Berücksichtigung der Groß-/Kleinschreibung zu ermöglichen. Weitere Informationen finden Sie unter</p></li>
+<li><p><strong>Tokenisierer</strong>: Verwendet den <code translate="no">standard</code> Tokenizer, um Text auf der Grundlage von Grammatikregeln in diskrete Worteinheiten aufzuteilen. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/standard-tokenizer.md">Standard</a>.</p></li>
+<li><p><strong>Filter</strong>: Verwendet den <code translate="no">lowercase</code><a href="/docs/de/v2.5.x/lowercase-filter.md"> Filter</a>, um alle Token in Kleinbuchstaben umzuwandeln und so eine Suche ohne Berücksichtigung der Groß-/Kleinschreibung zu ermöglichen. Weitere Informationen finden Sie unter</p></li>
 </ul>
 <p>Die Funktionalität des <code translate="no">standard</code> Analyzers entspricht der folgenden benutzerdefinierten Analyzer-Konfiguration:</p>
 <div class="multipleCode">
@@ -138,7 +139,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Weitere Informationen finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Verwendung von Beispielen</a>.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/analyzer-overview.md#Example-use">Verwendung von Beispielen</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,6 +194,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

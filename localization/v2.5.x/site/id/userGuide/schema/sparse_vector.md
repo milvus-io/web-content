@@ -8,6 +8,7 @@ summary: >-
   memberikan hasil pencocokan yang lebih dapat diprediksi, terutama saat mencari
   istilah khusus atau pengidentifikasi tekstual.
 ---
+
 <h1 id="Sparse-Vector" class="common-anchor-header">Vektor Jarang<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,8 +47,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Representasi Vektor Jarang</span> </span></p>
 <p>Dengan tokenisasi dan penilaian, dokumen dapat direpresentasikan sebagai vektor kantong kata, di mana setiap dimensi berhubungan dengan kata tertentu dalam kosakata. Hanya kata-kata yang ada di dalam dokumen yang memiliki nilai bukan nol, sehingga menciptakan representasi vektor yang jarang. Vektor jarang dapat dihasilkan dengan menggunakan dua pendekatan:</p>
 <ul>
-<li><p><strong>Teknik statistik tradisional</strong>, seperti <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) dan <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), memberikan bobot pada kata-kata berdasarkan frekuensi dan kepentingannya dalam sebuah korpus. Metode-metode ini menghitung statistik sederhana sebagai skor untuk setiap dimensi, yang mewakili sebuah token.  Milvus menyediakan <strong>pencarian teks lengkap</strong> dengan metode BM25, yang secara otomatis mengubah teks menjadi vektor yang jarang, sehingga tidak memerlukan prapemrosesan manual. Pendekatan ini ideal untuk pencarian berbasis kata kunci, di mana ketepatan dan kecocokan yang tepat adalah penting. Lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a> untuk informasi lebih lanjut.</p></li>
-<li><p><strong>Model penyematan jarang saraf</strong> adalah metode yang dipelajari untuk menghasilkan representasi jarang dengan melatih set data yang besar. Model ini biasanya merupakan model pembelajaran mendalam dengan arsitektur Transformer, yang mampu memperluas dan menimbang istilah berdasarkan konteks semantik. Milvus juga mendukung sematan jarang yang dihasilkan secara eksternal dari model seperti <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Lihat <a href="/docs/id/embeddings.md#Embedding-Overview">Penyematan</a> untuk detailnya.</include></p></li>
+<li><p><strong>Teknik statistik tradisional</strong>, seperti <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) dan <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), memberikan bobot pada kata-kata berdasarkan frekuensi dan kepentingannya dalam sebuah korpus. Metode-metode ini menghitung statistik sederhana sebagai skor untuk setiap dimensi, yang mewakili sebuah token.  Milvus menyediakan <strong>pencarian teks lengkap</strong> dengan metode BM25, yang secara otomatis mengubah teks menjadi vektor yang jarang, sehingga tidak memerlukan prapemrosesan manual. Pendekatan ini ideal untuk pencarian berbasis kata kunci, di mana ketepatan dan kecocokan yang tepat adalah penting. Lihat <a href="/docs/id/v2.5.x/full-text-search.md">Pencarian Teks Lengkap</a> untuk informasi lebih lanjut.</p></li>
+<li><p><strong>Model penyematan jarang saraf</strong> adalah metode yang dipelajari untuk menghasilkan representasi jarang dengan melatih set data yang besar. Model ini biasanya merupakan model pembelajaran mendalam dengan arsitektur Transformer, yang mampu memperluas dan menimbang istilah berdasarkan konteks semantik. Milvus juga mendukung sematan jarang yang dihasilkan secara eksternal dari model seperti <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. Lihat <a href="/docs/id/v2.5.x/embeddings.md#Embedding-Overview">Penyematan</a> untuk detailnya.</include></p></li>
 </ul>
 <p>Vektor-vektor jarang dan teks asli dapat disimpan di Milvus untuk pengambilan yang efisien. Diagram di bawah ini menguraikan keseluruhan proses.</p>
 <p>
@@ -55,7 +56,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector-workflow.png" alt="Sparse Vector Workflow" class="doc-image" id="sparse-vector-workflow" />
    </span> <span class="img-wrapper"> <span>Alur Kerja Vektor Jarang</span> </span></p>
 <div class="alert note">
-<p>Selain vektor jarang, Milvus juga mendukung vektor padat dan vektor biner. Vektor padat ideal untuk menangkap hubungan semantik yang dalam, sementara vektor biner unggul dalam skenario seperti perbandingan kemiripan cepat dan deduplikasi konten. Untuk informasi lebih lanjut, lihat <a href="/docs/id/dense-vector.md">Vektor Padat</a> dan <a href="/docs/id/binary-vector.md">Vektor Biner</a>.</p>
+<p>Selain vektor jarang, Milvus juga mendukung vektor padat dan vektor biner. Vektor padat ideal untuk menangkap hubungan semantik yang dalam, sementara vektor biner unggul dalam skenario seperti perbandingan kemiripan cepat dan deduplikasi konten. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/dense-vector.md">Vektor Padat</a> dan <a href="/docs/id/v2.5.x/binary-vector.md">Vektor Biner</a>.</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">Format Data<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +73,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pada bagian berikut, kami mendemonstrasikan cara menyimpan vektor dari model penyematan jarang yang telah dipelajari seperti SPLADE. Jika Anda mencari sesuatu untuk melengkapi pencarian semantik berbasis vektor padat, kami merekomendasikan <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a> dengan BM25 daripada SPLADE untuk kemudahan. Jika Anda telah melakukan evaluasi kualitas dan berdedikasi untuk menggunakan SPLADE, Anda dapat merujuk ke <a href="/docs/id/embeddings.md#Embedding-Overview">Penyematan</a> tentang cara menghasilkan vektor jarang dengan SPLADE.</p>
+    </button></h2><p>Pada bagian berikut, kami mendemonstrasikan cara menyimpan vektor dari model penyematan jarang yang telah dipelajari seperti SPLADE. Jika Anda mencari sesuatu untuk melengkapi pencarian semantik berbasis vektor padat, kami merekomendasikan <a href="/docs/id/v2.5.x/full-text-search.md">Pencarian Teks Lengkap</a> dengan BM25 daripada SPLADE untuk kemudahan. Jika Anda telah melakukan evaluasi kualitas dan berdedikasi untuk menggunakan SPLADE, Anda dapat merujuk ke <a href="/docs/id/v2.5.x/embeddings.md#Embedding-Overview">Penyematan</a> tentang cara menghasilkan vektor jarang dengan SPLADE.</p>
 <p>Milvus mendukung input vektor jarang dengan format berikut:</p>
 <ul>
 <li><p><strong>Daftar Kamus (diformat sebagai <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -86,8 +87,9 @@ sparse_vectors = [{<span class="hljs-number">27</span>: <span class="hljs-number
 <span class="hljs-comment"># Second vector: indices [3, 100] with values [0.8, 0.1]</span>
 indices = [[<span class="hljs-number">27</span>, <span class="hljs-number">100</span>, <span class="hljs-number">5369</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">100</span>]]
 values = [[<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.1</span>]]
-sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
+sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]\*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p><strong>Daftar Tuple Iterables (misalnya <code translate="no">[(dimension_index, value)]</code>)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a list of iterables (e.g. tuples)</span>
 sparse_vector = [
@@ -124,14 +126,15 @@ sparse_vector = [
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">True</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">True</span>,
+enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>, enable_analyzer=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -268,7 +271,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>: Bidang ini menyimpan string teks menggunakan tipe data <code translate="no">VARCHAR</code>, dengan panjang maksimum 65535 byte.</p></li>
 </ul>
 <div class="alert note">
-<p>Untuk mengaktifkan Milvus atau untuk menghasilkan penyematan vektor jarang dari bidang teks yang ditentukan selama penyisipan data, langkah tambahan yang melibatkan sebuah fungsi harus dilakukan. Untuk informasi lebih lanjut, silakan lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
+<p>Untuk mengaktifkan Milvus atau untuk menghasilkan penyematan vektor jarang dari bidang teks yang ditentukan selama penyisipan data, langkah tambahan yang melibatkan sebuah fungsi harus dilakukan. Untuk informasi lebih lanjut, silakan lihat <a href="/docs/id/v2.5.x/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">Mengatur Parameter Indeks<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -285,20 +288,21 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Proses pembuatan indeks untuk vektor jarang mirip dengan proses pembuatan indeks untuk vektor <a href="/docs/id/dense-vector.md">padat</a>, tetapi dengan perbedaan pada jenis indeks yang ditentukan (<code translate="no">index_type</code>), metrik jarak (<code translate="no">metric_type</code>), dan parameter indeks (<code translate="no">params</code>).</p>
+    </button></h2><p>Proses pembuatan indeks untuk vektor jarang mirip dengan proses pembuatan indeks untuk vektor <a href="/docs/id/v2.5.x/dense-vector.md">padat</a>, tetapi dengan perbedaan pada jenis indeks yang ditentukan (<code translate="no">index_type</code>), metrik jarak (<code translate="no">metric_type</code>), dan parameter indeks (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># or &quot;DAAT_WAND&quot; or &quot;TAAT_NAIVE&quot;</span>
+field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># or &quot;DAAT_WAND&quot; or &quot;TAAT_NAIVE&quot;</span>
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -345,7 +349,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>Contoh ini menggunakan tipe indeks <code translate="no">SPARSE_INVERTED_INDEX</code> dengan <code translate="no">IP</code> sebagai metrik. Untuk lebih jelasnya, lihat sumber daya berikut ini:</p>
 <ul>
-<li><a href="/docs/id/metric.md">Jenis Metrik</a>: Jenis metrik yang didukung untuk berbagai jenis bidang</li>
+<li><a href="/docs/id/v2.5.x/metric.md">Jenis Metrik</a>: Jenis metrik yang didukung untuk berbagai jenis bidang</li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">Membuat Koleksi<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -381,15 +385,16 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>
+<span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>
 });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    <span class="hljs-attr">schema</span>: schema,
-    <span class="hljs-attr">index_params</span>: indexParams
+<span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+<span class="hljs-attr">schema</span>: schema,
+<span class="hljs-attr">index_params</span>: indexParams
 });
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
@@ -437,10 +442,11 @@ client.createCollection(requestCreate);
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -566,6 +572,7 @@ search_params = {
 <span class="hljs-comment"># Query with sparse vector</span>
 query_data = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.SparseFloatVec;
 
@@ -615,6 +622,7 @@ queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32<
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172266&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172266&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172265&#x27;, &#x27;distance&#x27;: 0.10000000149011612, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172265&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
@@ -682,4 +690,4 @@ System.out.println(searchR.getSearchResults());
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/single-vector-search.md">Pencarian Vektor Dasar</a>.</p>
+<p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/v2.5.x/single-vector-search.md">Pencarian Vektor Dasar</a>.</p>

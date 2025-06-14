@@ -103,7 +103,7 @@ openssl req -new -key client.key\
 ./gen.sh
 <button class="copy-code-btn"></button></code></pre>
 <p>다음 7개의 파일이 생성됩니다: <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code>, <code translate="no">server.key</code>, <code translate="no">server.pem</code>, <code translate="no">client.key</code>, <code translate="no">client.pem</code>.</p>
-<p>나중에 인증서를 갱신하려면 <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> 파일을 안전하게 보관하세요. <code translate="no">server.key</code> 및 <code translate="no">server.pem</code> 파일은 서버에서 사용하고 <code translate="no">client.key</code> 및 <code translate="no">client.pem</code> 파일은 클라이언트에서 사용합니다.</p>
+<p>나중에 인증서를 갱신할 수 있도록 <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> 파일을 안전하게 보관하세요. <code translate="no">server.key</code> 및 <code translate="no">server.pem</code> 파일은 서버에서 사용하고 <code translate="no">client.key</code> 및 <code translate="no">client.pem</code> 파일은 클라이언트에서 사용합니다.</p>
 <h3 id="Renew-certificates-optional" class="common-anchor-header">인증서 갱신(선택 사항)</h3><p>인증서가 곧 만료될 경우와 같이 인증서를 갱신하려는 경우 다음 스크립트를 사용할 수 있습니다.</p>
 <p>작업 디렉터리에 <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> 가 필요합니다.</p>
 <p><details><summary><code translate="no">renew.sh</code></summary></p>

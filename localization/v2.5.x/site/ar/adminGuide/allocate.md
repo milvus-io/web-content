@@ -3,6 +3,7 @@ id: allocate.md
 title: تخصيص الموارد لميلفوس على Kubernetes
 summary: تعرف على كيفية تخصيص الموارد لـ Milvus على Kubernetes.
 ---
+
 <h1 id="Allocate-Resources-on-Kubernetes" class="common-anchor-header">تخصيص الموارد على Kubernetes<button data-href="#Allocate-Resources-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ summary: تعرف على كيفية تخصيص الموارد لـ Milvus على
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية تخصيص الموارد لمجموعة Milvus على Kubernetes.</p>
-<p>بشكل عام، يجب أن تكون الموارد التي تخصصها لمجموعة Milvus في الإنتاج متناسبة مع عبء عمل الجهاز. يجب عليك أيضًا مراعاة نوع الجهاز عند تخصيص الموارد. على الرغم من أنه يمكنك تحديث التكوينات عند تشغيل المجموعة، إلا أننا نوصي بتعيين القيم قبل <a href="/docs/ar/install_cluster-helm.md">نشر المجموعة</a>.</p>
+<p>بشكل عام، يجب أن تكون الموارد التي تخصصها لمجموعة Milvus في الإنتاج متناسبة مع عبء عمل الجهاز. يجب عليك أيضًا مراعاة نوع الجهاز عند تخصيص الموارد. على الرغم من أنه يمكنك تحديث التكوينات عند تشغيل المجموعة، إلا أننا نوصي بتعيين القيم قبل <a href="/docs/ar/v2.5.x/install_cluster-helm.md">نشر المجموعة</a>.</p>
 <div class="alert note">
 <p>للحصول على معلومات حول كيفية تخصيص الموارد باستخدام مشغل Milvus، راجع <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">تخصيص الموارد باستخدام مشغل Milvus</a>.</p>
 </div>
@@ -59,8 +60,8 @@ summary: تعرف على كيفية تخصيص الموارد لـ Milvus على
 سيؤدي استخدام Helm لترقية الموارد إلى إجراء تحديث متجدد للقرون قيد التشغيل.</div>
 <p>هناك طريقتان لتخصيص الموارد:</p>
 <ul>
-<li><a href="/docs/ar/allocate.md#Allocate-resources-with-commands">استخدم الأوامر</a></li>
-<li><a href="/docs/ar/allocate.md#Allocate-resources-by-setting-configuration-file">تعيين المعلمات في الملف <code translate="no">YAML</code> </a></li>
+<li><a href="/docs/ar/v2.5.x/allocate.md#Allocate-resources-with-commands">استخدم الأوامر</a></li>
+<li><a href="/docs/ar/v2.5.x/allocate.md#Allocate-resources-by-setting-configuration-file">تعيين المعلمات في الملف <code translate="no">YAML</code> </a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">تخصيص الموارد باستخدام الأوامر</h3><p>تحتاج إلى تعيين متغيرات الموارد لكل مكون من مكونات Milvus إذا كنت تستخدم <code translate="no">--set</code> لتحديث تكوينات الموارد.</p>
 <div class="filter">
@@ -129,13 +130,13 @@ summary: تعرف على كيفية تخصيص الموارد لـ Milvus على
       </svg>
     </button></h2><ul>
 <li>قد ترغب أيضًا في معرفة كيفية:<ul>
-<li><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus العنقودية</a></li>
-<li><a href="/docs/ar/upgrade_milvus_cluster-operator.md">ترقية مجموعة ميلفوس العنقودية</a></li>
-<li><a href="/docs/ar/upgrade_milvus_standalone-operator.md">ترقية مجموعة ميلفوس المستقلة</a></li>
+<li><a href="/docs/ar/v2.5.x/scaleout.md">توسيع نطاق مجموعة Milvus العنقودية</a></li>
+<li><a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-operator.md">ترقية مجموعة ميلفوس العنقودية</a></li>
+<li><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-operator.md">ترقية مجموعة ميلفوس المستقلة</a></li>
 </ul></li>
 <li>إذا كنت مستعداً لنشر مجموعتك العنقودية على السحابة<ul>
-<li>تعرف على كيفية <a href="/docs/ar/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
-<li>تعلم كيفية <a href="/docs/ar/gcp.md">نشر مجموعة ميلفوس العنقودية على GCP باستخدام Kubernetes</a></li>
-<li>تعرف على كيفية <a href="/docs/ar/azure.md">نشر Milvus على Microsoft Azure باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
+<li>تعلم كيفية <a href="/docs/ar/v2.5.x/gcp.md">نشر مجموعة ميلفوس العنقودية على GCP باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/azure.md">نشر Milvus على Microsoft Azure باستخدام Kubernetes</a></li>
 </ul></li>
 </ul>

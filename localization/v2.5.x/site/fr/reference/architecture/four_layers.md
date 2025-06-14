@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Structure de désagrégation stockage/informatique dans Milvus.
 title: Désagrégation stockage/informatique
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Désagrégation stockage/informatique<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,5 +120,5 @@ title: Désagrégation stockage/informatique
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lisez <a href="/docs/fr/main_components.md">Composants principaux</a> pour plus de détails sur l'architecture Milvus.</li>
+<li>Lisez <a href="/docs/fr/v2.5.x/main_components.md">Composants principaux</a> pour plus de détails sur l'architecture Milvus.</li>
 </ul>

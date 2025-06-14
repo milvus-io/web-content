@@ -1,9 +1,10 @@
 ---
 id: visualize.md
 title: Визуализация показателей
-related_key: 'monitor, alert'
-summary: 'Узнайте, как визуализировать метрики Milvus в Grafana.'
+related_key: "monitor, alert"
+summary: "Узнайте, как визуализировать метрики Milvus в Grafana."
 ---
+
 <h1 id="Visualize-Milvus-Metrics-in-Grafana" class="common-anchor-header">Визуализация метрик Milvus в Grafana<button data-href="#Visualize-Milvus-Metrics-in-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ summary: 'Узнайте, как визуализировать метрики M
         ></path>
       </svg>
     </button></h1><p>В этой теме описывается, как визуализировать метрики Milvus с помощью Grafana.</p>
-<p>Как описано в <a href="/docs/ru/monitor.md">руководстве по мониторингу</a>, метрики содержат полезную информацию, например, о том, сколько памяти используется конкретным компонентом Milvus. Мониторинг метрик помогает лучше понять производительность Milvus и состояние его работы, чтобы своевременно корректировать распределение ресурсов.</p>
+<p>Как описано в <a href="/docs/ru/v2.5.x/monitor.md">руководстве по мониторингу</a>, метрики содержат полезную информацию, например, о том, сколько памяти используется конкретным компонентом Milvus. Мониторинг метрик помогает лучше понять производительность Milvus и состояние его работы, чтобы своевременно корректировать распределение ресурсов.</p>
 <p>Визуализация - это график, показывающий изменение использования ресурсов во времени, что позволяет быстро увидеть и заметить изменения в использовании ресурсов, особенно когда происходит какое-либо событие.</p>
 <p>В этом руководстве используется Grafana, платформа с открытым исходным кодом для аналитики временных рядов, для визуализации различных показателей производительности кластера Milvus, развернутого на Kubernetes (K8s).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -39,8 +40,8 @@ summary: 'Узнайте, как визуализировать метрики M
         ></path>
       </svg>
     </button></h2><ul>
-<li>Вы <a href="/docs/ru/install_cluster-helm.md">установили кластер Milvus на K8s)</a>.</li>
-<li>Вам необходимо <a href="/docs/ru/monitor.md">настроить Prometheus</a> на мониторинг и сбор метрик, прежде чем использовать Grafana для визуализации метрик. Если настройка прошла успешно, вы можете получить доступ к Grafana по адресу <code translate="no">http://localhost:3000</code>. Также вы можете получить доступ к Grafana, используя стандартный адрес Grafana <code translate="no">user:password</code> <code translate="no">admin:admin</code> .</li>
+<li>Вы <a href="/docs/ru/v2.5.x/install_cluster-helm.md">установили кластер Milvus на K8s)</a>.</li>
+<li>Вам необходимо <a href="/docs/ru/v2.5.x/monitor.md">настроить Prometheus</a> на мониторинг и сбор метрик, прежде чем использовать Grafana для визуализации метрик. Если настройка прошла успешно, вы можете получить доступ к Grafana по адресу <code translate="no">http://localhost:3000</code>. Также вы можете получить доступ к Grafana, используя стандартный адрес Grafana <code translate="no">user:password</code> <code translate="no">admin:admin</code> .</li>
 </ul>
 <h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">Визуализация метрик с помощью Grafana<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +91,11 @@ summary: 'Узнайте, как визуализировать метрики M
       </svg>
     </button></h2><ul>
 <li>Если вы настроили Grafana на визуализацию метрик Milvus, вам также может быть интересно:<ul>
-<li>Узнайте, как <a href="/docs/ru/alert.md">создать оповещение для служб Milvus</a>.</li>
-<li>Настроить <a href="/docs/ru/allocate.md">распределение ресурсов</a></li>
-<li><a href="/docs/ru/scaleout.md">Масштабировать или увеличить масштаб кластера Milvus.</a></li>
+<li>Узнайте, как <a href="/docs/ru/v2.5.x/alert.md">создать оповещение для служб Milvus</a>.</li>
+<li>Настроить <a href="/docs/ru/v2.5.x/allocate.md">распределение ресурсов</a></li>
+<li><a href="/docs/ru/v2.5.x/scaleout.md">Масштабировать или увеличить масштаб кластера Milvus.</a></li>
 </ul></li>
 <li>Если вы заинтересованы в обновлении версии Milvus,<ul>
-<li>прочитайте <a href="/docs/ru/upgrade_milvus_cluster-operator.md">руководство по обновлению кластера Milvus</a> и <a href="/docs/ru/upgrade_milvus_cluster-operator.md">руководство</a> <a href="/docs/ru/upgrade_milvus_standalone-operator.md">по обновлению автономной версии Milvus</a>.</li>
+<li>прочитайте <a href="/docs/ru/v2.5.x/upgrade_milvus_cluster-operator.md">руководство по обновлению кластера Milvus</a> и <a href="/docs/ru/v2.5.x/upgrade_milvus_cluster-operator.md">руководство</a> <a href="/docs/ru/v2.5.x/upgrade_milvus_standalone-operator.md">по обновлению автономной версии Milvus</a>.</li>
 </ul></li>
 </ul>

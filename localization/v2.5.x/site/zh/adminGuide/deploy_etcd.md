@@ -1,9 +1,10 @@
 ---
 id: deploy_etcd.md
 title: 使用 Docker Compose 或 Helm 配置元存储
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: 了解如何使用 Docker Compose/Helm 为 Milvus 配置元存储。
 ---
+
 <h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">使用 Docker Compose 或 Helm 配置元存储<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ summary: 了解如何使用 Docker Compose/Helm 为 Milvus 配置元存储。
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p><a href="/docs/zh/configure_etcd.md">有关</a>详细信息，请参阅<a href="/docs/zh/configure_etcd.md">etcd 相关配置</a>。</p>
+<p><a href="/docs/zh/v2.5.x/configure_etcd.md">有关</a>详细信息，请参阅<a href="/docs/zh/v2.5.x/configure_etcd.md">etcd 相关配置</a>。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2.运行 Milvus</h3><p>运行以下命令启动使用 etcd 配置的 Milvus。</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -131,6 +132,6 @@ summary: 了解如何使用 Docker Compose/Helm 为 Milvus 配置元存储。
       </svg>
     </button></h2><p>了解如何使用 Docker Compose 或 Helm 配置 Milvus 的其他依赖项：</p>
 <ul>
-<li><a href="/docs/zh/deploy_s3.md">使用 Docker Compose 或 Helm 配置对象存储</a></li>
-<li><a href="/docs/zh/deploy_pulsar.md">使用 Docker Compose 或 Helm 配置消息存储</a></li>
+<li><a href="/docs/zh/v2.5.x/deploy_s3.md">使用 Docker Compose 或 Helm 配置对象存储</a></li>
+<li><a href="/docs/zh/v2.5.x/deploy_pulsar.md">使用 Docker Compose 或 Helm 配置消息存储</a></li>
 </ul>

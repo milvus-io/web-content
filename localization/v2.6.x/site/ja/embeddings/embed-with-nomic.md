@@ -40,7 +40,7 @@ ef = NomicEmbeddingFunction(
 <p><strong>パラメータ</strong></p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(文字列</em>)</p>
-<p>エンコーディングに使用するNomicエンベッディングモデルの名前。デフォルトは<code translate="no">nomic-embed-text-v1.5</code> 。詳細は<a href="https://docs.nomic.ai/atlas/models/image-embedding">Nomic公式ドキュメントを</a>参照してください。</p></li>
+<p>エンコードに使用するNomicエンベッディングモデルの名前。デフォルトは<code translate="no">nomic-embed-text-v1.5</code> 。詳細は<a href="https://docs.nomic.ai/atlas/models/image-embedding">Nomic公式ドキュメントを</a>参照してください。</p></li>
 </ul>
 <p>ドキュメントの埋め込みを作成するには、<code translate="no">encode_documents()</code> メソッドを使います：</p>
 <pre><code translate="no" class="language-python">docs = [

@@ -60,7 +60,7 @@ title: تكامل Milvus مع MindsDB
       </svg>
     </button></h2><p>الوسيطات المطلوبة لإنشاء اتصال هي</p>
 <ul>
-<li><code translate="no">uri</code>: uri لقاعدة بيانات Milvus، يمكن تعيينها إلى ملف ".db" المحلي أو خدمة docker أو السحابة</li>
+<li><code translate="no">uri</code>: uri لقاعدة بيانات milvus، يمكن تعيينها على ملف ".db" المحلي أو خدمة docker أو السحابة</li>
 <li><code translate="no">token</code>: الرمز المميز لدعم docker أو الخدمة السحابية وفقًا لخيار uri</li>
 </ul>
 <p>الوسيطات الاختيارية لإنشاء اتصال هي:</p>
@@ -68,7 +68,7 @@ title: تكامل Milvus مع MindsDB
 <ul>
 <li><code translate="no">search_default_limit</code>: الحد الافتراضي الذي سيتم تمريره في عبارات التحديد (افتراضي = 100)</li>
 <li><code translate="no">search_metric_type</code>: نوع المقياس المستخدم في عمليات البحث (افتراضي="L2")</li>
-<li><code translate="no">search_ignore_growing</code>: ما إذا كان يجب تجاهل المقاطع المتزايدة أثناء عمليات البحث عن التشابه (افتراضي="خطأ")</li>
+<li><code translate="no">search_ignore_growing</code>: ما إذا كان سيتم تجاهل المقاطع المتزايدة أثناء عمليات البحث عن التشابه (افتراضي="خطأ")</li>
 <li><code translate="no">search_params</code>: خاص بـ <code translate="no">search_metric_type</code> (افتراضي={"nprobe": 10})</li>
 </ul>
 <p>تُستخدم هذه لـ <code translate="no">CREATE</code> الاستعلامات</p>
@@ -158,6 +158,6 @@ LIMIT <span class="hljs-number">10</span>;
 <pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
 <span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Updating" class="common-anchor-header">تحديث</h3><p>تحديث السجلات غير مدعوم من قبل واجهة برمجة تطبيقات Milvus. يمكنك محاولة استخدام مزيج من <code translate="no">DELETE</code> و <code translate="no">INSERT</code></p>
+<h3 id="Updating" class="common-anchor-header">تحديث</h3><p>لا تدعم واجهة برمجة تطبيقات Milvus تحديث السجلات. يمكنك محاولة استخدام مزيج من <code translate="no">DELETE</code> و <code translate="no">INSERT</code></p>
 <hr>
 <p>لمزيد من التفاصيل والأمثلة، يرجى الرجوع إلى <a href="https://docs.mindsdb.com/what-is-mindsdb">الوثائق الرسمية لـ MindsDB</a>.</p>

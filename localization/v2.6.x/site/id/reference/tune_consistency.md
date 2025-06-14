@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, <strong>DataNodes</strong> bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. <strong>QueryNodes</strong> menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan <strong>data batch</strong> dan <strong>data streaming</strong>. Sederhananya, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek sementara data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang tidak tersimpan, sehingga mempengaruhi akurasi hasil pencarian.</p>
+    </button></h2><p>Milvus adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, <strong>DataNodes</strong> bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. <strong>QueryNodes</strong> menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan <strong>data batch</strong> dan <strong>data streaming</strong>. Sederhananya, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek sementara data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang belum tersimpan, sehingga mempengaruhi akurasi hasil pencarian.</p>
 <p>Milvus Commercial Edition adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, DataNodes bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. QueryNodes menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan data batch dan data streaming. Secara sederhana, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek, sedangkan data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang belum tersimpan, sehingga mempengaruhi akurasi hasil pencarian.</p>
 <p>
   
@@ -91,15 +91,13 @@ summary: >-
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+<span class="highlighted-wrapper-line">    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)
+<span class="highlighted-wrapper-line">        .consistencyLevel(ConsistencyLevel.STRONG)</span>
         .build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
@@ -161,11 +159,9 @@ curl --request POST \
     data=[query_vector],
     limit=<span class="hljs-number">3</span>,
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，
-    <span class="hljs-comment"># highlight-start</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,
-    <span class="hljs-comment"># highlight-next</span>
-)
-<button class="copy-code-btn"></button></code></pre>
+<span class="highlighted-comment-line">    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,</span>
+<span class="highlighted-wrapper-line">)</span>
+<span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(queryVector))
@@ -209,11 +205,9 @@ if err != nil {
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>，
-    <span class="hljs-comment"># highlight-start</span>
-    consistency_level=<span class="hljs-string">&quot;Eventually&quot;</span>,
-    <span class="hljs-comment"># highlight-next</span>
-)
-<button class="copy-code-btn"></button></code></pre>
+<span class="highlighted-comment-line">    consistency_level=<span class="hljs-string">&quot;Eventually&quot;</span>,</span>
+<span class="highlighted-wrapper-line">)</span>
+<span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)

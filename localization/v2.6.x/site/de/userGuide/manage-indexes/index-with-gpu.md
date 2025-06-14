@@ -6,7 +6,6 @@ summary: >-
   erstellt, um die Suchleistung zu verbessern.
 title: Index mit GPU
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">Index mit GPU<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,11 +119,10 @@ title: Index mit GPU
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">Suche<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,13 +180,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">Grenzen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -209,7 +206,7 @@ limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number o
 <li><p>Für <strong>GPU_IVF_FLAT</strong> beträgt der Höchstwert für <strong>limit</strong> 1024.</p></li>
 <li><p>Für <strong>GPU_IVF_PQ</strong> und <strong>GPU_CAGRA</strong> ist der Höchstwert für <strong>limit</strong> 1024.</p></li>
 <li><p>Für <strong>GPU_BRUTE_FORCE</strong> gibt es zwar keinen festen <strong>Grenzwert</strong>, es wird jedoch empfohlen, 4096 nicht zu überschreiten, um mögliche Leistungsprobleme zu vermeiden.</p></li>
-<li><p>Derzeit unterstützen GPU-Indizes keinen COSINE-Abstand. Wenn der COSINE-Abstand erforderlich ist, sollten die Daten zunächst normalisiert werden, und dann kann der Innenproduktabstand (IP) als Ersatz verwendet werden.</p></li>
+<li><p>Derzeit unterstützen GPU-Indizes keinen COSINE-Abstand. Wenn der COSINE-Abstand erforderlich ist, sollten die Daten zuerst normalisiert werden, und dann kann der Innenproduktabstand (IP) als Ersatz verwendet werden.</p></li>
 <li><p>Das Laden von OOM-Schutz für GPU-Indizes wird nicht vollständig unterstützt, zu viele Daten können zum Absturz von QueryNode führen.</p></li>
 <li><p>GPU-Indizes unterstützen keine Suchfunktionen wie <a href="https://milvus.io/docs/single-vector-search.md#Range-search">Bereichssuche</a> und <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">Gruppierungssuche</a>.</p></li>
 </ul>
@@ -232,5 +229,5 @@ limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number o
 <li><p><strong>Wann ist es sinnvoll, einen GPU-Index zu verwenden?</strong></p>
 <p>Ein GPU-Index ist besonders vorteilhaft in Situationen, die einen hohen Durchsatz oder eine hohe Wiederauffindung erfordern. Bei großen Stapeln kann der Durchsatz der GPU-Indizierung beispielsweise den der CPU-Indizierung um das 100-fache übertreffen. In Szenarien mit kleineren Stapeln übertrifft die GPU-Indizierung die CPU-Indizierung in Bezug auf die Leistung immer noch deutlich. Darüber hinaus kann der Einsatz eines Grafikprozessors den Prozess der Indexerstellung erheblich beschleunigen, wenn Daten schnell eingefügt werden müssen.</p></li>
 <li><p><strong>Für welche Szenarien sind GPU-Indizes wie CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT und GPU_BRUTE_FORCE am besten geeignet?</strong></p>
-<p>CAGRA-Indizes sind ideal für Szenarien, die eine höhere Leistung erfordern, auch wenn dies mit einem höheren Speicherbedarf einhergeht. In Umgebungen, in denen Speicherplatzeinsparung Priorität hat, kann der <strong>GPU_IVF_PQ-Index</strong> dazu beitragen, die Speicheranforderungen zu minimieren, auch wenn dies mit einem höheren Präzisionsverlust einhergeht. Der <strong>GPU_IVF_FLAT-Index</strong> stellt eine ausgewogene Option dar, die einen Kompromiss zwischen Leistung und Speicherbedarf bietet. Der <strong>GPU_BRUTE_FORCE-Index</strong> schließlich ist für erschöpfende Suchvorgänge konzipiert und garantiert durch die Durchführung von Traversalsuchen eine Abrufrate von 1.</p></li>
+<p>CAGRA-Indizes sind ideal für Szenarien, die eine höhere Leistung erfordern, auch wenn dies mit einem höheren Speicherbedarf einhergeht. In Umgebungen, in denen Speicherplatzeinsparungen Priorität haben, kann der <strong>GPU_IVF_PQ-Index</strong> dazu beitragen, die Speicheranforderungen zu minimieren, allerdings geht dies mit einem höheren Präzisionsverlust einher. Der <strong>GPU_IVF_FLAT-Index</strong> stellt eine ausgewogene Option dar, die einen Kompromiss zwischen Leistung und Speicherbedarf bietet. Der <strong>GPU_BRUTE_FORCE-Index</strong> schließlich ist für erschöpfende Suchvorgänge konzipiert und garantiert durch die Durchführung von Traversalsuchen eine Abrufrate von 1.</p></li>
 </ul>

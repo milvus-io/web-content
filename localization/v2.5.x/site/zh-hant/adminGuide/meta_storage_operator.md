@@ -1,9 +1,10 @@
 ---
 id: meta_storage_operator.md
 title: 使用 Milvus Operator 設定元資料儲存
-related_key: 'minio, s3, storage, etcd, pulsar'
+related_key: "minio, s3, storage, etcd, pulsar"
 summary: 學習如何使用 Milvus Operator 設定元儲存。
 ---
+
 <h1 id="Configure-Meta-Storage-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 設定元資料儲存<button data-href="#Configure-Meta-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,6 +113,6 @@ spec:
       </svg>
     </button></h2><p>學習如何使用 Milvus Operator 配置其他 Milvus 相依性：</p>
 <ul>
-<li><a href="/docs/zh-hant/object_storage_operator.md">使用 Milvus Operator 配置物件儲存</a></li>
-<li><a href="/docs/zh-hant/message_storage_operator.md">使用 Milvus Operator 配置訊息儲存</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/object_storage_operator.md">使用 Milvus Operator 配置物件儲存</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/message_storage_operator.md">使用 Milvus Operator 配置訊息儲存</a></li>
 </ul>

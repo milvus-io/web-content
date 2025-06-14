@@ -3,7 +3,6 @@ id: cncharonly-filter.md
 title: Cncharonly
 summary: cncharonly 过滤器会删除包含任何非中文字符的标记。当您只想关注中文文本，过滤掉任何包含其他文字、数字或符号的标记时，这个过滤器就非常有用了。
 ---
-
 <h1 id="Cncharonly" class="common-anchor-header">Cncharonly<button data-href="#Cncharonly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +62,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p><code translate="no">cncharonly</code> 过滤器对标记符生成的术语进行操作，因此必须与标记符结合使用。有关 Milvus 中可用的标记化器列表，请参阅<a href="/docs/zh/standard-tokenizer.md">标准</a>标记化器及其同类页面。</p>
 <p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -99,7 +97,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">验证使用<code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">验证使用<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。&quot;</span>
@@ -108,7 +106,6 @@ sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Founda
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

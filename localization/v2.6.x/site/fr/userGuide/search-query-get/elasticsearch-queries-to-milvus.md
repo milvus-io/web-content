@@ -237,7 +237,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans Milvus, vous pouvez rechercher les entités dont les valeurs d'un champ spécifique se situent dans une plage donnée, comme suit :</p>
+<p>Dans Milvus, vous pouvez rechercher les entités dont les valeurs d'un champ spécifique se situent dans un intervalle donné, comme suit :</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;10 &lt;= age &lt;= 20&#x27;</span>,
@@ -463,7 +463,7 @@ res = client.query(
 <li><p>Une recherche kNN sur le champ <code translate="no">vector</code> à l'aide du vecteur de requête fourni.</p></li>
 </ul>
 <p>Chaque moteur de recherche fournit jusqu'à 50 correspondances, qui sont reclassées par RRF, et les 10 premiers résultats finaux sont renvoyés.</p>
-<p>Dans Milvus, vous pouvez réaliser une recherche hybride similaire en combinant des recherches sur plusieurs champs vectoriels, en appliquant une stratégie de reclassement et en récupérant les K premiers résultats de la liste combinée. Milvus prend en charge les stratégies RRF et reranker pondéré. Pour plus de détails, voir <a href="/docs/fr/reranking.md">Reranking</a>.</p>
+<p>Dans Milvus, vous pouvez réaliser une recherche hybride similaire en combinant des recherches sur plusieurs champs vectoriels, en appliquant une stratégie de reclassement et en récupérant les K premiers résultats de la liste combinée. Milvus prend en charge les stratégies RRF et reranker pondéré. Pour plus de détails, voir <a href="/docs/fr/weighted-ranker.md">Reranking</a>.</p>
 <p>L'exemple suivant est une équivalence non stricte de l'exemple Elasticsearch ci-dessus dans Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

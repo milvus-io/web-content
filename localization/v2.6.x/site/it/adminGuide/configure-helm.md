@@ -59,7 +59,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
 <p>Per ulteriori informazioni su ciascun parametro, consultare i seguenti link.</p>
 <p>Ordinati per:</p>
 <div class="filter">
-<a href="#component">Componenti o dipendenze</a> <a href="#purpose">Scopi della configurazione</a> </div>
+<a href="#component">Componenti o dipendenze</a> <a href="#purpose">Scopo della configurazione</a> </div>
 <div class="filter-component table-wrapper">
 <table id="component">
 <thead>

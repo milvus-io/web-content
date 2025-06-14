@@ -4,6 +4,7 @@ title: إنشاء تنبيه
 related_key: monitor and alert.
 summary: تعرف على كيفية إنشاء تنبيه لخدمات Milvus في Grafana.
 ---
+
 <h1 id="Create-an-Alert-for-Milvus-Services" class="common-anchor-header">إنشاء تنبيه لخدمات ملفوس<button data-href="#Create-an-Alert-for-Milvus-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ summary: تعرف على كيفية إنشاء تنبيه لخدمات Milvus ف
         ></path>
       </svg>
     </button></h2><p>يأخذ هذا الدليل مثالاً لإنشاء تنبيه لاستخدام ذاكرة مكونات Milvus. لإنشاء أنواع أخرى من التنبيهات، يرجى تعديل الأوامر وفقاً لذلك. إذا واجهتك أي مشاكل أثناء العملية، لا تتردد في طرحها في <a href="https://discuss.milvus.io/">منتدى ميلفوس</a> أو بدء مناقشة على <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">سلاك</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية</h3><p>يفترض هذا البرنامج التعليمي أنك قمت بتثبيت وتهيئة غرافانا. إذا لم يكن كذلك، نوصي بقراءة <a href="/docs/ar/monitor.md">دليل المراقبة</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية</h3><p>يفترض هذا البرنامج التعليمي أنك قمت بتثبيت وتهيئة غرافانا. إذا لم يكن كذلك، نوصي بقراءة <a href="/docs/ar/v2.5.x/monitor.md">دليل المراقبة</a>.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. إضافة استعلام جديد</h3><p>لإضافة تنبيه لاستخدام الذاكرة لمكونات ميلفوس، قم بتحرير لوحة الذاكرة. ثم، أضف استعلامًا جديدًا بالمقياس: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +121,13 @@ summary: تعرف على كيفية إنشاء تنبيه لخدمات Milvus ف
       </svg>
     </button></h2><ul>
 <li>إذا كنت بحاجة إلى بدء خدمات المراقبة لـ Milvus:<ul>
-<li>اقرأ <a href="/docs/ar/monitor.md">دليل المراقبة</a></li>
-<li>تعرف على كيفية <a href="/docs/ar/visualize.md">تصور مقاييس المراقبة</a></li>
+<li>اقرأ <a href="/docs/ar/v2.5.x/monitor.md">دليل المراقبة</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/visualize.md">تصور مقاييس المراقبة</a></li>
 </ul></li>
 <li>إذا قمت بإنشاء تنبيهات لاستخدام الذاكرة بواسطة مكونات Milvus:<ul>
-<li>تعرف على كيفية <a href="/docs/ar/allocate.md#standalone">تخصيص الموارد</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.5.x/allocate.md#standalone">تخصيص الموارد</a></li>
 </ul></li>
 <li>إذا كنت تبحث عن معلومات حول كيفية توسيع نطاق مجموعة Milvus:<ul>
-<li>تعلم كيفية <a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus</a></li>
+<li>تعلم كيفية <a href="/docs/ar/v2.5.x/scaleout.md">توسيع نطاق مجموعة Milvus</a></li>
 </ul></li>
 </ul>

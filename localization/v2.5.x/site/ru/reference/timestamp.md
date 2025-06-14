@@ -5,6 +5,7 @@ summary: >-
   Узнайте о понятии временной метки и четырех основных параметрах, связанных с
   временной меткой, в векторной базе данных Milvus.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">Временная метка<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,5 +106,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Узнайте, как <a href="/docs/ru/consistency.md">гарантированная временная метка обеспечивает настраиваемую согласованность в Milvus</a></li>
+<li>Узнайте, как <a href="/docs/ru/v2.5.x/consistency.md">гарантированная временная метка обеспечивает настраиваемую согласованность в Milvus</a></li>
 </ul>

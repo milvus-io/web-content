@@ -2,8 +2,8 @@
 id: embed-with-mistral-ai.md
 order: 11
 summary: >-
-  この記事では、MistralAIEmbeddingFunction を使用して、Mistral AI
-  埋め込みモデルを使用して文書やクエリをエンコードする方法について説明します。
+  この記事では、MistralAIEmbeddingFunctionを使用して、Mistral
+  AIエンベッディングモデルを使用して文書やクエリをエンコードする方法について説明します。
 title: ミストラルAI
 ---
 <h1 id="Mistral-AI" class="common-anchor-header">ミストラルAI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">

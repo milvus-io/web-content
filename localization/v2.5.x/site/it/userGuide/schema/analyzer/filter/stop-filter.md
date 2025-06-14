@@ -7,6 +7,7 @@ summary: >-
   configurare l'elenco delle parole di arresto utilizzando il parametro
   stop_words.
 ---
+
 <h1 id="Stop" class="common-anchor-header">Stop<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,6 +91,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Il filtro <code translate="no">stop</code> accetta i seguenti parametri configurabili.</p>
 <table>
    <tr>
@@ -107,8 +109,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 </ul></td>
    </tr>
 </table>
-<p>Il filtro <code translate="no">stop</code> opera sui termini generati dal tokenizzatore, quindi deve essere usato in combinazione con un tokenizzatore. Per un elenco dei tokenizer disponibili in Milvus, si rimanda a <a href="/docs/it/standard-tokenizer.md">Standard Tokenizer</a> e alle sue pagine collaterali.</p>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Il filtro <code translate="no">stop</code> opera sui termini generati dal tokenizzatore, quindi deve essere usato in combinazione con un tokenizzatore. Per un elenco dei tokenizer disponibili in Milvus, si rimanda a <a href="/docs/it/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a> e alle sue pagine collaterali.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/v2.5.x/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,6 +167,7 @@ sample_text = <span class="hljs-string">&quot;The stop filter allows control ove
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

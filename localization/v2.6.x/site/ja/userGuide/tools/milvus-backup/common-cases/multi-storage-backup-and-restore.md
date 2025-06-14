@@ -41,7 +41,7 @@ title: S3環境をまたがるインスタンス間の移行
    </span> <span class="img-wrapper"> <span>マルチストレージバックアップ・リストア.png</span> </span></p>
 <p>異なるオブジェクトストレージを使用する2つのMilvusインスタンス、<code translate="no">milvus_A</code> と<code translate="no">milvus_B</code> があると仮定します。この例では、以下のタスクを完了することを目標とします：</p>
 <ol>
-<li><p><code translate="no">milvus_A</code> のオブジェクトストレージの<code translate="no">bucket_A</code> にあるコレクション<code translate="no">coll</code> のバックアップ（my_backup）を作成する。</p></li>
+<li><p><code translate="no">milvus_A</code> のオブジェクトストレージの<code translate="no">bucket_A</code> 内のコレクション<code translate="no">coll</code> のバックアップ（my_backup）を作成する。</p></li>
 <li><p>バックアップ my_backup を<code translate="no">milvus_B</code> の<code translate="no">bucket_B</code> に転送する。</p></li>
 </ol>
 <p><code translate="no">bucket_B</code> で、バックアップからリストアし、リストアされたコレクションに coll_bak という名前を付けます。</p>
@@ -186,7 +186,7 @@ mc ls my_minio
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>バックアップファイルのダウンロードが完了したら、<code translate="no">milvus_B</code> で使用するオブジェ クトストレージにアップロードして、将来のリストアに使用できます。または、バックアップを<a href="https://cloud.zilliz.com/">Zilliz Cloudに</a>アップロードして、データを含むマネージドベクターデータベースを作成することもできます。詳しくは、<a href="https://zilliz.com/doc/migrate_from_milvus-2x">MilvusからZilliz Cloudへの移行を</a>ご参照ください。</p>
+<p>バックアップファイルのダウンロードが完了したら、<code translate="no">milvus_B</code> で使用するオブジェク トストレージにアップロードして、将来のリストアに使用できます。または、バックアップを<a href="https://cloud.zilliz.com/">Zilliz Cloudに</a>アップロードして、データ付きのマネージドベクターデータベースを作成することもできます。詳しくは、<a href="https://zilliz.com/doc/migrate_from_milvus-2x">MilvusからZilliz Cloudへの移行を</a>ご参照ください。</p>
 <h2 id="Restore-from-the-backup-to-milvusB" class="common-anchor-header">バックアップからmilvus_Bへのリストア<button data-href="#Restore-from-the-backup-to-milvusB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

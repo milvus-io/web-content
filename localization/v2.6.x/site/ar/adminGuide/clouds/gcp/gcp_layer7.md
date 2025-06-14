@@ -3,7 +3,7 @@ id: gcp_layer7.md
 title: إعداد موازن تحميل من الطبقة 7 لميلفوس على GCP
 related_key: cluster
 summary: >-
-  تعرّف على كيفية نشر مجموعة Milvus العنقودية خلف موازن تحميل من الطبقة السابعة
+  تعرف على كيفية نشر مجموعة Milvus العنقودية خلف موازن تحميل من الطبقة السابعة
   على GCP.
 ---
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">إعداد موازن تحميل من الطبقة 7 لميلفوس على GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
@@ -71,9 +71,9 @@ summary: >-
 <li><p>بالنسبة للتعليق التوضيحي الأول,</p>
 <p>فإن Milvus أصلي ل gRPC، وهو مبني على HTTP/2. لذلك، يمكننا استخدام HTTP/2 كبروتوكول اتصال بين موازن تحميل الطبقة السابعة وميلفوس.</p></li>
 <li><p>أما بالنسبة للتعليق التوضيحي الثاني,</p>
-<p>يوفر Milvus نقطة نهاية التحقق من الصحة فقط عبر gRPC و HTTP/1. نحتاج إلى إعداد BackendConfig لتغليف نقطة نهاية التحقق من الصحة وربطها بخدمة Milvus بحيث يقوم موازن تحميل الطبقة السابعة باستكشاف نقطة النهاية هذه لمعرفة الحالة الصحية ل Milvus.</p></li>
+<p>يقدم Milvus نقطة نهاية التحقق من الصحة فقط عبر gRPC و HTTP/1. نحتاج إلى إعداد BackendConfig لتغليف نقطة نهاية التحقق من الصحة وربطها بخدمة Milvus بحيث يقوم موازن تحميل الطبقة السابعة باستكشاف نقطة النهاية هذه لمعرفة الحالة الصحية ل Milvus.</p></li>
 <li><p>أما بالنسبة للتعليق التوضيحي الثالث,</p>
-<p>فهو يطلب إنشاء مجموعة نقطة نهاية الشبكة (NEG) بعد إنشاء نقطة نهاية الشبكة (Ingress). عند استخدام NEGs مع GKE Ingress، تسهل وحدة التحكم في الدخول إنشاء جميع جوانب موازن التحميل. يتضمن ذلك إنشاء عنوان IP الظاهري وقواعد إعادة التوجيه والتحقق من الصحة وقواعد جدار الحماية والمزيد. لمزيد من التفاصيل، راجع <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">مستندات Google Cloud</a>.</p></li>
+<p>فهو يطلب إنشاء مجموعة نقطة نهاية الشبكة (NEG) بعد إنشاء نقطة نهاية الشبكة (Ingress). عند استخدام NEGs مع GKE Ingress، تسهل وحدة التحكم في الدخول إنشاء جميع جوانب موازن التحميل. يتضمن ذلك إنشاء عنوان IP الافتراضي، وقواعد إعادة التوجيه، والتحقق من الصحة، وقواعد جدار الحماية، والمزيد. لمزيد من التفاصيل، راجع <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">مستندات Google Cloud</a>.</p></li>
 </ul>
 </div>
 <h3 id="Prepare-TLS-certificates" class="common-anchor-header">إعداد شهادات TLS</h3><p>يتطلب TLS شهادات للعمل. <strong>هناك طريقتان لإنشاء الشهادات، وهما المدارة ذاتيًا والمدارة من Google.</strong></p>
@@ -210,6 +210,6 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <div class="alert note">
 <ul>
 <li>يجب أن يتطابق عنوان IP ورقم المنفذ في <strong>المضيف</strong> <strong>والمنفذ</strong> مع تلك المدرجة في نهاية <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">إنشاء مدخل لإنشاء موازن تحميل من الطبقة السابعة</a>.</li>
-<li>إذا كنت قد قمت بإعداد سجل DNS لتعيين اسم المجال إلى عنوان IP المضيف، استبدل عنوان IP في <strong>المضيف</strong> باسم المجال واحذف <strong>اسم_المخدم</strong>.</li>
+<li>إذا قمت بإعداد سجل DNS لتعيين اسم المجال إلى عنوان IP المضيف، استبدل عنوان IP في <strong>المضيف</strong> باسم المجال واحذف <strong>اسم_المخدم</strong>.</li>
 </ul>
 </div>

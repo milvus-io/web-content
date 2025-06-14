@@ -5,6 +5,7 @@ summary: >-
   検索エンジンとしても知られる情報検索システムは、RAG（Retrieval-augmented
   generation）、ビジュアル検索、商品推薦など、様々なAIアプリケーションに不可欠である。これらのシステムの核となるのは、情報を整理し、インデックスを付け、検索するために入念に設計されたデータモデルである。
 ---
+
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">検索のためのデータモデル設計<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,8 +90,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvusでは、データモデルはコレクションスキーマで表現されます。コレクションスキーマ内で適切なフィールドを設計することは、効果的な検索を可能にする鍵です。各フィールドはコレクションに格納された特定のデータタイプを定義し、検索プロセスにおいて明確な役割を果たします。Milvusは<strong>ベクトルフィールドと</strong> <strong>スカラーフィールドの</strong>2種類のフィールドをサポートしています。</p>
 <p>ベクターと補助的なスカラーフィールドを含むフィールドのスキーマにデータモデルをマッピングすることができます。各フィールドがデータモデルの属性と相関していることを確認し、特にベクトルタイプ（denseまたはspase）とその次元に注意してください。</p>
-<h3 id="Vector-Field" class="common-anchor-header">ベクトル・フィールド</h3><p>ベクトル・フィールドは、テキスト、画像、音声などの非構造化データの埋め込みを格納します。これらの埋め込みは、データ型や利用する検索方法によって、密なもの、疎なもの、バイナリのものがあります。一般的に、密なベクトルは意味検索に使用され、疎なベクトルは全文検索や語彙照合に適している。バイナリ・ベクトルは、ストレージや計算リソースが限られている場合に有用である。コレクションは、マルチモーダルまたはハイブリッド検索ストラテジーを可能にするために、複数のベクトルフィールドを含むことができる。このトピックの詳細ガイドについては、<a href="/docs/ja/multi-vector-search.md">マルチベクターハイブリッド検索を</a>参照してください。</p>
-<p>Milvusは以下のベクトルデータ型をサポートしています:<a href="/docs/ja/dense-vector.md">Dense Vectorは</a> <code translate="no">FLOAT_VECTOR</code> 、<a href="/docs/ja/sparse_vector.md">Sparse Vectorは</a> <code translate="no">SPARSE_FLOAT_VECTOR</code> 、<a href="/docs/ja/binary-vector.md">Binary Vectorは</a> <code translate="no">BINARY_VECTOR</code> 。</p>
+<h3 id="Vector-Field" class="common-anchor-header">ベクトル・フィールド</h3><p>ベクトル・フィールドは、テキスト、画像、音声などの非構造化データの埋め込みを格納します。これらの埋め込みは、データ型や利用する検索方法によって、密なもの、疎なもの、バイナリのものがあります。一般的に、密なベクトルは意味検索に使用され、疎なベクトルは全文検索や語彙照合に適している。バイナリ・ベクトルは、ストレージや計算リソースが限られている場合に有用である。コレクションは、マルチモーダルまたはハイブリッド検索ストラテジーを可能にするために、複数のベクトルフィールドを含むことができる。このトピックの詳細ガイドについては、<a href="/docs/ja/v2.5.x/multi-vector-search.md">マルチベクターハイブリッド検索を</a>参照してください。</p>
+<p>Milvusは以下のベクトルデータ型をサポートしています:<a href="/docs/ja/v2.5.x/dense-vector.md">Dense Vectorは</a> <code translate="no">FLOAT_VECTOR</code> 、<a href="/docs/ja/v2.5.x/sparse_vector.md">Sparse Vectorは</a> <code translate="no">SPARSE_FLOAT_VECTOR</code> 、<a href="/docs/ja/v2.5.x/binary-vector.md">Binary Vectorは</a> <code translate="no">BINARY_VECTOR</code> 。</p>
 <h3 id="Scalar-Field" class="common-anchor-header">スカラーフィールド</h3><p>スカラーフィールドは、数値、文字列、日付などのプリミティブで構造化された値-一般にメタデータと呼ばれる-を格納します。これらの値はベクターの検索結果と一緒に返すことができ、フィルタリングやソートに不可欠です。これらの値により、文書を特定のカテゴリや定義された時間範囲に限定するなど、特定の属性に基づいて検索結果を絞り込むことができます。</p>
 <p>Milvusは、ベクトル以外のデータの保存やフィルタリングのために、<code translate="no">BOOL</code> 、<code translate="no">INT8/16/32/64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、<code translate="no">VARCHAR</code> 、<code translate="no">JSON</code> 、<code translate="no">ARRAY</code> などのスカラー型をサポートしています。これらの型は検索操作の精度とカスタマイズ性を高めます。</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">スキーマ設計における高度な機能の活用<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
@@ -110,13 +111,13 @@ summary: >-
       </svg>
     </button></h2><p>スキーマを設計する場合、サポートされているデータ型を使ってデータをフィールドにマッピングするだけでは十分ではありません。フィールド間の関係や、コンフィギュレーションに利用できるストラテジーを十分に理解することが不可欠です。設計段階で主要な機能を念頭に置いておくことで、スキーマが当面のデータ処理要件を満たすだけでなく、将来のニーズに対しても拡張性と適応性を持つようになります。これらの機能を注意深く統合することにより、Milvusの機能を最大限に活用し、より広範なデータ戦略と目的をサポートする強力なデータアーキテクチャを構築することができます。以下はコレクションスキーマを作成する主な機能の概要です：</p>
 <h3 id="Primary-Key" class="common-anchor-header">主キー</h3><p>主キーフィールドは、コレクション内の各エンティティを一意に識別するため、スキーマの基本要素です。主キーの定義は必須である。これは整数型または文字列型のスカラー・フィールドで、<code translate="no">is_primary=True</code> としてマークされなければならない。オプションで、プライマリ・キーに<code translate="no">auto_id</code> を有効にすることができます。プライマリ・キーには、データがコレクションに取り込まれるにつれてモノリシックに増加する整数番号が自動的に割り当てられます。</p>
-<p>詳細については、<a href="/docs/ja/primary-field.md">プライマリフィールドとAutoIDを</a>参照してください。</p>
+<p>詳細については、<a href="/docs/ja/v2.5.x/primary-field.md">プライマリフィールドとAutoIDを</a>参照してください。</p>
 <h3 id="Partitioning" class="common-anchor-header">パーティショニング</h3><p>検索を高速化するために、オプションでパーティショニングをオンにできます。特定のスカラー・フィールドをパーティショニングに指定し、検索時にこのフィールドに基づくフィルタリング基準を指定することで、検索範囲を関連するパーティションのみに効果的に制限できます。この方法は、検索領域を減らすことで検索操作の効率を大幅に向上させる。</p>
-<p>詳細は「<a href="/docs/ja/use-partition-key.md">パーティション・キーの使用</a>」を参照。</p>
+<p>詳細は「<a href="/docs/ja/v2.5.x/use-partition-key.md">パーティション・キーの使用</a>」を参照。</p>
 <h3 id="Analyzer" class="common-anchor-header">アナライザー</h3><p>アナライザーは、テキストデータの処理と変換に不可欠なツールである。主な機能は、生のテキストをトークンに変換し、インデックス付けや検索のために構造化することである。文字列をトークン化し、ストップワードを削除し、個々の単語をトークンにステミングします。</p>
-<p>詳細については、「<a href="/docs/ja/analyzer-overview.md">Analyzer の概要</a>」を参照してください。</p>
+<p>詳細については、「<a href="/docs/ja/v2.5.x/analyzer-overview.md">Analyzer の概要</a>」を参照してください。</p>
 <h3 id="Function" class="common-anchor-header">機能</h3><p>Milvusではスキーマの一部として組み込み関数を定義し、特定のフィールドを自動的に導出することができます。例えば、<code translate="no">VARCHAR</code> フィールドからスパースベクトルを生成する組み込み BM25 関数を追加して、全文検索をサポートすることができます。これらの関数派生フィールドは、前処理を合理化し、コレクションが自己完結的でクエリに対応できる状態を維持することを保証する。</p>
-<p>詳細については、<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
+<p>詳細については、<a href="/docs/ja/v2.5.x/full-text-search.md">全文検索を</a>参照してください。</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">実例<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,7 +147,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>有効化された状態で自動生成<code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/ja/get-and-scalar-query.md">Getを使ったクエリー</a></p></td>
+     <td><p><a href="/docs/ja/v2.5.x/get-and-scalar-query.md">Getを使ったクエリー</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -155,7 +156,7 @@ summary: >-
    <tr>
      <td><p>タイトル (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>記事タイトル</p></td>
-     <td><p><a href="/docs/ja/keyword-match.md">テキストマッチ</a></p></td>
+     <td><p><a href="/docs/ja/v2.5.x/keyword-match.md">テキストマッチ</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -164,7 +165,7 @@ summary: >-
    <tr>
      <td><p>タイムスタンプ (<code translate="no">INT32</code>)</p></td>
      <td><p>公開日</p></td>
-     <td><p><a href="/docs/ja/use-partition-key.md">パーティションキーによるフィルタリング</a></p></td>
+     <td><p><a href="/docs/ja/v2.5.x/use-partition-key.md">パーティションキーによるフィルタリング</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -173,7 +174,7 @@ summary: >-
    <tr>
      <td><p>テキスト (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>記事の原文</p></td>
-     <td><p><a href="/docs/ja/multi-vector-search.md">マルチベクトルハイブリッドサーチ</a></p></td>
+     <td><p><a href="/docs/ja/v2.5.x/multi-vector-search.md">マルチベクトルハイブリッドサーチ</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -198,7 +199,7 @@ summary: >-
      <td><p>出力</p></td>
    </tr>
 </table>
-<p>スキーマの詳細と、さまざまなタイプのフィールドを追加するための詳細なガイダンスについては、<a href="/docs/ja/schema.md">スキーマの説明を</a>参照してください。</p>
+<p>スキーマの詳細と、さまざまなタイプのフィールドを追加するための詳細なガイダンスについては、<a href="/docs/ja/v2.5.x/schema.md">スキーマの説明を</a>参照してください。</p>
 <h3 id="Initialize-schema" class="common-anchor-header">スキーマの初期化</h3><p>はじめに、空のスキーマを作成する必要があります。このステップによって、データモデルを定義するための基礎構造が確立される。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -206,6 +207,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -242,6 +244,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, d
 schema.add_field(field_name=<span class="hljs-string">&quot;text_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
@@ -404,14 +407,15 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
+function_type=FunctionType.BM25,
 )
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -477,6 +481,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ja/create-collection.md">コレクションの作成</a></p></li>
-<li><p><a href="/docs/ja/alter-collection-field.md">コレクション・フィールドの変更</a></p></li>
+<li><p><a href="/docs/ja/v2.5.x/create-collection.md">コレクションの作成</a></p></li>
+<li><p><a href="/docs/ja/v2.5.x/alter-collection-field.md">コレクション・フィールドの変更</a></p></li>
 </ul>

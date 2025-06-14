@@ -149,7 +149,7 @@ title: Faire passer le Pulsar de Milvus de V2 à V3
 </ul>
 <h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Supprimer Pulsar V2 à l'aide de Helm</h4><p>Si vous avez installé Milvus à l'aide de la carte Milvus Helm, suivez les étapes ci-dessous pour arrêter le pod Milvus et supprimer le déploiement de Pulsar V2.</p>
 <ol>
-<li><p>Sauvegardez les valeurs de la version actuelle de Milvus sur <code translate="no">values.yaml</code> en vue d'une récupération ultérieure.</p>
+<li><p>Enregistrez les valeurs de version actuelles de Milvus à l'adresse <code translate="no">values.yaml</code> en vue d'une récupération ultérieure.</p>
 <pre><code translate="no" class="language-bash">helm -n default get values my-release -o yaml &gt; values.yaml​
 <span class="hljs-built_in">cat</span> values.yaml​
 

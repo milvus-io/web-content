@@ -3,6 +3,7 @@ id: schema.md
 title: 模式說明
 summary: 模式定義了集合的資料結構。在建立一個集合之前，您需要先設計它的模式。本頁可協助您瞭解集合模式，並自行設計一個範例模式。
 ---
+
 <h1 id="Schema-Explained​" class="common-anchor-header">模式說明<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ summary: 模式定義了集合的資料結構。在建立一個集合之前，�
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>模式設計</span> </span></p>
 <p>搜尋系統的資料模式設計包括分析業務需求，並將資訊抽象為模式表達的資料模式。例如，搜尋一段文字時，必須透過「嵌入」將字面字串轉換為向量，並啟用向量搜尋來「建立索引」。除了這個基本要求之外，儲存其他屬性（例如出版時間戳和作者）可能也是必要的。這些元資料允許透過篩選來精細語意搜尋，僅傳回在特定日期之後或由特定作者出版的文字。您也可以擷取這些標量與主要文字，以便在應用程式中呈現搜尋結果。每個標量都應該指定一個唯一的識別碼，以整數或字串的形式來組織這些文字片段。這些元素對於達成精密的搜尋邏輯是不可或缺的。</p>
-<p>請參閱<a href="/docs/zh-hant/schema-hands-on.md">模式設計實作</a>，以瞭解如何製作設計良好的模式。</p>
+<p>請參閱<a href="/docs/zh-hant/v2.5.x/schema-hands-on.md">模式設計實作</a>，以瞭解如何製作設計良好的模式。</p>
 <h2 id="Create-Schema​" class="common-anchor-header">建立模式<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,6 +67,7 @@ summary: 模式定義了集合的資料結構。在建立一個集合之前，�
 schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
 ​
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();​
@@ -109,6 +111,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
@@ -148,7 +151,7 @@ export schema='{​
 </code></pre>
 <p>新增欄位時，您可以透過設定其<code translate="no">is_primary</code> 屬性為<code translate="no">True</code> ，明確地將該欄位澄清為主要欄位。primary 欄位預設接受<strong>Int64</strong>值。在這種情況下，主字段值應該是類似<code translate="no">12345</code> 的整數。如果您選擇在主字段中使用<strong>VarChar</strong>值，則值應該是類似<code translate="no">my_entity_1234</code> 的字串。</p>
 <p>您也可以設定<code translate="no">autoId</code> 屬性為<code translate="no">True</code> ，讓 Milvus 在插入資料時自動分配主字段值。</p>
-<p>詳情請參考<a href="/docs/zh-hant/primary-field.md">Primary Field &amp; AutoID</a>。</p>
+<p>詳情請參考<a href="/docs/zh-hant/v2.5.x/primary-field.md">Primary Field &amp; AutoID</a>。</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">新增向量欄位<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,6 +178,7 @@ export schema='{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
@@ -235,7 +239,7 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>在常見的情況下，您可以使用標量欄位來儲存 Milvus 所儲存的向量內嵌的元資料，並利用元資料篩選來進行 ANN 搜尋，以提高搜尋結果的正確性。Milvus 支援多種標量欄位類型，包括<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、Float、<strong>Double</strong>、<strong>Array</strong> 和 JSON。</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">新增字串欄位</h3><p>在 Milvus 中，您可以使用 VarChar 欄位來儲存字串。關於 VarChar 欄位的更多資訊，請參考<a href="/docs/zh-hant/string.md">String Field</a>。</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">新增字串欄位</h3><p>在 Milvus 中，您可以使用 VarChar 欄位來儲存字串。關於 VarChar 欄位的更多資訊，請參考<a href="/docs/zh-hant/v2.5.x/string.md">String Field</a>。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -246,6 +250,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
@@ -280,7 +285,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">新增數字欄位</h3><p>Milvus 支援的數字類型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code>, 和<code translate="no">Double</code> 。有關數字欄位的詳細資訊，請參閱<a href="/docs/zh-hant/number.md">數字</a>欄位。</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">新增數字欄位</h3><p>Milvus 支援的數字類型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code>, 和<code translate="no">Double</code> 。有關數字欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/number.md">數字</a>欄位。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -289,6 +294,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
         .dataType(DataType.Int64)​
@@ -326,6 +332,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
         .dataType(DataType.Bool)​
@@ -355,7 +362,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">新增 JSON 欄位</h3><p>JSON 欄位通常儲存半結構化的 JSON 資料。有關 JSON 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/use-json-fields.md">JSON</a> 欄位。</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">新增 JSON 欄位</h3><p>JSON 欄位通常儲存半結構化的 JSON 資料。有關 JSON 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/use-json-fields.md">JSON</a> 欄位。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -364,6 +371,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
         .dataType(DataType.JSON)​
@@ -394,7 +402,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">新增陣列欄位</h3><p>陣列欄位儲存元素清單。陣列欄位中所有元素的資料類型應該相同。有關陣列欄位的詳細資訊，請參閱<a href="/docs/zh-hant/array_data_type.md">陣列</a>欄位。</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">新增陣列欄位</h3><p>陣列欄位儲存元素清單。陣列欄位中所有元素的資料類型應該相同。有關陣列欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/array_data_type.md">陣列</a>欄位。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -406,6 +414,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
         .dataType(DataType.Array)​

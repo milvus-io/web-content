@@ -1,11 +1,12 @@
 ---
 id: deploy_etcd.md
 title: Mengonfigurasi Penyimpanan Meta dengan Docker Compose atau Helm
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: >-
   Pelajari cara mengonfigurasi penyimpanan meta untuk Milvus dengan Docker
   Compose/Helm.
 ---
+
 <h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Mengonfigurasi Penyimpanan Meta dengan Docker Compose atau Helm<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +62,7 @@ summary: >-
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>Lihat <a href="/docs/id/configure_etcd.md">Konfigurasi terkait etcd</a> untuk informasi lebih lanjut.</p>
+<p>Lihat <a href="/docs/id/v2.5.x/configure_etcd.md">Konfigurasi terkait etcd</a> untuk informasi lebih lanjut.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Menjalankan Milvus</h3><p>Jalankan perintah berikut untuk menjalankan Milvus yang menggunakan konfigurasi etcd.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -133,6 +134,6 @@ summary: >-
       </svg>
     </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Docker Compose atau Helm:</p>
 <ul>
-<li><a href="/docs/id/deploy_s3.md">Mengonfigurasi Penyimpanan Objek dengan Docker Compose atau Helm</a></li>
-<li><a href="/docs/id/deploy_pulsar.md">Mengonfigurasi Penyimpanan Pesan dengan Docker Compose atau Helm</a></li>
+<li><a href="/docs/id/v2.5.x/deploy_s3.md">Mengonfigurasi Penyimpanan Objek dengan Docker Compose atau Helm</a></li>
+<li><a href="/docs/id/v2.5.x/deploy_pulsar.md">Mengonfigurasi Penyimpanan Pesan dengan Docker Compose atau Helm</a></li>
 </ul>

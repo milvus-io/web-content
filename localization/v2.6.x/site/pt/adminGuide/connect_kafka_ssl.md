@@ -169,7 +169,7 @@ summary: >-
 <p>Em seguida, pode iniciar o serviço Kafka com o seguinte comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Iniciar o Milvus e ligar-se ao Kafka</h3><p>Assim que o serviço Kafka for iniciado, pode iniciar o Milvus e ligar-se a ele. Use o seguinte arquivo <code translate="no">docker-compose.yaml</code> para iniciar o Milvus e conectar-se ao Kafka com SASL/PLAIN:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Iniciar o Milvus e ligar ao Kafka</h3><p>Assim que o serviço Kafka for iniciado, pode iniciar o Milvus e ligar-se a ele. Use o seguinte arquivo <code translate="no">docker-compose.yaml</code> para iniciar o Milvus e conectar-se ao Kafka com SASL/PLAIN:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>

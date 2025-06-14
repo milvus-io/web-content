@@ -2,6 +2,7 @@
 id: removepunct-filter.md
 title: "Remove Punct"
 summary: "The removepunct filter strips away punctuation marks, spaces, and line breaks that some tokenizers—such as jieba, lindera, and icu—normally keep. Use it when you want a cleaner token stream that contains only meaningful text tokens, free of commas, periods, and other punctuation."
+beta: Milvus 2.5.11+
 ---
 
 # Remove Punct

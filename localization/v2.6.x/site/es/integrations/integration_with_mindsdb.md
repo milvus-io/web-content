@@ -161,4 +161,4 @@ LIMIT <span class="hljs-number">10</span>;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Updating" class="common-anchor-header">Actualización</h3><p>La API de Milvus no admite la actualización de registros. Puede intentar usar una combinación de <code translate="no">DELETE</code> y <code translate="no">INSERT</code></p>
 <hr>
-<p>Para más detalles y ejemplos, por favor consulte la <a href="https://docs.mindsdb.com/what-is-mindsdb">Documentación Oficial de MindsDB</a>.</p>
+<p>Para más detalles y ejemplos, consulte la <a href="https://docs.mindsdb.com/what-is-mindsdb">Documentación Oficial de MindsDB</a>.</p>

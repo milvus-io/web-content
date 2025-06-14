@@ -1,9 +1,10 @@
 ---
 id: deploy_etcd.md
 title: Configurer le stockage des métadonnées avec Docker Compose ou Helm
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: Apprenez à configurer le méta stockage pour Milvus avec Docker Compose/Helm.
 ---
+
 <h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Configurer le stockage des métadonnées avec Docker Compose ou Helm<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ summary: Apprenez à configurer le méta stockage pour Milvus avec Docker Compos
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>Voir <a href="/docs/fr/configure_etcd.md">Configurations liées à etcd</a> pour plus d'informations.</p>
+<p>Voir <a href="/docs/fr/v2.5.x/configure_etcd.md">Configurations liées à etcd</a> pour plus d'informations.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Exécuter Milvus</h3><p>Exécutez la commande suivante pour démarrer Milvus qui utilise les configurations etcd.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -131,6 +132,6 @@ summary: Apprenez à configurer le méta stockage pour Milvus avec Docker Compos
       </svg>
     </button></h2><p>Découvrez comment configurer d'autres dépendances de Milvus avec Docker Compose ou Helm :</p>
 <ul>
-<li><a href="/docs/fr/deploy_s3.md">Configurer le stockage d'objets avec Docker Compose ou Helm</a></li>
-<li><a href="/docs/fr/deploy_pulsar.md">Configurer le stockage des messages avec Docker Compose ou Helm</a></li>
+<li><a href="/docs/fr/v2.5.x/deploy_s3.md">Configurer le stockage d'objets avec Docker Compose ou Helm</a></li>
+<li><a href="/docs/fr/v2.5.x/deploy_pulsar.md">Configurer le stockage des messages avec Docker Compose ou Helm</a></li>
 </ul>

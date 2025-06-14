@@ -8,6 +8,7 @@ summary: >-
   систем лежит тщательно разработанная модель данных для организации,
   индексирования и поиска информации.
 ---
+
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">Проектирование модели данных для поиска<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,8 +93,8 @@ summary: >-
       </svg>
     </button></h2><p>В Milvus модель данных выражается через схему коллекции. Разработка правильных полей в схеме коллекции - это ключ к эффективному поиску. Каждое поле определяет конкретный тип данных, хранящихся в коллекции, и играет определенную роль в процессе поиска. На высоком уровне Milvus поддерживает два основных типа полей: <strong>векторные</strong> и <strong>скалярные</strong>.</p>
 <p>Теперь вы можете отобразить свою модель данных в схему полей, включая векторы и любые вспомогательные скалярные поля. Убедитесь, что каждое поле соотносится с атрибутами вашей модели данных, особенно обратите внимание на тип вектора (dense или spase) и его размерность.</p>
-<h3 id="Vector-Field" class="common-anchor-header">Векторное поле</h3><p>Векторные поля хранят вкрапления для неструктурированных типов данных, таких как текст, изображения и аудио. Эти вкрапления могут быть плотными, разреженными или двоичными, в зависимости от типа данных и используемого метода поиска. Как правило, плотные векторы используются для семантического поиска, в то время как разреженные векторы лучше подходят для полнотекстового или лексического поиска. Двоичные векторы полезны при ограниченном объеме памяти и вычислительных ресурсов. Коллекция может содержать несколько векторных полей, что позволяет использовать мультимодальные или гибридные стратегии поиска. Подробное руководство по этой теме см. в разделе <a href="/docs/ru/multi-vector-search.md">Многовекторный гибридный поиск</a>.</p>
-<p>Milvus поддерживает типы векторных данных: <code translate="no">FLOAT_VECTOR</code> для <a href="/docs/ru/dense-vector.md">плотного вектора</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> для <a href="/docs/ru/sparse_vector.md">разреженного вектора</a> и <code translate="no">BINARY_VECTOR</code> для <a href="/docs/ru/binary-vector.md">двоичного вектора.</a></p>
+<h3 id="Vector-Field" class="common-anchor-header">Векторное поле</h3><p>Векторные поля хранят вкрапления для неструктурированных типов данных, таких как текст, изображения и аудио. Эти вкрапления могут быть плотными, разреженными или двоичными, в зависимости от типа данных и используемого метода поиска. Как правило, плотные векторы используются для семантического поиска, в то время как разреженные векторы лучше подходят для полнотекстового или лексического поиска. Двоичные векторы полезны при ограниченном объеме памяти и вычислительных ресурсов. Коллекция может содержать несколько векторных полей, что позволяет использовать мультимодальные или гибридные стратегии поиска. Подробное руководство по этой теме см. в разделе <a href="/docs/ru/v2.5.x/multi-vector-search.md">Многовекторный гибридный поиск</a>.</p>
+<p>Milvus поддерживает типы векторных данных: <code translate="no">FLOAT_VECTOR</code> для <a href="/docs/ru/v2.5.x/dense-vector.md">плотного вектора</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> для <a href="/docs/ru/v2.5.x/sparse_vector.md">разреженного вектора</a> и <code translate="no">BINARY_VECTOR</code> для <a href="/docs/ru/v2.5.x/binary-vector.md">двоичного вектора.</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">Скалярное поле</h3><p>Скалярные поля хранят примитивные, структурированные значения, обычно называемые метаданными, такие как числа, строки или даты. Эти значения могут быть возвращены вместе с результатами векторного поиска и необходимы для фильтрации и сортировки. Они позволяют сузить результаты поиска по определенным признакам, например, ограничить документы определенной категорией или определенным временным диапазоном.</p>
 <p>Milvus поддерживает скалярные типы, такие как <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> и <code translate="no">ARRAY</code> для хранения и фильтрации невекторных данных. Эти типы повышают точность и настраиваемость операций поиска.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Использование расширенных возможностей при разработке схем<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
@@ -113,13 +114,13 @@ summary: >-
       </svg>
     </button></h2><p>При разработке схемы недостаточно просто сопоставить данные с полями, используя поддерживаемые типы данных. Необходимо хорошо понимать взаимосвязи между полями и стратегии, доступные для настройки. Учет ключевых особенностей на этапе проектирования гарантирует, что схема будет не только соответствовать текущим требованиям к обработке данных, но и будет масштабируемой и адаптируемой к будущим потребностям. Тщательно интегрировав эти функции, вы сможете построить надежную архитектуру данных, которая максимально использует возможности Milvus и поддерживает вашу более широкую стратегию и цели в области данных. Ниже приведен обзор ключевых особенностей создания схемы коллекции:</p>
 <h3 id="Primary-Key" class="common-anchor-header">Первичный ключ</h3><p>Поле первичного ключа является основополагающим компонентом схемы, поскольку оно однозначно идентифицирует каждую сущность в коллекции. Определение первичного ключа является обязательным. Это должно быть скалярное поле целого или строкового типа, помеченное как <code translate="no">is_primary=True</code>. В качестве опции можно включить <code translate="no">auto_id</code> для первичного ключа, которому автоматически присваиваются целые числа, монолитно увеличивающиеся по мере поступления данных в коллекцию.</p>
-<p>Дополнительные сведения см. в разделе <a href="/docs/ru/primary-field.md">Первичное поле и автоидентификация</a>.</p>
+<p>Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/primary-field.md">Первичное поле и автоидентификация</a>.</p>
 <h3 id="Partitioning" class="common-anchor-header">Разбиение на разделы</h3><p>Чтобы ускорить поиск, можно включить разделение на разделы. Назначив определенное скалярное поле для разбиения и задав критерии фильтрации на основе этого поля во время поиска, можно эффективно ограничить область поиска только соответствующими разделами. Этот метод значительно повышает эффективность поисковых операций за счет уменьшения области поиска.</p>
-<p>Дополнительные сведения см. в разделе <a href="/docs/ru/use-partition-key.md">Использование ключа раздела</a>.</p>
+<p>Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/use-partition-key.md">Использование ключа раздела</a>.</p>
 <h3 id="Analyzer" class="common-anchor-header">Анализатор</h3><p>Анализатор - это важный инструмент для обработки и преобразования текстовых данных. Его основная задача - преобразовать необработанный текст в лексемы и структурировать их для индексирования и поиска. Для этого он выполняет токенизацию строки, удаляет стоп-слова и превращает отдельные слова в лексемы.</p>
-<p>Более подробную информацию см. в разделе <a href="/docs/ru/analyzer-overview.md">Обзор анализатора</a>.</p>
+<p>Более подробную информацию см. в разделе <a href="/docs/ru/v2.5.x/analyzer-overview.md">Обзор анализатора</a>.</p>
 <h3 id="Function" class="common-anchor-header">Функция</h3><p>Milvus позволяет определять встроенные функции как часть схемы для автоматического получения определенных полей. Например, вы можете добавить встроенную функцию BM25, которая генерирует разреженный вектор из поля <code translate="no">VARCHAR</code> для поддержки полнотекстового поиска. Эти поля, созданные с помощью функций, упрощают предварительную обработку и обеспечивают самодостаточность коллекции и ее готовность к запросу.</p>
-<p>Более подробную информацию можно найти в разделе <a href="/docs/ru/full-text-search.md">"Полнотекстовый поиск</a>.</p>
+<p>Более подробную информацию можно найти в разделе <a href="/docs/ru/v2.5.x/full-text-search.md">"Полнотекстовый поиск</a>.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">Пример из реального мира<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +150,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>автоматически генерируется при включении <code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/ru/get-and-scalar-query.md">Запрос с помощью Get</a></p></td>
+     <td><p><a href="/docs/ru/v2.5.x/get-and-scalar-query.md">Запрос с помощью Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -158,7 +159,7 @@ summary: >-
    <tr>
      <td><p>название (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>заголовок статьи</p></td>
-     <td><p><a href="/docs/ru/keyword-match.md">Текстовое соответствие</a></p></td>
+     <td><p><a href="/docs/ru/v2.5.x/keyword-match.md">Текстовое соответствие</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -167,7 +168,7 @@ summary: >-
    <tr>
      <td><p>временная метка (<code translate="no">INT32</code>)</p></td>
      <td><p>дата публикации</p></td>
-     <td><p><a href="/docs/ru/use-partition-key.md">Фильтр по ключу раздела</a></p></td>
+     <td><p><a href="/docs/ru/v2.5.x/use-partition-key.md">Фильтр по ключу раздела</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -176,7 +177,7 @@ summary: >-
    <tr>
      <td><p>текст (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>необработанный текст статьи</p></td>
-     <td><p><a href="/docs/ru/multi-vector-search.md">Многовекторный гибридный поиск</a></p></td>
+     <td><p><a href="/docs/ru/v2.5.x/multi-vector-search.md">Многовекторный гибридный поиск</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -201,7 +202,7 @@ summary: >-
      <td><p>выход</p></td>
    </tr>
 </table>
-<p>Более подробную информацию о схемах и подробное руководство по добавлению различных типов полей вы найдете в разделе <a href="/docs/ru/schema.md">"Объяснение схем"</a>.</p>
+<p>Более подробную информацию о схемах и подробное руководство по добавлению различных типов полей вы найдете в разделе <a href="/docs/ru/v2.5.x/schema.md">"Объяснение схем"</a>.</p>
 <h3 id="Initialize-schema" class="common-anchor-header">Инициализация схемы</h3><p>Для начала нам нужно создать пустую схему. Этот шаг устанавливает основополагающую структуру для определения модели данных.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -209,6 +210,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -245,6 +247,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, d
 schema.add_field(field_name=<span class="hljs-string">&quot;text_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
@@ -407,14 +410,15 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
+function_type=FunctionType.BM25,
 )
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -480,6 +484,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ru/create-collection.md">Создать коллекцию</a></p></li>
-<li><p><a href="/docs/ru/alter-collection-field.md">Изменить поле коллекции</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/create-collection.md">Создать коллекцию</a></p></li>
+<li><p><a href="/docs/ru/v2.5.x/alter-collection-field.md">Изменить поле коллекции</a></p></li>
 </ul>

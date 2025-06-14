@@ -462,7 +462,7 @@ res = client.query(
 <li><p>Pencarian kNN pada bidang <code translate="no">vector</code> menggunakan vektor kueri yang disediakan.</p></li>
 </ul>
 <p>Setiap retriever menyumbangkan hingga 50 kecocokan teratas, yang diperingkat ulang oleh RRF, dan 10 hasil teratas akhir dikembalikan.</p>
-<p>Di Milvus, Anda dapat mencapai pencarian hibrida yang serupa dengan menggabungkan pencarian di beberapa bidang vektor, menerapkan strategi pemeringkatan ulang, dan mengambil hasil K teratas dari daftar gabungan. Milvus mendukung strategi RRF dan strategi perangkingan ulang berbobot. Untuk lebih jelasnya, lihat <a href="/docs/id/reranking.md">Perangkingan Ulang</a>.</p>
+<p>Di Milvus, Anda dapat mencapai pencarian hibrida yang serupa dengan menggabungkan pencarian di beberapa bidang vektor, menerapkan strategi pemeringkatan ulang, dan mengambil hasil K teratas dari daftar gabungan. Milvus mendukung strategi RRF dan strategi perangkingan ulang berbobot. Untuk lebih jelasnya, lihat <a href="/docs/id/weighted-ranker.md">Perangkingan Ulang</a>.</p>
 <p>Berikut ini adalah ekuivalensi tidak ketat dari contoh Elasticsearch di atas di Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

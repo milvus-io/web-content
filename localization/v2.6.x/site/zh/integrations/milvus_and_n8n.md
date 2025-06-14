@@ -80,7 +80,7 @@ title: 开始使用 Milvus 和 n8n
     </button></h2><p>你可以在 n8n 中以以下模式使用 Milvus 向量存储节点。</p>
 <h3 id="Use-as-a-regular-node-to-insert-and-retrieve-documents" class="common-anchor-header">作为常规节点插入和检索文档</h3><p>你可以把 Milvus 向量存储作为一个常规节点来插入或获取文档。这种模式把 Milvus 向量存储放在常规连接流中，而不使用 Agents。</p>
 <p>请参阅本<a href="https://n8n.io/workflows/3573-create-a-rag-system-with-paul-essays-milvus-and-openai-for-cited-answers/">示例模板</a>，了解如何构建一个在 Milvus 中存储文档并检索文档的系统，以支持引用、基于聊天的回答。</p>
-<h3 id="Connect-directly-to-an-AI-agent-as-a-tool" class="common-anchor-header">直接连接人工智能 Agents 作为工具</h3><p>你可以将 Milvus 向量存储节点直接连接到<a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.agent/">人工智能 Agents</a>的工具连接器，以便在回答查询时使用向量存储作为资源。</p>
+<h3 id="Connect-directly-to-an-AI-agent-as-a-tool" class="common-anchor-header">作为工具直接连接人工智能 Agents</h3><p>你可以将 Milvus 向量存储节点直接连接到<a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.agent/">人工智能 Agents</a>的工具连接器，以便在回答查询时使用向量存储作为资源。</p>
 <p>连接方式如下AI 代理（工具连接器）-&gt; Milvus 向量存储节点。请看这个<a href="https://n8n.io/workflows/3576-paul-graham-essay-search-and-chat-with-milvus-vector-database/">示例模板</a>，数据被 Embeddings 并索引到 Milvus 中，AI Agent 将向量存储作为知识工具用于回答问题。</p>
 <h3 id="Use-a-retriever-to-fetch-documents" class="common-anchor-header">使用检索器获取文档</h3><p>你可以将向量<a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.retrievervectorstore/">存储检索器</a>节点与 Milvus 向量存储节点一起使用，从 Milvus 向量存储节点中获取文档。这通常与<a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.chainretrievalqa/">问答链</a>节点一起使用，以便从向量存储中获取与给定聊天输入相匹配的文档。</p>
 <p>典型的节点连接流程如下：问答链（Retriever 连接器）-&gt; 向量存储 Retriever（向量存储连接器）-&gt; Milvus 向量存储。</p>
@@ -108,9 +108,9 @@ title: 开始使用 Milvus 和 n8n
 <h3 id="Operation-Modes-Overview" class="common-anchor-header">操作模式概述</h3><p>Milvus 向量存储节点支持四种不同的模式：</p>
 <ul>
 <li><strong>获取多个</strong>：根据与提示语义的相似性检索多个文档。</li>
-<li><strong>插入文档</strong>：在您的 Milvus Collections 中插入新文档。</li>
+<li><strong>插入文档</strong>：向您的 Milvus Collections 中插入新文档。</li>
 <li><strong>检索文档（作为链/工具的向量存储）</strong>：在基于链的系统中将节点用作检索器。</li>
-<li><strong>检索文件（作为人工智能 Agents 的工具）</strong>：将节点用作人工智能代理在回答问题时的工具资源。</li>
+<li><strong>检索文件（作为人工智能 Agents 的工具）</strong>：在回答问题时，将节点用作人工智能代理的工具资源。</li>
 </ul>
 <h3 id="Additional-Node-Options" class="common-anchor-header">其他节点选项</h3><ul>
 <li><strong>元数据过滤器</strong>（仅限 "获取许多 "模式）：根据自定义元数据关键字过滤结果。多个字段应用 AND 条件。</li>

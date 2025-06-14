@@ -22,7 +22,7 @@ title: mGTE
         ></path>
       </svg>
     </button></h1><p>mGTE는 텍스트 검색 작업을 위한 다국어 텍스트 표현 모델이자 재랭크 모델입니다.</p>
-<p>Milvus는 MGTEEmbeddingFunction 클래스를 통해 mGTE 임베딩 모델과 통합됩니다. 이 클래스는 mGTE 임베딩 모델을 사용해 문서와 쿼리를 인코딩하고 임베딩을 Milvus 인덱싱과 호환되는 밀도 및 스파스 벡터로 반환하는 메서드를 제공합니다.</p>
+<p>Milvus는 MGTEEmbeddingFunction 클래스를 통해 mGTE 임베딩 모델과 통합됩니다. 이 클래스는 mGTE 임베딩 모델을 사용해 문서와 쿼리를 인코딩하고 임베딩을 Milvus 인덱싱과 호환되는 고밀도 및 희소 벡터로 반환하는 메서드를 제공합니다.</p>
 <p>이 기능을 사용하려면 필요한 종속성을 설치하세요:</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

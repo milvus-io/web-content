@@ -4,6 +4,7 @@ title: 词干
 summary: >-
   词干过滤器将单词还原为其基本形式或词根形式（称为词干化），从而更容易匹配不同词性中含义相似的单词。词干过滤器支持多种语言，可在各种语言环境中进行有效搜索和索引。
 ---
+
 <h1 id="Stemmer" class="common-anchor-header">词干<button data-href="#Stemmer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,6 +84,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p><code translate="no">stemmer</code> 过滤器接受以下可配置参数。</p>
 <table>
    <tr>
@@ -95,7 +97,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
 </table>
 <p><code translate="no">stemmer</code> 过滤器对标记符生成的术语进行操作，因此必须与标记符结合使用。</p>
-<p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将它们应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将它们应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/v2.5.x/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,6 +155,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">验证使用<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
@@ -162,6 +165,7 @@ sample_text = <span class="hljs-string">&quot;running runs looked ran runner&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

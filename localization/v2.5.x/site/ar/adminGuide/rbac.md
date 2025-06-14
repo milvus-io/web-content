@@ -7,6 +7,7 @@ summary: >-
   القيام بها على مستويات المجموعة وقاعدة البيانات والمثيلات، مما يعزز أمان
   البيانات.
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">شرح RBAC<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>لتحقيق التحكم في الوصول عبر RBAC، عليك اتباع الخطوات التالية:</p>
 <ol>
-<li><p><strong><a href="/docs/ar/users_and_roles.md#Create-a-user">إنشاء مستخدم</a></strong>: بالإضافة إلى المستخدم الافتراضي <code translate="no">root</code> في ميلفوس، يمكنك إنشاء مستخدمين جدد وتعيين كلمات مرور لحماية أمن البيانات.</p></li>
-<li><p><strong><a href="/docs/ar/users_and_roles.md#Create-a-role">إنشاء دور</a></strong>: يمكنك إنشاء أدوار مخصصة بناءً على احتياجاتك. يتم تحديد الإمكانيات المحددة للدور من خلال امتيازاته.</p></li>
-<li><p><strong><a href="/docs/ar/privilege_group.md">إنشاء مجموعة امتيازات</a></strong>: ادمج امتيازات متعددة في مجموعة امتيازات واحدة لتبسيط عملية منح الامتيازات لدور ما.</p></li>
-<li><p><strong><a href="/docs/ar/grant_privileges.md">منح امتيازات أو مجموعات امتيازات لدور ما</a></strong>: تحديد إمكانيات الدور من خلال منح امتيازات أو مجموعات امتيازات لهذا الدور.</p></li>
-<li><p><strong><a href="/docs/ar/grant_roles.md">منح الأدوار للمستخدمين</a></strong>: منح أدوار بامتيازات معينة للمستخدمين بحيث يمكن للمستخدمين الحصول على امتيازات الدور. يمكن منح دور واحد لعدة مستخدمين.</p></li>
+<li><p><strong><a href="/docs/ar/v2.5.x/users_and_roles.md#Create-a-user">إنشاء مستخدم</a></strong>: بالإضافة إلى المستخدم الافتراضي <code translate="no">root</code> في ميلفوس، يمكنك إنشاء مستخدمين جدد وتعيين كلمات مرور لحماية أمن البيانات.</p></li>
+<li><p><strong><a href="/docs/ar/v2.5.x/users_and_roles.md#Create-a-role">إنشاء دور</a></strong>: يمكنك إنشاء أدوار مخصصة بناءً على احتياجاتك. يتم تحديد الإمكانيات المحددة للدور من خلال امتيازاته.</p></li>
+<li><p><strong><a href="/docs/ar/v2.5.x/privilege_group.md">إنشاء مجموعة امتيازات</a></strong>: ادمج امتيازات متعددة في مجموعة امتيازات واحدة لتبسيط عملية منح الامتيازات لدور ما.</p></li>
+<li><p><strong><a href="/docs/ar/v2.5.x/grant_privileges.md">منح امتيازات أو مجموعات امتيازات لدور ما</a></strong>: تحديد إمكانيات الدور من خلال منح امتيازات أو مجموعات امتيازات لهذا الدور.</p></li>
+<li><p><strong><a href="/docs/ar/v2.5.x/grant_roles.md">منح الأدوار للمستخدمين</a></strong>: منح أدوار بامتيازات معينة للمستخدمين بحيث يمكن للمستخدمين الحصول على امتيازات الدور. يمكن منح دور واحد لعدة مستخدمين.</p></li>
 </ol>

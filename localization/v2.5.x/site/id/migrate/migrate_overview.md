@@ -5,6 +5,7 @@ summary: >-
   migrasi yang didukung, fitur, dan arsitektur.
 title: Gambaran Umum Migrasi Milvus
 ---
+
 <h1 id="Milvus-Migration-Overview" class="common-anchor-header">Gambaran Umum Migrasi Milvus<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,10 +39,10 @@ title: Gambaran Umum Migrasi Milvus
       </svg>
     </button></h2><p>Alat <a href="https://github.com/zilliztech/milvus-migration">migrasi Milvus</a> mendukung berbagai jalur migrasi untuk mengakomodasi kebutuhan pengguna yang berbeda:</p>
 <ul>
-<li><a href="/docs/id/es2m.md">Elasticsearch ke Milvus 2.x</a>: Memungkinkan pengguna untuk memigrasikan data dari lingkungan Elasticsearch untuk memanfaatkan kemampuan pencarian vektor yang dioptimalkan dari Milvus.</li>
-<li><a href="/docs/id/f2m.md">Faiss ke Milvus 2.x</a>: Menyediakan dukungan eksperimental untuk mentransfer data dari Faiss, sebuah pustaka populer untuk pencarian kesamaan yang efisien.</li>
-<li><a href="/docs/id/m2m.md">Milvus 1.x ke Milvus 2.x</a>: Memastikan data dari versi sebelumnya ditransisikan dengan lancar ke kerangka kerja terbaru.</li>
-<li><a href="/docs/id/from-m2x.md">Milvus 2.3.x ke Milvus 2.3.x atau yang lebih baru</a>: Menyediakan jalur migrasi satu kali untuk pengguna yang telah bermigrasi ke 2.3.x.</li>
+<li><a href="/docs/id/v2.5.x/es2m.md">Elasticsearch ke Milvus 2.x</a>: Memungkinkan pengguna untuk memigrasikan data dari lingkungan Elasticsearch untuk memanfaatkan kemampuan pencarian vektor yang dioptimalkan dari Milvus.</li>
+<li><a href="/docs/id/v2.5.x/f2m.md">Faiss ke Milvus 2.x</a>: Menyediakan dukungan eksperimental untuk mentransfer data dari Faiss, sebuah pustaka populer untuk pencarian kesamaan yang efisien.</li>
+<li><a href="/docs/id/v2.5.x/m2m.md">Milvus 1.x ke Milvus 2.x</a>: Memastikan data dari versi sebelumnya ditransisikan dengan lancar ke kerangka kerja terbaru.</li>
+<li><a href="/docs/id/v2.5.x/from-m2x.md">Milvus 2.3.x ke Milvus 2.3.x atau yang lebih baru</a>: Menyediakan jalur migrasi satu kali untuk pengguna yang telah bermigrasi ke 2.3.x.</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

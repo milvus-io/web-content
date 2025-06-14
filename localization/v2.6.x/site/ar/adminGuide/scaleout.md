@@ -174,7 +174,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <ul>
 <li>تعرف على كيفية <a href="/docs/ar/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
 <li>تعرف على كيفية <a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
-<li>تعرّف على كيفية <a href="/docs/ar/azure.md">نشر ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/azure.md">نشر ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
 </ul></li>
 <li><p>إذا كنت تبحث عن إرشادات حول كيفية تخصيص الموارد:</p>
 <ul>

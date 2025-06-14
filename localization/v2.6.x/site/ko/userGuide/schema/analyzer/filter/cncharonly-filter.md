@@ -5,7 +5,6 @@ summary: >-
   cncharonly 필터는 중국어 이외의 문자가 포함된 토큰을 제거합니다. 이 필터는 중국어 텍스트에만 집중하여 다른 문자, 숫자 또는
   기호가 포함된 토큰을 모두 걸러내고 싶을 때 유용합니다.
 ---
-
 <h1 id="Cncharonly" class="common-anchor-header">Cncharonly<button data-href="#Cncharonly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +64,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p><code translate="no">cncharonly</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다. Milvus에서 사용할 수 있는 토큰라이저 목록은 <a href="/docs/ko/standard-tokenizer.md">표준 토큰라이저와</a> 그 자매 페이지를 참조하세요.</p>
 <p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -101,7 +99,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Foundation 下的一个开源项目，以 Apache 2.0 许可发布。&quot;</span>
@@ -110,7 +108,6 @@ sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Founda
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

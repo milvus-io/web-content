@@ -308,7 +308,7 @@ title: 使用 Milvus Operator 配置 Milvus
   <span class="hljs-attr">dependencies:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-该示例不仅配置了全局资源，还配置了 Root coord 和代理的私有计算资源。使用此配置文件启动 Milvus 群集时，私有资源配置将应用于 Root coord 和代理，而其余组件将遵循全局资源配置。</div>
+该示例不仅配置了全局资源，还配置了 Root coord 和代理的私有计算资源。使用此配置文件启动 Milvus 群集时，私有资源配置将应用于根协调器和代理，而其余组件将遵循全局资源配置。</div>
 <p>运行以下命令应用新配置：</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

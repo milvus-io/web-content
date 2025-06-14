@@ -5,6 +5,7 @@ summary: >-
   l'amélioration des performances et d'autres problèmes liés aux performances.
 title: FAQ sur les performances
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">FAQ sur les performances<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -33,7 +34,7 @@ title: FAQ sur les performances
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">Quels sont les facteurs qui influencent l'utilisation de l'unité centrale ?</h4><p>L'utilisation de l'UC augmente lorsque Milvus construit des index ou exécute des requêtes. En général, la construction d'index est gourmande en CPU, sauf lors de l'utilisation d'Annoy, qui s'exécute sur un seul thread.</p>
 <p>Lors de l'exécution des requêtes, l'utilisation de l'unité centrale est affectée par <code translate="no">nq</code> et <code translate="no">nprobe</code>. Lorsque <code translate="no">nq</code> et <code translate="no">nprobe</code> sont petits, la concurrence est faible et l'utilisation de l'unité centrale reste basse.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">L'insertion de données et la recherche simultanées ont-elles un impact sur les performances des requêtes ?</h4><p>Les opérations d'insertion ne sont pas très gourmandes en ressources humaines. Toutefois, comme les nouveaux segments peuvent ne pas avoir atteint le seuil de construction de l'index, Milvus a recours à la recherche par force brute, ce qui a un impact significatif sur les performances de la requête.</p>
-<p>Le paramètre <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> détermine le seuil de construction d'index pour un segment et est défini par défaut à 1024 lignes. Voir <a href="/docs/fr/system_configuration.md">Configuration du système</a> pour plus d'informations.</p>
+<p>Le paramètre <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> détermine le seuil de construction d'index pour un segment et est défini par défaut à 1024 lignes. Voir <a href="/docs/fr/v2.5.x/system_configuration.md">Configuration du système</a> pour plus d'informations.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">L'indexation d'un champ VARCHAR peut-elle améliorer la vitesse de suppression ?</h4><p>L'indexation d'un champ VARCHAR peut accélérer les opérations de suppression par expression, mais uniquement sous certaines conditions :</p>
 <ul>
 <li><strong>Index INVERTED</strong>: Cet index est utile pour les expressions <code translate="no">IN</code> ou <code translate="no">==</code> sur les champs VARCHAR à clé non primaire.</li>

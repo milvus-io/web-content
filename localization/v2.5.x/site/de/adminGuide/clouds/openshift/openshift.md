@@ -2,8 +2,9 @@
 id: openshift.md
 title: Bereitstellung eines Milvus-Clusters auf OpenShift
 related_key: cluster
-summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen.'
+summary: "Erfahren Sie, wie Sie einen Milvus-Cluster auf OpenShift bereitstellen."
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">Bereitstellung eines Milvus-Clusters auf OpenShift<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>Wenn Sie erfahren möchten, wie Sie Milvus in anderen Clouds einsetzen können:</p>
 <ul>
-<li><a href="/docs/de/eks.md">Bereitstellung von Milvus Cluster auf AWS mit Kubernetes</a></li>
-<li><a href="/docs/de/azure.md">Bereitstellung von Milvus Cluster auf Azure mit Kubernetes</a></li>
-<li><a href="/docs/de/gcp.md">Bereitstellung von Milvus Cluster auf GCP mit Kubernetes</a></li>
+<li><a href="/docs/de/v2.5.x/eks.md">Bereitstellung von Milvus Cluster auf AWS mit Kubernetes</a></li>
+<li><a href="/docs/de/v2.5.x/azure.md">Bereitstellung von Milvus Cluster auf Azure mit Kubernetes</a></li>
+<li><a href="/docs/de/v2.5.x/gcp.md">Bereitstellung von Milvus Cluster auf GCP mit Kubernetes</a></li>
 </ul>

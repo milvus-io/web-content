@@ -7,7 +7,6 @@ summary: >-
   di berbagai infleksi. Filter stemmer mendukung berbagai bahasa, memungkinkan
   pencarian dan pengindeksan yang efektif dalam berbagai konteks bahasa.
 ---
-
 <h1 id="Stemmer" class="common-anchor-header">Pemangkasan (Stemmer)<button data-href="#Stemmer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +86,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Filter <code translate="no">stemmer</code> menerima parameter yang dapat dikonfigurasi berikut ini.</p>
 <table>
    <tr>
@@ -158,8 +156,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifikasi menggunakan <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verifikasi menggunakan <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;running runs looked ran runner&quot;</span>
@@ -168,7 +165,6 @@ sample_text = <span class="hljs-string">&quot;running runs looked ran runner&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

@@ -3,6 +3,7 @@ id: replica.md
 summary: Pelajari tentang replika dalam memori di Milvus.
 title: Replika Dalam Memori
 ---
+
 <h1 id="In-Memory-Replica" class="common-anchor-header">Replika Dalam Memori<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: Replika Dalam Memori
         ></path>
       </svg>
     </button></h1><p>Topik ini memperkenalkan mekanisme replika dalam memori (replikasi) dalam Milvus yang memungkinkan replikasi beberapa segmen dalam memori kerja untuk meningkatkan kinerja dan ketersediaan.</p>
-<p>Untuk informasi tentang cara mengonfigurasi replika dalam memori, lihat <a href="/docs/id/configure_querynode.md#queryNodereplicas">Konfigurasi terkait Node Query</a>.</p>
+<p>Untuk informasi tentang cara mengonfigurasi replika dalam memori, lihat <a href="/docs/id/v2.5.x/configure_querynode.md#queryNodereplicas">Konfigurasi terkait Node Query</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,6 +3,7 @@ id: time_sync.md
 title: Synchronisation temporelle
 summary: Découvrez le système de synchronisation temporelle de Milvus.
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">Synchronisation temporelle<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: Découvrez le système de synchronisation temporelle de Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Apprendre le concept d'<a href="/docs/fr/timestamp.md">horodatage</a>.</li>
-<li>Découvrir le <a href="/docs/fr/data_processing.md">flux de traitement des données</a> dans Milvus.</li>
+<li>Apprendre le concept d'<a href="/docs/fr/v2.5.x/timestamp.md">horodatage</a>.</li>
+<li>Découvrir le <a href="/docs/fr/v2.5.x/data_processing.md">flux de traitement des données</a> dans Milvus.</li>
 </ul>

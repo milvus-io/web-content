@@ -66,8 +66,8 @@ id: home.md
 
 - [Manage Collections](manage-collections.md)
 - [Insert, Upsert, and Delete](insert-update-delete.md)
-- [Index Vector Fields](index-vector-fields.md)
 - [Single-Vector Search](single-vector-search.md)
+- [Hybrid Search](multi-vector-search.md)
 - [Get & Scalar Query](get-and-scalar-query.md)
 </div>
 
@@ -86,7 +86,7 @@ id: home.md
 
 - [System Configuration](system_configuration.md)
 - [Architecture Overview](architecture_overview.md)
-- [Vector Index](index.md)
+- [Index Explained](index-explained.md)
 - [Similarity Metrics](metric.md)
 - [Glossary](glossary.md)
 </div>
@@ -97,12 +97,12 @@ id: home.md
 
 ## What's new in docs
 
-_Nov 2024 - Milvus 2.5.0 release_
+_June 2025 - Milvus 2.6.0 release_
 
-- Added guidance on how to [conduct full text search](full-text-search.md).
-- Added guidance on how to [conduct text match](keyword-match.md).
-- Added guidance on how to [enable nullable and default values](nullable-and-default.md).
-- Added descriptions of [analyzers](analyzer-overview.md).
-- Added descriptions of [bitmap indexes](bitmap.md).
+- Added guidance on how to [use embedding function](embedding-function-overview.md).
+- Added guidance on how to [use decay ranker](decay-ranker-overview.md).
+- Added guidance on how to [add fields to an existing collection](add-fields-to-an-existing-collection.md).
+- Added guidance on how to [perform phrase match](phrase-match.md).
+- Added descriptions of [IVF_RABITQ index](ivf-rabitq.md).
 
 </div>

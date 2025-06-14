@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Corrispondenza di frase
+title: Corrispondenza di fraseCompatible with Milvus 2.6.x
 summary: >-
   La corrispondenza di frase consente di cercare i documenti che contengono i
   termini della query come frase esatta. Per impostazione predefinita, le parole
@@ -9,8 +9,9 @@ summary: >-
   come "...typical robotics machine learning models...", dove le parole
   "robotics", "machine" e "learning" appaiono in sequenza senza altre parole tra
   loro.
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Corrispondenza di frase<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Corrispondenza di frase<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -49,7 +50,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Flusso di lavoro Phrase Match</span> </span></p>
 <ol>
 <li><p><strong>Tokenizzazione del documento</strong>: Quando si inseriscono i documenti in Milvus, il testo viene suddiviso in token (singole parole o termini) mediante un analizzatore, con informazioni di posizione registrate per ogni token. Ad esempio, <strong>doc_1</strong> viene tokenizzato in <strong>["macchina" (pos=0), "apprendimento" (pos=1), "boost" (pos=2), "efficienza" (pos=3)]</strong>. Per ulteriori informazioni sugli analizzatori, consultare la sezione <a href="/docs/it/analyzer-overview.md">Panoramica sugli analizzatori</a>.</p></li>
-<li><p><strong>Creazione di indici invertiti</strong>: Milvus crea un indice inverso, mappando ogni token al documento o ai documenti in cui appare e alla posizione del token in quei documenti.</p></li>
+<li><p><strong>Creazione di indici invertiti</strong>: Milvus crea un indice inverso, mappando ogni token al documento o ai documenti in cui compare e alla posizione del token in quei documenti.</p></li>
 <li><p><strong>Corrispondenza delle frasi</strong>: quando viene eseguita una query di frasi, Milvus cerca ogni token nell'indice invertito e controlla le loro posizioni per determinare se appaiono nell'ordine e nella prossimità corretti. Il parametro <code translate="no">slop</code> controlla il numero massimo di posizioni consentite tra i token corrispondenti:</p>
 <ul>
 <li><p><strong>slop = 0</strong> significa che i token devono apparire <strong>nell'ordine esatto e immediatamente adiacenti</strong> (cioè, senza parole aggiuntive in mezzo).</p>
@@ -106,8 +107,8 @@ schema.add_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opzionale: Configurare un analizzatore</h3><p>L'accuratezza della corrispondenza delle frasi dipende in modo significativo dall'analizzatore utilizzato per la tokenizzazione dei dati di testo. Analizzatori diversi si adattano a lingue e formati di testo diversi, influenzando la tokenizzazione e la precisione posizionale. La selezione di un analizzatore appropriato per il vostro caso d'uso specifico ottimizzerà i risultati della corrispondenza delle frasi.</p>
-<p>Per impostazione predefinita, Milvus utilizza l'analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Per l'uso predefinito non sono richiesti parametri aggiuntivi. Per ulteriori informazioni, consultare l'<a href="/docs/it/standard-analyzer.md">Analizzatore standard</a>.</p>
-<p>Se l'applicazione richiede un analizzatore specifico, è necessario configurarlo con il parametro <code translate="no">analyzer_params</code>. Ad esempio, ecco come configurare l'analizzatore <code translate="no">english</code> per la corrispondenza di frasi nel testo inglese:</p>
+<p>Per impostazione predefinita, Milvus utilizza l'analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Per l'uso predefinito non sono richiesti parametri aggiuntivi. Per ulteriori informazioni, consultare l'<a href="/docs/it/standard-analyzer.md">analizzatore standard</a>.</p>
+<p>Se l'applicazione richiede un analizzatore specifico, configurarlo usando il parametro <code translate="no">analyzer_params</code>. Ad esempio, ecco come configurare l'analizzatore <code translate="no">english</code> per la corrispondenza di frasi nel testo inglese:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -139,7 +140,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta attivata la corrispondenza per un campo <code translate="no">VARCHAR</code> nello schema della raccolta, è possibile eseguire corrispondenze di frasi utilizzando l'espressione <code translate="no">PHRASE_MATCH</code>.</p>
+    </button></h2><p>Una volta abilitata la corrispondenza per un campo <code translate="no">VARCHAR</code> nello schema della raccolta, è possibile eseguire corrispondenze di frasi utilizzando l'espressione <code translate="no">PHRASE_MATCH</code>.</p>
 <div class="alert note">
 <p>L'espressione <code translate="no">PHRASE_MATCH</code> non fa distinzione tra maiuscole e minuscole. Si può usare sia <code translate="no">PHRASE_MATCH</code> che <code translate="no">phrase_match</code>.</p>
 </div>
@@ -153,7 +154,7 @@ schema.add_field(
 <ul>
 <li><p><code translate="no">0</code> (predefinito): Corrisponde solo alle frasi esatte. Esempio: Un filtro per <strong>"machine learning"</strong> corrisponderà esattamente a <strong>"machine learning"</strong>, ma non a <strong>"machine boosts learning"</strong> o <strong>"learning machine".</strong></p></li>
 <li><p><code translate="no">1</code>: Consente variazioni minime, ad esempio un termine in più o un piccolo spostamento di posizione. Esempio: Un filtro per <strong>"machine learning"</strong> corrisponderà a <strong>"machine boosts learning"</strong> (un token tra <strong>"machine"</strong> e <strong>"learning")</strong> ma non a <strong>"learning machine"</strong> (termini invertiti).</p></li>
-<li><p><code translate="no">2</code>: Permette una maggiore flessibilità, includendo l'ordine inverso dei termini o fino a due token tra di essi. Esempio: Un filtro per <strong>"machine learning"</strong> corrisponderà a <strong>"machine learning"</strong> (termini invertiti) o <strong>"machine quickly boosts learning"</strong> (due token tra <strong>"machine"</strong> e <strong>"learning")</strong>.</p></li>
+<li><p><code translate="no">2</code>: Permette una maggiore flessibilità, includendo l'ordine inverso dei termini o fino a due token in mezzo. Esempio: Un filtro per <strong>"machine learning"</strong> corrisponderà a <strong>"machine learning"</strong> (termini invertiti) o <strong>"machine quickly boosts learning"</strong> (due token tra <strong>"machine"</strong> e <strong>"learning")</strong>.</p></li>
 </ul></li>
 </ul>
 <h3 id="Example-dataset" class="common-anchor-header">Esempio di set di dati</h3><p>Supponiamo di avere una raccolta denominata <strong>tech_articles</strong> contenente le seguenti cinque entità:</p>

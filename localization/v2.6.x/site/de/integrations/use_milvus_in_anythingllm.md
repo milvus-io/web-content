@@ -144,7 +144,7 @@ title: Milvus in AnythingLLM verwenden
    </span> <span class="img-wrapper"> <span>Speichern und einbetten</span> </span></p></li>
 </ol>
 <hr>
-<h2 id="4-Chat-and-Retrieve-Answers-from-Milvus" class="common-anchor-header">4. Chatten und Antworten von Milvus abrufen<button data-href="#4-Chat-and-Retrieve-Answers-from-Milvus" class="anchor-icon" translate="no">
+<h2 id="4-Chat-and-Retrieve-Answers-from-Milvus" class="common-anchor-header">4. Chatten und Antworten aus Milvus abrufen<button data-href="#4-Chat-and-Retrieve-Answers-from-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -160,7 +160,7 @@ title: Milvus in AnythingLLM verwenden
         ></path>
       </svg>
     </button></h2><ol>
-<li>Kehren Sie zum Chat-Interface des Arbeitsbereichs zurück und stellen Sie Fragen. AnythingLLM durchsucht Ihre Milvus-Vektordatenbank nach relevanten Inhalten und verwendet den LLM, um Antworten zu generieren.<br>
+<li>Kehren Sie zur Chat-Schnittstelle des Arbeitsbereichs zurück und stellen Sie Fragen. AnythingLLM durchsucht Ihre Milvus-Vektordatenbank nach relevanten Inhalten und verwendet den LLM, um Antworten zu generieren.<br>
 
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_chat.png" alt="Chat with Docs" class="doc-image" id="chat-with-docs" />

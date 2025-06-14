@@ -2,9 +2,10 @@
 id: install-node.md
 label: Install Node.js SDK
 related_key: SDK
-summary: 'Erfahren Sie, wie Sie das Node.js SDK von Milvus installieren.'
+summary: "Erfahren Sie, wie Sie das Node.js SDK von Milvus installieren."
 title: Milvus Nodejs SDK installieren
 ---
+
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Milvus Nodejs SDK installieren<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,11 +109,11 @@ yarn add @zilliz/milvus2-sdk-node
 <li><p><a href="https://github.com/milvus-io/milvus-sdk-node">Schnellstart von Milvus Node.js SDK</a> ansehen</p></li>
 <li><p>Lernen Sie die Grundfunktionen von Milvus kennen:</p>
 <ul>
-<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
-<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
-<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
-<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/v2.5.x/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/v2.5.x/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/v2.5.x/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/v2.5.x/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
 <li><p>Erkunden Sie die <a href="/api-reference/node/v2.4.x/About.md">Milvus Node.js API-Referenz</a></p></li>
 </ul>

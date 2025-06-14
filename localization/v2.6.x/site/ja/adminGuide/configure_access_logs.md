@@ -22,7 +22,7 @@ title: アクセスログの設定
 <p>アクセスログの設定は、Milvusのインストール方法によって異なります：</p>
 <ul>
 <li><strong>Helm インストール：</strong> <code translate="no">values.yaml</code> 。詳細については、<a href="/docs/ja/configure-helm.md">HelmチャートによるMilvusの設定を</a>参照してください。</li>
-<li><strong>Docker インストール</strong>：<code translate="no">milvus.yaml</code> で設定してください。詳細については、<a href="/docs/ja/configure-docker.md">Docker Composeを使用したMilvusの設定を</a>参照してください。</li>
+<li><strong>Docker インストール</strong>：<code translate="no">milvus.yaml</code> 。詳細については、<a href="/docs/ja/configure-docker.md">Docker Composeを使用したMilvusの設定を</a>参照してください。</li>
 <li><strong>Operator インストール</strong>：設定ファイルの<code translate="no">spec.components</code> 。詳細については、<a href="/docs/ja/configure_operator.md">Milvus OperatorでMilvusを設定するを</a>参照してください。</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">設定オプション<button data-href="#Configuration-options" class="anchor-icon" translate="no">

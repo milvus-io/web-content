@@ -51,7 +51,7 @@ summary: >-
         <tr>
             <td><strong>Elaborazione dei dati non strutturati guidata dall'intelligenza artificiale</strong><br/><i>Rafforzare la capacità di elaborare e analizzare i dati non strutturati utilizzando modelli di intelligenza artificiale e tecnologie avanzate</i>.</td>
             <td><strong>Ricerca full text</strong><br/><i>Supporto della ricerca full text con Sparse-BM25. La nuova API accetta il testo come input e genera automaticamente vettori sparsi all'interno di Milvus</i><br/><br/><strong>Sparse Vector (GA)</strong><br/><i>Supportare un metodo di archiviazione e indicizzazione efficiente per i vettori sparsi</i><br/></td>
-            <td><strong>Data-In e Data-Out</strong><br/><i>Supporta i principali servizi di modello per l'inserimento del testo originale</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Supporta reranker basati su modello e funzione di punteggio definita dall'utente</i><br/><br/><strong>Ricerca</strong> iterativa<br/><i>Rivede il vettore di query in base all'etichettatura dell'utente</i></td>
+            <td><strong>Data-In e Data-Out</strong><br/><i>Supporto dei principali servizi di modellizzazione per l'ingestione del testo originale</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Supporto di reranker basati su modelli e funzione di punteggio definita dall'utente</i><br/><br/><strong>Ricerca</strong> iterativa<br/><i>Revisione del vettore di query in base all'etichettatura dell'utente</i></td>
             <td><strong>Supporto dei tensori</strong><br/><i>Supporto di elenchi di vettori, usi tipici come Colbert, Copali e rappresentazione video</i><br/><br/><strong>Supporto di più tipi di dati</strong><br/><i>ad esempio Datetime, Map, GIS</i></td>
         </tr>
         <tr>
@@ -70,7 +70,7 @@ summary: >-
             <td><strong>Efficienza dei costi e architettura</strong><br/><i>Sistemi all'avanguardia con stabilità, efficienza dei costi e distribuzione semplificata.</i></td>
             <td><strong>Ottimizzazione della memoria</strong><br/><i>Riduzione dell'OOM e potenziamento del carico</i><br/><br/><strong>Compattazione</strong> del clustering<br/><i>Ridistribuzione dei dati in base alla configurazione per accelerare le prestazioni di lettura</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Design dei formati universali e base per l'accesso ai dati su disco</i></td>
             <td><strong>Archiviazione a livelli</strong><br/><i>Supporto per l'archiviazione a caldo e a freddo per l'ottimizzazione dei costi</i><br/><br/><strong>Stream Node</strong><br/><i>Elaborazione di dati in streaming e semplificazione del flusso di scrittura incrementale</i><br/><br/><strong>MixCoord</strong><br/><i>Unione delle logiche Coord in un'unica soluzione</i></td>
-            <td><strong>Vector Lake</strong><br/><i>Soluzione offline conveniente, connettore spark e integrazione con iceberg</i><br/><br/><strong>Logstore Component</strong><br/><i>Ridurre le dipendenze da componenti esterni come pulsar</i><br/><br/><strong>Data Evict Policy</strong><br/><i>Gli utenti possono definire la propria evict policy</i></td>
+            <td><strong>Vector Lake</strong><br/><i>Soluzione offline conveniente, connettore spark e integrazione con iceberg</i><br/><br/><strong>Logstore Component</strong><br/><i>Ridurre le dipendenze da componenti esterni come pulsar</i><br/><br/><strong>Data Evict Policy</strong><br/><i>Gli utenti possono definire la propria politica di evict</i></td>
         </tr>
     </tbody>
 </table>

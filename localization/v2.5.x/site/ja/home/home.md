@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Milvusドキュメントへようこそ！</h1></p>
@@ -33,13 +34,13 @@ Milvusドキュメントへようこそ！</h1></p>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ja/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ja/install_standalone-docker.md"> <p class="link-btn">Milvusのインストール</p> </a><p>Docker ComposeまたはKubernetesを使用してMilvusをインストールする方法をご紹介します。</p>
+   <a href="/docs/ja/v2.5.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/ja/v2.5.x/install_standalone-docker.md"> <p class="link-btn">Milvusのインストール</p> </a><p>Docker ComposeまたはKubernetesを使用してMilvusをインストールする方法をご紹介します。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ja/quickstart.md"> <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ja/quickstart.md"> <p class="link-btn">クイックスタート</p> </a><p>サンプルコードを使ってMilvusを素早く実行する方法をご紹介します。</p>
+   <a href="/docs/ja/v2.5.x/quickstart.md"> <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/ja/v2.5.x/quickstart.md"> <p class="link-btn">クイックスタート</p> </a><p>サンプルコードを使ってMilvusを素早く実行する方法をご紹介します。</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +68,31 @@ Milvusドキュメントへようこそ！</h1></p>
 <div class="recomment-item">
   <p>使用方法</p>
 <ul>
-<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/index-vector-fields.md">インデックス・ベクトル・フィールド</a></li>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/get-and-scalar-query.md">取得とスカラークエリー</a></li>
+<li><a href="/docs/ja/v2.5.x/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/v2.5.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.5.x/index-vector-fields.md">インデックス・ベクトル・フィールド</a></li>
+<li><a href="/docs/ja/v2.5.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.5.x/get-and-scalar-query.md">取得とスカラークエリー</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>デプロイ</p>
 <ul>
-<li><a href="/docs/ja/configure-docker.md">Milvusの設定</a></li>
-<li><a href="/docs/ja/deploy_s3.md">依存関係の管理</a></li>
-<li><a href="/docs/ja/eks.md">クラウドへのデプロイ</a></li>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
-<li><a href="/docs/ja/monitor_overview.md">監視とアラート</a></li>
+<li><a href="/docs/ja/v2.5.x/configure-docker.md">Milvusの設定</a></li>
+<li><a href="/docs/ja/v2.5.x/deploy_s3.md">依存関係の管理</a></li>
+<li><a href="/docs/ja/v2.5.x/eks.md">クラウドへのデプロイ</a></li>
+<li><a href="/docs/ja/v2.5.x/scaleout.md">Milvusクラスタのスケール</a></li>
+<li><a href="/docs/ja/v2.5.x/monitor_overview.md">監視とアラート</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>学ぶ</p>
 <ul>
-<li><a href="/docs/ja/system_configuration.md">システム構成</a></li>
-<li><a href="/docs/ja/architecture_overview.md">アーキテクチャの概要</a></li>
-<li><a href="/docs/ja/index.md">ベクトルインデックス</a></li>
-<li><a href="/docs/ja/metric.md">類似性メトリクス</a></li>
-<li><a href="/docs/ja/glossary.md">用語集</a></li>
+<li><a href="/docs/ja/v2.5.x/system_configuration.md">システム構成</a></li>
+<li><a href="/docs/ja/v2.5.x/architecture_overview.md">アーキテクチャの概要</a></li>
+<li><a href="/docs/ja/v2.5.x/index.md">ベクトルインデックス</a></li>
+<li><a href="/docs/ja/v2.5.x/metric.md">類似性メトリクス</a></li>
+<li><a href="/docs/ja/v2.5.x/glossary.md">用語集</a></li>
 </ul>
 </div>
 </div>
@@ -113,10 +114,10 @@ Milvusドキュメントへようこそ！</h1></p>
       </svg>
     </button></h2><p><em>2024年11月 - Milvus 2.5.0リリース</em></p>
 <ul>
-<li><a href="/docs/ja/full-text-search.md">全文検索の</a>ガイダンスを追加しました。</li>
-<li><a href="/docs/ja/keyword-match.md">テキストマッチの</a>方法に関するガイダンスを追加しました。</li>
-<li><a href="/docs/ja/nullable-and-default.md">NULL値およびデフォルト値の有効</a>化方法に関するガイダンスを追加しました。</li>
-<li><a href="/docs/ja/analyzer-overview.md">アナライザーの</a>説明を追加。</li>
-<li><a href="/docs/ja/bitmap.md">ビットマップインデックスの</a>説明を追加。</li>
+<li><a href="/docs/ja/v2.5.x/full-text-search.md">全文検索の</a>ガイダンスを追加しました。</li>
+<li><a href="/docs/ja/v2.5.x/keyword-match.md">テキストマッチの</a>方法に関するガイダンスを追加しました。</li>
+<li><a href="/docs/ja/v2.5.x/nullable-and-default.md">NULL値およびデフォルト値の有効</a>化方法に関するガイダンスを追加しました。</li>
+<li><a href="/docs/ja/v2.5.x/analyzer-overview.md">アナライザーの</a>説明を追加。</li>
+<li><a href="/docs/ja/v2.5.x/bitmap.md">ビットマップインデックスの</a>説明を追加。</li>
 </ul>
 </div>

@@ -125,7 +125,7 @@ summary: Apprenez à configurer gcs avec Workload Identity.
       </svg>
     </button></h2><pre><code translate="no" class="language-bash">helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>le contenu du fichier values.yaml :</p>
+<p>le contenu de values.yaml :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
     <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 

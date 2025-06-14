@@ -3,6 +3,7 @@ id: chinese-analyzer.md
 title: 中文
 summary: 中文分析器專為處理中文文字而設計，提供有效的分割和標記化。
 ---
+
 <h1 id="Chinese" class="common-anchor-header">中文<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,8 +22,8 @@ summary: 中文分析器專為處理中文文字而設計，提供有效的分�
     </button></h1><p><code translate="no">chinese</code> 分析器專為處理中文文字而設計，提供有效的分割和標記化。</p>
 <h3 id="Definition" class="common-anchor-header">定義</h3><p><code translate="no">chinese</code> 分析器包括</p>
 <ul>
-<li><p><strong>標記器</strong>：使用<code translate="no">jieba</code> tokenizer 根據詞彙和上下文將中文文字分割成 token。如需更多資訊，請參考<a href="/docs/zh-hant/jieba-tokenizer.md">Jieba</a>。</p></li>
-<li><p><strong>過濾器</strong>：使用<code translate="no">cnalphanumonly</code> 過濾器移除包含任何非中文字元的字元。如需詳細資訊，請參閱<a href="/docs/zh-hant/cnalphanumonly-filter.md">Cnalphanumonly</a>。</p></li>
+<li><p><strong>標記器</strong>：使用<code translate="no">jieba</code> tokenizer 根據詞彙和上下文將中文文字分割成 token。如需更多資訊，請參考<a href="/docs/zh-hant/v2.5.x/jieba-tokenizer.md">Jieba</a>。</p></li>
+<li><p><strong>過濾器</strong>：使用<code translate="no">cnalphanumonly</code> 過濾器移除包含任何非中文字元的字元。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonly</a>。</p></li>
 </ul>
 <p><code translate="no">chinese</code> 分析器的功能等同於下列自訂分析器配置：</p>
 <div class="multipleCode">
@@ -52,6 +53,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Configuration" class="common-anchor-header">配置</h3><p>要將<code translate="no">chinese</code> 分析器套用到欄位，只要在<code translate="no">analyzer_params</code> 中將<code translate="no">type</code> 設定為<code translate="no">chinese</code> 即可。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -122,6 +124,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是一个高性能、可扩
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

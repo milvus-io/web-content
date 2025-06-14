@@ -128,7 +128,7 @@ title: Развертывание сервера CDC
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Компиляция сервера Milvus-CDC</h3><p>Сохранив файл <code translate="no">cdc.yaml</code>, перейдите в каталог <code translate="no">milvus-cdc</code> и выполните одну из следующих команд для компиляции сервера:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Компиляция сервера Milvus-CDC</h3><p>После сохранения файла <code translate="no">cdc.yaml</code> перейдите в каталог <code translate="no">milvus-cdc</code> и выполните одну из следующих команд для компиляции сервера:</p>
 <ul>
 <li><p>Для бинарного файла:</p>
 <pre><code translate="no" class="language-bash">make build

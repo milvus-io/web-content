@@ -24,7 +24,7 @@ title: Utilizar Milvus en AnythingLLM
     </button></h1><p><a href="https://anythingllm.com/">AnythingLLM</a> es una aplicación de escritorio de IA potente, centrada en la privacidad y todo en uno que admite varios LLM, tipos de documentos y bases de datos vectoriales. Le permite crear un asistente privado similar a ChatGPT que puede ejecutarse localmente o alojarse de forma remota, permitiéndole chatear de forma inteligente con cualquier documento que le proporcione.</p>
 <p>Esta guía le guiará a través de la configuración de Milvus como base de datos vectorial en AnythingLLM, permitiéndole incrustar, almacenar y buscar sus documentos para una recuperación y chat inteligentes.</p>
 <blockquote>
-<p>Este tutorial se basa en la documentación oficial de AnythingLLM y en pasos de uso reales. Si la interfaz de usuario o los pasos cambian, por favor consulte la documentación oficial más reciente y no dude en sugerir mejoras.</p>
+<p>Este tutorial se basa en la documentación oficial de AnythingLLM y en pasos de uso reales. Si la interfaz de usuario o los pasos cambian, por favor consulte la documentación oficial más reciente y siéntase libre de sugerir mejoras.</p>
 </blockquote>
 <hr>
 <h2 id="1-Prerequisites" class="common-anchor-header">1. Requisitos previos<button data-href="#1-Prerequisites" class="anchor-icon" translate="no">

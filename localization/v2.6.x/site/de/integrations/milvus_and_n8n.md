@@ -62,7 +62,7 @@ title: Erste Schritte mit Milvus und n8n
       </svg>
     </button></h2><p>Mit dem Milvus-Vektorspeicher-Knoten in n8n können Sie:</p>
 <ul>
-<li>mit Ihrer Milvus-Datenbank als <a href="https://docs.n8n.io/glossary/#ai-vector-store">Vektorspeicher</a> interagieren</li>
+<li>Interaktion mit Ihrer Milvus-Datenbank als <a href="https://docs.n8n.io/glossary/#ai-vector-store">Vektorspeicher</a></li>
 <li>Dokumente in Milvus einfügen</li>
 <li>Dokumente aus Milvus abrufen</li>
 <li>Dokumente abrufen, um sie einem mit einer <a href="https://docs.n8n.io/glossary/#ai-chain">Kette</a> verbundenen Retriever zur Verfügung zu stellen</li>

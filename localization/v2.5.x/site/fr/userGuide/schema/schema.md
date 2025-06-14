@@ -7,6 +7,7 @@ summary: >-
   comprendre le schéma d'une collection et à concevoir un exemple de schéma par
   vous-même.
 ---
+
 <h1 id="Schema-Explained​" class="common-anchor-header">Explication du schéma<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +47,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Conception du schéma</span> </span></p>
 <p>La conception du modèle de données d'un système de recherche implique l'analyse des besoins de l'entreprise et l'abstraction des informations dans un modèle de données exprimé par un schéma. Par exemple, la recherche d'un morceau de texte doit être "indexée" en convertissant la chaîne littérale en un vecteur par "incorporation" et en permettant la recherche vectorielle. Au-delà de cette exigence essentielle, il peut être nécessaire de stocker d'autres propriétés telles que l'horodatage de la publication et l'auteur. Ces métadonnées permettent d'affiner les recherches sémantiques par filtrage, en ne renvoyant que les textes publiés après une date spécifique ou par un auteur particulier. Vous pouvez également récupérer ces scalaires avec le texte principal pour rendre le résultat de la recherche dans l'application. Un identifiant unique doit être attribué à chaque scalaire pour organiser ces morceaux de texte, sous la forme d'un nombre entier ou d'une chaîne de caractères. Ces éléments sont essentiels pour obtenir une logique de recherche sophistiquée.</p>
-<p>Reportez-vous à <a href="/docs/fr/schema-hands-on.md">Schema Design Hands-On</a> pour savoir comment créer un schéma bien conçu.</p>
+<p>Reportez-vous à <a href="/docs/fr/v2.5.x/schema-hands-on.md">Schema Design Hands-On</a> pour savoir comment créer un schéma bien conçu.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">Créer un schéma<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,6 +71,7 @@ summary: >-
 schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
 ​
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();​
@@ -113,6 +115,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
@@ -152,7 +155,7 @@ export schema='{​
 </code></pre>
 <p>Lors de l'ajout d'un champ, vous pouvez explicitement préciser qu'il s'agit du champ primaire en définissant sa propriété <code translate="no">is_primary</code> sur <code translate="no">True</code>. Un champ primaire accepte par défaut les valeurs <strong>Int64</strong>. Dans ce cas, la valeur du champ primaire doit être un nombre entier, comme dans <code translate="no">12345</code>. Si vous choisissez d'utiliser des valeurs <strong>VarChar</strong> dans le champ primaire, la valeur doit être une chaîne de caractères, comme dans <code translate="no">my_entity_1234</code>.</p>
 <p>Vous pouvez également définir les propriétés <code translate="no">autoId</code> sur <code translate="no">True</code> pour que Milvus alloue automatiquement des valeurs de champ primaire lors des insertions de données.</p>
-<p>Pour plus de détails, voir <a href="/docs/fr/primary-field.md">Champ primaire et AutoID</a>.</p>
+<p>Pour plus de détails, voir <a href="/docs/fr/v2.5.x/primary-field.md">Champ primaire et AutoID</a>.</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Ajout de champs vectoriels<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -179,6 +182,7 @@ export schema='{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
@@ -239,7 +243,7 @@ export schema=&quot;{​
         ></path>
       </svg>
     </button></h2><p>Dans des cas courants, vous pouvez utiliser des champs scalaires pour stocker les métadonnées des intégrations vectorielles stockées dans Milvus et effectuer des recherches ANN avec filtrage des métadonnées pour améliorer l'exactitude des résultats de la recherche. Milvus prend en charge plusieurs types de champs scalaires, notamment <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> et JSON.</p>
-<h3 id="Add-String-Fields​" class="common-anchor-header">Ajout de champs de type chaîne</h3><p>Dans Milvus, vous pouvez utiliser des champs VarChar pour stocker des chaînes de caractères. Pour plus d'informations sur le champ VarChar, reportez-vous à la section <a href="/docs/fr/string.md">Champ de chaîne</a>.</p>
+<h3 id="Add-String-Fields​" class="common-anchor-header">Ajout de champs de type chaîne</h3><p>Dans Milvus, vous pouvez utiliser des champs VarChar pour stocker des chaînes de caractères. Pour plus d'informations sur le champ VarChar, reportez-vous à la section <a href="/docs/fr/v2.5.x/string.md">Champ de chaîne</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -250,6 +254,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
@@ -284,7 +289,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">Ajout de champs numériques</h3><p>Les types de nombres pris en charge par Milvus sont <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> et <code translate="no">Double</code>. Pour plus d'informations sur les champs de nombres, voir <a href="/docs/fr/number.md">Champ de nombres</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">Ajout de champs numériques</h3><p>Les types de nombres pris en charge par Milvus sont <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> et <code translate="no">Double</code>. Pour plus d'informations sur les champs de nombres, voir <a href="/docs/fr/v2.5.x/number.md">Champ de nombres</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -293,6 +298,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
         .dataType(DataType.Int64)​
@@ -330,6 +336,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
         .dataType(DataType.Bool)​
@@ -359,7 +366,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">Ajouter des champs JSON</h3><p>Un champ JSON stocke généralement des données JSON semi-structurées. Pour plus d'informations sur les champs JSON, voir <a href="/docs/fr/use-json-fields.md">Champ JSON</a>.</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">Ajouter des champs JSON</h3><p>Un champ JSON stocke généralement des données JSON semi-structurées. Pour plus d'informations sur les champs JSON, voir <a href="/docs/fr/v2.5.x/use-json-fields.md">Champ JSON</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -368,6 +375,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
         .dataType(DataType.JSON)​
@@ -398,7 +406,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Ajouter des champs de type tableau</h3><p>Un champ de type tableau stocke une liste d'éléments. Les types de données de tous les éléments d'un champ tableau doivent être identiques. Pour plus d'informations sur les champs de type tableau, voir <a href="/docs/fr/array_data_type.md">Champ de type tableau</a>.</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Ajouter des champs de type tableau</h3><p>Un champ de type tableau stocke une liste d'éléments. Les types de données de tous les éléments d'un champ tableau doivent être identiques. Pour plus d'informations sur les champs de type tableau, voir <a href="/docs/fr/v2.5.x/array_data_type.md">Champ de type tableau</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -410,6 +418,7 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
         .dataType(DataType.Array)​

@@ -5,6 +5,7 @@ summary: >-
   Milvus 2.3.x a Milvus 2.3.x o superior.
 title: Desde Milvus 2.3.x
 ---
+
 <h1 id="From-Milvus-23x" class="common-anchor-header">Desde Milvus 2.3.x<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ title: Desde Milvus 2.3.x
 <li>Milvus de destino: 2.3.0+</li>
 </ul></li>
 <li><strong>Herramientas necesarias</strong>:<ul>
-<li>Herramienta<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. Para obtener más información sobre la instalación, consulte <a href="/docs/es/milvusdm_install.md">Instalar la herramienta de migración</a>.</li>
+<li>Herramienta<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. Para obtener más información sobre la instalación, consulte <a href="/docs/es/v2.5.x/milvusdm_install.md">Instalar la herramienta de migración</a>.</li>
 </ul></li>
 <li><strong>Preparación de los datos</strong>:<ul>
 <li>Asegúrese de que la colección Milvus de origen está cargada y lista para la exportación de datos.</li>
@@ -72,22 +73,23 @@ title: Desde Milvus 2.3.x
       bufferSize: 500
 
 meta:
-  mode: config
-  version: 2.3.0
-  collection: src_table_name
+mode: config
+version: 2.3.0
+collection: src_table_name
 
 <span class="hljs-built_in">source</span>:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 
 target:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 <button class="copy-code-btn"></button></code></pre>
+
 <p>La siguiente tabla describe los parámetros del archivo de configuración de ejemplo. Para más información, consulte <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Migración de Milvus: Milvus2.x a Milvus2.x</a>.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
@@ -120,8 +122,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>Dirección del servidor Milvus de origen.</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>Nombre de usuario del servidor Milvus de origen. Este parámetro es necesario si la autenticación de usuario está habilitada para su servidor Milvus. Para más información, consulte <a href="/docs/es/authenticate.md">Activar autenticación</a>.</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>Contraseña para el servidor Milvus de origen. Este parámetro es necesario si la autenticación de usuario está activada para su servidor Milvus. Para más información, consulte <a href="/docs/es/authenticate.md">Activar autenticación</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>Nombre de usuario del servidor Milvus de origen. Este parámetro es necesario si la autenticación de usuario está habilitada para su servidor Milvus. Para más información, consulte <a href="/docs/es/v2.5.x/authenticate.md">Activar autenticación</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>Contraseña para el servidor Milvus de origen. Este parámetro es necesario si la autenticación de usuario está activada para su servidor Milvus. Para más información, consulte <a href="/docs/es/v2.5.x/authenticate.md">Activar autenticación</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -132,8 +134,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>Dirección del servidor Milvus de destino.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>Nombre de usuario del servidor Milvus de destino. Este parámetro es necesario si la autenticación de usuario está activada para su servidor Milvus. Para más información, consulte <a href="/docs/es/authenticate.md">Activar autenticación</a>.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>Contraseña para el servidor Milvus de destino. Este parámetro es necesario si la autenticación de usuario está activada para su servidor Milvus. Para obtener más información, consulte <a href="/docs/es/authenticate.md">Activación de la autenticación</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>Nombre de usuario del servidor Milvus de destino. Este parámetro es necesario si la autenticación de usuario está activada para su servidor Milvus. Para más información, consulte <a href="/docs/es/v2.5.x/authenticate.md">Activar autenticación</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>Contraseña para el servidor Milvus de destino. Este parámetro es necesario si la autenticación de usuario está activada para su servidor Milvus. Para obtener más información, consulte <a href="/docs/es/v2.5.x/authenticate.md">Activación de la autenticación</a>.</td></tr>
 </tbody>
 </table>
 </li>

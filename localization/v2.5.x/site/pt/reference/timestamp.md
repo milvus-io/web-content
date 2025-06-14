@@ -5,6 +5,7 @@ summary: >-
   Conheça o conceito de carimbo de data/hora e os quatro principais parâmetros
   relacionados com o carimbo de data/hora na base de dados vetorial Milvus.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">Carimbo de tempo<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,5 +106,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Saiba como <a href="/docs/pt/consistency.md">o carimbo de data/hora de garantia permite uma consistência ajustável no Milvus</a></li>
+<li>Saiba como <a href="/docs/pt/v2.5.x/consistency.md">o carimbo de data/hora de garantia permite uma consistência ajustável no Milvus</a></li>
 </ul>

@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pemadatan pengelompokan dirancang untuk meningkatkan kinerja pencarian dan mengurangi biaya dalam koleksi yang besar. Panduan ini akan membantu Anda memahami pemadatan pengelompokan dan bagaimana fitur ini dapat meningkatkan kinerja pencarian.</p>
+    </button></h1><p>Pemadatan pengelompokan dirancang untuk meningkatkan kinerja pencarian dan mengurangi biaya dalam koleksi besar. Panduan ini akan membantu Anda memahami pemadatan pengelompokan dan bagaimana fitur ini dapat meningkatkan kinerja pencarian.</p>
 <h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +49,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Pemadatan Pengelompokan</span> </span></p>
-<p>Dengan menggunakan <strong>PartitionStats</strong> sebagai referensi, Milvus dapat memangkas data yang tidak relevan setelah menerima permintaan pencarian/kueri yang membawa nilai kunci pengelompokan dan membatasi cakupan pencarian di dalam segmen yang memetakan nilai tersebut, sehingga meningkatkan kinerja pencarian. Untuk detail tentang peningkatan kinerja, lihat <a href="/docs/id/clustering-compaction.md#Benchmark-Test">Tes tolok ukur</a>.</p>
+<p>Dengan menggunakan <strong>PartitionStats</strong> sebagai referensi, Milvus dapat memangkas data yang tidak relevan setelah menerima permintaan pencarian/kueri yang membawa nilai kunci pengelompokan dan membatasi cakupan pencarian di dalam segmen yang memetakan nilai tersebut, sehingga meningkatkan kinerja pencarian. Untuk detail tentang peningkatan kinerja, lihat <a href="/docs/id/v2.5.x/clustering-compaction.md#Benchmark-Test">Tes tolok ukur</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Gunakan Pemadatan Pengelompokan<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,7 +162,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>Untuk menerapkan perubahan di atas pada kluster Milvus Anda, silakan ikuti langkah-langkah di <a href="/docs/id/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/configure_operator.md">Konfigurasi Milvus dengan Operator Milvus</a>.</p>
+<p>Untuk menerapkan perubahan di atas pada kluster Milvus Anda, silakan ikuti langkah-langkah di <a href="/docs/id/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/v2.5.x/configure_operator.md">Konfigurasi Milvus dengan Operator Milvus</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Konfigurasi Koleksi</h3><p>Untuk pemadatan cluster dalam koleksi tertentu, Anda harus memilih bidang skalar dari koleksi sebagai kunci clustering.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

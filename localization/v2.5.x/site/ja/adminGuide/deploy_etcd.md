@@ -1,9 +1,10 @@
 ---
 id: deploy_etcd.md
 title: Docker ComposeまたはHelmでメタストレージを設定する
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: Docker Compose/Helmでmilvusのメタストレージを設定する方法をご紹介します。
 ---
+
 <h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Docker ComposeまたはHelmでメタストレージを設定する<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ summary: Docker Compose/Helmでmilvusのメタストレージを設定する方�
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>詳細は<a href="/docs/ja/configure_etcd.md">etcd関連の設定を</a>参照してください。</p>
+<p>詳細は<a href="/docs/ja/v2.5.x/configure_etcd.md">etcd関連の設定を</a>参照してください。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2.Milvusの起動</h3><p>以下のコマンドを実行し、etcdの設定を使用するMilvusを起動します。</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -131,6 +132,6 @@ summary: Docker Compose/Helmでmilvusのメタストレージを設定する方�
       </svg>
     </button></h2><p>Docker ComposeまたはHelmを使用してMilvusの他の依存関係を設定する方法について説明します：</p>
 <ul>
-<li><a href="/docs/ja/deploy_s3.md">Docker ComposeまたはHelmでオブジェクトストレージを設定する</a></li>
-<li><a href="/docs/ja/deploy_pulsar.md">Docker ComposeまたはHelmでメッセージストレージを設定する</a></li>
+<li><a href="/docs/ja/v2.5.x/deploy_s3.md">Docker ComposeまたはHelmでオブジェクトストレージを設定する</a></li>
+<li><a href="/docs/ja/v2.5.x/deploy_pulsar.md">Docker ComposeまたはHelmでメッセージストレージを設定する</a></li>
 </ul>

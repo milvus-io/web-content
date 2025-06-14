@@ -234,8 +234,7 @@ curl --request POST \
 </div>
 <pre><code translate="no" class="language-python">client.load_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+<span class="highlighted-wrapper-line">    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span></span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 

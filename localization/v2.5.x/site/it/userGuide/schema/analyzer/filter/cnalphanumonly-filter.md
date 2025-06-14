@@ -5,6 +5,7 @@ summary: >-
   Il filtro cnalphanumonly rimuove i token che contengono caratteri diversi da
   quelli cinesi, lettere inglesi o cifre.
 ---
+
 <h1 id="Cnalphanumonly" class="common-anchor-header">Cnalphanumonly<button data-href="#Cnalphanumonly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,8 +64,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il filtro <code translate="no">cnalphanumonly</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer. Per un elenco dei tokenizer disponibili in Milvus, consultare <a href="/docs/it/standard-tokenizer.md">Standard Tokenizer</a> e le sue pagine collaterali.</p>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Il filtro <code translate="no">cnalphanumonly</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer. Per un elenco dei tokenizer disponibili in Milvus, consultare <a href="/docs/it/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a> e le sue pagine collaterali.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarlo a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/v2.5.x/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,6 +108,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是 LF AI &amp; Data Founda
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

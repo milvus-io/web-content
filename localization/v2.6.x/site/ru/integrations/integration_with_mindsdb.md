@@ -80,9 +80,9 @@ title: Интеграция Milvus с MindsDB
 <li><code translate="no">create_dynamic_field</code>: будут ли создаваемые таблицы иметь динамические поля или нет (по умолчанию=True)</li>
 <li><code translate="no">create_content_max_len</code>: максимальная длина столбца содержимого (по умолчанию=200)</li>
 <li><code translate="no">create_content_default_value</code>: значение по умолчанию для столбца содержимого (по умолчанию='')</li>
-<li><code translate="no">create_schema_description</code>: описание созданных схем (default='')</li>
+<li><code translate="no">create_schema_description</code>: описание созданных схем (по умолчанию='')</li>
 <li><code translate="no">create_alias</code>: псевдоним созданных схем (default='default')</li>
-<li><code translate="no">create_index_params</code>: параметры индекса, создаваемого по столбцу embeddings (default={})</li>
+<li><code translate="no">create_index_params</code>: параметры индекса, созданного по столбцу embeddings (default={})</li>
 <li><code translate="no">create_index_metric_type</code>: метрика, используемая для создания индекса (default='L2')</li>
 <li><code translate="no">create_index_type</code>: тип индекса (по умолчанию='AUTOINDEX')</li>
 </ul>

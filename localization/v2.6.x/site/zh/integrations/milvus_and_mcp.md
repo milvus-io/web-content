@@ -193,7 +193,7 @@ title: MCP + Milvus：连接人工智能与向量数据库
 <ol start="2">
 <li>重新启动 Cursor 以应用配置。</li>
 </ol>
-<p>添加服务器后，您可能需要按下 MCP 设置中的刷新按钮来填充工具列表。当与您的查询相关时，Composer Agent 会自动使用 Milvus 工具。</p>
+<p>添加服务器后，您可能需要按下 MCP 设置中的刷新按钮来填充工具列表。当与您的查询相关时，Composer Agent 将自动使用 Milvus 工具。</p>
 <h2 id="Verifying-the-Integration" class="common-anchor-header">验证集成<button data-href="#Verifying-the-Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,7 @@ title: MCP + Milvus：连接人工智能与向量数据库
 <li>转到<code translate="no">Cursor Settings</code> →<code translate="no">Features</code> →<code translate="no">MCP</code> 。</li>
 <li>确认<code translate="no">&quot;Milvus&quot;</code> 出现在 MCP 服务器列表中。</li>
 <li>检查是否列出了 Milvus 工具（如<code translate="no">milvus_list_collections</code>,<code translate="no">milvus_vector_search</code> ）。</li>
-<li>如果出现错误，请参阅下面的 "<strong>故障排除 "</strong>部分。</li>
+<li>如果出现错误，请参阅下面的<strong>故障排除</strong>部分。</li>
 </ol>
 <h2 id="MCP-Server-Tools-for-Milvus" class="common-anchor-header">Milvus 的 MCP 服务器工具<button data-href="#MCP-Server-Tools-for-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

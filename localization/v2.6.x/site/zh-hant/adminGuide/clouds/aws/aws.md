@@ -47,7 +47,7 @@ summary: 瞭解如何在 AWS EC2 上部署 Milvus 群集。
 <h3 id="Prepare-configuration" class="common-anchor-header">準備配置</h3><p>您可以從<a href="https://drive.google.com/file/d/1jLQV0YkseOVj5X0exj17x9dWQjLCP7-1/view">Google Drive</a> 下載範本配置檔案。</p>
 <ul>
 <li><p><code translate="no">main.tf</code></p>
-<p>此檔案包含配置 Milvus 集群的配置。</p></li>
+<p>此檔案包含用於配置 Milvus 集群的配置。</p></li>
 <li><p><code translate="no">variables.tf</code></p>
 <p>此檔案可快速編輯用於設定或更新 Milvus 叢集的變數。</p></li>
 <li><p><code translate="no">output.tf</code> 以及<code translate="no">inventory.tmpl</code></p>

@@ -87,7 +87,7 @@ summary: 'Erfahren Sie, wie Sie Objektspeicher mit Milvus Operator konfigurieren
   <span class="hljs-attr">accesskey:</span> <span class="hljs-string">&lt;my-access-key&gt;</span>
   <span class="hljs-attr">secretkey:</span> <span class="hljs-string">&lt;my-secret-key&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anschließend können Sie einen AWS S3-Bucket als externen Objektspeicher konfigurieren:</p>
+<p>Dann können Sie einen AWS S3-Bucket als externen Objektspeicher konfigurieren:</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-comment"># # change the &lt;parameters&gt; to match your environment</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -125,7 +125,7 @@ summary: 'Erfahren Sie, wie Sie Objektspeicher mit Milvus Operator konfigurieren
   <span class="hljs-attr">annotations:</span>
     <span class="hljs-attr">eks.amazonaws.com/role-arn:</span> <span class="hljs-string">&lt;my-role-arn&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald alles eingerichtet ist, verweisen Sie in der YAML-Vorlagendatei auf das obige <code translate="no">ServiceAccount</code> und setzen <code translate="no">spec.config.minio.useIAM</code> auf <code translate="no">true</code>, um AssumeRole zu aktivieren.</p>
+<p>Wenn Sie alles vorbereitet haben, verweisen Sie in der YAML-Vorlagendatei auf das obige <code translate="no">ServiceAccount</code> und setzen <code translate="no">spec.config.minio.useIAM</code> auf <code translate="no">true</code>, um AssumeRole zu aktivieren.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

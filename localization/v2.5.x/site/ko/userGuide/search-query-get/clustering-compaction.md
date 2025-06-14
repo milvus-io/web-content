@@ -47,7 +47,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>클러스터링 압축</span> </span></p>
-<p>Milvus는 <strong>PartitionStats를</strong> 참조로 사용하여 클러스터링 키 값이 포함된 검색/쿼리 요청을 수신하면 관련 없는 데이터를 정리하고 해당 값에 매핑되는 세그먼트 내에서 검색 범위를 제한하여 검색 성능을 개선할 수 있습니다. 성능 향상에 대한 자세한 내용은 <a href="/docs/ko/clustering-compaction.md#Benchmark-Test">벤치마크 테스트를</a> 참조하세요.</p>
+<p>Milvus는 <strong>PartitionStats를</strong> 참조로 사용하여 클러스터링 키 값을 포함하는 검색/쿼리 요청을 수신하면 관련 없는 데이터를 정리하고 해당 값에 매핑되는 세그먼트 내에서 검색 범위를 제한하여 검색 성능을 개선할 수 있습니다. 성능 향상에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/clustering-compaction.md#Benchmark-Test">벤치마크 테스트를</a> 참조하세요.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">클러스터링 압축 사용<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>위의 변경 사항을 Milvus 클러스터에 적용하려면 <a href="/docs/ko/configure-helm.md#Configure-Milvus-via-configuration-file">헬름으로 Milvus 구성하기</a> 및 Milvus <a href="/docs/ko/configure_operator.md">오퍼레이터로 Milvus 구성하기의</a> 단계를 따르세요.</p>
+<p>위의 변경 사항을 Milvus 클러스터에 적용하려면 <a href="/docs/ko/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">헬름으로 Milvus 구성하기</a> 및 Milvus <a href="/docs/ko/v2.5.x/configure_operator.md">오퍼레이터로 Milvus 구성하기의</a> 단계를 따르세요.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">수집 구성</h3><p>특정 컬렉션에서 클러스터링 압축을 하려면 컬렉션에서 스칼라 필드를 클러스터링 키로 선택해야 합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -401,7 +401,7 @@ System.out.println(stateResp.getState());
      <td><p>431.41</p></td>
    </tr>
 </table>
-<p>검색 필터에서 검색 범위가 좁아질수록 프룬 비율이 증가합니다. 이는 검색 과정에서 더 많은 엔티티가 생략된다는 의미입니다. 첫 번째 행과 마지막 행의 통계를 비교하면 클러스터링 압축이 없는 검색은 전체 컬렉션을 스캔해야 한다는 것을 알 수 있습니다. 반면에 특정 키를 사용해 클러스터링 압축을 적용한 검색은 최대 25배까지 개선할 수 있습니다.</p>
+<p>검색 필터에서 검색 범위가 좁아질수록 프룬 비율이 증가합니다. 이는 검색 과정에서 더 많은 엔티티가 생략된다는 의미입니다. 첫 번째 행과 마지막 행의 통계를 비교하면 클러스터링 압축이 없는 검색은 전체 컬렉션을 스캔해야 한다는 것을 알 수 있습니다. 반면, 특정 키를 사용해 클러스터링 압축을 적용한 검색은 최대 25배까지 개선될 수 있습니다.</p>
 <h2 id="Best-Practices" class="common-anchor-header">모범 사례<button data-href="#Best-Practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

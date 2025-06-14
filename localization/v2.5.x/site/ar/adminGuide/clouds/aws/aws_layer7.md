@@ -6,6 +6,7 @@ summary: >-
   تعرف على كيفية نشر مجموعة Milvus العنقودية خلف موازن تحميل من الطبقة السابعة
   على AWS.
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">إعداد موازن تحميل من الطبقة 7 لميلفوس على AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,9 +25,9 @@ summary: >-
     </button></h1><p>عند مقارنته بموازن تحميل الطبقة 4، يوفر موازن التحميل من الطبقة 7 إمكانات ذكية لموازنة التحميل والتخزين المؤقت، وهو خيار رائع للخدمات السحابية الأصلية.</p>
 <p>يرشدك هذا الدليل إلى كيفية إعداد موازن تحميل من الطبقة 7 لمجموعة Milvus التي تعمل بالفعل خلف موازن تحميل من الطبقة 4.</p>
 <h3 id="Before-your-start" class="common-anchor-header">قبل البدء</h3><ul>
-<li>لقد قمت <a href="/docs/ar/eks.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة 4 على AWS</a>.</li>
+<li>لقد قمت <a href="/docs/ar/v2.5.x/eks.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة 4 على AWS</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">تعديل تكوينات Milvus</h3><p>يفترض هذا الدليل أنك قمت بالفعل <a href="/docs/ar/eks.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة 4 على AWS</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">تعديل تكوينات Milvus</h3><p>يفترض هذا الدليل أنك قمت بالفعل <a href="/docs/ar/v2.5.x/eks.md">بنشر مجموعة Milvus خلف موازن تحميل من الطبقة 4 على AWS</a>.</p>
 <p>قبل إعداد موازن تحميل من الطبقة السابعة لمجموعة Milvus العنقودية هذه، قم بتشغيل الأمر التالي لإزالة موازن تحميل الطبقة الرابعة.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -50,19 +51,18 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: <span class="hljs-string">&quot;arn:aws:acm:region:account-id:certificate/certificate-id&quot;</span>
 
 spec:
-  ingressClassName: alb
-  rules:
-    - host: milvus-demo.milvus.io
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: milvus-demo
-              port:
-                number: 19530
+ingressClassName: alb
+rules: - host: milvus-demo.milvus.io
+http:
+paths: - path: /
+pathType: Prefix
+backend:
+service:
+name: milvus-demo
+port:
+number: 19530
 <button class="copy-code-btn"></button></code></pre>
+
 <p>ثم يمكنك إنشاء الدخول عن طريق تطبيق الملف على مجموعة EKS الخاصة بك.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -101,6 +101,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
 
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;milvus-demo.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li>يجب استبدال <strong>المضيف</strong> <strong>واسم_الخادم</strong> باسمك.</li>

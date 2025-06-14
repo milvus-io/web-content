@@ -3,6 +3,7 @@ id: knowhere.md
 summary: 在 Milvus 瞭解 Knowhere。
 title: Knowhere
 ---
+
 <h1 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,8 +75,8 @@ title: Knowhere
     </button></h2><p>以下是 Knowhere 相對於 Faiss 的優勢。</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">支援 BitsetView</h4><p>Milvus 引入了一個 bitset 機制來實現 「軟刪除」。軟刪除的向量仍然存在於資料庫中，但不會在向量相似性搜索或查詢中被計算出來。</p>
 <p>位元集中的每個位元對應一個索引向量。如果一個向量在 bitset 中被標記為 "1"，就表示這個向量是軟刪除的，在向量搜尋時不會涉及。bitset 參數應用於 Knowhere 中所有外露的 Faiss 索引查詢 API，包括 CPU 和 GPU 索引。</p>
-<p>關於 bitset 機制的更多資訊，請參閱<a href="/docs/zh-hant/bitset.md">bitset</a>。</p>
-<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">索引二進位向量時支援多種相似度指標</h4><p>Knowhere 支援<a href="/docs/zh-hant/metric.md#Hamming-distance">Hamming</a>、<a href="/docs/zh-hant/metric.md#Jaccard-distance">Jaccard</a>、<a href="/docs/zh-hant/metric.md#Tanimoto-distance">Tanimoto</a>、<a href="/docs/zh-hant/metric.md#Superstructure">Superstructure</a> 和<a href="/docs/zh-hant/metric.md#Substructure">Substructure</a>。Jaccard 和 Tanimoto 可用於測量兩個樣本集之間的相似性，而 Superstructure 和 Substructure 則可用於測量化學結構的相似性。</p>
+<p>關於 bitset 機制的更多資訊，請參閱<a href="/docs/zh-hant/v2.5.x/bitset.md">bitset</a>。</p>
+<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">索引二進位向量時支援多種相似度指標</h4><p>Knowhere 支援<a href="/docs/zh-hant/v2.5.x/metric.md#Hamming-distance">Hamming</a>、<a href="/docs/zh-hant/v2.5.x/metric.md#Jaccard-distance">Jaccard</a>、<a href="/docs/zh-hant/v2.5.x/metric.md#Tanimoto-distance">Tanimoto</a>、<a href="/docs/zh-hant/v2.5.x/metric.md#Superstructure">Superstructure</a> 和<a href="/docs/zh-hant/v2.5.x/metric.md#Substructure">Substructure</a>。Jaccard 和 Tanimoto 可用於測量兩個樣本集之間的相似性，而 Superstructure 和 Substructure 則可用於測量化學結構的相似性。</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">支援 AVX512 指令集</h4><p>除了 Faiss 已經支援的<a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>、<a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a>和<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a> 指令集之外，Knowhere 也支援<a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a> 指令集，相較於 AVX2 指令集，<a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a> 指令集可以<a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">提高索引建立和查詢的效能 20% 到 30%</a>。</p>
 <h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">自動選擇SIMD指令</h4><p>Knowhere 支援在任何 CPU 處理器上 (包括內部平台與雲端平台) 自動調用適合的 SIMD 指令 (例如 SIMD SSE、AVX、AVX2 與 AVX512)，因此使用者不需要在編譯時手動指定 SIMD 標誌 (例如 "-msse4")。</p>
 <p>Knowhere 是透過重構 Faiss 的程式碼來建立的。依賴 SIMD 加速的常見函數 (例如相似性運算) 會被分解出來。然後，每個函式都會有四個版本 (即 SSE、AVX、AVX2、AVX512) 來實作，並各自放入獨立的原始碼檔案。然後，這些原始碼檔案再以相對應的 SIMD 標誌單獨編譯。因此，在運行時，Knowhere 可以根據當前的 CPU 標誌自動選擇最適合的 SIMD 指令，然後使用掛鉤（hooking）連結正確的函式指針。</p>
@@ -173,7 +174,7 @@ title: Knowhere
       </svg>
     </button></h2><p>在學習了 Knowhere 如何在 Milvus 中運作之後，你可能還想</p>
 <ul>
-<li><p>了解<a href="/docs/zh-hant/index.md">Milvus 支援的各種索引類型</a>。</p></li>
-<li><p>了解<a href="/docs/zh-hant/bitset.md">bitset 機制</a>。</p></li>
-<li><p>瞭解 Milvus<a href="/docs/zh-hant/data_processing.md">如何處理資料</a>。</p></li>
+<li><p>了解<a href="/docs/zh-hant/v2.5.x/index.md">Milvus 支援的各種索引類型</a>。</p></li>
+<li><p>了解<a href="/docs/zh-hant/v2.5.x/bitset.md">bitset 機制</a>。</p></li>
+<li><p>瞭解 Milvus<a href="/docs/zh-hant/v2.5.x/data_processing.md">如何處理資料</a>。</p></li>
 </ul>

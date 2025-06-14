@@ -5,6 +5,7 @@ summary: >-
   сервисах Snowpark.
 title: Milvus на контейнерных сервисах Snowpark
 ---
+
 <h1 id="Milvus-on-Snowpark-Container-Services" class="common-anchor-header">Milvus на контейнерных сервисах Snowpark<button data-href="#Milvus-on-Snowpark-Container-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,14 +78,15 @@ CREATE ROLE MILVUS_ROLE;
 
 USE ROLE USERADMIN;
 CREATE USER milvus_user
-  PASSWORD=<span class="hljs-string">&#x27;milvususerok&#x27;</span>
-  DEFAULT_ROLE = <span class="hljs-type">MILVUS_ROLE</span>
-  <span class="hljs-variable">DEFAULT_SECONDARY_ROLES</span> <span class="hljs-operator">=</span> (<span class="hljs-string">&#x27;ALL&#x27;</span>)
-  MUST_CHANGE_PASSWORD = FALSE;
-  
+PASSWORD=<span class="hljs-string">&#x27;milvususerok&#x27;</span>
+DEFAULT_ROLE = <span class="hljs-type">MILVUS_ROLE</span>
+<span class="hljs-variable">DEFAULT_SECONDARY_ROLES</span> <span class="hljs-operator">=</span> (<span class="hljs-string">&#x27;ALL&#x27;</span>)
+MUST_CHANGE_PASSWORD = FALSE;
+
 USE ROLE SECURITYADMIN;
 GRANT ROLE MILVUS_ROLE TO USER milvus_user;
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="3-Create-data-storage-configuration" class="common-anchor-header">3. Создание конфигурации хранилища данных</h3><ul>
 <li><p>Создайте хранилище и базу данных</p>
 <pre><code translate="no" class="language-sql">USE ROLE SYSADMIN;
@@ -102,6 +104,7 @@ CREATE OR REPLACE STAGE YAML_STAGE;
 CREATE OR REPLACE STAGE <span class="hljs-type">DATA</span> <span class="hljs-variable">ENCRYPTION</span> <span class="hljs-operator">=</span> (TYPE = <span class="hljs-string">&#x27;SNOWFLAKE_SSE&#x27;</span>);
 CREATE OR REPLACE STAGE <span class="hljs-type">FILES</span> <span class="hljs-variable">ENCRYPTION</span> <span class="hljs-operator">=</span> (TYPE = <span class="hljs-string">&#x27;SNOWFLAKE_SSE&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Предоставьте привилегии роли</p>
 <pre><code translate="no" class="language-sql">USE ROLE SECURITYADMIN;
 GRANT ALL PRIVILEGES ON DATABASE MILVUS_DEMO TO MILVUS_ROLE;
@@ -124,6 +127,7 @@ ENABLED=TRUE;
 
 GRANT USAGE ON INTEGRATION allow_all_eai TO ROLE SYSADMIN;
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h3 id="4-Create-images" class="common-anchor-header">4. Создание образов</h3><p>Образ, используемый Milvus, должен быть создан локально, а затем загружен пользователем. Для соответствующей настройки образа обратитесь к <a href="https://github.com/dald001/milvus_on_spcs">этому репозиторию</a>. После клонирования кода перейдите в корневой каталог проекта и подготовьтесь к сборке образа.</p>
 <ul>
@@ -147,8 +151,9 @@ docker tag jupyter <span class="hljs-variable">${instance_name}</span>.registry.
 <pre><code translate="no" class="language-shell">docker images | grep milvus
 
 <span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/milvus    latest        3721bbb8f62b   2 days ago    2.95GB
-<span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter   latest        20633f5bcadf   2 days ago    2GB
+<span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter latest 20633f5bcadf 2 days ago 2GB
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Отправить образы в SPCS</p>
 <pre><code translate="no" class="language-shell">docker push <span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/milvus
 docker push <span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter
@@ -195,29 +200,31 @@ USE DATABASE MILVUS_DEMO;
 USE SCHEMA PUBLIC;
 
 CREATE SERVICE MILVUS
-  IN COMPUTE POOL MILVUS_COMPUTE_POOL 
-  FROM <span class="hljs-meta">@YAML_STAGE</span>
-  SPEC=<span class="hljs-string">&#x27;milvus.yaml&#x27;</span>
-  MIN_INSTANCES=<span class="hljs-number">1</span>
-  MAX_INSTANCES=<span class="hljs-number">1</span>;
+IN COMPUTE POOL MILVUS_COMPUTE_POOL
+FROM <span class="hljs-meta">@YAML_STAGE</span>
+SPEC=<span class="hljs-string">&#x27;milvus.yaml&#x27;</span>
+MIN_INSTANCES=<span class="hljs-number">1</span>
+MAX_INSTANCES=<span class="hljs-number">1</span>;
 
 CREATE SERVICE JUPYTER
-  IN COMPUTE POOL JUPYTER_COMPUTE_POOL 
-  FROM <span class="hljs-meta">@YAML_STAGE</span>
-  SPEC=<span class="hljs-string">&#x27;jupyter.yaml&#x27;</span>
-  MIN_INSTANCES=<span class="hljs-number">1</span>
-  MAX_INSTANCES=<span class="hljs-number">1</span>;
+IN COMPUTE POOL JUPYTER_COMPUTE_POOL
+FROM <span class="hljs-meta">@YAML_STAGE</span>
+SPEC=<span class="hljs-string">&#x27;jupyter.yaml&#x27;</span>
+MIN_INSTANCES=<span class="hljs-number">1</span>
+MAX_INSTANCES=<span class="hljs-number">1</span>;
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Службы также можно просматривать через <code translate="no">SHOW SERVICES;</code>.</p>
 <pre><code translate="no" class="language-sql">SHOW SERVICES;
 
 +---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------
-| name    | database_name | schema_name | owner    | compute_pool         | dns_name                                               | ......
+| name | database_name | schema_name | owner | compute_pool | dns_name | ......
 |---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------
-| JUPYTER | MILVUS_DEMO   | PUBLIC      | SYSADMIN | JUPYTER_COMPUTE_POOL | jupyter.<span class="hljs-keyword">public</span>.milvus-demo.snowflakecomputing.<span class="hljs-keyword">internal</span> | ...... 
-| MILVUS  | MILVUS_DEMO   | PUBLIC      | SYSADMIN | MILVUS_COMPUTE_POOL  | milvus.<span class="hljs-keyword">public</span>.milvus-demo.snowflakecomputing.<span class="hljs-keyword">internal</span>  | ......
+| JUPYTER | MILVUS_DEMO | PUBLIC | SYSADMIN | JUPYTER_COMPUTE_POOL | jupyter.<span class="hljs-keyword">public</span>.milvus-demo.snowflakecomputing.<span class="hljs-keyword">internal</span> | ......
+| MILVUS | MILVUS_DEMO | PUBLIC | SYSADMIN | MILVUS_COMPUTE_POOL | milvus.<span class="hljs-keyword">public</span>.milvus-demo.snowflakecomputing.<span class="hljs-keyword">internal</span> | ......
 +---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Если у вас возникли проблемы с запуском службы, вы можете просмотреть информацию о службе через <code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code>.</p>
 <p>
   
@@ -269,7 +276,7 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>Получение и отображение наиболее релевантных результатов</span> </span></p>
-<p>Для получения дополнительной информации об использовании клиента Milvus вы можете обратиться к разделу <a href="/docs/ru/quickstart.md">Milvus Doc</a>.</p>
+<p>Для получения дополнительной информации об использовании клиента Milvus вы можете обратиться к разделу <a href="/docs/ru/v2.5.x/quickstart.md">Milvus Doc</a>.</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7. Очистка<button data-href="#7-Clean-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -304,6 +311,7 @@ USE ROLE ACCOUNTADMIN;
 DROP ROLE MILVUS_ROLE;
 DROP SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH;
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="About-Milvus" class="common-anchor-header">О Milvus<button data-href="#About-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -319,4 +327,4 @@ DROP SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Для получения дополнительной информации о Milvus вы можете начать с <a href="/docs/ru/overview.md">введения</a> и <a href="/docs/ru/quickstart.md">быстрого запуска</a> <a href="/docs/ru/overview.md">Milvus</a>. Конечно, есть более подробное введение в API, ссылки на версии для <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">Python</a> и <a href="https://milvus.io/api-reference/java/v2.3.x/About.md">Java</a>, а также информация о <a href="https://milvus.io/docs/embeddings.md">встраиваниях</a> и <a href="https://milvus.io/docs/integrate_with_openai.md">интеграциях</a> для справки.</p>
+    </button></h2><p>Для получения дополнительной информации о Milvus вы можете начать с <a href="/docs/ru/v2.5.x/overview.md">введения</a> и <a href="/docs/ru/v2.5.x/quickstart.md">быстрого запуска</a> <a href="/docs/ru/v2.5.x/overview.md">Milvus</a>. Конечно, есть более подробное введение в API, ссылки на версии для <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">Python</a> и <a href="https://milvus.io/api-reference/java/v2.3.x/About.md">Java</a>, а также информация о <a href="https://milvus.io/docs/embeddings.md">встраиваниях</a> и <a href="https://milvus.io/docs/integrate_with_openai.md">интеграциях</a> для справки.</p>

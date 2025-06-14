@@ -64,16 +64,16 @@ title: MilvusとMindsDBの統合
 <p>接続を確立するためのオプションの引数は以下の通り：</p>
 <p>これらは<code translate="no">SELECT</code> クエリに使用される：</p>
 <ul>
-<li><code translate="no">search_default_limit</code>select ステートメントで渡されるデフォルトの制限値（default=100）</li>
+<li><code translate="no">search_default_limit</code>select 文で渡されるデフォルトの制限値 (default=100)</li>
 <li><code translate="no">search_metric_type</code>検索に使用するメトリックタイプ (default="L2")</li>
-<li><code translate="no">search_ignore_growing</code>類似性検索時に成長するセグメントを無視するかどうか（default=False）。</li>
+<li><code translate="no">search_ignore_growing</code>類似検索時に成長するセグメントを無視するかどうか（default=False）。</li>
 <li><code translate="no">search_params</code> <code translate="no">search_metric_type</code> 固有のもの (default={"nprobe": 10})</li>
 </ul>
 <p>これらは<code translate="no">CREATE</code> クエリで使用されます：</p>
 <ul>
 <li><code translate="no">create_auto_id</code>IDを持たないレコードを挿入する際にidを自動生成するかどうか（default=False）。</li>
 <li><code translate="no">create_id_max_len</code>テーブル作成時のidフィールドの最大長（default=64）</li>
-<li><code translate="no">create_embedding_dim</code>テーブル作成時の埋め込みディメンジョン (default=8)</li>
+<li><code translate="no">create_embedding_dim</code>テーブル作成時の埋め込みディメンジョン（default=8）</li>
 <li><code translate="no">create_dynamic_field</code>作成するテーブルに動的フィールドを持たせるかどうか (default=True)</li>
 <li><code translate="no">create_content_max_len</code>コンテンツ・カラムの最大長 (default=200)</li>
 <li><code translate="no">create_content_default_value</code>コンテンツ・カラムのデフォルト値 (default='')</li>

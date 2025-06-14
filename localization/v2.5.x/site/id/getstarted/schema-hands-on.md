@@ -8,6 +8,7 @@ summary: >-
   model data yang dirancang dengan cermat untuk mengatur, mengindeks, dan
   mengambil informasi.
 ---
+
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">Desain Model Data untuk Pencarian<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,8 +93,8 @@ summary: >-
       </svg>
     </button></h2><p>Di Milvus, model data diekspresikan melalui skema koleksi. Merancang bidang yang tepat dalam skema koleksi adalah kunci untuk memungkinkan pengambilan yang efektif. Setiap bidang mendefinisikan jenis data tertentu yang disimpan dalam koleksi dan memainkan peran yang berbeda dalam proses pencarian. Pada tingkat tinggi, Milvus mendukung dua jenis field utama: <strong>field vektor</strong> dan <strong>field skalar</strong>.</p>
 <p>Sekarang, Anda dapat memetakan model data Anda ke dalam skema bidang, termasuk vektor dan bidang skalar tambahan. Pastikan bahwa setiap field berkorelasi dengan atribut dari model data Anda, terutama memperhatikan tipe vektor (dense atau spase) dan dimensinya.</p>
-<h3 id="Vector-Field" class="common-anchor-header">Bidang Vektor</h3><p>Bidang vektor menyimpan penyematan untuk tipe data yang tidak terstruktur seperti teks, gambar, dan audio. Penyematan ini dapat berupa padat, jarang, atau biner, tergantung pada tipe data dan metode pengambilan yang digunakan. Biasanya, vektor padat digunakan untuk pencarian semantik, sedangkan vektor jarang lebih cocok untuk pencocokan teks atau leksikal. Vektor biner berguna ketika penyimpanan dan sumber daya komputasi terbatas. Sebuah koleksi dapat berisi beberapa bidang vektor untuk memungkinkan strategi pencarian multi-modal atau hibrida. Untuk panduan terperinci tentang topik ini, silakan lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida Multi-Vektor</a>.</p>
-<p>Milvus mendukung tipe data vektor: <code translate="no">FLOAT_VECTOR</code> untuk <a href="/docs/id/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> untuk <a href="/docs/id/sparse_vector.md">Sparse Vector</a>, dan <code translate="no">BINARY_VECTOR</code> untuk <a href="/docs/id/binary-vector.md">Binary Vector</a></p>
+<h3 id="Vector-Field" class="common-anchor-header">Bidang Vektor</h3><p>Bidang vektor menyimpan penyematan untuk tipe data yang tidak terstruktur seperti teks, gambar, dan audio. Penyematan ini dapat berupa padat, jarang, atau biner, tergantung pada tipe data dan metode pengambilan yang digunakan. Biasanya, vektor padat digunakan untuk pencarian semantik, sedangkan vektor jarang lebih cocok untuk pencocokan teks atau leksikal. Vektor biner berguna ketika penyimpanan dan sumber daya komputasi terbatas. Sebuah koleksi dapat berisi beberapa bidang vektor untuk memungkinkan strategi pencarian multi-modal atau hibrida. Untuk panduan terperinci tentang topik ini, silakan lihat <a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian Hibrida Multi-Vektor</a>.</p>
+<p>Milvus mendukung tipe data vektor: <code translate="no">FLOAT_VECTOR</code> untuk <a href="/docs/id/v2.5.x/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> untuk <a href="/docs/id/v2.5.x/sparse_vector.md">Sparse Vector</a>, dan <code translate="no">BINARY_VECTOR</code> untuk <a href="/docs/id/v2.5.x/binary-vector.md">Binary Vector</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">Bidang Skalar</h3><p>Bidang skalar menyimpan nilai primitif dan terstruktur - biasanya disebut sebagai metadata - seperti angka, string, atau tanggal. Nilai-nilai ini dapat dikembalikan bersama hasil pencarian vektor dan sangat penting untuk pemfilteran dan penyortiran. Nilai ini memungkinkan Anda mempersempit hasil pencarian berdasarkan atribut tertentu, seperti membatasi dokumen pada kategori tertentu atau rentang waktu tertentu.</p>
 <p>Milvus mendukung tipe skalar seperti <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, dan <code translate="no">ARRAY</code> untuk menyimpan dan memfilter data non-vektor. Tipe-tipe ini meningkatkan ketepatan dan penyesuaian operasi pencarian.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Memanfaatkan Fitur Canggih dalam Desain Skema<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
@@ -113,13 +114,13 @@ summary: >-
       </svg>
     </button></h2><p>Ketika mendesain skema, hanya memetakan data Anda ke bidang menggunakan tipe data yang didukung tidaklah cukup. Sangat penting untuk memiliki pemahaman menyeluruh tentang hubungan antar bidang dan strategi yang tersedia untuk konfigurasi. Dengan mengingat fitur-fitur utama selama fase desain, memastikan bahwa skema tidak hanya memenuhi persyaratan penanganan data langsung, tetapi juga dapat diskalakan dan diadaptasi untuk kebutuhan di masa depan. Dengan mengintegrasikan fitur-fitur ini secara hati-hati, Anda dapat membangun arsitektur data yang kuat yang memaksimalkan kemampuan Milvus dan mendukung strategi dan tujuan data Anda yang lebih luas. Berikut ini adalah ikhtisar fitur-fitur utama yang membuat skema koleksi:</p>
 <h3 id="Primary-Key" class="common-anchor-header">Kunci Utama</h3><p>Field kunci utama adalah komponen fundamental dari skema, karena secara unik mengidentifikasi setiap entitas dalam koleksi. Mendefinisikan kunci primer adalah wajib. Ini harus berupa bidang skalar dengan tipe integer atau string dan ditandai sebagai <code translate="no">is_primary=True</code>. Secara opsional, Anda dapat mengaktifkan <code translate="no">auto_id</code> untuk kunci primer, yang secara otomatis diberi nomor integer yang secara monolitik bertambah seiring dengan bertambahnya data yang dimasukkan ke dalam koleksi.</p>
-<p>Untuk rincian lebih lanjut, lihat <a href="/docs/id/primary-field.md">Bidang Utama &amp; AutoID</a>.</p>
+<p>Untuk rincian lebih lanjut, lihat <a href="/docs/id/v2.5.x/primary-field.md">Bidang Utama &amp; AutoID</a>.</p>
 <h3 id="Partitioning" class="common-anchor-header">Pemilahan</h3><p>Untuk mempercepat pencarian, Anda dapat mengaktifkan partisi secara opsional. Dengan menetapkan bidang skalar tertentu untuk pemartisian dan menentukan kriteria pemfilteran berdasarkan bidang ini selama pencarian, cakupan pencarian dapat secara efektif dibatasi hanya pada partisi yang relevan. Metode ini secara signifikan meningkatkan efisiensi operasi pengambilan dengan mengurangi domain pencarian.</p>
-<p>Untuk rincian lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p>
+<p>Untuk rincian lebih lanjut, lihat <a href="/docs/id/v2.5.x/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p>
 <h3 id="Analyzer" class="common-anchor-header">Penganalisis</h3><p>Penganalisis adalah alat penting untuk memproses dan mengubah data teks. Fungsi utamanya adalah mengubah teks mentah menjadi token dan menyusunnya untuk pengindeksan dan pengambilan. Hal ini dilakukan dengan melakukan tokenisasi string, membuang kata-kata yang tidak perlu, dan membendung kata-kata individual menjadi token.</p>
-<p>Untuk detail lebih lanjut, lihat <a href="/docs/id/analyzer-overview.md">Tinjauan Umum Penganalisis</a>.</p>
+<p>Untuk detail lebih lanjut, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md">Tinjauan Umum Penganalisis</a>.</p>
 <h3 id="Function" class="common-anchor-header">Fungsi</h3><p>Milvus memungkinkan Anda untuk mendefinisikan fungsi bawaan sebagai bagian dari skema untuk secara otomatis mendapatkan bidang tertentu. Sebagai contoh, Anda dapat menambahkan fungsi BM25 bawaan yang menghasilkan vektor jarang dari bidang <code translate="no">VARCHAR</code> untuk mendukung pencarian teks lengkap. Bidang yang diturunkan dari fungsi ini menyederhanakan prapemrosesan dan memastikan bahwa koleksi tetap berdiri sendiri dan siap untuk kueri.</p>
-<p>Untuk rincian lebih lanjut, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
+<p>Untuk rincian lebih lanjut, lihat <a href="/docs/id/v2.5.x/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">Contoh Dunia Nyata<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +150,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>dibuat secara otomatis dengan diaktifkan <code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/id/get-and-scalar-query.md">Kueri menggunakan Get</a></p></td>
+     <td><p><a href="/docs/id/v2.5.x/get-and-scalar-query.md">Kueri menggunakan Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -158,7 +159,7 @@ summary: >-
    <tr>
      <td><p>judul (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>judul artikel</p></td>
-     <td><p><a href="/docs/id/keyword-match.md">Pencocokan Teks</a></p></td>
+     <td><p><a href="/docs/id/v2.5.x/keyword-match.md">Pencocokan Teks</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -167,7 +168,7 @@ summary: >-
    <tr>
      <td><p>stempel waktu (<code translate="no">INT32</code>)</p></td>
      <td><p>tanggal penerbitan</p></td>
-     <td><p><a href="/docs/id/use-partition-key.md">Filter berdasarkan Kunci Partisi</a></p></td>
+     <td><p><a href="/docs/id/v2.5.x/use-partition-key.md">Filter berdasarkan Kunci Partisi</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -176,7 +177,7 @@ summary: >-
    <tr>
      <td><p>teks (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>teks mentah dari artikel</p></td>
-     <td><p><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida Multi-Vektor</a></p></td>
+     <td><p><a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian Hibrida Multi-Vektor</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -201,7 +202,7 @@ summary: >-
      <td><p>keluaran</p></td>
    </tr>
 </table>
-<p>Untuk informasi lebih lanjut tentang skema dan panduan terperinci tentang cara menambahkan berbagai jenis bidang, silakan lihat <a href="/docs/id/schema.md">Penjelasan Skema</a>.</p>
+<p>Untuk informasi lebih lanjut tentang skema dan panduan terperinci tentang cara menambahkan berbagai jenis bidang, silakan lihat <a href="/docs/id/v2.5.x/schema.md">Penjelasan Skema</a>.</p>
 <h3 id="Initialize-schema" class="common-anchor-header">Menginisialisasi skema</h3><p>Untuk memulai, kita perlu membuat skema kosong. Langkah ini menetapkan struktur dasar untuk mendefinisikan model data.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -209,6 +210,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -245,6 +247,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, d
 schema.add_field(field_name=<span class="hljs-string">&quot;text_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
@@ -407,14 +410,15 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
+function_type=FunctionType.BM25,
 )
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -480,6 +484,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/id/create-collection.md">Membuat Koleksi</a></p></li>
-<li><p><a href="/docs/id/alter-collection-field.md">Mengubah Bidang Koleksi</a></p></li>
+<li><p><a href="/docs/id/v2.5.x/create-collection.md">Membuat Koleksi</a></p></li>
+<li><p><a href="/docs/id/v2.5.x/alter-collection-field.md">Mengubah Bidang Koleksi</a></p></li>
 </ul>

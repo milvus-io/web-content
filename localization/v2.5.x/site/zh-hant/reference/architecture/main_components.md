@@ -3,6 +3,7 @@ id: main_components.md
 summary: 了解 Milvus 單機版和群集版的主要元件。
 title: 主要元件
 ---
+
 <h1 id="Main-Components" class="common-anchor-header">主要元件<button data-href="#Main-Components" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,5 +95,5 @@ title: 主要元件
         ></path>
       </svg>
     </button></h2><ul>
-<li>閱讀<a href="/docs/zh-hant/four_layers.md">Computing/Storage Disaggregation</a>了解 Milvus 的機制與設計原理。</li>
+<li>閱讀<a href="/docs/zh-hant/v2.5.x/four_layers.md">Computing/Storage Disaggregation</a>了解 Milvus 的機制與設計原理。</li>
 </ul>

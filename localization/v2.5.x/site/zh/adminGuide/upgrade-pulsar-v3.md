@@ -4,6 +4,7 @@ related_key: upgrade pulsar v3
 summary: 了解如何在 Milvus 中将 Pulsar 从 V2 升级到 V3，以便使用最新版本的 Milvus v2.5.x。
 title: 将 Milvus 的脉冲星从 V2 升级到 V3
 ---
+
 <h1 id="Upgrading-Pulsar-​" class="common-anchor-header">升级 Pulsar<button data-href="#Upgrading-Pulsar-​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: 将 Milvus 的脉冲星从 V2 升级到 V3
       </svg>
     </button></h1><p>本文介绍了将 Pulsar 组件从 V2 升级到 V3 的过程，如果您已经部署了使用 Pulsar V2 的 Milvus。</p>
 <p>自 Milvus v2.5 起，<strong>milvus-helm</strong>和<strong>milvus-operator</strong>将默认使用 Pulsar V3，以修复一些错误和安全漏洞。 虽然 Milvus 2.5 与 Pulsar 2.x 兼容，但升级到 Pulsar V3 是可选的。为了提高稳定性和性能，我们建议升级到 Pulsar V3。</p>
-<p>如果你希望使用 Pulsar V2 与 Milvus v2.5.x，请阅读<a href="/docs/zh/use-pulsar-v2.md">Use Pulsar V2 with Milvus v2.5.x</a>。</p>
+<p>如果你希望使用 Pulsar V2 与 Milvus v2.5.x，请阅读<a href="/docs/zh/v2.5.x/use-pulsar-v2.md">Use Pulsar V2 with Milvus v2.5.x</a>。</p>
 <div class="alert note">
 <ol>
 <li><p>升级过程需要短暂的服务中断（通常需要几分钟到十多分钟，视数据量而定）。</p></li>
@@ -99,10 +100,12 @@ title: 将 Milvus 的脉冲星从 V2 升级到 V3
 Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">9091</span> -&gt; <span class="hljs-number">9091</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>保存 Pid 以备日后清理。</p>
 <pre><code translate="no" class="language-yaml">pid=8116​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>触发将所有插入数据从 Pulsar 持久化到 Ojbect 存储的操作。</p>
 <pre><code translate="no" class="language-bash">curl 127.0.0.1:9091/api/v1/collections \​
 |curl 127.0.0.1:9091/api/v1/persist -d @/dev/stdin\​
@@ -111,6 +114,7 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <span class="hljs-built_in">cat</span> flushing_segments.json​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出。</p>
 <pre><code translate="no" class="language-yaml">{​
   <span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
@@ -121,22 +125,27 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 }​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>检查刷新的所有段。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> flushing_segments.json|  curl -X GET 127.0.0.1:9091/api/v1/persist/state -d @/dev/stdin ​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>完成后，你会看到以下输出</p>
 <pre><code translate="no" class="language-json">{<span class="hljs-string">&quot;status&quot;</span>:{},<span class="hljs-string">&quot;flushed&quot;</span>:<span class="hljs-literal">true</span>}​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>停止后台<code translate="no">kubectl port-forward</code> 进程</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-built_in">kill</span> <span class="hljs-variable">$pid</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出。</p>
 <pre><code translate="no" class="language-yaml">[<span class="hljs-meta">1</span>]  + <span class="hljs-number">8116</span> terminated  kubectl -n <span class="hljs-literal">default</span> port-forward deploy/my-release-milvus-proxy <span class="hljs-number">9091</span>:<span class="hljs-number">9091</span>                      ​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">停止 Milvus 并删除 Pulsar V2</h3><p>在这一步中，需要停止 Milvus pod 并删除 Pulsar V2 部署。 有两个独立的部分可用：</p>
 <ul>
@@ -152,10 +161,12 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 cat values.yaml​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>使用命令停止 Milvus 和所有依赖项。不用担心数据卷，它们将被默认保留。</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-keyword">default</span> uninstall my-release​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出</p>
 <pre><code translate="no" class="language-bash">These resources were kept due to the resource policy:​
 [<span class="hljs-meta">PersistentVolumeClaim</span>] my-release-minio​
@@ -163,6 +174,7 @@ cat values.yaml​
 release <span class="hljs-string">&quot;my-release&quot;</span> uninstalled​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>需要清除脉冲星 PVC 和 PV 列表（持久卷索赔和持久卷</p>
 <pre><code translate="no" class="language-bash">kubectl -n default get pvc -lapp=pulsar,release=my-release |grep -v NAME |awk <span class="hljs-string">&#x27;{print $1}&#x27;</span> &gt; pulsar-pvcs.txt​
 kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL:.spec.volumeName|grep -v VOL &gt; pulsar-pvs.txt​
@@ -172,6 +184,7 @@ kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL
 <span class="hljs-built_in">cat</span> pulsar-pvs.txt​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出</p>
 <pre><code translate="no" class="language-yaml">Volume Claims:​
 my-release-pulsar-bookie-journal-my-release-pulsar-bookie-0​
@@ -187,10 +200,12 @@ pvc-60dcb6e4-760d-46c7-af1a-d1fc153b0caf​
 pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>检查<code translate="no">pulsar-pvcs.txt</code> 的 PVC 列表是否都是 Pulsar 的。确认无误后，删除 PVC。</p>
 <pre><code translate="no" class="language-bash">cat pulsar-pvcs.<span class="hljs-property">txt</span> |xargs -I {} kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> pvc {} --wait=<span class="hljs-literal">false</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出。</p>
 <pre><code translate="no" class="language-yaml">persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-journal-my-release-pulsar-bookie-0&quot;</span> deleted​
 persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-journal-my-release-pulsar-bookie-1&quot;</span> deleted​
@@ -199,10 +214,12 @@ persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-l
 persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeeper-data-my-release-pulsar-zookeeper-0&quot;</span> deleted​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>(可选）根据提供 PVC 的存储类别，您可能还需要手动删除 PV。</p>
 <pre><code translate="no" class="language-yaml">cat pulsar-pvs.<span class="hljs-property">txt</span> |xargs -I {} kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> pvc {} --wait=<span class="hljs-literal">false</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>如果输出 NotFound 错误也没关系。它已被 kubernetes 控制器删除。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-f590a4de-df31-4ca8-a424-007eac3c619a&quot;</span> not found​
 <span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-17b0e215-3e14-4d14-901e-1a1dda9ff5a3&quot;</span> not found​
@@ -211,6 +228,7 @@ persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeepe
 <span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a&quot;</span> not found​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">使用 Milvus 操作符删除 Pulsar V2</h4><p>如果使用 Milvus 操作符安装了 Milvus，请按照以下步骤停止 Milvus pod 并删除 Pulsar V2 部署。</p>
 <ol>
@@ -219,6 +237,7 @@ persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeepe
 head milvus.yaml -n <span class="hljs-number">20</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出。</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1​
 kind: Milvus​
@@ -242,6 +261,7 @@ spec:​
   components:​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>创建包含以下内容的<code translate="no">patch.yaml</code> 文件。</p>
 <pre><code translate="no" class="language-yaml"># a patch to retain etcd &amp; storage data and <span class="hljs-built_in">delete</span> pulsar data while <span class="hljs-built_in">delete</span> milvus​
 spec:​
@@ -260,20 +280,24 @@ spec:​
         pvcDeletion: <span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>使用<code translate="no">kubectl patch</code> 保留 etcd 和存储数据，并在删除 milvus 的同时删除脉冲星数据。</p>
 <pre><code translate="no" class="language-yaml">kubectl -n <span class="hljs-keyword">default</span> patch milvus my-release --patch-file patch.yaml --<span class="hljs-keyword">type</span>=merge​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出： 停止 Milvus 并删除脉冲星数据。</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io/my-release patched​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>停止 Milvus 并删除脉冲星 V2。不用担心 etcd 和对象存储数据卷，它们将被默认保留。</p>
 <pre><code translate="no" class="language-bash">kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> milvus my-release --wait=<span class="hljs-literal">false</span>​
 kubectl -n <span class="hljs-keyword">default</span> get milvus my-release​
 kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> milvus my-release --wait=<span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出结果注意，milvus 优雅停止和操作符删除 pulsar 卷可能需要几分钟时间。</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 NAME         MODE      STATUS     UPDATED   AGE​
@@ -281,15 +305,18 @@ my-release   cluster   Deleting   <span class="hljs-literal">True</span>      41
 milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>等待命令完成。</p></li>
 <li><p>再次检查 Milvus 资源是否已消失</p>
 <pre><code translate="no" class="language-yaml">kubectl -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> milvus my-release​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出应该如下</p>
 <pre><code translate="no" class="language-yaml">No resources found <span class="hljs-keyword">in</span> <span class="hljs-literal">default</span> <span class="hljs-keyword">namespace</span>.​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">启动 Pulsar V3 和 Milvus</h3><p>在这一步中，你需要启动 Pulsar V3 和 Milvus pod。 这里有两个独立的部分：</p>
 <ul>
@@ -310,11 +337,13 @@ pulsarv3:​
   <span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>更新本地 Helm repo</p>
 <pre><code translate="no" class="language-bash">helm repo <span class="hljs-keyword">add</span> zilliztech https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm​</span>
 helm repo update zilliztech​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;zilliztech&quot;</span> already exists <span class="hljs-keyword">with</span> the same configuration, skipping​
 <span class="hljs-title class_">Hang</span> tight <span class="hljs-keyword">while</span> we grab the latest <span class="hljs-keyword">from</span> your chart repositories...​
@@ -322,10 +351,12 @@ helm repo update zilliztech​
 <span class="hljs-title class_">Update</span> <span class="hljs-title class_">Complete</span>. ⎈<span class="hljs-title class_">Happy</span> <span class="hljs-title class_">Helming</span>!⎈​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>使用已编辑的<code translate="no">values.yaml</code> ，用最新的 Helm 图表版本安装你的 milvus 版本。</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-keyword">default</span> install my-release zilliztech/milvus --reset-values -f values.<span class="hljs-property">yaml</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-attr">NAME</span>: my-release​
 <span class="hljs-variable constant_">LAST</span> <span class="hljs-attr">DEPLOYED</span>: <span class="hljs-title class_">Fri</span> <span class="hljs-title class_">Nov</span> <span class="hljs-number">22</span> <span class="hljs-number">15</span>:<span class="hljs-number">31</span>:<span class="hljs-number">27</span> <span class="hljs-number">2024</span>​
@@ -335,6 +366,7 @@ helm repo update zilliztech​
 <span class="hljs-variable constant_">TEST</span> <span class="hljs-attr">SUITE</span>: <span class="hljs-title class_">None</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>通过<code translate="no">kubectl -n default get pods</code> 检查 pod 是否都已调度和运行。</p>
 <p>所有 pod 启动可能需要几分钟时间。</p>
 <p>输出如下。</p>
@@ -361,6 +393,7 @@ my-release-pulsarv3-zookeeper<span class="hljs-number">-1</span>               <
 my-release-pulsarv3-zookeeper<span class="hljs-number">-2</span>               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h4 id="Start-Pulsar-V3-and-using-Milvus-Operator" class="common-anchor-header">启动 Pulsar V3 并使用 Milvus 操作符</h4><ol>
 <li><p>编辑上一步保存的<code translate="no">milvus.yaml</code> 。</p>
@@ -381,20 +414,24 @@ spec:​
         values: null​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>确保您的 Milvus 操作符已升级到 v1.1.2 或更高版本。</p>
 <pre><code translate="no" class="language-yaml">helm repo <span class="hljs-keyword">add</span> milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator​</span>
 helm repo update milvus-<span class="hljs-keyword">operator</span>​
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>使用命令用脉冲星 V3 启动 Milvus</p>
 <pre><code translate="no" class="language-yaml">kubectl create -f milvus.yaml​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出</p>
 <pre><code translate="no" class="language-yaml">milvus.milvus.io/my-release created​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>检查 pod，查看是否所有 pod 都已调度并运行<code translate="no">kubectl -n default get pods</code> 。</p>
 <p>所有 pod 启动可能需要几分钟时间。</p>
 <p>输出如下</p>
@@ -421,5 +458,6 @@ my-release-pulsar-zookeeper<span class="hljs-number">-1</span>                  
 my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <p></p>

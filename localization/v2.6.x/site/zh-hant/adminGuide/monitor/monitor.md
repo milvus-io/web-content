@@ -121,7 +121,7 @@ summary: 學習如何使用 Prometheus 為 Milvus 集群部署監控服務。
       </svg>
     </button></h2><ul>
 <li>如果您已為 Milvus 叢集部署了監控服務，您也許還想學一下<ul>
-<li><a href="/docs/zh-hant/visualize.md">在 Grafana 可視化 Milvus 的度量指標</a></li>
+<li><a href="/docs/zh-hant/visualize.md">在 Grafana 中可視化 Milvus 的度量指標</a></li>
 <li><a href="/docs/zh-hant/alert.md">為 Milvus 服務建立警報</a></li>
 <li>調整您的<a href="/docs/zh-hant/allocate.md">資源分配</a></li>
 </ul></li>

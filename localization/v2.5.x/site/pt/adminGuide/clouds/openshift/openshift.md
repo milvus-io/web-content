@@ -4,6 +4,7 @@ title: Implantar um cluster do Milvus no OpenShift
 related_key: cluster
 summary: Saiba como implementar um cluster Milvus no OpenShift.
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">Implantar um cluster do Milvus no OpenShift<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>Se você quiser aprender como implantar o Milvus em outras nuvens:</p>
 <ul>
-<li><a href="/docs/pt/eks.md">Implantar o Milvus Cluster no AWS com Kubernetes</a></li>
-<li><a href="/docs/pt/azure.md">Implantar o Cluster Milvus no Azure com Kubernetes</a></li>
-<li><a href="/docs/pt/gcp.md">Implantar o Cluster Milvus no GCP com Kubernetes</a></li>
+<li><a href="/docs/pt/v2.5.x/eks.md">Implantar o Milvus Cluster no AWS com Kubernetes</a></li>
+<li><a href="/docs/pt/v2.5.x/azure.md">Implantar o Cluster Milvus no Azure com Kubernetes</a></li>
+<li><a href="/docs/pt/v2.5.x/gcp.md">Implantar o Cluster Milvus no GCP com Kubernetes</a></li>
 </ul>

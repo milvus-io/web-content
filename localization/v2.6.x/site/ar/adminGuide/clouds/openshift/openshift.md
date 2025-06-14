@@ -67,7 +67,7 @@ summary: تعرف على كيفية نشر مجموعة Milvus على OpenShift.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
    </span> <span class="img-wrapper"> <span>cert-manager-1</span> </span></p></li>
-<li><p>تأكد من أن جميع البودات جاهزة. على سبيل المثال، تشير الصورة أدناه إلى أن البودات لا تزال قيد التشغيل. انتظر حتى تصبح جميع هذه الكبسولات جاهزة.</p>
+<li><p>تأكد من أن جميع البودات جاهزة. على سبيل المثال، تشير الصورة أدناه إلى أن البودات لا تزال في طور البدء. انتظر حتى تصبح جميع هذه الكبسولات جاهزة.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
@@ -136,7 +136,7 @@ summary: تعرف على كيفية نشر مجموعة Milvus على OpenShift.
       </svg>
     </button></h2><p>يمكنك الآن البدء في تثبيت مشغل ميلفوس. يوصى باستخدام Helm لتثبيت مشغل Milvus لتبسيط عملية التهيئة.</p>
 <ol>
-<li><p>أضف مستودع Milvus Operator Helm Helm:</p>
+<li><p>أضف مستودع Milvus Operator Milvus Helm:</p>
 <pre><code translate="no" class="language-shell">helm repo add milvus-operator https://zilliztech.github.io/milvus-operator/
 helm repo update milvus-operator
 <button class="copy-code-btn"></button></code></pre></li>
@@ -177,7 +177,7 @@ helm repo update milvus-operator
       </svg>
     </button></h2><p>إذا كنت تريد معرفة كيفية نشر ميلفوس على السحب الأخرى:</p>
 <ul>
-<li><a href="/docs/ar/eks.md">نشر مجموعة ميلفوس العنقودية على AWS باستخدام Kubernetes</a></li>
+<li><a href="/docs/ar/eks.md">نشر مجموعة Milvus العنقودية على AWS باستخدام Kubernetes</a></li>
 <li><a href="/docs/ar/azure.md">نشر مجموعة Milvus العنقودية على Azure باستخدام Kubernetes</a></li>
 <li><a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
 </ul>

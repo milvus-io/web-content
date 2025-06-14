@@ -3,7 +3,6 @@ id: decompounder-filter.md
 title: 分词器
 summary: 反编译过滤器可根据指定词典将复合词拆分成单个成分，从而更方便地搜索复合词的部分内容。该过滤器对德语等经常使用复合词的语言特别有用。
 ---
-
 <h1 id="Decompounder" class="common-anchor-header">分词器<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +89,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p><code translate="no">decompounder</code> 过滤器接受以下可配置参数。</p>
 <table>
    <tr>
@@ -168,8 +166,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">验证使用<code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">验证使用<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&quot;</span>
@@ -178,7 +175,6 @@ sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&q
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

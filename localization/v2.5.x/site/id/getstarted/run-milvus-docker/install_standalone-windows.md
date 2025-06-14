@@ -5,6 +5,7 @@ related_key: Docker
 summary: Pelajari cara menginstal Milvus mandiri dengan Docker Desktop untuk Windows.
 title: Jalankan Milvus di Docker (Linux)
 ---
+
 <h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">Menjalankan Milvus di Docker (Windows)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,6 +65,7 @@ title: Jalankan Milvus di Docker (Linux)
 <pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
 </code></pre></li>
+
 <li><p>Jalankan skrip yang diunduh untuk memulai Milvus sebagai kontainer Docker.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;standalone.bat start​
 Wait for Milvus starting...​
@@ -71,6 +73,7 @@ Start successfully.​
 To change the default Milvus configuration, edit user.yaml and restart the service.​
 
 </code></pre>
+
 <p>Setelah menjalankan skrip instalasi.</p>
 <ul>
 <li><p>Kontainer docker bernama <strong>milvus-standalone</strong> telah dimulai pada port <strong>19530</strong>.</p></li>
@@ -88,6 +91,7 @@ Delete Milvus container successfully. # Container has been removed.​
 Delete successfully. # Data has been removed.​
 
 </code></pre></li>
+
 </ol>
 <h3 id="From-WSL-2​" class="common-anchor-header">Dari WSL 2</h3><p>Jika Anda lebih suka memulai Milvus menggunakan perintah Linux dan skrip shell pada Windows, pastikan bahwa Anda sudah menginstal perintah WSL 2. Untuk detail tentang cara menginstal perintah WSL 2, Anda dapat merujuk ke <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">artikel Microsoft</a> ini.</p>
 <ol>
@@ -97,6 +101,7 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>Unduh skrip instalasi</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Download the installation script​</span>
 $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh​
@@ -105,6 +110,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Mulai Milvus sebagai kontainer docker.</p>
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
@@ -112,6 +118,7 @@ Start successfully.​
 To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Anda dapat menggunakan perintah berikut untuk mengelola kontainer Milvus dan data yang tersimpan.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Stop Milvus​</span>
 $ bash standalone_embed.sh stop​
@@ -123,6 +130,7 @@ Delete Milvus container successfully.​
 Delete successfully.​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="Run-Milvus-with-Docker-Compose​" class="common-anchor-header">Menjalankan Milvus dengan Docker Compose<button data-href="#Run-Milvus-with-Docker-Compose​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,6 +161,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
+
 <p>Tergantung pada koneksi jaringan Anda, mengunduh citra untuk instalasi Milvus mungkin membutuhkan waktu beberapa saat. Setelah kontainer bernama <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, dan <strong>milvus-etcd</strong> aktif, Anda dapat menyaksikan bahwa</p>
 <ul>
 <li><p>Kontainer <strong>milvus-etcd</strong> tidak mengekspos port apa pun ke hos dan memetakan datanya ke <strong>volume/etcd</strong> dalam folder saat ini.</p></li>
@@ -169,10 +178,12 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
+
 <li><p>Unduh berkas konfigurasi Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>Mulai Milvus.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
@@ -181,6 +192,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ol>
 <h2 id="FAQs​" class="common-anchor-header">Pertanyaan Umum<button data-href="#FAQs​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -214,6 +226,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
+
 <li><p>Periksa apakah WSL telah terinstal dengan benar.</p>
 <p>Anda dapat menjalankan perintah berikut untuk menginstal atau memperbarui perintah WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
@@ -221,6 +234,7 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
+
 <li><p>Periksa apakah Docker Daemon telah dimulai.</p>
 <p>Anda harus membuka direktori instalasi Docker Desktop dan menjalankan <code translate="no">.\DockerCli.exe -SwitchDaemon</code> untuk memulai Docker Daemon.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
@@ -228,6 +242,7 @@ C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
+
 <li><p>Periksa apakah Anda telah memulai Docker Desktop dalam mode <strong>administrator</strong>.</p>
 <p>Pastikan Anda telah memulai Docker Desktop dalam mode administrator. Untuk melakukannya, klik kanan pada <strong>Docker Desktop</strong> dan pilih <strong>Jalankan sebagai administrator</strong>.</p>
 <p>
@@ -275,27 +290,27 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h2><p>Setelah menginstal Milvus di Docker, Anda dapat:</p>
 <ul>
-<li><p>Memeriksa <a href="/docs/id/quickstart.md">Mulai Cepat</a> untuk melihat apa yang dapat dilakukan Milvus.</p></li>
+<li><p>Memeriksa <a href="/docs/id/v2.5.x/quickstart.md">Mulai Cepat</a> untuk melihat apa yang dapat dilakukan Milvus.</p></li>
 <li><p>Mempelajari operasi dasar Milvus:</p>
 <ul>
-<li><a href="/docs/id/manage_databases.md">Mengelola Basis Data</a></li>
-<li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
-<li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
-<li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
+<li><a href="/docs/id/v2.5.x/manage_databases.md">Mengelola Basis Data</a></li>
+<li><a href="/docs/id/v2.5.x/manage-collections.md">Mengelola Koleksi</a></li>
+<li><a href="/docs/id/v2.5.x/manage-partitions.md">Mengelola Partisi</a></li>
+<li><a href="/docs/id/v2.5.x/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
+<li><a href="/docs/id/v2.5.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/v2.5.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/id/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
-<li><p>Mengatur<a href="/docs/id/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
+<li><p><a href="/docs/id/v2.5.x/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
+<li><p>Mengatur<a href="/docs/id/v2.5.x/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
 <li><p>Menerapkan cluster Milvu Anda di awan:</p>
 <ul>
-<li><a href="/docs/id/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/id/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/id/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/id/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/id/v2.5.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/id/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pengamatan dan manajemen Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.5.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pengamatan dan manajemen Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.5.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk manajemen Milvus yang intuitif.</p></li>
-<li><p><a href="/docs/id/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
+<li><p><a href="/docs/id/v2.5.x/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

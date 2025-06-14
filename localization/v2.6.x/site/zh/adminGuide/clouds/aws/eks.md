@@ -42,7 +42,7 @@ summary: 了解如何在 EKS 上部署 Milvus 集群
 <li><a href="https://helm.sh/docs/intro/install/"><code translate="no">helm</code></a></li>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html"><code translate="no">eksctl</code></a></li>
 </ul></li>
-<li>已正确授予 AWS IAM 权限。您使用的 IAM 安全负责人必须拥有使用 Amazon EKS IAM 角色、服务相关角色、AWS CloudFormation、VPC 和其他相关资源的权限。您可以采用以下任一方法授予委托人适当的权限。<ul>
+<li>已正确授予 AWS IAM 权限。您使用的 IAM 安全负责人必须拥有使用 Amazon EKS IAM 角色、服务相关角色、AWS CloudFormation、VPC 和其他相关资源的权限。您可以采用以下任一方法授予您的委托人适当的权限。<ul>
 <li>(不建议）只需将您使用的用户/角色的关联策略设置为 AWS 受管策略<code translate="no">AdministratorAccess</code> 。</li>
 <li>(强烈建议）要执行最小权限原则，请执行以下操作：<ul>
 <li><p>要设置<code translate="no">eksctl</code> 的权限，请参阅<a href="https://eksctl.io/usage/minimum-iam-policies/"> <code translate="no">eksctl</code> 的最小权限</a>。</p></li>

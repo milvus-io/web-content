@@ -578,7 +578,7 @@ total 12
 <p>ثم ابدأ تشغيل خدمة كافكا باستخدام الأمر التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. بدء تشغيل ميلفوس والاتصال بخدمة كافكا باستخدام SASL/PLAIN و SSL</h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل Milvus والاتصال بكافكا باستخدام SASL/PLAIN و SSL:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. بدء تشغيل ميلفوس والاتصال بكافكا باستخدام SASL/PLAIN و SSL</h3><p>بمجرد بدء تشغيل خدمة كافكا، يمكنك بدء تشغيل ميلفوس والاتصال بها. استخدم الملف التالي <code translate="no">docker-compose.yaml</code> لبدء تشغيل Milvus والاتصال بكافكا باستخدام SASL/PLAIN و SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>

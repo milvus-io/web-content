@@ -457,7 +457,7 @@ res = client.query(
 <li><p>제공된 쿼리 벡터를 사용하여 <code translate="no">vector</code> 필드에 대한 kNN 검색.</p></li>
 </ul>
 <p>각 리트리버는 최대 50개의 상위 일치 항목을 제공하며, RRF에 의해 순위가 재조정되고 최종 상위 10개 결과가 반환됩니다.</p>
-<p>Milvus에서는 여러 벡터 필드에서 검색을 결합하고, 재랭크 전략을 적용하고, 결합된 목록에서 상위 K 결과를 검색하여 유사한 하이브리드 검색을 수행할 수 있습니다. Milvus는 RRF와 가중치 재랭커 전략을 모두 지원합니다. 자세한 내용은 <a href="/docs/ko/reranking.md">재랭크하기를</a> 참조하세요.</p>
+<p>Milvus에서는 여러 벡터 필드에서 검색을 결합하고, 재랭크 전략을 적용하고, 결합된 목록에서 상위 K 결과를 검색하여 유사한 하이브리드 검색을 수행할 수 있습니다. Milvus는 RRF와 가중치 재랭커 전략을 모두 지원합니다. 자세한 내용은 <a href="/docs/ko/weighted-ranker.md">재랭크하기를</a> 참조하세요.</p>
 <p>다음은 위의 Elasticsearch 예제를 Milvus에서 엄격하게 동일시하지 않은 예제입니다.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

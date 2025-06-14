@@ -44,7 +44,7 @@ summary: Milvusのinternaltlsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        内部 TLS 用のサーバー名表示(SNI)は、証明書によって提供される名前と同じである必要がある ref: https://en.wikipedia.org/wiki/Server_Name_Indication      </td>
+      <td>        内部 TLS 用のサーバー名表示(SNI)は、証明書によって提供される名前と同じでなければならない ref: https://en.wikipedia.org/wiki/Server_Name_Indication      </td>
       <td>ローカルホスト</td>
     </tr>
   </tbody>

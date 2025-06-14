@@ -7,6 +7,7 @@ summary: >-
   d'améliorer considérablement les performances de classification et de
   regroupement.
 ---
+
 <h1 id="Metric-Types" class="common-anchor-header">Types de métriques<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +66,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>Pour les champs de vecteurs de type <code translate="no">SPARSE\_FLOAT\_VECTOR</code>, n'utilisez le type métrique <code translate="no">BM25</code> que pour la recherche en texte intégral. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p></li>
+<li><p>Pour les champs de vecteurs de type <code translate="no">SPARSE\_FLOAT\_VECTOR</code>, n'utilisez le type métrique <code translate="no">BM25</code> que pour la recherche en texte intégral. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.5.x/full-text-search.md">Recherche en texte intégral</a>.</p></li>
 <li><p>Pour les champs vectoriels de type <code translate="no">BINARY_VECTOR</code>, la valeur de la dimension (<code translate="no">dim</code>) doit être un multiple de 8.</p></li>
 </ul>
 </div>
@@ -248,7 +249,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 est une méthode de mesure de la pertinence des textes largement utilisée, spécialement conçue pour la <a href="/docs/fr/full-text-search.md">recherche de textes intégraux</a>. Elle combine les trois facteurs clés suivants</p>
+    </button></h2><p>BM25 est une méthode de mesure de la pertinence des textes largement utilisée, spécialement conçue pour la <a href="/docs/fr/v2.5.x/full-text-search.md">recherche de textes intégraux</a>. Elle combine les trois facteurs clés suivants</p>
 <ul>
 <li><p><strong>La fréquence des termes (TF) :</strong> Mesure la fréquence d'apparition d'un terme dans un document. Bien que des fréquences plus élevées indiquent souvent une plus grande importance, le BM25 utilise le paramètre de saturation <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> pour éviter que des termes trop fréquents ne dominent le score de pertinence.</p></li>
 <li><p><strong>Fréquence inverse des documents (IDF) :</strong> Reflète l'importance d'un terme dans l'ensemble du corpus. Les termes apparaissant dans moins de documents reçoivent une valeur IDF plus élevée, ce qui indique une plus grande contribution à la pertinence.</p></li>

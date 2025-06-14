@@ -93,7 +93,7 @@ cd configs
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Passo 2: Editar o ficheiro de configuração</h3><p>Modifique o ficheiro backup.yaml para definir as configurações adequadas para<code translate="no">milvus_A</code>. Abaixo está o exemplo de configuração de armazenamento:</p>
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">Passo 2: Editar o ficheiro de configuração</h3><p>Modifique o ficheiro backup.yaml para definir as configurações apropriadas para<code translate="no">milvus_A</code>. Abaixo está o exemplo de configuração de armazenamento:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>

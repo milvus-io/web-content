@@ -7,6 +7,7 @@ summary: >-
   dilakukan pengguna di tingkat koleksi, basis data, dan instance, sehingga
   meningkatkan keamanan data.
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">Penjelasan RBAC<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>Untuk mencapai kontrol akses melalui RBAC, anda perlu mengikuti langkah-langkah di bawah ini:</p>
 <ol>
-<li><p><strong><a href="/docs/id/users_and_roles.md#Create-a-user">Membuat pengguna</a></strong>: Selain pengguna default <code translate="no">root</code> di Milvus, anda dapat membuat pengguna baru dan mengatur kata sandi untuk melindungi keamanan data.</p></li>
-<li><p><strong><a href="/docs/id/users_and_roles.md#Create-a-role">Membuat peran</a></strong>: Anda dapat membuat peran yang disesuaikan berdasarkan kebutuhan Anda. Kemampuan spesifik peran ditentukan oleh hak istimewanya.</p></li>
-<li><p><strong><a href="/docs/id/privilege_group.md">Membuat grup hak istimewa</a></strong>: Gabungkan beberapa hak istimewa ke dalam satu grup hak istimewa untuk menyederhanakan proses pemberian hak istimewa pada suatu peran.</p></li>
-<li><p><strong><a href="/docs/id/grant_privileges.md">Memberikan hak istimewa atau grup hak istimewa ke suatu peran</a></strong>: Menetapkan kemampuan peran dengan memberikan hak istimewa atau grup hak istimewa ke peran ini.</p></li>
-<li><p><strong><a href="/docs/id/grant_roles.md">Memberikan peran kepada pengguna</a></strong>: Memberikan peran dengan hak istimewa tertentu kepada pengguna sehingga pengguna dapat memiliki hak istimewa peran. Satu peran dapat diberikan kepada beberapa pengguna.</p></li>
+<li><p><strong><a href="/docs/id/v2.5.x/users_and_roles.md#Create-a-user">Membuat pengguna</a></strong>: Selain pengguna default <code translate="no">root</code> di Milvus, anda dapat membuat pengguna baru dan mengatur kata sandi untuk melindungi keamanan data.</p></li>
+<li><p><strong><a href="/docs/id/v2.5.x/users_and_roles.md#Create-a-role">Membuat peran</a></strong>: Anda dapat membuat peran yang disesuaikan berdasarkan kebutuhan Anda. Kemampuan spesifik peran ditentukan oleh hak istimewanya.</p></li>
+<li><p><strong><a href="/docs/id/v2.5.x/privilege_group.md">Membuat grup hak istimewa</a></strong>: Gabungkan beberapa hak istimewa ke dalam satu grup hak istimewa untuk menyederhanakan proses pemberian hak istimewa pada suatu peran.</p></li>
+<li><p><strong><a href="/docs/id/v2.5.x/grant_privileges.md">Memberikan hak istimewa atau grup hak istimewa ke suatu peran</a></strong>: Menetapkan kemampuan peran dengan memberikan hak istimewa atau grup hak istimewa ke peran ini.</p></li>
+<li><p><strong><a href="/docs/id/v2.5.x/grant_roles.md">Memberikan peran kepada pengguna</a></strong>: Memberikan peran dengan hak istimewa tertentu kepada pengguna sehingga pengguna dapat memiliki hak istimewa peran. Satu peran dapat diberikan kepada beberapa pengguna.</p></li>
 </ol>

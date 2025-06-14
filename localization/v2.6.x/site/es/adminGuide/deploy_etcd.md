@@ -82,7 +82,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Para clusters Milvus en K8s, puede configurar etcd en el mismo comando que inicia Milvus. Alternativamente, puede configurar etcd utilizando el archivo <code translate="no">values.yml</code> en la ruta /charts/milvus en el repositorio <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> antes de iniciar Milvus.</p>
-<p>La siguiente tabla lista las claves para configurar etcd en el archivo YAML.</p>
+<p>La siguiente tabla enumera las claves para configurar etcd en el archivo YAML.</p>
 <table>
 <thead>
 <tr><th>Clave</th><th>Descripción</th><th>Valor</th></tr>

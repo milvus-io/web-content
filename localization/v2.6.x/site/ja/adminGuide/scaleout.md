@@ -51,7 +51,7 @@ title: Milvusクラスタのスケール
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>スケールアップ</span> </span></p>
 <p><a href="/docs/ja/architecture_overview.md">Milvusアーキテクチャに</a>よると、ステートレスワーカーノードにはクエリノード、データノード、インデックスノード、プロキシが含まれます。したがって、ビジネスニーズやアプリケーションシナリオに合わせて、これらのタイプのノードをスケールアウトすることができます。Milvusクラスタは手動または自動でスケールアウトすることができます。</p>
-<p>一般的に、作成したMilvusクラスタが過度に使用されている場合はスケールアウトする必要があります。以下はMilvusクラスタのスケールアウトが必要となる典型的な状況です：</p>
+<p>一般的に、作成したMilvusクラスタが過剰に使用されている場合はスケールアウトする必要があります。以下はMilvusクラスタのスケールアウトが必要となる典型的な状況です：</p>
 <ul>
 <li>CPUとメモリの使用率が一定期間高い。</li>
 <li>クエリのスループットが高くなった。</li>

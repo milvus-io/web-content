@@ -3,6 +3,7 @@ id: grant_privileges.md
 title: 역할에 권한 또는 권한 그룹 부여하기
 summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있습니다. 이 가이드에서는 역할에 권한 또는 권한 그룹을 부여하는 방법을 소개합니다.
 ---
+
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">역할에 권한 또는 권한 그룹 부여하기<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
    </tr>
 </table>
 <ul>
-<li><p><strong>권한</strong>: 역할에 부여해야 하는 특정 권한 또는 <a href="/docs/ko/privilege_group.md">권한 그룹입니다</a>. 현재 Milvus는 부여할 수 있는 56가지 유형의 권한을 제공합니다. 아래 표에는 Milvus의 권한이 나열되어 있습니다.</p>
+<li><p><strong>권한</strong>: 역할에 부여해야 하는 특정 권한 또는 <a href="/docs/ko/v2.5.x/privilege_group.md">권한 그룹입니다</a>. 현재 Milvus는 부여할 수 있는 56가지 유형의 권한을 제공합니다. 아래 표에는 Milvus의 권한이 나열되어 있습니다.</p>
 <p><div class="alert note"></p>
 <p>아래 표의 유형 열은 권한을 빠르게 조회할 수 있도록 사용자별로 구분한 것으로, 분류 목적으로만 사용됩니다. 권한을 부여할 때 유형을 이해할 필요는 없습니다. 해당 권한을 입력하기만 하면 됩니다.</p>
 <p></div></p>
@@ -122,27 +123,27 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <td rowspan="5"><p>데이터베이스 권한</p></td>
 <td><p>ListDatabases</p></td>
 <td><p>현재 인스턴스의 모든 데이터베이스 보기</p></td>
-<td><p><a href="/docs/ko/manage_databases.md">ListDatabases</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage_databases.md">ListDatabases</a></p></td>
 </tr>
 <tr>
 <td><p>DescribeDatabase</p></td>
 <td><p>데이터베이스의 세부 정보 보기</p></td>
-<td><p><a href="/docs/ko/manage_databases.md">DescribeDatabase</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage_databases.md">DescribeDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>CreateDatabase</p></td>
 <td><p>데이터베이스 생성</p></td>
-<td><p><a href="/docs/ko/manage_databases.md">CreateDatabase</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage_databases.md">CreateDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>DropDatabase</p></td>
 <td><p>데이터베이스 삭제</p></td>
-<td><p><a href="/docs/ko/manage_databases.md">DropDatabase</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage_databases.md">DropDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>데이터베이스 변경</p></td>
 <td><p>데이터베이스 속성 수정</p></td>
-<td><p><a href="/docs/ko/manage_databases.md">AlterDatabase</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage_databases.md">AlterDatabase</a></p></td>
 </tr>
 <tr>
 <td rowspan="18"><p>수집 권한</p></td>
@@ -163,7 +164,7 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <tr>
 <td><p>컬렉션 표시</p></td>
 <td><p>컬렉션 권한이 있는 모든 컬렉션 보기</p></td>
-<td><p><a href="/docs/ko/view-collections.md">ShowCollections</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/view-collections.md">ShowCollections</a></p></td>
 </tr>
 <tr>
 <td><p>ListAliases</p></td>
@@ -188,22 +189,22 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <tr>
 <td><p>CreateCollection</p></td>
 <td><p>컬렉션을 만듭니다.</p></td>
-<td><p><a href="/docs/ko/create-collection.md">CreateCollection</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/create-collection.md">CreateCollection</a></p></td>
 </tr>
 <tr>
 <td><p>DropCollection</p></td>
 <td><p>컬렉션 삭제</p></td>
-<td><p><a href="/docs/ko/drop-collection.md">DropCollection</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/drop-collection.md">DropCollection</a></p></td>
 </tr>
 <tr>
 <td><p>Load</p></td>
 <td><p>컬렉션 로드</p></td>
-<td><p><a href="/docs/ko/load-and-release.md">로드 컬렉션/로드</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">진행률/로드</a><a href="/docs/ko/load-and-release.md">상태 가져오기</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/load-and-release.md">로드 컬렉션/로드</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">진행률/로드</a><a href="/docs/ko/v2.5.x/load-and-release.md">상태 가져오기</a></p></td>
 </tr>
 <tr>
 <td><p>릴리스</p></td>
 <td><p>컬렉션 릴리스</p></td>
-<td><p><a href="/docs/ko/load-and-release.md">ReleaseCollection</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/load-and-release.md">ReleaseCollection</a></p></td>
 </tr>
 <tr>
 <td><p>Flush</p></td>
@@ -218,17 +219,17 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <tr>
 <td><p>RenameCollection</p></td>
 <td><p>컬렉션 이름 바꾸기</p></td>
-<td><p><a href="/docs/ko/modify-collection.md">RenameCollection</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/modify-collection.md">RenameCollection</a></p></td>
 </tr>
 <tr>
 <td><p>CreateAlias</p></td>
 <td><p>컬렉션의 별칭을 만듭니다.</p></td>
-<td><p><a href="/docs/ko/manage-aliases.md">CreateAlias</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage-aliases.md">CreateAlias</a></p></td>
 </tr>
 <tr>
 <td><p>DropAlias</p></td>
 <td><p>컬렉션의 별칭 삭제</p></td>
-<td><p><a href="/docs/ko/manage-aliases.md">DropAlias</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage-aliases.md">DropAlias</a></p></td>
 </tr>
 <tr>
 <td><p>FlushAll</p></td>
@@ -239,44 +240,44 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <td rowspan="4"><p>파티션 권한</p></td>
 <td><p>HasPartition</p></td>
 <td><p>파티션 존재 여부 확인</p></td>
-<td><p><a href="/docs/ko/manage-partitions.md">HasPartition</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
 <td><p>ShowPartitions</p></td>
 <td><p>컬렉션의 모든 파티션 보기</p></td>
-<td><p><a href="/docs/ko/manage-partitions.md">ShowPartitions</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage-partitions.md">ShowPartitions</a></p></td>
 </tr>
 <tr>
 <td><p>CreatePartition</p></td>
 <td><p>파티션 만들기</p></td>
-<td><p><a href="/docs/ko/manage-partitions.md">CreatePartition</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage-partitions.md">CreatePartition</a></p></td>
 </tr>
 <tr>
 <td><p>DropPartition</p></td>
 <td><p>파티션 삭제</p></td>
-<td><p><a href="/docs/ko/manage-partitions.md">DropPartition</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/manage-partitions.md">DropPartition</a></p></td>
 </tr>
 <tr>
 <td rowspan="3"><p>인덱스 권한</p></td>
 <td><p>IndexDetail</p></td>
 <td><p>인덱스의 상세 정보 보기</p></td>
-<td><p><a href="/docs/ko/index-vector-fields.md">색인 설명/색인 상태 가져오기/색인 빌드 진행률 가져오기</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/index-vector-fields.md">색인 설명/색인 상태 가져오기/색인 빌드 진행률 가져오기</a></p></td>
 </tr>
 <tr>
 <td><p>CreateIndex</p></td>
 <td><p>인덱스 생성</p></td>
-<td><p><a href="/docs/ko/index-vector-fields.md">CreateIndex</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/index-vector-fields.md">CreateIndex</a></p></td>
 </tr>
 <tr>
 <td><p>DropIndex</p></td>
 <td><p>인덱스 삭제</p></td>
-<td><p><a href="/docs/ko/index-vector-fields.md">DropIndex</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/index-vector-fields.md">DropIndex</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>리소스 관리 권한</p></td>
 <td><p>LoadBalance</p></td>
 <td><p>부하 분산 달성</p></td>
-<td><p><a href="/docs/ko/resource_group.md">LoadBalance</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/resource_group.md">LoadBalance</a></p></td>
 </tr>
 <tr>
 <td><p>CreateResourceGroup</p></td>
@@ -286,32 +287,32 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <tr>
 <td><p>DropResourceGroup</p></td>
 <td><p>리소스 그룹 삭제</p></td>
-<td><p><a href="/docs/ko/resource_group.md">DropResourceGroup</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/resource_group.md">DropResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>리소스 그룹 업데이트</p></td>
 <td><p>리소스 그룹 업데이트</p></td>
-<td><p><a href="/docs/ko/resource_group.md">UpdateResourceGroups</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/resource_group.md">UpdateResourceGroups</a></p></td>
 </tr>
 <tr>
 <td><p>DescribeResourceGroup</p></td>
 <td><p>리소스 그룹의 세부 정보 보기</p></td>
-<td><p><a href="/docs/ko/resource_group.md">DescribeResourceGroup</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/resource_group.md">DescribeResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>ListResourceGroups</p></td>
 <td><p>현재 인스턴스의 모든 리소스 그룹 보기</p></td>
-<td><p><a href="/docs/ko/resource_group.md">ListResourceGroups</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/resource_group.md">ListResourceGroups</a></p></td>
 </tr>
 <tr>
 <td><p>TransferNode</p></td>
 <td><p>리소스 그룹 간 노드 전송</p></td>
-<td><p><a href="/docs/ko/resource_group.md">TransferNode</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/resource_group.md">TransferNode</a></p></td>
 </tr>
 <tr>
 <td><p>TransferReplica</p></td>
 <td><p>리소스 그룹 간 복제본 전송</p></td>
-<td><p><a href="/docs/ko/resource_group.md">TransferReplica</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/resource_group.md">TransferReplica</a></p></td>
 </tr>
 <tr>
 <td><p>BackupRBAC</p></td>
@@ -327,83 +328,83 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <td rowspan="6"><p>엔터티 권한</p></td>
 <td><p>쿼리</p></td>
 <td><p>쿼리 수행</p></td>
-<td><p><a href="/docs/ko/get-and-scalar-query.md">쿼리</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/get-and-scalar-query.md">쿼리</a></p></td>
 </tr>
 <tr>
 <td><p>검색</p></td>
 <td><p>검색 수행</p></td>
-<td><p><a href="/docs/ko/single-vector-search.md">검색</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/single-vector-search.md">검색</a></p></td>
 </tr>
 <tr>
 <td><p>삽입</p></td>
 <td><p>엔티티 삽입</p></td>
-<td><p><a href="/docs/ko/insert-update-delete.md">삽입</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/insert-update-delete.md">삽입</a></p></td>
 </tr>
 <tr>
 <td><p>삭제</p></td>
 <td><p>엔터티 삭제</p></td>
-<td><p><a href="/docs/ko/delete-entities.md">삭제</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/delete-entities.md">삭제</a></p></td>
 </tr>
 <tr>
 <td><p>Upsert</p></td>
 <td><p>엔터티 위로 삽입</p></td>
-<td><p><a href="/docs/ko/upsert-entities.md">Upsert</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/upsert-entities.md">Upsert</a></p></td>
 </tr>
 <tr>
 <td><p>가져오기</p></td>
 <td><p>엔티티 대량 삽입 또는 가져오기</p></td>
-<td><p><a href="/docs/ko/import-data.md">대량 삽입/가져오기</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/import-data.md">대량 삽입/가져오기</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>RBAC 권한</p></td>
 <td><p>소유권 만들기</p></td>
 <td><p>사용자 또는 역할 만들기</p></td>
-<td><p><a href="/docs/ko/users_and_roles.md">사용자 만들기/역할 만들기</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/users_and_roles.md">사용자 만들기/역할 만들기</a></p></td>
 </tr>
 <tr>
 <td><p>UpdateUser</p></td>
 <td><p>사용자의 비밀번호 업데이트</p></td>
-<td><p><a href="/docs/ko/users_and_roles.md">UpdateCredential</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/users_and_roles.md">UpdateCredential</a></p></td>
 </tr>
 <tr>
 <td><p>DropOwnership</p></td>
 <td><p>사용자 비밀번호 또는 역할 삭제</p></td>
-<td><p><a href="/docs/ko/drop_users_roles.md">자격증명 삭제/역할 삭제</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/drop_users_roles.md">자격증명 삭제/역할 삭제</a></p></td>
 </tr>
 <tr>
 <td><p>SelectOwnership</p></td>
 <td><p>특정 역할이 부여된 모든 사용자 보기</p></td>
-<td><p><a href="/docs/ko/grant_roles.md">SelectRole/SelectGrant</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/grant_roles.md">SelectRole/SelectGrant</a></p></td>
 </tr>
 <tr>
 <td><p>소유권 관리</p></td>
 <td><p>사용자 또는 역할을 관리하거나 사용자에게 역할을 부여합니다.</p></td>
-<td><p><a href="/docs/ko/privilege_group.md">사용자 역할/권한 운영/권한 운영V2</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/privilege_group.md">사용자 역할/권한 운영/권한 운영V2</a></p></td>
 </tr>
 <tr>
 <td><p>SelectUser</p></td>
 <td><p>사용자에게 부여된 모든 역할 보기</p></td>
-<td><p><a href="/docs/ko/grant_roles.md">SelectUser</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/grant_roles.md">SelectUser</a></p></td>
 </tr>
 <tr>
 <td><p>권한 그룹 만들기</p></td>
 <td><p>권한 그룹 만들기</p></td>
-<td><p><a href="/docs/ko/privilege_group.md">CreatePrivilegeGroup</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/privilege_group.md">CreatePrivilegeGroup</a></p></td>
 </tr>
 <tr>
 <td><p>DropPrivilegeGroup</p></td>
 <td><p>권한 그룹 삭제</p></td>
-<td><p><a href="/docs/ko/privilege_group.md">DropPrivilegeGroup</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/privilege_group.md">DropPrivilegeGroup</a></p></td>
 </tr>
 <tr>
 <td><p>ListPrivilegeGroups</p></td>
 <td><p>현재 인스턴스의 모든 권한 그룹 보기</p></td>
-<td><p><a href="/docs/ko/privilege_group.md">ListPrivilegeGroups</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/privilege_group.md">ListPrivilegeGroups</a></p></td>
 </tr>
 <tr>
 <td><p>권한 그룹 운영</p></td>
 <td><p>권한 그룹에 권한을 추가하거나 권한 그룹에서 권한을 제거합니다.</p></td>
-<td><p><a href="/docs/ko/privilege_group.md">OperatePrivilegeGroup</a></p></td>
+<td><p><a href="/docs/ko/v2.5.x/privilege_group.md">OperatePrivilegeGroup</a></p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -413,31 +414,32 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
-)
-    
-client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+)
+
+client.grant_privilege_v2(
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
 
 client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
@@ -582,6 +584,7 @@ curl --request POST \
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.response.DescribeRoleResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq
 
@@ -657,12 +660,13 @@ client.revoke_privilege_v2(
 )
 
 client.revoke_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
 
 client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()

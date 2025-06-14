@@ -53,8 +53,7 @@ client = MilvusClient(
 
 res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span></span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -87,8 +86,7 @@ res = client.delete(
 <span class="hljs-comment">// 7. Delete entities</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">delete</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span></span>
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">delete_cnt</span>)
@@ -163,8 +161,7 @@ curl --request POST \
 </div>
 <pre><code translate="no" class="language-python">res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>]
+<span class="highlighted-wrapper-line">    ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>]</span>
 )
 
 <span class="hljs-built_in">print</span>(res)

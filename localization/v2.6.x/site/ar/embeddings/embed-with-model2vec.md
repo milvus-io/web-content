@@ -51,7 +51,7 @@ model2vec_ef = model.dense.Model2VecEmbeddingFunction(
 </ul></li>
 <li><p><strong>التحميل محلياً:</strong></p>
 <ul>
-<li>توفير مسار الملف المحلي حيث يتم تخزين نموذج Model2Vec (على سبيل المثال، <code translate="no">&quot;/path/to/local/model&quot;</code>).</li>
+<li>أدخل مسار الملف المحلي حيث يتم تخزين نموذج Model2Vec (على سبيل المثال، <code translate="no">&quot;/path/to/local/model&quot;</code>).</li>
 </ul></li>
 </ol></li>
 </ul>

@@ -5,7 +5,6 @@ summary: >-
   중지 필터는 토큰화된 텍스트에서 지정된 중지 단어를 제거하여 의미가 덜한 일반적인 단어를 제거하는 데 도움을 줍니다. stop_words
   매개변수를 사용하여 중지 단어 목록을 구성할 수 있습니다.
 ---
-
 <h1 id="Stop" class="common-anchor-header">Stop<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +88,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p><code translate="no">stop</code> 필터는 다음과 같은 구성 가능한 매개변수를 허용합니다.</p>
 <table>
    <tr>
@@ -101,9 +99,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>토큰화에서 제거할 단어 목록입니다. 기본적으로 필터는 기본 제공 <code translate="no">_english_</code> 사전을 사용합니다. 세 가지 방법으로 이 사전을 재정의하거나 확장할 수 있습니다:</p>
 <ul>
 <li><p><strong>기본</strong> 제공 사전 - 사전 정의된 사전을 사용하려면 다음 언어 별칭 중 하나를 제공합니다:<code translate="no">"_english_"</code>, <code translate="no">"_danish_"</code>, <code translate="no">"_dutch_"</code>, <code translate="no">"_finnish_"</code>, <code translate="no">"_french_"</code>, <code translate="no">"_german_"</code>, <code translate="no">"_hungarian_"</code>, <code translate="no">"_italian_"</code>, <code translate="no">"_norwegian_"</code>, <code translate="no">"_portuguese_"</code>, <code translate="no">"_russian_"</code>, <code translate="no">"_spanish_"</code>, <code translate="no">"_swedish_"</code></p></li>
-<li><p><strong>사용자 정의 목록</strong> - 사용자 정의 용어 배열을 전달합니다(예: <code translate="no">["foo", "bar", "baz"]</code>.</p></li>
+<li><p><strong>사용자 정의 목록</strong> - 사용자 정의 용어 배열을 전달합니다(예: <code translate="no">["foo", "bar", "baz"]</code>).</p></li>
 <li><p><strong>혼합 목록</strong> - 별칭과 사용자 지정 용어를 결합합니다(예: <code translate="no">["of", "to", "_english_"]</code>.</p>
-<p>사전 정의된 각 사전의 정확한 내용에 대한 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words를</a> 참조하세요.</p></li>
+<p>미리 정의된 각 사전의 정확한 내용에 대한 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words를</a> 참조하세요.</p></li>
 </ul></td>
    </tr>
 </table>
@@ -156,7 +154,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The stop filter allows control over common stop words for text processing.&quot;</span>
@@ -165,7 +163,6 @@ sample_text = <span class="hljs-string">&quot;The stop filter allows control ove
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

@@ -43,13 +43,13 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Без уплотнения кластеризации</span> </span></p>
-<p>Если Milvus может распределить сущности между сегментами на основе значений в определенном поле, область поиска может быть ограничена одним сегментом, что повышает производительность поиска.</p>
+<p>Если Milvus может распределить сущности между сегментами на основе значений в определенном поле, область поиска может быть ограничена в пределах одного сегмента, что повышает производительность поиска.</p>
 <p><strong>Clustering Compaction</strong> - это функция в Milvus, которая перераспределяет сущности между сегментами в коллекции на основе значений в скалярном поле. Чтобы включить эту функцию, сначала нужно выбрать скалярное поле в качестве <strong>ключа кластеризации</strong>. Это позволит Milvus перераспределять сущности в сегмент, если значения их ключа кластеризации попадают в определенный диапазон. Когда вы запускаете уплотнение кластеризации, Milvus генерирует/обновляет глобальный индекс <strong>PartitionStats</strong>, который записывает отношения сопоставления между сегментами и значениями ключей кластеризации.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Компактизация кластеризации</span> </span></p>
-<p>Используя <strong>PartitionStats</strong> в качестве ссылки, Milvus может отсеивать нерелевантные данные при получении запроса на поиск/запрос, содержащего значение ключа кластеризации, и ограничивать область поиска сегментами, сопоставленными с этим значением, тем самым повышая производительность поиска. Подробнее об улучшении производительности см. в разделе <a href="/docs/ru/clustering-compaction.md#Benchmark-Test">"Бенчмарк-тесты</a>".</p>
+<p>Используя <strong>PartitionStats</strong> в качестве ссылки, Milvus может отсеивать нерелевантные данные при получении запроса на поиск/запрос, содержащего значение ключа кластеризации, и ограничивать область поиска сегментами, сопоставленными с этим значением, тем самым повышая производительность поиска. Подробнее об улучшении производительности см. в разделе <a href="/docs/ru/v2.5.x/clustering-compaction.md#Benchmark-Test">"Бенчмарк-тесты</a>".</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Использование уплотнения кластеров<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,7 +162,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>Чтобы применить вышеуказанные изменения к кластеру Milvus, выполните шаги в разделах <a href="/docs/ru/configure-helm.md#Configure-Milvus-via-configuration-file">Настройка Milvus с помощью Helm</a> и <a href="/docs/ru/configure_operator.md">Настройка Milvus с помощью Milvus Operators</a>.</p>
+<p>Чтобы применить вышеуказанные изменения к кластеру Milvus, выполните шаги в разделах <a href="/docs/ru/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Настройка Milvus с помощью Helm</a> и <a href="/docs/ru/v2.5.x/configure_operator.md">Настройка Milvus с помощью Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Конфигурация коллекции</h3><p>Для уплотнения кластера в определенной коллекции необходимо выбрать скалярное поле из коллекции в качестве ключа кластеризации.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

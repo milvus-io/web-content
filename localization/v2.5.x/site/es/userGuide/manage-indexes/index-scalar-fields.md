@@ -6,6 +6,7 @@ summary: >-
   escalares para campos como enteros, cadenas, etc.
 title: Índice de campos escalares
 ---
+
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">Índice de campos escalares<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ title: Índice de campos escalares
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Indexación automática</a></strong>: Milvus decide automáticamente el tipo de índice basándose en el tipo de datos del campo escalar. Esto es adecuado cuando no necesita controlar el tipo de índice específico.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexación personalizada</a></strong>: Usted especifica el tipo de índice exacto, como un índice invertido o un <a href="/docs/es/bitmap.md">índice de mapa de bits</a>. Esto proporciona un mayor control sobre la selección del tipo de índice.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexación personalizada</a></strong>: Usted especifica el tipo de índice exacto, como un índice invertido o un <a href="/docs/es/v2.5.x/bitmap.md">índice de mapa de bits</a>. Esto proporciona un mayor control sobre la selección del tipo de índice.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Indexación automática<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,16 +77,17 @@ client = MilvusClient(
 index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
-    index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
+index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -142,16 +144,17 @@ client.createIndex(createIndexReq);
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
+index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -192,8 +195,8 @@ client.createIndex(createIndexReq);
 <p>El tipo del índice escalar a crear. Para la indexación implícita, déjelo vacío u omita este parámetro.</p>
 <p>Para la indexación personalizada, los valores válidos son:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/scalar_index.md">Índice escalar</a>.</p></li>
-<li><p><strong>BITMAP</strong>: Tipo de índice que almacena un mapa de bits de todos los valores únicos de un campo. Para más información, consulte <a href="/docs/es/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/v2.5.x/scalar_index.md">Índice escalar</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Tipo de índice que almacena un mapa de bits de todos los valores únicos de un campo. Para más información, consulte <a href="/docs/es/v2.5.x/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación estándar de la biblioteca de plantillas. Sólo admite campos numéricos (por ejemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Una estructura de datos en árbol para búsquedas y recuperaciones rápidas de prefijos. Admite campos VARCHAR.</p></li>
 </ul></li>
@@ -217,7 +220,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(Cadena</em>) El nombre del campo escalar que se va a indexar.</li>
 <li><strong>indexName</strong><em>(Cadena</em>) El nombre del índice escalar a crear. Cada campo escalar admite un índice.</li>
 <li><strong>indexType</strong><em>(Cadena</em>) Tipo de índice escalar a crear. Para la indexación implícita, déjelo vacío u omita este parámetro. Para la indexación personalizada, los valores válidos son:<ul>
-<li><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/scalar_index.md">Índice escalar</a>.</li>
+<li><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/v2.5.x/scalar_index.md">Índice escalar</a>.</li>
 <li><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación estándar de la biblioteca de plantillas. Admite campos booleanos y numéricos (por ejemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Una estructura de datos en árbol para búsquedas y recuperaciones rápidas de prefijos. Admite campos VARCHAR.</li>
 </ul></li>
@@ -238,7 +241,7 @@ client.createIndex(createIndexReq);
 <li><strong>nombre_campo</strong><em>(cadena</em>) El nombre del campo escalar que se va a indexar.</li>
 <li><strong>nombre_índice</strong><em>(cadena</em>) Nombre del índice escalar que se va a crear. Cada campo escalar admite un índice.</li>
 <li><strong>tipo_índice</strong><em>(cadena</em>) Tipo de índice escalar que se va a crear. Para la indexación implícita, déjelo vacío u omita este parámetro. Para la indexación personalizada, los valores válidos son:<ul>
-<li><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/scalar_index.md">Índice escalar</a>.</li>
+<li><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/v2.5.x/scalar_index.md">Índice escalar</a>.</li>
 <li><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación estándar de la biblioteca de plantillas. Admite campos booleanos y numéricos (por ejemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Una estructura de datos en árbol para búsquedas y recuperaciones rápidas de prefijos. Admite campos VARCHAR.</li>
 </ul></li>
@@ -278,6 +281,7 @@ client.createIndex(createIndexReq);
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># [&#x27;default_index&#x27;,&#x27;inverted_index&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.List;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.ListIndexesReq;
 

@@ -3,6 +3,7 @@ id: tls.md
 title: التشفير أثناء النقل
 summary: تعرف على كيفية تمكين بروكسي TLS في Milvus.
 ---
+
 <h1 id="Encryption-in-Transit" class="common-anchor-header">التشفير أثناء النقل<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ summary: تعرف على كيفية تمكين بروكسي TLS في Milvus.
     </button></h1><p>TLS (أمان طبقة النقل) هو بروتوكول تشفير لضمان أمان الاتصال. يستخدم وكيل Milvus بروكسي Milvus مصادقة TLS أحادية الاتجاه وثنائية الاتجاه.</p>
 <p>يصف هذا الموضوع كيفية تمكين TLS في وكيل Milvus لكل من gRPC وRESTful عمليات النقل.</p>
 <div class="alert note">
-<p>TLS ومصادقة المستخدم هما نهجان مختلفان للأمان. إذا قمت بتمكين كل من مصادقة المستخدم ومصادقة TLS في نظام Milvus الخاص بك، فستحتاج إلى توفير اسم مستخدم وكلمة مرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين مصادقة المستخدم، راجع <a href="/docs/ar/authenticate.md">مصادقة وصول المستخدم</a>.</p>
+<p>TLS ومصادقة المستخدم هما نهجان مختلفان للأمان. إذا قمت بتمكين كل من مصادقة المستخدم ومصادقة TLS في نظام Milvus الخاص بك، فستحتاج إلى توفير اسم مستخدم وكلمة مرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين مصادقة المستخدم، راجع <a href="/docs/ar/v2.5.x/authenticate.md">مصادقة وصول المستخدم</a>.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">إنشاء الشهادة الخاصة بك<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,6 +97,7 @@ openssl req -new -key client.key\
     -extfile ./openssl.cnf -extensions v3_req
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p></details></p>
 <p>تعتبر المتغيرات في الملف <code translate="no">gen.sh</code> ضرورية لعملية إنشاء ملف طلب توقيع الشهادة. المتغيرات الخمسة الأولى هي معلومات التوقيع الأساسية، بما في ذلك البلد والولاية والموقع والمنظمة ووحدة التنظيم. يجب توخي الحذر عند تكوين <code translate="no">CommonName</code> حيث سيتم التحقق منها أثناء الاتصال بين العميل والخادم.</p>
 <h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">تشغيل <code translate="no">gen.sh</code> لإنشاء شهادة</h3><p>قم بتشغيل الملف <code translate="no">gen.sh</code> لإنشاء الشهادة.</p>
@@ -175,9 +177,10 @@ openssl req -new -key client.key\
   <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
+<span class="hljs-attr">security:</span>
+<span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>المعلمات:</p>
 <ul>
 <li><code translate="no">serverPemPath</code>: المسار إلى ملف شهادة الخادم.</li>
@@ -195,9 +198,10 @@ openssl req -new -key client.key\
   <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span> 
+<span class="hljs-attr">security:</span>
+<span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>المعلمات:</p>
 <ul>
 <li><code translate="no">serverPemPath</code>: المسار إلى ملف شهادة الخادم.</li>
@@ -408,24 +412,26 @@ helm install my-release milvus/milvus -f values.yaml
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
-    secure=<span class="hljs-literal">True</span>,
-    server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
-    server_name=<span class="hljs-string">&quot;localhost&quot;</span>
+uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
+secure=<span class="hljs-literal">True</span>,
+server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
+server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Two-way-TLS-connection" class="common-anchor-header">اتصال TLS ثنائي الاتجاه</h3><p>قم بتوفير المسارات إلى <code translate="no">client.pem</code> و <code translate="no">client.key</code> و <code translate="no">ca.pem</code> وتأكد من أن <code translate="no">server_name</code> يطابق <code translate="no">CommonName</code> المكوّن في الشهادة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
-    secure=<span class="hljs-literal">True</span>,
-    client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
-    client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
-    ca_pem_path=<span class="hljs-string">&quot;path_to/ca.pem&quot;</span>,
-    server_name=<span class="hljs-string">&quot;localhost&quot;</span>
+uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
+secure=<span class="hljs-literal">True</span>,
+client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
+client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
+ca_pem_path=<span class="hljs-string">&quot;path_to/ca.pem&quot;</span>,
+server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>انظر <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls1.py">example_tls1.py</a> و <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls2.py">example_tls2.py</a> لمزيد من المعلومات.</p>
 <h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">الاتصال بخادم Milvus RESTful مع TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"

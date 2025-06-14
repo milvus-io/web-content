@@ -166,7 +166,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
     </button></h2><ul>
 <li><p>Milvus 서비스를 모니터링하고 알림을 생성하는 방법을 배우려면 다음과 같이 하세요:</p>
 <ul>
-<li><a href="/docs/ko/monitor.md">Kubernetes에서 Prometheus Operator로 Milvus 모니터링</a> 배우기</li>
+<li><a href="/docs/ko/monitor.md">Kubernetes의 Prometheus Operator로 Milvus 모니터링</a> 배우기</li>
 </ul></li>
 <li><p>클라우드에 클러스터를 배포할 준비가 되셨다면:</p>
 <ul>

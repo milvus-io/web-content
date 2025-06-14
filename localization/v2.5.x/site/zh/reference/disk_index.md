@@ -4,6 +4,7 @@ related_key: disk_index
 summary: Milvus 中用于磁盘优化向量搜索的磁盘索引机制。
 title: 盘上索引
 ---
+
 <h1 id="On-disk-Index" class="common-anchor-header">盘上索引<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ title: 盘上索引
         ></path>
       </svg>
     </button></h1><p>本文介绍了用于磁盘优化向量搜索的磁盘索引算法 DiskANN。DiskANN 基于 Vamana 图，可在大型数据集中进行高效的磁盘上向量搜索。</p>
-<p>为了提高查询性能，可以为每个向量字段<a href="/docs/zh/index-vector-fields.md">指定一种索引类型</a>。</p>
+<p>为了提高查询性能，可以为每个向量字段<a href="/docs/zh/v2.5.x/index-vector-fields.md">指定一种索引类型</a>。</p>
 <div class="alert note"> 
 目前，一个向量字段只支持一种索引类型。切换索引类型时，Milvus 会自动删除旧索引。</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">

@@ -1,9 +1,10 @@
 ---
 id: meta_storage_operator.md
 title: تكوين التخزين التعريفي مع مشغل Milvus
-related_key: 'minio, s3, storage, etcd, pulsar'
+related_key: "minio, s3, storage, etcd, pulsar"
 summary: تعرف على كيفية تكوين التخزين التعريفي باستخدام مشغل Milvus.
 ---
+
 <h1 id="Configure-Meta-Storage-with-Milvus-Operator" class="common-anchor-header">تكوين التخزين التعريفي مع مشغل Milvus<button data-href="#Configure-Meta-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,6 +113,6 @@ spec:
       </svg>
     </button></h2><p>تعرف على كيفية تكوين تبعيات Milvus الأخرى باستخدام مشغل Milvus:</p>
 <ul>
-<li><a href="/docs/ar/object_storage_operator.md">تكوين تخزين الكائنات باستخدام مشغل Milvus</a></li>
-<li><a href="/docs/ar/message_storage_operator.md">تكوين تخزين الرسائل باستخدام مشغل Milvus</a></li>
+<li><a href="/docs/ar/v2.5.x/object_storage_operator.md">تكوين تخزين الكائنات باستخدام مشغل Milvus</a></li>
+<li><a href="/docs/ar/v2.5.x/message_storage_operator.md">تكوين تخزين الرسائل باستخدام مشغل Milvus</a></li>
 </ul>

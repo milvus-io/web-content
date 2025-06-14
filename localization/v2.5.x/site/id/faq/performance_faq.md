@@ -5,6 +5,7 @@ summary: >-
   pencarian, peningkatan performa, dan masalah terkait performa lainnya.
 title: Pertanyaan Umum tentang Kinerja
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">Pertanyaan Umum tentang Kinerja<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -33,7 +34,7 @@ title: Pertanyaan Umum tentang Kinerja
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">Faktor-faktor apa saja yang memengaruhi penggunaan CPU?</h4><p>Penggunaan CPU meningkat ketika Milvus membangun indeks atau menjalankan kueri. Secara umum, pembuatan indeks menggunakan CPU yang intensif kecuali ketika menggunakan Annoy, yang berjalan pada satu thread.</p>
 <p>Ketika menjalankan kueri, penggunaan CPU dipengaruhi oleh <code translate="no">nq</code> dan <code translate="no">nprobe</code>. Ketika <code translate="no">nq</code> dan <code translate="no">nprobe</code> kecil, konkurensi rendah dan penggunaan CPU tetap rendah.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">Apakah memasukkan data dan pencarian secara bersamaan memengaruhi kinerja kueri?</h4><p>Operasi penyisipan tidak menggunakan CPU secara intensif. Namun, karena segmen baru mungkin belum mencapai ambang batas untuk pembuatan indeks, Milvus menggunakan pencarian brute-force - yang secara signifikan memengaruhi kinerja kueri.</p>
-<p>Parameter <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> menentukan ambang batas pembuatan indeks untuk sebuah segmen, dan diatur ke 1024 baris secara default. Lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a> untuk informasi lebih lanjut.</p>
+<p>Parameter <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> menentukan ambang batas pembuatan indeks untuk sebuah segmen, dan diatur ke 1024 baris secara default. Lihat <a href="/docs/id/v2.5.x/system_configuration.md">Konfigurasi Sistem</a> untuk informasi lebih lanjut.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">Apakah mengindeks bidang VARCHAR dapat meningkatkan kecepatan penghapusan?</h4><p>Mengindeks bidang VARCHAR dapat mempercepat operasi "Hapus Berdasarkan Ekspresi", tetapi hanya dalam kondisi tertentu:</p>
 <ul>
 <li><strong>Indeks Terbalik</strong>: Indeks ini membantu untuk ekspresi <code translate="no">IN</code> atau <code translate="no">==</code> pada field VARCHAR non-kunci utama.</li>

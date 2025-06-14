@@ -5,6 +5,7 @@ summary: >-
   Индекс IVF_FLAT - это алгоритм индексирования, который позволяет повысить
   производительность поиска для векторов с плавающей точкой.
 ---
+
 <h1 id="IVFFLAT" class="common-anchor-header">IVF_FLAT<button data-href="#IVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +59,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>ЭКО FLAT Workflow 2</span> </span></p>
-<p>Увеличив значение <code translate="no">nprobe</code>, вы можете включить в поиск больше разделов, что поможет не пропустить ближайшее к запросу вложение, даже если оно находится в другом разделе. Однако за это приходится платить увеличением времени поиска, поскольку необходимо оценить больше кандидатов. Дополнительные сведения о настройке параметров индекса см. в разделе <a href="/docs/ru/ivf-flat.md#Index-params">Параметры индекса</a>.</p>
+<p>Увеличив значение <code translate="no">nprobe</code>, вы можете включить в поиск больше разделов, что поможет не пропустить ближайшее к запросу вложение, даже если оно находится в другом разделе. Однако за это приходится платить увеличением времени поиска, поскольку необходимо оценить больше кандидатов. Дополнительные сведения о настройке параметров индекса см. в разделе <a href="/docs/ru/v2.5.x/ivf-flat.md#Index-params">Параметры индекса</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Построение индекса<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,26 +82,27 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>В данной конфигурации:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Тип индекса, который будет построен. В этом примере задайте значение <code translate="no">IVF_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Метод, используемый для вычисления расстояния между векторами. Поддерживаются следующие значения: <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code>. Подробнее см. в разделе <a href="/docs/ru/metric.md">Типы метрик</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Метод, используемый для вычисления расстояния между векторами. Поддерживаются следующие значения: <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code>. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/metric.md">Типы метрик</a>.</p></li>
 <li><p><code translate="no">params</code>: Дополнительные параметры конфигурации для построения индекса.</p>
 <ul>
 <li><code translate="no">nlist</code>: Количество кластеров для разделения набора данных.</li>
 </ul>
-<p>Чтобы узнать о параметрах построения, доступных для индекса <code translate="no">IVF_FLAT</code>, обратитесь к разделу <a href="/docs/ru/ivf-flat.md#Index-building-params">Параметры построения индекса</a>.</p></li>
+<p>Чтобы узнать о параметрах построения, доступных для индекса <code translate="no">IVF_FLAT</code>, обратитесь к разделу <a href="/docs/ru/v2.5.x/ivf-flat.md#Index-building-params">Параметры построения индекса</a>.</p></li>
 </ul>
-<p>После того как параметры индекса настроены, вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробности см. в разделе <a href="/docs/ru/create-collection.md">Создание коллекции</a>.</p>
+<p>После того как параметры индекса настроены, вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробности см. в разделе <a href="/docs/ru/v2.5.x/create-collection.md">Создание коллекции</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Поиск по индексу<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,20 +126,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>В этой конфигурации:</p>
 <ul>
 <li><p><code translate="no">params</code>: Дополнительные параметры конфигурации для поиска по индексу.</p>
 <ul>
 <li><code translate="no">nprobe</code>: Количество кластеров для поиска.</li>
 </ul>
-<p>Чтобы узнать больше параметров поиска, доступных для индекса <code translate="no">IVF_FLAT</code>, обратитесь к разделу <a href="/docs/ru/ivf-flat.md#Index-specific-search-params">Параметры поиска по индексу</a>.</p></li>
+<p>Чтобы узнать больше параметров поиска, доступных для индекса <code translate="no">IVF_FLAT</code>, обратитесь к разделу <a href="/docs/ru/v2.5.x/ivf-flat.md#Index-specific-search-params">Параметры поиска по индексу</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Параметры индекса<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,7 +158,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по нему.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/ivf-flat.md#Build-index">построении индекса</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/v2.5.x/ivf-flat.md#Build-index">построении индекса</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -170,7 +173,7 @@ res = MilvusClient.search(
      <td><p>Большие значения <code translate="no">nlist</code> улучшают отзыв за счет создания более точных кластеров, но увеличивают время построения индекса. Оптимизируйте значение в зависимости от размера набора данных и доступных ресурсов. В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые можно настроить в <code translate="no">search_params.params</code> при <a href="/docs/ru/ivf-flat.md#Search-on-index">поиске по индексу</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые можно настроить в <code translate="no">search_params.params</code> при <a href="/docs/ru/v2.5.x/ivf-flat.md#Search-on-index">поиске по индексу</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>

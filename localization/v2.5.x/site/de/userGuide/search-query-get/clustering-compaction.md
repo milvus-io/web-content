@@ -38,18 +38,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus speichert eingehende Entitäten in Segmenten innerhalb einer Sammlung und versiegelt ein Segment, wenn es voll ist. Wenn dies geschieht, wird ein neues Segment erstellt, um zusätzliche Entitäten aufzunehmen. Infolgedessen sind die Entitäten willkürlich über die Segmente verteilt. Diese Verteilung erfordert, dass Milvus mehrere Segmente durchsucht, um die nächsten Nachbarn für einen bestimmten Abfragevektor zu finden.</p>
+    </button></h2><p>Milvus speichert eingehende Entitäten in Segmenten innerhalb einer Sammlung und versiegelt ein Segment, wenn es voll ist. Wenn dies der Fall ist, wird ein neues Segment erstellt, um zusätzliche Entitäten unterzubringen. Infolgedessen sind die Entitäten willkürlich über die Segmente verteilt. Diese Verteilung erfordert, dass Milvus mehrere Segmente durchsucht, um die nächsten Nachbarn für einen bestimmten Abfragevektor zu finden.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Ohne Clustering-Verdichtung</span> </span></p>
 <p>Wenn Milvus die Entitäten auf der Grundlage der Werte in einem bestimmten Feld auf die Segmente verteilen kann, lässt sich der Suchbereich innerhalb eines Segments einschränken, wodurch die Suchleistung verbessert wird.</p>
-<p><strong>Clustering Compaction</strong> ist eine Funktion in Milvus, die Entitäten zwischen Segmenten in einer Sammlung basierend auf den Werten in einem skalaren Feld umverteilt. Um diese Funktion zu aktivieren, müssen Sie zunächst ein skalares Feld als <strong>Clustering-Schlüssel</strong> auswählen. Dies ermöglicht Milvus, Entitäten in ein Segment umzuverteilen, wenn ihre Clustering-Schlüsselwerte in einen bestimmten Bereich fallen. Wenn Sie eine Clustering Compaction auslösen, generiert/aktualisiert Milvus einen globalen Index namens <strong>PartitionStats</strong>, der die Zuordnungsbeziehung zwischen Segmenten und Clustering-Schlüsselwerten aufzeichnet.</p>
+<p><strong>Clustering Compaction</strong> ist eine Funktion in Milvus, die Entitäten zwischen Segmenten in einer Sammlung basierend auf den Werten in einem skalaren Feld umverteilt. Um diese Funktion zu aktivieren, müssen Sie zunächst ein Skalarfeld als <strong>Clustering-Schlüssel</strong> auswählen. Dies ermöglicht Milvus, Entitäten in ein Segment umzuverteilen, wenn ihre Clustering-Schlüsselwerte in einen bestimmten Bereich fallen. Wenn Sie eine Clustering Compaction auslösen, generiert/aktualisiert Milvus einen globalen Index namens <strong>PartitionStats</strong>, der die Zuordnungsbeziehung zwischen Segmenten und Clustering-Schlüsselwerten aufzeichnet.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Clustering-Verdichtung</span> </span></p>
-<p>Unter Verwendung von <strong>PartitionStats</strong> als Referenz kann Milvus beim Empfang einer Such-/Abfrageanfrage, die einen Clustering-Schlüsselwert enthält, irrelevante Daten entfernen und den Suchbereich innerhalb der Segmente, die dem Wert zugeordnet sind, einschränken, wodurch die Suchleistung verbessert wird. Einzelheiten zur Leistungsverbesserung finden Sie unter <a href="/docs/de/clustering-compaction.md#Benchmark-Test">Benchmark-Tests</a>.</p>
+<p>Unter Verwendung von <strong>PartitionStats</strong> als Referenz kann Milvus beim Empfang einer Such-/Abfrageanfrage, die einen Clustering-Schlüsselwert enthält, irrelevante Daten entfernen und den Suchbereich innerhalb der Segmente, die dem Wert zugeordnet sind, einschränken, wodurch die Suchleistung verbessert wird. Einzelheiten zur Leistungsverbesserung finden Sie unter <a href="/docs/de/v2.5.x/clustering-compaction.md#Benchmark-Test">Benchmark-Tests</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Clustering-Verdichtung verwenden<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,7 +162,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>Um die oben genannten Änderungen auf Ihren Milvus-Cluster anzuwenden, folgen Sie bitte den Schritten in <a href="/docs/de/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurieren von Milvus mit Helm</a> und <a href="/docs/de/configure_operator.md">Konfigurieren von Milvus mit Milvus Operators</a>.</p>
+<p>Um die oben genannten Änderungen auf Ihren Milvus-Cluster anzuwenden, folgen Sie bitte den Schritten in <a href="/docs/de/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurieren von Milvus mit Helm</a> und <a href="/docs/de/v2.5.x/configure_operator.md">Konfigurieren von Milvus mit Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Konfiguration der Sammlung</h3><p>Für die Clusterverdichtung in einer bestimmten Sammlung sollten Sie ein skalares Feld aus der Sammlung als Clustering-Schlüssel auswählen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

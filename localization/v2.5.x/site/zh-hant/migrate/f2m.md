@@ -1,9 +1,10 @@
 ---
 id: f2m.md
 title: 從 Faiss
-related_key: 'Faiss, migrate, import'
+related_key: "Faiss, migrate, import"
 summary: 了解如何將 Faiss 資料遷移至 Milvus。
 ---
+
 <h1 id="From-Faiss" class="common-anchor-header">從 Faiss<button data-href="#From-Faiss" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ summary: 了解如何將 Faiss 資料遷移至 Milvus。
 <li>安裝細節，請參閱<a href="https://github.com/facebookresearch/faiss/blob/main/INSTALL.md">安裝 Faiss</a>和<a href="https://milvus.io/docs/install_standalone-docker.md">安裝 Milvus</a>。</li>
 </ul></li>
 <li><strong>所需的工具</strong>：<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。安裝詳情請參閱<a href="/docs/zh-hant/milvusdm_install.md">安裝遷移工具</a>。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。安裝詳情請參閱<a href="/docs/zh-hant/v2.5.x/milvusdm_install.md">安裝遷移工具</a>。</li>
 </ul></li>
 </ul>
 <h2 id="Configure-the-migration" class="common-anchor-header">設定遷移<button data-href="#Configure-the-migration" class="anchor-icon" translate="no">
@@ -78,31 +79,32 @@ loader:
     faissFile: ./testfiles/faiss/faiss_ivf_flat.index
 
 target: <span class="hljs-comment"># configs for the target Milvus collection.</span>
-  create:
-    collection:
-      name: test1w
-      shardsNums: 2
-      dim: 256
-      metricType: L2
+create:
+collection:
+name: test1w
+shardsNums: 2
+dim: 256
+metricType: L2
 
-  mode: remote
-  remote:
-    outputDir: testfiles/output/
-    cloud: aws
-    endpoint: 0.0.0.0:9000
-    region: ap-southeast-1
-    bucket: a-bucket
-    ak: minioadmin
-    sk: minioadmin
-    useIAM: <span class="hljs-literal">false</span>
-    useSSL: <span class="hljs-literal">false</span>
-    checkBucket: <span class="hljs-literal">true</span>
-  milvus2x:
-    endpoint: localhost:19530
-    username: xxxxx
-    password: xxxxx
+mode: remote
+remote:
+outputDir: testfiles/output/
+cloud: aws
+endpoint: 0.0.0.0:9000
+region: ap-southeast-1
+bucket: a-bucket
+ak: minioadmin
+sk: minioadmin
+useIAM: <span class="hljs-literal">false</span>
+useSSL: <span class="hljs-literal">false</span>
+checkBucket: <span class="hljs-literal">true</span>
+milvus2x:
+endpoint: localhost:19530
+username: xxxxx
+password: xxxxx
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>下表描述了示例配置文件中的参数。如需完整的配置清單，請參考<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_FAISS.md#migrationyaml-reference">Milvus Migration：Faiss 到 Milvus 2.x</a>.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>

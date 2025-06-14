@@ -63,7 +63,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>비정형 데이터, 임베딩 및 Milvus</span> </span></p>
 <p>Milvus는 세 가지 배포 모드를 제공하며, Jupyter Notebook의 로컬 프로토타이핑부터 수백억 개의 벡터를 관리하는 대규모 Kubernetes 클러스터에 이르기까지 다양한 데이터 규모를 지원합니다:</p>
 <ul>
-<li>Milvus Lite는 애플리케이션에 쉽게 통합할 수 있는 Python 라이브러리입니다. Milvus의 경량 버전으로, Jupyter Notebook에서 빠르게 프로토타이핑하거나 리소스가 제한된 엣지 기기에서 실행하는 데 이상적입니다. <a href="/docs/ko/milvus_lite.md">자세히 알아보기</a>.</li>
+<li>Milvus Lite는 애플리케이션에 쉽게 통합할 수 있는 Python 라이브러리입니다. Milvus의 경량 버전으로, Jupyter Notebook에서 빠르게 프로토타이핑하거나 리소스가 제한된 에지 기기에서 실행하는 데 이상적입니다. <a href="/docs/ko/milvus_lite.md">자세히 알아보기</a>.</li>
 <li>Milvus Standalone은 단일 머신 서버 배포로, 모든 구성 요소가 단일 Docker 이미지에 번들로 제공되어 편리하게 배포할 수 있습니다. <a href="/docs/ko/install_standalone-docker.md">자세히 알아보기</a>.</li>
 <li>Milvus Distributed는 수십억 규모 또는 그 이상의 시나리오를 위해 설계된 클라우드 네이티브 아키텍처를 특징으로 하는 Kubernetes 클러스터에 배포할 수 있습니다. 이 아키텍처는 중요한 구성 요소의 중복성을 보장합니다. <a href="/docs/ko/install_cluster-milvusoperator.md">자세히 알아보기</a>.</li>
 </ul>
@@ -108,7 +108,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>밀버스의 고도로 분리된 시스템 아키텍처</span> </span></p>
-<p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화된 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
+<p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화할 수 있는 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus가 지원하는 검색 유형<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -131,7 +131,7 @@ summary: >-
 <li><a href="/docs/ko/single-vector-search.md#Range-search">범위 검색</a>: 쿼리 벡터에서 지정된 반경 내의 벡터를 찾습니다.</li>
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a>: 여러 벡터 필드를 기반으로 ANN 검색을 수행합니다.</li>
 <li><a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a>: BM25에 기반한 전체 텍스트 검색.</li>
-<li><a href="/docs/ko/reranking.md">순위 재조정</a>: 추가 기준 또는 보조 알고리즘을 기반으로 검색 결과의 순서를 조정하여 초기 ANN 검색 결과를 개선합니다.</li>
+<li><a href="/docs/ko/weighted-ranker.md">순위 재조정</a>: 추가 기준 또는 보조 알고리즘을 기반으로 검색 결과의 순서를 조정하여 초기 ANN 검색 결과를 개선합니다.</li>
 <li><a href="/docs/ko/get-and-scalar-query.md#Get-Entities-by-ID">가져오기</a>: 기본 키로 데이터를 검색합니다.</li>
 <li><a href="/docs/ko/get-and-scalar-query.md#Use-Basic-Operators">쿼리</a>: 특정 표현식을 사용해 데이터를 검색합니다.</li>
 </ul>
@@ -150,7 +150,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>위에서 언급한 주요 검색 기능 외에도 Milvus는 ANN 검색을 중심으로 구현된 일련의 기능을 제공하여 사용자가 그 기능을 최대한 활용할 수 있도록 합니다.</p>
+    </button></h2><p>위에서 언급한 주요 검색 기능 외에도 Milvus는 ANN 검색을 중심으로 구현된 일련의 기능을 제공하므로 그 기능을 충분히 활용할 수 있습니다.</p>
 <h3 id="API-and-SDK" class="common-anchor-header">API 및 SDK</h3><ul>
 <li><a href="https://milvus.io/api-reference/restful/v2.4.x/About.md">RESTful API</a> (공식)</li>
 <li><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">PyMilvus</a> (Python SDK)(공식)</li>

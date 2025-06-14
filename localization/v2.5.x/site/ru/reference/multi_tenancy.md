@@ -6,6 +6,7 @@ summary: >-
   команд, называемых арендаторами, используют один и тот же кластер, сохраняя
   при этом изолированные среды данных.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">Внедрение многопользовательской аренды<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus поддерживает многопользовательскую работу на четырех уровнях: <strong>База данных</strong>, <strong>Коллекция</strong>, <strong>Раздел</strong> и <strong>Ключ раздела</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Мультиарендность на уровне базы данных</h3><p>При многопользовательстве на уровне базы данных каждый арендатор получает соответствующую <a href="/docs/ru/manage_databases.md">базу данных</a>, содержащую одну или несколько коллекций.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Мультиарендность на уровне базы данных</h3><p>При многопользовательстве на уровне базы данных каждый арендатор получает соответствующую <a href="/docs/ru/v2.5.x/manage_databases.md">базу данных</a>, содержащую одну или несколько коллекций.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -50,7 +51,7 @@ summary: >-
 <li><p><strong>Гибкость</strong>: В каждой базе данных могут быть коллекции с различными схемами, что обеспечивает гибкую организацию данных и позволяет каждому арендатору иметь собственную схему данных.</p></li>
 <li><p><strong>Другие</strong>: Эта стратегия также поддерживает RBAC, позволяя осуществлять тонкий контроль над доступом пользователей для каждого арендатора. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне коллекции</h3><p>При многопользовательской системе на уровне коллекций каждому арендатору назначается своя <a href="/docs/ru/manage-collections.md">коллекция</a>, что обеспечивает надежную изоляцию данных.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне коллекции</h3><p>При многопользовательской системе на уровне коллекций каждому арендатору назначается своя <a href="/docs/ru/v2.5.x/manage-collections.md">коллекция</a>, что обеспечивает надежную изоляцию данных.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -61,7 +62,7 @@ summary: >-
 <li><p><strong>Гибкость</strong>: Эта стратегия позволяет каждой коллекции иметь собственную схему, что позволяет разместить арендаторов с различными схемами данных.</p></li>
 <li><p><strong>Другие</strong>: Эта стратегия также поддерживает RBAC, позволяя осуществлять гранулярный контроль доступа для арендаторов. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне разделов</h3><p>При многопользовательской системе на уровне разделов каждый арендатор назначается на созданный вручную <a href="/docs/ru/manage-partitions.md">раздел</a> в общей коллекции.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Многопользовательская лицензия на уровне разделов</h3><p>При многопользовательской системе на уровне разделов каждый арендатор назначается на созданный вручную <a href="/docs/ru/v2.5.x/manage-partitions.md">раздел</a> в общей коллекции.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -72,7 +73,7 @@ summary: >-
 <li><p><strong>Гибкость</strong>: Эта стратегия требует, чтобы все арендаторы использовали одну и ту же схему данных. А разделы необходимо создавать вручную.</p></li>
 <li><p><strong>Другие</strong>: RBAC не поддерживается на уровне разделов. К арендаторам можно обращаться как по отдельности, так и через несколько разделов, что делает этот подход хорошо подходящим для сценариев с агрегированными запросами или аналитикой по сегментам арендаторов. Кроме того, вы можете гибко загружать или освобождать данные для определенных арендаторов, чтобы эффективно управлять "горячими" и "холодными" данными.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Многопользовательская аренда на уровне ключа раздела</h3><p>При этой стратегии все арендаторы используют единую коллекцию и схему, но данные каждого арендатора автоматически распределяются по 16 физически изолированным разделам на основе значения <a href="/docs/ru/use-partition-key.md">ключа раздела</a>. Хотя каждый физический раздел может содержать несколько арендаторов, данные разных арендаторов остаются логически разделенными.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Многопользовательская аренда на уровне ключа раздела</h3><p>При этой стратегии все арендаторы используют единую коллекцию и схему, но данные каждого арендатора автоматически распределяются по 16 физически изолированным разделам на основе значения <a href="/docs/ru/v2.5.x/use-partition-key.md">ключа раздела</a>. Хотя каждый физический раздел может содержать несколько арендаторов, данные разных арендаторов остаются логически разделенными.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

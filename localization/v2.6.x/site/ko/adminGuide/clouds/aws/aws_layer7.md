@@ -25,7 +25,7 @@ summary: AWS의 Layer-7 로드 밸런서 뒤에 Milvus 클러스터를 배포하
 <li><a href="/docs/ko/eks.md">AWS의 레이어 4 로드 밸런서 뒤에 Milvus 클러스터를 배포했습니다</a>.</li>
 </ul>
 <h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정</h3><p>이 가이드에서는 <a href="/docs/ko/eks.md">AWS의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/eks.md">배포했다고</a> 가정합니다.</p>
-<p>이 Milvus 클러스터에 대해 레이어 7 로드 밸런서를 설정하기 전에 다음 명령을 실행하여 레이어 4 로드 밸런서를 제거하세요.</p>
+<p>이 Milvus 클러스터에 대해 Layer-7 로드 밸런서를 설정하기 전에 다음 명령을 실행하여 Layer-4 로드 밸런서를 제거하세요.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-TLS-certificates" class="common-anchor-header">TLS 인증서 준비</h3><p>TLS가 작동하려면 인증서가 필요합니다. <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM을</a> 사용하여 인증서를 관리하고 있으므로 기존 인증서를 ACM으로 가져와야 합니다. <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">인증서 가져오기를</a> 참조하세요. 다음은 예시입니다.</p>

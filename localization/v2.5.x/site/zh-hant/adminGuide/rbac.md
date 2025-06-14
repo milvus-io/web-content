@@ -5,6 +5,7 @@ summary: >-
   RBAC (Role-Based Access Control，基於角色的存取控制) 是一種基於角色的存取控制方法。使用
   RBAC，您可以在集合、資料庫和實例層級精細地控制使用者可以執行的作業，增強資料安全性。
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">RBAC 解釋<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,9 +68,9 @@ summary: >-
       </svg>
     </button></h2><p>要通過 RBAC 實現存取控制，您需要遵循以下步驟：</p>
 <ol>
-<li><p><strong><a href="/docs/zh-hant/users_and_roles.md#Create-a-user">建立使用者</a></strong>：除了 Milvus 中的預設用戶<code translate="no">root</code> ，您還可以創建新用戶，並設定密碼以保護資料安全。</p></li>
-<li><p><strong><a href="/docs/zh-hant/users_and_roles.md#Create-a-role">建立角色</a></strong>：您可以根據需要建立自訂角色。角色的具體功能由其權限決定。</p></li>
-<li><p><strong><a href="/docs/zh-hant/privilege_group.md">建立特權群組</a></strong>：將多個特權組合為一個特權組，以簡化授予角色特權的流程。</p></li>
-<li><p><strong><a href="/docs/zh-hant/grant_privileges.md">授予角色特權或特權群組</a></strong>：透過授予角色權限或權限群組，定義角色的功能。</p></li>
-<li><p><strong><a href="/docs/zh-hant/grant_roles.md">授予使用者角色</a></strong>：將具有特定權限的角色授予使用者，讓使用者可以擁有角色的權限。單一角色可授予多個使用者。</p></li>
+<li><p><strong><a href="/docs/zh-hant/v2.5.x/users_and_roles.md#Create-a-user">建立使用者</a></strong>：除了 Milvus 中的預設用戶<code translate="no">root</code> ，您還可以創建新用戶，並設定密碼以保護資料安全。</p></li>
+<li><p><strong><a href="/docs/zh-hant/v2.5.x/users_and_roles.md#Create-a-role">建立角色</a></strong>：您可以根據需要建立自訂角色。角色的具體功能由其權限決定。</p></li>
+<li><p><strong><a href="/docs/zh-hant/v2.5.x/privilege_group.md">建立特權群組</a></strong>：將多個特權組合為一個特權組，以簡化授予角色特權的流程。</p></li>
+<li><p><strong><a href="/docs/zh-hant/v2.5.x/grant_privileges.md">授予角色特權或特權群組</a></strong>：透過授予角色權限或權限群組，定義角色的功能。</p></li>
+<li><p><strong><a href="/docs/zh-hant/v2.5.x/grant_roles.md">授予使用者角色</a></strong>：將具有特定權限的角色授予使用者，讓使用者可以擁有角色的權限。單一角色可授予多個使用者。</p></li>
 </ol>

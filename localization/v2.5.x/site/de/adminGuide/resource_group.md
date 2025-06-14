@@ -62,7 +62,7 @@ title: Verwalten von Ressourcengruppen
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Das <strong>requests-Attribut</strong> legt die Bedingungen fest, die eine Ressourcengruppe erfüllen muss.</li>
+<li>Das Attribut <strong>requests</strong> gibt die Bedingungen an, die eine Ressourcengruppe erfüllen muss.</li>
 <li>Das <strong>limits-Attribut</strong> legt die Höchstgrenzen für eine Ressourcengruppe fest.</li>
 <li>Die Attribute <strong>transfer_from</strong> und <strong>transfer_to</strong> beschreiben, von welchen Ressourcengruppen eine Ressourcengruppe vorzugsweise Ressourcen beziehen bzw. an welche Ressourcengruppen sie Ressourcen übertragen soll.</li>
 </ul>
@@ -73,7 +73,7 @@ title: Verwalten von Ressourcengruppen
 <li>Wenn die Anzahl der QueryNodes im Milvus-Cluster unzureichend ist, d. h. <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, wird es immer Ressourcengruppen ohne genügend QueryNodes geben.</li>
 <li>Wenn die Anzahl der QueryNodes im Milvus-Cluster zu hoch ist, d.h. <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, werden die redundanten QueryNodes immer zuerst in der <strong>__default_resource_group</strong> platziert.</li>
 </ul>
-<p>Wenn sich die Anzahl der QueryNodes im Cluster ändert, wird der Milvus natürlich ständig versuchen, die endgültigen Bedingungen zu erfüllen. Daher können Sie zuerst die Konfigurationsänderungen der Ressourcengruppe anwenden und dann die Skalierung der QueryNodes durchführen.</p>
+<p>Wenn sich die Anzahl der QueryNodes im Cluster ändert, wird Milvus natürlich ständig versuchen, die endgültigen Bedingungen zu erfüllen. Daher können Sie zuerst die Konfigurationsänderungen der Ressourcengruppe anwenden und dann die Skalierung der QueryNodes durchführen.</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">Verwendung der deklarativen API zur Verwaltung der Ressourcengruppe<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ title: Verwalten von Ressourcengruppen
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.5.10. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
+<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.5.11. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
 </div>
 <ol>
 <li><p>Erstellen Sie eine Ressourcengruppe.</p>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>Beachten Sie, dass <code translate="no">_resource_groups</code> ein optionaler Parameter ist, und wenn Sie ihn nicht angeben, lädt Milvus die Replikate auf die Abfrageknoten in der Standard-Ressourcengruppe.</p>
 <p>Damit Milus jedes Replikat einer Sammlung in eine separate Ressourcengruppe lädt, stellen Sie sicher, dass die Anzahl der Ressourcengruppen gleich der Anzahl der Replikate ist.</p></li>
 <li><p>Übertragen Sie Replikate zwischen Ressourcengruppen.</p>
-<p>Milvus verwendet <a href="/docs/de/replica.md">Replikate</a>, um einen Lastausgleich zwischen <a href="/docs/de/glossary.md#Segment">Segmenten</a> zu erreichen, die über mehrere Abfrageknoten verteilt sind. Sie können bestimmte Replikate einer Sammlung wie folgt von einer Ressourcengruppe in eine andere verschieben:</p>
+<p>Milvus verwendet <a href="/docs/de/v2.5.x/replica.md">Replikate</a>, um einen Lastausgleich zwischen <a href="/docs/de/v2.5.x/glossary.md#Segment">Segmenten</a> zu erreichen, die über mehrere Abfrageknoten verteilt sind. Sie können bestimmte Replikate einer Sammlung wie folgt von einer Ressourcengruppe in eine andere verschieben:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Um eine mandantenfähige Milvus-Instanz einzurichten, lesen Sie das Folgende:</p>
 <ul>
-<li><a href="/docs/de/rbac.md">RBAC aktivieren</a></li>
-<li><a href="/docs/de/users_and_roles.md">Benutzer und Rollen</a></li>
+<li><a href="/docs/de/v2.5.x/rbac.md">RBAC aktivieren</a></li>
+<li><a href="/docs/de/v2.5.x/users_and_roles.md">Benutzer und Rollen</a></li>
 </ul>

@@ -121,7 +121,7 @@ title: 'MCP + Milvus: Ligar a IA a bases de dados vectoriais'
         ></path>
       </svg>
     </button></h2><ol>
-<li>Instalar <a href="https://claude.ai/download">o Claude Desktop</a>.</li>
+<li>Instale <a href="https://claude.ai/download">o Claude Desktop</a>.</li>
 <li>Abra o arquivo de configuração do Claude:<ul>
 <li>No macOS: <code translate="no">~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
 </ul></li>
@@ -195,7 +195,7 @@ title: 'MCP + Milvus: Ligar a IA a bases de dados vectoriais'
 <ol start="2">
 <li>Reinicie o Cursor para aplicar a configuração.</li>
 </ol>
-<p>Depois de adicionar o servidor, pode ser necessário pressionar o botão atualizar nas configurações do MCP para preencher a lista de ferramentas. O Agente de composição utilizará automaticamente as ferramentas Milvus quando for relevante para as suas consultas.</p>
+<p>Após adicionar o servidor, pode ser necessário pressionar o botão atualizar nas configurações do MCP para preencher a lista de ferramentas. O Agente de composição utilizará automaticamente as ferramentas Milvus quando for relevante para as suas consultas.</p>
 <h2 id="Verifying-the-Integration" class="common-anchor-header">Verificação da integração<button data-href="#Verifying-the-Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

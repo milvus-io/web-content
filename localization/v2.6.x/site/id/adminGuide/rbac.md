@@ -73,5 +73,5 @@ summary: >-
 <li><p><strong><a href="/docs/id/users_and_roles.md#Create-a-role">Membuat peran</a></strong>: Anda dapat membuat peran yang disesuaikan berdasarkan kebutuhan Anda. Kemampuan spesifik peran ditentukan oleh hak istimewanya.</p></li>
 <li><p><strong><a href="/docs/id/privilege_group.md">Membuat grup hak istimewa</a></strong>: Gabungkan beberapa hak istimewa ke dalam satu grup hak istimewa untuk menyederhanakan proses pemberian hak istimewa pada suatu peran.</p></li>
 <li><p><strong><a href="/docs/id/grant_privileges.md">Memberikan hak istimewa atau grup hak istimewa ke suatu peran</a></strong>: Menetapkan kemampuan peran dengan memberikan hak istimewa atau grup hak istimewa ke peran ini.</p></li>
-<li><p><strong><a href="/docs/id/grant_roles.md">Memberikan peran kepada pengguna</a></strong>: Memberikan peran dengan hak istimewa tertentu kepada pengguna sehingga pengguna dapat memiliki hak istimewa dari suatu peran. Satu peran dapat diberikan kepada beberapa pengguna.</p></li>
+<li><p><strong><a href="/docs/id/grant_roles.md">Memberikan peran kepada pengguna</a></strong>: Memberikan peran dengan hak istimewa tertentu kepada pengguna sehingga pengguna dapat memiliki hak istimewa peran. Satu peran dapat diberikan kepada beberapa pengguna.</p></li>
 </ol>

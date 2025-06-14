@@ -1,9 +1,10 @@
 ---
 id: deploy_etcd.md
 title: تكوين التخزين التعريفي باستخدام Docker Compose أو Helm
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: تعرف على كيفية تكوين التخزين التعريفي لـ Milvus باستخدام Docker Compose/Helm.
 ---
+
 <h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">تكوين التخزين التعريفي باستخدام Docker Compose أو Helm<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ summary: تعرف على كيفية تكوين التخزين التعريفي �
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>انظر <a href="/docs/ar/configure_etcd.md">التكوينات المتعلقة بـ etcd</a> لمزيد من المعلومات.</p>
+<p>انظر <a href="/docs/ar/v2.5.x/configure_etcd.md">التكوينات المتعلقة بـ etcd</a> لمزيد من المعلومات.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. تشغيل ميلفوس</h3><p>قم بتشغيل الأمر التالي لبدء تشغيل Milvus الذي يستخدم تكوينات إلخd.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -131,6 +132,6 @@ summary: تعرف على كيفية تكوين التخزين التعريفي �
       </svg>
     </button></h2><p>تعلم كيفية تكوين تبعيات Milvus الأخرى باستخدام Docker Compose أو Helm:</p>
 <ul>
-<li><a href="/docs/ar/deploy_s3.md">تهيئة تخزين الكائنات باستخدام Docker Compose أو Helm</a></li>
-<li><a href="/docs/ar/deploy_pulsar.md">تكوين تخزين الرسائل باستخدام Docker Compose أو Helm</a></li>
+<li><a href="/docs/ar/v2.5.x/deploy_s3.md">تهيئة تخزين الكائنات باستخدام Docker Compose أو Helm</a></li>
+<li><a href="/docs/ar/v2.5.x/deploy_pulsar.md">تكوين تخزين الرسائل باستخدام Docker Compose أو Helm</a></li>
 </ul>

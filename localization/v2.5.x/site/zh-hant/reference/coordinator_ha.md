@@ -3,6 +3,7 @@ id: coordinator_ha.md
 summary: 了解 Milvus 協調員在主動待命工作的動機和程序。
 title: 協調器 HA
 ---
+
 <h1 id="Coordinator-HA" class="common-anchor-header">協調器 HA<button data-href="#Coordinator-HA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -18,7 +19,7 @@ title: 協調器 HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>如<a href="/docs/zh-hant/architecture_overview.md">Milvus 架構</a>所示，Milvus 由許多元件組成，並以分散式方式運作。在所有元件中，Milvus 透過<a href="/docs/zh-hant/scaleout.md">擴充和縮</a>小節點來確保工作人員的高可用性，讓協調器成為整個鏈中唯一的薄弱環節。</p>
+    </button></h1><p>如<a href="/docs/zh-hant/v2.5.x/architecture_overview.md">Milvus 架構</a>所示，Milvus 由許多元件組成，並以分散式方式運作。在所有元件中，Milvus 透過<a href="/docs/zh-hant/v2.5.x/scaleout.md">擴充和縮</a>小節點來確保工作人員的高可用性，讓協調器成為整個鏈中唯一的薄弱環節。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,23 +96,24 @@ title: 協調器 HA
       - <span class="hljs-string">&quot;pulsar&quot;</span>
       - <span class="hljs-string">&quot;minio&quot;</span>
 
-<span class="hljs-comment">#   add the following to have RootCoords work in active-standby mode</span>
-<span class="hljs-comment">#   rootcoord-1:</span>
-<span class="hljs-comment">#    container_name: milvus-rootcoord-1</span>
-<span class="hljs-comment">#    image: milvusdb/milvus:v2.2.3</span>
-<span class="hljs-comment">#    command: [&quot;milvus&quot;, &quot;run&quot;, &quot;rootcoord&quot;]</span>
-<span class="hljs-comment">#    environment:</span>
-<span class="hljs-comment">#      ETCD_ENDPOINTS: etcd:2379</span>
-<span class="hljs-comment">#      MINIO_ADDRESS: minio:9000</span>
-<span class="hljs-comment">#      PULSAR_ADDRESS: pulsar://pulsar:6650</span>
-<span class="hljs-comment">#      ROOT_COORD_ADDRESS: rootcoord-1:53100</span>
-<span class="hljs-comment">#      # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
-<span class="hljs-comment">#      ROOT_COORD_ENABLE_ACTIVE_STANDBY: true</span>
-<span class="hljs-comment">#    depends_on:</span>
-<span class="hljs-comment">#      - &quot;etcd&quot;</span>
-<span class="hljs-comment">#      - &quot;pulsar&quot;</span>
-<span class="hljs-comment">#      - &quot;minio&quot;</span>
+<span class="hljs-comment"># add the following to have RootCoords work in active-standby mode</span>
+<span class="hljs-comment"># rootcoord-1:</span>
+<span class="hljs-comment"># container_name: milvus-rootcoord-1</span>
+<span class="hljs-comment"># image: milvusdb/milvus:v2.2.3</span>
+<span class="hljs-comment"># command: [&quot;milvus&quot;, &quot;run&quot;, &quot;rootcoord&quot;]</span>
+<span class="hljs-comment"># environment:</span>
+<span class="hljs-comment"># ETCD_ENDPOINTS: etcd:2379</span>
+<span class="hljs-comment"># MINIO_ADDRESS: minio:9000</span>
+<span class="hljs-comment"># PULSAR_ADDRESS: pulsar://pulsar:6650</span>
+<span class="hljs-comment"># ROOT_COORD_ADDRESS: rootcoord-1:53100</span>
+<span class="hljs-comment"># # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
+<span class="hljs-comment"># ROOT_COORD_ENABLE_ACTIVE_STANDBY: true</span>
+<span class="hljs-comment"># depends_on:</span>
+<span class="hljs-comment"># - &quot;etcd&quot;</span>
+<span class="hljs-comment"># - &quot;pulsar&quot;</span>
+<span class="hljs-comment"># - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="With-MacLinux-shell" class="common-anchor-header">使用 Mac/Linux shell</h3><p>要啟動多個協調器，並讓它們以主動待命模式工作，您可以</p>
 <ol>
 <li><p>下載 Milvus 原始碼到您的本機磁碟機，<a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">並從原始碼啟動一個 Milvus 叢集</a>，如下所示：</p>
@@ -170,9 +172,9 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
       </svg>
     </button></h2><p>協調器 HA 預設為停用。您可以在 Milvus 設定檔中變更下列項目，手動啟用此功能。</p>
 <ul>
-<li><a href="/docs/zh-hant/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/zh-hant/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

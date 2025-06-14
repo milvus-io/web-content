@@ -41,7 +41,7 @@ title: Migrieren zwischen Instanzen über S3-Umgebungen hinweg
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-storage-backup-and-restore.png" alt="multi-storage-backup-and-restore.png" class="doc-image" id="multi-storage-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>multi-storage-backup-and-restore.png</span> </span></p>
-<p>Angenommen, wir haben zwei Milvus-Instanzen, <code translate="no">milvus_A</code> und <code translate="no">milvus_B</code>, die unterschiedliche Objektspeicher verwenden. In diesem Beispiel ist es unser Ziel, die folgenden Aufgaben zu erledigen:</p>
+<p>Angenommen, wir haben zwei Milvus-Instanzen, <code translate="no">milvus_A</code> und <code translate="no">milvus_B</code>, die unterschiedliche Objektspeicher verwenden. In diesem Beispiel ist es unser Ziel, die folgenden Aufgaben zu erfüllen:</p>
 <ol>
 <li><p>Erstellen eines Backups (my_backup) für die Sammlung <code translate="no">coll</code> in <code translate="no">bucket_A</code> des Objektspeichers von<code translate="no">milvus_A</code>.</p></li>
 <li><p>Übertragen Sie die Sicherung my_backup in <code translate="no">bucket_B</code> des Objektspeichers von <code translate="no">milvus_B</code>.</p></li>

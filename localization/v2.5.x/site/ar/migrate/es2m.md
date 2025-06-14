@@ -5,6 +5,7 @@ summary: >-
   Milvus 2.x.
 title: من Elasticsearch
 ---
+
 <h1 id="From-Elasticsearch" class="common-anchor-header">من Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ title: من Elasticsearch
 <li>للحصول على تفاصيل التثبيت، راجع <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">تثبيت Elasticsearch</a> <a href="https://milvus.io/docs/install_standalone-docker.md">وتثبيت Milvus</a>.</li>
 </ul></li>
 <li><strong>الأدوات المطلوبة</strong>:<ul>
-<li>أداة<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. للحصول على تفاصيل التثبيت، راجع <a href="/docs/ar/milvusdm_install.md">تثبيت أداة الترحيل</a>.</li>
+<li>أداة<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. للحصول على تفاصيل التثبيت، راجع <a href="/docs/ar/v2.5.x/milvusdm_install.md">تثبيت أداة الترحيل</a>.</li>
 </ul></li>
 <li><strong>أنواع البيانات المدعومة للترحيل</strong>: الحقول التي سيتم ترحيلها من فهرس Elasticsearch المصدر هي من الأنواع التالية - <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector،</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">والكلمات الرئيسية،</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">والنص،</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">والطويل،</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">والصحيح،</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">والمزدوج،</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">والعائم،</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">والمنطقي،</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">والكائن</a>. أنواع البيانات غير المدرجة هنا غير مدعومة حاليًا للترحيل. ارجع إلى <a href="#field-mapping-reference">مرجع تخطيط الحقول</a> للحصول على معلومات مفصلة حول تخطيطات البيانات بين مجموعات Milvus وفهارس Elasticsearch.</li>
 <li><strong>متطلبات فهرس Elasticsearch</strong>:<ul>

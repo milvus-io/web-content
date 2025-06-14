@@ -5,6 +5,7 @@ summary: >-
   검색 엔진이라고도 하는 정보 검색 시스템은 검색 증강 생성(RAG), 시각적 검색, 제품 추천과 같은 다양한 AI 애플리케이션에
   필수적입니다. 이러한 시스템의 핵심은 정보를 구성, 색인화 및 검색하기 위해 신중하게 설계된 데이터 모델입니다.
 ---
+
 <h1 id="Data-Model-Design-for-Search" class="common-anchor-header">검색을 위한 데이터 모델 설계<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,8 +90,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus에서 데이터 모델은 컬렉션 스키마를 통해 표현됩니다. 컬렉션 스키마 내에서 올바른 필드를 설계하는 것은 효과적인 검색을 가능하게 하는 핵심입니다. 각 필드는 컬렉션에 저장된 특정 유형의 데이터를 정의하며 검색 프로세스에서 고유한 역할을 합니다. 상위 수준에서 Milvus는 <strong>벡터 필드</strong> 와 <strong>스칼라 필드라는</strong> 두 가지 주요 유형의 필드를 지원합니다.</p>
 <p>이제 데이터 모델을 벡터 및 보조 스칼라 필드를 포함한 필드 스키마에 매핑할 수 있습니다. 각 필드가 데이터 모델의 속성과 연관되어 있는지 확인하고, 특히 벡터 유형(밀도 또는 스페이스) 및 차원에 주의하세요.</p>
-<h3 id="Vector-Field" class="common-anchor-header">벡터 필드</h3><p>벡터 필드는 텍스트, 이미지, 오디오와 같은 비정형 데이터 유형에 대한 임베딩을 저장합니다. 이러한 임베딩은 데이터 유형과 사용되는 검색 방법에 따라 고밀도, 스파스 또는 바이너리일 수 있습니다. 일반적으로 고밀도 벡터는 시맨틱 검색에 사용되는 반면, 스파스 벡터는 전체 텍스트 또는 어휘 매칭에 더 적합합니다. 이진 벡터는 저장 공간과 계산 리소스가 제한되어 있을 때 유용합니다. 컬렉션에는 여러 개의 벡터 필드가 포함되어 멀티모달 또는 하이브리드 검색 전략을 사용할 수 있습니다. 이 주제에 대한 자세한 가이드는 <a href="/docs/ko/multi-vector-search.md">멀티-벡터 하이브리드 검색을</a> 참조하세요.</p>
-<p><a href="/docs/ko/dense-vector.md">밀도 벡터</a>는 <code translate="no">FLOAT_VECTOR</code>, <a href="/docs/ko/sparse_vector.md">스파스 벡터는</a> <code translate="no">SPARSE_FLOAT_VECTOR</code>, <a href="/docs/ko/binary-vector.md">바이너리 벡터는</a> <code translate="no">BINARY_VECTOR</code> 에서 벡터 데이터 유형을 지원합니다.</p>
+<h3 id="Vector-Field" class="common-anchor-header">벡터 필드</h3><p>벡터 필드는 텍스트, 이미지, 오디오와 같은 비정형 데이터 유형에 대한 임베딩을 저장합니다. 이러한 임베딩은 데이터 유형과 사용되는 검색 방법에 따라 고밀도, 스파스 또는 바이너리일 수 있습니다. 일반적으로 고밀도 벡터는 시맨틱 검색에 사용되는 반면, 스파스 벡터는 전체 텍스트 또는 어휘 매칭에 더 적합합니다. 이진 벡터는 저장 공간과 계산 리소스가 제한되어 있을 때 유용합니다. 컬렉션에는 여러 개의 벡터 필드가 포함되어 멀티모달 또는 하이브리드 검색 전략을 사용할 수 있습니다. 이 주제에 대한 자세한 가이드는 <a href="/docs/ko/v2.5.x/multi-vector-search.md">멀티-벡터 하이브리드 검색을</a> 참조하세요.</p>
+<p><a href="/docs/ko/v2.5.x/dense-vector.md">밀도 벡터</a>는 <code translate="no">FLOAT_VECTOR</code>, <a href="/docs/ko/v2.5.x/sparse_vector.md">스파스 벡터는</a> <code translate="no">SPARSE_FLOAT_VECTOR</code>, <a href="/docs/ko/v2.5.x/binary-vector.md">바이너리 벡터는</a> <code translate="no">BINARY_VECTOR</code> 에서 벡터 데이터 유형을 지원합니다.</p>
 <h3 id="Scalar-Field" class="common-anchor-header">스칼라 필드</h3><p>스칼라 필드는 숫자, 문자열 또는 날짜와 같은 원시적이고 구조화된 값(일반적으로 메타데이터라고 함)을 저장합니다. 이러한 값은 벡터 검색 결과와 함께 반환될 수 있으며 필터링 및 정렬에 필수적입니다. 특정 카테고리나 정의된 시간 범위로 문서를 제한하는 등 특정 속성을 기반으로 검색 결과의 범위를 좁힐 수 있습니다.</p>
 <p>Milvus는 벡터가 아닌 데이터를 저장하고 필터링하기 위해 <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, <code translate="no">ARRAY</code> 과 같은 스칼라 유형을 지원합니다. 이러한 유형은 검색 작업의 정밀도와 사용자 정의 기능을 향상시킵니다.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">스키마 설계에서 고급 기능 활용<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
@@ -110,13 +111,13 @@ summary: >-
       </svg>
     </button></h2><p>스키마를 설계할 때 단순히 지원되는 데이터 유형을 사용하여 데이터를 필드에 매핑하는 것만으로는 충분하지 않습니다. 필드 간의 관계와 구성에 사용할 수 있는 전략을 철저히 이해하는 것이 필수적입니다. 설계 단계에서 주요 기능을 염두에 두면 스키마가 즉각적인 데이터 처리 요구 사항을 충족할 뿐만 아니라 향후 필요에 따라 확장 및 조정할 수 있습니다. 이러한 기능을 신중하게 통합하면 Milvus의 기능을 극대화하고 보다 광범위한 데이터 전략과 목표를 지원하는 강력한 데이터 아키텍처를 구축할 수 있습니다. 다음은 컬렉션 스키마를 만드는 주요 기능에 대한 개요입니다:</p>
 <h3 id="Primary-Key" class="common-anchor-header">기본 키</h3><p>기본 키 필드는 컬렉션 내의 각 엔티티를 고유하게 식별하므로 스키마의 기본 구성 요소입니다. 기본 키를 정의하는 것은 필수입니다. 정수 또는 문자열 유형의 스칼라 필드여야 하며 <code translate="no">is_primary=True</code> 로 표시되어야 합니다. 선택적으로 컬렉션에 데이터가 더 많이 수집될수록 정수가 자동으로 할당되는 기본 키에 <code translate="no">auto_id</code> 를 활성화할 수 있습니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/primary-field.md">기본 필드 및 자동 ID를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.5.x/primary-field.md">기본 필드 및 자동 ID를</a> 참조하세요.</p>
 <h3 id="Partitioning" class="common-anchor-header">파티셔닝</h3><p>검색 속도를 높이려면 선택적으로 파티셔닝을 켤 수 있습니다. 파티셔닝을 위해 특정 스칼라 필드를 지정하고 검색 중에 이 필드를 기준으로 필터링 기준을 지정하면 검색 범위를 관련 파티션으로만 효과적으로 제한할 수 있습니다. 이 방법은 검색 도메인을 줄임으로써 검색 작업의 효율성을 크게 향상시킵니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.5.x/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p>
 <h3 id="Analyzer" class="common-anchor-header">분석기</h3><p>분석기는 텍스트 데이터를 처리하고 변환하는 데 필수적인 도구입니다. 주요 기능은 원시 텍스트를 토큰으로 변환하고 색인 및 검색을 위해 구조화하는 것입니다. 문자열을 토큰화하고, 중지 단어를 삭제하고, 개별 단어의 어간을 토큰으로 변환하는 방식으로 이를 수행합니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/analyzer-overview.md">분석기 개요를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.5.x/analyzer-overview.md">분석기 개요를</a> 참조하세요.</p>
 <h3 id="Function" class="common-anchor-header">기능</h3><p>Milvus를 사용하면 스키마의 일부로 내장 함수를 정의하여 특정 필드를 자동으로 도출할 수 있습니다. 예를 들어, <code translate="no">VARCHAR</code> 필드에서 스파스 벡터를 생성하는 기본 제공 BM25 함수를 추가하여 전체 텍스트 검색을 지원할 수 있습니다. 이러한 함수 파생 필드는 전처리를 간소화하고 컬렉션이 독립적이고 쿼리 준비가 된 상태로 유지되도록 합니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.5.x/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">실제 예제<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,7 +147,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>활성화된 상태에서 자동 생성 <code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/ko/get-and-scalar-query.md">Get을 사용하여 쿼리</a></p></td>
+     <td><p><a href="/docs/ko/v2.5.x/get-and-scalar-query.md">Get을 사용하여 쿼리</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -155,7 +156,7 @@ summary: >-
    <tr>
      <td><p>title (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>기사 제목</p></td>
-     <td><p><a href="/docs/ko/keyword-match.md">텍스트 일치</a></p></td>
+     <td><p><a href="/docs/ko/v2.5.x/keyword-match.md">텍스트 일치</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -164,7 +165,7 @@ summary: >-
    <tr>
      <td><p>타임스탬프 (<code translate="no">INT32</code>)</p></td>
      <td><p>게시 날짜</p></td>
-     <td><p><a href="/docs/ko/use-partition-key.md">파티션 키로 필터링</a></p></td>
+     <td><p><a href="/docs/ko/v2.5.x/use-partition-key.md">파티션 키로 필터링</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -173,7 +174,7 @@ summary: >-
    <tr>
      <td><p>텍스트 (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>기사의 원시 텍스트</p></td>
-     <td><p><a href="/docs/ko/multi-vector-search.md">멀티-벡터 하이브리드 검색</a></p></td>
+     <td><p><a href="/docs/ko/v2.5.x/multi-vector-search.md">멀티-벡터 하이브리드 검색</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -198,7 +199,7 @@ summary: >-
      <td><p>출력</p></td>
    </tr>
 </table>
-<p>스키마에 대한 자세한 내용과 다양한 유형의 필드 추가에 대한 자세한 안내는 <a href="/docs/ko/schema.md">스키마 설명을</a> 참조하세요.</p>
+<p>스키마에 대한 자세한 내용과 다양한 유형의 필드 추가에 대한 자세한 안내는 <a href="/docs/ko/v2.5.x/schema.md">스키마 설명을</a> 참조하세요.</p>
 <h3 id="Initialize-schema" class="common-anchor-header">스키마 초기화</h3><p>시작하려면 먼저 빈 스키마를 만들어야 합니다. 이 단계에서는 데이터 모델을 정의하기 위한 기본 구조를 설정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -206,6 +207,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -242,6 +244,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, d
 schema.add_field(field_name=<span class="hljs-string">&quot;text_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;text dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;text sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
@@ -404,14 +407,15 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
-    name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
-    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
-    output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
-    function_type=FunctionType.BM25,
+name=<span class="hljs-string">&quot;text_bm25&quot;</span>,
+input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],
+output_field_names=[<span class="hljs-string">&quot;text_sparse_vector&quot;</span>],
+function_type=FunctionType.BM25,
 )
 
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
 
@@ -477,6 +481,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ko/create-collection.md">컬렉션 생성</a></p></li>
-<li><p><a href="/docs/ko/alter-collection-field.md">컬렉션 필드 변경</a></p></li>
+<li><p><a href="/docs/ko/v2.5.x/create-collection.md">컬렉션 생성</a></p></li>
+<li><p><a href="/docs/ko/v2.5.x/alter-collection-field.md">컬렉션 필드 변경</a></p></li>
 </ul>

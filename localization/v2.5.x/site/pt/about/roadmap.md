@@ -7,6 +7,7 @@ summary: >-
   aplicações de IA. Aqui está o nosso roteiro para orientar o nosso
   desenvolvimento.
 ---
+
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Roteiro de Milvus<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +79,7 @@ summary: >-
 <li>O nosso roteiro está normalmente estruturado em três partes: a versão mais recente, a próxima versão e uma visão de médio a longo prazo para o próximo ano.</li>
 <li>À medida que progredimos, aprendemos continuamente e, ocasionalmente, ajustamos o nosso foco, adicionando ou removendo itens conforme necessário.</li>
 <li>Estes planos são indicativos e estão sujeitos a alterações, podendo variar consoante os serviços de subscrição.</li>
-<li>Cumprimos rigorosamente o nosso roteiro, com as nossas <a href="/docs/pt/release_notes.md">notas de lançamento</a> a servirem de referência.</li>
+<li>Cumprimos rigorosamente o nosso roteiro, com as nossas <a href="/docs/pt/v2.5.x/release_notes.md">notas de lançamento</a> a servirem de referência.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">Como contribuir<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

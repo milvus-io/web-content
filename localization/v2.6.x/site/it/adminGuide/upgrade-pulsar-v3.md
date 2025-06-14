@@ -324,7 +324,7 @@ Hang tight <span class="hljs-keyword">while</span> we grab the latest from your 
 Update Complete. ⎈Happy Helming!⎈​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Installare la release di Milvus con la versione più recente di helm chart utilizzando il file <code translate="no">values.yaml</code> modificato.</p>
+<li><p>Installare la release di Milvus con la versione più recente del grafico di Helm utilizzando il file <code translate="no">values.yaml</code> modificato.</p>
 <pre><code translate="no" class="language-bash">helm -n default install my-release zilliztech/milvus --reset-values -f values.yaml​
 
 <button class="copy-code-btn"></button></code></pre>

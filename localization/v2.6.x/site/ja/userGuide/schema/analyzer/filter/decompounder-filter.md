@@ -5,7 +5,6 @@ summary: >-
   複合語分解フィルタは、指定された辞書に基づいて複合語を個々のコンポーネントに分割し、複合語の部
   分を簡単に検索できるようにする。このフィルタは、ドイツ語など、複合語を頻繁に使用する言語で特に役立ちます。
 ---
-
 <h1 id="Decompounder" class="common-anchor-header">逆コンパウンダー<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,7 +91,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p><code translate="no">decompounder</code> フィルタは以下の設定可能なパラメータを受け付けます。</p>
 <table>
    <tr>
@@ -170,8 +168,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#javascript">Java NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURLを使用した</a>検証</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&quot;</span>
@@ -180,7 +177,6 @@ sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&q
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

@@ -86,7 +86,7 @@ title: CDC 개요
 <li><p><strong>작업 생성</strong>: 사용자가 HTTP 요청을 통해 CDC 작업을 시작합니다.</p></li>
 <li><p><strong>메타데이터 검색</strong>: 시스템은 수집에 대한 채널 및 체크포인트 정보를 포함한 수집 관련 메타데이터를 소스 Milvus의 etcd에서 가져옵니다.</p></li>
 <li><p><strong>MQ 연결</strong>: 메타데이터가 준비되면 시스템은 MQ에 연결하여 데이터 스트림에 대한 구독을 시작합니다.</p></li>
-<li><p><strong>데이터 처리</strong>: MQ의 데이터를 읽고, 구문 분석하여 Go SDK를 사용하여 전달하거나 소스 Milvus에서 수행된 작업을 복제하도록 처리합니다.</p></li>
+<li><p><strong>데이터 처리</strong>: MQ의 데이터를 읽고, 구문 분석하고, Go SDK를 사용하여 전달하거나 소스 Milvus에서 수행된 작업을 복제하도록 처리합니다.</p></li>
 </ol>
 <p>
   
@@ -109,7 +109,7 @@ title: CDC 개요
       </svg>
     </button></h2><ul>
 <li><p><strong>증분 데이터 동기화</strong>: 현재 Milvus-CDC는 증분 데이터만 동기화하도록 설계되어 있습니다. 비즈니스에 전체 데이터 백업이 필요한 경우 <a href="https://milvus.io/community">당사에</a> 문의하여 도움을 받으시기 바랍니다.</p></li>
-<li><p><strong>동기화 범위</strong>: 현재 Milvus-CDC는 클러스터 수준에서 데이터를 동기화할 수 있습니다. 향후 릴리스에서 컬렉션 수준의 데이터 동기화 지원을 추가하기 위해 노력하고 있습니다.</p></li>
+<li><p><strong>동기화 범위</strong>: 현재 Milvus-CDC는 클러스터 수준에서 데이터를 동기화할 수 있습니다. 향후 릴리스에서 컬렉션 수준의 데이터 동기화 지원을 추가하기 위해 노력 중입니다.</p></li>
 <li><p><strong>지원되는 API 요청</strong>: Milvus-CDC는 현재 다음과 같은 API 요청을 지원합니다. 향후 릴리스에서 추가 요청에 대한 지원을 확대할 계획입니다:</p>
 <ul>
 <li><p>컬렉션 생성/삭제</p></li>

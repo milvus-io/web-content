@@ -4,6 +4,7 @@ related_key: scale Milvus cluster
 summary: Aprenda a reducir y escalar manual o automáticamente en un clúster Milvus.
 title: Escalar un clúster Milvus
 ---
+
 <h1 id="Scale-a-Milvus-Cluster" class="common-anchor-header">Escalar un clúster Milvus<button data-href="#Scale-a-Milvus-Cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ title: Escalar un clúster Milvus
         ></path>
       </svg>
     </button></h1><p>Milvus soporta el escalado horizontal de sus componentes. Esto significa que puede aumentar o disminuir el número de nodos trabajadores de cada tipo según sus propias necesidades.</p>
-<p>Este tema describe cómo escalar y reducir un cluster Milvus. Asumimos que ya ha <a href="/docs/es/install_cluster-helm.md">instalado un cluster Milvus</a> antes de escalar. Además, le recomendamos que se familiarice con la <a href="/docs/es/architecture_overview.md">arquitectura de Milvus</a> antes de empezar.</p>
+<p>Este tema describe cómo escalar y reducir un cluster Milvus. Asumimos que ya ha <a href="/docs/es/v2.5.x/install_cluster-helm.md">instalado un cluster Milvus</a> antes de escalar. Además, le recomendamos que se familiarice con la <a href="/docs/es/v2.5.x/architecture_overview.md">arquitectura de Milvus</a> antes de empezar.</p>
 <p>Este tutorial toma como ejemplo la ampliación de tres nodos de consulta. Para escalar otros tipos de nodos, sustituya <code translate="no">queryNode</code> por el tipo de nodo correspondiente en la línea de comandos.</p>
 <div class="alert note">
 <p>Para obtener información sobre cómo escalar un clúster con <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Milvus Operator</a>, consulte <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Escalar un clúster con Milvus Operator</a>.</p>
@@ -50,7 +51,7 @@ title: Escalar un clúster Milvus
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Ampliación</span> </span></p>
-<p>De acuerdo con la <a href="/docs/es/architecture_overview.md">arquitectura Milvus</a>, los nodos trabajadores sin estado incluyen el nodo de consulta, el nodo de datos, el nodo de índice y el proxy. Por lo tanto, puede ampliar este tipo de nodos para adaptarlos a sus necesidades empresariales y escenarios de aplicación. Puede escalar el cluster Milvus manual o automáticamente.</p>
+<p>De acuerdo con la <a href="/docs/es/v2.5.x/architecture_overview.md">arquitectura Milvus</a>, los nodos trabajadores sin estado incluyen el nodo de consulta, el nodo de datos, el nodo de índice y el proxy. Por lo tanto, puede ampliar este tipo de nodos para adaptarlos a sus necesidades empresariales y escenarios de aplicación. Puede escalar el cluster Milvus manual o automáticamente.</p>
 <p>Generalmente, necesitará escalar el cluster Milvus que ha creado si está sobreutilizado. A continuación se detallan algunas situaciones típicas en las que puede necesitar escalar el cluster Milvus:</p>
 <ul>
 <li>La utilización de CPU y memoria es alta durante un período de tiempo.</li>
@@ -114,7 +115,7 @@ Milvus sólo admite la adición de los nodos trabajadores y no admite la adició
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede escalar su cluster Milvus manual o automáticamente. Para el escalado automático con Horizontal Pod Autoscaling (HPA), consulte <a href="/docs/es/hpa.md">Configurar HPA para Milvus</a>. Si el autoescalado está habilitado, el cluster Milvus se contraerá o expandirá automáticamente cuando el consumo de recursos de CPU y memoria alcance el valor que haya establecido.</p>
+    </button></h2><p>Puede escalar su cluster Milvus manual o automáticamente. Para el escalado automático con Horizontal Pod Autoscaling (HPA), consulte <a href="/docs/es/v2.5.x/hpa.md">Configurar HPA para Milvus</a>. Si el autoescalado está habilitado, el cluster Milvus se contraerá o expandirá automáticamente cuando el consumo de recursos de CPU y memoria alcance el valor que haya establecido.</p>
 <p>Actualmente, Milvus 2.1.0 sólo admite el escalado manual.</p>
 <h4 id="Scaling-out" class="common-anchor-header">Reducción</h4><p>Ejecute <code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> para ampliar manualmente el nodo de consulta.</p>
 <p>Si tiene éxito, se añaden tres pods en ejecución en el nodo de consulta como se muestra en el siguiente ejemplo.</p>
@@ -166,16 +167,16 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
     </button></h2><ul>
 <li><p>Si desea aprender a supervisar los servicios Milvus y crear alertas:</p>
 <ul>
-<li>Aprenda a <a href="/docs/es/monitor.md">supervisar Milvus con Prometheus Operator en Kubernetes</a>.</li>
+<li>Aprenda a <a href="/docs/es/v2.5.x/monitor.md">supervisar Milvus con Prometheus Operator en Kubernetes</a>.</li>
 </ul></li>
 <li><p>Si está listo para desplegar su clúster en nubes:</p>
 <ul>
-<li>Aprenda a <a href="/docs/es/eks.md">desplegar Milvus en Amazon EKS con Terraform</a></li>
-<li>Aprenda a <a href="/docs/es/gcp.md">desplegar Milvus Cluster en GCP con Kubernetes</a></li>
-<li>Aprenda a <a href="/docs/es/azure.md">desplegar Milvus en Microsoft Azure con Kubernetes</a></li>
+<li>Aprenda a <a href="/docs/es/v2.5.x/eks.md">desplegar Milvus en Amazon EKS con Terraform</a></li>
+<li>Aprenda a <a href="/docs/es/v2.5.x/gcp.md">desplegar Milvus Cluster en GCP con Kubernetes</a></li>
+<li>Aprenda a <a href="/docs/es/v2.5.x/azure.md">desplegar Milvus en Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 <li><p>Si está buscando instrucciones sobre cómo asignar recursos:</p>
 <ul>
-<li><a href="/docs/es/allocate.md#standalone">Asignación de Recursos en Kubernetes</a></li>
+<li><a href="/docs/es/v2.5.x/allocate.md#standalone">Asignación de Recursos en Kubernetes</a></li>
 </ul></li>
 </ul>

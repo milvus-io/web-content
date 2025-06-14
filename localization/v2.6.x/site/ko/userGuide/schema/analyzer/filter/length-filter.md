@@ -3,7 +3,6 @@ id: length-filter.md
 title: 길이
 summary: 길이 필터는 지정된 길이 요건을 충족하지 않는 토큰을 제거하여 텍스트 처리 중에 유지되는 토큰의 길이를 제어할 수 있습니다.
 ---
-
 <h1 id="Length" class="common-anchor-header">길이<button data-href="#Length" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +79,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p><code translate="no">length</code> 필터는 다음과 같은 구성 가능한 매개변수를 허용합니다.</p>
 <table>
    <tr>
@@ -138,7 +136,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">다음을 사용하여 확인 <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The length filter allows control over token length requirements for text processing.&quot;</span>
@@ -147,7 +145,6 @@ sample_text = <span class="hljs-string">&quot;The length filter allows control o
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

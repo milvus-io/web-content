@@ -384,7 +384,7 @@ Collection <span class="hljs-comment">&#x27;articles&#x27; has been created succ
 <li>Prüfen Sie, ob Ihre Milvus-Instanz eine Authentifizierung erfordert</li>
 <li>Vergewissern Sie sich, dass Sie die richtigen Berechtigungen für die Vorgänge haben, die Sie durchführen möchten.</li>
 </ol>
-<h4 id="Tool-Not-Found" class="common-anchor-header">Werkzeug nicht gefunden</h4><p>Wenn die MCP-Tools nicht in Claude Desktop oder Cursor erscheinen:</p>
+<h4 id="Tool-Not-Found" class="common-anchor-header">Werkzeug nicht gefunden</h4><p>Wenn die MCP-Tools nicht in Claude Desktop oder Cursor angezeigt werden:</p>
 <ol>
 <li>Starten Sie die Anwendung neu</li>
 <li>Prüfen Sie die Serverprotokolle auf eventuelle Fehler</li>

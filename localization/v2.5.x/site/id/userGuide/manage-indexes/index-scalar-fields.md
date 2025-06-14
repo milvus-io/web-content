@@ -6,6 +6,7 @@ summary: >-
   untuk bidang seperti bilangan bulat, string, dll.
 title: Bidang Skalar Indeks
 ---
+
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">Bidang Skalar Indeks<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ title: Bidang Skalar Indeks
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Pengindeksan otomatis</a></strong>: Milvus secara otomatis menentukan tipe indeks berdasarkan tipe data dari field skalar. Ini cocok bila Anda tidak perlu mengontrol jenis indeks tertentu.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Pengindeksan khusus</a></strong>: Anda menentukan jenis indeks yang tepat, seperti indeks terbalik atau <a href="/docs/id/bitmap.md">indeks bitmap</a>. Ini memberikan kontrol lebih besar atas pemilihan jenis indeks.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Pengindeksan khusus</a></strong>: Anda menentukan jenis indeks yang tepat, seperti indeks terbalik atau <a href="/docs/id/v2.5.x/bitmap.md">indeks bitmap</a>. Ini memberikan kontrol lebih besar atas pemilihan jenis indeks.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Pengindeksan otomatis<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,16 +77,17 @@ client = MilvusClient(
 index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
-    index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
+index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -142,16 +144,17 @@ client.createIndex(createIndexReq);
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
+index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -192,8 +195,8 @@ client.createIndex(createIndexReq);
 <p>Jenis indeks skalar yang akan dibuat. Untuk pengindeksan implisit, biarkan kosong atau hilangkan parameter ini.</p>
 <p>Untuk pengindeksan khusus, nilai yang valid adalah:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</p></li>
-<li><p><strong>BITMAP</strong>: Jenis indeks yang menyimpan bitmap dari semua nilai unik dalam suatu bidang. Untuk detailnya, lihat <a href="/docs/id/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/scalar_index.md">Indeks Skalar</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Jenis indeks yang menyimpan bitmap dari semua nilai unik dalam suatu bidang. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Mengurutkan bidang skalar menggunakan algoritme pengurutan pustaka templat standar. Hanya mendukung bidang numerik (misalnya, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Struktur data pohon untuk pencarian dan pengambilan awalan yang cepat. Mendukung bidang VARCHAR.</p></li>
 </ul></li>
@@ -217,7 +220,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(String</em>) Nama bidang skalar yang akan diindeks.</li>
 <li><strong>indexName</strong><em>(String</em>) Nama indeks skalar yang akan dibuat. Setiap bidang skalar mendukung satu indeks.</li>
 <li><strong>indexType</strong><em>(String</em>) Jenis indeks skalar yang akan dibuat. Untuk pengindeksan implisit, biarkan kosong atau hilangkan parameter ini. Untuk pengindeksan khusus, nilai yang valid adalah:<ul>
-<li><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</li>
+<li><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/scalar_index.md">Indeks Skalar</a>.</li>
 <li><strong>STL_SORT</strong>: Mengurutkan bidang skalar menggunakan algoritme pengurutan pustaka templat standar. Mendukung bidang Boolean dan numerik (misalnya, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Struktur data pohon untuk pencarian dan pengambilan awalan yang cepat. Mendukung bidang VARCHAR.</li>
 </ul></li>
@@ -238,7 +241,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(string</em>) Nama bidang skalar yang akan diindeks.</li>
 <li><strong>index_name</strong><em>(string</em>) Nama indeks skalar yang akan dibuat. Setiap bidang skalar mendukung satu indeks.</li>
 <li><strong>index_type</strong><em>(string</em>) Jenis indeks skalar yang akan dibuat. Untuk pengindeksan implisit, biarkan kosong atau hilangkan parameter ini. Untuk pengindeksan khusus, nilai yang valid adalah:<ul>
-<li><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</li>
+<li><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/scalar_index.md">Indeks Skalar</a>.</li>
 <li><strong>STL_SORT</strong>: Mengurutkan bidang skalar menggunakan algoritme pengurutan pustaka templat standar. Mendukung bidang Boolean dan numerik (misalnya, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Struktur data pohon untuk pencarian dan pengambilan awalan yang cepat. Mendukung bidang VARCHAR.</li>
 </ul></li>
@@ -278,6 +281,7 @@ client.createIndex(createIndexReq);
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># [&#x27;default_index&#x27;,&#x27;inverted_index&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.List;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.ListIndexesReq;
 

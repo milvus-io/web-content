@@ -120,7 +120,7 @@ Os recursos do cluster serão atualizados de acordo com o arquivo de configuraç
 </ul>
 <div class="alert note">
 Além disso, ao configurar o proxy, há um campo extra chamado `serviceType`. Este campo define o tipo de serviço que o Milvus fornece no cluster K8s.</div>
-<p>Para configurar recursos para um componente específico, adicione o nome do componente no campo em <code translate="no">spec.componets</code> primeiro e depois configure seus recursos privados.</p>
+<p>Para configurar recursos para um componente específico, adicione primeiro o nome do componente no campo em <code translate="no">spec.componets</code> e depois configure os seus recursos privados.</p>
 <div class="filter">
 <a href="#component">Componentes ou dependências</a> <a href="#purpose">Objectivos da configuração</a> </div>
 <div class="filter-component table-wrapper">

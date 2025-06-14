@@ -6,6 +6,7 @@ summary: >-
   搜尋獲得更精確的搜尋結果。多重搜尋會返回數組結果，這需要重新排序策略來協助合併和重新排序結果，並返回單一結果集。本指南將介紹 Milvus
   支援的重排策略，並提供選擇適當重排策略的提示。
 ---
+
 <h1 id="Reranking" class="common-anchor-header">重新排名<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,8 +45,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>多向量重排</span> </span></p>
 <p>在混合搜尋中，重排是整合多向量搜尋結果的關鍵步驟，以確保最終輸出的結果是最相關、最準確的。目前，Milvus 支援以下兩種 reranking 策略：</p>
 <ul>
-<li><p><strong><a href="/docs/zh-hant/reranking.md#WeightedRanker">加權排名</a></strong>：此策略透過計算來自不同向量搜尋的得分（或距離）的加權分數來合併結果。權重會根據每個向量欄位的重要性來分配，允許根據特定使用個案的優先順序來自訂。</p></li>
-<li><p><strong><a href="/docs/zh-hant/reranking.md#RRFRanker">RRFRanker</a>(Reciprocal Rank Fusion Ranker)：</strong>此策略會根據排名結合結果。它使用一種平衡不同搜尋結果等級的方法，通常可以更公平、有效地整合不同的資料類型或模式。</p></li>
+<li><p><strong><a href="/docs/zh-hant/v2.5.x/reranking.md#WeightedRanker">加權排名</a></strong>：此策略透過計算來自不同向量搜尋的得分（或距離）的加權分數來合併結果。權重會根據每個向量欄位的重要性來分配，允許根據特定使用個案的優先順序來自訂。</p></li>
+<li><p><strong><a href="/docs/zh-hant/v2.5.x/reranking.md#RRFRanker">RRFRanker</a>(Reciprocal Rank Fusion Ranker)：</strong>此策略會根據排名結合結果。它使用一種平衡不同搜尋結果等級的方法，通常可以更公平、有效地整合不同的資料類型或模式。</p></li>
 </ul>
 <h2 id="WeightedRanker" class="common-anchor-header">加權排名<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -227,8 +228,9 @@ summary: >-
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
-rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
+rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 
 <span class="hljs-type">WeightedRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>))
@@ -425,6 +427,7 @@ reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 <span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);

@@ -3,6 +3,7 @@ id: milvusdm_install.md
 summary: Pelajari cara memasang Milvus-Migration untuk memigrasi data Anda.
 title: Menginstal Alat Migrasi
 ---
+
 <h1 id="Install-Migration-Tool" class="common-anchor-header">Menginstal Alat Migrasi<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Setelah menginstal alat Milvus-migration, Anda dapat memigrasi data dari berbagai sumber:</p>
 <ul>
-<li><a href="/docs/id/es2m.md">Dari Elasticsearch</a></li>
-<li><a href="/docs/id/f2m.md">Dari Faiss</a></li>
-<li><a href="/docs/id/m2m.md">Dari Milvus 1.x</a></li>
+<li><a href="/docs/id/v2.5.x/es2m.md">Dari Elasticsearch</a></li>
+<li><a href="/docs/id/v2.5.x/f2m.md">Dari Faiss</a></li>
+<li><a href="/docs/id/v2.5.x/m2m.md">Dari Milvus 1.x</a></li>
 </ul>

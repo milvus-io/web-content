@@ -34,7 +34,7 @@ aws acm import-certificate --certificate fileb://Certificate.pem \
       --certificate-chain fileb://CertificateChain.pem \
       --private-key fileb://PrivateKey.pem  
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">レイヤー7ロードバランサーを生成するためのイングレスの作成</h3><p>以下のようにイングレスファイルを準備し、<code translate="no">ingress.yaml</code> という名前を付けます。<strong>証明書の arn と host は自分のものに置き換えてください。</strong></p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">レイヤー7ロードバランサーを生成するためのイングレスの作成</h3><p>以下のようにイングレスファイルを準備し、名前を<code translate="no">ingress.yaml</code> とします。<strong>証明書の arn と host は自分のものに置き換えてください。</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
 <span class="hljs-attr">metadata:</span>

@@ -1,9 +1,10 @@
 ---
 id: monitor.md
 title: 部署監控服務
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: 學習如何使用 Prometheus 為 Milvus 集群部署監控服務。
 ---
+
 <h1 id="Deploying-Monitoring-Services-on-Kubernetes" class="common-anchor-header">在 Kubernetes 上部署監控服務<button data-href="#Deploying-Monitoring-Services-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,14 +122,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>如果您已為 Milvus 叢集部署了監控服務，您也許還想學一下<ul>
-<li><a href="/docs/zh-hant/visualize.md">在 Grafana 可視化 Milvus 的度量指標</a></li>
-<li><a href="/docs/zh-hant/alert.md">為 Milvus 服務建立警報</a></li>
-<li>調整您的<a href="/docs/zh-hant/allocate.md">資源分配</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/visualize.md">在 Grafana 可視化 Milvus 的度量指標</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/alert.md">為 Milvus 服務建立警報</a></li>
+<li>調整您的<a href="/docs/zh-hant/v2.5.x/allocate.md">資源分配</a></li>
 </ul></li>
 <li>如果您正在尋找關於如何擴充 Milvus 叢集的資訊：<ul>
-<li>學習<a href="/docs/zh-hant/scaleout.md">擴充 Milvus 叢集</a></li>
+<li>學習<a href="/docs/zh-hant/v2.5.x/scaleout.md">擴充 Milvus 叢集</a></li>
 </ul></li>
 <li>如果您有興趣升級 Milvus 版本、<ul>
-<li>閱讀<a href="/docs/zh-hant/upgrade_milvus_cluster-operator.md">升級 Milvus 集群</a>和<a href="/docs/zh-hant/upgrade_milvus_standalone-operator.md">升級 Milvus 獨立</a>版本<a href="/docs/zh-hant/upgrade_milvus_cluster-operator.md">的指南</a>。</li>
+<li>閱讀<a href="/docs/zh-hant/v2.5.x/upgrade_milvus_cluster-operator.md">升級 Milvus 集群</a>和<a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-operator.md">升級 Milvus 獨立</a>版本<a href="/docs/zh-hant/v2.5.x/upgrade_milvus_cluster-operator.md">的指南</a>。</li>
 </ul></li>
 </ul>

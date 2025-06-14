@@ -1,13 +1,14 @@
 ---
 id: removepunct-filter.md
-title: إزالة علامات الترقيم
+title: إزالة علامات الترقيمCompatible with Milvus 2.5.11+
 summary: >-
   يزيل فلتر إزالة علامات الترقيم والمسافات وفواصل الأسطر التي عادةً ما تحتفظ بها
   بعض أدوات الترميز - مثل jieba و lindera و icu -. استخدمه عندما تريد دفق رموز
   أنظف يحتوي فقط على رموز نصية ذات معنى، خالية من الفواصل والنقاط وعلامات
   الترقيم الأخرى.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">إزالة علامات الترقيم<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">إزالة علامات الترقيم<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

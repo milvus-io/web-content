@@ -10,6 +10,7 @@ summary: >-
   les besoins de l'entreprise, de déterminer comment organiser l'information et
   d'indexer les données pour les rendre sémantiquement consultables.
 ---
+
 <h1 id="Schema-Design-Hands-On" class="common-anchor-header">Conception de schémas pratique<button data-href="#Schema-Design-Hands-On" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,19 +123,20 @@ collection_name = <span class="hljs-string">&quot;my_collection&quot;</span>
 client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
+auto_id=<span class="hljs-literal">False</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;article_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;article id&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;title&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>, description=<span class="hljs-string">&quot;article title&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;author_info&quot;</span>, datatype=DataType.JSON, description=<span class="hljs-string">&quot;author information&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>, datatype=DataType.INT32, description=<span class="hljs-string">&quot;publish timestamp&quot;</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;image_url&quot;</span>, datatype=DataType.VARCHAR,  max_length=<span class="hljs-number">500</span>, description=<span class="hljs-string">&quot;image URL&quot;</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;image_url&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">500</span>, description=<span class="hljs-string">&quot;image URL&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;image_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;image vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, description=<span class="hljs-string">&quot;article summary&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, description=<span class="hljs-string">&quot;summary dense vector&quot;</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;summary sparse vector&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -370,8 +372,8 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous remarquerez peut-être l'argument <code translate="no">uri</code> dans <code translate="no">MilvusClient</code>, qui est utilisé pour se connecter au serveur Milvus. Vous pouvez définir les arguments comme suit :</p>
 <ul>
-<li><p>Si vous n'avez besoin d'une base de données vectorielle locale que pour des données à petite échelle ou des prototypes, définir l'uri comme un fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="/docs/fr/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</p></li>
-<li><p>Si vous disposez de données à grande échelle, par exemple plus d'un million de vecteurs, vous pouvez configurer un serveur Milvus plus performant sur <a href="/docs/fr/quickstart.md">Docker ou Kubernetes</a>. Dans cette configuration, veuillez utiliser l'adresse et le port du serveur comme uri, par exemple<code translate="no">http://localhost:19530</code>. Si vous activez la fonction d'authentification sur Milvus, utilisez "<your_username>:<your_password>" comme jeton, sinon ne définissez pas le jeton.</p></li>
+<li><p>Si vous n'avez besoin d'une base de données vectorielle locale que pour des données à petite échelle ou des prototypes, définir l'uri comme un fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="/docs/fr/v2.5.x/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</p></li>
+<li><p>Si vous disposez de données à grande échelle, par exemple plus d'un million de vecteurs, vous pouvez configurer un serveur Milvus plus performant sur <a href="/docs/fr/v2.5.x/quickstart.md">Docker ou Kubernetes</a>. Dans cette configuration, veuillez utiliser l'adresse et le port du serveur comme uri, par exemple<code translate="no">http://localhost:19530</code>. Si vous activez la fonction d'authentification sur Milvus, utilisez "<your_username>:<your_password>" comme jeton, sinon ne définissez pas le jeton.</p></li>
 <li><p>Si vous utilisez <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service en nuage entièrement géré pour Milvus, adaptez les <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au point de terminaison public et à la clé API dans Zilliz Cloud.</p></li>
 </ul>
 <p>Comme pour <code translate="no">auto_id</code> dans <code translate="no">MilvusClient.create_schema</code>, AutoID est un attribut du champ primaire qui détermine s'il faut activer l'incrémentation automatique pour le champ primaire.  Comme nous avons défini le champ<code translate="no">article_id</code> comme clé primaire et que nous voulons ajouter l'identifiant de l'article manuellement, nous avons défini <code translate="no">auto_id</code> False pour désactiver cette fonctionnalité.</p>
@@ -382,25 +384,26 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
 )
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>,
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
+field_name=<span class="hljs-string">&quot;publish_ts&quot;</span>,
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 <span class="hljs-keyword">import</span> java.util.ArrayList;
@@ -495,7 +498,7 @@ indexParams=<span class="hljs-string">&#x27;[
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Une fois les paramètres d'index configurés et appliqués, Milvus est optimisé pour traiter les requêtes complexes sur les données vectorielles et scalaires. Cette indexation améliore les performances et la précision des recherches de similarité dans la collection, permettant une récupération efficace des articles basés sur les vecteurs d'image et les vecteurs de résumé. En tirant parti de <code translate="no">AUTOINDEX</code> pour les vecteurs denses, de <code translate="no">SPARSE_INVERTED_INDEX</code> pour les vecteurs épars et de <code translate="no">INVERTED_INDEX</code> pour les scalaires, Milvus peut rapidement identifier et renvoyer les résultats les plus pertinents, ce qui améliore considérablement l'expérience globale de l'utilisateur et l'efficacité du processus de recherche de données.</p>
-<p>Il existe de nombreux types d'indices et de métriques. Pour plus d'informations à leur sujet, vous pouvez vous reporter à <a href="/docs/fr/overview.md#Index-types">Type d'index Milvus</a> et <a href="/docs/fr/glossary.md#Metric-type">Type de métrique Milvus</a>.</p>
+<p>Il existe de nombreux types d'indices et de métriques. Pour plus d'informations à leur sujet, vous pouvez vous reporter à <a href="/docs/fr/v2.5.x/overview.md#Index-types">Type d'index Milvus</a> et <a href="/docs/fr/v2.5.x/glossary.md#Metric-type">Type de métrique Milvus</a>.</p>
 <h3 id="Create-Collection" class="common-anchor-header">Création d'une collection</h3><p>Une fois le schéma et les index définis, nous créons une "collection" avec ces paramètres. Pour Milvus, une collection est comparable à une table dans une base de données relationnelle.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -538,6 +541,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Nous pouvons vérifier que la collection a été créée avec succès en décrivant la collection.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -589,4 +593,4 @@ curl --request POST \
       </svg>
     </button></h2><h3 id="Loading-Index" class="common-anchor-header">Chargement de l'index</h3><p>Lors de la création d'une collection dans Milvus, vous pouvez choisir de charger l'index immédiatement ou de le différer jusqu'à l'ingestion en masse de certaines données. En général, il n'est pas nécessaire de faire un choix explicite à ce sujet, car les exemples ci-dessus montrent que l'index est automatiquement construit pour toutes les données ingérées juste après la création de la collection. Cela permet d'effectuer des recherches immédiates dans les données ingérées. Cependant, si vous avez une insertion en masse importante après la création de la collection et que vous n'avez pas besoin de rechercher des données jusqu'à un certain point, vous pouvez différer la construction de l'index en omettant les paramètres index_params dans la création de la collection et construire l'index en appelant explicitement load après avoir ingéré toutes les données. Cette méthode est plus efficace pour construire l'index sur une grande collection, mais aucune recherche ne peut être effectuée avant d'appeler load().</p>
 <h3 id="How-to-Define-Data-Model-For-Multi-tenancy" class="common-anchor-header">Comment définir le modèle de données pour le multi-locataire ?</h3><p>Le concept de locataires multiples est couramment utilisé dans les scénarios où une application ou un service logiciel unique doit servir plusieurs utilisateurs ou organisations indépendants, chacun disposant de son propre environnement isolé. Cette situation est fréquemment observée dans l'informatique en nuage, les applications SaaS (Software as a Service) et les systèmes de base de données. Par exemple, un service de stockage en nuage peut utiliser la multilocation pour permettre à différentes entreprises de stocker et de gérer leurs données séparément tout en partageant la même infrastructure sous-jacente. Cette approche maximise l'utilisation des ressources et l'efficacité tout en garantissant la sécurité et la confidentialité des données pour chaque locataire.</p>
-<p>La façon la plus simple de différencier les locataires est d'isoler leurs données et leurs ressources les unes des autres. Chaque locataire dispose d'un accès exclusif à des ressources spécifiques ou partage des ressources avec d'autres pour gérer les entités Milvus telles que les bases de données, les collections et les partitions. Il existe des méthodes spécifiques alignées sur ces entités pour mettre en œuvre la multi-location. Vous pouvez vous référer à la <a href="/docs/fr/multi_tenancy.md#Multi-tenancy-strategies">page Milvus multi-tenancy</a> pour plus d'informations.</p>
+<p>La façon la plus simple de différencier les locataires est d'isoler leurs données et leurs ressources les unes des autres. Chaque locataire dispose d'un accès exclusif à des ressources spécifiques ou partage des ressources avec d'autres pour gérer les entités Milvus telles que les bases de données, les collections et les partitions. Il existe des méthodes spécifiques alignées sur ces entités pour mettre en œuvre la multi-location. Vous pouvez vous référer à la <a href="/docs/fr/v2.5.x/multi_tenancy.md#Multi-tenancy-strategies">page Milvus multi-tenancy</a> pour plus d'informations.</p>

@@ -8,6 +8,7 @@ summary: >-
   Milvus v2.5.x.
 title: Menggunakan Pulsar v2 dengan Milvus v2.5.x
 ---
+
 <h1 id="Use-Pulsar-v2-with-Milvus-v25x" class="common-anchor-header">Menggunakan Pulsar v2 dengan Milvus v2.5.x<button data-href="#Use-Pulsar-v2-with-Milvus-v25x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,7 +24,7 @@ title: Menggunakan Pulsar v2 dengan Milvus v2.5.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus menyarankan Anda untuk mengupgrade Pulsar ke v3 untuk menjalankan Milvus v2.5.x. Untuk informasi lebih lanjut, lihat <a href="/docs/id/upgrade-pulsar-v3.md">Upgrade Pulsar</a>. Namun, jika Anda lebih suka menggunakan Pulsar v2 dengan Milvus v2.5.x, artikel ini akan memandu Anda melalui prosedur untuk menjalankan Milvus v2.5.x dengan Pulsar v2.</p>
+    </button></h1><p>Milvus menyarankan Anda untuk mengupgrade Pulsar ke v3 untuk menjalankan Milvus v2.5.x. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/upgrade-pulsar-v3.md">Upgrade Pulsar</a>. Namun, jika Anda lebih suka menggunakan Pulsar v2 dengan Milvus v2.5.x, artikel ini akan memandu Anda melalui prosedur untuk menjalankan Milvus v2.5.x dengan Pulsar v2.</p>
 <p>Jika Anda telah memiliki instans Milvus yang berjalan dan ingin memutakhirkannya ke v2.5.x namun tetap menggunakan Pulsar v2, Anda dapat mengikuti langkah-langkah di halaman ini.</p>
 <h2 id="Continue-using-Pulsar-v2-while-upgrading-Milvus-v25x" class="common-anchor-header">Melanjutkan penggunaan Pulsar v2 sambil mengupgrade Milvus v2.5.x<button data-href="#Continue-using-Pulsar-v2-while-upgrading-Milvus-v25x" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +42,7 @@ title: Menggunakan Pulsar v2 dengan Milvus v2.5.x
         ></path>
       </svg>
     </button></h2><p>Bagian ini akan memandu Anda melalui langkah-langkah untuk terus menggunakan Pulsar v2 sembari mengupgrade instance Milvus yang sedang berjalan ke Milvus v2.5.x.</p>
-<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Untuk pengguna Milvus Operator</h3><p>Milvus Operator kompatibel dengan peningkatan Pulsar v2 secara default. Anda dapat mengupgrade instance Milvus Anda ke v2.5.x dengan merujuk ke <a href="/docs/id/upgrade_milvus_cluster-operator.md">Upgrade Milvus Cluster dengan Milvus Operator</a>.</p>
+<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Untuk pengguna Milvus Operator</h3><p>Milvus Operator kompatibel dengan peningkatan Pulsar v2 secara default. Anda dapat mengupgrade instance Milvus Anda ke v2.5.x dengan merujuk ke <a href="/docs/id/v2.5.x/upgrade_milvus_cluster-operator.md">Upgrade Milvus Cluster dengan Milvus Operator</a>.</p>
 <p>Setelah peningkatan selesai, Anda dapat terus menggunakan Pulsar v2 dengan instance Milvus Anda.</p>
 <h3 id="For-Helm-users" class="common-anchor-header">Untuk pengguna Helm</h3><p>Sebelum melakukan peningkatan, pastikan bahwa</p>
 <ul>
@@ -98,7 +99,7 @@ helm repo update milvus
         ></path>
       </svg>
     </button></h2><p>Bagian ini akan memandu Anda melalui langkah-langkah untuk membuat instans Milvus baru dengan Pulsar v2.</p>
-<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Untuk pengguna Milvus Operator</h3><p>Sebelum Anda menggunakan Milvus v2.5.x, Anda perlu mengunduh dan mengedit file Customer Resource Definition (CRD) Milvus. Untuk detail tentang cara menginstal Milvus menggunakan Milvus Operator, lihat <a href="/docs/id/install_cluster-milvusoperator.md">Menginstalasi Milvus Cluster dengan Milvus Operator</a>.</p>
+<h3 id="For-Milvus-Operator-users" class="common-anchor-header">Untuk pengguna Milvus Operator</h3><p>Sebelum Anda menggunakan Milvus v2.5.x, Anda perlu mengunduh dan mengedit file Customer Resource Definition (CRD) Milvus. Untuk detail tentang cara menginstal Milvus menggunakan Milvus Operator, lihat <a href="/docs/id/v2.5.x/install_cluster-milvusoperator.md">Menginstalasi Milvus Cluster dengan Milvus Operator</a>.</p>
 <ol>
 <li><p>Unduh file CRD.</p>
 <pre><code translate="no" class="language-bash">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
@@ -123,7 +124,7 @@ helm repo update milvus
 <pre><code translate="no" class="language-bash">kubectl apply -f milvus_cluster_default.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="For-Helm-users" class="common-anchor-header">Untuk pengguna Helm</h3><p>Sebelum Anda menggunakan Milvus v2.5.x, Anda dapat menyiapkan file <code translate="no">values.yaml</code> atau menggunakan parameter inline untuk menentukan versi Pulsar. Untuk detail tentang cara menginstal Milvus menggunakan Helm, lihat <a href="/docs/id/install_cluster-helm.md">Menginstalasi Milvus Cluster dengan Helm</a>.</p>
+<h3 id="For-Helm-users" class="common-anchor-header">Untuk pengguna Helm</h3><p>Sebelum Anda menggunakan Milvus v2.5.x, Anda dapat menyiapkan file <code translate="no">values.yaml</code> atau menggunakan parameter inline untuk menentukan versi Pulsar. Untuk detail tentang cara menginstal Milvus menggunakan Helm, lihat <a href="/docs/id/v2.5.x/install_cluster-helm.md">Menginstalasi Milvus Cluster dengan Helm</a>.</p>
 <ul>
 <li><p>Gunakan parameter sebaris untuk menentukan versi Pulsar sebagai v2.</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">true</span>,pulsarv3.enabled=<span class="hljs-literal">false</span>

@@ -1,12 +1,13 @@
 ---
 id: phrase-match.md
-title: 구문 검색
+title: 구문 검색Compatible with Milvus 2.6.x
 summary: >-
   구문 검색을 사용하면 검색어가 포함된 문서를 정확한 구문으로 검색할 수 있습니다. 기본적으로 단어는 동일한 순서로 서로 바로 옆에 나타나야
   합니다. 예를 들어, '로봇 공학 머신 러닝'에 대한 쿼리는 '...일반적인 로봇 공학 머신 러닝 모델...'과 같은 텍스트와 일치하며,
   여기서 '로봇 공학', '기계', '학습'이라는 단어가 그 사이에 다른 단어 없이 순차적으로 나타납니다.
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">구문 검색<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">구문 검색<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>구문 검색을 사용하면 검색어가 포함된 문서를 정확한 구문으로 검색할 수 있습니다. 기본적으로 단어는 동일한 순서로 서로 바로 옆에 나타나야 합니다. 예를 들어, ' <strong>로봇 공학 머신 러닝'</strong> 에 대한 쿼리는 <em>'...일반적인 로봇 공학 머신 러닝 모델...'</em>과 같은 텍스트와 일치하며, 여기서 <strong>'로봇 공학',</strong> <strong>'기계</strong>', <strong>'학습'</strong> 단어가 그 사이에 다른 단어 없이 순차적으로 나타납니다.</p>
+    </button></h1><p>구문 검색을 사용하면 검색어가 포함된 문서를 정확한 구문으로 검색할 수 있습니다. 기본적으로 단어는 동일한 순서로 서로 바로 옆에 나타나야 합니다. 예를 들어, ' <strong>로봇 공학 기계 학습'</strong> 에 대한 쿼리는 <em>'...일반적인 로봇 공학 기계 학습 모델...'</em>과 같은 텍스트와 일치하며, 여기서 <strong>'로봇 공학',</strong> <strong>'기계</strong>', <strong>'학습'</strong> 이라는 단어가 그 사이에 다른 단어 없이 순서대로 나타납니다.</p>
 <p>그러나 실제 시나리오에서는 엄격한 구문 일치가 너무 엄격할 수 있습니다. 예를 들어 <em>"...로봇 공학에서 널리 채택된 머신 러닝 모델..."</em>과 같은 텍스트를 일치시키고 싶을 수 있습니다. 여기에는 동일한 키워드가 나란히 있거나 원래 순서가 아닌 다른 키워드가 존재합니다. 이를 처리하기 위해 구문 검색은 <code translate="no">slop</code> 매개변수를 지원하여 유연성을 도입합니다. <code translate="no">slop</code> 값은 구문 내 용어 간에 허용되는 위치 이동 횟수를 정의합니다. 예를 들어 <code translate="no">slop</code> 값이 1인 경우, <strong>'머신 러닝'</strong> 에 대한 쿼리는 <em>'...머신 딥 러닝...'</em>과 같은 텍스트를 일치시킬 수 있으며, 여기서 한 단어(<strong>"deep")가</strong> 원래 용어를 구분합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -147,7 +148,7 @@ schema.add_field(
 <li><p><code translate="no">phrase</code><strong>:</strong> 검색할 정확한 구문입니다.</p></li>
 <li><p><code translate="no">slop</code> (선택 사항)<strong>:</strong> 일치하는 토큰에서 허용되는 최대 위치 수를 지정하는 정수입니다.</p>
 <ul>
-<li><p><code translate="no">0</code> (기본값): 정확한 구문만 일치시킵니다. 예시: <strong>'머신 러닝</strong> '에 대한 필터는 ' <strong>머신 러닝'</strong> 은 정확히 일치하지만 <strong>'머신 부스트 러닝'</strong> 이나 <strong>'러닝 머신'</strong>은 일치하지 않습니다 <strong>.</strong></p></li>
+<li><p><code translate="no">0</code> (기본값): 정확한 구문만 일치시킵니다. 예시: <strong>'머신 러닝</strong> '에 대한 필터는 <strong>'머신 러닝'</strong> 은 정확히 일치하지만 <strong>'머신 부스트 러닝'</strong> 이나 <strong>'러닝 머신'</strong>은 일치하지 않습니다 <strong>.</strong></p></li>
 <li><p><code translate="no">1</code>: 용어 하나 추가 또는 위치의 사소한 이동과 같은 사소한 변형을 허용합니다. 예시: <strong>"machine learning"</strong> 에 대한 필터는 <strong>"machine boosts learning"</strong> ( <strong>"machine"</strong> 과 <strong>"learning"</strong> 사이에 하나의 토큰이 있음 <strong>)</strong>과 일치하지만 <strong>"learning machine"</strong> (용어가 뒤바뀜)은 일치하지 않습니다.</p></li>
 <li><p><code translate="no">2</code>: 용어 순서가 반전되거나 그 사이에 토큰이 최대 2개까지 포함되는 등 더 많은 유연성을 허용합니다. 예시: <strong>"machine learning"</strong> 에 대한 필터는 <strong>"learning machine"</strong> (용어가 반전됨) 또는 <strong>"machine quickly boosts learning"</strong> ( <strong>"machine"</strong> 과 <strong>"learning"</strong> 사이에 두 개의 토큰이 있음)과 일치합니다.</p></li>
 </ul></li>

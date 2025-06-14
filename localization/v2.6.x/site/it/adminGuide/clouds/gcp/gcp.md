@@ -179,7 +179,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 <pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Generare la chiave d'accesso utente e la chiave segreta, andando alla pagina di archiviazione del progetto. Nella barra laterale sinistra della dashboard, fare clic su Google Cloud Storage e poi su Impostazioni. Selezionare la scheda INTEROPERABILITÀ. Se non è ancora stata attivata, fare clic su Accesso interoperabile. Fare quindi clic sul pulsante CREA UNA CHIAVE per creare.</li>
+<li>Generare la chiave d'accesso utente e la chiave segreta, andando alla pagina di archiviazione del progetto. Nella barra laterale sinistra della dashboard, fare clic su Google Cloud Storage e poi su Impostazioni. Selezionare la scheda INTEROPERABILITÀ. Se non è già stata attivata, fare clic su Accesso interoperabile. Fare quindi clic sul pulsante CREA UNA CHIAVE per creare.</li>
 </ul>
 <p>
   

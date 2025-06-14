@@ -4,6 +4,7 @@ title: Milvus on AWS用のレイヤー7ロードバランサーのセットア�
 related_key: cluster
 summary: AWSのLayer-7ロードバランサーの背後にmilvusクラスタをデプロイする方法を学びます。
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Milvus on AWS用のレイヤー7ロードバランサーのセットアップ<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,9 +23,9 @@ summary: AWSのLayer-7ロードバランサーの背後にmilvusクラスタを�
     </button></h1><p>レイヤ4ロードバランサと比較すると、レイヤ7ロードバランサはスマートなロードバランシングとキャッシュ機能を提供し、クラウドネイティブなサービスに最適な選択です。</p>
 <p>このガイドでは、Layer-4ロードバランサーの背後で既に稼働しているMilvusクラスタにLayer-7ロードバランサーを設定する手順を説明します。</p>
 <h3 id="Before-your-start" class="common-anchor-header">始める前に</h3><ul>
-<li><a href="/docs/ja/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイして</a>いる。</li>
+<li><a href="/docs/ja/v2.5.x/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイして</a>いる。</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvusの設定を調整する</h3><p>このガイドでは、<a href="/docs/ja/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvusの設定を調整する</h3><p>このガイドでは、<a href="/docs/ja/v2.5.x/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
 <p>このMilvusクラスタにLayer-7ロードバランサを設定する前に、次のコマンドを実行してLayer-4ロードバランサを削除します。</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -48,19 +49,18 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: <span class="hljs-string">&quot;arn:aws:acm:region:account-id:certificate/certificate-id&quot;</span>
 
 spec:
-  ingressClassName: alb
-  rules:
-    - host: milvus-demo.milvus.io
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: milvus-demo
-              port:
-                number: 19530
+ingressClassName: alb
+rules: - host: milvus-demo.milvus.io
+http:
+paths: - path: /
+pathType: Prefix
+backend:
+service:
+name: milvus-demo
+port:
+number: 19530
 <button class="copy-code-btn"></button></code></pre>
+
 <p>このファイルをEKSクラスタに適用してIngressを作成します。</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -99,6 +99,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
 
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;milvus-demo.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li><strong>hostと</strong> <strong>server_nameは</strong>自分のものに置き換えてください。</li>

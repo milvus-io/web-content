@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>O Milvus 2.5 introduz uma nova versão da API que simplifica a operação de concessão. Já não é necessário procurar o tipo de objeto quando se concede um privilégio a uma função. Seguem-se os parâmetros e as respectivas explicações.</p>
 <ul>
-<li><p><strong>nome_da_função:</strong> o nome da função de destino à qual devem ser concedidos privilégios ou grupos de privilégios.</p></li>
+<li><p><strong>Nome_da_função:</strong> O nome da função de destino à qual devem ser concedidos privilégios ou grupos de privilégios.</p></li>
 <li><p><strong>Recurso</strong>: O recurso de destino de um privilégio, que pode ser uma instância específica, um banco de dados ou uma coleção.</p></li>
 </ul>
 <p>A tabela a seguir explica como especificar o recurso no método <code translate="no">client.grantV2()</code>.</p>
@@ -83,7 +83,7 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Introduza o nome da sua base de dados de destino e um wildcard <code translate="no">*</code> como nome da coleção.</p></td>
+     <td><p>Introduza o nome da sua base de dados alvo e um wildcard <code translate="no">*</code> como nome da coleção.</p></td>
    </tr>
    <tr>
      <td><p>Todas as bases de dados na instância atual</p></td>
@@ -284,7 +284,7 @@ summary: >-
 <tr>
 <td><p>Criar grupo de recursos</p></td>
 <td><p>Criar um grupo de recursos</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">Criar Grupo de Recursos</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>DropResourceGroup</p></td>

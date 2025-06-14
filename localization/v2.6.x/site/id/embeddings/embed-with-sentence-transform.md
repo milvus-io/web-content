@@ -37,7 +37,7 @@ sentence_transformer_ef = model.dense.SentenceTransformerEmbeddingFunction(
 <p><strong>Parameter</strong>:</p>
 <ul>
 <li><p><strong>nama_model</strong><em>(string</em>)</p>
-<p>Nama model Sentence Transformer yang akan digunakan untuk penyandian. Nilai defaultnya adalah <strong>all-MiniLM-L6-v2</strong>. Anda dapat menggunakan salah satu model yang telah dilatih sebelumnya dari Sentence Transformer. Untuk daftar model yang tersedia, lihat <a href="https://www.sbert.net/docs/pretrained_models.html">Model</a> yang sudah <a href="https://www.sbert.net/docs/pretrained_models.html">dilatih</a>.</p></li>
+<p>Nama model Sentence Transformer yang akan digunakan untuk penyandian. Nilai defaultnya adalah <strong>all-MiniLM-L6-v2</strong>. Anda dapat menggunakan salah satu model yang telah dilatih sebelumnya dari Sentence Transformer. Untuk daftar model yang tersedia, lihat <a href="https://www.sbert.net/docs/pretrained_models.html">Model yang telah dilatih</a>.</p></li>
 <li><p><strong>perangkat</strong><em>(string</em>)</p>
 <p>Perangkat yang akan digunakan, dengan <strong>cpu</strong> untuk CPU dan <strong>cuda:n</strong> untuk perangkat GPU ke-n.</p></li>
 </ul>

@@ -42,7 +42,7 @@ title: Menetapkan Skala Cluster Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Penskalaan horizontal meliputi penskalaan keluar dan penskalaan masuk.</p>
+    </button></h2><p>Penskalaan horizontal mencakup penskalaan keluar dan penskalaan masuk.</p>
 <h3 id="Scaling-out" class="common-anchor-header">Scaling out</h3><p>Scaling out mengacu pada peningkatan jumlah node dalam sebuah cluster. Tidak seperti scaling up, scaling out tidak mengharuskan Anda mengalokasikan lebih banyak sumber daya ke satu node dalam cluster. Sebaliknya, scaling out memperluas cluster secara horizontal dengan menambahkan lebih banyak node.</p>
 <p>
   
@@ -173,7 +173,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>Jika Anda siap untuk men-deploy cluster Anda di awan:</p>
 <ul>
 <li>Pelajari cara <a href="/docs/id/eks.md">Menerapkan Milvus di Amazon EKS dengan Terraform</a></li>
-<li>Pelajari cara <a href="/docs/id/gcp.md">Menerapkan Milvus Cluster di GCP dengan Kubernetes</a></li>
+<li>Pelajari cara <a href="/docs/id/gcp.md">Menerapkan Cluster Milvus di GCP dengan Kubernetes</a></li>
 <li>Pelajari cara <a href="/docs/id/azure.md">Menerapkan Milvus di Microsoft Azure dengan Kubernetes</a></li>
 </ul></li>
 <li><p>Jika Anda mencari petunjuk tentang cara mengalokasikan sumber daya:</p>

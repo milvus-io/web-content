@@ -5,6 +5,7 @@ related_key: SDK
 summary: 學習如何安裝 Milvus 的 GO SDK。
 title: 安裝 Milvus Go SDK
 ---
+
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">安裝 Milvus Go SDK<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +75,10 @@ title: 安裝 Milvus Go SDK
     </button></h2><p>安裝 Milvus GO SDK 後，您可以</p>
 <ul>
 <li>學習 Milvus 的基本操作：<ul>
-<li><a href="/docs/zh-hant/manage-collections.md">管理集合</a></li>
-<li><a href="/docs/zh-hant/manage-partitions.md">管理分區</a></li>
-<li><a href="/docs/zh-hant/insert-update-delete.md">插入、倒置與刪除</a></li>
-<li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
-<li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-collections.md">管理集合</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-partitions.md">管理分區</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/insert-update-delete.md">插入、倒置與刪除</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/single-vector-search.md">單向量搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
 </ul>

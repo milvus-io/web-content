@@ -1,9 +1,10 @@
 ---
 id: index-scalar-fields.md
 order: 2
-summary: '이 가이드에서는 정수, 문자열 등과 같은 필드에 대한 스칼라 인덱스를 만들고 구성하는 방법을 안내합니다.'
+summary: "이 가이드에서는 정수, 문자열 등과 같은 필드에 대한 스칼라 인덱스를 만들고 구성하는 방법을 안내합니다."
 title: 스칼라 필드 인덱스
 ---
+
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">스칼라 필드 인덱스<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +38,7 @@ title: 스칼라 필드 인덱스
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">자동 인덱싱</a></strong>: Milvus는 스칼라 필드의 데이터 유형에 따라 인덱스 유형을 자동으로 결정합니다. 특정 인덱스 유형을 제어할 필요가 없는 경우에 적합합니다.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">사용자 지정 인덱싱</a></strong>: 반전 인덱스 또는 <a href="/docs/ko/bitmap.md">비트맵 인덱스와</a> 같은 정확한 인덱스 유형을 지정합니다. 이렇게 하면 인덱스 유형 선택을 더 세밀하게 제어할 수 있습니다.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">사용자 지정 인덱싱</a></strong>: 반전 인덱스 또는 <a href="/docs/ko/v2.5.x/bitmap.md">비트맵 인덱스와</a> 같은 정확한 인덱스 유형을 지정합니다. 이렇게 하면 인덱스 유형 선택을 더 세밀하게 제어할 수 있습니다.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">자동 인덱싱<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,16 +75,17 @@ client = MilvusClient(
 index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
-    index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
+index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -140,16 +142,17 @@ client.createIndex(createIndexReq);
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
+index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -190,8 +193,8 @@ client.createIndex(createIndexReq);
 <p>생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략하세요.</p>
 <p>사용자 지정 인덱싱의 경우 유효한 값은 다음과 같습니다:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</p></li>
-<li><p><strong>비트맵</strong>: 필드에 있는 모든 고유 값의 비트맵을 저장하는 인덱스 유형입니다. 자세한 내용은 <a href="/docs/ko/bitmap.md">비트맵을</a> 참조하세요.</p></li>
+<li><p><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</p></li>
+<li><p><strong>비트맵</strong>: 필드에 있는 모든 고유 값의 비트맵을 저장하는 인덱스 유형입니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/bitmap.md">비트맵을</a> 참조하세요.</p></li>
 <li><p><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 숫자 필드만 지원합니다(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>트라이</strong>: 빠른 접두사 검색 및 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</p></li>
 </ul></li>
@@ -215,7 +218,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(문자열</em>) 인덱싱할 스칼라 필드의 이름입니다.</li>
 <li><strong>indexName</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 이름입니다. 각 스칼라 필드는 하나의 인덱스를 지원합니다.</li>
 <li><strong>indexType</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략합니다. 사용자 정의 인덱싱의 경우 유효한 값은 다음과 같습니다:<ul>
-<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
+<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
 <li><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 부울 및 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)를 지원합니다.</li>
 <li><strong>트라이</strong>: 빠른 접두사 검색과 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</li>
 </ul></li>
@@ -236,7 +239,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(문자열</em>) 인덱싱할 스칼라 필드의 이름입니다.</li>
 <li><strong>index_name</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 이름입니다. 각 스칼라 필드는 하나의 인덱스를 지원합니다.</li>
 <li><strong>index_type</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략합니다. 사용자 지정 인덱싱의 경우 유효한 값은 다음과 같습니다:<ul>
-<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
+<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
 <li><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 부울 및 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)를 지원합니다.</li>
 <li><strong>트라이</strong>: 빠른 접두사 검색과 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</li>
 </ul></li>
@@ -276,6 +279,7 @@ client.createIndex(createIndexReq);
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># [&#x27;default_index&#x27;,&#x27;inverted_index&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.List;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.ListIndexesReq;
 

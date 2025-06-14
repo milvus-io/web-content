@@ -4,6 +4,7 @@ title: IVF_PQ
 summary: >-
   IVF_PQインデックスは、高次元空間における近似最近傍探索のための量子化ベースのインデックス作成アルゴリズムである。グラフベースの手法ほど高速ではないが、IVF_PQは多くの場合メモリ使用量を大幅に削減できるため、大規模なデータセットに対して実用的な選択肢となる。
 ---
+
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +45,7 @@ summary: >-
 <li><p><strong>転置インデックス：</strong>各クラスタのセントロイドを、そのクラスタに割り当てられたベクトルのリストにマッピングするインデックスが作成されます。</p></li>
 <li><p><strong>検索：</strong>最近傍を検索する場合、検索アルゴリズムはクエリベクトルとクラスタ重心を比較し、最も有望なクラスタを選択します。そして、その選択されたクラスタ内のベクトルに検索が絞り込まれます。</p></li>
 </ol>
-<p>技術的な詳細については、<a href="/docs/ja/ivf-flat.md">IVF_FLAT</a> を参照してください。</p>
+<p>技術的な詳細については、<a href="/docs/ja/v2.5.x/ivf-flat.md">IVF_FLAT</a> を参照してください。</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong>は、高次元ベクトルの圧縮手法であり、高速な類似性検索を可能にすると同時に、ストレージ要件を大幅に削減します。</p>
 <p>PQプロセスには以下の主要な段階があります：</p>
 <p>
@@ -57,7 +58,7 @@ summary: >-
 <li><p><strong>ベクトル</strong> <strong>量子化</strong>：元のベクトル内の各サブベクトルに対して、PQは対応する部分空間内で、特定のメトリックタイプを使用して、その最も近いセントロイドを特定する。このプロセスは、各サブベクトルをコードブック内の最も近い代表ベクトルに効果的にマッピングする。完全な部分ベクトル座標を格納する代わりに、マッチしたセントロイドのインデックスのみが保持される。</p></li>
 <li><p><strong>圧縮表現</strong>：最終的な圧縮表現は、各サブスペースから1つずつ、<code translate="no">m</code> 、<strong>PQコードと</strong>総称されるインデックスで構成される。このエンコーディングにより、<em>D×32</em>ビット（32ビット浮動小数点数を仮定）から<em>m×n</em>ビットへとストレージ要件が削減され、ベクトル距離の近似能力を維持しながら大幅な圧縮が達成されます。</p></li>
 </ol>
-<p>パラメータのチューニングと最適化の詳細については、<a href="/docs/ja/ivf-pq.md#Index-params">Index paramsを</a>参照してください。</p>
+<p>パラメータのチューニングと最適化の詳細については、<a href="/docs/ja/v2.5.x/ivf-pq.md#Index-params">Index paramsを</a>参照してください。</p>
 <div class="alert note">
 <p>32ビット浮動小数点数を使用した<em>D = 128</em>次元のベクトルを考えます。PQ パラメータ<em>m = 64</em>（部分ベクトル）、<em>nbits = 8</em>（従って、<em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>= 256</em>centroids per subspace）で、ストレージ要件を比較することができます：</p>
 <ul>
@@ -91,7 +92,7 @@ summary: >-
 <li><p><strong>IVFによる粗いフィルタリング</strong>：IVFはベクトル空間をクラスタに分割し、検索範囲を狭める。データセット全体を評価する代わりに、このアルゴリズムはクエリーベクトルに最も近いクラスターのみに焦点を当てる。</p></li>
 <li><p><strong>PQによるきめ細かな比較</strong>：選択されたクラスタ内で、PQは圧縮・量子化されたベクトル表現を用いて近似距離を高速に計算する。</p></li>
 </ol>
-<p><strong>IVF_PQ</strong>インデックスの性能は、IVFとPQの両アルゴリズムを制御するパラメータによって大きく影響を受けます。与えられたデータセットとアプリケーションに最適な結果を得るためには、これらのパラメータを調整することが極めて重要です。これらのパラメータの詳細と調整方法については、<a href="/docs/ja/ivf-pq.md#Index-params">Index paramsを</a>参照してください。</p>
+<p><strong>IVF_PQ</strong>インデックスの性能は、IVFとPQの両アルゴリズムを制御するパラメータによって大きく影響を受けます。与えられたデータセットとアプリケーションに最適な結果を得るためには、これらのパラメータを調整することが極めて重要です。これらのパラメータの詳細と調整方法については、<a href="/docs/ja/v2.5.x/ivf-pq.md#Index-params">Index paramsを</a>参照してください。</p>
 <h2 id="Build-index" class="common-anchor-header">インデックスの構築<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,26 +115,27 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>この設定では</p>
 <ul>
 <li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">IVF_PQ</code> とします。</p></li>
-<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
+<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、<a href="/docs/ja/v2.5.x/metric.md">メトリック・タイプを</a>参照してください。</p></li>
 <li><p><code translate="no">params</code>:インデックスを構築するための追加設定オプション。</p>
 <ul>
 <li><code translate="no">m</code>:ベクトルを分割するサブベクトルの数。</li>
 </ul>
-<p><code translate="no">IVF_PQ</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/ivf-pq.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
+<p><code translate="no">IVF_PQ</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/v2.5.x/ivf-pq.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
 </ul>
-<p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
+<p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/v2.5.x/create-collection.md">コレクションの作成</a> を参照してください。</p>
 <h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,20 +159,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>この構成では</p>
 <ul>
 <li><p><code translate="no">params</code>:インデックスで検索するための追加構成オプション。</p>
 <ul>
 <li><code translate="no">nprobe</code>:検索するクラスタの数。</li>
 </ul>
-<p><code translate="no">IVF_PQ</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/ivf-pq.md#Index-specific-search-params">インデックス固有の検索パラメータを</a>参照してください。</p></li>
+<p><code translate="no">IVF_PQ</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/v2.5.x/ivf-pq.md#Index-specific-search-params">インデックス固有の検索パラメータを</a>参照してください。</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">インデックスパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -188,7 +191,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/ivf-pq.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/v2.5.x/ivf-pq.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
@@ -218,7 +221,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">nbits</code> の値を大きくすると、コードブックが大きくなり、元のベクトルをより正確に表現できる可能性がある。しかし、これは各インデックスを格納するために多くのビットを使用することを意味し、結果として圧縮率が低くなります。ほとんどの場合、この範囲内の値を設定することをお勧めします：[1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="/docs/ja/ivf-pq.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="/docs/ja/v2.5.x/ivf-pq.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>

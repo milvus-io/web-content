@@ -3,6 +3,7 @@ id: from-m2x.md
 summary: 이 가이드는 Milvus 2.3.x에서 Milvus 2.3.x 이상으로 데이터를 마이그레이션하기 위한 포괄적인 단계별 프로세스를 제공합니다.
 title: Milvus 2.3.x에서
 ---
+
 <h1 id="From-Milvus-23x" class="common-anchor-header">Milvus 2.3.x에서<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +41,7 @@ title: Milvus 2.3.x에서
 <li>대상 Milvus: 2.3.0 이상</li>
 </ul></li>
 <li><strong>필수 도구</strong>:<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구. 설치에 대한 자세한 내용은 <a href="/docs/ko/milvusdm_install.md">마이그레이션 도구 설치를</a> 참조하세요.</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구. 설치에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/milvusdm_install.md">마이그레이션 도구 설치를</a> 참조하세요.</li>
 </ul></li>
 <li><strong>데이터 준비</strong>:<ul>
 <li>소스 Milvus 컬렉션이 로드되어 있고 데이터를 내보낼 준비가 되어 있는지 확인합니다.</li>
@@ -70,22 +71,23 @@ title: Milvus 2.3.x에서
       bufferSize: 500
 
 meta:
-  mode: config
-  version: 2.3.0
-  collection: src_table_name
+mode: config
+version: 2.3.0
+collection: src_table_name
 
 <span class="hljs-built_in">source</span>:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 
 target:
-  milvus2x:
-    endpoint: {milvus2x_domain}:{milvus2x_port}
-    username: xxxx
-    password: xxxxx
+milvus2x:
+endpoint: {milvus2x_domain}:{milvus2x_port}
+username: xxxx
+password: xxxxx
 <button class="copy-code-btn"></button></code></pre>
+
 <p>다음 표에서는 예제 구성 파일의 매개 변수에 대해 설명합니다. 자세한 내용은 <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus 마이그레이션을</a> 참조하세요 <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">:</a> <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus2.x에서 Milvus2.x로</a> 마이그레이션을 참조하세요.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
@@ -118,8 +120,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>소스 Milvus 서버의 주소입니다.</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>소스 Milvus 서버의 사용자 이름입니다. 이 매개변수는 Milvus 서버에 대해 사용자 인증이 활성화된 경우 필요합니다. 자세한 내용은 <a href="/docs/ko/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>소스 Milvus 서버의 비밀번호입니다. Milvus 서버에 사용자 인증이 활성화된 경우 이 파라미터가 필요합니다. 자세한 내용은 <a href="/docs/ko/authenticate.md">인증 활성화를</a> 참조하십시오.</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>소스 Milvus 서버의 사용자 이름입니다. 이 매개변수는 Milvus 서버에 대해 사용자 인증이 활성화된 경우 필요합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>소스 Milvus 서버의 비밀번호입니다. Milvus 서버에 사용자 인증이 활성화된 경우 이 파라미터가 필요합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/authenticate.md">인증 활성화를</a> 참조하십시오.</td></tr>
 </tbody>
 </table>
 </li>
@@ -130,8 +132,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>대상 Milvus 서버의 주소입니다.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>대상 Milvus 서버의 사용자 이름입니다. 이 매개변수는 Milvus 서버에 사용자 인증이 활성화된 경우 필요합니다. 자세한 내용은 <a href="/docs/ko/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>대상 Milvus 서버의 비밀번호입니다. Milvus 서버에 사용자 인증이 활성화된 경우 이 파라미터가 필요합니다. 자세한 내용은 <a href="/docs/ko/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>대상 Milvus 서버의 사용자 이름입니다. 이 매개변수는 Milvus 서버에 사용자 인증이 활성화된 경우 필요합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>대상 Milvus 서버의 비밀번호입니다. Milvus 서버에 사용자 인증이 활성화된 경우 이 파라미터가 필요합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/authenticate.md">인증 활성화를</a> 참조하세요.</td></tr>
 </tbody>
 </table>
 </li>

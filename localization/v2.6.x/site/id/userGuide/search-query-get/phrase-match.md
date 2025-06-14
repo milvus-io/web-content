@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Pencocokan Frasa
+title: Pencocokan FrasaCompatible with Milvus 2.6.x
 summary: >-
   Pencocokan frasa memungkinkan Anda mencari dokumen yang mengandung istilah
   kueri Anda sebagai frasa yang tepat. Secara default, kata-kata harus muncul
@@ -8,8 +8,9 @@ summary: >-
   "pembelajaran mesin robotika" mencocokkan teks seperti "... model pembelajaran
   mesin robotika yang khas...", di mana kata "robotika", "mesin", dan
   "pembelajaran" muncul secara berurutan tanpa kata lain di antaranya.
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Pencocokan Frasa<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Pencocokan Frasa<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

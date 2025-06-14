@@ -6,6 +6,7 @@ summary: >-
   disk.
 title: Indeks di dalam disk
 ---
+
 <h1 id="On-disk-Index" class="common-anchor-header">Indeks di dalam disk<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: Indeks di dalam disk
         ></path>
       </svg>
     </button></h1><p>Artikel ini memperkenalkan DiskANN, sebuah algoritme pengindeksan dalam disk untuk pencarian vektor yang dioptimalkan untuk disk. Berdasarkan grafik Vamana, DiskANN mendukung pencarian vektor dalam disk yang efisien dalam kumpulan data yang besar.</p>
-<p>Untuk meningkatkan kinerja kueri, Anda dapat <a href="/docs/id/index-vector-fields.md">menentukan jenis indeks</a> untuk setiap bidang vektor.</p>
+<p>Untuk meningkatkan kinerja kueri, Anda dapat <a href="/docs/id/v2.5.x/index-vector-fields.md">menentukan jenis indeks</a> untuk setiap bidang vektor.</p>
 <div class="alert note"> 
 Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomatis menghapus indeks lama saat mengganti jenis indeks.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">

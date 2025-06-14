@@ -51,7 +51,7 @@ title: واجهة مستخدم ويب ميلفوس
 <tr><td>متوفر منذ</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>اعتبارًا من الإصدار 2.5.0، يمكنك الوصول إلى واجهة مستخدم ويب Milvus Web UI باستخدام عنوان URL التالي على مثيل Milvus قيد التشغيل:</p>
+<p>اعتبارًا من الإصدار 2.5.0، يمكنك الوصول إلى واجهة مستخدم Milvus Web UI باستخدام عنوان URL التالي على مثيل Milvus قيد التشغيل:</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">الميزات<button data-href="#Features" class="anchor-icon" translate="no">

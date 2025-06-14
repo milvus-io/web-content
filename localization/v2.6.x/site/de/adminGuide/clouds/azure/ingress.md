@@ -2,7 +2,7 @@
 id: ingress.md
 title: Konfigurieren von ingress nginx mit Milvus
 related_key: ingress nginx
-summary: 'Lernen Sie, wie man ingress nginx mit Milvus konfiguriert.'
+summary: 'Erfahren Sie, wie Sie ingress nginx mit Milvus konfigurieren.'
 ---
 <h1 id="Configure-ingress-nginx-with-Milvus" class="common-anchor-header">Konfigurieren von ingress nginx mit Milvus<button data-href="#Configure-ingress-nginx-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ helm install cert-manager jetstack/cert-manager \
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erstellen Sie einen Cluster Issuer, z. B. cluster-issuer.yaml, unter Verwendung des folgenden Beispielmanifests. Ersetzen Sie MY_EMAIL_ADDRESS durch eine gültige Adresse Ihrer Organisation.</li>
+<li>Erstellen Sie einen Cluster Issuer, z. B. cluster-issuer.yaml, unter Verwendung des folgenden Beispielmanifests. Ersetzen Sie MY_EMAIL_ADDRESS durch eine gültige Adresse aus Ihrem Unternehmen.</li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cert-manager.io/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterIssuer</span>

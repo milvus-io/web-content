@@ -67,7 +67,7 @@ go build
       └── backup.yaml
   </code>
 </pre>
-<p>Milvus Backup はローカルパスにデータをバックアップできないため、設定ファイルを作成する際は Minio の設定が正しいことを確認してください。</p>
+<p>Milvus Backup はローカルパスにデータをバックアップできないため、設定ファイルを作成する際には Minio の設定が正しいことを確認してください。</p>
 <div class="alert note">
 <p>デフォルトのMinioバケットの名前は、Milvusのインストール方法によって異なります。Minioの設定を変更する場合は、以下の表を参照してください。</p>
 <table>
@@ -158,7 +158,7 @@ go build
 <pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/get_backup?backup_id=&lt;test_backup_id&gt;&amp;backup_name=my_backup&#x27; \
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドを実行しながら、<code translate="no">backup_id</code> と<code translate="no">backup_name</code> を list API が返すものに変更します。</p>
+<p>上記のコマンドを実行しながら、<code translate="no">backup_id</code> と<code translate="no">backup_name</code> を list API が返すものに変更する。</p>
 <p>これで、バックアップファイルを安全な場所に保存して、将来復元することもできますし、<a href="https://cloud.zilliz.com">Zilliz Cloudに</a>アップロードして、データ入りのマネージドベクターデータベースを作成することもできます。詳しくは<a href="https://zilliz.com/doc/migrate_from_milvus-2x">MilvusからZilliz Cloudへの移行を</a>ご参照ください。</p>
 <h2 id="Restore-data" class="common-anchor-header">データのリストア<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"

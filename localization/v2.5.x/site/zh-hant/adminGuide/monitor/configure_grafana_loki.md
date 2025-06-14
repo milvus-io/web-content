@@ -3,6 +3,7 @@ id: configure_grafana_loki.md
 title: 配置 Grafana Loki
 summary: 本主題說明如何使用 Loki 收集日誌，並使用 Grafana 查詢 Milvus 叢集的日誌。
 ---
+
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">配置 Grafana Loki<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +42,7 @@ summary: 本主題說明如何使用 Loki 收集日誌，並使用 Grafana 查�
         ></path>
       </svg>
     </button></h2><ul>
-<li>您已<a href="/docs/zh-hant/install_cluster-helm.md">在 K8s 上安裝 Milvus 叢集</a>。</li>
+<li>您已<a href="/docs/zh-hant/v2.5.x/install_cluster-helm.md">在 K8s 上安裝 Milvus 叢集</a>。</li>
 <li>您已安裝必要的工具，包括<a href="https://helm.sh/docs/intro/install/">Helm</a>和<a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>。</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">部署 Loki<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
@@ -73,8 +74,9 @@ helm repo update
   <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
 
 <span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>選項 2：使用 AWS S3 儲存</p>
 <p>在以下範例中，請將<code translate="no">&lt;accessKey&gt;</code> 和<code translate="no">&lt;keyId&gt;</code> 替換為您自己的 S3 存取金鑰和 ID，<code translate="no">s3.endpoint</code> 替換為 S3 端點，<code translate="no">s3.region</code> 替換為 S3 區域。</p>
 <pre><code translate="no" class="language-yaml">loki:

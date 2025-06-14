@@ -66,7 +66,7 @@ title: Panoramica del CDC
 <p>Nel diagramma precedente,</p>
 <ul>
 <li><p><strong>Server HTTP</strong>: Gestisce le richieste degli utenti, esegue le attività e mantiene i metadati. Serve come piano di controllo per l'orchestrazione dei task all'interno del sistema Milvus-CDC.</p></li>
-<li><p><strong>Corelib</strong>: Responsabile dell'effettiva sincronizzazione dei task. Comprende un componente di lettura che recupera le informazioni dall'etcd e dalla coda di messaggi (MQ) del Milvus di origine e un componente di scrittura che traduce i messaggi dall'MQ in parametri API per il sistema Milvus e invia queste richieste al Milvus di destinazione per completare il processo di sincronizzazione.</p></li>
+<li><p><strong>Corelib</strong>: Responsabile dell'effettiva sincronizzazione dei task. Include un componente di lettura che recupera le informazioni dall'etcd e dalla coda di messaggi (MQ) del Milvus di origine e un componente di scrittura che traduce i messaggi dall'MQ in parametri API per il sistema Milvus e invia queste richieste al Milvus di destinazione per completare il processo di sincronizzazione.</p></li>
 </ul>
 <h2 id="Workflow" class="common-anchor-header">Flusso di lavoro<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ title: Panoramica del CDC
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Sincronizzazione incrementale dei dati</strong>: Attualmente, Milvus-CDC è progettato per sincronizzare solo dati incrementali. Se la vostra azienda necessita di un backup completo dei dati, <a href="https://milvus.io/community">contattateci</a> per assistenza.</p></li>
+<li><p><strong>Sincronizzazione incrementale dei dati</strong>: Attualmente Milvus-CDC è progettato per sincronizzare solo dati incrementali. Se la vostra azienda necessita di un backup completo dei dati, <a href="https://milvus.io/community">contattateci</a> per assistenza.</p></li>
 <li><p><strong>Ambito di sincronizzazione</strong>: Attualmente, Milvus-CDC può sincronizzare i dati a livello di cluster. Stiamo lavorando per aggiungere il supporto per la sincronizzazione dei dati a livello di collezione nelle prossime versioni.</p></li>
 <li><p><strong>Richieste API supportate</strong>: Milvus-CDC supporta attualmente le seguenti richieste API. Nelle prossime versioni si prevede di estendere il supporto ad altre richieste:</p>
 <ul>

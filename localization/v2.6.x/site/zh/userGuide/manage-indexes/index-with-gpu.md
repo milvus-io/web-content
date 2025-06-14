@@ -4,7 +4,6 @@ order: 3
 summary: 本指南介绍如何在 Milvus 中建立支持 GPU 的索引，以提高搜索性能。
 title: 使用 GPU 建立索引
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">使用 GPU 建立索引<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +36,7 @@ title: 使用 GPU 建立索引
         ></path>
       </svg>
     </button></h2><p>Milvus 使用全局图形内存池分配 GPU 内存。</p>
-<p>它支持<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus 配置文件</a>中的两个参数<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 。显存池大小初始设置为<code translate="no">initMemSize</code> ，超过此限制后将自动扩展至<code translate="no">maxMemSize</code> 。</p>
+<p>它支持<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus 配置文件</a>中的两个参数<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 。内存池大小初始设置为<code translate="no">initMemSize</code> ，超过此限制后将自动扩展至<code translate="no">maxMemSize</code> 。</p>
 <p>Milvus 启动时，默认<code translate="no">initMemSize</code> 为可用 GPU 内存的 1/2，默认<code translate="no">maxMemSize</code> 等于所有可用 GPU 内存。</p>
 <p>在 Milvus 2.4.1（包括 2.4.1 版）之前，Milvus 使用统一的 GPU 内存池。对于 2.4.1 之前的版本（包括 2.4.1 版），建议将这两个值都设为 0。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
@@ -118,11 +117,10 @@ title: 使用 GPU 建立索引
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">搜索<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,13 +178,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

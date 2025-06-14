@@ -71,8 +71,7 @@ client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     dimension=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    enable_dynamic_field=<span class="hljs-literal">True</span>
+<span class="highlighted-wrapper-line">    enable_dynamic_field=<span class="hljs-literal">True</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
@@ -86,8 +85,7 @@ client.create_collection(
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
     .dimension(<span class="hljs-number">5</span>)
-    <span class="hljs-comment">// highlight-next-line</span>
-    .enableDynamicField(<span class="hljs-literal">true</span>)
+<span class="highlighted-wrapper-line">    .enableDynamicField(<span class="hljs-literal">true</span>)</span>
     .build()
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
@@ -100,8 +98,7 @@ client.createCollection(createCollectionReq);
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_2&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">enable_dynamic_field</span>: <span class="hljs-literal">true</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">enable_dynamic_field</span>: <span class="hljs-literal">true</span></span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
@@ -454,10 +451,8 @@ res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
     limit=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-start</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
-    <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,</span>
+<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -498,10 +493,8 @@ System.out.println(resp.getSearchResults());
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
     <span class="hljs-attr">data</span>: [query_vector],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">filters</span>: <span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>]
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">filters</span>: <span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>]</span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>}

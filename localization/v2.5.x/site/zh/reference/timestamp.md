@@ -3,6 +3,7 @@ id: timestamp.md
 title: Milvus 时间戳
 summary: 了解时间戳的概念和 Milvus 向量数据库中与时间戳相关的四个主要参数。
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">时间戳<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,5 +104,5 @@ summary: 了解时间戳的概念和 Milvus 向量数据库中与时间戳相关
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解<a href="/docs/zh/consistency.md">保证时间戳</a>如何<a href="/docs/zh/consistency.md">在 Milvus 中实现可调整的一致性</a></li>
+<li>了解<a href="/docs/zh/v2.5.x/consistency.md">保证时间戳</a>如何<a href="/docs/zh/v2.5.x/consistency.md">在 Milvus 中实现可调整的一致性</a></li>
 </ul>

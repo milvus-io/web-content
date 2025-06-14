@@ -37,7 +37,7 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><p>O Milvus Web UI difere do Birdwatcher e do Attu por ser uma ferramenta integrada que permite a observação geral do sistema com uma interface simples e intuitiva.</p>
-<p>A tabela seguinte compara as caraterísticas do Milvus Web UI e do Birdwatcher/Attu:</p>
+<p>A tabela seguinte compara as funcionalidades do Milvus Web UI e do Birdwatcher/Attu:</p>
 <table>
 <thead>
 <tr><th>Funcionalidade</th><th>Milvus Web UI</th><th>Birdwatcher</th><th>Attu</th></tr>

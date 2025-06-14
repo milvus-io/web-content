@@ -5,6 +5,7 @@ summary: >-
   Milvus 提供強大的篩選功能，可精確查詢資料。篩選表達式允許您針對特定的標量欄位，以不同的條件精細化搜尋結果。本指南將解釋如何在 Milvus
   中使用篩選表達式，並以查詢作業為重點範例。您也可以在搜尋和刪除請求中應用這些篩選表達式。
 ---
+
 <h1 id="Filtering-Explained" class="common-anchor-header">篩選說明<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +53,7 @@ summary: >-
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">範例：篩選陣列欄位</h3><p>如果您有一個陣列欄位<code translate="no">history_temperatures</code> ，其中包含天文台自 2000 年以來所報告的平均溫度記錄，並且想要找出 2009 年（第 10 次記錄）溫度超過 23°C 的天文台，請使用此表達式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關這些基本運算符的詳細資訊，請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>。</p>
+<p>有關這些基本運算符的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/basic-operators.md">基本運算符</a>。</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">篩選表達式範本<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +78,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>此方法可減少解析開銷，並提高查詢速度。如需詳細資訊，請參閱<a href="/docs/zh-hant/filtering-templating.md">篩選模板</a>。</p>
+<p>此方法可減少解析開銷，並提高查詢速度。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/filtering-templating.md">篩選模板</a>。</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">特定資料類型的運算符號<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +108,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關 JSON 運算符的詳細資訊，請參閱<a href="/docs/zh-hant/json-operators.md">JSON 運算符</a>。</p>
+<p>有關 JSON 運算符的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/json-operators.md">JSON 運算符</a>。</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY 特定欄位運算符號</h3><p>Milvus 為陣列欄位提供進階過濾運算符，例如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code>, 和<code translate="no">ARRAY_LENGTH</code> ，可對陣列資料進行精細控制：</p>
 <p><code translate="no">ARRAY_CONTAINS</code>:過濾包含特定元素的實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
@@ -121,7 +122,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>:根據陣列的長度進行篩選。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關陣列運算元的詳細資訊，請參閱<a href="/docs/zh-hant/array-operators.md">ARRAY 運算元</a>。</p>
+<p>有關陣列運算元的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/array-operators.md">ARRAY 運算元</a>。</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">特定於 VARCHAR 欄位的運算符號</h3><p>Milvus 提供了專門的運算符號，用於在 VARCHAR 欄位上進行精確的基於文字的搜尋：</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> 運算符號</h4><p><code translate="no">TEXT_MATCH</code> 運算符允許根據特定查詢字詞進行精確的文件檢索。它對於結合標量篩選與向量相似性搜尋的篩選搜尋特別有用。與語意搜尋不同，文字匹配專注於精確的詞彙出現。</p>
 <p>Milvus 使用 Tantivy 來支援倒置索引和基於詞彙的文字搜尋。過程包括</p>
@@ -129,4 +130,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>分析器</strong>：對輸入文字進行標記化和處理。</p></li>
 <li><p><strong>建立索引</strong>：建立倒置索引，將唯一的標記對應到文件。</p></li>
 </ol>
-<p>如需詳細資訊，請參閱「<a href="/docs/zh-hant/keyword-match.md">文字匹配</a>」。</p>
+<p>如需詳細資訊，請參閱「<a href="/docs/zh-hant/v2.5.x/keyword-match.md">文字匹配</a>」。</p>

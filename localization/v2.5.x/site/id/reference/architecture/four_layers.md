@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Struktur pemilahan penyimpanan/komputasi di Milvus.
 title: Pemilahan Penyimpanan/Komputasi
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Pemilahan Penyimpanan/Komputasi<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,5 +120,5 @@ title: Pemilahan Penyimpanan/Komputasi
         ></path>
       </svg>
     </button></h2><ul>
-<li>Baca <a href="/docs/id/main_components.md">Komponen Utama</a> untuk detail lebih lanjut tentang arsitektur Milvus.</li>
+<li>Baca <a href="/docs/id/v2.5.x/main_components.md">Komponen Utama</a> untuk detail lebih lanjut tentang arsitektur Milvus.</li>
 </ul>

@@ -2,8 +2,8 @@
 id: embed-with-sentence-transform.md
 order: 3
 summary: >-
-  Dieser Artikel zeigt, wie man mit Hilfe von Sentence Transformers in Milvus
-  Dokumente und Abfragen in dichte Vektoren kodiert.
+  Dieser Artikel demonstriert die Verwendung von Satztransformatoren in Milvus,
+  um Dokumente und Abfragen in dichte Vektoren zu kodieren.
 title: Satztransformatoren
 ---
 <h1 id="Sentence-Transformers" class="common-anchor-header">Satztransformatoren<button data-href="#Sentence-Transformers" class="anchor-icon" translate="no">

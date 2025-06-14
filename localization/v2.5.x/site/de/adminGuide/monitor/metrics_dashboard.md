@@ -5,6 +5,7 @@ summary: >-
   In diesem Thema werden die im Milvus Dashboard angezeigten
   Überwachungsmetriken vorgestellt.
 ---
+
 <h1 id="Milvus-Metrics-Dashboard" class="common-anchor-header">Milvus Metrik Dashboard<button data-href="#Milvus-Metrics-Dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus gibt während der Laufzeit eine Liste mit detaillierten Zeitreihenmetriken aus. Sie können <a href="https://prometheus.io/">Prometheus</a> und <a href="https://grafana.com/">Grafana</a> verwenden, um die Metriken zu visualisieren. In diesem Thema werden die Überwachungsmetriken vorgestellt, die im Grafana Milvus Dashboard angezeigt werden.</p>
 <p>Die Zeiteinheit in diesem Thema ist Millisekunden. Und "99. Perzentil" in diesem Thema bezieht sich auf die Tatsache, dass 99 Prozent der Zeitstatistiken innerhalb eines bestimmten Wertes kontrolliert werden.</p>
-<p>Wir empfehlen, zuerst den <a href="/docs/de/monitor_overview.md">Überblick über das Milvus Monitoring Framework zu</a> lesen, um die Prometheus-Metriken zu verstehen.</p>
+<p>Wir empfehlen, zuerst den <a href="/docs/de/v2.5.x/monitor_overview.md">Überblick über das Milvus Monitoring Framework zu</a> lesen, um die Prometheus-Metriken zu verstehen.</p>
 <p><details><summary>Proxy</summary></p>
 <table>
 <thead>

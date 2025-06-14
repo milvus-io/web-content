@@ -102,7 +102,7 @@ summary: Scoprite come configurare StreamingNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione massima di ciascuna richiesta RPC che lo streamingNode può inviare, unità: byte    </td>
+      <td>        Dimensione massima di ogni richiesta RPC che lo streamingNode può inviare, unità: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>

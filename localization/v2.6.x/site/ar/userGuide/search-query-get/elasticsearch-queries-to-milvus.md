@@ -143,7 +143,7 @@ summary: >-
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;message&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في المثال أعلاه، <code translate="no">message_sparse</code> هو حقل متجه متناثر مشتق من حقل VarChar اسمه <code translate="no">message</code>. يستخدم Milvus نموذج التضمين BM25 لتحويل القيم الموجودة في الحقل <code translate="no">message</code> إلى تضمينات متجهات متناثرة ويخزنها في الحقل <code translate="no">message_sparse</code>. عند تلقي طلب البحث، يقوم Milvus بتضمين حمولة الاستعلام النصية العادية باستخدام نفس نموذج BM25 ويقوم بإجراء بحث متجهي متناثر وإرجاع الحقلين <code translate="no">id</code> و <code translate="no">message</code> المحددين في المعلمة <code translate="no">output_fields</code> مع درجات التشابه المقابلة.</p>
+<p>في المثال أعلاه، <code translate="no">message_sparse</code> هو حقل متجه متناثر مشتق من حقل VarChar اسمه <code translate="no">message</code>. يستخدم ميلفوس نموذج التضمين BM25 لتحويل القيم الموجودة في الحقل <code translate="no">message</code> إلى تضمينات متجهات متناثرة ويخزنها في الحقل <code translate="no">message_sparse</code>. عند تلقي طلب البحث، يقوم Milvus بتضمين حمولة الاستعلام النصي العادي باستخدام نفس نموذج BM25 ويقوم بإجراء بحث متجهي متناثر وإرجاع الحقلين <code translate="no">id</code> و <code translate="no">message</code> المحددين في المعلمة <code translate="no">output_fields</code> مع درجات التشابه المقابلة.</p>
 <p>لاستخدام هذه الوظيفة، يجب تمكين المحلل على الحقل <code translate="no">message</code> وتحديد دالة لاشتقاق الحقل <code translate="no">message_sparse</code> منه. للحصول على إرشادات مفصلة حول تمكين المحلل وإنشاء الدالة المشتقة في ميلفوس، راجع <a href="/docs/ar/full-text-search.md">البحث في النص الكامل</a>.</p>
 <h2 id="Term-level-queries" class="common-anchor-header">الاستعلامات على مستوى المصطلح<button data-href="#Term-level-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -461,7 +461,7 @@ res = client.query(
 <li><p>بحث kNN على الحقل <code translate="no">vector</code> باستخدام متجه الاستعلام المقدم.</p></li>
 </ul>
 <p>يساهم كل مسترجع بما يصل إلى 50 من أفضل التطابقات، والتي يتم إعادة ترتيبها بواسطة RRF، ويتم إرجاع أفضل 10 نتائج نهائية.</p>
-<p>في Milvus، يمكنك تحقيق بحث هجين مماثل من خلال الجمع بين عمليات البحث عبر حقول متجهات متعددة، وتطبيق استراتيجية إعادة الترتيب، واسترجاع أفضل النتائج من القائمة المدمجة. يدعم Milvus كلاً من استراتيجيات إعادة الترتيب الموزونة واستراتيجيات إعادة الترتيب الموزونة. لمزيد من التفاصيل، راجع <a href="/docs/ar/reranking.md">إعادة الترتيب</a>.</p>
+<p>في Milvus، يمكنك تحقيق بحث هجين مماثل من خلال الجمع بين عمليات البحث عبر حقول متجهات متعددة، وتطبيق استراتيجية إعادة الترتيب، واسترجاع أفضل النتائج من القائمة المدمجة. يدعم Milvus كلاً من استراتيجيات إعادة الترتيب الموزونة واستراتيجيات إعادة الترتيب الموزونة. لمزيد من التفاصيل، راجع <a href="/docs/ar/weighted-ranker.md">إعادة الترتيب</a>.</p>
 <p>ما يلي هو معادلة غير صارمة لمثال Elasticsearch أعلاه في Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

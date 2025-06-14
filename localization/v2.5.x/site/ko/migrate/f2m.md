@@ -1,9 +1,10 @@
 ---
 id: f2m.md
 title: Faiss에서
-related_key: 'Faiss, migrate, import'
+related_key: "Faiss, migrate, import"
 summary: Faiss 데이터를 Milvus로 마이그레이션하는 방법을 알아보세요.
 ---
+
 <h1 id="From-Faiss" class="common-anchor-header">Faiss에서<button data-href="#From-Faiss" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ summary: Faiss 데이터를 Milvus로 마이그레이션하는 방법을 알아�
 <li>설치에 대한 자세한 내용은 <a href="https://github.com/facebookresearch/faiss/blob/main/INSTALL.md">Faiss 설치</a> 및 <a href="https://milvus.io/docs/install_standalone-docker.md">Milvus 설치를</a> 참조하세요.</li>
 </ul></li>
 <li><strong>필수 도구</strong>:<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구. 설치에 대한 자세한 내용은 <a href="/docs/ko/milvusdm_install.md">마이그레이션 도구 설치를</a> 참조하세요.</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus 마이그레이션</a> 도구. 설치에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/milvusdm_install.md">마이그레이션 도구 설치를</a> 참조하세요.</li>
 </ul></li>
 </ul>
 <h2 id="Configure-the-migration" class="common-anchor-header">마이그레이션 구성<button data-href="#Configure-the-migration" class="anchor-icon" translate="no">
@@ -78,31 +79,32 @@ loader:
     faissFile: ./testfiles/faiss/faiss_ivf_flat.index
 
 target: <span class="hljs-comment"># configs for the target Milvus collection.</span>
-  create:
-    collection:
-      name: test1w
-      shardsNums: 2
-      dim: 256
-      metricType: L2
+create:
+collection:
+name: test1w
+shardsNums: 2
+dim: 256
+metricType: L2
 
-  mode: remote
-  remote:
-    outputDir: testfiles/output/
-    cloud: aws
-    endpoint: 0.0.0.0:9000
-    region: ap-southeast-1
-    bucket: a-bucket
-    ak: minioadmin
-    sk: minioadmin
-    useIAM: <span class="hljs-literal">false</span>
-    useSSL: <span class="hljs-literal">false</span>
-    checkBucket: <span class="hljs-literal">true</span>
-  milvus2x:
-    endpoint: localhost:19530
-    username: xxxxx
-    password: xxxxx
+mode: remote
+remote:
+outputDir: testfiles/output/
+cloud: aws
+endpoint: 0.0.0.0:9000
+region: ap-southeast-1
+bucket: a-bucket
+ak: minioadmin
+sk: minioadmin
+useIAM: <span class="hljs-literal">false</span>
+useSSL: <span class="hljs-literal">false</span>
+checkBucket: <span class="hljs-literal">true</span>
+milvus2x:
+endpoint: localhost:19530
+username: xxxxx
+password: xxxxx
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>다음 표에서는 예제 구성 파일의 매개변수에 대해 설명합니다. 전체 구성 목록은 <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_FAISS.md#migrationyaml-reference">Milvus 마이그레이션을</a> 참조하세요 <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_FAISS.md#migrationyaml-reference">:</a> <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_FAISS.md#migrationyaml-reference">Faiss에서 Milvus 2.x로</a> 마이그레이션하기를 참조하세요.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>

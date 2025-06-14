@@ -2,6 +2,7 @@
 id: chunk_cache.md
 title: チャンクキャッシュの設定
 ---
+
 <h1 id="Configure-Chunk-Cache" class="common-anchor-header">チャンクキャッシュの設定<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,11 +54,11 @@ title: チャンクキャッシュの設定
     </button></h2><p>このガイドでは、Milvusインスタンスのチャンクキャッシュメカニズムの設定方法を説明します。構成はMilvusインスタンスのインストール方法によって異なります。</p>
 <ul>
 <li><p>Helm Chartsを使用してインストールしたMilvusインスタンスの場合</p>
-<p><code translate="no">values.yaml</code> ファイルの<code translate="no">config</code> セクションに設定を追加します。詳細については、<a href="/docs/ja/configure-helm.md">Helm Chartsを使用したMilvusの設定を</a>参照してください。</p></li>
+<p><code translate="no">values.yaml</code> ファイルの<code translate="no">config</code> セクションに設定を追加します。詳細については、<a href="/docs/ja/v2.5.x/configure-helm.md">Helm Chartsを使用したMilvusの設定を</a>参照してください。</p></li>
 <li><p>Docker Composeを使用してインストールしたMilvusインスタンスの場合</p>
-<p>Milvusインスタンスの起動に使用した<code translate="no">milvus.yaml</code> ファイルに設定を追加します。詳細については、<a href="/docs/ja/configure-docker.md">Docker Composeを使用したMilvusの設定を</a>参照してください。</p></li>
+<p>Milvusインスタンスの起動に使用した<code translate="no">milvus.yaml</code> ファイルに設定を追加します。詳細については、<a href="/docs/ja/v2.5.x/configure-docker.md">Docker Composeを使用したMilvusの設定を</a>参照してください。</p></li>
 <li><p>Operatorを使用してインストールしたMilvusインスタンスの場合</p>
-<p><code translate="no">Milvus</code> カスタムリソースの<code translate="no">spec.components</code> セクションに設定を追加します。詳細については、「<a href="/docs/ja/configure_operator.md">Operatorを使用したMilvusの設定</a>」を参照してください。</p></li>
+<p><code translate="no">Milvus</code> カスタムリソースの<code translate="no">spec.components</code> セクションに設定を追加します。詳細については、「<a href="/docs/ja/v2.5.x/configure_operator.md">Operatorを使用したMilvusの設定</a>」を参照してください。</p></li>
 </ul>
 <h3 id="Configuration-options" class="common-anchor-header">構成オプション</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
     <span class="hljs-attr">cache</span>:

@@ -1,11 +1,12 @@
 ---
 id: monitor.md
 title: نشر خدمات المراقبة
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: >-
   تعرف على كيفية نشر خدمات المراقبة لمجموعة Milvus العنقودية باستخدام
   Prometheus.
 ---
+
 <h1 id="Deploying-Monitoring-Services-on-Kubernetes" class="common-anchor-header">نشر خدمات المراقبة على Kubernetes<button data-href="#Deploying-Monitoring-Services-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,14 +124,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>إذا قمت بنشر خدمات المراقبة لمجموعة ميلفوس العنقودية، فقد ترغب أيضًا في تعلم<ul>
-<li><a href="/docs/ar/visualize.md">تصور مقاييس ميلفوس في غرافانا</a></li>
-<li><a href="/docs/ar/alert.md">إنشاء تنبيه لخدمات ملفوس</a></li>
-<li>ضبط <a href="/docs/ar/allocate.md">تخصيص الموارد</a> الخاصة بك</li>
+<li><a href="/docs/ar/v2.5.x/visualize.md">تصور مقاييس ميلفوس في غرافانا</a></li>
+<li><a href="/docs/ar/v2.5.x/alert.md">إنشاء تنبيه لخدمات ملفوس</a></li>
+<li>ضبط <a href="/docs/ar/v2.5.x/allocate.md">تخصيص الموارد</a> الخاصة بك</li>
 </ul></li>
 <li>إذا كنت تبحث عن معلومات حول كيفية توسيع نطاق مجموعة Milvus:<ul>
-<li>تعلم كيفية <a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة ميلفوس</a></li>
+<li>تعلم كيفية <a href="/docs/ar/v2.5.x/scaleout.md">توسيع نطاق مجموعة ميلفوس</a></li>
 </ul></li>
 <li>إذا كنت مهتمًا بترقية إصدار Milvus,<ul>
-<li>اقرأ <a href="/docs/ar/upgrade_milvus_cluster-operator.md">دليل ترقية مجموعة Milvus العنقودية</a> ودليل <a href="/docs/ar/upgrade_milvus_standalone-operator.md">ترقية مجموعة Milvus المستقلة</a>.</li>
+<li>اقرأ <a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-operator.md">دليل ترقية مجموعة Milvus العنقودية</a> ودليل <a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-operator.md">ترقية مجموعة Milvus المستقلة</a>.</li>
 </ul></li>
 </ul>

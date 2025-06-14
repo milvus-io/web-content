@@ -3,6 +3,7 @@ id: ivf-flat.md
 title: IVF_FLAT
 summary: IVF_FLATインデックスは、浮動小数点ベクトルの検索性能を向上させるインデックス・アルゴリズムである。
 ---
+
 <h1 id="IVFFLAT" class="common-anchor-header">IVF_FLAT<button data-href="#IVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +57,7 @@ summary: IVF_FLATインデックスは、浮動小数点ベクトルの検索性
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>IVF FLATワークフロー2</span> </span></p>
-<p><code translate="no">nprobe</code> の値を大きくすることで、より多くのパーティションを検索に含めることができます。これにより、クエリに最も近い埋め込みが、たとえ異なるパーティションに存在するとしても、見逃されないようにすることができます。しかし、これは、より多くの候補を評価する必要があるため、検索時間の増加という代償を伴います。インデックスパラメータのチューニングの詳細については、<a href="/docs/ja/ivf-flat.md#Index-params">Index params</a> を参照してください。</p>
+<p><code translate="no">nprobe</code> の値を大きくすることで、より多くのパーティションを検索に含めることができます。これにより、クエリに最も近い埋め込みが、たとえ異なるパーティションに存在するとしても、見逃されないようにすることができます。しかし、これは、より多くの候補を評価する必要があるため、検索時間の増加という代償を伴います。インデックスパラメータのチューニングの詳細については、<a href="/docs/ja/v2.5.x/ivf-flat.md#Index-params">Index params</a> を参照してください。</p>
 <h2 id="Build-index" class="common-anchor-header">インデックスの構築<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,26 +80,27 @@ summary: IVF_FLATインデックスは、浮動小数点ベクトルの検索性
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>この設定では</p>
 <ul>
 <li><p><code translate="no">index_type</code>:構築するインデックスのタイプ。この例では<code translate="no">IVF_FLAT</code> とします。</p></li>
-<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、<a href="/docs/ja/metric.md">メトリック・タイプを</a>参照してください。</p></li>
+<li><p><code translate="no">metric_type</code>:ベクトル間の距離の計算方法。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、<a href="/docs/ja/v2.5.x/metric.md">メトリック・タイプを</a>参照してください。</p></li>
 <li><p><code translate="no">params</code>:インデックスを構築するための追加設定オプション。</p>
 <ul>
 <li><code translate="no">nlist</code>:データセットを分割するクラスタ数。</li>
 </ul>
-<p><code translate="no">IVF_FLAT</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/ivf-flat.md#Index-building-params">インデックス構築パラメータ</a> を参照。</p></li>
+<p><code translate="no">IVF_FLAT</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/v2.5.x/ivf-flat.md#Index-building-params">インデックス構築パラメータ</a> を参照。</p></li>
 </ul>
-<p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
+<p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/v2.5.x/create-collection.md">コレクションの作成</a> を参照してください。</p>
 <h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,20 +124,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>この構成では</p>
 <ul>
 <li><p><code translate="no">params</code>:インデックスで検索するための追加構成オプション。</p>
 <ul>
 <li><code translate="no">nprobe</code>:検索するクラスタの数。</li>
 </ul>
-<p><code translate="no">IVF_FLAT</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/ivf-flat.md#Index-specific-search-params">インデックス固有の検索パラメータを</a>参照してください。</p></li>
+<p><code translate="no">IVF_FLAT</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/v2.5.x/ivf-flat.md#Index-specific-search-params">インデックス固有の検索パラメータを</a>参照してください。</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">インデックスパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +156,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/ivf-flat.md#Build-index">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/v2.5.x/ivf-flat.md#Build-index">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -168,7 +171,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">nlist</code> の値を大きくすると、より洗練されたクラスターを作成することでリコールが向上しますが、インデックス作成時間が長くなります。データセットサイズと利用可能なリソースに基づいて最適化する。ほとんどの場合、この範囲内の値を設定することを推奨する：[32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/ivf-flat.md#Search-on-index">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/v2.5.x/ivf-flat.md#Search-on-index">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>

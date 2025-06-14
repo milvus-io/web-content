@@ -7,6 +7,7 @@ summary: >-
   melhorar o desempenho das consultas em campos escalares de baixa
   cardinalidade.
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">BITMAP<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,8 +88,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Neste exemplo, criamos um índice de mapa de bits no campo <code translate="no">category</code> da coleção <code translate="no">my_collection</code>. O método <code translate="no">add_index()</code> é utilizado para especificar o nome do campo, o tipo de índice e o nome do índice.</p>
-<p>Uma vez criado o índice bitmap, pode utilizar o parâmetro <code translate="no">filter</code> em operações de consulta para efetuar uma filtragem escalar com base no campo indexado. Isto permite-lhe restringir eficazmente os resultados da pesquisa utilizando o índice bitmap. Para obter mais informações, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>
+<p>Uma vez criado o índice bitmap, pode utilizar o parâmetro <code translate="no">filter</code> em operações de consulta para efetuar uma filtragem escalar com base no campo indexado. Isto permite-lhe restringir eficazmente os resultados da pesquisa utilizando o índice bitmap. Para obter mais informações, consulte <a href="/docs/pt/v2.5.x/boolean.md">Filtragem de metadados</a>.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

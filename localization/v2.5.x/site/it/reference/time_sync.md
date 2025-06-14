@@ -3,6 +3,7 @@ id: time_sync.md
 title: Sincronizzazione temporale
 summary: Imparare a conoscere il sistema di sincronizzazione dell'ora in Milvus.
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">Sincronizzazione temporale<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: Imparare a conoscere il sistema di sincronizzazione dell'ora in Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Imparare il concetto di <a href="/docs/it/timestamp.md">timestamp</a>.</li>
-<li>Conoscere il <a href="/docs/it/data_processing.md">flusso di lavoro dell'elaborazione dei dati</a> in Milvus.</li>
+<li>Imparare il concetto di <a href="/docs/it/v2.5.x/timestamp.md">timestamp</a>.</li>
+<li>Conoscere il <a href="/docs/it/v2.5.x/data_processing.md">flusso di lavoro dell'elaborazione dei dati</a> in Milvus.</li>
 </ul>

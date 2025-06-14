@@ -7,7 +7,6 @@ summary: >-
   texto en el que sólo son relevantes las letras y números básicos, excluyendo
   cualquier carácter especial o símbolo.
 ---
-
 <h1 id="Alphanumonly" class="common-anchor-header">Sólo alfanuméricos<button data-href="#Alphanumonly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +66,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p>El filtro <code translate="no">alphanumonly</code> funciona con los términos generados por el tokenizador, por lo que debe utilizarse en combinación con un tokenizador. Para obtener una lista de los tokenizadores disponibles en Milvus, consulte <a href="/docs/es/standard-tokenizer.md">Standard Tokenizer</a> y sus páginas hermanas.</p>
 <p>Después de definir <code translate="no">analyzer_params</code>, puede aplicarlos a un campo <code translate="no">VARCHAR</code> al definir un esquema de colección. Esto permite a Milvus procesar el texto de ese campo utilizando el analizador especificado para una tokenización y filtrado eficientes. Para más detalles, consulte <a href="/docs/es/analyzer-overview.md#Example-use">Ejemplo de uso</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -103,7 +101,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificación mediante <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verificación mediante <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;Milvus 2.0 @ Scale! #AI #Vector_Databasé&quot;</span>
@@ -112,7 +110,6 @@ sample_text = <span class="hljs-string">&quot;Milvus 2.0 @ Scale! #AI #Vector_Da
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

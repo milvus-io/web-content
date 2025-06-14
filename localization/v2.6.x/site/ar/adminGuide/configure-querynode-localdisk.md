@@ -155,7 +155,7 @@ mount -a
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /mnt/nvme/containerd /mnt/nvme/containerd/state
 <span class="hljs-built_in">sudo</span> vim /etc/containerd/config.toml
 <button class="copy-code-btn"></button></code></pre>
-<p>حدد موقع قسم <code translate="no">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</code> ، وقم بتعديل الإعدادات <code translate="no">snapshotter</code> و <code translate="no">root</code> على النحو التالي ：</p>
+<p>حدد موقع قسم <code translate="no">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</code> ، وقم بتعديل إعدادات <code translate="no">snapshotter</code> و <code translate="no">root</code> على النحو التالي ：</p>
 <pre><code translate="no" class="language-toml"><span class="hljs-section">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd]</span>
 <span class="hljs-attr">snapshotter</span> = <span class="hljs-string">&quot;overlayfs&quot;</span>
 <span class="hljs-attr">root</span> = <span class="hljs-string">&quot;/mnt/nvme/containerd&quot;</span>

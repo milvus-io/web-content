@@ -4,6 +4,7 @@ title: AWS에서 Milvus용 레이어 7 로드 밸런서 설정하기
 related_key: cluster
 summary: AWS의 Layer-7 로드 밸런서 뒤에 Milvus 클러스터를 배포하는 방법을 알아보세요.
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">AWS에서 Milvus용 레이어 7 로드 밸런서 설정하기<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,9 +23,9 @@ summary: AWS의 Layer-7 로드 밸런서 뒤에 Milvus 클러스터를 배포하
     </button></h1><p>레이어 4 로드 밸런서와 비교할 때, 레이어 7 로드 밸런서는 스마트한 로드 밸런싱 및 캐싱 기능을 제공하며 클라우드 네이티브 서비스에 적합한 선택입니다.</p>
 <p>이 가이드에서는 이미 레이어 4 로드 밸런서 뒤에서 실행 중인 Milvus 클러스터를 위한 레이어 7 로드 밸런서 설정 방법을 안내합니다.</p>
 <h3 id="Before-your-start" class="common-anchor-header">시작하기 전</h3><ul>
-<li><a href="/docs/ko/eks.md">AWS의 레이어 4 로드 밸런서 뒤에 Milvus 클러스터를 배포했습니다</a>.</li>
+<li><a href="/docs/ko/v2.5.x/eks.md">AWS의 레이어 4 로드 밸런서 뒤에 Milvus 클러스터를 배포했습니다</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정</h3><p>이 가이드에서는 <a href="/docs/ko/eks.md">AWS의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/eks.md">배포했다고</a> 가정합니다.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvus 구성 조정</h3><p>이 가이드에서는 <a href="/docs/ko/v2.5.x/eks.md">AWS의 Layer-4 로드 밸런서 뒤에 Milvus 클러스터를</a> 이미 <a href="/docs/ko/v2.5.x/eks.md">배포했다고</a> 가정합니다.</p>
 <p>이 Milvus 클러스터에 대해 레이어 7 로드 밸런서를 설정하기 전에 다음 명령을 실행하여 레이어 4 로드 밸런서를 제거하세요.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -48,19 +49,18 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: <span class="hljs-string">&quot;arn:aws:acm:region:account-id:certificate/certificate-id&quot;</span>
 
 spec:
-  ingressClassName: alb
-  rules:
-    - host: milvus-demo.milvus.io
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: milvus-demo
-              port:
-                number: 19530
+ingressClassName: alb
+rules: - host: milvus-demo.milvus.io
+http:
+paths: - path: /
+pathType: Prefix
+backend:
+service:
+name: milvus-demo
+port:
+number: 19530
 <button class="copy-code-btn"></button></code></pre>
+
 <p>그런 다음 파일을 EKS 클러스터에 적용하여 인그레스를 생성할 수 있습니다.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -99,6 +99,7 @@ milvus-demo   alb     milvus-demo.milvus.io   k8s-milvus-milvusde-2f72215c02-778
 
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;k8s-milvus-milvusde-2f72215c02-778371620.us-east-2.elb.amazonaws.com&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;milvus-demo.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li><strong>호스트와</strong> <strong>server_name은</strong> 사용자 이름으로 바꿔야 합니다.</li>

@@ -1,12 +1,12 @@
 ---
 id: aws_layer7.md
-title: Configurer un équilibreur de charge de couche 7 pour Milvus sur AWS
+title: Configurer un équilibreur de charge de niveau 7 pour Milvus sur AWS
 related_key: cluster
 summary: >-
   Découvrez comment déployer un cluster Milvus derrière un équilibreur de charge
   Layer-7 sur AWS.
 ---
-<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Configurer un équilibreur de charge de couche 7 pour Milvus sur AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
+<h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Configurer un équilibreur de charge de niveau 7 pour Milvus sur AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

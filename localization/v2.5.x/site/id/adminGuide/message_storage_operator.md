@@ -1,9 +1,10 @@
 ---
 id: message_storage_operator.md
 title: Mengonfigurasi Penyimpanan Pesan dengan Operator Milvus
-related_key: 'minio, s3, storage, etcd, pulsar'
+related_key: "minio, s3, storage, etcd, pulsar"
 summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
 ---
+
 <h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">Mengonfigurasi Penyimpanan Pesan dengan Operator Milvus<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -365,6 +366,6 @@ spec:
       </svg>
     </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Milvus Operator:</p>
 <ul>
-<li><a href="/docs/id/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a></li>
-<li><a href="/docs/id/meta_storage_operator.md">Mengkonfigurasi Meta Storage dengan Milvus Operator</a></li>
+<li><a href="/docs/id/v2.5.x/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a></li>
+<li><a href="/docs/id/v2.5.x/meta_storage_operator.md">Mengkonfigurasi Meta Storage dengan Milvus Operator</a></li>
 </ul>

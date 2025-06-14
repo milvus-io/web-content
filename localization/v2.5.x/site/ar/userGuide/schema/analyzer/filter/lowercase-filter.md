@@ -7,6 +7,7 @@ summary: >-
   المثال، يمكنه تحويل ["عالٍ"، "أداء"، "متجه"، "قاعدة بيانات"] إلى ["عالٍ"،
   "أداء"، "متجه"، "قاعدة بيانات"].
 ---
+
 <h1 id="Lowercase" class="common-anchor-header">الأحرف الصغيرة<button data-href="#Lowercase" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +67,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يعمل عامل التصفية <code translate="no">lowercase</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز.</p>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لميلفوس بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل الترميز والتصفية الفعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
+<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لميلفوس بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل الترميز والتصفية الفعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,6 +116,7 @@ sample_text = <span class="hljs-string">&quot;The Lowercase Filter Ensures Unifo
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

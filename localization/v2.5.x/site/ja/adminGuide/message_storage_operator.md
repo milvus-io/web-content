@@ -1,9 +1,10 @@
 ---
 id: message_storage_operator.md
 title: Milvus Operatorでメッセージストレージを設定する
-related_key: 'minio, s3, storage, etcd, pulsar'
+related_key: "minio, s3, storage, etcd, pulsar"
 summary: Milvus Operatorでメッセージストレージを設定する方法をご紹介します。
 ---
+
 <h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">Milvus Operatorでメッセージストレージを設定する<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -365,6 +366,6 @@ spec:
       </svg>
     </button></h2><p>Milvus Operatorを使用して他のMilvus依存関係を設定する方法について説明します：</p>
 <ul>
-<li><a href="/docs/ja/object_storage_operator.md">Milvus Operatorでオブジェクトストレージを設定する</a></li>
-<li><a href="/docs/ja/meta_storage_operator.md">Milvus Operatorを使用したMeta Storageの設定</a></li>
+<li><a href="/docs/ja/v2.5.x/object_storage_operator.md">Milvus Operatorでオブジェクトストレージを設定する</a></li>
+<li><a href="/docs/ja/v2.5.x/meta_storage_operator.md">Milvus Operatorを使用したMeta Storageの設定</a></li>
 </ul>

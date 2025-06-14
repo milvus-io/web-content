@@ -8,7 +8,6 @@ summary: >-
   traitement de texte plus simple et plus cohérent, en particulier pour les
   contenus multilingues.
 ---
-
 <h1 id="ASCII-folding" class="common-anchor-header">Pliage ASCII<button data-href="#ASCII-folding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,8 +67,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
-<p>Le filtre <code translate="no">asciifolding</code> fonctionne sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à la page <a href="/docs/fr/standard-tokenizer.md">Tokenizer standard</a> et à ses pages apparentées.</p>
+<p>Le filtre <code translate="no">asciifolding</code> fonctionne sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à <a href="/docs/fr/standard-tokenizer.md">Standard Tokenizer</a> et à ses pages apparentées.</p>
 <p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -104,7 +102,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Vérification à l'aide de <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
@@ -119,7 +117,6 @@ sample_text = <span class="hljs-string">&quot;Café Möller serves crème brûl�
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

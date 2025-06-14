@@ -223,7 +223,7 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
         ></path>
       </svg>
     </button></h2><p>Esta sección describe cómo utilizar Ansible para iniciar el cluster Milvus que ha aprovisionado.</p>
-<p><a href="https://www.ansible.com/overview/how-ansible-works">Ansible</a> es una herramienta de gestión de la configuración utilizada para automatizar el aprovisionamiento de la nube y la gestión de la configuración.</p>
+<p><a href="https://www.ansible.com/overview/how-ansible-works">Ansible</a> es una herramienta de gestión de configuración utilizada para automatizar el aprovisionamiento de la nube y la gestión de la configuración.</p>
 <h3 id="Prerequisites" class="common-anchor-header">Requisitos previos</h3><ul>
 <li><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible Controller</a> está instalado.</li>
 </ul>

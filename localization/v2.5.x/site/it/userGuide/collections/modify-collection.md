@@ -5,6 +5,7 @@ summary: >-
   È possibile rinominare una raccolta o modificarne le impostazioni. Questa
   pagina si concentra su come modificare una raccolta.
 ---
+
 <h1 id="Modify-Collection" class="common-anchor-header">Modifica della raccolta<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,15 +43,16 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.rename_collection(
-    old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
+old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.RenameCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -146,10 +148,11 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
 <span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
@@ -199,15 +202,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Se i dati di una collezione devono essere cancellati dopo un periodo specifico, si può impostare il suo Time-To-Live (TTL) in secondi. Una volta scaduto il TTL, Milvus cancella tutte le entità della collezione.  La cancellazione è asincrona, il che significa che le ricerche e le interrogazioni sono ancora possibili prima che la cancellazione sia completata. Per maggiori dettagli, consultare la sezione <a href="/docs/it/set-collection-ttl.md">Impostare il TTL della collezione</a>.</p></td>
+     <td><p>Se i dati di una collezione devono essere cancellati dopo un periodo specifico, si può impostare il suo Time-To-Live (TTL) in secondi. Una volta scaduto il TTL, Milvus cancella tutte le entità della collezione.  La cancellazione è asincrona, il che significa che le ricerche e le interrogazioni sono ancora possibili prima che la cancellazione sia completata. Per maggiori dettagli, consultare la sezione <a href="/docs/it/v2.5.x/set-collection-ttl.md">Impostare il TTL della collezione</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>La mappatura della memoria (Mmap) consente l'accesso diretto alla memoria a file di grandi dimensioni su disco, permettendo a Milvus di memorizzare indici e dati sia nella memoria che sul disco rigido. Questo approccio consente di ottimizzare i criteri di posizionamento dei dati in base alla frequenza di accesso, aumentando la capacità di archiviazione delle raccolte senza influire sulle prestazioni di ricerca.</p><p>Per ulteriori informazioni, consultare la sezione <a href="/docs/it/mmap.md">Uso di mmap</a>.</p></td>
+     <td><p>La mappatura della memoria (Mmap) consente l'accesso diretto alla memoria a file di grandi dimensioni su disco, permettendo a Milvus di memorizzare indici e dati sia nella memoria che sul disco rigido. Questo approccio consente di ottimizzare i criteri di posizionamento dei dati in base alla frequenza di accesso, aumentando la capacità di archiviazione delle raccolte senza influire sulle prestazioni di ricerca.</p><p>Per ulteriori informazioni, consultare la sezione <a href="/docs/it/v2.5.x/mmap.md">Uso di mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>Con l'isolamento della chiave di partizione abilitato, Milvus raggruppa le entità in base al valore della chiave di partizione e crea un indice separato per ciascuno di questi gruppi. Quando riceve una richiesta di ricerca, Milvus individua l'indice in base al valore della chiave di partizione specificato nella condizione di filtraggio e limita l'ambito di ricerca alle entità incluse nell'indice, evitando così la scansione di entità irrilevanti durante la ricerca e migliorando notevolmente le prestazioni della ricerca. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/use-partition-key.md#Use-Partition-Key-Isolation">Uso dell'isolamento della chiave di partizione</a>.</p></td>
+     <td><p>Con l'isolamento della chiave di partizione abilitato, Milvus raggruppa le entità in base al valore della chiave di partizione e crea un indice separato per ciascuno di questi gruppi. Quando riceve una richiesta di ricerca, Milvus individua l'indice in base al valore della chiave di partizione specificato nella condizione di filtraggio e limita l'ambito di ricerca alle entità incluse nell'indice, evitando così la scansione di entità irrilevanti durante la ricerca e migliorando notevolmente le prestazioni della ricerca. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/v2.5.x/use-partition-key.md#Use-Partition-Key-Isolation">Uso dell'isolamento della chiave di partizione</a>.</p></td>
    </tr>
 </table>
 <h2 id="Drop-Collection-Properties" class="common-anchor-header">Eliminare le proprietà della raccolta<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">

@@ -5,6 +5,7 @@ summary: >-
   Токенизатор jieba обрабатывает китайский текст, разбивая его на составляющие
   слова.
 ---
+
 <h1 id="Jieba" class="common-anchor-header">Jieba<button data-href="#Jieba" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +83,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Подробнее о параметрах см. в разделе <a href="/docs/ru/jieba-tokenizer.md#Custom-configuration">Пользовательская конфигурация</a>.</p>
+<p>Подробнее о параметрах см. в разделе <a href="/docs/ru/v2.5.x/jieba-tokenizer.md#Custom-configuration">Пользовательская конфигурация</a>.</p>
 <h3 id="Custom-configuration" class="common-anchor-header">Пользовательская конфигурация</h3><p>Для большего контроля можно создать пользовательскую конфигурацию, которая позволит указать пользовательский словарь, выбрать режим сегментации, а также включить или отключить скрытую марковскую модель (HMM). Например:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -145,7 +146,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/analyzer-overview.md#Example-use">Примеры использования</a>.</p>
+<p>Определив <code translate="no">analyzer_params</code>, вы можете применить их к полю <code translate="no">VARCHAR</code> при определении схемы коллекции. Это позволит Milvus обрабатывать текст в этом поле с помощью указанного анализатора для эффективной токенизации и фильтрации. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/analyzer-overview.md#Example-use">Примеры использования</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,6 +201,7 @@ sample_text = <span class="hljs-string">&quot;milvus结巴分词器中文测试&
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

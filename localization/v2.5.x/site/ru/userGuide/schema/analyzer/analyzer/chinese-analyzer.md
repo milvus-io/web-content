@@ -5,6 +5,7 @@ summary: >-
   Китайский анализатор разработан специально для работы с китайским текстом,
   обеспечивая эффективную сегментацию и токенизацию.
 ---
+
 <h1 id="Chinese" class="common-anchor-header">Китайский<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,8 +24,8 @@ summary: >-
     </button></h1><p>Анализатор <code translate="no">chinese</code> разработан специально для работы с китайским текстом, обеспечивая эффективную сегментацию и токенизацию.</p>
 <h3 id="Definition" class="common-anchor-header">Определение</h3><p>Анализатор <code translate="no">chinese</code> состоит из:</p>
 <ul>
-<li><p><strong>Токенизатор</strong>: Использует токенизатор <code translate="no">jieba</code> для сегментации китайского текста на лексемы, основанные на словарном запасе и контексте. Дополнительную информацию см. в разделе <a href="/docs/ru/jieba-tokenizer.md">Jieba</a>.</p></li>
-<li><p><strong>Фильтр</strong>: Использует фильтр <code translate="no">cnalphanumonly</code> для удаления лексем, содержащих некитайские символы. Дополнительные сведения см. в разделе <a href="/docs/ru/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><strong>Токенизатор</strong>: Использует токенизатор <code translate="no">jieba</code> для сегментации китайского текста на лексемы, основанные на словарном запасе и контексте. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.5.x/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>Фильтр</strong>: Использует фильтр <code translate="no">cnalphanumonly</code> для удаления лексем, содержащих некитайские символы. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
 <p>Функциональность анализатора <code translate="no">chinese</code> эквивалентна следующей пользовательской конфигурации анализатора:</p>
 <div class="multipleCode">
@@ -54,6 +55,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Configuration" class="common-anchor-header">Конфигурация</h3><p>Чтобы применить анализатор <code translate="no">chinese</code> к полю, просто установите <code translate="no">type</code> на <code translate="no">chinese</code> в <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -124,6 +126,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是一个高性能、可扩
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

@@ -4,6 +4,7 @@ title: 创建警报
 related_key: monitor and alert.
 summary: 了解如何在 Grafana 中为 Milvus 服务创建警报。
 ---
+
 <h1 id="Create-an-Alert-for-Milvus-Services" class="common-anchor-header">为 Milvus 服务创建警报<button data-href="#Create-an-Alert-for-Milvus-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ summary: 了解如何在 Grafana 中为 Milvus 服务创建警报。
         ></path>
       </svg>
     </button></h2><p>本指南以创建 Milvus 组件内存使用警报为例。要创建其他类型的警报，请相应调整命令。如果在创建过程中遇到任何问题，请随时到<a href="https://discuss.milvus.io/">Milvus 论坛</a>提问或在<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a> 上发起讨论。</p>
-<h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>本教程假定您已安装并配置了 Grafana。如果没有，建议阅读<a href="/docs/zh/monitor.md">监控指南</a>。</p>
+<h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>本教程假定您已安装并配置了 Grafana。如果没有，建议阅读<a href="/docs/zh/v2.5.x/monitor.md">监控指南</a>。</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1.添加新查询</h3><p>要为 Milvus 组件的内存使用情况添加警报，请编辑内存面板。然后，添加一个带有度量的新查询：<code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +121,13 @@ summary: 了解如何在 Grafana 中为 Milvus 服务创建警报。
       </svg>
     </button></h2><ul>
 <li>如果您需要为 Milvus 启动监控服务：<ul>
-<li>阅读<a href="/docs/zh/monitor.md">监控指南</a></li>
-<li>了解如何<a href="/docs/zh/visualize.md">可视化监控指标</a></li>
+<li>阅读<a href="/docs/zh/v2.5.x/monitor.md">监控指南</a></li>
+<li>了解如何<a href="/docs/zh/v2.5.x/visualize.md">可视化监控指标</a></li>
 </ul></li>
 <li>如果您已经为 Milvus 组件的内存使用情况创建了警报：<ul>
-<li>了解如何<a href="/docs/zh/allocate.md#standalone">分配资源</a></li>
+<li>了解如何<a href="/docs/zh/v2.5.x/allocate.md#standalone">分配资源</a></li>
 </ul></li>
 <li>如果你正在寻找有关如何扩展 Milvus 集群的信息：<ul>
-<li>了解如何<a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a></li>
+<li>了解如何<a href="/docs/zh/v2.5.x/scaleout.md">扩展 Milvus 集群</a></li>
 </ul></li>
 </ul>

@@ -2,6 +2,7 @@
 id: limit_collection_counts.md
 title: 設定收集數量限制
 ---
+
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">限制收藏集數量<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,11 +23,11 @@ title: 設定收集數量限制
 <p>設定會因您安裝 Milvus 實例的方式而異。</p>
 <ul>
 <li><p>對於使用 Helm Charts 安裝的 Milvus 實例</p>
-<p>將設定加入<code translate="no">values.yaml</code> 檔案的<code translate="no">config</code> 部分。詳情請參閱<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 設定 Milvus</a>。</p></li>
+<p>將設定加入<code translate="no">values.yaml</code> 檔案的<code translate="no">config</code> 部分。詳情請參閱<a href="/docs/zh-hant/v2.5.x/configure-helm.md">使用 Helm Charts 設定 Milvus</a>。</p></li>
 <li><p>對於使用 Docker Compose 安裝的 Milvus 實體</p>
-<p>將配置新增到您用來啟動 Milvus 實例的<code translate="no">milvus.yaml</code> 檔案。如需詳細資訊，請參閱<a href="/docs/zh-hant/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</p></li>
+<p>將配置新增到您用來啟動 Milvus 實例的<code translate="no">milvus.yaml</code> 檔案。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</p></li>
 <li><p>對於使用 Operator 安裝的 Milvus 實例</p>
-<p>將配置新增到<code translate="no">Milvus</code> 自訂資源的<code translate="no">spec.components</code> 區段。如需詳細資訊，請參閱<a href="/docs/zh-hant/configure_operator.md">使用 Operator 配置 Milvus</a>。</p></li>
+<p>將配置新增到<code translate="no">Milvus</code> 自訂資源的<code translate="no">spec.components</code> 區段。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure_operator.md">使用 Operator 配置 Milvus</a>。</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">組態選項<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

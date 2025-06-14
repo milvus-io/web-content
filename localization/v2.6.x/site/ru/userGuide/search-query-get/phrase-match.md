@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Сопоставление фраз
+title: Сопоставление фразCompatible with Milvus 2.6.x
 summary: >-
   Фразовое соответствие позволяет искать документы, содержащие термины запроса в
   виде точной фразы. По умолчанию слова должны располагаться в том же порядке и
@@ -8,8 +8,9 @@ summary: >-
   learning" соответствует тексту типа "...typical robotics machine learning
   models...", где слова "robotics", "machine" и "learning" идут в одном порядке
   и между ними нет других слов.
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Сопоставление фраз<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Сопоставление фраз<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

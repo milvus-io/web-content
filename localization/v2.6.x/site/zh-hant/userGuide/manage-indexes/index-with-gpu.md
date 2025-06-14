@@ -4,7 +4,6 @@ order: 3
 summary: 本指南說明如何在 Milvus 中建立支援 GPU 的索引，以提升搜尋效能。
 title: 使用 GPU 建立索引
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">使用 GPU 建立索引<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,11 +117,10 @@ title: 使用 GPU 建立索引
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">搜尋<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,13 +178,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

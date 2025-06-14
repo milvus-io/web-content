@@ -153,7 +153,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Add-Loki-as-a-Data-Source-in-Grafana" class="common-anchor-header">2. Aggiungere Loki come origine dati in Grafana</h3><p>Una volta che Grafana è in funzione, è necessario aggiungere Loki come origine dati per interrogare i registri.</p>
 <ol>
-<li>Aprire un browser web e navigare all'indirizzo <code translate="no">127.0.0.1:3000</code>. Accedere utilizzando il nome utente <code translate="no">admin</code> e la password ottenuta in precedenza.</li>
+<li>Aprire un browser web e navigare su <code translate="no">127.0.0.1:3000</code>. Accedere utilizzando il nome utente <code translate="no">admin</code> e la password ottenuta in precedenza.</li>
 <li>Nel menu di sinistra, scegliere <strong>Connessioni</strong> &gt; <strong>Aggiungi nuova connessione</strong>.</li>
 <li>Nella pagina visualizzata, scegliere <strong>Loki</strong> come tipo di origine dati. È possibile inserire <strong>loki</strong> nella barra di ricerca per trovare l'origine dati.</li>
 <li>Nelle impostazioni dell'origine dati Loki, specificare il <strong>nome</strong> e l'<strong>URL</strong>, quindi fare clic su <strong>Salva e prova</strong>.</li>

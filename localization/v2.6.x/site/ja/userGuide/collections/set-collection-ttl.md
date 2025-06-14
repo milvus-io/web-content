@@ -2,7 +2,7 @@
 id: set-collection-ttl.md
 title: コレクションTTLの設定
 summary: >-
-  一度データがコレクションに挿入されると、デフォルトでそのまま残ります。しかし、シナリオによっては、一定期間後にデータを削除またはクリーンアップしたい場合があります。そのような場合、コレクションのTTL（Time-to-Live）プロパティを設定することで、TTLが切れるとMilvusは自動的にデータを削除します。
+  一度データがコレクションに挿入されると、デフォルトでそのまま残ります。しかし、シナリオによっては、一定期間後にデータを削除またはクリーンアップしたい場合があります。このような場合、コレクションのTTL（Time-to-Live）プロパティを設定することで、TTLが切れるとMilvusは自動的にデータを削除します。
 ---
 <h1 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,7 +36,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Time-to-Live (TTL)は、挿入または変更後、一定期間だけデータが有効またはアクセス可能である必要がある場合にデータベースで一般的に使用されます。その後、データは自動的に削除されます。</p>
-<p>例えば、毎日データを取り込むが、14日間だけレコードを保持する必要がある場合、コレクションのTTLを<strong>14×24×3600=1209600</strong>秒に設定することで、それよりも古いデータを自動的に削除するようにMilvusを設定することができます。これにより、最新14日分のデータのみがコレクションに残ります。</p>
+<p>例えば、毎日データを取り込むが、14日間だけレコードを保持する必要がある場合、コレクションのTTLを<strong>14×24×3600=1209600</strong>秒に設定することで、それより古いデータを自動的に削除するようにMilvusを設定することができます。これにより、コレクションには最新の14日分のデータのみが残ります。</p>
 <p>MilvusコレクションのTTLプロパティは秒単位の整数で指定します。一度設定されると、TTLを超えたデータはコレクションから自動的に削除されます。</p>
 <p>削除処理は非同期処理であるため、指定したTTLが経過しても検索結果から正確にデータが削除されない場合があります。削除はガベージコレクション(GC)とコンパクション処理に依存し、これらの処理は非決定的な間隔で行われるため、遅延が発生する可能性があります。</p>
 <h2 id="Set-TTL" class="common-anchor-header">TTLの設定<button data-href="#Set-TTL" class="anchor-icon" translate="no">
@@ -68,11 +68,9 @@ summary: >-
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-start</span>
-    properties={
-        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>
-    }
-    <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">    properties={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span></span>
+<span class="highlighted-comment-line">    }</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -85,19 +83,16 @@ client.create_collection(
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;1209600&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;1209600&quot;</span>)</span>
         .build();
 client.createCollection(customizedSetupReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">properties</span>: {
-        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>
-    }
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">properties</span>: {</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span></span>
+<span class="highlighted-comment-line">    }</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).

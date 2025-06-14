@@ -97,7 +97,7 @@ variable &quot;my_ip&quot; {
 }
 </code></pre></li>
 <li><p>Sicherheitsgruppe</p>
-<p>Die folgende Vorlage deklariert eine Sicherheitsgruppe, die eingehenden Datenverkehr aus dem CIDR-Adressbereich zulässt, der durch <code translate="no">my_ip</code> repräsentiert und in <code translate="no">variables.tf</code> deklariert wird.</p>
+<p>Die folgende Vorlage deklariert eine Sicherheitsgruppe, die eingehenden Datenverkehr aus dem CIDR-Adressbereich zulässt, der durch <code translate="no">my_ip</code> repräsentiert wird und in <code translate="no">variables.tf</code> deklariert ist.</p>
 <pre><code translate="no" class="language-main.tf">resource &quot;aws_security_group&quot; &quot;cluster_sg&quot; {
   name        = &quot;cluster_sg&quot;
   description = &quot;Allows only me to access&quot;
@@ -316,7 +316,7 @@ INDEX_COORD_ADDRESS= {{coords_ip}}:31000
 <h3 id="Test-Ansible-connectivity" class="common-anchor-header">Testen der Konnektivität von Ansible</h3><p>Testen Sie die Konnektivität zu Ansible.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ansible all -m ping</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Fügen Sie <code translate="no">-i</code> in den Befehl ein, um den Pfad zur Inventarisierungsdatei anzugeben, wenn Sie ihn nicht in <code translate="no">ansible.cfg</code> angegeben haben. Andernfalls verwendet Ansible <code translate="no">/etc/ansible/hosts</code>.</p>
+<p>Fügen Sie <code translate="no">-i</code> in den Befehl ein, um den Pfad zur Inventarisierungsdatei anzugeben, wenn Sie ihn nicht in <code translate="no">ansible.cfg</code> angegeben haben, ansonsten verwendet Ansible <code translate="no">/etc/ansible/hosts</code>.</p>
 <p>Das Terminal gibt die folgende Meldung aus:</p>
 <pre><code translate="no">dockernode01 | <span class="hljs-function"><span class="hljs-params">SUCCESS</span> =&gt;</span> {
 <span class="hljs-string">&quot;changed&quot;</span>: <span class="hljs-literal">false</span>,

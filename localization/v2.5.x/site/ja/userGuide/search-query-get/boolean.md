@@ -4,6 +4,7 @@ summary: >-
   フィルタ式は、検索やクエリの際に特定のスカラーフィールドをフィルタリングし、正確にマッチした結果を得るために使用することができます。このガイドでは、データセットの例を通して、Zillizでのフィルター式の使い方を紹介します。デモンストレーションのため、このガイドではクエリー操作の例のみを提供します。
 title: メタデータのフィルタリング
 ---
+
 <h1 id="Metadata-Filtering​" class="common-anchor-header">Metadata Filtering​<button data-href="#Metadata-Filtering​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,6 +183,7 @@ results = client.query(​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;white_9381&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">597.0</span>)}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;​
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
@@ -243,6 +245,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-2-Apply-filter-on-JSON-field" class="common-anchor-header">Example 2: Apply filter on JSON field</h4><p>The following example demonstrates how to filter products with an inventory quantity of 250 or more.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -264,6 +267,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;purple_4976&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">450.0</span>), <span class="hljs-string">&#x27;inventory&#x27;</span>: {<span class="hljs-string">&#x27;brand&#x27;</span>: <span class="hljs-string">&#x27;Apple&#x27;</span>, <span class="hljs-string">&#x27;quantity&#x27;</span>: <span class="hljs-number">268</span>}}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -385,6 +389,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-3-Apply-filter-on-Array-field​" class="common-anchor-header">Example 3: Apply filter on Array field​</h4><p>The following example demonstrates how to filter products whose sales volume in the first country is 150 or more.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -406,6 +411,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;purple_4976&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">450.0</span>), <span class="hljs-string">&#x27;sales_volume&#x27;</span>: [<span class="hljs-number">190</span>, <span class="hljs-number">149</span>, <span class="hljs-number">85</span>, <span class="hljs-number">79</span>, <span class="hljs-number">80</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -507,6 +513,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Term-operators​" class="common-anchor-header">Term operators​</h3><p>Term operators include:​</p>
 <ul>
 <li><p><code translate="no">in</code>: Filter results that match the condition​</p></li>
@@ -535,6 +542,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;purple_4976&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">450.0</span>)}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -591,6 +599,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-2-Apply-filter-on-JSON-field​" class="common-anchor-header">Example 2: Apply filter on JSON field​</h4><p>The following example demonstrates how to filter products whose brand is Apple.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -611,6 +620,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;purple_4976&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">450.0</span>), <span class="hljs-string">&#x27;inventory&#x27;</span>: {<span class="hljs-string">&#x27;brand&#x27;</span>: <span class="hljs-string">&#x27;Apple&#x27;</span>, <span class="hljs-string">&#x27;quantity&#x27;</span>: <span class="hljs-number">268</span>}}} ​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -693,12 +703,13 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Match-operators​" class="common-anchor-header">Match operators​</h3><p>Match operators include:​</p>
 <ul>
 <li><p><code translate="no">like</code>: Match constants or prefixes (prefix%), infixes (%infix%), and suffixes (%suffix) within constants. It relies on a brute-force search mechanism using wildcards and does not involve text tokenization. While it can achieve exact matches, its query efficiency is relatively low, making it suitable for simple matching tasks or queries on smaller datasets.​</p></li>
 <li><p><code translate="no">TEXT_MATCH</code>: Match specific terms or keywords on VARCHAR fields, using tokenization and inverted index to enable efficient text search. Compared to <code translate="no">like</code>, <code translate="no">TEXT_MATCH</code> offers more advanced text tokenization and filtering capabilities. It is suited for large-scale datasets where higher query performance is required for complex text search scenarios.​</p>
 <p><div class="alert note"></p>
-<p>To use the <code translate="no">TEXT_MATCH</code> filter expression, you must enable text matching for the target <code translate="no">VARCHAR</code> field when creating the collection. For details, refer to <a href="/docs/ja/keyword-match.md">Text Match</a>.​</p>
+<p>To use the <code translate="no">TEXT_MATCH</code> filter expression, you must enable text matching for the target <code translate="no">VARCHAR</code> field when creating the collection. For details, refer to <a href="/docs/ja/v2.5.x/keyword-match.md">Text Match</a>.​</p>
 <p></div></p></li>
 </ul>
 <h4 id="Example-1-Apply-filter-on-scalar-field​" class="common-anchor-header">Example 1: Apply filter on scalar field​</h4><p>The following example demonstrates how to filter products whose color is red. In this case, you can quickly filter all red products by matching the prefix 'red%’. Similarly, you can use the expression color in ['red_7025’, 'red_4794’, ‘red_9392’] to filter all red products. However, when the data is more complex, we recommend using the like operator for more efficient filtering.​</p>
@@ -720,6 +731,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;red_9392&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">848.0</span>)}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -768,6 +780,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-2-Apply-filter-on-JSON-field​" class="common-anchor-header">Example 2: Apply filter on JSON field​</h4><p>The following example demonstrates how to filter products whose brand name starts with the letter 'S’.​</p>
 <pre><code translate="no" class="language-python">results = client.query(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
@@ -781,6 +794,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;orange_6781&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">862.0</span>), <span class="hljs-string">&#x27;inventory&#x27;</span>: {<span class="hljs-string">&#x27;brand&#x27;</span>: <span class="hljs-string">&#x27;Samsung&#x27;</span>, <span class="hljs-string">&#x27;quantity&#x27;</span>: <span class="hljs-number">103</span>}}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -853,7 +867,8 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-3-Text-match-on-VARCHAR-fields​" class="common-anchor-header">Example 3: Text match on VARCHAR fields​</h4><p>The <code translate="no">TEXT_MATCH</code> expression is used for text match on <code translate="no">VARCHAR</code> fields. By default, it applies an <strong>OR</strong> logic, but you can combine it with other logical operators to create more complex query conditions. For details, refer to <a href="/docs/ja/keyword-match.md">Text Match</a>.​</p>
+
+<h4 id="Example-3-Text-match-on-VARCHAR-fields​" class="common-anchor-header">Example 3: Text match on VARCHAR fields​</h4><p>The <code translate="no">TEXT_MATCH</code> expression is used for text match on <code translate="no">VARCHAR</code> fields. By default, it applies an <strong>OR</strong> logic, but you can combine it with other logical operators to create more complex query conditions. For details, refer to <a href="/docs/ja/v2.5.x/keyword-match.md">Text Match</a>.​</p>
 <p>The following example demonstrates how to use the <code translate="no">TEXT_MATCH</code> expression to filter products where the <code translate="no">description</code> field contains either the term <code translate="no">&quot;Apple&quot;</code> or <code translate="no">&quot;iPhone&quot;</code>:​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -868,6 +883,7 @@ curl --request POST \​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .filter(<span class="hljs-string">&quot;TEXT_MATCH(description, \&quot;Apple iPhone\&quot;)&quot;</span>)​
@@ -895,6 +911,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>To filter for descriptions containing multiple keywords simultaneously, you can use the <code translate="no">and</code> operator. The following example demonstrates how to filter products where the <code translate="no">description</code> field contains both <code translate="no">&quot;chip&quot;</code> and <code translate="no">&quot;iPhone&quot;</code>:​</p>
 <pre><code translate="no" class="language-python">results = client.query(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
@@ -903,6 +920,7 @@ curl --request POST \​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .filter(<span class="hljs-string">&quot;TEXT_MATCH(description, \&quot;chip\&quot;) and TEXT_MATCH(description, \&quot;iPhone\&quot;)&quot;</span>)​
@@ -927,6 +945,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Arithmetic-operators​" class="common-anchor-header">Arithmetic operators​</h3><p>Arithmetic operators include:​</p>
 <ul>
 <li><p><code translate="no">+</code>: Addition​</p></li>
@@ -955,6 +974,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">450.0</span>)}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1003,6 +1023,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-2-Apply-filter-on-JSON-field​" class="common-anchor-header">Example 2: Apply filter on JSON field​</h4><p>The following example demonstrates how to filter products whose inventory, when doubled, exceeds 600 items.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -1022,6 +1043,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;white_9381&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">597.0</span>), <span class="hljs-string">&#x27;inventory&#x27;</span>: {<span class="hljs-string">&#x27;brand&#x27;</span>: <span class="hljs-string">&#x27;Apple&#x27;</span>, <span class="hljs-string">&#x27;quantity&#x27;</span>: <span class="hljs-number">351</span>}}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1094,6 +1116,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-3-Apply-filter-on-Array-field​" class="common-anchor-header">Example 3: Apply filter on Array field​</h4><p>The following example demonstrates how to filter products whose combined sales in the first and second countries exceed 300.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -1114,6 +1137,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;purple_4976&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">450.0</span>), <span class="hljs-string">&#x27;sales_volume&#x27;</span>: [<span class="hljs-number">190</span>, <span class="hljs-number">149</span>, <span class="hljs-number">85</span>, <span class="hljs-number">79</span>, <span class="hljs-number">80</span>], <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">10</span>}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1194,6 +1218,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Advanced-JSON-operators​" class="common-anchor-header">Advanced JSON operators​</h3><p>JSON operators include: ​</p>
 <ul>
 <li><p><code translate="no">JSON_CONTAINS</code>: Filter entities whose JSON field contains elements from a specific list.​</p></li>
@@ -1223,6 +1248,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;inventory&#x27;</span>: {<span class="hljs-string">&#x27;brand&#x27;</span>: <span class="hljs-string">&#x27;Microsoft&#x27;</span>, <span class="hljs-string">&#x27;quantity&#x27;</span>: <span class="hljs-number">376</span>, <span class="hljs-string">&#x27;previous_sales&#x27;</span>: [<span class="hljs-number">254</span>, <span class="hljs-number">275</span>, <span class="hljs-number">232</span>]}, <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">6</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;yellow_4222&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">996.0</span>)}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1281,6 +1307,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-2-JSONCONTAINSALL​" class="common-anchor-header">Example 2: <code translate="no">JSON_CONTAINS_ALL</code>​</h4><p><code translate="no">JSON_CONTAINS_ALL(identifier, JsonExpr)</code>：<code translate="no">identifier</code> is the key name in the JSON field and <code translate="no">JsonExpr</code> is the list of filtering conditions.​</p>
 <p>The following example demonstrates how to filter products that had previous sales of 232, 254, and 275 items in three different countries.​</p>
 <div class="multipleCode">
@@ -1300,6 +1327,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">6</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;yellow_4222&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">996.0</span>), <span class="hljs-string">&#x27;inventory&#x27;</span>: {<span class="hljs-string">&#x27;brand&#x27;</span>: <span class="hljs-string">&#x27;Microsoft&#x27;</span>, <span class="hljs-string">&#x27;quantity&#x27;</span>: <span class="hljs-number">376</span>, <span class="hljs-string">&#x27;previous_sales&#x27;</span>: [<span class="hljs-number">254</span>, <span class="hljs-number">275</span>, <span class="hljs-number">232</span>]}}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1372,6 +1400,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-3-JSONCONTAINSANY​" class="common-anchor-header">Example 3: <code translate="no">JSON_CONTAINS_ANY</code>​</h4><p><code translate="no">JSON_CONTAINS_ANY(identifier, JsonExpr)</code>：<code translate="no">identifier</code> is the key name in the JSON field and <code translate="no">JsonExpr</code> is the list of filtering conditions.​</p>
 <p>The following example demonstrates how to filter products that had previous sales of either 232, 254, or 275 items in any one of the three countries.​</p>
 <div class="multipleCode">
@@ -1392,6 +1421,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;red_9392&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">848.0</span>), <span class="hljs-string">&#x27;inventory&#x27;</span>: {<span class="hljs-string">&#x27;brand&#x27;</span>: <span class="hljs-string">&#x27;Apple&#x27;</span>, <span class="hljs-string">&#x27;quantity&#x27;</span>: <span class="hljs-number">61</span>, <span class="hljs-string">&#x27;previous_sales&#x27;</span>: [<span class="hljs-number">312</span>, <span class="hljs-number">254</span>, <span class="hljs-number">367</span>]}}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1479,6 +1509,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Advanced-Array-operators​" class="common-anchor-header">Advanced Array operators​</h3><p>Array operators include:​</p>
 <ul>
 <li><p><code translate="no">ARRAY_CONTAINS</code>: Filter all entities whose Array field contains a specific element.​</p></li>
@@ -1505,6 +1536,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;red_4794&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">327.0</span>), <span class="hljs-string">&#x27;sales_volume&#x27;</span>: [<span class="hljs-number">155</span>, <span class="hljs-number">161</span>, <span class="hljs-number">106</span>, <span class="hljs-number">86</span>, <span class="hljs-number">99</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1571,6 +1603,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-2-ARRAYCONTAINSALL​" class="common-anchor-header">Example 2: <code translate="no">ARRAY_CONTAINS_ALL</code>​</h4><p><code translate="no">ARRAY_CONTAINS_ALL(identifier, ArrayExpr)</code>：<code translate="no">identifier</code> is the name of the Array field, and<code translate="no">ArrayExpr</code> is the array of filtering conditions. ​</p>
 <p>The following example demonstrates how to filter products with current sales of 150 items in both the first and second countries.​</p>
 <div class="multipleCode">
@@ -1589,6 +1622,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">597.0</span>), <span class="hljs-string">&#x27;sales_volume&#x27;</span>: [<span class="hljs-number">150</span>, <span class="hljs-number">150</span>, <span class="hljs-number">73</span>], <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;white_9381&#x27;</span>}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1642,6 +1676,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-3-ARRAYCONTAINSANY​" class="common-anchor-header">Example 3: <code translate="no">ARRAY_CONTAINS_ANY</code>​</h4><p><code translate="no">ARRAY_CONTAINS_ANY(identifier, ArrayExpr)</code>：<code translate="no">identifier</code> is the name of the Array field, and  <code translate="no">ArrayExpr</code> is the array of filtering conditions. ​</p>
 <p>The following example demonstrates how to filter products with current sales of either 150, 190, or 90 items in any country.​</p>
 <div class="multipleCode">
@@ -1662,6 +1697,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;purple_4976&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">450.0</span>), <span class="hljs-string">&#x27;sales_volume&#x27;</span>: [<span class="hljs-number">190</span>, <span class="hljs-number">149</span>, <span class="hljs-number">85</span>, <span class="hljs-number">79</span>, <span class="hljs-number">80</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1740,6 +1776,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="Example-4-ARRAYLENGTH​" class="common-anchor-header">Example 4: <code translate="no">ARRAY_LENGTH</code>​</h4><p>The following example demonstrates how to filter products that are sold in only three countries.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -1759,6 +1796,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;white_9381&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">597.0</span>), <span class="hljs-string">&#x27;sales_volume&#x27;</span>: [<span class="hljs-number">150</span>, <span class="hljs-number">150</span>, <span class="hljs-number">73</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1834,6 +1872,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Multi-condition-filtering​" class="common-anchor-header">Multi-condition filtering​<button data-href="#Multi-condition-filtering​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1874,6 +1913,7 @@ curl --request POST \​
 # {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&#x27;color&#x27;</span>: <span class="hljs-string">&#x27;red_4794&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>: np.<span class="hljs-type">float32</span>(<span class="hljs-number">327.0</span>), <span class="hljs-string">&#x27;inventory&#x27;</span>: {<span class="hljs-string">&#x27;brand&#x27;</span>: <span class="hljs-string">&#x27;Apple&#x27;</span>, <span class="hljs-string">&#x27;quantity&#x27;</span>: <span class="hljs-number">193</span>, <span class="hljs-string">&#x27;previous_sales&#x27;</span>: [<span class="hljs-number">225</span>, <span class="hljs-number">286</span>, <span class="hljs-number">202</span>]}, <span class="hljs-string">&#x27;sales_volume&#x27;</span>: [<span class="hljs-number">155</span>, <span class="hljs-number">161</span>, <span class="hljs-number">106</span>, <span class="hljs-number">86</span>, <span class="hljs-number">99</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp​
 ​
@@ -1933,6 +1973,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Operator-precedence​" class="common-anchor-header">Operator precedence​<button data-href="#Operator-precedence​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

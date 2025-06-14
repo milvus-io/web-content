@@ -3,6 +3,7 @@ id: migrate_overview.md
 summary: この記事では、対応するマイグレーション、機能、アーキテクチャなど、Milvusマイグレーションツールの概要を説明します。
 title: Milvusマイグレーション概要
 ---
+
 <h1 id="Milvus-Migration-Overview" class="common-anchor-header">Milvusマイグレーション概要<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,10 +37,10 @@ title: Milvusマイグレーション概要
       </svg>
     </button></h2><p><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツールは</a>、様々なユーザーニーズに対応するため、様々なマイグレーションパスをサポートしています：</p>
 <ul>
-<li><a href="/docs/ja/es2m.md">ElasticsearchからMilvus 2.xへの移行</a>：ElasticsearchからMilvus 2.xへの移行：Elasticsearch環境からデータを移行し、Milvusの最適化されたベクトル検索機能を利用することができます。</li>
-<li><a href="/docs/ja/f2m.md">FaissからMilvus 2.xへ</a>：効率的な類似検索のための一般的なライブラリであるFaissからのデータ移行を実験的にサポート。</li>
-<li><a href="/docs/ja/m2m.md">Milvus 1.xからMilvus 2.xへ</a>：旧バージョンのデータを最新フレームワークへスムーズに移行。</li>
-<li><a href="/docs/ja/from-m2x.md">Milvus 2.3.xからMilvus 2.3.x以上へ</a>：既に2.3.xに移行したユーザーに対して、1回限りの移行パスを提供。</li>
+<li><a href="/docs/ja/v2.5.x/es2m.md">ElasticsearchからMilvus 2.xへの移行</a>：ElasticsearchからMilvus 2.xへの移行：Elasticsearch環境からデータを移行し、Milvusの最適化されたベクトル検索機能を利用することができます。</li>
+<li><a href="/docs/ja/v2.5.x/f2m.md">FaissからMilvus 2.xへ</a>：効率的な類似検索のための一般的なライブラリであるFaissからのデータ移行を実験的にサポート。</li>
+<li><a href="/docs/ja/v2.5.x/m2m.md">Milvus 1.xからMilvus 2.xへ</a>：旧バージョンのデータを最新フレームワークへスムーズに移行。</li>
+<li><a href="/docs/ja/v2.5.x/from-m2x.md">Milvus 2.3.xからMilvus 2.3.x以上へ</a>：既に2.3.xに移行したユーザーに対して、1回限りの移行パスを提供。</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">特徴<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -42,7 +42,7 @@ summary: Saiba como implementar um cluster Milvus no EKS
 <li><a href="https://helm.sh/docs/intro/install/"><code translate="no">helm</code></a></li>
 <li><a href="https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html"><code translate="no">eksctl</code></a></li>
 </ul></li>
-<li>As permissões do AWS IAM foram concedidas corretamente. A entidade de segurança IAM que está a utilizar deve ter permissão para utilizar funções IAM do Amazon EKS, funções relacionadas com serviços, AWS CloudFormation, VPCs e outros recursos relacionados. Pode seguir uma das seguintes formas para conceder as permissões adequadas ao seu principal.<ul>
+<li>As permissões do AWS IAM foram concedidas corretamente. A entidade de segurança IAM que está a usar deve ter permissão para usar funções IAM do Amazon EKS, funções relacionadas com serviços, AWS CloudFormation, VPCs e outros recursos relacionados. Pode seguir uma das seguintes formas para conceder as permissões adequadas ao seu principal.<ul>
 <li>(Não recomendado) Basta definir a política de associação do usuário/função que você usou para a política gerenciada da AWS <code translate="no">AdministratorAccess</code>.</li>
 <li>(Altamente recomendado) Para implementar o princípio do menor privilégio, faça o seguinte:<ul>
 <li><p>Para configurar a permissão para <code translate="no">eksctl</code>, consulte <a href="https://eksctl.io/usage/minimum-iam-policies/">Permissão mínima para <code translate="no">eksctl</code></a>.</p></li>
@@ -66,7 +66,7 @@ summary: Saiba como implementar um cluster Milvus no EKS
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Para configurar permissões para criar/excluir políticas de IAM, consulte as seguintes configurações de permissão. Substitua o endereço <code translate="no">YOUR_ACCOUNT_ID</code> pelo seu próprio.</p>
+<li><p>Para configurar permissões para criar/eliminar políticas de IAM, consulte as seguintes configurações de permissão. Substitua o endereço <code translate="no">YOUR_ACCOUNT_ID</code> pelo seu próprio.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2012-10-17&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;Statement&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>

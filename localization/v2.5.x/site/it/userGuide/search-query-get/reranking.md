@@ -10,6 +10,7 @@ summary: >-
   fornisce suggerimenti per la scelta della strategia di reranking più
   appropriata.
 ---
+
 <h1 id="Reranking" class="common-anchor-header">Riclassificazione<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,8 +49,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Rerank multivettoriale</span> </span></p>
 <p>Nella ricerca ibrida, il reranking è una fase cruciale che integra i risultati di più ricerche vettoriali per garantire che il risultato finale sia il più pertinente e accurato. Attualmente, Milvus supporta le due seguenti strategie di reranking:</p>
 <ul>
-<li><p><strong><a href="/docs/it/reranking.md#WeightedRanker">WeightedRanker</a></strong>: Questa strategia unisce i risultati calcolando un punteggio ponderato di punteggi (o distanze) provenienti da diverse ricerche vettoriali. I pesi sono assegnati in base all'importanza di ciascun campo vettoriale, consentendo la personalizzazione in base alle priorità di casi d'uso specifici.</p></li>
-<li><p><strong><a href="/docs/it/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Questa strategia combina i risultati in base al ranking. Utilizza un metodo che bilancia i ranghi dei risultati di ricerche diverse, spesso portando a un'integrazione più equa ed efficace di diversi tipi o modalità di dati.</p></li>
+<li><p><strong><a href="/docs/it/v2.5.x/reranking.md#WeightedRanker">WeightedRanker</a></strong>: Questa strategia unisce i risultati calcolando un punteggio ponderato di punteggi (o distanze) provenienti da diverse ricerche vettoriali. I pesi sono assegnati in base all'importanza di ciascun campo vettoriale, consentendo la personalizzazione in base alle priorità di casi d'uso specifici.</p></li>
+<li><p><strong><a href="/docs/it/v2.5.x/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Questa strategia combina i risultati in base al ranking. Utilizza un metodo che bilancia i ranghi dei risultati di ricerche diverse, spesso portando a un'integrazione più equa ed efficace di diversi tipi o modalità di dati.</p></li>
 </ul>
 <h2 id="WeightedRanker" class="common-anchor-header">Cursore ponderato<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -231,8 +232,9 @@ summary: >-
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
-rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
+rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 
 <span class="hljs-type">WeightedRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>))
@@ -429,6 +431,7 @@ reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 <span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);

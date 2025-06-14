@@ -67,7 +67,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan objek dengan Milvus Operator.
 <ul>
 <li><p>Kolom <code translate="no">deletionPolicy</code> menentukan kebijakan penghapusan MinIO dalam cluster. Secara default adalah <code translate="no">Delete</code> dan memiliki <code translate="no">Retain</code> sebagai opsi alternatif.</p>
 <ul>
-<li><code translate="no">Delete</code> mengindikasikan bahwa penyimpanan objek dalam klaster akan dihapus saat Anda menghentikan instans Milvus.</li>
+<li><code translate="no">Delete</code> mengindikasikan bahwa penyimpanan objek dalam klaster akan dihapus ketika Anda menghentikan instans Milvus.</li>
 <li><code translate="no">Retain</code> mengindikasikan bahwa penyimpanan objek dalam cluster dipertahankan sebagai layanan ketergantungan untuk startup berikutnya dari instans Milvus Anda.</li>
 </ul></li>
 <li><p>Kolom <code translate="no">pvcDeletion</code> menentukan apakah akan menghapus PVC (Persistent Volume Claim) ketika MinIO dalam cluster dihapus.</p></li>

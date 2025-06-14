@@ -7,6 +7,7 @@ summary: >-
   spécifié. Il utilise une tokénisation basée sur la grammaire, ce qui le rend
   efficace pour la plupart des langues.
 ---
+
 <h1 id="Standard-Analyzer" class="common-anchor-header">Analyseur standard<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,8 +41,8 @@ summary: >-
       </svg>
     </button></h2><p>L'analyseur <code translate="no">standard</code> se compose de</p>
 <ul>
-<li><p>Un<strong>tokenizer</strong>: Il utilise le tokenizer <code translate="no">standard</code> pour diviser le texte en unités de mots discrètes basées sur des règles de grammaire. Pour plus d'informations, voir <a href="/docs/fr/standard-tokenizer.md">Standard</a>.</p></li>
-<li><p><strong>Filtre</strong>: Utilise le<a href="/docs/fr/lowercase-filter.md"> filtre</a> <code translate="no">lowercase</code><a href="/docs/fr/lowercase-filter.md"></a> pour convertir tous les tokens en minuscules, ce qui permet d'effectuer des recherches insensibles à la casse. Pour plus d'informations, voir</p></li>
+<li><p>Un<strong>tokenizer</strong>: Il utilise le tokenizer <code translate="no">standard</code> pour diviser le texte en unités de mots discrètes basées sur des règles de grammaire. Pour plus d'informations, voir <a href="/docs/fr/v2.5.x/standard-tokenizer.md">Standard</a>.</p></li>
+<li><p><strong>Filtre</strong>: Utilise le<a href="/docs/fr/v2.5.x/lowercase-filter.md"> filtre</a> <code translate="no">lowercase</code><a href="/docs/fr/v2.5.x/lowercase-filter.md"></a> pour convertir tous les tokens en minuscules, ce qui permet d'effectuer des recherches insensibles à la casse. Pour plus d'informations, voir</p></li>
 </ul>
 <p>Les fonctionnalités de l'analyseur <code translate="no">standard</code> sont équivalentes à la configuration personnalisée suivante de l'analyseur :</p>
 <div class="multipleCode">
@@ -138,7 +139,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collecte. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
+<p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collecte. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.5.x/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,6 +194,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

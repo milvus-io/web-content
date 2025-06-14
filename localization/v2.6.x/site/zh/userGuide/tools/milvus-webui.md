@@ -76,7 +76,7 @@ title: Milvus WebUI
 <li><p><a href="#Home">主页</a></p>
 <p>你可以找到关于当前运行的 Milvus 实例、其组件、连接的客户端和依赖关系的信息。</p></li>
 <li><p><a href="#Collections">Collections</a></p>
-<p>可查看当前 Milvus 中的数据库和 Collections 列表，并检查其详细信息。</p></li>
+<p>可查看 Milvus 当前的数据库和 Collections 列表，并检查其详细信息。</p></li>
 <li><p><a href="#Query">查询</a></p>
 <p>您可以查看收集到的查询节点和查询协调器在网段、通道、副本和资源组方面的统计数据。</p></li>
 <li><p><a href="#Data">数据</a></p>
@@ -191,7 +191,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UI 数据页面</span> </span></p>
 <ul>
 <li><p><strong>分段</strong>：查看数据节点/协调器的分段列表及其详细信息，包括分段 ID、对应的 Collections、状态、大小等。</p></li>
-<li><p><strong>通道</strong>：查看数据节点/协调器的通道列表及其详细信息，包括通道名称、相应的 Collections 等。</p></li>
+<li><p><strong>通道</strong>：查看数据节点/协调器的通道列表及其详细信息，包括通道名称、对应的 Collections 等。</p></li>
 </ul>
 <h2 id="Tasks" class="common-anchor-header">任务<button data-href="#Tasks" class="anchor-icon" translate="no">
       <svg translate="no"

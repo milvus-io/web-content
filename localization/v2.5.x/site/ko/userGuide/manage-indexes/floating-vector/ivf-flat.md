@@ -3,6 +3,7 @@ id: ivf-flat.md
 title: IVF_FLAT
 summary: IVF_FLAT 인덱스는 부동 소수점 벡터의 검색 성능을 향상시킬 수 있는 인덱싱 알고리즘입니다.
 ---
+
 <h1 id="IVFFLAT" class="common-anchor-header">IVF_FLAT<button data-href="#IVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +57,7 @@ summary: IVF_FLAT 인덱스는 부동 소수점 벡터의 검색 성능을 향�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
    </span> <span class="img-wrapper"> <span>IVF 플랫 워크플로 2</span> </span></p>
-<p><code translate="no">nprobe</code> 값을 늘리면 검색에 더 많은 파티션을 포함할 수 있으므로 쿼리와 가장 가까운 임베딩이 다른 파티션에 있더라도 놓치지 않고 찾을 수 있습니다. 하지만 더 많은 후보를 평가해야 하므로 검색 시간이 늘어나는 대가가 따릅니다. 인덱스 매개변수 조정에 대한 자세한 내용은 <a href="/docs/ko/ivf-flat.md#Index-params">인덱스</a> 매개변수를 참조하세요.</p>
+<p><code translate="no">nprobe</code> 값을 늘리면 검색에 더 많은 파티션을 포함할 수 있으므로 쿼리와 가장 가까운 임베딩이 다른 파티션에 있더라도 놓치지 않고 찾을 수 있습니다. 하지만 더 많은 후보를 평가해야 하므로 검색 시간이 늘어나는 대가가 따릅니다. 인덱스 매개변수 조정에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/ivf-flat.md#Index-params">인덱스</a> 매개변수를 참조하세요.</p>
 <h2 id="Build-index" class="common-anchor-header">인덱스 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,26 +80,27 @@ summary: IVF_FLAT 인덱스는 부동 소수점 벡터의 검색 성능을 향�
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">index_type</code>: 빌드할 인덱스 유형입니다. 이 예에서는 값을 <code translate="no">IVF_FLAT</code> 로 설정합니다.</p></li>
-<li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 메서드입니다. 지원되는 값은 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 입니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p></li>
+<li><p><code translate="no">metric_type</code>: 벡터 간의 거리를 계산하는 데 사용되는 메서드입니다. 지원되는 값은 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code> 입니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/metric.md">메트릭 유형을</a> 참조하세요.</p></li>
 <li><p><code translate="no">params</code>: 인덱스 구축을 위한 추가 구성 옵션입니다.</p>
 <ul>
 <li><code translate="no">nlist</code>: 데이터 세트를 분할할 클러스터의 수입니다.</li>
 </ul>
-<p><code translate="no">IVF_FLAT</code> 인덱스에 사용할 수 있는 더 많은 구축 매개변수에 대해 알아보려면 <a href="/docs/ko/ivf-flat.md#Index-building-params">인덱스 구축</a> 매개변수를 참조하세요.</p></li>
+<p><code translate="no">IVF_FLAT</code> 인덱스에 사용할 수 있는 더 많은 구축 매개변수에 대해 알아보려면 <a href="/docs/ko/v2.5.x/ivf-flat.md#Index-building-params">인덱스 구축</a> 매개변수를 참조하세요.</p></li>
 </ul>
-<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
+<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
 <h2 id="Search-on-index" class="common-anchor-header">인덱스에서 검색<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,20 +124,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">params</code>: 색인에서 검색을 위한 추가 구성 옵션.</p>
 <ul>
 <li><code translate="no">nprobe</code>: 검색할 클러스터 수입니다.</li>
 </ul>
-<p><code translate="no">IVF_FLAT</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-flat.md#Index-specific-search-params">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
+<p><code translate="no">IVF_FLAT</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/v2.5.x/ivf-flat.md#Index-specific-search-params">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">인덱스 매개변수<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +156,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스를 만들고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-flat.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/ivf-flat.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>
@@ -168,7 +171,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">nlist</code> 값이 클수록 더 세분화된 클러스터를 생성하여 정확도가 향상되지만 인덱스 구축 시간이 늘어납니다. 데이터 세트 크기와 사용 가능한 리소스에 따라 최적화하세요. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/ivf-flat.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/ivf-flat.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>

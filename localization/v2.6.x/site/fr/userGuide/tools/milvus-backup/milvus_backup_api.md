@@ -69,7 +69,7 @@ go build
 </pre>
 <p>Milvus Backup ne pouvant pas sauvegarder vos données sur un chemin local, assurez-vous que les paramètres Minio sont corrects lorsque vous adaptez le fichier de configuration.</p>
 <div class="alert note">
-<p>Le nom du seau Minio par défaut varie en fonction de la manière dont vous installez Milvus. Lorsque vous modifiez les paramètres de Minio, reportez-vous au tableau suivant.</p>
+<p>Le nom du seau Minio par défaut varie en fonction de la manière dont vous installez Milvus. Lorsque vous modifiez les paramètres Minio, reportez-vous au tableau suivant.</p>
 <table>
 <thead>
 <tr><th>champ</th><th>Docker Compose</th><th>Helm / Milvus Operator</th></tr>

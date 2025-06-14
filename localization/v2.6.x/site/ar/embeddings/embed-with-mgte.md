@@ -75,7 +75,7 @@ query_embeddings = ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Embeddings:&quot;</span>, query_embeddings)
 <span class="hljs-built_in">print</span>(ef.dim)
 <button class="copy-code-btn"></button></code></pre>
-<p>الناتج المتوقع مشابه لما يلي:</p>
+<p>المخرجات المتوقعة مشابهة لما يلي:</p>
 <pre><code translate="no" class="language-python">Embeddings: {<span class="hljs-string">&#x27;dense&#x27;</span>: [tensor([ <span class="hljs-number">6.5883e-03</span>, -<span class="hljs-number">7.9415e-03</span>, -<span class="hljs-number">3.3669e-02</span>, -<span class="hljs-number">2.6450e-02</span>, <span class="hljs-number">1.4345e-02</span>,
         <span class="hljs-number">1.9612e-02</span>, -<span class="hljs-number">8.1679e-02</span>, <span class="hljs-number">5.6361e-02</span>, <span class="hljs-number">6.9020e-02</span>, <span class="hljs-number">1.9827e-02</span>,
        -<span class="hljs-number">9.2933e-03</span>, -<span class="hljs-number">1.9995e-02</span>, -<span class="hljs-number">1.0055e-01</span>, -<span class="hljs-number">5.4053e-02</span>, -<span class="hljs-number">8.5991e-02</span>,

@@ -2,6 +2,7 @@
 id: glossary.md
 title: 术语
 ---
+
 <h1 id="Terminology" class="common-anchor-header">术语<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +81,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>是 Milvus 的调试工具，可连接 etcd，实时监控 Milvus 服务器的状态并进行调整。它还支持 etcd 文件备份，帮助开发人员排除故障。</p>
+    </button></h2><p><a href="/docs/zh/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>是 Milvus 的调试工具，可连接 etcd，实时监控 Milvus 服务器的状态并进行调整。它还支持 etcd 文件备份，帮助开发人员排除故障。</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">批量编写工具<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +161,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，集合相当于关系数据库管理系统（RDBMS）中的表。Collections 是用于存储和管理实体的主要逻辑对象。更多信息，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p>
+    </button></h2><p>在 Milvus 中，集合相当于关系数据库管理系统（RDBMS）中的表。Collections 是用于存储和管理实体的主要逻辑对象。更多信息，请参阅<a href="/docs/zh/v2.5.x/manage-collections.md">管理 Collections</a>。</p>
 <h2 id="Dependency" class="common-anchor-header">依赖程序<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +193,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>动态模式允许您在不修改现有模式的情况下，将带有新字段的实体插入 Collections。这意味着您可以在不知道 Collections 的完整模式的情况下插入数据，并可以包含尚未定义的字段。您可以在创建 Collections 时启用动态字段，从而启用这种无 Schema 功能。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>。</p>
+    </button></h2><p>动态模式允许您在不修改现有模式的情况下，将带有新字段的实体插入 Collections。这意味着您可以在不知道 Collections 的完整模式的情况下插入数据，并可以包含尚未定义的字段。您可以在创建 Collections 时启用动态字段，从而启用这种无 Schema 功能。有关详细信息，请参阅<a href="/docs/zh/v2.5.x/enable-dynamic-field.md">启用动态字段</a>。</p>
 <h2 id="Embeddings" class="common-anchor-header">嵌入<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +226,7 @@ title: 术语
         ></path>
       </svg>
     </button></h2><p>实体由一组表示现实世界对象的字段组成。Milvus 中的每个实体都有一个唯一的主键。</p>
-<p>你可以自定义主键。如果不手动配置，Milvus 会自动为实体分配主键。如果选择自定义主键，请注意 Milvus 暂时不支持主键去重。因此，同一 Collections 中可能存在重复的主键。有关详细信息，请参阅<a href="/docs/zh/insert-update-delete.md#Insert-entities">插入实体</a>。</p>
+<p>你可以自定义主键。如果不手动配置，Milvus 会自动为实体分配主键。如果选择自定义主键，请注意 Milvus 暂时不支持主键去重。因此，同一 Collections 中可能存在重复的主键。有关详细信息，请参阅<a href="/docs/zh/v2.5.x/insert-update-delete.md#Insert-entities">插入实体</a>。</p>
 <h2 id="Field" class="common-anchor-header">字段<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +274,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>过滤搜索将标量过滤器应用于向量搜索，允许你根据特定条件完善搜索结果。更多信息，请参阅<a href="/docs/zh/single-vector-search.md#Filtered-search">过滤搜索</a>。</p>
+    </button></h2><p>过滤搜索将标量过滤器应用于向量搜索，允许你根据特定条件完善搜索结果。更多信息，请参阅<a href="/docs/zh/v2.5.x/single-vector-search.md#Filtered-search">过滤搜索</a>。</p>
 <h2 id="Hybrid-search" class="common-anchor-header">混合搜索<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +290,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">混合</a>搜索是自 Milvus 2.4.0 以来的混合搜索 API。您可以搜索多个向量场并进行融合。对于与标量字段过滤相结合的向量搜索，称为 &quot;过滤搜索&quot;。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">混合</a>搜索是自 Milvus 2.4.0 以来的混合搜索 API。您可以搜索多个向量场并进行融合。对于与标量字段过滤相结合的向量搜索，称为 &quot;过滤搜索&quot;。更多信息，请参阅<a href="/docs/zh/v2.5.x/multi-vector-search.md">混合搜索</a>。</p>
 <h2 id="Index" class="common-anchor-header">索引<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -545,7 +546,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 自 2.4.0 起支持在一个 Collections 中使用多个向量场。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
+    </button></h2><p>Milvus 自 2.4.0 起支持在一个 Collections 中使用多个向量场。更多信息，请参阅<a href="/docs/zh/v2.5.x/multi-vector-search.md">混合搜索</a>。</p>
 <h2 id="Partition" class="common-anchor-header">分区<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

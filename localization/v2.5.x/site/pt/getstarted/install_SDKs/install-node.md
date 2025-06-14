@@ -5,6 +5,7 @@ related_key: SDK
 summary: Saiba como instalar o SDK Node.js do Milvus.
 title: Instalar o Milvus Nodejs SDK
 ---
+
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Instalar o Milvus Nodejs SDK<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,11 +109,11 @@ yarn add @zilliz/milvus2-sdk-node
 <li><p>Ver <a href="https://github.com/milvus-io/milvus-sdk-node">o início rápido do Milvus node.js sdk</a></p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
-<li><a href="/docs/pt/manage-collections.md">Gerenciar coleções</a></li>
-<li><a href="/docs/pt/manage-partitions.md">Gerir partições</a></li>
-<li><a href="/docs/pt/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
-<li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
-<li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
+<li><a href="/docs/pt/v2.5.x/manage-collections.md">Gerenciar coleções</a></li>
+<li><a href="/docs/pt/v2.5.x/manage-partitions.md">Gerir partições</a></li>
+<li><a href="/docs/pt/v2.5.x/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
+<li><a href="/docs/pt/v2.5.x/single-vector-search.md">Pesquisa de vetor único</a></li>
+<li><a href="/docs/pt/v2.5.x/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p>Explorar <a href="/api-reference/node/v2.4.x/About.md">a referência da API Milvus Node.js</a></p></li>
 </ul>

@@ -5,6 +5,7 @@ related_key: configure
 summary: 使用 Helm 圖表設定 Milvus。
 title: 使用 Helm Charts 配置 Milvus
 ---
+
 <h1 id="Configure-Milvus-with-Helm-Charts" class="common-anchor-header">使用 Helm Charts 配置 Milvus<button data-href="#Configure-Milvus-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,34 +73,34 @@ extraConfigFiles:
   <tr>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/configure_etcd.md">etcd</a></li>
-            <li><a href="/docs/zh-hant/configure_minio.md">MinIO 或 S3</a></li>
-            <li><a href="/docs/zh-hant/configure_pulsar.md">Pulsar</a></li>
-            <li><a href="/docs/zh-hant/configure_rocksmq.md">RocksMQ</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_etcd.md">etcd</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_minio.md">MinIO 或 S3</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_pulsar.md">Pulsar</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_rocksmq.md">RocksMQ</a></li>
         </ul>
     </td>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/configure_rootcoord.md">根協定</a></li>
-            <li><a href="/docs/zh-hant/configure_proxy.md">代理</a></li>
-            <li><a href="/docs/zh-hant/configure_querycoord.md">查詢座標</a></li>
-            <li><a href="/docs/zh-hant/configure_querynode.md">查詢節點</a></li>
-            <li><a href="/docs/zh-hant/configure_indexnode.md">索引節點</a></li>
-            <li><a href="/docs/zh-hant/configure_datacoord.md">資料節點</a></li>
-            <li><a href="/docs/zh-hant/configure_datanode.md">資料節點</a></li>
-            <li><a href="/docs/zh-hant/configure_localstorage.md">本地儲存</a></li>
-            <li><a href="/docs/zh-hant/configure_log.md">日誌</a></li>
-            <li><a href="/docs/zh-hant/configure_msgchannel.md">訊息通道</a></li>
-            <li><a href="/docs/zh-hant/configure_common.md">共通</a></li>
-            <li><a href="/docs/zh-hant/configure_gpu.md">GPU</a></li>
-            <li><a href="/docs/zh-hant/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/zh-hant/configure_indexcoord.md">索引坐標</a></li>
-            <li><a href="/docs/zh-hant/configure_metastore.md">元存儲</a></li>
-            <li><a href="/docs/zh-hant/configure_mq.md">訊息佇列</a></li>
-            <li><a href="/docs/zh-hant/configure_natsmq.md">訊息佇列</a></li>
-            <li><a href="/docs/zh-hant/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/zh-hant/configure_trace.md">追蹤</a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md">配額與限制</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_rootcoord.md">根協定</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_proxy.md">代理</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_querycoord.md">查詢座標</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_querynode.md">查詢節點</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_indexnode.md">索引節點</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_datacoord.md">資料節點</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_datanode.md">資料節點</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_localstorage.md">本地儲存</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_log.md">日誌</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_msgchannel.md">訊息通道</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_common.md">共通</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_gpu.md">GPU</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_grpc.md">GRPC</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_indexcoord.md">索引坐標</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_metastore.md">元存儲</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_mq.md">訊息佇列</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_natsmq.md">訊息佇列</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_tikv.md">Tikv</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_trace.md">追蹤</a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md">配額與限制</a></li>
         </ul>
     </td>
   </tr>
@@ -119,14 +120,14 @@ extraConfigFiles:
     <td>效能調整</td>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
-            <li><a href="/docs/zh-hant/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
-            <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
-            <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
-            <li><a href="/docs/zh-hant/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
-            <li><a href="/docs/zh-hant/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
-            <li><a href="/docs/zh-hant/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
-            <li><a href="/docs/zh-hant/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
         </ul>
     </td>
   </tr>
@@ -134,11 +135,11 @@ extraConfigFiles:
     <td>資料與元</td>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
-            <li><a href="/docs/zh-hant/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
-            <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
-            <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
-            <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordgcdropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_datacoord.md#dataCoordgcdropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
         </ul>
     </td>
   </tr>
@@ -146,11 +147,11 @@ extraConfigFiles:
     <td>管理</td>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/configure_log.md#loglevel"><code translate="no">log.level</code></a></li>
-            <li><a href="/docs/zh-hant/configure_log.md#logfilerootPath"><code translate="no">log.file.rootPath</code></a></li>
-            <li><a href="/docs/zh-hant/configure_log.md#logfilemaxAge"><code translate="no">log.file.maxAge</code></a></li>
-            <li><a href="/docs/zh-hant/configure_minio.md#minioaccessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
-            <li><a href="/docs/zh-hant/configure_minio.md#miniosecretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_log.md#loglevel"><code translate="no">log.level</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_log.md#logfilerootPath"><code translate="no">log.file.rootPath</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_log.md#logfilemaxAge"><code translate="no">log.file.maxAge</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_minio.md#minioaccessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_minio.md#miniosecretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
         </ul>
     </td>
   </tr>
@@ -158,37 +159,37 @@ extraConfigFiles:
     <td>配額與限制</td>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsddlcollectionRate"><code translate="no">quotaAndLimits.ddl.collectionRate</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsddlpartitionRate"><code translate="no">quotaAndLimits.ddl.partitionRate</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlcollectionRate"><code translate="no">quotaAndLimits.ddl.collectionRate</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlpartitionRate"><code translate="no">quotaAndLimits.ddl.partitionRate</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
+            <li><a href="/docs/zh-hant/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
         </ul>
     </td>
   </tr>
@@ -240,11 +241,11 @@ $ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span>
     </button></h2><ul>
 <li><p>如果你想學習如何監控 Milvus 服務和建立警報：</p>
 <ul>
-<li>學習<a href="/docs/zh-hant/monitor.md">在 Kubernetes 上使用 Prometheus Operator 監控 Milvus</a></li>
-<li>學習<a href="/docs/zh-hant/visualize.md">在 Grafana 可視化 Milvus Metrics</a>。</li>
+<li>學習<a href="/docs/zh-hant/v2.5.x/monitor.md">在 Kubernetes 上使用 Prometheus Operator 監控 Milvus</a></li>
+<li>學習<a href="/docs/zh-hant/v2.5.x/visualize.md">在 Grafana 可視化 Milvus Metrics</a>。</li>
 </ul></li>
 <li><p>如果您正在尋找如何分配資源的說明：</p>
 <ul>
-<li><a href="/docs/zh-hant/allocate.md#standalone">在 Kubernetes 上分配資源</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/allocate.md#standalone">在 Kubernetes 上分配資源</a></li>
 </ul></li>
 </ul>

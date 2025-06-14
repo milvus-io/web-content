@@ -3,6 +3,7 @@ id: replica.md
 summary: Milvus의 인메모리 복제본에 대해 알아보세요.
 title: 인메모리 복제본
 ---
+
 <h1 id="In-Memory-Replica" class="common-anchor-header">인메모리 복제본<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: 인메모리 복제본
         ></path>
       </svg>
     </button></h1><p>이 항목에서는 작업 메모리에서 여러 세그먼트 복제를 활성화하여 성능과 가용성을 향상시키는 Milvus의 인메모리 복제(복제) 메커니즘에 대해 소개합니다.</p>
-<p>인메모리 복제본을 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure_querynode.md#queryNodereplicas">쿼리 노드 관련 구성을</a> 참조하세요.</p>
+<p>인메모리 복제본을 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.5.x/configure_querynode.md#queryNodereplicas">쿼리 노드 관련 구성을</a> 참조하세요.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

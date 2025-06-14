@@ -6,6 +6,7 @@ summary: >-
   messen. Die Wahl einer geeigneten Abstandsmetrik trägt dazu bei, die
   Klassifizierungs- und Clustering-Leistung erheblich zu verbessern.
 ---
+
 <h1 id="Metric-Types" class="common-anchor-header">Metrik-Typen<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +65,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>Für Vektorfelder des Typs <code translate="no">SPARSE\_FLOAT\_VECTOR</code> verwenden Sie den metrischen Typ <code translate="no">BM25</code> nur, wenn Sie eine Volltextsuche durchführen. Weitere Informationen finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
+<li><p>Für Vektorfelder des Typs <code translate="no">SPARSE\_FLOAT\_VECTOR</code> verwenden Sie den metrischen Typ <code translate="no">BM25</code> nur, wenn Sie eine Volltextsuche durchführen. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/full-text-search.md">Volltextsuche</a>.</p></li>
 <li><p>Bei Vektorfeldern des Typs <code translate="no">BINARY_VECTOR</code> muss der Dimensionswert (<code translate="no">dim</code>) ein Vielfaches von 8 sein.</p></li>
 </ul>
 </div>
@@ -247,7 +248,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 ist eine weit verbreitete Methode zur Messung der Textrelevanz, die speziell für die <a href="/docs/de/full-text-search.md">Volltextsuche</a> entwickelt wurde. Sie kombiniert die folgenden drei Schlüsselfaktoren:</p>
+    </button></h2><p>BM25 ist eine weit verbreitete Methode zur Messung der Textrelevanz, die speziell für die <a href="/docs/de/v2.5.x/full-text-search.md">Volltextsuche</a> entwickelt wurde. Sie kombiniert die folgenden drei Schlüsselfaktoren:</p>
 <ul>
 <li><p><strong>Termfrequenz (TF):</strong> Misst, wie häufig ein Begriff in einem Dokument vorkommt. Während höhere Häufigkeiten oft auf eine größere Bedeutung hinweisen, verwendet BM25 den Sättigungsparameter <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> um zu verhindern, dass zu häufige Begriffe die Relevanzbewertung dominieren.</p></li>
 <li><p><strong>Umgekehrte Dokumenthäufigkeit (IDF):</strong> Spiegelt die Bedeutung eines Begriffs im gesamten Korpus wider. Begriffe, die in weniger Dokumenten vorkommen, erhalten einen höheren IDF-Wert, was auf einen größeren Beitrag zur Relevanz hinweist.</p></li>

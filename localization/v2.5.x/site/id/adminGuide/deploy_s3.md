@@ -1,11 +1,12 @@
 ---
 id: deploy_s3.md
 title: Mengonfigurasi Penyimpanan Objek dengan Docker Compose atau Helm
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: >-
   Pelajari cara menyiapkan penyimpanan S3 untuk Milvus dengan Docker Compose
   atau Helm.
 ---
+
 <h1 id="Configure-Object-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Mengonfigurasi Penyimpanan Objek dengan Docker Compose atau Helm<button data-href="#Configure-Object-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +48,7 @@ summary: >-
   useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
   bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Lihat <a href="/docs/id/configure_minio.md">Konfigurasi MinIO/S3</a> untuk informasi lebih lanjut.</p>
+<p>Lihat <a href="/docs/id/v2.5.x/configure_minio.md">Konfigurasi MinIO/S3</a> untuk informasi lebih lanjut.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Sempurnakan docker-compose.yaml</h3><p>Anda juga akan menghapus variabel lingkungan <code translate="no">MINIO_ADDRESS</code> untuk layanan milvus di <code translate="no">docker-compose.yaml</code>. Secara default, milvus akan menggunakan minio lokal, bukan S3 eksternal.</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3. Menjalankan Milvus</h3><p>Jalankan perintah berikut untuk menjalankan Milvus yang menggunakan konfigurasi S3.</p>
 <pre><code translate="no" class="language-shell">docker compose up
@@ -129,6 +130,6 @@ summary: >-
       </svg>
     </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Docker Compose atau Helm:</p>
 <ul>
-<li><a href="/docs/id/deploy_etcd.md">Mengonfigurasi Penyimpanan Meta dengan Docker Compose atau Helm</a></li>
-<li><a href="/docs/id/deploy_pulsar.md">Mengonfigurasi Penyimpanan Pesan dengan Docker Compose atau Helm</a></li>
+<li><a href="/docs/id/v2.5.x/deploy_etcd.md">Mengonfigurasi Penyimpanan Meta dengan Docker Compose atau Helm</a></li>
+<li><a href="/docs/id/v2.5.x/deploy_pulsar.md">Mengonfigurasi Penyimpanan Pesan dengan Docker Compose atau Helm</a></li>
 </ul>

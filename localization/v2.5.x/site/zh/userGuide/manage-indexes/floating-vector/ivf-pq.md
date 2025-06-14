@@ -5,6 +5,7 @@ summary: >-
   IVF_PQ 索引是一种基于量化的索引算法，用于高维空间中的近似近邻搜索。虽然 IVF_PQ
   的速度不如某些基于图的方法，但它所需的内存通常要少得多，因此是大型数据集的实用选择。
 ---
+
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +46,7 @@ summary: >-
 <li><p><strong>反向索引：</strong>创建一个索引，将每个聚类的中心点映射到分配给该聚类的向量列表中。</p></li>
 <li><p><strong>搜索：</strong>搜索近邻时，搜索算法会将查询向量与群集中心点进行比较，并选择最有希望的群集。然后将搜索范围缩小到这些选定簇内的向量。</p></li>
 </ol>
-<p>要了解更多技术细节，请参阅<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>。</p>
+<p>要了解更多技术细节，请参阅<a href="/docs/zh/v2.5.x/ivf-flat.md">IVF_FLAT</a>。</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>乘积量化（PQ）</strong>是一种针对高维向量的压缩方法，可显著降低存储需求，同时实现快速的相似性搜索操作符。</p>
 <p>PQ 过程包括以下几个关键阶段：</p>
 <p>
@@ -58,7 +59,7 @@ summary: >-
 <li><p><strong>向量</strong> <strong>量化</strong>：对于原始向量中的每个子向量，PQ 使用特定的度量类型在相应的子空间内识别其最近的中心点。这一过程可有效地将每个子向量映射到编码本中与其最接近的代表向量。PQ 不存储完整的子向量坐标，只保留匹配中心点的索引。</p></li>
 <li><p><strong>压缩表示</strong>：最终的压缩表示由<code translate="no">m</code> 索引组成，每个子空间一个索引，统称为<strong>PQ 编码</strong>。这种编码方式将存储需求从<em>D × 32</em>位（假设为 32 位浮点数）减少到<em>m</em>×<em>nbits</em>位，在保留近似向量距离能力的同时实现了大幅压缩。</p></li>
 </ol>
-<p>有关参数调整和优化的更多详情，请参阅<a href="/docs/zh/ivf-pq.md#Index-params">索引参数</a>。</p>
+<p>有关参数调整和优化的更多详情，请参阅<a href="/docs/zh/v2.5.x/ivf-pq.md#Index-params">索引参数</a>。</p>
 <div class="alert note">
 <p>考虑一个使用 32 位浮点数的<em>D = 128</em>维向量。在 PQ 参数<em>m = 64</em>（子向量）和<em>nbits = 8</em>（因此<em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>=</em>每个子空间<em> 256 个</em>中心点）的情况下，我们可以比较存储需求：</p>
 <ul>
@@ -92,7 +93,7 @@ summary: >-
 <li><p><strong>利用 IVF 进行粗过滤</strong>：IVF 将向量空间划分为簇，缩小了搜索范围。该算法不评估整个数据集，而只关注与查询向量最接近的簇。</p></li>
 <li><p><strong>与 PQ 进行细粒度比较</strong>：在选定的簇内，PQ 使用压缩和量化的向量表示来快速计算近似距离。</p></li>
 </ol>
-<p>控制<strong>IVF</strong>和 PQ 算法的参数对<strong>IVF_PQ</strong>索引的性能影响很大。调整这些参数对特定数据集和应用获得最佳结果至关重要。有关这些参数以及如何调整<a href="/docs/zh/ivf-pq.md#Index-params">参数</a>的详细信息，请参阅<a href="/docs/zh/ivf-pq.md#Index-params">索引参数</a>。</p>
+<p>控制<strong>IVF</strong>和 PQ 算法的参数对<strong>IVF_PQ</strong>索引的性能影响很大。调整这些参数对特定数据集和应用获得最佳结果至关重要。有关这些参数以及如何调整<a href="/docs/zh/v2.5.x/ivf-pq.md#Index-params">参数</a>的详细信息，请参阅<a href="/docs/zh/v2.5.x/ivf-pq.md#Index-params">索引参数</a>。</p>
 <h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,26 +116,27 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">IVF_PQ</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/v2.5.x/metric.md">公制类型</a>。</p></li>
 <li><p><code translate="no">params</code>:用于建立索引的附加配置选项。</p>
 <ul>
 <li><code translate="no">m</code>:将向量分割成的子向量个数。</li>
 </ul>
-<p>要了解<code translate="no">IVF_PQ</code> 索引可用的更多构建<a href="/docs/zh/ivf-pq.md#Index-building-params">参数</a>，请参阅<a href="/docs/zh/ivf-pq.md#Index-building-params">索引构建参数</a>。</p></li>
+<p>要了解<code translate="no">IVF_PQ</code> 索引可用的更多构建<a href="/docs/zh/v2.5.x/ivf-pq.md#Index-building-params">参数</a>，请参阅<a href="/docs/zh/v2.5.x/ivf-pq.md#Index-building-params">索引构建参数</a>。</p></li>
 </ul>
-<p>配置好索引参数后，可直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中传递索引参数来创建索引。有关详情，请参阅<a href="/docs/zh/create-collection.md">创建 Collections</a>。</p>
+<p>配置好索引参数后，可直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中传递索引参数来创建索引。有关详情，请参阅<a href="/docs/zh/v2.5.x/create-collection.md">创建 Collections</a>。</p>
 <h2 id="Search-on-index" class="common-anchor-header">在索引上搜索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,20 +160,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">params</code>:在索引上搜索的其他配置选项。</p>
 <ul>
 <li><code translate="no">nprobe</code>:要搜索的群集数量。</li>
 </ul>
-<p>要了解<code translate="no">IVF_PQ</code> 索引可用的更多搜索<a href="/docs/zh/ivf-pq.md#Index-specific-search-params">参数</a>，请参阅<a href="/docs/zh/ivf-pq.md#Index-specific-search-params">特定于索引的搜索参数</a>。</p></li>
+<p>要了解<code translate="no">IVF_PQ</code> 索引可用的更多搜索<a href="/docs/zh/v2.5.x/ivf-pq.md#Index-specific-search-params">参数</a>，请参阅<a href="/docs/zh/v2.5.x/ivf-pq.md#Index-specific-search-params">特定于索引的搜索参数</a>。</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">索引参数<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -189,7 +192,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本节概述了用于建立索引和在索引上执行搜索的参数。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立参数</h3><p>下表列出了<a href="/docs/zh/ivf-pq.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立参数</h3><p>下表列出了<a href="/docs/zh/v2.5.x/ivf-pq.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th></th>
@@ -219,7 +222,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">nbits</code> 值越大，编码本越大，可能会更精确地表示原始向量。不过，这也意味着要使用更多比特来存储每个索引，从而导致压缩率降低。在大多数情况下，我们建议在此范围内设置一个值：[1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了在<code translate="no">search_params.params</code> 中<a href="/docs/zh/ivf-pq.md#Search-on-index">搜索索引</a>时可以配置的参数。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了在<code translate="no">search_params.params</code> 中<a href="/docs/zh/v2.5.x/ivf-pq.md#Search-on-index">搜索索引</a>时可以配置的参数。</p>
 <table>
    <tr>
      <th></th>

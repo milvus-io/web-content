@@ -49,7 +49,7 @@ summary: Saiba como implementar um cluster Milvus no AWS EC2.
 <li><p><code translate="no">main.tf</code></p>
 <p>Este ficheiro contém a configuração para o aprovisionamento de um cluster Milvus.</p></li>
 <li><p><code translate="no">variables.tf</code></p>
-<p>Este ficheiro permite a edição rápida das variáveis utilizadas para configurar ou atualizar um cluster Milvus.</p></li>
+<p>Este ficheiro permite uma edição rápida das variáveis utilizadas para configurar ou atualizar um cluster Milvus.</p></li>
 <li><p><code translate="no">output.tf</code> e <code translate="no">inventory.tmpl</code></p>
 <p>Estes ficheiros armazenam os metadados de um cluster Milvus. Os metadados usados neste tópico são <code translate="no">public_ip</code> para cada instância de nó, <code translate="no">private_ip</code> para cada instância de nó e todos os IDs de instância do EC2.</p></li>
 </ul>
@@ -490,5 +490,5 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
 <ul>
 <li><a href="/docs/pt/eks.md">Implantar um cluster do Milvus no EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Implantar o cluster do Milvus no GCP com o Kubernetes</a></li>
-<li><a href="/docs/pt/azure.md">Guia para implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li><a href="/docs/pt/azure.md">Guia de implantação do Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul>

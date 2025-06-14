@@ -4,6 +4,7 @@ title: フィルタリングの説明
 summary: >-
   Milvusはデータの正確なクエリを可能にする強力なフィルタリング機能を提供します。フィルタ式を使用すると、特定のスカラーフィールドを対象とし、さまざまな条件で検索結果を絞り込むことができます。このガイドでは、Milvusにおけるフィルタ式の使用方法を、クエリ操作に焦点を当てた例を用いて説明します。また、検索および削除リクエストでこれらのフィルタを適用することもできます。
 ---
+
 <h1 id="Filtering-Explained" class="common-anchor-header">フィルタリングの説明<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,7 +52,7 @@ summary: >-
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">例配列フィールドのフィルタリング</h3><p>2000年以降に観測所から報告された平均気温の記録を含む配列フィールド<code translate="no">history_temperatures</code> があり、2009年（10番目に記録された）の気温が23℃を超える観測所を見つけたい場合、この式を使用します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これらの基本演算子についての詳細は、<a href="/docs/ja/basic-operators.md">基本演算子を</a>参照してください。</p>
+<p>これらの基本演算子についての詳細は、<a href="/docs/ja/v2.5.x/basic-operators.md">基本演算子を</a>参照してください。</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">フィルタ式のテンプレート<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,7 +77,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>この方法は、構文解析のオーバーヘッドを減らし、クエリの速度を向上させます。詳細は<a href="/docs/ja/filtering-templating.md">Filter Templating</a> を参照してください。</p>
+<p>この方法は、構文解析のオーバーヘッドを減らし、クエリの速度を向上させます。詳細は<a href="/docs/ja/v2.5.x/filtering-templating.md">Filter Templating</a> を参照してください。</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">データ型固有の演算子<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +107,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>JSON 演算子の詳細については、「<a href="/docs/ja/json-operators.md">JSON 演算子</a>」を参照してください。</p>
+<p>JSON 演算子の詳細については、「<a href="/docs/ja/v2.5.x/json-operators.md">JSON 演算子</a>」を参照してください。</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY フィールド固有の演算子</h3><p>Milvusは、<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> のような配列フィールド用の高度なフィルタリング演算子を提供しており、配列データに対するきめ細かな制御が可能です：</p>
 <p><code translate="no">ARRAY_CONTAINS</code>:特定の要素を含むエンティティをフィルタリングします。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
@@ -120,7 +121,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>:配列の長さに基づいてフィルタリングする。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>配列演算子の詳細については、<a href="/docs/ja/array-operators.md">ARRAY 演算子を</a>参照してください。</p>
+<p>配列演算子の詳細については、<a href="/docs/ja/v2.5.x/array-operators.md">ARRAY 演算子を</a>参照してください。</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR フィールド固有の演算子</h3><p>MilvusはVARCHARフィールドをテキストベースで正確に検索するために特化した演算子を提供しています：</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> 演算子</h4><p><code translate="no">TEXT_MATCH</code> 演算子を使用すると、特定のクエリ語に基づいて文書を正確に検索することができます。スカラーフィルタとベクトル類似検索を組み合わせたフィルタ検索に特に便利です。セマンティック検索とは異なり、Text Matchは正確な用語の出現に焦点を当てる。</p>
 <p>MilvusはTantivyを使用して、転置インデックスと用語ベースのテキスト検索をサポートしている。プロセスには以下が含まれる：</p>
@@ -128,4 +129,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>アナライザー</strong>：入力テキストをトークン化し、処理する。</p></li>
 <li><p><strong>インデックス作成</strong>：一意のトークンを文書にマッピングする転置インデックスを作成する。</p></li>
 </ol>
-<p>詳細は<a href="/docs/ja/keyword-match.md">テキストマッチを</a>参照。</p>
+<p>詳細は<a href="/docs/ja/v2.5.x/keyword-match.md">テキストマッチを</a>参照。</p>

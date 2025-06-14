@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: 了解如何在 Kubernetes 上安装 Milvus 集群。
 title: 使用 Helm Chart 在支持 GPU 的情况下运行 Milvus
 ---
+
 <h1 id="Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="common-anchor-header">使用 Helm Chart 在支持 GPU 的情况下运行 Milvus<button data-href="#Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,14 +55,15 @@ title: 使用 Helm Chart 在支持 GPU 的情况下运行 Milvus
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">安装 Helm CLI</a>。</p></li>
-<li><p><a href="/docs/zh/prerequisite-gpu.md#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes">创建带有 GPU 工作节点的 K8s 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/prerequisite-gpu.md#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes">创建带有 GPU 工作节点的 K8s 集群</a>。</p></li>
 <li><p>安装<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。您可以按以下步骤检查已安装的 StorageClass。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+NAME PROVISIONER RECLAIMPOLICY VOLUMEBIINDINGMODE ALLOWVOLUMEEXPANSION AGE
+standard (default) k8s.io/minikube-hostpath Delete Immediate <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>安装前请检查<a href="/docs/zh/prerequisite-gpu.md">硬件和软件要求</a>。</p></li>
+
+<li><p>安装前请检查<a href="/docs/zh/v2.5.x/prerequisite-gpu.md">硬件和软件要求</a>。</p></li>
 </ul>
 <div class="alert note">
 <p>如果在绘制镜像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们并提供问题详情，我们将为您提供必要的支持。</p>
@@ -311,7 +313,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 配备了一个名为 Milvus WebUI 的内置图形用户界面工具，可通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+    </button></h2><p>Milvus 配备了一个名为 Milvus WebUI 的内置图形用户界面工具，可通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/v2.5.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>要启用对 Milvus Web UI 的访问，需要将代理 pod 的端口转发到本地端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -352,27 +354,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>安装 Milvus 后，您可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/v2.5.x/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/v2.5.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.5.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.5.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.5.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
 <li><p>在云上部署你的 Milvu 集群：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/v2.5.x/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/v2.5.x/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/v2.5.x/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
-<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.5.x/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/v2.5.x/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
-<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

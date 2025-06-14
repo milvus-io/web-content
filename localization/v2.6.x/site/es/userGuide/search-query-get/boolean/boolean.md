@@ -1,0 +1,190 @@
+---
+id: boolean.md
+title: Explicación del filtrado
+summary: >-
+  Milvus proporciona potentes funciones de filtrado que permiten una consulta
+  precisa de sus datos. Las expresiones de filtrado le permiten dirigirse a
+  campos escalares específicos y refinar los resultados de la búsqueda con
+  diferentes condiciones. Esta guía explica cómo utilizar las expresiones de
+  filtrado en Milvus, con ejemplos centrados en las operaciones de consulta.
+  También puede aplicar estos filtros en solicitudes de búsqueda y eliminación.
+---
+<h1 id="Filtering-Explained" class="common-anchor-header">Explicación del filtrado<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>Milvus proporciona potentes capacidades de filtrado que permiten una consulta precisa de sus datos. Las expresiones de filtrado le permiten dirigirse a campos escalares específicos y refinar los resultados de la búsqueda con diferentes condiciones. Esta guía explica cómo utilizar las expresiones de filtrado en Milvus, con ejemplos centrados en las operaciones de consulta. También puede aplicar estos filtros en solicitudes de búsqueda y eliminación.</p>
+<h2 id="Basic-operators" class="common-anchor-header">Operadores básicos<button data-href="#Basic-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus admite varios operadores básicos para filtrar datos:</p>
+<ul>
+<li><p><strong>Operadores de comparación</strong>: <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, y <code translate="no">&lt;=</code> permiten filtrar basándose en campos numéricos o de texto.</p></li>
+<li><p><strong>Filtros de rango</strong>: <code translate="no">IN</code> y <code translate="no">LIKE</code> ayudan a emparejar rangos o conjuntos de valores específicos.</p></li>
+<li><p><strong>Operadores aritméticos</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, y <code translate="no">**</code> se utilizan para cálculos que implican campos numéricos.</p></li>
+<li><p><strong>Operadores lógicos</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, y <code translate="no">NOT</code> combinan múltiples condiciones en expresiones complejas.</p></li>
+</ul>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Ejemplo: Filtrar por color</h3><p>Para encontrar entidades con colores primarios (rojo, verde o azul) en un campo escalar <code translate="no">color</code>, utilice la siguiente expresión de filtro:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Ejemplo: Filtrado de campos JSON</h3><p>Milvus permite referenciar claves en campos JSON. Por ejemplo, si tiene un campo JSON <code translate="no">product</code> con las claves <code translate="no">price</code> y <code translate="no">model</code>, y desea encontrar productos con un modelo específico y un precio inferior a 1.850, utilice esta expresión de filtro:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Ejemplo: Filtrado de campos de matriz</h3><p>Si tiene un campo array <code translate="no">history_temperatures</code> que contiene los registros de las temperaturas medias notificadas por los observatorios desde el año 2000, y desea encontrar observatorios en los que la temperatura en 2009 (la décima registrada ) supere los 23°C, utilice esta expresión:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para obtener más información sobre estos operadores básicos, consulte <a href="/docs/es/basic-operators.md">Operadores básicos</a>.</p>
+<h2 id="Filter-expression-templates" class="common-anchor-header">Plantillas de expresiones de filtrado<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Al filtrar utilizando caracteres CJK, el procesamiento puede ser más complejo debido a sus mayores conjuntos de caracteres y diferencias de codificación. Esto puede dar lugar a un rendimiento más lento, especialmente con el operador <code translate="no">IN</code>.</p>
+<p>Milvus introduce plantillas de expresiones de filtrado para optimizar el rendimiento cuando se trabaja con caracteres CJK. Al separar los valores dinámicos de la expresión de filtro, el motor de consulta gestiona la inserción de parámetros de forma más eficiente.</p>
+<h3 id="Example" class="common-anchor-header">Ejemplo</h3><p>Para buscar personas mayores de 25 años que vivan en "北京" (Pekín) o "上海" (Shanghai), utilice la siguiente expresión de plantilla:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para mejorar el rendimiento, utilice esta variación con parámetros:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
+filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
+<button class="copy-code-btn"></button></code></pre>
+<p>Este enfoque reduce la sobrecarga de análisis sintáctico y mejora la velocidad de consulta. Para obtener más información, consulte <a href="/docs/es/filtering-templating.md">Plantillas de filtros</a>.</p>
+<h2 id="Data-type-specific-operators" class="common-anchor-header">Operadores específicos de tipos de datos<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus proporciona operadores de filtrado avanzados para tipos de datos específicos, como los campos JSON, ARRAY y VARCHAR.</p>
+<h3 id="JSON-field-specific-operators" class="common-anchor-header">Operadores específicos de campo JSON</h3><p>Milvus ofrece operadores avanzados para consultar campos JSON, permitiendo un filtrado preciso dentro de estructuras JSON complejas:</p>
+<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: Comprueba si existe una expresión JSON en el campo.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">JSON_CONTAINS_ALL(identifier, jsonExpr)</code>: Comprueba que todos los elementos de la expresión JSON están presentes.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;, &quot;discount&quot;]}</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>: Filtra las entidades en las que existe al menos un elemento en la expresión JSON.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para obtener más información sobre los operadores JSON, consulte <a href="/docs/es/json-operators.md">Operadores JSON</a>.</p>
+<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">Operadores específicos de campo ARRAY</h3><p>Milvus proporciona operadores de filtrado avanzados para campos de array, como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, y <code translate="no">ARRAY_LENGTH</code>, que permiten un control detallado de los datos de array:</p>
+<p><code translate="no">ARRAY_CONTAINS</code>: Filtra entidades que contienen un elemento específico.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">ARRAY_CONTAINS_ALL</code>: Filtra entidades en las que están presentes todos los elementos de una lista.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">ARRAY_CONTAINS_ANY</code>: Filtra entidades que contienen cualquier elemento de la lista.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">ARRAY_LENGTH</code>: Filtra en función de la longitud de la matriz.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para obtener más información sobre los operadores de matrices, consulte <a href="/docs/es/array-operators.md">Operadores ARRAY</a>.</p>
+<h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Operadores específicos de campo VARCHAR</h3><p>Milvus proporciona operadores especializados para búsquedas precisas basadas en texto en campos VARCHAR:</p>
+<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operador</h4><p>El operador <code translate="no">TEXT_MATCH</code> permite una recuperación precisa de documentos basada en términos de consulta específicos. Es especialmente útil para búsquedas filtradas que combinan filtros escalares con búsquedas de similitud vectorial. A diferencia de las búsquedas semánticas, Text Match se centra en las ocurrencias exactas de los términos.</p>
+<p>Milvus utiliza Tantivy para apoyar la indexación invertida y la búsqueda de texto basada en términos. El proceso implica:</p>
+<ol>
+<li><p><strong>Analizador</strong>: Tokeniza y procesa el texto de entrada.</p></li>
+<li><p><strong>Indexación</strong>: Crea un índice invertido que asigna tokens únicos a documentos.</p></li>
+</ol>
+<p>Para más información, consulte <a href="/docs/es/keyword-match.md">Coincidencia de textos</a>.</p>
+<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operador<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>El operador <strong>PHRASE_MATCH</strong> permite la recuperación precisa de documentos basados en coincidencias exactas de frases, teniendo en cuenta tanto el orden como la adyacencia de los términos de la consulta.</p>
+<p>Para más información, consulte <a href="/docs/es/phrase-match.md">Coincidencia de frases</a>.</p>
+<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">Operador de muestreo aleatorio<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>El muestreo aleatorio permite extraer un subconjunto de muestras de datos de una colección a nivel de segmento, por lo que resulta ideal para explorar y procesar conjuntos de datos masivos. Esta función es valiosa para estos casos de uso:</p>
+<ul>
+<li><p><strong>Previsualización rápida de datos</strong>: Devuelve datos de muestra representativos con un uso mínimo de recursos, lo que permite captar rápidamente la estructura general y el contenido de grandes conjuntos de datos vectoriales.</p></li>
+<li><p><strong>Filtrado combinado</strong>: Cuando se realiza un filtrado multicriterio (por ejemplo, selección de documentos por atributos), combinarlo con un muestreo aleatorio permite obtener rápidamente resúmenes estadísticos y vistas previas sobre los resultados filtrados.</p></li>
+<li><p><strong>Ahorro de recursos en el tratamiento de datos a gran escala</strong>: En el caso de conjuntos de datos muy grandes, la agregación y el análisis de los datos completos puede consumir muchos recursos. El muestreo aleatorio reduce la carga de procesamiento al disminuir la cantidad de datos manejados.</p></li>
+</ul>
+<p>Utilice la siguiente sintaxis para el muestreo aleatorio:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
+<button class="copy-code-btn"></button></code></pre>
+<ul>
+<li><code translate="no">float</code><strong>:</strong> Un factor de muestreo en el intervalo (0, 1), excluyendo los límites. Por ejemplo, <code translate="no">RANDOM_SAMPLE(0.001)</code> selecciona aproximadamente el 0,1% de los resultados.</li>
+</ul>
+<div class="alert note">
+<p>La expresión <code translate="no">RANDOM_SAMPLE</code> no distingue entre mayúsculas y minúsculas. Puede utilizar <code translate="no">RANDOM_SAMPLE</code> o <code translate="no">random_sample</code>.</p>
+</div>
+<h3 id="Combine-with-other-filters" class="common-anchor-header">Combinación con otros filtros</h3><p>El operador de muestreo aleatorio debe combinarse con otras expresiones de filtrado mediante la lógica <code translate="no">AND</code>. Por ejemplo:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Aquí, Milvus aplica primero la condición <code translate="no">color = 'red'</code> y luego realiza el muestreo aleatorio en el conjunto de resultados.</p>
+<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">Ejemplo: Muestreo aleatorio sin filtro adicional</h3><p>En este ejemplo, la consulta muestrea un subconjunto aleatorio (aproximadamente el 1%) de todos los datos de la colección especificada:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
+
+result = MilvusClient.query(
+    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
+)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">Ejemplo: Filtrado combinado con muestreo aleatorio</h3><p>En este ejemplo, la consulta filtra primero los documentos en función de un atributo específico (en este caso, los documentos en los que <code translate="no">color</code> es igual a <code translate="no">'red'</code>). Tras el filtrado, se aplica el operador de muestreo aleatorio para obtener aproximadamente el 0,1% de los resultados filtrados:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
+
+result = MilvusClient.query(
+    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
+)
+<button class="copy-code-btn"></button></code></pre>

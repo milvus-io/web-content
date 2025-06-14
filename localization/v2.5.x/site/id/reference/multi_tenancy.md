@@ -6,6 +6,7 @@ summary: >-
   sebagai penyewa - berbagi klaster yang sama dengan tetap mempertahankan
   lingkungan data yang terisolasi.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">Menerapkan Multi-tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus mendukung multi-tenancy pada empat level: <strong>Basis Data</strong>, <strong>Koleksi</strong>, <strong>Partisi</strong>, dan <strong>Kunci Partisi</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Penyewaan multi-tenant tingkat basis data</h3><p>Dengan multi-tenancy tingkat basis data, setiap penyewa menerima <a href="/docs/id/manage_databases.md">basis data</a> yang sesuai yang berisi satu atau beberapa koleksi.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Penyewaan multi-tenant tingkat basis data</h3><p>Dengan multi-tenancy tingkat basis data, setiap penyewa menerima <a href="/docs/id/v2.5.x/manage_databases.md">basis data</a> yang sesuai yang berisi satu atau beberapa koleksi.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -50,7 +51,7 @@ summary: >-
 <li><p><strong>Fleksibilitas</strong>: Setiap basis data dapat memiliki koleksi dengan skema yang berbeda, menawarkan pengaturan data yang sangat fleksibel dan memungkinkan setiap penyewa untuk memiliki skema datanya sendiri.</p></li>
 <li><p><strong>Lainnya</strong>: Strategi ini juga mendukung RBAC, memungkinkan kontrol yang lebih baik atas akses pengguna per penyewa. Selain itu, Anda bisa secara fleksibel memuat atau melepaskan data untuk penyewa tertentu untuk mengelola data panas dan dingin secara efektif.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-penyewaan tingkat koleksi</h3><p>Dengan multi-tenancy tingkat koleksi, setiap penyewa diberi <a href="/docs/id/manage-collections.md">koleksi</a>, menawarkan isolasi data yang kuat.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multi-penyewaan tingkat koleksi</h3><p>Dengan multi-tenancy tingkat koleksi, setiap penyewa diberi <a href="/docs/id/v2.5.x/manage-collections.md">koleksi</a>, menawarkan isolasi data yang kuat.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -61,7 +62,7 @@ summary: >-
 <li><p><strong>Fleksibilitas</strong>: Strategi ini memungkinkan setiap koleksi memiliki skema sendiri, mengakomodasi penyewa dengan skema data yang berbeda.</p></li>
 <li><p><strong>Lainnya</strong>: Strategi ini juga mendukung RBAC, yang memungkinkan kontrol akses granular atas penyewa. Selain itu, Anda dapat secara fleksibel memuat atau melepaskan data untuk penyewa tertentu untuk mengelola data panas dan data dingin secara efektif.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-penyewaan tingkat partisi</h3><p>Dalam multi-penyewaan tingkat partisi, setiap penyewa ditugaskan ke <a href="/docs/id/manage-partitions.md">partisi</a> yang dibuat secara manual dalam koleksi bersama.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-penyewaan tingkat partisi</h3><p>Dalam multi-penyewaan tingkat partisi, setiap penyewa ditugaskan ke <a href="/docs/id/v2.5.x/manage-partitions.md">partisi</a> yang dibuat secara manual dalam koleksi bersama.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -72,7 +73,7 @@ summary: >-
 <li><p><strong>Fleksibilitas</strong>: Strategi ini mengharuskan semua penyewa berbagi skema data yang sama. Dan partisi perlu dibuat secara manual.</p></li>
 <li><p><strong>Lainnya</strong>: RBAC tidak didukung pada tingkat partisi. Penyewa dapat ditanyakan secara individual atau di beberapa partisi, yang membuat pendekatan ini cocok untuk skenario yang melibatkan kueri agregat atau analitik di seluruh segmen penyewa. Selain itu, Anda dapat secara fleksibel memuat atau melepaskan data untuk penyewa tertentu untuk mengelola data panas dan dingin secara efektif.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Mempartisi multi-penyewaan tingkat kunci</h3><p>Dengan strategi ini, semua penyewa berbagi satu koleksi dan skema, tetapi data setiap penyewa secara otomatis dialihkan ke dalam 16 partisi yang terisolasi secara fisik berdasarkan nilai <a href="/docs/id/use-partition-key.md">kunci partisi</a>. Meskipun setiap partisi fisik dapat berisi beberapa penyewa, data dari penyewa yang berbeda tetap terpisah secara logis.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Mempartisi multi-penyewaan tingkat kunci</h3><p>Dengan strategi ini, semua penyewa berbagi satu koleksi dan skema, tetapi data setiap penyewa secara otomatis dialihkan ke dalam 16 partisi yang terisolasi secara fisik berdasarkan nilai <a href="/docs/id/v2.5.x/use-partition-key.md">kunci partisi</a>. Meskipun setiap partisi fisik dapat berisi beberapa penyewa, data dari penyewa yang berbeda tetap terpisah secara logis.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

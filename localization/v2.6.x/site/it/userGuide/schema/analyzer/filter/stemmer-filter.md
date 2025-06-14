@@ -3,11 +3,10 @@ id: stemmer-filter.md
 title: Stemmer
 summary: >-
   Il filtro stemmer riduce le parole alla loro forma di base o radice (nota come
-  stemming), facilitando la corrispondenza tra parole con significati simili e
-  inflessioni diverse. Il filtro stemmer supporta più lingue, consentendo una
+  stemming), facilitando l'abbinamento di parole con significati simili in
+  diverse inflessioni. Il filtro stemmer supporta più lingue, consentendo una
   ricerca e un'indicizzazione efficaci in vari contesti linguistici.
 ---
-
 <h1 id="Stemmer" class="common-anchor-header">Stemmer<button data-href="#Stemmer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +86,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Il filtro <code translate="no">stemmer</code> accetta i seguenti parametri configurabili.</p>
 <table>
    <tr>
@@ -100,7 +98,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
 </table>
 <p>Il filtro <code translate="no">stemmer</code> opera sui termini generati dal tokenizer, quindi deve essere usato in combinazione con un tokenizer.</p>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo utilizzando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Ciò consente a Milvus di elaborare il testo in quel campo utilizzando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, consultare l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,8 +156,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verifica con <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verifica con <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;running runs looked ran runner&quot;</span>
@@ -168,7 +165,6 @@ sample_text = <span class="hljs-string">&quot;running runs looked ran runner&quo
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

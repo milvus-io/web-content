@@ -2,8 +2,9 @@
 id: alert.md
 title: Einen Alarm erstellen
 related_key: monitor and alert.
-summary: 'Erfahren Sie, wie Sie einen Alarm für Milvus-Dienste in Grafana erstellen.'
+summary: "Erfahren Sie, wie Sie einen Alarm für Milvus-Dienste in Grafana erstellen."
 ---
+
 <h1 id="Create-an-Alert-for-Milvus-Services" class="common-anchor-header">Eine Warnung für Milvus-Dienste erstellen<button data-href="#Create-an-Alert-for-Milvus-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ summary: 'Erfahren Sie, wie Sie einen Alarm für Milvus-Dienste in Grafana erste
         ></path>
       </svg>
     </button></h2><p>In dieser Anleitung wird als Beispiel die Erstellung eines Alerts für die Speichernutzung von Milvus-Komponenten verwendet. Um andere Arten von Alarmen zu erstellen, passen Sie bitte Ihre Befehle entsprechend an. Sollten Sie während des Prozesses auf Probleme stoßen, fragen Sie bitte im <a href="https://discuss.milvus.io/">Milvus-Forum</a> oder starten Sie eine Diskussion auf <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Voraussetzungen</h3><p>Dieses Tutorial geht davon aus, dass Sie Grafana installiert und konfiguriert haben. Falls nicht, empfehlen wir die Lektüre des <a href="/docs/de/monitor.md">Monitoring-Guides</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Voraussetzungen</h3><p>Dieses Tutorial geht davon aus, dass Sie Grafana installiert und konfiguriert haben. Falls nicht, empfehlen wir die Lektüre des <a href="/docs/de/v2.5.x/monitor.md">Monitoring-Guides</a>.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Fügen Sie eine neue Abfrage hinzu</h3><p>Um einen Alarm für die Speichernutzung von Milvus-Komponenten hinzuzufügen, bearbeiten Sie das Panel Speicher. Fügen Sie dann eine neue Abfrage mit der Metrik hinzu: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +121,13 @@ summary: 'Erfahren Sie, wie Sie einen Alarm für Milvus-Dienste in Grafana erste
       </svg>
     </button></h2><ul>
 <li>Wenn Sie die Überwachung von Diensten für Milvus starten müssen:<ul>
-<li>Lesen Sie die <a href="/docs/de/monitor.md">Anleitung zur Überwachung</a></li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/visualize.md">Überwachungsmetriken visualisieren</a> können</li>
+<li>Lesen Sie die <a href="/docs/de/v2.5.x/monitor.md">Anleitung zur Überwachung</a></li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.5.x/visualize.md">Überwachungsmetriken visualisieren</a> können</li>
 </ul></li>
 <li>Wenn Sie Alarme für die Speichernutzung durch Milvus-Komponenten erstellt haben:<ul>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/allocate.md#standalone">Ressourcen zuweisen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.5.x/allocate.md#standalone">Ressourcen zuweisen</a> können</li>
 </ul></li>
 <li>Wenn Sie Informationen darüber suchen, wie Sie einen Milvus-Cluster skalieren können:<ul>
-<li>Lernen Sie, wie man <a href="/docs/de/scaleout.md">einen Milvus-Cluster skaliert</a></li>
+<li>Lernen Sie, wie man <a href="/docs/de/v2.5.x/scaleout.md">einen Milvus-Cluster skaliert</a></li>
 </ul></li>
 </ul>

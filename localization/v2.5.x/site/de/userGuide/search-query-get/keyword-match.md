@@ -9,6 +9,7 @@ summary: >-
   Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien
   erfüllen.
 ---
+
 <h1 id="Text-Match" class="common-anchor-header">Text-Abgleich<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -26,7 +27,7 @@ summary: >-
       </svg>
     </button></h1><p>Der Textabgleich in Milvus ermöglicht die präzise Suche nach Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für eine gefilterte Suche verwendet, um bestimmte Bedingungen zu erfüllen, und kann eine skalare Filterung zur Verfeinerung der Abfrageergebnisse beinhalten, die eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
 <div class="alert note">
-<p>Der Textabgleich konzentriert sich auf die Suche nach exakten Vorkommen der Abfragebegriffe, ohne die Relevanz der übereinstimmenden Dokumente zu bewerten. Wenn Sie die relevantesten Dokumente auf der Grundlage der semantischen Bedeutung und Wichtigkeit der Abfragebegriffe abrufen möchten, empfehlen wir Ihnen die <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
+<p>Der Textabgleich konzentriert sich auf die Suche nach exakten Vorkommen der Abfragebegriffe, ohne die Relevanz der übereinstimmenden Dokumente zu bewerten. Wenn Sie die relevantesten Dokumente auf der Grundlage der semantischen Bedeutung und Wichtigkeit der Abfragebegriffe abrufen möchten, empfehlen wir Ihnen die <a href="/docs/de/v2.5.x/full-text-search.md">Volltextsuche</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,8 +46,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus integriert <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, um den zugrunde liegenden invertierten Index und die begriffsbasierte Textsuche zu betreiben. Für jeden Texteintrag indiziert Milvus diesen nach folgendem Verfahren:</p>
 <ol>
-<li><p><a href="/docs/de/analyzer-overview.md">Analyzer</a>: Der Analyzer verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und dann nach Bedarf Filter anwendet. So kann Milvus einen Index auf der Grundlage dieser Token erstellen.</p></li>
-<li><p><a href="/docs/de/index-explained.md">Indizierung</a>: Nach der Textanalyse erstellt Milvus einen invertierten Index, der jedes einzelne Token den Dokumenten zuordnet, die es enthalten.</p></li>
+<li><p><a href="/docs/de/v2.5.x/analyzer-overview.md">Analyzer</a>: Der Analyzer verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und dann nach Bedarf Filter anwendet. So kann Milvus einen Index auf der Grundlage dieser Token erstellen.</p></li>
+<li><p><a href="/docs/de/v2.5.x/index-explained.md">Indizierung</a>: Nach der Textanalyse erstellt Milvus einen invertierten Index, der jedes einzelne Token den Dokumenten zuordnet, die es enthalten.</p></li>
 </ol>
 <p>Wenn ein Benutzer einen Textabgleich durchführt, wird der invertierte Index verwendet, um schnell alle Dokumente aufzufinden, die die Begriffe enthalten. Dies ist wesentlich schneller als das Durchsuchen jedes einzelnen Dokuments.</p>
 <p>
@@ -68,7 +69,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Textabgleich funktioniert mit dem Feldtyp <code translate="no">VARCHAR</code>, der in Milvus im Wesentlichen ein String-Datentyp ist. Um den Textabgleich zu aktivieren, setzen Sie sowohl <code translate="no">enable_analyzer</code> als auch <code translate="no">enable_match</code> auf <code translate="no">True</code> und konfigurieren dann optional einen <a href="/docs/de/analyzer-overview.md">Analyzer</a> für die Textanalyse, wenn Sie Ihr Sammelschema definieren.</p>
+    </button></h2><p>Der Textabgleich funktioniert mit dem Feldtyp <code translate="no">VARCHAR</code>, der in Milvus im Wesentlichen ein String-Datentyp ist. Um den Textabgleich zu aktivieren, setzen Sie sowohl <code translate="no">enable_analyzer</code> als auch <code translate="no">enable_match</code> auf <code translate="no">True</code> und konfigurieren dann optional einen <a href="/docs/de/v2.5.x/analyzer-overview.md">Analyzer</a> für die Textanalyse, wenn Sie Ihr Sammelschema definieren.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Setzen Sie <code translate="no">enable_analyzer</code> und <code translate="no">enable_match</code></h3><p>Um den Textabgleich für ein bestimmtes <code translate="no">VARCHAR</code> -Feld zu aktivieren, setzen Sie bei der Definition des Feldschemas die beiden Parameter <code translate="no">enable_analyzer</code> und <code translate="no">enable_match</code> auf <code translate="no">True</code>. Dies weist Milvus an, Text zu tokenisieren und einen invertierten Index für das angegebene Feld zu erstellen, was schnelle und effiziente Textabgleiche ermöglicht.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -76,24 +77,25 @@ summary: >-
 
 schema = MilvusClient.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    datatype=DataType.INT64,
-    is_primary=<span class="hljs-literal">True</span>,
-    auto_id=<span class="hljs-literal">True</span>
+field_name=<span class="hljs-string">&quot;id&quot;</span>,
+datatype=DataType.INT64,
+is_primary=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">True</span>
 )
 schema.add_field(
-    field_name=<span class="hljs-string">&#x27;text&#x27;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>, <span class="hljs-comment"># Whether to enable text analysis for this field</span>
-    enable_match=<span class="hljs-literal">True</span> <span class="hljs-comment"># Whether to enable text match</span>
+field_name=<span class="hljs-string">&#x27;text&#x27;</span>,
+datatype=DataType.VARCHAR,
+max_length=<span class="hljs-number">1000</span>,
+enable_analyzer=<span class="hljs-literal">True</span>, <span class="hljs-comment"># Whether to enable text analysis for this field</span>
+enable_match=<span class="hljs-literal">True</span> <span class="hljs-comment"># Whether to enable text match</span>
 )
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;embeddings&quot;</span>,
-    datatype=DataType.FLOAT_VECTOR,
-    dim=<span class="hljs-number">5</span>
+field_name=<span class="hljs-string">&quot;embeddings&quot;</span>,
+datatype=DataType.FLOAT_VECTOR,
+dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -189,7 +191,7 @@ schema.WithField(entity.NewField().
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Optional: Konfigurieren Sie einen Analysator</h3><p>Die Leistung und Genauigkeit des Schlüsselwortabgleichs hängt vom gewählten Analysator ab. Verschiedene Analysatoren sind auf verschiedene Sprachen und Textstrukturen zugeschnitten, so dass die Wahl des richtigen Analysators die Suchergebnisse für Ihren speziellen Anwendungsfall erheblich beeinflussen kann.</p>
-<p>Standardmäßig verwendet Milvus den Analysator <code translate="no">standard</code>, der Text auf der Grundlage von Leerzeichen und Interpunktion in Token umwandelt, Token entfernt, die länger als 40 Zeichen sind, und Text in Kleinbuchstaben umwandelt. Zur Anwendung dieser Standardeinstellung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/standard-analyzer.md">Standard</a>.</p>
+<p>Standardmäßig verwendet Milvus den Analysator <code translate="no">standard</code>, der Text auf der Grundlage von Leerzeichen und Interpunktion in Token umwandelt, Token entfernt, die länger als 40 Zeichen sind, und Text in Kleinbuchstaben umwandelt. Zur Anwendung dieser Standardeinstellung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/standard-analyzer.md">Standard</a>.</p>
 <p>In Fällen, in denen ein anderer Analyzer erforderlich ist, können Sie diesen mit dem Parameter <code translate="no">analyzer_params</code> konfigurieren. Zum Beispiel, um den <code translate="no">english</code> Analyzer für die Verarbeitung von englischem Text anzuwenden:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -276,7 +278,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus bietet auch verschiedene andere Analyzer, die für unterschiedliche Sprachen und Szenarien geeignet sind. Weitere Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md">Analyzer-Übersicht</a>.</p>
+<p>Milvus bietet auch verschiedene andere Analyzer, die für unterschiedliche Sprachen und Szenarien geeignet sind. Weitere Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/analyzer-overview.md">Analyzer-Übersicht</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Textabgleich verwenden<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -351,15 +353,16 @@ schema.WithField(entity.NewField().
 
 <span class="hljs-comment"># Assuming &#x27;embeddings&#x27; is the vector field and &#x27;text&#x27; is the VARCHAR field</span>
 result = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
-    anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[query_vector], <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
+anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[query_vector], <span class="hljs-comment"># Query vector</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
@@ -430,11 +433,12 @@ curl --request POST \
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>
 
 result = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()

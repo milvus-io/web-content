@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>분산형 벡터 데이터베이스로서 Milvus는 읽기 및 쓰기 작업 중에 각 노드 또는 복제본이 동일한 데이터에 액세스할 수 있도록 여러 수준의 일관성을 제공합니다. 현재 지원되는 일관성 수준에는 <strong>강함</strong>, <strong>경계</strong>, <strong>결국</strong>, <strong>세션이</strong> 있으며, 기본 일관성 수준은 <strong>경계가</strong> 사용됩니다.</p>
+    </button></h1><p>분산형 벡터 데이터베이스로서 Milvus는 읽기 및 쓰기 작업 중에 각 노드 또는 복제본이 동일한 데이터에 액세스할 수 있도록 여러 수준의 일관성을 제공합니다. 현재 지원되는 일관성 수준에는 <strong>강함</strong>, <strong>경계</strong>, <strong>최종</strong>, <strong>세션이</strong> 있으며, 기본 일관성 수준은 <strong>경계가</strong> 사용됩니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 저장과 계산을 분리하는 시스템입니다. 이 시스템에서 <strong>데이터 노드는</strong> 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. <strong>쿼리 노드는</strong> 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 <strong>배치 데이터와</strong> <strong>스트리밍 데이터</strong> 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 말합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
+    </button></h2><p>Milvus는 저장과 계산을 분리하는 시스템입니다. 이 시스템에서 <strong>데이터 노드는</strong> 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. <strong>쿼리 노드는</strong> 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 <strong>배치 데이터와</strong> <strong>스트리밍 데이터</strong> 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 의미합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
 <p>밀버스 커머셜 에디션은 저장과 계산을 분리한 시스템입니다. 이 시스템에서 데이터 노드는 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. 쿼리 노드는 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 배치 데이터와 스트리밍 데이터 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 의미합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
 <p>
   
@@ -88,15 +88,13 @@ summary: >-
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+<span class="highlighted-wrapper-line">    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)
+<span class="highlighted-wrapper-line">        .consistencyLevel(ConsistencyLevel.STRONG)</span>
         .build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
@@ -158,11 +156,9 @@ curl --request POST \
     data=[query_vector],
     limit=<span class="hljs-number">3</span>,
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，
-    <span class="hljs-comment"># highlight-start</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,
-    <span class="hljs-comment"># highlight-next</span>
-)
-<button class="copy-code-btn"></button></code></pre>
+<span class="highlighted-comment-line">    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,</span>
+<span class="highlighted-wrapper-line">)</span>
+<span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(queryVector))
@@ -206,11 +202,9 @@ if err != nil {
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>，
-    <span class="hljs-comment"># highlight-start</span>
-    consistency_level=<span class="hljs-string">&quot;Eventually&quot;</span>,
-    <span class="hljs-comment"># highlight-next</span>
-)
-<button class="copy-code-btn"></button></code></pre>
+<span class="highlighted-comment-line">    consistency_level=<span class="hljs-string">&quot;Eventually&quot;</span>,</span>
+<span class="highlighted-wrapper-line">)</span>
+<span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)

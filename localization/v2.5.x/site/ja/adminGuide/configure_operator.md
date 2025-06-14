@@ -5,6 +5,7 @@ related_key: Milvus Operator
 summary: Milvus Operatorを使ったMilvusの設定方法をご紹介します。
 title: Milvus OperatorによるMilvusの設定
 ---
+
 <h1 id="Configure-Milvus-with-Milvus-Operator" class="common-anchor-header">Milvus OperatorによるMilvusの設定<button data-href="#Configure-Milvus-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: Milvus OperatorによるMilvusの設定
       </svg>
     </button></h1><p>本番環境では、マシンのタイプとワークロードに基づいてMilvusクラスタにリソースを割り当てる必要があります。デプロイ時に設定することも、クラスタの実行中に設定を更新することもできます。</p>
 <p>このトピックでは、Milvus Operatorを使用してMilvusクラスタをインストールする際の設定方法を紹介します。</p>
-<p>このトピックでは、Milvus Operatorをデプロイしていることを前提としています。詳細については、「<a href="/docs/ja/install_cluster-milvusoperator.md">Milvus Operatorのデプロイ</a>」を参照してください。</p>
+<p>このトピックでは、Milvus Operatorをデプロイしていることを前提としています。詳細については、「<a href="/docs/ja/v2.5.x/install_cluster-milvusoperator.md">Milvus Operatorのデプロイ</a>」を参照してください。</p>
 <p>Milvus Operatorを使用したMilvusクラスタの設定には以下が含まれます：</p>
 <ul>
 <li>グローバルリソースの設定</li>
@@ -135,34 +136,34 @@ K8sクラスタに<code translate="no">my-release</code> というMilvusクラ�
   <tr>
     <td>
         <ul>
-            <li><a href="/docs/ja/configure_etcd.md">etcd</a></li>
-            <li><a href="/docs/ja/configure_minio.md">MinIOまたはS3</a></li>
-            <li><a href="/docs/ja/configure_pulsar.md">パルサー</a></li>
-            <li><a href="/docs/ja/configure_rocksmq.md">RocksMQ</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_etcd.md">etcd</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_minio.md">MinIOまたはS3</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_pulsar.md">パルサー</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_rocksmq.md">RocksMQ</a></li>
         </ul>
     </td>
     <td>
         <ul>
-            <li><a href="/docs/ja/configure_rootcoord.md">ルート・コーデック</a></li>
-            <li><a href="/docs/ja/configure_proxy.md">プロキシ</a></li>
-            <li><a href="/docs/ja/configure_querycoord.md">クエリコーデック</a></li>
-            <li><a href="/docs/ja/configure_querynode.md">クエリ・ノード</a></li>
-            <li><a href="/docs/ja/configure_indexnode.md">インデックスノード</a></li>
-            <li><a href="/docs/ja/configure_datacoord.md">データ・ノード</a></li>
-            <li><a href="/docs/ja/configure_datanode.md">データノード</a></li>
-            <li><a href="/docs/ja/configure_localstorage.md">ローカルストレージ</a></li>
-            <li><a href="/docs/ja/configure_log.md">ログ</a></li>
-            <li><a href="/docs/ja/configure_msgchannel.md">メッセージチャネル</a></li>
-            <li><a href="/docs/ja/configure_common.md">共通</a></li>
-            <li><a href="/docs/ja/configure_gpu.md">GPU</a></li>
-            <li><a href="/docs/ja/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/ja/configure_indexcoord.md">インデックス・コーダ</a></li>
-            <li><a href="/docs/ja/configure_metastore.md">メタストア</a></li>
-            <li><a href="/docs/ja/configure_mq.md">メッセージキュー</a></li>
-            <li><a href="/docs/ja/configure_natsmq.md">Natsmq</a></li>
-            <li><a href="/docs/ja/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/ja/configure_trace.md">トレース</a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md">クォータと制限</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_rootcoord.md">ルート・コーデック</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_proxy.md">プロキシ</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_querycoord.md">クエリコーデック</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_querynode.md">クエリ・ノード</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_indexnode.md">インデックスノード</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_datacoord.md">データ・ノード</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_datanode.md">データノード</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_localstorage.md">ローカルストレージ</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_log.md">ログ</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_msgchannel.md">メッセージチャネル</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_common.md">共通</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_gpu.md">GPU</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_grpc.md">GRPC</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_indexcoord.md">インデックス・コーダ</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_metastore.md">メタストア</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_mq.md">メッセージキュー</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_natsmq.md">Natsmq</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_tikv.md">Tikv</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_trace.md">トレース</a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md">クォータと制限</a></li>
         </ul>
     </td>
   </tr>
@@ -182,14 +183,14 @@ K8sクラスタに<code translate="no">my-release</code> というMilvusクラ�
     <td>パフォーマンス・チューニング</td>
     <td>
         <ul>
-            <li><a href="/docs/ja/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
-            <li><a href="/docs/ja/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
-            <li><a href="/docs/ja/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
-            <li><a href="/docs/ja/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
-            <li><a href="/docs/ja/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
-            <li><a href="/docs/ja/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
-            <li><a href="/docs/ja/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
-            <li><a href="/docs/ja/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
         </ul>
     </td>
   </tr>
@@ -197,11 +198,11 @@ K8sクラスタに<code translate="no">my-release</code> というMilvusクラ�
     <td>データとメタ</td>
     <td>
         <ul>
-            <li><a href="/docs/ja/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
-            <li><a href="/docs/ja/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
-            <li><a href="/docs/ja/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
-            <li><a href="/docs/ja/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
-            <li><a href="/docs/ja/configure_datacoord.md#dataCoordgcdropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_datacoord.md#dataCoordgcdropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
         </ul>
     </td>
   </tr>
@@ -209,11 +210,11 @@ K8sクラスタに<code translate="no">my-release</code> というMilvusクラ�
     <td>管理</td>
     <td>
         <ul>
-            <li><a href="/docs/ja/configure_log.md#loglevel"><code translate="no">log.level</code></a></li>
-            <li><a href="/docs/ja/configure_log.md#logfilerootPath"><code translate="no">log.file.rootPath</code></a></li>
-            <li><a href="/docs/ja/configure_log.md#logfilemaxAge"><code translate="no">log.file.maxAge</code></a></li>
-            <li><a href="/docs/ja/configure_minio.md#minioaccessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
-            <li><a href="/docs/ja/configure_minio.md#miniosecretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_log.md#loglevel"><code translate="no">log.level</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_log.md#logfilerootPath"><code translate="no">log.file.rootPath</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_log.md#logfilemaxAge"><code translate="no">log.file.maxAge</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_minio.md#minioaccessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_minio.md#miniosecretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
         </ul>
     </td>
   </tr>
@@ -221,43 +222,43 @@ K8sクラスタに<code translate="no">my-release</code> というMilvusクラ�
     <td>クォータと制限</td>
     <td>
         <ul>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitsmaxCollectionNumPerDB"><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsddlcollectionRate"><code translate="no">quotaAndLimits.ddl.collectionRate</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsddlpartitionRate"><code translate="no">quotaAndLimits.ddl.partitionRate</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatecollectionmax"><code translate="no">quotaAndLimits.dml.insertRate.collection.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatecollectionmax"><code translate="no">quotaAndLimits.dml.deleteRate.collection.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatecollectionmax"><code translate="no">quotaAndLimits.dql.searchRate.collection.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatecollectionmax"><code translate="no">quotaAndLimits.dql.queryRate.collection.max</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuotaPerCollection"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
-            <li><a href="/docs/ja/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitsmaxCollectionNumPerDB"><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlcollectionRate"><code translate="no">quotaAndLimits.ddl.collectionRate</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlpartitionRate"><code translate="no">quotaAndLimits.ddl.partitionRate</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatecollectionmax"><code translate="no">quotaAndLimits.dml.insertRate.collection.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatecollectionmax"><code translate="no">quotaAndLimits.dml.deleteRate.collection.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatecollectionmax"><code translate="no">quotaAndLimits.dql.searchRate.collection.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatecollectionmax"><code translate="no">quotaAndLimits.dql.queryRate.collection.max</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuotaPerCollection"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
+            <li><a href="/docs/ja/v2.5.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
         </ul>
     </td>
   </tr>
@@ -329,8 +330,8 @@ spec:
       </svg>
     </button></h2><ul>
 <li>Milvus Operatorを使用して以下のMilvus依存関係を管理する方法を学びます：<ul>
-<li><a href="/docs/ja/object_storage_operator.md">Milvus Operatorを使用したオブジェクトストレージの設定</a></li>
-<li><a href="/docs/ja/meta_storage_operator.md">Milvus Operatorを使用したMeta Storageの構成</a></li>
-<li><a href="/docs/ja/message_storage_operator.md">Milvus Operatorによるメッセージストレージの構成</a></li>
+<li><a href="/docs/ja/v2.5.x/object_storage_operator.md">Milvus Operatorを使用したオブジェクトストレージの設定</a></li>
+<li><a href="/docs/ja/v2.5.x/meta_storage_operator.md">Milvus Operatorを使用したMeta Storageの構成</a></li>
+<li><a href="/docs/ja/v2.5.x/message_storage_operator.md">Milvus Operatorによるメッセージストレージの構成</a></li>
 </ul></li>
 </ul>

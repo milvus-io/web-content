@@ -3,6 +3,7 @@ id: milvusdm_install.md
 summary: Apprenez à installer Milvus-Migration pour migrer vos données.
 title: Installer l'outil de migration
 ---
+
 <h1 id="Install-Migration-Tool" class="common-anchor-header">Installer l'outil de migration<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Une fois l'outil Milvus-migration installé, vous pouvez migrer des données à partir de différentes sources :</p>
 <ul>
-<li><a href="/docs/fr/es2m.md">Depuis Elasticsearch</a></li>
-<li><a href="/docs/fr/f2m.md">Depuis Faiss</a></li>
-<li><a href="/docs/fr/m2m.md">Depuis Milvus 1.x</a></li>
+<li><a href="/docs/fr/v2.5.x/es2m.md">Depuis Elasticsearch</a></li>
+<li><a href="/docs/fr/v2.5.x/f2m.md">Depuis Faiss</a></li>
+<li><a href="/docs/fr/v2.5.x/m2m.md">Depuis Milvus 1.x</a></li>
 </ul>

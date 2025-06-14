@@ -6,7 +6,6 @@ summary: >-
   untuk meningkatkan performa pencarian.
 title: Indeks dengan GPU
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">Indeks dengan GPU<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,11 +119,10 @@ title: Indeks dengan GPU
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">Pencarian<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,13 +180,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">Batas<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,5 +229,5 @@ limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number o
 <li><p><strong>Kapan waktu yang tepat untuk menggunakan indeks GPU?</strong></p>
 <p>Indeks GPU sangat bermanfaat dalam situasi yang menuntut throughput tinggi atau pemanggilan tinggi. Misalnya, saat menangani batch besar, throughput pengindeksan GPU dapat melampaui throughput pengindeksan CPU sebanyak 100 kali lipat. Dalam skenario dengan batch yang lebih kecil, indeks GPU masih secara signifikan mengungguli indeks CPU dalam hal kinerja. Selain itu, jika ada persyaratan untuk penyisipan data yang cepat, menggabungkan GPU dapat mempercepat proses pembuatan indeks secara substansial.</p></li>
 <li><p><strong>Dalam skenario apa indeks GPU seperti CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, dan GPU_BRUTE_FORCE paling cocok?</strong></p>
-<p>Indeks CAGRA ideal untuk skenario yang menuntut peningkatan performa, meskipun dengan mengorbankan konsumsi memori yang lebih besar. Untuk lingkungan di mana konservasi memori menjadi prioritas, indeks <strong>GPU_IVF_PQ</strong> dapat membantu meminimalkan kebutuhan penyimpanan, meskipun hal ini disertai dengan kehilangan presisi yang lebih tinggi. Indeks <strong>GPU_IVF_FLAT</strong> berfungsi sebagai opsi yang seimbang, menawarkan kompromi antara performa dan penggunaan memori. Terakhir, indeks <strong>GPU_BRUTE_FORCE</strong> dirancang untuk operasi pencarian yang menyeluruh, menjamin tingkat recall 1 dengan melakukan pencarian traversal.</p></li>
+<p>Indeks CAGRA ideal untuk skenario yang menuntut peningkatan performa, meskipun dengan biaya konsumsi memori yang lebih besar. Untuk lingkungan di mana konservasi memori menjadi prioritas, indeks <strong>GPU_IVF_PQ</strong> dapat membantu meminimalkan kebutuhan penyimpanan, meskipun hal ini disertai dengan kehilangan presisi yang lebih tinggi. Indeks <strong>GPU_IVF_FLAT</strong> berfungsi sebagai opsi yang seimbang, menawarkan kompromi antara performa dan penggunaan memori. Terakhir, indeks <strong>GPU_BRUTE_FORCE</strong> dirancang untuk operasi pencarian yang menyeluruh, menjamin tingkat recall 1 dengan melakukan pencarian traversal.</p></li>
 </ul>

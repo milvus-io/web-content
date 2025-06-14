@@ -6,7 +6,6 @@ summary: >-
   hilft so, häufige, weniger aussagekräftige Wörter zu eliminieren. Sie können
   die Liste der Stoppwörter mit dem Parameter stop_words konfigurieren.
 ---
-
 <h1 id="Stop" class="common-anchor-header">Stopp<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +89,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Der <code translate="no">stop</code> Filter akzeptiert die folgenden konfigurierbaren Parameter.</p>
 <table>
    <tr>
@@ -101,7 +99,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p><code translate="no">stop_words</code></p></td>
      <td><p>Eine Liste von Wörtern, die aus der Tokenisierung entfernt werden sollen. Standardmäßig verwendet der Filter das eingebaute <code translate="no">_english_</code> Wörterbuch. Sie können es auf drei Arten außer Kraft setzen oder erweitern:</p>
 <ul>
-<li><p><strong>Eingebaute Wörterbücher</strong> - geben Sie einen dieser Sprach-Aliase an, um ein vordefiniertes Wörterbuch zu verwenden:<code translate="no">"_english_"</code>, <code translate="no">"_danish_"</code>, <code translate="no">"_dutch_"</code>, <code translate="no">"_finnish_"</code>, <code translate="no">"_french_"</code>, <code translate="no">"_german_"</code>, <code translate="no">"_hungarian_"</code>, <code translate="no">"_italian_"</code>, <code translate="no">"_norwegian_"</code>, <code translate="no">"_portuguese_"</code>, <code translate="no">"_russian_"</code>, <code translate="no">"_spanish_"</code>, <code translate="no">"_swedish_"</code></p></li>
+<li><p><strong>Eingebaute Wörterbücher</strong> - geben Sie einen der folgenden Sprachalias an, um ein vordefiniertes Wörterbuch zu verwenden:<code translate="no">"_english_"</code>, <code translate="no">"_danish_"</code>, <code translate="no">"_dutch_"</code>, <code translate="no">"_finnish_"</code>, <code translate="no">"_french_"</code>, <code translate="no">"_german_"</code>, <code translate="no">"_hungarian_"</code>, <code translate="no">"_italian_"</code>, <code translate="no">"_norwegian_"</code>, <code translate="no">"_portuguese_"</code>, <code translate="no">"_russian_"</code>, <code translate="no">"_spanish_"</code>, <code translate="no">"_swedish_"</code></p></li>
 <li><p><strong>Benutzerdefinierte Liste</strong> - übergeben Sie ein Array mit Ihren eigenen Begriffen, z. B. <code translate="no">["foo", "bar", "baz"]</code>.</p></li>
 <li><p><strong>Gemischte Liste</strong> - kombinieren Sie Aliase und eigene Begriffe, z.B. <code translate="no">["of", "to", "_english_"]</code>.</p>
 <p>Einzelheiten über den genauen Inhalt der einzelnen vordefinierten Wörterbücher finden Sie unter <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>.</p></li>
@@ -157,7 +155,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The stop filter allows control over common stop words for text processing.&quot;</span>
@@ -166,7 +164,6 @@ sample_text = <span class="hljs-string">&quot;The stop filter allows control ove
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

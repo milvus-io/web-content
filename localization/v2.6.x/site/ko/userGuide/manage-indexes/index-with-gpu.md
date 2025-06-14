@@ -4,7 +4,6 @@ order: 3
 summary: 이 가이드에서는 Milvus에서 GPU를 지원하는 인덱스를 구축하여 검색 성능을 향상시키는 방법을 설명합니다.
 title: GPU를 사용한 색인
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">GPU를 사용한 색인<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +19,7 @@ title: GPU를 사용한 색인
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 처리량과 호출 횟수가 많은 시나리오에서 검색 성능을 크게 향상시킬 수 있는 Milvus에서 GPU를 지원하는 인덱스를 구축하는 단계를 간략하게 설명합니다. Milvus에서 지원하는 GPU 인덱스 유형에 대한 자세한 내용은 <a href="/docs/ko/gpu_index.md">GPU 인덱스를</a> 참조하세요.</p>
+    </button></h1><p>이 가이드에서는 처리량이 많고 호출 횟수가 많은 시나리오에서 검색 성능을 크게 향상시킬 수 있는 Milvus에서 GPU를 지원하는 인덱스를 구축하는 단계를 간략하게 설명합니다. Milvus에서 지원하는 GPU 인덱스 유형에 대한 자세한 내용은 <a href="/docs/ko/gpu_index.md">GPU 인덱스를</a> 참조하세요.</p>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">GPU 메모리 제어를 위한 Milvus 설정 구성하기<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,11 +117,10 @@ title: GPU를 사용한 색인
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">검색<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +161,7 @@ index_params=index_params
 <p>주요 검색 매개변수는 다음과 같습니다:</p>
 <ul>
 <li><p><strong>itopk_size</strong>: 검색 중에 보관되는 중간 결과의 크기를 결정합니다. 값이 클수록 검색 성능이 저하되는 대신 회상률이 향상될 수 있습니다. 이 값은 최소한 최종 상위 k<strong>(한계</strong>) 값과 같아야 하며 일반적으로 2의 거듭제곱입니다(예: 16, 32, 64, 128).</p></li>
-<li><p><strong>search_width</strong>: 검색 중 CAGRA 그래프에 들어가는 진입점 수를 지정합니다. 이 값을 높이면 검색 회수율은 향상될 수 있지만 검색 성능에 영향을 미칠 수 있습니다.</p></li>
+<li><p><strong>search_width</strong>: 검색 중 CAGRA 그래프에 들어가는 진입점 수를 지정합니다. 이 값을 높이면 검색 회수율은 향상될 수 있지만 검색 성능에 영향을 줄 수 있습니다.</p></li>
 <li><p><strong>MIN_ITERATIONS</strong> / <strong>MAX_ITERATIONS</strong>: 이 매개변수는 검색 반복 프로세스를 제어합니다. 기본적으로 이 값은 <strong>0으로</strong> 설정되어 있으며, CAGRA는 <strong>itopk_size</strong> 및 <strong>search_width에</strong> 따라 반복 횟수를 자동으로 결정합니다. 이 값을 수동으로 조정하면 성능과 정확도의 균형을 맞추는 데 도움이 될 수 있습니다.</p></li>
 <li><p><strong>team_size</strong>: GPU에서 메트릭 거리를 계산하는 데 사용되는 CUDA 스레드 수를 지정합니다. 일반적인 값은 2의 거듭제곱에서 최대 32입니다(예: 2, 4, 8, 16, 32). 검색 성능에 약간의 영향을 미칩니다. 기본값은 <strong>0이며</strong>, Milvus는 벡터 차원에 따라 자동으로 <strong>team_size를</strong> 선택합니다.</p></li>
 </ul></li>
@@ -180,13 +178,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -230,5 +227,5 @@ limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number o
 <li><p><strong>GPU 인덱스는 언제 사용하는 것이 적절하나요?</strong></p>
 <p>GPU 인덱스는 특히 높은 처리량이나 높은 리콜이 필요한 상황에서 유용합니다. 예를 들어, 대규모 배치를 처리할 때 GPU 인덱싱의 처리량은 CPU 인덱싱의 처리량을 100배까지 능가할 수 있습니다. 배치 규모가 작은 시나리오에서는 여전히 성능 면에서 GPU 인덱싱이 CPU 인덱싱을 크게 앞섭니다. 또한, 빠른 데이터 삽입이 요구되는 경우, GPU를 통합하면 인덱스 구축 프로세스의 속도를 크게 높일 수 있습니다.</p></li>
 <li><p><strong>CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, GPU_BRUTE_FORCE와 같은 GPU 인덱스는 어떤 시나리오에 가장 적합할까요?</strong></p>
-<p>CAGRA 인덱스는 더 많은 메모리를 사용하지만 향상된 성능을 요구하는 시나리오에 이상적입니다. 메모리 보존이 우선시되는 환경에서는 <strong>GPU_IVF_PQ</strong> 인덱스가 스토리지 요구 사항을 최소화하는 데 도움이 될 수 있지만, 정밀도 손실이 더 높습니다. <strong>GPU_IVF_FLAT</strong> 인덱스는 성능과 메모리 사용량 사이의 절충점을 제공하는 균형 잡힌 옵션입니다. 마지막으로 <strong>GPU_BRUTE_FORCE</strong> 인덱스는 철저한 검색 작업을 위해 설계되었으며, 순회 검색을 수행하여 1의 리콜률을 보장합니다.</p></li>
+<p>CAGRA 인덱스는 더 많은 메모리를 사용하지만 향상된 성능을 요구하는 시나리오에 이상적입니다. 메모리 보존이 우선시되는 환경에서는 <strong>GPU_IVF_PQ</strong> 인덱스가 스토리지 요구 사항을 최소화하는 데 도움이 될 수 있지만, 정밀도 손실이 더 높습니다. <strong>GPU_IVF_FLAT</strong> 인덱스는 성능과 메모리 사용량 사이의 절충점을 제공하는 균형 잡힌 옵션으로 사용됩니다. 마지막으로 <strong>GPU_BRUTE_FORCE</strong> 인덱스는 철저한 검색 작업을 위해 설계되었으며, 순회 검색을 수행하여 1의 리콜률을 보장합니다.</p></li>
 </ul>

@@ -5,6 +5,7 @@ related_key: SDK
 summary: Milvus의 Node.js SDK를 설치하는 방법을 알아보세요.
 title: Milvus Nodejs SDK 설치하기
 ---
+
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Milvus Nodejs SDK 설치하기<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,11 +109,11 @@ yarn add @zilliz/milvus2-sdk-node
 <li><p><a href="https://github.com/milvus-io/milvus-sdk-node">Milvus Node.js SDK 빠른 시작</a> 보기</p></li>
 <li><p>Milvus의 기본 동작을 학습합니다:</p>
 <ul>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.5.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
+<li><a href="/docs/ko/v2.5.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.5.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
 <li><p><a href="/api-reference/node/v2.4.x/About.md">Milvus Node.js API 참조</a> 살펴보기</p></li>
 </ul>

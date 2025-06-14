@@ -40,19 +40,19 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>ميلفوس هو نظام يفصل بين التخزين والحوسبة. في هذا النظام، تكون <strong>DataNodes</strong> مسؤولة عن ثبات البيانات وتخزينها في نهاية المطاف في تخزين الكائنات الموزعة مثل MinIO/S3. تتعامل <strong>QueryNodes</strong> مع المهام الحسابية مثل البحث. تتضمن هذه المهام معالجة كل من <strong>البيانات الدفعية</strong> <strong>والبيانات المتدفقة</strong>. ببساطة، يمكن فهم البيانات الدفعية على أنها البيانات التي تم تخزينها بالفعل في وحدة تخزين الكائنات بينما تشير البيانات المتدفقة إلى البيانات التي لم يتم تخزينها بعد في وحدة تخزين الكائنات. نظرًا لوقت استجابة الشبكة، غالبًا ما لا تحتفظ QueryNodes بأحدث بيانات التدفق. وبدون ضمانات إضافية، قد يؤدي إجراء البحث مباشرةً على بيانات التدفق إلى فقدان العديد من نقاط البيانات غير الملتزم بها، مما يؤثر على دقة نتائج البحث.</p>
-<p>الإصدار التجاري من ميلفوس هو نظام يفصل بين التخزين والحوسبة. في هذا النظام، تكون عقد البيانات DataNodes مسؤولة عن ثبات البيانات وتخزينها في نهاية المطاف في تخزين كائنات موزعة مثل MinIO/S3. تتعامل QueryNodes مع المهام الحسابية مثل البحث. تتضمن هذه المهام معالجة كل من البيانات الدفعية والبيانات المتدفقة. ببساطة، يمكن فهم البيانات الدفعية على أنها البيانات التي تم تخزينها بالفعل في وحدة تخزين الكائنات، بينما تشير البيانات المتدفقة إلى البيانات التي لم يتم تخزينها بعد في وحدة تخزين الكائنات. نظرًا لوقت استجابة الشبكة، غالبًا ما لا تحتفظ QueryNodes بأحدث بيانات التدفق. من دون ضمانات إضافية، قد يؤدي إجراء البحث مباشرةً على بيانات التدفق إلى فقدان العديد من نقاط البيانات غير الملتزم بها، مما يؤثر على دقة نتائج البحث.</p>
+<p>الإصدار التجاري من ميلفوس هو نظام يفصل بين التخزين والحوسبة. في هذا النظام، تكون عقد البيانات DataNodes مسؤولة عن استمرار البيانات وتخزينها في نهاية المطاف في تخزين كائنات موزعة مثل MinIO/S3. تتعامل QueryNodes مع المهام الحسابية مثل البحث. تتضمن هذه المهام معالجة كل من البيانات الدفعية والبيانات المتدفقة. ببساطة، يمكن فهم البيانات الدفعية على أنها البيانات التي تم تخزينها بالفعل في وحدة تخزين الكائنات، بينما تشير البيانات المتدفقة إلى البيانات التي لم يتم تخزينها بعد في وحدة تخزين الكائنات. نظرًا لوقت استجابة الشبكة، غالبًا ما لا تحتفظ QueryNodes بأحدث بيانات التدفق. من دون ضمانات إضافية، قد يؤدي إجراء البحث مباشرةً على بيانات التدفق إلى فقدان العديد من نقاط البيانات غير الملتزم بها، مما يؤثر على دقة نتائج البحث.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>البيانات المجمّعة وبيانات التدفق</span> </span></p>
 <p>كما هو موضح في الشكل أعلاه، يمكن أن تتلقى عقد الاستعلامات كلاً من بيانات الدفق والبيانات الدفعية في وقت واحد بعد تلقي طلب بحث. ومع ذلك، بسبب زمن انتقال الشبكة، قد تكون بيانات التدفق التي تحصل عليها عقد الاستعلام غير مكتملة.</p>
-<p>ولمعالجة هذه المشكلة، تقوم Milvus بوضع طوابع زمنية لكل سجل في قائمة انتظار البيانات وإدراج طوابع زمنية للمزامنة باستمرار في قائمة انتظار البيانات. كلما تم استلام طابع زمني للمزامنة (syncTs)، تقوم QueryNodes بتعيينه كوقت الخدمة، مما يعني أن QueryNodes يمكنها رؤية جميع البيانات قبل وقت الخدمة هذا. استنادًا إلى ServiceTime، يمكن لـ Milvus توفير طوابع زمنية مضمونة (GuaranteeTs) لتلبية متطلبات المستخدم المختلفة من حيث الاتساق والتوافر. يمكن للمستخدمين إبلاغ QueryNodes بالحاجة إلى تضمين البيانات قبل نقطة زمنية محددة في نطاق البحث عن طريق تحديد GuaranteeTs في طلبات البحث الخاصة بهم.</p>
+<p>لمعالجة هذه المشكلة، تقوم Milvus بطباعة الطوابع الزمنية لكل سجل في قائمة انتظار البيانات وإدراج الطوابع الزمنية للمزامنة باستمرار في قائمة انتظار البيانات. كلما تم استلام طابع زمني للمزامنة (syncTs)، تقوم QueryNodes بتعيينه كوقت الخدمة، مما يعني أن QueryNodes يمكنها رؤية جميع البيانات قبل وقت الخدمة هذا. استنادًا إلى ServiceTime، يمكن لـ Milvus توفير طوابع زمنية مضمونة (GuaranteeTs) لتلبية متطلبات المستخدم المختلفة من حيث الاتساق والتوافر. يمكن للمستخدمين إبلاغ QueryNodes بالحاجة إلى تضمين البيانات قبل نقطة زمنية محددة في نطاق البحث من خلال تحديد GuaranteeTs في طلبات البحث الخاصة بهم.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
    </span> <span class="img-wrapper"> <span>وقت الخدمة ووقت الضمان</span> </span></p>
 <p>كما هو موضح في الشكل أعلاه، إذا كان GuaranteeTs أقل من وقت الخدمة، فهذا يعني أن جميع البيانات قبل النقطة الزمنية المحددة قد تمت كتابتها بالكامل على القرص، مما يسمح لـ QueryNodes بإجراء عملية البحث على الفور. عندما يكون GuaranteeTs أكبر من ServiceTime، يجب أن تنتظر عقد الاستعلام حتى يتجاوز وقت الخدمة GuaranteeTs قبل أن تتمكن من تنفيذ عملية البحث.</p>
-<p>يحتاج المستخدمون إلى إجراء مفاضلة بين دقة الاستعلام وزمن الاستعلام. إذا كان المستخدمون لديهم متطلبات اتساق عالية وليس لديهم حساسية تجاه زمن انتقال الاستعلام، فيمكنهم تعيين GuaranteeTs إلى قيمة كبيرة قدر الإمكان؛ إذا كان المستخدمون يرغبون في تلقي نتائج البحث بسرعة ويتحملون دقة الاستعلام، فيمكن تعيين GuaranteeTs إلى قيمة أصغر.</p>
+<p>يحتاج المستخدمون إلى إجراء مفاضلة بين دقة الاستعلام وزمن الاستعلام. إذا كان المستخدمون لديهم متطلبات اتساق عالية وليس لديهم حساسية تجاه زمن تأخر الاستعلام، فيمكنهم تعيين GuaranteeTs على قيمة كبيرة قدر الإمكان؛ إذا كان المستخدمون يرغبون في تلقي نتائج البحث بسرعة ويتحملون دقة الاستعلام، فيمكن تعيين GuaranteeTs على قيمة أصغر.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
@@ -91,15 +91,13 @@ summary: >-
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+<span class="highlighted-wrapper-line">    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
-        <span class="hljs-comment">// highlight-next</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)
+<span class="highlighted-wrapper-line">        .consistencyLevel(ConsistencyLevel.STRONG)</span>
         .build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
@@ -161,11 +159,9 @@ curl --request POST \
     data=[query_vector],
     limit=<span class="hljs-number">3</span>,
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，
-    <span class="hljs-comment"># highlight-start</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,
-    <span class="hljs-comment"># highlight-next</span>
-)
-<button class="copy-code-btn"></button></code></pre>
+<span class="highlighted-comment-line">    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,</span>
+<span class="highlighted-wrapper-line">)</span>
+<span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(queryVector))
@@ -209,11 +205,9 @@ if err != nil {
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>],
     limit=<span class="hljs-number">3</span>，
-    <span class="hljs-comment"># highlight-start</span>
-    consistency_level=<span class="hljs-string">&quot;Eventually&quot;</span>,
-    <span class="hljs-comment"># highlight-next</span>
-)
-<button class="copy-code-btn"></button></code></pre>
+<span class="highlighted-comment-line">    consistency_level=<span class="hljs-string">&quot;Eventually&quot;</span>,</span>
+<span class="highlighted-wrapper-line">)</span>
+<span class="highlighted-comment-line"></span><button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)

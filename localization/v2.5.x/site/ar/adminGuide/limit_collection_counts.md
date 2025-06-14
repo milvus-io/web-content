@@ -2,6 +2,7 @@
 id: limit_collection_counts.md
 title: وضع حدود على عدد التحصيل
 ---
+
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">الحد من عدد المجموعات<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,11 +23,11 @@ title: وضع حدود على عدد التحصيل
 <p>يختلف التكوين باختلاف طريقة تثبيت مثيل Milvus.</p>
 <ul>
 <li><p>لمثيلات Milvus المثبتة باستخدام مخططات Helm</p>
-<p>أضف التكوين إلى الملف <code translate="no">values.yaml</code> ضمن القسم <code translate="no">config</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm Charts</a>.</p></li>
+<p>أضف التكوين إلى الملف <code translate="no">values.yaml</code> ضمن القسم <code translate="no">config</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/configure-helm.md">تكوين Milvus باستخدام مخططات Helm Charts</a>.</p></li>
 <li><p>لمثيلات Milvus المثبتة باستخدام Docker Compose</p>
-<p>أضف التكوين إلى الملف <code translate="no">milvus.yaml</code> الذي استخدمته لبدء تشغيل مثيل Milvus. للحصول على التفاصيل، راجع <a href="/docs/ar/configure-docker.md">تكوين Milvus باستخدام Docker Compose</a>.</p></li>
+<p>أضف التكوين إلى الملف <code translate="no">milvus.yaml</code> الذي استخدمته لبدء تشغيل مثيل Milvus. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/configure-docker.md">تكوين Milvus باستخدام Docker Compose</a>.</p></li>
 <li><p>لمثيلات Milvus المثبتة باستخدام المشغل</p>
-<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
+<p>أضف التكوين إلى قسم <code translate="no">spec.components</code> في المورد المخصص <code translate="no">Milvus</code>. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/configure_operator.md">تكوين Milvus مع المشغل</a>.</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">خيارات التكوين<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

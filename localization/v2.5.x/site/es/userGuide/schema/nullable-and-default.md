@@ -10,6 +10,7 @@ summary: >-
   automáticamente este valor si no se especifican datos para el campo durante la
   inserción.
 ---
+
 <h1 id="Nullable--Default" class="common-anchor-header">Anulable y por defecto<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,10 +47,10 @@ summary: >-
 <li><p>Sólo los campos escalares, excluido el campo primario, admiten valores por defecto y el atributo nullable.</p></li>
 <li><p>Los campos JSON y Array no admiten valores por defecto.</p></li>
 <li><p>Los valores por defecto o el atributo nullable sólo pueden configurarse durante la creación de la colección y no pueden modificarse posteriormente.</p></li>
-<li><p>Los campos escalares con el atributo nullable activado no se pueden utilizar como <code translate="no">group_by_field</code> en la búsqueda de agrupación. Para obtener más información sobre la búsqueda de agrupación, consulte <a href="/docs/es/grouping-search.md">Búsqueda de agrupación</a>.</p></li>
-<li><p>Los campos marcados como anulables no pueden utilizarse como claves de partición. Para más información sobre claves de partición, consulte <a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a>.</p></li>
+<li><p>Los campos escalares con el atributo nullable activado no se pueden utilizar como <code translate="no">group_by_field</code> en la búsqueda de agrupación. Para obtener más información sobre la búsqueda de agrupación, consulte <a href="/docs/es/v2.5.x/grouping-search.md">Búsqueda de agrupación</a>.</p></li>
+<li><p>Los campos marcados como anulables no pueden utilizarse como claves de partición. Para más información sobre claves de partición, consulte <a href="/docs/es/v2.5.x/use-partition-key.md">Utilizar clave de partición</a>.</p></li>
 <li><p>Al crear un índice en un campo escalar con el atributo anulable activado, los valores nulos se excluirán del índice.</p></li>
-<li><p><strong>Campos JSON y ARRAY</strong>: Cuando se utilizan los operadores <code translate="no">IS NULL</code> o <code translate="no">IS NOT NULL</code> para filtrar campos JSON o ARRAY, estos operadores funcionan a nivel de columna, lo que indica que sólo evalúan si todo el objeto JSON o array es nulo. Por ejemplo, si una clave dentro de un objeto JSON es nula, no será reconocida por el filtro <code translate="no">IS NULL</code>. Para obtener más información, consulte <a href="/docs/es/basic-operators.md">Operadores básicos</a>.</p></li>
+<li><p><strong>Campos JSON y ARRAY</strong>: Cuando se utilizan los operadores <code translate="no">IS NULL</code> o <code translate="no">IS NOT NULL</code> para filtrar campos JSON o ARRAY, estos operadores funcionan a nivel de columna, lo que indica que sólo evalúan si todo el objeto JSON o array es nulo. Por ejemplo, si una clave dentro de un objeto JSON es nula, no será reconocida por el filtro <code translate="no">IS NULL</code>. Para obtener más información, consulte <a href="/docs/es/v2.5.x/basic-operators.md">Operadores básicos</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Atributo nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,8 +77,8 @@ client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530
 
 <span class="hljs-comment"># Define collection schema</span>
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_schema=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_schema=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -91,6 +92,7 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;vector&quot;</
 <span class="hljs-comment"># Create collection</span>
 client.create_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -280,6 +282,7 @@ curl --request POST \
 
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -356,6 +359,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.15838398039340973, &#x27;entity&#x27;: {&#x27;age&#x27;: 30, &#x27;id&#x27;: 1}}, {&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.28278401494026184, &#x27;entity&#x27;: {&#x27;age&#x27;: None, &#x27;id&#x27;: 2}}]&quot;] </span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -434,17 +438,18 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 <span class="hljs-comment"># {&quot;id&quot;: 3, &quot;vector&quot;: [0.3, 0.4, ..., 0.130], &quot;age&quot;: None}  # Omitted age  column is treated as None</span>
 
 results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age &gt;= 0&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age &gt;= 0&quot;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
 )
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     {&quot;id&quot;: 1, &quot;age&quot;: 30}</span>
+<span class="hljs-comment"># {&quot;id&quot;: 1, &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># Note: Entities with `age` as `null` (id 2 and 3) will not appear in the result.</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 
@@ -504,6 +509,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(<span class="hljs-string">&quot;&quot;</span>)
@@ -578,6 +584,7 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;vector&quot;</
 
 client.create_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
@@ -783,6 +790,7 @@ curl --request POST \
 
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -850,7 +858,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Para obtener más información sobre cómo surten efecto los valores nulos y por defecto, consulte <a href="/docs/es/nullable-and-default.md#Applicable-rules">Reglas aplicables</a>.</p>
+<p>Para obtener más información sobre cómo surten efecto los valores nulos y por defecto, consulte <a href="/docs/es/v2.5.x/nullable-and-default.md#Applicable-rules">Reglas aplicables</a>.</p>
 </div>
 <h3 id="Search-and-query-with-default-values" class="common-anchor-header">Búsqueda y consulta con valores por defecto</h3><p>Las entidades que contienen valores por defecto se tratan igual que cualquier otra entidad durante las búsquedas vectoriales y el filtrado escalar. Puede incluir valores por defecto como parte de sus operaciones <code translate="no">search</code> y <code translate="no">query</code>.</p>
 <p>Por ejemplo, en una operación <code translate="no">search</code>, las entidades con <code translate="no">age</code> establecido en el valor por defecto de <code translate="no">18</code> se incluirán en los resultados:</p>
@@ -871,6 +879,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.050000004, &#x27;entity&#x27;: {&#x27;id&#x27;: 2, &#x27;age&#x27;: 18, &#x27;status&#x27;: &#x27;active&#x27;}}, {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.45000002, &#x27;entity&#x27;: {&#x27;id&#x27;: 4, &#x27;age&#x27;: 18, &#x27;status&#x27;: &#x27;inactive&#x27;}}]&quot;] </span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -957,11 +966,12 @@ default_age_results = client.query(
 
 <span class="hljs-comment"># Query all entities where `status` equals the default value (&quot;active&quot;)</span>
 default_status_results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 

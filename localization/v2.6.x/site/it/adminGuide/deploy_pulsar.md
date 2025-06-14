@@ -236,5 +236,5 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
     </button></h2><p>Scoprite come configurare le altre dipendenze di Milvus con Docker Compose o Helm:</p>
 <ul>
 <li><a href="/docs/it/deploy_s3.md">Configurazione dell'archiviazione degli oggetti con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/deploy_etcd.md">Configurare il Meta Storage con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/deploy_etcd.md">Configurazione del Meta Storage con Docker Compose o Helm</a></li>
 </ul>

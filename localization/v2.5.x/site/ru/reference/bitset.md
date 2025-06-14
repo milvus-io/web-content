@@ -3,6 +3,7 @@ id: bitset.md
 summary: Узнайте о наборах битов в Milvus.
 title: Биты
 ---
+
 <h1 id="Bitset" class="common-anchor-header">Биты<button data-href="#Bitset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +36,7 @@ title: Биты
         ></path>
       </svg>
     </button></h2><p>Набор битов - это набор битов. Биты - это элементы, имеющие только два возможных значения, чаще всего <code translate="no">0</code> и <code translate="no">1</code>, или булевы значения <code translate="no">true</code> и <code translate="no">false</code>. В Milvus наборы битов - это массивы битовых чисел <code translate="no">0</code> и <code translate="no">1</code>, которые могут использоваться для компактного и эффективного представления определенных данных, в отличие от интов, плавающих чисел или символов. По умолчанию битовое число имеет значение <code translate="no">0</code> и устанавливается в значение <code translate="no">1</code> только в том случае, если оно удовлетворяет определенным требованиям.</p>
-<p>Операции над наборами битов выполняются с помощью <a href="/docs/ru/boolean.md">булевой логики</a>, в соответствии с которой выходное значение является либо допустимым, либо недопустимым, также обозначаемым <code translate="no">1</code> и <code translate="no">0</code> соответственно. Например, <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">логический оператор</a> <code translate="no">AND</code> может использоваться для сравнения двух битовых наборов, основанных на элементах в одинаковых индексных позициях, и выдает новый битовый набор с результатами. Если два элемента в позиции одинаковы, то в новом битовом наборе в этой позиции будет записан <code translate="no">1</code>, если различны - <code translate="no">0</code>.</p>
+<p>Операции над наборами битов выполняются с помощью <a href="/docs/ru/v2.5.x/boolean.md">булевой логики</a>, в соответствии с которой выходное значение является либо допустимым, либо недопустимым, также обозначаемым <code translate="no">1</code> и <code translate="no">0</code> соответственно. Например, <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">логический оператор</a> <code translate="no">AND</code> может использоваться для сравнения двух битовых наборов, основанных на элементах в одинаковых индексных позициях, и выдает новый битовый набор с результатами. Если два элемента в позиции одинаковы, то в новом битовом наборе в этой позиции будет записан <code translate="no">1</code>, если различны - <code translate="no">0</code>.</p>
 <h2 id="Implementation" class="common-anchor-header">Реализация<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

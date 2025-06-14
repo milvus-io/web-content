@@ -132,7 +132,7 @@ summary: >-
 <li><a href="/docs/ar/single-vector-search.md#Range-search">بحث النطاق</a>: البحث عن المتجهات داخل نصف قطر محدد من متجه الاستعلام الخاص بك.</li>
 <li><a href="/docs/ar/multi-vector-search.md">بحث هجين</a>: إجراء بحث ANN بناءً على حقول متجهات متعددة.</li>
 <li><a href="/docs/ar/full-text-search.md">بحث بالنص الكامل</a>: بحث بالنص الكامل استنادًا إلى BM25.</li>
-<li><a href="/docs/ar/reranking.md">إعادة الترتيب</a>: يضبط ترتيب نتائج البحث استنادًا إلى معايير إضافية أو خوارزمية ثانوية، مع تنقيح نتائج بحث الشبكة العصبية الاصطناعية الأولية.</li>
+<li><a href="/docs/ar/weighted-ranker.md">إعادة الترتيب</a>: يضبط ترتيب نتائج البحث استنادًا إلى معايير إضافية أو خوارزمية ثانوية، مع تنقيح نتائج بحث الشبكة العصبية الاصطناعية الأولية.</li>
 <li><a href="/docs/ar/get-and-scalar-query.md#Get-Entities-by-ID">إحضار</a>: استرجاع البيانات حسب مفاتيحها الأساسية.</li>
 <li><a href="/docs/ar/get-and-scalar-query.md#Use-Basic-Operators">استعلام</a>: استرجاع البيانات باستخدام تعبيرات محددة.</li>
 </ul>

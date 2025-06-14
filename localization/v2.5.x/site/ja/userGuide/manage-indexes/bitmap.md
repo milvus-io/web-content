@@ -4,6 +4,7 @@ title: ビットマップ
 related_key: bitmap
 summary: ビットマップインデクシングは、カーディナリティの低いスカラーフィールドのクエリ性能を向上させるために考案された効率的なインデックス作成手法である。
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">ビットマップ<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,8 +85,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>この例では、<code translate="no">my_collection</code> コレクションの<code translate="no">category</code> フィールドにビットマップインデックスを作成します。<code translate="no">add_index()</code> メソッドを使用して、フィールド名、インデックスタイプ、インデックス名を指定します。</p>
-<p>ビットマップ・インデックスが作成されると、クエリ操作で<code translate="no">filter</code> パラメータを使用して、インデックスが作成されたフィールドに基づくスカラー・フィルタリングを実行できます。これにより、ビットマップインデックスを使用して検索結果を効率的に絞り込むことができます。詳細については、<a href="/docs/ja/boolean.md">メタデータ・フィルタリングを</a>参照してください。</p>
+<p>ビットマップ・インデックスが作成されると、クエリ操作で<code translate="no">filter</code> パラメータを使用して、インデックスが作成されたフィールドに基づくスカラー・フィルタリングを実行できます。これにより、ビットマップインデックスを使用して検索結果を効率的に絞り込むことができます。詳細については、<a href="/docs/ja/v2.5.x/boolean.md">メタデータ・フィルタリングを</a>参照してください。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,10 +1,10 @@
 ---
 id: deploy_pulsar.md
-title: Настройте хранилище сообщений с помощью Docker Compose или Helm
+title: Настройка хранилища сообщений с помощью Docker Compose или Helm
 related_key: 'Pulsar, storage'
 summary: 'Узнайте, как настроить хранение сообщений с помощью Docker Compose или Helm.'
 ---
-<h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Настройте хранилище сообщений с помощью Docker Compose или Helm<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
+<h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Настройка хранилища сообщений с помощью Docker Compose или Helm<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

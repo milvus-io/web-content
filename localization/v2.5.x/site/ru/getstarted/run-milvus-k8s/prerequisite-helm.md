@@ -7,6 +7,7 @@ summary: >-
   Helm.
 title: Требования для запуска Milvus на Kubernetes
 ---
+
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">Требования для запуска Milvus на Kubernetes<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -143,8 +144,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>Если ваше оборудование и программное обеспечение соответствуют требованиям, вы можете:</p>
 <ul>
-<li><a href="/docs/ru/install_cluster-milvusoperator.md">Запустить Milvus в Kubernets с помощью Milvus Operator</a></li>
-<li><a href="/docs/ru/install_cluster-helm.md">Запускать Milvus в Kubernetes с помощью Helm.</a></li>
+<li><a href="/docs/ru/v2.5.x/install_cluster-milvusoperator.md">Запустить Milvus в Kubernets с помощью Milvus Operator</a></li>
+<li><a href="/docs/ru/v2.5.x/install_cluster-helm.md">Запускать Milvus в Kubernetes с помощью Helm.</a></li>
 </ul></li>
-<li><p>Параметры, которые можно задать при установке Milvus, см. в разделе <a href="/docs/ru/system_configuration.md">Конфигурация системы</a>.</p></li>
+<li><p>Параметры, которые можно задать при установке Milvus, см. в разделе <a href="/docs/ru/v2.5.x/system_configuration.md">Конфигурация системы</a>.</p></li>
 </ul>

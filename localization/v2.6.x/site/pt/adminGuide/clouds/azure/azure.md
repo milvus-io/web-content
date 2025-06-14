@@ -56,7 +56,7 @@ summary: Saiba como implementar um cluster Milvus no Azure.
 <li><a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a></li>
 <li><a href="https://helm.sh/docs/intro/install/">Helm</a></li>
 </ul>
-<p>Em alternativa, pode utilizar o <a href="https://learn.microsoft.com/en-us/azure/cloud-shell/overview">Cloud Shell</a> que tem o Azure CLI, kubectl e Helm pré-instalados.</p>
+<p>Em alternativa, pode utilizar o <a href="https://learn.microsoft.com/en-us/azure/cloud-shell/overview">Cloud Shell</a> que tem o Azure CLI, o kubectl e o Helm pré-instalados.</p>
 <div class="alert note">Depois de instalar a CLI do Azure, certifique-se de que está devidamente autenticado. </div>
 <h2 id="Provision-a-Kubernetes-cluster" class="common-anchor-header">Provisionar um cluster Kubernetes<button data-href="#Provision-a-Kubernetes-cluster" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -1,9 +1,10 @@
 ---
 id: f2m.md
 title: Dari Faiss
-related_key: 'Faiss, migrate, import'
+related_key: "Faiss, migrate, import"
 summary: Pelajari cara memigrasi data Faiss ke Milvus.
 ---
+
 <h1 id="From-Faiss" class="common-anchor-header">Dari Faiss<button data-href="#From-Faiss" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ summary: Pelajari cara memigrasi data Faiss ke Milvus.
 <li>Untuk detail instalasi, lihat Menginstal <a href="https://github.com/facebookresearch/faiss/blob/main/INSTALL.md">Faiss</a> dan <a href="https://milvus.io/docs/install_standalone-docker.md">Menginstal Milvus</a>.</li>
 </ul></li>
 <li><strong>Alat yang dibutuhkan</strong>:<ul>
-<li>Alat<a href="https://github.com/zilliztech/milvus-migration">migrasi Milvus</a>. Untuk detail instalasi, lihat Menginstal <a href="/docs/id/milvusdm_install.md">Alat Migrasi</a>.</li>
+<li>Alat<a href="https://github.com/zilliztech/milvus-migration">migrasi Milvus</a>. Untuk detail instalasi, lihat Menginstal <a href="/docs/id/v2.5.x/milvusdm_install.md">Alat Migrasi</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Configure-the-migration" class="common-anchor-header">Mengkonfigurasi migrasi<button data-href="#Configure-the-migration" class="anchor-icon" translate="no">
@@ -78,31 +79,32 @@ loader:
     faissFile: ./testfiles/faiss/faiss_ivf_flat.index
 
 target: <span class="hljs-comment"># configs for the target Milvus collection.</span>
-  create:
-    collection:
-      name: test1w
-      shardsNums: 2
-      dim: 256
-      metricType: L2
+create:
+collection:
+name: test1w
+shardsNums: 2
+dim: 256
+metricType: L2
 
-  mode: remote
-  remote:
-    outputDir: testfiles/output/
-    cloud: aws
-    endpoint: 0.0.0.0:9000
-    region: ap-southeast-1
-    bucket: a-bucket
-    ak: minioadmin
-    sk: minioadmin
-    useIAM: <span class="hljs-literal">false</span>
-    useSSL: <span class="hljs-literal">false</span>
-    checkBucket: <span class="hljs-literal">true</span>
-  milvus2x:
-    endpoint: localhost:19530
-    username: xxxxx
-    password: xxxxx
+mode: remote
+remote:
+outputDir: testfiles/output/
+cloud: aws
+endpoint: 0.0.0.0:9000
+region: ap-southeast-1
+bucket: a-bucket
+ak: minioadmin
+sk: minioadmin
+useIAM: <span class="hljs-literal">false</span>
+useSSL: <span class="hljs-literal">false</span>
+checkBucket: <span class="hljs-literal">true</span>
+milvus2x:
+endpoint: localhost:19530
+username: xxxxx
+password: xxxxx
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Tabel berikut ini menjelaskan parameter dalam file konfigurasi contoh. Untuk daftar lengkap konfigurasi, lihat <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_FAISS.md#migrationyaml-reference">Migrasi Milvus: Faiss ke Milvus 2.x</a>.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>

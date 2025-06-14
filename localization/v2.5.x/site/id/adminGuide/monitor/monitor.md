@@ -1,11 +1,12 @@
 ---
 id: monitor.md
 title: Menerapkan Layanan Pemantauan
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: >-
   Pelajari cara menerapkan layanan pemantauan untuk cluster Milvus menggunakan
   Prometheus.
 ---
+
 <h1 id="Deploying-Monitoring-Services-on-Kubernetes" class="common-anchor-header">Menerapkan Layanan Pemantauan pada Kubernetes<button data-href="#Deploying-Monitoring-Services-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,14 +124,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>Jika Anda telah menerapkan layanan pemantauan untuk cluster Milvus, Anda mungkin juga ingin mempelajarinya:<ul>
-<li><a href="/docs/id/visualize.md">Memvisualisasikan metrik Milvus di Grafana</a></li>
-<li><a href="/docs/id/alert.md">Membuat peringatan untuk layanan Milvus</a></li>
-<li>Menyesuaikan <a href="/docs/id/allocate.md">alokasi sumber daya</a> Anda</li>
+<li><a href="/docs/id/v2.5.x/visualize.md">Memvisualisasikan metrik Milvus di Grafana</a></li>
+<li><a href="/docs/id/v2.5.x/alert.md">Membuat peringatan untuk layanan Milvus</a></li>
+<li>Menyesuaikan <a href="/docs/id/v2.5.x/allocate.md">alokasi sumber daya</a> Anda</li>
 </ul></li>
 <li>Jika Anda mencari informasi tentang cara menskalakan cluster Milvus:<ul>
-<li>Pelajari <a href="/docs/id/scaleout.md">cara menskalakan cluster Milvus</a></li>
+<li>Pelajari <a href="/docs/id/v2.5.x/scaleout.md">cara menskalakan cluster Milvus</a></li>
 </ul></li>
 <li>Jika Anda tertarik untuk meningkatkan versi Milvus,<ul>
-<li>Baca <a href="/docs/id/upgrade_milvus_cluster-operator.md">panduan untuk memutakhirkan cluster Milvus</a> dan <a href="/docs/id/upgrade_milvus_cluster-operator.md">panduan</a> <a href="/docs/id/upgrade_milvus_standalone-operator.md">untuk memutakhirkan Milvus mandiri</a>.</li>
+<li>Baca <a href="/docs/id/v2.5.x/upgrade_milvus_cluster-operator.md">panduan untuk memutakhirkan cluster Milvus</a> dan <a href="/docs/id/v2.5.x/upgrade_milvus_cluster-operator.md">panduan</a> <a href="/docs/id/v2.5.x/upgrade_milvus_standalone-operator.md">untuk memutakhirkan Milvus mandiri</a>.</li>
 </ul></li>
 </ul>

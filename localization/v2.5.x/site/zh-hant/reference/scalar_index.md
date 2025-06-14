@@ -36,7 +36,7 @@ title: 標量索引
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中執行向量相似性搜尋時，您可以使用邏輯運算符號將標量欄位組織成布林表達式。</p>
-<p>當 Milvus 接收到具有這種布林表達式的搜尋請求，它會將布林表達式解析為抽象語法樹 (AST)，以產生屬性篩選的實體計劃。Milvus 接著會在每個區段套用實體規劃，產生一個<a href="/docs/zh-hant/bitset.md">bitset</a>作為篩選結果，並將結果包含在向量搜尋參數中，以縮窄搜尋範圍。在這種情況下，向量搜尋的速度在很大程度上依賴於屬性篩選的速度。</p>
+<p>當 Milvus 接收到具有這種布林表達式的搜尋請求，它會將布林表達式解析為抽象語法樹 (AST)，以產生屬性篩選的實體計劃。Milvus 接著會在每個區段套用實體規劃，產生一個<a href="/docs/zh-hant/v2.5.x/bitset.md">bitset</a>作為篩選結果，並將結果包含在向量搜尋參數中，以縮窄搜尋範圍。在這種情況下，向量搜尋的速度在很大程度上依賴於屬性篩選的速度。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -75,8 +75,8 @@ title: 標量索引
 </tbody>
 </table>
 <h3 id="Inverted-indexing" class="common-anchor-header">反向索引</h3><p>反向索引提供了一種靈活的方式，可透過手動指定索引參數為標量欄位建立索引。這種方法適用於各種情況，包括點查詢、模式匹配查詢、全文檢索、JSON 檢索、布林檢索，甚至前綴匹配查詢。</p>
-<p>Milvus 中實作的倒置索引是由<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>（一個全文本搜尋引擎函式庫）所支援。Tantivy 可確保 Milvus 中的倒排索引既高效又快速。</p>
-<p>倒排索引有兩個主要組成部分：詞彙字典和倒排清單。詞彙字典包含所有按字母順序排序的標記化詞彙，而倒序清單包含每個詞彙出現的文件清單。這種設定使點查詢和範圍查詢比暴力搜尋更快、更有效率。</p>
+<p>Milvus 中實作的反向索引是由<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>（一個全文本搜尋引擎函式庫）支援。Tantivy 可確保 Milvus 中的倒排索引既高效又快速。</p>
+<p>倒排索引有兩個主要組成部分：詞彙字典和倒排清單。詞彙字典包含所有按字母順序排序的標記化詞彙，而倒置清單包含每個詞彙出現的文件清單。這種設定使點查詢和範圍查詢比暴力搜尋更快、更有效率。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
@@ -154,12 +154,12 @@ title: 標量索引
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>若要為標量欄位<a href="/docs/zh-hant/index-scalar-fields.md">建立</a>索引，請閱讀<a href="/docs/zh-hant/index-scalar-fields.md">建立標量索引</a>。</p></li>
+<li><p>若要為標量欄位<a href="/docs/zh-hant/v2.5.x/index-scalar-fields.md">建立</a>索引，請閱讀<a href="/docs/zh-hant/v2.5.x/index-scalar-fields.md">建立標量索引</a>。</p></li>
 <li><p>若要瞭解上述相關詞彙和規則的更多資訊，請閱讀</p>
 <ul>
-<li><a href="/docs/zh-hant/bitset.md">位元集</a></li>
-<li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
-<li><a href="/docs/zh-hant/boolean.md">布林表達規則</a></li>
-<li><a href="/docs/zh-hant/schema.md#Supported-data-type">支援的資料類型</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/bitset.md">位元集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/multi-vector-search.md">混合搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/boolean.md">布林表達規則</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/schema.md#Supported-data-type">支援的資料類型</a></li>
 </ul></li>
 </ul>

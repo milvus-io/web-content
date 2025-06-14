@@ -5,6 +5,7 @@ summary: >-
   Penanda spasi membagi teks menjadi beberapa istilah setiap kali ada spasi di
   antara kata-kata.
 ---
+
 <h1 id="Whitespace" class="common-anchor-header">Spasi<button data-href="#Whitespace" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +58,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;tokenizer&quot;: &quot;whitespace&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Tokenizer spasi dapat bekerja bersama dengan satu atau beberapa filter. Sebagai contoh, kode berikut ini mendefinisikan penganalisis yang menggunakan tokenizer <code translate="no">whitespace</code> dan<a href="/docs/id/lowercase-filter.md"> filter</a> <code translate="no">lowercase</code><a href="/docs/id/lowercase-filter.md">:</a></p>
+<p>Tokenizer spasi dapat bekerja bersama dengan satu atau beberapa filter. Sebagai contoh, kode berikut ini mendefinisikan penganalisis yang menggunakan tokenizer <code translate="no">whitespace</code> dan<a href="/docs/id/v2.5.x/lowercase-filter.md"> filter</a> <code translate="no">lowercase</code><a href="/docs/id/v2.5.x/lowercase-filter.md">:</a></p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -84,7 +85,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks di dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
+<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks di dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,6 +134,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

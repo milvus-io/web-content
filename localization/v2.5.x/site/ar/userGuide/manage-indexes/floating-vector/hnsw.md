@@ -7,6 +7,7 @@ summary: >-
   استجابة منخفض، بينما يتطلب نفقات عالية للذاكرة للحفاظ على بنية الرسم البياني
   الهرمي.
 ---
+
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +58,7 @@ summary: >-
 <li><p><code translate="no">efConstruction</code>: عدد المرشحين الذين تم أخذهم في الاعتبار أثناء بناء الفهرس. يؤدي ارتفاع <code translate="no">efConstruction</code> عمومًا إلى الحصول على رسم بياني بجودة أفضل ولكنه يتطلب وقتًا أطول للبناء.</p></li>
 <li><p><code translate="no">ef</code>: عدد الجيران الذين يتم تقييمهم أثناء البحث. تؤدي زيادة <code translate="no">ef</code> إلى تحسين احتمالية العثور على أقرب الجيران ولكنها تبطئ عملية البحث.</p></li>
 </ul>
-<p>للحصول على تفاصيل حول كيفية ضبط هذه الإعدادات لتناسب احتياجاتك، راجع <a href="/docs/ar/hnsw.md#Index-params">بارامز الفهرس</a>.</p>
+<p>للحصول على تفاصيل حول كيفية ضبط هذه الإعدادات لتناسب احتياجاتك، راجع <a href="/docs/ar/v2.5.x/hnsw.md#Index-params">بارامز الفهرس</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">إنشاء فهرس<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,28 +81,29 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
-        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
+<span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>في هذا التكوين</p>
 <ul>
 <li><p><code translate="no">index_type</code>: نوع الفهرس المراد إنشاؤه. في هذا المثال، اضبط القيمة على <code translate="no">HNSW</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: الطريقة المستخدمة لحساب المسافة بين المتجهات. تتضمن القيم المدعومة <code translate="no">COSINE</code> و <code translate="no">L2</code> و <code translate="no">IP</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: الطريقة المستخدمة لحساب المسافة بين المتجهات. تتضمن القيم المدعومة <code translate="no">COSINE</code> و <code translate="no">L2</code> و <code translate="no">IP</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/metric.md">أنواع المقاييس</a>.</p></li>
 <li><p><code translate="no">params</code>: : خيارات التكوين الإضافية لبناء الفهرس.</p>
 <ul>
 <li><p><code translate="no">M</code>: الحد الأقصى لعدد الجيران الذين يمكن لكل عقدة الاتصال بهم.</p></li>
 <li><p><code translate="no">efConstruction</code>: : عدد الجيران المرشحين للاتصال أثناء بناء الفهرس.</p></li>
 </ul>
-<p>لمعرفة المزيد من معلمات البناء المتوفرة للفهرس <code translate="no">HNSW</code> ، راجع <a href="/docs/ar/hnsw.md#Index-building-params">بارامز بناء الفهرس</a>.</p></li>
+<p>لمعرفة المزيد من معلمات البناء المتوفرة للفهرس <code translate="no">HNSW</code> ، راجع <a href="/docs/ar/v2.5.x/hnsw.md#Index-building-params">بارامز بناء الفهرس</a>.</p></li>
 </ul>
-<p>بمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection.md">إنشاء مجموعة</a>.</p>
+<p>بمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/create-collection.md">إنشاء مجموعة</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">البحث في الفهرس<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,20 +127,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">10</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>في هذا التكوين</p>
 <ul>
 <li><p><code translate="no">params</code>: خيارات التكوين الإضافية للبحث على الفهرس.</p>
 <ul>
 <li><code translate="no">ef</code>: عدد الكيانات المجاورة التي يجب أخذها في الاعتبار أثناء البحث.</li>
 </ul>
-<p>لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">HNSW</code> ، راجع <a href="/docs/ar/hnsw.md#Index-specific-search-params">باراميات البحث الخاصة بالفهرس</a>.</p></li>
+<p>لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">HNSW</code> ، راجع <a href="/docs/ar/v2.5.x/hnsw.md#Index-specific-search-params">باراميات البحث الخاصة بالفهرس</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">بارامترات الفهرس<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,7 +159,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
-<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/hnsw.md#Build-index">إنشاء فهرس</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/v2.5.x/hnsw.md#Build-index">إنشاء فهرس</a>.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
@@ -177,7 +180,7 @@ res = MilvusClient.search(
      <td><p>يؤدي ارتفاع <code translate="no">efConstruction</code> عادةً إلى <strong>فهرس أكثر دقة،</strong> حيث يتم استكشاف المزيد من الاتصالات المحتملة. ومع ذلك، يؤدي هذا أيضًا إلى <strong>إطالة وقت الفهرسة وزيادة استخدام الذاكرة</strong> أثناء الإنشاء. ضع في اعتبارك زيادة <code translate="no">efConstruction</code> لتحسين الدقة، خاصة في السيناريوهات التي يكون فيها وقت الفهرسة أقل أهمية.</p><p>فكر في تقليل <code translate="no">efConstruction</code> لتسريع بناء الفهرس عندما تكون قيود الموارد مصدر قلق.</p><p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/hnsw.md#Search-on-index">البحث في الفهرس</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/v2.5.x/hnsw.md#Search-on-index">البحث في الفهرس</a>.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>

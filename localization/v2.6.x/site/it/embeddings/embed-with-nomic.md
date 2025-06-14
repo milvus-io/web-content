@@ -22,7 +22,7 @@ title: Nomic
         ></path>
       </svg>
     </button></h1><p>I modelli<a href="https://atlas.nomic.ai/">Nomic</a> sono una serie di soluzioni avanzate di incorporazione di testo e immagini sviluppate da Nomic AI, progettate per convertire varie forme di dati in vettori numerici densi che catturano il loro significato semantico.</p>
-<p>Milvus si integra con i modelli di incorporamento di Nomic tramite la classe NomicEmbeddingFunction. Questa classe fornisce metodi per codificare documenti e query utilizzando i modelli di embedding di Nomic e restituendo gli embedding come vettori densi compatibili con l'indicizzazione di Milvus. Per utilizzare questa funzionalità, è necessario ottenere una chiave API da <a href="https://atlas.nomic.ai/">Nomic Atlas</a>.</p>
+<p>Milvus si integra con i modelli di incorporamento di Nomic attraverso la classe NomicEmbeddingFunction. Questa classe fornisce metodi per codificare documenti e query utilizzando i modelli di embedding di Nomic e restituendo gli embedding come vettori densi compatibili con l'indicizzazione di Milvus. Per utilizzare questa funzionalità, è necessario ottenere una chiave API da <a href="https://atlas.nomic.ai/">Nomic Atlas</a>.</p>
 <p>Per utilizzare questa funzionalità, installare le dipendenze necessarie:</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

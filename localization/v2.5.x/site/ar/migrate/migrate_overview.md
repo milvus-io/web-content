@@ -5,6 +5,7 @@ summary: >-
   الترحيل المدعومة والميزات والبنية.
 title: نظرة عامة على ترحيل ميلفوس
 ---
+
 <h1 id="Milvus-Migration-Overview" class="common-anchor-header">نظرة عامة على ترحيل ميلفوس<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,10 +39,10 @@ title: نظرة عامة على ترحيل ميلفوس
       </svg>
     </button></h2><p>تدعم أداة <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> مجموعة متنوعة من مسارات الترحيل لاستيعاب احتياجات المستخدمين المختلفة:</p>
 <ul>
-<li><a href="/docs/ar/es2m.md">Elasticsearch إلى Milvus 2.x</a>: تمكين المستخدمين من ترحيل البيانات من بيئات Elasticsearch للاستفادة من إمكانيات البحث المتجه المحسّنة في Milvus.</li>
-<li><a href="/docs/ar/f2m.md">فايس إلى ميلفوس 2.x</a>: توفير دعم تجريبي لنقل البيانات من Faiss، وهي مكتبة شائعة للبحث الفعال عن التشابه.</li>
-<li><a href="/docs/ar/m2m.md">Milvus 1.x إلى Milvus 2.x</a>: ضمان نقل البيانات من الإصدارات السابقة بسلاسة إلى الإطار الأحدث.</li>
-<li><a href="/docs/ar/from-m2x.md">Milvus 2.3.x إلى Milvus 2.3.x أو أعلى</a>: توفير مسار ترحيل لمرة واحدة للمستخدمين الذين قاموا بالترحيل بالفعل إلى 2.3.x.</li>
+<li><a href="/docs/ar/v2.5.x/es2m.md">Elasticsearch إلى Milvus 2.x</a>: تمكين المستخدمين من ترحيل البيانات من بيئات Elasticsearch للاستفادة من إمكانيات البحث المتجه المحسّنة في Milvus.</li>
+<li><a href="/docs/ar/v2.5.x/f2m.md">فايس إلى ميلفوس 2.x</a>: توفير دعم تجريبي لنقل البيانات من Faiss، وهي مكتبة شائعة للبحث الفعال عن التشابه.</li>
+<li><a href="/docs/ar/v2.5.x/m2m.md">Milvus 1.x إلى Milvus 2.x</a>: ضمان نقل البيانات من الإصدارات السابقة بسلاسة إلى الإطار الأحدث.</li>
+<li><a href="/docs/ar/v2.5.x/from-m2x.md">Milvus 2.3.x إلى Milvus 2.3.x أو أعلى</a>: توفير مسار ترحيل لمرة واحدة للمستخدمين الذين قاموا بالترحيل بالفعل إلى 2.3.x.</li>
 </ul>
 <h2 id="Features" class="common-anchor-header">الميزات<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"

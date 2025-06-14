@@ -6,7 +6,6 @@ summary: >-
   melhorar o desempenho da pesquisa.
 title: Índice com GPU
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">Índice com GPU<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,16 +114,15 @@ title: Índice com GPU
 <button class="copy-code-btn"></button></code></pre>
 <p>Não são necessárias configurações de <strong>parâmetros</strong> adicionais.</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">Construir índice</h3><p>Depois de configurar os parâmetros do índice em <strong>index_params</strong>, chame o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> para criar o índice.</p>
+<h3 id="Build-index" class="common-anchor-header">Construir índice</h3><p>Depois de configurar os parâmetros de índice em <strong>index_params</strong>, chame o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> para criar o índice.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">Pesquisar<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,13 +180,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

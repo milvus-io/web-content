@@ -3,6 +3,7 @@ id: metrics_dashboard.md
 title: Dasbor Metrik Milvus
 summary: Topik ini memperkenalkan metrik pemantauan yang ditampilkan di Dasbor Milvus.
 ---
+
 <h1 id="Milvus-Metrics-Dashboard" class="common-anchor-header">Dasbor Metrik Milvus<button data-href="#Milvus-Metrics-Dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ summary: Topik ini memperkenalkan metrik pemantauan yang ditampilkan di Dasbor M
       </svg>
     </button></h1><p>Milvus mengeluarkan daftar metrik deret waktu yang terperinci selama waktu berjalan. Anda dapat menggunakan <a href="https://prometheus.io/">Prometheus</a> dan <a href="https://grafana.com/">Grafana</a> untuk memvisualisasikan metrik. Topik ini memperkenalkan metrik pemantauan yang ditampilkan di Dasbor Grafana Milvus.</p>
 <p>Satuan waktu dalam topik ini adalah milidetik. Dan "persentil ke-99" dalam topik ini mengacu pada fakta bahwa 99 persen dari statistik waktu dikontrol dalam nilai tertentu.</p>
-<p>Kami sarankan untuk membaca <a href="/docs/id/monitor_overview.md">ikhtisar kerangka kerja pemantauan Milvus</a> untuk memahami metrik Prometheus terlebih dahulu.</p>
+<p>Kami sarankan untuk membaca <a href="/docs/id/v2.5.x/monitor_overview.md">ikhtisar kerangka kerja pemantauan Milvus</a> untuk memahami metrik Prometheus terlebih dahulu.</p>
 <p><details><summary>Proksi</summary></p>
 <table>
 <thead>

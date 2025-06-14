@@ -6,6 +6,7 @@ summary: >-
   disco.
 title: Índice no disco
 ---
+
 <h1 id="On-disk-Index" class="common-anchor-header">Índice no disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ title: Índice no disco
         ></path>
       </svg>
     </button></h1><p>Este artigo apresenta o DiskANN, um algoritmo de indexação em disco para pesquisas vetoriais otimizadas em disco. Com base nos gráficos Vamana, o DiskANN permite pesquisas vetoriais eficientes no disco em grandes conjuntos de dados.</p>
-<p>Para melhorar o desempenho da consulta, é possível <a href="/docs/pt/index-vector-fields.md">especificar um tipo de índice</a> para cada campo de vetor.</p>
+<p>Para melhorar o desempenho da consulta, é possível <a href="/docs/pt/v2.5.x/index-vector-fields.md">especificar um tipo de índice</a> para cada campo de vetor.</p>
 <div class="alert note"> 
 Atualmente, um campo de vetor suporta apenas um tipo de índice. O Milvus exclui automaticamente o índice antigo ao alternar o tipo de índice.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">

@@ -3,6 +3,7 @@ id: es2m.md
 summary: 本指南提供從 Elasticsearch 遷移資料至 Milvus 2.x 的全面性、逐步式流程。
 title: 從 Elasticsearch
 ---
+
 <h1 id="From-Elasticsearch" class="common-anchor-header">從 Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +42,7 @@ title: 從 Elasticsearch
 <li>如需安裝細節，請參閱<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">安裝 Elasticsearch</a>和<a href="https://milvus.io/docs/install_standalone-docker.md">安裝 Milvus</a>。</li>
 </ul></li>
 <li><strong>所需的工具</strong>：<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。安裝細節請參閱<a href="/docs/zh-hant/milvusdm_install.md">安裝遷移工具</a>。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。安裝細節請參閱<a href="/docs/zh-hant/v2.5.x/milvusdm_install.md">安裝遷移工具</a>。</li>
 </ul></li>
 <li><strong>支援遷移的資料類型</strong>：要從來源 Elasticsearch 索引遷移的欄位屬於下列類型 -<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">關鍵字</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">文字</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">長</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">整數</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">雙數</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">浮點</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">數</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">布林</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">物件</a>。此處未列出的資料類型目前不支援遷移。有關 Milvus 集合與 Elasticsearch 索引之間資料對應的詳細資訊，請參閱<a href="#field-mapping-reference">欄位</a>對應<a href="#field-mapping-reference">參考</a>。</li>
 <li><strong>Elasticsearch 索引要求</strong>：<ul>

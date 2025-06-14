@@ -49,8 +49,8 @@ summary: >-
 </p>
 <p>In Hybrid Search, reranking is a crucial step that integrates the results from multiple vector searches to ensure the final output is the most relevant and accurate. Currently, Milvus supports the following two reranking strategies:</p>
 <ul>
-<li><p><strong><a href="/docs/reranking.md#WeightedRanker">WeightedRanker</a></strong>: This strategy merges results by calculating a weighted score of scores (or distances) from different vector searches. Weights are assigned based on the importance of each vector field, allowing for customization according to specific use-case priorities.</p></li>
-<li><p><strong><a href="/docs/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: This strategy combines results based on ranking. It uses a method that balances the ranks of results from different searches, often leading to a more fair and effective integration of diverse data types or modalities.</p></li>
+<li><p><strong><a href="/docs/v2.5.x/reranking.md#WeightedRanker">WeightedRanker</a></strong>: This strategy merges results by calculating a weighted score of scores (or distances) from different vector searches. Weights are assigned based on the importance of each vector field, allowing for customization according to specific use-case priorities.</p></li>
+<li><p><strong><a href="/docs/v2.5.x/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: This strategy combines results based on ranking. It uses a method that balances the ranks of results from different searches, often leading to a more fair and effective integration of diverse data types or modalities.</p></li>
 </ul>
 <h2 id="WeightedRanker" class="common-anchor-header">WeightedRanker<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"

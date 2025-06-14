@@ -41,7 +41,7 @@ title: Verbessern Sie die Abrufqualität Ihrer LLM-Bewerbung mit AIMon und Milvu
 <ul>
 <li>Eine LLM-Anwendung zu erstellen, die die Anfrage eines Benutzers in Bezug auf den Meetingbank-Datensatz beantwortet.</li>
 <li>Die Qualität Ihrer LLM-Anwendung zu definieren und zu messen.</li>
-<li>Die Qualität Ihrer Anwendung mit Hilfe von 2 inkrementellen Ansätzen zu verbessern: eine Vektor-DB mit hybrider Suche und ein hochmoderner Re-Ranker.</li>
+<li>die Qualität Ihrer Anwendung mit Hilfe von 2 inkrementellen Ansätzen zu verbessern: eine Vektor-DB mit hybrider Suche und ein hochmoderner Re-Ranker.</li>
 </ul>
 <h2 id="Tech-Stack" class="common-anchor-header">Technischer Stapel<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -479,12 +479,12 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
         ></path>
       </svg>
     </button></h1><p>Jetzt werden wir die Qualitätsbewertung verbessern, indem wir eine Vektor-DB hinzufügen. Dies wird auch dazu beitragen, die Abfragelatenz im Vergleich zum vorherigen Ansatz zu verbessern.</p>
-<p>Es gibt zwei Hauptkomponenten, auf die wir achten müssen: Ingestion und RAG-basierte Q&amp;A. Die Ingestion-Pipeline verarbeitet die Transkripte aus dem Meeting Bank-Datensatz und speichert sie in der Milvus-Vektor-Datenbank. Die RAG-Q&amp;A-Pipeline verarbeitet eine Benutzeranfrage, indem sie zunächst die relevanten Dokumente aus dem Vektorspeicher abruft. Diese Dokumente werden dann als Grundlagendokumente für den LLM verwendet, um seine Antwort zu generieren. Wir nutzen AIMon, um die Qualitätsbewertung zu berechnen und die Anwendung kontinuierlich auf <a href="https://docs.aimon.ai/detectors/hallucination">Halluzinationen</a>, <a href="https://docs.aimon.ai/detectors/instruction_adherence">Einhaltung der Anweisungen</a> und <a href="https://docs.aimon.ai/checker-models/context_relevance">Kontextrelevanz</a> zu überwachen. Dies sind dieselben 3 Metriken, die wir oben zur Definition des <code translate="no">quality</code> Scores verwendet haben.</p>
+<p>Es gibt zwei Hauptkomponenten, auf die wir achten müssen: Ingestion und RAG-basierte Q&amp;A. Die Ingestion-Pipeline verarbeitet die Transkripte aus dem Meeting Bank-Datensatz und speichert sie in der Milvus-Vektor-Datenbank. Die RAG-Q&amp;A-Pipeline verarbeitet eine Benutzeranfrage, indem sie zunächst die relevanten Dokumente aus dem Vektorspeicher abruft. Diese Dokumente werden dann als Grundlagendokumente für den LLM verwendet, um seine Antwort zu generieren. Wir nutzen AIMon, um die Qualitätsbewertung zu berechnen und die Anwendung kontinuierlich auf <a href="https://docs.aimon.ai/detectors/hallucination">Halluzinationen</a>, die <a href="https://docs.aimon.ai/detectors/instruction_adherence">Einhaltung von Anweisungen</a> und die <a href="https://docs.aimon.ai/checker-models/context_relevance">Kontextrelevanz</a> zu überwachen. Dies sind dieselben 3 Metriken, die wir oben zur Definition des <code translate="no">quality</code> Scores verwendet haben.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
    </span> <span class="img-wrapper"> <span>Arbeitsablauf</span> </span></p>
-<p>Im Folgenden finden Sie einige Hilfsfunktionen zur Vorverarbeitung und Berechnung von Einbettungen für Dokumente.</p>
+<p>Nachfolgend finden Sie einige Hilfsfunktionen zur Vorverarbeitung und Berechnung von Einbettungen für Dokumente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -814,7 +814,7 @@ query_engine_with_reranking = RetrieverQueryEngine.from_args(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Lassen wir die Abfragen noch einmal durchlaufen und berechnen die Gesamtqualitätsbewertung neu, um zu sehen, ob es eine Verbesserung gibt.</p>
-<p><strong>Die Neueinstufung von AIMon sollte keine zusätzlichen Latenzzeiten verursachen, da sie die Anzahl der Kontextdokumente reduziert, die an den LLM gesendet werden müssen, um eine Antwort zu generieren, was den Vorgang in Bezug auf Netzwerk-E/A und LLM-Token-Verarbeitungskosten (Geld und Zeit) effizient macht.</strong></p>
+<p><strong>Die Neueinstufung von AIMon sollte keine zusätzlichen Latenzzeiten verursachen, da sie die Anzahl der Kontextdokumente reduziert, die an den LLM gesendet werden müssen, um eine Antwort zu generieren, wodurch der Vorgang in Bezug auf Netzwerk-E/A und LLM-Token-Verarbeitungskosten (Geld und Zeit) effizient ist.</strong></p>
 <p><strong>HINWEIS: Dieser Schritt wird 2 Minuten dauern.</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -902,7 +902,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <li>Weitere Verbesserung des Qualitätsergebnisses durch den anpassungsfähigen Re-Ranker von AIMon mit niedriger Latenz.</li>
 <li>Wir haben auch gezeigt, wie sich die Suchrelevanz durch den Einsatz von AIMons Re-Ranker deutlich verbessert.</li>
 </ul>
-<p>Wir möchten Sie ermutigen, mit den verschiedenen in diesem Notizbuch gezeigten Komponenten zu experimentieren, um <strong>die Qualitätsbewertung</strong> weiter <strong>zu verbessern</strong>. Eine Idee ist es, Ihre eigenen Definitionen von Qualität hinzuzufügen, indem Sie das Feld <code translate="no">instructions</code> im obigen instruction_adherence detector verwenden. Eine andere Idee ist es, ein weiteres der <a href="https://docs.aimon.ai/category/checker-models">AIMon-Prüfmodelle</a> als Teil der Qualitätsmetrik hinzuzufügen.</p>
+<p>Wir möchten Sie ermutigen, mit den verschiedenen in diesem Notizbuch gezeigten Komponenten zu experimentieren, um <strong>die Qualitätsbewertung</strong> weiter <strong>zu verbessern</strong>. Eine Idee ist es, Ihre eigenen Definitionen von Qualität hinzuzufügen, indem Sie das <code translate="no">instructions</code> Feld im instruction_adherence detector oben verwenden. Eine andere Idee ist es, ein weiteres der <a href="https://docs.aimon.ai/category/checker-models">AIMon-Prüfmodelle</a> als Teil der Qualitätsmetrik hinzuzufügen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(

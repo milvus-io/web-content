@@ -477,7 +477,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
         ></path>
       </svg>
     </button></h1><p>现在，我们将通过加入向量 DB 来提高质量得分。与之前的方法相比，这也有助于改善查询延迟。</p>
-<p>我们需要注意两个主要部分：摄取和基于 RAG 的问答。摄取管道处理来自 Meeting Bank 数据集的记录誊本，并将其存储到 Milvus 向量数据库中。RAG 问答管道在处理用户查询时，首先会从向量存储中检索相关文档。然后，这些文档将被用作 LLM 生成回复的基础文档。我们利用 AIMon 来计算质量得分，并持续监控应用程序的<a href="https://docs.aimon.ai/detectors/hallucination">幻觉</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指令遵守</a>情况和<a href="https://docs.aimon.ai/checker-models/context_relevance">上下文相关性</a>。这也是我们用来定义<code translate="no">quality</code> 分数的 3 个指标。</p>
+<p>我们需要注意两个主要部分：摄取和基于 RAG 的问答。摄取管道处理来自 Meeting Bank 数据集的记录誊本，并将其存储到 Milvus 向量数据库中。RAG 问答管道在处理用户查询时，首先会从向量存储中检索相关文档。然后，这些文档将被用作 LLM 生成其回复的基础文档。我们利用 AIMon 来计算质量得分，并持续监控应用程序的<a href="https://docs.aimon.ai/detectors/hallucination">幻觉</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指令遵守</a>情况和<a href="https://docs.aimon.ai/checker-models/context_relevance">上下文相关性</a>。这也是我们用来定义<code translate="no">quality</code> 分数的 3 个指标。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
@@ -972,5 +972,5 @@ df_scores
     </tr>
   </tbody>
 </table>
-<p>上表总结了我们的结果。实际数字会因各种因素而变化，如 LLM 响应质量的变化、VectorDB 中近邻搜索的性能等。</p>
+<p>上表总结了我们的结果。实际数字会因各种因素（如 LLM 响应质量的变化、VectorDB 中近邻搜索的性能等）而有所不同。</p>
 <p>总之，如下图所示，我们对您的 LLM 应用程序的质量得分、RAG 相关性和指令跟踪能力进行了评估。我们使用 AIMon 的重新排序器提高了应用程序的整体质量以及从您的 RAG 中检索到的文档的平均相关性。</p>

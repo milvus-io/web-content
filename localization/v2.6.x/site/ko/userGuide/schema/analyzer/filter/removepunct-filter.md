@@ -1,11 +1,12 @@
 ---
 id: removepunct-filter.md
-title: 구두점 제거
+title: 구두점 제거Compatible with Milvus 2.5.11+
 summary: >-
   removepunct 필터는 jieba, lindera, icu와 같은 일부 토큰화 도구가 일반적으로 유지하는 구두점, 공백, 줄 바꿈을
   제거합니다. 쉼표, 마침표, 기타 문장 부호가 없는 의미 있는 텍스트 토큰만 포함된 깔끔한 토큰 스트림을 원할 때 이 필터를 사용하세요.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">구두점 제거<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">구두점 제거<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

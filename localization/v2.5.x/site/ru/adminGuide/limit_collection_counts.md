@@ -2,6 +2,7 @@
 id: limit_collection_counts.md
 title: Установите лимиты на количество коллекций
 ---
+
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">Ограничение количества коллекций<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,11 +23,11 @@ title: Установите лимиты на количество коллек�
 <p>Конфигурация зависит от способа установки экземпляра Milvus.</p>
 <ul>
 <li><p>Для экземпляров Milvus, установленных с помощью Helm Charts</p>
-<p>Добавьте конфигурацию в файл <code translate="no">values.yaml</code> в разделе <code translate="no">config</code>. Подробнее см. в разделе <a href="/docs/ru/configure-helm.md">Настройка Milvus с помощью Helm Charts</a>.</p></li>
+<p>Добавьте конфигурацию в файл <code translate="no">values.yaml</code> в разделе <code translate="no">config</code>. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/configure-helm.md">Настройка Milvus с помощью Helm Charts</a>.</p></li>
 <li><p>Для экземпляров Milvus, установленных с помощью Docker Compose</p>
-<p>Добавьте конфигурацию в файл <code translate="no">milvus.yaml</code>, который вы использовали для запуска экземпляра Milvus. Подробнее см. в разделе <a href="/docs/ru/configure-docker.md">Настройка Milvus с помощью Docker Compose</a>.</p></li>
+<p>Добавьте конфигурацию в файл <code translate="no">milvus.yaml</code>, который вы использовали для запуска экземпляра Milvus. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/configure-docker.md">Настройка Milvus с помощью Docker Compose</a>.</p></li>
 <li><p>Для экземпляров Milvus, установленных с помощью Operator</p>
-<p>Добавьте конфигурацию в раздел <code translate="no">spec.components</code> пользовательского ресурса <code translate="no">Milvus</code>. Подробнее см. в разделе <a href="/docs/ru/configure_operator.md">Настройка Milvus с помощью Operator</a>.</p></li>
+<p>Добавьте конфигурацию в раздел <code translate="no">spec.components</code> пользовательского ресурса <code translate="no">Milvus</code>. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/configure_operator.md">Настройка Milvus с помощью Operator</a>.</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Параметры конфигурации<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

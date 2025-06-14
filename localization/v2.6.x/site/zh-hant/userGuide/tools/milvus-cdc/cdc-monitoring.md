@@ -28,8 +28,8 @@ title: 監控
    </span> <span class="img-wrapper"> <span>milvus-cdc-dashboard</span> </span></p>
 <p><strong>關鍵指標說明：</strong></p>
 <ul>
-<li><p><strong>任務</strong>：不同狀態的 CDC 任務數量，包括<strong>Initial</strong>、<strong>Running</strong> 和<strong>Paused</strong>。</p></li>
-<li><p><strong>請求總數</strong>：Milvus-CDC 收到的請求總數。</p></li>
+<li><p><strong>任務</strong>：不同狀態的 CDC 任務數量，包括<strong>初始</strong>、<strong>執行中</strong>和<strong>已暫停</strong>。</p></li>
+<li><p><strong>請求總數</strong>： Milvus-CDC 收到的請求總數。</p></li>
 <li><p><strong>請求成功</strong>：Milvus-CDC 收到的成功請求數目。</p></li>
 <li><p><strong>任務數</strong>：隨著時間的推移，處於<strong>Initial</strong>、<strong>Paused</strong> 及<strong>Running</strong>狀態的任務數量。</p></li>
 <li><p><strong>任務狀態</strong>：個別任務的狀態。</p></li>

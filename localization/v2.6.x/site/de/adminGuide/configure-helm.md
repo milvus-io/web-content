@@ -195,7 +195,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
 </tbody>
 </table>
 </div>
-<p>Weitere Parameter, die speziell für die Kubernetes-Installation gelten, finden Sie unter <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configuration</a>.</p>
+<p>Weitere Parameter speziell für die Kubernetes-Installation finden Sie unter <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configuration</a>.</p>
 <h3 id="Start-Milvus" class="common-anchor-header">Milvus starten</h3><p>Nachdem Sie die Konfigurationsdatei angepasst haben, können Sie Milvus mit dieser Datei starten.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>

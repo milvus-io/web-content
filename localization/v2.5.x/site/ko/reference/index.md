@@ -4,6 +4,7 @@ related_key: index
 summary: Milvus의 인덱스 메커니즘.
 title: 인메모리 인덱스
 ---
+
 <h1 id="In-memory-Index" class="common-anchor-header">인메모리 인덱스<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,9 +20,9 @@ title: 인메모리 인덱스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 항목에서는 Milvus가 지원하는 다양한 유형의 인메모리 인덱스, 각 인덱스가 가장 적합한 시나리오, 사용자가 더 나은 검색 성능을 달성하기 위해 구성할 수 있는 매개변수에 대해 설명합니다. 온디스크 인덱스에 대해서는 <strong><a href="/docs/ko/disk_index.md">온디스크 인덱스를</a></strong> 참조하세요.</p>
+    </button></h1><p>이 항목에서는 Milvus가 지원하는 다양한 유형의 인메모리 인덱스, 각 인덱스가 가장 적합한 시나리오, 사용자가 더 나은 검색 성능을 달성하기 위해 구성할 수 있는 매개변수에 대해 설명합니다. 온디스크 인덱스에 대해서는 <strong><a href="/docs/ko/v2.5.x/disk_index.md">온디스크 인덱스를</a></strong> 참조하세요.</p>
 <p>인덱싱은 데이터를 효율적으로 정리하는 과정으로, 대규모 데이터 세트에서 시간이 오래 걸리는 쿼리를 획기적으로 가속화하여 유사성 검색을 유용하게 만드는 데 중요한 역할을 합니다.</p>
-<p>쿼리 성능을 향상시키기 위해 각 벡터 필드에 <a href="/docs/ko/index-vector-fields.md">인덱스 유형을 지정할</a> 수 있습니다.</p>
+<p>쿼리 성능을 향상시키기 위해 각 벡터 필드에 <a href="/docs/ko/v2.5.x/index-vector-fields.md">인덱스 유형을 지정할</a> 수 있습니다.</p>
 <div class="alert note">
 현재 벡터 필드는 하나의 인덱스 유형만 지원합니다. 밀버스는 인덱스 유형을 전환할 때 이전 인덱스를 자동으로 삭제합니다.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS 벡터 인덱스<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +61,7 @@ title: 인메모리 인덱스
 <div class="filter">
  <a href="#floating">부동 소수점 임베딩</a> <a href="#binary">이진 임베딩</a> <a href="#sparse">스파스 임베딩</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">부동 소수점 임베딩의 인덱스</h3><p>128차원 부동 소수점 임베딩(벡터)의 경우, 임베딩이 차지하는 저장 공간은 128*플로트 크기 = 512바이트입니다. 그리고 부동 소수점 임베딩에 사용되는 <a href="/docs/ko/metric.md">거리 메트릭은</a> 유클리드 거리(<code translate="no">L2</code>)와 내적 곱(<code translate="no">IP</code>)입니다.</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">부동 소수점 임베딩의 인덱스</h3><p>128차원 부동 소수점 임베딩(벡터)의 경우, 임베딩이 차지하는 저장 공간은 128*플로트 크기 = 512바이트입니다. 그리고 부동 소수점 임베딩에 사용되는 <a href="/docs/ko/v2.5.x/metric.md">거리 메트릭은</a> 유클리드 거리(<code translate="no">L2</code>)와 내적 곱(<code translate="no">IP</code>)입니다.</p>
 <p>이러한 유형의 인덱스에는 <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">SCANN</code> 이 포함됩니다.</p>
 </div>
 <div class="filter-binary">
@@ -71,7 +72,7 @@ title: 인메모리 인덱스
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">스파스 임베딩용 인덱스</h3><p>스파스 임베딩용 인덱스는 <code translate="no">IP</code> 및 <code translate="no">BM25</code> (전체 텍스트 검색용) 메트릭만 지원합니다.</p>
 <p>스파스 임베딩에 지원되는 인덱스 유형: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
-<p>Milvus 2.5.4부터 <code translate="no">SPARSE_WAND</code> 은 더 이상 사용되지 않습니다. 대신, 호환성을 유지하면서 동등성을 위해 <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 을 사용하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md#Set-index-params-for-vector-field">스파스 벡터를</a> 참조하세요.</p>
+<p>Milvus 2.5.4부터 <code translate="no">SPARSE_WAND</code> 은 더 이상 사용되지 않습니다. 대신, 호환성을 유지하면서 동등성을 위해 <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 을 사용하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">스파스 벡터를</a> 참조하세요.</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
@@ -247,7 +248,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[선택 사항] 선택한 거리 메트릭입니다.</td><td><a href="/docs/ko/metric.md">지원되는 메트릭을</a> 참조하십시오.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[선택 사항] 선택한 거리 메트릭입니다.</td><td><a href="/docs/ko/v2.5.x/metric.md">지원되는 메트릭을</a> 참조하십시오.</td></tr>
 </tbody>
 </table>
 </li>
@@ -537,7 +538,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[선택 사항] 선택한 거리 메트릭입니다.</td><td><a href="/docs/ko/metric.md">지원되는 메트릭을</a> 참조하십시오.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[선택 사항] 선택한 거리 메트릭입니다.</td><td><a href="/docs/ko/v2.5.x/metric.md">지원되는 메트릭을</a> 참조하십시오.</td></tr>
 </tbody>
 </table>
 </li>
@@ -591,7 +592,7 @@ title: 인메모리 인덱스
 <tr><th>매개변수</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md#Set-index-params-for-vector-field">스파스 벡터를</a> 참조하세요.</td><td><code translate="no">DAAT_MAXSCORE</code> (기본값), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">스파스 벡터를</a> 참조하세요.</td><td><code translate="no">DAAT_MAXSCORE</code> (기본값), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 <tr><td><code translate="no">bm25_k1</code></td><td>용어 빈도 포화도를 제어합니다. 값이 클수록 문서 순위에서 용어 빈도의 중요도가 높아집니다.</td><td>[1.2, 2.0]</td></tr>
 <tr><td><code translate="no">bm25_b</code></td><td>문서 길이가 정규화되는 정도를 제어합니다. 기본값은 0.75입니다.</td><td>[0, 1]</td></tr>
 </tbody>
@@ -651,5 +652,5 @@ title: 인메모리 인덱스
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus에서 지원되는 <a href="/docs/ko/metric.md">유사성 지표에</a> 대해 자세히 알아보세요.</li>
+<li>Milvus에서 지원되는 <a href="/docs/ko/v2.5.x/metric.md">유사성 지표에</a> 대해 자세히 알아보세요.</li>
 </ul>

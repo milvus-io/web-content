@@ -3,6 +3,7 @@ id: chinese-analyzer.md
 title: 中国語
 summary: 中国語アナライザーは、中国語テキストを処理するために特別に設計されており、効果的なセグメンテーションとトークン化を提供する。
 ---
+
 <h1 id="Chinese" class="common-anchor-header">中国語<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,8 +22,8 @@ summary: 中国語アナライザーは、中国語テキストを処理する�
     </button></h1><p><code translate="no">chinese</code> アナライザーは中国語テキストを処理するために特別に設計されており、効果的なセグメンテーションとトークン化を提供します。</p>
 <h3 id="Definition" class="common-anchor-header">定義</h3><p><code translate="no">chinese</code> アナライザーは次のように構成されています：</p>
 <ul>
-<li><p><strong>トークン化</strong>：<code translate="no">jieba</code> トークナイザを使用して、語彙と文脈に基づいて中国語テキストをトークンにセグメンテーションする。詳細は<a href="/docs/ja/jieba-tokenizer.md">Jieba</a> を参照。</p></li>
-<li><p><strong>フィルタ</strong>：<code translate="no">cnalphanumonly</code> フィルタを使用して、中国語以外の文字を含むトークンを削除します。詳細については、<a href="/docs/ja/cnalphanumonly-filter.md">Cnalphanumonlyを</a>参照してください。</p></li>
+<li><p><strong>トークン化</strong>：<code translate="no">jieba</code> トークナイザを使用して、語彙と文脈に基づいて中国語テキストをトークンにセグメンテーションする。詳細は<a href="/docs/ja/v2.5.x/jieba-tokenizer.md">Jieba</a> を参照。</p></li>
+<li><p><strong>フィルタ</strong>：<code translate="no">cnalphanumonly</code> フィルタを使用して、中国語以外の文字を含むトークンを削除します。詳細については、<a href="/docs/ja/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonlyを</a>参照してください。</p></li>
 </ul>
 <p><code translate="no">chinese</code> アナライザーの機能は、以下のカスタム・アナライザー・コンフィギュレーションと同等です：</p>
 <div class="multipleCode">
@@ -52,6 +53,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Configuration" class="common-anchor-header">構成</h3><p><code translate="no">chinese</code> アナライザーをフィールドに適用するには、<code translate="no">analyzer_params</code> で<code translate="no">type</code> を<code translate="no">chinese</code> に設定するだけです。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -122,6 +124,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是一个高性能、可扩
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

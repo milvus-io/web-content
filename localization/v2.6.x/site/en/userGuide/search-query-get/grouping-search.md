@@ -213,9 +213,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">data</span>: [query_vector],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">group_by_field</span>: <span class="hljs-string">&quot;docId&quot;</span>
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">group_by_field</span>: <span class="hljs-string">&quot;docId&quot;</span></span>
 })
 
 <span class="hljs-comment">// Retrieve the values in the `docId` column</span>
@@ -361,10 +359,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <span class="hljs-attr">data</span>: [query_vector],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
     <span class="hljs-attr">group_by_field</span>: <span class="hljs-string">&quot;docId&quot;</span>,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">group_size</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">strict_group_size</span>: <span class="hljs-literal">true</span>
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">group_size</span>: <span class="hljs-number">2</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">strict_group_size</span>: <span class="hljs-literal">true</span></span>
 })
 
 <span class="hljs-comment">// Retrieve the values in the `docId` column</span>

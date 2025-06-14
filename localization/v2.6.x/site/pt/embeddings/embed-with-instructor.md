@@ -23,7 +23,7 @@ title: Instrutor
         ></path>
       </svg>
     </button></h1><p><a href="https://instructor-embedding.github.io/">O Instructor</a> é um modelo de incorporação de texto ajustado por instruções que pode gerar incorporação de texto adaptada a qualquer tarefa (por exemplo, classificação, recuperação, agrupamento, avaliação de texto, etc.) e domínios (por exemplo, ciência, finanças, etc.) fornecendo simplesmente as instruções da tarefa, sem qualquer ajuste fino.</p>
-<p>O Milvus integra-se com os modelos de incorporação do Instructor através da classe InstructorEmbeddingFunction. Esta classe fornece métodos para codificar documentos e consultas utilizando os modelos de incorporação do Instructor e devolver as incorporações como vectores densos compatíveis com a indexação Milvus.</p>
+<p>O Milvus integra-se com os modelos de incorporação do Instructor através da classe InstructorEmbeddingFunction. Esta classe fornece métodos para codificar documentos e consultas utilizando os modelos de incorporação do Instructor e devolver as incorporações como vectores densos compatíveis com a indexação do Milvus.</p>
 <p>Para utilizar esta funcionalidade, instale as dependências necessárias:</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -44,7 +44,7 @@ ef = InstructorEmbeddingFunction(
 <li><p><code translate="no">query_instruction</code> <em>(string</em>)</p>
 <p>Instrução específica da tarefa que orienta o modelo sobre como gerar uma incorporação para uma consulta ou pergunta.</p></li>
 <li><p><code translate="no">doc_instruction</code> <em>(string</em>)</p>
-<p>Instrução específica da tarefa que orienta o modelo a gerar uma incorporação para um documento.</p></li>
+<p>Instrução específica da tarefa que orienta o modelo para gerar uma incorporação para um documento.</p></li>
 </ul>
 <p>Para criar embeddings para documentos, utilize o método <code translate="no">encode_documents()</code>:</p>
 <pre><code translate="no" class="language-python">docs = [

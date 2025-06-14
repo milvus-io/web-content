@@ -5,6 +5,7 @@ summary: >-
   RBAC（基于角色的访问控制）是一种基于角色的访问控制方法。通过 RBAC，可以精细控制用户在
   Collections、数据库和实例级别上可以执行的操作，增强数据的安全性。
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">RBAC 解释<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,9 +68,9 @@ summary: >-
       </svg>
     </button></h2><p>要通过 RBAC 实现访问控制，需要遵循以下步骤：</p>
 <ol>
-<li><p><strong><a href="/docs/zh/users_and_roles.md#Create-a-user">创建用户</a></strong>：除了 Milvus 中的默认用户<code translate="no">root</code> 外，您还可以创建新用户并设置密码，以保护数据安全。</p></li>
-<li><p><strong><a href="/docs/zh/users_and_roles.md#Create-a-role">创建角色</a></strong>：您可以根据需要创建自定义角色。角色的具体功能由其权限决定。</p></li>
-<li><p><strong><a href="/docs/zh/privilege_group.md">创建权限组</a></strong>：将多个权限合并为一个权限组，以简化向角色授予权限的流程。</p></li>
-<li><p><strong><a href="/docs/zh/grant_privileges.md">向角色授予权限或权限组</a></strong>：通过向角色授予权限或权限组来定义角色的功能。</p></li>
-<li><p><strong><a href="/docs/zh/grant_roles.md">向用户授予角色</a></strong>：向用户授予具有特定权限的角色，这样用户就可以拥有某个角色的权限。一个角色可以授予多个用户。</p></li>
+<li><p><strong><a href="/docs/zh/v2.5.x/users_and_roles.md#Create-a-user">创建用户</a></strong>：除了 Milvus 中的默认用户<code translate="no">root</code> 外，您还可以创建新用户并设置密码，以保护数据安全。</p></li>
+<li><p><strong><a href="/docs/zh/v2.5.x/users_and_roles.md#Create-a-role">创建角色</a></strong>：您可以根据需要创建自定义角色。角色的具体功能由其权限决定。</p></li>
+<li><p><strong><a href="/docs/zh/v2.5.x/privilege_group.md">创建权限组</a></strong>：将多个权限合并为一个权限组，以简化向角色授予权限的流程。</p></li>
+<li><p><strong><a href="/docs/zh/v2.5.x/grant_privileges.md">向角色授予权限或权限组</a></strong>：通过向角色授予权限或权限组来定义角色的功能。</p></li>
+<li><p><strong><a href="/docs/zh/v2.5.x/grant_roles.md">向用户授予角色</a></strong>：向用户授予具有特定权限的角色，这样用户就可以拥有某个角色的权限。一个角色可以授予多个用户。</p></li>
 </ol>

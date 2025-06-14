@@ -6,6 +6,7 @@ summary: >-
   是领先的开源搜索引擎。然而，它在现代人工智能应用中面临着各种挑战，包括更新成本高、实时性差、分片管理效率低、非云原生设计以及资源需求过高。作为云原生向量数据库，Milvus
   通过解耦存储和计算、高效的高维数据索引以及与现代基础设施的无缝集成，克服了这些问题。它为人工智能工作负载提供了卓越的性能和可扩展性。
 ---
+
 <h1 id="Elasticsearch-Queries-to-Milvus" class="common-anchor-header">Elasticsearch 查询到 Milvus<button data-href="#Elasticsearch-Queries-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +51,7 @@ summary: >-
      <td colspan="3"><p><strong>全文查询</strong></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Match-query">匹配查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Match-query">匹配查询</a></p></td>
      <td><p>全文搜索</p></td>
      <td><p>两者提供类似的功能。</p></td>
    </tr>
@@ -58,32 +59,32 @@ summary: >-
      <td colspan="3"><p><strong>术语级查询</strong></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#IDs">ID</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#IDs">ID</a></p></td>
      <td><p><code translate="no">in</code> 操作符</p></td>
      <td rowspan="6"><p>在过滤器上下文中使用这些 Elasticsearch 查询时，两者都能提供相同或类似的功能。</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Prefix-query">前缀查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Prefix-query">前缀查询</a></p></td>
      <td><p><code translate="no">like</code> 操作符</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Range-query">范围查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Range-query">范围查询</a></p></td>
      <td><p>比较操作符，如<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;=</code>, 和<code translate="no">&lt;=</code></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Term-query">术语查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Term-query">术语查询</a></p></td>
      <td><p>比较操作符，如<code translate="no">==</code></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Terms-query">术语查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Terms-query">术语查询</a></p></td>
      <td><p><code translate="no">in</code> 操作符</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Wildcard-query">通配符查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Wildcard-query">通配符查询</a></p></td>
      <td><p><code translate="no">like</code> 操作符</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Boolean-query">布尔查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Boolean-query">布尔查询</a></p></td>
      <td><p>逻辑操作符，如<code translate="no">AND</code></p></td>
      <td><p>在过滤器上下文中使用时，这两种操作符都能提供类似的功能。</p></td>
    </tr>
@@ -91,12 +92,12 @@ summary: >-
      <td colspan="3"><p><strong>向量查询</strong></p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Knn-query">kNN 查询</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Knn-query">kNN 查询</a></p></td>
      <td><p>搜索</p></td>
      <td><p>Milvus 提供更高级的向量搜索功能。</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/zh/elasticsearch-queries-to-milvus.md#Reciprocal-rank-fusion">互易等级融合</a></p></td>
+     <td><p><a href="/docs/zh/v2.5.x/elasticsearch-queries-to-milvus.md#Reciprocal-rank-fusion">互易等级融合</a></p></td>
      <td><p>混合搜索</p></td>
      <td><p>Milvus 支持多种 Rerankers 策略。</p></td>
    </tr>
@@ -130,6 +131,7 @@ summary: >-
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Milvus 通过全文搜索功能提供了相同的功能。你可以按如下方式将上述 Elasticsearch 查询转换为 Milvus 查询：</p>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -139,7 +141,7 @@ summary: >-
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的示例中，<code translate="no">message_sparse</code> 是一个稀疏向量字段，由名为<code translate="no">message</code> 的 VarChar 字段衍生而来。Milvus 使用 BM25 嵌入模型将<code translate="no">message</code> 字段中的值转换为稀疏向量嵌入，并将其存储在<code translate="no">message_sparse</code> 字段中。收到搜索请求后，Milvus 会使用相同的 BM25 模型嵌入纯文本查询有效载荷，并执行稀疏向量搜索，然后返回<code translate="no">output_fields</code> 参数中指定的<code translate="no">id</code> 和<code translate="no">message</code> 字段以及相应的相似性分数。</p>
-<p>要使用此功能，必须在<code translate="no">message</code> 字段上启用分析器，并定义一个函数从中导出<code translate="no">message_sparse</code> 字段。有关启用分析器和在 Milvus 中创建派生函数的详细说明，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
+<p>要使用此功能，必须在<code translate="no">message</code> 字段上启用分析器，并定义一个函数从中导出<code translate="no">message_sparse</code> 字段。有关启用分析器和在 Milvus 中创建派生函数的详细说明，请参阅<a href="/docs/zh/v2.5.x/full-text-search.md">全文搜索</a>。</p>
 <h2 id="Term-level-queries" class="common-anchor-header">术语级查询<button data-href="#Term-level-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -183,12 +185,13 @@ res = client.query(
 
 <span class="hljs-comment"># Use the ids parameter</span>
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    ids=[<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">100</span>],
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+ids=[<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">100</span>],
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">本页</a>找到 Elasticsearch 示例。有关查询和获取请求以及 Milvus 中过滤器表达式的详细信息，请参阅<a href="/docs/zh/get-and-scalar-query.md">查询</a>和<a href="/docs/zh/filtering">过滤</a>。</p>
+
+<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">本页</a>找到 Elasticsearch 示例。有关查询和获取请求以及 Milvus 中过滤器表达式的详细信息，请参阅<a href="/docs/zh/v2.5.x/get-and-scalar-query.md">查询</a>和<a href="/docs/zh/v2.5.x/filtering">过滤</a>。</p>
 <h3 id="Prefix-query" class="common-anchor-header">前缀查询</h3><p>在 Elasticsearch 中，你可以在过滤器上下文中查找在所提供字段中包含特定前缀的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
@@ -205,6 +208,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在 Milvus 中，你可以按如下方式查找其值以指定前缀开头的实体：</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -212,7 +216,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中<code translate="no">like</code> 操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">使用 </a><code translate="no">LIKE</code><a href="/docs/zh/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> 进行模式匹配</a>。</p>
+<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中<code translate="no">like</code> 操作符的详细信息，请参阅<a href="/docs/zh/v2.5.x/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">使用 </a><code translate="no">LIKE</code><a href="/docs/zh/v2.5.x/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> 进行模式匹配</a>。</p>
 <h3 id="Range-query" class="common-anchor-header">范围查询</h3><p>在 Elasticsearch 中，您可以查找包含所提供范围内术语的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
@@ -230,6 +234,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在 Milvus 中，你可以按如下方式查找特定字段中的值在所提供范围内的实体：</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -237,7 +242,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中比较操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Comparison-operators">比较操作符</a>。</p>
+<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中比较操作符的详细信息，请参阅<a href="/docs/zh/v2.5.x/basic-operators.md#Comparison-operators">比较操作符</a>。</p>
 <h3 id="Term-query" class="common-anchor-header">术语查询</h3><p>在 Elasticsearch 中，你可以查找在所提供字段中包含<strong>精确</strong>术语的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
@@ -254,6 +259,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在 Milvus 中，您可以按如下方式查找指定字段中的值正好是指定术语的实体：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use ==</span>
 res = client.query(
@@ -264,12 +270,13 @@ res = client.query(
 
 <span class="hljs-comment"># use TEXT_MATCH</span>
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;TEXT_MATCH(status, &quot;retired&quot;)&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;TEXT_MATCH(status, &quot;retired&quot;)&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中比较操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Comparison-operators">比较操作符</a>。</p>
+
+<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中比较操作符的详细信息，请参阅<a href="/docs/zh/v2.5.x/basic-operators.md#Comparison-operators">比较操作符</a>。</p>
 <h3 id="Terms-query" class="common-anchor-header">术语查询</h3><p>在 Elasticsearch 中，你可以查找在所提供字段中包含一个或多个<strong>精确</strong>术语的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
@@ -287,6 +294,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Milvus 没有与此完全等价的词。不过，您可以按如下方式查找指定字段中的值为指定术语之一的实体：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use in</span>
 res = client.query(
@@ -297,12 +305,13 @@ res = client.query(
 
 <span class="hljs-comment"># use TEXT_MATCH</span>
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;TEXT_MATCH(degree, &quot;graduate post-graduate&quot;)&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;degree&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;TEXT_MATCH(degree, &quot;graduate post-graduate&quot;)&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;degree&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中范围操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Range-operators">范围操作符</a>。</p>
+
+<p>您可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中范围操作符的详细信息，请参阅<a href="/docs/zh/v2.5.x/basic-operators.md#Range-operators">范围操作符</a>。</p>
 <h3 id="Wildcard-query" class="common-anchor-header">通配符查询</h3><p>在 Elasticsearch 中，你可以查找包含与通配符模式匹配的术语的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
@@ -319,6 +328,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Milvus 在过滤条件中不支持通配符。不过，你可以使用<code translate="no">like</code> 操作符来实现类似的效果，如下所示：</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -326,7 +336,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中范围操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Range-operators">范围操作符</a>。</p>
+<p>您可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中范围操作符的详细信息，请参阅<a href="/docs/zh/v2.5.x/basic-operators.md#Range-operators">范围操作符</a>。</p>
 <h2 id="Boolean-query" class="common-anchor-header">布尔查询<button data-href="#Boolean-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -362,15 +372,17 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在 Milvus 中，你可以做类似的事情，如下所示：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = 
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> =
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;user like &quot;%kimchy%&quot; AND ARRAY_CONTAINS(tags, &quot;production&quot;)&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;user like &quot;%kimchy%&quot; AND ARRAY_CONTAINS(tags, &quot;production&quot;)&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>上面的示例假定在目标 Collections 中有一个<strong>VarChar</strong>类型的<code translate="no">user</code> 字段和一个<strong>Array</strong>类型的<code translate="no">tags</code> 字段。查询将返回名称中包含<code translate="no">kimchy</code> 的用户，并带有<code translate="no">production</code> 标记。</p>
 <h2 id="Vector-queries" class="common-anchor-header">向量查询<button data-href="#Vector-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -406,6 +418,7 @@ res = client.query(
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>作为专门的向量数据库，Milvus 使用索引类型来优化向量搜索。通常，它优先考虑对高维向量数据进行近似近邻（ANN）搜索。虽然使用 FLAT 索引类型的暴力 kNN 搜索能得到精确的结果，但它既耗时又耗资源。相比之下，使用 AUTOINDEX 或其他索引类型的 ANN 搜索能在速度和精确度之间取得平衡，其性能明显比 kNN 更快、更节省资源。</p>
 <p>在 Mlivus 中，与上述向量查询类似的等价关系是这样的：</p>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -415,7 +428,7 @@ res = client.query(
     limit=<span class="hljs-number">10</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中 ANN 搜索的详细信息，请阅读<a href="/docs/zh/single-vector-search.md">基本 ANN 搜索</a>。</p>
+<p>您可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中 ANN 搜索的详细信息，请阅读<a href="/docs/zh/v2.5.x/single-vector-search.md">基本 ANN 搜索</a>。</p>
 <h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">互惠排名融合</h3><p>Elasticsearch 提供互惠排名融合 (RRF)，可将具有不同相关性指标的多个结果集合并为一个排名结果集。</p>
 <p>下面的示例演示了如何将传统的基于术语的搜索与 k-nearest neighbors (kNN) 向量搜索相结合，以提高搜索相关性：</p>
 <pre><code translate="no" class="language-python">client.search(
@@ -456,7 +469,7 @@ res = client.query(
 <li><p>使用提供的查询向量对<code translate="no">vector</code> 字段进行 kNN 检索。</p></li>
 </ul>
 <p>每个检索器最多可贡献 50 个最匹配结果，RRF 会对这些结果进行重新排序，并返回最终的前 10 个结果。</p>
-<p>在 Milvus 中，您可以通过组合多个向量字段的搜索、应用重新排序策略并从组合列表中检索前 K 结果来实现类似的混合搜索。Milvus 支持 RRF 和加权重排序策略。更多详情，请参阅<a href="/docs/zh/reranking.md">Rerankers</a>。</p>
+<p>在 Milvus 中，您可以通过组合多个向量字段的搜索、应用重新排序策略并从组合列表中检索前 K 结果来实现类似的混合搜索。Milvus 支持 RRF 和加权重排序策略。更多详情，请参阅<a href="/docs/zh/v2.5.x/reranking.md">Rerankers</a>。</p>
 <p>下面是上述 Elasticsearch 示例在 Milvus 中的非严格等价。</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],
@@ -468,26 +481,27 @@ res = client.query(
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">100</span>
 }
 
-req_dense = ANNSearchRequest(**search_params_dense)
+req_dense = ANNSearchRequest(\*\*search_params_dense)
 
 search_params_sparse = {
-    <span class="hljs-string">&quot;data&quot;</span>: [<span class="hljs-string">&quot;shoes&quot;</span>],
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>}
-    }
+<span class="hljs-string">&quot;data&quot;</span>: [<span class="hljs-string">&quot;shoes&quot;</span>],
+<span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
+<span class="hljs-string">&quot;param&quot;</span>: {
+<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>}
+}
 }
 
-req_sparse = ANNSearchRequest(**search_params_sparse)
+req_sparse = ANNSearchRequest(\*\*search_params_sparse)
 
 res = client.hybrid_search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    reqs=[req_dense, req_sparse],
-    reranker=RRFRanker(),
-    limit=<span class="hljs-number">10</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+reqs=[req_dense, req_sparse],
+reranker=RRFRanker(),
+limit=<span class="hljs-number">10</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>该示例演示了 Milvus 中的混合搜索，它结合了以下内容：</p>
 <ol>
 <li><p><strong>密集向量搜索</strong>：使用内积（IP）度量，将<code translate="no">nprobe</code> 设置为 10，在<code translate="no">vector</code> 字段上进行近似近邻（ANN）搜索。</p></li>

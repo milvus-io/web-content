@@ -4,6 +4,7 @@ title: 位图
 related_key: bitmap
 summary: 位图索引是一种高效的索引技术，旨在提高低 Cardinal 标量字段的查询性能。
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">位图<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,8 +85,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在本例中，我们在<code translate="no">my_collection</code> Collections 的<code translate="no">category</code> 字段上创建位图索引。<code translate="no">add_index()</code> 方法用于指定字段名称、索引类型和索引名称。</p>
-<p>位图索引创建后，您可以在查询操作中使用<code translate="no">filter</code> 参数，根据索引字段执行标量过滤。这样就可以使用位图索引有效地缩小搜索结果的范围。更多信息，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>
+<p>位图索引创建后，您可以在查询操作中使用<code translate="no">filter</code> 参数，根据索引字段执行标量过滤。这样就可以使用位图索引有效地缩小搜索结果的范围。更多信息，请参阅<a href="/docs/zh/v2.5.x/boolean.md">元数据过滤</a>。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

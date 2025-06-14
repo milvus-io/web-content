@@ -205,9 +205,9 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>يتيح تعيين الذاكرة (Mmap) الوصول المباشر للذاكرة إلى الملفات الكبيرة على القرص، مما يسمح لـ Milvus بتخزين الفهارس والبيانات في كل من الذاكرة والأقراص الصلبة. يساعد هذا النهج في تحسين سياسة وضع البيانات استناداً إلى تكرار الوصول، مما يزيد من سعة التخزين للمجموعات دون التأثير على أداء البحث.</p>
-<p>يفترض المثال التالي أن المجموعة تحتوي على حقل باسم <code translate="no">doc_chunk</code> ويقوم بتعيين خاصية <code translate="no">mmap_enabled</code> الخاصة به.</p>
+<p>يفترض المثال التالي أن المجموعة تحتوي على حقل باسم <code translate="no">doc_chunk</code> ويقوم بتعيين الخاصية <code translate="no">mmap_enabled</code> الخاصة به.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
     collection=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,

@@ -148,7 +148,7 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>quotaAndLimits.ddl.enabled</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.indexRate.enabledを有効にする</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.flushRateが有効</td><td>FALSE</td></tr>
-<tr><td>quotaAndLimits.compactionRateが有効</td><td>FALSE</td></tr>
+<tr><td>quotaAndLimits.compactionRate.enabledを有効にする</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.dml.enabledを有効にする</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.dql.enabledが有効</td><td>FALSE</td></tr>
 <tr><td>quotaAndLimits.limits.collection.maxNum</td><td>64</td></tr>

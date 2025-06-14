@@ -35,14 +35,14 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
       </svg>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
-  <a href="/docs/install_standalone-docker.md">
+  <a href="/docs/v2.5.x/install_standalone-docker.md">
     <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
     <p class="link-btn">Install Milvus</p>
   </a>
   <p>Learn how to install Milvus using either Docker Compose or on Kubernetes.</p>
 </div>
 <div class="start_card_container">
-  <a href="/docs/quickstart.md">
+  <a href="/docs/v2.5.x/quickstart.md">
     <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
     <p class="link-btn">Quick Start</p>
   </a>
@@ -77,31 +77,31 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
 <div class="recomment-item">
   <p>Use</p>
 <ul>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert, and Delete</a></li>
-<li><a href="/docs/index-vector-fields.md">Index Vector Fields</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/get-and-scalar-query.md">Get & Scalar Query</a></li>
+<li><a href="/docs/v2.5.x/manage-collections.md">Manage Collections</a></li>
+<li><a href="/docs/v2.5.x/insert-update-delete.md">Insert, Upsert, and Delete</a></li>
+<li><a href="/docs/v2.5.x/index-vector-fields.md">Index Vector Fields</a></li>
+<li><a href="/docs/v2.5.x/single-vector-search.md">Single-Vector Search</a></li>
+<li><a href="/docs/v2.5.x/get-and-scalar-query.md">Get & Scalar Query</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Deploy</p>
 <ul>
-<li><a href="/docs/configure-docker.md">Configure Milvus</a></li>
-<li><a href="/docs/deploy_s3.md">Manage Dependencies</a></li>
-<li><a href="/docs/eks.md">Deploy on Clouds</a></li>
-<li><a href="/docs/scaleout.md">Scale a Milvus Cluster</a></li>
-<li><a href="/docs/monitor_overview.md">Monitor and Alert</a></li>
+<li><a href="/docs/v2.5.x/configure-docker.md">Configure Milvus</a></li>
+<li><a href="/docs/v2.5.x/deploy_s3.md">Manage Dependencies</a></li>
+<li><a href="/docs/v2.5.x/eks.md">Deploy on Clouds</a></li>
+<li><a href="/docs/v2.5.x/scaleout.md">Scale a Milvus Cluster</a></li>
+<li><a href="/docs/v2.5.x/monitor_overview.md">Monitor and Alert</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Learn</p>
 <ul>
-<li><a href="/docs/system_configuration.md">System Configuration</a></li>
-<li><a href="/docs/architecture_overview.md">Architecture Overview</a></li>
-<li><a href="/docs/index.md">Vector Index</a></li>
-<li><a href="/docs/metric.md">Similarity Metrics</a></li>
-<li><a href="/docs/glossary.md">Glossary</a></li>
+<li><a href="/docs/v2.5.x/system_configuration.md">System Configuration</a></li>
+<li><a href="/docs/v2.5.x/architecture_overview.md">Architecture Overview</a></li>
+<li><a href="/docs/v2.5.x/index.md">Vector Index</a></li>
+<li><a href="/docs/v2.5.x/metric.md">Similarity Metrics</a></li>
+<li><a href="/docs/v2.5.x/glossary.md">Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -123,10 +123,10 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
       </svg>
     </button></h2><p><em>Nov 2024 - Milvus 2.5.0 release</em></p>
 <ul>
-<li>Added guidance on how to <a href="/docs/full-text-search.md">conduct full text search</a>.</li>
-<li>Added guidance on how to <a href="/docs/keyword-match.md">conduct text match</a>.</li>
-<li>Added guidance on how to <a href="/docs/nullable-and-default.md">enable nullable and default values</a>.</li>
-<li>Added descriptions of <a href="/docs/analyzer-overview.md">analyzers</a>.</li>
-<li>Added descriptions of <a href="/docs/bitmap.md">bitmap indexes</a>.</li>
+<li>Added guidance on how to <a href="/docs/v2.5.x/full-text-search.md">conduct full text search</a>.</li>
+<li>Added guidance on how to <a href="/docs/v2.5.x/keyword-match.md">conduct text match</a>.</li>
+<li>Added guidance on how to <a href="/docs/v2.5.x/nullable-and-default.md">enable nullable and default values</a>.</li>
+<li>Added descriptions of <a href="/docs/v2.5.x/analyzer-overview.md">analyzers</a>.</li>
+<li>Added descriptions of <a href="/docs/v2.5.x/bitmap.md">bitmap indexes</a>.</li>
 </ul>
 </div>

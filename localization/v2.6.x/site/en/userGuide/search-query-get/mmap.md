@@ -330,8 +330,7 @@ index_params = MilvusClient.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;title&quot;</span>,
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+<span class="highlighted-wrapper-line">    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }</span>
 )
 
 <span class="hljs-comment"># Change mmap settings for an index</span>

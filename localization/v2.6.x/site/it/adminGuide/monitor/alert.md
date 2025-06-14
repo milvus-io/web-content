@@ -127,6 +127,6 @@ summary: Scoprite come creare un avviso per i servizi Milvus in Grafana.
 <li>Imparate ad <a href="/docs/it/allocate.md#standalone">allocare le risorse</a></li>
 </ul></li>
 <li>Se cercate informazioni su come scalare un cluster Milvus:<ul>
-<li>Imparate a <a href="/docs/it/scaleout.md">scalare un cluster Milvus</a></li>
+<li>Imparare a <a href="/docs/it/scaleout.md">scalare un cluster Milvus</a></li>
 </ul></li>
 </ul>

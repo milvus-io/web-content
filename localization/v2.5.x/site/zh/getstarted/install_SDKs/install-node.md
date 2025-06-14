@@ -5,6 +5,7 @@ related_key: SDK
 summary: 了解如何安装 Milvus 的 Node.js SDK。
 title: 安装 Milvus Nodejs SDK
 ---
+
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">安装 Milvus Nodejs SDK<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,11 +109,11 @@ yarn add @zilliz/milvus2-sdk-node
 <li><p>查看<a href="https://github.com/milvus-io/milvus-sdk-node">Milvus node.js SDK 快速入门</a></p></li>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.5.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.5.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.5.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p>探索<a href="/api-reference/node/v2.4.x/About.md">Milvus Node.js 应用程序接口参考</a></p></li>
 </ul>

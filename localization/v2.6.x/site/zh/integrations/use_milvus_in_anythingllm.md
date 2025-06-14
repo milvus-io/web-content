@@ -81,7 +81,7 @@ title: 在 AnythingLLM 中使用 Milvus
 <li><p>填写 Milvus 连接详情（本地 Milvus）。下面是一个例子：</p>
 <ul>
 <li><strong>Milvus DB 地址</strong>：<code translate="no">http://localhost:19530</code></li>
-<li><strong>Milvus 用户名</strong>：<code translate="no">root</code></li>
+<li><strong>Milvus 用户名：</strong> <code translate="no">root</code></li>
 <li><strong>Milvus 密码：</strong> <code translate="no">Milvus</code>
 
   

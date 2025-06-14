@@ -1,9 +1,7 @@
 ---
 id: privilege_group.md
 title: 特権グループの作成
-summary: >-
-  To streamline the process of granting privileges, it is recommended that you
-  combine multiple privileges into a privilege group.
+summary: 権限付与のプロセスを効率化するために、複数の権限を権限グループにまとめることをお勧めします。
 ---
 <h1 id="Create-Privilege-Group" class="common-anchor-header">特権グループの作成<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -565,7 +563,7 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">特権グループの一覧表示</h3><p>以下の例では、既存の特権グループをすべて一覧表示する方法を示します。</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">特権グループの一覧表示</h3><p>以下の例では、既存のすべての特権グループを一覧表示する方法を示します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

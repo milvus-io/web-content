@@ -3,6 +3,7 @@ id: standard-tokenizer.md
 title: 標準標記器
 summary: Milvus 中的標準 tokenizer 會根據空格和標點符號分割文字，因此適用於大多數語言。
 ---
+
 <h1 id="Standard-Tokenizer" class="common-anchor-header">標準標記器<button data-href="#Standard-Tokenizer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,9 +84,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>若要更簡單的設定，您可以選擇使用<code translate="no">standard</code> <a href="/docs/zh-hant/standard-analyzer.md">分析器</a>，它結合了<code translate="no">standard</code> tokenizer 與<code translate="no">lowercase</code><a href="/docs/zh-hant/lowercase-filter.md"> 過濾器</a>。</p>
+<p>若要更簡單的設定，您可以選擇使用<code translate="no">standard</code> <a href="/docs/zh-hant/v2.5.x/standard-analyzer.md">分析器</a>，它結合了<code translate="no">standard</code> tokenizer 與<code translate="no">lowercase</code><a href="/docs/zh-hant/v2.5.x/lowercase-filter.md"> 過濾器</a>。</p>
 </div>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以達到有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器來處理該欄位中的文字，以達到有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,6 +135,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

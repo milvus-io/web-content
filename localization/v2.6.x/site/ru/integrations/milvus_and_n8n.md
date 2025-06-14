@@ -124,5 +124,5 @@ title: Начало работы с Milvus и n8n
 <h3 id="Related-Resources" class="common-anchor-header">Связанные ресурсы</h3><ul>
 <li><a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">Документация по интеграции n8n Milvus</a></li>
 <li><a href="https://js.langchain.com/docs/integrations/vectorstores/milvus/">Документация по LangChain Milvus</a></li>
-<li><a href="https://docs.n8n.io/advanced-ai/">Документация n8n Advanced AI</a></li>
+<li><a href="https://docs.n8n.io/advanced-ai/">Документация по расширенному искусственному интеллекту n8n</a></li>
 </ul>

@@ -173,7 +173,7 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
 <p>Per migrare lo storage dei messaggi da RocksMQ a NATS, procedere come segue:</p>
 <ol>
 <li><p>Interrompere tutte le operazioni DDL.</p></li>
-<li><p>Chiamare l'API FlushAll e arrestare Milvus al termine dell'esecuzione della chiamata API.</p></li>
+<li><p>Richiamare l'API FlushAll e arrestare Milvus al termine dell'esecuzione della chiamata API.</p></li>
 <li><p>Cambiare <code translate="no">msgStreamType</code> in <code translate="no">natsmq</code> e apportare le modifiche necessarie alle impostazioni NATS in <code translate="no">spec.dependencies.natsmq</code>.</p></li>
 <li><p>Avviare nuovamente Milvus e verificare se:</p>
 <ul>
@@ -184,7 +184,7 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
 </ol>
 <div class="alert note">
 <p><strong>Scegliere tra RocksMQ e NATS?</strong></p>
-<p>RockMQ usa CGO per interagire con RocksDB e gestisce la memoria da solo, mentre il NATS puro di Go incorporato nell'installazione di Milvus delega la gestione della memoria al garbage collector (GC) di Go.</p>
+<p>RockMQ usa CGO per interagire con RocksDB e gestisce la memoria da solo, mentre il NATS puro di Go incorporato nell'installazione Milvus delega la gestione della memoria al garbage collector (GC) di Go.</p>
 <p>Nello scenario in cui il pacchetto di dati è più piccolo di 64 kb, RocksDB ha prestazioni migliori in termini di utilizzo della memoria, della CPU e del tempo di risposta. D'altra parte, se il pacchetto di dati è superiore a 64 kb, NATS eccelle in termini di tempo di risposta con una memoria sufficiente e una pianificazione GC ideale.</p>
 <p>Attualmente, si consiglia di utilizzare NATS solo per gli esperimenti.</p>
 </div>
@@ -203,7 +203,7 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar gestisce i log delle modifiche recenti, produce i log dei flussi e fornisce sottoscrizioni ai log. La configurazione di Pulsar per l'archiviazione dei messaggi è supportata sia in Milvus standalone che in Milvus cluster. Tuttavia, con Milvus Operator, è possibile configurare Pulsar come archivio messaggi solo per Milvus cluster. Aggiungere i campi richiesti in <code translate="no">spec.dependencies.pulsar</code> per configurare Pulsar.</p>
+    </button></h2><p>Pulsar gestisce i log delle modifiche recenti, emette i log dei flussi e fornisce sottoscrizioni ai log. La configurazione di Pulsar per l'archiviazione dei messaggi è supportata sia in Milvus standalone che in Milvus cluster. Tuttavia, con Milvus Operator, è possibile configurare Pulsar come archivio messaggi solo per Milvus cluster. Aggiungere i campi richiesti in <code translate="no">spec.dependencies.pulsar</code> per configurare Pulsar.</p>
 <p><code translate="no">pulsar</code> supporta <code translate="no">external</code> e <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar esterno</h3><p><code translate="no">external</code> indica l'utilizzo di un servizio Pulsar esterno. I campi utilizzati per configurare un servizio Pulsar esterno includono:</p>
 <ul>
@@ -366,5 +366,5 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
     </button></h2><p>Imparare a configurare altre dipendenze di Milvus con Milvus Operator:</p>
 <ul>
 <li><a href="/docs/it/object_storage_operator.md">Configurare l'archiviazione degli oggetti con Milvus Operator</a></li>
-<li><a href="/docs/it/meta_storage_operator.md">Configurazione del metaconservazione con Milvus Operator</a></li>
+<li><a href="/docs/it/meta_storage_operator.md">Configurare il Meta Storage con Milvus Operator</a></li>
 </ul>

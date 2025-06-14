@@ -27,7 +27,7 @@ summary: >-
 <li>Avete <a href="/docs/it/eks.md">distribuito un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</li>
 </ul>
 <h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus</h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/eks.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su AWS</a>.</p>
-<p>Prima di impostare un bilanciatore di carico Layer-7 per questo cluster Milvus, eseguite il seguente comando per rimuovere il bilanciatore di carico Layer-4.</p>
+<p>Prima di impostare un bilanciatore di carico Layer-7 per questo cluster Milvus, eseguire il seguente comando per rimuovere il bilanciatore di carico Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-TLS-certificates" class="common-anchor-header">Preparare i certificati TLS</h3><p>Il TLS richiede certificati per funzionare. Stiamo usando <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> per gestire i certificati e dobbiamo importare un certificato esistente in ACM. Fare riferimento a <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Importazione di certificati</a>. Di seguito è riportato un esempio.</p>

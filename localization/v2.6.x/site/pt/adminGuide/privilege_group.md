@@ -123,7 +123,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ShowPartitions</p></td>
+     <td><p>MostrarPartições</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -201,7 +201,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Inserir</p></td>
+     <td><p>Upsert</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -331,7 +331,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>SelectOwnership</p></td>
+     <td><p>Seleção de propriedade</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>

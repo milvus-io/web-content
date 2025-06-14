@@ -117,7 +117,7 @@ title: Milvus WebUI
 <li><p><strong>Informazioni sul sistema</strong>: Visualizza le informazioni sul sistema, comprese quelle relative alla modalità di distribuzione, all'immagine utilizzata nella distribuzione e alle informazioni correlate.</p></li>
 <li><p><strong>Informazioni sui componenti</strong>: Visualizza lo stato e le metriche dei componenti di Milvus, compresi lo stato e le metriche dei nodi di interrogazione, dei nodi di dati, dei nodi indice, dei coordinatori e dei proxy.</p></li>
 <li><p><strong>Client collegati</strong>: Visualizza i client connessi e le loro informazioni, tra cui il tipo e la versione dell'SDK, il nome utente e la cronologia degli accessi.</p></li>
-<li><p><strong>Dipendenze del sistema</strong>: Visualizza lo stato e le metriche delle dipendenze di Milvus, compreso lo stato e le metriche del meta store, della coda di messaggi e dell'archiviazione degli oggetti.</p></li>
+<li><p><strong>Dipendenze del sistema</strong>: Visualizza lo stato e le metriche delle dipendenze di Milvus, compreso lo stato e le metriche del meta store, della coda di messaggi e dello storage degli oggetti.</p></li>
 </ul>
 <h2 id="Collections" class="common-anchor-header">Collezioni<button data-href="#Collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,7 +220,7 @@ title: Milvus WebUI
 <ul>
 <li><p><strong>Attività QueryCoord</strong>: Visualizza tutte le attività dello scheduler QueryCoord, compresi i bilanciatori, i controllori di indici/segmenti/canali/leader negli ultimi 15 minuti.</p></li>
 <li><p><strong>Attività di compattazione</strong>: Visualizza tutte le attività di compattazione dei coordinatori dei dati negli ultimi 15 minuti.</p></li>
-<li><p><strong>Attività di costruzione dell'indice</strong>: Visualizza tutte le attività di costruzione dell'indice dei coordinatori dei dati negli ultimi 30 minuti.</p></li>
+<li><p><strong>Attività di costruzione dell'indice</strong>: Visualizza tutte le attività di creazione di indici dei coordinatori dei dati negli ultimi 30 minuti.</p></li>
 <li><p><strong>Attività di importazione</strong>: Visualizza tutte le attività di importazione dei coordinatori dei dati negli ultimi 30 minuti.</p></li>
 <li><p><strong>Attività di sincronizzazione dei dati</strong>: Visualizza tutte le attività di sincronizzazione dei dati dei nodi dati negli ultimi 15 minuti.</p></li>
 </ul></li>

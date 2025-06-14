@@ -4,7 +4,6 @@ order: 3
 summary: このガイドでは、MilvusでGPUをサポートしてインデックスを構築し、検索パフォーマンスを向上させる方法を説明します。
 title: GPUによるインデックス
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">GPUによるインデックス<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,8 +67,8 @@ title: GPUによるインデックス
 <h3 id="Prepare-index-parameters" class="common-anchor-header">インデックスパラメータの準備</h3><p>GPU インデックスパラメータを設定する際に、<strong>index_type</strong>、<strong>metric_type</strong>、<strong>params</strong> を定義します：</p>
 <ul>
 <li><p><strong>index_type</strong><em>(文字列</em>)：index_type (string): ベクトル探索を加速するために使用するインデックスのタイプ。有効なオプションは<strong>GPU_CAGRA</strong>、<strong>GPU_IVF_FLAT</strong>、<strong>GPU_IVF_PQ</strong>、<strong>GPU_BRUTE_FORCE</strong>です。</p></li>
-<li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用されるメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
-<li><p><strong>params</strong><em>(dict</em>)：インデックス固有の構築パラメータ。このパラメータに有効なオプションはインデックスの種類に依存します。</p></li>
+<li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用するメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
+<li><p><strong>params</strong><em>(dict</em>)：インデックス固有の構築パラメータ。このパラメータに有効なオプションは、インデックスの種類に依存します。</p></li>
 </ul>
 <p>以下は、異なるインデックス・タイプの構成例です：</p>
 <ul>
@@ -118,11 +117,10 @@ title: GPUによるインデックス
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">検索<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,13 +178,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">制限<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -21,7 +21,7 @@ title: Autenticar o acesso do utilizador
     </button></h1><p>Este guia explica como gerir a autenticação do utilizador no Milvus, incluindo a ativação da autenticação, a ligação como utilizador e a modificação das credenciais do utilizador.</p>
 <div class="alert note">
 <ul>
-<li><p>O TLS e a autenticação do utilizador são duas abordagens de segurança distintas. Se tiver ativado a autenticação de utilizador e o TLS no seu sistema Milvus, tem de fornecer um nome de utilizador, uma palavra-passe e caminhos de ficheiros de certificados. Para obter informações sobre como ativar o TLS, consulte <a href="/docs/pt/tls.md">Criptografia em trânsito</a>.</p></li>
+<li><p>O TLS e a autenticação do utilizador são duas abordagens de segurança distintas. Se tiver ativado a autenticação do utilizador e o TLS no seu sistema Milvus, tem de fornecer um nome de utilizador, uma palavra-passe e caminhos de ficheiros de certificados. Para obter informações sobre como ativar o TLS, consulte <a href="/docs/pt/tls.md">Criptografia em trânsito</a>.</p></li>
 <li><p>Os trechos de código nesta página usam o novo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) para interagir com o Milvus. Os novos SDKs do MilvusClient para outras linguagens serão lançados em futuras actualizações.</p></li>
 </ul>
 </div>
@@ -53,7 +53,7 @@ title: Autenticar o acesso do utilizador
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-helm">
-<p>Para ativar a autenticação de utilizador para o seu servidor Milvus, defina authorizationEnabled como true no ficheiro de configuração do Milvus <code translate="no">values.yaml</code>. Para obter mais informações sobre configurações, consulte <a href="https://milvus.io/docs/configure-helm.md?tab=component">Configurar o Milvus com Helm Charts</a>.</p>
+<p>Para ativar a autenticação do utilizador para o seu servidor Milvus, defina authorizationEnabled como true no ficheiro de configuração do Milvus <code translate="no">values.yaml</code>. Para obter mais informações sobre configurações, consulte <a href="https://milvus.io/docs/configure-helm.md?tab=component">Configurar o Milvus com Helm Charts</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -248,7 +248,7 @@ client.list_users()
       </svg>
     </button></h2><ol>
 <li>O nome de utilizador não pode estar vazio e não pode ter mais de 32 caracteres. Deve começar com uma letra e conter apenas sublinhados, letras ou números.</li>
-<li>A palavra-passe deve ter pelo menos 6 caracteres e não deve exceder 256 caracteres de comprimento.</li>
+<li>A palavra-passe tem de ter pelo menos 6 caracteres e não pode exceder 256 caracteres.</li>
 </ol>
 <h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -270,7 +270,7 @@ client.list_users()
 <li><a href="/docs/pt/scaleout.md">Dimensionar um cluster Milvus</a></li>
 </ul></li>
 <li>Se estiver pronto para implantar seu cluster em nuvens:<ul>
-<li>Saiba como implantar <a href="/docs/pt/eks.md">o Milvus no Amazon EKS com o Terraform</a></li>
+<li>Saiba como <a href="/docs/pt/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
 <li>Saiba como implantar <a href="/docs/pt/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
 <li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>

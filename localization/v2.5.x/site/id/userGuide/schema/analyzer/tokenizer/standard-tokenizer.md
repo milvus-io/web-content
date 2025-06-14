@@ -5,6 +5,7 @@ summary: >-
   Tokenizer standar di Milvus membagi teks berdasarkan spasi dan tanda baca,
   sehingga cocok untuk sebagian besar bahasa.
 ---
+
 <h1 id="Standard-Tokenizer" class="common-anchor-header">Tokenizer Standar<button data-href="#Standard-Tokenizer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,9 +86,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Untuk penyiapan yang lebih sederhana, Anda dapat memilih untuk menggunakan <code translate="no">standard</code> <a href="/docs/id/standard-analyzer.md">analyzer</a>, yang menggabungkan tokenizer <code translate="no">standard</code> dengan<a href="/docs/id/lowercase-filter.md"> filter</a> <code translate="no">lowercase</code><a href="/docs/id/lowercase-filter.md"></a>.</p>
+<p>Untuk penyiapan yang lebih sederhana, Anda dapat memilih untuk menggunakan <code translate="no">standard</code> <a href="/docs/id/v2.5.x/standard-analyzer.md">analyzer</a>, yang menggabungkan tokenizer <code translate="no">standard</code> dengan<a href="/docs/id/v2.5.x/lowercase-filter.md"> filter</a> <code translate="no">lowercase</code><a href="/docs/id/v2.5.x/lowercase-filter.md"></a>.</p>
 </div>
-<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> ketika mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
+<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> ketika mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,6 +137,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

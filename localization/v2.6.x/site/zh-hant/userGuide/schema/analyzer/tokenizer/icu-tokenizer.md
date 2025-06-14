@@ -1,12 +1,13 @@
 ---
 id: icu-tokenizer.md
-title: ICU
+title: ICUCompatible with Milvus 2.5.11+
 summary: >-
   icu tokenizer 建立在國際化 Unicode 元件 (Internationalization Components of Unicode,
   ICU) 的開放源碼專案上，該專案提供軟體國際化的關鍵工具。透過使用 ICU 的分詞演算法，tokenizer
   可以準確地將文字分割成世界上大多數語言的單字。
+beta: Milvus 2.5.11+
 ---
-<h1 id="ICU" class="common-anchor-header">ICU<button data-href="#ICU" class="anchor-icon" translate="no">
+<h1 id="ICU" class="common-anchor-header">ICU<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#ICU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

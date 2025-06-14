@@ -5,6 +5,7 @@ summary: >-
   Penganalisis bahasa Mandarin dirancang khusus untuk menangani teks bahasa
   Mandarin, memberikan segmentasi dan tokenisasi yang efektif.
 ---
+
 <h1 id="Chinese" class="common-anchor-header">Bahasa Mandarin<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,8 +24,8 @@ summary: >-
     </button></h1><p>Penganalisis <code translate="no">chinese</code> dirancang khusus untuk menangani teks bahasa Mandarin, menyediakan segmentasi dan tokenisasi yang efektif.</p>
 <h3 id="Definition" class="common-anchor-header">Definisi</h3><p>Penganalisis <code translate="no">chinese</code> terdiri dari:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Menggunakan tokenizer <code translate="no">jieba</code> untuk menyegmentasikan teks bahasa Mandarin menjadi token berdasarkan kosakata dan konteks. Untuk informasi lebih lanjut, lihat <a href="/docs/id/jieba-tokenizer.md">Jieba</a>.</p></li>
-<li><p><strong>Filter</strong>: Menggunakan filter <code translate="no">cnalphanumonly</code> untuk menghapus token yang mengandung karakter non-Cina. Untuk informasi lebih lanjut, lihat <a href="/docs/id/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><strong>Tokenizer</strong>: Menggunakan tokenizer <code translate="no">jieba</code> untuk menyegmentasikan teks bahasa Mandarin menjadi token berdasarkan kosakata dan konteks. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>Filter</strong>: Menggunakan filter <code translate="no">cnalphanumonly</code> untuk menghapus token yang mengandung karakter non-Cina. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
 <p>Fungsionalitas penganalisis <code translate="no">chinese</code> setara dengan konfigurasi penganalisis khusus berikut ini:</p>
 <div class="multipleCode">
@@ -54,6 +55,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Configuration" class="common-anchor-header">Konfigurasi</h3><p>Untuk menerapkan penganalisis <code translate="no">chinese</code> ke suatu bidang, cukup setel <code translate="no">type</code> ke <code translate="no">chinese</code> di <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -124,6 +126,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是一个高性能、可扩
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

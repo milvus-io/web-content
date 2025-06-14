@@ -143,7 +143,7 @@ res = client.search(​
     search_params={"metric_type": "IP"}，​
     # highlight-start​
     consistency_level="Bounded",​
-    # highlight-next​
+    # highlight-next-line​
 )​
 
 ```
@@ -196,7 +196,7 @@ res = client.query(​
     limit=3，​
     # highlight-start​
     consistency_level="Eventually",​
-    # highlight-next​
+    # highlight-next-line​
 )​
 
 ```

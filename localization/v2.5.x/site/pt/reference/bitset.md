@@ -3,6 +3,7 @@ id: bitset.md
 summary: Saiba mais sobre bitsets em Milvus.
 title: Bitset
 ---
+
 <h1 id="Bitset" class="common-anchor-header">Bitset<button data-href="#Bitset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +36,7 @@ title: Bitset
         ></path>
       </svg>
     </button></h2><p>Um conjunto de bits é um conjunto de bits. Os bits são elementos com apenas dois valores possíveis, geralmente <code translate="no">0</code> e <code translate="no">1</code>, ou valores booleanos <code translate="no">true</code> e <code translate="no">false</code>. No Milvus, os conjuntos de bits são matrizes de números de bits <code translate="no">0</code> e <code translate="no">1</code> que podem ser utilizados para representar determinados dados de forma compacta e eficiente, em oposição a ints, floats ou chars. Um número de bits é <code translate="no">0</code> por defeito e só é definido para <code translate="no">1</code> se cumprir determinados requisitos.</p>
-<p>As operações em conjuntos de bits são efectuadas com <a href="/docs/pt/boolean.md">lógica booleana</a>, segundo a qual um valor de saída é válido ou inválido, também denotado por <code translate="no">1</code> e <code translate="no">0</code>, respetivamente. Por exemplo, o <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">operador lógico</a> <code translate="no">AND</code> pode ser utilizado para comparar dois conjuntos de bits com base em itens nas mesmas posições de índice e produz um novo conjunto de bits com os resultados. Se dois itens numa posição forem iguais, então, no novo conjunto de bits, <code translate="no">1</code> será escrito nessa posição; <code translate="no">0</code> se forem diferentes.</p>
+<p>As operações em conjuntos de bits são efectuadas com <a href="/docs/pt/v2.5.x/boolean.md">lógica booleana</a>, segundo a qual um valor de saída é válido ou inválido, também denotado por <code translate="no">1</code> e <code translate="no">0</code>, respetivamente. Por exemplo, o <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">operador lógico</a> <code translate="no">AND</code> pode ser utilizado para comparar dois conjuntos de bits com base em itens nas mesmas posições de índice e produz um novo conjunto de bits com os resultados. Se dois itens numa posição forem iguais, então, no novo conjunto de bits, <code translate="no">1</code> será escrito nessa posição; <code translate="no">0</code> se forem diferentes.</p>
 <h2 id="Implementation" class="common-anchor-header">Implementação<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

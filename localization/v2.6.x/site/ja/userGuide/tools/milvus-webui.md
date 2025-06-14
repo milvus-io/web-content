@@ -242,9 +242,9 @@ title: Milvus WebUI
     </button></h2><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
-   </span> <span class="img-wrapper"> <span>Milvus Web UIスローリクエストページ</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Milvus Web UI スローリクエストページ</span> </span></p>
 <ul>
-<li><strong>スローリクエスト</strong>：スローリクエストとは、設定で指定された<code translate="no">proxy.slowQuerySpanInSeconds</code> の値よりも長いレイテンシを持つ検索またはクエリのことです。スローリクエストのリストには、過去15分以内のすべてのスローリクエストが表示されます。</li>
+<li><strong>スローリクエスト</strong>：低速リクエストとは、設定で指定された<code translate="no">proxy.slowQuerySpanInSeconds</code> の値よりも長いレイテンシを持つ検索またはクエリのことです。スローリクエストのリストには、過去15分以内のすべてのスローリクエストが表示されます。</li>
 </ul>
 <h2 id="Configurations" class="common-anchor-header">設定<button data-href="#Configurations" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Struttura di disaggregazione tra archiviazione e calcolo in Milvus.
 title: Disaggregazione storage/computing
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Disaggregazione storage/computing<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,5 +120,5 @@ title: Disaggregazione storage/computing
         ></path>
       </svg>
     </button></h2><ul>
-<li>Per maggiori dettagli sull'architettura di Milvus, leggere <a href="/docs/it/main_components.md">Componenti principali</a>.</li>
+<li>Per maggiori dettagli sull'architettura di Milvus, leggere <a href="/docs/it/v2.5.x/main_components.md">Componenti principali</a>.</li>
 </ul>

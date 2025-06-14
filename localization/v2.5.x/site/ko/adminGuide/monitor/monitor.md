@@ -1,9 +1,10 @@
 ---
 id: monitor.md
 title: 모니터링 서비스 배포
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: Prometheus를 사용하여 Milvus 클러스터에 대한 모니터링 서비스를 배포하는 방법을 알아보세요.
 ---
+
 <h1 id="Deploying-Monitoring-Services-on-Kubernetes" class="common-anchor-header">쿠버네티스에 모니터링 서비스 배포하기<button data-href="#Deploying-Monitoring-Services-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,14 +122,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>Milvus 클러스터에 대한 모니터링 서비스를 배포한 경우 다음 방법을 배울 수도 있습니다:<ul>
-<li><a href="/docs/ko/visualize.md">Grafana에서 Milvus 메트릭 시각화하기</a></li>
-<li><a href="/docs/ko/alert.md">Milvus 서비스에 대한 알림 만들기</a></li>
-<li><a href="/docs/ko/allocate.md">리소스 할당</a> 조정하기</li>
+<li><a href="/docs/ko/v2.5.x/visualize.md">Grafana에서 Milvus 메트릭 시각화하기</a></li>
+<li><a href="/docs/ko/v2.5.x/alert.md">Milvus 서비스에 대한 알림 만들기</a></li>
+<li><a href="/docs/ko/v2.5.x/allocate.md">리소스 할당</a> 조정하기</li>
 </ul></li>
 <li>Milvus 클러스터를 확장하는 방법에 대한 정보를 찾고 계신다면 이 도움말을 참조하세요:<ul>
-<li><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장</a> 알아보기</li>
+<li><a href="/docs/ko/v2.5.x/scaleout.md">Milvus 클러스터 확장</a> 알아보기</li>
 </ul></li>
 <li>Milvus 버전 업그레이드에 관심이 있으신 경우,<ul>
-<li><a href="/docs/ko/upgrade_milvus_cluster-operator.md">Milvus 클러스터 업그레이드 가이드와</a> <a href="/docs/ko/upgrade_milvus_standalone-operator.md">Milvus 독립형 업그레이드</a> <a href="/docs/ko/upgrade_milvus_cluster-operator.md">가이드를</a> 읽어보세요.</li>
+<li><a href="/docs/ko/v2.5.x/upgrade_milvus_cluster-operator.md">Milvus 클러스터 업그레이드 가이드와</a> <a href="/docs/ko/v2.5.x/upgrade_milvus_standalone-operator.md">Milvus 독립형 업그레이드</a> <a href="/docs/ko/v2.5.x/upgrade_milvus_cluster-operator.md">가이드를</a> 읽어보세요.</li>
 </ul></li>
 </ul>

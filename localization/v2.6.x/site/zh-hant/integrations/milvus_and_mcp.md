@@ -35,7 +35,7 @@ title: MCP + Milvus：將 AI 與向量資料庫連結在一起
         ></path>
       </svg>
     </button></h2><p><strong>Model Context Protocol (MCP)</strong>是一種開放式<strong>通訊協定</strong>，可讓 Claude 和 Cursor 等 AI 應用程式與外部資料來源和工具進行無縫互動。無論您是要建立自訂的 AI 應用程式、整合 AI 工作流程或強化聊天介面，MCP 都提供了標準化的方式來連接大型語言模型 (LLM) 與相關的情境資料。</p>
-<p>本教學教導您如何<strong>為 Milvus 設定 MCP 伺服器</strong>，讓 AI 應用程式可以執行向量搜尋、管理集合，以及使用<strong>自然語言指令</strong>擷取資料<strong>- 而無需</strong>撰寫自訂資料庫查詢。</p>
+<p>本教學教導您如何<strong>為 Milvus 設定 MCP 伺服器</strong>，讓 AI 應用程式可以執行向量搜尋、管理集合，並使用<strong>自然語言指令擷取</strong>資料，<strong>而無需</strong>撰寫自訂資料庫查詢。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

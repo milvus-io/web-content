@@ -38,7 +38,7 @@ title: 'MCP + Milvus: connettere l''intelligenza artificiale con i database vett
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il <strong>Model Context Protocol (MCP)</strong> è un protocollo aperto che consente alle applicazioni di IA, come Claude e Cursor, di interagire con fonti di dati e strumenti esterni senza soluzione di continuità. Che si tratti di costruire applicazioni AI personalizzate, integrare flussi di lavoro AI o migliorare le interfacce di chat, l'MCP fornisce un modo standardizzato per collegare modelli linguistici di grandi dimensioni (LLM) con dati contestuali rilevanti.</p>
+    </button></h2><p>Il <strong>Model Context Protocol (MCP)</strong> è un protocollo aperto che consente alle applicazioni di IA, come Claude e Cursor, di interagire con fonti di dati e strumenti esterni senza soluzione di continuità. Che si tratti di costruire applicazioni AI personalizzate, integrare flussi di lavoro AI o migliorare le interfacce di chat, l'MCP fornisce un modo standardizzato per collegare i modelli linguistici di grandi dimensioni (LLM) con i dati contestuali pertinenti.</p>
 <p>Questo tutorial spiega come <strong>configurare un server MCP per Milvus</strong>, consentendo alle applicazioni di IA di eseguire ricerche vettoriali, gestire collezioni e recuperare dati utilizzando <strong>comandi in linguaggio naturale, senza dover</strong>scrivere query di database personalizzate.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ title: 'MCP + Milvus: connettere l''intelligenza artificiale con i database vett
     </button></h2><p>Prima di configurare il server MCP, assicurarsi di disporre di:</p>
 <ul>
 <li>Python 3.10 o superiore</li>
-<li>Un'istanza <a href="https://milvus.io/">Milvus</a> in esecuzione</li>
+<li>Un'istanza <a href="https://milvus.io/">Milvus</a> funzionante</li>
 <li><a href="https://github.com/astral-sh/uv">uv</a> (consigliato per l'esecuzione del server)</li>
 </ul>
 <h2 id="Getting-Started" class="common-anchor-header">Come iniziare<button data-href="#Getting-Started" class="anchor-icon" translate="no">

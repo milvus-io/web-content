@@ -7,7 +7,6 @@ summary: >-
   significativas. Puede configurar la lista de palabras de parada mediante el
   parámetro stop_words.
 ---
-
 <h1 id="Stop" class="common-anchor-header">Detener<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +90,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p>El filtro <code translate="no">stop</code> acepta los siguientes parámetros configurables.</p>
 <table>
    <tr>
@@ -103,7 +101,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Una lista de palabras que deben eliminarse de la tokenización. Por defecto, el filtro utiliza el diccionario <code translate="no">_english_</code> incorporado. Puede anularlo o ampliarlo de tres formas:</p>
 <ul>
 <li><p><strong>Diccionarios incorporados</strong>: proporcione uno de estos alias de idioma para utilizar un diccionario predefinido:<code translate="no">"_english_"</code>, <code translate="no">"_danish_"</code>, <code translate="no">"_dutch_"</code>, <code translate="no">"_finnish_"</code>, <code translate="no">"_french_"</code>, <code translate="no">"_german_"</code>, <code translate="no">"_hungarian_"</code>, <code translate="no">"_italian_"</code>, <code translate="no">"_norwegian_"</code>, <code translate="no">"_portuguese_"</code>, <code translate="no">"_russian_"</code>, <code translate="no">"_spanish_"</code>, <code translate="no">"_swedish_"</code></p></li>
-<li><p><strong>Lista personalizada</strong>: pase una matriz con sus propios términos, por ejemplo, <code translate="no">["foo", "bar", "baz"]</code>.</p></li>
+<li><p><strong>Lista personalizada</strong>: pase una matriz con sus propios términos, por ejemplo <code translate="no">["foo", "bar", "baz"]</code>.</p></li>
 <li><p><strong>Lista mixta</strong> - combina alias y términos personalizados, por ejemplo <code translate="no">["of", "to", "_english_"]</code>.</p>
 <p>Para más detalles sobre el contenido exacto de cada diccionario predefinido, consulte <a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/filter/stop_words.rs">stop_words</a>.</p></li>
 </ul></td>
@@ -158,7 +156,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificación mediante <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verificación mediante <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The stop filter allows control over common stop words for text processing.&quot;</span>
@@ -167,7 +165,6 @@ sample_text = <span class="hljs-string">&quot;The stop filter allows control ove
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

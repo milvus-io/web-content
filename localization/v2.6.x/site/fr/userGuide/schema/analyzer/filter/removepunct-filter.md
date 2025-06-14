@@ -1,14 +1,15 @@
 ---
 id: removepunct-filter.md
-title: Supprimer la ponctuation
+title: Supprimer la ponctuationCompatible with Milvus 2.5.11+
 summary: >-
   Le filtre removepunct supprime les signes de ponctuation, les espaces et les
   retours à la ligne que certains tokenizers, tels que jieba, lindera et icu,
   conservent normalement. Utilisez-le lorsque vous voulez un flux de jetons plus
   propre qui ne contient que des jetons de texte significatifs, sans virgules,
   points et autres ponctuations.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Supprimer la ponctuation<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Supprimer la ponctuation<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

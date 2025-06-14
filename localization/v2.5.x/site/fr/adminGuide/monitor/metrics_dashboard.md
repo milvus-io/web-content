@@ -5,6 +5,7 @@ summary: >-
   Cette rubrique présente les mesures de surveillance affichées dans le tableau
   de bord Milvus.
 ---
+
 <h1 id="Milvus-Metrics-Dashboard" class="common-anchor-header">Tableau de bord des mesures de Milvus<button data-href="#Milvus-Metrics-Dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus produit une liste de métriques détaillées de séries temporelles pendant l'exécution. Vous pouvez utiliser <a href="https://prometheus.io/">Prometheus</a> et <a href="https://grafana.com/">Grafana</a> pour visualiser les métriques. Cette rubrique présente les métriques de surveillance affichées dans le tableau de bord Grafana Milvus.</p>
 <p>L'unité de temps utilisée dans cette rubrique est la milliseconde. Et "99ème percentile" dans cette rubrique fait référence au fait que 99 pour cent des statistiques de temps sont contrôlées dans une certaine valeur.</p>
-<p>Nous vous recommandons de lire l'<a href="/docs/fr/monitor_overview.md">aperçu du cadre de surveillance Milvus</a> pour comprendre d'abord les métriques Prometheus.</p>
+<p>Nous vous recommandons de lire l'<a href="/docs/fr/v2.5.x/monitor_overview.md">aperçu du cadre de surveillance Milvus</a> pour comprendre d'abord les métriques Prometheus.</p>
 <p><details><summary>Proxy</summary></p>
 <table>
 <thead>

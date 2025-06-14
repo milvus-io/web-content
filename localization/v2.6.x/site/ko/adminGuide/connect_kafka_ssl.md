@@ -61,7 +61,7 @@ summary: >-
       <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음 명령으로 Kafka 서비스를 시작할 수 있습니다:</p>
+<p>그런 다음 다음 명령어로 Kafka 서비스를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결하기</h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/SSL 없이 Kafka에 연결할 수 있습니다:</p>

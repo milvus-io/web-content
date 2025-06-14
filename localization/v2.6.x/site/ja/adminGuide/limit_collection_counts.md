@@ -69,4 +69,4 @@ title: コレクション数に制限を設ける
 <p>この例では、計算された合計960コレクションユニットが現在の使用量を表します。<code translate="no">maxGeneralCapacity</code> は、インスタンスがサポートできるコレクションユニットの最大数を定義します。これは、デフォルトで<code translate="no">65536</code> に設定されています。これは、インスタンスが最大65,536コレクション・ユニットに対応できることを意味します。合計数がこの制限を超えると、システムは以下のエラー・メッセージを表示します：</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>このエラーを回避するには、既存または新規コレクションのシャード数またはパーティション数を減らすか、一部のコレクションを削除するか、<code translate="no">maxGeneralCapacity</code> 値を増やします。</p>
+<p>このエラーを回避するには、既存または新規コレクションのシャードまたはパーティションの数を減らすか、一部のコレクションを削除するか、<code translate="no">maxGeneralCapacity</code> の値を増やします。</p>

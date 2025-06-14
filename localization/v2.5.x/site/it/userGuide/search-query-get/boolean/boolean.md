@@ -9,6 +9,7 @@ summary: >-
   Milvus, con esempi incentrati sulle operazioni di interrogazione. È possibile
   applicare questi filtri anche nelle richieste di ricerca e cancellazione.
 ---
+
 <h1 id="Filtering-Explained" class="common-anchor-header">Il filtraggio spiegato<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +57,7 @@ summary: >-
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Esempio: Filtrare i campi array</h3><p>Se si dispone di un campo array <code translate="no">history_temperatures</code> contenente i record delle temperature medie riportate dagli osservatori a partire dall'anno 2000 e si desidera trovare gli osservatori in cui la temperatura del 2009 (il 10° registrato) supera i 23°C, utilizzare questa espressione:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni su questi operatori di base, consultare <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p>
+<p>Per ulteriori informazioni su questi operatori di base, consultare <a href="/docs/it/v2.5.x/basic-operators.md">Operatori di base</a>.</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">Modelli di espressioni di filtro<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +82,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>Questo approccio riduce l'overhead del parsing e migliora la velocità della query. Per ulteriori informazioni, vedere <a href="/docs/it/filtering-templating.md">Templatura dei filtri</a>.</p>
+<p>Questo approccio riduce l'overhead del parsing e migliora la velocità della query. Per ulteriori informazioni, vedere <a href="/docs/it/v2.5.x/filtering-templating.md">Templatura dei filtri</a>.</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">Operatori specifici per i tipi di dati<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,7 +112,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per maggiori dettagli sugli operatori JSON, consultare <a href="/docs/it/json-operators.md">Operatori JSON</a>.</p>
+<p>Per maggiori dettagli sugli operatori JSON, consultare <a href="/docs/it/v2.5.x/json-operators.md">Operatori JSON</a>.</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">Operatori specifici del campo ARRAY</h3><p>Milvus offre operatori di filtraggio avanzati per i campi array, come <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> e <code translate="no">ARRAY_LENGTH</code>, che consentono un controllo a grana fine sui dati degli array:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: Filtra le entità contenenti un elemento specifico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
@@ -125,7 +126,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>: Filtra in base alla lunghezza dell'array.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per maggiori dettagli sugli operatori di array, vedere <a href="/docs/it/array-operators.md">Operatori ARRAY</a>.</p>
+<p>Per maggiori dettagli sugli operatori di array, vedere <a href="/docs/it/v2.5.x/array-operators.md">Operatori ARRAY</a>.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Operatori specifici per i campi VARCHAR</h3><p>Milvus offre operatori specializzati per ricerche precise basate sul testo nei campi VARCHAR:</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operatore</h4><p>L'operatore <code translate="no">TEXT_MATCH</code> consente di recuperare documenti precisi in base a termini di interrogazione specifici. È particolarmente utile per le ricerche filtrate che combinano filtri scalari con ricerche di somiglianza vettoriale. A differenza delle ricerche semantiche, Text Match si concentra sulle occorrenze esatte dei termini.</p>
 <p>Milvus utilizza Tantivy per supportare l'indicizzazione inversa e la ricerca testuale basata sui termini. Il processo prevede:</p>
@@ -133,4 +134,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>Analizzatore</strong>: Tokenizza ed elabora il testo in ingresso.</p></li>
 <li><p><strong>Indicizzazione</strong>: Crea un indice invertito che mappa i token unici nei documenti.</p></li>
 </ol>
-<p>Per maggiori dettagli, consultare <a href="/docs/it/keyword-match.md">Text Match</a>.</p>
+<p>Per maggiori dettagli, consultare <a href="/docs/it/v2.5.x/keyword-match.md">Text Match</a>.</p>

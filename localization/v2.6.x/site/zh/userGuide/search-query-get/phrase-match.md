@@ -1,11 +1,12 @@
 ---
 id: phrase-match.md
-title: 短语匹配
+title: 短语匹配Compatible with Milvus 2.6.x
 summary: >-
   短语匹配可让您搜索包含精确短语查询词的文档。默认情况下，单词必须以相同的顺序出现，并且彼此直接相邻。例如，查询 "机器人机器学习
-  "会匹配"......典型的机器人机器学习模型...... "这样的文本，其中 "机器人"、"机器 "和 "学习 "依次出现，中间没有其他词。
+  "会匹配"...典型的机器人机器学习模型... "这样的文本，其中 "机器人"、"机器 "和 "学习 "依次出现，中间没有其他词。
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">短语匹配<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">短语匹配<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,7 +75,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>短语匹配适用于<code translate="no">VARCHAR</code> 字段类型，即 Milvus 中的字符串数据类型。要启用短语匹配，请配置您的 Collections Schema，将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 参数都设置为<code translate="no">True</code> ，类似于<a href="/docs/zh/keyword-match.md">文本匹配</a>。</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">设置<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code></h3><p>要启用特定<code translate="no">VARCHAR</code> 字段的短语匹配，可在定义字段 Schema 时将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 参数设置为<code translate="no">True</code> 。该配置指示 Milvus 对文本进行标记化，并创建一个具有位置信息的反向索引，以实现高效的短语匹配。</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">设置<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code></h3><p>要启用特定<code translate="no">VARCHAR</code> 字段的短语匹配，可在定义字段 Schema 时将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 参数设置为<code translate="no">True</code> 。此配置指示 Milvus 对文本进行标记化，并创建一个具有位置信息的反向索引，以实现高效的短语匹配。</p>
 <p>下面是启用短语匹配的 Schema 定义示例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -200,7 +201,7 @@ result = client.query(
      <td><p>"机器学习提高了大规模数据分析的效率</p></td>
    </tr>
 </table>
-<p>只有文档 1 按指定顺序包含精确短语<strong>"machine learning"</strong>，且没有额外标记。</p>
+<p>只有文档 1 按指定顺序包含精确短语<strong>"machine learning"</strong>，且没有附加标记。</p>
 <h3 id="Search-with-phrase-match" class="common-anchor-header">使用短语匹配进行搜索</h3><p>在搜索操作中，<strong>PHRASE_MATCH</strong>用于在应用向量相似性排序之前过滤文档。这种两步法首先通过文本匹配缩小候选集的范围，然后根据向量嵌入重新对这些候选集进行排序。</p>
 <h4 id="Example-slop--1" class="common-anchor-header">示例：斜率 = 1</h4><p>这里，我们允许斜率为 1。该过滤器适用于包含<strong>"学习机 "</strong>短语的文档，并略有灵活性。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>

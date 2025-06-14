@@ -276,7 +276,7 @@ kubectl -n default get milvus my-release​
 kubectl -n default delete milvus my-release --<span class="hljs-built_in">wait</span>=<span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Выход: Обратите внимание, что на изящную остановку milvus и удаление томов pulsar оператором может уйти несколько минут.</p>
+<p>Выход: Обратите внимание, что на изящную остановку milvus и удаление оператором томов pulsar может уйти несколько минут.</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 NAME         MODE      STATUS     UPDATED   AGE​
 my-release   cluster   Deleting   True      41m​
@@ -365,7 +365,7 @@ my-release-pulsarv3-zookeeper-2               1/1     Running     0          4m2
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h4 id="Start-Pulsar-V3-and-using-Milvus-Operator" class="common-anchor-header">Запуск Pulsar V3 и использование Milvus Operator</h4><ol>
-<li><p>Отредактируйте файл <code translate="no">milvus.yaml</code>, сохраненный на предыдущем шаге.</p>
+<li><p>Отредактируйте <code translate="no">milvus.yaml</code>, сохраненный на предыдущем шаге.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change the followings fields:​</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1​</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus​</span>

@@ -3,6 +3,7 @@ id: english-analyzer.md
 title: 英文
 summary: Milvus 中的英文分析器專為處理英文文字而設計，可應用特定語言的符號化和過濾規則。
 ---
+
 <h1 id="English" class="common-anchor-header">英文<button data-href="#English" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ summary: Milvus 中的英文分析器專為處理英文文字而設計，可應�
       </svg>
     </button></h2><p><code translate="no">english</code> 分析器使用下列元件：</p>
 <ul>
-<li><p><strong>標記器</strong>：使用<code translate="no">standard</code><a href="/docs/zh-hant/standard-tokenizer.md"> tokenizer</a>將文字分割為離散的單字單位。</p></li>
+<li><p><strong>標記器</strong>：使用<code translate="no">standard</code><a href="/docs/zh-hant/v2.5.x/standard-tokenizer.md"> tokenizer</a>將文字分割為離散的單字單位。</p></li>
 <li><p><strong>過濾器</strong>：包含多種篩選器，可進行全面的文字處理：</p>
 <ul>
 <li><p><code translate="no">lowercase</code>:將所有標記轉換為小寫，以便進行不區分大小寫的搜尋。</p></li>
@@ -107,6 +108,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,7 +186,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
+
+<p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時將它們套用到<code translate="no">VARCHAR</code> 欄位。這可讓 Milvus 使用指定的分析器處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -227,6 +230,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">驗證使用<code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -242,6 +246,7 @@ sample_text = <span class="hljs-string">&quot;Milvus is a vector database built 
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

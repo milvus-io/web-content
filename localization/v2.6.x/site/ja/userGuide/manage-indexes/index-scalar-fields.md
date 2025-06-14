@@ -4,7 +4,6 @@ order: 2
 summary: このガイドでは、整数や文字列などのフィールドに対するスカラー・インデックスの作成と設定について説明します。
 title: スカラーフィールドのインデックス
 ---
-
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">スカラーフィールドのインデックス<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +58,7 @@ title: スカラーフィールドのインデックス
 <p>オートインデックスを使用するには、<strong>index_type</strong>パラメータを <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>でindex_typeパラメータを省略し、milvusがスカラーフィールドの型に基づいてインデックス型を推測できるようにします。</p>
 </div>
 <div class="language-java">
-<p>で<strong>indexType</strong>パラメータを省略します。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>の indexType パラメータを省略し、 Milvus がスカラーフィールドの型に基づいてインデックスタイプを推測できるようにします。</p>
+<p>で<strong>indexType</strong>パラメータを省略します。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>の indexType パラメータを省略すると、 Milvus はスカラーフィールドの型に基づいてインデックスタイプを推測することができます。</p>
 </div>
 <div class="language-javascript">
 <p>で<strong>index_type</strong>パラメータを省略する。 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>の index_type パラメータを省略すると、Milvus はスカラーフィールドの型に基づいてインデックスタイプを推測することができます。</p>
@@ -75,17 +74,16 @@ client = MilvusClient(
 index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
-index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+    field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
+    index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-index_params=index_params
+  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+  index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -142,17 +140,16 @@ client.createIndex(createIndexReq);
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+    field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
+    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-index_params=index_params
+  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+  index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -241,7 +238,7 @@ client.createIndex(createIndexReq);
 <li><strong>index_type</strong><em>(string</em>) 作成するスカラー・インデックスのタイプ。暗黙的インデックスの場合は、このパラメータを空にするか省略します。 カスタムインデックスの場合は、以下の値が有効です：<ul>
 <li><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/scalar_index.md">スカラー・インデックス</a>」を参照してください。</li>
 <li><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを使用して、スカラー・フィールドをソートします。ブール値と数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）をサポート。</li>
-<li><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポート。</li>
+<li><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポートしています。</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -279,7 +276,6 @@ client.createIndex(createIndexReq);
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># [&#x27;default_index&#x27;,&#x27;inverted_index&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.List;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.ListIndexesReq;
 
@@ -309,21 +305,3 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">制限<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li>現在、スカラー・インデックスはINT8、INT16、INT32、INT64、FLOAT、DOUBLE、BOOL、VARCHAR、ARRAYデータ型をサポートしているが、JSONデータ型はサポートしていない。</li>
-</ul>

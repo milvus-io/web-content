@@ -36,7 +36,7 @@ summary: >-
     cursor: pointer;
     margin-left: 4px;
   " onclick="document.getElementById('milvus-audio').play()"></span>
-</span></span> é uma ave de rapina do género Milvus da família dos falcões Accipaitridae, famosa pela sua velocidade de voo, visão apurada e notável adaptabilidade.</p>
+</span></span> é uma ave de rapina do género Milvus da família dos falcões Accipaitridae, famosa pela sua velocidade de voo, visão aguçada e notável adaptabilidade.</p>
 <style>
   audio::-webkit-media-controls { display: none !important; }</style>
 <p>A Zilliz adopta o nome Milvus para a sua base de dados vetorial de código aberto, de elevado desempenho e altamente escalável, que funciona eficientemente numa vasta gama de ambientes, desde um computador portátil a sistemas distribuídos de grande escala. Está disponível como software de código aberto e como um serviço na nuvem.</p>
@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os dados não estruturados, tais como texto, imagens e áudio, variam em formato e transportam uma semântica subjacente rica, o que torna a sua análise difícil. Para gerir esta complexidade, os embeddings são utilizados para converter dados não estruturados em vectores numéricos que captam as suas caraterísticas essenciais. Estes vectores são então armazenados numa base de dados vetorial, permitindo pesquisas e análises rápidas e escaláveis.</p>
+    </button></h2><p>Os dados não estruturados, tais como texto, imagens e áudio, variam em formato e transportam uma semântica subjacente rica, o que torna a sua análise difícil. Para gerir esta complexidade, os embeddings são utilizados para converter dados não estruturados em vectores numéricos que captam as suas caraterísticas essenciais. Estes vectores são depois armazenados numa base de dados vetorial, permitindo pesquisas e análises rápidas e escaláveis.</p>
 <p>Milvus oferece capacidades robustas de modelação de dados, permitindo-lhe organizar os seus dados não estruturados ou multimodais em colecções estruturadas. Suporta uma vasta gama de tipos de dados para diferentes modelações de atributos, incluindo tipos numéricos e de caracteres comuns, vários tipos de vectores, matrizes, conjuntos e JSON, poupando-lhe o esforço de manter vários sistemas de bases de dados.</p>
 <p>
   
@@ -133,7 +133,7 @@ summary: >-
 <li><a href="/docs/pt/single-vector-search.md#Range-search">Pesquisa de intervalo</a>: Encontra vetores dentro de um raio especificado a partir do vetor de consulta.</li>
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>: Realiza a pesquisa ANN com base em vários campos vetoriais.</li>
 <li><a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>: Pesquisa de texto completo com base no BM25.</li>
-<li><a href="/docs/pt/reranking.md">Reranking</a>: Ajusta a ordem dos resultados da pesquisa com base em critérios adicionais ou num algoritmo secundário, refinando os resultados iniciais da pesquisa ANN.</li>
+<li><a href="/docs/pt/weighted-ranker.md">Reranking</a>: Ajusta a ordem dos resultados da pesquisa com base em critérios adicionais ou num algoritmo secundário, refinando os resultados iniciais da pesquisa ANN.</li>
 <li><a href="/docs/pt/get-and-scalar-query.md#Get-Entities-by-ID">Buscar</a>: Recupera dados pelas suas chaves primárias.</li>
 <li><a href="/docs/pt/get-and-scalar-query.md#Use-Basic-Operators">Consulta</a>: Recupera dados utilizando expressões específicas.</li>
 </ul>
@@ -188,7 +188,7 @@ summary: >-
 <h3 id="Tools-and-Ecosystem" class="common-anchor-header">Ferramentas e Ecossistema</h3><ul>
 <li><p>Attu Attu é um GUI tudo-em-um intuitivo que o ajuda a gerir Milvus e os dados que armazena. Para mais informações, consulte o repositório <a href="https://github.com/zilliztech/attu">Attu</a>.</p></li>
 <li><p>Birdwatcher O Birdwatcher é uma ferramenta de depuração para o Milvus. Usando-o para se conectar ao etcd, você pode verificar o estado do seu sistema Milvus ou configurá-lo em tempo real. Para obter detalhes, consulte <a href="/docs/pt/birdwatcher_overview.md">BirdWatcher</a>.</p></li>
-<li><p>Integrações do Promethus e do Grafana O Prometheus é um kit de ferramentas de monitoramento e alerta de sistema de código aberto para o Kubernetes. Grafana é uma pilha de visualização de código aberto que pode se conectar a todas as fontes de dados. Você pode usar o Promethus &amp; Grafana como provedor de serviços de monitoramento para monitorar visualmente o desempenho do Milvus distribuído. Para obter detalhes, consulte <a href="/docs/pt/monitor.md">Implantação de serviços de monitoramento</a>.</p></li>
+<li><p>Integrações do Promethus e do Grafana O Prometheus é um kit de ferramentas de monitoramento e alerta de sistema de código aberto para o Kubernetes. Grafana é uma pilha de visualização de código aberto que pode se conectar a todas as fontes de dados. Você pode usar o Promethus e o Grafana como provedor de serviços de monitoramento para monitorar visualmente o desempenho do Milvus distribuído. Para obter detalhes, consulte <a href="/docs/pt/monitor.md">Implantação de serviços de monitoramento</a>.</p></li>
 <li><p>Milvus Backup O Milvus Backup é uma ferramenta que permite aos utilizadores fazer cópias de segurança e restaurar dados do Milvus. Ele fornece tanto CLI e API para se encaixar em diferentes cenários de aplicação. Para mais informações, consulte <a href="/docs/pt/milvus_backup_overview.md">Milvus Backup</a>.</p></li>
 <li><p>Milvus Capture Data Change (CDC) Milvus-CDC pode capturar e sincronizar dados incrementais em instâncias Milvus e garante a fiabilidade dos dados de negócios, transferindo-os perfeitamente entre instâncias de origem e de destino, permitindo fácil backup incremental e recuperação de desastres. Para mais informações, consulte <a href="/docs/pt/milvus-cdc-overview.md">Milvus CDC</a>.</p></li>
 <li><p>Conectores do Milvus O Milvus planeou um conjunto de conectores para que possa integrar o Milvus com ferramentas de terceiros, como o Apache Spark. Atualmente, pode utilizar o nosso Conector Spark para alimentar os dados do Milvus com o Apache Spark para processamento de aprendizagem automática. Para obter detalhes, consulte o <a href="/docs/pt/integrate_with_spark.md">Conector Spark-Milvus</a>.</p></li>

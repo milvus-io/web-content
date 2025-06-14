@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: Kubernetes에 Milvus 클러스터를 설치하는 방법을 알아보세요.
 title: 헬름 차트를 사용하여 GPU 지원으로 밀버스 실행하기
 ---
+
 <h1 id="Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="common-anchor-header">헬름 차트를 사용하여 GPU 지원으로 밀버스 실행하기<button data-href="#Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,14 +55,15 @@ title: 헬름 차트를 사용하여 GPU 지원으로 밀버스 실행하기
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">헬름 CLI를 설치한다</a>.</p></li>
-<li><p><a href="/docs/ko/prerequisite-gpu.md#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes">GPU 워커 노드가 있는 K8s 클러스터를 생성한다</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/prerequisite-gpu.md#How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes">GPU 워커 노드가 있는 K8s 클러스터를 생성한다</a>.</p></li>
 <li><p><a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">스토리지클래스를</a> 설치한다. 설치된 StorageClass는 아래와 같이 확인할 수 있다.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+NAME PROVISIONER RECLAIMPOLICY VOLUMEBIINDINGMODE ALLOWVOLUMEEXPANSION AGE
+standard (default) k8s.io/minikube-hostpath Delete Immediate <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>설치하기 전에 <a href="/docs/ko/prerequisite-gpu.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
+
+<li><p>설치하기 전에 <a href="/docs/ko/v2.5.x/prerequisite-gpu.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
 </ul>
 <div class="alert note">
 <p>이미지를 가져오는 데 문제가 발생하면 <a href="mailto:community@zilliz.com">community@zilliz.com</a> 으로 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p>
@@ -311,7 +313,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 GUI 도구가 내장되어 있습니다. Milvus Web UI는 간단하고 직관적인 인터페이스로 시스템 관찰성을 향상시킵니다. Milvus Web UI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계 및 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하고, 자세한 Milvus 구성을 나열할 수 있습니다. 밀버스 웹 UI에 대한 자세한 내용은 밀버스 <a href="/docs/ko/milvus-webui.md">웹 UI를</a> 참조하세요.</p>
+    </button></h2><p>Milvus는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 GUI 도구가 내장되어 있습니다. Milvus Web UI는 간단하고 직관적인 인터페이스로 시스템 관찰성을 향상시킵니다. Milvus Web UI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계 및 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하고, 자세한 Milvus 구성을 나열할 수 있습니다. 밀버스 웹 UI에 대한 자세한 내용은 밀버스 <a href="/docs/ko/v2.5.x/milvus-webui.md">웹 UI를</a> 참조하세요.</p>
 <p>Milvus 웹 UI에 액세스할 수 있도록 하려면 프록시 포드를 로컬 포트로 포트 포워딩해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -352,27 +354,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Milvus를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p><a href="/docs/ko/quickstart.md">빠른 시작을</a> 확인하여 Milvus의 기능을 살펴봅니다.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/quickstart.md">빠른 시작을</a> 확인하여 Milvus의 기능을 살펴봅니다.</p></li>
 <li><p>Milvus의 기본 작동에 대해 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.5.x/manage_databases.md">데이터베이스 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/v2.5.x/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/v2.5.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.5.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
-<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
 <li><p>Milvu 클러스터를 클라우드에 배포하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
-<li><a href="/docs/ko/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ko/v2.5.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ko/v2.5.x/gcp.md">구글 클라우드</a></li>
+<li><a href="/docs/ko/v2.5.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
-<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
-<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
+<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/v2.5.x/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/v2.5.x/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/v2.5.x/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/v2.5.x/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
 </ul>

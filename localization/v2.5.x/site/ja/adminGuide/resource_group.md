@@ -36,7 +36,7 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><p>リソースグループは、Milvusクラスタ内のクエリノードの一部またはすべてを保持することができます。リソースグループ間でクエリノードをどのように割り当てるかは、最も合理的な方法に基づいて決定します。例えば、マルチコレクションシナリオでは、各リソースグループに適切な数のクエリノードを割り当て、各コレクション内の操作が他のコレクション内の操作から物理的に独立するように、異なるリソースグループにコレクションをロードすることができます。</p>
-<p>Milvusインスタンスは、起動時にすべてのクエリノードを保持するデフォルトのリソースグループを保持し、<strong>__default_resource_groupと</strong>命名することに注意してください。</p>
+<p>Milvusインスタンスは、起動時にすべてのクエリノードを保持するデフォルトのリソースグループを保持し、それを<strong>__default_resource_groupと</strong>命名することに注意してください。</p>
 <p>バージョン2.4.1から、Milvusは宣言型リソースグループAPIを提供し、従来のリソースグループAPIは廃止されました。新しい宣言型APIにより、ユーザはidempotencyを実現し、クラウドネイティブ環境での二次開発を容易に行うことができるようになります。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">リソースグループの概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,7 +71,7 @@ title: リソースグループの管理
 <p>ただし、以下の場合を除く：</p>
 <ul>
 <li>Milvusクラスタ内のQueryNode数が不足している場合（<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ）、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
-<li>MilvusクラスタのQueryNode数が過剰な場合、すなわち<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
+<li>MilvusクラスタのQueryNode数が過剰な場合、つまり<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
 </ul>
 <p>もちろん、クラスタ内のQueryNode数が変更された場合、Milvusは最終的な条件を満たすように継続的に調整を試みます。そのため、最初にリソースグループの設定変更を適用し、その後QueryNodeのスケーリングを実行することができます。</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">宣言型apiを使用してリソースグループを管理する<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.5.10 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.5.11 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p><code translate="no">_resource_groups</code> はオプションのパラメータで、指定しないままにしておくと、Milvusはデフォルトのリソースグループのクエリノードにレプリカをロードします。</p>
 <p>Milusにコレクションの各レプリカを個別のリソースグループにロードさせるには、リソースグループの数がレプリカの数と等しくなるようにします。</p></li>
 <li><p>リソースグループ間でレプリカを転送します。</p>
-<p>Milvusは、複数のクエリノードに分散した<a href="/docs/ja/glossary.md#Segment">セグメント</a>間の負荷分散を実現するために<a href="/docs/ja/replica.md">レプリカを</a>使用します。コレクションの特定のレプリカをあるリソースグループから別のリソースグループに移動するには、次のようにします：</p>
+<p>Milvusは、複数のクエリノードに分散した<a href="/docs/ja/v2.5.x/glossary.md#Segment">セグメント</a>間の負荷分散を実現するために<a href="/docs/ja/v2.5.x/replica.md">レプリカを</a>使用します。コレクションの特定のレプリカをあるリソースグループから別のリソースグループに移動するには、次のようにします：</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -268,7 +268,7 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード例を使用して、追加のQueryNodeを保持するために<strong>__pending_nodesという</strong>リソース・グループを作成します。また、<strong>rg</strong>1と<strong>rg2という</strong>2つのユーザー固有のリソース・グループを作成します。さらに、もう1つのリソース・グループが、<strong>__pending_nodesから</strong>不足または冗長なQueryNodesをリカバリすることを優先するようにします。</p></li>
+<p>上記のコード例を使用して、追加のQueryNodeを保持するために<strong>__pending_nodesという</strong>リソース・グループを作成します。また、<strong>rg</strong>1と<strong>rg2という</strong>2つのユーザー固有のリソース・グループを作成します。さらに、もう1つのリソース・グループが<strong>__pending_nodesから</strong>不足または冗長なQueryNodesをリカバリすることを優先するようにします。</p></li>
 <li><p>クラスタのスケールアウト</p>
 <p>以下のスケーリング機能があると仮定します：</p>
 <pre><code translate="no" class="language-python">
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>マルチテナントのMilvusインスタンスをデプロイするには、以下をお読みください：</p>
 <ul>
-<li><a href="/docs/ja/rbac.md">RBACの有効化</a></li>
-<li><a href="/docs/ja/users_and_roles.md">ユーザとロール</a></li>
+<li><a href="/docs/ja/v2.5.x/rbac.md">RBACの有効化</a></li>
+<li><a href="/docs/ja/v2.5.x/users_and_roles.md">ユーザとロール</a></li>
 </ul>

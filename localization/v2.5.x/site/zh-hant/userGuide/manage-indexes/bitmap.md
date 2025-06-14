@@ -4,6 +4,7 @@ title: 位圖索引
 related_key: bitmap
 summary: 位圖索引是一種有效率的索引技術，設計用來改善低心數標量欄位的查詢效能。
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">位圖索引<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,8 +85,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>在這個範例中，我們在<code translate="no">my_collection</code> 資料集中的<code translate="no">category</code> 欄位上建立位圖索引。<code translate="no">add_index()</code> 方法用來指定欄位名稱、索引類型和索引名稱。</p>
-<p>一旦建立位圖索引，您就可以在查詢作業中使用<code translate="no">filter</code> 參數，根據索引欄位執行標量篩選。這可讓您使用位圖索引有效地縮窄搜尋結果的範圍。如需詳細資訊，請參<a href="/docs/zh-hant/boolean.md">閱元資料篩選</a>。</p>
+<p>一旦建立位圖索引，您就可以在查詢作業中使用<code translate="no">filter</code> 參數，根據索引欄位執行標量篩選。這可讓您使用位圖索引有效地縮窄搜尋結果的範圍。如需詳細資訊，請參<a href="/docs/zh-hant/v2.5.x/boolean.md">閱元資料篩選</a>。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

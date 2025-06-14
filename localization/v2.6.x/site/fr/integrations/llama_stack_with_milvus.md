@@ -105,7 +105,7 @@ $ pip install -e .
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Si tout se passe bien, vous devriez voir le serveur Llama Stack s'exécuter avec succès sur le port 8321.</p>
-<h2 id="Perform-RAG-from-client" class="common-anchor-header">Exécuter RAG à partir du client<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
+<h2 id="Perform-RAG-from-client" class="common-anchor-header">Exécuter le RAG à partir du client<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

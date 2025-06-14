@@ -145,7 +145,7 @@ summary: >-
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>En el ejemplo anterior, <code translate="no">message_sparse</code> es un campo vectorial disperso derivado de un campo VarChar llamado <code translate="no">message</code>. Milvus utiliza el modelo de incrustación BM25 para convertir los valores del campo <code translate="no">message</code> en incrustaciones de vectores dispersos y los almacena en el campo <code translate="no">message_sparse</code>. Al recibir la petición de búsqueda, Milvus incrusta la carga útil de la consulta en texto plano utilizando el mismo modelo BM25 y realiza una búsqueda de vectores dispersos y devuelve los campos <code translate="no">id</code> y <code translate="no">message</code> especificados en el parámetro <code translate="no">output_fields</code> junto con las puntuaciones de similitud correspondientes.</p>
-<p>Para utilizar esta funcionalidad, debe activar el analizador en el campo <code translate="no">message</code> y definir una función para derivar de él el campo <code translate="no">message_sparse</code>. Para obtener instrucciones detalladas sobre cómo habilitar el analizador y crear la función derivada en Milvus, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
+<p>Para utilizar esta funcionalidad, debe activar el analizador en el campo <code translate="no">message</code> y definir una función para derivar el campo <code translate="no">message_sparse</code> a partir de él. Para obtener instrucciones detalladas sobre cómo habilitar el analizador y crear la función derivada en Milvus, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
 <h2 id="Term-level-queries" class="common-anchor-header">Consultas a nivel de término<button data-href="#Term-level-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -462,7 +462,7 @@ res = client.query(
 <li><p>Una búsqueda kNN en el campo <code translate="no">vector</code> utilizando el vector de consulta proporcionado.</p></li>
 </ul>
 <p>Cada recuperador aporta hasta 50 coincidencias principales, que RRF vuelve a clasificar, y devuelve los 10 resultados finales más importantes.</p>
-<p>En Milvus, puede conseguir una búsqueda híbrida similar combinando búsquedas en múltiples campos vectoriales, aplicando una estrategia de renumeración y recuperando los resultados top-K de la lista combinada. Milvus admite las estrategias RRF y weighted reranker. Para más detalles, consulte <a href="/docs/es/reranking.md">Reranking</a>.</p>
+<p>En Milvus, puede conseguir una búsqueda híbrida similar combinando búsquedas en múltiples campos vectoriales, aplicando una estrategia de renumeración y recuperando los resultados top-K de la lista combinada. Milvus admite las estrategias RRF y weighted reranker. Para más detalles, consulte <a href="/docs/es/weighted-ranker.md">Reranking</a>.</p>
 <p>Lo siguiente es una equivalencia no estricta del ejemplo anterior de Elasticsearch en Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

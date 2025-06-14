@@ -319,7 +319,7 @@ summary: >-
 <tr>
 <td><p>BackupRBAC</p></td>
 <td><p>Créer une sauvegarde de toutes les opérations liées à RBAC dans l'instance actuelle</p></td>
-<td><p>SauvegardeRBAC</p></td>
+<td><p>BackupRBAC</p></td>
 </tr>
 <tr>
 <td><p>RestoreRBAC</p></td>

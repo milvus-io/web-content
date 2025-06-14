@@ -46,7 +46,7 @@ summary: Milvus용 스트리밍을 구성하는 방법을 알아보세요.
     <tr>
       <td>
         <li>백그라운드에서 밸런스 작업이 트리거되는 간격으로, 기본값은 1분입니다. </li>      
-        <li>30초 또는 1m30초와 같은 기간 문자열로 설정해도 됩니다(time.ParseDuration 참조).</li>      </td>
+        <li>30초 또는 1m30초와 같이 기간 문자열로 설정해도 됩니다(time.ParseDuration 참조).</li>      </td>
       <td>1m</td>
     </tr>
   </tbody>

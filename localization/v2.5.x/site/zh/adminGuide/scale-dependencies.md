@@ -2,6 +2,7 @@
 id: scale-dependencies.md
 title: 规模依赖性
 ---
+
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">扩展 Milvus 依赖项<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: 规模依赖性
       </svg>
     </button></h1><p>Milvus 依赖于 MinIO、Kafka、Pulsar 和 etcd 等各种依赖项。扩展这些组件可以增强 Milvus 对不同需求的适应性。</p>
 <div class="alert note">
-<p>Milvus Operator 用户请参阅《<a href="/docs/zh/object_storage_operator.md">使用 Milvus Operator 配置对象存储</a>》、《<a href="/docs/zh/meta_storage_operator.md">使用 Milvus Operator 配置元存储</a>》和《<a href="/docs/zh/message_storage_operator.md">使用 Milvus</a> Operator<a href="/docs/zh/message_storage_operator.md">配置消息存储</a>》。</p>
+<p>Milvus Operator 用户请参阅《<a href="/docs/zh/v2.5.x/object_storage_operator.md">使用 Milvus Operator 配置对象存储</a>》、《<a href="/docs/zh/v2.5.x/meta_storage_operator.md">使用 Milvus Operator 配置元存储</a>》和《<a href="/docs/zh/v2.5.x/message_storage_operator.md">使用 Milvus</a> Operator<a href="/docs/zh/v2.5.x/message_storage_operator.md">配置消息存储</a>》。</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">扩展 MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

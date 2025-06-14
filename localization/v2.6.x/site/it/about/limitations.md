@@ -220,7 +220,7 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 <tr><th>Vettori</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">topk</code> (numero di risultati più simili da restituire)</td><td>16,384</td></tr>
+<tr><td><code translate="no">topk</code> (numero del risultato più simile da restituire)</td><td>16,384</td></tr>
 <tr><td><code translate="no">nq</code> (numero di richieste di ricerca)</td><td>16,384</td></tr>
 </tbody>
 </table>
@@ -255,6 +255,6 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 <tr><td>Ricerca con iteratore</td><td>Sì</td><td>Sì</td><td>Si</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td><td>Si</td></tr>
 <tr><td>Ricerca ibrida</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì (solo RRFRanker)</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Interrogazione/raccolta</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
-<tr><td>Query con iteratore</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td><td>Si</td></tr>
+<tr><td>Query con iteratore</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Si</td><td>Si</td></tr>
 </tbody>
 </table>

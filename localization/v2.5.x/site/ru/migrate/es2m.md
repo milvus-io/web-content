@@ -5,6 +5,7 @@ summary: >-
   Elasticsearch в Milvus 2.x.
 title: Из Elasticsearch
 ---
+
 <h1 id="From-Elasticsearch" class="common-anchor-header">Из Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ title: Из Elasticsearch
 <li>Подробности установки см. в разделах <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Установка Elasticsearch</a> и <a href="https://milvus.io/docs/install_standalone-docker.md">Установка Milvus</a>.</li>
 </ul></li>
 <li><strong>Необходимые инструменты</strong>:<ul>
-<li>Инструмент<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. Подробности установки см. в разделе <a href="/docs/ru/milvusdm_install.md">Установка инструмента миграции</a>.</li>
+<li>Инструмент<a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>. Подробности установки см. в разделе <a href="/docs/ru/v2.5.x/milvusdm_install.md">Установка инструмента миграции</a>.</li>
 </ul></li>
 <li><strong>Поддерживаемые типы данных для миграции</strong>: Поля для миграции из исходного индекса Elasticsearch относятся к следующим типам - <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>. Типы данных, не перечисленные здесь, в настоящее время не поддерживаются для миграции. Подробную информацию о сопоставлении данных между коллекциями Milvus и индексами Elasticsearch см. в <a href="#field-mapping-reference">справочнике "Сопоставление полей"</a>.</li>
 <li><strong>Требования к индексу Elasticsearch</strong>:<ul>

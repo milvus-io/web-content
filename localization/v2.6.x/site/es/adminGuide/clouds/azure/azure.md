@@ -91,7 +91,7 @@ summary: Aprenda a desplegar un clúster Milvus en Azure.
 <ul>
 <li><p><strong>Nombre del clúster Kubernetes</strong>: Introduzca un nombre de clúster.</p></li>
 <li><p><strong>Región</strong>: Seleccione una región.</p></li>
-<li><p><strong>Zonas de disponibilidad</strong>: Seleccione las <a href="https://docs.microsoft.com/en-us/azure/aks/availability-zones#overview-of-availability-zones-for-aks-clusters">zonas de</a> disponibilidad que necesite. Para clústeres de producción, le recomendamos que seleccione varias zonas de disponibilidad.</p></li>
+<li><p><strong>Zonas de disponibilidad</strong>: Seleccione las <a href="https://docs.microsoft.com/en-us/azure/aks/availability-zones#overview-of-availability-zones-for-aks-clusters">zonas de</a> disponibilidad que necesite. Para los clústeres de producción, se recomienda seleccionar varias zonas de disponibilidad.</p></li>
 </ul></li>
 <li><p><strong>Grupo de nodos primarios</strong>:</p>
 <ul>

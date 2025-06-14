@@ -5,6 +5,7 @@ related_key: SDK
 summary: MilvusのGO SDKのインストール方法をご覧ください。
 title: Milvus Go SDKのインストール
 ---
+
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Milvus Go SDKのインストール<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +75,10 @@ title: Milvus Go SDKのインストール
     </button></h2><p>Milvus GO SDKをインストールしたら、次のことができます：</p>
 <ul>
 <li>Milvusの基本操作を学びます：<ul>
-<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/v2.5.x/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/v2.5.x/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/v2.5.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.5.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.5.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
 </ul>

@@ -22,7 +22,7 @@ title: Supervisión
         ></path>
       </svg>
     </button></h1><p>Milvus-CDC proporciona capacidades integrales de supervisión a través de paneles de Grafana, lo que le permite visualizar métricas clave y garantizar el buen funcionamiento de sus tareas de Captura de Datos de Cambios (CDC) y la salud del servidor.</p>
-<h3 id="Metrics-for-CDC-tasks" class="common-anchor-header">Métricas para tareas CDC</h3><p>Para empezar, importe el archivo <a href="https://github.com/zilliztech/milvus-cdc/blob/main/server/configs/cdc-grafana.json">cdc-grafana.json</a> a Grafana. Esto añadirá un panel de control diseñado específicamente para supervisar el estado de las tareas de CDC.</p>
+<h3 id="Metrics-for-CDC-tasks" class="common-anchor-header">Métricas para tareas CDC</h3><p>Para empezar, importe el archivo <a href="https://github.com/zilliztech/milvus-cdc/blob/main/server/configs/cdc-grafana.json">cdc-grafana.json</a> en Grafana. Esto añadirá un panel de control diseñado específicamente para supervisar el estado de las tareas de CDC.</p>
 <p><strong>Descripción general del panel CDC Grafana</strong>:</p>
 <p>
   

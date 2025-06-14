@@ -135,7 +135,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
     </button></h2><p>Milvus standalone 使用 RocksMQ 作為預設的訊息儲存空間。有關如何使用 Helm 配置 Milvus 的詳細步驟，請參考<a href="/docs/zh-hant/configure-helm.md">Configure Milvus with Helm Charts</a>。關於 RocksMQ 相關配置項的詳細步驟，請參考<a href="/docs/zh-hant/configure_rocksmq.md">RocksMQ 相關配置</a>。</p>
 <ul>
 <li><p>如果你用 RocksMQ 啟動 Milvus 並想要改變它的設定，你可以用以下 YAML 檔案中改變的設定執行<code translate="no">helm upgrade -f</code> 。</p></li>
-<li><p>如果你已經使用 Helm 獨立安裝了 Milvus，並使用了 RocksMQ 以外的訊息存放區，想要將它改回 RocksMQ，請在刷新所有集合並停止 Milvus 後，使用下列 YAML 檔案執行<code translate="no">helm upgrade -f</code> 。</p></li>
+<li><p>如果你已經使用 Helm 獨立安裝了 Milvus，並使用了 RocksMQ 以外的訊息存放區，想要將它改回 RocksMQ，請在刷新所有集合並停止 Milvus 後，使用以下 YAML 檔案執行<code translate="no">helm upgrade -f</code> 。</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -233,7 +233,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>學習如何使用 Docker Compose 或 Helm 配置其他 Milvus 依賴項目：</p>
+    </button></h2><p>學習如何使用 Docker Compose 或 Helm 配置 Milvus 的其他相依性：</p>
 <ul>
 <li><a href="/docs/zh-hant/deploy_s3.md">使用 Docker Compose 或 Helm 配置物件儲存空間</a></li>
 <li><a href="/docs/zh-hant/deploy_etcd.md">使用 Docker Compose 或 Helm 設定 Meta 儲存空間</a></li>

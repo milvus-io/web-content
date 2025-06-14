@@ -3,6 +3,7 @@ id: es2m.md
 summary: 本指南提供了将数据从 Elasticsearch 迁移到 Milvus 2.x 的全面、循序渐进的过程。
 title: 从 Elasticsearch
 ---
+
 <h1 id="From-Elasticsearch" class="common-anchor-header">从 Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +42,7 @@ title: 从 Elasticsearch
 <li>有关安装详情，请参阅<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">安装 Elasticsearch</a>和<a href="https://milvus.io/docs/install_standalone-docker.md">安装 Milvus</a>。</li>
 </ul></li>
 <li><strong>所需工具</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。有关安装详情，请参阅<a href="/docs/zh/milvusdm_install.md">安装迁移工具</a>。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。有关安装详情，请参阅<a href="/docs/zh/v2.5.x/milvusdm_install.md">安装迁移工具</a>。</li>
 </ul></li>
 <li><strong>支持迁移的数据类型</strong>：要从源 Elasticsearch 索引中迁移的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">字</a>段属于以下类型 -<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean、</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>。此处未列出的数据类型目前不支持迁移。有关 Milvus Collections 和 Elasticsearch 索引之间数据<a href="#field-mapping-reference">映射的</a>详细信息，请参阅<a href="#field-mapping-reference">字段</a>映射<a href="#field-mapping-reference">参考</a>。</li>
 <li><strong>Elasticsearch 索引要求</strong>：<ul>

@@ -21,7 +21,7 @@ title: インストラクタ
         ></path>
       </svg>
     </button></h1><p><a href="https://instructor-embedding.github.io/">Instructorは</a>、タスクの指示を与えるだけで、どんなタスク（分類、検索、クラスタリング、テキスト評価など）やドメイン（科学、金融など）にも合わせたテキスト埋め込みを生成することができる指示調整型テキスト埋め込みモデルです。</p>
-<p>MilvusはInstructorEmbeddingFunctionクラスを介してInstructorの埋め込みモデルと統合します。このクラスはInstructorの埋め込みモデルを用いて文書やクエリをエンコードし、Milvusのインデックス作成と互換性のある密なベクトルとして埋め込みを返すメソッドを提供します。</p>
+<p>MilvusはInstructorEmbeddingFunctionクラスを通してInstructorの埋め込みモデルと統合します。このクラスはInstructorの埋め込みモデルを用いて文書やクエリをエンコードし、Milvusのインデックス作成と互換性のある密なベクトルとして埋め込みを返すメソッドを提供します。</p>
 <p>この機能を使用するには、必要な依存関係をインストールしてください：</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

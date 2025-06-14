@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 歡迎來到 Milvus Docs！</h1></p>
@@ -33,13 +34,13 @@ id: home.md
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/zh-hant/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/zh-hant/install_standalone-docker.md"> <p class="link-btn">安裝 Milvus</p> </a><p>學習如何使用 Docker Compose 或 Kubernetes 安裝 Milvus。</p>
+   <a href="/docs/zh-hant/v2.5.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/zh-hant/v2.5.x/install_standalone-docker.md"> <p class="link-btn">安裝 Milvus</p> </a><p>學習如何使用 Docker Compose 或 Kubernetes 安裝 Milvus。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/zh-hant/quickstart.md"> <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/zh-hant/quickstart.md"> <p class="link-btn">快速啟動</p> </a><p>學習如何使用範例程式碼快速執行 Milvus。</p>
+   <a href="/docs/zh-hant/v2.5.x/quickstart.md"> <img translate="no" src="/docs/v2.5.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/zh-hant/v2.5.x/quickstart.md"> <p class="link-btn">快速啟動</p> </a><p>學習如何使用範例程式碼快速執行 Milvus。</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +68,31 @@ id: home.md
 <div class="recomment-item">
   <p>使用</p>
 <ul>
-<li><a href="/docs/zh-hant/manage-collections.md">管理集合</a></li>
-<li><a href="/docs/zh-hant/insert-update-delete.md">插入、倒置與刪除</a></li>
-<li><a href="/docs/zh-hant/index-vector-fields.md">索引向量欄位</a></li>
-<li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
-<li><a href="/docs/zh-hant/get-and-scalar-query.md">取得與標量查詢</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/manage-collections.md">管理集合</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/insert-update-delete.md">插入、倒置與刪除</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/index-vector-fields.md">索引向量欄位</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/single-vector-search.md">單向量搜尋</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/get-and-scalar-query.md">取得與標量查詢</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>部署</p>
 <ul>
-<li><a href="/docs/zh-hant/configure-docker.md">配置 Milvus</a></li>
-<li><a href="/docs/zh-hant/deploy_s3.md">管理相依性</a></li>
-<li><a href="/docs/zh-hant/eks.md">在雲上部署</a></li>
-<li><a href="/docs/zh-hant/scaleout.md">擴充 Milvus 集群</a></li>
-<li><a href="/docs/zh-hant/monitor_overview.md">監控和警報</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/configure-docker.md">配置 Milvus</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/deploy_s3.md">管理相依性</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/eks.md">在雲上部署</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/scaleout.md">擴充 Milvus 集群</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/monitor_overview.md">監控和警報</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>學習</p>
 <ul>
-<li><a href="/docs/zh-hant/system_configuration.md">系統組態</a></li>
-<li><a href="/docs/zh-hant/architecture_overview.md">架構總覽</a></li>
-<li><a href="/docs/zh-hant/index.md">向量索引</a></li>
-<li><a href="/docs/zh-hant/metric.md">相似度指標</a></li>
-<li><a href="/docs/zh-hant/glossary.md">詞彙</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/system_configuration.md">系統組態</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/architecture_overview.md">架構總覽</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/index.md">向量索引</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/metric.md">相似度指標</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/glossary.md">詞彙</a></li>
 </ul>
 </div>
 </div>
@@ -113,10 +114,10 @@ id: home.md
       </svg>
     </button></h2><p><em>2024 年 11 月 - Milvus 2.5.0 發佈</em></p>
 <ul>
-<li>新增如何<a href="/docs/zh-hant/full-text-search.md">進行全文檢索</a>的指引。</li>
-<li>新增如何<a href="/docs/zh-hant/keyword-match.md">進行文字匹配的</a>指南。</li>
-<li>新增如何<a href="/docs/zh-hant/nullable-and-default.md">啟用可空值與預設值的</a>說明。</li>
-<li>新增<a href="/docs/zh-hant/analyzer-overview.md">分析器</a>說明。</li>
-<li>新增<a href="/docs/zh-hant/bitmap.md">位圖索引的</a>說明。</li>
+<li>新增如何<a href="/docs/zh-hant/v2.5.x/full-text-search.md">進行全文檢索</a>的指引。</li>
+<li>新增如何<a href="/docs/zh-hant/v2.5.x/keyword-match.md">進行文字匹配的</a>指南。</li>
+<li>新增如何<a href="/docs/zh-hant/v2.5.x/nullable-and-default.md">啟用可空值與預設值的</a>說明。</li>
+<li>新增<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md">分析器</a>說明。</li>
+<li>新增<a href="/docs/zh-hant/v2.5.x/bitmap.md">位圖索引的</a>說明。</li>
 </ul>
 </div>

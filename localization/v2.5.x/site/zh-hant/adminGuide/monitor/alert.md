@@ -4,6 +4,7 @@ title: 建立警報
 related_key: monitor and alert.
 summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
 ---
+
 <h1 id="Create-an-Alert-for-Milvus-Services" class="common-anchor-header">為 Milvus 服務建立警報<button data-href="#Create-an-Alert-for-Milvus-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
         ></path>
       </svg>
     </button></h2><p>本指南以建立 Milvus 元件記憶體使用警示為例。若要建立其他類型的警示，請相應調整您的指令。如果您在過程中遇到任何問題，請隨時到<a href="https://discuss.milvus.io/">Milvus 論壇</a>詢問或在<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a> 上啟動討論。</p>
-<h3 id="Prerequisites" class="common-anchor-header">先決條件</h3><p>本教學假設您已安裝和設定 Grafana。如果沒有，建議閱讀<a href="/docs/zh-hant/monitor.md">監控指南</a>。</p>
+<h3 id="Prerequisites" class="common-anchor-header">先決條件</h3><p>本教學假設您已安裝和設定 Grafana。如果沒有，建議閱讀<a href="/docs/zh-hant/v2.5.x/monitor.md">監控指南</a>。</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1.新增查詢</h3><p>要為 Milvus 元件的記憶體使用量新增警示，請編輯記憶體面板。然後，新增一個包含 metric 的新查詢：<code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +121,13 @@ summary: 瞭解如何在 Grafana 中為 Milvus 服務建立警示。
       </svg>
     </button></h2><ul>
 <li>如果您需要開始監控 Milvus 的服務：<ul>
-<li>閱讀<a href="/docs/zh-hant/monitor.md">監控指南</a></li>
-<li>了解如何<a href="/docs/zh-hant/visualize.md">可視化監控指標</a></li>
+<li>閱讀<a href="/docs/zh-hant/v2.5.x/monitor.md">監控指南</a></li>
+<li>了解如何<a href="/docs/zh-hant/v2.5.x/visualize.md">可視化監控指標</a></li>
 </ul></li>
 <li>如果您已經為 Milvus 元件的記憶體使用創建了警報：<ul>
-<li>學習如何<a href="/docs/zh-hant/allocate.md#standalone">分配資源</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.5.x/allocate.md#standalone">分配資源</a></li>
 </ul></li>
 <li>如果您正在尋找關於如何擴展 Milvus 叢集的資訊：<ul>
-<li>了解如何<a href="/docs/zh-hant/scaleout.md">擴充 Milvus 叢集</a></li>
+<li>了解如何<a href="/docs/zh-hant/v2.5.x/scaleout.md">擴充 Milvus 叢集</a></li>
 </ul></li>
 </ul>

@@ -3,6 +3,7 @@ id: create-collection-instantly.md
 title: 立即建立集合
 summary: 您可以透過設定名稱和向量場的維度，立即建立一個集合。Milvus 會自動索引向量欄位，並在建立時載入集合。本頁面示範如何使用預設設定立即建立集合。
 ---
+
 <h1 id="Create-Collection-Instantly" class="common-anchor-header">立即建立集合<button data-href="#Create-Collection-Instantly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,8 +47,8 @@ summary: 您可以透過設定名稱和向量場的維度，立即建立一個�
 <li><p>已啟用名為<strong>$meta</strong>的保留動態欄位，以鍵值對儲存非結構描述定義的欄位及其值。</p></li>
 <li><p>該集合會在建立時自動載入。</p></li>
 </ul>
-<p>有關上述術語的詳細資訊，請參閱<a href="/docs/zh-hant/manage-collections.md">Collection Explained</a>。</p>
-<p>值得注意的是，使用預設設定立即建立集合並不適用於所有情況。建議您熟悉<a href="/docs/zh-hant/create-collection.md">常見的集合建立程序</a>，以便更好地瞭解 Milvus 的功能。</p>
+<p>有關上述術語的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/manage-collections.md">Collection Explained</a>。</p>
+<p>值得注意的是，使用預設設定立即建立集合並不適用於所有情況。建議您熟悉<a href="/docs/zh-hant/v2.5.x/create-collection.md">常見的集合建立程序</a>，以便更好地瞭解 Milvus 的功能。</p>
 <h2 id="Quick-Setup" class="common-anchor-header">快速設定<button data-href="#Quick-Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,18 +74,18 @@ TOKEN = <span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 <span class="hljs-comment"># 2. Create a collection in quick setup mode</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    dimension=<span class="hljs-number">5</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+dimension=<span class="hljs-number">5</span>
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -92,9 +93,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
@@ -229,24 +231,24 @@ TOKEN = <span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 <span class="hljs-comment"># 2. Create a collection in quick setup mode</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>,
-    dimension=<span class="hljs-number">5</span>,
-    primary_field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
-    id_type=<span class="hljs-string">&quot;string&quot;</span>,
-    vector_field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
-    auto_id=<span class="hljs-literal">True</span>,
-    max_length=<span class="hljs-number">512</span>
+collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>,
+dimension=<span class="hljs-number">5</span>,
+primary_field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+id_type=<span class="hljs-string">&quot;string&quot;</span>,
+vector_field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
+auto_id=<span class="hljs-literal">True</span>,
+max_length=<span class="hljs-number">512</span>
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>
+collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -254,9 +256,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
@@ -384,4 +387,4 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>如果使用上述兩種方式建立的集合仍無法滿足您的需求，請考慮遵循「<a href="/docs/zh-hant/create-collection.md">建立集合</a>」中的程序。</p>
+<p>如果使用上述兩種方式建立的集合仍無法滿足您的需求，請考慮遵循「<a href="/docs/zh-hant/v2.5.x/create-collection.md">建立集合</a>」中的程序。</p>

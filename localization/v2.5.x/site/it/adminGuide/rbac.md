@@ -7,6 +7,7 @@ summary: >-
   gli utenti possono eseguire a livello di raccolta, database e istanza,
   migliorando la sicurezza dei dati.
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">RBAC spiegato<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>Per ottenere il controllo degli accessi tramite RBAC, è necessario seguire i passaggi seguenti:</p>
 <ol>
-<li><p><strong><a href="/docs/it/users_and_roles.md#Create-a-user">Creare un utente</a></strong>: Oltre all'utente predefinito <code translate="no">root</code> in Milvus, è possibile creare nuovi utenti e impostare password per proteggere la sicurezza dei dati.</p></li>
-<li><p><strong><a href="/docs/it/users_and_roles.md#Create-a-role">Creare un ruolo</a></strong>: È possibile creare ruoli personalizzati in base alle proprie esigenze. Le capacità specifiche di un ruolo sono determinate dai suoi privilegi.</p></li>
-<li><p><strong><a href="/docs/it/privilege_group.md">Creare un gruppo di privilegi</a></strong>: Combinare più privilegi in un gruppo di privilegi per semplificare il processo di concessione dei privilegi a un ruolo.</p></li>
-<li><p><strong><a href="/docs/it/grant_privileges.md">Assegnare privilegi o gruppi di privilegi a un ruolo</a></strong>: Definire le capacità di un ruolo per assegnare privilegi o gruppi di privilegi a questo ruolo.</p></li>
-<li><p><strong><a href="/docs/it/grant_roles.md">Assegnare ruoli agli utenti</a></strong>: Assegnare ruoli con determinati privilegi agli utenti, in modo che questi ultimi possano avere i privilegi di un ruolo. Un singolo ruolo può essere assegnato a più utenti.</p></li>
+<li><p><strong><a href="/docs/it/v2.5.x/users_and_roles.md#Create-a-user">Creare un utente</a></strong>: Oltre all'utente predefinito <code translate="no">root</code> in Milvus, è possibile creare nuovi utenti e impostare password per proteggere la sicurezza dei dati.</p></li>
+<li><p><strong><a href="/docs/it/v2.5.x/users_and_roles.md#Create-a-role">Creare un ruolo</a></strong>: È possibile creare ruoli personalizzati in base alle proprie esigenze. Le capacità specifiche di un ruolo sono determinate dai suoi privilegi.</p></li>
+<li><p><strong><a href="/docs/it/v2.5.x/privilege_group.md">Creare un gruppo di privilegi</a></strong>: Combinare più privilegi in un gruppo di privilegi per semplificare il processo di concessione dei privilegi a un ruolo.</p></li>
+<li><p><strong><a href="/docs/it/v2.5.x/grant_privileges.md">Assegnare privilegi o gruppi di privilegi a un ruolo</a></strong>: Definire le capacità di un ruolo per assegnare privilegi o gruppi di privilegi a questo ruolo.</p></li>
+<li><p><strong><a href="/docs/it/v2.5.x/grant_roles.md">Assegnare ruoli agli utenti</a></strong>: Assegnare ruoli con determinati privilegi agli utenti, in modo che questi ultimi possano avere i privilegi di un ruolo. Un singolo ruolo può essere assegnato a più utenti.</p></li>
 </ol>

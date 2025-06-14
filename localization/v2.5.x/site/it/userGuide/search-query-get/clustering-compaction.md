@@ -49,7 +49,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Compattazione del clustering</span> </span></p>
-<p>Utilizzando <strong>PartitionStats</strong> come riferimento, Milvus può sfrondare i dati irrilevanti quando riceve una richiesta di ricerca/query che contiene un valore di chiave di clustering e restringe l'ambito di ricerca all'interno dei segmenti che corrispondono al valore, migliorando così le prestazioni di ricerca. Per maggiori dettagli sul miglioramento delle prestazioni, consultare i <a href="/docs/it/clustering-compaction.md#Benchmark-Test">test di benchmark</a>.</p>
+<p>Utilizzando <strong>PartitionStats</strong> come riferimento, Milvus può sfrondare i dati irrilevanti quando riceve una richiesta di ricerca/query che contiene un valore di chiave di clustering e restringe l'ambito di ricerca all'interno dei segmenti che corrispondono al valore, migliorando così le prestazioni di ricerca. Per maggiori dettagli sul miglioramento delle prestazioni, consultare i <a href="/docs/it/v2.5.x/clustering-compaction.md#Benchmark-Test">test di benchmark</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utilizzare la compattazione del clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,7 +137,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">enableSegmentPrune</code></p></td>
-     <td><p>Specifica se Milvus deve effettuare il pruning dei dati facendo riferimento a PartitionStats quando riceve richieste di ricerca/query. Impostate questo valore su <code translate="no">true</code>, in modo che Milvus possa eliminare i dati alla ricezione di richieste di ricerca/query facendo riferimento a PartitionStats.</p></td>
+     <td><p>Specifica se Milvus esegue il pruning dei dati facendo riferimento a PartitionStats quando riceve richieste di ricerca/query. Impostate questo valore su <code translate="no">true</code>, in modo che Milvus possa eliminare i dati alla ricezione di richieste di ricerca/query facendo riferimento a PartitionStats.</p></td>
      <td></td>
    </tr>
    <tr>
@@ -145,7 +145,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">memoryBufferRatio</code></p></td>
-     <td><p>Specifica il rapporto del buffer di memoria per le attività di compattazione del cluster.  Milvus elimina i dati quando la dimensione dei dati supera la dimensione del buffer allocato calcolata con questo rapporto.</p></td>
+     <td><p>Specifica il rapporto del buffer di memoria per le attività di compattazione del cluster.  Milvus elimina i dati quando la dimensione dei dati supera la dimensione del buffer allocato, calcolata in base a questo rapporto.</p></td>
      <td></td>
    </tr>
    <tr>
@@ -162,7 +162,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>Per applicare le modifiche di cui sopra al vostro cluster Milvus, seguite i passaggi in <a href="/docs/it/configure-helm.md#Configure-Milvus-via-configuration-file">Configurazione di Milvus con Helm</a> e <a href="/docs/it/configure_operator.md">Configurazione di Milvus con Milvus Operators</a>.</p>
+<p>Per applicare le modifiche di cui sopra al vostro cluster Milvus, seguite i passaggi in <a href="/docs/it/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configurazione di Milvus con Helm</a> e <a href="/docs/it/v2.5.x/configure_operator.md">Configurazione di Milvus con Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Configurazione della raccolta</h3><p>Per la compattazione del cluster in una raccolta specifica, è necessario selezionare un campo scalare della raccolta come chiave di clustering.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

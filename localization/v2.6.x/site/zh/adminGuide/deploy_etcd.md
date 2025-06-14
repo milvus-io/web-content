@@ -63,7 +63,7 @@ summary: 了解如何使用 Docker Compose/Helm 为 Milvus 配置元存储。
 <h3 id="2-Run-Milvus" class="common-anchor-header">2.运行 Milvus</h3><p>运行以下命令启动使用 etcd 配置的 Milvus。</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">配置仅在 Milvus 启动后生效。更多信息，请参阅<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">启动 Milvus</a>。</div>
+<div class="alert note">配置仅在 Milvus 启动后生效。有关详细信息，请参阅<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">启动 Milvus</a>。</div>
 <h2 id="Configure-etcd-on-K8s" class="common-anchor-header">在 K8s 上配置 etcd<button data-href="#Configure-etcd-on-K8s" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,7 +79,7 @@ summary: 了解如何使用 Docker Compose/Helm 为 Milvus 配置元存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于 K8s 上的 Milvus 群集，可以在启动 Milvus 的同一命令中配置 etcd。或者，也可以在启动 Milvus 前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 etcd。</p>
+    </button></h2><p>对于 K8s 上的 Milvus 群集，可以在启动 Milvus 的同一命令中配置 etcd。或者，也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 etcd。</p>
 <p>下表列出了在 YAML 文件中配置 etcd 的键值。</p>
 <table>
 <thead>

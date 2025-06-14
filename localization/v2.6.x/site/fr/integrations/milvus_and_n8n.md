@@ -125,5 +125,5 @@ title: Premiers pas avec Milvus et n8n
 <h3 id="Related-Resources" class="common-anchor-header">Ressources connexes</h3><ul>
 <li><a href="https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.vectorstoremilvus/">Documentation sur l'intégration de n8n Milvus</a></li>
 <li><a href="https://js.langchain.com/docs/integrations/vectorstores/milvus/">Documentation LangChain Milvus</a></li>
-<li><a href="https://docs.n8n.io/advanced-ai/">Documentation n8n Advanced AI</a></li>
+<li><a href="https://docs.n8n.io/advanced-ai/">Documentation sur l'IA avancée de n8n</a></li>
 </ul>

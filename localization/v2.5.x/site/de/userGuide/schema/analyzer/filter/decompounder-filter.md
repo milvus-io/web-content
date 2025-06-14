@@ -8,6 +8,7 @@ summary: >-
   nützlich für Sprachen, die häufig zusammengesetzte Wörter verwenden, wie z. B.
   Deutsch.
 ---
+
 <h1 id="Decompounder" class="common-anchor-header">Dekompounder<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,6 +95,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Der <code translate="no">decompounder</code> Filter akzeptiert die folgenden konfigurierbaren Parameter.</p>
 <table>
    <tr>
@@ -105,8 +107,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Eine Liste von Wortkomponenten, die zur Aufteilung zusammengesetzter Begriffe verwendet werden. Dieses Wörterbuch bestimmt, wie zusammengesetzte Wörter in einzelne Begriffe zerlegt werden.</p></td>
    </tr>
 </table>
-<p>Der Filter <code translate="no">decompounder</code> arbeitet mit den vom Tokenizer erzeugten Begriffen, muss also in Kombination mit einem Tokenizer verwendet werden. Eine Liste der in Milvus verfügbaren Tokenizer finden Sie unter <a href="/docs/de/standard-tokenizer.md">Standard Tokenizer</a> und den zugehörigen Seiten.</p>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Sammelschema definieren. Dies ermöglicht es Milvus, den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung zu verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
+<p>Der Filter <code translate="no">decompounder</code> arbeitet mit den vom Tokenizer erzeugten Begriffen, muss also in Kombination mit einem Tokenizer verwendet werden. Eine Liste der in Milvus verfügbaren Tokenizer finden Sie unter <a href="/docs/de/v2.5.x/standard-tokenizer.md">Standard Tokenizer</a> und den zugehörigen Seiten.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Sammelschema definieren. Dies ermöglicht es Milvus, den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung zu verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -171,6 +173,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
@@ -180,6 +183,7 @@ sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&q
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

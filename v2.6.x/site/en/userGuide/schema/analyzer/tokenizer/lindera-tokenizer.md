@@ -2,11 +2,30 @@
 id: lindera-tokenizer.md
 title: "Lindera"
 summary: "The lindera tokenizer performs dictionary-based morphological analysis. It is a good choice for languages—such as Japanese, Korean, and Chinese—whose words are not separated by spaces."
+beta: Milvus 2.5.11+
 ---
 
 # Lindera
 
 The `lindera` tokenizer performs dictionary-based morphological analysis. It is a good choice for languages—such as Japanese, Korean, and Chinese—whose words are not separated by spaces.
+
+## Prerequisites
+
+To use the `lindera` tokenizer, you need to use a specially compiled Milvus version. All dictionaries must be explicitly enabled during compilation to be used.
+
+To enable specific dictionaries, include them in the compilation command:
+
+```
+make milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
+```
+
+The complete list of available dictionaries is: `lindera-ipadic`, `lindera-ipadic-neologd`, `lindera-unidic`, `lindera-ko-dic`, `lindera-cc-cedict`.
+
+For example, to enable all dictionaries:
+
+```
+make milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ipadic-neologd,lindera-unidic,lindera-ko-dic,lindera-cc-cedict
+```
 
 ## Configuration
 
@@ -14,7 +33,8 @@ To configure an analyzer using the `lindera` tokenizer, set `tokenizer.type` to 
 
 <div class="multipleCode">
     <a href="#python">Python</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
 </div>
 
 ```python
@@ -26,13 +46,17 @@ analyzer_params = {
 }
 ```
 
-```plaintext
+```java
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer",
                 new HashMap<String, Object>() {{
                     put("type", "lindera");
                     put("dict_kind", "ipadic");
                 }});
+```
+
+```go
+analyzerParams = map[string]any{"tokenizer": map[string]any{"type": "lindera", "dict_kind": "ipadic"}}
 ```
 
 <table>
@@ -45,12 +69,16 @@ analyzerParams.put("tokenizer",
      <td><p>The type of tokenizer. This is fixed to <code>"lindera"</code>.</p></td>
    </tr>
    <tr>
-     <td><p><code>dict</code></p></td>
-     <td><p>A list of dictionaries used to define vocabulary. Possible values:</p>
+     <td><p><code>dict_kind</code></p></td>
+     <td><p>A dictionary used to define vocabulary. Possible values:</p>
 <ul>
-<li><p><code>ipadic</code>: Japanese</p></li>
-<li><p><code>ko-dic</code>: Korean</p></li>
-<li><p><code>cc-cedict</code>: Mandarin Chinese (traditional/simpl.)</p></li>
+<li><p><code>ko-dic</code>: Korean - Korean morphological dictionary (<a href="https://bitbucket.org/eunjeon/mecab-ko-dic">MeCab Ko-dic</a>)</p></li>
+<li><p><code>ipadic</code>: Japanese - Standard morphological dictionary (<a href="https://taku910.github.io/mecab/">MeCab IPADIC</a>)</p></li>
+
+<li><p><code>ipadic-neologd</code>: Japanese with neologism dictionary (extended) - Includes new words and proper nouns (<a href="https://github.com/neologd/mecab-ipadic-neologd">IPADIC NEologd</a>)</p></li>
+<li><p><code>unidic</code>: Japanese UniDic (extended) - Academic standard dictionary with detailed linguistic information (<a href="https://clrd.ninjal.ac.jp/unidic/">UniDic</a>)</p></li>
+<li><p><code>cc-cedict</code>: Mandarin Chinese (traditional/simplified) - Community-maintained Chinese-English dictionary (<a href="https://cc-cedict.org/wiki/">CC-CEDICT</a>)</p>
+<p><strong>Note:</strong> All dictionaries must be enabled during Milvus compilation to be available for use.</p></li>
 </ul></td>
    </tr>
 </table>
@@ -65,7 +93,8 @@ Before applying the analyzer configuration to your collection schema, verify its
 
 <div class="multipleCode">
     <a href="#python">Python</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
 </div>
 
 ```python
@@ -77,7 +106,7 @@ analyzer_params = {
 }
 ```
 
-```plaintext
+```java
 Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer",
                 new HashMap<String, Object>() {{
@@ -86,11 +115,16 @@ analyzerParams.put("tokenizer",
                 }});
 ```
 
-### Verification using `run_analyzer`
+```go
+analyzerParams = map[string]any{"tokenizer": map[string]any{"type": "lindera", "dict_kind": "ipadic"}}
+```
+
+### Verification using `run_analyzer` | Milvus 2.5.11+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
+    <a href="#go">Go</a>
 </div>
 
 ```python
@@ -127,6 +161,36 @@ RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
         .analyzerParams(analyzerParams)
         .build());
 List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
+```
+
+```go
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []string{"東京スカイツリーの最寄り駅はとうきょうスカイツリー駅で"}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(string(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ### Expected output

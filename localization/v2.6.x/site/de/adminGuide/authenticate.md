@@ -186,7 +186,7 @@ client.update_password(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Weitere Informationen zum Aktualisieren von Benutzerpasswörtern finden Sie in <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
-<p>Wenn Sie Ihr altes Passwort vergessen haben, bietet Milvus einen Konfigurationspunkt an, der es Ihnen ermöglicht, bestimmte Benutzer als Superuser zu bestimmen. Dadurch wird das alte Passwort nicht mehr benötigt, wenn Sie das Passwort zurücksetzen.</p>
+<p>Wenn Sie Ihr altes Passwort vergessen haben, bietet Milvus einen Konfigurationspunkt, der es Ihnen ermöglicht, bestimmte Benutzer als Superuser zu bestimmen. Dadurch wird das alte Passwort nicht mehr benötigt, wenn Sie das Passwort zurücksetzen.</p>
 <p>Standardmäßig ist das Feld <code translate="no">common.security.superUsers</code> in der Milvus-Konfigurationsdatei leer, was bedeutet, dass alle Benutzer beim Zurücksetzen ihres Passworts das alte Passwort angeben müssen. Sie können jedoch bestimmte Benutzer als Superuser bezeichnen, die das alte Passwort nicht angeben müssen. Im folgenden Ausschnitt werden <code translate="no">root</code> und <code translate="no">foo</code> als Superuser bezeichnet.</p>
 <p>Sie sollten den folgenden Konfigurationspunkt in der Milvus-Konfigurationsdatei hinzufügen, die den Betrieb Ihrer Milvus-Instanz regelt.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>

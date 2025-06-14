@@ -3,6 +3,7 @@ id: metric.md
 title: 度量類型
 summary: 相似度量用來衡量向量之間的相似性。選擇適當的距離指標有助於大幅改善分類和聚類效能。
 ---
+
 <h1 id="Metric-Types" class="common-anchor-header">度量類型<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +62,7 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
 </table>
 <div class="alert note">
 <ul>
-<li><p>對於<code translate="no">SPARSE\_FLOAT\_VECTOR</code> 類型的向量場，僅在執行全文檢索時使用<code translate="no">BM25</code> 公制類型。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p></li>
+<li><p>對於<code translate="no">SPARSE\_FLOAT\_VECTOR</code> 類型的向量場，僅在執行全文檢索時使用<code translate="no">BM25</code> 公制類型。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/full-text-search.md">全文</a>檢索。</p></li>
 <li><p>對於<code translate="no">BINARY_VECTOR</code> 類型的向量欄位，尺寸值 (<code translate="no">dim</code>) 必須是 8 的倍數。</p></li>
 </ul>
 </div>
@@ -244,7 +245,7 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 是一種廣泛使用的文字相關性測量方法，專門設計用於<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>。它結合了以下三個關鍵因素：</p>
+    </button></h2><p>BM25 是一種廣泛使用的文字相關性測量方法，專門設計用於<a href="/docs/zh-hant/v2.5.x/full-text-search.md">全文檢索</a>。它結合了以下三個關鍵因素：</p>
 <ul>
 <li><p><strong>詞彙頻率 (TF)：</strong>測量詞彙在文件中出現的頻率。儘管頻率越高通常表示重要性越高，但 BM25 使用飽和參數<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span>k<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>來防止過度頻繁的詞彙主宰相關性得分。</p></li>
 <li><p><strong>反向文件頻率 (IDF)：</strong>反映詞彙在整個語料庫中的重要性。出現在較少文件中的詞彙會得到較高的 IDF 值，表示對相關性的貢獻較大。</p></li>

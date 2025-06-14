@@ -99,7 +99,7 @@ go build
 <p>Obtenga los <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">scripts</a>. A continuación, ejecute los scripts para generar los datos. Asegúrese de que <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, el SDK Python oficial de Milvus, ha sido instalado.</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>Este paso es opcional. Si lo omite, asegúrese de que ya tiene algunos datos en su instancia de Milvus.</p>
+<p>Este paso es opcional. Si omite este paso, asegúrese de que ya tiene algunos datos en su instancia de Milvus.</p>
 <h2 id="Back-up-data" class="common-anchor-header">Copia de seguridad de los datos<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,7 +174,7 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez completada la restauración, puede verificar los datos restaurados indexando la colección restaurada como se indica a continuación:</p>
+    </button></h2><p>Una vez finalizada la restauración, puede verificar los datos restaurados indexando la colección restaurada como se indica a continuación:</p>
 <pre><code translate="no" class="language-shell">python example/verify_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>Tenga en cuenta que la secuencia de comandos anterior presupone que ha ejecutado el comando <code translate="no">restore</code> con el indicador <code translate="no">-s</code> y que el sufijo se ha establecido en <code translate="no">-recover</code>. No dude en realizar los cambios necesarios en el script para adaptarlo a sus necesidades.</p>

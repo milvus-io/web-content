@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Concordancia de frases
+title: Concordancia de frasesCompatible with Milvus 2.6.x
 summary: >-
   La concordancia de frases permite buscar documentos que contengan los términos
   de la consulta como una frase exacta. Por defecto, las palabras deben aparecer
@@ -9,8 +9,9 @@ summary: >-
   "...modelos típicos de aprendizaje automático de robótica...", donde las
   palabras "robótica", "máquina" y "aprendizaje" aparecen en secuencia sin
   ninguna otra palabra entre ellas.
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Concordancia de frases<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Concordancia de frases<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

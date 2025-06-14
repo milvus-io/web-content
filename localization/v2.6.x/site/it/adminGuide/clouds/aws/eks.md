@@ -103,7 +103,7 @@ summary: Imparare a distribuire un cluster Milvus su EKS
     </button></h2><p>È possibile impostare le risorse AWS necessarie, tra cui un bucket AWS S3 e un cluster EKS, utilizzando AWS Management Console, AWS CLI o strumenti IAC, come Terraform. In questo documento si preferisce utilizzare la AWS CLI per dimostrare come impostare le risorse AWS.</p>
 <h3 id="Create-an-Amazon-S3-Bucket" class="common-anchor-header">Creare un bucket Amazon S3</h3><ul>
 <li><p>Creare un bucket AWS S3.</p>
-<p>Leggete le <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">regole di denominazione dei bucket</a> e osservate le regole di denominazione per il vostro bucket AWS S3.</p>
+<p>Leggete le <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">regole di denominazione del bucket</a> e osservate le regole di denominazione per il vostro bucket AWS S3.</p>
 <pre><code translate="no" class="language-shell">milvus_bucket_name=&quot;milvus-bucket-$(openssl rand -hex 12)&quot;
 
 aws s3api create-bucket --bucket &quot;$milvus_bucket_name&quot; --region &#x27;us-east-2&#x27; --acl private  --object-ownership ObjectWriter --create-bucket-configuration LocationConstraint=&#x27;us-east-2&#x27;

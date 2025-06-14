@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Correspondência de frases
+title: Correspondência de frasesCompatible with Milvus 2.6.x
 summary: >-
   A correspondência de frases permite-lhe procurar documentos que contenham os
   termos da sua consulta como uma frase exacta. Por predefinição, as palavras
@@ -9,8 +9,9 @@ summary: >-
   texto como "...modelos típicos de aprendizagem automática de robótica...",
   onde as palavras "robótica", "máquina" e "aprendizagem" aparecem em sequência
   sem outras palavras entre elas.
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Correspondência de frases<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Correspondência de frases<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,7 +53,7 @@ summary: >-
 <li><p><strong>Criação de índice invertido</strong>: Milvus constrói um índice invertido, mapeando cada token para o(s) documento(s) em que aparece e as posições do token nesses documentos.</p></li>
 <li><p><strong>Correspondência de frases</strong>: Quando uma consulta de frase é executada, o Milvus procura cada token no índice invertido e verifica as suas posições para determinar se aparecem na ordem e proximidade corretas. O parâmetro <code translate="no">slop</code> controla o número máximo de posições permitidas entre os tokens correspondentes:</p>
 <ul>
-<li><p><strong>slop = 0</strong> significa que os tokens devem aparecer <strong>na ordem exacta e imediatamente adjacentes</strong> (ou seja, sem palavras extra pelo meio).</p>
+<li><p><strong>slop = 0</strong> significa que os tokens têm de aparecer <strong>na ordem exacta e imediatamente adjacentes</strong> (ou seja, sem palavras extra pelo meio).</p>
 <ul>
 <li>No exemplo, apenas <strong>doc_1</strong> (<strong>"machine"</strong> na <strong>pos=0</strong>, <strong>"learning"</strong> na <strong>pos=1</strong>) corresponde exatamente.</li>
 </ul></li>
@@ -106,7 +107,7 @@ schema.add_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opcional: Configurar um analisador</h3><p>A precisão da correspondência de frases depende significativamente do analisador utilizado para tokenizar os seus dados de texto. Diferentes analisadores adaptam-se a diferentes idiomas e formatos de texto, afectando a tokenização e a precisão posicional. A seleção de um analisador adequado para o seu caso de utilização específico optimizará os resultados da correspondência de frases.</p>
-<p>Por predefinição, o Milvus utiliza o analisador padrão, que tokeniza o texto com base em espaços em branco e pontuação, remove tokens com mais de 40 caracteres e converte o texto para minúsculas. Não são necessários parâmetros adicionais para o uso padrão. Consulte <a href="/docs/pt/standard-analyzer.md">Analisador padrão</a> para obter detalhes.</p>
+<p>Por predefinição, o Milvus utiliza o analisador padrão, que tokeniza o texto com base em espaços em branco e pontuação, remove tokens com mais de 40 caracteres e converte o texto para minúsculas. Nenhum parâmetro adicional é necessário para o uso padrão. Consulte <a href="/docs/pt/standard-analyzer.md">Analisador padrão</a> para obter detalhes.</p>
 <p>Se o seu aplicativo exigir um analisador específico, configure-o usando o parâmetro <code translate="no">analyzer_params</code>. Por exemplo, veja como configurar o analisador <code translate="no">english</code> para correspondência de frases em texto em inglês:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -183,7 +184,7 @@ schema.add_field(
      <td><p>"A aprendizagem de algoritmos de máquina avançados expande as capacidades de IA"</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">Consulta com correspondência de frases</h3><p>Ao utilizar o método <code translate="no">query()</code>, <strong>PHRASE_MATCH</strong> actua como um filtro escalar. Só são devolvidos os documentos que contêm a frase especificada (sujeita à inclinação permitida).</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">Consulta com correspondência de frases</h3><p>Ao utilizar o método <code translate="no">query()</code>, <strong>PHRASE_MATCH</strong> actua como um filtro escalar. Apenas são devolvidos os documentos que contêm a frase especificada (sujeita à inclinação permitida).</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">Exemplo: slop = 0 (correspondência exacta)</h4><p>Este exemplo devolve documentos que contêm a frase exacta <strong>"machine learning"</strong> sem quaisquer tokens extra pelo meio.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -322,7 +323,7 @@ result_slop2 = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>A ativação da correspondência de frases para um campo desencadeia a criação de um índice invertido, que consome recursos de armazenamento. Considere o impacto no armazenamento quando decidir ativar esta funcionalidade, uma vez que este varia em função do tamanho do texto, dos tokens únicos e do analisador utilizado.</p></li>
+<li><p>A ativação da correspondência de frases para um campo desencadeia a criação de um índice invertido, que consome recursos de armazenamento. Considere o impacto no armazenamento quando decidir ativar esta funcionalidade, uma vez que este varia com base no tamanho do texto, nos tokens únicos e no analisador utilizado.</p></li>
 <li><p>Depois de definir um analisador no seu esquema, as suas definições tornam-se permanentes para essa coleção. Se decidir que um analisador diferente se adequa melhor às suas necessidades, pode considerar eliminar a coleção existente e criar uma nova com a configuração de analisador pretendida.</p></li>
 <li><p>O desempenho da correspondência de frases depende de como o texto é tokenizado. Antes de aplicar um analisador a toda a sua coleção, use o método <code translate="no">run_analyzer</code> para revisar a saída da tokenização. Para obter mais informações, consulte <a href="/docs/pt/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">Visão geral do analisador</a>.</p></li>
 <li><p>Regras de escape em expressões <code translate="no">filter</code>:</p>

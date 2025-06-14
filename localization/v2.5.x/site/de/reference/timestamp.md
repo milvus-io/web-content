@@ -5,6 +5,7 @@ summary: >-
   Erfahren Sie mehr über das Konzept des Zeitstempels und die vier wichtigsten
   zeitstempelbezogenen Parameter in der Milvus-Vektordatenbank.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">Zeitstempel<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,5 +106,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erfahren Sie, wie <a href="/docs/de/consistency.md">der garantierte Zeitstempel die abstimmbare Konsistenz in Milvus ermöglicht</a></li>
+<li>Erfahren Sie, wie <a href="/docs/de/v2.5.x/consistency.md">der garantierte Zeitstempel die abstimmbare Konsistenz in Milvus ermöglicht</a></li>
 </ul>

@@ -151,7 +151,7 @@ helm install my-grafana grafana/grafana --namespace monitoring
 <pre><code translate="no" class="language-shell">export POD_NAME=$(kubectl get pods --namespace monitoring -l &quot;app.kubernetes.io/name=grafana,app.kubernetes.io/instance=my-grafana&quot; -o jsonpath=&quot;{.items[0].metadata.name}&quot;)
 kubectl --namespace monitoring port-forward $POD_NAME 3000
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Add-Loki-as-a-Data-Source-in-Grafana" class="common-anchor-header">2. Adicionar o Loki como uma fonte de dados no Grafana</h3><p>Quando o Grafana estiver em execução, você precisará adicionar o Loki como uma fonte de dados para consultar os logs.</p>
+<h3 id="2-Add-Loki-as-a-Data-Source-in-Grafana" class="common-anchor-header">2. Adicionar o Loki como uma fonte de dados no Grafana</h3><p>Quando o Grafana estiver em execução, você precisa adicionar o Loki como uma fonte de dados para consultar os logs.</p>
 <ol>
 <li>Abra um navegador da Web e navegue até <code translate="no">127.0.0.1:3000</code>. Faça login usando o nome de usuário <code translate="no">admin</code> e a senha obtida anteriormente.</li>
 <li>No menu do lado esquerdo, escolha <strong>Conexões</strong> &gt; <strong>Adicionar nova conexão</strong>.</li>
@@ -166,7 +166,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 <ol>
 <li>No menu do lado esquerdo, clique em <strong>Explore (Explorar</strong>).</li>
 <li>No canto superior esquerdo da página, escolha a fonte de dados loki.</li>
-<li>Use <strong>o navegador de rótulos</strong> para selecionar rótulos e consultar logs.</li>
+<li>Use o <strong>navegador de rótulos</strong> para selecionar rótulos e consultar logs.</li>
 </ol>
 <p>
   

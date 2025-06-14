@@ -3,7 +3,7 @@ id: deploy_pulsar.md
 title: Configurar o armazenamento de mensagens com Docker Compose ou Helm
 related_key: 'Pulsar, storage'
 summary: >-
-  Saiba como configurar o armazenamento de mensagens com o Docker Compose ou o
+  Saiba como configurar o armazenamento de mensagens com o Docker Compose ou
   Helm.
 ---
 <h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Configurar o armazenamento de mensagens com Docker Compose ou Helm<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">

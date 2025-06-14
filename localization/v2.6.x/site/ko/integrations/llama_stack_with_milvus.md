@@ -46,7 +46,7 @@ summary: >-
 <li>임베딩 모델로는 기본 <code translate="no">all-MiniLM-L6-v2</code> 을 사용합니다.</li>
 </ul>
 <div class="alert note">
-<p>이 튜토리얼은 주로 <a href="https://llama-stack.readthedocs.io/en/latest/index.html">라마 스택 문서의</a> 공식 설치 가이드를 참조합니다. 이 튜토리얼에서 오래된 부분을 발견하면 공식 가이드를 우선적으로 따르고 문제를 생성할 수 있습니다.</p>
+<p>이 튜토리얼은 주로 <a href="https://llama-stack.readthedocs.io/en/latest/index.html">라마 스택 문서의</a> 공식 설치 가이드를 참조합니다. 이 튜토리얼에서 오래된 부분을 발견하면 공식 가이드를 우선적으로 따르고 문제를 만들어 주세요.</p>
 </div>
 <h2 id="Start-Llama-Stack-Server" class="common-anchor-header">라마 스택 서버 시작하기<button data-href="#Start-Llama-Stack-Server" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,7 +102,7 @@ $ pip install -e .
 <p><code translate="no">~/.llama/distributions/together/together-run.yaml</code> 에 파일이 생성됩니다. 그런 다음 이 명령을 실행하여 서버를 시작합니다:</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>모든 것이 순조롭게 진행되면 포트 8321에서 라마 스택 서버가 성공적으로 실행되는 것을 볼 수 있을 것입니다.</p>
+<p>모든 것이 순조롭게 진행되면 포트 8321에서 라마 스택 서버가 성공적으로 실행되는 것을 볼 수 있습니다.</p>
 <h2 id="Perform-RAG-from-client" class="common-anchor-header">클라이언트에서 RAG 수행<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

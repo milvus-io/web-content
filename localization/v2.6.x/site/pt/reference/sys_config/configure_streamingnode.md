@@ -39,7 +39,7 @@ summary: Saiba como configurar o streamingNode para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>

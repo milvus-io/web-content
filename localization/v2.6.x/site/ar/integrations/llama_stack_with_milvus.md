@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a> هو نهج مكدس<a href="https://github.com/meta-llama/llama-stack/tree/main">Llama</a> Stack هو نهج موجه نحو الخدمة يعتمد على واجهة برمجة التطبيقات أولاً لبناء تطبيقات الذكاء الاصطناعي للإنتاج. وهو يوفر مكدسًا عالميًا يسمح للمطورين بالتطوير في أي مكان، والنشر في كل مكان، والاستفادة من وحدات البناء الجاهزة للإنتاج مع استقلالية حقيقية للمزود. تركز حزمة Llama Stack على نماذج Llama الخاصة ب Meta، وقابلية التركيب، والجاهزية للإنتاج، والنظام البيئي للشراكة.</p>
-<p>سنقدم في هذا البرنامج التعليمي كيفية بناء خادم Llama Stack المكدس الذي تم تكوينه باستخدام Milvus، مما يتيح لك استيراد بياناتك الخاصة لتكون بمثابة قاعدة معرفية. سنقوم بعد ذلك بإجراء استعلامات على الخادم، وإنشاء تطبيق RAG كامل.</p>
+<p>سنقدم في هذا البرنامج التعليمي كيفية إنشاء خادم Llama Stack المكدس الذي تم تكوينه باستخدام Milvus، مما يتيح لك استيراد بياناتك الخاصة لتكون بمثابة قاعدة معرفية. سنقوم بعد ذلك بإجراء استعلامات على الخادم، وإنشاء تطبيق RAG كامل.</p>
 <h2 id="Preparing-the-Environment" class="common-anchor-header">إعداد البيئة<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +64,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">إعداد البيئة</h3><p>نظرًا لأننا بحاجة إلى استخدام الذكاء الاصطناعي معًا كخدمة LLM، يجب علينا أولاً تسجيل الدخول إلى الموقع الرسمي لتقديم طلب للحصول على <a href="https://api.together.xyz/settings/api-keys">مفتاح API</a> وتعيين مفتاح API <code translate="no">TOGETHER_API_KEY</code> كمتغير بيئة.</p>
+    </button></h2><h3 id="Prepare-the-Environment" class="common-anchor-header">إعداد البيئة</h3><p>نظرًا لأننا نحتاج إلى استخدام الذكاء الاصطناعي معًا كخدمة LLM، يجب علينا أولاً تسجيل الدخول إلى الموقع الرسمي لتقديم طلب للحصول على <a href="https://api.together.xyz/settings/api-keys">مفتاح API</a> وتعيين مفتاح API <code translate="no">TOGETHER_API_KEY</code> كمتغير بيئة.</p>
 <p>استنساخ كود مصدر Llama Stack</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/meta-llama/llama-stack.git
 $ <span class="hljs-built_in">cd</span> llama-stack

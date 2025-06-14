@@ -5,6 +5,7 @@ summary: >-
   Penganalisis bahasa Inggris di Milvus dirancang untuk memproses teks bahasa
   Inggris, menerapkan aturan khusus bahasa untuk tokenisasi dan penyaringan.
 ---
+
 <h1 id="English" class="common-anchor-header">Bahasa Inggris<button data-href="#English" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>Penganalisis <code translate="no">english</code> menggunakan komponen-komponen berikut:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Menggunakan<a href="/docs/id/standard-tokenizer.md"> tokenizer</a> <code translate="no">standard</code><a href="/docs/id/standard-tokenizer.md"></a> untuk membagi teks menjadi unit-unit kata yang terpisah.</p></li>
+<li><p><strong>Tokenizer</strong>: Menggunakan<a href="/docs/id/v2.5.x/standard-tokenizer.md"> tokenizer</a> <code translate="no">standard</code><a href="/docs/id/v2.5.x/standard-tokenizer.md"></a> untuk membagi teks menjadi unit-unit kata yang terpisah.</p></li>
 <li><p><strong>Filter</strong>: Termasuk beberapa filter untuk pemrosesan teks yang komprehensif:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Mengubah semua token menjadi huruf kecil, sehingga memungkinkan pencarian tanpa huruf besar-kecil.</p></li>
@@ -109,6 +110,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +188,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks di dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
+
+<p>Setelah mendefinisikan <code translate="no">analyzer_params</code>, Anda dapat menerapkannya ke bidang <code translate="no">VARCHAR</code> saat mendefinisikan skema koleksi. Hal ini memungkinkan Milvus untuk memproses teks di dalam bidang tersebut menggunakan penganalisis yang ditentukan untuk tokenisasi dan pemfilteran yang efisien. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md#Example-use">Contoh penggunaan</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,6 +232,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verifikasi menggunakan <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -244,6 +248,7 @@ sample_text = <span class="hljs-string">&quot;Milvus is a vector database built 
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

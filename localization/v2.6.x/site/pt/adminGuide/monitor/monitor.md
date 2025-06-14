@@ -123,7 +123,7 @@ O clusterrole padrão prometheus-k8s não pode capturar as métricas do milvus, 
       </svg>
     </button></h2><ul>
 <li>Se você implantou serviços de monitoramento para o cluster do Milvus, talvez também queira aprender a:<ul>
-<li><a href="/docs/pt/visualize.md">Visualizar métricas do Milvus no Grafana</a></li>
+<li><a href="/docs/pt/visualize.md">Visualizar as métricas do Milvus no Grafana</a></li>
 <li><a href="/docs/pt/alert.md">Criar um alerta para os serviços do Milvus</a></li>
 <li>Ajustar sua <a href="/docs/pt/allocate.md">alocação de recursos</a></li>
 </ul></li>

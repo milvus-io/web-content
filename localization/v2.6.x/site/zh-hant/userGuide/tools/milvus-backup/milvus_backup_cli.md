@@ -58,7 +58,7 @@ go build
       </svg>
     </button></h2><p>下載<a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">範例組態檔案</a>，並依您的需求進行調整。</p>
 <p>然後在已下載或已建立的 Milvus Backup 二進位檔旁邊建立一個資料夾，將資料夾名稱為<code translate="no">configs</code> ，並將設定檔放在<code translate="no">configs</code> 資料夾內。</p>
-<p>您的資料夾結構應與以下相似：</p>
+<p>您的資料夾結構應該與下面相似：</p>
 <pre>
   <code translate="no">
   workspace
@@ -99,7 +99,7 @@ go build
 <p>獲取<a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">腳本</a>。然後執行腳本來產生資料。確保已安裝官方的 Milvus Python SDK<a href="https://pypi.org/project/pymilvus/">PyMilvus</a>。</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>此步驟是可選的。如果跳過此步驟，請確保您的 Milvus 實例中已經有一些資料。</p>
+<p>此步驟是可選的。如果您跳過這一步，請確保您的 Milvus 實例中已經有一些資料。</p>
 <h2 id="Back-up-data" class="common-anchor-header">備份資料<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,7 +132,7 @@ mc ls my_minio
 # </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>現在，您可以將備份檔案儲存到安全的地方，以便將來還原，或上傳到<a href="https://cloud.zilliz.com">Zilliz Cloud</a>，以您的資料建立受管理的向量資料庫。詳情請參閱<a href="https://zilliz.com/doc/migrate_from_milvus-2x">從 Milvus 遷移到 Zilliz Cloud</a>。</p>
+<p>現在，您可以將備份檔案儲存至安全的地方，以便將來還原，或上傳至<a href="https://cloud.zilliz.com">Zilliz Cloud</a>，以您的資料建立受管理的向量資料庫。詳情請參閱<a href="https://zilliz.com/doc/migrate_from_milvus-2x">從 Milvus 遷移到 Zilliz Cloud</a>。</p>
 <h2 id="Restore-data" class="common-anchor-header">還原資料<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

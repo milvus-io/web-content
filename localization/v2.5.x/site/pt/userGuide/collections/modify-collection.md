@@ -5,6 +5,7 @@ summary: >-
   Pode mudar o nome de uma coleção ou alterar as suas definições. Esta página
   centra-se na forma de modificar uma coleção.
 ---
+
 <h1 id="Modify-Collection" class="common-anchor-header">Modificar coleção<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,15 +43,16 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.rename_collection(
-    old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
+old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.RenameCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -146,10 +148,11 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
 <span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
@@ -199,15 +202,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Se os dados de uma coleção tiverem de ser eliminados após um período específico, considere definir o seu Time-To-Live (TTL) em segundos. Assim que o TTL expirar, o Milvus elimina todas as entidades da coleção.  A exclusão é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes que a exclusão seja concluída. Para mais detalhes, consulte <a href="/docs/pt/set-collection-ttl.md">Definir TTL da coleção</a>.</p></td>
+     <td><p>Se os dados de uma coleção tiverem de ser eliminados após um período específico, considere definir o seu Time-To-Live (TTL) em segundos. Assim que o TTL expirar, o Milvus elimina todas as entidades da coleção.  A exclusão é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes que a exclusão seja concluída. Para mais detalhes, consulte <a href="/docs/pt/v2.5.x/set-collection-ttl.md">Definir TTL da coleção</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>O mapeamento de memória (Mmap) permite o acesso direto à memória de grandes ficheiros no disco, permitindo ao Milvus armazenar índices e dados tanto na memória como nos discos rígidos. Esta abordagem ajuda a otimizar a política de colocação de dados com base na frequência de acesso, expandindo a capacidade de armazenamento das colecções sem afetar o desempenho da pesquisa.</p><p>Para obter detalhes, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p></td>
+     <td><p>O mapeamento de memória (Mmap) permite o acesso direto à memória de grandes ficheiros no disco, permitindo ao Milvus armazenar índices e dados tanto na memória como nos discos rígidos. Esta abordagem ajuda a otimizar a política de colocação de dados com base na frequência de acesso, expandindo a capacidade de armazenamento das colecções sem afetar o desempenho da pesquisa.</p><p>Para obter detalhes, consulte <a href="/docs/pt/v2.5.x/mmap.md">Usar mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>Com o Isolamento da Chave de Partição ativado, o Milvus agrupa entidades com base no valor da Chave de Partição e cria um índice separado para cada um desses grupos. Ao receber um pedido de pesquisa, o Milvus localiza o índice com base no valor da Chave de Partição especificado na condição de filtragem e restringe o âmbito da pesquisa às entidades incluídas no índice, evitando assim a pesquisa de entidades irrelevantes durante a pesquisa e melhorando consideravelmente o desempenho da pesquisa. Para obter detalhes, consulte <a href="/docs/pt/use-partition-key.md#Use-Partition-Key-Isolation">Usar isolamento de chave de partição</a>.</p></td>
+     <td><p>Com o Isolamento da Chave de Partição ativado, o Milvus agrupa entidades com base no valor da Chave de Partição e cria um índice separado para cada um desses grupos. Ao receber um pedido de pesquisa, o Milvus localiza o índice com base no valor da Chave de Partição especificado na condição de filtragem e restringe o âmbito da pesquisa às entidades incluídas no índice, evitando assim a pesquisa de entidades irrelevantes durante a pesquisa e melhorando consideravelmente o desempenho da pesquisa. Para obter detalhes, consulte <a href="/docs/pt/v2.5.x/use-partition-key.md#Use-Partition-Key-Isolation">Usar isolamento de chave de partição</a>.</p></td>
    </tr>
 </table>
 <h2 id="Drop-Collection-Properties" class="common-anchor-header">Anular propriedades de coleção<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">

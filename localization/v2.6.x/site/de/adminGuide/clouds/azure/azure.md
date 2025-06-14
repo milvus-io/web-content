@@ -241,7 +241,7 @@ az storage container create -n testmilvus --account-name milvustesting1
 helm repo update
 helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>In den vorangegangenen Befehlen fügen wir das Repo der Milvus-Helm-Charts lokal hinzu und aktualisieren das Repo, um die neuesten Charts abzurufen. Dann installieren wir eine Milvus-Instanz und nennen sie <strong>my-release</strong>.</p>
+<p>In den vorangegangenen Befehlen fügen wir das Repo der Milvus Helm Charts lokal hinzu und aktualisieren das Repo, um die neuesten Charts zu holen. Dann installieren wir eine Milvus-Instanz und nennen sie <strong>my-release</strong>.</p>
 <p>Beachten Sie den Wert von config <code translate="no">service.type</code>, der angibt, dass wir die Milvus-Instanz über einen Layer-4-Loadbalancer bereitstellen möchten.</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">Überprüfen Sie die Bereitstellung<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"

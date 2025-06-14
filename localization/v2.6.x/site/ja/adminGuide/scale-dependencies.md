@@ -56,7 +56,7 @@ title: 規模の依存
 <p>ファイルを保存した後、以下のコマンドで変更を適用します：</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>これにより、MinIOクラスタに追加のサーバプールが追加され、Milvusは各サーバプールの空きディスク容量に基づいてMinIOサーバプールに書き込むことができるようになります。たとえば、3つのプールのグループに合計10TiBの空き容量があり、各プールに次のように配分されている場合、次のようになります：</p>
+<p>これにより、MinIOクラスタに追加のサーバプールが追加され、Milvusは各サーバプールの空きディスク容量に基づいてMinIOサーバプールに書き込むことができるようになります。たとえば、3つのプールのグループに合計10TiBの空き容量があり、各プールに次のように分散されている場合、次のようになります：</p>
 <table>
 <thead>
 <tr><th></th><th>空き容量</th><th>書き込み可能</th></tr>

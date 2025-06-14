@@ -91,7 +91,7 @@ title: Milvus WebUI
 <li><p><a href="#Configurations">Konfigurationen</a></p>
 <p>Sie können die Liste der Milvus-Konfigurationen und deren Werte anzeigen.</p></li>
 <li><p><a href="#Tools">Werkzeuge</a></p>
-<p>Über die Web-UI können Sie auf die beiden integrierten Tools pprof und Milvus-Datenvisualisierung zugreifen.</p></li>
+<p>Sie können von der Web-UI aus auf die beiden eingebauten Tools, pprof und Milvus-Datenvisualisierung, zugreifen.</p></li>
 </ul>
 <h2 id="Home" class="common-anchor-header">Startseite<button data-href="#Home" class="anchor-icon" translate="no">
       <svg translate="no"

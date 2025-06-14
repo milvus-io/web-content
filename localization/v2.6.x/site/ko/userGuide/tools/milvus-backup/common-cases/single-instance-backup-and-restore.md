@@ -39,7 +39,7 @@ title: 하나의 인스턴스에서 백업 및 복원
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>단일 인스턴스 백업 및 복원.png</span> </span></p>
-<p>데이터 저장소로<code translate="no">bucket_A</code> 이라는 버킷을 사용하는 Milvus 인스턴스( <code translate="no">milvus_A</code>)가 있다고 가정합니다. 이 예제에서는 다음 작업을 완료하는 것이 목표입니다:</p>
+<p><code translate="no">bucket_A</code> 이라는 버킷을 데이터 저장소로 사용하는 Milvus 인스턴스( <code translate="no">milvus_A</code>)가 있다고 가정합니다. 이 예제에서는 다음 작업을 완료하는 것이 목표입니다:</p>
 <ol>
 <li><p><code translate="no">bucket_A</code> 에서 컬렉션 coll에 대한 백업(<code translate="no">my_backup</code>)을 만듭니다.</p></li>
 <li><p>백업에서 복원하고 복원된 컬렉션의 이름을 <code translate="no">coll_bak</code> 으로 지정합니다.</p></li>

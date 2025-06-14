@@ -1,10 +1,10 @@
 ---
 id: gcs.md
-title: ワークロードアイデンティティによるGCSアクセスの設定
+title: ワークロードIDによるGCSアクセスの構成
 related_key: 'gcs, storage, workload identity, iam'
 summary: Workload Identityを使用したgcsの設定方法について説明します。
 ---
-<h1 id="Configure-GCS-Access-by-Workload-Identity" class="common-anchor-header">ワークロードアイデンティティによるGCSアクセスの設定<button data-href="#Configure-GCS-Access-by-Workload-Identity" class="anchor-icon" translate="no">
+<h1 id="Configure-GCS-Access-by-Workload-Identity" class="common-anchor-header">ワークロードIDによるGCSアクセスの構成<button data-href="#Configure-GCS-Access-by-Workload-Identity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +76,7 @@ summary: Workload Identityを使用したgcsの設定方法について説明し
     --condition=<span class="hljs-string">&#x27;title=milvus-testing-nonprod,expression=resource.service == &quot;storage.googleapis.com&quot; &amp;&amp; resource.name.startsWith(&quot;projects/_/buckets/milvus-testing-nonprod&quot;)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>2つのサービスアカウント間にIAMポリシーバインディングを追加することで、KubernetesサービスアカウントがIAMサービスアカウントになりすますことを許可します。このバインディングによって、KubernetesサービスアカウントがIAMサービスアカウントとして動作できるようになります。</li>
+<li>2つのサービスアカウント間にIAMポリシーバインディングを追加することで、KubernetesサービスアカウントがIAMサービスアカウントになりすますことを許可します。このバインディングにより、KubernetesサービスアカウントがIAMサービスアカウントとして動作できるようになります。</li>
 </ul>
 <pre><code translate="no" class="language-bash">gcloud iam service-accounts add-iam-policy-binding milvus-gcs-access-sa@milvus-testing-nonprod.iam.gserviceaccount.com \
     --role <span class="hljs-string">&quot;roles/iam.workloadIdentityUser&quot;</span> \

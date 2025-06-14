@@ -2,6 +2,7 @@
 id: chunk_cache.md
 title: Mengonfigurasi Chunk Cache
 ---
+
 <h1 id="Configure-Chunk-Cache" class="common-anchor-header">Mengonfigurasi Chunk Cache<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,11 +54,11 @@ title: Mengonfigurasi Chunk Cache
     </button></h2><p>Panduan ini menyediakan instruksi tentang cara mengonfigurasi mekanisme chunk cache untuk instance Milvus. Konfigurasi bervariasi sesuai dengan cara Anda menginstal instans Milvus.</p>
 <ul>
 <li><p>Untuk instans Milvus yang diinstal menggunakan Helm Charts</p>
-<p>Tambahkan konfigurasi ke file <code translate="no">values.yaml</code> di bawah bagian <code translate="no">config</code>. Untuk detailnya, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>.</p></li>
+<p>Tambahkan konfigurasi ke file <code translate="no">values.yaml</code> di bawah bagian <code translate="no">config</code>. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>.</p></li>
 <li><p>Untuk instans Milvus yang diinstal menggunakan Docker Compose</p>
-<p>Tambahkan konfigurasi ke berkas <code translate="no">milvus.yaml</code> yang Anda gunakan untuk memulai instans Milvus. Untuk detailnya, lihat <a href="/docs/id/configure-docker.md">Mengkonfigurasi Milvus dengan Docker Compose</a>.</p></li>
+<p>Tambahkan konfigurasi ke berkas <code translate="no">milvus.yaml</code> yang Anda gunakan untuk memulai instans Milvus. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/configure-docker.md">Mengkonfigurasi Milvus dengan Docker Compose</a>.</p></li>
 <li><p>Untuk instans Milvus yang diinstal menggunakan Operator</p>
-<p>Tambahkan konfigurasi ke bagian <code translate="no">spec.components</code> pada sumber daya kustom <code translate="no">Milvus</code>. Untuk detailnya, lihat <a href="/docs/id/configure_operator.md">Mengkonfigurasi Milvus dengan Operator</a>.</p></li>
+<p>Tambahkan konfigurasi ke bagian <code translate="no">spec.components</code> pada sumber daya kustom <code translate="no">Milvus</code>. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/configure_operator.md">Mengkonfigurasi Milvus dengan Operator</a>.</p></li>
 </ul>
 <h3 id="Configuration-options" class="common-anchor-header">Opsi konfigurasi</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
     <span class="hljs-attr">cache</span>:

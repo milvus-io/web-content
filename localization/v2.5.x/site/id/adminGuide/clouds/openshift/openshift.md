@@ -4,6 +4,7 @@ title: Menerapkan Cluster Milvus di OpenShift
 related_key: cluster
 summary: Pelajari cara menggunakan cluster Milvus di OpenShift.
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-OpenShift" class="common-anchor-header">Menerapkan Cluster Milvus di OpenShift<button data-href="#Deploy-a-Milvus-Cluster-on-OpenShift" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +178,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
       </svg>
     </button></h2><p>Jika Anda ingin mempelajari cara menerapkan Milvus di cloud lain:</p>
 <ul>
-<li><a href="/docs/id/eks.md">Menerapkan Milvus Cluster di AWS dengan Kubernetes</a></li>
-<li><a href="/docs/id/azure.md">Menerapkan Milvus Cluster di Azure dengan Kubernetes</a></li>
-<li><a href="/docs/id/gcp.md">Menerapkan Milvus Cluster di GCP dengan Kubernetes</a></li>
+<li><a href="/docs/id/v2.5.x/eks.md">Menerapkan Milvus Cluster di AWS dengan Kubernetes</a></li>
+<li><a href="/docs/id/v2.5.x/azure.md">Menerapkan Milvus Cluster di Azure dengan Kubernetes</a></li>
+<li><a href="/docs/id/v2.5.x/gcp.md">Menerapkan Milvus Cluster di GCP dengan Kubernetes</a></li>
 </ul>

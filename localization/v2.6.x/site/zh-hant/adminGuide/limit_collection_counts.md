@@ -63,10 +63,10 @@ title: 設定收集數量限制
         ></path>
       </svg>
     </button></h2><p>在一個集合中，您可以設定多個分片和分區。分片是用於在多個資料節點之間分配資料寫入作業的邏輯單位。分區是邏輯單位，用於透過僅載入集合資料的子集來提高資料擷取效率。計算當前 Milvus 實例中的集合數量時，您還需要計算分片和分區。</p>
-<p>例如，假設您已經建立了<strong>100 個</strong>集合，其中<strong>60 個</strong>集合有<strong>2</strong>個分塊和<strong>4 個</strong>分區，其餘<strong>40 個</strong>集合有<strong>1</strong>個分塊和<strong>12 個</strong>分區。集合單元的總數（計算方式為<code translate="no">shards × partitions</code> ）可如下確定：</p>
+<p>例如，假設您已經建立了<strong>100 個</strong>集合，其中<strong>60 個</strong>集合有<strong>2</strong>個分塊和<strong>4 個</strong>分割，其餘<strong>40 個</strong>集合有<strong>1</strong>個分塊和<strong>12 個</strong>分割。集合單元的總數（計算方式為<code translate="no">shards × partitions</code> ）可如下確定：</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，計算出的 960 個集合單位總數代表目前的使用量。<code translate="no">maxGeneralCapacity</code> 定義了一個實例可支援的最大集合單位數量，預設值為<code translate="no">65536</code> 。這表示該實體最多可容納 65,536 個收集單元。如果總數超過此限制，系統會顯示以下錯誤訊息：</p>
+<p>在此範例中，計算出的 960 個集合單位總數代表目前的使用量。<code translate="no">maxGeneralCapacity</code> 定義了實體可支援的最大集合單位數量，預設值為<code translate="no">65536</code> 。這表示該實體最多可容納 65,536 個收集單元。如果總數超過此限制，系統會顯示以下錯誤訊息：</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
 <p>若要避免此錯誤訊息，您可以減少現有或新集合中的分片或分割數量、刪除某些集合，或增加<code translate="no">maxGeneralCapacity</code> 值。</p>

@@ -2,6 +2,7 @@
 id: multi-language-analyzers.md
 title: "Multi-language Analyzers"
 summary: "When Milvus performs text analysis, it typically applies a single analyzer across an entire text field in a collection. If that analyzer is optimized for English, it struggles with the very different tokenization and stemming rules required by other languages, such as Chinese, Spanish, or French, resulting a lower recall rate. For instance, a search for the Spanish word \"teléfono\" (meaning \"phone\") would trip up an English‑focused analyzer: it may drop the accent and apply no Spanish‑specific stemming, causing relevant results to be overlooked."
+beta: Milvus 2.5.11+
 ---
 
 # Multi-language Analyzers
@@ -419,9 +420,9 @@ export textField='{
   "dataType": "VarChar",
   "elementTypeParams": {
     "max_length": 8192,
-    "enable_analyzer": true
+    "enable_analyzer": true，
+    "multiAnalyzerParam": '"$multi_analyzer_params"'
   },
-  "multiAnalyzerParam": '"$multi_analyzer_params"'
 }'
 
 export sparseField='{
@@ -435,14 +436,14 @@ export sparseField='{
 Define a BM25 function to generate sparse vector representations from your raw text data:
 
 <div class="multipleCode">
-    <a href="#plaintext">plaintext</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
-```plaintext
+```python
 # Create the BM25 function
 bm25_function = Function(
     name="text_to_vector",            # Descriptive function name
@@ -848,14 +849,14 @@ When searching with multi-language analyzers, `search_params` contains crucial c
 - `params={"drop_ratio_search": "0"}` controls BM25-specific behavior; here, it retains all terms in the search. For more information, refer to [Sparse Vector](sparse_vector.md).
 
 <div class="multipleCode">
-    <a href="#plaintext">plaintext</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
-```plaintext
+```python
 search_params = {
     "metric_type": "BM25",            # Must match index configuration
     "analyzer_name": "english",  # Analyzer that matches the query language
@@ -987,14 +988,14 @@ curl --request POST \
 This example demonstrates switching to the Chinese analyzer (using its alias `"cn"`) for different query text. All other parameters remain the same, but now the query text is processed using Chinese-specific tokenization rules.
 
 <div class="multipleCode">
-    <a href="#plaintext">plaintext</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
-```plaintext
+```python
 search_params["analyzer_name"] = "cn"
 
 chinese_results = client.search(

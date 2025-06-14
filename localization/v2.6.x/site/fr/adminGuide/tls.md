@@ -213,7 +213,7 @@ openssl req -new -key client.key\
      ├── server.key
      └── ca.pem
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Mise à jour de la configuration de Docker Compose</h4><p>Modifiez le fichier <code translate="no">docker-compose.yaml</code> pour mapper les chemins d'accès aux fichiers de certificats à l'intérieur du conteneur comme indiqué ci-dessous :</p>
+<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Mise à jour de la configuration de Docker Compose</h4><p>Modifiez le fichier <code translate="no">docker-compose.yaml</code> pour mapper les chemins d'accès aux fichiers de certificats à l'intérieur du conteneur, comme indiqué ci-dessous :</p>
 <pre><code translate="no" class="language-yaml">  <span class="hljs-attr">standalone:</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:latest</span>

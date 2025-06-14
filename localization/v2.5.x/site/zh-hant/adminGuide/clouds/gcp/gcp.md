@@ -4,6 +4,7 @@ title: 在 GKE 上部署 Milvus 集群
 related_key: cluster
 summary: 了解如何在 GKE 上部署 Milvus 群集。
 ---
+
 <h1 id="Deploy-a-Milvus-Cluster-on-GKE" class="common-anchor-header">在 GKE 上部署 Milvus 集群<button data-href="#Deploy-a-Milvus-Cluster-on-GKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,34 +81,35 @@ summary: 了解如何在 GKE 上部署 Milvus 群集。
     --rules=icmp
 
 gcloud compute firewall-rules create milvus-network-allow-internal \
-    --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
-    --description=<span class="hljs-string">&quot;Allows connections from any source in the network IP range to any instance on the network using all protocols.&quot;</span> \
-    --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">10.128</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">9</span> \
-    --action=ALLOW --rules=<span class="hljs-built_in">all</span>
+ --project=milvus-testing-nonprod \
+ --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+ --description=<span class="hljs-string">&quot;Allows connections from any source in the network IP range to any instance on the network using all protocols.&quot;</span> \
+ --direction=INGRESS \
+ --priority=<span class="hljs-number">65534</span> \
+ --source-ranges=<span class="hljs-number">10.128</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">9</span> \
+ --action=ALLOW --rules=<span class="hljs-built_in">all</span>
 
 gcloud compute firewall-rules create milvus-network-allow-rdp \
-    --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
-    --description=<span class="hljs-string">&quot;Allows RDP connections from any source to any instance on the network using port 3389.&quot;</span> \
-    --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
-    --action=ALLOW \
-    --rules=tcp:<span class="hljs-number">3389</span>
+ --project=milvus-testing-nonprod \
+ --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+ --description=<span class="hljs-string">&quot;Allows RDP connections from any source to any instance on the network using port 3389.&quot;</span> \
+ --direction=INGRESS \
+ --priority=<span class="hljs-number">65534</span> \
+ --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
+ --action=ALLOW \
+ --rules=tcp:<span class="hljs-number">3389</span>
 
 gcloud compute firewall-rules create milvus-network-allow-ssh \
-    --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
-    --description=<span class="hljs-string">&quot;Allows TCP connections from any source to any instance on the network using port 22.&quot;</span> \
-    --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
-    --action=ALLOW \
-    --rules=tcp:<span class="hljs-number">22</span>
+ --project=milvus-testing-nonprod \
+ --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+ --description=<span class="hljs-string">&quot;Allows TCP connections from any source to any instance on the network using port 22.&quot;</span> \
+ --direction=INGRESS \
+ --priority=<span class="hljs-number">65534</span> \
+ --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
+ --action=ALLOW \
+ --rules=tcp:<span class="hljs-number">22</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>最後，您需要允許埠<strong>19530</strong> 的傳入流量到我們稍後建立的 Milvus 實例。</p>
 <pre><code translate="no" class="language-bash">gcloud compute firewall-rules create allow-milvus-<span class="hljs-keyword">in</span> \
     --project=milvus-testing-nonprod  \
@@ -192,22 +194,23 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
     enabled: <span class="hljs-literal">true</span>
 
 service:
-    <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-built_in">type</span>: LoadBalancer
 
 minio:
-    enabled: <span class="hljs-literal">false</span>
+enabled: <span class="hljs-literal">false</span>
 
 externalS3:
-    enabled: <span class="hljs-literal">true</span>
-    host: storage.googleapis.com
-    port: 443
-    rootPath: milvus/my-release
-    bucketName: milvus-testing-nonprod
-    cloudProvider: gcp
-    useSSL: <span class="hljs-literal">true</span>
-    accessKey: <span class="hljs-string">&quot;&lt;access-key&gt;&quot;</span>
-    secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
+enabled: <span class="hljs-literal">true</span>
+host: storage.googleapis.com
+port: 443
+rootPath: milvus/my-release
+bucketName: milvus-testing-nonprod
+cloudProvider: gcp
+useSSL: <span class="hljs-literal">true</span>
+accessKey: <span class="hljs-string">&quot;&lt;access-key&gt;&quot;</span>
+secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Deploy-Milvus" class="common-anchor-header">部署 Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -230,7 +233,7 @@ helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>在前面的指令中，我們在本機新增 Milvus Helm 圖表的 repo，並更新 repo 以取得最新的圖表。然後，我們安裝一個 Milvus 實例，並命名為<strong>my-release</strong>。</p>
 <p>請注意配置<code translate="no">service.type</code> 的值，它表示我們希望透過 Layer-4 負載平衡器揭露 Milvus 的實例。</p>
-<p>如果您想透過第 7 層負載平衡器暴露您的 Milvus 實例，請<a href="/docs/zh-hant/gcp_layer7.md">閱讀這篇文章</a>。</p>
+<p>如果您想透過第 7 層負載平衡器暴露您的 Milvus 實例，請<a href="/docs/zh-hant/v2.5.x/gcp_layer7.md">閱讀這篇文章</a>。</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">驗證部署<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,6 +285,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>如果您想學習如何在其他雲端部署 Milvus：</p>
 <ul>
-<li><a href="/docs/zh-hant/eks.md">使用 Kubernetes 在 AWS 上部署 Milvus 叢集</a></li>
-<li><a href="/docs/zh-hant/azure.md">使用 Kubernetes 在 Azure 上部署 Milvus 群集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/eks.md">使用 Kubernetes 在 AWS 上部署 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/azure.md">使用 Kubernetes 在 Azure 上部署 Milvus 群集</a></li>
 </ul>

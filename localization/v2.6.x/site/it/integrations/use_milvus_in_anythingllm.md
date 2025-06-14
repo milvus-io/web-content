@@ -21,7 +21,7 @@ title: Utilizzare Milvus in AnythingLLM
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://anythingllm.com/">AnythingLLM</a> è una potente applicazione desktop AI all-in-one, incentrata sulla privacy, che supporta diversi LLM, tipi di documenti e database vettoriali. Consente di creare un assistente privato simile a ChatGPT che può essere eseguito localmente o ospitato in remoto, permettendo di chattare in modo intelligente con i documenti forniti.</p>
+    </button></h1><p><a href="https://anythingllm.com/">AnythingLLM</a> è una potente applicazione desktop AI all-in-one, incentrata sulla privacy, che supporta diversi LLM, tipi di documenti e database vettoriali. Consente di creare un assistente privato, simile a ChatGPT, che può essere eseguito localmente o ospitato in remoto, permettendo di chattare in modo intelligente con i documenti forniti.</p>
 <p>Questa guida vi guiderà nella configurazione di Milvus come database vettoriale in AnythingLLM, consentendovi di incorporare, archiviare e cercare i vostri documenti per un recupero intelligente e una chat.</p>
 <blockquote>
 <p>Questa guida si basa sulla documentazione ufficiale di AnythingLLM e sulle fasi di utilizzo reali. Se l'interfaccia utente o i passaggi cambiano, fate riferimento alla documentazione ufficiale più recente e sentitevi liberi di suggerire miglioramenti.</p>
@@ -71,7 +71,7 @@ title: Utilizzare Milvus in AnythingLLM
    </span> <span class="img-wrapper"> <span>Aprire le impostazioni</span> </span></li>
 </ol>
 <ol start="2">
-<li><p>Nel menu a sinistra, selezionare <code translate="no">AI Providers</code> &gt; <code translate="no">Vector Database</code> <br>
+<li><p>Nel menu di sinistra, selezionare <code translate="no">AI Providers</code> &gt; <code translate="no">Vector Database</code> <br>
 
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_config.png" alt="Select Vector Database" class="doc-image" id="select-vector-database" />
@@ -81,7 +81,7 @@ title: Utilizzare Milvus in AnythingLLM
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_vectordb.png" alt="Choose Milvus" class="doc-image" id="choose-milvus" />
    </span> <span class="img-wrapper"> <span>Scegliere Milvus</span> </span></p></li>
-<li><p>Inserire i dettagli della connessione a Milvus (per Milvus locale). Ecco un esempio:</p>
+<li><p>Inserire i dati di connessione a Milvus (per Milvus locale). Ecco un esempio:</p>
 <ul>
 <li><strong>Indirizzo DB Milvus</strong>: <code translate="no">http://localhost:19530</code></li>
 <li><strong>Milvus Nome utente</strong>: <code translate="no">root</code></li>

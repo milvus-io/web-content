@@ -5,6 +5,7 @@ summary: >-
   memigrasikan data dari Elasticsearch ke Milvus 2.x.
 title: Dari Elasticsearch
 ---
+
 <h1 id="From-Elasticsearch" class="common-anchor-header">Dari Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ title: Dari Elasticsearch
 <li>Untuk detail instalasi, lihat Menginstalasi <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Elasticsearch</a> dan Menginstalasi <a href="https://milvus.io/docs/install_standalone-docker.md">Milvus</a>.</li>
 </ul></li>
 <li><strong>Alat yang dibutuhkan</strong>:<ul>
-<li>Alat<a href="https://github.com/zilliztech/milvus-migration">migrasi Milvus</a>. Untuk detail instalasi, lihat Menginstal <a href="/docs/id/milvusdm_install.md">Alat Migrasi</a>.</li>
+<li>Alat<a href="https://github.com/zilliztech/milvus-migration">migrasi Milvus</a>. Untuk detail instalasi, lihat Menginstal <a href="/docs/id/v2.5.x/milvusdm_install.md">Alat Migrasi</a>.</li>
 </ul></li>
 <li><strong>Tipe data yang didukung untuk migrasi</strong>: Bidang-bidang yang akan dimigrasikan dari sumber indeks Elasticsearch adalah dari jenis berikut - <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">kata kunci</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">teks</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">objek</a>. Tipe data yang tidak tercantum di sini saat ini tidak didukung untuk migrasi. Lihat <a href="#field-mapping-reference">Referensi pemetaan bidang</a> untuk informasi rinci mengenai pemetaan data antara koleksi Milvus dan indeks Elasticsearch.</li>
 <li><strong>Persyaratan indeks Elasticsearch</strong>:<ul>

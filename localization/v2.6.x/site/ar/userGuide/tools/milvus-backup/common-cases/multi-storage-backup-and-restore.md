@@ -64,7 +64,7 @@ title: الترحيل بين المثيلات عبر بيئات S3
       </svg>
     </button></h2><ul>
 <li><p>تأكد من تثبيت أداة <strong>النسخ الاحتياطي Milvus-backup</strong>.</p></li>
-<li><p>تعرف على تكوين إعدادات تخزين كائنات ميلفوس. لمزيد من التفاصيل، راجع <a href="https://milvus.io/docs/deploy_s3.md">تخزين الكائنات</a>.</p></li>
+<li><p>تعرف على تكوين إعدادات تخزين كائنات ميلفوس. للحصول على التفاصيل، راجع <a href="https://milvus.io/docs/deploy_s3.md">تخزين الكائنات</a>.</p></li>
 </ul>
 <h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">النسخ الاحتياطي لمجموعة من milvus_A<button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -188,7 +188,7 @@ mc ls my_minio
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>بمجرد تنزيل ملفات النسخ الاحتياطية، يمكنك تحميلها إلى وحدة تخزين الكائنات التي يستخدمها <code translate="no">milvus_B</code> للاستعادة المستقبلية. بدلاً من ذلك، يمكنك تحميل النسخة الاحتياطية إلى <a href="https://cloud.zilliz.com/">Zilliz Cloud</a> لإنشاء قاعدة بيانات متجهة مُدارة ببياناتك. لمزيد من التفاصيل، راجع <a href="https://zilliz.com/doc/migrate_from_milvus-2x">الترحيل من ميلفوس إلى زيليز كلاود</a>.</p>
+<p>بمجرد تنزيل ملفات النسخ الاحتياطية، يمكنك تحميلها إلى وحدة تخزين الكائنات التي يستخدمها <code translate="no">milvus_B</code> للاستعادة المستقبلية. وبدلاً من ذلك، يمكنك تحميل النسخة الاحتياطية إلى <a href="https://cloud.zilliz.com/">Zilliz Cloud</a> لإنشاء قاعدة بيانات متجهة مُدارة ببياناتك. لمزيد من التفاصيل، راجع <a href="https://zilliz.com/doc/migrate_from_milvus-2x">الترحيل من ميلفوس إلى زيليز كلاود</a>.</p>
 <h2 id="Restore-from-the-backup-to-milvusB" class="common-anchor-header">الاستعادة من النسخة الاحتياطية إلى milvus_B<button data-href="#Restore-from-the-backup-to-milvusB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

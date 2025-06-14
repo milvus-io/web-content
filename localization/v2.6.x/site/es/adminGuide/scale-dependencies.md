@@ -2,7 +2,7 @@
 id: scale-dependencies.md
 title: Dependencias de escala
 ---
-<h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Dependencias de Scale Milvus<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
+<h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Dependencias de Milvus Scale<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +36,7 @@ title: Dependencias de escala
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Aumente los recursos por pod MinIO</h3><p>MinIO, un sistema de almacenamiento de objetos utilizado por Milvus, puede aumentar sus recursos de CPU y memoria para cada pod.</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Aumente los recursos por pod MinIO</h3><p>MinIO, un sistema de almacenamiento de objetos utilizado por Milvus, puede tener sus recursos de CPU y memoria incrementados para cada pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-attr">resources:</span>

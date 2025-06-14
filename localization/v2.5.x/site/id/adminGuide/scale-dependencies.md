@@ -2,6 +2,7 @@
 id: scale-dependencies.md
 title: Ketergantungan Skala
 ---
+
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Skala Ketergantungan Milvus<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ title: Ketergantungan Skala
       </svg>
     </button></h1><p>Milvus bergantung pada berbagai ketergantungan seperti MinIO, Kafka, Pulsar, dan lain-lain. Menskalakan komponen-komponen ini dapat meningkatkan kemampuan beradaptasi Milvus terhadap kebutuhan yang berbeda.</p>
 <div class="alert note">
-<p>Untuk pengguna Milvus Operator, lihat <a href="/docs/id/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a>, Mengonfigurasi <a href="/docs/id/meta_storage_operator.md">Penyimpanan Meta dengan Milvus Operator</a>, dan <a href="/docs/id/message_storage_operator.md">Mengonfigurasi Penyimpanan Pesan dengan Milvus Operator</a>.</p>
+<p>Untuk pengguna Milvus Operator, lihat <a href="/docs/id/v2.5.x/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a>, Mengonfigurasi <a href="/docs/id/v2.5.x/meta_storage_operator.md">Penyimpanan Meta dengan Milvus Operator</a>, dan <a href="/docs/id/v2.5.x/message_storage_operator.md">Mengonfigurasi Penyimpanan Pesan dengan Milvus Operator</a>.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">Skala MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

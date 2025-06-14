@@ -3,6 +3,7 @@ id: time_sync.md
 title: مزامنة الوقت
 summary: تعرف على نظام مزامنة الوقت في ميلفوس.
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">مزامنة الوقت<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: تعرف على نظام مزامنة الوقت في ميلفوس.
         ></path>
       </svg>
     </button></h2><ul>
-<li>تعرف على مفهوم <a href="/docs/ar/timestamp.md">الطابع</a> الزمني.</li>
-<li>تعرف على <a href="/docs/ar/data_processing.md">سير عمل معالجة البيانات</a> في ميلفوس.</li>
+<li>تعرف على مفهوم <a href="/docs/ar/v2.5.x/timestamp.md">الطابع</a> الزمني.</li>
+<li>تعرف على <a href="/docs/ar/v2.5.x/data_processing.md">سير عمل معالجة البيانات</a> في ميلفوس.</li>
 </ul>

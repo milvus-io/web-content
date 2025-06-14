@@ -5,6 +5,7 @@ summary: >-
   O tokenizador padrão do Milvus divide o texto com base em espaços e sinais de
   pontuação, tornando-o adequado para a maioria das línguas.
 ---
+
 <h1 id="Standard-Tokenizer" class="common-anchor-header">Tokenizador padrão<button data-href="#Standard-Tokenizer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,9 +86,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Para uma configuração mais simples, você pode optar por usar o <a href="/docs/pt/standard-analyzer.md">analisador</a> <code translate="no">standard</code>, que combina o tokenizador <code translate="no">standard</code> com o<a href="/docs/pt/lowercase-filter.md"> filtro</a> <code translate="no">lowercase</code><a href="/docs/pt/lowercase-filter.md"></a>.</p>
+<p>Para uma configuração mais simples, você pode optar por usar o <a href="/docs/pt/v2.5.x/standard-analyzer.md">analisador</a> <code translate="no">standard</code>, que combina o tokenizador <code translate="no">standard</code> com o<a href="/docs/pt/v2.5.x/lowercase-filter.md"> filtro</a> <code translate="no">lowercase</code><a href="/docs/pt/v2.5.x/lowercase-filter.md"></a>.</p>
 </div>
-<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-los a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
+<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-los a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/v2.5.x/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,6 +137,7 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

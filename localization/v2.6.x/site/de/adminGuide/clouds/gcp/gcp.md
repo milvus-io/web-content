@@ -42,7 +42,7 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf GKE einsetzen.'
     </button></h2><p>Um Milvus auf GCP bereitzustellen, müssen Sie sicherstellen, dass</p>
 <ul>
 <li><p>In Ihrem GCP-Konto ist bereits ein Projekt vorhanden.</p>
-<p>Wie Sie ein Projekt erstellen können, erfahren Sie unter <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Erstellen und Verwalten von Projekten</a>. Der Name des in dieser Anleitung verwendeten Projekts ist <strong>milvus-testing-nonprod</strong>.</p></li>
+<p>Um ein Projekt zu erstellen, lesen Sie bitte den Abschnitt <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Erstellen und Verwalten von Projekten</a>. Der Name des in dieser Anleitung verwendeten Projekts ist <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> und <a href="https://helm.sh/docs/intro/install/">Helm</a> lokal installiert oder sich entschieden, stattdessen die browserbasierte <a href="https://cloud.google.com/shell">Cloud Shell</a> zu verwenden.</p></li>
 <li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">die gcloud CLI</a> mit Ihren GCP-Kontoanmeldeinformationen <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialisiert</a>.</p></li>
 </ul>
@@ -265,7 +265,7 @@ helm install -f values.yaml my-release milvus/milvus
         ></path>
       </svg>
     </button></h2><p>Bitte lesen Sie <a href="https://milvus.io/docs/v2.3.x/example_code.md">Hello Milvus</a>, ändern Sie den Host-Wert in die externe IP-Adresse und führen Sie dann den Code aus.</p>
-<h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Wie geht's weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

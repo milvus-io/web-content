@@ -6,6 +6,7 @@ summary: >-
   能同時在記憶體和硬碟中儲存索引和資料。這種方法有助於根據存取頻率優化資料放置政策，在不嚴重影響搜尋效能的情況下，擴大資料集的儲存容量。本頁可協助您瞭解
   Milvus 如何使用 mmap 來實現快速高效的資料儲存和檢索。
 ---
+
 <h1 id="Use-mmap" class="common-anchor-header">使用 mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +107,7 @@ summary: >-
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>要將上述設定套用到您的 Milvus 叢集，請依照<a href="/docs/zh-hant/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a>和<a href="/docs/zh-hant/configure_operator.md">Configure Milvus with Milvus Operators</a> 的步驟。</p>
+<p>要將上述設定套用到您的 Milvus 叢集，請依照<a href="/docs/zh-hant/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a>和<a href="/docs/zh-hant/v2.5.x/configure_operator.md">Configure Milvus with Milvus Operators</a> 的步驟。</p>
 <p>有時候，全局 mmap 設定在面對特定使用個案時並不具彈性。若要對特定的集合或其索引套用其他設定，請考慮針對集合、欄位或索引設定特定的 mmap。您需要釋放並載入一個集合，然後對 mmap 設定的變更才會生效。</p>
 <h3 id="Field-specific-mmap-settings" class="common-anchor-header">特定欄位的 mmap 設定</h3><p>要設定欄位特定的 mmap，您需要在新增欄位時加入<code translate="no">mmap_enabled</code> 參數。您可以透過將此參數設定為<code translate="no">True</code> 來啟用此特定欄位的 mmap。</p>
 <p>以下範例示範如何在新增欄位時，設定特定於欄位的 mmap。</p>
@@ -118,8 +119,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN
+uri=CLUSTER_ENDPOINT,
+token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -130,20 +131,21 @@ schema = MilvusClient.create_schema()
 
 <span class="hljs-comment"># Add a scalar field and enable mmap</span>
 schema.add_field(
-    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-    datatype=DataType.INT64,
-    is_primary=<span class="hljs-literal">True</span>,
-    mmap_enabled=<span class="hljs-literal">True</span>,
+field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+datatype=DataType.INT64,
+is_primary=<span class="hljs-literal">True</span>,
+mmap_enabled=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Alter mmap settings on a specific field</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_collection_field(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -313,20 +315,21 @@ index_params = MilvusClient.prepare_index_params()
 
 <span class="hljs-comment"># Create index on the varchar field with mmap settings</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;title&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+field_name=<span class="hljs-string">&quot;title&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+<span class="hljs-comment"># highlight-next-line</span>
+params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
 )
 
 <span class="hljs-comment"># Change mmap settings for an index</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_index_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    index_name=<span class="hljs-string">&quot;title&quot;</span>,
-    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+index_name=<span class="hljs-string">&quot;title&quot;</span>,
+properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -449,15 +452,16 @@ client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</s
 <span class="hljs-comment"># Ensure that the collection has already been released </span>
 <span class="hljs-comment"># and run the following</span>
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={
-        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
-    }
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={
+<span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
+}
 )
 
 <span class="hljs-comment"># Load the collection to make the above change take effect</span>
 client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">client.releaseCollection(ReleaseCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build());

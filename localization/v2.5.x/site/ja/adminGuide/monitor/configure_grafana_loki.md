@@ -3,6 +3,7 @@ id: configure_grafana_loki.md
 title: Grafana Lokiの設定
 summary: このトピックでは、Lokiを使用してログを収集し、Grafanaを使用してMilvusクラスタのログをクエリする方法について説明します。
 ---
+
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">Grafana Lokiの設定<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +42,7 @@ summary: このトピックでは、Lokiを使用してログを収集し、Graf
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/install_cluster-helm.md">K8s上にMilvusクラスタをインストールして</a>いる。</li>
+<li><a href="/docs/ja/v2.5.x/install_cluster-helm.md">K8s上にMilvusクラスタをインストールして</a>いる。</li>
 <li><a href="https://helm.sh/docs/intro/install/">Helmや</a> <a href="https://kubernetes.io/docs/tasks/tools/">Kubectlなどの</a>必要なツールをインストールしている。</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Lokiのデプロイ<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
@@ -73,8 +74,9 @@ helm repo update
   <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
 
 <span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>オプション2：ストレージにAWS S3を使用する。</p>
 <p>以下の例では、<code translate="no">&lt;accessKey&gt;</code> と<code translate="no">&lt;keyId&gt;</code> を独自の S3 アクセスキーと ID に、<code translate="no">s3.endpoint</code> を S3 エンドポイントに、<code translate="no">s3.region</code> を S3 リージョンに置き換えてください。</p>
 <pre><code translate="no" class="language-yaml">loki:

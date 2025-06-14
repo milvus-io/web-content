@@ -110,7 +110,7 @@ summary: 了解如何在 Kubernetes 上为 Milvus 分配资源。
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values -f resources.yaml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-如果未指定<code translate="no">resources.limits</code> ，pod 将占用所有可用的 CPU 和内存资源。因此，请确保指定<code translate="no">resources.requests</code> 和<code translate="no">resources.limits</code> ，以避免在同一实例上的其他运行任务需要消耗更多内存时出现资源过度分配的情况。</div>
+如果未指定<code translate="no">resources.limits</code> ，pod 将消耗所有可用的 CPU 和内存资源。因此，请确保指定<code translate="no">resources.requests</code> 和<code translate="no">resources.limits</code> ，以避免在同一实例上的其他运行任务需要消耗更多内存时出现资源过度分配的情况。</div>
 <p>有关资源管理的更多信息，请参阅<a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/">Kubernetes 文档</a>。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

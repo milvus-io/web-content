@@ -34,7 +34,7 @@ title: 监控
 <li><p><strong>任务数</strong>：一段时间内处于<strong>初始</strong>、<strong>暂停</strong>和<strong>运行</strong>状态的任务数。</p></li>
 <li><p><strong>任务状态</strong>：单个任务的状态。</p></li>
 <li><p><strong>请求数</strong>：成功请求数和总请求数</p></li>
-<li><p><strong>请求延迟</strong>：通过 p99 请求的延迟时间、平均值和其他统计数据。</p></li>
+<li><p><strong>请求延迟</strong>：通过 p99 请求的延迟、平均值和其他统计数据。</p></li>
 <li><p><strong>复制数据速率</strong>：读/写操作的复制数据速率</p></li>
 <li><p><strong>复制时滞</strong>：读/写操作的<strong>复制时滞</strong>：读/写操作的复制时滞。</p></li>
 <li><p><strong>api 执行次数</strong>：Milvus CDC 不同 API 的执行次数。</p></li>

@@ -1,11 +1,12 @@
 ---
 id: message_storage_operator.md
 title: Konfigurieren der Nachrichtenspeicherung mit Milvus Operator
-related_key: 'minio, s3, storage, etcd, pulsar'
+related_key: "minio, s3, storage, etcd, pulsar"
 summary: >-
   Erfahren Sie, wie Sie die Nachrichtenspeicherung mit Milvus Operator
   konfigurieren.
 ---
+
 <h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">Konfigurieren der Nachrichtenspeicherung mit Milvus Operator<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -367,6 +368,6 @@ spec:
       </svg>
     </button></h2><p>Erfahren Sie, wie Sie andere Milvus-Abhängigkeiten mit Milvus Operator konfigurieren können:</p>
 <ul>
-<li><a href="/docs/de/object_storage_operator.md">Konfigurieren Sie Objektspeicher mit Milvus Operator</a></li>
-<li><a href="/docs/de/meta_storage_operator.md">Konfigurieren Sie Meta-Speicher mit Milvus Operator</a></li>
+<li><a href="/docs/de/v2.5.x/object_storage_operator.md">Konfigurieren Sie Objektspeicher mit Milvus Operator</a></li>
+<li><a href="/docs/de/v2.5.x/meta_storage_operator.md">Konfigurieren Sie Meta-Speicher mit Milvus Operator</a></li>
 </ul>

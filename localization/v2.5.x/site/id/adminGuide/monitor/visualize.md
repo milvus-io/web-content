@@ -1,9 +1,10 @@
 ---
 id: visualize.md
 title: Memvisualisasikan Metrik
-related_key: 'monitor, alert'
+related_key: "monitor, alert"
 summary: Pelajari cara memvisualisasikan metrik Milvus di Grafana.
 ---
+
 <h1 id="Visualize-Milvus-Metrics-in-Grafana" class="common-anchor-header">Memvisualisasikan Metrik Milvus di Grafana<button data-href="#Visualize-Milvus-Metrics-in-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +21,7 @@ summary: Pelajari cara memvisualisasikan metrik Milvus di Grafana.
         ></path>
       </svg>
     </button></h1><p>Topik ini menjelaskan cara memvisualisasikan metrik Milvus menggunakan Grafana.</p>
-<p>Seperti yang dijelaskan dalam <a href="/docs/id/monitor.md">panduan pemantauan</a>, metrik berisi informasi yang berguna seperti berapa banyak memori yang digunakan oleh komponen Milvus tertentu. Memantau metrik membantu Anda lebih memahami kinerja Milvus dan status berjalannya sehingga Anda dapat menyesuaikan alokasi sumber daya secara tepat waktu.</p>
+<p>Seperti yang dijelaskan dalam <a href="/docs/id/v2.5.x/monitor.md">panduan pemantauan</a>, metrik berisi informasi yang berguna seperti berapa banyak memori yang digunakan oleh komponen Milvus tertentu. Memantau metrik membantu Anda lebih memahami kinerja Milvus dan status berjalannya sehingga Anda dapat menyesuaikan alokasi sumber daya secara tepat waktu.</p>
 <p>Visualisasi adalah grafik yang menunjukkan perubahan penggunaan sumber daya dari waktu ke waktu, yang memudahkan Anda untuk melihat dan mengetahui perubahan penggunaan sumber daya dengan cepat, terutama ketika suatu peristiwa terjadi.</p>
 <p>Tutorial ini menggunakan Grafana, sebuah platform sumber terbuka untuk analisis deret waktu, untuk memvisualisasikan berbagai metrik kinerja cluster Milvus yang digunakan di Kubernetes (K8).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -39,8 +40,8 @@ summary: Pelajari cara memvisualisasikan metrik Milvus di Grafana.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Anda telah <a href="/docs/id/install_cluster-helm.md">menginstal cluster Milvus pada K8s)</a>.</li>
-<li>Anda perlu <a href="/docs/id/monitor.md">mengonfigurasi Prometheus</a> untuk memantau dan mengumpulkan metrik sebelum menggunakan Grafana untuk memvisualisasikan metrik. Jika pengaturan berhasil, Anda dapat mengakses Grafana di <code translate="no">http://localhost:3000</code>. Atau Anda juga dapat mengakses Grafana menggunakan Grafana default <code translate="no">user:password</code> dari <code translate="no">admin:admin</code>.</li>
+<li>Anda telah <a href="/docs/id/v2.5.x/install_cluster-helm.md">menginstal cluster Milvus pada K8s)</a>.</li>
+<li>Anda perlu <a href="/docs/id/v2.5.x/monitor.md">mengonfigurasi Prometheus</a> untuk memantau dan mengumpulkan metrik sebelum menggunakan Grafana untuk memvisualisasikan metrik. Jika pengaturan berhasil, Anda dapat mengakses Grafana di <code translate="no">http://localhost:3000</code>. Atau Anda juga dapat mengakses Grafana menggunakan Grafana default <code translate="no">user:password</code> dari <code translate="no">admin:admin</code>.</li>
 </ul>
 <h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">Memvisualisasikan metrik menggunakan Grafana<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +91,11 @@ summary: Pelajari cara memvisualisasikan metrik Milvus di Grafana.
       </svg>
     </button></h2><ul>
 <li>Jika Anda telah mengatur Grafana untuk memvisualisasikan metrik Milvus, Anda mungkin juga ingin melakukannya:<ul>
-<li>Mempelajari cara <a href="/docs/id/alert.md">membuat peringatan untuk layanan Milvus</a></li>
-<li>Menyesuaikan <a href="/docs/id/allocate.md">alokasi sumber daya</a> Anda</li>
-<li><a href="/docs/id/scaleout.md">Memperkecil atau memperbesar skala dalam cluster Milvus</a></li>
+<li>Mempelajari cara <a href="/docs/id/v2.5.x/alert.md">membuat peringatan untuk layanan Milvus</a></li>
+<li>Menyesuaikan <a href="/docs/id/v2.5.x/allocate.md">alokasi sumber daya</a> Anda</li>
+<li><a href="/docs/id/v2.5.x/scaleout.md">Memperkecil atau memperbesar skala dalam cluster Milvus</a></li>
 </ul></li>
 <li>Jika Anda tertarik untuk meningkatkan versi Milvus,<ul>
-<li>Baca <a href="/docs/id/upgrade_milvus_cluster-operator.md">panduan untuk memutakhirkan cluster Milvus</a> dan <a href="/docs/id/upgrade_milvus_standalone-operator.md">panduan untuk memutakhirkan Milvus mandiri</a>.</li>
+<li>Baca <a href="/docs/id/v2.5.x/upgrade_milvus_cluster-operator.md">panduan untuk memutakhirkan cluster Milvus</a> dan <a href="/docs/id/v2.5.x/upgrade_milvus_standalone-operator.md">panduan untuk memutakhirkan Milvus mandiri</a>.</li>
 </ul></li>
 </ul>

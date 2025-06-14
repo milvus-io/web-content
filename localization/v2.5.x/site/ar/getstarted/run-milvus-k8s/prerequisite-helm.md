@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: تعرف على الاستعدادات اللازمة قبل تثبيت Milvus مع Helm.
 title: متطلبات تشغيل Milvus على Kubernetes
 ---
+
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">متطلبات تشغيل Milvus على Kubernetes<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,8 +142,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>إذا كانت أجهزتك وبرامجك تفي بالمتطلبات، يمكنك</p>
 <ul>
-<li><a href="/docs/ar/install_cluster-milvusoperator.md">تشغيل ميلفوس في كوبرنتس باستخدام مشغل ميلفوس</a></li>
-<li><a href="/docs/ar/install_cluster-helm.md">تشغيل ميلفوس في كيوبيرنتس باستخدام Helm</a></li>
+<li><a href="/docs/ar/v2.5.x/install_cluster-milvusoperator.md">تشغيل ميلفوس في كوبرنتس باستخدام مشغل ميلفوس</a></li>
+<li><a href="/docs/ar/v2.5.x/install_cluster-helm.md">تشغيل ميلفوس في كيوبيرنتس باستخدام Helm</a></li>
 </ul></li>
-<li><p>راجع <a href="/docs/ar/system_configuration.md">تكوين النظام</a> لمعرفة المعلمات التي يمكنك تعيينها أثناء تثبيت ميلفوس.</p></li>
+<li><p>راجع <a href="/docs/ar/v2.5.x/system_configuration.md">تكوين النظام</a> لمعرفة المعلمات التي يمكنك تعيينها أثناء تثبيت ميلفوس.</p></li>
 </ul>

@@ -241,4 +241,4 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <h3 id="Step-2-Restore-from-the-backup" class="common-anchor-header">第 2 步：从备份还原</h3><p>将备份还原到<code translate="no">milvus_B</code> ：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
 <button class="copy-code-btn"></button></code></pre>
-<p>此命令将备份还原到<code translate="no">milvus_B</code> 中名为 coll_bak 的新 Collections 中，数据存储在<code translate="no">milvus_B</code> 的对象存储空间内的<code translate="no">bucket_B/files/insert_log/[ID of new collection]</code> 中。</p>
+<p>此命令将备份还原到<code translate="no">milvus_B</code> 中名为 coll_bak 的新 Collections 中，数据存储在<code translate="no">milvus_B</code> 的对象存储中的<code translate="no">bucket_B/files/insert_log/[ID of new collection]</code> 中。</p>

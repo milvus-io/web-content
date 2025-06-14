@@ -22,7 +22,7 @@ title: mGTE
         ></path>
       </svg>
     </button></h1><p>mGTEは、テキスト検索タスクのための多言語テキスト表現モデルとリランキングモデルです。</p>
-<p>MilvusはMGTEEmbeddingFunctionクラスを通してmGTE埋め込みモデルと統合しています。このクラスはmGTEエンベッディングモデルを用いて文書やクエリをエンコードし、Milvusインデックスと互換性のある密なベクトルや疎なベクトルとしてエンベッディングを返すメソッドを提供します。</p>
+<p>MilvusはMGTEEmbeddingFunctionクラスを通してmGTE埋め込みモデルと統合しています。このクラスはmGTE埋め込みモデルを用いて文書やクエリをエンコードし、Milvusインデックスと互換性のある密ベクトルや疎ベクトルとして埋め込みを返すメソッドを提供します。</p>
 <p>この機能を使用するには、必要な依存関係をインストールします：</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

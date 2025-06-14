@@ -63,7 +63,7 @@ title: 规模依赖性
 </thead>
 <tbody>
 <tr><td>池 A</td><td>3 TiB</td><td>30% (3/10)</td></tr>
-<tr><td>资源库 B</td><td>2 个 TiB</td><td>20% (2/10)</td></tr>
+<tr><td>资源库 B</td><td>2 TiB</td><td>20% (2/10)</td></tr>
 <tr><td>C 组</td><td>5 个 TiB</td><td>50% (5/10)</td></tr>
 </tbody>
 </table>
@@ -122,7 +122,7 @@ title: 规模依赖性
 <button class="copy-code-btn"></button></code></pre>
 <p>这将为你的 Kafka 集群添加一个额外的代理。</p>
 <div class="alert note">
-<p>Kafka 不会自动在所有代理之间重新平衡主题。如果需要，请在登录每个 Kafka 代理 pod 后使用<code translate="no">bin/kafka-reassign-partitions.sh</code> 手动重新平衡所有 Kafka 代理的主题/分区。</p>
+<p>Kafka 不会自动在所有代理之间重新平衡主题。如有需要，请在登录每个 Kafka 代理 pod 后使用<code translate="no">bin/kafka-reassign-partitions.sh</code> 手动重新平衡所有 Kafka 代理的主题/分区。</p>
 </div>
 <h2 id="Pulsar" class="common-anchor-header">脉冲星<button data-href="#Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"

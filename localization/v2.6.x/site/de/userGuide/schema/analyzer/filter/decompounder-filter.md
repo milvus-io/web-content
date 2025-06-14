@@ -3,12 +3,11 @@ id: decompounder-filter.md
 title: Dekompounder
 summary: >-
   Der Decompounder-Filter zerlegt zusammengesetzte Wörter auf der Grundlage
-  eines bestimmten Wörterbuchs in einzelne Komponenten, was die Suche nach
-  Teilen zusammengesetzter Begriffe erleichtert. Dieser Filter ist besonders
+  eines angegebenen Wörterbuchs in einzelne Komponenten, um die Suche nach
+  Teilen zusammengesetzter Begriffe zu erleichtern. Dieser Filter ist besonders
   nützlich für Sprachen, die häufig zusammengesetzte Wörter verwenden, wie z. B.
   Deutsch.
 ---
-
 <h1 id="Decompounder" class="common-anchor-header">Dekompounder<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,7 +94,6 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Der <code translate="no">decompounder</code> Filter akzeptiert die folgenden konfigurierbaren Parameter.</p>
 <table>
    <tr>
@@ -173,8 +171,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code></h3><div class="multipleCode">
+<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Überprüfung mit <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&quot;</span>
@@ -183,7 +180,6 @@ sample_text = <span class="hljs-string">&quot;dampfschifffahrt brotbackautomat&q
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

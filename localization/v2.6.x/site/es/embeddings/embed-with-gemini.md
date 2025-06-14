@@ -62,7 +62,7 @@ gemini_ef = model.dense.GeminiEmbeddingFunction(
 </thead>
 <tbody>
 <tr><td>SIMILITUD_SEMÁNTICA</td><td>Se utiliza para generar incrustaciones optimizadas para evaluar la similitud textual.</td></tr>
-<tr><td>CLASIFICACIÓN</td><td>Se utiliza para generar incrustaciones optimizadas para clasificar textos según etiquetas preestablecidas.</td></tr>
+<tr><td>CLASIFICACIÓN</td><td>Permite generar incrustaciones optimizadas para clasificar textos según etiquetas preestablecidas.</td></tr>
 <tr><td>CLUSTERING</td><td>Permite generar incrustaciones optimizadas para agrupar textos en función de sus similitudes.</td></tr>
 <tr><td>RETRIEVAL_DOCUMENT, RETRIEVAL_QUERY, QUESTION_ANSWERING y FACT_VERIFICATION</td><td>Se utilizan para generar incrustaciones optimizadas para la búsqueda de documentos o la recuperación de información.</td></tr>
 <tr><td>CONSULTA_RECUPERACIÓN_CÓDIGO</td><td>Se utiliza para recuperar un bloque de código a partir de una consulta en lenguaje natural, como ordenar una matriz o invertir una lista enlazada. Las incrustaciones de los bloques de código se calculan con RETRIEVAL_DOCUMENT.</td></tr>

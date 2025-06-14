@@ -188,7 +188,7 @@ client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</spa
     </button></h2><p>يمكنك أيضًا إبطال دور تم تعيينه لمستخدم.</p>
 <p>يوضح المثال التالي كيفية إبطال الدور <code translate="no">role_a</code> المخصص للمستخدم <code translate="no">user_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.revoke_role(

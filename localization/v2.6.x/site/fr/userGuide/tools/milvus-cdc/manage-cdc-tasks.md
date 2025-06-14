@@ -64,7 +64,7 @@ title: Gestion des tâches CDC
 <li><p><strong>milvus_connect_param</strong>: Paramètres de connexion du Milvus cible.</p>
 <ul>
 <li><p><strong>host</strong>: nom d'hôte ou adresse IP du serveur Milvus.</p></li>
-<li><p><strong>port</strong>: Numéro de port sur lequel le serveur Milvus écoute.</p></li>
+<li><p><strong>port</strong>: Numéro de port sur lequel le serveur Milvus est à l'écoute.</p></li>
 <li><p><strong>username</strong>: Nom d'utilisateur pour l'authentification auprès du serveur Milvus.</p></li>
 <li><p><strong>password</strong>: Mot de passe pour s'authentifier auprès du serveur Milvus.</p></li>
 <li><p><strong>enable_tls</strong>: Utilisation ou non du cryptage TLS/SSL pour la connexion.</p></li>

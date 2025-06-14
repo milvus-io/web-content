@@ -456,7 +456,7 @@ res = client.query(
 <li><p>使用提供的查詢向量對<code translate="no">vector</code> 欄位進行 kNN 搜尋。</p></li>
 </ul>
 <p>每個擷取器會貢獻多達 50 個最頂尖的匹配結果，這些結果會由 RRF 重新排序，最後會傳回最頂尖的 10 個結果。</p>
-<p>在 Milvus 中，您可以透過結合跨多個向量欄位的搜尋、套用重新排序策略，並從結合清單中擷取 Top-K 結果，來達到類似混合搜尋的目的。Milvus 支援 RRF 和加權 reranker 策略。如需詳細資訊，請參閱<a href="/docs/zh-hant/reranking.md">Reranking</a>。</p>
+<p>在 Milvus 中，您可以透過結合跨多個向量欄位的搜尋、套用重新排序策略，並從結合清單中擷取 Top-K 結果，來達到類似混合搜尋的目的。Milvus 支援 RRF 和加權 reranker 策略。如需詳細資訊，請參閱<a href="/docs/zh-hant/weighted-ranker.md">Reranking</a>。</p>
 <p>以下是上述 Elasticsearch 範例在 Milvus 中的非嚴格等效性。</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

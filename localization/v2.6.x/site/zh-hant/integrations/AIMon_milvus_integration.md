@@ -57,8 +57,8 @@ title: 使用 AIMon 和 Milvus 改善您的 LLM 申請的檢索品質
         ></path>
       </svg>
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>向量資料庫</em></h4><p>在此應用程式中，我們將使用<a href="https://milvus.io/">Milvus</a>來管理和搜尋大型非結構化資料，例如文字、影像和視訊。</p>
-<h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 架構</em></h4><p>LlamaIndex 是一個開放原始碼的資料協調框架，可簡化大型語言模型 (LLM) 應用程式的建置，方法是促進私人資料與 LLM 的整合，透過檢索-增強生成 (RAG) 管道實現情境增強生成 AI 應用程式。由於 LlamaIndex 具備良好的靈活性和更佳的低階 API 抽象，因此我們將在本教學中使用 LlamaIndex。</p>
-<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 輸出品質評估</em></h4><p><a href="https://www.aimon.ai">AIMon</a>提供專屬的判斷模型，用來判斷幻覺、上下文品質問題、LLM 的指令遵循性、檢索品質和其他 LLM 可靠性任務。我們將使用 AIMon 來判斷 LLM 應用程式的品質。</p>
+<h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 架構</em></h4><p>LlamaIndex 是一個開放原始碼的資料協調框架，可簡化大型語言模型 (LLM) 應用程式的建立，方法是促進私人資料與 LLM 的整合，透過檢索-增強生成 (RAG) 管道實現情境增強的生成式 AI 應用程式。由於 LlamaIndex 具備良好的靈活性和更佳的低階 API 抽象，因此我們將在本教學中使用 LlamaIndex。</p>
+<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 輸出品質評估</em></h4><p><a href="https://www.aimon.ai">AIMon</a>提供專屬的判斷模型，用來判斷幻覺、上下文品質問題、LLM 的 Instruction Adherence、Retrieval Quality 及其他 LLM 可靠性任務。我們將使用 AIMon 來判斷 LLM 應用程式的品質。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">先決條件<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
@@ -900,7 +900,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <li>使用 AIMon 的低延遲、可適應領域的重新排序器，進一步改善品質分數。</li>
 <li>我們也展示了加入 AIMon 的 re-reranker 後，檢索相關性如何顯著改善。</li>
 </ul>
-<p>我們鼓勵您嘗試使用本筆記中所顯示的不同元件，以進一步<strong>提高品質分數</strong>。其中一個想法是使用上述 instruction_adherence 偵測器中的<code translate="no">instructions</code> 欄位，加入您自己的品質定義。另一個想法是加入另一個<a href="https://docs.aimon.ai/category/checker-models">AIMon 檢查器模型</a>，作為品質公制計算的一部分。</p>
+<p>我們鼓勵您嘗試使用本筆記中所顯示的不同元件，以進一步<strong>提高品質分數</strong>。其中一個想法是使用上述 instruction_adherence 偵測器中的<code translate="no">instructions</code> 欄位，加入您自己的品質定義。另一個想法是加入另一個<a href="https://docs.aimon.ai/category/checker-models">AIMon 檢查器模型</a>作為品質公制計算的一部分。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(

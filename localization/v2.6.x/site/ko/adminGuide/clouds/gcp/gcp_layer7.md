@@ -207,7 +207,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><strong>호스트</strong> 및 <strong>포트의</strong> IP 주소와 <strong>포트</strong> 번호는 <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">계층 7 로드 밸런서를 생성하려면 인그레스 만들기</a> 끝에 나열된 것과 일치해야 합니다.</li>
+<li><strong>호스트</strong> 및 <strong>포트의</strong> IP 주소와 <strong>포트</strong> 번호는 <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">레이어 7 부하 분산 장치를 생성하려면 인그레스 생성의</a> 끝에 나열된 것과 일치해야 합니다.</li>
 <li>도메인 이름을 호스트 IP 주소에 매핑하도록 DNS 레코드를 설정한 경우 <strong>호스트의</strong> IP 주소를 도메인 이름으로 바꾸고 <strong>server_name을</strong> 생략합니다.</li>
 </ul>
 </div>

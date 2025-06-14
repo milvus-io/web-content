@@ -34,7 +34,7 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索支援世代（RAG）チャットボットを構築するお手伝いをします。</p>
+    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索拡張世代（RAG）チャットボットを構築するお手伝いをします。</p>
 <p>このチュートリアルでは以下のことを学びます：</p>
 <ul>
 <li>会議バンクデータセットに関連するユーザーの質問に答えるLLMアプリケーションを構築する。</li>
@@ -786,7 +786,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>次に、AIMonのLlamaIndex<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">ポストプロセッサの再ランク統合を</a>使用して、AIMonの<a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">ドメイン適応可能な再ランク付けを</a>追加します。</p>
+    </button></h1><p>次に、AIMonのLlamaIndex<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">ポストプロセッサの再ランク統合を</a>使用して、AIMonの<a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">ドメイン適応可能な再ランクを</a>追加します。</p>
 <p>下図に示すように、再ランク付けは、より高度なクエリ-文書マッチング機能を使用することで、最も関連性の高い文書を上位にバブルアップするのに役立ちます。AIMonのリランカーのユニークな特徴は、ドメインごとにカスタマイズできることです。LLMのプロンプトエンジニアリングと同様に、<code translate="no">task_definition</code> フィールドを使用して、ドメインごとにリランカーのパフォーマンスをカスタマイズすることができます。この最先端のリランカーは、超低レイテンシー（～2kのコンテキストに対して）で動作し、そのパフォーマンスはMTEBリランキングリーダーボードのトップ5にランクインしている。</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
@@ -973,4 +973,4 @@ df_scores
   </tbody>
 </table>
 <p>上記の表は、私たちの結果をまとめたものです。実際の数値は、LLM回答の品質のばらつき、VectorDBの最近傍探索のパフォーマンスなど、様々な要因によって異なります。</p>
-<p>結論として、下図に示すように、LLMアプリケーションの品質スコア、RAG関連性、命令フォロー能力を評価しました。AIMonのリランカーを使用して、アプリケーションの全体的な品質と、お客様のRAGから検索された文書の平均的な関連性を改善しました。</p>
+<p>結論として、下図に示すように、LLMアプリケーションの品質スコア、RAG関連性、命令フォロー能力を評価しました。AIMonのリランカーを使用して、アプリケーションの全体的な品質と、お客様のRAGから検索されたドキュメントの平均的な関連性を改善しました。</p>

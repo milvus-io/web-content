@@ -7,6 +7,7 @@ summary: >-
   può considerare di abilitare il campo dinamico. Questo argomento descrive come
   abilitare e utilizzare il campo dinamico.
 ---
+
 <h1 id="Dynamic-Field" class="common-anchor-header">Campo dinamico<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,12 +65,13 @@ summary: >-
 client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    dimension=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    enable_dynamic_field=<span class="hljs-literal">True</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+dimension=<span class="hljs-number">5</span>,
+<span class="hljs-comment"># highlight-next-line</span>
+enable_dynamic_field=<span class="hljs-literal">True</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -186,8 +188,8 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
 ]
 
 res = client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=data
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -195,6 +197,7 @@ res = client.insert(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># {&#x27;insert_count&#x27;: 10, &#x27;ids&#x27;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -334,7 +337,7 @@ curl --request POST \
 <li><p><strong>Specificare il percorso JSON</strong> della chiave come <code translate="no">json_path</code>. Poiché il campo dinamico è memorizzato come JSON, si può specificare qualcosa come <code translate="no">&quot;color&quot;</code>, oppure, se si hanno strutture annidate, si possono specificare percorsi più profondi (per esempio <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
 <li><p><strong>Creare un indice INVERTED</strong>. Attualmente, solo il tipo <code translate="no">INVERTED</code> è supportato per l'indicizzazione dei percorsi JSON.</p></li>
 </ol>
-<p>Per i dettagli sui parametri e le considerazioni, fare riferimento a <a href="/docs/it/use-json-fields.md#Index-a-JSON-field">Indicizzare un campo JSON</a>.</p>
+<p>Per i dettagli sui parametri e le considerazioni, fare riferimento a <a href="/docs/it/v2.5.x/use-json-fields.md#Index-a-JSON-field">Indicizzare un campo JSON</a>.</p>
 <p>Di seguito è riportato un esempio di come creare un indice sul campo <code translate="no">&quot;color&quot;</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -342,21 +345,22 @@ curl --request POST \
 index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;color&quot;</span>,               <span class="hljs-comment"># Name of the &quot;column&quot; you see in queries (the dynamic key).</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,            <span class="hljs-comment"># Currently only &quot;INVERTED&quot; is supported for indexing JSON fields.</span>
-    index_name=<span class="hljs-string">&quot;color_index&quot;</span>,         <span class="hljs-comment"># Assign a name to this index.</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;color&quot;</span>,         <span class="hljs-comment"># JSON path to the key you want to index.</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>   <span class="hljs-comment"># Type to which Milvus will cast the extracted values.</span>
-    }
+field_name=<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-comment"># Name of the &quot;column&quot; you see in queries (the dynamic key).</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Currently only &quot;INVERTED&quot; is supported for indexing JSON fields.</span>
+index_name=<span class="hljs-string">&quot;color_index&quot;</span>, <span class="hljs-comment"># Assign a name to this index.</span>
+params={
+<span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-comment"># JSON path to the key you want to index.</span>
+<span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span> <span class="hljs-comment"># Type to which Milvus will cast the extracted values.</span>
+}
 )
 
 <span class="hljs-comment"># Create the index</span>
 client.create_index(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    index_params=index_params
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
@@ -431,13 +435,13 @@ curl --request POST \
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[query_vector],
-    limit=<span class="hljs-number">5</span>,
-    <span class="hljs-comment"># highlight-start</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
-    <span class="hljs-comment"># highlight-end</span>
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+data=[query_vector],
+limit=<span class="hljs-number">5</span>,
+<span class="hljs-comment"># highlight-start</span>
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
+<span class="hljs-comment"># highlight-end</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -446,6 +450,7 @@ res = client.search(
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.6290165185928345, &#x27;entity&#x27;: {&#x27;color&#x27;: &#x27;red_7025&#x27;}}, {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.5975797176361084, &#x27;entity&#x27;: {&#x27;color&#x27;: &#x27;red_4794&#x27;}}, {&#x27;id&#x27;: 6, &#x27;distance&#x27;: -0.24996188282966614, &#x27;entity&#x27;: {&#x27;color&#x27;: &#x27;red_9392&#x27;}}]&quot;] </span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp

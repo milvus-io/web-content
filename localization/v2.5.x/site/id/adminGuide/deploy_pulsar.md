@@ -1,11 +1,12 @@
 ---
 id: deploy_pulsar.md
 title: Mengonfigurasi Penyimpanan Pesan dengan Docker Compose atau Helm
-related_key: 'Pulsar, storage'
+related_key: "Pulsar, storage"
 summary: >-
   Pelajari cara mengonfigurasi penyimpanan pesan dengan Docker Compose atau
   Helm.
 ---
+
 <h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Mengonfigurasi Penyimpanan Pesan dengan Docker Compose atau Helm<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +45,7 @@ summary: >-
   port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Lihat <a href="/docs/id/configure_pulsar.md">Konfigurasi terkait Pulsar</a> untuk informasi lebih lanjut.</p>
+<p>Lihat <a href="/docs/id/v2.5.x/configure_pulsar.md">Konfigurasi terkait Pulsar</a> untuk informasi lebih lanjut.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Menjalankan Milvus</h3><p>Jalankan perintah berikut untuk menjalankan Milvus yang menggunakan konfigurasi Pulsar.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -65,7 +66,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Untuk gugus Milvus pada K8, Anda dapat mengonfigurasi Pulsar dengan perintah yang sama dengan perintah untuk memulai Milvus. Atau, Anda dapat mengkonfigurasi Pulsar menggunakan berkas <code translate="no">values.yml</code> pada jalur /charts/milvus di repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
-<p>Untuk detail tentang cara mengkonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail mengenai item konfigurasi yang berhubungan dengan Pulsar, lihat Konfigurasi <a href="/docs/id/configure_pulsar.md">yang berhubungan dengan Pulsar</a>.</p>
+<p>Untuk detail tentang cara mengkonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/v2.5.x/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail mengenai item konfigurasi yang berhubungan dengan Pulsar, lihat Konfigurasi <a href="/docs/id/v2.5.x/configure_pulsar.md">yang berhubungan dengan Pulsar</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan file YAML</h3><ol>
 <li>Konfigurasikan bagian <code translate="no">externalConfigFiles</code> pada file <code translate="no">values.yaml</code>.</li>
 </ol>
@@ -100,7 +101,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Untuk cluster Milvus pada K8, Anda dapat mengonfigurasi Kafka dengan perintah yang sama dengan perintah untuk menjalankan Milvus. Atau, Anda dapat mengonfigurasi Kafka menggunakan file <code translate="no">values.yml</code> pada jalur /charts/milvus di repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
-<p>Untuk detail mengenai cara mengkonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail mengenai item konfigurasi yang berhubungan dengan Pulsar, lihat Konfigurasi <a href="/docs/id/configure_pulsar.md">yang berhubungan dengan Pulsar</a>.</p>
+<p>Untuk detail mengenai cara mengkonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/v2.5.x/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail mengenai item konfigurasi yang berhubungan dengan Pulsar, lihat Konfigurasi <a href="/docs/id/v2.5.x/configure_pulsar.md">yang berhubungan dengan Pulsar</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan file YAML</h3><ol>
 <li>Konfigurasikan bagian <code translate="no">externalConfigFiles</code> pada file <code translate="no">values.yaml</code> jika Anda ingin menggunakan Kafka sebagai sistem penyimpanan pesan.</li>
 </ol>
@@ -134,7 +135,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus mandiri menggunakan RocksMQ sebagai penyimpanan pesan default. Untuk langkah-langkah terperinci tentang cara mengonfigurasi Milvus dengan Helm, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail tentang item konfigurasi yang berhubungan dengan RocksMQ, lihat Konfigurasi <a href="/docs/id/configure_rocksmq.md">yang berhubungan dengan RocksMQ</a>.</p>
+    </button></h2><p>Milvus mandiri menggunakan RocksMQ sebagai penyimpanan pesan default. Untuk langkah-langkah terperinci tentang cara mengonfigurasi Milvus dengan Helm, lihat <a href="/docs/id/v2.5.x/configure-helm.md">Mengonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail tentang item konfigurasi yang berhubungan dengan RocksMQ, lihat Konfigurasi <a href="/docs/id/v2.5.x/configure_rocksmq.md">yang berhubungan dengan RocksMQ</a>.</p>
 <ul>
 <li><p>Jika Anda memulai Milvus dengan RocksMQ dan ingin mengubah pengaturannya, Anda dapat menjalankan <code translate="no">helm upgrade -f</code> dengan pengaturan yang telah diubah pada file YAML berikut ini.</p></li>
 <li><p>Jika Anda telah menginstal Milvus mandiri menggunakan Helm dengan penyimpanan pesan selain RocksMQ dan ingin mengubahnya kembali ke RocksMQ, jalankan <code translate="no">helm upgrade -f</code> dengan file YAML berikut setelah Anda mem-flush semua koleksi dan menghentikan Milvus.</p></li>
@@ -173,7 +174,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS adalah alternatif penyimpanan pesan eksperimental untuk RocksMQ. Untuk langkah-langkah rinci tentang bagaimana mengkonfigurasi Milvus dengan Helm, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail tentang item konfigurasi yang berhubungan dengan RocksMQ, lihat Konfigurasi <a href="/docs/id/configure_natsmq.md">yang berhubungan dengan NATS</a>.</p>
+    </button></h2><p>NATS adalah alternatif penyimpanan pesan eksperimental untuk RocksMQ. Untuk langkah-langkah rinci tentang bagaimana mengkonfigurasi Milvus dengan Helm, lihat <a href="/docs/id/v2.5.x/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail tentang item konfigurasi yang berhubungan dengan RocksMQ, lihat Konfigurasi <a href="/docs/id/v2.5.x/configure_natsmq.md">yang berhubungan dengan NATS</a>.</p>
 <ul>
 <li><p>Jika Anda memulai Milvus dengan NATS dan ingin mengubah pengaturannya, Anda dapat menjalankan <code translate="no">helm upgrade -f</code> dengan pengaturan yang telah diubah pada file YAML berikut ini.</p></li>
 <li><p>Jika Anda telah menginstal Milvus mandiri dengan penyimpanan pesan selain NATS dan ingin mengubahnya menjadi NATS, jalankan <code translate="no">helm upgrade -f</code> dengan berkas YAML berikut setelah Anda mem-flush semua koleksi dan menghentikan Milvus.</p></li>
@@ -237,6 +238,6 @@ summary: >-
       </svg>
     </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Docker Compose atau Helm:</p>
 <ul>
-<li><a href="/docs/id/deploy_s3.md">Mengonfigurasi Penyimpanan Objek dengan Docker Compose atau Helm</a></li>
-<li><a href="/docs/id/deploy_etcd.md">Mengonfigurasi Penyimpanan Meta dengan Docker Compose atau Helm</a></li>
+<li><a href="/docs/id/v2.5.x/deploy_s3.md">Mengonfigurasi Penyimpanan Objek dengan Docker Compose atau Helm</a></li>
+<li><a href="/docs/id/v2.5.x/deploy_etcd.md">Mengonfigurasi Penyimpanan Meta dengan Docker Compose atau Helm</a></li>
 </ul>

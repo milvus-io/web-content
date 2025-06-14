@@ -82,7 +82,7 @@ title: 在同一個實例中備份和還原
 <pre><code translate="no" class="language-shell">mkdir configs
 cd configs
 <button class="copy-code-btn"></button></code></pre>
-<p>下載備份設定檔案 backup.yaml：</p>
+<p>下載備份組態檔案 backup.yaml：</p>
 <pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>檔案結構如下：</p>

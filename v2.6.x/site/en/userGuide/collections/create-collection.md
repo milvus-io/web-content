@@ -554,7 +554,7 @@ client.create_collection(
 CreateCollectionReq customizedSetupReq3 = CreateCollectionReq.builder()
     .collectionName("customized_setup_3")
     .collectionSchema(collectionSchema)
-    // highlight-next-line
+    # highlight-next-line
     .numShards(1)
     .build();
 client.createCollection(customizedSetupReq3);
@@ -564,7 +564,7 @@ client.createCollection(customizedSetupReq3);
 const createCollectionReq = {
     collection_name: "customized_setup_3",
     schema: schema,
-    // highlight-next-line
+    # highlight-next-line
     shards_num: 1
 }
 ```
@@ -626,7 +626,7 @@ import io.milvus.param.Constant;
 CreateCollectionReq customizedSetupReq4 = CreateCollectionReq.builder()
         .collectionName("customized_setup_4")
         .collectionSchema(schema)
-        // highlight-next-line
+        # highlight-next-line
         .property(Constant.MMAP_ENABLED, "false")
         .build();
 client.createCollection(customizedSetupReq4);
@@ -652,7 +652,7 @@ if err != nil {
 fmt.Println("collection created")
 ```
 
-```plaintext
+```bash
 export params='{
     "mmap.enabled": True
 }'
@@ -705,7 +705,7 @@ import io.milvus.param.Constant;
 CreateCollectionReq customizedSetupReq5 = CreateCollectionReq.builder()
         .collectionName("customized_setup_5")
         .collectionSchema(schema)
-        // highlight-next-line
+        # highlight-next-line
         .property(Constant.TTL_SECONDS, "86400")
         .build();
 client.createCollection(customizedSetupReq5);
@@ -715,11 +715,11 @@ client.createCollection(customizedSetupReq5);
 const createCollectionReq = {
     collection_name: "customized_setup_5",
     schema: schema,
-    // highlight-start
+    # highlight-start
     properties: {
         "collection.ttl.seconds": 86400
     }
-    // highlight-end
+    # highlight-end
 }
 ```
 
@@ -769,7 +769,7 @@ When creating a collection, you can set the consistency level for searches and q
 client.create_collection(
     collection_name="customized_setup_6",
     schema=schema,
-    # highlight-next
+    # highlight-next-line
     consistency_level="Bounded",
 )
 ```
@@ -781,7 +781,7 @@ import io.milvus.v2.common.ConsistencyLevel;
 CreateCollectionReq customizedSetupReq6 = CreateCollectionReq.builder()
         .collectionName("customized_setup_6")
         .collectionSchema(schema)
-        // highlight-next-line
+        # highlight-next-line
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build();
 client.createCollection(customizedSetupReq6);
@@ -791,9 +791,9 @@ client.createCollection(customizedSetupReq6);
 const createCollectionReq = {
     collection_name: "customized_setup_6",
     schema: schema,
-    // highlight-next
+    # highlight-next-line
     consistency_level: "Bounded",
-    // highlight-end
+    # highlight-end
 }
 
 client.createCollection(createCollectionReq);

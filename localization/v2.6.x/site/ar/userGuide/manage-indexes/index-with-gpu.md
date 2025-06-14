@@ -4,7 +4,6 @@ order: 3
 summary: يشرح هذا الدليل كيفية إنشاء فهرس مع دعم GPU في Milvus لتحسين أداء البحث.
 title: الفهرس باستخدام وحدة معالجة الرسومات
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">الفهرس باستخدام وحدة معالجة الرسومات<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +64,7 @@ title: الفهرس باستخدام وحدة معالجة الرسومات
         ></path>
       </svg>
     </button></h2><p>توضح الأمثلة التالية كيفية إنشاء فهارس GPU بأنواعها المختلفة.</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">إعداد معلمات الفهرس</h3><p>عند إعداد معلمات فهرس GPU، قم بتعريف <strong>نوع_الفهرس</strong> <strong>ونوع_المقياس</strong> <strong>والبارامز</strong>:</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">إعداد معلمات الفهرس</h3><p>عند إعداد معلمات فهرس GPU، حدد <strong>نوع_الفهرس</strong> <strong>ونوع_المقياس</strong> <strong>والبارامز</strong>:</p>
 <ul>
 <li><p><strong>نوع_الفهرس</strong><em>(سلسلة</em>): نوع الفهرس المستخدم لتسريع البحث المتجه. تتضمن الخيارات الصالحة <strong>GPU_CAGRA</strong> و <strong>GPU_IVF_FLAT</strong> و <strong>GPU_IVF_FLAT</strong> و <strong>GPU_IVF_PQ</strong> و <strong>GPU_BRUTE_FORCE</strong>.</p></li>
 <li><p><strong>نوع_المقياس</strong><em>(سلسلة</em>): نوع المقاييس المستخدمة لقياس تشابه المتجهات. الخيارات الصالحة هي <strong>IP</strong> و <strong>L2</strong>.</p></li>
@@ -118,11 +117,10 @@ title: الفهرس باستخدام وحدة معالجة الرسومات
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">بحث<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,13 +178,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

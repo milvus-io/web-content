@@ -2,9 +2,10 @@
 id: install-node.md
 label: Install Node.js SDK
 related_key: SDK
-summary: 'Узнайте, как установить Node.js SDK от Milvus.'
+summary: "Узнайте, как установить Node.js SDK от Milvus."
 title: Установка Milvus Nodejs SDK
 ---
+
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Установка Milvus Nodejs SDK<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,11 +109,11 @@ yarn add @zilliz/milvus2-sdk-node
 <li><p>Просмотреть <a href="https://github.com/milvus-io/milvus-sdk-node">быстрый старт milvus node.js sdk</a></p></li>
 <li><p>Изучить основные операции Milvus:</p>
 <ul>
-<li><a href="/docs/ru/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/manage-partitions.md">Управление разделами</a></li>
-<li><a href="/docs/ru/insert-update-delete.md">Вставка, вставка и удаление</a></li>
-<li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
-<li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-collections.md">Управлять коллекциями</a></li>
+<li><a href="/docs/ru/v2.5.x/manage-partitions.md">Управление разделами</a></li>
+<li><a href="/docs/ru/v2.5.x/insert-update-delete.md">Вставка, вставка и удаление</a></li>
+<li><a href="/docs/ru/v2.5.x/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/v2.5.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p>Изучите <a href="/api-reference/node/v2.4.x/About.md">справочник Milvus Node.js API</a></p></li>
 </ul>

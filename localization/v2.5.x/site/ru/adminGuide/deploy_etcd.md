@@ -1,9 +1,10 @@
 ---
 id: deploy_etcd.md
 title: Настройка метахранилища с помощью Docker Compose или Helm
-related_key: 'S3, storage'
-summary: 'Узнайте, как настроить метахранилище для Milvus с помощью Docker Compose/Helm.'
+related_key: "S3, storage"
+summary: "Узнайте, как настроить метахранилище для Milvus с помощью Docker Compose/Helm."
 ---
+
 <h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Настройка метахранилища с помощью Docker Compose или Helm<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +60,7 @@ summary: 'Узнайте, как настроить метахранилище �
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения см. в разделе <a href="/docs/ru/configure_etcd.md">Конфигурации, связанные с etcd</a>.</p>
+<p>Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/configure_etcd.md">Конфигурации, связанные с etcd</a>.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Запустите Milvus</h3><p>Выполните следующую команду, чтобы запустить Milvus, который использует конфигурации etcd.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -131,6 +132,6 @@ summary: 'Узнайте, как настроить метахранилище �
       </svg>
     </button></h2><p>Узнайте, как настроить другие зависимости Milvus с помощью Docker Compose или Helm:</p>
 <ul>
-<li><a href="/docs/ru/deploy_s3.md">Настройка хранилища объектов с помощью Docker Compose или Helm</a></li>
-<li><a href="/docs/ru/deploy_pulsar.md">Настройка хранилища сообщений с помощью Docker Compose или Helm</a></li>
+<li><a href="/docs/ru/v2.5.x/deploy_s3.md">Настройка хранилища объектов с помощью Docker Compose или Helm</a></li>
+<li><a href="/docs/ru/v2.5.x/deploy_pulsar.md">Настройка хранилища сообщений с помощью Docker Compose или Helm</a></li>
 </ul>

@@ -125,7 +125,7 @@ mount -a
 <div class="alert note">
 <p>No exemplo acima, assumimos que os discos NVMe são <code translate="no">/dev/nvme0n1</code> e <code translate="no">/dev/nvme1n1</code>. É necessário modificar o script para corresponder à sua configuração específica.</p>
 </div>
-<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud e TecentCloud</h3><p>Para criar um pool de nós que usa volumes SSD locais, precisamos passar dados personalizados. A seguir, um exemplo de dados personalizados.</p>
+<h3 id="Alibaba-Cloud--TecentCloud" class="common-anchor-header">Alibaba Cloud e TecentCloud</h3><p>Para criar um pool de nós que utiliza volumes SSD locais, precisamos de passar dados personalizados. A seguir, um exemplo de dados personalizados.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init start...&quot;</span>
 mkfs.xfs /dev/nvme0n1
@@ -149,7 +149,7 @@ mount -a
 <h3 id="Your-own-IDC" class="common-anchor-header">Seu próprio IDC</h3><p>Se estiver a executar o seu próprio IDC e pretender configurar os seus contentores para utilizarem o sistema de ficheiros num disco NVMe recém-montado por predefinição no containerd, siga estes passos:</p>
 <ul>
 <li><p><strong>Monte os discos NVMe.</strong></p>
-<p>Certifique-se de que o seu disco NVMe está devidamente montado na sua máquina anfitriã. Pode montá-lo num diretório à sua escolha. Por exemplo, se o montar em <code translate="no">/mnt/nvme</code>, certifique-se de que está corretamente configurado e que pode ver o disco disponível em <code translate="no">/mnt/nvme</code> executando <code translate="no">lsblk</code> ou <code translate="no">df -h</code>.</p></li>
+<p>Certifique-se de que o seu disco NVMe está devidamente montado na sua máquina anfitriã. Pode montá-lo num diretório à sua escolha. Por exemplo, se o montar em <code translate="no">/mnt/nvme</code>, certifique-se de que está corretamente configurado e de que pode ver o disco disponível em <code translate="no">/mnt/nvme</code> executando <code translate="no">lsblk</code> ou <code translate="no">df -h</code>.</p></li>
 <li><p><strong>Atualizar a configuração do containerd.</strong></p>
 <p>Modifique a configuração do containerd para usar a nova montagem como o diretório raiz para o armazenamento do contêiner.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /mnt/nvme/containerd /mnt/nvme/containerd/state
@@ -265,7 +265,7 @@ IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, &gt;=64=100.0%
         ></path>
       </svg>
     </button></h2><p>Quando os resultados da verificação forem satisfatórios, você poderá implantar o Milvus Distributed com as etapas a seguir:</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Dicas para implantar o Milvus Distributed usando o Helm</h3><p>O pod QueryNode usa discos NVMe como volumes EmptyDir por padrão. É aconselhável montar os discos NVMe em <code translate="no">/var/lib/milvus/data</code> dentro dos pods QueryNode para garantir o desempenho ideal.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Dicas para implantar o Milvus Distributed usando o Helm</h3><p>O pod QueryNode usa discos NVMe como volumes EmptyDir por padrão. É recomendável montar os discos NVMe em <code translate="no">/var/lib/milvus/data</code> dentro dos pods QueryNode para garantir o desempenho ideal.</p>
 <p>Para obter detalhes sobre como implantar o Milvus Distributed usando o Helm, consulte <a href="/docs/pt/install_cluster-helm.md">Executar o Milvus no Kubernetes com o Helm</a>.</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Dicas para implantar o Milvus Distributed usando o Milvus Operator</h3><p>O Milvus Operator configura automaticamente o pod QueryNode para usar discos NVMe como volumes EmptyDir. Aconselha-se a adicionar as seguintes configurações ao recurso personalizado <code translate="no">MilvusCluster</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>

@@ -44,7 +44,7 @@ summary: >-
       security:
         tlsMode: 1
 </span><button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Einrichten eines Gesundheitsprüfungs-Endpunkts</h3><p>Um die Verfügbarkeit des Dienstes zu gewährleisten, erfordert der Layer-7-Lastenausgleich auf GCP die Überprüfung des Zustands des Backend-Dienstes. Daher müssen wir eine BackendConfig einrichten, um den Endpunkt für die Gesundheitsprüfung zu verpacken und die BackendConfig über Anmerkungen mit dem Milvus-Dienst zu verknüpfen.</p>
+<h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Einrichten eines Gesundheitsprüfungs-Endpunkts</h3><p>Um die Verfügbarkeit des Dienstes zu gewährleisten, erfordert der Layer-7-Lastenausgleich auf GCP die Überprüfung des Zustands des Backend-Dienstes. Daher müssen wir eine BackendConfig einrichten, um den Gesundheitsprüfungs-Endpunkt zu verpacken und die BackendConfig mit dem Milvus-Dienst durch Anmerkungen zu verknüpfen.</p>
 <p>Das folgende Snippet zeigt die BackendConfig-Einstellungen. Speichern Sie ihn als <code translate="no">backendconfig.yaml</code> zur späteren Verwendung.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
@@ -71,7 +71,7 @@ summary: >-
 <li><p>Was die erste Anmerkung betrifft,</p>
 <p>Milvus ist nativ für gRPC, das auf HTTP/2 aufgebaut ist. Daher können wir HTTP/2 als Kommunikationsprotokoll zwischen dem Layer-7 Load Balancer und Milvus verwenden.</p></li>
 <li><p>Was die zweite Anmerkung betrifft,</p>
-<p>Milvus bietet nur den Endpunkt für die Gesundheitsprüfung über gRPC und HTTP/1 an. Wir müssen eine BackendConfig einrichten, um den Endpunkt für die Gesundheitsprüfung zu verpacken und ihn mit dem Milvus-Dienst zu verknüpfen, damit der Layer-7-Loadbalancer diesen Endpunkt auf den Gesundheitszustand von Milvus prüft.</p></li>
+<p>Milvus bietet nur den Endpunkt für die Gesundheitsprüfung über gRPC und HTTP/1 an. Wir müssen eine BackendConfig einrichten, um den Endpunkt für die Gesundheitsprüfung zu verpacken und ihn mit dem Milvus-Dienst zu verknüpfen, damit der Layer-7-Load-Balancer diesen Endpunkt auf den Gesundheitszustand von Milvus prüft.</p></li>
 <li><p>Was die dritte Anmerkung betrifft,</p>
 <p>Sie fordert die Erstellung einer Netzwerkendpunktgruppe (NEG), nachdem ein Ingress erstellt wurde. Wenn NEGs mit GKE-Ingress verwendet werden, erleichtert der Ingress-Controller die Erstellung aller Aspekte des Load Balancer. Dazu gehören die Erstellung der virtuellen IP-Adresse, Weiterleitungsregeln, Zustandsprüfungen, Firewall-Regeln und vieles mehr. Einzelheiten finden Sie in den <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/container-native-load-balancing">Google Cloud-Dokumenten</a>.</p></li>
 </ul>

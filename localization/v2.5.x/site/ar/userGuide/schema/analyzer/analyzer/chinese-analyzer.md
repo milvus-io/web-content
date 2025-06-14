@@ -5,6 +5,7 @@ summary: >-
   تم تصميم مُحلل اللغة الصينية خصيصًا للتعامل مع النص الصيني، مما يوفر تجزئة
   وترميزًا فعالين.
 ---
+
 <h1 id="Chinese" class="common-anchor-header">الصينية<button data-href="#Chinese" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,8 +24,8 @@ summary: >-
     </button></h1><p>تم تصميم محلل <code translate="no">chinese</code> خصيصًا للتعامل مع النص الصيني، مما يوفر تجزئة وترميزًا فعالين للنصوص الصينية.</p>
 <h3 id="Definition" class="common-anchor-header">التعريف</h3><p>يتكون محلل <code translate="no">chinese</code> من:</p>
 <ul>
-<li><p><strong>أداة الترميز</strong>: يستخدم أداة ترميز <code translate="no">jieba</code> لتجزئة النص الصيني إلى رموز بناءً على المفردات والسياق. لمزيد من المعلومات، راجع <a href="/docs/ar/jieba-tokenizer.md">Jieba</a>.</p></li>
-<li><p><strong>عامل التصفية</strong>: يستخدم عامل التصفية <code translate="no">cnalphanumonly</code> لإزالة الرموز التي تحتوي على أي أحرف غير صينية. لمزيد من المعلومات، راجع <a href="/docs/ar/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
+<li><p><strong>أداة الترميز</strong>: يستخدم أداة ترميز <code translate="no">jieba</code> لتجزئة النص الصيني إلى رموز بناءً على المفردات والسياق. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>عامل التصفية</strong>: يستخدم عامل التصفية <code translate="no">cnalphanumonly</code> لإزالة الرموز التي تحتوي على أي أحرف غير صينية. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
 <p>تكافئ وظيفة محلل <code translate="no">chinese</code> تكوين المحلل المخصص التالي:</p>
 <div class="multipleCode">
@@ -54,6 +55,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Configuration" class="common-anchor-header">التكوين</h3><p>لتطبيق محلل <code translate="no">chinese</code> على حقل ما، ما عليك سوى تعيين <code translate="no">type</code> إلى <code translate="no">chinese</code> في <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -124,6 +126,7 @@ sample_text = <span class="hljs-string">&quot;Milvus 是一个高性能、可扩
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

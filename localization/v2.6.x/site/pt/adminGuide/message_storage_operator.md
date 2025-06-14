@@ -106,7 +106,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <h5 id="Key-configuration-options" class="common-anchor-header">Principais opções de configuração:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: Define explicitamente o RocksMQ como a fila de mensagens</li>
 <li><code translate="no">persistence.enabled</code>: Habilita o armazenamento persistente para os dados do RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Quando verdadeiro, o PVC será excluído quando a instância do Milvus for excluída</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Quando verdadeiro, o PVC será apagado quando a instância do Milvus for apagada</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Especificação padrão do PVC do Kubernetes</li>
 <li><code translate="no">accessModes</code>: Normalmente <code translate="no">ReadWriteOnce</code> para armazenamento em bloco</li>
 <li><code translate="no">storageClassName</code>: A classe de armazenamento do seu cluster</li>
@@ -183,7 +183,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <li><p>(Opcional) Faça backup e limpe os arquivos de dados no diretório de armazenamento do RocksMQ.</p></li>
 </ol>
 <div class="alert note">
-<p><strong>Escolher entre RocksMQ e NATS?</strong></p>
+<p><strong>Escolher entre o RocksMQ e o NATS?</strong></p>
 <p>O RockMQ usa o CGO para interagir com o RocksDB e gerencia a memória por si só, enquanto o NATS puro-GO incorporado na instalação do Milvus delega seu gerenciamento de memória ao coletor de lixo (GC) do Go.</p>
 <p>No cenário em que o pacote de dados é menor que 64 kb, o RocksDB tem um desempenho melhor em termos de uso de memória, uso de CPU e tempo de resposta. Por outro lado, se o pacote de dados for maior que 64 kb, o NATS se sobressai em termos de tempo de resposta com memória suficiente e agendamento ideal do GC.</p>
 <p>Atualmente, é aconselhável usar o NATS apenas para experimentos.</p>

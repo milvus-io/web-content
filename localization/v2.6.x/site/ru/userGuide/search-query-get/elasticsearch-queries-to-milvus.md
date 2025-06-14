@@ -245,7 +245,7 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Пример Elasticsearch можно найти на <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">этой странице</a>. Подробнее об операторах сравнения в Milvus см. в разделе <a href="/docs/ru/basic-operators.md#Comparison-operators">Операторы сравнения</a>.</p>
-<h3 id="Term-query" class="common-anchor-header">Запрос термина</h3><p>В Elasticsearch вы можете найти документы, содержащие <strong>точный</strong> термин в указанном поле, как показано ниже:</p>
+<h3 id="Term-query" class="common-anchor-header">Запрос термина</h3><p>В Elasticsearch вы можете найти документы, которые содержат <strong>точный</strong> термин в указанном поле, как показано ниже:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -463,7 +463,7 @@ res = client.query(
 <li><p>kNN-поиск по полю <code translate="no">vector</code> с использованием предоставленного вектора запроса.</p></li>
 </ul>
 <p>Каждый ретривер вносит до 50 лучших совпадений, которые повторно ранжируются RRF, и в итоге возвращается 10 лучших результатов.</p>
-<p>В Milvus можно добиться аналогичного гибридного поиска, объединив поиск по нескольким векторным полям, применив стратегию ранжирования и получив топ-K результатов из объединенного списка. Milvus поддерживает стратегии RRF и взвешенного реранкинга. Более подробную информацию см. в разделе <a href="/docs/ru/reranking.md">"Реранжирование</a>".</p>
+<p>В Milvus можно добиться аналогичного гибридного поиска, объединив поиск по нескольким векторным полям, применив стратегию ранжирования и получив топ-K результатов из объединенного списка. Milvus поддерживает стратегии RRF и взвешенного реранкинга. Более подробную информацию см. в разделе <a href="/docs/ru/weighted-ranker.md">"Реранжирование</a>".</p>
 <p>Ниже приведен нестрогий эквивалент приведенного выше примера Elasticsearch в Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],

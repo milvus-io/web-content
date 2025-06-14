@@ -89,7 +89,7 @@ summary: Découvrez comment visualiser les métriques Milvus dans Grafana.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Si vous avez configuré Grafana pour visualiser les métriques Milvus, vous voudrez peut-être aussi.. :<ul>
+<li>Si vous avez configuré Grafana pour visualiser les métriques Milvus, vous pouvez également.. :<ul>
 <li>Apprendre à <a href="/docs/fr/alert.md">créer une alerte pour les services Milvus</a></li>
 <li>Ajuster l'<a href="/docs/fr/allocate.md">allocation des ressources</a></li>
 <li><a href="/docs/fr/scaleout.md">Réduire ou augmenter la taille d'un cluster Milvus</a></li>

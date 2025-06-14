@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>RBAC (Role-Based Access Control) ist eine rollenbasierte Zugriffskontrollmethode. Mit RBAC können Sie die Operationen, die Benutzer auf der Sammel-, Datenbank- und Instanzebene durchführen können, genau steuern und so die Datensicherheit erhöhen.</p>
-<p>Im Gegensatz zu herkömmlichen Modellen der Benutzerzugriffskontrolle führt RBAC das Konzept der <strong>Rollen</strong> ein. Im RBAC-Modell erteilen Sie Rollen Privilegien und weisen diese Rollen dann den Benutzern zu. Dann können die Benutzer Privilegien erhalten.</p>
+<p>Im Gegensatz zu herkömmlichen Modellen der Benutzerzugriffskontrolle führt RBAC das Konzept der <strong>Rollen</strong> ein. Im RBAC-Modell gewähren Sie den Rollen Privilegien und diese Rollen dann den Benutzern. Dann können die Benutzer Privilegien erhalten.</p>
 <p>Das RBAC-Modell kann die Effizienz der Zugriffskontrollverwaltung verbessern. Wenn beispielsweise mehrere Benutzer dieselben Berechtigungen benötigen, müssen Sie die Berechtigungen nicht manuell für jeden Benutzer festlegen. Stattdessen können Sie eine Rolle erstellen und diese Rolle den Benutzern zuweisen. Wenn Sie die Berechtigungen dieser Benutzer anpassen möchten, können Sie einfach die Rollenberechtigungen anpassen und die Änderung wird auf alle Benutzer mit dieser Rolle angewendet.</p>
 <h2 id="RBAC-key-concepts" class="common-anchor-header">RBAC-Schlüsselkonzepte<button data-href="#RBAC-key-concepts" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,10 +49,10 @@ summary: >-
 <li><p><strong>Ressource:</strong> Die Ressourceneinheit, auf die zugegriffen werden kann. Es gibt drei Ebenen von Ressourcen in Milvus - Instanz, Datenbank und Sammlung.</p></li>
 <li><p><strong>Privileg:</strong> Die Erlaubnis, bestimmte Operationen auf Milvus-Ressourcen durchzuführen (z.B. Sammlungen erstellen, Daten einfügen, etc.).</p></li>
 <li><p><strong>Privilegiengruppe:</strong> Eine Gruppe von mehreren Privilegien.</p></li>
-<li><p><strong>Rolle:</strong> Eine Rolle besteht aus zwei Teilen - Berechtigungen und Ressourcen. Berechtigungen definieren die Art der Operationen, die eine Rolle ausführen kann, während Ressourcen die Zielressourcen definieren, auf denen die Operationen ausgeführt werden können. So kann die Rolle des Datenbankadministrators beispielsweise Lese-, Schreib- und Verwaltungsoperationen für bestimmte Datenbanken durchführen.</p></li>
+<li><p><strong>Rolle:</strong> Eine Rolle besteht aus zwei Teilen - Berechtigungen und Ressourcen. Berechtigungen definieren die Art der Operationen, die eine Rolle ausführen kann, während Ressourcen die Zielressourcen definieren, auf denen die Operationen ausgeführt werden können. Die Rolle des Datenbankadministrators kann zum Beispiel Lese-, Schreib- und Verwaltungsoperationen für bestimmte Datenbanken durchführen.</p></li>
 <li><p><strong>Benutzer:</strong> Ein Benutzer ist jemand, der Milvus benutzt. Jeder Benutzer hat eine eindeutige ID und ist mit einer oder mehreren Rollen ausgestattet.</p></li>
 </ul>
-<h2 id="Procedures" class="common-anchor-header">Prozeduren<button data-href="#Procedures" class="anchor-icon" translate="no">
+<h2 id="Procedures" class="common-anchor-header">Verfahren<button data-href="#Procedures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -7,6 +7,7 @@ summary: >-
   der Ebene der Sammlung, der Datenbank und der Instanz durchführen können,
   genau steuern und so die Datensicherheit erhöhen.
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">RBAC Erklärt<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>Um die Zugriffskontrolle über RBAC zu erreichen, müssen Sie die folgenden Schritte ausführen:</p>
 <ol>
-<li><p><strong><a href="/docs/de/users_and_roles.md#Create-a-user">Erstellen Sie einen Benutzer</a></strong>: Zusätzlich zu den Standardbenutzern <code translate="no">root</code> in Milvus können Sie neue Benutzer erstellen und Passwörter festlegen, um die Datensicherheit zu gewährleisten.</p></li>
-<li><p><strong><a href="/docs/de/users_and_roles.md#Create-a-role">Erstellen Sie eine Rolle</a></strong>: Sie können benutzerdefinierte Rollen erstellen, die auf Ihren Bedürfnissen basieren. Die spezifischen Fähigkeiten einer Rolle werden durch ihre Berechtigungen bestimmt.</p></li>
-<li><p><strong><a href="/docs/de/privilege_group.md">Erstellen Sie eine Berechtigungsgruppe</a></strong>: Kombinieren Sie mehrere Berechtigungen in einer Berechtigungsgruppe, um den Prozess der Gewährung von Berechtigungen für eine Rolle zu rationalisieren.</p></li>
-<li><p><strong><a href="/docs/de/grant_privileges.md">Gewähren Sie einer Rolle Berechtigungen oder Berechtigungsgruppen</a></strong>: Definieren Sie die Fähigkeiten einer Rolle, indem Sie dieser Rolle Privilegien oder Privilegiengruppen erteilen.</p></li>
-<li><p><strong><a href="/docs/de/grant_roles.md">Rollen an Benutzer vergeben</a></strong>: Gewähren Sie Benutzern Rollen mit bestimmten Privilegien, so dass diese über die Privilegien einer Rolle verfügen können. Eine einzelne Rolle kann mehreren Benutzern zugewiesen werden.</p></li>
+<li><p><strong><a href="/docs/de/v2.5.x/users_and_roles.md#Create-a-user">Erstellen Sie einen Benutzer</a></strong>: Zusätzlich zu den Standardbenutzern <code translate="no">root</code> in Milvus können Sie neue Benutzer erstellen und Passwörter festlegen, um die Datensicherheit zu gewährleisten.</p></li>
+<li><p><strong><a href="/docs/de/v2.5.x/users_and_roles.md#Create-a-role">Erstellen Sie eine Rolle</a></strong>: Sie können benutzerdefinierte Rollen erstellen, die auf Ihren Bedürfnissen basieren. Die spezifischen Fähigkeiten einer Rolle werden durch ihre Berechtigungen bestimmt.</p></li>
+<li><p><strong><a href="/docs/de/v2.5.x/privilege_group.md">Erstellen Sie eine Berechtigungsgruppe</a></strong>: Kombinieren Sie mehrere Berechtigungen in einer Berechtigungsgruppe, um den Prozess der Gewährung von Berechtigungen für eine Rolle zu rationalisieren.</p></li>
+<li><p><strong><a href="/docs/de/v2.5.x/grant_privileges.md">Gewähren Sie einer Rolle Berechtigungen oder Berechtigungsgruppen</a></strong>: Definieren Sie die Fähigkeiten einer Rolle, indem Sie dieser Rolle Privilegien oder Privilegiengruppen erteilen.</p></li>
+<li><p><strong><a href="/docs/de/v2.5.x/grant_roles.md">Rollen an Benutzer vergeben</a></strong>: Gewähren Sie Benutzern Rollen mit bestimmten Privilegien, so dass diese über die Privilegien einer Rolle verfügen können. Eine einzelne Rolle kann mehreren Benutzern zugewiesen werden.</p></li>
 </ol>

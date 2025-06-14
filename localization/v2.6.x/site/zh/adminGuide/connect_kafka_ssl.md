@@ -576,7 +576,7 @@ total 12
 <p>然后使用以下命令启动 Kafka 服务：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2.使用 SASL/PLAIN 和 SSL 启动 Milvus 并连接到 Kafka</h3><p>Kafka 服务启动后，就可以启动 Milvus 并连接到它。使用以下<code translate="no">docker-compose.yaml</code> 文件启动 Milvus 并用 SASL/PLAIN 和 SSL 连接到 Kafka：</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2.使用 SASL/PLAIN 和 SSL 启动 Milvus 并连接到 Kafka</h3><p>启动 Kafka 服务后，就可以启动 Milvus 并连接到它。使用以下<code translate="no">docker-compose.yaml</code> 文件启动 Milvus 并用 SASL/PLAIN 和 SSL 连接到 Kafka：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>

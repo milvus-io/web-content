@@ -3,6 +3,7 @@ id: configure_grafana_loki.md
 title: Grafana Loki 구성
 summary: 이 항목에서는 Loki를 사용하여 로그를 수집하고 Grafana를 사용하여 Milvus 클러스터의 로그를 쿼리하는 방법에 대해 설명합니다.
 ---
+
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">Grafana Loki 구성<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +42,7 @@ summary: 이 항목에서는 Loki를 사용하여 로그를 수집하고 Grafana
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/install_cluster-helm.md">K8에 Milvus 클러스터를 설치했다</a>.</li>
+<li><a href="/docs/ko/v2.5.x/install_cluster-helm.md">K8에 Milvus 클러스터를 설치했다</a>.</li>
 <li><a href="https://helm.sh/docs/intro/install/">헬름과</a> <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl을</a> 포함한 필요한 도구를 설치했습니다.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Loki 배포<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">
@@ -73,8 +74,9 @@ helm repo update
   <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
 
 <span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>옵션 2: 스토리지에 AWS S3 사용</p>
 <p>다음 예제에서는 <code translate="no">&lt;accessKey&gt;</code> 및 <code translate="no">&lt;keyId&gt;</code> 을 자신의 S3 액세스 키 및 ID로, <code translate="no">s3.endpoint</code> 을 S3 엔드포인트로, <code translate="no">s3.region</code> 을 S3 리전으로 바꿉니다.</p>
 <pre><code translate="no" class="language-yaml">loki:

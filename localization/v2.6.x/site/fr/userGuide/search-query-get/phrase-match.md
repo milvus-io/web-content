@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Correspondance de phrases
+title: Correspondance de phrasesCompatible with Milvus 2.6.x
 summary: >-
   La correspondance des phrases vous permet de rechercher des documents
   contenant les termes de votre requête sous la forme d'une phrase exacte. Par
@@ -9,8 +9,9 @@ summary: >-
   machine learning" correspond à un texte tel que "...typical robotics machine
   learning models...", où les mots "robotics", "machine" et "learning"
   apparaissent dans l'ordre, sans aucun autre mot entre eux.
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Correspondance de phrases<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Correspondance de phrases<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -329,6 +330,6 @@ result_slop2 = client.search(
 <ul>
 <li><p>Les caractères placés entre guillemets doubles ou simples dans les expressions sont interprétés comme des constantes de chaîne. Si la constante de chaîne comprend des caractères d'échappement, ceux-ci doivent être représentés par une séquence d'échappement. Par exemple, utilisez <code translate="no">\\</code> pour représenter <code translate="no">\</code>, <code translate="no">\\t</code> pour représenter une tabulation <code translate="no">\t</code>, et <code translate="no">\\n</code> pour représenter une nouvelle ligne.</p></li>
 <li><p>Si une constante de chaîne est entourée de guillemets simples, un guillemet simple à l'intérieur de la constante doit être représenté par <code translate="no">\\'</code>, tandis qu'un guillemet double peut être représenté par <code translate="no">&quot;</code> ou <code translate="no">\\&quot;</code>. Exemple : <code translate="no">'It\\'s milvus'</code>.</p></li>
-<li><p>Si une constante de chaîne est encadrée par des guillemets doubles, un guillemet double à l'intérieur de la constante doit être représenté par <code translate="no">\\&quot;</code> tandis qu'un guillemet simple peut être représenté par <code translate="no">'</code> ou <code translate="no">\\'</code>. Exemple : <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
+<li><p>Si une constante de chaîne est entourée de guillemets doubles, un guillemet double à l'intérieur de la constante doit être représenté par <code translate="no">\\&quot;</code> tandis qu'un guillemet simple peut être représenté par <code translate="no">'</code> ou <code translate="no">\\'</code>. Exemple : <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

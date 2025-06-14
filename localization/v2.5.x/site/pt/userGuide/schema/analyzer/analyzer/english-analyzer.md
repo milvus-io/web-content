@@ -5,6 +5,7 @@ summary: >-
   O analisador de inglês do Milvus foi concebido para processar texto em inglês,
   aplicando regras específicas da língua para tokenização e filtragem.
 ---
+
 <h1 id="English" class="common-anchor-header">Inglês<button data-href="#English" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>O analisador <code translate="no">english</code> utiliza os seguintes componentes:</p>
 <ul>
-<li><p><strong>Tokenizador</strong>: Usa o<a href="/docs/pt/standard-tokenizer.md"> tokenizador</a> <code translate="no">standard</code><a href="/docs/pt/standard-tokenizer.md"></a> para dividir o texto em unidades discretas de palavras.</p></li>
+<li><p><strong>Tokenizador</strong>: Usa o<a href="/docs/pt/v2.5.x/standard-tokenizer.md"> tokenizador</a> <code translate="no">standard</code><a href="/docs/pt/v2.5.x/standard-tokenizer.md"></a> para dividir o texto em unidades discretas de palavras.</p></li>
 <li><p><strong>Filtros</strong>: Inclui vários filtros para um processamento de texto abrangente:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Converte todos os tokens para minúsculas, permitindo pesquisas sem distinção entre maiúsculas e minúsculas.</p></li>
@@ -109,6 +110,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +188,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-las a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
+
+<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-las a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/v2.5.x/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,6 +232,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verificação usando <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -244,6 +248,7 @@ sample_text = <span class="hljs-string">&quot;Milvus is a vector database built 
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

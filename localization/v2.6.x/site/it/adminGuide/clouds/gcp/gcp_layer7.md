@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Rispetto a un bilanciatore di carico Layer-4, un bilanciatore di carico Layer-7 offre funzionalità intelligenti di bilanciamento del carico e caching ed è un'ottima scelta per i servizi cloud-nativi.</p>
-<p>Questa guida illustra come configurare un bilanciatore di carico Layer-7 per un cluster Milvus già in esecuzione dietro un bilanciatore di carico Layer-4.</p>
+    </button></h1><p>Rispetto a un bilanciatore di carico Layer-4, un bilanciatore di carico Layer-7 offre funzionalità intelligenti di bilanciamento del carico e di caching ed è un'ottima scelta per i servizi cloud-nativi.</p>
+<p>Questa guida illustra la configurazione di un bilanciatore di carico Layer-7 per un cluster Milvus già in esecuzione dietro un bilanciatore di carico Layer-4.</p>
 <h3 id="Before-your-start" class="common-anchor-header">Prima di iniziare</h3><ul>
 <li><p>Nel vostro account GCP esiste già un progetto.</p>
 <p>Per creare un progetto, consultare la sezione <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creazione e gestione dei progetti</a>. Il nome del progetto utilizzato in questa guida è <strong>milvus-testing-nonprod</strong>.</p></li>
@@ -116,7 +116,7 @@ openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -sig
     status: Provisioning
 <button class="copy-code-btn"></button></code></pre>
 <p>Quando <strong>certificateStatus</strong> diventa <strong>Active</strong>, si è pronti a configurare il bilanciatore di carico.</p>
-<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Creare un ingress per generare un bilanciatore di carico Layer-7</h3><p>Creare un file YAML con uno dei seguenti snippet.</p>
+<h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Creare un Ingress per generare un bilanciatore di carico Layer-7</h3><p>Creare un file YAML con uno dei seguenti snippet.</p>
 <ul>
 <li><p>Utilizzo di certificati autogestiti</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>

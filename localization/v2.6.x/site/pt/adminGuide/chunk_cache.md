@@ -33,7 +33,7 @@ title: Configurar o Chunk Cache
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de efetuar consultas para obter vectores, o Milvus tem de carregar os dados do armazenamento de objectos para a memória cache no disco rígido local dos nós de consulta. Este é um processo demorado. Antes de todos os dados serem carregados, o Milvus pode responder a alguns pedidos de recuperação de vectores com atraso.</p>
+    </button></h2><p>Antes de efetuar consultas para obter vectores, o Milvus tem de carregar os dados do armazenamento de objectos para a memória cache no disco rígido local dos nós de consulta. Este é um processo demorado. Antes de todos os dados estarem carregados, o Milvus pode responder a alguns pedidos de recuperação de vectores com atraso.</p>
 <p>Para melhorar o desempenho da consulta, o Milvus fornece um mecanismo de cache de pedaços para pré-carregar dados do armazenamento de objectos para a cache no disco rígido local antes de serem necessários. Quando é recebido um pedido de consulta, o Segcore verifica primeiro se os dados estão na cache, em vez de no armazenamento de objectos. Se os dados estiverem no cache, o Segcore pode recuperá-los rapidamente do cache e retornar o resultado para o cliente.</p>
 <h2 id="Configure-Chunk-Cache" class="common-anchor-header">Configurar o cache de pedaços<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,7 +54,7 @@ title: Configurar o Chunk Cache
 <ul>
 <li><p>Para instâncias do Milvus instaladas usando Helm Charts</p>
 <p>Adicione a configuração ao ficheiro <code translate="no">values.yaml</code> na secção <code translate="no">config</code>. Para obter detalhes, consulte <a href="/docs/pt/configure-helm.md">Configurar o Milvus com Helm Charts</a>.</p></li>
-<li><p>Para instâncias do Milvus instaladas com o Docker Compose</p>
+<li><p>Para instâncias do Milvus instaladas usando o Docker Compose</p>
 <p>Adicione a configuração ao ficheiro <code translate="no">milvus.yaml</code> que utilizou para iniciar a instância do Milvus. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md">Configurar o Milvus com o Docker Compose</a>.</p></li>
 <li><p>Para instâncias do Milvus instaladas com o Operator</p>
 <p>Adicione a configuração à secção <code translate="no">spec.components</code> do recurso personalizado <code translate="no">Milvus</code>. Para obter detalhes, consulte <a href="/docs/pt/configure_operator.md">Configurar o Milvus com o Operator</a>.</p></li>

@@ -7,6 +7,7 @@ summary: >-
   utilizadores podem realizar ao nível da coleção, da base de dados e da
   instância, aumentando a segurança dos dados.
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">Explicação do RBAC<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>Para obter o controlo de acesso através do RBAC, é necessário seguir os passos abaixo:</p>
 <ol>
-<li><p><strong><a href="/docs/pt/users_and_roles.md#Create-a-user">Criar um utilizador</a></strong>: Para além do utilizador predefinido <code translate="no">root</code> no Milvus, é possível criar novos utilizadores e definir palavras-passe para proteger a segurança dos dados.</p></li>
-<li><p><strong><a href="/docs/pt/users_and_roles.md#Create-a-role">Criar uma função</a></strong>: Pode criar funções personalizadas com base nas suas necessidades. As capacidades específicas de uma função são determinadas pelos seus privilégios.</p></li>
-<li><p><strong><a href="/docs/pt/privilege_group.md">Criar um grupo de privilégios</a></strong>: Combine vários privilégios num único grupo de privilégios para simplificar o processo de concessão de privilégios a uma função.</p></li>
-<li><p><strong><a href="/docs/pt/grant_privileges.md">Conceder privilégios ou grupos de privilégios a uma função</a></strong>: Defina as capacidades de uma função concedendo privilégios ou grupos de privilégios a esta função.</p></li>
-<li><p><strong><a href="/docs/pt/grant_roles.md">Conceder funções aos utilizadores</a></strong>: Conceder funções com determinados privilégios aos utilizadores para que estes possam ter os privilégios de uma função. Uma única função pode ser concedida a vários utilizadores.</p></li>
+<li><p><strong><a href="/docs/pt/v2.5.x/users_and_roles.md#Create-a-user">Criar um utilizador</a></strong>: Para além do utilizador predefinido <code translate="no">root</code> no Milvus, é possível criar novos utilizadores e definir palavras-passe para proteger a segurança dos dados.</p></li>
+<li><p><strong><a href="/docs/pt/v2.5.x/users_and_roles.md#Create-a-role">Criar uma função</a></strong>: Pode criar funções personalizadas com base nas suas necessidades. As capacidades específicas de uma função são determinadas pelos seus privilégios.</p></li>
+<li><p><strong><a href="/docs/pt/v2.5.x/privilege_group.md">Criar um grupo de privilégios</a></strong>: Combine vários privilégios num único grupo de privilégios para simplificar o processo de concessão de privilégios a uma função.</p></li>
+<li><p><strong><a href="/docs/pt/v2.5.x/grant_privileges.md">Conceder privilégios ou grupos de privilégios a uma função</a></strong>: Defina as capacidades de uma função concedendo privilégios ou grupos de privilégios a esta função.</p></li>
+<li><p><strong><a href="/docs/pt/v2.5.x/grant_roles.md">Conceder funções aos utilizadores</a></strong>: Conceder funções com determinados privilégios aos utilizadores para que estes possam ter os privilégios de uma função. Uma única função pode ser concedida a vários utilizadores.</p></li>
 </ol>

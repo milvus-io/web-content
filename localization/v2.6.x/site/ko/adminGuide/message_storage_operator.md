@@ -185,7 +185,7 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
 <div class="alert note">
 <p><strong>RocksMQ와 NATS 중 어떤 것을 선택해야 하나요?</strong></p>
 <p>RockMQ는 CGO를 사용하여 RocksDB와 상호 작용하고 자체적으로 메모리를 관리하는 반면, Milvus 설치에 내장된 순수-GO NATS는 메모리 관리를 Go의 가비지 컬렉터(GC)에 위임합니다.</p>
-<p>데이터 패킷이 64KB보다 작은 시나리오에서는 메모리 사용량, CPU 사용량, 응답 시간 측면에서 RocksDB가 더 나은 성능을 보입니다. 반면에 데이터 패킷이 64KB보다 큰 경우, 충분한 메모리와 이상적인 GC 스케줄링으로 응답 시간 측면에서 NATS가 우수합니다.</p>
+<p>데이터 패킷이 64KB보다 작은 시나리오에서는 메모리 사용량, CPU 사용량, 응답 시간 측면에서 RocksDB가 더 우수한 성능을 보입니다. 반면에 데이터 패킷이 64KB보다 큰 경우, 충분한 메모리와 이상적인 GC 스케줄링으로 응답 시간 측면에서 NATS가 우수합니다.</p>
 <p>현재 NATS는 실험용으로만 사용하는 것이 좋습니다.</p>
 </div>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Pulsar 구성<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">

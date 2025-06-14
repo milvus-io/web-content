@@ -9,6 +9,7 @@ summary: >-
   этом руководстве представлены стратегии реранжирования, поддерживаемые Milvus,
   и даны советы по выбору подходящей стратегии реранжирования.
 ---
+
 <h1 id="Reranking" class="common-anchor-header">Рерайтинг<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,8 +48,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Многовекторный реранкинг</span> </span></p>
 <p>В гибридном поиске реранкинг - это важный этап, который объединяет результаты многовекторного поиска, чтобы обеспечить максимальную релевантность и точность конечного результата. В настоящее время Milvus поддерживает следующие две стратегии ранжирования:</p>
 <ul>
-<li><p><strong><a href="/docs/ru/reranking.md#WeightedRanker">WeightedRanker</a></strong>: Эта стратегия объединяет результаты, вычисляя взвешенную оценку оценок (или расстояний), полученных в результате различных векторных поисков. Веса присваиваются в зависимости от важности каждого поля вектора, что позволяет настраивать их в соответствии с приоритетами конкретного случая использования.</p></li>
-<li><p><strong><a href="/docs/ru/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Эта стратегия объединяет результаты на основе ранжирования. Она использует метод, который уравновешивает ранги результатов из разных поисковых запросов, что часто приводит к более справедливой и эффективной интеграции различных типов данных или модальностей.</p></li>
+<li><p><strong><a href="/docs/ru/v2.5.x/reranking.md#WeightedRanker">WeightedRanker</a></strong>: Эта стратегия объединяет результаты, вычисляя взвешенную оценку оценок (или расстояний), полученных в результате различных векторных поисков. Веса присваиваются в зависимости от важности каждого поля вектора, что позволяет настраивать их в соответствии с приоритетами конкретного случая использования.</p></li>
+<li><p><strong><a href="/docs/ru/v2.5.x/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Эта стратегия объединяет результаты на основе ранжирования. Она использует метод, который уравновешивает ранги результатов из разных поисковых запросов, что часто приводит к более справедливой и эффективной интеграции различных типов данных или модальностей.</p></li>
 </ul>
 <h2 id="WeightedRanker" class="common-anchor-header">WeightedRanker<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,8 +231,9 @@ summary: >-
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
-rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
+rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 
 <span class="hljs-type">WeightedRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>))
@@ -428,6 +430,7 @@ reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 <span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);

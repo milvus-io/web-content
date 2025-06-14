@@ -116,7 +116,7 @@ title: AnythingLLM에서 Milvus 사용
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>워크스페이스를 입력하고 <strong>업로드</strong> 아이콘을 클릭하여 문서 업로드 대화 상자를 엽니다.<br>
+<li><p>워크스페이스를 입력하고 <strong>업로드</strong> 아이콘을 클릭하면 문서 업로드 대화 상자가 열립니다.<br>
 
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/anythingllm_upload_file.png" alt="Open Upload Dialog" class="doc-image" id="open-upload-dialog" />

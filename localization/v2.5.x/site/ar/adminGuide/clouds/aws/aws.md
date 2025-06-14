@@ -4,6 +4,7 @@ title: نشر مجموعة Milvus العنقودية على EC2
 related_key: cluster
 summary: تعرّف على كيفية نشر مجموعة Milvus العنقودية على AWS EC2.
 ---
+
 <h1 id="Deprecated-Deploy-a-Milvus-Cluster-on-EC2" class="common-anchor-header">(مهملة) نشر مجموعة Milvus على EC2<button data-href="#Deprecated-Deploy-a-Milvus-Cluster-on-EC2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ summary: تعرّف على كيفية نشر مجموعة Milvus العنقود�
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية نشر مجموعة Milvus على <a href="https://docs.aws.amazon.com/ec2/">Amazon EC2</a> باستخدام Terraform و Ansible.</p>
 <div class="alert note">
-<p>هذا الموضوع قديم وستتم إزالته قريبًا. يُنصح بالرجوع إلى <a href="/docs/ar/eks.md">نشر مجموعة Milvus العنقودية على EKS</a> بدلاً من ذلك.</p>
+<p>هذا الموضوع قديم وستتم إزالته قريبًا. يُنصح بالرجوع إلى <a href="/docs/ar/v2.5.x/eks.md">نشر مجموعة Milvus العنقودية على EKS</a> بدلاً من ذلك.</p>
 </div>
 <h2 id="Provision-a-Milvus-cluster" class="common-anchor-header">توفير مجموعة Milvus العنقودية<button data-href="#Provision-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,11 +82,12 @@ summary: تعرّف على كيفية نشر مجموعة Milvus العنقود�
 }
 
 variable <span class="hljs-string">&quot;my_ip&quot;</span> {
-  description = <span class="hljs-string">&quot;my_ip for security group. used so that ansible and terraform can ssh in&quot;</span>
-  <span class="hljs-keyword">type</span>        = <span class="hljs-type">string</span>
-  <span class="hljs-keyword">default</span>     = <span class="hljs-string">&quot;x.x.x.x/32&quot;</span>
+description = <span class="hljs-string">&quot;my_ip for security group. used so that ansible and terraform can ssh in&quot;</span>
+<span class="hljs-keyword">type</span> = <span class="hljs-type">string</span>
+<span class="hljs-keyword">default</span> = <span class="hljs-string">&quot;x.x.x.x/32&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h4 id="Prepare-maintf" class="common-anchor-header">إعداد main.tf</h4><p>يصف هذا القسم التكوينات التي يحتوي عليها ملف <code translate="no">main.tf</code> الذي يحتوي على.</p>
 <ul>
@@ -103,35 +105,36 @@ variable <span class="hljs-string">&quot;my_ip&quot;</span> {
   description = <span class="hljs-string">&quot;Allows only me to access&quot;</span>
   vpc_id      = aws_vpc.<span class="hljs-property">cluster_vpc</span>.<span class="hljs-property">id</span>
 
-  ingress {
-    description      = <span class="hljs-string">&quot;All ports from my IP&quot;</span>
-    from_port        = <span class="hljs-number">0</span>
-    to_port          = <span class="hljs-number">65535</span>
-    protocol         = <span class="hljs-string">&quot;tcp&quot;</span>
-    cidr_blocks      = [<span class="hljs-keyword">var</span>.<span class="hljs-property">my_ip</span>]
-  }
+ingress {
+description = <span class="hljs-string">&quot;All ports from my IP&quot;</span>
+from_port = <span class="hljs-number">0</span>
+to_port = <span class="hljs-number">65535</span>
+protocol = <span class="hljs-string">&quot;tcp&quot;</span>
+cidr_blocks = [<span class="hljs-keyword">var</span>.<span class="hljs-property">my_ip</span>]
+}
 
-  ingress {
-    description      = <span class="hljs-string">&quot;Full subnet communication&quot;</span>
-    from_port        = <span class="hljs-number">0</span>
-    to_port          = <span class="hljs-number">65535</span>
-    protocol         = <span class="hljs-string">&quot;all&quot;</span>
-    self             = <span class="hljs-literal">true</span>
-  }
+ingress {
+description = <span class="hljs-string">&quot;Full subnet communication&quot;</span>
+from_port = <span class="hljs-number">0</span>
+to_port = <span class="hljs-number">65535</span>
+protocol = <span class="hljs-string">&quot;all&quot;</span>
+self = <span class="hljs-literal">true</span>
+}
 
-  egress {
-    from_port        = <span class="hljs-number">0</span>
-    to_port          = <span class="hljs-number">0</span>
-    protocol         = <span class="hljs-string">&quot;-1&quot;</span>
-    cidr_blocks      = [<span class="hljs-string">&quot;0.0.0.0/0&quot;</span>]
-    ipv6_cidr_blocks = [<span class="hljs-string">&quot;::/0&quot;</span>]
-  }
+egress {
+from_port = <span class="hljs-number">0</span>
+to_port = <span class="hljs-number">0</span>
+protocol = <span class="hljs-string">&quot;-1&quot;</span>
+cidr_blocks = [<span class="hljs-string">&quot;0.0.0.0/0&quot;</span>]
+ipv6_cidr_blocks = [<span class="hljs-string">&quot;::/0&quot;</span>]
+}
 
-  tags = {
-    <span class="hljs-title class_">Name</span> = <span class="hljs-string">&quot;cluster_sg&quot;</span>
-  }
+tags = {
+<span class="hljs-title class_">Name</span> = <span class="hljs-string">&quot;cluster_sg&quot;</span>
+}
 }
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>VPC</p>
 <p>يحدد القالب التالي VPC مع كتلة 10.0.0.0.0/24 CIDR 10.0.0.0/24 على مجموعة Milvus.</p>
 <pre><code translate="no" class="language-main.tf">resource <span class="hljs-string">&quot;aws_vpc&quot;</span> <span class="hljs-string">&quot;cluster_vpc&quot;</span> {
@@ -142,13 +145,14 @@ variable <span class="hljs-string">&quot;my_ip&quot;</span> {
 }
 
 resource <span class="hljs-string">&quot;aws_internet_gateway&quot;</span> <span class="hljs-string">&quot;cluster_gateway&quot;</span> {
-  vpc_id = aws_vpc.cluster_vpc.<span class="hljs-built_in">id</span>
+vpc_id = aws_vpc.cluster_vpc.<span class="hljs-built_in">id</span>
 
-  tags = {
-    Name = <span class="hljs-string">&quot;cluster_gateway&quot;</span>
-  }
+tags = {
+Name = <span class="hljs-string">&quot;cluster_gateway&quot;</span>
+}
 }
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>الشبكات الفرعية (اختياري)</p>
 <p>يعلن القالب التالي شبكة فرعية يتم توجيه حركة المرور الخاصة بها إلى بوابة إنترنت. في هذه الحالة، يكون حجم كتلة CIDR للشبكة الفرعية هو نفس حجم كتلة CIDR للشبكة الفرعية في VPC.</p>
 <pre><code translate="no" class="language-main.tf">resource <span class="hljs-string">&quot;aws_subnet&quot;</span> <span class="hljs-string">&quot;cluster_subnet&quot;</span> {
@@ -156,30 +160,31 @@ resource <span class="hljs-string">&quot;aws_internet_gateway&quot;</span> <span
   cidr_block              = <span class="hljs-string">&quot;10.0.0.0/24&quot;</span>
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = <span class="hljs-string">&quot;cluster_subnet&quot;</span>
-  }
+tags = {
+Name = <span class="hljs-string">&quot;cluster_subnet&quot;</span>
+}
 }
 
 resource <span class="hljs-string">&quot;aws_route_table&quot;</span> <span class="hljs-string">&quot;cluster_subnet_gateway_route&quot;</span> {
-  vpc_id       = aws_vpc.cluster_vpc.<span class="hljs-built_in">id</span>
+vpc_id = aws_vpc.cluster_vpc.<span class="hljs-built_in">id</span>
 
-  route {
-    cidr_block = <span class="hljs-string">&quot;0.0.0.0/0&quot;</span>
-    gateway_id = aws_internet_gateway.cluster_gateway.<span class="hljs-built_in">id</span>
-  }
+route {
+cidr_block = <span class="hljs-string">&quot;0.0.0.0/0&quot;</span>
+gateway_id = aws_internet_gateway.cluster_gateway.<span class="hljs-built_in">id</span>
+}
 
-  tags = {
-    Name = <span class="hljs-string">&quot;cluster_subnet_gateway_route&quot;</span>
-  }
+tags = {
+Name = <span class="hljs-string">&quot;cluster_subnet_gateway_route&quot;</span>
+}
 }
 
 resource <span class="hljs-string">&quot;aws_route_table_association&quot;</span> <span class="hljs-string">&quot;cluster_subnet_add_gateway&quot;</span> {
-  subnet_id      = aws_subnet.cluster_subnet.<span class="hljs-built_in">id</span>
-  route_table_id = aws_route_table.cluster_subnet_gateway_route.<span class="hljs-built_in">id</span>
+subnet_id = aws_subnet.cluster_subnet.<span class="hljs-built_in">id</span>
+route_table_id = aws_route_table.cluster_subnet_gateway_route.<span class="hljs-built_in">id</span>
 }
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>مثيلات العقدة (العقد)</p>
 <p>يعلن القالب التالي عن مثيل عقدة MinIO. يعلن ملف القالب <code translate="no">main.tf</code> عن عقد من 11 نوعاً من العقد. بالنسبة لبعض أنواع العقد، تحتاج إلى تعيين <code translate="no">root_block_device</code>. انظر <a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#ebs-ephemeral-and-root-block-devices">EBS، وEBS، وأجهزة الكتل الجذرية سريعة الزوال، وأجهزة الكتل الجذرية</a> لمزيد من المعلومات.</p>
 <pre><code translate="no" class="language-main.tf">resource <span class="hljs-string">&quot;aws_instance&quot;</span> <span class="hljs-string">&quot;minio_node&quot;</span> {
@@ -190,16 +195,17 @@ resource <span class="hljs-string">&quot;aws_route_table_association&quot;</span
   <span class="hljs-variable">subnet_id</span>     <span class="hljs-operator">=</span> aws_subnet.cluster_subnet.<span class="hljs-type">id</span> 
   <span class="hljs-variable">vpc_security_group_ids</span> <span class="hljs-operator">=</span> [aws_security_group.cluster_sg.id]
 
-  root_block_device {
-    volume_type = <span class="hljs-string">&quot;gp2&quot;</span>
-    volume_size = <span class="hljs-number">1000</span>
-  }
-  
-  tags = {
-    Name = <span class="hljs-string">&quot;minio-${count.index + 1}&quot;</span>
-  }
+root_block_device {
+volume_type = <span class="hljs-string">&quot;gp2&quot;</span>
+volume_size = <span class="hljs-number">1000</span>
+}
+
+tags = {
+Name = <span class="hljs-string">&quot;minio-${count.index + 1}&quot;</span>
+}
 }
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h3 id="Apply-the-configuration" class="common-anchor-header">تطبيق التكوين</h3><ol>
 <li><p>افتح محطة طرفية وانتقل إلى المجلد الذي يخزن <code translate="no">main.tf</code>.</p></li>
@@ -252,7 +258,7 @@ dockernode01
 dockernode02
 
 [<span class="hljs-meta">dependencies</span>] <span class="hljs-meta">#Add the host names of Milvus dependencies.</span>
-; dependencies node will host etcd, minio, pulsar, these <span class="hljs-number">3</span> roles are the foundation of Milvus. 
+; dependencies node will host etcd, minio, pulsar, these <span class="hljs-number">3</span> roles are the foundation of Milvus.
 ; Take note the IP of <span class="hljs-keyword">this</span> host VM, <span class="hljs-keyword">and</span> replace <span class="hljs-number">10.170</span><span class="hljs-number">.0</span><span class="hljs-number">.19</span> <span class="hljs-keyword">with</span> it.
 dockernode03
 
@@ -282,7 +288,7 @@ pulsar_ip= <span class="hljs-number">10.170</span><span class="hljs-number">.0</
 coords_ip= <span class="hljs-number">10.170</span><span class="hljs-number">.0</span><span class="hljs-number">.17</span>
 
 ; Setup container environment which later will be used <span class="hljs-keyword">in</span> container creation.
-ETCD_ENDPOINTS= {{etcd_ip}}:<span class="hljs-number">2379</span> 
+ETCD_ENDPOINTS= {{etcd_ip}}:<span class="hljs-number">2379</span>
 MINIO_ADDRESS= {{minio_ip}}:<span class="hljs-number">9000</span>
 PULSAR_ADDRESS= pulsar:<span class="hljs-comment">//{{pulsar_ip}}:6650</span>
 QUERY_COORD_ADDRESS= {{coords_ip}}:<span class="hljs-number">19531</span>
@@ -290,6 +296,7 @@ DATA_COORD_ADDRESS= {{coords_ip}}:<span class="hljs-number">13333</span>
 ROOT_COORD_ADDRESS= {{coords_ip}}:<span class="hljs-number">53100</span>
 INDEX_COORD_ADDRESS= {{coords_ip}}:<span class="hljs-number">31000</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="ansiblecfg" class="common-anchor-header"><code translate="no">ansible.cfg</code></h4><p><code translate="no">ansible.cfg</code> التحكم في عمل كتاب التشغيل، على سبيل المثال، مفتاح SSH، إلخ. لا تقم بإعداد عبارة المرور عبر مفتاح SSH على مضيفي docker. وإلا سيفشل اتصال Ansible SSH. نوصي بإعداد نفس اسم المستخدم ومفتاح SSH على المضيفين الثلاثة وإعداد حساب المستخدم الجديد لتنفيذ sudo بدون كلمة مرور. خلاف ذلك، ستتلقى أخطاءً تفيد بأن اسم المستخدم لا يتطابق مع كلمة المرور أو أنك لم تُمنح امتيازات مرتفعة عند تشغيل كتاب تشغيل Ansible playbook.</p>
 <pre><code translate="no">[defaults]
 host_key_checking = <span class="hljs-literal">False</span>
@@ -307,11 +314,10 @@ private_key_file=~/.my_ssh_keys/gpc_sshkey <span class="hljs-comment"># Specify 
     - configure-hosts-file
 
 - name: install docker
-  become: <span class="hljs-built_in">yes</span>
-  become_user: root
-  hosts: dockernodes
-  roles:
-    - docker-installation
+become: <span class="hljs-built_in">yes</span>
+become_user: root
+hosts: dockernodes
+roles: - docker-installation
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Test-Ansible-connectivity" class="common-anchor-header">اختبار الاتصال بـ Ansible</h3><p>اختبر الاتصال بـ Ansible.</p>
 <pre><code translate="no" class="language-shell">$ ansible <span class="hljs-built_in">all</span> -m ping
@@ -353,22 +359,23 @@ ok: [dockernode01]
 ok: [dockernode03]
 ok: [dockernode02]
 
-TASK [docker-installation : Install python3-docker] **************************************************************
+TASK [docker-installation : Install python3-docker] ******************************\*\*******************************
 ok: [dockernode01]
 ok: [dockernode02]
 ok: [dockernode03]
 
-TASK [docker-installation : Install docker-compose python3 library] **********************************************
+TASK [docker-installation : Install docker-compose python3 library] **********************\*\***********************
 changed: [dockernode01]
 changed: [dockernode03]
 changed: [dockernode02]
 
-PLAY RECAP *******************************************************************************************************
-ansible-controller         : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode01               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode02               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode03               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY RECAP **************************************************\*\*\***************************************************
+ansible-controller : ok=3 changed=0 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode01 : ok=10 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode02 : ok=10 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode03 : ok=10 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verify-the-installation" class="common-anchor-header">التحقق من التثبيت</h3><p>قم بتسجيل الدخول إلى المضيفين الثلاثة باستخدام مفتاح SSH، وتحقق من التثبيت على المضيفين.</p>
 <ul>
 <li>للمضيف الجذر:</li>
@@ -398,57 +405,58 @@ dockernode03               : ok=10   changed=1    unreachable=0    failed=0    s
 <p>تعود المحطة الطرفية على النحو التالي:</p>
 <pre><code translate="no">PLAY [Create milvus-etcd, minio, pulsar] *****************************************************************
 
-TASK [Gathering Facts] ********************************************************************************************
+TASK [Gathering Facts] ********************************************\*\*\*\*********************************************
 ok: [dockernode03]
 
-TASK [etcd] *******************************************************************************************************
+TASK [etcd] **************************************************\*\*\***************************************************
 changed: [dockernode03]
 
-TASK [pulsar] *****************************************************************************************************
+TASK [pulsar] **************************************************\***************************************************
 changed: [dockernode03]
 
-TASK [minio] ******************************************************************************************************
+TASK [minio] **************************************************\*\***************************************************
 changed: [dockernode03]
 
-PLAY [Create milvus nodes] ****************************************************************************************
+PLAY [Create milvus nodes] ******************************************\*\*\*\*******************************************
 
-TASK [Gathering Facts] ********************************************************************************************
+TASK [Gathering Facts] ********************************************\*\*\*\*********************************************
 ok: [dockernode02]
 
-TASK [querynode] **************************************************************************************************
+TASK [querynode] ************************************************\*\*************************************************
 changed: [dockernode02]
 
-TASK [datanode] ***************************************************************************************************
+TASK [datanode] ************************************************\*\*\*************************************************
 changed: [dockernode02]
 
-TASK [indexnode] **************************************************************************************************
+TASK [indexnode] ************************************************\*\*************************************************
 changed: [dockernode02]
 
-PLAY [Create milvus coords] ***************************************************************************************
+PLAY [Create milvus coords] ******************************************\*\*\*******************************************
 
-TASK [Gathering Facts] ********************************************************************************************
+TASK [Gathering Facts] ********************************************\*\*\*\*********************************************
 ok: [dockernode01]
 
-TASK [rootcoord] **************************************************************************************************
+TASK [rootcoord] ************************************************\*\*************************************************
 changed: [dockernode01]
 
-TASK [datacoord] **************************************************************************************************
+TASK [datacoord] ************************************************\*\*************************************************
 changed: [dockernode01]
 
-TASK [querycoord] *************************************************************************************************
+TASK [querycoord] ************************************************\*************************************************
 changed: [dockernode01]
 
-TASK [indexcoord] *************************************************************************************************
+TASK [indexcoord] ************************************************\*************************************************
 changed: [dockernode01]
 
-TASK [proxy] ******************************************************************************************************
+TASK [proxy] **************************************************\*\***************************************************
 changed: [dockernode01]
 
-PLAY RECAP ********************************************************************************************************
-dockernode01               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode02               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode03               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY RECAP **************************************************\*\*\*\***************************************************
+dockernode01 : ok=6 changed=5 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode02 : ok=4 changed=3 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode03 : ok=4 changed=3 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 <button class="copy-code-btn"></button></code></pre>
+
 <p>الآن تم نشر Milvus على المضيفين الثلاثة.</p>
 <h2 id="Stop-nodes" class="common-anchor-header">إيقاف العقد<button data-href="#Stop-nodes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -488,7 +496,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>إذا كنت ترغب في معرفة كيفية نشر Milvus على السحب الأخرى:</p>
 <ul>
-<li><a href="/docs/ar/eks.md">نشر مجموعة ميلفوس العنقودية على EKS</a></li>
-<li><a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
-<li><a href="/docs/ar/azure.md">دليل نشر Milvus على Microsoft Azure باستخدام Kubernetes</a></li>
+<li><a href="/docs/ar/v2.5.x/eks.md">نشر مجموعة ميلفوس العنقودية على EKS</a></li>
+<li><a href="/docs/ar/v2.5.x/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
+<li><a href="/docs/ar/v2.5.x/azure.md">دليل نشر Milvus على Microsoft Azure باستخدام Kubernetes</a></li>
 </ul>

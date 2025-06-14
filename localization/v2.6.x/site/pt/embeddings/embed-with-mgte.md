@@ -66,7 +66,7 @@ docs_embeddings = ef.encode_documents(docs)
 
 {<span class="hljs-string">&#x27;dense&#x27;</span>: <span class="hljs-number">768</span>, <span class="hljs-string">&#x27;sparse&#x27;</span>: <span class="hljs-number">250002</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>Para criar embeddings para consultas, utilize o método <code translate="no">encode_queries()</code>:</p>
+<p>Para criar embeddings para consultas, use o método <code translate="no">encode_queries()</code>:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>,
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 

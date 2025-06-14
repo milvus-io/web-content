@@ -3,6 +3,7 @@ id: time_sync.md
 title: 时间同步
 summary: 了解 Milvus 的时间同步系统。
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">时间同步<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: 了解 Milvus 的时间同步系统。
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解<a href="/docs/zh/timestamp.md">时间戳</a>的概念。</li>
-<li>了解 Milvus 的<a href="/docs/zh/data_processing.md">数据处理工作流程</a>。</li>
+<li>了解<a href="/docs/zh/v2.5.x/timestamp.md">时间戳</a>的概念。</li>
+<li>了解 Milvus 的<a href="/docs/zh/v2.5.x/data_processing.md">数据处理工作流程</a>。</li>
 </ul>

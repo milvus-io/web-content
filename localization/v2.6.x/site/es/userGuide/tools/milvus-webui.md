@@ -114,7 +114,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Inicio de Milvus Web UI</span> </span></p>
 <ul>
 <li><p><strong>Información del sistema</strong>: Ver información del sistema, incluida información sobre el modo de despliegue, la imagen utilizada en el despliegue e información relacionada.</p></li>
-<li><p><strong>Información del componente</strong>: Vea el estado y las métricas de los componentes de Milvus, incluidos el estado y las métricas de los nodos de consulta, los nodos de datos, los nodos de índice, los coordinadores y los proxies.</p></li>
+<li><p><strong>Información del componente</strong>: Ver el estado y las métricas de los componentes en Milvus, incluyendo el estado y las métricas de los nodos de consulta, nodos de datos, nodos de índice, coordinadores y proxies.</p></li>
 <li><p><strong>Clientes conectados</strong>: Vea los clientes conectados y su información, incluido el tipo y la versión del SDK, el nombre de usuario y su historial de acceso.</p></li>
 <li><p><strong>Dependencias del sistema</strong>: Vea el estado y las métricas de las dependencias de Milvus, incluidos el estado y las métricas del metaalmacén, la cola de mensajes y el almacenamiento de objetos.</p></li>
 </ul>

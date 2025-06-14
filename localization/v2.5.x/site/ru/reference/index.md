@@ -4,6 +4,7 @@ related_key: index
 summary: Индексный механизм в Милвусе.
 title: Индекс в памяти
 ---
+
 <h1 id="In-memory-Index" class="common-anchor-header">Индекс в памяти<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,9 +20,9 @@ title: Индекс в памяти
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В этой теме перечислены различные типы индексов in-memory, которые поддерживает Milvus, сценарии, для которых каждый из них подходит лучше всего, и параметры, которые пользователи могут настроить для достижения лучшей производительности поиска. Об индексах на диске см. в разделе <strong><a href="/docs/ru/disk_index.md">Индекс на диске</a></strong>.</p>
+    </button></h1><p>В этой теме перечислены различные типы индексов in-memory, которые поддерживает Milvus, сценарии, для которых каждый из них подходит лучше всего, и параметры, которые пользователи могут настроить для достижения лучшей производительности поиска. Об индексах на диске см. в разделе <strong><a href="/docs/ru/v2.5.x/disk_index.md">Индекс на диске</a></strong>.</p>
 <p>Индексирование - это процесс эффективной организации данных, и оно играет важную роль в обеспечении полезности поиска по сходству, значительно ускоряя трудоемкие запросы к большим наборам данных.</p>
-<p>Чтобы повысить производительность запросов, можно <a href="/docs/ru/index-vector-fields.md">указать тип индекса</a> для каждого векторного поля.</p>
+<p>Чтобы повысить производительность запросов, можно <a href="/docs/ru/v2.5.x/index-vector-fields.md">указать тип индекса</a> для каждого векторного поля.</p>
 <div class="alert note">
 В настоящее время векторное поле поддерживает только один тип индекса. При переключении типа индекса Milvus автоматически удаляет старый индекс.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">Векторные индексы ANNS<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +61,7 @@ title: Индекс в памяти
 <div class="filter">
  <a href="#floating">Встраивания с плавающей точкой</a> <a href="#binary">Двоичные встраивания</a> <a href="#sparse">Разреженные встраивания</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Индексы для вкраплений с плавающей точкой</h3><p>Для 128-мерных вкраплений (векторов) с плавающей точкой объем памяти, который они занимают, составляет 128 * размер float = 512 байт. А <a href="/docs/ru/metric.md">метрики расстояния</a>, используемые для вкраплений с плавающей точкой, - это евклидово расстояние (<code translate="no">L2</code>) и внутреннее произведение (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Индексы для вкраплений с плавающей точкой</h3><p>Для 128-мерных вкраплений (векторов) с плавающей точкой объем памяти, который они занимают, составляет 128 * размер float = 512 байт. А <a href="/docs/ru/v2.5.x/metric.md">метрики расстояния</a>, используемые для вкраплений с плавающей точкой, - это евклидово расстояние (<code translate="no">L2</code>) и внутреннее произведение (<code translate="no">IP</code>).</p>
 <p>К таким типам индексов относятся <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, и <code translate="no">SCANN</code> для поиска ANN на базе процессора.</p>
 </div>
 <div class="filter-binary">
@@ -71,7 +72,7 @@ title: Индекс в памяти
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Индексы для разреженных вкраплений</h3><p>Индексы для разреженных вкраплений поддерживают только метрики <code translate="no">IP</code> и <code translate="no">BM25</code> (для полнотекстового поиска).</p>
 <p>Тип индекса, поддерживаемого для разреженных вкраплений: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
-<p>Начиная с Milvus 2.5.4 и далее, <code translate="no">SPARSE_WAND</code> устаревает. Вместо него рекомендуется использовать <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> для эквивалентности и сохранения совместимости. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/sparse_vector.md#Set-index-params-for-vector-field">"Разреженный вектор</a>".</p>
+<p>Начиная с Milvus 2.5.4 и далее, <code translate="no">SPARSE_WAND</code> устаревает. Вместо него рекомендуется использовать <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> для эквивалентности и сохранения совместимости. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">"Разреженный вектор</a>".</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
@@ -247,7 +248,7 @@ title: Индекс в памяти
 <tr><th>Параметр</th><th>Описание</th><th>Диапазон</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Необязательно] Выбранная метрика расстояния.</td><td>См. раздел <a href="/docs/ru/metric.md">Поддерживаемые метрики</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Необязательно] Выбранная метрика расстояния.</td><td>См. раздел <a href="/docs/ru/v2.5.x/metric.md">Поддерживаемые метрики</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -537,7 +538,7 @@ title: Индекс в памяти
 <tr><th>Параметр</th><th>Описание</th><th>Диапазон</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Необязательно] Выбранная метрика расстояния.</td><td>См. раздел <a href="/docs/ru/metric.md">Поддерживаемые метрики</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Необязательно] Выбранная метрика расстояния.</td><td>См. раздел <a href="/docs/ru/v2.5.x/metric.md">Поддерживаемые метрики</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -591,7 +592,7 @@ title: Индекс в памяти
 <tr><th>Параметр</th><th>Описание</th><th>Диапазон</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>Алгоритм, используемый для построения и запроса индекса. Подробнее см. в разделе <a href="/docs/ru/sparse_vector.md#Set-index-params-for-vector-field">"Разреженный вектор</a>".</td><td><code translate="no">DAAT_MAXSCORE</code> (по умолчанию), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>Алгоритм, используемый для построения и запроса индекса. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">"Разреженный вектор</a>".</td><td><code translate="no">DAAT_MAXSCORE</code> (по умолчанию), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 <tr><td><code translate="no">bm25_k1</code></td><td>Управляет насыщенностью частот терминов. Более высокие значения увеличивают важность частот терминов при ранжировании документов.</td><td>[1.2, 2.0]</td></tr>
 <tr><td><code translate="no">bm25_b</code></td><td>Управляет степенью нормализации длины документа. По умолчанию 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
@@ -651,5 +652,5 @@ title: Индекс в памяти
         ></path>
       </svg>
     </button></h2><ul>
-<li>Узнайте больше о <a href="/docs/ru/metric.md">метриках сходства</a>, поддерживаемых в Milvus.</li>
+<li>Узнайте больше о <a href="/docs/ru/v2.5.x/metric.md">метриках сходства</a>, поддерживаемых в Milvus.</li>
 </ul>

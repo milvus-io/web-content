@@ -3,6 +3,7 @@ id: m2m.md
 summary: 本指南提供了從 Milvus 1.x（包括 0.9.x 及以上版本）遷移資料到 Milvus 2.x 的全面、逐步的過程。
 title: 從 Milvus 1.x
 ---
+
 <h1 id="From-Milvus-1x" class="common-anchor-header">從 Milvus 1.x<button data-href="#From-Milvus-1x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +41,7 @@ title: 從 Milvus 1.x
 <li>目標 Milvus: 2.x</li>
 </ul></li>
 <li><strong>所需的工具</strong>：<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。安裝細節請參考<a href="/docs/zh-hant/milvusdm_install.md">安裝遷移工具</a>。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。安裝細節請參考<a href="/docs/zh-hant/v2.5.x/milvusdm_install.md">安裝遷移工具</a>。</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">匯出來源 Milvus 安裝的元資料<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

@@ -169,7 +169,7 @@ oai_client = OpenAI(api_key=openai_key)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Мы будем использовать набор данных <a href="https://meetingbank.github.io/">MeetingBank</a>, который является эталонным набором данных, созданным на основе данных городских советов 6 крупных городов США, чтобы дополнить существующие наборы данных. Он содержит 1 366 заседаний с более чем 3 579 часами видео, а также стенограммы, PDF-документы с протоколами заседаний, повесткой дня и другими метаданными.</p>
+    </button></h1><p>Мы будем использовать набор данных <a href="https://meetingbank.github.io/">MeetingBank</a>, который представляет собой эталонный набор данных, созданный на основе данных городских советов 6 крупных городов США в дополнение к существующим наборам данных. Он содержит 1 366 заседаний с более чем 3 579 часами видео, а также стенограммы, PDF-документы с протоколами заседаний, повесткой дня и другими метаданными.</p>
 <p>Для этого упражнения мы создали меньший набор данных. Его можно найти <a href="https://drive.google.com/drive/folders/1v3vJahKtadi_r-8VJAsDd2eaiSRenmsa?usp=drive_link">здесь</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete the dataset folder if it already exists</span>
 
@@ -389,7 +389,7 @@ detect = Detect(
       </svg>
     </button></h1><p>В этом первом простом подходе мы будем использовать расстояние Левенштейна для сопоставления документа с заданным запросом. Три лучших документа с наилучшим соответствием будут отправлены в LLM в качестве контекста для ответа.</p>
 <p><strong>ПРИМЕЧАНИЕ: Выполнение этой ячейки займет около 3 минут.</strong></p>
-<p>Наслаждайтесь любимым напитком в ожидании :)</p>
+<p>Наслаждайтесь своим любимым напитком, пока вы ждете :)</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> fuzzywuzzy <span class="hljs-keyword">import</span> process
 <span class="hljs-keyword">import</span> time
 
@@ -464,7 +464,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Average retrieval relevance score for brute force approach: 14.31772340191865
 </code></pre>
-<p>Это <strong>базовая</strong> оценка качества приложения LLM. Вы также можете просмотреть отдельные метрики, такие как оценки галлюцинаций и т.д., вычисленные AIMon в <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">пользовательском интерфейсе AIMon</a>.</p>
+<p>Это <strong>базовая</strong> оценка качества приложения LLM. Вы также можете увидеть отдельные метрики, такие как оценки галлюцинаций и т.д., вычисленные AIMon в <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">пользовательском интерфейсе AIMon</a>.</p>
 <h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. Использование VectorDB (Milvus) для поиска документов<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -899,7 +899,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <p>В итоге, как показано на рисунке ниже, мы продемонстрировали следующее:</p>
 <ul>
 <li>Вычисление оценки качества с помощью взвешенной комбинации 3 различных метрик качества: оценки галлюцинаций, оценки соблюдения инструкций и оценки релевантности поиска.</li>
-<li>Установление базового уровня качества с помощью метода грубого подбора строк для сопоставления документов с запросом и передачи его в LLM.</li>
+<li>Установление базового уровня качества с помощью метода грубого подбора строк для сопоставления документов с запросом и передача его в LLM.</li>
 <li>Улучшение базового качества с помощью векторной БД (здесь мы использовали Milvus).</li>
 <li>Дальнейшее улучшение качества с помощью реранкера AIMon с низкой задержкой и адаптацией к домену.</li>
 <li>Мы также показали, как значительно улучшается релевантность поиска при добавлении реранкера AIMon.</li>

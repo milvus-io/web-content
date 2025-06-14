@@ -3,6 +3,7 @@ id: performance_faq.md
 summary: 尋找關於搜尋效能、效能增強及其他效能相關問題的常見問題答案。
 title: 效能常見問題
 ---
+
 <h1 id="Performance-FAQ" class="common-anchor-header">效能常見問題<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -31,7 +32,7 @@ title: 效能常見問題
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">哪些因素影響 CPU 使用量？</h4><p>當 Milvus 建立索引或執行查詢時，CPU 使用量會增加。一般而言，除了使用 Annoy（在單一線程上執行）外，索引建立都是 CPU 密集型的。</p>
 <p>當執行查詢時，CPU 使用量會受到<code translate="no">nq</code> 和<code translate="no">nprobe</code> 的影響。當<code translate="no">nq</code> 和<code translate="no">nprobe</code> 較小的時候，並發量會很低，CPU 使用量也會保持在低水平。</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">同時插入資料和搜尋會影響查詢效能嗎？</h4><p>插入作業不是 CPU 密集型作業。然而，由於新的區段可能尚未達到建立索引的臨界值，Milvus 會採用強制搜尋，這會嚴重影響查詢效能。</p>
-<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 參數決定段的索引建立臨界值，預設為 1024 行。如需詳細資訊，請參閱<a href="/docs/zh-hant/system_configuration.md">系統設定</a>。</p>
+<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 參數決定段的索引建立臨界值，預設為 1024 行。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/system_configuration.md">系統設定</a>。</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">索引 VARCHAR 欄位可以提高刪除速度嗎？</h4><p>為 VARCHAR 欄位建立索引可以加快「Delete By Expression」作業的速度，但僅限於特定情況：</p>
 <ul>
 <li><strong>INVERTED 索引</strong>：此索引有助於非主索引鍵 VARCHAR 欄位上的<code translate="no">IN</code> 或<code translate="no">==</code> 表達式。</li>

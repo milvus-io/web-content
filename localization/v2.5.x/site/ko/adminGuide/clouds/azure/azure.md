@@ -4,6 +4,7 @@ title: Kubernetes를 사용하여 Microsoft Azure에 Milvus 배포하기
 related_key: cluster
 summary: Azure에 Milvus 클러스터를 배포하는 방법을 알아보세요.
 ---
+
 <h1 id="Deploy-Milvus-on-Azure-with-AKS" class="common-anchor-header">AKS를 사용하여 Azure에 Milvus 배포하기<button data-href="#Deploy-Milvus-on-Azure-with-AKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -200,27 +201,28 @@ az storage container create -n testmilvus --account-name milvustesting1
   enabled: <span class="hljs-literal">true</span>
 
 service:
-  <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-built_in">type</span>: LoadBalancer
 
 extraConfigFiles:
-  user.yaml: |+
-    common:
-      storageType: remote
+user.yaml: |+
+common:
+storageType: remote
 
 minio:
-  enabled: <span class="hljs-literal">false</span>
+enabled: <span class="hljs-literal">false</span>
 
 externalS3:
-  enabled: <span class="hljs-literal">true</span>
-  host: core.windows.net
-  port: 443
-  rootPath: my-release
-  bucketName: testmilvus <span class="hljs-comment"># the storage account container name</span>
-  cloudProvider: azure
-  useSSL: <span class="hljs-literal">true</span>
-  accessKey: <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># the storage account name</span>
-  secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span> 
+enabled: <span class="hljs-literal">true</span>
+host: core.windows.net
+port: 443
+rootPath: my-release
+bucketName: testmilvus <span class="hljs-comment"># the storage account container name</span>
+cloudProvider: azure
+useSSL: <span class="hljs-literal">true</span>
+accessKey: <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># the storage account name</span>
+secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Deploy-Milvus" class="common-anchor-header">Milvus 배포<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,6 +296,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>다른 클라우드에 Milvus를 배포하는 방법을 알아보려면 다음과 같이 하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Kubernetes로 AWS에 Milvus 클러스터 배포하기</a></li>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.5.x/eks.md">Kubernetes로 AWS에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.5.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
 </ul>

@@ -179,7 +179,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 <pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Générez la clé d'accès de l'utilisateur et la clé secrète, vous devez aller sur la page de stockage de votre projet. Dans la barre latérale gauche du tableau de bord, cliquez sur Google Cloud Storage puis sur Paramètres. Sélectionnez l'onglet INTEROPÉRABILITÉ. Si vous ne l'avez pas encore activé, cliquez sur Accès interopérable. Cliquez ensuite sur le bouton CRÉER UNE CLÉ pour créer des clés d'accès GCP pour votre compte utilisateur.</li>
+<li>Générez la clé d'accès utilisateur et la clé secrète, vous devez aller sur la page de stockage de votre projet. Dans la barre latérale gauche du tableau de bord, cliquez sur Google Cloud Storage puis sur Paramètres. Sélectionnez l'onglet INTEROPÉRABILITÉ. Si vous ne l'avez pas encore activé, cliquez sur Accès interopérable. Cliquez ensuite sur le bouton CRÉER UNE CLÉ pour créer des clés d'accès GCP pour votre compte utilisateur.</li>
 </ul>
 <p>
   
@@ -283,5 +283,5 @@ helm install -f values.yaml my-release milvus/milvus
     </button></h2><p>Si vous souhaitez apprendre à déployer Milvus sur d'autres clouds :</p>
 <ul>
 <li><a href="/docs/fr/eks.md">Déployer Milvus Cluster sur AWS avec Kubernetes</a></li>
-<li><a href="/docs/fr/azure.md">Déployer le cluster Milvus sur Azure avec Kubernetes</a></li>
+<li><a href="/docs/fr/azure.md">Déployer Milvus Cluster sur Azure avec Kubernetes</a></li>
 </ul>

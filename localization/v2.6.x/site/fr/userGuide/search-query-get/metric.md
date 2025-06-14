@@ -155,7 +155,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Formule IP</span> </span></p>
 <p>Le produit intérieur est plus utile si vous devez comparer des données non normalisées ou si vous vous intéressez à la magnitude et à l'angle.</p>
 <div class="alert note">
-<p>Si vous utilisez le produit intérieur pour calculer les similarités entre les embeddings, vous devez normaliser vos embeddings. Après la normalisation, le produit intérieur est égal à la similarité cosinusoïdale.</p>
+<p>Si vous utilisez le produit intérieur pour calculer les similarités entre les embeddings, vous devez normaliser vos embeddings. Après la normalisation, le produit intérieur est égal à la similarité en cosinus.</p>
 </div>
 <p>Supposons que X' soit normalisé à partir de l'intégration X :</p>
 <p>

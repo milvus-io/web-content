@@ -43,12 +43,12 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/without-clustering-compaction.png" alt="Without Clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>بدون ضغط التجميع</span> </span></p>
 <p>إذا كان بإمكان Milvus توزيع الكيانات بين المقاطع بناءً على القيم الموجودة في حقل معين، يمكن تقييد نطاق البحث داخل مقطع واحد، وبالتالي تحسين أداء البحث.</p>
-<p><strong>ضغط التجميع</strong> هو ميزة في Milvus تقوم بإعادة توزيع الكيانات بين المقاطع في مجموعة بناءً على القيم الموجودة في حقل قياسي. لتمكين هذه الميزة، تحتاج أولاً إلى تحديد حقل قياسي <strong>كمفتاح ت</strong>جميع. يسمح ذلك ل Milvus بإعادة توزيع الكيانات في مقطع عندما تقع قيم مفتاح التجميع الخاصة بها ضمن نطاق محدد. عندما تقوم بتشغيل ضغط التجميع، يقوم Milvus بإنشاء/تحديث فهرس عام يسمى <strong>PartitionStats،</strong> والذي يسجل علاقة التعيين بين المقاطع وقيم مفاتيح التجميع.</p>
+<p><strong>ضغط التجميع</strong> هو ميزة في Milvus تقوم بإعادة توزيع الكيانات بين المقاطع في مجموعة بناءً على القيم الموجودة في حقل قياسي. لتمكين هذه الميزة، تحتاج أولاً إلى تحديد حقل قياسي <strong>كمفتاح ت</strong>جميع. وهذا يسمح ل Milvus بإعادة توزيع الكيانات في مقطع عندما تقع قيم مفتاح التجميع الخاصة بها ضمن نطاق محدد. عندما تقوم بتشغيل ضغط التجميع، يقوم Milvus بإنشاء/تحديث فهرس عام يسمى <strong>PartitionStats،</strong> والذي يسجل علاقة التعيين بين المقاطع وقيم مفاتيح التجميع.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>ضغط التجميع</span> </span></p>
-<p>باستخدام <strong>PartitionStats</strong> كمرجع، يمكن ل Milvus تشذيب البيانات غير ذات الصلة عند تلقي طلب بحث/استعلام يحمل قيمة مفتاح تجميع وتقييد نطاق البحث داخل المقاطع التي تم تعيينها إلى القيمة، وبالتالي تحسين أداء البحث. للحصول على تفاصيل حول تحسين الأداء، راجع <a href="/docs/ar/clustering-compaction.md#Benchmark-Test">الاختبارات المعيارية</a>.</p>
+<p>باستخدام <strong>PartitionStats</strong> كمرجع، يمكن ل Milvus تشذيب البيانات غير ذات الصلة عند تلقي طلب بحث/استعلام يحمل قيمة مفتاح تجميع وتقييد نطاق البحث داخل المقاطع التي تم تعيينها إلى القيمة، وبالتالي تحسين أداء البحث. للحصول على تفاصيل حول تحسين الأداء، راجع <a href="/docs/ar/v2.5.x/clustering-compaction.md#Benchmark-Test">الاختبارات المعيارية</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">استخدام ضغط التجميع<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +161,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>لتطبيق التغييرات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
+<p>لتطبيق التغييرات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/v2.5.x/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">تكوين التجميع</h3><p>لضغط التجميع في مجموعة معينة، يجب عليك تحديد حقل قياسي من المجموعة كمفتاح التجميع.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -336,7 +336,7 @@ System.out.println(stateResp.getState());
         ></path>
       </svg>
     </button></h2><p>يحدد حجم البيانات وأنماط الاستعلام مجتمعةً تحسين الأداء الذي يمكن أن يحققه ضغط التجميع. يُظهر اختبار معياري داخلي أن ضغط التجميع يؤدي إلى تحسين يصل إلى 25 ضعفًا في الاستعلامات في الثانية (QPS).</p>
-<p>يتم إجراء الاختبار المعياري على مجموعة تحتوي على كيانات من مجموعة بيانات LAION ذات 20 مليونًا و768 بُعدًا مع تعيين الحقل <code translate="no">key</code> كمفتاح تجميع. بعد تشغيل عملية ضغط التجميع في المجموعة، يتم إرسال عمليات البحث المتزامنة حتى يصل استخدام وحدة المعالجة المركزية إلى مستوى عالٍ من وحدة المعالجة المركزية.</p>
+<p>يتم إجراء الاختبار المعياري على مجموعة تحتوي على كيانات من مجموعة بيانات LAION ذات 20 مليونًا و768 بُعدًا مع تعيين الحقل <code translate="no">key</code> كمفتاح تجميع. بعد تشغيل ضغط التجميع في المجموعة، يتم إرسال عمليات البحث المتزامنة حتى يصل استخدام وحدة المعالجة المركزية إلى مستوى عالٍ من وحدة المعالجة المركزية.</p>
 <table>
    <tr>
      <th rowspan="2"><p>مرشح البحث</p></th>

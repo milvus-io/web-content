@@ -2,6 +2,7 @@
 id: configure_access_logs.md
 title: 配置訪問日誌
 ---
+
 <h1 id="Configure-Access-Logs" class="common-anchor-header">配置訪問日誌<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,9 +22,9 @@ title: 配置訪問日誌
 <p>本指南提供在 Milvus 中配置訪問日誌的詳細說明。</p>
 <p>存取日誌的設定取決於 Milvus 的安裝方式：</p>
 <ul>
-<li><strong>Helm 安裝</strong>：配置在<code translate="no">values.yaml</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>。</li>
-<li><strong>Docker 安裝</strong>：配置在<code translate="no">milvus.yaml</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</li>
-<li><strong>操作員安裝</strong>：在設定檔中修改<code translate="no">spec.components</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>。</li>
+<li><strong>Helm 安裝</strong>：配置在<code translate="no">values.yaml</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure-helm.md">使用 Helm Charts 配置 Milvus</a>。</li>
+<li><strong>Docker 安裝</strong>：配置在<code translate="no">milvus.yaml</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</li>
+<li><strong>操作員安裝</strong>：在設定檔中修改<code translate="no">spec.components</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>。</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">組態選項<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

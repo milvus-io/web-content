@@ -156,7 +156,7 @@ title: Configurazione dei registri di accesso
 <tbody>
 <tr><td><code translate="no">$method_name</code></td><td>Nome del metodo</td></tr>
 <tr><td><code translate="no">$method_status</code></td><td>Stato dell'accesso: <strong>OK</strong> o <strong>non riuscito</strong></td></tr>
-<tr><td><code translate="no">$method_expr</code></td><td>Espressione usata per le operazioni di interrogazione, ricerca o cancellazione</td></tr>
+<tr><td><code translate="no">$method_expr</code></td><td>Espressione utilizzata per le operazioni di interrogazione, ricerca o cancellazione</td></tr>
 <tr><td><code translate="no">$trace_id</code></td><td>TraceID associato all'accesso</td></tr>
 <tr><td><code translate="no">$user_addr</code></td><td>Indirizzo IP dell'utente</td></tr>
 <tr><td><code translate="no">$user_name</code></td><td>Nome dell'utente</td></tr>

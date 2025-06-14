@@ -5,6 +5,7 @@ summary: >-
   No Milvus, multi-tenancy significa que vários clientes ou equipas - designados
   por tenants - partilham o mesmo cluster, mantendo ambientes de dados isolados.
 ---
+
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implementar Multi-tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus suporta multi-tenancy em quatro níveis: <strong>Banco de dados</strong>, <strong>Coleção</strong>, <strong>Partição</strong> e <strong>Chave de Partição</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multitenancy ao nível da base de dados</h3><p>Com o multi-tenancy ao nível da base de dados, cada inquilino recebe uma <a href="/docs/pt/manage_databases.md">base de dados</a> correspondente que contém uma ou mais colecções.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Multitenancy ao nível da base de dados</h3><p>Com o multi-tenancy ao nível da base de dados, cada inquilino recebe uma <a href="/docs/pt/v2.5.x/manage_databases.md">base de dados</a> correspondente que contém uma ou mais colecções.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -49,7 +50,7 @@ summary: >-
 <li><p><strong>Flexibilidade</strong>: Cada base de dados pode ter colecções com esquemas diferentes, oferecendo uma organização de dados altamente flexível e permitindo que cada inquilino tenha o seu próprio esquema de dados.</p></li>
 <li><p><strong>Outros</strong>: Esta estratégia também suporta o RBAC, permitindo um controlo refinado do acesso do utilizador por inquilino. Além disso, pode carregar ou libertar dados de forma flexível para inquilinos específicos para gerir eficazmente os dados quentes e frios.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multitenancy ao nível da coleção</h3><p>Com o multilocatário ao nível da coleção, é atribuída uma <a href="/docs/pt/manage-collections.md">coleção</a> a cada inquilino, oferecendo um forte isolamento de dados.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multitenancy ao nível da coleção</h3><p>Com o multilocatário ao nível da coleção, é atribuída uma <a href="/docs/pt/v2.5.x/manage-collections.md">coleção</a> a cada inquilino, oferecendo um forte isolamento de dados.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -60,7 +61,7 @@ summary: >-
 <li><p><strong>Flexibilidade</strong>: Esta estratégia permite que cada coleção tenha o seu próprio esquema, acomodando inquilinos com diferentes esquemas de dados.</p></li>
 <li><p><strong>Outros</strong>: Esta estratégia também suporta RBAC, permitindo um controlo de acesso granular sobre os locatários. Além disso, pode carregar ou libertar dados de forma flexível para inquilinos específicos para gerir eficazmente dados quentes e frios.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multitenancy em nível de partição</h3><p>No multilocatário ao nível da partição, cada locatário é atribuído a uma <a href="/docs/pt/manage-partitions.md">partição</a> criada manualmente dentro de uma coleção partilhada.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multitenancy em nível de partição</h3><p>No multilocatário ao nível da partição, cada locatário é atribuído a uma <a href="/docs/pt/v2.5.x/manage-partitions.md">partição</a> criada manualmente dentro de uma coleção partilhada.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -71,7 +72,7 @@ summary: >-
 <li><p><strong>Flexibilidade</strong>: Esta estratégia requer que todos os locatários partilhem o mesmo esquema de dados. E as partições precisam de ser criadas manualmente.</p></li>
 <li><p><strong>Outros</strong>: O RBAC não é suportado no nível da partição. Os locatários podem ser consultados individualmente ou em várias partições, o que torna essa abordagem adequada para cenários que envolvem consultas agregadas ou análises em segmentos de locatários. Além disso, é possível carregar ou liberar dados de forma flexível para locatários específicos para gerenciar dados quentes e frios com eficiência.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multilocação em nível de chave de partição</h3><p>Com esta estratégia, todos os locatários partilham uma única coleção e esquema, mas os dados de cada locatário são automaticamente encaminhados para 16 partições fisicamente isoladas com base no valor <a href="/docs/pt/use-partition-key.md">da chave de partição</a>. Embora cada partição física possa conter vários locatários, os dados de diferentes locatários permanecem logicamente separados.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multilocação em nível de chave de partição</h3><p>Com esta estratégia, todos os locatários partilham uma única coleção e esquema, mas os dados de cada locatário são automaticamente encaminhados para 16 partições fisicamente isoladas com base no valor <a href="/docs/pt/v2.5.x/use-partition-key.md">da chave de partição</a>. Embora cada partição física possa conter vários locatários, os dados de diferentes locatários permanecem logicamente separados.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

@@ -3,6 +3,7 @@ id: milvus_lite.md
 summary: 开始使用 Milvus Lite。
 title: 本地运行 Milvus Lite
 ---
+
 <h1 id="Run-Milvus-Lite-Locally" class="common-anchor-header">本地运行 Milvus Lite<button data-href="#Run-Milvus-Lite-Locally" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,50 +127,51 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
 
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">384</span>  <span class="hljs-comment"># The vectors we will use in this demo has 384 dimensions</span>
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+dimension=<span class="hljs-number">384</span> <span class="hljs-comment"># The vectors we will use in this demo has 384 dimensions</span>
 )
 
 <span class="hljs-comment"># Text strings to search from.</span>
 docs = [
-    <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
-    <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
-    <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
+<span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
+<span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
+<span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
 ]
 <span class="hljs-comment"># For illustration, here we use fake vectors with random numbers (384 dimension).</span>
 
-vectors = [[ np.random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">384</span>) ] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(docs)) ]
+vectors = [[ np.random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">384</span>) ] <span class="hljs-keyword">for</span> \_ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(docs)) ]
 data = [ {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>} <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors)) ]
 res = client.insert(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+data=data
 )
 
 <span class="hljs-comment"># This will exclude any text in &quot;history&quot; subject despite close to the query vector.</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    data=[vectors[<span class="hljs-number">0</span>]],
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
-    limit=<span class="hljs-number">2</span>,
-    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+data=[vectors[<span class="hljs-number">0</span>]],
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
+limit=<span class="hljs-number">2</span>,
+output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
 )
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># a query that retrieves all entities matching filter expressions.</span>
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
+output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
 )
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># delete</span>
 res = client.delete(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
 )
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -355,13 +357,14 @@ milvus-lite dump -h
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -d DB_FILE, --db-file DB_FILE
-                        milvus lite db file
-  -c COLLECTION, --collection COLLECTION
-                        collection that need to be dumped
-  -p PATH, --path PATH  dump file storage dir
+-h, --help show this help message and exit
+-d DB_FILE, --db-file DB_FILE
+milvus lite db file
+-c COLLECTION, --collection COLLECTION
+collection that need to be dumped
+-p PATH, --path PATH dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
+
 <p>下面的示例转储了<code translate="no">demo_collection</code> Collections 中的所有数据，这些数据存储在<code translate="no">./milvus_demo.db</code> （Milvus Lite 数据库文件）中。</p>
 <p>导出数据：</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
@@ -387,26 +390,26 @@ optional arguments:
       </svg>
     </button></h2><p>连接 Milvus Lite 后，您可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/v2.5.x/quickstart.md">快速入门</a>，了解 Milvus 的功能。</p></li>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/v2.5.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.5.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.5.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.5.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.5.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
 <li><p>在云上部署你的 Milvus 集群：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/v2.5.x/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/v2.5.x/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/v2.5.x/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.5.x/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
-<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.5.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Las métricas de similitud se utilizan para medir las similitudes entre vectores. La elección de una métrica de distancia adecuada ayuda a mejorar significativamente la clasificación y el rendimiento de la agrupación.</p>
 <p>Actualmente, Milvus soporta estos tipos de métricas de similitud: Distancia euclidiana (<code translate="no">L2</code>), Producto interior (<code translate="no">IP</code>), Similitud coseno (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, y <code translate="no">BM25</code> (diseñada específicamente para la búsqueda de texto completo en vectores dispersos).</p>
-<p>La siguiente tabla resume la correspondencia entre los distintos tipos de campo y sus correspondientes tipos métricos.</p>
+<p>La siguiente tabla resume la correspondencia entre los distintos tipos de campo y sus correspondientes tipos de métrica.</p>
 <table>
    <tr>
      <th><p>Tipo de campo</p></th>

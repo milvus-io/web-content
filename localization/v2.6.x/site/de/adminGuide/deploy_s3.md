@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus verwendet standardmäßig MinIO für die Objektspeicherung, aber es unterstützt auch die Verwendung von <a href="https://aws.amazon.com/s3/">Amazon Simple Storage Service (S3)</a> als persistenten Objektspeicher für Protokoll- und Indexdateien. Dieses Thema beschreibt, wie Sie S3 für Milvus konfigurieren. Sie können dieses Thema überspringen, wenn Sie mit MinIO zufrieden sind.</p>
 <p>Sie können S3 mit <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> oder auf K8s konfigurieren.</p>
-<h2 id="Configure-S3-with-Docker-Compose" class="common-anchor-header">Konfigurieren von S3 mit Docker Compose<button data-href="#Configure-S3-with-Docker-Compose" class="anchor-icon" translate="no">
+<h2 id="Configure-S3-with-Docker-Compose" class="common-anchor-header">Konfigurieren Sie S3 mit Docker Compose<button data-href="#Configure-S3-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

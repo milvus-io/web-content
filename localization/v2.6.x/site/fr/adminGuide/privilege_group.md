@@ -69,7 +69,7 @@ summary: >-
 <p>Les tableaux suivants expliquent les privilèges inclus dans chacun des groupes de privilèges intégrés.</p>
 <h3 id="Collection-level" class="common-anchor-header">Niveau de collection</h3><ul>
 <li><p><strong>CollectionReadOnly (COLL_RO)</strong>: inclut les privilèges de lecture des données de la collection.</p></li>
-<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: inclut les privilèges de lecture et d'écriture des données de la collection.</p></li>
+<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: comprend les privilèges de lecture et d'écriture des données de la collection.</p></li>
 <li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: comprend les privilèges de lecture et d'écriture des données de la collection et de gestion des collections.</p></li>
 </ul>
 <p>Le tableau ci-dessous répertorie les privilèges spécifiques inclus dans les trois groupes de privilèges intégrés au niveau de la collecte :</p>
@@ -93,7 +93,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Détail de l'index</p></td>
+     <td><p>Détails de l'index</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>

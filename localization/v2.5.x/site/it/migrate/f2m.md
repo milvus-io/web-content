@@ -1,9 +1,10 @@
 ---
 id: f2m.md
 title: Da Faiss
-related_key: 'Faiss, migrate, import'
+related_key: "Faiss, migrate, import"
 summary: Scoprite come migrare i dati Faiss a Milvus.
 ---
+
 <h1 id="From-Faiss" class="common-anchor-header">Da Faiss<button data-href="#From-Faiss" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ summary: Scoprite come migrare i dati Faiss a Milvus.
 <li>Per i dettagli sull'installazione, vedere <a href="https://github.com/facebookresearch/faiss/blob/main/INSTALL.md">Installazione di Faiss</a> e <a href="https://milvus.io/docs/install_standalone-docker.md">Installazione di Milvus</a>.</li>
 </ul></li>
 <li><strong>Strumenti necessari</strong>:<ul>
-<li>Strumento di<a href="https://github.com/zilliztech/milvus-migration">migrazione Milvus</a>. Per i dettagli sull'installazione, vedere <a href="/docs/it/milvusdm_install.md">Installazione dello strumento di migrazione</a>.</li>
+<li>Strumento di<a href="https://github.com/zilliztech/milvus-migration">migrazione Milvus</a>. Per i dettagli sull'installazione, vedere <a href="/docs/it/v2.5.x/milvusdm_install.md">Installazione dello strumento di migrazione</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Configure-the-migration" class="common-anchor-header">Configurare la migrazione<button data-href="#Configure-the-migration" class="anchor-icon" translate="no">
@@ -78,31 +79,32 @@ loader:
     faissFile: ./testfiles/faiss/faiss_ivf_flat.index
 
 target: <span class="hljs-comment"># configs for the target Milvus collection.</span>
-  create:
-    collection:
-      name: test1w
-      shardsNums: 2
-      dim: 256
-      metricType: L2
+create:
+collection:
+name: test1w
+shardsNums: 2
+dim: 256
+metricType: L2
 
-  mode: remote
-  remote:
-    outputDir: testfiles/output/
-    cloud: aws
-    endpoint: 0.0.0.0:9000
-    region: ap-southeast-1
-    bucket: a-bucket
-    ak: minioadmin
-    sk: minioadmin
-    useIAM: <span class="hljs-literal">false</span>
-    useSSL: <span class="hljs-literal">false</span>
-    checkBucket: <span class="hljs-literal">true</span>
-  milvus2x:
-    endpoint: localhost:19530
-    username: xxxxx
-    password: xxxxx
+mode: remote
+remote:
+outputDir: testfiles/output/
+cloud: aws
+endpoint: 0.0.0.0:9000
+region: ap-southeast-1
+bucket: a-bucket
+ak: minioadmin
+sk: minioadmin
+useIAM: <span class="hljs-literal">false</span>
+useSSL: <span class="hljs-literal">false</span>
+checkBucket: <span class="hljs-literal">true</span>
+milvus2x:
+endpoint: localhost:19530
+username: xxxxx
+password: xxxxx
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>La tabella seguente descrive i parametri del file di configurazione di esempio. Per un elenco completo delle configurazioni, consultare <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_FAISS.md#migrationyaml-reference">Milvus Migration: Faiss a Milvus 2.x</a>.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>

@@ -5,6 +5,7 @@ summary: >-
   В этой статье проводится сравнение Milvus с другими решениями для векторного
   поиска.
 ---
+
 <h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Сравнение Milvus с альтернативами<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Испытание</strong>: Испытайте Milvus из первых рук, начав с <a href="https://milvus.io/docs/quickstart.md">быстрого запуска</a> Milvus или <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">подписавшись на Zilliz Cloud</a>.</p></li>
-<li><p><strong>Узнайте больше</strong>: Узнайте больше о возможностях Milvus из наших подробных <a href="https://milvus.io/docs/manage-collections.md">руководств</a> <a href="/docs/ru/glossary.md">по терминологии</a> и <a href="https://milvus.io/docs/manage-collections.md">руководств пользователя</a>.</p></li>
+<li><p><strong>Узнайте больше</strong>: Узнайте больше о возможностях Milvus из наших подробных <a href="https://milvus.io/docs/manage-collections.md">руководств</a> <a href="/docs/ru/v2.5.x/glossary.md">по терминологии</a> и <a href="https://milvus.io/docs/manage-collections.md">руководств пользователя</a>.</p></li>
 <li><p><strong>Изучите альтернативы</strong>: Для более широкого сравнения вариантов векторных баз данных изучите дополнительные ресурсы на <a href="https://zilliz.com/comparison">этой странице</a>.</p></li>
 </ul>

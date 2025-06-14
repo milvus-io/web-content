@@ -8,6 +8,7 @@ summary: >-
   معه على أنه لاغٍ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم
   النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات للحقل أثناء الإدراج.
 ---
+
 <h1 id="Nullable--Default" class="common-anchor-header">قابل للإلغاء والافتراضي<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,10 +45,10 @@ summary: >-
 <li><p>تدعم الحقول العددية فقط، باستثناء الحقل الأساسي، القيم الافتراضية والسمة القابلة للإلغاء.</p></li>
 <li><p>لا تدعم حقول JSON و Array القيم الافتراضية.</p></li>
 <li><p>يمكن تكوين القيم الافتراضية أو السمة القابلة للإلغاء فقط أثناء إنشاء المجموعة ولا يمكن تعديلها بعد ذلك.</p></li>
-<li><p>لا يمكن استخدام الحقول العددية ذات السمة القابلة للإلغاء الممكّنة كـ <code translate="no">group_by_field</code> في بحث التجميع. لمزيد من المعلومات حول بحث التجميع، راجع <a href="/docs/ar/grouping-search.md">بحث التجميع</a>.</p></li>
-<li><p>لا يمكن استخدام الحقول التي تم وضع علامة لاغية عليها كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
+<li><p>لا يمكن استخدام الحقول العددية ذات السمة القابلة للإلغاء الممكّنة كـ <code translate="no">group_by_field</code> في بحث التجميع. لمزيد من المعلومات حول بحث التجميع، راجع <a href="/docs/ar/v2.5.x/grouping-search.md">بحث التجميع</a>.</p></li>
+<li><p>لا يمكن استخدام الحقول التي تم وضع علامة لاغية عليها كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/v2.5.x/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
 <li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للإلغاء، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
-<li><p><strong>حقول JSON و ARRAY</strong>: عند استخدام المشغلين <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> للتصفية على حقول JSON أو ARRAY، يعمل هذان المشغلان على مستوى العمود، مما يشير إلى أنهما يقيمان فقط ما إذا كان كائن JSON أو المصفوفة بأكملها فارغة. على سبيل المثال، إذا كان أحد المفاتيح داخل كائن JSON فارغًا، فلن يتعرف عليه عامل التصفية <code translate="no">IS NULL</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/basic-operators.md">المعاملات الأساسية</a>.</p></li>
+<li><p><strong>حقول JSON و ARRAY</strong>: عند استخدام المشغلين <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> للتصفية على حقول JSON أو ARRAY، يعمل هذان المشغلان على مستوى العمود، مما يشير إلى أنهما يقيمان فقط ما إذا كان كائن JSON أو المصفوفة بأكملها فارغة. على سبيل المثال، إذا كان أحد المفاتيح داخل كائن JSON فارغًا، فلن يتعرف عليه عامل التصفية <code translate="no">IS NULL</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/basic-operators.md">المعاملات الأساسية</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">سمة لاغية<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,8 +75,8 @@ client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530
 
 <span class="hljs-comment"># Define collection schema</span>
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_schema=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_schema=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -89,6 +90,7 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;vector&quot;</
 <span class="hljs-comment"># Create collection</span>
 client.create_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -278,6 +280,7 @@ curl --request POST \
 
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -354,6 +357,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.15838398039340973, &#x27;entity&#x27;: {&#x27;age&#x27;: 30, &#x27;id&#x27;: 1}}, {&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.28278401494026184, &#x27;entity&#x27;: {&#x27;age&#x27;: None, &#x27;id&#x27;: 2}}]&quot;] </span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -432,17 +436,18 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 <span class="hljs-comment"># {&quot;id&quot;: 3, &quot;vector&quot;: [0.3, 0.4, ..., 0.130], &quot;age&quot;: None}  # Omitted age  column is treated as None</span>
 
 results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age &gt;= 0&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age &gt;= 0&quot;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
 )
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     {&quot;id&quot;: 1, &quot;age&quot;: 30}</span>
+<span class="hljs-comment"># {&quot;id&quot;: 1, &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># Note: Entities with `age` as `null` (id 2 and 3) will not appear in the result.</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 
@@ -502,6 +507,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(<span class="hljs-string">&quot;&quot;</span>)
@@ -576,6 +582,7 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;vector&quot;</
 
 client.create_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
@@ -781,6 +788,7 @@ curl --request POST \
 
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -848,7 +856,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>لمزيد من المعلومات حول كيفية تفعيل إعدادات القيمة الفارغة والافتراضية، راجع <a href="/docs/ar/nullable-and-default.md#Applicable-rules">القواعد القابلة للتطبيق</a>.</p>
+<p>لمزيد من المعلومات حول كيفية تفعيل إعدادات القيمة الفارغة والافتراضية، راجع <a href="/docs/ar/v2.5.x/nullable-and-default.md#Applicable-rules">القواعد القابلة للتطبيق</a>.</p>
 </div>
 <h3 id="Search-and-query-with-default-values" class="common-anchor-header">البحث والاستعلام بالقيم الافتراضية</h3><p>يتم التعامل مع الكيانات التي تحتوي على قيم افتراضية مثل أي كيانات أخرى أثناء عمليات البحث المتجه والتصفية القياسية. يمكنك تضمين القيم الافتراضية كجزء من عمليات <code translate="no">search</code> و <code translate="no">query</code> الخاصة بك.</p>
 <p>على سبيل المثال، في عملية <code translate="no">search</code> ، سيتم تضمين الكيانات التي تحتوي على <code translate="no">age</code> على القيمة الافتراضية <code translate="no">18</code> في النتائج:</p>
@@ -869,6 +877,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.050000004, &#x27;entity&#x27;: {&#x27;id&#x27;: 2, &#x27;age&#x27;: 18, &#x27;status&#x27;: &#x27;active&#x27;}}, {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.45000002, &#x27;entity&#x27;: {&#x27;id&#x27;: 4, &#x27;age&#x27;: 18, &#x27;status&#x27;: &#x27;inactive&#x27;}}]&quot;] </span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -955,11 +964,12 @@ default_age_results = client.query(
 
 <span class="hljs-comment"># Query all entities where `status` equals the default value (&quot;active&quot;)</span>
 default_status_results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 

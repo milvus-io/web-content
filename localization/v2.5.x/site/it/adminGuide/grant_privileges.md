@@ -5,6 +5,7 @@ summary: >-
   Una volta creato un ruolo, è possibile assegnare i privilegi al ruolo. Questa
   guida illustra come concedere privilegi o gruppi di privilegi a un ruolo.
 ---
+
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">Concessione di privilegi o gruppi di privilegi ai ruoli<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +110,7 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li><p><strong>Privilegio</strong>: Il privilegio specifico o il <a href="/docs/it/privilege_group.md">gruppo di privilegi</a> da concedere a un ruolo. Attualmente, Milvus offre 56 tipi di privilegi che possono essere concessi. La tabella seguente elenca i privilegi di Milvus.</p>
+<li><p><strong>Privilegio</strong>: Il privilegio specifico o il <a href="/docs/it/v2.5.x/privilege_group.md">gruppo di privilegi</a> da concedere a un ruolo. Attualmente, Milvus offre 56 tipi di privilegi che possono essere concessi. La tabella seguente elenca i privilegi di Milvus.</p>
 <p><div class="alert note"></p>
 <p>La colonna del tipo nella tabella sottostante è utilizzata per facilitare la ricerca rapida dei privilegi ed è usata solo a scopo di classificazione. Quando si concedono privilegi, non è necessario comprendere i tipi. È sufficiente inserire i privilegi corrispondenti.</p>
 <p></div></p>
@@ -124,27 +125,27 @@ summary: >-
 <td rowspan="5"><p>Privilegi del database</p></td>
 <td><p>ElencoDatabase</p></td>
 <td><p>Visualizza tutti i database dell'istanza corrente</p></td>
-<td><p><a href="/docs/it/manage_databases.md">Elenco dei database</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage_databases.md">Elenco dei database</a></p></td>
 </tr>
 <tr>
 <td><p>DescriviDatabase</p></td>
 <td><p>Visualizza i dettagli di un database</p></td>
-<td><p><a href="/docs/it/manage_databases.md">DescriviDatabase</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage_databases.md">DescriviDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>CreaDatabase</p></td>
 <td><p>Crea un database</p></td>
-<td><p><a href="/docs/it/manage_databases.md">CreaDatabase</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage_databases.md">CreaDatabase</a></p></td>
 </tr>
 <tr>
 <td><p>Abbandona il database</p></td>
 <td><p>Eliminare un database</p></td>
-<td><p><a href="/docs/it/manage_databases.md">Rilasciare il database</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage_databases.md">Rilasciare il database</a></p></td>
 </tr>
 <tr>
 <td><p>Alterare il database</p></td>
 <td><p>Modifica le proprietà di un database</p></td>
-<td><p><a href="/docs/it/manage_databases.md">AlteraDatabase</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage_databases.md">AlteraDatabase</a></p></td>
 </tr>
 <tr>
 <td rowspan="18"><p>Privilegi di raccolta</p></td>
@@ -165,7 +166,7 @@ summary: >-
 <tr>
 <td><p>Mostra collezioni</p></td>
 <td><p>Visualizza tutte le raccolte con privilegi di raccolta</p></td>
-<td><p><a href="/docs/it/view-collections.md">Mostra collezioni</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/view-collections.md">Mostra collezioni</a></p></td>
 </tr>
 <tr>
 <td><p>ElencaAliases</p></td>
@@ -190,12 +191,12 @@ summary: >-
 <tr>
 <td><p>CreaCollezione</p></td>
 <td><p>Crea una raccolta</p></td>
-<td><p><a href="/docs/it/create-collection.md">CreaCollezione</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/create-collection.md">CreaCollezione</a></p></td>
 </tr>
 <tr>
 <td><p>Abbandona la collezione</p></td>
 <td><p>Eliminare una collezione</p></td>
-<td><p><a href="/docs/it/drop-collection.md">Rilasciare la collezione</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/drop-collection.md">Rilasciare la collezione</a></p></td>
 </tr>
 <tr>
 <td><p>Caricare</p></td>
@@ -205,7 +206,7 @@ summary: >-
 <tr>
 <td><p>Rilasciare</p></td>
 <td><p>Rilascia una raccolta</p></td>
-<td><p><a href="/docs/it/load-and-release.md">Rilasciare la collezione</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/load-and-release.md">Rilasciare la collezione</a></p></td>
 </tr>
 <tr>
 <td><p>Sciacquare</p></td>
@@ -220,17 +221,17 @@ summary: >-
 <tr>
 <td><p>RinominaCollezione</p></td>
 <td><p>Rinomina una collezione</p></td>
-<td><p><a href="/docs/it/modify-collection.md">RinominaCollezione</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/modify-collection.md">RinominaCollezione</a></p></td>
 </tr>
 <tr>
 <td><p>CreaAlias</p></td>
 <td><p>Crea un alias per una collezione</p></td>
-<td><p><a href="/docs/it/manage-aliases.md">CreaAlias</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage-aliases.md">CreaAlias</a></p></td>
 </tr>
 <tr>
 <td><p>EliminaAlias</p></td>
 <td><p>Elimina l'alias di una collezione</p></td>
-<td><p><a href="/docs/it/manage-aliases.md">EliminaAlias</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage-aliases.md">EliminaAlias</a></p></td>
 </tr>
 <tr>
 <td><p>ArrossisciTutti</p></td>
@@ -241,44 +242,44 @@ summary: >-
 <td rowspan="4"><p>Privilegi della partizione</p></td>
 <td><p>HasPartition</p></td>
 <td><p>Controlla se esiste una partizione</p></td>
-<td><p><a href="/docs/it/manage-partitions.md">Ha una partizione</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage-partitions.md">Ha una partizione</a></p></td>
 </tr>
 <tr>
 <td><p>Mostra partizioni</p></td>
 <td><p>Visualizza tutte le partizioni di un insieme</p></td>
-<td><p><a href="/docs/it/manage-partitions.md">Mostra partizioni</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage-partitions.md">Mostra partizioni</a></p></td>
 </tr>
 <tr>
 <td><p>Crea partizione</p></td>
 <td><p>Crea una partizione</p></td>
-<td><p><a href="/docs/it/manage-partitions.md">CreaPartizione</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage-partitions.md">CreaPartizione</a></p></td>
 </tr>
 <tr>
 <td><p>Abbandona partizione</p></td>
 <td><p>Eliminare una partizione</p></td>
-<td><p><a href="/docs/it/manage-partitions.md">AbbandonaPartizione</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/manage-partitions.md">AbbandonaPartizione</a></p></td>
 </tr>
 <tr>
 <td rowspan="3"><p>Privilegi degli indici</p></td>
 <td><p>IndiceDettaglio</p></td>
 <td><p>Visualizza i dettagli di un indice</p></td>
-<td><p><a href="/docs/it/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/index-vector-fields.md">DescribeIndex/GetIndexState/GetIndexBuildProgress</a></p></td>
 </tr>
 <tr>
 <td><p>CreaIndice</p></td>
 <td><p>Creare un indice</p></td>
-<td><p><a href="/docs/it/index-vector-fields.md">CreaIndex</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/index-vector-fields.md">CreaIndex</a></p></td>
 </tr>
 <tr>
 <td><p>Rilasciare l'indice</p></td>
 <td><p>Eliminare un indice</p></td>
-<td><p><a href="/docs/it/index-vector-fields.md">Rilasciare l'indice</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/index-vector-fields.md">Rilasciare l'indice</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>Privilegi di gestione delle risorse</p></td>
 <td><p>Bilanciamento del carico</p></td>
 <td><p>Ottenere il bilanciamento del carico</p></td>
-<td><p><a href="/docs/it/resource_group.md">Bilanciamento del carico</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/resource_group.md">Bilanciamento del carico</a></p></td>
 </tr>
 <tr>
 <td><p>Crea gruppo di risorse</p></td>
@@ -288,32 +289,32 @@ summary: >-
 <tr>
 <td><p>Abbandona il gruppo di risorse</p></td>
 <td><p>Eliminare un gruppo di risorse</p></td>
-<td><p><a href="/docs/it/resource_group.md">AbbandonaGruppoRisorse</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/resource_group.md">AbbandonaGruppoRisorse</a></p></td>
 </tr>
 <tr>
 <td><p>AggiornaGruppi di risorse</p></td>
 <td><p>Aggiornare un gruppo di risorse</p></td>
-<td><p><a href="/docs/it/resource_group.md">Aggiornare i gruppi di risorse</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/resource_group.md">Aggiornare i gruppi di risorse</a></p></td>
 </tr>
 <tr>
 <td><p>DescriviGruppoRisorse</p></td>
 <td><p>Visualizza i dettagli di un gruppo di risorse</p></td>
-<td><p><a href="/docs/it/resource_group.md">DescriviGruppoRisorse</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/resource_group.md">DescriviGruppoRisorse</a></p></td>
 </tr>
 <tr>
 <td><p>Elenco dei gruppi di risorse</p></td>
 <td><p>Visualizza tutti i gruppi di risorse dell'istanza corrente</p></td>
-<td><p><a href="/docs/it/resource_group.md">Elenco dei gruppi di risorse</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/resource_group.md">Elenco dei gruppi di risorse</a></p></td>
 </tr>
 <tr>
 <td><p>TrasferisciNodo</p></td>
 <td><p>Trasferisce i nodi tra i gruppi di risorse</p></td>
-<td><p><a href="/docs/it/resource_group.md">TrasferisciNodo</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/resource_group.md">TrasferisciNodo</a></p></td>
 </tr>
 <tr>
 <td><p>TrasferisciReplica</p></td>
 <td><p>Trasferisce le repliche tra i gruppi di risorse</p></td>
-<td><p><a href="/docs/it/resource_group.md">TrasferimentoReplica</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/resource_group.md">TrasferimentoReplica</a></p></td>
 </tr>
 <tr>
 <td><p>BackupRBAC</p></td>
@@ -329,83 +330,83 @@ summary: >-
 <td rowspan="6"><p>Privilegi dell'entità</p></td>
 <td><p>Interrogazione</p></td>
 <td><p>Eseguire una query</p></td>
-<td><p><a href="/docs/it/get-and-scalar-query.md">Interrogazione</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/get-and-scalar-query.md">Interrogazione</a></p></td>
 </tr>
 <tr>
 <td><p>Ricerca</p></td>
 <td><p>Eseguire una ricerca</p></td>
-<td><p><a href="/docs/it/single-vector-search.md">Ricerca</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/single-vector-search.md">Ricerca</a></p></td>
 </tr>
 <tr>
 <td><p>Inserire</p></td>
 <td><p>Inserire entità</p></td>
-<td><p><a href="/docs/it/insert-update-delete.md">Inserire</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/insert-update-delete.md">Inserire</a></p></td>
 </tr>
 <tr>
 <td><p>Eliminare</p></td>
 <td><p>Cancellare entità</p></td>
-<td><p><a href="/docs/it/delete-entities.md">Cancellare</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/delete-entities.md">Cancellare</a></p></td>
 </tr>
 <tr>
 <td><p>Inserire</p></td>
 <td><p>Inserisci entità</p></td>
-<td><p><a href="/docs/it/upsert-entities.md">Inserisci</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/upsert-entities.md">Inserisci</a></p></td>
 </tr>
 <tr>
 <td><p>Importazione</p></td>
 <td><p>Inserire o importare entità in blocco</p></td>
-<td><p><a href="/docs/it/import-data.md">Inserimento/Importazione massiva</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/import-data.md">Inserimento/Importazione massiva</a></p></td>
 </tr>
 <tr>
 <td rowspan="10"><p>Privilegi RBAC</p></td>
 <td><p>CreaProprietà</p></td>
 <td><p>Crea un utente o un ruolo</p></td>
-<td><p><a href="/docs/it/users_and_roles.md">CreaUtente/CreaRuolo</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/users_and_roles.md">CreaUtente/CreaRuolo</a></p></td>
 </tr>
 <tr>
 <td><p>AggiornaUtente</p></td>
 <td><p>Aggiorna la password di un utente</p></td>
-<td><p><a href="/docs/it/users_and_roles.md">AggiornaCredenziale</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/users_and_roles.md">AggiornaCredenziale</a></p></td>
 </tr>
 <tr>
 <td><p>Eliminare la proprietà</p></td>
 <td><p>Elimina la password di un utente o di un ruolo</p></td>
-<td><p><a href="/docs/it/drop_users_roles.md">EliminaCredenziale/AbbandonaRuolo</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/drop_users_roles.md">EliminaCredenziale/AbbandonaRuolo</a></p></td>
 </tr>
 <tr>
 <td><p>SelezionaProprietà</p></td>
 <td><p>Visualizza tutti gli utenti a cui è stato concesso un ruolo specifico</p></td>
-<td><p><a href="/docs/it/grant_roles.md">SelezionaRuolo/SelezionaRegolamento</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/grant_roles.md">SelezionaRuolo/SelezionaRegolamento</a></p></td>
 </tr>
 <tr>
 <td><p>GestisciProprietà</p></td>
 <td><p>Gestione di un utente o di un ruolo o concessione di un ruolo a un utente</p></td>
-<td><p><a href="/docs/it/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
 </tr>
 <tr>
 <td><p>SelezionaUtente</p></td>
 <td><p>Visualizza tutti i ruoli concessi a un utente</p></td>
-<td><p><a href="/docs/it/grant_roles.md">Seleziona utente</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/grant_roles.md">Seleziona utente</a></p></td>
 </tr>
 <tr>
 <td><p>Crea gruppo di privilegi</p></td>
 <td><p>Crea un gruppo di privilegi</p></td>
-<td><p><a href="/docs/it/privilege_group.md">Crea gruppo di privilegi</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/privilege_group.md">Crea gruppo di privilegi</a></p></td>
 </tr>
 <tr>
 <td><p>Elimina gruppo di privilegi</p></td>
 <td><p>Eliminare un gruppo di privilegi</p></td>
-<td><p><a href="/docs/it/privilege_group.md">AbbandonaGruppoPrivilegio</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/privilege_group.md">AbbandonaGruppoPrivilegio</a></p></td>
 </tr>
 <tr>
 <td><p>Elenco dei gruppi di privilegi</p></td>
 <td><p>Visualizza tutti i gruppi di privilegi nell'istanza corrente</p></td>
-<td><p><a href="/docs/it/privilege_group.md">Elenco dei gruppi di privilegi</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/privilege_group.md">Elenco dei gruppi di privilegi</a></p></td>
 </tr>
 <tr>
 <td><p>OperareGruppoPrivilegio</p></td>
 <td><p>Aggiungere privilegi a un gruppo di privilegi o rimuoverli da esso</p></td>
-<td><p><a href="/docs/it/privilege_group.md">Operare il gruppo di privilegi</a></p></td>
+<td><p><a href="/docs/it/v2.5.x/privilege_group.md">Operare il gruppo di privilegi</a></p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -415,31 +416,32 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
-)
-    
-client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
 client.grant_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
+)
+
+client.grant_privilege_v2(
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
 
 client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
@@ -584,6 +586,7 @@ curl --request POST \
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.response.DescribeRoleResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq
 
@@ -659,12 +662,13 @@ client.revoke_privilege_v2(
 )
 
 client.revoke_privilege_v2(
-    role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
-    db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
+role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
+privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+collection_name=<span class="hljs-string">&#x27;_&#x27;</span>,
+db_name=<span class="hljs-string">&#x27;_&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
 
 client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()

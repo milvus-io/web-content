@@ -76,7 +76,7 @@ summary: Scoprite come configurare lo streaming per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>L'intervallo iniziale del backoff dell'attivazione dell'attività di bilanciamento, 50 ms per impostazione predefinita. </li>      
+        <li>L'intervallo iniziale del backoff dell'attivazione del task di bilanciamento, 50 ms per impostazione predefinita. </li>      
         <li>È possibile impostarlo in una stringa di durata, ad esempio 30s o 1m30s, vedere time.ParseDuration</li>      </td>
       <td>50ms</td>
     </tr>

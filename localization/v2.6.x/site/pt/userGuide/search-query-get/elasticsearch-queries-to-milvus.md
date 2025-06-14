@@ -49,7 +49,7 @@ summary: >-
 <table>
    <tr>
      <th><p>Consultas Elasticsearch</p></th>
-     <th><p>Equivalentes no Milvus</p></th>
+     <th><p>Equivalentes em Milvus</p></th>
      <th><p>Observações</p></th>
    </tr>
    <tr>
@@ -161,7 +161,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Elasticsearch, as consultas de nível de termo são usadas para encontrar documentos com base em valores exatos em dados estruturados, como intervalos de datas, endereços IP, preços ou IDs de produtos. Esta secção descreve os possíveis equivalentes de algumas consultas de nível de termo do Elasticsearch no Milvus. Todos os exemplos nesta secção são adaptados para funcionarem no contexto do filtro para se alinharem com as capacidades do Milvus.</p>
+    </button></h2><p>No Elasticsearch, as consultas de nível de termo são utilizadas para encontrar documentos com base em valores exactos em dados estruturados, tais como intervalos de datas, endereços IP, preços ou IDs de produtos. Esta secção descreve os possíveis equivalentes de algumas consultas de nível de termo do Elasticsearch no Milvus. Todos os exemplos nesta secção são adaptados para funcionarem no contexto do filtro para se alinharem com as capacidades do Milvus.</p>
 <h3 id="IDs" class="common-anchor-header">IDs</h3><p>No Elasticsearch, pode encontrar documentos com base nos respectivos IDs no contexto de filtro da seguinte forma:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
@@ -459,10 +459,10 @@ res = client.query(
 <p>Neste exemplo, a RRF combina resultados de dois recuperadores:</p>
 <ul>
 <li><p>Uma pesquisa padrão baseada em termos para documentos que contêm o termo <code translate="no">&quot;shoes&quot;</code> no campo <code translate="no">text</code>.</p></li>
-<li><p>Uma pesquisa kNN no campo <code translate="no">vector</code> usando o vetor de consulta fornecido.</p></li>
+<li><p>Uma pesquisa kNN no campo <code translate="no">vector</code> utilizando o vetor de consulta fornecido.</p></li>
 </ul>
 <p>Cada recuperador contribui com até 50 correspondências de topo, que são reavaliadas pela RRF, e os 10 resultados finais de topo são devolvidos.</p>
-<p>No Milvus, é possível obter uma pesquisa híbrida semelhante combinando pesquisas em vários campos vetoriais, aplicando uma estratégia de classificação e recuperando os resultados top-K da lista combinada. O Milvus suporta as estratégias RRF e reranker ponderado. Para mais detalhes, consulte <a href="/docs/pt/reranking.md">Reranking</a>.</p>
+<p>No Milvus, é possível obter uma pesquisa híbrida semelhante, combinando pesquisas em vários campos vetoriais, aplicando uma estratégia de classificação e recuperando os principais resultados K da lista combinada. O Milvus suporta as estratégias RRF e reranker ponderado. Para mais detalhes, consulte <a href="/docs/pt/weighted-ranker.md">Reranking</a>.</p>
 <p>O seguinte é uma equivalência não estrita do exemplo Elasticsearch acima em Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],
@@ -501,7 +501,7 @@ res = client.hybrid_search(
 </ol>
 <p>Os resultados destas pesquisas são executados separadamente, combinados e reavaliados utilizando o classificador Reciprocal Rank Fusion (RRF). A busca híbrida retorna as 10 principais entidades da lista ranqueada.</p>
 <p>Ao contrário da classificação RRF do Elasticsearch, que mescla resultados de consultas baseadas em texto padrão e buscas kNN, o Milvus combina resultados de buscas vetoriais esparsas e densas, fornecendo um recurso exclusivo de busca híbrida otimizado para dados multimodais.</p>
-<h2 id="Recap" class="common-anchor-header">Recapitulando<button data-href="#Recap" class="anchor-icon" translate="no">
+<h2 id="Recap" class="common-anchor-header">Recapitulação<button data-href="#Recap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -516,4 +516,4 @@ res = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Neste artigo, abordamos as conversões de consultas típicas do Elasticsearch em seus equivalentes do Milvus, incluindo consultas em nível de termo, consultas booleanas, consultas de texto completo e consultas de vetor. Se tiver mais perguntas sobre a conversão de outras consultas do Elasticsearch, não hesite em contactar-nos.</p>
+    </button></h2><p>Neste artigo, abordamos as conversões de consultas típicas do Elasticsearch para seus equivalentes no Milvus, incluindo consultas no nível do termo, consultas booleanas, consultas de texto completo e consultas de vetor. Se tiver mais perguntas sobre a conversão de outras consultas do Elasticsearch, não hesite em contactar-nos.</p>

@@ -3,6 +3,7 @@ id: tutorials-overview.md
 summary: Esta página apresenta uma lista de tutoriais para interagir com o Milvus.
 title: Visão geral dos tutoriais
 ---
+
 <h1 id="Tutorials-Overview" class="common-anchor-header">Visão geral dos tutoriais<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,29 +25,29 @@ title: Visão geral dos tutoriais
 <tr><th>Tutoriais</th><th>Caso de uso</th><th>Recursos relacionados ao Milvus</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/pt/build-rag-with-milvus.md">Construir RAG com Milvus</a></td><td>RAG</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/how_to_enhance_your_rag.md">RAG avançado</a></td><td>RAG</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/full_text_search_with_milvus.md">Pesquisa de texto integral com Milvus</a></td><td>Início rápido</td><td>Pesquisa de texto integral</td></tr>
-<tr><td><a href="/docs/pt/hybrid_search_with_milvus.md">Pesquisa híbrida com Milvus</a></td><td>Pesquisa híbrida</td><td>pesquisa híbrida, multi-vetor, incorporação densa, incorporação esparsa</td></tr>
-<tr><td><a href="/docs/pt/image_similarity_search.md">Pesquisa de imagens com Milvus</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial, campo dinâmico</td></tr>
-<tr><td><a href="/docs/pt/multimodal_rag_with_milvus.md">RAG multimodal com Milvus</a></td><td>RAG</td><td>pesquisa vetorial, campo dinâmico</td></tr>
-<tr><td><a href="/docs/pt/multimodal_rag_with_milvus.md">Pesquisa multimodal utilizando multi-vectores</a></td><td>Pesquisa semântica</td><td>multi-vetorial, pesquisa híbrida</td></tr>
-<tr><td><a href="/docs/pt/graph_rag_with_milvus.md">RAG de grafos com Milvus</a></td><td>RAG</td><td>pesquisa em grafos</td></tr>
-<tr><td><a href="/docs/pt/contextual_retrieval_with_milvus.md">Recuperação contextual com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/hdbscan_clustering_with_milvus.md">Agrupamento HDBSCAN com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/use_ColPali_with_milvus.md">Utilizar ColPali para recuperação multimodal com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/quickstart_with_attu.md">Início rápido com Attu</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/use-async-milvus-client-with-asyncio.md">Utilizar AsyncMilvusClient com asyncio</a></td><td>AsyncIO</td><td>AsyncIO, pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/text_image_search.md">Pesquisa de texto para imagem com Milvus</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/vector_visualization.md">Visualização vetorial</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/movie_recommendation_with_milvus.md">Recomendação de filmes com Milvus</a></td><td>Sistema de recomendação</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/funnel_search_with_matryoshka.md">Pesquisa de funil com Matryoshka Embeddings</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/question_answering_system.md">Sistema de resposta a perguntas</a></td><td>Resposta a perguntas</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/recommendation_system.md">Sistema de recomendação</a></td><td>Sistema de Recomendação</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/video_similarity_search.md">Pesquisa de similaridade de vídeo</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/audio_similarity_search.md">Pesquisa de similaridade de áudio</a></td><td>Pesquisa Semântica</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/dna_sequence_classification.md">Classificação de ADN</a></td><td>Classificação</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/text_search_engine.md">Motor de pesquisa de texto</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/image_deduplication_system.md">Deduplicação de imagens</a></td><td>Deduplicação</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/build-rag-with-milvus.md">Construir RAG com Milvus</a></td><td>RAG</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/how_to_enhance_your_rag.md">RAG avançado</a></td><td>RAG</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/full_text_search_with_milvus.md">Pesquisa de texto integral com Milvus</a></td><td>Início rápido</td><td>Pesquisa de texto integral</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/hybrid_search_with_milvus.md">Pesquisa híbrida com Milvus</a></td><td>Pesquisa híbrida</td><td>pesquisa híbrida, multi-vetor, incorporação densa, incorporação esparsa</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/image_similarity_search.md">Pesquisa de imagens com Milvus</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial, campo dinâmico</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/multimodal_rag_with_milvus.md">RAG multimodal com Milvus</a></td><td>RAG</td><td>pesquisa vetorial, campo dinâmico</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/multimodal_rag_with_milvus.md">Pesquisa multimodal utilizando multi-vectores</a></td><td>Pesquisa semântica</td><td>multi-vetorial, pesquisa híbrida</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/graph_rag_with_milvus.md">RAG de grafos com Milvus</a></td><td>RAG</td><td>pesquisa em grafos</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/contextual_retrieval_with_milvus.md">Recuperação contextual com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/hdbscan_clustering_with_milvus.md">Agrupamento HDBSCAN com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/use_ColPali_with_milvus.md">Utilizar ColPali para recuperação multimodal com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/quickstart_with_attu.md">Início rápido com Attu</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/use-async-milvus-client-with-asyncio.md">Utilizar AsyncMilvusClient com asyncio</a></td><td>AsyncIO</td><td>AsyncIO, pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/text_image_search.md">Pesquisa de texto para imagem com Milvus</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/vector_visualization.md">Visualização vetorial</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/movie_recommendation_with_milvus.md">Recomendação de filmes com Milvus</a></td><td>Sistema de recomendação</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/funnel_search_with_matryoshka.md">Pesquisa de funil com Matryoshka Embeddings</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/question_answering_system.md">Sistema de resposta a perguntas</a></td><td>Resposta a perguntas</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/recommendation_system.md">Sistema de recomendação</a></td><td>Sistema de Recomendação</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/video_similarity_search.md">Pesquisa de similaridade de vídeo</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/audio_similarity_search.md">Pesquisa de similaridade de áudio</a></td><td>Pesquisa Semântica</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/dna_sequence_classification.md">Classificação de ADN</a></td><td>Classificação</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/text_search_engine.md">Motor de pesquisa de texto</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/v2.5.x/image_deduplication_system.md">Deduplicação de imagens</a></td><td>Deduplicação</td><td>pesquisa vetorial</td></tr>
 </tbody>
 </table>

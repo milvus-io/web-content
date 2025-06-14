@@ -25,6 +25,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, Milvus provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches.</p>
+<div class="alert note">
+<p>If you dynamically add new fields after the collection has been created, searches that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -536,8 +539,7 @@ curl --request POST \
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     data=[query_vector],
     limit=<span class="hljs-number">3</span>,
 )
@@ -619,8 +621,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">partition_names</span>: [<span class="hljs-string">&quot;partitionA&quot;</span>],
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">partition_names</span>: [<span class="hljs-string">&quot;partitionA&quot;</span>],</span>
     <span class="hljs-attr">data</span>: query_vector,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>, <span class="hljs-comment">// The number of results to return</span>
 })
@@ -700,8 +701,7 @@ res = client.search(
     data=[query_vector],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，
-    <span class="hljs-comment"># highlight-next-line</span>
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]
+<span class="highlighted-wrapper-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -787,8 +787,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
     <span class="hljs-attr">data</span>: query_vector,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>, <span class="hljs-comment">// The number of results to return</span>
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>]
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>]</span>
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
@@ -900,8 +899,7 @@ res = client.search(
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
     search_params={
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
-        <span class="hljs-comment"># highlight-next-line</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">10</span> <span class="hljs-comment"># The records to skip</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">10</span> <span class="hljs-comment"># The records to skip</span></span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -959,8 +957,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
     <span class="hljs-attr">data</span>: query_vector,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>, <span class="hljs-comment">// The number of results to return,</span>
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">offset</span>: <span class="hljs-number">10</span> <span class="hljs-comment">// The record to skip.</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">offset</span>: <span class="hljs-number">10</span> <span class="hljs-comment">// The record to skip.</span></span>
 })
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>

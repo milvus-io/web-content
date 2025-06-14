@@ -131,7 +131,7 @@ summary: Découvrez comment configurer streamingNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        La taille maximale de chaque requête RPC que le nœud de streaming peut recevoir, unité : octet     </td>
+      <td>        Taille maximale de chaque requête RPC que le nœud de streaming peut recevoir, unité : octet     </td>
       <td>268435456</td>
     </tr>
   </tbody>

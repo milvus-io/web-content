@@ -3,6 +3,7 @@ id: time_sync.md
 title: Синхронизация времени
 summary: Узнайте о системе синхронизации времени в Milvus.
 ---
+
 <h1 id="Time-Synchronization" class="common-anchor-header">Синхронизация времени<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +157,6 @@ summary: Узнайте о системе синхронизации време�
         ></path>
       </svg>
     </button></h2><ul>
-<li>Узнайте о концепции <a href="/docs/ru/timestamp.md">временной метки</a>.</li>
-<li>Узнайте о <a href="/docs/ru/data_processing.md">рабочем процессе обработки данных</a> в Milvus.</li>
+<li>Узнайте о концепции <a href="/docs/ru/v2.5.x/timestamp.md">временной метки</a>.</li>
+<li>Узнайте о <a href="/docs/ru/v2.5.x/data_processing.md">рабочем процессе обработки данных</a> в Milvus.</li>
 </ul>

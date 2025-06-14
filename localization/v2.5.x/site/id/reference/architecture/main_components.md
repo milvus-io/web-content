@@ -3,6 +3,7 @@ id: main_components.md
 summary: Pelajari tentang komponen utama dalam Milvus standalone dan cluster.
 title: Komponen Utama
 ---
+
 <h1 id="Main-Components" class="common-anchor-header">Komponen Utama<button data-href="#Main-Components" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,5 +95,5 @@ title: Komponen Utama
         ></path>
       </svg>
     </button></h2><ul>
-<li>Baca <a href="/docs/id/four_layers.md">Komputasi/Pemilahan Penyimpanan</a> untuk memahami mekanisme dan prinsip desain Milvus.</li>
+<li>Baca <a href="/docs/id/v2.5.x/four_layers.md">Komputasi/Pemilahan Penyimpanan</a> untuk memahami mekanisme dan prinsip desain Milvus.</li>
 </ul>

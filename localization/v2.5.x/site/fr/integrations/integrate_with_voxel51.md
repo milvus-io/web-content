@@ -3,6 +3,7 @@ id: integrate_with_voxel51.md
 summary: Cette page traite de l'intégration avec voxel51
 title: Effectuer des recherches par vision avec Milvus et FiftyOne
 ---
+
 <h1 id="Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="common-anchor-header">Effectuer des recherches par vision avec Milvus et FiftyOne<button data-href="#Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +38,7 @@ title: Effectuer des recherches par vision avec Milvus et FiftyOne
       </svg>
     </button></h2><p>Avant de commencer, assurez-vous que vous disposez des éléments suivants :</p>
 <ul>
-<li>Un <a href="/docs/fr/install_standalone-docker.md">serveur Milvus</a> en cours d'exécution.</li>
+<li>Un <a href="/docs/fr/v2.5.x/install_standalone-docker.md">serveur Milvus</a> en cours d'exécution.</li>
 <li>Un environnement Python avec <code translate="no">pymilvus</code> et <code translate="no">fiftyone</code> installés.</li>
 <li>Un <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">ensemble de données d'</a> images à rechercher.</li>
 </ul>
@@ -108,11 +109,12 @@ dataset = foz.load_zoo_dataset(<span class="hljs-string">&quot;quickstart&quot;<
 
 <span class="hljs-comment"># Steps 2 and 3: Compute embeddings and create a similarity index</span>
 milvus_index = fob.compute_similarity(
-    dataset,
-    brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
-    backend=<span class="hljs-string">&quot;milvus&quot;</span>,
+dataset,
+brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
+backend=<span class="hljs-string">&quot;milvus&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2. Effectuer des recherches de similarité de vision</h3><p>Vous pouvez maintenant utiliser l'index de similarité Milvus pour effectuer des recherches de similarité de vision sur votre ensemble de données.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 4: Query your data</span>
 query = dataset.first().<span class="hljs-built_in">id</span>  <span class="hljs-comment"># query by sample ID</span>
@@ -130,6 +132,7 @@ milvus_index.cleanup()
 <span class="hljs-comment"># Delete run record from FiftyOne</span>
 dataset.delete_brain_run(<span class="hljs-string">&quot;milvus_index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="3-Delete-the-index" class="common-anchor-header">3. Supprimer l'index</h3><p>Si vous n'avez plus besoin de l'index de similarité Milvus, vous pouvez le supprimer à l'aide du code suivant :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 5: Delete the index</span>
 milvus_index.delete()
@@ -155,6 +158,7 @@ milvus_index.delete()
 
 fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Alternativement, vous pouvez configurer FiftyOne de manière permanente pour utiliser le backend Milvus en définissant la variable d'environnement suivante :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">FIFTYONE_BRAIN_DEFAULT_SIMILARITY_BACKEND</span>=milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -194,6 +198,7 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
 <span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_PEM_PATH=XXXXXX
 <span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="FiftyOne-Brain-config" class="common-anchor-header">FiftyOne Brain config</h3><p>Vous pouvez également stocker vos informations d'identification dans le fichier <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">brain config</a> situé à l'adresse <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
 <pre><code translate="no" class="language-python">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
@@ -213,19 +218,21 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
             <span class="hljs-string">&quot;server_name&quot;</span>: <span class="hljs-string">&quot;XXXXXX&quot;</span>
         }
     }
+
 }
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Notez que ce fichier n'existera pas tant que vous ne l'aurez pas créé.</p>
 <h3 id="Keyword-arguments" class="common-anchor-header">Arguments de mots-clés</h3><p>Vous pouvez fournir manuellement vos informations d'identification Milvus en tant qu'arguments de mot-clé chaque fois que vous appelez des méthodes comme <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> qui nécessitent des connexions à Milvus :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 
 milvus_index = fob.compute_similarity(
-    ...
-    backend=<span class="hljs-string">&quot;milvus&quot;</span>,
-    brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
-    uri=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
-    user=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
-    password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+...
+backend=<span class="hljs-string">&quot;milvus&quot;</span>,
+brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
+uri=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+user=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
 
     <span class="hljs-comment"># also available if necessary</span>
     secure=<span class="hljs-literal">True</span>,
@@ -236,8 +243,10 @@ milvus_index = fob.compute_similarity(
     ca_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Notez que, lorsque vous utilisez cette stratégie, vous devez fournir manuellement les informations d'identification lors du chargement ultérieur d'un index via <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.load_brain_results"><code translate="no">load_brain_results()</code></a>:</p>
 <pre><code translate="no" class="language-python">milvus_index = dataset.load_brain_results(
     <span class="hljs-string">&quot;milvus_index&quot;</span>,
@@ -254,15 +263,17 @@ milvus_index = fob.compute_similarity(
     ca_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Milvus-config-parameters" class="common-anchor-header">Paramètres de configuration de Milvus</h3><p>Le backend Milvus prend en charge une variété de paramètres de requête qui peuvent être utilisés pour personnaliser vos requêtes de similarité. Ces paramètres sont les suivants</p>
 <ul>
 <li><p><strong>collection_name</strong><em>(Aucun</em>) : le nom de la collection Milvus à utiliser ou à créer. Si aucun nom n'est fourni, une nouvelle collection sera créée.</p></li>
 <li><p><strong>metric</strong> (<em>"dotproduct")</em>: la métrique de distance d'intégration à utiliser lors de la création d'un nouvel index. Les valeurs supportées sont (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>"Session")</em>: le niveau de cohérence à utiliser. Les valeurs prises en charge sont (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>Pour des informations détaillées sur ces paramètres, voir la <a href="/docs/fr/authenticate.md">documentation</a> <a href="/docs/fr/consistency.md">sur</a> l <a href="/docs/fr/authenticate.md">'authentification Milvus</a> et la <a href="/docs/fr/consistency.md">documentation sur les niveaux de cohérence Milvus</a>.</p>
+<p>Pour des informations détaillées sur ces paramètres, voir la <a href="/docs/fr/v2.5.x/authenticate.md">documentation</a> <a href="/docs/fr/v2.5.x/consistency.md">sur</a> l <a href="/docs/fr/v2.5.x/authenticate.md">'authentification Milvus</a> et la <a href="/docs/fr/v2.5.x/consistency.md">documentation sur les niveaux de cohérence Milvus</a>.</p>
 <p>Vous pouvez spécifier ces paramètres via l'une des stratégies décrites dans la section précédente. Voici un exemple de <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">configuration de cerveau</a> qui inclut tous les paramètres disponibles :</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
@@ -311,11 +322,12 @@ dataset.list_brain_runs(<span class="hljs-built_in">type</span>=fob.Similarity)
 
 <span class="hljs-comment"># Only list specific similarity runs</span>
 dataset.list_brain_runs(
-    <span class="hljs-built_in">type</span>=fob.Similarity,
-    patches_field=<span class="hljs-string">&quot;ground_truth&quot;</span>,
-    supports_prompts=<span class="hljs-literal">True</span>,
+<span class="hljs-built_in">type</span>=fob.Similarity,
+patches_field=<span class="hljs-string">&quot;ground_truth&quot;</span>,
+supports_prompts=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Ou, vous pouvez utiliser <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.get_brain_info"><code translate="no">get_brain_info()</code></a> pour récupérer des informations sur la configuration d'un brain run :</p>
 <pre><code translate="no" class="language-python">info = dataset.get_brain_info(brain_key)
 <span class="hljs-built_in">print</span>(info)

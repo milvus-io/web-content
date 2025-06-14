@@ -6,7 +6,6 @@ summary: >-
   чтобы повысить производительность поиска.
 title: Индекс с GPU
 ---
-
 <h1 id="Index-with-GPU" class="common-anchor-header">Индекс с GPU<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,11 +119,10 @@ title: Индекс с GPU
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
 collection.create_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
-index_params=index_params
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field on which an index is built</span>
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Search" class="common-anchor-header">Поиск<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,7 +162,7 @@ index_params=index_params
 <button class="copy-code-btn"></button></code></pre>
 <p>Ключевые параметры поиска включают:</p>
 <ul>
-<li><p><strong>itopk_size</strong>: Определяет размер промежуточных результатов, сохраняемых во время поиска. Большее значение может улучшить запоминание за счет снижения производительности поиска. Оно должно быть как минимум равно конечному значению top-k<strong>(limit</strong>) и обычно является показателем степени 2 (например, 16, 32, 64, 128).</p></li>
+<li><p><strong>itopk_size</strong>: Определяет размер промежуточных результатов, сохраняемых во время поиска. Большее значение может улучшить запоминание за счет снижения производительности поиска. Оно должно быть как минимум равно конечному значению top-k<strong>(limit</strong>) и обычно является показателем, равным 2 (например, 16, 32, 64, 128).</p></li>
 <li><p><strong>search_width</strong>: задает количество точек входа в граф CAGRA во время поиска. Увеличение этого значения может улучшить запоминание, но может повлиять на производительность поиска.</p></li>
 <li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Эти параметры управляют процессом итераций поиска. По умолчанию они установлены в <strong>0</strong>, и CAGRA автоматически определяет количество итераций, основываясь на <strong>itopk_size</strong> и <strong>search_width</strong>. Настройка этих значений вручную может помочь сбалансировать производительность и точность.</p></li>
 <li><p><strong>team_size</strong>: Указывает количество потоков CUDA, используемых для вычисления метрического расстояния на GPU. Обычные значения - от 2 до 32 (например, 2, 4, 8, 16, 32). Это значение незначительно влияет на производительность поиска. Значение по умолчанию - <strong>0</strong>, при котором Milvus автоматически выбирает <strong>размер team_size</strong> на основе размерности вектора.</p></li>
@@ -182,13 +180,12 @@ index_params=index_params
 collection.load()
 
 collection.search(
-data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
-anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
-param=search_params,
-limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
+    data=[[query_vector]], <span class="hljs-comment"># Your query vector</span>
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-comment"># Name of the vector field</span>
+    param=search_params,
+    limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

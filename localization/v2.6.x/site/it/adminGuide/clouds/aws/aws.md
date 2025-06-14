@@ -235,7 +235,7 @@ resource &quot;aws_route_table_association&quot; &quot;cluster_subnet_add_gatewa
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ./milvus/deployments/docker/cluster-distributed-deployment</span>
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="inventoryini" class="common-anchor-header"><code translate="no">inventory.ini</code></h4><p>Configurare <code translate="no">inventory.ini</code> per dividere gli host in gruppi in base al loro ruolo nel sistema Milvus.</p>
-<p>Aggiungere i nomi degli host e definire i gruppi <code translate="no">docker</code> e <code translate="no">vars</code>.</p>
+<p>Aggiungere i nomi degli host e definire il gruppo <code translate="no">docker</code> e <code translate="no">vars</code>.</p>
 <pre><code translate="no">[dockernodes] <span class="hljs-comment">#Add docker host names.</span>
 dockernode01
 dockernode02

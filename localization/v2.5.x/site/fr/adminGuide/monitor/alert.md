@@ -4,6 +4,7 @@ title: Créer une alerte
 related_key: monitor and alert.
 summary: Découvrez comment créer une alerte pour les services Milvus dans Grafana.
 ---
+
 <h1 id="Create-an-Alert-for-Milvus-Services" class="common-anchor-header">Création d'une alerte pour les services Milvus<button data-href="#Create-an-Alert-for-Milvus-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ summary: Découvrez comment créer une alerte pour les services Milvus dans Graf
         ></path>
       </svg>
     </button></h2><p>Ce guide prend l'exemple de la création d'une alerte sur l'utilisation de la mémoire des composants Milvus. Pour créer d'autres types d'alertes, veuillez adapter vos commandes en conséquence. Si vous rencontrez des problèmes au cours du processus, n'hésitez pas à poser des questions dans le <a href="https://discuss.milvus.io/">forum Milvus</a> ou à lancer une discussion sur <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Conditions préalables</h3><p>Ce tutoriel suppose que vous avez installé et configuré Grafana. Si ce n'est pas le cas, nous vous recommandons de lire le <a href="/docs/fr/monitor.md">guide de surveillance</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Conditions préalables</h3><p>Ce tutoriel suppose que vous avez installé et configuré Grafana. Si ce n'est pas le cas, nous vous recommandons de lire le <a href="/docs/fr/v2.5.x/monitor.md">guide de surveillance</a>.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Ajouter une nouvelle requête</h3><p>Pour ajouter une alerte sur l'utilisation de la mémoire des composants Milvus, modifiez le panneau Mémoire. Ensuite, ajoutez une nouvelle requête avec la métrique : <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +121,13 @@ summary: Découvrez comment créer une alerte pour les services Milvus dans Graf
       </svg>
     </button></h2><ul>
 <li>Si vous avez besoin de commencer à surveiller les services pour Milvus :<ul>
-<li>Lire le <a href="/docs/fr/monitor.md">guide de surveillance</a></li>
-<li>Apprenez à <a href="/docs/fr/visualize.md">visualiser les mesures de surveillance</a></li>
+<li>Lire le <a href="/docs/fr/v2.5.x/monitor.md">guide de surveillance</a></li>
+<li>Apprenez à <a href="/docs/fr/v2.5.x/visualize.md">visualiser les mesures de surveillance</a></li>
 </ul></li>
 <li>Si vous avez créé des alertes pour l'utilisation de la mémoire par les composants Milvus :<ul>
-<li>Apprendre à <a href="/docs/fr/allocate.md#standalone">allouer des ressources</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.5.x/allocate.md#standalone">allouer des ressources</a></li>
 </ul></li>
 <li>Si vous recherchez des informations sur la mise à l'échelle d'un cluster Milvus :<ul>
-<li>Apprendre à <a href="/docs/fr/scaleout.md">faire évoluer un cluster Milvus</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.5.x/scaleout.md">faire évoluer un cluster Milvus</a></li>
 </ul></li>
 </ul>

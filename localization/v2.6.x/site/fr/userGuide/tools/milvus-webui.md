@@ -243,7 +243,7 @@ title: Milvus WebUI
     </button></h2><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
-   </span> <span class="img-wrapper"> <span>Page des demandes lentes de l'interface Web Milvus</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Page des requêtes lentes de l'interface Web Milvus</span> </span></p>
 <ul>
 <li><strong>Requêtes lentes</strong>: Une demande lente est une recherche ou une requête dont le temps de latence est supérieur à la valeur de <code translate="no">proxy.slowQuerySpanInSeconds</code> spécifiée dans la configuration. La liste des requêtes lentes affiche toutes les requêtes lentes des 15 dernières minutes.</li>
 </ul>

@@ -62,7 +62,7 @@ title: 动态配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 上，<code translate="no">proxy.minPasswordLength</code> 默认设置为<code translate="no">6</code> 。要更改该值，可按以下步骤操作：</p>
+    </button></h2><p>在 Milvus 上，<code translate="no">proxy.minPasswordLength</code> 默认设置为<code translate="no">6</code> 。要更改此值，可按以下步骤操作：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl put by-dev/config/proxy/minPasswordLength 8</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">or</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,set config-etcd --key by-dev/config/proxy/minPasswordLength --value 8&quot;</span></span>
@@ -157,7 +157,7 @@ QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <tr><td>quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</td><td>9223372036854775807</td></tr>
 <tr><td>quotaAndLimits.limitWriting.memProtection.enabled</td><td>启用</td></tr>
 <tr><td>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</td><td>0.85</td></tr>
-<tr><td>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel (配额和限制.限制写入.内存保护.数据节点内存高水位)</td><td>0.95</td></tr>
+<tr><td>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</td><td>0.95</td></tr>
 <tr><td>配额和限制.limitWriting.memProtection.queryNodeMemoryLowWaterLevel（查询节点内存低水位</td><td>0.85</td></tr>
 <tr><td>配额和限制.limitWriting.memProtection.queryNodeMemoryHighWaterLevel（查询节点内存高水位</td><td>0.95</td></tr>
 <tr><td>quotaAndLimits.limitWriting.diskProtection.enabled</td><td>启用</td></tr>

@@ -60,7 +60,7 @@ summary: Imparare a configurare Milvus QueryNode per utilizzare il disco locale.
 nvme0n1     259:0    0 250.0G  0 disk 
 nvme1n1     259:1    0 250.0G  0 disk 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-Kubernetes-to-use-local-disk" class="common-anchor-header">Configurare Kubernetes per usare il disco locale<button data-href="#Configure-Kubernetes-to-use-local-disk" class="anchor-icon" translate="no">
+<h2 id="Configure-Kubernetes-to-use-local-disk" class="common-anchor-header">Configurare Kubernetes per utilizzare il disco locale<button data-href="#Configure-Kubernetes-to-use-local-disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

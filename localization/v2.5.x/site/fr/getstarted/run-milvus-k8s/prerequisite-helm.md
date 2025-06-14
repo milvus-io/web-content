@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: Apprenez les préparations nécessaires avant d'installer Milvus avec Helm.
 title: Configuration requise pour l'exécution de Milvus sur Kubernetes
 ---
+
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">Configuration requise pour l'exécution de Milvus sur Kubernetes<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,8 +142,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>Si votre matériel et vos logiciels répondent aux exigences, vous pouvez :</p>
 <ul>
-<li><a href="/docs/fr/install_cluster-milvusoperator.md">Exécuter Milvus dans Kubernets avec Milvus Operator</a></li>
-<li><a href="/docs/fr/install_cluster-helm.md">Exécuter Milvus dans Kubernetes avec Helm</a></li>
+<li><a href="/docs/fr/v2.5.x/install_cluster-milvusoperator.md">Exécuter Milvus dans Kubernets avec Milvus Operator</a></li>
+<li><a href="/docs/fr/v2.5.x/install_cluster-helm.md">Exécuter Milvus dans Kubernetes avec Helm</a></li>
 </ul></li>
-<li><p>Voir <a href="/docs/fr/system_configuration.md">Configuration du système</a> pour les paramètres que vous pouvez définir lors de l'installation de Milvus.</p></li>
+<li><p>Voir <a href="/docs/fr/v2.5.x/system_configuration.md">Configuration du système</a> pour les paramètres que vous pouvez définir lors de l'installation de Milvus.</p></li>
 </ul>

@@ -10,6 +10,7 @@ summary: >-
   Milvus dan memberikan tips untuk memilih strategi perangkingan ulang yang
   sesuai.
 ---
+
 <h1 id="Reranking" class="common-anchor-header">Pemeringkatan ulang<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,8 +49,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Peringkat Ulang Multi Vektor</span> </span></p>
 <p>Dalam Hybrid Search, pemeringkatan ulang adalah langkah penting yang mengintegrasikan hasil dari beberapa pencarian vektor untuk memastikan hasil akhir yang paling relevan dan akurat. Saat ini, Milvus mendukung dua strategi perankingan ulang berikut ini:</p>
 <ul>
-<li><p><strong><a href="/docs/id/reranking.md#WeightedRanker">Pemeringkatan Tertimbang</a></strong>: Strategi ini menggabungkan hasil dengan menghitung skor tertimbang dari skor (atau jarak) dari pencarian vektor yang berbeda. Bobot diberikan berdasarkan pentingnya setiap bidang vektor, memungkinkan penyesuaian sesuai dengan prioritas kasus penggunaan tertentu.</p></li>
-<li><p><strong><a href="/docs/id/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Strategi ini menggabungkan hasil berdasarkan peringkat. Strategi ini menggunakan metode yang menyeimbangkan peringkat hasil dari pencarian yang berbeda, sehingga menghasilkan integrasi yang lebih adil dan efektif dari beragam jenis data atau modalitas.</p></li>
+<li><p><strong><a href="/docs/id/v2.5.x/reranking.md#WeightedRanker">Pemeringkatan Tertimbang</a></strong>: Strategi ini menggabungkan hasil dengan menghitung skor tertimbang dari skor (atau jarak) dari pencarian vektor yang berbeda. Bobot diberikan berdasarkan pentingnya setiap bidang vektor, memungkinkan penyesuaian sesuai dengan prioritas kasus penggunaan tertentu.</p></li>
+<li><p><strong><a href="/docs/id/v2.5.x/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Strategi ini menggabungkan hasil berdasarkan peringkat. Strategi ini menggunakan metode yang menyeimbangkan peringkat hasil dari pencarian yang berbeda, sehingga menghasilkan integrasi yang lebih adil dan efektif dari beragam jenis data atau modalitas.</p></li>
 </ul>
 <h2 id="WeightedRanker" class="common-anchor-header">Pemeringkat Tertimbang<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -231,8 +232,9 @@ summary: >-
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
-rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
+rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 
 <span class="hljs-type">WeightedRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>))
@@ -429,6 +431,7 @@ reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
 <span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);

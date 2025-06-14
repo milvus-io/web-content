@@ -229,7 +229,7 @@ summary: Aprenda a configurar el almacenamiento de mensajes con Milvus Operator.
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">Pulsar interno</h3><p><code translate="no">inCluster</code> indica que cuando se inicia un clúster Milvus, se inicia automáticamente un servicio Pulsar en el clúster.</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">Pulsar interno</h3><p><code translate="no">inCluster</code> indica que cuando se inicia un cluster Milvus, se inicia automáticamente un servicio Pulsar en el cluster.</p>
 <h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo configura un servicio Pulsar interno.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

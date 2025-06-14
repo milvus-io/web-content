@@ -5,6 +5,7 @@ related_key: SDK
 summary: تعرّف على كيفية تثبيت Node.js SDK لـ Milvus.
 title: تثبيت Milvus Nodejs SDK لميلفوس
 ---
+
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">تثبيت Milvus Nodejs SDK لميلفوس<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,11 +109,11 @@ yarn add @zilliz/milvus2-sdk-node
 <li><p>عرض <a href="https://github.com/milvus-io/milvus-sdk-node">البداية السريعة لـ Milvus node.jsdk</a></p></li>
 <li><p>تعلم العمليات الأساسية لـ Milvus</p>
 <ul>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.5.x/manage-partitions.md">إدارة الأقسام</a></li>
+<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإدراج وحذف</a></li>
+<li><a href="/docs/ar/v2.5.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 <li><p>استكشاف <a href="/api-reference/node/v2.4.x/About.md">مرجع واجهة برمجة تطبيقات Milvus Node.js</a></p></li>
 </ul>

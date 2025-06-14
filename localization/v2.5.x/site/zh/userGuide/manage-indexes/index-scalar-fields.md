@@ -4,6 +4,7 @@ order: 2
 summary: 本指南将指导您为整数、字符串等字段创建和配置标量索引。
 title: 标量字段索引
 ---
+
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">标量字段索引<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +38,7 @@ title: 标量字段索引
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">自动索引</a></strong>：Milvus 根据标量字段的数据类型自动决定索引类型。这适用于不需要控制特定索引类型的情况。</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">自定义索引</a></strong>：你可以指定精确的索引类型，如反转索引<a href="/docs/zh/bitmap.md">或位图索引</a>。这为索引类型选择提供了更多控制。</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">自定义索引</a></strong>：你可以指定精确的索引类型，如反转索引<a href="/docs/zh/v2.5.x/bitmap.md">或位图索引</a>。这为索引类型选择提供了更多控制。</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">自动索引<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,16 +75,17 @@ client = MilvusClient(
 index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
-    index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
+index_name=<span class="hljs-string">&quot;default_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -140,16 +142,17 @@ client.createIndex(createIndexReq);
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
+index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
+index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
 )
 
 client.create_index(
-  collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
-  index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
@@ -190,8 +193,8 @@ client.createIndex(createIndexReq);
 <p>要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。</p>
 <p>对于自定义索引，有效值为</p>
 <ul>
-<li><p><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</p></li>
-<li><p><strong>BITMAP</strong>：<strong>位图</strong>索引：一种存储字段中所有唯一值的位图的索引类型。有关详情，请参阅<a href="/docs/zh/bitmap.md">BITMAP</a>。</p></li>
+<li><p><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/v2.5.x/scalar_index.md">标量索引</a>。</p></li>
+<li><p><strong>BITMAP</strong>：<strong>位图</strong>索引：一种存储字段中所有唯一值的位图的索引类型。有关详情，请参阅<a href="/docs/zh/v2.5.x/bitmap.md">BITMAP</a>。</p></li>
 <li><p><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。仅支持数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</p></li>
 <li><p><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</p></li>
 </ul></li>
@@ -215,7 +218,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>（字符串</em>） 要索引的标量字段的名称。</li>
 <li><strong>indexName</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
 <li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，留空或省略此参数。 对于自定义索引，有效值为<ul>
-<li><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
+<li><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/v2.5.x/scalar_index.md">标量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
 <li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>
 </ul></li>
@@ -236,7 +239,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>（字符串</em>） 要创建索引的标量字段的名称。</li>
 <li><strong>index_name</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
 <li><strong>index_type</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。 对于自定义索引，有效值为<ul>
-<li><strong>倒排</strong>：（推荐）倒排索引由包含按字母顺序排序的所有标记词的术语字典组成。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
+<li><strong>倒排</strong>：（推荐）倒排索引由包含按字母顺序排序的所有标记词的术语字典组成。有关详情，请参阅<a href="/docs/zh/v2.5.x/scalar_index.md">标量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
 <li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>
 </ul></li>
@@ -276,6 +279,7 @@ client.createIndex(createIndexReq);
 <span class="hljs-comment"># Output:</span>
 <span class="hljs-comment"># [&#x27;default_index&#x27;,&#x27;inverted_index&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.List;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.ListIndexesReq;
 

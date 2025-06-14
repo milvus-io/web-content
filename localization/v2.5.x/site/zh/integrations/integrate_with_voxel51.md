@@ -3,6 +3,7 @@ id: integrate_with_voxel51.md
 summary: 本页讨论与 voxel51 的集成
 title: 使用 Milvus 和 FiftyOne 进行视觉搜索
 ---
+
 <h1 id="Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="common-anchor-header">使用 Milvus 和 FiftyOne 进行视觉搜索<button data-href="#Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +38,7 @@ title: 使用 Milvus 和 FiftyOne 进行视觉搜索
       </svg>
     </button></h2><p>开始之前，请确保具备以下条件：</p>
 <ul>
-<li>运行中的<a href="/docs/zh/install_standalone-docker.md">Milvus 服务器</a>。</li>
+<li>运行中的<a href="/docs/zh/v2.5.x/install_standalone-docker.md">Milvus 服务器</a>。</li>
 <li>安装了<code translate="no">pymilvus</code> 和<code translate="no">fiftyone</code> 的 Python 环境。</li>
 <li>要搜索的图像<a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">数据集</a>。</li>
 </ul>
@@ -108,11 +109,12 @@ dataset = foz.load_zoo_dataset(<span class="hljs-string">&quot;quickstart&quot;<
 
 <span class="hljs-comment"># Steps 2 and 3: Compute embeddings and create a similarity index</span>
 milvus_index = fob.compute_similarity(
-    dataset,
-    brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
-    backend=<span class="hljs-string">&quot;milvus&quot;</span>,
+dataset,
+brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
+backend=<span class="hljs-string">&quot;milvus&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2.进行视觉相似性搜索</h3><p>现在，您可以使用 Milvus 相似性索引对数据集进行视觉相似性搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 4: Query your data</span>
 query = dataset.first().<span class="hljs-built_in">id</span>  <span class="hljs-comment"># query by sample ID</span>
@@ -130,6 +132,7 @@ milvus_index.cleanup()
 <span class="hljs-comment"># Delete run record from FiftyOne</span>
 dataset.delete_brain_run(<span class="hljs-string">&quot;milvus_index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="3-Delete-the-index" class="common-anchor-header">3.删除索引</h3><p>如果您不再需要 Milvus 相似性索引，可以使用以下代码将其删除：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 5: Delete the index</span>
 milvus_index.delete()
@@ -155,6 +158,7 @@ milvus_index.delete()
 
 fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>或者，你也可以通过设置以下环境变量，将 FiftyOne 永久配置为使用 Milvus 后端：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">FIFTYONE_BRAIN_DEFAULT_SIMILARITY_BACKEND</span>=milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -194,6 +198,7 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
 <span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_PEM_PATH=XXXXXX
 <span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="FiftyOne-Brain-config" class="common-anchor-header">FiftyOne 大脑配置</h3><p>您也可以将凭据存储在位于<code translate="no">~/.fiftyone/brain_config.json</code> 的<a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">大脑配置</a>中：</p>
 <pre><code translate="no" class="language-python">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
@@ -213,19 +218,21 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
             <span class="hljs-string">&quot;server_name&quot;</span>: <span class="hljs-string">&quot;XXXXXX&quot;</span>
         }
     }
+
 }
 <button class="copy-code-btn"></button></code></pre>
+
 <p>请注意，这个文件在您创建之前并不存在。</p>
 <h3 id="Keyword-arguments" class="common-anchor-header">关键字参数</h3><p>每次调用需要连接到 Milvus 的方法时，您可以手动提供您的 Milvus 认证作为关键字参数。 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a>等需要连接 Milvus 的方法时，您都可以手动提供 Milvus 凭据作为关键字参数：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 
 milvus_index = fob.compute_similarity(
-    ...
-    backend=<span class="hljs-string">&quot;milvus&quot;</span>,
-    brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
-    uri=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
-    user=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
-    password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+...
+backend=<span class="hljs-string">&quot;milvus&quot;</span>,
+brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
+uri=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+user=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
 
     <span class="hljs-comment"># also available if necessary</span>
     secure=<span class="hljs-literal">True</span>,
@@ -236,8 +243,10 @@ milvus_index = fob.compute_similarity(
     ca_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>请注意，使用此策略时，您必须在以后通过 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.load_brain_results"><code translate="no">load_brain_results()</code></a>:</p>
 <pre><code translate="no" class="language-python">milvus_index = dataset.load_brain_results(
     <span class="hljs-string">&quot;milvus_index&quot;</span>,
@@ -254,15 +263,17 @@ milvus_index = fob.compute_similarity(
     ca_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Milvus-config-parameters" class="common-anchor-header">Milvus 配置参数</h3><p>Milvus 后端支持多种查询参数，可用于自定义相似性查询。这些参数包括</p>
 <ul>
 <li><p><strong>collection_</strong><em>name（无</em>）：要使用或创建的 Milvus Collection 的名称。如果没有提供，将创建一个新的 Collections</p></li>
 <li><p><strong>metric</strong>（<em>"dotproduct"）</em>：创建新索引时使用的嵌入距离度量。支持的值是 (<code translate="no">&quot;dotproduct&quot;</code>,<code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong>（<em>"会话"）</em>：要使用的一致性级别。支持的值有 (<code translate="no">&quot;Strong&quot;</code>,<code translate="no">&quot;Session&quot;</code>,<code translate="no">&quot;Bounded&quot;</code>,<code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>有关这些参数的详细信息，请参阅<a href="/docs/zh/authenticate.md">Milvus 身份验证文档</a>和<a href="/docs/zh/consistency.md">Milvus 一致性级别文档</a>。</p>
+<p>有关这些参数的详细信息，请参阅<a href="/docs/zh/v2.5.x/authenticate.md">Milvus 身份验证文档</a>和<a href="/docs/zh/v2.5.x/consistency.md">Milvus 一致性级别文档</a>。</p>
 <p>你可以通过上一节描述的任何策略来指定这些参数。下面是一个包含所有可用参数的<a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">大脑配置</a>示例：</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
@@ -311,11 +322,12 @@ dataset.list_brain_runs(<span class="hljs-built_in">type</span>=fob.Similarity)
 
 <span class="hljs-comment"># Only list specific similarity runs</span>
 dataset.list_brain_runs(
-    <span class="hljs-built_in">type</span>=fob.Similarity,
-    patches_field=<span class="hljs-string">&quot;ground_truth&quot;</span>,
-    supports_prompts=<span class="hljs-literal">True</span>,
+<span class="hljs-built_in">type</span>=fob.Similarity,
+patches_field=<span class="hljs-string">&quot;ground_truth&quot;</span>,
+supports_prompts=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>或使用 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.get_brain_info"><code translate="no">get_brain_info()</code></a>检索有关大脑运行配置的信息：</p>
 <pre><code translate="no" class="language-python">info = dataset.get_brain_info(brain_key)
 <span class="hljs-built_in">print</span>(info)

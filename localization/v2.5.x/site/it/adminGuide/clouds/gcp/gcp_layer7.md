@@ -6,6 +6,7 @@ summary: >-
   Scoprite come distribuire un cluster Milvus dietro un bilanciatore di carico
   Layer-7 su GCP.
 ---
+
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">Configurare un bilanciatore di carico Layer-7 per Milvus su GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -28,9 +29,9 @@ summary: >-
 <p>Per creare un progetto, consultare la sezione <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creazione e gestione dei progetti</a>. Il nome del progetto utilizzato in questa guida è <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Avete installato localmente <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> e <a href="https://helm.sh/docs/intro/install/">Helm</a> o avete deciso di utilizzare la <a href="https://cloud.google.com/shell">Cloud Shell</a> basata su browser.</p></li>
 <li><p>Avete <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">inizializzato la gcloud CLI</a> con le credenziali del vostro account GCP.</p></li>
-<li><p>Avete <a href="/docs/it/gcp.md">distribuito un cluster Milvus dietro un bilanciatore di carico Layer-4 su GCP</a>.</p></li>
+<li><p>Avete <a href="/docs/it/v2.5.x/gcp.md">distribuito un cluster Milvus dietro un bilanciatore di carico Layer-4 su GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus</h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/gcp.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modificare le configurazioni di Milvus</h3><p>Questa guida presuppone che abbiate già <a href="/docs/it/v2.5.x/gcp.md">implementato un cluster Milvus dietro un bilanciatore di carico Layer-4 su GCP</a>.</p>
 <p>Prima di impostare un bilanciatore di carico Layer-7 per questo cluster Milvus, eseguire il seguente comando per rimuovere il bilanciatore di carico Layer-4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
@@ -84,11 +85,12 @@ openssl genrsa -<span class="hljs-keyword">out</span> tls.key <span class="hljs-
 
 <span class="hljs-meta"># Creates a certificate and signs it with the preceding key.</span>
 openssl req -<span class="hljs-keyword">new</span> -key tls.key -<span class="hljs-keyword">out</span> tls.csr \
-    -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
+ -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
 
 openssl x509 -req -days <span class="hljs-number">99999</span> -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
-    -<span class="hljs-keyword">out</span> tls.crt
+ -<span class="hljs-keyword">out</span> tls.crt
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Quindi create un segreto nel vostro cluster GKE con questi file per un uso successivo.</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
@@ -207,6 +209,7 @@ connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<
 <span class="hljs-comment"># For Google-managed certificates, there is not need to do so.</span>
 connections.connect(<span class="hljs-string">&quot;default&quot;</span>, host=<span class="hljs-string">&quot;34.111.144.65&quot;</span>, port=<span class="hljs-string">&quot;443&quot;</span>, secure=<span class="hljs-literal">True</span>, server_name=<span class="hljs-string">&quot;my-release.milvus.io&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <ul>
 <li>L'indirizzo IP e il numero di porta in <strong>Host</strong> e <strong>Porta</strong> devono corrispondere a quelli elencati alla fine di <a href="#create-an-ingress-to-generate-a-layer-7-load-balancer">Creare un ingresso per generare un bilanciatore di carico Layer-7</a>.</li>

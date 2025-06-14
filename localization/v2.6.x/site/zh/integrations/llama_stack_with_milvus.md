@@ -93,7 +93,7 @@ $ pip install -e .
 <li><p>远程配置适用于大量数据存储。</p>
 <ul>
 <li>如果数据量较大，可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能良好的 Milvus 服务器。在此设置中，请使用服务器 URI，如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。默认的<code translate="no">token</code> 是<code translate="no">root:Milvus</code> 。</li>
-<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 API 密钥</a>相对应。</li>
+<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们对应于 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 API 密钥</a>。</li>
 </ul></li>
 </ul>
 <h3 id="Build-distribution-from-the-template" class="common-anchor-header">从模板构建分发版</h3><p>运行以下命令构建分发版：</p>

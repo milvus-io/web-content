@@ -1,9 +1,10 @@
 ---
 id: deploy_s3.md
 title: تكوين تخزين الكائنات باستخدام Docker Compose أو Helm
-related_key: 'S3, storage'
+related_key: "S3, storage"
 summary: تعرف على كيفية إعداد تخزين S3 لميلفوس باستخدام Docker Compose أو Helm.
 ---
+
 <h1 id="Configure-Object-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">تكوين تخزين الكائنات باستخدام Docker Compose أو Helm<button data-href="#Configure-Object-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +46,7 @@ summary: تعرف على كيفية إعداد تخزين S3 لميلفوس با
   useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
   bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>راجع <a href="/docs/ar/configure_minio.md">تكوينات MinIO/S3</a> لمزيد من المعلومات.</p>
+<p>راجع <a href="/docs/ar/v2.5.x/configure_minio.md">تكوينات MinIO/S3</a> لمزيد من المعلومات.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. صقل docker-compose.yaml</h3><p>يمكنك أيضًا إزالة متغير البيئة <code translate="no">MINIO_ADDRESS</code> لخدمة milvus في <code translate="no">docker-compose.yaml</code>. بشكل افتراضي سيستخدم ميلفوس المينيو المحلي بدلاً من S3 الخارجي.</p>
 <h3 id="3-Run-Milvus" class="common-anchor-header">3. قم بتشغيل ميلفوس</h3><p>قم بتشغيل الأمر التالي لبدء تشغيل Milvus الذي يستخدم تكوينات S3.</p>
 <pre><code translate="no" class="language-shell">docker compose up
@@ -127,6 +128,6 @@ summary: تعرف على كيفية إعداد تخزين S3 لميلفوس با
       </svg>
     </button></h2><p>تعلم كيفية تكوين تبعيات Milvus الأخرى باستخدام Docker Compose أو Helm:</p>
 <ul>
-<li><a href="/docs/ar/deploy_etcd.md">تكوين التخزين التعريفي باستخدام Docker Compose أو Helm</a></li>
-<li><a href="/docs/ar/deploy_pulsar.md">تكوين تخزين الرسائل باستخدام Docker Compose أو Helm</a></li>
+<li><a href="/docs/ar/v2.5.x/deploy_etcd.md">تكوين التخزين التعريفي باستخدام Docker Compose أو Helm</a></li>
+<li><a href="/docs/ar/v2.5.x/deploy_pulsar.md">تكوين تخزين الرسائل باستخدام Docker Compose أو Helm</a></li>
 </ul>

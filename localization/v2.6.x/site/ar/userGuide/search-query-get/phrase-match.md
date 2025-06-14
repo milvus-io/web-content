@@ -1,14 +1,15 @@
 ---
 id: phrase-match.md
-title: مطابقة العبارات
+title: مطابقة العباراتCompatible with Milvus 2.6.x
 summary: >-
   تتيح لك مطابقة العبارة البحث عن المستندات التي تحتوي على مصطلحات الاستعلام
   الخاصة بك كعبارة تامة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب وبجوار
   بعضها البعض مباشرةً. على سبيل المثال، يتطابق الاستعلام عن "تعلم الآلة
   الروبوتية" مع نص مثل "...نماذج تعلم الآلة الروبوتية النموذجية..."، حيث تظهر
   الكلمات "روبوتات" و"آلة" و"تعلم" في تسلسل دون أي كلمات أخرى بينها.
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">مطابقة العبارات<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">مطابقة العبارات<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -327,6 +328,6 @@ result_slop2 = client.search(
 <ul>
 <li><p>يتم تفسير الأحرف المحاطة بعلامات اقتباس مزدوجة أو علامات اقتباس مفردة داخل التعبيرات على أنها ثوابت سلسلة. إذا كان ثابت السلسلة يتضمن أحرف هروب، فيجب تمثيل أحرف الهروب بتسلسل الهروب. على سبيل المثال، استخدم <code translate="no">\\</code> لتمثيل <code translate="no">\</code> و <code translate="no">\\t</code> لتمثيل علامة تبويب <code translate="no">\t</code> و <code translate="no">\\n</code> لتمثيل سطر جديد.</p></li>
 <li><p>إذا كان ثابت السلسلة محاطًا بعلامات اقتباس مفردة، يجب تمثيل علامة اقتباس مفردة داخل الثابت على أنه <code translate="no">\\'</code> بينما يمكن تمثيل علامة الاقتباس المزدوجة إما <code translate="no">&quot;</code> أو <code translate="no">\\&quot;</code>. مثال: <code translate="no">'It\\'s milvus'</code>.</p></li>
-<li><p>إذا كان ثابت السلسلة محاطًا بعلامات اقتباس مزدوجة، فيجب تمثيل علامة اقتباس مزدوجة داخل الثابت على أنه <code translate="no">\\&quot;</code> بينما يمكن تمثيل علامة الاقتباس المفردة إما <code translate="no">'</code> أو <code translate="no">\\'</code>. مثال: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
+<li><p>إذا كان ثابت السلسلة محاطًا بعلامات اقتباس مزدوجة، يجب تمثيل علامة اقتباس مزدوجة داخل الثابت على أنه <code translate="no">\\&quot;</code> بينما يمكن تمثيل علامة الاقتباس المفردة إما <code translate="no">'</code> أو <code translate="no">\\'</code>. مثال: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

@@ -1,13 +1,14 @@
 ---
 id: phrase-match.md
-title: フレーズ一致
+title: フレーズ一致Compatible with Milvus 2.6.x
 summary: >-
   フレーズ一致では、クエリー用語を完全なフレーズとして含む文書を検索できます。デフォルトでは、単語は同じ順序で、互いに直接隣接していなければなりません。例えば、"robotics
   machine learning "のクエリは、"robotics"、"machine"、"learning
   "の単語が、間に他の単語がない状態で順番に現れる、"...typical robotics machine learning models...
   "のようなテキストにマッチします。
+beta: Milvus 2.6.x
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">フレーズ一致<button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">フレーズ一致<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,7 +205,7 @@ result = client.query(
 </table>
 <p>ドキュメント1だけが、指定された順序で、追加のトークンなしで正確なフレーズ<strong>"machine learning "</strong>を含んでいます。</p>
 <h3 id="Search-with-phrase-match" class="common-anchor-header">フレーズ一致検索</h3><p>検索操作では、ベクトル類似度ランキングを適用する前に、<strong>PHRASE_MATCHを</strong>使用して文書をフィルタリングする。この2段階のアプローチは、まずテキストマッチによって候補を絞り込み、次にそれらの候補をベクトル埋め込みに基づいて再ランク付けする。</p>
-<h4 id="Example-slop--1" class="common-anchor-header">例: スロップ = 1</h4><p>ここでは、slopを1としている。このフィルターは、<strong>"learning machine "という</strong>フレーズを含む文書に対して、若干の柔軟性を持たせて適用される。</p>
+<h4 id="Example-slop--1" class="common-anchor-header">例: スロップ = 1</h4><p>ここでは、slop = 1を許容する。このフィルターは、<strong>"learning machine "という</strong>フレーズを含む文書に、若干の柔軟性を持たせて適用される。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>
 

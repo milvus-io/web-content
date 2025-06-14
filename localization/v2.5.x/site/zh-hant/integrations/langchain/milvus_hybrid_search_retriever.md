@@ -411,7 +411,7 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以特定的問題來呼叫 RAG 鏈，並擷取回應</p>
+<p>以特定的問題來啟動 RAG 鏈，並擷取回應</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
 res = rag_chain.invoke(query)
 res

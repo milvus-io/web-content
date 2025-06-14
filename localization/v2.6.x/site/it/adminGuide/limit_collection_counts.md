@@ -22,7 +22,7 @@ title: Stabilire limiti al numero di raccolte
 <p>La configurazione varia a seconda del modo in cui si installa l'istanza Milvus.</p>
 <ul>
 <li><p>Per le istanze Milvus installate utilizzando Helm Charts</p>
-<p>Aggiungete la configurazione al file <code translate="no">values.yaml</code> nella sezione <code translate="no">config</code>. Per i dettagli, consultare <a href="/docs/it/configure-helm.md">Configurazione di Milvus con Helm Charts</a>.</p></li>
+<p>Aggiungere la configurazione al file <code translate="no">values.yaml</code> nella sezione <code translate="no">config</code>. Per i dettagli, consultare <a href="/docs/it/configure-helm.md">Configurazione di Milvus con Helm Charts</a>.</p></li>
 <li><p>Per le istanze Milvus installate usando Docker Compose</p>
 <p>Aggiungere la configurazione al file <code translate="no">milvus.yaml</code> utilizzato per avviare l'istanza Milvus. Per i dettagli, fate riferimento a <a href="/docs/it/configure-docker.md">Configurare Milvus con Docker Compose</a>.</p></li>
 <li><p>Per le istanze Milvus installate con Operator</p>

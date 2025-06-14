@@ -5,6 +5,7 @@ summary: >-
   تم تصميم محلل اللغة الإنجليزية في Milvus لمعالجة النص الإنجليزي، وتطبيق قواعد
   خاصة باللغة لترميز النصوص وتصفيتها.
 ---
+
 <h1 id="English" class="common-anchor-header">اللغة الإنجليزية<button data-href="#English" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>يستخدم محلل <code translate="no">english</code> المكونات التالية:</p>
 <ul>
-<li><p><strong>أداة الترميز</strong>: يستخدم<a href="/docs/ar/standard-tokenizer.md"> أداة الترميز</a> <code translate="no">standard</code><a href="/docs/ar/standard-tokenizer.md"></a> لتقسيم النص إلى وحدات كلمات منفصلة.</p></li>
+<li><p><strong>أداة الترميز</strong>: يستخدم<a href="/docs/ar/v2.5.x/standard-tokenizer.md"> أداة الترميز</a> <code translate="no">standard</code><a href="/docs/ar/v2.5.x/standard-tokenizer.md"></a> لتقسيم النص إلى وحدات كلمات منفصلة.</p></li>
 <li><p><strong>المرشحات</strong>: يتضمن مرشحات متعددة لمعالجة النص بشكل شامل:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: يحول جميع الرموز إلى أحرف صغيرة، مما يتيح عمليات بحث غير حساسة لحالة الأحرف.</p></li>
@@ -109,6 +110,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Configuration" class="common-anchor-header">التكوين<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +188,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح هذا لميلفوس بمعالجة النص في هذا الحقل باستخدام المحلل المحدد لترميز وتصفية فعالة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">مثال الاستخدام</a>.</p>
+
+<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح هذا لميلفوس بمعالجة النص في هذا الحقل باستخدام المحلل المحدد لترميز وتصفية فعالة. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/analyzer-overview.md#Example-use">مثال الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,6 +232,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">التحقق باستخدام <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span></h3><div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -244,6 +248,7 @@ sample_text = <span class="hljs-string">&quot;Milvus is a vector database built 
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

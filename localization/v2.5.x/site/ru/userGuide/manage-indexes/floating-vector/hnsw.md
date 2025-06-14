@@ -7,6 +7,7 @@ summary: >-
   Он обеспечивает отличную точность поиска и низкую задержку, но требует больших
   затрат памяти для поддержания иерархической структуры графа.
 ---
+
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +58,7 @@ summary: >-
 <li><p><code translate="no">efConstruction</code>: Количество кандидатов, учитываемых при построении индекса. Более высокое значение <code translate="no">efConstruction</code> обычно приводит к лучшему качеству графа, но требует больше времени на построение.</p></li>
 <li><p><code translate="no">ef</code>: Количество соседей, оцениваемых во время поиска. Увеличение <code translate="no">ef</code> повышает вероятность нахождения ближайших соседей, но замедляет процесс поиска.</p></li>
 </ul>
-<p>Подробнее о том, как настроить эти параметры в соответствии с вашими потребностями, читайте в разделе <a href="/docs/ru/hnsw.md#Index-params">Index params</a>.</p>
+<p>Подробнее о том, как настроить эти параметры в соответствии с вашими потребностями, читайте в разделе <a href="/docs/ru/v2.5.x/hnsw.md#Index-params">Index params</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Построение индекса<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,28 +81,29 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
-        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Maximum number of neighbors each node can connect to in the graph</span>
+<span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate neighbors considered for connection during index construction</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>В данной конфигурации:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Тип индекса, который будет построен. В этом примере задайте значение <code translate="no">HNSW</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Метод, используемый для вычисления расстояния между векторами. Поддерживаются следующие значения: <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code>. Подробнее см. в разделе <a href="/docs/ru/metric.md">Типы метрик</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Метод, используемый для вычисления расстояния между векторами. Поддерживаются следующие значения: <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code>. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/metric.md">Типы метрик</a>.</p></li>
 <li><p><code translate="no">params</code>: Дополнительные параметры конфигурации для построения индекса.</p>
 <ul>
 <li><p><code translate="no">M</code>: Максимальное количество соседей, с которыми может соединиться каждый узел.</p></li>
 <li><p><code translate="no">efConstruction</code>: Количество соседей-кандидатов, рассматриваемых для подключения при построении индекса.</p></li>
 </ul>
-<p>Чтобы узнать больше параметров построения, доступных для индекса <code translate="no">HNSW</code>, обратитесь к разделу <a href="/docs/ru/hnsw.md#Index-building-params">Параметры построения индекса</a>.</p></li>
+<p>Чтобы узнать больше параметров построения, доступных для индекса <code translate="no">HNSW</code>, обратитесь к разделу <a href="/docs/ru/v2.5.x/hnsw.md#Index-building-params">Параметры построения индекса</a>.</p></li>
 </ul>
-<p>После того как параметры индекса настроены, вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробности см. в разделе <a href="/docs/ru/create-collection.md">Создание коллекции</a>.</p>
+<p>После того как параметры индекса настроены, вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробности см. в разделе <a href="/docs/ru/v2.5.x/create-collection.md">Создание коллекции</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Поиск по индексу<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,20 +127,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">10</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>В этой конфигурации:</p>
 <ul>
 <li><p><code translate="no">params</code>: Дополнительные параметры конфигурации для поиска по индексу.</p>
 <ul>
 <li><code translate="no">ef</code>: : Количество соседей, учитываемых при поиске.</li>
 </ul>
-<p>Чтобы узнать больше параметров поиска, доступных для индекса <code translate="no">HNSW</code>, обратитесь к разделу <a href="/docs/ru/hnsw.md#Index-specific-search-params">Параметры поиска по индексу</a>.</p></li>
+<p>Чтобы узнать больше параметров поиска, доступных для индекса <code translate="no">HNSW</code>, обратитесь к разделу <a href="/docs/ru/v2.5.x/hnsw.md#Index-specific-search-params">Параметры поиска по индексу</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Параметры индекса<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,7 +159,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по нему.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/hnsw.md#Build-index">построении индекса</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/v2.5.x/hnsw.md#Build-index">построении индекса</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -177,7 +180,7 @@ res = MilvusClient.search(
      <td><p>Более высокое значение <code translate="no">efConstruction</code> обычно приводит к <strong>более точному индексу</strong>, поскольку исследуется больше потенциальных соединений. Однако это также приводит к <strong>увеличению времени индексирования и потреблению памяти</strong> при построении. Рассмотрите возможность увеличения <code translate="no">efConstruction</code> для повышения точности, особенно в сценариях, где время индексирования менее критично.</p><p>Уменьшите <code translate="no">efConstruction</code>, чтобы ускорить построение индекса, если ограничены ресурсы.</p><p>В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/hnsw.md#Search-on-index">поиске по индексу</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/v2.5.x/hnsw.md#Search-on-index">поиске по индексу</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>

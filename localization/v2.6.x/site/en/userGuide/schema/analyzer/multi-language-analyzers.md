@@ -10,8 +10,9 @@ summary: >-
   (meaning "phone") would trip up an English‑focused analyzer: it may drop the
   accent and apply no Spanish‑specific stemming, causing relevant results to be
   overlooked.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Multi-language-Analyzers" class="common-anchor-header">Multi-language Analyzers<button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
+<h1 id="Multi-language-Analyzers" class="common-anchor-header">Multi-language Analyzers<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -457,9 +458,9 @@ schema.WithField(entity.NewField().
   &quot;dataType&quot;: &quot;VarChar&quot;,
   &quot;elementTypeParams&quot;: {
     &quot;max_length&quot;: 8192,
-    &quot;enable_analyzer&quot;: true
+    &quot;enable_analyzer&quot;: true，
+    &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
   },
-  &quot;multiAnalyzerParam&quot;: &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$multi_analyzer_params</span>&quot;</span><span class="hljs-string">&#x27;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> sparseField=<span class="hljs-string">&#x27;{
@@ -469,21 +470,21 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Define-BM25-function" class="common-anchor-header">Define BM25 function</h3><p>Define a BM25 function to generate sparse vector representations from your raw text data:</p>
 <div class="multipleCode">
-    <a href="#plaintext">plaintext</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-plaintext"># Create the BM25 function
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the BM25 function</span>
 bm25_function = Function(
-    name=&quot;text_to_vector&quot;,            # Descriptive function name
-    function_type=FunctionType.BM25,  # Use BM25 algorithm
-    input_field_names=[&quot;text&quot;],       # Process text from this field
-    output_field_names=[&quot;sparse&quot;]     # Store vectors in this field
+    name=<span class="hljs-string">&quot;text_to_vector&quot;</span>,            <span class="hljs-comment"># Descriptive function name</span>
+    function_type=FunctionType.BM25,  <span class="hljs-comment"># Use BM25 algorithm</span>
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>],       <span class="hljs-comment"># Process text from this field</span>
+    output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>]     <span class="hljs-comment"># Store vectors in this field</span>
 )
 
-# Add the function to our schema
+<span class="hljs-comment"># Add the function to our schema</span>
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">function</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
@@ -843,38 +844,38 @@ curl --request POST \
 <li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> controls BM25-specific behavior; here, it retains all terms in the search. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p></li>
 </ul>
 <div class="multipleCode">
-    <a href="#plaintext">plaintext</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-plaintext">search_params = {
-    &quot;metric_type&quot;: &quot;BM25&quot;,            # Must match index configuration
-    &quot;analyzer_name&quot;: &quot;english&quot;,  # Analyzer that matches the query language
-    &quot;drop_ratio_search&quot;: &quot;0&quot;,     # Keep all terms in search (tweak as needed)
+<pre><code translate="no" class="language-python">search_params = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,            <span class="hljs-comment"># Must match index configuration</span>
+    <span class="hljs-string">&quot;analyzer_name&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>,  <span class="hljs-comment"># Analyzer that matches the query language</span>
+    <span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,     <span class="hljs-comment"># Keep all terms in search (tweak as needed)</span>
 }
 
-# Execute the search
+<span class="hljs-comment"># Execute the search</span>
 english_results = client.search(
-    collection_name=COLLECTION_NAME,  # Collection to search
-    data=[&quot;artificial intelligence&quot;],                # Query text
-    anns_field=&quot;sparse&quot;,              # Field to search against
-    search_params=search_params,      # Search configuration
-    limit=3,                      # Max results to return
-    output_fields=[&quot;text&quot;, &quot;language&quot;],  # Fields to include in the output
-    consistency_level=&quot;Strong&quot;,       # Data‑consistency guarantee
+    collection_name=COLLECTION_NAME,  <span class="hljs-comment"># Collection to search</span>
+    data=[<span class="hljs-string">&quot;artificial intelligence&quot;</span>],                <span class="hljs-comment"># Query text</span>
+    anns_field=<span class="hljs-string">&quot;sparse&quot;</span>,              <span class="hljs-comment"># Field to search against</span>
+    search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
+    limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
+    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
-# Display English search results
-print(&quot;\n=== English Search Results ===&quot;)
-for i, hit in enumerate(english_results[0]):
-    print(f&quot;{i+1}. [{hit.score:.4f}] {hit.entity.get(&#x27;text&#x27;)} &quot;
-          f&quot;(Language: {hit.entity.get(&#x27;language&#x27;)})&quot;)
+<span class="hljs-comment"># Display English search results</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== English Search Results ===&quot;</span>)
+<span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(english_results[<span class="hljs-number">0</span>]):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. [<span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>] <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;text&#x27;</span>)}</span> &quot;</span>
+          <span class="hljs-string">f&quot;(Language: <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;language&#x27;</span>)}</span>)&quot;</span>)
 
-# Expected output:
-# === English Search Results ===
-# 1. [2.7881] Artificial intelligence is transforming technology (Language: english)
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># === English Search Results ===</span>
+<span class="hljs-comment"># 1. [2.7881] Artificial intelligence is transforming technology (Language: english)</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>);
@@ -968,33 +969,33 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Use-Chinese-analyzer" class="common-anchor-header">Use Chinese analyzer</h3><p>This example demonstrates switching to the Chinese analyzer (using its alias <code translate="no">&quot;cn&quot;</code>) for different query text. All other parameters remain the same, but now the query text is processed using Chinese-specific tokenization rules.</p>
 <div class="multipleCode">
-    <a href="#plaintext">plaintext</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-plaintext">search_params[&quot;analyzer_name&quot;] = &quot;cn&quot;
+<pre><code translate="no" class="language-python">search_params[<span class="hljs-string">&quot;analyzer_name&quot;</span>] = <span class="hljs-string">&quot;cn&quot;</span>
 
 chinese_results = client.search(
-    collection_name=COLLECTION_NAME,  # Collection to search
-    data=[&quot;人工智能&quot;],                # Query text
-    anns_field=&quot;sparse&quot;,              # Field to search against
-    search_params=search_params,      # Search configuration
-    limit=3,                      # Max results to return
-    output_fields=[&quot;text&quot;, &quot;language&quot;],  # Fields to include in the output
-    consistency_level=&quot;Strong&quot;,       # Data‑consistency guarantee
+    collection_name=COLLECTION_NAME,  <span class="hljs-comment"># Collection to search</span>
+    data=[<span class="hljs-string">&quot;人工智能&quot;</span>],                <span class="hljs-comment"># Query text</span>
+    anns_field=<span class="hljs-string">&quot;sparse&quot;</span>,              <span class="hljs-comment"># Field to search against</span>
+    search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
+    limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
+    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
-# Display Chinese search results
-print(&quot;\n=== Chinese Search Results ===&quot;)
-for i, hit in enumerate(chinese_results[0]):
-    print(f&quot;{i+1}. [{hit.score:.4f}] {hit.entity.get(&#x27;text&#x27;)} &quot;
-          f&quot;(Language: {hit.entity.get(&#x27;language&#x27;)})&quot;)
+<span class="hljs-comment"># Display Chinese search results</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== Chinese Search Results ===&quot;</span>)
+<span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(chinese_results[<span class="hljs-number">0</span>]):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. [<span class="hljs-subst">{hit.score:<span class="hljs-number">.4</span>f}</span>] <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;text&#x27;</span>)}</span> &quot;</span>
+          <span class="hljs-string">f&quot;(Language: <span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;language&#x27;</span>)}</span>)&quot;</span>)
 
-# Expected output:
-# === Chinese Search Results ===
-# 1. [3.3814] 人工智能正在改变技术领域 (Language: chinese)
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># === Chinese Search Results ===</span>
+<span class="hljs-comment"># 1. [3.3814] 人工智能正在改变技术领域 (Language: chinese)</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">searchParams.put(<span class="hljs-string">&quot;analyzer_name&quot;</span>, <span class="hljs-string">&quot;cn&quot;</span>);
 searchResp = client.search(SearchReq.builder()

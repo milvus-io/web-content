@@ -2,8 +2,8 @@
 id: embed-with-mistral-ai.md
 order: 11
 summary: >-
-  Dieser Artikel beschreibt, wie man die MistralAIEmbeddingFunction verwendet,
-  um Dokumente und Abfragen mit dem Mistral AI Embedding Model zu kodieren.
+  Dieser Artikel beschreibt, wie man die MistralAIEmbeddingFunction benutzt, um
+  Dokumente und Abfragen mit dem Mistral AI Embedding Model zu kodieren.
 title: Mistral AI
 ---
 <h1 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">

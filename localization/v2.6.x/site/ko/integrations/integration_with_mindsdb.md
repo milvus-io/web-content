@@ -126,7 +126,7 @@ title: Milvus와 MindsDB 통합
 (<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Dropping-collections" class="common-anchor-header">컬렉션 삭제</h3><p>컬렉션 삭제는 지원되지 않습니다.</p>
-<h3 id="Querying-and-selecting" class="common-anchor-header">쿼리 및 선택</h3><p>검색 벡터를 사용하여 데이터베이스를 쿼리하려면 <code translate="no">WHERE</code> 절에 <code translate="no">search_vector</code> 을 사용할 수 있습니다.</p>
+<h3 id="Querying-and-selecting" class="common-anchor-header">쿼리 및 선택</h3><p>검색 벡터를 사용하여 데이터베이스를 쿼리하려면 <code translate="no">WHERE</code> 절에 <code translate="no">search_vector</code> 을 사용하면 됩니다.</p>
 <p>주의:</p>
 <ul>
 <li><code translate="no">LIMIT</code> 을 생략하는 경우 Milvus에서 요구하므로 <code translate="no">search_default_limit</code> 이 사용됩니다.</li>

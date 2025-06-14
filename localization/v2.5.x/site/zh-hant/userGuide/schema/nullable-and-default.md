@@ -5,6 +5,7 @@ summary: >-
   Milvus 允許您為標量欄位設定 nullable 屬性和預設值，但主欄位除外。對於標記為 nullable=True
   的欄位，您可以在插入資料時跳過該欄位，或直接將其設定為空值，系統會將其視為空值而不會造成錯誤。當欄位有預設值時，如果在插入時沒有為欄位指定資料，系統會自動套用此值。
 ---
+
 <h1 id="Nullable--Default" class="common-anchor-header">Nullable &amp; 預設值<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,10 +42,10 @@ summary: >-
 <li><p>只有標量欄位 (不包括主要欄位) 支援預設值和 nullable 屬性。</p></li>
 <li><p>JSON 和陣列欄位不支援預設值。</p></li>
 <li><p>預設值或 nullable 屬性只能在建立集合時設定，之後就無法修改。</p></li>
-<li><p>啟用 nullable 屬性的標量欄位無法在群組搜尋中用作<code translate="no">group_by_field</code> 。有關群組搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/grouping-search.md">群組搜尋</a>。</p></li>
-<li><p>標記為 nullable 的欄位不能用作分割區金鑰。有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金</a>鑰。</p></li>
+<li><p>啟用 nullable 屬性的標量欄位無法在群組搜尋中用作<code translate="no">group_by_field</code> 。有關群組搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/grouping-search.md">群組搜尋</a>。</p></li>
+<li><p>標記為 nullable 的欄位不能用作分割區金鑰。有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/use-partition-key.md">使用分割區金</a>鑰。</p></li>
 <li><p>在啟用 nullable 屬性的標量欄位上建立索引時，索引將排除 null 值。</p></li>
-<li><p><strong>JSON 和 ARRAY 欄位</strong>：使用<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 運算符號篩選 JSON 或 ARRAY 欄位時，這些運算符號會在欄位層級運作，這表示它們只會評估整個 JSON 物件或陣列是否為空。例如，如果 JSON 物件中的一個 key 為空，則<code translate="no">IS NULL</code> 過濾器將不會識別該 key。如需詳細資訊，請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>。</p></li>
+<li><p><strong>JSON 和 ARRAY 欄位</strong>：使用<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 運算符號篩選 JSON 或 ARRAY 欄位時，這些運算符號會在欄位層級運作，這表示它們只會評估整個 JSON 物件或陣列是否為空。例如，如果 JSON 物件中的一個 key 為空，則<code translate="no">IS NULL</code> 過濾器將不會識別該 key。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/basic-operators.md">基本運算符</a>。</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Nullable 屬性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,8 +72,8 @@ client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530
 
 <span class="hljs-comment"># Define collection schema</span>
 schema = client.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_schema=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_schema=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -86,6 +87,7 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;vector&quot;</
 <span class="hljs-comment"># Create collection</span>
 client.create_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -275,6 +277,7 @@ curl --request POST \
 
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -351,6 +354,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.15838398039340973, &#x27;entity&#x27;: {&#x27;age&#x27;: 30, &#x27;id&#x27;: 1}}, {&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.28278401494026184, &#x27;entity&#x27;: {&#x27;age&#x27;: None, &#x27;id&#x27;: 2}}]&quot;] </span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -429,17 +433,18 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 <span class="hljs-comment"># {&quot;id&quot;: 3, &quot;vector&quot;: [0.3, 0.4, ..., 0.130], &quot;age&quot;: None}  # Omitted age  column is treated as None</span>
 
 results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age &gt;= 0&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;age &gt;= 0&quot;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]
 )
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     {&quot;id&quot;: 1, &quot;age&quot;: 30}</span>
+<span class="hljs-comment"># {&quot;id&quot;: 1, &quot;age&quot;: 30}</span>
 <span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># Note: Entities with `age` as `null` (id 2 and 3) will not appear in the result.</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 
@@ -499,6 +504,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(<span class="hljs-string">&quot;&quot;</span>)
@@ -573,6 +579,7 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;vector&quot;</
 
 client.create_collection(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
@@ -778,6 +785,7 @@ curl --request POST \
 
 client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
@@ -845,7 +853,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>有關 nullable 和預設值設定如何生效的詳細資訊，請參閱<a href="/docs/zh-hant/nullable-and-default.md#Applicable-rules">適用規則</a>。</p>
+<p>有關 nullable 和預設值設定如何生效的詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/nullable-and-default.md#Applicable-rules">適用規則</a>。</p>
 </div>
 <h3 id="Search-and-query-with-default-values" class="common-anchor-header">使用預設值進行搜尋和查詢</h3><p>在向量搜尋和標量篩選過程中，包含預設值的實體與任何其他實體的處理方式相同。您可以在<code translate="no">search</code> 和<code translate="no">query</code> 作業中包含預設值。</p>
 <p>例如，在<code translate="no">search</code> 操作中，將<code translate="no">age</code> 設定為預設值<code translate="no">18</code> 的實體將包含在結果中：</p>
@@ -866,6 +874,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.050000004, &#x27;entity&#x27;: {&#x27;id&#x27;: 2, &#x27;age&#x27;: 18, &#x27;status&#x27;: &#x27;active&#x27;}}, {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.45000002, &#x27;entity&#x27;: {&#x27;id&#x27;: 4, &#x27;age&#x27;: 18, &#x27;status&#x27;: &#x27;inactive&#x27;}}]&quot;] </span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
@@ -952,11 +961,12 @@ default_age_results = client.query(
 
 <span class="hljs-comment"># Query all entities where `status` equals the default value (&quot;active&quot;)</span>
 default_status_results = client.query(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>,
+output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
 

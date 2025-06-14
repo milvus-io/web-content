@@ -8,6 +8,7 @@ summary: >-
   lebih sedikit memori, sehingga menjadikannya pilihan praktis untuk kumpulan
   data yang besar.
 ---
+
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +49,7 @@ summary: >-
 <li><p><strong>Indeks Terbalik:</strong> Sebuah indeks dibuat, memetakan setiap centroid klaster ke daftar vektor yang ditugaskan ke klaster tersebut.</p></li>
 <li><p><strong>Pencarian:</strong> Saat Anda mencari tetangga terdekat, algoritme pencarian membandingkan vektor kueri Anda dengan centroid klaster dan memilih klaster yang paling menjanjikan. Pencarian kemudian dipersempit menjadi vektor dalam klaster yang dipilih.</p></li>
 </ol>
-<p>Untuk mempelajari lebih lanjut tentang detail teknisnya, lihat <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>.</p>
+<p>Untuk mempelajari lebih lanjut tentang detail teknisnya, lihat <a href="/docs/id/v2.5.x/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ</strong> ) adalah metode kompresi untuk vektor berdimensi tinggi yang secara signifikan mengurangi kebutuhan penyimpanan sekaligus memungkinkan operasi pencarian kemiripan yang cepat.</p>
 <p>Proses PQ melibatkan tahapan-tahapan utama berikut ini:</p>
 <p>
@@ -61,7 +62,7 @@ summary: >-
 <li><p><strong>Kuantisasi</strong><strong>vektor</strong>: Untuk setiap sub-vektor dalam vektor asli, PQ mengidentifikasi centroid terdekat dalam subruang yang sesuai menggunakan jenis metrik tertentu. Proses ini secara efektif memetakan setiap sub-vektor ke vektor representatif terdekat dalam buku kode. Alih-alih menyimpan koordinat sub-vektor secara lengkap, hanya indeks dari centroid yang cocok yang disimpan.</p></li>
 <li><p><strong>Representasi terkompresi</strong>: Representasi terkompresi akhir terdiri dari <code translate="no">m</code> indeks, satu dari setiap sub-ruang, yang secara kolektif disebut sebagai <strong>kode PQ</strong>. Pengkodean ini mengurangi kebutuhan penyimpanan dari <em>D × 32</em> bit (dengan asumsi angka floating-point 32-bit) menjadi <em>m</em> × <em>n bit</em>, mencapai kompresi yang substansial sambil mempertahankan kemampuan untuk memperkirakan jarak vektor.</p></li>
 </ol>
-<p>Untuk detail lebih lanjut tentang penyetelan dan pengoptimalan parameter, lihat Parameter <a href="/docs/id/ivf-pq.md#Index-params">indeks</a>.</p>
+<p>Untuk detail lebih lanjut tentang penyetelan dan pengoptimalan parameter, lihat Parameter <a href="/docs/id/v2.5.x/ivf-pq.md#Index-params">indeks</a>.</p>
 <div class="alert note">
 <p>Pertimbangkan sebuah vektor dengan dimensi <em>D = 128</em> menggunakan angka floating-point 32-bit. Dengan parameter PQ <em>m = 64</em> (sub-vektor) dan <em>nbits = 8</em> (dengan demikian <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>= 256</em> centroid per subruang), kita dapat membandingkan kebutuhan penyimpanan:</p>
 <ul>
@@ -95,7 +96,7 @@ summary: >-
 <li><p><strong>Pemfilteran kasar dengan IVF</strong>: IVF mempartisi ruang vektor ke dalam kelompok-kelompok, sehingga mengurangi cakupan pencarian. Alih-alih mengevaluasi seluruh kumpulan data, algoritme ini hanya berfokus pada cluster yang paling dekat dengan vektor kueri.</p></li>
 <li><p><strong>Perbandingan yang lebih baik dengan PQ</strong>: Di dalam cluster yang dipilih, PQ menggunakan representasi vektor yang dikompresi dan dikuantisasi untuk menghitung perkiraan jarak dengan cepat.</p></li>
 </ol>
-<p>Kinerja indeks <strong>IVF_PQ</strong> secara signifikan dipengaruhi oleh parameter yang mengontrol algoritma IVF dan PQ. Menyetel parameter ini sangat penting untuk mencapai hasil yang optimal untuk set data dan aplikasi tertentu. Informasi lebih rinci tentang parameter ini dan cara menyetelnya dapat ditemukan di <a href="/docs/id/ivf-pq.md#Index-params">Index params</a>.</p>
+<p>Kinerja indeks <strong>IVF_PQ</strong> secara signifikan dipengaruhi oleh parameter yang mengontrol algoritma IVF dan PQ. Menyetel parameter ini sangat penting untuk mencapai hasil yang optimal untuk set data dan aplikasi tertentu. Informasi lebih rinci tentang parameter ini dan cara menyetelnya dapat ditemukan di <a href="/docs/id/v2.5.x/ivf-pq.md#Index-params">Index params</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Membangun indeks<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,26 +119,27 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
-    } <span class="hljs-comment"># Index building params</span>
+field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+params={
+<span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
+} <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Dalam konfigurasi ini:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibangun. Dalam contoh ini, tetapkan nilainya ke <code translate="no">IVF_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/metric.md">Jenis Metrik</a>.</p></li>
 <li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk membangun indeks.</p>
 <ul>
 <li><code translate="no">m</code>: Jumlah sub-vektor yang akan dibagi menjadi vektor.</li>
 </ul>
-<p>Untuk mempelajari lebih lanjut parameter pembuatan yang tersedia untuk indeks <code translate="no">IVF_PQ</code>, lihat Parameter <a href="/docs/id/ivf-pq.md#Index-building-params">pembuatan indeks</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut parameter pembuatan yang tersedia untuk indeks <code translate="no">IVF_PQ</code>, lihat Parameter <a href="/docs/id/v2.5.x/ivf-pq.md#Index-building-params">pembuatan indeks</a>.</p></li>
 </ul>
-<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a>.</p>
+<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/create-collection.md">Membuat Koleksi</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Mencari di indeks<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,20 +163,21 @@ index_params.add_index(
 }
 
 res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
+collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
+limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
+search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Dalam konfigurasi ini:</p>
 <ul>
 <li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk pencarian pada indeks.</p>
 <ul>
 <li><code translate="no">nprobe</code>: Jumlah kluster yang akan dicari.</li>
 </ul>
-<p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">IVF_PQ</code>, lihat Parameter <a href="/docs/id/ivf-pq.md#Index-specific-search-params">pencarian khusus indeks</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">IVF_PQ</code>, lihat Parameter <a href="/docs/id/v2.5.x/ivf-pq.md#Index-specific-search-params">pencarian khusus indeks</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parameter indeks<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -192,7 +195,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/ivf-pq.md#Build-index">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/v2.5.x/ivf-pq.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th></th>
@@ -222,7 +225,7 @@ res = MilvusClient.search(
      <td><p>Nilai <code translate="no">nbits</code> yang lebih tinggi memungkinkan codebook yang lebih besar, yang berpotensi menghasilkan representasi yang lebih akurat dari vektor asli. Namun, ini juga berarti menggunakan lebih banyak bit untuk menyimpan setiap indeks, sehingga kompresi menjadi lebih sedikit. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat <a href="/docs/id/ivf-pq.md#Search-on-index">mencari di indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat <a href="/docs/id/v2.5.x/ivf-pq.md#Search-on-index">mencari di indeks</a>.</p>
 <table>
    <tr>
      <th></th>

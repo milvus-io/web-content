@@ -239,7 +239,7 @@ title: Dépendances d'échelle
        <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Après avoir enregistré le fichier, appliquez les changements avec la commande suivante :</p>
+<p>Après avoir sauvegardé le fichier, appliquez les changements avec la commande suivante :</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Add-extra-etcd-pods" class="common-anchor-header">Ajouter des modules etcd supplémentaires</h3><p>Le nombre total de pods etcd doit être impair.</p>

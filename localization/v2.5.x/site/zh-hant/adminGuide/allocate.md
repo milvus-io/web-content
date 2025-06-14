@@ -3,6 +3,7 @@ id: allocate.md
 title: 在 Kubernetes 上為 Milvus 分配資源
 summary: 瞭解如何在 Kubernetes 上為 Milvus 分配資源。
 ---
+
 <h1 id="Allocate-Resources-on-Kubernetes" class="common-anchor-header">在 Kubernetes 上分配資源<button data-href="#Allocate-Resources-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ summary: 瞭解如何在 Kubernetes 上為 Milvus 分配資源。
         ></path>
       </svg>
     </button></h1><p>本主題描述如何在 Kubernetes 上分配資源給 Milvus 叢集。</p>
-<p>一般而言，您在生產中分配給 Milvus 叢集的資源應與機器的工作量成正比。分配資源時，您也應該考慮機器類型。雖然您可以在群集執行時更新配置，但我們建議您在<a href="/docs/zh-hant/install_cluster-helm.md">部署群集</a>前設定這些值。</p>
+<p>一般而言，您在生產中分配給 Milvus 叢集的資源應與機器的工作量成正比。分配資源時，您也應該考慮機器類型。雖然您可以在群集執行時更新配置，但我們建議您在<a href="/docs/zh-hant/v2.5.x/install_cluster-helm.md">部署群集</a>前設定這些值。</p>
 <div class="alert note">
 <p>有關如何使用 Milvus Operator 分配資源的資訊，請參閱<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">使用 Milvus Operator 分配資源</a>。</p>
 </div>
@@ -59,8 +60,8 @@ summary: 瞭解如何在 Kubernetes 上為 Milvus 分配資源。
 使用 Helm 升級資源會導致執行中的 Pod 執行滾動更新。</div>
 <p>有兩種方式可以分配資源：</p>
 <ul>
-<li><a href="/docs/zh-hant/allocate.md#Allocate-resources-with-commands">使用指令</a></li>
-<li><a href="/docs/zh-hant/allocate.md#Allocate-resources-by-setting-configuration-file">在<code translate="no">YAML</code> 檔案中設定參數</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/allocate.md#Allocate-resources-with-commands">使用指令</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/allocate.md#Allocate-resources-by-setting-configuration-file">在<code translate="no">YAML</code> 檔案中設定參數</a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">使用指令分配資源</h3><p>如果使用<code translate="no">--set</code> 更新資源配置，您需要為每個 Milvus 元件設定資源變數。</p>
 <div class="filter">
@@ -129,13 +130,13 @@ summary: 瞭解如何在 Kubernetes 上為 Milvus 分配資源。
       </svg>
     </button></h2><ul>
 <li>您可能還想學習如何<ul>
-<li><a href="/docs/zh-hant/scaleout.md">擴充 Milvus 叢集</a></li>
-<li><a href="/docs/zh-hant/upgrade_milvus_cluster-operator.md">升級 Milvus 叢集</a></li>
-<li><a href="/docs/zh-hant/upgrade_milvus_standalone-operator.md">升級 Milvus 單機</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/scaleout.md">擴充 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_cluster-operator.md">升級 Milvus 叢集</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/upgrade_milvus_standalone-operator.md">升級 Milvus 單機</a></li>
 </ul></li>
 <li>如果您已準備好在雲上部署您的叢集：<ul>
-<li>學習如何<a href="/docs/zh-hant/eks.md">使用 Terraform 在亞馬遜 EKS 上部署 Milvus</a></li>
-<li>學習如何<a href="/docs/zh-hant/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>學習如何<a href="/docs/zh-hant/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.5.x/eks.md">使用 Terraform 在亞馬遜 EKS 上部署 Milvus</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.5.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
+<li>學習如何<a href="/docs/zh-hant/v2.5.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>
 </ul>

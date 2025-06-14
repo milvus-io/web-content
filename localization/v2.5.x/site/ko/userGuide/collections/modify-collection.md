@@ -3,6 +3,7 @@ id: modify-collection.md
 title: 컬렉션 수정
 summary: 컬렉션의 이름을 바꾸거나 컬렉션의 설정을 변경할 수 있습니다. 이 페이지에서는 컬렉션을 수정하는 방법을 중점적으로 설명합니다.
 ---
+
 <h1 id="Modify-Collection" class="common-anchor-header">컬렉션 수정<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,15 +41,16 @@ summary: 컬렉션의 이름을 바꾸거나 컬렉션의 설정을 변경할 �
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.rename_collection(
-    old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
+old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.RenameCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -144,10 +146,11 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
+collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
 <span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
@@ -197,15 +200,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>컬렉션의 데이터를 특정 기간 후에 삭제해야 하는 경우, TTL(Time-To-Live)을 초 단위로 설정하는 것을 고려하세요. TTL이 초과되면 Milvus는 컬렉션에서 모든 엔티티를 삭제합니다.  삭제는 비동기식으로 이루어지므로 삭제가 완료되기 전에도 검색 및 쿼리가 가능합니다. 자세한 내용은 <a href="/docs/ko/set-collection-ttl.md">컬렉션 TTL 설정을</a> 참조하세요.</p></td>
+     <td><p>컬렉션의 데이터를 특정 기간 후에 삭제해야 하는 경우, TTL(Time-To-Live)을 초 단위로 설정하는 것을 고려하세요. TTL이 초과되면 Milvus는 컬렉션에서 모든 엔티티를 삭제합니다.  삭제는 비동기식으로 이루어지므로 삭제가 완료되기 전에도 검색 및 쿼리가 가능합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/set-collection-ttl.md">컬렉션 TTL 설정을</a> 참조하세요.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>메모리 매핑(Mmap)을 사용하면 디스크의 대용량 파일에 직접 메모리에 액세스할 수 있으므로 Milvus는 인덱스와 데이터를 메모리와 하드 드라이브 모두에 저장할 수 있습니다. 이 접근 방식은 액세스 빈도에 따라 데이터 배치 정책을 최적화하여 검색 성능에 영향을 주지 않으면서 컬렉션의 저장 용량을 확장하는 데 도움이 됩니다.</p><p>자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p></td>
+     <td><p>메모리 매핑(Mmap)을 사용하면 디스크의 대용량 파일에 직접 메모리에 액세스할 수 있으므로 Milvus는 인덱스와 데이터를 메모리와 하드 드라이브 모두에 저장할 수 있습니다. 이 접근 방식은 액세스 빈도에 따라 데이터 배치 정책을 최적화하여 검색 성능에 영향을 주지 않으면서 컬렉션의 저장 용량을 확장하는 데 도움이 됩니다.</p><p>자세한 내용은 <a href="/docs/ko/v2.5.x/mmap.md">mmap 사용을</a> 참조하세요.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>파티션 키 격리를 활성화하면 Milvus는 파티션 키 값을 기준으로 엔터티를 그룹화하고 각 그룹에 대해 별도의 인덱스를 생성합니다. 검색 요청을 받으면 Milvus는 필터링 조건에 지정된 파티션 키 값을 기준으로 인덱스를 찾고 인덱스에 포함된 엔티티 내에서 검색 범위를 제한하여 검색 중 관련 없는 엔티티를 검색하지 않고 검색 성능을 크게 향상시킵니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md#Use-Partition-Key-Isolation">파티션 키 격리 사용을</a> 참조하세요.</p></td>
+     <td><p>파티션 키 격리를 활성화하면 Milvus는 파티션 키 값을 기준으로 엔터티를 그룹화하고 각 그룹에 대해 별도의 인덱스를 생성합니다. 검색 요청을 받으면 Milvus는 필터링 조건에 지정된 파티션 키 값을 기준으로 인덱스를 찾고 인덱스에 포함된 엔티티 내에서 검색 범위를 제한하여 검색 중 관련 없는 엔티티를 검색하지 않고 검색 성능을 크게 향상시킵니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/use-partition-key.md#Use-Partition-Key-Isolation">파티션 키 격리 사용을</a> 참조하세요.</p></td>
    </tr>
 </table>
 <h2 id="Drop-Collection-Properties" class="common-anchor-header">컬렉션 속성 삭제<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">

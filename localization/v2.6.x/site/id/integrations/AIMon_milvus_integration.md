@@ -41,7 +41,7 @@ title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
 <ul>
 <li>Membangun aplikasi LLM yang menjawab pertanyaan pengguna yang terkait dengan dataset bank rapat.</li>
 <li>Mendefinisikan dan mengukur kualitas aplikasi LLM Anda.</li>
-<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangkingan ulang yang canggih.</li>
+<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangking ulang yang canggih.</li>
 </ul>
 <h2 id="Tech-Stack" class="common-anchor-header">Tumpukan Teknologi<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"

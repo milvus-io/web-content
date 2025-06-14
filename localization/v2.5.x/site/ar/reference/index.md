@@ -4,6 +4,7 @@ related_key: index
 summary: آلية الفهرس في ميلفوس.
 title: الفهرس داخل الذاكرة
 ---
+
 <h1 id="In-memory-Index" class="common-anchor-header">الفهرس داخل الذاكرة<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,9 +20,9 @@ title: الفهرس داخل الذاكرة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يسرد هذا الموضوع أنواع مختلفة من الفهارس داخل الذاكرة التي يدعمها ملفوس، والسيناريوهات التي تناسب كل منها، والمعلمات التي يمكن للمستخدمين تكوينها لتحقيق أداء بحث أفضل. بالنسبة للفهارس على القرص، راجع <strong><a href="/docs/ar/disk_index.md">الفهرسة على القرص</a></strong>.</p>
+    </button></h1><p>يسرد هذا الموضوع أنواع مختلفة من الفهارس داخل الذاكرة التي يدعمها ملفوس، والسيناريوهات التي تناسب كل منها، والمعلمات التي يمكن للمستخدمين تكوينها لتحقيق أداء بحث أفضل. بالنسبة للفهارس على القرص، راجع <strong><a href="/docs/ar/v2.5.x/disk_index.md">الفهرسة على القرص</a></strong>.</p>
 <p>الفهرسة هي عملية تنظيم البيانات بكفاءة، وتلعب دورًا رئيسيًا في جعل البحث عن التشابه مفيدًا من خلال تسريع الاستعلامات التي تستغرق وقتًا طويلاً على مجموعات البيانات الكبيرة بشكل كبير.</p>
-<p>لتحسين أداء الاستعلام، يمكنك <a href="/docs/ar/index-vector-fields.md">تحديد نوع فهرس</a> لكل حقل متجه.</p>
+<p>لتحسين أداء الاستعلام، يمكنك <a href="/docs/ar/v2.5.x/index-vector-fields.md">تحديد نوع فهرس</a> لكل حقل متجه.</p>
 <div class="alert note">
 يدعم حقل المتجه حاليًا نوع فهرس واحد فقط. يقوم ميلفوس تلقائيًا بحذف الفهرس القديم عند تبديل نوع الفهرس.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">فهارس المتجهات ANNS<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +61,7 @@ title: الفهرس داخل الذاكرة
 <div class="filter">
  <a href="#floating">تضمينات الفاصلة العائمة</a> <a href="#binary">التضمينات الثنائية التضمينات الثنائية</a> <a href="#sparse">التضمينات المتفرقة</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">فهارس لتضمينات الفاصلة العائمة</h3><p>بالنسبة للتضمينات ذات الفاصلة العائمة ذات 128 بُعدًا (المتجهات)، فإن مساحة التخزين التي تشغلها هي 128 * حجم العوامة = 512 بايت. <a href="/docs/ar/metric.md">ومقاييس المسافة</a> المستخدمة لتضمينات الفاصلة العائمة هي المسافة الإقليدية (<code translate="no">L2</code>) والمنتج الداخلي (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">فهارس لتضمينات الفاصلة العائمة</h3><p>بالنسبة للتضمينات ذات الفاصلة العائمة ذات 128 بُعدًا (المتجهات)، فإن مساحة التخزين التي تشغلها هي 128 * حجم العوامة = 512 بايت. <a href="/docs/ar/v2.5.x/metric.md">ومقاييس المسافة</a> المستخدمة لتضمينات الفاصلة العائمة هي المسافة الإقليدية (<code translate="no">L2</code>) والمنتج الداخلي (<code translate="no">IP</code>).</p>
 <p>وتتضمن هذه الأنواع من الفهارس <code translate="no">FLAT</code> و <code translate="no">IVF_FLAT</code> و و <code translate="no">IVF_PQ</code> و <code translate="no">IVF_SQ8</code> و <code translate="no">HNSW</code> و <code translate="no">HNSW_SQ</code> و <code translate="no">HNSW_PQ</code> و <code translate="no">HNSW_PRQ</code> و <code translate="no">SCANN</code> لعمليات البحث في الشبكة العنكبوتية القائمة على وحدة المعالجة المركزية.</p>
 </div>
 <div class="filter-binary">
@@ -71,7 +72,7 @@ title: الفهرس داخل الذاكرة
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">فهارس التضمينات المتفرقة</h3><p>تدعم فهارس التضمينات المتفرقة مقاييس <code translate="no">IP</code> و <code translate="no">BM25</code> (للبحث في النص الكامل) فقط.</p>
 <p>نوع الفهرس المدعوم للتضمينات المتفرقة: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
-<p>من الإصدار Milvus 2.5.4 فصاعدًا، تم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق. لمزيد من المعلومات، راجع <a href="/docs/ar/sparse_vector.md#Set-index-params-for-vector-field">متجه متناثر</a>.</p>
+<p>من الإصدار Milvus 2.5.4 فصاعدًا، تم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">متجه متناثر</a>.</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
@@ -247,7 +248,7 @@ title: الفهرس داخل الذاكرة
 <tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[اختياري] مقياس المسافة المختار.</td><td>انظر <a href="/docs/ar/metric.md">المقاييس المدعومة</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[اختياري] مقياس المسافة المختار.</td><td>انظر <a href="/docs/ar/v2.5.x/metric.md">المقاييس المدعومة</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -537,7 +538,7 @@ title: الفهرس داخل الذاكرة
 <tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[اختياري] مقياس المسافة المختار.</td><td>انظر <a href="/docs/ar/metric.md">المقاييس المدعومة</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[اختياري] مقياس المسافة المختار.</td><td>انظر <a href="/docs/ar/v2.5.x/metric.md">المقاييس المدعومة</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -591,7 +592,7 @@ title: الفهرس داخل الذاكرة
 <tr><th>المعلمة</th><th>الوصف</th><th>النطاق</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. لمزيد من التفاصيل، راجع <a href="/docs/ar/sparse_vector.md#Set-index-params-for-vector-field">متجه متناثر</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (افتراضي)، <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.5.x/sparse_vector.md#Set-index-params-for-vector-field">متجه متناثر</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (افتراضي)، <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 <tr><td><code translate="no">bm25_k1</code></td><td>يتحكم في تشبع تردد المصطلح. تزيد القيم الأعلى من أهمية ترددات المصطلحات في ترتيب المستندات.</td><td>[1.2, 2.0]</td></tr>
 <tr><td><code translate="no">bm25_b</code></td><td>يتحكم في مدى تطبيع طول المستند. الإعداد الافتراضي هو 0.75.</td><td>[0, 1]</td></tr>
 </tbody>
@@ -651,5 +652,5 @@ title: الفهرس داخل الذاكرة
         ></path>
       </svg>
     </button></h2><ul>
-<li>تعرف على المزيد حول <a href="/docs/ar/metric.md">مقاييس التشابه</a> المدعومة في ملفوس.</li>
+<li>تعرف على المزيد حول <a href="/docs/ar/v2.5.x/metric.md">مقاييس التشابه</a> المدعومة في ملفوس.</li>
 </ul>

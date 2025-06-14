@@ -49,7 +49,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Compactação de clustering</span> </span></p>
-<p>Usando o <strong>PartitionStats</strong> como referência, o Milvus pode eliminar dados irrelevantes ao receber uma solicitação de pesquisa/consulta que carrega um valor de chave de clustering e restringir o escopo da pesquisa dentro dos segmentos que mapeiam para o valor, melhorando assim o desempenho da pesquisa. Para obter detalhes sobre a melhoria do desempenho, consulte <a href="/docs/pt/clustering-compaction.md#Benchmark-Test">Testes de benchmark</a>.</p>
+<p>Usando o <strong>PartitionStats</strong> como referência, o Milvus pode eliminar dados irrelevantes ao receber uma solicitação de pesquisa/consulta que carrega um valor de chave de clustering e restringir o escopo da pesquisa dentro dos segmentos que mapeiam para o valor, melhorando assim o desempenho da pesquisa. Para obter detalhes sobre a melhoria do desempenho, consulte <a href="/docs/pt/v2.5.x/clustering-compaction.md#Benchmark-Test">Testes de benchmark</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Usar compactação de clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +99,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">enable</code></p></td>
-     <td><p>Especifica se a compactação de clusters deve ser activada. Definir este valor para <code translate="no">true</code> se for necessário ativar esta funcionalidade para todas as colecções que tenham uma chave de agrupamento.</p></td>
+     <td><p>Especifica se a compactação do agrupamento deve ser activada. Definir este valor para <code translate="no">true</code> se for necessário ativar esta funcionalidade para todas as colecções que tenham uma chave de agrupamento.</p></td>
      <td><p>false</p></td>
    </tr>
    <tr>
@@ -162,7 +162,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>Para aplicar as alterações acima ao seu cluster Milvus, siga os passos em <a href="/docs/pt/configure-helm.md#Configure-Milvus-via-configuration-file">Configurar Milvus com Helm</a> e <a href="/docs/pt/configure_operator.md">Configurar Milvus com Milvus Operators</a>.</p>
+<p>Para aplicar as alterações acima ao seu cluster Milvus, siga os passos em <a href="/docs/pt/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configurar Milvus com Helm</a> e <a href="/docs/pt/v2.5.x/configure_operator.md">Configurar Milvus com Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Configuração da coleção</h3><p>Para a compactação de clusters numa coleção específica, deve selecionar um campo escalar da coleção como a chave de clustering.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -426,6 +426,6 @@ System.out.println(stateResp.getState());
 <li><p>Escolha uma chave de agrupamento adequada.</p>
 <p>Pode utilizar campos escalares normalmente empregues como condições de filtragem como chave de agrupamento. Para uma coleção que contém dados de vários inquilinos, pode utilizar o campo que distingue um inquilino de outro como chave de agrupamento.</p></li>
 <li><p>Usar a chave de partição como a chave de clustering.</p>
-<p>Pode definir <code translate="no">common.usePartitionKeyAsClusteringKey</code> para <code translate="no">true</code> se pretender ativar esta funcionalidade para todas as colecções na sua instância Milvus ou se continuar a ter problemas de desempenho numa coleção grande com uma chave de partição. Ao fazê-lo, terá uma chave de agrupamento e uma chave de partição quando escolher um campo escalar numa coleção como chave de partição.</p>
+<p>Pode definir <code translate="no">common.usePartitionKeyAsClusteringKey</code> para <code translate="no">true</code> se pretender ativar esta funcionalidade para todas as colecções na sua instância Milvus ou se continuar a ter problemas de desempenho numa coleção grande com uma chave de partição. Ao fazê-lo, terá uma chave de clustering e uma chave de partição quando escolher um campo escalar numa coleção como chave de partição.</p>
 <p>Note que esta definição não impede a escolha de outro campo escalar como chave de agrupamento. A chave de clustering explicitamente designada tem sempre precedência.</p></li>
 </ul>

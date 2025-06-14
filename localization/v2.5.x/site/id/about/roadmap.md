@@ -7,6 +7,7 @@ summary: >-
   aplikasi AI. Berikut ini adalah peta jalan kami untuk memandu pengembangan
   kami.
 ---
+
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Peta Jalan Milvus<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +79,7 @@ summary: >-
 <li>Roadmap kami biasanya terstruktur dalam tiga bagian: rilis terbaru, rilis berikutnya yang akan datang, dan visi jangka menengah hingga jangka panjang dalam satu tahun ke depan.</li>
 <li>Seiring dengan perkembangannya, kami terus belajar dan sesekali menyesuaikan fokus kami, menambahkan atau menghapus item sesuai kebutuhan.</li>
 <li>Rencana ini bersifat indikatif dan dapat berubah, dan dapat bervariasi berdasarkan layanan berlangganan.</li>
-<li>Kami tetap berpegang teguh pada peta jalan kami, dengan <a href="/docs/id/release_notes.md">catatan rilis</a> kami yang berfungsi sebagai referensi.</li>
+<li>Kami tetap berpegang teguh pada peta jalan kami, dengan <a href="/docs/id/v2.5.x/release_notes.md">catatan rilis</a> kami yang berfungsi sebagai referensi.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">Bagaimana cara berkontribusi<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

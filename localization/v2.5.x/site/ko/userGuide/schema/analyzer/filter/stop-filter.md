@@ -5,6 +5,7 @@ summary: >-
   중지 필터는 토큰화된 텍스트에서 지정된 중지 단어를 제거하여 의미가 덜한 일반적인 단어를 제거하는 데 도움을 줍니다. stop_words
   매개변수를 사용하여 중지 단어 목록을 구성할 수 있습니다.
 ---
+
 <h1 id="Stop" class="common-anchor-header">Stop<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,6 +89,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p><code translate="no">stop</code> 필터는 다음과 같은 구성 가능한 매개변수를 허용합니다.</p>
 <table>
    <tr>
@@ -105,8 +107,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 </ul></td>
    </tr>
 </table>
-<p><code translate="no">stop</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다. Milvus에서 사용할 수 있는 토큰화기 목록은 <a href="/docs/ko/standard-tokenizer.md">표준 토큰화기와</a> 그 자매 페이지를 참조하세요.</p>
-<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
+<p><code translate="no">stop</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다. Milvus에서 사용할 수 있는 토큰화기 목록은 <a href="/docs/ko/v2.5.x/standard-tokenizer.md">표준 토큰화기와</a> 그 자매 페이지를 참조하세요.</p>
+<p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,6 +165,7 @@ sample_text = <span class="hljs-string">&quot;The stop filter allows control ove
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

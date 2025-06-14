@@ -41,7 +41,7 @@ title: Migrar entre instâncias em ambientes S3
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-storage-backup-and-restore.png" alt="multi-storage-backup-and-restore.png" class="doc-image" id="multi-storage-backup-and-restore.png" />
    </span> <span class="img-wrapper"> <span>multi-storage-backup-and-restore.png</span> </span></p>
-<p>Suponha que temos duas instâncias do Milvus, <code translate="no">milvus_A</code> e <code translate="no">milvus_B</code>, utilizando diferentes armazenamentos de objectos. Neste exemplo, o nosso objetivo é concluir as seguintes tarefas:</p>
+<p>Suponhamos que temos duas instâncias do Milvus, <code translate="no">milvus_A</code> e <code translate="no">milvus_B</code>, utilizando diferentes armazenamentos de objectos. Neste exemplo, o nosso objetivo é concluir as seguintes tarefas:</p>
 <ol>
 <li><p>Criar uma cópia de segurança (my_backup) para a coleção <code translate="no">coll</code> em <code translate="no">bucket_A</code> do armazenamento de objectos de<code translate="no">milvus_A</code>.</p></li>
 <li><p>Transferir a cópia de segurança my_backup para <code translate="no">bucket_B</code> do armazenamento de objectos de <code translate="no">milvus_B</code>.</p></li>

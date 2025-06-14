@@ -7,6 +7,7 @@ summary: >-
   les utilisateurs peuvent effectuer au niveau de la collection, de la base de
   données et de l'instance, ce qui renforce la sécurité des données.
 ---
+
 <h1 id="RBAC-Explained" class="common-anchor-header">RBAC expliqué<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>Pour réaliser le contrôle d'accès via RBAC, vous devez suivre les étapes ci-dessous :</p>
 <ol>
-<li><p><strong><a href="/docs/fr/users_and_roles.md#Create-a-user">Créer un utilisateur</a></strong>: Outre l'utilisateur par défaut <code translate="no">root</code> dans Milvus, vous pouvez créer de nouveaux utilisateurs et définir des mots de passe pour protéger la sécurité des données.</p></li>
-<li><p><strong><a href="/docs/fr/users_and_roles.md#Create-a-role">Créer un rôle</a></strong>: Vous pouvez créer des rôles personnalisés en fonction de vos besoins. Les capacités spécifiques d'un rôle sont déterminées par ses privilèges.</p></li>
-<li><p><strong><a href="/docs/fr/privilege_group.md">Créer un groupe de privilèges</a></strong>: Combinez plusieurs privilèges en un seul groupe de privilèges afin de rationaliser le processus d'octroi de privilèges à un rôle.</p></li>
-<li><p><strong><a href="/docs/fr/grant_privileges.md">Accorder des privilèges ou des groupes de privilèges à un rôle</a></strong>: Définir les capacités d'un rôle en lui accordant des privilèges ou des groupes de privilèges.</p></li>
-<li><p><strong><a href="/docs/fr/grant_roles.md">Attribuer des rôles aux utilisateurs</a></strong>: Accorder des rôles avec certains privilèges aux utilisateurs afin que ces derniers puissent bénéficier des privilèges d'un rôle. Un même rôle peut être attribué à plusieurs utilisateurs.</p></li>
+<li><p><strong><a href="/docs/fr/v2.5.x/users_and_roles.md#Create-a-user">Créer un utilisateur</a></strong>: Outre l'utilisateur par défaut <code translate="no">root</code> dans Milvus, vous pouvez créer de nouveaux utilisateurs et définir des mots de passe pour protéger la sécurité des données.</p></li>
+<li><p><strong><a href="/docs/fr/v2.5.x/users_and_roles.md#Create-a-role">Créer un rôle</a></strong>: Vous pouvez créer des rôles personnalisés en fonction de vos besoins. Les capacités spécifiques d'un rôle sont déterminées par ses privilèges.</p></li>
+<li><p><strong><a href="/docs/fr/v2.5.x/privilege_group.md">Créer un groupe de privilèges</a></strong>: Combinez plusieurs privilèges en un seul groupe de privilèges afin de rationaliser le processus d'octroi de privilèges à un rôle.</p></li>
+<li><p><strong><a href="/docs/fr/v2.5.x/grant_privileges.md">Accorder des privilèges ou des groupes de privilèges à un rôle</a></strong>: Définir les capacités d'un rôle en lui accordant des privilèges ou des groupes de privilèges.</p></li>
+<li><p><strong><a href="/docs/fr/v2.5.x/grant_roles.md">Attribuer des rôles aux utilisateurs</a></strong>: Accorder des rôles avec certains privilèges aux utilisateurs afin que ces derniers puissent bénéficier des privilèges d'un rôle. Un même rôle peut être attribué à plusieurs utilisateurs.</p></li>
 </ol>

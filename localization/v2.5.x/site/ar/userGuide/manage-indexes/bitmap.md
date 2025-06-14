@@ -6,6 +6,7 @@ summary: >-
   فهرسة الصور النقطية هي تقنية فهرسة فعالة مصممة لتحسين أداء الاستعلام على
   الحقول العددية منخفضة الكمية.
 ---
+
 <h1 id="BITMAP​" class="common-anchor-header">BITMAP<button data-href="#BITMAP​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,8 +87,9 @@ client.create_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>في هذا المثال، نقوم في هذا المثال بإنشاء فهرس صورة نقطية على الحقل <code translate="no">category</code> في المجموعة <code translate="no">my_collection</code>. يُستخدم الأسلوب <code translate="no">add_index()</code> لتحديد اسم الحقل ونوع الفهرس واسم الفهرس.</p>
-<p>بمجرد إنشاء فهرس الصورة النقطية، يمكنك استخدام المعلمة <code translate="no">filter</code> في عمليات الاستعلام لإجراء تصفية عددية استنادًا إلى الحقل المفهرس. يتيح لك ذلك تضييق نطاق نتائج البحث بكفاءة باستخدام الفهرس النقطي. لمزيد من المعلومات، راجع <a href="/docs/ar/boolean.md">تصفية البيانات الوصفية</a>.</p>
+<p>بمجرد إنشاء فهرس الصورة النقطية، يمكنك استخدام المعلمة <code translate="no">filter</code> في عمليات الاستعلام لإجراء تصفية عددية استنادًا إلى الحقل المفهرس. يتيح لك ذلك تضييق نطاق نتائج البحث بكفاءة باستخدام الفهرس النقطي. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/boolean.md">تصفية البيانات الوصفية</a>.</p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

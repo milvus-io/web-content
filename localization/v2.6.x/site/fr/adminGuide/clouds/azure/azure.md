@@ -95,7 +95,7 @@ summary: Découvrez comment déployer un cluster Milvus sur Azure.
 </ul></li>
 <li><p><strong>Pool de nœuds primaires</strong>:</p>
 <ul>
-<li><p><strong>Taille du nœud</strong>: Nous vous recommandons de choisir des machines virtuelles dotées d'un minimum de 16 Go de RAM, mais vous pouvez choisir la taille des machines virtuelles selon vos besoins.</p></li>
+<li><p><strong>Taille du nœud</strong>: Nous vous recommandons de choisir des machines virtuelles dotées d'au moins 16 Go de RAM, mais vous pouvez sélectionner des machines virtuelles de la taille souhaitée.</p></li>
 <li><p><strong>Méthode de mise à l'échelle</strong>: Choisissez une méthode de mise à l'échelle.</p></li>
 <li><p><strong>Node count range (Nombre de nœuds</strong>) : Sélectionnez une fourchette pour le nombre de nœuds.</p></li>
 </ul></li>

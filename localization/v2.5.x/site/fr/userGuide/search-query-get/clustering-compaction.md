@@ -49,7 +49,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Clustering Compaction" class="doc-image" id="clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Compaction de clustering</span> </span></p>
-<p>En utilisant <strong>PartitionStats</strong> comme référence, Milvus peut élaguer les données non pertinentes lors de la réception d'une requête de recherche qui comporte une valeur de clé de clustering et limiter la portée de la recherche aux segments correspondant à la valeur, ce qui améliore les performances de la recherche. Pour plus de détails sur l'amélioration des performances, reportez-vous à la section <a href="/docs/fr/clustering-compaction.md#Benchmark-Test">Tests de référence</a>.</p>
+<p>En utilisant <strong>PartitionStats</strong> comme référence, Milvus peut élaguer les données non pertinentes lors de la réception d'une requête de recherche qui comporte une valeur de clé de clustering et limiter la portée de la recherche aux segments correspondant à la valeur, ce qui améliore les performances de la recherche. Pour plus de détails sur l'amélioration des performances, reportez-vous à la section <a href="/docs/fr/v2.5.x/clustering-compaction.md#Benchmark-Test">Tests de référence</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utiliser le compactage de clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,11 +158,11 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">usePartitionKeyAsClusteringKey</code></p></td>
-     <td><p>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de clustering. En définissant ce paramètre sur true, Milvus traite les clés de partition des collections comme la clé de clustering. </p><p>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de regroupement.</p></td>
+     <td><p>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de regroupement. En définissant ce paramètre sur true, Milvus traite les clés de partition des collections comme la clé de clustering. </p><p>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de regroupement.</p></td>
      <td></td>
    </tr>
 </table>
-<p>Pour appliquer les modifications ci-dessus à votre cluster Milvus, veuillez suivre les étapes des sections <a href="/docs/fr/configure-helm.md#Configure-Milvus-via-configuration-file">Configurer Milvus avec Helm</a> et <a href="/docs/fr/configure_operator.md">Configurer Milvus avec Milvus Operators</a>.</p>
+<p>Pour appliquer les modifications ci-dessus à votre cluster Milvus, veuillez suivre les étapes des sections <a href="/docs/fr/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configurer Milvus avec Helm</a> et <a href="/docs/fr/v2.5.x/configure_operator.md">Configurer Milvus avec Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Configuration de la collecte</h3><p>Pour compacter le clustering dans une collection spécifique, vous devez sélectionner un champ scalaire de la collection comme clé de clustering.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

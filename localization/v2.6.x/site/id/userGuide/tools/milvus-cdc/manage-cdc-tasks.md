@@ -263,7 +263,7 @@ title: Mengelola Tugas CDC
 }&#x27;</span> http://localhost:8444/cdc
 <button class="copy-code-btn"></button></code></pre>
 <p>Ganti <strong>localhost</strong> dengan alamat IP server Milvus target.</p>
-<p><strong>Parameter</strong></p>
+<p><strong>Parameter</strong>:</p>
 <ul>
 <li><strong>task_id</strong>: ID tugas CDC yang akan dihapus.</li>
 </ul>

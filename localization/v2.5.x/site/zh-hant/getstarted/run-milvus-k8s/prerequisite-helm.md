@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: 了解使用 Helm 安裝 Milvus 前的必要準備。
 title: 在 Kubernetes 上執行 Milvus 的需求
 ---
+
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">在 Kubernetes 上執行 Milvus 的需求<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,8 +142,8 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
     </button></h2><ul>
 <li><p>如果您的硬體和軟體符合要求，您可以</p>
 <ul>
-<li><a href="/docs/zh-hant/install_cluster-milvusoperator.md">使用 Milvus Operator 在 Kubernets 中執行 Milvus</a></li>
-<li><a href="/docs/zh-hant/install_cluster-helm.md">使用 Helm 在 Kubernetes 中執行 Milvus</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/install_cluster-milvusoperator.md">使用 Milvus Operator 在 Kubernets 中執行 Milvus</a></li>
+<li><a href="/docs/zh-hant/v2.5.x/install_cluster-helm.md">使用 Helm 在 Kubernetes 中執行 Milvus</a></li>
 </ul></li>
-<li><p>安裝 Milvus 時可以設定的參數，請參閱<a href="/docs/zh-hant/system_configuration.md">系統組態</a>。</p></li>
+<li><p>安裝 Milvus 時可以設定的參數，請參閱<a href="/docs/zh-hant/v2.5.x/system_configuration.md">系統組態</a>。</p></li>
 </ul>

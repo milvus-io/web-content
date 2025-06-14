@@ -2,6 +2,7 @@
 id: configure_access_logs.md
 title: Настройка журналов доступа
 ---
+
 <h1 id="Configure-Access-Logs" class="common-anchor-header">Настройка журналов доступа<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,9 +22,9 @@ title: Настройка журналов доступа
 <p>В этом руководстве приведены подробные инструкции по настройке журналов доступа в Milvus.</p>
 <p>Конфигурация журналов доступа зависит от метода установки Milvus:</p>
 <ul>
-<li><strong>Установка Helm</strong>: Настройка в <code translate="no">values.yaml</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/configure-helm.md">Настройка Milvus с помощью диаграмм Helm</a>.</li>
-<li><strong>Установка Docker</strong>: Настроить в <code translate="no">milvus.yaml</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/configure-docker.md">Настройка Milvus с помощью Docker Compose</a>.</li>
-<li><strong>Установка оператора</strong>: Измените <code translate="no">spec.components</code> в файле конфигурации. Дополнительные сведения см. в разделе <a href="/docs/ru/configure_operator.md">Настройка Milvus с помощью Milvus Operator</a>.</li>
+<li><strong>Установка Helm</strong>: Настройка в <code translate="no">values.yaml</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/configure-helm.md">Настройка Milvus с помощью диаграмм Helm</a>.</li>
+<li><strong>Установка Docker</strong>: Настроить в <code translate="no">milvus.yaml</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/configure-docker.md">Настройка Milvus с помощью Docker Compose</a>.</li>
+<li><strong>Установка оператора</strong>: Измените <code translate="no">spec.components</code> в файле конфигурации. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/configure_operator.md">Настройка Milvus с помощью Milvus Operator</a>.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Варианты конфигурации<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -56,7 +56,7 @@ title: AIMon 및 Milvus로 LLM 애플리케이션의 검색 품질 향상
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>벡터 데이터베이스</em></h4><p>이 애플리케이션에서는 텍스트, 이미지, 동영상과 같은 대규모 비정형 데이터를 관리하고 검색하기 위해 <a href="https://milvus.io/">Milvus를</a> 사용합니다.</p>
+    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>벡터 데이터베이스</em></h4><p>이 애플리케이션에서는 텍스트, 이미지, 동영상과 같은 대규모 비정형 데이터를 관리하고 검색하는 데 <a href="https://milvus.io/">Milvus를</a> 사용합니다.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 프레임워크</em></h4><p>LlamaIndex는 오픈 소스 데이터 오케스트레이션 프레임워크로, 개인 데이터와 LLM의 통합을 용이하게 하여 대규모 언어 모델(LLM) 애플리케이션 구축을 간소화하고 검색 증강 생성(RAG) 파이프라인을 통해 문맥 증강 생성 AI 애플리케이션을 가능하게 합니다. 이 튜토리얼에서는 유연성이 뛰어나고 더 나은 하위 수준 API 추상화를 제공하는 LlamaIndex를 사용하겠습니다.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 출력 품질 평가</em></h4><p><a href="https://www.aimon.ai">AIMon은</a> 환각, 컨텍스트 품질 문제, LLM의 명령어 준수, 검색 품질 및 기타 LLM 신뢰성 작업에 대한 독점적인 판정 모델을 제공합니다. 저희는 AIMon을 사용하여 LLM 애플리케이션의 품질을 판단합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
@@ -165,7 +165,7 @@ oai_client = OpenAI(api_key=openai_key)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>기존 데이터 세트를 보완하기 위해 미국 6개 주요 도시의 시의회에서 만든 벤치마크 데이터 세트인 <a href="https://meetingbank.github.io/">MeetingBank</a> 데이터 세트를 사용할 것입니다. 여기에는 1,366개의 회의와 3,579시간이 넘는 동영상이 포함되어 있으며, 회의록, PDF 문서, 안건 및 기타 메타데이터가 포함되어 있습니다.</p>
+    </button></h1><p>기존 데이터 세트를 보완하기 위해 미국 6개 주요 도시의 시의회에서 만든 벤치마크 데이터 세트인 <a href="https://meetingbank.github.io/">MeetingBank</a> 데이터 세트를 사용할 것입니다. 여기에는 1,366개의 회의와 3,579시간 이상의 동영상이 포함되어 있으며, 회의록, 회의록의 PDF 문서, 안건 및 기타 메타데이터가 포함되어 있습니다.</p>
 <p>이 연습을 위해 더 작은 데이터 세트를 만들었습니다. <a href="https://drive.google.com/drive/folders/1v3vJahKtadi_r-8VJAsDd2eaiSRenmsa?usp=drive_link">여기에서</a> 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete the dataset folder if it already exists</span>
 
@@ -297,7 +297,7 @@ queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_
 <ol>
 <li><strong>환각 점수</strong> (hall_score): 생성된 텍스트가 제공된 컨텍스트에 근거를 두고 있는지 확인합니다. 1.0에 가까울수록 환각이 강하게 나타나고 0.0에 가까울수록 환각이 덜 나타난다는 것을 의미합니다. 따라서 최종 품질 점수를 계산할 때 여기서는 (1.0-hall_score)를 사용합니다.</li>
 <li><strong>지침 준수 점수</strong> (ia_score): 제공된 모든 명시적 지침이 LLM에 의해 준수되었는지 확인합니다. ia_score가 높을수록 지침을 잘 준수한다는 의미입니다. 점수가 낮을수록 지침을 제대로 준수하지 않는 것입니다.</li>
-<li><strong>검색 관련성 점수</strong> (rr_score): 검색된 문서가 쿼리와 관련이 있는지 여부를 확인합니다. 100.0에 가까울수록 문서와 쿼리의 연관성이 완벽함을 의미하며, 0.0에 가까울수록 문서와 쿼리의 연관성이 낮음을 의미합니다.</li>
+<li><strong>검색 관련성 점수</strong> (rr_score): 검색된 문서가 쿼리와 관련이 있는지를 확인합니다. 100.0에 가까울수록 문서와 쿼리의 연관성이 완벽함을 의미하며, 0.0에 가까울수록 문서와 쿼리의 연관성이 낮음을 의미합니다.</li>
 </ol>
 <p><code translate="no">quality_score = 0.35 * (1.0 - hall_score) + 0.35 * ia_score + 0.3 * rr_score</code></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># We will check the LLM response against these instructions</span>
@@ -787,7 +787,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
         ></path>
       </svg>
     </button></h1><p>이제 AIMon의 LlamaIndex <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">포스트프로세서 리랭크 통합을</a> 사용하여 AIMon의 <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">도메인 적응형 리랭커를</a> 추가하겠습니다.</p>
-<p>아래 그림과 같이 리랭크는 고급 쿼리-문서 매칭 기능을 사용하여 가장 관련성이 높은 문서를 상위로 끌어올리는 데 도움이 됩니다. AIMon의 리랭크 기능은 도메인별로 사용자 지정할 수 있다는 점이 가장 큰 특징입니다. 엔지니어가 LLM에 메시지를 표시하는 것과 마찬가지로 <code translate="no">task_definition</code> 필드를 사용하여 도메인별로 리랭크 성능을 사용자 지정할 수 있습니다. 이 최신 리랭커는 1초 미만의 매우 짧은 지연 시간(~2k 컨텍스트의 경우)으로 실행되며 MTEB 리랭킹 리더보드에서 상위 5위 안에 드는 성능을 자랑합니다.</p>
+<p>아래 그림과 같이 리랭크는 고급 쿼리-문서 매칭 기능을 사용하여 가장 관련성이 높은 문서를 상위로 끌어올리는 데 도움이 됩니다. AIMon의 리랭크 기능은 도메인별로 사용자 지정할 수 있다는 점이 가장 큰 특징입니다. 엔지니어가 LLM에 메시지를 표시하는 것과 마찬가지로 <code translate="no">task_definition</code> 필드를 사용하여 도메인별로 리랭크 성능을 사용자 지정할 수 있습니다. 이 최신 리랭커는 1초 미만의 매우 짧은 지연 시간(~2k 컨텍스트의 경우)으로 실행되며 MTEB 리랭킹 순위표에서 상위 5위 안에 드는 성능을 자랑합니다.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
 
@@ -973,4 +973,4 @@ df_scores
   </tbody>
 </table>
 <p>위 표는 결과를 요약한 것입니다. 실제 수치는 LLM 응답의 품질 변화, 벡터DB에서 가장 가까운 이웃 검색의 성능 등 다양한 요인에 따라 달라질 수 있습니다.</p>
-<p>결론적으로, 아래 그림에서 볼 수 있듯이 품질 점수, RAG 관련성 및 LLM 애플리케이션의 명령어 추종 기능을 평가했습니다. AIMon의 리랭커를 사용하여 애플리케이션의 전반적인 품질과 RAG에서 검색된 문서의 평균 관련성을 개선했습니다.</p>
+<p>결론적으로, 아래 그림에서 볼 수 있듯이 품질 점수, RAG 관련성 및 LLM 애플리케이션의 명령어 추종 기능을 평가했습니다. 애플리케이션의 전반적인 품질과 RAG에서 검색된 문서의 평균 관련성을 개선하기 위해 AIMon의 리랭커를 사용했습니다.</p>

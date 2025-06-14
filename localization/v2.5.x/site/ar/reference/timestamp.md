@@ -5,6 +5,7 @@ summary: >-
   تعرّف على مفهوم الطابع الزمني والمعلمات الأربعة الرئيسية المتعلقة بالطابع
   الزمني في قاعدة بيانات متجه ميلفوس.
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">الطابع الزمني<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,5 +106,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>تعلم كيف <a href="/docs/ar/consistency.md">يتيح الطابع الزمني المضمون الاتساق القابل للضبط في Milvus</a></li>
+<li>تعلم كيف <a href="/docs/ar/v2.5.x/consistency.md">يتيح الطابع الزمني المضمون الاتساق القابل للضبط في Milvus</a></li>
 </ul>

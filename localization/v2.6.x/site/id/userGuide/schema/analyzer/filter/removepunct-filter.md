@@ -1,14 +1,15 @@
 ---
 id: removepunct-filter.md
-title: Hapus Tanda Baca
+title: Hapus Tanda BacaCompatible with Milvus 2.5.11+
 summary: >-
   Filter removepunct menghilangkan tanda baca, spasi, dan jeda baris yang
   biasanya disimpan oleh beberapa tokenizer-seperti jieba, lindera, dan icu.
   Gunakan filter ini ketika Anda menginginkan aliran token yang lebih bersih
   yang hanya berisi token teks yang bermakna, bebas dari koma, titik, dan tanda
   baca lainnya.
+beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Hapus Tanda Baca<button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Hapus Tanda Baca<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

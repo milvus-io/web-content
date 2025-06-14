@@ -4,6 +4,7 @@ title: MilvusクラスタをEC2にデプロイする
 related_key: cluster
 summary: AWSのEC2にMilvusクラスタをデプロイする方法をご紹介します。
 ---
+
 <h1 id="Deprecated-Deploy-a-Milvus-Cluster-on-EC2" class="common-anchor-header">(非推奨) MilvusクラスタをEC2にデプロイする<button data-href="#Deprecated-Deploy-a-Milvus-Cluster-on-EC2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ summary: AWSのEC2にMilvusクラスタをデプロイする方法をご紹介�
       </svg>
     </button></h1><p>このトピックでは、TerraformとAnsibleを使用して<a href="https://docs.aws.amazon.com/ec2/">Amazon EC</a>2にMilvusクラスタをデプロイする方法について説明します。</p>
 <div class="alert note">
-<p>このトピックは古く、すぐに削除される予定です。代わりに<a href="/docs/ja/eks.md">EKS上でのMilvusクラスタのデプロイを</a>参照することをお勧めします。</p>
+<p>このトピックは古く、すぐに削除される予定です。代わりに<a href="/docs/ja/v2.5.x/eks.md">EKS上でのMilvusクラスタのデプロイを</a>参照することをお勧めします。</p>
 </div>
 <h2 id="Provision-a-Milvus-cluster" class="common-anchor-header">Milvusクラスタのプロビジョニング<button data-href="#Provision-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,11 +82,12 @@ summary: AWSのEC2にMilvusクラスタをデプロイする方法をご紹介�
 }
 
 variable <span class="hljs-string">&quot;my_ip&quot;</span> {
-  description = <span class="hljs-string">&quot;my_ip for security group. used so that ansible and terraform can ssh in&quot;</span>
-  <span class="hljs-keyword">type</span>        = <span class="hljs-type">string</span>
-  <span class="hljs-keyword">default</span>     = <span class="hljs-string">&quot;x.x.x.x/32&quot;</span>
+description = <span class="hljs-string">&quot;my_ip for security group. used so that ansible and terraform can ssh in&quot;</span>
+<span class="hljs-keyword">type</span> = <span class="hljs-type">string</span>
+<span class="hljs-keyword">default</span> = <span class="hljs-string">&quot;x.x.x.x/32&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h4 id="Prepare-maintf" class="common-anchor-header">main.tf の準備</h4><p>このセクションでは、<code translate="no">main.tf</code> ファイルが含む設定について説明します。</p>
 <ul>
@@ -103,35 +105,36 @@ variable <span class="hljs-string">&quot;my_ip&quot;</span> {
   description = <span class="hljs-string">&quot;Allows only me to access&quot;</span>
   vpc_id      = aws_vpc.<span class="hljs-property">cluster_vpc</span>.<span class="hljs-property">id</span>
 
-  ingress {
-    description      = <span class="hljs-string">&quot;All ports from my IP&quot;</span>
-    from_port        = <span class="hljs-number">0</span>
-    to_port          = <span class="hljs-number">65535</span>
-    protocol         = <span class="hljs-string">&quot;tcp&quot;</span>
-    cidr_blocks      = [<span class="hljs-keyword">var</span>.<span class="hljs-property">my_ip</span>]
-  }
+ingress {
+description = <span class="hljs-string">&quot;All ports from my IP&quot;</span>
+from_port = <span class="hljs-number">0</span>
+to_port = <span class="hljs-number">65535</span>
+protocol = <span class="hljs-string">&quot;tcp&quot;</span>
+cidr_blocks = [<span class="hljs-keyword">var</span>.<span class="hljs-property">my_ip</span>]
+}
 
-  ingress {
-    description      = <span class="hljs-string">&quot;Full subnet communication&quot;</span>
-    from_port        = <span class="hljs-number">0</span>
-    to_port          = <span class="hljs-number">65535</span>
-    protocol         = <span class="hljs-string">&quot;all&quot;</span>
-    self             = <span class="hljs-literal">true</span>
-  }
+ingress {
+description = <span class="hljs-string">&quot;Full subnet communication&quot;</span>
+from_port = <span class="hljs-number">0</span>
+to_port = <span class="hljs-number">65535</span>
+protocol = <span class="hljs-string">&quot;all&quot;</span>
+self = <span class="hljs-literal">true</span>
+}
 
-  egress {
-    from_port        = <span class="hljs-number">0</span>
-    to_port          = <span class="hljs-number">0</span>
-    protocol         = <span class="hljs-string">&quot;-1&quot;</span>
-    cidr_blocks      = [<span class="hljs-string">&quot;0.0.0.0/0&quot;</span>]
-    ipv6_cidr_blocks = [<span class="hljs-string">&quot;::/0&quot;</span>]
-  }
+egress {
+from_port = <span class="hljs-number">0</span>
+to_port = <span class="hljs-number">0</span>
+protocol = <span class="hljs-string">&quot;-1&quot;</span>
+cidr_blocks = [<span class="hljs-string">&quot;0.0.0.0/0&quot;</span>]
+ipv6_cidr_blocks = [<span class="hljs-string">&quot;::/0&quot;</span>]
+}
 
-  tags = {
-    <span class="hljs-title class_">Name</span> = <span class="hljs-string">&quot;cluster_sg&quot;</span>
-  }
+tags = {
+<span class="hljs-title class_">Name</span> = <span class="hljs-string">&quot;cluster_sg&quot;</span>
+}
 }
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>VPC</p>
 <p>次のテンプレートは、milvusクラスタ上の10.0.0.0/24 CIDRブロックを持つVPCを指定します。</p>
 <pre><code translate="no" class="language-main.tf">resource <span class="hljs-string">&quot;aws_vpc&quot;</span> <span class="hljs-string">&quot;cluster_vpc&quot;</span> {
@@ -142,13 +145,14 @@ variable <span class="hljs-string">&quot;my_ip&quot;</span> {
 }
 
 resource <span class="hljs-string">&quot;aws_internet_gateway&quot;</span> <span class="hljs-string">&quot;cluster_gateway&quot;</span> {
-  vpc_id = aws_vpc.cluster_vpc.<span class="hljs-built_in">id</span>
+vpc_id = aws_vpc.cluster_vpc.<span class="hljs-built_in">id</span>
 
-  tags = {
-    Name = <span class="hljs-string">&quot;cluster_gateway&quot;</span>
-  }
+tags = {
+Name = <span class="hljs-string">&quot;cluster_gateway&quot;</span>
+}
 }
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>サブネット(オプション)</p>
 <p>以下のテンプレートは、トラフィックがインターネットゲートウェイにルーティングされるサブネットを宣言します。この場合、サブネットのCIDRブロックのサイズはVPCのCIDRブロックと同じです。</p>
 <pre><code translate="no" class="language-main.tf">resource <span class="hljs-string">&quot;aws_subnet&quot;</span> <span class="hljs-string">&quot;cluster_subnet&quot;</span> {
@@ -156,30 +160,31 @@ resource <span class="hljs-string">&quot;aws_internet_gateway&quot;</span> <span
   cidr_block              = <span class="hljs-string">&quot;10.0.0.0/24&quot;</span>
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = <span class="hljs-string">&quot;cluster_subnet&quot;</span>
-  }
+tags = {
+Name = <span class="hljs-string">&quot;cluster_subnet&quot;</span>
+}
 }
 
 resource <span class="hljs-string">&quot;aws_route_table&quot;</span> <span class="hljs-string">&quot;cluster_subnet_gateway_route&quot;</span> {
-  vpc_id       = aws_vpc.cluster_vpc.<span class="hljs-built_in">id</span>
+vpc_id = aws_vpc.cluster_vpc.<span class="hljs-built_in">id</span>
 
-  route {
-    cidr_block = <span class="hljs-string">&quot;0.0.0.0/0&quot;</span>
-    gateway_id = aws_internet_gateway.cluster_gateway.<span class="hljs-built_in">id</span>
-  }
+route {
+cidr_block = <span class="hljs-string">&quot;0.0.0.0/0&quot;</span>
+gateway_id = aws_internet_gateway.cluster_gateway.<span class="hljs-built_in">id</span>
+}
 
-  tags = {
-    Name = <span class="hljs-string">&quot;cluster_subnet_gateway_route&quot;</span>
-  }
+tags = {
+Name = <span class="hljs-string">&quot;cluster_subnet_gateway_route&quot;</span>
+}
 }
 
 resource <span class="hljs-string">&quot;aws_route_table_association&quot;</span> <span class="hljs-string">&quot;cluster_subnet_add_gateway&quot;</span> {
-  subnet_id      = aws_subnet.cluster_subnet.<span class="hljs-built_in">id</span>
-  route_table_id = aws_route_table.cluster_subnet_gateway_route.<span class="hljs-built_in">id</span>
+subnet_id = aws_subnet.cluster_subnet.<span class="hljs-built_in">id</span>
+route_table_id = aws_route_table.cluster_subnet_gateway_route.<span class="hljs-built_in">id</span>
 }
 
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>ノードインスタンス（ノード）</p>
 <p>次のテンプレートでは、MinIOノードインスタンスを宣言します。<code translate="no">main.tf</code> テンプレートファイルは、11のノードタイプのノードを宣言します。ノードタイプによっては、<code translate="no">root_block_device</code> を設定する必要があります。詳細は、「<a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#ebs-ephemeral-and-root-block-devices">EBS、エフェメラル、およびルートブロックデバイス</a>」を参照してください。</p>
 <pre><code translate="no" class="language-main.tf">resource <span class="hljs-string">&quot;aws_instance&quot;</span> <span class="hljs-string">&quot;minio_node&quot;</span> {
@@ -190,16 +195,17 @@ resource <span class="hljs-string">&quot;aws_route_table_association&quot;</span
   <span class="hljs-variable">subnet_id</span>     <span class="hljs-operator">=</span> aws_subnet.cluster_subnet.<span class="hljs-type">id</span> 
   <span class="hljs-variable">vpc_security_group_ids</span> <span class="hljs-operator">=</span> [aws_security_group.cluster_sg.id]
 
-  root_block_device {
-    volume_type = <span class="hljs-string">&quot;gp2&quot;</span>
-    volume_size = <span class="hljs-number">1000</span>
-  }
-  
-  tags = {
-    Name = <span class="hljs-string">&quot;minio-${count.index + 1}&quot;</span>
-  }
+root_block_device {
+volume_type = <span class="hljs-string">&quot;gp2&quot;</span>
+volume_size = <span class="hljs-number">1000</span>
+}
+
+tags = {
+Name = <span class="hljs-string">&quot;minio-${count.index + 1}&quot;</span>
+}
 }
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h3 id="Apply-the-configuration" class="common-anchor-header">設定の適用</h3><ol>
 <li><p>ターミナルを開き、<code translate="no">main.tf</code> を格納するフォルダに移動します。</p></li>
@@ -252,7 +258,7 @@ dockernode01
 dockernode02
 
 [<span class="hljs-meta">dependencies</span>] <span class="hljs-meta">#Add the host names of Milvus dependencies.</span>
-; dependencies node will host etcd, minio, pulsar, these <span class="hljs-number">3</span> roles are the foundation of Milvus. 
+; dependencies node will host etcd, minio, pulsar, these <span class="hljs-number">3</span> roles are the foundation of Milvus.
 ; Take note the IP of <span class="hljs-keyword">this</span> host VM, <span class="hljs-keyword">and</span> replace <span class="hljs-number">10.170</span><span class="hljs-number">.0</span><span class="hljs-number">.19</span> <span class="hljs-keyword">with</span> it.
 dockernode03
 
@@ -282,7 +288,7 @@ pulsar_ip= <span class="hljs-number">10.170</span><span class="hljs-number">.0</
 coords_ip= <span class="hljs-number">10.170</span><span class="hljs-number">.0</span><span class="hljs-number">.17</span>
 
 ; Setup container environment which later will be used <span class="hljs-keyword">in</span> container creation.
-ETCD_ENDPOINTS= {{etcd_ip}}:<span class="hljs-number">2379</span> 
+ETCD_ENDPOINTS= {{etcd_ip}}:<span class="hljs-number">2379</span>
 MINIO_ADDRESS= {{minio_ip}}:<span class="hljs-number">9000</span>
 PULSAR_ADDRESS= pulsar:<span class="hljs-comment">//{{pulsar_ip}}:6650</span>
 QUERY_COORD_ADDRESS= {{coords_ip}}:<span class="hljs-number">19531</span>
@@ -290,6 +296,7 @@ DATA_COORD_ADDRESS= {{coords_ip}}:<span class="hljs-number">13333</span>
 ROOT_COORD_ADDRESS= {{coords_ip}}:<span class="hljs-number">53100</span>
 INDEX_COORD_ADDRESS= {{coords_ip}}:<span class="hljs-number">31000</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h4 id="ansiblecfg" class="common-anchor-header"><code translate="no">ansible.cfg</code></h4><p><code translate="no">ansible.cfg</code> SSHキーなど、playbookのアクションを制御します。docker ホストでは SSH 鍵経由でパスフレーズを設定しないでください。さもないと、Ansible の SSH 接続に失敗します。3つのホストで同じユーザー名とSSHキーを設定し、新しいユーザーアカウントはパスワードなしでsudoを実行するように設定することをお勧めします。そうしないと、Ansible playbookの実行時に、ユーザー名がパスワードと一致しない、または昇格権限が付与されていないというエラーが発生します。</p>
 <pre><code translate="no">[defaults]
 host_key_checking = <span class="hljs-literal">False</span>
@@ -307,11 +314,10 @@ private_key_file=~/.my_ssh_keys/gpc_sshkey <span class="hljs-comment"># Specify 
     - configure-hosts-file
 
 - name: install docker
-  become: <span class="hljs-built_in">yes</span>
-  become_user: root
-  hosts: dockernodes
-  roles:
-    - docker-installation
+become: <span class="hljs-built_in">yes</span>
+become_user: root
+hosts: dockernodes
+roles: - docker-installation
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Test-Ansible-connectivity" class="common-anchor-header">Ansible接続のテスト</h3><p>Ansibleへの接続性をテストします。</p>
 <pre><code translate="no" class="language-shell">$ ansible <span class="hljs-built_in">all</span> -m ping
@@ -353,22 +359,23 @@ ok: [dockernode01]
 ok: [dockernode03]
 ok: [dockernode02]
 
-TASK [docker-installation : Install python3-docker] **************************************************************
+TASK [docker-installation : Install python3-docker] ******************************\*\*******************************
 ok: [dockernode01]
 ok: [dockernode02]
 ok: [dockernode03]
 
-TASK [docker-installation : Install docker-compose python3 library] **********************************************
+TASK [docker-installation : Install docker-compose python3 library] **********************\*\***********************
 changed: [dockernode01]
 changed: [dockernode03]
 changed: [dockernode02]
 
-PLAY RECAP *******************************************************************************************************
-ansible-controller         : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode01               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode02               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode03               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY RECAP **************************************************\*\*\***************************************************
+ansible-controller : ok=3 changed=0 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode01 : ok=10 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode02 : ok=10 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode03 : ok=10 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Verify-the-installation" class="common-anchor-header">インストールの確認</h3><p>SSHキーで3つのホストにログインし、ホストへのインストールを確認します。</p>
 <ul>
 <li>rootホストの場合：</li>
@@ -398,57 +405,58 @@ dockernode03               : ok=10   changed=1    unreachable=0    failed=0    s
 <p>ターミナルが戻る：</p>
 <pre><code translate="no">PLAY [Create milvus-etcd, minio, pulsar] *****************************************************************
 
-TASK [Gathering Facts] ********************************************************************************************
+TASK [Gathering Facts] ********************************************\*\*\*\*********************************************
 ok: [dockernode03]
 
-TASK [etcd] *******************************************************************************************************
+TASK [etcd] **************************************************\*\*\***************************************************
 changed: [dockernode03]
 
-TASK [pulsar] *****************************************************************************************************
+TASK [pulsar] **************************************************\***************************************************
 changed: [dockernode03]
 
-TASK [minio] ******************************************************************************************************
+TASK [minio] **************************************************\*\***************************************************
 changed: [dockernode03]
 
-PLAY [Create milvus nodes] ****************************************************************************************
+PLAY [Create milvus nodes] ******************************************\*\*\*\*******************************************
 
-TASK [Gathering Facts] ********************************************************************************************
+TASK [Gathering Facts] ********************************************\*\*\*\*********************************************
 ok: [dockernode02]
 
-TASK [querynode] **************************************************************************************************
+TASK [querynode] ************************************************\*\*************************************************
 changed: [dockernode02]
 
-TASK [datanode] ***************************************************************************************************
+TASK [datanode] ************************************************\*\*\*************************************************
 changed: [dockernode02]
 
-TASK [indexnode] **************************************************************************************************
+TASK [indexnode] ************************************************\*\*************************************************
 changed: [dockernode02]
 
-PLAY [Create milvus coords] ***************************************************************************************
+PLAY [Create milvus coords] ******************************************\*\*\*******************************************
 
-TASK [Gathering Facts] ********************************************************************************************
+TASK [Gathering Facts] ********************************************\*\*\*\*********************************************
 ok: [dockernode01]
 
-TASK [rootcoord] **************************************************************************************************
+TASK [rootcoord] ************************************************\*\*************************************************
 changed: [dockernode01]
 
-TASK [datacoord] **************************************************************************************************
+TASK [datacoord] ************************************************\*\*************************************************
 changed: [dockernode01]
 
-TASK [querycoord] *************************************************************************************************
+TASK [querycoord] ************************************************\*************************************************
 changed: [dockernode01]
 
-TASK [indexcoord] *************************************************************************************************
+TASK [indexcoord] ************************************************\*************************************************
 changed: [dockernode01]
 
-TASK [proxy] ******************************************************************************************************
+TASK [proxy] **************************************************\*\***************************************************
 changed: [dockernode01]
 
-PLAY RECAP ********************************************************************************************************
-dockernode01               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode02               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-dockernode03               : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY RECAP **************************************************\*\*\*\***************************************************
+dockernode01 : ok=6 changed=5 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode02 : ok=4 changed=3 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
+dockernode03 : ok=4 changed=3 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 <button class="copy-code-btn"></button></code></pre>
+
 <p>これで3つのホストにMilvusがデプロイされた。</p>
 <h2 id="Stop-nodes" class="common-anchor-header">ノードの停止<button data-href="#Stop-nodes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -488,7 +496,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>Milvusを他のクラウドにデプロイする方法を学びたい場合：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">EKSへのMilvusクラスタのデプロイ</a></li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCP上にMilvusクラスタをデプロイする</a></li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイするガイド</a></li>
+<li><a href="/docs/ja/v2.5.x/eks.md">EKSへのMilvusクラスタのデプロイ</a></li>
+<li><a href="/docs/ja/v2.5.x/gcp.md">Kubernetesを使ってGCP上にMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.5.x/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイするガイド</a></li>
 </ul>

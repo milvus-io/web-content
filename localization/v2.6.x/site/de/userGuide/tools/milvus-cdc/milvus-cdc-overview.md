@@ -88,7 +88,7 @@ title: CDC-Übersicht
 <li><p><strong>Aufgabenerstellung</strong>: Benutzer initiieren eine CDC-Aufgabe über HTTP-Anfragen.</p></li>
 <li><p><strong>Abruf von Metadaten</strong>: Das System holt sammlungsspezifische Metadaten aus dem etcd der Milvus-Quelle, einschließlich Kanal- und Checkpoint-Informationen für die Sammlung.</p></li>
 <li><p><strong>MQ-Verbindung</strong>: Mit den vorliegenden Metadaten stellt das System eine Verbindung zum MQ her, um mit dem Abonnieren des Datenstroms zu beginnen.</p></li>
-<li><p><strong>Verarbeitung der Daten</strong>: Die Daten aus dem MQ werden gelesen, geparst und entweder mit dem Go-SDK weitergegeben oder verarbeitet, um die in der Milvus-Quelle durchgeführten Operationen zu replizieren.</p></li>
+<li><p><strong>Verarbeitung der Daten</strong>: Die Daten aus dem MQ werden gelesen, geparst und entweder mit dem Go SDK weitergegeben oder verarbeitet, um die in der Milvus-Quelle durchgeführten Operationen zu replizieren.</p></li>
 </ol>
 <p>
   

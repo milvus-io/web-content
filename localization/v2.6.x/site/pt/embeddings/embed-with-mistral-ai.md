@@ -22,7 +22,7 @@ title: Mistral AI
         ></path>
       </svg>
     </button></h1><p>Os modelos de incorporação da<a href="https://mistral.ai/">Mistral AI</a> são modelos de incorporação de texto projetados para converter entradas textuais em vetores numéricos densos, capturando efetivamente o significado subjacente do texto. Estes modelos são altamente optimizados para tarefas como a pesquisa semântica, a compreensão da linguagem natural e as aplicações sensíveis ao contexto, o que os torna adequados para uma vasta gama de soluções alimentadas por IA.</p>
-<p>Milvus integra-se com os modelos de incorporação da Mistral AI através da classe MistralAIEmbeddingFunction. Essa classe fornece métodos para codificar documentos e consultas usando os modelos de incorporação da Mistral AI e retornando as incorporações como vetores densos compatíveis com a indexação Milvus. Para utilizar essa funcionalidade, obtenha uma chave de API da <a href="https://console.mistral.ai/">Mistral AI</a>.</p>
+<p>Milvus integra-se com os modelos de incorporação da Mistral AI através da classe MistralAIEmbeddingFunction. Essa classe fornece métodos para codificar documentos e consultas usando os modelos de incorporação do Mistral AI e retornando as incorporações como vetores densos compatíveis com a indexação Milvus. Para utilizar essa funcionalidade, obtenha uma chave de API da <a href="https://console.mistral.ai/">Mistral AI</a>.</p>
 <p>Para usar esse recurso, instale as dependências necessárias:</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

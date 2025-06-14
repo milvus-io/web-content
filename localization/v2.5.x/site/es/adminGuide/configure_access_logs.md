@@ -2,6 +2,7 @@
 id: configure_access_logs.md
 title: Configurar registros de acceso
 ---
+
 <h1 id="Configure-Access-Logs" class="common-anchor-header">Configurar registros de acceso<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,9 +22,9 @@ title: Configurar registros de acceso
 <p>Esta guía proporciona instrucciones detalladas para configurar los registros de acceso en Milvus.</p>
 <p>La configuración de los registros de acceso depende del método de instalación de Milvus:</p>
 <ul>
-<li><strong>Instalación de Helm</strong>: Configure en <code translate="no">values.yaml</code>. Para obtener más información, consulte <a href="/docs/es/configure-helm.md">Configurar Milvus con gráficos Helm</a>.</li>
-<li><strong>Instalación de Docker</strong>: Configure en <code translate="no">milvus.yaml</code>. Para más información, consulte <a href="/docs/es/configure-docker.md">Configurar Milvus con Docker Compose</a>.</li>
-<li><strong>Instalación de Operador</strong>: Modifique <code translate="no">spec.components</code> en el archivo de configuración. Para más información, consulte <a href="/docs/es/configure_operator.md">Configurar Milvus con Milvus Operator</a>.</li>
+<li><strong>Instalación de Helm</strong>: Configure en <code translate="no">values.yaml</code>. Para obtener más información, consulte <a href="/docs/es/v2.5.x/configure-helm.md">Configurar Milvus con gráficos Helm</a>.</li>
+<li><strong>Instalación de Docker</strong>: Configure en <code translate="no">milvus.yaml</code>. Para más información, consulte <a href="/docs/es/v2.5.x/configure-docker.md">Configurar Milvus con Docker Compose</a>.</li>
+<li><strong>Instalación de Operador</strong>: Modifique <code translate="no">spec.components</code> en el archivo de configuración. Para más información, consulte <a href="/docs/es/v2.5.x/configure_operator.md">Configurar Milvus con Milvus Operator</a>.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Opciones de configuración<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

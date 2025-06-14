@@ -135,7 +135,7 @@ summary: Milvusのストリーミング設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        walブロードキャスターのCPU数に基づく同時実行比率、デフォルトは1。      </td>
+      <td>        walブロードキャスターのCPU数に基づく同時実行率、デフォルトは1。      </td>
       <td>1</td>
     </tr>
   </tbody>

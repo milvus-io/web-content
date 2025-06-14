@@ -115,7 +115,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <p><code translate="no">MilvusClient</code> 의 인수를 사용합니다:</p>
 <ul>
 <li><code translate="no">uri</code> 을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 모든 데이터를 이 파일에 저장하기 때문입니다.</li>
-<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 고성능의 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
+<li>데이터의 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
 <li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정하세요.</li>
 </ul>
 </div>
@@ -226,7 +226,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>프롬프트에 따라 응답을 생성하려면 Lepton AI에서 제공하는 <code translate="no">mistral-7b</code> 모델을 사용합니다.</p>
+<p>Lepton AI에서 제공하는 <code translate="no">mistral-7b</code> 모델을 사용하여 프롬프트에 따라 응답을 생성합니다.</p>
 <pre><code translate="no" class="language-python">response = lepton_client.chat.completions.create(
     model=<span class="hljs-string">&quot;mistral-7b&quot;</span>,
     messages=[

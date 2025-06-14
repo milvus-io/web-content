@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.2.0/milvus-operator-1.2.0.tgz</span>
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1/milvus-operator-1.3.0-rc1.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You will see the output similar to the following after the installation process ends.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
@@ -108,6 +108,14 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>If you have installed Milvus Operator before, upgrade it using the following command:</p>
+<pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
+  -n milvus-operator --create-namespace \
+  --wait --wait-for-jobs \
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1/milvus-operator-1.3.0-rc1.tgz
+<button class="copy-code-btn"></button></code></pre>
+</div>
 <h3 id="Install-with-kubectl" class="common-anchor-header">Install with kubectl</h3><p>Run the following command to install Milvus Operator with <code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -194,32 +202,19 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <p>Once your Milvus cluster is ready, the status of all pods in the Milvus cluster should be similar to the following.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
-NAME                                            READY   STATUS      RESTARTS   AGE
-my-release-etcd-0                               1/1     Running     0          14m
-my-release-etcd-1                               1/1     Running     0          14m
-my-release-etcd-2                               1/1     Running     0          14m
-my-release-milvus-datanode-5c686bd65-wxtmf      1/1     Running     0          6m
-my-release-milvus-indexnode-5b9787b54-xclbx     1/1     Running     0          6m
-my-release-milvus-proxy-84f67cdb7f-pg6wf        1/1     Running     0          6m
-my-release-milvus-querynode-5bcb59f6-nhqqw      1/1     Running     0          6m
-my-release-milvus-mixcoord-fdcccfc84-9964g      1/1     Running     0          6m
-my-release-minio-0                              1/1     Running     0          14m
-my-release-minio-1                              1/1     Running     0          14m
-my-release-minio-2                              1/1     Running     0          14m
-my-release-minio-3                              1/1     Running     0          14m
-my-release-pulsar-bookie-0                      1/1     Running     0          14m
-my-release-pulsar-bookie-1                      1/1     Running     0          14m
-my-release-pulsar-bookie-init-h6tfz             0/1     Completed   0          14m
-my-release-pulsar-broker-0                      1/1     Running     0          14m
-my-release-pulsar-broker-1                      1/1     Running     0          14m
-my-release-pulsar-proxy-0                       1/1     Running     0          14m
-my-release-pulsar-proxy-1                       1/1     Running     0          14m
-my-release-pulsar-pulsar-init-d2t56             0/1     Completed   0          14m
-my-release-pulsar-recovery-0                    1/1     Running     0          14m
-my-release-pulsar-toolset-0                     1/1     Running     0          14m
-my-release-pulsar-zookeeper-0                   1/1     Running     0          14m
-my-release-pulsar-zookeeper-1                   1/1     Running     0          13m
-my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
+NAME                                             READY   STATUS    RESTARTS   AGE
+my-release-etcd-0                                1/1     Running   0          2m36s
+my-release-etcd-1                                1/1     Running   0          2m36s
+my-release-etcd-2                                1/1     Running   0          2m36s
+my-release-milvus-datanode-58955c65b9-j4j7s      1/1     Running   0          92s
+my-release-milvus-mixcoord-686f84968f-jcv5d      1/1     Running   0          92s
+my-release-milvus-proxy-646f48fc7c-4lctb         1/1     Running   0          92s
+my-release-milvus-querynode-0-d89d7677b-x7j7q    1/1     Running   0          91s
+my-release-milvus-streamingnode-556bdcc87c-2qwcc 1/1     Running   0          92s
+my-release-minio-0                               1/1     Running   0          2m36s
+my-release-minio-1                               1/1     Running   0          2m36s
+my-release-minio-2                               1/1     Running   0          2m35s
+my-release-minio-3                               1/1     Running   0          2m35s
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Forward a local port to Milvus</h3><p>Run the following command to get the port at which your Milvus cluster serves.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pod my-release-milvus-proxy-84f67cdb7f-pg6wf --template</span>
@@ -307,7 +302,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">Uninstall with Helm</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm -n milvus-operator uninstall milvus-operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Uninstall with kubectl</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.2.0/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Uninstall with kubectl</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0-rc1/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

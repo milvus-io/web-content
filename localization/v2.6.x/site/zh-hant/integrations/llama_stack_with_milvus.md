@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/meta-llama/llama-stack/tree/main">Llama Stack</a>是一種以服務為導向、API 為先的方法，可用於建立生產型 AI 應用程式。它提供了一個通用的堆疊，讓開發人員可以隨處開發、隨處部署，並利用生產就緒的構建區塊，真正獨立於提供商。Llama Stack 著重於 Meta 的 Llama 模型、可複合性、生產就绪性以及合作生態系統。</p>
-<p>在本教程中，我們將介紹如何使用 Milvus 建立 Llama Stack 伺服器，讓您能夠匯入私人資料作為知識庫。然後，我們將在伺服器上執行查詢，建立完整的 RAG 應用程式。</p>
+<p>在本教程中，我們將介紹如何使用 Milvus 建立 Llama Stack 伺服器，讓您能夠匯入私人資料作為您的知識庫。然後，我們將在伺服器上執行查詢，建立完整的 RAG 應用程式。</p>
 <h2 id="Preparing-the-Environment" class="common-anchor-header">準備環境<button data-href="#Preparing-the-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -102,7 +102,7 @@ $ pip install -e .
 <p>將產生檔案<code translate="no">~/.llama/distributions/together/together-run.yaml</code> 。然後，執行此指令啟動伺服器：</p>
 <pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>如果一切順利，您應該會看到 Llama Stack 伺服器成功在 8321 連接埠上執行。</p>
+<p>如果一切順利，您應該會看到 Llama Stack 伺服器在 8321 連接埠成功執行。</p>
 <h2 id="Perform-RAG-from-client" class="common-anchor-header">從用戶端執行 RAG<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

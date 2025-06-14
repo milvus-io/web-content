@@ -133,7 +133,7 @@ summary: >-
 <li><a href="/docs/id/single-vector-search.md#Range-search">Pencarian Rentang</a>: Menemukan vektor dalam radius tertentu dari vektor kueri Anda.</li>
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>: Melakukan pencarian ANN berdasarkan beberapa bidang vektor.</li>
 <li><a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>: Pencarian teks lengkap berdasarkan BM25.</li>
-<li><a href="/docs/id/reranking.md">Pemeringkatan ulang</a>: Menyesuaikan urutan hasil pencarian berdasarkan kriteria tambahan atau algoritme sekunder, menyempurnakan hasil pencarian ANN awal.</li>
+<li><a href="/docs/id/weighted-ranker.md">Pemeringkatan ulang</a>: Menyesuaikan urutan hasil pencarian berdasarkan kriteria tambahan atau algoritme sekunder, menyempurnakan hasil pencarian ANN awal.</li>
 <li><a href="/docs/id/get-and-scalar-query.md#Get-Entities-by-ID">Ambil</a>: Mengambil data berdasarkan kunci utamanya.</li>
 <li><a href="/docs/id/get-and-scalar-query.md#Use-Basic-Operators">Query</a>: Mengambil data menggunakan ekspresi tertentu.</li>
 </ul>

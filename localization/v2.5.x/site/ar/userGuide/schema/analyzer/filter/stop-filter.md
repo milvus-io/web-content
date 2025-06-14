@@ -6,6 +6,7 @@ summary: >-
   التخلص من الكلمات الشائعة الأقل معنى. يمكنك تكوين قائمة كلمات التوقف باستخدام
   معلمة stop_words.
 ---
+
 <h1 id="Stop" class="common-anchor-header">التوقف<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,6 +90,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>يقبل عامل التصفية <code translate="no">stop</code> المعلمات التالية القابلة للتكوين.</p>
 <table>
    <tr>
@@ -106,8 +108,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
 </ul></td>
    </tr>
 </table>
-<p>يعمل عامل التصفية <code translate="no">stop</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز. للحصول على قائمة بأدوات الترميز المتوفرة في ميلفوس، راجع <a href="/docs/ar/standard-tokenizer.md">أداة الترميز القياسية</a> وصفحاتها الشقيقة.</p>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لـ Milvus بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل ترميز وتصفية فعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
+<p>يعمل عامل التصفية <code translate="no">stop</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز. للحصول على قائمة بأدوات الترميز المتوفرة في ميلفوس، راجع <a href="/docs/ar/v2.5.x/standard-tokenizer.md">أداة الترميز القياسية</a> وصفحاتها الشقيقة.</p>
+<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لـ Milvus بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل ترميز وتصفية فعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.5.x/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,6 +166,7 @@ sample_text = <span class="hljs-string">&quot;The stop filter allows control ove
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>

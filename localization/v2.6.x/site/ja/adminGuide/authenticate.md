@@ -21,7 +21,7 @@ title: ユーザアクセスの認証
     </button></h1><p>このガイドでは、認証の有効化、ユーザーとしての接続、ユーザー認証情報の変更など、Milvusにおけるユーザー認証の管理方法について説明します。</p>
 <div class="alert note">
 <ul>
-<li><p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザ認証とTLSの両方を有効にした場合、ユーザ名、パスワード、証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、<a href="/docs/ja/tls.md">Encryption in Transitを</a>参照してください。</p></li>
+<li><p>TLSとユーザ認証は、2つの異なるセキュリティアプローチです。Milvusシステムでユーザ認証とTLSの両方を有効にした場合、ユーザ名、パスワード、証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、<a href="/docs/ja/tls.md">Encryption in Transitを</a>参照してください。</p></li>
 <li><p>このページのコードスニペットでは、新しい<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a>(Python)を使用してMilvusと対話します。他の言語用の新しいMilvusClient SDKは今後のアップデートでリリースされる予定です。</p></li>
 </ul>
 </div>
@@ -184,7 +184,7 @@ client.update_password(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>ユーザパスワードの更新については、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>を参照してください。</p>
-<p>古いパスワードを忘れてしまった場合、Milvusは特定のユーザーをスーパーユーザーとして指定できる設定項目を提供しています。これにより、パスワード再設定時に古いパスワードを入力する必要がなくなります。</p>
+<p>古いパスワードを忘れてしまった場合、Milvusには特定のユーザーをスーパーユーザーとして指定できる設定項目があります。これにより、パスワード再設定時に古いパスワードを入力する必要がなくなります。</p>
 <p>デフォルトでは、Milvus設定ファイルの<code translate="no">common.security.superUsers</code> フィールドは空です。つまり、全てのユーザはパスワードリセット時に古いパスワードを入力する必要があります。ただし、特定のユーザーをスーパーユーザーとして指定することで、古いパスワードを入力する必要がなくなります。以下のスニペットでは、<code translate="no">root</code> と<code translate="no">foo</code> がスーパーユーザーとして指定されています。</p>
 <p>Milvusインスタンスの実行を管理するMilvus設定ファイルに以下の設定項目を追加してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
@@ -269,8 +269,8 @@ client.list_users()
 <li>次の方法もご覧ください：<ul>
 <li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
 </ul></li>
-<li>クラウド上にクラスターをデプロイする準備が整いましたら、次の方法をご覧ください：<ul>
-<li><a href="/docs/ja/eks.md">Terraformを使用してAmazon EKSにMilvusをデプロイ</a>する方法を学びます。</li>
+<li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法もご覧ください：<ul>
+<li><a href="/docs/ja/eks.md">Terraformを使用してAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
 <li><a href="/docs/ja/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
 <li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>

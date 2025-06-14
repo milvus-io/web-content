@@ -3,6 +3,7 @@ id: main_components.md
 summary: Conoscere i componenti principali di Milvus standalone e cluster.
 title: Componenti principali
 ---
+
 <h1 id="Main-Components" class="common-anchor-header">Componenti principali<button data-href="#Main-Components" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,5 +95,5 @@ title: Componenti principali
         ></path>
       </svg>
     </button></h2><ul>
-<li>Leggere <a href="/docs/it/four_layers.md">Computing/Storage Disaggregation</a> per comprendere il meccanismo e il principio di progettazione di Milvus.</li>
+<li>Leggere <a href="/docs/it/v2.5.x/four_layers.md">Computing/Storage Disaggregation</a> per comprendere il meccanismo e il principio di progettazione di Milvus.</li>
 </ul>

@@ -72,6 +72,6 @@ title: Configurare la Chunk Cache
 <p>Si noti che le impostazioni della cache dei chunk si applicano anche quando vengono inseriti nuovi dati nelle raccolte o vengono ricostruiti gli indici delle raccolte.</p>
 <h3 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI</h3><ul>
 <li><p><strong>Come posso determinare se il meccanismo della chunk cache funziona correttamente?</strong></p>
-<p>Si consiglia di verificare la latenza di una richiesta di ricerca o di query dopo il caricamento di una raccolta. Se la latenza è significativamente più alta del previsto (ad esempio, diversi secondi), ciò potrebbe indicare che il meccanismo della cache dei chunk è ancora in funzione.</p>
+<p>Si consiglia di verificare la latenza di una richiesta di ricerca o di query dopo il caricamento di una raccolta. Se la latenza è significativamente più alta del previsto (ad esempio, diversi secondi), potrebbe indicare che il meccanismo della cache dei chunk è ancora in funzione.</p>
 <p>Se la latenza della query rimane elevata per un lungo periodo di tempo. È possibile controllare il throughput dello storage degli oggetti per verificare che la cache dei chunk sia ancora funzionante. In casi normali, la cache chunk funzionante genererà un throughput elevato sullo storage degli oggetti. In alternativa, è possibile provare la cache chunk in modalità <code translate="no">sync</code>.</p></li>
 </ul>

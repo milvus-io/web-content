@@ -377,7 +377,7 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;tags&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>L'esempio precedente presuppone che nell'insieme di destinazione siano presenti un campo <code translate="no">user</code> di tipo <strong>VarChar</strong> e un campo <code translate="no">tags</code> di tipo <strong>Array</strong>. La query restituirà gli utenti con <code translate="no">kimchy</code> nel nome con un tag <code translate="no">production</code>.</p>
+<p>L'esempio precedente presuppone che nell'insieme di destinazione siano presenti un campo <code translate="no">user</code> di tipo <strong>VarChar</strong> e un campo <code translate="no">tags</code> di tipo <strong>Array</strong>. La query restituirà gli utenti con <code translate="no">kimchy</code> nel nome e con il tag <code translate="no">production</code>.</p>
 <h2 id="Vector-queries" class="common-anchor-header">Query vettoriali<button data-href="#Vector-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -461,8 +461,8 @@ res = client.query(
 <li><p>Una ricerca standard basata sui termini per i documenti contenenti il termine <code translate="no">&quot;shoes&quot;</code> nel campo <code translate="no">text</code>.</p></li>
 <li><p>Una ricerca kNN sul campo <code translate="no">vector</code> utilizzando il vettore di query fornito.</p></li>
 </ul>
-<p>Ciascun retriever contribuisce con un massimo di 50 top match, che vengono riclassificati da RRF e i 10 risultati finali vengono restituiti.</p>
-<p>In Milvus è possibile ottenere una ricerca ibrida simile, combinando le ricerche su più campi vettoriali, applicando una strategia di reranking e recuperando i risultati top-K dall'elenco combinato. Milvus supporta sia le strategie di reranking RRF che quelle ponderate. Per maggiori dettagli, consultare <a href="/docs/it/reranking.md">Reranking</a>.</p>
+<p>Ciascun retriever contribuisce con un massimo di 50 top match, che vengono riclassificati da RRF, per poi restituire i primi 10 risultati finali.</p>
+<p>In Milvus è possibile ottenere una ricerca ibrida simile, combinando le ricerche su più campi vettoriali, applicando una strategia di reranking e recuperando i risultati top-K dall'elenco combinato. Milvus supporta sia le strategie di reranking RRF che quelle ponderate. Per maggiori dettagli, consultare <a href="/docs/it/weighted-ranker.md">Reranking</a>.</p>
 <p>Di seguito viene presentata un'equivalenza non rigorosa dell'esempio Elasticsearch di cui sopra in Milvus.</p>
 <pre><code translate="no" class="language-python">search_params_dense = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">1.25</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3.5</span>]],
