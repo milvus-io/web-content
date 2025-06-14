@@ -117,7 +117,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <ul>
 <li><p>To deploy a Milvus instance in standalone mode, run the following command:</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v{{ milvus_release_version }} \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0-rc1 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -135,7 +135,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 </li>
 <li><p>To deploy a Milvus instance in cluster mode, run the following command:</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v{{ milvus_release_version }} \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0-rc1 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
