@@ -189,32 +189,19 @@ Once your Milvus cluster is ready, the status of all pods in the Milvus cluster 
 ```shell
 $ kubectl get pods
 
-NAME                                            READY   STATUS      RESTARTS   AGE
-my-release-etcd-0                               1/1     Running     0          14m
-my-release-etcd-1                               1/1     Running     0          14m
-my-release-etcd-2                               1/1     Running     0          14m
-my-release-milvus-datanode-5c686bd65-wxtmf      1/1     Running     0          6m
-my-release-milvus-indexnode-5b9787b54-xclbx     1/1     Running     0          6m
-my-release-milvus-proxy-84f67cdb7f-pg6wf        1/1     Running     0          6m
-my-release-milvus-querynode-5bcb59f6-nhqqw      1/1     Running     0          6m
-my-release-milvus-mixcoord-fdcccfc84-9964g      1/1     Running     0          6m
-my-release-minio-0                              1/1     Running     0          14m
-my-release-minio-1                              1/1     Running     0          14m
-my-release-minio-2                              1/1     Running     0          14m
-my-release-minio-3                              1/1     Running     0          14m
-my-release-pulsar-bookie-0                      1/1     Running     0          14m
-my-release-pulsar-bookie-1                      1/1     Running     0          14m
-my-release-pulsar-bookie-init-h6tfz             0/1     Completed   0          14m
-my-release-pulsar-broker-0                      1/1     Running     0          14m
-my-release-pulsar-broker-1                      1/1     Running     0          14m
-my-release-pulsar-proxy-0                       1/1     Running     0          14m
-my-release-pulsar-proxy-1                       1/1     Running     0          14m
-my-release-pulsar-pulsar-init-d2t56             0/1     Completed   0          14m
-my-release-pulsar-recovery-0                    1/1     Running     0          14m
-my-release-pulsar-toolset-0                     1/1     Running     0          14m
-my-release-pulsar-zookeeper-0                   1/1     Running     0          14m
-my-release-pulsar-zookeeper-1                   1/1     Running     0          13m
-my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
+NAME                                             READY   STATUS    RESTARTS   AGE
+my-release-etcd-0                                1/1     Running   0          2m36s
+my-release-etcd-1                                1/1     Running   0          2m36s
+my-release-etcd-2                                1/1     Running   0          2m36s
+my-release-milvus-datanode-58955c65b9-j4j7s      1/1     Running   0          92s
+my-release-milvus-mixcoord-686f84968f-jcv5d      1/1     Running   0          92s
+my-release-milvus-proxy-646f48fc7c-4lctb         1/1     Running   0          92s
+my-release-milvus-querynode-0-d89d7677b-x7j7q    1/1     Running   0          91s
+my-release-milvus-streamingnode-556bdcc87c-2qwcc 1/1     Running   0          92s
+my-release-minio-0                               1/1     Running   0          2m36s
+my-release-minio-1                               1/1     Running   0          2m36s
+my-release-minio-2                               1/1     Running   0          2m35s
+my-release-minio-3                               1/1     Running   0          2m35s
 ```
 
 ### 3. Forward a local port to Milvus

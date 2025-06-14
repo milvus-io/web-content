@@ -139,7 +139,7 @@ To upgrade Milvus from a minor release before v2.2.3 to the latest, run the foll
 
 ```shell
 helm repo update zilliztech
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.1.24 # use the helm chart version here
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.2.53 # use the helm chart version here
 ```
 
 Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).
