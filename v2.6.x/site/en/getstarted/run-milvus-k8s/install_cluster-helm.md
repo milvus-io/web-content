@@ -77,7 +77,7 @@ Once you have installed the Helm chart, you can start Milvus on Kubernetes. This
 
   ```bash
   helm install my-release milvus/milvus \
-    --set image.all.tag=v{{ milvus_release_version }} \
+    --set image.all.tag=v2.6.0-rc1 \
     --set cluster.enabled=false \
     --set pulsarv3.enabled=false \
     --set standalone.messageQueue=woodpecker \
@@ -100,7 +100,7 @@ Once you have installed the Helm chart, you can start Milvus on Kubernetes. This
 
   ```bash
   helm install my-release milvus/milvus \
-    --set image.all.tag=v{{ milvus_release_version }} \
+    --set image.all.tag=v2.6.0-rc1 \
     --set streaming.enabled=true \
     --set indexNode.enabled=false
   ```
