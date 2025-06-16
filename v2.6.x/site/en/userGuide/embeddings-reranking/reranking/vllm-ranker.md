@@ -74,10 +74,36 @@ vllm_ranker = Function(
         "provider": "vllm",         # Specifies vLLM service
         "queries": ["renewable energy developments"],  # Query text
         "endpoint": "http://localhost:8080",  # vLLM service address
-       # "maxBatch": 64              # Optional: batch size
+        "maxBatch": 64,              # Optional: batch size
+        "truncate_prompt_tokens": 256,  # Optional: Use last 256 tokens
     }
 )
 ```
+
+### vLLM ranker-specific parameters
+
+The following parameters are specific to the vLLM ranker:
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Required?</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value / Example</p></th>
+   </tr>
+   <tr>
+     <td><p><code>truncate_prompt_tokens</code></p></td>
+     <td><p>No</p></td>
+     <td><p>If set to an integer <em>k</em>, will use only the last <em>k</em> tokens from the prompt (i.e., left truncation). Defaults to None (i.e., no truncation).</p></td>
+     <td><p><code>256</code></p></td>
+   </tr>
+</table>
+
+<div class="alert note">
+
+For general parameters shared across all model rankers (e.g., `provider`, `queries`), refer to [Create a model ranker](model-ranker-overview.md#Create-a-model-ranker).
+
+</div>
 
 ## Apply to standard vector search
 
@@ -125,6 +151,7 @@ hybrid_results = client.hybrid_search(
     collection_name="your_collection",
     [dense_search, sparse_search],              # Multiple search requests
     ranker=vllm_ranker,                        # Apply vLLM reranking to combined results
+    #  highlight-next-line
     limit=5,                                   # Final number of results
     output_fields=["document"]
 )

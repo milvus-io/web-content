@@ -41,10 +41,47 @@ tei_ranker = Function(
         "provider": "tei",                 # Specifies TEI as the service provider
         "queries": ["renewable energy developments"],  # Query text for relevance evaluation
         "endpoint": "http://localhost:8080",  # Your TEI service URL
-        "maxBatch": 32                     # Optional: batch size for processing (default: 32)
+        "maxBatch": 32,                    # Optional: batch size for processing (default: 32)
+        "truncate": True,                # Optional: Truncate the inputs that are longer than the maximum supported size
+        "truncation_direction": "Right",    # Optional: Direction to truncate the inputs
     }
 )
 ```
+
+### TEI ranker-specific parameters
+
+The following parameters are specific to the TEI ranker:
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Required?</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value / Example</p></th>
+   </tr>
+   <tr>
+     <td><p><code>truncate</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Whether to truncate inputs exceeding max sequence length. If <code>False</code>, long inputs raise errors.</p></td>
+     <td><p><code>True</code> or <code>False</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>truncation_direction</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Direction to truncate from when input is too long:</p>
+<ul>
+<li><p><code>"Right"</code> (default):  Tokens are removed from the end of the sequence until the maximum supported size is matched.</p></li>
+<li><p><code>"Left"</code>: Tokens are removed from the beginning of the sequence.</p></li>
+</ul></td>
+     <td><p><code>"Right"</code> or <code>"Left"</code></p></td>
+   </tr>
+</table>
+
+<div class="alert note">
+
+For general parameters shared across all model rankers (e.g., `provider`, `queries`), refer to [Create a model ranker](model-ranker-overview.md#Create-a-model-ranker).
+
+</div>
 
 ## Apply to standard vector search
 
