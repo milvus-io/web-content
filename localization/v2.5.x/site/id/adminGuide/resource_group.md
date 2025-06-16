@@ -90,10 +90,10 @@ title: Mengelola Grup Sumber Daya
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.5.10. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
+<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.5.11. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
 </div>
 <ol>
-<li><p>Membuat sebuah grup sumber daya.</p>
+<li><p>Membuat grup sumber daya.</p>
 <p>Untuk membuat grup sumber daya, jalankan kode berikut setelah Anda terhubung ke sebuah instans Milvus. Cuplikan berikut ini mengasumsikan bahwa <code translate="no">default</code> adalah nama alias dari koneksi Milvus Anda.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
@@ -181,7 +181,7 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
 <p>Perhatikan bahwa <code translate="no">_resource_groups</code> adalah parameter opsional, dan jika tidak ditentukan, Milvus akan memuat replika ke node kueri dalam grup sumber daya default.</p>
-<p>Agar Milus memuat setiap replika koleksi dalam grup sumber daya yang terpisah, pastikan jumlah grup sumber daya sama dengan jumlah replika.</p></li>
+<p>Agar Milus memuat setiap replika koleksi dalam kelompok sumber daya yang terpisah, pastikan jumlah kelompok sumber daya sama dengan jumlah replika.</p></li>
 <li><p>Mentransfer replika di antara grup sumber daya.</p>
 <p>Milvus menggunakan <a href="/docs/id/replica.md">replika</a> untuk mencapai penyeimbangan beban di antara <a href="/docs/id/glossary.md#Segment">segmen-segmen</a> yang didistribusikan di beberapa node kueri. Anda dapat memindahkan replika tertentu dari sebuah koleksi dari satu grup sumber daya ke grup sumber daya lainnya sebagai berikut:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>

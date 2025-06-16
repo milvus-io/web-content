@@ -90,7 +90,7 @@ title: Gestire i gruppi di risorse
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.5.10. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
+<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.5.11. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
 </div>
 <ol>
 <li><p>Creare un gruppo di risorse.</p>
@@ -180,7 +180,7 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 <span class="hljs-comment"># Use the load method of a collection to load one of its partition</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
-<p>Si noti che <code translate="no">_resource_groups</code> è un parametro opzionale, e lasciandolo non specificato Milvus caricherà le repliche sui nodi di query nel gruppo di risorse predefinito.</p>
+<p>Si noti che <code translate="no">_resource_groups</code> è un parametro opzionale e lasciandolo non specificato Milvus caricherà le repliche sui nodi della query nel gruppo di risorse predefinito.</p>
 <p>Per fare in modo che Milus carichi ogni replica di una collezione in un gruppo di risorse separato, assicurarsi che il numero di gruppi di risorse sia uguale al numero di repliche.</p></li>
 <li><p>Trasferire le repliche tra i gruppi di risorse.</p>
 <p>Milvus utilizza <a href="/docs/it/replica.md">le repliche</a> per ottenere il bilanciamento del carico tra i <a href="/docs/it/glossary.md#Segment">segmenti</a> distribuiti su diversi nodi di interrogazione. È possibile spostare alcune repliche di una collezione da un gruppo di risorse a un altro come segue:</p>
@@ -329,7 +329,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>Le repliche di una singola collezione e i gruppi di risorse hanno una relazione N a N.</li>
-<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti in modo uniforme tra le repliche, assicurando che la differenza nel numero di QueryNode di ciascuna replica non superi 1.</li>
+<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti uniformemente tra le repliche, assicurando che la differenza nel numero di QueryNode di ciascuna replica non superi 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

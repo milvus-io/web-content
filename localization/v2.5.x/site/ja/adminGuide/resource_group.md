@@ -37,7 +37,7 @@ title: リソースグループの管理
       </svg>
     </button></h2><p>リソースグループは、Milvusクラスタ内のクエリノードの一部またはすべてを保持することができます。リソースグループ間でクエリノードをどのように割り当てるかは、最も合理的な方法に基づいて決定します。例えば、マルチコレクションシナリオでは、各リソースグループに適切な数のクエリノードを割り当て、各コレクション内の操作が他のコレクション内の操作から物理的に独立するように、異なるリソースグループにコレクションをロードすることができます。</p>
 <p>Milvusインスタンスは、起動時にすべてのクエリノードを保持するデフォルトのリソースグループを保持し、<strong>__default_resource_groupと</strong>命名することに注意してください。</p>
-<p>バージョン2.4.1から、Milvusは宣言型リソースグループAPIを提供し、従来のリソースグループAPIは廃止されました。新しい宣言型APIにより、ユーザはidempotencyを実現し、クラウドネイティブ環境での二次開発を容易に行うことができるようになります。</p>
+<p>バージョン2.4.1から、Milvusは宣言型リソースグループAPIを提供し、従来のリソースグループAPIは廃止されました。新しい宣言型APIにより、ユーザはidempotencyを実現することができ、クラウドネイティブ環境での二次開発をより容易に行うことができます。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">リソースグループの概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.5.10 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.5.11 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>

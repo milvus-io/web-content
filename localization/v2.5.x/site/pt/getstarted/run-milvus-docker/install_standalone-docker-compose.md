@@ -57,7 +57,7 @@ title: Executar o Milvus com o Docker Compose (Linux)
       </svg>
     </button></h2><p>O Milvus fornece um arquivo de configuração do Docker Compose no repositório do Milvus. Para instalar o Milvus usando o Docker Compose, basta executar</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -141,7 +141,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
 <li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
-<li><p>Implante seu cluster Milvus em nuvens:</p>
+<li><p>Implantar seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>

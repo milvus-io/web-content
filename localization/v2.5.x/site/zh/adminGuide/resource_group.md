@@ -71,7 +71,7 @@ title: 管理资源组
 <p>以下情况除外：</p>
 <ul>
 <li>当 Milvus 集群中的 QueryNodes 数量不足时，即<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ，总会有资源组没有足够的 QueryNodes。</li>
-<li>当 Milvus 集群中的 QueryNodes 数量过多时，即<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ，多余的 QueryNodes 总是会先被放置在__default_<strong>resource</strong>_group。</li>
+<li>当 Milvus 集群中的 QueryNodes 数量过多时，即<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ，多余的 QueryNodes 总是会被先放置在<strong>__default_resource_group</strong>中。</li>
 </ul>
 <p>当然，如果集群中的 QueryNodes 数量发生变化，Milvus 会不断尝试调整以满足最终条件。因此，可以先应用资源组配置更改，然后再执行 QueryNode 扩展。</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">使用声明式 api 管理资源组<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,11 +90,11 @@ title: 管理资源组
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本页面上的所有代码示例都在 PyMilvus 2.5.10 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
+<p>本页面上的所有代码示例都在 PyMilvus 2.5.11 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
 </div>
 <ol>
 <li><p>创建资源组。</p>
-<p>要创建资源组，请在连接到 Milvus 实例后运行以下代码。以下代码段假定<code translate="no">default</code> 是 Milvus 连接的别名。</p>
+<p>要创建资源组，请在连接 Milvus 实例后运行以下代码。以下代码段假定<code translate="no">default</code> 是 Milvus 连接的别名。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>

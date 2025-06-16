@@ -56,8 +56,8 @@ title: نظرة عامة على خيارات نشر ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone هو نشر خادم أحادي الجهاز. يتم تعبئة جميع مكونات Milvus Standalone في <a href="https://milvus.io/docs/install_standalone-docker.md">صورة Docker</a> واحدة، مما يجعل النشر مريحاً. إذا كان لديك عبء عمل إنتاجي ولكنك تفضل عدم استخدام Kubernetes، فإن تشغيل Milvus Standalone على جهاز واحد بذاكرة كافية يعد خيارًا جيدًا. بالإضافة إلى ذلك، يدعم Milvus Standalone التوافر العالي من خلال النسخ المتماثل بين السيد والعبد.</p>
-<h2 id="Milvus-Distributed" class="common-anchor-header">ميلفوس الموزعة<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus Standalone هو نشر خادم أحادي الجهاز. يتم تعبئة جميع مكونات Milvus Standalone في <a href="https://milvus.io/docs/install_standalone-docker.md">صورة Docker</a> واحدة، مما يجعل النشر مريحاً. إذا كان لديك عبء عمل إنتاجي ولكنك تفضل عدم استخدام Kubernetes، فإن تشغيل Milvus Standalone على جهاز واحد بذاكرة كافية يعد خيارًا جيدًا.</p>
+<h2 id="Milvus-Distributed" class="common-anchor-header">ميلفوس الموزع<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,7 +72,7 @@ title: نظرة عامة على خيارات نشر ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن نشر Milvus Distributed على مجموعات <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. يتميز هذا النشر ببنية سحابية أصلية، حيث يتم التعامل مع حمل الاستيعاب واستعلامات البحث بشكل منفصل بواسطة عقد معزولة، مما يسمح بالتكرار للمكونات الهامة. يوفر أعلى قابلية للتوسع والتوافر، بالإضافة إلى المرونة في تخصيص الموارد المخصصة في كل مكون. ميلفوس الموزعة هو الخيار الأفضل لمستخدمي المؤسسات الذين يقومون بتشغيل أنظمة بحث متجهية واسعة النطاق في الإنتاج.</p>
+    </button></h2><p>يمكن نشر Milvus Distributed على مجموعات <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. تتميز عملية النشر هذه ببنية سحابية أصلية، حيث يتم التعامل مع حمل الاستيعاب واستعلامات البحث بشكل منفصل بواسطة عقد معزولة، مما يسمح بالتكرار للمكونات الهامة. يوفر أعلى قابلية للتوسع والتوافر، بالإضافة إلى المرونة في تخصيص الموارد المخصصة في كل مكون. ميلفوس الموزعة هو الخيار الأفضل لمستخدمي المؤسسات الذين يقومون بتشغيل أنظمة بحث متجهية واسعة النطاق في الإنتاج.</p>
 <h2 id="Choose-the-Right-Deployment-for-Your-Use-Case" class="common-anchor-header">اختيار النشر المناسب لحالة الاستخدام الخاصة بك<button data-href="#Choose-the-Right-Deployment-for-Your-Use-Case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

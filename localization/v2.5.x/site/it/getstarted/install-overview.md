@@ -23,7 +23,7 @@ title: Panoramica delle opzioni di distribuzione di Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus è un database vettoriale scalabile e altamente performante. Supporta casi d'uso di dimensioni molto diverse, dalle demo eseguite localmente in Jupyter Notebook ai cluster Kubernetes su larga scala che gestiscono decine di miliardi di vettori. Attualmente esistono tre opzioni di distribuzione di Milvus: Milvus Lite, Milvus Standalone e Milvus Distributed.</p>
+    </button></h1><p>Milvus è un database vettoriale scalabile e altamente performante. Supporta casi d'uso di dimensioni molto diverse, da demo eseguite localmente in Jupyter Notebook a cluster Kubernetes su larga scala che gestiscono decine di miliardi di vettori. Attualmente esistono tre opzioni di distribuzione di Milvus: Milvus Lite, Milvus Standalone e Milvus Distributed.</p>
 <h2 id="Milvus-Lite" class="common-anchor-header">Milvus Lite<button data-href="#Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +56,7 @@ title: Panoramica delle opzioni di distribuzione di Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone è un'installazione su server a macchina singola. Tutti i componenti di Milvus Standalone sono racchiusi in un'unica <a href="https://milvus.io/docs/install_standalone-docker.md">immagine Docker</a>, il che rende comoda la distribuzione. Se avete un carico di lavoro di produzione ma preferite non usare Kubernetes, l'esecuzione di Milvus Standalone su una singola macchina con memoria sufficiente è una buona opzione. Inoltre, Milvus Standalone supporta l'alta disponibilità attraverso la replica master-slave.</p>
+    </button></h2><p>Milvus Standalone è un'installazione su server a macchina singola. Tutti i componenti di Milvus Standalone sono racchiusi in un'unica <a href="https://milvus.io/docs/install_standalone-docker.md">immagine Docker</a>, il che rende comoda la distribuzione. Se avete un carico di lavoro di produzione ma preferite non usare Kubernetes, l'esecuzione di Milvus Standalone su una singola macchina con memoria sufficiente è una buona opzione.</p>
 <h2 id="Milvus-Distributed" class="common-anchor-header">Milvus distribuito<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +99,7 @@ title: Panoramica delle opzioni di distribuzione di Milvus
 <li><p><strong>Ricerca locale sui dispositivi edge</strong></p>
 <p>Per le ricerche private o sensibili sui dispositivi edge, è possibile implementare Milvus Lite sul dispositivo senza affidarsi a un servizio basato su cloud per la ricerca di testo o immagini. Questo è adatto a casi come la ricerca di documenti proprietari o il rilevamento di oggetti sul dispositivo.</p></li>
 </ul>
-<p>La scelta della modalità di distribuzione di Milvus dipende dalla fase e dalla scala del progetto. Milvus offre una soluzione flessibile e potente per diverse esigenze, dalla prototipazione rapida alla distribuzione aziendale su larga scala.</p>
+<p>La scelta della modalità di distribuzione di Milvus dipende dalla fase e dalla scala del progetto. Milvus offre una soluzione flessibile e potente per diverse esigenze, dalla prototipazione rapida all'implementazione aziendale su larga scala.</p>
 <ul>
 <li><strong>Milvus Lite</strong> è consigliato per insiemi di dati più piccoli, fino a pochi milioni di vettori.</li>
 <li><strong>Milvus Standalone</strong> è adatto a insiemi di dati di medie dimensioni, fino a 100 milioni di vettori.</li>

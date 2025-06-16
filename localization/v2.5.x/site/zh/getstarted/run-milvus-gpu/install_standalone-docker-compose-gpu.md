@@ -41,7 +41,7 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
 <li>安装前<a href="/docs/zh/prerequisite-gpu.md">请检查硬件和软件要求</a>。</li>
 </ul>
 <div class="alert note">
-<p>如果在拉动映像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
+<p>如果在拉动映像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">安装 Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,8 +59,8 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
         ></path>
       </svg>
     </button></h2><p>要使用 Docker Compose 安装支持 GPU 的 Milvus，请按照以下步骤操作。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下载并配置 YAML 文件</h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>并手动保存为 docker-compose.yml，或使用以下命令。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下载并配置 YAML 文件</h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>并手动将其保存为 docker-compose.yml，或使用以下命令。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要对 YAML 文件中单机服务的环境变量做如下修改：</p>
 <ul>

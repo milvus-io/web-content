@@ -19,6 +19,70 @@ title: 版本说明
         ></path>
       </svg>
     </button></h1><p>了解 Milvus 的新功能！本页总结了每个版本的新功能、改进、已知问题和错误修复。您可以在本部分找到 v2.5.0 之后每个版本的发布说明。我们建议您定期访问此页面以了解更新信息。</p>
+<h2 id="v2513" class="common-anchor-header">v2.5.13<button data-href="#v2513" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>发布日期：2025 年 6 月 10 日</p>
+<table>
+<thead>
+<tr><th>Milvus 版本</th><th>Python SDK 版本</th><th>Node.js SDK 版本</th><th>Java SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.13</td><td>2.5.11</td><td>2.5.10</td><td>2.5.10</td></tr>
+</tbody>
+</table>
+<p>我们很高兴地宣布 Milvus 2.5.13 正式发布！该版本通过一些新功能增强了您的体验，例如下拉字段属性和使用<code translate="no">cast</code> 函数来处理 JSON 索引的功能。该版本还提供了一系列通用的性能和稳定性增强功能，同时解决了许多错误，以确保系统更加稳健。我们鼓励您升级到 2.5.13 并探索这些最新更新！</p>
+<h3 id="Features" class="common-anchor-header">新增功能</h3><ul>
+<li>添加了对从字段中删除属性的支持<a href="https://github.com/milvus-io/milvus/pull/41954">(#41954</a>)。</li>
+<li>添加了与 JSON 索引一起使用的<code translate="no">cast</code> 函数<a href="https://github.com/milvus-io/milvus/pull/42504">(#42504</a>)。</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
+<li>增加了默认导入缓冲区大小<a href="https://github.com/milvus-io/milvus/pull/42542">（#42542</a>）。</li>
+<li>加速了调度程序的构建过程<a href="https://github.com/milvus-io/milvus/pull/42544">（#42544</a>）。</li>
+<li>删除了通道任务和分段任务之间的平衡限制<a href="https://github.com/milvus-io/milvus/pull/42410">（#42410</a>）。</li>
+<li>将 CAGRA GPU 图像设为默认图像<a href="https://github.com/milvus-io/milvus/pull/42193">（#42193</a>）。</li>
+<li><code translate="no">DescribeIndex</code> RESTful API 现在支持返回索引参数<a href="https://github.com/milvus-io/milvus/pull/42080">（#42080</a>）。</li>
+<li>启用按 Collections 字段运行分析器，以避免频繁创建和销毁分析器<a href="https://github.com/milvus-io/milvus/pull/42119">（#42119</a>）。</li>
+<li>添加了对在单个触发器中平衡多个 Collections 的支持<a href="https://github.com/milvus-io/milvus/pull/42134">（#42134</a>）。</li>
+<li>在识别缓慢查询时，现在会考虑<code translate="no">nq</code> （查询次数）（<a href="https://github.com/milvus-io/milvus/pull/42125">#42125</a>）。</li>
+<li>服务器端现在可自动填写不存在的空字段<a href="https://github.com/milvus-io/milvus/pull/42120">（#42120</a>）。</li>
+<li>新增了使用 TTL 过滤过期数据的支持<a href="https://github.com/milvus-io/milvus/pull/41960">（#41960</a>、<a href="https://github.com/milvus-io/milvus/pull/42121">#42121</a>、<a href="https://github.com/milvus-io/milvus/pull/42103">#42103</a>）。</li>
+<li>改进了过期压缩，以便从少量较早的删除中回收空间<a href="https://github.com/milvus-io/milvus/pull/42052">（#42052</a>）。</li>
+<li>访问日志现在支持获取混合搜索表达式和字段<a href="https://github.com/milvus-io/milvus/pull/41921">（#41921</a>）。</li>
+<li>为<code translate="no">get_batch_view</code> 接口添加了明确的移动语义<a href="https://github.com/milvus-io/milvus/pull/42402">（#42402</a>）。</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">错误修复</h3><ul>
+<li>修复了管道/代理泄漏<a href="https://github.com/milvus-io/milvus/pull/42583">(#42583</a>)。</li>
+<li>修正了释放分段时的委托选择逻辑，以避免潜在的 MixCoord 恐慌<a href="https://github.com/milvus-io/milvus/pull/42572">(#42572</a>)。</li>
+<li>修正了一个在验证过程中可能导致数据写入损坏的错误<a href="https://github.com/milvus-io/milvus/pull/42555">(#42555</a>)。</li>
+<li>为 JSON<code translate="no">contains</code> 表达式添加了一项检查，以确保投类型是数组<a href="https://github.com/milvus-io/milvus/pull/42185">（#42185</a>）。</li>
+<li>修复了导入和插入操作之间自动标识重复的问题<a href="https://github.com/milvus-io/milvus/pull/42520">（#42520</a>）。</li>
+<li>确保导入分段统计任务仅由<code translate="no">import_checker</code> 触发<a href="https://github.com/milvus-io/milvus/pull/42487">（#42487</a>）。</li>
+<li>修正了玛丽莎索引<code translate="no">is null</code> 的一个错误<a href="https://github.com/milvus-io/milvus/pull/42421">（#42421</a>）。</li>
+<li>确保统计任务仅由刷新的片段触发<a href="https://github.com/milvus-io/milvus/pull/42425">（#42425</a>）。</li>
+<li>在分段统计完成后重置压缩状态<a href="https://github.com/milvus-io/milvus/pull/42005">（#42005</a>）。</li>
+<li>更新了 Tantivy 版本，以修复 stemmer 恐慌问题<a href="https://github.com/milvus-io/milvus/pull/42172">（#42172</a>）。</li>
+<li>修复了在使用新的临时索引时无法检索向量输出字段的问题<a href="https://github.com/milvus-io/milvus/pull/42183">（#42183</a>）。</li>
+<li>调用 Knowhere 迭代器时避免依赖 Knowhere 进行线程控制<a href="https://github.com/milvus-io/milvus/pull/42133">（#42133</a>）。</li>
+<li>修复了一个问题，即在平衡通道操作期间，可能会过早释放段<a href="https://github.com/milvus-io/milvus/pull/42043">（#42043</a>）。</li>
+<li><code translate="no">DescribeIndex</code> RESTful 接口现在包含时间戳<a href="https://github.com/milvus-io/milvus/pull/42105">（#42105</a>）。</li>
+<li>使用锁定功能确保丢弃分段索引的原子性<a href="https://github.com/milvus-io/milvus/pull/42076">（#42076</a>）。</li>
+<li>修正了分片客户端管理器中的代理恐慌<a href="https://github.com/milvus-io/milvus/pull/42026">（#42026</a>）。</li>
+<li>修正了导入槽分配逻辑<a href="https://github.com/milvus-io/milvus/pull/41982">（#41982</a>）。</li>
+<li>修正了一个 Bug，在该 Bug 中，强制到期压缩的时间点未能重置<a href="https://github.com/milvus-io/milvus/pull/42000">（#42000</a>）。</li>
+</ul>
 <h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,7 +179,7 @@ title: 版本说明
 </ul></li>
 <li>过滤器<ul>
 <li>扩展了对内置停止词过滤器的语言支持。更多信息，请参阅<a href="/docs/zh/stop-filter.md">停止</a>。</li>
-<li>添加了<code translate="no">remove_punct</code> 过滤器以移除标点符号。更多信息，请参阅<a href="/docs/zh/removepunct-filter.md">移除标点符号</a>。</li>
+<li>添加了<code translate="no">remove_punct</code> 过滤器以移除标点符号。有关更多信息，请参阅<a href="/docs/zh/removepunct-filter.md">删除标点符号</a>。</li>
 <li>添加了<code translate="no">regex</code> 过滤器，用于基于模式的文本过滤。更多信息，请参阅<a href="/docs/zh/regex-filter.md">Regex</a>。</li>
 </ul></li>
 </ul></li>
@@ -357,7 +421,7 @@ title: 版本说明
 <li>修复了搜索/查询的引用 Collections 问题<a href="https://github.com/milvus-io/milvus/pull/40550">（#40550）</a></li>
 <li>处理稀疏向量的空行<a href="https://github.com/milvus-io/milvus/pull/40586">（＃40586）</a></li>
 <li>创建集合时添加了重复类型/索引参数检查<a href="https://github.com/milvus-io/milvus/pull/40465">（#40465）</a></li>
-<li>将<code translate="no">metaHeader</code> 移至客户端以避免数据竞赛<a href="https://github.com/milvus-io/milvus/pull/40444">（＃40444）</a></li>
+<li>将<code translate="no">metaHeader</code> 移至客户端以避免数据竞赛<a href="https://github.com/milvus-io/milvus/pull/40444">（#40444）</a></li>
 </ul>
 <h2 id="v256" class="common-anchor-header">v2.5.6<button data-href="#v256" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -483,7 +547,7 @@ title: 版本说明
 <li>[2.5] 修正了即使设置了<code translate="no">common.security.rootShouldBindRole</code> ，root 用户也能列出所有 Collections 的问题<a href="https://github.com/milvus-io/milvus/pull/39714">(#39714</a>)</li>
 <li>[2.5] 修正了 flowgraph 泄露<a href="https://github.com/milvus-io/milvus/pull/39686">(#39686</a>)</li>
 <li>[2.5] 使用参数项格式化以避免 setconfig 重叠<a href="https://github.com/milvus-io/milvus/pull/39636">(#39636</a>)</li>
-<li>[2.5] 使用权限名称 "全部 "检查元存储权限名称<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
+<li>[2.5] 用权限名称 "全部 "检查元存储权限名称<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
 <li>[2.5] 为 RESTful v1 添加了速率限制器<a href="https://github.com/milvus-io/milvus/pull/39555">(#39555</a>)</li>
 <li>[2.5] 删除了 RESTful 处理程序中的硬编码分区号<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
 </ul>

@@ -19,6 +19,70 @@ title: 發佈筆記
         ></path>
       </svg>
     </button></h1><p>瞭解 Milvus 的新功能！本頁總結了每個版本的新功能、改進、已知問題和錯誤修正。您可以在本節中找到 v2.5.0 以後每個版本的發行說明。我們建議您定期造訪此頁面以瞭解更新資訊。</p>
+<h2 id="v2513" class="common-anchor-header">v2.5.13<button data-href="#v2513" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>發行日期：2025 年 6 月 10 日</p>
+<table>
+<thead>
+<tr><th>Milvus 版本</th><th>Python SDK 版本</th><th>Node.js SDK 版本</th><th>Java SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.13</td><td>2.5.11</td><td>2.5.10</td><td>2.5.10</td></tr>
+</tbody>
+</table>
+<p>我們很高興宣佈 Milvus 2.5.13！此版本透過新功能增強了您的使用體驗，例如下拉欄位屬性和使用<code translate="no">cast</code> 函式來處理 JSON 索引的能力。它也提供了一系列一般效能與穩定性的增強，同時解決了許多錯誤，以確保系統更為強大。我們鼓勵您升級至 2.5.13 並探索這些最新更新！</p>
+<h3 id="Features" class="common-anchor-header">功能</h3><ul>
+<li>新增支援從欄位中刪除屬性<a href="https://github.com/milvus-io/milvus/pull/41954">(#41954</a>)。</li>
+<li>新增<code translate="no">cast</code> 函式與 JSON 索引一起使用<a href="https://github.com/milvus-io/milvus/pull/42504">(#42504</a>)。</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改進</h3><ul>
+<li>增加預設匯入緩衝區大小<a href="https://github.com/milvus-io/milvus/pull/42542">(#42542</a>)。</li>
+<li>加速派遣器建立程序<a href="https://github.com/milvus-io/milvus/pull/42544">(#42544</a>)。</li>
+<li>移除通道與區段任務間的平衡限制<a href="https://github.com/milvus-io/milvus/pull/42410">(#42410</a>)。</li>
+<li>將 CAGRA GPU 映像設定為預設值<a href="https://github.com/milvus-io/milvus/pull/42193">(#42193</a>)。</li>
+<li><code translate="no">DescribeIndex</code> RESTful API 現在支援傳回索引參數<a href="https://github.com/milvus-io/milvus/pull/42080">(#42080</a>)。</li>
+<li>啟用以集合的欄位來執行分析器，以避免頻繁建立與銷毀分析器<a href="https://github.com/milvus-io/milvus/pull/42119">(#42119</a>)。</li>
+<li>新增在單一觸發器中平衡多個集合的支援<a href="https://github.com/milvus-io/milvus/pull/42134">(#42134</a>)。</li>
+<li>識別緩慢查詢時，現在會考慮<code translate="no">nq</code> （查詢次數） (<a href="https://github.com/milvus-io/milvus/pull/42125">#42125</a>)。</li>
+<li>伺服器端現在會自動填入不存在的 nullable 欄位<a href="https://github.com/milvus-io/milvus/pull/42120">(#42120</a>)。</li>
+<li>新增使用 TTL 過濾過期資料的支援<a href="https://github.com/milvus-io/milvus/pull/41960">(#41960</a>,<a href="https://github.com/milvus-io/milvus/pull/42121">#42121</a>,<a href="https://github.com/milvus-io/milvus/pull/42103">#42103</a>)。</li>
+<li>改進過期壓縮，從少量較舊的刪除中回收空間<a href="https://github.com/milvus-io/milvus/pull/42052">(#42052</a>)。</li>
+<li>存取日誌現在支援取得混合搜尋表達式和欄位<a href="https://github.com/milvus-io/milvus/pull/41921">(#41921</a>)。</li>
+<li>在<code translate="no">get_batch_view</code> 介面中新增明確的移動語意<a href="https://github.com/milvus-io/milvus/pull/42402">(#42402</a>)。</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">錯誤修正</h3><ul>
+<li>修正了管道/委託人洩漏<a href="https://github.com/milvus-io/milvus/pull/42583">(#42583</a>)。</li>
+<li>修正了釋放分段時的委託選擇邏輯，以避免潛在的 MixCoord 恐慌<a href="https://github.com/milvus-io/milvus/pull/42572">(#42572</a>)。</li>
+<li>修正了在驗證時可能導致資料寫入損毀的錯誤<a href="https://github.com/milvus-io/milvus/pull/42555">(#42555</a>)。</li>
+<li>對於 JSON<code translate="no">contains</code> 表達式，增加了一個檢查以確保轉換類型是一個陣列<a href="https://github.com/milvus-io/milvus/pull/42185">(#42185</a>)。</li>
+<li>修正了匯入和插入操作之間自動 ID 重複的問題<a href="https://github.com/milvus-io/milvus/pull/42520">(#42520</a>)。</li>
+<li>確保匯入分段統計任務僅由<code translate="no">import_checker</code> 觸發<a href="https://github.com/milvus-io/milvus/pull/42487">(#42487</a>)。</li>
+<li>修正了 Marisa 索引<code translate="no">is null</code> 的錯誤<a href="https://github.com/milvus-io/milvus/pull/42421">(#42421</a>)。</li>
+<li>確保統計任務只會被刷新的區段觸發<a href="https://github.com/milvus-io/milvus/pull/42425">(#42425</a>)。</li>
+<li>當區段統計完成時，重設壓縮狀態<a href="https://github.com/milvus-io/milvus/pull/42005">(#42005</a>)。</li>
+<li>更新 Tantivy 版本以修正 stemmer 恐慌<a href="https://github.com/milvus-io/milvus/pull/42172">(#42172</a>)。</li>
+<li>修正當使用新的臨時索引時，無法擷取向量輸出欄位的問題<a href="https://github.com/milvus-io/milvus/pull/42183">(#42183</a>)。</li>
+<li>在呼叫 Knowhere iterator 時避免依賴 Knowhere 來控制線程<a href="https://github.com/milvus-io/milvus/pull/42133">(#42133</a>).</li>
+<li>修正了在平衡通道操作中可能過早釋放區段的問題<a href="https://github.com/milvus-io/milvus/pull/42043">(#42043</a>)。</li>
+<li><code translate="no">DescribeIndex</code> RESTful 介面現在包含時間戳記<a href="https://github.com/milvus-io/milvus/pull/42105">(#42105</a>)。</li>
+<li>使用鎖定來確保丟失區段索引的原子性<a href="https://github.com/milvus-io/milvus/pull/42076">(#42076</a>)。</li>
+<li>修正了 Shard 客戶端管理員的代理恐慌<a href="https://github.com/milvus-io/milvus/pull/42026">(#42026</a>)。</li>
+<li>修正了匯入槽分配邏輯<a href="https://github.com/milvus-io/milvus/pull/41982">(#41982</a>)。</li>
+<li>修正了強制到期壓縮的時間點未能重設的錯誤<a href="https://github.com/milvus-io/milvus/pull/42000">(#42000</a>)。</li>
+</ul>
 <h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -284,7 +348,7 @@ title: 發佈筆記
 <li>在<code translate="no">MsgDispatcher</code> 中引入批量訂閱<a href="https://github.com/milvus-io/milvus/pull/40596">(#40596</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">錯誤修正</h3><ul>
-<li>修正了涉及可空輸入和成長中的 mmap 資料類型的當機問題<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
+<li>修正了涉及可空輸入和成長的 mmap 資料類型的當機問題<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
 <li>修正了在刪除操作中，由於重複 binlog IDs 而造成的潛在資料遺失<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>)、<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
 <li>為<code translate="no">GetSegmentsIndexStates</code> 新增欄位索引鎖，以避免在建立集合時插入可能造成的恐慌<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
 <li>修正 Rocksmq 消費者註冊的並發問題<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>)</li>
@@ -460,7 +524,7 @@ title: 發佈筆記
 <li>[2.5] 修正了角落情況下 querycoord 的恐慌<a href="https://github.com/milvus-io/milvus/pull/40058">(#40058</a>)</li>
 <li>[2.5] 增強 isbalanced 函數，以正確計算引號對<a href="https://github.com/milvus-io/milvus/pull/40002">(#40002</a>)</li>
 <li>[2.5] 修正負 -1 執行壓縮任務的問題<a href="https://github.com/milvus-io/milvus/pull/39955">(#39955</a>)</li>
-<li>[2.5] 修正了一個區段可能永遠不會從封存轉移到沖洗的錯誤<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
+<li>[2.5] 修正了一個區段可能永遠無法從封存轉移到沖洗的錯誤<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
 <li>載入 pk 索引時跳過建立主索引<a href="https://github.com/milvus-io/milvus/pull/39922">(#39922</a>)</li>
 <li>[2.5] 當排序後段為零時，跳過文字索引的建立<a href="https://github.com/milvus-io/milvus/pull/39969">(#39969</a>)</li>
 <li>[2.5] 修正了尋找最早位置的失敗<a href="https://github.com/milvus-io/milvus/pull/39966">(#39966</a>)</li>
@@ -741,14 +805,14 @@ title: 發佈筆記
 <tr><td>2.5.0</td><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.0 為處理向量搜尋與大規模資料管理的使用者帶來了顯著的進步，以提升可用性、可擴充性與效能。在此版本中，Milvus 整合了強大的新功能，例如：基於術語的搜尋、針對最佳化查詢的聚類壓縮，以及對稀疏與密集向量搜尋方法的多樣化支援。在群集管理、索引和資料處理方面的強化，將彈性和易用性提升到新的層級，使 Milvus 成為更強大、更易於使用的向量資料庫。</p>
+<p>Milvus 2.5.0 為處理向量搜尋與大規模資料管理的使用者帶來重大進步，以提升可用性、可擴充性與效能。在此版本中，Milvus 整合了強大的新功能，例如：基於術語的搜尋、針對最佳化查詢的聚類壓縮，以及對稀疏與密集向量搜尋方法的多樣化支援。在群集管理、索引和資料處理方面的強化，將彈性和易用性提升到新的層級，使 Milvus 成為更強大、更易於使用的向量資料庫。</p>
 <h3 id="Key-Features" class="common-anchor-header">主要功能</h3><h4 id="Full-Text-Search" class="common-anchor-header">全文檢索</h4><p>Milvus 2.5 支援以 Sparse-BM25 實作的全文檢索！此功能是 Milvus 強大語義搜尋功能的重要補充，尤其是在涉及罕見字詞或技術術語的情況下。在之前的版本中，Milvus 支援稀疏向量以協助關鍵字搜尋。這些稀疏向量是由 SPLADEv2/BGE-M3 等神經模型或 BM25 演算法等統計模型在 Milvus 外部產生的。</p>
 <p>在<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> 的支援下，Milvus 2.5 內建了分析器和稀疏向量萃取，將 API 從僅接收向量作為輸入擴展到直接接受文字。當資料插入時，BM25 統計資訊會即時更新，提升可用性與精確度。此外，以近似近鄰 (ANN) 演算法為基礎的稀疏向量，提供比標準關鍵字搜尋系統更強大的效能。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">Analyzer 概觀</a>與<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">叢集管理 WebUI (測試版)</h4><p>為了更好地支援海量資料和豐富的功能，Milvus 的精密設計包括各種依賴關係、眾多節點角色、複雜的資料結構等。這些方面都可能為使用和維護帶來挑戰。</p>
 <p>Milvus 2.5 引入了內建的叢集管理 WebUI，透過可視化 Milvus 複雜的運行環境資訊，降低系統維護的難度。這包括資料庫和資料集、網段、頻道、依存關係、節點健康狀態、任務資訊、緩慢查詢等詳細資訊。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
-<h4 id="Text-Match" class="common-anchor-header">文字匹配</h4><p>Milvus 2.5 利用<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>的分析器和索引來進行文字預處理和索引建立，支援根據特定詞彙對文字資料進行精確的自然語言匹配。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
+<h4 id="Text-Match" class="common-anchor-header">文字匹配</h4><p>Milvus 2.5 利用<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>的分析器和索引進行文字預處理和索引建立，支援根據特定詞彙對文字資料進行精確的自然語言匹配。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">Analyzer 概觀</a>和<a href="/docs/zh-hant/keyword-match.md">文字匹配</a>。</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">位圖索引</h4><p>Milvus 系列新增了標量資料索引。BitMap 索引使用長度等於行數的位元陣列來表示值的存在並加速搜尋。</p>
 <p>Bitmap 索引傳統上對於低心數欄位非常有效，因為低心數欄位只有少量不同的值--例如，包含性別資訊的欄位只有兩個可能的值：男性和女性。</p>
@@ -756,7 +820,7 @@ title: 發佈筆記
 <h4 id="Nullable--Default-Value" class="common-anchor-header">可空值與預設值</h4><p>Milvus 現在支援為除主索引鍵欄位以外的標量欄位設定 nullable 屬性和預設值。對於標記為<code translate="no">nullable=True</code> 的標量欄位，使用者可以在插入資料時省略該欄位；系統會將其視為空值或預設值（如果已設定），而不會產生錯誤。</p>
 <p>預設值和可為空的屬性為 Milvus 提供了更大的靈活性。使用者在建立集合時，可以利用此功能來處理值不確定的欄位。它也簡化了從其他資料庫系統到 Milvus 的資料遷移，允許處理包含空值的資料集，同時保留原始的預設值設定。</p>
 <p>詳情請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default Value</a>。</p>
-<h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">基於 Faiss 的 HNSW SQ/PQ/PRQ</h4><p>透過與 Faiss 社群的密切合作，Faiss 中的 HNSW 演算法在功能和效能上都有顯著的改善。基於穩定性和可維護性的考量，Milvus 2.5 正式將 HNSW 的支援從 hnswlib 移轉到 Faiss。</p>
+<h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">基於 Faiss 的 HNSW SQ/PQ/PRQ</h4><p>透過與 Faiss 社群的密切合作，Faiss 中的 HNSW 演算法在功能和效能上都有顯著的改善。基於穩定性與可維護性的考量，Milvus 2.5 正式將 HNSW 的支援從 hnswlib 移轉到 Faiss。</p>
 <p>在 Faiss 的基礎上，Milvus 2.5 支援 HNSW 的多種量化方法，以滿足不同場景的需求：SQ (Scalar Quantizers)、PQ (Product Quantizer)、PRQ (Product Residual Quantizer)。SQ 和 PQ 比較常見；SQ 提供良好的查詢效能和建立速度，而 PQ 則在相同的壓縮比下提供較佳的召回率。許多向量資料庫普遍使用二進位量化，這是 SQ 量化的一種簡單形式。</p>
 <p>PRQ 是 PQ 與 AQ (Additive Quantizer) 的融合。與 PQ 相比，它需要更長的建立時間，才能提供更好的召回率，尤其是在高壓縮率時，說二進位壓縮。</p>
 <h4 id="Clustering-Compaction-Beta" class="common-anchor-header">聚類壓縮 (測試版)</h4><p>Milvus 2.5 引入了聚類壓縮 (Clustering Compaction)，以加速搜尋並降低大型資料庫的成本。透過指定標量欄位作為聚類關鍵，資料會依範圍重新分配，以最佳化儲存與擷取。此功能的作用類似全局索引，可讓 Milvus 在根據聚類元資料進行查詢時，有效地剪裁資料，並在套用標量篩選條件時，提升搜尋效能。</p>
@@ -781,6 +845,6 @@ title: 發佈筆記
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">表達式解析最佳化</h4><p>透過對重複表達式實施快取、升級 ANTLR，以及優化<code translate="no">NOT IN</code> 子句的效能，改善表達式解析。</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">改善 DDL 並發效能</h4><p>優化了資料定義語言 (DDL) 作業的並發效能。</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">RESTful API 功能對齊</h4><p>將 RESTful API 的功能與其他 SDK 統一。</p>
-<h4 id="Security--Configuration-Updates" class="common-anchor-header">安全性與組態更新</h4><p>支援 TLS 以確保在更複雜或企業環境中的節點間通訊安全。如需詳細資訊，請參閱<a href="/docs/zh-hant/tls.md">安全性設定</a>。</p>
+<h4 id="Security--Configuration-Updates" class="common-anchor-header">安全性與組態更新</h4><p>支援 TLS 以確保在較複雜或企業環境中的節點間通訊安全。如需詳細資訊，請參閱<a href="/docs/zh-hant/tls.md">安全性設定</a>。</p>
 <h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">壓縮效能增強</h4><p>移除混合壓縮中的最大區段限制，現在會優先處理較小的區段，以提高效率並加快大型或分散資料集的查詢速度。</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">基於分數的通道平衡</h4><p>引進可動態平衡各通道負載的政策，在大規模部署中提高資源利用率和整體穩定性。</p>

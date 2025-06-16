@@ -59,12 +59,12 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
         ></path>
       </svg>
     </button></h2><p>Para instalar o Milvus com suporte a GPU usando o Docker Compose, siga estas etapas.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>É necessário fazer algumas alterações nas variáveis de ambiente do serviço autónomo no ficheiro YAML, como se segue:</p>
 <ul>
-<li>Para atribuir um dispositivo GPU específico ao Milvus, localize o campo <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> na definição do serviço <code translate="no">standalone</code> e substitua o seu valor pelo ID da GPU pretendida. Pode utilizar a ferramenta <code translate="no">nvidia-smi</code>, incluída nos controladores de visualização da GPU NVIDIA, para determinar a ID de um dispositivo GPU. O Milvus suporta múltiplos dispositivos GPU.</li>
+<li>Para atribuir um dispositivo GPU específico ao Milvus, localize o campo <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> na definição do serviço <code translate="no">standalone</code> e substitua o seu valor pelo ID da GPU pretendida. É possível utilizar a ferramenta <code translate="no">nvidia-smi</code>, incluída nos controladores de visualização da GPU NVIDIA, para determinar a ID de um dispositivo GPU. O Milvus suporta múltiplos dispositivos GPU.</li>
 </ul>
 <p>Atribuir um único dispositivo GPU ao Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>

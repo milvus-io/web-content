@@ -19,6 +19,70 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.5.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v2513" class="common-anchor-header">v2.5.13<button data-href="#v2513" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2025년 6월 10일</p>
+<table>
+<thead>
+<tr><th>Milvus 버전</th><th>Python SDK 버전</th><th>Node.js SDK 버전</th><th>Java SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.13</td><td>2.5.11</td><td>2.5.10</td><td>2.5.10</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.13을 발표하게 되어 기쁩니다! 이번 버전에서는 필드 속성 삭제 기능, JSON 인덱스에 대한 <code translate="no">cast</code> 함수 사용 등 새로운 기능을 통해 사용자 경험을 향상시켰습니다. 또한 다양한 성능과 안정성이 전반적으로 향상되었으며, 수많은 버그가 해결되어 더욱 견고한 시스템을 보장합니다. 2.5.13으로 업그레이드하여 최신 업데이트를 살펴보세요!</p>
+<h3 id="Features" class="common-anchor-header">주요 기능</h3><ul>
+<li>필드에서 속성 삭제 지원 추가<a href="https://github.com/milvus-io/milvus/pull/41954">(#41954</a>).</li>
+<li>JSON 인덱스와 함께 사용할 수 있는 <code translate="no">cast</code> 함수가 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/42504">(#42504</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
+<li>기본 가져오기 버퍼 크기를 늘렸습니다<a href="https://github.com/milvus-io/milvus/pull/42542">(#42542</a>).</li>
+<li>디스패처 빌드 프로세스를 가속화했습니다<a href="https://github.com/milvus-io/milvus/pull/42544">(#42544</a>).</li>
+<li>채널과 세그먼트 작업 간의 밸런스 제약이 제거되었습니다<a href="https://github.com/milvus-io/milvus/pull/42410">(#42410</a>).</li>
+<li>CAGRA GPU 이미지를 기본값으로 설정<a href="https://github.com/milvus-io/milvus/pull/42193">(#42193</a>).</li>
+<li><code translate="no">DescribeIndex</code> RESTful API가 이제 인덱스 매개변수 반환을 지원합니다<a href="https://github.com/milvus-io/milvus/pull/42080">(#42080</a>).</li>
+<li>빈번한 분석기 생성 및 소멸을 피하기 위해 컬렉션의 필드별로 분석기를 실행할 수 있게 되었습니다<a href="https://github.com/milvus-io/milvus/pull/42119">(#42119</a>).</li>
+<li>단일 트리거에서 여러 컬렉션의 밸런싱을 지원하는 기능이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/42134">(#42134</a>).</li>
+<li>이제 느린 쿼리를 식별할 때 <code translate="no">nq</code> (쿼리 수)를 고려합니다<a href="https://github.com/milvus-io/milvus/pull/42125">(#42125</a>).</li>
+<li>이제 서버 측에서 없는 null 가능 필드를 자동으로 채웁니다<a href="https://github.com/milvus-io/milvus/pull/42120">(#42120)</a>.</li>
+<li>TTL<a href="https://github.com/milvus-io/milvus/pull/41960">(#41960</a>, <a href="https://github.com/milvus-io/milvus/pull/42121">#42121</a>, <a href="https://github.com/milvus-io/milvus/pull/42103">#42103</a>)을 사용하여 만료된 데이터를 필터링하는 기능이 추가되었습니다.</li>
+<li>소수의 오래된 삭제에서 공간을 확보할 수 있도록 만료 압축을 개선했습니다<a href="https://github.com/milvus-io/milvus/pull/42052">(#42052</a>).</li>
+<li>이제 액세스 로그에서 하이브리드 검색 표현식 및 필드 가져오기를 지원합니다<a href="https://github.com/milvus-io/milvus/pull/41921">(#41921</a>).</li>
+<li><code translate="no">get_batch_view</code> 인터페이스에 명시적 이동 시맨틱을 추가했습니다<a href="https://github.com/milvus-io/milvus/pull/42402">(#42402</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
+<li>파이프라인/위임자 누수를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/42583">(#42583</a>).</li>
+<li>세그먼트를 해제할 때 델리게이터 선택 로직을 수정하여 잠재적인 MixCoord 패닉<a href="https://github.com/milvus-io/milvus/pull/42572">(#42572</a>)을 방지했습니다.</li>
+<li>유효성 검사 중 데이터 쓰기 손상을 일으킬 수 있는 버그를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/42555">(#42555</a>).</li>
+<li>JSON <code translate="no">contains</code> 표현식에 대해 형변환 유형이 배열인지 확인하는 검사를 추가했습니다<a href="https://github.com/milvus-io/milvus/pull/42185">(#42185</a>).</li>
+<li>가져오기 작업과 삽입 작업 간에 자동 ID가 중복되는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/42520">(#42520</a>).</li>
+<li>세그먼트 통계 가져오기 작업이 <code translate="no">import_checker</code> <a href="https://github.com/milvus-io/milvus/pull/42487">(#42487)</a>에 의해서만 트리거되도록 했습니다.</li>
+<li>Marisa 인덱스의 <code translate="no">is null</code> 관련 버그 수정<a href="https://github.com/milvus-io/milvus/pull/42421">(#42421</a>).</li>
+<li>통계 작업이 플러시된 세그먼트에 대해서만 트리거되도록 했습니다<a href="https://github.com/milvus-io/milvus/pull/42425">(#42425</a>).</li>
+<li>세그먼트 통계가 완료되면 압축 상태를 재설정합니다<a href="https://github.com/milvus-io/milvus/pull/42005">(#42005</a>).</li>
+<li>스템머 패닉<a href="https://github.com/milvus-io/milvus/pull/42172">(#42172)</a>을 수정하기 위해 탄티비 버전을 업데이트했습니다.</li>
+<li>새로운 중간 인덱스를 사용할 때 벡터 출력 필드를 검색할 수 없는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/42183">(#42183</a>).</li>
+<li>Knowhere 이터레이터를 호출할 때 스레드 제어를 위해 Knowhere에 의존하지 않도록 했습니다<a href="https://github.com/milvus-io/milvus/pull/42133">(#42133</a>).</li>
+<li>밸런스 채널 작업 중에 세그먼트가 조기에 해제될 수 있는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/42043">(#42043</a>).</li>
+<li><code translate="no">DescribeIndex</code> RESTful 인터페이스에 이제 타임스탬프가 포함됩니다<a href="https://github.com/milvus-io/milvus/pull/42105">(#42105)</a>.</li>
+<li>세그먼트 인덱스 삭제의 원자성을 보장하기 위해 잠금을 사용했습니다<a href="https://github.com/milvus-io/milvus/pull/42076">(#42076</a>).</li>
+<li>샤드 클라이언트 관리자에서 프록시 패닉을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/42026">(#42026</a>).</li>
+<li>가져오기 슬롯 할당 로직을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41982">(#41982</a>).</li>
+<li>강제 만료 압축 시점을 재설정하지 못하는 버그를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/42000">(#42000</a>).</li>
+</ul>
 <h2 id="v2512" class="common-anchor-header">v2.5.12<button data-href="#v2512" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -581,7 +645,7 @@ title: 릴리스 노트
 <li>2.4에서 2.5로 업그레이드할 때 스칼라 반전 인덱스 비호환성 수정<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
-<li>다중 열 로드 중 거친 잠금 단위로 인한 쿼리 속도 저하 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>).</li>
+<li>다중 열 로드 중 거친 잠금 세분화로 인한 쿼리 속도 저하 문제 수정<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
 <li>별칭을 사용하면 반복기가 잘못된 데이터베이스를 트래버스할 수 있는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>).</li>
 <li>데이터베이스 변경 시 리소스 그룹 업데이트 실패를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>).</li>
 <li>릴리스 중에 탠티비 인덱스가 인덱스 파일을 삭제할 수 없는 산발적인 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>).</li>

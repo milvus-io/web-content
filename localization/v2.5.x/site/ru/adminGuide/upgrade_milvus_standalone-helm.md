@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете выбрать путь обновления для своего Milvus следующим образом:</p>
-<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.12.</div>
+<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.13.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.12.</p></li>
-<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.12.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.13.</p></li>
+<li><p><a href="#Migrate-the-metadata">Мигрируйте метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.13.</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Проведение скользящего обновления<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Операция</td><td><code translate="no">update</code></td><td>Ложь</td></tr>
 </tbody>
 </table>
-<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.12.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w &#x27;milvusdb/milvus:v2.5.12&#x27;
+<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.13.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -235,25 +235,25 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li>Перенесите метаданные Milvus.</li>
 <li>Запустите компоненты Milvus с новым образом.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2512" class="common-anchor-header">2. Обновление Milvus с версии 2.1.x до 2.5.12</h4><p>Следующие команды предполагают, что вы обновили Milvus с версии 2.1.4 до 2.5.12. Измените их на версии, соответствующие вашим потребностям.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2513" class="common-anchor-header">2. Обновление Milvus с версии 2.1.x до 2.5.13</h4><p>Следующие команды предполагают, что вы обновили Milvus с v2.1.4 до 2.5.13. Измените их на версии, соответствующие вашим потребностям.</p>
 <ol>
 <li><p>Укажите имя экземпляра Milvus, исходную версию Milvus и целевую версию Milvus.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.13
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Укажите пространство имен с помощью <code translate="no">-n</code>, если ваш Milvus установлен не в стандартном пространстве имен K8s.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.13
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Укажите корневой путь с помощью <code translate="no">-r</code>, если ваш Milvus установлен с пользовательским <code translate="no">rootpath</code>.</p>
-<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">12</span> -<span class="hljs-attribute">r</span> by-dev
+<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">13</span> -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Укажите тег изображения с помощью <code translate="no">-w</code>, если ваш Milvus установлен с пользовательским <code translate="no">image</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -w milvusdb/milvus:v2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.13 -r by-dev -w milvusdb/milvus:v2.5.13
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Установите <code translate="no">-d true</code>, если вы хотите автоматически удалить миграционную капсулу после завершения миграции.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -w milvusdb/milvus:v2.5.12 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.13 -w milvusdb/milvus:v2.5.13 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Откатитесь и выполните миграцию заново, если миграция не удалась.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -o migrate -w milvusdb/milvus:v2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.13 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.13 -r by-dev -o migrate -w milvusdb/milvus:v2.5.13
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

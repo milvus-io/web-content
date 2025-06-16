@@ -90,7 +90,7 @@ title: Gerenciar grupos de recursos
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Todos os exemplos de código nesta página estão no PyMilvus 2.5.10. Atualize sua instalação do PyMilvus antes de executá-los.</p>
+<p>Todos os exemplos de código nesta página estão no PyMilvus 2.5.11. Atualize sua instalação do PyMilvus antes de executá-los.</p>
 </div>
 <ol>
 <li><p>Criar um grupo de recursos.</p>

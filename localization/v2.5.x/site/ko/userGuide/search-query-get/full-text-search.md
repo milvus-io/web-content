@@ -91,7 +91,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-schema = MilvusClient.create_schema()
+schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)
@@ -315,10 +315,10 @@ schema.WithFunction(function)
 <div class="alert note">
 <p>텍스트에서 스파스 벡터로 변환해야 하는 <code translate="no">VARCHAR</code> 필드가 여러 개 있는 컬렉션의 경우 컬렉션 스키마에 별도의 함수를 추가하여 각 함수에 고유한 이름과 <code translate="no">output_field_names</code> 값을 갖도록 합니다.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">인덱스 구성</h3><p>필요한 필드와 기본 제공 함수로 스키마를 정의한 후 컬렉션의 색인을 설정하세요. 이 과정을 간소화하기 위해 <code translate="no">AUTOINDEX</code> 을 <code translate="no">index_type</code> 으로 사용하면 Milvus가 데이터 구조에 따라 가장 적합한 인덱스 유형을 선택하고 구성할 수 있습니다.</p>
+<h3 id="Configure-the-index" class="common-anchor-header">인덱스 구성</h3><p>필요한 필드와 기본 제공 함수로 스키마를 정의한 후에는 컬렉션의 색인을 설정하세요. 이 과정을 단순화하기 위해 <code translate="no">AUTOINDEX</code> 을 <code translate="no">index_type</code> 으로 사용하면 Milvus가 데이터 구조에 따라 가장 적합한 인덱스 유형을 선택하고 구성할 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
@@ -384,7 +384,12 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 유효한 값입니다:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (기본값): MaxScore 알고리즘을 사용하여 DAAT(Document-at-a-Time) 쿼리 처리를 최적화합니다. MaxScore는 영향이 미미할 것 같은 용어와 문서를 건너뛰는 방식으로 높은 <em>k</em> 값이나 많은 용어가 포함된 쿼리에 대해 더 나은 성능을 제공합니다. 최대 영향력 점수를 기준으로 용어를 필수 및 비필수 그룹으로 분류하여 상위 k 결과에 기여할 수 있는 용어에 집중함으로써 이를 달성합니다.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: WAND 알고리즘을 사용하여 최적화된 DAAT 쿼리 처리. WAND는 최대 영향력 점수를 활용하여 비경쟁 문서를 건너뛰기 때문에 히트 문서를 더 적게 평가하지만, 히트당 오버헤드가 더 높습니다. 따라서 건너뛰기가 더 용이한 작은 <em>k</em> 값의 쿼리나 짧은 쿼리에는 WAND가 더 효율적입니다.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: 기본 TAAT(Term-at-a-Time) 쿼리 처리. <code translate="no">DAAT_MAXSCORE</code> 및 <code translate="no">DAAT_WAND</code> 에 비해 느리지만 <code translate="no">TAAT_NAIVE</code> 은 고유한 이점을 제공합니다. 전역 수집 매개변수(avgdl)의 변경에 관계없이 정적으로 유지되는 캐시된 최대 영향 점수를 사용하는 DAAT 알고리즘과 달리 <code translate="no">TAAT_NAIVE</code> 은 이러한 변경에 동적으로 적응합니다.</p></li></ul></td>
+     <td><p>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 유효한 값입니다:</p>
+<ul>
+<li><p><code translate="no">"DAAT_MAXSCORE"</code> (기본값): MaxScore 알고리즘을 사용하여 DAAT(Document-at-a-Time) 쿼리 처리를 최적화합니다. MaxScore는 영향이 미미할 것 같은 용어와 문서를 건너뛰는 방식으로 높은 <em>k</em> 값이나 많은 용어가 포함된 쿼리에 대해 더 나은 성능을 제공합니다. 최대 영향력 점수를 기준으로 용어를 필수 및 비필수 그룹으로 분류하여 상위 k 결과에 기여할 수 있는 용어에 집중함으로써 이를 달성합니다.</p></li>
+<li><p><code translate="no">"DAAT_WAND"</code>: WAND 알고리즘을 사용하여 최적화된 DAAT 쿼리 처리. WAND는 최대 영향력 점수를 활용하여 비경쟁 문서를 건너뛰기 때문에 히트 문서를 더 적게 평가하지만, 히트당 오버헤드가 더 높습니다. 따라서 건너뛰기가 더 용이한 작은 <em>k</em> 값의 쿼리나 짧은 쿼리에는 WAND가 더 효율적입니다.</p></li>
+<li><p><code translate="no">"TAAT_NAIVE"</code>: 기본 TAAT(Term-at-a-Time) 쿼리 처리. <code translate="no">DAAT_MAXSCORE</code> 및 <code translate="no">DAAT_WAND</code> 에 비해 느리지만 <code translate="no">TAAT_NAIVE</code> 은 고유한 이점을 제공합니다. 전역 수집 매개변수(avgdl)의 변경에 관계없이 정적으로 유지되는 캐시된 최대 영향 점수를 사용하는 DAAT 알고리즘과 달리 <code translate="no">TAAT_NAIVE</code> 은 이러한 변경에 동적으로 적응합니다.</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -530,8 +535,9 @@ client.insert(InsertReq.builder()
 
 client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
-    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
-    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
+<span class="highlighted-comment-line">    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],</span>
+<span class="highlighted-comment-line">    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,</span>
+<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>], <span class="hljs-comment"># Fields to return in search results; sparse field cannot be output</span></span>
     limit=<span class="hljs-number">3</span>,
     search_params=search_params
 )
@@ -576,6 +582,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>, 
     <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 )
@@ -615,19 +622,74 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
      <td><p>검색 시 무시할 중요도가 낮은 용어의 비율입니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p></td>
    </tr>
    <tr>
-     <td></td>
-     <td></td>
-   </tr>
-   <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>원시 쿼리 텍스트입니다.</p></td>
+     <td><p>자연어로 된 원시 쿼리 텍스트. Milvus는 BM25 함수를 사용하여 텍스트 쿼리를 자동으로 스파스 벡터로 변환하며, 미리 계산된 벡터를 <strong>제공하지</strong> 않습니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
-     <td><p>내부적으로 생성된 스파스 벡터를 포함하는 필드의 이름입니다.</p></td>
+     <td><p>내부적으로 생성된 스파스 벡터가 포함된 필드의 이름입니다.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">output_fields</code></p></td>
+     <td><p>검색 결과에 반환할 필드 이름의 목록입니다. BM25로 생성된 임베딩이 포함된 <strong>스파스 벡터 필드를 제외한</strong> 모든 필드를 지원합니다. 일반적인 출력 필드에는 기본 키 필드(예: <code translate="no">id</code>)와 원본 텍스트 필드(예: <code translate="no">text</code>)가 포함됩니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ를</a> 참조하세요.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
      <td><p>반환할 상위 일치 항목의 최대 개수입니다.</p></td>
    </tr>
 </table>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">전체 텍스트 검색에서 BM25 함수에 의해 생성된 스파스 벡터를 출력하거나 액세스할 수 있나요?</h3><p>아니요, BM25 함수에 의해 생성된 스파스 벡터는 전체 텍스트 검색에서 직접 액세스하거나 출력할 수 없습니다. 자세한 내용은 다음과 같습니다:</p>
+<ul>
+<li><p>BM25 함수는 내부적으로 랭킹 및 검색을 위해 스파스 벡터를 생성합니다.</p></li>
+<li><p>이러한 벡터는 스파스 필드에 저장되지만 다음에는 포함될 수 없습니다. <code translate="no">output_fields</code></p></li>
+<li><p>원본 텍스트 필드와 메타데이터(예: <code translate="no">id</code>, <code translate="no">text</code>)만 출력할 수 있습니다.</p></li>
+</ul>
+<p>예시:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
+client.search(
+    collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
+    data=[<span class="hljs-string">&#x27;query text&#x27;</span>],
+    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
+<span class="highlighted-wrapper-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;sparse&#x27;</span>]  <span class="hljs-comment"># &#x27;sparse&#x27; causes an error</span></span>
+    limit=<span class="hljs-number">3</span>,
+    search_params=search_params
+)
+
+<span class="hljs-comment"># ✅ This works - output text fields only</span>
+client.search(
+    collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
+    data=[<span class="hljs-string">&#x27;query text&#x27;</span>],
+    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
+<span class="highlighted-wrapper-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>]</span>
+    limit=<span class="hljs-number">3</span>,
+    search_params=search_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">액세스할 수 없는데 왜 스파스 벡터 필드를 정의해야 하나요?</h3><p>스파스 벡터 필드는 사용자가 직접 상호 작용하지 않는 데이터베이스 인덱스와 유사한 내부 검색 인덱스 역할을 합니다.</p>
+<p><strong>설계 근거</strong>:</p>
+<ul>
+<li><p>관심사 분리: 사용자는 텍스트(입력/출력)로 작업하고, Milvus는 벡터(내부 처리)를 처리합니다.</p></li>
+<li><p>성능: 사전 계산된 스파스 벡터를 통해 쿼리 중 빠른 BM25 순위 지정 가능</p></li>
+<li><p>사용자 경험: 간단한 텍스트 인터페이스 뒤에 복잡한 벡터 연산을 추상화합니다.</p></li>
+</ul>
+<p><strong>벡터 액세스가 필요한 경우</strong>:</p>
+<ul>
+<li><p>전체 텍스트 검색 대신 수동 스파스 벡터 연산 사용</p></li>
+<li><p>사용자 정의 스파스 벡터 워크플로우를 위한 별도의 컬렉션 생성</p></li>
+</ul>
+<p>자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>

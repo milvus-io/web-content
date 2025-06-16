@@ -97,7 +97,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-schema = MilvusClient.create_schema()
+schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)
@@ -324,7 +324,7 @@ schema.WithFunction(function)
 <h3 id="Configure-the-index" class="common-anchor-header">Configuration de l'index</h3><p>Après avoir défini le schéma avec les champs nécessaires et la fonction intégrée, configurez l'index de votre collection. Pour simplifier ce processus, utilisez <code translate="no">AUTOINDEX</code> comme <code translate="no">index_type</code>, une option qui permet à Milvus de choisir et de configurer le type d'index le plus approprié en fonction de la structure de vos données.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
@@ -390,7 +390,12 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>L'algorithme utilisé pour construire et interroger l'index. Valeurs valides :</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (par défaut) : Traitement optimisé des requêtes Document-at-a-Time (DAAT) à l'aide de l'algorithme MaxScore. MaxScore offre de meilleures performances pour les valeurs <em>k</em> élevées ou les requêtes comportant de nombreux termes en ignorant les termes et les documents susceptibles d'avoir un impact minimal. Il y parvient en répartissant les termes en groupes essentiels et non essentiels sur la base de leur score d'impact maximal, en se concentrant sur les termes qui peuvent contribuer aux résultats les plus importants.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Traitement optimisé des requêtes DAAT à l'aide de l'algorithme WAND. WAND évalue moins de documents en exploitant les scores d'impact maximum pour ignorer les documents non compétitifs, mais ses frais généraux par hit sont plus élevés. L'algorithme WAND est donc plus efficace pour les requêtes avec des valeurs <em>k</em> faibles ou pour les requêtes courtes, pour lesquelles il est plus facile de sauter des documents.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Traitement des requêtes par terme de base à la fois (TAAT). Bien qu'il soit plus lent que <code translate="no">DAAT_MAXSCORE</code> et <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un avantage unique. Contrairement aux algorithmes DAAT, qui utilisent des scores d'impact maximum mis en cache et qui restent statiques quelles que soient les modifications apportées au paramètre de collecte globale (avgdl), <code translate="no">TAAT_NAIVE</code> s'adapte dynamiquement à ces modifications.</p></li></ul></td>
+     <td><p>L'algorithme utilisé pour construire et interroger l'index. Valeurs valides :</p>
+<ul>
+<li><p><code translate="no">"DAAT_MAXSCORE"</code> (par défaut) : Traitement optimisé des requêtes Document-at-a-Time (DAAT) à l'aide de l'algorithme MaxScore. MaxScore offre de meilleures performances pour les valeurs <em>k</em> élevées ou les requêtes comportant de nombreux termes en ignorant les termes et les documents susceptibles d'avoir un impact minimal. Il y parvient en répartissant les termes en groupes essentiels et non essentiels sur la base de leur score d'impact maximal, en se concentrant sur les termes qui peuvent contribuer aux résultats les plus importants.</p></li>
+<li><p><code translate="no">"DAAT_WAND"</code>: Traitement optimisé des requêtes DAAT à l'aide de l'algorithme WAND. WAND évalue moins de documents en exploitant les scores d'impact maximum pour ignorer les documents non compétitifs, mais ses frais généraux par hit sont plus élevés. L'algorithme WAND est donc plus efficace pour les requêtes avec des valeurs <em>k</em> faibles ou pour les requêtes courtes, pour lesquelles il est plus facile de sauter des documents.</p></li>
+<li><p><code translate="no">"TAAT_NAIVE"</code>: Traitement des requêtes par terme de base à la fois (TAAT). Bien qu'il soit plus lent que <code translate="no">DAAT_MAXSCORE</code> et <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un avantage unique. Contrairement aux algorithmes DAAT, qui utilisent des scores d'impact maximum mis en cache et qui restent statiques quelles que soient les modifications apportées au paramètre de collecte globale (avgdl), <code translate="no">TAAT_NAIVE</code> s'adapte dynamiquement à ces modifications.</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -536,8 +541,9 @@ client.insert(InsertReq.builder()
 
 client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
-    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
-    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
+<span class="highlighted-comment-line">    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],</span>
+<span class="highlighted-comment-line">    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,</span>
+<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>], <span class="hljs-comment"># Fields to return in search results; sparse field cannot be output</span></span>
     limit=<span class="hljs-number">3</span>,
     search_params=search_params
 )
@@ -582,6 +588,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>, 
     <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 )
@@ -618,22 +625,77 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proportion de termes de faible importance à ignorer lors de la recherche. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</p></td>
-   </tr>
-   <tr>
-     <td></td>
-     <td></td>
+     <td><p>Proportion de termes de faible importance à ignorer lors de la recherche. Pour plus de détails, voir <a href="/docs/fr/sparse_vector.md">Vecteur épars</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>Texte brut de la requête.</p></td>
+     <td><p>Texte brut de la requête en langage naturel. Milvus convertit automatiquement votre requête textuelle en vecteurs épars à l'aide de la fonction BM25 - <strong>ne pas</strong> fournir de vecteurs précalculés.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
-     <td><p>Nom du champ contenant les vecteurs épars générés en interne.</p></td>
+     <td><p>Le nom du champ qui contient les vecteurs épars générés en interne.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">output_fields</code></p></td>
+     <td><p>Liste des noms de champs à renvoyer dans les résultats de la recherche. Prend en charge tous les champs <strong>, à l'exception du champ de vecteurs épars</strong> contenant les intégrations générées par la fonction BM25. Les champs de sortie courants sont le champ de la clé primaire (par exemple, <code translate="no">id</code>) et le champ du texte original (par exemple, <code translate="no">text</code>). Pour plus d'informations, voir la <a href="/docs/fr/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
-     <td><p>Nombre maximal de correspondances à renvoyer.</p></td>
+     <td><p>Nombre maximum de résultats à renvoyer.</p></td>
    </tr>
 </table>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">Puis-je sortir ou accéder aux vecteurs épars générés par la fonction BM25 dans le cadre d'une recherche en texte intégral ?</h3><p>Non, les vecteurs épars générés par la fonction BM25 ne sont pas directement accessibles ou exploitables dans le cadre d'une recherche en texte intégral. Voici les détails :</p>
+<ul>
+<li><p>La fonction BM25 génère des vecteurs épars en interne pour le classement et l'extraction</p></li>
+<li><p>Ces vecteurs sont stockés dans le champ clairsemé mais ne peuvent pas être inclus dans la recherche en texte intégral. <code translate="no">output_fields</code></p></li>
+<li><p>Vous ne pouvez sortir que les champs de texte originaux et les métadonnées (comme <code translate="no">id</code>, <code translate="no">text</code>).</p></li>
+</ul>
+<p>Exemple :</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
+client.search(
+    collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
+    data=[<span class="hljs-string">&#x27;query text&#x27;</span>],
+    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
+<span class="highlighted-wrapper-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;sparse&#x27;</span>]  <span class="hljs-comment"># &#x27;sparse&#x27; causes an error</span></span>
+    limit=<span class="hljs-number">3</span>,
+    search_params=search_params
+)
+
+<span class="hljs-comment"># ✅ This works - output text fields only</span>
+client.search(
+    collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
+    data=[<span class="hljs-string">&#x27;query text&#x27;</span>],
+    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,
+<span class="highlighted-wrapper-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>]</span>
+    limit=<span class="hljs-number">3</span>,
+    search_params=search_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Pourquoi dois-je définir un champ de vecteurs épars si je ne peux pas y accéder ?</h3><p>Le champ sparse vector sert d'index de recherche interne, similaire aux index de base de données avec lesquels les utilisateurs n'interagissent pas directement.</p>
+<p><strong>Justification de la conception</strong>:</p>
+<ul>
+<li><p>Séparation des préoccupations : Vous travaillez avec du texte (entrée/sortie), Milvus gère les vecteurs (traitement interne).</p></li>
+<li><p>Performance : Les vecteurs épars précalculés permettent un classement BM25 rapide lors des requêtes.</p></li>
+<li><p>Expérience utilisateur : Abandonne les opérations vectorielles complexes derrière une interface textuelle simple.</p></li>
+</ul>
+<p><strong>Si vous avez besoin d'un accès aux vecteurs</strong>:</p>
+<ul>
+<li><p>Utilisez les opérations manuelles de vecteurs épars au lieu de la recherche plein texte.</p></li>
+<li><p>Créez des collections distinctes pour les flux de travail personnalisés sur les vecteurs épars.</p></li>
+</ul>
+<p>Pour plus d'informations, reportez-vous à <a href="/docs/fr/sparse_vector.md">Sparse Vector</a>.</p>
