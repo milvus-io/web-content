@@ -8,7 +8,7 @@ summary: "Woodpecker is a cloud-native WAL system in Milvus 2.6. With a zero-dis
 
 In Milvus 2.6, Woodpecker replaces Kafka and Pulsar with a purpose-built, cloud-native write-ahead log (WAL) system. Engineered for object storage, Woodpecker simplifies operations, maximizes throughput, and scales effortlessly.
 
-Woodpecker’s design goals:
+Woodpecker's design goals:
 
 - Highest throughput in cloud environments
 
@@ -82,60 +82,13 @@ Woodpecker is particularly optimized for concurrent, high-volume writes where ma
 
 ## Operational benefits
 
-Woodpecker’s cloud-native architecture streamlines deployment, reduces maintenance, and improves reliability.
+Woodpecker's cloud-native architecture delivers significant operational advantages:
 
-### Simplified infrastructure management
+- **Zero local storage management**: Eliminates disk volume management, RAID configuration, and hardware failures
+- **Automatic scaling**: Storage scales with cloud object storage without capacity planning
+- **Cost efficiency**: Pay-as-you-go storage with automatic tiering and compression
+- **High availability**: Leverages cloud providers' 11-nines durability with fast recovery
+- **Simplified deployment**: Two deployment modes (MemoryBuffer/QuorumBuffer) match different operational needs
+- **Developer-friendly**: Faster environment setup and consistent architecture across all environments
 
-- **No local storage management:** Removes the need to manage disk volumes, RAID, or disk failures.
-- **Reduced hardware dependency:** Eliminates hardware configuration and monitoring; durability and availability are handled by cloud object storage.
-- **Simplified capacity planning:** Storage scales automatically with cloud object storage, removing the need for manual forecasting.
-
-### Simplified deployment
-
-- **MemoryBuffer mode:** Uses minimal resources and integrates with cloud storage, ideal for development and small-scale production.
-- **QuorumBuffer mode:** Provides enterprise-grade reliability without the complexity of traditional distributed storage.
-
-## Cost efficiency and resource optimization
-
-- **Lower memory usage:** Efficient buffering reduces memory requirements compared to traditional brokers.
-- **Elastic scaling:** Pay-as-you-go cloud storage eliminates over-provisioning.
-- **Reduced infrastructure overhead:** Fewer components mean lower deployment and maintenance costs.
-
-### Storage cost advantages
-
-- **Tiered storage:** Automatically migrates data to cost-effective cloud storage tiers for long-term retention.
-- **Compression and deduplication:** Built-in features reduce storage costs without extra operational effort.
-- **No replication overhead:** Durability is managed by cloud storage, removing the need for manual replica management.
-
-## High availability and disaster recovery
-
-### Simplified fault tolerance
-
-- **Cloud-native durability:** Leverages cloud providers’ 11-nines (99.999999999%) durability guarantees.
-- **Fast recovery:** Minimal local state enables rapid node replacement and cluster recovery.
-- **Cross-region resilience:** Supports cross-region replication using cloud storage features.
-
-### Operational resilience
-
-- **Fewer single points of failure:** Reduced component count lowers failure risk.
-- **Automatic failover:** Cloud storage redundancy simplifies failover.
-- **Simplified backup:** Integrated cloud storage provides automatic backup and versioning.
-
-
-## Development and operational experience
-
-### Improved development workflow
-
-- **Faster environment setup:** Minimal dependencies speed up development and testing.
-- **Consistent architecture:** Uniform design across development, staging, and production.
-- **Cloud-native integration:** Seamless compatibility with cloud services and container orchestration.
-
-### Enhanced production operations
-
-- **Predictable performance:** Consistent results across deployment scales and configurations.
-- **Simplified upgrades:** Stateless design enables minimal-downtime rolling updates.
-- **Resource predictability:** More stable resource usage compared to traditional message brokers.
-
-For vector databases supporting mission-critical RAG, AI agents, and low-latency search workloads, these operational advantages are revolutionary. Transitioning from complex message broker stacks to Woodpecker's simplified architecture not only boosts performance but also significantly reduces the operational burden on development and infrastructure teams.
-
-As cloud infrastructure continues to evolve with innovations like S3 Express One Zone, Woodpecker's architecture enables organizations to automatically benefit from these advancements without requiring major operational changes or system redesigns.
+These advantages make Woodpecker particularly valuable for mission-critical RAG, AI agents, and low-latency search workloads where operational simplicity is as important as performance.

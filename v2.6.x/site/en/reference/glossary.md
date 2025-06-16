@@ -35,7 +35,7 @@ Cardinal, developed by Zilliz Cloud, is a cutter-edge vector search algorithm th
 
 ## Channel
 
-Milvus utilizes two types of channels, [PChannel](https://milvus.io/docs/glossary.md#PChannel) and [VChannel](https://milvus.io/docs/glossary.md#VChannel). Each PChannel corresponds to a topic for log storage, while each VChannel corresponds to a shard in a collection.
+Milvus utilizes two types of channels, [PChannel](#pchannel) and [VChannel](#vchannel), as part of its streaming service architecture. Each PChannel corresponds to a WAL stream managed by [Woodpecker](woodpecker_architecture.md), while each VChannel corresponds to a shard in a collection. The streaming service manages these channels to ensure data consistency and fault recovery.
 
 ## Collection
 
@@ -87,25 +87,29 @@ A vector index is a reorganized data structure derived from raw data that can gr
 
 [Knowhere](https://milvus.io/docs/knowhere.md#Knowhere) is the core vector execution engine of Milvus which incorporates several vector similarity search libraries including Faiss, Hnswlib, and Annoy. Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations.
 
-## Log broker
+<!-- ## Log broker
 
-The [log broker](https://milvus.io/docs/four_layers.md#Log-broker) is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown.
+The [log broker](https://milvus.io/docs/four_layers.md#Log-broker) is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. -->
 
 ## Log snapshot
 
 A log snapshot is a binary log, a smaller unit in segment that records and handles the updates and changes made to data in Milvus. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog. For more information, refer to [Meta storage](https://milvus.io/docs/four_layers.md#Meta-storage).
 
-## Log subscriber
+<!-- ## Log subscriber
 
-Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies.
+Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. -->
 
-## Message storage
+<!-- ## Message storage
 
-Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to [Configure Message Storage](https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator).
+Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to [Configure Message Storage](https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator). -->
 
 ## Metric type
 
 Similarity metric types are used to measure similarities between vectors. Currently, Milvus supports Euclidean distance (L2), Inner product (IP), Cosine similarity (COSINE), and binary metric types. You can choose the most appropriate metric type based on your scenario. For more information, refer to [Similarity Metrics](https://milvus.io/docs/metric.md).
+
+## MemoryBuffer
+
+MemoryBuffer is a lightweight deployment mode of Woodpecker that temporarily buffers incoming writes in memory and periodically flushes them to cloud object storage. This mode is best suited for batch-heavy workloads in smaller-scale deployments or production environments that prioritize simplicity over performance. For more information, refer to [Woodpecker Architecture](woodpecker_architecture.md).
 
 ## Mmap
 
@@ -149,7 +153,7 @@ The partition key attribute of a field enables the segregation of entities into 
 
 ## PChannel
 
-PChannel stands for physical channel. Each PChannel corresponds to a topic for log storage. By default, a group of 16 PChannels will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started. For more information, refer to [Message Channel-related Configurations](https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations).
+PChannel stands for physical channel. Each PChannel corresponds to a WAL stream managed by Woodpecker. By default, a group of PChannels will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started. For more information, refer to [Streaming Service](streaming_service.md).
 
 ## PyMilvus
 
@@ -158,6 +162,10 @@ PyMilvus is a Python SDK of Milvus. Its source code is open-sourced and hosted o
 ## Query
 
 [Query](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md) is an API that conducts scalar filtering with a specified boolean expression as filter. For more information, refer to [Get & Scalar Query](https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators).
+
+## QuorumBuffer
+
+QuorumBuffer is a deployment mode of Woodpecker designed for latency-sensitive, high-frequency read/write workloads requiring both real-time responsiveness and strong fault tolerance. It functions as a high-speed write buffer with three-replica quorum writes, ensuring strong consistency and high availability. For more information, refer to [Woodpecker Architecture](woodpecker_architecture.md).
 
 ## Range search
 
@@ -191,17 +199,29 @@ Milvus enhances data write performance by distributing write operations across m
 
 Sparse vectors represent words or phrases using vector embeddings where most elements are zero, with only one non-zero element indicating the presence of a specific word. Sparse vector models, such as SPLADEv2, outperform dense models in out-of-domain knowledge search, keyword-awareness, and interpretability. For more information, refer to [Sparse Vectors](https://milvus.io/docs/sparse_vector.md#Sparse-Vector).
 
+## Streaming Service
+
+The Streaming Service is a concept for Milvus internal streaming system module, built around the Write-Ahead Log (WAL) to support various streaming-related functions. These include streaming data ingestion/subscription, fault recovery of cluster state, conversion of streaming data into historical data, and growing data queries. The service is composed of Streaming Coordinator, Streaming Node Cluster, and Streaming Client components. For more information, refer to [Streaming Service](streaming_service.md).
+
 ## Unstructured data
 
 Unstructured data, including images, video, audio, and natural language, is information that does not follow a predefined model or manner of organization. This data type accounts for around 80% of the world's data, and can be converted into vectors using various artificial intelligence (AI) and ML models.
 
 ## VChannel
 
-[VChannel](https://milvus.io/docs/data_processing.md#Data-insertion) stands for logical channel. Each VChannel represents a shard in a collection. Each collection will be assigned a group of VChannels for recording data insertion, deletion, and update. VChannels are logically separated but physically share resources.
+VChannel stands for virtual channel. Each VChannel represents a shard in a collection. Each collection will be assigned a group of VChannels for recording data insertion, deletion, and update. VChannels are logically separated but physically share resources through the streaming service. For more information, refer to [Streaming Service](streaming_service.md).
 
 ## Vector
 
 An embedding vector is a feature abstraction of unstructured data, such as emails, IoT sensor data, Instagram photos, protein structures, and more. Mathematically speaking, an embedding vector is an array of floating-point numbers or binaries. Modern embedding techniques are used to convert unstructured data to embedding vectors. Milvus support both dense and sparse vector since 2.4.0.
+
+## WAL Storage
+
+Write-Ahead Log (WAL) storage is the foundation of data durability and consistency in distributed systems. Before any change is committed, it's first recorded in a log—ensuring that, in the event of a failure, you can recover exactly where you left off. Milvus uses Woodpecker as its WAL storage system, which supports both MemoryBuffer and QuorumBuffer modes. For more information, refer to [Woodpecker Architecture](woodpecker_architecture.md).
+
+## Woodpecker
+
+Woodpecker is a cloud-native WAL system in Milvus 2.6 that replaces Kafka and Pulsar. With a zero-disk architecture and two deployment modes (MemoryBuffer and QuorumBuffer), it delivers high throughput, low operational overhead, and seamless scalability on object storage. For more information, refer to [Woodpecker Architecture](woodpecker_architecture.md).
 
 ## Zilliz Cloud
 
