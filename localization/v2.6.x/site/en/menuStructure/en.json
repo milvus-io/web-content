@@ -217,39 +217,33 @@
             "children": []
           },
           {
-            "label": "Storage/Computing",
-            "id": "four_layers.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "Main Components",
             "id": "main_components.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Woodpecker",
-            "id": "woodpecker_architecture.md",
-            "order": 3,
+            "order": 1,
             "children": []
           },
           {
             "label": "Streaming Service",
             "id": "streaming_service.md",
-            "order": 4,
+            "order": 2,
             "children": []
           },
           {
             "label": "Data Processing",
             "id": "data_processing.md",
-            "order": 5,
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Woodpecker",
+            "id": "woodpecker_architecture.md",
+            "order": 4,
             "children": []
           },
           {
             "label": "Knowhere",
             "id": "knowhere.md",
-            "order": 6,
+            "order": 5,
             "children": []
           }
         ]
