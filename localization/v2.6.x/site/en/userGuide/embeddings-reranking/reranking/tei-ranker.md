@@ -78,10 +78,40 @@ tei_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,                 <span class="hljs-comment"># Specifies TEI as the service provider</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text for relevance evaluation</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># Your TEI service URL</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>                     <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;truncate&quot;</span>: <span class="hljs-literal">True</span>,                <span class="hljs-comment"># Optional: Truncate the inputs that are longer than the maximum supported size</span>
+        <span class="hljs-string">&quot;truncation_direction&quot;</span>: <span class="hljs-string">&quot;Right&quot;</span>,    <span class="hljs-comment"># Optional: Direction to truncate the inputs</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">TEI ranker-specific parameters</h3><p>The following parameters are specific to the TEI ranker:</p>
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Required?</p></th>
+     <th><p>Description</p></th>
+     <th><p>Value / Example</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncate</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Whether to truncate inputs exceeding max sequence length. If <code translate="no">False</code>, long inputs raise errors.</p></td>
+     <td><p><code translate="no">True</code> or <code translate="no">False</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncation_direction</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Direction to truncate from when input is too long:</p>
+<ul>
+<li><p><code translate="no">"Right"</code> (default):  Tokens are removed from the end of the sequence until the maximum supported size is matched.</p></li>
+<li><p><code translate="no">"Left"</code>: Tokens are removed from the beginning of the sequence.</p></li>
+</ul></td>
+     <td><p><code translate="no">"Right"</code> or <code translate="no">"Left"</code></p></td>
+   </tr>
+</table>
+<div class="alert note">
+<p>For general parameters shared across all model rankers (e.g., <code translate="no">provider</code>, <code translate="no">queries</code>), refer to <a href="/docs/model-ranker-overview.md#Create-a-model-ranker">Create a model ranker</a>.</p>
+</div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Apply to standard vector search<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
