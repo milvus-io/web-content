@@ -30,7 +30,7 @@ summary: >-
 </p>
 <ul>
 <li><p><strong>Streaming Coordinator</strong>: A logical component in the coordinator node. It uses Etcd for service discovery to locate available streaming nodes and is responsible for binding WAL to the corresponding streaming nodes. It also registers service to expose the WAL distribution topology, allowing streaming clients to know the appropriate streaming node for a given WAL.</p></li>
-<li><p><strong>streaming Node Cluster</strong>: A cluster of streaming worker nodes responsible for all streaming-processing tasks, such as wal appending, state recovering, growing data querying.</p></li>
+<li><p><strong>Streaming Node Cluster</strong>: A cluster of streaming worker nodes responsible for all streaming-processing tasks, such as wal appending, state recovering, growing data querying.</p></li>
 <li><p><strong>Streaming Client</strong>: An internally developed Milvus client that encapsulates basic functionalities such as service discovery and readiness checks. It is used to initiate operations such as message writing and subscription.</p></li>
 </ul>
 <h2 id="Message" class="common-anchor-header">Message<button data-href="#Message" class="anchor-icon" translate="no">
