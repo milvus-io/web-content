@@ -70,7 +70,7 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-schema = MilvusClient.create_schema()
+schema = client.create_schema()
 
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True, auto_id=True)
 schema.add_field(field_name="text", datatype=DataType.VARCHAR, max_length=1000, enable_analyzer=True)
@@ -339,7 +339,7 @@ After defining the schema with necessary fields and the built-in function, set u
 </div>
 
 ```python
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name="sparse",
@@ -414,7 +414,12 @@ export indexParams='[
    </tr>
    <tr>
      <td><p><code>params.inverted_index_algo</code></p></td>
-     <td><p>The algorithm used for building and querying the index. Valid values:</p><ul><li><p><code>"DAAT_MAXSCORE"</code> (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high <em>k</em> values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.</p></li><li><p><code>"DAAT_WAND"</code>: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small <em>k</em> values or short queries, where skipping is more feasible.</p></li><li><p><code>"TAAT_NAIVE"</code>: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to <code>DAAT_MAXSCORE</code> and <code>DAAT_WAND</code>, <code>TAAT_NAIVE</code> offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), <code>TAAT_NAIVE</code> dynamically adapts to such changes.</p></li></ul></td>
+     <td><p>The algorithm used for building and querying the index. Valid values:</p>
+<ul>
+<li><p><code>"DAAT_MAXSCORE"</code> (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high <em>k</em> values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.</p></li>
+<li><p><code>"DAAT_WAND"</code>: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small <em>k</em> values or short queries, where skipping is more feasible.</p></li>
+<li><p><code>"TAAT_NAIVE"</code>: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to <code>DAAT_MAXSCORE</code> and <code>DAAT_WAND</code>, <code>TAAT_NAIVE</code> offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), <code>TAAT_NAIVE</code> dynamically adapts to such changes.</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p><code>params.bm25_k1</code></p></td>
@@ -579,8 +584,11 @@ search_params = {
 
 client.search(
     collection_name='my_collection', 
+    # highlight-start
     data=['whats the focus of information retrieval?'],
     anns_field='sparse',
+    output_fields=['text'], # Fields to return in search results; sparse field cannot be output
+    # highlight-end
     limit=3,
     search_params=search_params
 )
@@ -631,6 +639,7 @@ await client.search(
     collection_name: 'my_collection', 
     data: ['whats the focus of information retrieval?'],
     anns_field: 'sparse',
+    output_fields: ['text'],
     limit: 3,
     params: {'drop_ratio_search': 0.2},
 )
@@ -673,16 +682,16 @@ curl --request POST \
      <td><p>Proportion of low-importance terms to ignore during search. For details, refer to <a href="sparse_vector.md">Sparse Vector</a>.</p></td>
    </tr>
    <tr>
-     <td></td>
-     <td></td>
-   </tr>
-   <tr>
      <td><p><code>data</code></p></td>
-     <td><p>The raw query text.</p></td>
+     <td><p>Raw query text in natural language. Milvus automatically converts your text query into sparse vectors using the BM25 function - <strong>do not</strong> provide pre-computed vectors.</p></td>
    </tr>
    <tr>
      <td><p><code>anns_field</code></p></td>
      <td><p>The name of the field that contains internally generated sparse vectors.</p></td>
+   </tr>
+   <tr>
+     <td><p><code>output_fields</code></p></td>
+     <td><p>List of field names to return in search results. Supports all fields <strong>except the sparse vector field</strong> containing BM25-generated embeddings. Common output fields include the primary key field (e.g., <code>id</code>) and the original text field (e.g., <code>text</code>). For more information, refer to <a href="full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
    </tr>
    <tr>
      <td><p><code>limit</code></p></td>
@@ -690,3 +699,60 @@ curl --request POST \
    </tr>
 </table>
 
+## FAQ
+
+### Can I output or access the sparse vectors generated by the BM25 function in full text search?
+
+No, the sparse vectors generated by the BM25 function are not directly accessible or outputable in full text search. Here are the details:
+
+- The BM25 function generates sparse vectors internally for ranking and retrieval
+
+- These vectors are stored in the sparse field but cannot be included in `output_fields`
+
+- You can only output the original text fields and metadata (like `id`, `text`)
+
+Example:
+
+```python
+# ❌ This throws an error - you cannot output the sparse field
+client.search(
+    collection_name='my_collection', 
+    data=['query text'],
+    anns_field='sparse',
+    # highlight-next-line
+    output_fields=['text', 'sparse']  # 'sparse' causes an error
+    limit=3,
+    search_params=search_params
+)
+
+# ✅ This works - output text fields only
+client.search(
+    collection_name='my_collection', 
+    data=['query text'],
+    anns_field='sparse',
+    # highlight-next-line
+    output_fields=['text']
+    limit=3,
+    search_params=search_params
+)
+```
+
+### Why do I need to define a sparse vector field if I can't access it?
+
+The sparse vector field serves as an internal search index, similar to database indexes that users don't directly interact with.
+
+**Design Rationale**:
+
+- Separation of Concerns: You work with text (input/output), Milvus handles vectors (internal processing)
+
+- Performance: Pre-computed sparse vectors enable fast BM25 ranking during queries
+
+- User Experience: Abstracts away complex vector operations behind a simple text interface
+
+**If you need vector access**:
+
+- Use manual sparse vector operations instead of full text search
+
+- Create separate collections for custom sparse vector workflows
+
+For details, refer to [Sparse Vector](sparse_vector.md).
