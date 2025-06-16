@@ -205,6 +205,12 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>A dictionary containing configuration for the model-based reranking function. The available parameters (keys) vary depending on the provider (<code translate="no">tei</code> or <code translate="no">vllm</code>). Refer to <a href="/docs/vllm-ranker.md">vLLM Ranker</a> or <a href="/docs/tei-ranker.md">TEI Ranker</a> for more details.</p></td>
+     <td><p>{…}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Yes</p></td>
      <td><p>Must be set to <code translate="no">"model"</code> to enable model reranking.</p></td>
