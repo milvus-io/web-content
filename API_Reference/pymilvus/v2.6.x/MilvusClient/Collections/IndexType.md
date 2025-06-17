@@ -40,6 +40,10 @@ This is an enumeration that provides the following constants.
 
     Sets the index type to **IVF_SQ8**.
 
+- IVF_RABITQ
+
+    Sets the index type to **IVF_RABITQ**.
+
 - BIN_FLAT
 
     Sets the index type to **BIN_FLAT**. This applies to binary vectors only.
