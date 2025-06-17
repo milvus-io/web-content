@@ -16,7 +16,7 @@ You can choose how many shards a collection uses in Milvus—each shard maps to 
 
 After data verification, the proxy will split the written message into various data package of shards according to the specified shard routing rules. 
 
-![Channels 1](../../../../assets/channels_1.jpg "Each shard corresponds to a vchannel.")
+![Channels 1](../../../../assets/channels_1.png "Each shard corresponds to a vchannel.")
 
 Then the written data of one shard (*vchannel*) is sent to the corresponding Streaming Node of *pchannel*.
 
@@ -36,7 +36,7 @@ The transition of a growing segment into a sealed segment is called a flush. The
 
 Index building is performed by data node. To avoid frequent index building for data updates, a collection in Milvus is divided further into segments, each with its own index.
 
-![Index building](../../../../assets/index_building.jpg "Index building in Milvus.")
+![Index building](../../../../assets/index_building.png "Index building in Milvus.")
 
 Milvus supports building index for each vector field, scalar field and primary field. Both the input and output of index building engage with object storage: The data node loads the log snapshots to index from a segment (which is in object storage) to memory, deserializes the corresponding data and metadata to build index, serializes the index when index building completes, and writes it back to object storage.
 
@@ -62,7 +62,7 @@ Each Streaming Node generates a query plan, searches its local growing data, and
 
 Finally, the proxy collects all shard results, merges them into the final outcome, and returns it to the client.
 
-![Handoff](../../../../assets/handoff.jpg "Handoff in Milvus.")
+![Handoff](../../../../assets/handoff.png "Handoff in Milvus.")
 
 When the growing segment on a Streaming Node is flushed into a sealed segment—or when a Data Node completes a compaction—the Coordinator initiates a handoff operation to convert that growing data into historical data. The Coordinator then evenly distributes the sealed segments across all Query Nodes, balancing memory usage, CPU overhead, and segment count, and releases any redundant segment.
 

@@ -32,7 +32,7 @@ There are two modes for running Milvus:
 A single instance of Milvus that runs all components in one process, which is suitable for small datasets and low workload.
 Additionally, in standalone mode, simpler WAL implementation, such as woodpecker and rocksmq, can be chosen to eliminate the requirement for third-party WAL Storage dependencies.
 
-![Standalone_architecture](../../../../assets/standalone_architecture.jpg "Milvus standalone architecture.")
+![Standalone_architecture](../../../../assets/standalone_architecture.png "Milvus standalone architecture.")
 
 Currently, you cannot perform an online upgrade from a standalone Milvus instance to a Milvus cluster, even if the WAL storage backend supports cluster mode.
 
@@ -40,7 +40,7 @@ Currently, you cannot perform an online upgrade from a standalone Milvus instanc
 
 A distributed deployment mode of Milvus where each component runs independently and can be scaled out for elasticity. This setup is suitable for large datasets and high-load scenarios.
 
-![Distributed_architecture](../../../../assets/distributed_architecture.jpg "Milvus cluster architecture.")
+![Distributed_architecture](../../../../assets/distributed_architecture.png "Milvus cluster architecture.")
 
 ## What's next
 
