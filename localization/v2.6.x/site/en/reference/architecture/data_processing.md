@@ -44,7 +44,7 @@ title: Data Processing
 <p>After data verification, the proxy will split the written message into various data package of shards according to the specified shard routing rules.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+    <img translate="no" src="/docs/v2.6.x/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
     <span>Channels 1</span>
   </span>
 </p>
@@ -80,7 +80,7 @@ title: Data Processing
     </button></h2><p>Index building is performed by data node. To avoid frequent index building for data updates, a collection in Milvus is divided further into segments, each with its own index.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+    <img translate="no" src="/docs/v2.6.x/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
     <span>Index building</span>
   </span>
 </p>
@@ -117,7 +117,7 @@ title: Data Processing
 <p>Finally, the proxy collects all shard results, merges them into the final outcome, and returns it to the client.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+    <img translate="no" src="/docs/v2.6.x/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
     <span>Handoff</span>
   </span>
 </p>

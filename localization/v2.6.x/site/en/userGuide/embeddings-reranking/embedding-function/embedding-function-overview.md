@@ -7,10 +7,10 @@ summary: >-
   OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no
   longer need to manually interface with embedding APIs—Milvus handles the
   entire process of sending requests to providers, receiving embeddings, and
-  storing them in your collections. For semantic search, you need provide only
-  raw query data, not a query vector. Milvus generates the query vector with the
-  same model you used for ingestion, compares it to the stored vectors, and
-  returns the most relevant results.
+  storing them in your collections. For semantic search, you need to provide
+  only raw query data, not a query vector. Milvus generates the query vector
+  with the same model you used for ingestion, compares it to the stored vectors,
+  and returns the most relevant results.
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">Embedding Function Overview<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -28,7 +28,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results.</p>
+    </button></h1><p>The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need to provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results.</p>
 <h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +55,7 @@ beta: Milvus 2.6.x
 </ul>
 <p>Conversions to <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, or <code translate="no">BFLOAT16_VECTOR</code> are not supported.</p></li>
 </ul>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Supported-model-providers" class="common-anchor-header">Supported model providers<button data-href="#Supported-model-providers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,8 +70,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The Function module turns raw text into vector embeddings by calling an external model provider of your choice. Different providers support different models, embedding formats, and authentication methods, all summarized below.</p>
-<h3 id="Supported-model-providers" class="common-anchor-header">Supported model providers</h3><table>
+    </button></h2><table>
    <tr>
      <th><p>Provider</p></th>
      <th><p>Typical Models</p></th>
@@ -81,59 +80,74 @@ beta: Milvus 2.6.x
    <tr>
      <td><p><a href="/docs/openai.md">OpenAI</a></p></td>
      <td><p>text-embedding-3-*</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/azure-openai.md">Azure OpenAI</a></p></td>
      <td><p>Deployment-based</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>AK/SK pair</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/vertex-ai.md">Vertex AI</a></p></td>
      <td><p>text-embedding-005</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>GCP service-account JSON</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/voyage-ai.md">Voyage AI</a></p></td>
      <td><p>voyage-3, voyage-lite-02</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/siliconflow.md">SiliconFlow</a></p></td>
      <td><p>BAAI/bge-large-zh-v1.5</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/hugging-face-tei.md">Hugging Face</a></p></td>
      <td><p>Any TEI-served model</p></td>
-     <td><p>Dense (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Optional API key</p></td>
    </tr>
 </table>
-<h3 id="Workflow" class="common-anchor-header">Workflow</h3><p>The following diagram shows how the Function works in Milvus.</p>
+<h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>The following diagram shows how the Function works in Milvus.</p>
 <ol>
 <li><p><strong>Input text</strong>: Users insert raw data (e.g. documents) into Milvus.</p></li>
 <li><p><strong>Generate embeddings</strong>: The Function module within Milvus automatically calls the configured model provider to convert raw data into vector embeddings.</p></li>
@@ -148,26 +162,6 @@ beta: Milvus 2.6.x
     <span>Embedding Function Overview</span>
   </span>
 </p>
-<h3 id="Credential-management" class="common-anchor-header">Credential management</h3><p>Connecting to external embedding APIs requires authentication credentials (API keys or access/secret key pairs). Exposing these credentials in your application code creates security risks. Milvus solves this by storing credentials securely in the Milvus configuration file (<code translate="no">milvus.yaml</code>).</p>
-<ol>
-<li><p><strong>Add credentials</strong>: Under the top-level <code translate="no">credential:</code> block, give each credential a unique label; then point to that label in the <code translate="no">function:</code> block.</p></li>
-<li><p><strong>Server loads config</strong>: Milvus reads the YAML file, caches the raw keys in memory, and remembers only their labels (e.g. <code translate="no">apikey1</code>).</p></li>
-<li><p><strong>Call function</strong>: Optionally specify the <code translate="no">credential</code> argument.</p>
-<ul>
-<li><p>If you supply a credential name with function definition, Milvus uses the specified credential.</p></li>
-<li><p>If you omit the argument, Milvus automatically falls back to the credential configured for that model provider in <code translate="no">milvus.yaml</code>.</p>
-<p>Either way, the secret key never leaves the server.</p></li>
-</ul></li>
-</ol>
-<p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
-    <span>Credential Config Overflow</span>
-  </span>
-</p>
-<div class="alert note">
-<p>If you deploy Milvus with Docker Compose, you can also inject the same fields through environment variables. Refer to the provider-specific guides for exact variable names.</p>
-</div>
 <h2 id="Configure-credentials" class="common-anchor-header">Configure credentials<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -183,7 +177,20 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before using an embedding function with Milvus, configure access credentials.</p>
+    </button></h2><p>Before using an embedding function with Milvus, configure embedding service credentials for Milvus access.</p>
+<p>Milvus lets you supply embedding service credentials in two ways:</p>
+<ul>
+<li><p><strong>Configuration file</strong> (<code translate="no">milvus.yaml</code>):</p>
+<p>The example in this topic demonstrates the <strong>recommended setup</strong> using <code translate="no">milvus.yaml</code>.</p></li>
+<li><p><strong>Environment variables</strong>:</p>
+<p>For details on configuring credentials via environment variables, see the embedding service provider’s documentation (for example, <a href="/docs/openai.md">OpenAI</a> or <a href="/docs/azure-openai.md">Azure OpenAI</a>).</p></li>
+</ul>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
+    <span>Credential Config Overflow</span>
+  </span>
+</p>
 <h3 id="Step-1-Add-credentials-to-Milvus-configuration" class="common-anchor-header">Step 1: Add credentials to Milvus configuration</h3><p>In your <code translate="no">milvus.yaml</code> file, edit the <code translate="no">credential</code> block with entries for each provider you need to access:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
@@ -205,51 +212,13 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">gcp1:</span>                        
     <span class="hljs-attr">credential_json:</span> <span class="hljs-string">&lt;BASE64_OF_JSON&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>Provider Type</p></th>
-     <th><p>Required Fields</p></th>
-     <th><p>Example Config</p></th>
-   </tr>
-   <tr>
-     <td><p>AK/SK pair (AWS Bedrock)</p></td>
-     <td><p><code translate="no">access_key_id</code>, <code translate="no">secret_access_key</code></p></td>
-     <td><pre><code translate="no" class="yaml language-yaml"> credential:
-     ...
-     aksk1:    # custom label
-         access_key_id: &lt;YOUR_AK&gt;
-         secret_access_key: &lt;YOUR_SK&gt;
-     ...
-</code></pre></td>
-   </tr>
-   <tr>
-     <td><p>API-key based (OpenAI, Voyage AI, etc.)</p></td>
-     <td><p><code translate="no">apikey</code></p></td>
-     <td><pre><code translate="no" class="yaml language-yaml"> credential:
-     ...
-     apikey1:    # custom label
-         apikey: &lt;YOUR_API_KEY&gt;
-     ...
-</code></pre></td>
-   </tr>
-   <tr>
-     <td><p>GCP service-account JSON (Vertex AI)</p></td>
-     <td><p><code translate="no">credential_json</code></p></td>
-     <td><pre><code translate="no" class="yaml language-yaml"> credential:
-     ...
-     gcp1:    # custom label
-         credential_json: &lt;BASE64_OF_JSON&gt;
-     ...
-</code></pre></td>
-   </tr>
-</table>
 <h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">Step 2: Configure provider settings</h3><p>In the same configuration file, edit the <code translate="no">function</code> block to tell Milvus which key to use for embedding service calls:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">openai:</span>                         <span class="hljs-comment"># calls OpenAI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey1</span>           <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url: https://api.openai.com/v1/embeddings   # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
 
       <span class="hljs-attr">bedrock:</span>                        <span class="hljs-comment"># calls AWS Bedrock</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">aksk1</span>             <span class="hljs-comment"># Reference to the credential label</span>
@@ -313,17 +282,17 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
 <p>The example below adds a Function module (<code translate="no">openai_embedding</code>) that converts the scalar field <code translate="no">&quot;document&quot;</code> into embeddings, storing the resulting vectors in the <code translate="no">&quot;dense&quot;</code> vector field defined earlier.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
-    name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                        <span class="hljs-comment"># Unique identifier for this embedding function</span>
-    function_type=FunctionType.TEXTEMBEDDING,       <span class="hljs-comment"># Type of embedding function</span>
-    input_field_names=[<span class="hljs-string">&quot;document&quot;</span>],                 <span class="hljs-comment"># Scalar field to embed</span>
-    output_field_names=[<span class="hljs-string">&quot;dense&quot;</span>],                   <span class="hljs-comment"># Vector field to store embeddings</span>
-    params={                                        <span class="hljs-comment"># Provider-specific configuration (highest priority)</span>
-        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;openai&quot;</span>,                       <span class="hljs-comment"># Embedding model provider</span>
+    name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
+    function_type=FunctionType.TEXTEMBEDDING, <span class="hljs-comment"># Type of embedding function</span>
+    input_field_names=[<span class="hljs-string">&quot;document&quot;</span>],           <span class="hljs-comment"># Scalar field to embed</span>
+    output_field_names=[<span class="hljs-string">&quot;dense&quot;</span>],             <span class="hljs-comment"># Vector field to store embeddings</span>
+    params={                                  <span class="hljs-comment"># Provider-specific configuration (highest priority)</span>
+        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;openai&quot;</span>,                 <span class="hljs-comment"># Embedding model provider</span>
         <span class="hljs-string">&quot;model_name&quot;</span>: <span class="hljs-string">&quot;text-embedding-3-small&quot;</span>,     <span class="hljs-comment"># Embedding model</span>
-        <span class="hljs-comment"># &quot;credential&quot;: &quot;apikey1&quot;,                    # Optional: Credential label specified in milvus.yaml</span>
+        <span class="hljs-comment"># &quot;credential&quot;: &quot;apikey1&quot;,            # Optional: Credential label</span>
         <span class="hljs-comment"># Optional parameters:</span>
-        <span class="hljs-comment"># &quot;dim&quot;: &quot;1536&quot;,                            # Optionally shorten the output vector dimension</span>
-        <span class="hljs-comment"># &quot;user&quot;: &quot;user123&quot;                         # Optional: identifier for API tracking</span>
+        <span class="hljs-comment"># &quot;dim&quot;: &quot;1536&quot;,       # Optionally shorten the vector dimension</span>
+        <span class="hljs-comment"># &quot;user&quot;: &quot;user123&quot;    # Optional: identifier for API tracking</span>
     }
 )
 
