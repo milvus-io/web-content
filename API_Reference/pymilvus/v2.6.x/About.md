@@ -74,8 +74,14 @@ client = MilvusClient(
 
 In this version, PyMilvus adds a MilvusClient module that incorporates several functional methods, aligning its functionality overall with that of the legacy ORM module.
 
+### Function-related methods
+
+- [Function](MilvusClient/Function/Function.md)
+- [add_function()](MilvusClient/Function/add_function.md)
+
 ### Collection-related methods
 
+- [add_collection_field()](MilvusClient/Collections/add_collection_field.md)
 - [create_collection()](MilvusClient/Collections/create_collection.md)
 - [rename_collection()](MilvusClient/Collections/rename_collection.md)
 - [describe_collection()](MilvusClient/Collections/describe_collection.md)
@@ -87,6 +93,8 @@ In this version, PyMilvus adds a MilvusClient module that incorporates several f
 - [release_collection()](MilvusClient/Management/release_collection.md)
 - [get_load_state()](MilvusClient/Management/get_load_state.md)
 - [refresh_load()](MilvusClient/Management/refresh_load.md)
+- [DataType](MilvusClient/Collections/DataType.md)
+- [FunctionType](MilvusClient/Collections/FunctionType.md)
 
 ### Data-related methods
 
@@ -116,6 +124,7 @@ In this version, PyMilvus adds a MilvusClient module that incorporates several f
 
 ### Index-related methods
 
+- [IndexType](MilvusClient/Management/IndexType.md)
 - [create_index()](MilvusClient/Management/create_index.md)
 - [list_indexes()](MilvusClient/Management/list_indexes.md)
 - [drop_index](MilvusClient/Management/drop_index.md)
