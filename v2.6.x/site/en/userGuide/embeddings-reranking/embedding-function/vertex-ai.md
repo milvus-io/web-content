@@ -11,118 +11,228 @@ Google Cloud [Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/e
 
 Vertex AI supports several embedding models for different use cases:
 
+- gemini-embedding-001 (State-of-the-art performance across English, multilingual and code tasks)
+
 - text-embedding-005 (Latest text embedding model)
 
 - text-multilingual-embedding-002 (Latest multilingual text embedding model)
 
-For details, refer to [Vertex AI text embedding models reference](https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings).
+For more information, refer to [Vertex AI text embedding models](https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings).
 
-## Vertex AI deployment
+## Prerequisites
 
-Before configuring Milvus with Vertex AI function, you need to configure your Milvus instance to use your Google Cloud service account credentials. Milvus supports two main deployment approaches:
+Ensure you meet these requirements before configuring Vertex AI:
 
-### Standard deployment (Docker Compose)
+- **Run Milvus version 2.6 or higher** - Verify your deployment meets the minimum version requirement.
 
-In your docker-compose.yaml file, you need to mount the credential file and set the `MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS` environment variable.
+- **Create a Google Cloud service account** -  At a minimum, you'll likely need roles like "Vertex AI User" or other more specific roles. For details, refer to [Create service accounts](https://cloud.google.com/iam/docs/service-accounts-create?_gl=1*1jz33xw*_ga*MjE0NTAwMjk3Mi4xNzUwMTQwNTMw*_ga_WH2QY8WWF5*czE3NTAxNDA1MzEkbzEkZzEkdDE3NTAxNDIyOTEkajE0JGwwJGgw).
 
-```yaml
-# docker-compose.yaml (standalone service section)
-standalone:
-  # ... other configurations ...
-  environment:
-    # ... other environment variables ...
-    # Set the environment variable pointing to the credential file path inside the container
-    MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS: /milvus/configs/google_application_credentials.json
-  volumes:
-    # ... other mounts ...
-    # Mount the credential file from the host to the specified path inside the container
-    # Replace /path/to/your/credentials.json with the actual path
-    - /path/to/your/credentials.json:/milvus/configs/google_application_credentials.json:ro
+- **Download the service account's JSON key file** - Securely store this credential file on your server or local machine. For details, refer to [Create a service account key](https://cloud.google.com/iam/docs/keys-create-delete?_gl=1*ittbs8*_ga*MjE0NTAwMjk3Mi4xNzUwMTQwNTMw*_ga_WH2QY8WWF5*czE3NTAxNDA1MzEkbzEkZzEkdDE3NTAxNDI0NjMkajYwJGwwJGgw#creating).
 
-```
+## Configure credentials
 
-### Milvus Helm Chart deployment (Kubernetes)
+Before Milvus can call Vertex AI, it needs access to your GCP service account JSON key. We support two methods—choose one based on your deployment and operational needs.
 
-For Kubernetes environments, it is recommended to use a Kubernetes Secret to store the credential file:
+<table>
+   <tr>
+     <th><p>Option</p></th>
+     <th><p>Priority</p></th>
+     <th><p>Best For</p></th>
+   </tr>
+   <tr>
+     <td><p>Configuration file (<code>milvus.yaml</code>)</p></td>
+     <td><p>High</p></td>
+     <td><p>Cluster-wide, persistent settings</p></td>
+   </tr>
+   <tr>
+     <td><p>Environment variables (<code>MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</code>)</p></td>
+     <td><p>Low</p></td>
+     <td><p>Container workflows, quick tests</p></td>
+   </tr>
+</table>
 
-1. **Create Secret**
+### Option 1: Configuration file (recommended & higher priority)
+
+Milvus will always prefer credentials declared in `milvus.yaml` over any environment variables for the same provider.
+
+1. Base64-encode your JSON key
+
+    ```bash
+    cat credentials.json | jq . | base64
+    ```
+
+1. Declare credentials in `milvus.yaml`
 
     ```yaml
+    # milvus.yaml
+    credential:
+      gcp_vertex:                      # arbitrary label
+        credential_json: |
+          <YOUR_BASE64_ENCODED_JSON>
+    ```
+
+1. Bind the credential to Vertex AI provider
+
+    ```yaml
+    # milvus.yaml
+    function:
+      textEmbedding:
+        providers:
+          vertexai:
+            credential: gcp_vertex      # must match the label above
+            url: <optional: custom Vertex AI endpoint>
+    ```
+
+    <div class="alert note">
+    
+    If you later need to rotate keys, just update the Base64 string under `credential_json` and restart Milvus—no changes to your environment or containers required.
+
+    </div>
+
+### Option 2: Environment variables
+
+Use this method when you prefer injecting secrets at deploy time. Milvus falls back to env-vars only if no matching entry exists in `milvus.yaml`.
+
+<div class="alert note">
+
+The configuration steps depend on your Milvus deployment mode (standalone vs. distributed cluster) and orchestration platform (Docker Compose vs. Kubernetes).
+
+</div>
+
+<div class="filter">
+  <a href="#docker">Docker Compose</a>
+  <a href="#helm">Helm</a>
+</div>
+
+<div class="filter-docker">
+
+<div class="alert note">
+
+To obtain your Milvus configuration file (**docker-compose.yaml**), refer to [Download an installation file](configure-docker.md#Download-an-installation-file).
+
+</div>
+
+1. **Mount your key into the container**
+
+    Edit your `docker-compose.yaml` file to include the credential volume mapping:
+
+    ```yaml
+    services:
+      standalone:
+        volumes:
+          # Map host credential file to container path
+          - /path/to/your/credentials.json:/milvus/configs/google_application_credentials.json:ro
+    ```
+
+    In the preceding configuration:
+
+    - Use absolute paths for reliable file access (`/home/user/credentials.json` not `~/credentials.json`)
+
+    - The container path must end with `.json` extension
+
+    - `:ro` flag ensures read-only access for security
+
+1. **Set environment variable**
+
+    In the same `docker-compose.yaml` file, add the environment variable pointing to the credential path:
+
+    ```yaml
+    services:
+      standalone:
+        environment:
+          # Essential for Vertex AI authentication
+          MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS: /milvus/configs/google_application_credentials.json
+    ```
+
+1. **Apply changes**
+
+    Restart your Milvus container to activate the configuration:
+
+    ```bash
+    docker-compose down && docker-compose up -d
+    ```
+
+</div>
+
+<div class="filter-helm">
+
+1. **Create a Kubernetes Secret**
+
+    Execute this on your control machine (where **kubectl** is configured):
+
+    ```bash
     kubectl create secret generic vertex-ai-secret \
       --from-file=credentials.json=/path/to/your/credentials.json \
       -n <your-milvus-namespace>
-    
     ```
 
-1. **Configure values.yaml**
+    In the preceding command:
 
-    Add the following under the standalone or proxy/dataNode sections:
+    - `vertex-ai-secret`: Name for your secret (customizable)
 
-    ```yaml
-    extraEnv:
-      - name: MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS
-        value: /milvus/configs/credentials.json
-    volumes:
-      - name: vertex-ai-credentials-vol
-        secret:
-          secretName: vertex-ai-secret
-    volumeMounts:
-      - name: vertex-ai-credentials-vol
-        mountPath: /milvus/configs/credentials.json
-        subPath: credentials.json
-        readOnly: true
+    - `/path/to/your/credentials.json`: Local filename of your GCP credential file
+
+    - `<your-milvus-namespace>`: Kubernetes namespace hosting Milvus
+
+1. **Configure Helm values**
+
+    <div class="alert note">
     
+    For information on how to get your Milvus configuration file (`values.yaml`), refer to [Configure Milvus via configuration file](configure-helm.md#Configure-Milvus-via-configuration-file).
+
+    </div>
+
+    Update your `values.yaml` based on your deployment type:
+
+    - **For standalone deployment**
+
+        ```yaml
+        standalone:
+          extraEnv:
+            - name: MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS
+              value: /milvus/configs/credentials.json  # Container path
+          
+          volumes:
+            - name: vertex-ai-credentials-vol
+              secret:
+                secretName: vertex-ai-secret  # Must match Step 1
+          
+          volumeMounts:
+            - name: vertex-ai-credentials-vol
+              mountPath: /milvus/configs/credentials.json  # Must match extraEnv value
+              subPath: credentials.json  # Must match secret key name
+              readOnly: true
+        ```
+
+    - **For distributed deployment (add to each component)**
+
+        ```yaml
+        proxy:
+          extraEnv: 
+            - name: MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS
+              value: /milvus/configs/credentials.json
+          volumes: 
+            - name: vertex-ai-credentials-vol
+              secret:
+                secretName: vertex-ai-secret
+          volumeMounts:
+            - name: vertex-ai-credentials-vol
+              mountPath: /milvus/configs/credentials.json
+              subPath: credentials.json
+              readOnly: true
+        
+        # Repeat same configuration for dataNode, etc.
+        ```
+
+1. **Apply Helm configuration**
+
+    Deploy the updated configuration to your cluster:
+
+    ```bash
+    helm upgrade milvus milvus/milvus -f values.yaml -n <your-milvus-namespace>
     ```
 
-## Configuration in Milvus
-
-After deploying your Vertex AI credentials, you'll need to configure the embedding function. Milvus supports multiple methods to configure authentication credentials for Vertex AI, applied in the following order of precedence:
-
-- **Milvus configuration file (milvus.yaml)** — Highest priority
-
-- **Environment variables** — Lowest priority
-
-**Milvus configuration file (milvus.yaml)**
-
-For persistent, cluster-wide settings, the credential json data can be encoded in base64 format and then defined in the milvus.yaml file.
- `cat credentials.json|jq .|base64`
-replace `credentials.json` to your credential file path
-
-```yaml
-credential:
-  gcp1:
-    credential_json:  # base64 based gcp credential data
-
-# Any configuration related to functions
-function:
-  textEmbedding:
-    providers:
-      vertexai:
-        credential:  gcp1 # The name in the crendential configuration item
-        url:  # Your VertexAI embedding url
-
-```
-
-**Environment variables**
-
-Environment variables offer an alternative configuration method, commonly used when setting up container environments in Docker Compose or Kubernetes deployments.
-
-```yaml
-# Example (typically set in docker-compose.yaml or Kubernetes manifest)
-# docker-compose.yaml (standalone service section)
-standalone:
-  # ... other configurations ...
-  environment:
-    # ... other environment variables ...
-    # Set the environment variable pointing to the credential file path inside the container
-    MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS: /milvus/configs/google_application_credentials.json
-    
-#Add the following under the standalone or proxy/dataNode sections in values.yaml:    
-extraEnv:
-  - name: MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS
-    value: /milvus/configs/credentials.json    
-    
-```
+</div>
 
 ## Use embedding function
 

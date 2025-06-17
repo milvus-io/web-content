@@ -1,13 +1,13 @@
 ---
 id: embedding-function-overview.md
 title: "Embedding Function Overview"
-summary: "The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results."
+summary: "The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need to provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results."
 beta: Milvus 2.6.x
 ---
 
 # Embedding Function Overview
 
-The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results.
+The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need to provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results.
 
 ## Limits
 
@@ -25,11 +25,7 @@ The Function module in Milvus allows you to transform raw text data into vector 
 
     Conversions to `BINARY_VECTOR`, `FLOAT16_VECTOR`, or `BFLOAT16_VECTOR` are not supported.
 
-## Overview
-
-The Function module turns raw text into vector embeddings by calling an external model provider of your choice. Different providers support different models, embedding formats, and authentication methods, all summarized below.
-
-### Supported model providers
+## Supported model providers
 
 <table>
    <tr>
@@ -41,60 +37,60 @@ The Function module turns raw text into vector embeddings by calling an external
    <tr>
      <td><p><a href="openai.md">OpenAI</a></p></td>
      <td><p>text-embedding-3-*</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="azure-openai.md">Azure OpenAI</a></p></td>
      <td><p>Deployment-based</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
      <td><p>AK/SK pair</p></td>
    </tr>
    <tr>
      <td><p><a href="vertex-ai.md">Vertex AI</a></p></td>
      <td><p>text-embedding-005</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
      <td><p>GCP service-account JSON</p></td>
    </tr>
    <tr>
      <td><p><a href="voyage-ai.md">Voyage AI</a></p></td>
      <td><p>voyage-3, voyage-lite-02</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code> / <code>INT8_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code> / <code>INT8_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code> / <code>INT8_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code> / <code>INT8_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="siliconflow.md">SiliconFlow</a></p></td>
      <td><p>BAAI/bge-large-zh-v1.5</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
      <td><p><a href="hugging-face-tei.md">Hugging Face</a></p></td>
      <td><p>Any TEI-served model</p></td>
-     <td><p>Dense (<code>FLOAT_VECTOR</code>)</p></td>
+     <td><p><code>FLOAT_VECTOR</code></p></td>
      <td><p>Optional API key</p></td>
    </tr>
 </table>
 
-### Workflow
+## How it works
 
 The following diagram shows how the Function works in Milvus.
 
@@ -110,35 +106,23 @@ The following diagram shows how the Function works in Milvus.
 
 1. **Return results**: Milvus returns top-matching results to the application.
 
-![Embedding Function Overview](../../../../assets/embedding-function-overview.png)
-
-### Credential management
-
-Connecting to external embedding APIs requires authentication credentials (API keys or access/secret key pairs). Exposing these credentials in your application code creates security risks. Milvus solves this by storing credentials securely in the Milvus configuration file (`milvus.yaml`).
-
-1. **Add credentials**: Under the top-level `credential:` block, give each credential a unique label; then point to that label in the `function:` block.
-
-1. **Server loads config**: Milvus reads the YAML file, caches the raw keys in memory, and remembers only their labels (e.g. `apikey1`).
-
-1. **Call function**: Optionally specify the `credential` argument.
-
-    - If you supply a credential name with function definition, Milvus uses the specified credential.
-
-    - If you omit the argument, Milvus automatically falls back to the credential configured for that model provider in `milvus.yaml`.
-
-        Either way, the secret key never leaves the server.
-
-![Credential Config Overflow](../../../../assets/credential-config-overflow.png)
-
-<div class="alert note">
-
-If you deploy Milvus with Docker Compose, you can also inject the same fields through environment variables. Refer to the provider-specific guides for exact variable names.
-
-</div>
+![Embedding Function Overview](../../../../../assets/embedding-function-overview.png)
 
 ## Configure credentials
 
-Before using an embedding function with Milvus, configure access credentials.
+Before using an embedding function with Milvus, configure embedding service credentials for Milvus access.
+
+Milvus lets you supply embedding service credentials in two ways:
+
+- **Configuration file** (`milvus.yaml`):
+
+    The example in this topic demonstrates the **recommended setup** using `milvus.yaml`.
+
+- **Environment variables**:
+
+    For details on configuring credentials via environment variables, see the embedding service provider’s documentation (for example, [OpenAI](openai.md) or [Azure OpenAI](azure-openai.md)).
+
+![Credential Config Overflow](../../../../../assets/credential-config-overflow.png)
 
 ### Step 1: Add credentials to Milvus configuration
 
@@ -166,45 +150,6 @@ credential:
     credential_json: <BASE64_OF_JSON>
 ```
 
-<table>
-   <tr>
-     <th><p>Provider Type</p></th>
-     <th><p>Required Fields</p></th>
-     <th><p>Example Config</p></th>
-   </tr>
-   <tr>
-     <td><p>AK/SK pair (AWS Bedrock)</p></td>
-     <td><p><code>access_key_id</code>, <code>secret_access_key</code></p></td>
-     <td><pre><code class="yaml language-yaml"> credential:
-     ...
-     aksk1:    # custom label
-         access_key_id: &lt;YOUR_AK&gt;
-         secret_access_key: &lt;YOUR_SK&gt;
-     ...
-</code></pre></td>
-   </tr>
-   <tr>
-     <td><p>API-key based (OpenAI, Voyage AI, etc.)</p></td>
-     <td><p><code>apikey</code></p></td>
-     <td><pre><code class="yaml language-yaml"> credential:
-     ...
-     apikey1:    # custom label
-         apikey: &lt;YOUR_API_KEY&gt;
-     ...
-</code></pre></td>
-   </tr>
-   <tr>
-     <td><p>GCP service-account JSON (Vertex AI)</p></td>
-     <td><p><code>credential_json</code></p></td>
-     <td><pre><code class="yaml language-yaml"> credential:
-     ...
-     gcp1:    # custom label
-         credential_json: &lt;BASE64_OF_JSON&gt;
-     ...
-</code></pre></td>
-   </tr>
-</table>
-
 ### Step 2: Configure provider settings
 
 In the same configuration file, edit the `function` block to tell Milvus which key to use for embedding service calls:
@@ -215,7 +160,7 @@ function:
     providers:
       openai:                         # calls OpenAI
         credential: apikey1           # Reference to the credential label
-        # url: https://api.openai.com/v1/embeddings   # (optional) custom endpoint
+        # url:                        # (optional) custom endpoint
 
       bedrock:                        # calls AWS Bedrock
         credential: aksk1             # Reference to the credential label
@@ -281,17 +226,17 @@ The example below adds a Function module (`openai_embedding`) that converts the 
 ```python
 # Define embedding function (example: OpenAI provider)
 text_embedding_function = Function(
-    name="openai_embedding",                        # Unique identifier for this embedding function
-    function_type=FunctionType.TEXTEMBEDDING,       # Type of embedding function
-    input_field_names=["document"],                 # Scalar field to embed
-    output_field_names=["dense"],                   # Vector field to store embeddings
-    params={                                        # Provider-specific configuration (highest priority)
-        "provider": "openai",                       # Embedding model provider
+    name="openai_embedding",                  # Unique identifier for this embedding function
+    function_type=FunctionType.TEXTEMBEDDING, # Type of embedding function
+    input_field_names=["document"],           # Scalar field to embed
+    output_field_names=["dense"],             # Vector field to store embeddings
+    params={                                  # Provider-specific configuration (highest priority)
+        "provider": "openai",                 # Embedding model provider
         "model_name": "text-embedding-3-small",     # Embedding model
-        # "credential": "apikey1",                    # Optional: Credential label specified in milvus.yaml
+        # "credential": "apikey1",            # Optional: Credential label
         # Optional parameters:
-        # "dim": "1536",                            # Optionally shorten the output vector dimension
-        # "user": "user123"                         # Optional: identifier for API tracking
+        # "dim": "1536",       # Optionally shorten the vector dimension
+        # "user": "user123"    # Optional: identifier for API tracking
     }
 )
 
