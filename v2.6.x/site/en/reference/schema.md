@@ -220,7 +220,7 @@ The `dim` paramter in the above code snippets indicates the dimensionality of th
 
 - `- INT8_VECTOR`
 
-    A vector field of this type stores vectors composed of 8-bit signed integers (int8), with each component ranging from –128 to 127. Tailored for quantized deep learning architectures—such as ResNet and EfficientNet—it substantially shrinks model size and boosts inference speed, all while incurring only minimal precision loss. 
+    A vector field of this type stores vectors composed of 8-bit signed integers (int8), with each component ranging from –128 to 127. Tailored for quantized deep learning architectures—such as ResNet and EfficientNet—it substantially shrinks model size and boosts inference speed, all while incurring only minimal precision loss. **Note**: This vector type is supported only for HNSW indexes.
 
 - `BINARY_VECTOR`
 
