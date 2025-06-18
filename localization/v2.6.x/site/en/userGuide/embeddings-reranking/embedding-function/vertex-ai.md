@@ -151,6 +151,9 @@ beta: Milvus 2.6.x
 </ol>
 </div>
 <div class="filter-helm">
+<div class="alert note">
+<p>To obtain your Milvus configuration file (<strong>values.yaml</strong>), refer to <a href="/docs/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus via configuration file</a>.</p>
+</div>
 <ol>
 <li><p><strong>Create a Kubernetes Secret</strong></p>
 <p>Execute this on your control machine (where <strong>kubectl</strong> is configured):</p>
@@ -165,9 +168,6 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">&lt;your-milvus-namespace&gt;</code>: Kubernetes namespace hosting Milvus</p></li>
 </ul></li>
 <li><p><strong>Configure Helm values</strong></p>
-<p><div class="alert note"></p>
-<p>For information on how to get your Milvus configuration file (<code translate="no">values.yaml</code>), refer to <a href="/docs/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus via configuration file</a>.</p>
-<p></div></p>
 <p>Update your <code translate="no">values.yaml</code> based on your deployment type:</p>
 <ul>
 <li><p><strong>For standalone deployment</strong></p>
