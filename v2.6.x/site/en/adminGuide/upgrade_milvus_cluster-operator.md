@@ -39,7 +39,7 @@ spec:
 
 ## Upgrade your Milvus operator
 
-Run the following command to upgrade the version of your Milvus Operator to v1.3.0-rc1.
+Run the following command to upgrade the version of your Milvus Operator to v1.3.0-rc1-hotfix.
 
 ```
 helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/

@@ -53,7 +53,7 @@ Run the following command to install Milvus Operator with Helm.
 $ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1/milvus-operator-1.3.0-rc1.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1-hotfix/milvus-operator-1.3.0-rc1-hotfix.tgz
 ```
 
 You will see the output similar to the following after the installation process ends.
@@ -82,7 +82,7 @@ If you have installed Milvus Operator before, upgrade it using the following com
 helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1/milvus-operator-1.3.0-rc1.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1-hotfix/milvus-operator-1.3.0-rc1-hotfix.tgz
 ```
 
 </div>
@@ -284,7 +284,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 #### Uninstall with kubectl
 
 ```shell
-$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0-rc1/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0-rc1-hotfix/deploy/manifests/deployment.yaml
 ```
 
 ## What's next
