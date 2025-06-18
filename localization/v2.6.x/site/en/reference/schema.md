@@ -228,6 +228,8 @@ schema.addField(AddFieldReq.builder()
 <p>A vector field of this type holds a list of 16-bit half-precision floating numbers and usually applies to memory- or bandwidth-restricted deep learning or GPU-based computing scenarios.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>A vector field of this type holds a list of 16-bit floating-point numbers that have reduced precision but the same exponent range as Float32. This type of data is commonly used in deep learning scenarios, as it reduces memory usage without significantly impacting accuracy.</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>A vector field of this type stores vectors composed of 8-bit signed integers (int8), with each component ranging from –128 to 127. Tailored for quantized deep learning architectures—such as ResNet and EfficientNet—it substantially shrinks model size and boosts inference speed, all while incurring only minimal precision loss.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>A vector field of this type holds a list of 0s and 1s. They serve as compact features for representing data in image processing and information retrieval scenarios.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
