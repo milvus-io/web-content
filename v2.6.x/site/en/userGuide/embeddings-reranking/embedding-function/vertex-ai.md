@@ -156,6 +156,12 @@ To obtain your Milvus configuration file (**docker-compose.yaml**), refer to [Do
 
 <div class="filter-helm">
 
+<div class="alert note">
+    
+  To obtain your Milvus configuration file (**values.yaml**), refer to [Configure Milvus via configuration file](configure-helm.md#Configure-Milvus-via-configuration-file).
+
+</div>
+
 1. **Create a Kubernetes Secret**
 
     Execute this on your control machine (where **kubectl** is configured):
@@ -175,12 +181,6 @@ To obtain your Milvus configuration file (**docker-compose.yaml**), refer to [Do
     - `<your-milvus-namespace>`: Kubernetes namespace hosting Milvus
 
 1. **Configure Helm values**
-
-    <div class="alert note">
-    
-    For information on how to get your Milvus configuration file (`values.yaml`), refer to [Configure Milvus via configuration file](configure-helm.md#Configure-Milvus-via-configuration-file).
-
-    </div>
 
     Update your `values.yaml` based on your deployment type:
 
