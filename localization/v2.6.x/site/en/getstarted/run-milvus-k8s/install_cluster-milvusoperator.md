@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1/milvus-operator-1.3.0-rc1.tgz</span>
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1-hotfix/milvus-operator-1.3.0-rc1-hotfix.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You will see the output similar to the following after the installation process ends.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
@@ -113,7 +113,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1/milvus-operator-1.3.0-rc1.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1-hotfix/milvus-operator-1.3.0-rc1-hotfix.tgz
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <h3 id="Install-with-kubectl" class="common-anchor-header">Install with kubectl</h3><p>Run the following command to install Milvus Operator with <code translate="no">kubectl</code>.</p>
@@ -302,7 +302,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">Uninstall with Helm</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm -n milvus-operator uninstall milvus-operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Uninstall with kubectl</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0-rc1/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Uninstall with kubectl</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0-rc1-hotfix/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
