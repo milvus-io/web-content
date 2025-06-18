@@ -213,7 +213,7 @@ export schema="{
    </tr>
    <tr>
      <td><p><code>INT8_VECTOR</code></p></td>
-     <td><p>Stores vectors whose individual elements in each dimension are 8-bit integers (int8), with each element ranging from –128 to 127. Designed for quantized deep learning models (e.g., ResNet, EfficientNet), INT8_VECTOR reduces model size and speeds up inference with minimal precision loss.</p></td>
+     <td><p>Stores vectors whose individual elements in each dimension are 8-bit integers (int8), with each element ranging from –128 to 127. Designed for quantized deep learning models (e.g., ResNet, EfficientNet), INT8_VECTOR reduces model size and speeds up inference with minimal precision loss.<br><strong>Note</strong>: This vector type is supported only for HNSW indexes.</p></td>
    </tr>
 </table>
 
