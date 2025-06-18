@@ -1,13 +1,13 @@
 ---
 id: embedding-function-overview.md
 title: "Embedding Function Overview"
-summary: "The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need to provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results."
+summary: "The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external embedding service providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need to provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results."
 beta: Milvus 2.6.x
 ---
 
 # Embedding Function Overview
 
-The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external model providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need to provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results.
+The Function module in Milvus allows you to transform raw text data into vector embeddings by automatically calling external embedding service providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the Function module, you no longer need to manually interface with embedding APIs—Milvus handles the entire process of sending requests to providers, receiving embeddings, and storing them in your collections. For semantic search, you need to provide only raw query data, not a query vector. Milvus generates the query vector with the same model you used for ingestion, compares it to the stored vectors, and returns the most relevant results.
 
 ## Limits
 
@@ -25,7 +25,7 @@ The Function module in Milvus allows you to transform raw text data into vector 
 
     Conversions to `BINARY_VECTOR`, `FLOAT16_VECTOR`, or `BFLOAT16_VECTOR` are not supported.
 
-## Supported model providers
+## Supported embedding service providers
 
 <table>
    <tr>
@@ -62,7 +62,7 @@ The Function module in Milvus allows you to transform raw text data into vector 
      <td><p><a href="vertex-ai.md">Vertex AI</a></p></td>
      <td><p>text-embedding-005</p></td>
      <td><p><code>FLOAT_VECTOR</code></p></td>
-     <td><p>GCP service-account JSON</p></td>
+     <td><p>GCP service account JSON credential</p></td>
    </tr>
    <tr>
      <td><p><a href="voyage-ai.md">Voyage AI</a></p></td>
@@ -122,9 +122,11 @@ Milvus lets you supply embedding service credentials in two ways:
 
     For details on configuring credentials via environment variables, see the embedding service provider’s documentation (for example, [OpenAI](openai.md) or [Azure OpenAI](azure-openai.md)).
 
+The following diagram shows the process of configuring credentials via Milvus configuration file (`milvus.yaml`) and then calling the Function within Milvus.
+
 ![Credential Config Overflow](../../../../../assets/credential-config-overflow.png)
 
-### Step 1: Add credentials to Milvus configuration
+### Step 1: Add credentials to Milvus configuration file
 
 In your `milvus.yaml` file, edit the `credential` block with entries for each provider you need to access:
 
@@ -152,7 +154,7 @@ credential:
 
 ### Step 2: Configure provider settings
 
-In the same configuration file, edit the `function` block to tell Milvus which key to use for embedding service calls:
+In the same configuration file (`milvus.yaml`), edit the `function` block to tell Milvus which key to use for embedding service calls:
 
 ```yaml
 function:
@@ -178,17 +180,17 @@ For more information on how to apply Milvus configuration, refer to [Configure M
 
 ## Use embedding function
 
-Once credentials are configured, follow these steps to define and use embedding functions.
+Once credentials are configured in your Milvus configuration file, follow these steps to define and use embedding functions.
 
 ### Step 1: Define schema fields
 
 To use an embedding function, create a collection with a specific schema. This schema must include at least three necessary fields:
 
-- The primary field that uniquely identifies each entity in a collection.
+- The **primary field** that uniquely identifies each entity in a collection.
 
-- A scalar field that stores raw data to be embedded.
+- A **scalar field** that stores raw data to be embedded.
 
-- A vector field reserved to store vector embeddings that the function will generate for the scalar field.
+- A **vector field** reserved to store vector embeddings that the function will generate for the scalar field.
 
 The following example defines a schema with one scalar field `"document"` for storing textual data and one vector field `"dense"` for storing embeddings to be generated by the Function module. Remember to set the vector dimension (`dim`) to match the output of your chosen embedding model.
 
@@ -210,10 +212,9 @@ schema.add_field("id", DataType.INT64, is_primary=True, auto_id=False)
 schema.add_field("document", DataType.VARCHAR, max_length=9000)
 
 # Add vector field "dense" for storing embeddings.
-# IMPORTANT: Set dim to match the exact output dimension of the embedding model.
+# IMPORTANT: Set `dim` to match the exact output dimension of the embedding model.
 # For instance, OpenAI's text-embedding-3-small model outputs 1536-dimensional vectors.
 # For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR
-# For sparse vector, data type must be SPARSE_FLOAT_VECTOR
 schema.add_field("dense", DataType.FLOAT_VECTOR, dim=1536)
 ```
 
@@ -257,11 +258,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code>function_type</code></p></td>
-     <td><p>Type of embedding function used. Possible values:</p>
-<ul>
-<li><p><code>FunctionType.TEXTEMBEDDING</code>: Generates dense vectors that capture semantic meaning within the text.</p></li>
-<li><p><code>FunctionType.BM25</code>: Generates sparse vectors based on the BM25 ranking algorithm, which computes relevance scores using term frequency and inverse document frequency. For more information, refer to <a href="full-text-search.md">Full Text Search</a>.</p></li>
-</ul></td>
+     <td><p>Type of function used. For text embedding, set the value to <code>FunctionType.TEXTEMBEDDING</code>.<br><strong>Note:</strong> Milvus accepts <code>FunctionType.BM25</code> (for sparse-embedding transformation) and <code>FunctionType.RERANK</code> (for reranking) for this parameter. Refer to <a href="full-text-search.md">Full Text Search</a> and <a href="decay-ranker-overview.md">Decay Ranker Overview</a> for details.</p></td>
      <td><p><code>FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -301,7 +298,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code>dim</code></p></td>
-     <td><p>The number of dimensions for the output embeddings. For OpenAI's third-generation models, you can shorten the full vector to reduce cost and latency without a significant loss of semantic information. For more information, refer to <a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI announcement blog post</a>.
+     <td><p>The number of dimensions for the output embeddings. For OpenAI's third-generation models, you can shorten the full vector to reduce cost and latency without a significant loss of semantic information. For more information, refer to <a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI announcement blog post</a>.<br>
  <strong>Note:</strong> If you shorten the vector dimension, ensure the <code>dim</code> value specified in the schema's <code>add_field</code> method for the vector field matches the final output dimension of your embedding function.</p></td>
      <td><p><code>"1536"</code></p></td>
    </tr>
@@ -381,3 +378,50 @@ print(results)
 ```
 
 For more information about search and query operations, refer to [Basic Vector Search](single-vector-search.md) and [Query](get-and-scalar-query.md).
+
+## FAQ
+
+### What's the difference between configuring credentials in milvus.yaml vs environment variables?
+
+Both methods work, but using `milvus.yaml` is the recommended approach as it provides centralized credential management and consistent credential naming across all providers. When using environment variables, the variable names vary depending on the embedding service provider, so refer to each provider's dedicated page to understand the specific environment variable names required (for example, [OpenAI](openai.md) or [Azure OpenAI](azure-openai.md)).
+
+### What happens if I don't specify a credential parameter in the function definition?
+
+Milvus follows this credential resolution order:
+
+1. First, it looks for the default credential configured for that provider in the `milvus.yaml` file
+2. If no default credential exists in milvus.yaml, it falls back to environment variables (if configured)
+3. If neither `milvus.yaml` credentials nor environment variables are configured, Milvus will throw an error
+
+### How can I verify that embeddings are being generated correctly?
+
+You can check by:
+
+1. Querying your collection after insertion to see if the vector field contains data
+2. Checking the vector field length matches your expected dimensions
+3. Performing a simple similarity search to verify the embeddings produce meaningful results
+
+### When I perform a similarity search, can I use a query vector rather than raw text?
+
+Yes, you can use pre-computed query vectors instead of raw text for similarity search. While the Function module automatically converts raw text queries to embeddings, you can also directly provide vector data to the data parameter in your search operation. Note: The dimension size of your provided query vector must be consistent with the dimension size of the vector embeddings generated by your Function module.
+
+**Example**:
+
+```python
+# Using raw text (Function module converts automatically)
+results = client.search(
+    collection_name='demo', 
+    data=['How does Milvus handle semantic search?'],
+    anns_field='dense',
+    limit=1
+)
+
+# Using pre-computed query vector (must match stored vector dimensions)
+query_vector = [0.1, 0.2, 0.3, ...]  # Must be same dimension as stored embeddings
+results = client.search(
+    collection_name='demo', 
+    data=[query_vector],
+    anns_field='dense',
+    limit=1
+)
+```

@@ -215,7 +215,7 @@ decay_ranker = Function(
     params={
         "reranker": "decay",            # Specify decay reranker. Must be "decay"
         "function": "gauss",            # Choose decay function type: "gauss", "exp", or "linear"
-        "origin": current_timestamp,    # Reference point (current time)
+        "origin": int(datetime.datetime(2025, 1, 15).timestamp()),    # Reference point
         "scale": 7 * 24 * 60 * 60,      # 7 days in seconds
         "offset": 24 * 60 * 60,         # 1 day no-decay zone
         "decay": 0.5                    # Half score at scale distance
