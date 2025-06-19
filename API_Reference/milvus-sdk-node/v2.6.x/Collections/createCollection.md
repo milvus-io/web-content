@@ -356,15 +356,19 @@ milvusClient.createCollection({
 
         The type of function for processing raw data. Possible values:
 
-        - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
+        - `FunctionType.BM25`: Generates sparse vectors based on the BM25 ranking algorithm from a `VARCHAR` field.
+
+        - `FunctionType.TEXTEMBEDDING`: Generates dense vectors that capture semantic meaning from a `VARCHAR` field.
+
+        - `FunctionType.RERANK`: Applies reranking strategies to the search results.
 
     - **input_field_names** (*string[]*)
 
-        The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+        The name of the field containing the raw data that requires conversion to a vector representation. This parameter accepts only one field name.
 
     - **output_field_names** (*string[]*)
 
-        The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+        The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. This parameter accepts only one field name.
 
 ### With CreateCollectionWithSchemaAndIndexParamsReq
 
@@ -476,6 +480,8 @@ milvusClient.createCollection({
     - **is_primary_key** (*boolean)* -
 
         Whether the field will work as the primary key.
+
+        The value defaults to **False**. Setting this to **True** makes the field a primary key field which is unique throughout the collection.
 
     - **type_params** (*string* | *number)* -
 
@@ -657,13 +663,17 @@ milvusClient.createCollection({
 
         - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
 
+        - `FunctionType.TEXTEMBEDDING`: Generates dense vectors that capture semantic meaning from a `VARCHAR` field.
+
+        - `FunctionType.RERANK`: Applies reranking strategies to the search results.
+
     - **input_field_names** (*string[]*)
 
-        The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+        The name of the field containing the raw data that requires conversion to vector representation. This parameter accepts only one field name.
 
     - **output_field_names** (*string[]*)
 
-        The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+        The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. This parameter accepts only one field name.
 
 **RETURNS** *Promise\<ResStatus>*
 

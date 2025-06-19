@@ -12,6 +12,7 @@ The following collection shows Milvus versions and recommended @zilliz/milvus2-s
 |    v2.3.0+     |    **latest**    | `yarn add @zilliz/milvus2-sdk-node` |
 |    v2.4.0+     |    **latest**    | `yarn add @zilliz/milvus2-sdk-node` |
 |    v2.5.0+     |    **latest**    | `yarn add @zilliz/milvus2-sdk-node` |
+|    v2.6.0+     |    **latest**    | `yarn add @zilliz/milvus2-sdk-node` |
 
 ## Dependencies
 
@@ -60,7 +61,7 @@ npm install @zilliz/milvus2-sdk-node
 
 ```shell
 # Download the milvus standalone yaml file
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.6.0-rc1/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 # start the milvus server
 sudo docker-compose up -d

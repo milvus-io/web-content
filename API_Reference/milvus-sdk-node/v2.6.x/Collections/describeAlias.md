@@ -1,29 +1,32 @@
-# alterAlias()
+# describeAlias()
 
-This operation reassigns the alias of one collection to another.
+This operation describes a specific alias.
 
 ```javascript
-alterAlias(data): Promise<ResStatus>
+describeAlias(data): Promise<DescribeAliasResponse>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.alterAlias({
-   alias: string,
-   db_name: string
-   collection_name: string,
-   timeout?: number
- })
+milvusClient.describeAlias({
+    db_name: string,
+    alias: string,
+    collection_name: string
+})
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*str*) -
+
+    The name of the database that holds the target collection.
 
 - **alias** (*str*) -
 
     **[REQUIRED]**
 
-    The alias of the collection. Note that the alias should exist beforehand.
+    The alias of a collection. Note that the alias should exist beforehand.
 
     <div class="admonition note">
 
@@ -45,55 +48,59 @@ milvusClient.alterAlias({
 
     </div>
 
-- **db_name** (*str*) -
-
-    The name of the database that holds the target collection.
-
 - **collection_name** (*str*) -
 
     **[REQUIRED]**
 
-    The name of the target collection to reassign an alias to.
+    The name of the collection that has the specified alias.
 
-- **timeout** (*number*)  
-
-    The timeout duration for this operation. 
-
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
-
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\<DescribeAliasResponse>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number,
-    error_code: string | number,
-    reason: string
+    alias: string;
+    collection: string;
+    db_name: string;
+    status: ResStatus;
 }
 ```
 
 **PARAMETERS:**
 
-- **code** (*number*) -
+- **alias** (*string*) -
 
-    A code that indicates the operation result. It remains **0** if this operation succeeds.
+    The name of the specified alias.
 
-- **error_code** (*string* | *number*) -
+- **collection** (*string*) -
 
-    An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+    The name of the specified collection.
 
-- **reason** (*string*) - 
+- **db_name** (*string*) -
 
-    The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+    The database that holds the above alias and collection.
+
+- **status** (*ResStatus*) -  
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+
+    - **reason** (*string*) - 
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 ## Example
 
-```java
+```javascript
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.alterAlias({
+const res = await milvusClient.describeAlias({
    alias: 'my_collection_alias',
    collection_name: 'my_collection',
 });
 ```
-

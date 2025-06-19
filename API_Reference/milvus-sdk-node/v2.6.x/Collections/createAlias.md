@@ -1,17 +1,17 @@
-# alterAlias()
+# createAlias()
 
-This operation reassigns the alias of one collection to another.
+This operation creates an alias for an existing collection.
 
 ```javascript
-alterAlias(data): Promise<ResStatus>
+createAlias(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.alterAlias({
+milvusClient.createAlias({
    alias: string,
-   db_name: string
+   db_name: string,
    collection_name: string,
    timeout?: number
  })
@@ -23,7 +23,7 @@ milvusClient.alterAlias({
 
     **[REQUIRED]**
 
-    The alias of the collection. Note that the alias should exist beforehand.
+    The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.
 
     <div class="admonition note">
 
@@ -53,13 +53,11 @@ milvusClient.alterAlias({
 
     **[REQUIRED]**
 
-    The name of the target collection to reassign an alias to.
+    The name of the collection to create an alias for.
 
 - **timeout** (*number*)  
 
-    The timeout duration for this operation. 
-
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURNS** *Promise\<ResStatus>*
 
@@ -91,9 +89,9 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```java
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.alterAlias({
+ const resStatus = await milvusClient.createAlias({
    alias: 'my_collection_alias',
    collection_name: 'my_collection',
-});
+ });
 ```
 
