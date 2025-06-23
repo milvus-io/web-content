@@ -30,7 +30,7 @@ beta: Milvus 2.6.x
 <li><p>أنظمة دعم العملاء التي تحتاج إلى مطابقة مشاكل المستخدم مع الحلول ذات الصلة</p></li>
 <li><p>بحث التجارة الإلكترونية الذي يجب أن يفهم سمات المنتج ونوايا المستخدم</p></li>
 </ul>
-<p>بالمقارنة مع <a href="/docs/ar/tei-ranker.md">مصنف TEI Ranker،</a> يوفر vLLM Ranker مرونة أكبر في اختيار النموذج والتخصيص، مما يجعله مثاليًا لتطبيقات البحث المتخصصة أو المعقدة حيث توفر خيارات التكوين الإضافية فوائد كبيرة.</p>
+<p>بالمقارنة مع <a href="/docs/ar/v2.6.x/tei-ranker.md">مصنف TEI Ranker،</a> يوفر vLLM Ranker مرونة أكبر في اختيار النموذج والتخصيص، مما يجعله مثاليًا لتطبيقات البحث المتخصصة أو المعقدة حيث توفر خيارات التكوين الإضافية فوائد كبيرة.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,10 +103,29 @@ vllm_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;vllm&quot;</span>,         <span class="hljs-comment"># Specifies vLLM service</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># vLLM service address</span>
-       <span class="hljs-comment"># &quot;maxBatch&quot;: 64              # Optional: batch size</span>
+        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">64</span>,              <span class="hljs-comment"># Optional: batch size</span>
+        <span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>: <span class="hljs-number">256</span>,  <span class="hljs-comment"># Optional: Use last 256 tokens</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">المعلمات الخاصة بمصنّف vLLM</h3><p>المعلمات التالية خاصة بمصنّف vLLM:</p>
+<table>
+   <tr>
+     <th><p>المعلمة</p></th>
+     <th><p>مطلوبة؟</p></th>
+     <th><p>الوصف</p></th>
+     <th><p>القيمة / مثال</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncate_prompt_tokens</code></p></td>
+     <td><p>لا</p></td>
+     <td><p>إذا تم تعيينها إلى عدد صحيح <em>k،</em> ستستخدم فقط آخر <em>k</em> من المطالبة (أي الاقتطاع الأيسر). الإعداد الافتراضي إلى لا شيء (أي لا يوجد اقتطاع).</p></td>
+     <td><p><code translate="no">256</code></p></td>
+   </tr>
+</table>
+<div class="alert note">
+<p>للحصول على معلمات عامة مشتركة بين جميع مصنفات النماذج (على سبيل المثال، <code translate="no">provider</code> ، <code translate="no">queries</code>)، راجع <a href="/docs/ar/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">إنشاء مصنف نموذج</a>.</p>
+</div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">التطبيق على البحث المتجه القياسي<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +153,7 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيق على البحث الهجين<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+<h2 id="Apply-to-hybrid-search" class="common-anchor-header">التطبيق على البحث الهجين<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -173,7 +192,7 @@ hybrid_results = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
     ranker=vllm_ranker,                        <span class="hljs-comment"># Apply vLLM reranking to combined results</span>
-    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span>
+<span class="highlighted-wrapper-line">    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span></span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>

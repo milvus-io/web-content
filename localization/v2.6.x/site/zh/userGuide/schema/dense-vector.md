@@ -68,7 +68,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>使用密集向量</span> </span></p>
 <div class="alert note">
-<p>除了密集向量，Milvus 还支持稀疏向量和二进制向量。稀疏向量适用于基于特定术语的精确匹配，如关键词搜索和术语匹配，而二进制向量常用于高效处理二进制化数据，如图像模式匹配和某些散列应用。更多信息，请参阅<a href="/docs/zh/binary-vector.md">二进制向量</a>和<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
+<p>除了密集向量，Milvus 还支持稀疏向量和二进制向量。稀疏向量适用于基于特定术语的精确匹配，如关键词搜索和术语匹配，而二进制向量常用于高效处理二进制化数据，如图像模式匹配和某些散列应用。更多信息，请参阅<a href="/docs/zh/v2.6.x/binary-vector.md">二进制向量</a>和<a href="/docs/zh/v2.6.x/sparse_vector.md">稀疏向量</a>。</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">使用密集向量<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,10 +222,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>存储向量，其每个维度的单个元素均为 8 位整数（int8），每个元素的范围为 -128 至 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。</p></td>
+     <td><p>存储向量，其每个维度的单个元素均为 8 位整数（int8），每个元素的范围为 -128 至 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。<br><strong>注意</strong>：此向量类型仅支持 HNSW 索引。</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">为向量场设置索引参数</h3><p>为了加速语义搜索，必须为向量场创建索引。索引可以大大提高大规模向量数据的检索效率。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">为向量字段设置索引参数</h3><p>为了加速语义搜索，必须为向量字段创建索引。索引可以大大提高大规模向量数据的检索效率。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -271,7 +271,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的示例中，使用<code translate="no">AUTOINDEX</code> 索引类型为<code translate="no">dense_vector</code> 字段创建了名为<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 设置为<code translate="no">IP</code> ，表示将使用内积作为距离度量。</p>
 <p>Milvus 提供多种索引类型，以获得更好的向量搜索体验。AUTOINDEX 是一种特殊的索引类型，旨在平滑向量搜索的学习曲线。有很多索引类型可供您选择。详情请参阅 xxx。</p>
-<p>Milvus 支持其他度量类型。更多信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p>
+<p>Milvus 支持其他度量类型。更多信息，请参阅<a href="/docs/zh/v2.6.x/metric.md">公制类型</a>。</p>
 <h3 id="Create-collection" class="common-anchor-header">创建 Collections</h3><p>完成密集向量和索引参数设置后，就可以创建包含密集向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -487,4 +487,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关相似性搜索参数的更多信息，请参阅<a href="/docs/zh/single-vector-search.md">基本 ANN 搜索</a>。</p>
+<p>有关相似性搜索参数的更多信息，请参阅<a href="/docs/zh/v2.6.x/single-vector-search.md">基本 ANN 搜索</a>。</p>

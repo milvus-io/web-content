@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: 'Узнайте, как обновить автономный Milvus с помощью Helm Chart.'
 title: Обновление автономного Milvus с помощью диаграмм Helm
 ---
-<div class="tab-wrapper"><a href="/docs/ru/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ru/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/ru/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/ru/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ru/v2.6.x/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/ru/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Обновление автономного Milvus с помощью диаграмм Helm<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,6 +24,9 @@ title: Обновление автономного Milvus с помощью ди
         ></path>
       </svg>
     </button></h1><p>В этом руководстве описано, как обновить автономный Milvus с помощью диаграмм Milvus Helm.</p>
+<div class="alert note">
+<p>Обновление с Milvus 2.5.x (или более ранних версий) до 2.6.0-rc1 связано со значительными архитектурными изменениями, которые делают это обновление <strong>необратимым</strong>. В связи с появлением новых компонентов (таких как Woodpecker и Streaming Node) и удалением некоторых компонентов <strong>вы не сможете вернуться к предыдущей версии после завершения обновления</strong>. Подробные сведения об архитектурных изменениях, внесенных в 2.6.0-rc1, см. в разделе <a href="/docs/ru/v2.6.x/architecture_overview.md">Обзор архитектуры Milvus</a>.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +47,7 @@ title: Обновление автономного Milvus с помощью ди
 <li>Версия Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Начиная с версии Milvus-Helm chart 4.2.21, мы ввели зависимость от графика pulsar-v3.x. Для обратной совместимости, пожалуйста, обновите ваш helm до версии 3.14 или более поздней, и не забудьте добавить опцию <code translate="no">--reset-then-reuse-values</code> при использовании <code translate="no">helm upgrade</code>.</p>
+<p>Начиная с версии 4.2.21 графика Milvus-Helm стала зависимой от графика pulsar-v3.x. Для обратной совместимости, пожалуйста, обновите ваш helm до версии 3.14 или более поздней, и не забудьте добавить опцию <code translate="no">--reset-then-reuse-values</code> при использовании <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">Проверка версии Milvus<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +111,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете выбрать путь обновления для своего Milvus следующим образом:</p>
-<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.12.</div>
+<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.6.0-rc1.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.12.</p></li>
-<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.12.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Обновление Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.6.0-rc1.</p></li>
+<li><p><a href="#Migrate-the-metadata">Мигрируйте метаданные</a> перед обновлением с Milvus v2.1.x до v2.6.0-rc1.</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Проведение скользящего обновления<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +148,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Операция</td><td><code translate="no">update</code></td><td>Ложь</td></tr>
 </tbody>
 </table>
-<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.12.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w &#x27;milvusdb/milvus:v2.5.12&#x27;
+<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.6.0-rc1.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0-rc1 -w &#x27;milvusdb/milvus:v2.6.0-rc1&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -174,7 +177,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>Чтобы обновить Milvus с минорного выпуска до v2.2.3 до последней версии, выполните следующие команды:</p>
 <pre><code translate="no" class="language-shell">helm repo update
-helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=4.1.24 # use the helm chart version here
+helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=4.2.53 # use the helm chart version here
 <button class="copy-code-btn"></button></code></pre>
 <p>Используйте версию диаграммы Helm в предыдущей команде. Подробнее о том, как получить версию диаграммы Helm, см. в разделе <a href="#Check-the-Milvus-version">Проверка версии Milvus</a>.</p>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">Перенос метаданных<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
@@ -235,25 +238,25 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li>Перенесите метаданные Milvus.</li>
 <li>Запустите компоненты Milvus с новым образом.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2512" class="common-anchor-header">2. Обновление Milvus с версии 2.1.x до 2.5.12</h4><p>Следующие команды предполагают, что вы обновили Milvus с версии 2.1.4 до 2.5.12. Измените их на версии, соответствующие вашим потребностям.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-260-rc1" class="common-anchor-header">2. Обновление Milvus с версии 2.1.x до 2.6.0-rc1</h4><p>Следующие команды предполагают, что вы обновили Milvus с v2.1.4 до 2.6.0-rc1. Измените их на версии, соответствующие вашим потребностям.</p>
 <ol>
 <li><p>Укажите имя экземпляра Milvus, исходную версию Milvus и целевую версию Milvus.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.6.0-rc1
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Укажите пространство имен с помощью <code translate="no">-n</code>, если ваш Milvus установлен не в стандартном пространстве имен K8s.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Укажите корневой путь с помощью <code translate="no">-r</code>, если ваш Milvus установлен с пользовательским <code translate="no">rootpath</code>.</p>
-<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">12</span> -<span class="hljs-attribute">r</span> by-dev
+<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.6</span>.<span class="hljs-number">0</span>-rc1 -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Укажите тег изображения с помощью <code translate="no">-w</code>, если ваш Milvus установлен с пользовательским <code translate="no">image</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -w milvusdb/milvus:v2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1 -r by-dev -w milvusdb/milvus:v2.6.0-rc1
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Установите <code translate="no">-d true</code>, если вы хотите автоматически удалить миграционную капсулу после завершения миграции.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -w milvusdb/milvus:v2.5.12 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1 -w milvusdb/milvus:v2.6.0-rc1 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Откатитесь и выполните миграцию заново, если миграция не удалась.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -o migrate -w milvusdb/milvus:v2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1 -r by-dev -o migrate -w milvusdb/milvus:v2.6.0-rc1
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

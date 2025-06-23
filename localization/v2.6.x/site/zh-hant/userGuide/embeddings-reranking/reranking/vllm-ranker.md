@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
 <li><p>需要將使用者問題與相關解決方案相匹配的客戶支援系統</p></li>
 <li><p>必須瞭解產品屬性和使用者意圖的電子商務搜尋</p></li>
 </ul>
-<p>與<a href="/docs/zh-hant/tei-ranker.md">TEI Ranker</a> 相比，vLLM Ranker 在模型選擇和客製化方面提供了更大的靈活性，使其成為專業或複雜搜尋應用的理想選擇，在這些應用中，額外的配置選項提供了顯著的優勢。</p>
+<p>與<a href="/docs/zh-hant/v2.6.x/tei-ranker.md">TEI Ranker</a> 相比，vLLM Ranker 在模型選擇和客製化方面提供了更大的靈活性，使其成為專業或複雜搜尋應用的理想選擇，在這些應用中，額外的配置選項提供了顯著的優勢。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -100,10 +100,29 @@ vllm_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;vllm&quot;</span>,         <span class="hljs-comment"># Specifies vLLM service</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># vLLM service address</span>
-       <span class="hljs-comment"># &quot;maxBatch&quot;: 64              # Optional: batch size</span>
+        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">64</span>,              <span class="hljs-comment"># Optional: batch size</span>
+        <span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>: <span class="hljs-number">256</span>,  <span class="hljs-comment"># Optional: Use last 256 tokens</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">vLLM 排名器特有的參數</h3><p>以下參數是 vLLM ranker 特有的：</p>
+<table>
+   <tr>
+     <th><p>參數</p></th>
+     <th><p>需要嗎？</p></th>
+     <th><p>說明</p></th>
+     <th><p>值 / 示例</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncate_prompt_tokens</code></p></td>
+     <td><p>無</p></td>
+     <td><p>如果設定為整數<em>k</em>，則只使用提示符的最後<em>k</em>個字元（即左截短）。預設為 None (即不截斷)。</p></td>
+     <td><p><code translate="no">256</code></p></td>
+   </tr>
+</table>
+<div class="alert note">
+<p>關於所有模型排序器共用的一般參數 (例如<code translate="no">provider</code>,<code translate="no">queries</code>)，請參閱<a href="/docs/zh-hant/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">建立模型排序器</a>。</p>
+</div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">應用於標準向量搜尋<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,7 +189,7 @@ hybrid_results = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
     ranker=vllm_ranker,                        <span class="hljs-comment"># Apply vLLM reranking to combined results</span>
-    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span>
+<span class="highlighted-wrapper-line">    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span></span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>

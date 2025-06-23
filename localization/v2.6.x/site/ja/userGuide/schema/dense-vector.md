@@ -61,14 +61,14 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>密なベクトルは、画像の場合はCNNモデル（<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNetや</a> <a href="https://pytorch.org/vision/stable/models/vgg.html">VGGの</a>ような）、テキストの場合は言語モデル（<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERTや</a> <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vecの</a>ような）など、さまざまな<a href="https://en.wikipedia.org/wiki/Embedding">埋め込み</a>モデルを使用して生成することができます。これらのモデルは生データを高次元空間のポイントに変換し、データの意味的特徴を捉えます。さらにMilvusは、Embeddingsで詳述されているように、ユーザが高密度ベクトルを生成し処理するのに役立つ便利なメソッドを提供しています。</p>
+<p>密なベクトルは、画像の場合はCNNモデル（<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>、<a href="https://pytorch.org/vision/stable/models/vgg.html">VGGなど</a>）、テキストの場合は言語モデル（<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>、<a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vecなど</a>）など、さまざまな<a href="https://en.wikipedia.org/wiki/Embedding">埋め込み</a>モデルを使用して生成することができます。これらのモデルは生データを高次元空間のポイントに変換し、データの意味的特徴を捉えます。さらにMilvusは、Embeddingsで詳述されているように、ユーザが高密度ベクトルを生成し処理するのに役立つ便利なメソッドを提供しています。</p>
 <p>一度ベクトル化されたデータはMilvusに保存され、管理やベクトル検索に利用することができます。下図は基本的なプロセスを示しています。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>密なベクトルを使う</span> </span></p>
 <div class="alert note">
-<p>Milvusは密なベクトル以外にも、疎なベクトルやバイナリベクトルにも対応しています。スパースベクトルはキーワード検索やタームマッチのような特定の用語に基づく正確なマッチングに適しており、バイナリベクトルは画像パターンマッチングや特定のハッシュアプリケーションのような2値化されたデータを効率的に処理するために一般的に使用されます。詳細については、<a href="/docs/ja/binary-vector.md">バイナリ・ベクトルと</a> <a href="/docs/ja/sparse_vector.md">スパース・ベクトルを</a>参照してください。</p>
+<p>Milvusは密なベクトル以外にも、疎なベクトルやバイナリベクトルにも対応しています。スパースベクトルはキーワード検索やタームマッチのような特定の用語に基づく正確なマッチングに適しており、バイナリベクトルは画像パターンマッチングや特定のハッシュアプリケーションのような2値化されたデータを効率的に扱うために一般的に使用されます。詳細については、<a href="/docs/ja/v2.6.x/binary-vector.md">バイナリ・ベクトルと</a> <a href="/docs/ja/v2.6.x/sparse_vector.md">スパース・ベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">密なベクトルを使う<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,10 +222,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>各次元の各要素が8ビット整数（int8）であるベクトルを格納し、各要素の範囲は-128～127である。量子化された深層学習モデル（ResNet、EfficientNetなど）用に設計されたINT8_VECTORは、最小限の精度損失でモデルサイズを縮小し、推論を高速化します。</p></td>
+     <td><p>各次元の各要素が8ビット整数（int8）であるベクトルを格納し、各要素の範囲は-128～127である。量子化された深層学習モデル（ResNet、EfficientNetなど）用に設計されたINT8_VECTORは、最小限の精度損失でモデルサイズを縮小し、推論を高速化します。<br><strong>注</strong>：このベクトル型はHNSWインデックスでのみサポートされます。</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトルフィールドにインデックスパラメータを設定</h3><p>セマンティック検索を高速化するには、ベクトルフィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトルデータの検索効率を大幅に向上させることができる。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトルフィールドのインデックスパラメタの設定</h3><p>セマンティック検索を高速化するために、ベクトルフィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトルデータの検索効率を大幅に向上させることができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -271,7 +271,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>上の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、<code translate="no">dense_vector</code> フィールドに<code translate="no">dense_vector_index</code> という名前のインデックスが作成されている。<code translate="no">metric_type</code> は<code translate="no">IP</code> に設定され、距離メトリックとして内積が使用されることを示している。</p>
 <p>Milvusはより良いベクトル検索を行うために様々なインデックスタイプを提供しています。AUTOINDEXはベクトル検索の学習曲線を滑らかにするために設計された特別なインデックスタイプです。様々なインデックスタイプを選択することができます。詳しくはxxxをご参照ください。</p>
-<p>Milvusは他のメトリックタイプもサポートしています。詳細は<a href="/docs/ja/metric.md">Metric Typesを</a>参照してください。</p>
+<p>Milvusは他のメトリックタイプもサポートしています。詳細は<a href="/docs/ja/v2.6.x/metric.md">Metric Typesを</a>参照してください。</p>
 <h3 id="Create-collection" class="common-anchor-header">コレクションの作成</h3><p>密なベクトルとインデックスパラメータ設定が完了したら、密なベクトルを含むコレクションを作成できます。以下の例では、<code translate="no">create_collection</code> メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -487,4 +487,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>類似検索パラメータの詳細については、<a href="/docs/ja/single-vector-search.md">基本的なANN検索を</a>参照してください。</p>
+<p>類似検索パラメータの詳細については、<a href="/docs/ja/v2.6.x/single-vector-search.md">基本的なANN検索を</a>参照してください。</p>

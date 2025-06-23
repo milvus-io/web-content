@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在資料集可能包含數十億甚至數萬億向量的大型場景中，標準的記憶體內索引方法 (例如<a href="/docs/zh-hant/hnsw.md">HNSW</a>、<a href="/docs/zh-hant/ivf-flat.md">IVF_FLAT</a>) 常常會因為記憶體的限制而無法跟上步伐。<strong>DISKANN</strong>提供了一種基於磁碟的方法，可以在資料集大小超過可用 RAM 時保持高搜尋準確性和速度，從而解決這些挑戰。</p>
+    </button></h1><p>在資料集可能包含數十億甚至數萬億向量的大型場景中，標準的記憶體內索引方法 (例如<a href="/docs/zh-hant/v2.6.x/hnsw.md">HNSW</a>、<a href="/docs/zh-hant/v2.6.x/ivf-flat.md">IVF_FLAT</a>) 常常會因為記憶體的限制而無法跟上步伐。<strong>DISKANN</strong>提供了一種基於磁碟的方法，可以在資料集大小超過可用 RAM 時保持高搜尋準確性和速度，從而解決這些挑戰。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +58,7 @@ summary: >-
 <p><code translate="no">search_list_size</code> 參數決定圖形精煉過程的寬度。較高的<code translate="no">search_list_size</code> 會擴大建構過程中對鄰居的搜尋，並可提高最終精確度，但會增加索引建構時間。</p></li>
 </ul></li>
 </ol>
-<p>要瞭解關於參數調整的更多資訊，請參閱<a href="/docs/zh-hant/diskann.md#diskann-params">DISKANN params</a>。</p>
+<p>要瞭解關於參數調整的更多資訊，請參閱<a href="/docs/zh-hant/v2.6.x/diskann.md#diskann-params">DISKANN params</a>。</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN 使用<strong>PQ</strong>將高維向量壓縮成較小的表示<strong>(PQ 代碼</strong>)，並儲存在記憶體中，以便快速計算近似距離。</p>
 <p><code translate="no">pq_code_budget_gb_ratio</code> 參數管理專門用於儲存這些 PQ 代碼的記憶體佔用空間。它表示向量的總大小（以千兆位元組為單位）與分配用於儲存 PQ 代碼的空間之間的比率。您可以使用以下公式計算實際的 PQ 代碼預算（以千兆位元組為單位）：</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -66,9 +66,9 @@ summary: >-
 <p>其中</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> 是向量的總大小（以 GB 為單位）。</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> 是使用者定義的比率，代表保留給 PQ 代碼的總資料大小的部分。此參數允許在搜尋準確度和記憶體資源之間進行權衡。有關參數調整的詳細資訊，請參閱<a href="/docs/zh-hant/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>。</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> 是使用者定義的比率，代表保留給 PQ 代碼的總資料大小的部分。此參數允許在搜尋準確度和記憶體資源之間進行權衡。有關參數調整的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>。</p></li>
 </ul>
-<p>有關基本 PQ 方法的技術細節，請參閱<a href="/docs/zh-hant/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>。</p>
+<p>有關基本 PQ 方法的技術細節，請參閱<a href="/docs/zh-hant/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>。</p>
 <h3 id="Search-process" class="common-anchor-header">搜尋過程</h3><p>一旦建立索引（磁碟上的 Vamana 圖形和記憶體中的 PQ 代碼），DISKANN 就會執行 ANN 搜尋，如下所示：</p>
 <p>
   
@@ -82,7 +82,7 @@ summary: >-
 <li><p><code translate="no">beam_width_ratio</code>:一個控制搜尋廣度的比率，它決定了有多少候選鄰居會被選出來並行探索它們的鄰居。<code translate="no">beam_width_ratio</code> 越大，探索的範圍就越廣，可能會帶來更高的精確度，但也會增加計算成本和磁碟 I/O。波束寬度或選取的節點數目，是使用公式決定的：<code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>:分配用於快取頻繁存取的磁碟資料的記憶體比例。這種快取有助於最小化磁碟 I/O，使重複搜尋更快，因為資料已經在記憶體中。</p></li>
 </ul>
-<p>要瞭解關於參數調整的更多資訊，請參閱<a href="/docs/zh-hant/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>。</p></li>
+<p>要瞭解關於參數調整的更多資訊，請參閱<a href="/docs/zh-hant/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>。</p></li>
 <li><p><strong>迭代探索：</strong>搜尋會反覆精煉候選集，重複執行近似評估 (使用 PQ) 之後的精確檢查 (使用磁碟中的原始向量)，直到找到足夠數量的鄰居。</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">在 Milvus 中啟用 DISKANN<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -166,7 +166,7 @@ summary: >-
       <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="SDK-configuration" class="common-anchor-header">SDK 配置</h3><p>以下是如何使用 Milvus SDK 設定 DISKANN 參數的範例。</p>
-<h4 id="Build" class="common-anchor-header">建立</h4><p>要在 Milvus 中建立向量場的<code translate="no">IVF_FLAT</code> 索引，請使用<code translate="no">add_index()</code> 方法，指定<code translate="no">index_type</code>,<code translate="no">metric_type</code>, 以及索引的其他參數。</p>
+<h4 id="Build" class="common-anchor-header">建立</h4><p>要在 Milvus 中建立向量場的<code translate="no">DISKANN</code> 索引，請使用<code translate="no">add_index()</code> 方法，指定<code translate="no">index_type</code>,<code translate="no">metric_type</code>, 以及索引的其他參數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -185,7 +185,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>一旦配置好索引參數，就可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/create-collection.md">建立集合</a>。</p>
+<p>一旦配置好索引參數，就可以直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中傳入索引參數來建立索引。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/create-collection.md">建立集合</a>。</p>
 <h4 id="Search" class="common-anchor-header">搜尋</h4><p>索引建立且實體插入後，您就可以在索引上執行相似性搜尋。</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {

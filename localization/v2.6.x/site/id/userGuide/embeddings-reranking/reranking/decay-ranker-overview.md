@@ -81,7 +81,7 @@ beta: Milvus 2.6.x
 <li><p>Setiap pemeringkat peluruhan mengubah nilai numerik mentah menjadi skor relevansi yang dinormalisasi antara 0-1</p></li>
 <li><p>Skor peluruhan menunjukkan seberapa relevan sebuah item berdasarkan "jaraknya" dari titik ideal</p></li>
 </ul>
-<p>Rumus perhitungan spesifik bervariasi tergantung pada jenis pemeringkat peluruhan. Untuk detail tentang cara menghitung skor peluruhan, lihat halaman khusus untuk <a href="/docs/id/gaussian-decay.md#Formula">Peluruhan Gaussian</a>, <a href="/docs/id/exponential-decay.md#Formula">Peluruhan Eksponensial</a>, <a href="/docs/id/linear-decay.md#Formula">Peluruhan Linier</a>.</p>
+<p>Rumus perhitungan spesifik bervariasi tergantung pada jenis pemeringkat peluruhan. Untuk detail tentang cara menghitung skor peluruhan, lihat halaman khusus untuk <a href="/docs/id/v2.6.x/gaussian-decay.md#Formula">Peluruhan Gaussian</a>, <a href="/docs/id/v2.6.x/exponential-decay.md#Formula">Peluruhan Eksponensial</a>, <a href="/docs/id/v2.6.x/linear-decay.md#Formula">Peluruhan Linier</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Tahap 3: Menghitung skor akhir</h3><p>Terakhir, Milvus menggabungkan skor kemiripan yang dinormalisasi dan skor peluruhan untuk menghasilkan skor peringkat akhir:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -91,7 +91,7 @@ beta: Milvus 2.6.x
 <p>Misalnya, jika sebuah makalah penelitian mendapat skor 0,82 dari kesamaan vektor dan 0,91 dari pencarian teks berbasis BM25 dalam pencarian hibrida, Milvus menggunakan 0,91 sebagai skor kesamaan dasar sebelum menerapkan faktor peluruhan.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Peringkat peluruhan dalam aksi</h3><p>Mari kita lihat peringkat peluruhan dalam skenario praktis-mencari <strong>"makalah penelitian AI"</strong> dengan peluruhan berbasis waktu:</p>
 <div class="alert note">
-<p>Dalam contoh ini, skor peluruhan mencerminkan bagaimana relevansi berkurang seiring berjalannya waktu-makalah yang lebih baru menerima skor yang mendekati 1,0, makalah yang lebih lama menerima skor yang lebih rendah. Nilai-nilai ini dihitung dengan menggunakan pemeringkat peluruhan tertentu. Untuk detailnya, lihat <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a>.</p>
+<p>Dalam contoh ini, skor peluruhan mencerminkan bagaimana relevansi berkurang seiring berjalannya waktu-makalah yang lebih baru menerima skor yang mendekati 1,0, makalah yang lebih lama menerima skor yang lebih rendah. Nilai-nilai ini dihitung dengan menggunakan pemeringkat peluruhan tertentu. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a>.</p>
 </div>
 <table>
    <tr>
@@ -202,9 +202,9 @@ beta: Milvus 2.6.x
 </table>
 <p>Untuk informasi terperinci tentang bagaimana setiap pemeringkat peluruhan menghitung skor dan pola penurunan tertentu, lihat dokumentasi khusus:</p>
 <ul>
-<li><p><a href="/docs/id/gaussian-decay.md">Peluruhan Gaussian</a></p></li>
-<li><p><a href="/docs/id/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
-<li><p><a href="/docs/id/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/gaussian-decay.md">Peluruhan Gaussian</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Contoh implementasi<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Pemeringkat peluruhan dapat diterapkan pada pencarian vektor standar dan operasi pencarian hibrida di Milvus. Di bawah ini adalah cuplikan kode utama untuk mengimplementasikan fitur ini.</p>
 <div class="alert note">
-<p>Sebelum menggunakan fungsi peluruhan, Anda harus terlebih dahulu membuat koleksi dengan bidang numerik yang sesuai (seperti stempel waktu, jarak, dll.) yang akan digunakan untuk perhitungan peluruhan. Untuk contoh kerja lengkap termasuk penyiapan koleksi, definisi skema, dan penyisipan data, lihat <a href="/docs/id/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Menerapkan Pemeringkatan Berbasis Waktu di Milvus</a>.</p>
+<p>Sebelum menggunakan fungsi peluruhan, Anda harus terlebih dahulu membuat koleksi dengan bidang numerik yang sesuai (seperti stempel waktu, jarak, dll.) yang akan digunakan untuk perhitungan peluruhan. Untuk contoh kerja lengkap termasuk penyiapan koleksi, definisi skema, dan penyisipan data, lihat <a href="/docs/id/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Menerapkan Pemeringkatan Berbasis Waktu di Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Membuat pemeringkat peluruhan</h3><p>Untuk mengimplementasikan pemeringkatan peluruhan, pertama-tama tentukan objek <code translate="no">Function</code> dengan konfigurasi yang sesuai:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -236,7 +236,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -278,7 +278,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Menentukan pemeringkat peluruhan matematis mana yang akan diterapkan. Menentukan bentuk kurva penurunan relevansi. Lihat bagian <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a> untuk panduan dalam memilih fungsi yang sesuai.</p></td>
+     <td><p>Menentukan pemeringkat peluruhan matematis mana yang akan diterapkan. Menentukan bentuk kurva penurunan relevansi. Lihat bagian <a href="/docs/id/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a> untuk panduan dalam memilih fungsi yang sesuai.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, atau <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>

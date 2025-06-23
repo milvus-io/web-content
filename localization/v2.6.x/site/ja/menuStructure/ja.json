@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "ストレージ／コンピューティング",
-            "id": "four_layers.md",
+            "label": "主要コンポーネント",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "主要コンポーネント",
-            "id": "main_components.md",
+            "label": "ストリーミング・サービス",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "数字フィールド",
+            "label": "番号フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -1340,7 +1340,7 @@
             ]
           },
           {
-            "label": "Use Pulsar with Milvus",
+            "label": "Milvusでパルサーを使う",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1383,25 +1383,6 @@
             "label": "規模の依存",
             "id": "scale-dependencies.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "アップグレード",
-        "id": "upgrade_milvus",
-        "order": 7,
-        "children": [
-          {
-            "label": "Milvusクラスタのアップグレード",
-            "id": "upgrade_milvus_cluster-operator.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Milvusスタンドアローンのアップグレード",
-            "id": "upgrade_milvus_standalone-operator.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -1479,7 +1460,7 @@
             ]
           },
           {
-            "label": "Trace",
+            "label": "トレース",
             "id": "trace",
             "order": 3,
             "isMenu": true,
@@ -2588,7 +2569,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

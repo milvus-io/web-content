@@ -49,8 +49,8 @@ summary: >-
      <th><p>Tipi di indice applicabili</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>VETTORE_FLAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
-     <td><ul><li><p>PIATTO</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul><li><p>VETTORE_FIAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VETTORE</p></li><li><p>INT8_VETTORE</p></li></ul></td>
+     <td><ul><li><p>PIATTO</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
    </tr>
    <tr>
      <td><p>VETTORE BINARIO</p></td>
@@ -58,7 +58,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>VETTORE_FLAT SPARSE</p></td>
-     <td><p>INDICE SPARSE_INVERTITO</p></td>
+     <td><p>INDICE SPARSO_INVERTITO</p></td>
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
@@ -73,7 +73,7 @@ summary: >-
      <td><ul><li>INVERTITO</li><li>STL_SORT</li></ul></td>
    </tr>
    <tr>
-     <td><ul><li>FIAT</li><li>DOPPIO</li></ul></td>
+     <td><ul><li>FIORITO</li><li>DOPPIO</li></ul></td>
      <td><p>INVERTITO</p></td>
    </tr>
    <tr>
@@ -176,7 +176,7 @@ summary: >-
 <li><p>Per una ricerca con un top-K elevato (rispetto al numero totale di incorporazioni vettoriali), le varianti IVF sono una scelta migliore rispetto ai tipi di indice basati su grafi.</p></li>
 <li><p>Per una ricerca con un top-K medio e un elevato rapporto di filtraggio, le varianti FIV sono la scelta migliore.</p></li>
 </ul>
-<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matrice decisionale: Scelta del tipo di indice più appropriato</h3><p>La seguente tabella è una matrice decisionale a cui fare riferimento per la scelta del tipo di indice più appropriato.</p>
+<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matrice decisionale: Scelta del tipo di indice più appropriato</h3><p>La tabella seguente è una matrice decisionale a cui fare riferimento per la scelta del tipo di indice più appropriato.</p>
 <table>
    <tr>
      <th><p>Scenario</p></th>
@@ -267,7 +267,7 @@ summary: >-
 <td><p>11,0 MB</p></td>
 </tr>
 <tr>
-<td><p>FIV-PQ + 10% di raffinazione grezza</p></td>
+<td><p>FIV-PQ + 10% di raffinamento grezzo</p></td>
 <td><p>1,0 MB + 2,0 MB + 8,0 MB + 51,2 MB</p></td>
 <td><p>62,2 MB</p></td>
 </tr>
@@ -282,7 +282,7 @@ summary: >-
 <td><p>515,0 MB</p></td>
 </tr>
 </table></p></li>
-<li><p><strong>Calcolare l'overhead di raffinazione.</strong></p>
+<li><p><strong>Calcolare l'overhead di raffinamento.</strong></p>
 <p>Le varianti FIV sono spesso abbinate a un raffinatore per riordinare i candidati. Per una ricerca che recupera i primi 10 risultati con un tasso di espansione di 5, il refinement overhead può essere stimato come segue:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
@@ -290,7 +290,7 @@ summary: >-
 </ol>
 <h3 id="Graph-based-index-memory-usage" class="common-anchor-header">Utilizzo della memoria degli indici a grafo</h3><p>Gli indici basati su grafi, come HNSW, richiedono una memoria significativa per memorizzare sia la struttura del grafo sia le incorporazioni vettoriali grezze. Di seguito è riportata una ripartizione dettagliata della memoria consumata da 1 milione di vettori a 128 dimensioni indicizzati con il tipo di indice HNSW.</p>
 <ol>
-<li><p><strong>Calcolo della memoria utilizzata dalla struttura a grafo.</strong></p>
+<li><p><strong>Calcolo della memoria utilizzata dalla struttura del grafo.</strong></p>
 <p>Ogni vettore in HNSW mantiene le connessioni con i suoi vicini. Con un grado del grafo (bordi per nodo) di 32, la memoria consumata può essere calcolata come segue:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 32 links × 4 bytes (for 32-bit integer storage) = 128 MB  
 <button class="copy-code-btn"></button></code></pre></li>

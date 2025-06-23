@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "التخزين/الحوسبة",
-            "id": "four_layers.md",
+            "label": "المكونات الرئيسية",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "المكونات الرئيسية",
-            "id": "main_components.md",
+            "label": "خدمة البث",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -1383,25 +1383,6 @@
             "label": "تبعيات المقياس",
             "id": "scale-dependencies.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "الترقية",
-        "id": "upgrade_milvus",
-        "order": 7,
-        "children": [
-          {
-            "label": "ترقية مجموعة ميلفوس العنقودية",
-            "id": "upgrade_milvus_cluster-operator.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "ترقية ميلفوس ستاندالون",
-            "id": "upgrade_milvus_standalone-operator.md",
-            "order": 1,
             "children": []
           }
         ]

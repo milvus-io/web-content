@@ -59,8 +59,8 @@ title: Установка Milvus Python SDK
       </svg>
     </button></h2><p>PyMilvus доступен в <a href="https://pypi.org/project/pymilvus/">индексе пакетов Python</a>.</p>
 <div class="alert note">
-Рекомендуется установить версию PyMilvus, соответствующую версии установленного вами сервера Milvus. Для получения дополнительной информации см. раздел <a href="/docs/ru/release_notes.md">Информация о выпуске</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">10</span>
+Рекомендуется устанавливать версию PyMilvus, соответствующую версии установленного вами сервера Milvus. Для получения дополнительной информации см. раздел <a href="/docs/ru/v2.6.x/release_notes.md">Информация о выпуске</a>.</div>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">0b0</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Проверка установки<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,11 +99,11 @@ title: Установка Milvus Python SDK
 <ul>
 <li><p>Изучить основные операции Milvus:</p>
 <ul>
-<li><a href="/docs/ru/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/manage-partitions.md">Управлять разделами</a></li>
-<li><a href="/docs/ru/insert-update-delete.md">Вставка, вставка и удаление</a></li>
-<li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
-<li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
+<li><a href="/docs/ru/v2.6.x/manage-collections.md">Управлять коллекциями</a></li>
+<li><a href="/docs/ru/v2.6.x/manage-partitions.md">Управлять разделами</a></li>
+<li><a href="/docs/ru/v2.6.x/insert-update-delete.md">Вставка, вставка и удаление</a></li>
+<li><a href="/docs/ru/v2.6.x/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p>Изучите <a href="/api-reference/pymilvus/v2.4.x/About.md">справочник API PyMilvus</a></p></li>
 </ul>

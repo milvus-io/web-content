@@ -26,11 +26,12 @@ beta: Milvus 2.6.x
     </button></h1><p>Google Cloud <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings">Vertex AI</a> è un servizio ad alte prestazioni progettato specificamente per i modelli di incorporazione del testo. Questa guida spiega come utilizzare Google Cloud Vertex AI con Milvus per una generazione efficiente di incorporazioni di testo.</p>
 <p>Vertex AI supporta diversi modelli di incorporamento per diversi casi d'uso:</p>
 <ul>
-<li><p>text-embedding-005 (ultimo modello di incorporamento del testo)</p></li>
-<li><p>text-multilingual-embedding-002 (ultimo modello di incorporazione del testo multilingue).</p></li>
+<li><p>gemini-embedding-001 (prestazioni all'avanguardia per compiti in inglese, multilingue e codice)</p></li>
+<li><p>text-embedding-005 (ultimo modello di incorporazione del testo)</p></li>
+<li><p>text-multilingual-embedding-002 (Ultimo modello di incorporazione del testo multilingue)</p></li>
 </ul>
-<p>Per maggiori dettagli, consultare il <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">riferimento ai modelli di incorporamento del testo di Vertex AI</a>.</p>
-<h2 id="Vertex-AI-deployment" class="common-anchor-header">Distribuzione di Vertex AI<button data-href="#Vertex-AI-deployment" class="anchor-icon" translate="no">
+<p>Per ulteriori informazioni, consultare i <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings">modelli di incorporazione del testo di Vertex AI</a>.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,100 +46,171 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prima di configurare Milvus con la funzione Vertex AI, è necessario configurare l'istanza di Milvus per utilizzare le credenziali dell'account del servizio Google Cloud. Milvus supporta due approcci principali di distribuzione:</p>
-<h3 id="Standard-deployment-Docker-Compose" class="common-anchor-header">Distribuzione standard (Docker Compose)</h3><p>Nel file docker-compose.yaml, è necessario montare il file delle credenziali e impostare la variabile d'ambiente <code translate="no">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</code>.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
-<span class="hljs-attr">standalone:</span>
-  <span class="hljs-comment"># ... other configurations ...</span>
-  <span class="hljs-attr">environment:</span>
-    <span class="hljs-comment"># ... other environment variables ...</span>
-    <span class="hljs-comment"># Set the environment variable pointing to the credential file path inside the container</span>
-    <span class="hljs-attr">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS:</span> <span class="hljs-string">/milvus/configs/google_application_credentials.json</span>
-  <span class="hljs-attr">volumes:</span>
-    <span class="hljs-comment"># ... other mounts ...</span>
-    <span class="hljs-comment"># Mount the credential file from the host to the specified path inside the container</span>
-    <span class="hljs-comment"># Replace /path/to/your/credentials.json with the actual path</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">/path/to/your/credentials.json:/milvus/configs/google_application_credentials.json:ro</span>
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Milvus-Helm-Chart-deployment-Kubernetes" class="common-anchor-header">Distribuzione di Milvus Helm Chart (Kubernetes)</h3><p>Per gli ambienti Kubernetes, si consiglia di utilizzare un Kubernetes Secret per memorizzare il file delle credenziali:</p>
-<ol>
-<li><p><strong>Creare il segreto</strong></p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">create</span> <span class="hljs-string">secret</span> <span class="hljs-string">generic</span> <span class="hljs-string">vertex-ai-secret</span> <span class="hljs-string">\</span>
-  <span class="hljs-string">--from-file=credentials.json=/path/to/your/credentials.json</span> <span class="hljs-string">\</span>
-  <span class="hljs-string">-n</span> <span class="hljs-string">&lt;your-milvus-namespace&gt;</span>
-
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Configurare values.yaml</strong></p>
-<p>Aggiungere quanto segue nelle sezioni standalone o proxy/dataNode:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraEnv:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</span>
-    <span class="hljs-attr">value:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>
-<span class="hljs-attr">volumes:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">vertex-ai-credentials-vol</span>
-    <span class="hljs-attr">secret:</span>
-      <span class="hljs-attr">secretName:</span> <span class="hljs-string">vertex-ai-secret</span>
-<span class="hljs-attr">volumeMounts:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">vertex-ai-credentials-vol</span>
-    <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>
-    <span class="hljs-attr">subPath:</span> <span class="hljs-string">credentials.json</span>
-    <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
-
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
-<h2 id="Configuration-in-Milvus" class="common-anchor-header">Configurazione in Milvus<button data-href="#Configuration-in-Milvus" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Dopo aver distribuito le credenziali Vertex AI, è necessario configurare la funzione di incorporamento. Milvus supporta diversi metodi per configurare le credenziali di autenticazione per Vertex AI, applicati nel seguente ordine di precedenza:</p>
+    </button></h2><p>Prima di configurare Vertex AI, assicurarsi di soddisfare i seguenti requisiti:</p>
 <ul>
-<li><p><strong>File di configurazione di Milvus (milvus.yaml)</strong> - Massima priorità</p></li>
-<li><p><strong>Variabili d'ambiente</strong> - priorità più bassa</p></li>
+<li><p><strong>Eseguire Milvus versione 2.6 o superiore</strong> - Verificare che la distribuzione soddisfi il requisito minimo di versione.</p></li>
+<li><p><strong>Creare un account di servizio Google Cloud</strong> - Come minimo, è probabile che siano necessari ruoli come "Vertex AI User" o altri ruoli più specifici. Per maggiori dettagli, consultare la sezione <a href="https://cloud.google.com/iam/docs/service-accounts-create?_gl=1*1jz33xw*_ga*MjE0NTAwMjk3Mi4xNzUwMTQwNTMw*_ga_WH2QY8WWF5*czE3NTAxNDA1MzEkbzEkZzEkdDE3NTAxNDIyOTEkajE0JGwwJGgw">Creare account di servizio</a>.</p></li>
+<li><p><strong>Scaricare il file chiave JSON dell'account di servizio</strong> - Memorizzare in modo sicuro questo file di credenziali sul server o sul computer locale. Per ulteriori informazioni, fare riferimento a <a href="https://cloud.google.com/iam/docs/keys-create-delete?_gl=1*ittbs8*_ga*MjE0NTAwMjk3Mi4xNzUwMTQwNTMw*_ga_WH2QY8WWF5*czE3NTAxNDA1MzEkbzEkZzEkdDE3NTAxNDI0NjMkajYwJGwwJGgw#creating">Creare una chiave dell'account di servizio</a>.</p></li>
 </ul>
-<p><strong>File di configurazione di Milvus (milvus.yaml)</strong></p>
-<p>Per impostazioni persistenti a livello di cluster, i dati json delle credenziali possono essere codificati in formato base64 e poi definiti nel file milvus.yaml.<code translate="no">cat credentials.json|jq .|base64</code>sostituisce <code translate="no">credentials.json</code> con il percorso del file delle credenziali.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">credential:</span>
-  <span class="hljs-attr">gcp1:</span>
-    <span class="hljs-attr">credential_json:</span>  <span class="hljs-comment"># base64 based gcp credential data</span>
-
-<span class="hljs-comment"># Any configuration related to functions</span>
+<h2 id="Configure-credentials" class="common-anchor-header">Configurazione delle credenziali<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Prima che Milvus possa chiamare Vertex AI, ha bisogno di accedere alla chiave JSON dell'account di servizio GCP. Supportiamo due metodi: sceglietene uno in base alle vostre esigenze di distribuzione e operative.</p>
+<table>
+   <tr>
+     <th><p>Opzione</p></th>
+     <th><p>Priorità</p></th>
+     <th><p>Migliore per</p></th>
+   </tr>
+   <tr>
+     <td><p>File di configurazione (<code translate="no">milvus.yaml</code>)</p></td>
+     <td><p>Alta</p></td>
+     <td><p>Impostazioni persistenti a livello di cluster</p></td>
+   </tr>
+   <tr>
+     <td><p>Variabili d'ambiente (<code translate="no">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</code>)</p></td>
+     <td><p>Basso</p></td>
+     <td><p>Flussi di lavoro del contenitore, test rapidi</p></td>
+   </tr>
+</table>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Opzione 1: File di configurazione (raccomandato e con priorità più alta)</h3><p>Milvus preferirà sempre le credenziali dichiarate in <code translate="no">milvus.yaml</code> rispetto a qualsiasi variabile d'ambiente per lo stesso provider.</p>
+<ol>
+<li><p>Codificare in base64 la chiave JSON</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> credentials.json | jq . | <span class="hljs-built_in">base64</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Dichiarare le credenziali in <code translate="no">milvus.yaml</code></p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">credential:</span>
+  <span class="hljs-attr">gcp_vertex:</span>                      <span class="hljs-comment"># arbitrary label</span>
+    <span class="hljs-attr">credential_json:</span> <span class="hljs-string">|
+      &lt;YOUR_BASE64_ENCODED_JSON&gt;
+</span><button class="copy-code-btn"></button></code></pre></li>
+<li><p>Legare le credenziali al provider Vertex AI</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">vertexai:</span>
-        <span class="hljs-attr">credential:</span>  <span class="hljs-string">gcp1</span> <span class="hljs-comment"># The name in the crendential configuration item</span>
-        <span class="hljs-attr">url:</span>  <span class="hljs-comment"># Your VertexAI embedding url</span>
+        <span class="hljs-attr">credential:</span> <span class="hljs-string">gcp_vertex</span>      <span class="hljs-comment"># must match the label above</span>
+        <span class="hljs-attr">url:</span> <span class="hljs-string">&lt;optional:</span> <span class="hljs-string">custom</span> <span class="hljs-string">Vertex</span> <span class="hljs-string">AI</span> <span class="hljs-string">endpoint&gt;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><div class="alert note"></p>
+<p>Se in seguito è necessario ruotare le chiavi, basta aggiornare la stringa Base64 in <code translate="no">credential_json</code> e riavviare Milvus, senza dover modificare l'ambiente o i contenitori.</p>
+<p></div></p></li>
+</ol>
+<h3 id="Option-2-Environment-variables" class="common-anchor-header">Opzione 2: Variabili d'ambiente</h3><p>Usate questo metodo quando preferite iniettare i segreti al momento della distribuzione. Milvus ricorre alle variabili d'ambiente solo se non esiste una voce corrispondente in <code translate="no">milvus.yaml</code>.</p>
+<div class="alert note">
+<p>Le fasi di configurazione dipendono dalla modalità di distribuzione di Milvus (standalone o cluster distribuito) e dalla piattaforma di orchestrazione (Docker Compose o Kubernetes).</p>
+</div>
+<div class="filter">
+ <a href="#docker">Docker Compose</a> <a href="#helm">Helm</a></div>
+<div class="filter-docker">
+<div class="alert note">
+<p>Per ottenere il file di configurazione di Milvus<strong>(docker-compose.yaml</strong>), fate riferimento a <a href="/docs/it/v2.6.x/configure-docker.md#Download-an-installation-file">Scaricare un file di installazione</a>.</p>
+</div>
+<ol>
+<li><p><strong>Montare la chiave nel contenitore</strong></p>
+<p>Modificare il file <code translate="no">docker-compose.yaml</code> per includere la mappatura del volume delle credenziali:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-comment"># Map host credential file to container path</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/path/to/your/credentials.json:/milvus/configs/google_application_credentials.json:ro</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Nella configurazione precedente:</p>
+<ul>
+<li><p>Usare percorsi assoluti per un accesso affidabile ai file (<code translate="no">/home/user/credentials.json</code> non <code translate="no">~/credentials.json</code>)</p></li>
+<li><p>Il percorso del contenitore deve terminare con l'estensione <code translate="no">.json</code> </p></li>
+<li><p><code translate="no">:ro</code> Il flag assicura l'accesso in sola lettura per la sicurezza</p></li>
+</ul></li>
+<li><p><strong>Impostare la variabile d'ambiente</strong></p>
+<p>Nello stesso file <code translate="no">docker-compose.yaml</code>, aggiungere la variabile d'ambiente che punta al percorso delle credenziali:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-comment"># Essential for Vertex AI authentication</span>
+      <span class="hljs-attr">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS:</span> <span class="hljs-string">/milvus/configs/google_application_credentials.json</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>Applicare le modifiche</strong></p>
+<p>Riavviare il contenitore Milvus per attivare la configurazione:</p>
+<pre><code translate="no" class="language-bash">docker-compose down &amp;&amp; docker-compose up -d
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+</div>
+<div class="filter-helm">
+<div class="alert note">
+<p>Per ottenere il file di configurazione di Milvus<strong>(values.yaml</strong>), fare riferimento a <a href="/docs/it/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configurare Milvus tramite file di configurazione</a>.</p>
+</div>
+<ol>
+<li><p><strong>Creare un segreto Kubernetes</strong></p>
+<p>Eseguire questo comando sulla macchina di controllo (dove è configurato <strong>kubectl</strong> ):</p>
+<pre><code translate="no" class="language-bash">kubectl create secret generic vertex-ai-secret \
+  --from-file=credentials.json=/path/to/your/credentials.json \
+  -n &lt;your-milvus-namespace&gt;
+<button class="copy-code-btn"></button></code></pre>
+<p>Nel comando precedente:</p>
+<ul>
+<li><p><code translate="no">vertex-ai-secret</code>: Nome del segreto (personalizzabile)</p></li>
+<li><p><code translate="no">/path/to/your/credentials.json</code>: Nome del file locale delle credenziali GCP</p></li>
+<li><p><code translate="no">&lt;your-milvus-namespace&gt;</code>: Spazio dei nomi Kubernetes che ospita Milvus</p></li>
+</ul></li>
+<li><p><strong>Configurare i valori di Helm</strong></p>
+<p>Aggiornare il sito <code translate="no">values.yaml</code> in base al tipo di distribuzione:</p>
+<ul>
+<li><p><strong>Per la distribuzione standalone</strong></p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">standalone:</span>
+  <span class="hljs-attr">extraEnv:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</span>
+      <span class="hljs-attr">value:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>  <span class="hljs-comment"># Container path</span>
+  
+  <span class="hljs-attr">volumes:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">vertex-ai-credentials-vol</span>
+      <span class="hljs-attr">secret:</span>
+        <span class="hljs-attr">secretName:</span> <span class="hljs-string">vertex-ai-secret</span>  <span class="hljs-comment"># Must match Step 1</span>
+  
+  <span class="hljs-attr">volumeMounts:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">vertex-ai-credentials-vol</span>
+      <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>  <span class="hljs-comment"># Must match extraEnv value</span>
+      <span class="hljs-attr">subPath:</span> <span class="hljs-string">credentials.json</span>  <span class="hljs-comment"># Must match secret key name</span>
+      <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>Per la distribuzione distribuita (aggiungere a ciascun componente)</strong></p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">extraEnv:</span> 
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</span>
+      <span class="hljs-attr">value:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>
+  <span class="hljs-attr">volumes:</span> 
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">vertex-ai-credentials-vol</span>
+      <span class="hljs-attr">secret:</span>
+        <span class="hljs-attr">secretName:</span> <span class="hljs-string">vertex-ai-secret</span>
+  <span class="hljs-attr">volumeMounts:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">vertex-ai-credentials-vol</span>
+      <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>
+      <span class="hljs-attr">subPath:</span> <span class="hljs-string">credentials.json</span>
+      <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Variabili d'ambiente</strong></p>
-<p>Le variabili d'ambiente offrono un metodo di configurazione alternativo, comunemente usato quando si impostano gli ambienti dei container in Docker Compose o nelle distribuzioni Kubernetes.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Example (typically set in docker-compose.yaml or Kubernetes manifest)</span>
-<span class="hljs-comment"># docker-compose.yaml (standalone service section)</span>
-<span class="hljs-attr">standalone:</span>
-  <span class="hljs-comment"># ... other configurations ...</span>
-  <span class="hljs-attr">environment:</span>
-    <span class="hljs-comment"># ... other environment variables ...</span>
-    <span class="hljs-comment"># Set the environment variable pointing to the credential file path inside the container</span>
-    <span class="hljs-attr">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS:</span> <span class="hljs-string">/milvus/configs/google_application_credentials.json</span>
-    
-<span class="hljs-comment">#Add the following under the standalone or proxy/dataNode sections in values.yaml:    </span>
-<span class="hljs-attr">extraEnv:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">MILVUSAI_GOOGLE_APPLICATION_CREDENTIALS</span>
-    <span class="hljs-attr">value:</span> <span class="hljs-string">/milvus/configs/credentials.json</span>    
-    
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-embedding-function" class="common-anchor-header">Utilizzare la funzione embedding<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
+<span class="hljs-comment"># Repeat same configuration for dataNode, etc.</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul></li>
+<li><p><strong>Applicare la configurazione di Helm</strong></p>
+<p>Distribuire la configurazione aggiornata al cluster:</p>
+<pre><code translate="no" class="language-bash">helm upgrade milvus milvus/milvus -f values.yaml -n &lt;your-milvus-namespace&gt;
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+</div>
+<h2 id="Use-embedding-function" class="common-anchor-header">Utilizzare la funzione di incorporamento<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -254,4 +326,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo aver configurato la funzione di incorporamento, consultare la <a href="/docs/it/embeddings.md">Panoramica della funzione</a> per ulteriori indicazioni sulla configurazione degli indici, sugli esempi di inserimento dei dati e sulle operazioni di ricerca semantica.</p>
+    </button></h2><p>Dopo aver configurato la funzione di incorporamento, consultare la <a href="/docs/it/v2.6.x/embeddings.md">Panoramica della funzione</a> per ulteriori indicazioni sulla configurazione degli indici, sugli esempi di inserimento dei dati e sulle operazioni di ricerca semantica.</p>

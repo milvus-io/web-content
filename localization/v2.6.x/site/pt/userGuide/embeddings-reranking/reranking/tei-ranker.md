@@ -23,8 +23,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O TEI Ranker utiliza o serviço <a href="/docs/pt/tei-ranker.md">TEI (Text Embedding Inference)</a> da Hugging Face para melhorar a relevância da pesquisa através da classificação semântica. Representa uma abordagem avançada à ordenação de resultados de pesquisa que vai além da tradicional semelhança de vectores.</p>
-<p>Comparado ao <a href="/docs/pt/vllm-ranker.md">vLLM Ranker</a>, o TEI Ranker oferece integração direta com o ecossistema da Hugging Face e modelos de classificação pré-treinados, tornando-o ideal para aplicativos em que a facilidade de implantação e manutenção são prioridades.</p>
+    </button></h1><p>O TEI Ranker utiliza o serviço <a href="/docs/pt/v2.6.x/tei-ranker.md">TEI (Text Embedding Inference)</a> da Hugging Face para melhorar a relevância da pesquisa através da classificação semântica. Representa uma abordagem avançada à ordenação de resultados de pesquisa que vai além da tradicional semelhança de vectores.</p>
+<p>Comparado ao <a href="/docs/pt/v2.6.x/vllm-ranker.md">vLLM Ranker</a>, o TEI Ranker oferece integração direta com o ecossistema da Hugging Face e modelos de classificação pré-treinados, tornando-o ideal para aplicativos em que a facilidade de implantação e manutenção são prioridades.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,8 +42,8 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Antes de implementar o vLLM Ranker no Milvus, certifique-se de que tem:</p>
 <ul>
-<li><p>Uma coleção do Milvus com um campo <code translate="no">VARCHAR</code> contendo o texto a ser ranqueado</p></li>
-<li><p>Um serviço TEI em execução com capacidades de classificação. Para obter instruções detalhadas sobre a configuração de um serviço TEI, consulte a <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">documentação oficial do TEI</a>.</p></li>
+<li><p>Uma coleção Milvus com um campo <code translate="no">VARCHAR</code> contendo o texto a ser ranqueado</p></li>
+<li><p>Um serviço TEI em execução com recursos de classificação. Para obter instruções detalhadas sobre como configurar um serviço TEI, consulte a <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">documentação oficial do TEI</a>.</p></li>
 </ul>
 <h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">Criar uma função do classificador TEI<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,11 +78,41 @@ tei_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,                 <span class="hljs-comment"># Specifies TEI as the service provider</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text for relevance evaluation</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># Your TEI service URL</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>                     <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;truncate&quot;</span>: <span class="hljs-literal">True</span>,                <span class="hljs-comment"># Optional: Truncate the inputs that are longer than the maximum supported size</span>
+        <span class="hljs-string">&quot;truncation_direction&quot;</span>: <span class="hljs-string">&quot;Right&quot;</span>,    <span class="hljs-comment"># Optional: Direction to truncate the inputs</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa vetorial standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">Parâmetros específicos do TEI Ranker</h3><p>Os parâmetros seguintes são específicos do TEI Ranker:</p>
+<table>
+   <tr>
+     <th><p>Parâmetro</p></th>
+     <th><p>Necessário?</p></th>
+     <th><p>Descrição</p></th>
+     <th><p>Valor / Exemplo</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncate</code></p></td>
+     <td><p>Não</p></td>
+     <td><p>Se as entradas que excedem o comprimento máximo da sequência devem ser truncadas. Se <code translate="no">False</code>, as entradas longas dão origem a erros.</p></td>
+     <td><p><code translate="no">True</code> ou <code translate="no">False</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncation_direction</code></p></td>
+     <td><p>Não</p></td>
+     <td><p>Direção a partir da qual truncar quando a entrada é demasiado longa:</p>
+<ul>
+<li><p><code translate="no">"Right"</code> (predefinição):  Os tokens são removidos do fim da sequência até que o tamanho máximo suportado seja atingido.</p></li>
+<li><p><code translate="no">"Left"</code>: Os símbolos são removidos do início da sequência.</p></li>
+</ul></td>
+     <td><p><code translate="no">"Right"</code> ou <code translate="no">"Left"</code></p></td>
+   </tr>
+</table>
+<div class="alert note">
+<p>Para parâmetros gerais partilhados por todos os classificadores de modelos (por exemplo, <code translate="no">provider</code>, <code translate="no">queries</code>), consulte <a href="/docs/pt/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Criar um classificador de modelos</a>.</p>
+</div>
+<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa vetorial padrão<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -99,7 +129,7 @@ tei_ranker = Function(
       </svg>
     </button></h2><p>Para aplicar o TEI Ranker a uma pesquisa vetorial padrão:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
-results = milvus_client.search(
+results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],  <span class="hljs-comment"># Search queries</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
@@ -124,7 +154,7 @@ results = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O TEI Ranker também pode ser utilizado com a pesquisa híbrida para combinar métodos de pesquisa densos e esparsos:</p>
+    </button></h2><p>O TEI Ranker também pode ser utilizado com a pesquisa híbrida para combinar métodos de recuperação densos e esparsos:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Configure dense vector search</span>
@@ -144,7 +174,7 @@ sparse_search = AnnSearchRequest(
 )
 
 <span class="hljs-comment"># Execute hybrid search with vLLM reranking</span>
-hybrid_results = milvus_client.hybrid_search(
+hybrid_results = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                        <span class="hljs-comment"># Apply tei reranking to combined results</span></span>

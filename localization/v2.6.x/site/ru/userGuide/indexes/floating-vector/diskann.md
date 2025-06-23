@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В крупномасштабных сценариях, где наборы данных могут включать миллиарды или даже триллионы векторов, стандартные методы индексирования в памяти (например, <a href="/docs/ru/hnsw.md">HNSW</a>, <a href="/docs/ru/ivf-flat.md">IVF_FLAT</a>) часто не успевают за скоростью из-за ограничений памяти. <strong>DISKANN</strong> предлагает дисковый подход, который решает эти проблемы, сохраняя высокую точность и скорость поиска, когда размер набора данных превышает объем доступной оперативной памяти.</p>
+    </button></h1><p>В крупномасштабных сценариях, где наборы данных могут включать миллиарды или даже триллионы векторов, стандартные методы индексирования в памяти (например, <a href="/docs/ru/v2.6.x/hnsw.md">HNSW</a>, <a href="/docs/ru/v2.6.x/ivf-flat.md">IVF_FLAT</a>) часто не успевают за скоростью из-за ограничений памяти. <strong>DISKANN</strong> предлагает дисковый подход, который решает эти проблемы, сохраняя высокую точность и скорость поиска, когда размер набора данных превышает объем доступной оперативной памяти.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,7 @@ summary: >-
     </button></h2><p><strong>DISKANN</strong> сочетает в себе две ключевые технологии для эффективного векторного поиска:</p>
 <ul>
 <li><p><strong>Vamana Graph</strong> - <strong>дисковый</strong> индекс на <strong>основе графа</strong>, который соединяет точки данных (или векторы) для эффективной навигации во время поиска.</p></li>
-<li><p><strong>Product Quantization (PQ)</strong> - метод сжатия <strong>в памяти</strong>, который уменьшает размер векторов, позволяя быстро вычислять приблизительное расстояние между ними.</p></li>
+<li><p><strong>Product Quantization (PQ)</strong> - метод сжатия <strong>в памяти</strong>, который уменьшает размер векторов, позволяя быстро вычислять приблизительное расстояние между векторами.</p></li>
 </ul>
 <h3 id="Index-construction" class="common-anchor-header">Построение индексов</h3><h4 id="Vamana-graph" class="common-anchor-header">Граф Вамана</h4><p>Граф Vamana занимает центральное место в дисковой стратегии DISKANN. Он может работать с очень большими наборами данных, поскольку ему не нужно полностью размещаться в памяти во время или после построения.</p>
 <p>На следующем рисунке показано, как строится граф Vamana.</p>
@@ -61,7 +61,7 @@ summary: >-
 <p>Параметр <code translate="no">search_list_size</code> определяет широту процесса уточнения графа. Более высокий <code translate="no">search_list_size</code> расширяет поиск соседей во время построения и может повысить итоговую точность, но увеличивает время построения индекса.</p></li>
 </ul></li>
 </ol>
-<p>Чтобы узнать больше о настройке параметров, обратитесь к разделу <a href="/docs/ru/diskann.md#diskann-params">DISKANN params</a>.</p>
+<p>Чтобы узнать больше о настройке параметров, обратитесь к разделу <a href="/docs/ru/v2.6.x/diskann.md#diskann-params">DISKANN params</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN использует <strong>PQ</strong> для сжатия высокоразмерных векторов в более мелкие представления<strong>(PQ-коды</strong>), которые хранятся в памяти для быстрого вычисления приблизительного расстояния.</p>
 <p>Параметр <code translate="no">pq_code_budget_gb_ratio</code> управляет объемом памяти, выделенным для хранения этих PQ-кодов. Он представляет собой соотношение между общим размером векторов (в гигабайтах) и местом, выделенным для хранения PQ-кодов. Вы можете рассчитать фактический бюджет PQ-кодов (в гигабайтах) по этой формуле:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -69,9 +69,9 @@ summary: >-
 <p>где:</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> общий размер векторов (в гигабайтах).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> задаваемый пользователем коэффициент, представляющий собой долю общего объема данных, зарезервированную для PQ-кодов. Этот параметр позволяет найти компромисс между точностью поиска и ресурсами памяти. Дополнительные сведения о настройке параметров см. в разделе <a href="/docs/ru/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Конфигурации DISKANN</a>.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> задаваемый пользователем коэффициент, представляющий собой долю общего объема данных, зарезервированную для PQ-кодов. Этот параметр позволяет найти компромисс между точностью поиска и ресурсами памяти. Дополнительные сведения о настройке параметров см. в разделе <a href="/docs/ru/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Конфигурации DISKANN</a>.</p></li>
 </ul>
-<p>Технические подробности о методе PQ см. в разделе <a href="/docs/ru/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<p>Технические подробности о методе PQ см. в разделе <a href="/docs/ru/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
 <h3 id="Search-process" class="common-anchor-header">Процесс поиска</h3><p>После того как индекс (граф Vamana на диске и коды PQ в памяти) построен, DISKANN выполняет поиск ANN следующим образом:</p>
 <p>
   
@@ -85,7 +85,7 @@ summary: >-
 <li><p><code translate="no">beam_width_ratio</code>: Коэффициент, который управляет широтой поиска, определяя, сколько соседей-кандидатов выбирается параллельно для изучения их соседей. Большее значение <code translate="no">beam_width_ratio</code> приводит к более широкому поиску, что потенциально ведет к повышению точности, но также увеличивает вычислительные затраты и объем дисковых операций ввода-вывода. Ширина луча, или количество выбранных узлов, определяется по формуле: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: Доля памяти, выделяемая для кэширования часто используемых дисковых данных. Такое кэширование позволяет минимизировать дисковый ввод-вывод и ускорить повторный поиск, поскольку данные уже находятся в памяти.</p></li>
 </ul>
-<p>Чтобы узнать больше о настройке параметров, обратитесь к разделу <a href="/docs/ru/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Конфигурации DISKANN</a>.</p></li>
+<p>Чтобы узнать больше о настройке параметров, обратитесь к разделу <a href="/docs/ru/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Конфигурации DISKANN</a>.</p></li>
 <li><p><strong>Итеративное исследование:</strong> Поиск итеративно уточняет набор кандидатов, многократно выполняя приблизительные оценки (используя PQ), а затем точные проверки (используя исходные векторы с диска), пока не будет найдено достаточное количество соседей.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Включение DISKANN в Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -169,7 +169,7 @@ summary: >-
       <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="SDK-configuration" class="common-anchor-header">Конфигурация SDK</h3><p>Здесь приведен пример настройки параметров DISKANN с помощью Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">Построение</h4><p>Чтобы построить индекс <code translate="no">IVF_FLAT</code> по векторному полю в Milvus, используйте метод <code translate="no">add_index()</code>, указав <code translate="no">index_type</code>, <code translate="no">metric_type</code> и дополнительные параметры индекса.</p>
+<h4 id="Build" class="common-anchor-header">Построение</h4><p>Чтобы построить индекс <code translate="no">DISKANN</code> по векторному полю в Milvus, используйте метод <code translate="no">add_index()</code>, указав <code translate="no">index_type</code>, <code translate="no">metric_type</code> и дополнительные параметры индекса.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -188,7 +188,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>После того как параметры индекса настроены, вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробнее см. в разделе <a href="/docs/ru/create-collection.md">Создание коллекции</a>.</p>
+<p>После того как параметры индекса настроены, вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/create-collection.md">Создание коллекции</a>.</p>
 <h4 id="Search" class="common-anchor-header">Поиск</h4><p>После того как индекс создан и сущности вставлены, можно выполнять поиск по сходству в индексе.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {

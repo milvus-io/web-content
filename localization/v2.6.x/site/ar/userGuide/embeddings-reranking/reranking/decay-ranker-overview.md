@@ -81,7 +81,7 @@ beta: Milvus 2.6.x
 <li><p>يقوم كل مصنف اضمحلال بتحويل القيم الرقمية الأولية إلى درجات ملاءمة طبيعية بين 0-1</p></li>
 <li><p>تمثل درجة التضاؤل مدى ملاءمة العنصر بناءً على "المسافة" بينه وبين النقطة المثالية</p></li>
 </ul>
-<p>تختلف معادلة الحساب المحددة بناءً على نوع مصنف التضاؤل. للحصول على تفاصيل حول كيفية حساب درجة التضاؤل، راجع الصفحات المخصصة <a href="/docs/ar/gaussian-decay.md#Formula">للتضاؤل الغاوسي،</a> <a href="/docs/ar/exponential-decay.md#Formula">والتضاؤل الأسي،</a> <a href="/docs/ar/linear-decay.md#Formula">والتضاؤل الخطي</a>.</p>
+<p>تختلف معادلة الحساب المحددة بناءً على نوع مصنف التضاؤل. للحصول على تفاصيل حول كيفية حساب درجة التضاؤل، راجع الصفحات المخصصة <a href="/docs/ar/v2.6.x/gaussian-decay.md#Formula">للتضاؤل الغاوسي،</a> <a href="/docs/ar/v2.6.x/exponential-decay.md#Formula">والتضاؤل الأسي،</a> <a href="/docs/ar/v2.6.x/linear-decay.md#Formula">والتضاؤل الخطي</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">المرحلة 3: حساب الدرجات النهائية</h3><p>أخيرًا، يجمع Milvus بين درجة التشابه الطبيعي ودرجة التضاؤل لإنتاج درجة الترتيب النهائية:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -91,7 +91,7 @@ beta: Milvus 2.6.x
 <p>على سبيل المثال، إذا حصلت ورقة بحثية على 0.82 من التشابه المتجه و0.91 من استرجاع النص المستند إلى BM25 في بحث مختلط، يستخدم ميلفوس 0.91 كدرجة تشابه أساسية قبل تطبيق عامل الاضمحلال.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">ترتيب الاضمحلال أثناء العمل</h3><p>دعونا نرى ترتيب الاضمحلال في سيناريو عملي - البحث عن <strong>"أوراق بحثية للذكاء الاصطناعي"</strong> مع اضمحلال زمني:</p>
 <div class="alert note">
-<p>في هذا المثال، تعكس درجات التضاؤل في هذا المثال كيف تتضاءل الأهمية مع مرور الوقت - تحصل الأوراق البحثية الأحدث على درجات أقرب إلى 1.0، بينما تحصل الأوراق الأقدم على درجات أقل. يتم حساب هذه القيم باستخدام مصنف اضمحلال محدد. للحصول على التفاصيل، راجع <a href="/docs/ar/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف الاضمحلال الصحيح</a>.</p>
+<p>في هذا المثال، تعكس درجات التضاؤل في هذا المثال كيف تتضاءل الأهمية مع مرور الوقت - تحصل الأوراق البحثية الأحدث على درجات أقرب إلى 1.0، بينما تحصل الأوراق الأقدم على درجات أقل. يتم حساب هذه القيم باستخدام مصنف اضمحلال محدد. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف الاضمحلال الصحيح</a>.</p>
 </div>
 <table>
    <tr>
@@ -202,9 +202,9 @@ beta: Milvus 2.6.x
 </table>
 <p>للحصول على معلومات مفصلة حول كيفية حساب كل مصنف اضمحلال للنتائج وأنماط اضمحلال محددة، راجع الوثائق المخصصة:</p>
 <ul>
-<li><p><a href="/docs/ar/gaussian-decay.md">الاضمحلال الغاوسي</a></p></li>
-<li><p><a href="/docs/ar/exponential-decay.md">التضاؤل الأسي</a></p></li>
-<li><p><a href="/docs/ar/exponential-decay.md">التضاؤل الأسي</a></p></li>
+<li><p><a href="/docs/ar/v2.6.x/gaussian-decay.md">الاضمحلال الغاوسي</a></p></li>
+<li><p><a href="/docs/ar/v2.6.x/exponential-decay.md">التضاؤل الأسي</a></p></li>
+<li><p><a href="/docs/ar/v2.6.x/exponential-decay.md">التضاؤل الأسي</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">مثال على التنفيذ<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>يمكن تطبيق مصنفات التضاؤل على كل من عمليات البحث المتجه القياسية وعمليات البحث المختلطة في ميلفوس. فيما يلي مقتطفات الشيفرة الرئيسية لتنفيذ هذه الميزة.</p>
 <div class="alert note">
-<p>قبل استخدام دوال التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة وتعريف المخطط وإدراج البيانات، راجع <a href="/docs/ar/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي: تنفيذ الترتيب المستند إلى الوقت في ميلفوس</a>.</p>
+<p>قبل استخدام دوال التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة وتعريف المخطط وإدراج البيانات، راجع <a href="/docs/ar/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي: تنفيذ الترتيب المستند إلى الوقت في ميلفوس</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">إنشاء مصنف اضمحلال</h3><p>لتنفيذ تصنيف التضاؤل، قم أولاً بتعريف كائن <code translate="no">Function</code> بالتكوين المناسب:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -236,7 +236,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -278,7 +278,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>تحديد مصنف التضاؤل الرياضي المطلوب تطبيقه. يحدد شكل المنحنى الخاص بانخفاض الملاءمة. راجع قسم <a href="/docs/ar/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف التضاؤل الصحيح</a> للحصول على إرشادات حول اختيار الدالة المناسبة.</p></td>
+     <td><p>تحديد مصنف التضاؤل الرياضي المطلوب تطبيقه. يحدد شكل المنحنى الخاص بانخفاض الملاءمة. راجع قسم <a href="/docs/ar/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف التضاؤل الصحيح</a> للحصول على إرشادات حول اختيار الدالة المناسبة.</p></td>
      <td><p><code translate="no">"gauss"</code> <code translate="no">"exp"</code> ، أو <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>

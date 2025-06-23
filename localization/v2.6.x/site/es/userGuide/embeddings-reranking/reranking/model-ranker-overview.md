@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Para obtener información detallada sobre la implementación de cada modelo de servicio, consulte la documentación correspondiente:</p>
 <ul>
-<li><p><a href="/docs/es/vllm-ranker.md">Clasificador vLLM</a></p></li>
-<li><p><a href="/docs/es/tei-ranker.md">Clasificador TEI</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/vllm-ranker.md">Clasificador vLLM</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/tei-ranker.md">Clasificador TEI</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementación<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,9 +203,15 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Sí</p></td>
+     <td><p>Diccionario que contiene la configuración de la función de reordenación basada en modelos. Los parámetros disponibles (claves) varían en función del proveedor (<code translate="no">tei</code> o <code translate="no">vllm</code>). Consulte <a href="/docs/es/v2.6.x/vllm-ranker.md">vLLM Ranker</a> o <a href="/docs/es/v2.6.x/tei-ranker.md">TEI Ranker</a> para obtener más detalles.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Sí</p></td>
-     <td><p>Debe establecerse en <code translate="no">"model"</code> para habilitar la reordenación de modelos.</p></td>
+     <td><p>Debe establecerse en <code translate="no">"model"</code> para activar la reordenación basada en modelos.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>

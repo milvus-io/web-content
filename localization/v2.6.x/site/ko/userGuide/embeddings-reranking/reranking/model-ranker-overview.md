@@ -125,8 +125,8 @@ beta: Milvus 2.6.x
 </table>
 <p>각 모델 서비스의 구현에 대한 자세한 내용은 전용 설명서를 참조하세요:</p>
 <ul>
-<li><p><a href="/docs/ko/vllm-ranker.md">vLLM 랭커</a></p></li>
-<li><p><a href="/docs/ko/tei-ranker.md">TEI 랭커</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/vllm-ranker.md">vLLM 랭커</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/tei-ranker.md">TEI 랭커</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">구현<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -198,6 +198,12 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>예</p></td>
+     <td><p>모델 기반 재랭킹 함수에 대한 구성이 포함된 딕셔너리입니다. 사용 가능한 매개 변수(키)는 제공업체에 따라 다릅니다(<code translate="no">tei</code> 또는 <code translate="no">vllm</code>). 자세한 내용은 <a href="/docs/ko/v2.6.x/vllm-ranker.md">vLLM 랭커</a> 또는 <a href="/docs/ko/v2.6.x/tei-ranker.md">TEI 랭커를</a> 참조하세요.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>예</p></td>
      <td><p>모델 재랭킹을 사용하려면 <code translate="no">"model"</code> 으로 설정해야 합니다.</p></td>
@@ -206,7 +212,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>예</p></td>
-     <td><p>재랭크에 사용할 모델 서비스 제공업체입니다.</p></td>
+     <td><p>재랭킹에 사용할 모델 서비스 제공업체입니다.</p></td>
      <td><p><code translate="no">"tei"</code> 또는 <code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>

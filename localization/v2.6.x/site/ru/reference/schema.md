@@ -44,8 +44,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>Анатомия проектирования схемы</span> </span></p>
-<p>Проектирование модели данных поисковой системы включает в себя анализ потребностей бизнеса и абстрагирование информации в виде модели данных, выраженной в виде схемы. Например, поиск по фрагменту текста должен быть "проиндексирован" путем преобразования буквенной строки в вектор с помощью "встраивания" и включения векторного поиска. Помимо этого основного требования, может потребоваться хранение других свойств, таких как временная метка публикации и автор. Эти метаданные позволяют уточнять семантический поиск с помощью фильтрации, возвращая только тексты, опубликованные после определенной даты или определенным автором. Вы также можете получить эти скаляры вместе с основным текстом, чтобы отобразить результат поиска в приложении. Для упорядочивания этих фрагментов текста каждому из них должен быть присвоен уникальный идентификатор, выраженный в виде целого числа или строки. Эти элементы необходимы для создания сложной логики поиска.</p>
-<p>Обратитесь к <a href="/docs/ru/schema-hands-on.md">Schema Design Hands-On</a>, чтобы узнать, как создать хорошо продуманную схему.</p>
+<p>Проектирование модели данных поисковой системы включает в себя анализ потребностей бизнеса и абстрагирование информации в виде модели данных, выраженной в виде схемы. Например, поиск по фрагменту текста должен быть "проиндексирован" путем преобразования буквенной строки в вектор с помощью "встраивания" и включения векторного поиска. Помимо этого основного требования, может потребоваться хранение других свойств, таких как временная метка публикации и автор. Эти метаданные позволяют уточнять семантический поиск с помощью фильтрации, возвращая только тексты, опубликованные после определенной даты или определенным автором. Вы также можете получить эти скаляры вместе с основным текстом, чтобы отобразить результат поиска в приложении. Для упорядочивания этих фрагментов текста каждому из них должен быть присвоен уникальный идентификатор, выраженный в виде целого числа или строки. Эти элементы необходимы для реализации сложной логики поиска.</p>
+<p>Обратитесь к <a href="/docs/ru/v2.6.x/schema-hands-on.md">Schema Design Hands-On</a>, чтобы узнать, как создать хорошо продуманную схему.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Создание схемы<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +147,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p>При добавлении поля вы можете явно указать его как первичное, установив для свойства <code translate="no">is_primary</code> значение <code translate="no">True</code>. По умолчанию первичное поле принимает значения <strong>Int64</strong>. В этом случае значением первичного поля должны быть целые числа, аналогичные <code translate="no">12345</code>. Если вы решили использовать в первичном поле значения <strong>VarChar</strong>, то значения должны быть строками, аналогичными <code translate="no">my_entity_1234</code>.</p>
 <p>Вы также можете установить для свойства <code translate="no">autoId</code> значение <code translate="no">True</code>, чтобы Zilliz Cloud автоматически выделял значения первичного поля при вставке данных.</p>
-<p>Подробнее см. в разделе <a href="/docs/ru/primary-field.md">Первичное поле и автоидентификатор</a>.</p>
+<p>Подробнее см. в разделе <a href="/docs/ru/v2.6.x/primary-field.md">Первичное поле и автоидентификатор</a>.</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">Добавление векторных полей<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -211,8 +211,10 @@ schema.addField(AddFieldReq.builder()
 <p>Векторное поле этого типа содержит список 16-битных чисел с плавающей запятой половинной точности и обычно применяется в сценариях глубокого обучения или вычислений на базе GPU с ограничением памяти или пропускной способности.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>Векторное поле этого типа содержит список 16-битных чисел с плавающей точкой, которые имеют пониженную точность, но тот же диапазон экспонент, что и Float32. Этот тип данных часто используется в сценариях глубокого обучения, так как позволяет сократить расход памяти без существенного влияния на точность.</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>Векторное поле этого типа хранит векторы, состоящие из 8-битных знаковых целых чисел (int8), каждая компонента которых находится в диапазоне от -128 до 127. Предназначенное для архитектур глубокого обучения с квантованием, таких как ResNet и EfficientNet, оно существенно сокращает размер модели и увеличивает скорость вычислений, при этом потери точности минимальны. <strong>Примечание</strong>: Этот тип вектора поддерживается только для индексов HNSW.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
-<p>Векторное поле этого типа содержит список 0 и 1. Они служат компактными элементами для представления данных в сценариях обработки изображений и поиска информации.</p></li>
+<p>Векторное поле этого типа содержит список 0 и 1. Они служат в качестве компактных элементов для представления данных в сценариях обработки изображений и поиска информации.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
 <p>Векторное поле этого типа содержит список ненулевых чисел и их порядковых номеров для представления разреженных векторных вкраплений.</p></li>
 </ul>
@@ -232,7 +234,7 @@ schema.addField(AddFieldReq.builder()
         ></path>
       </svg>
     </button></h2><p>В распространенных случаях вы можете использовать скалярные поля для хранения метаданных векторных вкраплений, хранящихся в Milvus, и проводить ANN-поиск с фильтрацией метаданных для повышения корректности результатов поиска. Zilliz Cloud поддерживает несколько типов скалярных полей, включая <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong> и <strong>JSON</strong>.</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">Добавление строковых полей</h3><p>В Milvus вы можете использовать поля VarChar для хранения строк. Подробнее о поле VarChar см. в разделе <a href="/docs/ru/string.md">"Строковое поле"</a>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">Добавление строковых полей</h3><p>В Milvus вы можете использовать поля VarChar для хранения строк. Подробнее о поле VarChar см. в разделе <a href="/docs/ru/v2.6.x/string.md">"Строковое поле"</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -275,7 +277,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Number-Fields" class="common-anchor-header">Добавление числовых полей</h3><p>Milvus поддерживает следующие типы чисел: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> и <code translate="no">Double</code>. Подробнее о числовых полях см. в разделе <a href="/docs/ru/number.md">Числовое поле</a>.</p>
+<h3 id="Add-Number-Fields" class="common-anchor-header">Добавление числовых полей</h3><p>Milvus поддерживает следующие типы чисел: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> и <code translate="no">Double</code>. Подробнее о числовых полях см. в разделе <a href="/docs/ru/v2.6.x/number.md">Числовое поле</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -350,7 +352,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-JSON-fields" class="common-anchor-header">Добавление полей JSON</h3><p>Поле JSON обычно хранит полуструктурированные данные JSON. Подробнее о полях JSON читайте в разделе <a href="/docs/ru/use-json-fields.md">Поле JSON</a>.</p>
+<h3 id="Add-JSON-fields" class="common-anchor-header">Добавление полей JSON</h3><p>Поле JSON обычно хранит полуструктурированные данные JSON. Подробнее о полях JSON читайте в разделе <a href="/docs/ru/v2.6.x/use-json-fields.md">Поле JSON</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -389,7 +391,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">Добавление полей массива</h3><p>Поле массива хранит список элементов. Типы данных всех элементов в поле массива должны быть одинаковыми. Подробнее о полях массива читайте в разделе <a href="/docs/ru/array_data_type.md">Поле масси</a>ва.</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">Добавление полей массива</h3><p>Поле массива хранит список элементов. Типы данных всех элементов в поле массива должны быть одинаковыми. Подробнее о полях массива читайте в разделе <a href="/docs/ru/v2.6.x/array_data_type.md">Поле масси</a>ва.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(

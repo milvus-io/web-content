@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "儲存/計算",
-            "id": "four_layers.md",
+            "label": "主要元件",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "主要元件",
-            "id": "main_components.md",
+            "label": "串流服務",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -1383,25 +1383,6 @@
             "label": "規模依賴性",
             "id": "scale-dependencies.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "升級",
-        "id": "upgrade_milvus",
-        "order": 7,
-        "children": [
-          {
-            "label": "升級 Milvus 集群",
-            "id": "upgrade_milvus_cluster-operator.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "升級 Milvus 單機",
-            "id": "upgrade_milvus_standalone-operator.md",
-            "order": 1,
             "children": []
           }
         ]

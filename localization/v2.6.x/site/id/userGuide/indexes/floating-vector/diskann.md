@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam skenario berskala besar, di mana kumpulan data dapat mencakup miliaran atau bahkan triliunan vektor, metode pengindeksan dalam memori standar (misalnya, <a href="/docs/id/hnsw.md">HNSW</a>, <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>) sering kali tidak dapat mengimbangi karena keterbatasan memori. <strong>DISKANN</strong> menawarkan pendekatan berbasis disk yang mengatasi tantangan ini dengan mempertahankan akurasi dan kecepatan pencarian yang tinggi ketika ukuran dataset melebihi RAM yang tersedia.</p>
+    </button></h1><p>Dalam skenario berskala besar, di mana kumpulan data dapat mencakup miliaran atau bahkan triliunan vektor, metode pengindeksan dalam memori standar (misalnya, <a href="/docs/id/v2.6.x/hnsw.md">HNSW</a>, <a href="/docs/id/v2.6.x/ivf-flat.md">IVF_FLAT</a>) sering kali tidak dapat mengimbangi karena keterbatasan memori. <strong>DISKANN</strong> menawarkan pendekatan berbasis disk yang mengatasi tantangan ini dengan mempertahankan akurasi dan kecepatan pencarian yang tinggi ketika ukuran dataset melebihi RAM yang tersedia.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ summary: >-
 <p>Parameter <code translate="no">search_list_size</code> menentukan luasnya proses penyempurnaan graf. <code translate="no">search_list_size</code> yang lebih tinggi akan memperluas pencarian tetangga selama konstruksi dan dapat meningkatkan akurasi akhir, tetapi meningkatkan waktu pembuatan indeks.</p></li>
 </ul></li>
 </ol>
-<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat parameter <a href="/docs/id/diskann.md#diskann-params">DISKANN</a>.</p>
+<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat parameter <a href="/docs/id/v2.6.x/diskann.md#diskann-params">DISKANN</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN menggunakan <strong>PQ</strong> untuk memampatkan vektor berdimensi tinggi ke dalam representasi yang lebih kecil<strong>(kode PQ</strong>), yang disimpan di memori untuk perhitungan perkiraan jarak yang cepat.</p>
 <p>Parameter <code translate="no">pq_code_budget_gb_ratio</code> mengelola jejak memori yang didedikasikan untuk menyimpan kode-kode PQ ini. Parameter ini merepresentasikan rasio antara ukuran total vektor (dalam gigabyte) dan ruang yang dialokasikan untuk menyimpan kode PQ. Anda dapat menghitung anggaran kode PQ yang sebenarnya (dalam gigabyte) dengan rumus ini:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -69,9 +69,9 @@ summary: >-
 <p>di mana</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> adalah ukuran total vektor (dalam gigabyte).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> adalah rasio yang ditentukan pengguna, yang mewakili sebagian kecil dari total ukuran data yang dicadangkan untuk kode PQ. Parameter ini memungkinkan pertukaran antara akurasi pencarian dan sumber daya memori. Untuk informasi lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> adalah rasio yang ditentukan pengguna, yang mewakili sebagian kecil dari total ukuran data yang dicadangkan untuk kode PQ. Parameter ini memungkinkan pertukaran antara akurasi pencarian dan sumber daya memori. Untuk informasi lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
 </ul>
-<p>Untuk rincian teknis tentang metode PQ yang mendasari, lihat <a href="/docs/id/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<p>Untuk rincian teknis tentang metode PQ yang mendasari, lihat <a href="/docs/id/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
 <h3 id="Search-process" class="common-anchor-header">Proses pencarian</h3><p>Setelah indeks (grafik Vamana pada disk dan kode PQ dalam memori) dibangun, DISKANN melakukan pencarian ANN sebagai berikut:</p>
 <p>
   
@@ -85,7 +85,7 @@ summary: >-
 <li><p><code translate="no">beam_width_ratio</code>: Rasio yang mengontrol luasnya pencarian, menentukan berapa banyak kandidat tetangga yang dipilih secara paralel untuk mengeksplorasi tetangga mereka. <code translate="no">beam_width_ratio</code> yang lebih besar menghasilkan eksplorasi yang lebih luas, yang berpotensi menghasilkan akurasi yang lebih tinggi tetapi juga meningkatkan biaya komputasi dan I/O disk. Lebar berkas, atau jumlah node yang dipilih, ditentukan dengan menggunakan rumus: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: Proporsi memori yang dialokasikan untuk caching data disk yang sering diakses. Caching ini membantu meminimalkan I/O disk, sehingga pencarian berulang menjadi lebih cepat karena data sudah ada di dalam memori.</p></li>
 </ul>
-<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
 <li><p><strong>Eksplorasi berulang:</strong> Pencarian secara iteratif menyempurnakan himpunan kandidat, berulang kali melakukan evaluasi perkiraan (menggunakan PQ) diikuti dengan pemeriksaan yang tepat (menggunakan vektor asli dari disk) hingga jumlah tetangga yang cukup ditemukan.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Mengaktifkan DISKANN di Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -169,7 +169,7 @@ summary: >-
       <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="SDK-configuration" class="common-anchor-header">Konfigurasi SDK</h3><p>Berikut adalah contoh cara mengatur parameter DISKANN menggunakan Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">Membangun</h4><p>Untuk membangun indeks <code translate="no">IVF_FLAT</code> pada bidang vektor di Milvus, gunakan metode <code translate="no">add_index()</code>, tentukan <code translate="no">index_type</code>, <code translate="no">metric_type</code>, dan parameter tambahan untuk indeks.</p>
+<h4 id="Build" class="common-anchor-header">Membangun</h4><p>Untuk membangun indeks <code translate="no">DISKANN</code> pada bidang vektor di Milvus, gunakan metode <code translate="no">add_index()</code>, tentukan <code translate="no">index_type</code>, <code translate="no">metric_type</code>, dan parameter tambahan untuk indeks.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -188,7 +188,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a>.</p>
+<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/create-collection.md">Membuat Koleksi</a>.</p>
 <h4 id="Search" class="common-anchor-header">Pencarian</h4><p>Setelah indeks dibuat dan entitas dimasukkan, Anda dapat melakukan pencarian kemiripan pada indeks.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {

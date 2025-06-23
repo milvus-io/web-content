@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: 了解如何使用 Docker Compose 升级 Milvus Standalone。
 title: 使用 Docker Compose 升级 Milvus 单机版
 ---
-<div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升级 Milvus 单机版<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,9 +24,9 @@ title: 使用 Docker Compose 升级 Milvus 单机版
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何使用 Docker Compose 升级 Milvus。</p>
-<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.5.12 之前，你需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
+<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.6.0-rc1 之前，你需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
 <div class="alter note">
-<p>出于安全考虑，Milvus 在发布 v2.2.5 时将其 MinIO 升级为 RELEASE.2023-03-20T20-16-18Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
+<p>出于安全考虑，Milvus 在发布 v2.2.5 时将其 MinIO 升级到 RELEASE.2023-03-20T20-16-18Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">通过更改映像升级 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ title: 使用 Docker Compose 升级 Milvus 单机版
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>运行以下命令执行升级。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.12</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.0</span><span class="hljs-string">-rc1</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
@@ -122,11 +122,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>你可能还想了解如何<ul>
-<li><a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a></li>
+<li><a href="/docs/zh/v2.6.x/scaleout.md">扩展 Milvus 集群</a></li>
 </ul></li>
 <li>如果你准备在云上部署集群，请学习如何在亚马逊 Eclipse 上部署 Milvus：<ul>
-<li>了解如何<a href="/docs/zh/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
-<li>学习如何<a href="/docs/zh/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>了解如何<a href="/docs/zh/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
+<li>了解如何<a href="/docs/zh/v2.6.x/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
+<li>学习如何<a href="/docs/zh/v2.6.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
+<li>了解如何<a href="/docs/zh/v2.6.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>
 </ul>

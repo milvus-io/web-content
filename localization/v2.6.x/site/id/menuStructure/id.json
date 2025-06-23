@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "Releases",
+        "label": "Rilis",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "Penyimpanan/Komputasi",
-            "id": "four_layers.md",
+            "label": "Komponen Utama",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Komponen Utama",
-            "id": "main_components.md",
+            "label": "Layanan Streaming",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -1383,25 +1383,6 @@
             "label": "Ketergantungan Skala",
             "id": "scale-dependencies.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Tingkatkan",
-        "id": "upgrade_milvus",
-        "order": 7,
-        "children": [
-          {
-            "label": "Tingkatkan Cluster Milvus",
-            "id": "upgrade_milvus_cluster-operator.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Tingkatkan Milvus Standalone",
-            "id": "upgrade_milvus_standalone-operator.md",
-            "order": 1,
             "children": []
           }
         ]

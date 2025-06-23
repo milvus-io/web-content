@@ -80,7 +80,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ja/birdwatcher_overview.md">Birdwatcherは</a>etcdに接続するMilvus用のデバッグツールで、Milvusサーバの状態を監視し、リアルタイムに調整を行うことができます。また、etcdファイルのバックアップにも対応しており、開発者のトラブルシューティングを支援します。</p>
+    </button></h2><p><a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcherは</a>etcdに接続するMilvus用のデバッグツールで、Milvusサーバの状態を監視し、リアルタイムに調整を行うことができます。また、etcdファイルのバックアップにも対応しており、開発者のトラブルシューティングを支援します。</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">バルクライター<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +144,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは<a href="https://milvus.io/docs/glossary.md#PChannel">PCチャネルと</a> <a href="https://milvus.io/docs/glossary.md#VChannel">Vチャネルの</a>2種類のチャネルを利用している。各PCチャネルはログストレージのトピックに対応し、各Vチャネルはコレクション内のシャードに対応する。</p>
+    </button></h2><p>Milvusは、ストリーミングサービスアーキテクチャの一部として、<a href="#pchannel">PCチャネルと</a> <a href="#vchannel">Vチャネルの</a>2種類のチャネルを利用している。各PCChannelは<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerが</a>管理するWALストリームに対応し、各VChannelはコレクション内のシャードに対応します。ストリーミングサービスはこれらのチャネルを管理し、データの一貫性と障害回復を保証します。</p>
 <h2 id="Collection" class="common-anchor-header">コレクション<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、コレクションはリレーショナルデータベース管理システム（RDBMS）におけるテーブルに相当します。コレクションはエンティティの保存と管理に使用される主要な論理オブジェクトです。詳細については、「<a href="/docs/ja/manage-collections.md">コレクションの管理</a>」を参照してください。</p>
+    </button></h2><p>Milvusでは、コレクションはリレーショナルデータベース管理システム（RDBMS）におけるテーブルに相当します。コレクションはエンティティの保存と管理に使用される主要な論理オブジェクトです。詳細については、「<a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a>」を参照してください。</p>
 <h2 id="Dependency" class="common-anchor-header">依存関係<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>動的スキーマを使用すると、既存のスキーマを変更することなく、新しいフィールドを持つエンティティをコレクションに挿入できます。これは、コレクションの完全なスキーマを知らなくてもデータを挿入でき、まだ定義されていないフィールドを含めることができることを意味します。コレクションを作成するときにダイナミック・フィールドを有効にすることで、このスキーマ・フリー機能を有効にできます。詳細は、<a href="/docs/ja/enable-dynamic-field.md">Enable Dynamic Fieldを</a>参照してください。</p>
+    </button></h2><p>動的スキーマを使用すると、既存のスキーマを変更することなく、新しいフィールドを持つエンティティをコレクションに挿入できます。これは、コレクションの完全なスキーマを知らなくてもデータを挿入でき、まだ定義されていないフィールドを含めることができることを意味します。コレクションを作成するときにダイナミック・フィールドを有効にすることで、このスキーマ・フリー機能を有効にできます。詳細は、<a href="/docs/ja/v2.6.x/enable-dynamic-field.md">Enable Dynamic Fieldを</a>参照してください。</p>
 <h2 id="Embeddings" class="common-anchor-header">埋め込み<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -208,7 +208,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは一般的な埋め込みプロバイダと連携する埋め込み機能を内蔵しています。Milvusでコレクションを作成する前に、これらの関数を使用してデータセットのエンベッディングを生成し、データやベクトル検索の準備プロセスを合理化することができます。エンベッディングを実際に生成するには、<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Using PyMilvus's Model To Generate Text Embeddingsを</a>参照してください。</p>
+    </button></h2><p>Milvusは一般的な埋め込みプロバイダと連携する埋め込み機能を内蔵しています。Milvusでコレクションを作成する前に、これらの関数を使用してデータセットのエンベッディングを生成し、データやベクトル検索の準備プロセスを合理化することができます。実際に埋め込みを生成するには、<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Using PyMilvus's Model To Generate Text Embeddingsを</a>参照してください。</p>
 <h2 id="Entity" class="common-anchor-header">エンティティ<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ title: 用語解説
         ></path>
       </svg>
     </button></h2><p>エンティティは実世界のオブジェクトを表すフィールド群で構成されます。Milvusの各エンティティは一意な主キーで表されます。</p>
-<p>主キーはカスタマイズできます。手動で設定しない場合、Milvus は自動的に主キーをエンティティに割り当てます。主キーをカスタマイズする場合、Milvusは今のところ主キーの重複排除をサポートしていないことに注意してください。そのため、同じコレクション内に重複した主キーが存在する可能性があります。詳細については、<a href="/docs/ja/insert-update-delete.md#Insert-entities">エンティティの挿入を</a>参照してください。</p>
+<p>主キーはカスタマイズできます。手動で設定しない場合、Milvus は自動的に主キーをエンティティに割り当てます。主キーをカスタマイズする場合、Milvusは今のところ主キーの重複排除をサポートしていないことに注意してください。そのため、同じコレクション内に重複した主キーが存在する可能性があります。詳細については、<a href="/docs/ja/v2.6.x/insert-update-delete.md#Insert-entities">エンティティの挿入を</a>参照してください。</p>
 <h2 id="Field" class="common-anchor-header">フィールド<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +273,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィルタリング検索はスカラーフィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。詳細については、<a href="/docs/ja/single-vector-search.md#Filtered-search">フィルタリング検索</a>を参照してください。</p>
+    </button></h2><p>フィルタリング検索はスカラーフィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。詳細については、<a href="/docs/ja/v2.6.x/single-vector-search.md#Filtered-search">フィルタリング検索</a>を参照してください。</p>
 <h2 id="Hybrid-search" class="common-anchor-header">ハイブリッド検索<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +289,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">ハイブリッド検索は</a>Milvus 2.4.0から搭載されたAPIです。複数のベクトルフィールドを検索し、融合させることができます。ベクトル検索とスカラーフィールドのフィルタリングを組み合わせた検索を「フィルタリング検索」と呼びます。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照。</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">ハイブリッド検索は</a>Milvus 2.4.0から搭載されたAPIです。複数のベクトルフィールドを検索し、融合させることができます。ベクトル検索とスカラーフィールドのフィルタリングを組み合わせた検索を「フィルタリング検索」と呼びます。詳細は<a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索を</a>参照。</p>
 <h2 id="Index" class="common-anchor-header">インデックス<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,23 +337,9 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhereは</a>Milvusのコアとなるベクトル実行エンジンであり、Faiss、Hnswlib、Annoyを含む複数のベクトル類似性検索ライブラリが組み込まれています。また、Knowhereはヘテロジニアスコンピューティングをサポートするように設計されている。インデックス構築と検索要求をどのハードウェア（CPUまたはGPU）で実行するかを制御する。これがKnowhereの名前の由来であり、どこで処理を実行するかを知っている。</p>
-<h2 id="Log-broker" class="common-anchor-header">ログブローカー<button data-href="#Log-broker" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><a href="https://milvus.io/docs/four_layers.md#Log-broker">ログ・ブローカーは</a>、再生をサポートするパブリッシュ・サブスクライブ・システムである。ストリーミングデータの永続化、信頼性の高い非同期クエリの実行、イベント通知、クエリ結果の返送を担当する。また、ワーカーノードがシステムダウンから回復する際に、増分データの整合性を保証します。</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhereは</a>Milvusのコアとなるベクトル実行エンジンであり、Faiss、Hnswlib、Annoyを含む複数のベクトル類似性検索ライブラリが組み込まれています。また、Knowhereはヘテロジニアスコンピューティングをサポートするように設計されている。インデックス構築と検索要求をどのハードウェア（CPUまたはGPU）で実行するかを制御する。これがKnowhereの名前の由来である、どこで処理を実行するかを知っているということだ。</p>
+<!-- ## Log broker
+<p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">ログスナップショット<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -369,39 +355,11 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ログスナップショットはバイナリログであり、milvusのデータに対する更新や変更を記録し、処理するセグメントの小さな単位です。セグメントのデータは複数のバイナリログに永続化されます。MilvusのバイナリログにはInsertBinlog、DeleteBinlog、DDLBinlogの3種類があります。詳細については、<a href="https://milvus.io/docs/four_layers.md#Meta-storage">メタストレージを</a>参照してください。</p>
-<h2 id="Log-subscriber" class="common-anchor-header">ログ購読者<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>ログサブスクライバは、ローカルデータを更新し、読み取り専用コピーの形でサービスを提供するために、ログシーケンスをサブスクライブします。</p>
-<h2 id="Message-storage" class="common-anchor-header">メッセージストレージ<button data-href="#Message-storage" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>メッセージストレージはMilvusのログストレージエンジンです。MilvusはメッセージストレージとしてKafkaまたはPulsaをサポートしています。詳細については、「<a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">メッセージストレージの設定</a>」を参照してください。</p>
+    </button></h2><p>ログスナップショットはバイナリログであり、milvusのデータの更新や変更を記録し、処理するセグメントの小さな単位である。セグメントのデータは複数のバイナリログに永続化されます。MilvusのバイナリログにはInsertBinlog、DeleteBinlog、DDLBinlogの3種類があります。詳細については、<a href="https://milvus.io/docs/four_layers.md#Meta-storage">Meta storageを</a>参照してください。</p>
+<!-- ## Log subscriber
+<p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. --></p>
+<!-- ## Message storage
+<p>Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Configure Message Storage</a>. --></p>
 <h2 id="Metric-type" class="common-anchor-header">メトリックタイプ<button data-href="#Metric-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -418,6 +376,22 @@ title: 用語解説
         ></path>
       </svg>
     </button></h2><p>類似度メトリックタイプはベクトル間の類似度を測定するために使用されます。現在、Milvusはユークリッド距離(L2)、内積(IP)、コサイン類似度(COSINE)、バイナリメトリックタイプをサポートしています。シナリオに応じて最適なメトリックタイプを選択することができます。詳細については、<a href="https://milvus.io/docs/metric.md">類似度メトリックを</a>参照してください。</p>
+<h2 id="MemoryBuffer" class="common-anchor-header">メモリーバッファ<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>MemoryBufferは、Woodpeckerの軽量なデプロイメントモードで、一時的にメモリにバッファリングし、定期的にクラウドオブジェクトストレージにフラッシュします。このモードは、パフォーマンスよりもシンプルさを優先する小規模なデプロイメントやプロダクション環境でのバッチ負荷の高いワークロードに最適です。詳細については、<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>参照してください。</p>
 <h2 id="Mmap" class="common-anchor-header">マップ<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,7 +407,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>メモリマップされたファイルは、ファイルの内容を直接メモリにマッピングすることで、効率的なデータ処理を可能にします。これは、メモリが限られており、すべてのデータをロードできない場合に特に有効です。このテクニックは、データ容量を増加させ、パフォーマンスをある程度維持することができる。しかし、データがメモリ容量を大幅に超える場合、検索やクエリの速度が大幅に低下する可能性があります。詳細については、<a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storageを</a>参照してください。</p>
+    </button></h2><p>メモリ・マップされたファイルは、ファイルの内容を直接メモリにマッピングすることにより、効率的なデータ処理を可能にします。これは、メモリが限られており、全てのデータをロードすることが不可能な場合に特に有効です。このテクニックは、データ容量を増加させ、パフォーマンスをある程度維持することができます。しかし、データがメモリ容量を大幅に超える場合、検索やクエリの速度が大幅に低下する可能性があります。詳細については、<a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storageを</a>参照してください。</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvusバックアップ<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -545,7 +519,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは2.4.0以降、1つのコレクションで複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
+    </button></h2><p>Milvusは2.4.0以降、1つのコレクションで複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
 <h2 id="Partition" class="common-anchor-header">パーティション<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -593,7 +567,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannelは物理チャンネルを意味します。各PCチャンネルは、ログ・ストレージのトピックに対応します。デフォルトでは、Milvusクラスタの起動時にデータの挿入、削除、更新を記録するログを格納するために16のPCチャネルが割り当てられます。詳細については、<a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">メッセージチャネル関連の設定を</a>参照してください。</p>
+    </button></h2><p>PChannelは物理チャネルを意味します。各PChannelは、Woodpeckerが管理するWALストリームに対応しています。デフォルトでは、Milvusクラスタの起動時に、データの挿入、削除、更新を記録するログを格納するためにPChannelのグループが割り当てられます。詳細については、<a href="/docs/ja/v2.6.x/streaming_service.md">ストリーミングサービスを</a>参照してください。</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -609,7 +583,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PyMilvusはMilvusのPython SDKです。ソースコードはオープンソース化されており、<a href="https://github.com/milvus-io/pymilvus">GitHubで</a>ホストされています。MilvusClient（新バージョンのPython SDK）またはオリジナルのORMモジュールを選択し、Milvusと対話することができます。</p>
+    </button></h2><p>PyMilvusはMilvusのPython SDKです。ソースコードはオープンソース化されており、<a href="https://github.com/milvus-io/pymilvus">GitHubで</a>ホストされています。Milvusと対話するために、MilvusClient（新バージョンのPython SDK）またはオリジナルのORMモジュールを柔軟に選択することができます。</p>
 <h2 id="Query" class="common-anchor-header">クエリ<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -626,6 +600,22 @@ title: 用語解説
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Queryは</a>、指定されたブール式をフィルタとしてスカラーフィルタリングを行うAPIです。詳細は<a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get &amp; Scalar Query</a> を参照してください。</p>
+<h2 id="QuorumBuffer" class="common-anchor-header">QuorumBuffer<button data-href="#QuorumBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>QuorumBufferは、リアルタイム応答性と強力な耐障害性の両方を必要とする、レイテンシに敏感で、高頻度の読み書きワークロードのために設計されたWoodpeckerの展開モードです。クォーラムバッファは、3つのレプリカによる高速書き込みバッファとして機能し、強力な一貫性と高可用性を保証します。詳細については、<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
 <h2 id="Range-search" class="common-anchor-header">範囲検索<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -740,6 +730,22 @@ title: 用語解説
         ></path>
       </svg>
     </button></h2><p>スパース・ベクトルは、ほとんどの要素がゼロであり、ゼロでない要素が1つだけあれば特定の単語が存在することを示すベクトル埋め込みを用いて単語やフレーズを表現する。SPLADEv2のようなスパース・ベクター・モデルは、領域外の知識検索、キーワード認識、解釈可能性において、密なモデルよりも優れている。詳細については、「<a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">スパース・ベクトル</a>」を参照してください。</p>
+<h2 id="Streaming-Service" class="common-anchor-header">ストリーミング・サービス<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>ストリーミングサービスは、Milvus内部ストリーミングシステムモジュールのコンセプトであり、Write-Ahead Log (WAL)を中心に構築され、様々なストリーミング関連機能をサポートします。これには、ストリーミングデータの取り込み/サブスクリプション、クラスタ状態の障害回復、ストリーミングデータの履歴データへの変換、データクエリの増加などが含まれます。このサービスは、Streaming Coordinator、Streaming Node Cluster、Streaming Clientコンポーネントで構成されます。詳細は<a href="/docs/ja/v2.6.x/streaming_service.md">ストリーミング・サービスを</a>参照。</p>
 <h2 id="Unstructured-data" class="common-anchor-header">非構造化データ<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -755,7 +761,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>画像、ビデオ、オーディオ、自然言語などの非構造化データは、事前に定義されたモデルや構成方法に従わない情報です。このデータタイプは世界のデータの約80%を占めており、様々な人工知能（AI）やMLモデルを使用してベクトルに変換することができます。</p>
+    </button></h2><p>画像、ビデオ、オーディオ、自然言語などの非構造化データは、事前に定義されたモデルや構成方法に従わない情報です。このデータタイプは、世界のデータの約80％を占めており、様々な人工知能（AI）やMLモデルを使用してベクトルに変換することができます。</p>
 <h2 id="VChannel" class="common-anchor-header">Vチャネル<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -771,7 +777,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannelは</a>論理チャネルの略。各VChannelはコレクション内のシャードを表す。各コレクションには、データの挿入、削除、更新を記録するためのVChannelのグループが割り当てられる。VChannelは論理的には分離されているが、物理的にはリソースを共有している。</p>
+    </button></h2><p>VChannelは仮想チャネルの略。各VChannelはコレクション内のシャードを表す。各コレクションには、データの挿入、削除、更新を記録するためのVChannelのグループが割り当てられる。VChannelは論理的に分離されているが、ストリーミング・サービスを通じて物理的にリソースを共有している。詳細については、<a href="/docs/ja/v2.6.x/streaming_service.md">ストリーミング・サービスを</a>参照してください。</p>
 <h2 id="Vector" class="common-anchor-header">ベクター<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -787,7 +793,39 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>埋め込みベクトルは、電子メール、IoTセンサーデータ、Instagramの写真、タンパク質構造などの非構造化データの特徴を抽象化したものです。数学的に言えば、エンベッディング・ベクターは浮動小数点数またはバイナリの配列です。最新の埋め込み技術は、非構造化データを埋め込みベクトルに変換するために使用されます。milvusは2.4.0から密なベクトルと疎なベクトルの両方をサポートしています。</p>
+    </button></h2><p>埋め込みベクトルは、電子メール、IoTセンサーデータ、Instagramの写真、タンパク質構造などの非構造化データの特徴を抽象化したものです。数学的に言えば、エンベッディング・ベクターは浮動小数点数またはバイナリの配列です。最新の埋め込み技術は、非構造化データを埋め込みベクトルに変換するために使用されます。milvusは2.4.0以降、密なベクトルと疎なベクトルの両方をサポートしています。</p>
+<h2 id="WAL-Storage" class="common-anchor-header">WALストレージ<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>WAL (Write-Ahead Log) ストレージは分散システムにおけるデータの耐久性と一貫性の基礎です。変更がコミットされる前に、その変更はまずログに記録されます。MilvusはWALストレージシステムとしてWoodpeckerを使用しており、MemoryBufferモードとQuorumBufferモードの両方をサポートしています。詳細は<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
+<h2 id="Woodpecker" class="common-anchor-header">ウッドペッカー<button data-href="#Woodpecker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>WoodpeckerはMilvus 2.6のクラウド・ネイティブなWALシステムで、KafkaとPulsarに取って代わるものです。ゼロディスクアーキテクチャと2つのデプロイモード（MemoryBufferとQuorumBuffer）により、オブジェクトストレージ上で高スループット、低運用オーバーヘッド、シームレスなスケーラビリティを実現します。詳細は<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
 <h2 id="Zilliz-Cloud" class="common-anchor-header">Zillizクラウド<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -803,4 +841,4 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://zilliz.com/">Zilliz Cloud</a>上のフルマネージドMilvusは、より多くのエンタープライズ機能と高度に最適化されたパフォーマンスを備えています。</p>
+    </button></h2><p>より多くのエンタープライズ機能と高度に最適化されたパフォーマンスを備えた、<a href="https://zilliz.com/">Zilliz Cloud</a>上のフルマネージドMilvus。</p>

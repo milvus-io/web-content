@@ -124,8 +124,8 @@ beta: Milvus 2.6.x
 </table>
 <p>有关各模型服务实施的详细信息，请参阅专用文档：</p>
 <ul>
-<li><p><a href="/docs/zh/vllm-ranker.md">vLLM 排序器</a></p></li>
-<li><p><a href="/docs/zh/tei-ranker.md">TEI 排序器</a></p></li>
+<li><p><a href="/docs/zh/v2.6.x/vllm-ranker.md">vLLM 排序器</a></p></li>
+<li><p><a href="/docs/zh/v2.6.x/tei-ranker.md">TEI 排序器</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">实施<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -195,6 +195,12 @@ model_ranker = Function(
      <td><p>是</p></td>
      <td><p>指定创建的函数类型。 所有模型排名器必须设置为<code translate="no">RERANK</code> 。</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>是</p></td>
+     <td><p>包含基于模型的 Reranker 功能配置的字典。可用参数（键）因提供程序（<code translate="no">tei</code> 或<code translate="no">vllm</code> ）而异。详情请参考<a href="/docs/zh/v2.6.x/vllm-ranker.md">vLLM Ranker</a>或<a href="/docs/zh/v2.6.x/tei-ranker.md">TEI Ranker</a>。</p></td>
+     <td><p>{...}</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>

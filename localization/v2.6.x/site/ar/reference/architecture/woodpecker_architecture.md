@@ -46,7 +46,7 @@ summary: >-
     </button></h2><p>إن الابتكار الأساسي في Woodpecker هو بنيته الخالية من الأقراص:</p>
 <ul>
 <li>جميع بيانات السجل المخزنة في تخزين الكائنات السحابية (مثل Amazon S3 أو Google Cloud Storage أو Alibaba OS)</li>
-<li>البيانات الوصفية المُدارة من خلال مخازن القيمة الرئيسية الموزعة مثل <strong>etcd</strong></li>
+<li>البيانات الوصفية المُدارة من خلال مخازن القيمة الرئيسية الموزعة مثل <strong>إلخd</strong></li>
 <li>لا توجد تبعيات أقراص محلية للعمليات الأساسية</li>
 </ul>
 <p>
@@ -101,8 +101,8 @@ summary: >-
 <p>والنتيجة هي طبقة WAL مبسطة وقوية ومثالية لبيئات الإنتاج ذات المهام الحرجة حيث يكون الاتساق والتوافر والاسترداد السريع ضرورياً.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
-   </span> <span class="img-wrapper"> <span>نشر وضع ذاكرة نقار الخشب</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
+   </span> <span class="img-wrapper"> <span>نشر وضع نصاب نقار الخشب</span> </span></p>
 <h2 id="Performance-benchmarks" class="common-anchor-header">معايير الأداء<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,7 +118,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قمنا بتشغيل معايير شاملة لتقييم أداء Woodpecker في إعداد أحادي العقدة وعميل واحد وتدفق سجل واحد. كانت النتائج مبهرة عند مقارنتها مع Kafka وPulsar:</p>
+    </button></h2><p>أجرينا اختبارات معيارية شاملة لتقييم أداء Woodpecker في إعداد أحادي العقدة وعميل واحد وتدفق سجل واحد. كانت النتائج مبهرة عند مقارنتها بكافكا وبولسار:</p>
 <table>
 <thead>
 <tr><th>النظام</th><th>كافكا</th><th>بولسار</th><th>WP Minio</th><th>WP Local</th><th>الفسفور الابيض S3</th></tr>
@@ -156,90 +156,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعمل بنية Woodpecker السحابية الأصلية على تبسيط عملية النشر وتقليل الصيانة وتحسين الموثوقية.</p>
-<h3 id="Simplified-infrastructure-management" class="common-anchor-header">إدارة مبسطة للبنية التحتية</h3><ul>
-<li><strong>لا توجد إدارة تخزين محلية:</strong> يزيل الحاجة إلى إدارة وحدات تخزين الأقراص أو RAID أو أعطال الأقراص.</li>
-<li><strong>تقليل الاعتماد على الأجهزة:</strong> يزيل تكوين الأجهزة ومراقبتها؛ يتم التعامل مع المتانة والتوافر عن طريق تخزين الكائنات السحابية.</li>
-<li><strong>تخطيط سعة مبسط:</strong> يتم توسيع نطاق التخزين تلقائياً باستخدام تخزين الكائنات السحابية، مما يلغي الحاجة إلى التنبؤ اليدوي.</li>
+    </button></h2><p>توفر بنية Woodpecker السحابية الأصلية مزايا تشغيلية كبيرة:</p>
+<ul>
+<li><strong>انعدام إدارة التخزين المحلي</strong>: الاستغناء عن إدارة وحدة تخزين الأقراص وتكوين RAID وأعطال الأجهزة</li>
+<li><strong>التحجيم التلقائي</strong>: توسيع نطاق التخزين مع تخزين الكائنات السحابية دون الحاجة إلى تخطيط السعة</li>
+<li><strong>كفاءة التكلفة</strong>: تخزين الدفع حسب الاستخدام مع خاصية التخزين التلقائي والضغط التلقائي</li>
+<li><strong>التوافر العالي</strong>: الاستفادة من متانة موفري الخدمات السحابية التي تصل إلى 11-9 مع الاسترداد السريع</li>
+<li><strong>نشر مبسط</strong>: وضعان للنشر (MemoryBuffer/QuorBuffer) يتناسبان مع الاحتياجات التشغيلية المختلفة</li>
+<li><strong>ملائمة للمطورين</strong>: إعداد أسرع للبيئة وبنية متسقة في جميع البيئات</li>
 </ul>
-<h3 id="Simplified-deployment" class="common-anchor-header">نشر مبسط</h3><ul>
-<li><strong>وضع MemoryBuffer:</strong> يستخدم الحد الأدنى من الموارد ويتكامل مع التخزين السحابي، وهو مثالي للتطوير والإنتاج على نطاق صغير.</li>
-<li><strong>وضع QuorumBuffer:</strong> يوفر موثوقية على مستوى المؤسسات دون تعقيد التخزين الموزع التقليدي.</li>
-</ul>
-<h2 id="Cost-efficiency-and-resource-optimization" class="common-anchor-header">كفاءة التكلفة وتحسين الموارد<button data-href="#Cost-efficiency-and-resource-optimization" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><strong>استخدام أقل للذاكرة:</strong> تخزين مؤقت فعال يقلل من متطلبات الذاكرة مقارنةً بالوسطاء التقليديين.</li>
-<li><strong>توسيع مرن:</strong> التخزين السحابي بنظام الدفع حسب الاستخدام يلغي الإفراط في التوفير.</li>
-<li><strong>انخفاض النفقات العامة للبنية التحتية:</strong> مكونات أقل تعني انخفاض تكاليف النشر والصيانة.</li>
-</ul>
-<h3 id="Storage-cost-advantages" class="common-anchor-header">مزايا تكلفة التخزين</h3><ul>
-<li><strong>التخزين المتدرج:</strong> ترحيل البيانات تلقائياً إلى مستويات تخزين سحابية فعالة من حيث التكلفة للاحتفاظ بها على المدى الطويل.</li>
-<li><strong>الضغط وإلغاء البيانات المكررة:</strong> ميزات مدمجة تقلل من تكاليف التخزين دون بذل جهد تشغيلي إضافي.</li>
-<li><strong>لا توجد نفقات إضافية للنسخ المتماثل:</strong> تتم إدارة المتانة عن طريق التخزين السحابي، مما يلغي الحاجة إلى إدارة النسخ المتماثلة يدوياً.</li>
-</ul>
-<h2 id="High-availability-and-disaster-recovery" class="common-anchor-header">التوافر العالي والتعافي من الكوارث<button data-href="#High-availability-and-disaster-recovery" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Simplified-fault-tolerance" class="common-anchor-header">تحمّل مبسط للأخطاء</h3><ul>
-<li><strong>المتانة السحابية الأصلية:</strong> تستفيد من ضمانات المتانة التي يقدمها موفرو الخدمات السحابية بنسبة 11-تسعة (99.999999999%).</li>
-<li><strong>استرداد سريع:</strong> الحد الأدنى من الحالة المحلية يتيح الاستبدال السريع للعقدة واستعادة المجموعة.</li>
-<li><strong>مرونة عبر المناطق:</strong> يدعم النسخ المتماثل عبر المناطق باستخدام ميزات التخزين السحابي.</li>
-</ul>
-<h3 id="Operational-resilience" class="common-anchor-header">المرونة التشغيلية</h3><ul>
-<li><strong>نقاط فشل فردية أقل:</strong> انخفاض عدد المكونات يقلل من مخاطر الفشل.</li>
-<li><strong>تجاوز الفشل التلقائي:</strong> يعمل تكرار التخزين السحابي على تبسيط عملية تجاوز الفشل.</li>
-<li><strong>نسخ احتياطي مبسط:</strong> يوفر التخزين السحابي المدمج النسخ الاحتياطي التلقائي والنسخ الاحتياطي التلقائي.</li>
-</ul>
-<h2 id="Development-and-operational-experience" class="common-anchor-header">تجربة التطوير والتشغيل<button data-href="#Development-and-operational-experience" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Improved-development-workflow" class="common-anchor-header">تحسين سير عمل التطوير</h3><ul>
-<li><strong>إعداد بيئة أسرع:</strong> الحد الأدنى من التبعيات تسريع التطوير والاختبار.</li>
-<li><strong>بنية متسقة:</strong> تصميم موحد عبر التطوير والتدريج والإنتاج.</li>
-<li><strong>تكامل سحابي أصلي:</strong> توافق سلس مع الخدمات السحابية وتنسيق الحاويات.</li>
-</ul>
-<h3 id="Enhanced-production-operations" class="common-anchor-header">عمليات إنتاج محسّنة</h3><ul>
-<li><strong>أداء يمكن التنبؤ به:</strong> نتائج متسقة عبر نطاقات النشر والتكوينات.</li>
-<li><strong>ترقيات مبسطة:</strong> يتيح التصميم عديم الحالة إجراء تحديثات متجددة في أقل وقت ممكن.</li>
-<li><strong>إمكانية التنبؤ بالموارد:</strong> استخدام أكثر استقراراً للموارد مقارنةً بوسطاء الرسائل التقليديين.</li>
-</ul>
-<p>تعتبر هذه المزايا التشغيلية ثورية بالنسبة لقواعد البيانات المتجهة التي تدعم المهام الحرجة لوسطاء الرسائل، ووكلاء الذكاء الاصطناعي، وأعباء عمل البحث ذات الكمون المنخفض. لا يؤدي الانتقال من حزم وسطاء الرسائل المعقدة إلى بنية Woodpecker المبسطة إلى تعزيز الأداء فحسب، بل يقلل أيضًا بشكل كبير من العبء التشغيلي على فرق التطوير والبنية التحتية.</p>
-<p>مع استمرار تطوّر البنية التحتية السحابية مع الابتكارات مثل S3 Express One Zone، تمكّن بنية Woodpecker المؤسسات من الاستفادة تلقائياً من هذه التطورات دون الحاجة إلى تغييرات تشغيلية كبيرة أو إعادة تصميم النظام.</p>
+<p>هذه المزايا تجعل من Woodpecker ذا قيمة خاصة للمهام الحرجة في مهام RAG، ووكلاء الذكاء الاصطناعي، وأعباء عمل البحث ذات الكمون المنخفض حيث تكون البساطة التشغيلية مهمة مثل الأداء.</p>

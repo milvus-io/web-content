@@ -54,7 +54,7 @@ title: Milvus 部署選項概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone 是單機伺服器部署。Milvus Standalone 的所有元件都包裝在單一<a href="https://milvus.io/docs/install_standalone-docker.md">Docker 映像檔中</a>，讓部署更方便。如果您有生產工作負載，但又不想使用 Kubernetes，在有足夠記憶體的單機上執行 Milvus Standalone 是個不錯的選擇。此外，Milvus Standalone 透過主從複製支援高可用性。</p>
+    </button></h2><p>Milvus Standalone 是單機伺服器部署。Milvus Standalone 的所有元件都包裝在單一<a href="https://milvus.io/docs/install_standalone-docker.md">Docker 映像檔中</a>，讓部署更方便。如果您有生產工作負載，但又不想使用 Kubernetes，在有足夠記憶體的單機上執行 Milvus Standalone 是個不錯的選擇。</p>
 <h2 id="Milvus-Distributed" class="common-anchor-header">分散式 Milvus<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +70,7 @@ title: Milvus 部署選項概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Distributed 可以部署在<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>集群上。此部署採用雲原生架構，擷取負載和搜尋查詢分別由獨立節點處理，讓關鍵元件具有備援。它提供最高的可擴充性和可用性，以及自訂每個元件所分配資源的彈性。Milvus Distributed 是企業用戶在生產中運行大型向量搜索系統的首選。</p>
+    </button></h2><p>Milvus Distributed 可以部署在<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>集群上。此部署採用雲原生架構，擷取負載與搜尋查詢分別由獨立節點處理，讓關鍵元件得以備援。它提供最高的可擴充性和可用性，以及自訂每個元件所分配資源的彈性。Milvus Distributed 是企業用戶在生產中運行大型向量搜索系統的首選。</p>
 <h2 id="Choose-the-Right-Deployment-for-Your-Use-Case" class="common-anchor-header">為您的使用個案選擇正確的部署模式<button data-href="#Choose-the-Right-Deployment-for-Your-Use-Case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +93,7 @@ title: Milvus 部署選項概述
 <li><p><strong>小規模生產部署</strong></p>
 <p>對於早期階段的生產，當專案仍在尋求產品與市場的契合，敏捷性比可擴展性更重要時，Milvus Standalone 是最好的選擇。只要有足夠的機器資源，Milvus Standalone 仍可擴充至 1 億向量，同時對 DevOps 的需求遠低於維護 K8s 集群。</p></li>
 <li><p><strong>大型生產部署</strong></p>
-<p>當您的業務快速成長，資料規模超過單一伺服器的容量，是時候考慮Milvus Distributed。您可以繼續使用Milvus Standalone作為開發或暫存環境，並運行Milvus Distributed的K8s集群。這可以讓您持續處理數百億個向量，並提供針對特定工作負載調整節點大小的彈性，例如高讀取次數、低寫入次數或高寫入次數、低讀取次數的情況。</p></li>
+<p>當您的業務快速成長，資料規模超過單一伺服器的容量，是時候考慮Milvus Distributed。您可以繼續使用Milvus Standalone作為開發或暫存環境，並運行Milvus Distributed的K8s集群。這可以讓您持續處理數百億個向量，並提供針對特定工作負載調整節點大小的彈性，例如高讀取量、不常寫入或高寫入量、低讀取量的情況。</p></li>
 <li><p><strong>邊緣裝置上的本機搜尋</strong></p>
 <p>若要在邊緣裝置上搜尋私人或敏感資料，您可以在裝置上部署 Milvus Lite，而無需依賴雲端服務來進行文字或影像搜尋。這適用於專屬文件搜尋或裝置上物件偵測等情況。</p></li>
 </ul>

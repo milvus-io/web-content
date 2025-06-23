@@ -44,7 +44,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>Schema 设计剖析</span> </span></p>
 <p>搜索系统的数据模型设计包括分析业务需求，并将信息抽象为模式表达的数据模型。例如，搜索一段文本必须通过 "嵌入 "将字面字符串转换为向量并启用向量搜索，从而实现 "索引"。除了这一基本要求外，可能还需要存储出版时间戳和作者等其他属性。有了这些元数据，就可以通过过滤来完善语义搜索，只返回特定日期之后或特定作者发表的文本。您还可以检索这些标量与主文本，以便在应用程序中呈现搜索结果。每个标量都应分配一个唯一标识符，以整数或字符串的形式组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。</p>
-<p>请参考<a href="/docs/zh/schema-hands-on.md">Schema Design Hands-On</a>，了解如何制作一个精心设计的模式。</p>
+<p>请参考<a href="/docs/zh/v2.6.x/schema-hands-on.md">Schema Design Hands-On</a>，了解如何制作一个精心设计的模式。</p>
 <h2 id="Create-Schema" class="common-anchor-header">创建 Schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,7 +146,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p>添加字段时，可以通过将<code translate="no">is_primary</code> 属性设置为<code translate="no">True</code> 来明确说明该字段是主字段。主字段默认接受<strong>Int64</strong>值。在这种情况下，主字段值应为整数，类似于<code translate="no">12345</code> 。如果选择在主字段中使用<strong>VarChar</strong>值，则其值应为字符串，类似于<code translate="no">my_entity_1234</code> 。</p>
 <p>您也可以将<code translate="no">autoId</code> 属性设置为<code translate="no">True</code> ，使 Zilliz Cloud 在插入数据时自动分配主字段值。</p>
-<p>有关详情，请参阅<a href="/docs/zh/primary-field.md">主字段和自动 ID</a>。</p>
+<p>有关详情，请参阅<a href="/docs/zh/v2.6.x/primary-field.md">主字段和自动 ID</a>。</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">添加向量字段<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -210,10 +210,12 @@ schema.addField(AddFieldReq.builder()
 <p>这种类型的向量场保存一个 16 位半精度浮点数列表，通常适用于内存或带宽受限的深度学习或基于 GPU 的计算场景。</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>这种类型的向量字段保存 16 位浮点数列表，精度有所降低，但指数范围与 Float32 相同。这种类型的数据常用于深度学习场景，因为它能在不明显影响精度的情况下减少内存使用量。</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>这种类型的向量字段存储由 8 位有符号整数（int8）组成的向量，每个分量的范围为-128 到 127。它专为量化深度学习架构（如 ResNet 和 EfficientNet）量身定制，可大幅缩小模型大小，提高推理速度，同时只造成极小的精度损失。<strong>注</strong>：该向量类型仅支持 HNSW 索引。</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
-<p>这种类型的向量场保存着一个 0 和 1 的列表。它们是图像处理和信息检索场景中表示数据的紧凑特征。</p></li>
+<p>这种类型的向量场保存着一个 0 和 1 的列表。在图像处理和信息检索场景中，它们是表示数据的紧凑特征。</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>这种类型的向量场可保存非零数字及其序列号列表，用于表示稀疏向量嵌入。</p></li>
+<p>该类型的向量场可保存非零数字及其序列号列表，用于表示稀疏向量嵌入。</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields" class="common-anchor-header">添加标量字段<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -231,7 +233,7 @@ schema.addField(AddFieldReq.builder()
         ></path>
       </svg>
     </button></h2><p>在常见情况下，您可以使用标量字段来存储存储在 Milvus 中的向量嵌入的元数据，并通过元数据过滤进行 ANN 搜索，以提高搜索结果的正确性。Zilliz Cloud 支持多种标量字段类型，包括<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、<strong>Float</strong>、<strong>Double</strong>、<strong>Array</strong> 和<strong>JSON</strong>。</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">添加字符串字段</h3><p>在 Milvus 中，您可以使用 VarChar 字段来存储字符串。有关 VarChar 字段的更多信息，请参阅<a href="/docs/zh/string.md">字符串字段</a>。</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">添加字符串字段</h3><p>在 Milvus 中，您可以使用 VarChar 字段来存储字符串。有关 VarChar 字段的更多信息，请参阅<a href="/docs/zh/v2.6.x/string.md">字符串字段</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -274,7 +276,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Number-Fields" class="common-anchor-header">添加数字字段</h3><p>Milvus 支持的数字类型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code> 和<code translate="no">Double</code> 。有关数字字段的更多信息，请参阅<a href="/docs/zh/number.md">数字</a>字段。</p>
+<h3 id="Add-Number-Fields" class="common-anchor-header">添加数字字段</h3><p>Milvus 支持的数字类型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code> 和<code translate="no">Double</code> 。有关数字字段的更多信息，请参阅<a href="/docs/zh/v2.6.x/number.md">数字</a>字段。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -349,7 +351,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-JSON-fields" class="common-anchor-header">添加 JSON 字段</h3><p>JSON 字段通常存储半结构化的 JSON 数据。有关 JSON 字段的更多信息，请参阅<a href="/docs/zh/use-json-fields.md">JSON 字段</a>。</p>
+<h3 id="Add-JSON-fields" class="common-anchor-header">添加 JSON 字段</h3><p>JSON 字段通常存储半结构化的 JSON 数据。有关 JSON 字段的更多信息，请参阅<a href="/docs/zh/v2.6.x/use-json-fields.md">JSON 字段</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -388,7 +390,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">添加数组字段</h3><p>数组字段存储元素列表。数组字段中所有元素的数据类型应相同。有关数组字段的更多信息，请参阅<a href="/docs/zh/array_data_type.md">数组</a>字段。</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">添加数组字段</h3><p>数组字段存储元素列表。数组字段中所有元素的数据类型应相同。有关数组字段的更多信息，请参阅<a href="/docs/zh/v2.6.x/array_data_type.md">数组</a>字段。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(

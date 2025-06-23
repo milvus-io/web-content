@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Em cenários de grande escala, onde os conjuntos de dados podem incluir biliões ou mesmo triliões de vectores, os métodos de indexação padrão na memória (por exemplo, <a href="/docs/pt/hnsw.md">HNSW</a>, <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>) muitas vezes não conseguem acompanhar o ritmo devido a limitações de memória. <strong>O DISKANN</strong> oferece uma abordagem baseada em disco que aborda esses desafios, mantendo alta precisão e velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.</p>
+    </button></h1><p>Em cenários de grande escala, onde os conjuntos de dados podem incluir biliões ou mesmo triliões de vectores, os métodos de indexação padrão na memória (por exemplo, <a href="/docs/pt/v2.6.x/hnsw.md">HNSW</a>, <a href="/docs/pt/v2.6.x/ivf-flat.md">IVF_FLAT</a>) muitas vezes não conseguem acompanhar o ritmo devido a limitações de memória. <strong>O DISKANN</strong> oferece uma abordagem baseada em disco que aborda esses desafios, mantendo alta precisão e velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>O DISKANN</strong> combina duas técnicas fundamentais para uma pesquisa vetorial eficiente:</p>
+    </button></h2><p><strong>O DISKANN</strong> combina duas técnicas-chave para uma pesquisa vetorial eficiente:</p>
 <ul>
 <li><p><strong>Gráfico Vamana</strong> - Um índice <strong>baseado em disco</strong> e <strong>em gráficos</strong> que liga pontos de dados (ou vectores) para uma navegação eficiente durante a pesquisa.</p></li>
 <li><p><strong>Quantização de produtos (PQ)</strong> - Um método de compressão <strong>na memória</strong> que reduz o tamanho dos vectores, permitindo cálculos rápidos de distância aproximada entre vectores.</p></li>
@@ -61,7 +61,7 @@ summary: >-
 <p>O parâmetro <code translate="no">search_list_size</code> determina a amplitude do processo de refinamento do gráfico. Um <code translate="no">search_list_size</code> mais elevado alarga a pesquisa de vizinhos durante a construção e pode melhorar a precisão final, mas aumenta o tempo de construção do índice.</p></li>
 </ul></li>
 </ol>
-<p>Para saber mais sobre a afinação de parâmetros, consulte <a href="/docs/pt/diskann.md#diskann-params">Parâmetros DISKANN</a>.</p>
+<p>Para saber mais sobre a afinação de parâmetros, consulte <a href="/docs/pt/v2.6.x/diskann.md#diskann-params">Parâmetros DISKANN</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN utiliza <strong>PQ</strong> para comprimir vectores de alta dimensão em representações mais pequenas<strong>(códigos PQ</strong>), que são armazenadas na memória para cálculos rápidos de distância aproximada.</p>
 <p>O parâmetro <code translate="no">pq_code_budget_gb_ratio</code> gere o espaço de memória dedicado ao armazenamento destes códigos PQ. Representa um rácio entre o tamanho total dos vectores (em gigabytes) e o espaço atribuído para armazenar os códigos PQ. Pode calcular o orçamento real do código PQ (em gigabytes) com esta fórmula:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -69,9 +69,9 @@ summary: >-
 <p>onde:</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> é o tamanho total dos vectores (em gigabytes).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> é um rácio definido pelo utilizador, que representa a fração do tamanho total dos dados reservada para os códigos PQ. Este parâmetro permite um compromisso entre a precisão da pesquisa e os recursos de memória. Para obter mais informações sobre o ajuste de parâmetros, consulte <a href="/docs/pt/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Configurações do DISKANN</a>.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> é um rácio definido pelo utilizador, que representa a fração do tamanho total dos dados reservada para os códigos PQ. Este parâmetro permite um compromisso entre a precisão da pesquisa e os recursos de memória. Para obter mais informações sobre o ajuste de parâmetros, consulte <a href="/docs/pt/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Configurações do DISKANN</a>.</p></li>
 </ul>
-<p>Para obter pormenores técnicos sobre o método PQ subjacente, consulte <a href="/docs/pt/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<p>Para obter pormenores técnicos sobre o método PQ subjacente, consulte <a href="/docs/pt/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
 <h3 id="Search-process" class="common-anchor-header">Processo de pesquisa</h3><p>Uma vez construído o índice (o gráfico Vamana no disco e os códigos PQ na memória), o DISKANN efectua pesquisas ANN da seguinte forma:</p>
 <p>
   
@@ -85,7 +85,7 @@ summary: >-
 <li><p><code translate="no">beam_width_ratio</code>: Uma ração que controla a amplitude da pesquisa, determinando quantos vizinhos candidatos são selecionados em paralelo para explorar os seus vizinhos. Um <code translate="no">beam_width_ratio</code> maior resulta numa exploração mais ampla, potencialmente conduzindo a uma maior precisão, mas também aumentando o custo computacional e a E/S do disco. A largura do feixe, ou o número de nós selecionados, é determinada utilizando a fórmula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: A proporção de memória atribuída para armazenar em cache os dados do disco frequentemente acedidos. Este armazenamento em cache ajuda a minimizar a E/S do disco, tornando as pesquisas repetidas mais rápidas, uma vez que os dados já estão na memória.</p></li>
 </ul>
-<p>Para saber mais sobre a afinação de parâmetros, consulte <a href="/docs/pt/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Configurações do DISKANN</a>.</p></li>
+<p>Para saber mais sobre a afinação de parâmetros, consulte <a href="/docs/pt/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">Configurações do DISKANN</a>.</p></li>
 <li><p><strong>Exploração iterativa:</strong> A pesquisa refina iterativamente o conjunto de candidatos, efectuando repetidamente avaliações aproximadas (utilizando PQ) seguidas de verificações precisas (utilizando vectores originais do disco) até ser encontrado um número suficiente de vizinhos.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Ativar DISKANN em Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -103,7 +103,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Por padrão, <strong>DISKANN</strong> é desativado no Milvus para priorizar a velocidade dos índices na memória para conjuntos de dados que cabem confortavelmente na RAM. No entanto, se estiver a trabalhar com conjuntos de dados maciços ou quiser tirar partido da escalabilidade do <strong>DISKANN</strong> e da otimização de SSD, pode activá-lo facilmente.</p>
+    </button></h2><p>Por padrão, <strong>DISKANN</strong> é desativado no Milvus para priorizar a velocidade dos índices na memória para conjuntos de dados que cabem confortavelmente na RAM. No entanto, se estiver a trabalhar com conjuntos de dados enormes ou quiser tirar partido da escalabilidade do <strong>DISKANN</strong> e da otimização de SSD, pode activá-lo facilmente.</p>
 <p>Veja como habilitar o DISKANN no Milvus:</p>
 <ol>
 <li><p><strong>Atualizar o arquivo de configuração do Milvus</strong></p>
@@ -116,7 +116,7 @@ summary: >-
 </ol></li>
 <li><p><strong>Otimizar o armazenamento para DISKANN</strong></p></li>
 </ol>
-<p>Para garantir o melhor desempenho com o DISKANN, é recomendável armazenar os dados do Milvus num SSD NVMe rápido. Veja como fazer isso para implantações do Milvus Standalone e do Cluster:</p>
+<p>Para garantir o melhor desempenho com o DISKANN, é recomendável armazenar seus dados do Milvus em um SSD NVMe rápido. Veja como fazer isso para implantações do Milvus Standalone e do Cluster:</p>
 <ul>
 <li><p><strong>Milvus Standalone</strong></p>
 <ul>
@@ -151,7 +151,7 @@ summary: >-
     </button></h2><p>Os parâmetros do DISKANN podem ser configurados usando dois métodos principais:</p>
 <ul>
 <li><p><strong>Ficheiro de configuração Milvus:</strong> Ajuste os parâmetros DISKANN através do ficheiro de configuração Milvus. Este método é adequado para definir opções de configuração gerais para a sua instância Milvus.</p></li>
-<li><p><strong>Milvus SDK:</strong> Ajuste os parâmetros DISKANN usando o Milvus SDK durante a criação de índices ou operações de pesquisa. Isto permite um controlo mais granular e ajustes dinâmicos dos parâmetros com base em casos de utilização específicos.</p></li>
+<li><p><strong>Milvus SDK:</strong> Ajuste fino dos parâmetros DISKANN usando o Milvus SDK durante a criação de índices ou operações de pesquisa. Isto permite um controlo mais granular e ajustes dinâmicos dos parâmetros com base em casos de utilização específicos.</p></li>
 </ul>
 <div class="alert note">
 <p>A configuração efectuada pelo SDK substitui quaisquer definições definidas no ficheiro de configuração, oferecendo flexibilidade e controlo para aplicações e conjuntos de dados específicos.</p>
@@ -169,7 +169,7 @@ summary: >-
       <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="SDK-configuration" class="common-anchor-header">Configuração do SDK</h3><p>Eis um exemplo de como definir os parâmetros DISKANN utilizando o Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">Construir</h4><p>Para construir um índice <code translate="no">IVF_FLAT</code> sobre um campo vetorial em Milvus, utilize o método <code translate="no">add_index()</code>, especificando os parâmetros <code translate="no">index_type</code>, <code translate="no">metric_type</code>, e parâmetros adicionais para o índice.</p>
+<h4 id="Build" class="common-anchor-header">Construir</h4><p>Para construir um índice <code translate="no">DISKANN</code> sobre um campo vetorial em Milvus, utilize o método <code translate="no">add_index()</code>, especificando os parâmetros <code translate="no">index_type</code>, <code translate="no">metric_type</code>, e parâmetros adicionais para o índice.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -188,7 +188,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para mais informações, consulte <a href="/docs/pt/create-collection.md">Criar coleção</a>.</p>
+<p>Assim que os parâmetros do índice estiverem configurados, pode criar o índice utilizando diretamente o método <code translate="no">create_index()</code> ou passando os parâmetros do índice no método <code translate="no">create_collection</code>. Para mais informações, consulte <a href="/docs/pt/v2.6.x/create-collection.md">Criar coleção</a>.</p>
 <h4 id="Search" class="common-anchor-header">Pesquisar</h4><p>Assim que o índice for criado e as entidades forem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
@@ -219,7 +219,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O ajuste fino dos parâmetros do DISKANN permite-lhe adaptar o seu comportamento ao seu conjunto de dados específico e à carga de trabalho de pesquisa, atingindo o equilíbrio certo entre velocidade, precisão e utilização de memória.</p>
+    </button></h2><p>O ajuste fino dos parâmetros do DISKANN permite adaptar seu comportamento ao conjunto de dados específico e à carga de trabalho de pesquisa, atingindo o equilíbrio certo entre velocidade, precisão e uso de memória.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Parâmetros de criação de índices</h3><p>Estes parâmetros influenciam a forma como o índice DISKANN é construído. O ajuste dos mesmos pode afetar o tamanho do índice, o tempo de construção e a qualidade da pesquisa.</p>
 <table>
    <tr>

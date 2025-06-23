@@ -73,7 +73,7 @@ beta: Milvus 2.6.x
 <li><p>各文書は意味理解に基づく関連性スコアを受け取る</p></li>
 </ul></li>
 <li><p><strong>インテリジェントな並べ替え</strong>：文書がモデルによって生成された関連性スコアに基づいて並べ替えられる。</p></li>
-<li><p><strong>充実した結果</strong>：アプリケーションはベクトルの類似性だけでなく、意味的な関連性によってランク付けされた結果を受け取ります。</p></li>
+<li><p><strong>向上した結果</strong>：アプリケーションはベクトルの類似性だけでなく、意味的な関連性によってランク付けされた結果を受け取ります。</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">ニーズに合ったモデルプロバイダーを選択<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,8 +123,8 @@ beta: Milvus 2.6.x
 </table>
 <p>各モデル・サービスの実装に関する詳細情報は、専用のドキュメントを参照してください：</p>
 <ul>
-<li><p><a href="/docs/ja/vllm-ranker.md">vLLM ランカー</a></p></li>
-<li><p><a href="/docs/ja/tei-ranker.md">TEIランカー</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/vllm-ranker.md">vLLM ランカー</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/tei-ranker.md">TEIランカー</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">実装<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -196,21 +196,27 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>はい</p></td>
+     <td><p>モデルベース・リランキング関数の設定を含む辞書。利用可能なパラメータ（キー）は、プロバイダ（<code translate="no">tei</code> または<code translate="no">vllm</code> ）によって異なる。詳 し く は<a href="/docs/ja/v2.6.x/vllm-ranker.md">vLLM Ranker</a>または<a href="/docs/ja/v2.6.x/tei-ranker.md">TEI Ranker</a>を参照。</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>はい</p></td>
-     <td><p>モデルの再ランキングを有効にするには、<code translate="no">"model"</code> に設定する必要があります。</p></td>
+     <td><p>モデル・リランキングを有効にするには、<code translate="no">"model"</code> に設定する必要がある。</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
-     <td><p>はい</p></td>
-     <td><p>リランキングに使用するモデルサービスプロバイダ。</p></td>
+     <td><p>Yes</p></td>
+     <td><p>リランキングに使用するモデル・サービス・プロバイダ。</p></td>
      <td><p><code translate="no">"tei"</code> または<code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>リランキングモデルが関連性スコアの算出に使用するクエリ文字列のリスト。 クエリ文字列の数は、検索操作のクエリ数と正確に一致する必要があります (テキストの代わりにクエリベクタを使用する場合も同様)。</p></td>
+     <td><p>リランキングモデルが関連性スコアを計算するために使用するクエリ文字列のリスト。 クエリ文字列の数は、検索操作のクエリの数と正確に一致する必要があります（テキストの代わりにクエリベクタを使用する場合でも）。</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>

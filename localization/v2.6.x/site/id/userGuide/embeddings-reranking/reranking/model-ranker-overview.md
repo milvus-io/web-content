@@ -129,8 +129,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Untuk informasi terperinci tentang implementasi setiap layanan model, lihat dokumentasi khusus:</p>
 <ul>
-<li><p><a href="/docs/id/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/id/tei-ranker.md">Pemeringkat TEI</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/id/v2.6.x/tei-ranker.md">Pemeringkat TEI</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementasi<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -200,6 +200,12 @@ model_ranker = Function(
      <td><p>Ya</p></td>
      <td><p>Menentukan jenis fungsi yang sedang dibuat. Harus disetel ke <code translate="no">RERANK</code> untuk semua pemeringkat model.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Ya</p></td>
+     <td><p>Kamus yang berisi konfigurasi untuk fungsi pemeringkatan ulang berbasis model. Parameter yang tersedia (kunci) bervariasi tergantung pada penyedia (<code translate="no">tei</code> atau <code translate="no">vllm</code>). Lihat <a href="/docs/id/v2.6.x/vllm-ranker.md">vLLM Ranker</a> atau <a href="/docs/id/v2.6.x/tei-ranker.md">TEI Ranker</a> untuk detail lebih lanjut.</p></td>
+     <td><p>{...}</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>

@@ -27,7 +27,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>Arc distribué de diffusion en continu</span> </span></p>
 <ul>
-<li><p><strong>Coordinateur de streaming</strong>: Un composant logique dans le nœud coordinateur. Il utilise Etcd pour la découverte de services afin de localiser les nœuds de diffusion en continu disponibles et est chargé de lier le WAL aux nœuds de diffusion en continu correspondants. Il enregistre également des services pour exposer la topologie de distribution des WAL, ce qui permet aux clients de streaming de connaître le nœud de streaming approprié pour un WAL donné.</p></li>
+<li><p><strong>Coordinateur de streaming</strong>: Un composant logique dans le nœud coordinateur. Il utilise Etcd pour la découverte de services afin de localiser les nœuds de diffusion en continu disponibles et est chargé de lier le WAL aux nœuds de diffusion en continu correspondants. Il enregistre également le service pour exposer la topologie de distribution des WAL, ce qui permet aux clients de streaming de connaître le nœud de streaming approprié pour un WAL donné.</p></li>
 <li><p><strong>Cluster de nœuds de streaming</strong>: Il s'agit d'une grappe de nœuds de diffusion en continu responsables de toutes les tâches de traitement de la diffusion en continu, telles que l'ajout de fichiers WAL, la récupération de l'état, l'interrogation de données croissantes.</p></li>
 <li><p><strong>Client de streaming</strong>: Un client Milvus développé en interne qui encapsule des fonctionnalités de base telles que la découverte de services et les contrôles de disponibilité. Il est utilisé pour lancer des opérations telles que l'écriture de messages et l'abonnement.</p></li>
 </ul>
@@ -98,7 +98,7 @@ summary: >-
     </button></h2><p>Le composant <strong>Recovery Storage</strong> s'exécute toujours sur le nœud de streaming où se trouve le composant WAL correspondant.</p>
 <ul>
 <li><p>Il est chargé de convertir les données de streaming en données historiques persistantes et de les stocker dans le stockage d'objets.</p></li>
-<li><p>Il gère également la récupération de l'état en mémoire pour le composant WAL sur le nœud de streaming.</p></li>
+<li><p>Il gère également la récupération de l'état en mémoire du composant WAL sur le nœud de streaming.</p></li>
 </ul>
 <p>
   

@@ -100,9 +100,9 @@ summary: >-
 <p>結果是一個簡化、穩健的 WAL 層，非常適合對一致性、可用性和快速復原要求極高的關鍵任務生產環境。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
-   </span> <span class="img-wrapper"> <span>啄木鳥記憶體模式部署</span> </span></p>
-<h2 id="Performance-benchmarks" class="common-anchor-header">效能基準<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
+   </span> <span class="img-wrapper"> <span>啄木鸟法定人数模式部署</span> </span></p>
+<h2 id="Performance-benchmarks" class="common-anchor-header">性能基準<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,90 +155,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker 的雲原生架構可簡化部署、減少維護並提高可靠性。</p>
-<h3 id="Simplified-infrastructure-management" class="common-anchor-header">簡化基礎架構管理</h3><ul>
-<li><strong>無需本機儲存管理：</strong>無需管理磁碟區、RAID 或磁碟故障。</li>
-<li><strong>降低硬體依賴：</strong>省去硬體設定與監控；耐用性與可用性由雲端物件儲存處理。</li>
-<li><strong>簡化容量規劃：</strong>雲端物件儲存可自動擴充儲存空間，無需手動預測。</li>
+    </button></h2><p>Woodpecker 的雲原生架構提供了顯著的營運優勢：</p>
+<ul>
+<li><strong>零本機儲存管理</strong>：消除磁碟卷管理、RAID 配置和硬體故障</li>
+<li><strong>自動擴充</strong>：儲存空間可隨雲端物件儲存擴充，無需容量規劃</li>
+<li><strong>成本效益</strong>：隨用隨付的儲存空間，可自動分層與壓縮</li>
+<li><strong>高可用性</strong>：利用雲端供應商的 11-nines 耐用性與快速復原</li>
+<li><strong>簡化部署</strong>：兩種部署模式 (MemoryBuffer/QuorumBuffer) 符合不同的作業需求</li>
+<li><strong>開發人員友善</strong>：更快速的環境設定，所有環境架構一致</li>
 </ul>
-<h3 id="Simplified-deployment" class="common-anchor-header">簡化部署</h3><ul>
-<li><strong>MemoryBuffer 模式：</strong>使用最少的資源，並與雲端儲存整合，是開發與小規模生產的理想選擇。</li>
-<li><strong>QuorumBuffer 模式：</strong>提供企業級的可靠性，卻沒有傳統分散式儲存的複雜性。</li>
-</ul>
-<h2 id="Cost-efficiency-and-resource-optimization" class="common-anchor-header">成本效益與資源最佳化<button data-href="#Cost-efficiency-and-resource-optimization" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><strong>降低記憶體使用量：</strong>相較於傳統的經銷商，有效率的緩衝可降低記憶體需求。</li>
-<li><strong>彈性擴充：</strong>隨用隨付的雲端儲存可避免過度配置。</li>
-<li><strong>降低基礎架構開銷：</strong>較少的元件意味著較低的部署與維護成本。</li>
-</ul>
-<h3 id="Storage-cost-advantages" class="common-anchor-header">儲存成本優勢</h3><ul>
-<li><strong>分層儲存：</strong>自動將資料遷移至符合成本效益的雲端儲存層，以便長期保留。</li>
-<li><strong>壓縮與重複資料刪除：</strong>內建功能可降低儲存成本，而無需額外的作業。</li>
-<li><strong>無複製開銷：</strong>耐久性由雲端儲存管理，無需手動複製管理。</li>
-</ul>
-<h2 id="High-availability-and-disaster-recovery" class="common-anchor-header">高可用性與災難復原<button data-href="#High-availability-and-disaster-recovery" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Simplified-fault-tolerance" class="common-anchor-header">簡化容錯</h3><ul>
-<li><strong>雲端原生耐久性：</strong>利用雲供應商的 11-nines (99.999999999%) 耐用性保證。</li>
-<li><strong>快速復原：</strong>最小本機狀態可快速更換節點及群集復原。</li>
-<li><strong>跨區域復原能力：</strong>使用雲端儲存功能支援跨區域複製。</li>
-</ul>
-<h3 id="Operational-resilience" class="common-anchor-header">運作彈性</h3><ul>
-<li><strong>更少的單點故障：</strong>減少元件數量，降低故障風險。</li>
-<li><strong>自動故障移轉：</strong>雲端儲存備援簡化故障移轉。</li>
-<li><strong>簡化備份：</strong>整合式雲端儲存提供自動備份與版本管理。</li>
-</ul>
-<h2 id="Development-and-operational-experience" class="common-anchor-header">開發與作業體驗<button data-href="#Development-and-operational-experience" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Improved-development-workflow" class="common-anchor-header">改善開發工作流程</h3><ul>
-<li><strong>更快的環境設定：</strong>最小化依賴性，加速開發與測試。</li>
-<li><strong>一致的架構：</strong>跨開發、暫存與生產的統一設計。</li>
-<li><strong>雲端原生整合：</strong>與雲端服務及容器協調無縫相容。</li>
-</ul>
-<h3 id="Enhanced-production-operations" class="common-anchor-header">增強生產作業</h3><ul>
-<li><strong>可預測的效能：</strong>跨部署規模與配置的一致結果。</li>
-<li><strong>簡化升級：</strong>無狀態設計可實現最短停機時間的滾動更新。</li>
-<li><strong>資源可預測性：</strong>與傳統訊息中介相比，資源使用更穩定。</li>
-</ul>
-<p>對於支援關鍵任務 RAG、AI 代理和低延遲搜尋工作負載的向量資料庫而言，這些作業優勢是革命性的。從複雜的訊息中介堆疊轉換到 Woodpecker 的簡化架構，不僅能提升效能，還能大幅降低開發和基礎架構團隊的作業負擔。</p>
-<p>隨著 S3 Express One Zone 等創新技術在雲基礎架構中的不斷發展，Woodpecker 的架構使組織能夠自動從這些進步中獲益，而無需進行重大的運營變革或系統重新設計。</p>
+<p>這些優勢讓 Woodpecker 對於關鍵任務 RAG、AI 代理和低延遲搜尋工作負載特別有價值，在這些工作負載中，作業簡單性與效能同樣重要。</p>

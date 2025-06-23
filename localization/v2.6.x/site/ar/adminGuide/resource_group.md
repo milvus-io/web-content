@@ -90,7 +90,7 @@ title: إدارة مجموعات الموارد
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.5.10. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
+<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.6.0b0. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
 </div>
 <ol>
 <li><p>إنشاء مجموعة موارد.</p>
@@ -136,7 +136,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>نقل العقد بين مجموعات الموارد.</p>
-<p>قد تلاحظ أن مجموعة الموارد الموصوفة لا تحتوي على أي عقدة استعلام بعد. انقل بعض العُقد من مجموعة الموارد الافتراضية إلى المجموعة التي تقوم بإنشائها على النحو التالي: بافتراض وجود عقدة استعلام واحدة حاليًا في <strong>_مجموعة الموارد _المجموعة_الافتراضية_المجموعة_المجموعة_الموارد،</strong> ونريد نقل عقدة واحدة إلى <strong>rg</strong> المنشأة.<code translate="no">update_resource_groups</code> يضمن الذرية لتغييرات التكوين المتعددة، لذلك لن تكون هناك حالات وسيطة مرئية لـ Milvus.</p>
+<p>قد تلاحظ أن مجموعة الموارد الموصوفة لا تحتوي على أي عقدة استعلام بعد. انقل بعض العُقد من مجموعة الموارد الافتراضية إلى المجموعة التي تقوم بإنشائها على النحو التالي: بافتراض وجود عقدة استعلام واحدة حاليًا في <strong>_مجموعة الموارد _المجموعة_الافتراضية_المجموعة_المجموعة_الموصفة،</strong> ونريد نقل عقدة واحدة إلى <strong>rg</strong> المنشأة.<code translate="no">update_resource_groups</code> يضمن الذرية لتغييرات التكوين المتعددة، لذلك لن تكون هناك حالات وسيطة مرئية لـ Milvus.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>لاحظ أن <code translate="no">_resource_groups</code> هو معلمة اختيارية، وتركه غير محدد يجعل ميلفوس يقوم بتحميل النسخ المتماثلة على عقد الاستعلام في مجموعة الموارد الافتراضية.</p>
 <p>لجعل ميلفوس يقوم بتحميل كل نسخة متماثلة من المجموعة في مجموعة موارد منفصلة، تأكد من أن عدد مجموعات الموارد يساوي عدد النسخ المتماثلة.</p></li>
 <li><p>نقل النسخ المتماثلة بين مجموعات الموارد.</p>
-<p>يستخدم ميلفوس <a href="/docs/ar/replica.md">النسخ المتماثلة</a> لتحقيق موازنة التحميل بين <a href="/docs/ar/glossary.md#Segment">المجموعات</a> الموزعة عبر عدة عقد استعلام. يمكنك نقل نسخ متماثلة معينة من مجموعة ما من مجموعة موارد إلى أخرى على النحو التالي:</p>
+<p>يستخدم ميلفوس <a href="/docs/ar/v2.6.x/replica.md">النسخ المتماثلة</a> لتحقيق موازنة التحميل بين <a href="/docs/ar/v2.6.x/glossary.md#Segment">المجموعات</a> الموزعة عبر عدة عقد استعلام. يمكنك نقل نسخ متماثلة معينة من مجموعة ما من مجموعة موارد إلى أخرى على النحو التالي:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -213,7 +213,7 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>لمزيد من التفاصيل، يُرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
+<p>لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق المجموعة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>لنشر مثيل Milvus متعدد المستأجرين، اقرأ ما يلي:</p>
 <ul>
-<li><a href="/docs/ar/rbac.md">تمكين RBAC</a></li>
-<li><a href="/docs/ar/users_and_roles.md">المستخدمون والأدوار</a></li>
+<li><a href="/docs/ar/v2.6.x/rbac.md">تمكين RBAC</a></li>
+<li><a href="/docs/ar/v2.6.x/users_and_roles.md">المستخدمون والأدوار</a></li>
 </ul>

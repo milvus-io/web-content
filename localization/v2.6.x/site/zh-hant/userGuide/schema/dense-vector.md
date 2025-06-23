@@ -68,7 +68,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>使用密集向量</span> </span></p>
 <div class="alert note">
-<p>除了密集向量，Milvus 也支援稀疏向量和二進位向量。稀疏向量適用於基於特定詞彙的精確匹配，例如關鍵字搜尋和詞彙匹配；而二進制向量則常用於有效處理二進制資料，例如圖像模式匹配和某些雜湊應用。如需詳細資訊，請參閱<a href="/docs/zh-hant/binary-vector.md">二進位向量</a>和<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>。</p>
+<p>除了密集向量，Milvus 也支援稀疏向量和二進位向量。稀疏向量適用於基於特定詞彙的精確匹配，例如關鍵字搜尋和詞彙匹配；而二進制向量則常用於有效處理二進制資料，例如圖像模式匹配和某些雜湊應用。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/binary-vector.md">二進位向量</a>和<a href="/docs/zh-hant/v2.6.x/sparse_vector.md">稀疏向量</a>。</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">使用密集向量<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,10 +222,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>儲存向量，其每個維度的個別元素為 8 位元整數 (int8)，每個元素的範圍為 -128 到 127。INT8_VECTOR 專為量化深度學習模型 (例如 ResNet、EfficientNet) 而設計，可減少模型大小，並加快推論速度，同時將精確度損失降至最低。</p></td>
+     <td><p>儲存向量，其每個維度的個別元素為 8 位元整數 (int8)，每個元素的範圍為 -128 到 127。INT8_VECTOR 專為量化深度學習模型 (例如 ResNet、EfficientNet) 而設計，可減少模型大小，並加快推論速度，同時將精確度損失降至最低。<br><strong>注意</strong>：僅 HNSW 索引支援此向量類型。</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">為向量場設定索引參數</h3><p>為了加速語意搜尋，必須為向量欄位建立索引。索引可以顯著改善大規模向量資料的檢索效率。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">為向量欄位設定索引參數</h3><p>為了加速語意搜尋，必須為向量欄位建立索引。索引可以顯著改善大規模向量資料的檢索效率。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -269,9 +269,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的範例中，使用<code translate="no">AUTOINDEX</code> 索引類型為<code translate="no">dense_vector</code> 欄位建立一個名為<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 設定為<code translate="no">IP</code> ，表示將使用內積作為距離指標。</p>
+<p>在上面的範例中，使用<code translate="no">AUTOINDEX</code> 索引類型為<code translate="no">dense_vector</code> 欄位建立了一個名為<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 設定為<code translate="no">IP</code> ，表示將使用內積作為距離指標。</p>
 <p>Milvus 提供多種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有很多索引類型可供您選擇。詳情請參考 xxx。</p>
-<p>Milvus 支援其他公制類型。如需詳細資訊，請參考<a href="/docs/zh-hant/metric.md">公制類型</a>。</p>
+<p>Milvus 支援其他公制類型。如需詳細資訊，請參考<a href="/docs/zh-hant/v2.6.x/metric.md">公制類型</a>。</p>
 <h3 id="Create-collection" class="common-anchor-header">建立集合</h3><p>一旦密集向量和索引參數設定完成，你就可以建立一個包含密集向量的集合。以下範例使用<code translate="no">create_collection</code> 方法建立一個名為<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -487,4 +487,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關相似性搜尋參數的詳細資訊，請參閱<a href="/docs/zh-hant/single-vector-search.md">基本 ANN 搜尋</a>。</p>
+<p>有關相似性搜尋參數的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/single-vector-search.md">基本 ANN 搜尋</a>。</p>

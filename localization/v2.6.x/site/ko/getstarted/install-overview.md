@@ -54,8 +54,8 @@ title: Milvus 배포 옵션 개요
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone은 단일 머신 서버 배포입니다. Milvus Standalone의 모든 구성 요소는 단일 <a href="https://milvus.io/docs/install_standalone-docker.md">Docker 이미지에</a> 포함되어 있어 배포가 편리합니다. 프로덕션 워크로드가 있지만 Kubernetes를 사용하지 않으려는 경우, 충분한 메모리가 있는 단일 머신에서 Milvus Standalone을 실행하는 것이 좋은 옵션입니다. 또한 Milvus Standalone은 마스터-슬레이브 복제를 통해 고가용성을 지원합니다.</p>
-<h2 id="Milvus-Distributed" class="common-anchor-header">Milvus 분산<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus Standalone은 단일 머신 서버 배포입니다. Milvus Standalone의 모든 구성 요소는 단일 <a href="https://milvus.io/docs/install_standalone-docker.md">Docker 이미지에</a> 포함되어 있어 배포가 편리합니다. 프로덕션 워크로드가 있지만 Kubernetes를 사용하지 않으려는 경우, 충분한 메모리가 있는 단일 머신에서 Milvus Standalone을 실행하는 것이 좋은 옵션입니다.</p>
+<h2 id="Milvus-Distributed" class="common-anchor-header">Milvus 배포<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,7 +70,7 @@ title: Milvus 배포 옵션 개요
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Distributed는 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 클러스터에 배포할 수 있습니다. 이 배포는 수집 로드와 검색 쿼리가 격리된 노드에서 개별적으로 처리되는 클라우드 네이티브 아키텍처를 특징으로 하며, 중요한 구성 요소에 대한 이중화를 허용합니다. 또한 최고의 확장성과 가용성을 제공할 뿐만 아니라 각 구성 요소에 할당된 리소스를 유연하게 사용자 정의할 수 있습니다. Milvus Distributed는 프로덕션 환경에서 대규모 벡터 검색 시스템을 실행하는 기업 사용자에게 최고의 선택입니다.</p>
+    </button></h2><p>Milvus Distributed는 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 클러스터에 배포할 수 있습니다. 이 배포는 클라우드 네이티브 아키텍처를 특징으로 하며, 수집 로드와 검색 쿼리가 격리된 노드에서 개별적으로 처리되어 중요한 구성 요소에 대한 중복성을 허용합니다. 또한 최고의 확장성과 가용성을 제공할 뿐만 아니라 각 구성 요소에 할당된 리소스를 유연하게 사용자 정의할 수 있습니다. Milvus Distributed는 프로덕션 환경에서 대규모 벡터 검색 시스템을 실행하는 기업 사용자에게 최고의 선택입니다.</p>
 <h2 id="Choose-the-Right-Deployment-for-Your-Use-Case" class="common-anchor-header">사용 사례에 적합한 배포 선택하기<button data-href="#Choose-the-Right-Deployment-for-Your-Use-Case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

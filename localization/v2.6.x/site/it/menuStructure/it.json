@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "Archiviazione/Computing",
-            "id": "four_layers.md",
+            "label": "Componenti principali",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Componenti principali",
-            "id": "main_components.md",
+            "label": "Servizio di streaming",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -1048,7 +1048,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutorial: Implementare una classifica basata sul tempo in Milvus",
+                    "label": "Tutorial: Implementare la classificazione basata sul tempo in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1383,25 +1383,6 @@
             "label": "Dipendenze di scala",
             "id": "scale-dependencies.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Aggiornamento",
-        "id": "upgrade_milvus",
-        "order": 7,
-        "children": [
-          {
-            "label": "Aggiornamento del cluster Milvus",
-            "id": "upgrade_milvus_cluster-operator.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Aggiornamento di Milvus Standalone",
-            "id": "upgrade_milvus_standalone-operator.md",
-            "order": 1,
             "children": []
           }
         ]

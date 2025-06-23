@@ -46,7 +46,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>Model Rankers können nicht mit gruppierenden Suchen verwendet werden.</p></li>
-<li><p>Die für das Model-Ranking verwendeten Felder müssen vom Typ Text sein (<code translate="no">VARCHAR</code>).</p></li>
+<li><p>Felder, die für Model Ranker verwendet werden, müssen vom Typ Text sein (<code translate="no">VARCHAR</code>).</p></li>
 <li><p>Jeder Model Ranker kann jeweils nur ein <code translate="no">VARCHAR</code> Feld für die Auswertung verwenden.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Wie funktioniert das?<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Detaillierte Informationen zur Implementierung der einzelnen Modelldienste finden Sie in der entsprechenden Dokumentation:</p>
 <ul>
-<li><p><a href="/docs/de/vllm-ranker.md">vLLM-Rangierer</a></p></li>
-<li><p><a href="/docs/de/tei-ranker.md">TEI-Rangierer</a></p></li>
+<li><p><a href="/docs/de/v2.6.x/vllm-ranker.md">vLLM-Rangierer</a></p></li>
+<li><p><a href="/docs/de/v2.6.x/tei-ranker.md">TEI-Rangierer</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementierung<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,6 +201,12 @@ model_ranker = Function(
      <td><p>Ja</p></td>
      <td><p>Gibt den Typ der zu erstellenden Funktion an. Muss für alle Modell-Ranker auf <code translate="no">RERANK</code> gesetzt werden.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Ja</p></td>
+     <td><p>Ein Wörterbuch, das die Konfiguration für die modellbasierte Ranglistenfunktion enthält. Die verfügbaren Parameter (Schlüssel) variieren je nach Anbieter (<code translate="no">tei</code> oder <code translate="no">vllm</code>). Weitere Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/vllm-ranker.md">vLLM Ranker</a> oder <a href="/docs/de/v2.6.x/tei-ranker.md">TEI Ranker</a>.</p></td>
+     <td><p>{...}</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>

@@ -43,7 +43,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>スキーマ設計の解剖</span> </span></p>
 <p>検索システムのデータモデル設計には、ビジネスニーズを分析し、情報をスキーマで表現されたデータモデルに抽象化することが含まれます。例えば、テキストの一部を検索するには、リテラル文字列を「埋め込み」によってベクトルに変換し、ベクトル検索を可能にすることで「インデックス化」しなければならない。この必須要件以外にも、出版物のタイムスタンプや著者などのプロパティを格納することが必要な場合がある。このメタデータにより、フィルタリングによってセマンティック検索を絞り込むことができ、特定の日付以降に出版されたテキストや、特定の著者によるテキストだけを返すことができる。アプリケーションで検索結果をレンダリングするために、メインテキストと一緒にこれらのスカラーを取得することもできます。これらのテキスト片を整理するために、それぞれに整数または文字列で表される一意の識別子を割り当てる必要があります。これらの要素は洗練された検索ロジックを実現するために不可欠です。</p>
-<p><a href="/docs/ja/schema-hands-on.md">スキーマ設計ハンズオンを</a>参照して、よく設計されたスキーマの作り方を把握してください。</p>
+<p><a href="/docs/ja/v2.6.x/schema-hands-on.md">スキーマ設計ハンズオンを</a>参照して、よく設計されたスキーマの作り方を把握してください。</p>
 <h2 id="Create-Schema" class="common-anchor-header">スキーマの作成<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,7 +145,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p>フィールドを追加する際、<code translate="no">is_primary</code> プロパティを<code translate="no">True</code> に設定することで、フィールドをプライマリ・フィールドとして明示的に明示することができる。プライマリ・フィールドはデフォルトで<strong>Int64</strong>値を受け入れる。この場合、プライマリ・フィールドの値は<code translate="no">12345</code> と同様の整数でなければなりません。プライマリ・フィールドに<strong>VarChar</strong>値を使用する場合は、<code translate="no">my_entity_1234</code> と同様の文字列でなければなりません。</p>
 <p>また、<code translate="no">autoId</code> プロパティを<code translate="no">True</code> に設定すると、データ挿入時に Zilliz Cloud が自動的にプライマリフィールドの値を割り当てるようになります。</p>
-<p>詳しくは、<a href="/docs/ja/primary-field.md">プライマリフィールドとAutoIdを</a>参照してください。</p>
+<p>詳しくは、<a href="/docs/ja/v2.6.x/primary-field.md">プライマリフィールドとAutoIdを</a>参照してください。</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">ベクターフィールドの追加<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -209,8 +209,10 @@ schema.addField(AddFieldReq.builder()
 <p>このタイプのベクトルフィールドは、16ビットの半精度浮動小数点数のリストを保持し、通常、メモリや帯域幅が制限されたディープラーニングやGPUベースのコンピューティングシナリオに適用されます。</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>この型のベクトル・フィールドは、16ビット浮動小数点数のリストを保持し、精度は低下するが、指数範囲はFloat32と同じである。このタイプのデータは、精度に大きな影響を与えることなくメモリ使用量を削減できるため、ディープラーニングのシナリオでよく使用されます。</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>このタイプのベクトル・フィールドは、8ビットの符号付き整数（int8）で構成されるベクトルを格納し、各成分の範囲は-128～127である。ResNetやEfficientNetのような量子化されたディープラーニング・アーキテクチャ用に調整されており、モデルサイズを大幅に縮小し、推論速度を向上させる。<strong>注</strong>：このベクトル型はHNSWインデックスでのみサポートされている。</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
-<p>このタイプのベクトル・フィールドは、0と1のリストを保持する。画像処理や情報検索のシナリオでデータを表現するためのコンパクトな特徴として機能する。</p></li>
+<p>この型のベクトル・フィールドは0と1のリストを保持する。画像処理や情報検索の場面でデータを表現するためのコンパクトな特徴として機能する。</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
 <p>この型のベクトル・フィールドは、非ゼロ数のリストとそのシーケンス番号を保持し、スパースなベクトル埋め込みを表現する。</p></li>
 </ul>
@@ -230,7 +232,7 @@ schema.addField(AddFieldReq.builder()
         ></path>
       </svg>
     </button></h2><p>一般的なケースでは、スカラーフィールドを使用してmilvusに格納されたベクトル埋め込みデータのメタデータを格納し、検索結果の正しさを向上させるためにメタデータフィルタリングによるANN検索を行うことができます。Zilliz Cloudは<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、<strong>Float</strong>、<strong>Double</strong>、<strong>Array</strong>、<strong>JSONなど</strong>複数のスカラーフィールドをサポートしています。</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">文字列フィールドの追加</h3><p>Milvusでは、VarCharフィールドを使って文字列を格納することができます。VarCharフィールドの詳細については、<a href="/docs/ja/string.md">文字列フィールドを</a>参照してください。</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">文字列フィールドの追加</h3><p>Milvusでは、VarCharフィールドを使って文字列を格納することができます。VarCharフィールドの詳細については、<a href="/docs/ja/v2.6.x/string.md">文字列フィールドを</a>参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -273,7 +275,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Number-Fields" class="common-anchor-header">数値フィールドの追加</h3><p>Milvusがサポートする数値の種類は<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code>,<code translate="no">Double</code> です。数値フィールドの詳細については、<a href="/docs/ja/number.md">数値フィールドを</a>参照してください。</p>
+<h3 id="Add-Number-Fields" class="common-anchor-header">数値フィールドの追加</h3><p>Milvusがサポートする数値の種類は<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code>,<code translate="no">Double</code> です。数値フィールドの詳細については、<a href="/docs/ja/v2.6.x/number.md">数値フィールドを</a>参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -348,7 +350,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-JSON-fields" class="common-anchor-header">JSONフィールドの追加</h3><p>JSONフィールドは通常、半構造化JSONデータを格納します。JSONフィールドの詳細については、<a href="/docs/ja/use-json-fields.md">JSONフィールドを</a>参照してください。</p>
+<h3 id="Add-JSON-fields" class="common-anchor-header">JSONフィールドの追加</h3><p>JSONフィールドは通常、半構造化JSONデータを格納します。JSONフィールドの詳細については、<a href="/docs/ja/v2.6.x/use-json-fields.md">JSONフィールドを</a>参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -387,7 +389,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">配列フィールドの追加</h3><p>配列フィールドは要素のリストを格納します。配列フィールドのすべての要素のデータ型は同じでなければならない。配列フィールドの詳細については、<a href="/docs/ja/array_data_type.md">配列フィールドを</a>参照してください。</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">配列フィールドの追加</h3><p>配列フィールドは要素のリストを格納します。配列フィールドのすべての要素のデータ型は同じでなければならない。配列フィールドの詳細については、<a href="/docs/ja/v2.6.x/array_data_type.md">配列フィールドを</a>参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(

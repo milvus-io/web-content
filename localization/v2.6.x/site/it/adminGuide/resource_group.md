@@ -66,7 +66,7 @@ title: Gestire i gruppi di risorse
 <li>L'attributo <strong>limits</strong> specifica i limiti massimi per un gruppo di risorse.</li>
 <li>Gli attributi <strong>transfer_from</strong> e <strong>transfer_to</strong> descrivono da quali gruppi di risorse un gruppo di risorse deve preferibilmente acquisire risorse e a quali gruppi di risorse deve trasferire risorse, rispettivamente.</li>
 </ul>
-<p>Una volta cambiata la configurazione di un gruppo di risorse, Milvus regolerà le risorse del Nodo di interrogazione corrente il più possibile in base alla nuova configurazione, assicurando che tutti i gruppi di risorse alla fine soddisfino la seguente condizione:</p>
+<p>Una volta modificata la configurazione di un gruppo di risorse, Milvus regolerà le risorse del Nodo di interrogazione corrente il più possibile in base alla nuova configurazione, assicurando che tutti i gruppi di risorse alla fine soddisfino la seguente condizione:</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>Tranne nei seguenti casi:</p>
 <ul>
@@ -90,7 +90,7 @@ title: Gestire i gruppi di risorse
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.5.10. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
+<p>Tutti gli esempi di codice in questa pagina sono in PyMilvus 2.6.0b0. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
 </div>
 <ol>
 <li><p>Creare un gruppo di risorse.</p>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>Si noti che <code translate="no">_resource_groups</code> è un parametro opzionale, e lasciandolo non specificato Milvus caricherà le repliche sui nodi di query nel gruppo di risorse predefinito.</p>
 <p>Per fare in modo che Milus carichi ogni replica di una collezione in un gruppo di risorse separato, assicurarsi che il numero di gruppi di risorse sia uguale al numero di repliche.</p></li>
 <li><p>Trasferire le repliche tra i gruppi di risorse.</p>
-<p>Milvus utilizza <a href="/docs/it/replica.md">le repliche</a> per ottenere il bilanciamento del carico tra i <a href="/docs/it/glossary.md#Segment">segmenti</a> distribuiti su diversi nodi di interrogazione. È possibile spostare alcune repliche di una collezione da un gruppo di risorse a un altro come segue:</p>
+<p>Milvus utilizza <a href="/docs/it/v2.6.x/replica.md">le repliche</a> per ottenere il bilanciamento del carico tra i <a href="/docs/it/v2.6.x/glossary.md#Segment">segmenti</a> distribuiti su diversi nodi di interrogazione. È possibile spostare alcune repliche di una collezione da un gruppo di risorse a un altro come segue:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -329,7 +329,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>Le repliche di una singola collezione e i gruppi di risorse hanno una relazione N a N.</li>
-<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti in modo uniforme tra le repliche, assicurando che la differenza nel numero di QueryNode di ogni replica non superi 1.</li>
+<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti in modo uniforme tra le repliche, assicurando che la differenza nel numero di QueryNode di ciascuna replica non superi 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Per distribuire un'istanza Milvus multi-tenant, leggere quanto segue:</p>
 <ul>
-<li><a href="/docs/it/rbac.md">Abilitare RBAC</a></li>
-<li><a href="/docs/it/users_and_roles.md">Utenti e ruoli</a></li>
+<li><a href="/docs/it/v2.6.x/rbac.md">Abilitare RBAC</a></li>
+<li><a href="/docs/it/v2.6.x/users_and_roles.md">Utenti e ruoli</a></li>
 </ul>

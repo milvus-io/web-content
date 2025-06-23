@@ -49,8 +49,8 @@ summary: >-
      <th><p>Jenis Indeks yang Berlaku</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
+     <td><ul><li><p>DATAR</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
    </tr>
    <tr>
      <td><p>BINARY_VECTOR</p></td>
@@ -312,6 +312,6 @@ summary: >-
 </ol>
 <h3 id="Other-considerations" class="common-anchor-header">Pertimbangan lain</h3><p>Sementara IVF dan indeks berbasis grafik mengoptimalkan penggunaan memori melalui kuantisasi, file yang dipetakan dengan memori (mmap), dan skenario alamat DiskANN di mana kumpulan data melebihi memori akses acak (RAM) yang tersedia.</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN adalah indeks berbasis grafik Vamana yang menghubungkan titik-titik data untuk navigasi yang efisien selama pencarian sambil menerapkan PQ untuk mengurangi ukuran vektor dan memungkinkan penghitungan jarak perkiraan yang cepat antar vektor.</p>
-<p>Grafik Vamana disimpan di disk, yang memungkinkan DiskANN untuk menangani kumpulan data besar yang jika tidak, akan terlalu besar untuk ditampung di memori. Hal ini sangat berguna untuk dataset miliaran titik.</p>
+<p>Grafik Vamana disimpan di disk, yang memungkinkan DiskANN untuk menangani kumpulan data besar yang jika tidak, akan terlalu besar untuk ditampung di memori. Hal ini sangat berguna untuk kumpulan data miliaran titik.</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">File yang dipetakan dengan memori (mmap)</h4><p>Pemetaan memori (Mmap) memungkinkan akses memori langsung ke file besar pada disk, memungkinkan Milvus untuk menyimpan indeks dan data dalam memori dan hard drive. Pendekatan ini membantu mengoptimalkan operasi I/O dengan mengurangi overhead panggilan I/O berdasarkan frekuensi akses, sehingga memperluas kapasitas penyimpanan untuk koleksi tanpa memengaruhi kinerja pencarian secara signifikan.</p>
 <p>Secara khusus, Anda dapat mengonfigurasi Milvus untuk memetakan memori data mentah dalam bidang tertentu alih-alih memuatnya secara penuh ke dalam memori. Dengan cara ini, Anda dapat memperoleh akses memori langsung ke bidang-bidang tersebut tanpa mengkhawatirkan masalah memori dan memperluas kapasitas koleksi.</p>

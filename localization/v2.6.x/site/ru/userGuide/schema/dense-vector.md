@@ -77,7 +77,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>Использование плотного вектора</span> </span></p>
 <div class="alert note">
-<p>Помимо плотных векторов, Milvus также поддерживает разреженные векторы и двоичные векторы. Разреженные векторы подходят для точного поиска по определенным терминам, например, для поиска по ключевым словам и сопоставления терминов, а двоичные векторы обычно используются для эффективной работы с бинаризованными данными, например, для сопоставления шаблонов изображений и некоторых приложений хеширования. Дополнительные сведения см. в разделах <a href="/docs/ru/binary-vector.md">"Двоичный вектор"</a> и <a href="/docs/ru/sparse_vector.md">"Разреженный вектор</a>".</p>
+<p>Помимо плотных векторов, Milvus также поддерживает разреженные векторы и двоичные векторы. Разреженные векторы подходят для точного поиска по определенным терминам, например, для поиска по ключевым словам и сопоставления терминов, а двоичные векторы обычно используются для эффективной работы с бинаризованными данными, например, для сопоставления шаблонов изображений и некоторых приложений хеширования. Дополнительные сведения см. в разделах <a href="/docs/ru/v2.6.x/binary-vector.md">"Двоичный вектор"</a> и <a href="/docs/ru/v2.6.x/sparse_vector.md">"Разреженный вектор</a>".</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Использование плотных векторов<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>Хранит 16-битные числа с плавающей точкой половинной точности, используемые для глубокого обучения и вычислений на GPU. Экономит место в памяти в сценариях, где точность не так важна, например, на этапе запоминания с низкой точностью в рекомендательных системах.</p></td>
+     <td><p>Хранит 16-битные числа с плавающей точкой половинной точности, используемые для глубокого обучения и вычислений на GPU. Экономит место в памяти в сценариях, где точность не так важна, например на этапе запоминания с низкой точностью в рекомендательных системах.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
@@ -231,10 +231,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Хранит векторы, отдельные элементы которых в каждом измерении являются 8-битными целыми числами (int8), причем каждый элемент находится в диапазоне от -128 до 127. Разработанный для квантованных моделей глубокого обучения (например, ResNet, EfficientNet), INT8_VECTOR уменьшает размер модели и ускоряет вывод с минимальной потерей точности.</p></td>
+     <td><p>Хранит векторы, отдельные элементы которых в каждом измерении являются 8-битными целыми числами (int8), причем каждый элемент находится в диапазоне от -128 до 127. Разработанный для квантованных моделей глубокого обучения (например, ResNet, EfficientNet), INT8_VECTOR уменьшает размер модели и ускоряет вывод с минимальной потерей точности.<br><strong>Примечание</strong>: Этот тип вектора поддерживается только для индексов HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Установка индексных параметров для векторного поля</h3><p>Чтобы ускорить семантический поиск, необходимо создать индекс для векторного поля. Индексирование может значительно повысить эффективность поиска по крупномасштабным векторным данным.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Установка параметров индекса для векторного поля</h3><p>Чтобы ускорить семантический поиск, необходимо создать индекс для векторного поля. Индексирование может значительно повысить эффективность поиска по крупномасштабным векторным данным.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -280,7 +280,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>В приведенном выше примере для поля <code translate="no">dense_vector</code> создается индекс с именем <code translate="no">dense_vector_index</code> с использованием типа индекса <code translate="no">AUTOINDEX</code>. Значение <code translate="no">metric_type</code> установлено в <code translate="no">IP</code>, что указывает на то, что в качестве метрики расстояния будет использоваться внутреннее произведение.</p>
 <p>Milvus предоставляет различные типы индексов для более удобного векторного поиска. AUTOINDEX - это специальный тип индекса, предназначенный для сглаживания кривой обучения векторному поиску. Существует множество типов индексов, из которых вы можете выбирать. Подробнее см. в разделе xxx.</p>
-<p>Milvus поддерживает другие типы метрик. Дополнительные сведения см. в разделе <a href="/docs/ru/metric.md">Типы метрик</a>.</p>
+<p>Milvus поддерживает другие типы метрик. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.6.x/metric.md">Типы метрик</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Создание коллекции</h3><p>После того как настройки плотного вектора и параметров индекса завершены, можно создать коллекцию, содержащую плотные векторы. В примере ниже используется метод <code translate="no">create_collection</code> для создания коллекции с именем <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -335,7 +335,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>После создания коллекции используйте метод <code translate="no">insert</code> для добавления данных, содержащих плотные векторы. Убедитесь, что размерность вставляемых плотных векторов соответствует значению <code translate="no">dim</code>, заданному при добавлении поля плотных векторов.</p>
+<h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>После создания коллекции используйте метод <code translate="no">insert</code> для добавления данных, содержащих плотные векторы. Убедитесь, что размерность вставляемых плотных векторов соответствует значению <code translate="no">dim</code>, определенному при добавлении поля плотных векторов.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -496,4 +496,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения о параметрах поиска сходства см. в разделе <a href="/docs/ru/single-vector-search.md">Базовый поиск ANN</a>.</p>
+<p>Дополнительные сведения о параметрах поиска сходства см. в разделе <a href="/docs/ru/v2.6.x/single-vector-search.md">Базовый поиск ANN</a>.</p>

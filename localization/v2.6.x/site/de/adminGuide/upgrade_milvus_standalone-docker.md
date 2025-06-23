@@ -9,7 +9,7 @@ summary: >-
   können.
 title: Upgrade von Milvus Standalone mit Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/de/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/de/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/de/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/de/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/de/v2.6.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/de/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Upgrade von Milvus Standalone mit Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -26,7 +26,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
         ></path>
       </svg>
     </button></h1><p>Dieses Thema beschreibt, wie Sie Milvus mit Docker Compose aktualisieren können.</p>
-<p>Im Normalfall können Sie <a href="#Upgrade-Milvus-by-changing-its-image">Milvus aktualisieren, indem Sie sein Image ändern</a>. Vor einem Upgrade von v2.1.x auf v2.5.12 müssen Sie jedoch <a href="#Migrate-the-metadata">die Metadaten migrieren</a>.</p>
+<p>Im Normalfall können Sie <a href="#Upgrade-Milvus-by-changing-its-image">Milvus aktualisieren, indem Sie sein Image ändern</a>. Sie müssen jedoch <a href="#Migrate-the-metadata">die Metadaten</a> vor einem Upgrade von v2.1.x auf v2.6.0-rc1 <a href="#Migrate-the-metadata">migrieren</a>.</p>
 <div class="alter note">
 <p>Aufgrund von Sicherheitsbedenken aktualisiert Milvus seine MinIO auf RELEASE.2023-03-20T20-16-18Z mit der Veröffentlichung von v2.2.5. Vor einem Upgrade von früheren Milvus Standalone-Versionen, die mit Docker Compose installiert wurden, sollten Sie eine Single-Node Single-Drive MinIO-Bereitstellung erstellen und die vorhandenen MinIO-Einstellungen und -Inhalte in die neue Bereitstellung migrieren. Einzelheiten hierzu finden Sie in <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">diesem Leitfaden</a>.</p>
 </div>
@@ -51,7 +51,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Führen Sie die folgenden Befehle aus, um das Upgrade durchzuführen.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -85,7 +85,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.12</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.0</span><span class="hljs-string">-rc1</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
@@ -124,11 +124,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>Sie möchten vielleicht auch lernen, wie man:<ul>
-<li><a href="/docs/de/scaleout.md">Skalieren eines Milvus-Clusters</a></li>
+<li><a href="/docs/de/v2.6.x/scaleout.md">Skalieren eines Milvus-Clusters</a></li>
 </ul></li>
 <li>Wenn Sie bereit sind, Ihren Cluster in einer Cloud einzusetzen:<ul>
-<li>Lernen Sie, wie Sie <a href="/docs/de/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a></li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
+<li>Lernen Sie, wie Sie <a href="/docs/de/v2.6.x/eks.md">Milvus auf Amazon EKS mit Terraform bereitstellen</a></li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.6.x/gcp.md">Milvus Cluster auf GCP mit Kubernetes bereitstellen</a> können</li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.6.x/azure.md">Milvus auf Microsoft Azure mit Kubernetes bereitstellen</a> können</li>
 </ul></li>
 </ul>

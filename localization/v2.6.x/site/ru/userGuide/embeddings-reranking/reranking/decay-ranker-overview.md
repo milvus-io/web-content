@@ -81,7 +81,7 @@ beta: Milvus 2.6.x
 <li><p>Каждый ранжировщик распада преобразует необработанные числовые значения в нормализованные оценки релевантности в диапазоне от 0 до 1.</p></li>
 <li><p>Балл распада отражает степень релевантности элемента в зависимости от его "расстояния" до идеальной точки.</p></li>
 </ul>
-<p>Формула расчета зависит от типа ранжировщика распада. Подробнее о том, как рассчитать балл распада, читайте на страницах, посвященных <a href="/docs/ru/gaussian-decay.md#Formula">гауссову распаду</a>, <a href="/docs/ru/exponential-decay.md#Formula">экспоненциальному распаду</a> и <a href="/docs/ru/linear-decay.md#Formula">линейному распаду</a>.</p>
+<p>Формула расчета зависит от типа ранжировщика распада. Подробнее о том, как рассчитать балл распада, читайте на страницах, посвященных <a href="/docs/ru/v2.6.x/gaussian-decay.md#Formula">гауссову распаду</a>, <a href="/docs/ru/v2.6.x/exponential-decay.md#Formula">экспоненциальному распаду</a> и <a href="/docs/ru/v2.6.x/linear-decay.md#Formula">линейному распаду</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Этап 3: Вычисление итоговых оценок</h3><p>Наконец, Milvus объединяет нормализованный балл сходства и балл распада, чтобы получить итоговый балл ранжирования:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -91,7 +91,7 @@ beta: Milvus 2.6.x
 <p>Например, если научная статья получила 0,82 балла за векторное сходство и 0,91 балла за поиск текста на основе BM25 в гибридном поиске, Milvus использует 0,91 балла в качестве базового балла сходства перед применением коэффициента распада.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Ранжирование по распаду в действии</h3><p>Давайте посмотрим на ранжирование по распаду в практическом сценарии - поиск <strong>"исследовательских работ по искусственному интеллекту"</strong> с распадом по времени:</p>
 <div class="alert note">
-<p>В этом примере показатели распада отражают, как релевантность уменьшается со временем - более новые статьи получают оценки ближе к 1,0, более старые - ниже. Эти значения рассчитываются с помощью специального ранжировщика распада. Подробнее см. в разделе <a href="/docs/ru/decay-ranker-overview.md#Choose-the-right-decay-ranker">Выбор правильного ранжировщика распада</a>.</p>
+<p>В этом примере показатели распада отражают, как релевантность уменьшается со временем - более новые статьи получают оценки ближе к 1,0, более старые - ниже. Эти значения рассчитываются с помощью специального ранжировщика распада. Подробнее см. в разделе <a href="/docs/ru/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Выбор правильного ранжировщика распада</a>.</p>
 </div>
 <table>
    <tr>
@@ -202,9 +202,9 @@ beta: Milvus 2.6.x
 </table>
 <p>Подробную информацию о том, как каждый ранжировщик распада рассчитывает баллы и конкретные модели распада, см. в специальной документации:</p>
 <ul>
-<li><p><a href="/docs/ru/gaussian-decay.md">Гауссово распадение</a></p></li>
-<li><p><a href="/docs/ru/exponential-decay.md">Экспоненциальный распад</a></p></li>
-<li><p><a href="/docs/ru/exponential-decay.md">Экспоненциальный распад</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/gaussian-decay.md">Гауссово распадение</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/exponential-decay.md">Экспоненциальный распад</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/exponential-decay.md">Экспоненциальный распад</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Пример реализации<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Ранжировщики распада могут применяться как к стандартному векторному поиску, так и к гибридным операциям поиска в Milvus. Ниже приведены ключевые фрагменты кода для реализации этой возможности.</p>
 <div class="alert note">
-<p>Прежде чем использовать функции распада, необходимо создать коллекцию с соответствующими числовыми полями (например, временными метками, расстояниями и т. д.), которые будут использоваться для расчетов распада. Полные рабочие примеры, включающие настройку коллекции, определение схемы и вставку данных, см. в разделе <a href="/docs/ru/tutorial-implement-a-time-based-ranking-in-milvus.md">Учебник: Реализация ранжирования по времени в Milvus</a>.</p>
+<p>Прежде чем использовать функции распада, необходимо создать коллекцию с соответствующими числовыми полями (например, временными метками, расстояниями и т. д.), которые будут использоваться для расчетов распада. Полные рабочие примеры, включающие настройку коллекции, определение схемы и вставку данных, см. в разделе <a href="/docs/ru/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">Учебник: Реализация ранжирования по времени в Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Создание ранжировщика распада</h3><p>Чтобы реализовать ранжирование по распаду, сначала определите объект <code translate="no">Function</code> с соответствующей конфигурацией:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -236,7 +236,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -278,7 +278,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Указывает, какой математический ранжировщик распада следует применить. Определяет форму кривой снижения релевантности. Рекомендации по выбору подходящей функции см. в разделе <a href="/docs/ru/decay-ranker-overview.md#Choose-the-right-decay-ranker">Выбор правильного ранжировщика распада</a>.</p></td>
+     <td><p>Указывает, какой математический ранжировщик распада следует применить. Определяет форму кривой снижения релевантности. Рекомендации по выбору подходящей функции см. в разделе <a href="/docs/ru/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Выбор правильного ранжировщика распада</a>.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, или <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -315,7 +315,7 @@ decay_ranker = Function(
      <td><p><code translate="no">0.5</code> (по умолчанию)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Применить к стандартному векторному поиску</h3><p>Определив ранжир распада, вы можете применить его в процессе поиска, передав параметр <code translate="no">ranker</code>:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Применить к стандартному векторному поиску</h3><p>Определив ранжир распада, вы можете применить его во время поиска, передав параметр <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,

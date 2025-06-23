@@ -21,8 +21,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TEI Ranker는 의미론적 재랭킹을 통해 검색 관련성을 향상시키기 위해 Hugging Face의 <a href="/docs/ko/tei-ranker.md">텍스트 임베딩 추론(TEI)</a> 서비스를 활용합니다. 이는 기존의 벡터 유사도를 뛰어넘는 검색 결과 순서에 대한 고급 접근 방식을 나타냅니다.</p>
-<p><a href="/docs/ko/vllm-ranker.md">vLLM Ranker와</a> 비교했을 때, TEI Ranker는 허깅 페이스의 에코시스템 및 사전 학습된 재랭크 모델과의 간단한 통합을 제공하므로 배포 및 유지 관리의 용이성이 우선시되는 애플리케이션에 이상적입니다.</p>
+    </button></h1><p>TEI Ranker는 의미론적 재랭킹을 통해 검색 관련성을 향상시키기 위해 Hugging Face의 <a href="/docs/ko/v2.6.x/tei-ranker.md">텍스트 임베딩 추론(TEI)</a> 서비스를 활용합니다. 이는 기존의 벡터 유사도를 뛰어넘는 검색 결과 순서에 대한 고급 접근 방식을 나타냅니다.</p>
+<p><a href="/docs/ko/v2.6.x/vllm-ranker.md">vLLM Ranker와</a> 비교했을 때, TEI Ranker는 허깅 페이스의 에코시스템 및 사전 학습된 재랭크 모델과의 간단한 통합을 제공하므로 배포 및 유지 관리의 용이성이 우선시되는 애플리케이션에 이상적입니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,11 +76,41 @@ tei_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,                 <span class="hljs-comment"># Specifies TEI as the service provider</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text for relevance evaluation</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># Your TEI service URL</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>                     <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;truncate&quot;</span>: <span class="hljs-literal">True</span>,                <span class="hljs-comment"># Optional: Truncate the inputs that are longer than the maximum supported size</span>
+        <span class="hljs-string">&quot;truncation_direction&quot;</span>: <span class="hljs-string">&quot;Right&quot;</span>,    <span class="hljs-comment"># Optional: Direction to truncate the inputs</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">TEI 랭커 관련 파라미터</h3><p>다음 매개 변수는 TEI 랭커에 특정한 매개 변수입니다:</p>
+<table>
+   <tr>
+     <th><p>파라미터</p></th>
+     <th><p>필수?</p></th>
+     <th><p>설명</p></th>
+     <th><p>값/예시</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncate</code></p></td>
+     <td><p>No</p></td>
+     <td><p>최대 시퀀스 길이를 초과하는 입력을 잘라낼지 여부입니다. <code translate="no">False</code> 인 경우 긴 입력은 오류를 발생시킵니다.</p></td>
+     <td><p><code translate="no">True</code> 또는 <code translate="no">False</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncation_direction</code></p></td>
+     <td><p>아니요</p></td>
+     <td><p>입력이 너무 길 때 잘라낼 방향입니다:</p>
+<ul>
+<li><p><code translate="no">"Right"</code> (기본값)입니다:  지원되는 최대 크기가 일치할 때까지 토큰이 시퀀스 끝에서 제거됩니다.</p></li>
+<li><p><code translate="no">"Left"</code>: 토큰이 시퀀스의 시작부터 제거됩니다.</p></li>
+</ul></td>
+     <td><p><code translate="no">"Right"</code> 또는 <code translate="no">"Left"</code></p></td>
+   </tr>
+</table>
+<div class="alert note">
+<p>모든 모델 랭커에서 공유되는 일반 파라미터(예: <code translate="no">provider</code>, <code translate="no">queries</code>)는 <a href="/docs/ko/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하세요.</p>
+</div>
+<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,7 +127,7 @@ tei_ranker = Function(
       </svg>
     </button></h2><p>표준 벡터 검색에 TEI 랭커를 적용하려면 다음과 같이 하세요:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
-results = milvus_client.search(
+results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],  <span class="hljs-comment"># Search queries</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
@@ -142,7 +172,7 @@ sparse_search = AnnSearchRequest(
 )
 
 <span class="hljs-comment"># Execute hybrid search with vLLM reranking</span>
-hybrid_results = milvus_client.hybrid_search(
+hybrid_results = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                        <span class="hljs-comment"># Apply tei reranking to combined results</span></span>

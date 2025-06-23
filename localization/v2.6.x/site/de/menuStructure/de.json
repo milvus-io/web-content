@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "Lagerung/Computing",
-            "id": "four_layers.md",
+            "label": "Hauptkomponenten",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Hauptkomponenten",
-            "id": "main_components.md",
+            "label": "Streaming-Dienst",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -1383,25 +1383,6 @@
             "label": "Skalenabhängigkeiten",
             "id": "scale-dependencies.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Upgrade",
-        "id": "upgrade_milvus",
-        "order": 7,
-        "children": [
-          {
-            "label": "Milvus-Cluster aufrüsten",
-            "id": "upgrade_milvus_cluster-operator.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Upgrade Milvus Standalone",
-            "id": "upgrade_milvus_standalone-operator.md",
-            "order": 1,
             "children": []
           }
         ]

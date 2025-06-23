@@ -34,23 +34,28 @@ title: Pengolahan Data
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat menentukan sejumlah pecahan untuk setiap koleksi di Milvus, setiap pecahan berhubungan dengan sebuah saluran virtual<em>(vchannel</em>)<em>.</em> Seperti yang ditunjukkan pada gambar berikut, Milvus memberikan setiap vchannel pada log broker sebuah saluran fisik<em>(pchannel</em>). Setiap permintaan sisipkan/hapus yang masuk dirutekan ke shard berdasarkan nilai hash dari kunci utama.</p>
-<p>Validasi permintaan DML diteruskan ke proxy karena Milvus tidak memiliki transaksi yang rumit. Proxy akan meminta timestamp untuk setiap permintaan insert/delete dari TSO (Timestamp Oracle), yang merupakan modul waktu yang berada di bawah koordinator root. Dengan cap waktu yang lebih lama ditimpa oleh cap waktu yang lebih baru, cap waktu digunakan untuk menentukan urutan permintaan data yang sedang diproses. Proxy mengambil informasi dalam batch dari koordinator data termasuk segmen entitas dan kunci utama untuk meningkatkan throughput secara keseluruhan dan menghindari pembebanan yang berlebihan pada simpul pusat.</p>
+    </button></h2><p>Anda dapat memilih berapa banyak pecahan yang digunakan oleh sebuah koleksi di Milvus-setiap pecahan dipetakan ke sebuah saluran virtual<em>(vchannel)</em>. Seperti yang diilustrasikan di bawah ini, Milvus kemudian menetapkan setiap <em>vchannel</em> ke saluran fisik<em>(pchannel</em>), dan setiap <em>pchannel</em> terikat ke Streaming Node tertentu.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
+   </span> <span class="img-wrapper"> <span>VChannel PChannel dan StreamingNode</span> </span></p>
+<p>Setelah verifikasi data, proxy akan membagi pesan tertulis menjadi berbagai paket data pecahan sesuai dengan aturan perutean pecahan yang ditentukan.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Saluran 1</span> </span></p>
-<p>Operasi DML (bahasa manipulasi data) dan operasi DDL (bahasa definisi data) ditulis ke urutan log, tetapi operasi DDL hanya diberi satu saluran karena frekuensi kemunculannya yang rendah.</p>
+<p>Kemudian data tertulis dari satu pecahan<em>(vchannel</em>) dikirim ke Streaming Node <em>pchannel</em> yang sesuai.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
-   </span> <span class="img-wrapper"> <span>Saluran 2</span> </span></p>
-<p><em>Vchannels</em> dipertahankan di node broker log yang mendasarinya. Setiap saluran secara fisik tidak dapat dibagi dan tersedia untuk semua tetapi hanya satu node. Ketika tingkat konsumsi data mencapai kemacetan, pertimbangkan dua hal: Apakah node log broker kelebihan beban dan perlu diskalakan, dan apakah ada pecahan yang cukup untuk memastikan keseimbangan beban untuk setiap node.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
-   </span> <span class="img-wrapper"> <span>Tulis urutan log</span> </span></p>
-<p>Diagram di atas merangkum empat komponen yang terlibat dalam proses penulisan urutan log: proksi, log broker, simpul data, dan penyimpanan objek. Proses ini melibatkan empat tugas: validasi permintaan DML, publikasi-langganan urutan log, konversi dari log streaming ke snapshot log, dan persistensi snapshot log. Keempat tugas tersebut dipisahkan satu sama lain untuk memastikan setiap tugas ditangani oleh jenis node yang sesuai. Node dengan tipe yang sama dibuat sama dan dapat diskalakan secara elastis dan independen untuk mengakomodasi berbagai beban data, khususnya data streaming yang sangat besar dan sangat berfluktuasi.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
+   </span> <span class="img-wrapper"> <span>aliran tulis</span> </span></p>
+<p>Streaming Node memberikan Timestamp Oracle (TSO) ke setiap paket data untuk menetapkan urutan total operasi. Ini melakukan pemeriksaan konsistensi pada payload sebelum menuliskannya ke dalam write-ahead log (WAL) yang mendasarinya. Setelah data disimpan dalam jangka waktu yang lama di WAL, data tersebut dijamin tidak akan hilang-bahkan jika terjadi kerusakan, Streaming Node dapat memutar ulang WAL untuk memulihkan semua operasi yang tertunda.</p>
+<p>Sementara itu, StreamingNode juga secara asinkron memotong entri WAL yang telah dikomitmenkan ke dalam segmen-segmen terpisah. Ada dua jenis segmen:</p>
+<ul>
+<li><strong>Segmen yang sedang tumbuh</strong>: semua data yang belum dimasukkan ke dalam penyimpanan objek.</li>
+<li><strong>Segmen tertutup</strong>: semua data telah dimasukkan ke dalam penyimpanan objek, data segmen tertutup tidak dapat diubah.</li>
+</ul>
+<p>Transisi dari segmen yang sedang tumbuh menjadi segmen tertutup disebut flush. Streaming Node memicu flush segera setelah ia menelan dan menulis semua entri WAL yang tersedia untuk segmen itu - yaitu, ketika tidak ada lagi catatan yang tertunda dalam log tulis-depan yang mendasarinya - pada saat itu segmen tersebut diselesaikan dan dioptimalkan untuk dibaca.</p>
 <h2 id="Index-building" class="common-anchor-header">Pembuatan indeks<button data-href="#Index-building" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,12 +71,12 @@ title: Pengolahan Data
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pembangunan indeks dilakukan oleh simpul indeks. Untuk menghindari pembangunan indeks yang sering untuk pembaruan data, koleksi di Milvus dibagi lebih lanjut menjadi beberapa segmen, masing-masing dengan indeksnya sendiri.</p>
+    </button></h2><p>Pembuatan indeks dilakukan oleh simpul data. Untuk menghindari pembuatan indeks yang sering untuk pembaruan data, koleksi di Milvus dibagi lebih lanjut menjadi beberapa segmen, masing-masing dengan indeksnya sendiri.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Pembuatan indeks</span> </span></p>
-<p>Milvus mendukung pembangunan indeks untuk setiap bidang vektor, bidang skalar, dan bidang primer. Baik input maupun output dari pembangunan indeks berhubungan dengan penyimpanan objek: Node indeks memuat snapshot log untuk diindeks dari sebuah segmen (yang ada di penyimpanan objek) ke memori, mendeserialisasi data dan metadata yang sesuai untuk membangun indeks, menserialisasi indeks ketika pembangunan indeks selesai, dan menuliskannya kembali ke penyimpanan objek.</p>
+<p>Milvus mendukung pembangunan indeks untuk setiap bidang vektor, bidang skalar, dan bidang primer. Baik input maupun output dari pembangunan indeks berhubungan dengan penyimpanan objek: Simpul data memuat snapshot log untuk diindeks dari sebuah segmen (yang ada di penyimpanan objek) ke memori, mendeserialisasi data dan metadata yang sesuai untuk membangun indeks, menserialisasi indeks ketika pembangunan indeks selesai, dan menuliskannya kembali ke penyimpanan objek.</p>
 <p>Pembuatan indeks terutama melibatkan operasi vektor dan matriks dan karenanya bersifat komputasi dan memori intensif. Vektor tidak dapat diindeks secara efisien dengan indeks berbasis pohon tradisional karena sifatnya yang berdimensi tinggi, tetapi dapat diindeks dengan teknik yang lebih matang dalam hal ini, seperti indeks berbasis kluster atau grafik. Apa pun jenisnya, membangun indeks melibatkan perhitungan berulang yang sangat besar untuk vektor berskala besar, seperti Kmeans atau graph traverse.</p>
 <p>Tidak seperti pengindeksan untuk data skalar, membangun indeks vektor harus memanfaatkan sepenuhnya akselerasi SIMD (single instruction, multiple data). Milvus memiliki dukungan bawaan untuk set instruksi SIMD, misalnya, SSE, AVX2, dan AVX512. Mengingat "cegukan" dan sifat intensif sumber daya dari pembangunan indeks vektor, elastisitas menjadi sangat penting bagi Milvus dalam hal ekonomi. Rilis Milvus di masa depan akan mengeksplorasi lebih lanjut dalam komputasi heterogen dan komputasi tanpa server untuk menurunkan biaya terkait.</p>
 <p>Selain itu, Milvus juga mendukung pemfilteran skalar dan kueri bidang utama. Milvus memiliki indeks bawaan untuk meningkatkan efisiensi kueri, misalnya indeks filter Bloom, indeks hash, indeks berbasis pohon, dan indeks terbalik, dan berencana untuk memperkenalkan lebih banyak indeks eksternal, misalnya indeks bitmap dan indeks kasar.</p>
@@ -95,13 +100,16 @@ title: Pengolahan Data
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Permintaan data</span> </span></p>
-<p>Koleksi di Milvus dibagi menjadi beberapa segmen, dan simpul kueri memuat indeks per segmen. Ketika permintaan pencarian tiba, permintaan tersebut disiarkan ke semua node kueri untuk pencarian bersamaan. Setiap node kemudian memangkas segmen lokal, mencari vektor yang memenuhi kriteria, dan mengurangi dan mengembalikan hasil pencarian.</p>
-<p>Node kueri tidak bergantung satu sama lain dalam kueri data. Setiap node hanya bertanggung jawab untuk dua tugas: Memuat atau melepaskan segmen mengikuti instruksi dari query coord; melakukan pencarian di dalam segmen lokal. Dan proxy bertanggung jawab untuk mengurangi hasil pencarian dari setiap node kueri dan mengembalikan hasil akhir ke klien.</p>
+<p>Sebuah koleksi di Milvus dibagi menjadi beberapa segmen; Streaming Node memuat segmen yang sedang berkembang dan menyimpan data real-time, sementara Query Node memuat segmen yang disegel.</p>
+<p>Ketika permintaan kueri/pencarian tiba, proksi menyiarkan permintaan tersebut ke semua Streaming Node yang bertanggung jawab atas pecahan terkait untuk pencarian bersamaan.</p>
+<p>Ketika permintaan kueri tiba, proxy secara bersamaan meminta Streaming Node yang menyimpan pecahan terkait untuk menjalankan pencarian.</p>
+<p>Setiap Streaming Node membuat rencana kueri, mencari data lokal yang berkembang, dan secara bersamaan menghubungi Query Node jarak jauh untuk mengambil hasil historis, kemudian menggabungkannya menjadi satu hasil pecahan.</p>
+<p>Terakhir, proxy mengumpulkan semua hasil pecahan, menggabungkannya ke dalam hasil akhir, dan mengembalikannya ke klien.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
     Serah terima </span></p>
-<p>Ada dua jenis segmen, segmen yang berkembang (untuk data tambahan), dan segmen tertutup (untuk data historis). Node kueri berlangganan ke vchannel untuk menerima pembaruan terbaru (data tambahan) sebagai segmen yang berkembang. Ketika segmen yang berkembang mencapai ambang batas yang telah ditentukan, koordinat data menyegelnya dan pembangunan indeks dimulai. Kemudian operasi <em>handoff</em> yang diprakarsai oleh query coord mengubah data tambahan menjadi data historis. Query coord akan mendistribusikan segmen yang disegel secara merata di antara semua node kueri sesuai dengan penggunaan memori, overhead CPU, dan nomor segmen.</p>
+<p>Ketika segmen yang berkembang pada Streaming Node disiram menjadi segmen tertutup - atau ketika Node Data menyelesaikan pemadatan - Koordinator memulai operasi handoff untuk mengubah data yang berkembang menjadi data historis. Koordinator kemudian mendistribusikan segmen tersegel secara merata ke semua Query Node, menyeimbangkan penggunaan memori, overhead CPU, dan jumlah segmen, dan melepaskan segmen yang berlebihan.</p>
 <h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,5 +128,5 @@ title: Pengolahan Data
     </button></h2><ul>
 <li>Pelajari tentang cara <a href="https://milvus.io/blog/deep-dive-5-real-time-query.md">menggunakan basis data vektor Milvus untuk kueri waktu nyata</a>.</li>
 <li>Mempelajari tentang <a href="https://milvus.io/blog/deep-dive-4-data-insertion-and-data-persistence.md">penyisipan data dan persistensi data di Milvus</a>.</li>
-<li>Mempelajari bagaimana <a href="https://milvus.io/blog/deep-dive-3-data-processing.md">data diproses dalam Milvus</a>.</li>
+<li>Mempelajari bagaimana <a href="https://milvus.io/blog/deep-dive-3-data-processing.md">data diproses di Milvus</a>.</li>
 </ul>

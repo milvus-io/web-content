@@ -77,7 +77,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>Menggunakan Vektor Padat</span> </span></p>
 <div class="alert note">
-<p>Selain vektor padat, Milvus juga mendukung vektor jarang dan vektor biner. Vektor jarang cocok untuk pencocokan yang tepat berdasarkan istilah tertentu, seperti pencarian kata kunci dan pencocokan istilah, sedangkan vektor biner biasanya digunakan untuk menangani data binari secara efisien, seperti pencocokan pola gambar dan aplikasi hashing tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/binary-vector.md">Vektor Biner</a> dan <a href="/docs/id/sparse_vector.md">Vektor</a> <a href="/docs/id/binary-vector.md">Jarang</a>.</p>
+<p>Selain vektor padat, Milvus juga mendukung vektor jarang dan vektor biner. Vektor jarang cocok untuk pencocokan yang tepat berdasarkan istilah tertentu, seperti pencarian kata kunci dan pencocokan istilah, sedangkan vektor biner biasanya digunakan untuk menangani data binari secara efisien, seperti pencocokan pola gambar dan aplikasi hashing tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/binary-vector.md">Vektor Biner</a> dan <a href="/docs/id/v2.6.x/sparse_vector.md">Vektor</a> <a href="/docs/id/v2.6.x/binary-vector.md">Jarang</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Menggunakan vektor padat<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -231,10 +231,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Menyimpan vektor yang masing-masing elemennya dalam setiap dimensi adalah bilangan bulat 8-bit (int8), dengan setiap elemen berkisar antara -128 hingga 127. Dirancang untuk model pembelajaran mendalam yang terkuantisasi (misalnya, ResNet, EfficientNet), INT8_VECTOR mengurangi ukuran model dan mempercepat kesimpulan dengan kehilangan presisi minimal.</p></td>
+     <td><p>Menyimpan vektor yang masing-masing elemennya dalam setiap dimensi adalah bilangan bulat 8-bit (int8), dengan setiap elemen berkisar antara -128 hingga 127. Dirancang untuk model pembelajaran mendalam yang terkuantisasi (misalnya, ResNet, EfficientNet), INT8_VECTOR mengurangi ukuran model dan mempercepat kesimpulan dengan kehilangan presisi minimal.<br><strong>Catatan</strong>: Jenis vektor ini hanya didukung untuk indeks HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Tetapkan parameter indeks untuk bidang vektor</h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor</h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -280,7 +280,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada contoh di atas, sebuah indeks bernama <code translate="no">dense_vector_index</code> dibuat untuk bidang <code translate="no">dense_vector</code> menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. <code translate="no">metric_type</code> disetel ke <code translate="no">IP</code>, yang menunjukkan bahwa inner product akan digunakan sebagai metrik jarak.</p>
 <p>Milvus menyediakan berbagai jenis indeks untuk pengalaman pencarian vektor yang lebih baik. AUTOINDEX adalah jenis indeks khusus yang dirancang untuk memperlancar kurva pembelajaran pencarian vektor. Ada banyak jenis indeks yang tersedia untuk Anda pilih. Untuk detailnya, lihat xxx.</p>
-<p>Milvus mendukung jenis metrik lainnya. Untuk informasi lebih lanjut, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p>
+<p>Milvus mendukung jenis metrik lainnya. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/metric.md">Jenis Metrik</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Membuat koleksi</h3><p>Setelah pengaturan vektor padat dan param indeks selesai, Anda dapat membuat koleksi yang berisi vektor padat. Contoh di bawah ini menggunakan metode <code translate="no">create_collection</code> untuk membuat koleksi bernama <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -496,4 +496,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/single-vector-search.md">Pencarian ANN Dasar</a>.</p>
+<p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian ANN Dasar</a>.</p>

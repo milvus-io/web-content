@@ -79,7 +79,7 @@ beta: Milvus 2.6.x
 <li><p>각 감쇠 순위자는 원시 숫자 값을 0-1 사이의 정규화된 관련성 점수로 변환합니다.</p></li>
 <li><p>감쇠 점수는 이상적인 지점과의 '거리'를 기준으로 항목이 얼마나 관련성이 있는지를 나타냅니다.</p></li>
 </ul>
-<p>구체적인 계산 공식은 감쇠 랭커 유형에 따라 다릅니다. 감쇠 점수를 계산하는 방법에 대한 자세한 내용은 <a href="/docs/ko/gaussian-decay.md#Formula">가우스 감쇠</a>, <a href="/docs/ko/exponential-decay.md#Formula">지수 감쇠</a>, <a href="/docs/ko/linear-decay.md#Formula">선형 감쇠</a> 전용 페이지를 참조하세요.</p>
+<p>구체적인 계산 공식은 감쇠 랭커 유형에 따라 다릅니다. 감쇠 점수를 계산하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/gaussian-decay.md#Formula">가우스 감쇠</a>, <a href="/docs/ko/v2.6.x/exponential-decay.md#Formula">지수 감쇠</a>, <a href="/docs/ko/v2.6.x/linear-decay.md#Formula">선형 감쇠</a> 전용 페이지를 참조하세요.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">3단계: 최종 점수 계산</h3><p>마지막으로 Milvus는 정규화된 유사도 점수와 감쇠 점수를 결합하여 최종 순위 점수를 산출합니다:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -89,7 +89,7 @@ beta: Milvus 2.6.x
 <p>예를 들어, 하이브리드 검색에서 연구 논문이 벡터 유사성에서 0.82점, BM25 기반 텍스트 검색에서 0.91점을 받은 경우, Milvus는 0.91점을 기본 유사성 점수로 사용한 후 감쇠 계수를 적용합니다.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">실제 감쇠 순위</h3><p>시간 기반 감쇠를 사용하여 <strong>'AI 연구 논문'을</strong> 검색하는 실제 시나리오에서 감쇠 순위가 어떻게 적용되는지 살펴봅시다:</p>
 <div class="alert note">
-<p>이 예에서 감쇠 점수는 시간이 지남에 따라 관련성이 감소하는 방식을 반영하며, 최신 논문은 1.0에 가까운 점수를 받고 오래된 논문은 더 낮은 점수를 받습니다. 이 값은 특정 감쇠 순위자를 사용하여 계산됩니다. 자세한 내용은 <a href="/docs/ko/decay-ranker-overview.md#Choose-the-right-decay-ranker">올바른 감쇠 순위 선택하기를</a> 참조하세요.</p>
+<p>이 예에서 감쇠 점수는 시간이 지남에 따라 관련성이 감소하는 방식을 반영하며, 최신 논문은 1.0에 가까운 점수를 받고 오래된 논문은 더 낮은 점수를 받습니다. 이 값은 특정 감쇠 순위자를 사용하여 계산됩니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">올바른 감쇠 순위 선택하기를</a> 참조하세요.</p>
 </div>
 <table>
    <tr>
@@ -138,7 +138,7 @@ beta: Milvus 2.6.x
      <td>4</td>
    </tr>
 </table>
-<p>감쇠 재순위를 적용하지 않으면 순수 벡터 유사도(0.92)를 기준으로 문서 B가 가장 높은 순위를 차지합니다. 그러나 감쇠 재랭킹을 적용하면:</p>
+<p>감쇠 재순위를 적용하지 않으면 순수 벡터 유사도(0.92)를 기준으로 논문 B가 가장 높은 순위를 차지합니다. 그러나 감쇠 재랭킹을 적용하면:</p>
 <ul>
 <li><p>C 문서가 매우 최근(어제 게시됨)이기 때문에 중간 정도의 유사성에도 불구하고 1위로 올라갑니다.</p></li>
 <li><p>논문 B는 상대적으로 오래되었기 때문에 우수한 유사성에도 불구하고 3위로 떨어집니다.</p></li>
@@ -200,9 +200,9 @@ beta: Milvus 2.6.x
 </table>
 <p>각 감쇠 랭커가 점수를 계산하는 방법과 구체적인 감쇠 패턴에 대한 자세한 내용은 전용 문서를 참조하세요:</p>
 <ul>
-<li><p><a href="/docs/ko/gaussian-decay.md">가우스 감쇠</a></p></li>
-<li><p><a href="/docs/ko/exponential-decay.md">지수 감쇠</a></p></li>
-<li><p><a href="/docs/ko/exponential-decay.md">지수 감쇠</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/gaussian-decay.md">가우스 감쇠</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/exponential-decay.md">지수 감쇠</a></p></li>
+<li><p><a href="/docs/ko/v2.6.x/exponential-decay.md">지수 감쇠</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">구현 예시<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +221,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>디케이 랭커는 Milvus의 표준 벡터 검색과 하이브리드 검색 작업 모두에 적용할 수 있습니다. 다음은 이 기능을 구현하기 위한 주요 코드 스니펫입니다.</p>
 <div class="alert note">
-<p>감쇠 함수를 사용하기 전에 먼저 감쇠 계산에 사용할 적절한 숫자 필드(타임스탬프, 거리 등)가 포함된 컬렉션을 만들어야 합니다. 컬렉션 설정, 스키마 정의 및 데이터 삽입을 포함한 전체 작업 예제는 <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">튜토리얼을</a> 참조하세요: <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">밀버스에서 시간 기반 랭킹 구현하기를</a> 참조하세요.</p>
+<p>감쇠 함수를 사용하기 전에 먼저 감쇠 계산에 사용할 적절한 숫자 필드(타임스탬프, 거리 등)가 포함된 컬렉션을 만들어야 합니다. 컬렉션 설정, 스키마 정의 및 데이터 삽입을 포함한 전체 작업 예제는 <a href="/docs/ko/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">튜토리얼을</a> 참조하세요: <a href="/docs/ko/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">밀버스에서 시간 기반 랭킹 구현하기를</a> 참조하세요.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">감쇠 순위 생성하기</h3><p>감쇠 순위를 구현하려면 먼저 적절한 구성으로 <code translate="no">Function</code> 객체를 정의합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -234,7 +234,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -251,7 +251,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">name</code></p></td>
      <td><p>예</p></td>
-     <td><p>검색을 실행할 때 사용되는 함수의 식별자입니다. 사용 사례와 관련된 설명이 포함된 이름을 선택하세요.</p></td>
+     <td><p>검색을 실행할 때 사용되는 함수의 식별자입니다. 사용 사례와 관련된 설명적인 이름을 선택하세요.</p></td>
      <td><p><code translate="no">"time_decay"</code></p></td>
    </tr>
    <tr>
@@ -276,7 +276,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>적용할 수학적 감쇠 순위를 지정합니다. 관련성 감소의 곡선 모양을 결정합니다. 적절한 기능을 선택하는 방법에 대한 지침은 <a href="/docs/ko/decay-ranker-overview.md#Choose-the-right-decay-ranker">올바른 감쇠 순위자 선택</a> 섹션을 참조하세요.</p></td>
+     <td><p>적용할 수학적 감쇠 순위를 지정합니다. 관련성 감소의 곡선 모양을 결정합니다. 적절한 기능을 선택하는 방법에 대한 지침은 <a href="/docs/ko/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">올바른 감쇠 순위자 선택</a> 섹션을 참조하세요.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, 또는 <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>

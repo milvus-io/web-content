@@ -45,8 +45,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomia do desenho do esquema</span> </span></p>
-<p>A conceção do modelo de dados de um sistema de pesquisa envolve a análise das necessidades comerciais e a abstração da informação num modelo de dados expresso em esquema. Por exemplo, a pesquisa de um pedaço de texto deve ser "indexada" convertendo a cadeia literal num vetor através de "incorporação" e permitindo a pesquisa vetorial. Para além deste requisito essencial, pode ser necessário armazenar outras propriedades, como o carimbo temporal da publicação e o autor. Estes metadados permitem que as pesquisas semânticas sejam refinadas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um determinado autor. Também pode obter estes escalares com o texto principal para apresentar o resultado da pesquisa na aplicação. A cada um deles deve ser atribuído um identificador único para organizar estas partes de texto, expresso como um número inteiro ou uma cadeia de caracteres. Esses elementos são essenciais para obter uma lógica de pesquisa sofisticada.</p>
-<p>Consulte a secção <a href="/docs/pt/schema-hands-on.md">Prática de conceção de esquemas</a> para saber como criar um esquema bem concebido.</p>
+<p>A conceção do modelo de dados de um sistema de pesquisa envolve a análise das necessidades comerciais e a abstração da informação num modelo de dados expresso em esquema. Por exemplo, a pesquisa de um pedaço de texto deve ser "indexada" convertendo a cadeia literal num vetor através da "incorporação" e permitindo a pesquisa vetorial. Para além deste requisito essencial, pode ser necessário armazenar outras propriedades, como o carimbo temporal da publicação e o autor. Estes metadados permitem que as pesquisas semânticas sejam refinadas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um determinado autor. Também pode obter estes escalares com o texto principal para apresentar o resultado da pesquisa na aplicação. A cada um deles deve ser atribuído um identificador único para organizar estas partes de texto, expresso como um número inteiro ou uma cadeia de caracteres. Esses elementos são essenciais para obter uma lógica de pesquisa sofisticada.</p>
+<p>Consulte a secção <a href="/docs/pt/v2.6.x/schema-hands-on.md">Prática de conceção de esquemas</a> para saber como criar um esquema bem concebido.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Criar esquema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,7 +148,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p>Ao adicionar um campo, você pode esclarecer explicitamente o campo como o campo primário, definindo sua propriedade <code translate="no">is_primary</code> como <code translate="no">True</code>. Um campo primário aceita valores <strong>Int64</strong> por padrão. Neste caso, o valor do campo primário deve ser um número inteiro semelhante a <code translate="no">12345</code>. Se optar por utilizar valores <strong>VarChar</strong> no campo primário, o valor deve ser uma cadeia de caracteres semelhante a <code translate="no">my_entity_1234</code>.</p>
 <p>Também é possível definir as propriedades <code translate="no">autoId</code> como <code translate="no">True</code> para fazer com que o Zilliz Cloud aloque automaticamente os valores do campo primário nas inserções de dados.</p>
-<p>Para obter detalhes, consulte <a href="/docs/pt/primary-field.md">Campo primário e AutoId</a>.</p>
+<p>Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/primary-field.md">Campo primário e AutoId</a>.</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">Adicionar campos vetoriais<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -212,10 +212,12 @@ schema.addField(AddFieldReq.builder()
 <p>Um campo vetorial deste tipo contém uma lista de números flutuantes de meia-precisão de 16 bits e aplica-se normalmente a cenários de aprendizagem profunda com restrições de memória ou largura de banda ou de computação baseada em GPU.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>Um campo vetorial deste tipo contém uma lista de números de vírgula flutuante de 16 bits com precisão reduzida, mas com o mesmo intervalo de expoentes que o Float32. Este tipo de dados é normalmente utilizado em cenários de aprendizagem profunda, uma vez que reduz a utilização de memória sem afetar significativamente a precisão.</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>Um campo de vetor deste tipo armazena vectores compostos por números inteiros assinados de 8 bits (int8), com cada componente a variar entre -128 e 127. Adaptado para arquiteturas de aprendizado profundo quantizadas - como ResNet e EfficientNet - ele reduz substancialmente o tamanho do modelo e aumenta a velocidade de inferência, ao mesmo tempo em que incorre em uma perda mínima de precisão. <strong>Nota</strong>: Este tipo de vetor é suportado apenas para índices HNSW.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
-<p>Um campo vetorial deste tipo contém uma lista de 0s e 1s. Servem como caraterísticas compactas para representar dados em cenários de processamento de imagem e recuperação de informação.</p></li>
+<p>Um campo de vetor deste tipo contém uma lista de 0s e 1s. Servem como caraterísticas compactas para representar dados em cenários de processamento de imagem e recuperação de informação.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>Um campo vetorial deste tipo contém uma lista de números diferentes de zero e os seus números de sequência para representar embeddings vectoriais esparsos.</p></li>
+<p>Um campo vetorial deste tipo contém uma lista de números não nulos e os seus números de sequência para representar embeddings vectoriais esparsos.</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields" class="common-anchor-header">Adicionar campos escalares<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -233,7 +235,7 @@ schema.addField(AddFieldReq.builder()
         ></path>
       </svg>
     </button></h2><p>Em casos comuns, é possível utilizar campos escalares para armazenar os metadados dos embeddings vectoriais armazenados no Milvus e realizar pesquisas ANN com filtragem de metadados para melhorar a correção dos resultados da pesquisa. O Zilliz Cloud suporta múltiplos tipos de campos escalares, incluindo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong> e <strong>JSON</strong>.</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">Adicionar campos String</h3><p>No Milvus, é possível usar campos VarChar para armazenar strings. Para saber mais sobre o campo VarChar, consulte <a href="/docs/pt/string.md">Campo de cadeia de caracteres</a>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">Adicionar campos String</h3><p>No Milvus, é possível usar campos VarChar para armazenar strings. Para saber mais sobre o campo VarChar, consulte <a href="/docs/pt/v2.6.x/string.md">Campo de cadeia de caracteres</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -276,7 +278,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Number-Fields" class="common-anchor-header">Adicionar campos numéricos</h3><p>Os tipos de números suportados pelo Milvus são <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, e <code translate="no">Double</code>. Para mais informações sobre os campos de números, consulte <a href="/docs/pt/number.md">Campo de números</a>.</p>
+<h3 id="Add-Number-Fields" class="common-anchor-header">Adicionar campos numéricos</h3><p>Os tipos de números que o Milvus suporta são <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, e <code translate="no">Double</code>. Para mais informações sobre os campos de números, consulte <a href="/docs/pt/v2.6.x/number.md">Campo de números</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -351,7 +353,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-JSON-fields" class="common-anchor-header">Adicionar campos JSON</h3><p>Um campo JSON geralmente armazena dados JSON semi-estruturados. Para saber mais sobre os campos JSON, consulte <a href="/docs/pt/use-json-fields.md">Campo JSON</a>.</p>
+<h3 id="Add-JSON-fields" class="common-anchor-header">Adicionar campos JSON</h3><p>Um campo JSON geralmente armazena dados JSON semi-estruturados. Para saber mais sobre os campos JSON, consulte <a href="/docs/pt/v2.6.x/use-json-fields.md">Campo JSON</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -390,7 +392,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">Adicionar campos de matriz</h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos de um campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">Adicionar campos de matriz</h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos num campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/v2.6.x/array_data_type.md">Campo de matriz</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(

@@ -124,8 +124,8 @@ beta: Milvus 2.6.x
 </table>
 <p>有關各模型服務實施的詳細資訊，請參閱專用說明文件：</p>
 <ul>
-<li><p><a href="/docs/zh-hant/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/zh-hant/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/tei-ranker.md">TEI Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">實施<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -197,15 +197,21 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>是</p></td>
+     <td><p>包含基於模型的重排函數設定的辭典。可用參數 (鍵) 依提供者 (<code translate="no">tei</code> 或<code translate="no">vllm</code>) 而異。詳情請參閱<a href="/docs/zh-hant/v2.6.x/vllm-ranker.md">vLLM Ranker</a>或<a href="/docs/zh-hant/v2.6.x/tei-ranker.md">TEI Ranker</a>。</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>是</p></td>
-     <td><p>必須設定為<code translate="no">"model"</code> 才能啟用模型重排。</p></td>
+     <td><p>必須設定為<code translate="no">"model"</code> 才能啟用模型重排功能。</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>是</p></td>
-     <td><p>用於重排的模型服務提供者。</p></td>
+     <td><p>用於重新排序的模型服務提供者。</p></td>
      <td><p><code translate="no">"tei"</code> 或<code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>

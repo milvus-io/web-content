@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: تعرف على كيفية ترقية Milvus مستقل مع Docker Compose.
 title: ترقية Milvus Standalone باستخدام Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ar/upgrade_milvus_standalone-helm.md" class=''>مشغل</a><a href="/docs/ar/upgrade_milvus_standalone-operator.md" class=''>MilvusHelmDocker</a><a href="/docs/ar/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-helm.md" class=''>مشغل</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>MilvusHelmDocker</a><a href="/docs/ar/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">ترقية Milvus Standalone باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,7 +24,7 @@ title: ترقية Milvus Standalone باستخدام Docker Compose
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية ترقية Milvus الخاص بك باستخدام Docker Compose.</p>
-<p>في الحالات العادية، يمكنك ترقية <a href="#Upgrade-Milvus-by-changing-its-image">Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار 2.1.x إلى الإصدار 2.5.12.</p>
+<p>في الحالات العادية، يمكنك ترقية <a href="#Upgrade-Milvus-by-changing-its-image">Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار 2.1.x إلى الإصدار 2.6.0-rc1.</p>
 <div class="alter note">
 <p>نظرًا لمخاوف أمنية، يقوم Milvus بترقية MinIO الخاص به إلى RELEASE.2023-03-20T20-16-18Z مع إصدار الإصدار 2.2.5. قبل إجراء أي ترقيات من إصدارات Milvus Standalone السابقة المثبتة باستخدام Docker Compose، يجب عليك إنشاء نشر MinIO أحادي العقدة أحادي القيادة وترحيل إعدادات MinIO الحالية والمحتوى إلى النشر الجديد. لمزيد من التفاصيل، راجع <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">هذا الدليل</a>.</p>
 </div>
@@ -49,7 +49,7 @@ title: ترقية Milvus Standalone باستخدام Docker Compose
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>قم بتشغيل الأوامر التالية لتنفيذ الترقية.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.12</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.0</span><span class="hljs-string">-rc1</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
@@ -122,11 +122,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>قد ترغب أيضاً في معرفة كيفية القيام بـ<ul>
-<li><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus</a></li>
+<li><a href="/docs/ar/v2.6.x/scaleout.md">توسيع نطاق مجموعة Milvus</a></li>
 </ul></li>
 <li>إذا كنت مستعدًا لنشر مجموعتك على السحابة:<ul>
-<li>تعرف على كيفية <a href="/docs/ar/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
-<li>تعلم كيفية <a href="/docs/ar/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
-<li>تعرف على كيفية <a href="/docs/ar/azure.md">نشر</a> مجموعة <a href="/docs/ar/azure.md">ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.6.x/eks.md">نشر Milvus على Amazon EKS باستخدام Terraform</a></li>
+<li>تعلم كيفية <a href="/docs/ar/v2.6.x/gcp.md">نشر مجموعة Milvus العنقودية على GCP باستخدام Kubernetes</a></li>
+<li>تعرف على كيفية <a href="/docs/ar/v2.6.x/azure.md">نشر</a> مجموعة <a href="/docs/ar/v2.6.x/azure.md">ميلفوس على مايكروسوفت أزور باستخدام Kubernetes</a></li>
 </ul></li>
 </ul>

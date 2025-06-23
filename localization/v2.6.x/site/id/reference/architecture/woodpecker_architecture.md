@@ -3,8 +3,8 @@ id: woodpecker_architecture.md
 title: Woodpecker
 summary: >-
   Woodpecker adalah sistem WAL cloud-native di Milvus 2.6. Dengan arsitektur
-  tanpa disk dan dua mode penerapan, sistem ini memberikan throughput yang
-  tinggi, biaya operasional yang rendah, dan skalabilitas tanpa batas pada
+  tanpa disk dan dua mode penyebaran, sistem ini memberikan throughput tinggi,
+  overhead operasional yang rendah, dan skalabilitas tanpa batas pada
   penyimpanan objek.
 ---
 <h1 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">
@@ -102,8 +102,8 @@ summary: >-
 <p>Hasilnya adalah lapisan WAL yang ramping dan kuat yang ideal untuk lingkungan produksi yang sangat penting di mana konsistensi, ketersediaan, dan pemulihan yang cepat sangat penting.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
-   </span> <span class="img-wrapper"> <span>penerapan mode memori woodpecker</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
+   </span> <span class="img-wrapper"> <span>penerapan mode kuorum pelatuk</span> </span></p>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Tolok ukur kinerja<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,90 +157,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Arsitektur cloud-native Woodpecker menyederhanakan penerapan, mengurangi pemeliharaan, dan meningkatkan keandalan.</p>
-<h3 id="Simplified-infrastructure-management" class="common-anchor-header">Manajemen infrastruktur yang disederhanakan</h3><ul>
-<li><strong>Tidak ada manajemen penyimpanan lokal:</strong> Menghilangkan kebutuhan untuk mengelola volume disk, RAID, atau kegagalan disk.</li>
-<li><strong>Mengurangi ketergantungan perangkat keras:</strong> Menghilangkan konfigurasi dan pemantauan perangkat keras; daya tahan dan ketersediaan ditangani oleh penyimpanan objek cloud.</li>
-<li><strong>Perencanaan kapasitas yang disederhanakan:</strong> Skala penyimpanan secara otomatis dengan penyimpanan objek cloud, sehingga tidak perlu lagi melakukan prakiraan secara manual.</li>
+    </button></h2><p>Arsitektur cloud-native Woodpecker memberikan keuntungan operasional yang signifikan:</p>
+<ul>
+<li>Tidak<strong>ada manajemen penyimpanan lokal</strong>: Menghilangkan manajemen volume disk, konfigurasi RAID, dan kegagalan perangkat keras</li>
+<li><strong>Penskalaan otomatis</strong>: Skala penyimpanan dengan penyimpanan objek cloud tanpa perencanaan kapasitas</li>
+<li><strong>Efisiensi biaya</strong>: Penyimpanan bayar sesuai penggunaan dengan tiering dan kompresi otomatis</li>
+<li><strong>Ketersediaan tinggi</strong>: Memanfaatkan daya tahan 11-sembilan dari penyedia layanan cloud dengan pemulihan yang cepat</li>
+<li><strong>Penerapan</strong> yang<strong>disederhanakan</strong>: Dua mode penerapan (MemoryBuffer/QuorumBuffer) sesuai dengan kebutuhan operasional yang berbeda</li>
+<li><strong>Ramah pengembang</strong>: Penyiapan lingkungan yang lebih cepat dan arsitektur yang konsisten di semua lingkungan</li>
 </ul>
-<h3 id="Simplified-deployment" class="common-anchor-header">Penerapan yang disederhanakan</h3><ul>
-<li><strong>Mode MemoryBuffer:</strong> Menggunakan sumber daya minimal dan terintegrasi dengan penyimpanan cloud, ideal untuk pengembangan dan produksi skala kecil.</li>
-<li><strong>Mode QuorumBuffer:</strong> Memberikan keandalan tingkat perusahaan tanpa kerumitan penyimpanan terdistribusi tradisional.</li>
-</ul>
-<h2 id="Cost-efficiency-and-resource-optimization" class="common-anchor-header">Efisiensi biaya dan optimalisasi sumber daya<button data-href="#Cost-efficiency-and-resource-optimization" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><strong>Penggunaan memori yang lebih rendah:</strong> Buffering yang efisien mengurangi kebutuhan memori dibandingkan dengan broker tradisional.</li>
-<li><strong>Penskalaan elastis:</strong> Penyimpanan cloud bayar sesuai penggunaan menghilangkan penyediaan yang berlebihan.</li>
-<li><strong>Mengurangi biaya overhead infrastruktur:</strong> Lebih sedikit komponen berarti biaya penerapan dan pemeliharaan yang lebih rendah.</li>
-</ul>
-<h3 id="Storage-cost-advantages" class="common-anchor-header">Keuntungan biaya penyimpanan</h3><ul>
-<li><strong>Penyimpanan berjenjang:</strong> Secara otomatis memigrasikan data ke tingkat penyimpanan awan yang hemat biaya untuk penyimpanan jangka panjang.</li>
-<li><strong>Kompresi dan deduplikasi:</strong> Fitur bawaan mengurangi biaya penyimpanan tanpa upaya operasional ekstra.</li>
-<li><strong>Tidak ada biaya overhead replikasi:</strong> Daya tahan dikelola oleh penyimpanan cloud, sehingga tidak perlu lagi melakukan manajemen replikasi secara manual.</li>
-</ul>
-<h2 id="High-availability-and-disaster-recovery" class="common-anchor-header">Ketersediaan tinggi dan pemulihan bencana<button data-href="#High-availability-and-disaster-recovery" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Simplified-fault-tolerance" class="common-anchor-header">Toleransi kesalahan yang disederhanakan</h3><ul>
-<li><strong>Daya tahan asli awan:</strong> Memanfaatkan jaminan daya tahan 11-sembilan (99.999999999%) dari penyedia layanan cloud.</li>
-<li><strong>Pemulihan cepat:</strong> Status lokal minimal memungkinkan penggantian node dan pemulihan cluster yang cepat.</li>
-<li><strong>Ketahanan lintas wilayah:</strong> Mendukung replikasi lintas wilayah menggunakan fitur penyimpanan cloud.</li>
-</ul>
-<h3 id="Operational-resilience" class="common-anchor-header">Ketahanan operasional</h3><ul>
-<li><strong>Lebih sedikit titik kegagalan tunggal:</strong> Jumlah komponen yang berkurang menurunkan risiko kegagalan.</li>
-<li><strong>Failover otomatis:</strong> Redundansi penyimpanan awan menyederhanakan proses peralihan.</li>
-<li><strong>Pencadangan yang disederhanakan:</strong> Penyimpanan awan terintegrasi menyediakan pencadangan dan pembuatan versi secara otomatis.</li>
-</ul>
-<h2 id="Development-and-operational-experience" class="common-anchor-header">Pengalaman pengembangan dan operasional<button data-href="#Development-and-operational-experience" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Improved-development-workflow" class="common-anchor-header">Alur kerja pengembangan yang lebih baik</h3><ul>
-<li><strong>Penyiapan lingkungan yang lebih cepat:</strong> Ketergantungan minimal mempercepat pengembangan dan pengujian.</li>
-<li><strong>Arsitektur yang konsisten:</strong> Desain yang seragam di seluruh pengembangan, pementasan, dan produksi.</li>
-<li><strong>Integrasi cloud-native:</strong> Kompatibilitas tanpa hambatan dengan layanan cloud dan orkestrasi kontainer.</li>
-</ul>
-<h3 id="Enhanced-production-operations" class="common-anchor-header">Operasi produksi yang ditingkatkan</h3><ul>
-<li><strong>Performa yang dapat diprediksi:</strong> Hasil yang konsisten di seluruh skala dan konfigurasi penerapan.</li>
-<li><strong>Peningkatan yang disederhanakan:</strong> Desain tanpa status memungkinkan pembaruan bergulir dengan waktu henti yang minimal.</li>
-<li><strong>Prediktabilitas sumber daya:</strong> Penggunaan sumber daya yang lebih stabil dibandingkan dengan perantara pesan tradisional.</li>
-</ul>
-<p>Untuk basis data vektor yang mendukung RAG yang sangat penting, agen AI, dan beban kerja pencarian dengan latensi rendah, keuntungan operasional ini sangat revolusioner. Transisi dari tumpukan message broker yang kompleks ke arsitektur Woodpecker yang disederhanakan tidak hanya meningkatkan kinerja, tetapi juga secara signifikan mengurangi beban operasional pada tim pengembangan dan infrastruktur.</p>
-<p>Karena infrastruktur cloud terus berkembang dengan inovasi seperti S3 Express One Zone, arsitektur Woodpecker memungkinkan organisasi untuk secara otomatis mendapatkan manfaat dari kemajuan ini tanpa memerlukan perubahan operasional besar atau desain ulang sistem.</p>
+<p>Keunggulan-keunggulan ini menjadikan Woodpecker sangat berharga untuk RAG yang sangat penting, agen AI, dan beban kerja pencarian dengan latensi rendah di mana kesederhanaan operasional sama pentingnya dengan kinerja.</p>

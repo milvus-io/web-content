@@ -59,8 +59,8 @@ title: تثبيت Milvus Python SDK
       </svg>
     </button></h2><p>يتوفر PyMilvus في <a href="https://pypi.org/project/pymilvus/">فهرس حزمة Python</a>.</p>
 <div class="alert note">
-يوصى بتثبيت إصدار PyMilvus الذي يطابق إصدار خادم Milvus الذي قمت بتثبيته. لمزيد من المعلومات، راجع <a href="/docs/ar/release_notes.md">ملاحظات الإصدار</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">10</span>
+يوصى بتثبيت إصدار PyMilvus الذي يطابق إصدار خادم Milvus الذي قمت بتثبيته. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/release_notes.md">ملاحظات الإصدار</a>.</div>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">0b0</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">تحقق من التثبيت<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,11 +99,11 @@ title: تثبيت Milvus Python SDK
 <ul>
 <li><p>تعلم العمليات الأساسية لـ Milvus:</p>
 <ul>
-<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">الإدراج، الإضافة والحذف</a></li>
-<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/v2.6.x/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/v2.6.x/manage-partitions.md">إدارة الأقسام</a></li>
+<li><a href="/docs/ar/v2.6.x/insert-update-delete.md">الإدراج، الإضافة والحذف</a></li>
+<li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
 <li><p>استكشف <a href="/api-reference/pymilvus/v2.4.x/About.md">مرجع PyMilvus API</a></p></li>
 </ul>

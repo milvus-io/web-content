@@ -27,7 +27,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/streaming_distributed_arch.png" alt="Streaming Distributed Arc" class="doc-image" id="streaming-distributed-arc" />
    </span> <span class="img-wrapper"> <span>Arco distribuído de fluxo contínuo</span> </span></p>
 <ul>
-<li><p><strong>Coordenador de fluxo contínuo</strong>: Um componente lógico no nó coordenador. Utiliza o Etcd para a descoberta de serviços para localizar os nós de fluxo disponíveis e é responsável pela ligação do WAL aos nós de fluxo correspondentes. Também regista o serviço para expor a topologia de distribuição do WAL, permitindo que os clientes de streaming conheçam o nó de streaming adequado para um determinado WAL.</p></li>
+<li><p><strong>Coordenador de streaming</strong>: Um componente lógico no nó coordenador. Utiliza o Etcd para a descoberta de serviços para localizar os nós de fluxo disponíveis e é responsável pela ligação do WAL aos nós de fluxo correspondentes. Também regista o serviço para expor a topologia de distribuição do WAL, permitindo que os clientes de streaming conheçam o nó de streaming adequado para um determinado WAL.</p></li>
 <li><p><strong>Cluster de nós de streaming</strong>: Um cluster de nós de trabalho de streaming responsável por todas as tarefas de processamento de streaming, como anexação de wal, recuperação de estado, consulta de dados crescentes.</p></li>
 <li><p><strong>Cliente de Streaming</strong>: Um cliente Milvus desenvolvido internamente que encapsula funcionalidades básicas, como descoberta de serviços e verificações de prontidão. É utilizado para iniciar operações como a escrita de mensagens e a subscrição.</p></li>
 </ul>

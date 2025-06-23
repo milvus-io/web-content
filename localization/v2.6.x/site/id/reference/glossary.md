@@ -80,7 +80,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a> adalah alat debugging untuk Milvus yang terhubung ke etcd, memungkinkan Anda untuk memonitor status server Milvus dan membuat penyesuaian secara real-time. Alat ini juga mendukung backup file etcd, membantu pengembang dalam pemecahan masalah.</p>
+    </button></h2><p><a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a> adalah alat debugging untuk Milvus yang terhubung ke etcd, memungkinkan Anda untuk memonitor status server Milvus dan membuat penyesuaian secara real-time. Alat ini juga mendukung backup file etcd, membantu pengembang dalam pemecahan masalah.</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">Penulis Massal<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +144,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menggunakan dua jenis saluran, <a href="https://milvus.io/docs/glossary.md#PChannel">PChannel</a> dan <a href="https://milvus.io/docs/glossary.md#VChannel">VChannel</a>. Setiap PChannel berhubungan dengan topik untuk penyimpanan log, sementara setiap VChannel berhubungan dengan pecahan dalam koleksi.</p>
+    </button></h2><p>Milvus menggunakan dua jenis saluran, <a href="#pchannel">PChannel</a> dan <a href="#vchannel">VChannel</a>, sebagai bagian dari arsitektur layanan streaming. Setiap PChannel berhubungan dengan aliran WAL yang dikelola oleh <a href="/docs/id/v2.6.x/woodpecker_architecture.md">Woodpecker</a>, sedangkan setiap VChannel berhubungan dengan pecahan dalam koleksi. Layanan streaming mengelola saluran-saluran ini untuk memastikan konsistensi data dan pemulihan kesalahan.</p>
 <h2 id="Collection" class="common-anchor-header">Koleksi<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam Milvus, koleksi setara dengan tabel dalam sistem manajemen basis data relasional (RDBMS). Koleksi adalah objek logis utama yang digunakan untuk menyimpan dan mengelola entitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>.</p>
+    </button></h2><p>Dalam Milvus, koleksi setara dengan tabel dalam sistem manajemen basis data relasional (RDBMS). Koleksi adalah objek logis utama yang digunakan untuk menyimpan dan mengelola entitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a>.</p>
 <h2 id="Dependency" class="common-anchor-header">Ketergantungan<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Skema dinamis memungkinkan Anda menyisipkan entitas dengan bidang baru ke dalam koleksi tanpa mengubah skema yang sudah ada. Ini berarti Anda dapat menyisipkan data tanpa mengetahui skema lengkap koleksi dan dapat menyertakan bidang yang belum didefinisikan. Anda dapat mengaktifkan kemampuan bebas skema ini dengan mengaktifkan bidang dinamis saat membuat koleksi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Mengaktifkan Bidang Dinamis</a>.</p>
+    </button></h2><p>Skema dinamis memungkinkan Anda menyisipkan entitas dengan bidang baru ke dalam koleksi tanpa mengubah skema yang sudah ada. Ini berarti Anda dapat menyisipkan data tanpa mengetahui skema lengkap koleksi dan dapat menyertakan bidang yang belum didefinisikan. Anda dapat mengaktifkan kemampuan bebas skema ini dengan mengaktifkan bidang dinamis saat membuat koleksi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/enable-dynamic-field.md">Mengaktifkan Bidang Dinamis</a>.</p>
 <h2 id="Embeddings" class="common-anchor-header">Penyematan<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ title: Terminologi
         ></path>
       </svg>
     </button></h2><p>Entitas terdiri dari sekelompok bidang yang merepresentasikan objek dunia nyata. Setiap entitas di Milvus diwakili oleh sebuah kunci primer yang unik.</p>
-<p>Anda dapat menyesuaikan kunci utama. Jika anda tidak mengkonfigurasi secara manual, Milvus akan secara otomatis memberikan primary key ke entitas. Jika Anda memilih untuk menyesuaikan primary key, perhatikan bahwa Milvus tidak mendukung de-duplikasi primary key untuk saat ini. Oleh karena itu, bisa saja terdapat duplikat primary key dalam koleksi yang sama. Untuk informasi lebih lanjut, lihat <a href="/docs/id/insert-update-delete.md#Insert-entities">Menyisipkan Entitas</a>.</p>
+<p>Anda dapat menyesuaikan kunci utama. Jika anda tidak mengkonfigurasi secara manual, Milvus akan secara otomatis memberikan primary key ke entitas. Jika Anda memilih untuk menyesuaikan primary key, perhatikan bahwa Milvus tidak mendukung de-duplikasi primary key untuk saat ini. Oleh karena itu, bisa saja terdapat duplikat primary key dalam koleksi yang sama. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/insert-update-delete.md#Insert-entities">Menyisipkan Entitas</a>.</p>
 <h2 id="Field" class="common-anchor-header">Field<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +273,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pencarian yang difilter menerapkan filter skalar ke pencarian vektor, memungkinkan Anda untuk menyaring hasil pencarian berdasarkan kriteria tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/single-vector-search.md#Filtered-search">Pencarian</a> yang <a href="/docs/id/single-vector-search.md#Filtered-search">difilter</a>.</p>
+    </button></h2><p>Pencarian yang difilter menerapkan filter skalar ke pencarian vektor, memungkinkan Anda untuk menyaring hasil pencarian berdasarkan kriteria tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/single-vector-search.md#Filtered-search">Pencarian</a> yang <a href="/docs/id/v2.6.x/single-vector-search.md#Filtered-search">difilter</a>.</p>
 <h2 id="Hybrid-search" class="common-anchor-header">Pencarian hibrida<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +289,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">Pencarian Hibrida</a> adalah API untuk pencarian hibrida sejak Milvus 2.4.0. Anda dapat mencari beberapa bidang vektor dan menggabungkannya. Untuk pencarian vektor yang digabungkan dengan pemfilteran bidang skalar, ini disebut sebagai "pencarian yang difilter". Untuk informasi lebih lanjut, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">Pencarian Hibrida</a> adalah API untuk pencarian hibrida sejak Milvus 2.4.0. Anda dapat mencari beberapa bidang vektor dan menggabungkannya. Untuk pencarian vektor yang digabungkan dengan pemfilteran bidang skalar, ini disebut sebagai "pencarian yang difilter". Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a>.</p>
 <h2 id="Index" class="common-anchor-header">Indeks<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,23 +337,9 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> adalah mesin eksekusi vektor inti dari Milvus yang menggabungkan beberapa pustaka pencarian kemiripan vektor termasuk Faiss, Hnswlib, dan Annoy. Knowhere juga dirancang untuk mendukung komputasi heterogen. Knowhere mengontrol perangkat keras mana (CPU atau GPU) yang akan mengeksekusi pembuatan indeks dan permintaan pencarian. Inilah bagaimana Knowhere mendapatkan namanya - mengetahui di mana harus menjalankan operasi.</p>
-<h2 id="Log-broker" class="common-anchor-header">Pialang log<button data-href="#Log-broker" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><a href="https://milvus.io/docs/four_layers.md#Log-broker">Log broker</a> adalah sistem publish-subscribe yang mendukung pemutaran. Sistem ini bertanggung jawab untuk streaming persistensi data, eksekusi kueri asinkron yang andal, pemberitahuan peristiwa, dan pengembalian hasil kueri. Ini juga memastikan integritas data tambahan ketika node pekerja pulih dari kerusakan sistem.</p>
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> adalah mesin eksekusi vektor inti dari Milvus yang menggabungkan beberapa pustaka pencarian kemiripan vektor termasuk Faiss, Hnswlib, dan Annoy. Knowhere juga dirancang untuk mendukung komputasi heterogen. Knowhere mengontrol perangkat keras (CPU atau GPU) mana yang akan menjalankan pembuatan indeks dan permintaan pencarian. Inilah bagaimana Knowhere mendapatkan namanya - mengetahui di mana harus menjalankan operasi.</p>
+<!-- ## Log broker
+<p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">Cuplikan log<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -369,39 +355,11 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Snapshot log adalah log biner, unit yang lebih kecil dalam segmen yang mencatat dan menangani pembaruan dan perubahan yang dilakukan pada data di Milvus. Data dari sebuah segmen disimpan dalam beberapa binlog. Ada tiga jenis binlog di Milvus: InsertBinlog, DeleteBinlog, dan DDLBinlog. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/four_layers.md#Meta-storage">Penyimpanan Meta</a>.</p>
-<h2 id="Log-subscriber" class="common-anchor-header">Pelanggan log<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Pelanggan log berlangganan ke urutan log untuk memperbarui data lokal dan menyediakan layanan dalam bentuk salinan hanya-baca.</p>
-<h2 id="Message-storage" class="common-anchor-header">Penyimpanan pesan<button data-href="#Message-storage" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Penyimpanan pesan adalah mesin penyimpanan log Milvus. Milvus mendukung Kafka atau Pulsa sebagai penyimpanan pesan. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Mengonfigurasi Penyimpanan Pesan</a>.</p>
+    </button></h2><p>Snapshot log adalah log biner, sebuah unit yang lebih kecil dalam segmen yang mencatat dan menangani pembaruan dan perubahan yang dilakukan pada data di Milvus. Data dari sebuah segmen disimpan dalam beberapa binlog. Ada tiga jenis binlog di Milvus: InsertBinlog, DeleteBinlog, dan DDLBinlog. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/four_layers.md#Meta-storage">Penyimpanan Meta</a>.</p>
+<!-- ## Log subscriber
+<p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. --></p>
+<!-- ## Message storage
+<p>Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Configure Message Storage</a>. --></p>
 <h2 id="Metric-type" class="common-anchor-header">Jenis metrik<button data-href="#Metric-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -417,7 +375,23 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jenis metrik kemiripan digunakan untuk mengukur kemiripan antara vektor. Saat ini, Milvus mendukung jenis metrik Euclidean distance (L2), Inner product (IP), Cosine similarity (COSINE), dan biner. Anda dapat memilih jenis metrik yang paling tepat berdasarkan skenario Anda. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/metric.md">Metrik Kemiripan</a>.</p>
+    </button></h2><p>Jenis metrik kemiripan digunakan untuk mengukur kemiripan antar vektor. Saat ini, Milvus mendukung jenis metrik Euclidean distance (L2), Inner product (IP), Cosine similarity (COSINE), dan biner. Anda dapat memilih jenis metrik yang paling tepat berdasarkan skenario Anda. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/metric.md">Metrik Kemiripan</a>.</p>
+<h2 id="MemoryBuffer" class="common-anchor-header">MemoryBuffer<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>MemoryBuffer adalah mode penerapan Woodpecker yang ringan yang untuk sementara menyangga penulisan yang masuk di memori dan secara berkala membuangnya ke penyimpanan objek cloud. Mode ini paling cocok untuk beban kerja yang banyak dalam penerapan skala kecil atau lingkungan produksi yang memprioritaskan kesederhanaan daripada kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,7 +407,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>File yang dipetakan ke memori memungkinkan penanganan data yang efisien dengan memetakan konten file secara langsung ke dalam memori. Hal ini sangat berguna ketika memori terbatas dan memuat semua data tidak memungkinkan. Teknik ini dapat meningkatkan kapasitas data dan mempertahankan kinerja hingga batas tertentu. Namun, jika data sangat melebihi kapasitas memori, kecepatan pencarian dan kueri dapat menurun secara signifikan. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/mmap.md">Penyimpanan Data yang mendukung MMap</a>.</p>
+    </button></h2><p>File yang dipetakan memori memungkinkan penanganan data yang efisien dengan memetakan konten file secara langsung ke dalam memori. Hal ini sangat berguna terutama ketika memori terbatas dan memuat semua data tidak memungkinkan. Teknik ini dapat meningkatkan kapasitas data dan mempertahankan kinerja hingga titik tertentu. Namun, jika data sangat melebihi kapasitas memori, kecepatan pencarian dan kueri dapat menurun secara signifikan. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/mmap.md">Penyimpanan Data yang mendukung MMap</a>.</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Cadangan Milvus<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -545,7 +519,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus mendukung beberapa bidang vektor dalam satu koleksi sejak versi 2.4.0. Untuk informasi lebih lanjut, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>.</p>
+    </button></h2><p>Milvus mendukung beberapa bidang vektor dalam satu koleksi sejak versi 2.4.0. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a>.</p>
 <h2 id="Partition" class="common-anchor-header">Partisi<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -593,7 +567,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannel adalah singkatan dari saluran fisik. Setiap PChannel berhubungan dengan topik untuk penyimpanan log. Secara default, sebuah grup yang terdiri dari 16 PChannel akan ditetapkan untuk menyimpan log yang merekam penyisipan, penghapusan, dan pembaruan data ketika cluster Milvus dimulai. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">Konfigurasi terkait Saluran Pesan</a>.</p>
+    </button></h2><p>PChannel adalah singkatan dari saluran fisik. Setiap PChannel berhubungan dengan aliran WAL yang dikelola oleh Woodpecker. Secara default, sekelompok PChannel akan ditugaskan untuk menyimpan log yang merekam penyisipan, penghapusan, dan pembaruan data ketika cluster Milvus dimulai. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/streaming_service.md">Layanan Streaming</a>.</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -626,6 +600,22 @@ title: Terminologi
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a> adalah API yang melakukan pemfilteran skalar dengan ekspresi boolean tertentu sebagai filter. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get &amp; Scalar Query</a>.</p>
+<h2 id="QuorumBuffer" class="common-anchor-header">QuorumBuffer<button data-href="#QuorumBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>QuorumBuffer adalah mode penerapan Woodpecker yang dirancang untuk beban kerja baca/tulis berfrekuensi tinggi yang peka terhadap latensi dan membutuhkan respons waktu nyata serta toleransi kesalahan yang kuat. Mode ini berfungsi sebagai penyangga penulisan berkecepatan tinggi dengan penulisan kuorum tiga replika, memastikan konsistensi yang kuat dan ketersediaan yang tinggi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <h2 id="Range-search" class="common-anchor-header">Pencarian rentang<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -739,7 +729,23 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vektor jarang merepresentasikan kata atau frasa menggunakan penyematan vektor yang sebagian besar elemennya bernilai nol, dengan hanya satu elemen bukan nol yang menunjukkan keberadaan kata tertentu. Model vektor jarang, seperti SPLADEv2, mengungguli model padat dalam pencarian pengetahuan di luar domain, kesadaran kata kunci, dan kemampuan penafsiran. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vektor</a> Jarang.</p>
+    </button></h2><p>Vektor jarang merepresentasikan kata atau frasa menggunakan penyematan vektor yang sebagian besar elemennya bernilai nol, dengan hanya satu elemen bukan nol yang menunjukkan keberadaan kata tertentu. Model vektor jarang, seperti SPLADEv2, mengungguli model padat dalam pencarian pengetahuan di luar domain, kesadaran kata kunci, dan kemampuan penafsiran. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Vektor Jarang</a>.</p>
+<h2 id="Streaming-Service" class="common-anchor-header">Layanan Streaming<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Layanan Streaming adalah sebuah konsep untuk modul sistem streaming internal Milvus, yang dibangun di sekitar Write-Ahead Log (WAL) untuk mendukung berbagai fungsi yang berhubungan dengan streaming. Ini termasuk konsumsi/langganan data streaming, pemulihan kesalahan status cluster, konversi data streaming menjadi data historis, dan kueri data yang terus bertambah. Layanan ini terdiri dari komponen Streaming Coordinator, Streaming Node Cluster, dan Streaming Client. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/streaming_service.md">Layanan Streaming</a>.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">Data tidak terstruktur<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -755,7 +761,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data tidak terstruktur, termasuk gambar, video, audio, dan bahasa alami, adalah informasi yang tidak mengikuti model atau cara pengorganisasian yang telah ditentukan sebelumnya. Jenis data ini menyumbang sekitar 80% dari data dunia, dan dapat dikonversi menjadi vektor menggunakan berbagai model kecerdasan buatan (AI) dan ML.</p>
+    </button></h2><p>Data tidak terstruktur, termasuk gambar, video, audio, dan bahasa alami, adalah informasi yang tidak mengikuti model atau cara pengorganisasian yang telah ditetapkan sebelumnya. Jenis data ini menyumbang sekitar 80% dari data dunia, dan dapat dikonversi menjadi vektor menggunakan berbagai model kecerdasan buatan (AI) dan ML.</p>
 <h2 id="VChannel" class="common-anchor-header">VChannel<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -771,7 +777,7 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannel</a> adalah singkatan dari saluran logis. Setiap VChannel mewakili pecahan dalam sebuah koleksi. Setiap koleksi akan diberikan sekelompok VChannel untuk merekam penyisipan, penghapusan, dan pembaruan data. VChannel dipisahkan secara logis namun secara fisik berbagi sumber daya.</p>
+    </button></h2><p>VChannel adalah singkatan dari saluran virtual. Setiap VChannel mewakili pecahan dalam sebuah koleksi. Setiap koleksi akan diberikan sekelompok VChannel untuk merekam penyisipan, penghapusan, dan pembaruan data. VChannels secara logis terpisah tetapi secara fisik berbagi sumber daya melalui layanan streaming. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/streaming_service.md">Layanan Streaming</a>.</p>
 <h2 id="Vector" class="common-anchor-header">Vektor<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -787,7 +793,39 @@ title: Terminologi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vektor penyematan adalah abstraksi fitur dari data yang tidak terstruktur, seperti email, data sensor IoT, foto Instagram, struktur protein, dan banyak lagi. Secara matematis, vektor penyematan adalah sebuah larik angka floating-point atau biner. Teknik penyematan modern digunakan untuk mengubah data yang tidak terstruktur menjadi vektor penyematan. Milvus mendukung vektor padat dan jarang sejak 2.4.0.</p>
+    </button></h2><p>Vektor penyematan adalah abstraksi fitur dari data yang tidak terstruktur, seperti email, data sensor IoT, foto Instagram, struktur protein, dan lainnya. Secara matematis, vektor penyematan adalah susunan angka floating-point atau biner. Teknik penyematan modern digunakan untuk mengubah data yang tidak terstruktur menjadi vektor penyematan. Milvus mendukung vektor padat dan vektor jarang sejak 2.4.0.</p>
+<h2 id="WAL-Storage" class="common-anchor-header">Penyimpanan WAL<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Penyimpanan Write-Ahead Log (WAL) adalah fondasi ketahanan dan konsistensi data dalam sistem terdistribusi. Sebelum perubahan dilakukan, perubahan tersebut terlebih dahulu dicatat dalam log-memastikan bahwa, jika terjadi kegagalan, Anda dapat memulihkan tepat di tempat yang Anda tinggalkan. Milvus menggunakan Woodpecker sebagai sistem penyimpanan WAL-nya, yang mendukung mode MemoryBuffer dan QuorumBuffer. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
+<h2 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Woodpecker adalah sistem WAL cloud-native di Milvus 2.6 yang menggantikan Kafka dan Pulsar. Dengan arsitektur tanpa disk dan dua mode penyebaran (MemoryBuffer dan QuorumBuffer), Woodpecker memberikan throughput yang tinggi, overhead operasional yang rendah, dan skalabilitas tanpa batas pada penyimpanan objek. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/woodpecker_architecture.md">Arsitektur Woodpecker</a>.</p>
 <h2 id="Zilliz-Cloud" class="common-anchor-header">Zilliz Cloud<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

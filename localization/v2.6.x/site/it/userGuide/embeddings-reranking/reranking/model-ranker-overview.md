@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Per informazioni dettagliate sull'implementazione di ciascun modello di servizio, consultare la documentazione dedicata:</p>
 <ul>
-<li><p><a href="/docs/it/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/it/tei-ranker.md">Classificatore TEI</a></p></li>
+<li><p><a href="/docs/it/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/it/v2.6.x/tei-ranker.md">Classificatore TEI</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementazione<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,15 +203,21 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Sì</p></td>
+     <td><p>Un dizionario contenente la configurazione della funzione di reranking basata su modelli. I parametri disponibili (chiavi) variano a seconda del provider (<code translate="no">tei</code> o <code translate="no">vllm</code>). Fare riferimento a <a href="/docs/it/v2.6.x/vllm-ranker.md">vLLM Ranker</a> o <a href="/docs/it/v2.6.x/tei-ranker.md">TEI Ranker</a> per maggiori dettagli.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Deve essere impostato su <code translate="no">"model"</code> per abilitare il reranking dei modelli.</p></td>
+     <td><p>Deve essere impostato su <code translate="no">"model"</code> per abilitare il reranking basato sul modello.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Il fornitore di servizi di modello da usare per il reranking.</p></td>
+     <td><p>Il fornitore di servizi del modello da utilizzare per il reranking.</p></td>
      <td><p><code translate="no">"tei"</code> o <code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>

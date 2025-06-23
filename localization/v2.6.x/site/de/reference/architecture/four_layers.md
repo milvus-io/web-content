@@ -39,7 +39,7 @@ title: Disaggregation von Speicherung und Datenverarbeitung
 <li>Der Proxy ist an sich zustandslos. Er bietet eine einheitliche Dienstadresse unter Verwendung von Lastausgleichskomponenten wie Nginx, Kubernetes Ingress, NodePort und LVS.</li>
 <li>Da Milvus eine MPP-Architektur (Massively Parallel Processing) verwendet, aggregiert und verarbeitet der Proxy die Zwischenergebnisse, bevor er die endgültigen Ergebnisse an den Client zurückgibt.</li>
 </ul>
-<h2 id="Coordinator-service" class="common-anchor-header">Koordinator-Dienst<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
+<h2 id="Coordinator" class="common-anchor-header">Koordinator<button data-href="#Coordinator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,11 +54,14 @@ title: Disaggregation von Speicherung und Datenverarbeitung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Koordinatordienst weist den Arbeitsknoten Aufgaben zu und fungiert als Gehirn des Systems. Zu den Aufgaben, die er übernimmt, gehören die Verwaltung der Clustertopologie, der Lastausgleich, die Erzeugung von Zeitstempeln, die Datendeklaration und die Datenverwaltung.</p>
-<p>Es gibt drei Arten von Koordinatoren: Stammkoordinator (Root Coord), Datenkoordinator (Data Coord) und Abfragekoordinator (Query Coord).</p>
-<h3 id="Root-coordinator-root-coord" class="common-anchor-header">Wurzelkoordinator (Root Coord)</h3><p>Der Root-Koordinator bearbeitet Data Definition Language (DDL)- und Data Control Language (DCL)-Anfragen, wie z. B. das Erstellen oder Löschen von Collections, Partitionen oder Indizes, sowie die Verwaltung von TSO (Timestamp Oracle) und die Ausgabe von Zeittickern.</p>
-<h3 id="Query-coordinator-query-coord" class="common-anchor-header">Abfragekoordinator (query coord)</h3><p>Der Abfragekoordinator verwaltet die Topologie und den Lastausgleich für die Abfrageknoten sowie die Weitergabe von wachsenden Segmenten an geschlossene Segmente.</p>
-<h3 id="Data-coordinator-data-coord" class="common-anchor-header">Datenkoordinator (Datenkoordinator)</h3><p>Der Datenkoordinator verwaltet die Topologie der Daten- und Indexknoten, pflegt die Metadaten und löst Flush-, Kompaktierungs- und Indexerstellungsvorgänge sowie andere Datenoperationen im Hintergrund aus.</p>
+    </button></h2><p>Der <strong>Coordinator</strong> dient als Gehirn von Milvus. Zu jedem Zeitpunkt ist genau ein Coordinator im gesamten Cluster aktiv, der für die Aufrechterhaltung der Clustertopologie, die Planung aller Aufgabentypen und die Gewährleistung der Konsistenz auf Clusterebene verantwortlich ist.</p>
+<p>Im Folgenden sind einige der Aufgaben aufgeführt, die vom <strong>Coordinator</strong> bearbeitet werden:</p>
+<ul>
+<li><strong>DDL/DCL/TSO-Verwaltung</strong>: Bearbeitung von Data Definition Language (DDL)- und Data Control Language (DCL)-Anfragen, wie z. B. das Erstellen oder Löschen von Sammlungen, Partitionen oder Indizes, sowie die Verwaltung von Timestamp Oracle (TSO) und die Ausgabe von Zeittickern.</li>
+<li><strong>Verwaltung von Streaming-Diensten</strong>: Verbindet das Write-Ahead Log (WAL) mit Streaming Nodes und bietet eine Service Discovery für den Streaming Service.</li>
+<li><strong>Abfrage-Management</strong>: Verwaltet die Topologie und den Lastausgleich für die Abfrageknoten und liefert und verwaltet die Abfrageansichten, um das Abfrage-Routing zu steuern.</li>
+<li><strong>Verwaltung historischer Daten</strong>: Verteilt Offline-Aufgaben wie Verdichtung und Indexerstellung an Datenknoten und verwaltet die Topologie von Segmenten und Datenansichten.</li>
+</ul>
 <h2 id="Worker-nodes" class="common-anchor-header">Worker-Knoten<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +77,10 @@ title: Disaggregation von Speicherung und Datenverarbeitung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Arme und Beine. Worker-Knoten sind stumme Ausführungsknoten, die den Anweisungen des Coordinator-Dienstes folgen und DML-Befehle (Data Manipulation Language) des Proxys ausführen. Worker Nodes sind dank der Trennung von Speicherung und Berechnung zustandslos und können die Skalierung des Systems und die Wiederherstellung im Notfall erleichtern, wenn sie in Kubernetes eingesetzt werden. Es gibt drei Arten von Worker Nodes:</p>
-<h3 id="Query-node" class="common-anchor-header">Abfrageknoten</h3><p>Der Abfrageknoten ruft inkrementelle Protokolldaten ab und wandelt sie in wachsende Segmente um, indem er den Protokollbroker abonniert, historische Daten aus dem Objektspeicher lädt und eine hybride Suche zwischen Vektor- und Skalardaten durchführt.</p>
-<h3 id="Data-node" class="common-anchor-header">Datenknoten</h3><p>Der Datenknoten ruft inkrementelle Protokolldaten ab, indem er sich beim Log-Broker anmeldet, verarbeitet Mutationsanforderungen und packt Protokolldaten in Protokoll-Snapshots und speichert sie im Objektspeicher.</p>
-<h3 id="Index-node" class="common-anchor-header">Index-Knoten</h3><p>Der Index-Knoten baut Indizes auf.  Indexknoten müssen nicht speicherresident sein und können mit dem serverlosen Framework implementiert werden.</p>
+    </button></h2><p>Die Arme und Beine. Worker-Knoten sind stumme Ausführungseinheiten, die den Anweisungen des Koordinators folgen. Worker-Knoten sind dank der Trennung von Speicherung und Berechnung zustandslos und können die Skalierung des Systems und die Notfallwiederherstellung erleichtern, wenn sie in Kubernetes eingesetzt werden. Es gibt drei Arten von Worker Nodes:</p>
+<h3 id="Streaming-node" class="common-anchor-header">Streaming-Knoten</h3><p>Der Streaming Node dient als "Mini-Gehirn" auf Shard-Ebene und bietet Konsistenzgarantien auf Shard-Ebene sowie Fehlerwiederherstellung auf der Grundlage des zugrunde liegenden WAL-Speichers. Gleichzeitig ist der Streaming Node auch für die Abfrage von wachsenden Daten und die Erstellung von Abfrageplänen zuständig. Darüber hinaus übernimmt er auch die Umwandlung wachsender Daten in versiegelte (historische) Daten.</p>
+<h3 id="Query-node" class="common-anchor-header">Abfrageknoten</h3><p>Der Abfrageknoten lädt die historischen Daten aus dem Objektspeicher und ermöglicht die Abfrage der historischen Daten.</p>
+<h3 id="Data-node" class="common-anchor-header">Datenknoten</h3><p>Der Datenknoten ist für die Offline-Verarbeitung historischer Daten zuständig, z. B. für die Verdichtung und den Indexaufbau.</p>
 <h2 id="Storage" class="common-anchor-header">Speicherung<button data-href="#Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,7 +97,7 @@ title: Disaggregation von Speicherung und Datenverarbeitung
         ></path>
       </svg>
     </button></h2><p>Der Speicher ist das Herzstück des Systems und für die Datenpersistenz verantwortlich. Er umfasst Metaspeicher, Log-Broker und Objektspeicher.</p>
-<h3 id="Meta-storage" class="common-anchor-header">Metaspeicher</h3><p>Der Metaspeicher speichert Schnappschüsse von Metadaten wie Sammelschemata und Prüfpunkte für den Nachrichtenverbrauch. Die Speicherung von Metadaten erfordert extrem hohe Verfügbarkeit, starke Konsistenz und Transaktionsunterstützung, weshalb Milvus sich für etcd als Metaspeicher entschieden hat. Milvus verwendet etcd auch für die Serviceregistrierung und Zustandsüberprüfung.</p>
+<h3 id="Meta-storage" class="common-anchor-header">Metaspeicher</h3><p>Der Metaspeicher speichert Schnappschüsse von Metadaten wie Sammelschemata und Prüfpunkte für den Nachrichtenverbrauch. Die Speicherung von Metadaten erfordert extrem hohe Verfügbarkeit, starke Konsistenz und Transaktionsunterstützung, weshalb Milvus etcd als Metaspeicher gewählt hat. Milvus verwendet etcd auch für die Serviceregistrierung und Zustandsüberprüfung.</p>
 <h3 id="Object-storage" class="common-anchor-header">Objektspeicher</h3><p>Der Objektspeicher speichert Snapshot-Dateien von Protokollen, Indexdateien für skalare und Vektordaten sowie Zwischenergebnisse von Abfragen. Milvus verwendet MinIO als Objektspeicher und kann problemlos auf AWS S3 und Azure Blob eingesetzt werden, zwei der beliebtesten und kostengünstigsten Speicherdienste der Welt. Der Objektspeicher hat jedoch eine hohe Zugriffslatenz und wird nach der Anzahl der Abfragen berechnet. Um die Leistung zu verbessern und die Kosten zu senken, plant Milvus die Implementierung einer Kalt-Warm-Datentrennung auf einem speicher- oder SSD-basierten Cache-Pool.</p>
 <h3 id="WAL-storage" class="common-anchor-header">WAL-Speicher</h3><p>Die WAL-Speicherung (Write-Ahead Log) ist die Grundlage für die Haltbarkeit und Konsistenz von Daten in verteilten Systemen. Bevor eine Änderung übertragen wird, wird sie zunächst in einem Protokoll aufgezeichnet, um sicherzustellen, dass Sie im Falle eines Fehlers genau dort wiederhergestellt werden können, wo Sie aufgehört haben.</p>
 <p>Zu den gängigen WAL-Implementierungen gehören Kafka, Pulsar und Woodpecker. Im Gegensatz zu herkömmlichen plattenbasierten Lösungen verwendet Woodpecker ein Cloud-natives Design ohne Platten, das direkt in den Objektspeicher schreibt. Dieser Ansatz lässt sich mühelos mit Ihren Anforderungen skalieren und vereinfacht den Betrieb, da der Overhead der Verwaltung lokaler Festplatten entfällt.</p>
@@ -115,5 +118,5 @@ title: Disaggregation von Speicherung und Datenverarbeitung
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lesen Sie <a href="/docs/de/main_components.md">Hauptkomponenten</a> für weitere Details über die Milvus-Architektur.</li>
+<li>Lesen Sie <a href="/docs/de/v2.6.x/main_components.md">Hauptkomponenten</a> für weitere Details über die Milvus-Architektur.</li>
 </ul>

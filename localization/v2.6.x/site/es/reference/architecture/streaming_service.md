@@ -28,7 +28,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Arco distribuido de streaming</span> </span></p>
 <ul>
 <li><p><strong>Coordinador de Streaming</strong>: Un componente lógico en el nodo coordinador. Utiliza Etcd para el descubrimiento de servicios con el fin de localizar los nodos de streaming disponibles y se encarga de vincular la WAL a los nodos de streaming correspondientes. También registra el servicio para exponer la topología de distribución de WAL, permitiendo a los clientes de streaming conocer el nodo de streaming apropiado para un WAL dado.</p></li>
-<li><p><strong>Clúster de nodos de streaming</strong>: Un clúster de nodos trabajadores de streaming responsables de todas las tareas de procesamiento de streaming, como la anexión de wal, la recuperación de estado, la consulta de datos en crecimiento.</p></li>
+<li><p><strong>Clúster de nodos de streaming</strong>: Un clúster de nodos de trabajo de streaming responsable de todas las tareas de procesamiento de streaming, como la anexión de wal, la recuperación de estado, la consulta de datos en crecimiento.</p></li>
 <li><p><strong>Cliente de streaming</strong>: Un cliente Milvus desarrollado internamente que encapsula funcionalidades básicas como el descubrimiento de servicios y las comprobaciones de disponibilidad. Se utiliza para iniciar operaciones como la escritura de mensajes y la suscripción.</p></li>
 </ul>
 <h2 id="Message" class="common-anchor-header">Mensaje<button data-href="#Message" class="anchor-icon" translate="no">

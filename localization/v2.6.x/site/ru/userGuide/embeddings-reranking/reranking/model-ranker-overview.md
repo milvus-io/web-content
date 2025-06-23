@@ -74,7 +74,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Поиск кандидатов</strong>: Система определяет начальный набор документов-кандидатов на основе векторного сходства</p></li>
 <li><p><strong>Оценка модели</strong>: Функция ранжирования моделей обрабатывает пары запрос-документ:</p>
 <ul>
-<li><p>Отправляет исходный запрос и документы-кандидаты на внешний модельный сервис</p></li>
+<li><p>Отправляет исходный запрос и документы-кандидаты на внешний модельный сервис.</p></li>
 <li><p>Языковая модель оценивает семантическую релевантность между запросом и каждым документом</p></li>
 <li><p>Каждый документ получает оценку релевантности, основанную на семантическом понимании</p></li>
 </ul></li>
@@ -129,8 +129,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Для получения подробной информации о реализации каждой модели сервиса обратитесь к специальной документации:</p>
 <ul>
-<li><p><a href="/docs/ru/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/ru/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/ru/v2.6.x/tei-ranker.md">TEI Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Реализация<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>Коллекция Milvus с полем <code translate="no">VARCHAR</code>, содержащим текст для ранжирования.</p></li>
 <li><p>Работающий внешний сервис моделей (vLLM или TEI), доступный вашему экземпляру Milvus</p></li>
-<li><p>Соответствующее сетевое соединение между Milvus и выбранным вами сервисом моделирования.</p></li>
+<li><p>Соответствующее сетевое соединение между Milvus и выбранным вами сервисом моделей.</p></li>
 </ul>
 <p>Ранжирование моделей легко интегрируется как со стандартным векторным поиском, так и с гибридными поисковыми операциями. Реализация заключается в создании объекта Function, определяющего конфигурацию ранжирования, и передаче его операциям поиска.</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">Создание ранжировщика моделей</h3><p>Чтобы реализовать ранжирование моделей, сначала определите объект Function с соответствующей конфигурацией:</p>
@@ -202,15 +202,21 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Да</p></td>
+     <td><p>Словарь, содержащий конфигурацию для функции ранжирования на основе модели. Доступные параметры (ключи) зависят от поставщика (<code translate="no">tei</code> или <code translate="no">vllm</code>). Дополнительные сведения см. в <a href="/docs/ru/v2.6.x/vllm-ranker.md">vLLM Ranker</a> или <a href="/docs/ru/v2.6.x/tei-ranker.md">TEI Ranker</a>.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Должно быть установлено значение <code translate="no">"model"</code> для включения повторного ранжирования моделей.</p></td>
+     <td><p>Должно быть установлено значение <code translate="no">"model"</code>, чтобы включить ранжирование по модели.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Поставщик услуг модели, который будет использоваться для повторного ранжирования.</p></td>
+     <td><p>Поставщик услуг модели, используемый для повторного ранжирования.</p></td>
      <td><p><code translate="no">"tei"</code> или <code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>

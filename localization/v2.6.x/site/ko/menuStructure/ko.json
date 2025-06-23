@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "스토리지/컴퓨팅",
-            "id": "four_layers.md",
+            "label": "주요 구성 요소",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "주요 구성 요소",
-            "id": "main_components.md",
+            "label": "스트리밍 서비스",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -1388,25 +1388,6 @@
         ]
       },
       {
-        "label": "업그레이드",
-        "id": "upgrade_milvus",
-        "order": 7,
-        "children": [
-          {
-            "label": "Milvus 클러스터 업그레이드",
-            "id": "upgrade_milvus_cluster-operator.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Milvus 스탠드얼론 업그레이드",
-            "id": "upgrade_milvus_standalone-operator.md",
-            "order": 1,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "모니터링, 알림 및 로그",
         "id": "monitor_alert_log",
         "order": 8,
@@ -2245,7 +2226,7 @@
             "children": []
           },
           {
-            "label": "12개의 실험실",
+            "label": "12개의 랩",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []

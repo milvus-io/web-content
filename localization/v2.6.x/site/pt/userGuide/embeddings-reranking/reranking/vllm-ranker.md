@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>Sistemas de apoio ao cliente que precisam de fazer corresponder os problemas dos utilizadores a soluções relevantes</p></li>
 <li><p>Pesquisa de comércio eletrónico que tem de compreender os atributos do produto e a intenção do utilizador</p></li>
 </ul>
-<p>Comparado ao <a href="/docs/pt/tei-ranker.md">TEI Ranker</a>, o vLLM Ranker oferece maior flexibilidade na seleção e personalização de modelos, tornando-o ideal para aplicações de pesquisa especializadas ou complexas, em que as opções de configuração adicionais oferecem benefícios significativos.</p>
+<p>Comparado ao <a href="/docs/pt/v2.6.x/tei-ranker.md">TEI Ranker</a>, o vLLM Ranker oferece maior flexibilidade na seleção e personalização de modelos, tornando-o ideal para aplicações de pesquisa especializadas ou complexas, em que as opções de configuração adicionais oferecem benefícios significativos.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,10 +104,29 @@ vllm_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;vllm&quot;</span>,         <span class="hljs-comment"># Specifies vLLM service</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># vLLM service address</span>
-       <span class="hljs-comment"># &quot;maxBatch&quot;: 64              # Optional: batch size</span>
+        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">64</span>,              <span class="hljs-comment"># Optional: batch size</span>
+        <span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>: <span class="hljs-number">256</span>,  <span class="hljs-comment"># Optional: Use last 256 tokens</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">Parâmetros específicos do classificador vLLM</h3><p>Os parâmetros a seguir são específicos do classificador vLLM:</p>
+<table>
+   <tr>
+     <th><p>Parâmetro</p></th>
+     <th><p>Necessário?</p></th>
+     <th><p>Descrição</p></th>
+     <th><p>Valor / Exemplo</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncate_prompt_tokens</code></p></td>
+     <td><p>Não</p></td>
+     <td><p>Se definido para um número inteiro <em>k</em>, utilizará apenas os últimos <em>k</em> tokens do prompt (ou seja, truncagem à esquerda). A predefinição é Nenhum (ou seja, sem truncamento).</p></td>
+     <td><p><code translate="no">256</code></p></td>
+   </tr>
+</table>
+<div class="alert note">
+<p>Para parâmetros gerais partilhados por todos os classificadores de modelos (por exemplo, <code translate="no">provider</code>, <code translate="no">queries</code>), consulte <a href="/docs/pt/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Criar um classificador de modelos</a>.</p>
+</div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa vetorial padrão<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,7 +142,7 @@ vllm_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para aplicar o vLLM Ranker a uma pesquisa vetorial padrão:</p>
+    </button></h2><p>Para aplicar o vLLM Ranker a uma pesquisa de vetor padrão:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -174,7 +193,7 @@ hybrid_results = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
     ranker=vllm_ranker,                        <span class="hljs-comment"># Apply vLLM reranking to combined results</span>
-    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span>
+<span class="highlighted-wrapper-line">    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span></span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>

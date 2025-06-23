@@ -77,7 +77,7 @@ beta: Milvus 2.6.x
 <li><p>每個衰減排名器將原始數值轉換為 0-1 之間的規範化相關性分數。</p></li>
 <li><p>衰減分數會根據項目與理想點的「距離」來表示其相關程度</p></li>
 </ul>
-<p>具體的計算公式根據衰減排名器類型而有所不同。有關如何計算衰減分數的詳細資訊，請參閱<a href="/docs/zh-hant/gaussian-decay.md#Formula">高斯衰減</a>、<a href="/docs/zh-hant/exponential-decay.md#Formula">指數衰減</a>、<a href="/docs/zh-hant/linear-decay.md#Formula">線性衰減的</a>專用頁面。</p>
+<p>具體的計算公式根據衰減排名器類型而有所不同。有關如何計算衰減分數的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/gaussian-decay.md#Formula">高斯衰減</a>、<a href="/docs/zh-hant/v2.6.x/exponential-decay.md#Formula">指數衰減</a>、<a href="/docs/zh-hant/v2.6.x/linear-decay.md#Formula">線性衰減的</a>專用頁面。</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">第三階段：計算最終得分</h3><p>最後，Milvus 結合規範化的相似度得分和衰減得分，產生最終的排名得分：</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -87,7 +87,7 @@ beta: Milvus 2.6.x
 <p>例如，在混合搜尋中，如果一篇研究論文的向量相似度得分為 0.82，而以 BM25 為基礎的文字檢索得分為 0.91，Milvus 會先使用 0.91 作為基本相似度得分，然後再套用衰減因子。</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">衰減排序的實際應用</h3><p>讓我們來看看衰減排序在實際情境中的應用-以時間為基礎的衰減來搜尋<strong>「AI 研究論文」</strong>：</p>
 <div class="alert note">
-<p>在這個範例中，衰減分數反映出相關性會隨著時間遞減-較新的論文會得到較接近 1.0 的分數，較舊的論文則會得到較低的分數。這些值是使用特定的衰減排名器計算出來的。如需詳細資訊，請參閱<a href="/docs/zh-hant/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>。</p>
+<p>在這個範例中，衰減分數反映出相關性會隨著時間遞減-較新的論文會得到較接近 1.0 的分數，較舊的論文則會得到較低的分數。這些值是使用特定的衰減排名器計算出來的。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>。</p>
 </div>
 <table>
    <tr>
@@ -198,9 +198,9 @@ beta: Milvus 2.6.x
 </table>
 <p>有關每個衰減排名器如何計算分數和特定衰減模式的詳細資訊，請參閱專用文件：</p>
 <ul>
-<li><p><a href="/docs/zh-hant/gaussian-decay.md">高斯衰減</a></p></li>
-<li><p><a href="/docs/zh-hant/exponential-decay.md">指數衰減</a></p></li>
-<li><p><a href="/docs/zh-hant/exponential-decay.md">指數衰減</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/gaussian-decay.md">高斯衰減</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/exponential-decay.md">指數衰減</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/exponential-decay.md">指數衰減</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">實施範例<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -219,7 +219,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>衰減排名器可以應用於 Milvus 中的標準向量搜索和混合搜索操作。以下是實現此功能的主要程式碼片段。</p>
 <div class="alert note">
-<p>在使用遞減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於遞減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">教學：在 Milvus 中實施以時間為基礎的排名</a>。</p>
+<p>在使用遞減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於遞減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">教學：在 Milvus 中實施以時間為基礎的排名</a>。</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>要實現衰變排名，首先要定義一個具有適當配置的<code translate="no">Function</code> 物件：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -232,7 +232,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -274,7 +274,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>是</p></td>
-     <td><p>指定要應用的數學衰減排名器。決定相關性下降的曲線形狀。 請參閱<a href="/docs/zh-hant/decay-ranker-overview.md#Choose-the-right-decay-ranker">選擇</a>適當的遞減<a href="/docs/zh-hant/decay-ranker-overview.md#Choose-the-right-decay-ranker">排名器</a>部分，以獲得選擇適當函數的指引。</p></td>
+     <td><p>指定要應用的數學衰減排名器。決定相關性下降的曲線形狀。 請參閱<a href="/docs/zh-hant/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">選擇</a>適當的遞減<a href="/docs/zh-hant/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">排名器</a>部分，以獲得選擇適當函數的指引。</p></td>
      <td><p><code translate="no">"gauss"</code>,<code translate="no">"exp"</code>, 或<code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -307,7 +307,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>無</p></td>
-     <td><p><code translate="no">scale</code> 距離的分數值，控制曲線的陡度。較低的值會產生較陡的下降曲線；較高的值則會產生較漸進的下降曲線。 必須介於 0 和 1 之間。</p></td>
+     <td><p><code translate="no">scale</code> 距離的分數值，控制曲線的陡度。較低的值會產生較陡的下降曲線；較高的值會產生較漸進的下降曲線。 必須介於 0 和 1 之間。</p></td>
      <td><p><code translate="no">0.5</code> (預設值)</p></td>
    </tr>
 </table>

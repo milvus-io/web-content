@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>데이터 세트에 수십억 또는 수조 개의 벡터가 포함될 수 있는 대규모 시나리오에서는 메모리 제한으로 인해 표준 인메모리 색인 방법(예: <a href="/docs/ko/hnsw.md">HNSW</a>, <a href="/docs/ko/ivf-flat.md">IVF_FLAT</a>)이 속도를 따라잡지 못하는 경우가 많습니다. <strong>DISKANN은</strong> 데이터 세트 크기가 사용 가능한 RAM을 초과할 때 높은 검색 정확도와 속도를 유지함으로써 이러한 문제를 해결하는 디스크 기반 접근 방식을 제공합니다.</p>
+    </button></h1><p>데이터 세트에 수십억 또는 수조 개의 벡터가 포함될 수 있는 대규모 시나리오에서는 메모리 제한으로 인해 표준 인메모리 색인 방법(예: <a href="/docs/ko/v2.6.x/hnsw.md">HNSW</a>, <a href="/docs/ko/v2.6.x/ivf-flat.md">IVF_FLAT</a>)이 속도를 따라잡지 못하는 경우가 많습니다. <strong>DISKANN은</strong> 데이터 세트 크기가 사용 가능한 RAM을 초과할 때 높은 검색 정확도와 속도를 유지함으로써 이러한 문제를 해결하는 디스크 기반 접근 방식을 제공합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +58,7 @@ summary: >-
 <p><code translate="no">search_list_size</code> 매개변수는 그래프 세분화 프로세스의 폭을 결정합니다. <code translate="no">search_list_size</code> 값이 높을수록 구성 중 이웃 검색이 확장되어 최종 정확도가 향상되지만 인덱스 구축 시간이 늘어납니다.</p></li>
 </ul></li>
 </ol>
-<p>매개변수 조정에 대해 자세히 알아보려면 <a href="/docs/ko/diskann.md#diskann-params">DISKANN 매개변수를</a> 참조하세요.</p>
+<p>매개변수 조정에 대해 자세히 알아보려면 <a href="/docs/ko/v2.6.x/diskann.md#diskann-params">DISKANN 매개변수를</a> 참조하세요.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN은 <strong>PQ를</strong> 사용하여 고차원 벡터를 더 작은 표현<strong>(PQ 코드)</strong>으로 압축하고, 이를 메모리에 저장하여 대략적인 거리를 빠르게 계산합니다.</p>
 <p><code translate="no">pq_code_budget_gb_ratio</code> 매개변수는 이러한 PQ 코드를 저장하는 전용 메모리 공간을 관리합니다. 이 값은 벡터의 총 크기(기가바이트)와 PQ 코드 저장을 위해 할당된 공간 사이의 비율을 나타냅니다. 다음 공식을 사용하여 실제 PQ 코드 예산(기가바이트)을 계산할 수 있습니다:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -66,9 +66,9 @@ summary: >-
 <p>여기서</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> 는 벡터의 총 크기(기가바이트)입니다.</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> 는 사용자가 정의한 비율로, 전체 데이터 크기 중 PQ 코드용으로 예약된 비율을 나타냅니다. 이 매개변수를 사용하면 검색 정확도와 메모리 리소스 간의 균형을 맞출 수 있습니다. 매개변수 조정에 대한 자세한 내용은 <a href="/docs/ko/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN 구성을</a> 참조하세요.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> 는 사용자가 정의한 비율로, 전체 데이터 크기 중 PQ 코드용으로 예약된 비율을 나타냅니다. 이 매개변수를 사용하면 검색 정확도와 메모리 리소스 간의 균형을 맞출 수 있습니다. 매개변수 조정에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN 구성을</a> 참조하세요.</p></li>
 </ul>
-<p>기본 PQ 방법에 대한 기술적 세부 사항은 <a href="/docs/ko/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ를</a> 참조하세요.</p>
+<p>기본 PQ 방법에 대한 기술적 세부 사항은 <a href="/docs/ko/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ를</a> 참조하세요.</p>
 <h3 id="Search-process" class="common-anchor-header">검색 프로세스</h3><p>인덱스(디스크의 Vamana 그래프와 메모리의 PQ 코드)가 구축되면 DISKANN은 다음과 같이 ANN 검색을 수행합니다:</p>
 <p>
   
@@ -82,7 +82,7 @@ summary: >-
 <li><p><code translate="no">beam_width_ratio</code>: 검색의 폭을 제어하는 배율로, 이웃을 탐색하기 위해 얼마나 많은 후보 이웃을 병렬로 선택할지 결정합니다. <code translate="no">beam_width_ratio</code> 이 클수록 탐색 범위가 넓어져 정확도는 높아지지만 계산 비용과 디스크 I/O가 증가합니다. 빔 폭 또는 선택된 노드 수는 다음 공식을 사용하여 결정됩니다: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: 자주 액세스하는 디스크 데이터를 캐싱하기 위해 할당된 메모리 비율입니다. 이 캐싱은 디스크 I/O를 최소화하는 데 도움이 되며, 데이터가 이미 메모리에 있으므로 반복 검색을 더 빠르게 수행할 수 있습니다.</p></li>
 </ul>
-<p>매개변수 조정에 대해 자세히 알아보려면 <a href="/docs/ko/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN 구성을</a> 참조하세요.</p></li>
+<p>매개변수 조정에 대해 자세히 알아보려면 <a href="/docs/ko/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN 구성을</a> 참조하세요.</p></li>
 <li><p><strong>반복 탐색:</strong> 검색은 충분한 수의 이웃을 찾을 때까지 대략적인 평가(PQ 사용)와 정밀 검사(디스크의 원본 벡터 사용)를 반복적으로 수행하여 후보 집합을 반복적으로 구체화합니다.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Milvus에서 DISKANN 활성화하기<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -166,7 +166,7 @@ summary: >-
       <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="SDK-configuration" class="common-anchor-header">SDK 구성</h3><p>다음은 Milvus SDK를 사용하여 DISKANN 매개변수를 설정하는 방법의 예시입니다.</p>
-<h4 id="Build" class="common-anchor-header">빌드</h4><p>Milvus의 벡터 필드에 <code translate="no">IVF_FLAT</code> 인덱스를 구축하려면 <code translate="no">add_index()</code> 방법을 사용하여 <code translate="no">index_type</code>, <code translate="no">metric_type</code> 및 인덱스에 대한 추가 파라미터를 지정합니다.</p>
+<h4 id="Build" class="common-anchor-header">빌드</h4><p>Milvus의 벡터 필드에 <code translate="no">DISKANN</code> 인덱스를 구축하려면 <code translate="no">add_index()</code> 방법을 사용하여 <code translate="no">index_type</code>, <code translate="no">metric_type</code> 및 인덱스에 대한 추가 파라미터를 지정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -185,7 +185,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
+<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
 <h4 id="Search" class="common-anchor-header">검색</h4><p>인덱스가 생성되고 엔티티가 삽입되면 인덱스에서 유사도 검색을 수행할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
@@ -258,7 +258,7 @@ res = MilvusClient.search(
      <td><p>압축되지 않은 데이터의 크기와 비교하여 PQ 코드(데이터 포인트의 압축된 표현)의 크기를 제어합니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: (0.0, 0.25]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>비율이 높을수록 PQ 코드에 더 많은 메모리를 할당하여 원본 벡터에 대한 더 많은 정보를 효과적으로 저장함으로써 더 정확한 검색 결과를 얻을 수 있습니다. 하지만 더 많은 메모리가 필요하므로 대규모 데이터 세트를 처리할 수 있는 용량이 제한됩니다. 비율이 낮을수록 메모리 사용량은 줄어들지만 더 작은 PQ 코드가 더 적은 정보를 보유하므로 정확도가 떨어질 가능성이 있습니다. 이 접근 방식은 메모리 제약이 우려되는 시나리오에 적합하며 잠재적으로 더 큰 데이터 세트의 색인화를 가능하게 합니다.</p>
+     <td><p>비율이 높을수록 PQ 코드에 더 많은 메모리를 할당하여 원본 벡터에 대한 더 많은 정보를 효과적으로 저장함으로써 더 정확한 검색 결과를 얻을 수 있습니다. 하지만 더 많은 메모리가 필요하므로 대용량 데이터 세트를 처리할 수 있는 용량이 제한됩니다. 비율이 낮을수록 메모리 사용량은 줄어들지만 더 작은 PQ 코드가 더 적은 정보를 보유하므로 정확도가 떨어질 가능성이 있습니다. 이 접근 방식은 메모리 제약이 우려되는 시나리오에 적합하며 잠재적으로 더 큰 데이터 세트의 색인화를 가능하게 합니다.</p>
 <p>대부분의 경우 다음 범위 내에서 값을 설정하는 것이 좋습니다: [0.0625, 0.25].</p></td>
    </tr>
 </table>

@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Pelajari cara meng-upgrade Milvus mandiri dengan Helm Chart.
 title: Meningkatkan Milvus Standalone dengan Helm Chart
 ---
-<div class="tab-wrapper"><a href="/docs/id/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/id/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/id/upgrade_milvus_standalone-docker.md" class=''>Menyusun</a></div>
+<div class="tab-wrapper"><a href="/docs/id/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/id/v2.6.x/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/id/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Menyusun</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Meningkatkan Milvus Standalone dengan Helm Chart<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,6 +24,9 @@ title: Meningkatkan Milvus Standalone dengan Helm Chart
         ></path>
       </svg>
     </button></h1><p>Panduan ini menjelaskan cara mengupgrade Milvus standalone Anda dengan Milvus Helm chart.</p>
+<div class="alert note">
+<p>Peningkatan dari Milvus 2.5.x (atau versi sebelumnya) ke 2.6.0-rc1 melibatkan perubahan arsitektur yang signifikan yang membuat peningkatan ini tidak dapat <strong>dibatalkan</strong>. Karena pengenalan komponen baru (seperti Woodpecker dan Streaming Node) dan penghapusan komponen tertentu, <strong>Anda tidak dapat kembali ke versi sebelumnya setelah upgrade selesai.</strong> Untuk detail tentang perubahan arsitektur yang diperkenalkan pada 2.6.0-rc1, lihat <a href="/docs/id/v2.6.x/architecture_overview.md">Tinjauan Arsitektur Milvus</a>.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +47,7 @@ title: Meningkatkan Milvus Standalone dengan Helm Chart
 <li>Versi Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Sejak grafik Milvus-Helm versi 4.2.21, kami memperkenalkan grafik pulsar-v3.x sebagai ketergantungan. Untuk kompatibilitas ke belakang, harap tingkatkan helm Anda ke versi v3.14 atau versi yang lebih baru, dan pastikan untuk menambahkan opsi <code translate="no">--reset-then-reuse-values</code> setiap kali Anda menggunakan <code translate="no">helm upgrade</code>.</p>
+<p>Sejak bagan Milvus-Helm versi 4.2.21, kami memperkenalkan bagan pulsar-v3.x sebagai ketergantungan. Untuk kompatibilitas ke belakang, harap tingkatkan helm Anda ke versi v3.14 atau versi yang lebih baru, dan pastikan untuk menambahkan opsi <code translate="no">--reset-then-reuse-values</code> setiap kali Anda menggunakan <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">Memeriksa versi Milvus<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +111,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat memilih jalur upgrade untuk Milvus Anda sebagai berikut:</p>
-<div style="display: none;">- [Lakukan peningkatan bergilir] (#melakukan-peningkatan bergilir) dari Milvus v2.2.3 dan rilis yang lebih baru ke v2.5.12.</div>
+<div style="display: none;">- [Lakukan peningkatan bergilir] (#melakukan-peningkatan bergilir) dari Milvus v2.2.3 dan rilis yang lebih baru ke v2.6.0-rc1.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Tingkatkan Milvus menggunakan Helm</a> untuk peningkatan dari rilis minor sebelum v2.2.3 ke v2.5.12.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrasi metadata</a> sebelum peningkatan dari Milvus v2.1.x ke v2.5.12.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Tingkatkan Milvus menggunakan Helm</a> untuk peningkatan dari rilis minor sebelum v2.2.3 ke v2.6.0-rc1.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrasi metadata</a> sebelum peningkatan dari Milvus v2.1.x ke v2.6.0-rc1.</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Melakukan pemutakhiran bergilir<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -129,7 +132,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sejak Milvus 2.2.3, Anda dapat mengkonfigurasi koordinator Milvus untuk bekerja dalam mode siaga aktif dan mengaktifkan fitur peningkatan bergilir untuk mereka, sehingga Milvus dapat menanggapi permintaan yang masuk selama peningkatan koordinator. Pada rilis sebelumnya, koordinator akan dihapus dan kemudian dibuat selama peningkatan, yang dapat menyebabkan waktu henti tertentu pada layanan.</p>
+    </button></h2><p>Sejak Milvus 2.2.3, Anda dapat mengkonfigurasi koordinator Milvus untuk bekerja dalam mode siaga aktif dan mengaktifkan fitur peningkatan bergilir untuk mereka, sehingga Milvus dapat merespon permintaan yang masuk selama peningkatan koordinator. Pada rilis sebelumnya, koordinator akan dihapus dan kemudian dibuat selama peningkatan, yang dapat menyebabkan waktu henti tertentu pada layanan.</p>
 <p>Upgrade bergulir mengharuskan koordinator untuk bekerja dalam mode siaga aktif. Anda dapat menggunakan <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">skrip</a> yang kami sediakan untuk mengonfigurasi koordinator agar bekerja dalam mode siaga aktif dan memulai pemutakhiran bergulir.</p>
 <p>Berdasarkan kemampuan pembaruan bergulir yang disediakan oleh Kubernetes, skrip di atas memberlakukan pembaruan terurut dari penyebaran sesuai dengan dependensinya. Selain itu, Milvus mengimplementasikan mekanisme untuk memastikan bahwa komponen-komponennya tetap kompatibel dengan komponen-komponen yang bergantung padanya selama peningkatan, sehingga secara signifikan mengurangi potensi waktu henti layanan.</p>
 <p>Skrip ini hanya berlaku untuk peningkatan Milvus yang diinstal dengan Helm. Tabel berikut mencantumkan flag perintah yang tersedia dalam skrip.</p>
@@ -145,14 +148,14 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operasi</td><td><code translate="no">update</code></td><td>Salah</td></tr>
 </tbody>
 </table>
-<p>Setelah Anda memastikan bahwa semua deployment dalam instans Milvus Anda berada dalam status normal. Anda dapat menjalankan perintah berikut untuk memutakhirkan instans Milvus ke 2.5.12.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w &#x27;milvusdb/milvus:v2.5.12&#x27;
+<p>Setelah Anda memastikan bahwa semua deployment dalam instans Milvus Anda berada dalam status normal. Anda dapat menjalankan perintah berikut untuk memutakhirkan instans Milvus ke 2.6.0-rc1.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0-rc1 -w &#x27;milvusdb/milvus:v2.6.0-rc1&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
 <li>Skrip ini <strong>tidak berlaku</strong> pada instans Milvus yang terinstalasi dengan <strong>RocksMQ</strong>.</li>
 <li>Skrip ini mengkodekan urutan peningkatan penyebaran dan tidak dapat diubah.</li>
-<li>Skrip ini menggunakan <code translate="no">kubectl patch</code> untuk memperbarui deployment dan <code translate="no">kubectl rollout status</code> untuk melihat statusnya.</li>
+<li>Skrip ini menggunakan <code translate="no">kubectl patch</code> untuk memperbarui penyebaran dan <code translate="no">kubectl rollout status</code> untuk melihat statusnya.</li>
 <li>Skrip menggunakan <code translate="no">kubectl patch</code> untuk memperbarui label <code translate="no">app.kubernetes.io/version</code> pada deployment ke label yang ditentukan setelah bendera <code translate="no">-t</code> pada perintah.</li>
 </ol>
 </div>
@@ -174,7 +177,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>Untuk memutakhirkan Milvus dari rilis minor sebelum v2.2.3 ke versi terbaru, jalankan perintah berikut:</p>
 <pre><code translate="no" class="language-shell">helm repo update
-helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=4.1.24 # use the helm chart version here
+helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=4.2.53 # use the helm chart version here
 <button class="copy-code-btn"></button></code></pre>
 <p>Gunakan versi grafik Helm pada perintah sebelumnya. Untuk detail mengenai cara mendapatkan versi grafik Helm, lihat <a href="#Check-the-Milvus-version">Memeriksa versi Milvus</a>.</p>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">Memigrasi metadata<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
@@ -235,25 +238,25 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li>Migrasi metadata Milvus.</li>
 <li>Memulai komponen Milvus dengan image baru.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2512" class="common-anchor-header">2. Memutakhirkan Milvus dari v2.1.x ke 2.5.12</h4><p>Perintah berikut ini mengasumsikan bahwa Anda memutakhirkan Milvus dari v2.1.4 ke 2.5.12. Ubahlah ke versi yang sesuai dengan kebutuhan Anda.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-260-rc1" class="common-anchor-header">2. Memutakhirkan Milvus dari v2.1.x ke 2.6.0-rc1</h4><p>Perintah berikut ini mengasumsikan bahwa Anda memutakhirkan Milvus dari v2.1.4 ke 2.6.0-rc1. Ubahlah ke versi yang sesuai dengan kebutuhan Anda.</p>
 <ol>
 <li><p>Tentukan nama instans Milvus, versi Milvus sumber, dan versi Milvus target.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.6.0-rc1
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tentukan namespace dengan <code translate="no">-n</code> jika Milvus Anda tidak terinstal pada namespace default K8s.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tentukan jalur root dengan <code translate="no">-r</code> jika Milvus Anda terinstalasi dengan <code translate="no">rootpath</code>.</p>
-<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">12</span> -<span class="hljs-attribute">r</span> by-dev
+<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.6</span>.<span class="hljs-number">0</span>-rc1 -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tentukan tag gambar dengan <code translate="no">-w</code> jika Milvus Anda terinstalasi dengan <code translate="no">image</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -w milvusdb/milvus:v2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1 -r by-dev -w milvusdb/milvus:v2.6.0-rc1
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tetapkan <code translate="no">-d true</code> jika Anda ingin menghapus pod migrasi secara otomatis setelah migrasi selesai.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -w milvusdb/milvus:v2.5.12 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1 -w milvusdb/milvus:v2.6.0-rc1 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Kembalikan dan migrasi lagi jika migrasi gagal.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.12 -r by-dev -o migrate -w milvusdb/milvus:v2.5.12
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0-rc1 -r by-dev -o migrate -w milvusdb/milvus:v2.6.0-rc1
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

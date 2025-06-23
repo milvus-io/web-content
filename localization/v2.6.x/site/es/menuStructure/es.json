@@ -1,42 +1,42 @@
 [
   {
-    "label": "À propos de Milvus",
+    "label": "Acerca de Milvus",
     "id": "about",
     "isMenu": true,
     "order": 0,
     "children": [
       {
-        "label": "Qu'est-ce que Milvus ?",
+        "label": "Qué es Milvus",
         "id": "overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Milvus Adopters",
+        "label": "Milvus Adoptantes",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "Feuille de route Milvus",
+        "label": "Hoja de ruta de Milvus",
         "id": "roadmap.md",
         "order": 2,
         "children": []
       },
       {
-        "label": "Communiqués",
+        "label": "Comunicados",
         "id": "release_notes.md",
         "order": 3,
         "children": []
       },
       {
-        "label": "Critères de référence",
+        "label": "Puntos de referencia",
         "id": "benchmark.md",
         "order": 4,
         "children": []
       },
       {
-        "label": "Comparaison",
+        "label": "Comparación",
         "id": "comparison.md",
         "order": 5,
         "children": []
@@ -44,49 +44,49 @@
     ]
   },
   {
-    "label": "Commencer",
+    "label": "Comenzar",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
     "children": [
       {
-        "label": "Démarrage rapide",
+        "label": "Inicio rápido",
         "id": "quickstart.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Conception d'un modèle de données pour la recherche",
+        "label": "Diseño del modelo de datos para la búsqueda",
         "id": "schema-hands-on.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "Installer Milvus",
+        "label": "Instalar Milvus",
         "id": "install_milvus",
         "order": 2,
         "isMenu": true,
         "children": [
           {
-            "label": "Vue d'ensemble",
+            "label": "Visión general",
             "id": "install-overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Run Milvus Lite",
+            "label": "Ejecutar Milvus Lite",
             "id": "milvus_lite.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Run Milvus Standalone",
+            "label": "Ejecutar Milvus Standalone",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
             "children": [
               {
-                "label": "Exigences",
+                "label": "Requisitos",
                 "id": "prerequisite-docker.md",
                 "order": 0,
                 "children": []
@@ -104,7 +104,7 @@
                 "children": []
               },
               {
-                "label": "Docker Desktop (Windows)",
+                "label": "Escritorio Docker (Windows)",
                 "id": "install_standalone-windows.md",
                 "order": 3,
                 "children": []
@@ -112,25 +112,25 @@
             ]
           },
           {
-            "label": "Exécuter Milvus Distribué",
+            "label": "Ejecutar Milvus Distributed",
             "id": "run_milvus_k8s",
             "order": 3,
             "isMenu": true,
             "children": [
               {
-                "label": "Exigences",
+                "label": "Requisitos",
                 "id": "prerequisite-helm.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Opérateur Milvus",
+                "label": "Operador Milvus",
                 "id": "install_cluster-milvusoperator.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Tableau de bord",
+                "label": "Cuadro de mando",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -138,19 +138,19 @@
             ]
           },
           {
-            "label": "Exécuter Milvus avec le GPU",
+            "label": "Ejecutar Milvus con GPU",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Exigences",
+                "label": "Requisitos",
                 "id": "prerequisite-gpu.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Tableau de bord",
+                "label": "Cuadro de mando",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -166,7 +166,7 @@
         ]
       },
       {
-        "label": "Installer les SDK",
+        "label": "Instalar SDK",
         "id": "install_sdks",
         "order": 3,
         "children": [
@@ -177,7 +177,7 @@
             "children": []
           },
           {
-            "label": "SDK Java",
+            "label": "SDK de Java",
             "id": "install-java.md",
             "order": 1,
             "children": []
@@ -189,7 +189,7 @@
             "children": []
           },
           {
-            "label": "SDK Node.js",
+            "label": "SDK de Node.js",
             "id": "install-node.md",
             "order": 3,
             "children": []
@@ -199,49 +199,49 @@
     ]
   },
   {
-    "label": "Concepts",
+    "label": "Conceptos",
     "id": "concepts",
     "isMenu": true,
     "order": 2,
     "children": [
       {
-        "label": "Architecture",
+        "label": "Arquitectura",
         "id": "architecture",
         "order": 0,
         "isMenu": true,
         "children": [
           {
-            "label": "Vue d'ensemble",
+            "label": "Visión general",
             "id": "architecture_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Principaux éléments",
+            "label": "Componentes principales",
             "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Service de diffusion en continu",
+            "label": "Servicio de streaming",
             "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Traitement des données",
+            "label": "Tratamiento de datos",
             "id": "data_processing.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "Pivert",
+            "label": "Pájaro carpintero",
             "id": "woodpecker_architecture.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "Le lieu du savoir",
+            "label": "Knowhere",
             "id": "knowhere.md",
             "order": 5,
             "children": []
@@ -255,43 +255,43 @@
         "children": []
       },
       {
-        "label": "Multi-tenance",
+        "label": "Multiarrendamiento",
         "id": "multi_tenancy.md",
         "order": 3,
         "children": []
       },
       {
-        "label": "Horodatage",
+        "label": "Marca de tiempo",
         "id": "timestamp.md",
         "order": 4,
         "children": []
       },
       {
-        "label": "Synchronisation du temps",
+        "label": "Sincronización horaria",
         "id": "time_sync.md",
         "order": 6,
         "children": []
       },
       {
-        "label": "Types métriques",
+        "label": "Tipos métricos",
         "id": "metric.md",
         "order": 7,
         "children": []
       },
       {
-        "label": "Niveau de cohérence",
+        "label": "Nivel de coherencia",
         "id": "tune_consistency.md",
         "order": 8,
         "children": []
       },
       {
-        "label": "Réplique en mémoire",
+        "label": "Réplica en memoria",
         "id": "replica.md",
         "order": 9,
         "children": []
       },
       {
-        "label": "Terminologie",
+        "label": "Terminología",
         "id": "glossary.md",
         "order": 10,
         "children": []
@@ -299,72 +299,72 @@
     ]
   },
   {
-    "label": "Guide de l'utilisateur",
+    "label": "Guía del usuario",
     "id": "userguide",
     "isMenu": true,
     "order": 3,
     "children": [
       {
-        "label": "Base de données",
+        "label": "Base de datos",
         "id": "manage_databases.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Collections",
+        "label": "Colecciones",
         "id": "collections",
         "order": 1,
         "children": [
           {
-            "label": "La collecte expliquée",
+            "label": "Explicación de la recogida",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Créer une collection",
+            "label": "Crear colección",
             "id": "create-collection.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Voir les collections",
+            "label": "Ver colecciones",
             "id": "view-collections.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "Modifier la collection",
+            "label": "Modificar la colección",
             "id": "modify-collection.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "Chargement et libération",
+            "label": "Cargar y soltar",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "Set Collection TTL",
+            "label": "Establecer TTL de recogida",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
           },
           {
-            "label": "Gérer les partitions",
+            "label": "Gestionar particiones",
             "id": "manage-partitions.md",
             "order": 7,
             "children": []
           },
           {
-            "label": "Gérer les alias",
+            "label": "Gestionar alias",
             "id": "manage-aliases.md",
             "order": 8,
             "children": []
           },
           {
-            "label": "Collecte des gouttes",
+            "label": "Recogida de gotas",
             "id": "drop-collection.md",
             "order": 9,
             "children": []
@@ -372,106 +372,106 @@
         ]
       },
       {
-        "label": "Schéma et champs de données",
+        "label": "Esquema y campos de datos",
         "id": "schema",
         "order": 2,
         "children": [
           {
-            "label": "Le schéma expliqué",
+            "label": "Explicación del esquema",
             "id": "schema.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Champ primaire et AutoID",
+            "label": "Campo primario y AutoID",
             "id": "primary-field.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Vecteur dense",
+            "label": "Vector denso",
             "id": "dense-vector.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Vecteur binaire",
+            "label": "Vector binario",
             "id": "binary-vector.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "Vecteur épars",
+            "label": "Vector disperso",
             "id": "sparse_vector.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "Champ de la chaîne de caractères",
+            "label": "Campo de cadena",
             "id": "string.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "Champ numérique",
+            "label": "Campo numérico",
             "id": "number.md",
             "order": 6,
             "children": []
           },
           {
-            "label": "Champ JSON",
+            "label": "Campo JSON",
             "id": "use-json-fields.md",
             "order": 7,
             "children": []
           },
           {
-            "label": "Champ du tableau",
+            "label": "Campo de matriz",
             "id": "array_data_type.md",
             "order": 8,
             "children": []
           },
           {
-            "label": "Champ dynamique",
+            "label": "Campo dinámico",
             "id": "enable-dynamic-field.md",
             "order": 9,
             "children": []
           },
           {
-            "label": "Nullable et par défaut",
+            "label": "Anulable y por defecto",
             "id": "nullable-and-default.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "Analyseur",
+            "label": "Analizador",
             "id": "analyzer",
             "order": 11,
             "children": [
               {
-                "label": "Aperçu de l'analyseur",
+                "label": "Visión general del analizador",
                 "id": "analyzer-overview.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Analyseurs intégrés",
+                "label": "Analizadores integrados",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
                   {
-                    "label": "Standard",
+                    "label": "Estándar",
                     "id": "standard-analyzer.md",
                     "order": 0,
                     "children": []
                   },
                   {
-                    "label": "Anglais",
+                    "label": "Inglés",
                     "id": "english-analyzer.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Chinois",
+                    "label": "Chino",
                     "id": "chinese-analyzer.md",
                     "order": 2,
                     "children": []
@@ -479,18 +479,18 @@
                 ]
               },
               {
-                "label": "Tokenizers",
+                "label": "Tokenizadores",
                 "id": "tokenizers",
                 "order": 2,
                 "children": [
                   {
-                    "label": "Standard",
+                    "label": "Estándar",
                     "id": "standard-tokenizer.md",
                     "order": 0,
                     "children": []
                   },
                   {
-                    "label": "Espace blanc",
+                    "label": "Espacio en blanco",
                     "id": "whitespace-tokenizer.md",
                     "order": 1,
                     "children": []
@@ -508,7 +508,7 @@
                     "children": []
                   },
                   {
-                    "label": "UNITÉ DE SOINS INTENSIFS",
+                    "label": "UCI",
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -516,18 +516,18 @@
                 ]
               },
               {
-                "label": "Filtres",
+                "label": "Filtros",
                 "id": "filters",
                 "order": 3,
                 "children": [
                   {
-                    "label": "Minuscules",
+                    "label": "Minúsculas",
                     "id": "lowercase-filter.md",
                     "order": 0,
                     "children": []
                   },
                   {
-                    "label": "Pliage ASCII",
+                    "label": "Plegado ASCII",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
@@ -551,19 +551,19 @@
                     "children": []
                   },
                   {
-                    "label": "Longueur",
+                    "label": "Longitud",
                     "id": "length-filter.md",
                     "order": 5,
                     "children": []
                   },
                   {
-                    "label": "Arrêter",
+                    "label": "Stop",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
                   },
                   {
-                    "label": "Décompacteur",
+                    "label": "Descompostador",
                     "id": "decompounder-filter.md",
                     "order": 7,
                     "children": []
@@ -575,7 +575,7 @@
                     "children": []
                   },
                   {
-                    "label": "Supprimer la ponctuation",
+                    "label": "Eliminar punct",
                     "id": "removepunct-filter.md",
                     "order": 9,
                     "children": []
@@ -589,7 +589,7 @@
                 ]
               },
               {
-                "label": "Analyseurs multilingues",
+                "label": "Analizadores multilingües",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
@@ -597,13 +597,13 @@
             ]
           },
           {
-            "label": "Modifier le champ de collecte",
+            "label": "Alterar campo de recogida",
             "id": "alter-collection-field.md",
             "order": 12,
             "children": []
           },
           {
-            "label": "Ajouter des champs à une collection existante",
+            "label": "Añadir campos a una colección existente",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 13,
             "children": []
@@ -611,24 +611,24 @@
         ]
       },
       {
-        "label": "Insérer et supprimer",
+        "label": "Insertar y eliminar",
         "id": "insert-and-delete",
         "order": 3,
         "children": [
           {
-            "label": "Insérer des entités",
+            "label": "Insertar entidades",
             "id": "insert-update-delete.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Entités Upsert",
+            "label": "Entidades Upsert",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Supprimer des entités",
+            "label": "Borrar entidades",
             "id": "delete-entities.md",
             "order": 2,
             "children": []
@@ -636,25 +636,25 @@
         ]
       },
       {
-        "label": "Index",
+        "label": "Índices",
         "id": "manage_indexes",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "L'indice expliqué",
+            "label": "Explicación del índice",
             "id": "index-explained.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Index de vecteurs flottants",
+            "label": "Índices de vectores flotantes",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "PLAT",
+                "label": "PLANA",
                 "id": "flat.md",
                 "order": 0,
                 "children": []
@@ -716,7 +716,7 @@
             ]
           },
           {
-            "label": "Index vectoriels binaires",
+            "label": "Índices vectoriales binarios",
             "id": "binary-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -736,13 +736,13 @@
             ]
           },
           {
-            "label": "Index de vecteurs épars",
+            "label": "Índices de vectores dispersos",
             "id": "sparse-vector-indexes",
             "order": 3,
             "isMenu": true,
             "children": [
               {
-                "label": "INDEX_INVERSÉ_SPARSE",
+                "label": "ÍNDICE_ESPARCIDO_INVERTIDO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -750,7 +750,7 @@
             ]
           },
           {
-            "label": "Index scalaires",
+            "label": "Índices escalares",
             "id": "scalar-indexes",
             "order": 4,
             "isMenu": true,
@@ -762,7 +762,7 @@
                 "children": []
               },
               {
-                "label": "INVERSE",
+                "label": "INVERTIDO",
                 "id": "inverted.md",
                 "order": 1,
                 "children": []
@@ -770,12 +770,12 @@
             ]
           },
           {
-            "label": "Index compatibles avec le GPU",
+            "label": "Índices habilitados para GPU",
             "id": "gpu-enabled-indexes",
             "order": 5,
             "children": [
               {
-                "label": "Aperçu de l'indice GPU",
+                "label": "Visión general del índice GPU",
                 "id": "gpu-index-overview.md",
                 "order": 0,
                 "children": []
@@ -809,78 +809,78 @@
         ]
       },
       {
-        "label": "Recherche",
+        "label": "Buscar en",
         "id": "search-rerank",
         "order": 5,
         "isMenu": true,
         "children": [
           {
-            "label": "Recherche de base ANN",
+            "label": "Búsqueda básica de RNA",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Recherche filtrée",
+            "label": "Búsqueda filtrada",
             "id": "filtered-search.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Recherche de gamme",
+            "label": "Búsqueda por rangos",
             "id": "range-search.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Recherche de groupes",
+            "label": "Agrupación Búsqueda",
             "id": "grouping-search.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "Recherche hybride",
+            "label": "Búsqueda híbrida",
             "id": "multi-vector-search.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "Demande de renseignements",
+            "label": "Consulta",
             "id": "get-and-scalar-query.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "Filtrage",
+            "label": "Filtrado",
             "id": "filtering",
             "order": 6,
             "children": [
               {
-                "label": "Le filtrage expliqué",
+                "label": "Explicación del filtrado",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Opérateurs de base",
+                "label": "Operadores básicos",
                 "id": "basic-operators.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Filtrage Templating",
+                "label": "Filtrado Plantillas",
                 "id": "filtering-templating.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Opérateurs JSON",
+                "label": "Operadores JSON",
                 "id": "json-operators.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Opérateurs de tableau",
+                "label": "Operadores de matrices",
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
@@ -888,37 +888,37 @@
             ]
           },
           {
-            "label": "Recherche en texte intégral",
+            "label": "Búsqueda de texto completo",
             "id": "full-text-search.md",
             "order": 7,
             "children": []
           },
           {
-            "label": "Correspondance des textes",
+            "label": "Coincidencia de texto",
             "id": "keyword-match.md",
             "order": 8,
             "children": []
           },
           {
-            "label": "Correspondance des phrases",
+            "label": "Coincidencia de frases",
             "id": "phrase-match.md",
             "order": 9,
             "children": []
           },
           {
-            "label": "Requêtes Elasticsearch vers Milvus",
+            "label": "Consultas de Elasticsearch a Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "Recherche d'itérateurs",
+            "label": "Iteradores de búsqueda",
             "id": "with-iterators.md",
             "order": 11,
             "children": []
           },
           {
-            "label": "Utiliser la clé de partition",
+            "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
             "order": 12,
             "children": []
@@ -926,19 +926,19 @@
         ]
       },
       {
-        "label": "Embeddings &amp; Reranking",
+        "label": "Embeddings y reordenación",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
         "children": [
           {
-            "label": "Fonction d'intégration",
+            "label": "Función de incrustación",
             "id": "embedding-function",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "Vue d'ensemble de la fonction d'intégration",
+                "label": "Visión general de la función de incrustación",
                 "id": "embedding-function-overview.md",
                 "order": 0,
                 "children": []
@@ -962,25 +962,25 @@
                 "children": []
               },
               {
-                "label": "Roche-mère",
+                "label": "Bedrock",
                 "id": "bedrock.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "Vertex AI",
+                "label": "Vértice AI",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
               },
               {
-                "label": "Voyage AI",
+                "label": "Viaje AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
               },
               {
-                "label": "Cohère",
+                "label": "Cohere",
                 "id": "cohere.md",
                 "order": 7,
                 "children": []
@@ -992,7 +992,7 @@
                 "children": []
               },
               {
-                "label": "Visage en étreinte TEI",
+                "label": "Cara de abrazo TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1000,55 +1000,55 @@
             ]
           },
           {
-            "label": "Fonction de reclassement",
+            "label": "Función de reclasificación",
             "id": "reranking",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "Classeur pondéré",
+                "label": "Clasificador ponderado",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "RRF Ranker",
+                "label": "Clasificador RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Rang de décomposition",
+                "label": "Decadencia Ranker",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 2,
                 "children": [
                   {
-                    "label": "Aperçu de Decay Ranker",
+                    "label": "Visión general de Decay Ranker",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
                   },
                   {
-                    "label": "Décroissance gaussienne",
+                    "label": "Decaimiento gaussiano",
                     "id": "gaussian-decay.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Décroissance exponentielle",
+                    "label": "Decaimiento exponencial",
                     "id": "exponential-decay.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "Décroissance linéaire",
+                    "label": "Decaimiento lineal",
                     "id": "linear-decay.md",
                     "order": 3,
                     "children": []
                   },
                   {
-                    "label": "Tutoriel : Mettre en place un classement basé sur le temps dans Milvus",
+                    "label": "Tutorial: Implementación de la clasificación basada en el tiempo en Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1056,25 +1056,25 @@
                 ]
               },
               {
-                "label": "Classeur de modèles",
+                "label": "Clasificador de modelos",
                 "id": "model-ranker",
                 "order": 3,
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Aperçu de Model Ranker",
+                    "label": "Visión general de Model Ranker",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
                   },
                   {
-                    "label": "Classement vLLM",
+                    "label": "Clasificador vLLM",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Classement TEI",
+                    "label": "Clasificador TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1088,19 +1088,19 @@
     ]
   },
   {
-    "label": "Importation de données",
+    "label": "Importación de datos",
     "id": "data_import",
     "order": 5,
     "isMenu": true,
     "children": [
       {
-        "label": "Préparer les données sources",
+        "label": "Preparar los datos de origen",
         "id": "prepare-source-data.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Importer des données",
+        "label": "Importar datos",
         "id": "import-data.md",
         "order": 1,
         "children": []
@@ -1108,43 +1108,43 @@
     ]
   },
   {
-    "label": "Guide d'administration",
+    "label": "Guía de administración",
     "id": "admin_guide",
     "isMenu": true,
     "order": 9,
     "children": [
       {
-        "label": "Déploiement",
+        "label": "Despliegue",
         "id": "deployment",
         "order": 0,
         "isMenu": true,
         "children": [
           {
-            "label": "Sur place",
+            "label": "En las instalaciones",
             "id": "on_premises",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "Avec Docker",
+                "label": "Con Docker",
                 "id": "configure-docker.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Avec barre",
+                "label": "Con Helm",
                 "id": "configure-helm.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Avec l'opérateur Milvus",
+                "label": "Con Milvus Operator",
                 "id": "configure_operator.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Attribuer des ressources",
+                "label": "Asignar recursos",
                 "id": "allocate.md",
                 "order": 3,
                 "children": []
@@ -1152,37 +1152,37 @@
             ]
           },
           {
-            "label": "Sur les nuages",
+            "label": "Sobre las nubes",
             "id": "on_cloud",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "Déployer sur AWS",
+                "label": "Implementación en AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Déployer sur GCP",
+                "label": "Despliegue en GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Déployer sur Azure",
+                "label": "Despliegue en Azure",
                 "id": "azure.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Déployer sur OpenShift",
+                "label": "Despliegue en OpenShift",
                 "id": "openshift.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "Équilibrage de la charge de la couche 7",
+                "label": "Equilibrio de carga de Capa 7",
                 "id": "layer-7-lb",
                 "order": 5,
                 "isMenu": true,
@@ -1194,13 +1194,13 @@
                     "children": []
                   },
                   {
-                    "label": "PCG",
+                    "label": "GCP",
                     "id": "gcp_layer7.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "L'azur",
+                    "label": "Azure",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []
@@ -1208,7 +1208,7 @@
                 ]
               },
               {
-                "label": "Stockage en nuage",
+                "label": "Almacenamiento en la nube",
                 "id": "cloud-storage",
                 "order": 6,
                 "isMenu": true,
@@ -1220,13 +1220,13 @@
                     "children": []
                   },
                   {
-                    "label": "PCG",
+                    "label": "GCP",
                     "id": "gcs.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "L'azur",
+                    "label": "Azure",
                     "id": "abs.md",
                     "order": 3,
                     "children": []
@@ -1238,43 +1238,43 @@
         ]
       },
       {
-        "label": "Configuration",
+        "label": "Configuración",
         "id": "configuration",
         "order": 1,
         "isMenu": true,
         "children": [
           {
-            "label": "Configurations du système",
+            "label": "Configuraciones del sistema",
             "id": "system_configuration.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "À la volée",
+            "label": "Sobre la marcha",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Limiter le nombre de collectes",
+            "label": "Limitar los recuentos de recogida",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Configurer le cache Chunk",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "Coordinateur HA",
+            "label": "Coordinador HA",
             "id": "coordinator_ha.md",
             "order": 4,
             "children": []
           },
           {
-            "label": "QueryNode utilisant le disque local",
+            "label": "QueryNode usando disco local",
             "id": "configure-querynode-localdisk.md",
             "order": 5,
             "children": []
@@ -1282,31 +1282,31 @@
         ]
       },
       {
-        "label": "Gérer les dépendances",
+        "label": "Gestión de dependencias",
         "id": "manage_dependencies",
         "order": 2,
         "isMenu": true,
         "children": [
           {
-            "label": "Avec Docker ou Helm",
+            "label": "Con Docker o Helm",
             "id": "docker_helm_dependencies",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "Stockage d'objets",
+                "label": "Almacenamiento de objetos",
                 "id": "deploy_s3.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Stockage méta",
+                "label": "Metaalmacenamiento",
                 "id": "deploy_etcd.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Stockage des messages",
+                "label": "Almacenamiento de mensajes",
                 "id": "deploy_pulsar.md",
                 "order": 2,
                 "children": []
@@ -1314,25 +1314,25 @@
             ]
           },
           {
-            "label": "Avec l'opérateur Milvus",
+            "label": "Con Milvus Operator",
             "id": "milvus_operator_dependencies",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "Stockage d'objets",
+                "label": "Almacenamiento de objetos",
                 "id": "object_storage_operator.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Stockage méta",
+                "label": "Metaalmacenamiento",
                 "id": "meta_storage_operator.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Stockage des messages",
+                "label": "Almacenamiento de mensajes",
                 "id": "message_storage_operator.md",
                 "order": 2,
                 "children": []
@@ -1340,19 +1340,19 @@
             ]
           },
           {
-            "label": "Utiliser Pulsar avec Milvus",
+            "label": "Utilizar Pulsar con Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
             "children": [
               {
-                "label": "Passer à Pulsar v3",
+                "label": "Actualización a Pulsar v3",
                 "id": "upgrade-pulsar-v3.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Continuer à utiliser Pulsar v2",
+                "label": "Seguir utilizando Pulsar v2",
                 "id": "use-pulsar-v2.md",
                 "order": 1,
                 "children": []
@@ -1362,25 +1362,25 @@
         ]
       },
       {
-        "label": "Mise à l'échelle",
+        "label": "Escala",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "Grappe d'échelle",
+            "label": "Escala Cluster",
             "id": "scaleout.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Échelle avec HPA",
+            "label": "Escala con HPA",
             "id": "hpa.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Dépendances d'échelle",
+            "label": "Dependencias de escala",
             "id": "scale-dependencies.md",
             "order": 2,
             "children": []
@@ -1388,37 +1388,37 @@
         ]
       },
       {
-        "label": "Surveillance, alertes et journaux",
+        "label": "Supervisión, alertas y registros",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
         "children": [
           {
-            "label": "Contrôle",
+            "label": "Supervisión",
             "id": "monitoring",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "Architecture",
+                "label": "Arquitectura",
                 "id": "monitor_overview.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Déployer des services de surveillance",
+                "label": "Implantar servicios de supervisión",
                 "id": "monitor.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Visualiser les mesures",
+                "label": "Visualizar métricas",
                 "id": "visualize.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Tableau de bord Milvus Metrics",
+                "label": "Cuadro de mando de métricas de Milvus",
                 "id": "metrics_dashboard.md",
                 "order": 3,
                 "children": []
@@ -1426,13 +1426,13 @@
             ]
           },
           {
-            "label": "Alertes",
+            "label": "Alertas",
             "id": "alerts",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "Créer une alerte",
+                "label": "Crear una alerta",
                 "id": "alert.md",
                 "order": 0,
                 "children": []
@@ -1440,19 +1440,19 @@
             ]
           },
           {
-            "label": "Journaux",
+            "label": "Registros",
             "id": "logs",
             "order": 2,
             "isMenu": true,
             "children": [
               {
-                "label": "Configurer Grafana Loki",
+                "label": "Configurar Grafana Loki",
                 "id": "configure_grafana_loki.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Configuration des journaux d'accès",
+                "label": "Configurar registros de acceso",
                 "id": "configure_access_logs.md",
                 "order": 1,
                 "children": []
@@ -1460,13 +1460,13 @@
             ]
           },
           {
-            "label": "Trace",
+            "label": "Rastrear",
             "id": "trace",
             "order": 3,
             "isMenu": true,
             "children": [
               {
-                "label": "Recherche de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1476,12 +1476,12 @@
         ]
       },
       {
-        "label": "Groupes de ressources",
+        "label": "Grupos de recursos",
         "id": "resource_groups",
         "order": 9,
         "children": [
           {
-            "label": "Gérer les groupes de ressources",
+            "label": "Gestionar grupos de recursos",
             "id": "resource_group.md",
             "order": 0,
             "children": []
@@ -1489,19 +1489,19 @@
         ]
       },
       {
-        "label": "Optimisation du stockage",
+        "label": "Optimización del almacenamiento",
         "id": "storage_optimization",
         "order": 10,
         "isMenu": true,
         "children": [
           {
-            "label": "Utiliser mmap",
+            "label": "Utilizar mmap",
             "id": "mmap.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Regroupement Compaction",
+            "label": "Agrupación Compactación",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1509,55 +1509,55 @@
         ]
       },
       {
-        "label": "Sécurité",
+        "label": "Seguridad",
         "id": "security",
         "order": 11,
         "isMenu": true,
         "children": [
           {
-            "label": "Activer l'authentification",
+            "label": "Activar autenticación",
             "id": "authenticate.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Activer RBAC",
+            "label": "Activar RBAC",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "Vue d'ensemble de RBAC",
+                "label": "Visión general de RBAC",
                 "id": "rbac.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Utilisateurs, privilèges et rôles",
+                "label": "Usuarios, privilegios y funciones",
                 "id": "users_and_roles.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Groupe de privilèges",
+                "label": "Grupo Privilegio",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Accorder des privilèges",
+                "label": "Conceder privilegios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Rôles des subventions",
+                "label": "Funciones de las subvenciones",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
               },
               {
-                "label": "Supprimer des utilisateurs et des rôles",
+                "label": "Eliminar usuarios y funciones",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -1565,13 +1565,13 @@
             ]
           },
           {
-            "label": "Chiffrement en transit",
+            "label": "Cifrado en tránsito",
             "id": "tls.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Se connecter à Kafka avec SASL/SSL",
+            "label": "Conectarse a Kafka con SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -1587,7 +1587,7 @@
     ]
   },
   {
-    "label": "Outils",
+    "label": "Herramientas",
     "id": "tools",
     "isMenu": true,
     "order": 6,
@@ -1600,18 +1600,18 @@
         "children": []
       },
       {
-        "label": "Sauvegarde Milvus",
+        "label": "Milvus Backup",
         "id": "milvus_backup",
         "order": 1,
         "children": [
           {
-            "label": "Vue d'ensemble",
+            "label": "Visión general",
             "id": "milvus_backup_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Commandes",
+            "label": "Comandos",
             "id": "milvus_backup_cli.md",
             "order": 1,
             "children": []
@@ -1623,31 +1623,31 @@
             "children": []
           },
           {
-            "label": "Cas courants",
+            "label": "Casos comunes",
             "id": "common-cases",
             "order": 3,
             "isMenu": true,
             "children": [
               {
-                "label": "Sauvegarde et restauration en une seule instance",
+                "label": "Copia de seguridad y restauración en una sola instancia",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un même panier",
+                "label": "Migración entre instancias en un mismo cubo",
                 "id": "shared-bucket-backup-and-restore.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrer entre les instances et entre les différents bacs",
+                "label": "Migración entre instancias a través de cubos",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "label": "Migración entre instancias a través de entornos S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -1657,24 +1657,24 @@
         ]
       },
       {
-        "label": "Observateur d'oiseaux",
+        "label": "Observador de aves",
         "id": "birdwatcher",
         "order": 2,
         "children": [
           {
-            "label": "Vue d'ensemble",
+            "label": "Visión general",
             "id": "birdwatcher_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Guides d'installation",
+            "label": "Guías de instalación",
             "id": "birdwatcher_install_guides.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Guides d'utilisation",
+            "label": "Guías de uso",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
             "children": []
@@ -1688,25 +1688,25 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Vue d'ensemble",
+            "label": "Visión general",
             "id": "milvus-cdc-overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Déployer le serveur CDC",
+            "label": "Despliegue del servidor CDC",
             "id": "deploy-cdc-server.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Gérer les tâches du CDC",
+            "label": "Gestionar las tareas de los CDC",
             "id": "manage-cdc-tasks.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Contrôle",
+            "label": "Supervisión",
             "id": "cdc-monitoring.md",
             "order": 3,
             "children": []
@@ -1714,25 +1714,25 @@
         ]
       },
       {
-        "label": "CLI Milvus",
+        "label": "Milvus CLI",
         "id": "cli",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "Vue d'ensemble",
+            "label": "Visión general",
             "id": "cli_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Installation",
+            "label": "Instalación",
             "id": "install_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Commandes",
+            "label": "Comandos",
             "id": "cli_commands.md",
             "order": 2,
             "children": []
@@ -1740,13 +1740,13 @@
         ]
       },
       {
-        "label": "Connecteurs Milvus",
+        "label": "Conectores Milvus",
         "id": "milvus_connectors",
         "order": 5,
         "isMenu": true,
         "children": [
           {
-            "label": "Etincelle",
+            "label": "Chispa",
             "id": "integrate_with_spark.md",
             "order": 0,
             "children": []
@@ -1761,33 +1761,33 @@
         "children": []
       },
       {
-        "label": "Outil de dimensionnement Milvus",
+        "label": "Herramienta de dimensionamiento Milvus",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },
       {
-        "label": "Client Powershell Milvus",
+        "label": "Cliente Powershell Milvus",
         "id": "milvus_powershell",
         "order": 8,
         "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
         "children": []
       },
       {
-        "label": "Modèles",
+        "label": "Modelos",
         "id": "models",
         "isMenu": true,
         "order": 4,
         "children": [
           {
-            "label": "Emboîtements",
+            "label": "Incrustaciones",
             "id": "embeddings",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "Vue d'ensemble",
+                "label": "Visión general",
                 "id": "embeddings.md",
                 "order": 0,
                 "children": []
@@ -1799,7 +1799,7 @@
                 "children": []
               },
               {
-                "label": "Transformateurs de phrases",
+                "label": "Transformadores de frases",
                 "id": "embed-with-sentence-transform.md",
                 "order": 2,
                 "children": []
@@ -1817,7 +1817,7 @@
                 "children": []
               },
               {
-                "label": "Voyage",
+                "label": "Viaje",
                 "id": "embed-with-voyage.md",
                 "order": 6,
                 "children": []
@@ -1829,13 +1829,13 @@
                 "children": []
               },
               {
-                "label": "Cohère",
+                "label": "Cohere",
                 "id": "embed-with-cohere.md",
                 "order": 8,
                 "children": []
               },
               {
-                "label": "Instructeur",
+                "label": "Instructor",
                 "id": "embed-with-instructor.md",
                 "order": 9,
                 "children": []
@@ -1847,7 +1847,7 @@
                 "children": []
               },
               {
-                "label": "Nomique",
+                "label": "Nomic",
                 "id": "embed-with-nomic.md",
                 "order": 11,
                 "children": []
@@ -1859,13 +1859,13 @@
                 "children": []
               },
               {
-                "label": "Modèle2Vec",
+                "label": "Modelo2Vec",
                 "id": "embed-with-model2vec.md",
                 "order": 13,
                 "children": []
               },
               {
-                "label": "Gémeaux",
+                "label": "Géminis",
                 "id": "embed-with-gemini.md",
                 "order": 14,
                 "children": []
@@ -1879,7 +1879,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Vue d'ensemble",
+                "label": "Visión general",
                 "id": "rerankers-overview.md",
                 "order": 0,
                 "children": []
@@ -1891,19 +1891,19 @@
                 "children": []
               },
               {
-                "label": "Cohère",
+                "label": "Cohere",
                 "id": "rerankers-cohere.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Encodeur transversal",
+                "label": "Codificador cruzado",
                 "id": "rerankers-cross-encoder.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Voyage",
+                "label": "Viaje",
                 "id": "rerankers-voyage.md",
                 "order": 4,
                 "children": []
@@ -1921,29 +1921,29 @@
     ]
   },
   {
-    "label": "Intégrations",
+    "label": "Integraciones",
     "id": "integrations",
     "isMenu": true,
     "order": 8,
     "children": [
       {
-        "label": "Vue d'ensemble",
+        "label": "Visión general",
         "id": "integrations_overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Orchestration",
+        "label": "Orquestación",
         "id": "orchestrate-with-milvus",
         "order": 3,
         "children": [
           {
-            "label": "LangChain",
+            "label": "Cadena LangChain",
             "id": "langchain",
             "order": 0,
             "children": [
               {
-                "label": "Utilisation de base",
+                "label": "Uso básico",
                 "id": "basic_usage_langchain.md",
                 "order": 1,
                 "children": []
@@ -1955,13 +1955,13 @@
                 "children": []
               },
               {
-                "label": "Recherche hybride",
+                "label": "Búsqueda híbrida",
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Recherche en texte intégral",
+                "label": "Búsqueda de texto completo",
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
                 "children": []
@@ -1980,25 +1980,25 @@
                 "children": []
               },
               {
-                "label": "Milvus Async API",
+                "label": "API Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Recherche en texte intégral",
+                "label": "Búsqueda de texto completo",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Recherche hybride",
+                "label": "Búsqueda híbrida",
                 "id": "llamaindex_milvus_hybrid_search.md",
                 "order": 3,
                 "children": []
               },
               {
-                "label": "Filtrage des métadonnées",
+                "label": "Filtrado de metadatos",
                 "id": "llamaindex_milvus_metadata_filter.md",
                 "order": 4,
                 "children": []
@@ -2018,7 +2018,7 @@
             "children": []
           },
           {
-            "label": "HayStack",
+            "label": "Pajar",
             "id": "haystack",
             "order": 4,
             "children": [
@@ -2029,7 +2029,7 @@
                 "children": []
               },
               {
-                "label": "Recherche en texte intégral",
+                "label": "Búsqueda de texto completo",
                 "id": "full_text_search_with_milvus_and_haystack.md",
                 "order": 1,
                 "children": []
@@ -2061,7 +2061,7 @@
             "children": []
           },
           {
-            "label": "PrivateGPT",
+            "label": "PrivadoGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []
@@ -2073,7 +2073,7 @@
             "children": []
           },
           {
-            "label": "Pile de lamas",
+            "label": "Pila de llamas",
             "id": "llama_stack_with_milvus.md",
             "order": 12,
             "children": []
@@ -2085,7 +2085,7 @@
             "children": []
           },
           {
-            "label": "N'importe quoiLLM",
+            "label": "Cualquier cosaLLM",
             "id": "use_milvus_in_anythingllm.md",
             "order": 14,
             "children": []
@@ -2093,7 +2093,7 @@
         ]
       },
       {
-        "label": "Agents",
+        "label": "Agentes",
         "id": "integrate-agents",
         "order": 4,
         "children": [
@@ -2104,7 +2104,7 @@
             "children": []
           },
           {
-            "label": "Chameau",
+            "label": "Camello",
             "id": "integrate_with_camel.md",
             "order": 1,
             "children": []
@@ -2136,7 +2136,7 @@
         ]
       },
       {
-        "label": "Évaluation et observabilité",
+        "label": "Evaluación y observabilidad",
         "id": "evaluation-observability",
         "order": 6,
         "children": [
@@ -2153,7 +2153,7 @@
             "children": []
           },
           {
-            "label": "Cinquante et un",
+            "label": "FiftyOne",
             "id": "integrate_with_voxel51.md",
             "order": 2,
             "children": []
@@ -2179,7 +2179,7 @@
         ]
       },
       {
-        "label": "Intégration de modèles",
+        "label": "Modelos de incrustación",
         "id": "integrate-embeddings-models",
         "order": 1,
         "children": [
@@ -2190,13 +2190,13 @@
             "children": []
           },
           {
-            "label": "Cohère",
+            "label": "Cohere",
             "id": "integrate_with_cohere.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Visage étreint",
+            "label": "HuggingFace",
             "id": "integrate_with_hugging-face.md",
             "order": 2,
             "children": []
@@ -2208,7 +2208,7 @@
             "children": []
           },
           {
-            "label": "PhraseTransformateurs",
+            "label": "SentenciaTransformadores",
             "id": "integrate_with_sentencetransformers.md",
             "order": 4,
             "children": []
@@ -2226,7 +2226,7 @@
             "children": []
           },
           {
-            "label": "Douze laboratoires",
+            "label": "Doce laboratorios",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -2246,7 +2246,7 @@
         ]
       },
       {
-        "label": "LLM",
+        "label": "LLMs",
         "id": "integrate-llms",
         "order": 2,
         "children": [
@@ -2263,7 +2263,7 @@
             "children": []
           },
           {
-            "label": "Feux d'artifice",
+            "label": "Fuegos artificiales",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
             "children": []
@@ -2287,7 +2287,7 @@
             "children": []
           },
           {
-            "label": "Gémeaux",
+            "label": "Géminis",
             "id": "build_RAG_with_milvus_and_gemini.md",
             "order": 6,
             "children": []
@@ -2307,12 +2307,12 @@
         ]
       },
       {
-        "label": "Ingénierie de la connaissance",
+        "label": "Ingeniería del conocimiento",
         "id": "knowledge-engineering",
         "order": 5,
         "children": [
           {
-            "label": "PourquoiComment",
+            "label": "Por quéCómo",
             "id": "integrate_with_whyhow.md",
             "order": 0,
             "children": []
@@ -2324,7 +2324,7 @@
             "children": []
           },
           {
-            "label": "Tableau des connaissances",
+            "label": "Tabla de conocimientos",
             "id": "knowledge_table_with_milvus.md",
             "order": 2,
             "children": []
@@ -2344,7 +2344,7 @@
         ]
       },
       {
-        "label": "Sources de données",
+        "label": "Fuentes de datos",
         "id": "data-sources",
         "order": 7,
         "children": [
@@ -2367,13 +2367,13 @@
             "children": []
           },
           {
-            "label": "Non structuré",
+            "label": "Sin estructurar",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "Masque PII",
+            "label": "Enmascarador PII",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -2403,7 +2403,7 @@
             "children": []
           },
           {
-            "label": "Festin",
+            "label": "Fiesta",
             "id": "build_RAG_with_milvus_and_feast.md",
             "order": 9,
             "children": []
@@ -2429,18 +2429,18 @@
         ]
       },
       {
-        "label": "Autres",
+        "label": "Otros",
         "id": "other-integrations",
         "order": 8,
         "children": [
           {
-            "label": "Flocon de neige",
+            "label": "Copo de nieve",
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Bras",
+            "label": "Brazo",
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
@@ -2450,43 +2450,43 @@
     ]
   },
   {
-    "label": "Tutoriels",
+    "label": "Tutoriales",
     "id": "tutorials",
     "isMenu": true,
     "order": 7,
     "children": [
       {
-        "label": "Vue d'ensemble",
+        "label": "Visión general",
         "id": "tutorials-overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Construire un RAG avec Milvus",
+        "label": "Construir RAG con Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "RAG avancé",
+        "label": "RAG avanzado",
         "id": "how_to_enhance_your_rag.md",
         "order": 2,
         "children": []
       },
       {
-        "label": "Recherche plein texte avec Milvus",
+        "label": "Búsqueda de texto completo con Milvus",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
       },
       {
-        "label": "Recherche hybride avec Milvus",
+        "label": "Búsqueda híbrida con Milvus",
         "id": "hybrid_search_with_milvus.md",
         "order": 4,
         "children": []
       },
       {
-        "label": "Recherche d'images avec Milvus",
+        "label": "Búsqueda de imágenes con Milvus",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []
@@ -2498,108 +2498,108 @@
         "children": []
       },
       {
-        "label": "Graphique RAG avec Milvus",
+        "label": "Gráfico RAG con Milvus",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
       },
       {
-        "label": "Recherche contextuelle",
+        "label": "Recuperación contextual",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
       },
       {
-        "label": "Regroupement HDBSCAN",
+        "label": "Agrupación HDBSCAN",
         "id": "hdbscan_clustering_with_milvus.md",
         "order": 9,
         "children": []
       },
       {
-        "label": "Utiliser ColPali pour la récupération multimodale",
+        "label": "Utilice ColPali para la recuperación multimodal",
         "id": "use_ColPali_with_milvus.md",
         "order": 10,
         "children": []
       },
       {
-        "label": "Visualisation vectorielle",
+        "label": "Visualización vectorial",
         "id": "vector_visualization.md",
         "order": 11,
         "children": []
       },
       {
-        "label": "Recommandation de film",
+        "label": "Recomendación de películas",
         "id": "movie_recommendation_with_milvus.md",
         "order": 12,
         "children": []
       },
       {
-        "label": "Recherche d'entonnoirs avec les emboîtements Matryoshka",
+        "label": "Búsqueda en embudo con incrustaciones de matrioskas",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
       },
       {
-        "label": "Démarrage rapide avec Attu",
+        "label": "Inicio rápido con Attu",
         "id": "quickstart_with_attu.md",
         "order": 14,
         "children": []
       },
       {
-        "label": "Utiliser AsyncMilvusClient avec asyncio",
+        "label": "Utilizar AsyncMilvusClient con asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []
       },
       {
-        "label": "Recherche texte-image avec Milvus",
+        "label": "Búsqueda de texto a imagen con Milvus",
         "id": "text_image_search.md",
         "order": 16,
         "children": []
       },
       {
-        "label": "En savoir plus",
+        "label": "Más información",
         "id": "explore-more",
         "order": 99,
         "children": [
           {
-            "label": "Système de réponse aux questions",
+            "label": "Sistema de respuesta a preguntas",
             "id": "question_answering_system.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "Système de recommandation",
+            "label": "Sistema de recomendación",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []
           },
           {
-            "label": "Recherche de similitudes vidéo",
+            "label": "Búsqueda por similitud de vídeos",
             "id": "video_similarity_search.md",
             "order": 7,
             "children": []
           },
           {
-            "label": "Recherche de similarité audio",
+            "label": "Búsqueda de similitudes de audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
           },
           {
-            "label": "Classification des séquences d'ADN",
+            "label": "Clasificación de secuencias de ADN",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []
           },
           {
-            "label": "Moteur de recherche textuelle",
+            "label": "Motor de búsqueda de texto",
             "id": "text_search_engine.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "Système de déduplication d'images",
+            "label": "Sistema de deduplicación de imágenes",
             "id": "image_deduplication_system.md",
             "order": 12,
             "children": []
@@ -2609,37 +2609,37 @@
     ]
   },
   {
-    "label": "FAQ",
+    "label": "Preguntas frecuentes",
     "id": "faq",
     "isMenu": true,
     "order": 9,
     "children": [
       {
-        "label": "FAQ sur la performance",
+        "label": "Preguntas frecuentes",
         "id": "performance_faq.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "FAQ sur les produits",
+        "label": "Preguntas frecuentes sobre productos",
         "id": "product_faq.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "FAQ opérationnelle",
+        "label": "Preguntas más frecuentes",
         "id": "operational_faq.md",
         "order": 2,
         "children": []
       },
       {
-        "label": "Limites de Milvus",
+        "label": "Límites de Milvus",
         "id": "limitations.md",
         "order": 3,
         "children": []
       },
       {
-        "label": "Dépannage",
+        "label": "Solución de problemas",
         "id": "troubleshooting.md",
         "order": 4,
         "children": []

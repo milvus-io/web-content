@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في السيناريوهات واسعة النطاق، حيث يمكن أن تتضمن مجموعات البيانات مليارات أو حتى تريليونات من المتجهات، غالبًا ما تفشل طرق الفهرسة القياسية داخل الذاكرة (مثل <a href="/docs/ar/hnsw.md">HNSW</a> و <a href="/docs/ar/ivf-flat.md">IVF_FLAT</a>) في مواكبة ذلك بسبب قيود الذاكرة. يقدم <strong>DISKANN</strong> نهجًا قائمًا على الأقراص يعالج هذه التحديات من خلال الحفاظ على دقة وسرعة بحث عالية عندما يتجاوز حجم مجموعة البيانات ذاكرة الوصول العشوائي المتاحة.</p>
+    </button></h1><p>في السيناريوهات واسعة النطاق، حيث يمكن أن تتضمن مجموعات البيانات مليارات أو حتى تريليونات من المتجهات، غالبًا ما تفشل طرق الفهرسة القياسية داخل الذاكرة (مثل <a href="/docs/ar/v2.6.x/hnsw.md">HNSW</a> و <a href="/docs/ar/v2.6.x/ivf-flat.md">IVF_FLAT</a>) في مواكبة ذلك بسبب قيود الذاكرة. يقدم <strong>DISKANN</strong> نهجًا قائمًا على الأقراص يعالج هذه التحديات من خلال الحفاظ على دقة وسرعة بحث عالية عندما يتجاوز حجم مجموعة البيانات ذاكرة الوصول العشوائي المتاحة.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ summary: >-
       </svg>
     </button></h2><p>يجمع<strong>DISKANN</strong> بين تقنيتين رئيسيتين للبحث المتجه الفعال:</p>
 <ul>
-<li><p><strong>الرسم البياني Vamana Graph</strong> - فهرس <strong>قائم على القرص</strong> <strong>قائم على الرسم البياني</strong> يربط بين نقاط البيانات (أو المتجهات) للتنقل الفعال أثناء البحث.</p></li>
+<li><p><strong>الرسم البياني Vamana Graph</strong> - فهرس <strong>قائم على القرص</strong> <strong>قائم على الرسم البياني</strong> يربط نقاط البيانات (أو المتجهات) للتنقل الفعال أثناء البحث.</p></li>
 <li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>في الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
 </ul>
 <h3 id="Index-construction" class="common-anchor-header">بناء الفهرس</h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات بيانات كبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
@@ -61,7 +61,7 @@ summary: >-
 <p>تحدد المعلمة <code translate="no">search_list_size</code> اتساع عملية تنقيح الرسم البياني. يؤدي ارتفاع <code translate="no">search_list_size</code> إلى توسيع نطاق البحث عن الجيران أثناء الإنشاء ويمكن أن يحسّن الدقة النهائية، ولكنه يزيد من وقت بناء الفهرس.</p></li>
 </ul></li>
 </ol>
-<p>لمعرفة المزيد حول ضبط <a href="/docs/ar/diskann.md#diskann-params">البارامترات، راجع بارامترات DISKANN</a>.</p>
+<p>لمعرفة المزيد حول ضبط <a href="/docs/ar/v2.6.x/diskann.md#diskann-params">البارامترات، راجع بارامترات DISKANN</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>يستخدم DISKANN <strong>PQ</strong> لضغط المتجهات عالية الأبعاد إلى تمثيلات أصغر<strong>(رموز PQ</strong>)، والتي يتم تخزينها في الذاكرة لإجراء حسابات المسافة التقريبية السريعة.</p>
 <p>تدير المعلمة <code translate="no">pq_code_budget_gb_ratio</code> بصمة الذاكرة المخصصة لتخزين رموز PQ هذه. وهي تمثل النسبة بين الحجم الإجمالي للمتجهات (بالجيجابايت) والمساحة المخصصة لتخزين رموز PQ. يمكنك حساب ميزانية رمز PQ الفعلية (بالجيجابايت) باستخدام هذه الصيغة:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -69,9 +69,9 @@ summary: >-
 <p>حيث</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> هو الحجم الإجمالي للمتجهات (بالجيجابايت).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> هي نسبة يحددها المستخدم، تمثل جزءًا من إجمالي حجم البيانات المحجوزة لرموز PQ. تسمح هذه المعلمة بالمفاضلة بين دقة البحث وموارد الذاكرة. لمزيد من المعلومات حول ضبط المعلمة، راجع <a href="/docs/ar/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">تكوينات DISKANN</a>.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> هي نسبة يحددها المستخدم، تمثل جزءًا من إجمالي حجم البيانات المحجوزة لرموز PQ. تسمح هذه المعلمة بالمفاضلة بين دقة البحث وموارد الذاكرة. لمزيد من المعلومات حول ضبط المعلمة، راجع <a href="/docs/ar/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">تكوينات DISKANN</a>.</p></li>
 </ul>
-<p>للحصول على التفاصيل الفنية حول طريقة PQ الأساسية، راجع <a href="/docs/ar/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<p>للحصول على التفاصيل الفنية حول طريقة PQ الأساسية، راجع <a href="/docs/ar/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
 <h3 id="Search-process" class="common-anchor-header">عملية البحث</h3><p>بمجرد إنشاء الفهرس (الرسم البياني Vamana على القرص ورموز PQ في الذاكرة)، يقوم DISKANN بإجراء عمليات بحث ANN على النحو التالي:</p>
 <p>
   
@@ -85,7 +85,7 @@ summary: >-
 <li><p><code translate="no">beam_width_ratio</code>: الحصة التي تتحكم في اتساع نطاق البحث، وتحدد عدد الجيران المرشحين الذين يتم اختيارهم بالتوازي لاستكشاف جيرانهم. يؤدي وجود <code translate="no">beam_width_ratio</code> أكبر إلى استكشاف أوسع، مما قد يؤدي إلى دقة أعلى ولكن أيضًا زيادة التكلفة الحسابية وإدخال/إخراج القرص. يتم تحديد عرض الشعاع، أو عدد العقد المختارة، باستخدام المعادلة: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: نسبة الذاكرة المخصصة للتخزين المؤقت لبيانات القرص التي يتم الوصول إليها بشكل متكرر. يساعد هذا التخزين المؤقت على تقليل عمليات الإدخال/الإخراج من القرص إلى الحد الأدنى، مما يجعل عمليات البحث المتكررة أسرع لأن البيانات موجودة بالفعل في الذاكرة.</p></li>
 </ul>
-<p>لمعرفة المزيد حول ضبط المعلمات، راجع <a href="/docs/ar/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">تكوينات DISKANN</a>.</p></li>
+<p>لمعرفة المزيد حول ضبط المعلمات، راجع <a href="/docs/ar/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">تكوينات DISKANN</a>.</p></li>
 <li><p><strong>الاستكشاف التكراري:</strong> يقوم البحث بشكل متكرر بتنقيح مجموعة المرشحين بشكل متكرر، مع إجراء تقييمات تقريبية (باستخدام PQ) بشكل متكرر متبوعة بفحوصات دقيقة (باستخدام المتجهات الأصلية من القرص) حتى يتم العثور على عدد كافٍ من الجيران.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">تمكين DISKANN في ميلفوس<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -169,7 +169,7 @@ summary: >-
       <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="SDK-configuration" class="common-anchor-header">تكوين SDK</h3><p>فيما يلي مثال على كيفية تعيين معلمات DISKANN باستخدام Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">إنشاء</h4><p>لإنشاء فهرس <code translate="no">IVF_FLAT</code> على حقل متجه في ملف ميلفوس، استخدم الطريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> والمعلمات الإضافية للفهرس.</p>
+<h4 id="Build" class="common-anchor-header">إنشاء</h4><p>لإنشاء فهرس <code translate="no">DISKANN</code> على حقل متجه في ملف ميلفوس، استخدم الطريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> والمعلمات الإضافية للفهرس.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -188,7 +188,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>وبمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection.md">إنشاء مجموعة</a>.</p>
+<p>وبمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/create-collection.md">إنشاء مجموعة</a>.</p>
 <h4 id="Search" class="common-anchor-header">البحث</h4><p>بمجرد إنشاء الفهرس وإدراج الكيانات، يمكنك إجراء عمليات بحث التشابه على الفهرس.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
@@ -219,7 +219,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يسمح لك الضبط الدقيق لمعلمات DISKKANN بتكييف سلوكها مع مجموعة البيانات الخاصة بك وعبء عمل البحث، وتحقيق التوازن الصحيح بين السرعة والدقة واستخدام الذاكرة.</p>
+    </button></h2><p>يسمح لك الضبط الدقيق لمعلمات DISKKANN بتكييف سلوكه مع مجموعة البيانات الخاصة بك وعبء عمل البحث، وتحقيق التوازن الصحيح بين السرعة والدقة واستخدام الذاكرة.</p>
 <h3 id="Index-building-params" class="common-anchor-header">بارامترات بناء الفهرس</h3><p>تؤثر هذه المعلمات على كيفية إنشاء فهرس DISKANN. يمكن أن يؤثر تعديلها على حجم الفهرس ووقت الإنشاء وجودة البحث.</p>
 <table>
    <tr>
@@ -277,7 +277,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>فامانا</p></td>
      <td><p><code translate="no">beam_width_ratio</code></p></td>
-     <td><p>يتحكم في درجة التوازي أثناء البحث من خلال تحديد الحد الأقصى لعدد طلبات الإدخال/الإخراج المتوازي للقرص بالنسبة لعدد أنوية وحدة المعالجة المركزية المتوفرة.</p></td>
+     <td><p>يتحكم في درجة التوازي أثناء البحث عن طريق تحديد الحد الأقصى لعدد طلبات الإدخال/الإخراج المتوازي للقرص بالنسبة لعدد أنوية وحدة المعالجة المركزية المتوفرة.</p></td>
      <td><p><strong>النوع</strong>: <strong>نطاق</strong> عائم: [1، الحد الأقصى (128/رقم وحدة المعالجة المركزية، 16)]</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">4.0</code></p></td>
      <td><p>تعمل القيم الأعلى على زيادة التوازي، مما قد يؤدي إلى تسريع البحث على الأنظمة ذات وحدات المعالجة المركزية القوية ومحركات أقراص الحالة الصلبة. ومع ذلك، قد يؤدي تعيينها أعلى من اللازم إلى تنافس مفرط على الموارد. في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [1.0, 4.0].</p></td>

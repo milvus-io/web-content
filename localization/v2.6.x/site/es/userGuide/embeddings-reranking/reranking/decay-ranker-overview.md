@@ -82,7 +82,7 @@ beta: Milvus 2.6.x
 <li><p>Cada decay ranker transforma los valores numéricos brutos en puntuaciones de relevancia normalizadas entre 0-1</p></li>
 <li><p>La puntuación de descomposición representa la relevancia de un elemento en función de su "distancia" respecto al punto ideal.</p></li>
 </ul>
-<p>La fórmula de cálculo específica varía en función del tipo de clasificador. Para más detalles sobre cómo calcular una puntuación de descomposición, consulte las páginas dedicadas a la descomposición <a href="/docs/es/gaussian-decay.md#Formula">gaussiana</a>, la <a href="/docs/es/exponential-decay.md#Formula">descomposición exponencial</a> y <a href="/docs/es/linear-decay.md#Formula">la descomposición lineal</a>.</p>
+<p>La fórmula de cálculo específica varía en función del tipo de clasificador. Para más detalles sobre cómo calcular una puntuación de descomposición, consulte las páginas dedicadas a la descomposición <a href="/docs/es/v2.6.x/gaussian-decay.md#Formula">gaussiana</a>, la <a href="/docs/es/v2.6.x/exponential-decay.md#Formula">descomposición exponencial</a> y <a href="/docs/es/v2.6.x/linear-decay.md#Formula">la descomposición lineal</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Etapa 3: Calcular las puntuaciones finales</h3><p>Por último, Milvus combina la puntuación de similitud normalizada y la puntuación de decaimiento para producir la puntuación de clasificación final:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -92,7 +92,7 @@ beta: Milvus 2.6.x
 <p>Por ejemplo, si un artículo de investigación obtiene una puntuación de 0,82 a partir de la similitud vectorial y de 0,91 a partir de la recuperación de texto basada en BM25 en una búsqueda híbrida, Milvus utiliza 0,91 como puntuación de similitud base antes de aplicar el factor de decaimiento.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Decay ranking en acción</h3><p>Veamos la clasificación por decaimiento en un escenario práctico: la búsqueda de <strong>"artículos de investigación sobre inteligencia artificial"</strong> con un decaimiento basado en el tiempo:</p>
 <div class="alert note">
-<p>En este ejemplo, las puntuaciones reflejan cómo disminuye la relevancia con el tiempo: los artículos más recientes reciben puntuaciones cercanas a 1,0 y los más antiguos, puntuaciones más bajas. Estos valores se calculan utilizando un clasificador de decaimiento específico. Para más detalles, consulte <a href="/docs/es/decay-ranker-overview.md#Choose-the-right-decay-ranker">Elegir el clasificador de deterioro adecuado</a>.</p>
+<p>En este ejemplo, las puntuaciones reflejan cómo disminuye la relevancia con el tiempo: los artículos más recientes reciben puntuaciones cercanas a 1,0 y los más antiguos, puntuaciones más bajas. Estos valores se calculan utilizando un clasificador de decaimiento específico. Para más detalles, consulte <a href="/docs/es/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Elegir el clasificador de deterioro adecuado</a>.</p>
 </div>
 <table>
    <tr>
@@ -178,7 +178,7 @@ beta: Milvus 2.6.x
 <li><p>Aplicaciones en las que los usuarios tienen un sentido intuitivo de la distancia</p></li>
 <li><p>Cuando una distancia moderada no debería penalizar gravemente los resultados</p></li>
 </ul></td>
-     <td><p>En una búsqueda de restaurantes, los locales de calidad situados a 3 km siguen siendo localizables, aunque con una clasificación inferior a las opciones cercanas</p></td>
+     <td><p>En una búsqueda de restaurantes, los locales de calidad situados a 3 km de distancia siguen siendo localizables, aunque con una clasificación inferior a las opciones cercanas</p></td>
    </tr>
    <tr>
      <td><p>Exponencial (<code translate="no">exp</code>)</p></td>
@@ -203,9 +203,9 @@ beta: Milvus 2.6.x
 </table>
 <p>Para obtener información detallada sobre cómo calcula las puntuaciones cada clasificador de decaimiento y los patrones de decaimiento específicos, consulte la documentación dedicada:</p>
 <ul>
-<li><p><a href="/docs/es/gaussian-decay.md">Decaimiento gaussiano</a></p></li>
-<li><p><a href="/docs/es/exponential-decay.md">Decaimiento exponencial</a></p></li>
-<li><p><a href="/docs/es/exponential-decay.md">Decaimiento exponencial</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/gaussian-decay.md">Decaimiento gaussiano</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/exponential-decay.md">Decaimiento exponencial</a></p></li>
+<li><p><a href="/docs/es/v2.6.x/exponential-decay.md">Decaimiento exponencial</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Ejemplo de aplicación<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +224,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Los clasificadores de decaimiento pueden aplicarse tanto a la búsqueda vectorial estándar como a las operaciones de búsqueda híbrida en Milvus. A continuación se muestran los fragmentos de código clave para implementar esta función.</p>
 <div class="alert note">
-<p>Antes de utilizar las funciones de decaimiento, primero debe crear una colección con los campos numéricos apropiados (como marcas de tiempo, distancias, etc.) que se utilizarán para los cálculos de decaimiento. Para ver ejemplos de trabajo completos que incluyan la configuración de la colección, la definición del esquema y la inserción de datos, consulte <a href="/docs/es/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implementar la clasificación basada en el tiempo en Milvus</a>.</p>
+<p>Antes de utilizar las funciones de decaimiento, primero debe crear una colección con los campos numéricos apropiados (como marcas de tiempo, distancias, etc.) que se utilizarán para los cálculos de decaimiento. Para ver ejemplos de trabajo completos que incluyan la configuración de la colección, la definición del esquema y la inserción de datos, consulte <a href="/docs/es/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implementar la clasificación basada en el tiempo en Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Crear un clasificador de decaimiento</h3><p>Para implementar la clasificación por decaimiento, defina primero un objeto <code translate="no">Function</code> con la configuración adecuada:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -237,7 +237,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -279,7 +279,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Sí</p></td>
-     <td><p>Especifica el clasificador matemático que se aplicará. Consulte la sección <a href="/docs/es/decay-ranker-overview.md#Choose-the-right-decay-ranker">Elegir el clasificador de decaimiento adecuado</a> para obtener orientación sobre la selección de la función adecuada.</p></td>
+     <td><p>Especifica el clasificador matemático que se aplicará. Consulte la sección <a href="/docs/es/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Elegir el clasificador de decaimiento adecuado</a> para obtener orientación sobre la selección de la función adecuada.</p></td>
      <td><p><code translate="no">"gauss"</code> <code translate="no">"exp"</code> o <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>

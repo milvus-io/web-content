@@ -63,7 +63,7 @@ title: リソースグループの管理
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><strong>requests</strong>属性は、リソースグループが満たすべき条件を指定する。</li>
-<li><strong>limits</strong>属性はリソースグループが満たすべき条件を指定します。</li>
+<li><strong>limits</strong>属性は、リソースグループが満たすべき条件を指定します。</li>
 <li><strong>transfer_from</strong>属性と<strong>transfer_to</strong>属性は、それぞれリソースグループがどのリソースグループからリソースを取得するのが望ましいか、どのリソースグループにリソースを転送するのが望ましいかを記述します。</li>
 </ul>
 <p>リソースグループのコンフィギュレーションが変更されると、milvusは新しいコンフィギュレーションに従って現在のQuery Nodeのリソースを可能な限り調整し、最終的に全てのリソースグループが以下の条件を満たすようにします：</p>
@@ -90,11 +90,11 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.5.10 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.6.0b0 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>
-<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行します。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
+<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行してください。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p><code translate="no">_resource_groups</code> はオプションのパラメータで、指定しないままにしておくと、Milvusはデフォルトのリソースグループのクエリノードにレプリカをロードします。</p>
 <p>Milusにコレクションの各レプリカを個別のリソースグループにロードさせるには、リソースグループの数がレプリカの数と等しくなるようにします。</p></li>
 <li><p>リソースグループ間でレプリカを転送します。</p>
-<p>Milvusは、複数のクエリノードに分散した<a href="/docs/ja/glossary.md#Segment">セグメント</a>間の負荷分散を実現するために<a href="/docs/ja/replica.md">レプリカを</a>使用します。コレクションの特定のレプリカをあるリソースグループから別のリソースグループに移動するには、次のようにします：</p>
+<p>Milvusは、複数のクエリノードに分散した<a href="/docs/ja/v2.6.x/glossary.md#Segment">セグメント</a>間の負荷分散を実現するために<a href="/docs/ja/v2.6.x/replica.md">レプリカを</a>使用します。コレクションの特定のレプリカをあるリソースグループから別のリソースグループに移動するには、次のようにします：</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>マルチテナントのMilvusインスタンスをデプロイするには、以下をお読みください：</p>
 <ul>
-<li><a href="/docs/ja/rbac.md">RBACの有効化</a></li>
-<li><a href="/docs/ja/users_and_roles.md">ユーザとロール</a></li>
+<li><a href="/docs/ja/v2.6.x/rbac.md">RBACの有効化</a></li>
+<li><a href="/docs/ja/v2.6.x/users_and_roles.md">ユーザとロール</a></li>
 </ul>

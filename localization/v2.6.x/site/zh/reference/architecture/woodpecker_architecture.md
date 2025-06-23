@@ -88,18 +88,18 @@ summary: 啄木鸟是 Milvus 2.6 中的一个云原生 WAL 系统。它采用零
         ></path>
       </svg>
     </button></h2><p>啄木鸟提供两种部署模式，以满足您的特定需求：</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 轻便、免维护</h3><p>MemoryBuffer 模式提供了一种简单、轻量级的部署选项，Woodpecker 会在内存中临时缓冲写入的内容，并定期将其刷新到云对象存储服务。元数据使用<strong>etcd</strong>管理，以确保一致性和协调性。这种模式最适合小规模部署或生产环境中批量繁重的工作负载，它们优先考虑的是简单性而不是性能，尤其是在低写入延迟并不重要的情况下。</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 轻便、免维护</h3><p>MemoryBuffer 模式提供了一种简单、轻量级的部署选项，Woodpecker 在内存中临时缓冲写入的内容，并定期将其刷新到云对象存储服务。元数据使用<strong>etcd</strong>管理，以确保一致性和协调性。这种模式最适合小规模部署或生产环境中批量繁重的工作负载，它们优先考虑的是简单性而不是性能，尤其是在低写入延迟并不重要的情况下。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>啄木鸟内存模式部署</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - 针对低延迟、高耐用性进行了优化</h3><p>QuorumBuffer 模式专为对延迟敏感的高频率读/写工作负载而设计，既要求实时响应能力，又要求较强的容错能力。在这种模式下，啄木鸟作为一个高速写缓冲器，通过三个副本的法定人数写入，确保了强大的一致性和高可用性。</p>
-<p>写入一旦复制到三个节点中的至少两个节点，就被认为是成功的，通常在个位数毫秒内完成，之后数据会异步刷新到云对象存储，以实现长期持久性。这种架构最大限度地减少了节点上的状态，消除了对大型本地磁盘卷的需求，并避免了传统的基于法定人数的系统通常需要的复杂的反熵修复。</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - 针对低延迟、高耐用性进行了优化</h3><p>QuorumBuffer 模式专为对延迟敏感的高频率读/写工作负载而设计，既要求实时响应，又要求较强的容错能力。在这种模式下，啄木鸟作为一个高速写缓冲器，通过三个副本的法定人数写入，确保了强大的一致性和高可用性。</p>
+<p>写入一旦复制到三个节点中的至少两个，即被视为成功，通常在个位数毫秒内完成，之后数据会异步刷新到云对象存储，以获得长期持久性。这种架构最大限度地减少了节点上的状态，消除了对大型本地磁盘卷的需求，并避免了传统的基于法定人数的系统通常需要的复杂的反熵修复。</p>
 <p>因此，对于一致性、可用性和快速恢复至关重要的关键任务生产环境来说，精简、稳健的 WAL 层是理想之选。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
-   </span> <span class="img-wrapper"> <span>啄木鸟内存模式部署</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
+   </span> <span class="img-wrapper"> <span>啄木鸟法定人数模式部署</span> </span></p>
 <h2 id="Performance-benchmarks" class="common-anchor-header">性能基准<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,90 +153,13 @@ summary: 啄木鸟是 Milvus 2.6 中的一个云原生 WAL 系统。它采用零
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>啄木鸟的云原生架构简化了部署、减少了维护并提高了可靠性。</p>
-<h3 id="Simplified-infrastructure-management" class="common-anchor-header">简化基础设施管理</h3><ul>
-<li><strong>无需本地存储管理：</strong>无需管理磁盘卷、RAID 或磁盘故障。</li>
-<li><strong>降低硬件依赖性：</strong>无需进行硬件配置和监控；耐用性和可用性由云对象存储处理。</li>
-<li><strong>简化容量规划：</strong>云对象存储可自动扩展存储容量，无需手动预测。</li>
+    </button></h2><p>啄木鸟的云原生架构具有显著的操作优势：</p>
+<ul>
+<li><strong>零本地存储管理</strong>：消除磁盘卷管理、RAID 配置和硬件故障</li>
+<li><strong>自动扩展</strong>：存储随云对象存储扩展，无需容量规划</li>
+<li><strong>成本效益</strong>：随用随付存储，自动分层和压缩</li>
+<li><strong>高可用性</strong>：利用云提供商的 11-9 级耐用性和快速恢复功能</li>
+<li><strong>简化部署</strong>：两种部署模式（MemoryBuffer/QuorumBuffer）可满足不同的操作符需求</li>
+<li><strong>开发人员友好</strong>型：环境设置更快，所有环境的架构保持一致</li>
 </ul>
-<h3 id="Simplified-deployment" class="common-anchor-header">简化部署</h3><ul>
-<li><strong>内存缓冲模式：</strong>使用最少的资源并与云存储集成，是开发和小规模生产的理想选择。</li>
-<li><strong>QuorumBuffer 模式：</strong>提供企业级的可靠性，而不像传统的分布式存储那样复杂。</li>
-</ul>
-<h2 id="Cost-efficiency-and-resource-optimization" class="common-anchor-header">成本效益和资源优化<button data-href="#Cost-efficiency-and-resource-optimization" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><strong>降低内存使用率：</strong>与传统代理相比，高效缓冲减少了内存需求。</li>
-<li><strong>弹性扩展：</strong>即用即付型云存储可避免过度配置。</li>
-<li><strong>减少基础设施开销：</strong>更少的组件意味着更低的部署和维护成本。</li>
-</ul>
-<h3 id="Storage-cost-advantages" class="common-anchor-header">存储成本优势</h3><ul>
-<li><strong>分层存储：</strong>自动将数据迁移到具有成本效益的云存储层，以便长期保留。</li>
-<li><strong>压缩和重复数据删除：</strong>内置功能无需额外操作符即可降低存储成本。</li>
-<li><strong>无复制开销：</strong>耐用性由云存储管理，无需手动复制管理。</li>
-</ul>
-<h2 id="High-availability-and-disaster-recovery" class="common-anchor-header">高可用性和灾难恢复<button data-href="#High-availability-and-disaster-recovery" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Simplified-fault-tolerance" class="common-anchor-header">简化容错</h3><ul>
-<li><strong>云原生耐用性：</strong>利用云提供商的 11-nines（99.999999999%）耐用性保证。</li>
-<li><strong>快速恢复：</strong>最小化本地状态可实现快速节点替换和集群恢复。</li>
-<li><strong>跨区域弹性：</strong>利用云存储功能支持跨区域复制。</li>
-</ul>
-<h3 id="Operational-resilience" class="common-anchor-header">操作符弹性</h3><ul>
-<li><strong>单点故障更少：</strong>减少组件数量，降低故障风险。</li>
-<li><strong>自动故障切换：</strong>云存储冗余简化了故障切换。</li>
-<li><strong>简化备份：</strong>集成的云存储可提供自动备份和版本管理。</li>
-</ul>
-<h2 id="Development-and-operational-experience" class="common-anchor-header">开发和操作符<button data-href="#Development-and-operational-experience" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Improved-development-workflow" class="common-anchor-header">改进开发工作流程</h3><ul>
-<li><strong>更快的环境设置：</strong>最小化依赖性，加快开发和测试。</li>
-<li><strong>一致的架构：</strong>在开发、暂存和生产过程中采用统一的设计。</li>
-<li><strong>云原生集成：</strong>与云服务和容器协调无缝兼容。</li>
-</ul>
-<h3 id="Enhanced-production-operations" class="common-anchor-header">增强生产操作符</h3><ul>
-<li><strong>可预测的性能：</strong>不同部署规模和配置下的结果一致。</li>
-<li><strong>简化升级：</strong>无状态设计可实现最短停机时间的滚动更新。</li>
-<li><strong>资源可预测性：</strong>与传统消息代理相比，资源使用更稳定。</li>
-</ul>
-<p>对于支持关键任务 RAG、人工智能 Agents 和低延迟搜索工作负载的向量数据库来说，这些操作符优势是革命性的。从复杂的消息代理堆栈过渡到 Woodpecker 的简化架构，不仅提升了性能，还大大减轻了开发和基础设施团队的操作负担。</p>
-<p>随着云基础架构随着 S3 Express One Zone 等创新技术的不断发展，啄木鸟的架构使企业能够自动从这些进步中获益，而无需进行重大操作变更或系统重新设计。</p>
+<p>这些优势使 Woodpecker 对关键任务 RAG、人工智能 Agents 和低延迟搜索工作负载特别有价值，在这些负载中，操作符的简易性与性能同等重要。</p>

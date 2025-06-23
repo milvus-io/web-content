@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "存储/计算",
-            "id": "four_layers.md",
+            "label": "主要组件",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "主要组件",
-            "id": "main_components.md",
+            "label": "流媒体服务",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -1388,25 +1388,6 @@
         ]
       },
       {
-        "label": "升级",
-        "id": "upgrade_milvus",
-        "order": 7,
-        "children": [
-          {
-            "label": "升级 Milvus 集群",
-            "id": "upgrade_milvus_cluster-operator.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "升级 Milvus Standalone",
-            "id": "upgrade_milvus_standalone-operator.md",
-            "order": 1,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "监控、警报和日志",
         "id": "monitor_alert_log",
         "order": 8,
@@ -1648,7 +1629,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和恢复",
+                "label": "在一个实例中进行备份和还原",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

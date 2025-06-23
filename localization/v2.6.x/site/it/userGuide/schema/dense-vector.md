@@ -29,7 +29,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>I vettori densi sono rappresentazioni di dati numerici ampiamente utilizzati nell'apprendimento automatico e nell'analisi dei dati. Sono costituiti da array di numeri reali, in cui la maggior parte o tutti gli elementi sono non nulli. Rispetto ai vettori sparsi, i vettori densi contengono più informazioni allo stesso livello dimensionale, poiché ogni dimensione contiene valori significativi. Questa rappresentazione può catturare efficacemente modelli e relazioni complesse, rendendo più facile l'analisi e l'elaborazione dei dati in spazi ad alta densità. I vettori densi hanno in genere un numero fisso di dimensioni, che varia da poche decine a diverse centinaia o addirittura migliaia, a seconda dell'applicazione e dei requisiti specifici.</p>
-<p>I vettori densi sono utilizzati principalmente in scenari che richiedono la comprensione della semantica dei dati, come la ricerca semantica e i sistemi di raccomandazione. Nella ricerca semantica, i vettori densi aiutano a catturare le connessioni sottostanti tra query e documenti, migliorando la rilevanza dei risultati della ricerca. Nei sistemi di raccomandazione, aiutano a identificare le somiglianze tra utenti e articoli, offrendo suggerimenti più personalizzati.</p>
+<p>I vettori densi sono utilizzati principalmente in scenari che richiedono la comprensione della semantica dei dati, come la ricerca semantica e i sistemi di raccomandazione. Nella ricerca semantica, i vettori densi aiutano a catturare le connessioni sottostanti tra query e documenti, migliorando la rilevanza dei risultati della ricerca. Nei sistemi di raccomandazione, aiutano a identificare le somiglianze tra utenti e oggetti, offrendo suggerimenti più personalizzati.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +77,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>Utilizzare i vettori densi</span> </span></p>
 <div class="alert note">
-<p>Oltre ai vettori densi, Milvus supporta anche vettori sparsi e vettori binari. I vettori sparsi sono adatti a corrispondenze precise basate su termini specifici, come la ricerca di parole chiave e la corrispondenza di termini, mentre i vettori binari sono comunemente usati per gestire in modo efficiente i dati binarizzati, come la corrispondenza di modelli di immagini e alcune applicazioni di hashing. Per ulteriori informazioni, consultare <a href="/docs/it/binary-vector.md">Vettori binari</a> e <a href="/docs/it/sparse_vector.md">vettori sparsi</a>.</p>
+<p>Oltre ai vettori densi, Milvus supporta anche vettori sparsi e vettori binari. I vettori sparsi sono adatti a corrispondenze precise basate su termini specifici, come la ricerca di parole chiave e la corrispondenza di termini, mentre i vettori binari sono comunemente usati per gestire in modo efficiente i dati binarizzati, come la corrispondenza di modelli di immagini e alcune applicazioni di hashing. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/binary-vector.md">Vettori binari</a> e <a href="/docs/it/v2.6.x/sparse_vector.md">vettori sparsi</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Utilizzare vettori densi<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ summary: >-
     </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Aggiungere un campo vettoriale</h3><p>Per utilizzare i vettori densi in Milvus, occorre innanzitutto definire un campo vettoriale per memorizzare i vettori densi quando si crea una collezione. Questo processo comprende:</p>
 <ol>
 <li><p>Impostare <code translate="no">datatype</code> su un tipo di dati vettoriali densi supportato. Per i tipi di dati vettoriali densi supportati, vedere Tipi di dati.</p></li>
-<li><p>Specificare le dimensioni del vettore denso utilizzando il parametro <code translate="no">dim</code>.</p></li>
+<li><p>Specificare le dimensioni del vettore denso usando il parametro <code translate="no">dim</code>.</p></li>
 </ol>
 <p>Nell'esempio seguente, si aggiunge un campo vettoriale chiamato <code translate="no">dense_vector</code> per memorizzare vettori densi. Il tipo di dati del campo è <code translate="no">FLOAT_VECTOR</code>, con una dimensione di <code translate="no">4</code>.</p>
 <div class="multipleCode">
@@ -227,11 +227,11 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>Memorizza numeri Brain Floating Point (bfloat16) a 16 bit, offrendo la stessa gamma di esponenti di Float32 ma con una precisione ridotta. È adatto a scenari che richiedono l'elaborazione rapida di grandi volumi di vettori, come il recupero di immagini su larga scala.</p></td>
+     <td><p>Memorizza numeri Brain Floating Point (bfloat16) a 16 bit, offrendo la stessa gamma di esponenti di Float32 ma con una precisione ridotta. Adatto a scenari che richiedono l'elaborazione rapida di grandi volumi di vettori, come il recupero di immagini su larga scala.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Memorizza vettori i cui singoli elementi in ciascuna dimensione sono numeri interi a 8 bit (int8), con ciascun elemento compreso tra -128 e 127. Progettato per modelli di deep learning quantizzati (ad esempio, ResNet, EfficientNet), INT8_VECTOR riduce le dimensioni del modello e velocizza l'inferenza con una perdita minima di precisione.</p></td>
+     <td><p>Memorizza vettori i cui singoli elementi in ciascuna dimensione sono numeri interi a 8 bit (int8), con ciascun elemento compreso tra -128 e 127. Progettato per modelli di deep learning quantizzati (ad esempio, ResNet, EfficientNet), INT8_VECTOR riduce le dimensioni del modello e velocizza l'inferenza con una perdita minima di precisione.<br><strong>Nota</strong>: questo tipo di vettore è supportato solo per gli indici HNSW.</p></td>
    </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Impostare i parametri dell'indice per il campo vettoriale</h3><p>Per accelerare le ricerche semantiche, è necessario creare un indice per il campo vettoriale. L'indicizzazione può migliorare significativamente l'efficienza di recupero dei dati vettoriali su larga scala.</p>
@@ -280,7 +280,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>Nell'esempio precedente, viene creato un indice chiamato <code translate="no">dense_vector_index</code> per il campo <code translate="no">dense_vector</code> utilizzando il tipo di indice <code translate="no">AUTOINDEX</code>. <code translate="no">metric_type</code> è impostato su <code translate="no">IP</code>, a indicare che il prodotto interno sarà usato come metrica di distanza.</p>
 <p>Milvus offre diversi tipi di indice per una migliore esperienza di ricerca vettoriale. AUTOINDEX è un tipo di indice speciale progettato per facilitare la curva di apprendimento della ricerca vettoriale. Sono disponibili molti tipi di indice tra cui scegliere. Per maggiori dettagli, consultare xxx.</p>
-<p>Milvus supporta altri tipi di metriche. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/metric.md">Tipi di metriche</a>.</p>
+<p>Milvus supporta altri tipi di metriche. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/v2.6.x/metric.md">Tipi di metriche</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Creare la collezione</h3><p>Una volta completate le impostazioni dei parametri dei vettori densi e degli indici, è possibile creare una collezione contenente vettori densi. L'esempio seguente utilizza il metodo <code translate="no">create_collection</code> per creare un insieme chiamato <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -496,4 +496,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sui parametri di ricerca per similarità, consultare la sezione <a href="/docs/it/single-vector-search.md">Ricerca di base di RNA</a>.</p>
+<p>Per ulteriori informazioni sui parametri di ricerca per similarità, consultare la sezione <a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca di base di RNA</a>.</p>
