@@ -52,7 +52,7 @@ summary: >-
     </button></h2><ul>
 <li><p><strong>Field Size</strong>: JSON fields are limited to 65,536 bytes in size.</p></li>
 <li><p><strong>Nested Dictionaries</strong>: Any nested dictionaries within JSON field values are treated as plain strings for storage.</p></li>
-<li><p><strong>Default Values</strong>: JSON fields do not support default values. However, you can set the <code translate="no">nullable</code> attribute to <code translate="no">True</code> to allow null values. For details, refer to <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a>.</p></li>
+<li><p><strong>Default Values</strong>: JSON fields do not support default values. However, you can set the <code translate="no">nullable</code> attribute to <code translate="no">True</code> to allow null values. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p></li>
 <li><p><strong>Type Matching</strong>: If a JSON field’s key value is an integer or float, it can only be compared (via expression filters) with another numeric key of the same type.</p></li>
 <li><p><strong>Naming</strong>: When naming JSON keys, it is recommended to use only letters, numbers, and underscores. Using other characters may cause issues when filtering or searching.</p></li>
 <li><p><strong>String Handling</strong>: Milvus stores string values in JSON fields as entered, without semantic conversion. For example:</p>
@@ -60,7 +60,7 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, and <code translate="no">&quot;a\\&quot;b&quot;</code> are stored exactly as they are.</p></li>
 <li><p><code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid.</p></li>
 </ul></li>
-<li><p><strong>JSON Indexing</strong>: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to <a href="/docs/v2.6.x/use-json-fields.md#Considerations-on-JSON-indexing">Considerations on JSON indexing</a>.</p></li>
+<li><p><strong>JSON Indexing</strong>: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to <a href="/docs/use-json-fields.md#Considerations-on-JSON-indexing">Considerations on JSON indexing</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">Add JSON field<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -430,7 +430,7 @@ curl --request POST \
 <li>Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key <code translate="no">&quot;k&quot;</code> while others store a number), some rows will not be indexed.</li>
 </ul></li>
 </ul>
-<h3 id="Index-a-vector-field" class="common-anchor-header">Index a vector field</h3><p>The following example creates an index on the vector field <code translate="no">embedding</code>, using the <code translate="no">AUTOINDEX</code> index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to <a href="/docs/v2.6.x/index-explained.md">Index Explained</a>.</p>
+<h3 id="Index-a-vector-field" class="common-anchor-header">Index a vector field</h3><p>The following example creates an index on the vector field <code translate="no">embedding</code>, using the <code translate="no">AUTOINDEX</code> index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to <a href="/docs/index-explained.md">Index Explained</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -740,7 +740,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
       </svg>
     </button></h2><p>After inserting entities, use the <code translate="no">query</code> method to retrieve entities that match the specified filter expressions.</p>
 <div class="alert note">
-<p>For JSON fields that allow null values, the field will be treated as null if the entire JSON object is missing or set to <code translate="no">None</code>. For more information, refer to <a href="/docs/v2.6.x/basic-operators.md#JSON-Fields-with-Null-Values">JSON Fields with Null Values</a>.</p>
+<p>For JSON fields that allow null values, the field will be treated as null if the entire JSON object is missing or set to <code translate="no">None</code>. For more information, refer to <a href="/docs/basic-operators.md#JSON-Fields-with-Null-Values">JSON Fields with Null Values</a>.</p>
 </div>
 <p>To retrieve entities where <code translate="no">metadata</code> is not null:</p>
 <div class="multipleCode">
@@ -1028,4 +1028,4 @@ curl --request POST \
 
 <span class="hljs-comment">##{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;metadata&quot;:&quot;{\&quot;product_info\&quot;: {\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;brand\&quot;: \&quot;BrandA\&quot;}, \&quot;price\&quot;: 99.99, \&quot;in_stock\&quot;: true, \&quot;tags\&quot;: [\&quot;summer_sale\&quot;]}&quot;,&quot;pk&quot;:1}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Additionally, Milvus supports advanced JSON filtering operators such as <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, and <code translate="no">JSON_CONTAINS_ANY</code>, which can further enhance query capabilities. For more details, refer to <a href="/docs/v2.6.x/json-operators.md">JSON Operators</a>.</p>
+<p>Additionally, Milvus supports advanced JSON filtering operators such as <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, and <code translate="no">JSON_CONTAINS_ANY</code>, which can further enhance query capabilities. For more details, refer to <a href="/docs/json-operators.md">JSON Operators</a>.</p>

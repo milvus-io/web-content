@@ -59,8 +59,8 @@ summary: >-
       </svg>
     </button></h2><p>You can set the TTL property when you</p>
 <ul>
-<li><p><a href="/docs/v2.6.x/set-collection-ttl.md#Set-TTL-when-creating-a-collection">Create a collection.</a></p></li>
-<li><p><a href="/docs/v2.6.x/set-collection-ttl.md#Set-TTL-for-an-existing-collection">Alter the TTL property of an existing collection.</a></p></li>
+<li><p><a href="/docs/set-collection-ttl.md#Set-TTL-when-creating-a-collection">Create a collection.</a></p></li>
+<li><p><a href="/docs/set-collection-ttl.md#Set-TTL-for-an-existing-collection">Alter the TTL property of an existing collection.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">Set TTL when creating a collection</h3><p>The following code snippet demonstrates how to set the TTL property when you create a collection.</p>
 <div class="multipleCode">

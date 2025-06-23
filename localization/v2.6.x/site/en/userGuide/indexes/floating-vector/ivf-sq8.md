@@ -51,7 +51,7 @@ summary: >-
 <li><p><strong>Inverted Index:</strong> An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.</p></li>
 <li><p><strong>Search:</strong> When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.</p></li>
 </ol>
-<p>To learn more about its technical details , refer to <a href="/docs/v2.6.x/ivf-flat.md">IVF_FLAT</a>.</p>
+<p>To learn more about its technical details , refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="SQ8" class="common-anchor-header">SQ8</h3><p>Scalar Quantization (SQ) is a technique used to reduce the size of high-dimensional vectors by replacing their values with smaller, more compact representations. The <strong>SQ8</strong> variant uses 8-bit integers instead of the typical 32-bit floating point numbers to store each dimension value of a vector. This greatly reduces the amount of memory required to store the data.</p>
 <p>Here’s how SQ8 works:</p>
 <ol>
@@ -108,14 +108,14 @@ index_params.add_index(
 <p>In this configuration:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">IVF_SQ8</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/v2.6.x/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
 <li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
 <li><code translate="no">nlist</code>: Number of clusters to create using the k-means algorithm during index building.</li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">IVF_SQ8</code> index, refer to <a href="/docs/v2.6.x/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">Index building params</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">IVF_SQ8</code> index, refer to <a href="/docs/ivf-sq8.md#share-BwprdWFCjoMBtMxorO0cWrUPnjb">Index building params</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/v2.6.x/create-collection.md">Create Collection</a>.</p>
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">nprobe</code>: Number of clusters to search for candidates.</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">IVF_SQ8</code> index, refer to <a href="/docs/v2.6.x/ivf-sq8.md#share-PJhqdqNaNodKiexm6F1cD2IInbe">Index-specific search params</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">IVF_SQ8</code> index, refer to <a href="/docs/ivf-sq8.md#share-PJhqdqNaNodKiexm6F1cD2IInbe">Index-specific search params</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -170,7 +170,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/v2.6.x/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">building an index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/ivf-sq8.md#share-X9Y9dTuhDohRRBxSvzBcXmIEnu4">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -190,7 +190,7 @@ res = MilvusClient.search(
  In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/v2.6.x/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/ivf-sq8.md#share-TI73dmWBOoEnocxQ8H7clSYUnLg">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>

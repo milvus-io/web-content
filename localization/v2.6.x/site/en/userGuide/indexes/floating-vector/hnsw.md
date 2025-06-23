@@ -59,7 +59,7 @@ summary: >-
 <li><p><code translate="no">efConstruction</code>: The number of candidates considered during index construction. A higher <code translate="no">efConstruction</code> generally results in a better quality graph but requires more time to build.</p></li>
 <li><p><code translate="no">ef</code>: The number of neighbors evaluated during a search. Increasing <code translate="no">ef</code> improves the likelihood of finding the nearest neighbors but slows down the search process.</p></li>
 </ul>
-<p>For details on how to adjust these settings to suit your needs, refer to <a href="/docs/v2.6.x/hnsw.md#Index-params">Index params</a>.</p>
+<p>For details on how to adjust these settings to suit your needs, refer to <a href="/docs/hnsw.md#Index-params">Index params</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,15 +95,15 @@ index_params.add_index(
 <p>In this configuration:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">HNSW</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/v2.6.x/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
 <li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
 <li><p><code translate="no">M</code>: Maximum number of neighbors each node can connect to.</p></li>
 <li><p><code translate="no">efConstruction</code>: Number of candidate neighbors considered for connection during index construction.</p></li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">HNSW</code> index, refer to <a href="/docs/v2.6.x/hnsw.md#Index-building-params">Index building params</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">HNSW</code> index, refer to <a href="/docs/hnsw.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/v2.6.x/create-collection.md">Create Collection</a>.</p>
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +140,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">ef</code>: Number of neighbors to consider during a search.</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">HNSW</code> index, refer to <a href="/docs/v2.6.x/hnsw.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">HNSW</code> index, refer to <a href="/docs/hnsw.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -158,7 +158,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/v2.6.x/hnsw.md#Build-index">building an index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/hnsw.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -179,7 +179,7 @@ res = MilvusClient.search(
      <td><p>A higher <code translate="no">efConstruction</code> typically results in a <strong>more accurate index</strong>, as more potential connections are explored. However, this also leads to <strong>longer indexing time and increased memory usage</strong> during construction. Consider increasing <code translate="no">efConstruction</code> for improved accuracy, especially in scenarios where indexing time is less critical.</p><p>Consider decreasing <code translate="no">efConstruction</code> to speed up index construction when resource constraints are a concern.</p><p>In most cases, we recommend you set a value within this range: [50, 500].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/v2.6.x/hnsw.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/hnsw.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

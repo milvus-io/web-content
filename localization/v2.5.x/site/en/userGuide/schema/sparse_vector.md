@@ -48,8 +48,8 @@ summary: >-
 </p>
 <p>With tokenization and scoring, documents can be represented as bag-of-words vectors, where each dimension corresponds to a specific word in the vocabulary. Only the words present in the document have non-zero values, creating a sparse vector representation. Sparse vectors can be generated using two approaches:</p>
 <ul>
-<li><p><strong>Traditional statistical techniques</strong>, such as <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) and <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), assign weights to words based on their frequency and importance across a corpus. These methods compute simple statistics as scores for each dimension, which represents a token.  Milvus provides built-in <strong>full-text search</strong> with the BM25 method, which automatically converts text into sparse vectors, eliminating the need for manual preprocessing. This approach is ideal for keyword-based search, where precision and exact matches are important. Refer to <a href="/docs/full-text-search.md">Full Text Search</a> for more information.</p></li>
-<li><p><strong>Neural sparse embedding models</strong> are learned methods to generate sparse representations by training on large datasets. They are typically deep learning models with Transformer architecture, able to expand and weigh terms based on semantic context. Milvus also supports externally generated sparse embeddings from models like <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. See <a href="/docs/embeddings.md#Embedding-Overview">Embeddings</a> for details.</include></p></li>
+<li><p><strong>Traditional statistical techniques</strong>, such as <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) and <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (Best Matching 25), assign weights to words based on their frequency and importance across a corpus. These methods compute simple statistics as scores for each dimension, which represents a token.  Milvus provides built-in <strong>full-text search</strong> with the BM25 method, which automatically converts text into sparse vectors, eliminating the need for manual preprocessing. This approach is ideal for keyword-based search, where precision and exact matches are important. Refer to <a href="/docs/v2.5.x/full-text-search.md">Full Text Search</a> for more information.</p></li>
+<li><p><strong>Neural sparse embedding models</strong> are learned methods to generate sparse representations by training on large datasets. They are typically deep learning models with Transformer architecture, able to expand and weigh terms based on semantic context. Milvus also supports externally generated sparse embeddings from models like <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. See <a href="/docs/v2.5.x/embeddings.md#Embedding-Overview">Embeddings</a> for details.</include></p></li>
 </ul>
 <p>Sparse vectors and the original text can be stored in Milvus for efficient retrieval. The diagram below outlines the overall process.</p>
 <p>
@@ -59,7 +59,7 @@ summary: >-
   </span>
 </p>
 <div class="alert note">
-<p>In addition to sparse vectors, Milvus also supports dense vectors and binary vectors. Dense vectors are ideal for capturing deep semantic relationships, while binary vectors excel in scenarios like quick similarity comparisons and content deduplication. For more information, refer to <a href="/docs/dense-vector.md">Dense Vector</a> and <a href="/docs/binary-vector.md">Binary Vector</a>.</p>
+<p>In addition to sparse vectors, Milvus also supports dense vectors and binary vectors. Dense vectors are ideal for capturing deep semantic relationships, while binary vectors excel in scenarios like quick similarity comparisons and content deduplication. For more information, refer to <a href="/docs/v2.5.x/dense-vector.md">Dense Vector</a> and <a href="/docs/v2.5.x/binary-vector.md">Binary Vector</a>.</p>
 </div>
 <h2 id="Data-Formats" class="common-anchor-header">Data Formats<button data-href="#Data-Formats" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the following sections, we demonstrate how to store vectors from learned sparse embedding models like SPLADE. If you are looking for something to complement dense-vector-based semantic search, we recommend <a href="/docs/full-text-search.md">Full Text Search</a> with BM25 over SPLADE for simplicity. If you’ve ran quality evaluation and dediced to use SPLADE, you can refer to <a href="/docs/embeddings.md#Embedding-Overview">Embeddings</a> on how to generate sparse vectors with SPLADE.</p>
+    </button></h2><p>In the following sections, we demonstrate how to store vectors from learned sparse embedding models like SPLADE. If you are looking for something to complement dense-vector-based semantic search, we recommend <a href="/docs/v2.5.x/full-text-search.md">Full Text Search</a> with BM25 over SPLADE for simplicity. If you’ve ran quality evaluation and dediced to use SPLADE, you can refer to <a href="/docs/v2.5.x/embeddings.md#Embedding-Overview">Embeddings</a> on how to generate sparse vectors with SPLADE.</p>
 <p>Milvus supports  sparse vector input with the following formats:</p>
 <ul>
 <li><p><strong>List of Dictionaries (formatted as <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -277,7 +277,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text</code>: This field stores text strings using the <code translate="no">VARCHAR</code> data type, with a maximum length of 65535 bytes.</p></li>
 </ul>
 <div class="alert note">
-<p>To enable Milvus or  to generate sparse vector embeddings from a specified text field during data insertion, an additional step involving a function must be taken. For more information, please refer to  <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
+<p>To enable Milvus or  to generate sparse vector embeddings from a specified text field during data insertion, an additional step involving a function must be taken. For more information, please refer to  <a href="/docs/v2.5.x/full-text-search.md">Full Text Search</a>.</p>
 </div>
 <h2 id="Set-Index-Parameters" class="common-anchor-header">Set Index Parameters<button data-href="#Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -294,7 +294,7 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The process of creating an index for sparse vectors is similar to that for <a href="/docs/dense-vector.md">dense vectors</a>, but with differences in the specified index type (<code translate="no">index_type</code>), distance metric (<code translate="no">metric_type</code>), and index parameters (<code translate="no">params</code>).</p>
+    </button></h2><p>The process of creating an index for sparse vectors is similar to that for <a href="/docs/v2.5.x/dense-vector.md">dense vectors</a>, but with differences in the specified index type (<code translate="no">index_type</code>), distance metric (<code translate="no">metric_type</code>), and index parameters (<code translate="no">params</code>).</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -359,7 +359,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>This example uses the <code translate="no">SPARSE_INVERTED_INDEX</code> index type with <code translate="no">IP</code> as the metric. For more details, see the following resources:</p>
 <ul>
-<li><a href="/docs/metric.md">Metric Types</a>: Supported metric types for different field types</li>
+<li><a href="/docs/v2.5.x/metric.md">Metric Types</a>: Supported metric types for different field types</li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -716,4 +716,4 @@ System.out.println(searchR.getSearchResults());
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic Vector Search</a>.</p>
+<p>For more information on similarity search parameters, refer to <a href="/docs/v2.5.x/single-vector-search.md">Basic Vector Search</a>.</p>

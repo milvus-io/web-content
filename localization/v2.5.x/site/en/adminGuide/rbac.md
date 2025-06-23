@@ -70,9 +70,9 @@ summary: >-
       </svg>
     </button></h2><p>The achieve access control via RBAC, you need to follow the steps below:</p>
 <ol>
-<li><p><strong><a href="/docs/users_and_roles.md#Create-a-user">Create a user</a></strong>: In addition to the default user <code translate="no">root</code> in Milvus, you can create new users and set passwords to protect data security.</p></li>
-<li><p><strong><a href="/docs/users_and_roles.md#Create-a-role">Create a role</a></strong>: You can create customized roles based on your needs. The specific capabilities of a role are determined by its privileges.</p></li>
-<li><p><strong><a href="/docs/privilege_group.md">Create a privilege group</a></strong>: Combine multiple privileges into one privilege group to streamline the process of granting privileges to a role.</p></li>
-<li><p><strong><a href="/docs/grant_privileges.md">Grant privileges or privilege groups to a role</a></strong>: Define the capabilities of a role be granting privileges or privilege groups to this role.</p></li>
-<li><p><strong><a href="/docs/grant_roles.md">Grant roles to users</a></strong>: Grant roles with certain privileges to users so that users can have the privileges of a role. A single role can be granted to multiple users.</p></li>
+<li><p><strong><a href="/docs/v2.5.x/users_and_roles.md#Create-a-user">Create a user</a></strong>: In addition to the default user <code translate="no">root</code> in Milvus, you can create new users and set passwords to protect data security.</p></li>
+<li><p><strong><a href="/docs/v2.5.x/users_and_roles.md#Create-a-role">Create a role</a></strong>: You can create customized roles based on your needs. The specific capabilities of a role are determined by its privileges.</p></li>
+<li><p><strong><a href="/docs/v2.5.x/privilege_group.md">Create a privilege group</a></strong>: Combine multiple privileges into one privilege group to streamline the process of granting privileges to a role.</p></li>
+<li><p><strong><a href="/docs/v2.5.x/grant_privileges.md">Grant privileges or privilege groups to a role</a></strong>: Define the capabilities of a role be granting privileges or privilege groups to this role.</p></li>
+<li><p><strong><a href="/docs/v2.5.x/grant_roles.md">Grant roles to users</a></strong>: Grant roles with certain privileges to users so that users can have the privileges of a role. A single role can be granted to multiple users.</p></li>
 </ol>

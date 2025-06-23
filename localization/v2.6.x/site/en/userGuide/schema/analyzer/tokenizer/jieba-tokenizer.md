@@ -92,7 +92,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For details on parameters, refer to <a href="/docs/v2.6.x/jieba-tokenizer.md#Custom-configuration">Custom configuration</a>.</p>
+<p>For details on parameters, refer to <a href="/docs/jieba-tokenizer.md#Custom-configuration">Custom configuration</a>.</p>
 <h3 id="Custom-configuration" class="common-anchor-header">Custom configuration</h3><p>For more control, you can provide a custom configuration that allows you to specify a custom dictionary, select the segmentation mode, and enable or disable the Hidden Markov Model (HMM). For example:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -160,7 +160,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/v2.6.x/analyzer-overview.md#Example-use">Example use</a>.</p>
+<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

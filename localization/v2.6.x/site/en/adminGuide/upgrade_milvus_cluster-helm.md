@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster with Helm Chart.
 title: Upgrade Milvus Cluster with Helm Chart
 ---
-<div class="tab-wrapper"><a href="/docs/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="/docs/v2.6.x/upgrade_milvus_cluster-helm.md" class='active '>Helm</a></div>
+<div class="tab-wrapper"><a href="/docs/upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="/docs/upgrade_milvus_cluster-helm.md" class='active '>Helm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">Upgrade Milvus Cluster with Helm Chart<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -25,7 +25,7 @@ title: Upgrade Milvus Cluster with Helm Chart
       </svg>
     </button></h1><p>This guide describes how to upgrade your Milvus cluster with Milvus Helm charts.</p>
 <div class="alert note">
-<p>Upgrading from Milvus 2.5.x (or earlier versions) to 2.6.0-rc1 involves significant architectural changes that make this upgrade <strong>irreversible</strong>. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, <strong>you cannot roll back to a previous version once the upgrade is completed</strong>. For details on the architectural changes introduced in 2.6.0-rc1, refer to <a href="/docs/v2.6.x/architecture_overview.md">Milvus Architecture Overview</a>.</p>
+<p>Upgrading from Milvus 2.5.x (or earlier versions) to 2.6.0-rc1 involves significant architectural changes that make this upgrade <strong>irreversible</strong>. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, <strong>you cannot roll back to a previous version once the upgrade is completed</strong>. For details on the architectural changes introduced in 2.6.0-rc1, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"

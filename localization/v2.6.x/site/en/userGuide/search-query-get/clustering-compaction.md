@@ -52,7 +52,7 @@ summary: >-
     <span>Clustering Compaction</span>
   </span>
 </p>
-<p>Using <strong>PartitionStats</strong> as a reference, Milvus can prune irrelevant data upon receiving a search/query request that carries a clustering key value and restricting the search scope within the segments mapping to the value, thus improving search performance. For details on performance improvement, refer to <a href="/docs/v2.6.x/clustering-compaction.md#Benchmark-Test">Benchmark tests</a>.</p>
+<p>Using <strong>PartitionStats</strong> as a reference, Milvus can prune irrelevant data upon receiving a search/query request that carries a clustering key value and restricting the search scope within the segments mapping to the value, thus improving search performance. For details on performance improvement, refer to <a href="/docs/clustering-compaction.md#Benchmark-Test">Benchmark tests</a>.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Use Clustering Compaction<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +165,7 @@ summary: >-
      <td></td>
    </tr>
 </table>
-<p>To apply the above changes to your Milvus cluster, please follow the steps in <a href="/docs/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a> and <a href="/docs/v2.6.x/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
+<p>To apply the above changes to your Milvus cluster, please follow the steps in <a href="/docs/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a> and <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Collection Configuration</h3><p>For clustering compacting in a specific collection, you should select a scalar field from the collection as the clustering key.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
