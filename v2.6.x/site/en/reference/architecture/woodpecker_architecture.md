@@ -53,7 +53,7 @@ A write is considered successful once it's replicated to at least two of the thr
 
 The result is a streamlined, robust WAL layer ideal for mission-critical production environments where consistency, availability, and fast recovery are essential.
 
-![woodpecker memory mode deployment](../../../../assets/woodpecker_memorybuffer_mode_deployment.png "woodpecker memory mode deployment.")
+![woodpecker quorum mode deployment](../../../../assets/woodpecker_quorumbuffer_mode_deployment.png "woodpecker memory mode deployment.")
 
 ## Performance benchmarks
 
