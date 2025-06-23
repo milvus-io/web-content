@@ -256,7 +256,7 @@ summary: >-
 <li><p>The ARRAY field is completely missing from the entity.</p></li>
 </ul>
 <div class="alert note">
-<p>An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to <a href="/docs/v2.5.x/array_data_type.md">Array Field</a>.</p>
+<p>An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
 </div>
 <p>To further illustrate how Milvus handles ARRAY fields with null values, consider the following sample data with an ARRAY field <code translate="no">tags</code>:</p>
 <pre><code translate="no" class="language-python">data = [

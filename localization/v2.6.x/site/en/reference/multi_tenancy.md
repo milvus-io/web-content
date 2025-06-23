@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus supports multi-tenancy at four levels: <strong>Database</strong>, <strong>Collection</strong>, <strong>Partition</strong>, and <strong>Partition Key</strong>.</p>
-<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Database-level multi-tenancy</h3><p>With database-level multi-tenancy, each tenant receives a corresponding <a href="/docs/manage_databases.md">database</a> containing one or more collections.</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">Database-level multi-tenancy</h3><p>With database-level multi-tenancy, each tenant receives a corresponding <a href="/docs/v2.6.x/manage_databases.md">database</a> containing one or more collections.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
@@ -51,7 +51,7 @@ summary: >-
 <li><p><strong>Flexibility</strong>: Each database can have collections with different schemas, offering highly flexible data organization and allowing each tenant to have its own data schema.</p></li>
 <li><p><strong>Others</strong>: This strategy also supports RBAC, enabling fine-grained control over user access per tenant. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Collection-level multi-tenancy</h3><p>With collection-level multi-tenancy, each tenant is assigned a <a href="/docs/manage-collections.md">collection</a>, offering strong data isolation.</p>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Collection-level multi-tenancy</h3><p>With collection-level multi-tenancy, each tenant is assigned a <a href="/docs/v2.6.x/manage-collections.md">collection</a>, offering strong data isolation.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
@@ -64,7 +64,7 @@ summary: >-
 <li><p><strong>Flexibility</strong>: This strategy allows each collection to have its own schema, accommodating tenants with different data schemas.</p></li>
 <li><p><strong>Others</strong>: This strategy also supports RBAC, allowing for granular access control over tenants. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
 </ul>
-<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Partition-level multi-tenancy</h3><p>In partition-level multi-tenancy, each tenant is assigned to a manually created <a href="/docs/manage-partitions.md">partition</a> within a shared collection.</p>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Partition-level multi-tenancy</h3><p>In partition-level multi-tenancy, each tenant is assigned to a manually created <a href="/docs/v2.6.x/manage-partitions.md">partition</a> within a shared collection.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
@@ -77,7 +77,7 @@ summary: >-
 <li><p><strong>Flexibility</strong>: This strategy requires all tenants to share the same data schema. And partitions need to be manually created.</p></li>
 <li><p><strong>Others</strong>: RBAC is not supported on the partition level. Tenants can be queried either individually or across multiple partitions, which makes this approach well-suited for scenarios involving aggregated queries or analytics across tenant segments. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
 </ul>
-<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Partition key-level multi-tenancy</h3><p>With this strategy, all tenants share a single collection and schema, but each tenant’s data is automatically routed into 16 physically isolated partitions based on the <a href="/docs/use-partition-key.md">partition key</a> value. Although each physical partition can contain multiple tenants, the data from different tenants remains logically separated.</p>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Partition key-level multi-tenancy</h3><p>With this strategy, all tenants share a single collection and schema, but each tenant’s data is automatically routed into 16 physically isolated partitions based on the <a href="/docs/v2.6.x/use-partition-key.md">partition key</a> value. Although each physical partition can contain multiple tenants, the data from different tenants remains logically separated.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />

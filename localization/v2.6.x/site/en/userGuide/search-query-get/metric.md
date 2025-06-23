@@ -64,7 +64,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>For vector fields of the <code translate="no">SPARSE\_FLOAT\_VECTOR</code> type, use the <code translate="no">BM25</code> metric type only when performing full text search. For more information, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
+<li><p>For vector fields of the <code translate="no">SPARSE\_FLOAT\_VECTOR</code> type, use the <code translate="no">BM25</code> metric type only when performing full text search. For more information, refer to <a href="/docs/v2.6.x/full-text-search.md">Full Text Search</a>.</p></li>
 <li><p>For vector fields of the <code translate="no">BINARY_VECTOR</code> type, the dimension value (<code translate="no">dim</code>) must be a multiple of 8.</p></li>
 </ul>
 </div>
@@ -261,7 +261,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 is a widely used text relevance measurement method, specifically designed for <a href="/docs/full-text-search.md">full text search</a>. It combines the following three key factors:</p>
+    </button></h2><p>BM25 is a widely used text relevance measurement method, specifically designed for <a href="/docs/v2.6.x/full-text-search.md">full text search</a>. It combines the following three key factors:</p>
 <ul>
 <li><p><strong>Term Frequency (TF):</strong> Measures how frequently a term appears in a document. While higher frequencies often indicate greater importance, BM25 uses the saturation parameter <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> to prevent overly frequent terms from dominating the relevance score.</p></li>
 <li><p><strong>Inverse Document Frequency (IDF):</strong> Reflects the importance of a term across the entire corpus. Terms appearing in fewer documents receive a higher IDF value, indicating greater contribution to relevance.</p></li>

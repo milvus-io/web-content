@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <strong>BIN_IVF_FLAT</strong> index is a variant of the <strong>IVF_FLAT</strong> index exclusively for binary embeddings. It enhances query efficiency by first partitioning the vector data into multiple clusters (nlist units) and then comparing the target input vector to the center of each cluster. BIN_IVF_FLAT significantly reduces query time while allowing users to fine-tune the balance between accuracy and speed. For more information, refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
+    </button></h1><p>The <strong>BIN_IVF_FLAT</strong> index is a variant of the <strong>IVF_FLAT</strong> index exclusively for binary embeddings. It enhances query efficiency by first partitioning the vector data into multiple clusters (nlist units) and then comparing the target input vector to the center of each cluster. BIN_IVF_FLAT significantly reduces query time while allowing users to fine-tune the balance between accuracy and speed. For more information, refer to <a href="/docs/v2.6.x/ivf-flat.md">IVF_FLAT</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,14 +59,14 @@ index_params.add_index(
 <p>In this configuration:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">BIN_IVF_FLAT</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values for binary embeddings include <code translate="no">HAMMING</code> (default) and <code translate="no">JACCARD</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values for binary embeddings include <code translate="no">HAMMING</code> (default) and <code translate="no">JACCARD</code>. For details, refer to <a href="/docs/v2.6.x/metric.md">Metric Types</a>.</p></li>
 <li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
 <li><code translate="no">nlist</code>: Number of clusters to divide the dataset.</li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/bin-ivf-flat.md#Index-building-params">Index building params</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/v2.6.x/bin-ivf-flat.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/v2.6.x/create-collection.md">Create Collection</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,7 +103,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/bin-ivf-flat.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">BIN_IVF_FLAT</code> index, refer to <a href="/docs/v2.6.x/bin-ivf-flat.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,7 +121,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/bin-ivf-flat.md#Index-building-params">building an index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/v2.6.x/bin-ivf-flat.md#Index-building-params">building an index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -140,7 +140,7 @@ res = MilvusClient.search(
  In most cases, we recommend you set a value within this range: [32, 4096].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/bin-ivf-flat.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/v2.6.x/bin-ivf-flat.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

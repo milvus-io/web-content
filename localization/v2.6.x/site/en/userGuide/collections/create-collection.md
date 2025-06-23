@@ -41,9 +41,9 @@ summary: >-
 <p>You can determine every aspect of a collection, including its schema, index parameters, metric type, and whether to load it upon creation to ensure that the collection fully meets your requirements.</p>
 <p>To create a collection, you need to</p>
 <ul>
-<li><p><a href="/docs/create-collection.md#Create-Schema">Create schema</a></p></li>
-<li><p><a href="/docs/create-collection.md#Optional-Set-Index-Parameters">Set index parameters</a> (Optional)</p></li>
-<li><p><a href="/docs/create-collection.md#Create-a-Collection">Create collection</a></p></li>
+<li><p><a href="/docs/v2.6.x/create-collection.md#Create-Schema">Create schema</a></p></li>
+<li><p><a href="/docs/v2.6.x/create-collection.md#Optional-Set-Index-Parameters">Set index parameters</a> (Optional)</p></li>
+<li><p><a href="/docs/v2.6.x/create-collection.md#Create-a-Collection">Create collection</a></p></li>
 </ul>
 <h2 id="Create-Schema" class="common-anchor-header">Create Schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,10 +60,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A schema defines the data structure of a collection. When creating a collection, you need to design the schema based on your requirements. For details, refer to <a href="/docs/schema.md">Schema Explained</a>.</p>
+    </button></h2><p>A schema defines the data structure of a collection. When creating a collection, you need to design the schema based on your requirements. For details, refer to <a href="/docs/v2.6.x/schema.md">Schema Explained</a>.</p>
 <p>The following code snippets create a schema with the enabled dynamic field and three mandatory fields named <code translate="no">my_id</code>, <code translate="no">my_vector</code>, and <code translate="no">my_varchar</code>.</p>
 <div class="alert note">
-<p>You can set default values for any scalar field and make it nullable. For details, refer to  <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+<p>You can set default values for any scalar field and make it nullable. For details, refer to  <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a>.</p>
 </div>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -231,7 +231,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>Creating an index on a specific field accelerates the search against this field. An index records the order of entities within a collection. As shown in the following code snippets, you can use <code translate="no">metric_type</code> and <code translate="no">index_type</code> to select appropriate ways for Milvus to index a field and measure similarities between vector embeddings.</p>
 <p>On Milvus, you can use <code translate="no">AUTOINDEX</code> as the index type for all vector fields, and one of <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code> as the metric type based on your needs.</p>
 <p>As demonstrated in the above code snippet, you need to set both the index type and metric type for vector fields and only the index type for the scalar fields. Indexes are mandatory for vector fields, and you are advised to create indexes on scalar fields frequently used in filtering conditions.</p>
-<p>For details, refer to <a href="/docs/index-vector-fields.md">Index Vector Fields</a> and <a href="/docs/index-scalar-fields.md">Index Scalar Fields</a>.</p>
+<p>For details, refer to <a href="/docs/v2.6.x/index-vector-fields.md">Index Vector Fields</a> and <a href="/docs/v2.6.x/index-scalar-fields.md">Index Scalar Fields</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -595,7 +595,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Enable mmap</h3><p>Milvus enables mmap on all collections by default, allowing Milvus to map raw field data into memory instead of fully loading them. This reduces memory footprints and increases collection capacity. For details on mmap, refer to <a href="/docs/mmap.md">Use mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Enable mmap</h3><p>Milvus enables mmap on all collections by default, allowing Milvus to map raw field data into memory instead of fully loading them. This reduces memory footprints and increases collection capacity. For details on mmap, refer to <a href="/docs/v2.6.x/mmap.md">Use mmap</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -772,6 +772,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more on consistency levels, see <a href="/docs/tune_consistency.md">Consistency Level</a>.</p>
+<p>For more on consistency levels, see <a href="/docs/v2.6.x/tune_consistency.md">Consistency Level</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Enable Dynamic Field</h3><p>The dynamic field in a collection is a reserved JavaScript Object Notation (JSON) field named <strong>$meta</strong>. Once you have enabled this field, Milvus saves all non-schema-defined fields carried in each entity and their values as key-value pairs in the reserved field.</p>
-<p>For details on how to use the dynamic field, refer to <a href="/docs/enable-dynamic-field.md">Dynamic Field</a>.</p>
+<p>For details on how to use the dynamic field, refer to <a href="/docs/v2.6.x/enable-dynamic-field.md">Dynamic Field</a>.</p>

@@ -30,7 +30,7 @@ beta: Milvus 2.6.x
 <li><p>Customer support systems that need to match user problems with relevant solutions</p></li>
 <li><p>E-commerce search that must understand product attributes and user intent</p></li>
 </ul>
-<p>Compared to <a href="/docs/tei-ranker.md">TEI Ranker</a>, vLLM Ranker offers greater flexibility in model selection and customization, making it ideal for specialized or complex search applications where the additional configuration options provide significant benefits.</p>
+<p>Compared to <a href="/docs/v2.6.x/tei-ranker.md">TEI Ranker</a>, vLLM Ranker offers greater flexibility in model selection and customization, making it ideal for specialized or complex search applications where the additional configuration options provide significant benefits.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,7 +124,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>For general parameters shared across all model rankers (e.g., <code translate="no">provider</code>, <code translate="no">queries</code>), refer to <a href="/docs/model-ranker-overview.md#Create-a-model-ranker">Create a model ranker</a>.</p>
+<p>For general parameters shared across all model rankers (e.g., <code translate="no">provider</code>, <code translate="no">queries</code>), refer to <a href="/docs/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Create a model ranker</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Apply to standard vector search<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

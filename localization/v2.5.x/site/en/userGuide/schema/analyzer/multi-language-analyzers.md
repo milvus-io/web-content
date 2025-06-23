@@ -45,7 +45,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>This feature works only with BM25-based text retrieval and sparse vectors. For more information, refer to <a href="/docs/v2.5.x/full-text-search.md">Full Text Search</a>.</p></li>
+<li><p>This feature works only with BM25-based text retrieval and sparse vectors. For more information, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
 <li><p>Each document in a single collection can use only one analyzer, determined by its language identifier field value.</p></li>
 <li><p>Performance may vary depending on the complexity of your analyzers and the size of your text data.</p></li>
 </ul>
@@ -74,7 +74,7 @@ beta: Milvus 2.5.11+
 <ol>
 <li><p><strong>Configure Multi-language Analyzers</strong>:</p>
 <ul>
-<li><p>Set up multiple language-specific analyzers using the format: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, where each <code translate="no">analyzer_config</code> follows standard <code translate="no">analyzer_params</code> configuration as described in <a href="/docs/v2.5.x/analyzer-overview.md#Analyzer-types">Analyzer Overview</a>.</p></li>
+<li><p>Set up multiple language-specific analyzers using the format: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_config&gt;</code>, where each <code translate="no">analyzer_config</code> follows standard <code translate="no">analyzer_params</code> configuration as described in <a href="/docs/analyzer-overview.md#Analyzer-types">Analyzer Overview</a>.</p></li>
 <li><p>Define a special identifier field that will determine analyzer selection for each document.</p></li>
 <li><p>Configure a <code translate="no">default</code> analyzer for handling unknown languages.</p></li>
 </ul></li>
@@ -218,7 +218,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>Lists every language‑specific analyzer that Milvus can use to process text.
  Each analyzer in <code translate="no">analyzers</code> follows this format: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
-<li>Define each analyzer with the standard <code translate="no">analyzer_params</code> syntax (see <a href="/docs/v2.5.x/analyzer-overview.md#Analyzer-types">Analyzer Overview</a>).</li>
+<li>Define each analyzer with the standard <code translate="no">analyzer_params</code> syntax (see <a href="/docs/analyzer-overview.md#Analyzer-types">Analyzer Overview</a>).</li>
 <li>Add an entry whose key is <code translate="no">default</code>; Milvus falls back to this analyzer whenever the value stored in <code translate="no">by_field</code> does not match any other analyzer name.</li>
 </ul></td>
    </tr>
@@ -533,7 +533,7 @@ schema.WithFunction(function.WithName(<span class="hljs-string">&quot;text_to_ve
   ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This function automatically applies the appropriate analyzer to each text entry based on its language identifier. For more information on BM25-based text retrieval, refer to <a href="/docs/v2.5.x/full-text-search.md">Full Text Search</a>.</p>
+<p>This function automatically applies the appropriate analyzer to each text entry based on its language identifier. For more information on BM25-based text retrieval, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
 <h3 id="Configure-index-params" class="common-anchor-header">Configure index params</h3><p>To allow efficient searching, create an index on the sparse vector field:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -841,7 +841,7 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">metric_type=&quot;BM25&quot;</code> must match your index configuration.</p></li>
 <li><p><code translate="no">analyzer_name=&quot;english&quot;</code> specifies which analyzer to apply to your query text. This is independent of the analyzers used on stored documents.</p></li>
-<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> controls BM25-specific behavior; here, it retains all terms in the search. For more information, refer to <a href="/docs/v2.5.x/sparse_vector.md">Sparse Vector</a>.</p></li>
+<li><p><code translate="no">params={&quot;drop_ratio_search&quot;: &quot;0&quot;}</code> controls BM25-specific behavior; here, it retains all terms in the search. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p></li>
 </ul>
 <div class="multipleCode">
     <a href="#python">Python</a>

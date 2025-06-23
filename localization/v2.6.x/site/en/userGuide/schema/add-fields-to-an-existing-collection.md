@@ -44,7 +44,7 @@ beta: Milvus 2.6.x
 <li><p>You can add scalar fields (<code translate="no">INT64</code>, <code translate="no">VARCHAR</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, etc.). Vector fields cannot be added to existing collections.</p></li>
 <li><p>New fields must be nullable (nullable=True) to accommodate existing entities that don’t have values for the new field.</p></li>
 <li><p>Adding fields to loaded collections increases memory usage.</p></li>
-<li><p>There’s a maximum limit on total fields per collection. For details, refer to <a href="/docs/limitations.md#Number-of-resources-in-a-collection">Milvus Limits</a>.</p></li>
+<li><p>There’s a maximum limit on total fields per collection. For details, refer to <a href="/docs/v2.6.x/limitations.md#Number-of-resources-in-a-collection">Milvus Limits</a>.</p></li>
 <li><p>Field names must be unique among static fields.</p></li>
 <li><p>You cannot add a <code translate="no">$meta</code> field to enable dynamic field functionality for collections that weren’t originally created with <code translate="no">enable_dynamic_field=True</code>.</p></li>
 </ul>
@@ -70,7 +70,7 @@ beta: Milvus 2.6.x
 <li><p>An existing collection</p></li>
 </ul>
 <div class="alert note">
-<p>Refer to our <a href="/docs/create-collection.md">Create Collection</a> for collection creation and basic operations.</p>
+<p>Refer to our <a href="/docs/v2.6.x/create-collection.md">Create Collection</a> for collection creation and basic operations.</p>
 </div>
 <h2 id="Basic-usage" class="common-anchor-header">Basic usage<button data-href="#Basic-usage" class="anchor-icon" translate="no">
       <svg translate="no"

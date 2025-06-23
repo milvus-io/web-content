@@ -78,55 +78,55 @@ beta: Milvus 2.6.x
      <th><p>Authentication Method</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/openai.md">OpenAI</a></p></td>
+     <td><p><a href="/docs/v2.6.x/openai.md">OpenAI</a></p></td>
      <td><p>text-embedding-3-*</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/azure-openai.md">Azure OpenAI</a></p></td>
+     <td><p><a href="/docs/v2.6.x/azure-openai.md">Azure OpenAI</a></p></td>
      <td><p>Deployment-based</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/dashscope.md">DashScope</a></p></td>
+     <td><p><a href="/docs/v2.6.x/dashscope.md">DashScope</a></p></td>
      <td><p>text-embedding-v3</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/bedrock.md">Bedrock</a></p></td>
+     <td><p><a href="/docs/v2.6.x/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>AK/SK pair</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/vertex-ai.md">Vertex AI</a></p></td>
+     <td><p><a href="/docs/v2.6.x/vertex-ai.md">Vertex AI</a></p></td>
      <td><p>text-embedding-005</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>GCP service account JSON credential</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/voyage-ai.md">Voyage AI</a></p></td>
+     <td><p><a href="/docs/v2.6.x/voyage-ai.md">Voyage AI</a></p></td>
      <td><p>voyage-3, voyage-lite-02</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/cohere.md">Cohere</a></p></td>
+     <td><p><a href="/docs/v2.6.x/cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/siliconflow.md">SiliconFlow</a></p></td>
+     <td><p><a href="/docs/v2.6.x/siliconflow.md">SiliconFlow</a></p></td>
      <td><p>BAAI/bge-large-zh-v1.5</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>API key</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/hugging-face-tei.md">Hugging Face</a></p></td>
+     <td><p><a href="/docs/v2.6.x/hugging-face-tei.md">Hugging Face</a></p></td>
      <td><p>Any TEI-served model</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Optional API key</p></td>
@@ -183,7 +183,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Configuration file</strong> (<code translate="no">milvus.yaml</code>):</p>
 <p>The example in this topic demonstrates the <strong>recommended setup</strong> using <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Environment variables</strong>:</p>
-<p>For details on configuring credentials via environment variables, see the embedding service provider’s documentation (for example, <a href="/docs/openai.md">OpenAI</a> or <a href="/docs/azure-openai.md">Azure OpenAI</a>).</p></li>
+<p>For details on configuring credentials via environment variables, see the embedding service provider’s documentation (for example, <a href="/docs/v2.6.x/openai.md">OpenAI</a> or <a href="/docs/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
 <p>The following diagram shows the process of configuring credentials via Milvus configuration file (<code translate="no">milvus.yaml</code>) and then calling the Function within Milvus.</p>
 <p>
@@ -232,7 +232,7 @@ beta: Milvus 2.6.x
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on how to apply Milvus configuration, refer to <a href="/docs/dynamic_config.md">Configure Milvus on the Fly</a>.</p>
+<p>For more information on how to apply Milvus configuration, refer to <a href="/docs/v2.6.x/dynamic_config.md">Configure Milvus on the Fly</a>.</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">Use embedding function<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -312,7 +312,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Type of function used. For text embedding, set the value to <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>Note:</strong> Milvus accepts <code translate="no">FunctionType.BM25</code> (for sparse-embedding transformation) and <code translate="no">FunctionType.RERANK</code> (for reranking) for this parameter. Refer to <a href="/docs/full-text-search.md">Full Text Search</a> and <a href="/docs/decay-ranker-overview.md">Decay Ranker Overview</a> for details.</p></td>
+     <td><p>Type of function used. For text embedding, set the value to <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>Note:</strong> Milvus accepts <code translate="no">FunctionType.BM25</code> (for sparse-embedding transformation) and <code translate="no">FunctionType.RERANK</code> (for reranking) for this parameter. Refer to <a href="/docs/v2.6.x/full-text-search.md">Full Text Search</a> and <a href="/docs/v2.6.x/decay-ranker-overview.md">Decay Ranker Overview</a> for details.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -407,7 +407,7 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information about search and query operations, refer to <a href="/docs/single-vector-search.md">Basic Vector Search</a> and <a href="/docs/get-and-scalar-query.md">Query</a>.</p>
+<p>For more information about search and query operations, refer to <a href="/docs/v2.6.x/single-vector-search.md">Basic Vector Search</a> and <a href="/docs/v2.6.x/get-and-scalar-query.md">Query</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +423,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">What’s the difference between configuring credentials in milvus.yaml vs environment variables?</h3><p>Both methods work, but using <code translate="no">milvus.yaml</code> is the recommended approach as it provides centralized credential management and consistent credential naming across all providers. When using environment variables, the variable names vary depending on the embedding service provider, so refer to each provider’s dedicated page to understand the specific environment variable names required (for example, <a href="/docs/openai.md">OpenAI</a> or <a href="/docs/azure-openai.md">Azure OpenAI</a>).</p>
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">What’s the difference between configuring credentials in milvus.yaml vs environment variables?</h3><p>Both methods work, but using <code translate="no">milvus.yaml</code> is the recommended approach as it provides centralized credential management and consistent credential naming across all providers. When using environment variables, the variable names vary depending on the embedding service provider, so refer to each provider’s dedicated page to understand the specific environment variable names required (for example, <a href="/docs/v2.6.x/openai.md">OpenAI</a> or <a href="/docs/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">What happens if I don’t specify a credential parameter in the function definition?</h3><p>Milvus follows this credential resolution order:</p>
 <ol>
 <li>First, it looks for the default credential configured for that provider in the <code translate="no">milvus.yaml</code> file</li>

@@ -262,7 +262,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on the operators you can use in metadata filtering, refer to <a href="/docs/v2.5.x/filtering">Filtering</a>.</p>
+<p>For more information on the operators you can use in metadata filtering, refer to <a href="/docs/filtering">Filtering</a>.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">Search with iterative filtering</h3><p>To conduct a filtered search with iterative filtering, you can do as follows:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>

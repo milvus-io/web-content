@@ -37,7 +37,7 @@ summary: >-
 </p>
 <p>The multi-vector hybrid search integrates different search methods or spans embeddings from various modalities:</p>
 <ul>
-<li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/v2.5.x/dense-vector.md">Dense Vector</a> are excellent for capturing semantic relationships, while <a href="/docs/v2.5.x/sparse_vector.md">Sparse Vector</a> are highly effective for precise keyword matching. Hybrid search combines these approaches to provide both a broad conceptual understanding and exact term relevance, thus improving search results. By leveraging the strengths of each method, hybrid search overcomes the limitations of indiviual approaches, offering better performance for complex queries. Here is more detailed <a href="/docs/v2.5.x/full_text_search_with_milvus.md">guide</a> on hybrid retrieval that combines semantic search with full-text search.</p></li>
+<li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/dense-vector.md">Dense Vector</a> are excellent for capturing semantic relationships, while <a href="/docs/sparse_vector.md">Sparse Vector</a> are highly effective for precise keyword matching. Hybrid search combines these approaches to provide both a broad conceptual understanding and exact term relevance, thus improving search results. By leveraging the strengths of each method, hybrid search overcomes the limitations of indiviual approaches, offering better performance for complex queries. Here is more detailed <a href="/docs/full_text_search_with_milvus.md">guide</a> on hybrid retrieval that combines semantic search with full-text search.</p></li>
 <li><p><strong>Multimodal Vector Search</strong>: Multimodal vector search is a powerful technique that allows you to search across various data types, including text, images, audio, and others. The main advantage of this approach is its ability to unify different modalities into a seamless and cohesive search experience. For instance, in product search, a user might input a text query to find products described with both text and images. By combining these modalities through a hybrid search method, you can enhance search accuracy or enrich the search results.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Example<button data-href="#Example" class="anchor-icon" translate="no">
@@ -87,7 +87,7 @@ summary: >-
 <li><p><code translate="no">text_sparse</code>: Used to store sparse vectors of the texts. This field is of the data type <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: Used to store dense vectors of the product images. This field is of the data type <code translate="no">FLOAT_VETOR</code> with a vector dimension of 512.</p></li>
 </ul>
-<p>Since we will use the built-in BM25 algorithm to perform a full-text search on the text field, it is necessary to add the Milvus <code translate="no">Function</code> to the schema. For further details, please refer to <a href="/docs/v2.5.x/full-text-search.md">Full Text Search</a>.</p>
+<p>Since we will use the built-in BM25 algorithm to perform a full-text search on the text field, it is necessary to add the Milvus <code translate="no">Function</code> to the schema. For further details, please refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -649,7 +649,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Create multiple AnnSearchRequest instances</h3><p>Hybrid Search is implemented by creating multiple <code translate="no">AnnSearchRequest</code> in the <code translate="no">hybrid_search()</code> function, where each <code translate="no">AnnSearchRequest</code> represents a basic ANN search request for a specific vector field. Therefore, before conducting a Hybrid Search, it is necessary to create an <code translate="no">AnnSearchRequest</code> for each vector field.</p>
-<p>In addition, by configuring the <code translate="no">expr</code> parameter in an <code translate="no">AnnSearchRequest</code>, you can set the filtering conditions for your hybrid search. Please refer to <a href="/docs/v2.5.x/filtered-search.md">Filtered Search</a> and <a href="/docs/v2.5.x/boolean.md">Filtering</a>.</p>
+<p>In addition, by configuring the <code translate="no">expr</code> parameter in an <code translate="no">AnnSearchRequest</code>, you can set the filtering conditions for your hybrid search. Please refer to <a href="/docs/filtered-search.md">Filtered Search</a> and <a href="/docs/boolean.md">Filtering</a>.</p>
 <div class="alert note">
 <p>In Hybrid Search, each <code translate="no">AnnSearchRequest</code> supports only one query data.</p>
 </div>
@@ -802,7 +802,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <li><p><strong>WeightedRanker</strong>: Use this strategy if the results need to emphasize a particular vector field. WeightedRanker allows you to assign greater weight to certain vector fields, highlighting them more prominently.</p></li>
 <li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Choose this strategy when no specific emphasis is required. RRFRanker effectively balances the importance of each vector field.</p></li>
 </ul>
-<p>For more details on these reranking mechanisms, please refer to <a href="/docs/v2.5.x/reranking.md">Reranking</a>.</p>
+<p>For more details on these reranking mechanisms, please refer to <a href="/docs/reranking.md">Reranking</a>.</p>
 <p>In this example, since there is no particular emphasis on specific search queries, we will proceed with the RRFRanker strategy.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>

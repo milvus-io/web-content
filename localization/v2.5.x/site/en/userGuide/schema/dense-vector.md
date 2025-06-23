@@ -80,7 +80,7 @@ summary: >-
   </span>
 </p>
 <div class="alert note">
-<p>Besides dense vectors, Milvus also supports sparse vectors and binary vectors. Sparse vectors are suitable for precise matches based on specific terms, such as keyword search and term matching, while binary vectors are commonly used for efficiently handling binarized data, such as image pattern matching and certain hashing applications. For more information, refer to <a href="/docs/v2.5.x/binary-vector.md">Binary Vector</a> and <a href="/docs/v2.5.x/sparse_vector.md">Sparse Vector</a>.</p>
+<p>Besides dense vectors, Milvus also supports sparse vectors and binary vectors. Sparse vectors are suitable for precise matches based on specific terms, such as keyword search and term matching, while binary vectors are commonly used for efficiently handling binarized data, such as image pattern matching and certain hashing applications. For more information, refer to <a href="/docs/binary-vector.md">Binary Vector</a> and <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Use dense vectors<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -293,7 +293,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>In the example above, an index named <code translate="no">dense_vector_index</code> is created for the <code translate="no">dense_vector</code> field using the <code translate="no">AUTOINDEX</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">IP</code>, indicating that inner product will be used as the distance metric.</p>
 <p>Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.</p>
-<p>Milvus supports other metric types. For more information, refer to <a href="/docs/v2.5.x/metric.md">Metric Types</a>.</p>
+<p>Milvus supports other metric types. For more information, refer to <a href="/docs/metric.md">Metric Types</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Create collection</h3><p>Once the dense vector and index param settings are complete, you can create a collection containing dense vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -524,4 +524,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/v2.5.x/single-vector-search.md">Basic ANN Search</a>.</p>
+<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">Basic ANN Search</a>.</p>

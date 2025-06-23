@@ -39,7 +39,7 @@ title: Index Scalar Fields
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Auto indexing</a></strong>: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Custom indexing</a></strong>: You specify the exact index type, such as an inverted index or <a href="/docs/v2.5.x/bitmap.md">bitmap index</a>. This provides more control over the index type selection.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Custom indexing</a></strong>: You specify the exact index type, such as an inverted index or <a href="/docs/bitmap.md">bitmap index</a>. This provides more control over the index type selection.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Auto indexing<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -198,8 +198,8 @@ client.createIndex(createIndexReq);
 <p>The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.</p>
 <p>For custom indexing, valid values are:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/v2.5.x/scalar_index.md">Scalar Index</a>.</p></li>
-<li><p><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/v2.5.x/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</p></li>
+<li><p><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</p></li>
 </ul></li>
@@ -230,7 +230,7 @@ The name of the scalar index to create. Each scalar field supports one index.</l
 The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
 For custom indexing, valid values are:
 <ul>
-<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/v2.5.x/scalar_index.md">Scalar Index</a>.</li>
+<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
 <li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
 </ul></li>
@@ -261,7 +261,7 @@ The name of the scalar index to create. Each scalar field supports one index.</l
 The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
 For custom indexing, valid values are:
 <ul>
-<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/v2.5.x/scalar_index.md">Scalar Index</a>.</li>
+<li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
 <li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
 </ul></li>

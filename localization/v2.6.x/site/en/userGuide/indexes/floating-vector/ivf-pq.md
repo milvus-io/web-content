@@ -47,7 +47,7 @@ summary: >-
 <li><p><strong>Inverted Index:</strong> An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.</p></li>
 <li><p><strong>Search:</strong> When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.</p></li>
 </ol>
-<p>To learn more about its technical details , refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
+<p>To learn more about its technical details , refer to <a href="/docs/v2.6.x/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong> is a compression method for high-dimensional vectors that significantly reduces storage requirements while enabling fast similarity search operations.</p>
 <p>The PQ process involves these key stages:</p>
 <p>
@@ -62,7 +62,7 @@ summary: >-
 <li><p><strong>Vector</strong> <strong>quantization</strong>: For each sub-vector in the original vector, PQ identifies its nearest centroid within the corresponding subspace using a specific metric type. This process effectively maps each sub-vector to its closest representative vector in the codebook. Instead of storing the full sub-vector coordinates, only the index of the matched centroid is retained.</p></li>
 <li><p><strong>Compressed representation</strong>: The final compressed representation consists of <code translate="no">m</code> indices, one from each subspace, collectively referred to as <strong>PQ codes</strong>. This encoding reduces the storage requirement from <em>D × 32</em> bits (assuming 32-bit floating-point numbers) to <em>m</em> × <em>nbits</em> bits, achieving substantial compression while preserving the ability to approximate vector distances.</p></li>
 </ol>
-<p>For more details on parameter tuning and optimization, refer to <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
+<p>For more details on parameter tuning and optimization, refer to <a href="/docs/v2.6.x/ivf-pq.md#Index-params">Index params</a>.</p>
 <div class="alert note">
 <p>Consider a vector with <em>D = 128</em> dimensions using 32-bit floating-point numbers. With PQ parameters <em>m = 64</em> (sub-vectors) and <em>nbits = 8</em> (thus <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">2^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span> <em>= 256</em> centroids per subspace), we can compare the storage requirements:</p>
 <ul>
@@ -98,7 +98,7 @@ summary: >-
 <li><p><strong>Coarse filtering with IVF</strong>: IVF partitions the vector space into clusters, reducing the search scope. Instead of evaluating the entire dataset, the algorithm focuses only on the clusters closest to the query vector.</p></li>
 <li><p><strong>Fine-grained comparison with PQ</strong>: Within the selected clusters, PQ uses compressed and quantized vector representations to compute approximate distances quickly.</p></li>
 </ol>
-<p>The performance of the <strong>IVF_PQ</strong> index is significantly impacted by the parameters that control both the IVF and PQ algorithms. Tuning these parameters is crucial to achieve the optimal results for a given dataset and application. More detailed information about these parameters and how to tune them can be found in <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
+<p>The performance of the <strong>IVF_PQ</strong> index is significantly impacted by the parameters that control both the IVF and PQ algorithms. Tuning these parameters is crucial to achieve the optimal results for a given dataset and application. More detailed information about these parameters and how to tune them can be found in <a href="/docs/v2.6.x/ivf-pq.md#Index-params">Index params</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,14 +133,14 @@ index_params.add_index(
 <p>In this configuration:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">IVF_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/v2.6.x/metric.md">Metric Types</a>.</p></li>
 <li><p><code translate="no">params</code>: Additional configuration options for building the index.</p>
 <ul>
 <li><code translate="no">m</code>: Number of sub-vectors to split the vector into.</li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/ivf-pq.md#Index-building-params">Index building params</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/v2.6.x/ivf-pq.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/v2.6.x/create-collection.md">Create Collection</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +177,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">nprobe</code>: Number of clusters to search for.</li>
 </ul>
-<p>To learn more search parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/ivf-pq.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
+<p>To learn more search parameters available for the <code translate="no">IVF_PQ</code> index, refer to <a href="/docs/v2.6.x/ivf-pq.md#Index-specific-search-params">Index-specific search params</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -195,7 +195,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/ivf-pq.md#Build-index">building an index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/v2.6.x/ivf-pq.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -225,7 +225,7 @@ res = MilvusClient.search(
      <td><p>A higher <code translate="no">nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression. In most cases, we recommend you set a value within this range: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/ivf-pq.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/v2.6.x/ivf-pq.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>
