@@ -95,9 +95,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For simpler setup, you may choose to use the <code translate="no">standard</code> <a href="/docs/standard-analyzer.md">analyzer</a>, which combines the <code translate="no">standard</code> tokenizer with the <code translate="no">lowercase</code><a href="/docs/lowercase-filter.md"> filter</a>.</p>
+<p>For simpler setup, you may choose to use the <code translate="no">standard</code> <a href="/docs/v2.6.x/standard-analyzer.md">analyzer</a>, which combines the <code translate="no">standard</code> tokenizer with the <code translate="no">lowercase</code><a href="/docs/v2.6.x/lowercase-filter.md"> filter</a>.</p>
 </div>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
+<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/v2.6.x/analyzer-overview.md#Example-use">Example use</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

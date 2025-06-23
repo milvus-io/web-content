@@ -49,7 +49,7 @@ summary: >-
 <li><p>While there is no set <code translate="no">limit</code> for <code translate="no">GPU_BRUTE_FORCE</code>, it is recommended not to exceed 4,096 to avoid potential performance issues.</p></li>
 <li><p>Currently, GPU indexes do not support <code translate="no">COSINE</code> distance. If <code translate="no">COSINE</code> distance is required, data should be normalized first, and then inner product (IP) distance can be used as a substitute.</p></li>
 <li><p>Loading OOM protection for GPU indexes is not fully supported, too much data might lead to QueryNode crashes.</p></li>
-<li><p>GPU indexes do not support search functions like <a href="/docs/range-search.md">range search</a> and <a href="/docs/grouping-search.md">grouping search</a>.</p></li>
+<li><p>GPU indexes do not support search functions like <a href="/docs/v2.6.x/range-search.md">range search</a> and <a href="/docs/v2.6.x/grouping-search.md">grouping search</a>.</p></li>
 </ul>
 <h2 id="Supported-GPU-index-types" class="common-anchor-header">Supported GPU index types<button data-href="#Supported-GPU-index-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,22 +74,22 @@ summary: >-
      <th><p>Memory Usage</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/gpu-cagra.md">GPU_CAGRA</a></p></td>
+     <td><p><a href="/docs/v2.6.x/gpu-cagra.md">GPU_CAGRA</a></p></td>
      <td><p>GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs to run the Milvus GPU version can be more cost-effective compared to using expensive training-grade GPUs.</p></td>
      <td><p>Memory usage is approximately 1.8 times that of the original vector data.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/gpu-ivf-flat.md">GPU_IVF_FLAT</a></p></td>
+     <td><p><a href="/docs/v2.6.x/gpu-ivf-flat.md">GPU_IVF_FLAT</a></p></td>
      <td><p>GPU_IVF_FLAT is the most basic IVF index, and the encoded data stored in each unit is consistent with the original data. When conducting searches, note that you can set the top-k (<code translate="no">limit</code>) up to 256 for any search against a GPU_IVF_FLAT-indexed collection.</p></td>
      <td><p>Requires memory equal to the size of the original data.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/gpu-ivf-pq.md">GPU_IVF_PQ</a></p></td>
+     <td><p><a href="/docs/v2.6.x/gpu-ivf-pq.md">GPU_IVF_PQ</a></p></td>
      <td><p>GPU_IVF_PQ performs IVF index clustering before quantizing the product of vectors. When conducting searches, note that you can set the top-k (<code translate="no">limit</code>) up to 8,192 for any search against a GPU_IVF_FLAT-indexed collection.</p></td>
      <td><p>Utilizes a smaller memory footprint, which depends on the compression parameter settings.</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/gpu-brute-force.md">GPU_BRUTE_FORCE</a></p></td>
+     <td><p><a href="/docs/v2.6.x/gpu-brute-force.md">GPU_BRUTE_FORCE</a></p></td>
      <td><p>GPU_BRUTE_FORCE is tailored for cases where extremely high recall is crucial, guaranteeing a recall of 1 by comparing each query with all vectors in the dataset. It only requires the metric type (<code translate="no">metric_type</code>) and top-k (<code translate="no">limit</code>) as index building and search parameters.</p></td>
      <td><p>Requires memory equal to the size of the original data.</p></td>
    </tr>

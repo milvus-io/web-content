@@ -47,7 +47,7 @@ summary: >-
   </span>
 </p>
 <p>The data model design of a search system involves analyzing business needs and abstracting information into a schema-expressed data model. For instance, searching a piece of text must be “indexed” by converting the literal string into a vector through “embedding” and enabling vector search. Beyond this essential requirement, storing other properties such as publication timestamp and author may be necessary. This metadata allows for semantic searches to be refined through filtering, returning only texts published after a specific date or by a particular author. You can also retrieve these scalars with the main text to render the search result in the application. Each should be assigned a unique identifier to organize these text pieces, expressed as an integer or string. These elements are essential for achieving sophisticated search logic.</p>
-<p>Refer to <a href="/docs/schema-hands-on.md">Schema Design Hands-On</a> to figure out how to make a well-designed schema.</p>
+<p>Refer to <a href="/docs/v2.6.x/schema-hands-on.md">Schema Design Hands-On</a> to figure out how to make a well-designed schema.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Create Schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -159,7 +159,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p>When adding a field, you can explicitly clarify the field as the primary field by setting its <code translate="no">is_primary</code> property to <code translate="no">True</code>. A primary field accepts <strong>Int64</strong> values by default. In this case, the primary field value should be integers similar to <code translate="no">12345</code>. If you choose to use <strong>VarChar</strong> values in the primary field, the value should be strings similar to <code translate="no">my_entity_1234</code>.</p>
 <p>You can also set the <code translate="no">autoId</code> properties to <code translate="no">True</code> to make Zilliz Cloud automatically allocate primary field values upon data insertions.</p>
-<p>For details, refer to <a href="/docs/primary-field.md">Primary Field & AutoId</a>.</p>
+<p>For details, refer to <a href="/docs/v2.6.x/primary-field.md">Primary Field & AutoId</a>.</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">Add Vector Fields<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -251,7 +251,7 @@ schema.addField(AddFieldReq.builder()
         ></path>
       </svg>
     </button></h2><p>In common cases, you can use scalar fields to store the metadata of the vector embeddings stored in Milvus, and conduct ANN searches with metadata filtering to improve the correctness of the search results. Zilliz Cloud supports multiple scalar field types, including <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong>, and <strong>JSON</strong>.</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">Add String Fields</h3><p>In Milvus, you can use VarChar fields to store strings. For more on the VarChar field, refer to <a href="/docs/string.md">String Field</a>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">Add String Fields</h3><p>In Milvus, you can use VarChar fields to store strings. For more on the VarChar field, refer to <a href="/docs/v2.6.x/string.md">String Field</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -299,7 +299,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Number-Fields" class="common-anchor-header">Add Number Fields</h3><p>The types of numbers that Milvus supports are <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, and <code translate="no">Double</code>. For more on the number fields, refer to <a href="/docs/number.md">Number Field</a>.</p>
+<h3 id="Add-Number-Fields" class="common-anchor-header">Add Number Fields</h3><p>The types of numbers that Milvus supports are <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, and <code translate="no">Double</code>. For more on the number fields, refer to <a href="/docs/v2.6.x/number.md">Number Field</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -384,7 +384,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-JSON-fields" class="common-anchor-header">Add JSON fields</h3><p>A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to <a href="/docs/use-json-fields.md">JSON Field</a>.</p>
+<h3 id="Add-JSON-fields" class="common-anchor-header">Add JSON fields</h3><p>A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to <a href="/docs/v2.6.x/use-json-fields.md">JSON Field</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -428,7 +428,7 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">Add Array Fields</h3><p>An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to <a href="/docs/array_data_type.md">Array Field</a>.</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">Add Array Fields</h3><p>An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to <a href="/docs/v2.6.x/array_data_type.md">Array Field</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>

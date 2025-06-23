@@ -111,7 +111,7 @@ summary: >-
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>To apply the above settings to your Milvus cluster, please follow the steps in <a href="/docs/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a> and <a href="/docs/v2.5.x/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
+<p>To apply the above settings to your Milvus cluster, please follow the steps in <a href="/docs/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a> and <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
 <p>Sometimes, global mmap settings are not flexible when facing particular use cases. To apply alternate settings to a specific collection or its indexes, consider configuring mmap specific to a collection, a field, or an index. You need to release and load a collection before the changes to the mmap settings take effect.</p>
 <h3 id="Field-specific-mmap-settings" class="common-anchor-header">Field-specific mmap settings</h3><p>To configure field-specific mmap, you need to include the <code translate="no">mmap_enabled</code> parameter when you add a field. You can enable mmap on this specific field by setting this parameter to <code translate="no">True</code>.</p>
 <p>The following example demonstrates how to configure field-specific mmap when you add a field.</p>

@@ -341,7 +341,7 @@ curl --request POST \
 <li><p><strong>Specify the JSON path</strong> to that key as <code translate="no">json_path</code>. Since the dynamic field is stored as JSON, you can specify something like <code translate="no">&quot;color&quot;</code>, or if you have nested structures, you can specify deeper paths (e.g. <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
 <li><p><strong>Create an INVERTED index</strong>. Currently, only <code translate="no">INVERTED</code> type is supported for JSON path indexing.</p></li>
 </ol>
-<p>For details on parameters and considerations, refer to <a href="/docs/v2.5.x/use-json-fields.md#Index-a-JSON-field">Index a JSON field</a>.</p>
+<p>For details on parameters and considerations, refer to <a href="/docs/use-json-fields.md#Index-a-JSON-field">Index a JSON field</a>.</p>
 <p>Below is an example of how to create an index on the <code translate="no">&quot;color&quot;</code> field:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>

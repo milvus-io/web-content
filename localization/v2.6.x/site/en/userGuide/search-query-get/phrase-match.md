@@ -50,7 +50,7 @@ beta: Milvus 2.6.x
   </span>
 </p>
 <ol>
-<li><p><strong>Document Tokenization</strong>: When you insert documents into Milvus, the text is split into tokens (individual words or terms) using an analyzer, with positional information recorded for each token. For example, <strong>doc_1</strong> is tokenized into <strong>[“machine” (pos=0), “learning” (pos=1), “boosts” (pos=2), “efficiency” (pos=3)]</strong>. For more information on analyzers, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p></li>
+<li><p><strong>Document Tokenization</strong>: When you insert documents into Milvus, the text is split into tokens (individual words or terms) using an analyzer, with positional information recorded for each token. For example, <strong>doc_1</strong> is tokenized into <strong>[“machine” (pos=0), “learning” (pos=1), “boosts” (pos=2), “efficiency” (pos=3)]</strong>. For more information on analyzers, refer to <a href="/docs/v2.6.x/analyzer-overview.md">Analyzer Overview</a>.</p></li>
 <li><p><strong>Inverted Index Creation</strong>: Milvus builds an inverted index, mapping each token to the document(s) in which it appears and the token’s positions in those documents.</p></li>
 <li><p><strong>Phrase Matching</strong>: When a phrase query is executed, Milvus looks up each token in the inverted index and checks their positions to determine if they appear in the correct order and proximity. The <code translate="no">slop</code> parameter controls the maximum number of positions allowed between matching tokens:</p>
 <ul>
@@ -80,7 +80,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Phrase match works with the <code translate="no">VARCHAR</code> field type, the string data type in Milvus. To enable phrase matching, configure your collection schema by setting both <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code> parameters to <code translate="no">True</code>, similar to <a href="/docs/keyword-match.md">text match</a>.</p>
+    </button></h2><p>Phrase match works with the <code translate="no">VARCHAR</code> field type, the string data type in Milvus. To enable phrase matching, configure your collection schema by setting both <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code> parameters to <code translate="no">True</code>, similar to <a href="/docs/v2.6.x/keyword-match.md">text match</a>.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Set <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code></h3><p>To enable phrase match for a specific <code translate="no">VARCHAR</code> field, set both <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code> parameters to <code translate="no">True</code> when defining the field schema. This configuration instructs Milvus to tokenize the text and create an inverted index with positional information required for efficient phrase matching.</p>
 <p>Here’s an example schema definition to enable phrase match:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -108,7 +108,7 @@ schema.add_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Optional: Configure an analyzer</h3><p>Phrase matching accuracy depends significantly on the analyzer used to tokenize your text data. Different analyzers suit different languages and text formats, affecting tokenization and positional accuracy. Selecting an appropriate analyzer for your specific use case will optimize your phrase matching results.</p>
-<p>By default, Milvus uses the standard analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are required for default usage. Refer to <a href="/docs/standard-analyzer.md">Standard Analyzer</a> for details.</p>
+<p>By default, Milvus uses the standard analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are required for default usage. Refer to <a href="/docs/v2.6.x/standard-analyzer.md">Standard Analyzer</a> for details.</p>
 <p>If your application requires a specific analyzer, configure it using the <code translate="no">analyzer_params</code> parameter. For example, here’s how to configure the <code translate="no">english</code> analyzer for phrase matching in English text:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -125,7 +125,7 @@ schema.add_field(
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus supports several analyzers tailored for different languages and use cases. For detailed information, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p>
+<p>Milvus supports several analyzers tailored for different languages and use cases. For detailed information, refer to <a href="/docs/v2.6.x/analyzer-overview.md">Analyzer Overview</a>.</p>
 <h2 id="Use-phrase-match" class="common-anchor-header">Use phrase match<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -326,7 +326,7 @@ result_slop2 = client.search(
     </button></h2><ul>
 <li><p>Enabling phrase matching for a field triggers the creation of an inverted index, which consumes storage resources. Consider storage impact when deciding to enable this feature, as it varies based on text size, unique tokens, and the analyzer used.</p></li>
 <li><p>Once you’ve defined an analyzer in your schema, its settings become permanent for that collection. If you decide that a different analyzer would better suit your needs, you may consider dropping the existing collection and creating a new one with the desired analyzer configuration.</p></li>
-<li><p>Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the <code translate="no">run_analyzer</code> method to review the tokenization output. For more information, refer to <a href="/docs/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">Analyzer Overview</a>.</p></li>
+<li><p>Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the <code translate="no">run_analyzer</code> method to review the tokenization output. For more information, refer to <a href="/docs/v2.6.x/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">Analyzer Overview</a>.</p></li>
 <li><p>Escape rules in <code translate="no">filter</code> expressions:</p>
 <ul>
 <li><p>Characters enclosed in double quotes or single quotes within expressions are interpreted as string constants. If the string constant includes escape characters, the escape characters must be represented with escape sequence. For example, use <code translate="no">\\</code> to represent <code translate="no">\</code>, <code translate="no">\\t</code> to represent a tab <code translate="no">\t</code>, and <code translate="no">\\n</code> to represent a newline.</p></li>

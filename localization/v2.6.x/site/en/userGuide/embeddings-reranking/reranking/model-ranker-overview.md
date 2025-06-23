@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
 </table>
 <p>For detailed information about implementation of each model service, refer to the dedicated documentation:</p>
 <ul>
-<li><p><a href="/docs/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/v2.6.x/tei-ranker.md">TEI Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -207,7 +207,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>A dictionary containing configuration for the model-based reranking function. The available parameters (keys) vary depending on the provider (<code translate="no">tei</code> or <code translate="no">vllm</code>). Refer to <a href="/docs/vllm-ranker.md">vLLM Ranker</a> or <a href="/docs/tei-ranker.md">TEI Ranker</a> for more details.</p></td>
+     <td><p>A dictionary containing configuration for the model-based reranking function. The available parameters (keys) vary depending on the provider (<code translate="no">tei</code> or <code translate="no">vllm</code>). Refer to <a href="/docs/v2.6.x/vllm-ranker.md">vLLM Ranker</a> or <a href="/docs/v2.6.x/tei-ranker.md">TEI Ranker</a> for more details.</p></td>
      <td><p>{…}</p></td>
    </tr>
    <tr>

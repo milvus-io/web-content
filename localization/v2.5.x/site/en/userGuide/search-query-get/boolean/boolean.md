@@ -55,7 +55,7 @@ summary: >-
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">Example: Filtering Array Fields</h3><p>If you have an array field <code translate="no">history_temperatures</code> containing the records of average temperatures reported by observatories since the year 2000, and want to find observatories where the temperature in 2009 (the 10th recorded ) exceeds 23°C, use this expression:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on these basic operators, refer to <a href="/docs/v2.5.x/basic-operators.md">Basic Operators</a>.</p>
+<p>For more information on these basic operators, refer to <a href="/docs/basic-operators.md">Basic Operators</a>.</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">Filter expression templates<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +80,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>This approach reduces parsing overhead and improves query speed. For more information, see <a href="/docs/v2.5.x/filtering-templating.md">Filter Templating</a>.</p>
+<p>This approach reduces parsing overhead and improves query speed. For more information, see <a href="/docs/filtering-templating.md">Filter Templating</a>.</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">Data type-specific operators<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +110,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more details on JSON operators, refer to <a href="/docs/v2.5.x/json-operators.md">JSON Operators</a>.</p>
+<p>For more details on JSON operators, refer to <a href="/docs/json-operators.md">JSON Operators</a>.</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY field-specific operators</h3><p>Milvus provides advanced filtering operators for array fields, such as <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code>, which allow fine-grained control over array data:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: Filters entities containing a specific element.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
@@ -124,7 +124,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>: Filters based on the length of the array.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more details on array operators, see <a href="/docs/v2.5.x/array-operators.md">ARRAY Operators</a>.</p>
+<p>For more details on array operators, see <a href="/docs/array-operators.md">ARRAY Operators</a>.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR field-specific operators</h3><p>Milvus provides specialized operators for precise text-based searches on VARCHAR fields:</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operator</h4><p>The <code translate="no">TEXT_MATCH</code> operator allows precise document retrieval based on specific query terms. It is particularly useful for filtered searches that combine scalar filters with vector similarity searches. Unlike semantic searches, Text Match focuses on exact term occurrences.</p>
 <p>Milvus uses Tantivy to support inverted indexing and term-based text search. The process involves:</p>
@@ -132,4 +132,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>Analyzer</strong>: Tokenizes and processes input text.</p></li>
 <li><p><strong>Indexing</strong>: Creates an inverted index mapping unique tokens to documents.</p></li>
 </ol>
-<p>For more details, refer to <a href="/docs/v2.5.x/keyword-match.md">Text Match</a>.</p>
+<p>For more details, refer to <a href="/docs/keyword-match.md">Text Match</a>.</p>
