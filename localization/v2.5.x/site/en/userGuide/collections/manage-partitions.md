@@ -42,7 +42,7 @@ summary: >-
 <p>A collection can have a maximum of 1,024 partitions.</p>
 <div class="alert note">
 <p>The <strong>Partition Key</strong> feature is a search optimization based on partitions and allows Milvus to distribute entities into different partitions based on the values in a specific scalar field. This feature helps implement partition-oriented multi-tenancy and improves search performance.</p>
-<p>This feature will not be discussed on this page. To find more, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p>
+<p>This feature will not be discussed on this page. To find more, refer to <a href="/docs/v2.5.x/use-partition-key.md">Use Partition Key</a>.</p>
 </div>
 <h2 id="List-Partitions" class="common-anchor-header">List Partitions<button data-href="#List-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -648,14 +648,14 @@ curl --request POST \
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities" class="common-anchor-header">Insert and Delete Entities</h3><p>You can perform insert, upsert, and delete operations in specific operations. For details, refer to</p>
 <ul>
-<li><p><a href="/docs/insert-update-delete.md#Insert-Entities-into-a-Partition">Insert Entities into Partition</a></p></li>
-<li><p><a href="/docs/upsert-entities.md#Upsert-Entities-in-a-Partition">Upsert Entities into Partition</a></p></li>
-<li><p><a href="/docs/delete-entities.md#Delete-Entities-from-Partitions">Delete Entities from Partition</a></p></li>
+<li><p><a href="/docs/v2.5.x/insert-update-delete.md#Insert-Entities-into-a-Partition">Insert Entities into Partition</a></p></li>
+<li><p><a href="/docs/v2.5.x/upsert-entities.md#Upsert-Entities-in-a-Partition">Upsert Entities into Partition</a></p></li>
+<li><p><a href="/docs/v2.5.x/delete-entities.md#Delete-Entities-from-Partitions">Delete Entities from Partition</a></p></li>
 </ul>
 <h3 id="Search-and-Query" class="common-anchor-header">Search and Query</h3><p>You can conduct searches and queries within specific partitions. For details, refer to</p>
 <ul>
-<li><p><a href="/docs/single-vector-search.md#ANN-Search-in-Partition">Conduct ANN Searches within Partitions</a></p></li>
-<li><p><a href="/docs/get-and-scalar-query.md#Queries-in-Partitions">Conduct Metadata Filtering within Partitions</a></p></li>
+<li><p><a href="/docs/v2.5.x/single-vector-search.md#ANN-Search-in-Partition">Conduct ANN Searches within Partitions</a></p></li>
+<li><p><a href="/docs/v2.5.x/get-and-scalar-query.md#Queries-in-Partitions">Conduct Metadata Filtering within Partitions</a></p></li>
 </ul>
 <h2 id="Drop-Partition" class="common-anchor-header">Drop Partition<button data-href="#Drop-Partition" class="anchor-icon" translate="no">
       <svg translate="no"

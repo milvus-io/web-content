@@ -44,7 +44,7 @@ summary: >-
       </svg>
     </button></h2><p>HNSW_PRQ combines two indexing techniques: <strong>HSNW</strong> for fast graph-based navigation and <strong>PRQ</strong> for efficient vector compression.</p>
 <h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW constructs a multi-layer graph where each node corresponds to a vector in the dataset. In this graph, nodes are connected based on their similarity, enabling rapid traversal through the data space. The hierarchical structure allows the search algorithm to narrow down the candidate neighbors, significantly accelerating the search process in high-dimensional spaces.</p>
-<p>For more information, refer to <a href="/docs/v2.6.x/hnsw.md">HNSW</a>.</p>
+<p>For more information, refer to <a href="/docs/hnsw.md">HNSW</a>.</p>
 <h3 id="PRQ" class="common-anchor-header">PRQ</h3><p>PRQ is a multi-stage vector compression approach that combines two complementary techniques: PQ and RQ. By first splitting a high-dimensional vector into smaller sub-vectors (via PQ) and then quantizing any remaining difference (via RQ), PRQ achieves a compact yet accurate representation of the original data.</p>
 <p>The following figure shows how it works.</p>
 <p>
@@ -55,7 +55,7 @@ summary: >-
 </p>
 <ol>
 <li><p><strong>Product Quantization (PQ)</strong></p>
-<p>In this phase, the original vector is divided into smaller sub-vectors, and each sub-vector is mapped to its nearest centroid in a learned codebook. This mapping significantly reduces data size but introduces some rounding error since each sub-vector is approximated by a single centroid. For more details, refer to <a href="/docs/v2.6.x/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
+<p>In this phase, the original vector is divided into smaller sub-vectors, and each sub-vector is mapped to its nearest centroid in a learned codebook. This mapping significantly reduces data size but introduces some rounding error since each sub-vector is approximated by a single centroid. For more details, refer to <a href="/docs/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
 <li><p><strong>Residual Quantization (RQ)</strong></p>
 <p>After the PQ stage, RQ quantizes the residual—the difference between the original vector and its PQ-based approximation—using additional codebooks. Because this residual is typically much smaller, it can be encoded more precisely without a large increase in storage.</p>
 <p>The parameter <code translate="no">nrq</code> determines how many times this residual is iteratively quantized, allowing you to fine-tune the balance between compression efficiency and accuracy.</p></li>
@@ -74,7 +74,7 @@ summary: >-
 <li><p><code translate="no">refine_k</code>: Acts as a magnification factor. For instance, if your top <em>k</em> is 100 and <code translate="no">refine_k</code> is 2, the system re-ranks the top 200 candidates and returns the best 100, enhancing overall accuracy.</p></li>
 </ul></li>
 </ol>
-<p>For a full list of parameters and valid values, refer to <a href="/docs/v2.6.x/hnsw-prq.md#Index-params">Index params</a>.</p>
+<p>For a full list of parameters and valid values, refer to <a href="/docs/hnsw-prq.md#Index-params">Index params</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,10 +115,10 @@ index_params.add_index(
 <p>In this configuration:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">HNSW_PQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/v2.6.x/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index. For details, refer to <a href="/docs/v2.6.x/hnsw-prq.md#Index-building-params">Index building params</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index. For details, refer to <a href="/docs/hnsw-prq.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/v2.6.x/create-collection.md">Create Collection</a>.</p>
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>In this configuration:</p>
 <ul>
-<li><code translate="no">params</code>: Additional configuration options for searching on the index. For details, refer to <a href="/docs/v2.6.x/hnsw-prq.md#Index-specific-search-params">Index-specific search params</a>.</li>
+<li><code translate="no">params</code>: Additional configuration options for searching on the index. For details, refer to <a href="/docs/hnsw-prq.md#Index-specific-search-params">Index-specific search params</a>.</li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -170,7 +170,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>This section provides an overview of the parameters used for building an index and performing searches on the index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/v2.6.x/hnsw-prq.md#Build-index">building an index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/hnsw-prq.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -256,7 +256,7 @@ res = MilvusClient.search(
      <td><p>Use <code translate="no">FP32</code> for maximum precision at a higher memory cost, or <code translate="no">SQ6</code>/<code translate="no">SQ8</code> for better compression. <code translate="no">BF16</code> and <code translate="no">FP16</code> offer a balanced alternative.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/v2.6.x/hnsw-prq.md#Search-on-index">searching on the index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/hnsw-prq.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>
