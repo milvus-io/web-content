@@ -155,7 +155,7 @@ Here's an example of how to set DISKANN parameters using Milvus SDK.
 
 #### Build
 
-To build an `IVF_FLAT` index on a vector field in Milvus, use the `add_index()` method, specifying the `index_type`, `metric_type`, and additional parameters for the index.
+To build an `DISKANN` index on a vector field in Milvus, use the `add_index()` method, specifying the `index_type`, `metric_type`, and additional parameters for the index.
 
 ```python
 from pymilvus import MilvusClient
