@@ -66,7 +66,7 @@ In 2022, Milvus supported billion-scale vectors, and in 2023, it scaled up to te
 
 Milvus's cloud-native and highly decoupled system architecture ensures that the system can continuously expand as data grows:
 
-![Highly decoupled system architecture of Milvus](../../../assets/milvus_architecture_2_6.png Milvus Architecture)
+![Highly decoupled system architecture of Milvus](../../../assets/milvus_architecture_2_6.png)
 
 Milvus itself is fully stateless so it can be easily scaled with the help of Kubernetes or public clouds. In addition, Milvus components are well decoupled, with the three most critical tasks—search, data insertion, and indexing/compaction—designed as easily parallelized processes, with complex logic separated out. This ensures that the corresponding query node, data node, and index node can scale both up and out independently, optimizing performance and cost efficiency.
 
