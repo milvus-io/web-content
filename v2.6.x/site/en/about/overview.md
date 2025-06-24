@@ -129,7 +129,7 @@ In addition to primitive data types, Milvus supports various advanced data types
 
 - **Data Security and Fine-grain Access Control**
 
-  Milvus ensures data security by implementing [mandatory user authentication](authenticate.md), [TLS encryption](tls.md), and [Role-Based Access Control (RBAC)](rbac.md). User authentication ensures that only authorized users with valid credentials can access the database, while TLS encryption secures all communications within the network. Additionally, RBAC allows for fine-grained access control by assigning specific permissions to users based on their roles. These features make Milvus a robust and secure choice for enterprise applications, protecting sensitive data from unauthorized access and potential breaches.
+  Milvus ensures data security by implementing [mandatory user authentication](authenticate.md), [TLS encryption](tls.md), and [Role-Based Access Control (RBAC)](rbac.md). User authentication ensures that only authorized users with valid credentials can access the database, while TLS encryption secures all communications within the network. Additionally, RBAC allows for fine-grained access control by assigning specific permissions to users based on their roles. These features make Milvus a robust and secure choice for enterprise applications, protecting sensitive data from unauthorized access and potential breaches. 
 
 ### AI Integrations
 
