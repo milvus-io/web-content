@@ -108,7 +108,7 @@ If your TEI service was deployed with API key authentication (`--api-key` flag),
     function:
       textEmbedding:
         providers:
-          openai:
+          tei:
             credential: tei_key      # ← choose any label you defined above
             enable: true # enabled by default. no action required.
     ```
