@@ -35,7 +35,7 @@ title: Main Components
         ></path>
       </svg>
     </button></h2><ul>
-<li>Coordinator: exactly one per cluster</li>
+<li>Coordinator: master-slave mode can be eneabled to provide high availability.</li>
 <li>Proxy: one or more per cluster</li>
 <li>Streaming Node: one or more per cluster</li>
 <li>Query Node: one or more per cluster</li>
