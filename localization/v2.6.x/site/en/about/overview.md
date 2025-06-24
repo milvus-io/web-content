@@ -111,7 +111,12 @@ summary: >-
       </svg>
     </button></h2><p>In 2022, Milvus supported billion-scale vectors, and in 2023, it scaled up to tens of billions with consistent stability, powering large-scale scenarios for over 300 major enterprises, including Salesforce, PayPal, Shopee, Airbnb, eBay, NVIDIA, IBM, AT&T, LINE, ROBLOX, Inflection, etc.</p>
 <p>Milvus’s cloud-native and highly decoupled system architecture ensures that the system can continuously expand as data grows:</p>
-<p>![Highly decoupled system architecture of Milvus](…/…/…/assets/milvus_architecture_2_6.png Milvus Architecture)</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/milvus_architecture_2_6.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+    <span>Highly decoupled system architecture of Milvus</span>
+  </span>
+</p>
 <p>Milvus itself is fully stateless so it can be easily scaled with the help of Kubernetes or public clouds. In addition, Milvus components are well decoupled, with the three most critical tasks—search, data insertion, and indexing/compaction—designed as easily parallelized processes, with complex logic separated out. This ensures that the corresponding query node, data node, and index node can scale both up and out independently, optimizing performance and cost efficiency.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Types of Searches Supported by Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
