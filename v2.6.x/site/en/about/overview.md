@@ -117,7 +117,7 @@ In addition to primitive data types, Milvus supports various advanced data types
 
 - **Support for Various Vector Index Types and Hardware Acceleration**
 
-  Milvus separates the system and core vector search engine, allowing it to support all major vector index types that are optimized for different scenarios, including HNSW, IVF, FLAT (brute-force), SCANN, and DiskANN, with [quantization-based](index-explained) variations and [mmap](mmap.md). Milvus optimizes vector search for advanced features such as [metadata filtering](boolean.md) and [range search](range-search.md). Additionally, Milvus implements hardware acceleration to enhance vector search performance and supports GPU indexing, such as NVIDIA's [CAGRA](gpu-cagra.md).
+  Milvus separates the system and core vector search engine, allowing it to support all major vector index types that are optimized for different scenarios, including HNSW, IVF, FLAT (brute-force), SCANN, and DiskANN, with [quantization-based](index-explained.md) variations and [mmap](mmap.md). Milvus optimizes vector search for advanced features such as [metadata filtering](boolean.md) and [range search](range-search.md). Additionally, Milvus implements hardware acceleration to enhance vector search performance and supports GPU indexing, such as NVIDIA's [CAGRA](gpu-cagra.md).
 
 - **Flexible Multi-tenancy and Hot/Cold Storage**
 
