@@ -381,6 +381,46 @@ summary: Learn how to configure dataCoord for Milvus.
 </table>
 
 
+## `dataCoord.sealPolicy.channel.blockingL0EntryNum`
+
+<table id="dataCoord.sealPolicy.channel.blockingL0EntryNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>If the total entry number of l0 logs of each shard </li>      
+        <li>exceeds this threshold, the earliest growing segments will be sealed.</li>      </td>
+      <td>5000000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.sealPolicy.channel.blockingL0SizeInMB`
+
+<table id="dataCoord.sealPolicy.channel.blockingL0SizeInMB">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>The size threshold in MB, if the total entry number of l0 logs of each shard </li>      
+        <li>exceeds this threshold, the earliest growing segments will be sealed.</li>      </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `dataCoord.autoUpgradeSegmentIndex`
 
 <table id="dataCoord.autoUpgradeSegmentIndex">
@@ -528,6 +568,24 @@ summary: Learn how to configure dataCoord for Milvus.
     <tr>
       <td>        The time interval in seconds for compaction gc      </td>
       <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.scheduleInterval`
+
+<table id="dataCoord.compaction.scheduleInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The time interval in milliseconds for scheduling compaction tasks. If the configuration setting is below 100ms, it will be ajusted upwards to 100ms      </td>
+      <td>500</td>
     </tr>
   </tbody>
 </table>
@@ -1356,6 +1414,132 @@ summary: Learn how to configure dataCoord for Milvus.
     <tr>
       <td>        slot usage of l0 compaction job.      </td>
       <td>8</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.slot.indexTaskSlotUsage`
+
+<table id="dataCoord.slot.indexTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        slot usage of index task per 512mb      </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.slot.statsTaskSlotUsage`
+
+<table id="dataCoord.slot.statsTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        slot usage of stats task per 512mb      </td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.slot.analyzeTaskSlotUsage`
+
+<table id="dataCoord.slot.analyzeTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        slot usage of analyze task      </td>
+      <td>65535</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.jsonStatsTriggerCount`
+
+<table id="dataCoord.jsonStatsTriggerCount">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        jsonkey stats task count per trigger      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.jsonStatsTriggerInterval`
+
+<table id="dataCoord.jsonStatsTriggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        jsonkey task interval per trigger      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.enabledJSONKeyStatsInSort`
+
+<table id="dataCoord.enabledJSONKeyStatsInSort">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indicates whether to enable JSON key stats task with sort      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.jsonKeyStatsMemoryBudgetInTantivy`
+
+<table id="dataCoord.jsonKeyStatsMemoryBudgetInTantivy">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        the memory budget for the JSON index In Tantivy, the unit is bytes      </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>

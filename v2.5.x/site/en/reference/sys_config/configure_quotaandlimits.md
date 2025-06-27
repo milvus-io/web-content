@@ -68,6 +68,24 @@ If necessary, you can also manually force to deny RW requests.
 </table>
 
 
+## `quotaAndLimits.forceDenyAllDDL`
+
+<table id="quotaAndLimits.forceDenyAllDDL">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        true to force deny all DDL requests, false to allow.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `quotaAndLimits.limits.allocRetryTimes`
 
 <table id="quotaAndLimits.limits.allocRetryTimes">
@@ -473,6 +491,46 @@ If necessary, you can also manually force to deny RW requests.
   <tbody>
     <tr>
       <td>        qps of db level, default no limit, rate for manualCompaction      </td>
+      <td>-1</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `quotaAndLimits.dbRate.enabled`
+
+<table id="quotaAndLimits.dbRate.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether DB request throttling is enabled      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `quotaAndLimits.dbRate.max`
+
+<table id="quotaAndLimits.dbRate.max">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Maximum number of db-related requests per second.</li>      
+        <li>Setting this item to 10 indicates that Milvus processes no more than 10 db-related requests per second, including db creation/drop/alter requests.</li>      
+        <li>To use this setting, set quotaAndLimits.dbRate.enabled to true at the same time.</li>      
+        <li>		</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>

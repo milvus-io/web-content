@@ -373,6 +373,24 @@ Related configuration of queryCoord, used to manage topology and load balancing 
 </table>
 
 
+## `queryCoord.autoBalanceInterval`
+
+<table id="queryCoord.autoBalanceInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        the interval for triggerauto balance      </td>
+      <td>3000</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `queryCoord.channelTaskTimeout`
 
 <table id="queryCoord.channelTaskTimeout">

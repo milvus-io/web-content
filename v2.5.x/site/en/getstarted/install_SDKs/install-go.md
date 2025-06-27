@@ -21,7 +21,7 @@ GO (1.17 or later) is required.
 Install the Milvus GO SDK and dependencies via `go get`.
 
 ```bash
-$ go get -u github.com/milvus-io/milvus-sdk-go/v2
+$ go get -u github.com/milvus-io/milvus/client/v2
 ```
 
 ## What's next

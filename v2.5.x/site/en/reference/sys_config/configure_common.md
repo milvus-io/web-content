@@ -266,6 +266,24 @@ summary: Learn how to configure common for Milvus.
 </table>
 
 
+## `common.security.enablePublicPrivilege`
+
+<table id="common.security.enablePublicPrivilege">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether to enable public privilege      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `common.security.rbac.overrideBuiltInPrivilegeGroups.enabled`
 
 <table id="common.security.rbac.overrideBuiltInPrivilegeGroups.enabled">
@@ -768,6 +786,60 @@ summary: Learn how to configure common for Milvus.
     <tr>
       <td>        The maximum time to wait for the task to finish and release resources in the pool      </td>
       <td>60</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.enabledOptimizeExpr`
+
+<table id="common.enabledOptimizeExpr">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indicates whether to enable optimize expr      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.enabledJSONKeyStats`
+
+<table id="common.enabledJSONKeyStats">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indicates sealedsegment whether to enable JSON key stats      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.enabledGrowingSegmentJSONKeyStats`
+
+<table id="common.enabledGrowingSegmentJSONKeyStats">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indicates growingsegment whether to enable JSON key stats      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>

@@ -95,7 +95,7 @@ Related configuration of queryNode, used to run hybrid search between vector and
   </thead>
   <tbody>
     <tr>
-      <td>        temp index nlist, recommend to set sqrt(chunkRows), must smaller than chunkRows/8      </td>
+      <td>        interim index nlist, recommend to set sqrt(chunkRows), must smaller than chunkRows/8      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -115,6 +115,96 @@ Related configuration of queryNode, used to run hybrid search between vector and
     <tr>
       <td>        nprobe to search small index, based on your accuracy requirement, must smaller than nlist      </td>
       <td>16</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.segcore.interimIndex.subDim`
+
+<table id="queryNode.segcore.interimIndex.subDim">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        interim index sub dim, recommend to (subDim % vector dim == 0)      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.segcore.interimIndex.refineRatio`
+
+<table id="queryNode.segcore.interimIndex.refineRatio">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        interim index parameters, should set to be >= 1.0      </td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.segcore.interimIndex.refineQuantType`
+
+<table id="queryNode.segcore.interimIndex.refineQuantType">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Data representation of SCANN_DVR index, options: 'NONE', 'FLOAT16', 'BFLOAT16' and 'UINT8'      </td>
+      <td>NONE</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.segcore.interimIndex.refineWithQuant`
+
+<table id="queryNode.segcore.interimIndex.refineWithQuant">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        whether to use refineQuantType to refine for fatser but loss a little precision      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.segcore.interimIndex.denseVectorIndexType`
+
+<table id="queryNode.segcore.interimIndex.denseVectorIndexType">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Dense vector intermin index type      </td>
+      <td>IVF_FLAT_CC</td>
     </tr>
   </tbody>
 </table>
@@ -187,6 +277,24 @@ Related configuration of queryNode, used to run hybrid search between vector and
     <tr>
       <td>        Enable knowhere strong consistency score computation logic      </td>
       <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.segcore.jsonKeyStatsCommitInterval`
+
+<table id="queryNode.segcore.jsonKeyStatsCommitInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        the commit interval for the JSON key Stats to commit      </td>
+      <td>200</td>
     </tr>
   </tbody>
 </table>
@@ -712,6 +820,24 @@ Related configuration of queryNode, used to run hybrid search between vector and
     <tr>
       <td>        delegator streaming deletion forward policy, possible option["FilterByBF", "Direct"]      </td>
       <td>FilterByBF</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.forwardBatchSize`
+
+<table id="queryNode.forwardBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        the batch size delegator uses for forwarding stream delete in loading procedure      </td>
+      <td>4194304</td>
     </tr>
   </tbody>
 </table>

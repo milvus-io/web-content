@@ -9,24 +9,6 @@ summary: Learn how to configure indexNode for Milvus.
 
 
 
-## `indexNode.enableDisk`
-
-<table id="indexNode.enableDisk">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        enable index node build disk vector index      </td>
-      <td>true</td>
-    </tr>
-  </tbody>
-</table>
-
-
 ## `indexNode.ip`
 
 <table id="indexNode.ip">
