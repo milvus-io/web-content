@@ -1,7 +1,7 @@
 ---
 id: quickstart_with_attu.md
 summary: Attu is an all-in-one, open-source administration tool for Milvus. It features an intuitive graphical user interface (GUI), allowing you to easily interact with your databases. With just a few clicks, you can visualize your cluster status, manage metadata, perform data queries, and much more.
-title: Question Answering System
+title: Quick Start with Attu - the Web UI of Milvus
 ---
 
 # Quick Start with Attu Desktop
