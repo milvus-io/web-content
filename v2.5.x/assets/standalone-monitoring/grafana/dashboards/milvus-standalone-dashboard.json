@@ -9484,7 +9484,7 @@
             "uid": "${datasource}",
             "type": "prometheus"
           },
-          "description": "per-second increasing rate of building index requests recived by IndexCoord.",
+          "description": "per-second increasing rate of building index requests received by IndexCoord.",
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {

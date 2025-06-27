@@ -14,5 +14,5 @@ As a cloud-native vector database, Milvus separates storage and computation by d
 
 - [Main Components](main_components.md): Milvus standalone includes three components while Milvus cluster includes eight microservice components and three third-party dependencies. 
 
-- [Data Processsing](data_processing.md): A detailed description of the implementation of data insertion, index building, and data query in Milvus.
+- [Data Processing](data_processing.md): A detailed description of the implementation of data insertion, index building, and data query in Milvus.
  

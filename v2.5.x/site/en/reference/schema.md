@@ -208,7 +208,7 @@ export schema="{
 }"
 ```
 
-The `dim` paramter in the above code snippets indicates the dimensionality of the vector embeddings to be held in the vector field. The `FLOAT_VECTOR` value indicates that the vector field holds a list of 32-bit floating numbers, which are usually used to represent antilogarithms.In addition to that, Zilliz Cloud also supports the following types of vector embeddings:
+The `dim` parameter in the above code snippets indicates the dimensionality of the vector embeddings to be held in the vector field. The `FLOAT_VECTOR` value indicates that the vector field holds a list of 32-bit floating numbers, which are usually used to represent antilogarithms.In addition to that, Zilliz Cloud also supports the following types of vector embeddings:
 
 - `FLOAT16_VECTOR`
 

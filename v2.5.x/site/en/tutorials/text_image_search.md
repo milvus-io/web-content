@@ -56,7 +56,7 @@ Before proceeding, set up your Milvus server and connect using your URI (and opt
 
 - **Docker or Kubernetes (For Large-Scale Data)**: For handling larger datasets, deploy a more performant Milvus server using [Docker or Kubernetes](https://milvus.io/docs/quickstart.md). In this case, use the server URI, such as http://localhost:19530, to connect.
 
-- **Zilliz Cloud (Managed Service)**: If you’re using [Zilliz Cloud](https://zilliz.com/cloud), Milvus’s fully managed cloud service, set the the Public Endpoint as URI and API Key as token.
+- **Zilliz Cloud (Managed Service)**: If you’re using [Zilliz Cloud](https://zilliz.com/cloud), Milvus’s fully managed cloud service, set the Public Endpoint as URI and API Key as token.
 
 
 ```python

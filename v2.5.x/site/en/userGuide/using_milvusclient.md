@@ -21,7 +21,7 @@ The MilvusClient supports a single unified way of connecting to the service thro
 
 When using an HTTPS connection we expect a username and password. 
 
-Now lets go over a quick example using the MilvusClient
+Now let's go over a quick example using the MilvusClient
 
 ## Basics
 
@@ -50,7 +50,7 @@ client = MilvusClient(
 
 With the MilvusClient created we can begin to insert data. Data is inserted in the form of a list of dictionaries where each dict corresponds to a row in the collection. Each dict must include values for all the columns in the collection, otherwise the insert will throw an exception.
 
-If the client was created on a collection that doesnt exist or overwrite is set to True, the first entry in the list of dicts will be used to construct the schema of the collection. All subsequent inserts will need to contain the same fields as the first dict. If no index parameteres were supplied at construction time, then a default HNSW index will be used to index the data. 
+If the client was created on a collection that doesn't exist or overwrite is set to True, the first entry in the list of dicts will be used to construct the schema of the collection. All subsequent inserts will need to contain the same fields as the first dict. If no index parameters were supplied at construction time, then a default HNSW index will be used to index the data. 
 
 ```python
 data = [
@@ -75,7 +75,7 @@ client.insert_data(data)
 
 ### Search the Data
 
-Once the data has been inserted into Milvus we can proceed to search the collection. The search takes in the search vector/s and how many search results we want (top_k). In addition to this, if you want you can also supply search parameters. Ths search parameters should correspond to the index_parameters if you supplied them at construction time. If not supplied, MilvusClient will use default search parameters.
+Once the data has been inserted into Milvus we can proceed to search the collection. The search takes in the search vector/s and how many search results we want (top_k). In addition to this, if you want you can also supply search parameters. This search parameters should correspond to the index_parameters if you supplied them at construction time. If not supplied, MilvusClient will use default search parameters.
 
 ```python
 res = client.search_data(
@@ -92,13 +92,13 @@ res = client.search_data(
 # ]]
 ```
 
-The search results will come in the form of a list of lists. For each search vector, you will recieve a list of dicts, with each dict containing the distance and the corresponding result data. If not all of the data is needed you can adjust what data is returned using the return_fields argument. 
+The search results will come in the form of a list of lists. For each search vector, you will receive a list of dicts, with each dict containing the distance and the corresponding result data. If not all of the data is needed you can adjust what data is returned using the return_fields argument. 
 
 ## Advanced
 
 ### Partitions
 
-The MilvusClient supports partitions in its current release. Partitions can be specified both at MilvusClient construction and later on. Here is a quick example on using the partitions functionality.
+The MilvusClient supports partitions in its current release. Partitions can be specified both at MilvusClient construction and later on. Here is a quick example of using the partitions functionality.
 
 ```python
 from pymilvus import MilvusClient

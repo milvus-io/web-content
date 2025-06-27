@@ -456,7 +456,7 @@ System.out.println(loaded);
 ```
 
 ```javascript
-// 3.4 Create a collection and index it seperately
+// 3.4 Create a collection and index it separately
 res = await client.createCollection({
     collection_name: "customized_setup_2",
     fields: fields,
