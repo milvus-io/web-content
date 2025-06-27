@@ -5,7 +5,7 @@ summary: >-
   an intuitive graphical user interface (GUI), allowing you to easily interact
   with your databases. With just a few clicks, you can visualize your cluster
   status, manage metadata, perform data queries, and much more.
-title: Question Answering System
+title: Quick Start with Attu - the Web UI of Milvus
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Quick Start with Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
