@@ -466,7 +466,7 @@ System.out.println(loaded);
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// false</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 3.4 Create a collection and index it seperately</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 3.4 Create a collection and index it separately</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_2&quot;</span>,
     <span class="hljs-attr">fields</span>: fields,

@@ -65,7 +65,7 @@ title: Text-to-Image Search with Milvus
 <ul>
 <li><p><strong>Milvus Lite (Recommended for Convenience)</strong>: Set the URI to a local file, such as ./milvus.db. This automatically leverages <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in a single file.</p></li>
 <li><p><strong>Docker or Kubernetes (For Large-Scale Data)</strong>: For handling larger datasets, deploy a more performant Milvus server using <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this case, use the server URI, such as http://localhost:19530, to connect.</p></li>
-<li><p><strong>Zilliz Cloud (Managed Service)</strong>: If you’re using <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, Milvus’s fully managed cloud service, set the the Public Endpoint as URI and API Key as token.</p></li>
+<li><p><strong>Zilliz Cloud (Managed Service)</strong>: If you’re using <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, Milvus’s fully managed cloud service, set the Public Endpoint as URI and API Key as token.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 

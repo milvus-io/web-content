@@ -79,7 +79,7 @@ response = requests.get(url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will set our customized RAG pipeline, we will take <code translate="no">VectorRetriever</code> as an example. We will set <code translate="no">OpenAIEmbedding</code> as the embeddding model and <code translate="no">MilvusStorage</code> as the storage for it.</p>
+    </button></h2><p>In this section we will set our customized RAG pipeline, we will take <code translate="no">VectorRetriever</code> as an example. We will set <code translate="no">OpenAIEmbedding</code> as the embedding model and <code translate="no">MilvusStorage</code> as the storage for it.</p>
 <p>To set OpenAI embedding, we need to set the <code translate="no">OPENAI_API_KEY</code> in below.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -116,7 +116,7 @@ vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>We use integrated <code translate="no">Unstructured Module</code> to split the content into small chunks, the content will be splited automacitlly with its <code translate="no">chunk_by_title</code> function, the max character for each chunk is 500 characters, which is a suitable length for <code translate="no">OpenAIEmbedding</code>. All the text in the chunks will be embed and stored to the vector storage instance, it will take some time, please wait.</p>
+<p>We use integrated <code translate="no">Unstructured Module</code> to split the content into small chunks, the content will be split automatically with its <code translate="no">chunk_by_title</code> function, the max character for each chunk is 500 characters, which is a suitable length for <code translate="no">OpenAIEmbedding</code>. All the text in the chunks will be embedded and stored to the vector storage instance, it will take some time, please wait.</p>
 <pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -169,7 +169,7 @@ vector_retriever = VectorRetriever(
 <li>Set remote url and api key for Milvus</li>
 <li>Give a query</li>
 </ul>
-<p>The Auto RAG pipeline would create collections for given content input paths, the collection name will be set automaticlly based on the content input path name, if the collection exists, it will do the retrieve directly.</p>
+<p>The Auto RAG pipeline would create collections for given content input paths, the collection name will be set automatically based on the content input path name, if the collection exists, it will do the retrieve directly.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
