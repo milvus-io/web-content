@@ -43,7 +43,7 @@ title: 在 Kubernetes 上运行 Milvus 的要求
 <tbody>
 <tr><td>中央处理器</td><td><ul><li>英特尔第二代酷睿处理器或更高版本</li><li>苹果硅</li></ul></td><td><ul><li>独立：4 核或更高</li><li>集群：8 核或更多</li></ul></td><td></td></tr>
 <tr><td>CPU 指令集</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Milvus 中的向量相似性搜索和索引建立需要 CPU 支持单指令、多数据（SIMD）扩展集。确保 CPU 至少支持所列 SIMD 扩展之一。有关详细信息，请参阅<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">带 AVX 的 CPU</a>。</td></tr>
-<tr><td>内存</td><td><ul><li>单机：8G</li><li>集群：32G</li></ul></td><td><ul><li>单机：16G</li><li>集群： 128G128G</li></ul></td><td>内存大小取决于数据量。</td></tr>
+<tr><td>内存</td><td><ul><li>单机：8G</li><li>集群：32G</li></ul></td><td><ul><li>单机：16G</li><li>集群： 128G</li></ul></td><td>内存大小取决于数据量。</td></tr>
 <tr><td>硬盘</td><td>SATA 3.0 固态硬盘或 CloudStorage</td><td>NVMe SSD 或更高版本</td><td>硬盘大小取决于数据量。</td></tr>
 </tbody>
 </table>
