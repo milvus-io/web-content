@@ -72,7 +72,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        I datanode &lt;= questa versione sono considerati nodi legacy, che non hanno watch() basato su rpc. Questo valore viene utilizzato solo durante l'aggiornamento continuo, quando i nodi legacy non riceveranno nuovi canali.      </td>
+      <td>        I datanode &lt;= questa versione sono considerati nodi legacy, che non hanno watch() basato su rpc. Questo valore è utilizzato solo durante gli aggiornamenti periodici, quando i nodi legacy non riceveranno nuovi canali.      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -611,6 +611,68 @@ summary: Imparare a configurare dataCoord per Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordsealPolicychannelblockingL0EntryNum" class="common-anchor-header"><code translate="no">dataCoord.sealPolicy.channel.blockingL0EntryNum</code><button data-href="#dataCoordsealPolicychannelblockingL0EntryNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.sealPolicy.channel.blockingL0EntryNum">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Se il numero totale di voci dei registri l0 di ogni shard supera questa soglia, i segmenti di crescita più precoci verranno sigillati. </li>      
+        <li>supera questa soglia, i segmenti a crescita più rapida verranno sigillati.</li>      </td>
+      <td>5000000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordsealPolicychannelblockingL0SizeInMB" class="common-anchor-header"><code translate="no">dataCoord.sealPolicy.channel.blockingL0SizeInMB</code><button data-href="#dataCoordsealPolicychannelblockingL0SizeInMB" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.sealPolicy.channel.blockingL0SizeInMB">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Soglia di dimensione in MB; se il numero totale di registri l0 di ogni shard supera questa soglia, i primi segmenti in crescita verranno sigillati. </li>      
+        <li>supera questa soglia, i segmenti di crescita più precoci verranno sigillati.</li>      </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordautoUpgradeSegmentIndex" class="common-anchor-header"><code translate="no">dataCoord.autoUpgradeSegmentIndex</code><button data-href="#dataCoordautoUpgradeSegmentIndex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -851,6 +913,35 @@ summary: Imparare a configurare dataCoord per Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordcompactionscheduleInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.scheduleInterval</code><button data-href="#dataCoordcompactionscheduleInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.scheduleInterval">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        L'intervallo di tempo in millisecondi per la pianificazione delle attività di compattazione. Se l'impostazione della configurazione è inferiore a 100ms, verrà regolata verso l'alto a 100ms.      </td>
+      <td>500</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordcompactionmixtriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.mix.triggerInterval</code><button data-href="#dataCoordcompactionmixtriggerInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -875,7 +966,7 @@ summary: Imparare a configurare dataCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Intervallo di tempo in secondi per attivare la compattazione dell'impasto      </td>
+      <td>        L'intervallo di tempo in secondi per attivare la compattazione della miscela      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -2182,6 +2273,209 @@ summary: Imparare a configurare dataCoord per Milvus.
     <tr>
       <td>        utilizzo dello slot del lavoro di compattazione l0.      </td>
       <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotindexTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.indexTaskSlotUsage</code><button data-href="#dataCoordslotindexTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.indexTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        utilizzo dello slot del task indice per 512 mb  </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotstatsTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.statsTaskSlotUsage</code><button data-href="#dataCoordslotstatsTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.statsTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        utilizzo dello slot dell'attività statistiche per 512 mb  </td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotanalyzeTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.analyzeTaskSlotUsage</code><button data-href="#dataCoordslotanalyzeTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.analyzeTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        utilizzo dello slot dell'attività di analisi      </td>
+      <td>65535</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonStatsTriggerCount" class="common-anchor-header"><code translate="no">dataCoord.jsonStatsTriggerCount</code><button data-href="#dataCoordjsonStatsTriggerCount" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonStatsTriggerCount">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        jsonkey stats conteggio attività per trigger      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonStatsTriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.jsonStatsTriggerInterval</code><button data-href="#dataCoordjsonStatsTriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonStatsTriggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        jsonkey intervallo attività per attivazione      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordenabledJSONKeyStatsInSort" class="common-anchor-header"><code translate="no">dataCoord.enabledJSONKeyStatsInSort</code><button data-href="#dataCoordenabledJSONKeyStatsInSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.enabledJSONKeyStatsInSort">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indica se abilitare l'attività JSON key stats con sort    </td>
+      <td>falso</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonKeyStatsMemoryBudgetInTantivy" class="common-anchor-header"><code translate="no">dataCoord.jsonKeyStatsMemoryBudgetInTantivy</code><button data-href="#dataCoordjsonKeyStatsMemoryBudgetInTantivy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonKeyStatsMemoryBudgetInTantivy">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        il budget di memoria per l'indice JSON In Tantivy, l'unità di misura è il byte    </td>
+      <td>16777216</td>
     </tr>
   </tbody>
 </table>

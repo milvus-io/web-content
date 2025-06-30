@@ -452,7 +452,7 @@ summary: تعرف على كيفية تكوين dataCoord لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأدنى للحجم بالميغابايت للمقطع الذي يمكن أن يكون خاملاً من الإغلاق.      </td>
+      <td>        الحد الأدنى للحجم بالميغابايت للمقطع الذي يمكن أن يكون خاملاً من الختم.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -608,6 +608,68 @@ summary: تعرف على كيفية تكوين dataCoord لـ Milvus.
         <li>عتبة الحجم بالميغابايت، إذا كان الحجم الإجمالي للمقاطع المتنامية لكل جزء </li>      
         <li>يتجاوز هذا الحد، فسيتم إغلاق أكبر شريحة متنامية.</li>      </td>
       <td>4096</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordsealPolicychannelblockingL0EntryNum" class="common-anchor-header"><code translate="no">dataCoord.sealPolicy.channel.blockingL0EntryNum</code><button data-href="#dataCoordsealPolicychannelblockingL0EntryNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.sealPolicy.channel.blockingL0EntryNum">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>إذا تجاوز إجمالي رقم الإدخال الكلي لسجلات L0 لكل جزء </li>      
+        <li>يتجاوز هذا الحد، فسيتم إغلاق المقاطع الأكبر نمواً.</li>      </td>
+      <td>5000000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordsealPolicychannelblockingL0SizeInMB" class="common-anchor-header"><code translate="no">dataCoord.sealPolicy.channel.blockingL0SizeInMB</code><button data-href="#dataCoordsealPolicychannelblockingL0SizeInMB" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.sealPolicy.channel.blockingL0SizeInMB">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>الحد الأدنى للحجم بالميجابايت، إذا تجاوز إجمالي عدد الإدخالات لسجلات l0 لكل جزء </li>      
+        <li>يتجاوز هذا الحد، فسيتم إغلاق المقاطع الأقدم نمواً.</li>      </td>
+      <td>64</td>
     </tr>
   </tbody>
 </table>
@@ -848,6 +910,35 @@ summary: تعرف على كيفية تكوين dataCoord لـ Milvus.
     <tr>
       <td>        الفاصل الزمني بالثواني للضغط gc  </td>
       <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionscheduleInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.scheduleInterval</code><button data-href="#dataCoordcompactionscheduleInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.scheduleInterval">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        الفاصل الزمني بالمللي ثانية لجدولة مهام الضغط. إذا كان إعداد التكوين أقل من 100 مللي ثانية، فسيتم تعديله لأعلى إلى 100 مللي ثانية      </td>
+      <td>500</td>
     </tr>
   </tbody>
 </table>
@@ -2185,6 +2276,209 @@ summary: تعرف على كيفية تكوين dataCoord لـ Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordslotindexTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.indexTaskSlotUsage</code><button data-href="#dataCoordslotindexTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.indexTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        استخدام الفتحة لمهمة الفهرس لكل 512 ميجابايت      </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotstatsTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.statsTaskSlotUsage</code><button data-href="#dataCoordslotstatsTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.statsTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        استخدام الفتحة لمهمة الإحصائيات لكل 512 ميجابايت      </td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotanalyzeTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.analyzeTaskSlotUsage</code><button data-href="#dataCoordslotanalyzeTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.analyzeTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        استخدام الفتحة لمهمة التحليل      </td>
+      <td>65535</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonStatsTriggerCount" class="common-anchor-header"><code translate="no">dataCoord.jsonStatsTriggerCount</code><button data-href="#dataCoordjsonStatsTriggerCount" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonStatsTriggerCount">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        عدد مهام إحصاءات jsonkey الإحصائية لكل مشغل      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonStatsTriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.jsonStatsTriggerInterval</code><button data-href="#dataCoordjsonStatsTriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonStatsTriggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        الفاصل الزمني لمهمة jsonkey لكل مشغّل      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordenabledJSONKeyStatsInSort" class="common-anchor-header"><code translate="no">dataCoord.enabledJSONKeyStatsInSort</code><button data-href="#dataCoordenabledJSONKeyStatsInSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.enabledJSONKeyStatsInSort">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        تشير إلى ما إذا كان يجب تمكين مهمة إحصائيات مفتاح JSON مع الفرز      </td>
+      <td>خطأ</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonKeyStatsMemoryBudgetInTantivy" class="common-anchor-header"><code translate="no">dataCoord.jsonKeyStatsMemoryBudgetInTantivy</code><button data-href="#dataCoordjsonKeyStatsMemoryBudgetInTantivy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonKeyStatsMemoryBudgetInTantivy">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        ميزانية الذاكرة لفهرس JSON في Tantivy، الوحدة هي بايت      </td>
+      <td>16777216</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordip" class="common-anchor-header"><code translate="no">dataCoord.ip</code><button data-href="#dataCoordip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -2209,7 +2503,7 @@ summary: تعرف على كيفية تكوين dataCoord لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        عنوان TCP/IP الخاص بـ dataCoord. إذا لم يتم تحديده، استخدم العنوان الأول غير القابل للإرسال      </td>
+      <td>        عنوان TCP/IP الخاص بـ dataCoord. إذا لم يتم تحديده، استخدم أول عنوان غير قابل للإرسال      </td>
       <td></td>
     </tr>
   </tbody>

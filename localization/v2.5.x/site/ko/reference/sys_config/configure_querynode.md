@@ -197,6 +197,151 @@ summary: Milvus용 쿼리노드 구성 방법을 알아보세요.
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodesegcoreinterimIndexsubDim" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.subDim</code><button data-href="#queryNodesegcoreinterimIndexsubDim" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.subDim">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        중간 인덱스 서브딤, (subDim % 벡터딤 == 0)을 권장합니다.      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineRatio" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineRatio</code><button data-href="#queryNodesegcoreinterimIndexrefineRatio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineRatio">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        중간 인덱스 매개변수, &gt;= 1.0으로 설정해야 합니다.      </td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineQuantType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineQuantType</code><button data-href="#queryNodesegcoreinterimIndexrefineQuantType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineQuantType">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        SCANN_DVR 인덱스의 데이터 표현, 옵션: 'NONE', 'FLOAT16', 'BFLOAT16' 및 'UINT8'      </td>
+      <td>NONE</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineWithQuant" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineWithQuant</code><button data-href="#queryNodesegcoreinterimIndexrefineWithQuant" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineWithQuant">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        refineQuantType을 사용하여 더 정밀하게 정제하되 약간의 정밀도를 잃을지 여부입니다.      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexdenseVectorIndexType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.denseVectorIndexType</code><button data-href="#queryNodesegcoreinterimIndexdenseVectorIndexType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.denseVectorIndexType">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        고밀도 벡터 인터민 인덱스 유형      </td>
+      <td>IVF_FLAT_CC</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodesegcoreinterimIndexmemExpansionRate" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.memExpansionRate</code><button data-href="#queryNodesegcoreinterimIndexmemExpansionRate" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,7 +366,7 @@ summary: Milvus용 쿼리노드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        임시 인덱스 구축에 필요한 추가 메모리      </td>
+      <td>        중간 인덱스 빌드에 필요한 추가 메모리      </td>
       <td>1.15</td>
     </tr>
   </tbody>
@@ -310,6 +455,35 @@ summary: Milvus용 쿼리노드 구성 방법을 알아보세요.
     <tr>
       <td>        강력한 일관성 점수 계산 로직을 사용하도록 설정합니다.      </td>
       <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcorejsonKeyStatsCommitInterval" class="common-anchor-header"><code translate="no">queryNode.segcore.jsonKeyStatsCommitInterval</code><button data-href="#queryNodesegcorejsonKeyStatsCommitInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.jsonKeyStatsCommitInterval">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        커밋할 JSON 키 Stats의 커밋 간격입니다.      </td>
+      <td>200</td>
     </tr>
   </tbody>
 </table>
@@ -1143,6 +1317,35 @@ summary: Milvus용 쿼리노드 구성 방법을 알아보세요.
     <tr>
       <td>        위임자 스트리밍 삭제 전달 정책, 사용 가능한 옵션["FilterByBF", "직접"]      </td>
       <td>FilterByBF</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodeforwardBatchSize" class="common-anchor-header"><code translate="no">queryNode.forwardBatchSize</code><button data-href="#queryNodeforwardBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.forwardBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        로딩 절차에서 스트림 삭제를 전달할 때 위임자가 사용하는 배치 크기입니다.      </td>
+      <td>4194304</td>
     </tr>
   </tbody>
 </table>

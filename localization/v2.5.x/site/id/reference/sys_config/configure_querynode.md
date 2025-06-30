@@ -197,6 +197,151 @@ summary: Pelajari cara mengonfigurasi queryNode untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodesegcoreinterimIndexsubDim" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.subDim</code><button data-href="#queryNodesegcoreinterimIndexsubDim" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.subDim">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        sub dim indeks sementara, rekomendasikan untuk (subDim % vektor dim == 0)  </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineRatio" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineRatio</code><button data-href="#queryNodesegcoreinterimIndexrefineRatio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineRatio">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        parameter indeks sementara, harus diatur menjadi &gt;= 1.0   </td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineQuantType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineQuantType</code><button data-href="#queryNodesegcoreinterimIndexrefineQuantType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineQuantType">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Representasi data indeks SCANN_DVR, opsi: 'NONE', 'FLOAT16', 'BFLOAT16', dan 'UINT8'      </td>
+      <td>TIDAK ADA</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineWithQuant" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineWithQuant</code><button data-href="#queryNodesegcoreinterimIndexrefineWithQuant" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineWithQuant">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        apakah akan menggunakan refineQuantType untuk menyaring lebih banyak lemak tetapi kehilangan sedikit presisi      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexdenseVectorIndexType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.denseVectorIndexType</code><button data-href="#queryNodesegcoreinterimIndexdenseVectorIndexType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.denseVectorIndexType">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Jenis indeks intermin vektor padat     </td>
+      <td>IVF_FLAT_CC</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodesegcoreinterimIndexmemExpansionRate" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.memExpansionRate</code><button data-href="#queryNodesegcoreinterimIndexmemExpansionRate" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -310,6 +455,35 @@ summary: Pelajari cara mengonfigurasi queryNode untuk Milvus.
     <tr>
       <td>        Mengaktifkan logika penghitungan skor konsistensi yang kuat di mana saja    </td>
       <td>salah</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcorejsonKeyStatsCommitInterval" class="common-anchor-header"><code translate="no">queryNode.segcore.jsonKeyStatsCommitInterval</code><button data-href="#queryNodesegcorejsonKeyStatsCommitInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.jsonKeyStatsCommitInterval">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        interval komit untuk Statistik kunci JSON yang akan dikomit      </td>
+      <td>200</td>
     </tr>
   </tbody>
 </table>
@@ -1146,6 +1320,35 @@ summary: Pelajari cara mengonfigurasi queryNode untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodeforwardBatchSize" class="common-anchor-header"><code translate="no">queryNode.forwardBatchSize</code><button data-href="#queryNodeforwardBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.forwardBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        ukuran batch yang digunakan delegator untuk meneruskan penghapusan aliran dalam prosedur pemuatan      </td>
+      <td>4194304</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodedataSyncflowGraphmaxQueueLength" class="common-anchor-header"><code translate="no">queryNode.dataSync.flowGraph.maxQueueLength</code><button data-href="#queryNodedataSyncflowGraphmaxQueueLength" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1170,7 +1373,7 @@ summary: Pelajari cara mengonfigurasi queryNode untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Ukuran maksimum cache antrean tugas dalam grafik aliran di simpul kueri.      </td>
+      <td>        Ukuran maksimum cache antrean tugas dalam grafik aliran di node kueri.      </td>
       <td>16</td>
     </tr>
   </tbody>

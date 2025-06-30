@@ -246,7 +246,7 @@ summary: Milvus共通の設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        ミリ秒。これは、Bounded Consistencyの場合にリクエスト到着時間を 引く必要がある間隔(ミリ秒単位)を表す。      </td>
+      <td>        ミリ秒。これは、Bounded Consistencyの場合にリクエスト到着時間を 引く必要がある間隔(ミリ秒)を表す。      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -425,8 +425,37 @@ summary: Milvus共通の設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        認証が有効な場合に、rootユーザがロールをバインドすべきかどうか。      </td>
+      <td>        認証が有効な場合に、rootユーザがロールをバインドするかどうか。      </td>
       <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityenablePublicPrivilege" class="common-anchor-header"><code translate="no">common.security.enablePublicPrivilege</code><button data-href="#commonsecurityenablePublicPrivilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.enablePublicPrivilege">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        パブリック特権を有効にするかどうか      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -1242,6 +1271,93 @@ summary: Milvus共通の設定方法をご紹介します。
     <tr>
       <td>        タスクが終了してプールのリソースが解放されるまでの最大待機時間      </td>
       <td>60</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledOptimizeExpr" class="common-anchor-header"><code translate="no">common.enabledOptimizeExpr</code><button data-href="#commonenabledOptimizeExpr" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledOptimizeExpr">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        optimize expr を有効にするかどうかを示す      </td>
+      <td>真</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledJSONKeyStats" class="common-anchor-header"><code translate="no">common.enabledJSONKeyStats</code><button data-href="#commonenabledJSONKeyStats" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledJSONKeyStats">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        sealedsegmentでJSONキー統計を有効にするかどうかを示す。      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledGrowingSegmentJSONKeyStats" class="common-anchor-header"><code translate="no">common.enabledGrowingSegmentJSONKeyStats</code><button data-href="#commonenabledGrowingSegmentJSONKeyStats" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledGrowingSegmentJSONKeyStats">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        JSONキーの統計情報を有効にするかどうかを示す。      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>

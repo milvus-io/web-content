@@ -6,7 +6,7 @@ summary: >-
   facilement avec vos bases de données. En quelques clics, vous pouvez
   visualiser l'état de votre cluster, gérer les métadonnées, effectuer des
   requêtes de données, et bien plus encore.
-title: Système de réponse aux questions
+title: Démarrage rapide avec Attu - l'interface Web de Milvus
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Démarrage rapide avec Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -237,6 +237,6 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Attu simplifie la gestion et la visualisation des données vectorielles stockées dans Milvus. De l'insertion des données à l'exécution des requêtes et à l'exploration interactive, il fournit une interface intuitive pour traiter les tâches complexes de recherche vectorielle. Grâce à des fonctionnalités telles que la prise en charge des schémas dynamiques, les visualisations de recherche graphique et les filtres de requête flexibles, Attu permet aux utilisateurs d'analyser efficacement des ensembles de données à grande échelle.</p>
+    </button></h2><p>Attu simplifie la gestion et la visualisation des données vectorielles stockées dans Milvus. De l'insertion des données à l'exécution des requêtes et à l'exploration interactive, il fournit une interface intuitive pour traiter les tâches complexes de recherche vectorielle. Avec des fonctionnalités telles que la prise en charge de schémas dynamiques, des visualisations de recherche graphique et des filtres de requête flexibles, Attu permet aux utilisateurs d'analyser efficacement des ensembles de données à grande échelle.</p>
 <p>En exploitant les outils d'exploration visuelle d'Attu, les utilisateurs peuvent mieux comprendre leurs données, identifier les relations cachées et prendre des décisions basées sur les données. Commencez à explorer vos propres ensembles de données dès aujourd'hui avec Attu et Milvus !</p>
 <hr>

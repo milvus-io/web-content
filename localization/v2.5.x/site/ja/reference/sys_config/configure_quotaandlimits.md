@@ -95,6 +95,35 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsforceDenyAllDDL" class="common-anchor-header"><code translate="no">quotaAndLimits.forceDenyAllDDL</code><button data-href="#quotaAndLimitsforceDenyAllDDL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.forceDenyAllDDL">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">既定値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        trueを指定するとすべてのDDL要求を強制的に拒否し、falseを指定すると許可します。      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitslimitsallocRetryTimes" class="common-anchor-header"><code translate="no">quotaAndLimits.limits.allocRetryTimes</code><button data-href="#quotaAndLimitslimitsallocRetryTimes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,7 +148,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        レート・リミットからの全転送データの削除に失敗した場合のリトライ回数      </td>
+      <td>        レートリミットからの全前方データ削除が失敗した場合のリトライ回数      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -748,6 +777,68 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsdbRateenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.enabled</code><button data-href="#quotaAndLimitsdbRateenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.enabled">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        DBリクエストのスロットリングが有効かどうか      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitsdbRatemax" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.max</code><button data-href="#quotaAndLimitsdbRatemax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.max">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>1秒あたりのDB関連リクエストの最大数。</li>      
+        <li>この項目を10に設定すると、Milvusはdb作成/ドロップ/変更要求を含め、1秒間に10個を超えるdb関連要求を処理しないことを示します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.dbRate.enabledをtrueに設定します。</li>      
+        <li>        </li>      </td>
+      <td>-1</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitsdmlenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dml.enabled</code><button data-href="#quotaAndLimitsdmlenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -772,7 +863,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        DML リクエスト・スロットルを有効にするかどうか。      </td>
+      <td>        DMLリクエストのスロットルを有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -2202,7 +2293,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
     <tr>
       <td>
         <li>forceDeny falseはdqlリクエストが許可されることを意味する。</li>      
-        <li>trueは常にすべてのdqlリクエストを拒否する。</li>      </td>
+        <li>trueはすべてのdqlリクエストを常に拒否する。</li>      </td>
       <td>false</td>
     </tr>
   </tbody>

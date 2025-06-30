@@ -44,7 +44,7 @@ summary: Milvusのgrpcの設定方法について説明します。
   <tbody>
     <tr>
       <td>        秒、グレースフルストップ終了待ち時間      </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

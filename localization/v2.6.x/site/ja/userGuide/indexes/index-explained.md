@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>インデックスはデータの上に構築される付加的な構造である。その内部構造は、使用する近似最近傍探索アルゴリズムに依存する。インデックスは検索を高速化しますが、検索中の前処理時間、スペース、RAMが追加されます。さらに、インデックスを使用すると一般的に想起率が低下する（その影響は無視できるほど小さいが、それでも重要である）。そこで、この記事では、インデックスを使用するコストを最小化しつつ、メリットを最大化する方法について説明する。</p>
+    </button></h1><p>インデックスはデータの上に構築される付加的な構造である。その内部構造は、使用する近似最近傍探索アルゴリズムに依存する。インデックスは検索を高速化しますが、検索中の前処理時間、スペース、RAMが追加されます。さらに、インデックスを使用すると一般的に想起率が低下する（その影響は無視できるほど小さいが、それでも重要である）。そこでこの記事では、インデックスを使用するコストを最小化しつつ、メリットを最大化する方法を説明する。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,12 +43,31 @@ summary: >-
      <th><p>適用可能なインデックス・タイプ</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
-     <td><ul><li><p>フラット</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>BLOAT16_VECTOR</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>フラット</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>バイナリベクトル</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>スパースフロートベクトル</p></td>
@@ -56,18 +75,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED（再推奨）</p></li><li><p>ビットマップ</p></li><li><p>トライ</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED（再推奨）</p></li>
+<li><p>ビットマップ</p></li>
+<li><p>トライ</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>論理</p></td>
-     <td><ul><li>BITMAP（推奨）</li><li>INVERTED</li></ul></td>
+     <td><ul>
+<li>BITMAP（推奨）</li>
+<li>INVERTED</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>INVERTED</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>INVERTED</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>INVERTED</p></td>
    </tr>
    <tr>
@@ -282,7 +319,7 @@ summary: >-
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">グラフベースのインデックスのメモリ使用量</h3><p>HNSWのようなグラフベースのインデックスタイプは、グラフ構造と生のベクトル埋め込みを保存するために、かなりのメモリを必要とします。以下は、HNSWインデックスタイプを使用してインデックス付けされた128次元ベクトル100万個が消費するメモリの詳細な内訳です。</p>
+<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">グラフベースインデックスのメモリ使用量</h3><p>HNSWのようなグラフベースのインデックス・タイプは、グラフ構造と生のベクトル埋め込みを保存するために大きなメモリを必要とします。以下は、HNSWインデックスタイプを使用してインデックス付けされた128次元ベクトル100万個が消費するメモリの詳細な内訳です。</p>
 <ol>
 <li><p><strong>グラフ構造が使用するメモリを計算する。</strong></p>
 <p>HNSWの各ベクトルは近傍との接続を維持する。グラフ次数（ノードあたりの辺）を32とすると、消費されるメモリは以下のように計算できる：</p>
@@ -307,5 +344,5 @@ summary: >-
 <h3 id="Other-considerations" class="common-anchor-header">その他の考慮点</h3><p>IVFとグラフベースのインデックスが量子化によってメモリ使用量を最適化するのに対して、メモリマップファイル（mmap）とDiskANNは、データセットが利用可能なランダムアクセスメモリ（RAM）を超えるシナリオに対応します。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN は Vamana グラフ ベースのインデックスで、検索中にデータ ポイントを効率的にナビゲートできるように接続する一方、PQ を適用してベクトル サイズを縮小し、ベクトル間の近似距離計算を迅速に行うことができます。</p>
 <p>Vamana グラフはディスク上に保存されるため、DiskANN はメモリに収まらないような大きなデータセットも扱うことができます。これは特に10億ポイントのデータセットに有効です。</p>
-<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">メモリ マップ ファイル (mmap)</h4><p>メモリマッピング(Mmap)により、ディスク上の大容量ファイルへの直接メモリアクセスが可能になり、Milvusはインデックスとデータをメモリとハードディスクの両方に格納することができます。このアプローチは、アクセス頻度に基づくI/Oコールのオーバーヘッドを削減することでI/Oオペレーションを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張します。</p>
+<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">メモリ マップ ファイル (mmap)</h4><p>メモリマッピング(Mmap)は、ディスク上の大きなファイルへの直接メモリアクセスを可能にし、Milvusがメモリとハードディスクの両方にインデックスとデータを格納することを可能にします。このアプローチは、アクセス頻度に基づくI/Oコールのオーバーヘッドを削減することでI/Oオペレーションを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張します。</p>
 <p>具体的には、Milvusは特定のフィールドの生データを完全にメモリにロードするのではなく、メモリマップするように設定することができます。こうすることで、メモリの問題を心配することなくフィールドに直接メモリアクセスすることができ、コレクション容量を拡張することができます。</p>

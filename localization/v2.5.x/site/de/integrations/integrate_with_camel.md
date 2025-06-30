@@ -22,7 +22,7 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und Camel
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Dieser Leitfaden zeigt, wie ein Retrieval-Augmented Generation (RAG) System mit CAMEL und Milvus aufgebaut werden kann.</p>
+<p>Dieser Leitfaden zeigt, wie man ein Retrieval-Augmented Generation (RAG) System mit CAMEL und Milvus aufbaut.</p>
 <p>Das RAG-System kombiniert ein Retrievalsystem mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System ruft zunächst relevante Dokumente aus einem Korpus mit Milvus ab und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der abgerufenen Dokumente zu erzeugen.</p>
 <p><a href="https://www.camel-ai.org/">CAMEL</a> ist ein Multiagentensystem. <a href="https://milvus.io/">Milvus</a> ist die weltweit fortschrittlichste Open-Source-Vektordatenbank, die für die Einbettung von Ähnlichkeitssuche und KI-Anwendungen entwickelt wurde.</p>
 <p>In diesem Notizbuch zeigen wir die Verwendung des CAMEL Retrieve Moduls sowohl auf angepasste als auch auf automatische Weise. Wir zeigen auch, wie man <code translate="no">AutoRetriever</code> mit <code translate="no">ChatAgent</code> und <code translate="no">AutoRetriever</code> mit <code translate="no">RolePlaying</code> unter Verwendung von <code translate="no">Function Calling</code> kombiniert.</p>
@@ -52,7 +52,7 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und Camel
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Bildschirmrand und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> requests
@@ -79,8 +79,8 @@ response = requests.get(url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In diesem Abschnitt werden wir unsere benutzerdefinierte RAG-Pipeline einrichten. Wir nehmen <code translate="no">VectorRetriever</code> als Beispiel. Wir werden <code translate="no">OpenAIEmbedding</code> als Einbettungsmodell und <code translate="no">MilvusStorage</code> als Speicherort dafür festlegen.</p>
-<p>Um die OpenAI-Einbettung einzustellen, müssen wir die <code translate="no">OPENAI_API_KEY</code> im Folgenden einstellen.</p>
+    </button></h2><p>In diesem Abschnitt werden wir unsere benutzerdefinierte RAG-Pipeline einrichten. Wir nehmen <code translate="no">VectorRetriever</code> als Beispiel. Wir werden <code translate="no">OpenAIEmbedding</code> als Einbettungsmodell und <code translate="no">MilvusStorage</code> als Speicher für dieses Modell festlegen.</p>
+<p>Um die OpenAI-Einbettung einzurichten, müssen wir die <code translate="no">OPENAI_API_KEY</code> im Folgenden einstellen.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Importieren und setzen Sie die Einbettungsinstanz:</p>
@@ -116,7 +116,7 @@ vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Wir verwenden die integrierte Funktion <code translate="no">Unstructured Module</code>, um den Inhalt in kleine Chunks aufzuteilen. Der Inhalt wird automatisch mit der Funktion <code translate="no">chunk_by_title</code> aufgeteilt, die maximale Zeichenlänge für jeden Chunk beträgt 500 Zeichen, was eine geeignete Länge für <code translate="no">OpenAIEmbedding</code> ist. Der gesamte Text in den Chunks wird eingebettet und in der Vektor-Speicherinstanz gespeichert, was einige Zeit in Anspruch nehmen wird.</p>
+<p>Wir verwenden die integrierte <code translate="no">Unstructured Module</code>, um den Inhalt in kleine Chunks aufzuteilen. Der Inhalt wird automatisch mit der Funktion <code translate="no">chunk_by_title</code> aufgeteilt, die maximale Zeichenlänge für jeden Chunk beträgt 500 Zeichen, was eine geeignete Länge für <code translate="no">OpenAIEmbedding</code> ist. Der gesamte Text in den Chunks wird eingebettet und in der Vektorspeicherinstanz gespeichert, was einige Zeit in Anspruch nehmen wird.</p>
 <pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -169,7 +169,7 @@ vector_retriever = VectorRetriever(
 <li>Remote-Url und API-Schlüssel für Milvus festlegen</li>
 <li>Geben Sie eine Abfrage ein</li>
 </ul>
-<p>Die Auto-RAG-Pipeline erstellt Sammlungen für gegebene Inhaltseingabepfade, der Sammlungsname wird automatisch auf der Grundlage des Inhaltseingabepfads festgelegt, wenn die Sammlung existiert, wird sie direkt abgerufen.</p>
+<p>Die Auto-RAG-Pipeline erstellt Sammlungen für gegebene Inhaltseingabepfade. Der Name der Sammlung wird automatisch auf der Grundlage des Namens des Inhaltseingabepfads festgelegt, wenn die Sammlung existiert, wird sie direkt abgerufen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
@@ -216,7 +216,7 @@ Retrieved Context:
         ></path>
       </svg>
     </button></h2><p>In diesem Abschnitt zeigen wir, wie man <code translate="no">AutoRetriever</code> mit einem <code translate="no">ChatAgent</code> kombiniert.</p>
-<p>Legen wir eine Agentenfunktion fest, in dieser Funktion können wir die Antwort erhalten, indem wir eine Abfrage an diesen Agenten stellen.</p>
+<p>In dieser Funktion können wir die Antwort erhalten, indem wir eine Abfrage an diesen Agenten stellen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> RoleType

@@ -50,12 +50,31 @@ summary: >-
      <th><p>Tipos de índice aplicables</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>VECTOR_FLOAT16</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>VECTOR_INT8</p></li></ul></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>VECTOR_FLOAT16</p></li>
+<li><p>BFLOAT16_VECTOR</p></li>
+<li><p>VECTOR_INT8</p></li>
+</ul></td>
+     <td><ul>
+<li><p>FLAT</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BINARY_VECTOR</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>SPARSE_FLOAT_VECTOR</p></td>
@@ -63,18 +82,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED (Recomendado)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED (Recomendado)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (Recomendado)</li><li>INVERTIDO</li></ul></td>
+     <td><ul>
+<li>BITMAP (Recomendado)</li>
+<li>INVERTIDO</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>INVERTIDO</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>INVERTIDO</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>INVERTIDO</p></td>
    </tr>
    <tr>
@@ -129,7 +166,7 @@ summary: >-
 </ul>
 <h3 id="Refiner" class="common-anchor-header">Refinador</h3><p>La cuantificación tiene pérdidas intrínsecas. Para mantener la tasa de recuperación, la cuantización produce sistemáticamente más candidatos top-K de los necesarios, lo que permite a los refinadores utilizar una mayor precisión para seleccionar los resultados top-K de entre estos candidatos, mejorando la tasa de recuperación.</p>
 <p>Por ejemplo, el refinador FP32 opera sobre los candidatos a resultados de búsqueda devueltos por la cuantización recalculando las distancias utilizando la precisión FP32 en lugar de los valores cuantizados.</p>
-<p>Esto es fundamental para las aplicaciones que requieren un equilibrio entre la eficiencia de la búsqueda y la precisión, como la búsqueda semántica o los sistemas de recomendación, en los que pequeñas variaciones en la distancia afectan significativamente a la calidad de los resultados.</p>
+<p>Esto es fundamental para las aplicaciones que requieren un equilibrio entre la eficiencia de la búsqueda y la precisión, como la búsqueda semántica o los sistemas de recomendación, en los que pequeñas variaciones de distancia afectan significativamente a la calidad de los resultados.</p>
 <h3 id="Summary" class="common-anchor-header">Resumen</h3><p>Esta arquitectura escalonada (filtrado grueso mediante estructuras de datos, cálculo eficiente mediante cuantificación y ajuste de precisión mediante refinamiento) permite a Milvus optimizar el equilibrio entre precisión y rendimiento de forma adaptativa.</p>
 <h2 id="Performance-trade-offs" class="common-anchor-header">Compromisos de rendimiento<button data-href="#Performance-trade-offs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -148,7 +185,7 @@ summary: >-
       </svg>
     </button></h2><p>Al evaluar el rendimiento, es fundamental equilibrar <strong>el tiempo de compilación</strong>, las <strong>consultas por segundo (QPS)</strong> y <strong>la tasa de recuperación</strong>. Las reglas generales son las siguientes:</p>
 <ul>
-<li><p><strong>Los tipos de índice basados en grafos</strong> suelen superar a <strong>las variantes IV</strong> F en términos de <strong>QPS</strong>.</p></li>
+<li><p><strong>Los tipos de índice basados en grafos</strong> suelen superar a <strong>las variantes IVF</strong> en términos de <strong>QPS</strong>.</p></li>
 <li><p>Las<strong>variantes IVF</strong> encajan especialmente en los escenarios con <strong>un topK grande (por ejemplo, más de 2.000)</strong>.</p></li>
 <li><p><strong>PQ</strong> suele ofrecer un mejor índice de recuperación con índices de compresión similares en comparación con <strong>SQ</strong>, aunque este último proporciona un rendimiento más rápido.</p></li>
 <li><p>El uso de discos duros para parte del índice (como en <strong>DiskANN</strong>) ayuda a gestionar grandes conjuntos de datos, pero también introduce posibles cuellos de botella de IOPS.</p></li>
@@ -233,7 +270,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>Esta sección se centra en el cálculo del consumo de memoria de un tipo de índice específico e incluye muchos detalles técnicos. Puede saltarse esta sección sin problemas si no se ajusta a sus intereses.</p>
 </div>
-<p>El consumo de memoria de un índice está influido por su estructura de datos, la tasa de compresión a través de la cuantización y el refinador en uso. En general, los índices basados en grafos suelen tener un mayor consumo de memoria debido a la estructura del grafo (por ejemplo, <strong>HNSW</strong>), lo que suele implicar una notable sobrecarga de espacio por vector. Por el contrario, el IVF y sus variantes son más eficientes en términos de memoria, ya que la sobrecarga de espacio por vector es menor. Sin embargo, técnicas avanzadas como <strong>DiskANN</strong> permiten que partes del índice, como el gráfico o el refinador, residan en disco, lo que reduce la carga de memoria al tiempo que mantiene el rendimiento.</p>
+<p>El consumo de memoria de un índice está influido por su estructura de datos, la tasa de compresión a través de la cuantización y el refinador en uso. En términos generales, los índices basados en grafos suelen tener un mayor consumo de memoria debido a la estructura del grafo (por ejemplo, <strong>HNSW</strong>), lo que suele implicar una notable sobrecarga de espacio por vector. Por el contrario, el IVF y sus variantes son más eficientes en términos de memoria, ya que la sobrecarga de espacio por vector es menor. Sin embargo, técnicas avanzadas como <strong>DiskANN</strong> permiten que partes del índice, como el gráfico o el refinador, residan en disco, lo que reduce la carga de memoria al tiempo que mantiene el rendimiento.</p>
 <p>En concreto, el uso de memoria de un índice puede calcularse de la siguiente manera:</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">Uso de memoria del índice IVF</h3><p>Los índices IVF equilibran la eficiencia de la memoria con el rendimiento de la búsqueda particionando los datos en clusters. A continuación se muestra un desglose de la memoria utilizada por 1 millón de vectores de 128 dimensiones indexados mediante variantes IVF.</p>
 <ol>
@@ -289,7 +326,7 @@ summary: >-
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">Uso de memoria de índices basados en gráficos</h3><p>Los índices basados en grafos, como el HNSW, requieren una cantidad significativa de memoria para almacenar tanto la estructura del grafo como las incrustaciones de vectores sin procesar. A continuación se muestra un desglose detallado de la memoria consumida por 1 millón de vectores de 128 dimensiones indexados utilizando el tipo de índice HNSW.</p>
+<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">Uso de memoria de índices basados en gráficos</h3><p>Los índices basados en grafos, como el HNSW, requieren una cantidad significativa de memoria para almacenar tanto la estructura del grafo como las incrustaciones vectoriales en bruto. A continuación se muestra un desglose detallado de la memoria consumida por 1 millón de vectores de 128 dimensiones indexados utilizando el tipo de índice HNSW.</p>
 <ol>
 <li><p><strong>Calcular la memoria utilizada por la estructura gráfica.</strong></p>
 <p>Cada vector en HNSW mantiene conexiones con sus vecinos. Con un grado de grafo (aristas por nodo) de 32, la memoria consumida puede calcularse del siguiente modo:</p>

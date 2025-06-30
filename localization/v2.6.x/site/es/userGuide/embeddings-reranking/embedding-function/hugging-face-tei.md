@@ -5,7 +5,7 @@ summary: >-
   Hugging Face Text Embeddings Inference (TEI) es un servidor de inferencia de
   alto rendimiento diseñado específicamente para modelos de incrustación de
   texto. Esta guía explica cómo utilizar Hugging Face TEI con Milvus para una
-  generación eficiente de incrustación de texto.
+  generación eficiente de incrustaciones de texto.
 beta: Milvus 2.6.x
 ---
 <h1 id="Hugging-Face-TEI" class="common-anchor-header">TEI de Hugging Face<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Hugging-Face-TEI" class="anchor-icon" translate="no">
@@ -119,7 +119,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
-      <span class="hljs-attr">openai:</span>
+      <span class="hljs-attr">tei:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">tei_key</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enabled by default. no action required.</span>
 <button class="copy-code-btn"></button></code></pre></li>
@@ -237,7 +237,7 @@ schema.add_function(text_embedding_function)
    <tr>
      <td><p><code translate="no">search_prompt</code></p></td>
      <td><p>No</p></td>
-     <td><p>(Avanzado) Especifica el mensaje que se utilizará durante la fase de búsqueda. Depende del modelo TEI utilizado; el modelo debe admitir avisos.</p></td>
+     <td><p>(Avanzado) Especifica la instrucción que se utilizará durante la fase de búsqueda. Depende del modelo TEI utilizado; el modelo debe admitir avisos.</p></td>
      <td><p>"consulta: "</p></td>
    </tr>
 </table>

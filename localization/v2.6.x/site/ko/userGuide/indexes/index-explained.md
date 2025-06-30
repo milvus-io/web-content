@@ -46,12 +46,31 @@ summary: >-
      <th><p>적용 가능한 인덱스 유형</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>BFLOAT16_VECTOR</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>FLAT</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BINARY_VECTOR</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>SPARSE_FLOAT_VECTOR</p></td>
@@ -59,18 +78,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED(권장)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED(권장)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP(권장)</li><li>INVERTED</li></ul></td>
+     <td><ul>
+<li>BITMAP(권장)</li>
+<li>INVERTED</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>INVERTED</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>INVERTED</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>INVERTED</p></td>
    </tr>
    <tr>
@@ -171,7 +208,7 @@ summary: >-
 <ul>
 <li><p>상위 K가 작고(예: 2,000개) 높은 리콜률이 필요한 검색의 경우 그래프 기반 인덱스 유형이 IVF 변형보다 성능이 뛰어납니다.</p></li>
 <li><p>(벡터 임베딩의 총 수와 비교하여) 상위 K가 큰 검색의 경우, IVF 변형이 그래프 기반 인덱스 유형보다 더 나은 선택입니다.</p></li>
-<li><p>중간 크기의 상위 K와 높은 필터 비율을 가진 검색의 경우, IVF 변형이 더 나은 선택입니다.</p></li>
+<li><p>중간 크기의 상위 K와 높은 필터 비율을 가진 검색의 경우 IVF 변형이 더 나은 선택입니다.</p></li>
 </ul>
 <h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">의사 결정 매트릭스: 가장 적합한 인덱스 유형 선택하기</h3><p>다음 표는 적절한 인덱스 유형을 선택할 때 참조할 수 있는 의사 결정 매트릭스입니다.</p>
 <table>
@@ -310,5 +347,5 @@ summary: >-
 <h3 id="Other-considerations" class="common-anchor-header">기타 고려 사항</h3><p>IVF 및 그래프 기반 인덱스는 양자화를 통해 메모리 사용량을 최적화하지만, 메모리 맵 파일(mmap)과 DiskANN은 데이터 세트가 사용 가능한 RAM(랜덤 액세스 메모리)을 초과하는 시나리오를 해결합니다.</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN은 검색 중 효율적인 탐색을 위해 데이터 포인트를 연결하는 동시에 벡터의 크기를 줄이고 벡터 간의 대략적인 거리를 빠르게 계산할 수 있도록 PQ를 적용하는 Vamana 그래프 기반 인덱스입니다.</p>
 <p>Vamana 그래프는 디스크에 저장되기 때문에 DiskANN은 메모리에 담기에는 너무 큰 대용량 데이터 세트를 처리할 수 있습니다. 이는 10억 포인트 데이터 세트에 특히 유용합니다.</p>
-<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">메모리 매핑 파일(mmap)</h4><p>메모리 매핑(Mmap)을 사용하면 디스크의 대용량 파일에 직접 메모리에 액세스할 수 있으므로 Milvus는 인덱스와 데이터를 메모리와 하드 드라이브 모두에 저장할 수 있습니다. 이 접근 방식은 액세스 빈도에 따라 I/O 호출의 오버헤드를 줄여 I/O 작업을 최적화함으로써 검색 성능에 큰 영향을 주지 않으면서 컬렉션의 저장 용량을 확장하는 데 도움이 됩니다.</p>
+<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">메모리 매핑 파일(mmap)</h4><p>메모리 매핑(Mmap)을 사용하면 디스크의 대용량 파일에 직접 메모리에 액세스할 수 있으므로 Milvus는 인덱스와 데이터를 메모리와 하드 드라이브 모두에 저장할 수 있습니다. 이 접근 방식은 액세스 빈도에 따라 I/O 호출의 오버헤드를 줄여 I/O 작업을 최적화함으로써 검색 성능에 큰 영향을 주지 않고 컬렉션의 저장 용량을 확장하는 데 도움이 됩니다.</p>
 <p>특히, 특정 필드에 있는 원시 데이터를 메모리에 완전히 로드하는 대신 메모리 매핑하도록 Milvus를 구성할 수 있습니다. 이렇게 하면 메모리 문제에 대한 걱정 없이 필드에 직접 메모리 액세스를 확보하고 컬렉션 용량을 확장할 수 있습니다.</p>

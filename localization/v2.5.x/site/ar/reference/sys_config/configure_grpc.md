@@ -44,7 +44,7 @@ summary: تعرف على كيفية تهيئة grpc لـ Milvus.
   <tbody>
     <tr>
       <td>        ثانية، وقت انتظار انتهاء التوقف الرشيق      </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

@@ -95,6 +95,35 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsforceDenyAllDDL" class="common-anchor-header"><code translate="no">quotaAndLimits.forceDenyAllDDL</code><button data-href="#quotaAndLimitsforceDenyAllDDL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.forceDenyAllDDL">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        참이면 모든 DDL 요청을 강제로 거부하고, 거짓이면 허용합니다.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitslimitsallocRetryTimes" class="common-anchor-header"><code translate="no">quotaAndLimits.limits.allocRetryTimes</code><button data-href="#quotaAndLimitslimitsallocRetryTimes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,7 +148,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        속도 제한에서 순방향 데이터 할당 삭제 실패 시 재시도 시간      </td>
+      <td>        속도 제한에서 순방향 데이터 할당 삭제 실패 시 재시도 횟수      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -415,7 +444,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        DB 수준의 쿼터, 기본값 제한 없음, CreateCollection, DropCollection, LoadCollection, ReleaseCollection의 속도      </td>
+      <td>        DB 수준의 쿼터, 기본값 제한 없음, CreateCollection, DropCollection, LoadCollection, ReleaseCollection에 대한 속도      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -748,6 +777,68 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsdbRateenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.enabled</code><button data-href="#quotaAndLimitsdbRateenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.enabled">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        DB 요청 스로틀링 사용 여부      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitsdbRatemax" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.max</code><button data-href="#quotaAndLimitsdbRatemax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.max">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>초당 최대 DB 관련 요청 수입니다.</li>      
+        <li>이 항목을 10으로 설정하면 Milvus는 DB 생성/삭제/변경 요청을 포함하여 초당 10건 이하의 DB 관련 요청을 처리합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dbRate.enabled를 동시에 true로 설정하세요.</li>      
+        <li>        </li>      </td>
+      <td>-1</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitsdmlenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dml.enabled</code><button data-href="#quotaAndLimitsdmlenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -772,7 +863,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        DML 요청 스로틀링 사용 여부입니다.      </td>
+      <td>        DML 요청 스로틀링을 사용할지 여부입니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1277,7 +1368,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        DQL 요청 스로틀링 사용 여부입니다.      </td>
+      <td>        DQL 요청 스로틀링을 사용할지 여부입니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1615,7 +1706,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   <tbody>
     <tr>
       <td>
-        <li>메모리 사용량 &gt; memoryHighWaterLevel일 경우 모든 DML 요청이 거부됩니다;</li>      
+        <li>메모리 사용량 &gt; memoryHighWaterLevel인 경우 모든 DML 요청이 거부됩니다;</li>      
         <li>memoryLowWaterLevel &lt; 메모리 사용량 &lt; memoryHighWaterLevel일 경우, dml 속도를 줄입니다;</li>      
         <li>메모리 사용량이 memoryLowWaterLevel &lt;이면 아무 조치도 취하지 않습니다.</li>      </td>
       <td>true</td>

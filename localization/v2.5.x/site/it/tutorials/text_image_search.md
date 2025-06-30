@@ -30,7 +30,7 @@ title: Ricerca da testo a immagine con Milvus
         ></path>
       </svg>
     </button></h1><p>La ricerca da testo a immagine è una tecnologia avanzata che consente agli utenti di cercare immagini utilizzando descrizioni testuali in linguaggio naturale. Sfrutta un modello multimodale preaddestrato per convertire sia il testo che le immagini in incorporazioni in uno spazio semantico condiviso, consentendo confronti basati sulla somiglianza.</p>
-<p>In questa esercitazione esploreremo come implementare il recupero di immagini basato sul testo utilizzando il modello CLIP (Contrastive Language-Image Pretraining) di OpenAI e Milvus. Genereremo le incorporazioni delle immagini con CLIP, le memorizzeremo in Milvus ed eseguiremo ricerche di similarità efficienti.</p>
+<p>In questa esercitazione esploreremo come implementare il recupero di immagini basato sul testo utilizzando il modello CLIP (Contrastive Language-Image Pretraining) di OpenAI e Milvus. Genereremo embeddings di immagini con CLIP, li memorizzeremo in Milvus ed eseguiremo ricerche di similarità efficienti.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,8 +65,8 @@ title: Ricerca da testo a immagine con Milvus
 <h3 id="Set-up-Milvus" class="common-anchor-header">Configurare Milvus</h3><p>Prima di procedere, configurare il server Milvus e connettersi utilizzando il proprio URI (e, facoltativamente, un token):</p>
 <ul>
 <li><p><strong>Milvus Lite (consigliato per comodità)</strong>: Impostare l'URI su un file locale, come ./milvus.db. In questo modo si sfrutta automaticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> per memorizzare tutti i dati in un unico file.</p></li>
-<li><p><strong>Docker o Kubernetes (per dati su larga scala)</strong>: Per gestire insiemi di dati più grandi, distribuire un server Milvus più performante utilizzando <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. In questo caso, per connettersi utilizzare l'URI del server, ad esempio http://localhost:19530.</p></li>
-<li><p><strong>Zilliz Cloud (servizio gestito)</strong>: Se si utilizza <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito da Milvus, impostare l'Endpoint pubblico come URI e la Chiave API come token.</p></li>
+<li><p><strong>Docker o Kubernetes (per dati su larga scala)</strong>: Per gestire insiemi di dati più grandi, è possibile distribuire un server Milvus più performante utilizzando <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. In questo caso, per connettersi utilizzare l'URI del server, ad esempio http://localhost:19530.</p></li>
+<li><p><strong>Zilliz Cloud (servizio gestito)</strong>: Se si utilizza <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito da Milvus, impostare l'endpoint pubblico come URI e la chiave API come token.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 

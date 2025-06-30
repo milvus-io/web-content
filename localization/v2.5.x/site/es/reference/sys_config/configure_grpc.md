@@ -44,7 +44,7 @@ summary: Aprenda a configurar grpc para Milvus.
   <tbody>
     <tr>
       <td>        second, tiempo de espera para finalizar graceful stop    </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

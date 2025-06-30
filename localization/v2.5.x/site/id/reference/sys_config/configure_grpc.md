@@ -43,8 +43,8 @@ summary: Pelajari cara mengonfigurasi grpc untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        detik, waktu untuk menunggu waktu berhenti dengan anggun      </td>
-      <td>10</td>
+      <td>        detik, waktu untuk menunggu berhenti dengan anggun selesai      </td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

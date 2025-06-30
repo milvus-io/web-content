@@ -5,7 +5,6 @@ summary: >-
   스키마는 컬렉션의 데이터 구조를 정의합니다. 컬렉션을 만들기 전에 컬렉션의 스키마를 설계해야 합니다. 이 페이지는 컬렉션 스키마를 이해하고
   직접 스키마 예제를 디자인하는 데 도움이 됩니다.
 ---
-
 <h1 id="Schema-Explained​" class="common-anchor-header">스키마 설명<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +68,6 @@ summary: >-
 schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
 ​
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();​
@@ -106,34 +104,27 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,​
     datatype=DataType.INT64,​
-    <span class="hljs-comment"># highlight-start​</span>
-    is_primary=<span class="hljs-literal">True</span>,​
-    auto_id=<span class="hljs-literal">False</span>,​
-    <span class="hljs-comment"># highlight-end​</span>
+<span class="highlighted-comment-line">    is_primary=<span class="hljs-literal">True</span>,​</span>
+<span class="highlighted-comment-line">    auto_id=<span class="hljs-literal">False</span>,​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
 schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)​
         .dataType(DataType.Int64)​
-        <span class="hljs-comment">// highlight-start​</span>
-        .isPrimaryKey(<span class="hljs-literal">true</span>)​
-        .autoID(<span class="hljs-literal">false</span>)​
-        <span class="hljs-comment">// highlight-end​</span>
+<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)​</span>
+<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,​
-    <span class="hljs-comment">// highlight-start​</span>
-    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,​
-    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>​
-    <span class="hljs-comment">// highlight-end​</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,​</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -175,25 +166,21 @@ export schema='{​
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,​
     datatype=DataType.FLOAT_VECTOR,​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    dim=<span class="hljs-number">5</span>​
+<span class="highlighted-wrapper-line">    dim=<span class="hljs-number">5</span>​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
-        <span class="hljs-comment">// highlight-next-line​</span>
-        .dimension(<span class="hljs-number">5</span>)​
+<span class="highlighted-wrapper-line">        .dimension(<span class="hljs-number">5</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,​
-    <span class="hljs-comment">// highlight-next-line​</span>
-    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>​
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -214,7 +201,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>위 코드 스니펫의 <code translate="no">dim</code> 매개 변수는 벡터 필드에 포함될 벡터 임베딩의 차원을 나타냅니다. <code translate="no">FLOAT_VECTOR</code> 값은 벡터 필드에 일반적으로 역수를 나타내는 데 사용되는 32비트 부동 소수점 목록이 들어 있음을 나타내며, 그 외에도 Milvus는 다음 유형의 벡터 임베딩을 지원합니다.</p>
+<p>위 코드 스니펫의 <code translate="no">dim</code> 매개 변수는 벡터 필드에 포함될 벡터 임베딩의 차원을 나타냅니다. <code translate="no">FLOAT_VECTOR</code> 값은 벡터 필드에 일반적으로 역수를 나타내는 데 사용되는 32비트 부동 소수점 목록이 들어 있음을 나타내며, 이 외에도 Milvus는 다음 유형의 벡터 임베딩을 지원합니다.</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>이 유형의 벡터 필드는 16비트 반정밀도 부동 소수점 목록을 보유하며 일반적으로 메모리 또는 대역폭이 제한된 딥 러닝 또는 GPU 기반 컴퓨팅 시나리오에 적용됩니다.</p></li>
@@ -247,25 +234,21 @@ export schema=&quot;{​
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,​
     datatype=DataType.VARCHAR,​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    max_length=<span class="hljs-number">512</span>​
+<span class="highlighted-wrapper-line">    max_length=<span class="hljs-number">512</span>​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
-        <span class="hljs-comment">// highlight-next-line​</span>
-        .maxLength(<span class="hljs-number">512</span>)​
+<span class="highlighted-wrapper-line">        .maxLength(<span class="hljs-number">512</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,​
-    <span class="hljs-comment">// highlight-next-line​</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>​
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -296,7 +279,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
         .dataType(DataType.Int64)​
@@ -334,7 +316,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
         .dataType(DataType.Bool)​
@@ -373,7 +354,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
         .dataType(DataType.JSON)​
@@ -416,7 +396,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
         .dataType(DataType.Array)​

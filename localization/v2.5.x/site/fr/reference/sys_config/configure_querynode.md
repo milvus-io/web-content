@@ -163,7 +163,7 @@ summary: Découvrez comment configurer queryNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        index temporaire nlist, il est recommandé de définir sqrt(chunkRows), doit être inférieur à chunkRows/8      </td>
+      <td>        index provisoire nlist, il est recommandé de définir sqrt(chunkRows), qui doit être inférieur à chunkRows/8      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -197,6 +197,151 @@ summary: Découvrez comment configurer queryNode pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodesegcoreinterimIndexsubDim" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.subDim</code><button data-href="#queryNodesegcoreinterimIndexsubDim" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.subDim">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        interim index sub dim, recommend to (subDim % vector dim == 0)  </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineRatio" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineRatio</code><button data-href="#queryNodesegcoreinterimIndexrefineRatio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineRatio">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        paramètres de l'indice intermédiaire, à fixer à &gt;= 1.0   </td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineQuantType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineQuantType</code><button data-href="#queryNodesegcoreinterimIndexrefineQuantType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineQuantType">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Représentation des données de l'indice SCANN_DVR, options : NONE", "FLOAT16", "BFLOAT16" et "UINT8".      </td>
+      <td>NONE</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineWithQuant" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineWithQuant</code><button data-href="#queryNodesegcoreinterimIndexrefineWithQuant" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineWithQuant">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Utiliser ou non refineQuantType pour affiner pour les fatser mais perdre un peu de précision      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexdenseVectorIndexType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.denseVectorIndexType</code><button data-href="#queryNodesegcoreinterimIndexdenseVectorIndexType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.denseVectorIndexType">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Type d'indice intermin du vecteur dense     </td>
+      <td>IVF_FLAT_CC</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodesegcoreinterimIndexmemExpansionRate" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.memExpansionRate</code><button data-href="#queryNodesegcoreinterimIndexmemExpansionRate" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,7 +366,7 @@ summary: Découvrez comment configurer queryNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        mémoire supplémentaire nécessaire à la construction de l'index provisoire      </td>
+      <td>        Mémoire supplémentaire nécessaire à la construction de l'index intermédiaire      </td>
       <td>1.15</td>
     </tr>
   </tbody>
@@ -313,6 +458,35 @@ summary: Découvrez comment configurer queryNode pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodesegcorejsonKeyStatsCommitInterval" class="common-anchor-header"><code translate="no">queryNode.segcore.jsonKeyStatsCommitInterval</code><button data-href="#queryNodesegcorejsonKeyStatsCommitInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.jsonKeyStatsCommitInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        l'intervalle de validation pour la clé JSON Stats à valider      </td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodeloadMemoryUsageFactor" class="common-anchor-header"><code translate="no">queryNode.loadMemoryUsageFactor</code><button data-href="#queryNodeloadMemoryUsageFactor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -331,13 +505,13 @@ summary: Découvrez comment configurer queryNode pour Milvus.
     </button></h2><table id="queryNode.loadMemoryUsageFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
+      <th class="width80">Description de la valeur par défaut</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Le facteur de multiplication du calcul de l'utilisation de la mémoire lors du chargement des segments      </td>
+      <td>        Facteur de multiplication pour le calcul de l'utilisation de la mémoire lors du chargement des segments      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -1112,7 +1286,7 @@ summary: Découvrez comment configurer queryNode pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        politique de suppression zéro au niveau du délégué, option possible["FilterByBF", "RemoteLoad"]].      </td>
+      <td>        Politique de suppression zéro au niveau du délégué, option possible["FilterByBF", "RemoteLoad"]].      </td>
       <td>FilterByBF</td>
     </tr>
   </tbody>
@@ -1146,6 +1320,35 @@ summary: Découvrez comment configurer queryNode pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodeforwardBatchSize" class="common-anchor-header"><code translate="no">queryNode.forwardBatchSize</code><button data-href="#queryNodeforwardBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.forwardBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        la taille du lot utilisée par le délégateur pour transmettre la suppression de flux dans la procédure de chargement      </td>
+      <td>4194304</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodedataSyncflowGraphmaxQueueLength" class="common-anchor-header"><code translate="no">queryNode.dataSync.flowGraph.maxQueueLength</code><button data-href="#queryNodedataSyncflowGraphmaxQueueLength" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1164,7 +1367,7 @@ summary: Découvrez comment configurer queryNode pour Milvus.
     </button></h2><table id="queryNode.dataSync.flowGraph.maxQueueLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
+      <th class="width80">Description de la valeur par défaut</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>

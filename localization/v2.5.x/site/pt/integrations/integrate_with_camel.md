@@ -52,7 +52,7 @@ title: Geração Aumentada por Recuperação (RAG) com Milvus e Camel
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> requests
@@ -116,7 +116,7 @@ vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizamos o <code translate="no">Unstructured Module</code> integrado para dividir o conteúdo em pequenos pedaços, o conteúdo será dividido automaticamente com a sua função <code translate="no">chunk_by_title</code>, o carácter máximo para cada pedaço é de 500 caracteres, que é um comprimento adequado para <code translate="no">OpenAIEmbedding</code>. Todo o texto nos pedaços será incorporado e armazenado na instância de armazenamento vetorial, o que levará algum tempo, por favor aguarde.</p>
+<p>Utilizamos o <code translate="no">Unstructured Module</code> integrado para dividir o conteúdo em pequenos pedaços, o conteúdo será dividido automaticamente com a sua função <code translate="no">chunk_by_title</code>, o carácter máximo para cada pedaço é de 500 caracteres, que é um comprimento adequado para <code translate="no">OpenAIEmbedding</code>. Todo o texto nos pedaços será incorporado e armazenado na instância de armazenamento vetorial, o que demorará algum tempo.</p>
 <pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -169,7 +169,7 @@ vector_retriever = VectorRetriever(
 <li>Definir o URL remoto e a chave da API para o Milvus</li>
 <li>Fornecer uma consulta</li>
 </ul>
-<p>O pipeline Auto RAG criará colecções para os caminhos de entrada de conteúdos fornecidos. O nome da coleção será definido automaticamente com base no nome do caminho de entrada de conteúdos e, se a coleção existir, será feita a recuperação diretamente.</p>
+<p>O pipeline Auto RAG criará colecções para os caminhos de entrada de conteúdos fornecidos. O nome da coleção será definido automaticamente com base no nome do caminho de entrada de conteúdos e, se a coleção existir, a recuperação será feita diretamente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
@@ -200,7 +200,7 @@ Retrieved Context:
 {'similarity score': '0.8252888321876526', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 7}, 'text': ' Section 3.2, to simulate assistant-user cooperation. For our analysis, we set our attention on AI Society setting. We also gathered conversational data, named CAMEL AI Society and CAMEL Code datasets and problem-solution pairs data named CAMEL Math and CAMEL Science and analyzed and evaluated their quality. Moreover, we will discuss potential extensions of our framework and highlight both the risks and opportunities that future AI society might present.'}
 {'similarity score': '0.8378663659095764', 'content path': 'https://www.camel-ai.org/', 'metadata': {'filetype': 'text/html', 'languages': ['eng'], 'page_number': 1, 'url': 'https://www.camel-ai.org/', 'link_urls': ['#h.3f4tphhd9pn8', 'https://join.slack.com/t/camel-ai/shared_invite/zt-2g7xc41gy-_7rcrNNAArIP6sLQqldkqQ', 'https://discord.gg/CNcNpquyDc'], 'link_texts': [None, None, None], 'emphasized_text_contents': ['Mission', 'CAMEL-AI.org', 'is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.', 'Join us via', 'Slack', 'Discord', 'or'], 'emphasized_text_tags': ['span', 'span', 'span', 'span', 'span', 'span', 'span']}, 'text': 'Mission\n\nCAMEL-AI.org is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.\n\nJoin us via\n\nSlack\n\nDiscord\n\nor'}
 </code></pre>
-<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Agente único com RAG automático<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Agente único com Auto RAG<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -3,7 +3,7 @@ id: quickstart_with_attu.md
 summary: >-
   Attu 是 Milvus
   的一体化开源管理工具。它具有直观的图形用户界面（GUI），可让您轻松与数据库交互。只需点击几下，您就可以直观地查看集群状态、管理元数据、执行数据查询等。
-title: 答题系统
+title: 快速入门使用 Attu - Milvus 的网络用户界面
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Attu 桌面快速入门<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"

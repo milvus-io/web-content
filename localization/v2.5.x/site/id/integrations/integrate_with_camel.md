@@ -79,7 +79,7 @@ response = requests.get(url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pada bagian ini kita akan mengatur pipeline RAG yang telah disesuaikan, kita akan menggunakan <code translate="no">VectorRetriever</code> sebagai contoh. Kita akan mengatur <code translate="no">OpenAIEmbedding</code> sebagai model embeddding dan <code translate="no">MilvusStorage</code> sebagai penyimpanannya.</p>
+    </button></h2><p>Pada bagian ini kita akan mengatur pipeline RAG yang telah disesuaikan, kita akan menggunakan <code translate="no">VectorRetriever</code> sebagai contoh. Kita akan mengatur <code translate="no">OpenAIEmbedding</code> sebagai model embedding dan <code translate="no">MilvusStorage</code> sebagai penyimpanannya.</p>
 <p>Untuk mengatur embedding OpenAI, kita perlu mengatur <code translate="no">OPENAI_API_KEY</code> di bawah ini.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -125,7 +125,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>Sekarang kita dapat mengambil informasi dari penyimpanan vektor dengan memberikan query. Secara default, ini akan mengembalikan konten teks dari 1 chunk teratas dengan nilai kemiripan Cosine tertinggi, dan nilai kemiripan harus lebih tinggi dari 0,75 untuk memastikan konten yang diambil relevan dengan kueri. Anda juga dapat mengubah nilai <code translate="no">top_k</code>.</p>
+<p>Sekarang kita dapat mengambil informasi dari penyimpanan vektor dengan memberikan query. Secara default, ini akan mengembalikan konten teks dari 1 chunk teratas dengan nilai kemiripan Cosine tertinggi, dan nilai kemiripan harus lebih tinggi dari 0.75 untuk memastikan konten yang diambil relevan dengan kueri. Anda juga dapat mengubah nilai <code translate="no">top_k</code>.</p>
 <p>Daftar string yang dikembalikan meliputi:</p>
 <ul>
 <li>skor kemiripan</li>
@@ -165,11 +165,11 @@ vector_retriever = VectorRetriever(
     </button></h2><p>Pada bagian ini kita akan menjalankan <code translate="no">AutoRetriever</code> dengan pengaturan default. Ini menggunakan <code translate="no">OpenAIEmbedding</code> sebagai model penyematan default dan <code translate="no">Milvus</code> sebagai penyimpanan vektor default.</p>
 <p>Yang perlu Anda lakukan adalah:</p>
 <ul>
-<li>Tetapkan jalur input konten, yang dapat berupa jalur lokal atau url jarak jauh</li>
+<li>Tetapkan jalur masukan konten, yang dapat berupa jalur lokal atau url jarak jauh</li>
 <li>Tetapkan url jarak jauh dan kunci api untuk Milvus</li>
 <li>Berikan kueri</li>
 </ul>
-<p>Pipeline Auto RAG akan membuat koleksi untuk jalur input konten yang diberikan, nama koleksi akan diatur secara otomatis berdasarkan nama jalur input konten, jika koleksi tersebut ada, maka akan dilakukan pengambilan secara langsung.</p>
+<p>Pipeline Auto RAG akan membuat koleksi untuk jalur input konten yang diberikan, nama koleksi akan diatur secara otomatis berdasarkan nama jalur input konten, jika koleksi tersebut ada, maka akan melakukan pengambilan secara langsung.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 

@@ -6,7 +6,7 @@ summary: >-
   einfache Interaktion mit Ihren Datenbanken ermöglicht. Mit nur wenigen Klicks
   können Sie den Status Ihres Clusters visualisieren, Metadaten verwalten,
   Datenabfragen durchführen und vieles mehr.
-title: System zur Beantwortung von Fragen
+title: Schnellstart mit Attu - der Web-UI von Milvus
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Schnellstart mit Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"

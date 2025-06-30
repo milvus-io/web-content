@@ -35,10 +35,10 @@ title: المكونات الرئيسية
         ></path>
       </svg>
     </button></h2><ul>
-<li>المنسق: واحد فقط لكل مجموعة</li>
+<li>المنسق: يمكن تمكين وضع رئيسي-عبد لتوفير توافر عالٍ.</li>
 <li>الوكيل: واحد أو أكثر لكل مجموعة</li>
 <li>عقدة البث: واحدة أو أكثر لكل مجموعة</li>
-<li>عقدة الاستعلام: واحدة أو أكثر لكل مجموعة</li>
+<li>عقدة الاستعلام: واحدة أو أكثر لكل مجموعة.</li>
 <li>عقدة البيانات: واحدة أو أكثر لكل مجموعة</li>
 </ul>
 <h2 id="Third-party-dependencies" class="common-anchor-header">تبعيات الطرف الثالث<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
@@ -106,5 +106,5 @@ title: المكونات الرئيسية
         ></path>
       </svg>
     </button></h2><ul>
-<li>اقرأ <a href="/docs/ar/v2.6.x/four_layers.md">تفكيك الحوسبة/التخزين</a> لفهم آلية ومبدأ تصميم ميلفوس.</li>
+<li>اقرأ <a href="/docs/ar/four_layers.md">تفكيك الحوسبة/التخزين</a> لفهم آلية ومبدأ تصميم ميلفوس.</li>
 </ul>

@@ -119,7 +119,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
-      <span class="hljs-attr">openai:</span>
+      <span class="hljs-attr">tei:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">tei_key</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enabled by default. no action required.</span>
 <button class="copy-code-btn"></button></code></pre></li>

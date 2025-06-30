@@ -63,13 +63,13 @@ title: Milvusによるテキスト画像検索
 <ul>
 <li><p><strong>Milvus Lite (便宜上推奨)</strong>：URIを./milvus.dbのようなローカルファイルに設定します。これは自動的に<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>活用し、すべてのデータを単一のファイルに保存します。</p></li>
 <li><p><strong>DockerまたはKubernetes（大規模データ用）</strong>：より大規模なデータセットを扱うには、<a href="https://milvus.io/docs/quickstart.md">DockerまたはKubernetesを</a>使用して、よりパフォーマンスの高いMilvusサーバをデプロイします。この場合、http://localhost:19530 のようなサーバURIを使用して接続します。</p></li>
-<li><p><strong>Zillizクラウド（マネージドサービス）</strong>：Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、URIにPublic Endpoint、トークンにAPI Keyを設定してください。</p></li>
+<li><p><strong>Zillizクラウド（マネージドサービス）</strong>：Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、Public EndpointをURIに、API Keyをトークンに設定してください。</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Getting-Started" class="common-anchor-header">開始<button data-href="#Getting-Started" class="anchor-icon" translate="no">
+<h2 id="Getting-Started" class="common-anchor-header">始める<button data-href="#Getting-Started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,7 +84,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>必要な依存関係やデータが揃ったところで、いよいよ機能抽出ツールをセットアップし、Milvusを使い始めましょう。このセクションでは、テキストから画像への検索システムを構築するための重要なステップを説明します。最後に、テキストクエリに基づいて画像を検索し、視覚化する方法を示します。</p>
+    </button></h2><p>必要な依存関係やデータが揃ったところで、いよいよ機能抽出ツールをセットアップしてMilvusを使い始めましょう。このセクションでは、テキストから画像への検索システムを構築するための重要なステップを説明します。最後に、テキストクエリに基づいて画像を検索し、視覚化する方法を示します。</p>
 <h3 id="Define-feature-extractors" class="common-anchor-header">特徴抽出器の定義</h3><p>画像とテキストの埋め込みを生成するために、事前に学習されたCLIPモデルを使用します。このセクションでは、事前に学習された<strong>ViT-B/32</strong>variant of CLIPをロードし、画像とテキストをエンコードするためのヘルパー関数を定義する：</p>
 <ul>
 <li><code translate="no">encode_image(image_path)</code>:画像を処理して特徴ベクトルにエンコードする。</li>

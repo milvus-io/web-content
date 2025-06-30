@@ -35,10 +35,10 @@ title: Hauptkomponenten
         ></path>
       </svg>
     </button></h2><ul>
-<li>Koordinator: genau einer pro Cluster</li>
-<li>Proxy: ein oder mehrere pro Cluster</li>
+<li>Coordinator: Der Master-Slave-Modus kann aktiviert werden, um hohe Verfügbarkeit zu gewährleisten.</li>
+<li>Proxy: einer oder mehrere pro Cluster</li>
 <li>Streaming Node: ein oder mehrere pro Cluster</li>
-<li>Abfrageknoten: einer oder mehrere pro Cluster</li>
+<li>Abfrageknoten: ein oder mehrere pro Cluster</li>
 <li>Datenknoten: ein oder mehrere pro Cluster</li>
 </ul>
 <h2 id="Third-party-dependencies" class="common-anchor-header">Abhängigkeiten von Drittanbietern<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
@@ -106,5 +106,5 @@ title: Hauptkomponenten
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lesen Sie <a href="/docs/de/v2.6.x/four_layers.md">Computing/Storage Disaggregation</a>, um den Mechanismus und das Designprinzip von Milvus zu verstehen.</li>
+<li>Lesen Sie <a href="/docs/de/four_layers.md">Computing/Storage Disaggregation</a>, um den Mechanismus und das Designprinzip von Milvus zu verstehen.</li>
 </ul>

@@ -44,7 +44,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        クエリ・ノードがセグメント・ステータス、CPU使用率、メモリ使用率、ヘルス・ステータスなどのノード統計情報を公開する間隔。単位：ms      </td>
+      <td>        クエリノードがセグメントステータス、CPU使用率、メモリ使用率、ヘルスステータスなどのノード統計情報を公開する間隔。単位：ms      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -163,7 +163,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        一時インデックスnlist、sqrt(chunkRows)を設定することを推奨。      </td>
+      <td>        中間インデックスnlist、sqrt(chunkRows)を設定することを推奨。      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -194,6 +194,151 @@ summary: MilvusのqueryNodeの設定方法について説明します。
     <tr>
       <td>        小さなインデックスを検索するためのnprobe。      </td>
       <td>16</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexsubDim" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.subDim</code><button data-href="#queryNodesegcoreinterimIndexsubDim" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.subDim">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        中間インデックスsub dim, (subDim % vector dim == 0) まで推奨。      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineRatio" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineRatio</code><button data-href="#queryNodesegcoreinterimIndexrefineRatio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineRatio">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        中間インデックス・パラメータ。      </td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineQuantType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineQuantType</code><button data-href="#queryNodesegcoreinterimIndexrefineQuantType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineQuantType">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        SCANN_DVRインデックスのデータ表現：オプション：'NONE'、'FLOAT16'、'BFLOAT16'、'UINT8'      </td>
+      <td>NONE</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineWithQuant" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineWithQuant</code><button data-href="#queryNodesegcoreinterimIndexrefineWithQuant" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineWithQuant">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        refineQuantTypeを使用してファッツを絞り込むかどうか。      </td>
+      <td>真</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexdenseVectorIndexType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.denseVectorIndexType</code><button data-href="#queryNodesegcoreinterimIndexdenseVectorIndexType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.denseVectorIndexType">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        密なベクトル間インデックスの型      </td>
+      <td>IVF_FLAT_CC</td>
     </tr>
   </tbody>
 </table>
@@ -250,7 +395,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        中間インデックスの並列構築とCPU数の比率      </td>
+      <td>        中間インデックス構築の並列処理とCPU数の比率      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -310,6 +455,35 @@ summary: MilvusのqueryNodeの設定方法について説明します。
     <tr>
       <td>        Knowhere 強い一貫性スコア計算ロジックを有効にする      </td>
       <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcorejsonKeyStatsCommitInterval" class="common-anchor-header"><code translate="no">queryNode.segcore.jsonKeyStatsCommitInterval</code><button data-href="#queryNodesegcorejsonKeyStatsCommitInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.jsonKeyStatsCommitInterval">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        コミットするJSONキーの統計情報のコミット間隔      </td>
+      <td>200</td>
     </tr>
   </tbody>
 </table>
@@ -694,7 +868,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        mmap チャンクマネージャーで使用するディスクのパーセンテージ      </td>
+      <td>        mmap チャンクマネージャーで使用されるディスクのパーセンテージ      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -1143,6 +1317,35 @@ summary: MilvusのqueryNodeの設定方法について説明します。
     <tr>
       <td>        デリゲータのストリーミング削除フォワードポリシー、可能なオプション["FilterByBF", "Direct"]。      </td>
       <td>FilterByBF</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodeforwardBatchSize" class="common-anchor-header"><code translate="no">queryNode.forwardBatchSize</code><button data-href="#queryNodeforwardBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.forwardBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        デリゲータがロード手順でストリーム削除を転送するために使用するバッチサイズ      </td>
+      <td>4194304</td>
     </tr>
   </tbody>
 </table>

@@ -44,7 +44,7 @@ summary: Milvus용 grpc를 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>        초, 우아한 정지 완료를 기다리는 시간      </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

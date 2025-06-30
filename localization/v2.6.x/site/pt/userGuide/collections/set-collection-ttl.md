@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Quando os dados são inseridos numa coleção, permanecem lá por predefinição. No entanto, em alguns cenários, pode querer remover ou limpar os dados após um determinado período. Nesses casos, pode configurar a propriedade Time-to-Live (TTL) da coleção para que o Milvus elimine automaticamente os dados quando o TTL expirar.</p>
+    </button></h1><p>Quando os dados são inseridos numa coleção, permanecem lá por defeito. No entanto, em alguns cenários, pode querer remover ou limpar os dados após um determinado período. Nesses casos, pode configurar a propriedade Time-to-Live (TTL) da coleção para que o Milvus elimine automaticamente os dados quando o TTL expirar.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,10 +39,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Time-to-Live (TTL) é normalmente utilizado em bases de dados para cenários em que os dados só devem permanecer válidos ou acessíveis durante um determinado período após qualquer inserção ou modificação. Depois, os dados podem ser removidos automaticamente.</p>
+    </button></h2><p>O Time-to-Live (TTL) é normalmente utilizado em bases de dados para cenários em que os dados só devem permanecer válidos ou acessíveis durante um determinado período após qualquer inserção ou modificação. Em seguida, os dados podem ser removidos automaticamente.</p>
 <p>Por exemplo, se ingerir dados diariamente mas só precisar de manter registos durante 14 dias, pode configurar o Milvus para remover automaticamente quaisquer dados mais antigos do que isso, definindo o TTL da coleção para <strong>14 × 24 × 3600 = 1209600</strong> segundos. Isto garante que apenas os dados mais recentes de 14 dias permaneçam na coleção.</p>
-<p>A propriedade TTL numa coleção Milvus é especificada como um número inteiro em segundos. Uma vez definida, quaisquer dados que ultrapassem o seu TTL serão automaticamente eliminados da coleção.</p>
-<p>Como o processo de eliminação é assíncrono, os dados podem não ser removidos dos resultados da pesquisa exatamente quando o TTL especificado tiver decorrido. Em vez disso, pode haver um atraso, uma vez que a remoção depende dos processos de recolha de lixo (GC) e de compactação, que ocorrem em intervalos não determinísticos.</p>
+<div class="alert note">
+<p>As entidades expiradas não aparecerão em nenhum resultado de pesquisa ou consulta. No entanto, elas podem permanecer no armazenamento até a compactação de dados subsequente, que deve ser realizada nas próximas 24 horas.</p>
+<p>É possível controlar o momento em que a compactação de dados é activada definindo o item de configuração <code translate="no">dataCoord.compaction.expiry.tolerance</code> no ficheiro de configuração do Milvus.</p>
+<p>Por defeito, este item de configuração é <code translate="no">-1</code>, indicando que se aplica o intervalo de compactação de dados existente. No entanto, ao alterar o seu valor para um número inteiro positivo, como <code translate="no">12</code>, a compactação de dados será acionada o número de horas especificado após a expiração de quaisquer entidades.</p>
+</div>
+<p>A propriedade TTL numa coleção Milvus é especificada como um número inteiro em segundos. Uma vez definida, qualquer dado que ultrapasse o seu TTL será automaticamente eliminado da coleção.</p>
+<p>Como o processo de eliminação é assíncrono, os dados podem não ser removidos dos resultados da pesquisa exatamente quando o TTL especificado tiver expirado. Em vez disso, pode haver um atraso, uma vez que a remoção depende dos processos de recolha de lixo (GC) e de compactação, que ocorrem em intervalos não determinísticos.</p>
 <h2 id="Set-TTL" class="common-anchor-header">Definir TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

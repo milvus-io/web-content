@@ -243,8 +243,8 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>В приведенном выше примере для поля <code translate="no">binary_vector</code> создается индекс с именем <code translate="no">binary_vector_index</code>, использующий тип индекса <code translate="no">AUTOINDEX</code>. Значение <code translate="no">metric_type</code> установлено в <code translate="no">HAMMING</code>, что указывает на использование расстояния Хэмминга для измерения сходства.</p>
-<p>Milvus предоставляет различные типы индексов для более удобного векторного поиска. AUTOINDEX - это специальный тип индекса, предназначенный для сглаживания кривой обучения векторному поиску. Существует множество типов индексов, из которых вы можете выбирать. Подробнее см. в разделе xxx.</p>
-<p>Кроме того, Milvus поддерживает другие метрики сходства для бинарных векторов. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/metric.md">Типы метрик</a>.</p>
+<p>Milvus предоставляет различные типы индексов для более удобного векторного поиска. AUTOINDEX - это специальный тип индекса, предназначенный для сглаживания кривой обучения векторному поиску. Существует множество типов индексов, из которых вы можете выбирать. Для получения подробной информации обратитесь к разделу <a href="/docs/ru/index-explained.md">"Объяснение индексов</a>".</p>
+<p>Кроме того, Milvus поддерживает другие метрики сходства для бинарных векторов. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/metric.md">"Типы метрик"</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Создание коллекции</h3><p>После того как настройки бинарных векторов и индексов завершены, создайте коллекцию, содержащую бинарные векторы. В примере ниже используется метод <code translate="no">create_collection</code> для создания коллекции с именем <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

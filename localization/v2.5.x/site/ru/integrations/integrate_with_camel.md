@@ -83,7 +83,7 @@ response = requests.get(url)
 <p>Чтобы установить встраивание OpenAI, нам нужно установить <code translate="no">OPENAI_API_KEY</code>, как показано ниже.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Импортируйте и установите экземпляр эмбеддинга:</p>
+<p>Импортируйте и установите экземпляр встраивания:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.embeddings <span class="hljs-keyword">import</span> OpenAIEmbedding
 
 embedding_instance = OpenAIEmbedding()
@@ -125,7 +125,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>Теперь мы можем получить информацию из векторного хранилища, задав запрос. По умолчанию будет выдано текстовое содержимое из топ-1 чанка с наибольшим показателем косинусного сходства, причем показатель сходства должен быть выше 0,75, чтобы убедиться, что полученное содержимое соответствует запросу. Вы также можете изменить значение <code translate="no">top_k</code>.</p>
+<p>Теперь мы можем получить информацию из векторного хранилища, задав запрос. По умолчанию будет возвращен текстовый контент из топ-1 чанка с наибольшим показателем косинусного сходства, причем показатель сходства должен быть выше 0,75, чтобы убедиться, что полученный контент соответствует запросу. Вы также можете изменить значение <code translate="no">top_k</code>.</p>
 <p>Возвращаемый список строк включает:</p>
 <ul>
 <li>балл сходства</li>
@@ -200,7 +200,7 @@ Retrieved Context:
 {'similarity score': '0.8252888321876526', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 7}, 'text': ' Section 3.2, to simulate assistant-user cooperation. For our analysis, we set our attention on AI Society setting. We also gathered conversational data, named CAMEL AI Society and CAMEL Code datasets and problem-solution pairs data named CAMEL Math and CAMEL Science and analyzed and evaluated their quality. Moreover, we will discuss potential extensions of our framework and highlight both the risks and opportunities that future AI society might present.'}
 {'similarity score': '0.8378663659095764', 'content path': 'https://www.camel-ai.org/', 'metadata': {'filetype': 'text/html', 'languages': ['eng'], 'page_number': 1, 'url': 'https://www.camel-ai.org/', 'link_urls': ['#h.3f4tphhd9pn8', 'https://join.slack.com/t/camel-ai/shared_invite/zt-2g7xc41gy-_7rcrNNAArIP6sLQqldkqQ', 'https://discord.gg/CNcNpquyDc'], 'link_texts': [None, None, None], 'emphasized_text_contents': ['Mission', 'CAMEL-AI.org', 'is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.', 'Join us via', 'Slack', 'Discord', 'or'], 'emphasized_text_tags': ['span', 'span', 'span', 'span', 'span', 'span', 'span']}, 'text': 'Mission\n\nCAMEL-AI.org is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.\n\nJoin us via\n\nSlack\n\nDiscord\n\nor'}
 </code></pre>
-<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Единый агент с автоматическим RAG<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Единый агент с Auto RAG<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

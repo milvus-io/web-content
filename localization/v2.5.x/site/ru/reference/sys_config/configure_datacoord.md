@@ -611,6 +611,68 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordsealPolicychannelblockingL0EntryNum" class="common-anchor-header"><code translate="no">dataCoord.sealPolicy.channel.blockingL0EntryNum</code><button data-href="#dataCoordsealPolicychannelblockingL0EntryNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.sealPolicy.channel.blockingL0EntryNum">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Если суммарный номер записи журналов l0 каждого шарда </li>      
+        <li>превысит этот порог, самые ранние растущие сегменты будут запечатаны.</li>      </td>
+      <td>5000000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordsealPolicychannelblockingL0SizeInMB" class="common-anchor-header"><code translate="no">dataCoord.sealPolicy.channel.blockingL0SizeInMB</code><button data-href="#dataCoordsealPolicychannelblockingL0SizeInMB" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.sealPolicy.channel.blockingL0SizeInMB">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Порог размера в МБ, если общее количество записей журналов l0 каждого шарда </li>      
+        <li>превысит этот порог, самые ранние растущие сегменты будут закрыты.</li>      </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordautoUpgradeSegmentIndex" class="common-anchor-header"><code translate="no">dataCoord.autoUpgradeSegmentIndex</code><button data-href="#dataCoordautoUpgradeSegmentIndex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -848,6 +910,35 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
     <tr>
       <td>        Временной интервал в секундах для уплотнения gc  </td>
       <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionscheduleInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.scheduleInterval</code><button data-href="#dataCoordcompactionscheduleInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.scheduleInterval">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Временной интервал в миллисекундах для планирования задач уплотнения. Если значение конфигурации меньше 100 мс, оно будет скорректировано в сторону увеличения до 100 мс    </td>
+      <td>500</td>
     </tr>
   </tbody>
 </table>
@@ -2185,6 +2276,209 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordslotindexTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.indexTaskSlotUsage</code><button data-href="#dataCoordslotindexTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.indexTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        использование слота индексного задания на 512 мб    </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotstatsTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.statsTaskSlotUsage</code><button data-href="#dataCoordslotstatsTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.statsTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        использование слота задачи статистики на 512мб      </td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotanalyzeTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.analyzeTaskSlotUsage</code><button data-href="#dataCoordslotanalyzeTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.analyzeTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        использование слота для задачи анализа      </td>
+      <td>65535</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonStatsTriggerCount" class="common-anchor-header"><code translate="no">dataCoord.jsonStatsTriggerCount</code><button data-href="#dataCoordjsonStatsTriggerCount" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonStatsTriggerCount">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        количество задач jsonkey stats для каждого триггера      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonStatsTriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.jsonStatsTriggerInterval</code><button data-href="#dataCoordjsonStatsTriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonStatsTriggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        jsonkey интервал задач на триггер      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordenabledJSONKeyStatsInSort" class="common-anchor-header"><code translate="no">dataCoord.enabledJSONKeyStatsInSort</code><button data-href="#dataCoordenabledJSONKeyStatsInSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.enabledJSONKeyStatsInSort">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Указывает, следует ли включить задачу статистики по ключам JSON с сортировкой      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonKeyStatsMemoryBudgetInTantivy" class="common-anchor-header"><code translate="no">dataCoord.jsonKeyStatsMemoryBudgetInTantivy</code><button data-href="#dataCoordjsonKeyStatsMemoryBudgetInTantivy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonKeyStatsMemoryBudgetInTantivy">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        бюджет памяти для индекса JSON В Tantivy единицей измерения являются байты      </td>
+      <td>16777216</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordip" class="common-anchor-header"><code translate="no">dataCoord.ip</code><button data-href="#dataCoordip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -2209,7 +2503,7 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP-адрес адреса dataCoord. Если не указан, используется первый одноадресный адрес.      </td>
+      <td>        TCP/IP адрес dataCoord. Если не указан, используется первый одноадресный адрес.      </td>
       <td></td>
     </tr>
   </tbody>

@@ -35,7 +35,7 @@ title: 主要元件
         ></path>
       </svg>
     </button></h2><ul>
-<li>協調器：每個群集正好一個</li>
+<li>協調器：可啟用主從模式以提供高可用性。</li>
 <li>代理：每個群集一個或多個</li>
 <li>串流節點：每個群集一個或多個</li>
 <li>查詢節點：每個群集一個或多個</li>
@@ -85,7 +85,7 @@ title: 主要元件
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/standalone_architecture.png" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />
    </span> <span class="img-wrapper"> <span>獨立架構</span> </span></p>
 <p>目前，即使 WAL 儲存後端支援叢集模式，您也無法從獨立的 Milvus 實例執行線上升級至 Milvus 叢集。</p>
-<h3 id="Cluster" class="common-anchor-header">叢集</h3><p>Milvus 的分散式部署模式，每個元件獨立運作，並可擴充彈性。此設定適用於大型資料集和高負載的情況。</p>
+<h3 id="Cluster" class="common-anchor-header">叢集</h3><p>Milvus 的分佈式部署模式，每個元件獨立運作，並可擴充彈性。此設定適用於大型資料集和高負載的情況。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/distributed_architecture.png" alt="Distributed_architecture" class="doc-image" id="distributed_architecture" />
@@ -106,5 +106,5 @@ title: 主要元件
         ></path>
       </svg>
     </button></h2><ul>
-<li>閱讀「<a href="/docs/zh-hant/v2.6.x/four_layers.md">運算/儲存分散</a>」了解 Milvus 的機制與設計原理。</li>
+<li>閱讀「<a href="/docs/zh-hant/four_layers.md">運算/儲存分散</a>」了解 Milvus 的機制與設計原理。</li>
 </ul>

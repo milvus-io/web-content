@@ -35,7 +35,7 @@ title: Composants principaux
         ></path>
       </svg>
     </button></h2><ul>
-<li>Coordinateur : exactement un par cluster</li>
+<li>Coordinateur : le mode maître-esclave peut être activé pour fournir une haute disponibilité.</li>
 <li>Proxy : un ou plusieurs par cluster</li>
 <li>Nœud de streaming : un ou plusieurs par cluster</li>
 <li>Nœud de requête : un ou plusieurs par cluster</li>
@@ -106,5 +106,5 @@ title: Composants principaux
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lire <a href="/docs/fr/v2.6.x/four_layers.md">Disagrégation du calcul/stockage</a> pour comprendre le mécanisme et le principe de conception de Milvus.</li>
+<li>Lire <a href="/docs/fr/four_layers.md">Disagrégation du calcul/stockage</a> pour comprendre le mécanisme et le principe de conception de Milvus.</li>
 </ul>

@@ -50,7 +50,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>MilvusにTEI機能を設定する前に、TEIサービスが動作している必要があります。Milvusは2つのTEIデプロイ方法をサポートしています：</p>
-<h3 id="Standard-deployment-external" class="common-anchor-header">標準デプロイメント（外部デプロイメント）</h3><p>Hugging Faceの公式メソッドを使用して、TEIをスタンドアロンサービスとしてデプロイすることができます。このアプローチでは、TEIサービスを最大限柔軟にコントロールすることができます。</p>
+<h3 id="Standard-deployment-external" class="common-anchor-header">標準デプロイメント（外部デプロイメント）</h3><p>Hugging Faceの公式メソッドを使用して、TEIをスタンドアロンサービスとしてデプロイすることができます。このアプローチでは、TEIサービスを最大限に柔軟にコントロールすることができます。</p>
 <p>Dockerやその他の方法を用いたTEIのデプロイに関する詳しい説明は、<a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">Hugging Face Text Embeddings Inferenceの公式ドキュメントを</a>参照してください。</p>
 <p>デプロイ後、<a href="/docs/ja/hugging-face-tei.md#Use-embedding-function-">MilvusのTEI機能を使用する</a>際に必要となりますので、TEIサービスのエンドポイント（例:<code translate="no">http://localhost:8080</code> ）を控えておいてください。</p>
 <h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm Chartのデプロイ(統合)</h3><p>Kubernetes環境向けに、MilvusはHelmチャートによる統合デプロイオプションを提供しています。これにより、Milvusと一緒にTEIのデプロイと設定を行うことで、プロセスを簡素化することができます。</p>
@@ -106,7 +106,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>TEIサービスをデプロイした後、TEIエンベッディング関数を定義する際にエンドポイントを指定する必要があります。MilvusではデフォルトでTEIが有効になっているため、ほとんどの場合、追加の設定は必要ありません。</p>
-<p>ただし、TEIサービスがAPIキー認証(<code translate="no">--api-key</code> フラグ)付きでデプロイされている場合は、このキーを使用するようにMilvusを設定する必要があります：</p>
+<p>ただし、TEIサービスがAPIキー認証(<code translate="no">--api-key</code> フラグ)付きでデプロイされている場合、Milvusがこのキーを使用するように設定する必要があります：</p>
 <ol>
 <li><p><strong> <code translate="no">credential</code> ：</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
@@ -118,7 +118,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
-      <span class="hljs-attr">openai:</span>
+      <span class="hljs-attr">tei:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">tei_key</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enabled by default. no action required.</span>
 <button class="copy-code-btn"></button></code></pre></li>

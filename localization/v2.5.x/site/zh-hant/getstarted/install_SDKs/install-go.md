@@ -2,10 +2,9 @@
 id: install-go.md
 label: Install GO SDK
 related_key: SDK
-summary: 學習如何安裝 Milvus 的 GO SDK。
+summary: 了解如何安裝 Milvus 的 GO SDK。
 title: 安裝 Milvus Go SDK
 ---
-
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">安裝 Milvus Go SDK<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +54,7 @@ title: 安裝 Milvus Go SDK
         ></path>
       </svg>
     </button></h2><p>透過<code translate="no">go get</code> 安裝 Milvus GO SDK 及相依套件。</p>
-<pre><code translate="no" class="language-bash">$ <span class="hljs-keyword">go</span> get -u github.com/milvus-io/milvus-sdk-<span class="hljs-keyword">go</span>/v2
+<pre><code translate="no" class="language-bash">$ go get -u github.com/milvus-io/milvus/client/v2
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

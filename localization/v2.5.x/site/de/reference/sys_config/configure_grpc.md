@@ -44,7 +44,7 @@ summary: 'Erfahren Sie, wie Sie grpc für Milvus konfigurieren.'
   <tbody>
     <tr>
       <td>        Sekunde, Wartezeit für die Beendigung von Graceful Stop    </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

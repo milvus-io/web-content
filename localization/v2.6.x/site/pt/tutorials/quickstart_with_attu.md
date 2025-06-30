@@ -6,7 +6,7 @@ summary: >-
   permite interagir facilmente com as suas bases de dados. Com apenas alguns
   cliques, pode visualizar o estado do seu cluster, gerir metadados, efetuar
   consultas de dados e muito mais.
-title: Sistema de resposta a perguntas
+title: Início rápido com o Attu - a interface Web do Milvus
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Início rápido com o Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -197,12 +197,12 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>O Attu fornece uma interface poderosa para visualizar e explorar relações de dados. Para examinar os pontos de dados inseridos e suas relações de similaridade, siga estas etapas:</p>
-<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>Realizar uma pesquisa</strong></h3><p>Navegue até a guia <strong>Pesquisa de vetor</strong> no Attu.</p>
+<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>Realizar uma pesquisa</strong></h3><p>Navegue até a guia <strong>Pesquisa de Vetor</strong> no Attu.</p>
 <ol>
 <li>Clique no botão <strong>Gerar dados aleatórios</strong> para criar consultas de teste.</li>
 <li>Clique em <strong>Pesquisar</strong> para obter resultados com base nos dados gerados.</li>
 </ol>
-<p>Os resultados são apresentados numa tabela, mostrando IDs, pontuações de semelhança e campos dinâmicos para cada entidade correspondente.</p>
+<p>Os resultados são apresentados numa tabela, mostrando IDs, pontuações de similaridade e campos dinâmicos para cada entidade correspondente.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>

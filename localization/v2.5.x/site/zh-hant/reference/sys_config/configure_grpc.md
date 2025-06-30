@@ -44,7 +44,7 @@ summary: 了解如何為 Milvus 設定 grpc。
   <tbody>
     <tr>
       <td>        秒，等待優化停止完成的時間      </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

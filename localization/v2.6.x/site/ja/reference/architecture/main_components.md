@@ -35,13 +35,13 @@ title: 主要コンポーネント
         ></path>
       </svg>
     </button></h2><ul>
-<li>コーディネータ: クラスタごとに1つ</li>
-<li>プロキシ: クラスタあたり1つ以上</li>
-<li>ストリーミングノード: クラスタごとに1つ以上</li>
-<li>クエリノード: クラスタごとに1つ以上</li>
-<li>データノード: クラスタごとに1つ以上</li>
+<li>Coordinator:高可用性を実現するためにマスタースレーブモードを有効にすることができる。</li>
+<li>プロキシ：クラスタごとに1つ以上</li>
+<li>Streaming Node: クラスタあたり1つ以上</li>
+<li>クエリノード: クラスタあたり1つ以上</li>
+<li>データノード：クラスタごとに1つ以上</li>
 </ul>
-<h2 id="Third-party-dependencies" class="common-anchor-header">サードパーティの依存関係<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
+<h2 id="Third-party-dependencies" class="common-anchor-header">サードパーティ依存<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,5 +106,5 @@ title: 主要コンポーネント
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvusの仕組みと設計原理を理解するには、<a href="/docs/ja/v2.6.x/four_layers.md">コンピューティング/ストレージ分散を</a>お読みください。</li>
+<li>Milvusの仕組みと設計原理を理解するには、<a href="/docs/ja/four_layers.md">コンピューティング/ストレージ分散を</a>お読みください。</li>
 </ul>

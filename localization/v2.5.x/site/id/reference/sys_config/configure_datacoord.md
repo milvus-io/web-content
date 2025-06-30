@@ -611,6 +611,68 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordsealPolicychannelblockingL0EntryNum" class="common-anchor-header"><code translate="no">dataCoord.sealPolicy.channel.blockingL0EntryNum</code><button data-href="#dataCoordsealPolicychannelblockingL0EntryNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.sealPolicy.channel.blockingL0EntryNum">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Jika jumlah entri total l0 log dari setiap pecahan </li>      
+        <li>melebihi ambang batas ini, segmen yang tumbuh paling awal akan disegel.</li>      </td>
+      <td>5000000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordsealPolicychannelblockingL0SizeInMB" class="common-anchor-header"><code translate="no">dataCoord.sealPolicy.channel.blockingL0SizeInMB</code><button data-href="#dataCoordsealPolicychannelblockingL0SizeInMB" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.sealPolicy.channel.blockingL0SizeInMB">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Ambang batas ukuran dalam MB, jika jumlah entri total l0 log dari setiap pecahan </li>      
+        <li>melebihi ambang batas ini, segmen yang tumbuh paling awal akan disegel.</li>      </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordautoUpgradeSegmentIndex" class="common-anchor-header"><code translate="no">dataCoord.autoUpgradeSegmentIndex</code><button data-href="#dataCoordautoUpgradeSegmentIndex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -636,7 +698,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>        apakah mengupgrade indeks segmen secara otomatis ke versi mesin indeks      </td>
-      <td>salah</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -848,6 +910,35 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     <tr>
       <td>        Interval waktu dalam detik untuk pemadatan gc  </td>
       <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionscheduleInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.scheduleInterval</code><button data-href="#dataCoordcompactionscheduleInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.scheduleInterval">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Interval waktu dalam milidetik untuk penjadwalan tugas pemadatan. Jika pengaturan konfigurasi di bawah 100ms, maka akan disesuaikan ke atas hingga 100ms     </td>
+      <td>500</td>
     </tr>
   </tbody>
 </table>
@@ -2185,6 +2276,209 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordslotindexTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.indexTaskSlotUsage</code><button data-href="#dataCoordslotindexTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.indexTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        penggunaan slot dari tugas indeks per 512mb     </td>
+      <td>64</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotstatsTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.statsTaskSlotUsage</code><button data-href="#dataCoordslotstatsTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.statsTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        penggunaan slot tugas statistik per 512mb     </td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordslotanalyzeTaskSlotUsage" class="common-anchor-header"><code translate="no">dataCoord.slot.analyzeTaskSlotUsage</code><button data-href="#dataCoordslotanalyzeTaskSlotUsage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.slot.analyzeTaskSlotUsage">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        penggunaan slot tugas analisis      </td>
+      <td>65535</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonStatsTriggerCount" class="common-anchor-header"><code translate="no">dataCoord.jsonStatsTriggerCount</code><button data-href="#dataCoordjsonStatsTriggerCount" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonStatsTriggerCount">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        jumlah tugas statistik jsonkey per pemicu      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonStatsTriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.jsonStatsTriggerInterval</code><button data-href="#dataCoordjsonStatsTriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonStatsTriggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        interval tugas jsonkey per pemicu      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordenabledJSONKeyStatsInSort" class="common-anchor-header"><code translate="no">dataCoord.enabledJSONKeyStatsInSort</code><button data-href="#dataCoordenabledJSONKeyStatsInSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.enabledJSONKeyStatsInSort">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Menunjukkan apakah akan mengaktifkan tugas statistik kunci JSON dengan pengurutan      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordjsonKeyStatsMemoryBudgetInTantivy" class="common-anchor-header"><code translate="no">dataCoord.jsonKeyStatsMemoryBudgetInTantivy</code><button data-href="#dataCoordjsonKeyStatsMemoryBudgetInTantivy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.jsonKeyStatsMemoryBudgetInTantivy">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        anggaran memori untuk indeks JSON Di Tantivy, satuannya adalah byte    </td>
+      <td>16777216</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordip" class="common-anchor-header"><code translate="no">dataCoord.ip</code><button data-href="#dataCoordip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -2209,7 +2503,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Alamat TCP/IP dari dataCoord. Jika tidak ditentukan, gunakan alamat pertama yang dapat disiarkan      </td>
+      <td>        Alamat TCP/IP dari dataCoord. Jika tidak ditentukan, gunakan alamat pertama yang dapat di-unicast      </td>
       <td></td>
     </tr>
   </tbody>

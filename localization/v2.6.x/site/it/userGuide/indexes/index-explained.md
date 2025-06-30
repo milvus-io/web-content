@@ -49,31 +49,68 @@ summary: >-
      <th><p>Tipi di indice applicabili</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>VETTORE_FIAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VETTORE</p></li><li><p>INT8_VETTORE</p></li></ul></td>
-     <td><ul><li><p>PIATTO</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>VETTORE_FIAT</p></li>
+<li><p>VETTORE_FLAT16</p></li>
+<li><p>BFLOAT16_VETTORE</p></li>
+<li><p>INT8_VETTORE</p></li>
+</ul></td>
+     <td><ul>
+<li><p>PIATTO</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>VETTORE BINARIO</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
-     <td><p>VETTORE_FLAT SPARSE</p></td>
-     <td><p>INDICE SPARSO_INVERTITO</p></td>
+     <td><p>VETTORE_FLOAT_SPARSO</p></td>
+     <td><p>INDICE SPARSE_INVERTITO</p></td>
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTITO (consigliato)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTITO (consigliato)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (consigliato)</li><li>INVERTITO</li></ul></td>
+     <td><ul>
+<li>BITMAP (consigliato)</li>
+<li>INVERTITO</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>INVERTITO</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>INVERTITO</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FIORITO</li><li>DOPPIO</li></ul></td>
+     <td><ul>
+<li>FIORITO</li>
+<li>DOPPIO</li>
+</ul></td>
      <td><p>INVERTITO</p></td>
    </tr>
    <tr>
@@ -176,7 +213,7 @@ summary: >-
 <li><p>Per una ricerca con un top-K elevato (rispetto al numero totale di incorporazioni vettoriali), le varianti IVF sono una scelta migliore rispetto ai tipi di indice basati su grafi.</p></li>
 <li><p>Per una ricerca con un top-K medio e un elevato rapporto di filtraggio, le varianti FIV sono la scelta migliore.</p></li>
 </ul>
-<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matrice decisionale: Scelta del tipo di indice più appropriato</h3><p>La tabella seguente è una matrice decisionale a cui fare riferimento per la scelta del tipo di indice più appropriato.</p>
+<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matrice decisionale: Scelta del tipo di indice più appropriato</h3><p>La seguente tabella è una matrice decisionale a cui fare riferimento per la scelta del tipo di indice più appropriato.</p>
 <table>
    <tr>
      <th><p>Scenario</p></th>
@@ -267,7 +304,7 @@ summary: >-
 <td><p>11,0 MB</p></td>
 </tr>
 <tr>
-<td><p>FIV-PQ + 10% di raffinamento grezzo</p></td>
+<td><p>FIV-PQ + 10% di raffinazione grezza</p></td>
 <td><p>1,0 MB + 2,0 MB + 8,0 MB + 51,2 MB</p></td>
 <td><p>62,2 MB</p></td>
 </tr>

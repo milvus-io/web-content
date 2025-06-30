@@ -7,9 +7,9 @@ summary: >-
   соседей. Индекс ускоряет поиск, но требует дополнительного времени на
   предварительную обработку, места и оперативной памяти во время поиска. Кроме
   того, использование индекса обычно снижает коэффициент запоминания (хотя этот
-  эффект и незначителен, но все же имеет значение). Поэтому в этой статье
-  рассказывается о том, как минимизировать затраты на использование индекса и
-  при этом получить максимальную выгоду.
+  эффект и незначителен, но все же имеет значение). Поэтому в этой статье мы
+  расскажем, как минимизировать затраты на использование индекса и при этом
+  получить максимальную выгоду.
 ---
 <h1 id="Index-Explained" class="common-anchor-header">Объяснение индекса<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,12 +50,31 @@ summary: >-
      <th><p>Применяемые типы индексов</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_ВЕКТОР</p></li></ul></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>BFLOAT16_VECTOR</p></li>
+<li><p>INT8_ВЕКТОР</p></li>
+</ul></td>
+     <td><ul>
+<li><p>FLAT</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>БИНАРНЫЙ_ВЕКТОР</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>РАЗРЕЖЕННЫЙ_ПЛОСКИЙ_ВЕКТОР</p></td>
@@ -63,18 +82,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>ИНВЕРТИРОВАННЫЙ (Рекомендуется)</p></li><li><p>BITMAP</p></li><li><p>Тройка</p></li></ul></td>
+     <td><ul>
+<li><p>ИНВЕРТИРОВАННЫЙ (Рекомендуется)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Тройка</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (рекомендуется)</li><li>ИНВЕРТИРОВАННЫЙ</li></ul></td>
+     <td><ul>
+<li>BITMAP (рекомендуется)</li>
+<li>ИНВЕРТИРОВАННЫЙ</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>ИНВЕРТИРОВАННЫЙ</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>ИНВЕРТИРОВАННЫЙ</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>ИНВЕРТИРОВАННЫЙ</p></td>
    </tr>
    <tr>
@@ -107,7 +144,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Как показано на диаграмме ниже, тип индекса в Milvus состоит из трех основных компонентов, а именно: <strong>структуры данных</strong>, <strong>квантования</strong> и <strong>уточнителя</strong>. Квантование и рафинер необязательны, но широко используются из-за значительного баланса "выгода-лучше-чем-затраты".</p>
+    </button></h2><p>Как показано на диаграмме ниже, тип индекса в Milvus состоит из трех основных компонентов, а именно: <strong>структуры данных</strong>, <strong>квантования</strong> и <strong>уточнителя</strong>. Квантование и рафинер необязательны, но широко используются из-за значительного баланса выгоды-лучше-чем-затраты.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />

@@ -40,9 +40,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Time-to-Live (TTL) wird in Datenbanken häufig für Szenarien verwendet, in denen Daten nur für einen bestimmten Zeitraum nach dem Einfügen oder Ändern gültig oder zugänglich bleiben sollen. Danach können die Daten automatisch entfernt werden.</p>
-<p>Wenn Sie beispielsweise täglich Daten einspielen, aber nur 14 Tage lang Datensätze aufbewahren müssen, können Sie Milvus so konfigurieren, dass alle Daten, die älter sind als dieser Zeitraum, automatisch entfernt werden, indem Sie die TTL der Sammlung auf <strong>14 × 24 × 3600 = 1209600</strong> Sekunden einstellen. Dadurch wird sichergestellt, dass nur die Daten der letzten 14 Tage in der Sammlung verbleiben.</p>
+<p>Wenn Sie beispielsweise täglich Daten einspielen, aber nur 14 Tage lang Datensätze aufbewahren müssen, können Sie Milvus so konfigurieren, dass alle Daten, die älter sind als diese, automatisch entfernt werden, indem Sie die TTL der Sammlung auf <strong>14 × 24 × 3600 = 1209600</strong> Sekunden einstellen. Dadurch wird sichergestellt, dass nur die Daten der letzten 14 Tage in der Sammlung verbleiben.</p>
+<div class="alert note">
+<p>Abgelaufene Entitäten erscheinen nicht in den Such- oder Abfrageergebnissen. Sie können jedoch bis zur nächsten Datenverdichtung im Speicher verbleiben, die innerhalb der nächsten 24 Stunden durchgeführt werden sollte.</p>
+<p>Sie können steuern, wann die Datenverdichtung ausgelöst werden soll, indem Sie in Ihrer Milvus-Konfigurationsdatei den Konfigurationspunkt <code translate="no">dataCoord.compaction.expiry.tolerance</code> setzen.</p>
+<p>Der Standardwert für dieses Konfigurationselement ist <code translate="no">-1</code>, was bedeutet, dass das bestehende Datenverdichtungsintervall gilt. Wenn Sie den Wert jedoch auf eine positive ganze Zahl wie <code translate="no">12</code> ändern, wird die Datenverdichtung die angegebene Anzahl von Stunden nach Ablauf der Entitäten ausgelöst.</p>
+</div>
 <p>Die TTL-Eigenschaft in einer Milvus-Sammlung wird als ganze Zahl in Sekunden angegeben. Einmal festgelegt, werden alle Daten, die ihre TTL überschreiten, automatisch aus der Sammlung gelöscht.</p>
-<p>Da der Löschvorgang asynchron abläuft, werden die Daten möglicherweise nicht genau dann aus den Suchergebnissen entfernt, wenn die angegebene TTL verstrichen ist. Stattdessen kann es zu einer Verzögerung kommen, da die Entfernung von der Garbage Collection (GC) und den Verdichtungsprozessen abhängt, die in nicht-deterministischen Intervallen stattfinden.</p>
+<p>Da der Löschvorgang asynchron erfolgt, werden die Daten möglicherweise nicht genau dann aus den Suchergebnissen entfernt, wenn die angegebene TTL abgelaufen ist. Stattdessen kann es zu einer Verzögerung kommen, da die Entfernung von der Garbage Collection (GC) und den Verdichtungsprozessen abhängt, die in nicht-deterministischen Intervallen stattfinden.</p>
 <h2 id="Set-TTL" class="common-anchor-header">TTL setzen<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

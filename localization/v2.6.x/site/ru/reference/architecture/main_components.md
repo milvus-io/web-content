@@ -35,13 +35,13 @@ title: Основные компоненты
         ></path>
       </svg>
     </button></h2><ul>
-<li>Координатор: ровно один на кластер</li>
+<li>Координатор: для обеспечения высокой доступности может быть включен режим master-slave.</li>
 <li>Прокси: один или несколько на кластер</li>
 <li>Узел потоковой передачи: один или несколько на кластер</li>
 <li>Узел запросов: один или несколько на кластер</li>
 <li>Узел данных: один или несколько на кластер</li>
 </ul>
-<h2 id="Third-party-dependencies" class="common-anchor-header">Сторонние зависимости<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
+<h2 id="Third-party-dependencies" class="common-anchor-header">Зависимости от сторонних производителей<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,5 +106,5 @@ title: Основные компоненты
         ></path>
       </svg>
     </button></h2><ul>
-<li>Прочитайте раздел <a href="/docs/ru/v2.6.x/four_layers.md">"Распределение вычислений/хранилищ"</a>, чтобы понять механизм и принцип работы Milvus.</li>
+<li>Прочитайте раздел <a href="/docs/ru/four_layers.md">"Распределение вычислений/хранилищ"</a>, чтобы понять механизм и принцип работы Milvus.</li>
 </ul>

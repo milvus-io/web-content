@@ -63,7 +63,7 @@ title: 使用 Milvus 进行文本到图像搜索
 <ul>
 <li><p><strong>Milvus Lite（为方便起见推荐使用）</strong>：将 URI 设置为本地文件，如 ./milvus.db。这会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在一个文件中。</p></li>
 <li><p><strong>Docker 或 Kubernetes（用于大规模数据）</strong>：要处理更大的数据集，可使用<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 部署性能更强的 Milvus 服务器。在这种情况下，请使用服务器 URI（如 http://localhost:19530）进行连接。</p></li>
-<li><p><strong>Zilliz Cloud（托管服务）</strong>：如果使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务），请将公共端点设为 URI，将 API Key 设为令牌。</p></li>
+<li><p><strong>Zilliz Cloud（托管服务）</strong>：如果您使用的是<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务），请将公共端点设为 URI，将 API Key 设为令牌。</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 

@@ -95,6 +95,35 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsforceDenyAllDDL" class="common-anchor-header"><code translate="no">quotaAndLimits.forceDenyAllDDL</code><button data-href="#quotaAndLimitsforceDenyAllDDL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.forceDenyAllDDL">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        صواب لفرض رفض جميع طلبات DDL، وخطأ للسماح.      </td>
+      <td>خطأ</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitslimitsallocRetryTimes" class="common-anchor-header"><code translate="no">quotaAndLimits.limits.allocRetryTimes</code><button data-href="#quotaAndLimitslimitsallocRetryTimes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,7 +148,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        أوقات إعادة المحاولة عند فشل حذف بيانات إعادة توجيه التخصيص من حد المعدل      </td>
+      <td>        مرات إعادة المحاولة عند فشل حذف بيانات إعادة توجيه التخصيص من حد المعدل      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -748,6 +777,68 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsdbRateenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.enabled</code><button data-href="#quotaAndLimitsdbRateenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.enabled">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        ما إذا تم تمكين اختناق طلب قاعدة البيانات      </td>
+      <td>خطأ</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitsdbRatemax" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.max</code><button data-href="#quotaAndLimitsdbRatemax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.max">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>الحد الأقصى لعدد الطلبات المتعلقة بقاعدة البيانات في الثانية.</li>      
+        <li>يشير تعيين هذا العنصر إلى 10 إلى أن Milvus لا يعالج أكثر من 10 طلبات متعلقة بمصرف البيانات في الثانية، بما في ذلك طلبات إنشاء/إسقاط/تعديل قاعدة البيانات.</li>      
+        <li>لاستخدام هذا الإعداد، قم بتعيين quotaAndLimits.dbRate.dbRate.enabled إلى صواب في نفس الوقت.</li>      
+        <li>        </li>      </td>
+      <td>-1</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitsdmlenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dml.enabled</code><button data-href="#quotaAndLimitsdmlenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -772,7 +863,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        سواء تم تمكين اختناق طلب DML أم لا.      </td>
+      <td>        ما إذا كان يتم تمكين اختناق طلبات DML.      </td>
       <td>خطأ</td>
     </tr>
   </tbody>
@@ -1551,7 +1642,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false تعني السماح بطلبات dml (باستثناء بعض</li>      
+        <li>forceDeny false تعني أن طلبات dml مسموح بها (باستثناء بعض</li>      
         <li>شروط محددة، مثل ذاكرة العقد لعلامة الماء)، صحيح يعني رفض جميع طلبات dml دائمًا.</li>      </td>
       <td>خاطئة</td>
     </tr>
@@ -1704,7 +1795,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1]، مستوى الماء المنخفض للذاكرة في عقد الاستعلام      </td>
+      <td>        (0، 1]، مستوى الماء المنخفض للذاكرة في عقد الاستعلام      </td>
       <td>0.85</td>
     </tr>
   </tbody>

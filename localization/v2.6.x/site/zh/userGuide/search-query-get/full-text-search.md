@@ -22,7 +22,7 @@ summary: >-
     </button></h1><p>全文搜索是一种在文本数据集中检索包含特定术语或短语的文档，然后根据相关性对结果进行排序的功能。该功能克服了语义搜索的局限性（语义搜索可能会忽略精确的术语），确保您获得最准确且与上下文最相关的结果。此外，它还通过接受原始文本输入来简化向量搜索，自动将您的文本数据转换为稀疏嵌入，而无需手动生成向量嵌入。</p>
 <p>该功能使用 BM25 算法进行相关性评分，在检索增强生成 (RAG) 场景中尤为重要，它能优先处理与特定搜索词密切匹配的文档。</p>
 <div class="alert note">
-<p>通过将全文检索与基于语义的密集向量搜索相结合，可以提高搜索结果的准确性和相关性。更多信息，请参阅<a href="/docs/zh/v2.6.x/multi-vector-search.md">混合搜索</a>。</p>
+<p>通过将全文检索与基于语义的密集向量搜索相结合，可以提高搜索结果的准确性和相关性。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ summary: >-
     </button></h2><p>全文搜索无需手动嵌入，从而简化了基于文本的搜索过程。该功能通过以下工作流程进行操作符：</p>
 <ol>
 <li><p><strong>文本输入</strong>：插入原始文本文档或提供查询文本，无需手动嵌入。</p></li>
-<li><p><strong>文本分析</strong>：Milvus 使用<a href="/docs/zh/v2.6.x/analyzer-overview.md">分析器</a>将输入文本标记为可搜索的单个术语。</p></li>
+<li><p><strong>文本分析</strong>：Milvus 使用<a href="/docs/zh/analyzer-overview.md">分析器</a>将输入文本标记为可搜索的单个术语。</p></li>
 <li><p><strong>函数处理</strong>：内置函数接收标记化术语，并将其转换为稀疏向量表示。</p></li>
 <li><p><strong>Collections 存储</strong>：Milvus 将这些稀疏嵌入存储在 Collections 中，以便高效检索。</p></li>
 <li><p><strong>BM25 评分</strong>：在搜索过程中，Milvus 应用 BM25 算法为存储的文档计算分数，并根据与查询文本的相关性对匹配结果进行排序。</p></li>
@@ -53,9 +53,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>全文搜索</span> </span></p>
 <p>要使用全文搜索，请遵循以下主要步骤：</p>
 <ol>
-<li><p><a href="/docs/zh/v2.6.x/full-text-search.md#Create-a-collection-for-full-text-search">创建 Collections</a>：设置带有必要字段的 Collections，并定义一个函数将原始文本转换为稀疏嵌入。</p></li>
-<li><p><a href="/docs/zh/v2.6.x/full-text-search.md#Insert-text-data">插入数据</a>：将原始文本文档输入 Collections。</p></li>
-<li><p><a href="/docs/zh/v2.6.x/full-text-search.md#Perform-full-text-search">执行搜索</a>：使用查询文本搜索你的 Collections 并检索相关结果。</p></li>
+<li><p><a href="/docs/zh/full-text-search.md#Create-a-collection-for-full-text-search">创建 Collections</a>：设置带有必要字段的 Collections，并定义一个将原始文本转换为稀疏嵌入的函数。</p></li>
+<li><p><a href="/docs/zh/full-text-search.md#Insert-text-data">插入数据</a>：将原始文本文档输入 Collections。</p></li>
+<li><p><a href="/docs/zh/full-text-search.md#Perform-full-text-search">执行搜索</a>：使用查询文本搜索你的 Collections 并检索相关结果。</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">创建用于全文搜索的 Collections<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -208,8 +208,8 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <p>在此配置中</p>
 <ul>
-<li><p><code translate="no">id</code>: 作为主键，由<code translate="no">auto_id=True</code> 自动生成。</p></li>
-<li><p><code translate="no">text</code>:存储原始文本数据，用于全文搜索操作。数据类型必须是<code translate="no">VARCHAR</code> ，因为<code translate="no">VARCHAR</code> 是 Milvus 用于文本存储的字符串数据类型。设置<code translate="no">enable_analyzer=True</code> 以允许 Milvus 对文本进行标记化。默认情况下，Milvus 使用<code translate="no">standard</code><a href="/docs/zh/v2.6.x/standard-analyzer.md"> 分析器</a>进行文本分析。要配置不同的分析器，请参阅<a href="/docs/zh/v2.6.x/analyzer-overview.md">分析器概述</a>。</p></li>
+<li><p><code translate="no">id</code>: 作为主键，并通过<code translate="no">auto_id=True</code> 自动生成。</p></li>
+<li><p><code translate="no">text</code>:存储原始文本数据，用于全文搜索操作。数据类型必须是<code translate="no">VARCHAR</code> ，因为<code translate="no">VARCHAR</code> 是 Milvus 用于文本存储的字符串数据类型。设置<code translate="no">enable_analyzer=True</code> 以允许 Milvus 对文本进行标记化。默认情况下，Milvus 使用<code translate="no">standard</code><a href="/docs/zh/standard-analyzer.md"> 分析器</a>进行文本分析。要配置不同的分析器，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>。</p></li>
 <li><p><code translate="no">sparse</code>矢量字段：用于存储内部生成的稀疏嵌入的矢量字段，以进行全文搜索操作。数据类型必须是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 </ul>
 <p>现在，定义一个将文本转换为稀疏向量表示的函数，然后将其添加到 Schema 中：</p>
@@ -290,7 +290,7 @@ schema.WithFunction(function)
 <table>
    <tr>
      <th><p>参数</p></th>
-     <th><p>参数</p></th>
+     <th><p>说明</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
@@ -332,21 +332,35 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
+Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+fvParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+fvParams.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+fvParams.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.BM25)
+        .extraParams(params)
         .build());    
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
     index.NewAutoIndex(entity.MetricType(entity.BM25)))
+    .WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
+    .WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
+    .WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">params</span>: {
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>
+    }
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
@@ -354,7 +368,12 @@ indexes.add(IndexParam.builder()
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
+            &quot;params&quot;:{
+               &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
+               &quot;bm25_k1&quot;: 1.2,
+               &quot;bm25_b&quot;: 0.75
+            }
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -369,7 +388,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>要创建的索引类型。<code translate="no">AUTOINDEX</code> 允许 Milvus 自动优化索引设置。如果需要对索引设置进行更多控制，可以从 Milvus 中稀疏向量可用的各种索引类型中进行选择。更多信息，请参阅<a href="/docs/zh/v2.6.x/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</p></td>
+     <td><p>要创建的索引类型。<code translate="no">AUTOINDEX</code> 允许 Milvus 自动优化索引设置。如果需要对索引设置进行更多控制，可以从 Milvus 中稀疏向量可用的各种索引类型中进行选择。更多信息，请参阅<a href="/docs/zh/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -385,7 +404,7 @@ indexes.add(IndexParam.builder()
 <ul>
 <li><p><code translate="no">"DAAT_MAXSCORE"</code> (默认）：使用 MaxScore 算法优化的一次文档 (DAAT) 查询处理。MaxScore 通过跳过可能影响最小的术语和文档，为高<em>k</em>值或包含大量术语的查询提供更好的性能。为此，它根据最大影响分值将术语划分为基本组和非基本组，并将重点放在对前 k 结果有贡献的术语上。</p></li>
 <li><p><code translate="no">"DAAT_WAND"</code>:使用 WAND 算法优化 DAAT 查询处理。WAND 算法利用最大影响分数跳过非竞争性文档，从而评估较少的命中文档，但每次命中的开销较高。这使得 WAND 对于<em>k</em>值较小的查询或较短的查询更有效，因为在这些情况下跳过更可行。</p></li>
-<li><p><code translate="no">"TAAT_NAIVE"</code>:基本术语一次查询处理（TAAT）。虽然与<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比速度较慢，但<code translate="no">TAAT_NAIVE</code> 具有独特的优势。DAAT 算法使用的是缓存的最大影响分数，无论全局 Collections 参数（avgdl）如何变化，这些分数都保持静态，而<code translate="no">TAAT_NAIVE</code> 不同，它能动态地适应这种变化。</p></li>
+<li><p><code translate="no">"TAAT_NAIVE"</code>:基本术语一次查询处理（TAAT）。虽然与<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比速度较慢，但<code translate="no">TAAT_NAIVE</code> 具有独特的优势。DAAT 算法使用的是缓存的最大影响分数，无论全局 Collections 参数（avgdl）如何变化，这些分数都是静态的，而<code translate="no">TAAT_NAIVE</code> 不同，它能动态地适应这种变化。</p></li>
 </ul></td>
    </tr>
    <tr>
@@ -616,7 +635,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>搜索过程中要忽略的低重要性词的比例。详情请参阅<a href="/docs/zh/v2.6.x/sparse_vector.md">稀疏向量</a>。</p></td>
+     <td><p>搜索过程中要忽略的低重要性词的比例。详情请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
@@ -628,7 +647,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>在搜索结果中返回的字段名列表。支持<strong>除</strong>包含 BM25 生成的 Embeddings 的<strong>稀疏向量字段外的</strong>所有字段。常见的输出字段包括主键字段（如<code translate="no">id</code> ）和原始文本字段（如<code translate="no">text</code> ）。更多信息请参阅<a href="/docs/zh/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">常见问题</a>。</p></td>
+     <td><p>在搜索结果中返回的字段名列表。支持<strong>除</strong>包含 BM25 生成的 Embeddings 的<strong>稀疏向量字段外的</strong>所有字段。常见的输出字段包括主键字段（如<code translate="no">id</code> ）和原始文本字段（如<code translate="no">text</code> ）。更多信息请参阅<a href="/docs/zh/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">常见问题</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -689,4 +708,4 @@ client.search(
 <li><p>使用手动稀疏向量操作符代替全文搜索</p></li>
 <li><p>为自定义稀疏向量工作流程创建单独的 Collections</p></li>
 </ul>
-<p>详情请参考<a href="/docs/zh/v2.6.x/sparse_vector.md">稀疏向量</a>。</p>
+<p>详情请参考<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>

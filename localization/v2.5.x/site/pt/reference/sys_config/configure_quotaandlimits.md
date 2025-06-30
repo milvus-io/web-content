@@ -95,6 +95,35 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsforceDenyAllDDL" class="common-anchor-header"><code translate="no">quotaAndLimits.forceDenyAllDDL</code><button data-href="#quotaAndLimitsforceDenyAllDDL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.forceDenyAllDDL">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor predefinido</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        true para forçar a recusa de todos os pedidos DDL, false para permitir.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitslimitsallocRetryTimes" class="common-anchor-header"><code translate="no">quotaAndLimits.limits.allocRetryTimes</code><button data-href="#quotaAndLimitslimitsallocRetryTimes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,7 +143,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor predefinido</th> 
+      <th class="width20">Valor por defeito</th> 
     </tr>
   </thead>
   <tbody>
@@ -148,7 +177,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        duração do tempo de espera da repetição quando a taxa de envio de dados da atribuição falhou, em milissegundos      </td>
+      <td>        duração do tempo de espera da repetição quando a taxa de transmissão de dados da atribuição falhou, em milissegundos      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -322,7 +351,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Se a limitação dos pedidos DDL está activada.      </td>
+      <td>        Se a limitação de pedidos DDL está activada.      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -595,7 +624,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
       <td>
         <li>Número máximo de pedidos de descarga por segundo.</li>      
         <li>Se este item for definido como 10, indica que o Milvus não processa mais de 10 pedidos de descarga por segundo.</li>      
-        <li>Para utilizar esta definição, defina quotaAndLimits.flushRate.enabled para true ao mesmo tempo.</li>      </td>
+        <li>Para usar esta definição, defina quotaAndLimits.flushRate.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -748,6 +777,68 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsdbRateenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.enabled</code><button data-href="#quotaAndLimitsdbRateenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Se a limitação dos pedidos de BD está activada      </td>
+      <td>falso</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitsdbRatemax" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.max</code><button data-href="#quotaAndLimitsdbRatemax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.max">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Número máximo de pedidos relacionados com a base de dados por segundo.</li>      
+        <li>Definir este item como 10 indica que o Milvus não processa mais de 10 pedidos relacionados com a base de dados por segundo, incluindo pedidos de criação/saída/alteração de base de dados.</li>      
+        <li>Para usar esta configuração, defina quotaAndLimits.dbRate.enabled para true ao mesmo tempo.</li>      
+        <li>        </li>      </td>
+      <td>-1</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitsdmlenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dml.enabled</code><button data-href="#quotaAndLimitsdmlenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -767,12 +858,12 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Se a limitação dos pedidos DML está activada.      </td>
+      <td>        Se a limitação de pedidos DML está activada.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1102,7 +1193,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Taxa máxima de eliminação de dados por segundo.</li>      
-        <li>Definir este item como 0,1 indica que o Milvus só permite a eliminação de dados de qualquer coleção a uma velocidade de 0,1 MB/s.</li>      
+        <li>Definir este item como 0,1 indica que o Milvus só permite a eliminação de dados de qualquer coleção a uma taxa de 0,1 MB/s.</li>      
         <li>Para usar esta configuração, defina quotaAndLimits.dml.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -1308,7 +1399,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Número máximo de vectores a pesquisar por segundo.</li>      
-        <li>Definir este item como 100 indica que o Milvus só permite a pesquisa de 100 vectores por segundo, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
+        <li>Definir este item para 100 indica que o Milvus só permite a pesquisa de 100 vectores por segundo, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
         <li>Para usar esta configuração, defina quotaAndLimits.dql.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -1939,7 +2030,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        para ativar a quota de contagem de linhas do segmento l0  </td>
+      <td>        switch para ativar a quota de contagem de linhas do segmento l0  </td>
       <td>falso</td>
     </tr>
   </tbody>

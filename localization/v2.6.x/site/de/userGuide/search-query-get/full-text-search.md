@@ -4,12 +4,12 @@ title: Volltextsuche
 summary: >-
   Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen
   oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz
-  einstuft. Diese Funktion überwindet die Einschränkungen der semantischen
-  Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher,
-  dass Sie die genauesten und kontextrelevanten Ergebnisse erhalten. Darüber
-  hinaus vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und
-  Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass
-  Sie manuell Vektoreinbettungen erzeugen müssen.
+  einstuft. Diese Funktion überwindet die Beschränkungen der semantischen Suche,
+  bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie
+  die genauesten und kontextuell relevanten Ergebnisse erhalten. Darüber hinaus
+  vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und Ihre
+  Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie
+  manuell Vektoreinbettungen erzeugen müssen.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">Volltextsuche<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -29,7 +29,7 @@ summary: >-
     </button></h1><p>Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz einstuft. Diese Funktion überwindet die Beschränkungen der semantischen Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie die genauesten und kontextuell relevanten Ergebnisse erhalten. Darüber hinaus vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie manuell Vektoreinbettungen erstellen müssen.</p>
 <p>Durch die Verwendung des BM25-Algorithmus für die Relevanzbewertung ist diese Funktion besonders wertvoll in Retrieval-Augmented-Generating-Szenarien (RAG), bei denen Dokumente mit hoher Übereinstimmung mit bestimmten Suchbegriffen priorisiert werden.</p>
 <div class="alert note">
-<p>Durch die Integration der Volltextsuche mit der semantikbasierten dichten Vektorsuche können Sie die Genauigkeit und Relevanz der Suchergebnisse verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/multi-vector-search.md">Hybride Suche</a>.</p>
+<p>Durch die Integration der Volltextsuche mit der semantikbasierten dichten Vektorsuche können Sie die Genauigkeit und Relevanz der Suchergebnisse verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,9 +49,9 @@ summary: >-
     </button></h2><p>Die Volltextsuche vereinfacht den Prozess der textbasierten Suche, indem sie die Notwendigkeit der manuellen Einbettung eliminiert. Diese Funktion funktioniert über den folgenden Arbeitsablauf:</p>
 <ol>
 <li><p><strong>Texteingabe</strong>: Sie fügen Rohtextdokumente ein oder stellen Abfragetext bereit, ohne dass eine manuelle Einbettung erforderlich ist.</p></li>
-<li><p><strong>Text-Analyse</strong>: Milvus verwendet einen <a href="/docs/de/v2.6.x/analyzer-overview.md">Analysator</a>, um den eingegebenen Text in einzelne, durchsuchbare Begriffe zu zerlegen.</p></li>
+<li><p><strong>Text-Analyse</strong>: Milvus verwendet einen <a href="/docs/de/analyzer-overview.md">Analysator</a>, um den eingegebenen Text in einzelne, durchsuchbare Begriffe zu zerlegen.</p></li>
 <li><p><strong>Funktions-Verarbeitung</strong>: Die eingebaute Funktion empfängt tokenisierte Begriffe und wandelt sie in spärliche Vektordarstellungen um.</p></li>
-<li><p><strong>Sammlungsspeicher</strong>: Milvus speichert diese spärlichen Einbettungen in einer Sammlung zum effizienten Abruf.</p></li>
+<li><p><strong>Sammlungsspeicher</strong>: Milvus speichert diese spärlichen Einbettungen in einer Sammlung, um sie effizient abrufen zu können.</p></li>
 <li><p><strong>BM25-Bewertung</strong>: Während einer Suche wendet Milvus den BM25-Algorithmus an, um Scores für die gespeicherten Dokumente zu berechnen und die übereinstimmenden Ergebnisse nach ihrer Relevanz für den Abfragetext zu ordnen.</p></li>
 </ol>
 <p>
@@ -60,9 +60,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Volltextsuche</span> </span></p>
 <p>Um die Volltextsuche zu nutzen, führen Sie die folgenden Schritte aus:</p>
 <ol>
-<li><p><a href="/docs/de/v2.6.x/full-text-search.md#Create-a-collection-for-full-text-search">Erstellen Sie eine Sammlung</a>: Richten Sie eine Sammlung mit den erforderlichen Feldern ein und definieren Sie eine Funktion zur Umwandlung von Rohtext in Sparse Embeddings.</p></li>
-<li><p><a href="/docs/de/v2.6.x/full-text-search.md#Insert-text-data">Daten einfügen</a>: Fügen Sie Ihre Rohtextdokumente in die Sammlung ein.</p></li>
-<li><p><a href="/docs/de/v2.6.x/full-text-search.md#Perform-full-text-search">Suchen durchführen</a>: Verwenden Sie Abfragetexte, um Ihre Sammlung zu durchsuchen und relevante Ergebnisse zu erhalten.</p></li>
+<li><p><a href="/docs/de/full-text-search.md#Create-a-collection-for-full-text-search">Erstellen Sie eine Sammlung</a>: Richten Sie eine Sammlung mit den erforderlichen Feldern ein und definieren Sie eine Funktion zur Umwandlung von Rohtext in Sparse Embeddings.</p></li>
+<li><p><a href="/docs/de/full-text-search.md#Insert-text-data">Daten einfügen</a>: Fügen Sie Ihre Rohtextdokumente in die Sammlung ein.</p></li>
+<li><p><a href="/docs/de/full-text-search.md#Perform-full-text-search">Suchen durchführen</a>: Verwenden Sie Abfragetexte, um Ihre Sammlung zu durchsuchen und relevante Ergebnisse zu erhalten.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">Erstellen Sie eine Sammlung für die Volltextsuche<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -216,7 +216,7 @@ schema.WithField(entity.NewField().
 <p>In dieser Konfiguration,</p>
 <ul>
 <li><p><code translate="no">id</code>: dient als Primärschlüssel und wird automatisch mit <code translate="no">auto_id=True</code> generiert.</p></li>
-<li><p><code translate="no">text</code>: speichert Ihre Rohtextdaten für Volltextsuchvorgänge. Der Datentyp muss <code translate="no">VARCHAR</code> sein, da <code translate="no">VARCHAR</code> der Milvus-String-Datentyp für die Textspeicherung ist. Setzen Sie <code translate="no">enable_analyzer=True</code>, um Milvus die Tokenisierung des Textes zu erlauben. Standardmäßig verwendet Milvus den <code translate="no">standard</code><a href="/docs/de/v2.6.x/standard-analyzer.md"> Analysator</a> für die Textanalyse. Um einen anderen Analyzer zu konfigurieren, siehe <a href="/docs/de/v2.6.x/analyzer-overview.md">Analyzer-Übersicht</a>.</p></li>
+<li><p><code translate="no">text</code>: speichert Ihre Rohtextdaten für Volltextsuchvorgänge. Der Datentyp muss <code translate="no">VARCHAR</code> sein, da <code translate="no">VARCHAR</code> der Milvus-String-Datentyp für die Textspeicherung ist. Setzen Sie <code translate="no">enable_analyzer=True</code>, um Milvus die Tokenisierung des Textes zu erlauben. Standardmäßig verwendet Milvus den <code translate="no">standard</code><a href="/docs/de/standard-analyzer.md"> Analysator</a> für die Textanalyse. Um einen anderen Analyzer zu konfigurieren, siehe <a href="/docs/de/analyzer-overview.md">Analyzer-Übersicht</a>.</p></li>
 <li><p><code translate="no">sparse</code>Vektorfeld: Ein Vektorfeld, das für die Speicherung von intern generierten Sparse Embeddings für Volltextsuchoperationen reserviert ist. Der Datentyp muss <code translate="no">SPARSE_FLOAT_VECTOR</code> sein.</p></li>
 </ul>
 <p>Definieren Sie nun eine Funktion, die Ihren Text in Sparse-Vektor-Darstellungen umwandelt, und fügen Sie sie dann dem Schema hinzu:</p>
@@ -339,21 +339,35 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
+Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+fvParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+fvParams.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+fvParams.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.BM25)
+        .extraParams(params)
         .build());    
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
     index.NewAutoIndex(entity.MetricType(entity.BM25)))
+    .WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
+    .WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
+    .WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">params</span>: {
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>
+    }
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
@@ -361,7 +375,12 @@ indexes.add(IndexParam.builder()
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
+            &quot;params&quot;:{
+               &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
+               &quot;bm25_k1&quot;: 1.2,
+               &quot;bm25_b&quot;: 0.75
+            }
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -376,7 +395,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>Der Typ des zu erstellenden Indexes. <code translate="no">AUTOINDEX</code> ermöglicht es Milvus, die Indexeinstellungen automatisch zu optimieren. Wenn Sie mehr Kontrolle über Ihre Indexeinstellungen benötigen, können Sie aus verschiedenen Indextypen wählen, die für Sparse-Vektoren in Milvus verfügbar sind. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/index.md#Indexes-supported-in-Milvus">In Milvus unterstützte Indizes</a>.</p></td>
+     <td><p>Der Typ des zu erstellenden Indexes. <code translate="no">AUTOINDEX</code> ermöglicht es Milvus, die Indexeinstellungen automatisch zu optimieren. Wenn Sie mehr Kontrolle über Ihre Indexeinstellungen benötigen, können Sie aus verschiedenen Indextypen wählen, die für Sparse-Vektoren in Milvus verfügbar sind. Weitere Informationen finden Sie unter <a href="/docs/de/index.md#Indexes-supported-in-Milvus">In Milvus unterstützte Indizes</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -623,11 +642,11 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Anteil der Begriffe mit geringer Bedeutung, die bei der Suche ignoriert werden sollen. Für Details siehe <a href="/docs/de/v2.6.x/sparse_vector.md">Sparse Vector</a>.</p></td>
+     <td><p>Anteil der Begriffe mit geringer Bedeutung, die bei der Suche ignoriert werden sollen. Für Details siehe <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>Roher Abfragetext in natürlicher Sprache. Milvus konvertiert Ihre Textabfrage automatisch in Sparse Vectors unter Verwendung der BM25-Funktion - geben Sie <strong>keine</strong> vorberechneten Vektoren an.</p></td>
+     <td><p>Roher Abfragetext in natürlicher Sprache. Milvus konvertiert Ihre Textabfrage automatisch in Sparse Vectors unter Verwendung der BM25-Funktion - stellen <strong>Sie keine</strong> vorberechneten Vektoren bereit.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
@@ -635,7 +654,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>Liste der Feldnamen, die in den Suchergebnissen zurückgegeben werden sollen. Unterstützt alle Felder <strong>mit Ausnahme des Feldes "Sparse Vector"</strong>, das BM25-generierte Einbettungen enthält. Übliche Ausgabefelder sind das Primärschlüsselfeld (z. B. <code translate="no">id</code>) und das ursprüngliche Textfeld (z. B. <code translate="no">text</code>). Weitere Informationen finden Sie in den <a href="/docs/de/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
+     <td><p>Liste der Feldnamen, die in den Suchergebnissen zurückgegeben werden sollen. Unterstützt alle Felder <strong>mit Ausnahme des Feldes "Sparse Vector"</strong>, das BM25-generierte Einbettungen enthält. Übliche Ausgabefelder sind das Primärschlüsselfeld (z. B. <code translate="no">id</code>) und das ursprüngliche Textfeld (z. B. <code translate="no">text</code>). Weitere Informationen finden Sie in den <a href="/docs/de/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -696,4 +715,4 @@ client.search(
 <li><p>Verwenden Sie manuelle Sparse-Vector-Operationen anstelle einer Volltextsuche</p></li>
 <li><p>Erstellen Sie separate Sammlungen für benutzerdefinierte Sparse-Vector-Workflows</p></li>
 </ul>
-<p>Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/sparse_vector.md">Sparse Vector</a>.</p>
+<p>Einzelheiten finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p>

@@ -23,7 +23,7 @@ title: 使用 Milvus 和 Camel 的檢索-擴充世代 (RAG)
 <p>本指南展示了如何使用 CAMEL 和 Milvus 建立一個檢索-增強生成 (RAG) 系統。</p>
 <p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示生成新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
 <p><a href="https://www.camel-ai.org/">CAMEL</a>是一個多重代理框架。<a href="https://milvus.io/">Milvus</a>是世界上最先進的開放原始碼向量資料庫，專門用於嵌入相似性搜尋和人工智能應用程式。</p>
-<p>在本筆記簿中，我們展示了 CAMEL Retrieve 模組在自訂方式和自動方式中的使用。我們也將展示如何結合<code translate="no">AutoRetriever</code> 與<code translate="no">ChatAgent</code> ，並透過<code translate="no">Function Calling</code> 進一步結合<code translate="no">AutoRetriever</code> 與<code translate="no">RolePlaying</code> 。</p>
+<p>在本筆記簿中，我們展示了 CAMEL Retrieve 模組在自訂和自動兩種方式中的用法。我們也將展示如何結合<code translate="no">AutoRetriever</code> 與<code translate="no">ChatAgent</code> ，並透過<code translate="no">Function Calling</code> 進一步結合<code translate="no">AutoRetriever</code> 與<code translate="no">RolePlaying</code> 。</p>
 <p>包括四個主要部分：</p>
 <ul>
 <li>自訂 RAG</li>
@@ -50,7 +50,7 @@ title: 使用 Milvus 和 Camel 的檢索-擴充世代 (RAG)
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> requests
@@ -78,7 +78,7 @@ response = requests.get(url)
         ></path>
       </svg>
     </button></h2><p>在本節中，我們將設定自訂的 RAG 管道，以<code translate="no">VectorRetriever</code> 為例。我們將設定<code translate="no">OpenAIEmbedding</code> 為嵌入模型，<code translate="no">MilvusStorage</code> 為其儲存空間。</p>
-<p>要設定 OpenAI 的嵌入，我們需要設定<code translate="no">OPENAI_API_KEY</code> 。</p>
+<p>要設定 OpenAI 的嵌入，我們需要在下面的<code translate="no">OPENAI_API_KEY</code> 設定。</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>匯入並設定嵌入實例：</p>
@@ -114,7 +114,7 @@ vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>我們使用整合的<code translate="no">Unstructured Module</code> 來將內容分割成小塊，內容會利用其<code translate="no">chunk_by_title</code> 功能自動分割，每個小塊的最大字元為 500 個字元，這是<code translate="no">OpenAIEmbedding</code> 的合適長度。分塊中的所有文字都會嵌入並儲存到向量儲存實例中，這需要一些時間，請稍候。</p>
+<p>我們使用整合的<code translate="no">Unstructured Module</code> 將內容分割成小塊，內容會利用其<code translate="no">chunk_by_title</code> 功能自動分割，每個小塊的最大字元為 500 個字元，這是<code translate="no">OpenAIEmbedding</code> 的合適長度。所有小塊中的文字都會被嵌入並儲存到向量儲存實例中，這需要一些時間，請稍候。</p>
 <pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -123,7 +123,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>現在我們可以透過查詢從向量儲存中擷取資訊。預設情況下，它會從 Cosine 類似度分數最高的前 1 個分塊中擷取文字內容，而類似度分數應高於 0.75，以確保擷取的內容與查詢相關。您也可以變更<code translate="no">top_k</code> 值。</p>
+<p>現在我們可以透過查詢從向量儲存中擷取資訊。預設情況下，它會擷取 Cosine 類似度分數最高的前 1 個 chunk 中的文字內容，而類似度分數應高於 0.75，以確保擷取的內容與查詢相關。您也可以變更<code translate="no">top_k</code> 值。</p>
 <p>傳回的字串清單包括</p>
 <ul>
 <li>相似度得分</li>
@@ -167,7 +167,7 @@ vector_retriever = VectorRetriever(
 <li>設定 Milvus 的遠端網址和 api 金鑰</li>
 <li>提供查詢</li>
 </ul>
-<p>自動 RAG 管道會為指定的內容輸入路徑建立集合，集合名稱會根據內容輸入路徑名稱自動設定，如果集合存在，則會直接進行擷取。</p>
+<p>自動 RAG 管道會為給定的內容輸入路徑建立集合，集合名稱會根據內容輸入路徑名稱自動設定，如果集合存在，則會直接執行擷取。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
@@ -198,7 +198,7 @@ Retrieved Context:
 {'similarity score': '0.8252888321876526', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 7}, 'text': ' Section 3.2, to simulate assistant-user cooperation. For our analysis, we set our attention on AI Society setting. We also gathered conversational data, named CAMEL AI Society and CAMEL Code datasets and problem-solution pairs data named CAMEL Math and CAMEL Science and analyzed and evaluated their quality. Moreover, we will discuss potential extensions of our framework and highlight both the risks and opportunities that future AI society might present.'}
 {'similarity score': '0.8378663659095764', 'content path': 'https://www.camel-ai.org/', 'metadata': {'filetype': 'text/html', 'languages': ['eng'], 'page_number': 1, 'url': 'https://www.camel-ai.org/', 'link_urls': ['#h.3f4tphhd9pn8', 'https://join.slack.com/t/camel-ai/shared_invite/zt-2g7xc41gy-_7rcrNNAArIP6sLQqldkqQ', 'https://discord.gg/CNcNpquyDc'], 'link_texts': [None, None, None], 'emphasized_text_contents': ['Mission', 'CAMEL-AI.org', 'is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.', 'Join us via', 'Slack', 'Discord', 'or'], 'emphasized_text_tags': ['span', 'span', 'span', 'span', 'span', 'span', 'span']}, 'text': 'Mission\n\nCAMEL-AI.org is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.\n\nJoin us via\n\nSlack\n\nDiscord\n\nor'}
 </code></pre>
-<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3.具有自動 RAG 的單一代理<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3.使用 Auto RAG 的單一代理<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,7 +213,7 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本節將介紹如何將<code translate="no">AutoRetriever</code> 與單一<code translate="no">ChatAgent</code> 結合。</p>
+    </button></h2><p>在本節中，我們將展示如何結合<code translate="no">AutoRetriever</code> 與一個<code translate="no">ChatAgent</code> 。</p>
 <p>讓我們設定一個代理函式，在這個函式中，我們可以透過提供查詢給這個代理來取得回應。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
@@ -283,7 +283,7 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本節中，我們將展示如何透過應用<code translate="no">Function Calling</code> 來結合<code translate="no">RETRIEVAL_FUNCS</code> 與<code translate="no">RolePlaying</code> 。</p>
+    </button></h2><p>在本節中，我們將展示如何應用<code translate="no">Function Calling</code> 來結合<code translate="no">RETRIEVAL_FUNCS</code> 與<code translate="no">RolePlaying</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> colorama <span class="hljs-keyword">import</span> Fore
 

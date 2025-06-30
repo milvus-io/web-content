@@ -163,7 +163,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        临时索引 nlist，建议设置为 sqrt（chunkRows），必须小于 chunkRows/8      </td>
+      <td>        临时索引 nlist，建议设置 sqrt（chunkRows），必须小于 chunkRows/8      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -192,8 +192,153 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        nprobe 用于搜索小索引，基于您的精度要求，必须小于 nlist     </td>
+      <td>        nprobe 用于搜索小索引，基于你的精度要求，必须小于 nlist     </td>
       <td>16</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexsubDim" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.subDim</code><button data-href="#queryNodesegcoreinterimIndexsubDim" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.subDim">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        临时索引子 dim，建议使用 (subDim % 向量 dim == 0)  </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineRatio" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineRatio</code><button data-href="#queryNodesegcoreinterimIndexrefineRatio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineRatio">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        临时索引参数，应设置为 &gt;= 1.0   </td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineQuantType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineQuantType</code><button data-href="#queryNodesegcoreinterimIndexrefineQuantType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineQuantType">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        SCANN_DVR 索引的数据表示，可选项：无"、"FLOAT16"、"BFLOAT16 "和 "UINT8      </td>
+      <td>无</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineWithQuant" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineWithQuant</code><button data-href="#queryNodesegcoreinterimIndexrefineWithQuant" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineWithQuant">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        是否使用 refineQuantType 对脂肪进行细化，但会损失一点精度      </td>
+      <td>真</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexdenseVectorIndexType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.denseVectorIndexType</code><button data-href="#queryNodesegcoreinterimIndexdenseVectorIndexType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.denseVectorIndexType">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        密集向量最小间距指数类型      </td>
+      <td>IVF_FLAT_CC</td>
     </tr>
   </tbody>
 </table>
@@ -215,7 +360,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
     </button></h2><table id="queryNode.segcore.interimIndex.memExpansionRate">
   <thead>
     <tr>
-      <th class="width80">说明</th>
+      <th class="width80">描述</th>
       <th class="width20">默认值</th> 
     </tr>
   </thead>
@@ -313,6 +458,35 @@ summary: 了解如何为 Milvus 配置 queryNode。
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodesegcorejsonKeyStatsCommitInterval" class="common-anchor-header"><code translate="no">queryNode.segcore.jsonKeyStatsCommitInterval</code><button data-href="#queryNodesegcorejsonKeyStatsCommitInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.jsonKeyStatsCommitInterval">
+  <thead>
+    <tr>
+      <th class="width80">描述</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        JSON key Stats 的提交间隔      </td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodeloadMemoryUsageFactor" class="common-anchor-header"><code translate="no">queryNode.loadMemoryUsageFactor</code><button data-href="#queryNodeloadMemoryUsageFactor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,7 +511,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        计算加载分段时内存使用量的乘数系数      </td>
+      <td>        计算加载段时内存使用量的乘数系数      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -424,7 +598,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        分块缓存的超前读取策略，可选项：正常、随机、顺序、需要、不需要      </td>
+      <td>        大块缓存的超前读取策略，选项：正常、随机、顺序、需要、不需要      </td>
       <td>需要</td>
     </tr>
   </tbody>
@@ -459,7 +633,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
         <li>1.如果设置为 "sync"（同步）或 "async"（异步），原始向量数据将在加载过程中同步/异步加载到 </li>      
         <li>在加载过程中，原始矢量数据将同步/异步加载到块缓存中。这种方法有可能在加载后的特定时间内大幅减少查询/搜索延迟。</li>      
         <li>尽管同时会增加磁盘使用量；</li>      
-        <li>2.如果设置为 "禁用"，原始向量数据只会在搜索/查询过程中加载到块缓存中。</li>      </td>
+        <li>2.如果设置为 "禁用"，原始向量数据将只在搜索/查询过程中加载到块缓存中。</li>      </td>
       <td>禁用</td>
     </tr>
   </tbody>
@@ -1146,6 +1320,35 @@ summary: 了解如何为 Milvus 配置 queryNode。
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodeforwardBatchSize" class="common-anchor-header"><code translate="no">queryNode.forwardBatchSize</code><button data-href="#queryNodeforwardBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.forwardBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        代表程序在加载过程中转发流删除时使用的批量大小      </td>
+      <td>4194304</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodedataSyncflowGraphmaxQueueLength" class="common-anchor-header"><code translate="no">queryNode.dataSync.flowGraph.maxQueueLength</code><button data-href="#queryNodedataSyncflowGraphmaxQueueLength" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1170,7 +1373,7 @@ summary: 了解如何为 Milvus 配置 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        查询节点流图中任务队列缓存的最大大小。      </td>
+      <td>        查询节点流量图中任务队列缓存的最大大小。      </td>
       <td>16</td>
     </tr>
   </tbody>

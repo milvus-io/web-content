@@ -44,7 +44,7 @@ summary: Imparate a configurare grpc per Milvus.
   <tbody>
     <tr>
       <td>        secondo, tempo di attesa per la fine dell'arresto grazioso      </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

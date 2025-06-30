@@ -35,10 +35,10 @@ title: Componentes principales
         ></path>
       </svg>
     </button></h2><ul>
-<li>Coordinador: exactamente uno por clúster</li>
+<li>Coordinador: puede habilitarse el modo maestro-esclavo para proporcionar alta disponibilidad.</li>
 <li>Proxy: uno o más por clúster</li>
-<li>Nodo de transmisión: uno o más por clúster</li>
-<li>Nodo de consulta: uno o varios por clúster</li>
+<li>Nodo de Streaming: uno o más por cluster</li>
+<li>Nodo de consulta: uno o más por clúster</li>
 <li>Nodo de datos: uno o varios por clúster</li>
 </ul>
 <h2 id="Third-party-dependencies" class="common-anchor-header">Dependencias de terceros<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
@@ -106,5 +106,5 @@ title: Componentes principales
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lea <a href="/docs/es/v2.6.x/four_layers.md">Computing/Storage Disaggregation</a> para comprender el mecanismo y el principio de diseño de Milvus.</li>
+<li>Lea <a href="/docs/es/four_layers.md">Computing/Storage Disaggregation</a> para comprender el mecanismo y el principio de diseño de Milvus.</li>
 </ul>

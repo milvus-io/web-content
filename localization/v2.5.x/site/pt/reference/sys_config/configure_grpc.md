@@ -44,7 +44,7 @@ summary: Saiba como configurar o grpc para o Milvus.
   <tbody>
     <tr>
       <td>        segundo, tempo de espera para a paragem graciosa terminar      </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

@@ -5,10 +5,10 @@ summary: >-
   Indeks adalah struktur tambahan yang dibangun di atas data. Struktur
   internalnya tergantung pada perkiraan algoritma pencarian tetangga terdekat
   yang digunakan. Indeks mempercepat pencarian, tetapi menimbulkan tambahan
-  waktu, ruang, dan RAM selama pencarian. Selain itu, penggunaan indeks biasanya
-  menurunkan tingkat pemanggilan (meskipun efeknya dapat diabaikan, namun tetap
-  penting). Oleh karena itu, artikel ini menjelaskan cara meminimalkan biaya
-  penggunaan indeks sekaligus memaksimalkan manfaatnya.
+  waktu, ruang, dan RAM selama pencarian. Selain itu, menggunakan indeks
+  biasanya menurunkan tingkat recall (meskipun efeknya dapat diabaikan, namun
+  tetap penting). Oleh karena itu, artikel ini menjelaskan cara meminimalkan
+  biaya penggunaan indeks sekaligus memaksimalkan manfaatnya.
 ---
 <h1 id="Index-Explained" class="common-anchor-header">Penjelasan Indeks<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Indeks adalah struktur tambahan yang dibangun di atas data. Struktur internalnya bergantung pada perkiraan algoritme pencarian tetangga terdekat yang digunakan. Indeks mempercepat pencarian, tetapi menimbulkan waktu, ruang, dan RAM tambahan selama pencarian. Selain itu, penggunaan indeks biasanya menurunkan tingkat pemanggilan (meskipun efeknya dapat diabaikan, namun tetap penting). Oleh karena itu, artikel ini menjelaskan cara meminimalkan biaya penggunaan indeks sekaligus memaksimalkan manfaatnya.</p>
+    </button></h1><p>Indeks adalah struktur tambahan yang dibangun di atas data. Struktur internalnya bergantung pada perkiraan algoritme pencarian tetangga terdekat yang digunakan. Indeks mempercepat pencarian, tetapi menimbulkan waktu, ruang, dan RAM tambahan selama pencarian. Selain itu, menggunakan indeks biasanya menurunkan tingkat recall (meskipun efeknya dapat diabaikan, namun tetap penting). Oleh karena itu, artikel ini menjelaskan cara meminimalkan biaya penggunaan indeks sekaligus memaksimalkan manfaatnya.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,12 +49,31 @@ summary: >-
      <th><p>Jenis Indeks yang Berlaku</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
-     <td><ul><li><p>DATAR</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>BFLOAT16_VECTOR</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>DATAR</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BINARY_VECTOR</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>VEKTOR MENGAMBANG JARANG</p></td>
@@ -62,18 +81,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>TERBALIK (Disarankan)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>TERBALIK (Disarankan)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (Disarankan)</li><li>TERBALIK</li></ul></td>
+     <td><ul>
+<li>BITMAP (Direkomendasikan)</li>
+<li>TERBALIK</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>TERBALIK</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>TERBALIK</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>GANDA</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>GANDA</li>
+</ul></td>
      <td><p>TERBALIK</p></td>
    </tr>
    <tr>
@@ -312,6 +349,6 @@ summary: >-
 </ol>
 <h3 id="Other-considerations" class="common-anchor-header">Pertimbangan lain</h3><p>Sementara IVF dan indeks berbasis grafik mengoptimalkan penggunaan memori melalui kuantisasi, file yang dipetakan dengan memori (mmap), dan skenario alamat DiskANN di mana kumpulan data melebihi memori akses acak (RAM) yang tersedia.</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN adalah indeks berbasis grafik Vamana yang menghubungkan titik-titik data untuk navigasi yang efisien selama pencarian sambil menerapkan PQ untuk mengurangi ukuran vektor dan memungkinkan penghitungan jarak perkiraan yang cepat antar vektor.</p>
-<p>Grafik Vamana disimpan di disk, yang memungkinkan DiskANN untuk menangani kumpulan data besar yang jika tidak, akan terlalu besar untuk ditampung di memori. Hal ini sangat berguna untuk kumpulan data miliaran titik.</p>
+<p>Grafik Vamana disimpan di disk, yang memungkinkan DiskANN untuk menangani kumpulan data besar yang jika tidak, akan terlalu besar untuk ditampung di memori. Hal ini sangat berguna untuk dataset miliaran titik.</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">File yang dipetakan dengan memori (mmap)</h4><p>Pemetaan memori (Mmap) memungkinkan akses memori langsung ke file besar pada disk, memungkinkan Milvus untuk menyimpan indeks dan data dalam memori dan hard drive. Pendekatan ini membantu mengoptimalkan operasi I/O dengan mengurangi overhead panggilan I/O berdasarkan frekuensi akses, sehingga memperluas kapasitas penyimpanan untuk koleksi tanpa memengaruhi kinerja pencarian secara signifikan.</p>
 <p>Secara khusus, Anda dapat mengonfigurasi Milvus untuk memetakan memori data mentah dalam bidang tertentu alih-alih memuatnya secara penuh ke dalam memori. Dengan cara ini, Anda dapat memperoleh akses memori langsung ke bidang-bidang tersebut tanpa mengkhawatirkan masalah memori dan memperluas kapasitas koleksi.</p>

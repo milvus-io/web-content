@@ -2,7 +2,7 @@
 id: quickstart_with_attu.md
 summary: >-
   AttuはMilvusのためのオールインワンのオープンソース管理ツールです。直感的なグラフィカルユーザインタフェース(GUI)を備えており、データベースを簡単に操作することができます。数回クリックするだけで、クラスタステータスの可視化、メタデータの管理、データクエリの実行などが可能です。
-title: 質問応答システム
+title: Attuのクイックスタート - MilvusのウェブUI
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Attuデスクトップのクイックスタート<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,7 +171,7 @@ doc_embeddings = embedding_model.encode_documents(text_lines)
 client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 データとスキーマの可視化</h3><p>Attuのインターフェースを使用して、データスキーマと挿入されたエンティティを視覚化できます。スキーマは、<code translate="no">Int64</code> 型の<code translate="no">id</code> フィールドと、<code translate="no">FloatVector(768)</code> 型の<code translate="no">vector</code> フィールドと、<code translate="no">Inner Product (IP)</code> メトリックを含む、定義されたフィールドを表示します。コレクションには<strong>72のエンティティが</strong>ロードされています。</p>
+<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 データとスキーマの可視化</h3><p>Attuのインターフェースを使用して、データスキーマと挿入されたエンティティを視覚化することができます。スキーマは、<code translate="no">Int64</code> 型の<code translate="no">id</code> フィールドと、<code translate="no">FloatVector(768)</code> 型の<code translate="no">vector</code> フィールドと、<code translate="no">Inner Product (IP)</code> メトリックを含む、定義されたフィールドを表示します。コレクションには<strong>72のエンティティが</strong>ロードされています。</p>
 <p>さらに、ID、ベクトル埋め込み、テキスト・コンテンツなどのメタデータを格納するダイナミック・フィールドなど、挿入されたデータを見ることができる。このインターフェースは、指定された条件やダイナミック・フィールドに基づくフィルタリングやクエリをサポートしている。</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />

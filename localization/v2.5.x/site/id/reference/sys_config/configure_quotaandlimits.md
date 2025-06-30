@@ -89,9 +89,38 @@ summary: Pelajari cara mengonfigurasi kuotaAndLimits untuk Milvus.
     <tr>
       <td>
         <li>quotaCenterCollectInterval adalah interval waktu yang digunakan quotaCenter</li>      
-        <li>mengumpulkan metrik dari Proksi, klaster Kueri, dan klaster Data.</li>      
+        <li>mengumpulkan metrik dari Proksi, kluster Kueri, dan kluster Data.</li>      
         <li>detik, (0 ~ 65536)</li>      </td>
       <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitsforceDenyAllDDL" class="common-anchor-header"><code translate="no">quotaAndLimits.forceDenyAllDDL</code><button data-href="#quotaAndLimitsforceDenyAllDDL" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.forceDenyAllDDL">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        true untuk memaksa menolak semua permintaan DDL, false untuk mengizinkan.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -119,7 +148,7 @@ summary: Pelajari cara mengonfigurasi kuotaAndLimits untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        waktu coba ulang ketika menghapus data alokasi maju dari batas tarif gagal     </td>
+      <td>        waktu percobaan ulang ketika menghapus data alokasi ke depan dari batas tarif gagal     </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -748,6 +777,68 @@ summary: Pelajari cara mengonfigurasi kuotaAndLimits untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitsdbRateenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.enabled</code><button data-href="#quotaAndLimitsdbRateenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Apakah pelambatan permintaan DB diaktifkan      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitsdbRatemax" class="common-anchor-header"><code translate="no">quotaAndLimits.dbRate.max</code><button data-href="#quotaAndLimitsdbRatemax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.dbRate.max">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Jumlah maksimum permintaan terkait db per detik.</li>      
+        <li>Mengatur item ini ke 10 menunjukkan bahwa Milvus memproses tidak lebih dari 10 permintaan terkait db per detik, termasuk permintaan pembuatan/penghapusan/pengubahan db.</li>      
+        <li>Untuk menggunakan pengaturan ini, setel quotaAndLimits.dbRate.enabled ke true pada saat yang sama.</li>      
+        <li>        </li>      </td>
+      <td>-1</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitsdmlenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.dml.enabled</code><button data-href="#quotaAndLimitsdmlenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -975,7 +1066,7 @@ summary: Pelajari cara mengonfigurasi kuotaAndLimits untuk Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Keterangan</th>
+      <th class="width80">Deskripsi</th>
       <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
@@ -1004,7 +1095,7 @@ summary: Pelajari cara mengonfigurasi kuotaAndLimits untuk Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Keterangan</th>
+      <th class="width80">Deskripsi</th>
       <th class="width20">Nilai Default</th> 
     </tr>
   </thead>

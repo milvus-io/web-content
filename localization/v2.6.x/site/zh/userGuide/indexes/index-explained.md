@@ -44,31 +44,68 @@ summary: >-
      <th><p>适用索引类型</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>bfloat16_vector</p></li><li><p>INT8_VECTOR</p></li></ul></td>
-     <td><ul><li><p>平面</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>bfloat16_vector</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>平面</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>二进制向量</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>稀疏浮点矢量</p></td>
      <td><p>稀疏反转索引</p></td>
    </tr>
    <tr>
-     <td><p>变量</p></td>
-     <td><ul><li><p>反转（推荐）</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><p>VARCHAR</p></td>
+     <td><ul>
+<li><p>反转（推荐）</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP（推荐）</li><li>反转</li></ul></td>
+     <td><ul>
+<li>BITMAP（推荐）</li>
+<li>反转</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>反转</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>反转</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>反转</p></td>
    </tr>
    <tr>
@@ -113,13 +150,13 @@ summary: >-
 <p>IVF 系列索引类型允许 Milvus 通过基于中心点的分区将向量聚类到桶中。一般可以安全地假设，如果桶的中心点接近查询向量，那么桶中的所有向量都有可能接近查询向量。基于这个前提，Milvus 只扫描那些中心点靠近查询向量的桶中的向量 Embeddings，而不是检查整个数据集。这种策略既能降低计算成本，又能保持可接受的精确度。</p>
 <p>这种索引数据结构非常适合需要快速吞吐量的大规模数据集。</p></li>
 <li><p><strong>基于图的结构</strong></p>
-<p>基于图的向量搜索数据结构，如分层导航小世界<a href="https://arxiv.org/abs/1603.09320">（HNSW</a>），构建了一个分层图，其中每个向量都与其最近的邻居相连。查询可以浏览这个层次结构，从粗略的上层开始，然后切换到下层，从而实现高效的对数时间搜索复杂性。</p>
+<p>基于图的向量搜索数据结构，如分层导航小世界<a href="https://arxiv.org/abs/1603.09320">（HNSW</a>），构建了一个分层图，其中每个向量都连接到其最近的邻居。查询可以浏览这个层次结构，从粗略的上层开始，然后切换到下层，从而实现高效的对数时间搜索复杂性。</p>
 <p>这种索引数据结构适用于高维空间和要求低延迟查询的场景。</p></li>
 </ul>
 <h3 id="Quantization" class="common-anchor-header">量化</h3><p>量化通过更粗略的表示来减少内存占用和计算成本：</p>
 <ul>
 <li><p><strong>标量量化</strong>（如<strong>SQ8</strong>）使 Milvus 能够将每个向量维度压缩为单字节（8 位），与 32 位浮点数相比，内存使用量减少了 75%，同时保持了合理的精度。</p></li>
-<li><p><strong>乘积量化</strong><strong>（PQ</strong>）使 Milvus 能够将向量分割成子向量，并使用基于编码本的聚类对其进行编码。这可以实现更高的压缩率（例如 4-32 倍），但代价是召回率略有降低，因此适用于内存受限的环境。</p></li>
+<li><p><strong>乘积量化</strong><strong>（PQ</strong>）使 Milvus 能够将向量分割成子向量，并使用基于编码本的聚类进行编码。这可以实现更高的压缩率（例如 4-32 倍），但代价是召回率略有降低，因此适用于内存受限的环境。</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">精炼器</h3><p>量化本身就是有损的。为了保持召回率，量化始终会产生比所需数量更多的前 K 个候选结果，这使得精炼器可以使用更高的精度从这些候选结果中进一步选择前 K 个结果，从而提高召回率。</p>
 <p>例如，FP32 精炼器通过使用 FP32 精度而不是量化值重新计算距离，对量化返回的候选搜索结果进行操作符操作。</p>
@@ -168,7 +205,7 @@ summary: >-
 <h3 id="Performance" class="common-anchor-header">性能</h3><p>搜索性能通常涉及 top-K，即搜索返回的记录数。在处理性能问题时，请考虑以下几点：</p>
 <ul>
 <li><p>对于 Top-K 较小的搜索（如 2,000），需要较高的召回率，基于图的索引类型优于 IVF 变体。</p></li>
-<li><p>对于 top-K 较大（与向量嵌入总数相比）的搜索，IVF 变体是比基于图的索引类型更好的选择。</p></li>
+<li><p>对于 top-K 较大的搜索（与向量嵌入的总数相比），IVF 变体比基于图的索引类型是更好的选择。</p></li>
 <li><p>对于 top-K 中等且过滤率较高的搜索，IVF 变体是更好的选择。</p></li>
 </ul>
 <h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">决策矩阵：选择最合适的索引类型</h3><p>下表是一个决策矩阵，供您在选择合适的索引类型时参考。</p>
@@ -227,7 +264,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>本节主要计算特定索引类型的内存消耗，包括许多技术细节。如果本节内容与您的兴趣不符，您可以放心跳过。</p>
 </div>
-<p>索引的内存消耗受其数据结构、通过量化实现的压缩率以及所使用的精炼器的影响。一般来说，由于图的结构（如<strong>HNSW</strong>），基于图的索引通常会占用较多内存，这通常意味着每个向量的空间开销较大。相比之下，IVF 及其变体更节省内存，因为适用的每个向量空间开销更少。不过，<strong>DiskANN</strong>等先进技术允许索引的一部分（如图或细化器）驻留在磁盘上，从而在保持性能的同时减少了内存负荷。</p>
+<p>索引的内存消耗受其数据结构、通过量化实现的压缩率以及所使用的精炼器的影响。一般来说，由于图的结构（如<strong>HNSW</strong>），基于图的索引通常会占用较多内存，这通常意味着每个向量的空间开销较大。相比之下，IVF 及其变体更节省内存，因为适用的单位向量空间开销更少。不过，<strong>DiskANN</strong>等先进技术允许索引的一部分（如图或细化器）驻留在磁盘上，从而在保持性能的同时减少了内存负荷。</p>
 <p>具体来说，索引的内存使用量可按以下方式计算：</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">IVF 索引内存使用量</h3><p>IVF 索引通过将数据划分为数据集群，在内存效率和搜索性能之间取得平衡。以下是使用 IVF 变体索引的 100 万个 128 维向量所使用的内存明细。</p>
 <ol>
@@ -307,6 +344,6 @@ summary: >-
 </ol>
 <h3 id="Other-considerations" class="common-anchor-header">其他考虑因素</h3><p>IVF 和基于图的索引可通过量化优化内存使用，而内存映射文件（mmap）和 DiskANN 则可解决数据集超出可用随机存取内存（RAM）的情况。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是一种基于 Vamana 图的索引，它将数据点连接起来，以便在搜索过程中高效导航，同时应用 PQ 来减小向量的大小，并能快速计算向量之间的近似距离。</p>
-<p>Vamana 图存储在磁盘上，这使得 DiskANN 可以处理那些内存无法容纳的大型数据集。这对十亿点数据集尤其有用。</p>
+<p>Vamana 图存储在磁盘上，这使得 DiskANN 能够处理那些内存无法容纳的大型数据集。这对十亿点数据集尤其有用。</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">内存映射文件 (mmap)</h4><p>内存映射（Mmap）可实现对磁盘上大型文件的直接内存访问，从而允许 Milvus 在内存和硬盘中同时存储索引和数据。这种方法可根据访问频率减少 I/O 调用的开销，有助于优化 I/O 操作，从而在不对搜索性能造成重大影响的情况下扩大 Collections 的存储容量。</p>
 <p>具体来说，你可以配置 Milvus 对某些字段中的原始数据进行内存映射，而不是将它们完全加载到内存中。这样，你就可以直接对字段进行内存访问，而不必担心内存问题，并扩展了 Collections 的容量。</p>

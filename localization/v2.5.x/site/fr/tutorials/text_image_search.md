@@ -66,7 +66,7 @@ title: Recherche texte-image avec Milvus
 <ul>
 <li><p><strong>Milvus Lite (recommandé pour des raisons de commodité)</strong>: Définissez l'URI sur un fichier local, tel que ./milvus.db. Cela permet de tirer automatiquement parti de <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans un seul fichier.</p></li>
 <li><p><strong>Docker ou Kubernetes (pour les données à grande échelle)</strong>: Pour traiter des ensembles de données plus importants, déployez un serveur Milvus plus performant à l'aide de <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Dans ce cas, utilisez l'URI du serveur, tel que http://localhost:19530, pour vous connecter.</p></li>
-<li><p><strong>Zilliz Cloud (Managed Service)</strong>: Si vous utilisez <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service en nuage entièrement géré de Milvus, définissez le point de terminaison public comme URI et la clé API comme jeton.</p></li>
+<li><p><strong>Zilliz Cloud (Managed Service)</strong>: Si vous utilisez <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service cloud entièrement géré de Milvus, définissez le point de terminaison public comme URI et la clé API comme jeton.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 

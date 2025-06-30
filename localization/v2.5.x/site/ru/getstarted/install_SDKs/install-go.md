@@ -2,10 +2,9 @@
 id: install-go.md
 label: Install GO SDK
 related_key: SDK
-summary: "Узнайте, как установить GO SDK от Milvus."
+summary: 'Узнайте, как установить GO SDK от Milvus.'
 title: Установка Milvus Go SDK
 ---
-
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Установка Milvus Go SDK<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +54,7 @@ title: Установка Milvus Go SDK
         ></path>
       </svg>
     </button></h2><p>Установите Milvus GO SDK и зависимости с помощью <code translate="no">go get</code>.</p>
-<pre><code translate="no" class="language-bash">$ <span class="hljs-keyword">go</span> get -u github.com/milvus-io/milvus-sdk-<span class="hljs-keyword">go</span>/v2
+<pre><code translate="no" class="language-bash">$ go get -u github.com/milvus-io/milvus/client/v2
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -2,13 +2,13 @@
 id: full-text-search.md
 title: البحث في النص الكامل
 summary: >-
-  البحث عن النص الكامل هي ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات
-  محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى
-  ملاءمتها. تتغلب هذه الميزة على قيود البحث الدلالي، التي قد تغفل المصطلحات
-  الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة
-  إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات
-  نصية أولية، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى
-  إنشاء تضمينات متجهة يدويًا.
+  البحث بالنص الكامل هي ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات
+  محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى الصلة.
+  تتغلب هذه الميزة على قيود البحث الدلالي، التي قد تغفل المصطلحات الدقيقة، مما
+  يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى ذلك، تعمل
+  هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات نصية أولية،
+  وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات
+  متجهة يدويًا.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">البحث في النص الكامل<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -28,7 +28,7 @@ summary: >-
     </button></h1><p>البحث بالنص الكامل هي ميزة تسترجع المستندات التي تحتوي على مصطلحات أو عبارات محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى ملاءمتها. تتغلب هذه الميزة على قيود البحث الدلالي التي قد تغفل المصطلحات الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات النص الخام، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى إنشاء تضمينات متجهة يدويًا.</p>
 <p>وباستخدام خوارزمية BM25 لتسجيل درجة الملاءمة، تُعد هذه الميزة ذات قيمة خاصة في سيناريوهات التوليد المعزز للاسترجاع (RAG)، حيث تعطي الأولوية للمستندات التي تتطابق بشكل وثيق مع مصطلحات بحث محددة.</p>
 <div class="alert note">
-<p>من خلال دمج البحث النصي الكامل مع البحث المتجه الكثيف القائم على الدلالة، يمكنك تحسين دقة نتائج البحث ومدى ملاءمتها. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث المختلط</a>.</p>
+<p>من خلال دمج البحث النصي الكامل مع البحث المتجه الكثيف القائم على الدلالة، يمكنك تحسين دقة نتائج البحث ومدى ملاءمتها. لمزيد من المعلومات، راجع <a href="/docs/ar/multi-vector-search.md">البحث المختلط</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ summary: >-
     </button></h2><p>يعمل البحث بالنص الكامل على تبسيط عملية البحث المستند إلى النص من خلال إلغاء الحاجة إلى التضمين اليدوي. تعمل هذه الميزة من خلال سير العمل التالي:</p>
 <ol>
 <li><p><strong>إدخال النص</strong>: يمكنك إدراج مستندات نصية أولية أو توفير نص استعلام دون الحاجة إلى التضمين اليدوي.</p></li>
-<li><p><strong>تحليل النص</strong>: يستخدم ميلفوس <a href="/docs/ar/v2.6.x/analyzer-overview.md">محلل</a> لترميز نص الإدخال إلى مصطلحات فردية قابلة للبحث.</p></li>
+<li><p><strong>تحليل النص</strong>: يستخدم ميلفوس <a href="/docs/ar/analyzer-overview.md">محلل</a> لترميز نص الإدخال إلى مصطلحات فردية قابلة للبحث.</p></li>
 <li><p><strong>معالجة الدالة</strong>: تستقبل الدالة المدمجة المصطلحات المرمزة وتحولها إلى تمثيلات متجهة متفرقة.</p></li>
 <li><p><strong>مخزن المجموعة</strong>: يخزن ميلفوس هذه التضمينات المتفرقة في مجموعة لاسترجاعها بكفاءة.</p></li>
 <li><p><strong>تسجيل BM25</strong>: أثناء البحث، يطبّق ميلفوس خوارزمية BM25 لحساب درجات المستندات المخزنة وترتيب النتائج المتطابقة بناءً على مدى صلتها بنص الاستعلام.</p></li>
@@ -59,9 +59,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>البحث بالنص الكامل</span> </span></p>
 <p>لاستخدام البحث بالنص الكامل، اتبع الخطوات الرئيسية التالية:</p>
 <ol>
-<li><p><a href="/docs/ar/v2.6.x/full-text-search.md#Create-a-collection-for-full-text-search">إنشاء مجموعة</a>: إعداد مجموعة مع الحقول اللازمة وتحديد دالة لتحويل النص الخام إلى تضمينات متفرقة.</p></li>
-<li><p><a href="/docs/ar/v2.6.x/full-text-search.md#Insert-text-data">إدراج البيانات</a>: أدخل مستنداتك النصية الأولية في المجموعة.</p></li>
-<li><p><a href="/docs/ar/v2.6.x/full-text-search.md#Perform-full-text-search">إجراء عمليات البحث</a>: استخدم نصوص الاستعلام للبحث في مجموعتك واسترداد النتائج ذات الصلة.</p></li>
+<li><p><a href="/docs/ar/full-text-search.md#Create-a-collection-for-full-text-search">إنشاء مجموعة</a>: إعداد مجموعة مع الحقول اللازمة وتحديد دالة لتحويل النص الخام إلى تضمينات متفرقة.</p></li>
+<li><p><a href="/docs/ar/full-text-search.md#Insert-text-data">إدراج البيانات</a>: أدخل مستنداتك النصية الأولية في المجموعة.</p></li>
+<li><p><a href="/docs/ar/full-text-search.md#Perform-full-text-search">إجراء عمليات البحث</a>: استخدم نصوص الاستعلام للبحث في مجموعتك واسترداد النتائج ذات الصلة.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">إنشاء مجموعة للبحث في النص الكامل<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -215,7 +215,7 @@ schema.WithField(entity.NewField().
 <p>في هذا التكوين</p>
 <ul>
 <li><p><code translate="no">id</code>: يعمل كمفتاح أساسي ويتم إنشاؤه تلقائيًا باستخدام <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: يخزن بيانات النص الخام لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات هو <code translate="no">VARCHAR</code> ، حيث أن <code translate="no">VARCHAR</code> هو نوع بيانات سلسلة ميلفوس لتخزين النص. قم بتعيين <code translate="no">enable_analyzer=True</code> للسماح لـ Milvus بترميز النص. بشكل افتراضي، يستخدم ميلفوس<a href="/docs/ar/v2.6.x/standard-analyzer.md"> محلل</a> <code translate="no">standard</code><a href="/docs/ar/v2.6.x/standard-analyzer.md"></a> لتحليل النص. لتكوين محلل مختلف، ارجع إلى <a href="/docs/ar/v2.6.x/analyzer-overview.md">نظرة عامة على المحلل</a>.</p></li>
+<li><p><code translate="no">text</code>: يخزن بيانات النص الخام لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات هو <code translate="no">VARCHAR</code> ، حيث أن <code translate="no">VARCHAR</code> هو نوع بيانات سلسلة ميلفوس لتخزين النص. قم بتعيين <code translate="no">enable_analyzer=True</code> للسماح لـ Milvus بترميز النص. بشكل افتراضي، يستخدم ميلفوس<a href="/docs/ar/standard-analyzer.md"> محلل</a> <code translate="no">standard</code><a href="/docs/ar/standard-analyzer.md"></a> لتحليل النص. لتكوين محلل مختلف، ارجع إلى <a href="/docs/ar/analyzer-overview.md">نظرة عامة على المحلل</a>.</p></li>
 <li><p><code translate="no">sparse</code>:: حقل متجه محجوز لتخزين التضمينات المتفرقة التي تم إنشاؤها داخليًا لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>الآن، قم بتعريف الدالة التي ستقوم بتحويل النص إلى تمثيلات متجهية متناثرة ثم قم بإضافتها إلى المخطط:</p>
@@ -338,21 +338,35 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
+Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+fvParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+fvParams.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+fvParams.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.BM25)
+        .extraParams(params)
         .build());    
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
     index.NewAutoIndex(entity.MetricType(entity.BM25)))
+    .WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
+    .WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
+    .WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">params</span>: {
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>
+    }
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
@@ -360,7 +374,12 @@ indexes.add(IndexParam.builder()
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
+            &quot;params&quot;:{
+               &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
+               &quot;bm25_k1&quot;: 1.2,
+               &quot;bm25_b&quot;: 0.75
+            }
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -375,7 +394,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>نوع الفهرس المراد إنشاؤه. <code translate="no">AUTOINDEX</code> يسمح لـ Milvus بتحسين إعدادات الفهرس تلقائيًا. إذا كنت بحاجة إلى مزيد من التحكم في إعدادات الفهرس الخاص بك، يمكنك الاختيار من بين أنواع الفهارس المختلفة المتاحة للمتجهات المتفرقة في ملفوس. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/index.md#Indexes-supported-in-Milvus">الفهارس المدعومة في ملفوس</a>.</p></td>
+     <td><p>نوع الفهرس المراد إنشاؤه. <code translate="no">AUTOINDEX</code> يسمح لـ Milvus بتحسين إعدادات الفهرس تلقائيًا. إذا كنت بحاجة إلى مزيد من التحكم في إعدادات الفهرس الخاص بك، يمكنك الاختيار من بين أنواع الفهارس المختلفة المتاحة للمتجهات المتفرقة في ملفوس. لمزيد من المعلومات، راجع <a href="/docs/ar/index.md#Indexes-supported-in-Milvus">الفهارس المدعومة في ملفوس</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -389,7 +408,7 @@ indexes.add(IndexParam.builder()
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
      <td><p>الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. قيم صالحة:</p>
 <ul>
-<li><p><code translate="no">"DAAT_MAXSCORE"</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. يوفر MaxScore أداءً أفضل لقيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li>
+<li><p><code translate="no">"DAAT_MAXSCORE"</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. توفر MaxScore أداءً أفضل لقيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li>
 <li><p><code translate="no">"DAAT_WAND"</code>: معالجة استعلام DAAT المحسّنة باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. وهذا يجعل WAND أكثر كفاءة للاستعلامات ذات القيم <em>k</em> الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li>
 <li><p><code translate="no">"TAAT_NAIVE"</code>: معالجة استعلام المصطلح الأساسي في الوقت (TAAT). على الرغم من أنها أبطأ مقارنةً بـ <code translate="no">DAAT_MAXSCORE</code> و <code translate="no">DAAT_WAND</code> ، إلا أن <code translate="no">TAAT_NAIVE</code> تقدم ميزة فريدة. على عكس خوارزميات DAAT، التي تستخدم درجات التأثير القصوى المخزنة مؤقتًا والتي تظل ثابتة بغض النظر عن التغييرات التي تطرأ على معلمة التجميع العالمية (avgdl)، يتكيف <code translate="no">TAAT_NAIVE</code> ديناميكيًا مع هذه التغييرات.</p></li>
 </ul></td>
@@ -622,7 +641,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>نسبة المصطلحات منخفضة الأهمية لتجاهلها أثناء البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/sparse_vector.md">Sparse Vector</a>.</p></td>
+     <td><p>نسبة المصطلحات منخفضة الأهمية لتجاهلها أثناء البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/sparse_vector.md">Sparse Vector</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
@@ -634,7 +653,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>قائمة بأسماء الحقول لإرجاعها في نتائج البحث. يدعم جميع الحقول <strong>باستثناء الحقل المتجه المتناثر</strong> الذي يحتوي على التضمينات التي تم إنشاؤها بواسطة BM25. تتضمن حقول الإخراج الشائعة حقل المفتاح الأساسي (على سبيل المثال، <code translate="no">id</code>) وحقل النص الأصلي (على سبيل المثال، <code translate="no">text</code>). لمزيد من المعلومات، راجع <a href="/docs/ar/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">الأسئلة الشائعة</a>.</p></td>
+     <td><p>قائمة بأسماء الحقول لإرجاعها في نتائج البحث. يدعم جميع الحقول <strong>باستثناء الحقل المتجه المتناثر</strong> الذي يحتوي على التضمينات التي تم إنشاؤها بواسطة BM25. تتضمن حقول الإخراج الشائعة حقل المفتاح الأساسي (على سبيل المثال، <code translate="no">id</code>) وحقل النص الأصلي (على سبيل المثال، <code translate="no">text</code>). لمزيد من المعلومات، راجع <a href="/docs/ar/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">الأسئلة الشائعة</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -695,4 +714,4 @@ client.search(
 <li><p>استخدم عمليات المتجهات المتفرقة يدوياً بدلاً من البحث النصي الكامل</p></li>
 <li><p>إنشاء مجموعات منفصلة لسير عمل المتجهات المتفرقة المخصصة</p></li>
 </ul>
-<p>للحصول على التفاصيل، راجع <a href="/docs/ar/v2.6.x/sparse_vector.md">المتجهات المتفرقة</a>.</p>
+<p>للحصول على التفاصيل، راجع <a href="/docs/ar/sparse_vector.md">المتجهات المتفرقة</a>.</p>

@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>바이너리 벡터는 이미지, 텍스트, 오디오 등 복잡한 객체를 고정 길이의 이진 값으로 인코딩하는 방법입니다. Milvus에서 바이너리 벡터는 일반적으로 비트 배열 또는 바이트 배열로 표현됩니다. 예를 들어 8차원 바이너리 벡터는 <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code> 로 표현할 수 있습니다.</p>
+    </button></h2><p>이진 벡터는 이미지, 텍스트 또는 오디오와 같은 복잡한 객체를 고정 길이의 이진 값으로 인코딩하는 방법입니다. Milvus에서 바이너리 벡터는 일반적으로 비트 배열 또는 바이트 배열로 표현됩니다. 예를 들어 8차원 바이너리 벡터는 <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code> 로 표현할 수 있습니다.</p>
 <p>아래 다이어그램은 이진 벡터가 텍스트 콘텐츠에서 키워드의 존재를 나타내는 방법을 보여줍니다. 이 예에서는 10차원 이진 벡터가 두 개의 서로 다른 텍스트<strong>(텍스트 1과</strong> <strong>텍스트 2</strong>)를 표현하는 데 사용되며, 각 차원은 어휘의 단어에 해당합니다(1은 텍스트에 단어가 있음을 나타내고 0은 단어가 없음을 나타냅니다).</p>
 <p>
   
@@ -239,7 +239,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>위의 예에서는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 <code translate="no">binary_vector</code> 필드에 대해 <code translate="no">binary_vector_index</code> 라는 이름의 인덱스가 생성됩니다. <code translate="no">metric_type</code> 은 <code translate="no">HAMMING</code> 으로 설정되어 유사도 측정에 해밍 거리가 사용되었음을 나타냅니다.</p>
-<p>밀버스는 더 나은 벡터 검색 환경을 위해 다양한 인덱스 유형을 제공합니다. 자동 인덱스는 벡터 검색의 학습 곡선을 원활하게 하기 위해 고안된 특수 인덱스 유형입니다. 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 xxx를 참조하세요.</p>
+<p>밀버스는 더 나은 벡터 검색 환경을 위해 다양한 인덱스 유형을 제공합니다. 자동 인덱스는 벡터 검색의 학습 곡선을 원활하게 하기 위해 고안된 특수 인덱스 유형입니다. 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">색인 설명을</a> 참조하세요.</p>
 <p>또한 Milvus는 이진 벡터에 대한 다른 유사성 메트릭도 지원합니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p>
 <h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기</h3><p>바이너리 벡터 및 인덱스 설정이 완료되면 바이너리 벡터를 포함하는 컬렉션을 만듭니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">

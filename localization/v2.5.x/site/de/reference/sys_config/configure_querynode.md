@@ -163,7 +163,7 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        temporärer Index nlist, es wird empfohlen, sqrt(chunkRows) zu setzen, muss kleiner als chunkRows/8 sein    </td>
+      <td>        Zwischenindex nlist, empfohlen wird sqrt(chunkRows), muss kleiner als chunkRows/8 sein    </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -194,6 +194,151 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
     <tr>
       <td>        nprobe, um einen kleinen Index zu suchen, basierend auf Ihren Genauigkeitsanforderungen, muss kleiner als nlist sein    </td>
       <td>16</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexsubDim" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.subDim</code><button data-href="#queryNodesegcoreinterimIndexsubDim" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.subDim">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Zwischenindex sub dim, empfohlen für (subDim % vector dim == 0)  </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineRatio" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineRatio</code><button data-href="#queryNodesegcoreinterimIndexrefineRatio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineRatio">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Zwischenindex-Parameter, sollte auf &gt;= 1,0 gesetzt werden      </td>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineQuantType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineQuantType</code><button data-href="#queryNodesegcoreinterimIndexrefineQuantType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineQuantType">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Voreinstellung Wert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Datendarstellung des SCANN_DVR-Index, Optionen: 'NONE', 'FLOAT16', 'BFLOAT16' und 'UINT8'      </td>
+      <td>NONE</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexrefineWithQuant" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.refineWithQuant</code><button data-href="#queryNodesegcoreinterimIndexrefineWithQuant" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.refineWithQuant">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        ob refineQuantType zur Verfeinerung für Fatser verwendet werden soll, wobei jedoch ein geringer Präzisionsverlust entsteht      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcoreinterimIndexdenseVectorIndexType" class="common-anchor-header"><code translate="no">queryNode.segcore.interimIndex.denseVectorIndexType</code><button data-href="#queryNodesegcoreinterimIndexdenseVectorIndexType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.interimIndex.denseVectorIndexType">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Dense-Vektor-Intermin-Index-Typ      </td>
+      <td>IVF_FLAT_CC</td>
     </tr>
   </tbody>
 </table>
@@ -310,6 +455,35 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
     <tr>
       <td>        Logik für die Berechnung der starken Konsistenzbewertung von Knowhere einschalten      </td>
       <td>falsch</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodesegcorejsonKeyStatsCommitInterval" class="common-anchor-header"><code translate="no">queryNode.segcore.jsonKeyStatsCommitInterval</code><button data-href="#queryNodesegcorejsonKeyStatsCommitInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.jsonKeyStatsCommitInterval">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        das Übergabeintervall für die zu übergebenden JSON Key Stats     </td>
+      <td>200</td>
     </tr>
   </tbody>
 </table>
@@ -635,7 +809,7 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
     <tr>
       <td>
         <li>Aktiviert die Speicherzuordnung (mmap), um die Handhabung wachsender Rohdaten zu optimieren. </li>      
-        <li>Durch die Aktivierung dieser Funktion wird der mit neu hinzugefügten oder geänderten Daten verbundene Speicher-Overhead erheblich minimiert. </li>      
+        <li>Durch das Aktivieren dieser Funktion wird der mit neu hinzugefügten oder geänderten Daten verbundene Speicher-Overhead erheblich minimiert. </li>      
         <li>Diese Optimierung kann jedoch auf Kosten einer leichten Verringerung der Abfragelatenz für die betroffenen Datensegmente gehen.</li>      </td>
       <td>falsch</td>
     </tr>
@@ -1054,7 +1228,7 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Aktiviert die benutzerübergreifende Gruppierung bei der Verwendung der Richtlinie für die Abfrage von Benutzeraufgaben. (Deaktivieren Sie es, wenn die Aufgaben der Benutzer nicht zusammengeführt werden können)      </td>
+      <td>        Aktiviert die benutzerübergreifende Gruppierung bei Verwendung der Richtlinie für die Abfrage von Benutzeraufgaben. (Deaktivieren Sie es, wenn die Aufgaben der Benutzer nicht zusammengeführt werden können)      </td>
       <td>falsch</td>
     </tr>
   </tbody>
@@ -1146,6 +1320,35 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodeforwardBatchSize" class="common-anchor-header"><code translate="no">queryNode.forwardBatchSize</code><button data-href="#queryNodeforwardBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.forwardBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        die Stapelgröße, die der Delegator für die Weiterleitung der Stream-Löschung im Ladevorgang verwendet      </td>
+      <td>4194304</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodedataSyncflowGraphmaxQueueLength" class="common-anchor-header"><code translate="no">queryNode.dataSync.flowGraph.maxQueueLength</code><button data-href="#queryNodedataSyncflowGraphmaxQueueLength" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1170,7 +1373,7 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Die maximale Größe des Aufgabenwarteschlangen-Cache im Flussdiagramm im Abfrageknoten.      </td>
+      <td>        Die maximale Größe des Aufgabenwarteschlangen-Caches im Ablaufdiagramm im Abfrageknoten.      </td>
       <td>16</td>
     </tr>
   </tbody>

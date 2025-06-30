@@ -63,7 +63,7 @@ title: 使用 Milvus 進行文字轉圖像搜尋
 <ul>
 <li><p><strong>Milvus Lite (為方便起見推薦使用)：</strong>將 URI 設定為本機檔案，例如 ./milvus.db。這會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在單一檔案中。</p></li>
 <li><p><strong>Docker 或 Kubernetes (適用於大型資料)：</strong>若要處理較大的資料集，請使用<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 部署效能較高的 Milvus 伺服器。在這種情況下，請使用伺服器 URI 連線，例如 http://localhost:19530。</p></li>
-<li><p><strong>Zilliz Cloud (管理服務)：</strong>如果您使用的是<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理雲端服務，請將公共端點設定為 URI，並將 API Key 設定為 token。</p></li>
+<li><p><strong>Zilliz Cloud (管理服務)：</strong>如果您使用的是<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理雲端服務，請設定 Public Endpoint 為 URI，API Key 為 token。</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -84,7 +84,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在您已經擁有必要的相依性與資料，是時候設定功能擷取器並開始使用 Milvus。本節將介紹建立文字到圖片搜尋系統的關鍵步驟。最後，我們將示範如何根據文字查詢擷取圖片並將其視覺化。</p>
+    </button></h2><p>現在您已經有了必要的相依性與資料，是時候設定功能擷取器並開始使用 Milvus 了。本節將介紹建立文字到圖片搜尋系統的關鍵步驟。最後，我們將示範如何根據文字查詢擷取圖片並將其視覺化。</p>
 <h3 id="Define-feature-extractors" class="common-anchor-header">定義特徵萃取器</h3><p>我們將使用預先訓練好的 CLIP 模型來產生圖像和文字嵌入。在本節中，我們將載入 CLIP 的預訓<strong>ViT-B/32</strong>變體，並定義用於編碼圖像和文字的輔助函式：</p>
 <ul>
 <li><code translate="no">encode_image(image_path)</code>:處理影像並將其編碼為特徵向量</li>

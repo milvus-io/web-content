@@ -6,7 +6,7 @@ summary: >-
   пользователя (GUI), позволяющий легко взаимодействовать с вашими базами
   данных. Всего за несколько кликов вы можете визуализировать состояние
   кластера, управлять метаданными, выполнять запросы к данным и многое другое.
-title: Система ответов на вопросы
+title: Быстрый старт с Attu - веб-интерфейса Milvus
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Быстрый старт с Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,7 +202,7 @@ client.insert(collection_name=collection_name, data=data)
 <li>Нажмите кнопку <strong>Генерировать случайные данные</strong>, чтобы создать тестовые запросы.</li>
 <li>Нажмите кнопку <strong>Поиск</strong>, чтобы получить результаты на основе сгенерированных данных.</li>
 </ol>
-<p>Результаты отображаются в таблице, в которой показаны идентификаторы, баллы сходства и динамические поля для каждого совпадающего объекта.</p>
+<p>Результаты отображаются в таблице, в которой показаны идентификаторы, баллы сходства и динамические поля для каждой совпадающей сущности.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>

@@ -7,7 +7,6 @@ summary: >-
   compreender o esquema da coleção e a conceber um exemplo de esquema por si
   próprio.
 ---
-
 <h1 id="Schema-Explained​" class="common-anchor-header">Explicação do esquema<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um esquema define a estrutura de dados de uma coleção. Antes de criar uma coleção, é necessário conceber o respetivo esquema. Esta página ajuda-o a compreender o esquema de coleção e a conceber um exemplo de esquema por si próprio.</p>
+    </button></h1><p>Um esquema define a estrutura de dados de uma coleção. Antes de criar uma coleção, é necessário conceber o respetivo esquema. Esta página ajuda-o a compreender o esquema da coleção e a conceber um exemplo de esquema por si próprio.</p>
 <h2 id="Overview​" class="common-anchor-header">Descrição geral<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +40,7 @@ summary: >-
       </svg>
     </button></h2><p>No Milvus, um esquema de coleção reúne uma tabela numa base de dados relacional, que define a forma como o Milvus organiza os dados na coleção. </p>
 <p>Um esquema bem concebido é essencial, uma vez que abstrai o modelo de dados e decide se é possível atingir os objectivos comerciais através de uma pesquisa. Além disso, uma vez que cada linha de dados inserida na coleção deve seguir o esquema, ajuda a manter a consistência dos dados e a qualidade a longo prazo. De uma perspetiva técnica, um esquema bem definido leva a um armazenamento de dados de coluna bem organizado e a uma estrutura de índice mais limpa, aumentando o desempenho da pesquisa.</p>
-<p>Um esquema de coleção tem uma chave primária, um máximo de quatro campos vectoriais e vários campos escalares. O diagrama a seguir ilustra como mapear um artigo para uma lista de campos de esquema.</p>
+<p>Um esquema de coleção tem uma chave primária, um máximo de quatro campos vectoriais e vários campos escalares. O diagrama seguinte ilustra como mapear um artigo para uma lista de campos de esquema.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
@@ -71,7 +70,6 @@ summary: >-
 schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
 ​
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();​
@@ -108,34 +106,27 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,​
     datatype=DataType.INT64,​
-    <span class="hljs-comment"># highlight-start​</span>
-    is_primary=<span class="hljs-literal">True</span>,​
-    auto_id=<span class="hljs-literal">False</span>,​
-    <span class="hljs-comment"># highlight-end​</span>
+<span class="highlighted-comment-line">    is_primary=<span class="hljs-literal">True</span>,​</span>
+<span class="highlighted-comment-line">    auto_id=<span class="hljs-literal">False</span>,​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
 schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)​
         .dataType(DataType.Int64)​
-        <span class="hljs-comment">// highlight-start​</span>
-        .isPrimaryKey(<span class="hljs-literal">true</span>)​
-        .autoID(<span class="hljs-literal">false</span>)​
-        <span class="hljs-comment">// highlight-end​</span>
+<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)​</span>
+<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,​
-    <span class="hljs-comment">// highlight-start​</span>
-    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,​
-    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>​
-    <span class="hljs-comment">// highlight-end​</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,​</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -171,31 +162,27 @@ export schema='{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os campos vectoriais aceitam várias incorporações vectoriais esparsas e densas. No Milvus, pode adicionar quatro campos vectoriais a uma coleção. Os seguintes trechos de código demonstram como adicionar um campo vetorial.</p>
+    </button></h2><p>Os campos vectoriais aceitam várias incorporações de vectores esparsos e densos. No Milvus, pode adicionar quatro campos vectoriais a uma coleção. Os seguintes trechos de código demonstram como adicionar um campo vetorial.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,​
     datatype=DataType.FLOAT_VECTOR,​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    dim=<span class="hljs-number">5</span>​
+<span class="highlighted-wrapper-line">    dim=<span class="hljs-number">5</span>​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
-        <span class="hljs-comment">// highlight-next-line​</span>
-        .dimension(<span class="hljs-number">5</span>)​
+<span class="highlighted-wrapper-line">        .dimension(<span class="hljs-number">5</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,​
-    <span class="hljs-comment">// highlight-next-line​</span>
-    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>​
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -216,12 +203,12 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>O parâmetro <code translate="no">dim</code> nos trechos de código acima indica a dimensionalidade dos embeddings vetoriais a serem mantidos no campo vetorial. O valor <code translate="no">FLOAT_VECTOR</code> indica que o campo vetorial contém uma lista de números flutuantes de 32 bits, que são normalmente utilizados para representar antilogaritmos.</p>
+<p>O parâmetro <code translate="no">dim</code> nos trechos de código acima indica a dimensionalidade dos embeddings vetoriais a serem mantidos no campo vetorial. O valor <code translate="no">FLOAT_VECTOR</code> indica que o campo vetorial contém uma lista de números flutuantes de 32 bits, que são normalmente utilizados para representar antilogaritmos. Além disso, o Milvus também suporta os seguintes tipos de incorporações vectoriais.</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>Um campo vetorial deste tipo contém uma lista de números flutuantes de meia-precisão de 16 bits e aplica-se normalmente a cenários de aprendizagem profunda com restrições de memória ou largura de banda ou de computação baseada em GPU.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
-<p>Um campo vetorial deste tipo contém uma lista de números de vírgula flutuante de 16 bits com precisão reduzida, mas com o mesmo intervalo de expoentes que o Float32. Este tipo de dados é normalmente utilizado em cenários de aprendizagem profunda, uma vez que reduz a utilização de memória sem afetar significativamente a precisão.</p></li>
+<p>Um campo de vetor deste tipo contém uma lista de números de vírgula flutuante de 16 bits com precisão reduzida, mas com o mesmo intervalo de expoentes que o Float32. Este tipo de dados é normalmente utilizado em cenários de aprendizagem profunda, uma vez que reduz a utilização de memória sem afetar significativamente a precisão.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>Um campo vetorial deste tipo contém uma lista de 0s e 1s. Servem como caraterísticas compactas para representar dados em cenários de processamento de imagem e recuperação de informação.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
@@ -242,32 +229,28 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em casos comuns, pode utilizar campos escalares para armazenar os metadados das incorporações vectoriais armazenadas no Milvus e realizar pesquisas ANN com filtragem de metadados para melhorar a correção dos resultados da pesquisa. O Milvus suporta vários tipos de campos escalares, incluindo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> e JSON.</p>
+    </button></h2><p>Em casos comuns, é possível utilizar campos escalares para armazenar os metadados das incorporações vectoriais armazenadas no Milvus e realizar pesquisas ANN com filtragem de metadados para melhorar a correção dos resultados da pesquisa. O Milvus suporta vários tipos de campos escalares, incluindo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> e JSON.</p>
 <h3 id="Add-String-Fields​" class="common-anchor-header">Adicionar campos String</h3><p>No Milvus, é possível usar campos VarChar para armazenar strings. Para saber mais sobre o campo VarChar, consulte <a href="/docs/pt/v2.5.x/string.md">Campo String</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,​
     datatype=DataType.VARCHAR,​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    max_length=<span class="hljs-number">512</span>​
+<span class="highlighted-wrapper-line">    max_length=<span class="hljs-number">512</span>​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
-        <span class="hljs-comment">// highlight-next-line​</span>
-        .maxLength(<span class="hljs-number">512</span>)​
+<span class="highlighted-wrapper-line">        .maxLength(<span class="hljs-number">512</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,​
-    <span class="hljs-comment">// highlight-next-line​</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>​
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -298,7 +281,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
         .dataType(DataType.Int64)​
@@ -336,7 +318,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
         .dataType(DataType.Bool)​
@@ -375,7 +356,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
         .dataType(DataType.JSON)​
@@ -418,7 +398,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
         .dataType(DataType.Array)​

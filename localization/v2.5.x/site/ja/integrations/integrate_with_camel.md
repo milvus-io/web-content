@@ -77,7 +77,7 @@ response = requests.get(url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、カスタマイズした RAG パイプラインを設定します。<code translate="no">VectorRetriever</code> を例とします。ここでは、<code translate="no">OpenAIEmbedding</code> をエンベッディングモデルとして設定し、<code translate="no">MilvusStorage</code> をストレージとして設定します。</p>
+    </button></h2><p>このセクションでは、カスタマイズした RAG パイプラインを設定します。<code translate="no">VectorRetriever</code> を例とします。<code translate="no">OpenAIEmbedding</code> をエンベッディングモデル、<code translate="no">MilvusStorage</code> をストレージとして設定します。</p>
 <p>OpenAIのエンベッディングを設定するには、<code translate="no">OPENAI_API_KEY</code> 。</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -114,7 +114,7 @@ vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>コンテンツを小さなチャンクに分割するために、統合された<code translate="no">Unstructured Module</code> を使用します。コンテンツは、<code translate="no">chunk_by_title</code> 関数を使用して自動的に分割されます。各チャンクの最大文字数は500文字で、<code translate="no">OpenAIEmbedding</code> に適した長さです。各チャンクの最大文字数は500文字で、 に適した長さです。チャンク内のテキストはすべて埋め込まれて、ベクトル・ストレージ・インスタンスに格納されます。</p>
+<p>コンテンツを小さなチャンクに分割するために、統合された<code translate="no">Unstructured Module</code> を使用します。コンテンツは、<code translate="no">chunk_by_title</code> の機能で自動的に分割されます。各チャンクの最大文字数は500文字で、<code translate="no">OpenAIEmbedding</code> に適した長さです。チャンク内のテキストはすべて埋め込まれ、ベクター・ストレージ・インスタンスに保存されます。</p>
 <pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -123,7 +123,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>ここで、クエリーを与えることで、ベクトル・ストレージから情報を取り出すことができます。デフォルトでは、コサイン類似度スコアが最も高い上位1つのチャンクからテキストコンテンツを返します。検索されたコンテンツがクエリに関連していることを確認するために、類似度スコアは0.75以上でなければなりません。また、<code translate="no">top_k</code> の値を変更することもできます。</p>
+<p>ここで、クエリーを与えることで、ベクターストレージから情報を取り出すことができます。デフォルトでは、コサイン類似度スコアが最も高い上位1つのチャンクからテキストコンテンツを返します。検索されたコンテンツがクエリに関連していることを確認するために、類似度スコアは0.75以上でなければなりません。また、<code translate="no">top_k</code> の値を変更することもできます。</p>
 <p>返される文字列リストには</p>
 <ul>
 <li>類似度スコア</li>
@@ -167,7 +167,7 @@ vector_retriever = VectorRetriever(
 <li>MilvusのリモートURLとapiキーを設定する。</li>
 <li>クエリを与える</li>
 </ul>
-<p>Auto RAGパイプラインは与えられたコンテンツ入力パスに対してコレクションを作成する。コレクション名はコンテンツ入力パス名に基づいて自動的に設定され、コレクションが存在する場合は直接検索を行う。</p>
+<p>Auto RAGパイプラインは、与えられたコンテンツ入力パスに対してコレクションを作成します。コレクション名はコンテンツ入力パス名に基づいて自動的に設定され、コレクションが存在する場合は、直接検索を行います。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
@@ -198,7 +198,7 @@ Retrieved Context:
 {'similarity score': '0.8252888321876526', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 7}, 'text': ' Section 3.2, to simulate assistant-user cooperation. For our analysis, we set our attention on AI Society setting. We also gathered conversational data, named CAMEL AI Society and CAMEL Code datasets and problem-solution pairs data named CAMEL Math and CAMEL Science and analyzed and evaluated their quality. Moreover, we will discuss potential extensions of our framework and highlight both the risks and opportunities that future AI society might present.'}
 {'similarity score': '0.8378663659095764', 'content path': 'https://www.camel-ai.org/', 'metadata': {'filetype': 'text/html', 'languages': ['eng'], 'page_number': 1, 'url': 'https://www.camel-ai.org/', 'link_urls': ['#h.3f4tphhd9pn8', 'https://join.slack.com/t/camel-ai/shared_invite/zt-2g7xc41gy-_7rcrNNAArIP6sLQqldkqQ', 'https://discord.gg/CNcNpquyDc'], 'link_texts': [None, None, None], 'emphasized_text_contents': ['Mission', 'CAMEL-AI.org', 'is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.', 'Join us via', 'Slack', 'Discord', 'or'], 'emphasized_text_tags': ['span', 'span', 'span', 'span', 'span', 'span', 'span']}, 'text': 'Mission\n\nCAMEL-AI.org is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.\n\nJoin us via\n\nSlack\n\nDiscord\n\nor'}
 </code></pre>
-<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3.自動RAGによるシングルエージェント<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3.Auto RAGによるシングルエージェント<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,7 +213,7 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、<code translate="no">AutoRetriever</code> を1つの<code translate="no">ChatAgent</code> に結合する方法を示します。</p>
+    </button></h2><p>このセクションでは、<code translate="no">AutoRetriever</code> を1つの<code translate="no">ChatAgent</code> と組み合わせる方法を示します。</p>
 <p>エージェント関数を設定します。この関数で、このエージェントにクエリを提供することで、レスポンスを取得できます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage

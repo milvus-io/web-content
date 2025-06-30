@@ -50,12 +50,31 @@ summary: >-
      <th><p>Tipos de índice aplicáveis</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>BFLOAT16_VECTOR</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>FLAT</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>VECTOR_BINÁRIO</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>VECTOR_FLOAT_ESPARSO</p></td>
@@ -63,18 +82,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED (Recomendado)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED (Recomendado)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (Recomendado)</li><li>INVERTIDO</li></ul></td>
+     <td><ul>
+<li>BITMAP (Recomendado)</li>
+<li>INVERTIDO</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>INVERTIDO</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>INVERTIDO</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>INVERTED</p></td>
    </tr>
    <tr>
@@ -107,7 +144,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Como demonstrado no diagrama abaixo, um tipo de índice em Milvus consiste em três componentes principais, nomeadamente <strong>a estrutura de dados</strong>, <strong>a quantização</strong> e o <strong>refinador</strong>. A quantização e o refinador são opcionais, mas são amplamente utilizados devido a um equilíbrio significativo entre ganhos e custos.</p>
+    </button></h2><p>Como demonstrado no diagrama abaixo, um tipo de índice em Milvus consiste em três componentes principais, nomeadamente <strong>a estrutura de dados</strong>, <strong>a quantização</strong> e <strong>o refinador</strong>. A quantização e o refinador são opcionais, mas são amplamente utilizados devido a um equilíbrio significativo entre ganhos e custos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
@@ -119,7 +156,7 @@ summary: >-
 <p>Os tipos de índice da série IVF permitem que o Milvus agrupe vectores em grupos através de um particionamento baseado em centróides. Em geral, é seguro assumir que todos os vectores de um grupo estão provavelmente próximos do vetor de consulta se o centróide do grupo estiver próximo do vetor de consulta. Com base nesta premissa, o Milvus analisa apenas as incorporações de vectores nos baldes em que os centróides estão próximos do vetor de consulta, em vez de examinar todo o conjunto de dados. Esta estratégia reduz os custos computacionais, mantendo uma precisão aceitável.</p>
 <p>Este tipo de estrutura de dados de índice é ideal para conjuntos de dados de grande escala que requerem um rendimento rápido.</p></li>
 <li><p><strong>Estrutura baseada em grafos</strong></p>
-<p>Uma estrutura de dados baseada em gráficos para pesquisa vetorial, como a Hierarchical Navigable Small World<a href="https://arxiv.org/abs/1603.09320">(HNSW</a>), constrói um gráfico em camadas em que cada vetor se liga aos seus vizinhos mais próximos. As consultas navegam nesta hierarquia, começando nas camadas superiores grosseiras e passando pelas camadas inferiores, o que permite uma complexidade de pesquisa eficiente em tempo logarítmico.</p>
+<p>Uma estrutura de dados baseada em gráficos para pesquisa vetorial, como a Hierarchical Navigable Small World<a href="https://arxiv.org/abs/1603.09320">(HNSW</a>), constrói um gráfico em camadas em que cada vetor se liga aos seus vizinhos mais próximos. As consultas navegam nesta hierarquia, começando nas camadas superiores grosseiras e passando pelas camadas inferiores, permitindo uma complexidade de pesquisa eficiente em tempo logarítmico.</p>
 <p>Este tipo de estrutura de dados de índice é excelente em espaços de elevada dimensão e em cenários que exigem consultas de baixa latência.</p></li>
 </ul>
 <h3 id="Quantization" class="common-anchor-header">Quantização</h3><p>A quantização reduz o espaço de memória e os custos computacionais através de uma representação mais grosseira:</p>
@@ -235,7 +272,7 @@ summary: >-
 </div>
 <p>O consumo de memória de um índice é influenciado pela sua estrutura de dados, taxa de compressão através da quantização e o refinador em uso. De um modo geral, os índices baseados em grafos têm tipicamente um maior consumo de memória devido à estrutura do grafo (por exemplo, <strong>HNSW</strong>), o que implica normalmente uma sobrecarga de espaço por vetor. Em contrapartida, o IVF e as suas variantes são mais eficientes em termos de memória, uma vez que se aplica menos sobrecarga de espaço por vetor. No entanto, técnicas avançadas como a <strong>DiskANN</strong> permitem que partes do índice, como o gráfico ou o refinador, residam no disco, reduzindo a carga de memória e mantendo o desempenho.</p>
 <p>Especificamente, a utilização de memória de um índice pode ser calculada da seguinte forma:</p>
-<h3 id="IVF-index-memory-usage" class="common-anchor-header">Utilização de memória do índice IVF</h3><p>Os índices IVF equilibram a eficiência da memória com o desempenho da pesquisa, particionando os dados em clusters. Segue-se uma análise da memória utilizada por 1 milhão de vectores de 128 dimensões indexados com variantes de IVF.</p>
+<h3 id="IVF-index-memory-usage" class="common-anchor-header">Utilização de memória do índice IVF</h3><p>Os índices IVF equilibram a eficiência da memória com o desempenho da pesquisa ao particionar os dados em clusters. Segue-se uma análise da memória utilizada por 1 milhão de vectores de 128 dimensões indexados com variantes de IVF.</p>
 <ol>
 <li><p><strong>Calcule a memória utilizada pelos centróides.</strong></p>
 <p>Os tipos de índice da série IVF permitem que o Milvus agrupe vectores em grupos utilizando o particionamento baseado em centróides. Cada centróide é incluído no índice na incorporação de vectores em bruto. Quando divide os vectores em 2.000 clusters, a utilização de memória pode ser calculada da seguinte forma:</p>
@@ -304,7 +341,7 @@ summary: >-
 <p>A quantização reduz o tamanho do vetor. Por exemplo, a utilização de PQ com 8 subquantizadores (8 bytes por vetor) conduz a uma compressão drástica. A memória consumida pelos embeddings vectoriais comprimidos pode ser calculada da seguinte forma:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
-<p>Isto atinge uma taxa de compressão de 64 vezes quando comparada com os embeddings de vetor em bruto, e a memória total utilizada pelo tipo de índice <strong>HNSWPQ</strong> seria <strong>128 MB (gráfico) + 8 MB (vetor comprimido) = 136 MB</strong>.</p></li>
+<p>Isto alcança uma taxa de compressão de 64 vezes quando comparado com os embeddings de vetor em bruto, e a memória total utilizada pelo tipo de índice <strong>HNSWPQ</strong> seria <strong>128 MB (gráfico) + 8 MB (vetor comprimido) = 136 MB</strong>.</p></li>
 <li><p><strong>Calcule a sobrecarga de refinamento.</strong></p>
 <p>O refinamento, como a reclassificação com vetores brutos, carrega temporariamente dados de alta precisão na memória. Para uma pesquisa que recupera os 10 principais resultados com uma taxa de expansão de 5, a sobrecarga de refinamento pode ser estimada da seguinte forma:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates

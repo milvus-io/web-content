@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>バイナリベクタは、複雑なオブジェクト（画像、テキスト、音声など）を固定長のバイナリ値にエンコードする方法です。Milvusでは、バイナリベクタは通常ビット配列またはバイト配列として表現されます。例えば、8次元のバイナリベクトルは<code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code> のように表現できます。</p>
-<p>下の図は、バイナリ・ベクトルがテキスト・コンテンツ内のキーワードの存在をどのように表すかを示しています。この例では、10 次元のバイナリ・ベクトルを使用して 2 つの異なるテキスト<strong>（テキスト 1</strong>と<strong>テキスト 2</strong>）を表し、各次元が語彙内の単語に対応します。</p>
+<p>下の図は、バイナリ・ベクトルがテキスト・コンテンツ内のキーワードの存在をどのように表すかを示しています。この例では、10 次元のバイナリ・ベクトルを使用して、2 つの異なるテキスト<strong>（テキスト 1</strong>と<strong>テキスト 2</strong>）を表し、各次元は語彙内の単語に対応します。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
@@ -73,10 +73,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">ベクトルフィールドの追加</h3><p>Milvusでバイナリベクトルを使用するには、まずコレクションを作成する際にバイナリベクトルを格納するためのベクトルフィールドを定義します。このプロセスには以下が含まれます：</p>
+    </button></h2><h3 id="Add-vector-field" class="common-anchor-header">ベクトルフィールドの追加</h3><p>Milvusでバイナリベクタを使用するには、まずコレクションを作成する際にバイナリベクタを格納するためのベクタフィールドを定義します。このプロセスには以下が含まれます：</p>
 <ol>
 <li><p><code translate="no">datatype</code> をサポートされるバイナリベクタデータ型、すなわち<code translate="no">BINARY_VECTOR</code> に設定する。</p></li>
-<li><p><code translate="no">dim</code> パラメータを使用して、ベクトルの次元を指定する。バイナリベクタは挿入時にバイト配列に変換する必要があるため、<code translate="no">dim</code> は 8 の倍数でなければならないことに注意。8個のブーリアン値（0または1）はすべて1バイトにパックされる。例えば、<code translate="no">dim=128</code> の場合、挿入には16バイトの配列が必要となる。</p></li>
+<li><p><code translate="no">dim</code> パラメータを使用して、ベクトルの次元を指定する。バイナリベクタは挿入時にバイト配列に変換する必要があるため、<code translate="no">dim</code> は 8 の倍数でなければならないことに注意。8個のブーリアン値（0または1）は、1バイトにパックされる。例えば、<code translate="no">dim=128</code> の場合、挿入には16バイトの配列が必要となる。</p></li>
 </ol>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -237,8 +237,8 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>上の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、<code translate="no">binary_vector</code> フィールドに<code translate="no">binary_vector_index</code> という名前のインデックスが作成されている。<code translate="no">metric_type</code> は<code translate="no">HAMMING</code> に設定され、ハミング距離が類似性測定に使用されることを示している。</p>
-<p>Milvusはより良いベクトル検索を行うために様々なインデックスタイプを提供しています。AUTOINDEXはベクトル検索の学習曲線を滑らかにするために設計された特別なインデックスタイプです。様々なインデックスタイプを選択することができます。詳しくはxxxをご参照ください。</p>
-<p>さらに、Milvusはバイナリベクトルの他の類似度メトリックもサポートしています。詳細は<a href="/docs/ja/metric.md">Metric Typesを</a>参照してください。</p>
+<p>Milvusはより良いベクトル検索を行うために様々なインデックスタイプを提供しています。AUTOINDEXはベクトル検索の学習曲線を滑らかにするために設計された特別なインデックスタイプです。様々なインデックスタイプを選択することができます。詳しくは<a href="/docs/ja/index-explained.md">インデックスの</a>説明をご覧ください。</p>
+<p>さらに、Milvusはバイナリベクトルの他の類似度メトリックもサポートしています。詳細は<a href="/docs/ja/metric.md">メトリックタイプを</a>参照してください。</p>
 <h3 id="Create-collection" class="common-anchor-header">コレクションの作成</h3><p>バイナリベクトルとインデックスの設定が完了したら、バイナリベクトルを含むコレクションを作成します。以下の例では、<code translate="no">create_collection</code> メソッドを使用して、<code translate="no">my_collection</code> という名前のコレクションを作成しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

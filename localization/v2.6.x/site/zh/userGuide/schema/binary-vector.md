@@ -238,7 +238,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的示例中，使用<code translate="no">AUTOINDEX</code> 索引类型为<code translate="no">binary_vector</code> 字段创建了名为<code translate="no">binary_vector_index</code> 的索引。<code translate="no">metric_type</code> 设置为<code translate="no">HAMMING</code> ，表示使用汉明距离进行相似性测量。</p>
-<p>Milvus 提供多种索引类型，以获得更好的向量搜索体验。AUTOINDEX 是一种特殊的索引类型，旨在平滑向量搜索的学习曲线。有很多索引类型可供您选择。详情请参阅 xxx。</p>
+<p>Milvus 提供多种索引类型，以获得更好的向量搜索体验。AUTOINDEX 是一种特殊的索引类型，旨在平滑向量搜索的学习曲线。有很多索引类型供你选择。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引说明</a>。</p>
 <p>此外，Milvus 还支持二进制向量的其他相似度度量。更多信息，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p>
 <h3 id="Create-collection" class="common-anchor-header">创建 Collections</h3><p>二进制向量和索引设置完成后，创建一个包含二进制向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的 Collection。</p>
 <div class="multipleCode">

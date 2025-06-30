@@ -6,7 +6,7 @@ summary: >-
   untuk berinteraksi dengan database Anda dengan mudah. Hanya dengan beberapa
   klik, Anda bisa memvisualisasikan status cluster Anda, mengelola metadata,
   melakukan kueri data, dan banyak lagi.
-title: Sistem Penjawab Pertanyaan
+title: Memulai Cepat dengan Attu - UI Web dari Milvus
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Memulai Cepat dengan Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"

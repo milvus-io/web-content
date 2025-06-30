@@ -430,6 +430,35 @@ summary: Milvus에 공통을 구성하는 방법을 알아보세요.
     </tr>
   </tbody>
 </table>
+<h2 id="commonsecurityenablePublicPrivilege" class="common-anchor-header"><code translate="no">common.security.enablePublicPrivilege</code><button data-href="#commonsecurityenablePublicPrivilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.enablePublicPrivilege">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        공용 권한 활성화 여부      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="commonsecurityrbacoverrideBuiltInPrivilegeGroupsenabled" class="common-anchor-header"><code translate="no">common.security.rbac.overrideBuiltInPrivilegeGroups.enabled</code><button data-href="#commonsecurityrbacoverrideBuiltInPrivilegeGroupsenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -542,7 +571,7 @@ summary: Milvus에 공통을 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>        클러스터 수준 관리자 권한      </td>
-      <td>데이터베이스 목록, 소유권 선택, 사용자 선택, 리소스 그룹 설명, 리소스 그룹 목록, 권한 그룹 목록, 모두 플러시, 전송 노드, 전송 복제본, 리소스 그룹 업데이트, 백업 RBAC, 복원 RBAC, 데이터베이스 만들기,데이터베이스 삭제,소유권 만들기,소유권 삭제,소유권 관리,리소스 그룹 만들기,리소스 그룹 삭제,사용자 업데이트,컬렉션 이름 바꾸기,권한 그룹 만들기,권한 그룹 삭제,권한 그룹 작동</td>
+      <td>데이터베이스 목록, 소유권 선택, 사용자 선택, 리소스 그룹 설명, 리소스 그룹 목록, 권한 그룹 목록, 모두 플러시, 전송 노드, 전송 복제본, 리소스 그룹 업데이트, 백업 RBAC, 복원 RBAC, 데이터베이스 만들기,데이터베이스 삭제,소유권 만들기,소유권 삭제,소유권 관리,리소스 그룹 만들기,리소스 그룹 삭제,사용자 업데이트,컬렉션 이름 바꾸기,권한 그룹 만들기,권한 그룹 삭제,권한 그룹 운영</td>
     </tr>
   </tbody>
 </table>
@@ -1242,6 +1271,93 @@ summary: Milvus에 공통을 구성하는 방법을 알아보세요.
     <tr>
       <td>        작업이 완료될 때까지 기다렸다가 풀에서 리소스를 해제할 최대 시간입니다.      </td>
       <td>60</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledOptimizeExpr" class="common-anchor-header"><code translate="no">common.enabledOptimizeExpr</code><button data-href="#commonenabledOptimizeExpr" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledOptimizeExpr">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        익스플로잇 최적화 활성화 여부를 나타냅니다.      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledJSONKeyStats" class="common-anchor-header"><code translate="no">common.enabledJSONKeyStats</code><button data-href="#commonenabledJSONKeyStats" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledJSONKeyStats">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        JSON 키 통계를 활성화할지 여부를 sealedsegment에 표시합니다.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledGrowingSegmentJSONKeyStats" class="common-anchor-header"><code translate="no">common.enabledGrowingSegmentJSONKeyStats</code><button data-href="#commonenabledGrowingSegmentJSONKeyStats" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledGrowingSegmentJSONKeyStats">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        성장하는 세그먼트에 JSON 키 통계를 활성화할지 여부를 나타냅니다.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>

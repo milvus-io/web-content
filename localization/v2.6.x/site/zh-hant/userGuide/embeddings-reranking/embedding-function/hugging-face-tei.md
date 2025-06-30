@@ -2,8 +2,8 @@
 id: hugging-face-tei.md
 title: 抱抱臉 TEICompatible with Milvus 2.6.x
 summary: >-
-  Hugging Face Text Embeddings Inference (TEI) 是專為文字嵌入模型設計的高效能推論伺服器。本指南說明如何將
-  Hugging Face TEI 與 Milvus 搭配使用，以有效率地產生文字嵌入。
+  Hugging Face Text Embeddings Inference (TEI) 是專為文字嵌入模型設計的高效能推論伺服器。本指南說明如何使用
+  Hugging Face TEI 與 Milvus 進行高效率的文字嵌入產生。
 beta: Milvus 2.6.x
 ---
 <h1 id="Hugging-Face-TEI" class="common-anchor-header">抱抱臉 TEI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Hugging-Face-TEI" class="anchor-icon" translate="no">
@@ -117,7 +117,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
-      <span class="hljs-attr">openai:</span>
+      <span class="hljs-attr">tei:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">tei_key</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enabled by default. no action required.</span>
 <button class="copy-code-btn"></button></code></pre></li>

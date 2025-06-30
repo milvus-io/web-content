@@ -44,7 +44,7 @@ summary: 了解如何为 Milvus 配置 grpc。
   <tbody>
     <tr>
       <td>        秒，等待优雅停止结束的时间      </td>
-      <td>10</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>

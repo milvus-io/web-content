@@ -35,13 +35,13 @@ title: 주요 구성 요소
         ></path>
       </svg>
     </button></h2><ul>
-<li>코디네이터: 클러스터당 정확히 하나</li>
+<li>코디네이터: 고가용성을 제공하기 위해 마스터-슬레이브 모드를 활성화할 수 있습니다.</li>
 <li>프록시: 클러스터당 하나 이상</li>
 <li>스트리밍 노드: 클러스터당 하나 이상</li>
 <li>쿼리 노드: 클러스터당 하나 이상</li>
 <li>데이터 노드: 클러스터당 하나 이상</li>
 </ul>
-<h2 id="Third-party-dependencies" class="common-anchor-header">서드파티 종속성<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
+<h2 id="Third-party-dependencies" class="common-anchor-header">타사 종속성<button data-href="#Third-party-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,5 +106,5 @@ title: 주요 구성 요소
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/v2.6.x/four_layers.md">컴퓨팅/스토리지 분리를</a> 읽고 Milvus의 메커니즘과 설계 원리를 이해하세요.</li>
+<li><a href="/docs/ko/four_layers.md">컴퓨팅/스토리지 분리를</a> 읽고 Milvus의 메커니즘과 설계 원리를 이해하세요.</li>
 </ul>

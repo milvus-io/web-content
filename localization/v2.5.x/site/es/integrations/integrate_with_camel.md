@@ -48,7 +48,7 @@ title: Retrieval-Augmented Generation (RAG) con Milvus y Camel
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Primero carguemos el papel CAMEL desde https://arxiv.org/pdf/2303.17760.pdf. Este será nuestro ejemplo local de datos.</p>
+    </button></h2><p>Carguemos primero el papel CAMEL desde https://arxiv.org/pdf/2303.17760.pdf. Este será nuestro ejemplo local de datos.</p>
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -79,7 +79,7 @@ response = requests.get(url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En esta sección configuraremos nuestro pipeline RAG personalizado, tomaremos <code translate="no">VectorRetriever</code> como ejemplo. Estableceremos <code translate="no">OpenAIEmbedding</code> como modelo de incrustación y <code translate="no">MilvusStorage</code> como almacenamiento.</p>
+    </button></h2><p>En esta sección configuraremos nuestro pipeline RAG personalizado, tomaremos <code translate="no">VectorRetriever</code> como ejemplo. Estableceremos <code translate="no">OpenAIEmbedding</code> como el modelo de incrustación y <code translate="no">MilvusStorage</code> como el almacenamiento para el mismo.</p>
 <p>Para establecer la incrustación OpenAI, tenemos que establecer la <code translate="no">OPENAI_API_KEY</code> en la parte inferior.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -116,7 +116,7 @@ vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizamos <code translate="no">Unstructured Module</code> integrado para dividir el contenido en pequeños trozos, el contenido se dividirá automacitlly con su <code translate="no">chunk_by_title</code> función, el carácter máximo para cada trozo es de 500 caracteres, que es una longitud adecuada para <code translate="no">OpenAIEmbedding</code>. Todo el texto en los trozos será incrustado y almacenado en la instancia de almacenamiento vectorial, esto tomará algún tiempo, por favor espere.</p>
+<p>Utilizamos <code translate="no">Unstructured Module</code> integrado para dividir el contenido en pequeños trozos, el contenido se dividirá automáticamente con su función <code translate="no">chunk_by_title</code>, el carácter máximo para cada trozo es de 500 caracteres, que es una longitud adecuada para <code translate="no">OpenAIEmbedding</code>. Todo el texto en los trozos será incrustado y almacenado en la instancia de almacenamiento vectorial, esto tomará algún tiempo, por favor espere.</p>
 <pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -125,7 +125,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>Ahora podemos recuperar información del almacenamiento vectorial haciendo una consulta. Por defecto, se devolverá el contenido de texto del primer fragmento con la mayor puntuación de similitud coseno, y la puntuación de similitud debe ser superior a 0,75 para asegurar que el contenido recuperado es relevante para la consulta. También puede cambiar el valor de <code translate="no">top_k</code>.</p>
+<p>Ahora podemos recuperar información del almacenamiento vectorial haciendo una consulta. Por defecto, nos devolverá el contenido de texto del primer trozo con la mayor puntuación de similitud coseno, y la puntuación de similitud debe ser superior a 0,75 para asegurar que el contenido recuperado es relevante para la consulta. También puede cambiar el valor de <code translate="no">top_k</code>.</p>
 <p>La lista de cadenas devuelta incluye:</p>
 <ul>
 <li>puntuación de similitud</li>
@@ -169,7 +169,7 @@ vector_retriever = VectorRetriever(
 <li>Establecer url remota y clave api para Milvus</li>
 <li>Dar una consulta</li>
 </ul>
-<p>El Auto RAG pipeline creará colecciones para las rutas de entrada de contenido dadas, el nombre de la colección se establecerá automáticamente basado en el nombre de la ruta de entrada de contenido, si la colección existe, hará la recuperación directamente.</p>
+<p>La tubería Auto RAG crearía colecciones para las rutas de entrada de contenido dadas, el nombre de la colección se establecerá automáticamente basado en el nombre de la ruta de entrada de contenido, si la colección existe, hará la recuperación directamente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
@@ -200,7 +200,7 @@ Retrieved Context:
 {'similarity score': '0.8252888321876526', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 7}, 'text': ' Section 3.2, to simulate assistant-user cooperation. For our analysis, we set our attention on AI Society setting. We also gathered conversational data, named CAMEL AI Society and CAMEL Code datasets and problem-solution pairs data named CAMEL Math and CAMEL Science and analyzed and evaluated their quality. Moreover, we will discuss potential extensions of our framework and highlight both the risks and opportunities that future AI society might present.'}
 {'similarity score': '0.8378663659095764', 'content path': 'https://www.camel-ai.org/', 'metadata': {'filetype': 'text/html', 'languages': ['eng'], 'page_number': 1, 'url': 'https://www.camel-ai.org/', 'link_urls': ['#h.3f4tphhd9pn8', 'https://join.slack.com/t/camel-ai/shared_invite/zt-2g7xc41gy-_7rcrNNAArIP6sLQqldkqQ', 'https://discord.gg/CNcNpquyDc'], 'link_texts': [None, None, None], 'emphasized_text_contents': ['Mission', 'CAMEL-AI.org', 'is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.', 'Join us via', 'Slack', 'Discord', 'or'], 'emphasized_text_tags': ['span', 'span', 'span', 'span', 'span', 'span', 'span']}, 'text': 'Mission\n\nCAMEL-AI.org is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.\n\nJoin us via\n\nSlack\n\nDiscord\n\nor'}
 </code></pre>
-<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Agente Único con Auto RAG<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Agente único con Auto RAG<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

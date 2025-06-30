@@ -83,7 +83,7 @@ response = requests.get(url)
 <p>Pour configurer l'intégration d'OpenAI, nous devons configurer <code translate="no">OPENAI_API_KEY</code> comme indiqué ci-dessous.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Importer et définir l'instance d'intégration :</p>
+<p>Importez et définissez l'instance d'intégration :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.embeddings <span class="hljs-keyword">import</span> OpenAIEmbedding
 
 embedding_instance = OpenAIEmbedding()
@@ -116,7 +116,7 @@ vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nous utilisons <code translate="no">Unstructured Module</code> intégré pour diviser le contenu en petits morceaux, le contenu sera divisé automatiquement avec sa fonction <code translate="no">chunk_by_title</code>, le caractère maximum pour chaque morceau est de 500 caractères, ce qui est une longueur appropriée pour <code translate="no">OpenAIEmbedding</code>. Tout le texte contenu dans les morceaux sera intégré et stocké dans l'instance de stockage vectoriel, ce qui prendra un certain temps, veuillez patienter.</p>
+<p>Nous utilisons <code translate="no">Unstructured Module</code> intégré pour diviser le contenu en petits morceaux, le contenu sera divisé automatiquement avec sa fonction <code translate="no">chunk_by_title</code>, le caractère maximum pour chaque morceau est de 500 caractères, ce qui est une longueur appropriée pour <code translate="no">OpenAIEmbedding</code>. Tout le texte des morceaux sera intégré et stocké dans l'instance de stockage vectoriel, ce qui prendra un certain temps, veuillez patienter.</p>
 <pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -215,8 +215,8 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans cette section, nous allons montrer comment combiner <code translate="no">AutoRetriever</code> avec un seul agent <code translate="no">ChatAgent</code>.</p>
-<p>Mettons en place une fonction d'agent, dans cette fonction nous pouvons obtenir la réponse en fournissant une requête à cet agent.</p>
+    </button></h2><p>Dans cette section, nous allons montrer comment combiner le site <code translate="no">AutoRetriever</code> avec un seul site <code translate="no">ChatAgent</code>.</p>
+<p>Définissons une fonction d'agent, dans cette fonction nous pouvons obtenir la réponse en fournissant une requête à cet agent.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> RoleType

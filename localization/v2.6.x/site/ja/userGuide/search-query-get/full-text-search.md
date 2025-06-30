@@ -22,7 +22,7 @@ summary: >-
     </button></h1><p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取れるようにします。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
 <p>関連性のスコアリングにBM25アルゴリズムを使用するこの機能は、特定の検索用語に密接に一致する文書を優先的に検索する、検索拡張世代（RAG）シナリオで特に有用です。</p>
 <div class="alert note">
-<p>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳細については、<a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
+<p>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳細については、<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,9 +42,9 @@ summary: >-
     </button></h2><p>全文検索は、手作業による埋め込みを不要にすることで、テキストベースの検索プロセスを簡素化します。この機能は、次のようなワークフローで動作します：</p>
 <ol>
 <li><p><strong>テキスト入力</strong>：テキスト入力： 生のテキスト文書を挿入するか、クエリーテキストを提供します。</p></li>
-<li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/v2.6.x/analyzer-overview.md">アナライザーを</a>使用して、入力テキストを検索可能な個々の用語にトークン化します。</p></li>
+<li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/analyzer-overview.md">アナライザーを使って</a>、入力テキストを検索可能な個々の用語にトークン化します。</p></li>
 <li><p><strong>関数処理</strong>：組み込み関数がトークン化された用語を受け取り、スパースベクトル表現に変換します。</p></li>
-<li><p><strong>コレクションストア</strong>：Milvusはこれらのスパース埋め込みをコレクションに保存し、効率的な検索を可能にする。</p></li>
+<li><p><strong>コレクションストア</strong>：Milvusは効率的な検索のために、これらのスパース埋め込みをコレクションに保存する。</p></li>
 <li><p><strong>BM25スコアリング</strong>：検索中、MilvusはBM25アルゴリズムを適用して保存された文書のスコアを計算し、クエリテキストとの関連性に基づいてマッチした結果をランク付けします。</p></li>
 </ol>
 <p>
@@ -53,9 +53,9 @@ summary: >-
    </span> <span class="img-wrapper"> <span>全文検索</span> </span></p>
 <p>全文検索を使用するには、以下の主な手順に従ってください：</p>
 <ol>
-<li><p><a href="/docs/ja/v2.6.x/full-text-search.md#Create-a-collection-for-full-text-search">コレクションを作成</a>する：必要なフィールドを持つコレクションをセットアップし、生テキストをスパース埋め込みに変換する関数を定義する。</p></li>
-<li><p><a href="/docs/ja/v2.6.x/full-text-search.md#Insert-text-data">データを挿入する</a>：生テキスト文書をコレクションに取り込む。</p></li>
-<li><p><a href="/docs/ja/v2.6.x/full-text-search.md#Perform-full-text-search">検索を実行する</a>：クエリテキストを使用してコレクションを検索し、関連する結果を取得します。</p></li>
+<li><p><a href="/docs/ja/full-text-search.md#Create-a-collection-for-full-text-search">コレクションを作成</a>する：必要なフィールドを持つコレクションをセットアップし、生テキストをスパース埋め込みに変換する関数を定義する。</p></li>
+<li><p><a href="/docs/ja/full-text-search.md#Insert-text-data">データを挿入する</a>：生テキスト文書をコレクションに取り込む。</p></li>
+<li><p><a href="/docs/ja/full-text-search.md#Perform-full-text-search">検索を実行する</a>：クエリテキストを使用してコレクションを検索し、関連する結果を取得します。</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">全文検索用のコレクションの作成<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,7 +209,7 @@ schema.WithField(entity.NewField().
 <p>この構成では</p>
 <ul>
 <li><p><code translate="no">id</code>: は主キーとして機能し、<code translate="no">auto_id=True</code> で自動的に生成される。</p></li>
-<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はテキスト保存用のMilvus文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvus はテキスト分析に<code translate="no">standard</code><a href="/docs/ja/v2.6.x/standard-analyzer.md"> アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/v2.6.x/analyzer-overview.md">解析器の概要を</a>参照してください。</p></li>
+<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はテキスト保存用のMilvus文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvus はテキスト分析に<code translate="no">standard</code><a href="/docs/ja/standard-analyzer.md"> アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/analyzer-overview.md">解析器の概要を</a>参照してください。</p></li>
 <li><p><code translate="no">sparse</code>: 全文検索操作のために内部で生成されたスパース埋め込みを格納するために予約されたベクトルフィールドです。データ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> でなければならない。</p></li>
 </ul>
 <p>次に、テキストをスパース・ベクトル表現に変換する関数を定義し、スキーマに追加します：</p>
@@ -332,21 +332,35 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
+Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+fvParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+fvParams.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+fvParams.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.BM25)
+        .extraParams(params)
         .build());    
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
     index.NewAutoIndex(entity.MetricType(entity.BM25)))
+    .WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
+    .WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
+    .WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
     <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">params</span>: {
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>
+    }
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
@@ -354,7 +368,12 @@ indexes.add(IndexParam.builder()
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
+            &quot;params&quot;:{
+               &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
+               &quot;bm25_k1&quot;: 1.2,
+               &quot;bm25_b&quot;: 0.75
+            }
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -369,7 +388,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">index_type</code></p></td>
-     <td><p>作成するインデックスのタイプ<code translate="no">AUTOINDEX</code> Milvusは自動的にインデックス設定を最適化します。インデックス設定をより細かく制御する必要がある場合は、Milvusのスパースベクタで利用可能な様々なインデックスタイプから選択することができます。詳細は<a href="/docs/ja/v2.6.x/index.md#Indexes-supported-in-Milvus">Milvusでサポートされるインデックスを</a>参照してください。</p></td>
+     <td><p>作成するインデックスのタイプ<code translate="no">AUTOINDEX</code> Milvusは自動的にインデックス設定を最適化します。インデックス設定をより細かく制御する必要がある場合は、Milvusのスパースベクタで利用可能な様々なインデックスタイプから選択することができます。詳細は<a href="/docs/ja/index.md#Indexes-supported-in-Milvus">Milvusでサポートされるインデックスを</a>参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">metric_type</code></p></td>
@@ -616,11 +635,11 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>検索時に無視する重要度の低い用語の割合。詳細は<a href="/docs/ja/v2.6.x/sparse_vector.md">スパース・ベクターを</a>参照。</p></td>
+     <td><p>検索時に無視する重要度の低い用語の割合。詳細は<a href="/docs/ja/sparse_vector.md">スパース・ベクターを</a>参照。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>自然言語による生のクエリテキスト。MilvusはBM25関数を使用して自動的にテキストクエリをスパースベクトルに変換します。</p></td>
+     <td><p>自然言語による生のクエリテキスト。milvusはBM25関数を使用して、テキストクエリを自動的にスパースベクトルに変換します。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
@@ -628,7 +647,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>検索結果に返すフィールド名のリスト。BM25 が生成した埋め込みを含む<strong>スパース・ベクトル・フィールド以外の</strong>すべてのフィールドをサポートします。一般的な出力フィールドには、主キー・フィールド（例：<code translate="no">id</code> ）や元のテキスト・フィールド（例：<code translate="no">text</code> ）があります。詳細については、<a href="/docs/ja/v2.6.x/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a> を参照してください。</p></td>
+     <td><p>検索結果に返すフィールド名のリスト。BM25 が生成した埋め込みを含む<strong>スパース・ベクトル・フィールド以外の</strong>すべてのフィールドをサポートします。一般的な出力フィールドには、主キー・フィールド（例：<code translate="no">id</code> ）や元のテキスト・フィールド（例：<code translate="no">text</code> ）があります。詳細については、<a href="/docs/ja/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">FAQ</a> を参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -689,4 +708,4 @@ client.search(
 <li><p>全文検索の代わりに手動でスパースベクトル操作を使用</p></li>
 <li><p>カスタムスパースベクトルワークフロー用に個別のコレクションを作成できます。</p></li>
 </ul>
-<p>詳細については、<a href="/docs/ja/v2.6.x/sparse_vector.md">スパース・ベクターを</a>参照してください。</p>
+<p>詳細については、<a href="/docs/ja/sparse_vector.md">スパースベクトルを</a>参照してください。</p>

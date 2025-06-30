@@ -90,13 +90,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpecker 提供兩種部署模式，以符合您的特定需求：</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 輕量且免於維護</h3><p>MemoryBuffer 模式提供了一個簡單、輕量的部署選項，Woodpecker 會在記憶體中暫時緩衝寫入的內容，並定期將其刷新至雲端物件儲存服務。元數據使用<strong>etcd</strong>管理，以確保一致性和協調性。此模式最適合用於較小規模部署中的批次繁重工作負載，或將簡單性置於效能之上的生產環境，尤其是在低寫入延遲並非關鍵的情況下。</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 輕量且免於維護</h3><p>MemoryBuffer 模式提供了一個簡單、輕量的部署選項，Woodpecker 的嵌入式用戶端會在記憶體中暫時緩衝寫入的內容，並定期將其刷新至雲端物件儲存服務。在此模式下，記憶體緩衝直接嵌入客戶端，在刷新到 S3 之前實現了高效的批次處理。元資料使用<strong>etcd</strong>管理，以確保一致性和協調性。此模式最適合用於較小規模部署中的批次繁重工作負載，或將簡單性置於效能之上的生產環境，尤其是在低寫入延遲並非關鍵的情況下。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>啄木鳥記憶體模式部署</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - 優化為低延遲、高耐用性</h3><p>QuorumBuffer 模式專為對延遲敏感的高頻率讀/寫工作負載而設計，這些工作負載同時需要實時的回應能力和強大的容錯能力。在此模式下，Woodpecker 可作為高速寫入緩衝器使用三個副本 quorum 寫入，以確保強大的一致性和高可用性。</p>
-<p>寫入一旦複製到三個節點中的至少兩個，即被視為成功，通常在個位數毫秒內完成，之後，資料會以非同步方式刷新到雲端物件儲存，以達到長期耐用性。此架構可將節點上的狀態降至最低，不需要大型本機磁碟區，並避免傳統基於法定人數的系統通常需要的複雜反熵修復。</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - 優化為低延遲、高耐用性</h3><p>QuorumBuffer 模式專為對延遲敏感的高頻率讀/寫工作負載而設計，這些工作負載同時需要實時的回應能力和強大的容錯能力。在此模式下，Woodpecker 的用戶端會與三個副本的 quorum 系統互動，以提供高速寫入緩衝，並透過分散式共識確保強大的一致性和高可用性。</p>
+<p>一旦用戶端成功將資料複製到三個法定節點中的至少兩個，即視為寫入成功，通常在個位數毫秒內完成，之後，資料會以非同步方式刷新到雲端物件儲存空間，以獲得長期耐用性。此架構可將節點上的狀態降至最低，不需要大型本機磁碟區，並避免傳統法定人數系統常見的複雜反熵修復。</p>
 <p>結果是一個簡化、穩健的 WAL 層，非常適合對一致性、可用性和快速復原要求極高的關鍵任務生產環境。</p>
 <p>
   
@@ -136,7 +136,7 @@ summary: >-
 <p>值得注意的是，Woodpecker 對於每個後端都持續達到最大可能吞吐量的 60-80%，對於中介軟體來說，這是一個非凡的效率水準。</p>
 <h3 id="Key-performance-insights" class="common-anchor-header">關鍵性能洞察</h3><ul>
 <li>本地檔案系統模式：Woodpecker 的速度達到 450 MB/s，比 Kafka 快 3.5 倍，比 Pulsar 快 4.2 倍，超低延遲僅為 1.8 ms，非常適合高效能單節點部署。</li>
-<li>雲端儲存模式 (S3)：直接寫入 S3 時，Woodpecker 達到 750 MB/s（約為 S3 理論極限的 68%），比 Kafka 高 5.8 倍，比 Pulsar 高 7 倍。雖然延遲較高 (166 毫秒)，但此設定可為面向批次的工作負載提供優異的吞吐量。</li>
+<li>雲端儲存模式 (S3)：直接寫入 S3 時，Woodpecker 達到 750 MB/s（約為 S3 理論極限的 68%），比 Kafka 高 5.8 倍，比 Pulsar 高 7 倍。雖然延遲較高 (166 毫秒)，但此設定可為面向批次的工作負載提供卓越的吞吐量。</li>
 <li>物件儲存模式 (MinIO)：即使使用 MinIO，Woodpecker 也能達到 71 MB/s，約為 MinIO 容量的 65%。此性能可與 Kafka 和 Pulsar 媲美，但對資源的需求明顯較低。</li>
 </ul>
 <p>Woodpecker 特別針對並發、大容量寫入進行了優化，在這種情況下，維持順序至關重要。而這些結果只反映出開發的早期階段 - 在 I/O 合併、智慧緩衝和預取方面持續進行的最佳化，可望讓效能更接近理論極限。</p>
@@ -162,6 +162,6 @@ summary: >-
 <li><strong>成本效益</strong>：隨用隨付的儲存空間，可自動分層與壓縮</li>
 <li><strong>高可用性</strong>：利用雲端供應商的 11-nines 耐用性與快速復原</li>
 <li><strong>簡化部署</strong>：兩種部署模式 (MemoryBuffer/QuorumBuffer) 符合不同的作業需求</li>
-<li><strong>開發人員友善</strong>：更快速的環境設定，所有環境架構一致</li>
+<li><strong>開發人員友善</strong>：更快的環境設定，所有環境的架構一致</li>
 </ul>
 <p>這些優勢讓 Woodpecker 對於關鍵任務 RAG、AI 代理和低延遲搜尋工作負載特別有價值，在這些工作負載中，作業簡單性與效能同樣重要。</p>

@@ -35,7 +35,7 @@ title: Componentes principais
         ></path>
       </svg>
     </button></h2><ul>
-<li>Coordenador: exatamente um por cluster</li>
+<li>Coordenador: o modo mestre-escravo pode ser ativado para fornecer alta disponibilidade.</li>
 <li>Proxy: um ou mais por cluster</li>
 <li>Nó de streaming: um ou mais por cluster</li>
 <li>Nó de consulta: um ou mais por cluster</li>
@@ -106,5 +106,5 @@ title: Componentes principais
         ></path>
       </svg>
     </button></h2><ul>
-<li>Leia <a href="/docs/pt/v2.6.x/four_layers.md">Computing/Storage Disaggregation</a> para entender o mecanismo e o princípio de design do Milvus.</li>
+<li>Leia <a href="/docs/pt/four_layers.md">Computing/Storage Disaggregation</a> para entender o mecanismo e o princípio de design do Milvus.</li>
 </ul>

@@ -29,7 +29,7 @@ summary: >-
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background: url('https://milvus.io/docs/v2.6.x/assets/hearing.png') no-repeat center center;
     background-size: contain;
     cursor: pointer;
     margin-left: 4px;
@@ -106,9 +106,9 @@ summary: >-
 <p>Milvus 的雲原生與高度解耦的系統架構，可確保系統能隨著資料成長而持續擴充：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus_architecture_2_6.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Milvus 高度解耦的系統架構</span> </span></p>
-<p>Milvus 本身是完全無狀態的，因此可借助 Kubernetes 或公有雲輕鬆擴展。此外，Milvus 各個元件都有很好的解耦功能，其中最重要的三項任務 - 搜尋、資料插入和索引/壓縮 - 都被設計成容易並行化的流程，並將複雜的邏輯分離出來。這可確保相對應的查詢節點、資料節點和索引節點都能獨立擴充，以最佳化效能和成本效益。</p>
+<p>Milvus 本身是完全無狀態的，因此可借助 Kubernetes 或公有雲輕鬆擴展。此外，Milvus 各個元件都有很好的解耦功能，其中最重要的三個任務 - 搜尋、資料插入和索引/壓縮 - 都被設計成容易並行化的流程，並將複雜的邏輯分離出來。這可確保相對應的查詢節點、資料節點和索引節點都能獨立擴充，以最佳化效能和成本效益。</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus 支援的搜尋類型<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,9 @@ summary: >-
 <li><a href="https://milvus.io/api-reference/go/v2.4.x/About.md">Go SDK</a>(官方)</li>
 <li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">Java SDK</a>(官方)</li>
 <li><a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.js</a>(JavaScript) SDK (官方)</li>
-<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a>(微軟提供)</li>
+<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a>(由 Microsoft 提供)</li>
+<li>C++ SDK (開發中)</li>
+<li>Rust SDK (開發中)</li>
 </ul>
 <h3 id="Advanced-Data-Types" class="common-anchor-header">進階資料類型</h3><p>除了原始資料類型外，Milvus 還支援各種進階資料類型及其各自適用的距離度量。</p>
 <ul>
@@ -165,21 +167,23 @@ summary: >-
 <li><a href="/docs/zh-hant/index-vector-fields.md">二進位向量</a></li>
 <li><a href="/docs/zh-hant/use-json-fields.md">JSON 支援</a></li>
 <li><a href="/docs/zh-hant/array_data_type.md">陣列支援</a></li>
-<li><a href="/docs/zh-hant/metric.md">距離指標</a></li>
+<li>文字 (開發中)</li>
+<li>地理位置（開發中）</li>
 </ul>
-<h3 id="Acceleration" class="common-anchor-header">加速</h3><ul>
-<li><p>搜尋演算法 Milvus 支援一組可調整的索引和搜尋演算法。如需詳細資訊，請參閱「<a href="/docs/zh-hant/index.md">記憶體內索引</a>」、<a href="/docs/zh-hant/disk_index.md">「磁碟上索引</a>」和「<a href="/docs/zh-hant/gpu_index.md">GPU 索引</a>」。</p></li>
-<li><p>分區和分區鍵值 分區是 Milvus 資料集中的子分區。您可以選擇標量欄位作為分割鍵，以獲得更好的搜尋效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/manage-partitions.md">管理分割區和</a> <a href="/docs/zh-hant/use-partition-key.md">使用分割區金鑰</a>。</p></li>
-<li><p>可調整的一致性模型 一致性可確保每個 Milvus 節點或副本在特定時間寫入或讀取資料時，擁有相同的資料視圖。在 Milvus 中執行 ANN 搜尋時，您可以輕鬆調整一致性層級。如需詳細資訊，請參閱<a href="/docs/zh-hant/consistency.md">一致性</a>。</p></li>
-<li><p>高通量資料匯入 要匯入大量資料到 Milvus，而不是一個接一個地插入，請考慮使用我們的高通量資料匯入工具。詳情請參閱<a href="/docs/zh-hant/prepare-source-data.md">準備來源資料</a>和<a href="/docs/zh-hant/import-data.md">匯入資料</a>。</p></li>
-<li><p>多租用支援 Milvus 實現了許多面向多租用場景的功能，包括分區鑰匙、集群鑰匙等。詳情請參閱<a href="/docs/zh-hant/multi_tenancy.md">多租戶策略</a>。</p></li>
-</ul>
-<h3 id="Security-and-Authorization" class="common-anchor-header">安全性與授權</h3><ul>
-<li><p>可調整的一致性模型 一致性確保每個 Milvus 節點或副本在特定時間寫入或讀取資料時，擁有相同的資料視圖。在 Milvus 中執行 ANN 搜尋時，您可以輕鬆調整一致性層級。如需詳細資訊，請參閱<a href="/docs/zh-hant/consistency.md">一致性</a>。</p></li>
-<li><p>資料隔離及資源控制 對於多租戶情境，資料隔離是基本的安全需求。Milvus 實現了多種功能來解決您的安全問題。如需詳細資訊，請參閱<a href="/docs/zh-hant/resource_group.md">管理資源</a> <a href="/docs/zh-hant/clustering-compaction.md">群組</a>與<a href="/docs/zh-hant/clustering-compaction.md">群集壓縮</a>。</p></li>
+<h3 id="Why-Milvus" class="common-anchor-header">為什麼選擇 Milvus？</h3><ul>
+<li><p><strong>高效能與高可用性</strong></p>
+<p>Milvus 採用<a href="/docs/zh-hant/architecture_overview.md">分散式架構</a>，<a href="/docs/zh-hant/data_processing.md#Data-query">將計算</a>與<a href="/docs/zh-hant/data_processing.md#Data-insertion">儲存</a>分離。Milvus 可橫向擴充並適應多樣化的流量模式，透過針對讀取繁重的工作負載獨立增加查詢節點，以及針對寫入繁重的工作負載獨立增加資料節點，達到最佳效能。K8s 上的無狀態微服務可從故障中<a href="/docs/zh-hant/coordinator_ha.md#Coordinator-HA">快速恢復</a>，確保高可用性。透過在多個查詢節點上載入資料片段，對<a href="/docs/zh-hant/replica.md">複製</a>的支援進一步增強了容錯能力和吞吐量。請參閱效能比較<a href="https://zilliz.com/vector-database-benchmark-tool">基準</a>。</p></li>
+<li><p><strong>支援各種向量索引類型及硬體加速</strong></p>
+<p>Milvus 將系統與核心向量搜尋引擎分離，使其能夠支援針對不同情境最佳化的所有主要向量索引類型，包括 HNSW、IVF、FLAT (brute-force)、SCANN 和 DiskANN，以及<a href="/docs/zh-hant/index-explained.md">基於量化的</a>變異和<a href="/docs/zh-hant/mmap.md">mmap</a>。Milvus 優化向量搜尋的進階功能，例如<a href="/docs/zh-hant/boolean.md">元資料過濾</a>和<a href="/docs/zh-hant/range-search.md">範圍搜尋</a>。此外，Milvus 實作硬體加速以提升向量搜尋效能，並支援 GPU 索引，例如 NVIDIA 的<a href="/docs/zh-hant/gpu-cagra.md">CAGRA</a>。</p></li>
+<li><p><strong>彈性的多租戶與冷/熱儲存</strong></p>
+<p>Milvus 透過資料庫、資料集、分割區或分割區金鑰層級的隔離來支援<a href="/docs/zh-hant/multi_tenancy.md#Multi-tenancy-strategies">多租用</a>。靈活的策略可讓單一叢集處理數百至數百萬的租戶，也確保最佳化的搜尋效能與彈性的存取控制。Milvus 透過冷/熱儲存提升成本效益。經常存取的熱資料可儲存在記憶體或固態硬碟上，以獲得更佳效能，而較少存取的冷資料則保存在速度較慢、具成本效益的儲存設備上。此機制可大幅降低成本，同時維持關鍵任務的高效能。</p></li>
+<li><p><strong>用於全文檢索和混合檢索的稀疏向量</strong></p>
+<p>除了透過密集向量進行語意搜尋外，Milvus 也原生支援 BM25<a href="/docs/zh-hant/full-text-search.md">全文搜尋</a>，以及 SPLADE 和 BGE-M3 等學習型稀疏嵌入。使用者可以在同一個集合中儲存稀疏向量和密集向量，並定義函式來重新排序多次搜尋請求的結果。請參閱<a href="/docs/zh-hant/full_text_search_with_milvus.md">混合搜尋 (Hybrid Search) 搭配語意搜尋 + 全文搜尋的</a>範例。</p></li>
+<li><p><strong>資料安全與細粒度存取控制</strong></p>
+<p>Milvus 透過實施<a href="/docs/zh-hant/authenticate.md">強制使用者驗證</a>、<a href="/docs/zh-hant/tls.md">TLS 加密</a>和<a href="/docs/zh-hant/rbac.md">角色存取控制 (RBAC)</a> 來確保資料安全。使用者驗證可確保只有擁有有效憑證的授權使用者才能存取資料庫，而 TLS 加密則可確保網路內所有通訊的安全性。此外，RBAC 可根據使用者的角色為其指定特定權限，從而實現精細的存取控制。這些功能讓 Milvus 成為企業應用程式穩健且安全的選擇，保護敏感資料免於未經授權的存取及潛在的外洩。</p></li>
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">AI 整合</h3><ul>
-<li><p>嵌入式模型整合 嵌入式模型將非結構化資料轉換成高維資料空間中的數值表示，以便您可以將它們儲存在 Milvus 中。目前 Python SDK PyMilvus 整合了多種嵌入模型，讓您可以快速將資料準備成向量嵌入。如需詳細資訊，請參閱<a href="/docs/zh-hant/embeddings.md">嵌入概述</a>。</p></li>
+<li><p>嵌入式模型整合 嵌入式模型可將非結構化資料轉換為高維資料空間中的數值表示，以便您能將其儲存在 Milvus 中。目前 Python SDK PyMilvus 整合了多種嵌入模型，讓您可以快速將資料準備成向量嵌入。如需詳細資訊，請參閱<a href="/docs/zh-hant/embeddings.md">嵌入概述</a>。</p></li>
 <li><p>重排模型 (Reranking Model Integrations) 在資訊檢索與生成式人工智慧領域中，重排器 (reranker) 是優化初始搜尋結果順序的重要工具。PyMilvus 也整合了幾個 reranking 模型來優化從初始搜尋返回結果的順序。詳情請參閱<a href="/docs/zh-hant/rerankers-overview.md">Rerankers 總覽</a>。</p></li>
 <li><p>LangChain 與其他 AI 工具整合 在 GenAI 時代，LangChain 等工具獲得許多應用程式開發人員的關注。作為核心元件，Milvus 通常在這些工具中扮演向量儲存的角色。要了解如何將 Milvus 整合到您最喜愛的 AI 工具中，請參考我們的<a href="/docs/zh-hant/integrate_with_openai.md">整合</a>與<a href="/docs/zh-hant/build-rag-with-milvus.md">教學</a>。</p></li>
 </ul>
@@ -188,7 +192,7 @@ summary: >-
 <li><p>Birdwatcher Birdwatcher 是 Milvus 的調試工具。使用它連線到 etcd，您可以檢查 Milvus 系統的狀態或即時設定。如需詳細資訊，請參閱<a href="/docs/zh-hant/birdwatcher_overview.md">BirdWatcher</a>。</p></li>
 <li><p>Promethus &amp; Grafana 整合 Prometheus 是 Kubernetes 的開放原始碼系統監控與警示工具套件。Grafana 是可與所有資料來源連接的開放原始碼視覺化堆疊。您可以使用 Promethus &amp; Grafana 作為監控服務提供者，以視覺化方式監控 Milvus 分散式的效能。詳情請參閱<a href="/docs/zh-hant/monitor.md">部署監控服務</a>。</p></li>
 <li><p>Milvus 備份 Milvus 備份是一個允許使用者備份和還原 Milvus 資料的工具。它同時提供 CLI 和 API，以適合不同的應用情境。詳情請參閱<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus 備份</a>。</p></li>
-<li><p>Milvus Capture Data Change (CDC) Milvus-CDC 可以捕捉和同步 Milvus 實例中的增量數據，並通過源實例和目標實例之間的無縫傳輸來確保業務數據的可靠性，從而實現簡便的增量備份和災難恢復。詳情請參閱<a href="/docs/zh-hant/milvus-cdc-overview.md">Milvus CDC</a>。</p></li>
+<li><p>Milvus Capture Data Change (CDC) Milvus-CDC 可以擷取和同步 Milvus 實體中的增量資料，並透過源實體和目標實體之間的無縫傳輸，確保業務資料的可靠性，方便進行增量備份和災難恢復。詳情請參閱<a href="/docs/zh-hant/milvus-cdc-overview.md">Milvus CDC</a>。</p></li>
 <li><p>Milvus Connectors Milvus 已經規劃了一套連接器，讓您可以無縫整合 Milvus 與第三方工具，例如 Apache Spark。目前，您可以使用我們的 Spark Connector 將 Milvus 資料饋送至 Apache Spark 進行機器學習處理。如需詳細資訊，請參閱<a href="/docs/zh-hant/integrate_with_spark.md">Spark-Milvus Connector</a>。</p></li>
 <li><p>Vector Transmission Services (VTS) Milvus 提供了一套工具，讓您可以在 Milvus 實例和一堆資料來源之間傳輸資料，包括 Zilliz 集群、Elasticsearch、Postgres (PgVector) 和另一個 Milvus 實例。如需詳細資訊，請參閱<a href="https://github.com/zilliztech/vts">VTS</a>。</p></li>
 </ul>

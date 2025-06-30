@@ -61,7 +61,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
    </span> <span class="img-wrapper"> <span>استخدام المتجهات الثنائية</span> </span></p>
 <div class="alert note">
-<p>على الرغم من أن المتجهات الثنائية تتفوق في سيناريوهات محددة، إلا أن لها قيودًا في قدرتها التعبيرية، مما يجعل من الصعب التقاط العلاقات الدلالية المعقدة. لذلك، في سيناريوهات العالم الحقيقي، غالبًا ما تُستخدم المتجهات الثنائية جنبًا إلى جنب مع أنواع المتجهات الأخرى لتحقيق التوازن بين الكفاءة والتعبير. لمزيد من المعلومات، راجع <a href="/docs/ar/dense-vector.md">المتجهات الكثيفة</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
+<p>على الرغم من أن المتجهات الثنائية تتفوق في سيناريوهات محددة، إلا أن لها قيودًا في قدرتها التعبيرية، مما يجعل من الصعب التقاط العلاقات الدلالية المعقدة. لذلك، في سيناريوهات العالم الواقعي، غالبًا ما تُستخدم المتجهات الثنائية جنبًا إلى جنب مع أنواع المتجهات الأخرى لتحقيق التوازن بين الكفاءة والتعبير. لمزيد من المعلومات، راجع <a href="/docs/ar/dense-vector.md">المتجهات الكثيفة</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
 </div>
 <h2 id="Use-binary-vectors" class="common-anchor-header">استخدام المتجهات الثنائية<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -195,7 +195,7 @@ schema.WithField(entity.NewField().
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، تمت إضافة حقل متجه باسم <code translate="no">binary_vector</code> لتخزين المتجهات الثنائية. نوع بيانات هذا الحقل هو <code translate="no">BINARY_VECTOR</code> ، ببعد 128.</p>
+<p>في هذا المثال، تمت إضافة حقل متجه اسمه <code translate="no">binary_vector</code> لتخزين المتجهات الثنائية. نوع بيانات هذا الحقل هو <code translate="no">BINARY_VECTOR</code> ، ببعد 128.</p>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجه</h3><p>لتسريع عمليات البحث، يجب إنشاء فهرس لحقل المتجه الثنائي. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -242,9 +242,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>في المثال أعلاه، يتم إنشاء فهرس باسم <code translate="no">binary_vector_index</code> للحقل <code translate="no">binary_vector</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. تم تعيين <code translate="no">metric_type</code> على <code translate="no">HAMMING</code> ، مما يشير إلى استخدام مسافة هامينج لقياس التشابه.</p>
-<p>يوفر Milvus أنواعًا مختلفة من الفهارس للحصول على تجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل منحنى تعلم البحث المتجه. هناك الكثير من أنواع الفهارس المتاحة لتختار من بينها. لمزيد من التفاصيل، راجع xxx.</p>
+<p>يوفر Milvus أنواعًا مختلفة من الفهارس للحصول على تجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل منحنى تعلم البحث المتجه. هناك الكثير من أنواع الفهارس المتاحة لتختار من بينها. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
 <p>بالإضافة إلى ذلك، يدعم ميلفوس مقاييس تشابه أخرى للمتجهات الثنائية. لمزيد من المعلومات، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجهات الثنائية والفهرس، قم بإنشاء مجموعة تحتوي على متجهات ثنائية. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
+<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجه الثنائي والفهرس، قم بإنشاء مجموعة تحتوي على متجهات ثنائية. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(

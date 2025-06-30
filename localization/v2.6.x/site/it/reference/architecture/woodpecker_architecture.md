@@ -72,8 +72,8 @@ summary: >-
     </button></h2><p>Una distribuzione standard di Woodpecker comprende i seguenti componenti:</p>
 <ul>
 <li><strong>Client</strong>: Livello di interfaccia per l'emissione di richieste di lettura e scrittura</li>
-<li><strong>LogStore</strong>: Gestisce il buffering delle scritture ad alta velocità, il caricamento asincrono sullo storage e la compattazione dei registri</li>
-<li><strong>Backend di archiviazione</strong>: Supporta servizi di storage scalabili e a basso costo, come S3, GCS e file system come EFS</li>
+<li><strong>LogStore</strong>: Gestisce il buffering di scrittura ad alta velocità, i caricamenti asincroni sullo storage e la compattazione dei registri</li>
+<li><strong>Backend di archiviazione</strong>: Supporta servizi di archiviazione scalabili e a basso costo come S3, GCS e file system come EFS</li>
 <li><strong>Etcd</strong>: Memorizza i metadati e coordina lo stato dei log tra i nodi distribuiti.</li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">Modalità di distribuzione<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
@@ -92,13 +92,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpecker offre due modalità di distribuzione per soddisfare le vostre esigenze specifiche:</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Leggero e senza manutenzione</h3><p>La modalità MemoryBuffer offre un'opzione di distribuzione semplice e leggera in cui Woodpecker bufferizza temporaneamente le scritture in arrivo in memoria e le invia periodicamente a un servizio di archiviazione di oggetti nel cloud. I metadati sono gestiti tramite <strong>etcd</strong> per garantire coerenza e coordinamento. Questa modalità è più adatta per carichi di lavoro batch-heavy in distribuzioni su scala ridotta o in ambienti di produzione che privilegiano la semplicità rispetto alle prestazioni, soprattutto quando la bassa latenza di scrittura non è fondamentale.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Leggero e senza manutenzione</h3><p>La modalità MemoryBuffer offre un'opzione di distribuzione semplice e leggera in cui il client incorporato di Woodpecker bufferizza temporaneamente le scritture in arrivo in memoria e le invia periodicamente a un servizio di archiviazione di oggetti nel cloud. In questa modalità, il buffer di memoria è incorporato direttamente nel client, consentendo un batching efficiente prima del flushing su S3. I metadati sono gestiti tramite <strong>etcd</strong> per garantire coerenza e coordinamento. Questa modalità è più adatta per i carichi di lavoro pesanti in batch in distribuzioni su scala ridotta o in ambienti di produzione che privilegiano la semplicità rispetto alle prestazioni, soprattutto quando la bassa latenza di scrittura non è fondamentale.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>distribuzione della modalità di memoria woodpecker</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Ottimizzata per bassa latenza e alta durata</h3><p>La modalità QuorumBuffer è progettata per carichi di lavoro di lettura/scrittura sensibili alla latenza e ad alta frequenza, che richiedono una reattività in tempo reale e una forte tolleranza agli errori. In questa modalità, Woodpecker funziona come un buffer di scrittura ad alta velocità con scritture quorum a tre repliche, garantendo una forte coerenza e un'elevata disponibilità.</p>
-<p>Una scrittura è considerata riuscita una volta replicata su almeno due dei tre nodi, e in genere viene completata entro una cifra di millisecondi, dopodiché i dati vengono scaricati in modo asincrono sull'archivio oggetti del cloud per una durata a lungo termine. Questa architettura riduce al minimo lo stato sui nodi, elimina la necessità di grandi volumi di dischi locali ed evita le complesse riparazioni anti-entropia spesso necessarie nei sistemi tradizionali basati sul quorum.</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Ottimizzata per bassa latenza e alta durata</h3><p>La modalità QuorumBuffer è progettata per carichi di lavoro di lettura/scrittura sensibili alla latenza e ad alta frequenza, che richiedono una reattività in tempo reale e una forte tolleranza agli errori. In questa modalità, il client di Woodpecker interagisce con un sistema quorum a tre repliche per fornire un buffering di scrittura ad alta velocità, garantendo una forte coerenza e un'alta disponibilità attraverso il consenso distribuito.</p>
+<p>Una scrittura è considerata riuscita quando il client replica con successo i dati su almeno due dei tre nodi del quorum, in genere completando il tutto entro una cifra di millisecondi, dopodiché i dati vengono scaricati in modo asincrono sullo storage di oggetti del cloud per una durata a lungo termine. Questa architettura riduce al minimo lo stato sui nodi, elimina la necessità di grandi volumi di dischi locali ed evita le complesse riparazioni anti-entropia spesso necessarie nei sistemi tradizionali basati sul quorum.</p>
 <p>Il risultato è un livello WAL snello e robusto, ideale per gli ambienti di produzione mission-critical in cui coerenza, disponibilità e ripristino rapido sono essenziali.</p>
 <p>
   
@@ -163,7 +163,7 @@ summary: >-
 <li><strong>Scalabilità automatica</strong>: Lo storage si adatta allo storage a oggetti del cloud senza dover pianificare la capacità.</li>
 <li><strong>Efficienza dei costi</strong>: Storage pay-as-you-go con tiering e compressione automatici</li>
 <li><strong>Alta disponibilità</strong>: Sfrutta la durata di 11 nove anni dei provider cloud con un ripristino rapido.</li>
-<li><strong>Implementazione semplificata</strong>: Due modalità di implementazione (MemoryBuffer/QuorumBuffer) per soddisfare le diverse esigenze operative</li>
+<li><strong>Implementazione semplificata</strong>: Due modalità di distribuzione (MemoryBuffer/QuorumBuffer) per soddisfare le diverse esigenze operative</li>
 <li><strong>Facilità di sviluppo</strong>: Configurazione dell'ambiente più rapida e architettura coerente in tutti gli ambienti</li>
 </ul>
 <p>Questi vantaggi rendono Woodpecker particolarmente prezioso per RAG mission-critical, agenti AI e carichi di lavoro di ricerca a bassa latenza, dove la semplicità operativa è importante quanto le prestazioni.</p>

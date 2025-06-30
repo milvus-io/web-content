@@ -37,9 +37,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在数据库中，"有效时间"（TTL）通常用于数据插入或修改后只能保持有效或可访问一段时间的情况。然后，数据会被自动删除。</p>
-<p>例如，如果你每天采集数据，但只需要保留 14 天的记录，你可以通过将 Collections 的 TTL 设置为<strong>14 × 24 × 3600 = 1209600</strong>秒，配置 Milvus 自动移除任何比这更早的数据。这样就能确保 Collection 中只保留最近 14 天的数据。</p>
-<p>Milvus Collections 中的 TTL 属性指定为以秒为单位的整数。一旦设置，任何超过 TTL 的数据都将自动从 Collections 中删除。</p>
-<p>由于删除过程是异步的，因此一旦指定的 TTL 超过，数据可能不会准确地从搜索结果中删除。相反，可能会有延迟，因为删除取决于垃圾 Collections (GC) 和压缩过程，而这两个过程会以非确定的时间间隔发生。</p>
+<p>例如，如果你每天采集数据，但只需要保留 14 天的记录，你可以通过将 Collections 的 TTL 设置为<strong>14 × 24 × 3600 = 1209600</strong>秒，配置 Milvus 自动移除任何比这更早的数据。这样可以确保 Collection 中只保留最近 14 天的数据。</p>
+<div class="alert note">
+<p>过期的实体不会出现在任何搜索或查询结果中。不过，它们可能会留在存储中，直到随后的数据压缩（应在接下来的 24 小时内进行）。</p>
+<p>你可以通过设置 Milvus 配置文件中的<code translate="no">dataCoord.compaction.expiry.tolerance</code> 配置项来控制何时触发数据压缩。</p>
+<p>该配置项的默认值为<code translate="no">-1</code> ，表示适用现有的数据压实间隔。不过，如果将其值改为正整数（如<code translate="no">12</code> ），则会在任何实体过期后的指定小时数触发数据压缩。</p>
+</div>
+<p>Milvus Collections 中的 TTL 属性指定为以秒为单位的整数。一旦设定，任何超过 TTL 的数据都将自动从 Collections 中删除。</p>
+<p>由于删除过程是异步的，因此一旦指定的 TTL 过期，数据可能不会准确地从搜索结果中删除。相反，可能会有延迟，因为删除取决于垃圾 Collections (GC) 和压缩过程，而这两个过程的时间间隔是不确定的。</p>
 <h2 id="Set-TTL" class="common-anchor-header">设置 TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

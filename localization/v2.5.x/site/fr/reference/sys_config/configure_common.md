@@ -275,7 +275,7 @@ summary: Apprenez à configurer Common pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        secondes. Le serveur sera arrêté de force si le processus d'arrêt gracieux n'est pas achevé pendant cette période.      </td>
+      <td>        secondes. Le serveur sera fermé de force si le processus d'arrêt gracieux n'est pas achevé pendant cette période.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -396,7 +396,7 @@ summary: Apprenez à configurer Common pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        mot de passe par défaut pour l'utilisateur root. La longueur maximale est de 72 caractères, et les guillemets doubles sont obligatoires.      </td>
+      <td>        mot de passe par défaut pour l'utilisateur root. La longueur maximale est de 72 caractères et les guillemets doubles sont obligatoires.      </td>
       <td>Milvus</td>
     </tr>
   </tbody>
@@ -430,6 +430,35 @@ summary: Apprenez à configurer Common pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="commonsecurityenablePublicPrivilege" class="common-anchor-header"><code translate="no">common.security.enablePublicPrivilege</code><button data-href="#commonsecurityenablePublicPrivilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.enablePublicPrivilege">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Si le privilège public doit être activé      </td>
+      <td>vrai</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="commonsecurityrbacoverrideBuiltInPrivilegeGroupsenabled" class="common-anchor-header"><code translate="no">common.security.rbac.overrideBuiltInPrivilegeGroups.enabled</code><button data-href="#commonsecurityrbacoverrideBuiltInPrivilegeGroupsenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -454,7 +483,7 @@ summary: Apprenez à configurer Common pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Indique s'il faut remplacer les groupes de privilèges intégrés      </td>
+      <td>        Remplacer ou non les groupes de privilèges intégrés      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -883,7 +912,7 @@ summary: Apprenez à configurer Common pour Milvus.
     </button></h2><table id="common.locks.maxWLockConditionalWaitTime">
   <thead>
     <tr>
-      <th class="width80">Valeur par défaut</th>
+      <th class="width80">Description de la valeur par défaut</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
@@ -1242,6 +1271,93 @@ summary: Apprenez à configurer Common pour Milvus.
     <tr>
       <td>        Le temps maximum d'attente pour que la tâche se termine et libère les ressources dans le pool.     </td>
       <td>60</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledOptimizeExpr" class="common-anchor-header"><code translate="no">common.enabledOptimizeExpr</code><button data-href="#commonenabledOptimizeExpr" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledOptimizeExpr">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indique s'il faut activer l'optimisation expr    </td>
+      <td>vrai</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledJSONKeyStats" class="common-anchor-header"><code translate="no">common.enabledJSONKeyStats</code><button data-href="#commonenabledJSONKeyStats" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledJSONKeyStats">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indique sealedsegment s'il faut activer les statistiques de clés JSON    </td>
+      <td>faux</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonenabledGrowingSegmentJSONKeyStats" class="common-anchor-header"><code translate="no">common.enabledGrowingSegmentJSONKeyStats</code><button data-href="#commonenabledGrowingSegmentJSONKeyStats" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.enabledGrowingSegmentJSONKeyStats">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Indique pour le segment croissant s'il faut activer les statistiques des clés JSON    </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>

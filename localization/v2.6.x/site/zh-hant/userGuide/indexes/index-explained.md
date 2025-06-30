@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和 RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍然很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。</p>
+    </button></h1><p>索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和 RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,12 +44,31 @@ summary: >-
      <th><p>適用的索引類型</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>bfloat16_vector</p></li><li><p>INT8_VECTOR</p></li></ul></td>
-     <td><ul><li><p>平面</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>bfloat16_vector</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>平面</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BINARY_VECTOR</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>稀疏浮點向量</p></td>
@@ -57,18 +76,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED (建議使用)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED (建議使用)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (建議)</li><li>反轉</li></ul></td>
+     <td><ul>
+<li>BITMAP (建議)</li>
+<li>反轉</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>反轉</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>反轉</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>反轉</p></td>
    </tr>
    <tr>
@@ -227,7 +264,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>本節重點在於計算特定索引類型的記憶體消耗，並包含許多技術細節。如果本節與您的興趣不符，您可以放心跳過。</p>
 </div>
-<p>索引的記憶體消耗量受其資料結構、透過量化的壓縮率，以及使用中的精煉器所影響。一般而言，基於圖表的索引通常會因為圖表的結構（例如<strong>HNSW</strong>）而佔用較多記憶體，這通常意味著每個向量的空間開銷較大。相較之下，IVF 及其變體則更節省記憶體，因為適用的每向量空間開銷較少。然而，<strong>DiskANN</strong>等先進技術允許索引的一部分（例如圖形或精煉器）駐留在磁碟上，以減少記憶體負載，同時維持效能。</p>
+<p>索引的記憶體消耗量受其資料結構、透過量化的壓縮率，以及使用中的精煉器所影響。一般來說，基於圖表的索引通常會因為圖表結構（例如<strong>HNSW</strong>）而佔用較多記憶體，這通常意味著每個向量的空間開銷較大。相較之下，IVF 及其變體則更節省記憶體，因為適用的每向量空間開銷較少。然而，<strong>DiskANN</strong>等先進技術允許索引的一部分（例如圖形或精煉器）駐留在磁碟上，以減少記憶體負載，同時維持效能。</p>
 <p>具體來說，索引的記憶體使用量可以如下計算：</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">IVF 索引記憶體使用量</h3><p>IVF 索引透過將資料分割成群組，在記憶體效率與搜尋效能之間取得平衡。以下是使用 IVF 變異索引的 100 萬個 128 維向量所使用的記憶體明細。</p>
 <ol>

@@ -45,7 +45,7 @@ summary: >-
     </button></h2><p>Woodpeckerの中核となるイノベーションは、ゼロディスク・アーキテクチャです：</p>
 <ul>
 <li>全てのログデータはクラウドオブジェクトストレージ（Amazon S3、Google Cloud Storage、Alibaba OSなど）に保存されます。</li>
-<li>メタデータは<strong>etcdの</strong>ような分散キーバリューストアで管理されます。</li>
+<li>メタデータは<strong>etcdの</strong>ような分散キーバリューストアで管理。</li>
 <li>コアオペレーションにおいてローカルディスクに依存しない</li>
 </ul>
 <p>
@@ -90,13 +90,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpeckerはお客様のニーズに合わせて2つのデプロイメントモードを提供します：</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 軽量でメンテナンスフリー</h3><p>MemoryBufferモードは、Woodpeckerが一時的にメモリに書き込みをバッファリングし、定期的にクラウドオブジェクトストレージサービスにフラッシュするシンプルで軽量なデプロイメントオプションです。メタデータは<strong>etcdを使って</strong>管理され、一貫性と協調性を確保します。このモードは、特に書き込みレイテンシの低さが重要でない場合、パフォーマンスよりもシンプルさを優先する小規模なデプロイや本番環境でのバッチ負荷の高いワークロードに最適です。</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 軽量でメンテナンスフリー</h3><p>MemoryBufferモードは、Woodpeckerの組み込みクライアントが一時的にメモリに書き込みをバッファリングし、定期的にクラウドオブジェクトストレージサービスにフラッシュするシンプルで軽量なデプロイメントオプションです。このモードでは、メモリバッファはクライアントに直接組み込まれており、S3にフラッシュする前に効率的なバッチ処理を行うことができます。メタデータは<strong>etcdを使って</strong>管理され、一貫性と協調性を確保する。このモードは、小規模なデプロイメントや、パフォーマンスよりもシンプルさを優先する本番環境で、特に低書き込みレイテンシが重要でない場合に、バッチを多用するワークロードに最適です。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>ウッドペッカーのメモリモード展開</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - 低レイテンシ、高耐久性のために最適化されています。</h3><p>QuorumBufferモードは、レイテンシに敏感で、リアルタイムの応答性と強力な耐障害性の両方を必要とする高頻度の読み書きワークロード用に設計されています。このモードでは、Woodpeckerは3レプリカのクォーラム書き込みによる高速書き込みバッファとして機能し、強力な一貫性と高可用性を保証します。</p>
-<p>書き込みは、3つのノードのうち少なくとも2つのノードにレプリケートされると成功とみなされ、通常1桁ミリ秒以内に完了します。このアーキテクチャは、ノード上の状態を最小化し、大規模なローカル・ディスク・ボリュームの必要性を排除し、従来のクォーラムベースのシステムでしばしば必要とされる複雑なアンチエントロピー修復を回避します。</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - 低レイテンシ、高耐久性のために最適化されています。</h3><p>QuorumBufferモードは、リアルタイムな応答性と強力な耐障害性の両方を必要とする、レイテンシ重視の高頻度読み書きワークロード向けに設計されています。このモードでは、Woodpeckerのクライアントは3レプリカのクォーラムシステムと相互作用し、高速書き込みバッファリングを提供し、分散コンセンサスによる強力な一貫性と高可用性を保証します。</p>
+<p>クライアントが3つのクォーラムノードのうち少なくとも2つのノードにデータをレプリケートし、通常1桁ミリ秒以内に完了すると書き込みが成功したとみなされ、その後データは長期耐久性のためにクラウドオブジェクトストレージに非同期でフラッシュされます。このアーキテクチャは、ノード上の状態を最小化し、大規模なローカルディスクボリュームを不要にし、従来のクォーラムベースのシステムでしばしば必要とされる複雑なアンチエントロピー修復を回避します。</p>
 <p>その結果、一貫性、可用性、迅速なリカバリが不可欠なミッションクリティカルな本番環境に理想的な、合理的で堅牢なWALレイヤーを実現しています。</p>
 <p>
   
