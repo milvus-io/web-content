@@ -6,13 +6,26 @@ summary: "Milvus provides alias management capabilities. This page demonstrates 
 
 # Manage Aliases
 
-Milvus provides alias management capabilities. This page demonstrates the procedures to create, list, alter, and drop aliases.
+In Milvus, an alias is a secondary, mutable name for a collection. Using aliases provides a layer of abstraction that allows you to dynamically switch between collections without modifying your application code. This is particularly useful in production environments for seamless data updates, A/B testing, and other operational tasks.
 
-## Overview
+This page demonstrates how to create, list, reassign, and drop collection aliases.
 
-You can create aliases for your collections. A collection can have several aliases, but collections cannot share an alias. 
+## Why Use an Alias?
 
-Upon receiving a request against a collection, Milvus locates the collection based on the provided name. If the collection by the provided name does not exist, Milvus continues locating the provided name as an alias. You can use collection aliases to adapt your code to different scenarios.
+The primary benefit of using an alias is to decouple your client application from a specific, physical collection name.
+
+Imagine you have a live application that queries a collection named `prod_data`. When you need to update the underlying data, you can perform the update without any service interruption. The workflow would be:
+
+1.  **Create a New Collection**: Create a new collection, for instance, `prod_data_v2`.
+2.  **Prepare Data**: Load and index the new data in `prod_data_v2`.
+3.  **Switch the Alias**: Once the new collection is ready for service, atomically reassign the alias `prod_data` from the old collection to `prod_data_v2`.
+
+Your application continues to send requests to the alias `prod_data`, experiencing zero downtime. This mechanism enables seamless updates and simplifies operations like blue-green deployments for your vector search service.
+
+**Key Properties of Aliases:**
+- A collection can have multiple aliases.
+- An alias can only point to one collection at a time.
+- When processing a request, Milvus first checks if a collection with the provided name exists. If not, it then checks if the name is an alias for a collection.
 
 ## Create Alias
 

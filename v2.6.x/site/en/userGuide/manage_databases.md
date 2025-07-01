@@ -491,3 +491,14 @@ curl --request POST \
 }'
 ```
 
+## FAQ
+
+### How do I manage permissions for a database?
+
+Milvus uses Role-Based Access Control (RBAC) to manage permissions. You can create roles with specific privileges and assign them to users, thus controlling their access to different databases. For more details, refer to the [RBAC documentation](rbac.md).
+
+### Are there any quota limitations for a database?
+
+Yes, Milvus allows you to set quota limitations for a database, such as the maximum number of collections. For a comprehensive list of limitations, please refer to the [Milvus Limits documentation](limitations.md).
+
+

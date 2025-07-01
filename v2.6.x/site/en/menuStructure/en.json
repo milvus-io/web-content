@@ -279,21 +279,15 @@
         "children": []
       },
       {
-        "label": "Consistency Level",
-        "id": "tune_consistency.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "In-memory Replica",
         "id": "replica.md",
-        "order": 9,
+        "order": 8,
         "children": []
       },
       {
         "label": "Terminology",
         "id": "glossary.md",
-        "order": 10,
+        "order": 9,
         "children": []
       }
     ]
@@ -352,21 +346,27 @@
             "children": []
           },
           {
+            "label": "Set Consistency Level",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
             "label": "Manage Partitions",
             "id": "manage-partitions.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Manage Aliases",
             "id": "manage-aliases.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Drop Collection",
             "id": "drop-collection.md",
-            "order": 9,
+            "order": 10,
             "children": []
           }
         ]
@@ -1084,6 +1084,26 @@
             ]
           }
         ]
+      },
+      {
+        "label": "Storage Optimization",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Use mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Clustering Compaction",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1484,26 +1504,6 @@
             "label": "Manage Resource Groups",
             "id": "resource_group.md",
             "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Storage Optimization",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Use mmap",
-            "id": "mmap.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Clustering Compaction",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           }
         ]

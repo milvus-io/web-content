@@ -16,6 +16,13 @@ You can also enable **AutoID** to make Milvus automatically allocate primary key
 
 The primary field in a collection does not have a default value and cannot be null.
 
+<div class="alert note">
+
+- A standard `insert` operation with a primary key that already exists in the collection will not overwrite the old entry. Instead, it will create a new, separate entity with the same primary key. This can lead to unexpected search results and data redundancy.
+- If your use case involves updating existing data or you suspect that the data you are inserting may already exist, it is highly recommended to use the upsert operation. The upsert operation will intelligently update the entity if the primary key exists, or insert a new one if it does not. For more details, refer to [Upsert Entities](upsert-entities.md).
+
+</div>
+
 ## Use Int64 Primary Keys
 
 To use primary keys of the Int64 type, you need to set `datatype` to `DataType.INT64` and set `is_primary` to `true`. If you also need Milvus to allocate the primary keys for the incoming entities, also set `auto_id` to `true`.

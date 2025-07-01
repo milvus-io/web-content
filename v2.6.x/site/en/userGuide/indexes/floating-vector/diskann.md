@@ -228,12 +228,11 @@ These parameters influence how the DISKANN index is constructed. Adjusting them 
    <tr>
      <td></td>
      <td><p><code>search_list_size</code></p></td>
-     <td><p>Determines the number of candidate neighbors considered for each data point during graph construction.</p></td>
+     <td><p>During index construction, this parameter defines the size of the candidate pool used when searching for the nearest neighbors for each node. For every node being added to the graph, the algorithm maintains a list of the <code>search_list_size</code> best candidates found so far. The search for neighbors stops when this list can no longer be improved. From this final candidate pool, the top <code>max_degree</code> nodes are selected to form the final edges.</p></td>
      <td><p><strong>Type</strong>: Integer
  <strong>Range</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Default value</strong>: <code>100</code></p></td>
-     <td><p>Larger values lead to more comprehensive graphs, potentially improving search quality but also increasing build time. 
- In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
+     <td><p>A larger <code>search_list_size</code> increases the likelihood of finding the true nearest neighbors for each node, which can lead to a higher-quality graph and better search performance (recall). However, this comes at the cost of a significantly longer index build time. It should always be set to a value greater than or equal to <code>max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -279,6 +278,15 @@ These parameters influence how DISKANN performs searches. Adjusting them can imp
 <p><strong>Default value</strong>: <code>4.0</code></p></td>
      <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to excessive resource contention.
  In most cases, we recommend you set a value within this range: [1.0, 4.0].</p></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td><p><code>search_list_size</code></p></td>
+     <td><p>During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, <em>int_max</em>]</p>
+<p><strong>Default value</strong>: <code>100</code></p></td>
+     <td><p>For a good balance between performance and accuracy, it is recommended to set this value to be equal to or slightly larger than the number of results you want to retrieve (top_k).</p></td>
    </tr>
 </table>
 

@@ -12,6 +12,12 @@ Entities in a collection are data records that share the same set of fields. Fie
 
 If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when inserting entities, Milvus automatically populates them with either their defined default values or NULL if defaults are not set. For details, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
 
+<div class="alert note">
+
+- **Fields added after collection creation**: If you add new fields to a collection after creation and don't specify values during insertion, Milvus automatically populates them with defined default values or NULL if no defaults are set. For details, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
+
+- **Duplicate handling**: The standard `insert` operation does not check for duplicate primary keys. Inserting data with an existing primary key creates a new entity with the same key, leading to data duplication and potential application issues. To update existing entities or avoid duplicates, use the **`upsert`** operation instead. For more information, refer to [Upsert Entities](upsert-entities.md).
+
 </div>
 
 ## Overview

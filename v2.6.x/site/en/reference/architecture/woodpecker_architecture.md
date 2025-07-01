@@ -41,7 +41,7 @@ Woodpecker offers two deployment modes to match your specific needs:
 
 ### MemoryBuffer - Lightweight and maintenance-free
 
-MemoryBuffer mode provides a simple and lightweight deployment option where Woodpecker's embedded client temporarily buffers incoming writes in memory and periodically flushes them to a cloud object storage service. In this mode, the memory buffer is embedded directly into the client, enabling efficient batching before flushing to S3. Metadata is managed using **etcd** to ensure consistency and coordination. This mode is best suited for batch-heavy workloads in smaller-scale deployments or production environments that prioritize simplicity over performance, especially when low write latency is not critical.
+MemoryBuffer mode provides a simple and lightweight deployment option where Woodpecker's embedded client temporarily buffers incoming writes in memory and periodically flushes them to a cloud object storage service. In this mode, the memory buffer is embedded directly into the client, enabling efficient batching before flushing to S3. Metadata is managed using **etcd** to ensure consistency and coordination. This mode is best suited for batch-heavy workloads in smaller-scale deployments or production environments that prioritize simplicity over performance, especially when low write latency is not critical. The write latency in this mode is generally between 200-500 ms.
 
 ![woodpecker memory mode deployment](../../../../assets/woodpecker_memorybuffer_mode_deployment.png "woodpecker memory mode deployment.")
 
