@@ -70,7 +70,7 @@ func NewHybridSearchOption(collectionName string, limit int, annRequests ...*Ann
 
 ## AnnRequest
 
-This is a struct type. You can use the `NewAnnRequest` method to create a search request.
+This is a struct type. The `index.CustomAnnParam` struct type implements this interface. You can use the `NewAnnRequest` method to create a search request.
 
 ### NewAnnRequest
 
@@ -345,31 +345,6 @@ func (r *AnnRequest) WithTemplateParam(key string, val any) *AnnRequest
    </tr>
 </table>
 
-## ResultSet
-
-This is a struct type. You can use the `GetColumn` method to get the result values in a specific field.
-
-### GetColumn
-
-This method returns the query result in a specific column. The signature is as follows:
-
-```go
-func (rs *ResultSet) GetColumn(fieldName string) column.Column
-```
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>fieldName</code></p></td>
-     <td><p>Name of the target field.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
-
 ## index.AnnParam
 
 This is an interface type. The following struct types implement this interface.
@@ -460,11 +435,6 @@ func NewSCANNAnnParam(nprobe int, reorderK int) scannAnnParam
      <td><p>The number of clusters to search for candidates. Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.</p></td>
      <td><p><code>int</code></p></td>
    </tr>
-   <tr>
-     <td><p><code>recordK</code></p></td>
-     <td></td>
-     <td><p><code>int</code></p></td>
-   </tr>
 </table>
 
 ### sparseAnnParam
@@ -475,11 +445,120 @@ This method prepares the search parameters specific to SPARSE_INVERTED. The sign
 func NewSparseAnnParam() sparseAnnParam
 ```
 
+This method has no mandatory parameters.
+
+## index.CustomAnnParam
+
+This is a struct type that implements the `AnnRequest` interface. You can use `NewCustomAnnParam()` to get its concrete implementation.
+
+### NewCustomAnnParam
+
+This method prepares the custom ANN search parameters for the hybrid search request. The signature of this method is as follows:
+
+```go
+func NewCustomAnnParam() CustomAnnParam
+```
+
+This method has no parameters.
+
+You can chain the following methods to append extra settings to the `CustomAnnParam` struct.
+
+- [WithExtraParam](HybridSearch.md#WithExtraParam)
+
+- [WithRadius](HybridSearch.md#WithRadius)
+
+- [WithRangeFilter](HybridSearch.md#WithRangeFilter)
+
+### WithExtraParam
+
+This method appends extra search parameters to the current `AnnRequest` struct. The signature is as follows:
+
+```go
+func (b CustomAnnParam) WithExtraParam(key string, value any)
+```
+
 <table>
    <tr>
      <th><p>Parameter</p></th>
      <th><p>Description</p></th>
      <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>key</code></p></td>
+     <td><p>The name of an extra search parameter.</p></td>
+     <td><p><code>string</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>value</code></p></td>
+     <td><p>The value of the above extra search parameter.</p></td>
+     <td><p><code>string</code></p></td>
+   </tr>
+</table>
+
+### WithRadius
+
+This method appends the radius parameters to the current `AnnRequest` struct. The signature is as follows:
+
+```go
+func (b CustomAnnParam) WithRadius(radius float64)
+```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>radius</code></p></td>
+     <td><p>The radius for a range search.</p></td>
+     <td><p><code>float64</code></p></td>
+   </tr>
+</table>
+
+### WithRangeFilter
+
+This method appends the range filter parameters to the current `AnnRequest` struct. The signature is as follows:
+
+```go
+func (b CustomAnnParam) WithRangeFilter(rangeFilter float64)
+```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>radiusFilter</code></p></td>
+     <td><p>The range filter for a range search.</p></td>
+     <td><p><code>float64</code></p></td>
+   </tr>
+</table>
+
+## ResultSet
+
+This is a struct type. You can use the `GetColumn` method to get the result values in a specific field.
+
+### GetColumn
+
+This method returns the query result in a specific column. The signature is as follows:
+
+```go
+func (rs *ResultSet) GetColumn(fieldName string) column.Column
+```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>fieldName</code></p></td>
+     <td><p>Name of the target field.</p></td>
+     <td><p><code>string</code></p></td>
    </tr>
 </table>
 

@@ -952,7 +952,7 @@ This method creates an empty function. You can chain the following methods to ap
 
 - [WithParam](CreateCollection.md#entityWithParam)
 
-- WithType
+- [WithType](CreateCollection.md#entityType)
 
 ### entity.WithInputFields
 
@@ -1105,6 +1105,7 @@ const (
         FunctionTypeUnknown       = schemapb.FunctionType_Unknown
         FunctionTypeBM25          = schemapb.FunctionType_BM25
         FunctionTypeTextEmbedding = schemapb.FunctionType_TextEmbedding
+        FunctionTypeRerank        = schemapb.FunctionType_Rerank
 )
 ```
 
