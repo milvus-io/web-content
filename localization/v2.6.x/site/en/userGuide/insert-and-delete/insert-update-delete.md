@@ -24,6 +24,11 @@ summary: >-
     </button></h1><p>Entities in a collection are data records that share the same set of fields. Field values in every data record form an entity. This page introduces how to insert entities into a collection.</p>
 <div class="alert note">
 <p>If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when inserting entities, Milvus automatically populates them with either their defined default values or NULL if defaults are not set. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<div class="alert note">
+<ul>
+<li><p><strong>Fields added after collection creation</strong>: If you add new fields to a collection after creation and don’t specify values during insertion, Milvus automatically populates them with defined default values or NULL if no defaults are set. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p></li>
+<li><p><strong>Duplicate handling</strong>: The standard <code translate="no">insert</code> operation does not check for duplicate primary keys. Inserting data with an existing primary key creates a new entity with the same key, leading to data duplication and potential application issues. To update existing entities or avoid duplicates, use the <strong><code translate="no">upsert</code></strong> operation instead. For more information, refer to <a href="/docs/upsert-entities.md">Upsert Entities</a>.</p></li>
+</ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"

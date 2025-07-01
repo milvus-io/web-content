@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Upsert operation combines the actions of updating and inserting data. Milvus determines whether to perform an update or an insert operation by checking if the primary key exists. This section will introduce how to Upsert an Entity and the specific behaviors of the Upsert operation in different scenarios.</p>
+    </button></h1><p>The <code translate="no">upsert</code> operation provides a convenient way to insert or update entities in a collection. It intelligently handles data by checking for the existence of a primary key: if the key already exists, the corresponding entity is updated; otherwise, a new entity is inserted. This makes <code translate="no">upsert</code> the recommended method for managing data when you are unsure if an entity already exists or when you need to avoid creating duplicate entries.</p>
 <div class="alert note">
 <p>If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when upserting entities, Milvus automatically populates them with either their defined default values or NULL if defaults are not set. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
 </div>
