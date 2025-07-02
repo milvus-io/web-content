@@ -36,54 +36,49 @@
       {
         "id": 6,
         "title": "Retrieval-Augmented Generation (RAG) ",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/build_RAG_with_milvus.ipynb",
         "iconType": "QUESTION_ANSWER",
         "desc": "Building a Retrieval-Augmented Generation (RAG) system using Milvus for efficient document retrieval and LLM for text generation based on retrieved context."
       },
-
       {
         "id": 7,
         "title": "Multimodal RAG",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb",
         "desc": "Demonstrate a multimodal RAG system using Milvus, a visualized BGE model, and GPT-4o to perform image retrieval based on text instructions and image queries.",
         "liveDemo": "https://demos.milvus.io/multimodal-image-search/"
       },
-
       {
         "id": 9,
         "title": "Graph RAG",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb",
         "desc": "Demonstrate a Graph RAG approach using Milvus, combining entity and relation retrieval with LLM reranking to improve multi-hop question answering performance."
       },
-
       {
         "id": 8,
         "title": "Hybrid Search",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb",
         "desc": "Perform hybrid search using dense and sparse vectors in Milvus, combining semantic and keyword-based search for improved relevance in information retrieval.",
         "liveDemo": "https://demos.milvus.io/hybrid-search/"
       },
-
       {
         "id": 5,
         "title": "Image Similarity Search",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/image_search_with_milvus.ipynb",
         "iconType": "IMAGE_SEARCH",
         "desc": "Demonstrate how to use Milvus for image similarity search by extracting features from images using a ResNet model, indexing them in Milvus, and performing an image search.",
         "liveDemo": "https://milvus.io/milvus-demos/reverse-image-search"
       },
-
       {
         "id": 10,
         "title": "Recommender System",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/movie_recommendation_with_milvus.ipynb",
         "iconType": "RECOMMENDATION",
         "desc": "Build a movie recommendation system utilizing Milvus. This includes generating and loading embeddings of movie descriptions and enabling querying with filters."
       },
       {
         "id": 11,
         "title": "Video Similarity Search",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/video_search_with_twelvelabs_and_milvus.md",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/integration/video_search_with_twelvelabs_and_milvus.md",
         "iconType": "VIDEO_SEARCH",
         "desc": "Learn to build a semantic video search application by integrating Twelve Labs' Embed API for multimodal embeddings with Milvus vector database."
       },
