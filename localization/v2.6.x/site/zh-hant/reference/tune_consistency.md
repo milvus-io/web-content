@@ -148,9 +148,9 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> 參數的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">在搜尋中設定一致性層級</h3><p>您可以隨時變更特定搜尋的一致性等級。以下程式碼範例會將一致性層級設定回<strong>Bounded</strong>。此變更只適用於目前的搜尋要求。</p>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">在搜尋中設定一致性層級</h3><p>您可以隨時變更特定搜尋的一致性等級。以下程式碼範例會將一致性層級設定回<strong>Bounded</strong>。此變更僅適用於目前的搜尋請求。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">plaintext</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -169,15 +169,15 @@ curl --request POST \
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    &quot;my_collection&quot;, // collectionName
-    3,               // limit
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
 ).WithConsistencyLevel(entity.ClBounded).
-    WithANNSField(&quot;vector&quot;))
-if err != nil {
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -193,10 +193,10 @@ if err != nil {
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此參數在混合搜尋和搜尋迭代器中也可用。<code translate="no">consistency_level</code> 參數的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
+<p>此參數在混合搜尋和搜尋迭加器中也可用。<code translate="no">consistency_level</code> 參數的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">在查詢中設定一致性層級</h3><p>您可以隨時變更特定搜尋的一致性層級。以下程式碼範例設定一致性層級為<strong>Eventually</strong>。此設定僅適用於目前的查詢請求。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">明文</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -215,14 +215,25 @@ if err != nil {
         
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(&quot;my_collection&quot;).
-    WithFilter(&quot;color like \&quot;red%\&quot;&quot;).
-    WithOutputFields(&quot;vector&quot;, &quot;color&quot;).
-    WithLimit(3).
+<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>).
+    WithLimit(<span class="hljs-number">3</span>).
     WithConsistencyLevel(entity.ClEventually))
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;,
+    &quot;limit&quot;: 3
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>查詢迭代器中也可使用此參數。<code translate="no">consistency_level</code> 參數的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>

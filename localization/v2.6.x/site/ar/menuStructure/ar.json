@@ -279,21 +279,15 @@
         "children": []
       },
       {
-        "label": "مستوى الاتساق",
-        "id": "tune_consistency.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "النسخ المتماثل داخل الذاكرة",
         "id": "replica.md",
-        "order": 9,
+        "order": 8,
         "children": []
       },
       {
         "label": "المصطلحات",
         "id": "glossary.md",
-        "order": 10,
+        "order": 9,
         "children": []
       }
     ]
@@ -352,21 +346,27 @@
             "children": []
           },
           {
+            "label": "تعيين مستوى الاتساق",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
             "label": "إدارة الأقسام",
             "id": "manage-partitions.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "إدارة الأسماء المستعارة",
             "id": "manage-aliases.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "مجموعة القطرات",
             "id": "drop-collection.md",
-            "order": 9,
+            "order": 10,
             "children": []
           }
         ]
@@ -1084,6 +1084,26 @@
             ]
           }
         ]
+      },
+      {
+        "label": "تحسين التخزين",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "استخدام mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ضغط التكتلات",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1374,15 +1394,21 @@
             "children": []
           },
           {
+            "label": "مقياس مستقل بذاته",
+            "id": "scale-standalone.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "مقياس مع HPA",
             "id": "hpa.md",
-            "order": 1,
+            "order": 2,
             "children": []
           },
           {
             "label": "تبعيات المقياس",
             "id": "scale-dependencies.md",
-            "order": 2,
+            "order": 3,
             "children": []
           }
         ]
@@ -1484,26 +1510,6 @@
             "label": "إدارة مجموعات الموارد",
             "id": "resource_group.md",
             "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "تحسين التخزين",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "استخدام mmap",
-            "id": "mmap.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "ضغط التكتلات",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -1965,6 +1971,12 @@
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "بحث غير متزامن",
+                "id": "langchain_milvus_async.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2266,12 +2278,6 @@
             "label": "الألعاب النارية",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
-            "children": []
-          },
-          {
-            "label": "ليبتون",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
             "children": []
           },
           {

@@ -40,19 +40,19 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>ميلفوس هو نظام يفصل بين التخزين والحوسبة. في هذا النظام، تكون <strong>DataNodes</strong> مسؤولة عن ثبات البيانات وتخزينها في نهاية المطاف في تخزين الكائنات الموزعة مثل MinIO/S3. تتعامل <strong>QueryNodes</strong> مع المهام الحسابية مثل البحث. تتضمن هذه المهام معالجة كل من <strong>البيانات الدفعية</strong> <strong>والبيانات المتدفقة</strong>. ببساطة، يمكن فهم البيانات الدفعية على أنها البيانات التي تم تخزينها بالفعل في وحدة تخزين الكائنات بينما تشير البيانات المتدفقة إلى البيانات التي لم يتم تخزينها بعد في وحدة تخزين الكائنات. نظرًا لوقت استجابة الشبكة، غالبًا ما لا تحتفظ QueryNodes بأحدث بيانات التدفق. وبدون ضمانات إضافية، قد يؤدي إجراء البحث مباشرةً على بيانات التدفق إلى فقدان العديد من نقاط البيانات غير الملتزم بها، مما يؤثر على دقة نتائج البحث.</p>
-<p>الإصدار التجاري من ميلفوس هو نظام يفصل بين التخزين والحوسبة. في هذا النظام، تكون عقد البيانات DataNodes مسؤولة عن استمرار البيانات وتخزينها في نهاية المطاف في تخزين كائنات موزعة مثل MinIO/S3. تتعامل QueryNodes مع المهام الحسابية مثل البحث. تتضمن هذه المهام معالجة كل من البيانات الدفعية والبيانات المتدفقة. ببساطة، يمكن فهم البيانات الدفعية على أنها البيانات التي تم تخزينها بالفعل في وحدة تخزين الكائنات، بينما تشير البيانات المتدفقة إلى البيانات التي لم يتم تخزينها بعد في وحدة تخزين الكائنات. نظرًا لوقت استجابة الشبكة، غالبًا ما لا تحتفظ QueryNodes بأحدث بيانات التدفق. من دون ضمانات إضافية، قد يؤدي إجراء البحث مباشرةً على بيانات التدفق إلى فقدان العديد من نقاط البيانات غير الملتزم بها، مما يؤثر على دقة نتائج البحث.</p>
+<p>الإصدار التجاري من ميلفوس هو نظام يفصل بين التخزين والحوسبة. في هذا النظام، تكون عقد البيانات DataNodes مسؤولة عن ثبات البيانات وتخزينها في نهاية المطاف في تخزين كائنات موزعة مثل MinIO/S3. تتعامل QueryNodes مع المهام الحسابية مثل البحث. تتضمن هذه المهام معالجة كل من البيانات الدفعية والبيانات المتدفقة. ببساطة، يمكن فهم البيانات الدفعية على أنها البيانات التي تم تخزينها بالفعل في وحدة تخزين الكائنات، بينما تشير البيانات المتدفقة إلى البيانات التي لم يتم تخزينها بعد في وحدة تخزين الكائنات. نظرًا لوقت استجابة الشبكة، غالبًا ما لا تحتفظ QueryNodes بأحدث بيانات التدفق. من دون ضمانات إضافية، قد يؤدي إجراء البحث مباشرةً على بيانات التدفق إلى فقدان العديد من نقاط البيانات غير الملتزم بها، مما يؤثر على دقة نتائج البحث.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>البيانات المجمّعة وبيانات التدفق</span> </span></p>
 <p>كما هو موضح في الشكل أعلاه، يمكن أن تتلقى عقد الاستعلامات كلاً من بيانات الدفق والبيانات الدفعية في وقت واحد بعد تلقي طلب بحث. ومع ذلك، بسبب زمن انتقال الشبكة، قد تكون بيانات التدفق التي تحصل عليها عقد الاستعلام غير مكتملة.</p>
-<p>لمعالجة هذه المشكلة، تقوم Milvus بطباعة الطوابع الزمنية لكل سجل في قائمة انتظار البيانات وإدراج الطوابع الزمنية للمزامنة باستمرار في قائمة انتظار البيانات. كلما تم استلام طابع زمني للمزامنة (syncTs)، تقوم QueryNodes بتعيينه كوقت الخدمة، مما يعني أن QueryNodes يمكنها رؤية جميع البيانات قبل وقت الخدمة هذا. استنادًا إلى ServiceTime، يمكن لـ Milvus توفير طوابع زمنية مضمونة (GuaranteeTs) لتلبية متطلبات المستخدم المختلفة من حيث الاتساق والتوافر. يمكن للمستخدمين إبلاغ QueryNodes بالحاجة إلى تضمين البيانات قبل نقطة زمنية محددة في نطاق البحث من خلال تحديد GuaranteeTs في طلبات البحث الخاصة بهم.</p>
+<p>ولمعالجة هذه المشكلة، تقوم Milvus بوضع طوابع زمنية لكل سجل في قائمة انتظار البيانات وإدراج طوابع زمنية للمزامنة باستمرار في قائمة انتظار البيانات. كلما تم استلام طابع زمني للمزامنة (syncTs)، تقوم QueryNodes بتعيينه كوقت الخدمة، مما يعني أن QueryNodes يمكنها رؤية جميع البيانات قبل وقت الخدمة هذا. استنادًا إلى ServiceTime، يمكن لـ Milvus توفير طوابع زمنية مضمونة (GuaranteeTs) لتلبية متطلبات المستخدم المختلفة من حيث الاتساق والتوافر. يمكن للمستخدمين إبلاغ QueryNodes بالحاجة إلى تضمين البيانات قبل نقطة زمنية محددة في نطاق البحث عن طريق تحديد GuaranteeTs في طلبات البحث الخاصة بهم.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
    </span> <span class="img-wrapper"> <span>وقت الخدمة ووقت الضمان</span> </span></p>
 <p>كما هو موضح في الشكل أعلاه، إذا كان GuaranteeTs أقل من وقت الخدمة، فهذا يعني أن جميع البيانات قبل النقطة الزمنية المحددة قد تمت كتابتها بالكامل على القرص، مما يسمح لـ QueryNodes بإجراء عملية البحث على الفور. عندما يكون GuaranteeTs أكبر من ServiceTime، يجب أن تنتظر عقد الاستعلام حتى يتجاوز وقت الخدمة GuaranteeTs قبل أن تتمكن من تنفيذ عملية البحث.</p>
-<p>يحتاج المستخدمون إلى إجراء مفاضلة بين دقة الاستعلام وزمن الاستعلام. إذا كان المستخدمون لديهم متطلبات اتساق عالية وليس لديهم حساسية تجاه زمن تأخر الاستعلام، فيمكنهم تعيين GuaranteeTs على قيمة كبيرة قدر الإمكان؛ إذا كان المستخدمون يرغبون في تلقي نتائج البحث بسرعة ويتحملون دقة الاستعلام، فيمكن تعيين GuaranteeTs على قيمة أصغر.</p>
+<p>يحتاج المستخدمون إلى إجراء مفاضلة بين دقة الاستعلام وزمن الاستعلام. إذا كان المستخدمون لديهم متطلبات اتساق عالية وليس لديهم حساسية تجاه زمن تأخر الاستعلام، فيمكنهم تعيين GuaranteeTs إلى قيمة كبيرة قدر الإمكان؛ إذا كان المستخدمون يرغبون في تلقي نتائج البحث بسرعة ويتحملون دقة الاستعلام، فيمكن تعيين GuaranteeTs إلى قيمة أصغر.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
@@ -84,7 +84,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك تعيين مستويات اتساق مختلفة عند إنشاء مجموعة وكذلك إجراء عمليات بحث واستعلامات.</p>
+    </button></h2><p>يمكنك تعيين مستويات اتساق مختلفة عند إنشاء مجموعة وكذلك عند إجراء عمليات البحث والاستعلامات.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">تعيين مستوى الاتساق عند إنشاء مجموعة</h3><p>عند إنشاء مجموعة، يمكنك تعيين مستوى الاتساق لعمليات البحث والاستعلامات داخل المجموعة. يقوم المثال البرمجي التالي بتعيين مستوى الاتساق إلى <strong>قوي</strong>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
@@ -153,7 +153,7 @@ curl --request POST \
 <p>القيم الممكنة للمعلمة <code translate="no">consistency_level</code> هي <code translate="no">Strong</code> و <code translate="no">Bounded</code> و <code translate="no">Eventually</code> و <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">تعيين مستوى الاتساق في البحث</h3><p>يمكنك دائمًا تغيير مستوى الاتساق لبحث معين. يقوم مثال التعليمات البرمجية التالي بتعيين مستوى الاتساق إلى المستوى <strong>المحدود</strong>. ينطبق التغيير فقط على طلب البحث الحالي.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#plaintext">النص العادي</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا غو</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -172,15 +172,15 @@ curl --request POST \
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    &quot;my_collection&quot;, // collectionName
-    3,               // limit
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
 ).WithConsistencyLevel(entity.ClBounded).
-    WithANNSField(&quot;vector&quot;))
-if err != nil {
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -199,7 +199,7 @@ if err != nil {
 <p>هذه المعلمة متاحة أيضًا في عمليات البحث المختلطة ومكرر البحث. القيم الممكنة للمعلمة <code translate="no">consistency_level</code> هي <code translate="no">Strong</code> و <code translate="no">Bounded</code> و <code translate="no">Eventually</code> و <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">تعيين مستوى الاتساق في الاستعلام</h3><p>يمكنك دائمًا تغيير مستوى الاتساق لبحث معين. يقوم مثال التعليمات البرمجية التالي بتعيين مستوى الاتساق إلى <strong>النهاية</strong>. ينطبق الإعداد فقط على طلب الاستعلام الحالي.</p>
 <div class="multipleCode">
-   <a href="#plaintext">نص</a> <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#plaintext">عادي</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -218,14 +218,25 @@ if err != nil {
         
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(&quot;my_collection&quot;).
-    WithFilter(&quot;color like \&quot;red%\&quot;&quot;).
-    WithOutputFields(&quot;vector&quot;, &quot;color&quot;).
-    WithLimit(3).
+<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>).
+    WithLimit(<span class="hljs-number">3</span>).
     WithConsistencyLevel(entity.ClEventually))
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;,
+    &quot;limit&quot;: 3
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>تتوفر هذه المعلمة أيضًا في مكرر الاستعلام. القيم الممكنة للمعلمة <code translate="no">consistency_level</code> هي <code translate="no">Strong</code> و <code translate="no">Bounded</code> و <code translate="no">Eventually</code> و <code translate="no">Session</code>.</p>

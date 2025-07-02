@@ -69,7 +69,7 @@ vector_store = Milvus(
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Milvus Collectionsを使用してデータを分割します。</h3><p>同じMilvusインスタンス内で、関連性のない異なるドキュメントを異なるコレクションに格納し、コンテキストを維持することができます。</p>
-<p>以下は、ドキュメントから新しいベクトルストアのコレクションを作成する方法です：</p>
+<p>以下は、ドキュメントから新しいベクターストアコレクションを作成する方法です：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 vector_store_saved = Milvus.from_documents(
@@ -209,6 +209,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
     <span class="hljs-string">&quot;LangChain provides abstractions to make working with LLMs easy&quot;</span>,
     k=<span class="hljs-number">2</span>,
     expr=<span class="hljs-string">&#x27;source == &quot;tweet&quot;&#x27;</span>,
+    <span class="hljs-comment"># param=...  # Search params for the index type</span>
 )
 <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
@@ -263,7 +264,7 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
-    drop_old=<span class="hljs-literal">False</span>,
+    <span class="hljs-comment"># drop_old=True,</span>
     partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
 )
 <button class="copy-code-btn"></button></code></pre>

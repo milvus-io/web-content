@@ -71,7 +71,7 @@ summary: >-
 <ul>
 <li><strong>用戶端</strong>：用於發出讀寫請求的介面層</li>
 <li><strong>LogStore</strong>：管理高速寫入緩衝、異步上傳存儲和日誌壓縮</li>
-<li><strong>儲存後端</strong>：支援可擴充、低成本的儲存服務，例如 S3、GCS 和檔案系統 (例如 EFS)</li>
+<li><strong>儲存後端</strong>：支援可擴充、低成本的儲存服務，例如 S3、GCS 及檔案系統 (例如 EFS)</li>
 <li><strong>Etcd</strong>：在分散式節點間儲存元資料並協調日誌狀態</li>
 </ul>
 <h2 id="Deployment-modes" class="common-anchor-header">部署模式<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpecker 提供兩種部署模式，以符合您的特定需求：</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 輕量且免於維護</h3><p>MemoryBuffer 模式提供了一個簡單、輕量的部署選項，Woodpecker 的嵌入式用戶端會在記憶體中暫時緩衝寫入的內容，並定期將其刷新至雲端物件儲存服務。在此模式下，記憶體緩衝直接嵌入客戶端，在刷新到 S3 之前實現了高效的批次處理。元資料使用<strong>etcd</strong>管理，以確保一致性和協調性。此模式最適合用於較小規模部署中的批次繁重工作負載，或將簡單性置於效能之上的生產環境，尤其是在低寫入延遲並非關鍵的情況下。</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 輕量且免於維護</h3><p>MemoryBuffer 模式提供了一個簡單、輕量的部署選項，Woodpecker 的嵌入式用戶端會在記憶體中暫時緩衝寫入的內容，並定期將其刷新至雲端物件儲存服務。在此模式下，記憶體緩衝直接嵌入客戶端，在刷新到 S3 之前實現了高效的批次處理。元資料使用<strong>etcd</strong>管理，以確保一致性和協調性。此模式最適合用於較小規模部署中的批次繁重工作負載，或將簡單性置於效能之上的生產環境，尤其是在低寫入延遲並非關鍵的情況下。此模式的寫入延遲一般在 200-500 毫秒之間。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
@@ -136,7 +136,7 @@ summary: >-
 <p>值得注意的是，Woodpecker 對於每個後端都持續達到最大可能吞吐量的 60-80%，對於中介軟體來說，這是一個非凡的效率水準。</p>
 <h3 id="Key-performance-insights" class="common-anchor-header">關鍵性能洞察</h3><ul>
 <li>本地檔案系統模式：Woodpecker 的速度達到 450 MB/s，比 Kafka 快 3.5 倍，比 Pulsar 快 4.2 倍，超低延遲僅為 1.8 ms，非常適合高效能單節點部署。</li>
-<li>雲端儲存模式 (S3)：直接寫入 S3 時，Woodpecker 達到 750 MB/s（約為 S3 理論極限的 68%），比 Kafka 高 5.8 倍，比 Pulsar 高 7 倍。雖然延遲較高 (166 毫秒)，但此設定可為面向批次的工作負載提供卓越的吞吐量。</li>
+<li>雲端儲存模式 (S3)：直接寫入 S3 時，Woodpecker 達到 750 MB/s（約為 S3 理論極限的 68%），比 Kafka 高 5.8 倍，比 Pulsar 高 7 倍。雖然延遲較高 (166 毫秒)，但此設定可為面向批次的工作負載提供優異的吞吐量。</li>
 <li>物件儲存模式 (MinIO)：即使使用 MinIO，Woodpecker 也能達到 71 MB/s，約為 MinIO 容量的 65%。此性能可與 Kafka 和 Pulsar 媲美，但對資源的需求明顯較低。</li>
 </ul>
 <p>Woodpecker 特別針對並發、大容量寫入進行了優化，在這種情況下，維持順序至關重要。而這些結果只反映出開發的早期階段 - 在 I/O 合併、智慧緩衝和預取方面持續進行的最佳化，可望讓效能更接近理論極限。</p>
@@ -164,4 +164,4 @@ summary: >-
 <li><strong>簡化部署</strong>：兩種部署模式 (MemoryBuffer/QuorumBuffer) 符合不同的作業需求</li>
 <li><strong>開發人員友善</strong>：更快的環境設定，所有環境的架構一致</li>
 </ul>
-<p>這些優勢讓 Woodpecker 對於關鍵任務 RAG、AI 代理和低延遲搜尋工作負載特別有價值，在這些工作負載中，作業簡單性與效能同樣重要。</p>
+<p>這些優勢讓 Woodpecker 對於關鍵任務的 RAG、AI 代理和低延遲搜尋工作負載特別有價值，在這些工作負載中，作業簡單性與效能同樣重要。</p>

@@ -21,8 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus bietet Funktionen zur Verwaltung von Aliasen. Auf dieser Seite werden die Verfahren zum Erstellen, Auflisten, Ändern und Löschen von Aliasen beschrieben.</p>
-<h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>In Milvus ist ein Alias ein zweiter, veränderbarer Name für eine Sammlung. Die Verwendung von Aliasen bietet eine Abstraktionsebene, die es Ihnen ermöglicht, dynamisch zwischen Sammlungen zu wechseln, ohne Ihren Anwendungscode zu ändern. Dies ist besonders in Produktionsumgebungen für nahtlose Datenaktualisierungen, A/B-Tests und andere operative Aufgaben nützlich.</p>
+<p>Auf dieser Seite wird gezeigt, wie Sie Sammlungs-Aliase erstellen, auflisten, neu zuordnen und löschen können.</p>
+<h2 id="Why-Use-an-Alias" class="common-anchor-header">Warum einen Alias verwenden?<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,8 +38,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können Aliasnamen für Ihre Sammlungen erstellen. Eine Sammlung kann mehrere Aliasnamen haben, aber Sammlungen können keinen Alias gemeinsam nutzen.</p>
-<p>Wenn eine Anfrage für eine Sammlung eingeht, sucht Milvus die Sammlung anhand des angegebenen Namens. Wenn die Sammlung mit dem angegebenen Namen nicht existiert, fährt Milvus mit der Suche nach dem angegebenen Namen als Alias fort. Sie können Sammlungs-Aliase verwenden, um Ihren Code an verschiedene Szenarien anzupassen.</p>
+    </button></h2><p>Der Hauptvorteil der Verwendung eines Alias ist die Entkopplung Ihrer Client-Anwendung von einem bestimmten, physischen Sammlungsnamen.</p>
+<p>Stellen Sie sich vor, Sie haben eine Live-Anwendung, die eine Sammlung namens <code translate="no">prod_data</code> abfragt. Wenn Sie die zugrundeliegenden Daten aktualisieren müssen, können Sie die Aktualisierung ohne Dienstunterbrechung durchführen. Der Arbeitsablauf wäre folgender:</p>
+<ol>
+<li><strong>Erstellen Sie eine neue Sammlung</strong>: Erstellen Sie eine neue Sammlung, zum Beispiel <code translate="no">prod_data_v2</code>.</li>
+<li><strong>Daten vorbereiten</strong>: Laden und indizieren Sie die neuen Daten in <code translate="no">prod_data_v2</code>.</li>
+<li><strong>Wechseln Sie den Alias</strong>: Sobald die neue Sammlung einsatzbereit ist, weisen Sie den Alias <code translate="no">prod_data</code> von der alten Sammlung atomar auf <code translate="no">prod_data_v2</code> um.</li>
+</ol>
+<p>Ihre Anwendung sendet weiterhin Anfragen an den Alias <code translate="no">prod_data</code>, ohne dass es zu Ausfallzeiten kommt. Dieser Mechanismus ermöglicht nahtlose Aktualisierungen und vereinfacht Vorgänge wie Blue-Green-Deployments für Ihren Vektorsuchdienst.</p>
+<p><strong>Schlüsseleigenschaften von Aliasen:</strong></p>
+<ul>
+<li>Eine Sammlung kann mehrere Aliasnamen haben.</li>
+<li>Ein Alias kann jeweils nur auf eine Sammlung verweisen.</li>
+<li>Bei der Verarbeitung einer Anfrage prüft Milvus zunächst, ob eine Sammlung mit dem angegebenen Namen existiert. Wenn nicht, wird geprüft, ob der Name ein Alias für eine Sammlung ist.</li>
+</ul>
 <h2 id="Create-Alias" class="common-anchor-header">Alias erstellen<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der folgende Codeschnipsel demonstriert, wie man einen Alias für eine Sammlung erstellt.</p>
+    </button></h2><p>Der folgende Codeschnipsel zeigt, wie man einen Alias für eine Sammlung erstellt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

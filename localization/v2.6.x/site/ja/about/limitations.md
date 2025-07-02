@@ -83,7 +83,6 @@ summary: Milvus使用中の制限について学ぶ。
 </thead>
 <tbody>
 <tr><td>コレクション</td><td>65,536</td></tr>
-<tr><td>接続/プロキシ</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">コレクション内のリソース数<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
@@ -103,7 +102,7 @@ summary: Milvus使用中の制限について学ぶ。
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>リソース数</th><th>リミット</th></tr>
+<tr><th>リソース数</th><th>制限</th></tr>
 </thead>
 <tbody>
 <tr><td>パーティション</td><td>1,024</td></tr>
@@ -251,7 +250,7 @@ summary: Milvus使用中の制限について学ぶ。
 <tr><td>ページネーション付き基本検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
 <tr><td>フィルタ検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
 <tr><td>範囲検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>はい</td></tr>
-<tr><td>グループ化検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
+<tr><td>グループ化検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
 <tr><td>イテレータによる検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
 <tr><td>ハイブリッド検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい（RRFRanker だけ）</td><td>はい</td><td>はい</td></tr>
 <tr><td>照会/取得</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>

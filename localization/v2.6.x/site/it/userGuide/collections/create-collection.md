@@ -299,7 +299,7 @@ indexOptions := []milvusclient.CreateIndexOption{
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-Collection" class="common-anchor-header">Creare una raccolta<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-a-Collection" class="common-anchor-header">Creare una collezione<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -520,9 +520,13 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>È possibile impostare le proprietà della collezione da creare per adattarla al proprio servizio. Le proprietà applicabili sono le seguenti.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Imposta numero di frammenti</h3><p>I frammenti sono fette orizzontali di una raccolta. Ogni frammento corrisponde a un canale di ingresso dei dati. Ogni raccolta ha un frammento per impostazione predefinita. È possibile impostare il numero appropriato di shard quando si crea una raccolta, in base al throughput previsto e al volume dei dati da inserire nella raccolta.</p>
-<p>Nei casi più comuni, si consiglia di aumentare il numero di shard di uno ogni volta che il throughput previsto aumenta di 500 MB/s o il volume dei dati da inserire aumenta di 100 GB. Questo suggerimento si basa sulla nostra esperienza e potrebbe non essere completamente adatto agli scenari applicativi. È possibile modificare questo numero per adattarlo alle proprie esigenze o utilizzare il valore predefinito.</p>
-<p>Il seguente frammento di codice mostra come impostare il numero di shard quando si crea una collezione.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Imposta numero di frammenti</h3><p>I frammenti sono fette orizzontali di una raccolta e ogni frammento corrisponde a un canale di ingresso dei dati. Per impostazione predefinita, ogni raccolta ha un frammento. È possibile specificare il numero di shard durante la creazione di una raccolta per adattarlo al volume dei dati e al carico di lavoro.</p>
+<p>Come linea guida generale, quando si imposta il numero di shard si deve tenere conto di quanto segue:</p>
+<ul>
+<li><strong>Dimensione dei dati:</strong> Una pratica comune è quella di avere uno shard ogni 200 milioni di entità. Si può anche stimare in base alla dimensione totale dei dati, ad esempio aggiungendo uno shard per ogni 100 GB di dati che si prevede di inserire.</li>
+<li><strong>Utilizzo dei nodi di flusso:</strong> Se l'istanza Milvus ha più nodi di flusso, si consiglia di utilizzare più shard. In questo modo si garantisce che il carico di lavoro di inserimento dei dati sia distribuito su tutti i nodi di flusso disponibili, evitando che alcuni siano inattivi mentre altri sono sovraccarichi.</li>
+</ul>
+<p>Il seguente frammento di codice mostra come impostare il numero di shard quando si crea una raccolta.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>

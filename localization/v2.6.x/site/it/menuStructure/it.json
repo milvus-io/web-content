@@ -279,21 +279,15 @@
         "children": []
       },
       {
-        "label": "Livello di coerenza",
-        "id": "tune_consistency.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "Replica in memoria",
         "id": "replica.md",
-        "order": 9,
+        "order": 8,
         "children": []
       },
       {
         "label": "Terminologia",
         "id": "glossary.md",
-        "order": 10,
+        "order": 9,
         "children": []
       }
     ]
@@ -352,21 +346,27 @@
             "children": []
           },
           {
+            "label": "Impostare il livello di coerenza",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
             "label": "Gestire le partizioni",
             "id": "manage-partitions.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Gestire gli alias",
             "id": "manage-aliases.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Raccolta di gocce",
             "id": "drop-collection.md",
-            "order": 9,
+            "order": 10,
             "children": []
           }
         ]
@@ -1048,7 +1048,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutorial: Implementare la classificazione basata sul tempo in Milvus",
+                    "label": "Tutorial: Implementare una classifica basata sul tempo in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1082,6 +1082,26 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      {
+        "label": "Ottimizzazione dello stoccaggio",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Utilizzare mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Compattazione del clustering",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
           }
         ]
       }
@@ -1374,15 +1394,21 @@
             "children": []
           },
           {
+            "label": "Scala Standalone",
+            "id": "scale-standalone.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Scala con HPA",
             "id": "hpa.md",
-            "order": 1,
+            "order": 2,
             "children": []
           },
           {
             "label": "Dipendenze di scala",
             "id": "scale-dependencies.md",
-            "order": 2,
+            "order": 3,
             "children": []
           }
         ]
@@ -1484,26 +1510,6 @@
             "label": "Gestire i gruppi di risorse",
             "id": "resource_group.md",
             "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Ottimizzazione dello stoccaggio",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Utilizzare mmap",
-            "id": "mmap.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Compattazione dei cluster",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -1965,6 +1971,12 @@
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Ricerca asincrona",
+                "id": "langchain_milvus_async.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2266,12 +2278,6 @@
             "label": "Fuochi d'artificio",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
-            "children": []
-          },
-          {
-            "label": "Lepton",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
             "children": []
           },
           {

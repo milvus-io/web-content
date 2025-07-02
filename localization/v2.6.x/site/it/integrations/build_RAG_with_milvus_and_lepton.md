@@ -1,11 +1,12 @@
 ---
 id: build_RAG_with_milvus_and_lepton.md
+beta: NEAR DEPRECATE
 summary: >-
   In questo tutorial vi mostreremo come costruire una pipeline RAG
   (Retrieval-Augmented Generation) con Milvus e Lepton AI.
-title: Costruire RAG con Milvus e Lepton AI
+title: Costruire RAG con Milvus e Lepton AIAbout to Deprecate
 ---
-<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">Costruire RAG con Milvus e Lepton AI<button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">Costruire RAG con Milvus e Lepton AI<span class="beta-tag" style="background-color:#FF7F47;color:white" translate="no">About to Deprecate</span><button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,7 +127,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Creare una nuova raccolta con i parametri specificati.</p>
-<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti da schemi e i loro valori.</p>
+<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti dalla mappa e i loro valori.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,

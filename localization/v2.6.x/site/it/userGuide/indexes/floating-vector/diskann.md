@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In scenari di grandi dimensioni, in cui i set di dati possono includere miliardi o addirittura trilioni di vettori, i metodi standard di indicizzazione in memoria (ad esempio, <a href="/docs/it/v2.6.x/hnsw.md">HNSW</a>, <a href="/docs/it/v2.6.x/ivf-flat.md">IVF_FLAT</a>) spesso non riescono a tenere il passo a causa dei limiti di memoria. <strong>DISKANN</strong> offre un approccio basato su disco che affronta queste sfide mantenendo un'elevata precisione e velocità di ricerca quando le dimensioni del set di dati superano la RAM disponibile.</p>
+    </button></h1><p>In scenari di grandi dimensioni, in cui i set di dati possono includere miliardi o addirittura trilioni di vettori, i metodi standard di indicizzazione in memoria (ad esempio, <a href="/docs/it/hnsw.md">HNSW</a>, <a href="/docs/it/ivf-flat.md">IVF_FLAT</a>) spesso non riescono a tenere il passo a causa dei limiti di memoria. <strong>DISKANN</strong> offre un approccio basato su disco che affronta queste sfide mantenendo un'elevata precisione e velocità di ricerca quando le dimensioni del set di dati superano la RAM disponibile.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +62,7 @@ summary: >-
 <p>Il parametro <code translate="no">search_list_size</code> determina l'ampiezza del processo di raffinamento del grafo. Un valore più alto di <code translate="no">search_list_size</code> estende la ricerca dei vicini durante la costruzione e può migliorare l'accuratezza finale, ma aumenta il tempo di costruzione dell'indice.</p></li>
 </ul></li>
 </ol>
-<p>Per saperne di più sulla regolazione dei parametri, consultare i <a href="/docs/it/v2.6.x/diskann.md#diskann-params">parametri di DISKANN</a>.</p>
+<p>Per saperne di più sulla regolazione dei parametri, consultare i <a href="/docs/it/diskann.md#diskann-params">parametri di DISKANN</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN utilizza <strong>PQ</strong> per comprimere vettori ad alta dimensione in rappresentazioni più piccole<strong>(codici PQ</strong>), che vengono memorizzate per un rapido calcolo delle distanze approssimate.</p>
 <p>Il parametro <code translate="no">pq_code_budget_gb_ratio</code> gestisce l'ingombro della memoria dedicata alla memorizzazione di questi codici PQ. Rappresenta un rapporto tra la dimensione totale dei vettori (in gigabyte) e lo spazio allocato per la memorizzazione dei codici PQ. È possibile calcolare il budget effettivo dei codici PQ (in gigabyte) con questa formula:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -70,23 +70,23 @@ summary: >-
 <p>dove:</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> è la dimensione totale dei vettori (in gigabyte).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> è un rapporto definito dall'utente, che rappresenta la frazione della dimensione totale dei dati riservata ai codici PQ. Questo parametro consente di trovare un compromesso tra la precisione della ricerca e le risorse di memoria. Per ulteriori informazioni sulla regolazione dei parametri, consultare le <a href="/docs/it/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">configurazioni DISKANN</a>.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> è un rapporto definito dall'utente, che rappresenta la frazione della dimensione totale dei dati riservata ai codici PQ. Questo parametro consente di trovare un compromesso tra la precisione della ricerca e le risorse di memoria. Per ulteriori informazioni sulla regolazione dei parametri, consultare le <a href="/docs/it/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">configurazioni DISKANN</a>.</p></li>
 </ul>
-<p>Per i dettagli tecnici sul metodo PQ sottostante, consultare <a href="/docs/it/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
-<h3 id="Search-process" class="common-anchor-header">Processo di ricerca</h3><p>Una volta costruito l'indice (il grafico Vamana su disco e i codici PQ in memoria), DISKANN esegue le ricerche ANN come segue:</p>
+<p>Per i dettagli tecnici sul metodo PQ sottostante, consultare <a href="/docs/it/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<h3 id="Search-process" class="common-anchor-header">Processo di ricerca</h3><p>Una volta costruito l'indice (il grafico Vamana su disco e i codici PQ in memoria), DISKANN esegue le ricerche di RNA come segue:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Query e punto di ingresso:</strong> Viene fornito un vettore di query per individuare i suoi vicini più prossimi. DISKANN parte da un punto di ingresso selezionato nel grafo di Vamana, spesso un nodo vicino al centroide globale del dataset. Il centroide globale rappresenta la media di tutti i vettori e aiuta a minimizzare la distanza di attraversamento del grafo per trovare i vicini desiderati.</p></li>
-<li><p><strong>Esplorazione dei vicini:</strong> L'algoritmo raccoglie i potenziali vicini candidati (cerchi in rosso nella figura) dagli spigoli del nodo corrente, sfruttando i codici PQ in memoria per approssimare le distanze tra questi candidati e il vettore di interrogazione. Questi potenziali vicini candidati sono i nodi direttamente connessi al punto di ingresso selezionato attraverso i bordi del grafo di Vamana.</p></li>
+<li><p><strong>Esplorazione dei vicini:</strong> L'algoritmo raccoglie i potenziali vicini candidati (cerchi in rosso nella figura) dai bordi del nodo corrente, sfruttando i codici PQ in memoria per approssimare le distanze tra questi candidati e il vettore di interrogazione. Questi potenziali vicini candidati sono i nodi direttamente connessi al punto di ingresso selezionato attraverso i bordi del grafo di Vamana.</p></li>
 <li><p><strong>Selezione dei nodi per il calcolo accurato della distanza:</strong> Dai risultati approssimativi, un sottoinsieme dei vicini più promettenti (cerchi in verde nella figura) viene selezionato per una valutazione precisa della distanza utilizzando i loro vettori originali non compressi. Ciò richiede la lettura dei dati dal disco, che può richiedere molto tempo. DISKANN utilizza due parametri per controllare questo delicato equilibrio tra precisione e velocità:</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>: Una razione che controlla l'ampiezza della ricerca, determinando quanti candidati vicini vengono selezionati in parallelo per esplorare i loro vicini. Una <code translate="no">beam_width_ratio</code> più grande comporta un'esplorazione più ampia, che potenzialmente porta a una maggiore accuratezza, ma aumenta anche il costo computazionale e l'I/O su disco. L'ampiezza del fascio, o il numero di nodi selezionati, è determinata dalla formula: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>: La percentuale di memoria allocata per la cache dei dati del disco a cui si accede di frequente. La cache aiuta a ridurre al minimo l'I/O su disco, rendendo le ricerche ripetute più veloci perché i dati sono già in memoria.</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>: La percentuale di memoria allocata per la memorizzazione nella cache dei dati del disco a cui si accede di frequente. La cache aiuta a ridurre al minimo l'I/O su disco, rendendo le ricerche ripetute più veloci perché i dati sono già in memoria.</p></li>
 </ul>
-<p>Per saperne di più sulla regolazione dei parametri, consultare le <a href="/docs/it/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">configurazioni di DISKANN</a>.</p></li>
+<p>Per saperne di più sulla regolazione dei parametri, consultare le <a href="/docs/it/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">configurazioni di DISKANN</a>.</p></li>
 <li><p><strong>Esplorazione iterativa:</strong> La ricerca affina iterativamente l'insieme dei candidati, eseguendo ripetutamente valutazioni approssimative (usando PQ) seguite da controlli precisi (usando i vettori originali dal disco) finché non viene trovato un numero sufficiente di vicini.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Abilitare DISKANN in Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -151,7 +151,7 @@ summary: >-
       </svg>
     </button></h2><p>I parametri di DISKANN possono essere configurati con due metodi principali:</p>
 <ul>
-<li><p><strong>File di configurazione di Milvus:</strong> Regolare i parametri di DISKANN attraverso il file di configurazione di Milvus. Questo metodo è adatto per impostare le opzioni di configurazione generale dell'istanza Milvus.</p></li>
+<li><p><strong>File di configurazione Milvus:</strong> Regolare i parametri DISKANN attraverso il file di configurazione Milvus. Questo metodo è adatto per impostare le opzioni generali di configurazione dell'istanza Milvus.</p></li>
 <li><p><strong>SDK Milvus:</strong> Regolare con precisione i parametri DISKANN utilizzando l'SDK Milvus durante la creazione dell'indice o le operazioni di ricerca. Ciò consente un controllo più granulare e la regolazione dinamica dei parametri in base a casi d'uso specifici.</p></li>
 </ul>
 <div class="alert note">
@@ -189,7 +189,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice usando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/create-collection.md">Creare una raccolta</a>.</p>
+<p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per ulteriori informazioni, consultare <a href="/docs/it/create-collection.md">Creare una raccolta</a>.</p>
 <h4 id="Search" class="common-anchor-header">Ricerca</h4><p>Una volta creato l'indice e inserite le entità, è possibile eseguire ricerche di similarità sull'indice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
@@ -242,11 +242,10 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Determina il numero di candidati vicini considerati per ogni punto dati durante la costruzione del grafico.</p></td>
+     <td><p>Durante la costruzione dell'indice, questo parametro definisce la dimensione del pool di candidati utilizzato per la ricerca dei vicini più prossimi per ogni nodo. Per ogni nodo aggiunto al grafo, l'algoritmo mantiene un elenco dei <code translate="no">search_list_size</code> migliori candidati trovati finora. La ricerca dei vicini si ferma quando questo elenco non può più essere migliorato. Da questa lista finale di candidati, i migliori <code translate="no">max_degree</code> nodi vengono selezionati per formare i bordi finali.</p></td>
      <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">100</code></p></td>
-     <td><p>Valori maggiori portano a grafi più completi, migliorando potenzialmente la qualità della ricerca, ma aumentando anche il tempo di costruzione. 
- Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [K, 10K].</p></td>
+     <td><p>Un valore maggiore di <code translate="no">search_list_size</code> aumenta la probabilità di trovare i veri vicini per ogni nodo, il che può portare a un grafo di qualità superiore e a migliori prestazioni di ricerca (recall). Tuttavia, ciò ha il costo di un tempo di creazione dell'indice significativamente più lungo. Dovrebbe essere sempre impostato a un valore maggiore o uguale a <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -282,5 +281,13 @@ res = MilvusClient.search(
      <td><p><strong>Tipo</strong>: Variabile <strong>Intervallo</strong>: [1, max(128/numero di CPU, 16)].</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">4.0</code></p></td>
      <td><p>Valori più alti aumentano il parallelismo, accelerando la ricerca su sistemi con CPU e SSD potenti. Tuttavia, un valore troppo alto potrebbe causare un'eccessiva contestazione delle risorse. Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [1.0, 4.0].</p></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td><p><code translate="no">search_list_size</code></p></td>
+     <td><p>Durante un'operazione di ricerca, questo parametro determina la dimensione del pool di candidati che l'algoritmo mantiene durante l'attraversamento del grafo. Un valore maggiore aumenta le possibilità di trovare i veri vicini (richiamo più elevato), ma aumenta anche la latenza della ricerca.</p></td>
+     <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
+<p><strong>Valore predefinito</strong>: <code translate="no">100</code></p></td>
+     <td><p>Per un buon equilibrio tra prestazioni e accuratezza, si consiglia di impostare questo valore come uguale o leggermente superiore al numero di risultati che si desidera recuperare (top_k).</p></td>
    </tr>
 </table>

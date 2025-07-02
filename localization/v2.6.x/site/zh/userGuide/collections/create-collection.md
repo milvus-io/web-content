@@ -517,9 +517,13 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>您可以为要创建的 Collection 设置属性，使其适合您的服务。适用的属性如下。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">设置分片数</h3><p>分片是 Collections 的水平切片。每个分区对应一个数据输入通道。每个 Collections 默认都有一个分区。创建 Collections 时，可根据预期吞吐量和要插入 Collections 的数据量设置适当的分片数。</p>
-<p>在常见情况下，每当预期吞吐量增加 500 MB/秒或要插入的数据量增加 100 GB 时，就可以考虑增加一个分区。这一建议是基于我们自己的经验，可能并不完全适合您的应用场景。你可以根据自己的需要调整这个数字，或者直接使用默认值。</p>
-<p>下面的代码片段演示了如何在创建 Collection 时设置分片数。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">设置分片数</h3><p>分片是 Collections 的水平切片，每个分片对应一个数据输入通道。默认情况下，每个 Collections 都有一个分区。您可以在创建 Collections 时指定分片数量，以便更好地适应数据量和工作负载。</p>
+<p>作为一般指导原则，在设置分片数量时应考虑以下几点：</p>
+<ul>
+<li><strong>数据大小：</strong>通常的做法是每 2 亿个实体设置一个分区。也可以根据总数据量进行估算，例如，计划插入的数据量每 100 GB 就增加一个分区。</li>
+<li><strong>流节点利用率：</strong>如果你的 Milvus 实例有多个流节点，建议使用多个分片。这样可以确保数据插入工作量分布在所有可用的流节点上，防止一些节点闲置，而其他节点超负荷工作。</li>
+</ul>
+<p>下面的代码片段演示了如何在创建 Collections 时设置分片编号。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>

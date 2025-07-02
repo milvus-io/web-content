@@ -41,6 +41,12 @@ summary: >-
     </button></h2><p>Dalam sebuah koleksi, kunci utama dari setiap entitas harus unik secara global. Ketika menambahkan field utama, Anda harus secara eksplisit mengatur tipe datanya ke <strong>VARCHAR</strong> atau <strong>INT64</strong>. Mengatur tipe data ke <strong>INT64</strong> menunjukkan bahwa kunci utama harus berupa bilangan bulat yang mirip dengan <code translate="no">12345</code>; Mengatur tipe data ke <strong>VARCHAR</strong> menunjukkan bahwa kunci utama harus berupa string yang mirip dengan <code translate="no">my_entity_1234</code>.</p>
 <p>Anda juga dapat mengaktifkan <strong>AutoID</strong> untuk membuat Milvus secara otomatis mengalokasikan kunci primer untuk entitas yang masuk. Setelah Anda mengaktifkan <strong>AutoID</strong> di koleksi Anda, jangan sertakan kunci primer saat memasukkan entitas.</p>
 <p>Field utama dalam koleksi tidak memiliki nilai default dan tidak boleh bernilai nol.</p>
+<div class="alert note">
+<ul>
+<li>Operasi standar <code translate="no">insert</code> dengan kunci utama yang sudah ada dalam koleksi tidak akan menimpa entri lama. Sebaliknya, operasi ini akan membuat entitas baru yang terpisah dengan kunci utama yang sama. Hal ini dapat mengakibatkan hasil pencarian yang tidak diharapkan dan redundansi data.</li>
+<li>Jika kasus penggunaan Anda melibatkan pembaruan data yang sudah ada atau Anda menduga bahwa data yang Anda masukkan mungkin sudah ada, sangat disarankan untuk menggunakan operasi upsert. Operasi upsert akan secara cerdas memperbarui entitas jika kunci utama ada, atau menyisipkan kunci baru jika tidak ada. Untuk lebih jelasnya, lihat <a href="/docs/id/upsert-entities.md">Upsert Entitas</a>.</li>
+</ul>
+</div>
 <h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Menggunakan Kunci Primer Int64<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +62,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan primary key tipe Int64, Anda perlu mengatur <code translate="no">datatype</code> ke <code translate="no">DataType.INT64</code> dan mengatur <code translate="no">is_primary</code> ke <code translate="no">true</code>. Jika Anda juga membutuhkan Milvus untuk mengalokasikan primary key untuk entitas yang masuk, atur juga <code translate="no">auto_id</code> ke <code translate="no">true</code>.</p>
+    </button></h2><p>Untuk menggunakan kunci primer tipe Int64, Anda perlu mengatur <code translate="no">datatype</code> ke <code translate="no">DataType.INT64</code> dan mengatur <code translate="no">is_primary</code> ke <code translate="no">true</code>. Jika Anda juga membutuhkan Milvus untuk mengalokasikan kunci primer untuk entitas yang masuk, atur juga <code translate="no">auto_id</code> ke <code translate="no">true</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType

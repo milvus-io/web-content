@@ -23,6 +23,11 @@ summary: >-
     </button></h1><p>컬렉션의 엔티티는 동일한 필드 집합을 공유하는 데이터 레코드입니다. 모든 데이터 레코드의 필드 값은 엔티티를 구성합니다. 이 페이지에서는 컬렉션에 엔티티를 삽입하는 방법을 소개합니다.</p>
 <div class="alert note">
 <p>컬렉션이 생성된 후 새 필드를 동적으로 추가하고 엔티티를 삽입할 때 이러한 필드에 대한 값을 지정하지 않으면 Milvus는 정의된 기본값 또는 기본값이 설정되지 않은 경우 NULL로 해당 필드를 자동으로 채웁니다. 자세한 내용은 <a href="/docs/ko/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드 추가하기를</a> 참조하세요.</p>
+<div class="alert note">
+<ul>
+<li><p><strong>컬렉션 생성 후 추가된 필드</strong>: 컬렉션 생성 후 컬렉션에 새 필드를 추가하고 삽입하는 동안 값을 지정하지 않으면 Milvus는 정의된 기본값 또는 기본값이 설정되지 않은 경우 NULL로 필드를 자동으로 채웁니다. 자세한 내용은 <a href="/docs/ko/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드 추가하기를</a> 참조하세요.</p></li>
+<li><p><strong>중복 처리</strong>: 표준 <code translate="no">insert</code> 작업은 중복된 기본 키를 확인하지 않습니다. 기존 기본 키를 사용하여 데이터를 삽입하면 동일한 키를 가진 새 엔티티가 생성되어 데이터 중복 및 잠재적인 애플리케이션 문제가 발생할 수 있습니다. 기존 엔티티를 업데이트하거나 중복을 방지하려면 대신 <strong><code translate="no">upsert</code></strong> 작업을 대신 사용하세요. 자세한 내용은 <a href="/docs/ko/upsert-entities.md">엔티티 삽입을</a> 참조하세요.</p></li>
+</ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +63,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>데이터를 삽입하기 전에 스키마에 따라 데이터를 사전 목록으로 구성해야 하며, 각 사전은 엔티티를 나타내며 스키마에 정의된 모든 필드를 포함해야 합니다. 컬렉션에 동적 필드가 활성화되어 있는 경우 각 사전에는 스키마에 정의되지 않은 필드도 포함될 수 있습니다.</p>
-<p>이 섹션에서는 빠른 설정 방식으로 만든 컬렉션에 엔티티를 삽입합니다. 이 방식으로 만든 컬렉션에는 <strong>id와</strong> <strong>벡터라는</strong> 두 개의 필드만 있습니다. 또한 이 컬렉션에는 동적 필드가 활성화되어 있으므로 예제 코드의 엔티티에는 스키마에 정의되어 있지 않은 <strong>color라는</strong> 필드가 포함되어 있습니다.</p>
+<p>이 섹션에서는 빠른 설정 방식으로 만든 컬렉션에 엔티티를 삽입합니다. 이 방법으로 만든 컬렉션에는 <strong>id와</strong> <strong>벡터라는</strong> 두 개의 필드만 있습니다. 또한 이 컬렉션에는 동적 필드가 활성화되어 있으므로 예제 코드의 엔티티에는 스키마에 정의되어 있지 않은 <strong>color라는</strong> 필드가 포함되어 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

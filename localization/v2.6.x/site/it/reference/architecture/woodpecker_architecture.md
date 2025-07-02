@@ -72,7 +72,7 @@ summary: >-
     </button></h2><p>Una distribuzione standard di Woodpecker comprende i seguenti componenti:</p>
 <ul>
 <li><strong>Client</strong>: Livello di interfaccia per l'emissione di richieste di lettura e scrittura</li>
-<li><strong>LogStore</strong>: Gestisce il buffering di scrittura ad alta velocità, i caricamenti asincroni sullo storage e la compattazione dei registri</li>
+<li><strong>LogStore</strong>: Gestisce il buffering delle scritture ad alta velocità, il caricamento asincrono sullo storage e la compattazione dei registri</li>
 <li><strong>Backend di archiviazione</strong>: Supporta servizi di archiviazione scalabili e a basso costo come S3, GCS e file system come EFS</li>
 <li><strong>Etcd</strong>: Memorizza i metadati e coordina lo stato dei log tra i nodi distribuiti.</li>
 </ul>
@@ -92,7 +92,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpecker offre due modalità di distribuzione per soddisfare le vostre esigenze specifiche:</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Leggero e senza manutenzione</h3><p>La modalità MemoryBuffer offre un'opzione di distribuzione semplice e leggera in cui il client incorporato di Woodpecker bufferizza temporaneamente le scritture in arrivo in memoria e le invia periodicamente a un servizio di archiviazione di oggetti nel cloud. In questa modalità, il buffer di memoria è incorporato direttamente nel client, consentendo un batching efficiente prima del flushing su S3. I metadati sono gestiti tramite <strong>etcd</strong> per garantire coerenza e coordinamento. Questa modalità è più adatta per i carichi di lavoro pesanti in batch in distribuzioni su scala ridotta o in ambienti di produzione che privilegiano la semplicità rispetto alle prestazioni, soprattutto quando la bassa latenza di scrittura non è fondamentale.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Leggero e senza manutenzione</h3><p>La modalità MemoryBuffer offre un'opzione di distribuzione semplice e leggera in cui il client incorporato di Woodpecker bufferizza temporaneamente le scritture in arrivo nella memoria e le invia periodicamente a un servizio di archiviazione di oggetti nel cloud. In questa modalità, il buffer di memoria è incorporato direttamente nel client, consentendo un batching efficiente prima del flushing su S3. I metadati sono gestiti tramite <strong>etcd</strong> per garantire coerenza e coordinamento. Questa modalità è più adatta per i carichi di lavoro pesanti in batch in distribuzioni su scala ridotta o in ambienti di produzione che privilegiano la semplicità rispetto alle prestazioni, soprattutto quando la bassa latenza di scrittura non è fondamentale. La latenza di scrittura in questa modalità è generalmente compresa tra 200 e 500 ms.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
@@ -137,7 +137,7 @@ summary: >-
 </ul>
 <p>Notevolmente, Woodpecker ha raggiunto costantemente il 60-80% del throughput massimo possibile per ogni backend, un livello di efficienza eccezionale per un middleware.</p>
 <h3 id="Key-performance-insights" class="common-anchor-header">Principali informazioni sulle prestazioni</h3><ul>
-<li>Modalità file system locale: Woodpecker ha raggiunto 450 MB/s - 3,5 volte più veloce di Kafka e 4,2 volte più veloce di Pulsar - con una latenza bassissima di soli 1,8 ms, che lo rende ideale per le implementazioni a singolo nodo ad alte prestazioni.</li>
+<li>Modalità file system locale: Woodpecker ha raggiunto 450 MB/s - 3,5 volte più veloce di Kafka e 4,2 volte più veloce di Pulsar - con una latenza bassissima di soli 1,8 ms, che lo rende ideale per le implementazioni a nodo singolo ad alte prestazioni.</li>
 <li>Modalità di archiviazione cloud (S3): Scrivendo direttamente su S3, Woodpecker ha raggiunto 750 MB/s (circa il 68% del limite teorico di S3), 5,8 volte superiore a Kafka e 7 volte superiore a Pulsar. Sebbene la latenza sia più elevata (166 ms), questa configurazione offre un throughput eccezionale per i carichi di lavoro orientati ai batch.</li>
 <li>Modalità di archiviazione degli oggetti (MinIO): Anche con MinIO, Woodpecker ha raggiunto 71 MB/s, circa il 65% della capacità di MinIO. Queste prestazioni sono paragonabili a quelle di Kafka e Pulsar, ma con requisiti di risorse significativamente inferiori.</li>
 </ul>
@@ -163,7 +163,7 @@ summary: >-
 <li><strong>Scalabilità automatica</strong>: Lo storage si adatta allo storage a oggetti del cloud senza dover pianificare la capacità.</li>
 <li><strong>Efficienza dei costi</strong>: Storage pay-as-you-go con tiering e compressione automatici</li>
 <li><strong>Alta disponibilità</strong>: Sfrutta la durata di 11 nove anni dei provider cloud con un ripristino rapido.</li>
-<li><strong>Implementazione semplificata</strong>: Due modalità di distribuzione (MemoryBuffer/QuorumBuffer) per soddisfare le diverse esigenze operative</li>
+<li><strong>Distribuzione semplificata</strong>: Due modalità di distribuzione (MemoryBuffer/QuorumBuffer) per soddisfare le diverse esigenze operative</li>
 <li><strong>Facilità di sviluppo</strong>: Configurazione dell'ambiente più rapida e architettura coerente in tutti gli ambienti</li>
 </ul>
 <p>Questi vantaggi rendono Woodpecker particolarmente prezioso per RAG mission-critical, agenti AI e carichi di lavoro di ricerca a bassa latenza, dove la semplicità operativa è importante quanto le prestazioni.</p>

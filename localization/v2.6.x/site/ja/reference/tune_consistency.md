@@ -47,7 +47,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
    </span> <span class="img-wrapper"> <span>サービス時間と保証時間</span> </span></p>
-<p>上図に示すように、GuaranteeTsがServiceTimeより小さい場合、指定された時点より前のすべてのデータがディスクに完全に書き込まれていることを意味し、QueryNodeは直ちにSearchオペレーションを実行することができる。GuaranteeTsがServiceTimeより大きい場合、QueryNodeはServiceTimeがGuaranteeTsを超えるまで待ってからSearchオペレーションを実行しなければならない。</p>
+<p>上図に示すように、GuaranteeTsがServiceTimeより小さい場合、指定された時点より前のすべてのデータがディスクに完全に書き込まれていることを意味し、QueryNodeは直ちに検索操作を実行することができる。GuaranteeTsがServiceTimeより大きい場合、QueryNodeはServiceTimeがGuaranteeTsを超えるまで待ってからSearchオペレーションを実行しなければならない。</p>
 <p>ユーザは、クエリの精度とクエリの待ち時間をトレードオフする必要があります。ユーザが高い一貫性を要求し、クエリのレイテンシに敏感でない場合、GuaranteeTsを可能な限り大きな値に設定することができます。ユーザが検索結果を迅速に受信することを望み、クエリの精度に寛容である場合、GuaranteeTsを小さな値に設定することができます。</p>
 <p>
   
@@ -149,7 +149,7 @@ curl --request POST \
 <p><code translate="no">consistency_level</code> パラメータに指定できる値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">検索での一貫性レベルの設定</h3><p>特定の検索の一貫性レベルはいつでも変更できる。以下のコード例では、一貫性レベルを「<strong>Bounded</strong>」に戻しています。この変更は現在の検索リクエストにのみ適用される。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">プレーンテキスト</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -168,15 +168,15 @@ curl --request POST \
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    &quot;my_collection&quot;, // collectionName
-    3,               // limit
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
 ).WithConsistencyLevel(entity.ClBounded).
-    WithANNSField(&quot;vector&quot;))
-if err != nil {
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -193,9 +193,9 @@ if err != nil {
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>このパラメータは、ハイブリッド検索と検索イテレータでも使用できます。<code translate="no">consistency_level</code> パラメータに指定できる値は<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>,<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">クエリでの一貫性レベルの設定</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は、現在のクエリ・リクエストにのみ適用されます。</p>
+<h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">クエリーの一貫性レベルの設定</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は、現在のクエリ・リクエストにのみ適用される。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">平文</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -214,14 +214,25 @@ if err != nil {
         
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(&quot;my_collection&quot;).
-    WithFilter(&quot;color like \&quot;red%\&quot;&quot;).
-    WithOutputFields(&quot;vector&quot;, &quot;color&quot;).
-    WithLimit(3).
+<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>).
+    WithLimit(<span class="hljs-number">3</span>).
     WithConsistencyLevel(entity.ClEventually))
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;,
+    &quot;limit&quot;: 3
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>このパラメータは、クエリ・イテレータでも使用できます。<code translate="no">consistency_level</code> パラメータに指定できる値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>

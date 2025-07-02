@@ -83,7 +83,6 @@ summary: تعرف على الحدود أثناء استخدام ميلفوس.
 </thead>
 <tbody>
 <tr><td>المجموعة</td><td>65,536</td></tr>
-<tr><td>الاتصال/الوكيل</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">عدد الموارد في المجموعة<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">

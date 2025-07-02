@@ -51,7 +51,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
    </span> <span class="img-wrapper"> <span>Tempo de serviço e tempo de garantia</span> </span></p>
-<p>Conforme mostrado na figura acima, se GuaranteeTs for menor que ServiceTime, significa que todos os dados anteriores ao ponto de tempo especificado foram totalmente gravados no disco, permitindo que os nós de consulta executem imediatamente a operação de pesquisa. Quando GuaranteeTs é superior a ServiceTime, os QueryNodes têm de esperar até que ServiceTime exceda GuaranteeTs para poderem executar a operação Search.</p>
+<p>Conforme mostrado na figura acima, se GuaranteeTs for menor que ServiceTime, significa que todos os dados antes do ponto de tempo especificado foram totalmente gravados no disco, permitindo que os nós de consulta executem imediatamente a operação de pesquisa. Quando GuaranteeTs é superior a ServiceTime, os QueryNodes têm de esperar até que ServiceTime exceda GuaranteeTs para poderem executar a operação Search.</p>
 <p>Os utilizadores precisam de fazer um compromisso entre a precisão da consulta e a latência da consulta. Se os utilizadores tiverem requisitos de consistência elevados e não forem sensíveis à latência da consulta, podem definir GuaranteeTs para um valor tão grande quanto possível; se os utilizadores pretenderem receber rapidamente os resultados da pesquisa e forem mais tolerantes à precisão da consulta, então GuaranteeTs pode ser definido para um valor mais pequeno.</p>
 <p>
   
@@ -153,7 +153,7 @@ curl --request POST \
 <p>Os valores possíveis para o parâmetro <code translate="no">consistency_level</code> são <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> e <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Definir o nível de consistência na pesquisa</h3><p>É sempre possível alterar o nível de consistência de uma pesquisa específica. O exemplo de código a seguir define o nível de consistência de volta para <strong>Limitado</strong>. A alteração se aplica apenas à solicitação de pesquisa atual.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">texto simples</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -172,15 +172,15 @@ curl --request POST \
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    &quot;my_collection&quot;, // collectionName
-    3,               // limit
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
 ).WithConsistencyLevel(entity.ClBounded).
-    WithANNSField(&quot;vector&quot;))
-if err != nil {
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -199,7 +199,7 @@ if err != nil {
 <p>Este parâmetro também está disponível em pesquisas híbridas e no iterador de pesquisa. Os valores possíveis para o parâmetro <code translate="no">consistency_level</code> são <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, e <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Definir o nível de consistência na consulta</h3><p>É sempre possível alterar o nível de consistência para uma pesquisa específica. O exemplo de código a seguir define o nível de consistência para <strong>Eventually</strong>. A definição aplica-se apenas ao pedido de consulta atual.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">texto simples</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -218,14 +218,25 @@ if err != nil {
         
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(&quot;my_collection&quot;).
-    WithFilter(&quot;color like \&quot;red%\&quot;&quot;).
-    WithOutputFields(&quot;vector&quot;, &quot;color&quot;).
-    WithLimit(3).
+<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>).
+    WithLimit(<span class="hljs-number">3</span>).
     WithConsistencyLevel(entity.ClEventually))
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;,
+    &quot;limit&quot;: 3
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Este parâmetro também está disponível no iterador de consulta. Os valores possíveis para o parâmetro <code translate="no">consistency_level</code> são <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, e <code translate="no">Session</code>.</p>

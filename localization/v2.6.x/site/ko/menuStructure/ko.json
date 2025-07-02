@@ -279,21 +279,15 @@
         "children": []
       },
       {
-        "label": "일관성 수준",
-        "id": "tune_consistency.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "인메모리 복제본",
         "id": "replica.md",
-        "order": 9,
+        "order": 8,
         "children": []
       },
       {
         "label": "용어",
         "id": "glossary.md",
-        "order": 10,
+        "order": 9,
         "children": []
       }
     ]
@@ -352,21 +346,27 @@
             "children": []
           },
           {
+            "label": "일관성 수준 설정",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
             "label": "파티션 관리",
             "id": "manage-partitions.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "별칭 관리",
             "id": "manage-aliases.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "드롭 컬렉션",
             "id": "drop-collection.md",
-            "order": 9,
+            "order": 10,
             "children": []
           }
         ]
@@ -1084,6 +1084,26 @@
             ]
           }
         ]
+      },
+      {
+        "label": "스토리지 최적화",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "mmap 사용",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "클러스터링 압축",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1374,15 +1394,21 @@
             "children": []
           },
           {
+            "label": "독립형 확장",
+            "id": "scale-standalone.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "HPA로 확장",
             "id": "hpa.md",
-            "order": 1,
+            "order": 2,
             "children": []
           },
           {
             "label": "스케일 종속성",
             "id": "scale-dependencies.md",
-            "order": 2,
+            "order": 3,
             "children": []
           }
         ]
@@ -1484,26 +1510,6 @@
             "label": "리소스 그룹 관리",
             "id": "resource_group.md",
             "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "스토리지 최적화",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "mmap 사용",
-            "id": "mmap.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "클러스터링 압축",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -1965,6 +1971,12 @@
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "비동기 검색",
+                "id": "langchain_milvus_async.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2226,7 +2238,7 @@
             "children": []
           },
           {
-            "label": "12개의 랩",
+            "label": "12개의 실험실",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -2269,13 +2281,7 @@
             "children": []
           },
           {
-            "label": "Lepton",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "실리콘 플로우",
+            "label": "SiliconFlow",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []

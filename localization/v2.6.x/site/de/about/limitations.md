@@ -19,7 +19,7 @@ summary: Informieren Sie sich über die Grenzen bei der Verwendung von Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus ist bestrebt, die besten Vektordatenbanken für KI-Anwendungen und die Suche nach Vektorähnlichkeit bereitzustellen. Das Team arbeitet jedoch kontinuierlich daran, weitere Funktionen und die besten Hilfsprogramme einzubauen, um die Benutzerfreundlichkeit zu verbessern. Auf dieser Seite werden einige bekannte Einschränkungen aufgeführt, auf die Benutzer bei der Verwendung von Milvus stoßen können.</p>
+    </button></h1><p>Milvus hat es sich zur Aufgabe gemacht, die besten Vektordatenbanken zur Unterstützung von KI-Anwendungen und der Suche nach Vektorähnlichkeit bereitzustellen. Das Team arbeitet jedoch kontinuierlich daran, weitere Funktionen und die besten Hilfsprogramme einzubauen, um die Benutzerfreundlichkeit zu verbessern. Auf dieser Seite werden einige bekannte Einschränkungen aufgeführt, auf die Benutzer bei der Verwendung von Milvus stoßen können.</p>
 <h2 id="Length-of-a-resource-name" class="common-anchor-header">Länge eines Ressourcennamens<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +83,6 @@ summary: Informieren Sie sich über die Grenzen bei der Verwendung von Milvus.
 </thead>
 <tbody>
 <tr><td>Sammlung</td><td>65,536</td></tr>
-<tr><td>Verbindung / Proxy</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Anzahl der Ressourcen in einer Sammlung<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
@@ -106,7 +105,7 @@ summary: Informieren Sie sich über die Grenzen bei der Verwendung von Milvus.
 <tr><th>Ressource</th><th>Grenze</th></tr>
 </thead>
 <tbody>
-<tr><td>Partition</td><td>1,024</td></tr>
+<tr><td>Unterteilung</td><td>1,024</td></tr>
 <tr><td>Scherbe</td><td>16</td></tr>
 <tr><td>Feld</td><td>64</td></tr>
 <tr><td>Index</td><td>1</td></tr>

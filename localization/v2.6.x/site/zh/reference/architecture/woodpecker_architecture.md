@@ -88,12 +88,12 @@ summary: 啄木鸟是 Milvus 2.6 中的一个云原生 WAL 系统。它采用零
         ></path>
       </svg>
     </button></h2><p>啄木鸟提供两种部署模式，以满足您的特定需求：</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 轻便、免维护</h3><p>MemoryBuffer 模式提供了一种简单、轻量级的部署选项，Woodpecker 的嵌入式客户端会在内存中临时缓冲写入的内容，并定期将其刷新到云对象存储服务。在这种模式下，内存缓冲区直接嵌入客户端，在刷新到 S3 之前实现高效批处理。元数据使用<strong>etcd</strong>进行管理，以确保一致性和协调性。这种模式最适合小规模部署或生产环境中的批量繁重工作负载，它们优先考虑的是简单性而不是性能，尤其是在低写延迟并不重要的情况下。</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 轻便、免维护</h3><p>MemoryBuffer 模式提供了一种简单、轻量级的部署选项，Woodpecker 的嵌入式客户端会在内存中临时缓冲写入的内容，并定期将其刷新到云对象存储服务。在这种模式下，内存缓冲区直接嵌入客户端，在刷新到 S3 之前实现高效批处理。元数据使用<strong>etcd</strong>进行管理，以确保一致性和协调性。这种模式最适合小规模部署或生产环境中的批量繁重工作负载，它们优先考虑的是简单性而不是性能，尤其是在低写延迟并不重要的情况下。该模式下的写延迟一般在 200-500 毫秒之间。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>啄木鸟内存模式部署</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - 针对低延迟、高耐用性进行了优化</h3><p>QuorumBuffer 模式专为对延迟敏感的高频率读/写工作负载而设计，既要求实时响应，又要求较强的容错能力。在这种模式下，啄木鸟的客户端与三副本法定人数系统交互，提供高速写缓冲，通过分布式共识确保强一致性和高可用性。</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - 针对低延迟、高耐用性进行了优化</h3><p>QuorumBuffer 模式设计用于对延迟敏感的高频率读/写工作负载，这些负载既需要实时响应能力，又需要较强的容错能力。在这种模式下，啄木鸟的客户端与三副本法定人数系统交互，提供高速写缓冲，通过分布式共识确保强一致性和高可用性。</p>
 <p>一旦客户端成功地将数据复制到三个法定节点中的至少两个，写入即被视为成功，通常在个位数毫秒内完成，之后数据会异步刷新到云对象存储中，以获得长期持久性。这种架构最大限度地减少了节点上的状态，消除了对大型本地磁盘卷的需求，避免了传统法定人数系统通常需要的复杂的反熵修复。</p>
 <p>因此，对于一致性、可用性和快速恢复至关重要的关键任务生产环境来说，精简、稳健的 WAL 层是理想之选。</p>
 <p>

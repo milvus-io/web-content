@@ -1,11 +1,12 @@
 ---
 id: build_RAG_with_milvus_and_lepton.md
+beta: NEAR DEPRECATE
 summary: >-
   In diesem Tutorial zeigen wir Ihnen, wie Sie eine RAG-Pipeline
   (Retrieval-Augmented Generation) mit Milvus und Lepton AI aufbauen können.
-title: RAG mit Milvus und Lepton AI aufbauen
+title: RAG mit Milvus und Lepton AI aufbauenAbout to Deprecate
 ---
-<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">RAG mit Milvus und Lepton AI aufbauen<button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">RAG mit Milvus und Lepton AI aufbauen<span class="beta-tag" style="background-color:#FF7F47;color:white" translate="no">About to Deprecate</span><button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,7 +27,7 @@ title: RAG mit Milvus und Lepton AI aufbauen
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_lepton.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://www.lepton.ai/">Lepton AI</a> ermöglicht es Entwicklern und Unternehmen, KI-Anwendungen in Minutenschnelle effizient und in produktionsreifem Umfang auszuführen. Mit Lepton AI können Sie Modelle in Python erstellen, lokal debuggen und testen, sie mit einem einzigen Befehl in der Cloud bereitstellen und Modelle in jeder Anwendung über eine einfache, flexible API nutzen. Es bietet eine umfassende Umgebung für den Einsatz verschiedener KI-Modelle, einschließlich großer Sprachmodelle (LLMs) und Diffusionsmodelle, ohne dass eine umfangreiche Infrastruktur eingerichtet werden muss.</p>
+<p><a href="https://www.lepton.ai/">Lepton AI</a> ermöglicht es Entwicklern und Unternehmen, KI-Anwendungen in Minutenschnelle effizient und in produktionsreifem Umfang auszuführen. Mit Lepton AI können Sie Modelle in Python erstellen, Modelle lokal debuggen und testen, sie mit einem einzigen Befehl in der Cloud bereitstellen und Modelle in jeder Anwendung mit einer einfachen, flexiblen API nutzen. Es bietet eine umfassende Umgebung für den Einsatz verschiedener KI-Modelle, einschließlich großer Sprachmodelle (LLMs) und Diffusionsmodelle, ohne dass eine umfangreiche Infrastruktur eingerichtet werden muss.</p>
 <p>In diesem Tutorial zeigen wir Ihnen, wie Sie eine RAG-Pipeline (Retrieval-Augmented Generation) mit Milvus und Lepton AI aufbauen.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -225,7 +225,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
         ></path>
       </svg>
     </button></h2><p>La création d'un index sur un champ spécifique accélère la recherche sur ce champ. Un index enregistre l'ordre des entités dans une collection. Comme le montrent les extraits de code suivants, vous pouvez utiliser <code translate="no">metric_type</code> et <code translate="no">index_type</code> pour sélectionner les moyens appropriés permettant à Milvus d'indexer un champ et de mesurer les similitudes entre les intégrations vectorielles.</p>
-<p>Sur Milvus, vous pouvez utiliser <code translate="no">AUTOINDEX</code> comme type d'index pour tous les champs vectoriels, et l'un de <code translate="no">COSINE</code>, <code translate="no">L2</code>, et <code translate="no">IP</code> comme type de métrique en fonction de vos besoins.</p>
+<p>Sur Milvus, vous pouvez utiliser <code translate="no">AUTOINDEX</code> comme type d'index pour tous les champs vectoriels et l'un de <code translate="no">COSINE</code>, <code translate="no">L2</code>, et <code translate="no">IP</code> comme type de métrique en fonction de vos besoins.</p>
 <p>Comme le montre l'extrait de code ci-dessus, vous devez définir à la fois le type d'index et le type métrique pour les champs vectoriels et uniquement le type d'index pour les champs scalaires. Les index sont obligatoires pour les champs vectoriels, et il est conseillé de créer des index sur les champs scalaires fréquemment utilisés dans les conditions de filtrage.</p>
 <p>Pour plus de détails, voir <a href="/docs/fr/index-vector-fields.md">Indexer les champs vectoriels</a> et <a href="/docs/fr/index-scalar-fields.md">Indexer les champs scalaires</a>.</p>
 <div class="multipleCode">
@@ -521,9 +521,13 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Vous pouvez définir les propriétés de la collection à créer afin de l'intégrer à votre service. Les propriétés applicables sont les suivantes.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Définir le nombre d'unités</h3><p>Les tessons sont des tranches horizontales d'une collection. Chaque shard correspond à un canal d'entrée de données. Chaque collection possède un shard par défaut. Lors de la création d'une collection, vous pouvez définir le nombre approprié d'unités en fonction du débit attendu et du volume des données à insérer dans la collection.</p>
-<p>Dans les cas les plus courants, envisagez d'augmenter le nombre de shards d'une unité chaque fois que le débit attendu augmente de 500 Mo/s ou que le volume de données à insérer augmente de 100 Go. Cette suggestion est basée sur notre propre expérience et peut ne pas être totalement adaptée à vos scénarios d'application. Vous pouvez adapter ce nombre à vos propres besoins ou simplement utiliser la valeur par défaut.</p>
-<p>L'extrait de code suivant montre comment définir le nombre de tessons lors de la création d'une collection.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Définir le nombre d'unités</h3><p>Les shards sont des tranches horizontales d'une collection, et chaque shard correspond à un canal d'entrée de données. Par défaut, chaque collection a un shard. Lors de la création d'une collection, vous pouvez spécifier le nombre d'unités afin de mieux répondre à votre volume de données et à votre charge de travail.</p>
+<p>En règle générale, il convient de tenir compte des éléments suivants lors de la définition du nombre de tessons :</p>
+<ul>
+<li><strong>La taille des données :</strong> Une pratique courante consiste à prévoir un groupe de stockage pour 200 millions d'entités. Vous pouvez également faire une estimation en fonction de la taille totale des données, par exemple en ajoutant une unité de stockage pour 100 Go de données que vous prévoyez d'insérer.</li>
+<li><strong>Utilisation des nœuds de flux :</strong> Si votre instance Milvus dispose de plusieurs nœuds de flux, il est recommandé d'utiliser plusieurs tiroirs. Cela garantit que la charge de travail d'insertion des données est répartie sur tous les nœuds de flux disponibles, ce qui évite que certains soient inactifs alors que d'autres sont surchargés.</li>
+</ul>
+<p>L'extrait de code suivant montre comment définir le numéro de dépôt lors de la création d'une collection.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
@@ -571,7 +575,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Activer mmap</h3><p>Milvus active mmap sur toutes les collections par défaut, ce qui permet à Milvus de mapper les données de champ brutes dans la mémoire au lieu de les charger complètement. Cela permet de réduire les empreintes mémoire et d'augmenter la capacité des collections. Pour plus de détails sur mmap, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Activer mmap</h3><p>Milvus active mmap sur toutes les collections par défaut, ce qui lui permet de mapper les données de champ brutes dans la mémoire au lieu de les charger complètement. Cela permet de réduire les empreintes mémoire et d'augmenter la capacité des collections. Pour plus de détails sur mmap, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">texte brut</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>

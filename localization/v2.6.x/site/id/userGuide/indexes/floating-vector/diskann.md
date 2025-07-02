@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam skenario berskala besar, di mana kumpulan data dapat mencakup miliaran atau bahkan triliunan vektor, metode pengindeksan dalam memori standar (misalnya, <a href="/docs/id/v2.6.x/hnsw.md">HNSW</a>, <a href="/docs/id/v2.6.x/ivf-flat.md">IVF_FLAT</a>) sering kali tidak dapat mengimbangi karena keterbatasan memori. <strong>DISKANN</strong> menawarkan pendekatan berbasis disk yang mengatasi tantangan ini dengan mempertahankan akurasi dan kecepatan pencarian yang tinggi ketika ukuran dataset melebihi RAM yang tersedia.</p>
+    </button></h1><p>Dalam skenario berskala besar, di mana kumpulan data dapat mencakup miliaran atau bahkan triliunan vektor, metode pengindeksan dalam memori standar (misalnya, <a href="/docs/id/hnsw.md">HNSW</a>, <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>) sering kali tidak dapat mengimbangi karena keterbatasan memori. <strong>DISKANN</strong> menawarkan pendekatan berbasis disk yang mengatasi tantangan ini dengan mempertahankan akurasi dan kecepatan pencarian yang tinggi ketika ukuran dataset melebihi RAM yang tersedia.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ summary: >-
 <p>Parameter <code translate="no">search_list_size</code> menentukan luasnya proses penyempurnaan graf. <code translate="no">search_list_size</code> yang lebih tinggi akan memperluas pencarian tetangga selama konstruksi dan dapat meningkatkan akurasi akhir, tetapi meningkatkan waktu pembuatan indeks.</p></li>
 </ul></li>
 </ol>
-<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat parameter <a href="/docs/id/v2.6.x/diskann.md#diskann-params">DISKANN</a>.</p>
+<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat parameter <a href="/docs/id/diskann.md#diskann-params">DISKANN</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN menggunakan <strong>PQ</strong> untuk memampatkan vektor berdimensi tinggi ke dalam representasi yang lebih kecil<strong>(kode PQ</strong>), yang disimpan di memori untuk perhitungan perkiraan jarak yang cepat.</p>
 <p>Parameter <code translate="no">pq_code_budget_gb_ratio</code> mengelola jejak memori yang didedikasikan untuk menyimpan kode-kode PQ ini. Parameter ini merepresentasikan rasio antara ukuran total vektor (dalam gigabyte) dan ruang yang dialokasikan untuk menyimpan kode PQ. Anda dapat menghitung anggaran kode PQ yang sebenarnya (dalam gigabyte) dengan rumus ini:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -69,9 +69,9 @@ summary: >-
 <p>di mana</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> adalah ukuran total vektor (dalam gigabyte).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> adalah rasio yang ditentukan pengguna, yang mewakili sebagian kecil dari total ukuran data yang dicadangkan untuk kode PQ. Parameter ini memungkinkan pertukaran antara akurasi pencarian dan sumber daya memori. Untuk informasi lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> adalah rasio yang ditentukan pengguna, yang mewakili sebagian kecil dari total ukuran data yang dicadangkan untuk kode PQ. Parameter ini memungkinkan pertukaran antara akurasi pencarian dan sumber daya memori. Untuk informasi lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
 </ul>
-<p>Untuk rincian teknis tentang metode PQ yang mendasari, lihat <a href="/docs/id/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<p>Untuk rincian teknis tentang metode PQ yang mendasari, lihat <a href="/docs/id/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
 <h3 id="Search-process" class="common-anchor-header">Proses pencarian</h3><p>Setelah indeks (grafik Vamana pada disk dan kode PQ dalam memori) dibangun, DISKANN melakukan pencarian ANN sebagai berikut:</p>
 <p>
   
@@ -85,7 +85,7 @@ summary: >-
 <li><p><code translate="no">beam_width_ratio</code>: Rasio yang mengontrol luasnya pencarian, menentukan berapa banyak kandidat tetangga yang dipilih secara paralel untuk mengeksplorasi tetangga mereka. <code translate="no">beam_width_ratio</code> yang lebih besar menghasilkan eksplorasi yang lebih luas, yang berpotensi menghasilkan akurasi yang lebih tinggi tetapi juga meningkatkan biaya komputasi dan I/O disk. Lebar berkas, atau jumlah node yang dipilih, ditentukan dengan menggunakan rumus: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: Proporsi memori yang dialokasikan untuk caching data disk yang sering diakses. Caching ini membantu meminimalkan I/O disk, sehingga pencarian berulang menjadi lebih cepat karena data sudah ada di dalam memori.</p></li>
 </ul>
-<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
+<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
 <li><p><strong>Eksplorasi berulang:</strong> Pencarian secara iteratif menyempurnakan himpunan kandidat, berulang kali melakukan evaluasi perkiraan (menggunakan PQ) diikuti dengan pemeriksaan yang tepat (menggunakan vektor asli dari disk) hingga jumlah tetangga yang cukup ditemukan.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Mengaktifkan DISKANN di Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -188,7 +188,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/create-collection.md">Membuat Koleksi</a>.</p>
+<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a>.</p>
 <h4 id="Search" class="common-anchor-header">Pencarian</h4><p>Setelah indeks dibuat dan entitas dimasukkan, Anda dapat melakukan pencarian kemiripan pada indeks.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
@@ -241,17 +241,16 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Menentukan jumlah kandidat tetangga yang dipertimbangkan untuk setiap titik data selama konstruksi graf.</p></td>
-     <td><p><strong>Jenis</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
+     <td><p>Selama pembangunan indeks, parameter ini mendefinisikan ukuran kumpulan kandidat yang digunakan ketika mencari tetangga terdekat untuk setiap node. Untuk setiap simpul yang ditambahkan ke dalam graf, algoritme ini menyimpan daftar <code translate="no">search_list_size</code> kandidat terbaik yang ditemukan sejauh ini. Pencarian tetangga berhenti ketika daftar ini tidak lagi dapat ditingkatkan. Dari kumpulan kandidat akhir ini, <code translate="no">max_degree</code> node teratas dipilih untuk membentuk sisi akhir.</p></td>
+     <td><p><strong>Tipe</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>
-     <td><p>Nilai yang lebih besar akan menghasilkan grafik yang lebih komprehensif, yang berpotensi meningkatkan kualitas pencarian, tetapi juga meningkatkan waktu pembuatan. 
- Pada kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [K, 10K].</p></td>
+     <td><p><code translate="no">search_list_size</code> yang lebih besar meningkatkan kemungkinan menemukan tetangga terdekat yang sebenarnya untuk setiap simpul, yang dapat menghasilkan grafik berkualitas lebih tinggi dan kinerja pencarian yang lebih baik (recall). Namun, hal ini harus dibayar dengan waktu pembuatan indeks yang jauh lebih lama. Ini harus selalu diatur ke nilai yang lebih besar dari atau sama dengan <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
      <td><p>Mengontrol jumlah memori yang dialokasikan untuk menyimpan bagian grafik yang sering diakses selama konstruksi indeks.</p></td>
-     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Float: [0.0, 0.3)</p>
+     <td><p><strong>Tipe</strong>: <strong>Kisaran</strong> Float: [0.0, 0.3)</p>
 <p><strong>Nilai default</strong>: <code translate="no">0.10</code></p></td>
      <td><p>Nilai yang lebih tinggi mengalokasikan lebih banyak memori untuk caching, secara signifikan mengurangi I/O disk tetapi mengkonsumsi lebih banyak memori sistem. Nilai yang lebih rendah menggunakan lebih sedikit memori untuk caching, sehingga berpotensi meningkatkan kebutuhan akses disk. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [0.0, 0.3).</p></td>
    </tr>
@@ -281,5 +280,13 @@ res = MilvusClient.search(
      <td><p><strong>Jenis</strong>: <strong>Kisaran</strong> Float: [1, maks (128 / nomor CPU, 16)]</p>
 <p><strong>Nilai default</strong>: <code translate="no">4.0</code></p></td>
      <td><p>Nilai yang lebih tinggi akan meningkatkan paralelisme, yang dapat mempercepat pencarian pada sistem dengan CPU dan SSD yang kuat. Namun demikian, pengaturan yang terlalu tinggi dapat menyebabkan perebutan sumber daya yang berlebihan. Pada kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [1.0, 4.0].</p></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td><p><code translate="no">search_list_size</code></p></td>
+     <td><p>Selama operasi pencarian, parameter ini menentukan ukuran kumpulan kandidat yang dipertahankan oleh algoritme saat melintasi grafik. Nilai yang lebih besar meningkatkan peluang menemukan tetangga terdekat yang sebenarnya (recall yang lebih tinggi) tetapi juga meningkatkan latensi pencarian.</p></td>
+     <td><p><strong>Jenis</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
+<p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>
+     <td><p>Untuk keseimbangan yang baik antara kinerja dan akurasi, disarankan untuk menetapkan nilai ini sama dengan atau sedikit lebih besar dari jumlah hasil yang ingin Anda ambil (top_k).</p></td>
    </tr>
 </table>

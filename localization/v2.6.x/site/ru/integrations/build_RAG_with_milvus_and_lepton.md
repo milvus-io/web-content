@@ -1,11 +1,12 @@
 ---
 id: build_RAG_with_milvus_and_lepton.md
+beta: NEAR DEPRECATE
 summary: >-
   В этом руководстве мы покажем вам, как построить конвейер RAG
   (Retrieval-Augmented Generation) с помощью Milvus и Lepton AI.
-title: Создайте RAG с помощью Milvus и Lepton AI
+title: Создайте RAG с помощью Milvus и Lepton AIAbout to Deprecate
 ---
-<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">Создайте RAG с помощью Milvus и Lepton AI<button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">Создайте RAG с помощью Milvus и Lepton AI<span class="beta-tag" style="background-color:#FF7F47;color:white" translate="no">About to Deprecate</span><button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

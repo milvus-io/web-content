@@ -1,11 +1,12 @@
 ---
 id: build_RAG_with_milvus_and_lepton.md
+beta: NEAR DEPRECATE
 summary: >-
   このチュートリアルでは、MilvusとLepton AIを使ってRAG（Retrieval-Augmented
   Generation）パイプラインを構築する方法を紹介します。
-title: MilvusとLepton AIでRAGを構築する
+title: MilvusとLepton AIでRAGを構築するAbout to Deprecate
 ---
-<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">MilvusとLepton AIでRAGを構築する<button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">MilvusとLepton AIでRAGを構築する<span class="beta-tag" style="background-color:#FF7F47;color:white" translate="no">About to Deprecate</span><button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,7 +27,7 @@ title: MilvusとLepton AIでRAGを構築する
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_lepton.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://www.lepton.ai/">Lepton AIは</a>、開発者や企業がAIアプリケーションを数分で効率的に実行し、本番環境で利用可能な規模にすることを可能にします。 Lepton AIでは、Pythonネイティブな方法でモデルを構築し、ローカルでモデルをデバッグおよびテストし、1つのコマンドでクラウドにデプロイし、シンプルで柔軟なAPIを使用して任意のアプリケーションでモデルを利用することができます。大規模言語モデル（LLM）や拡散モデルを含む様々なAIモデルを、大規模なインフラを構築することなくデプロイするための包括的な環境を提供します。</p>
+<p><a href="https://www.lepton.ai/">Lepton AIは</a>、開発者や企業がAIアプリケーションを数分で効率的に実行し、本番環境で利用可能な規模にすることを可能にします。 Lepton AIは、Pythonネイティブな方法でモデルを構築し、ローカルでモデルをデバッグおよびテストし、単一のコマンドでクラウドにデプロイし、シンプルで柔軟なAPIを使用して任意のアプリケーションでモデルを利用することができます。大規模言語モデル（LLM）や拡散モデルを含む様々なAIモデルを、大規模なインフラを構築することなくデプロイするための包括的な環境を提供します。</p>
 <p>このチュートリアルでは、MilvusとLepton AIを使ってRAG（Retrieval-Augmented Generation）パイプラインを構築する方法を紹介します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +47,7 @@ title: MilvusとLepton AIでRAGを構築する
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus[model] openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択します）。</p>
 </div>
 <p>LeptonはOpenAIスタイルのAPIを有効にする。公式サイトにログインし、<a href="https://www.lepton.ai/docs">api key</a> <code translate="no">LEPTONAI_TOKEN</code> を環境変数として用意する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -209,12 +210,12 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLMを使ってRAGレスポンスを取得する</h3><p>検索されたドキュメントを文字列形式に変換する。</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLMを使ってRAGレスポンスを取得する</h3><p>検索されたドキュメントを文字列フォーマットに変換する。</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>ラネージ・モデルのシステム・プロンプトとユーザー・プロンプトを定義する。このプロンプトはmilvusから検索された文書で組み立てられる。</p>
+<p>ラネージ・モデルのシステム・プロンプトとユーザー・プロンプトを定義する。このプロンプトはMilvusから検索された文書で組み立てられる。</p>
 <pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>

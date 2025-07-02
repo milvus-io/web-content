@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, <strong>DataNodes</strong> bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. <strong>QueryNodes</strong> menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan <strong>data batch</strong> dan <strong>data streaming</strong>. Sederhananya, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek sementara data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang belum tersimpan, sehingga mempengaruhi akurasi hasil pencarian.</p>
+    </button></h2><p>Milvus adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, <strong>DataNodes</strong> bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. <strong>QueryNodes</strong> menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan <strong>data batch</strong> dan <strong>data streaming</strong>. Sederhananya, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek sementara data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang tidak tersimpan, sehingga mempengaruhi akurasi hasil pencarian.</p>
 <p>Milvus Commercial Edition adalah sebuah sistem yang memisahkan penyimpanan dan komputasi. Dalam sistem ini, DataNodes bertanggung jawab atas persistensi data dan pada akhirnya menyimpannya dalam penyimpanan objek terdistribusi seperti MinIO/S3. QueryNodes menangani tugas-tugas komputasi seperti Pencarian. Tugas-tugas ini melibatkan pemrosesan data batch dan data streaming. Secara sederhana, data batch dapat dipahami sebagai data yang telah disimpan dalam penyimpanan objek, sedangkan data streaming mengacu pada data yang belum disimpan dalam penyimpanan objek. Karena latensi jaringan, QueryNode sering kali tidak menyimpan data streaming terbaru. Tanpa perlindungan tambahan, melakukan Pencarian secara langsung pada data streaming dapat mengakibatkan hilangnya banyak titik data yang belum tersimpan, sehingga mempengaruhi akurasi hasil pencarian.</p>
 <p>
   
@@ -153,7 +153,7 @@ curl --request POST \
 <p>Nilai yang mungkin untuk parameter <code translate="no">consistency_level</code> adalah <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, dan <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Mengatur Tingkat Konsistensi dalam Pencarian</h3><p>Anda selalu dapat mengubah tingkat konsistensi untuk pencarian tertentu. Contoh kode berikut ini menetapkan tingkat konsistensi kembali ke <strong>Bounded</strong>. Perubahan ini hanya berlaku untuk permintaan pencarian saat ini.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#bash">cURL</a> <a href="#plaintext">teks biasa</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -172,15 +172,15 @@ curl --request POST \
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    &quot;my_collection&quot;, // collectionName
-    3,               // limit
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
 ).WithConsistencyLevel(entity.ClBounded).
-    WithANNSField(&quot;vector&quot;))
-if err != nil {
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -196,10 +196,10 @@ if err != nil {
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Parameter ini juga tersedia di pencarian gabungan dan iterator pencarian. Nilai yang mungkin untuk parameter <code translate="no">consistency_level</code> adalah <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, dan <code translate="no">Session</code>.</p>
+<p>Parameter ini juga tersedia di pencarian gabungan dan iterator pencarian. Nilai yang memungkinkan untuk parameter <code translate="no">consistency_level</code> adalah <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, dan <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Mengatur Tingkat Konsistensi dalam Kueri</h3><p>Anda selalu dapat mengubah tingkat konsistensi untuk pencarian tertentu. Contoh kode berikut ini menetapkan tingkat konsistensi ke <strong>Akhirnya</strong>. Pengaturan ini hanya berlaku untuk permintaan kueri saat ini.</p>
 <div class="multipleCode">
-   <a href="#plaintext">Teks biasa</a> <a href="#python">Python</a> <a href="#java">Java</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -218,14 +218,25 @@ if err != nil {
         
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(&quot;my_collection&quot;).
-    WithFilter(&quot;color like \&quot;red%\&quot;&quot;).
-    WithOutputFields(&quot;vector&quot;, &quot;color&quot;).
-    WithLimit(3).
+<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>).
+    WithLimit(<span class="hljs-number">3</span>).
     WithConsistencyLevel(entity.ClEventually))
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;,
+    &quot;limit&quot;: 3
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Parameter ini juga tersedia di pengulang kueri. Nilai yang mungkin untuk parameter <code translate="no">consistency_level</code> adalah <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, dan <code translate="no">Session</code>.</p>

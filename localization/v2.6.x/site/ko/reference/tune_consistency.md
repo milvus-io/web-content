@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 저장과 계산을 분리하는 시스템입니다. 이 시스템에서 <strong>데이터 노드는</strong> 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. <strong>쿼리 노드는</strong> 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 <strong>배치 데이터와</strong> <strong>스트리밍 데이터</strong> 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 의미합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
+    </button></h2><p>Milvus는 저장과 계산을 분리하는 시스템입니다. 이 시스템에서 <strong>데이터 노드는</strong> 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. <strong>쿼리 노드는</strong> 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 <strong>배치 데이터와</strong> <strong>스트리밍 데이터</strong> 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 말합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
 <p>밀버스 커머셜 에디션은 저장과 계산을 분리한 시스템입니다. 이 시스템에서 데이터 노드는 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. 쿼리 노드는 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 배치 데이터와 스트리밍 데이터 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 의미합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
 <p>
   
@@ -150,7 +150,7 @@ curl --request POST \
 <p><code translate="no">consistency_level</code> 매개변수에 사용 가능한 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">검색에서 일관성 수준 설정</h3><p>특정 검색의 일관성 수준을 언제든지 변경할 수 있습니다. 다음 코드 예제는 일관성 수준을 다시 <strong>Bounded로</strong> 설정합니다. 변경 사항은 현재 검색 요청에만 적용됩니다.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">일반 텍스트</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -169,15 +169,15 @@ curl --request POST \
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    &quot;my_collection&quot;, // collectionName
-    3,               // limit
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
 ).WithConsistencyLevel(entity.ClBounded).
-    WithANNSField(&quot;vector&quot;))
-if err != nil {
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -193,10 +193,10 @@ if err != nil {
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 매개변수는 하이브리드 검색 및 검색 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용 가능한 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
+<p>이 매개변수는 하이브리드 검색 및 검색 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수의 가능한 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">쿼리에서 일관성 수준 설정</h3><p>특정 검색의 일관성 수준을 언제든지 변경할 수 있습니다. 다음 코드 예제에서는 일관성 수준을 <strong>Eventually로</strong> 설정합니다. 이 설정은 현재 쿼리 요청에만 적용됩니다.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">일반 텍스트</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -215,14 +215,25 @@ if err != nil {
         
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(&quot;my_collection&quot;).
-    WithFilter(&quot;color like \&quot;red%\&quot;&quot;).
-    WithOutputFields(&quot;vector&quot;, &quot;color&quot;).
-    WithLimit(3).
+<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>).
+    WithLimit(<span class="hljs-number">3</span>).
     WithConsistencyLevel(entity.ClEventually))
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>이 매개 변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;,
+    &quot;limit&quot;: 3
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>이 매개 변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수의 가능한 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>

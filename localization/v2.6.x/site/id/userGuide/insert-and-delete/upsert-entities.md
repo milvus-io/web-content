@@ -1,6 +1,6 @@
 ---
 id: upsert-entities.md
-title: Entitas Upsert
+title: Menyisipkan Entitas
 summary: >-
   Operasi Upsert menggabungkan tindakan memperbarui dan menyisipkan data. Milvus
   menentukan apakah akan melakukan operasi update atau insert dengan memeriksa
@@ -8,7 +8,7 @@ summary: >-
   meng-upsert sebuah Entitas dan perilaku spesifik dari operasi Upsert dalam
   berbagai skenario.
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Entitas Upsert<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">Menyisipkan Entitas<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Operasi Upsert menggabungkan tindakan memperbarui dan menyisipkan data. Milvus menentukan apakah akan melakukan operasi update atau insert dengan memeriksa apakah kunci utama ada. Bagian ini akan memperkenalkan bagaimana cara meng-upsert sebuah Entitas dan perilaku spesifik dari operasi Upsert dalam berbagai skenario.</p>
+    </button></h1><p>Operasi <code translate="no">upsert</code> menyediakan cara yang mudah untuk menyisipkan atau memperbarui entitas dalam koleksi. Operasi ini secara cerdas menangani data dengan memeriksa keberadaan kunci utama: jika kunci tersebut sudah ada, entitas yang sesuai akan diperbarui; jika tidak, entitas baru akan disisipkan. Hal ini menjadikan <code translate="no">upsert</code> sebagai metode yang direkomendasikan untuk mengelola data ketika Anda tidak yakin apakah suatu entitas sudah ada atau ketika Anda perlu menghindari pembuatan entri duplikat.</p>
 <div class="alert note">
-<p>Jika Anda menambahkan field baru secara dinamis setelah koleksi dibuat, dan Anda tidak menentukan nilai untuk field-field ini ketika meng-upsert entitas, Milvus akan secara otomatis mengisinya dengan nilai default yang telah ditentukan atau NULL jika nilai default tidak ditetapkan. Untuk detailnya, lihat <a href="/docs/id/add-fields-to-an-existing-collection.md">Menambahkan Field ke Koleksi yang Sudah Ada</a>.</p>
+<p>Jika Anda menambahkan field baru secara dinamis setelah koleksi dibuat, dan Anda tidak menentukan nilai untuk field-field ini ketika memasukkan entitas, Milvus akan secara otomatis mengisinya dengan nilai default yang telah ditentukan atau NULL jika nilai default tidak ditentukan. Untuk detailnya, lihat <a href="/docs/id/add-fields-to-an-existing-collection.md">Menambahkan Field ke Koleksi yang Sudah Ada</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"

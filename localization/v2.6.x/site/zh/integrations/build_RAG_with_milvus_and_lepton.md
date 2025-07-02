@@ -1,9 +1,10 @@
 ---
 id: build_RAG_with_milvus_and_lepton.md
+beta: NEAR DEPRECATE
 summary: 在本教程中，我们将向您展示如何利用 Milvus 和 Lepton AI 构建 RAG（检索-增强生成）管道。
-title: 利用 Milvus 和 Lepton AI 构建 RAG
+title: 利用 Milvus 和 Lepton AI 构建 RAGAbout to Deprecate
 ---
-<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">利用 Milvus 和 Lepton AI 构建 RAG<button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">利用 Milvus 和 Lepton AI 构建 RAG<span class="beta-tag" style="background-color:#FF7F47;color:white" translate="no">About to Deprecate</span><button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,7 +120,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<p>检查 Collections 是否已存在，如果已存在，则删除它。</p>
+<p>检查 Collections 是否已存在，如果存在则删除。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>

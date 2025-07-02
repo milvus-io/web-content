@@ -39,6 +39,12 @@ summary: >-
     </button></h2><p>컬렉션에서 각 엔티티의 기본 키는 전 세계적으로 고유해야 합니다. 기본 필드를 추가할 때 데이터 유형을 명시적으로 <strong>VARCHAR</strong> 또는 <strong>INT64로</strong> 설정해야 합니다. 데이터 유형을 <strong>INT64로</strong> 설정하면 기본 키가 <code translate="no">12345</code> 와 유사한 정수여야 하고, 데이터 유형을 <strong>VARCHAR로</strong> 설정하면 기본 키가 <code translate="no">my_entity_1234</code> 와 유사한 문자열이어야 함을 나타냅니다.</p>
 <p>또한 <strong>AutoID를</strong> 활성화하여 Milvus가 수신 엔티티에 대해 기본 키를 자동으로 할당하도록 할 수도 있습니다. 컬렉션에서 <strong>AutoID를</strong> 활성화한 후에는 엔티티를 삽입할 때 기본 키를 포함하지 마세요.</p>
 <p>컬렉션의 기본 필드에는 기본값이 없으며 null이 될 수 없습니다.</p>
+<div class="alert note">
+<ul>
+<li>컬렉션에 이미 존재하는 기본 키를 사용하는 표준 <code translate="no">insert</code> 작업은 이전 항목을 덮어쓰지 않습니다. 대신 동일한 기본 키를 가진 별도의 새 엔티티가 생성됩니다. 이로 인해 예기치 않은 검색 결과와 데이터 중복이 발생할 수 있습니다.</li>
+<li>사용 사례에 기존 데이터 업데이트가 포함되거나 삽입하려는 데이터가 이미 존재할 것으로 의심되는 경우, 업서트 작업을 사용하는 것이 좋습니다. 업서트 작업은 기본 키가 존재하는 경우 엔티티를 지능적으로 업데이트하고, 존재하지 않는 경우 새 키를 삽입합니다. 자세한 내용은 <a href="/docs/ko/upsert-entities.md">엔티티 업서트를</a> 참조하세요.</li>
+</ul>
+</div>
 <h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Int64 기본 키 사용<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +60,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Int64 유형의 기본 키를 사용하려면 <code translate="no">datatype</code> 를 <code translate="no">DataType.INT64</code> 로 설정하고 <code translate="no">is_primary</code> 를 <code translate="no">true</code> 로 설정해야 합니다. 들어오는 엔티티의 기본 키를 할당하기 위해 Milvus도 필요한 경우 <code translate="no">auto_id</code> 를 <code translate="no">true</code> 로 설정해야 합니다.</p>
+    </button></h2><p>Int64 유형의 기본 키를 사용하려면 <code translate="no">datatype</code> 를 <code translate="no">DataType.INT64</code> 로 설정하고 <code translate="no">is_primary</code> 를 <code translate="no">true</code> 로 설정해야 합니다. 들어오는 엔티티에 대한 기본 키를 할당하기 위해 Milvus도 필요한 경우 <code translate="no">auto_id</code> 를 <code translate="no">true</code> 로 설정해야 합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType

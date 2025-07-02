@@ -18,8 +18,9 @@ summary: Milvus 提供別名管理功能。本頁面示範建立、列出、變�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 提供別名管理功能。本頁面展示了建立、列出、變更和刪除別名的程序。</p>
-<h2 id="Overview" class="common-anchor-header">總覽<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>在 Milvus 中，別名是一個集合的次要、可變的名稱。使用別名提供了一個抽象層，允許您在不修改應用程式碼的情況下動態切換集合。這對於生產環境中的無縫資料更新、A/B 測試和其他作業工作特別有用。</p>
+<p>本頁面將示範如何建立、列出、重新指派及刪除集合別名。</p>
+<h2 id="Why-Use-an-Alias" class="common-anchor-header">為什麼要使用別名？<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,8 +35,20 @@ summary: Milvus 提供別名管理功能。本頁面示範建立、列出、變�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以為您的集合建立別名。一個集合可以有多個別名，但集合不能共用一個別名。</p>
-<p>當收到針對集合的請求時，Milvus 會根據提供的名稱找到集合。如果所提供名稱的集合不存在，Milvus 會繼續定位所提供名稱的別名。您可以使用集合別名來使您的程式碼適應不同的情況。</p>
+    </button></h2><p>使用別名的主要好處是讓您的用戶端應用程式與特定的實體集合名稱脫離。</p>
+<p>假設您有一個即時應用程式，它會查詢一個名為<code translate="no">prod_data</code> 的集合。當您需要更新底層資料時，您可以在不中斷任何服務的情況下執行更新。工作流程如下</p>
+<ol>
+<li><strong>建立新的集合</strong>：建立一個新的集合，例如<code translate="no">prod_data_v2</code> 。</li>
+<li><strong>準備資料</strong>：在<code translate="no">prod_data_v2</code> 中載入新資料並編入索引。</li>
+<li><strong>切換別名</strong>：一旦新的資料集準備好提供服務，原子式地將舊資料集的別名<code translate="no">prod_data</code> 重新指定為<code translate="no">prod_data_v2</code> 。</li>
+</ol>
+<p>您的應用程式會繼續將請求傳送至別名<code translate="no">prod_data</code> ，不會有停機時間。此機制可實現無縫更新，並簡化向量搜尋服務的藍綠部署等作業。</p>
+<p><strong>別名的關鍵屬性：</strong></p>
+<ul>
+<li>一個集合可以有多個別名。</li>
+<li>一個別名一次只能指向一個集合。</li>
+<li>當處理一個請求時，Milvus 會先檢查所提供名稱的集合是否存在。如果不存在，它會檢查該名稱是否是一個集合的別名。</li>
+</ul>
 <h2 id="Create-Alias" class="common-anchor-header">建立別名<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

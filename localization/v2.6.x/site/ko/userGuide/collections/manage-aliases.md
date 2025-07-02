@@ -18,8 +18,9 @@ summary: 'Milvus는 별칭 관리 기능을 제공합니다. 이 페이지에서
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 별칭 관리 기능을 제공합니다. 이 페이지에서는 별칭을 만들고, 나열하고, 변경하고, 삭제하는 절차를 설명합니다.</p>
-<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus에서 별칭은 컬렉션의 변경 가능한 보조 이름입니다. 별칭을 사용하면 애플리케이션 코드를 수정하지 않고도 컬렉션 간에 동적으로 전환할 수 있는 추상화 계층을 제공합니다. 이는 원활한 데이터 업데이트, A/B 테스트 및 기타 운영 작업을 위해 프로덕션 환경에서 특히 유용합니다.</p>
+<p>이 페이지에서는 컬렉션 별칭을 만들고, 나열하고, 재할당하고, 삭제하는 방법을 보여줍니다.</p>
+<h2 id="Why-Use-an-Alias" class="common-anchor-header">별칭을 사용하는 이유<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,8 +35,20 @@ summary: 'Milvus는 별칭 관리 기능을 제공합니다. 이 페이지에서
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션의 별칭을 만들 수 있습니다. 컬렉션에는 여러 개의 별칭을 가질 수 있지만 컬렉션은 별칭을 공유할 수 없습니다.</p>
-<p>컬렉션에 대한 요청을 받으면 Milvus는 제공된 이름을 기준으로 컬렉션을 찾습니다. 제공된 이름의 컬렉션이 존재하지 않는 경우 Milvus는 제공된 이름을 별칭으로 계속 찾습니다. 컬렉션 별칭을 사용하여 코드를 다양한 시나리오에 맞게 조정할 수 있습니다.</p>
+    </button></h2><p>별칭 사용의 주요 이점은 클라이언트 애플리케이션을 특정 물리적 컬렉션 이름에서 분리할 수 있다는 것입니다.</p>
+<p><code translate="no">prod_data</code> 이라는 컬렉션을 쿼리하는 라이브 애플리케이션이 있다고 가정해 보겠습니다. 기초 데이터를 업데이트해야 할 때 서비스 중단 없이 업데이트를 수행할 수 있습니다. 워크플로는 다음과 같습니다:</p>
+<ol>
+<li><strong>새 컬렉션을 만듭니다</strong>: 예를 들어 <code translate="no">prod_data_v2</code> 과 같은 새 컬렉션을 만듭니다.</li>
+<li><strong>데이터 준비</strong>: <code translate="no">prod_data_v2</code> 에서 새 데이터를 로드하고 색인합니다.</li>
+<li>별칭을<strong>전환합니다</strong>: 새 컬렉션을 서비스할 준비가 되면 이전 컬렉션의 별칭 <code translate="no">prod_data</code> 을 <code translate="no">prod_data_v2</code> 으로 원자적으로 재할당합니다.</li>
+</ol>
+<p>애플리케이션은 계속해서 별칭 <code translate="no">prod_data</code> 으로 요청을 보내므로 다운타임이 전혀 발생하지 않습니다. 이 메커니즘은 원활한 업데이트를 가능하게 하고 벡터 검색 서비스에 대한 청록색 배포와 같은 작업을 간소화합니다.</p>
+<p><strong>별칭의 주요 속성:</strong></p>
+<ul>
+<li>컬렉션에는 여러 개의 별칭을 가질 수 있습니다.</li>
+<li>별칭은 한 번에 하나의 컬렉션만 가리킬 수 있습니다.</li>
+<li>요청을 처리할 때 Milvus는 먼저 제공된 이름의 컬렉션이 존재하는지 확인합니다. 존재하지 않으면 그 이름이 컬렉션의 별칭인지 확인합니다.</li>
+</ul>
 <h2 id="Create-Alias" class="common-anchor-header">별칭 만들기<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

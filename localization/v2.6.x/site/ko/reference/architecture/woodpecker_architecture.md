@@ -90,7 +90,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>딱따구리는 사용자의 특정 요구 사항에 맞는 두 가지 배포 모드를 제공합니다:</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 가볍고 유지보수가 필요 없음</h3><p>MemoryBuffer 모드는 간단하고 가벼운 배포 옵션으로, Woodpecker의 임베디드 클라이언트가 메모리에 들어오는 쓰기를 일시적으로 버퍼링하고 주기적으로 클라우드 객체 스토리지 서비스로 플러시하는 방식입니다. 이 모드에서는 메모리 버퍼가 클라이언트에 직접 내장되어 있어 S3로 플러시하기 전에 효율적으로 일괄 처리할 수 있습니다. 메타데이터는 일관성과 조정을 보장하기 위해 <strong>etcd를</strong> 사용하여 관리됩니다. 이 모드는 성능보다 단순성을 우선시하는 소규모 배포 또는 프로덕션 환경, 특히 쓰기 지연 시간이 중요하지 않은 경우의 배치 작업량이 많은 워크로드에 가장 적합합니다.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - 가볍고 유지보수가 필요 없음</h3><p>MemoryBuffer 모드는 간단하고 가벼운 배포 옵션으로, Woodpecker의 임베디드 클라이언트가 메모리에 들어오는 쓰기를 일시적으로 버퍼링하고 주기적으로 클라우드 객체 스토리지 서비스로 플러시하는 방식입니다. 이 모드에서는 메모리 버퍼가 클라이언트에 직접 내장되어 있어 S3로 플러시하기 전에 효율적으로 일괄 처리할 수 있습니다. 메타데이터는 일관성과 조정을 보장하기 위해 <strong>etcd를</strong> 사용하여 관리됩니다. 이 모드는 성능보다 단순성을 우선시하는 소규모 배포 또는 프로덕션 환경의 배치 작업량이 많은 워크로드에 가장 적합하며, 특히 짧은 쓰기 지연 시간이 중요하지 않은 경우에 적합합니다. 이 모드의 쓰기 지연 시간은 일반적으로 200-500밀리초입니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
@@ -139,7 +139,7 @@ summary: >-
 <li>클라우드 스토리지 모드(S3): S3에 직접 기록할 때 Woodpecker는 750MB/s(S3의 이론적 한계치의 약 68%)에 도달하여 Kafka보다 5.8배, Pulsar보다 7배 더 높았습니다. 지연 시간은 더 높지만(166밀리초), 이 설정은 배치 지향 워크로드에 탁월한 처리량을 제공합니다.</li>
 <li>객체 스토리지 모드(MinIO): MinIO를 사용하더라도 Woodpecker는 MinIO 용량의 약 65%인 71MB/s를 달성했습니다. 이 성능은 Kafka 및 Pulsar와 비슷하지만 리소스 요구 사항이 훨씬 낮습니다.</li>
 </ul>
-<p>우드페커는 특히 질서 유지가 중요한 동시 대용량 쓰기에 최적화되어 있습니다. 그리고 이러한 결과는 개발 초기 단계의 결과일 뿐이며, I/O 병합, 지능형 버퍼링, 프리페칭의 지속적인 최적화를 통해 성능이 이론적 한계에 더욱 근접할 것으로 예상됩니다.</p>
+<p>우드페커는 특히 질서 유지가 중요한 동시 대용량 쓰기에 최적화되어 있습니다. 그리고 이러한 결과는 개발 초기 단계에 불과하며, I/O 병합, 지능형 버퍼링 및 프리페칭의 지속적인 최적화를 통해 성능이 이론적 한계에 더욱 가까워질 것으로 예상됩니다.</p>
 <h2 id="Operational-benefits" class="common-anchor-header">운영상의 이점<button data-href="#Operational-benefits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

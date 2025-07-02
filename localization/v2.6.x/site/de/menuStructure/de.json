@@ -279,21 +279,15 @@
         "children": []
       },
       {
-        "label": "Konsistenzstufe",
-        "id": "tune_consistency.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "In-Memory-Replik",
         "id": "replica.md",
-        "order": 9,
+        "order": 8,
         "children": []
       },
       {
         "label": "Terminologie",
         "id": "glossary.md",
-        "order": 10,
+        "order": 9,
         "children": []
       }
     ]
@@ -352,21 +346,27 @@
             "children": []
           },
           {
+            "label": "Konsistenzebene festlegen",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
             "label": "Partitionen verwalten",
             "id": "manage-partitions.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Aliase verwalten",
             "id": "manage-aliases.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Tropfen-Sammlung",
             "id": "drop-collection.md",
-            "order": 9,
+            "order": 10,
             "children": []
           }
         ]
@@ -1084,6 +1084,26 @@
             ]
           }
         ]
+      },
+      {
+        "label": "Optimierung der Speicherung",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "mmap verwenden",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Clustering Verdichtung",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1374,15 +1394,21 @@
             "children": []
           },
           {
+            "label": "Skala Eigenständig",
+            "id": "scale-standalone.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Skala mit HPA",
             "id": "hpa.md",
-            "order": 1,
+            "order": 2,
             "children": []
           },
           {
             "label": "Skalenabhängigkeiten",
             "id": "scale-dependencies.md",
-            "order": 2,
+            "order": 3,
             "children": []
           }
         ]
@@ -1484,26 +1510,6 @@
             "label": "Verwalten von Ressourcengruppen",
             "id": "resource_group.md",
             "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Optimierung der Speicherung",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "mmap verwenden",
-            "id": "mmap.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Clustering Verdichtung",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -1965,6 +1971,12 @@
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Asynchrone Suche",
+                "id": "langchain_milvus_async.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2266,12 +2278,6 @@
             "label": "Feuerwerk",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
-            "children": []
-          },
-          {
-            "label": "Lepton",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
             "children": []
           },
           {

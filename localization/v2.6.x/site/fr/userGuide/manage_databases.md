@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans Milvus, une base de données sert d'unité logique pour organiser et gérer les données. Pour améliorer la sécurité des données et parvenir à la multi-location, vous pouvez créer plusieurs bases de données afin d'isoler logiquement les données pour différentes applications ou différents locataires. Par exemple, vous créez une base de données pour stocker les données de l'utilisateur A et une autre base de données pour l'utilisateur B.</p>
+    </button></h2><p>Dans Milvus, une base de données sert d'unité logique pour organiser et gérer les données. Pour améliorer la sécurité des données et parvenir à une multi-location, vous pouvez créer plusieurs bases de données afin d'isoler logiquement les données pour différentes applications ou différents locataires. Par exemple, vous créez une base de données pour stocker les données de l'utilisateur A et une autre base de données pour l'utilisateur B.</p>
 <h2 id="Create-database" class="common-anchor-header">Créer une base de données<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -452,3 +452,20 @@ curl --request POST \
     &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">Comment gérer les autorisations pour une base de données ?</h3><p>Milvus utilise le contrôle d'accès basé sur les rôles (RBAC) pour gérer les autorisations. Vous pouvez créer des rôles avec des privilèges spécifiques et les attribuer à des utilisateurs, contrôlant ainsi leur accès à différentes bases de données. Pour plus de détails, voir la <a href="/docs/fr/rbac.md">documentation RBAC</a>.</p>
+<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">Existe-t-il des limitations de quotas pour une base de données ?</h3><p>Oui, Milvus vous permet de définir des limitations de quotas pour une base de données, telles que le nombre maximum de collections. Pour une liste complète des limitations, veuillez vous référer à la <a href="/docs/fr/limitations.md">documentation Limites de Milvus</a>.</p>

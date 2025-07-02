@@ -1,9 +1,10 @@
 ---
 id: build_RAG_with_milvus_and_lepton.md
+beta: NEAR DEPRECATE
 summary: 在本教程中，我們將教您如何使用 Milvus 和 Lepton AI 建立 RAG（Retrieval-Augmented Generation）管道。
-title: 使用 Milvus 和 Lepton AI 建立 RAG
+title: 使用 Milvus 和 Lepton AI 建立 RAGAbout to Deprecate
 ---
-<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">使用 Milvus 和 Lepton AI 建立 RAG<button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-and-Lepton-AI" class="common-anchor-header">使用 Milvus 和 Lepton AI 建立 RAG<span class="beta-tag" style="background-color:#FF7F47;color:white" translate="no">About to Deprecate</span><button data-href="#Build-RAG-with-Milvus-and-Lepton-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,7 +125,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>使用指定的參數建立新的集合。</p>
-<p>如果我們沒有指定任何欄位資訊，Milvus 會自動建立一個預設的<code translate="no">id</code> 欄位做為主索引鍵，以及一個<code translate="no">vector</code> 欄位來儲存向量資料。保留的 JSON 欄位用來儲存非結構描述定義的欄位及其值。</p>
+<p>如果我們沒有指定任何欄位資訊，Milvus 會自動建立一個預設的<code translate="no">id</code> 欄位作為主索引鍵，以及一個<code translate="no">vector</code> 欄位來儲存向量資料。保留的 JSON 欄位用來儲存非結構描述定義的欄位及其值。</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,

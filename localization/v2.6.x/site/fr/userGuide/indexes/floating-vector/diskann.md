@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans les scénarios à grande échelle, où les ensembles de données peuvent comprendre des milliards, voire des trillions de vecteurs, les méthodes d'indexation en mémoire standard (par exemple, <a href="/docs/fr/v2.6.x/hnsw.md">HNSW</a>, <a href="/docs/fr/v2.6.x/ivf-flat.md">IVF_FLAT</a>) ne parviennent souvent pas à suivre le rythme en raison des limites de la mémoire. <strong>DISKANN</strong> propose une approche basée sur le disque qui relève ces défis en maintenant une précision et une vitesse de recherche élevées lorsque la taille de l'ensemble de données dépasse la RAM disponible.</p>
+    </button></h1><p>Dans les scénarios à grande échelle, où les ensembles de données peuvent comprendre des milliards, voire des trillions de vecteurs, les méthodes d'indexation en mémoire standard (par exemple, <a href="/docs/fr/hnsw.md">HNSW</a>, <a href="/docs/fr/ivf-flat.md">IVF_FLAT</a>) ne parviennent souvent pas à suivre le rythme en raison des limites de la mémoire. <strong>DISKANN</strong> propose une approche basée sur le disque qui relève ces défis en maintenant une précision et une vitesse de recherche élevées lorsque la taille de l'ensemble de données dépasse la RAM disponible.</p>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +62,7 @@ summary: >-
 <p>Le paramètre <code translate="no">search_list_size</code> détermine l'ampleur du processus d'affinage du graphe. Une valeur plus élevée de <code translate="no">search_list_size</code> étend la recherche de voisins pendant la construction et peut améliorer la précision finale, mais augmente le temps de construction de l'index.</p></li>
 </ul></li>
 </ol>
-<p>Pour en savoir plus sur le réglage des paramètres, reportez-vous à <a href="/docs/fr/v2.6.x/diskann.md#diskann-params">DISKANN params</a>.</p>
+<p>Pour en savoir plus sur le réglage des paramètres, reportez-vous à <a href="/docs/fr/diskann.md#diskann-params">DISKANN params</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN utilise <strong>PQ</strong> pour compresser les vecteurs à haute dimension en représentations plus petites<strong>(codes PQ</strong>), qui sont stockées en mémoire pour des calculs rapides de distance approximative.</p>
 <p>Le paramètre <code translate="no">pq_code_budget_gb_ratio</code> gère l'empreinte mémoire dédiée au stockage de ces codes PQ. Il représente un rapport entre la taille totale des vecteurs (en gigaoctets) et l'espace alloué au stockage des codes PQ. Vous pouvez calculer le budget réel des codes PQ (en gigaoctets) à l'aide de la formule suivante :</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -70,9 +70,9 @@ summary: >-
 <p>où :</p>
 <ul>
 <li><p><code translate="no">vec_field_size_gb</code> est la taille totale des vecteurs (en gigaoctets).</p></li>
-<li><p><code translate="no">pq_code_budget_gb_ratio</code> est un ratio défini par l'utilisateur, représentant la fraction de la taille totale des données réservée aux codes PQ. Ce paramètre permet de trouver un compromis entre la précision de la recherche et les ressources mémoire. Pour plus d'informations sur le réglage des paramètres, reportez-vous à <a href="/docs/fr/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>.</p></li>
+<li><p><code translate="no">pq_code_budget_gb_ratio</code> est un ratio défini par l'utilisateur, représentant la fraction de la taille totale des données réservée aux codes PQ. Ce paramètre permet de trouver un compromis entre la précision de la recherche et les ressources mémoire. Pour plus d'informations sur le réglage des paramètres, reportez-vous à <a href="/docs/fr/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>.</p></li>
 </ul>
-<p>Pour plus de détails techniques sur la méthode PQ sous-jacente, voir <a href="/docs/fr/v2.6.x/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
+<p>Pour plus de détails techniques sur la méthode PQ sous-jacente, voir <a href="/docs/fr/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
 <h3 id="Search-process" class="common-anchor-header">Processus de recherche</h3><p>Une fois que l'index (le graphe de Vamana sur le disque et les codes PQ en mémoire) est construit, DISKANN effectue les recherches ANN comme suit :</p>
 <p>
   
@@ -86,7 +86,7 @@ summary: >-
 <li><p><code translate="no">beam_width_ratio</code>: Un ration qui contrôle l'étendue de la recherche, déterminant le nombre de voisins candidats sélectionnés en parallèle pour explorer leurs voisins. Une valeur plus élevée de <code translate="no">beam_width_ratio</code> entraîne une exploration plus large, ce qui peut conduire à une plus grande précision, mais aussi à une augmentation des coûts de calcul et des entrées/sorties sur disque. La largeur du faisceau, ou le nombre de nœuds sélectionnés, est déterminée à l'aide de la formule suivante : <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
 <li><p><code translate="no">search_cache_budget_gb_ratio</code>: La proportion de mémoire allouée à la mise en cache des données du disque fréquemment consultées. Cette mise en cache permet de minimiser les entrées/sorties sur disque et d'accélérer les recherches répétées, car les données sont déjà en mémoire.</p></li>
 </ul>
-<p>Pour en savoir plus sur le réglage des paramètres, reportez-vous à <a href="/docs/fr/v2.6.x/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>.</p></li>
+<p>Pour en savoir plus sur le réglage des paramètres, reportez-vous à <a href="/docs/fr/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>.</p></li>
 <li><p><strong>Exploration itérative :</strong> La recherche affine de manière itérative l'ensemble des candidats, en effectuant à plusieurs reprises des évaluations approximatives (à l'aide de PQ) suivies de vérifications précises (à l'aide des vecteurs originaux du disque) jusqu'à ce qu'un nombre suffisant de voisins soit trouvé.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Activer DISKANN dans Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
@@ -189,7 +189,7 @@ index_params.add_index(
     } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois les paramètres de l'index configurés, vous pouvez créer l'index en utilisant directement la méthode <code translate="no">create_index()</code> ou en transmettant les paramètres de l'index dans la méthode <code translate="no">create_collection</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.6.x/create-collection.md">Créer une collection</a>.</p>
+<p>Une fois les paramètres de l'index configurés, vous pouvez créer l'index en utilisant directement la méthode <code translate="no">create_index()</code> ou en transmettant les paramètres de l'index dans la méthode <code translate="no">create_collection</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/create-collection.md">Créer une collection</a>.</p>
 <h4 id="Search" class="common-anchor-header">Recherche</h4><p>Une fois l'index construit et les entités insérées, vous pouvez effectuer des recherches de similarité sur l'index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
@@ -242,11 +242,10 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Détermine le nombre de voisins candidats pris en compte pour chaque point de données lors de la construction du graphique.</p></td>
-     <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, <em>int_max</em>]</p>
+     <td><p>Lors de la construction de l'index, ce paramètre définit la taille du groupe de candidats utilisé lors de la recherche des voisins les plus proches pour chaque nœud. Pour chaque nœud ajouté au graphe, l'algorithme conserve une liste des <code translate="no">search_list_size</code> meilleurs candidats trouvés jusqu'à présent. La recherche de voisins s'arrête lorsque cette liste ne peut plus être améliorée. À partir de cette liste finale de candidats, les meilleurs <code translate="no">max_degree</code> nœuds sont sélectionnés pour former les arêtes finales.</p></td>
+     <td><p><strong>Type</strong>: Integer (nombre entier) <strong>Plage</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">100</code></p></td>
-     <td><p>Des valeurs plus élevées conduisent à des graphes plus complets, améliorant potentiellement la qualité de la recherche mais augmentant également le temps de construction. 
- Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [K, 10K].</p></td>
+     <td><p>Une valeur plus élevée de <code translate="no">search_list_size</code> augmente la probabilité de trouver les vrais voisins les plus proches pour chaque nœud, ce qui peut conduire à un graphe de meilleure qualité et à de meilleures performances de recherche (rappel). Cependant, cela se fait au prix d'un temps de construction de l'index beaucoup plus long. Il doit toujours être fixé à une valeur supérieure ou égale à <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -262,7 +261,7 @@ res = MilvusClient.search(
      <td><p>Contrôle la taille des codes PQ (représentations compressées des points de données) par rapport à la taille des données non compressées.</p></td>
      <td><p><strong>Type</strong>: Flottant <strong>Plage</strong>: (0,0, 0,25)</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>Un ratio plus élevé permet d'obtenir des résultats de recherche plus précis en allouant une plus grande proportion de la mémoire aux codes PQ, ce qui permet de stocker plus d'informations sur les vecteurs originaux. Un ratio plus faible réduit l'utilisation de la mémoire, mais sacrifie potentiellement la précision, car les codes PQ plus petits conservent moins d'informations. Cette approche convient aux scénarios dans lesquels les contraintes de mémoire sont importantes, et permet éventuellement d'indexer des ensembles de données plus importants.</p>
+     <td><p>Un ratio plus élevé permet d'obtenir des résultats de recherche plus précis en allouant une plus grande proportion de la mémoire aux codes PQ, ce qui permet de stocker davantage d'informations sur les vecteurs d'origine. Un ratio plus faible réduit l'utilisation de la mémoire, mais sacrifie potentiellement la précision, car les codes PQ plus petits conservent moins d'informations. Cette approche convient aux scénarios dans lesquels les contraintes de mémoire sont importantes, et permet éventuellement d'indexer des ensembles de données plus importants.</p>
 <p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : (0.0625, 0.25)</p></td>
    </tr>
 </table>
@@ -282,5 +281,13 @@ res = MilvusClient.search(
      <td><p><strong>Type</strong>: Flottant <strong>Plage</strong>: [1, max(128 / nombre de CPU, 16)]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">4.0</code></p></td>
      <td><p>Des valeurs plus élevées augmentent le parallélisme, ce qui peut accélérer la recherche sur les systèmes dotés de CPU et de SSD puissants. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [1.0, 4.0].</p></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td><p><code translate="no">search_list_size</code></p></td>
+     <td><p>Au cours d'une opération de recherche, ce paramètre détermine la taille du groupe de candidats que l'algorithme maintient lorsqu'il parcourt le graphe. Une valeur plus élevée augmente les chances de trouver les vrais voisins les plus proches (rappel plus élevé), mais augmente également la latence de la recherche.</p></td>
+     <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, <em>int_max</em>]</p>
+<p><strong>Valeur par défaut</strong>: <code translate="no">100</code></p></td>
+     <td><p>Pour un bon équilibre entre performance et précision, il est recommandé de fixer cette valeur à un niveau égal ou légèrement supérieur au nombre de résultats que vous souhaitez récupérer (top_k).</p></td>
    </tr>
 </table>

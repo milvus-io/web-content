@@ -83,7 +83,6 @@ summary: Conheça os limites da utilização do Milvus.
 </thead>
 <tbody>
 <tr><td>Coleção</td><td>65,536</td></tr>
-<tr><td>Ligação / proxy</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Número de recursos numa coleção<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
@@ -103,7 +102,7 @@ summary: Conheça os limites da utilização do Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Recursos</th><th>Limite</th></tr>
+<tr><th>Recurso</th><th>Limite</th></tr>
 </thead>
 <tbody>
 <tr><td>Partição</td><td>1,024</td></tr>

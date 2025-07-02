@@ -83,7 +83,6 @@ summary: Milvus 사용 중 제한 사항에 대해 알아보세요.
 </thead>
 <tbody>
 <tr><td>컬렉션</td><td>65,536</td></tr>
-<tr><td>연결/프록시</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">컬렉션의 리소스 수<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">

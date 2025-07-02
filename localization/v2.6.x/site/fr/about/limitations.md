@@ -83,7 +83,6 @@ summary: Apprenez à connaître les limites de l'utilisation de Milvus.
 </thead>
 <tbody>
 <tr><td>Collection</td><td>65,536</td></tr>
-<tr><td>Connexion / proxy</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Nombre de ressources dans une collection<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">

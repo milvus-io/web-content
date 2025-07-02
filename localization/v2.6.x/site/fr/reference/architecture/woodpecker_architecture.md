@@ -92,7 +92,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpecker propose deux modes de déploiement pour répondre à vos besoins spécifiques :</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Léger et sans maintenance</h3><p>Le mode MemoryBuffer offre une option de déploiement simple et légère dans laquelle le client intégré de Woodpecker met temporairement en mémoire tampon les écritures entrantes et les évacue périodiquement vers un service de stockage d'objets dans le nuage. Dans ce mode, la mémoire tampon est intégrée directement dans le client, ce qui permet une mise en lot efficace avant le transfert vers S3. Les métadonnées sont gérées à l'aide d'<strong>etcd</strong> pour assurer la cohérence et la coordination. Ce mode convient mieux aux charges de travail lourdes en lots dans les déploiements à petite échelle ou les environnements de production qui privilégient la simplicité aux performances, en particulier lorsqu'une faible latence d'écriture n'est pas essentielle.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer - Léger et sans maintenance</h3><p>Le mode MemoryBuffer offre une option de déploiement simple et légère dans laquelle le client intégré de Woodpecker met temporairement en mémoire tampon les écritures entrantes et les évacue périodiquement vers un service de stockage d'objets dans le nuage. Dans ce mode, la mémoire tampon est intégrée directement dans le client, ce qui permet une mise en lot efficace avant le transfert vers S3. Les métadonnées sont gérées à l'aide d'<strong>etcd</strong> pour assurer la cohérence et la coordination. Ce mode convient mieux aux charges de travail lourdes en lots dans les déploiements à petite échelle ou les environnements de production qui privilégient la simplicité aux performances, en particulier lorsqu'une faible latence d'écriture n'est pas essentielle. La latence d'écriture dans ce mode est généralement comprise entre 200 et 500 ms.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
@@ -135,7 +135,7 @@ summary: >-
 <li>Système de fichiers local : 600-750 Mo/s</li>
 <li>Amazon S3 (instance EC2 unique) : jusqu'à 1,1 Go/s</li>
 </ul>
-<p>Fait remarquable, Woodpecker a constamment atteint 60 à 80 % du débit maximal possible pour chaque backend, ce qui représente un niveau d'efficacité exceptionnel pour un middleware.</p>
+<p>Fait remarquable, Woodpecker a constamment atteint 60 à 80 % du débit maximal possible pour chaque backend, ce qui représente un niveau d'efficacité exceptionnel pour un intergiciel.</p>
 <h3 id="Key-performance-insights" class="common-anchor-header">Principales informations sur les performances</h3><ul>
 <li>Mode système de fichiers local : Woodpecker a atteint 450 Mo/s, soit 3,5 fois plus vite que Kafka et 4,2 fois plus vite que Pulsar, avec une latence ultra-faible de seulement 1,8 ms, ce qui en fait l'outil idéal pour les déploiements haute performance à un seul nœud.</li>
 <li>Mode de stockage dans le nuage (S3) : En écrivant directement sur S3, Woodpecker a atteint 750 Mo/s (environ 68 % de la limite théorique de S3), soit 5,8 fois plus que Kafka et 7 fois plus que Pulsar. Bien que la latence soit plus élevée (166 ms), cette configuration offre un débit exceptionnel pour les charges de travail par lots.</li>

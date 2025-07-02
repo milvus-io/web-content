@@ -41,7 +41,7 @@ summary: >-
 <p>Pode determinar todos os aspectos de uma coleção, incluindo o esquema, os parâmetros de índice, o tipo de métrica e se deve ser carregada aquando da criação, para garantir que a coleção satisfaz totalmente os seus requisitos.</p>
 <p>Para criar uma coleção, é necessário</p>
 <ul>
-<li><p><a href="/docs/pt/create-collection.md#Create-Schema">Criar um esquema</a></p></li>
+<li><p><a href="/docs/pt/create-collection.md#Create-Schema">Criar o esquema</a></p></li>
 <li><p><a href="/docs/pt/create-collection.md#Optional-Set-Index-Parameters">Definir parâmetros de índice</a> (opcional)</p></li>
 <li><p><a href="/docs/pt/create-collection.md#Create-a-Collection">Criar coleção</a></p></li>
 </ul>
@@ -223,10 +223,10 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A criação de um índice em um campo específico acelera a pesquisa em relação a esse campo. Um índice regista a ordem das entidades dentro de uma coleção. Como mostrado nos seguintes trechos de código, você pode usar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar maneiras apropriadas para Milvus indexar um campo e medir semelhanças entre embeddings vetoriais.</p>
+    </button></h2><p>Criar um índice em um campo específico acelera a pesquisa em relação a esse campo. Um índice regista a ordem das entidades dentro de uma coleção. Como mostrado nos seguintes trechos de código, você pode usar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar maneiras apropriadas para Milvus indexar um campo e medir semelhanças entre embeddings vetoriais.</p>
 <p>No Milvus, pode utilizar <code translate="no">AUTOINDEX</code> como o tipo de índice para todos os campos vectoriais e um de <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> como o tipo de métrica com base nas suas necessidades.</p>
-<p>Como demonstrado no excerto de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
-<p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Indexar campos vetoriais</a> e Indexar <a href="/docs/pt/index-scalar-fields.md">campos escalares</a>.</p>
+<p>Como demonstrado no fragmento de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
+<p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Indexar campos vetoriais</a> e <a href="/docs/pt/index-scalar-fields.md">Indexar campos escalares</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -407,7 +407,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Também é possível criar uma coleção sem quaisquer parâmetros de indexação e adicioná-los posteriormente. Neste caso, o Milvus não carrega a coleção aquando da sua criação. .</p>
-<p>O trecho de código a seguir demonstra como criar uma coleção sem um índice, e o status de carregamento da coleção permanece descarregado após a criação.</p>
+<p>O seguinte trecho de código demonstra como criar uma coleção sem um índice, e o status de carregamento da coleção permanece descarregado após a criação.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -520,9 +520,13 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Você pode definir propriedades para a coleção a ser criada para que ela se encaixe no seu serviço. As propriedades aplicáveis são as seguintes.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Definir número de fragmentos</h3><p>Os fragmentos são fatias horizontais de uma coleção. Cada fragmento corresponde a um canal de entrada de dados. Por predefinição, cada coleção tem um fragmento. Pode definir o número apropriado de fragmentos ao criar uma coleção com base na taxa de transferência esperada e no volume de dados a inserir na coleção.</p>
-<p>Em casos comuns, considere aumentar o número de fragmentos em um sempre que a taxa de transferência esperada aumentar em 500 MB/s ou o volume de dados a serem inseridos aumentar em 100 GB. Esta sugestão baseia-se na nossa própria experiência e pode não se adequar completamente aos seus cenários de aplicação. Pode ajustar este número de acordo com as suas próprias necessidades ou utilizar apenas o valor predefinido.</p>
-<p>O seguinte trecho de código demonstra como definir o número do fragmento ao criar uma coleção.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Definir número de fragmentos</h3><p>Os fragmentos são fatias horizontais de uma coleção, e cada fragmento corresponde a um canal de entrada de dados. Por predefinição, cada coleção tem um fragmento. Pode especificar o número de fragmentos ao criar uma coleção para melhor se adequar ao seu volume de dados e carga de trabalho.</p>
+<p>Como orientação geral, considere o seguinte ao definir o número de fragmentos:</p>
+<ul>
+<li><strong>Tamanho dos dados:</strong> Uma prática comum é ter um fragmento para cada 200 milhões de entidades. Também é possível estimar com base no tamanho total dos dados, por exemplo, adicionando um shard para cada 100 GB de dados que você planeja inserir.</li>
+<li><strong>Utilização do nó de fluxo:</strong> Se a instância do Milvus tiver vários nós de fluxo, recomenda-se o uso de vários fragmentos. Isso garante que a carga de trabalho de inserção de dados seja distribuída entre todos os nós de fluxo disponíveis, evitando que alguns fiquem ociosos enquanto outros estão sobrecarregados.</li>
+</ul>
+<p>O trecho de código a seguir demonstra como definir o número do fragmento ao criar uma coleção.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
@@ -570,7 +574,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Habilitar mmap</h3><p>O Milvus ativa o mmap em todas as colecções por defeito, permitindo ao Milvus mapear os dados brutos dos campos para a memória em vez de os carregar completamente. Isto reduz o consumo de memória e aumenta a capacidade da coleção. Para obter detalhes sobre o mmap, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Habilitar mmap</h3><p>Milvus habilita o mmap em todas as coleções por padrão, permitindo que o Milvus mapeie dados de campo brutos na memória em vez de carregá-los completamente. Isto reduz o consumo de memória e aumenta a capacidade da coleção. Para obter detalhes sobre o mmap, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">texto simples</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>
@@ -623,7 +627,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">Definir TTL da coleção</h3><p>Se os dados de uma coleção precisarem ser descartados por um período específico, considere definir seu tempo de vida (TTL) em segundos. Uma vez que o TTL se esgota, Milvus exclui as entidades da coleção. A eliminação é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes de a eliminação estar concluída.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">Definir TTL da coleção</h3><p>Se os dados de uma coleção precisarem ser descartados por um período específico, considere definir seu Time-To-Live (TTL) em segundos. Uma vez que o TTL se esgota, Milvus exclui as entidades da coleção. A eliminação é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes de a eliminação estar concluída.</p>
 <p>O seguinte trecho de código define o TTL para um dia (86400 segundos). Aconselha-se a definir o TTL para um par de dias, no mínimo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

@@ -4,8 +4,8 @@ title: Livello di coerenza
 summary: >-
   Come database vettoriale distribuito, Milvus offre diversi livelli di coerenza
   per garantire che ogni nodo o replica possa accedere agli stessi dati durante
-  le operazioni di lettura e scrittura. Attualmente, i livelli di consistenza
-  supportati sono Strong, Bounded, Eventually e Session, mentre Bounded è il
+  le operazioni di lettura e scrittura. Attualmente i livelli di consistenza
+  supportati sono Strong, Bounded, Eventually e Session, con Bounded come
   livello di consistenza predefinito.
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">Livello di coerenza<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i <strong>DataNode</strong> sono responsabili della persistenza dei dati e li memorizzano in uno storage distribuito di oggetti, come MinIO/S3. I <strong>QueryNode</strong> gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di <strong>dati batch</strong> e di <strong>dati in streaming</strong>. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
-<p>Milvus Commercial Edition è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i DataNodes sono responsabili della persistenza dei dati e li memorizzano in uno storage a oggetti distribuito, come MinIO/S3. I QueryNode gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di dati batch e di dati in streaming. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
+<p>Milvus Commercial Edition è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i DataNode sono responsabili della persistenza dei dati e li memorizzano in uno storage a oggetti distribuito, come MinIO/S3. I QueryNode gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di dati batch e di dati in streaming. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -62,7 +62,7 @@ summary: >-
 <li><p><strong>Forte</strong></p>
 <p>L'ultimo timestamp viene utilizzato come GuaranteeTs e i QueryNodes devono attendere che il ServiceTime soddisfi il GuaranteeTs prima di eseguire le richieste di ricerca.</p></li>
 <li><p><strong>Eventuale</strong></p>
-<p>Il GuaranteeTs è impostato su un valore estremamente basso, ad esempio 1, per evitare i controlli di coerenza, in modo che i QueryNode possano eseguire immediatamente le richieste di ricerca su tutti i dati del batch.</p></li>
+<p>Il GuaranteeTs è impostato su un valore estremamente basso, ad esempio 1, per evitare i controlli di consistenza, in modo che i QueryNode possano eseguire immediatamente le richieste di ricerca su tutti i dati del batch.</p></li>
 <li><p><strong>Stallo limitato</strong></p>
 <p>GuranteeTs è impostato su un punto precedente all'ultimo timestamp per far sì che i QueryNodes eseguano ricerche con una certa tolleranza di perdita di dati.</p></li>
 <li><p><strong>Sessione</strong></p>
@@ -153,7 +153,7 @@ curl --request POST \
 <p>I valori possibili per il parametro <code translate="no">consistency_level</code> sono <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> e <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Impostare il livello di consistenza nella ricerca</h3><p>È sempre possibile modificare il livello di coerenza per una ricerca specifica. L'esempio di codice seguente riporta il livello di consistenza a <strong>Bounded</strong>. La modifica si applica solo alla richiesta di ricerca corrente.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">plaintext</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -172,15 +172,15 @@ curl --request POST \
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    &quot;my_collection&quot;, // collectionName
-    3,               // limit
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
 ).WithConsistencyLevel(entity.ClBounded).
-    WithANNSField(&quot;vector&quot;))
-if err != nil {
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -199,7 +199,7 @@ if err != nil {
 <p>Questo parametro è disponibile anche nelle ricerche ibride e nell'iteratore di ricerca. I valori possibili per il parametro <code translate="no">consistency_level</code> sono <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> e <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Impostare il livello di consistenza nella query</h3><p>È sempre possibile modificare il livello di coerenza per una ricerca specifica. Il seguente esempio di codice imposta il livello di coerenza su <strong>Eventualmente</strong>. L'impostazione si applica solo alla richiesta di ricerca corrente.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">plaintext</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -218,14 +218,25 @@ if err != nil {
         
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(&quot;my_collection&quot;).
-    WithFilter(&quot;color like \&quot;red%\&quot;&quot;).
-    WithOutputFields(&quot;vector&quot;, &quot;color&quot;).
-    WithLimit(3).
+<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>).
+    WithLimit(<span class="hljs-number">3</span>).
     WithConsistencyLevel(entity.ClEventually))
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;,
+    &quot;limit&quot;: 3
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Questo parametro è disponibile anche nell'iteratore della query. I valori possibili per il parametro <code translate="no">consistency_level</code> sono <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> e <code translate="no">Session</code>.</p>

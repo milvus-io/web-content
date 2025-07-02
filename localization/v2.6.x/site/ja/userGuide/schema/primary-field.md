@@ -38,6 +38,12 @@ summary: >-
     </button></h2><p>コレクションでは、各エンティティの主キーはグローバルに一意でなければなりません。プライマリフィールドを追加する場合、データ型を明示的に<strong>VARCHAR</strong>または<strong>INT64</strong> に設定する必要があります。データ型を<strong>INT64</strong>に設定すると、主キーは<code translate="no">12345</code> のような整数になります。データ型を<strong>VARCHAR</strong>に設定すると、主キーは<code translate="no">my_entity_1234</code> のような文字列になります。</p>
 <p>また、<strong>AutoIDを</strong>有効にすると、Milvusが自動的に主キーを割り当てるようになります。コレクションで<strong>AutoIDを</strong>有効にしたら、エンティティの挿入時に主キーを含めないでください。</p>
 <p>コレクション内の主フィールドにはデフォルト値がなく、NULLにすることはできません。</p>
+<div class="alert note">
+<ul>
+<li>コレクションに既に存在する主キーを持つ標準の<code translate="no">insert</code> 操作は、古いエントリを上書きしません。代わりに、同じ主キーを持つ新しい別のエンティティが作成されます。これは、予期しない検索結果やデータの冗長性につながる可能性があります。</li>
+<li>既存のデータを更新する場合、または挿入するデータが既に存在する可能性がある場合は、upsert操作を使用することを強くお勧めします。upsert操作は、主キーが存在する場合はインテリジェントにエンティティを更新し、存在しない場合は新しいキーを挿入します。詳細は、<a href="/docs/ja/upsert-entities.md">upsert Entities</a> を参照してください。</li>
+</ul>
+</div>
 <h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Int64 主キーの使用<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +59,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Int64型の主キーを使用するには、<code translate="no">datatype</code> を<code translate="no">DataType.INT64</code> に設定し、<code translate="no">is_primary</code> を<code translate="no">true</code> に設定する必要があります。Milvusに受信エンティティの主キーを割り当てる必要がある場合は、<code translate="no">auto_id</code> を<code translate="no">true</code> にも設定してください。</p>
+    </button></h2><p>Int64型の主キーを使用するには、<code translate="no">datatype</code> を<code translate="no">DataType.INT64</code> に設定し、<code translate="no">is_primary</code> を<code translate="no">true</code> に設定する必要があります。Milvusに入力エンティティの主キーを割り当てる必要がある場合は、<code translate="no">auto_id</code> を<code translate="no">true</code> にも設定してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -130,7 +136,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VarChar主キーを使用するには、<code translate="no">data_type</code> パラメータの値を<code translate="no">DataType.VARCHAR</code> に変更するだけでなく、<code translate="no">max_length</code> パラメータをフィールドに設定する必要があります。</p>
+    </button></h2><p>VarChar プライマリキーを使用するには、<code translate="no">data_type</code> パラメータの値を<code translate="no">DataType.VARCHAR</code> に変更することに加えて、フィールドに<code translate="no">max_length</code> パラメータを設定する必要があります。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
