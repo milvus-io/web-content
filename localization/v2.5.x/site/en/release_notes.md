@@ -19,6 +19,72 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2514" class="common-anchor-header">v2.5.14<button data-href="#v2514" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: July 2, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.14</td><td>2.5.11</td><td>2.5.11</td><td>2.5.10</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce Milvus 2.5.14! This release delivers a range of performance and stability enhancements, including a separate chunk cache pool, auto-indexing for JSON fields, and local caching for BM25 segment statistics. This version also resolves several critical bugs, such as a thread explosion in the file watcher and potential panics in QueryCoord, to ensure a more robust and reliable system. We encourage you to upgrade to 2.5.14 to benefit from these latest updates!</p>
+<h3 id="Dependency-upgrade" class="common-anchor-header">Dependency upgrade</h3><ul>
+<li>Upgraded Minio to RELEASE.2024-05-28T17-19-04Z to fix a few CVEs (<a href="https://github.com/milvus-io/milvus/pull/43063">#43063</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Added a separate chunk cache pool (<a href="https://github.com/milvus-io/milvus/pull/42901">#42901</a>).</li>
+<li>Added support for <code translate="no">AUTOINDEX</code> on JSON fields (<a href="https://github.com/milvus-io/milvus/pull/42161">#42161</a>).</li>
+<li>Used English name as language identifiers for all language types (<a href="https://github.com/milvus-io/milvus/pull/42601">#42601</a>).</li>
+<li>Enabled running an analyzer by a collection field (<a href="https://github.com/milvus-io/milvus/pull/42812">#42812</a>).</li>
+<li>Updated the Knowhere version (<a href="https://github.com/milvus-io/milvus/pull/42939">#42939</a>).</li>
+<li>Added a size interface to the file reader to eliminate <code translate="no">statobject</code> calls during reads (<a href="https://github.com/milvus-io/milvus/pull/42911">#42911</a>).</li>
+<li>Introduced a local cache for BM25 segment statistics (<a href="https://github.com/milvus-io/milvus/pull/42924">#42924</a>, <a href="https://github.com/milvus-io/milvus/pull/42646">#42646</a>).</li>
+<li>Filled in <code translate="no">dbname</code> for <code translate="no">operateprivilegev2request</code> in the interceptor (<a href="https://github.com/milvus-io/milvus/pull/42904">#42904</a>).</li>
+<li>Avoided modifying field metadata when renaming a collection or database (<a href="https://github.com/milvus-io/milvus/pull/42876">#42876</a>).</li>
+<li>Made the Web UI toggleable via configuration (<a href="https://github.com/milvus-io/milvus/pull/42815">#42815</a>).</li>
+<li>Avoided using the thread pool when a column is ready in the chunk cache (<a href="https://github.com/milvus-io/milvus/pull/42804">#42804</a>).</li>
+<li>Enabled the Tantivy collector to set bitset directly (<a href="https://github.com/milvus-io/milvus/pull/39748">#39748</a>, <a href="https://github.com/milvus-io/milvus/pull/42881">#42881</a>).</li>
+<li>Replaced pointer-based map keys with IDs in the garbage collector (<a href="https://github.com/milvus-io/milvus/pull/42654">#42654</a>).</li>
+<li>Optimized memory usage during garbage collection (<a href="https://github.com/milvus-io/milvus/pull/42631">#42631</a>).</li>
+<li>Added support for printing NQ and parameters for search and query logs (<a href="https://github.com/milvus-io/milvus/pull/42545">#42545</a>).</li>
+<li>Handled nullable and default values correctly during bulk insert (<a href="https://github.com/milvus-io/milvus/pull/42072">#42072</a>).</li>
+<li>Set thread names for the Segcore thread pool (<a href="https://github.com/milvus-io/milvus/pull/42596">#42596</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Pre-allocated sufficient IDs during data import to avoid failures (<a href="https://github.com/milvus-io/milvus/pull/42935">#42935</a>).</li>
+<li>Updated Tantivy to fix a thread explosion in the file watcher (<a href="https://github.com/milvus-io/milvus/pull/42828">#42828</a>, <a href="https://github.com/milvus-io/milvus/pull/42713">#42713</a>).</li>
+<li>Fixed an issue where filtered data became invisible under TTL (<a href="https://github.com/milvus-io/milvus/pull/42944">#42944</a>).</li>
+<li>Removed cached null expression results to prevent incorrect filtering (<a href="https://github.com/milvus-io/milvus/pull/42783">#42783</a>).</li>
+<li>Rejected division or modulo by zero in binary arithmetic expressions (<a href="https://github.com/milvus-io/milvus/pull/42887">#42887</a>).</li>
+<li>Ensured the flow graph frees function resources after all nodes are closed (<a href="https://github.com/milvus-io/milvus/pull/42775">#42775</a>).</li>
+<li>Fixed an issue where DataCoord could get stuck during an upgrade from v2.5 to v2.6 (<a href="https://github.com/milvus-io/milvus/pull/42669">#42669</a>).</li>
+<li>Added a pre-check to prevent unsupported data type casting (<a href="https://github.com/milvus-io/milvus/pull/42678">#42678</a>).</li>
+<li>Added concurrency and close protection for the BM25 function (<a href="https://github.com/milvus-io/milvus/pull/42599">#42599</a>).</li>
+<li>Filtered out streaming query nodes from the resource group during upgrades (<a href="https://github.com/milvus-io/milvus/pull/42594">#42594</a>).</li>
+<li>Fixed an issue with <code translate="no">is_not_in</code> expressions for the Trie index (<a href="https://github.com/milvus-io/milvus/pull/42886">#42886</a>).</li>
+<li>Fixed an issue preventing Rocksmq from stopping gracefully (<a href="https://github.com/milvus-io/milvus/pull/42843">#42843</a>).</li>
+<li>Corrected pruning optimization for <code translate="no">OR</code> logical expressions to only prune if child nodes are prunable (<a href="https://github.com/milvus-io/milvus/pull/42915">#42915</a>).</li>
+<li>Fixed a QueryCoord panic caused by the controller not waiting for the checker to finish (<a href="https://github.com/milvus-io/milvus/pull/42726">#42726</a>).</li>
+<li>Fixed an issue where small segments missed primary key sorting tasks due to being incorrectly marked as indexed (<a href="https://github.com/milvus-io/milvus/pull/42615">#42615</a>).</li>
+<li>Reduced total DataNode task concurrency in Standalone mode to prevent OOM errors (<a href="https://github.com/milvus-io/milvus/pull/42809">#42809</a>).</li>
+<li>Provided explicit errors for arithmetic operations on unsupported types (<a href="https://github.com/milvus-io/milvus/pull/42890">#42890</a>).</li>
+</ul>
 <h2 id="v2513" class="common-anchor-header">v2.5.13<button data-href="#v2513" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
