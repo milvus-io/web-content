@@ -1,5 +1,6 @@
 ---
 id: build_RAG_with_milvus_and_lepton.md
+beta: NEAR DEPRECATE
 summary: In this tutorial, we will show you how to build a RAG (Retrieval-Augmented Generation) pipeline with Milvus and Lepton AI.
 title: Build RAG with Milvus and Lepton AI
 ---

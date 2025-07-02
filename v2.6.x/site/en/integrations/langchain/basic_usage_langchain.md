@@ -202,6 +202,7 @@ results = vector_store.similarity_search(
     "LangChain provides abstractions to make working with LLMs easy",
     k=2,
     expr='source == "tweet"',
+    # param=...  # Search params for the index type
 )
 for res in results:
     print(f"* {res.page_content} [{res.metadata}]")
@@ -269,7 +270,7 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={"uri": URI},
-    drop_old=False,
+    # drop_old=True,
     partition_key_field="namespace",  # Use the "namespace" field as the partition key
 )
 ```
@@ -318,3 +319,4 @@ vectorstore.as_retriever(search_kwargs={"expr": 'namespace == "harrison"'}).invo
 ## API reference
 
 For detailed documentation of all __ModuleName__VectorStore features and configurations head to the API reference: https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html
+
