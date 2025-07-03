@@ -48,7 +48,8 @@ Milvus provides two types of analyzers to meet different text processing needs:
 
 <div class="alert note">
 
-If you omit analyzer configurations during collection creation, Milvus uses the `standard` analyzer for all text processing by default. For details, refer to [Standard](standard-analyzer.md).
+- If you omit analyzer configurations during collection creation, Milvus uses the `standard` analyzer for all text processing by default. For details, refer to [Standard Analyzer](standard-analyzer.md). 
+- For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the `standard` analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Japanese, or Korean. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md) or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
 
 </div>
 
