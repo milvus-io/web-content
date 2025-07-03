@@ -14,7 +14,7 @@ Release date: July 2, 2025
 
 | Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
 |----------------|--------------------|---------------------|------------------|
-| 2.5.14          | 2.5.11            | 2.5.11              | 2.5.10           |
+| 2.5.14          | 2.5.12            | 2.5.11              | 2.5.10           |
 
 We're excited to announce Milvus 2.5.14! This release delivers a range of performance and stability enhancements, including a separate chunk cache pool, auto-indexing for JSON fields, and local caching for BM25 segment statistics. This version also resolves several critical bugs, such as a thread explosion in the file watcher and potential panics in QueryCoord, to ensure a more robust and reliable system. We encourage you to upgrade to 2.5.14 to benefit from these latest updates!
 
