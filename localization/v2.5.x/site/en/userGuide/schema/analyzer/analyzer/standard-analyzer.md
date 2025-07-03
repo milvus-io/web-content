@@ -22,6 +22,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>The <code translate="no">standard</code> analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It uses grammar-based tokenization, making it effective for most languages.</p>
+<div class="alert note">
+<p>The <code translate="no">standard</code> analyzer is suitable for languages that rely on separators (such as spaces, punctuation) for word boundaries. However, languages like Chinese, Japanese, and Korean require dictionary-based tokenizations. In such cases, using a language-specific analyzer like <a href="/docs/v2.5.x/chinese-analyzer.md"><code translate="no">chinese</code></a> or custom analyzers with specialized tokenizers (such as <a href="/docs/v2.5.x/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/v2.5.x/icu-tokenizer.md"><code translate="no">icu</code></a>) and filters is highly recommended to ensure accurate tokenization and better search results.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">Definition<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
