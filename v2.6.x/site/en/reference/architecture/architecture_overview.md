@@ -46,11 +46,11 @@ The arms and legs. Worker nodes are dumb executors that follow instructions from
 
 ### Streaming node
 
-Streaming node serves as the shard-level "mini-brain", providing shard-level consistency guarantees and fault recovery based on underlying WAL Storage. Meanwhile, Streaming Node is also responsible for growing data querying and generating query plans. Additionally, it also handles the conversion of growing data into sealed(historical) data.
+Streaming Node serves as the shard-level "mini-brain", providing shard-level consistency guarantees and fault recovery based on underlying WAL Storage. Meanwhile, Streaming Node is also responsible for growing data querying and generating query plans. Additionally, it also handles the conversion of growing data into sealed (historical) data.
 
 ### Query node
 
-Query node loads the historical data from object storage, and provides the Historical data querying.
+Query node loads the historical data from object storage, and provides the historical data querying.
 
 ### Data node
 

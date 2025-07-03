@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Random Sampling",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
