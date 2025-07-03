@@ -83,7 +83,10 @@ summary: >-
 <li><p><strong>Custom analyzer</strong>: For more advanced requirements, custom analyzers allow you to define your own configuration by specifying both the tokenizer and zero or more filters. This level of customization is especially useful for specialized use cases where precise control over text processing is needed.</p></li>
 </ul>
 <div class="alert note">
-<p>If you omit analyzer configurations during collection creation, Milvus uses the <code translate="no">standard</code> analyzer for all text processing by default. For details, refer to <a href="/docs/standard-analyzer.md">Standard</a>.</p>
+<ul>
+<li>If you omit analyzer configurations during collection creation, Milvus uses the <code translate="no">standard</code> analyzer for all text processing by default. For details, refer to <a href="/docs/standard-analyzer.md">Standard Analyzer</a>.</li>
+<li>For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the <code translate="no">standard</code> analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Japanese, or Korean. In such cases, using a language-specific analyzer like <a href="/docs/chinese-analyzer.md"><code translate="no">chinese</code></a> or custom analyzers with specialized tokenizers (such as <a href="/docs/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/icu-tokenizer.md"><code translate="no">icu</code></a>) and filters is highly recommended to ensure accurate tokenization and better search results.</li>
+</ul>
 </div>
 <h3 id="Built-in-analyzer" class="common-anchor-header">Built-in analyzer</h3><p>Built-in analyzers in Milvus are pre-configured with specific tokenizers and filters, allowing you to use them immediately without needing to define these components yourself. Each built-in analyzer serves as a template that includes a preset tokenizer and filters, with optional parameters for customization.</p>
 <p>For example, to use the <code translate="no">standard</code> built-in analyzer, simply specify its name <code translate="no">standard</code> as the <code translate="no">type</code> and optionally include extra configurations specific to this analyzer type, such as <code translate="no">stop_words</code>:</p>
