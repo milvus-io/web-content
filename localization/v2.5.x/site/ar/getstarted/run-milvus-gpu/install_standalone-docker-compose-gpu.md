@@ -59,8 +59,8 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
         ></path>
       </svg>
     </button></h2><p>لتثبيت Milvus مع دعم GPU باستخدام Docker Compose، اتبع الخطوات التالية.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. تنزيل ملف YAML وتكوينه</h3><p>تنزيل <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> واحفظه بصيغة docker-compose.yml يدويًا، أو باستخدام الأمر التالي.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. قم بتنزيل ملف YAML وتكوينه</h3><p>تنزيل <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> واحفظه بصيغة docker-compose.yml يدويًا، أو باستخدام الأمر التالي.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>تحتاج إلى إجراء بعض التغييرات على متغيرات البيئة الخاصة بالخدمة المستقلة في ملف YAML على النحو التالي:</p>
 <ul>

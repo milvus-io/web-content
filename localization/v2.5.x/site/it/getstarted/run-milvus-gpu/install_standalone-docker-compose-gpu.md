@@ -59,8 +59,8 @@ title: Esecuzione di Milvus con supporto GPU tramite Docker Compose
         ></path>
       </svg>
     </button></h2><p>Per installare Milvus con supporto GPU usando Docker Compose, seguite i seguenti passi.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Scaricare e configurare il file YAML</h3><p>Scaricare <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salvarlo come docker-compose.yml manualmente o con il seguente comando.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Scaricare e configurare il file YAML</h3><p>Scaricare <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salvarlo come docker-compose.yml manualmente o con il seguente comando.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>È necessario apportare alcune modifiche alle variabili d'ambiente del servizio standalone nel file YAML come segue:</p>
 <ul>
@@ -100,7 +100,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se non si riesce a eseguire il comando precedente, verificare se nel sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p>
+<p>Se non si è riusciti a eseguire il comando precedente, verificare se nel sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p>
 </div>
 <p>Dopo aver avviato Milvus,</p>
 <ul>

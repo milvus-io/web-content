@@ -44,7 +44,7 @@ title: Atualizar o Cluster Milvus com o Gráfico Helm
 <li>Versão do Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Desde a versão 4.2.21 do gráfico Milvus-Helm, introduzimos o gráfico pulsar-v3.x como dependência. Para compatibilidade com versões anteriores, atualize seu helm para a versão v3.14 ou posterior e certifique-se de adicionar a opção <code translate="no">--reset-then-reuse-values</code> sempre que usar <code translate="no">helm upgrade</code>.</p>
+<p>Desde a versão 4.2.21 do gráfico Milvus-Helm, introduzimos o gráfico pulsar-v3.x como dependência. Para compatibilidade com versões anteriores, atualize seu helm para a versão v3.14 ou posterior, e certifique-se de adicionar a opção <code translate="no">--reset-then-reuse-values</code> sempre que usar <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Verificar a carta do Milvus Helm<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ title: Atualizar o Cluster Milvus com o Gráfico Helm
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">helm search repo zilliztech/milvus --versions</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>O repositório de Milvus Helm Charts em <code translate="no">https://milvus-io.github.io/milvus-helm/</code> foi arquivado e pode obter mais actualizações em <code translate="no">https://zilliztech.github.io/milvus-helm/</code> da seguinte forma:</p>
+<p>O repositório Milvus Helm Charts em <code translate="no">https://milvus-io.github.io/milvus-helm/</code> foi arquivado e pode obter mais actualizações em <code translate="no">https://zilliztech.github.io/milvus-helm/</code> da seguinte forma:</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
 <span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Pode escolher o caminho de atualização para o seu Milvus da seguinte forma:</p>
-<div style="display: none;">- [Conduzir uma atualização contínua](#conduct-a-rolling-upgrade) do Milvus v2.2.3 e versões posteriores para a v2.5.13.</div>
+<div style="display: none;">- [Conduzir uma atualização contínua](#conduct-a-rolling-upgrade) do Milvus v2.2.3 e versões posteriores para a v2.5.14.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Atualizar o Milvus utilizando o Helm</a> para uma atualização de uma versão menor antes da v2.2.3 para a v2.5.13.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrar os metadados</a> antes da atualização do Milvus v2.1.x para a v2.5.13.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Atualizar o Milvus utilizando o Helm</a> para uma atualização de uma versão menor antes da v2.2.3 para a v2.5.14.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrar os metadados</a> antes da atualização do Milvus v2.1.x para a v2.5.14.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar uma atualização contínua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -130,7 +130,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
         ></path>
       </svg>
     </button></h2><p>Desde a versão 2.2.3 do Milvus, é possível configurar os coordenadores do Milvus para funcionarem em modo de espera ativa e ativar a funcionalidade de atualização contínua para os mesmos, de modo a que o Milvus possa responder aos pedidos recebidos durante as actualizações dos coordenadores. Nas versões anteriores, os coordenadores devem ser removidos e depois criados durante uma atualização, o que pode provocar um certo tempo de inatividade do serviço.</p>
-<p>As actualizações contínuas exigem que os coordenadores trabalhem em modo de espera ativa. Pode utilizar <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">o script</a> que fornecemos para configurar os coordenadores para trabalharem em modo de espera ativa e iniciar a atualização contínua.</p>
+<p>As actualizações contínuas requerem que os coordenadores trabalhem em modo de espera ativa. Pode utilizar <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">o script</a> que fornecemos para configurar os coordenadores para trabalharem em modo de espera ativa e iniciar a atualização contínua.</p>
 <p>Com base nos recursos de atualização contínua fornecidos pelo Kubernetes, o script acima impõe uma atualização ordenada das implantações de acordo com suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que dependem deles durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
 <p>O script aplica-se apenas à atualização do Milvus instalado com o Helm. A tabela a seguir lista os sinalizadores de comando disponíveis nos scripts.</p>
 <table>
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Funcionamento</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Depois de se ter assegurado de que todas as implementações na sua instância Milvus estão no seu estado normal. Pode executar o seguinte comando para atualizar a instância do Milvus para a versão 2.5.13.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
+<p>Depois de se ter assegurado de que todas as implementações na sua instância Milvus estão no seu estado normal. Pode executar o seguinte comando para atualizar a instância do Milvus para a versão 2.5.14.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.14 -w &#x27;milvusdb/milvus:v2.5.14&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -225,7 +225,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-1</span>                   <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-number">20</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-2</span>                   <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-number">20</span>m
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-image-tag" class="common-anchor-header">3. Verificar a etiqueta de imagem</h3><p>Verifique a etiqueta de imagem para o pod <code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code>. Pode ver que a versão do seu cluster Milvus é v2.1.4.</p>
+<h3 id="3-Check-the-image-tag" class="common-anchor-header">3. Verificar a etiqueta de imagem</h3><p>Verifique a etiqueta de imagem para o pod <code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code>. Pode ver que a versão do seu cluster Milvus é a v2.1.4.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods my-release-milvus-proxy-6c548f787f-scspp -o=jsonpath=<span class="hljs-string">&#x27;{$.spec.containers[0].image}&#x27;</span></span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">milvusdb/milvus:v2.1.4</span>
 <button class="copy-code-btn"></button></code></pre>

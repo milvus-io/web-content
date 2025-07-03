@@ -150,7 +150,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -883,6 +883,12 @@
                 "label": "Операторы массива",
                 "id": "array-operators.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Случайная выборка",
+                "id": "random-sampling.md",
+                "order": 5,
                 "children": []
               }
             ]

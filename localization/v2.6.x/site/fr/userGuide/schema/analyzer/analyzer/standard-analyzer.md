@@ -23,6 +23,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>L'analyseur <code translate="no">standard</code> est l'analyseur par défaut de Milvus, qui est automatiquement appliqué aux champs de texte si aucun analyseur n'est spécifié. Il utilise une tokenisation basée sur la grammaire, ce qui le rend efficace pour la plupart des langues.</p>
+<div class="alert note">
+<p>L'analyseur <code translate="no">standard</code> convient aux langues qui s'appuient sur des séparateurs (tels que les espaces, la ponctuation) pour délimiter les mots. Cependant, des langues comme le chinois, le japonais et le coréen nécessitent une tokénisation basée sur le dictionnaire. Dans ce cas, l'utilisation d'un analyseur spécifique à la langue comme <a href="/docs/fr/chinese-analyzer.md"><code translate="no">chinese</code></a> ou des analyseurs personnalisés avec des tokenizers spécialisés (tels que <a href="/docs/fr/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/fr/icu-tokenizer.md"><code translate="no">icu</code></a>) et des filtres est fortement recommandée pour garantir une tokenisation précise et de meilleurs résultats de recherche.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">Définition<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'analyseur <code translate="no">standard</code> se compose de</p>
+    </button></h2><p>L'analyseur <code translate="no">standard</code> se compose des éléments suivants</p>
 <ul>
 <li><p>Un<strong>tokenizer</strong>: Utilise le tokenizer <code translate="no">standard</code> pour diviser le texte en unités de mots discrètes basées sur des règles de grammaire. Pour plus d'informations, voir <a href="/docs/fr/standard-tokenizer.md">Standard</a>.</p></li>
 <li><p><strong>Filtre</strong>: Utilise le<a href="/docs/fr/lowercase-filter.md"> filtre</a> <code translate="no">lowercase</code><a href="/docs/fr/lowercase-filter.md"></a> pour convertir tous les tokens en minuscules, ce qui permet d'effectuer des recherches insensibles à la casse. Pour plus d'informations, voir</p></li>

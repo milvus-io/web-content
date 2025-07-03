@@ -46,7 +46,7 @@ summary: >-
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">举例说明：按颜色筛选</h3><p>要在标量字段<code translate="no">color</code> 中查找具有三原色（红色、绿色或蓝色）的实体，请使用以下过滤表达式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">示例过滤 JSON 字段</h3><p>Milvus 允许在 JSON 字段中引用键。例如，如果您有一个带有键<code translate="no">price</code> 和<code translate="no">model</code> 的 JSON 字段<code translate="no">product</code> ，并希望查找具有特定模型且价格低于 1,850 的产品，请使用此过滤表达式：</p>
+<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">示例过滤 JSON 字段</h3><p>Milvus 允许在 JSON 字段中引用键。例如，如果您有一个带有键<code translate="no">price</code> 和<code translate="no">model</code> 的 JSON 字段<code translate="no">product</code> ，并想查找具有特定模型且价格低于 1,850 的产品，请使用此过滤表达式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">示例：过滤数组字段</h3><p>如果有一个数组字段<code translate="no">history_temperatures</code> ，其中包含自 2000 年以来各观测站报告的平均气温记录，要查找 2009 年（第 10 次记录）气温超过 23°C 的观测站，请使用此表达式：</p>
@@ -132,55 +132,3 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p>有关详细信息，请参阅<a href="/docs/zh/keyword-match.md">文本匹配</a>。</p>
 <h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> 操作符<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p><strong>PHRASE_MATCH</strong>操作符可根据精确的短语匹配结果精确检索文档，同时考虑查询词的顺序和相邻关系。</p>
 <p>更多详情，请参阅<a href="/docs/zh/phrase-match.md">短语匹配</a>。</p>
-<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">随机抽样操作符<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>随机抽样允许您从段级别的 Collections 中提取数据样本子集，因此非常适合探索和处理海量数据集。该功能对于这些使用案例非常有价值：</p>
-<ul>
-<li><p><strong>快速数据预览</strong>：它能以最少的资源占用返回具有代表性的样本数据，让你快速掌握大型向量数据集的整体结构和内容。</p></li>
-<li><p><strong>组合筛选</strong>：在执行多标准筛选（如按属性选择文档）时，将其与随机抽样相结合，可快速对筛选结果进行统计汇总和预览。</p></li>
-<li><p><strong>节省大规模数据处理的资源</strong>：对于超大型数据集来说，汇总和分析全部数据可能会耗费大量资源。随机抽样可以减少处理的数据量，从而降低处理负荷。</p></li>
-</ul>
-<p>使用以下语法进行随机抽样：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li><code translate="no">float</code><strong>:</strong>取样因子，取样范围为 (0，1)，不包括边界。例如，<code translate="no">RANDOM_SAMPLE(0.001)</code> 选择约 0.1% 的结果。</li>
-</ul>
-<div class="alert note">
-<p><code translate="no">RANDOM_SAMPLE</code> 表达式不区分大小写。您可以使用<code translate="no">RANDOM_SAMPLE</code> 或<code translate="no">random_sample</code> 。</p>
-</div>
-<h3 id="Combine-with-other-filters" class="common-anchor-header">与其他筛选器结合使用</h3><p>随机抽样操作符必须与其他过滤表达式结合使用，逻辑表达式为<code translate="no">AND</code> 。例如</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>在这里，Milvus 首先应用条件<code translate="no">color = 'red'</code> ，然后对结果集执行随机抽样。</p>
-<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">示例无附加过滤器的随机抽样</h3><p>在这个示例中，查询从指定 Collections 的全部数据中随机抽样一个子集（约 1%）：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">示例结合过滤和随机取样</h3><p>在本例中，查询首先根据特定属性过滤文档（在本例中，过滤<code translate="no">color</code> 等于<code translate="no">'red'</code> 的文档）。过滤后，应用随机抽样操作符返回大约 0.1% 的过滤结果：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>

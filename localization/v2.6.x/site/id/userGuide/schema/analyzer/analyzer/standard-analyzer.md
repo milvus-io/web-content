@@ -23,6 +23,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Penganalisis <code translate="no">standard</code> adalah penganalisis standar di Milvus, yang secara otomatis diterapkan pada bidang teks jika tidak ada penganalisis yang ditentukan. Penganalisis ini menggunakan tokenisasi berbasis tata bahasa, sehingga efektif untuk sebagian besar bahasa.</p>
+<div class="alert note">
+<p>Penganalisis <code translate="no">standard</code> cocok untuk bahasa yang mengandalkan pemisah (seperti spasi, tanda baca) untuk batas kata. Namun, bahasa seperti bahasa Cina, Jepang, dan Korea memerlukan tokenisasi berbasis kamus. Dalam kasus seperti itu, gunakan penganalisis khusus bahasa seperti <a href="/docs/id/chinese-analyzer.md"><code translate="no">chinese</code></a> atau penganalisis khusus dengan tokenisasi khusus (seperti <a href="/docs/id/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/id/icu-tokenizer.md"><code translate="no">icu</code></a>) dan filter sangat disarankan untuk memastikan tokenisasi yang akurat dan hasil pencarian yang lebih baik.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">Definisi<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

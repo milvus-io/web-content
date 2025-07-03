@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Pengambilan Sampel Acak",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },

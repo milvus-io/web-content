@@ -40,7 +40,7 @@ title: Instalar Milvus Python SDK
     </button></h2><ul>
 <li>Se requiere Python 3.7 o posterior.</li>
 <li>Google protobuf está instalado. Puede instalarlo con el comando <code translate="no">pip3 install protobuf==3.20.0</code>.</li>
-<li>grpcio-tools está instalado. Puedes instalarlo con el comando <code translate="no">pip3 install grpcio-tools</code>.</li>
+<li>grpcio-tools está instalado. Puede instalarlo con el comando <code translate="no">pip3 install grpcio-tools</code>.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Instalar PyMilvus mediante pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ title: Instalar Milvus Python SDK
     </button></h2><p>PyMilvus está disponible en <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
 Se recomienda instalar una versión de PyMilvus que coincida con la versión del servidor Milvus que ha instalado. Para más información, consulte <a href="/docs/es/v2.5.x/release_notes.md">las Notas de la versión</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">11</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">12</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifique la instalación<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -100,7 +100,7 @@ Se recomienda instalar una versión de PyMilvus que coincida con la versión del
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
 <li><a href="/docs/es/v2.5.x/manage-collections.md">Gestionar Colecciones</a></li>
-<li><a href="/docs/es/v2.5.x/manage-partitions.md">Gestionar Particiones</a></li>
+<li><a href="/docs/es/v2.5.x/manage-partitions.md">Gestionar particiones</a></li>
 <li><a href="/docs/es/v2.5.x/insert-update-delete.md">Insertar, Subinsertar y Borrar</a></li>
 <li><a href="/docs/es/v2.5.x/single-vector-search.md">Búsqueda en un solo vector</a></li>
 <li><a href="/docs/es/v2.5.x/multi-vector-search.md">Búsqueda Híbrida</a></li>

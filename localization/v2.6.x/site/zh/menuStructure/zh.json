@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "随机抽样",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -1635,7 +1641,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和还原",
+                "label": "在一个实例中进行备份和恢复",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

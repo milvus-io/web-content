@@ -8,7 +8,6 @@ summary: >-
   Вместе они преобразуют входной текст в лексемы, уточняют эти лексемы и готовят
   их к эффективному индексированию и поиску.
 ---
-
 <h1 id="Analyzer-Overview" class="common-anchor-header">Обзор анализаторов<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,9 +81,12 @@ summary: >-
 <li><p><strong>Пользовательский анализатор</strong>: Для более сложных задач пользовательские анализаторы позволяют задать собственную конфигурацию, указав как токенизатор, так и ноль или более фильтров. Такой уровень настройки особенно полезен в специализированных случаях, когда требуется точный контроль над обработкой текста.</p></li>
 </ul>
 <div class="alert note">
-<p>Если вы не указываете конфигурацию анализатора при создании коллекции, Milvus по умолчанию использует анализатор <code translate="no">standard</code> для обработки всего текста. Подробнее см. в разделе <a href="/docs/ru/v2.5.x/standard-analyzer.md">Стандартный</a>.</p>
+<ul>
+<li>Если вы не указываете конфигурацию анализатора при создании коллекции, Milvus по умолчанию использует анализатор <code translate="no">standard</code> для обработки всего текста. Подробности см. в разделе <a href="/docs/ru/v2.5.x/standard-analyzer.md">Стандартный анализатор</a>.</li>
+<li>Для оптимальной производительности поиска и запросов выбирайте анализатор, соответствующий языку ваших текстовых данных. Например, несмотря на универсальность анализатора <code translate="no">standard</code>, он может оказаться не лучшим выбором для языков с уникальными грамматическими структурами, таких как китайский, японский или корейский. В таких случаях лучше использовать анализатор для конкретного языка, например <a href="/docs/ru/v2.5.x/chinese-analyzer.md"><code translate="no">chinese</code></a> или пользовательских анализаторов со специализированными токенизаторами (такими как <a href="/docs/ru/v2.5.x/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ru/v2.5.x/icu-tokenizer.md"><code translate="no">icu</code></a>) и фильтрами, чтобы обеспечить точную токенизацию и лучшие результаты поиска.</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Встроенный анализатор</h3><p>Встроенные анализаторы в Milvus предварительно сконфигурированы с определенными токенизаторами и фильтрами, что позволяет использовать их сразу, без необходимости определять эти компоненты самостоятельно. Каждый встроенный анализатор представляет собой шаблон, включающий в себя предустановленные токенизаторы и фильтры, с дополнительными параметрами для настройки.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Встроенный анализатор</h3><p>Встроенные анализаторы в Milvus предварительно сконфигурированы с определенными токенизаторами и фильтрами, что позволяет использовать их сразу, без необходимости определять эти компоненты самостоятельно. Каждый встроенный анализатор представляет собой шаблон, включающий в себя предустановленные токенизаторы и фильтры, а также дополнительные параметры для настройки.</p>
 <p>Например, чтобы использовать встроенный анализатор <code translate="no">standard</code>, достаточно указать его имя <code translate="no">standard</code> в качестве <code translate="no">type</code> и опционально включить дополнительные конфигурации, специфичные для этого типа анализатора, например <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -117,11 +119,10 @@ text = <span class="hljs-string">&quot;An efficient system relies on a robust an
 
 <span class="hljs-comment"># Run analyzer</span>
 result = client.run_analyzer(
-text,
-analyzer_params
+    text,
+    analyzer_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
 
@@ -164,7 +165,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вывод будет следующим:</p>
+<p>На выходе мы получим следующее:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Это свидетельствует о том, что анализатор правильно выполняет токенизацию входного текста, отфильтровывая стоп-слова <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, и <code translate="no">&quot;for&quot;</code>, и возвращая оставшиеся осмысленные лексемы.</p>
@@ -226,7 +227,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">chinese</code>: Специализирован для обработки китайского текста, включая токенизацию, адаптированную к структурам китайского языка.</p></li>
 </ul>
 <h3 id="Custom-analyzer" class="common-anchor-header">Пользовательский анализатор</h3><p>Для более сложной обработки текста пользовательские анализаторы в Milvus позволяют создать индивидуальный конвейер обработки текста, указав <strong>токенизатор</strong> и <strong>фильтры</strong>. Такая настройка идеально подходит для специализированных случаев, когда требуется точный контроль.</p>
-<h4 id="Tokenizer" class="common-anchor-header">Токенизатор</h4><p><strong>Токенизатор</strong> - это <strong>обязательный</strong> компонент пользовательского анализатора, который запускает конвейер анализатора, разбивая входной текст на дискретные единицы или <strong>токены</strong>. В зависимости от типа токенизатора токенизация выполняется по определенным правилам, таким как разбиение на пробельные символы или знаки препинания. Этот процесс позволяет более точно и независимо обрабатывать каждое слово или фразу.</p>
+<h4 id="Tokenizer" class="common-anchor-header">Токенизатор</h4><p><strong>Токенизатор</strong> - <strong>обязательный</strong> компонент пользовательского анализатора, который запускает конвейер анализатора, разбивая входной текст на дискретные единицы или <strong>лексемы</strong>. В зависимости от типа токенизатора токенизация выполняется по определенным правилам, таким как разбиение на пробельные символы или знаки препинания. Этот процесс позволяет более точно и независимо обрабатывать каждое слово или фразу.</p>
 <p>Например, токенизатор преобразует текст <code translate="no">&quot;Vector Database Built for Scale&quot;</code> в отдельные лексемы:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
@@ -378,7 +379,6 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="hljs-comment"># Create a new schema</span>
 schema = client.create_schema(auto_id=<span class="hljs-literal">True</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -450,7 +450,6 @@ result = client.run_analyzer(sample_text, analyzer_params_built_in)
 <span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
 
@@ -526,7 +525,6 @@ result = client.run_analyzer(sample_text, analyzer_params_custom)
 <span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
 Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
@@ -612,12 +610,12 @@ schema.add_field(
 
 <span class="hljs-comment"># Add VARCHAR field &#x27;title&#x27; using the custom analyzer configuration</span>
 schema.add_field(
-field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
-datatype=DataType.VARCHAR,
-max_length=<span class="hljs-number">1000</span>,
-enable_analyzer=<span class="hljs-literal">True</span>,
-analyzer_params=analyzer_params_custom,
-enable_match=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
+    datatype=DataType.VARCHAR,
+    max_length=<span class="hljs-number">1000</span>,
+    enable_analyzer=<span class="hljs-literal">True</span>,
+    analyzer_params=analyzer_params_custom,
+    enable_match=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Add a vector field for embeddings</span>
@@ -626,7 +624,6 @@ schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</spa
 <span class="hljs-comment"># Add a primary key field</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -711,12 +708,11 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot
 
 <span class="hljs-comment"># Create the collection with the defined schema and index parameters</span>
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-schema=schema,
-index_params=index_params
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    schema=schema,
+    index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Set up index params for vector field</span>
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()

@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "隨機抽樣",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2153,7 +2159,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格舞曲",
+            "label": "拉格",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []

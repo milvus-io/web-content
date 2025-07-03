@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Muestreo aleatorio",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2639,7 +2645,7 @@
         "children": []
       },
       {
-        "label": "Límites de Milvus",
+        "label": "Milvus Limits",
         "id": "limitations.md",
         "order": 3,
         "children": []

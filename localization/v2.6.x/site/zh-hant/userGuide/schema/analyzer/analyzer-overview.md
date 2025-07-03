@@ -77,9 +77,12 @@ summary: >-
 <li><p><strong>自訂分析器</strong>：對於更進階的需求，自訂分析器可讓您透過指定標記器和零個或多個過濾器來定義您自己的組態。這種層級的自訂對於需要精確控制文字處理的專門用例特別有用。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在建立集合時省略了分析器設定，Milvus 預設會使用<code translate="no">standard</code> 分析器來處理所有文字。詳情請參閱<a href="/docs/zh-hant/standard-analyzer.md">標準</a>。</p>
+<ul>
+<li>如果您在建立集合時省略了分析器設定，Milvus 預設會使用<code translate="no">standard</code> 分析器來處理所有文字。如需詳細資訊，請參閱<a href="/docs/zh-hant/standard-analyzer.md">標準分析器</a>。</li>
+<li>為了獲得最佳的搜尋與查詢效能，請選擇符合您文字資料語言的分析器。例如，雖然<code translate="no">standard</code> 分析器用途廣泛，但對於具有獨特語法結構的語言 (例如中文、日文或韓文) 來說，它可能不是最佳選擇。在這種情況下，使用特定語言的分析器，例如 <a href="/docs/zh-hant/chinese-analyzer.md"><code translate="no">chinese</code></a>或具有專門標記器的自訂分析器 (例如 <a href="/docs/zh-hant/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/zh-hant/icu-tokenizer.md"><code translate="no">icu</code></a>) 和過濾器，以確保正確的標記化和更好的搜尋結果。</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">內建分析器</h3><p>Milvus 的內建分析器預先設定了特定的 tokenizer 和過濾器，讓您可以立即使用，而不需要自己定義這些元件。每個內建分析器都是一個範本，包含預設的標記器和篩選器，以及可選的自訂參數。</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">內建分析器</h3><p>Milvus 的內建分析器預先設定了特定的標記化器和過濾器，讓您可以立即使用，而不需要自己定義這些元件。每個內建分析器都是一個範本，包含預設的標記化器和篩選器，以及可選的自訂參數。</p>
 <p>例如，若要使用<code translate="no">standard</code> 內建分析器，只需指定其名稱<code translate="no">standard</code> 為<code translate="no">type</code> ，並可選擇包含此分析器類型特有的額外配置，例如<code translate="no">stop_words</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

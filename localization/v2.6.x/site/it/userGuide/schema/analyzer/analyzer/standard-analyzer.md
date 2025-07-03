@@ -23,6 +23,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>L'analizzatore <code translate="no">standard</code> è l'analizzatore predefinito di Milvus, che viene applicato automaticamente ai campi di testo se non viene specificato alcun analizzatore. Utilizza una tokenizzazione basata sulla grammatica, che lo rende efficace per la maggior parte delle lingue.</p>
+<div class="alert note">
+<p>L'analizzatore <code translate="no">standard</code> è adatto alle lingue che si basano su separatori (come spazi e punteggiatura) per delimitare le parole. Tuttavia, lingue come il cinese, il giapponese e il coreano richiedono una tokenizzazione basata su dizionari. In questi casi, l'uso di un analizzatore specifico per la lingua come <a href="/docs/it/chinese-analyzer.md"><code translate="no">chinese</code></a> o analizzatori personalizzati con tokenizzatori specializzati (come ad esempio <a href="/docs/it/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/it/icu-tokenizer.md"><code translate="no">icu</code></a>) e filtri per garantire una tokenizzazione accurata e risultati di ricerca migliori.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">Definizione<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

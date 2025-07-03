@@ -79,9 +79,12 @@ summary: >-
 <li><p><strong>사용자 정의 분석기</strong>: 보다 고급 요구 사항이 필요한 경우, 사용자 정의 분석기를 사용하면 토큰화 도구와 0개 이상의 필터를 모두 지정하여 자신만의 구성을 정의할 수 있습니다. 이 수준의 사용자 지정은 텍스트 처리에 대한 정밀한 제어가 필요한 특수한 사용 사례에 특히 유용합니다.</p></li>
 </ul>
 <div class="alert note">
-<p>수집 생성 중에 분석기 구성을 생략하는 경우, Milvus는 기본적으로 모든 텍스트 처리에 <code translate="no">standard</code> 분석기를 사용합니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준을</a> 참조하세요.</p>
+<ul>
+<li>수집 생성 중에 분석기 구성을 생략하는 경우, Milvus는 기본적으로 모든 텍스트 처리에 <code translate="no">standard</code> 분석기를 사용합니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 참조하세요.</li>
+<li>최적의 검색 및 쿼리 성능을 위해 텍스트 데이터의 언어와 일치하는 분석기를 선택하세요. 예를 들어, <code translate="no">standard</code> 분석기는 다목적이지만 중국어, 일본어 또는 한국어와 같이 고유한 문법 구조를 가진 언어에는 적합하지 않을 수 있습니다. 이러한 경우 다음과 같은 언어 전용 분석기를 사용하거나 <a href="/docs/ko/chinese-analyzer.md"><code translate="no">chinese</code></a> 와 같은 언어 전용 분석기 또는 특수 토큰화 도구가 포함된 사용자 정의 분석기( <a href="/docs/ko/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a>) 및 필터를 사용하는 것이 정확한 토큰화와 더 나은 검색 결과를 보장하기 위해 적극 권장됩니다.</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">기본 제공 분석기</h3><p>Milvus의 기본 제공 분석기는 특정 토큰화기 및 필터로 미리 구성되어 있으므로 이러한 구성 요소를 직접 정의할 필요 없이 즉시 사용할 수 있습니다. 각 기본 제공 분석기는 사전 설정된 토큰화 도구와 필터가 포함된 템플릿 역할을 하며, 사용자 지정을 위한 선택적 매개변수를 제공합니다.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">기본 제공 분석기</h3><p>Milvus의 기본 제공 분석기는 특정 토큰화 도구와 필터로 미리 구성되어 있으므로 이러한 구성 요소를 직접 정의할 필요 없이 바로 사용할 수 있습니다. 각 기본 제공 분석기는 사전 설정된 토큰화 도구와 필터가 포함된 템플릿 역할을 하며, 사용자 지정을 위한 선택적 매개변수를 제공합니다.</p>
 <p>예를 들어 <code translate="no">standard</code> 기본 제공 분석기를 사용하려면 <code translate="no">standard</code> 이름을 <code translate="no">type</code> 로 지정하고 선택적으로 이 분석기 유형에 특정한 추가 구성(예: <code translate="no">stop_words</code>)을 포함하면 됩니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

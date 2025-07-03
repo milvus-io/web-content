@@ -127,7 +127,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais detalhes sobre os operadores de matriz, consulte <a href="/docs/pt/array-operators.md">Operadores</a> de matriz.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Operadores específicos do campo VARCHAR</h3><p>Milvus fornece operadores especializados para pesquisas precisas baseadas em texto em campos VARCHAR:</p>
-<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operador</h4><p>O operador <code translate="no">TEXT_MATCH</code> permite a recuperação precisa de documentos com base em termos de consulta específicos. É particularmente útil para pesquisas filtradas que combinam filtros escalares com pesquisas de semelhança vetorial. Ao contrário das pesquisas semânticas, a correspondência de texto centra-se em ocorrências exactas de termos.</p>
+<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operador</h4><p>O operador <code translate="no">TEXT_MATCH</code> permite a recuperação precisa de documentos com base em termos de consulta específicos. É particularmente útil para pesquisas filtradas que combinam filtros escalares com pesquisas de semelhança vetorial. Ao contrário das pesquisas semânticas, a correspondência de texto centra-se nas ocorrências exactas de termos.</p>
 <p>O Milvus utiliza o Tantivy para suportar a indexação invertida e a pesquisa de texto baseada em termos. O processo envolve:</p>
 <ol>
 <li><p><strong>Analisador</strong>: Tokeniza e processa o texto de entrada.</p></li>
@@ -135,56 +135,4 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 </ol>
 <p>Para obter mais detalhes, consulte <a href="/docs/pt/keyword-match.md">Correspondência de texto</a>.</p>
 <h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operador<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>O operador <strong>PHRASE_MATCH</strong> permite a recuperação precisa de documentos com base em correspondências exactas de frases, considerando tanto a ordem como a adjacência dos termos de consulta.</p>
-<p>Para mais pormenores, consulte <a href="/docs/pt/phrase-match.md">Correspondência de frases</a>.</p>
-<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">Operador de amostragem aleatória<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>A amostragem aleatória permite-lhe extrair um subconjunto de amostras de dados de uma coleção ao nível do segmento, tornando-a ideal para explorar e processar conjuntos de dados maciços. Esse recurso é valioso para esses casos de uso:</p>
-<ul>
-<li><p><strong>Pré-visualização rápida de dados</strong>: Devolve dados de amostra representativos com uma utilização mínima de recursos, o que lhe permite compreender rapidamente a estrutura geral e o conteúdo de grandes conjuntos de dados vectoriais.</p></li>
-<li><p><strong>Filtragem combinada</strong>: Ao efetuar uma filtragem multicritério (por exemplo, selecionar documentos por atributos), a combinação com a amostragem aleatória permite resumos estatísticos rápidos e pré-visualizações dos resultados filtrados.</p></li>
-<li><p><strong>Poupança de recursos no processamento de dados em grande escala</strong>: Para conjuntos de dados muito grandes, a agregação e análise de dados completos pode exigir muitos recursos. A amostragem aleatória reduz a carga de processamento ao diminuir a quantidade de dados tratados.</p></li>
-</ul>
-<p>Utilize a seguinte sintaxe para a amostragem aleatória:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li><code translate="no">float</code><strong>:</strong> Um fator de amostragem no intervalo (0, 1), excluindo os limites. Por exemplo, <code translate="no">RANDOM_SAMPLE(0.001)</code> seleciona aproximadamente 0,1% dos resultados.</li>
-</ul>
-<div class="alert note">
-<p>A expressão <code translate="no">RANDOM_SAMPLE</code> não diferencia maiúsculas de minúsculas. Você pode usar <code translate="no">RANDOM_SAMPLE</code> ou <code translate="no">random_sample</code>.</p>
-</div>
-<h3 id="Combine-with-other-filters" class="common-anchor-header">Combinar com outros filtros</h3><p>O operador de amostragem aleatória deve ser combinado com outras expressões de filtragem utilizando a expressão lógica <code translate="no">AND</code>. Por exemplo:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Aqui, o Milvus aplica primeiro a condição <code translate="no">color = 'red'</code> e, em seguida, efectua a amostragem aleatória no conjunto de resultados.</p>
-<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">Exemplo: Amostragem aleatória sem um filtro adicional</h3><p>Neste exemplo, a consulta recolhe uma amostra de um subconjunto aleatório (aproximadamente 1%) de todos os dados da coleção especificada:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">Exemplo: Filtragem combinada com amostragem aleatória</h3><p>Neste exemplo, a consulta filtra primeiro os documentos com base num atributo específico (neste caso, documentos em que <code translate="no">color</code> é igual a <code translate="no">'red'</code>). Após a filtragem, o operador de amostragem aleatória é aplicado para retornar cerca de 0,1% dos resultados filtrados:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
+<p>Para obter mais detalhes, consulte <a href="/docs/pt/phrase-match.md">Correspondência de frases</a>.</p>

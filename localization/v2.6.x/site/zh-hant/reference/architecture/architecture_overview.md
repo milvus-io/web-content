@@ -18,7 +18,7 @@ title: Milvus 架構概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 是一個<strong>開放源碼</strong>、<strong>雲原生</strong>向量資料庫，專為在大量向量資料集上進行高效能相似性搜尋而設計。它建構在流行的向量搜尋程式庫（包括 Faiss、HNSW、DiskANN 和 SCANN）之上，可增強人工智能應用程式和非結構化資料檢索情境的能力。在繼續之前，請先熟悉嵌入式檢索的<a href="/docs/zh-hant/v2.6.x/glossary.md">基本原理</a>。</p>
+    </button></h1><p>Milvus 是一個<strong>開放源碼</strong>、<strong>雲原生</strong>向量資料庫，專為在大量向量資料集上進行高效能相似性搜尋而設計。它建構在流行的向量搜尋程式庫（包括 Faiss、HNSW、DiskANN 和 SCANN）之上，可增強人工智能應用程式和非結構化資料檢索情境的能力。在繼續之前，請先熟悉嵌入式檢索的<a href="/docs/zh-hant/glossary.md">基本原理</a>。</p>
 <h2 id="Architecture-Diagram" class="common-anchor-header">架構圖<button data-href="#Architecture-Diagram" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,11 +85,11 @@ title: Milvus 架構概述
 <li><strong>歷史資料管理</strong>：將離線工作（例如壓縮和建立索引）分派給資料節點，並管理區段的拓樸結構和資料檢視。</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">第 3 層：工作節點</h3><p>手腳。工作節點是遵循協調器指示的啞巴執行器。由於儲存與計算的分離，工作節點是無狀態的，當部署在 Kubernetes 上時，可促進系統擴充與災難復原。Worker 節點有三種類型：</p>
-<h3 id="Streaming-node" class="common-anchor-header">串流節點</h3><p>Streaming Node 充當 shard 級的「迷你大腦」，提供 shard 級的一致性保證，並根據底層 WAL 儲存進行故障復原。同時，Streaming Node 也負責成長資料查詢和產生查詢計畫。此外，它還處理將成長中的資料轉換為封存（歷史）資料。</p>
-<h3 id="Query-node" class="common-anchor-header">查詢節點</h3><p>查詢節點從物件儲存區載入歷史資料，並提供歷史資料查詢。</p>
+<h3 id="Streaming-node" class="common-anchor-header">串流節點</h3><p>Streaming Node 作為 shard 層級的「小腦」，提供 shard 層級的一致性保證和基於底層 WAL 儲存的故障復原。同時，Streaming Node 也負責成長中的資料查詢和產生查詢計畫。此外，它還處理將成長中的資料轉換為封存（歷史）資料。</p>
+<h3 id="Query-node" class="common-anchor-header">查詢節點</h3><p>查詢節點從物件儲存載入歷史資料，並提供歷史資料查詢。</p>
 <h3 id="Data-node" class="common-anchor-header">資料節點</h3><p>資料節點負責離線處理歷史資料，例如壓縮和建立索引。</p>
-<h3 id="Layer-4-Storage" class="common-anchor-header">第四層：儲存</h3><p>儲存是系統的骨骼，負責資料的持久性。它包括元儲存、日誌代理和物件儲存。</p>
-<h3 id="Meta-storage" class="common-anchor-header">元儲存</h3><p>元存儲儲存了元資料的快照，例如收集模式和訊息消耗檢查點。儲存元資料需要極高的可用性、強大的一致性和交易支援，因此 Milvus 選擇 etcd 作為元儲存。Milvus 也使用 etcd 進行服務註冊和健康檢查。</p>
+<h3 id="Layer-4-Storage" class="common-anchor-header">第四層：儲存</h3><p>儲存是系統的骨骼，負責資料的持久性。它包括元儲存、日誌中介和物件儲存。</p>
+<h3 id="Meta-storage" class="common-anchor-header">元儲存</h3><p>元存儲儲存了元資料的快照，例如集合模式和訊息消耗檢查點。儲存元資料需要極高的可用性、強大的一致性和交易支援，因此 Milvus 選擇 etcd 作為元儲存。Milvus 也使用 etcd 進行服務註冊和健康檢查。</p>
 <h3 id="Object-storage" class="common-anchor-header">物件儲存</h3><p>物件儲存存放日誌的快照檔案、標量與向量資料的索引檔案，以及中間查詢結果。Milvus 使用 MinIO 作為物件儲存，並可隨時部署在 AWS S3 和 Azure Blob 這兩種全球最流行、最具成本效益的儲存服務上。然而，物件儲存有很高的存取延遲，並且會依據查詢次數收費。為了提升效能並降低成本，Milvus 計劃在記憶體或 SSD 為基礎的快取記憶體池上實施冷熱資料分離。</p>
 <h3 id="WAL-storage" class="common-anchor-header">WAL 儲存</h3><p>Write-Ahead Log (WAL) 儲存是分散式系統中資料耐久性與一致性的基礎。在提交任何變更之前，首先會將其記錄在日誌中，以確保在發生故障時，可以準確地恢復到之前的位置。</p>
 <p>常見的 WAL 實作包括 Kafka、Pulsar 和 Woodpecker。與傳統基於磁碟的解決方案不同，Woodpecker 採用雲原生、零磁碟設計，直接寫入物件儲存。這種方法可以毫不費力地根據您的需求進行擴展，並透過消除管理本機磁碟的開銷來簡化作業。</p>
@@ -153,7 +153,7 @@ title: Milvus 架構概述
         ></path>
       </svg>
     </button></h2><ul>
-<li>探索<a href="/docs/zh-hant/v2.6.x/main_components.md">主要元件</a>，瞭解詳細的實作細節</li>
-<li>瞭解<a href="/docs/zh-hant/v2.6.x/data_processing.md">資料處理</a>工作流程與最佳化策略</li>
-<li>瞭解 Milvus 的<a href="/docs/zh-hant/v2.6.x/consistency.md">一致性模型</a>和交易保證</li>
+<li>探索<a href="/docs/zh-hant/main_components.md">主要元件</a>，瞭解詳細的實作細節</li>
+<li>瞭解<a href="/docs/zh-hant/data_processing.md">資料處理</a>工作流程與最佳化策略</li>
+<li>瞭解 Milvus 的<a href="/docs/zh-hant/consistency.md">一致性模型</a>和交易保證</li>
 </ul>

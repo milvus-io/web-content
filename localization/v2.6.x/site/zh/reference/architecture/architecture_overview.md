@@ -18,7 +18,7 @@ title: Milvus 架构概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 是一个<strong>开源</strong> <strong>云原生</strong>向量数据库，专为在海量向量数据集上进行高性能相似性搜索而设计。它建立在流行的向量搜索库（包括 Faiss、HNSW、DiskANN 和 SCANN）之上，可为人工智能应用和非结构化数据检索场景提供支持。在继续之前，请先熟悉一下 Embeddings 检索的<a href="/docs/zh/v2.6.x/glossary.md">基本原理</a>。</p>
+    </button></h1><p>Milvus 是一个<strong>开源</strong> <strong>云原生</strong>向量数据库，专为在海量向量数据集上进行高性能相似性搜索而设计。它建立在流行的向量搜索库（包括 Faiss、HNSW、DiskANN 和 SCANN）之上，可为人工智能应用和非结构化数据检索场景提供支持。在继续之前，请先熟悉一下 Embeddings 检索的<a href="/docs/zh/glossary.md">基本原理</a>。</p>
 <h2 id="Architecture-Diagram" class="common-anchor-header">架构图<button data-href="#Architecture-Diagram" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ title: Milvus 架构概述
       </svg>
     </button></h2><h3 id="Layer-1-Access-Layer" class="common-anchor-header">第 1 层：访问层</h3><p>访问层由一组无状态代理组成，是系统的前端层，也是用户的终端。它验证客户端请求并减少返回结果：</p>
 <ul>
-<li>代理本身是无状态的。它使用 Nginx、Kubernetes Ingress、NodePort 和 LVS 等负载平衡组件提供统一的服务地址。</li>
+<li>代理本身是无状态的。它使用 Nginx、Kubernetes Ingress、NodePort 和 LVS 等负载均衡组件提供统一的服务地址。</li>
 <li>由于 Milvus 采用的是大规模并行处理（MPP）架构，代理会对中间结果进行聚合和后处理，然后再将最终结果返回给客户端。</li>
 </ul>
 <h3 id="Layer-2-Coordinator" class="common-anchor-header">第 2 层：协调器</h3><p>协调器是 Milvus 的大脑。在任何时刻，整个集群都有一个协调器在工作，负责维护集群拓扑结构、调度所有任务类型并保证集群级一致性。</p>
@@ -85,7 +85,7 @@ title: Milvus 架构概述
 <li><strong>历史数据管理</strong>：将压缩和索引建立等离线任务分配给数据节点，并管理数据段和数据视图的拓扑结构。</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">第 3 层：工作节点</h3><p>手臂和腿。工作节点是遵从协调器指令的哑执行器。由于存储和计算分离，工作节点是无状态的，部署在 Kubernetes 上时可促进系统扩展和灾难恢复。工作节点有三种类型：</p>
-<h3 id="Streaming-node" class="common-anchor-header">流节点</h3><p>流节点作为碎片级的 "小型大脑"，基于底层 WAL 存储提供碎片级的一致性保证和故障恢复。同时，流节点还负责增长数据查询和生成查询计划。此外，它还负责将增长数据转换为封存（历史）数据。</p>
+<h3 id="Streaming-node" class="common-anchor-header">流节点</h3><p>流节点（Streaming Node）作为碎片级的 "小型大脑"，基于底层 WAL 存储提供碎片级的一致性保证和故障恢复。同时，流节点还负责增长数据查询和生成查询计划。此外，它还负责将增长数据转换为封存（历史）数据。</p>
 <h3 id="Query-node" class="common-anchor-header">查询节点</h3><p>查询节点从对象存储中加载历史数据，并提供历史数据查询。</p>
 <h3 id="Data-node" class="common-anchor-header">数据节点</h3><p>数据节点负责离线处理历史数据，如压缩和建立索引。</p>
 <h3 id="Layer-4-Storage" class="common-anchor-header">第 4 层：存储</h3><p>存储是系统的骨骼，负责数据的持久性。它包括元存储、日志代理和对象存储。</p>
@@ -153,7 +153,7 @@ title: Milvus 架构概述
         ></path>
       </svg>
     </button></h2><ul>
-<li>探索<a href="/docs/zh/v2.6.x/main_components.md">主要组件</a>，了解详细的实施细节</li>
-<li>了解<a href="/docs/zh/v2.6.x/data_processing.md">数据处理</a>工作流程和优化策略</li>
-<li>了解 Milvus 中的<a href="/docs/zh/v2.6.x/consistency.md">一致性模型</a>和事务保证</li>
+<li>探索<a href="/docs/zh/main_components.md">主要组件</a>，了解详细的实施细节</li>
+<li>了解<a href="/docs/zh/data_processing.md">数据处理</a>工作流程和优化策略</li>
+<li>了解 Milvus 中的<a href="/docs/zh/consistency.md">一致性模型</a>和事务保证</li>
 </ul>

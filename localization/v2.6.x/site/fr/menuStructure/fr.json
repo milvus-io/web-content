@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "L'échantillonnage aléatoire",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -1018,7 +1024,7 @@
                 "children": []
               },
               {
-                "label": "Rang de décomposition",
+                "label": "Classeur de décroissance",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 2,
@@ -2073,7 +2079,7 @@
             "children": []
           },
           {
-            "label": "PrivateGPT",
+            "label": "PrivéGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []

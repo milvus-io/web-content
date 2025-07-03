@@ -23,7 +23,7 @@ title: ترقية مجموعة Milvus العنقودية باستخدام مخط
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يصف هذا الدليل كيفية ترقية مجموعة Milvus الخاصة بك باستخدام مخططات Milvus Helm.</p>
+    </button></h1><p>يصف هذا الدليل كيفية ترقية مجموعة Milvus الخاصة بك مع مخططات Milvus Helm.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ title: ترقية مجموعة Milvus العنقودية باستخدام مخط
 <li>إصدار Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>منذ الإصدار 4.2.21 من مخطط Milvus-Helm، قدمنا مخطط pulsar-v3.x كإصدار تبعي. للتوافق مع الإصدارات السابقة، يُرجى ترقية دفة القيادة إلى الإصدار 3.14 أو إصدار أحدث، وتأكد من إضافة الخيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.</p>
+<p>منذ الإصدار 4.2.21 من مخطط Milvus-Helm، قدمنا مخطط pulsar-v3.x كإصدار تبعي. للتوافق مع الإصدارات السابقة، يُرجى ترقية الدفة إلى الإصدار 3.14 أو إصدار أحدث، وتأكد من إضافة الخيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">تحقق من مخطط ميلفوس هيلم<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك اختيار مسار الترقية لميلفوس الخاص بك على النحو التالي:</p>
-<div style="display: none;">- [إجراء ترقية متجددة] (#إجراء ترقية متجددة) من الإصدار 2.2.3 والإصدارات الأحدث إلى الإصدار 2.5.13.</div>
+<div style="display: none;">- [إجراء ترقية متجددة] (#إجراء ترقية متجددة) من الإصدار 2.2.3 والإصدارات الأحدث إلى الإصدار 2.5.14.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">ترقية Milvus باستخدام Helm</a> للترقية من إصدار ثانوي قبل الإصدار 2.2.3 إلى الإصدار 2.5.13.</p></li>
-<li><p><a href="#Migrate-the-metadata">قم بترحيل البيانات الوصفية</a> قبل الترقية من الإصدار 2.1.x من Milvus إلى الإصدار 2.5.13.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">ترقية Milvus باستخدام Helm</a> للترقية من إصدار ثانوي قبل الإصدار 2.2.3 إلى الإصدار 2.5.14.</p></li>
+<li><p><a href="#Migrate-the-metadata">قم بترحيل البيانات الوصفية</a> قبل الترقية من الإصدار 2.1.x من Milvus إلى الإصدار 2.5.14.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">إجراء ترقية متجددة<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>التشغيل</td><td><code translate="no">update</code></td><td>خطأ</td></tr>
 </tbody>
 </table>
-<p>بمجرد التأكد من أن جميع عمليات النشر في مثيل Milvus الخاص بك في حالتها الطبيعية. يمكنك تشغيل الأمر التالي لترقية مثيل Milvus إلى 2.5.13.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
+<p>بمجرد التأكد من أن جميع عمليات النشر في مثيل Milvus الخاص بك في حالتها الطبيعية. يمكنك تشغيل الأمر التالي لترقية مثيل Milvus إلى 2.5.14.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.14 -w &#x27;milvusdb/milvus:v2.5.14&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

@@ -43,7 +43,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusのアナライザーは、1つの<strong>トークナイザーと</strong> <strong>0つ以上の</strong>フィルターから構成されます。</p>
+    </button></h2><p>Milvusのアナライザーは1つの<strong>トークナイザーと</strong> <strong>0つ以上の</strong>フィルターから構成されます。</p>
 <ul>
 <li><p><strong>トークナイザー</strong>：トークナイザーは入力テキストをトークンと呼ばれる個別の単位に分割します。トークンはトークン化の種類によって、単語であったりフレーズであったりします。</p></li>
 <li><p><strong>フィルター</strong>：たとえば、小文字にしたり、一般的な単語を削除したりします。</p></li>
@@ -77,9 +77,12 @@ summary: >-
 <li><p><strong>カスタムアナライザー</strong>：より高度な要件に対応するカスタム・アナライザでは、トークナイザとゼロ個以上のフィルタの両方を指定することで、独自の設定を定義できます。このレベルのカスタマイズは、テキスト処理を正確に制御する必要がある特殊なユースケースで特に役立ちます。</p></li>
 </ul>
 <div class="alert note">
-<p>コレクション作成時にアナライザ設定を省略した場合、Milvusはデフォルトですべてのテキスト処理に<code translate="no">standard</code> アナライザを使用します。詳細については、「<a href="/docs/ja/standard-analyzer.md">標準</a>」を参照してください。</p>
+<ul>
+<li>コレクション作成時にアナライザ設定を省略した場合、Milvusはデフォルトですべてのテキスト処理に<code translate="no">standard</code> アナライザを使用します。詳細については、<a href="/docs/ja/standard-analyzer.md">標準アナライザを</a>参照してください。</li>
+<li>検索とクエリのパフォーマンスを最適化するには、テキストデータの言語に合ったアナライザを選択してください。たとえば、<code translate="no">standard</code> アナライザは多機能ですが、中国語、日本語、韓国語など、独特の文法構造を持つ言語には最適でない場合があります。そのような場合は、次のような言語固有の解析器を使用します。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>のような言語固有の解析器を使うか、特殊なトークナイザーを備えたカスタム解析器（たとえば <a href="/docs/ja/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a>など）やフィルタを備えたカスタム解析器を使用することを強くお勧めします。</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">内蔵アナライザ</h3><p>Milvusのビルトインアナライザは、特定のトークナイザやフィルタがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトインアナライザは、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">ビルトイン分析器</h3><p>Milvusのビルトインアナライザーには、特定のトークナイザーとフィルターがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトイン分析器は、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
 <p>たとえば、<code translate="no">standard</code> 組み込みアナライザを使用するには、<code translate="no">standard</code> という名前を<code translate="no">type</code> と指定し、オプションで<code translate="no">stop_words</code> など、このアナライザ・タイプに固有の追加設定を含めるだけです：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -693,7 +696,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">ステップ 4: インデックス・パラメーターを準備し、コレクションを作成する。</h3><div class="multipleCode">
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">ステップ 4: インデックス・パラメータの準備とコレクションの作成</h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
 index_params = client.prepare_index_params()

@@ -38,7 +38,7 @@ title: Gestion des groupes de ressources
     </button></h2><p>Un groupe de ressources peut contenir plusieurs ou tous les nœuds de requête d'un cluster Milvus. Vous décidez de la manière dont vous souhaitez répartir les nœuds de requête entre les groupes de ressources en fonction de ce qui vous semble le plus judicieux. Par exemple, dans un scénario à plusieurs collections, vous pouvez allouer un nombre approprié de nœuds de requête à chaque groupe de ressources et charger les collections dans différents groupes de ressources, de sorte que les opérations au sein de chaque collection soient physiquement indépendantes de celles des autres collections.</p>
 <p>Notez qu'une instance Milvus maintient un groupe de ressources par défaut pour contenir tous les nœuds de requête au démarrage et le nomme <strong>__default_resource_group</strong>.</p>
 <p>À partir de la version 2.4.1, Milvus fournit une API de groupe de ressources déclarative, tandis que l'ancienne API de groupe de ressources a été supprimée. La nouvelle API déclarative permet aux utilisateurs d'atteindre l'idempotence, afin de faciliter le développement secondaire dans les environnements "cloud-native".</p>
-<h2 id="Concepts-of-resource-group" class="common-anchor-header">Concepts de groupe de ressources<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
+<h2 id="Concepts-of-resource-group" class="common-anchor-header">Concepts du groupe de ressources<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,7 +90,7 @@ title: Gestion des groupes de ressources
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.5.11. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
+<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.5.12. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
 </div>
 <ol>
 <li><p>Créer un groupe de ressources.</p>

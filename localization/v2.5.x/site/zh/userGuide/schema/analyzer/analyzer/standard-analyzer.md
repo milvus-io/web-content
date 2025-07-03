@@ -3,7 +3,6 @@ id: standard-analyzer.md
 title: 标准分析器
 summary: 标准分析器是 Milvus 的默认分析器，如果没有指定分析器，它将自动应用于文本字段。它使用基于语法的标记化，因此对大多数语言都很有效。
 ---
-
 <h1 id="Standard-Analyzer" class="common-anchor-header">标准分析器<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +18,10 @@ summary: 标准分析器是 Milvus 的默认分析器，如果没有指定分析
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">standard</code> 分析器是 Milvus 的默认分析器，如果没有指定分析器，它将自动应用于文本字段。它使用基于语法的标记化，对大多数语言都很有效。</p>
+    </button></h1><p><code translate="no">standard</code> 分析器是 Milvus 的默认分析器，如果没有指定分析器，它将自动应用于文本字段。它使用基于语法的标记化，因此对大多数语言都很有效。</p>
+<div class="alert note">
+<p><code translate="no">standard</code> 分析器适用于依赖分隔符（如空格、标点符号）作为单词边界的语言。但是，中文、日文和韩文等语言需要基于词典的标记化。在这种情况下，使用特定语言的分析器，如 <a href="/docs/zh/v2.5.x/chinese-analyzer.md"><code translate="no">chinese</code></a>或带有专门标记符号化器的自定义分析器（如 <a href="/docs/zh/v2.5.x/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/zh/v2.5.x/icu-tokenizer.md"><code translate="no">icu</code></a>）和过滤器，以确保准确的标记化和更好的搜索结果。</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">定义<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +39,7 @@ summary: 标准分析器是 Milvus 的默认分析器，如果没有指定分析
       </svg>
     </button></h2><p><code translate="no">standard</code> 分析器包括</p>
 <ul>
-<li><p><strong>标记化器</strong>：使用<code translate="no">standard</code> 标记符号化器，根据语法规则将文本分割成离散的单词单位。更多信息，请参阅<a href="/docs/zh/v2.5.x/standard-tokenizer.md">标准</a>。</p></li>
+<li><p><strong>标记化器</strong>：使用<code translate="no">standard</code> 标记符号化器，根据语法规则将文本分割成离散的单词单元。更多信息，请参阅<a href="/docs/zh/v2.5.x/standard-tokenizer.md">标准</a>。</p></li>
 <li><p><strong>过滤器</strong>：使用<code translate="no">lowercase</code><a href="/docs/zh/v2.5.x/lowercase-filter.md"> 过滤器</a>将所有标记转换为小写，从而实现不区分大小写的搜索。更多信息，请参阅</p></li>
 </ul>
 <p><code translate="no">standard</code> 分析器的功能相当于以下自定义分析器配置：</p>
@@ -190,7 +192,6 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

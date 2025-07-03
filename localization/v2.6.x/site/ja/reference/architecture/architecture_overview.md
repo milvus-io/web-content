@@ -18,7 +18,7 @@ title: Milvusアーキテクチャの概要
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusは<strong>オープンソースの</strong> <strong>クラウドネイティブな</strong>ベクトルデータベースであり、膨大なベクトルデータセットの高性能な類似検索用に設計されています。Faiss、HNSW、DiskANN、SCANNを含む一般的なベクトル検索ライブラリの上に構築され、AIアプリケーションや非構造化データ検索シナリオを強化します。先に進む前に、埋め込み検索の<a href="/docs/ja/v2.6.x/glossary.md">基本原理を</a>理解してください。</p>
+    </button></h1><p>Milvusは<strong>オープンソースの</strong> <strong>クラウドネイティブな</strong>ベクトルデータベースであり、膨大なベクトルデータセットの高性能な類似検索用に設計されています。Faiss、HNSW、DiskANN、SCANNを含む一般的なベクトル検索ライブラリの上に構築され、AIアプリケーションや非構造化データ検索シナリオを強化します。先に進む前に、埋め込み検索の<a href="/docs/ja/glossary.md">基本原理について</a>よく理解してください。</p>
 <h2 id="Architecture-Diagram" class="common-anchor-header">アーキテクチャ図<button data-href="#Architecture-Diagram" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,9 +85,9 @@ title: Milvusアーキテクチャの概要
 <li><strong>履歴データ管理</strong>：コンパクションやインデックス構築などのオフラインタスクをデータノードに分散し、セグメントとデータビューのトポロジーを管理する。</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">レイヤー3：ワーカー・ノード</h3><p>手足。ワーカーノードはコーディネーターの指示に従うダムエグゼキューターです。ワーカーノードはストレージと計算を分離しているためステートレスであり、Kubernetesにデプロイすることでシステムのスケールアウトやディザスタリカバリを容易にすることができる。ワーカーノードには3つのタイプがある：</p>
-<h3 id="Streaming-node" class="common-anchor-header">ストリーミングノード</h3><p>Streaming Nodeは、シャードレベルの「ミニ頭脳」として機能し、基礎となるWAL Storageに基づいてシャードレベルの一貫性保証と障害回復を提供する。一方、ストリーミング・ノードは、データ・クエリの増大とクエリ・プランの生成も担当する。さらに、成長データの密封（履歴）データへの変換も行う。</p>
-<h3 id="Query-node" class="common-anchor-header">クエリーノード</h3><p>クエリーノードはオブジェクトストレージからヒストリカルデータをロードし、ヒストリカルデータクエリーを提供します。</p>
-<h3 id="Data-node" class="common-anchor-header">データノード</h3><p>データノードは、コンパクションやインデックス構築など、履歴データのオフライン処理を担当します。</p>
+<h3 id="Streaming-node" class="common-anchor-header">ストリーミングノード</h3><p>Streaming Nodeはシャードレベルの "ミニ頭脳 "として機能し、シャードレベルの一貫性保証と、基礎となるWAL Storageに基づく障害復旧を提供する。一方、Streaming Nodeはデータクエリの増大とクエリプランの生成も担当する。さらに、成長データを密封（履歴）データに変換する処理も行う。</p>
+<h3 id="Query-node" class="common-anchor-header">クエリーノード</h3><p>クエリーノードはオブジェクトストレージから履歴データをロードし、履歴データのクエリーを提供します。</p>
+<h3 id="Data-node" class="common-anchor-header">データノード</h3><p>データノードは、コンパクションやインデックス構築など、履歴データのオフライン処理を担当する。</p>
 <h3 id="Layer-4-Storage" class="common-anchor-header">レイヤー4：ストレージ</h3><p>ストレージはシステムの骨格であり、データの永続性を担う。メタ・ストレージ、ログ・ブローカー、オブジェクト・ストレージで構成される。</p>
 <h3 id="Meta-storage" class="common-anchor-header">メタ・ストレージ</h3><p>メタ・ストレージは、コレクション・スキーマやメッセージ消費チェックポイントなどのメタデータのスナップショットを保存する。メタデータの保存には極めて高い可用性、強力な一貫性、トランザクションサポートが要求されるため、Milvusはメタ・ストレージにetcdを選択した。Milvusはサービスの登録とヘルスチェックにもetcdを使用している。</p>
 <h3 id="Object-storage" class="common-anchor-header">オブジェクトストレージ</h3><p>オブジェクトストレージには、ログのスナップショットファイル、スカラーデータおよびベクトルデータのインデックスファイル、クエリの中間結果が格納される。MilvusはオブジェクトストレージとしてMinIOを使用しており、AWS S3やAzure Blobといった世界で最も利用されているコスト効率の高いストレージサービスに容易に導入することができる。しかし、オブジェクトストレージはアクセスレイテンシーが高く、クエリー数によって課金される。パフォーマンスを向上させ、コストを下げるために、milvusはメモリまたはSSDベースのキャッシュプール上にコールド・ホット・データ分離を実装する予定である。</p>
@@ -135,7 +135,7 @@ title: Milvusアーキテクチャの概要
 <li>データはリアルタイムで処理され、クエリに利用可能になる</li>
 <li>セグメントが容量に達すると、Streaming Nodeは密封されたセグメントへの変換をトリガーする</li>
 <li>データノードがコンパクションを行い、密封されたセグメント上にインデックスを構築し、結果をオブジェクトストレージに格納する。</li>
-<li>クエリノードは新しく構築されたインデックスを読み込み、対応する成長データを置き換える。</li>
+<li>クエリーノードが新しく構築されたインデックスを読み込み、対応する成長データを置き換える。</li>
 </ol>
 <h2 id="Whats-Next" class="common-anchor-header">次のページ<button data-href="#Whats-Next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ title: Milvusアーキテクチャの概要
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/v2.6.x/main_components.md">メインコンポーネントの</a>詳細な実装を見る</li>
-<li><a href="/docs/ja/v2.6.x/data_processing.md">データ処理の</a>ワークフローと最適化戦略について学ぶ</li>
-<li>Milvusの<a href="/docs/ja/v2.6.x/consistency.md">一貫性</a>モデルとトランザクション保証について理解する。</li>
+<li><a href="/docs/ja/main_components.md">メインコンポーネントの</a>詳細な実装を見る</li>
+<li><a href="/docs/ja/data_processing.md">データ処理の</a>ワークフローと最適化戦略について学ぶ</li>
+<li>Milvusの<a href="/docs/ja/consistency.md">一貫性</a>モデルとトランザクション保証について理解する。</li>
 </ul>

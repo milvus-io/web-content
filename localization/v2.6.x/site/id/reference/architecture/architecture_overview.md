@@ -20,7 +20,7 @@ title: Gambaran Umum Arsitektur Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus adalah basis data vektor <strong>open-source</strong>, <strong>cloud-native</strong> yang dirancang untuk pencarian kemiripan berkinerja tinggi pada set data vektor yang sangat besar. Dibangun di atas pustaka pencarian vektor yang populer, termasuk Faiss, HNSW, DiskANN, dan SCANN, Milvus memberdayakan aplikasi AI dan skenario pencarian data yang tidak terstruktur. Sebelum melanjutkan, biasakan diri Anda dengan <a href="/docs/id/v2.6.x/glossary.md">prinsip-prinsip dasar</a> pengambilan embedding.</p>
+    </button></h1><p>Milvus adalah basis data vektor <strong>open-source</strong>, <strong>cloud-native</strong> yang dirancang untuk pencarian kemiripan berkinerja tinggi pada set data vektor yang sangat besar. Dibangun di atas pustaka pencarian vektor yang populer, termasuk Faiss, HNSW, DiskANN, dan SCANN, Milvus memberdayakan aplikasi AI dan skenario pencarian data yang tidak terstruktur. Sebelum melanjutkan, biasakan diri Anda dengan <a href="/docs/id/glossary.md">prinsip-prinsip dasar</a> pengambilan embedding.</p>
 <h2 id="Architecture-Diagram" class="common-anchor-header">Diagram Arsitektur<button data-href="#Architecture-Diagram" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +87,7 @@ title: Gambaran Umum Arsitektur Milvus
 <li><strong>Manajemen Data Historis</strong>: Mendistribusikan tugas-tugas offline seperti pemadatan dan pembuatan indeks ke Node Data, dan mengelola topologi segmen dan tampilan data.</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">Lapisan 3: Simpul Pekerja</h3><p>Lengan dan kaki. Node pekerja adalah eksekutor bodoh yang mengikuti instruksi dari koordinator. Node pekerja tidak memiliki kewarganegaraan berkat pemisahan penyimpanan dan komputasi, dan dapat memfasilitasi peningkatan skala sistem dan pemulihan bencana saat digunakan di Kubernetes. Ada tiga jenis simpul pekerja:</p>
-<h3 id="Streaming-node" class="common-anchor-header">Node streaming</h3><p>Streaming node berfungsi sebagai "otak mini" tingkat pecahan, memberikan jaminan konsistensi tingkat pecahan dan pemulihan kesalahan berdasarkan WAL Storage yang mendasarinya. Sementara itu, Streaming Node juga bertanggung jawab untuk mengembangkan kueri data dan menghasilkan rencana kueri. Selain itu, node ini juga menangani konversi data yang terus bertambah menjadi data yang tersegel (historis).</p>
+<h3 id="Streaming-node" class="common-anchor-header">Node streaming</h3><p>Streaming Node berfungsi sebagai "otak mini" tingkat pecahan, memberikan jaminan konsistensi tingkat pecahan dan pemulihan kesalahan berdasarkan WAL Storage yang mendasarinya. Sementara itu, Streaming Node juga bertanggung jawab untuk mengembangkan kueri data dan menghasilkan rencana kueri. Selain itu, node ini juga menangani konversi data yang terus bertambah menjadi data yang tersegel (historis).</p>
 <h3 id="Query-node" class="common-anchor-header">Node kueri</h3><p>Query node memuat data historis dari penyimpanan objek, dan menyediakan kueri data historis.</p>
 <h3 id="Data-node" class="common-anchor-header">Simpul data</h3><p>Simpul data bertanggung jawab untuk pemrosesan data historis secara offline, seperti pemadatan dan pembuatan indeks.</p>
 <h3 id="Layer-4-Storage" class="common-anchor-header">Lapisan 4: Penyimpanan</h3><p>Penyimpanan adalah tulang dari sistem, yang bertanggung jawab atas persistensi data. Ini terdiri dari penyimpanan meta, perantara log, dan penyimpanan objek.</p>
@@ -155,7 +155,7 @@ title: Gambaran Umum Arsitektur Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Jelajahi <a href="/docs/id/v2.6.x/main_components.md">Komponen Utama</a> untuk mengetahui detail implementasi secara spesifik</li>
-<li>Pelajari tentang alur kerja <a href="/docs/id/v2.6.x/data_processing.md">Pemrosesan Data</a> dan strategi pengoptimalan</li>
-<li>Memahami <a href="/docs/id/v2.6.x/consistency.md">Model Konsistensi</a> dan jaminan transaksi di Milvus</li>
+<li>Jelajahi <a href="/docs/id/main_components.md">Komponen Utama</a> untuk mengetahui detail implementasi secara spesifik</li>
+<li>Pelajari tentang alur kerja <a href="/docs/id/data_processing.md">Pemrosesan Data</a> dan strategi pengoptimalan</li>
+<li>Memahami <a href="/docs/id/consistency.md">Model Konsistensi</a> dan jaminan transaksi di Milvus</li>
 </ul>

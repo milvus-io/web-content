@@ -57,7 +57,7 @@ title: Docker ComposeでMilvusを起動する(Linux)
       </svg>
     </button></h2><p>MilvusはDocker Composeの設定ファイルをMilvusリポジトリに用意しています。Docker Composeを使用してMilvusをインストールするには、以下のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -76,7 +76,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-standalone</strong>、<strong>milvus-minio</strong>、<strong>milvus-etcdという</strong>名前のコンテナが立ち上がっています。<ul>
 <li><strong>milvus-etcd</strong>コンテナはホストにポートを公開せず、カレントフォルダ内の<strong>volumes/etcdに</strong>データをマッピングする。</li>
-<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータをカレントフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
+<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
 <li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルにポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマップする。</li>
 </ul></li>
 </ul>

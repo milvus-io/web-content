@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "무작위 샘플링",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2281,7 +2287,7 @@
             "children": []
           },
           {
-            "label": "SiliconFlow",
+            "label": "실리콘 플로우",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []

@@ -20,7 +20,7 @@ title: Panoramica dell'architettura di Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus è un database vettoriale <strong>open-source</strong> e <strong>cloud-native</strong> progettato per la ricerca di similarità ad alte prestazioni su enormi insiemi di dati vettoriali. Costruito sulla base delle più diffuse librerie di ricerca vettoriale, tra cui Faiss, HNSW, DiskANN e SCANN, consente applicazioni di intelligenza artificiale e scenari di recupero di dati non strutturati. Prima di procedere, è necessario familiarizzare con i <a href="/docs/it/v2.6.x/glossary.md">principi di base</a> dell'embedding retrieval.</p>
+    </button></h1><p>Milvus è un database vettoriale <strong>open-source</strong> e <strong>cloud-native</strong> progettato per la ricerca di similarità ad alte prestazioni su enormi insiemi di dati vettoriali. Costruito sulla base delle più diffuse librerie di ricerca vettoriale, tra cui Faiss, HNSW, DiskANN e SCANN, consente applicazioni di intelligenza artificiale e scenari di recupero di dati non strutturati. Prima di procedere, è necessario familiarizzare con i <a href="/docs/it/glossary.md">principi di base</a> dell'embedding retrieval.</p>
 <h2 id="Architecture-Diagram" class="common-anchor-header">Diagramma dell'architettura<button data-href="#Architecture-Diagram" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,8 +87,8 @@ title: Panoramica dell'architettura di Milvus
 <li><strong>Gestione dei dati storici</strong>: Distribuisce le attività offline, come la compattazione e la creazione di indici, ai Data Nodes e gestisce la topologia dei segmenti e delle viste dei dati.</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">Livello 3: Nodi lavoratori</h3><p>Le braccia e le gambe. I nodi worker sono esecutori muti che seguono le istruzioni del coordinatore. I nodi worker sono stateless grazie alla separazione di storage e calcolo e possono facilitare lo scale-out del sistema e il disaster recovery quando sono distribuiti su Kubernetes. Esistono tre tipi di nodi worker:</p>
-<h3 id="Streaming-node" class="common-anchor-header">Nodo di streaming</h3><p>Il nodo di streaming funge da "mini-cervello" a livello di shard, fornendo garanzie di coerenza a livello di shard e il recupero degli errori basato sul WAL Storage sottostante. Nel frattempo, lo Streaming Node è anche responsabile dell'interrogazione dei dati in crescita e della generazione dei piani di query. Inoltre, gestisce anche la conversione dei dati in crescita in dati sigillati (storici).</p>
-<h3 id="Query-node" class="common-anchor-header">Nodo Query</h3><p>Il nodo Query carica i dati storici dall'object storage e fornisce l'interrogazione dei dati storici.</p>
+<h3 id="Streaming-node" class="common-anchor-header">Nodo di streaming</h3><p>Lo Streaming Node funge da "mini-cervello" a livello di shard, fornendo garanzie di coerenza a livello di shard e il ripristino degli errori basato sul WAL Storage sottostante. Nel frattempo, lo Streaming Node è anche responsabile dell'interrogazione dei dati in crescita e della generazione dei piani di query. Inoltre, gestisce anche la conversione dei dati in crescita in dati sigillati (storici).</p>
+<h3 id="Query-node" class="common-anchor-header">Nodo di interrogazione</h3><p>Il nodo Query carica i dati storici dall'object storage e fornisce l'interrogazione dei dati storici.</p>
 <h3 id="Data-node" class="common-anchor-header">Nodo dati</h3><p>Il nodo Dati è responsabile dell'elaborazione offline dei dati storici, come la compattazione e la creazione di indici.</p>
 <h3 id="Layer-4-Storage" class="common-anchor-header">Livello 4: archiviazione</h3><p>Lo storage è l'ossatura del sistema, responsabile della persistenza dei dati. Comprende il meta storage, il log broker e l'object storage.</p>
 <h3 id="Meta-storage" class="common-anchor-header">Meta storage</h3><p>Il meta storage memorizza le istantanee dei metadati, come gli schemi di raccolta e i checkpoint di consumo dei messaggi. La memorizzazione dei metadati richiede una disponibilità estremamente elevata, una forte coerenza e il supporto delle transazioni, quindi Milvus ha scelto etcd per il meta storage. Milvus utilizza etcd anche per la registrazione dei servizi e il controllo dello stato di salute.</p>
@@ -118,7 +118,7 @@ title: Panoramica dell'architettura di Milvus
 </thead>
 <tbody>
 <tr><td><strong>DDL/DCL</strong></td><td>Schema e controllo dell'accesso</td><td><code translate="no">createCollection</code>, <code translate="no">dropCollection</code>, <code translate="no">hasCollection</code>, <code translate="no">createPartition</code></td><td>Livello di accesso → Coordinatore</td></tr>
-<tr><td><strong>DML</strong></td><td>Manipolazione dei dati</td><td><code translate="no">insert</code>, <code translate="no">delete</code>, <code translate="no">upsert</code></td><td>Livello di accesso → Nodo operaio di streaming</td></tr>
+<tr><td><strong>DML</strong></td><td>Manipolazione dei dati</td><td><code translate="no">insert</code>, <code translate="no">delete</code>, <code translate="no">upsert</code></td><td>Livello di accesso → Nodo di lavoro in streaming</td></tr>
 <tr><td><strong>DQL</strong></td><td>Interrogazione dati</td><td><code translate="no">search</code>, <code translate="no">query</code></td><td>Livello di accesso → Nodo di lavoro batch (nodi di interrogazione)</td></tr>
 </tbody>
 </table>
@@ -155,7 +155,7 @@ title: Panoramica dell'architettura di Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Esplorare i <a href="/docs/it/v2.6.x/main_components.md">componenti principali</a> per conoscere le specifiche dell'implementazione</li>
-<li>Imparare a conoscere i flussi di lavoro <a href="/docs/it/v2.6.x/data_processing.md">dell'elaborazione dei dati</a> e le strategie di ottimizzazione</li>
-<li>Comprendere il <a href="/docs/it/v2.6.x/consistency.md">modello di consistenza</a> e le garanzie di transazione in Milvus</li>
+<li>Esplorare i <a href="/docs/it/main_components.md">componenti principali</a> per conoscere le specifiche dell'implementazione</li>
+<li>Imparare a conoscere i flussi di lavoro <a href="/docs/it/data_processing.md">dell'elaborazione dei dati</a> e le strategie di ottimizzazione</li>
+<li>Comprendere il <a href="/docs/it/consistency.md">modello di consistenza</a> e le garanzie di transazione in Milvus</li>
 </ul>

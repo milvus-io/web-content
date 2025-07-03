@@ -90,7 +90,7 @@ title: Gerenciar grupos de recursos
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Todos os exemplos de código nesta página estão no PyMilvus 2.5.11. Atualize sua instalação do PyMilvus antes de executá-los.</p>
+<p>Todos os exemplos de código nesta página estão no PyMilvus 2.5.12. Atualize sua instalação do PyMilvus antes de executá-los.</p>
 </div>
 <ol>
 <li><p>Criar um grupo de recursos.</p>
@@ -231,7 +231,7 @@ except Exception:
       </svg>
     </button></h2><p>Atualmente, o Milvus não pode ser escalado de forma independente em ambientes nativos da nuvem. No entanto, ao usar a <strong>API Declarative Resource Group</strong> em conjunto com a orquestração de contêineres, o Milvus pode facilmente obter o isolamento e o gerenciamento de recursos para QueryNodes. Aqui está uma boa prática para gerenciar QueryNodes em um ambiente de nuvem:</p>
 <ol>
-<li><p>Por padrão, o Milvus cria um <strong>__default_resource_group</strong>. Este grupo de recursos não pode ser eliminado e serve igualmente de grupo de recursos de carregamento por defeito para todas as colecções e os QueryNodes redundantes são-lhe sempre atribuídos. Por conseguinte, podemos criar um grupo de recursos pendentes para manter os recursos QueryNode não utilizados, impedindo que os recursos QueryNode sejam ocupados pelo <strong>__default_resource_group</strong>.</p>
+<li><p>Por padrão, o Milvus cria um <strong>__default_resource_group</strong>. Este grupo de recursos não pode ser eliminado e serve igualmente de grupo de recursos de carregamento por defeito para todas as colecções e os QueryNodes redundantes são-lhe sempre atribuídos. Por conseguinte, podemos criar um grupo de recursos pendentes para manter os recursos QueryNode não utilizados, impedindo que os recursos QueryNode sejam ocupados pelo grupo <strong>__default_resource_group</strong>.</p>
 <p>Além disso, se aplicarmos rigorosamente a restrição <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, podemos controlar com precisão a atribuição de QueryNodes no cluster. Vamos assumir que existe atualmente apenas um QueryNode no cluster e inicializar o cluster. Aqui está um exemplo de configuração:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -329,7 +329,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>As réplicas de uma única coleção e os grupos de recursos têm uma relação N para N.</li>
-<li>Quando várias réplicas de uma única coleção são carregadas em um grupo de recursos, os QueryNodes desse grupo de recursos são distribuídos uniformemente entre as réplicas, garantindo que a diferença no número de QueryNodes que cada réplica tem não exceda 1.</li>
+<li>Quando várias réplicas de uma única coleção são carregadas em um grupo de recursos, os QueryNodes desse grupo de recursos são distribuídos uniformemente entre as réplicas, garantindo que a diferença no número de QueryNodes de cada réplica não exceda 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

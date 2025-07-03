@@ -6,7 +6,6 @@ summary: >-
   حقول النص إذا لم يتم تحديد محلل. وهو يستخدم الترميز القائم على القواعد
   النحوية، مما يجعله فعالاً لمعظم اللغات.
 ---
-
 <h1 id="Standard-Analyzer" class="common-anchor-header">المحلل القياسي<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,6 +22,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>محلل <code translate="no">standard</code> هو المحلل الافتراضي في ميلفوس، والذي يتم تطبيقه تلقائيًا على حقول النص إذا لم يتم تحديد محلل. وهو يستخدم الترميز القائم على القواعد النحوية، مما يجعله فعالاً لمعظم اللغات.</p>
+<div class="alert note">
+<p>يعد محلل <code translate="no">standard</code> مناسبًا للغات التي تعتمد على الفواصل (مثل المسافات وعلامات الترقيم) لحدود الكلمات. ومع ذلك، فإن لغات مثل الصينية واليابانية والكورية تتطلب ترميزات قائمة على القاموس. في مثل هذه الحالات، فإن استخدام مُحلل خاص باللغة مثل <a href="/docs/ar/v2.5.x/chinese-analyzer.md"><code translate="no">chinese</code></a> أو محللات مخصصة مع أدوات تحليل رمزية متخصصة (مثل <a href="/docs/ar/v2.5.x/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ar/v2.5.x/icu-tokenizer.md"><code translate="no">icu</code></a>) والمرشحات يوصى بشدة لضمان ترميز دقيق ونتائج بحث أفضل.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">التعريف<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,7 +195,6 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

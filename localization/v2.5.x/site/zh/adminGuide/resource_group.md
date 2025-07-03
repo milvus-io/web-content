@@ -71,7 +71,7 @@ title: 管理资源组
 <p>以下情况除外：</p>
 <ul>
 <li>当 Milvus 集群中的 QueryNodes 数量不足时，即<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ，总会有资源组没有足够的 QueryNodes。</li>
-<li>当 Milvus 集群中的 QueryNodes 数量过多时，即<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ，多余的 QueryNodes 总是会被先放置在<strong>__default_resource_group</strong>中。</li>
+<li>当 Milvus 集群中的 QueryNodes 数量过多时，即<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ，多余的 QueryNodes 总是会先被放置在__default_<strong>resource</strong>_group。</li>
 </ul>
 <p>当然，如果集群中的 QueryNodes 数量发生变化，Milvus 会不断尝试调整以满足最终条件。因此，可以先应用资源组配置更改，然后再执行 QueryNode 扩展。</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">使用声明式 api 管理资源组<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ title: 管理资源组
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本页面上的所有代码示例都在 PyMilvus 2.5.11 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
+<p>本页面上的所有代码示例都在 PyMilvus 2.5.12 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
 </div>
 <ol>
 <li><p>创建资源组。</p>
@@ -136,7 +136,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>在资源组之间转移节点。</p>
-<p>您可能会注意到，所描述的资源组还没有任何查询节点。将一些节点从默认资源组转移到你创建的资源组，如下所示： 假设集群的<strong>__default_resource_group</strong>中目前有 1 个查询节点，我们想将一个节点转移到创建的<strong>rg</strong> 中。<code translate="no">update_resource_groups</code> ，确保多个配置更改的原子性，因此 Milvus 不会看到任何中间状态。</p>
+<p>您可能会注意到，所描述的资源组还没有任何查询节点。将一些节点从默认资源组转移到你创建的资源组，如下所示： 假设集群的<strong>__default_resource_group</strong>中目前有 1 个查询节点，我们想将一个节点转移到创建的<strong>rg</strong> 中。<code translate="no">update_resource_groups</code> 确保多次配置更改的原子性，因此 Milvus 不会看到任何中间状态。</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>

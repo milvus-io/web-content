@@ -81,9 +81,12 @@ summary: >-
 <li><p><strong>Analyseur personnalisé</strong>: Pour des besoins plus avancés, les analyseurs personnalisés vous permettent de définir votre propre configuration en spécifiant à la fois le tokenizer et zéro ou plusieurs filtres. Ce niveau de personnalisation est particulièrement utile pour les cas d'utilisation spécialisés nécessitant un contrôle précis du traitement du texte.</p></li>
 </ul>
 <div class="alert note">
-<p>Si vous omettez les configurations de l'analyseur lors de la création de la collection, Milvus utilise par défaut l'analyseur <code translate="no">standard</code> pour tous les traitements de texte. Pour plus de détails, voir <a href="/docs/fr/standard-analyzer.md">Standard</a>.</p>
+<ul>
+<li>Si vous omettez les configurations de l'analyseur lors de la création de la collection, Milvus utilise par défaut l'analyseur <code translate="no">standard</code> pour tous les traitements de texte. Pour plus de détails, voir <a href="/docs/fr/standard-analyzer.md">Analyseur standard</a>.</li>
+<li>Pour des performances optimales en matière de recherche et de requête, choisissez un analyseur qui correspond à la langue de vos données textuelles. Par exemple, bien que l'analyseur <code translate="no">standard</code> soit polyvalent, il peut ne pas être le meilleur choix pour les langues ayant des structures grammaticales uniques, telles que le chinois, le japonais ou le coréen. Dans ce cas, il convient d'utiliser un analyseur spécifique à la langue, tel que <a href="/docs/fr/chinese-analyzer.md"><code translate="no">chinese</code></a> ou des analyseurs personnalisés avec des tokenizers spécialisés (tels que <a href="/docs/fr/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/fr/icu-tokenizer.md"><code translate="no">icu</code></a>) et des filtres est fortement recommandée pour garantir une tokenisation précise et de meilleurs résultats de recherche.</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Analyseur intégré</h3><p>Les analyseurs intégrés dans Milvus sont préconfigurés avec des tokenizers et des filtres spécifiques, ce qui vous permet de les utiliser immédiatement sans avoir à définir ces composants vous-même. Chaque analyseur intégré sert de modèle qui comprend un tokenizer et des filtres prédéfinis, avec des paramètres facultatifs pour la personnalisation.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Analyseur intégré</h3><p>Les analyseurs intégrés dans Milvus sont préconfigurés avec des tokenizers et des filtres spécifiques, ce qui vous permet de les utiliser immédiatement sans avoir à définir ces composants vous-même. Chaque analyseur intégré sert de modèle et comprend un tokenizer et des filtres prédéfinis, avec des paramètres facultatifs pour la personnalisation.</p>
 <p>Par exemple, pour utiliser l'analyseur intégré <code translate="no">standard</code>, il suffit de spécifier son nom <code translate="no">standard</code> comme <code translate="no">type</code> et d'inclure éventuellement des configurations supplémentaires spécifiques à ce type d'analyseur, telles que <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -492,7 +495,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Configurer et vérifier un analyseur personnalisé :</strong></p>
 <ul>
-<li><p><strong>Configuration :</strong> Définissez un analyseur personnalisé qui utilise un tokenizer standard avec un filtre minuscule intégré et des filtres personnalisés pour la longueur du token et les mots vides.</p></li>
+<li><p><strong>Configuration :</strong> Définir un analyseur personnalisé qui utilise un tokenizer standard avec un filtre minuscule intégré et des filtres personnalisés pour la longueur du token et les mots vides.</p></li>
 <li><p><strong>Vérification :</strong> Utilisez <code translate="no">run_analyzer</code> pour vous assurer que la configuration personnalisée traite le texte comme prévu.</p></li>
 </ul>
 <p><div class="multipleCode">

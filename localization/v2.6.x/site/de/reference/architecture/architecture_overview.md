@@ -21,7 +21,7 @@ title: Milvus Architektur Übersicht
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus ist eine <strong>quelloffene</strong>, <strong>Cloud-native</strong> Vektordatenbank, die für eine leistungsstarke Ähnlichkeitssuche in großen Vektordatensätzen entwickelt wurde. Sie basiert auf beliebten Vektorsuchbibliotheken wie Faiss, HNSW, DiskANN und SCANN und unterstützt KI-Anwendungen und unstrukturierte Datenabfrageszenarien. Bevor Sie fortfahren, machen Sie sich bitte mit den <a href="/docs/de/v2.6.x/glossary.md">Grundprinzipien</a> der Einbettungssuche vertraut.</p>
+    </button></h1><p>Milvus ist eine <strong>quelloffene</strong>, <strong>Cloud-native</strong> Vektordatenbank, die für eine leistungsstarke Ähnlichkeitssuche in großen Vektordatensätzen entwickelt wurde. Sie basiert auf beliebten Vektorsuchbibliotheken wie Faiss, HNSW, DiskANN und SCANN und unterstützt KI-Anwendungen und unstrukturierte Datenabfrageszenarien. Bevor Sie fortfahren, machen Sie sich bitte mit den <a href="/docs/de/glossary.md">Grundprinzipien</a> der Einbettungssuche vertraut.</p>
 <h2 id="Architecture-Diagram" class="common-anchor-header">Architektur-Diagramm<button data-href="#Architecture-Diagram" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,9 +88,9 @@ title: Milvus Architektur Übersicht
 <li><strong>Verwaltung historischer Daten</strong>: Verteilt Offline-Aufgaben wie Verdichtung und Indexerstellung an Datenknoten und verwaltet die Topologie von Segmenten und Datenansichten.</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">Schicht 3: Arbeiterknoten</h3><p>Die Arme und Beine. Worker Nodes sind stumme Ausführungsknoten, die den Anweisungen des Koordinators folgen. Worker Nodes sind dank der Trennung von Speicherung und Berechnung zustandslos und können die Skalierung des Systems und die Wiederherstellung im Notfall erleichtern, wenn sie in Kubernetes eingesetzt werden. Es gibt drei Arten von Worker Nodes:</p>
-<h3 id="Streaming-node" class="common-anchor-header">Streaming-Knoten</h3><p>Der Streaming Node dient als "Mini-Gehirn" auf Shard-Ebene und bietet Konsistenzgarantien auf Shard-Ebene sowie Fehlerwiederherstellung auf der Grundlage des zugrunde liegenden WAL-Speichers. Gleichzeitig ist der Streaming Node auch für die Abfrage von wachsenden Daten und die Erstellung von Abfrageplänen zuständig. Darüber hinaus übernimmt er auch die Umwandlung wachsender Daten in versiegelte (historische) Daten.</p>
+<h3 id="Streaming-node" class="common-anchor-header">Streaming Node</h3><p>Der Streaming Node dient als "Mini-Gehirn" auf Shard-Ebene und bietet Konsistenzgarantien auf Shard-Ebene sowie Fehlerbehebung auf der Grundlage des zugrunde liegenden WAL-Speichers. Gleichzeitig ist der Streaming Node auch für die Abfrage wachsender Daten und die Erstellung von Abfrageplänen zuständig. Darüber hinaus übernimmt er auch die Umwandlung wachsender Daten in versiegelte (historische) Daten.</p>
 <h3 id="Query-node" class="common-anchor-header">Abfrageknoten</h3><p>Der Abfrageknoten lädt die historischen Daten aus dem Objektspeicher und ermöglicht die Abfrage der historischen Daten.</p>
-<h3 id="Data-node" class="common-anchor-header">Datenknoten</h3><p>Der Datenknoten ist für die Offline-Verarbeitung historischer Daten zuständig, z. B. für die Verdichtung und den Indexaufbau.</p>
+<h3 id="Data-node" class="common-anchor-header">Datenknoten</h3><p>Der Datenknoten ist für die Offline-Verarbeitung historischer Daten zuständig, z. B. für die Verdichtung und den Aufbau von Indizes.</p>
 <h3 id="Layer-4-Storage" class="common-anchor-header">Schicht 4: Speicherung</h3><p>Die Speicherung ist das Herzstück des Systems und für die Datenpersistenz verantwortlich. Er umfasst Metaspeicher, Log-Broker und Objektspeicher.</p>
 <h3 id="Meta-storage" class="common-anchor-header">Metaspeicher</h3><p>Der Metaspeicher speichert Schnappschüsse von Metadaten wie Sammelschemata und Prüfpunkte für den Nachrichtenverbrauch. Die Speicherung von Metadaten erfordert extrem hohe Verfügbarkeit, starke Konsistenz und Transaktionsunterstützung, weshalb Milvus etcd als Metaspeicher gewählt hat. Milvus verwendet etcd auch für die Serviceregistrierung und Zustandsüberprüfung.</p>
 <h3 id="Object-storage" class="common-anchor-header">Objektspeicher</h3><p>Der Objektspeicher speichert Snapshot-Dateien von Protokollen, Indexdateien für skalare und Vektordaten sowie Zwischenergebnisse von Abfragen. Milvus verwendet MinIO als Objektspeicher und kann problemlos auf AWS S3 und Azure Blob eingesetzt werden, zwei der beliebtesten und kostengünstigsten Speicherdienste der Welt. Der Objektspeicher hat jedoch eine hohe Zugriffslatenz und wird nach der Anzahl der Abfragen berechnet. Um die Leistung zu verbessern und die Kosten zu senken, plant Milvus die Implementierung einer Kalt-Warm-Datentrennung auf einem speicher- oder SSD-basierten Cache-Pool.</p>
@@ -156,7 +156,7 @@ title: Milvus Architektur Übersicht
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erkunden Sie die <a href="/docs/de/v2.6.x/main_components.md">Hauptkomponenten</a> für detaillierte Implementierungsspezifika</li>
-<li>Lernen Sie die Arbeitsabläufe der <a href="/docs/de/v2.6.x/data_processing.md">Datenverarbeitung</a> und Optimierungsstrategien kennen</li>
-<li>Verstehen Sie das <a href="/docs/de/v2.6.x/consistency.md">Konsistenzmodell</a> und die Transaktionsgarantien in Milvus</li>
+<li>Erkunden Sie die <a href="/docs/de/main_components.md">Hauptkomponenten</a> für detaillierte Implementierungsspezifika</li>
+<li>Lernen Sie die Arbeitsabläufe der <a href="/docs/de/data_processing.md">Datenverarbeitung</a> und Optimierungsstrategien kennen</li>
+<li>Verstehen Sie das <a href="/docs/de/consistency.md">Konsistenzmodell</a> und die Transaktionsgarantien in Milvus</li>
 </ul>

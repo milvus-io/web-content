@@ -22,6 +22,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>محلل <code translate="no">standard</code> هو المحلل الافتراضي في ميلفوس، والذي يتم تطبيقه تلقائيًا على حقول النص إذا لم يتم تحديد محلل. وهو يستخدم الترميز القائم على القواعد النحوية، مما يجعله فعالاً لمعظم اللغات.</p>
+<div class="alert note">
+<p>يعد محلل <code translate="no">standard</code> مناسبًا للغات التي تعتمد على الفواصل (مثل المسافات وعلامات الترقيم) لحدود الكلمات. ومع ذلك، فإن لغات مثل الصينية واليابانية والكورية تتطلب ترميزات قائمة على القاموس. في مثل هذه الحالات، يمكن استخدام مُحلل خاص باللغة مثل <a href="/docs/ar/chinese-analyzer.md"><code translate="no">chinese</code></a> أو محللات مخصصة مع أدوات تحليل رمزية متخصصة (مثل <a href="/docs/ar/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ar/icu-tokenizer.md"><code translate="no">icu</code></a>) والمرشحات يوصى بشدة لضمان ترميز دقيق ونتائج بحث أفضل.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">التعريف<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

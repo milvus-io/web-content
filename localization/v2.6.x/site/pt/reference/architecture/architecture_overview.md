@@ -20,7 +20,7 @@ title: Visão geral da arquitetura do Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus é um banco de dados vetorial de <strong>código aberto</strong> e <strong>nativo da nuvem</strong> projetado para pesquisa de similaridade de alto desempenho em conjuntos de dados vetoriais maciços. Criado com base em bibliotecas populares de pesquisa vetorial, incluindo Faiss, HNSW, DiskANN e SCANN, ele capacita aplicativos de IA e cenários de recuperação de dados não estruturados. Antes de prosseguir, familiarize-se com os <a href="/docs/pt/v2.6.x/glossary.md">princípios básicos</a> da recuperação de incorporação.</p>
+    </button></h1><p>O Milvus é um banco de dados vetorial de <strong>código aberto</strong> e <strong>nativo da nuvem</strong> projetado para pesquisa de similaridade de alto desempenho em conjuntos de dados vetoriais maciços. Criado com base em bibliotecas populares de pesquisa vetorial, incluindo Faiss, HNSW, DiskANN e SCANN, ele capacita aplicativos de IA e cenários de recuperação de dados não estruturados. Antes de continuar, familiarize-se com os <a href="/docs/pt/glossary.md">princípios básicos</a> da recuperação de incorporação.</p>
 <h2 id="Architecture-Diagram" class="common-anchor-header">Diagrama de arquitetura<button data-href="#Architecture-Diagram" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +87,7 @@ title: Visão geral da arquitetura do Milvus
 <li><strong>Gestão de dados históricos</strong>: Distribui tarefas offline, como compactação e construção de índices para nós de dados, e gerencia a topologia de segmentos e visualizações de dados.</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">Camada 3: Nós de trabalho</h3><p>Os braços e as pernas. Os nós de trabalho são executores burros que seguem as instruções do coordenador. Os nós de trabalho não têm estado graças à separação do armazenamento e da computação, e podem facilitar a expansão do sistema e a recuperação de desastres quando implantados no Kubernetes. Há três tipos de nós de trabalho:</p>
-<h3 id="Streaming-node" class="common-anchor-header">Nó de streaming</h3><p>O nó de streaming funciona como o "mini-cérebro" ao nível do shard, fornecendo garantias de consistência ao nível do shard e recuperação de falhas com base no armazenamento WAL subjacente. Entretanto, o nó de fluxo contínuo também é responsável pela consulta de dados crescentes e pela geração de planos de consulta. Além disso, também trata da conversão de dados crescentes em dados selados (históricos).</p>
+<h3 id="Streaming-node" class="common-anchor-header">Nó de streaming</h3><p>O Streaming Node funciona como o "mini-cérebro" ao nível do shard, fornecendo garantias de consistência ao nível do shard e recuperação de falhas com base no armazenamento WAL subjacente. Entretanto, o Streaming Node também é responsável pela consulta de dados crescentes e pela geração de planos de consulta. Além disso, também lida com a conversão de dados crescentes em dados selados (históricos).</p>
 <h3 id="Query-node" class="common-anchor-header">Nó de consulta</h3><p>O nó de consulta carrega os dados históricos do armazenamento de objectos e fornece a consulta de dados históricos.</p>
 <h3 id="Data-node" class="common-anchor-header">Nó de dados</h3><p>O nó de dados é responsável pelo processamento offline dos dados históricos, como a compactação e a criação de índices.</p>
 <h3 id="Layer-4-Storage" class="common-anchor-header">Camada 4: Armazenamento</h3><p>O armazenamento é o osso do sistema, responsável pela persistência dos dados. Inclui meta-armazenamento, corretor de registos e armazenamento de objectos.</p>
@@ -127,7 +127,7 @@ title: Visão geral da arquitetura do Milvus
 <li>O balanceador de carga encaminha o pedido para o proxy disponível na camada de acesso</li>
 <li>O proxy utiliza a cache de encaminhamento para determinar os nós de destino; contacta o coordenador apenas se a cache não estiver disponível</li>
 <li>O proxy encaminha o pedido para os nós de streaming adequados, que depois coordenam com os nós de consulta para a pesquisa de dados selados enquanto executam localmente a pesquisa de dados crescentes</li>
-<li>Os nós de consulta carregam segmentos selados a partir do Object Storage, conforme necessário, e efectuam a pesquisa ao nível dos segmentos</li>
+<li>Os nós de consulta carregam segmentos selados do Object Storage conforme necessário e efectuam a pesquisa ao nível do segmento</li>
 <li>Os resultados da pesquisa são submetidos a uma redução multinível: Os nós de consulta reduzem os resultados em vários segmentos, os nós de streaming reduzem os resultados dos nós de consulta e o proxy reduz os resultados de todos os nós de streaming antes de retornar ao cliente</li>
 </ol>
 <h3 id="Example-Data-Flow-Data-Insertion" class="common-anchor-header">Exemplo de fluxo de dados: inserção de dados</h3><ol>
@@ -155,7 +155,7 @@ title: Visão geral da arquitetura do Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Explore os <a href="/docs/pt/v2.6.x/main_components.md">componentes principais</a> para obter detalhes específicos de implementação</li>
-<li>Saiba mais sobre fluxos de trabalho <a href="/docs/pt/v2.6.x/data_processing.md">de processamento de dados</a> e estratégias de otimização</li>
-<li>Compreender o <a href="/docs/pt/v2.6.x/consistency.md">Modelo de Consistência</a> e as garantias de transação em Milvus</li>
+<li>Explore os <a href="/docs/pt/main_components.md">componentes principais</a> para obter detalhes específicos de implementação</li>
+<li>Saiba mais sobre fluxos de trabalho <a href="/docs/pt/data_processing.md">de processamento de dados</a> e estratégias de otimização</li>
+<li>Compreender o <a href="/docs/pt/consistency.md">Modelo de Consistência</a> e as garantias de transação em Milvus</li>
 </ul>

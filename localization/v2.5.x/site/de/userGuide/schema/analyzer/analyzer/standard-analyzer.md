@@ -7,7 +7,6 @@ summary: >-
   verwendet eine grammatikbasierte Tokenisierung und ist daher für die meisten
   Sprachen geeignet.
 ---
-
 <h1 id="Standard-Analyzer" class="common-anchor-header">Standard-Analysator<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,6 +23,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Der <code translate="no">standard</code> Analyzer ist der Standard-Analyzer in Milvus, der automatisch auf Textfelder angewendet wird, wenn kein Analyzer angegeben ist. Er verwendet eine grammatikbasierte Tokenisierung und ist daher für die meisten Sprachen geeignet.</p>
+<div class="alert note">
+<p>Der <code translate="no">standard</code> Analyzer ist für Sprachen geeignet, die auf Trennzeichen (wie Leerzeichen, Satzzeichen) für Wortgrenzen angewiesen sind. Sprachen wie Chinesisch, Japanisch und Koreanisch erfordern jedoch eine wörterbuchbasierte Tokenisierung. In solchen Fällen ist die Verwendung eines sprachspezifischen Analysators wie <a href="/docs/de/v2.5.x/chinese-analyzer.md"><code translate="no">chinese</code></a> oder benutzerdefinierte Analyzer mit spezialisierten Tokenizern (z. B. <a href="/docs/de/v2.5.x/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/de/v2.5.x/icu-tokenizer.md"><code translate="no">icu</code></a>) und Filtern wird dringend empfohlen, um eine genaue Tokenisierung und bessere Suchergebnisse zu gewährleisten.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">Definition<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +43,7 @@ summary: >-
       </svg>
     </button></h2><p>Der <code translate="no">standard</code> Analyzer besteht aus:</p>
 <ul>
-<li><p><strong>Tokenisierer</strong>: Verwendet den <code translate="no">standard</code> Tokenizer, um Text auf der Grundlage von Grammatikregeln in diskrete Worteinheiten aufzuteilen. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/standard-tokenizer.md">Standard</a>.</p></li>
+<li><p><strong>Tokenisierer</strong>: Verwendet den <code translate="no">standard</code> Tokenizer, um Text auf der Grundlage von Grammatikregeln in diskrete Worteinheiten zu zerlegen. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/standard-tokenizer.md">Standard</a>.</p></li>
 <li><p><strong>Filter</strong>: Verwendet den <code translate="no">lowercase</code><a href="/docs/de/v2.5.x/lowercase-filter.md"> Filter</a>, um alle Token in Kleinbuchstaben umzuwandeln und so eine Suche ohne Berücksichtigung der Groß-/Kleinschreibung zu ermöglichen. Weitere Informationen finden Sie unter</p></li>
 </ul>
 <p>Die Funktionalität des <code translate="no">standard</code> Analyzers entspricht der folgenden benutzerdefinierten Analyzer-Konfiguration:</p>
@@ -194,7 +196,6 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

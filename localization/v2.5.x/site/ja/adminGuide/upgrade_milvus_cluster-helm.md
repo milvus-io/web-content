@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusのアップグレードパスは以下のように選択できます：</p>
-<div style="display: none;">- Milvus v2.2.3およびそれ以降のリリースからv2.5.13への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
+<div style="display: none;">- Milvus v2.2.3以降からv2.5.14への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.5.13へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
-<li><p>Milvus v2.1.xからv2.5.13へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.5.14へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
+<li><p>Milvus v2.1.xからv2.5.14へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">ローリングアップグレードの実施<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作方法</td><td><code translate="no">update</code></td><td>偽</td></tr>
 </tbody>
 </table>
-<p>Milvusインスタンスのすべてのデプロイメントが正常な状態であることを確認したら、以下のコマンドを実行してMilvusインスタンスを2.5.13にアップグレードします。以下のコマンドを実行することで、Milvusインスタンスを2.5.13にアップグレードすることができます。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
+<p>Milvusインスタンスのすべてのデプロイメントが正常な状態であることを確認したら、以下のコマンドを実行してMilvusインスタンスを2.5.14にアップグレードします。以下のコマンドを実行することで、Milvusインスタンスを2.5.14にアップグレードすることができます。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.14 -w &#x27;milvusdb/milvus:v2.5.14&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -192,7 +192,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.
         ></path>
       </svg>
     </button></h2><p>Milvus 2.2.0からメタデータに互換性がなくなりました。以下の例はMilvus 2.1.4からMilvus 2.2.0へのアップグレードを想定しています。</p>
-<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1.Milvusバージョンの確認</h3><p><code translate="no">$ helm list</code> を実行し、Milvusアプリのバージョンを確認します。<code translate="no">APP VERSION</code> は 2.1.4 です。</p>
+<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1.Milvusバージョンの確認</h3><p><code translate="no">$ helm list</code> を実行し、Milvusアプリのバージョンを確認します。<code translate="no">APP VERSION</code> 、2.1.4であることがわかります。</p>
 <pre><code translate="no">NAME                NAMESPACE   REVISION    UPDATED                                 STATUS      CHART           APP VERSION    
 <span class="hljs-keyword">new</span><span class="hljs-operator">-</span><span class="hljs-keyword">release</span>         <span class="hljs-keyword">default</span>     <span class="hljs-number">1</span>           <span class="hljs-number">2022</span><span class="hljs-number">-11</span><span class="hljs-number">-21</span> <span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">25.51539</span> <span class="hljs-operator">+</span><span class="hljs-number">0800</span> CST     deployed    milvus<span class="hljs-number">-3.2</span><span class="hljs-number">.18</span>   <span class="hljs-number">2.1</span><span class="hljs-number">.4</span> 
 <button class="copy-code-btn"></button></code></pre>

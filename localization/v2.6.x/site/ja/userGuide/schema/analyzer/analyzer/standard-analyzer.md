@@ -2,7 +2,7 @@
 id: standard-analyzer.md
 title: 標準アナライザー
 summary: >-
-  標準アナライザーはMilvusのデフォルトアナライザーであり、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。
+  標準アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">標準アナライザー<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">standard</code> アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。</p>
+    </button></h1><p><code translate="no">standard</code> アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法ベースのトークン化を使用するため、ほとんどの言語に有効です。</p>
+<div class="alert note">
+<p><code translate="no">standard</code> アナライザーは単語の境界を区切り文字（スペースや句読点など）に依存する言語に適しています。しかし、中国語、日本語、韓国語のような言語は、辞書ベースのトークン化を必要とします。このような場合は、次のような言語固有の解析器を使用します。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>のような言語固有の解析器を使用するか、特殊なトークン化器を備えたカスタム解析器 ( <a href="/docs/ja/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a>など）とフィルタを備えたカスタム解析器を使用することを強くお勧めします。</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">定義<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,12 +38,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">standard</code> ：</p>
+    </button></h2><p><code translate="no">standard</code> アナライザーは以下のように構成される：</p>
 <ul>
-<li><p><strong>トークン化</strong>：<code translate="no">standard</code> トークン化器を使用して、文法規則に基づいてテキストを個別の単語単位に分割する。詳細は「<a href="/docs/ja/standard-tokenizer.md">標準</a>」を参照。</p></li>
+<li><p><strong>トークン化器</strong>：<code translate="no">standard</code> のトークナイザを使用して、文法規則に基づいてテキストを個別の単語単位に分割する。詳細は「<a href="/docs/ja/standard-tokenizer.md">標準</a>」を参照。</p></li>
 <li><p><strong>フィルタ</strong>：<code translate="no">lowercase</code><a href="/docs/ja/lowercase-filter.md"> フィルタを</a>使用して、すべてのトークンを小文字に変換し、大文字と小文字を区別しない検索を可能にする。詳細については</p></li>
 </ul>
-<p><code translate="no">standard</code> アナライザーの機能は、以下のカスタム・アナライザー設定と同等です：</p>
+<p><code translate="no">standard</code> アナライザーの機能は、以下のカスタムアナライザー設定と同等です：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

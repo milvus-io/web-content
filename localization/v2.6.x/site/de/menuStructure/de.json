@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Zufallsstichproben",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -1527,7 +1533,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac",
             "order": 1,
             "isMenu": true,

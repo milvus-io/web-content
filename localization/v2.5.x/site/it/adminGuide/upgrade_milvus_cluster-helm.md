@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>È possibile scegliere il percorso di aggiornamento per il proprio Milvus come segue:</p>
-<div style="display: none;">- Eseguire un aggiornamento continuo](#conduct-a-rolling-upgrade) da Milvus v2.2.3 e versioni successive a v2.5.13.</div>
+<div style="display: none;">- Eseguire un aggiornamento continuo] (#conduct-a-rolling-upgrade) da Milvus v2.2.3 e versioni successive alla v2.5.14.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Aggiornare Milvus utilizzando Helm</a> per un aggiornamento da una release minore precedente alla v2.2.3 alla v2.5.13.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrare i metadati</a> prima dell'aggiornamento da Milvus v2.1.x a v2.5.13.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Aggiornare Milvus utilizzando Helm</a> per un aggiornamento da una versione minore precedente alla v2.2.3 alla v2.5.14.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrare i metadati</a> prima dell'aggiornamento da Milvus v2.1.x a v2.5.14.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Eseguire un aggiornamento continuo<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operazione</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Dopo essersi assicurati che tutte le installazioni nella vostra istanza Milvus siano nello stato normale. È possibile eseguire il seguente comando per aggiornare l'istanza Milvus alla versione 2.5.13.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
+<p>Dopo essersi assicurati che tutte le installazioni nella vostra istanza Milvus siano nello stato normale. È possibile eseguire il comando seguente per aggiornare l'istanza Milvus alla versione 2.5.14.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.14 -w &#x27;milvusdb/milvus:v2.5.14&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -225,7 +225,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-1</span>                   <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-number">20</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-2</span>                   <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-number">20</span>m
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-image-tag" class="common-anchor-header">3. Controllare il tag immagine</h3><p>Controllare il tag image per il pod <code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code>. È possibile vedere che la release del cluster Milvus è v2.1.4.</p>
+<h3 id="3-Check-the-image-tag" class="common-anchor-header">3. Controllare il tag immagine</h3><p>Controllare il tag image per il pod <code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code>. Si può notare che la release del cluster Milvus è la v2.1.4.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods my-release-milvus-proxy-6c548f787f-scspp -o=jsonpath=<span class="hljs-string">&#x27;{$.spec.containers[0].image}&#x27;</span></span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">milvusdb/milvus:v2.1.4</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -257,7 +257,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li>Migrare i metadati di Milvus.</li>
 <li>Avviare i componenti Milvus con una nuova immagine.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Aggiornamento di Milvus da v2.1.x a 2.2.0</h4><p>I seguenti comandi presuppongono l'aggiornamento di Milvus dalla v2.1.4 alla 2.2.0. Modificateli in base alle vostre esigenze.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Aggiornamento di Milvus da v2.1.x a 2.2.0</h4><p>I comandi seguenti presuppongono l'aggiornamento di Milvus dalla v2.1.4 alla 2.2.0. Modificateli in base alle vostre esigenze.</p>
 <ol>
 <li><p>Specificare il nome dell'istanza Milvus, la versione Milvus di origine e la versione Milvus di destinazione.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
@@ -268,7 +268,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>Specificare il percorso della radice con <code translate="no">-r</code> se Milvus è installato con il percorso personalizzato <code translate="no">rootpath</code>.</p>
 <pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.2</span>.<span class="hljs-number">0</span> -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Specificate il tag dell'immagine con <code translate="no">-w</code> se Milvus è installato con il tag personalizzato <code translate="no">image</code>.</p>
+<li><p>Specificate il tag dell'immagine con <code translate="no">-w</code> se il vostro Milvus è installato con un <code translate="no">image</code> personalizzato.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -w milvusdb/milvus:v2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Impostare <code translate="no">-d true</code> se si desidera rimuovere automaticamente il pod di migrazione al termine della migrazione.</p>

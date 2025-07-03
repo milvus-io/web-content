@@ -23,6 +23,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Анализатор <code translate="no">standard</code> - это анализатор по умолчанию в Milvus, который автоматически применяется к текстовым полям, если анализатор не указан. Он использует грамматическую токенизацию, что делает его эффективным для большинства языков.</p>
+<div class="alert note">
+<p>Анализатор <code translate="no">standard</code> подходит для языков, в которых границы слов определяются разделителями (например, пробелами и пунктуацией). Однако такие языки, как китайский, японский и корейский, требуют токенизации на основе словаря. В таких случаях следует использовать анализатор для конкретного языка, например <a href="/docs/ru/chinese-analyzer.md"><code translate="no">chinese</code></a> или пользовательских анализаторов со специализированными токенизаторами (такими как <a href="/docs/ru/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ru/icu-tokenizer.md"><code translate="no">icu</code></a>) и фильтрами, чтобы обеспечить точную токенизацию и лучшие результаты поиска.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">Определение<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

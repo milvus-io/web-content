@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "番号フィールド",
+            "label": "数字フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -884,6 +884,12 @@
                 "id": "array-operators.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "ランダム・サンプリング",
+                "id": "random-sampling.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -926,7 +932,7 @@
         ]
       },
       {
-        "label": "エンベッディングと再ランキング",
+        "label": "エンベッディングとリランキング",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1841,7 +1847,7 @@
                 "children": []
               },
               {
-                "label": "講師",
+                "label": "インストラクター",
                 "id": "embed-with-instructor.md",
                 "order": 9,
                 "children": []
@@ -2575,7 +2581,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []
@@ -2615,7 +2621,7 @@
     ]
   },
   {
-    "label": "よくある質問",
+    "label": "よくあるご質問",
     "id": "faq",
     "isMenu": true,
     "order": 9,
