@@ -369,6 +369,11 @@
                         "token": "Kc3Cweq1AhAmMGbrVgRcTlTKnUf",
                         "type": "board",
                         "alt_text": "data-model-anatomy"
+                    },
+                    {
+                        "token": "AF0fbMmXVoCJwrxCPR3c0fZMnwf",
+                        "type": "image",
+                        "alt_text": "inverted-index"
                     }
                 ]
             }

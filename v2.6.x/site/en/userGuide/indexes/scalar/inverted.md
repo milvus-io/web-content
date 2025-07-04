@@ -1,169 +1,125 @@
 ---
 id: inverted.md
 title: "INVERTED"
-summary: "The INVERTED index in Milvus is designed to accelerate filter queries on both scalar fields and structured JSON fields. By mapping terms to the documents or records that contain them, inverted indexes greatly improve query performance compared to brute-force searches."
+summary: "When you need to perform frequent filter queries on your data, INVERTED indexes can dramatically improve query performance. Instead of scanning through all documents, Milvus uses inverted indexes to quickly locate the exact records that match your filter conditions."
 ---
 
 # INVERTED
 
-The `INVERTED` index in Milvus is designed to accelerate filter queries on both scalar fields and structured JSON fields. By mapping terms to the documents or records that contain them, inverted indexes greatly improve query performance compared to brute-force searches.
+When you need to perform frequent filter queries on your data, `INVERTED` indexes can dramatically improve query performance. Instead of scanning through all documents, Milvus uses inverted indexes to quickly locate the exact records that match your filter conditions.
 
-## Overview
+## When to use INVERTED indexes
 
-Powered by [Tantivy](https://github.com/quickwit-oss/tantivy), Milvus implements inverted indexing to accelerate filter queries, especially for textual data. Here’s how it works:
+Use INVERTED indexes when you need to:
 
-1. **Tokenize the Data**: Milvus takes your raw data—in this example, two sentences:
+- **Filter by specific values**: Find all records where a field equals a specific value (e.g., `category == "electronics"`)
 
-    - **"Milvus is a cloud-native vector database."**
+- **Filter text content**: Perform efficient searches on `VARCHAR` fields
 
-    - **"Milvus is very good at performance."**
+- **Query JSON field values**: Filter on specific keys within JSON structures
 
-    and breaks them into unique words (e.g., *Milvus*, *is*, *cloud-native*, *vector*, *database*, *very*, *good*, *at*, *performance*).
+**Performance benefit**: INVERTED indexes can reduce query time from seconds to milliseconds on large datasets by eliminating the need for full collection scans.
 
-1. **Build the Term Dictionary**: These unique words are stored in a sorted list called the **Term Dictionary**. This dictionary lets Milvus quickly check if a word exists and locate its position in the index.
+## How INVERTED indexes work
 
-1. **Create the Inverted List**: For each word in the Term Dictionary, Milvus keeps an **Inverted List** showing which documents contain that word. For instance, **"Milvus"** appears in both sentences, so its inverted list points to both document IDs.
+Milvus uses [Tantivy](https://github.com/quickwit-oss/tantivy) to implement inverted indexing. Here's the process:
 
-![Inverted](../../../../../assets/inverted.png)
+1. **Tokenization**: Milvus breaks down your data into searchable terms
 
-Because the dictionary is sorted, term-based filtering can be handled efficiently. Instead of scanning all documents, Milvus just looks up the term in the dictionary and retrieves its inverted list—significantly speeding up searches and filters on large datasets.
+2. **Term dictionary**: Creates a sorted list of all unique terms
 
-## Index a regular scalar field
+3. **Inverted lists**: Maps each term to the documents containing it
 
-For scalar fields like **BOOL**, **INT8**, **INT16**, **INT32**, **INT64**, **FLOAT**, **DOUBLE**, **VARCHAR**, and **ARRAY**, creating an inverted index is straightforward. Use the `create_index()` method with the `index_type` parameter set to `"INVERTED"`.
+For example, given these two sentences:
+
+- **"Milvus is a cloud-native vector database"**
+
+- **"Milvus is very good at performance"**
+
+The inverted index maps terms like **"Milvus"** → **[Document 0, Document 1]**, **"cloud-native"** → **[Document 0]**, and **"performance"** → **[Document 1]**.
+
+![Inverted Index](../../../../../assets/inverted-index.png)
+
+When you filter by a term, Milvus looks up the term in the dictionary and instantly retrieves all matching documents.
+
+INVERTED indexes support all scalar field types: **BOOL**, **INT8**, **INT16**, **INT32**, **INT64**, **FLOAT**, **DOUBLE**, **VARCHAR**, **JSON**, and **ARRAY**. However, the index parameters for indexing a JSON field are slightly different from regular scalar fields.
+
+## Create indexes on non-JSON fields
+
+To create an index on a non-JSON field, follow these steps:
+
+1. Prepare your index parameters:
+
+    ```python
+    from pymilvus import MilvusClient
+    
+    client = MilvusClient(uri="http://localhost:19530") # Replace with your server address
+    
+    # Create an empty index parameter object
+    index_params = client.prepare_index_params()
+    ```
+
+1. Add the `INVERTED` index:
+
+    ```python
+    index_params.add_index(
+        field_name="category",           # Name of the field to index
+        # highlight-next-line
+        index_type="INVERTED",          # Specify INVERTED index type
+        index_name="category_index"     # Give your index a name
+    )
+    ```
+
+1. Create the index:
+
+    ```python
+    client.create_index(
+        collection_name="my_collection", # Replace with your collection name
+        index_params=index_params
+    )
+    ```
+
+## Create indexes on JSON fields | Milvus 2.5.11+
+
+You can also create INVERTED indexes on specific paths within JSON fields. This requires additional parameters to specify the JSON path and data type:
 
 ```python
-from pymilvus import MilvusClient
-
-client = MilvusClient(
-    uri="http://localhost:19530",
-)
-
-index_params = client.create_index_params() # Prepare an empty IndexParams object, without having to specify any index parameters
+# Build index params
 index_params.add_index(
-    field_name="scalar_field_1", # Name of the scalar field to be indexed
-    index_type="INVERTED", # Type of index to be created
-    index_name="inverted_index" # Name of the index to be created
+    field_name="metadata",                    # JSON field name
+    # highlight-next-line
+    index_type="INVERTED",
+    index_name="metadata_category_index",
+    # highlight-start
+    params={
+        "json_path": "metadata[\"category\"]",    # Path to the JSON key
+        "json_cast_type": "varchar"              # Data type to cast to during indexing
+    }
+    # highlight-end
 )
 
+# Create index
 client.create_index(
-    collection_name="my_collection", # Specify the collection name
+    collection_name="my_collection", # Replace with your collection name
     index_params=index_params
 )
 ```
 
-## Index a JSON field
+For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to [JSON Field](use-json-fields.md).
 
-Milvus extends its indexing capabilities to JSON fields, allowing you to efficiently filter on nested or structured data stored within a single column. Unlike scalar fields, when indexing a JSON field you must provide two additional parameters:
+## Best practices
 
-- `json_path`**:** Specifies the nested key to index.
+- **Create indexes after loading data**: Build indexes on collections that already contain data for better performance
 
-- `json_cast_type`**:** Defines the data type (e.g., `"varchar"`, `"double"`, or `"bool"`) to which the extracted JSON value will be cast.
+- **Use descriptive index names**: Choose names that clearly indicate the field and purpose
 
-For example, consider a JSON field named `metadata` with the following structure:
+- **Monitor index performance**: Check query performance before and after creating indexes
 
-```plaintext
-{
-  "metadata": {
-    "product_info": {
-      "category": "electronics",
-      "brand": "BrandA"
-    },
-    "price": 99.99,
-    "in_stock": true,
-    "tags": ["summer_sale", "clearance"]
-  }
-}
-```
+- **Consider your query patterns**: Create indexes on fields you frequently filter by
 
-To create inverted indexes on specific JSON paths, you can use the following approach:
+## Next steps
 
-```python
-index_params = client.prepare_index_params()
+- Learn about [other index types](index-explained.md)
 
-# Example 1: Index the 'category' key inside 'product_info' as a string.
-index_params.add_index(
-    field_name="metadata",         # JSON field name
-    index_type="INVERTED",         # Specify the inverted index type
-    index_name="json_index_1",      # Custom name for this JSON index
-    params={
-        "json_path": "metadata[\"product_info\"][\"category\"]",  # Path to the 'category' key
-        "json_cast_type": "varchar"   # Cast the value as a string
-    }
-)
-
-# Example 2: Index the 'price' key as a numeric type (double).
-index_params.add_index(
-    field_name="metadata",         # JSON field name
-    index_type="INVERTED",
-    index_name="json_index_2",      # Custom name for this JSON index
-    params={
-        "json_path": "metadata[\"price\"]",  # Path to the 'price' key
-        "json_cast_type": "double"           # Cast the value as a double
-    }
-)
-
-```
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Example Value</p></th>
-   </tr>
-   <tr>
-     <td><p><code>field_name</code></p></td>
-     <td><p>Name of the JSON field in your schema.</p></td>
-     <td><p><code>"metadata"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>index_type</code></p></td>
-     <td><p>Index type to create; currently only <code>INVERTED</code> is supported for JSON path indexing.</p></td>
-     <td><p><code>"INVERTED"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>index_name</code></p></td>
-     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
-     <td><p><code>"json_index_1"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>params.json_path</code></p></td>
-     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code>metadata["product_info"]["category"]</code> or <code>metadata["tags"][0]</code>).
- If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
-     <td><p><code>"metadata[\"product_info\"][\"category\"]"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
-<ul>
-<li><p><code>"bool"</code> or <code>"BOOL"</code></p></li>
-<li><p><code>"double"</code> or <code>"DOUBLE"</code></p></li>
-<li><p><code>"varchar"</code> or <code>"VARCHAR"</code></p>
-<p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If the cast fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li>
-</ul></td>
-     <td><p><code>"varchar"</code></p></td>
-   </tr>
-</table>
-
-## Considerations on JSON indexing
-
-- **Filtering logic**:
-
-    - If you **create a double-type index** (`json_cast_type="double"`), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.
-
-    - If you **create a varchar-type index** (`json_cast_type="varchar"`), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.
-
-    - **Boolean** indexing behaves similarly to varchar-type.
-
-- **Term expressions**:
-
-    - You can use `json["field"] in [value1, value2, …]`. However, the index works only for scalar values stored under that path. If `json["field"]` is an array, the query falls back to brute force (array-type indexing is not yet supported).
-
-- **Numeric precision**:
-
-    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds $2^{53}$, it loses precision, and queries on those out-of-range values may not match exactly.
-
-- **Data integrity**:
-
-    - Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key `"k"` while others store a number), some rows will not be indexed.
+- See [JSON field indexing](use-json-fields.md#Index-values-inside-the-JSON-field) for advanced JSON indexing scenarios
 

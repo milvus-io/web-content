@@ -1,24 +1,93 @@
 ---
 id: enable-dynamic-field.md
 title: "Dynamic Field"
-summary: "All fields defined in the schema of a collection must be included in the entities to be inserted. If you want some fields to be optional, consider enabling the dynamic field. This topic describes how to enable and use the dynamic field."
+summary: "Milvus allows you to insert entities with flexible, evolving structures through a special feature called the dynamic field. This field is implemented as a hidden JSON field named $meta, which automatically stores any fields in your data that are not explicitly defined in the collection schema."
 ---
 
 # Dynamic Field
 
-All fields defined in the schema of a collection must be included in the entities to be inserted. If you want some fields to be optional, consider enabling the dynamic field. This topic describes how to enable and use the dynamic field.
+Milvus allows you to insert entities with flexible, evolving structures through a special feature called the **dynamic field**. This field is implemented as a hidden JSON field named `$meta`, which automatically stores any fields in your data that are **not explicitly defined** in the collection schema.
 
-## Overview
+## How it works
 
-In Milvus, you can create a collection schema by setting the names and data types for each field in the collection. When you add a field to the schema, make sure that this field is included in the entity you intend to insert. If you want some fields to be optional, enabling the dynamic field is one option.
+When the dynamic field is enabled, Milvus adds a hidden `$meta` field to each entity. During data insertion, any field not declared in the schema is automatically stored as a key-value pair inside this dynamic field.
 
-The dynamic field is a reserved field named **\$meta**, which is of the JavaScript Object Notation (JSON) type. Any fields in the entities that are not defined in the schema will be stored in this reserved JSON field as key-value pairs.
+You don't need to manage `$meta` manually—Milvus handles it transparently.
 
-For a collection with the dynamic field enabled, you can use keys in the dynamic field for scalar filtering, just as you would with fields explicitly defined in the schema.
+For example, if your collection schema defines only `id` and `vector`, and you insert the following entity:
+
+```json
+{
+  "id": 1,
+  "vector": [0.1, 0.2, 0.3],
+  "name": "Item A",    // Not in schema
+  "category": "books"  // Not in schema
+}
+```
+
+With the dynamic field feature enabled, Milvus stores it internally as:
+
+```json
+{
+  "id": 1,
+  "vector": [0.1, 0.2, 0.3],
+  // highlight-start
+  "$meta": {
+    "name": "Item A",
+    "category": "books"
+  }
+  // highlight-end
+}
+```
+
+This allows you to evolve your data structure without altering the schema.
+
+Common use cases include:
+
+- Storing optional or infrequently retrieved fields
+
+- Capturing metadata that varies by entity
+
+- Supporting flexible filtering via indexes on specific dynamic field keys
+
+## Supported data types
+
+The dynamic field supports all scalar data types provided by Milvus, including both simple and complex values. These data types apply to the **values of keys stored in `$meta`.
+
+**Supported types include:**
+
+- String (`VARCHAR`)
+
+- Integer (`INT8`, `INT32`, `INT64`)
+
+- Floating point (`FLOAT`, `DOUBLE`)
+
+- Boolean (`BOOL`)
+
+- Array of scalar values (`ARRAY`)
+
+- JSON objects (`JSON`)
+
+**Example:**
+
+```json
+{
+  "brand": "Acme",
+  "price": 29.99,
+  "in_stock": true,
+  "tags": ["new", "hot"],
+  "specs": {
+    "weight": "1.2kg",
+    "dimensions": { "width": 10, "height": 20 }
+  }
+}
+```
+
+Each of the above keys and values would be stored inside the `$meta` field.
 
 ## Enable dynamic field
 
-You can enable the dynamic field manually when creating a collection with custom settings.
+To use the dynamic field feature, set `enable_dynamic_field=True` when creating the collection schema:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -29,120 +98,130 @@ You can enable the dynamic field manually when creating a collection with custom
 </div>
 
 ```python
-from pymilvus import MilvusClient
+from pymilvus import MilvusClient, DataType
 
-client= MilvusClient(uri="http://localhost:19530")
+# Initialize client
+client = MilvusClient(uri="http://localhost:19530")
 
+# Create schema with dynamic field enabled
+schema = client.create_schema(
+    auto_id=False,
+    # highlight-next-line
+    enable_dynamic_field=True,
+)
+
+# Add explicitly defined fields
+schema.add_field(field_name="my_id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
+
+# Create the collection
 client.create_collection(
     collection_name="my_collection",
-    dimension=5,
-    # highlight-next-line
-    enable_dynamic_field=True
+    schema=schema
 )
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.client.*;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.AddFieldReq;
 
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+ConnectConfig config = ConnectConfig.builder()
         .uri("http://localhost:19530")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
+
+CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder()
+        .enableDynamicField(true)
+        .build();
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(Boolean.TRUE)
         .build());
-        
-CreateCollectionReq createCollectionReq = CreateCollectionReq.builder()
-    .collectionName("my_collection")
-    .dimension(5)
-    // highlight-next-line
-    .enableDynamicField(true)
-    .build()
-client.createCollection(createCollectionReq);
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_vector")
+        .dataType(DataType.FloatVector)
+        .dimension(5)
+        .build());
+
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(schema)
+        .build();
+client.createCollection(requestCreate);
 ```
 
 ```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+import { MilvusClient, DataType, CreateCollectionReq } from '@zilliz/milvus2-sdk-node';
 
-const client = new Client({
-    address: 'http://localhost:19530'
+// Initialize client
+const client = new MilvusClient({ address: 'localhost:19530' });
+
+// Create collection
+const res = await client.createCollection({
+  collection_name: 'my_collection',
+  schema:  [
+      {
+        name: 'my_id',
+        data_type: DataType.Int64,
+        is_primary_key: true,
+        autoID: false,
+      },
+      {
+        name: 'my_vector',
+        data_type: DataType.FloatVector,
+        type_params: {
+          dim: '5',
+      }
+   ],
+   enable_dynamic_field: true
 });
 
-await client.createCollection({
-    collection_name: "customized_setup_2",
-    schema: schema,
-    // highlight-next-line
-    enable_dynamic_field: true
-});
 ```
 
 ```go
 import (
     "context"
-    "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
     "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
     "github.com/milvus-io/milvus/client/v2/milvusclient"
-)  
+)
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle err
+    return err
 }
-defer client.Close(ctx)
 
-err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions("my_collection", 5).
-    WithAutoID(false).
-    WithDynamicSchema(true))
+schema := entity.NewSchema().WithDynamicFieldEnabled(true)
+schema.WithField(entity.NewField().
+    WithName("my_id").pk
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(true),
+).WithField(entity.NewField().
+    WithName("my_vector").
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(5),
+)
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_collection", schema))
 if err != nil {
-    fmt.Println(err.Error())
+    return err
 }
 ```
 
 ```bash
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "collectionName": "my_collection",
-    "dimension": 5,
-    "enableDynamicField": true
-}'
+# restful
 ```
 
-## Use dynamic field
+## Insert entities to the collection
 
-When the dynamic field is enabled in your collection, all fields and their values that are not defined in the schema will be stored as key-value pairs in the dynamic field.
-
-For example, suppose your collection schema defines only two fields, named `id` and `vector`, with the dynamic field enabled. Now, insert the following dataset into this collection.
-
-```json
-[
-    {id: 0, vector: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], color: "pink_8682"},
-    {id: 1, vector: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], color: "red_7025"},
-    {id: 2, vector: [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], color: "orange_6781"},
-    {id: 3, vector: [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], color: "pink_9298"},
-    {id: 4, vector: [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], color: "red_4794"},
-    {id: 5, vector: [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], color: "yellow_4222"},
-    {id: 6, vector: [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], color: "red_9392"},
-    {id: 7, vector: [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], color: "grey_8510"},
-    {id: 8, vector: [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], color: "white_9381"},
-    {id: 9, vector: [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], color: "purple_4976"}        
-]
-```
-
-The dataset above contains 10 entities, each including the fields `id`, `vector`, and `color`. Here, the `color` field is not defined in the schema. Since the collection has the dynamic field enabled, the field `color` will be stored as a key-value pair within the dynamic field.
-
-### Insert data
-
-The following code demonstrates how to insert this dataset into the collection.
+The dynamic field allows you to insert extra fields not defined in the schema. These fields will be stored automatically in `$meta`.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -153,28 +232,23 @@ The following code demonstrates how to insert this dataset into the collection.
 </div>
 
 ```python
-data=[
-    {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},
-    {"id": 1, "vector": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], "color": "red_7025"},
-    {"id": 2, "vector": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], "color": "orange_6781"},
-    {"id": 3, "vector": [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], "color": "pink_9298"},
-    {"id": 4, "vector": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], "color": "red_4794"},
-    {"id": 5, "vector": [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], "color": "yellow_4222"},
-    {"id": 6, "vector": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], "color": "red_9392"},
-    {"id": 7, "vector": [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], "color": "grey_8510"},
-    {"id": 8, "vector": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], "color": "white_9381"},
-    {"id": 9, "vector": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], "color": "purple_4976"}
+entities = [
+    {
+        "my_id": 1, # Explicitly defined primary field
+        "my_vector": [0.1, 0.2, 0.3, 0.4, 0.5], # Explicitly defined vector field
+        "overview": "Great product",       # Scalar key not defined in schema
+        "words": 150,                      # Scalar key not defined in schema
+        "dynamic_json": {                  # JSON key not defined in schema
+            "varchar": "some text",
+            "nested": {
+                "value": 42.5
+            },
+            "string_price": "99.99"        # Number stored as string
+        }
+    }
 ]
 
-res = client.insert(
-    collection_name="my_collection",
-    data=data
-)
-
-print(res)
-
-# Output
-# {'insert_count': 10, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+client.insert(collection_name="my_collection", data=entities)
 ```
 
 ```java
@@ -182,180 +256,408 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import io.milvus.v2.service.vector.request.InsertReq;
-import io.milvus.v2.service.vector.response.InsertResp;
-   
+
 Gson gson = new Gson();
-List<JsonObject> data = Arrays.asList(
-        gson.fromJson("{\"id\": 0, \"vector\": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], \"color\": \"pink_8682\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 1, \"vector\": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], \"color\": \"red_7025\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 2, \"vector\": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], \"color\": \"orange_6781\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 3, \"vector\": [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], \"color\": \"pink_9298\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 4, \"vector\": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], \"color\": \"red_4794\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 5, \"vector\": [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], \"color\": \"yellow_4222\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 6, \"vector\": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], \"color\": \"red_9392\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 7, \"vector\": [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], \"color\": \"grey_8510\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 8, \"vector\": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], \"color\": \"white_9381\"}", JsonObject.class),
-        gson.fromJson("{\"id\": 9, \"vector\": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], \"color\": \"purple_4976\"}", JsonObject.class)
-);
+JsonObject row = new JsonObject();
+row.addProperty("my_id", 1);
+row.add("my_vector", gson.toJsonTree(Arrays.asList(0.1, 0.2, 0.3, 0.4, 0.5)));
+row.addProperty("overview", "Great product");
+row.addProperty("words", 150);
 
-InsertReq insertReq = InsertReq.builder()
+JsonObject dynamic = new JsonObject();
+dynamic.addProperty("varchar", "some text");
+dynamic.addProperty("string_price", "99.99");
+
+JsonObject nested = new JsonObject();
+nested.addProperty("value", 42.5);
+
+dynamic.add("nested", nested);
+row.add("dynamic_json", dynamic);
+
+client.insert(InsertReq.builder()
         .collectionName("my_collection")
-        .data(data)
-        .build();
-
-InsertResp insertResp = client.insert(insertReq);
-System.out.println(insertResp);
-
-// Output:
-//
-// InsertResp(InsertCnt=10, primaryKeys=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .data(Collections.singletonList(row))
+        .build());
 ```
 
 ```javascript
-const { DataType } = require("@zilliz/milvus2-sdk-node")
 
-// 3. Insert some data
-
-const data = [
-    {id: 0, vector: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], color: "pink_8682"},
-    {id: 1, vector: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], color: "red_7025"},
-    {id: 2, vector: [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], color: "orange_6781"},
-    {id: 3, vector: [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], color: "pink_9298"},
-    {id: 4, vector: [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], color: "red_4794"},
-    {id: 5, vector: [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], color: "yellow_4222"},
-    {id: 6, vector: [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], color: "red_9392"},
-    {id: 7, vector: [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], color: "grey_8510"},
-    {id: 8, vector: [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], color: "white_9381"},
-    {id: 9, vector: [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], color: "purple_4976"}        
-]
-
+const entities = [
+  {
+    my_id: 1,
+    my_vector: [0.1, 0.2, 0.3, 0.4, 0.5],
+    overview: 'Great product',
+    words: 150,
+    dynamic_json: {
+      varchar: 'some text',
+      nested: {
+        value: 42.5,
+      },
+      string_price: '99.99',
+    },
+  },
+];
 const res = await client.insert({
-    collection_name: "quick_setup",
-    data: data,
-})
-
-console.log(res.insert_cnt)
-
-// Output
-// 
-// 10
-// 
+    collection_name: 'my_collection',
+    data: entities,
+});
 ```
 
 ```go
-dynamicColumn := column.NewColumnString("color", []string{
-    "pink_8682", "red_7025", "orange_6781", "pink_9298", "red_4794", "yellow_4222", "red_9392", "grey_8510", "white_9381", "purple_4976",
-})
-
 _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
-    WithInt64Column("id", []int64{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}).
-    WithFloatVectorColumn("vector", 5, [][]float32{
-        {0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592},
-        {0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104},
-        {0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592},
-        {0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345},
-        {0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106},
-        {0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955},
-        {0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987},
-        {-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052},
-        {0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336},
-        {0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608},
-    }).
-    WithColumns(dynamicColumn),
-)
+    WithInt64Column("my_id", []int64{1}).
+    WithFloatVectorColumn("my_vector", 5, [][]float32{
+        {0.1, 0.2, 0.3, 0.4, 0.5},
+    }).WithColumns(
+    column.NewColumnVarChar("overview", []string{"Great product"}),
+    column.NewColumnInt32("words", []int32{150}),
+    column.NewColumnJSONBytes("dynamic_json", [][]byte{
+        []byte(`{
+            varchar: 'some text',
+            nested: {
+                value: 42.5,
+            },
+            string_price: '99.99',
+        }`),
+    }),
+))
 if err != nil {
-    fmt.Println(err.Error())
-    // handle err
+    return err
 }
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
-
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "data": [
-        {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},
-        {"id": 1, "vector": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], "color": "red_7025"},
-        {"id": 2, "vector": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], "color": "orange_6781"},
-        {"id": 3, "vector": [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], "color": "pink_9298"},
-        {"id": 4, "vector": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], "color": "red_4794"},
-        {"id": 5, "vector": [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], "color": "yellow_4222"},
-        {"id": 6, "vector": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], "color": "red_9392"},
-        {"id": 7, "vector": [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], "color": "grey_8510"},
-        {"id": 8, "vector": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], "color": "white_9381"},
-        {"id": 9, "vector": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], "color": "purple_4976"}        
-    ],
-    "collectionName": "my_collection"
-}'
-
-# {
-#     "code": 0,
-#     "data": {
-#         "insertCount": 10,
-#         "insertIds": [
-#             0,
-#             1,
-#             2,
-#             3,
-#             4,
-#             5,
-#             6,
-#             7,
-#             8,
-#             9
-#         ]
-#     }
-# }
+# restful
 ```
 
-### Index a scalar field in the dynamic field
+## Index keys in the dynamic field | Milvus 2.5.11+
 
-When you enable a dynamic field, any undefined scalar fields are stored as key-value pairs in JSON format. Milvus supports creating an index on such an undefined scalar field, effectively by building a JSON path index. Here's how it works:
+Milvus allows you to use **JSON path indexing** to create indexes on specific keys inside the dynamic field. These can be scalar values or nested values in JSON objects.
 
-1. **Choose the dynamic field key** you want to index. For example, `"color"` in the example above.
+<div class="alert note">
 
-1. **Decide on a cast type** for the values found at that key. Milvus will parse the dynamic field, extract the values under the specified key, and cast them to the type you configure.
+Indexing dynamic field keys is **optional**. You can still query or filter by dynamic field keys without an index, but it may result in slower performance due to brute-force search.
 
-    - Supported `json_cast_type` values are `bool` (or `BOOL`), `double` (or `DOUBLE`), and `varchar` (or `VARCHAR`).
+</div>
 
-    - If parsing or casting fails (for example, trying to parse a string as double), those rows will be skipped in the index.
+### JSON path indexing syntax
 
-1. **Specify the JSON path** to that key as `json_path`. Since the dynamic field is stored as JSON, you can specify something like `"color"`, or if you have nested structures, you can specify deeper paths (e.g. `my_json["field"]["subfield"]`).
+To create a JSON path index, specify:
 
-1. **Create an INVERTED index**. Currently, only `INVERTED` type is supported for JSON path indexing.
+- **JSON path** (`json_path`): The path to the key or nested field within your JSON object that you want to index.
 
-For details on parameters and considerations, refer to [Index a JSON field](use-json-fields.md#Index-a-JSON-field).
+    - Example: `metadata["category"]`
 
-Below is an example of how to create an index on the `"color"` field:
+        This defines where the indexing engine should look inside the JSON structure.
+
+- **JSON cast type** (`json_cast_type`): The data type that Milvus should use when interpreting and indexing the value at the specified path.
+
+    - This type must match the actual data type of the field being indexed.
+
+    - For a complete list, refer to [Supported JSON cast types](use-json-fields.md#Supported-JSON-cast-types).
+
+### Index non-JSON keys in the dynamic field
+
+You can index any non-JSON key (e.g., `overview`, `words`) by referencing its key name directly in `json_path`:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
-# Prepare index parameters
 index_params = client.prepare_index_params()
 
+# Index a string key from $meta
 index_params.add_index(
-    field_name="color",               # Name of the "column" you see in queries (the dynamic key).
-    index_type="INVERTED",            # Currently only "INVERTED" is supported for indexing JSON fields.
-    index_name="color_index",         # Assign a name to this index.
+    field_name="overview",  # Key name in the dynamic field
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_name="overview_index",  # Unique index name
+    # highlight-start
     params={
-        "json_path": "color",         # JSON path to the key you want to index.
-        "json_cast_type": "varchar"   # Type to which Milvus will cast the extracted values.
+        "json_cast_type": "varchar",   # Data type that Milvus uses when indexing the values
+        "json_path": "overview"        # Key name in the dynamic field
     }
+    # highlight-end
 )
 
-# Create the index
+# Index a numeric key from $meta
+index_params.add_index(
+    field_name="words",  # Key name in the dynamic field
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_name="words_index",  # Unique index name
+    # highlight-start
+    params={
+        "json_cast_type": "double",  # Data type that Milvus uses when indexing the values
+        "json_path": "words" # Key name in the dynamic field
+    }
+    # highlight-end
+)
+```
+
+```java
+import io.milvus.v2.common.IndexParam;
+
+Map<String,Object> extraParams1 = new HashMap<>();
+extraParams1.put("json_path", "overview");
+extraParams1.put("json_cast_type", "varchar");
+indexParams.add(IndexParam.builder()
+        .fieldName("overview")
+        .indexName("overview_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams1)
+        .build());
+
+Map<String,Object> extraParams2 = new HashMap<>();
+extraParams2.put("json_path", "words");
+extraParams2.put("json_cast_type", "double");
+indexParams.add(IndexParam.builder()
+        .fieldName("words")
+        .indexName("words_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams2)
+        .build());
+```
+
+```javascript
+const indexParams = [
+    {
+      collection_name: 'my_collection',
+      field_name: 'overview',
+      index_name: 'overview_index',
+      index_type: 'AUTOINDEX',
+      metric_type: 'NONE',
+      params: {
+        json_path: 'overview',
+        json_cast_type: 'varchar',
+      },
+    },
+    {
+      collection_name: 'my_collection',
+      field_name: 'words',
+      index_name: 'words_index',
+      index_type: 'AUTOINDEX',
+      metric_type: 'NONE',
+      params: {
+        json_path: 'words',
+        json_cast_type: 'double',
+      },
+    },
+  ];
+
+```
+
+```go
+import (
+    "github.com/milvus-io/milvus/client/v2/index"
+)
+
+jsonIndex1 := index.NewJSONPathIndex(index.AUTOINDEX, "varchar", "overview")
+    .WithIndexName("overview_index")
+jsonIndex2 := index.NewJSONPathIndex(index.AUTOINDEX, "double", "words")
+    .WithIndexName("words_index")
+
+indexOpt1 := milvusclient.NewCreateIndexOption("my_collection", "overview", jsonIndex1)
+indexOpt2 := milvusclient.NewCreateIndexOption("my_collection", "words", jsonIndex2)
+```
+
+```bash
+# restful
+```
+
+### Index JSON keys in the dynamic field
+
+When a key in the dynamic field (`$meta`) stores a JSON object, you can index its internal keys using bracket notation in `json_path`.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Index a top-level key inside a JSON object
+index_params.add_index(
+    field_name="dynamic_json", # JSON key name in the dynamic field
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_name="json_varchar_index", # Unique index name
+    # highlight-start
+    params={
+        "json_cast_type": "varchar", # Data type that Milvus uses when indexing the values
+        "json_path": "dynamic_json['varchar']" # Path to the key to be indexed
+    }
+    # highlight-end
+)
+
+# Index a nested key
+index_params.add_index(
+    field_name="dynamic_json",
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_name="json_nested_index", # Unique index name
+    # highlight-start
+    params={
+        "json_cast_type": "double",
+        "json_path": "dynamic_json['nested']['value']"
+    }
+    # highlight-end
+)
+```
+
+```java
+Map<String,Object> extraParams3 = new HashMap<>();
+extraParams3.put("json_path", "dynamic_json['varchar']");
+extraParams3.put("json_cast_type", "varchar");
+indexParams.add(IndexParam.builder()
+        .fieldName("dynamic_json")
+        .indexName("json_varchar_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams3)
+        .build());
+
+Map<String,Object> extraParams4 = new HashMap<>();
+extraParams4.put("json_path", "dynamic_json['nested']['value']");
+extraParams4.put("json_cast_type", "double");
+indexParams.add(IndexParam.builder()
+        .fieldName("dynamic_json")
+        .indexName("json_nested_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams4)
+        .build());
+```
+
+```javascript
+indexParams.push({
+      collection_name: 'my_collection',
+      field_name: 'dynamic_json',
+      index_name: 'json_varchar_index',
+      index_type: 'AUTOINDEX',
+      metric_type: 'NONE',
+      params: {
+        json_cast_type: 'varchar',
+        json_path: "dynamic_json['varchar']",
+      },
+    },
+    {
+      collection_name: 'my_collection',
+      field_name: 'dynamic_json',
+      index_name: 'json_nested_index',
+      index_type: 'AUTOINDEX',
+      metric_type: 'NONE',
+      params: {
+        json_cast_type: 'double',
+        json_path: "dynamic_json['nested']['value']",
+      },
+    });
+```
+
+```go
+jsonIndex3 := index.NewJSONPathIndex(index.AUTOINDEX, "varchar", `dynamic_json['varchar']`)
+    .WithIndexName("json_varchar_index")
+jsonIndex4 := index.NewJSONPathIndex(index.AUTOINDEX, "double", `dynamic_json['nested']['value']`)
+    .WithIndexName("json_nested_index")
+
+indexOpt3 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", jsonIndex3)
+indexOpt4 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", jsonIndex4)
+```
+
+```bash
+# restful
+```
+
+### Use JSON cast functions for type conversion | Milvus 2.5.14+
+
+If a dynamic field key contains values in an incorrect format, (e.g. numbers stored as strings), you can use a cast function to convert it:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Convert a string to double before indexing
+index_params.add_index(
+    field_name="dynamic_json", # JSON key name
+    index_type="AUTOINDEX",
+    index_name="json_string_price_index",
+    params={
+        "json_path": "dynamic_json['string_price']",
+        "json_cast_type": "double", # Must be the output type of the cast function
+        # highlight-next-line
+        "json_cast_function": "STRING_TO_DOUBLE" # Case insensitive; convert string to double
+    }
+)
+```
+
+```java
+Map<String,Object> extraParams5 = new HashMap<>();
+extraParams5.put("json_path", "dynamic_json['string_price']");
+extraParams5.put("json_cast_type", "double");
+indexParams.add(IndexParam.builder()
+        .fieldName("dynamic_json")
+        .indexName("json_string_price_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams5)
+        .build());
+```
+
+```javascript
+indexParams.push({
+    collection_name: 'my_collection',
+    field_name: 'dynamic_json',
+    index_name: 'json_string_price_index',
+    index_type: 'AUTOINDEX',
+    metric_type: 'NONE',
+    params: {
+      json_path: "dynamic_json['string_price']",
+      json_cast_type: 'double',
+      json_cast_function: 'STRING_TO_DOUBLE',
+    },
+  });
+```
+
+```go
+jsonIndex5 := index.NewJSONPathIndex(index.AUTOINDEX, "double", `dynamic_json['string_price']`)
+    .WithIndexName("json_string_price_index")
+indexOpt5 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", jsonIndex5)
+```
+
+```bash
+# restful
+```
+
+<div class="alert note">
+
+- If type conversion fails (e.g. value `"not_a_number"` cannot be converted to a number), the value is skipped and unindexed.
+
+- For details on cast function parameters, refer to [JSON Field](use-json-fields.md#Use-JSON-cast-functions-for-type-conversion).
+
+</div>
+
+### Apply indexes to the collection
+
+After defining the index parameters, you can apply them to the collection using `create_index()`:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
 client.create_index(
     collection_name="my_collection",
     index_params=index_params
@@ -363,84 +665,54 @@ client.create_index(
 ```
 
 ```java
-import io.milvus.v2.common.IndexParam;
-
-List<IndexParam> indexes = new ArrayList<>();
-
-Map<String,Object> extraParams = new HashMap<>();
-extraParams.put("json_path", "color");
-extraParams.put("json_cast_type", "varchar");
-indexes.add(IndexParam.builder()
-        .fieldName("color")
-        .indexName("color_index")
-        .indexType(IndexParam.IndexType.INVERTED)
-        .extraParams(extraParams)
-        .build());
+import io.milvus.v2.service.index.request.CreateIndexReq;
 
 client.createIndex(CreateIndexReq.builder()
         .collectionName("my_collection")
-        .indexParams(indexes)
+        .indexParams(indexParams)
         .build());
 ```
 
-```go
-indexTask, err := client.CreateIndex(ctx, milvusclient.NewCreateIndexOption("my_collection", "color",
-    index.NewJSONPathIndex(index.Inverted, "varchar", "color")))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-
-err = indexTask.Await(ctx)
-if err != nil {
-    fmt.Println(err.Error())
-    // handler err
-}
+```javascript
+  await client.createIndex(indexParams);
 ```
 
-```javascript
-const index_params = {
-    field_name: "color",               // Name of the "column" you see in queries (the dynamic key).
-    index_type: "INVERTED",            // Currently only "INVERTED" is supported for indexing JSON fields.
-    index_name: "color_index",         // Assign a name to this index.
-    params:{
-        "json_path": "color",          // JSON path to the key you want to index.
-        "json_cast_type": "varchar"   // Type to which Milvus will cast the extracted values.
-    }
+```go
+indexTask1, err := client.CreateIndex(ctx, indexOpt1)
+if err != nil {
+    return err
 }
-
-// Create the index
-await client.create_index({
-    collection_name: "my_collection",
-    index_params: index_params
-});
+indexTask2, err := client.CreateIndex(ctx, indexOpt2)
+if err != nil {
+    return err
+}
+indexTask3, err := client.CreateIndex(ctx, indexOpt3)
+if err != nil {
+    return err
+}
+indexTask4, err := client.CreateIndex(ctx, indexOpt4)
+if err != nil {
+    return err
+}
+indexTask5, err := client.CreateIndex(ctx, indexOpt5)
+if err != nil {
+    return err
+}
 ```
 
 ```bash
 # restful
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "collectionName": "my_collection",
-    "indexParams": [
-        {
-            "fieldName": "color",
-            "indexName": "color_index",
-            "indexType": "INVERTED",
-            "params": {
-                "json_path": "color",
-                "json_cast_type": "varchar"
-            }
-        }
-    ]
-}'
 ```
 
-### Query and search with dynamic field
+## Filter by dynamic field keys
 
-Milvus supports the use of filter expressions during queries and searches, allowing you to specify which fields to include in the results. The following example demonstrates how to perform queries and searches using the `color` field, which is not defined in the schema, by using the dynamic field.
+After inserting entities with dynamic field keys, you can filter them using standard filter expressions.
+
+- For non-JSON keys (e.g. strings, numbers, booleans), you can reference them by key name directly.
+
+- For keys storing JSON objects, use JSON path syntax to access nested values.
+
+Based on [the ](enable-dynamic-field.md#Insert-entities-to-the-collection)[example entity](enable-dynamic-field.md#Insert-entities-to-the-collection) from the previous section, valid filter expressions include:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -451,135 +723,83 @@ Milvus supports the use of filter expressions during queries and searches, allow
 </div>
 
 ```python
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-
-res = client.search(
-    collection_name="my_collection",
-    data=[query_vector],
-    limit=5,
-    # highlight-start
-    filter='color like "red%"',
-    output_fields=["color"]
-    # highlight-end
-)
-
-print(res)
-
-# Output
-# data: ["[{'id': 1, 'distance': 0.6290165185928345, 'entity': {'color': 'red_7025'}}, {'id': 4, 'distance': 0.5975797176361084, 'entity': {'color': 'red_4794'}}, {'id': 6, 'distance': -0.24996188282966614, 'entity': {'color': 'red_9392'}}]"] 
-
+filter = 'overview == "Great product"'                # Non-JSON key
+filter = 'words >= 100'                               # Non-JSON key
+filter = 'dynamic_json["nested"]["value"] < 50'       # JSON object key
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.SearchReq
-import io.milvus.v2.service.vector.request.data.FloatVec;
-import io.milvus.v2.service.vector.response.SearchResp
-
-FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
-SearchResp resp = client.search(SearchReq.builder()
-        .collectionName("my_collection")
-        .annsField("vector")
-        .data(Collections.singletonList(queryVector))
-        .outputFields(Collections.singletonList("color"))
-        .filter("color like \"red%\"")
-        .topK(5)
-        .consistencyLevel(ConsistencyLevel.STRONG)
-        .build());
-
-System.out.println(resp.getSearchResults());
-
-// Output
-//
-// [[
-//    SearchResp.SearchResult(entity={color=red_7025}, score=0.6290165, id=1),
-//    SearchResp.SearchResult(entity={color=red_4794}, score=0.5975797, id=4), 
-//    SearchResp.SearchResult(entity={color=red_9392}, score=-0.24996188, id=6)
-//]]
-
+String filter = 'overview == "Great product"';
+String filter = 'words >= 100';
+String filter = 'dynamic_json["nested"]["value"] < 50';
 ```
 
 ```javascript
-const query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-
-const res = await client.search({
-    collection_name: "quick_setup",
-    data: [query_vector],
-    limit: 5,
-    // highlight-start
-    filters: "color like \"red%\"",
-    output_fields: ["color"]
-    // highlight-end
-});
+filter = 'overview == "Great product"'                # Non-JSON key
+filter = 'words >= 100'                               # Non-JSON key
+filter = 'dynamic_json["nested"]["value"] < 50'       # JSON object key
 ```
 
 ```go
-queryVector := []float32{0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592}
-
-resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    "my_collection", // collectionName
-    5,                       // limit
-    []entity.Vector{entity.FloatVector(queryVector)},
-).WithFilter("color like \"red%\"").
-    WithANNSField("vector").
-    WithOutputFields("color"))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-
-for _, resultSet := range resultSets {
-    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
-    fmt.Println("Scores: ", resultSet.Scores)
-    fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
-}
+filter := 'overview == "Great product"'
+filter := 'words >= 100'
+filter := 'dynamic_json["nested"]["value"] < 50'
 ```
 
 ```bash
-export CLUSTER_ENDPOINT="http://localhost:19530"
-export TOKEN="root:Milvus"
-
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "collectionName": "my_collection",
-    "data": [
-        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-    ],
-    "annsField": "vector",
-    "filter": "color like \"red%\"",
-    "limit": 3,
-    "outputFields": ["color"]
-}'
-# {"code":0,"cost":0,"data":[{"color":"red_7025","distance":0.6290165,"id":1},{"color":"red_4794","distance":0.5975797,"id":4},{"color":"red_9392","distance":-0.24996185,"id":6}]}
+# restful
 ```
 
-In the filter expression used in the code example above, `color like "red%" and likes > 50`, the conditions specify that the value of the `color` field must start with **"red"**. In the sample data, only two entities meet this condition. Thus, when `limit` (topK) is set to `3` or fewer, both of these entities will be returned.
+For a full list of supported operators and filter expressions, refer to [Filtered Search](filtered-search.md).
 
-```json
-[
-    {
-        "id": 1, 
-        "distance": 0.6290165,
-        "entity": {
-            "color": "red_7025"
-        }
-    },
-    {
-        "id": 4, 
-        "distance": 0.5975797,
-        "entity": {
-            "color": "red_4794"
-        }
-    },
-    {
-        "id": 6, 
-        "distance": -0.24996188，
-        "entity": {
-            "color": "red_9392"
-        }
-    },
-]
-```
+## Put it all together
 
+By now, you’ve learned how to use the dynamic field to flexibly store and index keys that are not defined in the schema. Once a dynamic field key is inserted, you can use it just like any other field in filter expressions—no special syntax required.
+
+To complete the workflow in a real-world application, you’ll also need to:
+
+- **Create an index on your vector field** (mandatory for each collection)  
+
+    Refer to [Set Index Parameters](create-collection.md#Optional-Set-Index-Parameters)
+
+- **Load the collection**
+
+    Refer to [Load & Release](load-and-release.md)
+
+- **Search or query using JSON path filters**  
+
+    Refer to [Filtered Search](filtered-search.md) and [JSON Operators](json-operators.md)
+
+## FAQ
+
+### When should I define a field explicitly in the schema instead of using a dynamic field key?
+
+You should define a field explicitly in the schema instead of using a dynamic field key when:
+
+- **The field is frequently included in output_fields**: Only explicitly defined fields are guaranteed to be efficiently retrievable through `output_fields`. Dynamic field keys are not optimized for high-frequency retrieval and may incur performance overhead.
+
+- **The field is accessed or filtered frequently**: While indexing a dynamic field key can provide similar filtering performance to fixed schema fields, explicitly defined fields offer clearer structure and better maintainability.
+
+- **You need full control over field behavior**: Explicit fields support schema-level constraints, validations, and clearer typing, which can be useful for managing data integrity and consistency.
+
+- **You want to avoid indexing inconsistencies**: Data in dynamic field keys is more prone to inconsistency in type or structure. Using a fixed schema helps ensure data quality, especially if you plan to use indexing or casting.
+
+### Can I create multiple indexes on the same dynamic field key with different data types?
+
+No, you can create **only one index per JSON path**. Even if a dynamic field key contains mixed-type values (e.g., some strings and some numbers), you must choose a single `json_cast_type` when indexing that path. Multiple indexes on the same key with different types are not supported at this time.
+
+### When indexing a dynamic field key, what if the data casting fails?
+
+If you’ve created an index on a dynamic field key and the data casting fails—e.g., a value meant to be cast to `double` is a non-numeric string like `"abc"`—those specific values will be **silently skipped during index creation**. They won’t appear in the index and therefore **won’t be returned in filter-based search or query results** that rely on the index.
+
+This has a few important implications:
+
+- **No fallback to full scan**: If the majority of entities are successfully indexed, filtering queries will rely entirely on the index. Entities with casting failures will be excluded from the result set—even if they logically match the filter condition.
+
+- **Search accuracy risk**: In large datasets where data quality is inconsistent (especially in dynamic field keys), this behavior can lead to unexpected missing results. It’s critical to ensure consistent and valid data formatting before indexing.
+
+- **Use cast functions cautiously**: If you use a `json_cast_function` to convert strings to numbers during indexing, ensure the string values are reliably convertible. A mismatch between `json_cast_type` and the actual converted type will result in errors or skipped entries.
+
+### What happens if my query uses a different data type than the indexed cast type?
+
+If your query compares a dynamic field key using a **different data type** than what was used in the index (e.g., querying with a string comparison when the index was cast to `double`), the system will **not use the index**, and may fall back to a full scan *only if possible*. For best performance and accuracy, ensure your query type matches the `json_cast_type` used during index creation.
