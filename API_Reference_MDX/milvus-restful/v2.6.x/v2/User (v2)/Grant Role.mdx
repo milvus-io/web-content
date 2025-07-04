@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 85
+slug: /restful/Grant Role
+beta: FALSE
+title: "Grant Role To User | RESTful"
+description: "This operation grants a specified role to the current user. Once granted the role, the user gets permissions allowed for the current role and can perform certain operations.To complete this operation, you need to enable authentication on your Milvus instance. For details, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md). | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Grant Role To User"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Grant Role To User"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Grant Role To User
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Grant Role To User","deprecated":false,"description":"This operation grants a specified role to the current user. Once granted the role, the user gets permissions allowed for the current role and can perform certain operations.<include target=\"milvus\">To complete this operation, you need to enable authentication on your Milvus instance. For details, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).</include>","x-i18n":{"zh-CN":{"summary":"授予用户角色","description":"本接口可以为指定用户分配指定角色。角色授予完成后，用户将获得当前角色所允许的权限，并可以执行相应的操作。"}},"tags":["User Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","x-i18n":{"zh-CN":{"description":"认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}},"required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"userName":{"type":"string","description":"The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.","x-i18n":{"zh-CN":{"description":"待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"}}},"roleName":{"type":"string","description":"The name of the target role.","x-i18n":{"zh-CN":{"description":"目标角色名称。"}}}},"required":["roleName","userName"],"x-i18n-langs":["zh-CN"]},"examples":{"1":{"summary":"example","value":{"roleName":"admin","userName":"milvusAdmin"},"x-include-target":["milvus"]},"2":{"summary":"example","value":{"roleName":"db_admin","userName":"myUser"},"x-include-target":["zilliz"]}}}}},"responses":{"200":{"description":"None","content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","description":"A success response","x-i18n":{"zh-CN":{"description":"成功响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","properties":{},"description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应载荷。为空对象。"}}}}},{"x-tab-label":"failure","description":"A failure response.","x-i18n":{"zh-CN":{"description":"失败响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/users/grant_role"
+export const method = "post"

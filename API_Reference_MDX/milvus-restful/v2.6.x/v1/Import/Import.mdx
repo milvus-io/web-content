@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 9
+slug: /restful/import
+beta: NEAR DEPRECATE
+title: "Import | RESTful"
+description: "Imports data from files stored in a specified object storage bucket. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Import"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Import"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Import
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Import","deprecated":false,"description":"Imports data from files stored in a specified object storage bucket.","x-i18n":{"zh-CN":{"summary":"导入","description":"从指定对象存储桶中导入数据。"}},"tags":["Import Operations"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"clusterId":{"type":"string","description":"The ID of a cluster to which this operation applies.","x-i18n":{"zh-CN":{"description":"集群 ID。"}}},"collectionName":{"type":"string","description":"The name of the collection to which this operation applies.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}},"partitionName":{"type":"string","description":"The name of the partition to which this operation applies.","x-i18n":{"zh-CN":{"description":"Partition 名称。"}}},"objectUrl":{"type":"string","description":"The URL of the object that stores the data to be imported.","x-i18n":{"zh-CN":{"description":"存储待导入数据的对象 URL。"}}},"accessKey":{"type":"string","description":"The access key used to access the specified object.","x-i18n":{"zh-CN":{"description":"用于访问指定对象的 Access Key。"}}},"secretKey":{"type":"string","description":"The secret access key used to access the specified object.","x-i18n":{"zh-CN":{"description":"用于访问指定对象的 Secret Key。"}}}},"required":["collectionName","objectUrl","clusterId"]},"examples":{"1":{"summary":"request","value":{"clusterId":"inxx-xxxxxxxxxxxxxxx","collectionName":"medium_articles","objectUrl":"gs://docs-demo/1af78216-xxxx-2b0a73c566ed/1.parquet","accessKey":"xxxxxx","secretKey":"xxxxxx"}}}}}},"responses":{"200":{"description":"Returns a import task job ID.","x-i18n":{"zh-CN":{"description":"返回导入任务 ID。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","properties":{"jobId":{"type":"string","description":"The ID of the import job that has been submitted.","x-i18n":{"zh-CN":{"description":"提交的导入任务的 ID。"}}}},"required":["jobId"],"description":"Response payload, which is an object containing the import job ID.","x-i18n":{"zh-CN":{"description":"响应载荷，为一个包含导入任务 ID 的对象。"}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":200,"data":{"jobId":"job-xxxxxxxxxxxxxxxxxxxxxx"}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":80002,"message":"Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."}}}}}}},"security":[]}
+export const endpoint = "/v1/vector/collections/import"
+export const method = "post"

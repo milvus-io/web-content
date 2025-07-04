@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 83
+slug: /restful/Query
+beta: FALSE
+title: "Query | RESTful"
+description: "This operation conducts a filtering on the scalar field with a specified boolean expression. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Query"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Query"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Query
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Query","deprecated":false,"description":"This operation conducts a filtering on the scalar field with a specified boolean expression.","x-i18n":{"zh-CN":{"summary":"查询","description":"本接口可使用指定的布尔表达式对标量字段进行过滤。"}},"tags":["Vector Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":false,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database.","x-i18n":{"zh-CN":{"description":"数据库名称。"}}},"collectionName":{"type":"string","description":"The name of the collection to which this operation applies.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}},"filter":{"type":"string","description":"The filter used to find matches for the search.","x-i18n":{"zh-CN":{"description":"用于对标量字段进行过滤的表达式。"}}},"outputFields":{"type":"array","items":{"type":"string","description":"An output field name.","x-i18n":{"zh-CN":{"description":"随查询结果返回的字段名称。"}}},"description":"An array of fields to return along with the query results.","x-i18n":{"zh-CN":{"description":"需要在查询结果中返回的字名称数组。"}}},"partitionNames":{"type":"array","items":{"type":"string","description":"A partition name.","x-i18n":{"zh-CN":{"description":"Partition 名称。"}}},"description":"The name of the partitions to which this operation applies. Setting this parameter restricts the operation to the specified partitions. If not set, the operation applies to all partitions in the collection.","x-i18n":{"zh-CN":{"description":"Partition 名称列表。设置此参数可限制操作范围到指定的 Partition。未设置时，操作范围为 Collection 中的所有 Partition。"}}},"limit":{"type":"integer","description":"The total number of entities to return.\nYou can use this parameter in combination with **offset** in **param** to enable pagination.\nThe sum of this value and **offset** in **param** should be less than 16,384. ","x-i18n":{"zh-CN":{"description":"需要在搜索结果中返回的 Entity 数量。\n您可以使用此参数与 **offset** 参数结合使用以实现分页。\n此值与 **offset** 参数之和不应超过 16,384。"}}},"offset":{"type":"integer","description":"The number of records to skip in the search result. \nYou can use this parameter in combination with limit to enable pagination. \nThe sum of this value and limit should be less than 16,384. ","x-i18n":{"zh-CN":{"description":"需要在搜索结果中跳过的 Entity 数量。\n您可以使用此参数与 **limit** 参数结合使用以实现分页。\n此值与 **limit** 参数之和不应超过 16,384。"}}}},"required":["collectionName","filter"]},"example":{"collectionName":"quick_setup","filter":"color like \"red_%\"","outputFields":["color"],"limit":3}}}},"responses":{"200":{"description":"A list of dictionaries with each dictionary representing a queried entity.","x-i18n":{"zh-CN":{"description":"返回查询到的 Entity 列表，每个字典表示一个查询到的 Entity。"}},"content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"array","description":"A list of dictionaries with each dictionary representing a queried entity.","x-i18n":{"zh-CN":{"description":"查询到的 Entity 列表，每个字典表示一个查询到的 Entity。"}},"items":{"type":"object","properties":{},"description":"An entity object","x-i18n":{"zh-CN":{"description":"Entity 对象。"}}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"cost":0,"data":[{"color":"red_7025","id":1},{"color":"red_4794","id":4},{"color":"red_9392","id":6}]}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/entities/query"
+export const method = "post"

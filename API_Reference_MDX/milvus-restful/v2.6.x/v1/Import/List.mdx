@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 29
+slug: /restful/List
+beta: NEAR DEPRECATE
+title: "List Import Jobs | RESTful"
+description: "List all import jobs specific to a cluster. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "List Import Jobs"
+sidebar_custom_props: { badges: ['get']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "List Import Jobs"
+  - "get"
+  - RESTful
+  - API
+---
+
+# List Import Jobs
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"List Import Jobs","deprecated":false,"description":"List all import jobs specific to a cluster.","x-i18n":{"zh-CN":{"summary":"查看导入任务列表","description":"列出指定集群的导入任务。"}},"tags":["Import Operations"],"parameters":[{"name":"clusterId","in":"query","description":"The ID of a specific cluster on Zilliz Cloud.","required":true,"example":"inxx-xxxxxxxxxxxxxxx","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"Zilliz Cloud 上的特定集群的 ID。"}}},{"name":"pageSize","in":"query","description":"The number of records to return at each request.","required":false,"example":"10","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"每页返回记录数。"}}},{"name":"currentPage","in":"query","description":"The current page number.","required":false,"example":"1","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"当前页码。"}}},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"responses":{"200":{"description":"Returns a list of import jobs.","x-i18n":{"zh-CN":{"description":"返回导入任务列表。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"string","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","description":"Response payload which is a list containing import jobs in detail.","x-i18n":{"zh-CN":{"description":"响应负载，包含所有导入任务的详细信息。"}},"properties":{"count":{"type":"string","description":"Total number of records listed in this response.","x-i18n":{"zh-CN":{"description":"本次响应中列出的记录总数。"}}},"currentPage":{"type":"string","description":"The current page number for your reference.","x-i18n":{"zh-CN":{"description":"用于参考的当前页码。"}}},"pageSize":{"type":"string","description":"The maximum number of records to be included in each return.","x-i18n":{"zh-CN":{"description":"每页返回的最大记录数。"}}},"tasks":{"type":"array","description":"A list of import jobs in detail.","x-i18n":{"zh-CN":{"description":"导入任务的详细列表。"}},"items":{"type":"object","description":"A import job in detail.","x-i18n":{"zh-CN":{"description":"某个导入任务的详细信息。"}},"properties":{"collectionName":{"type":"string","description":"The target collection name of a import task.","x-i18n":{"zh-CN":{"description":"导入任务的目标 Collection 名称。"}}},"jobId":{"type":"string","description":"The ID of an import task.","x-i18n":{"zh-CN":{"description":"导入任务的 ID。"}}},"state":{"type":"string","description":"The corresponding status of the import task. Possible values are <b>ImportRunning</b>, <b>ImportCompleted</b> and <b>ImportFailed</b>.","x-i18n":{"zh-CN":{"description":"导入任务的对应状态。可能的值为 <b>ImportRunning</b>、<b>ImportCompleted</b> 和 <b>ImportFailed</b>。"}}}}}}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":200,"data":{"tasks":[{"collectionName":"medium_articles","jobId":"job-xxxxxxxxxxxxxxxxxxxxxx","state":"ImportRunning"},{"collectionName":"medium_articles","jobId":"2b93fef7-xxxx-xxxx-xxxx-f82afd598ff1","state":"ImportCompleted"}],"count":2,"currentPage":1,"pageSize":10}}},"2":{"x-target-response":"OPTION 2","summary":"failure","value":{"code":80002,"message":"Token not found or unauthorized: The provided token does not exist in our records, or you do not have the necessary permissions to use this token. Please ensure you have the correct token."}}}}}}},"security":[]}
+export const endpoint = "/v1/vector/collections/import/list"
+export const method = "get"

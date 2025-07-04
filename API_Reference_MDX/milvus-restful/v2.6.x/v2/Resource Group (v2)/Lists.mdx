@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 130
+slug: /restful/Lists
+beta: FALSE
+title: "List Resource Groups | RESTful"
+description: "This operation returns the list of resource group names. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "List Resource Groups"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "List Resource Groups"
+  - "post"
+  - RESTful
+  - API
+---
+
+# List Resource Groups
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"List Resource Groups","deprecated":false,"description":"This operation returns the list of resource group names.","x-i18n":{"zh-CN":{"summary":"查看资源组列表","description":"本操作返回资源组名称列表。"}},"x-include-target":["milvus"],"tags":["Resource Group (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{}},"example":{}}}},"responses":{"200":{"description":"Returns the list of resource group names.","x-i18n":{"zh-CN":{"description":"返回资源组名称列表。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","description":"A success response","x-i18n":{"zh-CN":{"description":"成功响应。"}},"type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"array","description":"The list of resource group names.","x-i18n":{"zh-CN":{"description":"资源组名称列表。"}},"items":{"type":"string","description":"The name of a resource group.","x-i18n":{"zh-CN":{"description":"资源组名称。"}}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":["__default_resource_group","group1"]}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}}}
+export const endpoint = "/v2/vectordb/resource_groups/list"
+export const method = "post"
