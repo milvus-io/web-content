@@ -34,11 +34,11 @@ filter = "RANDOM_SAMPLE(sampling_factor)"
 ```
 
 ```java
-// java
+String filter = "RANDOM_SAMPLE(sampling_factor)"
 ```
 
 ```go
-// go
+filter := "RANDOM_SAMPLE(sampling_factor)"
 ```
 
 ```javascript
@@ -82,11 +82,22 @@ filter = 'color == "red" OR RANDOM_SAMPLE(0.001)'  # ❌ Invalid logic
 ```
 
 ```java
-// java
+// Correct: Filter first, then sample
+String filter = 'color == "red" AND RANDOM_SAMPLE(0.001)';
+// Processing: Find all red items → Sample 0.1% of those red items
+
+// Incorrect: OR doesn't make logical sense
+String filter = 'color == "red" OR RANDOM_SAMPLE(0.001)';  // ❌ Invalid logic
+// This would mean: "Either red items OR sample everything" - which is meaningless
 ```
 
 ```go
-// go
+// Correct: Filter first, then sample
+filter := 'color == "red" AND RANDOM_SAMPLE(0.001)'
+// Processing: Find all red items → Sample 0.1% of those red items
+
+filter := 'color == "red" OR RANDOM_SAMPLE(0.001)' // ❌ Invalid logic
+// This would mean: "Either red items OR sample everything" - which is meaningless
 ```
 
 ```javascript
@@ -129,11 +140,62 @@ print(f"Sampled {len(result)} products from collection")
 ```
 
 ```java
-// java
+import io.milvus.v2.client.*;
+import io.milvus.v2.service.vector.request.QueryReq
+import io.milvus.v2.service.vector.request.QueryResp
+
+ConnectConfig config = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("product_catalog")
+        .filter("RANDOM_SAMPLE(0.01)")
+        .outputFields(Arrays.asList("id", "product_name"))
+        .limit(10)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
+
+List<QueryResp.QueryResult> results = queryResp.getQueryResults();
+for (QueryResp.QueryResult result : results) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("product_catalog").
+    WithFilter("RANDOM_SAMPLE(0.01)").
+    WithOutputFields("id", "product_name"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+fmt.Println("id: ", resultSet.GetColumn("id").FieldData().GetScalars())
+fmt.Println("product_name: ", resultSet.GetColumn("product_name").FieldData().GetScalars())
 ```
 
 ```javascript
@@ -172,11 +234,28 @@ print(f"Found {len(result)} electronics products in sample")
 ```
 
 ```java
-// java
+String filter = "category == \"electronics\" AND price > 100 AND RANDOM_SAMPLE(0.005)";
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("product_catalog")
+        .filter(filter)
+        .outputFields(Arrays.asList("product_name", "price", "rating"))
+        .limit(10)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
 ```
 
 ```go
-// go
+filter := "category == \"electronics\" AND price > 100 AND RANDOM_SAMPLE(0.005)"
+
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("product_catalog").
+    WithFilter(filter).
+    WithOutputFields("product_name", "price", "rating"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```javascript
@@ -222,11 +301,28 @@ if result:
 ```
 
 ```java
-// java
+String filter = "customer_tier == \"premium\" AND region == \"North America\" AND RANDOM_SAMPLE(0.001)";
+
+QueryReq queryReq = QueryReq.builder()
+        .collectionName("customer_profiles")
+        .filter(filter)
+        .outputFields(Arrays.asList("purchase_amount", "satisfaction_score", "last_purchase_date"))
+        .limit(10)
+        .build();
+
+QueryResp queryResp = client.query(queryReq);
 ```
 
 ```go
-// go
+filter := "customer_tier == \"premium\" AND region == \"North America\" AND RANDOM_SAMPLE(0.001)"
+
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption("customer_profiles").
+    WithFilter(filter).
+    WithOutputFields("purchase_amount", "satisfaction_score", "last_purchase_date"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```javascript
@@ -265,11 +361,51 @@ print(f"Found {len(search_results[0])} similar books in sample")
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp
+
+FloatVec queryVector = new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f, 0.5f});
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("product_catalog")
+        .data(Collections.singletonList(queryVector))
+        .topK(10)
+        .filter("category == \"books\" AND RANDOM_SAMPLE(0.01)")
+        .outputFields(Arrays.asList("title", "author", "price"))
+        .build();
+
+SearchResp searchResp = client.search(searchReq);
+
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
+
 ```
 
 ```go
-// go
+queryVector := []float32{0.1, 0.2, 0.3, 0.4, 0.5}
+
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "product_catalog", // collectionName
+    10,               // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithConsistencyLevel(entity.ClStrong).
+    WithFilter("category == \"books\" AND RANDOM_SAMPLE(0.01)").
+    WithOutputFields("title", "author", "price"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("title: ", resultSet.GetColumn("title").FieldData().GetScalars())
+    fmt.Println("author: ", resultSet.GetColumn("author").FieldData().GetScalars())
+    fmt.Println("price: ", resultSet.GetColumn("price").FieldData().GetScalars())
+}
 ```
 
 ```javascript
