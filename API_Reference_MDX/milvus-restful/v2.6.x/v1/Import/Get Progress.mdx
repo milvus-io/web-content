@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 23
+slug: /restful/get-import-progress
+beta: NEAR DEPRECATE
+title: "Get Import Progress | RESTful"
+description: "Retrieves the progress of a specified import task. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Get Import Progress"
+sidebar_custom_props: { badges: ['get']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Get Import Progress"
+  - "get"
+  - RESTful
+  - API
+---
+
+# Get Import Progress
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Get Import Progress","deprecated":false,"description":"Retrieves the progress of a specified import task.","x-i18n":{"zh-CN":{"summary":"查看导入进度","description":"查看指定导入任务的进度。"}},"tags":["Import Operations"],"parameters":[{"name":"jobId","in":"query","description":"The ID of the import task in concern","required":true,"example":"job-xxxxxxxxxxxxxxxxxx","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"导入任务的 ID。"}}},{"name":"clusterId","in":"query","description":"The ID of a cluster to which this operation applies.","required":true,"example":"inxx-xxxxxxxxxxxxxxx","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"集群 ID。"}}},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"responses":{"200":{"description":"Returns the progress of the specified job ID in percentage.","x-i18n":{"zh-CN":{"description":"以百分比形式返回指定任务 ID 的进度。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","description":"Response payload which is an object containing the progress of the import task.","x-i18n":{"zh-CN":{"description":"指定导入任务的进度详情。"}},"properties":{"fileName":{"type":"string","description":"The path of the data file object in the object storage."},"fileSize":{"type":"integer","description":"The size of the data file object.","format":"int64"},"readyPercentage":{"type":"number","description":"The indicator of the import progress","format":"float"},"completeTime":{"type":"string","description":"The time at which the import task completes. `null` indicates that the file import is going on.","nullable":true},"errorMessage":{"type":"string","description":"The message that explains the reason for an import failure. `null` indicates that no error occurs.","nullable":true},"collectionName":{"type":"string","description":"The target collection name of the import task."},"jobId":{"type":"string","description":"The ID of an import task."},"details":{"type":"array","items":{"type":"object","description":"A list of import progress details per data files","x-i18n":{"zh-CN":{"description":"按数据文件维度分别收集的数据导入进度信息。"}},"properties":{"fileName":{"type":"string","description":"The path to a file being imported."},"fileSize":{"type":"integer","description":"The size of a file being imported.","format":"int64"},"readyPercentage":{"type":"number","description":"The import progress of a specific file.","format":"float"},"completeTime":{"type":"string","description":"The time at which the import progress ends for a specific file. `null` indicates that the file import is going on.","nullable":true},"errorMessage":{"type":"string","description":"The message that explains the reason for an import failure. `null` indicates that no error occurs.","nullable":true}}},"description":"The import task details"}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":200,"data":{"collectionName":"medium_articles","fileName":"1af78216-xxxx-xxxx-xxxx-2b0a73c566ed/1.parquet","fileSize":19599887,"readyPercentage":0,"completeTime":null,"errorMessage":null,"jobId":"job-xxxxxxxxxxxxxxxxxxxxxx","details":[{"fileName":"1af78216-xxxx-xxxx-xxxx-2b0a73c566ed/1.parquet","fileSize":19599887,"readyPercentage":0,"completeTime":null,"errorMessage":null}]}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}},"security":[]}
+export const endpoint = "/v1/vector/collections/import/get"
+export const method = "get"
