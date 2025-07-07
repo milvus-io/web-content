@@ -1,11 +1,9 @@
 ---
 id: inverted.md
-title: 反轉
-summary: >-
-  Milvus 中的 INVERTED 索引旨在加速標量欄位和結構化 JSON
-  欄位的篩選查詢。透過將詞彙對應到包含這些詞彙的文件或記錄，倒轉式索引可大幅提升查詢效能。
+title: 反向
+summary: 當您需要對資料執行頻繁的篩選查詢時，倒轉式索引可以顯著提高查詢性能。Milvus 不需要掃描所有文件，而是使用倒轉式索引來快速找出符合篩選條件的精確記錄。
 ---
-<h1 id="INVERTED" class="common-anchor-header">反轉<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">反向<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 中的<code translate="no">INVERTED</code> 索引旨在加速標量欄位和結構化 JSON 欄位的過濾查詢。透過將詞彙對應到包含這些詞彙的文件或記錄，倒轉式索引可大幅提升查詢效能。</p>
-<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>當您需要對資料執行頻繁的篩選查詢時，<code translate="no">INVERTED</code> 索引可以顯著提高查詢性能。Milvus 使用倒排索引來快速找到符合篩選條件的精確記錄，而不是掃描所有文件。</p>
+<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">何時使用反轉索引<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,23 +34,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> 的支援下，Milvus 實作了倒置索引來加速篩選查詢，尤其是針對文字資料。以下是其運作方式：</p>
-<ol>
-<li><p><strong>將資料標記化</strong>：Milvus 採用您的原始資料 (本範例中為兩句話)：</p>
+    </button></h2><p>當您需要時，請使用 INVERTED 索引：</p>
 <ul>
-<li><p><strong>「Milvus是一個雲端原生向量資料庫」。</strong></p></li>
-<li><p><strong>「Milvus 非常擅長效能」。</strong></p></li>
+<li><p><strong>根據特定值進行篩選</strong>：尋找欄位等於特定值的所有記錄 (例如<code translate="no">category == &quot;electronics&quot;</code>)</p></li>
+<li><p><strong>過濾文字內容</strong>：在<code translate="no">VARCHAR</code> 欄位上執行有效率的搜尋</p></li>
+<li><p><strong>查詢 JSON 欄位值</strong>：篩選 JSON 結構中的特定鍵</p></li>
 </ul>
-<p>並將它們分割成獨特的詞彙 (例如：<em>Milvus</em>、<em>is</em>、<em>cloud-native</em>、<em>向量</em>、<em>資料庫</em>、<em>very</em>、<em>good</em>、<em>at</em>、<em>performance</em>)。</p></li>
-<li><p><strong>建立詞彙辭典</strong>：這些獨特的詞彙會儲存在一個排序清單中，稱為<strong>詞彙辭典</strong>。這個詞典可讓 Milvus 快速檢查單字是否存在，並找出它在索引中的位置。</p></li>
-<li><p><strong>建立反向清單</strong>：對於詞彙辭典中的每個詞彙，Milvus 保存一個<strong>反向列表</strong>，顯示哪些文件包含該詞彙。例如，<strong>"Milvus "</strong>出現在兩個句子中，所以它的反向列表指向兩個文件 ID。</p></li>
+<p><strong>效能優勢</strong>：INVERTED 索引不需要進行全集掃描，可將大型資料集的查詢時間從幾秒縮短至幾毫秒。</p>
+<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTED 索引如何運作<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus 使用<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>來實作反轉索引。流程如下</p>
+<ol>
+<li><p><strong>標記化</strong>：Milvus 將您的資料分解為可搜尋的詞彙</p></li>
+<li><p><strong>詞彙字典</strong>：建立所有獨特詞彙的排序清單</p></li>
+<li><p><strong>反向清單</strong>：將每個詞彙對應到包含該詞彙的文件</p></li>
 </ol>
+<p>例如，給出這兩個句子：</p>
+<ul>
+<li><p><strong>"Milvus 是雲原生向量資料庫</strong></p></li>
+<li><p><strong>「Milvus 的性能非常出色」</strong></p></li>
+</ul>
+<p>倒排索引會將<strong>「Milvus」</strong>→<strong>[文件 0、文件 1]</strong>、<strong>「cloud-native」</strong>→<strong>[文件 0]</strong>、<strong>「效能」</strong>→<strong>[文件 1]</strong>等詞彙對映。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
-   </span> <span class="img-wrapper"> <span>倒置</span> </span></p>
-<p>由於字典已排序，因此可以有效率地處理基於詞彙的篩選。Milvus 不需要掃描所有的文件，只需在字典中查詢該詞彙，並擷取其倒置清單 - 大幅加快大型資料集的搜尋與篩選速度。</p>
-<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">索引一般的標量欄位<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
+   </span> <span class="img-wrapper"> <span>反向索引</span> </span></p>
+<p>當您使用詞彙進行篩選時，Milvus 會在字典中查找該詞彙，並立即檢索所有匹配的文件。</p>
+<p>INVERTED 索引支援所有標量欄位類型：<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong> 和<strong>ARRAY</strong>。然而，索引 JSON 欄位的索引參數與一般標量欄位略有不同。</p>
+<h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">在非 JSON 欄位上建立索引<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,123 +89,65 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>對於<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong> 和<strong>ARRAY</strong> 等標量字段，建立反演索引非常簡單。使用<code translate="no">create_index()</code> 方法，並將<code translate="no">index_type</code> 參數設為<code translate="no">&quot;INVERTED&quot;</code> 。</p>
+    </button></h2><p>要在非 JSON 欄位上建立索引，請遵循下列步驟：</p>
+<ol>
+<li><p>準備您的索引參數：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>) <span class="hljs-comment"># Replace with your server address</span>
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+<span class="hljs-comment"># Create an empty index parameter object</span>
+index_params = client.prepare_index_params()
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>新增<code translate="no">INVERTED</code> 索引：</p>
+<pre><code translate="no" class="language-python">index_params.add_index(
+    field_name=<span class="hljs-string">&quot;category&quot;</span>,           <span class="hljs-comment"># Name of the field to index</span>
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,          <span class="hljs-comment"># Specify INVERTED index type</span></span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span>     <span class="hljs-comment"># Give your index a name</span>
+)
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>建立索引：</p>
+<pre><code translate="no" class="language-python">client.create_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Replace with your collection name</span>
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<h2 id="Create-indexes-on-JSON-fields--Milvus-2511+" class="common-anchor-header">在 JSON 欄位上建立索引<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Create-indexes-on-JSON-fields--Milvus-2511+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>您也可以在 JSON 欄位內的特定路徑上建立 INVERTED 索引。這需要額外的參數來指定 JSON 路徑和資料類型：</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Build index params</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_field_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,                    <span class="hljs-comment"># JSON field name</span>
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,</span>
+    index_name=<span class="hljs-string">&quot;metadata_category_index&quot;</span>,
+<span class="highlighted-comment-line">    params={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>,    <span class="hljs-comment"># Path to the JSON key</span></span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>              <span class="hljs-comment"># Data type to cast to during indexing</span></span>
+<span class="highlighted-comment-line">    }</span>
 )
 
+<span class="hljs-comment"># Create index</span>
 client.create_index(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Replace with your collection name</span>
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-JSON-field" class="common-anchor-header">索引一個 JSON 欄位<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus 將其索引功能擴展到 JSON 欄位，允許您有效地過濾儲存在單列中的嵌套或結構化資料。與標量欄位不同，當索引一個 JSON 欄位時，您必須提供兩個額外的參數：</p>
-<ul>
-<li><p><code translate="no">json_path</code><strong>:</strong>指定要索引的巢狀關鍵字。</p></li>
-<li><p><code translate="no">json_cast_type</code><strong>:</strong>定義資料類型 (例如<code translate="no">&quot;varchar&quot;</code>,<code translate="no">&quot;double&quot;</code>, 或<code translate="no">&quot;bool&quot;</code>)，擷取的 JSON 值將被轉換成這種類型。</p></li>
-</ul>
-<p>例如，考慮一個名為<code translate="no">metadata</code> 的 JSON 欄位，其結構如下：</p>
-<pre><code translate="no" class="language-plaintext">{
-  &quot;metadata&quot;: {
-    &quot;product_info&quot;: {
-      &quot;category&quot;: &quot;electronics&quot;,
-      &quot;brand&quot;: &quot;BrandA&quot;
-    },
-    &quot;price&quot;: 99.99,
-    &quot;in_stock&quot;: true,
-    &quot;tags&quot;: [&quot;summer_sale&quot;, &quot;clearance&quot;]
-  }
-}
-<button class="copy-code-btn"></button></code></pre>
-<p>若要在特定的 JSON 路徑上建立反轉索引，您可以使用下列方法：</p>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
-
-<span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string.</span>
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,         <span class="hljs-comment"># JSON field name</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,         <span class="hljs-comment"># Specify the inverted index type</span>
-    index_name=<span class="hljs-string">&quot;json_index_1&quot;</span>,      <span class="hljs-comment"># Custom name for this JSON index</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;]&quot;</span>,  <span class="hljs-comment"># Path to the &#x27;category&#x27; key</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>   <span class="hljs-comment"># Cast the value as a string</span>
-    }
-)
-
-<span class="hljs-comment"># Example 2: Index the &#x27;price&#x27; key as a numeric type (double).</span>
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,         <span class="hljs-comment"># JSON field name</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
-    index_name=<span class="hljs-string">&quot;json_index_2&quot;</span>,      <span class="hljs-comment"># Custom name for this JSON index</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>,  <span class="hljs-comment"># Path to the &#x27;price&#x27; key</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>           <span class="hljs-comment"># Cast the value as a double</span>
-    }
-)
-
-<button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>參數</p></th>
-     <th><p>說明</p></th>
-     <th><p>範例 值</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">field_name</code></p></td>
-     <td><p>模式中 JSON 欄位的名稱。</p></td>
-     <td><p><code translate="no">"metadata"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">index_type</code></p></td>
-     <td><p>要建立的索引類型；目前只有<code translate="no">INVERTED</code> 支援 JSON 路徑索引。</p></td>
-     <td><p><code translate="no">"INVERTED"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(可選）自訂索引名稱。如果您在同一 JSON 欄位上建立多個索引，請指定不同的名稱。</p></td>
-     <td><p><code translate="no">"json_index_1"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>指定要索引的 JSON 路徑。您可以針對巢狀索引鍵、陣列位置或兩者 (例如<code translate="no">metadata["product_info"]["category"]</code> 或<code translate="no">metadata["tags"][0]</code>)。如果路徑遺失或某一行的陣列元素不存在，索引過程中會直接跳過該行，且不會產生錯誤。</p></td>
-     <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>在建立索引時，Milvus 會將抽取的 JSON 值轉換成的資料類型。有效值：</p>
-<ul>
-<li><p><code translate="no">"bool"</code> 或<code translate="no">"BOOL"</code></p></li>
-<li><p><code translate="no">"double"</code> 或<code translate="no">"DOUBLE"</code></p></li>
-<li><p><code translate="no">"varchar"</code> 或<code translate="no">"VARCHAR"</code></p>
-<p><strong>注意</strong>：對於整數值，Milvus 內部使用 double 來建立索引。超過 2^53 的大整數會失去精確度。如果轉換失敗（由於類型不匹配），不會產生錯誤，該行的值也不會被索引。</p></li>
-</ul></td>
-     <td><p><code translate="no">"varchar"</code></p></td>
-   </tr>
-</table>
-<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">JSON 索引的注意事項<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
+<p>有關 JSON 欄位索引的詳細資訊，包括支援的路徑、資料類型和限制，請參閱<a href="/docs/zh-hant/use-json-fields.md">JSON Field</a>。</p>
+<h2 id="Best-practices" class="common-anchor-header">最佳實務<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -199,22 +163,27 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>過濾邏輯</strong>：</p>
-<ul>
-<li><p>如果您<strong>建立了雙重類型的索引</strong>(<code translate="no">json_cast_type=&quot;double&quot;</code>)，則只有數值類型的篩選條件才能使用該索引。如果篩選條件將雙索引與非數字條件比較，Milvus 會退回到暴力搜尋。</p></li>
-<li><p>如果您<strong>建立了 varchar 類型的索引</strong>(<code translate="no">json_cast_type=&quot;varchar&quot;</code>)，只有字串類型的篩選條件可以使用該索引。否則，Milvus 會回到暴力搜尋。</p></li>
-<li><p><strong>布林</strong>索引的行為與 varchar-type 類似。</p></li>
-</ul></li>
-<li><p><strong>術語表達式</strong>：</p>
-<ul>
-<li>您可以使用<code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code> 。但是，索引只對存放在該路徑下的標量值有效。如果<code translate="no">json[&quot;field&quot;]</code> 是一個陣列，查詢會退回到暴力查詢 (目前尚未支援陣列類型索引)。</li>
-</ul></li>
-<li><p><strong>數值精確度</strong>：</p>
-<ul>
-<li>在內部，Milvus 將所有數值欄位索引為雙倍。如果數值超過<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>，就會失去精確度，對這些超出範圍的數值進行查詢時，可能無法完全匹配。</li>
-</ul></li>
-<li><p><strong>資料完整性</strong>：</p>
-<ul>
-<li>Milvus 不會解析或轉換超出您指定的鑄造範圍的 JSON 鍵。如果來源資料不一致（例如，有些資料列的 key<code translate="no">&quot;k&quot;</code> 儲存了字串，有些則儲存了數字），有些資料列將不會被索引。</li>
-</ul></li>
+<li><p><strong>在載入資料後建立索引</strong>：在已包含資料的集合上建立索引，以獲得更佳效能</p></li>
+<li><p><strong>使用描述性索引名稱</strong>：選擇能清楚指出欄位和目的的名稱</p></li>
+<li><p><strong>監控索引效能</strong>：在建立索引之前和之後，檢查查詢效能</p></li>
+<li><p><strong>考慮您的查詢模式</strong>：在您經常篩選的欄位上建立索引</p></li>
+</ul>
+<h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p>瞭解<a href="/docs/zh-hant/index-explained.md">其他索引類型</a></p></li>
+<li><p>請參閱<a href="/docs/zh-hant/use-json-fields.md#Index-values-inside-the-JSON-field">JSON 欄位索引</a>，瞭解進階的 JSON 索引情境</p></li>
 </ul>

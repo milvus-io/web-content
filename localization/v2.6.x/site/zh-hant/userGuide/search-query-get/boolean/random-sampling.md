@@ -20,11 +20,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在處理大規模資料集時，您通常不需要處理所有資料來獲得洞察力或測試篩選邏輯。隨機抽樣提供了一個解決方案，讓您可以處理具有統計代表性的資料子集，大幅減少查詢時間和資源消耗。</p>
+    </button></h1><p>在處理大規模資料集時，您通常不需要處理所有資料，就能獲得洞察力或測試篩選邏輯。隨機抽樣提供了一個解決方案，讓您可以處理具有統計代表性的資料子集，大幅減少查詢時間和資源消耗。</p>
 <p>隨機抽樣在區段層級運作，可確保高效的效能，同時在您的集合資料分佈中維持抽樣的隨機性。</p>
 <p><strong>主要用例：</strong></p>
 <ul>
-<li><p><strong>資料探索</strong>：以最少的資源使用量快速預覽資料集結構和內容</p></li>
+<li><p><strong>資料探索</strong>：以最少的資源使用量快速預覽資料集結構與內容</p></li>
 <li><p><strong>開發測試</strong>：在全面部署之前，在可管理的資料樣本上測試複雜的篩選邏輯</p></li>
 <li><p><strong>資源最佳化</strong>：降低探索性查詢和統計分析的計算成本</p></li>
 </ul>
@@ -47,9 +47,9 @@ beta: Milvus 2.6.x
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -90,9 +90,20 @@ beta: Milvus 2.6.x
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAMPLE(0.001)&#x27;</span>  <span class="hljs-comment"># ❌ Invalid logic</span>
 <span class="hljs-comment"># This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Correct: Filter first, then sample</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;color == &quot;red&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>;
+<span class="hljs-comment">// Processing: Find all red items → Sample 0.1% of those red items</span>
+
+<span class="hljs-comment">// Incorrect: OR doesn&#x27;t make logical sense</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAMPLE(0.001)&#x27;</span>;  <span class="hljs-comment">// ❌ Invalid logic</span>
+<span class="hljs-comment">// This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// Correct: Filter first, then sample</span>
+filter := <span class="hljs-string">&#x27;color == &quot;red&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>
+<span class="hljs-comment">// Processing: Find all red items → Sample 0.1% of those red items</span>
+
+filter := <span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAMPLE(0.001)&#x27;</span> <span class="hljs-comment">// ❌ Invalid logic</span>
+<span class="hljs-comment">// This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -130,9 +141,60 @@ result = client.query(
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Sampled <span class="hljs-subst">{<span class="hljs-built_in">len</span>(result)}</span> products from collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+<span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .filter(<span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;product_name&quot;</span>))
+        .limit(<span class="hljs-number">10</span>)
+        .build();
+
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
+
+List&lt;QueryResp.QueryResult&gt; results = queryResp.getQueryResults();
+<span class="hljs-keyword">for</span> (QueryResp.QueryResult result : results) {
+    System.out.println(result.getEntity());
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;product_catalog&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;product_name&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+fmt.Println(<span class="hljs-string">&quot;id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;id&quot;</span>).FieldData().GetScalars())
+fmt.Println(<span class="hljs-string">&quot;product_name: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;product_name&quot;</span>).FieldData().GetScalars())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -153,9 +215,26 @@ result = client.query(
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Found <span class="hljs-subst">{<span class="hljs-built_in">len</span>(result)}</span> electronics products in sample&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;category == \&quot;electronics\&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;</span>;
+
+<span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .filter(filter)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>))
+        .limit(<span class="hljs-number">10</span>)
+        .build();
+
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;category == \&quot;electronics\&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;</span>
+
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;product_catalog&quot;</span>).
+    WithFilter(filter).
+    WithOutputFields(<span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -183,9 +262,26 @@ result = client.query(
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Average purchase amount: $<span class="hljs-subst">{average_purchase:<span class="hljs-number">.2</span>f}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Average satisfaction score: <span class="hljs-subst">{average_satisfaction:<span class="hljs-number">.2</span>f}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;customer_tier == \&quot;premium\&quot; AND region == \&quot;North America\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>;
+
+<span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;customer_profiles&quot;</span>)
+        .filter(filter)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;purchase_amount&quot;</span>, <span class="hljs-string">&quot;satisfaction_score&quot;</span>, <span class="hljs-string">&quot;last_purchase_date&quot;</span>))
+        .limit(<span class="hljs-number">10</span>)
+        .build();
+
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;customer_tier == \&quot;premium\&quot; AND region == \&quot;North America\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>
+
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;customer_profiles&quot;</span>).
+    WithFilter(filter).
+    WithOutputFields(<span class="hljs-string">&quot;purchase_amount&quot;</span>, <span class="hljs-string">&quot;satisfaction_score&quot;</span>, <span class="hljs-string">&quot;last_purchase_date&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,9 +302,49 @@ search_results = client.search(
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Found <span class="hljs-subst">{<span class="hljs-built_in">len</span>(search_results[<span class="hljs-number">0</span>])}</span> similar books in sample&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>});
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .data(Collections.singletonList(queryVector))
+        .topK(<span class="hljs-number">10</span>)
+        .filter(<span class="hljs-string">&quot;category == \&quot;books\&quot; AND RANDOM_SAMPLE(0.01)&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;author&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>))
+        .build();
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+
+List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
+
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>}
+
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">10</span>,               <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithConsistencyLevel(entity.ClStrong).
+    WithFilter(<span class="hljs-string">&quot;category == \&quot;books\&quot; AND RANDOM_SAMPLE(0.01)&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;author&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;title: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;title&quot;</span>).FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;author: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;author&quot;</span>).FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;price: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;price&quot;</span>).FieldData().GetScalars())
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -230,7 +366,7 @@ search_results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>從小處開始</strong>：從較小的採樣因子 (0.001-0.01)<strong>開始</strong>進行初步探索</p></li>
+<li><p><strong>從小處開始</strong>：從較小的取樣因子 (0.001-0.01)<strong>開始</strong>進行初步探索</p></li>
 <li><p><strong>開發工作流程</strong>：在開發過程中使用取樣，在生產查詢中移除取樣</p></li>
 <li><p><strong>統計有效性</strong>：較大的樣本可提供更精確的統計表現</p></li>
 <li><p><strong>效能測試</strong>：監控查詢效能，並視需要調整取樣因子</p></li>

@@ -2,9 +2,9 @@
 id: enable-dynamic-field.md
 title: الحقل الديناميكي
 summary: >-
-  يجب تضمين جميع الحقول المحددة في مخطط المجموعة في الكيانات المراد إدراجها. إذا
-  كنت تريد أن تكون بعض الحقول اختيارية، ففكر في تمكين الحقل الديناميكي. يصف هذا
-  الموضوع كيفية تمكين الحقل الديناميكي واستخدامه.
+  يسمح لك Milvus بإدراج كيانات ذات هياكل مرنة ومتطورة من خلال ميزة خاصة تسمى
+  الحقل الديناميكي. يُنفذ هذا الحقل كحقل JSON مخفي يسمى $meta، والذي يخزن
+  تلقائيًا أي حقول في بياناتك غير محددة صراحةً في مخطط المجموعة.
 ---
 <h1 id="Dynamic-Field" class="common-anchor-header">الحقل الديناميكي<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يجب تضمين جميع الحقول المحددة في مخطط المجموعة في الكيانات المراد إدراجها. إذا كنت تريد أن تكون بعض الحقول اختيارية، ففكر في تمكين الحقل الديناميكي. يصف هذا الموضوع كيفية تمكين الحقل الديناميكي واستخدامه.</p>
-<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>يسمح لك ميلفوس بإدراج كيانات ذات هياكل مرنة ومتطورة من خلال ميزة خاصة تسمى الحقل <strong>الديناميكي</strong>. يتم تنفيذ هذا الحقل كحقل JSON مخفي يسمى <code translate="no">$meta</code> ، والذي يخزن تلقائيًا أي حقول في بياناتك <strong>غير محددة بشكل صريح</strong> في مخطط المجموعة.</p>
+<h2 id="How-it-works" class="common-anchor-header">كيف يعمل الحقل الديناميكي<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,9 +37,71 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في ملفوس، يمكنك إنشاء مخطط مجموعة من خلال تعيين الأسماء وأنواع البيانات لكل حقل في المجموعة. عند إضافة حقل إلى المخطط، تأكد من تضمين هذا الحقل في الكيان الذي تنوي إدراجه. إذا كنت تريد أن تكون بعض الحقول اختيارية، فإن تمكين الحقل الديناميكي هو أحد الخيارات.</p>
-<p>الحقل الديناميكي هو حقل محجوز يسمى <strong>$meta،</strong> وهو من نوع JavaScript Object Notation (JSON). سيتم تخزين أي حقول في الكيانات التي لم يتم تعريفها في المخطط في حقل JSON المحجوز هذا كأزواج قيمة مفتاح-قيمة.</p>
-<p>بالنسبة لمجموعة مع تمكين الحقل الديناميكي، يمكنك استخدام المفاتيح في الحقل الديناميكي للتصفية العددية، تمامًا كما تفعل مع الحقول المحددة صراحةً في المخطط.</p>
+    </button></h2><p>عند تمكين الحقل الديناميكي، يضيف ميلفوس حقلاً مخفياً <code translate="no">$meta</code> إلى كل كيان. أثناء إدراج البيانات، يتم تخزين أي حقل لم يتم الإعلان عنه في المخطط تلقائيًا كزوج من مفتاح وقيمة داخل هذا الحقل الديناميكي.</p>
+<p>لا تحتاج إلى إدارة <code translate="no">$meta</code> يدويًا - فـ Milvus يعالجها بشفافية.</p>
+<p>على سبيل المثال، إذا كان مخطط مجموعتك يحدد فقط <code translate="no">id</code> و <code translate="no">vector</code> ، وقمت بإدراج الكيان التالي:</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Item A&quot;</span><span class="hljs-punctuation">,</span>    <span class="hljs-comment">// Not in schema</span>
+  <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;books&quot;</span>  <span class="hljs-comment">// Not in schema</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>مع تمكين ميزة الحقل الديناميكي، يقوم ميلفوس بتخزينه داخليًا على أنه:</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">&quot;$meta&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Item A&quot;</span><span class="hljs-punctuation">,</span></span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;books&quot;</span></span>
+<span class="highlighted-comment-line">  <span class="hljs-punctuation">}</span></span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>يسمح لك هذا بتطوير بنية البيانات الخاصة بك دون تغيير المخطط.</p>
+<p>تتضمن حالات الاستخدام الشائعة ما يلي:</p>
+<ul>
+<li><p>تخزين الحقول الاختيارية أو التي يتم استرجاعها بشكل غير متكرر</p></li>
+<li><p>التقاط البيانات الوصفية التي تختلف حسب الكيان</p></li>
+<li><p>دعم التصفية المرنة عبر الفهارس على مفاتيح حقول ديناميكية محددة</p></li>
+</ul>
+<h2 id="Supported-data-types" class="common-anchor-header">أنواع البيانات المدعومة<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يدعم الحقل الديناميكي جميع أنواع البيانات القياسية التي يوفرها ميلفوس، بما في ذلك القيم البسيطة والمعقدة. تنطبق أنواع البيانات هذه على ** قيم المفاتيح المخزنة في <code translate="no">$meta</code>.</p>
+<p><strong>تشمل الأنواع المدعومة ما يلي:</strong></p>
+<ul>
+<li><p>سلسلة (<code translate="no">VARCHAR</code>)</p></li>
+<li><p>عدد صحيح (<code translate="no">INT8</code> ، <code translate="no">INT32</code> ، ، <code translate="no">INT64</code>)</p></li>
+<li><p>النقطة العائمة (<code translate="no">FLOAT</code> ، <code translate="no">DOUBLE</code>)</p></li>
+<li><p>منطقية (<code translate="no">BOOL</code>)</p></li>
+<li><p>صفيف القيم القياسية (<code translate="no">ARRAY</code>)</p></li>
+<li><p>كائنات JSON (<code translate="no">JSON</code>)</p></li>
+</ul>
+<p><strong>مثال:</strong></p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Acme&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">29.99</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;in_stock&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;new&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;hot&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;specs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;weight&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.2kg&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;dimensions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;width&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;height&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>سيتم تخزين كل من المفاتيح والقيم المذكورة أعلاه داخل الحقل <code translate="no">$meta</code>.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">تمكين الحقل الديناميكي<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,86 +117,121 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك تمكين الحقل الديناميكي يدويًا عند إنشاء مجموعة بإعدادات مخصصة.</p>
+    </button></h2><p>لاستخدام ميزة الحقل الديناميكي، قم بتعيين <code translate="no">enable_dynamic_field=True</code> عند إنشاء مخطط المجموعة:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<span class="hljs-comment"># Initialize client</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
+<span class="hljs-comment"># Create schema with dynamic field enabled</span>
+schema = client.create_schema(
+    auto_id=<span class="hljs-literal">False</span>,
+<span class="highlighted-wrapper-line">    enable_dynamic_field=<span class="hljs-literal">True</span>,</span>
+)
+
+<span class="hljs-comment"># Add explicitly defined fields</span>
+schema.add_field(field_name=<span class="hljs-string">&quot;my_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
+schema.add_field(field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
+
+<span class="hljs-comment"># Create the collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    dimension=<span class="hljs-number">5</span>,
-<span class="highlighted-wrapper-line">    enable_dynamic_field=<span class="hljs-literal">True</span></span>
+    schema=schema
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.*;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
+        .enableDynamicField(<span class="hljs-literal">true</span>)
+        .build();
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(Boolean.TRUE)
         .build());
-        
-<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-    .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-    .dimension(<span class="hljs-number">5</span>)
-<span class="highlighted-wrapper-line">    .enableDynamicField(<span class="hljs-literal">true</span>)</span>
-    .build()
-client.createCollection(createCollectionReq);
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
+
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .build();
+client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">CreateCollectionReq</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Client</span>({
-    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>
+<span class="hljs-comment">// Initialize client</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;localhost:19530&#x27;</span> });
+
+<span class="hljs-comment">// Create collection</span>
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+  <span class="hljs-attr">schema</span>:  [
+      {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;my_id&#x27;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+        <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>,
+      },
+      {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;my_vector&#x27;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+        <span class="hljs-attr">type_params</span>: {
+          <span class="hljs-attr">dim</span>: <span class="hljs-string">&#x27;5&#x27;</span>,
+      }
+   ],
+   <span class="hljs-attr">enable_dynamic_field</span>: <span class="hljs-literal">true</span>
 });
 
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    <span class="hljs-attr">schema</span>: schema,
-<span class="highlighted-wrapper-line">    <span class="hljs-attr">enable_dynamic_field</span>: <span class="hljs-literal">true</span></span>
-});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-)  
+)
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle err</span>
+    <span class="hljs-keyword">return</span> err
 }
-<span class="hljs-keyword">defer</span> client.Close(ctx)
 
-err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-number">5</span>).
-    WithAutoID(<span class="hljs-literal">false</span>).
-    WithDynamicSchema(<span class="hljs-literal">true</span>))
+schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">true</span>)
+schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;my_id&quot;</span>).pk
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">5</span>),
+)
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span> err
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;dimension&quot;: 5,
-    &quot;enableDynamicField&quot;: true
-}&#x27;</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-dynamic-field" class="common-anchor-header">استخدام الحقل الديناميكي<button data-href="#Use-dynamic-field" class="anchor-icon" translate="no">
+<h2 id="Insert-entities-to-the-collection" class="common-anchor-header">إدراج كيانات في المجموعة<button data-href="#Insert-entities-to-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,394 +246,482 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عندما يتم تمكين الحقل الديناميكي في مجموعتك، سيتم تخزين جميع الحقول وقيمها غير المحددة في المخطط كأزواج مفاتيح-قيم في الحقل الديناميكي.</p>
-<p>على سبيل المثال، لنفترض أن مخطط مجموعتك يحدد حقلين فقط، وهما <code translate="no">id</code> و <code translate="no">vector</code> ، مع تمكين الحقل الديناميكي. الآن، أدخل مجموعة البيانات التالية في هذه المجموعة.</p>
-<pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19886812562848388</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.06023560599112088</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6976963061752597</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2614474506242501</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.838729485096104</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.43742130801983836</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.5597502546264526</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6457887650909682</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.7894058910881185</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.20785793220625592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;orange_6781&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3172005263489739</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9719044792798428</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.36981146090600725</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.4860894583077995</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.95791889146345</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_9298&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.4452349528804562</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.8757026943054742</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.8220779437047674</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.46406290649483184</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.30337481143159106</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_4794&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.985825131989184</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.8144651566660419</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6299267002202009</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.1206906911183383</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.1446277761879955</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;yellow_4222&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">6</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.8371977790571115</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.015764369584852833</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.31062937026679327</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.562666951622192</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.8984947637863987</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_9392&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">7</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">-0.33445148015177995</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.2567135004164067</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.8987539745369246</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9402995886420709</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.5378064918413052</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;grey_8510&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">8</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.39524717779832685</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.4000257286739164</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.5890507376891594</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.8650502298996872</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6140360785406336</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;white_9381&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">9</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.5718280481994695</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24070317428066512</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.3737913482606834</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.06726932177492717</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6980531615588608</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purple_4976&quot;</span><span class="hljs-punctuation">}</span>        
-<span class="hljs-punctuation">]</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>تحتوي مجموعة البيانات أعلاه على 10 كيانات، يتضمن كل منها الحقول <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code>. هنا، لم يتم تعريف الحقل <code translate="no">color</code> في المخطط. نظرًا لأن المجموعة تحتوي على الحقل الديناميكي، فسيتم تخزين الحقل <code translate="no">color</code> كزوج من مفتاح وقيمة داخل الحقل الديناميكي.</p>
-<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>يوضح الرمز التالي كيفية إدراج مجموعة البيانات هذه في المجموعة.</p>
+    </button></h2><p>يسمح لك الحقل الديناميكي بإدراج حقول إضافية غير محددة في المخطط. سيتم تخزين هذه الحقول تلقائيًا في <code translate="no">$meta</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">data=[
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, <span class="hljs-number">0.7894058910881185</span>, <span class="hljs-number">0.20785793220625592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;orange_6781&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_9298&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.4452349528804562</span>, -<span class="hljs-number">0.8757026943054742</span>, <span class="hljs-number">0.8220779437047674</span>, <span class="hljs-number">0.46406290649483184</span>, <span class="hljs-number">0.30337481143159106</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_4794&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.985825131989184</span>, -<span class="hljs-number">0.8144651566660419</span>, <span class="hljs-number">0.6299267002202009</span>, <span class="hljs-number">0.1206906911183383</span>, -<span class="hljs-number">0.1446277761879955</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;yellow_4222&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">6</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.8371977790571115</span>, -<span class="hljs-number">0.015764369584852833</span>, -<span class="hljs-number">0.31062937026679327</span>, -<span class="hljs-number">0.562666951622192</span>, -<span class="hljs-number">0.8984947637863987</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_9392&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&quot;vector&quot;</span>: [-<span class="hljs-number">0.33445148015177995</span>, -<span class="hljs-number">0.2567135004164067</span>, <span class="hljs-number">0.8987539745369246</span>, <span class="hljs-number">0.9402995886420709</span>, <span class="hljs-number">0.5378064918413052</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;grey_8510&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.39524717779832685</span>, <span class="hljs-number">0.4000257286739164</span>, -<span class="hljs-number">0.5890507376891594</span>, -<span class="hljs-number">0.8650502298996872</span>, -<span class="hljs-number">0.6140360785406336</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;white_9381&quot;</span>},
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>}
+<pre><code translate="no" class="language-python">entities = [
+    {
+        <span class="hljs-string">&quot;my_id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-comment"># Explicitly defined primary field</span>
+        <span class="hljs-string">&quot;my_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-comment"># Explicitly defined vector field</span>
+        <span class="hljs-string">&quot;overview&quot;</span>: <span class="hljs-string">&quot;Great product&quot;</span>,       <span class="hljs-comment"># Scalar key not defined in schema</span>
+        <span class="hljs-string">&quot;words&quot;</span>: <span class="hljs-number">150</span>,                      <span class="hljs-comment"># Scalar key not defined in schema</span>
+        <span class="hljs-string">&quot;dynamic_json&quot;</span>: {                  <span class="hljs-comment"># JSON key not defined in schema</span>
+            <span class="hljs-string">&quot;varchar&quot;</span>: <span class="hljs-string">&quot;some text&quot;</span>,
+            <span class="hljs-string">&quot;nested&quot;</span>: {
+                <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">42.5</span>
+            },
+            <span class="hljs-string">&quot;string_price&quot;</span>: <span class="hljs-string">&quot;99.99&quot;</span>        <span class="hljs-comment"># Number stored as string</span>
+        }
+    }
 ]
 
-res = client.insert(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=data
-)
-
-<span class="hljs-built_in">print</span>(res)
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment"># {&#x27;insert_count&#x27;: 10, &#x27;ids&#x27;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}</span>
+client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=entities)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
-   
+
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-List&lt;JsonObject&gt; data = Arrays.asList(
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 0, \&quot;vector\&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], \&quot;color\&quot;: \&quot;pink_8682\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 1, \&quot;vector\&quot;: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], \&quot;color\&quot;: \&quot;red_7025\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 2, \&quot;vector\&quot;: [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], \&quot;color\&quot;: \&quot;orange_6781\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3, \&quot;vector\&quot;: [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], \&quot;color\&quot;: \&quot;pink_9298\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 4, \&quot;vector\&quot;: [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], \&quot;color\&quot;: \&quot;red_4794\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 5, \&quot;vector\&quot;: [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], \&quot;color\&quot;: \&quot;yellow_4222\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 6, \&quot;vector\&quot;: [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], \&quot;color\&quot;: \&quot;red_9392\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 7, \&quot;vector\&quot;: [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], \&quot;color\&quot;: \&quot;grey_8510\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 8, \&quot;vector\&quot;: [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], \&quot;color\&quot;: \&quot;white_9381\&quot;}&quot;</span>, JsonObject.class),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 9, \&quot;vector\&quot;: [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], \&quot;color\&quot;: \&quot;purple_4976\&quot;}&quot;</span>, JsonObject.class)
-);
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row.addProperty(<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-number">1</span>);
+row.add(<span class="hljs-string">&quot;my_vector&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>)));
+row.addProperty(<span class="hljs-string">&quot;overview&quot;</span>, <span class="hljs-string">&quot;Great product&quot;</span>);
+row.addProperty(<span class="hljs-string">&quot;words&quot;</span>, <span class="hljs-number">150</span>);
 
-<span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">dynamic</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+dynamic.addProperty(<span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">&quot;some text&quot;</span>);
+dynamic.addProperty(<span class="hljs-string">&quot;string_price&quot;</span>, <span class="hljs-string">&quot;99.99&quot;</span>);
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">nested</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+nested.addProperty(<span class="hljs-string">&quot;value&quot;</span>, <span class="hljs-number">42.5</span>);
+
+dynamic.add(<span class="hljs-string">&quot;nested&quot;</span>, nested);
+row.add(<span class="hljs-string">&quot;dynamic_json&quot;</span>, dynamic);
+
+client.insert(InsertReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .data(data)
-        .build();
-
-<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(insertReq);
-System.out.println(insertResp);
-
-<span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// InsertResp(InsertCnt=10, primaryKeys=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+        .data(Collections.singletonList(row))
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
-
-<span class="hljs-comment">// 3. Insert some data</span>
-
-<span class="hljs-keyword">const</span> data = [
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, <span class="hljs-number">0.7894058910881185</span>, <span class="hljs-number">0.20785793220625592</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;orange_6781&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;pink_9298&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.4452349528804562</span>, -<span class="hljs-number">0.8757026943054742</span>, <span class="hljs-number">0.8220779437047674</span>, <span class="hljs-number">0.46406290649483184</span>, <span class="hljs-number">0.30337481143159106</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;red_4794&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.985825131989184</span>, -<span class="hljs-number">0.8144651566660419</span>, <span class="hljs-number">0.6299267002202009</span>, <span class="hljs-number">0.1206906911183383</span>, -<span class="hljs-number">0.1446277761879955</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;yellow_4222&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">6</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.8371977790571115</span>, -<span class="hljs-number">0.015764369584852833</span>, -<span class="hljs-number">0.31062937026679327</span>, -<span class="hljs-number">0.562666951622192</span>, -<span class="hljs-number">0.8984947637863987</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;red_9392&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">7</span>, <span class="hljs-attr">vector</span>: [-<span class="hljs-number">0.33445148015177995</span>, -<span class="hljs-number">0.2567135004164067</span>, <span class="hljs-number">0.8987539745369246</span>, <span class="hljs-number">0.9402995886420709</span>, <span class="hljs-number">0.5378064918413052</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;grey_8510&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.39524717779832685</span>, <span class="hljs-number">0.4000257286739164</span>, -<span class="hljs-number">0.5890507376891594</span>, -<span class="hljs-number">0.8650502298996872</span>, -<span class="hljs-number">0.6140360785406336</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;white_9381&quot;</span>},
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">9</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>}        
-]
-
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">const</span> entities = [
+  {
+    <span class="hljs-attr">my_id</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">my_vector</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>],
+    <span class="hljs-attr">overview</span>: <span class="hljs-string">&#x27;Great product&#x27;</span>,
+    <span class="hljs-attr">words</span>: <span class="hljs-number">150</span>,
+    <span class="hljs-attr">dynamic_json</span>: {
+      <span class="hljs-attr">varchar</span>: <span class="hljs-string">&#x27;some text&#x27;</span>,
+      <span class="hljs-attr">nested</span>: {
+        <span class="hljs-attr">value</span>: <span class="hljs-number">42.5</span>,
+      },
+      <span class="hljs-attr">string_price</span>: <span class="hljs-string">&#x27;99.99&#x27;</span>,
+    },
+  },
+];
 <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-attr">data</span>: data,
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">insert_cnt</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// 10</span>
-<span class="hljs-comment">// </span>
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+    <span class="hljs-attr">data</span>: entities,
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">dynamicColumn := column.NewColumnString(<span class="hljs-string">&quot;color&quot;</span>, []<span class="hljs-type">string</span>{
-    <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;orange_6781&quot;</span>, <span class="hljs-string">&quot;pink_9298&quot;</span>, <span class="hljs-string">&quot;red_4794&quot;</span>, <span class="hljs-string">&quot;yellow_4222&quot;</span>, <span class="hljs-string">&quot;red_9392&quot;</span>, <span class="hljs-string">&quot;grey_8510&quot;</span>, <span class="hljs-string">&quot;white_9381&quot;</span>, <span class="hljs-string">&quot;purple_4976&quot;</span>,
-})
-
-_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithInt64Column(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>}).
-    WithFloatVectorColumn(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-number">5</span>, [][]<span class="hljs-type">float32</span>{
-        {<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>},
-        {<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>},
-        {<span class="hljs-number">0.43742130801983836</span>, <span class="hljs-number">-0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, <span class="hljs-number">0.7894058910881185</span>, <span class="hljs-number">0.20785793220625592</span>},
-        {<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, <span class="hljs-number">-0.36981146090600725</span>, <span class="hljs-number">-0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>},
-        {<span class="hljs-number">0.4452349528804562</span>, <span class="hljs-number">-0.8757026943054742</span>, <span class="hljs-number">0.8220779437047674</span>, <span class="hljs-number">0.46406290649483184</span>, <span class="hljs-number">0.30337481143159106</span>},
-        {<span class="hljs-number">0.985825131989184</span>, <span class="hljs-number">-0.8144651566660419</span>, <span class="hljs-number">0.6299267002202009</span>, <span class="hljs-number">0.1206906911183383</span>, <span class="hljs-number">-0.1446277761879955</span>},
-        {<span class="hljs-number">0.8371977790571115</span>, <span class="hljs-number">-0.015764369584852833</span>, <span class="hljs-number">-0.31062937026679327</span>, <span class="hljs-number">-0.562666951622192</span>, <span class="hljs-number">-0.8984947637863987</span>},
-        {<span class="hljs-number">-0.33445148015177995</span>, <span class="hljs-number">-0.2567135004164067</span>, <span class="hljs-number">0.8987539745369246</span>, <span class="hljs-number">0.9402995886420709</span>, <span class="hljs-number">0.5378064918413052</span>},
-        {<span class="hljs-number">0.39524717779832685</span>, <span class="hljs-number">0.4000257286739164</span>, <span class="hljs-number">-0.5890507376891594</span>, <span class="hljs-number">-0.8650502298996872</span>, <span class="hljs-number">-0.6140360785406336</span>},
-        {<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, <span class="hljs-number">-0.3737913482606834</span>, <span class="hljs-number">-0.06726932177492717</span>, <span class="hljs-number">-0.6980531615588608</span>},
-    }).
-    WithColumns(dynamicColumn),
-)
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithInt64Column(<span class="hljs-string">&quot;my_id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>}).
+    WithFloatVectorColumn(<span class="hljs-string">&quot;my_vector&quot;</span>, <span class="hljs-number">5</span>, [][]<span class="hljs-type">float32</span>{
+        {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>},
+    }).WithColumns(
+    column.NewColumnVarChar(<span class="hljs-string">&quot;overview&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Great product&quot;</span>}),
+    column.NewColumnInt32(<span class="hljs-string">&quot;words&quot;</span>, []<span class="hljs-type">int32</span>{<span class="hljs-number">150</span>}),
+    column.NewColumnJSONBytes(<span class="hljs-string">&quot;dynamic_json&quot;</span>, [][]<span class="hljs-type">byte</span>{
+        []<span class="hljs-type">byte</span>(<span class="hljs-string">`{
+            varchar: &#x27;some text&#x27;,
+            nested: {
+                value: 42.5,
+            },
+            string_price: &#x27;99.99&#x27;,
+        }`</span>),
+    }),
+))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle err</span>
+    <span class="hljs-keyword">return</span> err
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;data&quot;: [
-        {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},
-        {&quot;id&quot;: 1, &quot;vector&quot;: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], &quot;color&quot;: &quot;red_7025&quot;},
-        {&quot;id&quot;: 2, &quot;vector&quot;: [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], &quot;color&quot;: &quot;orange_6781&quot;},
-        {&quot;id&quot;: 3, &quot;vector&quot;: [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], &quot;color&quot;: &quot;pink_9298&quot;},
-        {&quot;id&quot;: 4, &quot;vector&quot;: [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], &quot;color&quot;: &quot;red_4794&quot;},
-        {&quot;id&quot;: 5, &quot;vector&quot;: [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], &quot;color&quot;: &quot;yellow_4222&quot;},
-        {&quot;id&quot;: 6, &quot;vector&quot;: [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], &quot;color&quot;: &quot;red_9392&quot;},
-        {&quot;id&quot;: 7, &quot;vector&quot;: [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], &quot;color&quot;: &quot;grey_8510&quot;},
-        {&quot;id&quot;: 8, &quot;vector&quot;: [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], &quot;color&quot;: &quot;white_9381&quot;},
-        {&quot;id&quot;: 9, &quot;vector&quot;: [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], &quot;color&quot;: &quot;purple_4976&quot;}        
-    ],
-    &quot;collectionName&quot;: &quot;my_collection&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;insertCount&quot;: 10,</span>
-<span class="hljs-comment">#         &quot;insertIds&quot;: [</span>
-<span class="hljs-comment">#             0,</span>
-<span class="hljs-comment">#             1,</span>
-<span class="hljs-comment">#             2,</span>
-<span class="hljs-comment">#             3,</span>
-<span class="hljs-comment">#             4,</span>
-<span class="hljs-comment">#             5,</span>
-<span class="hljs-comment">#             6,</span>
-<span class="hljs-comment">#             7,</span>
-<span class="hljs-comment">#             8,</span>
-<span class="hljs-comment">#             9</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Index-a-scalar-field-in-the-dynamic-field" class="common-anchor-header">فهرسة حقل قياسي في الحقل الديناميكي</h3><p>عندما تقوم بتمكين حقل ديناميكي، يتم تخزين أي حقول قياسية غير محددة كأزواج مفاتيح-قيم بتنسيق JSON. يدعم Milvus إنشاء فهرس على مثل هذا الحقل القياسي غير المعرّف، بشكل فعال من خلال بناء فهرس مسار JSON. إليك كيفية عمل ذلك:</p>
-<ol>
-<li><p><strong>اختر مفتاح الحقل الديناميكي</strong> الذي تريد فهرسته. على سبيل المثال، <code translate="no">&quot;color&quot;</code> في المثال أعلاه.</p></li>
-<li><p><strong>حدّد نوع الجبيرة</strong> للقيم الموجودة في هذا المفتاح. سيقوم ميلفوس بتحليل الحقل الديناميكي، واستخراج القيم الموجودة تحت المفتاح المحدد، وإرسالها إلى النوع الذي قمت بتكوينه.</p>
+<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">مفاتيح الفهرسة في الحقل الديناميكي<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يسمح لك Milvus باستخدام <strong>فهرسة مسار JSON</strong> لإنشاء فهارس على مفاتيح محددة داخل الحقل الديناميكي. يمكن أن تكون هذه قيمًا قياسية أو قيمًا متداخلة في كائنات JSON.</p>
+<div class="alert note">
+<p>فهرسة مفاتيح الحقول الديناميكية <strong>اختيارية</strong>. لا يزال بإمكانك الاستعلام أو التصفية حسب مفاتيح الحقول الديناميكية بدون فهرس، ولكن قد يؤدي ذلك إلى أداء أبطأ بسبب البحث بالقوة الغاشمة.</p>
+</div>
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">بناء جملة فهرسة مسار JSON</h3><p>لإنشاء فهرس مسار JSON، حدد:</p>
 <ul>
-<li><p>القيم <code translate="no">json_cast_type</code> المدعومة هي <code translate="no">bool</code> (أو <code translate="no">BOOL</code>) و <code translate="no">double</code> (أو <code translate="no">DOUBLE</code>) و <code translate="no">varchar</code> (أو <code translate="no">VARCHAR</code>).</p></li>
-<li><p>في حالة فشل التحليل أو الصب (على سبيل المثال، محاولة تحليل سلسلة على أنها مزدوجة)، سيتم تخطي هذه الصفوف في الفهرس.</p></li>
+<li><p><strong>مسار JSON</strong> (<code translate="no">json_path</code>): المسار إلى المفتاح أو الحقل المتداخل داخل كائن JSON الذي تريد فهرسته.</p>
+<ul>
+<li><p>مثال: <code translate="no">metadata[&quot;category&quot;]</code></p>
+<p>هذا يحدد المكان الذي يجب أن يبحث فيه محرك الفهرسة داخل بنية JSON.</p></li>
 </ul></li>
-<li><p><strong>حدد مسار JSON</strong> لهذا المفتاح على أنه <code translate="no">json_path</code>. نظرًا لأن الحقل الديناميكي يتم تخزينه على هيئة JSON، يمكنك تحديد شيء مثل <code translate="no">&quot;color&quot;</code> ، أو إذا كان لديك هياكل متداخلة، يمكنك تحديد مسارات أعمق (على سبيل المثال <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
-<li><p><strong>قم بإنشاء فهرس INVERTED</strong>. حاليًا، يتم دعم نوع <code translate="no">INVERTED</code> فقط لفهرسة مسار JSON.</p></li>
-</ol>
-<p>للحصول على تفاصيل حول المعلمات والاعتبارات، راجع <a href="/docs/ar/use-json-fields.md#Index-a-JSON-field">فهرسة حقل JSON</a>.</p>
-<p>فيما يلي مثال على كيفية إنشاء فهرس على الحقل <code translate="no">&quot;color&quot;</code>:</p>
+<li><p><strong>نوع إرسال JSON</strong> (<code translate="no">json_cast_type</code>): نوع البيانات الذي يجب أن يستخدمه Milvus عند تفسير وفهرسة القيمة في المسار المحدد.</p>
+<ul>
+<li><p>يجب أن يتطابق هذا النوع مع نوع البيانات الفعلي للحقل الذي تتم فهرسته.</p></li>
+<li><p>للاطلاع على قائمة كاملة، ارجع إلى <a href="/docs/ar/use-json-fields.md#Supported-JSON-cast-types">أنواع مسبوكات JSON المدعومة</a>.</p></li>
+</ul></li>
+</ul>
+<h3 id="Index-non-JSON-keys-in-the-dynamic-field" class="common-anchor-header">فهرسة مفاتيح غير JSON في الحقل الديناميكي</h3><p>يمكنك فهرسة أي مفتاح غير JSON (على سبيل المثال، <code translate="no">overview</code> ، <code translate="no">words</code>) بالرجوع إلى اسم المفتاح الخاص به مباشرةً في <code translate="no">json_path</code>:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
-index_params = client.prepare_index_params()
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
+<span class="hljs-comment"># Index a string key from $meta</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;color&quot;</span>,               <span class="hljs-comment"># Name of the &quot;column&quot; you see in queries (the dynamic key).</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,            <span class="hljs-comment"># Currently only &quot;INVERTED&quot; is supported for indexing JSON fields.</span>
-    index_name=<span class="hljs-string">&quot;color_index&quot;</span>,         <span class="hljs-comment"># Assign a name to this index.</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;color&quot;</span>,         <span class="hljs-comment"># JSON path to the key you want to index.</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>   <span class="hljs-comment"># Type to which Milvus will cast the extracted values.</span>
-    }
+    field_name=<span class="hljs-string">&quot;overview&quot;</span>,  <span class="hljs-comment"># Key name in the dynamic field</span>
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Must be set to AUTOINDEX or INVERTEDfor JSON path indexing</span></span>
+    index_name=<span class="hljs-string">&quot;overview_index&quot;</span>,  <span class="hljs-comment"># Unique index name</span>
+<span class="highlighted-comment-line">    params={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>,   <span class="hljs-comment"># Data type that Milvus uses when indexing the values</span></span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;overview&quot;</span>        <span class="hljs-comment"># Key name in the dynamic field</span></span>
+<span class="highlighted-comment-line">    }</span>
 )
 
-<span class="hljs-comment"># Create the index</span>
-client.create_index(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    index_params=index_params
+<span class="hljs-comment"># Index a numeric key from $meta</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;words&quot;</span>,  <span class="hljs-comment"># Key name in the dynamic field</span>
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Must be set to AUTOINDEX or INVERTEDfor JSON path indexing</span></span>
+    index_name=<span class="hljs-string">&quot;words_index&quot;</span>,  <span class="hljs-comment"># Unique index name</span>
+<span class="highlighted-comment-line">    params={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>,  <span class="hljs-comment"># Data type that Milvus uses when indexing the values</span></span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;words&quot;</span> <span class="hljs-comment"># Key name in the dynamic field</span></span>
+<span class="highlighted-comment-line">    }</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-
-Map&lt;String,Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-extraParams.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>);
-extraParams.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;varchar&quot;</span>);
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
-        .indexName(<span class="hljs-string">&quot;color_index&quot;</span>)
-        .indexType(IndexParam.IndexType.INVERTED)
-        .extraParams(extraParams)
+Map&lt;String,Object&gt; extraParams1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams1.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;overview&quot;</span>);
+extraParams1.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;varchar&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;overview&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;overview_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams1)
         .build());
+
+Map&lt;String,Object&gt; extraParams2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams2.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;words&quot;</span>);
+extraParams2.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;double&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;words&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;words_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams2)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = [
+    {
+      <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+      <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;overview&#x27;</span>,
+      <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;overview_index&#x27;</span>,
+      <span class="hljs-attr">index_type</span>: <span class="hljs-string">&#x27;AUTOINDEX&#x27;</span>,
+      <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;NONE&#x27;</span>,
+      <span class="hljs-attr">params</span>: {
+        <span class="hljs-attr">json_path</span>: <span class="hljs-string">&#x27;overview&#x27;</span>,
+        <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&#x27;varchar&#x27;</span>,
+      },
+    },
+    {
+      <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+      <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;words&#x27;</span>,
+      <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;words_index&#x27;</span>,
+      <span class="hljs-attr">index_type</span>: <span class="hljs-string">&#x27;AUTOINDEX&#x27;</span>,
+      <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;NONE&#x27;</span>,
+      <span class="hljs-attr">params</span>: {
+        <span class="hljs-attr">json_path</span>: <span class="hljs-string">&#x27;words&#x27;</span>,
+        <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&#x27;double&#x27;</span>,
+      },
+    },
+  ];
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+)
+
+jsonIndex1 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">&quot;overview&quot;</span>)
+    .WithIndexName(<span class="hljs-string">&quot;overview_index&quot;</span>)
+jsonIndex2 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">&quot;words&quot;</span>)
+    .WithIndexName(<span class="hljs-string">&quot;words_index&quot;</span>)
+
+indexOpt1 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;overview&quot;</span>, jsonIndex1)
+indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;words&quot;</span>, jsonIndex2)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Index-JSON-keys-in-the-dynamic-field" class="common-anchor-header">فهرسة مفاتيح JSON في الحقل الديناميكي</h3><p>عندما يقوم مفتاح في الحقل الديناميكي (<code translate="no">$meta</code>) بتخزين كائن JSON، يمكنك فهرسة مفاتيحه الداخلية باستخدام الترميز بين قوسين في <code translate="no">json_path</code>.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Index a top-level key inside a JSON object</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-comment"># JSON key name in the dynamic field</span>
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Must be set to AUTOINDEX or INVERTEDfor JSON path indexing</span></span>
+    index_name=<span class="hljs-string">&quot;json_varchar_index&quot;</span>, <span class="hljs-comment"># Unique index name</span>
+<span class="highlighted-comment-line">    params={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-comment"># Data type that Milvus uses when indexing the values</span></span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;dynamic_json[&#x27;varchar&#x27;]&quot;</span> <span class="hljs-comment"># Path to the key to be indexed</span></span>
+<span class="highlighted-comment-line">    }</span>
+)
+
+<span class="hljs-comment"># Index a nested key</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;dynamic_json&quot;</span>,
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># Must be set to AUTOINDEX or INVERTEDfor JSON path indexing</span></span>
+    index_name=<span class="hljs-string">&quot;json_nested_index&quot;</span>, <span class="hljs-comment"># Unique index name</span>
+<span class="highlighted-comment-line">    params={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]&quot;</span></span>
+<span class="highlighted-comment-line">    }</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">Map&lt;String,Object&gt; extraParams3 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams3.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;dynamic_json[&#x27;varchar&#x27;]&quot;</span>);
+extraParams3.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;varchar&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;dynamic_json&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;json_varchar_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams3)
+        .build());
+
+Map&lt;String,Object&gt; extraParams4 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams4.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]&quot;</span>);
+extraParams4.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;double&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;dynamic_json&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;json_nested_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams4)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+      <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+      <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;dynamic_json&#x27;</span>,
+      <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;json_varchar_index&#x27;</span>,
+      <span class="hljs-attr">index_type</span>: <span class="hljs-string">&#x27;AUTOINDEX&#x27;</span>,
+      <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;NONE&#x27;</span>,
+      <span class="hljs-attr">params</span>: {
+        <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&#x27;varchar&#x27;</span>,
+        <span class="hljs-attr">json_path</span>: <span class="hljs-string">&quot;dynamic_json[&#x27;varchar&#x27;]&quot;</span>,
+      },
+    },
+    {
+      <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+      <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;dynamic_json&#x27;</span>,
+      <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;json_nested_index&#x27;</span>,
+      <span class="hljs-attr">index_type</span>: <span class="hljs-string">&#x27;AUTOINDEX&#x27;</span>,
+      <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;NONE&#x27;</span>,
+      <span class="hljs-attr">params</span>: {
+        <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&#x27;double&#x27;</span>,
+        <span class="hljs-attr">json_path</span>: <span class="hljs-string">&quot;dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]&quot;</span>,
+      },
+    });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">jsonIndex3 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;varchar&#x27;]`</span>)
+    .WithIndexName(<span class="hljs-string">&quot;json_varchar_index&quot;</span>)
+jsonIndex4 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]`</span>)
+    .WithIndexName(<span class="hljs-string">&quot;json_nested_index&quot;</span>)
+
+indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex3)
+indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex4)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">استخدم دالات JSON cast لتحويل النوع<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h3><p>إذا كان مفتاح الحقل الديناميكي يحتوي على قيم بتنسيق غير صحيح، (على سبيل المثال الأرقام المخزنة كسلاسل)، يمكنك استخدام دالة الإرسال لتحويلها:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-comment"># JSON key name</span>
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    index_name=<span class="hljs-string">&quot;json_string_price_index&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;dynamic_json[&#x27;string_price&#x27;]&quot;</span>,
+        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-comment"># Must be the output type of the cast function</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;json_cast_function&quot;</span>: <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span> <span class="hljs-comment"># Case insensitive; convert string to double</span></span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">Map&lt;String,Object&gt; extraParams5 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams5.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;dynamic_json[&#x27;string_price&#x27;]&quot;</span>);
+extraParams5.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;double&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;dynamic_json&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;json_string_price_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams5)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;dynamic_json&#x27;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;json_string_price_index&#x27;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&#x27;AUTOINDEX&#x27;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;NONE&#x27;</span>,
+    <span class="hljs-attr">params</span>: {
+      <span class="hljs-attr">json_path</span>: <span class="hljs-string">&quot;dynamic_json[&#x27;string_price&#x27;]&quot;</span>,
+      <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&#x27;double&#x27;</span>,
+      <span class="hljs-attr">json_cast_function</span>: <span class="hljs-string">&#x27;STRING_TO_DOUBLE&#x27;</span>,
+    },
+  });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">jsonIndex5 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;string_price&#x27;]`</span>)
+    .WithIndexName(<span class="hljs-string">&quot;json_string_price_index&quot;</span>)
+indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex5)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<ul>
+<li><p>إذا فشل تحويل النوع (على سبيل المثال القيمة <code translate="no">&quot;not_a_number&quot;</code> لا يمكن تحويلها إلى رقم)، يتم تخطي القيمة وإلغاء فهرستها.</p></li>
+<li><p>للحصول على تفاصيل حول معلمات دالة الإرسال، راجع <a href="/docs/ar/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">حقل JSON</a>.</p></li>
+</ul>
+</div>
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">تطبيق الفهارس على المجموعة</h3><p>بعد تحديد معلمات الفهرس، يمكنك تطبيقها على المجموعة باستخدام <code translate="no">create_index()</code>:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.create_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
 
 client.createIndex(CreateIndexReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .indexParams(indexes)
+        .indexParams(indexParams)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">indexTask, err := client.CreateIndex(ctx, milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>,
-    index.NewJSONPathIndex(index.Inverted, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>)))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-
-err = indexTask.Await(ctx)
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handler err</span>
-}
+<pre><code translate="no" class="language-javascript">  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(indexParams);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = {
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;color&quot;</span>,               <span class="hljs-comment">// Name of the &quot;column&quot; you see in queries (the dynamic key).</span>
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;INVERTED&quot;</span>,            <span class="hljs-comment">// Currently only &quot;INVERTED&quot; is supported for indexing JSON fields.</span>
-    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;color_index&quot;</span>,         <span class="hljs-comment">// Assign a name to this index.</span>
-    <span class="hljs-attr">params</span>:{
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;color&quot;</span>,          <span class="hljs-comment">// JSON path to the key you want to index.</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>   <span class="hljs-comment">// Type to which Milvus will cast the extracted values.</span>
-    }
+<pre><code translate="no" class="language-go">indexTask1, err := client.CreateIndex(ctx, indexOpt1)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
 }
-
-<span class="hljs-comment">// Create the index</span>
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_index</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">index_params</span>: index_params
-});
+indexTask2, err := client.CreateIndex(ctx, indexOpt2)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
+indexTask3, err := client.CreateIndex(ctx, indexOpt3)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
+indexTask4, err := client.CreateIndex(ctx, indexOpt4)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
+indexTask5, err := client.CreateIndex(ctx, indexOpt5)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;indexParams&quot;: [
-        {
-            &quot;fieldName&quot;: &quot;color&quot;,
-            &quot;indexName&quot;: &quot;color_index&quot;,
-            &quot;indexType&quot;: &quot;INVERTED&quot;,
-            &quot;params&quot;: {
-                &quot;json_path&quot;: &quot;color&quot;,
-                &quot;json_cast_type&quot;: &quot;varchar&quot;
-            }
-        }
-    ]
-}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field" class="common-anchor-header">الاستعلام والبحث باستخدام حقل ديناميكي</h3><p>يدعم ميلفوس استخدام تعبيرات التصفية أثناء الاستعلامات وعمليات البحث، مما يسمح لك بتحديد الحقول التي يجب تضمينها في النتائج. يوضح المثال التالي كيفية إجراء الاستعلامات وعمليات البحث باستخدام الحقل <code translate="no">color</code> ، الذي لم يتم تعريفه في المخطط، باستخدام الحقل الديناميكي.</p>
+<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">تصفية حسب مفاتيح الحقول الديناميكية<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>بعد إدراج الكيانات ذات مفاتيح الحقول الديناميكية، يمكنك تصفيتها باستخدام تعبيرات التصفية القياسية.</p>
+<ul>
+<li><p>بالنسبة للمفاتيح غير JSON (مثل السلاسل والأرقام والمنطقيات)، يمكنك الإشارة إليها باسم المفتاح مباشرةً.</p></li>
+<li><p>بالنسبة للمفاتيح التي تخزّن كائنات JSON، استخدم صيغة مسار JSON للوصول إلى القيم المتداخلة.</p></li>
+</ul>
+<p>استنادًا <a href="/docs/ar/enable-dynamic-field.md#Insert-entities-to-the-collection">إلى </a><a href="/docs/ar/enable-dynamic-field.md#Insert-entities-to-the-collection">مثال الكيان</a> من القسم السابق، تتضمن تعبيرات التصفية الصالحة:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
-
-res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    data=[query_vector],
-    limit=<span class="hljs-number">5</span>,
-<span class="highlighted-comment-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot;&#x27;</span>,</span>
-<span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]</span>
-)
-
-<span class="hljs-built_in">print</span>(res)
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.6290165185928345, &#x27;entity&#x27;: {&#x27;color&#x27;: &#x27;red_7025&#x27;}}, {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.5975797176361084, &#x27;entity&#x27;: {&#x27;color&#x27;: &#x27;red_4794&#x27;}}, {&#x27;id&#x27;: 6, &#x27;distance&#x27;: -0.24996188282966614, &#x27;entity&#x27;: {&#x27;color&#x27;: &#x27;red_9392&#x27;}}]&quot;] </span>
-
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment"># Non-JSON key</span>
+<span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>                               <span class="hljs-comment"># Non-JSON key</span>
+<span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>       <span class="hljs-comment"># JSON object key</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
-
-<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>});
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
-        .data(Collections.singletonList(queryVector))
-        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;color&quot;</span>))
-        .filter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>)
-        .topK(<span class="hljs-number">5</span>)
-        .consistencyLevel(ConsistencyLevel.STRONG)
-        .build());
-
-System.out.println(resp.getSearchResults());
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// [[</span>
-<span class="hljs-comment">//    SearchResp.SearchResult(entity={color=red_7025}, score=0.6290165, id=1),</span>
-<span class="hljs-comment">//    SearchResp.SearchResult(entity={color=red_4794}, score=0.5975797, id=4), </span>
-<span class="hljs-comment">//    SearchResp.SearchResult(entity={color=red_9392}, score=-0.24996188, id=6)</span>
-<span class="hljs-comment">//]]</span>
-
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
-
-<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-attr">data</span>: [query_vector],
-    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
-<span class="highlighted-comment-line">    <span class="hljs-attr">filters</span>: <span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,</span>
-<span class="highlighted-comment-line">    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>]</span>
-});
+<pre><code translate="no" class="language-javascript">filter = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                # <span class="hljs-title class_">Non</span>-<span class="hljs-title class_">JSON</span> key
+filter = <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>                               # <span class="hljs-title class_">Non</span>-<span class="hljs-title class_">JSON</span> key
+filter = <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>       # <span class="hljs-title class_">JSON</span> object key
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>}
-
-resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-    <span class="hljs-number">5</span>,                       <span class="hljs-comment">// limit</span>
-    []entity.Vector{entity.FloatVector(queryVector)},
-).WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
-    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
-    WithOutputFields(<span class="hljs-string">&quot;color&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-
-<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
-    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
-    fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;color&quot;</span>).FieldData().GetScalars())
-}
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>
+filter := <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>
+filter := <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;data&quot;: [
-        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-    ],
-    &quot;annsField&quot;: &quot;vector&quot;,
-    &quot;filter&quot;: &quot;color like \&quot;red%\&quot;&quot;,
-    &quot;limit&quot;: 3,
-    &quot;outputFields&quot;: [&quot;color&quot;]
-}&#x27;</span>
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في تعبير التصفية المستخدم في مثال الكود أعلاه، <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> ، تحدد الشروط أن قيمة الحقل <code translate="no">color</code> يجب أن تبدأ بـ <strong>"أحمر".</strong> في نموذج البيانات، يستوفي كيانان فقط هذا الشرط. وبالتالي، عندما يتم تعيين <code translate="no">limit</code> (topK) على <code translate="no">3</code> أو أقل، سيتم إرجاع كلا هذين الكيانين.</p>
-<pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
-    <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 
-        <span class="hljs-attr">&quot;distance&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.6290165</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;entity&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-            <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span>
-        <span class="hljs-punctuation">}</span>
-    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> 
-        <span class="hljs-attr">&quot;distance&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.5975797</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;entity&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-            <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_4794&quot;</span>
-        <span class="hljs-punctuation">}</span>
-    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">6</span><span class="hljs-punctuation">,</span> 
-        <span class="hljs-attr">&quot;distance&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">-0.24996188</span>，
-        <span class="hljs-attr">&quot;entity&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-            <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_9392&quot;</span>
-        <span class="hljs-punctuation">}</span>
-    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-<span class="hljs-punctuation">]</span>
-<button class="copy-code-btn"></button></code></pre>
+<p>للاطلاع على قائمة كاملة بالمشغلات وتعبيرات التصفية المدعومة، راجع <a href="/docs/ar/filtered-search.md">البحث المصفى</a>.</p>
+<h2 id="Put-it-all-together" class="common-anchor-header">ضع كل ذلك معًا<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>لقد تعلمت الآن كيفية استخدام الحقل الديناميكي لتخزين وفهرسة المفاتيح غير المحددة في المخطط بمرونة. بمجرد إدراج مفتاح الحقل الديناميكي، يمكنك استخدامه تمامًا مثل أي حقل آخر في تعبيرات التصفية - لا حاجة إلى بناء جملة خاص.</p>
+<p>لإكمال سير العمل في تطبيق واقعي، ستحتاج أيضًا إلى:</p>
+<ul>
+<li><p><strong>إنشاء فهرس على الحقل المتجه الخاص بك</strong> (إلزامي لكل مجموعة)</p>
+<p>الرجوع إلى <a href="/docs/ar/create-collection.md#Optional-Set-Index-Parameters">تعيين معلمات الفهرس</a></p></li>
+<li><p><strong>تحميل المجموعة</strong></p>
+<p>ارجع إلى <a href="/docs/ar/load-and-release.md">تحميل وتحرير</a></p></li>
+<li><p><strong>البحث أو الاستعلام باستخدام مرشحات مسار JSON</strong></p>
+<p>راجع <a href="/docs/ar/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/json-operators.md">وعوامل تشغيل JSON</a></p></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">متى يجب تحديد حقل بشكل صريح في المخطط بدلاً من استخدام مفتاح حقل ديناميكي؟</h3><p>يجب عليك تعريف حقل بشكل صريح في المخطط بدلاً من استخدام مفتاح حقل ديناميكي عندما:</p>
+<ul>
+<li><p><strong>يتم تضمين الحقل بشكل متكرر في حقول_المخرجات</strong>: يتم ضمان إمكانية استرجاع الحقول المحددة صراحةً فقط بكفاءة من خلال <code translate="no">output_fields</code>. لا يتم تحسين مفاتيح الحقول الديناميكية للاسترجاع عالي التردد وقد تتكبد نفقات أداء زائدة.</p></li>
+<li><p><strong>يتم الوصول إلى الحقل أو تصفيته بشكل متكرر</strong>: في حين أن فهرسة مفتاح الحقل الديناميكي يمكن أن يوفر أداء تصفية مماثل لحقول المخطط الثابتة، فإن الحقول المحددة صراحةً توفر بنية أوضح وقابلية صيانة أفضل.</p></li>
+<li><p><strong>تحتاج إلى تحكم كامل في سلوك الحقل</strong>: تدعم الحقول الصريحة القيود على مستوى المخطط والتحقق من الصحة والكتابة بشكل أوضح، والتي يمكن أن تكون مفيدة لإدارة تكامل البيانات واتساقها.</p></li>
+<li><p><strong>تريد تجنب التناقضات في الفهرسة</strong>: تكون البيانات في مفاتيح الحقول الديناميكية أكثر عرضة لعدم الاتساق في النوع أو البنية. يساعد استخدام مخطط ثابت على ضمان جودة البيانات، خاصةً إذا كنت تخطط لاستخدام الفهرسة أو الصب.</p></li>
+</ul>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">هل يمكنني إنشاء فهارس متعددة على نفس مفتاح الحقل الديناميكي بأنواع بيانات مختلفة؟</h3><p>لا، يمكنك إنشاء فهرس <strong>واحد فقط لكل مسار JSON</strong>. حتى إذا كان مفتاح الحقل الديناميكي يحتوي على قيم من أنواع مختلطة (على سبيل المثال، بعض السلاسل وبعض الأرقام)، يجب عليك اختيار فهرس واحد <code translate="no">json_cast_type</code> عند فهرسة هذا المسار. الفهارس المتعددة على نفس المفتاح بأنواع مختلفة غير مدعومة في الوقت الحالي.</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">عند فهرسة مفتاح حقل ديناميكي، ماذا لو فشل صب البيانات؟</h3><p>إذا أنشأت فهرسًا على مفتاح حقل ديناميكي وفشل صب البيانات - على سبيل المثال، إذا كانت القيمة التي من المفترض أن يتم صبها إلى <code translate="no">double</code> هي سلسلة غير رقمية مثل <code translate="no">&quot;abc&quot;</code>- فسيتم <strong>تخطي</strong> هذه القيم المحددة <strong>بصمت أثناء إنشاء الفهرس</strong>. لن تظهر في الفهرس وبالتالي لن <strong>يتم إرجاعها في نتائج البحث المستندة إلى التصفية أو نتائج الاستعلام</strong> التي تعتمد على الفهرس.</p>
+<p>هذا له بعض الآثار المهمة:</p>
+<ul>
+<li><p><strong>لا رجوع إلى الفحص الكامل</strong>: إذا تمت فهرسة غالبية الكيانات بنجاح، فإن استعلامات التصفية ستعتمد بالكامل على الفهرس. سيتم استبعاد الكيانات التي فشلت في الفهرسة من مجموعة النتائج - حتى لو كانت تتطابق منطقيًا مع شرط التصفية.</p></li>
+<li><p><strong>مخاطر دقة البحث</strong>: في مجموعات البيانات الكبيرة التي تكون فيها جودة البيانات غير متناسقة (خاصةً في مفاتيح الحقول الديناميكية)، يمكن أن يؤدي هذا السلوك إلى نتائج مفقودة غير متوقعة. من المهم ضمان تنسيق بيانات متناسق وصالح قبل الفهرسة.</p></li>
+<li><p><strong>استخدم دوال الإرسال بحذر</strong>: إذا كنت تستخدم <code translate="no">json_cast_function</code> لتحويل السلاسل إلى أرقام أثناء الفهرسة، تأكد من أن قيم السلسلة قابلة للتحويل بشكل موثوق. سيؤدي عدم التطابق بين <code translate="no">json_cast_type</code> والنوع المحول الفعلي إلى حدوث أخطاء أو تخطي الإدخالات.</p></li>
+</ul>
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">ماذا يحدث إذا كان الاستعلام الخاص بي يستخدم نوع بيانات مختلف عن نوع البيانات المفهرس المُحَوَّل؟</h3><p>إذا كان استعلامك يقارن مفتاح حقل ديناميكي باستخدام <strong>نوع بيانات مختلف</strong> عما تم استخدامه في الفهرس (على سبيل المثال، الاستعلام باستخدام مقارنة سلسلة عندما تم إرسال الفهرس إلى <code translate="no">double</code>)، <strong>فلن يستخدم</strong> النظام <strong>الفهرس،</strong> وقد يعود إلى الفحص الكامل <em>فقط إذا كان ذلك ممكنًا</em>. للحصول على أفضل أداء ودقة، تأكد من تطابق نوع الاستعلام الخاص بك مع <code translate="no">json_cast_type</code> المستخدم أثناء إنشاء الفهرس.</p>
