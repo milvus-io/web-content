@@ -246,8 +246,8 @@ The table below lists the specific privileges included in the three built-in pri
    </tr>
    <tr>
      <td><p>CreateCollection</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
