@@ -272,8 +272,8 @@ summary: >-
    </tr>
    <tr>
      <td><p>CreateCollection</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
