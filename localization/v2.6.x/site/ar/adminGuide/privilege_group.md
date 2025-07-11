@@ -66,7 +66,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
 </div>
 <p>توضح الجداول التالية الامتيازات المتضمنة في كل مجموعة امتيازات مضمنة.</p>
 <h3 id="Collection-level" class="common-anchor-header">مستوى المجموعة</h3><ul>
-<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: تتضمن امتيازات لقراءة بيانات المجموعة</p></li>
+<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: يتضمن امتيازات لقراءة بيانات المجموعة</p></li>
 <li><p><strong>CollectionReadWrite (COLL_RW)</strong>: يتضمن امتيازات لقراءة بيانات المجموعة وكتابتها</p></li>
 <li><p><strong>CollectionAdmin (COLL_ADMIN</strong>): تتضمن امتيازات لقراءة بيانات المجموعة وكتابتها وإدارة المجموعات.</p></li>
 </ul>
@@ -268,12 +268,12 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
    </tr>
    <tr>
      <td><p>إنشاء مجموعة</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إسقاط مجموعة</p></td>
+     <td><p>دروبكولكشن</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>

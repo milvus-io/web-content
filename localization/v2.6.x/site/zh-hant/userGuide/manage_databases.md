@@ -284,8 +284,8 @@ curl --request POST \
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
-    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    properties: {
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>,
+    properties={
         <span class="hljs-string">&quot;database.max.collections&quot;</span>: <span class="hljs-number">10</span>
     }
 )
@@ -324,8 +324,8 @@ curl --request POST \
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
-    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    property_keys: [
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>,
+    property_keys=[
         <span class="hljs-string">&quot;database.max.collections&quot;</span>
     ]
 )

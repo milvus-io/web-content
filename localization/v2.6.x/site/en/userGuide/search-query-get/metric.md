@@ -50,6 +50,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>No need to specify the dimension.</p></td>
      <td><p><code translate="no">IP</code>, <code translate="no">BM25</code> (used only for full text search)</p></td>
@@ -58,7 +64,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -93,6 +99,11 @@ summary: >-
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>A smaller value indicates a greater similarity.</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>Estimates Jaccard similarity from MinHash signature bits; smaller distance = more similar</p></td>
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
@@ -214,7 +225,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JACCARD similarity coefficient measures the similarity between two sample sets and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.</p>
+    </button></h2><p>JACCARD distance coefficient measures the similarity between two sample sets and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -228,6 +239,39 @@ summary: >-
     <span>JACCARD Distance Formula</span>
   </span>
 </p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) is a metric type used for efficient, approximate similarity search over large sets—such as document word sets, user tag sets, or genomic k-mer sets. Instead of comparing raw sets directly, MHJACCARD compares <strong>MinHash signatures</strong>, which are compact representations designed to estimate Jaccard similarity efficiently.</p>
+<p>This approach is significantly faster than computing exact Jaccard similarity and is especially useful in large-scale or high-dimensional scenarios.</p>
+<p><strong>Applicable vector type</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>, where each vector stores a MinHash signature. Each element corresponds to the minimum hash value under one of the independent hash functions applied to the original set.</li>
+</ul>
+<p><strong>Distance definition</strong></p>
+<p>MHJACCARD measures how many positions in two MinHash signatures match. The higher the match ratio, the more similar the underlying sets are.</p>
+<p>Milvus reports:</p>
+<ul>
+<li><strong>Distance = 1 - estimated similarity (match ratio)</strong></li>
+</ul>
+<p>The distance value ranges from 0 to 1:</p>
+<ul>
+<li><p><strong>0</strong> means the MinHash signatures are identical (estimated Jaccard similarity = 1)</p></li>
+<li><p><strong>1</strong> means no matches at any position (estimated Jaccard similarity = 0)</p></li>
+</ul>
+<p>For information on technical details, refer to <a href="/docs/minhash-lsh.md">MINHASH_LSH</a>.</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">HAMMING distance<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

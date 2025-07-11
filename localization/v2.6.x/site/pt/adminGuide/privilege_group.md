@@ -201,7 +201,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Upsert</p></td>
+     <td><p>Inserir</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -237,7 +237,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>SoltarAlias</p></td>
+     <td><p>DropAlias</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -269,13 +269,13 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CriarColeção</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>Criar coleção</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Deixar coleção</p></td>
+     <td><p>DropCollection</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -367,7 +367,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>AbandonarGrupo de Recursos</p></td>
+     <td><p>DropResourceGroup</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>

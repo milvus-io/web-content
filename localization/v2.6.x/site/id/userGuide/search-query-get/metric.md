@@ -50,6 +50,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>Tidak perlu menentukan dimensi.</p></td>
      <td><p><code translate="no">IP</code>, <code translate="no">BM25</code> (hanya digunakan untuk pencarian teks lengkap)</p></td>
@@ -58,14 +64,14 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
 <div class="alert note">
 <ul>
 <li><p>Untuk bidang vektor dengan tipe <code translate="no">SPARSE\_FLOAT\_VECTOR</code>, gunakan tipe metrik <code translate="no">BM25</code> hanya saat melakukan pencarian teks lengkap. Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
-<li><p>Untuk bidang vektor jenis <code translate="no">BINARY_VECTOR</code>, nilai dimensi (<code translate="no">dim</code>) harus kelipatan 8.</p></li>
+<li><p>Untuk bidang vektor dengan tipe <code translate="no">BINARY_VECTOR</code>, nilai dimensi (<code translate="no">dim</code>) harus kelipatan 8.</p></li>
 </ul>
 </div>
 <p>Tabel di bawah ini merangkum karakteristik nilai jarak kemiripan dari semua jenis metrik yang didukung dan kisaran nilainya.</p>
@@ -96,13 +102,18 @@ summary: >-
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>Memperkirakan kemiripan Jaccard dari bit tanda tangan MinHash; jarak yang lebih kecil = lebih mirip</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Nilai yang lebih kecil menunjukkan kemiripan yang lebih besar.</p></td>
-     <td><p>[0, redup(vektor)]</p></td>
+     <td><p>[0, dim(vektor)]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BM25</code></p></td>
-     <td><p>Nilai relevansi berdasarkan frekuensi istilah, frekuensi dokumen terbalik, dan normalisasi dokumen.</p></td>
+     <td><p>Nilai relevansi berdasarkan frekuensi term, frekuensi dokumen terbalik, dan normalisasi dokumen.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
@@ -204,7 +215,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Koefisien kemiripan JACCARD mengukur kemiripan antara dua set sampel dan didefinisikan sebagai kardinalitas perpotongan set yang ditentukan dibagi dengan kardinalitas penyatuannya. Ini hanya dapat diterapkan pada set sampel yang terbatas.</p>
+    </button></h2><p>Koefisien jarak JACCARD mengukur kemiripan antara dua set sampel dan didefinisikan sebagai kardinalitas perpotongan set yang ditentukan dibagi dengan kardinalitas gabungan keduanya. Ini hanya dapat diterapkan pada set sampel yang terbatas.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -214,6 +225,39 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Rumus Jarak JACCARD</span> </span></p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) adalah jenis metrik yang digunakan untuk pencarian kemiripan yang efisien dan mendekati pada set yang besar-seperti set kata dokumen, set tag pengguna, atau set k-mer genom. Alih-alih membandingkan set mentah secara langsung, MHJACCARD membandingkan <strong>tanda tangan MinHash</strong>, yang merupakan representasi ringkas yang dirancang untuk memperkirakan kemiripan Jaccard secara efisien.</p>
+<p>Pendekatan ini secara signifikan lebih cepat daripada menghitung kemiripan Jaccard yang tepat dan sangat berguna dalam skenario berskala besar atau berdimensi tinggi.</p>
+<p><strong>Jenis vektor yang berlaku</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>, di mana setiap vektor menyimpan tanda tangan MinHash. Setiap elemen sesuai dengan nilai hash minimum di bawah salah satu fungsi hash independen yang diterapkan pada set asli.</li>
+</ul>
+<p><strong>Definisi jarak</strong></p>
+<p>MHJACCARD mengukur berapa banyak posisi dalam dua tanda tangan MinHash yang cocok. Semakin tinggi rasio kecocokannya, semakin mirip set yang mendasarinya.</p>
+<p>Laporan Milvus:</p>
+<ul>
+<li><strong>Jarak = 1 - perkiraan kemiripan (rasio kecocokan)</strong></li>
+</ul>
+<p>Nilai jarak berkisar antara 0 hingga 1:</p>
+<ul>
+<li><p><strong>0</strong> berarti tanda tangan MinHash identik (perkiraan kemiripan Jaccard = 1)</p></li>
+<li><p><strong>1</strong> berarti tidak ada kecocokan di posisi mana pun (perkiraan kemiripan Jaccard = 0)</p></li>
+</ul>
+<p>Untuk informasi mengenai detail teknis, lihat <a href="/docs/id/minhash-lsh.md">MINHASH_LSH</a>.</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">Jarak HAMMING<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,7 +273,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jarak HAMMING mengukur string data biner. Jarak antara dua string dengan panjang yang sama adalah jumlah posisi bit di mana bit-bitnya berbeda.</p>
+    </button></h2><p>Jarak HAMMING mengukur string data biner. Jarak antara dua string dengan panjang yang sama adalah jumlah posisi bit di mana bit-bit tersebut berbeda.</p>
 <p>Sebagai contoh, misalkan ada dua string, 1101 1001 dan 1001 1101.</p>
 <p>11011001 ⊕ 10011101 = 01000100. Karena ini mengandung dua 1, maka jarak HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity" class="common-anchor-header">Kesamaan BM25<button data-href="#BM25-similarity" class="anchor-icon" translate="no">

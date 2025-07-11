@@ -47,6 +47,7 @@ summary: >-
 <li><p><strong>Filter Rentang</strong>: <code translate="no">IN</code> dan <code translate="no">LIKE</code> membantu mencocokkan rentang atau set nilai tertentu.</p></li>
 <li><p><strong>Operator Aritmatika</strong>: <code translate="no">+</code> <code translate="no">-</code> , <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, dan <code translate="no">**</code> digunakan untuk perhitungan yang melibatkan bidang numerik.</p></li>
 <li><p><strong>Operator Logika</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, dan <code translate="no">NOT</code> menggabungkan beberapa kondisi ke dalam ekspresi yang kompleks.</p></li>
+<li><p><strong>Operator IS NULL dan IS NOT NULL</strong>: Operator <code translate="no">IS NULL</code> dan <code translate="no">IS NOT NULL</code> digunakan untuk memfilter bidang berdasarkan apakah bidang tersebut mengandung nilai null (tidak ada data). Untuk detailnya, lihat <a href="/docs/id/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Operator Dasar</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Contoh: Memfilter berdasarkan Warna</h3><p>Untuk menemukan entitas dengan warna primer (merah, hijau, atau biru) dalam bidang skalar <code translate="no">color</code>, gunakan ekspresi filter berikut:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>

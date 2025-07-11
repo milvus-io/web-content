@@ -270,8 +270,8 @@ summary: >-
    </tr>
    <tr>
      <td><p>CreaCollezione</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>

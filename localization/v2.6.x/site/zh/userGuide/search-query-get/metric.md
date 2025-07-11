@@ -19,7 +19,7 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
         ></path>
       </svg>
     </button></h1><p>相似度量用于衡量向量之间的相似性。选择合适的距离度量有助于显著提高分类和聚类性能。</p>
-<p>目前，Milvus 支持这些类型的相似度度量：欧氏距离 (<code translate="no">L2</code>)、内积 (<code translate="no">IP</code>)、余弦相似度 (<code translate="no">COSINE</code>)、<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> 和<code translate="no">BM25</code> （专门为稀疏向量的全文检索而设计）。</p>
+<p>目前，Milvus 支持这些类型的相似性度量：欧氏距离 (<code translate="no">L2</code>)、内积 (<code translate="no">IP</code>)、余弦相似度 (<code translate="no">COSINE</code>)、<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> 和<code translate="no">BM25</code> （专门为稀疏向量的全文检索而设计）。</p>
 <p>下表总结了不同字段类型与相应度量类型之间的映射关系。</p>
 <table>
    <tr>
@@ -47,6 +47,12 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>,<code translate="no">L2</code> 、<code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>无需指定维度。</p></td>
      <td><p><code translate="no">IP</code>,<code translate="no">BM25</code> （仅用于全文检索）</p></td>
@@ -55,7 +61,7 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>,<code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>,<code translate="no">JACCARD</code> 、<code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -93,13 +99,18 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>根据 MinHash 签名位估算 Jaccard 相似度；距离越小 = 越相似</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>值越小，表示相似度越高。</p></td>
+     <td><p>值越小表示相似度越高。</p></td>
      <td><p>[0，dim(向量)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BM25</code></p></td>
-     <td><p>根据词频、反转文档频率和文档归一化对相关性进行评分。</p></td>
+     <td><p>根据术语频率、反转文档频率和文档规范化对相关性进行评分。</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
@@ -201,7 +212,7 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JACCARD 相似性系数衡量两个样本集之间的相似性，定义为定义集的交集的卡方值除以它们的联合的卡方值。它只能应用于有限样本集。</p>
+    </button></h2><p>JACCARD 距离系数衡量两个样本集之间的相似性，其定义为定义集的交集的卡方值除以它们的联合的卡方值。它只能应用于有限样本集。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -211,7 +222,40 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>JACCARD 距离公式</span> </span></p>
-<h2 id="HAMMING-distance" class="common-anchor-header">汉明距离<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong>(<code translate="no">MHJACCARD</code>) 是一种度量类型，用于在大型集合（如文档单词集、用户标签集或基因组 k-mer 集）上进行高效、近似的相似性搜索。MHJACCARD 不直接比较原始集，而是比较<strong>MinHash 签名</strong>，<strong>MinHash 签名</strong>是专为高效估计 Jaccard 相似性而设计的紧凑表示法。</p>
+<p>这种方法比计算精确的 Jaccard 相似性要快得多，尤其适用于大规模或高维场景。</p>
+<p><strong>适用向量类型</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>，其中每个向量存储一个 MinHash 签名。每个元素都对应于应用于原始集合的一个独立哈希函数下的最小哈希值。</li>
+</ul>
+<p><strong>距离定义</strong></p>
+<p>MHJACCARD 衡量两个 MinHash 签名中匹配位置的数量。匹配率越高，说明底层集越相似。</p>
+<p>Milvus 报告：</p>
+<ul>
+<li><strong>距离 = 1 - 估计相似度（匹配率）</strong></li>
+</ul>
+<p>距离值从 0 到 1 不等：</p>
+<ul>
+<li><p><strong>0</strong>表示 MinHash 签名完全相同（估计 Jaccard 相似度 = 1）</p></li>
+<li><p><strong>1</strong>表示任何位置都不匹配（估计的 Jaccard 相似度 = 0）</p></li>
+</ul>
+<p>有关技术细节的信息，请参阅<a href="/docs/zh/minhash-lsh.md">MINHASH_LSH</a>。</p>
+<h2 id="HAMMING-distance" class="common-anchor-header">HAMMING 距离<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

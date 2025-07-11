@@ -1,11 +1,11 @@
 ---
 id: privilege_group.md
-title: Create Privilege Group
+title: Crear grupo de privilegios
 summary: >-
-  To streamline the process of granting privileges, it is recommended that you
-  combine multiple privileges into a privilege group.
+  Para agilizar el proceso de concesión de privilegios, se recomienda combinar
+  varios privilegios en un grupo de privilegios.
 ---
-<h1 id="Create-Privilege-Group" class="common-anchor-header">Create Privilege Group<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
+<h1 id="Create-Privilege-Group" class="common-anchor-header">Crear grupo de privilegios<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>To streamline the process of granting privileges, it is recommended that you combine multiple privileges into a privilege group.</p>
-<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">Privilege group vs. privileges<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
+    </button></h1><p>Para agilizar el proceso de concesión de privilegios, se recomienda combinar varios privilegios en un grupo de privilegios.</p>
+<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">Grupo de privilegios frente a privilegios<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,20 +36,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A privilege group consists of multiple privileges.</p>
+    </button></h2><p>Un grupo de privilegios está formado por varios privilegios.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
-    <span>Privilege Group Illustrated</span>
-  </span>
-</p>
-<p>As shown in the figure above, suppose you need to grant three different privileges to a role.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
+   </span> <span class="img-wrapper"> <span>Ilustración de un grupo de privilegios</span> </span></p>
+<p>Como se muestra en la figura anterior, supongamos que necesita conceder tres privilegios diferentes a un rol.</p>
 <ul>
-<li><p>If you do not use a privilege group, you need to grant the privileges three times.</p></li>
-<li><p>If you use a privilege group, you only need to create a privilege group and add the three privileges to this privilege group and grant the privilege group to Role A.</p></li>
+<li><p>Si no utiliza un grupo de privilegios, tendrá que conceder los privilegios tres veces.</p></li>
+<li><p>Si utiliza un grupo de privilegios, sólo tiene que crear un grupo de privilegios y añadir los tres privilegios a este grupo de privilegios y conceder el grupo de privilegios al rol A.</p></li>
 </ul>
-<p>By using a privilege group, you can grant multiple privileges in bulk to a role.</p>
-<h2 id="Built-in-privilege-groups" class="common-anchor-header">Built-in privilege groups<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
+<p>Al utilizar un grupo de privilegios, puede conceder varios privilegios en bloque a un rol.</p>
+<h2 id="Built-in-privilege-groups" class="common-anchor-header">Grupos de privilegios incorporados<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,38 +62,38 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For ease-of-use, Milvus provides a total of 9 built-in privileges on the collection, database, and instance level: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW and Cluster_Admin.</p>
+    </button></h2><p>Para facilitar su uso, Milvus proporciona un total de 9 privilegios incorporados a nivel de colección, base de datos e instancia: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW y Cluster_Admin.</p>
 <div class="alert note">
-<p>The three levels of built-in privilege groups do not have a cascading relationship. Setting a privilege group at the instance level does not automatically set permissions for all databases and collections under that instance. Privileges at the database and collection levels need to be set manually.</p>
+<p>Los tres niveles de grupos de privilegios incorporados no tienen una relación en cascada. Establecer un grupo de privilegios a nivel de instancia no establece automáticamente permisos para todas las bases de datos y colecciones bajo esa instancia. Los privilegios en los niveles de base de datos y colección deben establecerse manualmente.</p>
 </div>
-<p>The following tables explains the privileges includes in each of the built-in privilege group.</p>
-<h3 id="Collection-level" class="common-anchor-header">Collection level</h3><ul>
-<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: includes privileges to read collection data</p></li>
-<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: includes privileges to read and write collection data</p></li>
-<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: includes privileges to read and write collection data and manage collections.</p></li>
+<p>En las tablas siguientes se explican los privilegios incluidos en cada uno de los grupos de privilegios incorporados.</p>
+<h3 id="Collection-level" class="common-anchor-header">Nivel de colección</h3><ul>
+<li><p><strong>ColecciónSóloLectura (COLL_RO)</strong>: incluye privilegios para leer datos de la colección</p></li>
+<li><p><strong>ColecciónLecturaEscritura (COLL_RW)</strong>: incluye privilegios para leer y escribir datos de la colección</p></li>
+<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: incluye privilegios para leer y escribir datos de colecciones y gestionar colecciones.</p></li>
 </ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the collection level:</p>
+<p>La tabla siguiente enumera los privilegios específicos incluidos en los tres grupos de privilegios incorporados en el nivel de recopilación:</p>
 <table>
    <tr>
-     <th><p><strong>Privilege</strong></p></th>
-     <th><p><strong>CollectionReadOnly</strong></p></th>
-     <th><p><strong>CollectionReadWrite</strong></p></th>
-     <th><p><strong>CollectionAdmin</strong></p></th>
+     <th><p><strong>Privilegio</strong></p></th>
+     <th><p><strong>ColecciónSólo lectura</strong></p></th>
+     <th><p><strong>ColecciónLecturaEscritura</strong></p></th>
+     <th><p><strong>Administrador de colecciones</strong></p></th>
    </tr>
    <tr>
-     <td><p>Query</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>Search</p></td>
+     <td><p>Consulta</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>IndexDetail</p></td>
+     <td><p>Búsqueda</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ÍndiceDetalle</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -125,7 +123,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ShowPartitions</p></td>
+     <td><p>MostrarParticiones</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -137,7 +135,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeCollection</p></td>
+     <td><p>DescribirColección</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -149,13 +147,13 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>GetStatistics</p></td>
+     <td><p>ObtenerEstadísticas</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateIndex</p></td>
+     <td><p>Crearíndice</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -167,7 +165,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreatePartition</p></td>
+     <td><p>CrearPartición</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -179,61 +177,61 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Load</p></td>
+     <td><p>Cargar</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Release</p></td>
+     <td><p>Liberar</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Insert</p></td>
+     <td><p>Insertar</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Delete</p></td>
+     <td><p>Borrar</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Upsert</p></td>
+     <td><p>Subir</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Import</p></td>
+     <td><p>Importar</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Flush</p></td>
+     <td><p>Descarga</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Compaction</p></td>
+     <td><p>Compactación</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>LoadBalance</p></td>
+     <td><p>Equilibrio de carga</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateAlias</p></td>
+     <td><p>CrearAlias</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -245,39 +243,39 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Database-level" class="common-anchor-header">Database level</h3><ul>
-<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: includes privileges to read database data</p></li>
-<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: includes privileges to read and write database data</p></li>
-<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: includes privileges to read and write database data and manage databases.</p></li>
+<h3 id="Database-level" class="common-anchor-header">Nivel de base de datos</h3><ul>
+<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: incluye privilegios para leer datos de la base de datos</p></li>
+<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: incluye privilegios para leer y escribir datos de la base de datos</p></li>
+<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: incluye privilegios para leer y escribir datos de bases de datos y gestionar bases de datos.</p></li>
 </ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the database level:</p>
+<p>La siguiente tabla enumera los privilegios específicos incluidos en los tres grupos de privilegios incorporados a nivel de base de datos:</p>
 <table>
    <tr>
-     <th><p><strong>Privilege</strong></p></th>
-     <th><p><strong>DatabaseReadOnly</strong></p></th>
+     <th><p><strong>Privilegio</strong></p></th>
+     <th><p><strong>Base de datosSólo lectura</strong></p></th>
      <th><p><strong>DatabaseReadWrite</strong></p></th>
      <th><p><strong>DatabaseAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>ShowCollections</p></td>
+     <td><p>MostrarColecciones</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeDatabase</p></td>
+     <td><p>DescribirBaseDeDatos</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateCollection</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>CrearColección</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DropCollection</p></td>
+     <td><p>SoltarColección</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -289,15 +287,15 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">Cluster level</h3><ul>
-<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: includes privileges to read instance data</p></li>
-<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: includes privileges to read and write instance data</p></li>
-<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: includes privileges to read and write instance data and manage instances.</p></li>
+<h3 id="Cluster-level" class="common-anchor-header">Nivel de clúster</h3><ul>
+<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: incluye privilegios para leer datos de instancia.</p></li>
+<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: incluye privilegios para leer y escribir datos de instancia</p></li>
+<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: incluye privilegios para leer y escribir datos de instancia y gestionar instancias.</p></li>
 </ul>
-<p>The table below lists the specific privileges included in the three built-in privilege groups at the instance level:</p>
+<p>La siguiente tabla enumera los privilegios específicos incluidos en los tres grupos de privilegios incorporados a nivel de instancia:</p>
 <table>
    <tr>
-     <th><p><strong>Privilege</strong></p></th>
+     <th><p><strong>Privilegio</strong></p></th>
      <th><p><strong>ClusterReadOnly</strong></p></th>
      <th><p><strong>ClusterReadWrite</strong></p></th>
      <th><p><strong>ClusterAdmin</strong></p></th>
@@ -309,19 +307,19 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>RenameCollection</p></td>
+     <td><p>RenombrarColección</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateOwnership</p></td>
+     <td><p>CrearPropiedad</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>UpdateUser</p></td>
+     <td><p>ActualizarUsuario</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -333,19 +331,19 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>SelectOwnership</p></td>
+     <td><p>SeleccionarPropiedad</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ManageOwnership</p></td>
+     <td><p>GestionarPropiedad</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>SelectUser</p></td>
+     <td><p>SeleccionarUsuario</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -357,13 +355,13 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>RestoreRBAC</p></td>
+     <td><p>RestaurarRBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateResourceGroup</p></td>
+     <td><p>CrearResourceGroup</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -375,7 +373,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>UpdateResourceGroups</p></td>
+     <td><p>ActualizarResourceGroups</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -405,7 +403,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateDatabase</p></td>
+     <td><p>CrearBaseDeDatos</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -423,7 +421,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreatePrivilegeGroup</p></td>
+     <td><p>CrearGrupoDePrivilegios</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -447,7 +445,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h2 id="Procedures" class="common-anchor-header">Procedures<button data-href="#Procedures" class="anchor-icon" translate="no">
+<h2 id="Procedures" class="common-anchor-header">Procedimientos<button data-href="#Procedures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -462,15 +460,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create a privilege group and then add privileges to the privilege group.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">Create a privilege group</h3><p>The following example demonstrates how to create a privilege group named <code translate="no">privilege_group_1</code>.</p>
+    </button></h2><p>Puede crear un grupo de privilegios y, a continuación, añadir privilegios al grupo de privilegios.</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">Creación de un grupo de privilegios</h3><p>El siguiente ejemplo muestra cómo crear un grupo de privilegios denominado <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）
 <button class="copy-code-btn"></button></code></pre>
@@ -500,14 +493,9 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Add privileges to a privilege group</h3><p>The following example demonstrates how to add privileges <code translate="no">PrivilegeBackupRBAC</code> and <code translate="no">PrivilegeRestoreRBAC</code> to the privilege group <code translate="no">privilege_group_1</code> that is just created.</p>
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">Adición de privilegios a un grupo de privilegios</h3><p>El siguiente ejemplo muestra cómo añadir los privilegios <code translate="no">PrivilegeBackupRBAC</code> y <code translate="no">PrivilegeRestoreRBAC</code> al grupo de privilegios <code translate="no">privilege_group_1</code> que se acaba de crear.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
@@ -542,14 +530,9 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Remove privileges from a privilege group</h3><p>The following example demonstrates how to remove the privilege <code translate="no">PrivilegeRestoreRBAC</code> from the privilege group <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Eliminación de privilegios de un grupo de privilegios</h3><p>El siguiente ejemplo muestra cómo eliminar el privilegio <code translate="no">PrivilegeRestoreRBAC</code> del grupo de privilegios <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -582,14 +565,9 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">List privilege groups</h3><p>The following example demonstrates how to list all existing privilege groups.</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">Listar grupos de privilegios</h3><p>El siguiente ejemplo muestra cómo listar todos los grupos de privilegios existentes.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.list_privilege_groups()
 <button class="copy-code-btn"></button></code></pre>
@@ -617,17 +595,12 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Below is an example output.</p>
+<p>A continuación se muestra un ejemplo de salida.</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">Drop a privilege group</h3><p>The following example demonstrates how to drop the privilege group <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">Eliminar un grupo de privilegios</h3><p>El siguiente ejemplo muestra cómo eliminar el grupo de privilegios <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#go">Go</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>

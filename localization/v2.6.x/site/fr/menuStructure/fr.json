@@ -732,6 +732,12 @@
                 "id": "bin-flat.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -1024,7 +1030,7 @@
                 "children": []
               },
               {
-                "label": "Classeur de décroissance",
+                "label": "Rang de décomposition",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 2,
@@ -2079,7 +2085,7 @@
             "children": []
           },
           {
-            "label": "PrivéGPT",
+            "label": "PrivateGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []

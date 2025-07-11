@@ -43,8 +43,9 @@ summary: >-
 <li><p><strong>범위 필터</strong>: <code translate="no">IN</code> 및 <code translate="no">LIKE</code> 은 특정 값 범위 또는 집합을 일치시키는 데 도움이 됩니다.</p></li>
 <li><p><strong>산술 연산자</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, <code translate="no">**</code> 은 숫자 필드와 관련된 계산에 사용됩니다.</p></li>
 <li><p><strong>논리 연산자</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 은 여러 조건을 복잡한 표현식으로 결합합니다.</p></li>
+<li><p><strong>IS NULL 및 IS NOT NULL 연산자</strong>: <code translate="no">IS NULL</code> 및 <code translate="no">IS NOT NULL</code> 연산자는 null 값 포함 여부(데이터 부재)에 따라 필드를 필터링하는 데 사용됩니다. 자세한 내용은 <a href="/docs/ko/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">기본 연산자를</a> 참조하세요.</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">예시: 색상별 필터링</h3><p>스칼라 필드 <code translate="no">color</code> 에서 원색(빨강, 녹색 또는 파랑)을 가진 엔티티를 찾으려면 다음 필터 표현식을 사용합니다:</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">예제: 색상으로 필터링하기</h3><p>스칼라 필드 <code translate="no">color</code> 에서 기본 색상(빨강, 녹색 또는 파랑)을 가진 엔티티를 찾으려면 다음 필터 표현식을 사용합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">예시: JSON 필드 필터링</h3><p>Milvus에서는 JSON 필드에서 키를 참조할 수 있습니다. 예를 들어 키가 <code translate="no">price</code> 및 <code translate="no">model</code> 인 JSON 필드 <code translate="no">product</code> 가 있고 특정 모델과 가격이 1,850보다 낮은 제품을 찾고자 하는 경우 다음 필터 표현식을 사용합니다:</p>

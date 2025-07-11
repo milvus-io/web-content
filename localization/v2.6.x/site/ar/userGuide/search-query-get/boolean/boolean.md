@@ -2,8 +2,8 @@
 id: boolean.md
 title: شرح التصفية
 summary: >-
-  يوفر Milvus إمكانات تصفية قوية تتيح الاستعلام الدقيق عن بياناتك. تسمح لك
-  تعبيرات التصفية باستهداف حقول قياسية محددة وتنقيح نتائج البحث بشروط مختلفة.
+  يوفر برنامج Milvus إمكانات تصفية قوية تتيح الاستعلام الدقيق عن بياناتك. تسمح
+  لك تعبيرات التصفية باستهداف حقول قياسية محددة وتنقيح نتائج البحث بشروط مختلفة.
   يشرح هذا الدليل كيفية استخدام تعبيرات التصفية في ملفوس، مع أمثلة تركز على
   عمليات الاستعلام. يمكنك أيضًا تطبيق هذه المرشحات في طلبات البحث والحذف.
 ---
@@ -43,9 +43,10 @@ summary: >-
 <li><p><strong>عوامل المقارنة</strong> <code translate="no">==</code> <code translate="no">!=</code> و <code translate="no">&gt;</code> و و <code translate="no">&lt;</code> و <code translate="no">&gt;=</code> و <code translate="no">&lt;=</code> تسمح بالتصفية بناءً على الحقول الرقمية أو النصية.</p></li>
 <li><p><strong>مرشحات النطاق</strong>: <code translate="no">IN</code> و <code translate="no">LIKE</code> تساعد في مطابقة نطاقات أو مجموعات قيم محددة.</p></li>
 <li><p><strong>المعاملات الحسابية</strong>: <code translate="no">+</code> <code translate="no">-</code> و <code translate="no">*</code> و و <code translate="no">/</code> و <code translate="no">%</code> و <code translate="no">**</code> تستخدم للحسابات التي تتضمن حقول رقمية.</p></li>
-<li><p><strong>المعاملات المنطقية</strong>: <code translate="no">AND</code> و <code translate="no">OR</code> ، و <code translate="no">NOT</code> تجمع بين عدة شروط في تعبيرات معقدة.</p></li>
+<li><p><strong>المعاملات المنطقية</strong>: <code translate="no">AND</code> و <code translate="no">OR</code> و <code translate="no">NOT</code> تجمع بين عدة شروط في تعبيرات معقدة.</p></li>
+<li><p>معامِلات<strong>IS NULL و IS NOT NULL</strong>: يُستخدم المشغّلان <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> لتصفية الحقول بناءً على ما إذا كانت تحتوي على قيمة فارغة (عدم وجود بيانات). لمزيد من التفاصيل، راجع المعاملات <a href="/docs/ar/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">الأساسية</a>.</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">مثال: التصفية حسب اللون</h3><p>للعثور على كيانات ذات ألوان أساسية (أحمر، أو أخضر، أو أزرق) في حقل رقمي <code translate="no">color</code> ، استخدم تعبير التصفية التالي:</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">مثال: التصفية حسب اللون</h3><p>للعثور على كيانات ذات ألوان أساسية (أحمر أو أخضر أو أزرق) في حقل قياسي <code translate="no">color</code> ، استخدم تعبير التصفية التالي:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">مثال: تصفية حقول JSON</h3><p>يسمح ميلفوس بالرجوع إلى المفاتيح في حقول JSON. على سبيل المثال، إذا كان لديك حقل JSON <code translate="no">product</code> مع المفتاحين <code translate="no">price</code> و <code translate="no">model</code> ، وتريد العثور على منتجات ذات طراز وسعر محدد أقل من 1850، استخدم تعبير التصفية هذا:</p>
@@ -110,7 +111,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>لمزيد من التفاصيل حول مشغلي JSON، راجع <a href="/docs/ar/json-operators.md">مشغلي JSON</a>.</p>
-<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">المشغلات الخاصة بحقل ARRAY</h3><p>يوفر Milvus عوامل تصفية متقدمة لحقول المصفوفات، مثل <code translate="no">ARRAY_CONTAINS</code> و <code translate="no">ARRAY_CONTAINS_ALL</code> و <code translate="no">ARRAY_CONTAINS_ANY</code> و <code translate="no">ARRAY_LENGTH</code> ، والتي تسمح بالتحكم الدقيق في بيانات المصفوفات:</p>
+<h3 id="ARRAY-field-specific-operators" class="common-anchor-header">المشغلات الخاصة بحقل ARRAY</h3><p>يوفر ميلفوس عوامل تصفية متقدمة لحقول المصفوفات، مثل <code translate="no">ARRAY_CONTAINS</code> و <code translate="no">ARRAY_CONTAINS_ALL</code> و <code translate="no">ARRAY_CONTAINS_ANY</code> و <code translate="no">ARRAY_LENGTH</code> ، والتي تسمح بالتحكم الدقيق في بيانات المصفوفات:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: تصفية الكيانات التي تحتوي على عنصر معين.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -125,12 +126,12 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <button class="copy-code-btn"></button></code></pre>
 <p>لمزيد من التفاصيل حول مشغلي المصفوفة، راجع <a href="/docs/ar/array-operators.md">مشغلي ARRAY</a>.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">المشغلات الخاصة بحقل VARCHAR</h3><p>يوفر ميلفوس مشغلات متخصصة لعمليات بحث دقيقة تستند إلى النص على حقول VARCHAR:</p>
-<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> المشغل</h4><p>يسمح المشغل <code translate="no">TEXT_MATCH</code> باسترجاع المستندات بدقة بناءً على مصطلحات استعلام محددة. وهو مفيد بشكل خاص لعمليات البحث المصفاة التي تجمع بين المرشحات القياسية وعمليات البحث عن التشابه المتجه. على عكس عمليات البحث الدلالية، يركّز Text Match على التكرارات الدقيقة للمصطلحات.</p>
+<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> المشغل</h4><p>يسمح المشغل <code translate="no">TEXT_MATCH</code> باسترجاع المستندات بدقة بناءً على مصطلحات استعلام محددة. وهو مفيد بشكل خاص لعمليات البحث المصفاة التي تجمع بين المرشحات العددية وعمليات البحث عن التشابه المتجه. على عكس عمليات البحث الدلالية، يركّز Text Match على التكرارات الدقيقة للمصطلحات.</p>
 <p>يستخدم ميلفوس تانتيفي لدعم الفهرسة المقلوبة والبحث النصي القائم على المصطلحات. تتضمن العملية</p>
 <ol>
 <li><p><strong>المحلّل</strong>: ترميز النص المدخلات ومعالجتها.</p></li>
 <li><p><strong>الفهرسة</strong>: ينشئ فهرسًا مقلوبًا يعيّن الرموز الفريدة للمستندات.</p></li>
 </ol>
 <p>لمزيد من التفاصيل، راجع <a href="/docs/ar/keyword-match.md">مطابقة النص</a>.</p>
-<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> المشغّل<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>يتيح مشغل <strong>PHRASE_MATCH</strong> استرجاع المستندات بدقة استنادًا إلى تطابق العبارات بدقة، مع الأخذ في الاعتبار ترتيب مصطلحات الاستعلام وتجاورها.</p>
+<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> المشغّل<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>يمكّن مشغل <strong>PHRASE_MATCH</strong> من استرجاع المستندات بدقة استنادًا إلى تطابق العبارات بدقة، مع الأخذ في الاعتبار ترتيب مصطلحات الاستعلام وتجاورها.</p>
 <p>لمزيد من التفاصيل، راجع <a href="/docs/ar/phrase-match.md">مطابقة العبارة</a>.</p>

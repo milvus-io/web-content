@@ -46,6 +46,7 @@ summary: >-
 <li><p><strong>Filtros de intervalo</strong>: <code translate="no">IN</code> e <code translate="no">LIKE</code> ajudam a corresponder a intervalos ou conjuntos de valores específicos.</p></li>
 <li><p><strong>Operadores aritméticos</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, e <code translate="no">**</code> são utilizados para cálculos que envolvem campos numéricos.</p></li>
 <li><p><strong>Operadores lógicos</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, e <code translate="no">NOT</code> combinam várias condições em expressões complexas.</p></li>
+<li><p><strong>Operadores IS NULL e IS NOT NULL</strong>: Os operadores <code translate="no">IS NULL</code> e <code translate="no">IS NOT NULL</code> são utilizados para filtrar campos com base no facto de conterem ou não um valor nulo (ausência de dados). Para obter detalhes, consulte <a href="/docs/pt/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Operadores básicos</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Exemplo: Filtragem por cor</h3><p>Para encontrar entidades com cores primárias (vermelho, verde ou azul) em um campo escalar <code translate="no">color</code>, use a seguinte expressão de filtro:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
@@ -127,7 +128,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais detalhes sobre os operadores de matriz, consulte <a href="/docs/pt/array-operators.md">Operadores</a> de matriz.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Operadores específicos do campo VARCHAR</h3><p>Milvus fornece operadores especializados para pesquisas precisas baseadas em texto em campos VARCHAR:</p>
-<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operador</h4><p>O operador <code translate="no">TEXT_MATCH</code> permite a recuperação precisa de documentos com base em termos de consulta específicos. É particularmente útil para pesquisas filtradas que combinam filtros escalares com pesquisas de semelhança vetorial. Ao contrário das pesquisas semânticas, a correspondência de texto centra-se nas ocorrências exactas de termos.</p>
+<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operador</h4><p>O operador <code translate="no">TEXT_MATCH</code> permite a recuperação precisa de documentos com base em termos de consulta específicos. É particularmente útil para pesquisas filtradas que combinam filtros escalares com pesquisas de semelhança vetorial. Ao contrário das pesquisas semânticas, a correspondência de texto centra-se em ocorrências exactas de termos.</p>
 <p>O Milvus utiliza o Tantivy para suportar a indexação invertida e a pesquisa de texto baseada em termos. O processo envolve:</p>
 <ol>
 <li><p><strong>Analisador</strong>: Tokeniza e processa o texto de entrada.</p></li>

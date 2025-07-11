@@ -47,6 +47,12 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>,<code translate="no">L2</code> 、<code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>不需要指定尺寸。</p></td>
      <td><p><code translate="no">IP</code>,<code translate="no">BM25</code> (僅用於全文檢索)</p></td>
@@ -55,7 +61,7 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>,<code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>,<code translate="no">JACCARD</code> 、<code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -93,13 +99,18 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>根據 MinHash 簽名位估計 Jaccard 相似度；距離越小表示越相似。</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>值越小，表示相似度越高。</p></td>
-     <td><p>[0, dim(vector)] [0, dim(vector)</p></td>
+     <td><p>值越小表示相似度越高。</p></td>
+     <td><p>[0, dim(vector)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BM25</code></p></td>
-     <td><p>根據詞彙頻率、倒置文件頻率和文件規範化為相關性評分。</p></td>
+     <td><p>根據詞彙頻率、倒置文件頻率和文件規範化來評分相關性。</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
@@ -184,7 +195,7 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
    </span> <span class="img-wrapper"> <span>余弦相似度</span> </span></p>
-<p>余弦相似度總是在區間<strong>[-1, 1]</strong>。例如，兩個成正比的向量的余弦相似度為<strong>1</strong>，兩個正交的向量的相似度為<strong>0</strong>，兩個相反的向量的相似度為<strong>-1</strong>。余弦越大，兩個向量之間的角度越小，表示這兩個向量之間的相似度越高。</p>
+<p>余弦相似度總是在區間<strong>[-1, 1]</strong>。舉例來說，兩個成正比的向量的余弦相似度為<strong>1</strong>，兩個正交的向量的相似度為<strong>0</strong>，兩個相反的向量的相似度為<strong>-1</strong>。余弦越大，兩個向量之間的角度越小，表示這兩個向量之間的相似度越高。</p>
 <p>將它們的余弦相似度從 1 減去，就可以得到兩個向量之間的余弦距離。</p>
 <h2 id="JACCARD-distance" class="common-anchor-header">JACCARD 距離<button data-href="#JACCARD-distance" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,7 +212,7 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JACCARD 相似度系數量度兩個樣本集之間的相似度，定義為定義集的交集的 cardinality 除以它們的結合的 cardinality。它只能應用於有限樣本集。</p>
+    </button></h2><p>JACCARD 距離係數衡量兩個樣本集之間的相似性，定義為定義集的交集的卡入度除以它們的合集的卡入度。它只能應用於有限樣本集。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -211,6 +222,39 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>JACCARD 距離公式</span> </span></p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong>(<code translate="no">MHJACCARD</code>) 是一種度量類型，用於在大型集上進行有效、近似的相似性搜尋 - 例如文件字元集、使用者標籤集或基因組 k-mer 集。MHJACCARD 並非直接比較原始集，而是比較<strong>MinHash 簽署</strong>，<strong>MinHash 簽署</strong>是專門用來有效估計 Jaccard 相似性的精簡表示法。</p>
+<p>這種方法比計算精確的 Jaccard 相似性快很多，在大規模或高維度的情況下特別有用。</p>
+<p><strong>適用向量類型</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>，其中每個向量儲存一個 MinHash 簽章。每個元素對應於套用到原始集合的其中一個獨立切細值函數下的最小切細值。</li>
+</ul>
+<p><strong>距離定義</strong></p>
+<p>MHJACCARD 量測兩個 MinHash 簽章中有多少位置符合。匹配比率越高，表示底層集越相似。</p>
+<p>Milvus 報告：</p>
+<ul>
+<li><strong>距離 = 1 - 估計相似度 (匹配比率)</strong></li>
+</ul>
+<p>距離值範圍從 0 到 1：</p>
+<ul>
+<li><p><strong>0</strong>表示 MinHash 簽名完全相同 (估計 Jaccard 相似度 = 1)</p></li>
+<li><p><strong>1</strong>表示任何位置都不匹配 (估計的 Jaccard 相似度 = 0)</p></li>
+</ul>
+<p>有關技術細節的資訊，請參閱<a href="/docs/zh-hant/minhash-lsh.md">MINHASH_LSH</a>。</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">HAMMING 距離<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +270,7 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HAMMING 距離量度二進位資料字串。長度相等的兩個字串之間的距離是位元位置不同的位元數。</p>
+    </button></h2><p>HAMMING 距離量度二進位資料字串。長度相等的兩個字串之間的距離是位元不同的位元位置數目。</p>
 <p>例如，假設有兩個字串，1101 1001 和 1001 1101。</p>
 <p>11011001 ⊕ 10011101 = 01000100.由於這包含兩個 1，所以 HAMMING 距離 d (11011001, 10011101) = 2。</p>
 <h2 id="BM25-similarity" class="common-anchor-header">BM25 相似度<button data-href="#BM25-similarity" class="anchor-icon" translate="no">

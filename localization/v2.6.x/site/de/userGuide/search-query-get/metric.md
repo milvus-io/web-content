@@ -50,6 +50,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>Die Angabe der Dimension ist nicht erforderlich.</p></td>
      <td><p><code translate="no">IP</code> <code translate="no">BM25</code> (nur für die Volltextsuche verwendet)</p></td>
@@ -58,7 +64,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -96,13 +102,18 @@ summary: >-
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>Schätzt die Jaccard-Ähnlichkeit anhand der MinHash-Signaturbits; kleinerer Abstand = größere Ähnlichkeit</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Ein kleinerer Wert weist auf eine größere Ähnlichkeit hin.</p></td>
      <td><p>[0, dim(vector)]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BM25</code></p></td>
-     <td><p>Bewertung der Relevanz auf der Grundlage der Termhäufigkeit, der invertierten Dokumenthäufigkeit und der Dokumentnormalisierung.</p></td>
+     <td><p>Bewertet die Relevanz auf der Grundlage der Termhäufigkeit, der invertierten Dokumenthäufigkeit und der Dokumentnormalisierung.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
@@ -204,7 +215,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der JACCARD-Ähnlichkeitskoeffizient misst die Ähnlichkeit zwischen zwei Stichprobenmengen und ist definiert als die Kardinalität der Schnittmenge der definierten Mengen geteilt durch die Kardinalität der Vereinigung dieser Mengen. Er kann nur auf endliche Stichprobenmengen angewendet werden.</p>
+    </button></h2><p>Der JACCARD-Distanzkoeffizient misst die Ähnlichkeit zwischen zwei Stichprobenmengen und ist definiert als die Kardinalität der Schnittmenge der definierten Mengen geteilt durch die Kardinalität der Vereinigung dieser Mengen. Er kann nur auf endliche Stichprobenmengen angewendet werden.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -214,6 +225,39 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>JACCARD-Abstandsformel</span> </span></p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) ist ein metrischer Typ, der für eine effiziente, ungefähre Ähnlichkeitssuche über große Mengen verwendet wird, wie z. B. Dokument-Wortmengen, Benutzer-Tagmengen oder genomische k-mer-Mengen. Anstatt rohe Mengen direkt zu vergleichen, vergleicht MHJACCARD <strong>MinHash-Signaturen</strong>, die kompakte Darstellungen zur effizienten Schätzung der Jaccard-Ähnlichkeit sind.</p>
+<p>Dieser Ansatz ist wesentlich schneller als die Berechnung der exakten Jaccard-Ähnlichkeit und ist besonders in großen oder hochdimensionalen Szenarien nützlich.</p>
+<p><strong>Anwendbarer Vektortyp</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>, wobei jeder Vektor eine MinHash-Signatur speichert. Jedes Element entspricht dem minimalen Hash-Wert unter einer der unabhängigen Hash-Funktionen, die auf die ursprüngliche Menge angewendet werden.</li>
+</ul>
+<p><strong>Definition der Entfernung</strong></p>
+<p>MHJACCARD misst, wie viele Positionen in zwei MinHash-Signaturen übereinstimmen. Je höher die Übereinstimmungsquote, desto ähnlicher sind die zugrunde liegenden Mengen.</p>
+<p>Milvus berichtet:</p>
+<ul>
+<li><strong>Abstand = 1 - geschätzte Ähnlichkeit (Übereinstimmungsverhältnis)</strong></li>
+</ul>
+<p>Der Abstandswert reicht von 0 bis 1:</p>
+<ul>
+<li><p><strong>0</strong> bedeutet, dass die MinHash-Signaturen identisch sind (geschätzte Jaccard-Ähnlichkeit = 1)</p></li>
+<li><p><strong>1</strong> bedeutet, dass es an keiner Position eine Übereinstimmung gibt (geschätzte Jaccard-Ähnlichkeit = 0)</p></li>
+</ul>
+<p>Informationen zu technischen Details finden Sie unter <a href="/docs/de/minhash-lsh.md">MINHASH_LSH</a>.</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">HAMMING-Abstand<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

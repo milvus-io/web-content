@@ -46,8 +46,9 @@ summary: >-
 <li><p><strong>Filtros de rango</strong>: <code translate="no">IN</code> y <code translate="no">LIKE</code> ayudan a emparejar rangos o conjuntos de valores específicos.</p></li>
 <li><p><strong>Operadores aritméticos</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, y <code translate="no">**</code> se utilizan para cálculos que implican campos numéricos.</p></li>
 <li><p><strong>Operadores lógicos</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, y <code translate="no">NOT</code> combinan múltiples condiciones en expresiones complejas.</p></li>
+<li><p><strong>Operadores IS NULL y IS NOT NULL</strong>: Los operadores <code translate="no">IS NULL</code> y <code translate="no">IS NOT NULL</code> se utilizan para filtrar campos en función de si contienen un valor nulo (ausencia de datos). Para más detalles, consulte <a href="/docs/es/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Operadores básicos</a>.</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Ejemplo: Filtrar por color</h3><p>Para encontrar entidades con colores primarios (rojo, verde o azul) en un campo escalar <code translate="no">color</code>, utilice la siguiente expresión de filtro:</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Ejemplo: Filtrar por color</h3><p>Para buscar entidades con colores primarios (rojo, verde o azul) en un campo escalar <code translate="no">color</code>, utilice la siguiente expresión de filtrado:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Ejemplo: Filtrado de campos JSON</h3><p>Milvus permite referenciar claves en campos JSON. Por ejemplo, si tiene un campo JSON <code translate="no">product</code> con las claves <code translate="no">price</code> y <code translate="no">model</code>, y desea encontrar productos con un modelo específico y un precio inferior a 1.850, utilice esta expresión de filtro:</p>
@@ -128,7 +129,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p>Para obtener más información sobre los operadores de matrices, consulte <a href="/docs/es/array-operators.md">Operadores ARRAY</a>.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Operadores específicos de campo VARCHAR</h3><p>Milvus proporciona operadores especializados para búsquedas precisas basadas en texto en campos VARCHAR:</p>
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operador</h4><p>El operador <code translate="no">TEXT_MATCH</code> permite una recuperación precisa de documentos basada en términos de consulta específicos. Es especialmente útil para búsquedas filtradas que combinan filtros escalares con búsquedas de similitud vectorial. A diferencia de las búsquedas semánticas, Text Match se centra en las ocurrencias exactas de los términos.</p>
-<p>Milvus utiliza Tantivy para apoyar la indexación invertida y la búsqueda de texto basada en términos. El proceso implica:</p>
+<p>Milvus utiliza Tantivy para soportar la indexación invertida y la búsqueda de texto basada en términos. El proceso implica:</p>
 <ol>
 <li><p><strong>Analizador</strong>: Tokeniza y procesa el texto de entrada.</p></li>
 <li><p><strong>Indexación</strong>: Crea un índice invertido que asigna tokens únicos a documentos.</p></li>

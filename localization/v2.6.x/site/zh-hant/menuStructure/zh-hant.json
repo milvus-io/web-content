@@ -732,6 +732,12 @@
                 "id": "bin-flat.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -2159,7 +2165,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格",
+            "label": "拉格舞曲",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []

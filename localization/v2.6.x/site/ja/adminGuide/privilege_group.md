@@ -62,7 +62,7 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
       </svg>
     </button></h2><p>Milvusでは、使いやすさを考慮し、コレクション、データベース、インスタンスレベルで合計9つの組み込み権限を提供しています：COLL_RO、COLL_RW、COLL_ADMIN、DB_RO、DB_RW、DB_Admin、Cluster_RO、Cluster_RW、Cluster_Adminです。</p>
 <div class="alert note">
-<p>3つのレベルの組み込み特権グループにはカスケード関係はありません。インスタンス・レベルで権限グループを設定しても、そのインスタンス配下のすべてのデータベースとコレクションに自動的に権限が設定されるわけではありません。データベース・レベルとコレクション・レベルの権限は手動で設定する必要があります。</p>
+<p>3つのレベルの組み込み特権グループにはカスケード関係はありません。インスタンス・レベルで権限グループを設定しても、そのインスタンス配下のすべてのデータベースとコレクションの権限は自動的に設定されません。データベース・レベルとコレクション・レベルの権限は手動で設定する必要があります。</p>
 </div>
 <p>以下の表では、組み込みの各特権グループに含まれる権限について説明します。</p>
 <h3 id="Collection-level" class="common-anchor-header">コレクション・レベル</h3><ul>
@@ -267,13 +267,13 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>コレクション作成</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>コレクションの作成</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>コレクションの削除</p></td>
+     <td><p>ドロップコレクション</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -563,7 +563,7 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">特権グループの一覧表示</h3><p>以下の例では、既存のすべての特権グループを一覧表示する方法を示します。</p>
+<h3 id="List-privilege-groups" class="common-anchor-header">特権グループの一覧表示</h3><p>以下の例では、既存の特権グループをすべて一覧表示する方法を示します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

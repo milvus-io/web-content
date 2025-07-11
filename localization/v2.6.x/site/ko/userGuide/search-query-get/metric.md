@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>유사성 메트릭은 벡터 간의 유사성을 측정하는 데 사용됩니다. 적절한 거리 메트릭을 선택하면 분류 및 클러스터링 성능을 크게 향상시키는 데 도움이 됩니다.</p>
-<p>현재 Milvus는 다음과 같은 유형의 유사도 메트릭을 지원합니다: 유클리드 거리 (<code translate="no">L2</code>), 내적 곱 (<code translate="no">IP</code>), 코사인 유사도 (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, <code translate="no">BM25</code> (특히 희소 벡터의 전체 텍스트 검색을 위해 설계됨).</p>
+<p>현재 Milvus는 다음과 같은 유형의 유사도 메트릭을 지원합니다: 유클리드 거리 (<code translate="no">L2</code>), 내부 곱 (<code translate="no">IP</code>), 코사인 유사도 (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, <code translate="no">BM25</code> (특히 희소 벡터의 전체 텍스트 검색을 위해 설계됨).</p>
 <p>아래 표에는 다양한 필드 유형과 해당 메트릭 유형 간의 매핑이 요약되어 있습니다.</p>
 <table>
    <tr>
@@ -49,6 +49,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>차원을 지정할 필요가 없습니다.</p></td>
      <td><p><code translate="no">IP</code>, <code translate="no">BM25</code> (전체 텍스트 검색에만 사용)</p></td>
@@ -57,7 +63,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -95,13 +101,18 @@ summary: >-
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>MinHash 서명 비트에서 Jaccard 유사성을 추정합니다. 거리가 작을수록 더 유사합니다.</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>값이 작을수록 유사도가 높음을 나타냅니다.</p></td>
-     <td><p>[0, dim(벡터)]</p></td>
+     <td><p>값이 작을수록 유사성이 높음을 나타냅니다.</p></td>
+     <td><p>[0, dim(vector)]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BM25</code></p></td>
-     <td><p>용어 빈도, 반전된 문서 빈도 및 문서 정규화를 기반으로 관련성 점수를 매깁니다.</p></td>
+     <td><p>용어 빈도, 반전된 문서 빈도 및 문서 정규화를 기반으로 관련성을 점수화합니다.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
@@ -203,7 +214,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JACCARD 유사도 계수는 두 샘플 세트 간의 유사도를 측정하며, 정의된 세트의 교집합의 카디널리티를 두 세트의 합집합의 카디널리티로 나눈 값으로 정의됩니다. 유한한 샘플 세트에만 적용할 수 있습니다.</p>
+    </button></h2><p>JACCARD 거리 계수는 두 샘플 세트 간의 유사도를 측정하며, 정의된 세트의 교집합의 카디널리티를 합집합의 카디널리티로 나눈 값으로 정의됩니다. 유한한 샘플 세트에만 적용할 수 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -213,6 +224,39 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>JACCARD 거리 공식</span> </span></p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>)는 문서 단어 집합, 사용자 태그 집합 또는 게놈 k-mer 집합과 같은 대규모 집합에 대한 효율적이고 대략적인 유사성 검색에 사용되는 메트릭 유형입니다. 원시 집합을 직접 비교하는 대신 MHJACCARD는 Jaccard 유사성을 효율적으로 추정하도록 설계된 압축 표현인 <strong>MinHash 서명을</strong> 비교합니다.</p>
+<p>이 접근 방식은 정확한 Jaccard 유사도를 계산하는 것보다 훨씬 빠르며 대규모 또는 고차원 시나리오에서 특히 유용합니다.</p>
+<p><strong>적용 가능한 벡터 유형</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>각 벡터는 MinHash 서명을 저장합니다. 각 요소는 원래 집합에 적용된 독립 해시 함수 중 하나에 따른 최소 해시 값에 해당합니다.</li>
+</ul>
+<p><strong>거리 정의</strong></p>
+<p>MHJACCARD는 두 MinHash 서명에서 얼마나 많은 위치가 일치하는지 측정합니다. 일치 비율이 높을수록 기본 세트가 더 유사하다는 것을 의미합니다.</p>
+<p>밀버스는 다음과 같이 보고합니다:</p>
+<ul>
+<li><strong>거리 = 1 - 추정 유사도(일치 비율)</strong></li>
+</ul>
+<p>거리 값은 0에서 1 사이의 범위입니다:</p>
+<ul>
+<li><p><strong>0은</strong> MinHash 서명이 동일함을 의미합니다(예상 Jaccard 유사도 = 1).</p></li>
+<li><p><strong>1은</strong> 어떤 위치에서도 일치하는 항목이 없음을 의미합니다(예상 Jaccard 유사도 = 0).</p></li>
+</ul>
+<p>기술적 세부사항에 대한 자세한 내용은 <a href="/docs/ko/minhash-lsh.md">MINHASH_LSH를</a> 참조하세요.</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">해밍 거리<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -228,8 +272,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>해밍 거리는 이진 데이터 문자열을 측정합니다. 길이가 같은 두 문자열 사이의 거리는 비트가 서로 다른 비트 위치의 수입니다.</p>
-<p>예를 들어 1101 1001과 1001 1101이라는 두 개의 문자열이 있다고 가정해 보겠습니다.</p>
+    </button></h2><p>해밍 거리는 바이너리 데이터 문자열을 측정합니다. 길이가 같은 두 문자열 사이의 거리는 비트가 서로 다른 비트 위치의 수입니다.</p>
+<p>예를 들어 1101 1001과 1001 1101이라는 두 문자열이 있다고 가정해 보겠습니다.</p>
 <p>11011001 ⊕ 10011101 = 01000100. 여기에는 두 개의 1이 포함되어 있으므로 해밍 거리는 d(11011001, 10011101) = 2입니다.</p>
 <h2 id="BM25-similarity" class="common-anchor-header">BM25 유사성<button data-href="#BM25-similarity" class="anchor-icon" translate="no">
       <svg translate="no"

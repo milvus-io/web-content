@@ -268,8 +268,8 @@ summary: 为了简化授予权限的流程，建议将多个权限合并为一�
    </tr>
    <tr>
      <td><p>创建集合</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
@@ -290,7 +290,7 @@ summary: 为了简化授予权限的流程，建议将多个权限合并为一�
 <li><p><strong>群集读写 (Cluster_RW)</strong>：包括读取和写入实例数据的权限</p></li>
 <li><p><strong>ClusterAdmin (Cluster_Admin)</strong>：包括读写实例数据和管理实例的权限。</p></li>
 </ul>
-<p>下表列出了实例级三个内置权限组所包含的具体权限：</p>
+<p>下表列出了实例级三个内置特权组所包含的具体特权：</p>
 <table>
    <tr>
      <th><p><strong>权限</strong></p></th>

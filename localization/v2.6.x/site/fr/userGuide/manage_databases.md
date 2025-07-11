@@ -287,8 +287,8 @@ curl --request POST \
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
-    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    properties: {
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>,
+    properties={
         <span class="hljs-string">&quot;database.max.collections&quot;</span>: <span class="hljs-number">10</span>
     }
 )
@@ -327,8 +327,8 @@ curl --request POST \
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
-    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    property_keys: [
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>,
+    property_keys=[
         <span class="hljs-string">&quot;database.max.collections&quot;</span>
     ]
 )
@@ -468,4 +468,4 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">Comment gérer les autorisations pour une base de données ?</h3><p>Milvus utilise le contrôle d'accès basé sur les rôles (RBAC) pour gérer les autorisations. Vous pouvez créer des rôles avec des privilèges spécifiques et les attribuer à des utilisateurs, contrôlant ainsi leur accès à différentes bases de données. Pour plus de détails, voir la <a href="/docs/fr/rbac.md">documentation RBAC</a>.</p>
-<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">Existe-t-il des limitations de quotas pour une base de données ?</h3><p>Oui, Milvus vous permet de définir des limitations de quotas pour une base de données, telles que le nombre maximum de collections. Pour une liste complète des limitations, veuillez vous référer à la <a href="/docs/fr/limitations.md">documentation Limites de Milvus</a>.</p>
+<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">Existe-t-il des limitations de quotas pour une base de données ?</h3><p>Oui, Milvus vous permet de définir des limitations de quota pour une base de données, telles que le nombre maximum de collections. Pour une liste complète des limitations, veuillez vous référer à la <a href="/docs/fr/limitations.md">documentation Limites de Milvus</a>.</p>

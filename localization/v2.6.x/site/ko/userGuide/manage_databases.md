@@ -116,7 +116,7 @@ curl --request POST \
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>데이터베이스를 만들 때 데이터베이스에 대한 속성을 설정할 수도 있습니다. 다음 예제는 데이터베이스의 복제본 수를 설정합니다.</p>
+<p>데이터베이스를 만들 때 데이터베이스에 대한 속성을 설정할 수도 있습니다. 다음 예는 데이터베이스의 복제본 수를 설정하는 예제입니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_database(
@@ -286,8 +286,8 @@ curl --request POST \
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
-    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    properties: {
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>,
+    properties={
         <span class="hljs-string">&quot;database.max.collections&quot;</span>: <span class="hljs-number">10</span>
     }
 )
@@ -326,8 +326,8 @@ curl --request POST \
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
-    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    property_keys: [
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>,
+    property_keys=[
         <span class="hljs-string">&quot;database.max.collections&quot;</span>
     ]
 )

@@ -732,6 +732,12 @@
                 "id": "bin-flat.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -1104,7 +1110,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []

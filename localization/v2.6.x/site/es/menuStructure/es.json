@@ -732,6 +732,12 @@
                 "id": "bin-flat.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -2645,7 +2651,7 @@
         "children": []
       },
       {
-        "label": "Milvus Limits",
+        "label": "Límites de Milvus",
         "id": "limitations.md",
         "order": 3,
         "children": []

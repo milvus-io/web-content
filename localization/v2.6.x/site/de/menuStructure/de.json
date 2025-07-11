@@ -732,6 +732,12 @@
                 "id": "bin-flat.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -1533,7 +1539,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac",
             "order": 1,
             "isMenu": true,

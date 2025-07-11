@@ -49,6 +49,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code> <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>لا حاجة لتحديد البُعد</p></td>
      <td><p><code translate="no">IP</code>، <code translate="no">BM25</code> (يستخدم فقط للبحث عن النص الكامل)</p></td>
@@ -57,14 +63,14 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code> <code translate="no">JACCARD</code> ، , <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
 <div class="alert note">
 <ul>
-<li><p>بالنسبة للحقول المتجهة من النوع <code translate="no">SPARSE\_FLOAT\_VECTOR</code> ، استخدم النوع المتري <code translate="no">BM25</code> فقط عند إجراء بحث بالنص الكامل. لمزيد من المعلومات، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p></li>
-<li><p>بالنسبة للحقول المتجهة من النوع <code translate="no">BINARY_VECTOR</code> ، يجب أن تكون قيمة البعد (<code translate="no">dim</code>) من مضاعفات 8.</p></li>
+<li><p>بالنسبة للحقول المتجهة من النوع <code translate="no">SPARSE\_FLOAT\_VECTOR</code> ، استخدم النوع المتري <code translate="no">BM25</code> فقط عند إجراء بحث بالنص الكامل. لمزيد من المعلومات، راجع <a href="/docs/ar/full-text-search.md">البحث</a> عن <a href="/docs/ar/full-text-search.md">النص الكامل</a>.</p></li>
+<li><p>بالنسبة للحقول المتجهة من النوع <code translate="no">BINARY_VECTOR</code> ، يجب أن تكون قيمة البعد (<code translate="no">dim</code>) من مضاعفات العدد 8.</p></li>
 </ul>
 </div>
 <p>يلخص الجدول أدناه خصائص قيم مسافة التشابه لجميع أنواع المقاييس المدعومة ونطاق قيمها.</p>
@@ -95,13 +101,18 @@ summary: >-
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>تقديرات تشابه جاكارد من بتات توقيع MinHash؛ مسافة أصغر = تشابه أكبر</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>تشير القيمة الأصغر إلى تشابه أكبر.</p></td>
      <td><p>[0، خافت (متجه)]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BM25</code></p></td>
-     <td><p>تسجيل درجة الصلة بناءً على تكرار المصطلح وتكرار المستند المقلوب وتطبيع المستند.</p></td>
+     <td><p>تقدير الصلة استنادًا إلى تكرار المصطلح وتكرار المستند المقلوب وتطبيع المستند.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
@@ -181,7 +192,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يستخدم تشابه جيب التمام جيب تمام الزاوية بين مجموعتين من المتجهات لقياس مدى تشابههما. يمكنك التفكير في مجموعتي المتجهات على أنهما قطعتان مستقيمتان تبدآن من نفس النقطة، مثل [0،0،...]، لكنهما تشيران في اتجاهين مختلفين.</p>
-<p>لحساب تشابه جيب التمام بين مجموعتين من المتجهين <strong>A = (<sub>a0،</sub><sub>a1،</sub>...،<sub>an-1</sub>)</strong> <strong>وB = (<sub>b0،</sub><sub>b1،</sub>...، <sub>bn-1</sub>)</strong>، استخدم الصيغة التالية:</p>
+<p>لحساب التشابه في جيب التمام بين مجموعتين من المتجهات <strong>A = (<sub>a0،</sub><sub>a1،</sub>...،<sub>an-1</sub>)</strong> <strong>وB = (<sub>b0،</sub><sub>b1،</sub>...، <sub>bn-1</sub>)</strong>، استخدم الصيغة التالية:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
@@ -203,7 +214,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقيس معامل التشابه JACCARD التشابه بين مجموعتين من العينات، ويُعرَّف بأنه مقدار التشابه بين مجموعتين محددتين مقسومًا على مقدار التشابه بين مجموعتين محددتين. يمكن تطبيقه فقط على مجموعات العينات المحدودة.</p>
+    </button></h2><p>يقيس معامل المسافة JACCARD التشابه بين مجموعتين من العينات، ويُعرَّف بأنه مقدار التشابه بين مجموعتين محددتين مقسومًا على مقدار التشابه بين مجموعتين محددتين. يمكن تطبيقه فقط على مجموعات العينات المحدودة.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -212,8 +223,8 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
-   </span> <span class="img-wrapper"> <span>معادلة مسافة JACCARD</span> </span></p>
-<h2 id="HAMMING-distance" class="common-anchor-header">مسافة هامينج<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
+   </span> <span class="img-wrapper"> <span>صيغة المسافة JACCARD</span> </span></p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,9 +239,42 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تقيس مسافة HAMMING سلاسل البيانات الثنائية. المسافة بين سلسلتين متساويتين في الطول هي عدد مواضع البتات التي تختلف عندها البتات.</p>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) هو نوع مقياس يستخدم للبحث الفعال والتقريبي عن التشابه على مجموعات كبيرة - مثل مجموعات كلمات المستندات، أو مجموعات علامات المستخدم، أو مجموعات k-مير الجينومية. وبدلاً من مقارنة المجموعات الخام مباشرة، يقارن MHJACCARD <strong>تواقيع MinHash،</strong> وهي عبارة عن تمثيلات مضغوطة مصممة لتقدير تشابه جاكارد بكفاءة.</p>
+<p>هذا النهج أسرع بكثير من حساب تشابه جاكارد الدقيق وهو مفيد بشكل خاص في السيناريوهات واسعة النطاق أو عالية الأبعاد.</p>
+<p><strong>نوع المتجه القابل للتطبيق</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>حيث يخزن كل متجه توقيع MinHash. يتوافق كل عنصر مع الحد الأدنى لقيمة التجزئة تحت إحدى دوال التجزئة المستقلة المطبقة على المجموعة الأصلية.</li>
+</ul>
+<p><strong>تعريف المسافة</strong></p>
+<p>يقيس MHJACCARD عدد المواضع في توقيعين من MinHash متطابقين. كلما كانت نسبة التطابق أعلى، كلما كانت المجموعتان الأساسيتان متشابهتان.</p>
+<p>تقارير ميلفوس</p>
+<ul>
+<li><strong>المسافة = 1 - التشابه المقدر (نسبة التطابق)</strong></li>
+</ul>
+<p>تتراوح قيمة المسافة من 0 إلى 1:</p>
+<ul>
+<li><p><strong>0</strong> تعني<strong>0</strong> أن توقيعات MinHash متطابقة (تشابه جاكارد المقدر = 1)</p></li>
+<li><p><strong>1</strong> تعني عدم وجود تطابق في أي موضع (تشابه جاكارد المقدر = 0)</p></li>
+</ul>
+<p>للحصول على معلومات حول التفاصيل الفنية، راجع <a href="/docs/ar/minhash-lsh.md">MINHASH_LSH</a>.</p>
+<h2 id="HAMMING-distance" class="common-anchor-header">مسافة HAMMING<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>تقيس مسافة HAMMING سلاسل البيانات الثنائية. المسافة بين سلسلتين متساويتين في الطول هي عدد مواضع البتات التي تختلف فيها البتات.</p>
 <p>على سبيل المثال، لنفترض أن هناك سلسلتين، 1101 1001 و1001 1101.</p>
-<p>11011001 ⊕ 10011101 = 01000100. وبما أن هذا يحتوي على اثنين من 1، فإن المسافة بين السلسلتين هي د (11011001، 10011101) = 2.</p>
+<p>11011001 ⊕ 10011101 = 01000100. وبما أن هذا يحتوي على رقمين 1، فإن المسافة بين السلسلتين هي د (11011001، 10011101) = 2.</p>
 <h2 id="BM25-similarity" class="common-anchor-header">تشابه BM25<button data-href="#BM25-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -249,7 +293,7 @@ summary: >-
     </button></h2><p>BM25 هي طريقة قياس صلة النص المستخدمة على نطاق واسع، وهي مصممة خصيصًا <a href="/docs/ar/full-text-search.md">للبحث في النص الكامل</a>. وهي تجمع بين العوامل الرئيسية الثلاثة التالية:</p>
 <ul>
 <li><p><strong>تردد المصطلح (TF):</strong> يقيس مدى تكرار ظهور المصطلح في المستند. في حين أن الترددات الأعلى غالبًا ما تشير إلى أهمية أكبر، تستخدم BM25 معلمة التشبع <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">k1k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span></span></span></span> k <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span><span class="vlist-s">1</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> لمنع المصطلحات المتكررة بشكل مفرط من الهيمنة على درجة الصلة.</p></li>
-<li><p><strong>تردد المستند العكسي (IDF):</strong> يعكس أهمية المصطلح عبر المجموعة بأكملها. وتحصل المصطلحات التي تظهر في عدد أقل من المستندات على قيمة IDF أعلى، مما يشير إلى مساهمة أكبر في الأهمية.</p></li>
+<li><p><strong>تردد المستند العكسي (IDF):</strong> يعكس أهمية المصطلح عبر المجموعة بأكملها. وتحصل المصطلحات التي تظهر في عدد أقل من المستندات على قيمة أعلى لتكرار المستند (IDF)، مما يشير إلى مساهمة أكبر في الأهمية.</p></li>
 <li><p><strong>تطبيع طول المستند:</strong> تميل المستندات الأطول إلى الحصول على درجات أعلى بسبب احتوائها على مصطلحات أكثر. يخفف BM25 من هذا التحيز من خلال تطبيع أطوال المستندات، حيث يتحكم المعامل <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">bb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span></span></span></span> b في قوة هذا التطبيع.</p></li>
 </ul>
 <p>يتم حساب نقاط BM25 على النحو التالي:</p>
