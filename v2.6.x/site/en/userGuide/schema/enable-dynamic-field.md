@@ -10,7 +10,9 @@ Milvus allows you to insert entities with flexible, evolving structures through 
 
 ## How it works
 
-When the dynamic field is enabled, Milvus adds a hidden `$meta` field to each entity. During data insertion, any field not declared in the schema is automatically stored as a key-value pair inside this dynamic field.
+When the dynamic field is enabled, Milvus adds a hidden `$meta` field to each entity. This field is of JSON type, which means it can store any JSON-compatible data structure and can be indexed using JSON path syntax.
+
+During data insertion, any field not declared in the schema is automatically stored as a key-value pair inside this dynamic field.
 
 You don't need to manage `$meta` manually—Milvus handles it transparently.
 
@@ -217,6 +219,42 @@ if err != nil {
 
 ```bash
 # restful
+export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="http://localhost:19530"
+
+export myIdField='{
+  "fieldName": "my_id",
+  "dataType": "Int64",
+  "isPrimary": true,
+  "autoID": false
+}'
+
+export myVectorField='{
+  "fieldName": "my_vector",
+  "dataType": "FloatVector",
+  "elementTypeParams": {
+    "dim": 5
+  }
+}'
+
+export schema="{
+  \"autoID\": false,
+  \"enableDynamicField\": true,
+  \"fields\": [
+    $myIdField,
+    $myVectorField
+  ]
+}"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data "{
+  \"collectionName\": \"my_collection\",
+  \"schema\": $schema
+}"
+
 ```
 
 ## Insert entities to the collection
@@ -328,6 +366,28 @@ if err != nil {
 
 ```bash
 # restful
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data '{
+  "data": [
+    {
+      "my_id": 1,
+      "my_vector": [0.1, 0.2, 0.3, 0.4, 0.5],
+      "overview": "Great product",
+      "words": 150,
+      "dynamic_json": {
+        "varchar": "some text",
+        "nested": {
+          "value": 42.5
+        },
+        "string_price": "99.99"
+      }
+    }
+  ],
+  "collectionName": "my_collection"
+}'
 ```
 
 ## Index keys in the dynamic field | Milvus 2.5.11+
@@ -356,9 +416,15 @@ To create a JSON path index, specify:
 
     - For a complete list, refer to [Supported JSON cast types](use-json-fields.md#Supported-JSON-cast-types).
 
-### Index non-JSON keys in the dynamic field
+### Use JSON path to index dynamic field keys
 
-You can index any non-JSON key (e.g., `overview`, `words`) by referencing its key name directly in `json_path`:
+Since the dynamic field is a JSON field, you can index any key within it using JSON path syntax. This works for both simple scalar values and complex nested structures.
+
+**JSON path examples:**
+
+- For simple keys: `overview`, `words`
+
+- For nested keys: `dynamic_json['varchar']`, `dynamic_json['nested']['value']`
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -371,30 +437,58 @@ You can index any non-JSON key (e.g., `overview`, `words`) by referencing its ke
 ```python
 index_params = client.prepare_index_params()
 
-# Index a string key from $meta
+# Index a simple string key
 index_params.add_index(
     field_name="overview",  # Key name in the dynamic field
     # highlight-next-line
-    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
     index_name="overview_index",  # Unique index name
     # highlight-start
     params={
         "json_cast_type": "varchar",   # Data type that Milvus uses when indexing the values
-        "json_path": "overview"        # Key name in the dynamic field
+        "json_path": "overview"        # JSON path to the key
     }
     # highlight-end
 )
 
-# Index a numeric key from $meta
+# Index a simple numeric key
 index_params.add_index(
     field_name="words",  # Key name in the dynamic field
     # highlight-next-line
-    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
     index_name="words_index",  # Unique index name
     # highlight-start
     params={
         "json_cast_type": "double",  # Data type that Milvus uses when indexing the values
-        "json_path": "words" # Key name in the dynamic field
+        "json_path": "words" # JSON path to the key
+    }
+    # highlight-end
+)
+
+# Index a nested key within a JSON object
+index_params.add_index(
+    field_name="dynamic_json", # JSON key name in the dynamic field
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
+    index_name="json_varchar_index", # Unique index name
+    # highlight-start
+    params={
+        "json_cast_type": "varchar", # Data type that Milvus uses when indexing the values
+        "json_path": "dynamic_json['varchar']" # JSON path to the nested key
+    }
+    # highlight-end
+)
+
+# Index a deeply nested key
+index_params.add_index(
+    field_name="dynamic_json",
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
+    index_name="json_nested_index", # Unique index name
+    # highlight-start
+    params={
+        "json_cast_type": "double",
+        "json_path": "dynamic_json['nested']['value']"
     }
     # highlight-end
 )
@@ -422,6 +516,26 @@ indexParams.add(IndexParam.builder()
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .extraParams(extraParams2)
         .build());
+
+Map<String,Object> extraParams3 = new HashMap<>();
+extraParams3.put("json_path", "dynamic_json['varchar']");
+extraParams3.put("json_cast_type", "varchar");
+indexParams.add(IndexParam.builder()
+        .fieldName("dynamic_json")
+        .indexName("json_varchar_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams3)
+        .build());
+
+Map<String,Object> extraParams4 = new HashMap<>();
+extraParams4.put("json_path", "dynamic_json['nested']['value']");
+extraParams4.put("json_cast_type", "double");
+indexParams.add(IndexParam.builder()
+        .fieldName("dynamic_json")
+        .indexName("json_nested_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams4)
+        .build());
 ```
 
 ```javascript
@@ -448,94 +562,7 @@ const indexParams = [
         json_cast_type: 'double',
       },
     },
-  ];
-
-```
-
-```go
-import (
-    "github.com/milvus-io/milvus/client/v2/index"
-)
-
-jsonIndex1 := index.NewJSONPathIndex(index.AUTOINDEX, "varchar", "overview")
-    .WithIndexName("overview_index")
-jsonIndex2 := index.NewJSONPathIndex(index.AUTOINDEX, "double", "words")
-    .WithIndexName("words_index")
-
-indexOpt1 := milvusclient.NewCreateIndexOption("my_collection", "overview", jsonIndex1)
-indexOpt2 := milvusclient.NewCreateIndexOption("my_collection", "words", jsonIndex2)
-```
-
-```bash
-# restful
-```
-
-### Index JSON keys in the dynamic field
-
-When a key in the dynamic field (`$meta`) stores a JSON object, you can index its internal keys using bracket notation in `json_path`.
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-# Index a top-level key inside a JSON object
-index_params.add_index(
-    field_name="dynamic_json", # JSON key name in the dynamic field
-    # highlight-next-line
-    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
-    index_name="json_varchar_index", # Unique index name
-    # highlight-start
-    params={
-        "json_cast_type": "varchar", # Data type that Milvus uses when indexing the values
-        "json_path": "dynamic_json['varchar']" # Path to the key to be indexed
-    }
-    # highlight-end
-)
-
-# Index a nested key
-index_params.add_index(
-    field_name="dynamic_json",
-    # highlight-next-line
-    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
-    index_name="json_nested_index", # Unique index name
-    # highlight-start
-    params={
-        "json_cast_type": "double",
-        "json_path": "dynamic_json['nested']['value']"
-    }
-    # highlight-end
-)
-```
-
-```java
-Map<String,Object> extraParams3 = new HashMap<>();
-extraParams3.put("json_path", "dynamic_json['varchar']");
-extraParams3.put("json_cast_type", "varchar");
-indexParams.add(IndexParam.builder()
-        .fieldName("dynamic_json")
-        .indexName("json_varchar_index")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .extraParams(extraParams3)
-        .build());
-
-Map<String,Object> extraParams4 = new HashMap<>();
-extraParams4.put("json_path", "dynamic_json['nested']['value']");
-extraParams4.put("json_cast_type", "double");
-indexParams.add(IndexParam.builder()
-        .fieldName("dynamic_json")
-        .indexName("json_nested_index")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .extraParams(extraParams4)
-        .build());
-```
-
-```javascript
-indexParams.push({
+    {
       collection_name: 'my_collection',
       field_name: 'dynamic_json',
       index_name: 'json_varchar_index',
@@ -556,21 +583,73 @@ indexParams.push({
         json_cast_type: 'double',
         json_path: "dynamic_json['nested']['value']",
       },
-    });
+    },
+  ];
 ```
 
 ```go
+import (
+    "github.com/milvus-io/milvus/client/v2/index"
+)
+
+jsonIndex1 := index.NewJSONPathIndex(index.AUTOINDEX, "varchar", "overview")
+    .WithIndexName("overview_index")
+jsonIndex2 := index.NewJSONPathIndex(index.AUTOINDEX, "double", "words")
+    .WithIndexName("words_index")
 jsonIndex3 := index.NewJSONPathIndex(index.AUTOINDEX, "varchar", `dynamic_json['varchar']`)
     .WithIndexName("json_varchar_index")
 jsonIndex4 := index.NewJSONPathIndex(index.AUTOINDEX, "double", `dynamic_json['nested']['value']`)
     .WithIndexName("json_nested_index")
 
+indexOpt1 := milvusclient.NewCreateIndexOption("my_collection", "overview", jsonIndex1)
+indexOpt2 := milvusclient.NewCreateIndexOption("my_collection", "words", jsonIndex2)
 indexOpt3 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", jsonIndex3)
 indexOpt4 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", jsonIndex4)
 ```
 
 ```bash
-# restful
+export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="http://localhost:19530"
+
+export overviewIndex='{
+  "fieldName": "dynamic_json",
+  "indexName": "overview_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_cast_type": "varchar",
+    "json_path": "dynamic_json[\"overview\"]"
+  }
+}'
+
+export wordsIndex='{
+  "fieldName": "dynamic_json",
+  "indexName": "words_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_cast_type": "double",
+    "json_path": "dynamic_json[\"words\"]"
+  }
+}'
+
+export varcharIndex='{
+  "fieldName": "dynamic_json",
+  "indexName": "json_varchar_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_cast_type": "varchar",
+    "json_path": "dynamic_json[\"varchar\"]"
+  }
+}'
+
+export nestedIndex='{
+  "fieldName": "dynamic_json",
+  "indexName": "json_nested_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_cast_type": "double",
+          "json_path": "dynamic_json[\"nested\"][\"value\"]"
+    }
+  }'
 ```
 
 ### Use JSON cast functions for type conversion | Milvus 2.5.14+
@@ -634,7 +713,20 @@ indexOpt5 := milvusclient.NewCreateIndexOption("my_collection", "dynamic_json", 
 ```
 
 ```bash
-# restful
+export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="http://localhost:19530"
+
+export stringPriceIndex='{
+  "fieldName": "dynamic_json",
+  "indexName": "json_string_price_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "dynamic_json[\"string_price\"]",
+    "json_cast_type": "double",
+    "json_cast_function": "STRING_TO_DOUBLE"
+  }
+}'
+
 ```
 
 <div class="alert note">
@@ -702,6 +794,23 @@ if err != nil {
 
 ```bash
 # restful
+export indexParams="[
+  $varcharIndex,
+  $nestedIndex,
+  $overviewIndex,
+  $wordsIndex,
+  $stringPriceIndex
+]"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data "{
+  \"collectionName\": \"my_collection\",
+  \"indexParams\": $indexParams
+}"
+
 ```
 
 ## Filter by dynamic field keys
@@ -735,9 +844,9 @@ String filter = 'dynamic_json["nested"]["value"] < 50';
 ```
 
 ```javascript
-filter = 'overview == "Great product"'                # Non-JSON key
-filter = 'words >= 100'                               # Non-JSON key
-filter = 'dynamic_json["nested"]["value"] < 50'       # JSON object key
+filter = 'overview == "Great product"'                // Non-JSON key
+filter = 'words >= 100'                               // Non-JSON key
+filter = 'dynamic_json["nested"]["value"] < 50'       // JSON object key
 ```
 
 ```go
@@ -748,7 +857,146 @@ filter := 'dynamic_json["nested"]["value"] < 50'
 
 ```bash
 # restful
+export filterOverview='overview == "Great product"'
+export filterWords='words >= 100'
+export filterNestedValue='dynamic_json["nested"]["value"] < 50'
 ```
+
+**Retrieving dynamic field keys**: To return dynamic field keys in search or query results, you must explicitly specify them in the `output_fields` parameter using the same JSON path syntax as filtering:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Example: Include dynamic field keys in search results
+results = client.search(
+    collection_name="my_collection",
+    data=[[0.1, 0.2, 0.3, 0.4, 0.5]],
+    filter=filter,                         # Filter expression defined earlier
+    limit=10,
+    # highlight-start
+    output_fields=[
+        "overview",                        # Simple dynamic field key
+        'dynamic_json["varchar"]'          # Nested JSON key
+    ]
+    # highlight-end
+)
+```
+
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.SearchReq
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("YOUR_CLUSTER_ENDPOINT")
+        .token("YOUR_CLUSTER_TOKEN")
+        .build());
+
+FloatVec queryVector = new FloatVec(new float[]{0.1, 0.2, 0.3, 0.4, 0.5});
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(queryVector))
+        .topK(5)
+        .filter(filter)
+        .outputFields(Arrays.asList("overview", "dynamic_json['varchar']"))
+        .build();
+
+SearchResp searchResp = client.search(searchReq);
+```
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const address = "YOUR_CLUSTER_ENDPOINT";
+const token = "YOUR_CLUSTER_TOKEN";
+const client = new MilvusClient({address, token});
+
+const query_vector = [0.1, 0.2, 0.3, 0.4, 0.5]
+
+const res = await client.search({
+    collection_name: "my_collection",
+    data: [query_vector],
+    limit: 5,
+    filters: filter,
+    output_fields: ["overview", "dynamic_json['varchar']"]
+})
+```
+
+```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "YOUR_CLUSTER_ENDPOINT"
+token := "YOUR_CLUSTER_TOKEN"
+
+client, err := client.New(ctx, &client.ClientConfig{
+    Address: milvusAddr,
+    APIKey:  token,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+queryVector := []float32{0.1, 0.2, 0.3, 0.4, 0.5}
+
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
+    5,               // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithConsistencyLevel(entity.ClStrong).
+    WithANNSField("my_vector").
+    WithFilter(filter).
+    WithOutputFields("overview", "dynamic_json['varchar']"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```bash
+export CLUSTER_ENDPOINT="YOUR_CLUSTER_ENDPOINT"
+export TOKEN="YOUR_CLUSTER_TOKEN"
+export FILTER='color like "red%" and likes > 50'
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data "{
+  \"collectionName\": \"my_collection\",
+  \"data\": [
+    [0.1, 0.2, 0.3, 0.4, 0.5]
+  ],
+  \"annsField\": \"my_vector\",
+  \"filter\": \"${FILTER}\",
+  \"limit\": 5,
+  \"outputFields\": [\"overview\", \"dynamic_json.varchar\"]
+}"
+```
+
+<div class="alert note">
+
+Dynamic field keys are not included in results by default and must be explicitly requested.
+
+</div>
 
 For a full list of supported operators and filter expressions, refer to [Filtered Search](filtered-search.md).
 

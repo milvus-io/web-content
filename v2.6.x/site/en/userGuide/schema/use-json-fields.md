@@ -118,7 +118,36 @@ client.createCollection(requestCreate);
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
+
+const client = new MilvusClient({
+  address: 'localhost:19530'
+});
+
+// Create collection
+await client.createCollection({
+collection_name: "product_catalog",
+fields: [
+  {
+    name: "product_id",
+    data_type: DataType.Int64,
+    is_primary_key: true,
+    autoID: false
+  },
+  {
+    name: "vector",
+    data_type: DataType.FloatVector,
+    dim: 5
+  },
+  {
+    name: "metadata",
+    data_type: DataType.JSON,
+    nullable: true  // JSON field that allows null values
+  }
+],
+enable_dynamic_field: true
+});
+
 ```
 
 ```go
@@ -162,6 +191,52 @@ if err != nil {
 
 ```bash
 # restful
+export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="http://localhost:19530"
+
+# 字段定义
+export productIdField='{
+  "fieldName": "product_id",
+  "dataType": "Int64",
+  "isPrimary": true,
+  "autoID": false
+}'
+
+export vectorField='{
+  "fieldName": "vector",
+  "dataType": "FloatVector",
+  "typeParams": {
+    "dim": 5
+  }
+}'
+
+export metadataField='{
+  "fieldName": "metadata",
+  "dataType": "JSON",
+  "isNullable": true
+}'
+
+# 构造 schema
+export schema="{
+  \"autoID\": false,
+  \"enableDynamicField\": true,
+  \"fields\": [
+    $productIdField,
+    $vectorField,
+    $metadataField
+  ]
+}"
+
+# 创建集合
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data "{
+  \"collectionName\": \"product_catalog\",
+  \"schema\": $schema
+}"
+
 ```
 
 <div class="alert note">
@@ -247,7 +322,33 @@ client.insert(InsertReq.builder()
 ```
 
 ```javascript
-// nodejs
+const entities = [
+    {
+        "product_id": 1,
+        "vector": [0.1, 0.2, 0.3, 0.4, 0.5],
+        "metadata": {
+            "category": "electronics",
+            "brand": "BrandA",
+            "in_stock": True,
+            "price": 99.99,
+            "string_price": "99.99",
+            "tags": ["clearance", "summer_sale"],
+            "supplier": {
+                "name": "SupplierX",
+                "country": "USA",
+                "contact": {
+                    "email": "support@supplierx.com",
+                    "phone": "+1-800-555-0199"
+                }
+            }
+        }
+    }
+]
+
+await client.insert({
+    collection_name: "product_catalog", 
+    data: entities
+});
 ```
 
 ```go
@@ -282,6 +383,40 @@ if err != nil {
 
 ```bash
 # restful
+export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="http://localhost:19530"
+
+export entities='[
+  {
+    "product_id": 1,
+    "vector": [0.1, 0.2, 0.3, 0.4, 0.5],
+    "metadata": {
+      "category": "electronics",
+      "brand": "BrandA",
+      "in_stock": true,
+      "price": 99.99,
+      "string_price": "99.99",
+      "tags": ["clearance", "summer_sale"],
+      "supplier": {
+        "name": "SupplierX",
+        "country": "USA",
+        "contact": {
+          "email": "support@supplierx.com",
+          "phone": "+1-800-555-0199"
+        }
+      }
+    }
+  }
+]'
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/product_catalog/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data "{
+  \"data\": $entities
+}"
+
 ```
 
 ## Index values inside the JSON field | Milvus 2.5.11+
@@ -377,7 +512,7 @@ index_params = client.prepare_index_params()
 index_params.add_index(
     field_name="metadata",
     # highlight-next-line
-    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
     index_name="category_index",  # Unique index name
     # highlight-start
     params={
@@ -391,7 +526,7 @@ index_params.add_index(
 index_params.add_index(
     field_name="metadata",
     # highlight-next-line
-    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
     index_name="tags_array_index", # Unique index name
     # highlight-start
     params={
@@ -427,7 +562,29 @@ indexParams.add(IndexParam.builder()
 ```
 
 ```javascript
-// nodejs
+const indexParams = [
+  {
+    collection_name: "product_catalog",
+    field_name: "metadata",
+    index_name: "category_index",
+    index_type: "AUTOINDEX", // Can also use "INVERTED" for JSON path indexing
+    extra_params: {
+      json_path: 'metadata["category"]',
+      json_cast_type: "varchar",
+    },
+  },
+  {
+    collection_name: "product_catalog",
+    field_name: "metadata",
+    index_name: "tags_array_index",
+    index_type: "AUTOINDEX", // Can also use "INVERTED" for JSON path indexing
+    extra_params: {
+      json_path: 'metadata["tags"]',
+      json_cast_type: "array_varchar",
+    },
+  },
+];
+
 ```
 
 ```go
@@ -446,6 +603,25 @@ indexOpt2 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", js
 
 ```bash
 # restful
+export categoryIndex='{
+  "fieldName": "metadata",
+  "indexName": "category_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata[\\\"category\\\"]",
+    "json_cast_type": "varchar"
+  }
+}'
+
+export tagsArrayIndex='{
+  "fieldName": "metadata",
+  "indexName": "tags_array_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata[\\\"tags\\\"]",
+    "json_cast_type": "array_varchar"
+  }
+}'
 ```
 
 ### Use JSON cast functions for type conversion | Milvus 2.5.14+
@@ -484,7 +660,7 @@ Cast functions are case-insensitive. The following types are supported:
 index_params.add_index(
     field_name="metadata",
     # highlight-next-line
-    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTEDfor JSON path indexing
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
     index_name="string_to_double_index", # Unique index name
     params={
         "json_path": "metadata[\"string_price\"]", # Path to the JSON key to be indexed
@@ -509,7 +685,18 @@ indexParams.add(IndexParam.builder()
 ```
 
 ```javascript
-// nodejs
+indexParams.push({
+  collection_name: "product_catalog",
+  field_name: "metadata",
+  index_name: "string_to_double_index",
+  index_type: "AUTOINDEX", // Can also use "INVERTED"
+  extra_params: {
+    json_path: 'metadata["string_price"]',
+    json_cast_type: "double",
+    json_cast_function: "STRING_TO_DOUBLE", // Case insensitive
+  },
+});
+
 ```
 
 ```go
@@ -522,6 +709,16 @@ indexOpt3 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", js
 
 ```bash
 # restful
+export stringToDoubleIndex='{
+  "fieldName": "metadata",
+  "indexName": "string_to_double_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata[\\\"string_price\\\"]",
+    "json_cast_type": "double",
+    "json_cast_function": "STRING_TO_DOUBLE"
+  }
+}'
 ```
 
 <div class="alert note">
@@ -561,7 +758,7 @@ client.createIndex(CreateIndexReq.builder()
 ```
 
 ```javascript
-// nodejs
+await client.createIndex(indexParams)
 ```
 
 ```go
@@ -581,6 +778,19 @@ if err != nil {
 
 ```bash
 # restful
+export indexParams="[
+  $categoryIndex,
+  $tagsArrayIndex,
+  $stringToDoubleIndex
+]"
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data "{
+  \"collectionName\": \"product_catalog\",
+  \"indexParams\": $indexParams
+}"
 ```
 
 ## Filter by JSON field values
@@ -610,7 +820,9 @@ String filter = 'json_contains(metadata["tags"], "featured")';
 ```
 
 ```javascript
-// nodejs
+let filter = 'metadata["category"] == "electronics"'
+let filter = 'metadata["price"] > 50'
+let filter = 'json_contains(metadata["tags"], "featured")'
 ```
 
 ```go
@@ -621,6 +833,9 @@ filter := 'json_contains(metadata["tags"], "featured")'
 
 ```bash
 # restful
+export filterCategory='metadata["category"] == "electronics"'
+export filterPrice='metadata["price"] > 50'
+export filterTags='json_contains(metadata["tags"], "featured")'
 ```
 
 To use these expressions in a search or query, make sure:
@@ -673,7 +888,7 @@ Refer to [Nullable & Default](nullable-and-default.md) for details.
 
 ### Are there any naming conventions for JSON field keys?
 
-Yes. To ensure compatibility with queries and indexing:
+Yes, to ensure compatibility with queries and indexing:
 
 - Use only letters, numbers, and underscores in JSON keys.
 
@@ -701,23 +916,15 @@ Milvus stores string values exactly as they appear in the JSON input—without s
 
 - **Numeric Indexing**:
 
-    If an index is created with `json_cast_type="double"`, only numeric filter conditions (e.g., `>`, `<`, `== 42`) will leverage the index. Non-numeric conditions will force a brute-force scan.
+    If an index is created with `json_cast_type="double"`, only numeric filter conditions (e.g., `>`, `<`, `== 42`) will leverage the index. Non-numeric conditions may fall back to a brute-force scan.
 
 - **String Indexing**:
 
-    If an index uses `json_cast_type="varchar"`, only string filter conditions will benefit from the index; other types will fall back to brute-force search.
+    If an index uses `json_cast_type="varchar"`, only string filter conditions will benefit from the index; other types may fall back to a brute-force scan.
 
 - **Boolean Indexing**:
 
     Boolean indexing behaves similarly to string indexing, with index usage only when the condition strictly matches true or false.
-
-### How do term expressions work with JSON field indexing?
-
-You can use term expressions like `json["field"] IN [value1, value2, …]` to filter entities.
-
-- The index applies only if the targeted value is a scalar.
-
-- If `json["field"]` is an array, the query will not use the index and will fall back to a brute-force search.
 
 ### What about numeric precision when indexing JSON fields?
 
@@ -725,25 +932,11 @@ Milvus stores all indexed numeric values as doubles.
 
 If a numeric value exceeds **2^53**, it may lose precision. This loss of precision can result in filter queries not matching out-of-range values exactly.
 
-### How does Milvus handle data integrity for JSON field indexing?
-
-Milvus does not automatically convert or normalize inconsistent data types.
-
-For example, if some rows store `"price": "99.99"` as a string and others store `"price": 99.99` as a number while the index is defined as a double, only the rows with numeric values will be indexed.
-
-Inconsistencies will cause the affected rows to be skipped silently during indexing.
-
-### What happens if type casting fails when indexing a JSON field?
-
-If a value cannot be cast to the specified `json_cast_type` (e.g., a non-numeric string when expecting a `double`), that value is silently skipped and **not included in the index**. As a result, entities with casting failures will be **excluded from filter results** that rely on the index.
-
-To avoid unexpected query behavior, ensure all values under the indexed JSON path are consistently typed.
-
 ### Can I create multiple indexes on the same JSON path with different cast types?
 
 No, each JSON path supports **only one index**. You must choose a single `json_cast_type` that matches your data. Creating multiple indexes on the same path with different cast types is not supported.
 
-### What if values at a JSON path have inconsistent types?
+### What if values on a JSON path have inconsistent types?
 
 Inconsistent types across entities can lead to **partial indexing**. For example, if `metadata["price"]` is stored as both a number (`99.99`) and a string (`"99.99"`), and the index is defined with `json_cast_type="double"`, only the numeric values will be indexed. The string-form entries will be skipped and not appear in filter results.
 

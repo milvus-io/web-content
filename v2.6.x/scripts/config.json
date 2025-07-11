@@ -374,6 +374,26 @@
                         "token": "AF0fbMmXVoCJwrxCPR3c0fZMnwf",
                         "type": "image",
                         "alt_text": "inverted-index"
+                    },
+                    {
+                        "token": "CCzEwT7uchMqI6bsxRJcK1qenEh",
+                        "type": "board",
+                        "alt_text": "minhash-workflow"
+                    },
+                    {
+                        "token": "E1dewMnqshua0ib7aHmcL10lnIe",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-1"
+                    },
+                    {
+                        "token": "PhSMwS74rh25oybv9Docmfionze",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-2"
+                    },
+                    {
+                        "token": "RfmMwNkIvhlUFSb11alcP8fqnmf",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-3"
                     }
                 ]
             }
