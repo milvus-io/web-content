@@ -277,7 +277,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -300,7 +300,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):
