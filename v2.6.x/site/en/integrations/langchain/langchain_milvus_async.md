@@ -6,6 +6,12 @@ title: Asynchronous Functions in LangChain Milvus Integration
 
 # Asynchronous Functions in LangChain Milvus Integration
 
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_parent">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
+    <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a>
 
 This tutorial explores how to leverage asynchronous functions in [langchain-milvus](https://github.com/langchain-ai/langchain-milvus) to build high-performance applications. By using async methods, you can significantly improve your application's throughput and responsiveness, especially when dealing with large-scale retrieval. Whether you're building a real-time recommendation system, implementing semantic search in your application, or creating a RAG (Retrieval-Augmented Generation) pipeline, async operations can help you handle concurrent requests more efficiently. The high-performance vector database Milvus combined with LangChain's powerful LLM abstractions can provide a robust foundation for building scalable AI applications.
 
@@ -373,3 +379,4 @@ Key takeaways:
 3. Async operations fully utilize the compute power of the machines
 
 When building production RAG applications with LangChain and Milvus, consider using the async API when performance is a concern, especially for concurrent operations.
+
