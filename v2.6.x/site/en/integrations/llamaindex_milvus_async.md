@@ -106,7 +106,7 @@ def init_vector_store():
         embedding_field="embedding",
         id_field="id",
         similarity_metric="COSINE",
-        consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+        consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
         overwrite=True,  # To overwrite the collection if it already exists
     )
 

@@ -135,7 +135,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level="Strong",
+    consistency_level="Bounded",
 )
 
 milvus_client.load_collection(collection_name=collection_name)

@@ -133,7 +133,7 @@ schema = CollectionSchema(fields)
 col_name = "hybrid_demo"
 if utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level="Strong")
+col = Collection(col_name, schema, consistency_level="Bounded")
 
 # To make vector search efficient, we need to create indices for the vector fields
 sparse_index = {"index_type": "SPARSE_INVERTED_INDEX", "metric_type": "IP"}

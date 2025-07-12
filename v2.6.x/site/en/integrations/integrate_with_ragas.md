@@ -109,7 +109,7 @@ Use the following pieces of information enclosed in <context> tags to provide an
             collection_name=self.collection_name,
             dimension=embedding_dim,
             metric_type="IP",  # Inner product distance
-            consistency_level="Strong",  # Strong consistency level
+            consistency_level="Bounded",  # Strong consistency level
         )
 
     def load(self, texts: List[str]):

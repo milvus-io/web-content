@@ -203,7 +203,7 @@ results = client.search(
     output_fields=["document"],  # Include the text field in outputs
     #  highlight-next-line
     ranker=model_ranker,  # Apply the model ranker here
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 ```
 

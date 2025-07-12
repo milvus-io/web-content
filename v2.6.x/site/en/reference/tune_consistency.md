@@ -68,7 +68,7 @@ client.create_collection(
     collection_name="my_collection",
     schema=schema,
     # highlight-next-line
-    consistency_level="Strong",
+    consistency_level="Bounded",
 )
 ```
 

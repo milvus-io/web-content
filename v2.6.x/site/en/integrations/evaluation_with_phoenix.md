@@ -103,7 +103,7 @@ class RAG:
             collection_name=self.collection_name,
             dimension=embedding_dim,
             metric_type="IP",
-            consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+            consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
         )
 
     def load(self, texts: List[str]):

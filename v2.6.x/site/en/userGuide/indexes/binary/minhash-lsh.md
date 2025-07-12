@@ -326,7 +326,7 @@ approx_results = client.search(
     search_params=search_params,
     limit=3,
     output_fields=["doc_id", "document"],
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 
 for i, hit in enumerate(approx_results[0]):
@@ -357,7 +357,7 @@ refined_results = client.search(
     search_params=search_params,
     limit=3,
     output_fields=["doc_id", "document"],
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 
 for i, hit in enumerate(refined_results[0]):

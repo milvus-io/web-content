@@ -119,7 +119,7 @@ results = client.search(
     output_fields=["document"],                  # Include text field for reranking
     #  highlight-next-line
     ranker=vllm_ranker,                         # Apply vLLM reranking
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 ```
 

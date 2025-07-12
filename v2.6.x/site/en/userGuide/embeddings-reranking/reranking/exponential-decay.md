@@ -151,7 +151,7 @@ result = milvus_client.search(
     output_fields=["title", "publish_time"], # Fields to return
     #  highlight-next-line
     ranker=ranker,                        # Apply the decay ranker
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 ```
 
