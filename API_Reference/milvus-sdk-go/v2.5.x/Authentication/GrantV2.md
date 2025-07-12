@@ -85,6 +85,6 @@ Null
 
 ```go
 // TODO 
-// https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Authentication/grant_privilege.md
+// https://milvus.io/api-reference/pymilvus/client/v2.5.x/MilvusClient/Authentication/grant_privilege.md
 ```
 

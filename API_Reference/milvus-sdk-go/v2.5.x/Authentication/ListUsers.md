@@ -59,7 +59,7 @@ This interface provided by the gRPC Go library allows you to specify additional 
 import (
    "context"
    "google.golang.org/grpc"
-   "github.com/milvus-io/milvus/v2/milvusclient"
+   "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
 opts := client.NewListUserOption()
