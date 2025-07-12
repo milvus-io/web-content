@@ -118,7 +118,7 @@ A `Client` object.
 ```go
 import (
    "context"
-   "github.com/milvus-io/milvus/v2/milvusclient"
+   "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
 mclient, err := client.NewClient(context.Background(), client.ClientConfig{
