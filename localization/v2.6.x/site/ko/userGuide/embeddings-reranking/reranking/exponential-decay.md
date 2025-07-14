@@ -4,7 +4,7 @@ title: 지수 감쇠Compatible with Milvus 2.6.x
 summary: >-
   지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 만들어냅니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의
   중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색
-  가능하도록 유지합니다. 이 접근 방식은 근접성 또는 최신성을 우선순위로 두고 싶지만 더 먼 거리의 옵션을 완전히 배제하고 싶지 않을 때
+  가능하도록 유지합니다. 이 접근 방식은 근접성이나 최신성을 우선순위로 두고 싶지만 먼 거리의 항목을 완전히 배제하고 싶지 않을 때
   이상적입니다.
 beta: Milvus 2.6.x
 ---
@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 생성합니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의 중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색할 수 있도록 합니다. 이 접근 방식은 근접성이나 최신성에 높은 우선순위를 부여하고 싶지만 먼 거리에 있는 옵션을 완전히 없애고 싶지 않을 때 이상적입니다.</p>
+    </button></h1><p>지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 생성합니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의 중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색 가능하도록 유지합니다. 이 접근 방식은 근접성이나 최신성에 높은 우선순위를 부여하고 싶지만 더 먼 옵션을 완전히 없애고 싶지 않을 때 이상적입니다.</p>
 <p>다른 감쇠 함수와 달리</p>
 <ul>
 <li><p>가우스 감쇠는 보다 점진적인 종 모양의 감쇠를 생성합니다.</p></li>
@@ -134,7 +134,7 @@ beta: Milvus 2.6.x
 <li><p>스케일과 감쇠 매개변수에서 계산한 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ를</span></span></span></span> 곱합니다.</p></li>
 <li><p>지수를 구하면 0과 1 사이의 값을 얻을 수 있습니다: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo stretchy="false">(</mo><mi>λ⋅값</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exp(\lambda \cdot 값)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">값</span><span class="mclose">)</span></span></span></span>.</p></li>
 </ol>
-<p> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span> 계산은 스케일 및 감쇠 매개변수를 지수 함수의 비율 매개변수로 변환합니다. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\람다</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ가</span></span></span></span> 음수일수록 초기 하락이 더 가파르게 나타납니다.</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span> 계산은 스케일 및 감쇠 매개변수를 지수 함수의 비율 매개변수로 변환합니다. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\람다</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ가</span></span></span></span> 음수일수록 초기 하락이 더 가파르게 나타납니다.</p>
 <h2 id="Use-exponential-decay" class="common-anchor-header">지수 감쇠 사용<button data-href="#Use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,7 +182,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;publish_time&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 연산에도 디케이 레이커를 적용할 수 있습니다:</p>

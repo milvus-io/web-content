@@ -2,7 +2,7 @@
 id: multi-language-analyzers.md
 title: 多语言分析器Compatible with Milvus 2.5.11+
 summary: >-
-  Milvus 在进行文本分析时，通常会在 Collections
+  Milvus 执行文本分析时，通常会在 Collections
   的整个文本字段中应用一个分析器。如果该分析器针对英语进行了优化，那么它在处理其他语言（如中文、西班牙语或法语）所需的完全不同的标记化和词干规则时就会遇到困难，从而导致召回率降低。例如，搜索西班牙语单词
   "teléfono"（意为 "电话"）时，以英语为重点的分析器会被绊倒：它可能会去掉重音，不应用西班牙语特定的词干，导致相关结果被忽略。
 beta: Milvus 2.5.11+
@@ -22,7 +22,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 执行文本分析时，通常会在 Collections 的整个文本字段中应用单个分析器。如果该分析器针对英语进行了优化，那么它在处理其他语言（如中文、西班牙语或法语）所需的完全不同的标记化和词干规则时就会很吃力，从而导致召回率降低。例如，搜索西班牙语单词<em>"teléfono"</em>（意为<em>"电话"）</em>时，以英语为重点的分析器会被绊倒：它可能会去掉重音，不应用西班牙语特定的词干，导致相关结果被忽略。</p>
+    </button></h1><p>Milvus 执行文本分析时，通常会在 Collections 的整个文本字段中应用单个分析器。如果该分析器针对英语进行了优化，那么在处理其他语言（如中文、西班牙语或法语）所需的完全不同的标记化和词干规则时就会很吃力，从而导致召回率降低。例如，搜索西班牙语单词<em>"teléfono"</em>（意为<em>"电话"）</em>时，以英语为重点的分析器会被绊倒：它可能会去掉重音，不应用西班牙语特定的词干，导致相关结果被忽略。</p>
 <p>多语言分析器解决了这个问题，它允许你在一个 Collections 中为一个文本字段配置多个分析器。这样，你就可以在一个文本字段中存储多语言文档，Milvus 会根据每个文档的相应语言规则分析文本。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -821,7 +821,7 @@ english_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display English search results</span>
@@ -867,7 +867,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display English search results</span>
@@ -921,7 +921,7 @@ curl --request POST \
     &quot;drop_ratio_search&quot;: &quot;0&quot;  
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Use-Chinese-analyzer" class="common-anchor-header">使用中文分析器</h3><p>本示例演示了针对不同的查询文本切换到中文分析器（使用其别名<code translate="no">&quot;cn&quot;</code> ）。所有其他参数保持不变，但现在使用特定于中文的标记化规则处理查询文本。</p>
@@ -936,7 +936,7 @@ chinese_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display Chinese search results</span>
@@ -979,7 +979,7 @@ searchResults = searchResp.getSearchResults();
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display Chinese search results</span>
@@ -1029,6 +1029,6 @@ curl --request POST \
     &quot;analyzer_name&quot;: &quot;cn&quot;
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

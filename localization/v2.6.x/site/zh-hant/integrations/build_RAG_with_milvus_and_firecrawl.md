@@ -2,7 +2,7 @@
 id: build_RAG_with_milvus_and_firecrawl.md
 summary: >-
   在本教程中，我們將教您如何使用 Milvus 和 Firecrawl 建立一個 Retrieval-Augmented Generation (RAG)
-  管道。此管道整合了 Firecrawl (用於網路資料搜刮)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。
+  管道。這個管道整合了 Firecrawl (用於網路資料搜刮)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。
 title: 使用 Milvus 和 Firecrawl 建立 RAG
 ---
 <h1 id="Building-RAG-with-Milvus-and-Firecrawl" class="common-anchor-header">使用 Milvus 和 Firecrawl 建立 RAG<button data-href="#Building-RAG-with-Milvus-and-Firecrawl" class="anchor-icon" translate="no">
@@ -47,7 +47,7 @@ title: 使用 Milvus 和 Firecrawl 建立 RAG
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install firecrawl-py pymilvus openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（按一下螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <h3 id="Setting-Up-API-Keys" class="common-anchor-header">設定 API 金鑰</h3><p>要使用 Firecrawl 從指定的 URL 搜刮資料，您需要取得<a href="https://www.firecrawl.dev/">FIRECRAWL_API_KEY</a>，並將其設定為環境變數。此外，在本範例中，我們會使用 OpenAI 作為 LLM。您也應該準備<a href="https://platform.openai.com/docs/quickstart">OPENAI_API_KEY</a>作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -183,7 +183,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

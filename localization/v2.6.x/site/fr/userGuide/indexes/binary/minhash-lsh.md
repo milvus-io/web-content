@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La déduplication et la recherche de similarités efficaces sont essentielles pour les ensembles de données d'apprentissage automatique à grande échelle, en particulier pour les tâches telles que le nettoyage des corpus d'entraînement pour les grands modèles de langage (LLM). Lorsqu'il s'agit de millions ou de milliards de documents, la correspondance exacte traditionnelle devient trop lente et trop coûteuse.</p>
+    </button></h1><p>La déduplication et la recherche de similarités efficaces sont essentielles pour les ensembles de données d'apprentissage automatique à grande échelle, en particulier pour des tâches telles que le nettoyage des corpus d'entraînement pour les grands modèles de langage (LLM). Lorsqu'il s'agit de millions ou de milliards de documents, la correspondance exacte traditionnelle devient trop lente et trop coûteuse.</p>
 <p>L'index <strong>MINHASH_LSH</strong> de Milvus permet une déduplication approximative rapide, évolutive et précise en combinant deux techniques puissantes :</p>
 <ul>
 <li><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a>: Génère rapidement des signatures compactes (ou "empreintes digitales") pour estimer la similarité des documents.</p></li>
@@ -66,7 +66,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail Minhash</span> </span></p>
 <div class="alert note">
-<p>Le nombre de fonctions de hachage utilisées détermine la dimensionnalité de la signature MinHash. Des dimensions plus élevées permettent une meilleure précision d'approximation, au prix d'une augmentation de l'espace de stockage et des calculs.</p>
+<p>Le nombre de fonctions de hachage utilisées détermine la dimensionnalité de la signature MinHash. Des dimensions plus élevées permettent une meilleure précision d'approximation, au prix d'un stockage et d'un calcul accrus.</p>
 </div>
 <h3 id="LSH-for-MinHash" class="common-anchor-header">LSH pour MinHash</h3><p>Bien que les signatures MinHash réduisent considérablement le coût du calcul de la similarité Jaccard exacte entre les documents, la comparaison exhaustive de chaque paire de vecteurs de signature reste inefficace à grande échelle.</p>
 <p>Pour résoudre ce problème, <a href="https://zilliz.com/learn/Local-Sensitivity-Hashing-A-Comprehensive-Guide">LSH</a> est utilisé. LSH permet une recherche de similarité approximative rapide en garantissant que les éléments similaires sont hachés dans le même "seau" avec une forte probabilité - évitant ainsi la nécessité de comparer chaque paire directement.</p>
@@ -76,7 +76,7 @@ summary: >-
 <p>Une signature MinHash <em>à n dimensions</em> est divisée en <em>b</em> bandes. Chaque bande contient <em>r</em> valeurs de hachage consécutives, de sorte que la longueur totale de la signature est égale à : <em>n = b × r.</em></p>
 <p>Par exemple, si vous avez une signature MinHash à 128 dimensions<em>(n = 128</em>) et que vous la divisez en 32 bandes<em>(b = 32</em>), chaque bande contient 4 valeurs de hachage<em>(r = 4</em>).</p></li>
 <li><p><strong>Hachage au niveau de la bande :</strong></p>
-<p>Après la segmentation, chaque bande est traitée indépendamment à l'aide d'une fonction de hachage standard afin de l'affecter à un panier. Si deux signatures produisent la même valeur de hachage dans une bande - c'est-à-dire qu'elles tombent dans le même panier - elles sont considérées comme des correspondances potentielles.</p></li>
+<p>Après la segmentation, chaque bande est traitée indépendamment à l'aide d'une fonction de hachage standard afin de l'affecter à un panier. Si deux signatures produisent la même valeur de hachage dans une bande - c'est-à-dire qu'elles appartiennent au même panier - elles sont considérées comme des correspondances potentielles.</p></li>
 <li><p><strong>Sélection des candidats :</strong></p>
 <p>Les paires qui entrent en conflit dans au moins une bande sont sélectionnées en tant que candidats à la similarité.</p></li>
 </ol>
@@ -271,7 +271,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -294,7 +294,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):

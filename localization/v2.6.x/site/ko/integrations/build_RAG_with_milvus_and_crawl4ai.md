@@ -1,9 +1,9 @@
 ---
 id: build_RAG_with_milvus_and_crawl4ai.md
 summary: >-
-  이 튜토리얼에서는 Milvus와 Crawl4AI를 사용해 검색 증강 생성(RAG) 파이프라인을 구축하는 방법을 보여드립니다. 이 파이프라인은
-  웹 데이터 크롤링을 위한 Crawl4AI, 벡터 스토리지를 위한 Milvus, 인사이트가 있는 문맥 인식 응답을 생성하기 위한 OpenAI를
-  통합합니다.
+  이 튜토리얼에서는 Milvus와 Crawl4AI를 사용해 검색 증강 생성(RAG) 파이프라인을 구축하는 방법을 보여드리겠습니다. 이
+  파이프라인은 웹 데이터 크롤링을 위한 Crawl4AI, 벡터 스토리지를 위한 Milvus, 인사이트가 있는 문맥 인식 응답을 생성하기 위한
+  OpenAI를 통합합니다.
 title: Milvus와 Crawl4AI로 RAG 구축하기
 ---
 <h1 id="Building-RAG-with-Milvus-and-Crawl4AI" class="common-anchor-header">Milvus와 Crawl4AI로 RAG 구축하기<button data-href="#Building-RAG-with-Milvus-and-Crawl4AI" class="anchor-icon" translate="no">
@@ -209,7 +209,7 @@ INFO:numexpr.utils:NumExpr defaulting to 8 threads.
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

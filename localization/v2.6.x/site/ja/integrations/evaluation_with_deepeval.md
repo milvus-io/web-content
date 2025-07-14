@@ -123,7 +123,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -327,7 +327,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>大規模言語モデル（LLM）システムでリトリーバーを評価する場合、以下の点を評価することが重要だ：</p>
+    </button></h2><p>大規模言語モデル（LLM）システムでレトリバーを評価する場合、以下の点を評価することが重要だ：</p>
 <ol>
 <li><p><strong>ランキングの妥当性</strong>：リトリーバーが、関連性のないデータよりも関連性のある情報をいかに効果的に優先させるか。</p></li>
 <li><p><strong>文脈検索</strong>：入力に基づき、文脈に関連する情報を捕捉し、検索する能力。</p></li>
@@ -423,7 +423,7 @@ result = evaluate(
     print_results=<span class="hljs-literal">False</span>,  <span class="hljs-comment"># Change to True to see detailed metric results</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">DeepEval の最新の<span style="color: #6a00ff; text-decoration-color: #6a00ff">回答関連性メトリックを</span>実行している！<span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">gpt-4o、 </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict</span><span style="color: #374151; text-decoration-color: #374151">=False</span><span style="color: #374151; text-decoration-color: #374151">、 </span><span style="color: #374151; text-decoration-color: #374151">async</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">_</span><span style="color: #374151; text-decoration-color: #374151">mode=True を</span><span style="color: #374151; text-decoration-color: #374151">使用 </span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">DeepEval の最新の<span style="color: #6a00ff; text-decoration-color: #6a00ff">回答関連性メトリックを</span>実行しています！<span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">gpt-4o、 </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict</span><span style="color: #374151; text-decoration-color: #374151">=False</span><span style="color: #374151; text-decoration-color: #374151">、 </span><span style="color: #374151; text-decoration-color: #374151">async_</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">mode</span><span style="color: #374151; text-decoration-color: #374151">=True を</span><span style="color: #374151; text-decoration-color: #374151">使用 </span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">DeepEval の最新の<span style="color: #6a00ff; text-decoration-color: #6a00ff">忠実度メトリックを</span>実行しています！<span style="color: #374151; text-decoration-color: #374151">(gpt-4o を使用、 </span><span style="color: #374151; text-decoration-color: #374151">strict</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">=</span><span style="color: #374151; text-decoration-color: #374151">False</span><span style="color: #374151; text-decoration-color: #374151">、 </span><span style="color: #374151; text-decoration-color: #374151">async_mode=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre><code translate="no">Event loop is already running. Applying nest_asyncio patch to allow async execution...
 
@@ -431,4 +431,4 @@ result = evaluate(
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.97s/test case]
 </code></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">テストが終了しました<span style="color: #05f58d; text-decoration-color: #05f58d">！</span>Confident AIで評価結果を見るには<span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span>を実行する。 
-‼️ 注意: 代わりに Confident AI 上で直接、deepeval のすべてのメトリクスに対する評価を実行することもできます。</pre>
+‼️ 注意：代わりにConfident AI上で直接deepevalの全メトリクスの評価を実行することもできます。</pre>

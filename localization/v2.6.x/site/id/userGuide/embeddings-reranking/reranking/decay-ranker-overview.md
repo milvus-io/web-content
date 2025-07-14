@@ -81,17 +81,17 @@ beta: Milvus 2.6.x
 <li><p>Setiap pemeringkat peluruhan mengubah nilai numerik mentah menjadi skor relevansi yang dinormalisasi antara 0-1</p></li>
 <li><p>Skor peluruhan menunjukkan seberapa relevan sebuah item berdasarkan "jaraknya" dari titik ideal</p></li>
 </ul>
-<p>Rumus perhitungan spesifik bervariasi tergantung pada jenis pemeringkat peluruhan. Untuk detail tentang cara menghitung skor peluruhan, lihat halaman khusus untuk <a href="/docs/id/v2.6.x/gaussian-decay.md#Formula">Peluruhan Gaussian</a>, <a href="/docs/id/v2.6.x/exponential-decay.md#Formula">Peluruhan Eksponensial</a>, <a href="/docs/id/v2.6.x/linear-decay.md#Formula">Peluruhan Linier</a>.</p>
+<p>Rumus perhitungan spesifik bervariasi tergantung pada jenis pemeringkat peluruhan. Untuk detail tentang cara menghitung skor peluruhan, lihat halaman khusus untuk <a href="/docs/id/gaussian-decay.md#Formula">Peluruhan Gaussian</a>, <a href="/docs/id/exponential-decay.md#Formula">Peluruhan Eksponensial</a>, <a href="/docs/id/linear-decay.md#Formula">Peluruhan Linier</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Tahap 3: Menghitung skor akhir</h3><p>Terakhir, Milvus menggabungkan skor kemiripan yang dinormalisasi dan skor peluruhan untuk menghasilkan skor peringkat akhir:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam kasus pencarian hibrida (menggabungkan beberapa bidang vektor), Milvus mengambil skor kemiripan ternormalisasi maksimum di antara permintaan pencarian:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>Misalnya, jika sebuah makalah penelitian mendapat skor 0,82 dari kesamaan vektor dan 0,91 dari pencarian teks berbasis BM25 dalam pencarian hibrida, Milvus menggunakan 0,91 sebagai skor kesamaan dasar sebelum menerapkan faktor peluruhan.</p>
+<p>Misalnya, jika sebuah makalah penelitian mendapat skor 0,82 dari kemiripan vektor dan 0,91 dari pencarian teks berbasis BM25 dalam pencarian hibrida, Milvus menggunakan 0,91 sebagai skor kemiripan dasar sebelum menerapkan faktor peluruhan.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Peringkat peluruhan dalam aksi</h3><p>Mari kita lihat peringkat peluruhan dalam skenario praktis-mencari <strong>"makalah penelitian AI"</strong> dengan peluruhan berbasis waktu:</p>
 <div class="alert note">
-<p>Dalam contoh ini, skor peluruhan mencerminkan bagaimana relevansi berkurang seiring berjalannya waktu-makalah yang lebih baru menerima skor yang mendekati 1,0, makalah yang lebih lama menerima skor yang lebih rendah. Nilai-nilai ini dihitung dengan menggunakan pemeringkat peluruhan tertentu. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a>.</p>
+<p>Dalam contoh ini, skor peluruhan mencerminkan bagaimana relevansi berkurang seiring berjalannya waktu-makalah yang lebih baru menerima skor yang mendekati 1,0, makalah yang lebih lama menerima skor yang lebih rendah. Nilai-nilai ini dihitung dengan menggunakan pemeringkat peluruhan tertentu. Untuk detailnya, lihat <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a>.</p>
 </div>
 <table>
    <tr>
@@ -174,7 +174,7 @@ beta: Milvus 2.6.x
      <td><p>Penurunan bertahap yang terasa alami yang meluas secara moderat</p></td>
      <td><ul>
 <li><p>Pencarian umum yang membutuhkan hasil yang seimbang</p></li>
-<li><p>Aplikasi di mana pengguna memiliki perasaan intuitif tentang jarak</p></li>
+<li><p>Aplikasi di mana pengguna memiliki rasa intuitif terhadap jarak</p></li>
 <li><p>Ketika jarak yang moderat seharusnya tidak terlalu mempengaruhi hasil</p></li>
 </ul></td>
      <td><p>Dalam pencarian restoran, tempat berkualitas yang berjarak 3 km tetap dapat ditemukan, meskipun peringkatnya lebih rendah dari pilihan terdekat</p></td>
@@ -202,9 +202,9 @@ beta: Milvus 2.6.x
 </table>
 <p>Untuk informasi terperinci tentang bagaimana setiap pemeringkat peluruhan menghitung skor dan pola penurunan tertentu, lihat dokumentasi khusus:</p>
 <ul>
-<li><p><a href="/docs/id/v2.6.x/gaussian-decay.md">Peluruhan Gaussian</a></p></li>
-<li><p><a href="/docs/id/v2.6.x/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
-<li><p><a href="/docs/id/v2.6.x/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
+<li><p><a href="/docs/id/gaussian-decay.md">Peluruhan Gaussian</a></p></li>
+<li><p><a href="/docs/id/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
+<li><p><a href="/docs/id/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Contoh implementasi<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Pemeringkat peluruhan dapat diterapkan pada pencarian vektor standar dan operasi pencarian hibrida di Milvus. Di bawah ini adalah cuplikan kode utama untuk mengimplementasikan fitur ini.</p>
 <div class="alert note">
-<p>Sebelum menggunakan fungsi peluruhan, Anda harus terlebih dahulu membuat koleksi dengan bidang numerik yang sesuai (seperti stempel waktu, jarak, dll.) yang akan digunakan untuk perhitungan peluruhan. Untuk contoh kerja lengkap termasuk penyiapan koleksi, definisi skema, dan penyisipan data, lihat <a href="/docs/id/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Menerapkan Pemeringkatan Berbasis Waktu di Milvus</a>.</p>
+<p>Sebelum menggunakan fungsi peluruhan, Anda harus terlebih dahulu membuat koleksi dengan bidang numerik yang sesuai (seperti stempel waktu, jarak, dll.) yang akan digunakan untuk perhitungan peluruhan. Untuk contoh kerja lengkap termasuk penyiapan koleksi, definisi skema, dan penyisipan data, lihat <a href="/docs/id/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Menerapkan Pemeringkatan Berbasis Waktu di Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Membuat pemeringkat peluruhan</h3><p>Untuk mengimplementasikan pemeringkatan peluruhan, pertama-tama tentukan objek <code translate="no">Function</code> dengan konfigurasi yang sesuai:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -278,7 +278,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Menentukan pemeringkat peluruhan matematis mana yang akan diterapkan. Menentukan bentuk kurva penurunan relevansi. Lihat bagian <a href="/docs/id/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a> untuk panduan dalam memilih fungsi yang sesuai.</p></td>
+     <td><p>Menentukan pemeringkat peluruhan matematis mana yang akan diterapkan. Menentukan bentuk kurva penurunan relevansi. Lihat bagian <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a> untuk panduan dalam memilih fungsi yang sesuai.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, atau <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -324,7 +324,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Terapkan ke pencarian hibrida</h3><p>Pemeringkat peluruhan juga dapat diterapkan pada operasi pencarian hibrida yang menggabungkan beberapa bidang vektor:</p>

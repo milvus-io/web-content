@@ -92,7 +92,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我们使用内积距离作为默认度量类型。有关距离类型的更多信息，请参阅 "<a href="https://milvus.io/docs/metric.md?tab=floating">相似度量 "页面。</a></p>
@@ -179,7 +179,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <p>现在可以使用 HuggingFace cli 下载模型了：</p>
 <pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 <button class="copy-code-btn"></button></code></pre>
-<p>由 llama.cpp 团队引入的 GGUF 模型格式使用压缩和量化技术将权重精度降低到 4 位整数，大大降低了计算和内存需求，使 Arm CPU 有效用于 LLM 推理。</p>
+<p>由 llama.cpp 团队推出的 GGUF 模型格式使用压缩和量化技术将权重精度降低到 4 位整数，大大降低了计算和内存需求，使 Arm CPU 有效地用于 LLM 推理。</p>
 <h3 id="Re-quantize-the-model-weights" class="common-anchor-header">重新量化模型权重</h3><p>要重新量化，运行</p>
 <pre><code translate="no" class="language-bash">$ ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 <button class="copy-code-btn"></button></code></pre>

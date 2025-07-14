@@ -23,8 +23,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O TEI Ranker utiliza o serviço <a href="/docs/pt/v2.6.x/tei-ranker.md">TEI (Text Embedding Inference)</a> da Hugging Face para melhorar a relevância da pesquisa através da classificação semântica. Representa uma abordagem avançada à ordenação de resultados de pesquisa que vai além da tradicional semelhança de vectores.</p>
-<p>Comparado ao <a href="/docs/pt/v2.6.x/vllm-ranker.md">vLLM Ranker</a>, o TEI Ranker oferece integração direta com o ecossistema da Hugging Face e modelos de classificação pré-treinados, tornando-o ideal para aplicativos em que a facilidade de implantação e manutenção são prioridades.</p>
+    </button></h1><p>O TEI Ranker utiliza o serviço <a href="/docs/pt/tei-ranker.md">TEI (Text Embedding Inference)</a> da Hugging Face para melhorar a relevância da pesquisa através da classificação semântica. Representa uma abordagem avançada à ordenação de resultados de pesquisa que vai além da tradicional semelhança de vectores.</p>
+<p>Comparado ao <a href="/docs/pt/vllm-ranker.md">vLLM Ranker</a>, o TEI Ranker oferece integração direta com o ecossistema da Hugging Face e modelos de classificação pré-treinados, tornando-o ideal para aplicativos em que a facilidade de implantação e manutenção são prioridades.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,8 +42,8 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Antes de implementar o vLLM Ranker no Milvus, certifique-se de que tem:</p>
 <ul>
-<li><p>Uma coleção Milvus com um campo <code translate="no">VARCHAR</code> contendo o texto a ser ranqueado</p></li>
-<li><p>Um serviço TEI em execução com recursos de classificação. Para obter instruções detalhadas sobre como configurar um serviço TEI, consulte a <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">documentação oficial do TEI</a>.</p></li>
+<li><p>Uma coleção do Milvus com um campo <code translate="no">VARCHAR</code> contendo o texto a ser ranqueado</p></li>
+<li><p>Um serviço TEI em execução com capacidades de classificação. Para obter instruções detalhadas sobre como configurar um serviço TEI, consulte a <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">documentação oficial do TEI</a>.</p></li>
 </ul>
 <h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">Criar uma função do classificador TEI<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ tei_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Para parâmetros gerais partilhados por todos os classificadores de modelos (por exemplo, <code translate="no">provider</code>, <code translate="no">queries</code>), consulte <a href="/docs/pt/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Criar um classificador de modelos</a>.</p>
+<p>Para parâmetros gerais partilhados por todos os classificadores de modelos (por exemplo, <code translate="no">provider</code>, <code translate="no">queries</code>), consulte <a href="/docs/pt/model-ranker-overview.md#Create-a-model-ranker">Criar um classificador de modelos</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa vetorial padrão<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,7 +136,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                         <span class="hljs-comment"># Apply tei reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

@@ -5,9 +5,9 @@ summary: >-
   أنابيب توليد الاسترجاع المعزز (RAG) باستخدام Milvus و Crawl4AI. يدمج خط
   الأنابيب بين Crawl4AI لتصفح بيانات الويب، وMilvus لتخزين المتجهات، وOpenAI
   لتوليد استجابات ثاقبة مدركة للسياق.
-title: بناء RAG مع Milvus و Crawl4AI
+title: بناء RAG باستخدام Milvus و Crawl4AI
 ---
-<h1 id="Building-RAG-with-Milvus-and-Crawl4AI" class="common-anchor-header">بناء RAG مع Milvus و Crawl4AI<button data-href="#Building-RAG-with-Milvus-and-Crawl4AI" class="anchor-icon" translate="no">
+<h1 id="Building-RAG-with-Milvus-and-Crawl4AI" class="common-anchor-header">بناء RAG باستخدام Milvus و Crawl4AI<button data-href="#Building-RAG-with-Milvus-and-Crawl4AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -210,7 +210,7 @@ INFO:numexpr.utils:NumExpr defaulting to 8 threads.
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

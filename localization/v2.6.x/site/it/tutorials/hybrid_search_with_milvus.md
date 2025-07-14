@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -144,7 +144,7 @@ query_embeddings = ef([query])
 <ul>
 <li><code translate="no">dense_search</code>: ricerca solo nel campo vettoriale denso</li>
 <li><code translate="no">sparse_search</code>: ricerca solo nel campo vettoriale rado</li>
-<li><code translate="no">hybrid_search</code>: ricerca in entrambi i campi vettoriali e densi con un reranker ponderato</li>
+<li><code translate="no">hybrid_search</code>: ricerca su entrambi i campi vettoriali e densi con un reranker ponderato</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     AnnSearchRequest,
@@ -306,7 +306,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Come</span> si impara un linguaggio informatico come java<span style='color:red'>?</span></p>
 <p>Qual è l'alternativa<span style='color:red'> all'</span><span style='color:red'> apprendimento</span> automatico<span style='color:red'>?</span></p>
 <p><span style='color:red'>Come</span> si crea un nuovo terminale e una nuova shell in Linux utilizzando la<span style='color:red'> programmazione</span> C<span style='color:red'>?</span></p>
-<p><span style='color:red'>Come</span> si crea una nuova shell in un nuovo terminale usando la<span style='color:red'> programmazione</span> C (terminale Linux)<span style='color:red'>?</span></p>
+<p><span style='color:red'>Come</span> si crea una nuova shell in un nuovo terminale utilizzando la<span style='color:red'> programmazione</span> C (terminale Linux)<span style='color:red'>?</span></p>
 <p>Quale attività è meglio<span style='color:red'> avviare a</span> Hyderabad<span style='color:red'>?</span></p>
 <p>Quale attività è meglio<span style='color:red'> avviare</span> a Hyderabad<span style='color:red'>?</span></p>
 <p>Di quale matematica ha bisogno un principiante<span style='color:red'> per</span> capire gli algoritmi della<span style='color:red'> programmazione</span> informatica<span style='color:red'>?</span> Quali libri sugli algoritmi sono adatti a un principiante assoluto<span style='color:red'>?</span></p>

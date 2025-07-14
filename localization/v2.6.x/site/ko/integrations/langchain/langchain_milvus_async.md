@@ -20,7 +20,13 @@ title: 랭체인 밀버스 통합의 비동기 함수
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 튜토리얼에서는 <a href="https://github.com/langchain-ai/langchain-milvus">랭체인 밀</a> 버스에서 비동기 함수를 활용하여 고성능 애플리케이션을 구축하는 방법을 살펴봅니다. 비동기 방식을 사용하면 특히 대규모 검색을 처리할 때 애플리케이션의 처리량과 응답성을 크게 향상시킬 수 있습니다. 실시간 추천 시스템을 구축하든, 애플리케이션에서 시맨틱 검색을 구현하든, RAG(검색 증강 생성) 파이프라인을 만들든, 비동기 작업을 사용하면 동시 요청을 보다 효율적으로 처리하는 데 도움이 될 수 있습니다. 고성능 벡터 데이터베이스 Milvus와 LangChain의 강력한 LLM 추상화를 결합하면 확장 가능한 AI 애플리케이션을 구축하기 위한 강력한 기반을 제공할 수 있습니다.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>이 튜토리얼에서는 <a href="https://github.com/langchain-ai/langchain-milvus">랭체인 밀</a> 버스에서 비동기 함수를 활용하여 고성능 애플리케이션을 구축하는 방법을 살펴봅니다. 비동기 방식을 사용하면 특히 대규모 검색을 처리할 때 애플리케이션의 처리량과 응답성을 크게 향상시킬 수 있습니다. 실시간 추천 시스템을 구축하든, 애플리케이션에서 시맨틱 검색을 구현하든, RAG(검색 증강 생성) 파이프라인을 만들든, 비동기 작업을 사용하면 동시 요청을 보다 효율적으로 처리하는 데 도움이 될 수 있습니다. 고성능 벡터 데이터베이스 Milvus와 LangChain의 강력한 LLM 추상화를 결합하면 확장 가능한 AI 애플리케이션을 구축하기 위한 강력한 기반을 제공할 수 있습니다.</p>
 <h2 id="Async-API-Overview" class="common-anchor-header">비동기 API 개요<button data-href="#Async-API-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +59,7 @@ title: 랭체인 밀버스 통합의 비동기 함수
 <tr><td>다양성 검색</td><td><code translate="no">max_marginal_relevance_search()</code></td><td><code translate="no">amax_marginal_relevance_search()</code></td><td>MMR 검색(다양성을 최적화하면서 유사한 것을 반환)</td></tr>
 <tr><td>벡터 다양성 검색</td><td><code translate="no">max_marginal_relevance_search_by_vector()</code></td><td><code translate="no">amax_marginal_relevance_search_by_vector()</code></td><td>벡터를 통한 MMR 검색</td></tr>
 <tr><td>삭제 작업</td><td><code translate="no">delete()</code></td><td><code translate="no">adelete()</code></td><td>문서 삭제</td></tr>
-<tr><td>업서트 작업</td><td><code translate="no">upsert()</code></td><td><code translate="no">aupsert()</code></td><td>문서 업서트(기존 문서가 있으면 업데이트, 그렇지 않으면 삽입)</td></tr>
+<tr><td>업서트 작업</td><td><code translate="no">upsert()</code></td><td><code translate="no">aupsert()</code></td><td>문서 업서트(기존 문서가 있으면 업데이트, 없으면 삽입)</td></tr>
 <tr><td>메타데이터 검색</td><td><code translate="no">search_by_metadata()</code></td><td><code translate="no">asearch_by_metadata()</code></td><td>메타데이터 필터링으로 쿼리</td></tr>
 <tr><td>기본 키 가져오기</td><td><code translate="no">get_pks()</code></td><td><code translate="no">aget_pks()</code></td><td>표현식으로 기본 키 가져오기</td></tr>
 <tr><td>텍스트에서 생성</td><td><code translate="no">from_texts()</code></td><td><code translate="no">afrom_texts()</code></td><td>텍스트에서 벡터 저장소 만들기</td></tr>

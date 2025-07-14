@@ -26,8 +26,8 @@ title: 使用 Milvus 和 Haystack 進行全文檢索
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文</a>檢索是一種透過匹配文字中特定關鍵字或短語來檢索文件的傳統方法。它會根據詞彙頻率等因素計算出的相關性分數對結果進行排序。語意搜尋更擅長於理解意義和上下文，而全文搜尋則擅長於精確的關鍵字比對，因此是語意搜尋的有效補充。BM25 演算法廣泛用於全文檢索的排序，並在檢索增強世代 (Retrieval-Augmented Generation, RAG) 中扮演關鍵角色。</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>引入了使用 BM25 的原生全文搜尋功能。此方法可將文字轉換成代表 BM25 分數的稀疏向量。您只需輸入原始文字，Milvus 即會自動產生並儲存稀疏向量，無需手動產生稀疏嵌入。</p>
-<p><a href="https://haystack.deepset.ai/">Haystack</a>現在支援 Milvus 的這項功能，讓您可以輕鬆地在 RAG 應用程式中加入全文檢索功能。您可以將全文檢索與密集向量語意檢索結合，以獲得混合方法，從語意理解和關鍵字匹配精確度中獲益。這種結合可提高搜尋準確性，並提供使用者更好的結果。</p>
-<p>本教學示範如何使用 Haystack 和 Milvus 在您的應用程式中實作全文和混合搜尋。</p>
+<p><a href="https://haystack.deepset.ai/">Haystack</a>現在支援 Milvus 的這項功能，讓您可以輕鬆地在 RAG 應用程式中加入全文檢索功能。您可以將全文檢索與密集向量語意檢索結合，以獲得混合方法，從語意理解和關鍵字匹配精確度中獲益。這種結合可提高搜尋準確度，並提供使用者更好的結果。</p>
+<p>本教學示範如何使用 Haystack 和 Milvus 在應用程式中實作全文和混合搜尋。</p>
 <p>要使用 Milvus 向量存儲，請指定您的 Milvus 伺服器<code translate="no">URI</code> (也可選擇使用<code translate="no">TOKEN</code>)。若要啟動 Milvus 伺服器，您可以依照<a href="https://milvus.io/docs/install-overview.md">Milvus 安裝指南</a>設定 Milvus 伺服器，或直接免費<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">試用 Zilliz Cloud</a>(完全管理的 Milvus)。</p>
 <div class="alert note">
 <ul>
@@ -83,7 +83,7 @@ documents = [
     Document(content=<span class="hljs-string">&quot;Charlie likes white dogs&quot;</span>, meta={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>將全文檢索整合到 RAG 系統中，可以在語意檢索與精確且可預測的關鍵字檢索之間取得平衡。您也可以選擇只使用全文檢索，但建議結合全文檢索與語意檢索，以獲得更好的檢索結果。為了示範的目的，我們將在此展示單獨的全文檢索和混合檢索。</p>
+<p>將全文檢索整合到 RAG 系統中，可以平衡語意檢索與精確且可預測的關鍵字檢索。您也可以選擇只使用全文檢索，但建議結合全文檢索與語意檢索，以獲得更好的檢索結果。為了示範的目的，我們將在此展示單獨的全文檢索和混合檢索。</p>
 <h2 id="BM25-search-without-embedding" class="common-anchor-header">無嵌入的 BM25 搜尋<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,7 +113,7 @@ document_store = MilvusDocumentStore(
             output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
     drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old collection if it exists and recreate it.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -172,7 +172,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
             output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
     drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old collection and recreate it.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -244,7 +244,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>分析器是全文檢索中不可或缺的工具，它可將句子分割成字元，並執行詞彙分析，例如刪除詞幹和停止詞。分析器通常是特定語言的。您可以參考<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">本指南</a>以瞭解更多關於 Milvus 分析器的資訊。</p>
+    </button></h2><p>分析器是全文檢索中不可或缺的工具，它可將句子分割成字元，並執行詞彙分析，如詞幹分析和停止詞移除。分析器通常是特定語言的。您可以參考<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">本指南</a>以瞭解更多關於 Milvus 分析器的資訊。</p>
 <p>Milvus 支援兩種類型的分析器：<strong>內建分析器</strong>和<strong>自訂分析器</strong>。在預設情況下，<code translate="no">BM25BuiltInFunction</code> 會使用<a href="https://milvus.io/docs/standard-analyzer.md">標準的內建分析器</a>，這是最基本的分析器，會用標點符號來標記文字。</p>
 <p>如果您想使用不同的分析器或自訂分析器，可以在<code translate="no">BM25BuiltInFunction</code> 初始化時傳入<code translate="no">analyzer_params</code> 參數。</p>
 <pre><code translate="no" class="language-python">analyzer_params_custom = {
@@ -269,7 +269,7 @@ document_store = MilvusDocumentStore(
             enable_match=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Whether to enable match.</span>
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -319,7 +319,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     <span></span>
   </span>
 </p>
-<p>這個圖表顯示了 Hybrid Retrieve &amp; Reranking 流程，結合了用於關鍵字比對的 BM25 和用於語意檢索的密集向量搜尋。來自這兩種方法的結果會合併、重新排序，並傳送到 LLM 以產生最終答案。</p>
+<p>這個圖表顯示了 Hybrid Retrieve &amp; Reranking 流程，結合了用於關鍵字匹配的 BM25 和用於語意檢索的密集向量搜尋。來自這兩種方法的結果會合併、重新排序，並傳送到 LLM 以產生最終答案。</p>
 <p>混合搜尋平衡了精確度與語意理解，針對不同的查詢提高了精確度與穩健性。它利用 BM25 全文檢索和向量檢索來擷取候選項目，同時確保語意、上下文感知和精確的檢索。</p>
 <p>讓我們嘗試使用混合搜尋的最佳化 RAG 實作。</p>
 <pre><code translate="no" class="language-python">prompt_template = <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does

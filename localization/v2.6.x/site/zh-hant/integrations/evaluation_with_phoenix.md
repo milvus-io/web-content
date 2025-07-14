@@ -121,7 +121,7 @@ title: 使用 Arize Pheonix 進行評估
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -437,7 +437,7 @@ results_df.head()
       <td>[Hardware Requirements（硬體需求）] 以下是硬體需求規格，以建立...</td>
       <td>[Hardware Requirements\n\nThe following specif...</td>
       <td>事實</td>
-      <td>要確定答案是否符合事實或...</td>
+      <td>要判斷答案是事實還是虛假，您需要...</td>
       <td>正確</td>
       <td>要確定答案是否正確，我們需要...</td>
     </tr>

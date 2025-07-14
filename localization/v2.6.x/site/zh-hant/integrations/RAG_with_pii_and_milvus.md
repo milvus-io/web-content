@@ -20,7 +20,7 @@ title: 使用 Milvus + PII Masker 建立 RAG
       </svg>
     </button></h1><p>PII（個人識別資訊）是一種可用於識別個人身份的敏感資料。</p>
 <p><a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII Masker</a> 由<a href="https://www.hydrox.ai/">HydroX AI</a> 開發，是一款先進的開放原始碼工具，旨在利用尖端的 AI 模型保護您的敏感資料。無論您是要處理客戶資料、執行資料分析，或是確保符合隱私權法規，PII Masker 都能提供強大、可擴充的解決方案，確保您的資訊安全。</p>
-<p>在本教程中，我們將介紹如何使用 PII Masker 與 Milvus 來保護 RAG（Retrieval-Augmented Generation）應用程式中的隱私資料。透過結合 PII Masker 的資料遮蔽功能與 Milvus 的高效資料擷取功能，您可以建立安全、符合隱私權規定的管道，放心地處理敏感資料。此方法可確保您的應用程式符合隱私權標準，並有效保護使用者資料。</p>
+<p>在本教程中，我們將展示如何使用 PII Masker 與 Milvus 來保護 RAG（Retrieval-Augmented Generation）應用程式中的隱私資料。透過結合 PII Masker 的資料遮蔽功能與 Milvus 的高效資料擷取功能，您可以建立安全、符合隱私權規定的管道，放心地處理敏感資料。此方法可確保您的應用程式符合隱私權標準，並有效保護使用者資料。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ title: 使用 Milvus + PII Masker 建立 RAG
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/HydroXai/pii-masker-v1.git</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> pii-masker-v1/pii-masker</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>從<code translate="no">https://huggingface.co/hydroxai/pii_model_weight</code> 下載模型，並取代其中的檔案：<code translate="no">pii-masker/output_model/deberta3base_1024/</code></p>
+<p>從<code translate="no">https://huggingface.co/hydroxai/pii_model_weight</code> 下載模型，並用其中的檔案取代：<code translate="no">pii-masker/output_model/deberta3base_1024/</code></p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">依賴與環境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm dataset</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
@@ -138,7 +138,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>遍歷遮罩的文字行，建立嵌入，然後將資料插入 Milvus。</p>

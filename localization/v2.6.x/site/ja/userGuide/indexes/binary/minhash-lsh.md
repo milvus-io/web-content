@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>効率的な重複排除と類似検索は、大規模な機械学習データセット、特に大規模言語モデル(LLM)の学習コーパスのクリーニングのようなタスクにとって重要である。数百万、数十億のドキュメントを扱う場合、従来の完全マッチングでは時間とコストがかかりすぎる。</p>
+    </button></h1><p>効率的な重複排除と類似検索は、大規模な機械学習データセット、特に大規模言語モデル(LLM)の学習コーパスのクリーニングのようなタスクにとって重要である。数百万から数十億のドキュメントを扱う場合、従来の完全マッチングでは時間とコストがかかりすぎる。</p>
 <p>Milvusの<strong>MINHASH_LSH</strong>インデックスは、2つの強力な技術を組み合わせることで、高速でスケーラブルかつ正確な近似重複排除を可能にします：</p>
 <ul>
 <li><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a>：MinHash：文書の類似性を推定するためのコンパクトなシグネチャ（または「フィンガープリント」）を素早く生成する。</p></li>
@@ -70,7 +70,7 @@ summary: >-
 <ol>
 <li><p><strong>署名のセグメンテーション：</strong></p>
 <p><em>n次元の</em>MinHash署名は<em>b個の</em>バンドに分割される。各バンドには<em>r個の</em>連続したハッシュ値が含まれるため、署名の長さは<em>n = b × rを</em>満たす。</p>
-<p>たとえば、128次元のMinHash署名<em>（n = 128</em>）を32のバンド<em>（b = 32</em>）に分割する場合、各バンドには4つのハッシュ値<em>（r = 4</em>）が含まれる。</p></li>
+<p>たとえば、128次元のMinHash署名<em>（n = 128）が</em>あり、それを32のバンド<em>（b = 32</em>）に分割すると、各バンドには4つのハッシュ値<em>（r = 4</em>）が含まれます。</p></li>
 <li><p><strong>バンドレベルのハッシュ：</strong></p>
 <p>セグメンテーション後、各バンドは標準的なハッシュ関数を使用して独立に処理され、バケツに割り当てられる。バンド内で2つの署名が同じハッシュ値を生成する場合、つまり同じバケツに入る場合、それらは一致する可能性があるとみなされる。</p></li>
 <li><p><strong>候補の選択：</strong></p>
@@ -267,7 +267,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -290,7 +290,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):

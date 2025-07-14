@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -295,7 +295,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>كيف</span> تجعل الحياة تناسبك وتمنع الحياة من <span style='color:red'>الإساءة</span> إليك عقلياً<span style='color:red'> وعاطفياً؟</span></p>
 <p><strong>نتائج البحث الهجين:</strong></p>
 <p>ما هي أفضل طريقة<span style='color:red'> لبدء</span> برمجة<span style='color:red'> الروبوتات؟</span> ما هي أفضل لوحة تطوير يمكنني<span style='color:red'> البدء في</span> العمل<span style='color:red'> عليها؟</span></p>
-<p>ما هي<span style='color:red'> برمجة ج</span> افا؟<span style='color:red'> كيف</span> تتعلم لغة برمجة جافا؟</p>
+<p>ما هي<span style='color:red'> برمجة ج</span> افا؟<span style='color:red'> كيف</span> أتعلم لغة برمجة جافا؟</p>
 <p>ما هي أفضل طريقة<span style='color:red'> لبدء تعلم</span><span style='color:red'> الروبوتات؟</span></p>
 <p><span style='color:red'>كيف</span> نستعد لامتحان<span style='color:red'> UPSC؟</span></p>
 <p><span style='color:red'>كيف</span> تجعل الفيزياء<span style='color:red'> سهلة</span><span style='color:red'> التعلم؟</span></p>

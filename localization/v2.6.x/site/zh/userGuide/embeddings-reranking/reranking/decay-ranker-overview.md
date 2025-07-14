@@ -19,7 +19,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在传统的向量搜索中，搜索结果的排名纯粹取决于向量的相似性--向量在数学空间中的匹配程度。但在实际应用中，真正相关的内容往往不仅仅取决于语义相似性。</p>
+    </button></h1><p>在传统的向量搜索中，搜索结果的排名完全取决于向量的相似性--向量在数学空间中的匹配程度。但在实际应用中，内容的真正相关性往往不仅仅取决于语义相似性。</p>
 <p>考虑一下这些日常场景：</p>
 <ul>
 <li><p>在新闻搜索中，昨天的文章应该比三年前的类似文章排名靠前</p></li>
@@ -77,7 +77,7 @@ beta: Milvus 2.6.x
 <li><p>每个衰减排名器将原始数值转化为 0-1 之间的归一化相关性分数。</p></li>
 <li><p>衰减分数表示一个项目与理想点的 "距离 "相关程度</p></li>
 </ul>
-<p>具体计算公式因衰减排名器类型而异。有关如何计算衰减分数的详情，请参阅<a href="/docs/zh/v2.6.x/gaussian-decay.md#Formula">高斯衰减</a>、<a href="/docs/zh/v2.6.x/exponential-decay.md#Formula">指数衰减</a>和<a href="/docs/zh/v2.6.x/linear-decay.md#Formula">线性衰减的</a>专门页面。</p>
+<p>具体计算公式因衰减排名器类型而异。有关如何计算衰减分数的详情，请参阅<a href="/docs/zh/gaussian-decay.md#Formula">高斯衰减</a>、<a href="/docs/zh/exponential-decay.md#Formula">指数衰减</a>和<a href="/docs/zh/linear-decay.md#Formula">线性衰减的</a>专门页面。</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">第三阶段：计算最终得分</h3><p>最后，Milvus 将归一化的相似度得分和衰减得分结合起来，得出最终排名得分：</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -87,7 +87,7 @@ beta: Milvus 2.6.x
 <p>例如，在混合搜索中，如果一篇研究论文的向量相似度得分是 0.82，而基于 BM25 的文本检索得分是 0.91，那么 Milvus 在应用衰减因子之前，会先使用 0.91 作为基本相似度得分。</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">实际的衰减排名</h3><p>让我们在实际场景中看看衰减排名--基于时间的衰减搜索<strong>"人工智能研究论文"：</strong></p>
 <div class="alert note">
-<p>在这个例子中，衰减得分反映了相关性随时间的推移而降低的情况--较新的论文得分接近 1.0，较老的论文得分较低。这些值是使用特定的衰减排序器计算得出的。有关详情，请参阅 "<a href="/docs/zh/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">选择合适的衰减排名器</a>"。</p>
+<p>在这个例子中，衰减得分反映了相关性随时间的推移而降低的情况--较新的论文得分接近 1.0，较老的论文得分较低。这些值是使用特定的衰减排序器计算得出的。有关详情，请参阅<a href="/docs/zh/decay-ranker-overview.md#Choose-the-right-decay-ranker">选择合适的衰减排名器</a>。</p>
 </div>
 <table>
    <tr>
@@ -140,7 +140,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>尽管相似度中等，论文 C 还是跃居第一，因为它是最近发表的（昨天发表的）。</p></li>
 <li><p>论文 B 因发表时间较早，尽管相似度很高，但排名却降至第 3 位</p></li>
-<li><p>论文 D 使用的是 L2 距离（越低越好），因此在应用衰减排序前，其得分从 1.2 降为 0.76。</p></li>
+<li><p>论文 D 使用的是 L2 距离（越低越好），因此在应用衰减排序之前，其得分从 1.2 降为 0.76。</p></li>
 </ul>
 <h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">选择正确的衰减排序器<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -198,9 +198,9 @@ beta: Milvus 2.6.x
 </table>
 <p>有关每个衰减排名器如何计算分数和具体衰减模式的详细信息，请参阅专用文档：</p>
 <ul>
-<li><p><a href="/docs/zh/v2.6.x/gaussian-decay.md">高斯衰减</a></p></li>
-<li><p><a href="/docs/zh/v2.6.x/exponential-decay.md">指数衰减</a></p></li>
-<li><p><a href="/docs/zh/v2.6.x/exponential-decay.md">指数衰减</a></p></li>
+<li><p><a href="/docs/zh/gaussian-decay.md">高斯衰减</a></p></li>
+<li><p><a href="/docs/zh/exponential-decay.md">指数衰减</a></p></li>
+<li><p><a href="/docs/zh/exponential-decay.md">指数衰减</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">实施示例<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -219,7 +219,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>衰减排名器可应用于 Milvus 中的标准向量搜索和混合搜索操作。以下是实现这一功能的关键代码片段。</p>
 <div class="alert note">
-<p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collections，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅<a href="/docs/zh/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">教程：在 Milvus 中实施基于时间的排名</a>。</p>
+<p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collections，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">教程：在 Milvus 中实施基于时间的排名</a>。</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">创建衰减排名器</h3><p>要实施衰减排名，首先要定义一个具有适当配置的<code translate="no">Function</code> 对象：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -274,7 +274,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>是</p></td>
-     <td><p>指定要应用的数学衰减排名器。确定相关性下降的曲线形状。 请参阅 "<a href="/docs/zh/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">选择合适的衰减排名器</a>"部分，了解如何选择合适的函数。</p></td>
+     <td><p>指定要应用的数学衰减排名器。确定相关性下降的曲线形状。 请参阅 "<a href="/docs/zh/decay-ranker-overview.md#Choose-the-right-decay-ranker">选择合适的衰减排名器</a>"部分，了解如何选择合适的函数。</p></td>
      <td><p><code translate="no">"gauss"</code>,<code translate="no">"exp"</code>, 或<code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -282,7 +282,7 @@ decay_ranker = Function(
      <td><p>是</p></td>
      <td><p>计算衰减分数的参考点。处于此值的项目会获得最大相关性分数。</p></td>
      <td><ul>
-<li>时间戳：当前时间（如<code translate="no">int(time.time())</code>)</li>
+<li>对于时间戳：当前时间（如<code translate="no">int(time.time())</code>)</li>
 <li>地理位置：用户当前坐标</li>
 </ul></td>
    </tr>
@@ -291,7 +291,7 @@ decay_ranker = Function(
      <td><p>是</p></td>
      <td><p>相关性下降到<code translate="no">decay</code> 值的距离或时间。该值越大，相关性下降越快；该值越小，相关性下降越快。</p></td>
      <td><ul>
-<li>时间：以秒为单位的周期（例如，<code translate="no">7 * 24 * 60 * 60</code> 为 7 天）</li>
+<li>时间：以秒为单位的周期（例如<code translate="no">7 * 24 * 60 * 60</code> 为 7 天）</li>
 <li>距离：米（例如，<code translate="no">5000</code> 表示 5 千米）</li>
 </ul></td>
    </tr>
@@ -320,7 +320,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索</h3><p>衰减排序器也可以应用于结合多个向量场的混合搜索操作符：</p>

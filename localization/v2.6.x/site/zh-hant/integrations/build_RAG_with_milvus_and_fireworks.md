@@ -26,7 +26,7 @@ title: 使用 Milvus 和 Fireworks AI 建立 RAG
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://fireworks.ai/">Fireworks AI</a>是一個生成式人工智能推理平台，提供業界領先的速度和生產準備，可執行和自訂模型。 Fireworks AI 提供各種生成式人工智能服務，包括無伺服器模型、按需部署和微調功能。它提供了部署各種 AI 模型的全面環境，包括大型語言模型 (LLM) 和嵌入模型。Fireworks AI 匯聚了許多模型，讓使用者可以輕鬆存取和利用這些資源，而不需要大量的基礎架構設定。</p>
+<p><a href="https://fireworks.ai/">Fireworks AI</a>是一個生成式人工智能推理平台，提供業界領先的速度和生產準備，可執行和自訂模型。 Fireworks AI 提供各種生成式人工智能服務，包括無伺服器模型、隨需部署和微調功能。它提供了部署各種 AI 模型的全面環境，包括大型語言模型 (LLM) 和嵌入模型。Fireworks AI 匯聚了許多模型，讓使用者可以輕鬆存取和利用這些資源，而不需要大量的基礎架構設定。</p>
 <p>在本教程中，我們將教您如何使用 Milvus 和 Fireworks AI 建立 RAG（Retrieval-Augmented Generation）管道。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -130,12 +130,12 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>使用指定的參數建立新的集合。</p>
-<p>如果我們沒有指定任何欄位資訊，Milvus 會自動建立一個預設的<code translate="no">id</code> 欄位做為主索引鍵，以及一個<code translate="no">vector</code> 欄位來儲存向量資料。保留的 JSON 欄位用來儲存非結構描述定義的欄位及其值。</p>
+<p>如果我們沒有指定任何欄位資訊，Milvus 會自動建立一個預設的<code translate="no">id</code> 欄位作為主索引鍵，以及一個<code translate="no">vector</code> 欄位來儲存向量資料。保留的 JSON 欄位用來儲存非結構描述定義的欄位及其值。</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>遍歷文字行，建立嵌入，然後將資料插入 Milvus。</p>
@@ -245,4 +245,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 
 Additionally, when data is inserted, it is first loaded into a message queue, and then written to persistent storage as incremental logs by the data node. The `flush()` function can be used to force the data node to write all data in the message queue to persistent storage immediately.
 </code></pre>
-<p>太好了！我們已經用 Milvus 和 Fireworks AI 成功地建立了一個 RAG 管道。</p>
+<p>太好了！我們成功地利用 Milvus 和 Fireworks AI 建立了 RAG 管道。</p>

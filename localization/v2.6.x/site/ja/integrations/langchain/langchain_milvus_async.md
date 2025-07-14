@@ -19,7 +19,13 @@ title: LangChain-milvus統合における非同期関数
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このチュートリアルでは、<a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvusの</a>非同期関数を活用して高性能なアプリケーションを構築する方法について説明します。非同期メソッドを使うことで、特に大規模な検索を扱う場合に、アプリケーションのスループットと応答性を大幅に向上させることができます。リアルタイムのレコメンデーションシステムを構築する場合でも、アプリケーションにセマンティック検索を実装する場合でも、RAG（Retrieval-Augmented Generation）パイプラインを作成する場合でも、非同期操作は同時リクエストをより効率的に処理するのに役立ちます。高性能ベクトルデータベースmilvusとLangChainの強力なLLM抽象化を組み合わせることで、スケーラブルなAIアプリケーションを構築するための強固な基盤を提供することができます。</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>このチュートリアルでは、<a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvusの</a>非同期関数を活用して高性能なアプリケーションを構築する方法について説明します。非同期メソッドを使うことで、特に大規模な検索を扱う場合に、アプリケーションのスループットと応答性を大幅に向上させることができます。リアルタイムのレコメンデーションシステムを構築する場合でも、アプリケーションにセマンティック検索を実装する場合でも、RAG（Retrieval-Augmented Generation）パイプラインを作成する場合でも、非同期操作は同時リクエストをより効率的に処理するのに役立ちます。高性能ベクトルデータベースmilvusとLangChainの強力なLLM抽象化を組み合わせることで、スケーラブルなAIアプリケーションを構築するための強固な基盤を提供することができます。</p>
 <h2 id="Async-API-Overview" class="common-anchor-header">非同期APIの概要<button data-href="#Async-API-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +42,7 @@ title: LangChain-milvus統合における非同期関数
         ></path>
       </svg>
     </button></h2><p>langchain-milvusは包括的な非同期処理のサポートを提供し、大規模な並行処理シナリオにおけるパフォーマンスを大幅に向上させます。非同期APIは同期APIと一貫したインターフェース設計を維持します。</p>
-<h3 id="Core-Async-Functions" class="common-anchor-header">コア非同期関数</h3><p>langchain-milvusで非同期操作を使用するには、メソッド名に<code translate="no">a</code> プレフィックスを追加するだけです。これにより、リソースの利用効率が向上し、同時検索要求を処理する際のスループットが向上します。</p>
+<h3 id="Core-Async-Functions" class="common-anchor-header">コア非同期関数</h3><p>langchain-milvusで非同期操作を使用するには、メソッド名に<code translate="no">a</code> プレフィックスを追加するだけです。これにより、リソースの有効活用が可能になり、同時検索リクエストを処理する際のスループットが向上します。</p>
 <table>
 <thead>
 <tr><th>操作タイプ</th><th>同期メソッド</th><th>非同期メソッド</th><th>説明</th></tr>

@@ -45,7 +45,7 @@ summary: >-
     </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">Jaccard 相似性</h3><p>Jaccard 類似度量兩個集合 A 和 B 之間的重疊程度，正式定義為：</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(A, B) = \frac{|A \cap B|}{|A \cup B|}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>其值範圍從 0 (完全不相連) 到 1 (完全相同)。</p>
-<p>然而，在大型資料集中精確計算所有文件對之間的 Jaccard 類似性，在時間和記憶體上的計算成本很高，當<strong>n</strong>很大時為-O<strong>(n²)</strong>。這使得它在 LLM 訓練語料清理或網路規模文件分析等使用個案中並不可行。</p>
+<p>然而，在大型資料集中精確計算所有文件對之間的 Jaccard 類似性，當<strong>n</strong>很大時，在時間和記憶體上的計算成本為-O<strong>(n²)</strong>。這使得它在 LLM 訓練語料清理或網路規模文件分析等使用個案中並不可行。</p>
 <h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">MinHash 簽名：近似 Jaccard 相似性</h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a>是一種概率技術，可提供估算 Jaccard 相似性的有效方法。它的工作方式是將每個集合轉換成精簡的<strong>簽章向量</strong>，保留足夠的資訊來有效率地近似集合相似性。</p>
 <p><strong>核心思想</strong>：</p>
 <p>兩個集越相似，它們的 MinHash 簽署就越有可能在相同的位置匹配。這個特性讓 MinHash 可以近似集合間的 Jaccard 相似度。</p>
@@ -64,7 +64,7 @@ summary: >-
 <div class="alert note">
 <p>使用的切細函數決定 MinHash 簽章的維度。較高的維度可提供較佳的近似精確度，但代價是增加儲存和計算。</p>
 </div>
-<h3 id="LSH-for-MinHash" class="common-anchor-header">適用於 MinHash 的 LSH</h3><p>雖然 MinHash 簽章大幅降低了計算文件間精確 Jaccard 相似度的成本，但在規模上，徹底比較每對簽章向量的效率仍然很低。</p>
+<h3 id="LSH-for-MinHash" class="common-anchor-header">適用於 MinHash 的 LSH</h3><p>雖然 MinHash 簽章大幅降低了計算文件間精確 Jaccard 相似性的成本，但在規模上，徹底比較每一對簽章向量的效率仍然很低。</p>
 <p>為了解決這個問題，我們使用<a href="https://zilliz.com/learn/Local-Sensitivity-Hashing-A-Comprehensive-Guide">LSH</a>。LSH 可確保類似項目以高概率散列到相同的「桶」中，避免直接比較每一對，從而實現快速的近似相似性搜尋。</p>
 <p>過程包括</p>
 <ol>
@@ -267,7 +267,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -290,7 +290,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):

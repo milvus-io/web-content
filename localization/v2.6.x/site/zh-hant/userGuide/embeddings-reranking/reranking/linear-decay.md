@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>線性衰減 (Linear Decay) 在您的搜尋結果中創造了一個以絕對零點為終點的直線下降。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束，線性衰減在項目離開您的理想點時，應用可預測的、穩定的相關性減弱，直到它們完全消失。當您想要一致的衰減率且有明確的分界線時，此方法是最理想的選擇，可確保超過特定界線的項目完全排除在搜尋結果之外。</p>
+    </button></h1><p>線性衰減 (Linear Decay) 在您的搜尋結果中創造了一個以絕對零點為終點的直線下降。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束，線性衰減在項目離開您的理想點時，應用可預測的、穩定的相關性減弱，直到它們完全消失。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超出某個邊界的項目完全被排除在結果之外。</p>
 <p>與其他衰減函數不同：</p>
 <ul>
 <li><p>高斯衰減遵循逐漸接近但永遠不會達到零的鐘形曲線</p></li>
@@ -185,7 +185,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">應用於混合搜尋</h3><p>衰減排序器也可以應用於結合多向量場的混合搜尋作業：</p>

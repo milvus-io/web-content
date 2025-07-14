@@ -23,7 +23,13 @@ title: Асинхронные функции в интеграции с LangChai
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В этом уроке рассматривается использование асинхронных функций в <a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a> для создания высокопроизводительных приложений. Используя асинхронные методы, вы можете значительно повысить пропускную способность и скорость реакции вашего приложения, особенно при работе с крупномасштабным поиском. Создаете ли вы систему рекомендаций в реальном времени, внедряете семантический поиск в приложение или создаете конвейер RAG (Retrieval-Augmented Generation), операции async помогут вам более эффективно обрабатывать одновременные запросы. Высокопроизводительная векторная база данных Milvus в сочетании с мощными LLM-абстракциями LangChain может стать надежной основой для создания масштабируемых приложений ИИ.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>В этом уроке рассматривается использование асинхронных функций в <a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a> для создания высокопроизводительных приложений. Используя асинхронные методы, вы можете значительно повысить пропускную способность и скорость реакции вашего приложения, особенно при работе с крупномасштабным поиском. Создаете ли вы систему рекомендаций в реальном времени, внедряете семантический поиск в приложение или создаете конвейер RAG (Retrieval-Augmented Generation), операции async помогут вам более эффективно обрабатывать одновременные запросы. Высокопроизводительная векторная база данных Milvus в сочетании с мощными LLM-абстракциями LangChain может стать надежной основой для создания масштабируемых приложений ИИ.</p>
 <h2 id="Async-API-Overview" class="common-anchor-header">Обзор Async API<button data-href="#Async-API-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +69,7 @@ title: Асинхронные функции в интеграции с LangChai
 </tbody>
 </table>
 <p>Для получения более подробной информации об этих функциях обратитесь к <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html#milvus">справочнику API</a>.</p>
-<h3 id="Performance-Benefits" class="common-anchor-header">Преимущества производительности</h3><p>Асинхронные операции обеспечивают значительное повышение производительности при обработке большого количества одновременных запросов, что особенно удобно для:</p>
+<h3 id="Performance-Benefits" class="common-anchor-header">Преимущества производительности</h3><p>Асинхронные операции обеспечивают значительное повышение производительности при обработке больших объемов одновременных запросов, что особенно удобно для:</p>
 <ul>
 <li>Пакетной обработки документов</li>
 <li>Сценарии поиска с высокой интенсивностью запросов</li>
@@ -90,7 +96,7 @@ title: Асинхронные функции в интеграции с LangChai
 <pre><code translate="no" class="language-python">! pip install -U pymilvus langchain-milvus langchain langchain-core langchain-openai langchain-text-splitters nest-asyncio
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Если вы используете Google Colab, то для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам, возможно, потребуется <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </blockquote>
 <p>Мы будем использовать модели OpenAI. Вам необходимо подготовить <a href="https://platform.openai.com/docs/quickstart">api ключ</a> <code translate="no">OPENAI_API_KEY</code> в качестве переменной окружения:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os

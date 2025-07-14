@@ -1,9 +1,9 @@
 ---
 id: integrate_with_ragas.md
 summary: >-
-  This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmented
-  Generation (RAG) pipeline built upon Milvus.
-title: Evaluation with Ragas
+  Esta guía muestra cómo utilizar Ragas para evaluar un canal de Generación
+  Mejorada por Recuperación (RAG) basado en Milvus.
+title: Evaluación con Ragas
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,7 +11,7 @@ title: Evaluation with Ragas
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_ragas.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Evaluation-with-Ragas" class="common-anchor-header">Evaluation with Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
+<h1 id="Evaluation-with-Ragas" class="common-anchor-header">Evaluación con Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,10 +26,10 @@ title: Evaluation with Ragas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmented Generation (RAG) pipeline built upon <a href="https://milvus.io/">Milvus</a>.</p>
-<p>The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.</p>
-<p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas</a> is a framework that helps you evaluate your RAG pipelines. There are existing tools and frameworks that help you build these pipelines but evaluating it and quantifying your pipeline performance can be hard. This is where Ragas (RAG Assessment) comes in.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>Esta guía muestra cómo utilizar Ragas para evaluar un sistema de generación mejorada por recuperación (RAG) basado en <a href="https://milvus.io/">Milvus</a>.</p>
+<p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar texto nuevo a partir de una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
+<p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas</a> es un marco de trabajo que le ayuda a evaluar sus canalizaciones RAG. Existen herramientas y marcos de trabajo que ayudan a crear estas cadenas, pero evaluarlas y cuantificar su rendimiento puede resultar difícil. Aquí es donde entra Ragas (RAG Assessment).</p>
+<h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,18 +44,18 @@ title: Evaluation with Ragas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before running this notebook, make sure you have the following dependencies installed:</p>
+    </button></h2><p>Antes de ejecutar este cuaderno, asegúrate de tener instaladas las siguientes dependencias:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
-<p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>Si estás utilizando Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla, y selecciona "Reiniciar sesión" en el menú desplegable).</p>
+<p>En este ejemplo utilizaremos OpenAI como LLM. Deberás preparar la <a href="https://platform.openai.com/docs/quickstart">clave api</a> <code translate="no">OPENAI_API_KEY</code> como variable de entorno.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Define the RAG pipeline<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
+<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Definir el pipeline RAG<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,8 +70,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will define the RAG class that use Milvus as the vector store, and OpenAI as the LLM.
-The class contains the <code translate="no">load</code> method, which loads the text data into Milvus, the <code translate="no">retrieve</code> method, which retrieves the most similar text data to the given question, and the <code translate="no">answer</code> method, which answers the given question with the retrieved knowledge.</p>
+    </button></h2><p>Definiremos la clase RAG que utiliza Milvus como almacén de vectores, y OpenAI como LLM. La clase contiene el método <code translate="no">load</code>, que carga los datos de texto en Milvus, el método <code translate="no">retrieve</code>, que recupera los datos de texto más similares a la pregunta dada, y el método <code translate="no">answer</code>, que responde a la pregunta dada con el conocimiento recuperado.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
@@ -128,7 +127,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -180,21 +179,21 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
         <span class="hljs-keyword">else</span>:
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s initialize the RAG class with OpenAI and Milvus clients.</p>
+<p>Inicialicemos la clase RAG con los clientes OpenAI y Milvus.</p>
 <pre><code translate="no" class="language-python">openai_client = OpenAI()
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>En cuanto al argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
+<li>Si tiene una gran escala de datos, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</li>
+<li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y a la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 </div>
-<h2 id="Run-the-RAG-pipeline-and-get-results" class="common-anchor-header">Run the RAG pipeline and get results<button data-href="#Run-the-RAG-pipeline-and-get-results" class="anchor-icon" translate="no">
+<h2 id="Run-the-RAG-pipeline-and-get-results" class="common-anchor-header">Ejecutar la canalización RAG y obtener resultados<button data-href="#Run-the-RAG-pipeline-and-get-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -209,8 +208,8 @@ my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We use the <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">Milvus development guide</a> to be as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download it and load it into the rag pipeline.</p>
+    </button></h2><p>Utilizamos la <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">guía de desarrollo de</a> Milvus como conocimiento privado en nuestra RAG, que es una buena fuente de datos para una canalización RAG sencilla.</p>
+<p>Descárguela y cárguela en la tubería RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> urllib.request
 
@@ -228,7 +227,7 @@ my_rag.load(text_lines)  <span class="hljs-comment"># Load the text data into RA
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Creating embeddings: 100%|██████████| 27/27 [00:20&lt;00:00,  1.34it/s]
 </code></pre>
-<p>Let’s define a query question about the content of the development guide documentation. And then use the <code translate="no">answer</code> method to get the answer and the retrieved context texts.</p>
+<p>Definamos una pregunta de consulta sobre el contenido de la documentación de la guía de desarrollo. Y luego utilicemos el método <code translate="no">answer</code> para obtener la respuesta y los textos contextuales recuperados.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;what is the hardware requirements specification if I want to build Milvus and run from source code?&quot;</span>
 my_rag.answer(question, return_retrieved_text=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -237,7 +236,7 @@ my_rag.answer(question, return_retrieved_text=<span class="hljs-literal">True</s
   'Building Milvus on a local OS/shell environment\n\nThe details below outline the hardware and software requirements for building on Linux and MacOS.\n\n##',
   &quot;Software Requirements\n\nAll Linux distributions are available for Milvus development. However a majority of our contributor worked with Ubuntu or CentOS systems, with a small portion of Mac (both x86_64 and Apple Silicon) contributors. If you would like Milvus to build and run on other distributions, you are more than welcome to file an issue and contribute!\n\nHere's a list of verified OS types where Milvus can successfully build and run:\n\n- Debian/Ubuntu\n- Amazon Linux\n- MacOS (x86_64)\n- MacOS (Apple Silicon)\n\n##&quot;])
 </code></pre>
-<p>Now let’s prepare some questions with its corresponding ground truth answers. We get answers and contexts from our RAG pipeline.</p>
+<p>Ahora vamos a preparar algunas preguntas con sus correspondientes respuestas ground truth. Obtenemos las respuestas y los contextos de nuestra canalización RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> EvaluationDataset
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> Dataset
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -275,10 +274,7 @@ df
 </code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -292,37 +288,37 @@ df
     <tr style="text-align: right;">
       <th></th>
       <th>user_input</th>
-      <th>retrieved_contexts</th>
-      <th>response</th>
-      <th>reference</th>
+      <th>contextos_recuperados</th>
+      <th>respuesta</th>
+      <th>referencia</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>what is the hardware requirements specificatio...</td>
-      <td>[Hardware Requirements\n\nThe following specif...</td>
-      <td>The hardware requirements specification to bui...</td>
-      <td>If you want to build Milvus and run from sourc...</td>
+      <td>¿cuáles son los requisitos de hardware específic...</td>
+      <td>[Requisitos de hardware\nespecificaci...</td>
+      <td>La especificación de requisitos de hardware p...</td>
+      <td>Si desea crear Milvus y ejecutarlo desde la fuente...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>What is the programming language used to write...</td>
-      <td>[CMake &amp; Conan\n\nThe algorithm library of Mil...</td>
-      <td>The programming language used to write Knowher...</td>
-      <td>The programming language used to write Knowher...</td>
+      <td>¿Cuál es el lenguaje de programación utilizado...</td>
+      <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
+      <td>¿Cuál es el lenguaje de programación utilizado...</td>
+      <td>¿Cuál es el lenguaje de programación utilizado...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>What should be ensured before running code cov...</td>
-      <td>[Code coverage\n\nBefore submitting your pull ...</td>
-      <td>Before running code coverage, it should be ens...</td>
-      <td>Before running code coverage, you should make ...</td>
+      <td>¿Qué debe garantizarse antes de ejecutar la cobertur...</td>
+      <td>[Antes de enviar su pull ...</td>
+      <td>Antes de ejecutar la cobertura de có...</td>
+      <td>Antes de ejecutar la cobertura de código, debe ...</td>
     </tr>
   </tbody>
 </table>
 </div>
-<h2 id="Evaluation-with-Ragas" class="common-anchor-header">Evaluation with Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
+<h2 id="Evaluation-with-Ragas" class="common-anchor-header">Evaluación con Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -337,8 +333,8 @@ df
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We use Ragas to evaluate the performance of our RAG pipeline results.</p>
-<p>Ragas provides a set of metrics that is easy to use. We take <code translate="no">Answer relevancy</code>, <code translate="no">Faithfulness</code>, <code translate="no">Context recall</code>, and <code translate="no">Context precision</code> as the metrics to evaluate our RAG pipeline. For more information about the metrics, please refer to the <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Ragas Metrics</a>.</p>
+    </button></h2><p>Utilizamos Ragas para evaluar el rendimiento de los resultados de nuestra canalización RAG.</p>
+<p>Ragas proporciona un conjunto de métricas fáciles de usar. Tomamos <code translate="no">Answer relevancy</code>, <code translate="no">Faithfulness</code>, <code translate="no">Context recall</code>, y <code translate="no">Context precision</code> como métricas para evaluar nuestro pipeline RAG. Para obtener más información sobre las métricas, consulte <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Ragas Metrics</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> evaluate
 <span class="hljs-keyword">from</span> ragas.metrics <span class="hljs-keyword">import</span> AnswerRelevancy, Faithfulness, ContextRecall, ContextPrecision
 

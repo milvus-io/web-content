@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>منصة للتجارة الإلكترونية تعزز المنتجات الشائعة حتى عندما تكون أقل تشابهًا مع استعلام البحث</p></li>
 </ul>
 <p>تشترك جميع هذه السيناريوهات في حاجة مشتركة: موازنة التشابه المتجه مع عوامل رقمية أخرى مثل الوقت أو المسافة أو الشعبية.</p>
-<p>تلبي مصنفات التضاؤل في Milvus هذه الحاجة من خلال تعديل تصنيفات البحث بناءً على قيم الحقول الرقمية. فهي تسمح لك بموازنة تشابه المتجهات مع "الحداثة" أو "القرب" أو الخصائص الرقمية الأخرى لبياناتك، مما يخلق تجارب بحث أكثر سهولة وملاءمة للسياق.</p>
+<p>تعالج مصنفات التضاؤل في Milvus هذه الحاجة من خلال تعديل تصنيفات البحث بناءً على قيم الحقول الرقمية. فهي تسمح لك بموازنة تشابه المتجهات مع "الحداثة" أو "القرب" أو الخصائص الرقمية الأخرى لبياناتك، مما يخلق تجارب بحث أكثر سهولة وملاءمة للسياق.</p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +81,7 @@ beta: Milvus 2.6.x
 <li><p>يقوم كل مصنف اضمحلال بتحويل القيم الرقمية الأولية إلى درجات ملاءمة طبيعية بين 0-1</p></li>
 <li><p>تمثل درجة التضاؤل مدى ملاءمة العنصر بناءً على "المسافة" بينه وبين النقطة المثالية</p></li>
 </ul>
-<p>تختلف معادلة الحساب المحددة بناءً على نوع مصنف التضاؤل. للحصول على تفاصيل حول كيفية حساب درجة التضاؤل، راجع الصفحات المخصصة <a href="/docs/ar/v2.6.x/gaussian-decay.md#Formula">للتضاؤل الغاوسي،</a> <a href="/docs/ar/v2.6.x/exponential-decay.md#Formula">والتضاؤل الأسي،</a> <a href="/docs/ar/v2.6.x/linear-decay.md#Formula">والتضاؤل الخطي</a>.</p>
+<p>تختلف معادلة الحساب المحددة بناءً على نوع مصنف التضاؤل. للحصول على تفاصيل حول كيفية حساب درجة التضاؤل، راجع الصفحات المخصصة <a href="/docs/ar/gaussian-decay.md#Formula">للتضاؤل الغاوسي،</a> <a href="/docs/ar/exponential-decay.md#Formula">والتضاؤل الأسي،</a> <a href="/docs/ar/linear-decay.md#Formula">والتضاؤل الخطي</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">المرحلة 3: حساب الدرجات النهائية</h3><p>أخيرًا، يجمع Milvus بين درجة التشابه الطبيعي ودرجة التضاؤل لإنتاج درجة الترتيب النهائية:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -91,7 +91,7 @@ beta: Milvus 2.6.x
 <p>على سبيل المثال، إذا حصلت ورقة بحثية على 0.82 من التشابه المتجه و0.91 من استرجاع النص المستند إلى BM25 في بحث مختلط، يستخدم ميلفوس 0.91 كدرجة تشابه أساسية قبل تطبيق عامل الاضمحلال.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">ترتيب الاضمحلال أثناء العمل</h3><p>دعونا نرى ترتيب الاضمحلال في سيناريو عملي - البحث عن <strong>"أوراق بحثية للذكاء الاصطناعي"</strong> مع اضمحلال زمني:</p>
 <div class="alert note">
-<p>في هذا المثال، تعكس درجات التضاؤل في هذا المثال كيف تتضاءل الأهمية مع مرور الوقت - تحصل الأوراق البحثية الأحدث على درجات أقرب إلى 1.0، بينما تحصل الأوراق الأقدم على درجات أقل. يتم حساب هذه القيم باستخدام مصنف اضمحلال محدد. للحصول على التفاصيل، راجع <a href="/docs/ar/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف الاضمحلال الصحيح</a>.</p>
+<p>في هذا المثال، تعكس درجات التضاؤل في هذا المثال كيف تتضاءل الأهمية مع مرور الوقت - تحصل الأوراق البحثية الأحدث على درجات أقرب إلى 1.0، بينما تحصل الأوراق الأقدم على درجات أقل. يتم حساب هذه القيم باستخدام مصنف اضمحلال محدد. للحصول على التفاصيل، راجع <a href="/docs/ar/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف الاضمحلال الصحيح</a>.</p>
 </div>
 <table>
    <tr>
@@ -177,7 +177,7 @@ beta: Milvus 2.6.x
 <li><p>التطبيقات التي يكون لدى المستخدمين فيها إحساس بديهي بالمسافة</p></li>
 <li><p>عندما لا ينبغي أن تؤدي المسافة المعتدلة إلى معاقبة النتائج بشدة</p></li>
 </ul></td>
-     <td><p>في البحث عن مطعم، تظل الأماكن ذات الجودة العالية التي تبعد 3 كم قابلة للاكتشاف، على الرغم من أنها تحتل مرتبة أقل من الخيارات القريبة</p></td>
+     <td><p>في بحث عن مطعم، تظل الأماكن ذات الجودة العالية التي تبعد 3 كم قابلة للاكتشاف، على الرغم من أنها تحتل مرتبة أقل من الخيارات القريبة</p></td>
    </tr>
    <tr>
      <td><p>أسي (<code translate="no">exp</code>)</p></td>
@@ -197,14 +197,14 @@ beta: Milvus 2.6.x
 <li><p>الخدمات ذات حدود المسافة</p></li>
 <li><p>محتوى بتواريخ انتهاء صلاحية أو حدود واضحة</p></li>
 </ul></td>
-     <td><p>في أداة البحث عن الأحداث، لا تظهر الأحداث التي تتجاوز نافذة مستقبلية مدتها أسبوعين على الإطلاق</p></td>
+     <td><p>في أداة البحث عن الأحداث، لا تظهر الأحداث التي تتجاوز نافذة مستقبلية لمدة أسبوعين على الإطلاق</p></td>
    </tr>
 </table>
 <p>للحصول على معلومات مفصلة حول كيفية حساب كل مصنف اضمحلال للنتائج وأنماط اضمحلال محددة، راجع الوثائق المخصصة:</p>
 <ul>
-<li><p><a href="/docs/ar/v2.6.x/gaussian-decay.md">الاضمحلال الغاوسي</a></p></li>
-<li><p><a href="/docs/ar/v2.6.x/exponential-decay.md">التضاؤل الأسي</a></p></li>
-<li><p><a href="/docs/ar/v2.6.x/exponential-decay.md">التضاؤل الأسي</a></p></li>
+<li><p><a href="/docs/ar/gaussian-decay.md">الاضمحلال الغاوسي</a></p></li>
+<li><p><a href="/docs/ar/exponential-decay.md">التضاؤل الأسي</a></p></li>
+<li><p><a href="/docs/ar/exponential-decay.md">التضاؤل الأسي</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">مثال على التنفيذ<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>يمكن تطبيق مصنفات التضاؤل على كل من عمليات البحث المتجه القياسية وعمليات البحث المختلطة في ميلفوس. فيما يلي مقتطفات الشيفرة الرئيسية لتنفيذ هذه الميزة.</p>
 <div class="alert note">
-<p>قبل استخدام دوال التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة وتعريف المخطط وإدراج البيانات، راجع <a href="/docs/ar/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي: تنفيذ الترتيب المستند إلى الوقت في ميلفوس</a>.</p>
+<p>قبل استخدام دوال التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة وتعريف المخطط وإدراج البيانات، راجع <a href="/docs/ar/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي: تنفيذ الترتيب المستند إلى الوقت في ميلفوس</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">إنشاء مصنف اضمحلال</h3><p>لتنفيذ تصنيف التضاؤل، قم أولاً بتعريف كائن <code translate="no">Function</code> بالتكوين المناسب:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -266,7 +266,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يحدد نوع الدالة التي يتم إنشاؤها. يجب تعيينها على <code translate="no">RERANK</code> لجميع مرتبات التضاؤل.</p></td>
+     <td><p>تحديد نوع الدالة التي يتم إنشاؤها. يجب تعيينها على <code translate="no">RERANK</code> لجميع مرتبات التضاؤل.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
@@ -278,7 +278,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>تحديد مصنف التضاؤل الرياضي المطلوب تطبيقه. يحدد شكل المنحنى الخاص بانخفاض الملاءمة. راجع قسم <a href="/docs/ar/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف التضاؤل الصحيح</a> للحصول على إرشادات حول اختيار الدالة المناسبة.</p></td>
+     <td><p>تحديد مصنف التضاؤل الرياضي المطلوب تطبيقه. يحدد شكل المنحنى الخاص بانخفاض الملاءمة. راجع قسم <a href="/docs/ar/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف التضاؤل الصحيح</a> للحصول على إرشادات حول اختيار الدالة المناسبة.</p></td>
      <td><p><code translate="no">"gauss"</code> <code translate="no">"exp"</code> ، أو <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -324,7 +324,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">تنطبق على البحث الهجين</h3><p>يمكن أيضًا تطبيق مصنفات التضاؤل على عمليات البحث الهجين التي تجمع بين حقول متجهات متعددة:</p>

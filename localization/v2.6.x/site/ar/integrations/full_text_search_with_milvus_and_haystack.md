@@ -3,7 +3,7 @@ id: full_text_search_with_milvus_and_haystack.md
 summary: >-
   يوضح هذا البرنامج التعليمي كيفية تنفيذ البحث بالنص الكامل والبحث المختلط في
   تطبيقك باستخدام Haystack و Milvus.
-title: البحث في النص الكامل باستخدام ميلفوس وهايستاك
+title: البحث في النص الكامل مع ميلفوس وهايستاك
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -11,7 +11,7 @@ title: البحث في النص الكامل باستخدام ميلفوس وه�
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/full_text_search_with_milvus_and_haystack.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Full-text-search-with-Milvus-and-Haystack" class="common-anchor-header">البحث في النص الكامل باستخدام ميلفوس وهايستاك<button data-href="#Full-text-search-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
+<h1 id="Full-text-search-with-Milvus-and-Haystack" class="common-anchor-header">البحث في النص الكامل مع ميلفوس وهايستاك<button data-href="#Full-text-search-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,7 +28,7 @@ title: البحث في النص الكامل باستخدام ميلفوس وه�
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">البحث في النص الكامل</a> هو طريقة تقليدية لاسترجاع المستندات عن طريق مطابقة كلمات أو عبارات محددة في النص. يقوم بترتيب النتائج بناءً على درجات الملاءمة المحسوبة من عوامل مثل تكرار المصطلح. في حين أن البحث الدلالي أفضل في فهم المعنى والسياق، فإن البحث في النص الكامل يتفوق في مطابقة الكلمات المفتاحية بدقة، مما يجعله مكملاً مفيدًا للبحث الدلالي. تُستخدم خوارزمية BM25 على نطاق واسع للترتيب في البحث في النص الكامل وتلعب دورًا رئيسيًا في التوليد المعزز للاسترجاع (RAG).</p>
 <p>يقدم<a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">الإصدار Milvus 2.5</a> إمكانات البحث في النص الكامل الأصلي باستخدام BM25. يقوم هذا النهج بتحويل النص إلى متجهات متفرقة تمثل درجات BM25. يمكنك ببساطة إدخال نص أولي وسيقوم ميلفوس تلقائيًا بتوليد المتجهات المتفرقة وتخزينها، دون الحاجة إلى توليد تضمين يدوي متناثر.</p>
-<p>يدعم<a href="https://haystack.deepset.ai/">Haystack</a> الآن ميزة Milvus هذه، مما يجعل من السهل إضافة البحث عن النص الكامل إلى تطبيقات RAG. يمكنك الجمع بين البحث في النص الكامل مع البحث الدلالي عن المتجهات الكثيفة للحصول على نهج هجين يستفيد من كل من الفهم الدلالي ودقة مطابقة الكلمات الرئيسية. يعمل هذا الدمج على تحسين دقة البحث وتقديم نتائج أفضل للمستخدمين.</p>
+<p>يدعم<a href="https://haystack.deepset.ai/">Haystack</a> الآن ميزة Milvus هذه، مما يجعل من السهل إضافة البحث عن النص الكامل إلى تطبيقات RAG. يمكنك الجمع بين البحث في النص الكامل مع البحث الدلالي في المتجهات الكثيفة للحصول على نهج هجين يستفيد من كل من الفهم الدلالي ودقة مطابقة الكلمات الرئيسية. يعمل هذا الدمج على تحسين دقة البحث وتقديم نتائج أفضل للمستخدمين.</p>
 <p>يوضح هذا البرنامج التعليمي كيفية تنفيذ بحث النص الكامل والبحث المختلط في تطبيقك باستخدام Haystack و Milvus.</p>
 <p>لاستخدام مخزن Milvus المتجه، حدد خادم Milvus الخاص بك <code translate="no">URI</code> (واختيارياً مع <code translate="no">TOKEN</code>). لبدء تشغيل خادم Milvus، يمكنك إعداد خادم Milvus باتباع <a href="https://milvus.io/docs/install-overview.md">دليل تثبيت Milvus</a> أو ببساطة <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">تجربة Zilliz Cloud</a>(Milvus المدار بالكامل) مجانًا.</p>
 <div class="alert note">
@@ -115,7 +115,7 @@ document_store = MilvusDocumentStore(
             output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
     drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old collection if it exists and recreate it.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -174,7 +174,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
             output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
     drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old collection and recreate it.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -271,7 +271,7 @@ document_store = MilvusDocumentStore(
             enable_match=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Whether to enable match.</span>
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 

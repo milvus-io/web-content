@@ -827,7 +827,7 @@ english_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display English search results</span>
@@ -873,7 +873,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display English search results</span>
@@ -927,7 +927,7 @@ curl --request POST \
     &quot;drop_ratio_search&quot;: &quot;0&quot;  
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Use-Chinese-analyzer" class="common-anchor-header">Использование китайского анализатора</h3><p>Этот пример демонстрирует переключение на китайский анализатор (используя его псевдоним <code translate="no">&quot;cn&quot;</code>) для различных текстов запросов. Все остальные параметры остаются прежними, но теперь текст запроса обрабатывается с использованием правил токенизации, специфичных для китайского языка.</p>
@@ -942,7 +942,7 @@ chinese_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display Chinese search results</span>
@@ -985,7 +985,7 @@ searchResults = searchResp.getSearchResults();
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display Chinese search results</span>
@@ -1035,6 +1035,6 @@ curl --request POST \
     &quot;analyzer_name&quot;: &quot;cn&quot;
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

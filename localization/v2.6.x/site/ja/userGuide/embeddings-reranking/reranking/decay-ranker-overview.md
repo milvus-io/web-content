@@ -78,17 +78,17 @@ beta: Milvus 2.6.x
 <li><p>各ディケイランカーは生の数値を0～1の間で正規化された関連性スコアに変換します。</p></li>
 <li><p>減衰スコアは、理想的なポイントからの「距離」に基づいて、アイテムがどの程度関連性があるかを表します。</p></li>
 </ul>
-<p>具体的な計算式はディケイランカーのタイプによって異なります。ディケイスコアの計算方法の詳細については、<a href="/docs/ja/v2.6.x/gaussian-decay.md#Formula">ガウスディケイ</a>、<a href="/docs/ja/v2.6.x/exponential-decay.md#Formula">指数ディケイ</a>、<a href="/docs/ja/v2.6.x/linear-decay.md#Formula">線形ディケイの</a>専用ページを参照してください。</p>
+<p>具体的な計算式はディケイランカーのタイプによって異なります。ディケイスコアの計算方法の詳細については、<a href="/docs/ja/gaussian-decay.md#Formula">ガウスディケイ</a>、<a href="/docs/ja/exponential-decay.md#Formula">指数ディケイ</a>、<a href="/docs/ja/linear-decay.md#Formula">線形ディケイの</a>専用ページを参照してください。</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">ステージ 3: 最終スコアの計算</h3><p>最後に、Milvusは正規化された類似度スコアと減衰スコアを組み合わせ、最終的なランキングスコアを算出します：</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>ハイブリッド検索（複数のベクトルフィールドを組み合わせる）の場合、Milvusは検索リクエストの中で正規化類似度スコアが最大のものを採用する：</p>
+<p>ハイブリッド検索（複数のベクトルフィールドを組み合わせる）の場合、Milvusは検索リクエストの中から正規化類似度スコアの最大値を取ります：</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>例えば、ある研究論文がベクトル類似度で0.82、BM25ベースのテキスト検索で0.91のハイブリッド検索を行った場合、Milvusは減衰係数を適用する前に0.91を基本類似度スコアとして使用します。</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">ディケイ・ランキングの実例</h3><p>実用的なシナリオでディケイ・ランキングを見てみよう-時間ベースのディケイを使った<strong>「AI研究論文」の</strong>検索である：</p>
 <div class="alert note">
-<p>この例では、減衰スコアは時間とともに関連性がどのように低下するかを反映しています。これらの値は、特定の減衰ランカーを使用して計算されます。詳細は「<a href="/docs/ja/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">正しいディケイランカーを選ぶ</a>」を参照してください。</p>
+<p>この例では、減衰スコアは時間とともに関連性がどのように低下するかを反映しています。これらの値は、特定の減衰ランカーを使用して計算されます。詳細は「<a href="/docs/ja/decay-ranker-overview.md#Choose-the-right-decay-ranker">正しいディケイランカーを選ぶ</a>」を参照してください。</p>
 </div>
 <table>
    <tr>
@@ -199,9 +199,9 @@ beta: Milvus 2.6.x
 </table>
 <p>各ディケイ・ランカーのスコアの計算方法や具体的な減少パターンについての詳細は、専用のドキュメントを参照してください：</p>
 <ul>
-<li><p><a href="/docs/ja/v2.6.x/gaussian-decay.md">ガウス崩壊</a></p></li>
-<li><p><a href="/docs/ja/v2.6.x/exponential-decay.md">指数関数的減衰</a></p></li>
-<li><p><a href="/docs/ja/v2.6.x/exponential-decay.md">指数関数的減衰</a></p></li>
+<li><p><a href="/docs/ja/gaussian-decay.md">ガウス崩壊</a></p></li>
+<li><p><a href="/docs/ja/exponential-decay.md">指数関数的減衰</a></p></li>
+<li><p><a href="/docs/ja/exponential-decay.md">指数関数的減衰</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">実装例<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,7 +220,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>ディケイランカーはmilvusの標準的なベクトル検索とハイブリッド検索の両方に適用することができます。以下はこの機能を実装するための主要なコードスニペットです。</p>
 <div class="alert note">
-<p>減衰関数を使用する前に、まず減衰計算に使用する適切な数値フィールド（タイムスタンプ、距離など）を持つコレクションを作成する必要があります。コレクションのセットアップ、スキーマ定義、データ挿入を含む完全な作業例については、<a href="/docs/ja/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">チュートリアルを</a>参照してください<a href="/docs/ja/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">：Milvusでタイムベースランキングを実装するを</a>参照してください。</p>
+<p>減衰関数を使用する前に、まず減衰計算に使用する適切な数値フィールド（タイムスタンプ、距離など）を持つコレクションを作成する必要があります。コレクションのセットアップ、スキーマ定義、データ挿入を含む完全な作業例については、<a href="/docs/ja/tutorial-implement-a-time-based-ranking-in-milvus.md">チュートリアルを</a>参照してください<a href="/docs/ja/tutorial-implement-a-time-based-ranking-in-milvus.md">：Milvusでタイムベースランキングを実装するを</a>参照してください。</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">ディケイランカーの作成</h3><p>ディケイランキングを実装するには、まず<code translate="no">Function</code> オブジェクトを適切な設定で定義します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -275,7 +275,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>はい</p></td>
-     <td><p>どの数学的ディケイランカーを適用するかを指定します。適切な関数を選択するためのガイダンスについては、<a href="/docs/ja/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>セクションを参照してください。</p></td>
+     <td><p>どの数学的ディケイランカーを適用するかを指定します。適切な関数を選択するためのガイダンスについては、<a href="/docs/ja/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>セクションを参照してください。</p></td>
      <td><p><code translate="no">"gauss"</code> <code translate="no">"exp"</code> または<code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -308,7 +308,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p><code translate="no">scale</code> 距離におけるスコア値で、曲線の急勾配を制御する。値が低いほど急峻な減少カーブを描き、値が高いほど緩やかな減少カーブを描く。 0 から 1 の間でなければならない。</p></td>
+     <td><p><code translate="no">scale</code> 距離におけるスコア値で、曲線の急峻さを制御する。値が低いほど急峻な減少カーブを描き、値が高いほど緩やかな減少カーブを描く。 0 から 1 の間でなければならない。</p></td>
      <td><p><code translate="no">0.5</code> (デフォルト)</p></td>
    </tr>
 </table>
@@ -321,7 +321,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用</h3><p>ディケイランカーは複数のベクトルフィールドを組み合わせたハイブリッド検索にも適用できます：</p>

@@ -27,7 +27,7 @@ title: Создайте RAG с помощью Milvus и Ollama
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://ollama.com/">Ollama</a> - это платформа с открытым исходным кодом, которая упрощает запуск и настройку больших языковых моделей (LLM) на локальном уровне. Она обеспечивает удобство использования без облачных вычислений, позволяя легко загружать, устанавливать и взаимодействовать с моделями, не требуя при этом высоких технических навыков. Благодаря растущей библиотеке предварительно обученных LLM - от общего назначения до специфических для конкретной области - Allama позволяет легко управлять моделями и настраивать их для различных приложений. Она обеспечивает конфиденциальность данных и гибкость, позволяя пользователям точно настраивать, оптимизировать и внедрять решения на основе ИИ исключительно на своих машинах.</p>
+    </button></h1><p><a href="https://ollama.com/">Ollama</a> - это платформа с открытым исходным кодом, которая упрощает запуск и настройку больших языковых моделей (LLM) на локальном уровне. Она обеспечивает удобство использования без облачных вычислений, позволяя легко загружать модели, устанавливать их и взаимодействовать с ними, не требуя продвинутых технических навыков. Благодаря растущей библиотеке предварительно обученных LLM - от общего назначения до специфических для конкретной области - Allama позволяет легко управлять моделями и настраивать их для различных приложений. Она обеспечивает конфиденциальность данных и гибкость, позволяя пользователям точно настраивать, оптимизировать и внедрять решения на основе ИИ исключительно на своих машинах.</p>
 <p>В этом руководстве мы покажем вам, как использовать Ollama и Milvus для эффективного и безопасного построения конвейера RAG (Retrieval-Augmented Generation).</p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ title: Создайте RAG с помощью Milvus и Ollama
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Зависимости и окружение</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus ollama</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей может потребоваться <strong>перезапуск среды выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </div>
 <h3 id="Prepare-the-data" class="common-anchor-header">Подготовьте данные</h3><p>Мы используем страницы FAQ из <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> в качестве частных знаний в нашем RAG, что является хорошим источником данных для простого RAG-конвейера.</p>
 <p>Скачайте zip-файл и распакуйте документы в папку <code translate="no">milvus_docs</code>.</p>
@@ -167,7 +167,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>Пройдитесь по текстовым строкам, создайте вкрапления, а затем вставьте данные в Milvus.</p>

@@ -49,7 +49,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>A classificação de decaimento não pode ser utilizada com pesquisas de agrupamento.</p></li>
-<li><p>O campo utilizado para a classificação de decaimento tem de ser numérico (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, ou <code translate="no">DOUBLE</code>).</p></li>
+<li><p>O campo utilizado para a classificação de desvalorização tem de ser numérico (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, ou <code translate="no">DOUBLE</code>).</p></li>
 <li><p>Cada classificador de desvalorização só pode utilizar um campo numérico.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Como funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -67,7 +67,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A classificação decrescente melhora a pesquisa vetorial tradicional ao incorporar factores numéricos como o tempo ou a distância geográfica no processo de classificação. O processo completo segue as seguintes etapas:</p>
+    </button></h2><p>A classificação decrescente melhora a pesquisa vetorial tradicional, incorporando factores numéricos como o tempo ou a distância geográfica no processo de classificação. O processo completo segue as seguintes etapas:</p>
 <h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Etapa 1: Calcular as pontuações de semelhança normalizadas</h3><p>Primeiro, o Milvus calcula e normaliza as pontuações de similaridade dos vectores para garantir uma comparação consistente:</p>
 <ul>
 <li><p>Para as métricas de distância <strong>L2</strong> e <strong>JACCARD</strong> (em que valores mais baixos indicam maior semelhança):</p>
@@ -81,7 +81,7 @@ beta: Milvus 2.6.x
 <li><p>Cada classificador de deterioração transforma valores numéricos brutos em pontuações de relevância normalizadas entre 0-1</p></li>
 <li><p>A pontuação de deterioração representa o grau de relevância de um item com base na sua "distância" do ponto ideal</p></li>
 </ul>
-<p>A fórmula de cálculo específica varia consoante o tipo de classificador de deterioração. Para obter detalhes sobre como calcular uma pontuação de decaimento, consulte as páginas dedicadas ao <a href="/docs/pt/v2.6.x/gaussian-decay.md#Formula">Decaimento gaussiano</a>, Decaimento <a href="/docs/pt/v2.6.x/exponential-decay.md#Formula">exponencial</a> e <a href="/docs/pt/v2.6.x/linear-decay.md#Formula">Decaimento linear</a>.</p>
+<p>A fórmula de cálculo específica varia consoante o tipo de classificador de deterioração. Para obter detalhes sobre como calcular uma pontuação de decaimento, consulte as páginas dedicadas ao <a href="/docs/pt/gaussian-decay.md#Formula">Decaimento gaussiano</a>, Decaimento <a href="/docs/pt/exponential-decay.md#Formula">exponencial</a> e <a href="/docs/pt/linear-decay.md#Formula">Decaimento linear</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Etapa 3: Calcular as pontuações finais</h3><p>Finalmente, o Milvus combina a pontuação de similaridade normalizada e a pontuação de decaimento para produzir a pontuação de classificação final:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -91,7 +91,7 @@ beta: Milvus 2.6.x
 <p>Por exemplo, se um artigo de investigação tiver uma pontuação de 0,82 na similaridade vetorial e 0,91 na recuperação de texto com base no BM25 numa pesquisa híbrida, o Milvus utiliza 0,91 como pontuação de similaridade de base antes de aplicar o fator de decaimento.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Classificação decrescente em ação</h3><p>Vejamos a classificação decrescente num cenário prático - pesquisa de <strong>"artigos de investigação de IA"</strong> com decrescimento baseado no tempo:</p>
 <div class="alert note">
-<p>Neste exemplo, as pontuações de decaimento reflectem a forma como a relevância diminui com o tempo - os documentos mais recentes recebem pontuações mais próximas de 1,0, os documentos mais antigos recebem pontuações mais baixas. Estes valores são calculados utilizando um classificador de decaimento específico. Para obter detalhes, consulte <a href="/docs/pt/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Escolher o classificador de deterioração correto</a>.</p>
+<p>Neste exemplo, as pontuações de decaimento reflectem a forma como a relevância diminui com o tempo - os documentos mais recentes recebem pontuações mais próximas de 1,0, os documentos mais antigos recebem pontuações mais baixas. Estes valores são calculados utilizando um classificador de decaimento específico. Para obter detalhes, consulte <a href="/docs/pt/decay-ranker-overview.md#Choose-the-right-decay-ranker">Escolher o classificador de deterioração correto</a>.</p>
 </div>
 <table>
    <tr>
@@ -142,7 +142,7 @@ beta: Milvus 2.6.x
 </table>
 <p>Sem o decay reranking, o Documento B teria a classificação mais elevada com base na semelhança vetorial pura (0,92). No entanto, com a classificação decrescente aplicada:</p>
 <ul>
-<li><p>O artigo C salta para a posição #1 apesar da similaridade média porque é muito recente (publicado ontem)</p></li>
+<li><p>O artigo C salta para a posição #1, apesar da similaridade média, porque é muito recente (publicado ontem)</p></li>
 <li><p>O artigo B desce para a posição #3, apesar da excelente semelhança, porque é relativamente antigo</p></li>
 <li><p>O artigo D utiliza a distância L2 (em que quanto menor for, melhor), pelo que a sua pontuação é normalizada de 1,2 para 0,76 antes de aplicar a desclassificação</p></li>
 </ul>
@@ -202,9 +202,9 @@ beta: Milvus 2.6.x
 </table>
 <p>Para obter informações detalhadas sobre como cada classificador de decaimento calcula as pontuações e os padrões de declínio específicos, consulte a documentação dedicada:</p>
 <ul>
-<li><p><a href="/docs/pt/v2.6.x/gaussian-decay.md">Decaimento Gaussiano</a></p></li>
-<li><p><a href="/docs/pt/v2.6.x/exponential-decay.md">Decaimento exponencial</a></p></li>
-<li><p><a href="/docs/pt/v2.6.x/exponential-decay.md">Decaimento exponencial</a></p></li>
+<li><p><a href="/docs/pt/gaussian-decay.md">Decaimento Gaussiano</a></p></li>
+<li><p><a href="/docs/pt/exponential-decay.md">Decaimento exponencial</a></p></li>
+<li><p><a href="/docs/pt/exponential-decay.md">Decaimento exponencial</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Exemplo de implementação<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Os classificadores de decaimento podem ser aplicados tanto à pesquisa vetorial padrão como às operações de pesquisa híbrida em Milvus. Abaixo estão os principais trechos de código para implementar esse recurso.</p>
 <div class="alert note">
-<p>Antes de utilizar as funções de decaimento, deve primeiro criar uma coleção com campos numéricos apropriados (como carimbos de data/hora, distâncias, etc.) que serão utilizados para cálculos de decaimento. Para obter exemplos de trabalho completos, incluindo a configuração da coleção, a definição do esquema e a inserção de dados, consulte <a href="/docs/pt/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implementar classificação baseada no tempo em Milvus</a>.</p>
+<p>Antes de utilizar as funções de decaimento, deve primeiro criar uma coleção com campos numéricos apropriados (como carimbos de data/hora, distâncias, etc.) que serão utilizados para cálculos de decaimento. Para obter exemplos de trabalho completos, incluindo a configuração da coleção, a definição do esquema e a inserção de dados, consulte <a href="/docs/pt/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implementar classificação baseada no tempo em Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Criar um classificador de decaimento</h3><p>Para implementar a classificação por decaimento, primeiro defina um objeto <code translate="no">Function</code> com a configuração apropriada:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -278,7 +278,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Especifica qual o classificador matemático de redução a aplicar. Determina a forma da curva de declínio da relevância. Consulte a secção <a href="/docs/pt/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Escolher o classificador de decaimento correto</a> para obter orientação sobre como selecionar a função adequada.</p></td>
+     <td><p>Especifica qual o classificador matemático de redução a aplicar. Determina a forma da curva de declínio da relevância. Consulte a secção <a href="/docs/pt/decay-ranker-overview.md#Choose-the-right-decay-ranker">Escolher o classificador de decaimento correto</a> para obter orientação sobre como selecionar a função adequada.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, ou <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -324,7 +324,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida</h3><p>Os classificadores de decaimento também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vectoriais:</p>

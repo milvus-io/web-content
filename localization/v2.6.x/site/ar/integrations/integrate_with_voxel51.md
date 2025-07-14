@@ -77,7 +77,7 @@ title: إجراء عمليات بحث في الرؤية باستخدام Milvus 
     </button></h2><p>سير العمل الأساسي لاستخدام ميلفوس لإنشاء فهرس تشابه على مجموعات بيانات فيفتي ون واستخدامه للاستعلام عن بياناتك هو كالتالي</p>
 <ol>
 <li>تحميل <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">مجموعة بيانات</a> إلى FiftyOne</li>
-<li>احسب التضمينات المتجهة للعينات أو الرقع في مجموعة البيانات الخاصة بك، أو حدد نموذجًا لاستخدامه في إنشاء التضمينات.</li>
+<li>احسب التضمينات المتجهة للعينات أو البقع في مجموعة البيانات الخاصة بك، أو حدد نموذجًا لاستخدامه في إنشاء التضمينات.</li>
 <li>استخدم <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> الطريقة لإنشاء فهرس تشابه ميلفوس للعينات أو رقع الكائنات في مجموعة البيانات عن طريق تعيين المعلمة <code translate="no">backend=&quot;milvus&quot;</code> وتحديد <code translate="no">brain_key</code> من اختيارك.</li>
 <li>استخدم فهرس تشابه ميلفوس هذا للاستعلام عن بياناتك باستخدام <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.sort_by_similarity"><code translate="no">sort_by_similarity()</code></a>.</li>
 <li>إذا رغبت في ذلك، احذف الفهرس.</li>
@@ -155,7 +155,7 @@ milvus_index.delete()
 
 fob.compute_similarity(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
 <button class="copy-code-btn"></button></code></pre>
-<p>بدلاً من ذلك، يمكنك تهيئة FiftyOne بشكل دائم لاستخدام الواجهة الخلفية لـ Milvus من خلال تعيين متغير البيئة التالي</p>
+<p>بدلاً من ذلك، يمكنك تهيئة FiftyOne بشكل دائم لاستخدام الواجهة الخلفية لـ Milvus عن طريق تعيين متغير البيئة التالي</p>
 <pre><code translate="no" class="language-shell">export FIFTYONE_BRAIN_DEFAULT_SIMILARITY_BACKEND=milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>أو عن طريق تعيين المعلمة <code translate="no">default_similarity_backend</code> من <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">تكوين الدماغ</a> الموجود في <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
@@ -281,7 +281,7 @@ milvus_index = fob.compute_similarity(
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">إدارة عمليات تشغيل الدماغ<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">

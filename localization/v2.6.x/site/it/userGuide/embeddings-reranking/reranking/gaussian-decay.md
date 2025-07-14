@@ -54,7 +54,7 @@ beta: Milvus 2.6.x
    <tr>
      <th><p>Caso d'uso</p></th>
      <th><p>Esempio</p></th>
-     <th><p>Perché il decadimento gaussiano funziona bene</p></th>
+     <th><p>Perché la gaussiana funziona bene</p></th>
    </tr>
    <tr>
      <td><p>Ricerche basate sulla posizione</p></td>
@@ -93,7 +93,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il decadimento gaussiano crea una curva liscia, a forma di campana, che riduce gradualmente la rilevanza all'aumentare della distanza da un punto ideale. Questa distribuzione, che prende il nome dal matematico Carl Friedrich Gauss, compare spesso in natura e in statistica, il che spiega perché sia così intuitiva per la percezione umana.</p>
+    </button></h2><p>Il decadimento gaussiano crea una curva regolare a forma di campana che riduce gradualmente la rilevanza all'aumentare della distanza da un punto ideale. Questa distribuzione, che prende il nome dal matematico Carl Friedrich Gauss, compare spesso in natura e in statistica, il che spiega perché sia così intuitiva per la percezione umana.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gaussian-decay.png" alt="Gaussian Decay" class="doc-image" id="gaussian-decay" />
@@ -181,7 +181,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],  <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Applica alla ricerca ibrida</h3><p>I ranker di decadimento possono essere applicati anche alle operazioni di ricerca ibrida che combinano più campi vettoriali:</p>

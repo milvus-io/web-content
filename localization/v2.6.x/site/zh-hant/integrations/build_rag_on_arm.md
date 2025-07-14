@@ -70,7 +70,7 @@ $ <span class="hljs-built_in">source</span> venv/bin/activate
       </svg>
     </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">建立資料集</h3><p>我們使用部署在 AWS 上的<a href="https://zilliz.com/cloud">Zilliz Cloud</a>與 Arm 型機器來儲存與擷取向量資料。若要快速上手，只需在 Zilliz Cloud 免費<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">註冊一個帳號</a>。</p>
 <div class="alert note">
-<p>除了 Zilliz Cloud 之外，自我託管的 Milvus 也是一個選擇（設定比較複雜）。我們也可以在以 ARM 為基礎的機器上部署<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>。有關 Milvus 安裝的詳細資訊，請參閱安裝<a href="https://milvus.io/docs/install-overview.md">說明文件</a>。</p>
+<p>除了 Zilliz Cloud 之外，自我託管的 Milvus 也是一個選擇（設定較複雜）。我們也可以在以 ARM 為基礎的機器上部署<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>。有關 Milvus 安裝的詳細資訊，請參閱安裝<a href="https://milvus.io/docs/install-overview.md">說明文件</a>。</p>
 </div>
 <p>我們在 Zilliz Cloud 設定<code translate="no">uri</code> 和<code translate="no">token</code> 為<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -92,7 +92,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我們使用內乘距離作為預設的度量類型。如需更多關於距離類型的資訊，您可以參考<a href="https://milvus.io/docs/metric.md?tab=floating">相似度量頁面</a></p>

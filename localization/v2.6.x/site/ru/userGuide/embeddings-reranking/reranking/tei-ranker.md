@@ -23,8 +23,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TEI Ranker использует сервис <a href="/docs/ru/v2.6.x/tei-ranker.md">Text Embedding Inference (TEI)</a> от Hugging Face для повышения релевантности поиска путем семантического ранжирования. Он представляет собой продвинутый подход к упорядочиванию результатов поиска, выходящий за рамки традиционного векторного сходства.</p>
-<p>По сравнению с <a href="/docs/ru/v2.6.x/vllm-ranker.md">vLLM Ranker</a>, TEI Ranker предлагает простую интеграцию с экосистемой Hugging Face и предварительно обученными моделями ранжирования, что делает его идеальным для приложений, где простота развертывания и обслуживания являются приоритетами.</p>
+    </button></h1><p>TEI Ranker использует сервис <a href="/docs/ru/tei-ranker.md">Text Embedding Inference (TEI)</a> от Hugging Face для повышения релевантности поиска путем семантического ранжирования. Он представляет собой продвинутый подход к упорядочиванию результатов поиска, выходящий за рамки традиционного векторного сходства.</p>
+<p>По сравнению с <a href="/docs/ru/vllm-ranker.md">vLLM Ranker</a>, TEI Ranker предлагает простую интеграцию с экосистемой Hugging Face и предварительно обученными моделями ранжирования, что делает его идеальным для приложений, где простота развертывания и обслуживания являются приоритетами.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +110,7 @@ tei_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Общие параметры, общие для всех ранжировщиков моделей (например, <code translate="no">provider</code>, <code translate="no">queries</code>), см. в разделе <a href="/docs/ru/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Создание ранжировщика моделей</a>.</p>
+<p>Общие параметры, общие для всех ранжировщиков моделей (например, <code translate="no">provider</code>, <code translate="no">queries</code>), см. в разделе <a href="/docs/ru/model-ranker-overview.md#Create-a-model-ranker">Создание ранжировщика моделей</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Применение к стандартному векторному поиску<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,7 +136,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                         <span class="hljs-comment"># Apply tei reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Применить к гибридному поиску<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

@@ -2,7 +2,7 @@
 id: vllm-ranker.md
 title: Classificador vLLMCompatible with Milvus 2.6.x
 summary: >-
-  O vLLM Ranker utiliza a estrutura de inferência vLLM para melhorar a
+  O vLLM Ranker aproveita a estrutura de inferência vLLM para melhorar a
   relevância da pesquisa através da classificação semântica. Representa uma
   abordagem avançada à ordenação de resultados de pesquisa que vai além da
   tradicional semelhança de vectores.
@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>Sistemas de apoio ao cliente que precisam de fazer corresponder os problemas dos utilizadores a soluções relevantes</p></li>
 <li><p>Pesquisa de comércio eletrónico que tem de compreender os atributos do produto e a intenção do utilizador</p></li>
 </ul>
-<p>Comparado ao <a href="/docs/pt/v2.6.x/tei-ranker.md">TEI Ranker</a>, o vLLM Ranker oferece maior flexibilidade na seleção e personalização de modelos, tornando-o ideal para aplicações de pesquisa especializadas ou complexas, em que as opções de configuração adicionais oferecem benefícios significativos.</p>
+<p>Comparado ao <a href="/docs/pt/tei-ranker.md">TEI Ranker</a>, o vLLM Ranker oferece maior flexibilidade na seleção e personalização de modelos, tornando-o ideal para aplicações de pesquisa especializadas ou complexas, nas quais as opções de configuração adicionais oferecem benefícios significativos.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Para parâmetros gerais partilhados por todos os classificadores de modelos (por exemplo, <code translate="no">provider</code>, <code translate="no">queries</code>), consulte <a href="/docs/pt/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Criar um classificador de modelos</a>.</p>
+<p>Para parâmetros gerais partilhados por todos os classificadores de modelos (por exemplo, <code translate="no">provider</code>, <code translate="no">queries</code>), consulte <a href="/docs/pt/model-ranker-overview.md#Create-a-model-ranker">Criar um classificador de modelos</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa vetorial padrão<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

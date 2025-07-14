@@ -34,7 +34,7 @@ beta: Milvus 2.6.x
 <li><p>La désintégration gaussienne suit une courbe en cloche qui se rapproche progressivement de zéro sans jamais l'atteindre</p></li>
 <li><p>La décroissance exponentielle maintient une longue queue de pertinence minimale qui s'étend indéfiniment.</p></li>
 </ul>
-<p>La décroissance linéaire crée uniquement un point final définitif, ce qui la rend particulièrement efficace pour les applications comportant des limites naturelles ou des délais.</p>
+<p>La décroissance linéaire crée un point final unique, ce qui la rend particulièrement efficace pour les applications comportant des limites naturelles ou des échéances.</p>
 <h2 id="When-to-use-linear-decay" class="common-anchor-header">Quand utiliser la décroissance linéaire ?<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +80,7 @@ beta: Milvus 2.6.x
 </table>
 <p>Choisissez la décroissance linéaire lorsque :</p>
 <ul>
-<li><p>Votre application a une limite naturelle, une date limite ou un seuil.</p></li>
+<li><p>Votre application a une limite naturelle, un délai ou un seuil.</p></li>
 <li><p>Les éléments dépassant un certain seuil doivent être complètement exclus des résultats.</p></li>
 <li><p>Vous avez besoin d'un taux prévisible et cohérent de déclin de la pertinence.</p></li>
 <li><p>Les utilisateurs doivent voir une démarcation claire entre les éléments pertinents et ceux qui ne le sont pas.</p></li>
@@ -192,7 +192,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de décroissance peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>

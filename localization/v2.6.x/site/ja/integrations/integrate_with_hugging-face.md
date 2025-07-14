@@ -22,7 +22,7 @@ title: milvusとハグ顔を使った質問応答
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>意味検索に基づく質問応答システムは、与えられた質問に対する質問と答えのペアのデータセットから最も類似した質問を見つけることによって機能する。最も類似した質問が特定されると、データセットから対応する答えがその質問に対する答えとみなされる。このアプローチは、質問間の類似性を決定し、関連する答えを検索するために、意味的類似性尺度に依存します。</p>
+<p>意味検索に基づく質問応答システムは、与えられた質問に対する質問と答えのペアのデータセットから最も類似した質問を見つけることによって機能する。最も類似した質問が特定されると、データセットから対応する答えがクエリの答えとみなされる。このアプローチは、質問間の類似性を決定し、関連する答えを検索するために、意味的類似性尺度に依存します。</p>
 <p>このチュートリアルでは、データ処理のためのデータローダーと埋め込みジェネレーターとして<a href="https://huggingface.co">Hugging Faceを</a>、意味検索のためのベクトルデータベースとして<a href="https://milvus.io">Milvusを</a>使用して、質問応答システムを構築する方法を示します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">始める前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,7 +166,7 @@ milvus_client.create_collection(
     auto_id=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable auto id</span>
     enable_dynamic_field=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable dynamic fields</span>
     vector_field_name=<span class="hljs-string">&quot;question_embedding&quot;</span>,  <span class="hljs-comment"># Map vector field name and embedding column in dataset</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

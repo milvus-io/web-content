@@ -44,7 +44,7 @@ title: بناء RAG على بنية Arm
       </svg>
     </button></h2><p>لتشغيل هذا المثال، نوصيك باستخدام <a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton،</a> الذي يوفر طريقة فعالة من حيث التكلفة لتشغيل أحمال عمل التعلم الآلي على الخوادم القائمة على الذراع. تم اختبار هذا الكمبيوتر الدفتري على مثيل AWS Graviton3 <code translate="no">c7g.2xlarge</code> مع نظام Ubuntu 22.04 LTS.</p>
 <p>تحتاج إلى أربعة أنوية على الأقل وذاكرة وصول عشوائي بسعة 8 جيجابايت لتشغيل هذا المثال. قم بتكوين تخزين القرص حتى 32 جيجابايت على الأقل. نوصي باستخدام مثيل بنفس المواصفات أو أفضل.</p>
-<p>بعد تشغيل المثيل، قم بالاتصال به وتشغيل الأوامر التالية لإعداد البيئة.</p>
+<p>بعد تشغيل المثيل، اتصل به وقم بتشغيل الأوامر التالية لإعداد البيئة.</p>
 <p>تثبيت بايثون على الخادم:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt update
 $ <span class="hljs-built_in">sudo</span> apt install python-is-python3 python3-pip python3-venv -y
@@ -95,7 +95,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>نستخدم مسافة الضرب الداخلي كنوع القياس الافتراضي. لمزيد من المعلومات حول أنواع المسافات، يمكنك الرجوع إلى <a href="https://milvus.io/docs/metric.md?tab=floating">صفحة مقاييس التشابه</a></p>
@@ -299,4 +299,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Milvus stores data in two types: inserted data and metadata. Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends such as MinIO, AWS S3, Google Cloud Storage (GCS), Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage (COS). Metadata are generated within Milvus and each Milvus module has its own metadata that are stored in etcd.
 </code></pre>
-<p>تهانينا! لقد قمت ببناء تطبيق RAG فوق البنى التحتية القائمة على الذراع.</p>
+<p>تهانينا! لقد قمت ببناء تطبيق RAG على رأس البنى التحتية القائمة على الذراع.</p>

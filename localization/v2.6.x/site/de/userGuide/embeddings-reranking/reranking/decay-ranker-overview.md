@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Bei der herkömmlichen Vektorsuche werden die Ergebnisse ausschließlich nach der Vektorähnlichkeit eingestuft, d. h. danach, wie gut die Vektoren im mathematischen Raum übereinstimmen. In realen Anwendungen hängt die tatsächliche Relevanz von Inhalten jedoch oft von mehr als nur semantischer Ähnlichkeit ab.</p>
+    </button></h1><p>Bei der herkömmlichen Vektorsuche werden die Ergebnisse ausschließlich nach der Vektorähnlichkeit eingestuft, d. h. danach, wie gut die Vektoren im mathematischen Raum übereinstimmen. In realen Anwendungen hängt die wirkliche Relevanz von Inhalten jedoch oft von mehr als nur semantischer Ähnlichkeit ab.</p>
 <p>Betrachten Sie diese alltäglichen Szenarien:</p>
 <ul>
 <li><p>Eine Nachrichtensuche, bei der der Artikel von gestern höher bewertet werden sollte als ein ähnlicher Artikel von vor drei Jahren</p></li>
@@ -81,17 +81,17 @@ beta: Milvus 2.6.x
 <li><p>Jeder Decay Ranker wandelt rohe numerische Werte in normalisierte Relevanzwerte zwischen 0-1 um.</p></li>
 <li><p>Der Decay-Score gibt an, wie relevant ein Element ist, basierend auf seiner "Entfernung" vom idealen Punkt.</p></li>
 </ul>
-<p>Die spezifische Berechnungsformel variiert je nach Typ des Decay Rankers. Einzelheiten zur Berechnung eines Zerfallswertes finden Sie auf den entsprechenden Seiten für <a href="/docs/de/v2.6.x/gaussian-decay.md#Formula">Gauß'schen Zerfall</a>, <a href="/docs/de/v2.6.x/exponential-decay.md#Formula">Exponentialzerfall</a> und <a href="/docs/de/v2.6.x/linear-decay.md#Formula">linearen Zerfall</a>.</p>
+<p>Die spezifische Berechnungsformel variiert je nach Typ des Decay Rankers. Einzelheiten zur Berechnung eines Zerfallswertes finden Sie auf den entsprechenden Seiten für <a href="/docs/de/gaussian-decay.md#Formula">Gauß'schen Zerfall</a>, <a href="/docs/de/exponential-decay.md#Formula">Exponentialzerfall</a> und <a href="/docs/de/linear-decay.md#Formula">linearen Zerfall</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Stufe 3: Berechnen der endgültigen Punktzahlen</h3><p>Abschließend kombiniert Milvus die normalisierte Ähnlichkeitsbewertung und die Abklingbewertung, um die endgültige Ranglistenbewertung zu erstellen:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Im Falle einer hybriden Suche (Kombination mehrerer Vektorfelder) nimmt Milvus die maximale normalisierte Ähnlichkeitsbewertung unter den Suchanfragen:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn beispielsweise eine Forschungsarbeit bei einer hybriden Suche 0,82 bei der Vektorähnlichkeit und 0,91 beim BM25-basierten Text-Retrieval erzielt, verwendet Milvus 0,91 als Basisähnlichkeitswert, bevor der Decay-Faktor angewendet wird.</p>
+<p>Wenn beispielsweise eine Forschungsarbeit bei einer hybriden Suche 0,82 bei der Vektorähnlichkeit und 0,91 beim BM25-basierten Text-Retrieval erreicht, verwendet Milvus 0,91 als Basisähnlichkeitswert, bevor der Decay-Faktor angewendet wird.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Decay-Ranking in Aktion</h3><p>Schauen wir uns das Decay-Ranking in einem praktischen Szenario an - bei der Suche nach <strong>"AI-Forschungsarbeiten"</strong> mit zeitbasiertem Decay:</p>
 <div class="alert note">
-<p>In diesem Beispiel spiegeln die Decay-Scores wider, wie die Relevanz mit der Zeit abnimmt - neuere Arbeiten erhalten Scores, die näher an 1,0 liegen, ältere Arbeiten erhalten niedrigere Scores. Diese Werte werden mit Hilfe eines speziellen Zerfalls-Rankers berechnet. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Wählen Sie den richtigen Decay Ranker</a>.</p>
+<p>In diesem Beispiel spiegeln die Decay-Scores wider, wie die Relevanz mit der Zeit abnimmt - neuere Arbeiten erhalten Scores, die näher an 1,0 liegen, ältere Arbeiten erhalten niedrigere Scores. Diese Werte werden mit Hilfe eines speziellen Zerfalls-Rankers berechnet. Weitere Informationen finden Sie unter <a href="/docs/de/decay-ranker-overview.md#Choose-the-right-decay-ranker">Wählen Sie den richtigen Decay Ranker</a>.</p>
 </div>
 <table>
    <tr>
@@ -161,7 +161,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus bietet verschiedene Decay Ranker an - <code translate="no">gauss</code>, <code translate="no">exp</code>, <code translate="no">linear</code>, die jeweils für spezielle Anwendungsfälle entwickelt wurden:</p>
+    </button></h2><p>Milvus bietet verschiedene Decay Ranker an - <code translate="no">gauss</code>, <code translate="no">exp</code>, <code translate="no">linear</code>, die jeweils für spezifische Anwendungsfälle entwickelt wurden:</p>
 <table>
    <tr>
      <th><p>Abkling-Rangierer</p></th>
@@ -202,9 +202,9 @@ beta: Milvus 2.6.x
 </table>
 <p>Detaillierte Informationen darüber, wie jeder Decay Ranker die Punktzahlen und spezifischen Abnahmemuster berechnet, finden Sie in der entsprechenden Dokumentation:</p>
 <ul>
-<li><p><a href="/docs/de/v2.6.x/gaussian-decay.md">Gaußscher Zerfall</a></p></li>
-<li><p><a href="/docs/de/v2.6.x/exponential-decay.md">Exponentialer Zerfall</a></p></li>
-<li><p><a href="/docs/de/v2.6.x/exponential-decay.md">Exponentialer Zerfall</a></p></li>
+<li><p><a href="/docs/de/gaussian-decay.md">Gaußscher Zerfall</a></p></li>
+<li><p><a href="/docs/de/exponential-decay.md">Exponentialer Zerfall</a></p></li>
+<li><p><a href="/docs/de/exponential-decay.md">Exponentialer Zerfall</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Beispiel für die Implementierung<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Decay Rankers können sowohl auf die Standard-Vektorsuche als auch auf hybride Suchoperationen in Milvus angewendet werden. Im Folgenden finden Sie die wichtigsten Codeschnipsel für die Implementierung dieser Funktion.</p>
 <div class="alert note">
-<p>Bevor Sie Abklingfunktionen verwenden, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempel, Entfernungen usw.) erstellen, die für Abklingberechnungen verwendet werden sollen. Vollständige Arbeitsbeispiele, einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneinfügung, finden Sie im <a href="/docs/de/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Zeitbasiertes Ranking in Milvus implementieren</a>.</p>
+<p>Bevor Sie Abklingfunktionen verwenden, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempel, Entfernungen usw.) erstellen, die für Abklingberechnungen verwendet werden sollen. Vollständige Arbeitsbeispiele, einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneinfügung, finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Zeitbasiertes Ranking in Milvus implementieren</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Um das Decay-Ranking zu implementieren, definieren Sie zunächst ein <code translate="no">Function</code> Objekt mit der entsprechenden Konfiguration:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -259,7 +259,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Numerisches Feld für die Berechnung der Abklingrate. Bestimmt, welches Datenattribut für die Berechnung des Verfalls verwendet wird (z. B. Zeitstempel für zeitbasierten Verfall, Koordinaten für ortsbezogenen Verfall). 
+     <td><p>Numerisches Feld für die Berechnung der Abklingrate. Legt fest, welches Datenattribut für die Berechnung des Verfalls verwendet wird (z. B. Zeitstempel für zeitbasierten Verfall, Koordinaten für ortsbezogenen Verfall). 
  Muss ein Feld in Ihrer Sammlung sein, das relevante numerische Werte enthält. Unterstützt INT8/16/32/64, FLOAT, DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
@@ -272,13 +272,13 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Gibt die zu verwendende Ranking-Methode an. Muss auf <code translate="no">"decay"</code> gesetzt werden, um die Decay-Ranking-Funktionalität zu aktivieren.</p></td>
+     <td><p>Gibt die zu verwendende Ranking-Methode an. Muss auf <code translate="no">"decay"</code> gesetzt werden, um die Funktion "decay ranking" zu aktivieren.</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Legt fest, welcher mathematische Decay Ranker angewendet werden soll. Legt die Kurvenform des Relevanzabfalls fest. Eine Anleitung zur Auswahl der geeigneten Funktion finden Sie im Abschnitt <a href="/docs/de/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Wählen Sie den richtigen Decay Ranker</a>.</p></td>
+     <td><p>Legt fest, welcher mathematische Decay Ranker angewendet werden soll. Legt die Kurvenform des Relevanzabfalls fest. Eine Anleitung zur Auswahl der geeigneten Funktion finden Sie im Abschnitt <a href="/docs/de/decay-ranker-overview.md#Choose-the-right-decay-ranker">Wählen Sie den richtigen Decay Ranker</a>.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, oder <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -324,7 +324,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf Hybridsuche anwenden</h3><p>Decay Ranker können auch auf hybride Suchoperationen angewendet werden, die mehrere Vektorfelder kombinieren:</p>

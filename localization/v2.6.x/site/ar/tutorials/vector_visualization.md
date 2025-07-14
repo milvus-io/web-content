@@ -27,7 +27,7 @@ title: تصوّر المتجهات
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>في هذا المثال، سنوضح في هذا المثال كيفية تصور التضمينات (المتجهات) في ميلفوس باستخدام <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
-<p>تقنيات تقليل الأبعاد، مثل t-SNE، لا تقدر بثمن لتصور البيانات المعقدة عالية الأبعاد في فضاء ثنائي الأبعاد أو ثلاثي الأبعاد مع الحفاظ على البنية المحلية. يتيح ذلك التعرف على الأنماط ويعزز فهم العلاقات بين السمات ويسهل تفسير نتائج نموذج التعلم الآلي. بالإضافة إلى ذلك، يساعد في تقييم الخوارزمية من خلال المقارنة البصرية لنتائج التجميع، ويبسط عرض البيانات للجمهور غير المتخصص، ويمكن أن يقلل من التكاليف الحسابية من خلال العمل مع تمثيلات منخفضة الأبعاد. من خلال هذه التطبيقات، لا يساعد t-SNE في اكتساب رؤى أعمق في مجموعات البيانات فحسب، بل يدعم أيضًا عمليات اتخاذ قرارات أكثر استنارة.</p>
+<p>تقنيات تقليل الأبعاد، مثل t-SNE، لا تقدر بثمن لتصور البيانات المعقدة عالية الأبعاد في فضاء ثنائي الأبعاد أو ثلاثي الأبعاد مع الحفاظ على البنية المحلية. يتيح ذلك التعرف على الأنماط ويعزز فهم العلاقات بين السمات ويسهل تفسير نتائج نموذج التعلم الآلي. بالإضافة إلى ذلك، يساعد في تقييم الخوارزمية من خلال المقارنة البصرية لنتائج التجميع، ويبسط عرض البيانات للجمهور غير المتخصص، ويمكن أن يقلل من التكاليف الحسابية من خلال العمل مع تمثيلات ذات أبعاد أقل. من خلال هذه التطبيقات، لا يساعد t-SNE في اكتساب رؤى أعمق في مجموعات البيانات فحسب، بل يدعم أيضًا عمليات اتخاذ قرارات أكثر استنارة.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -277,7 +277,7 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">تقليل البُعد إلى 2-د بواسطة t-SNE</h3><p>لنختزل أبعاد التضمينات إلى 2-د بواسطة t-SNE. سنستخدم مكتبة <code translate="no">sklearn</code> لإجراء تحويل t-SNE.</p>
+<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">تقليل البُعد إلى 2-د بواسطة t-SNE</h3><p>دعونا نقلل أبعاد التضمينات إلى 2-د بواسطة t-SNE. سنستخدم مكتبة <code translate="no">sklearn</code> لإجراء تحويل t-SNE.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> sklearn.manifold <span class="hljs-keyword">import</span> TSNE
@@ -430,5 +430,5 @@ plt.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>بنج</span> </span></p>
-<p>كما نرى، متجه الاستعلام قريب من المتجهات المسترجعة. على الرغم من أن المتجهات المسترجعة ليست ضمن دائرة قياسية بنصف قطر ثابت مركزها الاستعلام، يمكننا أن نرى أنها لا تزال قريبة جدًا من متجه الاستعلام على المستوى ثنائي الأبعاد.</p>
+<p>كما نرى، متجه الاستعلام قريب من المتجهات المسترجعة. على الرغم من أن المتجهات المسترجعة ليست ضمن دائرة قياسية ذات نصف قطر ثابت مركزها الاستعلام، يمكننا أن نرى أنها لا تزال قريبة جدًا من متجه الاستعلام على المستوى ثنائي الأبعاد.</p>
 <p>يمكن أن يؤدي استخدام تقنيات تقليل الأبعاد إلى تسهيل فهم المتجهات واستكشاف الأخطاء وإصلاحها. آمل أن تتمكن من الحصول على فهم أفضل للمتجهات من خلال هذا البرنامج التعليمي.</p>

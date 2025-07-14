@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>Sistemi di assistenza clienti che devono far coincidere i problemi degli utenti con le relative soluzioni</p></li>
 <li><p>Ricerca nel commercio elettronico che deve comprendere gli attributi del prodotto e l'intento dell'utente.</p></li>
 </ul>
-<p>Rispetto a <a href="/docs/it/v2.6.x/tei-ranker.md">TEI Ranker</a>, vLLM Ranker offre una maggiore flessibilità nella selezione dei modelli e nella personalizzazione, rendendolo ideale per applicazioni di ricerca specializzate o complesse, dove le opzioni di configurazione aggiuntive offrono vantaggi significativi.</p>
+<p>Rispetto a <a href="/docs/it/tei-ranker.md">TEI Ranker</a>, vLLM Ranker offre una maggiore flessibilità nella selezione dei modelli e nella personalizzazione, rendendolo ideale per applicazioni di ricerca specializzate o complesse, dove le opzioni di configurazione aggiuntive offrono vantaggi significativi.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Per i parametri generali condivisi da tutti i classificatori di modelli (ad esempio, <code translate="no">provider</code>, <code translate="no">queries</code>), fare riferimento a <a href="/docs/it/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Creare un classificatore di modelli</a>.</p>
+<p>Per i parametri generali condivisi da tutti i classificatori di modelli (ad esempio, <code translate="no">provider</code>, <code translate="no">queries</code>), fare riferimento a <a href="/docs/it/model-ranker-overview.md#Create-a-model-ranker">Creare un classificatore di modelli</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Applicare alla ricerca vettoriale standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Applicare alla ricerca ibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

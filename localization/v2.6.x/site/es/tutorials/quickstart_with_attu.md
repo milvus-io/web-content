@@ -38,7 +38,7 @@ title: Inicio rápido con Attu - la interfaz de usuario web de Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/attu">Attu</a> es una herramienta de administración "todo en uno" de código abierto para Milvus. Presenta una interfaz gráfica de usuario (GUI) intuitiva, que le permite interactuar fácilmente con sus bases de datos. Con sólo unos clics, puede visualizar el estado de su clúster, gestionar metadatos, realizar consultas de datos y mucho más.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/attu">Attu</a> es una herramienta de administración todo en uno de código abierto para Milvus. Presenta una interfaz gráfica de usuario (GUI) intuitiva, que le permite interactuar fácilmente con sus bases de datos. Con sólo unos clics, puede visualizar el estado de su clúster, gestionar metadatos, realizar consultas de datos y mucho más.</p>
 <hr>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Instalación de la aplicación de escritorio<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -113,7 +113,7 @@ title: Inicio rápido con Attu - la interfaz de usuario web de Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Preparar los datos</h3><p>Utilizamos las páginas de preguntas frecuentes de la <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentación de Milvus 2.4.x</a> como conjunto de datos para este ejemplo.</p>
+    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Preparar los datos</h3><p>Utilizamos las páginas FAQ de la <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentación de Milvus 2.4.x</a> como conjunto de datos para este ejemplo.</p>
 <h4 id="Download-and-Extract-Data" class="common-anchor-header">Descargue y extraiga los datos:</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
@@ -159,7 +159,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>

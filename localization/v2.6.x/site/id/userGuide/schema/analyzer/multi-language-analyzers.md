@@ -7,11 +7,11 @@ summary: >-
   dioptimalkan untuk bahasa Inggris, maka ia akan kesulitan dengan aturan
   tokenisasi dan stemming yang sangat berbeda yang diperlukan oleh bahasa lain,
   seperti bahasa Mandarin, Spanyol, atau Prancis, yang menghasilkan tingkat
-  penarikan yang lebih rendah. Misalnya, pencarian untuk kata "teléfono" dalam
-  bahasa Spanyol (yang berarti "telepon") akan menyulitkan penganalisis yang
-  berfokus pada bahasa Inggris: penganalisis tersebut dapat menghilangkan aksen
-  dan tidak menerapkan stemming khusus bahasa Spanyol, sehingga hasil yang
-  relevan terlewatkan.
+  penarikan yang lebih rendah. Misalnya, pencarian untuk kata Spanyol "teléfono"
+  (yang berarti "telepon") akan menyulitkan penganalisis yang berfokus pada
+  bahasa Inggris: penganalisis tersebut dapat menghilangkan aksen dan tidak
+  menerapkan stemming khusus bahasa Spanyol, sehingga hasil yang relevan
+  terlewatkan.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Multi-language-Analyzers" class="common-anchor-header">Penganalisis Multi-bahasa<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Multi-language-Analyzers" class="anchor-icon" translate="no">
@@ -785,7 +785,7 @@ curl --request POST \
 <ol>
 <li><p>Membaca bidang <code translate="no">language</code> setiap dokumen</p></li>
 <li><p>Menerapkan penganalisis yang sesuai ke bidang <code translate="no">text</code> </p></li>
-<li><p>Menghasilkan representasi vektor yang jarang melalui fungsi BM25</p></li>
+<li><p>Menghasilkan representasi vektor jarang melalui fungsi BM25</p></li>
 <li><p>Menyimpan teks asli dan vektor jarang yang dihasilkan</p></li>
 </ol>
 <div class="alert note">
@@ -828,7 +828,7 @@ english_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display English search results</span>
@@ -874,7 +874,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display English search results</span>
@@ -928,7 +928,7 @@ curl --request POST \
     &quot;drop_ratio_search&quot;: &quot;0&quot;  
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Use-Chinese-analyzer" class="common-anchor-header">Gunakan penganalisis bahasa Mandarin</h3><p>Contoh ini mendemonstrasikan peralihan ke penganalisis bahasa Mandarin (menggunakan alias <code translate="no">&quot;cn&quot;</code>) untuk teks kueri yang berbeda. Semua parameter lainnya tetap sama, tetapi sekarang teks kueri diproses menggunakan aturan tokenisasi khusus bahasa Mandarin.</p>
@@ -943,7 +943,7 @@ chinese_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display Chinese search results</span>
@@ -986,7 +986,7 @@ searchResults = searchResp.getSearchResults();
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display Chinese search results</span>
@@ -1036,6 +1036,6 @@ curl --request POST \
     &quot;analyzer_name&quot;: &quot;cn&quot;
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

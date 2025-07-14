@@ -23,7 +23,13 @@ title: Asynchrone Funktionen in der LangChain-Milvus-Integration
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In diesem Tutorial erfahren Sie, wie Sie asynchrone Funktionen in <a href="https://github.com/langchain-ai/langchain-milvus">Langchain-Milvus</a> nutzen können, um hochperformante Anwendungen zu erstellen. Durch den Einsatz von asynchronen Methoden können Sie den Durchsatz und die Reaktionsfähigkeit Ihrer Anwendung erheblich verbessern, insbesondere wenn Sie mit umfangreichen Abfragen arbeiten. Ganz gleich, ob Sie ein Echtzeit-Empfehlungssystem aufbauen, eine semantische Suche in Ihre Anwendung implementieren oder eine RAG-Pipeline (Retrieval-Augmented Generation) erstellen, mit asynchronen Operationen können Sie gleichzeitige Anfragen effizienter bearbeiten. Die leistungsstarke Vektordatenbank Milvus in Kombination mit den leistungsstarken LLM-Abstraktionen von LangChain bietet eine robuste Grundlage für die Entwicklung skalierbarer KI-Anwendungen.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>In diesem Tutorial erfahren Sie, wie Sie asynchrone Funktionen in <a href="https://github.com/langchain-ai/langchain-milvus">Langchain-Milvus</a> nutzen können, um hochperformante Anwendungen zu erstellen. Durch den Einsatz von asynchronen Methoden können Sie den Durchsatz und die Reaktionsfähigkeit Ihrer Anwendung erheblich verbessern, insbesondere wenn Sie mit umfangreichen Abfragen arbeiten. Ganz gleich, ob Sie ein Echtzeit-Empfehlungssystem aufbauen, eine semantische Suche in Ihre Anwendung implementieren oder eine RAG-Pipeline (Retrieval-Augmented Generation) erstellen, mit asynchronen Operationen können Sie gleichzeitige Anfragen effizienter bearbeiten. Die leistungsstarke Vektordatenbank Milvus in Kombination mit den leistungsstarken LLM-Abstraktionen von LangChain bietet eine robuste Grundlage für die Entwicklung skalierbarer KI-Anwendungen.</p>
 <h2 id="Async-API-Overview" class="common-anchor-header">Async-API-Übersicht<button data-href="#Async-API-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -374,4 +380,4 @@ Sync delete for 100 operations took 29.21 seconds
 <li>Bei Arbeitslasten, die einen höheren Durchsatz generieren, vergrößert sich der Leistungsunterschied zwischen synchronen und asynchronen Operationen</li>
 <li>Asynchrone Operationen nutzen die Rechenleistung der Maschinen voll aus</li>
 </ol>
-<p>Wenn Sie mit LangChain und Milvus produktive RAG-Anwendungen erstellen, sollten Sie die Verwendung der asynchronen API in Betracht ziehen, wenn die Leistung eine Rolle spielt, insbesondere bei gleichzeitigen Operationen.</p>
+<p>Wenn Sie produktive RAG-Anwendungen mit LangChain und Milvus erstellen, sollten Sie die Verwendung der asynchronen API in Betracht ziehen, wenn die Leistung eine Rolle spielt, insbesondere bei gleichzeitigen Operationen.</p>

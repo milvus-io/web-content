@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Detaillierte Informationen zur Implementierung der einzelnen Modelldienste finden Sie in der entsprechenden Dokumentation:</p>
 <ul>
-<li><p><a href="/docs/de/v2.6.x/vllm-ranker.md">vLLM-Rangierer</a></p></li>
-<li><p><a href="/docs/de/v2.6.x/tei-ranker.md">TEI-Rangierer</a></p></li>
+<li><p><a href="/docs/de/vllm-ranker.md">vLLM-Rangierer</a></p></li>
+<li><p><a href="/docs/de/tei-ranker.md">TEI-Rangierer</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementierung<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +205,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Ein Wörterbuch, das die Konfiguration für die modellbasierte Ranglistenfunktion enthält. Die verfügbaren Parameter (Schlüssel) variieren je nach Anbieter (<code translate="no">tei</code> oder <code translate="no">vllm</code>). Weitere Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/vllm-ranker.md">vLLM Ranker</a> oder <a href="/docs/de/v2.6.x/tei-ranker.md">TEI Ranker</a>.</p></td>
+     <td><p>Ein Wörterbuch, das die Konfiguration für die modellbasierte Ranglistenfunktion enthält. Die verfügbaren Parameter (Schlüssel) variieren je nach Anbieter (<code translate="no">tei</code> oder <code translate="no">vllm</code>). Weitere Einzelheiten finden Sie unter <a href="/docs/de/vllm-ranker.md">vLLM Ranker</a> oder <a href="/docs/de/tei-ranker.md">TEI Ranker</a>.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -248,7 +248,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf hybride Suche anwenden</h3><p>Modell-Ranker können auch auf hybride Suchvorgänge angewendet werden, die mehrere Vektorfelder kombinieren:</p>

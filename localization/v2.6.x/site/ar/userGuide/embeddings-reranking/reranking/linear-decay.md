@@ -57,7 +57,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>قوائم الأحداث</p></td>
      <td><p>منصات تذاكر الحفلات الموسيقية</p></td>
-     <td><p>يضع حداً فاصلاً واضحاً للأحداث في المستقبل البعيد جداً</p></td>
+     <td><p>يضع حداً فاصلاً واضحاً للفعاليات في المستقبل البعيد جداً</p></td>
    </tr>
    <tr>
      <td><p>العروض محدودة الوقت</p></td>
@@ -77,7 +77,7 @@ beta: Milvus 2.6.x
 </table>
 <p>اختر الاضمحلال الخطي عندما:</p>
 <ul>
-<li><p>يحتوي تطبيقك على حدود أو موعد نهائي أو عتبة طبيعية</p></li>
+<li><p>يكون للتطبيق الخاص بك حدود أو موعد نهائي أو عتبة طبيعية</p></li>
 <li><p>يجب استبعاد العناصر التي تتجاوز نقطة معينة تمامًا من النتائج</p></li>
 <li><p>تحتاج إلى معدل انخفاض متسق يمكن التنبؤ به ومتسق في الأهمية</p></li>
 <li><p>يجب أن يرى المستخدمون فرقاً واضحاً بين العناصر ذات الصلة وغير ذات الصلة</p></li>
@@ -189,7 +189,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث الهجين</h3><p>يمكن أيضًا تطبيق مصنفات الاضمحلال على عمليات البحث المختلط التي تجمع بين حقول متجهات متعددة:</p>

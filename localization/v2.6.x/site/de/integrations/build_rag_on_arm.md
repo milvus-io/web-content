@@ -95,7 +95,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Wir verwenden den inneren Produktabstand als Standard-Metrik-Typ. Weitere Informationen über Abstandsarten finden Sie auf der <a href="https://milvus.io/docs/metric.md?tab=floating">Seite Ähnlichkeitsmetriken</a></p>
@@ -190,7 +190,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <div class="alert note">
 <p>Diese Re-Quantisierung ist speziell für Graviton3 optimal. Für Graviton2 sollte die optimale Requantisierung im Format <code translate="no">Q4_0_4_4</code> durchgeführt werden, und für Graviton4 ist das Format <code translate="no">Q4_0_4_8</code> am besten für die Requantisierung geeignet.</p>
 </div>
-<h3 id="Start-the-LLM-Service" class="common-anchor-header">Starten Sie den LLM-Dienst</h3><p>Sie können das Serverprogramm llama.cpp verwenden und Anfragen über eine OpenAI-kompatible API senden. So können Sie Anwendungen entwickeln, die mehrfach mit dem LLM interagieren, ohne ihn wiederholt starten und stoppen zu müssen. Außerdem können Sie von einem anderen Rechner, auf dem der LLM über das Netzwerk gehostet wird, auf den Server zugreifen.</p>
+<h3 id="Start-the-LLM-Service" class="common-anchor-header">Starten Sie den LLM-Dienst</h3><p>Sie können das Serverprogramm llama.cpp verwenden und Anfragen über eine OpenAI-kompatible API senden. So können Sie Anwendungen entwickeln, die mehrfach mit dem LLM interagieren, ohne ihn wiederholt starten und stoppen zu müssen. Außerdem können Sie auf den Server von einem anderen Rechner aus zugreifen, auf dem der LLM über das Netzwerk gehostet wird.</p>
 <p>Starten Sie den Server von der Befehlszeile aus, und er lauscht am Port 8080:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080</span>
 <button class="copy-code-btn"></button></code></pre>

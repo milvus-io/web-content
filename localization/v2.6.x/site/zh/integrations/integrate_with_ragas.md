@@ -125,7 +125,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -188,7 +188,7 @@ my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <ul>
 <li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
 <li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
-<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
+<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
 <h2 id="Run-the-RAG-pipeline-and-get-results" class="common-anchor-header">运行 RAG 管道并获取结果<button data-href="#Run-the-RAG-pipeline-and-get-results" class="anchor-icon" translate="no">
@@ -296,12 +296,12 @@ df
       <th>0</th>
       <td>硬件要求是什么？</td>
       <td>[硬件要求（Hardware Requirements/n...</td>
-      <td>硬件要求规范（...</td>
+      <td>硬件要求规格（...</td>
       <td>如果您想构建Milvus并从源代码运行...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>用什么编程语言编写Milvus...</td>
+      <td>用什么编程语言来编写Milvus...</td>
       <td>[CMake &amp; Conan\n\nMilvus 的算法库...</td>
       <td>编写 Knowherus 的编程语言是什么？</td>
       <td>用来编写知乎的编程语言...</td>
@@ -309,7 +309,7 @@ df
     <tr>
       <th>2</th>
       <td>运行代码覆盖前应确保什么？</td>
-      <td>[代码覆盖（Code coverage）]在提交您的pull...</td>
+      <td>[代码覆盖（Code coverage）：在提交您的pull...</td>
       <td>在运行代码覆盖之前，应该确保...</td>
       <td>运行代码覆盖之前，应确保 ...</td>
     </tr>

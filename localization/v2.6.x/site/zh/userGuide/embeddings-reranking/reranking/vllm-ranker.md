@@ -20,14 +20,14 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>vLLM Ranker 利用<a href="https://docs.vllm.ai/en/latest/index.html">vLLM</a>推论框架，通过语义重新排序来提高搜索相关性。它代表了一种超越传统向量相似性的先进搜索结果排序方法。</p>
-<p>vLLM Ranker 对于精确度和上下文至关重要的应用特别有价值，例如</p>
+<p>vLLM Ranker 对于精确度和上下文至关重要的应用尤其有价值，例如</p>
 <ul>
 <li><p>需要深入理解概念的技术文档搜索</p></li>
 <li><p>语义关系超过关键词匹配的研究数据库</p></li>
 <li><p>需要将用户问题与相关解决方案相匹配的客户支持系统</p></li>
 <li><p>必须了解产品属性和用户意图的电子商务搜索</p></li>
 </ul>
-<p>与<a href="/docs/zh/v2.6.x/tei-ranker.md">TEI Ranker</a> 相比，vLLM Ranker 在模型选择和定制方面具有更大的灵活性，因此非常适合专业或复杂的搜索应用，在这些应用中，额外的配置选项可带来显著的优势。</p>
+<p>与<a href="/docs/zh/tei-ranker.md">TEI Ranker</a> 相比，vLLM Ranker 在模型选择和定制方面具有更大的灵活性，因此非常适合专业或复杂的搜索应用，在这些应用中，额外的配置选项可带来显著的优势。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,7 +121,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>关于所有模型排序器共享的一般参数（如<code translate="no">provider</code>,<code translate="no">queries</code> ），请参阅<a href="/docs/zh/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">创建模型排序器</a>。</p>
+<p>关于所有模型排序器共享的一般参数（如<code translate="no">provider</code>,<code translate="no">queries</code> ），请参阅<a href="/docs/zh/model-ranker-overview.md#Create-a-model-ranker">创建模型排序器</a>。</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">应用于标准向量搜索<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -147,7 +147,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

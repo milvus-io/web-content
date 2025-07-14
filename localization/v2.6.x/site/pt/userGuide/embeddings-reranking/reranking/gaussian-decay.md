@@ -72,7 +72,7 @@ beta: Milvus 2.6.x
      <td><p>Diminuição suave da relevância à medida que os preços se desviam do objetivo</p></td>
    </tr>
    <tr>
-     <td><p>Correspondência de competências</p></td>
+     <td><p>Correspondência de conhecimentos especializados</p></td>
      <td><p>Encontrar profissionais com experiência relevante</p></td>
      <td><p>Avaliação equilibrada da relevância da experiência</p></td>
    </tr>
@@ -93,7 +93,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O decaimento gaussiano cria uma curva suave, em forma de sino, que reduz gradualmente a relevância à medida que a distância aumenta em relação a um ponto ideal. Nomeada em homenagem ao matemático Carl Friedrich Gauss, essa distribuição aparece com frequência na natureza e nas estatísticas, o que explica por que ela é tão intuitiva para a perceção humana.</p>
+    </button></h2><p>O decaimento gaussiano cria uma curva suave, em forma de sino, que reduz gradualmente a relevância à medida que a distância aumenta em relação a um ponto ideal. Batizada em homenagem ao matemático Carl Friedrich Gauss, essa distribuição aparece com frequência na natureza e nas estatísticas, o que explica por que ela é tão intuitiva para a perceção humana.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gaussian-decay.png" alt="Gaussian Decay" class="doc-image" id="gaussian-decay" />
@@ -105,7 +105,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (±2 km): A distância à qual a relevância cai para o valor de decaimento - os restaurantes a exatamente 2 quilómetros de distância têm as suas pontuações de relevância reduzidas para metade (0,5).</p></li>
 <li><p><code translate="no">decay</code> (0.5): A pontuação na distância da escala - este parâmetro controla essencialmente a rapidez com que as pontuações diminuem com a distância.</p></li>
 </ul>
-<p>Como pode ver na curva, os restaurantes a mais de 2 km continuam a diminuir a sua relevância, mas nunca chegam a zero. Mesmo os restaurantes a 4-5 quilómetros de distância mantêm alguma relevância mínima, permitindo que restaurantes excelentes, mas distantes, ainda apareçam nos seus resultados (embora com uma classificação inferior).</p>
+<p>Como pode ver na curva, os restaurantes a mais de 2 km continuam a diminuir a sua relevância, mas nunca chegam a zero. Mesmo os restaurantes a 4-5 quilómetros de distância mantêm alguma relevância mínima, permitindo que restaurantes excelentes mas distantes ainda apareçam nos resultados (embora com uma classificação inferior).</p>
 <p>Este comportamento imita a forma como as pessoas pensam naturalmente sobre a relevância da distância - os locais próximos são preferidos, mas estamos dispostos a viajar mais longe para opções excepcionais.</p>
 <h2 id="Formula" class="common-anchor-header">Fórmula<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -181,7 +181,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],  <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida</h3><p>Os classificadores de decaimento também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vectoriais:</p>

@@ -30,7 +30,7 @@ title: Costruire RAG con Milvus e Docling
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/docling-project/docling">Docling</a> semplifica l'analisi e la comprensione dei documenti in diversi formati per le applicazioni di intelligenza artificiale. Grazie alla comprensione avanzata dei PDF e alla rappresentazione unificata dei documenti, Docling rende i dati dei documenti non strutturati pronti per i flussi di lavoro a valle.</p>
-<p>In questa esercitazione vi mostreremo come costruire una pipeline Retrieval-Augmented Generation (RAG) utilizzando Milvus e Docling. La pipeline integra Docling per il parsing dei documenti, Milvus per l'archiviazione vettoriale e OpenAI per la generazione di risposte intelligenti e consapevoli del contesto.</p>
+<p>In questa esercitazione vi mostreremo come costruire una pipeline Retrieval-Augmented Generation (RAG) utilizzando Milvus e Docling. La pipeline integra Docling per il parsing dei documenti, Milvus per l'archiviazione vettoriale e OpenAI per la generazione di risposte perspicue e consapevoli del contesto.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,12 +161,12 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Creare una nuova raccolta con i parametri specificati.</p>
-<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene usato per memorizzare campi non definiti dalla mappa e i loro valori.</p>
+<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti da schemi e i loro valori.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

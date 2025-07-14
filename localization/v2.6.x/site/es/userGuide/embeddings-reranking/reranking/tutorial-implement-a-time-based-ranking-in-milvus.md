@@ -28,7 +28,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En muchas aplicaciones de búsqueda, la frescura del contenido es tan importante como su relevancia. Los artículos de noticias, los listados de productos, las publicaciones en redes sociales y los trabajos de investigación se benefician de los sistemas de clasificación que equilibran la relevancia semántica con la actualidad. Este tutorial muestra cómo implementar la clasificación basada en el tiempo en Milvus utilizando clasificadores de decaimiento.</p>
+    </button></h1><p>En muchas aplicaciones de búsqueda, la frescura del contenido es tan importante como su relevancia. Los artículos de noticias, los listados de productos, las publicaciones en redes sociales y los trabajos de investigación se benefician de sistemas de clasificación que equilibran la relevancia semántica con la actualidad. Este tutorial muestra cómo implementar la clasificación basada en el tiempo en Milvus utilizando clasificadores de decaimiento.</p>
 <h2 id="Understand-decay-rankers-in-Milvus" class="common-anchor-header">Comprender los decay rankers en Milvus<button data-href="#Understand-decay-rankers-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -188,7 +188,7 @@ milvus_client.create_collection(
     collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Step-4-Prepare-sample-data" class="common-anchor-header">Paso 4: Preparar datos de muestra<button data-href="#Step-4-Prepare-sample-data" class="anchor-icon" translate="no">
@@ -447,7 +447,7 @@ standard_results = milvus_client.search(
     anns_field=<span class="hljs-string">&quot;dense&quot;</span>,
     limit=<span class="hljs-number">7</span>,  <span class="hljs-comment"># Get all our articles</span>
     output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 print_search_results(standard_results, <span class="hljs-string">&quot;SEARCH RESULTS WITHOUT DECAY RANKING&quot;</span>)
 
@@ -465,7 +465,7 @@ gaussian_results = milvus_client.search(
     limit=<span class="hljs-number">7</span>,
     output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
     ranker=gaussian_ranker,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 print_search_results(gaussian_results, <span class="hljs-string">&quot;SEARCH RESULTS WITH GAUSSIAN DECAY RANKING&quot;</span>)
 
@@ -477,7 +477,7 @@ exponential_results = milvus_client.search(
     limit=<span class="hljs-number">7</span>,
     output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
     ranker=exponential_ranker,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 print_search_results(exponential_results, <span class="hljs-string">&quot;SEARCH RESULTS WITH EXPONENTIAL DECAY RANKING&quot;</span>)
 
@@ -489,7 +489,7 @@ linear_results = milvus_client.search(
     limit=<span class="hljs-number">7</span>,
     output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
     ranker=linear_ranker,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 print_search_results(linear_results, <span class="hljs-string">&quot;SEARCH RESULTS WITH LINEAR DECAY RANKING&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -823,7 +823,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
         limit=<span class="hljs-number">7</span>,
         output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
         ranker=scaled_ranker,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
     )
     
     print_search_results(scale_results, <span class="hljs-string">f&quot;SEARCH WITH GAUSSIAN DECAY (SCALE = <span class="hljs-subst">{scale_days}</span> DAYS)&quot;</span>)
@@ -944,7 +944,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
         limit=<span class="hljs-number">4</span>,
         output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
         ranker=gaussian_ranker,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
     )
     print_search_results(test_results, <span class="hljs-string">f&quot;TOP 4 RESULTS FOR &#x27;<span class="hljs-subst">{test_query}</span>&#x27;&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>

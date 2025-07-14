@@ -78,10 +78,10 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">LLM 및 임베딩 모델 준비</h3><p>Ollama는 LLM 기반 작업과 임베딩 생성 모두에 대해 여러 모델을 지원하므로 검색 증강 생성(RAG) 애플리케이션을 쉽게 개발할 수 있습니다. 이 설정의 경우:</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">LLM 및 임베딩 모델 준비</h3><p>Ollama는 LLM 기반 작업과 임베딩 생성 모두에 대해 여러 모델을 지원하므로 검색 증강 생성(RAG) 애플리케이션을 쉽게 개발할 수 있습니다. 이 설정의 경우</p>
 <ul>
 <li>텍스트 생성 작업에는 <strong>Llama 3.2(3B)를</strong> LLM으로 사용합니다.</li>
-<li>임베딩 생성에는 의미론적 유사성에 최적화된 334M 파라미터 모델인 <strong>mxbai-embed-large를</strong> 사용하겠습니다.</li>
+<li>임베딩 생성에는 의미론적 유사성에 최적화된 334M 파라미터 모델인 <strong>mxbai-embed-large를</strong> 사용합니다.</li>
 </ul>
 <p>시작하기 전에 두 모델을 모두 로컬로 가져왔는지 확인하세요:</p>
 <pre><code translate="no" class="language-python">! ollama pull mxbai-embed-large
@@ -164,7 +164,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>텍스트 줄을 반복하여 임베딩을 만든 다음 데이터를 Milvus에 삽입합니다.</p>

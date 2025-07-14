@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>기존의 벡터 검색은 순전히 수학적 유사성, 즉 고차원 공간에서 벡터가 얼마나 일치하는지에 따라 결과의 순위를 매깁니다. 이 접근 방식은 효율적이기는 하지만 진정한 의미적 관련성을 놓치는 경우가 많습니다. <strong>'데이터베이스 최적화를 위한 모범 사례'를</strong> 검색한다고 생각해 보세요. 이러한 용어가 자주 언급되는 벡터 유사도가 높은 문서가 있지만 실제로 실행 가능한 최적화 전략을 제공하지는 않을 수 있습니다.</p>
+    </button></h1><p>기존의 벡터 검색은 순전히 수학적 유사성, 즉 고차원 공간에서 벡터가 얼마나 가깝게 일치하는지에 따라 결과의 순위를 매깁니다. 이 접근 방식은 효율적이기는 하지만 진정한 의미적 관련성을 놓치는 경우가 많습니다. <strong>'데이터베이스 최적화를 위한 모범 사례'를</strong> 검색한다고 생각해 보세요. 이러한 용어가 자주 언급되는 벡터 유사도가 높은 문서가 있지만 실제로 실행 가능한 최적화 전략을 제공하지는 않을 수 있습니다.</p>
 <p>모델 랭커는 쿼리와 문서 간의 의미 관계를 이해하는 고급 언어 모델을 통합하여 Milvus 검색을 혁신합니다. 벡터 유사도에만 의존하는 대신 콘텐츠의 의미와 문맥을 평가하여 보다 지능적이고 관련성 높은 결과를 제공합니다.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -125,8 +125,8 @@ beta: Milvus 2.6.x
 </table>
 <p>각 모델 서비스의 구현에 대한 자세한 내용은 전용 설명서를 참조하세요:</p>
 <ul>
-<li><p><a href="/docs/ko/v2.6.x/vllm-ranker.md">vLLM 랭커</a></p></li>
-<li><p><a href="/docs/ko/v2.6.x/tei-ranker.md">TEI 랭커</a></p></li>
+<li><p><a href="/docs/ko/vllm-ranker.md">vLLM 랭커</a></p></li>
+<li><p><a href="/docs/ko/tei-ranker.md">TEI 랭커</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">구현<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -200,7 +200,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>예</p></td>
-     <td><p>모델 기반 재랭킹 함수에 대한 구성이 포함된 딕셔너리입니다. 사용 가능한 매개 변수(키)는 제공업체에 따라 다릅니다(<code translate="no">tei</code> 또는 <code translate="no">vllm</code>). 자세한 내용은 <a href="/docs/ko/v2.6.x/vllm-ranker.md">vLLM 랭커</a> 또는 <a href="/docs/ko/v2.6.x/tei-ranker.md">TEI 랭커를</a> 참조하세요.</p></td>
+     <td><p>모델 기반 재랭킹 함수에 대한 구성이 포함된 딕셔너리입니다. 사용 가능한 매개 변수(키)는 제공업체에 따라 다릅니다(<code translate="no">tei</code> 또는 <code translate="no">vllm</code>). 자세한 내용은 <a href="/docs/ko/vllm-ranker.md">vLLM 랭커</a> 또는 <a href="/docs/ko/tei-ranker.md">TEI 랭커를</a> 참조하세요.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -243,7 +243,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 작업에도 모델 랭커를 적용할 수 있습니다:</p>

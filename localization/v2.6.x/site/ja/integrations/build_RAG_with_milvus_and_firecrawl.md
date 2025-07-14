@@ -27,7 +27,7 @@ title: MilvusとFirecrawlでRAGを構築する
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://www.firecrawl.dev/">Firecrawlは</a>、開発者があらゆるウェブサイトからスクレイピングされたクリーンなデータでAIアプリケーションを構築できるようにします。高度なスクレイピング、クローリング、データ抽出機能を備えたFirecrawlは、ウェブサイトのコンテンツを、下流のAIワークフローのためのクリーンなマークダウンまたは構造化データに変換するプロセスを簡素化します。</p>
-<p>このチュートリアルでは、MilvusとFirecrawlを使用したRAG（Retrieval-Augmented Generation）パイプラインの構築方法をご紹介します。このパイプラインは、WebデータスクレイピングのためのFirecrawl、ベクトルストレージのためのMilvus、そして洞察に満ちた、コンテキストを認識した応答を生成するためのOpenAIを統合しています。</p>
+<p>このチュートリアルでは、MilvusとFirecrawlを使用してRAG（Retrieval-Augmented Generation）パイプラインを構築する方法を紹介します。このパイプラインは、WebデータスクレイピングのためのFirecrawl、ベクトルストレージのためのMilvus、そして洞察に満ちた、コンテキストを認識した応答を生成するためのOpenAIを統合しています。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -183,7 +183,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

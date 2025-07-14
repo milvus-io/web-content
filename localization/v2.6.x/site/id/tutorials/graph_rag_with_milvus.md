@@ -18,8 +18,12 @@ title: Grafik RAG dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <p>Penerapan model bahasa besar yang meluas menyoroti pentingnya meningkatkan akurasi dan relevansi respons mereka. Retrieval-Augmented Generation (RAG) meningkatkan model dengan basis pengetahuan eksternal, memberikan informasi yang lebih kontekstual dan mengurangi masalah seperti halusinasi dan pengetahuan yang tidak memadai. Namun, hanya mengandalkan paradigma RAG yang sederhana memiliki keterbatasan, terutama ketika berhadapan dengan hubungan entitas yang kompleks dan pertanyaan multi-hop, di mana model sering kali kesulitan untuk memberikan jawaban yang akurat.</p>
 <p>Memperkenalkan grafik pengetahuan (KG) ke dalam sistem RAG menawarkan solusi baru. KG menyajikan entitas dan hubungannya secara terstruktur, memberikan informasi pengambilan yang lebih tepat dan membantu RAG untuk menangani tugas-tugas menjawab pertanyaan yang kompleks dengan lebih baik. KG-RAG masih dalam tahap awal, dan belum ada konsensus mengenai cara mengambil entitas dan hubungan secara efektif dari KG atau cara mengintegrasikan pencarian kemiripan vektor dengan struktur graf.</p>
 <p>Dalam buku catatan ini, kami memperkenalkan sebuah pendekatan yang sederhana namun kuat untuk meningkatkan performa dari skenario ini. Ini adalah paradigma RAG sederhana dengan pengambilan multi-arah dan kemudian melakukan pemeringkatan ulang, tetapi mengimplementasikan Graph RAG secara logis, dan mencapai kinerja yang canggih dalam menangani pertanyaan-pertanyaan multi-hop. Mari kita lihat bagaimana implementasinya.</p>
@@ -48,7 +52,7 @@ title: Grafik RAG dengan Milvus
 <pre><code translate="no" class="language-python">$ pip install --upgrade --quiet pymilvus numpy scipy langchain langchain-core langchain-openai tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja terinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
+<p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
 </blockquote>
 <p>Kita akan menggunakan model dari OpenAI. Anda harus menyiapkan <a href="https://platform.openai.com/docs/quickstart">kunci api</a> <code translate="no">OPENAI_API_KEY</code> sebagai variabel lingkungan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -202,7 +206,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 

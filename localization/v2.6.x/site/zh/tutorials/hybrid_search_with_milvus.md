@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -278,7 +278,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>什么是 Java 编程？如何学习 Java 编程语言？</p>
 <p>如何学习计算机安全？</p>
 <p>开始学习机器人技术的最佳方法是什么？哪种开发板最适合我开始工作？</p>
-<p>如何学习说流利的英语？</p>
+<p>如何学说流利的英语？</p>
 <p>学习法语的最佳方法是什么？</p>
 <p>如何让物理变得简单易学？</p>
 <p>如何准备 UPSC？</p>

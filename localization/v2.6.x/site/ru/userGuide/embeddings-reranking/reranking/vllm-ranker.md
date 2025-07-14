@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>Системы поддержки клиентов, которые должны сопоставлять проблемы пользователей с соответствующими решениями</p></li>
 <li><p>Поиск в электронной коммерции, где необходимо понимать атрибуты продукта и намерения пользователя.</p></li>
 </ul>
-<p>По сравнению с <a href="/docs/ru/v2.6.x/tei-ranker.md">TEI Ranker</a>, vLLM Ranker предлагает большую гибкость в выборе и настройке моделей, что делает его идеальным для специализированных или сложных поисковых приложений, где дополнительные возможности настройки дают значительные преимущества.</p>
+<p>По сравнению с <a href="/docs/ru/tei-ranker.md">TEI Ranker</a>, vLLM Ranker предлагает большую гибкость в выборе и настройке моделей, что делает его идеальным для специализированных или сложных поисковых приложений, где дополнительные возможности настройки дают значительные преимущества.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Общие параметры, общие для всех ранжировщиков моделей (например, <code translate="no">provider</code>, <code translate="no">queries</code>), см. в разделе <a href="/docs/ru/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Создание ранжировщика моделей</a>.</p>
+<p>Общие параметры, общие для всех ранжировщиков моделей (например, <code translate="no">provider</code>, <code translate="no">queries</code>), см. в разделе <a href="/docs/ru/model-ranker-overview.md#Create-a-model-ranker">Создание ранжировщика моделей</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Применение к стандартному векторному поиску<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Применить к гибридному поиску<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

@@ -1,7 +1,7 @@
 ---
 id: build_RAG_with_milvus_and_docling.md
 summary: >-
-  在本教程中，我们将向您展示如何使用 Milvus 和 Docling 构建检索增强生成（RAG）管道。该管道集成了用于文档解析的
+  在本教程中，我们将向您展示如何使用 Milvus 和 Docling 构建一个检索增强生成（RAG）管道。该管道集成了用于文档解析的
   Docling、用于向量存储的 Milvus 和用于生成有洞察力的上下文感知响应的 OpenAI。
 title: 使用 Milvus 和 Docling 构建 RAG
 ---
@@ -27,7 +27,7 @@ title: 使用 Milvus 和 Docling 构建 RAG
         ></path>
       </svg>
     </button></h1><p><a href="https://github.com/docling-project/docling">Docling</a>简化了人工智能应用对不同格式文档的解析和理解。通过高级 PDF 理解和统一文档表示，Docling 使非结构化文档数据为下游工作流做好了准备。</p>
-<p>在本教程中，我们将向你展示如何使用 Milvus 和 Docling 构建一个检索-增强生成（RAG）管道。该管道集成了 Docling（用于文档解析）、Milvus（用于向量存储）和 OpenAI（用于生成具有洞察力的上下文感知响应）。</p>
+<p>在本教程中，我们将向您展示如何使用 Milvus 和 Docling 构建一个检索-增强生成（RAG）管道。该管道集成了 Docling（用于文档解析）、Milvus（用于向量存储）和 OpenAI（用于生成具有洞察力的上下文感知响应）。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,7 +153,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<p>检查 Collections 是否已存在，如果已存在，则删除它。</p>
+<p>检查 Collections 是否已存在，如果存在则删除。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
@@ -163,7 +163,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

@@ -18,9 +18,13 @@ title: Grafico RAG con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>L'applicazione diffusa di modelli linguistici di grandi dimensioni evidenzia l'importanza di migliorare l'accuratezza e la pertinenza delle loro risposte. La Retrieval-Augmented Generation (RAG) arricchisce i modelli con basi di conoscenza esterne, fornendo maggiori informazioni contestuali e mitigando problemi come l'allucinazione e la conoscenza insufficiente. Tuttavia, affidarsi esclusivamente a semplici paradigmi RAG ha i suoi limiti, soprattutto quando si tratta di relazioni complesse tra entità e domande multi-hop, dove il modello spesso fatica a fornire risposte accurate.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>L'applicazione diffusa di modelli linguistici di grandi dimensioni evidenzia l'importanza di migliorare l'accuratezza e la pertinenza delle loro risposte. La Retrieval-Augmented Generation (RAG) arricchisce i modelli con basi di conoscenza esterne, fornendo maggiori informazioni contestuali e attenuando problemi come l'allucinazione e la conoscenza insufficiente. Tuttavia, affidarsi esclusivamente a semplici paradigmi RAG ha i suoi limiti, soprattutto quando si tratta di relazioni complesse tra entità e domande multi-hop, dove il modello spesso fatica a fornire risposte accurate.</p>
 <p>L'introduzione dei grafi di conoscenza (KG) nel sistema RAG offre una nuova soluzione. I KG presentano le entità e le loro relazioni in modo strutturato, fornendo informazioni di recupero più precise e aiutando RAG a gestire meglio le attività di risposta a domande complesse. KG-RAG è ancora in fase iniziale e non esiste un consenso su come recuperare efficacemente entità e relazioni dai KG o su come integrare la ricerca di similarità vettoriale con le strutture a grafo.</p>
 <p>In questo quaderno, introduciamo un approccio semplice ma potente per migliorare notevolmente le prestazioni di questo scenario. Si tratta di un semplice paradigma RAG con recupero a più vie e successivo reranking, ma implementa il Graph RAG in modo logico e raggiunge prestazioni all'avanguardia nella gestione di domande multi-hop. Vediamo come viene implementato.</p>
 <p>
@@ -202,7 +206,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -273,7 +277,7 @@ Inserting: 100%|█████████████████████�
         ></path>
       </svg>
     </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Recupero delle somiglianze</h3><p>Recuperiamo le topK entità e relazioni simili in base alla query di input da Milvus.</p>
-<p>Quando si esegue il recupero delle entità, bisogna prima estrarre le entità dal testo della query utilizzando un metodo specifico come il NER (Named-entity recognition). Per semplicità, prepariamo qui i risultati del NER. Se si desidera modificare la query come domanda personalizzata, è necessario modificare l'elenco NER corrispondente alla query. In pratica, è possibile utilizzare qualsiasi altro modello o approccio per estrarre le entità dalla query.</p>
+<p>Quando si esegue il recupero delle entità, occorre innanzitutto estrarre le entità dal testo della query utilizzando un metodo specifico come il NER (Named-entity recognition). Per semplicità, prepariamo qui i risultati del NER. Se si desidera modificare la query come domanda personalizzata, è necessario modificare l'elenco NER corrispondente alla query. In pratica, è possibile utilizzare qualsiasi altro modello o approccio per estrarre le entità dalla query.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 
 query_ner_list = [<span class="hljs-string">&quot;Euler&quot;</span>]
@@ -372,7 +376,7 @@ relation_candidate_texts = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>Abbiamo ottenuto le relazioni candidate attraverso l'espansione del sottografo, che saranno ricanalizzate da LLM nella fase successiva.</p>
-<h3 id="LLM-reranking" class="common-anchor-header">Ricanalizzazione da parte di LLM</h3><p>In questa fase, utilizziamo il potente meccanismo di autoattenzione di LLM per filtrare e raffinare ulteriormente l'insieme delle relazioni candidate. Utilizziamo un prompt unico, incorporando la domanda e l'insieme di relazioni candidate nel prompt, e istruiamo LLM a selezionare le relazioni potenziali che potrebbero aiutare a rispondere alla domanda. Poiché alcune domande possono essere complesse, adottiamo l'approccio della catena del pensiero, consentendo a LLM di articolare il suo processo di pensiero nella risposta. La risposta di LLM deve essere in formato json, per una comoda analisi.</p>
+<h3 id="LLM-reranking" class="common-anchor-header">Ricanalizzazione da parte di LLM</h3><p>In questa fase, utilizziamo il potente meccanismo di autoattenzione di LLM per filtrare e raffinare ulteriormente l'insieme di relazioni candidate. Utilizziamo una richiesta unica, incorporando la domanda e l'insieme di relazioni candidate nella richiesta, e istruiamo LLM a selezionare le relazioni potenziali che potrebbero aiutare a rispondere alla domanda. Dato che alcune domande possono essere complesse, adottiamo l'approccio della catena del pensiero, consentendo a LLM di articolare il suo processo di pensiero nella risposta. La risposta di LLM deve essere in formato json, per una comoda analisi.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:

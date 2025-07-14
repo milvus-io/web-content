@@ -23,8 +23,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Il TEI Ranker sfrutta il servizio <a href="/docs/it/v2.6.x/tei-ranker.md">Text Embedding Inference (TEI)</a> di Hugging Face per migliorare la rilevanza delle ricerche attraverso una riclassificazione semantica. Rappresenta un approccio avanzato all'ordinamento dei risultati di ricerca che va oltre la tradizionale somiglianza vettoriale.</p>
-<p>Rispetto a <a href="/docs/it/v2.6.x/vllm-ranker.md">vLLM Ranker</a>, TEI Ranker offre una semplice integrazione con l'ecosistema di Hugging Face e con i modelli di reranking pre-addestrati, rendendolo ideale per le applicazioni in cui la facilità di implementazione e di manutenzione sono prioritarie.</p>
+    </button></h1><p>Il TEI Ranker sfrutta il servizio <a href="/docs/it/tei-ranker.md">Text Embedding Inference (TEI)</a> di Hugging Face per migliorare la rilevanza delle ricerche attraverso una riclassificazione semantica. Rappresenta un approccio avanzato all'ordinamento dei risultati di ricerca che va oltre la tradizionale somiglianza vettoriale.</p>
+<p>Rispetto a <a href="/docs/it/vllm-ranker.md">vLLM Ranker</a>, TEI Ranker offre una semplice integrazione con l'ecosistema di Hugging Face e con i modelli di reranking pre-addestrati, rendendolo ideale per le applicazioni in cui la facilità di implementazione e di manutenzione sono prioritarie.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +110,7 @@ tei_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Per i parametri generali condivisi da tutti i classificatori di modelli (ad esempio, <code translate="no">provider</code>, <code translate="no">queries</code>), fare riferimento a <a href="/docs/it/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Creare un classificatore di modelli</a>.</p>
+<p>Per i parametri generali condivisi da tutti i classificatori di modelli (ad esempio, <code translate="no">provider</code>, <code translate="no">queries</code>), fare riferimento a <a href="/docs/it/model-ranker-overview.md#Create-a-model-ranker">Creare un classificatore di modelli</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Applicare alla ricerca vettoriale standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,7 +136,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                         <span class="hljs-comment"># Apply tei reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Applicare alla ricerca ibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

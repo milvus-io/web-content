@@ -23,7 +23,7 @@ title: Pesquisa híbrida com Milvus
     </button></h1><p>Se quiser experimentar o efeito final deste tutorial, pode ir diretamente para https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>Neste tutorial, vamos demonstrar como efetuar uma pesquisa híbrida com <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">o modelo BGE-M3</a>. O modelo BGE-M3 pode converter texto em vectores densos e esparsos. O Milvus suporta o armazenamento de ambos os tipos de vectores numa única coleção, permitindo uma pesquisa híbrida que aumenta a relevância dos resultados.</p>
-<p>Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
+<p>O Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
 <ul>
 <li>Recuperação Densa: Utiliza o contexto semântico para entender o significado por trás das consultas.</li>
 <li>Recuperação esparsa: Dá ênfase à correspondência de palavras-chave para encontrar resultados com base em termos específicos, equivalente à pesquisa de texto completo.</li>
@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -143,8 +143,8 @@ query_embeddings = ef([query])
 <h3 id="Run-the-Search" class="common-anchor-header">Executar a pesquisa</h3><p>Vamos primeiro preparar algumas funções úteis para executar a pesquisa:</p>
 <ul>
 <li><code translate="no">dense_search</code>: apenas pesquisa no campo vetorial denso</li>
-<li><code translate="no">sparse_search</code>: pesquisar apenas no campo vetorial esparso</li>
-<li><code translate="no">hybrid_search</code>: pesquisar em campos densos e vectoriais com um reranker ponderado</li>
+<li><code translate="no">sparse_search</code>: pesquisa apenas no campo vetorial esparso</li>
+<li><code translate="no">hybrid_search</code>: pesquisa em campos densos e vectoriais com um reranker ponderado</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     AnnSearchRequest,
@@ -305,7 +305,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Como</span> é que posso começar<span style='color:red'> a</span> aprender segurança informática<span style='color:red'>?</span></p>
 <p><span style='color:red'>Como</span> é que aprendo uma linguagem informática como o java<span style='color:red'>?</span></p>
 <p>Qual é a alternativa<span style='color:red'> à</span><span style='color:red'> aprendizagem</span> automática<span style='color:red'>?</span></p>
-<p><span style='color:red'>Como</span> criar um novo Terminal e um novo shell no Linux usando<span style='color:red'> programação</span> C<span style='color:red'>?</span></p>
+<p><span style='color:red'>Como</span> é que eu crio um novo Terminal e uma nova shell no Linux usando<span style='color:red'> programação</span> C<span style='color:red'>?</span></p>
 <p><span style='color:red'>Como</span> criar um novo shell num novo terminal usando<span style='color:red'> programação</span> C (terminal Linux)<span style='color:red'>?</span></p>
 <p>Qual é o melhor negócio<span style='color:red'> para começar</span> em Hyderabad<span style='color:red'>?</span></p>
 <p>Qual é o melhor negócio para<span style='color:red'> começar</span> em Hyderabad<span style='color:red'>?</span></p>

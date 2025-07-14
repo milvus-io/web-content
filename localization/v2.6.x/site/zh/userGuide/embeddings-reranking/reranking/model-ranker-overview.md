@@ -124,8 +124,8 @@ beta: Milvus 2.6.x
 </table>
 <p>有关各模型服务实施的详细信息，请参阅专用文档：</p>
 <ul>
-<li><p><a href="/docs/zh/v2.6.x/vllm-ranker.md">vLLM 排序器</a></p></li>
-<li><p><a href="/docs/zh/v2.6.x/tei-ranker.md">TEI 排序器</a></p></li>
+<li><p><a href="/docs/zh/vllm-ranker.md">vLLM 排序器</a></p></li>
+<li><p><a href="/docs/zh/tei-ranker.md">TEI 排序器</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">实施<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -199,7 +199,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>是</p></td>
-     <td><p>包含基于模型的 Reranker 功能配置的字典。可用参数（键）因提供程序（<code translate="no">tei</code> 或<code translate="no">vllm</code> ）而异。详情请参考<a href="/docs/zh/v2.6.x/vllm-ranker.md">vLLM Ranker</a>或<a href="/docs/zh/v2.6.x/tei-ranker.md">TEI Ranker</a>。</p></td>
+     <td><p>包含基于模型的 Reranker 功能配置的字典。可用参数（键）因提供程序（<code translate="no">tei</code> 或<code translate="no">vllm</code> ）而异。详情请参考<a href="/docs/zh/vllm-ranker.md">vLLM Ranker</a>或<a href="/docs/zh/tei-ranker.md">TEI Ranker</a>。</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -242,7 +242,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索</h3><p>模型排序器也可以应用于结合多个向量场的混合搜索操作：</p>

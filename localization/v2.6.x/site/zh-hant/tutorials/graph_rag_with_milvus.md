@@ -18,8 +18,12 @@ title: 使用 Milvus 的圖形 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <p>大型語言模型的廣泛應用突顯了改善其回應準確性與相關性的重要性。檢索增強世代 (Retrieval-Augmented Generation，RAG) 利用外部知識庫增強模型，提供更多的上下文資訊，並減少幻覺和知識不足等問題。然而，僅依賴簡單的 RAG 模式有其限制，尤其是在處理複雜的實體關係和多跳問題時，模型往往難以提供準確的答案。</p>
 <p>將知識圖形 (KG) 引進 RAG 系統提供了新的解決方案。KG 以結構化的方式呈現實體及其關係，提供更精確的檢索資訊，並協助 RAG 更好地處理複雜的問題解答任務。KG-RAG 仍處於早期階段，對於如何從 KG 中有效地檢索實體及其關係，以及如何整合向量相似性搜尋與圖形結構，目前尚未達成共識。</p>
 <p>在本筆記中，我們將介紹一種簡單但功能強大的方法，以大幅改善此情況的效能。它是一個簡單的 RAG 范例，先進行多向擷取，然後再重新排序，但它在邏輯上實現了 Graph RAG，並在處理多跳問題時達到最先進的效能。讓我們看看它是如何實作的。</p>
@@ -202,7 +206,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -306,7 +310,7 @@ relation_search_res = milvus_client.search(
     <span></span>
   </span>
 </p>
-<p>在此我們建構一個相鄰矩陣，並使用矩陣乘法來計算幾度內的相鄰映射資訊。透過這種方式，我們可以快速取得任何擴充度的資訊。</p>
+<p>在此，我們建構一個鄰接矩陣，並使用矩陣乘法計算幾度內的鄰接映射資訊。透過這種方式，我們可以快速取得任何擴充度的資訊。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Construct the adjacency matrix of entities and relations where the value of the adjacency matrix is 1 if an entity is related to a relation, otherwise 0.</span>
 entity_relation_adj = np.zeros((<span class="hljs-built_in">len</span>(entities), <span class="hljs-built_in">len</span>(relations)))
 <span class="hljs-keyword">for</span> entity_id, entity <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(entities):

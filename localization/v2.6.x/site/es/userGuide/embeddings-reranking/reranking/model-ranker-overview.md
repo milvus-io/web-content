@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Para obtener información detallada sobre la implementación de cada modelo de servicio, consulte la documentación correspondiente:</p>
 <ul>
-<li><p><a href="/docs/es/v2.6.x/vllm-ranker.md">Clasificador vLLM</a></p></li>
-<li><p><a href="/docs/es/v2.6.x/tei-ranker.md">Clasificador TEI</a></p></li>
+<li><p><a href="/docs/es/vllm-ranker.md">Clasificador vLLM</a></p></li>
+<li><p><a href="/docs/es/tei-ranker.md">Clasificador TEI</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementación<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +205,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Sí</p></td>
-     <td><p>Diccionario que contiene la configuración de la función de reordenación basada en modelos. Los parámetros disponibles (claves) varían en función del proveedor (<code translate="no">tei</code> o <code translate="no">vllm</code>). Consulte <a href="/docs/es/v2.6.x/vllm-ranker.md">vLLM Ranker</a> o <a href="/docs/es/v2.6.x/tei-ranker.md">TEI Ranker</a> para obtener más detalles.</p></td>
+     <td><p>Diccionario que contiene la configuración de la función de reordenación basada en modelos. Los parámetros disponibles (claves) varían en función del proveedor (<code translate="no">tei</code> o <code translate="no">vllm</code>). Consulte <a href="/docs/es/vllm-ranker.md">vLLM Ranker</a> o <a href="/docs/es/tei-ranker.md">TEI Ranker</a> para obtener más detalles.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -248,7 +248,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar a la búsqueda híbrida</h3><p>Los clasificadores de modelos también pueden aplicarse a las operaciones de búsqueda híbrida que combinan varios campos vectoriales:</p>

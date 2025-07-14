@@ -6,9 +6,9 @@ summary: >-
   metodi asincroni, è possibile migliorare in modo significativo il throughput e
   la reattività delle applicazioni, soprattutto quando si tratta di recuperi su
   larga scala.
-title: Funzioni asincrone nell'integrazione LangChain Milvus
+title: Funzioni asincrone nell'integrazione di LangChain Milvus
 ---
-<h1 id="Asynchronous-Functions-in-LangChain-Milvus-Integration" class="common-anchor-header">Funzioni asincrone nell'integrazione LangChain Milvus<button data-href="#Asynchronous-Functions-in-LangChain-Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Asynchronous-Functions-in-LangChain-Milvus-Integration" class="common-anchor-header">Funzioni asincrone nell'integrazione di LangChain Milvus<button data-href="#Asynchronous-Functions-in-LangChain-Milvus-Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,13 @@ title: Funzioni asincrone nell'integrazione LangChain Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questo tutorial spiega come sfruttare le funzioni asincrone in <a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a> per costruire applicazioni ad alte prestazioni. Utilizzando i metodi asincroni, è possibile migliorare significativamente il throughput e la reattività dell'applicazione, soprattutto quando si tratta di un reperimento su larga scala. Sia che stiate costruendo un sistema di raccomandazione in tempo reale, sia che stiate implementando una ricerca semantica nella vostra applicazione, sia che stiate creando una pipeline RAG (Retrieval-Augmented Generation), le operazioni async possono aiutarvi a gestire in modo più efficiente le richieste simultanee. Il database vettoriale ad alte prestazioni Milvus, combinato con le potenti astrazioni LLM di LangChain, può fornire una solida base per la costruzione di applicazioni AI scalabili.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>Questo tutorial spiega come sfruttare le funzioni asincrone in <a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a> per costruire applicazioni ad alte prestazioni. Utilizzando i metodi asincroni, è possibile migliorare in modo significativo il throughput e la reattività delle applicazioni, soprattutto quando si ha a che fare con il reperimento di dati su larga scala. Sia che stiate costruendo un sistema di raccomandazione in tempo reale, sia che stiate implementando una ricerca semantica nella vostra applicazione, sia che stiate creando una pipeline RAG (Retrieval-Augmented Generation), le operazioni async possono aiutarvi a gestire in modo più efficiente le richieste simultanee. Il database vettoriale ad alte prestazioni Milvus, combinato con le potenti astrazioni LLM di LangChain, può fornire una solida base per la costruzione di applicazioni AI scalabili.</p>
 <h2 id="Async-API-Overview" class="common-anchor-header">Panoramica dell'API asincrona<button data-href="#Async-API-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +96,7 @@ title: Funzioni asincrone nell'integrazione LangChain Milvus
 <pre><code translate="no" class="language-python">! pip install -U pymilvus langchain-milvus langchain langchain-core langchain-openai langchain-text-splitters nest-asyncio
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Riavvia sessione" dal menu a discesa).</p>
+<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>
 </blockquote>
 <p>Utilizzeremo i modelli OpenAI. È necessario preparare la <a href="https://platform.openai.com/docs/quickstart">chiave api</a> <code translate="no">OPENAI_API_KEY</code> come variabile d'ambiente:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os

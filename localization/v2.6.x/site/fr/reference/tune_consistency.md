@@ -52,7 +52,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" />
    </span> <span class="img-wrapper"> <span>Temps de service et temps de garantie</span> </span></p>
 <p>Comme le montre la figure ci-dessus, si GuaranteeTs est inférieur à ServiceTime, cela signifie que toutes les données antérieures au moment spécifié ont été entièrement écrites sur le disque, ce qui permet aux QueryNodes d'effectuer immédiatement l'opération de recherche. Lorsque GuaranteeTs est supérieur à ServiceTime, les QueryNodes doivent attendre que ServiceTime dépasse GuaranteeTs avant de pouvoir exécuter l'opération Search.</p>
-<p>Les utilisateurs doivent trouver un compromis entre la précision et la latence des requêtes. Si les utilisateurs ont des exigences élevées en matière de cohérence et ne sont pas sensibles à la latence des requêtes, ils peuvent fixer GuaranteeTs à une valeur aussi grande que possible ; si les utilisateurs souhaitent recevoir les résultats de la recherche rapidement et sont plus tolérants quant à la précision des requêtes, alors GuaranteeTs peut être fixé à une valeur plus petite.</p>
+<p>Les utilisateurs doivent trouver un compromis entre la précision et la latence des requêtes. Si les utilisateurs ont des exigences élevées en matière de cohérence et ne sont pas sensibles à la latence des requêtes, ils peuvent fixer GuaranteeTs à une valeur aussi grande que possible ; si les utilisateurs souhaitent recevoir des résultats de recherche rapidement et sont plus tolérants en matière de précision des requêtes, alors GuaranteeTs peut être fixé à une valeur plus petite.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" />
@@ -91,7 +91,7 @@ summary: >-
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-<span class="highlighted-wrapper-line">    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,</span>
+<span class="highlighted-wrapper-line">    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()

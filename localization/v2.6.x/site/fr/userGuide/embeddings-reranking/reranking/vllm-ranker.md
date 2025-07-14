@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>les systèmes d'assistance à la clientèle qui doivent associer les problèmes des utilisateurs à des solutions pertinentes</p></li>
 <li><p>La recherche dans le domaine du commerce électronique qui doit comprendre les attributs du produit et l'intention de l'utilisateur.</p></li>
 </ul>
-<p>Comparé à <a href="/docs/fr/v2.6.x/tei-ranker.md">TEI Ranker</a>, vLLM Ranker offre une plus grande flexibilité dans la sélection et la personnalisation des modèles, ce qui le rend idéal pour les applications de recherche spécialisées ou complexes où les options de configuration supplémentaires offrent des avantages significatifs.</p>
+<p>Comparé à <a href="/docs/fr/tei-ranker.md">TEI Ranker</a>, vLLM Ranker offre une plus grande flexibilité dans la sélection et la personnalisation des modèles, ce qui le rend idéal pour les applications de recherche spécialisées ou complexes où les options de configuration supplémentaires offrent des avantages significatifs.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +86,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser vLLM Ranker dans votre application Milvus, créez un objet Function qui spécifie le mode de fonctionnement du reranking. Cette fonction sera transmise aux opérations de recherche Milvus afin d'améliorer le classement des résultats.</p>
+    </button></h2><p>Pour utiliser vLLM Ranker dans votre application Milvus, créez un objet Function qui spécifie le mode de fonctionnement du reranking. Cette fonction sera transmise aux opérations de recherche Milvus pour améliorer le classement des résultats.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -125,7 +125,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Pour les paramètres généraux partagés par tous les classificateurs de modèles (par exemple, <code translate="no">provider</code>, <code translate="no">queries</code>), reportez-vous à la section <a href="/docs/fr/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Créer un classificateur de modèles</a>.</p>
+<p>Pour les paramètres généraux partagés par tous les classificateurs de modèles (par exemple, <code translate="no">provider</code>, <code translate="no">queries</code>), reportez-vous à la section <a href="/docs/fr/model-ranker-overview.md#Create-a-model-ranker">Créer un classificateur de modèles</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Appliquer à la recherche vectorielle standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

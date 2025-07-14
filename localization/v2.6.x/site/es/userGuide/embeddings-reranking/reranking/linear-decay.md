@@ -60,7 +60,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Listados de eventos</p></td>
      <td><p>Plataformas de entradas para conciertos</p></td>
-     <td><p>Crea un límite claro para eventos demasiado lejanos en el tiempo</p></td>
+     <td><p>Crea un límite claro para los eventos demasiado lejanos en el tiempo</p></td>
    </tr>
    <tr>
      <td><p>Ofertas por tiempo limitado</p></td>
@@ -110,7 +110,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">origin</code> (fecha actual): El momento actual, donde la relevancia es máxima (1,0).</p></li>
 <li><p><code translate="no">offset</code> (1 día): La "ventana de eventos inmediatos": todos los eventos que se celebren en el día siguiente mantienen una puntuación de relevancia completa (1,0), lo que garantiza que los eventos muy inminentes no se vean penalizados por pequeñas diferencias temporales.</p></li>
 <li><p><code translate="no">decay</code> (0.5): La puntuación a la distancia de escala: este parámetro controla la tasa de disminución de la relevancia.</p></li>
-<li><p><code translate="no">scale</code> (10 días): El periodo de tiempo en el que la relevancia desciende hasta el valor de decaimiento-los eventos a 10 días tienen sus puntuaciones de relevancia reducidas a la mitad (0,5).</p></li>
+<li><p><code translate="no">scale</code> (10 días): El periodo de tiempo en el que la relevancia cae hasta el valor de decaimiento-los eventos a 10 días vista tienen sus puntuaciones de relevancia reducidas a la mitad (0,5).</p></li>
 </ul>
 <p>Como puede ver en la curva rectilínea, los eventos que se produzcan en un plazo superior a 16 días tendrán una relevancia cero y no aparecerán en los resultados de búsqueda. Esto crea un límite claro que garantiza que los usuarios sólo vean los próximos eventos relevantes dentro de una ventana temporal definida.</p>
 <p>Este comportamiento refleja cómo funciona normalmente la planificación de eventos: los eventos inminentes son los más relevantes, los eventos de las próximas semanas tienen una importancia decreciente y los eventos demasiado lejanos en el tiempo (o ya pasados) no deberían aparecer en absoluto.</p>
@@ -141,7 +141,7 @@ beta: Milvus 2.6.x
 <li><p>Reste la distancia ajustada de <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s y divídala por <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s</p></li>
 <li><p>Asegúrese de que el resultado nunca sea inferior a cero: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>max</mi><mo stretchy="false">(</mo><mi>resultado</mi><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\max <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(resultado, 0)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord mathnormal">resultado</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span></span> 0 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose">)</span></span></span></span></p></li>
 </ol>
-<p>El cálculo de <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s transforma sus parámetros de escala y decaimiento en el punto en el que la puntuación llega a cero. Por ejemplo, con decaimiento=0,5 y escala=7, la puntuación llegará exactamente a cero en la distancia=14 (el doble del valor de escala).</p>
+<p>El cálculo de <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s transforma sus parámetros de escala y decaimiento en el punto en el que la puntuación llega a cero. Por ejemplo, con decaimiento=0,5 y escala=7, la puntuación llegará exactamente a cero en la distancia=14 (el doble del valor de la escala).</p>
 <h2 id="Use-linear-decay" class="common-anchor-header">Utilizar el decaimiento lineal<button data-href="#Use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -159,7 +159,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>El decaimiento lineal puede aplicarse tanto a la búsqueda vectorial estándar como a las operaciones de búsqueda híbrida en Milvus. A continuación se muestran los fragmentos de código clave para implementar esta función.</p>
 <div class="alert note">
-<p>Antes de utilizar las funciones de decaimiento, primero debe crear una colección con los campos numéricos apropiados (como marcas de tiempo, distancias, etc.) que se utilizarán para los cálculos de decaimiento. Para ver ejemplos de trabajo completos que incluyan la configuración de la colección, la definición del esquema y la inserción de datos, consulte el <a href="/docs/es/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial del Clasificador por Decaimiento</a>.</p>
+<p>Antes de utilizar las funciones de decaimiento, primero debe crear una colección con campos numéricos apropiados (como marcas de tiempo, distancias, etc.) que se utilizarán para los cálculos de decaimiento. Para ver ejemplos de trabajo completos que incluyan la configuración de la colección, la definición del esquema y la inserción de datos, consulte el <a href="/docs/es/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial del Clasificador por Decaimiento</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Crear un clasificador de descomposición</h3><p>Una vez configurada la colección con un campo numérico (en este ejemplo, <code translate="no">event_date</code> como segundos a partir de ahora), cree un clasificador de decaimiento lineal:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -192,7 +192,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar a la búsqueda híbrida</h3><p>Los decay rankers también pueden aplicarse a operaciones de búsqueda híbrida que combinan múltiples campos vectoriales:</p>

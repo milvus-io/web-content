@@ -2,7 +2,7 @@
 id: linear-decay.md
 title: 선형 감쇠Compatible with Milvus 2.6.x
 summary: >-
-  선형 감쇠는 검색 결과에서 절대 0점에서 끝나는 직선형 감소를 만듭니다. 다가오는 이벤트 카운트다운에서 이벤트가 지나갈 때까지 관련성이
+  선형 감쇠는 검색 결과에서 절대 0점에서 끝나는 직선형 감소를 생성합니다. 다가오는 이벤트 카운트다운에서 이벤트가 지나갈 때까지 관련성이
   서서히 사라지는 것처럼, 선형 감쇠는 항목이 이상적인 지점에서 멀어질수록 관련성이 완전히 사라질 때까지 예측 가능하고 꾸준히 감소합니다. 이
   접근 방식은 특정 경계를 벗어난 항목이 결과에서 완전히 제외되도록 하여 명확한 컷오프가 있는 일관된 감쇠율을 원하는 경우에 이상적입니다.
 beta: Milvus 2.6.x
@@ -102,7 +102,7 @@ beta: Milvus 2.6.x
 <p>위의 그래프는 선형 감쇠가 티켓팅 플랫폼의 이벤트 목록에 어떤 영향을 미치는지 보여줍니다:</p>
 <ul>
 <li><p><code translate="no">origin</code> (현재 날짜): 관련성이 최대(1.0)인 현재 시점입니다.</p></li>
-<li><p><code translate="no">offset</code> (1일): '즉시 이벤트 기간': 다음 날 이내에 발생하는 모든 이벤트는 관련성 점수가 최대(1.0)로 유지되어 매우 임박한 이벤트가 약간의 시간 차이로 인해 불이익을 받지 않도록 보장합니다.</p></li>
+<li><p><code translate="no">offset</code> (1일): '즉시 이벤트 기간': 다음 날 이내에 발생하는 모든 이벤트는 관련성 점수가 최대(1.0)로 유지되어 매우 임박한 이벤트가 약간의 시간 차이로 인해 불이익을 받지 않도록 합니다.</p></li>
 <li><p><code translate="no">decay</code> (0.5): 스케일 거리의 점수 - 이 매개변수는 관련성 감소 속도를 제어합니다.</p></li>
 <li><p><code translate="no">scale</code> (10일): 관련성이 감쇠 값으로 떨어지는 기간 - 10일이 지난 이벤트의 관련성 점수는 절반(0.5)으로 감소합니다.</p></li>
 </ul>
@@ -186,7 +186,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 연산에도 디케이 레이커를 적용할 수 있습니다:</p>

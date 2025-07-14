@@ -23,7 +23,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 해당 분석기가 영어에 최적화된 경우 중국어, 스페인어 또는 프랑스어와 같은 다른 언어에서 요구하는 매우 다른 토큰화 및 어간 규칙에 어려움을 겪게 되며, 그 결과 리콜률이 낮아지게 됩니다. 예를 들어, 스페인어 단어 <em>"teléfono</em> "( <em>'전화'라는</em> 뜻)를 검색하면 영어 중심의 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지 않아 관련 결과를 간과할 수 있습니다.</p>
+    </button></h1><p>Milvus는 텍스트 분석을 수행할 때 일반적으로 컬렉션의 전체 텍스트 필드에 단일 분석기를 적용합니다. 해당 분석기가 영어에 최적화된 경우 중국어, 스페인어 또는 프랑스어와 같은 다른 언어에서 요구하는 토큰화 및 어간 규칙이 매우 달라서 리콜률이 낮아질 수 있습니다. 예를 들어, 스페인어 단어 <em>"teléfono</em> "( <em>'전화'라는</em> 뜻)를 검색하면 영어 중심의 분석기가 악센트를 삭제하고 스페인어 전용 어간을 적용하지 않아 관련 결과를 간과할 수 있습니다.</p>
 <p>다국어 분석기는 단일 컬렉션에서 텍스트 필드에 대해 여러 분석기를 구성할 수 있도록 함으로써 이 문제를 해결합니다. 이렇게 하면 텍스트 필드에 다국어 문서를 저장할 수 있으며, Milvus는 각 문서에 적합한 언어 규칙에 따라 텍스트를 분석합니다.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -822,7 +822,7 @@ english_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display English search results</span>
@@ -868,7 +868,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display English search results</span>
@@ -922,7 +922,7 @@ curl --request POST \
     &quot;drop_ratio_search&quot;: &quot;0&quot;  
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Use-Chinese-analyzer" class="common-anchor-header">중국어 분석기 사용</h3><p>이 예는 다른 쿼리 텍스트에 대해 중국어 분석기(별칭 <code translate="no">&quot;cn&quot;</code>)로 전환하는 것을 보여줍니다. 다른 모든 매개 변수는 동일하게 유지되지만 이제 쿼리 텍스트는 중국어 전용 토큰화 규칙을 사용하여 처리됩니다.</p>
@@ -937,7 +937,7 @@ chinese_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display Chinese search results</span>
@@ -980,7 +980,7 @@ searchResults = searchResp.getSearchResults();
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display Chinese search results</span>
@@ -1030,6 +1030,6 @@ curl --request POST \
     &quot;analyzer_name&quot;: &quot;cn&quot;
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

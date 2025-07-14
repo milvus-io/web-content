@@ -267,7 +267,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -290,7 +290,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):
@@ -349,7 +349,7 @@ refined_results = client.search(
      <td><p><code translate="no">mh_lsh_bloom_false_positive_prob</code></p></td>
      <td><p>LSH 버킷 최적화에 사용되는 블룸 필터의 오탐 확률입니다.</p></td>
      <td><p>[0.001, 0.1]</p></td>
-     <td><p>균형 잡힌 메모리 사용량과 정확도를 위해 <code translate="no">0.01</code> 을 사용하세요. 값이 낮을수록 (<code translate="no">0.001</code>) 오탐 확률은 감소하지만 메모리가 증가합니다. 값이 높을수록(<code translate="no">0.05</code>) 메모리는 절약되지만 정확도가 떨어질 수 있습니다.</p></td>
+     <td><p>균형 잡힌 메모리 사용량과 정확도를 위해 <code translate="no">0.01</code> 을 사용하세요. 값이 낮을수록 (<code translate="no">0.001</code>) 오탐은 감소하지만 메모리가 증가합니다. 값이 높을수록(<code translate="no">0.05</code>) 메모리는 절약되지만 정확도가 떨어질 수 있습니다.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/minhash-lsh.md#Perform-similarity-search">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나와 있습니다.</p>
@@ -376,6 +376,6 @@ refined_results = client.search(
      <td><p><code translate="no">mh_lsh_batch_search</code></p></td>
      <td><p>여러 개의 동시 쿼리에 대해 일괄 최적화를 활성화할지 여부입니다.</p></td>
      <td><p>true, false</p></td>
-     <td><p>처리량 향상을 위해 여러 쿼리를 동시에 검색할 때는 <code translate="no">true</code> 을 사용합니다. 단일 쿼리 시나리오에서는 <code translate="no">false</code> 을 사용하여 메모리 오버헤드를 줄입니다.</p></td>
+     <td><p>처리량 향상을 위해 여러 쿼리를 동시에 검색하는 경우 <code translate="no">true</code> 을 사용합니다. 단일 쿼리 시나리오에서는 <code translate="no">false</code> 을 사용하여 메모리 오버헤드를 줄입니다.</p></td>
    </tr>
 </table>

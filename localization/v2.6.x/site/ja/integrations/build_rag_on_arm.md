@@ -2,7 +2,7 @@
 id: build_rag_on_arm.md
 summary: >-
   このチュートリアルでは、Armベースのインフラ上でRAG（Retrieval-Augmented
-  Generation）アプリケーションを構築する方法を学びます。ベクターストレージには、フルマネージドMilvusベクターデータベースであるZilliz
+  Generation）アプリケーションを構築する方法を学びます。ベクトルストレージには、フルマネージドMilvusベクトルデータベースであるZilliz
   Cloudを利用します。Zilliz
   Cloudは、AWS、GCP、Azureなどの主要なクラウドで利用できる。このデモでは、ArmマシンとAWS上にデプロイされたZilliz
   Cloudを使用している。LLMについては、llama.cppを使用してAWSのArmベースのサーバーCPU上でLlama-3.1-8Bモデルを使用しています。
@@ -93,7 +93,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>デフォルトのメトリックタイプとして内積距離を使用する。距離タイプの詳細については、<a href="https://milvus.io/docs/metric.md?tab=floating">類似度メトリクスのページを</a>参照してください。</p>

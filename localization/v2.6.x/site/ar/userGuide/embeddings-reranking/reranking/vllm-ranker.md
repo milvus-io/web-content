@@ -30,7 +30,7 @@ beta: Milvus 2.6.x
 <li><p>أنظمة دعم العملاء التي تحتاج إلى مطابقة مشاكل المستخدم مع الحلول ذات الصلة</p></li>
 <li><p>بحث التجارة الإلكترونية الذي يجب أن يفهم سمات المنتج ونوايا المستخدم</p></li>
 </ul>
-<p>بالمقارنة مع <a href="/docs/ar/v2.6.x/tei-ranker.md">مصنف TEI Ranker،</a> يوفر vLLM Ranker مرونة أكبر في اختيار النموذج والتخصيص، مما يجعله مثاليًا لتطبيقات البحث المتخصصة أو المعقدة حيث توفر خيارات التكوين الإضافية فوائد كبيرة.</p>
+<p>بالمقارنة مع <a href="/docs/ar/tei-ranker.md">مصنف TEI Ranker،</a> يوفر vLLM Ranker مرونة أكبر في اختيار النموذج والتخصيص، مما يجعله مثاليًا لتطبيقات البحث المتخصصة أو المعقدة حيث توفر خيارات التكوين الإضافية فوائد كبيرة.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,7 +124,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>للحصول على معلمات عامة مشتركة بين جميع مصنفات النماذج (على سبيل المثال، <code translate="no">provider</code> ، <code translate="no">queries</code>)، راجع <a href="/docs/ar/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">إنشاء مصنف نموذج</a>.</p>
+<p>للحصول على معلمات عامة مشتركة بين جميع مصنفات النماذج (على سبيل المثال، <code translate="no">provider</code> ، <code translate="no">queries</code>)، راجع <a href="/docs/ar/model-ranker-overview.md#Create-a-model-ranker">إنشاء مصنف نموذج</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">التطبيق على البحث المتجه القياسي<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,7 +150,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">التطبيق على البحث الهجين<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

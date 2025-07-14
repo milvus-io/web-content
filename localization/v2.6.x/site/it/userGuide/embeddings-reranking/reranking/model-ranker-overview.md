@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>I Model Ranker integrano le capacità di comprensione dei modelli linguistici nel processo di ricerca Milvus attraverso un flusso di lavoro ben definito:</p>
+    </button></h2><p>I Model Ranker integrano le capacità di comprensione dei modelli linguistici nel processo di ricerca di Milvus attraverso un flusso di lavoro ben definito:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" />
@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Per informazioni dettagliate sull'implementazione di ciascun modello di servizio, consultare la documentazione dedicata:</p>
 <ul>
-<li><p><a href="/docs/it/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/it/v2.6.x/tei-ranker.md">Classificatore TEI</a></p></li>
+<li><p><a href="/docs/it/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/it/tei-ranker.md">Classificatore TEI</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementazione<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +205,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Un dizionario contenente la configurazione della funzione di reranking basata su modelli. I parametri disponibili (chiavi) variano a seconda del provider (<code translate="no">tei</code> o <code translate="no">vllm</code>). Fare riferimento a <a href="/docs/it/v2.6.x/vllm-ranker.md">vLLM Ranker</a> o <a href="/docs/it/v2.6.x/tei-ranker.md">TEI Ranker</a> per maggiori dettagli.</p></td>
+     <td><p>Un dizionario contenente la configurazione della funzione di reranking basata su modelli. I parametri disponibili (chiavi) variano a seconda del provider (<code translate="no">tei</code> o <code translate="no">vllm</code>). Fare riferimento a <a href="/docs/it/vllm-ranker.md">vLLM Ranker</a> o <a href="/docs/it/tei-ranker.md">TEI Ranker</a> per maggiori dettagli.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -248,7 +248,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Applica alla ricerca ibrida</h3><p>I ranker dei modelli possono essere applicati anche alle operazioni di ricerca ibrida che combinano più campi vettoriali:</p>

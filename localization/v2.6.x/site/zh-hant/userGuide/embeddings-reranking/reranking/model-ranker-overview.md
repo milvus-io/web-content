@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>傳統的向量搜尋純粹是透過數學相似性來排列結果，也就是向量在高維空間中的匹配程度。這種方法雖然有效率，但往往會忽略真正的語意相關性。考慮搜尋<strong>「資料庫最佳優化實務」：</strong>您可能會收到高向量相似度的文件，這些文件會經常提到這些詞彙，但實際上卻沒有提供可行的優化策略。</p>
+    </button></h1><p>傳統的向量搜尋純粹以數學相似性來排列結果，也就是向量在高維空間中的匹配程度。這種方法雖然有效率，但往往會忽略真正的語意相關性。考慮搜尋<strong>「資料庫最佳優化實務」：</strong>您可能會收到高向量相似度的文件，這些文件會經常提到這些詞彙，但實際上卻沒有提供可行的優化策略。</p>
 <p>Model Ranker 整合了先進的語言模型，能夠理解查詢與文件之間的語義關係，從而改變 Milvus 的搜尋方式。它不只依賴向量相似度，還會評估內容的意義和上下文，以提供更智慧、更相關的搜尋結果。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,8 +124,8 @@ beta: Milvus 2.6.x
 </table>
 <p>有關各模型服務實施的詳細資訊，請參閱專用說明文件：</p>
 <ul>
-<li><p><a href="/docs/zh-hant/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/zh-hant/v2.6.x/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/zh-hant/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/zh-hant/tei-ranker.md">TEI Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">實施<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -199,7 +199,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>是</p></td>
-     <td><p>包含基於模型的重排函數設定的辭典。可用參數 (鍵) 依提供者 (<code translate="no">tei</code> 或<code translate="no">vllm</code>) 而異。詳情請參閱<a href="/docs/zh-hant/v2.6.x/vllm-ranker.md">vLLM Ranker</a>或<a href="/docs/zh-hant/v2.6.x/tei-ranker.md">TEI Ranker</a>。</p></td>
+     <td><p>包含基於模型的重排函數設定的辭典。可用參數 (鍵) 依提供者 (<code translate="no">tei</code> 或<code translate="no">vllm</code>) 而異。詳情請參閱<a href="/docs/zh-hant/vllm-ranker.md">vLLM Ranker</a>或<a href="/docs/zh-hant/tei-ranker.md">TEI Ranker</a>。</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -217,7 +217,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>是</p></td>
-     <td><p>reranking 模型用來計算相關性分數的查詢字串清單。 查詢字串的數量必須與您的搜尋作業中的查詢字串數量完全相同（即使使用查詢向量來取代文字），否則會報錯。</p></td>
+     <td><p>Reranking 模型用來計算相關性分數的查詢字串清單。 查詢字串的數量必須與您的搜尋作業中的查詢字串數量完全相同（即使使用查詢向量來取代文字），否則會報錯。</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>
@@ -242,7 +242,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">套用至混合搜尋</h3><p>模型排序器也可以應用於結合多向量場的混合搜尋作業：</p>

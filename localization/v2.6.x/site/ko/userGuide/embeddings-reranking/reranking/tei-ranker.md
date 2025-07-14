@@ -2,7 +2,7 @@
 id: tei-ranker.md
 title: TEI 랭커Compatible with Milvus 2.6.x
 summary: >-
-  TEI 랭커는 의미론적 재순위를 통해 검색 관련성을 향상시키기 위해 Hugging Face의 텍스트 임베딩 추론(TEI) 서비스를
+  TEI 랭커는 의미론적 재랭킹을 통해 검색 관련성을 향상시키기 위해 Hugging Face의 텍스트 임베딩 추론(TEI) 서비스를
   활용합니다. 이는 기존의 벡터 유사도를 뛰어넘는 검색 결과 순서에 대한 고급 접근 방식을 나타냅니다.
 beta: Milvus 2.6.x
 ---
@@ -21,8 +21,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TEI Ranker는 의미론적 재랭킹을 통해 검색 관련성을 향상시키기 위해 Hugging Face의 <a href="/docs/ko/v2.6.x/tei-ranker.md">텍스트 임베딩 추론(TEI)</a> 서비스를 활용합니다. 이는 기존의 벡터 유사도를 뛰어넘는 검색 결과 순서에 대한 고급 접근 방식을 나타냅니다.</p>
-<p><a href="/docs/ko/v2.6.x/vllm-ranker.md">vLLM Ranker와</a> 비교했을 때, TEI Ranker는 허깅 페이스의 에코시스템 및 사전 학습된 재랭크 모델과의 간단한 통합을 제공하므로 배포 및 유지 관리의 용이성이 우선시되는 애플리케이션에 이상적입니다.</p>
+    </button></h1><p>TEI Ranker는 의미론적 재랭킹을 통해 검색 관련성을 향상시키기 위해 Hugging Face의 <a href="/docs/ko/tei-ranker.md">텍스트 임베딩 추론(TEI)</a> 서비스를 활용합니다. 이는 기존의 벡터 유사도를 뛰어넘는 검색 결과 순서에 대한 고급 접근 방식을 나타냅니다.</p>
+<p><a href="/docs/ko/vllm-ranker.md">vLLM Ranker와</a> 비교했을 때, TEI Ranker는 허깅 페이스의 에코시스템 및 사전 학습된 리랭크 모델과의 간단한 통합을 제공하므로 배포 및 유지 관리의 용이성이 우선시되는 애플리케이션에 이상적입니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,7 +108,7 @@ tei_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>모든 모델 랭커에서 공유되는 일반 파라미터(예: <code translate="no">provider</code>, <code translate="no">queries</code>)는 <a href="/docs/ko/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하세요.</p>
+<p>모든 모델 랭커에서 공유되는 일반 파라미터(예: <code translate="no">provider</code>, <code translate="no">queries</code>)는 <a href="/docs/ko/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하세요.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -134,7 +134,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                         <span class="hljs-comment"># Apply tei reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

@@ -90,12 +90,12 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Buat koleksi baru dengan parameter yang ditentukan.</p>
-<p>Jika kita tidak menentukan informasi field apapun, Milvus akan secara otomatis membuat field default <code translate="no">id</code> untuk primary key, dan field <code translate="no">vector</code> untuk menyimpan data vektor. Bidang JSON yang dicadangkan digunakan untuk menyimpan bidang yang tidak ditentukan skema dan nilainya.</p>
+<p>Jika kita tidak menentukan informasi field, Milvus akan secara otomatis membuat field default <code translate="no">id</code> untuk primary key, dan field <code translate="no">vector</code> untuk menyimpan data vektor. Bidang JSON yang dicadangkan digunakan untuk menyimpan bidang yang tidak ditentukan skema dan nilainya.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Kami menggunakan jarak hasil kali dalam sebagai jenis metrik default. Untuk informasi lebih lanjut tentang jenis jarak, Anda dapat merujuk ke <a href="https://milvus.io/docs/metric.md?tab=floating">halaman Metrik Kemiripan</a></p>

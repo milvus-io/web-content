@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <li><p>사용자 문제를 관련 솔루션과 일치시켜야 하는 고객 지원 시스템</p></li>
 <li><p>제품 속성과 사용자 의도를 이해해야 하는 이커머스 검색</p></li>
 </ul>
-<p><a href="/docs/ko/v2.6.x/tei-ranker.md">TEI Rank</a>er에 비해 vLLM Ranker는 모델 선택 및 사용자 정의에서 더 큰 유연성을 제공하므로 추가 구성 옵션이 상당한 이점을 제공하는 전문적이거나 복잡한 검색 애플리케이션에 이상적입니다.</p>
+<p><a href="/docs/ko/tei-ranker.md">TEI Rank</a>er에 비해 vLLM Ranker는 모델 선택 및 사용자 정의에 있어 더 큰 유연성을 제공하므로 추가 구성 옵션이 상당한 이점을 제공하는 전문적이거나 복잡한 검색 애플리케이션에 이상적입니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,9 +123,9 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>모든 모델 랭커에서 공유되는 일반 매개변수(예: <code translate="no">provider</code>, <code translate="no">queries</code>)는 <a href="/docs/ko/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하세요.</p>
+<p>모든 모델 랭커에서 공유되는 일반 매개변수(예: <code translate="no">provider</code>, <code translate="no">queries</code>)는 <a href="/docs/ko/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하세요.</p>
 </div>
-<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,7 +149,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

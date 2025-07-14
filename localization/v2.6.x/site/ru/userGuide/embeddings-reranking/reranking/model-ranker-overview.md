@@ -129,8 +129,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Для получения подробной информации о реализации каждой модели сервиса обратитесь к специальной документации:</p>
 <ul>
-<li><p><a href="/docs/ru/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/ru/v2.6.x/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/ru/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/ru/tei-ranker.md">TEI Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Реализация<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -204,7 +204,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Словарь, содержащий конфигурацию для функции ранжирования на основе модели. Доступные параметры (ключи) зависят от поставщика (<code translate="no">tei</code> или <code translate="no">vllm</code>). Дополнительные сведения см. в <a href="/docs/ru/v2.6.x/vllm-ranker.md">vLLM Ranker</a> или <a href="/docs/ru/v2.6.x/tei-ranker.md">TEI Ranker</a>.</p></td>
+     <td><p>Словарь, содержащий конфигурацию для функции ранжирования на основе модели. Доступные параметры (ключи) зависят от поставщика (<code translate="no">tei</code> или <code translate="no">vllm</code>). Дополнительные сведения см. в <a href="/docs/ru/vllm-ranker.md">vLLM Ranker</a> или <a href="/docs/ru/tei-ranker.md">TEI Ranker</a>.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -247,7 +247,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Применить к гибридному поиску</h3><p>Ранжирование моделей можно также применять в гибридных поисковых операциях, объединяющих несколько векторных полей:</p>

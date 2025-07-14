@@ -3,9 +3,9 @@ id: RAG_with_pii_and_milvus.md
 summary: >-
   في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط
   أنابيب RAG (استرجاع-توليد معزز) باستخدام Milvus و PII Masker.
-title: بناء RAG مع برنامج Milvus + PII Masker
+title: بناء RAG باستخدام Milvus + PII Masker
 ---
-<h1 id="Build-RAG-with-Milvus-+-PII-Masker" class="common-anchor-header">بناء RAG مع برنامج Milvus + PII Masker<button data-href="#Build-RAG-with-Milvus-+-PII-Masker" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-+-PII-Masker" class="common-anchor-header">بناء RAG باستخدام Milvus + PII Masker<button data-href="#Build-RAG-with-Milvus-+-PII-Masker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -140,7 +140,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>قم بالتكرار من خلال الأسطر النصية المقنعة، وأنشئ التضمينات، ثم أدخل البيانات في ملفوس.</p>

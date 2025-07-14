@@ -20,13 +20,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>線形減衰は、検索結果の絶対的なゼロポイントで終了する直線的な減少を作成します。イベントが過ぎ去るまで関連性が徐々に薄れていくイベントのカウントダウンのように、リニア減衰はアイテムが完全に消えるまで、理想的なポイントから遠ざかるにつれて予測可能で着実な関連性の減少を適用します。このアプローチは、特定の境界を超えたアイテムが結果から完全に除外されるように、明確なカットオフで一貫した減衰率を求める場合に理想的です。</p>
+    </button></h1><p>線形減衰は、検索結果の絶対的なゼロポイントで終了する直線的な減少を作成します。イベントが過ぎ去るまで関連性が徐々に薄れていくイベントのカウントダウンのように、リニア減衰はアイテムが完全に消えるまで、理想的なポイントから遠ざかるにつれて予測可能で着実な関連性の減少を適用します。このアプローチは、特定の境界を超えたアイテムが結果から完全に除外されるように、明確なカットオフで一貫した減衰率を求める場合に最適です。</p>
 <p>他の減衰関数とは異なります：</p>
 <ul>
 <li><p>ガウス減衰は、徐々にゼロに近づくが決してゼロにはならないベル曲線に従います。</p></li>
 <li><p>指数関数的減衰は、最小限の関連性のロングテールを維持し、無限に広がります。</p></li>
 </ul>
-<p>線形減衰は、明確な終点を独自に作成するため、自然な境界や期限を持つアプリケーションに特に効果的です。</p>
+<p>線形減衰は、明確な終点を独自に作成するため、自然な境界や期限があるアプリケーションに特に効果的です。</p>
 <h2 id="When-to-use-linear-decay" class="common-anchor-header">リニアディケイを使用する場合<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,10 +184,10 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用</h3><p>ディケイランカーは複数のベクトル場を組み合わせたハイブリッド検索操作にも適用できます：</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用</h3><p>ディケイランカーは複数のベクトルフィールドを組み合わせたハイブリッド検索操作にも適用できます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

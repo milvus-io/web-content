@@ -25,7 +25,7 @@ title: ベクトルの可視化
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>この例では、milvusの埋め込み（ベクトル）を<a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNEを用いて</a>可視化する方法を示します。</p>
-<p>t-SNEのような次元削減技術は、複雑な高次元データを局所構造を保持したまま2Dまたは3D空間で可視化するのに非常に有効です。これにより、パターン認識が可能になり、特徴の関係の理解が深まり、機械学習モデルの結果の解釈が容易になります。さらに、クラスタリング結果を視覚的に比較することでアルゴリズム評価を支援し、専門家以外の聴衆へのデータ提示を簡素化し、低次元の表現で作業することで計算コストを削減することができる。これらのアプリケーションを通じて、t-SNEはデータセットに対するより深い洞察を得るのに役立つだけでなく、より多くの情報に基づいた意思決定プロセスをサポートします。</p>
+<p>t-SNEのような次元削減技術は、複雑な高次元データを局所構造を保持したまま2次元または3次元空間で可視化するのに非常に有効です。これにより、パターン認識が可能になり、特徴の関係の理解が深まり、機械学習モデルの結果の解釈が容易になります。さらに、クラスタリング結果を視覚的に比較することでアルゴリズム評価を支援し、専門家以外の聴衆へのデータ提示を簡素化し、低次元の表現で作業することで計算コストを削減することができる。これらのアプリケーションを通じて、t-SNEはデータセットに対するより深い洞察を得るのに役立つだけでなく、より多くの情報に基づいた意思決定プロセスをサポートします。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +140,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数として：</p>
 <ul>
-<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利です。</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利な方法です。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
@@ -155,7 +155,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">データの挿入<button data-href="#Insert-data" class="anchor-icon" translate="no">

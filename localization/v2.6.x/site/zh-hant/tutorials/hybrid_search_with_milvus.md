@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -287,7 +287,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'> 開始學習</span>機器人的最佳方式是什麼<span style='color:red'>？</span></p>
 <p>機器<span style='color:red'> 學習的</span>替代方法是什麼？</p>
 <p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在 Linux 中建立新終端和新 shell<span style='color:red'> ？</span></p>
-<p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在 Linux 終端建立新的 shell<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在新終端（Linux 終端）建立新 shell<span style='color:red'>？</span></p>
 <p>在海德拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
 <p>在海得拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
 <p><span style='color:red'> 開辦</span>機器人的最佳方式是什麼<span style='color:red'>？</span>哪種開發板最適合我<span style='color:red'> 開始</span>工作<span style='color:red'>？</span></p>

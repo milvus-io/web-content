@@ -82,7 +82,7 @@ beta: Milvus 2.6.x
 <li><p>Chaque classificateur de désintégration transforme les valeurs numériques brutes en scores de pertinence normalisés compris entre 0 et 1</p></li>
 <li><p>Le score de décroissance représente le degré de pertinence d'un élément en fonction de sa "distance" par rapport au point idéal.</p></li>
 </ul>
-<p>La formule de calcul spécifique varie en fonction du type de classificateur de décroissance. Pour plus de détails sur le calcul d'un score de décroissance, reportez-vous aux pages consacrées à la <a href="/docs/fr/v2.6.x/gaussian-decay.md#Formula">décroissance gaussienne</a>, à la <a href="/docs/fr/v2.6.x/exponential-decay.md#Formula">décroissance exponentielle</a> et à la <a href="/docs/fr/v2.6.x/linear-decay.md#Formula">décroissance linéaire</a>.</p>
+<p>La formule de calcul spécifique varie en fonction du type de classificateur de décroissance. Pour plus de détails sur le calcul d'un score de décroissance, reportez-vous aux pages consacrées à la <a href="/docs/fr/gaussian-decay.md#Formula">décroissance gaussienne</a>, à la <a href="/docs/fr/exponential-decay.md#Formula">décroissance exponentielle</a> et à la <a href="/docs/fr/linear-decay.md#Formula">décroissance linéaire</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Étape 3 : Calcul des scores finaux</h3><p>Enfin, Milvus combine le score de similarité normalisé et le score de décroissance pour produire le score de classement final :</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
@@ -92,7 +92,7 @@ beta: Milvus 2.6.x
 <p>Par exemple, si un document de recherche obtient un score de 0,82 pour la similarité vectorielle et un score de 0,91 pour la recherche de texte basée sur BM25 dans une recherche hybride, Milvus utilise 0,91 comme score de similarité de base avant d'appliquer le facteur de décroissance.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">Le classement par décroissance en action</h3><p>Voyons le classement par décroissance dans un scénario pratique : la recherche de <strong>"documents de recherche sur l'IA"</strong> avec une décroissance basée sur le temps :</p>
 <div class="alert note">
-<p>Dans cet exemple, les scores de décroissance reflètent la manière dont la pertinence diminue avec le temps - les articles plus récents obtiennent des scores plus proches de 1,0, tandis que les articles plus anciens obtiennent des scores plus faibles. Ces valeurs sont calculées à l'aide d'un classificateur de décroissance spécifique. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choisir le bon classificateur de décroissance</a>.</p>
+<p>Dans cet exemple, les scores de décroissance reflètent la manière dont la pertinence diminue avec le temps - les articles plus récents obtiennent des scores plus proches de 1,0, tandis que les articles plus anciens obtiennent des scores plus faibles. Ces valeurs sont calculées à l'aide d'un classificateur de décroissance spécifique. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choisir le bon classificateur de décroissance</a>.</p>
 </div>
 <table>
    <tr>
@@ -203,9 +203,9 @@ beta: Milvus 2.6.x
 </table>
 <p>Pour obtenir des informations détaillées sur la manière dont chaque outil de classement calcule les scores et les modèles de déclin spécifiques, reportez-vous à la documentation correspondante :</p>
 <ul>
-<li><p><a href="/docs/fr/v2.6.x/gaussian-decay.md">Décroissance gaussienne</a></p></li>
-<li><p><a href="/docs/fr/v2.6.x/exponential-decay.md">Décroissance exponentielle</a></p></li>
-<li><p><a href="/docs/fr/v2.6.x/exponential-decay.md">Décroissance exponentielle</a></p></li>
+<li><p><a href="/docs/fr/gaussian-decay.md">Décroissance gaussienne</a></p></li>
+<li><p><a href="/docs/fr/exponential-decay.md">Décroissance exponentielle</a></p></li>
+<li><p><a href="/docs/fr/exponential-decay.md">Décroissance exponentielle</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Exemple de mise en œuvre<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +224,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Les classificateurs de décroissance peuvent être appliqués aux opérations de recherche vectorielle standard et de recherche hybride dans Milvus. Vous trouverez ci-dessous les principaux extraits de code pour la mise en œuvre de cette fonctionnalité.</p>
 <div class="alert note">
-<p>Avant d'utiliser les fonctions de décroissance, vous devez d'abord créer une collection avec les champs numériques appropriés (comme les horodatages, les distances, etc.) qui seront utilisés pour les calculs de décroissance. Pour des exemples de travail complets comprenant la configuration de la collection, la définition du schéma et l'insertion de données, reportez-vous au <a href="/docs/fr/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">didacticiel : Mise en œuvre du classement basé sur le temps dans Milvus</a>.</p>
+<p>Avant d'utiliser les fonctions de décroissance, vous devez d'abord créer une collection avec les champs numériques appropriés (comme les horodatages, les distances, etc.) qui seront utilisés pour les calculs de décroissance. Pour des exemples de travail complets comprenant la configuration de la collection, la définition du schéma et l'insertion de données, reportez-vous au <a href="/docs/fr/tutorial-implement-a-time-based-ranking-in-milvus.md">didacticiel : Mise en œuvre du classement basé sur le temps dans Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Création d'un classeur de décroissance</h3><p>Pour mettre en œuvre le classement par décroissance, il faut d'abord définir un objet <code translate="no">Function</code> avec la configuration appropriée :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -260,7 +260,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Champ numérique pour le calcul du score de décroissance. Détermine l'attribut de données qui sera utilisé pour calculer la dégradation (par exemple, les horodatages pour la dégradation basée sur le temps, les coordonnées pour la dégradation basée sur l'emplacement). 
+     <td><p>Champ numérique pour le calcul du score de décroissance. Détermine l'attribut de données qui sera utilisé pour le calcul de la dégradation (par exemple, les horodatages pour la dégradation basée sur le temps, les coordonnées pour la dégradation basée sur l'emplacement). 
  Il doit s'agir d'un champ de votre collection qui contient des valeurs numériques pertinentes. Prend en charge INT8/16/32/64, FLOAT, DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
@@ -279,7 +279,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Spécifie le classeur mathématique de décroissance à appliquer. Voir la section <a href="/docs/fr/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choisir le bon classificateur de décroissance</a> pour obtenir des conseils sur le choix de la fonction appropriée.</p></td>
+     <td><p>Spécifie le classeur mathématique de décroissance à appliquer. Voir la section <a href="/docs/fr/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choisir le bon classificateur de décroissance</a> pour obtenir des conseils sur le choix de la fonction appropriée.</p></td>
      <td><p><code translate="no">"gauss"</code> <code translate="no">"exp"</code>, ou <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
@@ -325,7 +325,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de décroissance peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>

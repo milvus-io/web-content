@@ -61,7 +61,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/minhash-workflow.png" alt="Minhash Workflow" class="doc-image" id="minhash-workflow" />
    </span> <span class="img-wrapper"> <span>最小散列工作流程</span> </span></p>
 <div class="alert note">
-<p>使用的哈希函数数量决定了 MinHash 签名的维度。维数越高，近似精度越高，但存储和计算量也会随之增加。</p>
+<p>使用的哈希函数数量决定了 MinHash 签名的维度。维度越高，近似精度越高，但存储和计算量也会随之增加。</p>
 </div>
 <h3 id="LSH-for-MinHash" class="common-anchor-header">用于 MinHash 的 LSH</h3><p>虽然 MinHash 签名大大降低了计算文档间精确 Jaccard 相似性的成本，但穷举比较每一对签名向量在规模上仍然是低效的。</p>
 <p>为了解决这个问题，我们使用了<a href="https://zilliz.com/learn/Local-Sensitivity-Hashing-A-Comprehensive-Guide">LSH</a>。LSH 通过确保相似项目以高概率散列到同一个 "桶 "中，从而实现快速的近似相似性搜索--避免了直接比较每一对的需要。</p>
@@ -96,7 +96,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Lsh 工作流程 2</span> </span></p>
-<p>然后，使用哈希函数将每个带散列到不同的桶中。共享散列的文档对被选为相似性候选文档。在下面的示例中，文档 A 和文档 B 被选为相似性候选对象，因为它们的哈希结果在<strong>带 0</strong> 中相撞：</p>
+<p>然后，使用哈希函数将每个带散列到不同的桶中。共享散列的文档对被选为相似性候选文档。在下面的例子中，文档 A 和文档 B 被选为相似性候选对象，因为它们的哈希结果在<strong>带 0</strong> 中相撞：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
@@ -104,7 +104,7 @@ summary: >-
 <div class="alert note">
 <p>带的数量由<code translate="no">mh_lsh_band</code> 参数控制。更多信息，请参阅<a href="/docs/zh/minhash-lsh.md#Index-building-params">索引构建参数</a>。</p>
 </div>
-<h3 id="MHJACCARD-Comparing-MinHash-signatures-in-Milvus" class="common-anchor-header">MHJACCARD：比较 Milvus 中的 MinHash 签名</h3><p>MinHash 签名使用固定长度的二进制向量近似于集合间的 Jaccard 相似性。但是，由于这些签名不保留原始集合，因此无法直接应用<code translate="no">JACCARD</code>,<code translate="no">L2</code> 或<code translate="no">COSINE</code> 等标准度量来比较它们。</p>
+<h3 id="MHJACCARD-Comparing-MinHash-signatures-in-Milvus" class="common-anchor-header">MHJACCARD：比较 Milvus 中的 MinHash 签名</h3><p>MinHash 签名使用固定长度的二进制向量来接近集合间的 Jaccard 相似性。但是，由于这些签名不保留原始集合，因此无法直接应用<code translate="no">JACCARD</code>,<code translate="no">L2</code> 或<code translate="no">COSINE</code> 等标准度量来比较它们。</p>
 <p>为了解决这个问题，Milvus 引入了一种专门的度量类型，称为<code translate="no">MHJACCARD</code> ，专为比较 MinHash 签名而设计。</p>
 <p>在 Milvus 中使用 MinHash 时：</p>
 <ul>
@@ -129,7 +129,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中使用 MinHash LSH 之前，必须先生成<strong>MinHash 签名</strong>。这些紧凑的二进制签名近似于集合之间的 Jaccard 相似性，是在 Milvus 中基于<code translate="no">MHJACCARD</code> 的搜索所必需的。</p>
+    </button></h2><p>在 Milvus 中使用 MinHash LSH 之前，必须先生成<strong>MinHash 签名</strong>。这些紧凑的二进制签名近似于集合之间的 Jaccard 相似性，是在 Milvus 中进行基于<code translate="no">MHJACCARD</code> 的搜索所必需的。</p>
 <h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">选择生成 MinHash 签名的方法</h3><p>根据您的工作量，您可以选择：</p>
 <ul>
 <li><p>使用 Python 的<code translate="no">datasketch</code> 来简化（建议用于原型开发）</p></li>
@@ -181,7 +181,7 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦您的 MinHash 向量和原始令牌集准备就绪，您就可以通过<code translate="no">MINHASH_LSH</code> 使用 Milvus 存储、索引和搜索它们。</p>
+    </button></h2><p>一旦您的 MinHash 向量和原始令牌集准备就绪，您就可以使用<code translate="no">MINHASH_LSH</code> 使用 Milvus 对它们进行存储、索引和搜索。</p>
 <h3 id="Connect-to-Milvus" class="common-anchor-header">连接到 Milvus</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)  <span class="hljs-comment"># Update if your URI is different</span>
@@ -266,7 +266,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -289,7 +289,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):

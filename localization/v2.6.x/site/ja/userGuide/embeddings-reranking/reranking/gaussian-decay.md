@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>通常の減衰としても知られるガウス減衰は、検索結果を最も自然な感じに調整します。距離によって徐々にぼやけていく人間の視覚のように、ガウス減衰はアイテムが理想的なポイントから遠ざかるにつれて関連性が緩やかに減少する、滑らかな釣鐘型の曲線を作成します。このアプローチは、好みの範囲外のアイテムに厳しいペナルティを与えず、それでも遠くのアイテムの関連性を大幅に下げる、バランスの取れた減衰を望む場合に理想的です。</p>
+    </button></h1><p>通常の減衰としても知られるガウス減衰は、検索結果を最も自然な感じに調整します。距離によって徐々にぼやけていく人間の視覚のように、ガウス減衰はアイテムが理想的なポイントから遠ざかるにつれて、関連性を緩やかに減少させる滑らかな釣鐘型の曲線を作成します。このアプローチは、好みの範囲外のアイテムに厳しいペナルティを与えず、それでも遠くのアイテムの関連性を大幅に下げる、バランスの取れた減衰を望む場合に理想的です。</p>
 <p>他のディケイランカーとは異なります：</p>
 <ul>
 <li><p>指数関数的減衰は、最初に急激に減少し、より強い初期ペナルティを生み出します。</p></li>
@@ -42,7 +42,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ガウス減衰は特に以下のような場合に効果的です：</p>
+    </button></h2><p>ガウス減衰は、以下のような場合に特に効果的です：</p>
 <table>
    <tr>
      <th><p>使用例</p></th>
@@ -174,7 +174,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],  <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用</h3><p>ディケイランカーは複数のベクトル場を組み合わせたハイブリッド検索操作にも適用できます：</p>

@@ -101,7 +101,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Fluxo de Trabalho 2 do Lsh</span> </span></p>
-<p>De seguida, cada banda é transformada em diferentes intervalos usando uma função hash. Os pares de documentos que partilham os intervalos são selecionados como candidatos à semelhança. No exemplo abaixo, o Documento A e o Documento B são selecionados como candidatos à semelhança, uma vez que os seus resultados de hash colidem na <strong>Banda 0</strong>:</p>
+<p>De seguida, cada banda é transformada em diferentes intervalos usando uma função de hash. Os pares de documentos que partilham os intervalos são selecionados como candidatos à semelhança. No exemplo abaixo, o Documento A e o Documento B são selecionados como candidatos à semelhança, uma vez que os seus resultados de hash colidem na <strong>Banda 0</strong>:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
@@ -141,7 +141,7 @@ summary: >-
 <li><p>Usar ferramentas distribuídas (por exemplo, Spark, Ray) para conjuntos de dados em grande escala</p></li>
 <li><p>Implementar lógica personalizada (NumPy, C++, etc.) se o ajuste de desempenho for crítico</p></li>
 </ul>
-<p>Neste guia, usamos <code translate="no">datasketch</code> para simplicidade e compatibilidade com o formato de entrada Milvus.</p>
+<p>Neste guia, usamos <code translate="no">datasketch</code> por simplicidade e compatibilidade com o formato de entrada Milvus.</p>
 <h3 id="Install-required-libraries" class="common-anchor-header">Instalar as bibliotecas necessárias</h3><p>Instale os pacotes necessários para este exemplo:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus datasketch numpy
 <button class="copy-code-btn"></button></code></pre>
@@ -252,7 +252,7 @@ client.flush(<span class="hljs-string">&quot;minhash_demo&quot;</span>)
 <h3 id="Perform-similarity-search" class="common-anchor-header">Efetuar pesquisa por semelhança</h3><p>Milvus suporta dois modos de pesquisa de similaridade usando MinHash LSH:</p>
 <ul>
 <li><p><strong>Pesquisa aproximada</strong> - utiliza apenas assinaturas MinHash e LSH para obter resultados rápidos mas probabilísticos.</p></li>
-<li><p><strong>Pesquisa refinada</strong> - calcula novamente a similaridade Jaccard usando conjuntos de tokens originais para melhorar a precisão.</p></li>
+<li><p><strong>Pesquisa refinada</strong> - recalcula a similaridade Jaccard usando conjuntos de tokens originais para melhorar a precisão.</p></li>
 </ul>
 <h4 id="51-Prepare-the-query" class="common-anchor-header">5.1 Preparar a consulta</h4><p>Para executar uma pesquisa de similaridade, gere uma assinatura MinHash para o documento de consulta. Essa assinatura deve corresponder à mesma dimensão e formato de codificação usados durante a inserção de dados.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;neural networks model patterns in data&quot;</span>
@@ -271,7 +271,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -294,7 +294,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):

@@ -46,7 +46,7 @@ beta: Milvus 2.5.11+
     </button></h2><ul>
 <li><p>تعمل هذه الميزة فقط مع استرجاع النصوص المستندة إلى BM25 والمتجهات المتفرقة. لمزيد من المعلومات، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p></li>
 <li><p>يمكن لكل مستند في مجموعة واحدة استخدام محلل واحد فقط، يتم تحديده من خلال قيمة حقل معرف اللغة الخاص به.</p></li>
-<li><p>قد يختلف الأداء بناءً على مدى تعقيد المحللات وحجم البيانات النصية.</p></li>
+<li><p>قد يختلف الأداء اعتماداً على مدى تعقيد المحللات وحجم البيانات النصية الخاصة بك.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,7 +114,7 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h2><p><code translate="no">multi_analyzer_params</code> هو كائن JSON واحد يحدد كيفية اختيار Milvus للمحلل المناسب لكل كيان:</p>
 <div class="multipleCode">
-   <a href="#python">بيثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">multi_analyzer_params = {
   <span class="hljs-comment"># Define language-specific analyzers</span>
   <span class="hljs-comment"># Each analyzer follows this format: &lt;analyzer_name&gt;: &lt;analyzer_params&gt;</span>
@@ -219,7 +219,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
      <td><p>اسم الحقل الذي يخزن، لكل مستند، اللغة (أي اسم المحلل) التي يجب أن يطبقها ميلفوس.</p></td>
      <td><ul>
 <li><p>يجب أن يكون حقلاً <code translate="no">VARCHAR</code> محدداً في المجموعة.</p></li>
-<li><p>يجب أن تتطابق القيمة في كل صف تمامًا مع أحد أسماء المحللين (أو الأسماء المستعارة) المدرجة في <code translate="no">analyzers</code>.</p></li>
+<li><p>يجب أن تكون القيمة في كل صف مطابقة تمامًا لأحد أسماء المحللين (أو الأسماء المستعارة) المدرجة في <code translate="no">analyzers</code>.</p></li>
 <li><p>إذا كانت قيمة أحد الصفوف مفقودة أو غير موجودة، يطبق ميلفوس تلقائيًا محلل <code translate="no">default</code>.</p></li>
 </ul></td>
    </tr>
@@ -825,7 +825,7 @@ english_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display English search results</span>
@@ -871,7 +871,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display English search results</span>
@@ -925,7 +925,7 @@ curl --request POST \
     &quot;drop_ratio_search&quot;: &quot;0&quot;  
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Use-Chinese-analyzer" class="common-anchor-header">استخدام المحلِّل الصيني</h3><p>يوضّح هذا المثال التحويل إلى المحلّل الصيني (باستخدام الاسم المستعار الخاص به <code translate="no">&quot;cn&quot;</code>) لنص استعلام مختلف. تظل جميع المعلمات الأخرى كما هي، ولكن الآن تتم معالجة نص الاستعلام باستخدام قواعد الترميز الخاصة بالصينية.</p>
@@ -940,7 +940,7 @@ chinese_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display Chinese search results</span>
@@ -983,7 +983,7 @@ searchResults = searchResp.getSearchResults();
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display Chinese search results</span>
@@ -1033,6 +1033,6 @@ curl --request POST \
     &quot;analyzer_name&quot;: &quot;cn&quot;
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

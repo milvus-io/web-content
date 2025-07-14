@@ -52,7 +52,7 @@ summary: >-
 <h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">Подписи MinHash: Приблизительное сходство по Жаккарду</h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> - это вероятностная техника, которая предлагает эффективный способ оценки сходства по Жаккарду. Она работает путем преобразования каждого набора в компактный <strong>вектор сигнатур</strong>, сохраняющий достаточно информации для эффективной аппроксимации сходства наборов.</p>
 <p><strong>Основная идея</strong>:</p>
 <p>Чем более похожи два набора, тем больше вероятность того, что их сигнатуры MinHash будут совпадать в одних и тех же позициях. Это свойство позволяет MinHash аппроксимировать сходство по Жаккарду между наборами.</p>
-<p>Это свойство позволяет MinHash <strong>аппроксимировать сходство Жаккара</strong> между наборами без необходимости прямого сравнения полных наборов.</p>
+<p>Это свойство позволяет MinHash <strong>аппроксимировать сходство по Жаккарду</strong> между наборами без необходимости прямого сравнения полных наборов.</p>
 <p>Процесс MinHash включает в себя:</p>
 <ol>
 <li><p><strong>Шингование</strong>: Преобразование документов в наборы перекрывающихся последовательностей лексем (шинглов).</p></li>
@@ -100,7 +100,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
    </span> <span class="img-wrapper"> <span>Lsh Workflow 2</span> </span></p>
-<p>Затем каждая полоса хэшируется в различные ведра с помощью хэш-функции. Пары документов, разделяющие ведра, выбираются в качестве кандидатов на сходство. В приведенном ниже примере документы A и B выбраны в качестве кандидатов на сходство, поскольку их результаты хэширования совпадают в <strong>полосе 0</strong>:</p>
+<p>Затем каждая полоса хэшируется в различные ведра с помощью хэш-функции. Пары документов, разделяющие бакеты, выбираются в качестве кандидатов на сходство. В приведенном ниже примере документы A и B выбраны в качестве кандидатов на сходство, поскольку их результаты хэширования совпадают в <strong>полосе 0</strong>:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-3.png" alt="Lsh Workflow 3" class="doc-image" id="lsh-workflow-3" />
@@ -140,7 +140,7 @@ summary: >-
 <li><p>Использовать распределенные инструменты (например, Spark, Ray) для работы с большими массивами данных</p></li>
 <li><p>Реализовать пользовательскую логику (NumPy, C++ и т. д.), если критически важна настройка производительности.</p></li>
 </ul>
-<p>В этом руководстве мы используем <code translate="no">datasketch</code> для простоты и совместимости с входным форматом Milvus.</p>
+<p>В этом руководстве мы используем <code translate="no">datasketch</code> для простоты и совместимости с форматом ввода Milvus.</p>
 <h3 id="Install-required-libraries" class="common-anchor-header">Установите необходимые библиотеки</h3><p>Установите необходимые пакеты для этого примера:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus datasketch numpy
 <button class="copy-code-btn"></button></code></pre>
@@ -270,7 +270,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -293,7 +293,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):

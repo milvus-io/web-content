@@ -26,8 +26,8 @@ title: Visualização de vectores
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/vector_visualization.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Neste exemplo, vamos mostrar como visualizar os embeddings (vectores) em Milvus usando <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
-<p>As técnicas de redução de dimensionalidade, como o t-SNE, são inestimáveis para visualizar dados complexos e de alta dimensão num espaço 2D ou 3D, preservando a estrutura local. Isto permite o reconhecimento de padrões, melhora a compreensão das relações entre caraterísticas e facilita a interpretação dos resultados do modelo de aprendizagem automática. Além disso, ajuda na avaliação de algoritmos através da comparação visual de resultados de agrupamento, simplifica a apresentação de dados a audiências não especializadas e pode reduzir os custos computacionais ao trabalhar com representações de dimensão inferior. Através destas aplicações, o t-SNE não só ajuda a obter uma visão mais profunda dos conjuntos de dados, como também apoia processos de tomada de decisões mais informados.</p>
+<p>Neste exemplo, mostraremos como visualizar os embeddings (vectores) em Milvus utilizando <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
+<p>As técnicas de redução de dimensionalidade, como o t-SNE, são inestimáveis para visualizar dados complexos e de alta dimensão num espaço 2D ou 3D, preservando a estrutura local. Isto permite o reconhecimento de padrões, melhora a compreensão das relações entre caraterísticas e facilita a interpretação dos resultados do modelo de aprendizagem automática. Além disso, ajuda na avaliação de algoritmos através da comparação visual de resultados de agrupamento, simplifica a apresentação de dados a audiências não especializadas e pode reduzir os custos computacionais ao trabalhar com representações de dimensão inferior. Através destas aplicações, o t-SNE não só ajuda a obter conhecimentos mais profundos sobre conjuntos de dados, como também apoia processos de tomada de decisões mais informados.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">Inserir dados<button data-href="#Insert-data" class="anchor-icon" translate="no">

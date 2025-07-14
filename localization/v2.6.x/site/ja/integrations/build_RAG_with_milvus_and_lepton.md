@@ -27,7 +27,7 @@ title: MilvusとLepton AIでRAGを構築するAbout to Deprecate
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_lepton.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://www.lepton.ai/">Lepton AIは</a>、開発者や企業がAIアプリケーションを数分で効率的に実行し、本番環境で利用可能な規模にすることを可能にします。 Lepton AIは、Pythonネイティブな方法でモデルを構築し、ローカルでモデルをデバッグおよびテストし、単一のコマンドでクラウドにデプロイし、シンプルで柔軟なAPIを使用して任意のアプリケーションでモデルを利用することができます。大規模言語モデル（LLM）や拡散モデルを含む様々なAIモデルを、大規模なインフラを構築することなくデプロイするための包括的な環境を提供します。</p>
+<p><a href="https://www.lepton.ai/">Lepton AIは</a>、開発者や企業がAIアプリケーションを数分で効率的に実行し、本番環境で利用可能な規模にすることを可能にします。 Lepton AIでは、Pythonネイティブな方法でモデルを構築し、ローカルでモデルをデバッグおよびテストし、1つのコマンドでクラウドにデプロイし、シンプルで柔軟なAPIを使用して任意のアプリケーションでモデルを利用することができます。大規模言語モデル（LLM）や拡散モデルを含む様々なAIモデルを、大規模なインフラを構築することなくデプロイするための包括的な環境を提供します。</p>
 <p>このチュートリアルでは、MilvusとLepton AIを使ってRAG（Retrieval-Augmented Generation）パイプラインを構築する方法を紹介します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -132,7 +132,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>
@@ -210,7 +210,7 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLMを使ってRAGレスポンスを取得する</h3><p>検索されたドキュメントを文字列フォーマットに変換する。</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLMを使ってRAGレスポンスを取得する</h3><p>検索されたドキュメントを文字列形式に変換する。</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )

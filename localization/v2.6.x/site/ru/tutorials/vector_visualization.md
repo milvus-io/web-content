@@ -27,7 +27,7 @@ title: Визуализация векторов
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>В этом примере мы покажем, как визуализировать вкрапления (векторы) в Milvus с помощью <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
-<p>Методы уменьшения размерности, такие как t-SNE, неоценимы для визуализации сложных, высокоразмерных данных в 2D или 3D пространстве с сохранением локальной структуры. Это позволяет распознавать закономерности, улучшает понимание взаимосвязей между признаками и облегчает интерпретацию результатов работы моделей машинного обучения. Кроме того, это помогает в оценке алгоритмов путем визуального сравнения результатов кластеризации, упрощает представление данных для неспециалистов и позволяет снизить вычислительные затраты за счет работы с более низкоразмерными представлениями. Благодаря этим приложениям t-SNE не только помогает получить более глубокое представление о наборах данных, но и способствует принятию более обоснованных решений.</p>
+<p>Методы уменьшения размерности, такие как t-SNE, неоценимы для визуализации сложных, высокоразмерных данных в 2D или 3D пространстве с сохранением локальной структуры. Это позволяет распознавать закономерности, улучшает понимание взаимосвязей между признаками и облегчает интерпретацию результатов работы моделей машинного обучения. Кроме того, это помогает в оценке алгоритмов путем визуального сравнения результатов кластеризации, упрощает представление данных для неспециалистов и позволяет снизить вычислительные затраты за счет работы с более низкоразмерными представлениями. Благодаря этим приложениям t-SNE не только помогает глубже изучить наборы данных, но и способствует принятию более обоснованных решений.</p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">Вставка данных<button data-href="#Insert-data" class="anchor-icon" translate="no">

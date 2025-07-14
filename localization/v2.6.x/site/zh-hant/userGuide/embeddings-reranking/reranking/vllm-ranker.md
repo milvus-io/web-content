@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
 <li><p>需要將使用者問題與相關解決方案相匹配的客戶支援系統</p></li>
 <li><p>必須瞭解產品屬性和使用者意圖的電子商務搜尋</p></li>
 </ul>
-<p>與<a href="/docs/zh-hant/v2.6.x/tei-ranker.md">TEI Ranker</a> 相比，vLLM Ranker 在模型選擇和客製化方面提供了更大的靈活性，使其成為專業或複雜搜尋應用的理想選擇，在這些應用中，額外的配置選項提供了顯著的優勢。</p>
+<p>與<a href="/docs/zh-hant/tei-ranker.md">TEI Ranker</a> 相比，vLLM Ranker 在模型選擇和客製化方面提供了更大的靈活性，使其成為專業或複雜搜尋應用的理想選擇，在這些應用中，額外的配置選項提供了顯著的優勢。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,7 +121,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>關於所有模型排序器共用的一般參數 (例如<code translate="no">provider</code>,<code translate="no">queries</code>)，請參閱<a href="/docs/zh-hant/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">建立模型排序器</a>。</p>
+<p>關於所有模型排序器共用的一般參數 (例如<code translate="no">provider</code>,<code translate="no">queries</code>)，請參閱<a href="/docs/zh-hant/model-ranker-overview.md#Create-a-model-ranker">建立模型排序器</a>。</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">應用於標準向量搜尋<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -147,7 +147,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">應用於混合搜尋<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

@@ -129,8 +129,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Para obter informações detalhadas sobre a implementação de cada modelo de serviço, consulte a documentação específica:</p>
 <ul>
-<li><p><a href="/docs/pt/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/pt/v2.6.x/tei-ranker.md">Classificador TEI</a></p></li>
+<li><p><a href="/docs/pt/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/pt/tei-ranker.md">Classificador TEI</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementação<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ beta: Milvus 2.6.x
 <li><p>Um serviço de modelo externo em execução (vLLM ou TEI) acessível à sua instância Milvus</p></li>
 <li><p>Conectividade de rede apropriada entre Milvus e o serviço de modelo escolhido</p></li>
 </ul>
-<p>Os classificadores de modelos integram-se perfeitamente nas operações de pesquisa vetorial padrão e de pesquisa híbrida. A implementação envolve a criação de um objeto Function que define a sua configuração de reanálise e a sua transmissão às operações de pesquisa.</p>
+<p>Os classificadores de modelos integram-se perfeitamente nas operações de pesquisa vetorial padrão e de pesquisa híbrida. A implementação implica a criação de um objeto Function que define a sua configuração de reanálise e a sua transmissão às operações de pesquisa.</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">Criar um classificador de modelos</h3><p>Para implementar a reclassificação de modelos, comece por definir um objeto Function com a configuração adequada:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
@@ -204,7 +204,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Um dicionário que contém a configuração para a função de reclassificação baseada em modelos. Os parâmetros disponíveis (chaves) variam de acordo com o provedor (<code translate="no">tei</code> ou <code translate="no">vllm</code>). Consulte <a href="/docs/pt/v2.6.x/vllm-ranker.md">vLLM Ranker</a> ou <a href="/docs/pt/v2.6.x/tei-ranker.md">TEI Ranker</a> para obter mais detalhes.</p></td>
+     <td><p>Um dicionário que contém a configuração da função de reordenação baseada em modelos. Os parâmetros disponíveis (chaves) variam de acordo com o provedor (<code translate="no">tei</code> ou <code translate="no">vllm</code>). Consulte <a href="/docs/pt/vllm-ranker.md">vLLM Ranker</a> ou <a href="/docs/pt/tei-ranker.md">TEI Ranker</a> para obter mais detalhes.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -234,7 +234,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">maxBatch</code></p></td>
      <td><p>Não</p></td>
-     <td><p>Número máximo de documentos a processar num único lote. Valores maiores aumentam o rendimento, mas exigem mais memória.</p></td>
+     <td><p>Número máximo de documentos a processar num único lote. Valores maiores aumentam a taxa de transferência, mas exigem mais memória.</p></td>
      <td><p><code translate="no">32</code> (predefinição)</p></td>
    </tr>
 </table>
@@ -247,7 +247,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida</h3><p>Os classificadores de modelos também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vetoriais:</p>

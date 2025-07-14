@@ -23,7 +23,13 @@ title: Funções assíncronas na integração LangChain Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tutorial explora como aproveitar as funções assíncronas no <a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a> para criar aplicativos de alto desempenho. Usando métodos assíncronos, você pode melhorar significativamente o rendimento e a capacidade de resposta de sua aplicação, especialmente ao lidar com recuperação em larga escala. Quer esteja a construir um sistema de recomendação em tempo real, a implementar a pesquisa semântica na sua aplicação ou a criar um pipeline RAG (Retrieval-Augmented Generation), as operações assíncronas podem ajudá-lo a lidar com pedidos concorrentes de forma mais eficiente. O banco de dados vetorial de alto desempenho Milvus, combinado com as poderosas abstrações LLM do LangChain, pode fornecer uma base robusta para a criação de aplicativos de IA escalonáveis.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>Este tutorial explora como aproveitar as funções assíncronas no <a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a> para criar aplicativos de alto desempenho. Usando métodos assíncronos, você pode melhorar significativamente o rendimento e a capacidade de resposta de sua aplicação, especialmente ao lidar com recuperação em larga escala. Quer esteja a construir um sistema de recomendação em tempo real, a implementar a pesquisa semântica na sua aplicação ou a criar um pipeline RAG (Retrieval-Augmented Generation), as operações assíncronas podem ajudá-lo a lidar com pedidos concorrentes de forma mais eficiente. O banco de dados vetorial de alto desempenho Milvus, combinado com as poderosas abstrações LLM do LangChain, pode fornecer uma base robusta para a criação de aplicativos de IA escalonáveis.</p>
 <h2 id="Async-API-Overview" class="common-anchor-header">Visão geral da API assíncrona<button data-href="#Async-API-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +69,7 @@ title: Funções assíncronas na integração LangChain Milvus
 </tbody>
 </table>
 <p>Para obter informações mais detalhadas sobre estas funções, consulte a <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html#milvus">Referência da API</a>.</p>
-<h3 id="Performance-Benefits" class="common-anchor-header">Benefícios de desempenho</h3><p>As operações assíncronas proporcionam melhorias significativas de desempenho ao lidar com grandes volumes de pedidos simultâneos, particularmente adequadas para:</p>
+<h3 id="Performance-Benefits" class="common-anchor-header">Benefícios de desempenho</h3><p>As operações assíncronas proporcionam melhorias significativas no desempenho ao lidar com grandes volumes de pedidos simultâneos, particularmente adequadas para:</p>
 <ul>
 <li>Processamento de documentos em lote</li>
 <li>Cenários de pesquisa de alta simultaneidade</li>

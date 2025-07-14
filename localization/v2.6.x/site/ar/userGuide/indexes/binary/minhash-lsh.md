@@ -47,7 +47,7 @@ summary: >-
     </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">تشابه جاكارد</h3><p>يقيس تشابه جاكارد التداخل بين مجموعتين (أ) و(ب)، ويُعرّف رسميًا على النحو التالي:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(A, B) = \frac{|A \cap B|}{|A \cup B|}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>حيث تتراوح قيمته من 0 (منفصلتان تمامًا) إلى 1 (متطابقتان).</p>
-<p>ومع ذلك، فإن حساب تشابه جاكارد بالضبط بين جميع أزواج المستندات في مجموعات البيانات واسعة النطاق مكلف حسابيًا - O<strong>(n²)</strong> من حيث الوقت والذاكرة عندما يكون <strong>n</strong> كبيرًا. هذا يجعلها غير مجدية لحالات الاستخدام مثل تنظيف مجموعة تدريب LLM أو تحليل المستندات على نطاق الويب.</p>
+<p>ومع ذلك، فإن حساب تشابه جاكارد بالضبط بين جميع أزواج المستندات في مجموعات البيانات واسعة النطاق مكلف حسابيًا - O<strong>(n²)</strong> من حيث الوقت والذاكرة عندما يكون <strong>n</strong> كبيرًا. وهذا يجعلها غير مجدية لحالات الاستخدام مثل تنظيف مجموعة تدريب LLM أو تحليل المستندات على نطاق الويب.</p>
 <h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">تواقيع MinHash: تشابه جاكارد التقريبي</h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> هي تقنية احتمالية توفر طريقة فعالة لتقدير تشابه جاكارد. وهي تعمل عن طريق تحويل كل مجموعة إلى <strong>متجه توقيع</strong> مضغوط، مع الحفاظ على معلومات كافية لتقريب تشابه المجموعة بكفاءة.</p>
 <p><strong>الفكرة الأساسية</strong>:</p>
 <p>كلما زاد تشابه المجموعتين، زادت احتمالية تطابق توقيعات MinHash الخاصة بهما في نفس المواضع. تمكّن هذه الخاصية MinHash من تقريب تشابه جاكارد بين المجموعتين.</p>
@@ -56,7 +56,7 @@ summary: >-
 <ol>
 <li><p><strong>التجزئة</strong>: تحويل المستندات إلى مجموعات من التسلسلات الرمزية المتداخلة (التجزئة)</p></li>
 <li><p><strong>التجزئة</strong>: تطبيق دوال تجزئة مستقلة متعددة على كل تجزئة</p></li>
-<li><p><strong>التحديد الأدنى</strong>: لكل دالة تجزئة، قم بتسجيل <strong>الحد الأدنى</strong> لقيمة التجزئة عبر جميع التجزئات</p></li>
+<li><p><strong>التحديد الأدنى</strong>: بالنسبة لكل دالة تجزئة، قم بتسجيل <strong>الحد الأدنى</strong> لقيمة التجزئة عبر جميع التجزئات</p></li>
 </ol>
 <p>يمكنك رؤية العملية بأكملها موضحة أدناه:</p>
 <p>
@@ -269,7 +269,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -292,7 +292,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):

@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
     </button></h1><p>指数関数的減衰は、検索結果にロングテールをもたらす。ニュース速報のように、最初は関連性が急速に低下するが、時間が経つにつれて重要性を保つストーリーもあるように、指数関数的減衰は、理想的な範囲を超えたアイテムに急激なペナルティを適用する一方で、遠くのアイテムは発見可能なままにしておく。このアプローチは、近接性や最新性を優先したいが、より遠い選択肢を完全に排除したくない場合に理想的です。</p>
 <p>他の減衰関数とは異なります：</p>
 <ul>
-<li><p>ガウス減衰は、より緩やかな、ベル型の減少を作成します。</p></li>
+<li><p>ガウス減衰は、より緩やかなベル型の減少を作成します。</p></li>
 <li><p>線形減衰は、ちょうどゼロになるまで一定の割合で減少します。</p></li>
 </ul>
 <p>指数関数的減衰は、ペナルティをユニークに「フロントロード」し、レリバンスの減少の大部分を早期に適用する一方で、レリバンスは最小だがゼロではないロングテールを維持します。</p>
@@ -101,10 +101,10 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">origin</code> (現在時刻）：現在時刻）：関連性が最大（1.0）である現時点。</p></li>
 <li><p><code translate="no">offset</code> (3時間）：過去3時間以内に発表された記事はすべて関連性スコアが満点（1.0）を維持し、ごく最近のニュースがわずかな時間差で不必要なペナルティを受けることはない。</p></li>
 <li><p><code translate="no">decay</code> (0.5):このパラメータは、時間とともにスコアがどの程度劇的に減少するかをコントロールします。</p></li>
-<li><p><code translate="no">scale</code> (24時間）：関連性が減衰値まで下がる時間-ちょうど24時間前のニュース記事は関連性スコアが半分（0.5）になります。</p></li>
+<li><p><code translate="no">scale</code> (24時間）：関連性が減衰値まで下がる時間-ちょうど24時間前のニュース記事は関連性スコアが半分（0.5）になる。</p></li>
 </ul>
 <p>曲線からわかるように、24時間以上前のニュース記事は関連性が下がり続けますが、ゼロになることはありません。数日前の記事でも最低限の関連性は保たれるため、重要だが古いニュースも（ランクは下がるものの）フィードに表示される。</p>
-<p>この動作は、ニュースの関連性が一般的にどのように働くかを模倣しています。非常に最近のストーリーが強く優位を占めていますが、ユーザーの関心に特別に関連している場合は、重要な古いストーリーがまだ突破できる可能性があります。</p>
+<p>この動作は、ニュースの関連性が一般的にどのように働くかを模倣しています。非常に最近のストーリーが強く支配的ですが、ユーザーの関心に特別に関連している場合、重要な古いストーリーがまだ突破できる可能性があります。</p>
 <h2 id="Formula" class="common-anchor-header">計算式<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -179,7 +179,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;publish_time&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索への適用</h3><p>ディケイランカーは複数のベクトルフィールドを組み合わせたハイブリッド検索操作にも適用できます：</p>

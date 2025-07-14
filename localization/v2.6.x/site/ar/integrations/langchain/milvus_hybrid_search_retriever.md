@@ -25,7 +25,7 @@ title: مسترجع البحث الهجين ميلفوس الهجين
     <span></span>
   </span>
 </p>
-<p>يوضح هذا الرسم البياني سيناريو البحث الهجين الأكثر شيوعًا، وهو البحث الهجين الكثيف + البحث الهجين المتناثر. في هذه الحالة، يتم استرداد المرشحين باستخدام كل من تشابه المتجهات الدلالية ومطابقة الكلمات الرئيسية الدقيقة. يتم دمج النتائج من هذه الطرق وإعادة ترتيبها وتمريرها إلى جهاز البحث الدلالي لتوليد الإجابة النهائية. يوازن هذا النهج بين الدقة والفهم الدلالي، مما يجعله فعالاً للغاية في سيناريوهات الاستعلام المتنوعة.</p>
+<p>يوضح هذا الرسم البياني سيناريو البحث الهجين الأكثر شيوعًا، وهو البحث الهجين الكثيف + البحث الهجين المتناثر. في هذه الحالة، يتم استرداد المرشحين باستخدام كل من تشابه المتجهات الدلالية ومطابقة الكلمات الرئيسية الدقيقة. يتم دمج النتائج من هاتين الطريقتين وإعادة ترتيبها وتمريرها إلى جهاز البحث الدلالي لتوليد الإجابة النهائية. يوازن هذا النهج بين الدقة والفهم الدلالي، مما يجعله فعالاً للغاية في سيناريوهات الاستعلام المتنوعة.</p>
 <p>بالإضافة إلى البحث الهجين الكثيف + المتناثر، يمكن للاستراتيجيات الهجينة أيضًا الجمع بين نماذج متجهات كثيفة متعددة. على سبيل المثال، قد يتخصص أحد نماذج المتجهات الكثيفة في التقاط الفروق الدلالية الدقيقة، بينما يركز نموذج آخر على التضمينات السياقية أو التمثيلات الخاصة بالمجال. من خلال دمج النتائج من هذه النماذج وإعادة ترتيبها، يضمن هذا النوع من البحث الهجين عملية استرجاع أكثر دقة وإدراكًا للسياق.</p>
 <p>يوفر تكامل LangChain Milvus طريقة مرنة لتنفيذ البحث الهجين، فهو يدعم أي عدد من حقول المتجهات، وأي نماذج تضمين كثيفة أو متفرقة مخصصة، مما يسمح لـ LangChain Milvus بالتكيف بمرونة مع سيناريوهات استخدام البحث الهجين المختلفة، وفي نفس الوقت متوافق مع القدرات الأخرى لـ LangChain.</p>
 <p>في هذا البرنامج التعليمي، سنبدأ بالحالة الأكثر شيوعًا كثيفة + متناثرة، ثم نقدم أي عدد من أساليب استخدام البحث الهجين العامة.</p>
@@ -136,7 +136,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -195,7 +195,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -232,7 +232,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -264,7 +264,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -285,7 +285,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -349,7 +349,7 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">تحميل المستند إلى مخزن ميلفوس المتجه</h3><p>كما في المقدمة أعلاه، نقوم بتهيئة وتحميل المستندات المُعدّة في مخزن Milvus vector، والذي يحتوي على حقلي متجهين: <code translate="no">dense</code> لتضمين OpenAI و <code translate="no">sparse</code> لدالة BM25.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">تحميل المستند إلى مخزن ميلفوس المتجه</h3><p>كما في المقدمة أعلاه، نقوم بتهيئة وتحميل المستندات المعدة في مخزن Milvus vector، والذي يحتوي على حقلي متجهين: <code translate="no">dense</code> لتضمين OpenAI و <code translate="no">sparse</code> لدالة BM25.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -358,7 +358,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>

@@ -2,7 +2,7 @@
 id: model-ranker-overview.md
 title: نظرة عامة على مصنف النماذجCompatible with Milvus 2.6.x
 summary: >-
-  يصنّف البحث التقليدي عن المتجهات النتائج من خلال التشابه الرياضي فقط - أي مدى
+  يصنّف البحث التقليدي عن المتجهات النتائج حسب التشابه الرياضي فقط - أي مدى
   تطابق المتجهات في الفضاء عالي الأبعاد. على الرغم من كفاءة هذا النهج، إلا أنه
   غالبًا ما يغفل الصلة الدلالية الحقيقية. فكّر في البحث عن "أفضل الممارسات
   لتحسين قاعدة البيانات": قد تتلقى مستندات ذات تشابه كبير في المتجهات التي تذكر
@@ -128,8 +128,8 @@ beta: Milvus 2.6.x
 </table>
 <p>للحصول على معلومات مفصلة حول تنفيذ كل خدمة نموذجية، راجع الوثائق المخصصة:</p>
 <ul>
-<li><p><a href="/docs/ar/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/ar/v2.6.x/tei-ranker.md">مصنف TEI</a></p></li>
+<li><p><a href="/docs/ar/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/ar/tei-ranker.md">مصنف TEI</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">التنفيذ<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>قاموس يحتوي على تكوين لدالة إعادة الترتيب المستندة إلى النموذج. تختلف المعلمات (المفاتيح) المتاحة حسب الموفر (<code translate="no">tei</code> أو <code translate="no">vllm</code>). ارجع إلى <a href="/docs/ar/v2.6.x/vllm-ranker.md">vLLM Ranker</a> أو <a href="/docs/ar/v2.6.x/tei-ranker.md">TEI Ranker</a> لمزيد من التفاصيل.</p></td>
+     <td><p>قاموس يحتوي على تكوين لدالة إعادة الترتيب المستندة إلى النموذج. تختلف المعلمات (المفاتيح) المتاحة حسب الموفر (<code translate="no">tei</code> أو <code translate="no">vllm</code>). ارجع إلى <a href="/docs/ar/vllm-ranker.md">vLLM Ranker</a> أو <a href="/docs/ar/tei-ranker.md">TEI Ranker</a> لمزيد من التفاصيل.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -246,7 +246,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث المختلط</h3><p>يمكن أيضًا تطبيق مصنفات النموذج على عمليات البحث المختلط التي تجمع بين حقول متجهات متعددة:</p>

@@ -49,8 +49,8 @@ summary: >-
     </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">Somiglianza di Jaccard</h3><p>La somiglianza di Jaccard misura la sovrapposizione tra due insiemi A e B, formalmente definita come:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(A, B) = \frac{|A \cap B|}{|A \cup B|}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>Dove il suo valore va da 0 (completamente disgiunto) a 1 (identico).</p>
-<p>Tuttavia, calcolare esattamente la somiglianza di Jaccard tra tutte le coppie di documenti in insiemi di dati su larga scala è computazionalmente costoso-O<strong>(n²)</strong> in termini di tempo e memoria quando <strong>n</strong> è grande. Ciò lo rende impraticabile per casi d'uso come la pulizia del corpus di addestramento LLM o l'analisi di documenti su scala web.</p>
-<h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">Firme MinHash: Similitudine di Jaccard approssimata</h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> è una tecnica probabilistica che offre un modo efficiente per stimare la somiglianza di Jaccard. Funziona trasformando ogni insieme in un <strong>vettore di firme</strong> compatto, che conserva informazioni sufficienti per approssimare in modo efficiente la somiglianza degli insiemi.</p>
+<p>Tuttavia, calcolare esattamente la somiglianza di Jaccard tra tutte le coppie di documenti in insiemi di dati su larga scala è computazionalmente costoso-O<strong>(n²)</strong> in termini di tempo e memoria quando <strong>n</strong> è grande. Ciò lo rende impraticabile per casi d'uso come la pulizia del corpus di addestramento LLM o l'analisi dei documenti su scala web.</p>
+<h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">Firme MinHash: Somiglianza di Jaccard approssimata</h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> è una tecnica probabilistica che offre un modo efficiente per stimare la somiglianza di Jaccard. Funziona trasformando ogni insieme in un <strong>vettore di firme</strong> compatto, che conserva informazioni sufficienti per approssimare in modo efficiente la somiglianza degli insiemi.</p>
 <p>L<strong>'idea di base</strong>:</p>
 <p>Quanto più simili sono i due insiemi, tanto più è probabile che le loro firme MinHash corrispondano nelle stesse posizioni. Questa proprietà consente a MinHash di approssimare la somiglianza di Jaccard tra gli insiemi.</p>
 <p>Questa proprietà consente a MinHash di <strong>approssimare la somiglianza di Jaccard</strong> tra gli insiemi senza dover confrontare direttamente gli insiemi completi.</p>
@@ -73,7 +73,7 @@ summary: >-
 <p>Il processo prevede:</p>
 <ol>
 <li><p><strong>Segmentazione della firma:</strong></p>
-<p>Una firma MinHash <em>n-dimensionale</em> viene suddivisa in <em>b b</em> ande. Ogni fascia contiene <em>r</em> valori hash consecutivi, quindi la lunghezza totale della firma soddisfa: <em>n = b × r</em>.</p>
+<p>Una firma MinHash <em>n-dimensionale</em> viene suddivisa in <em>b b</em> ande. Ogni banda contiene <em>r</em> valori hash consecutivi, quindi la lunghezza totale della firma soddisfa: <em>n = b × r</em>.</p>
 <p>Ad esempio, se si dispone di una firma MinHash a 128 dimensioni<em>(n = 128</em>) e la si divide in 32 bande<em>(b = 32</em>), ogni banda contiene 4 valori hash<em>(r = 4</em>).</p></li>
 <li><p><strong>Hashing a livello di banda:</strong></p>
 <p>Dopo la segmentazione, ogni banda viene elaborata in modo indipendente utilizzando una funzione hash standard per assegnarla a un bucket. Se due firme producono lo stesso valore hash all'interno di una banda, cioè rientrano nello stesso bucket, sono considerate potenziali corrispondenze.</p></li>
@@ -89,7 +89,7 @@ summary: >-
 <li><p>La probabilità che corrispondano in <strong>almeno una banda</strong> è:</p></li>
 </ul>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>s</mi><mi>r</mi></msup><msup><mo stretchy="false">)</mo><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">1 - (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p>Per maggiori dettagli, consultare la sezione <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">hashing sensibile alle località</a>.</p>
+<p>Per maggiori dettagli, fare riferimento a <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">Hashing sensibile alle località</a>.</p>
 </div>
 <p>Consideriamo tre documenti con firme MinHash a 128 dimensioni:</p>
 <p>
@@ -145,7 +145,7 @@ summary: >-
 <h3 id="Install-required-libraries" class="common-anchor-header">Installare le librerie necessarie</h3><p>Installare i pacchetti necessari per questo esempio:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus datasketch numpy
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Generate-MinHash-signatures" class="common-anchor-header">Generare le firme MinHash</h3><p>Genereremo firme MinHash a 256 dimensioni, con ogni valore hash rappresentato come un intero a 64 bit. Questo corrisponde al formato vettoriale previsto per <code translate="no">MINHASH_LSH</code>.</p>
+<h3 id="Generate-MinHash-signatures" class="common-anchor-header">Generare le firme MinHash</h3><p>Genereremo firme MinHash a 256 dimensioni, con ogni valore hash rappresentato come un intero a 64 bit. Ciò corrisponde al formato vettoriale previsto per <code translate="no">MINHASH_LSH</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasketch <span class="hljs-keyword">import</span> MinHash
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -159,7 +159,7 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
     <span class="hljs-keyword">return</span> m.hashvalues.astype(<span class="hljs-string">&#x27;&gt;u8&#x27;</span>).tobytes()  <span class="hljs-comment"># Returns 2048 bytes</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Ogni firma è 256 × 64 bit = 2048 byte. Questa stringa di byte può essere inserita direttamente in un campo Milvus <code translate="no">BINARY_VECTOR</code>. Per ulteriori informazioni sui vettori binari utilizzati in Milvus, consultare <a href="/docs/it/binary-vector.md">Vettore binario</a>.</p>
-<h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(Facoltativo) Preparare set di token grezzi (per la ricerca raffinata)</h3><p>Per impostazione predefinita, Milvus utilizza solo le firme MinHash e l'indice LSH per trovare i vicini approssimativi. Questo metodo è veloce, ma può restituire falsi positivi o perdere corrispondenze strette.</p>
+<h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(Facoltativo) Preparare set di token grezzi (per la ricerca raffinata)</h3><p>Per impostazione predefinita, Milvus utilizza solo le firme MinHash e l'indice LSH per trovare i vicini approssimativi. Questo metodo è veloce, ma può restituire falsi positivi o perdere le corrispondenze più strette.</p>
 <p>Se si desidera una <strong>somiglianza Jaccard accurata</strong>, Milvus supporta una ricerca raffinata che utilizza i set di token originali. Per abilitarla:</p>
 <ul>
 <li><p>Memorizzare gli insiemi di token come campo separato <code translate="no">VARCHAR</code>.</p></li>
@@ -186,7 +186,7 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta che i vettori MinHash e gli insiemi di token originali sono pronti, è possibile memorizzarli, indicizzarli e ricercarli usando Milvus con <code translate="no">MINHASH_LSH</code>.</p>
+    </button></h2><p>Una volta che i vettori MinHash e gli insiemi di token originali sono pronti, è possibile memorizzarli, indicizzarli e ricercarli utilizzando Milvus con <code translate="no">MINHASH_LSH</code>.</p>
 <h3 id="Connect-to-Milvus" class="common-anchor-header">Connettersi a Milvus</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)  <span class="hljs-comment"># Update if your URI is different</span>
@@ -271,7 +271,7 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
@@ -294,7 +294,7 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):
@@ -329,7 +329,7 @@ refined_results = client.search(
      <td><p><code translate="no">mh_element_bit_width</code></p></td>
      <td><p>Larghezza di bit di ciascun valore hash nella firma MinHash. Deve essere divisibile per 8.</p></td>
      <td><p>8, 16, 32, 64</p></td>
-     <td><p>Utilizzare <code translate="no">32</code> per ottenere prestazioni e precisione equilibrate. Usare <code translate="no">64</code> per una maggiore precisione con insiemi di dati più grandi. Utilizzare <code translate="no">16</code> per risparmiare memoria con una perdita di precisione accettabile.</p></td>
+     <td><p>Utilizzare <code translate="no">32</code> per ottenere prestazioni e precisione equilibrate. Utilizzare <code translate="no">64</code> per una maggiore precisione con insiemi di dati più grandi. Utilizzare <code translate="no">16</code> per risparmiare memoria con una perdita di precisione accettabile.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mh_lsh_band</code></p></td>

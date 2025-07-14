@@ -98,7 +98,7 @@ title: Início rápido com o Attu - a interface Web do Milvus
   <img translate="no" src="/docs/v2.6.x/assets/attu_login_page.png" alt="Attu Login Page" width="80%">
 </p>
 <hr>
-<h2 id="4-Prepare-Data-Create-Collection-and-Insert-Data" class="common-anchor-header">4. Preparar dados, criar coleção e inserir dados<button data-href="#4-Prepare-Data-Create-Collection-and-Insert-Data" class="anchor-icon" translate="no">
+<h2 id="4-Prepare-Data-Create-Collection-and-Insert-Data" class="common-anchor-header">4. Preparar os dados, criar uma coleção e inserir dados<button data-href="#4-Prepare-Data-Create-Collection-and-Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,7 +159,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
@@ -238,5 +238,5 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>O Attu simplifica a gestão e a visualização dos dados vectoriais armazenados no Milvus. Desde a inserção de dados à execução de consultas e à exploração interactiva, fornece uma interface intuitiva para lidar com tarefas complexas de pesquisa vetorial. Com funcionalidades como o suporte de esquemas dinâmicos, visualizações de pesquisa gráfica e filtros de consulta flexíveis, o Attu permite aos utilizadores analisar eficazmente conjuntos de dados de grande escala.</p>
-<p>Ao tirar partido das ferramentas de exploração visual da Attu, os utilizadores podem compreender melhor os seus dados, identificar relações ocultas e tomar decisões baseadas em dados. Comece hoje mesmo a explorar os seus próprios conjuntos de dados com a Attu e o Milvus!</p>
+<p>Ao tirar partido das ferramentas de exploração visual do Attu, os utilizadores podem compreender melhor os seus dados, identificar relações ocultas e tomar decisões baseadas em dados. Comece hoje mesmo a explorar os seus próprios conjuntos de dados com a Attu e o Milvus!</p>
 <hr>

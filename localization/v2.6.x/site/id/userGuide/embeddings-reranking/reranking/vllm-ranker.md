@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>Sistem dukungan pelanggan yang perlu mencocokkan masalah pengguna dengan solusi yang relevan</p></li>
 <li><p>Pencarian e-commerce yang harus memahami atribut produk dan maksud pengguna</p></li>
 </ul>
-<p>Dibandingkan dengan <a href="/docs/id/v2.6.x/tei-ranker.md">TEI Ranker</a>, vLLM Ranker menawarkan fleksibilitas yang lebih besar dalam pemilihan model dan penyesuaian, sehingga ideal untuk aplikasi pencarian khusus atau kompleks di mana opsi konfigurasi tambahan memberikan manfaat yang signifikan.</p>
+<p>Dibandingkan dengan <a href="/docs/id/tei-ranker.md">TEI Ranker</a>, vLLM Ranker menawarkan fleksibilitas yang lebih besar dalam pemilihan model dan penyesuaian, sehingga ideal untuk aplikasi pencarian khusus atau kompleks di mana opsi konfigurasi tambahan memberikan manfaat yang signifikan.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +86,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan vLLM Ranker di aplikasi Milvus Anda, buatlah sebuah objek Function yang menentukan bagaimana pemeringkatan harus beroperasi. Fungsi ini akan diteruskan ke operasi pencarian Milvus untuk meningkatkan pemeringkatan hasil.</p>
+    </button></h2><p>Untuk menggunakan vLLM Ranker di aplikasi Milvus Anda, buatlah sebuah objek Function yang menentukan bagaimana pemeringkatan harus beroperasi. Fungsi ini akan diteruskan ke operasi pencarian Milvus untuk meningkatkan peringkat hasil.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -125,7 +125,7 @@ vllm_ranker = Function(
    </tr>
 </table>
 <div class="alert note">
-<p>Untuk parameter umum yang digunakan bersama di semua pemeringkat model (misalnya, <code translate="no">provider</code>, <code translate="no">queries</code>), lihat <a href="/docs/id/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Membuat pemeringkat model</a>.</p>
+<p>Untuk parameter umum yang digunakan bersama di semua pemeringkat model (misalnya, <code translate="no">provider</code>, <code translate="no">queries</code>), lihat <a href="/docs/id/model-ranker-overview.md#Create-a-model-ranker">Membuat pemeringkat model</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Menerapkan ke pencarian vektor standar<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ results = client.search(
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Menerapkan ke pencarian hibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">

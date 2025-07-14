@@ -60,7 +60,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Annunci di eventi</p></td>
      <td><p>Piattaforme di biglietti per concerti</p></td>
-     <td><p>Crea un limite chiaro per gli eventi troppo lontani nel futuro</p></td>
+     <td><p>Crea un limite chiaro per gli eventi troppo lontani nel tempo</p></td>
    </tr>
    <tr>
      <td><p>Offerte a tempo limitato</p></td>
@@ -80,7 +80,7 @@ beta: Milvus 2.6.x
 </table>
 <p>Scegliete il decadimento lineare quando:</p>
 <ul>
-<li><p>L'applicazione ha un limite, una scadenza o una soglia naturale.</p></li>
+<li><p>L'applicazione ha un confine, una scadenza o una soglia naturale.</p></li>
 <li><p>Gli elementi che superano un certo punto dovrebbero essere completamente esclusi dai risultati</p></li>
 <li><p>Avete bisogno di un tasso prevedibile e coerente di declino della rilevanza</p></li>
 <li><p>Gli utenti devono vedere una chiara demarcazione tra elementi rilevanti e irrilevanti.</p></li>
@@ -192,7 +192,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Applica alla ricerca ibrida</h3><p>I ranker di decadimento possono essere applicati anche alle operazioni di ricerca ibrida che combinano più campi vettoriali:</p>

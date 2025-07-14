@@ -281,7 +281,7 @@ milvus_index = fob.compute_similarity(
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Управление прогонами мозга<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">
@@ -334,4 +334,4 @@ milvus_index = dataset.load_brain_results(brain_key)
 milvus_index.cleanup()
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<p>Для общего рабочего процесса векторного поиска в наборе данных FiftyOne с использованием бэкенда Milvus см. <a href="https://docs.voxel51.com/integrations/milvus.html#examples">примеры здесь</a>.</p>
+<p>Для общего рабочего процесса векторного поиска в наборе данных FiftyOne с использованием бэкэнда Milvus см. <a href="https://docs.voxel51.com/integrations/milvus.html#examples">примеры здесь</a>.</p>

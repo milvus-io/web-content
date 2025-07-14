@@ -5,11 +5,11 @@ summary: >-
   La recherche vectorielle traditionnelle classe les résultats uniquement en
   fonction de la similarité mathématique, c'est-à-dire de la proximité des
   vecteurs dans un espace à haute dimension. Bien qu'efficace, cette approche
-  passe souvent à côté de la véritable pertinence sémantique. Pensez à une
-  recherche sur les "meilleures pratiques pour l'optimisation des bases de
-  données" : vous pourriez recevoir des documents à forte similarité vectorielle
-  qui mentionnent fréquemment ces termes, mais qui ne fournissent pas réellement
-  de stratégies d'optimisation exploitables.
+  passe souvent à côté de la véritable pertinence sémantique. Pensez à la
+  recherche de "meilleures pratiques pour l'optimisation des bases de données" :
+  vous pourriez recevoir des documents à forte similarité vectorielle qui
+  mentionnent fréquemment ces termes, mais qui ne fournissent pas réellement de
+  stratégies d'optimisation exploitables.
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">Aperçu de Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -130,8 +130,8 @@ beta: Milvus 2.6.x
 </table>
 <p>Pour des informations détaillées sur l'implémentation de chaque modèle de service, reportez-vous à la documentation correspondante :</p>
 <ul>
-<li><p><a href="/docs/fr/v2.6.x/vllm-ranker.md">vLLM Ranker</a></p></li>
-<li><p><a href="/docs/fr/v2.6.x/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/fr/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/fr/tei-ranker.md">TEI Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Mise en œuvre<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +205,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Dictionnaire contenant la configuration de la fonction de reclassement basée sur un modèle. Les paramètres disponibles (clés) varient en fonction du fournisseur (<code translate="no">tei</code> ou <code translate="no">vllm</code>). Se référer à <a href="/docs/fr/v2.6.x/vllm-ranker.md">vLLM Ranker</a> ou <a href="/docs/fr/v2.6.x/tei-ranker.md">TEI Ranker</a> pour plus de détails.</p></td>
+     <td><p>Dictionnaire contenant la configuration de la fonction de reclassement basée sur un modèle. Les paramètres disponibles (clés) varient en fonction du fournisseur (<code translate="no">tei</code> ou <code translate="no">vllm</code>). Se référer à <a href="/docs/fr/vllm-ranker.md">vLLM Ranker</a> ou <a href="/docs/fr/tei-ranker.md">TEI Ranker</a> pour plus de détails.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -248,7 +248,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de modèles peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>

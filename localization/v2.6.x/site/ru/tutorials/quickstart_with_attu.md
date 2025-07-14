@@ -159,7 +159,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
@@ -202,7 +202,7 @@ client.insert(collection_name=collection_name, data=data)
 <li>Нажмите кнопку <strong>Генерировать случайные данные</strong>, чтобы создать тестовые запросы.</li>
 <li>Нажмите кнопку <strong>Поиск</strong>, чтобы получить результаты на основе сгенерированных данных.</li>
 </ol>
-<p>Результаты отображаются в таблице, в которой показаны идентификаторы, баллы сходства и динамические поля для каждой совпадающей сущности.</p>
+<p>Результаты отображаются в таблице, в которой показаны идентификаторы, баллы сходства и динамические поля для каждого совпадающего объекта.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>

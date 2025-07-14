@@ -20,7 +20,13 @@ title: LangChain Milvus 集成中的异步函数
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本教程探讨如何利用<a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a>中的异步函数构建高性能应用程序。通过使用异步方法，您可以显著提高应用程序的吞吐量和响应速度，尤其是在处理大规模检索时。无论您是要构建实时推荐系统、在应用程序中实现语义搜索，还是要创建 RAG（检索增强生成）管道，async 操作符都能帮助您更高效地处理并发请求。高性能向量数据库 Milvus 与 LangChain 强大的 LLM 抽象相结合，可以为构建可扩展的人工智能应用奠定坚实的基础。</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/langchain_milvus_async.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>本教程探讨如何利用<a href="https://github.com/langchain-ai/langchain-milvus">langchain-milvus</a>中的异步函数构建高性能应用程序。通过使用异步方法，您可以显著提高应用程序的吞吐量和响应速度，尤其是在处理大规模检索时。无论您是要构建实时推荐系统、在应用程序中实现语义搜索，还是要创建 RAG（检索增强生成）管道，async 操作符都能帮助您更高效地处理并发请求。高性能向量数据库 Milvus 与 LangChain 强大的 LLM 抽象相结合，可以为构建可扩展的人工智能应用奠定坚实的基础。</p>
 <h2 id="Async-API-Overview" class="common-anchor-header">异步 API 概述<button data-href="#Async-API-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -310,7 +316,7 @@ Sync search for 100 queries took 54.22 seconds
     end_time = time.time()
     <span class="hljs-keyword">return</span> end_time - start_time
 <button class="copy-code-btn"></button></code></pre>
-<p>现在，让我们执行删除性能测试来量化性能差异。我们将从一个填充了测试数据的全新向量存储开始，然后使用同步和异步两种方法执行删除操作：</p>
+<p>现在，让我们执行删除性能测试，量化性能差异。我们将从一个填充了测试数据的全新向量存储开始，然后使用同步和异步两种方法执行删除操作：</p>
 <pre><code translate="no" class="language-python">delete_counts = [<span class="hljs-number">10</span>, <span class="hljs-number">100</span>]
 
 <span class="hljs-comment"># Initialize and populate the vector store</span>
