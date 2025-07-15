@@ -22,14 +22,16 @@ The `removepunct` filter is built into Milvus. To use it, simply specify its nam
 </div>
 
 ```python
-{
+analyzer_params = {
     "tokenizer": "jieba",
     "filter": ["removepunct"]
 }
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "jieba");
+analyzerParams.put("filter", Collections.singletonList("removepunct"));
 ```
 
 ```javascript
@@ -37,7 +39,7 @@ The `removepunct` filter is built into Milvus. To use it, simply specify its nam
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"removepunct"}}
 ```
 
 ```bash
@@ -63,14 +65,16 @@ Before applying the analyzer configuration to your collection schema, verify its
 </div>
 
 ```python
-{
+analyzer_params = {
     "tokenizer": "icu",
     "filter": ["removepunct"]
 }
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "icu");
+analyzerParams.put("filter", Collections.singletonList("removepunct"));
 ```
 
 ```javascript
@@ -78,7 +82,7 @@ Before applying the analyzer configuration to your collection schema, verify its
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "icu", "filter": []string{"removepunct"}}
 ```
 
 ```bash
@@ -96,16 +100,39 @@ Before applying the analyzer configuration to your collection schema, verify its
 </div>
 
 ```python
+from pymilvus import (
+    MilvusClient,
+)
+
+client = MilvusClient(uri="http://localhost:19530")
+
 # Sample text to analyze
 sample_text = "Привет! Как дела?"
 
 # Run the standard analyzer with the defined configuration
-result = MilvusClient.run_analyzer(sample_text, analyzer_params)
-print(result)
+result = client.run_analyzer(sample_text, analyzer_params)
+print("Standard analyzer output:", result)
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.RunAnalyzerReq;
+import io.milvus.v2.service.vector.response.RunAnalyzerResp;
+
+ConnectConfig config = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
+
+List<String> texts = new ArrayList<>();
+texts.add("Привет! Как дела?");
+
+RunAnalyzerResp resp = client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
+List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
 ```javascript
@@ -113,7 +140,33 @@ print(result)
 ```
 
 ```go
-// go
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []string{"Привет! Как дела?"}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(string(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash

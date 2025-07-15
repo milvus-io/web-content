@@ -205,9 +205,9 @@ The following example assumes the collection has a field named `doc_chunk` and s
 
 ```python
 client.alter_collection_field(
-    collection="my_collection",
+    collection_name="my_collection",
     field_name="doc_chunk",
-    properties={"mmap.enabled": True}
+    field_params={"mmap.enabled": True}
 )
 ```
 

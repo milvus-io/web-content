@@ -40,7 +40,7 @@ To configure an analyzer using the `lindera` tokenizer, set `tokenizer.type` to 
 ```python
 analyzer_params = {
     "tokenizer": {
-      "type": "lindera"，
+      "type": "lindera",
       "dict_kind": "ipadic"
     }
 }

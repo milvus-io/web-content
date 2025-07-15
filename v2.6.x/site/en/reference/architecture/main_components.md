@@ -10,7 +10,7 @@ A Milvus cluster comprises five core components and three third-party dependenci
 
 ## Milvus components
 
-- Coordinator: master-slave mode can be eneabled to provide high availability.
+- Coordinator: master-slave mode can be enabled to provide high availability.
 - Proxy: one or more per cluster
 - Streaming Node: one or more per cluster
 - Query Node: one or more per cluster
