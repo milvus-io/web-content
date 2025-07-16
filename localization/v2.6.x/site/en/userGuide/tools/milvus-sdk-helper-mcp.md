@@ -59,8 +59,8 @@ summary: '⚡️ Configure once, boost efficiency forever!'
      <th><p>MCP code helper <strong>disabled</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" width="300" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" width="300"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>Use the officially recommended latest MilvusClient interface to create a Collection</p></td>
