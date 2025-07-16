@@ -26,8 +26,8 @@ The following figure compares the effects of generating code with and without th
      <th><p>MCP code helper <strong>disabled</strong></p></th>
    </tr>
    <tr>
-     <td><p><img src="../../../../assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img src="../../../../assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img width="300" src="../../../../assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img width="300"src="../../../../assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>Use the officially recommended latest MilvusClient interface to create a Collection</p></td>
