@@ -1796,7 +1796,7 @@
         "label": "Modelle",
         "id": "models",
         "isMenu": true,
-        "order": 4,
+        "order": 9,
         "children": [
           {
             "label": "Einbettungen",
@@ -1935,6 +1935,12 @@
             ]
           }
         ]
+      },
+      {
+        "label": "SDK-Code-Helfer (MCP)",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 10,
+        "children": []
       }
     ]
   },

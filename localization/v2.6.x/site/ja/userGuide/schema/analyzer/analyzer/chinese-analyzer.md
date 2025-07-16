@@ -19,7 +19,7 @@ summary: 中国語アナライザーは、中国語テキストを処理する�
         ></path>
       </svg>
     </button></h1><p><code translate="no">chinese</code> アナライザーは中国語テキストを処理するために特別に設計されており、効果的なセグメンテーションとトークン化を提供します。</p>
-<h3 id="Definition" class="common-anchor-header">定義</h3><p><code translate="no">chinese</code> アナライザーは次のように構成されています：</p>
+<h3 id="Definition" class="common-anchor-header">定義</h3><p><code translate="no">chinese</code> アナライザーは次のように構成されます：</p>
 <ul>
 <li><p><strong>トークン化</strong>：<code translate="no">jieba</code> トークナイザを使用して、語彙と文脈に基づいて中国語テキストをトークンにセグメンテーションする。詳細は<a href="/docs/ja/jieba-tokenizer.md">Jieba</a> を参照。</p></li>
 <li><p><strong>フィルタ</strong>：<code translate="no">cnalphanumonly</code> フィルタを使用して、中国語以外の文字を含むトークンを削除します。詳細については、<a href="/docs/ja/cnalphanumonly-filter.md">Cnalphanumonlyを</a>参照してください。</p></li>
@@ -143,7 +143,33 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus 是一个高性能、可扩展的向量数据库！&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

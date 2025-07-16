@@ -1004,7 +1004,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه TEI",
+                "label": "عناق الوجه المعانق TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1796,7 +1796,7 @@
         "label": "النماذج",
         "id": "models",
         "isMenu": true,
-        "order": 4,
+        "order": 9,
         "children": [
           {
             "label": "التضمينات",
@@ -1935,6 +1935,12 @@
             ]
           }
         ]
+      },
+      {
+        "label": "مساعد كود SDK (MCP)",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 10,
+        "children": []
       }
     ]
   },

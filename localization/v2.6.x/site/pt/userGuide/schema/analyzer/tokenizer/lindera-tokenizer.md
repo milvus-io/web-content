@@ -2,7 +2,7 @@
 id: lindera-tokenizer.md
 title: LinderaCompatible with Milvus 2.5.11+
 summary: >-
-  O tokenizador lindera executa análise morfológica baseada em dicionário. É uma
+  O tokenizador lindera realiza análise morfológica baseada em dicionário. É uma
   boa escolha para línguas - como o japonês, coreano e chinês - cujas palavras
   não são separadas por espaços.
 beta: Milvus 2.5.11+
@@ -39,7 +39,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><p>Para usar o tokenizador <code translate="no">lindera</code>, é necessário usar uma versão especialmente compilada do Milvus. Todos os dicionários devem ser explicitamente habilitados durante a compilação para serem usados.</p>
-<p>Para habilitar dicionários específicos, inclua-os no comando de compilação:</p>
+<p>Para ativar dicionários específicos, inclua-os no comando de compilação:</p>
 <pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
 <button class="copy-code-btn"></button></code></pre>
 <p>A lista completa de dicionários disponíveis é: <code translate="no">lindera-ipadic</code>, <code translate="no">lindera-ipadic-neologd</code>, <code translate="no">lindera-unidic</code>, <code translate="no">lindera-ko-dic</code>, <code translate="no">lindera-cc-cedict</code>.</p>
@@ -66,7 +66,7 @@ beta: Milvus 2.5.11+
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }

@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dopo l'inizializzazione di un'istanza Milvus, viene generato automaticamente un utente root per l'autenticazione quando ci si connette a Milvus per la prima volta. Il nome utente dell'utente root è <code translate="no">root</code> e la password è <code translate="no">Milvus</code>. Il ruolo predefinito dell'utente root è <code translate="no">admin</code>, che ha accesso a tutte le risorse. Per garantire la sicurezza dei dati, si consiglia di conservare le credenziali dell'utente root per evitare accessi non autorizzati.</p>
-<p>Per le operazioni quotidiane, si consiglia di creare degli utenti invece di usare l'utente root.</p>
+<p>Per le operazioni quotidiane, si consiglia di creare degli utenti invece di utilizzare l'utente root.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Creare un utente</h3><p>L'esempio seguente mostra come creare un utente con il nome utente <code translate="no">user_1</code> e la password <code translate="no">P@ssw0rd</code>. Il nome utente e la password dell'utente devono seguire queste regole:</p>
 <ul>
 <li><p>Nome utente: deve iniziare con una lettera e può includere solo lettere maiuscole o minuscole, numeri e trattini bassi.</p></li>
@@ -277,5 +277,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Di seguito è riportato un esempio di output. <code translate="no">admin</code> è il ruolo predefinito in Milvus. <code translate="no">role_a</code> è il nuovo ruolo appena creato.</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]
+<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
 <button class="copy-code-btn"></button></code></pre>

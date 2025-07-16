@@ -24,7 +24,7 @@ summary: >-
       </svg>
     </button></h1><p>O analisador <code translate="no">standard</code> é o analisador padrão no Milvus, que é automaticamente aplicado aos campos de texto se nenhum analisador for especificado. Ele usa tokenização baseada em gramática, tornando-o eficaz para a maioria dos idiomas.</p>
 <div class="alert note">
-<p>O analisador <code translate="no">standard</code> é adequado para línguas que dependem de separadores (tais como espaços, pontuação) para delimitar palavras. No entanto, idiomas como chinês, japonês e coreano exigem tokenizações baseadas em dicionário. Nesses casos, usar um analisador específico de idioma como o <a href="/docs/pt/chinese-analyzer.md"><code translate="no">chinese</code></a> ou analisadores personalizados com tokenizadores especializados (como <a href="/docs/pt/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/pt/icu-tokenizer.md"><code translate="no">icu</code></a>) e filtros é altamente recomendado para garantir uma tokenização precisa e melhores resultados de pesquisa.</p>
+<p>O analisador <code translate="no">standard</code> é adequado para línguas que dependem de separadores (como espaços, pontuação) para delimitar palavras. No entanto, idiomas como chinês, japonês e coreano exigem tokenizações baseadas em dicionário. Nesses casos, usar um analisador específico de idioma como o <a href="/docs/pt/chinese-analyzer.md"><code translate="no">chinese</code></a> ou analisadores personalizados com tokenizadores especializados (como <a href="/docs/pt/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/pt/icu-tokenizer.md"><code translate="no">icu</code></a>) e filtros é altamente recomendado para garantir uma tokenização precisa e melhores resultados de pesquisa.</p>
 </div>
 <h2 id="Definition" class="common-anchor-header">Definição<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,7 +217,33 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

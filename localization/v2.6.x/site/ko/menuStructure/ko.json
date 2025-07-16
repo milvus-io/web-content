@@ -1796,7 +1796,7 @@
         "label": "모델",
         "id": "models",
         "isMenu": true,
-        "order": 4,
+        "order": 9,
         "children": [
           {
             "label": "임베딩",
@@ -1935,6 +1935,12 @@
             ]
           }
         ]
+      },
+      {
+        "label": "SDK 코드 도우미(MCP)",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 10,
+        "children": []
       }
     ]
   },

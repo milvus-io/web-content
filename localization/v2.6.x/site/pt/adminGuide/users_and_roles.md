@@ -277,5 +277,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Abaixo está um exemplo de saída. <code translate="no">admin</code> é a função padrão em Milvus. <code translate="no">role_a</code> é a nova função que acabou de ser criada.</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]
+<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
 <button class="copy-code-btn"></button></code></pre>

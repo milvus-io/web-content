@@ -2,7 +2,7 @@
 id: standard-analyzer.md
 title: 標準アナライザー
 summary: >-
-  標準アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。
+  標準アナライザーはMilvusのデフォルトアナライザーであり、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法に基づいたトークン化を使用するため、ほとんどの言語に有効です。
 ---
 <h1 id="Standard-Analyzer" class="common-anchor-header">標準アナライザー<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +21,7 @@ summary: >-
       </svg>
     </button></h1><p><code translate="no">standard</code> アナライザーはMilvusのデフォルトアナライザーで、アナライザーが指定されていない場合は自動的にテキストフィールドに適用されます。文法ベースのトークン化を使用するため、ほとんどの言語に有効です。</p>
 <div class="alert note">
-<p><code translate="no">standard</code> アナライザーは単語の境界を区切り文字（スペースや句読点など）に依存する言語に適しています。しかし、中国語、日本語、韓国語のような言語は、辞書ベースのトークン化を必要とします。このような場合は、次のような言語固有の解析器を使用します。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>のような言語固有の解析器を使用するか、特殊なトークン化器を備えたカスタム解析器 ( <a href="/docs/ja/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a>など）とフィルタを備えたカスタム解析器を使用することを強くお勧めします。</p>
+<p><code translate="no">standard</code> アナライザーは単語の境界を区切り文字（スペースや句読点など）に依存する言語に適しています。しかし、中国語、日本語、韓国語のような言語は、辞書ベースのトークン化を必要とします。このような場合は、次のような言語固有の解析器を使用します。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>のような言語固有の解析器や、特殊なトークン化器を持つカスタム解析器（たとえば <a href="/docs/ja/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a>など）とフィルタを備えたカスタム解析器を使用することを強くお勧めします。</p>
 </div>
 <h2 id="Definition" class="common-anchor-header">定義<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -138,7 +138,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定されたアナライザを使用してフィールド内のテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、それらを<code translate="no">VARCHAR</code> フィールドに適用することができます。これにより、Milvusは指定されたアナライザを使用してフィールド内のテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">使用例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,33 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>É possível alterar as propriedades de um campo de coleção para modificar as restrições de coluna ou aplicar regras de integridade de dados mais rigorosas.</p>
 <div class="alert note">
 <ul>
-<li><p>Cada coleção é constituída apenas por um campo primário. Uma vez definido durante a criação da coleção, não é possível modificar o campo primário ou alterar as suas propriedades.</p></li>
+<li><p>Cada coleção é composta apenas por um campo primário. Uma vez definido durante a criação da coleção, não é possível modificar o campo primário ou alterar as suas propriedades.</p></li>
 <li><p>Cada coleção pode ter apenas uma chave de partição. Uma vez definida durante a criação da coleção, não é possível alterar a chave de partição.</p></li>
 </ul>
 </div>
@@ -209,9 +209,9 @@ curl --request POST \
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_collection_field(
-    collection=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">client.alterCollectionField(AlterCollectionFieldReq.builder()

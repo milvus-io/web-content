@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 인스턴스를 초기화한 후, Milvus에 처음 접속할 때 인증을 위해 루트 사용자가 자동으로 생성됩니다. 루트 사용자의 사용자 이름은 <code translate="no">root</code> 이고 비밀번호는 <code translate="no">Milvus</code> 입니다. 루트 사용자의 기본 역할은 <code translate="no">admin</code> 이며 모든 리소스에 대한 액세스 권한이 있습니다. 데이터 보안을 위해 루트 사용자의 자격 증명을 안전하게 보관하여 무단 액세스를 방지하세요.</p>
+    </button></h2><p>Milvus 인스턴스를 초기화한 후, Milvus에 처음 접속할 때 인증을 위해 루트 사용자가 자동으로 생성됩니다. 루트 사용자의 사용자 이름은 <code translate="no">root</code> 이고 비밀번호는 <code translate="no">Milvus</code> 입니다. 루트 사용자의 기본 역할은 <code translate="no">admin</code> 이며, 모든 리소스에 대한 액세스 권한이 있습니다. 데이터 보안을 위해 루트 사용자의 자격 증명을 안전하게 보관하여 무단 액세스를 방지하세요.</p>
 <p>일상적인 작업의 경우 루트 사용자를 사용하는 대신 사용자를 만드는 것이 좋습니다.</p>
 <h3 id="Create-a-user" class="common-anchor-header">사용자 만들기</h3><p>다음 예는 사용자 아이디 <code translate="no">user_1</code> 와 비밀번호 <code translate="no">P@ssw0rd</code> 를 사용하여 사용자를 만드는 방법을 보여줍니다. 사용자의 사용자 아이디와 비밀번호는 다음 규칙을 따라야 합니다:</p>
 <ul>
@@ -216,7 +216,7 @@ client.list_users()
 <h3 id="Create-a-role" class="common-anchor-header">역할 만들기</h3><p>다음 예에서는 <code translate="no">role_a</code> 라는 역할을 만드는 방법을 보여 줍니다.</p>
 <p>역할 이름은 다음 규칙을 따라야 합니다:</p>
 <ul>
-<li>문자로 시작해야 하며 대문자 또는 소문자, 숫자 및 밑줄만 포함할 수 있습니다.</li>
+<li>문자로 시작해야 하며 대문자 또는 소문자, 숫자, 밑줄만 포함할 수 있습니다.</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -274,5 +274,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>아래는 출력 예시입니다. <code translate="no">admin</code> 은 Milvus의 기본 역할이고 <code translate="no">role_a</code> 은 방금 생성한 새 역할입니다.</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]
+<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
 <button class="copy-code-btn"></button></code></pre>

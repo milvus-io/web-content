@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "番号フィールド",
+            "label": "数字フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -1796,7 +1796,7 @@
         "label": "モデル",
         "id": "models",
         "isMenu": true,
-        "order": 4,
+        "order": 9,
         "children": [
           {
             "label": "埋め込み",
@@ -1935,6 +1935,12 @@
             ]
           }
         ]
+      },
+      {
+        "label": "SDKコードヘルパー（MCP）",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 10,
+        "children": []
       }
     ]
   },

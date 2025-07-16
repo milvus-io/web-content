@@ -59,7 +59,7 @@ title: 主要组件
     </button></h2><ul>
 <li><strong>元存储：</strong>存储 Milvus 中各种组件的元数据，如 etcd。</li>
 <li><strong>对象存储：</strong> 负责 Milvus 中索引和二进制日志文件等大型文件的数据持久化，例如 S3</li>
-<li><strong>WAL 存储：</strong>为 milvus 提供先写日志（WAL）服务，如 woodpecker。<ul>
+<li><strong>WAL 存储：</strong>为 Milvus 提供先写日志（WAL）服务，如 woodpecker。<ul>
 <li>在啄木鸟零磁盘模式下，<strong>WAL</strong>直接使用对象存储和元存储，无需其他部署，减少第三方依赖。</li>
 </ul></li>
 </ul>
@@ -79,7 +79,7 @@ title: 主要组件
         ></path>
       </svg>
     </button></h2><p>运行 Milvus 有两种模式：</p>
-<h3 id="Standalone" class="common-anchor-header">独立运行</h3><p>在一个进程中运行所有组件的 Milvus 单实例，适用于小数据集和低工作量的情况。 此外，在 Standalone 模式下，可以选择更简单的 WAL 实现，如 woodpecker 和 rocksmq，以消除对第三方 WAL 存储依赖的要求。</p>
+<h3 id="Standalone" class="common-anchor-header">独立运行</h3><p>在一个进程中运行所有组件的 Milvus 单实例，适用于数据集小、工作量小的情况。 此外，在 Standalone 模式下，可以选择更简单的 WAL 实现，如 woodpecker 和 rocksmq，以消除对第三方 WAL 存储依赖的要求。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/standalone_architecture.png" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />

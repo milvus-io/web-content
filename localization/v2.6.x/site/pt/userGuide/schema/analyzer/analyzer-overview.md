@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>No processamento de texto, um <strong>analisador</strong> é um componente crucial que converte o texto em bruto num formato estruturado e pesquisável. Cada analisador é normalmente composto por dois elementos principais: <strong>tokenizador</strong> e <strong>filtro</strong>. Juntos, eles transformam o texto de entrada em tokens, refinam esses tokens e preparam-nos para uma indexação e recuperação eficientes.</p>
-<p>No Milvus, os analisadores são configurados durante a criação da coleção quando se adicionam os campos <code translate="no">VARCHAR</code> ao esquema da coleção. Os símbolos produzidos por um analisador podem ser utilizados para construir um índice para correspondência de palavras-chave ou convertidos em embeddings esparsos para pesquisa de texto completo. Para obter mais informações, consulte <a href="/docs/pt/keyword-match.md">Correspondência de texto</a> ou <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
+<p>No Milvus, os analisadores são configurados durante a criação da coleção quando se adicionam os campos <code translate="no">VARCHAR</code> ao esquema da coleção. Os símbolos produzidos por um analisador podem ser utilizados para construir um índice para correspondência de palavras-chave ou convertidos em embeddings esparsos para pesquisa de texto completo. Para obter mais informações, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>, <a href="/docs/pt/phrase-match.md">Correspondência de frases</a> ou <a href="/docs/pt/keyword-match.md">Correspondência de texto</a>.</p>
 <div class="alert note">
 <p>A utilização de analisadores pode afetar o desempenho:</p>
 <ul>
@@ -169,7 +169,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Isso demonstra que o analisador tokeniza corretamente o texto de entrada, filtrando as palavras de parada <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, e <code translate="no">&quot;for&quot;</code>, enquanto retorna os tokens significativos restantes.</p>
-<p>A configuração do analisador interno <code translate="no">standard</code> acima é equivalente à configuração de um <a href="/docs/pt/analyzer-overview.md#Custom-analyzer">analisador personalizado</a> com os seguintes parâmetros, onde as opções <code translate="no">tokenizer</code> e <code translate="no">filter</code> são explicitamente definidas para alcançar uma funcionalidade semelhante:</p>
+<p>A configuração do analisador interno <code translate="no">standard</code> acima é equivalente à configuração de um <a href="/docs/pt/analyzer-overview.md#Custom-analyzer">analisador personalizado</a> com os seguintes parâmetros, onde as opções <code translate="no">tokenizer</code> e <code translate="no">filter</code> são explicitamente definidas para obter uma funcionalidade semelhante:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -259,7 +259,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <li><p><strong>Filtros incorporados</strong>: Pré-configurados pelo Milvus, requerem uma configuração mínima. Pode utilizar estes filtros imediatamente, especificando os seus nomes. Os filtros abaixo são integrados para uso direto:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Converte o texto em minúsculas, garantindo uma correspondência sem distinção entre maiúsculas e minúsculas. Para obter detalhes, consulte <a href="/docs/pt/lowercase-filter.md">Minúsculas</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Converte caracteres não-ASCII em equivalentes ASCII, simplificando o tratamento de texto multilingue. Para mais pormenores, consulte <a href="/docs/pt/ascii-folding-filter.md">Dobragem ASCII</a>.</p></li>
+<li><p><code translate="no">asciifolding</code>: Converte caracteres não-ASCII em equivalentes ASCII, simplificando o manuseamento de texto multilingue. Para mais pormenores, consulte <a href="/docs/pt/ascii-folding-filter.md">Dobragem ASCII</a>.</p></li>
 <li><p><code translate="no">alphanumonly</code>: Mantém apenas os caracteres alfanuméricos, removendo os outros. Para mais pormenores, consulte <a href="/docs/pt/alphanumonly-filter.md">Apenas alfanuméricos</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: Remove tokens que contêm quaisquer caracteres que não sejam caracteres chineses, letras inglesas ou dígitos. Para mais pormenores, consulte <a href="/docs/pt/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 <li><p><code translate="no">cncharonly</code>: Remove tokens que contêm quaisquer caracteres não chineses. Para mais pormenores, consulte <a href="/docs/pt/cncharonly-filter.md">Cncharonly</a>.</p></li>
@@ -760,3 +760,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Depois de configurar um analisador, pode integrá-lo com as funcionalidades de recuperação de texto fornecidas pelo Milvus. Para mais informações:</p>
+<ul>
+<li><p><a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a></p></li>
+<li><p><a href="/docs/pt/keyword-match.md">Correspondência de texto</a></p></li>
+<li><p><a href="/docs/pt/phrase-match.md">Correspondência de frases</a></p></li>
+</ul>

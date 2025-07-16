@@ -557,7 +557,7 @@
                     "children": []
                   },
                   {
-                    "label": "Fermarsi",
+                    "label": "Stop",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -648,7 +648,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali fluttuanti",
+            "label": "Indici vettoriali flottanti",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -1796,7 +1796,7 @@
         "label": "Modelli",
         "id": "models",
         "isMenu": true,
-        "order": 4,
+        "order": 9,
         "children": [
           {
             "label": "Incorporazioni",
@@ -1935,6 +1935,12 @@
             ]
           }
         ]
+      },
+      {
+        "label": "Aiutante di codice SDK (MCP)",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 10,
+        "children": []
       }
     ]
   },

@@ -79,7 +79,7 @@ title: 주요 구성 요소
         ></path>
       </svg>
     </button></h2><p>Milvus를 실행하는 데는 두 가지 모드가 있습니다:</p>
-<h3 id="Standalone" class="common-anchor-header">독립형</h3><p>하나의 프로세스에서 모든 구성 요소를 실행하는 Milvus의 단일 인스턴스로, 작은 데이터 세트와 낮은 워크로드에 적합합니다. 또한 독립형 모드에서는 타사 WAL 스토리지 종속성에 대한 요구 사항을 없애기 위해 woodpecker 및 rocksmq와 같은 더 간단한 WAL 구현을 선택할 수 있습니다.</p>
+<h3 id="Standalone" class="common-anchor-header">독립형</h3><p>하나의 프로세스에서 모든 구성 요소를 실행하는 Milvus의 단일 인스턴스로, 작은 데이터 세트와 낮은 워크로드에 적합합니다. 또한, 독립형 모드에서는 타사 WAL 스토리지 종속성에 대한 요구 사항을 없애기 위해 woodpecker 및 rocksmq와 같은 더 간단한 WAL 구현을 선택할 수 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/standalone_architecture.png" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />

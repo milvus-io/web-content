@@ -37,7 +37,7 @@ title: Composants principaux
     </button></h2><ul>
 <li>Coordinateur : le mode maître-esclave peut être activé pour fournir une haute disponibilité.</li>
 <li>Proxy : un ou plusieurs par cluster</li>
-<li>Nœud de streaming : un ou plusieurs par cluster</li>
+<li>Nœud de streaming : un ou plusieurs par cluster.</li>
 <li>Nœud de requête : un ou plusieurs par cluster</li>
 <li>Nœud de données : un ou plusieurs par cluster</li>
 </ul>

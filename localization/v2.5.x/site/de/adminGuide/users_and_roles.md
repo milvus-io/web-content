@@ -42,7 +42,7 @@ summary: >-
       </svg>
     </button></h2><p>Nach der Initialisierung einer Milvus-Instanz wird automatisch ein Root-Benutzer für die Authentifizierung bei der ersten Verbindung mit Milvus erstellt. Der Benutzername des Root-Benutzers ist <code translate="no">root</code> und das Passwort lautet <code translate="no">Milvus</code>. Die Standardrolle des Root-Benutzers ist <code translate="no">admin</code>, der Zugriff auf alle Ressourcen hat. Um die Datensicherheit zu gewährleisten, bewahren Sie bitte die Anmeldedaten des Root-Benutzers sicher auf, um unbefugten Zugriff zu verhindern.</p>
 <p>Für den täglichen Betrieb empfiehlt es sich, Benutzer anzulegen, anstatt den Root-Benutzer zu verwenden.</p>
-<h3 id="Create-a-user" class="common-anchor-header">Anlegen eines Benutzers</h3><p>Das folgende Beispiel zeigt, wie Sie einen Benutzer mit dem Benutzernamen <code translate="no">user_1</code> und dem Passwort <code translate="no">P@ssw0rd</code> anlegen. Der Benutzername und das Passwort für den Benutzer müssen diese Regeln befolgen:</p>
+<h3 id="Create-a-user" class="common-anchor-header">Erstellen eines Benutzers</h3><p>Das folgende Beispiel zeigt, wie Sie einen Benutzer mit dem Benutzernamen <code translate="no">user_1</code> und dem Passwort <code translate="no">P@ssw0rd</code> anlegen. Der Benutzername und das Passwort für den Benutzer müssen diese Regeln befolgen:</p>
 <ul>
 <li><p>Benutzername: Muss mit einem Buchstaben beginnen und darf nur Groß- und Kleinbuchstaben, Zahlen und Unterstriche enthalten.</p></li>
 <li><p>Passwort: Muss 8-64 Zeichen lang sein und drei der folgenden Zeichen enthalten: Großbuchstaben, Kleinbuchstaben, Zahlen und Sonderzeichen.</p></li>
@@ -251,7 +251,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">Rollen auflisten</h3><p>Nachdem Sie mehrere Rollen erstellt haben, können Sie alle vorhandenen Rollen auflisten und ansehen.</p>
+<h3 id="List-roles" class="common-anchor-header">Rollen auflisten</h3><p>Nachdem Sie mehrere Rollen erstellt haben, können Sie alle vorhandenen Rollen auflisten und einsehen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -277,5 +277,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Unten sehen Sie eine Beispielausgabe. <code translate="no">admin</code> ist die Standardrolle in Milvus. <code translate="no">role_a</code> ist die neue Rolle, die gerade erstellt wurde.</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]
+<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
 <button class="copy-code-btn"></button></code></pre>

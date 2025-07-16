@@ -213,7 +213,7 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><p>Milvus는 모든 인스턴스의 리소스에 액세스할 수 있고 모든 작업에 대한 권한이 있는 관리자 역할인 <code translate="no">admin</code> 이라는 기본 제공 역할을 제공합니다. 보다 세분화된 액세스 관리와 향상된 데이터 보안을 위해 필요에 따라 사용자 지정 역할을 만드는 것이 좋습니다.</p>
-<h3 id="Create-a-role" class="common-anchor-header">역할 만들기</h3><p>다음 예에서는 <code translate="no">role_a</code> 라는 역할을 만드는 방법을 보여 줍니다.</p>
+<h3 id="Create-a-role" class="common-anchor-header">역할 만들기</h3><p>다음 예에서는 <code translate="no">role_a</code> 이라는 역할을 만드는 방법을 보여 줍니다.</p>
 <p>역할 이름은 다음 규칙을 따라야 합니다:</p>
 <ul>
 <li>문자로 시작해야 하며 대문자 또는 소문자, 숫자 및 밑줄만 포함할 수 있습니다.</li>
@@ -274,5 +274,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>아래는 출력 예시입니다. <code translate="no">admin</code> 은 Milvus의 기본 역할이고 <code translate="no">role_a</code> 은 방금 생성한 새 역할입니다.</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]
+<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
 <button class="copy-code-btn"></button></code></pre>

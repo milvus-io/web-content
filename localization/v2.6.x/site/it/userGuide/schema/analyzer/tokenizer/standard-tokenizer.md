@@ -2,8 +2,8 @@
 id: standard-tokenizer.md
 title: Tokenizzatore standard
 summary: >-
-  Il tokenizer standard di Milvus divide il testo in base agli spazi e ai segni
-  di punteggiatura, rendendolo adatto alla maggior parte delle lingue.
+  Il tokenizzatore standard di Milvus divide il testo in base agli spazi e ai
+  segni di punteggiatura, rendendolo adatto alla maggior parte delle lingue.
 ---
 <h1 id="Standard-Tokenizer" class="common-anchor-header">Tokenizzatore standard<button data-href="#Standard-Tokenizer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,9 +85,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Per una configurazione più semplice, si può scegliere di utilizzare l'<a href="/docs/it/standard-analyzer.md">analizzatore</a> <code translate="no">standard</code>, che combina il tokenizer <code translate="no">standard</code> con il<a href="/docs/it/lowercase-filter.md"> filtro</a> <code translate="no">lowercase</code><a href="/docs/it/lowercase-filter.md"></a>.</p>
+<p>Per una configurazione più semplice, si può scegliere di usare l'<a href="/docs/it/standard-analyzer.md">analizzatore</a> <code translate="no">standard</code>, che combina il tokenizer <code translate="no">standard</code> con il<a href="/docs/it/lowercase-filter.md"> filtro</a> <code translate="no">lowercase</code><a href="/docs/it/lowercase-filter.md"></a>.</p>
 </div>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Questo permette a Milvus di elaborare il testo di quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, si veda l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Questo permette a Milvus di elaborare il testo di quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per i dettagli, consultare l'<a href="/docs/it/analyzer-overview.md#Example-use">esempio di utilizzo</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,33 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

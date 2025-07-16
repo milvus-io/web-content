@@ -24,11 +24,11 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Nell'elaborazione del testo, un <strong>analizzatore</strong> è un componente cruciale che converte il testo grezzo in un formato strutturato e ricercabile. Ogni analizzatore è generalmente composto da due elementi fondamentali: <strong>tokenizer</strong> e <strong>filtro</strong>. Insieme, trasformano il testo in ingresso in token, li raffinano e li preparano per un'indicizzazione e un recupero efficienti.</p>
-<p>In Milvus, gli analizzatori vengono configurati durante la creazione della raccolta, quando si aggiungono i campi <code translate="no">VARCHAR</code> allo schema della raccolta. I token prodotti da un analizzatore possono essere usati per costruire un indice per la corrispondenza con le parole chiave o convertiti in embedding sparsi per la ricerca full text. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/keyword-match.md">Corrispondenza di testo</a> o <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
+<p>In Milvus, gli analizzatori sono configurati durante la creazione della raccolta, quando si aggiungono i campi <code translate="no">VARCHAR</code> allo schema della raccolta. I token prodotti da un analizzatore possono essere usati per costruire un indice per la corrispondenza con le parole chiave o convertiti in embedding sparsi per la ricerca full text. Per ulteriori informazioni, consultare <a href="/docs/it/full-text-search.md">Ricerca a testo intero</a>, <a href="/docs/it/phrase-match.md">Corrispondenza per frase</a> o <a href="/docs/it/keyword-match.md">Corrispondenza per testo</a>.</p>
 <div class="alert note">
 <p>L'uso degli analizzatori può influire sulle prestazioni:</p>
 <ul>
-<li><p><strong>Ricerca a testo completo:</strong> Per la ricerca full text, i canali <strong>DataNode</strong> e <strong>QueryNode</strong> consumano i dati più lentamente perché devono attendere il completamento della tokenizzazione. Di conseguenza, i dati appena ingeriti impiegano più tempo per diventare disponibili per la ricerca.</p></li>
+<li><p><strong>Ricerca a testo pieno:</strong> Per la ricerca full text, i canali <strong>DataNode</strong> e <strong>QueryNode</strong> consumano i dati più lentamente perché devono attendere il completamento della tokenizzazione. Di conseguenza, i dati appena ingeriti impiegano più tempo per diventare disponibili per la ricerca.</p></li>
 <li><p><strong>Corrispondenza di parole chiave:</strong> Per la corrispondenza delle parole chiave, anche la creazione dell'indice è più lenta, poiché la tokenizzazione deve essere completata prima di poter costruire un indice.</p></li>
 </ul>
 </div>
@@ -86,7 +86,7 @@ summary: >-
 <li>Per ottenere prestazioni ottimali nella ricerca e nelle query, scegliere un analizzatore che corrisponda alla lingua dei dati di testo. Ad esempio, l'analizzatore <code translate="no">standard</code>, pur essendo versatile, potrebbe non essere la scelta migliore per le lingue con strutture grammaticali uniche, come il cinese, il giapponese o il coreano. In questi casi, si può usare un analizzatore specifico per la lingua come <a href="/docs/it/chinese-analyzer.md"><code translate="no">chinese</code></a> o analizzatori personalizzati con tokenizer specializzati (come ad es. <a href="/docs/it/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/it/icu-tokenizer.md"><code translate="no">icu</code></a>) e filtri per garantire una tokenizzazione accurata e risultati di ricerca migliori.</li>
 </ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, consentendo di utilizzarli immediatamente senza dover definire questi componenti. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, il che consente di utilizzarli immediatamente senza doverli definire personalmente. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
 <p>Per esempio, per usare l'analizzatore incorporato <code translate="no">standard</code>, basta specificare il nome <code translate="no">standard</code> come <code translate="no">type</code> e includere facoltativamente configurazioni aggiuntive specifiche per questo tipo di analizzatore, come <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -291,7 +291,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Filtri personalizzati</strong>: I filtri personalizzati consentono configurazioni specifiche. È possibile definire un filtro personalizzato scegliendo un tipo di filtro valido (<code translate="no">filter.type</code>) e aggiungendo impostazioni specifiche per ogni tipo di filtro. Esempi di tipi di filtro che supportano la personalizzazione:</p>
 <ul>
-<li><p><code translate="no">stop</code>: Rimuove le parole comuni specificate impostando un elenco di parole di arresto (ad esempio, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Per i dettagli, fare riferimento a <a href="/docs/it/stop-filter.md">Stop</a>.</p></li>
+<li><p><code translate="no">stop</code>: Rimuove le parole comuni specificate impostando un elenco di parole di arresto (ad esempio, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Per ulteriori informazioni, consultare <a href="/docs/it/stop-filter.md">Stop</a>.</p></li>
 <li><p><code translate="no">length</code>: Esclude i token in base a criteri di lunghezza, come l'impostazione di una lunghezza massima dei token. Per i dettagli, vedere <a href="/docs/it/length-filter.md">Lunghezza</a>.</p></li>
 <li><p><code translate="no">stemmer</code>: Riduce le parole alla loro forma radicale per una corrispondenza più flessibile. Per ulteriori informazioni, vedere <a href="/docs/it/stemmer-filter.md">Stemmer</a>.</p></li>
 </ul>
@@ -760,3 +760,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Dopo aver configurato un analizzatore, è possibile integrarlo con le funzioni di recupero del testo fornite da Milvus. Per maggiori dettagli:</p>
+<ul>
+<li><p><a href="/docs/it/full-text-search.md">Ricerca a tutto testo</a></p></li>
+<li><p><a href="/docs/it/keyword-match.md">Corrispondenza del testo</a></p></li>
+<li><p><a href="/docs/it/phrase-match.md">Corrispondenza di frase</a></p></li>
+</ul>

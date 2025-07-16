@@ -79,13 +79,13 @@ title: 主要元件
         ></path>
       </svg>
     </button></h2><p>運行 Milvus 有兩種模式：</p>
-<h3 id="Standalone" class="common-anchor-header">單機</h3><p>Milvus 的單一實體，在一個進程中執行所有元件，適用於小資料集、低工作負載的情況。 此外，在 standalone 模式下，可以選擇較簡單的 WAL 實作，例如 woodpecker 和 rocksmq，以消除對第三方 WAL 儲存的依賴。</p>
+<h3 id="Standalone" class="common-anchor-header">單機</h3><p>Milvus 的單一實體，在一個進程中執行所有元件，適合小資料集、低工作量的情況。 此外，在 standalone 模式中，可以選擇較簡單的 WAL 實作，例如 woodpecker 和 rocksmq，以消除對第三方 WAL 儲存的依賴。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/standalone_architecture.png" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />
    </span> <span class="img-wrapper"> <span>獨立架構</span> </span></p>
 <p>目前，即使 WAL 儲存後端支援叢集模式，您也無法從獨立的 Milvus 實例執行線上升級至 Milvus 叢集。</p>
-<h3 id="Cluster" class="common-anchor-header">叢集</h3><p>Milvus 的分佈式部署模式，每個元件獨立運作，並可擴充彈性。此設定適用於大型資料集和高負載的情況。</p>
+<h3 id="Cluster" class="common-anchor-header">叢集</h3><p>Milvus 的分散式部署模式，每個元件獨立運作，並可擴充彈性。此設定適用於大型資料集及高負載的情況。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/distributed_architecture.png" alt="Distributed_architecture" class="doc-image" id="distributed_architecture" />

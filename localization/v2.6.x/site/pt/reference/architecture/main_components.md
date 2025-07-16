@@ -79,7 +79,7 @@ title: Componentes principais
         ></path>
       </svg>
     </button></h2><p>Existem dois modos de execução do Milvus:</p>
-<h3 id="Standalone" class="common-anchor-header">Autónomo</h3><p>Uma única instância do Milvus que executa todos os componentes num único processo, o que é adequado para pequenos conjuntos de dados e pouca carga de trabalho. Adicionalmente, no modo autónomo, podem ser escolhidas implementações mais simples do WAL, tais como woodpecker e rocksmq, para eliminar a necessidade de dependências de armazenamento WAL de terceiros.</p>
+<h3 id="Standalone" class="common-anchor-header">Autónomo</h3><p>Uma única instância do Milvus que executa todos os componentes num único processo, o que é adequado para pequenos conjuntos de dados e baixa carga de trabalho. Adicionalmente, no modo autónomo, podem ser escolhidas implementações mais simples do WAL, tais como woodpecker e rocksmq, para eliminar a necessidade de dependências de armazenamento WAL de terceiros.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/standalone_architecture.png" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />

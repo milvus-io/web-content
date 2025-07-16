@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>在文本处理中，<strong>分析器</strong>是将原始文本转换为结构化可搜索格式的关键组件。每个分析器通常由两个核心部件组成：<strong>标记器</strong>和<strong>过滤器</strong>。它们共同将输入文本转换为标记，完善这些标记，并为高效索引和检索做好准备。</p>
-<p>在 Milvus 中，创建 Collections 时，将<code translate="no">VARCHAR</code> 字段添加到 Collections Schema 时，会对分析器进行配置。分析器生成的标记可用于建立关键字匹配索引，或转换为稀疏嵌入以进行全文检索。更多信息，请参阅<a href="/docs/zh/keyword-match.md">文本匹配</a>或<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
+<p>在 Milvus 中，创建 Collections 时，将<code translate="no">VARCHAR</code> 字段添加到 Collections Schema 时，会对分析器进行配置。分析器生成的标记可用于建立关键字匹配索引，或转换为稀疏嵌入以进行全文检索。有关详细信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>、<a href="/docs/zh/phrase-match.md">词组匹配</a>或<a href="/docs/zh/keyword-match.md">文本匹配</a>。</p>
 <div class="alert note">
 <p>使用分析器可能会影响性能：</p>
 <ul>
@@ -591,7 +591,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">第 3 步：向 Schema 添加字段</h3><p>验证完分析器配置后，将其添加到 Schema 字段中：</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">第 3 步：向 Schema 添加字段</h3><p>验证分析器配置后，将其添加到 Schema 字段中：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>
@@ -756,3 +756,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>配置分析器后，您就可以集成 Milvus 提供的文本检索功能。详情请看</p>
+<ul>
+<li><p><a href="/docs/zh/full-text-search.md">全文检索</a></p></li>
+<li><p><a href="/docs/zh/keyword-match.md">文本匹配</a></p></li>
+<li><p><a href="/docs/zh/phrase-match.md">短语匹配</a></p></li>
+</ul>

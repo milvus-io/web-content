@@ -35,7 +35,7 @@ title: Componenti principali
         ></path>
       </svg>
     </button></h2><ul>
-<li>Coordinatore: la modalità master-slave può essere attivata per fornire alta disponibilità.</li>
+<li>Coordinatore: la modalità master-slave può essere abilitata per fornire un'alta disponibilità.</li>
 <li>Proxy: uno o più per cluster</li>
 <li>Nodo di streaming: uno o più per cluster</li>
 <li>Nodo di interrogazione: uno o più per cluster</li>
