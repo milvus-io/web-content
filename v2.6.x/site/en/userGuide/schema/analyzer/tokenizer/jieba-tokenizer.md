@@ -8,6 +8,12 @@ summary: "The jieba tokenizer processes Chinese text by breaking it down into it
 
 The `jieba` tokenizer processes Chinese text by breaking it down into its component words.
 
+<div class="alert note">
+
+The `jieba` tokenizer preserves punctuation marks as separate tokens in the output. For example, `"你好！世界。"` becomes `["你好", "！", "世界", "。"]`. To remove these standalone punctuation tokens, use the [`removepunct`](removepunct-filter.md) filter.
+
+</div>
+
 ## Configuration
 
 Milvus supports two configuration approaches for the `jieba` tokenizer: a simple configuration and a custom configuration.
