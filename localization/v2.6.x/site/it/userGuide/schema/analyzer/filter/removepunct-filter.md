@@ -1,6 +1,6 @@
 ---
 id: removepunct-filter.md
-title: Rimuovere la punteggiaturaCompatible with Milvus 2.5.11+
+title: Rimuovi punteggiaturaCompatible with Milvus 2.5.11+
 summary: >-
   Il filtro removepunct elimina i segni di punteggiatura, gli spazi e le
   interruzioni di riga che alcuni tokenizzatori, come jieba, lindera e icu,
@@ -9,7 +9,7 @@ summary: >-
   segni di punteggiatura.
 beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Rimuovere la punteggiatura<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Rimuovi punteggiatura<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,7 +24,10 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Il filtro <code translate="no">removepunct</code> elimina i segni di punteggiatura, gli spazi e le interruzioni di riga che alcuni tokenizzatori, come <code translate="no">jieba</code>, <code translate="no">lindera</code> e <code translate="no">icu</code>, normalmente mantengono. Si usa quando si vuole un flusso di token più pulito, che contenga solo token di testo significativi, senza virgole, punti e altri segni di punteggiatura.</p>
+    </button></h1><p>Il filtro <code translate="no">removepunct</code> rimuove i token di punteggiatura indipendenti dal flusso di token. Si usa quando si vuole un'elaborazione del testo più pulita, che si concentri sulle parole significative del contenuto piuttosto che sui segni di punteggiatura.</p>
+<div class="alert note">
+<p>Questo filtro è più efficace con i tokenizer <code translate="no">jieba</code>, <code translate="no">lindera</code> e <code translate="no">icu</code>, che conservano la punteggiatura come token separati (ad esempio, <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). Altri tokenizer come <code translate="no">standard</code> e <code translate="no">whitespace</code> scartano la punteggiatura durante la tokenizzazione, quindi <code translate="no">removepunct</code> non ha alcun effetto su di essi.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configurazione<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

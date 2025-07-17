@@ -2,7 +2,7 @@
 id: icu-tokenizer.md
 title: ICUCompatible with Milvus 2.5.11+
 summary: >-
-  icuトークナイザーは、ソフトウェアの国際化のための主要なツールを提供するICU（Internationalization Components of
+  icuトークナイザーは、ソフトウェアの国際化のための重要なツールを提供するICU（Internationalization Components of
   Unicode）オープンソースプロジェクトに基づいて構築されています。ICUのワードブレイクアルゴリズムを使用することで、トークナイザーは世界の大半の言語でテキストを正確に単語に分割することができます。
 beta: Milvus 2.5.11+
 ---
@@ -22,7 +22,10 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p><code translate="no">icu</code> トークナイザーは、ソフトウェアの国際化のための重要なツールを提供する<a href="http://site.icu-project.org/">ICU（Internationalization Components of Unicode</a>）オープンソースプロジェクトに基づいて構築されています。ICUのワードブレイクアルゴリズムを使用することで、トークナイザーは世界の大半の言語でテキストを正確に単語に分割することができます。</p>
-<h2 id="Configuration" class="common-anchor-header">設定方法<button data-href="#Configuration" class="anchor-icon" translate="no">
+<div class="alert note">
+<p><code translate="no">icu</code> トークナイザーは、句読点とスペースを別々のトークンとして出力に保持します。たとえば、<code translate="no">&quot;Привет! Как дела?&quot;</code> は<code translate="no">[&quot;Привет&quot;, &quot;!&quot;, &quot; &quot;, &quot;Как&quot;, &quot; &quot;, &quot;дела&quot;, &quot;?&quot;]</code> になります。これらの独立した句読点トークンを削除するには <a href="/docs/ja/removepunct-filter.md"><code translate="no">removepunct</code></a>フィルタを使用してください。</p>
+</div>
+<h2 id="Configuration" class="common-anchor-header">構成<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +40,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">icu</code> トークナイザーを使用する解析器を設定するには、<code translate="no">analyzer_params</code> で<code translate="no">tokenizer</code> を<code translate="no">icu</code> に設定します。</p>
+    </button></h2><p><code translate="no">icu</code> トークン化器を使用する解析器を設定するには、<code translate="no">analyzer_params</code> で<code translate="no">tokenizer</code> を<code translate="no">icu</code> に設定します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -53,7 +56,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">icu</code> トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードでは、<code translate="no">icu</code> トー クナイザと<a href="/docs/ja/removepunct-filter.md">remove punct フィルタを</a>使用する解析器を定義します：</p>
+<p><code translate="no">icu</code> トークナイザーは、1 つ以上のフィルターと組み合わせて使用できます。たとえば、次のコードでは、<code translate="no">icu</code> トー クナイザと<a href="/docs/ja/removepunct-filter.md">remove punct フィルタを</a>使用する解析器を定義しています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

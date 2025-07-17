@@ -35,7 +35,7 @@ summary: ⚡️ 한 번 구성하면 영원히 효율성을 높일 수 있습니
       </svg>
     </button></h1><p>⚡️ 한 번 설정하면 영원히 효율성을 높일 수 있습니다!</p>
 <p>여전히 오래된 LLM의 결과물에 실망하셨나요? 버전이 업데이트된 후에도 오래된 콘텐츠를 출력하는 LLM에 지치셨나요? 밀버스 관련 코드를 개발할 때 정보 지연 문제를 한 번에 해결하려면 이 mcp를 사용해보세요!</p>
-<p>이제 밀버스 공식 SDK 코드 헬퍼가 온라인에 출시되었습니다. 해당 AI IDE를 찾아 한 번 설정하기만 하면 AI가 <strong>공식적으로 권장하는</strong> 밀버스 코드를 자동으로 작성해줍니다. 오래된 프레임워크와 완전히 작별하세요!</p>
+<p>이제 밀버스 공식 SDK 코드 헬퍼가 온라인에 출시되었습니다 - 해당 AI IDE를 찾아서 한 번 설정하기만 하면 AI가 <strong>공식적으로 추천하는</strong> 밀버스 코드를 자동으로 작성해줍니다. 오래된 프레임워크와 완전히 작별하세요!</p>
 <p>➡️ 지금 이동하세요: <a href="#Quickstart">퀵스타트</a></p>
 <h1 id="Effect-display" class="common-anchor-header">효과 표시<button data-href="#Effect-display" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,8 +59,8 @@ summary: ⚡️ 한 번 구성하면 영원히 효율성을 높일 수 있습니
      <th><p>MCP 코드 도우미 <strong>비활성화</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>공식적으로 권장되는 최신 MilvusClient 인터페이스를 사용하여 컬렉션 만들기</p></td>

@@ -19,6 +19,9 @@ summary: jieba 토큰화기는 중국어 텍스트를 구성 단어로 분해하
         ></path>
       </svg>
     </button></h1><p><code translate="no">jieba</code> 토큰화 도구는 중국어 텍스트를 구성 단어로 분해하여 처리합니다.</p>
+<div class="alert note">
+<p><code translate="no">jieba</code> 토큰화 도구는 출력에서 구두점을 별도의 토큰으로 보존합니다. 예를 들어 <code translate="no">&quot;你好！世界。&quot;</code> 은 <code translate="no">[&quot;你好&quot;, &quot;！&quot;, &quot;世界&quot;, &quot;。&quot;]</code> 이 됩니다. 이러한 독립형 구두점 토큰을 제거하려면 <a href="/docs/ko/removepunct-filter.md"><code translate="no">removepunct</code></a> 필터를 사용합니다.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">구성<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,8 +37,8 @@ summary: jieba 토큰화기는 중국어 텍스트를 구성 단어로 분해하
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 <code translate="no">jieba</code> 토큰화기에 대해 단순 구성과 사용자 지정 구성의 두 가지 구성 방식을 지원합니다.</p>
-<h3 id="Simple-configuration" class="common-anchor-header">간단한 구성</h3><p>단순 구성을 사용하면 토큰화기를 <code translate="no">&quot;jieba&quot;</code> 로 설정하기만 하면 됩니다. 예를 들어</p>
+    </button></h2><p>Milvus는 <code translate="no">jieba</code> 토큰화기에 대해 단순 구성과 사용자 정의 구성이라는 두 가지 구성 방식을 지원합니다.</p>
+<h3 id="Simple-configuration" class="common-anchor-header">단순 구성</h3><p>단순 구성의 경우 토큰화기를 <code translate="no">&quot;jieba&quot;</code> 로 설정하기만 하면 됩니다. 예를 들어</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Simple configuration: only specifying the tokenizer name</span>

@@ -150,7 +150,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -711,6 +711,12 @@
                 "label": "DISKANN",
                 "id": "diskann.md",
                 "order": 9,
+                "children": []
+              },
+              {
+                "label": "SCANN",
+                "id": "scann.md",
+                "order": 10,
                 "children": []
               }
             ]

@@ -23,6 +23,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>Le tokenizer <code translate="no">lindera</code> effectue une analyse morphologique basée sur le dictionnaire. C'est un bon choix pour les langues telles que le japonais, le coréen et le chinois, dont les mots ne sont pas séparés par des espaces.</p>
+<div class="alert note">
+<p>Le tokenizer <code translate="no">lindera</code> préserve les signes de ponctuation en tant que jetons distincts dans le résultat. Par exemple, <code translate="no">&quot;こんにちは！&quot;</code> devient <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. Pour supprimer ces jetons de ponctuation autonomes, utilisez le filtre <a href="/docs/fr/removepunct-filter.md"><code translate="no">removepunct</code></a> pour supprimer ces jetons de ponctuation autonomes.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,7 +99,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 <li><p><code translate="no">ko-dic</code>: Coréen - Dictionnaire morphologique coréen<a href="https://bitbucket.org/eunjeon/mecab-ko-dic">(MeCab Ko-dic</a>)</p></li>
 <li><p><code translate="no">ipadic</code>: Japonais - Dictionnaire morphologique standard<a href="https://taku910.github.io/mecab/">(MeCab IPADIC</a>)</p></li>
 <li><p><code translate="no">ipadic-neologd</code>: Japonais avec dictionnaire de néologismes (étendu) - Inclut les nouveaux mots et les noms propres<a href="https://github.com/neologd/mecab-ipadic-neologd">(IPADIC NEologd</a>)</p></li>
-<li><p><code translate="no">unidic</code>: Japonais UniDic (étendu) - Dictionnaire académique standard avec des informations linguistiques détaillées<a href="https://clrd.ninjal.ac.jp/unidic/">(UniDic</a>)</p></li>
+<li><p><code translate="no">unidic</code>: UniDic japonais (étendu) - Dictionnaire académique standard avec des informations linguistiques détaillées<a href="https://clrd.ninjal.ac.jp/unidic/">(UniDic</a>)</p></li>
 <li><p><code translate="no">cc-cedict</code>: Chinois mandarin (traditionnel/simplifié) - Dictionnaire chinois-anglais entretenu par la communauté<a href="https://cc-cedict.org/wiki/">(CC-CEDICT</a>)</p>
 <p><strong>Remarque :</strong> tous les dictionnaires doivent être activés lors de la compilation de Milvus pour pouvoir être utilisés.</p></li>
 </ul></td>

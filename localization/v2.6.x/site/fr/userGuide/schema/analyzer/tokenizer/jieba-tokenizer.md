@@ -18,7 +18,10 @@ summary: Le tokenizer jieba traite le texte chinois en le décomposant en mots.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le tokenizer <code translate="no">jieba</code> traite le texte chinois en le décomposant en mots.</p>
+    </button></h1><p>Le tokenizer <code translate="no">jieba</code> traite le texte chinois en le décomposant en ses mots constitutifs.</p>
+<div class="alert note">
+<p>Le tokenizer <code translate="no">jieba</code> conserve les signes de ponctuation en tant que jetons séparés dans le résultat. Par exemple, <code translate="no">&quot;你好！世界。&quot;</code> devient <code translate="no">[&quot;你好&quot;, &quot;！&quot;, &quot;世界&quot;, &quot;。&quot;]</code>. Pour supprimer ces jetons de ponctuation autonomes, utilisez le filtre <a href="/docs/fr/removepunct-filter.md"><code translate="no">removepunct</code></a> filtre.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

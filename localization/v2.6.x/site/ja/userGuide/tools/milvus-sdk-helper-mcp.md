@@ -59,8 +59,8 @@ summary: ⚡️ 一度設定すれば、いつまでも効率アップ！
      <th><p>MCPコードヘルパー<strong>無効</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>公式に推奨されている最新のMilvusClientインタフェースを使用してCollectionを作成する</p></td>
@@ -236,7 +236,7 @@ summary: ⚡️ 一度設定すれば、いつまでも効率アップ！
       </svg>
     </button></h2><p>Cherry Studioでは、設定インターフェイスを通じて視覚的にMCPサーバーを設定できます。手動でのJSON設定には直接対応していませんが、GUIで新しいサーバーを追加できます：</p>
 <ol>
-<li><p>設定 → MCPサーバー → サーバーの追加。</p></li>
+<li><p>設定]→[MCPサーバー]→[サーバーの追加]に移動します。</p></li>
 <li><p>サーバーの詳細を入力します：</p>
 <ul>
 <li><p>名前：<code translate="no">sdk code helper</code></p></li>

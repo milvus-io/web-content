@@ -35,7 +35,7 @@ summary: '⚡️ Konfigurasikan sekali, tingkatkan efisiensi selamanya!'
       </svg>
     </button></h1><p>⚡️ Konfigurasi sekali, tingkatkan efisiensi selamanya!</p>
 <p>Masih frustrasi dengan hasil yang usang dari LLM? Bosan dengan LLM yang mengeluarkan konten yang sudah usang bahkan setelah versinya diperbarui? Cobalah mcp ini untuk mengatasi masalah kelambatan informasi saat mengembangkan kode terkait Milvus untuk selamanya!</p>
-<p>Milvus SDK Code Helper resmi sekarang sudah online - cukup cari AI IDE yang sesuai, konfigurasikan sekali, dan biarkan AI menulis kode Milvus yang <strong>direkomendasikan secara resmi</strong> untuk Anda. Ucapkan selamat tinggal pada kerangka kerja yang sudah ketinggalan zaman!</p>
+<p>Milvus resmi SDK Code Helper sekarang sudah online - cukup cari AI IDE yang sesuai, konfigurasikan sekali, dan biarkan AI menulis kode Milvus yang <strong>direkomendasikan secara resmi</strong> untuk Anda. Ucapkan selamat tinggal pada kerangka kerja yang sudah ketinggalan zaman!</p>
 <p>➡️ Lompat sekarang: <a href="#Quickstart">Mulai Cepat</a></p>
 <h1 id="Effect-display" class="common-anchor-header">Tampilan efek<button data-href="#Effect-display" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,15 +52,15 @@ summary: '⚡️ Konfigurasikan sekali, tingkatkan efisiensi selamanya!'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Gambar berikut ini membandingkan efek dari pembuatan kode dengan dan tanpa helper kode Milvus SDK. Jika code helper Milvus SDK tidak digunakan, kode yang ditulis akan mengikuti pendekatan ORM SDK yang lama, yang sudah tidak direkomendasikan lagi. Berikut ini adalah perbandingan tangkapan layar kode dengan dan tanpa Code Helper MCP:</p>
+    </button></h1><p>Gambar berikut ini membandingkan efek dari pembuatan kode dengan dan tanpa helper kode Milvus SDK. Jika code helper Milvus SDK tidak digunakan, kode yang ditulis mengikuti pendekatan ORM SDK yang lama, yang sudah tidak direkomendasikan lagi. Berikut ini adalah perbandingan tangkapan layar kode dengan dan tanpa Code Helper MCP:</p>
 <table>
    <tr>
      <th><p>Pembantu kode MCP <strong>diaktifkan</strong></p></th>
      <th><p>Pembantu kode MCP <strong>dinonaktifkan</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>Gunakan antarmuka MilvusClient terbaru yang direkomendasikan secara resmi untuk membuat Koleksi</p></td>

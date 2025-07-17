@@ -21,6 +21,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Tokenizer <code translate="no">jieba</code> memproses teks bahasa Mandarin dengan memecahnya menjadi beberapa komponen kata.</p>
+<div class="alert note">
+<p>Tokenizer <code translate="no">jieba</code> mempertahankan tanda baca sebagai token terpisah dalam keluarannya. Misalnya, <code translate="no">&quot;你好！世界。&quot;</code> menjadi <code translate="no">[&quot;你好&quot;, &quot;！&quot;, &quot;世界&quot;, &quot;。&quot;]</code>. Untuk menghapus token tanda baca yang berdiri sendiri ini, gunakan filter <a href="/docs/id/removepunct-filter.md"><code translate="no">removepunct</code></a> filter.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -22,7 +22,10 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El tokenizador <code translate="no">lindera</code> realiza un análisis morfológico basado en diccionarios. Es una buena opción para idiomas -como el japonés, el coreano y el chino- cuyas palabras no están separadas por espacios.</p>
+    </button></h1><p>El tokenizador <code translate="no">lindera</code> realiza un análisis morfológico basado en diccionarios. Es una buena opción para idiomas como el japonés, el coreano y el chino, cuyas palabras no están separadas por espacios.</p>
+<div class="alert note">
+<p>El tokenizador <code translate="no">lindera</code> conserva los signos de puntuación como fichas separadas en la salida. Por ejemplo, <code translate="no">&quot;こんにちは！&quot;</code> se convierte en <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. Para eliminar estos signos de puntuación independientes, utilice el filtro <a href="/docs/es/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar el tokenizador <code translate="no">lindera</code>, debe utilizar una versión de Milvus especialmente compilada. Todos los diccionarios deben habilitarse explícitamente durante la compilación para poder utilizarse.</p>
+    </button></h2><p>Para utilizar el tokenizador <code translate="no">lindera</code>, debe utilizar una versión de Milvus especialmente compilada. Todos los diccionarios deben estar explícitamente habilitados durante la compilación para poder ser utilizados.</p>
 <p>Para habilitar diccionarios específicos, inclúyalos en el comando de compilación:</p>
 <pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
 <button class="copy-code-btn"></button></code></pre>

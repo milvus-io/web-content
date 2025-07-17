@@ -25,6 +25,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>Il tokenizer <code translate="no">icu</code> si basa sul progetto open-source <a href="http://site.icu-project.org/">Internationalization Components of Unicode</a> (ICU), che fornisce strumenti chiave per l'internazionalizzazione del software. Utilizzando l'algoritmo word-break di ICU, il tokenizer è in grado di dividere accuratamente il testo in parole nella maggior parte delle lingue del mondo.</p>
+<div class="alert note">
+<p>Il tokenizer <code translate="no">icu</code> conserva i segni di punteggiatura e gli spazi come token separati nell'output. Ad esempio, <code translate="no">&quot;Привет! Как дела?&quot;</code> diventa <code translate="no">[&quot;Привет&quot;, &quot;!&quot;, &quot; &quot;, &quot;Как&quot;, &quot; &quot;, &quot;дела&quot;, &quot;?&quot;]</code>. Per rimuovere questi token di punteggiatura indipendenti, utilizzare il filtro <a href="/docs/it/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configurazione<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

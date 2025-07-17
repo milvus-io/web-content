@@ -25,6 +25,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>Der <code translate="no">icu</code> Tokenizer basiert auf dem Open-Source-Projekt <a href="http://site.icu-project.org/">Internationalization Components of Unicode</a> (ICU), das wichtige Werkzeuge für die Internationalisierung von Software bereitstellt. Durch die Verwendung des Worttrennungsalgorithmus von ICU kann der Tokenizer Text in den meisten Sprachen der Welt präzise in Wörter aufteilen.</p>
+<div class="alert note">
+<p>Der <code translate="no">icu</code> Tokenizer behält Satzzeichen und Leerzeichen als separate Token in der Ausgabe bei. Zum Beispiel wird <code translate="no">&quot;Привет! Как дела?&quot;</code> zu <code translate="no">[&quot;Привет&quot;, &quot;!&quot;, &quot; &quot;, &quot;Как&quot;, &quot; &quot;, &quot;дела&quot;, &quot;?&quot;]</code>. Um diese eigenständigen Interpunktionszeichen zu entfernen, verwenden Sie den <a href="/docs/de/removepunct-filter.md"><code translate="no">removepunct</code></a> Filter.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Konfiguration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +77,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Auflistungsschema definieren. Dadurch kann Milvus den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung verarbeiten. Weitere Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Anwendungsbeispiele</a>.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie auf ein <code translate="no">VARCHAR</code> Feld anwenden, wenn Sie ein Auflistungsschema definieren. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Weitere Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Anwendungsbeispiele</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

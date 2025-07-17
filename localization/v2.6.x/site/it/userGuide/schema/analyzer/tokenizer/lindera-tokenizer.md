@@ -23,6 +23,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>Il tokenizer <code translate="no">lindera</code> esegue un'analisi morfologica basata su dizionari. È una buona scelta per le lingue, come il giapponese, il coreano e il cinese, le cui parole non sono separate da spazi.</p>
+<div class="alert note">
+<p>Il tokenizer <code translate="no">lindera</code> conserva i segni di punteggiatura come token separati nell'output. Ad esempio, <code translate="no">&quot;こんにちは！&quot;</code> diventa <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. Per rimuovere questi token di punteggiatura indipendenti, usare il filtro <a href="/docs/it/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -102,7 +105,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 </ul></td>
    </tr>
 </table>
-<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Questo permette a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per maggiori dettagli, consultare la sezione <a href="/docs/it/analyzer-overview.md#Example-use">Esempi di utilizzo</a>.</p>
+<p>Dopo aver definito <code translate="no">analyzer_params</code>, è possibile applicarli a un campo <code translate="no">VARCHAR</code> quando si definisce uno schema di raccolta. Questo permette a Milvus di elaborare il testo in quel campo usando l'analizzatore specificato per una tokenizzazione e un filtraggio efficienti. Per maggiori dettagli, consultare la sezione <a href="/docs/it/analyzer-overview.md#Example-use">Esempi d'uso</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

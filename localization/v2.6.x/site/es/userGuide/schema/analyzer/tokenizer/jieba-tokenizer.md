@@ -21,6 +21,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>El tokenizador <code translate="no">jieba</code> procesa el texto chino descomponiéndolo en las palabras que lo componen.</p>
+<div class="alert note">
+<p>El tokenizador <code translate="no">jieba</code> conserva los signos de puntuación como fichas separadas en la salida. Por ejemplo, <code translate="no">&quot;你好！世界。&quot;</code> se convierte en <code translate="no">[&quot;你好&quot;, &quot;！&quot;, &quot;世界&quot;, &quot;。&quot;]</code>. Para eliminar estos signos de puntuación independientes, utilice el filtro <a href="/docs/es/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configuración<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus admite dos enfoques de configuración para el tokenizador <code translate="no">jieba</code>: una configuración simple y una configuración personalizada.</p>
-<h3 id="Simple-configuration" class="common-anchor-header">Configuración simple</h3><p>Con la configuración simple, sólo tiene que configurar el tokenizador en <code translate="no">&quot;jieba&quot;</code>. Por ejemplo</p>
+<h3 id="Simple-configuration" class="common-anchor-header">Configuración simple</h3><p>Con la configuración simple, sólo necesita configurar el tokenizador en <code translate="no">&quot;jieba&quot;</code>. Por ejemplo</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Simple configuration: only specifying the tokenizer name</span>

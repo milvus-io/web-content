@@ -25,6 +25,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>El tokenizador <code translate="no">icu</code> se basa en el proyecto de código abierto <a href="http://site.icu-project.org/">Internationalization Components of Unicode</a> (ICU), que proporciona herramientas clave para la internacionalización del software. Al utilizar el algoritmo de ruptura de palabras de ICU, el tokenizador puede dividir con precisión el texto en palabras en la mayoría de los idiomas del mundo.</p>
+<div class="alert note">
+<p>El tokenizador de <code translate="no">icu</code> conserva los signos de puntuación y los espacios como fichas separadas en la salida. Por ejemplo, <code translate="no">&quot;Привет! Как дела?&quot;</code> se convierte en <code translate="no">[&quot;Привет&quot;, &quot;!&quot;, &quot; &quot;, &quot;Как&quot;, &quot; &quot;, &quot;дела&quot;, &quot;?&quot;]</code>. Para eliminar estos signos de puntuación independientes, utilice el filtro <a href="/docs/es/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configuración<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +43,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para configurar un analizador que utilice el tokenizador <code translate="no">icu</code>, establezca <code translate="no">tokenizer</code> en <code translate="no">icu</code> en <code translate="no">analyzer_params</code>.</p>
+    </button></h2><p>Para configurar un analizador utilizando el tokenizador <code translate="no">icu</code>, establezca <code translate="no">tokenizer</code> en <code translate="no">icu</code> en <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

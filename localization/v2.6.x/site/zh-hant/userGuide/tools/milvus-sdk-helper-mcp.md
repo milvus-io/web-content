@@ -52,15 +52,15 @@ summary: ⚡️ 一次設定，永遠提升效率！
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>下圖比較了使用和不使用 Milvus SDK 程式碼助手產生程式碼的效果。如果不使用 Milvus SDK 代碼輔助器，寫出的代碼會沿用舊的 ORM SDK 方式，不再建議使用。以下是使用和不使用代碼助手MCP的代碼截圖比較：</p>
+    </button></h1><p>下圖比較了使用和不使用 Milvus SDK 程式碼助手產生程式碼的效果。如果不使用 Milvus SDK 代碼輔助器，寫出的代碼會沿用舊的 ORM SDK 方式，這已不再被推薦。以下是使用和不使用代碼助手MCP的代碼截圖比較：</p>
 <table>
    <tr>
      <th><p><strong>啟用</strong>MCP 代碼輔助器</p></th>
      <th><p><strong>停用</strong>MCP 代碼助手</p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>使用官方推薦的最新 MilvusClient 介面來建立一個 Collection</p></td>
@@ -157,7 +157,7 @@ summary: ⚡️ 一次設定，永遠提升效率！
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Claude Code 支援透過 JSON 配置直接新增 MCP 伺服器，包括遠端 URL 類型的伺服器。使用下列指令新增配置至 Claude Code：</p>
+    </button></h2><p>Claude Code 支援透過 JSON 配置直接新增 MCP 伺服器，包括遠端 URL 類型的伺服器。使用下列指令將配置新增至 Claude Code：</p>
 <pre><code translate="no" class="language-sql">claude mcp <span class="hljs-keyword">add</span><span class="hljs-operator">-</span>json sdk<span class="hljs-operator">-</span>code<span class="hljs-operator">-</span>helper <span class="hljs-comment">--json &#x27;{</span>
   &quot;url&quot;: &quot;https://sdk.milvus.io/mcp/&quot;,
   &quot;headers&quot;: {
@@ -366,8 +366,8 @@ summary: ⚡️ 一次設定，永遠提升效率！
     </button></h2><p>Roo 程式碼</p>
 <p>Roo Code 為 MCP 伺服器使用 JSON 配置檔案：</p>
 <ol>
-<li><p>開啟 Roo Code 並導航至設定 → MCP 伺服器 → 編輯全局設定。</p></li>
-<li><p>在<code translate="no">mcp_settings.json</code> 檔案中，新增下列配置：</p></li>
+<li><p>開啟 Roo Code 並導航至設定 → MCP 伺服器 → 編輯全域設定。</p></li>
+<li><p>在<code translate="no">mcp_settings.json</code> 檔案中，新增以下配置：</p></li>
 </ol>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>

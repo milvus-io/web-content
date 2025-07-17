@@ -20,8 +20,11 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">removepunct</code> フィルタは、<code translate="no">jieba</code> 、<code translate="no">lindera</code> 、<code translate="no">icu</code>などのトークナイザが通常保持する句読点、空白、改行を取り除きます。カンマ、ピリオド、その他の句読点を取り除いた、意味のあるテキストトークンのみを含む、よりクリーンなトークンストリームを作りたいときにこのフィルタを使います。</p>
-<h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">removepunct</code> フィルタは、トークンストリームから単体の句読点トークンを削除します。句読点よりも意味のある単語を重視した、よりクリーンなテキスト処理を行いたい場合に使用します。</p>
+<div class="alert note">
+<p>このフィルタは、<code translate="no">jieba</code> 、<code translate="no">lindera</code> 、<code translate="no">icu</code> のトークナイザで最も効果的です。これらのトークナイザでは、句読点は別のトークンとして保持されます（たとえば、<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> ）。<code translate="no">standard</code> や<code translate="no">whitespace</code> のような他のトークナイザーは、トークン化の際に句読点を破棄するため、<code translate="no">removepunct</code> には効果がありません。</p>
+</div>
+<h2 id="Configuration" class="common-anchor-header">構成<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +39,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">removepunct</code> フィルタはMilvusに組み込まれています。使用するには、<code translate="no">analyzer_params</code> の<code translate="no">filter</code> セクションにその名前を指定するだけです。</p>
+    </button></h2><p>Milvusには<code translate="no">removepunct</code> というフィルタが組み込まれています。このフィルタを使用するには、<code translate="no">analyzer_params</code> の<code translate="no">filter</code> セクションでその名前を指定するだけです。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

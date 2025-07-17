@@ -611,7 +611,7 @@
         ]
       },
       {
-        "label": "Insertar y eliminar",
+        "label": "Insertar y suprimir",
         "id": "insert-and-delete",
         "order": 3,
         "children": [
@@ -711,6 +711,12 @@
                 "label": "DISKANN",
                 "id": "diskann.md",
                 "order": 9,
+                "children": []
+              },
+              {
+                "label": "SCANN",
+                "id": "scann.md",
+                "order": 10,
                 "children": []
               }
             ]

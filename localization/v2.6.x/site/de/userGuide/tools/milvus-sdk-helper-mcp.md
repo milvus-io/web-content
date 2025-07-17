@@ -35,7 +35,7 @@ summary: '⚡️ Einmal konfigurieren, Effizienz für immer steigern!'
       </svg>
     </button></h1><p>⚡️ Einmal konfigurieren, Effizienz für immer steigern!</p>
 <p>Sind Sie immer noch frustriert von veralteten Ergebnissen des LLM? Sind Sie es leid, dass der LLM veraltete Inhalte ausgibt, auch wenn die Versionen aktualisiert wurden? Versuchen Sie dieses mcp, um das Problem der Informationsverzögerung bei der Entwicklung von Milvus-bezogenem Code ein für alle Mal zu lösen!</p>
-<p>Der offizielle Milvus SDK Code Helper ist jetzt online - finden Sie einfach die entsprechende AI IDE, konfigurieren Sie sie einmal und lassen Sie AI <strong>offiziell empfohlenen</strong> Milvus Code für Sie schreiben. Verabschieden Sie sich vollständig von veralteten Frameworks!</p>
+<p>Der offizielle Milvus SDK Code Helper ist jetzt online - finden Sie einfach die entsprechende AI IDE, konfigurieren Sie sie einmal, und lassen Sie AI <strong>offiziell empfohlenen</strong> Milvus-Code für Sie schreiben. Verabschieden Sie sich vollständig von veralteten Frameworks!</p>
 <p>➡️ Jetzt springen: <a href="#Quickstart">QuickStart</a></p>
 <h1 id="Effect-display" class="common-anchor-header">Effekt-Anzeige<button data-href="#Effect-display" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,8 +59,8 @@ summary: '⚡️ Einmal konfigurieren, Effizienz für immer steigern!'
      <th><p>MCP-Code-Helfer <strong>deaktiviert</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
      <td><p>Verwenden Sie die offiziell empfohlene neueste MilvusClient-Schnittstelle zum Erstellen einer Collection</p></td>

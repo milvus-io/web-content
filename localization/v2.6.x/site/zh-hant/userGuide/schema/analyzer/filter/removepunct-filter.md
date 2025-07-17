@@ -21,8 +21,11 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">removepunct</code> 篩選器會刪除標點符號、空格和換行符號，這些標點符號、空格和換行符號通常會被某些 tokenizer（例如<code translate="no">jieba</code>,<code translate="no">lindera</code>, 和<code translate="no">icu</code>）保留。當您想要一個更乾淨的標記串流，只包含有意義的文字標記，不含逗號、句點和其他標點符號時，請使用它。</p>
-<h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">removepunct</code> 過濾器會移除符記串流中獨立的標點符記。當您想要更乾淨的文字處理，著重於有意義的內容字詞而非標點符號時，請使用此過濾器。</p>
+<div class="alert note">
+<p>此過濾器對<code translate="no">jieba</code> 、<code translate="no">lindera</code> 和<code translate="no">icu</code> tokenizer 最為有效，它們會保留標點符號為獨立的 token (例如<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>)。其他令牌化器如<code translate="no">standard</code> 和<code translate="no">whitespace</code> 會在令牌化過程中丟棄標點符號，因此<code translate="no">removepunct</code> 對它們沒有影響。</p>
+</div>
+<h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +40,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">removepunct</code> 過濾器內建在 Milvus 中。要使用它，只需在<code translate="no">analyzer_params</code> 內的<code translate="no">filter</code> 部分指定其名稱即可。</p>
+    </button></h2><p><code translate="no">removepunct</code> 過濾器內建於 Milvus。要使用它，只需在<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 部分指定其名稱即可。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

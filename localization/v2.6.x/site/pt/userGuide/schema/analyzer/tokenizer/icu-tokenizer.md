@@ -2,7 +2,7 @@
 id: icu-tokenizer.md
 title: ICUCompatible with Milvus 2.5.11+
 summary: >-
-  O tokenizador icu é construído no projeto de código aberto
+  O tokenizador icu é construído sobre o projeto de código aberto
   Internationalization Components of Unicode (ICU), que fornece ferramentas
   chave para a internacionalização de software. Ao usar o algoritmo de quebra de
   palavras do ICU, o tokenizador pode dividir com precisão o texto em palavras
@@ -25,6 +25,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>O tokenizador <code translate="no">icu</code> é construído sobre o projeto de código aberto <a href="http://site.icu-project.org/">Internationalization Components of Unicode</a> (ICU), que fornece ferramentas-chave para a internacionalização de software. Ao usar o algoritmo de quebra de palavras do ICU, o tokenizador pode dividir com precisão o texto em palavras na maioria dos idiomas do mundo.</p>
+<div class="alert note">
+<p>O tokenizador <code translate="no">icu</code> preserva sinais de pontuação e espaços como tokens separados na saída. Por exemplo, <code translate="no">&quot;Привет! Как дела?&quot;</code> torna-se <code translate="no">[&quot;Привет&quot;, &quot;!&quot;, &quot; &quot;, &quot;Как&quot;, &quot; &quot;, &quot;дела&quot;, &quot;?&quot;]</code>. Para remover esses tokens de pontuação independentes, use o filtro <a href="/docs/pt/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +43,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para configurar um analisador usando o tokenizador <code translate="no">icu</code>, defina <code translate="no">tokenizer</code> para <code translate="no">icu</code> em <code translate="no">analyzer_params</code>.</p>
+    </button></h2><p>Para configurar um analisador usando o tokenizador <code translate="no">icu</code>, defina <code translate="no">tokenizer</code> como <code translate="no">icu</code> em <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

@@ -21,6 +21,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>O tokenizador <code translate="no">jieba</code> processa o texto chinês dividindo-o nas palavras que o compõem.</p>
+<div class="alert note">
+<p>O tokenizador <code translate="no">jieba</code> preserva os sinais de pontuação como tokens separados na saída. Por exemplo, <code translate="no">&quot;你好！世界。&quot;</code> torna-se <code translate="no">[&quot;你好&quot;, &quot;！&quot;, &quot;世界&quot;, &quot;。&quot;]</code>. Para remover esses tokens de pontuação independentes, use o filtro <a href="/docs/pt/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +86,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter detalhes sobre os parâmetros, consulte <a href="/docs/pt/jieba-tokenizer.md#Custom-configuration">Configuração personalizada</a>.</p>
-<h3 id="Custom-configuration" class="common-anchor-header">Configuração personalizada</h3><p>Para obter mais controle, você pode fornecer uma configuração personalizada que permite especificar um dicionário personalizado, selecionar o modo de segmentação e ativar ou desativar o Modelo de Markov Oculto (HMM). Por exemplo:</p>
+<h3 id="Custom-configuration" class="common-anchor-header">Configuração personalizada</h3><p>Para obter mais controle, é possível fornecer uma configuração personalizada que permite especificar um dicionário personalizado, selecionar o modo de segmentação e ativar ou desativar o Modelo de Markov Oculto (HMM). Por exemplo:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom configuration with user-defined settings</span>

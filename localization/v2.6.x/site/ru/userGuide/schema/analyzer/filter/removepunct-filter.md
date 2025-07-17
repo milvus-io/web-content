@@ -1,6 +1,6 @@
 ---
 id: removepunct-filter.md
-title: Удаление знаков препинанияCompatible with Milvus 2.5.11+
+title: Удалить пунктуациюCompatible with Milvus 2.5.11+
 summary: >-
   Фильтр removepunct удаляет знаки препинания, пробелы и переносы строк, которые
   некоторые токенизаторы, такие как jieba, lindera и icu, обычно сохраняют.
@@ -9,7 +9,7 @@ summary: >-
   препинания.
 beta: Milvus 2.5.11+
 ---
-<h1 id="Remove-Punct" class="common-anchor-header">Удаление знаков препинания<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
+<h1 id="Remove-Punct" class="common-anchor-header">Удалить пунктуацию<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,7 +24,10 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Фильтр <code translate="no">removepunct</code> удаляет знаки препинания, пробелы и переносы строк, которые некоторые токенизаторы, такие как <code translate="no">jieba</code>, <code translate="no">lindera</code> и <code translate="no">icu</code>, обычно сохраняют. Используйте его, когда хотите получить более чистый поток токенов, содержащий только значимые текстовые токены, без запятых, точек и других знаков препинания.</p>
+    </button></h1><p>Фильтр <code translate="no">removepunct</code> удаляет из потока токенов отдельные знаки препинания. Используйте его, когда вам нужна более чистая обработка текста, которая фокусируется на содержательных словах, а не на знаках препинания.</p>
+<div class="alert note">
+<p>Этот фильтр наиболее эффективен с токенизаторами <code translate="no">jieba</code>, <code translate="no">lindera</code> и <code translate="no">icu</code>, которые сохраняют знаки препинания как отдельные лексемы (например, <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). Другие токенизаторы, такие как <code translate="no">standard</code> и <code translate="no">whitespace</code>, отбрасывают знаки препинания при токенизации, поэтому <code translate="no">removepunct</code> не оказывает на них никакого влияния.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">Конфигурация<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +43,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Фильтр <code translate="no">removepunct</code> встроен в Milvus. Чтобы использовать его, просто укажите его имя в секции <code translate="no">filter</code> в разделе <code translate="no">analyzer_params</code>.</p>
+    </button></h2><p>Фильтр <code translate="no">removepunct</code> встроен в Milvus. Чтобы использовать его, просто укажите его имя в секции <code translate="no">filter</code> внутри <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

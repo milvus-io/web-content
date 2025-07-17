@@ -712,6 +712,12 @@
                 "id": "diskann.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "スキャン",
+                "id": "scann.md",
+                "order": 10,
+                "children": []
               }
             ]
           },

@@ -20,6 +20,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p><code translate="no">lindera</code> トークナイザーは辞書ベースの形態素解析を行います。日本語、韓国語、中国語など、単語がスペースで区切られていない言語に適しています。</p>
+<div class="alert note">
+<p><code translate="no">lindera</code> トークナイザは、出力において句読点を別のトークンとして保持します。たとえば、<code translate="no">&quot;こんにちは！&quot;</code> は<code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code> になります。これらの独立した句読点トークンを削除するには <a href="/docs/ja/removepunct-filter.md"><code translate="no">removepunct</code></a>フィルタを使用してください。</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +61,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">lindera</code> トークナイザを使用する解析器を構成するには、<code translate="no">tokenizer.type</code> を<code translate="no">lindera</code> に設定し、<code translate="no">dict_kind</code> で辞書を選択します。</p>
+    </button></h2><p><code translate="no">lindera</code> トークン化器を使用する解析器を構成するには、<code translate="no">tokenizer.type</code> を<code translate="no">lindera</code> に設定し、<code translate="no">dict_kind</code> で辞書を選択します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

@@ -23,7 +23,10 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يقوم عامل التصفية <code translate="no">removepunct</code> بإزالة علامات الترقيم والمسافات وفواصل الأسطر التي تحتفظ بها عادةً بعض أدوات الترميز - مثل <code translate="no">jieba</code> و <code translate="no">lindera</code> و <code translate="no">icu</code>. استخدمه عندما تريد دفق رموز أنظف يحتوي فقط على رموز نصية ذات معنى، خالية من الفواصل والنقاط وعلامات الترقيم الأخرى.</p>
+    </button></h1><p>يقوم عامل التصفية <code translate="no">removepunct</code> بإزالة علامات الترقيم المستقلة من دفق الرموز المميزة. استخدمه عندما تريد معالجة نصية أنظف تركز على كلمات المحتوى ذات المعنى بدلاً من علامات الترقيم.</p>
+<div class="alert note">
+<p>يكون هذا الفلتر أكثر فاعلية مع <code translate="no">jieba</code> و <code translate="no">lindera</code> و <code translate="no">icu</code> الرموز الرمزية التي تحافظ على علامات الترقيم كرموز منفصلة (على سبيل المثال، <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). أما أدوات الترميز الأخرى مثل <code translate="no">standard</code> و <code translate="no">whitespace</code> فتتجاهل علامات الترقيم أثناء الترميز، لذا فإن <code translate="no">removepunct</code> ليس له أي تأثير عليها.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">التكوين<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +60,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يعمل عامل التصفية <code translate="no">removepunct</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز.</p>
+<p>يعمل مرشح <code translate="no">removepunct</code> على المصطلحات التي تم إنشاؤها بواسطة أداة الترميز، لذلك يجب استخدامه مع أداة الترميز.</p>
 <p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لميلفوس بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد من أجل الترميز والتصفية الفعالة. للحصول على التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">أمثلة الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

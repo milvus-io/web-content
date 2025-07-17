@@ -322,7 +322,7 @@
             "children": []
           },
           {
-            "label": "檢視收藏集",
+            "label": "檢視館藏",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -711,6 +711,12 @@
                 "label": "DISKANN",
                 "id": "diskann.md",
                 "order": 9,
+                "children": []
+              },
+              {
+                "label": "SCANN",
+                "id": "scann.md",
+                "order": 10,
                 "children": []
               }
             ]

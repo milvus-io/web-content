@@ -22,7 +22,10 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">icu</code> 토큰화 도구는 소프트웨어 국제화를 위한 핵심 도구를 제공하는 <a href="http://site.icu-project.org/">유니코드 국제화 구성요소</a> (ICU) 오픈 소스 프로젝트를 기반으로 합니다. 토큰화 도구는 ICU의 단어 분리 알고리즘을 사용하여 전 세계 대부분의 언어에서 텍스트를 단어로 정확하게 분할할 수 있습니다.</p>
+    </button></h1><p><code translate="no">icu</code> 토큰화 도구는 소프트웨어 국제화를 위한 핵심 도구를 제공하는 <a href="http://site.icu-project.org/">유니코드 국제화 구성요소</a> (ICU) 오픈 소스 프로젝트를 기반으로 합니다. ICU의 단어 분리 알고리즘을 사용하여 토큰화 도구는 전 세계 대부분의 언어에서 텍스트를 단어로 정확하게 분할할 수 있습니다.</p>
+<div class="alert note">
+<p><code translate="no">icu</code> 토큰화 도구는 출력에서 구두점과 공백을 별도의 토큰으로 보존합니다. 예를 들어 <code translate="no">&quot;Привет! Как дела?&quot;</code> 은 <code translate="no">[&quot;Привет&quot;, &quot;!&quot;, &quot; &quot;, &quot;Как&quot;, &quot; &quot;, &quot;дела&quot;, &quot;?&quot;]</code> 이 됩니다. 이러한 독립형 구두점 토큰을 제거하려면 <a href="/docs/ko/removepunct-filter.md"><code translate="no">removepunct</code></a> 필터를 사용합니다.</p>
+</div>
 <h2 id="Configuration" class="common-anchor-header">구성<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">icu</code> 토큰화기를 사용하여 분석기를 구성하려면 <code translate="no">analyzer_params</code> 에서 <code translate="no">tokenizer</code> 을 <code translate="no">icu</code> 로 설정하세요.</p>
+    </button></h2><p><code translate="no">icu</code> 토큰화기를 사용하여 분석기를 구성하려면 <code translate="no">analyzer_params</code> 에서 <code translate="no">tokenizer</code> 을 <code translate="no">icu</code> 로 설정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {

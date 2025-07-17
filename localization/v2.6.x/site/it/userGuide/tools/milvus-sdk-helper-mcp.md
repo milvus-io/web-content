@@ -59,11 +59,11 @@ summary: '⚡️ Configurate una volta, aumentate l''efficienza per sempre!'
      <th><p>MCP code helper <strong>disabilitato</strong></p></th>
    </tr>
    <tr>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
-     <td><p><img translate="no" src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
+     <td><p><img translate="no" width="400" src="/docs/v2.6.x/assets/code-helper-enabled.png" alt="Code Helper Enabled" /></p></td>
+     <td><p><img translate="no" width="400"src="/docs/v2.6.x/assets/code-helper-disabled.png" alt="Code Helper Disabled" /></p></td>
    </tr>
    <tr>
-     <td><p>Utilizzare l'ultima interfaccia MilvusClient ufficialmente raccomandata per creare una raccolta</p></td>
+     <td><p>Usare l'ultima interfaccia MilvusClient ufficialmente raccomandata per creare una collezione</p></td>
      <td><p>Non è consigliabile creare una raccolta utilizzando la vecchia interfaccia ORM.</p></td>
    </tr>
 </table>

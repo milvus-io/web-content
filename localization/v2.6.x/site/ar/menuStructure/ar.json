@@ -80,7 +80,7 @@
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس ستاندالون",
+            "label": "تشغيل ميلفوس مستقل",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -712,6 +712,12 @@
                 "id": "diskann.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "قناة SCANN",
+                "id": "scann.md",
+                "order": 10,
+                "children": []
               }
             ]
           },
@@ -1004,7 +1010,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه المعانق TEI",
+                "label": "عناق الوجه TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
