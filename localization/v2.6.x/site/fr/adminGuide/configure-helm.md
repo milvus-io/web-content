@@ -39,7 +39,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après le re
         ></path>
       </svg>
     </button></h2><p>Vous pouvez configurer Milvus à l'aide d'un fichier de configuration <code translate="no">values.yaml</code>.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">Télécharger un fichier de configuration</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Télécharger</a> <code translate="no">values.yaml</code> directement ou à l'aide de la commande suivante.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">Télécharger un fichier de configuration</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Télécharger</a> <code translate="no">values.yaml</code> directement ou à l'aide de la commande suivante.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Modifier le fichier de configuration</h3><p>Configurez votre instance Milvus en fonction de vos scénarios d'application en ajustant les paramètres correspondants dans <code translate="no">values.yaml</code>.</p>

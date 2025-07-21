@@ -39,10 +39,10 @@ title: HelmチャートでMilvusを設定する
         ></path>
       </svg>
     </button></h2><p>設定ファイル<code translate="no">values.yaml</code> を使用してMilvusを設定することができます。</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">設定ファイルのダウンロード</h3><p><code translate="no">values.yaml</code> を直接<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">ダウンロード</a>するか、以下のコマンドでダウンロードします。</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">設定ファイルのダウンロード</h3><p><code translate="no">values.yaml</code> を直接<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">ダウンロード</a>するか、以下のコマンドでダウンロードします。</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Modify-the-configuration-file" class="common-anchor-header">設定ファイルの変更</h3><p><code translate="no">values.yaml</code> の対応するパラメータを調整することで、アプリケーションシナリオに合わせてMilvusインスタンスを設定します。</p>
+<h3 id="Modify-the-configuration-file" class="common-anchor-header">設定ファイルの変更</h3><p><code translate="no">values.yaml</code> の対応するパラメータを調整することにより、アプリケーションのシナリオに合わせてMilvusインスタンスを設定します。</p>
 <p>具体的には、<code translate="no">values.yaml</code> の<code translate="no">extraConfigFiles</code> を検索し、以下のようにこのセクションに設定を記述します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Extra configs for milvus.yaml</span>
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>

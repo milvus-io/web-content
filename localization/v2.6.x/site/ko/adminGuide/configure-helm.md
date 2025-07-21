@@ -39,7 +39,7 @@ title: 헬름 차트로 밀버스 구성하기
         ></path>
       </svg>
     </button></h2><p>구성 파일 <code translate="no">values.yaml</code> 을 사용하여 Milvus를 구성할 수 있다.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">구성 파일 다운로드</h3><p><code translate="no">values.yaml</code> 을 직접<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">다운로드하거나</a> 다음 명령을 사용하여<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">다운로드하세요</a>.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">구성 파일 다운로드</h3><p><code translate="no">values.yaml</code> 을 직접<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">다운로드하거나</a> 다음 명령을 사용하여<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">다운로드합니다</a>.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">구성 파일 수정하기</h3><p><code translate="no">values.yaml</code> 에서 해당 파라미터를 조정하여 애플리케이션 시나리오에 맞게 Milvus 인스턴스를 구성합니다.</p>

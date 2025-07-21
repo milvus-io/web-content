@@ -5,7 +5,6 @@ summary: >-
   يمكنك حذف الكيانات التي لم تعد هناك حاجة إليها عن طريق تصفية الشروط أو
   مفاتيحها الأساسية.
 ---
-
 <h1 id="Delete-Entities" class="common-anchor-header">حذف الكيانات<button data-href="#Delete-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,14 +42,13 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 res = client.delete(
-collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span></span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -58,7 +56,6 @@ collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># {&#x27;delete_count&#x27;: 2}</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.DeleteReq;
@@ -71,7 +68,7 @@ collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 
 <span class="hljs-type">DeleteResp</span> <span class="hljs-variable">deleteResp</span> <span class="hljs-operator">=</span> client.delete(DeleteReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-        .filter(<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span>)
+        .filter(<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976&#x27;]&quot;</span>)
         .build());
 
 <button class="copy-code-btn"></button></code></pre>
@@ -84,8 +81,7 @@ collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 <span class="hljs-comment">// 7. Delete entities</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">delete</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span></span>
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">delete_cnt</span>)
@@ -155,8 +151,7 @@ curl --request POST \
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.delete(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    <span class="hljs-comment"># highlight-next-line</span>
-    ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>]
+<span class="highlighted-wrapper-line">    ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>]</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -164,7 +159,6 @@ curl --request POST \
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># {&#x27;delete_count&#x27;: 2}</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.DeleteReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.DeleteResp;
 
@@ -238,7 +232,6 @@ curl --request POST \
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># {&#x27;delete_count&#x27;: 2}</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.DeleteReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.DeleteResp;
 
