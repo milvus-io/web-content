@@ -73,7 +73,7 @@ res = client.delete(
 
 <span class="hljs-type">DeleteResp</span> <span class="hljs-variable">deleteResp</span> <span class="hljs-operator">=</span> client.delete(DeleteReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-        .filter(<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976]&quot;</span>)
+        .filter(<span class="hljs-string">&quot;color in [&#x27;red_7025&#x27;, &#x27;purple_4976&#x27;]&quot;</span>)
         .build());
 
 <button class="copy-code-btn"></button></code></pre>
