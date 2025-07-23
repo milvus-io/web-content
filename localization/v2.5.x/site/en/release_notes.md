@@ -19,6 +19,58 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2515" class="common-anchor-header">v2.5.15<button data-href="#v2515" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: July 23, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.15</td><td>2.5.14</td><td>2.5.12</td><td>2.5.11</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce Milvus 2.5.15! This version enhances your experience by fixing a series of functionality bugs, including ones that may severely damage the metadata causing data loss when collection is renamed. It also delivers a range of general performance and stability enhancements, while resolving numerous bugs to ensure a more robust system. <strong>We encourage you to upgrade to 2.5.15, especially if you are currently on 2.5.14, and explore these latest updates!</strong></p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Updated Knowhere version to fix a sparse vector brute force bug (<a href="https://github.com/milvus-io/milvus/pull/43398">#43398</a>).</li>
+<li>Implemented meta saving with txn limits (<a href="https://github.com/milvus-io/milvus/pull/43287">#43287</a>).</li>
+<li>Applied load config changes after QueryCoord restart (<a href="https://github.com/milvus-io/milvus/pull/43236">#43236</a>).</li>
+<li>Refined variable-length-type memory usage (<a href="https://github.com/milvus-io/milvus/pull/43093">#43093</a>).</li>
+<li>Reordered RootCoord shutdown to be last in coordinator stop sequence (<a href="https://github.com/milvus-io/milvus/pull/43024">#43024</a>).</li>
+<li>Updated CMake version to 3.31.8 (<a href="https://github.com/milvus-io/milvus/pull/43004">#43004</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Skipped remove operation if key exists in save set (<a href="https://github.com/milvus-io/milvus/pull/43426">#43426</a>).</li>
+<li>Fixed null bitmap offset alignment when loading multi-chunk data (<a href="https://github.com/milvus-io/milvus/pull/43411">#43411</a>, <a href="https://github.com/milvus-io/milvus/pull/43342">#43342</a>).</li>
+<li>Updated Tantivy to fix directory removing race condition (<a href="https://github.com/milvus-io/milvus/pull/43401">#43401</a>).</li>
+<li>Fixed an issue by calling <code translate="no">AlterCollection</code> only when renaming collections (<a href="https://github.com/milvus-io/milvus/pull/43421">#43421</a>).</li>
+<li>Made <code translate="no">MultiSaveAndRemove</code> execute removal operations first (<a href="https://github.com/milvus-io/milvus/pull/43409">#43409</a>).</li>
+<li>Used disk segment max size for collections with both sparse and dense vectors (<a href="https://github.com/milvus-io/milvus/pull/43195">#43195</a>).</li>
+<li>Fixed text match bug by adapting to multi-chunk model (<a href="https://github.com/milvus-io/milvus/pull/43297">#43297</a>).</li>
+<li>Fixed incorrect bitset for division comparison when the right operand is negative (<a href="https://github.com/milvus-io/milvus/pull/43180">#43180</a>).</li>
+<li>Voided unnecessary copying when getting JSON chunks (<a href="https://github.com/milvus-io/milvus/pull/43183">#43183</a>, <a href="https://github.com/milvus-io/milvus/pull/43202">#43202</a>).</li>
+<li>Prevented delegator from becoming unserviceable due to shard leader changes (<a href="https://github.com/milvus-io/milvus/pull/43309">#43309</a>).</li>
+<li>Fixed text match index and JSON key stats index leaks when segments are released (<a href="https://github.com/milvus-io/milvus/pull/43308">#43308</a>).</li>
+<li>Fixed <code translate="no">RegeneratePartitionStats</code> failure after restoring clustering compaction tasks (<a href="https://github.com/milvus-io/milvus/pull/43206">#43206</a>).</li>
+<li>Added error handling for invalid function parameters to prevent panics (<a href="https://github.com/milvus-io/milvus/pull/43190">#43190</a>).</li>
+<li>Removed space trimming logic when validating collection names (<a href="https://github.com/milvus-io/milvus/pull/43138">#43138</a>).</li>
+<li>Added field mmap property checks before applying collection-level settings (<a href="https://github.com/milvus-io/milvus/pull/43091">#43091</a>).</li>
+<li>Fixed index creation being blocked by failed sort stats (<a href="https://github.com/milvus-io/milvus/pull/43061">#43061</a>).</li>
+<li>Fixed exclude nodes clearing logic in load balancer retry mechanism (<a href="https://github.com/milvus-io/milvus/pull/43002">#43002</a>).</li>
+</ul>
 <h2 id="v2514" class="common-anchor-header">v2.5.14<button data-href="#v2514" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
