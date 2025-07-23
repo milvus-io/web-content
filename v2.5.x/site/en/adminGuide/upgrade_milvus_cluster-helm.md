@@ -85,11 +85,11 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 
 You can choose the upgrade path for your Milvus as follows:
 
-<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.5.14.</div>
+<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.5.15.</div>
 
-- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.5.14.
+- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.5.15.
 
-- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.5.14.
+- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.5.15.
 
 <div style="display: none;">
     
@@ -111,10 +111,10 @@ The script applies only to the upgrade of Milvus installed with Helm. The follow
 | `w`          | New Milvus image tag                                      | `milvusdb/milvus:v2.2.3`         | True                    |
 | `o`          | Operation                                                 | `update`                         | False                   |
 
-Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.5.14.
+Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.5.15.
 
 ```shell
-sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.14 -w 'milvusdb/milvus:v2.5.14'
+sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.15 -w 'milvusdb/milvus:v2.5.15'
 ```
 
 <div class="alert note">

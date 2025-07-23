@@ -8,6 +8,45 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.15
+
+Release date: July 23, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.15          | 2.5.14            | 2.5.12              | 2.5.11           |
+
+We're excited to announce Milvus 2.5.15! This version enhances your experience by fixing a series of functionality bugs, including ones that may severely damage the metadata causing data loss when collection is renamed. It also delivers a range of general performance and stability enhancements, while resolving numerous bugs to ensure a more robust system. **We encourage you to upgrade to 2.5.15, especially if you are currently on 2.5.14, and explore these latest updates!**
+
+### Improvements
+
+- Updated Knowhere version to fix a sparse vector brute force bug ([#43398](https://github.com/milvus-io/milvus/pull/43398)).
+- Implemented meta saving with txn limits ([#43287](https://github.com/milvus-io/milvus/pull/43287)).
+- Applied load config changes after QueryCoord restart ([#43236](https://github.com/milvus-io/milvus/pull/43236)).
+- Refined variable-length-type memory usage ([#43093](https://github.com/milvus-io/milvus/pull/43093)).
+- Reordered RootCoord shutdown to be last in coordinator stop sequence ([#43024](https://github.com/milvus-io/milvus/pull/43024)).
+- Updated CMake version to 3.31.8 ([#43004](https://github.com/milvus-io/milvus/pull/43004)).
+
+### Bug fixes
+
+- Skipped remove operation if key exists in save set ([#43426](https://github.com/milvus-io/milvus/pull/43426)).
+- Fixed null bitmap offset alignment when loading multi-chunk data ([#43411](https://github.com/milvus-io/milvus/pull/43411), [#43342](https://github.com/milvus-io/milvus/pull/43342)).
+- Updated Tantivy to fix directory removing race condition ([#43401](https://github.com/milvus-io/milvus/pull/43401)).
+- Fixed an issue by calling `AlterCollection` only when renaming collections ([#43421](https://github.com/milvus-io/milvus/pull/43421)).
+- Made `MultiSaveAndRemove` execute removal operations first ([#43409](https://github.com/milvus-io/milvus/pull/43409)).
+- Used disk segment max size for collections with both sparse and dense vectors ([#43195](https://github.com/milvus-io/milvus/pull/43195)).
+- Fixed text match bug by adapting to multi-chunk model ([#43297](https://github.com/milvus-io/milvus/pull/43297)).
+- Fixed incorrect bitset for division comparison when the right operand is negative ([#43180](https://github.com/milvus-io/milvus/pull/43180)).
+- Voided unnecessary copying when getting JSON chunks ([#43183](https://github.com/milvus-io/milvus/pull/43183), [#43202](https://github.com/milvus-io/milvus/pull/43202)).
+- Prevented delegator from becoming unserviceable due to shard leader changes ([#43309](https://github.com/milvus-io/milvus/pull/43309)).
+- Fixed text match index and JSON key stats index leaks when segments are released ([#43308](https://github.com/milvus-io/milvus/pull/43308)).
+- Fixed `RegeneratePartitionStats` failure after restoring clustering compaction tasks ([#43206](https://github.com/milvus-io/milvus/pull/43206)).
+- Added error handling for invalid function parameters to prevent panics ([#43190](https://github.com/milvus-io/milvus/pull/43190)).
+- Removed space trimming logic when validating collection names ([#43138](https://github.com/milvus-io/milvus/pull/43138)).
+- Added field mmap property checks before applying collection-level settings ([#43091](https://github.com/milvus-io/milvus/pull/43091)).
+- Fixed index creation being blocked by failed sort stats ([#43061](https://github.com/milvus-io/milvus/pull/43061)).
+- Fixed exclude nodes clearing logic in load balancer retry mechanism ([#43002](https://github.com/milvus-io/milvus/pull/43002)).
+
 ## v2.5.14
 
 Release date: July 2, 2025
