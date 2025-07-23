@@ -62,7 +62,7 @@ summary: >-
 <p>The <code translate="no">search_list_size</code> parameter determines the breadth of the graph refinement process. A higher <code translate="no">search_list_size</code> extends the search for neighbors during construction and can improve final accuracy, but increases index-building time.</p></li>
 </ul></li>
 </ol>
-<p>To learn more about parameter tuning, refer to <a href="/docs/diskann.md#diskann-params">DISKANN params</a>.</p>
+<p>To learn more about parameter tuning, refer to <a href="/docs/diskann.md#DISKANN-params">DISKANN params</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN uses <strong>PQ</strong> to compress high-dimensional vectors into smaller representations (<strong>PQ codes</strong>), which are stored in memory for rapid approximate distance calculations.</p>
 <p>The <code translate="no">pq_code_budget_gb_ratio</code> parameter manages the memory footprint dedicated to storing these PQ codes. It represents a ratio between the total size of the vectors (in gigabytes) and the space allocated for storing the PQ codes. You can calculate the actual PQ code budget (in gigabytes) with this formula:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -151,62 +151,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN parameters can be configured using two primary methods:</p>
-<ul>
-<li><p><strong>Milvus Configuration File:</strong> Adjust DISKANN parameters through the Milvus configuration file. This method is suitable for setting general configuration options for your Milvus instance.</p></li>
-<li><p><strong>Milvus SDK:</strong> Fine-tune DISKANN parameters using the Milvus SDK during index creation or search operations. This allows for more granular control and dynamic parameter adjustments based on specific use cases.</p></li>
-</ul>
-<div class="alert note">
-<p>The configuration made by the SDK overrides any settings defined in the configuration file, offering flexibility and control for specific applications and data sets.</p>
-</div>
-<h3 id="Milvus-configuration-file" class="common-anchor-header">Milvus configuration file</h3><p>Here’s an example of how to set DISKANN parameters within the <code translate="no">milvus.yaml</code> file:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
-  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># When enable this configuration, the index parameters defined following will be automatically populated as index parameters, without requiring user input.</span>
-  <span class="hljs-attr">DISKANN:</span>
-    <span class="hljs-attr">build:</span>
-      <span class="hljs-attr">max_degree:</span> <span class="hljs-number">56</span> <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
-      <span class="hljs-attr">pq_code_budget_gb_ratio:</span> <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
-      <span class="hljs-attr">search_cache_budget_gb_ratio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
-      <span class="hljs-attr">search_list_size:</span> <span class="hljs-number">100</span> <span class="hljs-comment"># Size of the candidate list during building graph</span>
-    <span class="hljs-attr">search:</span>
-      <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
+    </button></h2><p>DISKANN-related parameters can be configured via your Milvus configuration file (<code translate="no">milvus.yaml</code>):</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">DiskIndex:</span>
+    <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>  <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
+    <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>  <span class="hljs-comment"># Size of the candidate list during building graph</span>
+    <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>  <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
+    <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
+    <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="SDK-configuration" class="common-anchor-header">SDK configuration</h3><p>Here’s an example of how to set DISKANN parameters using Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">Build</h4><p>To build an <code translate="no">DISKANN</code> index on a vector field in Milvus, use the <code translate="no">add_index()</code> method, specifying the <code translate="no">index_type</code>, <code translate="no">metric_type</code>, and additional parameters for the index.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-<span class="hljs-comment"># Prepare index building params</span>
-index_params = MilvusClient.prepare_index_params()
-
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;DISKANN&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;max_degree&quot;</span>: <span class="hljs-number">56</span>, <span class="hljs-comment"># Maximum number of connections (edges) each data point can have</span>
-        <span class="hljs-string">&quot;search_list_size&quot;</span>: <span class="hljs-number">100</span>,
-        <span class="hljs-string">&quot;search_cache_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.10</span>, <span class="hljs-comment"># Amount of memory allocated for caching frequently accessed parts of the graph</span>
-        <span class="hljs-string">&quot;pq_code_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data</span>
-    } <span class="hljs-comment"># Index building params</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
-<h4 id="Search" class="common-anchor-header">Search</h4><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
-<pre><code translate="no" class="language-python">search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {
-        <span class="hljs-string">&quot;beam_width_ratio&quot;</span>: <span class="hljs-number">4.0</span>, <span class="hljs-comment"># degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</span>
-    }
-}
-
-res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
-)
-<button class="copy-code-btn"></button></code></pre>
+<p>For details on parameter descriptions, refer to <a href="/docs/diskann.md#DISKANN-params">DISKANN params</a>.</p>
 <h2 id="DISKANN-params" class="common-anchor-header">DISKANN params<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -234,7 +189,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code translate="no">max_degree</code></p></td>
+     <td><p><code translate="no">MaxDegree</code></p></td>
      <td><p>Controls the maximum number of connections (edges) each data point can have in the Vamana graph.</p></td>
      <td><p><strong>Type</strong>: Integer
  <strong>Range</strong>: [1, 512]</p>
@@ -244,7 +199,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_list_size</code></p></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
      <td><p>During index construction, this parameter defines the size of the candidate pool used when searching for the nearest neighbors for each node. For every node being added to the graph, the algorithm maintains a list of the <code translate="no">search_list_size</code> best candidates found so far. The search for neighbors stops when this list can no longer be improved. From this final candidate pool, the top <code translate="no">max_degree</code> nodes are selected to form the final edges.</p></td>
      <td><p><strong>Type</strong>: Integer
  <strong>Range</strong>: [1, <em>int_max</em>]</p>
@@ -253,7 +208,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">SearchCacheBudgetGBRatio</code></p></td>
      <td><p>Controls the amount of memory allocated for caching frequently accessed parts of the graph during index construction.</p></td>
      <td><p><strong>Type</strong>: Float
  <strong>Range</strong>: [0.0, 0.3)</p>
@@ -263,7 +218,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>PQ</p></td>
-     <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">PQCodeBudgetGBRatio</code></p></td>
      <td><p>Controls the size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data.</p></td>
      <td><p><strong>Type</strong>: Float
  <strong>Range</strong>: (0.0, 0.25]</p>
@@ -284,7 +239,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code translate="no">beam_width_ratio</code></p></td>
+     <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</p></td>
      <td><p><strong>Type</strong>: Float
  <strong>Range</strong>: [1, max(128 / CPU number, 16)]</p>
@@ -294,7 +249,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_list_size</code></p></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
      <td><p>During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency.</p></td>
      <td><p><strong>Type</strong>: Integer
  <strong>Range</strong>: [1, <em>int_max</em>]</p>
