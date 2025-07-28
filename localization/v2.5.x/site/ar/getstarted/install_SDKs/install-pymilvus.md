@@ -40,7 +40,7 @@ title: تثبيت Milvus Python SDK
     </button></h2><ul>
 <li>مطلوب بايثون 3.7 أو أحدث.</li>
 <li>تثبيت بروتوبوف جوجل. يمكنك تثبيته باستخدام الأمر <code translate="no">pip3 install protobuf==3.20.0</code>.</li>
-<li>أدوات grpcio-tools مثبتة. يمكنك تثبيته باستخدام الأمر <code translate="no">pip3 install grpcio-tools</code>.</li>
+<li>تم تثبيت grpcio-tools. يمكنك تثبيته باستخدام الأمر <code translate="no">pip3 install grpcio-tools</code>.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">قم بتثبيت PyMilvus عبر النقطة<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ title: تثبيت Milvus Python SDK
     </button></h2><p>يتوفر PyMilvus في <a href="https://pypi.org/project/pymilvus/">فهرس حزمة Python</a>.</p>
 <div class="alert note">
 يوصى بتثبيت إصدار PyMilvus الذي يطابق إصدار خادم Milvus الذي قمت بتثبيته. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/release_notes.md">ملاحظات الإصدار</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">12</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">14</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">تحقق من التثبيت<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

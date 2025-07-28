@@ -52,7 +52,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
-<li><p><strong>Koneksi acak awal:</strong> Setiap titik data (vektor) direpresentasikan sebagai sebuah simpul dalam graf. Node-node ini pada awalnya terhubung secara acak, membentuk sebuah jaringan yang padat. Biasanya, sebuah simpul dimulai dengan sekitar 500 sisi (atau koneksi) untuk konektivitas yang luas.</p></li>
+<li><p><strong>Koneksi-koneksi acak awal:</strong> Setiap titik data (vektor) direpresentasikan sebagai sebuah simpul dalam graf. Node-node ini pada awalnya terhubung secara acak, membentuk sebuah jaringan yang padat. Biasanya, sebuah simpul dimulai dengan sekitar 500 sisi (atau koneksi) untuk konektivitas yang luas.</p></li>
 <li><p><strong>Pemurnian untuk efisiensi:</strong> Graf acak awal mengalami proses optimasi untuk membuatnya lebih efisien untuk pencarian. Hal ini melibatkan dua langkah utama:</p>
 <ul>
 <li><p><strong>Memangkas sisi yang berlebihan:</strong> Algoritme membuang koneksi yang tidak perlu berdasarkan jarak antar simpul. Langkah ini memprioritaskan sisi-sisi yang berkualitas lebih tinggi.</p>
@@ -61,7 +61,7 @@ summary: >-
 <p>Parameter <code translate="no">search_list_size</code> menentukan luasnya proses penyempurnaan graf. <code translate="no">search_list_size</code> yang lebih tinggi akan memperluas pencarian tetangga selama konstruksi dan dapat meningkatkan akurasi akhir, tetapi meningkatkan waktu pembuatan indeks.</p></li>
 </ul></li>
 </ol>
-<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat parameter <a href="/docs/id/diskann.md#diskann-params">DISKANN</a>.</p>
+<p>Untuk mempelajari lebih lanjut tentang penyetelan parameter, lihat parameter <a href="/docs/id/diskann.md#DISKANN-params">DISKANN</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN menggunakan <strong>PQ</strong> untuk memampatkan vektor berdimensi tinggi ke dalam representasi yang lebih kecil<strong>(kode PQ</strong>), yang disimpan di memori untuk perhitungan perkiraan jarak yang cepat.</p>
 <p>Parameter <code translate="no">pq_code_budget_gb_ratio</code> mengelola jejak memori yang didedikasikan untuk menyimpan kode-kode PQ ini. Parameter ini merepresentasikan rasio antara ukuran total vektor (dalam gigabyte) dan ruang yang dialokasikan untuk menyimpan kode PQ. Anda dapat menghitung anggaran kode PQ yang sebenarnya (dalam gigabyte) dengan rumus ini:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -148,62 +148,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Parameter DISKANN dapat dikonfigurasi menggunakan dua metode utama:</p>
-<ul>
-<li><p><strong>File Konfigurasi Milvus:</strong> Menyesuaikan parameter DISKANN melalui file konfigurasi Milvus. Metode ini cocok untuk mengatur opsi konfigurasi umum untuk instance Milvus Anda.</p></li>
-<li><p><strong>Milvus SDK:</strong> Menyempurnakan parameter DISKANN menggunakan Milvus SDK selama pembuatan indeks atau operasi pencarian. Hal ini memungkinkan kontrol yang lebih terperinci dan penyesuaian parameter dinamis berdasarkan kasus penggunaan tertentu.</p></li>
-</ul>
-<div class="alert note">
-<p>Konfigurasi yang dibuat oleh SDK menggantikan pengaturan apa pun yang ditentukan dalam file konfigurasi, menawarkan fleksibilitas dan kontrol untuk aplikasi dan kumpulan data tertentu.</p>
-</div>
-<h3 id="Milvus-configuration-file" class="common-anchor-header">File konfigurasi Milvus</h3><p>Berikut adalah contoh cara mengatur parameter DISKANN dalam file <code translate="no">milvus.yaml</code>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
-  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># When enable this configuration, the index parameters defined following will be automatically populated as index parameters, without requiring user input.</span>
-  <span class="hljs-attr">DISKANN:</span>
-    <span class="hljs-attr">build:</span>
-      <span class="hljs-attr">max_degree:</span> <span class="hljs-number">56</span> <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
-      <span class="hljs-attr">pq_code_budget_gb_ratio:</span> <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
-      <span class="hljs-attr">search_cache_budget_gb_ratio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
-      <span class="hljs-attr">search_list_size:</span> <span class="hljs-number">100</span> <span class="hljs-comment"># Size of the candidate list during building graph</span>
-    <span class="hljs-attr">search:</span>
-      <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
+    </button></h2><p>Parameter terkait DISKANN dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>):</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">DiskIndex:</span>
+    <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>  <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
+    <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>  <span class="hljs-comment"># Size of the candidate list during building graph</span>
+    <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>  <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
+    <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
+    <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="SDK-configuration" class="common-anchor-header">Konfigurasi SDK</h3><p>Berikut adalah contoh cara mengatur parameter DISKANN menggunakan Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">Membangun</h4><p>Untuk membangun indeks <code translate="no">DISKANN</code> pada bidang vektor di Milvus, gunakan metode <code translate="no">add_index()</code>, tentukan <code translate="no">index_type</code>, <code translate="no">metric_type</code>, dan parameter tambahan untuk indeks.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-<span class="hljs-comment"># Prepare index building params</span>
-index_params = MilvusClient.prepare_index_params()
-
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;DISKANN&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;max_degree&quot;</span>: <span class="hljs-number">56</span>, <span class="hljs-comment"># Maximum number of connections (edges) each data point can have</span>
-        <span class="hljs-string">&quot;search_list_size&quot;</span>: <span class="hljs-number">100</span>,
-        <span class="hljs-string">&quot;search_cache_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.10</span>, <span class="hljs-comment"># Amount of memory allocated for caching frequently accessed parts of the graph</span>
-        <span class="hljs-string">&quot;pq_code_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data</span>
-    } <span class="hljs-comment"># Index building params</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a>.</p>
-<h4 id="Search" class="common-anchor-header">Pencarian</h4><p>Setelah indeks dibuat dan entitas dimasukkan, Anda dapat melakukan pencarian kemiripan pada indeks.</p>
-<pre><code translate="no" class="language-python">search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {
-        <span class="hljs-string">&quot;beam_width_ratio&quot;</span>: <span class="hljs-number">4.0</span>, <span class="hljs-comment"># degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</span>
-    }
-}
-
-res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
-)
-<button class="copy-code-btn"></button></code></pre>
+<p>Untuk detail tentang deskripsi parameter, lihat <a href="/docs/id/diskann.md#DISKANN-params">DISKANN params</a>.</p>
 <h2 id="DISKANN-params" class="common-anchor-header">Parameter DISKANN<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -231,7 +186,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code translate="no">max_degree</code></p></td>
+     <td><p><code translate="no">MaxDegree</code></p></td>
      <td><p>Mengontrol jumlah maksimum koneksi (sisi) yang dapat dimiliki setiap titik data dalam grafik Vamana.</p></td>
      <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, 512]</p>
 <p><strong>Nilai default</strong>: <code translate="no">56</code></p></td>
@@ -240,7 +195,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_list_size</code></p></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
      <td><p>Selama pembangunan indeks, parameter ini mendefinisikan ukuran kumpulan kandidat yang digunakan ketika mencari tetangga terdekat untuk setiap node. Untuk setiap simpul yang ditambahkan ke dalam graf, algoritme ini menyimpan daftar <code translate="no">search_list_size</code> kandidat terbaik yang ditemukan sejauh ini. Pencarian tetangga berhenti ketika daftar ini tidak lagi dapat ditingkatkan. Dari kumpulan kandidat akhir ini, <code translate="no">max_degree</code> node teratas dipilih untuk membentuk sisi akhir.</p></td>
      <td><p><strong>Tipe</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>
@@ -248,7 +203,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">SearchCacheBudgetGBRatio</code></p></td>
      <td><p>Mengontrol jumlah memori yang dialokasikan untuk menyimpan bagian grafik yang sering diakses selama konstruksi indeks.</p></td>
      <td><p><strong>Tipe</strong>: <strong>Kisaran</strong> Float: [0.0, 0.3)</p>
 <p><strong>Nilai default</strong>: <code translate="no">0.10</code></p></td>
@@ -256,7 +211,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>PQ</p></td>
-     <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">PQCodeBudgetGBRatio</code></p></td>
      <td><p>Mengontrol ukuran kode PQ (representasi titik data yang dikompresi) dibandingkan dengan ukuran data yang tidak dikompresi.</p></td>
      <td><p><strong>Tipe</strong> <strong>Kisaran</strong> Float: (0,0, 0,25]</p>
 <p><strong>Nilai default</strong>: <code translate="no">0.125</code></p></td>
@@ -275,7 +230,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code translate="no">beam_width_ratio</code></p></td>
+     <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>Mengontrol tingkat paralelisme selama pencarian dengan menentukan jumlah maksimum permintaan I/O disk paralel relatif terhadap jumlah inti CPU yang tersedia.</p></td>
      <td><p><strong>Jenis</strong>: <strong>Kisaran</strong> Float: [1, maks (128 / nomor CPU, 16)]</p>
 <p><strong>Nilai default</strong>: <code translate="no">4.0</code></p></td>
@@ -283,7 +238,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_list_size</code></p></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
      <td><p>Selama operasi pencarian, parameter ini menentukan ukuran kumpulan kandidat yang dipertahankan oleh algoritme saat melintasi grafik. Nilai yang lebih besar meningkatkan peluang menemukan tetangga terdekat yang sebenarnya (recall yang lebih tinggi) tetapi juga meningkatkan latensi pencarian.</p></td>
      <td><p><strong>Jenis</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>

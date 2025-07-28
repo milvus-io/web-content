@@ -19,6 +19,58 @@ title: Notes de mise à jour
         ></path>
       </svg>
     </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Vous trouverez dans cette section les notes de version pour chaque version publiée après la v2.5.0. Nous vous conseillons de consulter régulièrement cette page pour prendre connaissance des mises à jour.</p>
+<h2 id="v2515" class="common-anchor-header">v2.5.15<button data-href="#v2515" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Date de publication : 23 juillet 2025</p>
+<table>
+<thead>
+<tr><th>Version de Milvus</th><th>Version du SDK Python</th><th>Version du SDK Node.js</th><th>Version du SDK Java</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.15</td><td>2.5.14</td><td>2.5.12</td><td>2.5.11</td></tr>
+</tbody>
+</table>
+<p>Nous sommes heureux d'annoncer Milvus 2.5.15 ! Cette version améliore votre expérience en corrigeant une série de bogues de fonctionnalité, y compris ceux qui peuvent gravement endommager les métadonnées causant une perte de données lorsque la collection est renommée. Elle apporte également une série d'améliorations générales en termes de performances et de stabilité, tout en résolvant de nombreux bugs afin de garantir un système plus robuste. <strong>Nous vous encourageons à mettre à jour vers la version 2.5.15, en particulier si vous êtes actuellement sur la version 2.5.14, et à découvrir ces dernières mises à jour !</strong></p>
+<h3 id="Improvements" class="common-anchor-header">Améliorations</h3><ul>
+<li>Mise à jour de la version de Knowhere pour corriger un bug de force brute sur les vecteurs sparse<a href="https://github.com/milvus-io/milvus/pull/43398">(#43398</a>).</li>
+<li>Implémentation de la méta-sauvegarde avec les limites de txn<a href="https://github.com/milvus-io/milvus/pull/43287">(#43287</a>).</li>
+<li>Application des changements de configuration de chargement après le redémarrage de QueryCoord<a href="https://github.com/milvus-io/milvus/pull/43236">(#43236</a>).</li>
+<li>Amélioration de l'utilisation de la mémoire des types à longueur variable<a href="https://github.com/milvus-io/milvus/pull/43093">(#43093</a>).</li>
+<li>Réorganisation de l'arrêt de RootCoord pour qu'il soit le dernier dans la séquence d'arrêt du coordinateur<a href="https://github.com/milvus-io/milvus/pull/43024">(#43024</a>).</li>
+<li>Mise à jour de la version de CMake à 3.31.8<a href="https://github.com/milvus-io/milvus/pull/43004">(#43004</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correction de bogues</h3><ul>
+<li>Saut de l'opération de suppression si la clé existe dans le jeu de sauvegarde<a href="https://github.com/milvus-io/milvus/pull/43426">(#43426</a>).</li>
+<li>Correction de l'alignement du décalage de la bitmap nulle lors du chargement de données multi-chunks<a href="https://github.com/milvus-io/milvus/pull/43411">(#43411</a>, <a href="https://github.com/milvus-io/milvus/pull/43342">#43342</a>).</li>
+<li>Mise à jour de Tantivy pour corriger une condition de course lors de la suppression d'un répertoire<a href="https://github.com/milvus-io/milvus/pull/43401">(#43401</a>).</li>
+<li>Correction d'un problème en appelant <code translate="no">AlterCollection</code> uniquement lors du renommage des collections<a href="https://github.com/milvus-io/milvus/pull/43421">(#43421</a>).</li>
+<li>Fait en sorte que <code translate="no">MultiSaveAndRemove</code> exécute les opérations de suppression en premier<a href="https://github.com/milvus-io/milvus/pull/43409">(#43409</a>).</li>
+<li>Utilisation de la taille maximale d'un segment de disque pour les collections avec des vecteurs denses et épars<a href="https://github.com/milvus-io/milvus/pull/43195">(#43195</a>).</li>
+<li>Correction d'un bogue de correspondance de texte en s'adaptant au modèle multi-chunk<a href="https://github.com/milvus-io/milvus/pull/43297">(#43297</a>).</li>
+<li>Correction d'un jeu de bits incorrect pour la comparaison de division lorsque l'opérande de droite est négatif<a href="https://github.com/milvus-io/milvus/pull/43180">(#43180</a>).</li>
+<li>Annulation des copies inutiles lors de l'obtention de morceaux JSON<a href="https://github.com/milvus-io/milvus/pull/43183">(#43183</a>, <a href="https://github.com/milvus-io/milvus/pull/43202">#43202</a>).</li>
+<li>Empêche le délégateur de devenir inutilisable à cause des changements de chef de groupe<a href="https://github.com/milvus-io/milvus/pull/43309">(#43309</a>).</li>
+<li>Correction des fuites de l'index des correspondances de texte et de l'index des statistiques des clés JSON lorsque les segments sont libérés<a href="https://github.com/milvus-io/milvus/pull/43308">(#43308</a>).</li>
+<li>Correction de l'échec de <code translate="no">RegeneratePartitionStats</code> après la restauration des tâches de compactage de clustering<a href="https://github.com/milvus-io/milvus/pull/43206">(#43206</a>).</li>
+<li>Ajout d'une gestion d'erreur pour les paramètres de fonction invalides afin d'éviter les paniques<a href="https://github.com/milvus-io/milvus/pull/43190">(#43190</a>).</li>
+<li>Suppression de la logique de réduction des espaces lors de la validation des noms de collections<a href="https://github.com/milvus-io/milvus/pull/43138">(#43138</a>).</li>
+<li>Ajout de vérifications des propriétés mmap des champs avant d'appliquer les paramètres au niveau de la collection<a href="https://github.com/milvus-io/milvus/pull/43091">(#43091</a>).</li>
+<li>Correction de la création d'index bloquée par l'échec des statistiques de tri<a href="https://github.com/milvus-io/milvus/pull/43061">(#43061</a>).</li>
+<li>Correction de la logique d'effacement des noeuds d'exclusion dans le mécanisme de réessai de l'équilibreur de charge<a href="https://github.com/milvus-io/milvus/pull/43002">(#43002</a>).</li>
+</ul>
 <h2 id="v2514" class="common-anchor-header">v2.5.14<button data-href="#v2514" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -881,7 +933,7 @@ title: Notes de mise à jour
 <h4 id="Text-Match" class="common-anchor-header">Correspondance de texte</h4><p>Milvus 2.5 exploite les analyseurs et l'indexation de <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> pour le prétraitement du texte et la création d'index, prenant en charge la correspondance précise en langage naturel des données textuelles basées sur des termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
 <p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/v2.5.x/analyzer-overview.md">Vue d'ensemble de l'analyseur</a> et à la section <a href="/docs/fr/v2.5.x/keyword-match.md">Correspondance de texte</a>.</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">Index Bitmap</h4><p>Un nouvel index de données scalaires a été ajouté à la famille Milvus. L'index BitMap utilise un tableau de bits, d'une longueur égale au nombre de lignes, pour représenter l'existence de valeurs et accélérer les recherches.</p>
-<p>Les index Bitmap sont traditionnellement efficaces pour les champs à faible cardinalité, qui ont un nombre modeste de valeurs distinctes - par exemple, une colonne contenant des informations sur le sexe avec seulement deux valeurs possibles : homme et femme.</p>
+<p>Les index Bitmap sont traditionnellement efficaces pour les champs à faible cardinalité, qui présentent un nombre modeste de valeurs distinctes - par exemple, une colonne contenant des informations sur le sexe avec seulement deux valeurs possibles : homme et femme.</p>
 <p>Pour plus de détails, voir <a href="/docs/fr/v2.5.x/bitmap.md">Index bitmap</a>.</p>
 <h4 id="Nullable--Default-Value" class="common-anchor-header">Valeur nulle et valeur par défaut</h4><p>Milvus prend désormais en charge la définition de propriétés nullables et de valeurs par défaut pour les champs scalaires autres que le champ de clé primaire. Pour les champs scalaires marqués comme <code translate="no">nullable=True</code>, les utilisateurs peuvent omettre le champ lors de l'insertion de données ; le système le traitera comme une valeur nulle ou une valeur par défaut (si elle est définie) sans générer d'erreur.</p>
 <p>Les valeurs par défaut et les propriétés nullables offrent une plus grande flexibilité à Milvus. Les utilisateurs peuvent utiliser cette fonctionnalité pour les champs dont les valeurs sont incertaines lors de la création de collections. Elles simplifient également la migration des données d'autres systèmes de base de données vers Milvus, en permettant de traiter des ensembles de données contenant des valeurs nulles tout en préservant les paramètres de valeur par défaut d'origine.</p>

@@ -36,7 +36,7 @@ title: Verwalten von Ressourcengruppen
         ></path>
       </svg>
     </button></h2><p>Eine Ressourcengruppe kann mehrere oder alle Abfrageknoten in einem Milvus-Cluster enthalten. Sie entscheiden, wie Sie die Abfrageknoten zwischen den Ressourcengruppen zuweisen möchten, je nachdem, was für Sie am sinnvollsten ist. In einem Szenario mit mehreren Sammlungen können Sie zum Beispiel jeder Ressourcengruppe eine angemessene Anzahl von Abfrageknoten zuweisen und Sammlungen in verschiedene Ressourcengruppen laden, so dass die Operationen innerhalb jeder Sammlung physisch unabhängig von denen in anderen Sammlungen sind.</p>
-<p>Beachten Sie, dass eine Milvus-Instanz eine Standard-Ressourcengruppe unterhält, um alle Abfrageknoten beim Start zu halten und sie <strong>__default_resource_group</strong> nennt.</p>
+<p>Beachten Sie, dass eine Milvus-Instanz eine Standard-Ressourcengruppe unterhält, um alle Abfrageknoten beim Start zu halten, und sie <strong>__default_resource_group</strong> nennt.</p>
 <p>Ab Version 2.4.1 bietet Milvus eine deklarative Ressourcengruppen-API, während die alte Ressourcengruppen-API veraltet ist. Die neue deklarative API ermöglicht es den Benutzern, Idempotenz zu erreichen, um sekundäre Entwicklung in Cloud-nativen Umgebungen einfacher zu machen.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Konzepte der Ressourcengruppe<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ title: Verwalten von Ressourcengruppen
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.5.12. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
+<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.5.14. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
 </div>
 <ol>
 <li><p>Erstellen Sie eine Ressourcengruppe.</p>

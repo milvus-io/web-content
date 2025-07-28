@@ -260,7 +260,7 @@ retrieved_lines_with_distances = [
         0.5655910968780518
     ],
     [
-        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client\u2019s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.\n\n###&quot;,
+        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client's perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. For growing segments with incremental data, Milvus automatically builds interim indexes to ensure efficient search performance, even when the segment size does not reach the index-building threshold, calculated as `dataCoord.segment.maxSize` × `dataCoord.segment.sealProportion`. You can control this behavior through the configuration parameter `queryNode.segcore.interimIndex.enableIndex` in the [Milvus configuration file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440) - setting it to `true` enables temporary indexing (default) while setting it to `false` disables it.\n\n###&quot;,
         0.5618637204170227
     ],
     [
@@ -373,7 +373,7 @@ df_tsne
 </table>
 <p>74 baris × 2 kolom</p>
 </div>
-<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Memvisualisasikan hasil pencarian Milvus pada bidang 2d</h3><p>Kami akan memplot vektor kueri dengan warna hijau, vektor yang diambil dengan warna merah, dan vektor yang tersisa dengan warna biru.</p>
+<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Memvisualisasikan hasil pencarian Milvus pada bidang 2d</h3><p>Kita akan memplot vektor kueri dengan warna hijau, vektor yang diambil dengan warna merah, dan vektor yang tersisa dengan warna biru.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 

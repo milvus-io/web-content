@@ -26,7 +26,7 @@ title: Visualização de vectores
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/vector_visualization.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Neste exemplo, mostraremos como visualizar os embeddings (vectores) em Milvus utilizando <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
+<p>Neste exemplo, vamos mostrar como visualizar os embeddings (vectores) em Milvus usando <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
 <p>As técnicas de redução de dimensionalidade, como o t-SNE, são inestimáveis para visualizar dados complexos e de alta dimensão num espaço 2D ou 3D, preservando a estrutura local. Isto permite o reconhecimento de padrões, melhora a compreensão das relações entre caraterísticas e facilita a interpretação dos resultados do modelo de aprendizagem automática. Além disso, ajuda na avaliação de algoritmos através da comparação visual de resultados de agrupamento, simplifica a apresentação de dados a audiências não especializadas e pode reduzir os custos computacionais ao trabalhar com representações de dimensão inferior. Através destas aplicações, o t-SNE não só ajuda a obter conhecimentos mais profundos sobre conjuntos de dados, como também apoia processos de tomada de decisões mais informados.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Carregamos todos os ficheiros markdown da pasta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, utilizamos simplesmente "#" para separar o conteúdo do ficheiro, o que pode separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown.</p>
+<p>Carregamos todos os ficheiros markdown da pasta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, basta utilizar "#" para separar o conteúdo do ficheiro, o que pode separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -260,7 +260,7 @@ retrieved_lines_with_distances = [
         0.5655910968780518
     ],
     [
-        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client\u2019s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.\n\n###&quot;,
+        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client's perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. For growing segments with incremental data, Milvus automatically builds interim indexes to ensure efficient search performance, even when the segment size does not reach the index-building threshold, calculated as `dataCoord.segment.maxSize` × `dataCoord.segment.sealProportion`. You can control this behavior through the configuration parameter `queryNode.segcore.interimIndex.enableIndex` in the [Milvus configuration file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440) - setting it to `true` enables temporary indexing (default) while setting it to `false` disables it.\n\n###&quot;,
         0.5618637204170227
     ],
     [

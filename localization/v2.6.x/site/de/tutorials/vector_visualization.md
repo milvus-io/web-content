@@ -27,7 +27,7 @@ title: Vektor-Visualisierung
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>In diesem Beispiel wird gezeigt, wie die Einbettungen (Vektoren) in Milvus mit <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a> visualisiert werden können.</p>
-<p>Techniken zur Dimensionalitätsreduktion, wie t-SNE, sind von unschätzbarem Wert für die Visualisierung komplexer, hochdimensionaler Daten in einem 2D- oder 3D-Raum, wobei die lokale Struktur erhalten bleibt. Dies ermöglicht die Mustererkennung, verbessert das Verständnis von Merkmalsbeziehungen und erleichtert die Interpretation der Ergebnisse von Modellen des maschinellen Lernens. Darüber hinaus hilft es bei der Bewertung von Algorithmen durch den visuellen Vergleich von Clustering-Ergebnissen, vereinfacht die Datenpräsentation für ein nicht spezialisiertes Publikum und kann durch die Arbeit mit niedrigdimensionalen Darstellungen die Rechenkosten senken. Durch diese Anwendungen hilft t-SNE nicht nur dabei, tiefere Einblicke in Datensätze zu gewinnen, sondern unterstützt auch fundiertere Entscheidungsprozesse.</p>
+<p>Dimensionalitätsreduktionstechniken wie t-SNE sind von unschätzbarem Wert für die Visualisierung komplexer, hochdimensionaler Daten in einem 2D- oder 3D-Raum unter Beibehaltung der lokalen Struktur. Dies ermöglicht die Mustererkennung, verbessert das Verständnis von Merkmalsbeziehungen und erleichtert die Interpretation der Ergebnisse von Modellen des maschinellen Lernens. Darüber hinaus hilft es bei der Bewertung von Algorithmen durch den visuellen Vergleich von Clustering-Ergebnissen, vereinfacht die Datenpräsentation für ein nicht spezialisiertes Publikum und kann durch die Arbeit mit niedrigdimensionalen Darstellungen die Rechenkosten senken. Durch diese Anwendungen hilft t-SNE nicht nur dabei, tiefere Einblicke in Datensätze zu gewinnen, sondern unterstützt auch fundiertere Entscheidungsprozesse.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
         ></path>
       </svg>
     </button></h2><p>Iterieren Sie durch die Textzeilen, erstellen Sie Einbettungen und fügen Sie dann die Daten in Milvus ein.</p>
-<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammelschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene wie ein normales Feld behandelt werden kann.</p>
+<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammelschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene als normales Feld behandelt werden kann.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -260,7 +260,7 @@ retrieved_lines_with_distances = [
         0.5655910968780518
     ],
     [
-        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client\u2019s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.\n\n###&quot;,
+        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client's perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. For growing segments with incremental data, Milvus automatically builds interim indexes to ensure efficient search performance, even when the segment size does not reach the index-building threshold, calculated as `dataCoord.segment.maxSize` × `dataCoord.segment.sealProportion`. You can control this behavior through the configuration parameter `queryNode.segcore.interimIndex.enableIndex` in the [Milvus configuration file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440) - setting it to `true` enables temporary indexing (default) while setting it to `false` disables it.\n\n###&quot;,
         0.5618637204170227
     ],
     [
@@ -431,4 +431,4 @@ plt.show()
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>Wie wir sehen können, liegt der Abfragevektor nahe bei den gefundenen Vektoren. Obwohl die abgerufenen Vektoren nicht innerhalb eines Standardkreises mit festem Radius liegen, der auf die Abfrage zentriert ist, können wir sehen, dass sie dem Abfragevektor auf der 2D-Ebene immer noch sehr nahe sind.</p>
-<p>Der Einsatz von Techniken zur Dimensionalitätsreduktion kann das Verständnis von Vektoren und die Fehlerbehebung erleichtern. Ich hoffe, dass Sie durch dieses Tutorial ein besseres Verständnis von Vektoren erlangen können.</p>
+<p>Der Einsatz von Techniken zur Dimensionalitätsreduktion kann das Verständnis von Vektoren und die Fehlerbehebung erleichtern. Ich hoffe, dass Sie durch dieses Lernprogramm ein besseres Verständnis von Vektoren bekommen.</p>

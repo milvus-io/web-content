@@ -1,6 +1,6 @@
 ---
 id: vector_visualization.md
-summary: 在本例中，我们将展示如何使用 t-SNE 可视化 Milvus 中的嵌入（向量）。
+summary: 在这个例子中，我们将展示如何使用 t-SNE 可视化 Milvus 中的嵌入（向量）。
 title: 向量可视化
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">向量可视化<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
@@ -145,7 +145,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<p>检查 Collections 是否已存在，如果已存在，则删除它。</p>
+<p>检查 Collections 是否已存在，如果存在则删除。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
@@ -258,7 +258,7 @@ retrieved_lines_with_distances = [
         0.5655910968780518
     ],
     [
-        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client\u2019s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.\n\n###&quot;,
+        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client's perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. For growing segments with incremental data, Milvus automatically builds interim indexes to ensure efficient search performance, even when the segment size does not reach the index-building threshold, calculated as `dataCoord.segment.maxSize` × `dataCoord.segment.sealProportion`. You can control this behavior through the configuration parameter `queryNode.segcore.interimIndex.enableIndex` in the [Milvus configuration file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440) - setting it to `true` enables temporary indexing (default) while setting it to `false` disables it.\n\n###&quot;,
         0.5618637204170227
     ],
     [
@@ -428,5 +428,5 @@ plt.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>图</span> </span></p>
-<p>我们可以看到，查询向量与检索向量很接近。虽然检索到的向量并不在以查询为中心、半径固定的标准圆内，但我们可以看到它们在二维平面上仍然非常接近查询向量。</p>
+<p>我们可以看到，查询向量与检索向量很接近。虽然检索到的向量并不在以查询为中心、半径固定的标准圆内，但我们可以看到，它们在二维平面上仍然非常接近查询向量。</p>
 <p>使用降维技术可以促进对向量的理解和故障排除。希望你能通过本教程更好地理解向量。</p>

@@ -90,10 +90,10 @@ title: Mengelola Grup Sumber Daya
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.5.12. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
+<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.5.14. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
 </div>
 <ol>
-<li><p>Membuat grup sumber daya.</p>
+<li><p>Membuat sebuah grup sumber daya.</p>
 <p>Untuk membuat grup sumber daya, jalankan kode berikut setelah Anda terhubung ke sebuah instans Milvus. Cuplikan berikut ini mengasumsikan bahwa <code translate="no">default</code> adalah nama alias dari koneksi Milvus Anda.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 

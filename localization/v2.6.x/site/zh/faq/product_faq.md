@@ -27,9 +27,9 @@ title: 产品常见问题
 <p>插入数据（包括向量数据、标量数据和特定于 Collections 的 Schema）以增量日志的形式存储在持久存储中。Milvus 支持多种对象存储后端，包括<a href="https://min.io/">MinIO</a>、<a href="https://aws.amazon.com/s3/?nc1=h_ls">AWS S3</a>、<a href="https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes">谷歌云存储</a>（GCS）、<a href="https://azure.microsoft.com/en-us/products/storage/blobs">Azure Blob 存储</a>、<a href="https://www.alibabacloud.com/product/object-storage-service">阿里云 OSS</a> 和<a href="https://www.tencentcloud.com/products/cos">腾讯云对象存储</a>（COS）。</p>
 <p>元数据在 Milvus 内部生成。每个 Milvus 模块都有自己的元数据，这些元数据存储在 etcd 中。</p>
 <h4 id="Why-is-there-no-vector-data-in-etcd" class="common-anchor-header">为什么 etcd 中没有向量数据？</h4><p>etcd 存储 Milvus 模块元数据；MinIO 存储实体。</p>
-<h4 id="Does-Milvus-support-inserting-and-searching-data-simultaneously" class="common-anchor-header">Milvus 支持同时插入和搜索数据吗？</h4><p>是的。插入操作和查询操作由两个相互独立的模块处理。从客户端的角度来看，当插入的数据进入消息队列时，插入操作符就完成了。但是，插入的数据在加载到查询节点之前是不可查询的。如果数据段的大小没有达到建立索引的阈值（默认为 512 MB），Milvus 就会采用暴力搜索，查询性能可能会降低。</p>
+<h4 id="Does-Milvus-support-inserting-and-searching-data-simultaneously" class="common-anchor-header">Milvus 支持同时插入和搜索数据吗？</h4><p>是的。插入操作和查询操作由两个相互独立的模块处理。从客户端的角度来看，当插入的数据进入消息队列时，插入操作符就完成了。但是，插入的数据在加载到查询节点之前是不可查询的。对于具有增量数据的增长数据段，Milvus 会自动建立临时索引，以确保高效的搜索性能，即使数据段大小未达到索引建立阈值（计算公式为<code translate="no">dataCoord.segment.maxSize</code> ×<code translate="no">dataCoord.segment.sealProportion</code> ）。你可以通过<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440">Milvus 配置文件</a>中的配置参数<code translate="no">queryNode.segcore.interimIndex.enableIndex</code> 来控制这种行为--将其设置为<code translate="no">true</code> 可启用临时索引（默认），而将其设置为<code translate="no">false</code> 则会禁用临时索引。</p>
 <h4 id="Can-vectors-with-duplicate-primary-keys-be-inserted-into-Milvus" class="common-anchor-header">能否在 Milvus 中插入主键重复的向量？</h4><p>可以。Milvus 不检查向量主键是否重复。</p>
-<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">当插入具有重复主键的向量时，Milvus 是否将其视为更新操作？</h4><p>Milvus目前不支持更新操作，也不检查实体主键是否重复。你有责任确保实体主键是唯一的，如果不是唯一的，Milvus 可能包含多个主键重复的实体。</p>
+<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">当插入主键重复的向量时，Milvus 是否将其视为更新操作？</h4><p>Milvus目前不支持更新操作，也不检查实体主键是否重复。你有责任确保实体主键是唯一的，如果不是唯一的，Milvus 可能包含多个主键重复的实体。</p>
 <p>如果出现这种情况，查询时将返回哪个数据副本仍是未知行为。这一限制将在今后的版本中修复。</p>
 <h4 id="What-is-the-maximum-length-of-self-defined-entity-primary-keys" class="common-anchor-header">自定义实体主键的最大长度是多少？</h4><p>实体主键必须是非负 64 位整数。</p>
 <h4 id="What-is-the-maximum-amount-of-data-that-can-be-added-per-insert-operation" class="common-anchor-header">每次插入操作可添加的最大数据量是多少？</h4><p>插入操作的大小不得超过 1,024 MB。这是 gRPC 规定的限制。</p>
@@ -69,7 +69,7 @@ title: 产品常见问题
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvus 如何处理向量数据类型和精度？</h4><p>Milvus 支持二进制、Float32、Float16 和 BFloat16 向量类型。</p>
 <ul>
 <li>二进制向量：将二进制数据存储为 0 和 1 的序列，用于图像处理和信息检索。</li>
-<li>Float32 向量：默认存储精度约为小数点后 7 位。即使是 Float64 值，也是以 Float32 精度存储的，因此在检索时可能会丢失精度。</li>
+<li>Float32 向量：默认存储精度约为十进制 7 位数。即使是 Float64 值也是以 Float32 精度存储的，这可能会导致检索时的精度损失。</li>
 <li>Float16 和 BFloat16 向量：可降低精度和内存使用量。Float16 适用于带宽和存储有限的应用，而 BFloat16 则兼顾了范围和效率，常用于深度学习，在不显著影响精度的情况下降低计算要求。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支持为标量或向量场指定默认值？</h4><p>目前，Milvus 2.4.x 不支持为标量或向量场指定默认值。该功能计划在未来版本中推出。</p>

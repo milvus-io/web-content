@@ -19,6 +19,58 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.5.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v2515" class="common-anchor-header">v2.5.15<button data-href="#v2515" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2025년 7월 23일</p>
+<table>
+<thead>
+<tr><th>Milvus 버전</th><th>Python SDK 버전</th><th>Node.js SDK 버전</th><th>Java SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.15</td><td>2.5.14</td><td>2.5.12</td><td>2.5.11</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.15를 발표하게 되어 기쁩니다! 이 버전은 수집 이름이 변경될 때 메타데이터를 심각하게 손상시켜 데이터 손실을 유발할 수 있는 버그를 포함하여 일련의 기능 버그를 수정하여 사용자 경험을 향상시킵니다. 또한 다양한 일반 성능 및 안정성 향상과 함께 수많은 버그를 해결하여 더욱 견고한 시스템을 보장합니다. <strong>특히 현재 2.5.14를 사용 중이라면 2.5.15로 업그레이드하여 최신 업데이트를 살펴보세요!</strong></p>
+<h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
+<li>스파스 벡터 무차별 대입 버그<a href="https://github.com/milvus-io/milvus/pull/43398">(#43398</a>)를 수정하기 위해 Knowhere 버전이 업데이트되었습니다.</li>
+<li>txn 제한이 있는 메타 저장을 구현했습니다<a href="https://github.com/milvus-io/milvus/pull/43287">(#43287</a>).</li>
+<li>쿼리코드 재시작 후 로드 구성 변경 사항 적용<a href="https://github.com/milvus-io/milvus/pull/43236">(#43236</a>).</li>
+<li>가변 길이 유형 메모리 사용량 개선<a href="https://github.com/milvus-io/milvus/pull/43093">(#43093</a>).</li>
+<li>코디네이터 종료 시퀀스에서 RootCoord 종료를 마지막 순서로 재지정<a href="https://github.com/milvus-io/milvus/pull/43024">(#43024</a>).</li>
+<li>CMake 버전을 3.31.8로 업데이트<a href="https://github.com/milvus-io/milvus/pull/43004">(#43004)</a>.</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
+<li>저장 세트에 키가 있는 경우 제거 작업을 건너뛰었습니다<a href="https://github.com/milvus-io/milvus/pull/43426">(#43426</a>).</li>
+<li>멀티 청크 데이터 로드 시 널 비트맵 오프셋 정렬을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43411">(#43411</a>, <a href="https://github.com/milvus-io/milvus/pull/43342">#43342</a>).</li>
+<li>디렉터리 제거 경쟁 조건<a href="https://github.com/milvus-io/milvus/pull/43401">(#43401)</a>을 수정하도록 Tantivy를 업데이트했습니다.</li>
+<li>컬렉션 이름을 바꿀 때만 <code translate="no">AlterCollection</code> 을 호출하는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43421">(#43421</a>).</li>
+<li><code translate="no">MultiSaveAndRemove</code> 에서 제거 작업을 먼저 실행하도록<a href="https://github.com/milvus-io/milvus/pull/43409"> 했습니다(#43409</a>).</li>
+<li>희소 벡터와 고밀도 벡터가 모두 포함된 컬렉션에 디스크 세그먼트 최대 크기를 사용했습니다<a href="https://github.com/milvus-io/milvus/pull/43195">(#43195</a>).</li>
+<li>다중 청크 모델을 적용하여 텍스트 일치 버그를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43297">(#43297</a>).</li>
+<li>오른쪽 피연산자가 음수일 때 나눗셈 비교에 대한 잘못된 비트셋을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43180">(#43180</a>).</li>
+<li>JSON 청크를 가져올 때 불필요한 복사를 무효화했습니다<a href="https://github.com/milvus-io/milvus/pull/43183">(#43183</a>, <a href="https://github.com/milvus-io/milvus/pull/43202">#43202</a>).</li>
+<li>샤드 리더 변경으로 인해 위임자가 서비스 불가능해지는 것을 방지했습니다<a href="https://github.com/milvus-io/milvus/pull/43309">(#43309</a>).</li>
+<li>세그먼트가 릴리즈될 때 텍스트 일치 인덱스와 JSON 키 통계 인덱스 누수를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43308">(#43308</a>).</li>
+<li>클러스터링 압축 작업 복원 후 <code translate="no">RegeneratePartitionStats</code> 오류가 수정되었습니다<a href="https://github.com/milvus-io/milvus/pull/43206">(#43206</a>).</li>
+<li>패닉을 방지하기 위해 유효하지 않은 함수 매개변수에 대한 오류 처리를 추가했습니다<a href="https://github.com/milvus-io/milvus/pull/43190">(#43190)</a>.</li>
+<li>컬렉션 이름 유효성 검사 시 공백 트리밍 로직을 제거했습니다<a href="https://github.com/milvus-io/milvus/pull/43138">(#43138</a>).</li>
+<li>컬렉션 수준 설정을 적용하기 전에 필드 mmap 속성 검사를 추가했습니다<a href="https://github.com/milvus-io/milvus/pull/43091">(#43091</a>).</li>
+<li>정렬 통계 실패로 인해 인덱스 생성이 차단되던 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43061">(#43061</a>).</li>
+<li>로드 밸런서 재시도 메커니즘에서 노드 제외 로직을 지우는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43002">(#43002</a>).</li>
+</ul>
 <h2 id="v2514" class="common-anchor-header">v2.5.14<button data-href="#v2514" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -298,7 +350,7 @@ title: 릴리스 노트
 <tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.10은 향상된 검색 및 로드 성능, 향상된 메트릭 보고 기능, 가속화된 메트릭 계산을 위한 확장된 SVE 지원을 제공합니다. 또한 이번 릴리스에는 안정성과 정확성을 향상시키는 여러 버그 수정이 포함되어 있습니다. 업그레이드하거나 사용해 보시기 바랍니다. 여러분의 피드백은 Milvus를 더욱 개선하는 데 큰 도움이 됩니다!</p>
+<p>Milvus 2.5.10은 향상된 검색 및 로드 성능, 향상된 메트릭 보고 기능, 가속화된 메트릭 계산을 위한 확장된 SVE 지원을 제공합니다. 이 릴리스에는 안정성과 정확성을 높이는 여러 버그 수정도 포함되어 있습니다. 업그레이드하거나 사용해 보시기 바랍니다. 여러분의 피드백은 Milvus를 더욱 개선하는 데 큰 도움이 됩니다!</p>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
 <li>존재하지 않는 인덱스에 대한 보고 인덱스 메트릭 무시<a href="https://github.com/milvus-io/milvus/pull/41296">(#41296</a>)</li>
 <li>반전된 인덱스가 존재할 때에도 좋아요에 스캔 모드 사용<a href="https://github.com/milvus-io/milvus/pull/41309">(#41309</a>)</li>
@@ -619,7 +671,7 @@ title: 릴리스 노트
 </ul>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><h4 id="Observability" class="common-anchor-header">관찰 가능성</h4><ul>
 <li>원시 데이터 검색을 위한 모니터 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/40155">(#40155</a>).</li>
-<li>[2.5] get 벡터 지연 시간 메트릭 추가 및 요청 제한 오류 메시지 개선<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>).</li>
+<li>[2.5] get 벡터 지연 시간 메트릭 추가 및 요청 제한 오류 메시지 개선<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
 <li>[2.5] 프록시 대기열에 대한 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/40071">(#40071</a>)</li>
 <li>더 많은 메트릭 데이터 노출<a href="https://github.com/milvus-io/milvus/pull/39466">(#39466</a>)</li>
 <li>[2.5] 구문 분석 표현식에 대한 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/39716">(#39716</a>)</li>
@@ -680,7 +732,7 @@ title: 릴리스 노트
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>PartitionKey 격리, DAAT MaxScore를 사용한 스파스 인덱스, 향상된 잠금 메커니즘 등 주요 성능 최적화 및 새로운 기능을 도입한 Milvus 2.5.4의 출시를 발표하게 되어 기쁘게 생각합니다. 이번 릴리스의 가장 큰 특징은 10,000개의 컬렉션과 1백만 개의 파티션을 지원하여 멀티테넌트 사용 사례에 있어 중요한 이정표를 세웠다는 점입니다. 이 버전은 또한 전반적인 안정성과 신뢰성을 개선하는 여러 버그들을 해결했으며, 그 중 두 가지 중요한 버그는 데이터 손실을 유발할 수 있습니다. 이 최신 버전을 업그레이드하거나 사용해 보시기를 권장하며, Milvus를 지속적으로 개선하는 데 도움이 되는 여러분의 피드백을 기다리겠습니다!</p>
+<p>PartitionKey 격리, DAAT MaxScore를 사용한 스파스 인덱스, 향상된 잠금 메커니즘 등 주요 성능 최적화 및 새로운 기능을 도입한 Milvus 2.5.4의 출시를 발표하게 되어 기쁘게 생각합니다. 이번 릴리스의 가장 큰 특징은 10,000개의 컬렉션과 1백만 개의 파티션을 지원하여 멀티테넌트 사용 사례에 있어 중요한 이정표를 세웠다는 점입니다. 이 버전은 또한 전반적인 안정성과 신뢰성을 향상시키는 여러 버그들을 해결했으며, 그 중 두 가지 중요한 버그는 데이터 손실을 유발할 수 있습니다. 이 최신 버전을 업그레이드하거나 사용해 보시기를 권장하며, Milvus를 지속적으로 개선하는 데 도움이 되는 여러분의 피드백을 기다리겠습니다!</p>
 <h3 id="Features" class="common-anchor-header">특징</h3><ul>
 <li>여러 개의 파티션 키로 성능을 개선하기 위해 PartitionKey 격리를 지원합니다<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). 자세한 내용은 <a href="/docs/ko/v2.5.x/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</li>
 <li>스파스 인덱스가 이제 DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015를</a> 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
@@ -912,5 +964,5 @@ title: 릴리스 노트
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">DDL 동시성 성능 개선</h4><p>데이터 정의 언어(DDL) 작업의 동시성 성능을 최적화했습니다.</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">RESTful API 기능 조정</h4><p>일관성을 위해 RESTful API의 기능을 다른 SDK와 정렬했습니다.</p>
 <h4 id="Security--Configuration-Updates" class="common-anchor-header">보안 및 구성 업데이트</h4><p>보다 복잡한 환경이나 엔터프라이즈 환경에서 노드 간 통신을 보호하기 위해 TLS를 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/tls.md">보안 구성을</a> 참조하세요.</p>
-<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">압축 성능 향상</h4><p>혼합 압축에서 최대 세그먼트 제한을 제거하고 이제 작은 세그먼트부터 우선순위를 지정하여 효율성이 향상되고 대규모 또는 조각화된 데이터 세트의 쿼리 속도가 빨라졌습니다.</p>
+<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">압축 성능 개선</h4><p>혼합 압축에서 최대 세그먼트 제한을 제거하고 이제 작은 세그먼트부터 우선순위를 지정하여 효율성이 향상되고 대규모 또는 조각화된 데이터 세트의 쿼리 속도가 빨라졌습니다.</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">점수 기반 채널 밸런싱</h4><p>채널 간 부하를 동적으로 분산하는 정책을 도입하여 대규모 배포에서 리소스 활용률과 전반적인 안정성을 향상시켰습니다.</p>

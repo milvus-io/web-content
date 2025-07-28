@@ -260,7 +260,7 @@ retrieved_lines_with_distances = [
         0.5655910968780518
     ],
     [
-        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client\u2019s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.\n\n###&quot;,
+        &quot;Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client's perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. For growing segments with incremental data, Milvus automatically builds interim indexes to ensure efficient search performance, even when the segment size does not reach the index-building threshold, calculated as `dataCoord.segment.maxSize` × `dataCoord.segment.sealProportion`. You can control this behavior through the configuration parameter `queryNode.segcore.interimIndex.enableIndex` in the [Milvus configuration file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440) - setting it to `true` enables temporary indexing (default) while setting it to `false` disables it.\n\n###&quot;,
         0.5618637204170227
     ],
     [
@@ -277,7 +277,7 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">تقليل البُعد إلى 2-د بواسطة t-SNE</h3><p>دعونا نقلل أبعاد التضمينات إلى 2-د بواسطة t-SNE. سنستخدم مكتبة <code translate="no">sklearn</code> لإجراء تحويل t-SNE.</p>
+<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">تقليل البُعد إلى 2-د بواسطة t-SNE</h3><p>لنختزل أبعاد التضمينات إلى 2-د بواسطة t-SNE. سنستخدم مكتبة <code translate="no">sklearn</code> لإجراء تحويل t-SNE.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> sklearn.manifold <span class="hljs-keyword">import</span> TSNE
@@ -431,4 +431,4 @@ plt.show()
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>بنج</span> </span></p>
 <p>كما نرى، متجه الاستعلام قريب من المتجهات المسترجعة. على الرغم من أن المتجهات المسترجعة ليست ضمن دائرة قياسية ذات نصف قطر ثابت مركزها الاستعلام، يمكننا أن نرى أنها لا تزال قريبة جدًا من متجه الاستعلام على المستوى ثنائي الأبعاد.</p>
-<p>يمكن أن يؤدي استخدام تقنيات تقليل الأبعاد إلى تسهيل فهم المتجهات واستكشاف الأخطاء وإصلاحها. آمل أن تتمكن من الحصول على فهم أفضل للمتجهات من خلال هذا البرنامج التعليمي.</p>
+<p>يمكن أن يسهّل استخدام تقنيات تقليل الأبعاد فهم المتجهات واستكشاف الأخطاء وإصلاحها. آمل أن تتمكن من الحصول على فهم أفضل للمتجهات من خلال هذا البرنامج التعليمي.</p>
