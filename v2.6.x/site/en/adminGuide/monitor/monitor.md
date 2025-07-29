@@ -114,7 +114,7 @@ Click on the `Status` tab and then `Targets`. You should see the targets of the 
 
 ![Prometheus_targets](../../../../assets/prometheus_targets.png "The Prometheus targets.")
 
-Click on the `Graph` tab and enter the expression `up{job="my-release-milvus"}` in the expression input box. You should see the metrics of the Milvus components.
+Click on the `Graph` tab and enter the expression `up{job="default/my-release"}` in the expression input box. You should see the metrics of the Milvus components.
 
 ![Prometheus_graph](../../../../assets/prometheus_graph.png "The Prometheus graph.")
 
