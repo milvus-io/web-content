@@ -131,7 +131,7 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
     <span>Prometheus_targets</span>
   </span>
 </p>
-<p>Click on the <code translate="no">Graph</code> tab and enter the expression <code translate="no">up{job=&quot;my-release-milvus&quot;}</code> in the expression input box. You should see the metrics of the Milvus components.</p>
+<p>Click on the <code translate="no">Graph</code> tab and enter the expression <code translate="no">up{job=&quot;default/my-release&quot;}</code> in the expression input box. You should see the metrics of the Milvus components.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
