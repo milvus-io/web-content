@@ -134,6 +134,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
   </div>
 </li>
 <li><p>To deploy a Milvus instance in cluster mode, run the following command:</p>
+<p>You can use <code translate="no">--set</code> to install the Milvus cluster with custom configurations. The following command sets <code translate="no">streaming.enabled</code> to <code translate="no">true</code> to enable the streaming service and set <code translate="no">indexNode.enabled</code> to <code translate="no">false</code> to disable the index service. In this case, the streaming node will be responsible for all data processing and indexing tasks.</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0-rc1 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -202,6 +203,43 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Optionally, you can use <code translate="no">:19530</code> instead of <code translate="no">27017:19530</code> in the above command to let <code translate="no">kubectl</code> allocate a local port for you so that you don’t have to manage port conflicts.</p>
 <p>By default, kubectl’s port-forwarding only listens on <code translate="no">localhost</code>. Use the <code translate="no">address</code> flag if you want Milvus to listen on the selected or all IP addresses. The following command makes port-forward listen on all IP addresses on the host machine.</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Update Milvus configurations<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>You can update the configurations of your Milvus cluster by editing the <code translate="no">values.yaml</code> file and applying it again.</p>
+<ol>
+<li>Create a <code translate="no">values.yaml</code> file with the desired configurations.</li>
+</ol>
+<p>The following assumes that you want to enable <code translate="no">proxy.http</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    proxy:
+      http:
+        enabled: true
+</span><button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Apply the <code translate="no">values.yaml</code> file.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Check the updated configurations.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm get values my-release
+<button class="copy-code-btn"></button></code></pre>
+<p>The output should show the updated configurations.</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Access Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
