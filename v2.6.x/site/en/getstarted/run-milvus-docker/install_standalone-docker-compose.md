@@ -60,6 +60,33 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 
 You can also access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
 
+## (Optional) Update Milvus configurations
+
+To update Milvus configuration to suit your needs, you need to modify the `/milvus/configs/user.yaml` file within the `milvus-standalone` container.
+
+1. Access the `milvus-standalone` container.
+
+  ```shell
+  docker exec -it milvus-standalone bash
+  ```
+
+1. Add extra configurations to override the default ones. 
+  The following assumes that you need to override the default `proxy.healthCheckTimeout`. For applicable configuration items, refer to [System Configuration](system_configuration.md).
+
+  ```shell
+  cat << EOF > /milvus/configs/user.yaml
+  # Extra config to override default milvus.yaml
+  proxy:
+    healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
+  EOF
+  ```
+
+1. Restart the `milvus-standalone` container to apply the changes.
+
+  ```shell
+  docker restart milvus-standalone
+  ```
+
 ## Stop and delete Milvus
 
 You can stop and delete this container as follows

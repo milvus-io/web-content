@@ -42,6 +42,7 @@ If you want to explicitly install `milvus-lite` package, or you have installed a
 ## Connect to Milvus Lite
 
 In `pymilvus`, specify a local file name as uri parameter of MilvusClient will use Milvus Lite.
+
 ```python
 from pymilvus import MilvusClient
 client = MilvusClient("./milvus_demo.db")
