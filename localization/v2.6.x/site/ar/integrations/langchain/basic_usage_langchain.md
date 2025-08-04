@@ -209,6 +209,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
     <span class="hljs-string">&quot;LangChain provides abstractions to make working with LLMs easy&quot;</span>,
     k=<span class="hljs-number">2</span>,
     expr=<span class="hljs-string">&#x27;source == &quot;tweet&quot;&#x27;</span>,
+    <span class="hljs-comment"># param=...  # Search params for the index type</span>
 )
 <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
@@ -251,7 +252,7 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
 <h3 id="Per-User-Retrieval" class="common-anchor-header">الاسترجاع لكل مستخدم</h3><p>عند إنشاء تطبيق استرجاع، غالبًا ما يتعين عليك إنشاؤه مع وضع عدة مستخدمين في الاعتبار. هذا يعني أنك قد تقوم بتخزين البيانات ليس لمستخدم واحد فقط، ولكن للعديد من المستخدمين المختلفين، ويجب ألا يتمكنوا من رؤية بيانات بعضهم البعض.</p>
 <p>يوصي ميلفوس باستخدام <a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a> لتنفيذ الإيجار المتعدد، وإليك مثال على ذلك.</p>
 <blockquote>
-<p>خاصية مفتاح التقسيم غير متوفرة الآن في Milvus Lite، إذا كنت ترغب في استخدامها، فأنت بحاجة إلى بدء تشغيل خادم Milvus من <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker أو kubernetes</a>.</p>
+<p>ميزة مفتاح التقسيم غير متوفرة الآن في Milvus Lite، إذا كنت ترغب في استخدامها، فأنت بحاجة إلى بدء تشغيل خادم Milvus من <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker أو kubernetes</a>.</p>
 </blockquote>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
@@ -263,7 +264,7 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
-    drop_old=<span class="hljs-literal">False</span>,
+    <span class="hljs-comment"># drop_old=True,</span>
     partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
 )
 <button class="copy-code-btn"></button></code></pre>

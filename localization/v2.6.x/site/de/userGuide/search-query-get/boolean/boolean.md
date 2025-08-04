@@ -46,6 +46,7 @@ summary: >-
 <li><p><strong>Bereichsfilter</strong>: <code translate="no">IN</code> und <code translate="no">LIKE</code> helfen bei der Suche nach bestimmten Wertebereichen oder -mengen.</p></li>
 <li><p><strong>Arithmetische Operatoren</strong>: <code translate="no">+</code> <code translate="no">-</code> , <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code> und <code translate="no">**</code> werden für Berechnungen mit numerischen Feldern verwendet.</p></li>
 <li><p><strong>Logische Operatoren</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, und <code translate="no">NOT</code> kombinieren mehrere Bedingungen zu komplexen Ausdrücken.</p></li>
+<li><p><strong>IS NULL- und IS NOT NULL-Operatoren</strong>: Die Operatoren <code translate="no">IS NULL</code> und <code translate="no">IS NOT NULL</code> werden verwendet, um Felder danach zu filtern, ob sie einen Nullwert (fehlende Daten) enthalten. Einzelheiten finden Sie unter <a href="/docs/de/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Grundlegende Operatoren</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Beispiel: Filtern nach Farbe</h3><p>Um Entitäten mit Primärfarben (rot, grün oder blau) in einem skalaren Feld <code translate="no">color</code> zu finden, verwenden Sie den folgenden Filterausdruck:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
@@ -136,55 +137,3 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/keyword-match.md">Textabgleich</a>.</p>
 <h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> Operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>Der <strong>PHRASE_MATCH-Operator</strong> ermöglicht das präzise Auffinden von Dokumenten auf der Grundlage von exakten Phrasenübereinstimmungen, wobei sowohl die Reihenfolge als auch die Nachbarschaft der Suchbegriffe berücksichtigt werden.</p>
 <p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/phrase-match.md">Phrase Match</a>.</p>
-<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">Zufallsstichproben-Operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Mit dem Operator für Zufallsstichproben können Sie eine Teilmenge von Datenproben aus einer Sammlung auf Segmentebene extrahieren, was ideal für die Untersuchung und Verarbeitung umfangreicher Datensätze ist. Diese Funktion ist für diese Anwendungsfälle sehr nützlich:</p>
-<ul>
-<li><p><strong>Schnelle Datenvorschau</strong>: Sie liefert repräsentative Beispieldaten mit minimalem Ressourcenverbrauch, so dass Sie schnell die Gesamtstruktur und den Inhalt großer Vektordatensätze erfassen können.</p></li>
-<li><p><strong>Kombinierte Filterung</strong>: Bei der Filterung nach mehreren Kriterien (z. B. Auswahl von Dokumenten nach Attributen) ermöglicht die Kombination mit Zufallsstichproben schnelle statistische Zusammenfassungen und Vorschauen auf die gefilterten Ergebnisse.</p></li>
-<li><p><strong>Ressourceneinsparung bei der Verarbeitung großer Datenmengen</strong>: Bei sehr großen Datenbeständen kann das Aggregieren und Analysieren der gesamten Daten ressourcenintensiv sein. Zufallsstichproben reduzieren die Verarbeitungslast, indem sie die Menge der zu verarbeitenden Daten verringern.</p></li>
-</ul>
-<p>Verwenden Sie die folgende Syntax für Zufallsstichproben:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li><code translate="no">float</code><strong>:</strong> Ein Stichprobenfaktor im Bereich (0, 1), ohne Berücksichtigung der Grenzen. Zum Beispiel wählt <code translate="no">RANDOM_SAMPLE(0.001)</code> ungefähr 0,1% der Ergebnisse aus.</li>
-</ul>
-<div class="alert note">
-<p>Beim Ausdruck <code translate="no">RANDOM_SAMPLE</code> wird die Groß- und Kleinschreibung nicht berücksichtigt. Sie können entweder <code translate="no">RANDOM_SAMPLE</code> oder <code translate="no">random_sample</code> verwenden.</p>
-</div>
-<h3 id="Combine-with-other-filters" class="common-anchor-header">Kombinieren mit anderen Filtern</h3><p>Der Zufallsstichprobenoperator muss mit anderen Filterausdrücken unter Verwendung der logischen <code translate="no">AND</code> kombiniert werden. Ein Beispiel:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Hier wendet Milvus zuerst die Bedingung <code translate="no">color = 'red'</code> an und führt dann eine Zufallsstichprobe auf die Ergebnismenge durch.</p>
-<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">Beispiel: Zufallsstichproben ohne einen zusätzlichen Filter</h3><p>In diesem Beispiel nimmt die Abfrage eine zufällige Teilmenge (ca. 1%) der gesamten Daten in der angegebenen Sammlung:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">Beispiel: Kombinierte Filterung mit Zufallsstichproben</h3><p>In diesem Beispiel filtert die Abfrage zunächst die Dokumente auf der Grundlage eines bestimmten Attributs (in diesem Fall die Dokumente, bei denen <code translate="no">color</code> gleich <code translate="no">'red'</code> ist). Nach der Filterung wird der Zufallsstichprobenoperator angewendet, um etwa 0,1 % der gefilterten Ergebnisse zurückzugeben:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>

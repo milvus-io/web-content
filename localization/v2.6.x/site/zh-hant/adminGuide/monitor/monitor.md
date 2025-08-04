@@ -96,15 +96,47 @@ summary: 學習如何使用 Prometheus 為 Milvus 集群部署監控服務。
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2.啟用 ServiceMonitor</h3><p>Milvus Helm 預設未啟用 ServiceMonitor。在 Kubernetes 群集中安裝 Prometheus Operator 之後，您可以透過新增參數<code translate="no">metrics.serviceMonitor.enabled=true</code> 來啟用它。</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values</span>
-<button class="copy-code-btn"></button></code></pre>
+<h4 id="With-Helm" class="common-anchor-header">使用 Helm</h4><p>如果您已經安裝 Milvus Helm 圖表，您可以透過設定參數<code translate="no">metrics.serviceMonitor.enabled=true</code> 來啟用 ServiceMonitor，如下所示。</p>
+<pre><code translate="no">```
+$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
+```
+</code></pre>
 <p>安裝完成後，使用<code translate="no">kubectl</code> 檢查 ServiceMonitor 資源。</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h4 id="With-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator</h4><p>如果您使用 Milvus Operator 安裝了 Milvus，您可以如下方式啟用 ServiceMonitor。</p>
+<ol>
+<li><p>執行下列指令編輯 Milvus 自訂資源。以下命令假設自訂資源的名稱為<code translate="no">my-release</code> 。</p>
+<pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>編輯<code translate="no">spec.components.disableMetrics</code> 欄位為<code translate="no">false</code> 。</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>保存並退出編輯器。</p></li>
+<li><p>等待操作員核對變更。您可以執行以下指令檢查 Milvus 自訂資源的狀態。</p>
+<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> milvus my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span> <span class="hljs-operator">-</span>o yaml
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<p><code translate="no">status.components.metrics.serviceMonitor.enabled</code> 欄位應為<code translate="no">true</code> 。</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3.檢查指標</h3><p>啟用 ServiceMonitor 之後，您可以存取 Prometheus 面板，網址是<code translate="no">http://localhost:9090/</code> 。</p>
+<p>按一下<code translate="no">Status</code> 索引標籤，然後按一下<code translate="no">Targets</code> 。您應該可以看到 Milvus 元件的目標。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_targets.png" alt="Prometheus_targets" class="doc-image" id="prometheus_targets" />
+   </span> <span class="img-wrapper"> <span>Prometheus_targets</span> </span></p>
+<p>按一下<code translate="no">Graph</code> 索引標籤，然後在表達式輸入方塊中輸入表達式<code translate="no">up{job=&quot;default/my-release&quot;}</code> 。您應該會看到 Milvus 元件的度量。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
+   </span> <span class="img-wrapper"> <span>Prometheus_graph</span> </span></p>
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4.檢查 ServiceMonitor</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">接下來<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,8 +152,8 @@ summary: 學習如何使用 Prometheus 為 Milvus 集群部署監控服務。
         ></path>
       </svg>
     </button></h2><ul>
-<li>如果您已為 Milvus 叢集部署了監控服務，您也許還想學一下<ul>
-<li><a href="/docs/zh-hant/visualize.md">在 Grafana 中可視化 Milvus 的度量指標</a></li>
+<li>如果您已經為 Milvus 叢集部署了監控服務，您也許還想學一下<ul>
+<li><a href="/docs/zh-hant/visualize.md">在 Grafana 可視化 Milvus 的度量指標</a></li>
 <li><a href="/docs/zh-hant/alert.md">為 Milvus 服務建立警報</a></li>
 <li>調整您的<a href="/docs/zh-hant/allocate.md">資源分配</a></li>
 </ul></li>

@@ -197,7 +197,7 @@ beta: Milvus 2.6.x
 <li><p>الخدمات ذات حدود المسافة</p></li>
 <li><p>محتوى بتواريخ انتهاء صلاحية أو حدود واضحة</p></li>
 </ul></td>
-     <td><p>في أداة البحث عن الأحداث، لا تظهر الأحداث التي تتجاوز نافذة مستقبلية مدتها أسبوعين على الإطلاق</p></td>
+     <td><p>في أداة البحث عن الأحداث، لا تظهر الأحداث التي تتجاوز نافذة مستقبلية لمدة أسبوعين على الإطلاق</p></td>
    </tr>
 </table>
 <p>للحصول على معلومات مفصلة حول كيفية حساب كل مصنف اضمحلال للنتائج وأنماط اضمحلال محددة، راجع الوثائق المخصصة:</p>
@@ -236,7 +236,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -266,7 +266,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يحدد نوع الدالة التي يتم إنشاؤها. يجب تعيينها على <code translate="no">RERANK</code> لجميع مرتبات التضاؤل.</p></td>
+     <td><p>تحديد نوع الدالة التي يتم إنشاؤها. يجب تعيينها على <code translate="no">RERANK</code> لجميع مرتبات التضاؤل.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
@@ -311,7 +311,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>لا يوجد</p></td>
-     <td><p>تتحكم قيمة الدرجة في المسافة <code translate="no">scale</code> في انحدار المنحنى. تُنشئ القيم المنخفضة منحنيات انحدار أكثر حدة؛ بينما تُنشئ القيم الأعلى منحنيات انحدار أكثر تدرجًا. يجب أن تكون بين 0 و1.</p></td>
+     <td><p>قيمة الدرجة في المسافة <code translate="no">scale</code> ، تتحكم في انحدار المنحنى. تُنشئ القيم المنخفضة منحنيات انحدار أكثر حدة؛ بينما تُنشئ القيم الأعلى منحنيات انحدار أكثر تدرجًا. يجب أن تكون بين 0 و1.</p></td>
      <td><p><code translate="no">0.5</code> (افتراضي)</p></td>
    </tr>
 </table>
@@ -324,10 +324,10 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تنطبق على البحث الهجين</h3><p>يمكن أيضًا تطبيق مصنفات التضاؤل على عمليات البحث الهجين التي تجمع بين حقول متجهات متعددة:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تنطبق على البحث الهجين</h3><p>يمكن أيضًا تطبيق مصنفات الاضمحلال على عمليات البحث الهجين التي تجمع بين حقول متجهات متعددة:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>

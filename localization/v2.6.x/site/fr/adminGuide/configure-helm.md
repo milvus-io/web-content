@@ -39,7 +39,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après le re
         ></path>
       </svg>
     </button></h2><p>Vous pouvez configurer Milvus à l'aide d'un fichier de configuration <code translate="no">values.yaml</code>.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">Télécharger un fichier de configuration</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Télécharger</a> <code translate="no">values.yaml</code> directement ou à l'aide de la commande suivante.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">Télécharger un fichier de configuration</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Télécharger</a> <code translate="no">values.yaml</code> directement ou à l'aide de la commande suivante.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Modifier le fichier de configuration</h3><p>Configurez votre instance Milvus en fonction de vos scénarios d'application en ajustant les paramètres correspondants dans <code translate="no">values.yaml</code>.</p>
@@ -196,7 +196,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après le re
 </table>
 </div>
 <p>Pour d'autres paramètres spécifiques à l'installation de Kubernetes, voir <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configuration.</a></p>
-<h3 id="Start-Milvus" class="common-anchor-header">Démarrer Milvus</h3><p>Après avoir fini de modifier le fichier de configuration, vous pouvez démarrer Milvus avec le fichier.</p>
+<h3 id="Start-Milvus" class="common-anchor-header">Démarrer Milvus</h3><p>Après avoir modifié le fichier de configuration, vous pouvez démarrer Milvus à l'aide du fichier.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">Configurer Milvus via la ligne de commande<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">

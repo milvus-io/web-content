@@ -5,7 +5,6 @@ related_key: configure
 summary: 使用 Helm 圖表設定 Milvus。
 title: 使用 Helm Charts 配置 Milvus
 ---
-
 <h1 id="Configure-Milvus-with-Helm-Charts" class="common-anchor-header">使用 Helm Charts 配置 Milvus<button data-href="#Configure-Milvus-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +40,7 @@ title: 使用 Helm Charts 配置 Milvus
       </svg>
     </button></h2><p>您可以使用配置文件<code translate="no">values.yaml</code> 來配置 Milvus。</p>
 <h3 id="Download-a-configuration-file" class="common-anchor-header">下載配置檔</h3><p>直接<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">下載</a> <code translate="no">values.yaml</code> 或使用以下命令。</p>
-<pre><code translate="no">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">修改配置文件</h3><p>通過調整<code translate="no">values.yaml</code> 中的相應參數，配置您的 Milvus 實例，以適應您的應用場景。</p>
 <p>具體來說，在<code translate="no">values.yaml</code> 中搜索<code translate="no">extraConfigFiles</code> ，並將您的配置放入此部分，如下所示：</p>
@@ -49,14 +48,14 @@ title: 使用 Helm Charts 配置 Milvus
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
 <span class="hljs-comment"># Please follow the config structure in the milvus.yaml</span>
 <span class="hljs-comment"># at https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># Note: this config will be the top priority which will override the config</span>
+<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> this config will be the top priority which will override the config</span>
 <span class="hljs-comment"># in the image and helm chart.</span>
-extraConfigFiles:
-  user.yaml: |+
-    <span class="hljs-comment">#    For example to set the graceful time for query nodes</span>
-    <span class="hljs-comment">#    queryNodes:</span>
-    <span class="hljs-comment">#      gracefulTime: 10</span>
-<button class="copy-code-btn"></button></code></pre>
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    #    For example to set the graceful time for query nodes
+    #    queryNodes:
+    #      gracefulTime: 10
+</span><button class="copy-code-btn"></button></code></pre>
 <p>查看以下鏈接，瞭解各參數的更多資訊。</p>
 <p>排序依據</p>
 <div class="filter">
@@ -198,7 +197,7 @@ extraConfigFiles:
 </div>
 <p>其他專門針對 Kubernetes 安裝的參數，請參閱<a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configuration</a>。</p>
 <h3 id="Start-Milvus" class="common-anchor-header">啟動 Milvus</h3><p>修改完配置文件後，就可以用該文件啟動 Milvus。</p>
-<pre><code translate="no">$ helm upgrade my-release milvus/milvus -f values.yaml
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">透過命令列配置 Milvus<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,11 +216,11 @@ extraConfigFiles:
       </svg>
     </button></h2><p>另外，您也可以直接使用 Helm 指令升級 Milvus 配置。</p>
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">檢查可配置的參數</h3><p>在升級之前，你可以用 Helm 圖表檢查可配置的參數。</p>
-<pre><code translate="no">$ helm show values milvus/milvus
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Start-Milvus" class="common-anchor-header">啟動 Milvus</h3><p>在升級指令中加入<code translate="no">--values</code> 或<code translate="no">--set</code> ，設定並啟動 Milvus。</p>
-<pre><code translate="no"><span class="hljs-comment"># For instance, upgrade the Milvus cluster with compaction disabled</span>
-$ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span>
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

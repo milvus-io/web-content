@@ -1,6 +1,6 @@
 ---
 id: upsert-entities.md
-title: Upsert-Entitäten
+title: Upsert Entitäten
 summary: >-
   Die Upsert-Operation kombiniert die Aktionen des Aktualisierens und Einfügens
   von Daten. Milvus bestimmt, ob eine Aktualisierung oder eine Einfügeoperation
@@ -8,7 +8,7 @@ summary: >-
   diesem Abschnitt wird das Upsert einer Entität und das spezifische Verhalten
   der Upsert-Operation in verschiedenen Szenarien vorgestellt.
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Upsert-Entitäten<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">Upsert Entitäten<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Upsert-Operation kombiniert die Aktionen des Aktualisierens und Einfügens von Daten. Milvus bestimmt, ob eine Aktualisierung oder eine Einfügeoperation durchgeführt werden soll, indem es prüft, ob der Primärschlüssel existiert. In diesem Abschnitt wird das Upsert einer Entität und das spezifische Verhalten der Upsert-Operation in verschiedenen Szenarien vorgestellt.</p>
+    </button></h1><p>Die Operation <code translate="no">upsert</code> bietet eine bequeme Möglichkeit zum Einfügen oder Aktualisieren von Entitäten in einer Sammlung. Sie verarbeitet Daten auf intelligente Weise, indem sie das Vorhandensein eines Primärschlüssels überprüft: Wenn der Schlüssel bereits existiert, wird die entsprechende Entität aktualisiert; andernfalls wird eine neue Entität eingefügt. Dies macht <code translate="no">upsert</code> zur empfohlenen Methode für die Verwaltung von Daten, wenn Sie nicht sicher sind, ob eine Entität bereits vorhanden ist, oder wenn Sie die Erstellung doppelter Einträge vermeiden müssen.</p>
 <div class="alert note">
-<p>Wenn Sie neue Felder dynamisch hinzufügen, nachdem die Sammlung erstellt wurde, und Sie beim Upserting von Entitäten keine Werte für diese Felder angeben, füllt Milvus sie automatisch entweder mit ihren definierten Standardwerten oder mit NULL, wenn keine Standardwerte festgelegt sind. Details finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>
+<p>Wenn Sie neue Felder dynamisch hinzufügen, nachdem die Sammlung erstellt wurde, und Sie beim Einfügen von Entitäten keine Werte für diese Felder angeben, werden sie von Milvus automatisch entweder mit den definierten Standardwerten oder mit NULL gefüllt, wenn keine Standardwerte festgelegt sind. Details finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In diesem Abschnitt werden Sie Entitäten in eine Sammlung einfügen, die mit der Schnelleinrichtung erstellt wurde. Eine auf diese Weise erstellte Sammlung hat nur zwei Felder, nämlich <strong>id</strong> und <strong>vector</strong>. Außerdem ist in dieser Collection das dynamische Feld aktiviert, so dass die Entities im Beispielcode ein Feld namens <strong>color</strong> enthalten, das nicht im Schema definiert ist.</p>
+    </button></h2><p>In diesem Abschnitt fügen Sie Entitäten in eine Sammlung ein, die mit der Schnelleinstellungsmethode erstellt wurde. Eine auf diese Weise erstellte Sammlung hat nur zwei Felder, nämlich <strong>id</strong> und <strong>vector</strong>. Außerdem ist in dieser Collection das dynamische Feld aktiviert, so dass die Entities im Beispielcode ein Feld namens <strong>color</strong> enthalten, das nicht im Schema definiert ist.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -262,7 +262,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-Entities-in-a-Partition" class="common-anchor-header">Upsert Entities in eine Partition<button data-href="#Upsert-Entities-in-a-Partition" class="anchor-icon" translate="no">
+<h2 id="Upsert-Entities-in-a-Partition" class="common-anchor-header">Einfügen von Entitäten in eine Partition<button data-href="#Upsert-Entities-in-a-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

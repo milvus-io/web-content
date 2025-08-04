@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>Hugging Face<a href="https://huggingface.co/docs/text-embeddings-inference/en/index">文本嵌入推理（TEI）</a>是专为文本嵌入模型设计的高性能推理服务器。本指南介绍了如何将 Hugging Face TEI 与 Milvus 结合使用，以高效生成文本嵌入。</p>
-<p>TEI 可与 Hugging Face Hub 的许多文本嵌入模型配合使用，包括</p>
+<p>TEI 可与 Hugging Face 中枢的许多文本嵌入模型配合使用，包括</p>
 <ul>
 <li><p>BAAI/bge-* 系列</p></li>
 <li><p>Sentence-transformers/* 系列</p></li>
@@ -51,7 +51,7 @@ beta: Milvus 2.6.x
     </button></h2><p>在为 Milvus 配置 TEI 功能之前，您需要有一个正在运行的 TEI 服务。Milvus 支持两种 TEI 部署方法：</p>
 <h3 id="Standard-deployment-external" class="common-anchor-header">标准部署（外部）</h3><p>您可以使用来自 Hugging Face 的官方方法，将 TEI 作为独立服务进行部署。这种方法为您的 TEI 服务提供了最大的灵活性和控制权。</p>
 <p>有关使用 Docker 或其他方法部署 TEI 的详细说明，请参阅<a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">Hugging Face Text Embeddings Inference 官方文档</a>。</p>
-<p>部署后，请记下您的 TEI 服务端点（如<code translate="no">http://localhost:8080</code> ），因为<a href="/docs/zh/hugging-face-tei.md#Use-embedding-function-">在 Milvus 中使用 TEI 功能</a>时会用到它。</p>
+<p>部署完成后，请记下您的 TEI 服务端点（如<code translate="no">http://localhost:8080</code> ），因为<a href="/docs/zh/hugging-face-tei.md#Use-embedding-function-">在 Milvus 中使用 TEI 功能</a>时会用到它。</p>
 <h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm 图表部署（已集成）</h3><p>对于 Kubernetes 环境，Milvus 通过其 Helm 图表提供了集成部署选项。这通过与 Milvus 一起部署和配置 TEI 简化了流程。</p>
 <p>在 Milvus Helm 部署中启用 TEI：</p>
 <ol>
@@ -105,7 +105,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
         ></path>
       </svg>
     </button></h2><p>部署 TEI 服务后，您需要在定义 TEI Embeddings 功能时提供其端点。在大多数情况下，不需要额外的配置，因为 TEI 在 Milvus 中是默认启用的。</p>
-<p>不过，如果您的 TEI 服务是使用 API 密钥验证（<code translate="no">--api-key</code> 标志）部署的，则需要配置 Milvus 以使用此密钥：</p>
+<p>不过，如果您的 TEI 服务在部署时使用了 API 密钥验证 (<code translate="no">--api-key</code> 标志)，则需要配置 Milvus 以使用此密钥：</p>
 <ol>
 <li><p><strong>在<code translate="no">credential</code> 部分定义 API 密钥：</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
@@ -117,7 +117,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
-      <span class="hljs-attr">openai:</span>
+      <span class="hljs-attr">tei:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">tei_key</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enabled by default. no action required.</span>
 <button class="copy-code-btn"></button></code></pre></li>
@@ -140,11 +140,11 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
     </button></h2><p>配置 TEI 服务后，请按照以下步骤定义和使用嵌入函数。</p>
 <h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步骤 1：定义 Schema 字段</h3><p>要使用嵌入函数，请创建一个具有特定 Schema 的 Collections。此 Schema 必须至少包含三个必要字段：</p>
 <ul>
-<li><p>主字段，用于唯一标识 Collections 中的每个实体。</p></li>
+<li><p>唯一标识 Collections 中每个实体的主字段。</p></li>
 <li><p>标量字段，用于存储要嵌入的原始数据。</p></li>
 <li><p>一个向量字段，用于存储函数将为标量字段生成的向量嵌入。</p></li>
 </ul>
-<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense_vector&quot;</code> 用于存储将由函数模块生成的嵌入。切记设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
+<p>下面的示例定义了一个 Schema 模式，其中一个标量字段<code translate="no">&quot;document&quot;</code> 用于存储文本数据，一个向量字段<code translate="no">&quot;dense_vector&quot;</code> 用于存储将由函数模块生成的嵌入。切记要设置向量维数 (<code translate="no">dim</code>) 以匹配所选嵌入模型的输出。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType, CollectionSchema, FieldSchema
 
 <span class="hljs-comment"># Assume you have connected to Milvus</span>

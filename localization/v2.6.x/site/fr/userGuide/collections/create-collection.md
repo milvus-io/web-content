@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Une collection est une table bidimensionnelle avec des colonnes fixes et des lignes variantes. Chaque colonne représente un champ et chaque ligne une entité. Un schéma est nécessaire pour mettre en œuvre une telle gestion structurelle des données. Chaque entité à insérer doit répondre aux contraintes définies dans le schéma.</p>
-<p>Vous pouvez déterminer tous les aspects d'une collection, y compris son schéma, ses paramètres d'index, son type de métrique, et décider de la charger ou non lors de sa création afin de vous assurer que la collection répond pleinement à vos besoins.</p>
+<p>Vous pouvez déterminer tous les aspects d'une collection, y compris son schéma, ses paramètres d'index, son type de métrique, et décider de la charger ou non lors de sa création, afin de vous assurer que la collection répond pleinement à vos besoins.</p>
 <p>Pour créer une collection, vous devez</p>
 <ul>
 <li><p><a href="/docs/fr/create-collection.md#Create-Schema">Créer un schéma</a></p></li>
@@ -521,9 +521,13 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Vous pouvez définir les propriétés de la collection à créer afin de l'intégrer à votre service. Les propriétés applicables sont les suivantes.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Définir le nombre d'unités</h3><p>Les tessons sont des tranches horizontales d'une collection. Chaque shard correspond à un canal d'entrée de données. Chaque collection possède un shard par défaut. Lors de la création d'une collection, vous pouvez définir le nombre approprié d'unités en fonction du débit attendu et du volume des données à insérer dans la collection.</p>
-<p>Dans les cas les plus courants, envisagez d'augmenter le nombre de shards d'une unité chaque fois que le débit attendu augmente de 500 Mo/s ou que le volume de données à insérer augmente de 100 Go. Cette suggestion est basée sur notre propre expérience et peut ne pas être totalement adaptée à vos scénarios d'application. Vous pouvez adapter ce nombre à vos propres besoins ou simplement utiliser la valeur par défaut.</p>
-<p>L'extrait de code suivant montre comment définir le nombre de tessons lors de la création d'une collection.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Définir le nombre d'unités</h3><p>Les shards sont des tranches horizontales d'une collection, et chaque shard correspond à un canal d'entrée de données. Par défaut, chaque collection a un shard. Lors de la création d'une collection, vous pouvez spécifier le nombre d'unités afin de mieux répondre à votre volume de données et à votre charge de travail.</p>
+<p>En règle générale, il convient de tenir compte des éléments suivants lors de la définition du nombre de tessons :</p>
+<ul>
+<li><strong>La taille des données :</strong> Une pratique courante consiste à prévoir un groupe de stockage pour 200 millions d'entités. Vous pouvez également faire une estimation en fonction de la taille totale des données, par exemple en ajoutant une unité de stockage pour 100 Go de données que vous prévoyez d'insérer.</li>
+<li><strong>Utilisation des nœuds de flux :</strong> Si votre instance Milvus dispose de plusieurs nœuds de flux, il est recommandé d'utiliser plusieurs tiroirs. Cela garantit que la charge de travail d'insertion des données est répartie sur tous les nœuds de flux disponibles, ce qui évite que certains soient inactifs alors que d'autres sont surchargés.</li>
+</ul>
+<p>L'extrait de code suivant montre comment définir le numéro de dépôt lors de la création d'une collection.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
@@ -571,7 +575,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap" class="common-anchor-header">Activer mmap</h3><p>Milvus active mmap sur toutes les collections par défaut, ce qui permet à Milvus de mapper les données de champ brutes dans la mémoire au lieu de les charger complètement. Cela permet de réduire les empreintes mémoire et d'augmenter la capacité des collections. Pour plus de détails sur mmap, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p>
+<h3 id="Enable-mmap" class="common-anchor-header">Activer mmap</h3><p>Milvus active mmap sur toutes les collections par défaut, ce qui lui permet de mapper les données de champ brutes dans la mémoire au lieu de les charger complètement. Cela permet de réduire les empreintes mémoire et d'augmenter la capacité des collections. Pour plus de détails sur mmap, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#plaintext">texte brut</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap</span>

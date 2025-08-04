@@ -1124,7 +1124,7 @@ summary: Saiba como configurar o common para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Se verdadeiro, compactação de clusters e poda de segmentos no campo de chave de partição      </td>
+      <td>        Se for verdadeiro, compactação de agrupamentos e poda de segmentos no campo de chave de partição      </td>
       <td>false</td>
     </tr>
   </tbody>

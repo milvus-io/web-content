@@ -41,7 +41,13 @@ summary: >-
     </button></h2><p>In einer Sammlung sollte der Primärschlüssel jeder Entität global eindeutig sein. Wenn Sie das Primärfeld hinzufügen, müssen Sie seinen Datentyp explizit auf <strong>VARCHAR</strong> oder <strong>INT64</strong> einstellen. Die Einstellung des Datentyps auf <strong>INT64</strong> bedeutet, dass die Primärschlüssel eine ganze Zahl ähnlich wie <code translate="no">12345</code> sein sollten; die Einstellung des Datentyps auf <strong>VARCHAR</strong> bedeutet, dass die Primärschlüssel eine Zeichenkette ähnlich wie <code translate="no">my_entity_1234</code> sein sollten.</p>
 <p>Sie können auch <strong>AutoID</strong> aktivieren, damit Milvus automatisch Primärschlüssel für eingehende Entitäten zuweist. Sobald Sie <strong>AutoID</strong> in Ihrer Sammlung aktiviert haben, sollten Sie beim Einfügen von Entitäten keine Primärschlüssel verwenden.</p>
 <p>Das Primärfeld in einer Sammlung hat keinen Standardwert und kann nicht null sein.</p>
-<h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Int64-Primärschlüssel verwenden<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
+<div class="alert note">
+<ul>
+<li>Ein Standardvorgang <code translate="no">insert</code> mit einem Primärschlüssel, der bereits in der Sammlung vorhanden ist, überschreibt den alten Eintrag nicht. Stattdessen wird eine neue, separate Entität mit demselben Primärschlüssel erstellt. Dies kann zu unerwarteten Suchergebnissen und Datenredundanz führen.</li>
+<li>Wenn Ihr Anwendungsfall die Aktualisierung bestehender Daten beinhaltet oder Sie vermuten, dass die Daten, die Sie einfügen wollen, bereits existieren, sollten Sie unbedingt den Upsert-Vorgang verwenden. Die Upsert-Operation aktualisiert die Entität auf intelligente Weise, wenn der Primärschlüssel vorhanden ist, oder fügt einen neuen ein, wenn er nicht vorhanden ist. Weitere Einzelheiten finden Sie unter <a href="/docs/de/upsert-entities.md">Upsert Entitäten</a>.</li>
+</ul>
+</div>
+<h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Verwendung von Int64-Primärschlüsseln<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

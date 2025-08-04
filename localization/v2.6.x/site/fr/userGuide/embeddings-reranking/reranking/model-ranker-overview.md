@@ -75,7 +75,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Récupération des candidats</strong>: Le système identifie l'ensemble initial de documents candidats sur la base de la similarité vectorielle.</p></li>
 <li><p><strong>Évaluation du modèle</strong>: La fonction Model Ranker traite les paires requête-document :</p>
 <ul>
-<li><p>Envoie la requête originale et les documents candidats à un service de modèle externe.</p></li>
+<li><p>envoie la requête originale et les documents candidats à un service de modèle externe</p></li>
 <li><p>Le modèle linguistique évalue la pertinence sémantique entre la requête et chaque document.</p></li>
 <li><p>Chaque document reçoit un score de pertinence basé sur la compréhension sémantique.</p></li>
 </ul></li>
@@ -203,15 +203,21 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Oui</p></td>
+     <td><p>Dictionnaire contenant la configuration de la fonction de reclassement basée sur un modèle. Les paramètres disponibles (clés) varient en fonction du fournisseur (<code translate="no">tei</code> ou <code translate="no">vllm</code>). Se référer à <a href="/docs/fr/vllm-ranker.md">vLLM Ranker</a> ou <a href="/docs/fr/tei-ranker.md">TEI Ranker</a> pour plus de détails.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Doit avoir la valeur <code translate="no">"model"</code> pour permettre le reclassement des modèles.</p></td>
+     <td><p>Doit être défini sur <code translate="no">"model"</code> pour activer le reclassement du modèle.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Le fournisseur de services de modèles à utiliser pour le reclassement.</p></td>
+     <td><p>Le fournisseur de services de modèle à utiliser pour le reclassement.</p></td>
      <td><p><code translate="no">"tei"</code> ou <code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
@@ -242,7 +248,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de modèles peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>

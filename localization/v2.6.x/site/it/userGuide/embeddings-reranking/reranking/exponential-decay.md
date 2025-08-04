@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Timeline dei social media</p></td>
      <td><p>Feed di attività, aggiornamenti di stato</p></td>
-     <td><p>Enfatizza i contenuti freschi, ma permette di far emergere i contenuti virali più vecchi</p></td>
+     <td><p>Enfatizza i contenuti freschi, ma permette di far emergere quelli vecchi e virali</p></td>
    </tr>
    <tr>
      <td><p>Sistemi di notifica</p></td>
@@ -186,7 +186,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;publish_time&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Applica alla ricerca ibrida</h3><p>I ranker di decadimento possono essere applicati anche alle operazioni di ricerca ibrida che combinano più campi vettoriali:</p>

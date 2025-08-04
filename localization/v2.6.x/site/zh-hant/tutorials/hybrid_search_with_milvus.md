@@ -22,7 +22,7 @@ title: 使用 Milvus 進行混合搜尋
       </svg>
     </button></h1><p>如果您想體驗本教學的最終效果，可以直接到 https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>在本教程中，我們將示範如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>進行混合搜索。BGE-M3 模型可以將文字轉換成密集向量和稀疏向量。Milvus 支援在一個集合中同時儲存這兩種向量，允許進行混合搜尋，以提高搜尋結果的相關性。</p>
+<p>在本教程中，我們將示範如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>進行混合搜索。BGE-M3 模型可以將文字轉換成密集向量和稀疏向量。Milvus 支援在一個集合中同時儲存這兩種向量，允許混合搜尋以增強結果的相關性。</p>
 <p>Milvus 支援密集、稀疏和混合檢索方法：</p>
 <ul>
 <li>密集檢索：利用語意上下文來瞭解查詢背後的意義。</li>
@@ -74,7 +74,7 @@ Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00
 <ul>
 <li>將 uri 設定為本機檔案，例如 "./milvus.db" 是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
 <li>如果您有大規模的資料，例如超過一百萬個向量，您可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器的 uri，例如：http://localhost:19530。</li>
-<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整 uri 和 token，對應 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">雲端</a>服務，請調整 uri 和 token，它們對應於 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -287,7 +287,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'> 開始學習</span>機器人的最佳方式是什麼<span style='color:red'>？</span></p>
 <p>機器<span style='color:red'> 學習的</span>替代方法是什麼？</p>
 <p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在 Linux 中建立新終端和新 shell<span style='color:red'> ？</span></p>
-<p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在 Linux 終端建立新的 shell<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>使用 C<span style='color:red'> 程式</span>語言在新終端（Linux 終端）建立新 shell<span style='color:red'>？</span></p>
 <p>在海德拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
 <p>在海得拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
 <p><span style='color:red'> 開辦</span>機器人的最佳方式是什麼<span style='color:red'>？</span>哪種開發板最適合我<span style='color:red'> 開始</span>工作<span style='color:red'>？</span></p>

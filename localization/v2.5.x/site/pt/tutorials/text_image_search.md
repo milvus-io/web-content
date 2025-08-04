@@ -57,7 +57,7 @@ title: Pesquisa de texto para imagem com Milvus
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, poderá ter de <strong>reiniciar o tempo de execução</strong> (navegue até ao menu "Tempo de execução" na parte superior da interface e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
-<h3 id="Download-example-data" class="common-anchor-header">Descarregar dados de exemplo</h3><p>Iremos utilizar um subconjunto do conjunto de dados <a href="https://www.image-net.org">ImageNet</a> (100 classes, 10 imagens para cada classe) como imagens de exemplo. O comando seguinte descarrega os dados de exemplo e extrai-os para a pasta local <code translate="no">./images_folder</code>:</p>
+<h3 id="Download-example-data" class="common-anchor-header">Descarregar dados de exemplo</h3><p>Utilizaremos um subconjunto do conjunto de dados <a href="https://www.image-net.org">ImageNet</a> (100 classes, 10 imagens para cada classe) como imagens de exemplo. O comando seguinte descarrega os dados de exemplo e extrai-os para a pasta local <code translate="no">./images_folder</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q reverse_image_search.zip -d images_folder</span>
 <button class="copy-code-btn"></button></code></pre>

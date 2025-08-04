@@ -44,7 +44,7 @@ title: 使用 Helm 圖表升級 Milvus 單機版
 <li>Kubernetes 版本 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>自 Milvus Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為相依性。為了向下相容性，請升級您的 helm 到 v3.14 或更高版本，並確保在使用<code translate="no">helm upgrade</code> 時加入<code translate="no">--reset-then-reuse-values</code> 選項。</p>
+<p>自 Milvus Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為依賴。為了向下相容性，請升級您的 helm 至 v3.14 或更高版本，並確保在使用<code translate="no">helm upgrade</code> 時加入<code translate="no">--reset-then-reuse-values</code> 選項。</p>
 </div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">檢查 Milvus 版本<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -129,9 +129,9 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 2.2.3 起，您可以設定 Milvus 協調器工作在主動待命模式，並啟用它們的滾動升級功能，以便 Milvus 能在協調器升級期間回應傳入的請求。在之前的版本中，協調器需要在升級過程中移除然後再創建，這可能會導致服務出現一定的停機時間。</p>
+    </button></h2><p>自 Milvus 2.2.3 起，您可以設定 Milvus 協調器工作在主動待命模式，並啟用它們的滾動升級功能，以便 Milvus 可以在協調器升級期間回應傳入的請求。在之前的版本中，協調器需要在升級過程中移除然後再創建，這可能會導致服務出現一定的停機時間。</p>
 <p>滾動升級需要協調器在主動待命模式下工作。您可以使用我們提供的<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">腳本</a>，設定協調器在主動待命模式下工作，並開始滾動升級。</p>
-<p>基於 Kubernetes 提供的滾動更新功能，上述腳本會根據部署的依賴關係強制執行有序更新。此外，Milvus 實作了一套機制，以確保其元件在升級過程中與依賴元件的系統保持相容，大幅減少潛在的服務停機時間。</p>
+<p>基於 Kubernetes 提供的滾動更新功能，上述腳本會根據部署的依賴關係強制執行有序更新。此外，Milvus 實作了一套機制，以確保其元件在升級期間仍能與那些依賴它們的元件相容，大幅減少潛在的服務停機時間。</p>
 <p>該腳本只適用於與 Helm 一起安裝的 Milvus 的升級。下表列出了腳本中可用的命令旗標。</p>
 <table>
 <thead>
@@ -209,7 +209,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="4-Migrate-the-metadata" class="common-anchor-header">4.遷移元資料</h3><p>Milvus 2.2 的一個主要改變是段索引的 metadata 結構。因此，當您將 Milvus 從 v2.1.x 升級到 v2.2.0 時，您需要使用 Helm 來遷移 metadata。這裡有<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一個腳本</a>可以讓您安全地遷移 metadata。</p>
 <p>這個腳本只適用於安裝在 K8s 集群上的 Milvus。如果在過程中發生錯誤，請先用回滾操作回滾到之前的版本。</p>
-<p>下表列出了元資料遷移的操作。</p>
+<p>下表列出了您可以進行的元資料遷移操作。</p>
 <table>
 <thead>
 <tr><th>參數</th><th>說明</th><th>預設值</th><th>需要</th></tr>

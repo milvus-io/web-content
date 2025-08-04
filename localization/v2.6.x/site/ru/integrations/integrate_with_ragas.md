@@ -127,7 +127,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -296,10 +296,10 @@ df
   <tbody>
     <tr>
       <th>0</th>
-      <td>какие требования к аппаратному обеспечению...</td>
+      <td>какие требования к оборудованию...</td>
       <td>[Требования к аппаратному обеспечению\n\nСледующая специф...</td>
       <td>Спецификация требований к аппаратному обеспечению для бу...</td>
-      <td>Если вы хотите собрать Milvus и запустить его из источника...</td>
+      <td>Если вы хотите собрать Milvus и запустить его из источн...</td>
     </tr>
     <tr>
       <th>1</th>

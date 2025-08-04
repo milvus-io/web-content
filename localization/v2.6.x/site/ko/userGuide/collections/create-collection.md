@@ -519,8 +519,12 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>생성할 컬렉션의 속성을 설정하여 서비스에 적합하게 만들 수 있습니다. 적용 가능한 속성은 다음과 같습니다.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">샤드 번호 설정</h3><p>샤드는 컬렉션의 수평적 조각입니다. 각 샤드는 데이터 입력 채널에 해당합니다. 모든 컬렉션에는 기본적으로 샤드가 있습니다. 컬렉션을 만들 때 예상 처리량과 컬렉션에 삽입할 데이터의 양에 따라 적절한 샤드 수를 설정할 수 있습니다.</p>
-<p>일반적인 경우, 예상 처리량이 500MB/s 증가하거나 삽입할 데이터의 양이 100GB 증가할 때마다 샤드 수를 하나씩 늘리는 것을 고려하세요. 이 제안은 저희의 경험을 바탕으로 한 것이며, 여러분의 애플리케이션 시나리오에 완전히 적합하지 않을 수도 있습니다. 필요에 맞게 이 수치를 조정하거나 기본값을 사용할 수 있습니다.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">샤드 번호 설정</h3><p>샤드는 컬렉션의 수평적 조각으로, 각 샤드는 데이터 입력 채널에 해당합니다. 기본적으로 모든 컬렉션에는 하나의 샤드가 있습니다. 컬렉션을 만들 때 데이터 볼륨과 워크로드에 더 적합하도록 샤드 수를 지정할 수 있습니다.</p>
+<p>일반적인 가이드라인으로 샤드 수를 설정할 때 다음 사항을 고려하세요:</p>
+<ul>
+<li><strong>데이터 크기:</strong> 일반적으로 2억 개의 엔티티당 하나의 샤드를 사용하는 것이 일반적입니다. 예를 들어, 삽입하려는 데이터 100GB당 샤드 하나를 추가하는 등 총 데이터 크기를 기준으로 추정할 수도 있습니다.</li>
+<li><strong>스트림 노드 사용률:</strong> Milvus 인스턴스에 여러 개의 스트림 노드가 있는 경우, 여러 개의 샤드를 사용하는 것이 좋습니다. 이렇게 하면 데이터 삽입 워크로드가 사용 가능한 모든 스트림 노드에 분산되어 일부 노드가 유휴 상태가 되는 동안 다른 노드가 과부하되는 것을 방지할 수 있습니다.</li>
+</ul>
 <p>다음 코드 스니펫은 컬렉션을 만들 때 샤드 번호를 설정하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -733,4 +737,4 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>일관성 수준에 대한 자세한 내용은 <a href="/docs/ko/tune_consistency.md">일관성 수준을</a> 참조하세요.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">동적 필드 사용</h3><p>컬렉션의 동적 필드는 <strong>$meta라는</strong> 예약된 JSON(JavaScript 객체 표기법) 필드입니다. 이 필드를 활성화하면 Milvus는 각 엔티티에 포함된 스키마 정의되지 않은 모든 필드와 해당 값을 예약된 필드에 키-값 쌍으로 저장합니다.</p>
-<p>동적 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필</a>드를 참조하세요.</p>
+<p>동적 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>

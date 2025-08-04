@@ -23,7 +23,10 @@ title: 使用 Helm 圖表升級 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南描述如何使用 Milvus Helm 圖表升級你的 Milvus 集群。</p>
+    </button></h1><p>本指南描述如何使用 Milvus Helm 圖表升級您的 Milvus 集群。</p>
+<div class="alert note">
+<p>從 Milvus 2.5.x (或更早的版本) 升級到 2.6.0 涉及到重大的架構改變，使得這個升級是<strong>不可逆的</strong>。由於引入了新的元件 (例如 Woodpecker 和 Streaming Node) 以及移除某些元件，<strong>一旦升級完成，您就無法回滾到先前的版本</strong>。有關 2.6.0 引入的架構變更的詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">Milvus 架構概述</a>。</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +47,7 @@ title: 使用 Helm 圖表升級 Milvus 集群
 <li>Kubernetes 版本 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>自 Milvus Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為依賴。為了向下相容性，請升級您的 helm 到 v3.14 或更高版本，並確保在使用<code translate="no">helm upgrade</code> 時加入<code translate="no">--reset-then-reuse-values</code> 選項。</p>
+<p>自 Milvus-Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為相依性。為了向下相容性，請升級您的 helm 至 v3.14 或更高版本，並確保在使用<code translate="no">helm upgrade</code> 時加入<code translate="no">--reset-then-reuse-values</code> 選項。</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">檢查 Milvus Helm 海圖<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +111,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以為您的 Milvus 選擇升級路徑，如下所示：</p>
-<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.12。</div>
+<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.6.0。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.12。</p></li>
-<li><p>在從 Milvus v2.1.x 升級到 v2.5.12 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.6.0。</p></li>
+<li><p>在從 Milvus v2.1.x 升級到 v2.6.0 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">進行滾動升級<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,14 +148,14 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.12。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.12 -w &#x27;milvusdb/milvus:v2.5.12&#x27;
+<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.6.0。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0 -w &#x27;milvusdb/milvus:v2.6.0&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
 <li>腳本硬體編碼了部署的升級順序，無法變更。</li>
 <li>腳本使用<code translate="no">kubectl patch</code> 更新部署，並使用<code translate="no">kubectl rollout status</code> 觀察其狀態。</li>
-<li>腳本使用<code translate="no">kubectl patch</code> 將部署的<code translate="no">app.kubernetes.io/version</code> 標籤更新為指令中<code translate="no">-t</code> 旗標之後指定的標籤。</li>
+<li>腳本使用<code translate="no">kubectl patch</code> 更新部署的<code translate="no">app.kubernetes.io/version</code> 標籤，使其成為指令中<code translate="no">-t</code> 旗標之後指定的標籤。</li>
 </ol>
 </div>
 </div>
@@ -173,7 +176,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>要將 Milvus 從 v2.2.3 之前的次要版本升級到最新版本，請執行下列指令：</p>
 <pre><code translate="no" class="language-shell">helm repo update zilliztech
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.1.24 # use the helm chart version here
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=5.0.0 # use the helm chart version here
 <button class="copy-code-btn"></button></code></pre>
 <p>使用前面命令中的 Helm 圖表版本。有關如何取得 Helm 圖表版本的詳細資訊，請參閱<a href="#Check-the-Milvus-version">檢查 Milvus 版本</a>。</p>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">遷移元資料<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">

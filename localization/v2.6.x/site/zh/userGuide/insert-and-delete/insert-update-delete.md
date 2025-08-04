@@ -21,8 +21,13 @@ summary: Collections 中的实体是共享同一组字段的数据记录。每�
     </button></h1><p>Collections 中的实体是指共享同一组字段的数据记录。每条数据记录中的字段值构成一个实体。本页介绍如何在 Collections 中插入实体。</p>
 <div class="alert note">
 <p>如果在创建 Collections 后动态添加新字段，并且在插入实体时没有为这些字段指定值，Milvus 会自动用定义的默认值填充这些字段，如果没有设置默认值，则填充 NULL。有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>
+<div class="alert note">
+<ul>
+<li><p><strong>创建 Collections 后添加的字段</strong>：如果在创建后向 Collections 添加新字段，并且在插入时没有指定值，Milvus 会自动用定义的默认值填充它们，如果没有设置默认值，则填充 NULL。有关详情，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p></li>
+<li><p><strong>重复处理</strong>：标准<code translate="no">insert</code> 操作符不会检查主键是否重复。使用现有主键插入数据会创建具有相同键的新实体，从而导致数据重复和潜在的应用问题。要更新现有实体或避免重复，请使用 <strong><code translate="no">upsert</code></strong>操作符。有关详细信息，请参阅 "<a href="/docs/zh/upsert-entities.md">更新实体</a>"。</p></li>
+</ul>
 </div>
-<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">实体概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +61,7 @@ summary: Collections 中的实体是共享同一组字段的数据记录。每�
         ></path>
       </svg>
     </button></h2><p>在插入数据之前，需要根据 Schema 将数据组织到字典列表中，每个字典代表一个实体，并包含 Schema 中定义的所有字段。如果 Collection 启用了动态字段，每个字典还可以包含 Schema 中未定义的字段。</p>
-<p>本节将向以快速设置方式创建的 Collection 中插入实体。以这种方式创建的 Collection 只有两个字段，分别名为<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的实体包含一个名为<strong>color</strong>的字段，该字段在 Schema 中未定义。</p>
+<p>本节将向以快速设置方式创建的 Collection 中插入实体。以这种方式创建的 Collection 只有两个字段，分别名为<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的实体包含一个名为<strong>color</strong>的字段，该字段未在 Schema 中定义。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

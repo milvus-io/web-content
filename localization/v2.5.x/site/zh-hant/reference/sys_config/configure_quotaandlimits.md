@@ -504,7 +504,7 @@ summary: 瞭解如何為 Milvus 設定 quotaAndLimits。
     <tr>
       <td>
         <li>每秒與索引相關的最大請求數。</li>      
-        <li>將此項目設定為 10 表示 Milvus 每秒處理不超過 10 個分割區相關的請求，包括索引建立請求和索引丟棄請求。</li>      
+        <li>將此項目設定為 10 表示 Milvus 每秒處理不超過 10 個分割區相關的請求，包括索引建立請求和索引刪除請求。</li>      
         <li>若要使用此設定，請同時設定 quotaAndLimits.indexRate.enabled 為 true。</li>      </td>
       <td>-1</td>
     </tr>
@@ -1551,7 +1551,7 @@ summary: 瞭解如何為 Milvus 設定 quotaAndLimits。
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false 表示允許 dml 請求 (除了某些特定的條件，例如</li>      
+        <li>forceDeny false 表示允許 dml 請求 (除了某些特定情況，例如</li>      
         <li>特定條件，例如記憶體節點到水標記），true 表示永遠拒絕所有 dml 請求。</li>      </td>
       <td>false</td>
     </tr>

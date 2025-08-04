@@ -41,7 +41,7 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
 <li>安装前<a href="/docs/zh/v2.5.x/prerequisite-gpu.md">请检查硬件和软件要求</a>。</li>
 </ul>
 <div class="alert note">
-<p>如果在拉动映像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
+<p>如果在拉动映像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">安装 Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -149,7 +149,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 启动并运行后，可以通过修改<code translate="no">milvus.yaml</code> 文件中的<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 设置来定制内存池。</p>
+    </button></h2><p>Milvus 启动并运行后，您可以通过修改<code translate="no">milvus.yaml</code> 文件中的<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 设置来定制内存池。</p>
 <div class="alert note">
 <p><code translate="no">milvus.yaml</code> 文件位于 Milvus 容器内的<code translate="no">/milvus/configs/</code> 目录中。</p>
 </div>

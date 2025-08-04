@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "Хранение/вычисления",
-            "id": "four_layers.md",
+            "label": "Основные компоненты",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Основные компоненты",
-            "id": "main_components.md",
+            "label": "Потоковая служба",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -279,21 +279,15 @@
         "children": []
       },
       {
-        "label": "Уровень согласованности",
-        "id": "tune_consistency.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "Реплика в памяти",
         "id": "replica.md",
-        "order": 9,
+        "order": 8,
         "children": []
       },
       {
         "label": "Терминология",
         "id": "glossary.md",
-        "order": 10,
+        "order": 9,
         "children": []
       }
     ]
@@ -352,21 +346,27 @@
             "children": []
           },
           {
+            "label": "Установите уровень последовательности",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
             "label": "Управление разделами",
             "id": "manage-partitions.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Управление псевдонимами",
             "id": "manage-aliases.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Сбор капель",
             "id": "drop-collection.md",
-            "order": 9,
+            "order": 10,
             "children": []
           }
         ]
@@ -712,6 +712,12 @@
                 "id": "diskann.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "SCANN",
+                "id": "scann.md",
+                "order": 10,
+                "children": []
               }
             ]
           },
@@ -731,6 +737,12 @@
                 "label": "BIN_FLAT",
                 "id": "bin-flat.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -883,6 +895,12 @@
                 "label": "Операторы массива",
                 "id": "array-operators.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Случайная выборка",
+                "id": "random-sampling.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -1084,6 +1102,26 @@
             ]
           }
         ]
+      },
+      {
+        "label": "Оптимизация хранения",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Используйте mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Уплотнение кластеров",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1256,7 +1294,7 @@
             "children": []
           },
           {
-            "label": "Limit Collection Counts",
+            "label": "Предельные показатели сбора",
             "id": "limit_collection_counts.md",
             "order": 2,
             "children": []
@@ -1374,15 +1412,21 @@
             "children": []
           },
           {
+            "label": "Масштаб Автономный",
+            "id": "scale-standalone.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Масштаб с HPA",
             "id": "hpa.md",
-            "order": 1,
+            "order": 2,
             "children": []
           },
           {
             "label": "Зависимости от масштаба",
             "id": "scale-dependencies.md",
-            "order": 2,
+            "order": 3,
             "children": []
           }
         ]
@@ -1503,26 +1547,6 @@
             "label": "Управление группами ресурсов",
             "id": "resource_group.md",
             "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Оптимизация хранения",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Используйте mmap",
-            "id": "mmap.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Уплотнение кластеров",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -1797,7 +1821,7 @@
         "label": "Модели",
         "id": "models",
         "isMenu": true,
-        "order": 4,
+        "order": 9,
         "children": [
           {
             "label": "Встраивания",
@@ -1936,6 +1960,12 @@
             ]
           }
         ]
+      },
+      {
+        "label": "SDK Code Helper (MCP)",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 10,
+        "children": []
       }
     ]
   },
@@ -1983,6 +2013,12 @@
                 "label": "Полнотекстовый поиск",
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Асинхронный поиск",
+                "id": "langchain_milvus_async.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -2285,12 +2321,6 @@
             "label": "Фейерверк",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
-            "children": []
-          },
-          {
-            "label": "Лептон",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
             "children": []
           },
           {

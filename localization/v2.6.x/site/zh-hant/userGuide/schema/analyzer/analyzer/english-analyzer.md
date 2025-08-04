@@ -37,7 +37,7 @@ summary: Milvus 中的英文分析器專為處理英文文字而設計，可應�
     </button></h2><p><code translate="no">english</code> 分析器使用下列元件：</p>
 <ul>
 <li><p><strong>標記器</strong>：使用<code translate="no">standard</code><a href="/docs/zh-hant/standard-tokenizer.md"> tokenizer</a>將文字分割為離散的單字單位。</p></li>
-<li><p><strong>過濾器</strong>：包含多種篩選器，可進行全面的文字處理：</p>
+<li><p><strong>過濾器</strong>：包含多種篩選器，以進行全面的文字處理：</p>
 <ul>
 <li><p><code translate="no">lowercase</code>:將所有標記轉換為小寫，以便進行不區分大小寫的搜尋。</p></li>
 <li><p><code translate="no">stemmer</code>:將字詞縮減為字根形式，以支援更廣泛的匹配 (例如，「running」變為「run」)。</p></li>
@@ -122,7 +122,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要將<code translate="no">english</code> 分析器套用至欄位，只要在<code translate="no">analyzer_params</code> 中將<code translate="no">type</code> 設定為<code translate="no">english</code> ，並視需要加入可選參數即可。</p>
+    </button></h2><p>要將<code translate="no">english</code> 分析器套用至欄位，只要在<code translate="no">analyzer_params</code> 中將<code translate="no">type</code> 設定為<code translate="no">english</code> ，並視需要加入可選參數即可。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -263,7 +263,33 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus is a vector database built for scale!&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -206,11 +206,12 @@ vector_store.add_documents(documents=documents, ids=uuids)
         ></path>
       </svg>
     </button></h2><p>Setelah penyimpanan vektor anda dibuat dan dokumen-dokumen yang relevan telah ditambahkan, kemungkinan besar anda ingin menanyakannya selama menjalankan rantai atau agen anda.</p>
-<h3 id="Query-directly" class="common-anchor-header">Menanyakan secara langsung</h3><h4 id="Similarity-search" class="common-anchor-header">Pencarian kemiripan</h4><p>Melakukan pencarian kemiripan sederhana dengan pemfilteran pada metadata dapat dilakukan sebagai berikut:</p>
+<h3 id="Query-directly" class="common-anchor-header">Menanyakan secara langsung</h3><h4 id="Similarity-search" class="common-anchor-header">Pencarian kesamaan</h4><p>Melakukan pencarian kemiripan sederhana dengan pemfilteran pada metadata dapat dilakukan sebagai berikut:</p>
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search(
     <span class="hljs-string">&quot;LangChain provides abstractions to make working with LLMs easy&quot;</span>,
     k=<span class="hljs-number">2</span>,
     expr=<span class="hljs-string">&#x27;source == &quot;tweet&quot;&#x27;</span>,
+    <span class="hljs-comment"># param=...  # Search params for the index type</span>
 )
 <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
@@ -265,7 +266,7 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
-    drop_old=<span class="hljs-literal">False</span>,
+    <span class="hljs-comment"># drop_old=True,</span>
     partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
 )
 <button class="copy-code-btn"></button></code></pre>

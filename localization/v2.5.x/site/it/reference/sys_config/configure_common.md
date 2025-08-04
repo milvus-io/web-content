@@ -513,7 +513,7 @@ summary: Imparare a configurare i comuni per Milvus.
   <tbody>
     <tr>
       <td>        Privilegi di lettura a livello di cluster      </td>
-      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+      <td>ListDatabase,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
     </tr>
   </tbody>
 </table>
@@ -802,7 +802,7 @@ summary: Imparare a configurare i comuni per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        se raccogliere le statistiche per i blocchi delle metriche      </td>
+      <td>        se raccogliere statistiche per i blocchi delle metriche      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -831,7 +831,7 @@ summary: Imparare a configurare i comuni per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        millisecondi minimi per la durata della stampa nel livello Info    </td>
+      <td>        millisecondi minimi per la durata della stampa nel livello info    </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -1008,7 +1008,7 @@ summary: Imparare a configurare i comuni per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Tipo di filtro bloom, supporta BasicBloomFilter e BlockedBloomFilter      </td>
+      <td>        tipo di filtro bloom, supporta BasicBloomFilter e BlockedBloomFilter      </td>
       <td>FiltroBloomBloomBloomBloomBloomBloomBloomBloomBloomFilter</td>
     </tr>
   </tbody>
@@ -1124,7 +1124,7 @@ summary: Imparare a configurare i comuni per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        se true, esegue la compattazione del clustering e il prune dei segmenti sul campo della chiave di partizione      </td>
+      <td>        se true, esegue la compattazione del clustering e il potenziamento dei segmenti sul campo chiave della partizione      </td>
       <td>falso</td>
     </tr>
   </tbody>

@@ -20,11 +20,11 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>テキスト処理において、<strong>アナライザーは</strong>生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。アナライザーは通常、<strong>トークナイザーと</strong> <strong>フィルターという</strong>2つのコア要素で構成される。これらは共に入力テキストをトークンに変換し、トークンを洗練させ、効率的なインデックス作成と検索に備えます。</p>
-<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">Text Match</a>または<a href="/docs/ja/full-text-search.md">Full Text Search</a> を参照してください。</p>
+<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/full-text-search.md">全文検索</a>、<a href="/docs/ja/phrase-match.md">フレーズ一致</a>、または<a href="/docs/ja/keyword-match.md">テキスト一致を</a>参照してください。</p>
 <div class="alert note">
-<p>アナライザーの使用は、パフォーマンスに影響する場合があります：</p>
+<p>アナライザーの使用はパフォーマンスに影響する場合があります：</p>
 <ul>
-<li><p><strong>全文検索：</strong>全文検索：全文検索の場合、<strong>DataNodeと</strong> <strong>QueryNode</strong>チャネルはトークン化の完了を待つ必要があるため、データの消費が遅くなります。その結果、新しく取り込まれたデータが検索に利用できるようになるまでに時間がかかる。</p></li>
+<li><p><strong>全文検索：</strong>全文検索：全文検索では、トークン化の完了を待つ必要があるため、<strong>DataNodeと</strong> <strong>QueryNode</strong>チャネルはデータをより遅く消費します。その結果、新しく取り込まれたデータが検索に利用できるようになるまでに時間がかかる。</p></li>
 <li><p><strong>キーワードマッチ：</strong>キーワードマッチの場合、インデックスを構築する前にトークン化が完了する必要があるため、インデックス作成も遅くなります。</p></li>
 </ul>
 </div>
@@ -77,9 +77,12 @@ summary: >-
 <li><p><strong>カスタムアナライザー</strong>：より高度な要件に対応するカスタム・アナライザでは、トークナイザとゼロ個以上のフィルタの両方を指定することで、独自の設定を定義できます。このレベルのカスタマイズは、テキスト処理を正確に制御する必要がある特殊なユースケースで特に役立ちます。</p></li>
 </ul>
 <div class="alert note">
-<p>コレクション作成時にアナライザ設定を省略した場合、Milvusはデフォルトですべてのテキスト処理に<code translate="no">standard</code> アナライザを使用します。詳細については、「<a href="/docs/ja/standard-analyzer.md">標準</a>」を参照してください。</p>
+<ul>
+<li>コレクション作成時にアナライザ設定を省略した場合、Milvusはデフォルトですべてのテキスト処理に<code translate="no">standard</code> アナライザを使用します。詳細については、<a href="/docs/ja/standard-analyzer.md">標準アナライザを</a>参照してください。</li>
+<li>検索とクエリのパフォーマンスを最適化するには、テキストデータの言語に合ったアナライザを選択してください。たとえば、<code translate="no">standard</code> アナライザは多機能ですが、中国語、日本語、韓国語など、独特の文法構造を持つ言語には最適でない場合があります。そのような場合は、次のような言語固有の解析器を使用します。 <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>のような言語固有の解析器を使うか、特殊なトークナイザーを備えたカスタム解析器（たとえば <a href="/docs/ja/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a>など）やフィルタを備えたカスタム解析器を使用することを強くお勧めします。</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">内蔵アナライザ</h3><p>Milvusのビルトインアナライザは、特定のトークナイザやフィルタがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトインアナライザは、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">ビルトイン分析器</h3><p>Milvusのビルトインアナライザーには、特定のトークナイザーとフィルターがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトイン分析器は、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
 <p>たとえば、<code translate="no">standard</code> 組み込みアナライザを使用するには、<code translate="no">standard</code> という名前を<code translate="no">type</code> と指定し、オプションで<code translate="no">stop_words</code> など、このアナライザ・タイプに固有の追加設定を含めるだけです：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -753,3 +756,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>アナライザーを設定した後、Milvusが提供するテキスト検索機能と統合することができます。詳細はこちら：</p>
+<ul>
+<li><p><a href="/docs/ja/full-text-search.md">全文検索</a></p></li>
+<li><p><a href="/docs/ja/keyword-match.md">テキストマッチ</a></p></li>
+<li><p><a href="/docs/ja/phrase-match.md">フレーズマッチ</a></p></li>
+</ul>

@@ -41,6 +41,12 @@ summary: >-
     </button></h2><p>Dans une collection, la clé primaire de chaque entité doit être globalement unique. Lors de l'ajout du champ primaire, vous devez explicitement définir son type de données sur <strong>VARCHAR</strong> ou <strong>INT64</strong>. En définissant son type de données sur <strong>INT64</strong>, vous indiquez que les clés primaires doivent être un nombre entier similaire à <code translate="no">12345</code>; En définissant son type de données sur <strong>VARCHAR</strong>, vous indiquez que les clés primaires doivent être une chaîne de caractères similaire à <code translate="no">my_entity_1234</code>.</p>
 <p>Vous pouvez également activer <strong>AutoID</strong> pour que Milvus alloue automatiquement des clés primaires aux entités entrantes. Une fois que vous avez activé <strong>AutoID</strong> dans votre collection, n'incluez pas de clés primaires lors de l'insertion d'entités.</p>
 <p>Le champ primaire d'une collection n'a pas de valeur par défaut et ne peut pas être nul.</p>
+<div class="alert note">
+<ul>
+<li>Une opération standard <code translate="no">insert</code> avec une clé primaire qui existe déjà dans la collection n'écrase pas l'ancienne entrée. Au lieu de cela, elle créera une nouvelle entité distincte avec la même clé primaire. Cela peut entraîner des résultats de recherche inattendus et une redondance des données.</li>
+<li>Si votre cas d'utilisation implique la mise à jour de données existantes ou si vous soupçonnez que les données que vous insérez existent déjà, il est fortement recommandé d'utiliser l'opération upsert. L'opération upsert mettra intelligemment à jour l'entité si la clé primaire existe, ou en insérera une nouvelle si ce n'est pas le cas. Pour plus de détails, reportez-vous à l'<a href="/docs/fr/upsert-entities.md">opération Upsert Entities</a>.</li>
+</ul>
+</div>
 <h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Utiliser des clés primaires Int64<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

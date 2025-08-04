@@ -39,7 +39,7 @@ title: Настройка Milvus с помощью Helm Charts
         ></path>
       </svg>
     </button></h2><p>Вы можете настроить Milvus с помощью файла конфигурации <code translate="no">values.yaml</code>.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">Загрузить файл конфигурации</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Загрузите файл</a> <code translate="no">values.yaml</code> напрямую или с помощью следующей команды.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">Загрузить файл конфигурации</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Загрузите файл</a> <code translate="no">values.yaml</code> напрямую или с помощью следующей команды.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Изменение файла конфигурации</h3><p>Настройте экземпляр Milvus в соответствии с вашими сценариями применения, изменив соответствующие параметры в файле <code translate="no">values.yaml</code>.</p>

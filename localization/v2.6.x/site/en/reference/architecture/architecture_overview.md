@@ -89,8 +89,8 @@ title: Milvus Architecture Overview
 <li><strong>Historical Data Management</strong>: Distributes offline tasks such as compaction and index-building to Data Nodes, and manages the topology of segments and data views.</li>
 </ul>
 <h3 id="Layer-3-Worker-Nodes" class="common-anchor-header">Layer 3: Worker Nodes</h3><p>The arms and legs. Worker nodes are dumb executors that follow instructions from the coordinator. Worker nodes are stateless thanks to separation of storage and computation, and can facilitate system scale-out and disaster recovery when deployed on Kubernetes. There are three types of worker nodes:</p>
-<h3 id="Streaming-node" class="common-anchor-header">Streaming node</h3><p>Streaming node serves as the shard-level "mini-brain", providing shard-level consistency guarantees and fault recovery based on underlying WAL Storage. Meanwhile, Streaming Node is also responsible for growing data querying and generating query plans. Additionally, it also handles the conversion of growing data into sealed(historical) data.</p>
-<h3 id="Query-node" class="common-anchor-header">Query node</h3><p>Query node loads the historical data from object storage, and provides the Historical data querying.</p>
+<h3 id="Streaming-node" class="common-anchor-header">Streaming node</h3><p>Streaming Node serves as the shard-level "mini-brain", providing shard-level consistency guarantees and fault recovery based on underlying WAL Storage. Meanwhile, Streaming Node is also responsible for growing data querying and generating query plans. Additionally, it also handles the conversion of growing data into sealed (historical) data.</p>
+<h3 id="Query-node" class="common-anchor-header">Query node</h3><p>Query node loads the historical data from object storage, and provides the historical data querying.</p>
 <h3 id="Data-node" class="common-anchor-header">Data node</h3><p>Data node is responsible for offline processing of historical data, such as compaction and index building.</p>
 <h3 id="Layer-4-Storage" class="common-anchor-header">Layer 4: Storage</h3><p>Storage is the bone of the system, responsible for data persistence. It comprises meta storage, log broker, and object storage.</p>
 <h3 id="Meta-storage" class="common-anchor-header">Meta storage</h3><p>Meta storage stores snapshots of metadata such as collection schema, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check.</p>
@@ -127,10 +127,10 @@ title: Milvus Architecture Overview
 <h3 id="Example-Data-Flow-Search-Operation" class="common-anchor-header">Example Data Flow: Search Operation</h3><ol>
 <li>Client sends a search request via SDK/RESTful API</li>
 <li>Load Balancer routes request to available Proxy in Access Layer</li>
-<li>Proxy forwards request to Coordinator for routing decisions</li>
-<li>Coordinator directs request to appropriate Query Nodes in Batch Worker Node</li>
-<li>Query Nodes load sealed segments from Object Storage as needed</li>
-<li>Search results are returned through the same path back to client</li>
+<li>Proxy uses routing cache to determine target nodes; contacts Coordinator only if cache is unavailable</li>
+<li>Proxy forwards request to appropriate Streaming Nodes, which then coordinate with Query Nodes for sealed data search while executing growing data search locally</li>
+<li>Query Nodes load sealed segments from Object Storage as needed and perform segment-level search</li>
+<li>Search results undergo multi-level reduction: Query Nodes reduce results across multiple segments, Streaming Nodes reduce results from Query Nodes, and Proxy reduces results from all Streaming Nodes before returning to client</li>
 </ol>
 <h3 id="Example-Data-Flow-Data-Insertion" class="common-anchor-header">Example Data Flow: Data Insertion</h3><ol>
 <li>Client sends an insert request with vector data</li>
@@ -138,7 +138,8 @@ title: Milvus Architecture Overview
 <li>Streaming Node logs operation to WAL Storage for durability</li>
 <li>Data is processed in real-time and made available for queries</li>
 <li>When segments reach capacity, Streaming Node triggers conversion to sealed segments</li>
-<li>Data Node handles compaction and index building, storing results in Object Storage</li>
+<li>Data Node handles compaction and builds indexes on top of the sealed segments, storing results in Object Storage</li>
+<li>Query Nodes load the newly built indexes and replace the corresponding growing data</li>
 </ol>
 <h2 id="Whats-Next" class="common-anchor-header">What’s Next<button data-href="#Whats-Next" class="anchor-icon" translate="no">
       <svg translate="no"

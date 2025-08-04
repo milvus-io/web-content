@@ -371,7 +371,7 @@ summary: Pelajari cara mengonfigurasi mq untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        mendaftarkan batas waktu coba ulang dalam detik     </td>
+      <td>        daftarkan batas waktu coba ulang dalam detik     </td>
       <td>60</td>
     </tr>
   </tbody>

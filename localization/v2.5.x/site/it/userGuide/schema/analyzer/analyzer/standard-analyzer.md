@@ -7,7 +7,6 @@ summary: >-
   analizzatore. Utilizza una tokenizzazione basata sulla grammatica, che lo
   rende efficace per la maggior parte delle lingue.
 ---
-
 <h1 id="Standard-Analyzer" class="common-anchor-header">Analizzatore standard<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,7 +114,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>Un array contenente un elenco di stop words, che saranno rimosse dalla tokenizzazione. L'impostazione predefinita è <code translate="no">_english_</code>, un insieme di stop word inglesi comuni.</p></td>
+     <td><p>Un array contenente un elenco di stop word, che saranno rimosse dalla tokenizzazione. L'impostazione predefinita è <code translate="no">_english_</code>, un insieme di stop word inglesi comuni.</p></td>
    </tr>
 </table>
 <p>Esempio di configurazione di stop word personalizzate:</p>
@@ -194,7 +193,6 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

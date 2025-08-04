@@ -4,7 +4,7 @@ title: 지수 감쇠Compatible with Milvus 2.6.x
 summary: >-
   지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 만들어냅니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의
   중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색
-  가능하도록 유지합니다. 이 접근 방식은 근접성 또는 최신성을 우선순위로 두고 싶지만 더 먼 거리의 옵션을 완전히 배제하고 싶지 않을 때
+  가능하도록 유지합니다. 이 접근 방식은 근접성이나 최신성을 우선순위로 두고 싶지만 먼 거리의 항목을 완전히 배제하고 싶지 않을 때
   이상적입니다.
 beta: Milvus 2.6.x
 ---
@@ -107,7 +107,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (24시간): 관련성이 감쇠 값으로 떨어지는 시간 - 정확히 24시간이 지난 뉴스 기사는 관련성 점수가 절반(0.5)으로 떨어집니다.</p></li>
 </ul>
 <p>곡선에서 볼 수 있듯이 24시간이 지난 뉴스 기사는 관련성이 계속 감소하지만 0에 도달하지는 않습니다. 며칠 전의 기사라도 최소한의 관련성은 유지되므로 중요하지만 오래된 뉴스는 순위는 낮지만 여전히 피드에 표시될 수 있습니다.</p>
-<p>이 동작은 뉴스 관련성이 일반적으로 작동하는 방식을 모방한 것으로, 아주 최근의 기사가 강력하게 지배적이지만 사용자의 관심사와 매우 관련이 있는 경우 중요한 오래된 기사가 여전히 돌파구를 찾을 수 있습니다.</p>
+<p>이 동작은 뉴스 관련성이 일반적으로 작동하는 방식을 모방한 것으로, 아주 최근의 기사가 강력하게 지배적이지만 사용자의 관심사와 매우 관련이 있는 경우 중요한 오래된 기사가 여전히 돌파할 수 있습니다.</p>
 <h2 id="Formula" class="common-anchor-header">공식<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +173,7 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기</h3><p>감쇠 순위자를 정의한 후 <code translate="no">ranker</code> 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기</h3><p>디케이 랭커를 정의한 후 <code translate="no">ranker</code> 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -182,7 +182,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;publish_time&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 연산에도 디케이 레이커를 적용할 수 있습니다:</p>

@@ -123,7 +123,7 @@ title: Avaliação com Arize Pheonix
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -293,7 +293,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       <td>quais são as especificações dos requisitos de hardware...</td>
       <td>[Requisitos de hardware\n\nAs seguintes especificaç...</td>
       <td>A especificação dos requisitos de hardware para a...</td>
-      <td>Se queres construir o Milvus e correr a partir da fonte...</td>
+      <td>Se quiseres construir o Milvus e correr a partir da fonte...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -304,7 +304,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     </tr>
     <tr>
       <th>2</th>
-      <td>O que deve ser garantido antes de executar a cobertura de...</td>
+      <td>O que deve ser assegurado antes de executar a cobertura de...</td>
       <td>[Cobertura de código\n\nAntes de submeter o seu pull ...</td>
       <td>Antes de executar a cobertura de código, deve ser...</td>
       <td>Antes de executar a cobertura de código, deve ...</td>
@@ -331,7 +331,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <ul>
 <li><p><strong>Avaliação de alucinação</strong>: Determina se o conteúdo é factual ou alucinatório (informação não fundamentada no contexto), garantindo a integridade dos dados.</p>
 <ul>
-<li><strong>Explicação</strong> da<strong>alucinação</strong>: Explica porque é que uma resposta é factual ou não.</li>
+<li><strong>Explicação da alucinação</strong>: Explica porque é que uma resposta é factual ou não.</li>
 </ul></li>
 <li><p><strong>Avaliação de QA</strong>: Avalia a exatidão das respostas do modelo às consultas de entrada.</p>
 <ul>

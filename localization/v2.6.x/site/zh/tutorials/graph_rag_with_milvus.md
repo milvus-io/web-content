@@ -18,11 +18,15 @@ title: 用 Milvus 绘制 RAG 图
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>大型语言模型的广泛应用凸显了提高其响应准确性和相关性的重要性。检索增强生成（RAG）通过外部知识库来增强模型，提供更多上下文信息，缓解幻觉和知识不足等问题。然而，仅仅依靠简单的 RAG 范式有其局限性，尤其是在处理复杂的实体关系和多跳问题时，模型往往难以提供准确的答案。</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>大型语言模型的广泛应用凸显了提高其响应准确性和相关性的重要性。检索增强生成（RAG）利用外部知识库增强了模型，提供了更多上下文信息，缓解了幻觉和知识不足等问题。然而，仅仅依靠简单的 RAG 范式有其局限性，尤其是在处理复杂的实体关系和多跳问题时，模型往往难以提供准确的答案。</p>
 <p>将知识图谱（KG）引入 RAG 系统提供了一种新的解决方案。知识图谱以结构化的方式呈现实体及其关系，提供更精确的检索信息，帮助 RAG 更好地处理复杂的问题解答任务。KG-RAG 仍处于早期阶段，对于如何从 KG 中有效检索实体及其关系，以及如何将向量相似性搜索与图结构相结合，目前还没有达成共识。</p>
-<p>在本笔记本中，我们介绍了一种简单但功能强大的方法，可大大提高该场景的性能。它是一种简单的 RAG 范式，先进行多向检索，然后重新排序，但它在逻辑上实现了 Graph RAG，并在处理多跳问题时实现了最先进的性能。让我们看看它是如何实现的。</p>
+<p>在本笔记本中，我们介绍了一种简单但功能强大的方法，可大大提高该场景的性能。它是一种简单的 RAG 范式，先进行多向检索，然后重新排序，但它从逻辑上实现了 Graph RAG，并在处理多跳问题时达到了最先进的性能。让我们看看它是如何实现的。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
@@ -202,7 +206,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -506,4 +510,4 @@ Answer from naive RAG: I don't know. The retrieved context does not provide info
 
 Answer from our method: The son of Euler's teacher, Daniel Bernoulli, made major contributions to fluid dynamics, probability, and statistics. He is most famous for Bernoulli’s principle, which describes the behavior of fluid flow and is fundamental to the understanding of aerodynamics.
 </code></pre>
-<p>我们可以看到，从幼稚 RAG 方法中检索出的段落遗漏了一个地面实况段落，从而导致了错误的答案。 而从我们的方法中检索出的段落是正确的，这有助于得到问题的准确答案。</p>
+<p>正如我们所看到的，天真 RAG 方法检索出的段落遗漏了一个地面实况段落，导致答案错误。 而我们的方法检索出的段落是正确的，有助于获得问题的准确答案。</p>

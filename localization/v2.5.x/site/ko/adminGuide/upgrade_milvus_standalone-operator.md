@@ -47,7 +47,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <p>Milvus 운영자를 최신 버전으로 업그레이드한 후에는 다음과 같은 옵션을 선택할 수 있습니다:</p>
 <ul>
 <li>Milvus를 v2.2.3 이상 릴리스에서 2.5.13으로 업그레이드하려면 <a href="#Conduct-a-rolling-upgrade">롤링 업그레이드를 수행하면</a> 됩니다.</li>
-<li>v2.2.3 이전 마이너 릴리스에서 2.5.13으로 업그레이드하려면 <a href="#Upgrade-Milvus-by-changing-its-image">이미지 버전을 변경하여 Mil</a>vus를 업그레이드하는 것이 좋습니다.</li>
+<li>v2.2.3 이전 마이너 릴리스에서 2.5.13으로 업그레이드하려면 <a href="#Upgrade-Milvus-by-changing-its-image">이미지 버전을 변경하여 Milvus를 업그레이드하는</a> 것이 좋습니다.</li>
 <li>Milvus를 v2.1.x에서 2.5.13으로 업그레이드하려면 실제 업그레이드 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</li>
 </ul>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">롤링 업그레이드 수행<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">

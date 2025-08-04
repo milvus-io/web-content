@@ -5,7 +5,6 @@ related_key: configure
 summary: Configurar Milvus con Helm Charts.
 title: Configurar Milvus con Helm Charts
 ---
-
 <h1 id="Configure-Milvus-with-Helm-Charts" class="common-anchor-header">Configurar Milvus con Helm Charts<button data-href="#Configure-Milvus-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +40,7 @@ En la versión actual, todos los parámetros tienen efecto sólo después de rei
       </svg>
     </button></h2><p>Puede configurar Milvus con un archivo de configuración <code translate="no">values.yaml</code>.</p>
 <h3 id="Download-a-configuration-file" class="common-anchor-header">Descargar un archivo de configuración</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Descargue</a> <code translate="no">values.yaml</code> directamente o con el siguiente comando.</p>
-<pre><code translate="no">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Modificar el fichero de configuración</h3><p>Configure su instancia de Milvus para adaptarla a sus escenarios de aplicación ajustando los parámetros correspondientes en <code translate="no">values.yaml</code>.</p>
 <p>Específicamente, busque <code translate="no">extraConfigFiles</code> en <code translate="no">values.yaml</code> y ponga sus configuraciones en esta sección como sigue:</p>
@@ -49,14 +48,14 @@ En la versión actual, todos los parámetros tienen efecto sólo después de rei
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
 <span class="hljs-comment"># Please follow the config structure in the milvus.yaml</span>
 <span class="hljs-comment"># at https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># Note: this config will be the top priority which will override the config</span>
+<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> this config will be the top priority which will override the config</span>
 <span class="hljs-comment"># in the image and helm chart.</span>
-extraConfigFiles:
-  user.yaml: |+
-    <span class="hljs-comment">#    For example to set the graceful time for query nodes</span>
-    <span class="hljs-comment">#    queryNodes:</span>
-    <span class="hljs-comment">#      gracefulTime: 10</span>
-<button class="copy-code-btn"></button></code></pre>
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    #    For example to set the graceful time for query nodes
+    #    queryNodes:
+    #      gracefulTime: 10
+</span><button class="copy-code-btn"></button></code></pre>
 <p>Consulte los siguientes enlaces para obtener más información sobre cada parámetro.</p>
 <p>Ordenados por:</p>
 <div class="filter">
@@ -156,7 +155,7 @@ extraConfigFiles:
     </td>
   </tr>
   <tr>
-    <td>Cuota y Límites</td>
+    <td>Cuota y límites</td>
     <td>
         <ul>
             <li><a href="/docs/es/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
@@ -198,7 +197,7 @@ extraConfigFiles:
 </div>
 <p>Para otros parámetros específicos de la instalación de Kubernetes, consulte <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Configuración de Milvus Helm Chart</a>.</p>
 <h3 id="Start-Milvus" class="common-anchor-header">Iniciar Milvus</h3><p>Una vez que haya terminado de modificar el archivo de configuración, puede iniciar Milvus con el archivo.</p>
-<pre><code translate="no">$ helm upgrade my-release milvus/milvus -f values.yaml
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">Configurar Milvus a través de la línea de comandos<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,11 +216,11 @@ extraConfigFiles:
       </svg>
     </button></h2><p>Alternativamente, puede actualizar las configuraciones de Milvus directamente con el comando Helm.</p>
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">Compruebe los parámetros configurables</h3><p>Antes de actualizar, puede comprobar los parámetros configurables con los gráficos de Helm.</p>
-<pre><code translate="no">$ helm show values milvus/milvus
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Start-Milvus" class="common-anchor-header">Iniciar Milvus</h3><p>Configure e inicie Milvus añadiendo <code translate="no">--values</code> o <code translate="no">--set</code> en el comando para la actualización.</p>
-<pre><code translate="no"><span class="hljs-comment"># For instance, upgrade the Milvus cluster with compaction disabled</span>
-$ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span>
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

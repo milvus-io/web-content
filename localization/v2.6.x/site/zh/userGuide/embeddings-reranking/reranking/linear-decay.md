@@ -92,14 +92,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>线性衰减是指以恒定的速度直线下降，直至降到零。这种模式出现在许多日常场景中，如倒计时器、库存耗尽和截止日期临近，在这些场景中，相关性有一个明确的到期点。</p>
+    </button></h2><p>线性衰减是指以恒定的速度直线下降，直至降到零。这种模式出现在许多日常场景中，如倒计时器、库存耗尽以及相关性有明确到期点的截止日期临近。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
    </span> <span class="img-wrapper"> <span>线性衰减</span> </span></p>
 <p>上图显示了线性衰减如何影响票务平台上的活动列表：</p>
 <ul>
-<li><p><code translate="no">origin</code> (当前日期）：当前时刻，相关性达到最大值 (1.0)。</p></li>
+<li><p><code translate="no">origin</code> (当前日期）：当前时刻，相关性达到最大值（1.0）。</p></li>
 <li><p><code translate="no">offset</code> (1天）：即时事件窗口"--所有在第二天内发生的事件都能保持满分相关性分数（1.0），确保即将发生的事件不会因为微小的时间差而受到影响。</p></li>
 <li><p><code translate="no">decay</code> (0.5):尺度距离得分--该参数控制相关性下降的速度。</p></li>
 <li><p><code translate="no">scale</code> (10天）：相关性下降到衰减值的时间段--10 天后的事件相关性得分减半（0.5）。</p></li>
@@ -184,7 +184,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索</h3><p>衰减排序器还可以应用于结合多个向量场的混合搜索操作：</p>

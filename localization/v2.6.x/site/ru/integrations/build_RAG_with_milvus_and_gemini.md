@@ -29,7 +29,7 @@ title: Создайте RAG с помощью Milvus и Gemini
         ></path>
       </svg>
     </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">API Gemini</a> и <a href="https://ai.google.dev/aistudio">Google AI Studio</a> помогут вам начать работу с новейшими моделями Google и воплотить свои идеи в масштабируемых приложениях. Gemini предоставляет доступ к мощным языковым моделям, таким как <code translate="no">Gemini-2.0-Flash</code>, <code translate="no">Gemini-2.0-Pro</code> и другим версиям, для таких задач, как генерация текста, обработка документов, зрение, анализ аудио и многое другое. API позволяет вводить длинные контексты с миллионами лексем, точно настраивать модели для конкретных задач, генерировать структурированные выходные данные, такие как JSON, и использовать такие возможности, как семантический поиск и выполнение кода.</p>
-<p>В этом уроке мы покажем вам, как построить конвейер RAG (Retrieval-Augmented Generation) с помощью Milvus и Gemini. Мы будем использовать модель Gemini для генерации ответов на основе заданного запроса, дополненного релевантной информацией, полученной из Milvus.</p>
+<p>В этом руководстве мы покажем вам, как построить конвейер RAG (Retrieval-Augmented Generation) с помощью Milvus и Gemini. Мы будем использовать модель Gemini для генерации ответов на основе заданного запроса, дополненного релевантной информацией, полученной из Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,11 +137,11 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>Пройдитесь по текстовым строкам, создайте вкрапления, а затем вставьте данные в Milvus.</p>
-<p>Вот новое поле <code translate="no">text</code>, которое является неопределенным полем в схеме коллекции. Оно будет автоматически добавлено в зарезервированное динамическое поле JSON, которое на высоком уровне может рассматриваться как обычное поле.</p>
+<p>Вот новое поле <code translate="no">text</code>, которое является неопределенным полем в схеме коллекции. Оно будет автоматически добавлено в зарезервированное динамическое поле JSON, с которым можно обращаться как с обычным полем на высоком уровне.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []

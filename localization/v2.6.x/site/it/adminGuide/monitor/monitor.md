@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>Le metriche sono indicatori che forniscono informazioni sullo stato di funzionamento del sistema. Ad esempio, con le metriche è possibile capire quante risorse di memoria o CPU sono consumate da un nodo dati in Milvus. Essere consapevoli delle prestazioni e dello stato dei componenti del vostro cluster Milvus vi rende ben informati e quindi in grado di prendere decisioni migliori e di regolare l'allocazione delle risorse in modo più tempestivo.</p>
 <p>In genere, le metriche sono memorizzate in un database di serie temporali (TSDB), come <a href="https://prometheus.io/">Prometheus</a>, e le metriche sono registrate con un timestamp. Nel caso del monitoraggio dei servizi Milvus, è possibile utilizzare Prometheus per estrarre i dati dagli endpoint impostati dagli esportatori. Prometheus esporta quindi le metriche di ciascun componente Milvus all'indirizzo <code translate="no">http://&lt;component-host&gt;:9091/metrics</code>.</p>
 <p>Tuttavia, è possibile avere diverse repliche per un componente, il che rende troppo complicata la configurazione manuale di Prometheus. Pertanto, è possibile utilizzare <a href="https://github.com/prometheus-operator/prometheus-operator">Prometheus Operator</a>, un'estensione di Kubernetes, per una gestione automatizzata ed efficace delle istanze di monitoraggio di Prometheus. L'uso di Prometheus Operator evita di aggiungere manualmente i target metrici e i service provider.</p>
-<p>La ServiceMonitor Custom Resource Definition (CRD) consente di definire in modo dichiarativo il monitoraggio di un insieme dinamico di servizi. Inoltre, consente di selezionare i servizi da monitorare con la configurazione desiderata utilizzando le selezioni delle etichette. Con Prometheus Operator, è possibile introdurre convenzioni che specificano come vengono esposte le metriche. I nuovi servizi possono essere scoperti automaticamente seguendo le convenzioni impostate, senza bisogno di riconfigurazioni manuali.</p>
+<p>La ServiceMonitor Custom Resource Definition (CRD) consente di definire in modo dichiarativo il monitoraggio di un insieme dinamico di servizi. Consente inoltre di selezionare i servizi da monitorare con la configurazione desiderata utilizzando le selezioni delle etichette. Con Prometheus Operator, è possibile introdurre convenzioni che specificano come vengono esposte le metriche. I nuovi servizi possono essere scoperti automaticamente seguendo le convenzioni impostate, senza bisogno di riconfigurazioni manuali.</p>
 <p>L'immagine seguente illustra il flusso di lavoro di Prometheus.</p>
 <p>
   
@@ -98,10 +98,42 @@ Il clusterrole predefinito prometheus-k8s non è in grado di catturare le metric
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Abilitare ServiceMonitor</h3><p>Il ServiceMonitor non è abilitato per Milvus Helm per impostazione predefinita. Dopo aver installato Prometheus Operator nel cluster Kubernetes, è possibile abilitarlo aggiungendo il parametro <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values</span>
-<button class="copy-code-btn"></button></code></pre>
+<h4 id="With-Helm" class="common-anchor-header">Con Helm</h4><p>È possibile abilitare il ServiceMonitor impostando il parametro <code translate="no">metrics.serviceMonitor.enabled=true</code> come segue se è stato installato il grafico Milvus Helm.</p>
+<pre><code translate="no">```
+$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
+```
+</code></pre>
 <p>Al termine dell'installazione, utilizzare <code translate="no">kubectl</code> per controllare la risorsa ServiceMonitor.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h4 id="With-Milvus-Operator" class="common-anchor-header">Con Milvus Operator</h4><p>Se avete installato Milvus con Milvus Operator, potete attivare ServiceMonitor come segue.</p>
+<ol>
+<li><p>Eseguire il seguente comando per modificare la risorsa personalizzata di Milvus. Il comando seguente presuppone che la risorsa personalizzata si chiami <code translate="no">my-release</code>.</p>
+<pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Modificare il campo <code translate="no">spec.components.disableMetrics</code> in <code translate="no">false</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Salvare e uscire dall'editor.</p></li>
+<li><p>Attendere che l'operatore riconcili le modifiche. È possibile verificare lo stato della risorsa personalizzata Milvus eseguendo il seguente comando.</p>
+<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> milvus my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span> <span class="hljs-operator">-</span>o yaml
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<p>Il campo <code translate="no">status.components.metrics.serviceMonitor.enabled</code> dovrebbe essere <code translate="no">true</code>.</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3. Controllare le metriche</h3><p>Dopo aver abilitato il ServiceMonitor, è possibile accedere alla dashboard di Prometheus all'indirizzo <code translate="no">http://localhost:9090/</code>.</p>
+<p>Fare clic sulla scheda <code translate="no">Status</code> e poi su <code translate="no">Targets</code>. Si dovrebbero vedere i target dei componenti Milvus.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_targets.png" alt="Prometheus_targets" class="doc-image" id="prometheus_targets" />
+   </span> <span class="img-wrapper"> <span>Prometheus_targets</span> </span></p>
+<p>Fare clic sulla scheda <code translate="no">Graph</code> e inserire l'espressione <code translate="no">up{job=&quot;default/my-release&quot;}</code> nella casella di input dell'espressione. Dovrebbero essere visualizzate le metriche dei componenti Milvus.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
+   </span> <span class="img-wrapper"> <span>Grafico_Prometeo</span> </span></p>
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. Controllare il ServiceMonitor</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s

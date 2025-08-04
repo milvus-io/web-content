@@ -27,7 +27,7 @@ title: MilvusとFirecrawlでRAGを構築する
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://www.firecrawl.dev/">Firecrawlは</a>、開発者があらゆるウェブサイトからスクレイピングされたクリーンなデータでAIアプリケーションを構築できるようにします。高度なスクレイピング、クローリング、データ抽出機能を備えたFirecrawlは、ウェブサイトのコンテンツを、下流のAIワークフローのためのクリーンなマークダウンまたは構造化データに変換するプロセスを簡素化します。</p>
-<p>このチュートリアルでは、MilvusとFirecrawlを使用したRAG（Retrieval-Augmented Generation）パイプラインの構築方法をご紹介します。このパイプラインは、WebデータスクレイピングのためのFirecrawl、ベクトルストレージのためのMilvus、そして洞察に満ちた、コンテキストを認識した応答を生成するためのOpenAIを統合しています。</p>
+<p>このチュートリアルでは、MilvusとFirecrawlを使用してRAG（Retrieval-Augmented Generation）パイプラインを構築する方法を紹介します。このパイプラインは、WebデータスクレイピングのためのFirecrawl、ベクトルストレージのためのMilvus、そして洞察に満ちた、コンテキストを認識した応答を生成するためのOpenAIを統合しています。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +168,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数として：</p>
 <ul>
-<li><p><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定する方法が最も便利である。</p></li>
+<li><p><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定するのが最も便利である。</p></li>
 <li><p>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</p></li>
 <li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</p></li>
 </ul>
@@ -183,7 +183,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

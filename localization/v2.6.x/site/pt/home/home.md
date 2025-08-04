@@ -45,7 +45,7 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
   
    <a href="/bootcamp"> <img translate="no" src="/docs/v2.6.x/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">Bootcamp</p> </a><p>
-  Aprenda a criar aplicações de pesquisa de similaridade vetorial com o Milvus.  </p>
+  Aprenda a criar aplicações de pesquisa de semelhanças vectoriais com o Milvus.  </p>
 </div>
 </div>
 <h2 id="Recommended-articles" class="common-anchor-header">Artigos recomendados<button data-href="#Recommended-articles" class="anchor-icon" translate="no">
@@ -69,8 +69,8 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
 <ul>
 <li><a href="/docs/pt/manage-collections.md">Gerir colecções</a></li>
 <li><a href="/docs/pt/insert-update-delete.md">Inserir, Upsert e Excluir</a></li>
-<li><a href="/docs/pt/index-vector-fields.md">Campos de vetor de índice</a></li>
 <li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
+<li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 <li><a href="/docs/pt/get-and-scalar-query.md">Obter e consulta escalar</a></li>
 </ul>
 </div>
@@ -89,7 +89,7 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
 <ul>
 <li><a href="/docs/pt/system_configuration.md">Configuração do sistema</a></li>
 <li><a href="/docs/pt/architecture_overview.md">Visão geral da arquitetura</a></li>
-<li><a href="/docs/pt/index.md">Índice de vetores</a></li>
+<li><a href="/docs/pt/index-explained.md">Índice explicado</a></li>
 <li><a href="/docs/pt/metric.md">Métricas de similaridade</a></li>
 <li><a href="/docs/pt/glossary.md">Glossário</a></li>
 </ul>
@@ -111,12 +111,12 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Nov 2024 - Lançamento do Milvus 2.5.0</em></p>
+    </button></h2><p><em>junho 2025 - Lançamento do Milvus 2.6.0</em></p>
 <ul>
-<li>Adicionada orientação sobre como <a href="/docs/pt/full-text-search.md">conduzir uma pesquisa de texto completo</a>.</li>
-<li>Adicionada orientação sobre como <a href="/docs/pt/keyword-match.md">conduzir a correspondência de texto</a>.</li>
-<li>Adicionada orientação sobre como <a href="/docs/pt/nullable-and-default.md">ativar valores anuláveis e predefinidos</a>.</li>
-<li>Adicionadas descrições de <a href="/docs/pt/analyzer-overview.md">analisadores</a>.</li>
-<li>Adicionadas descrições de <a href="/docs/pt/bitmap.md">índices bitmap</a>.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/embedding-function-overview.md">usar a função de incorporação</a>.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/decay-ranker-overview.md">usar o classificador de decaimento</a>.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/add-fields-to-an-existing-collection.md">adicionar campos a uma coleção existente</a>.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/phrase-match.md">efetuar a correspondência de frases</a>.</li>
+<li>Adicionadas descrições do <a href="/docs/pt/ivf-rabitq.md">índice IVF_RABITQ</a>.</li>
 </ul>
 </div>

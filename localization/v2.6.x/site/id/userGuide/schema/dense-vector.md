@@ -231,10 +231,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Menyimpan vektor yang masing-masing elemennya dalam setiap dimensi adalah bilangan bulat 8-bit (int8), dengan setiap elemen berkisar antara -128 hingga 127. Dirancang untuk model pembelajaran mendalam yang terkuantisasi (misalnya, ResNet, EfficientNet), INT8_VECTOR mengurangi ukuran model dan mempercepat kesimpulan dengan kehilangan presisi minimal.</p></td>
+     <td><p>Menyimpan vektor yang masing-masing elemennya dalam setiap dimensi adalah bilangan bulat 8-bit (int8), dengan setiap elemen berkisar antara -128 hingga 127. Dirancang untuk model pembelajaran mendalam yang terkuantisasi (misalnya, ResNet, EfficientNet), INT8_VECTOR mengurangi ukuran model dan mempercepat kesimpulan dengan kehilangan presisi minimal.<br><strong>Catatan</strong>: Jenis vektor ini hanya didukung untuk indeks HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Tetapkan parameter indeks untuk bidang vektor</h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor</h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()

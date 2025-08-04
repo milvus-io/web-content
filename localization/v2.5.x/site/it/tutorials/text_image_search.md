@@ -65,7 +65,7 @@ title: Ricerca da testo a immagine con Milvus
 <h3 id="Set-up-Milvus" class="common-anchor-header">Configurare Milvus</h3><p>Prima di procedere, configurare il server Milvus e connettersi utilizzando il proprio URI (e, facoltativamente, un token):</p>
 <ul>
 <li><p><strong>Milvus Lite (consigliato per comodità)</strong>: Impostare l'URI su un file locale, come ./milvus.db. In questo modo si sfrutta automaticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> per memorizzare tutti i dati in un unico file.</p></li>
-<li><p><strong>Docker o Kubernetes (per dati su larga scala)</strong>: Per gestire insiemi di dati più grandi, distribuire un server Milvus più performante utilizzando <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. In questo caso, per connettersi utilizzare l'URI del server, ad esempio http://localhost:19530.</p></li>
+<li><p><strong>Docker o Kubernetes (per dati su larga scala)</strong>: Per gestire insiemi di dati più grandi, è possibile distribuire un server Milvus più performante utilizzando <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. In questo caso, per connettersi utilizzare l'URI del server, ad esempio http://localhost:19530.</p></li>
 <li><p><strong>Zilliz Cloud (servizio gestito)</strong>: Se si utilizza <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito da Milvus, impostare l'Endpoint pubblico come URI e la Chiave API come token.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

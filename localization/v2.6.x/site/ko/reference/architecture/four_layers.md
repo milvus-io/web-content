@@ -39,7 +39,7 @@ title: 스토리지/컴퓨팅 분리
 <li>프록시는 그 자체로 상태 비저장 상태입니다. 프록시는 그 자체로 상태 비저장형이며 Nginx, Kubernetes 인그레스, NodePort, LVS와 같은 부하 분산 구성 요소를 사용하여 통합된 서비스 주소를 제공합니다.</li>
 <li>Milvus는 대규모 병렬 처리(MPP) 아키텍처를 사용하므로 프록시는 최종 결과를 클라이언트에 반환하기 전에 중간 결과를 집계하고 후처리합니다.</li>
 </ul>
-<h2 id="Coordinator-service" class="common-anchor-header">코디네이터 서비스<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
+<h2 id="Coordinator" class="common-anchor-header">코디네이터<button data-href="#Coordinator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,11 +54,14 @@ title: 스토리지/컴퓨팅 분리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>코디네이터 서비스는 작업자 노드에 작업을 할당하고 시스템의 두뇌 역할을 합니다. 클러스터 토폴로지 관리, 로드 밸런싱, 타임스탬프 생성, 데이터 선언, 데이터 관리 등의 작업을 수행합니다.</p>
-<p>코디네이터 유형에는 루트 코디네이터(루트 코디), 데이터 코디네이터(데이터 코디), 쿼리 코디네이터(쿼리 코디)의 세 가지가 있습니다.</p>
-<h3 id="Root-coordinator-root-coord" class="common-anchor-header">루트 코디네이터(루트 코디네이터)</h3><p>루트 코디네이터는 컬렉션, 파티션 또는 인덱스의 생성 또는 삭제와 같은 DDL(데이터 정의 언어) 및 DCL(데이터 제어 언어) 요청을 처리하고 TSO(타임스탬프 오라클) 및 시간 티커 발행을 관리합니다.</p>
-<h3 id="Query-coordinator-query-coord" class="common-anchor-header">쿼리 코디네이터(쿼리 코디)</h3><p>쿼리 코디네이터는 쿼리 노드의 토폴로지 및 로드 밸런싱을 관리하고, 성장하는 세그먼트에서 봉인된 세그먼트로의 핸드오프를 관리합니다.</p>
-<h3 id="Data-coordinator-data-coord" class="common-anchor-header">데이터 코디네이터(데이터 코디)</h3><p>데이터 코디네이터는 데이터 노드와 인덱스 노드의 토폴로지를 관리하고 메타데이터를 유지 관리하며 플러시, 압축, 인덱스 구축 및 기타 백그라운드 데이터 작업을 트리거합니다.</p>
+    </button></h2><p><strong>코디네이터는</strong> Milvus의 두뇌 역할을 합니다. 클러스터 토폴로지를 유지하고, 모든 작업 유형을 스케줄링하며, 클러스터 수준의 일관성을 유지하는 일을 담당하는 코디네이터는 항상 전체 클러스터에서 정확히 한 명만 활성화되어 있습니다.</p>
+<p>다음은 <strong>코디네이터가</strong> 처리하는 작업 중 일부입니다:</p>
+<ul>
+<li><strong>DDL/DCL/TSO 관리</strong>: 컬렉션, 파티션 또는 인덱스의 생성 또는 삭제와 같은 DDL(데이터 정의 언어) 및 DCL(데이터 제어 언어) 요청을 처리하고 TSO(타임스탬프 오라클) 및 시간 티커 발행을 관리합니다.</li>
+<li><strong>스트리밍 서비스 관리</strong>: WAL(Write-Ahead Log)을 스트리밍 노드와 바인딩하고 스트리밍 서비스에 대한 서비스 검색을 제공합니다.</li>
+<li><strong>쿼리 관리</strong>: 쿼리 노드의 토폴로지 및 로드 밸런싱을 관리하고, 쿼리 라우팅을 안내하기 위해 서빙 쿼리 뷰를 제공하고 관리합니다.</li>
+<li><strong>기록 데이터 관리</strong>: 압축, 인덱스 구축과 같은 오프라인 작업을 데이터 노드에 분산하고 세그먼트와 데이터 뷰의 토폴로지를 관리합니다.</li>
+</ul>
 <h2 id="Worker-nodes" class="common-anchor-header">작업자 노드<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,10 +77,10 @@ title: 스토리지/컴퓨팅 분리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>팔과 다리입니다. 작업자 노드는 코디네이터 서비스의 지시를 따르고 프록시에서 DML(데이터 조작 언어) 명령을 실행하는 덤 실행기입니다. 워커 노드는 스토리지와 컴퓨팅이 분리되어 상태 저장소가 없으며, Kubernetes에 배포될 때 시스템 스케일아웃과 재해 복구를 용이하게 할 수 있습니다. 워커 노드에는 세 가지 유형이 있습니다:</p>
-<h3 id="Query-node" class="common-anchor-header">쿼리 노드</h3><p>쿼리 노드는 로그 브로커에 가입하여 증분 로그 데이터를 검색하여 증가하는 세그먼트로 전환하고, 객체 스토리지에서 기록 데이터를 로드하고, 벡터 데이터와 스칼라 데이터 간의 하이브리드 검색을 실행합니다.</p>
-<h3 id="Data-node" class="common-anchor-header">데이터 노드</h3><p>데이터 노드는 로그 브로커에 가입하여 증분 로그 데이터를 검색하고, 변경 요청을 처리하며, 로그 데이터를 로그 스냅샷으로 패킹하여 오브젝트 스토리지에 저장합니다.</p>
-<h3 id="Index-node" class="common-anchor-header">인덱스 노드</h3><p>인덱스 노드는 인덱스를 구축합니다.  인덱스 노드는 메모리에 상주할 필요가 없으며 서버리스 프레임워크로 구현할 수 있습니다.</p>
+    </button></h2><p>팔과 다리. 워커 노드는 코디네이터의 지시를 따르는 덤 실행기입니다. 워커 노드는 스토리지와 컴퓨팅이 분리되어 상태 저장소가 없으며, Kubernetes에 배포할 때 시스템 스케일아웃과 재해 복구를 용이하게 할 수 있습니다. 워커 노드에는 세 가지 유형이 있습니다:</p>
+<h3 id="Streaming-node" class="common-anchor-header">스트리밍 노드</h3><p>스트리밍 노드는 샤드 수준의 "미니 브레인" 역할을 하며, 기본 WAL 스토리지를 기반으로 샤드 수준의 일관성 보장 및 장애 복구를 제공합니다. 한편, 스트리밍 노드는 데이터 쿼리 증가와 쿼리 계획 생성도 담당합니다. 또한, 증가하는 데이터를 봉인된(과거) 데이터로 변환하는 작업도 처리합니다.</p>
+<h3 id="Query-node" class="common-anchor-header">쿼리 노드</h3><p>쿼리 노드는 오브젝트 스토리지에서 히스토리 데이터를 로드하고 히스토리 데이터 쿼리를 제공합니다.</p>
+<h3 id="Data-node" class="common-anchor-header">데이터 노드</h3><p>데이터 노드는 압축, 인덱스 구축 등 히스토리 데이터의 오프라인 처리를 담당합니다.</p>
 <h2 id="Storage" class="common-anchor-header">스토리지<button data-href="#Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,5 +118,5 @@ title: 스토리지/컴퓨팅 분리
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus 아키텍처에 대한 자세한 내용은 <a href="/docs/ko/main_components.md">주요 구성 요소를</a> 읽어보세요.</li>
+<li>Milvus 아키텍처에 대한 자세한 내용은 <a href="/docs/ko/main_components.md">주요 구성 요소를</a> 참조하세요.</li>
 </ul>

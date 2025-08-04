@@ -39,7 +39,7 @@ title: 使用 Helm Charts 配置 Milvus
         ></path>
       </svg>
     </button></h2><p>您可以通过配置文件<code translate="no">values.yaml</code> 配置 Milvus。</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">下载配置文件</h3><p>直接或使用以下命令<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">下载</a> <code translate="no">values.yaml</code> 。</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">下载配置文件</h3><p>直接或使用以下命令<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">下载</a> <code translate="no">values.yaml</code> 。</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">修改配置文件</h3><p>通过调整<code translate="no">values.yaml</code> 中的相应参数，配置 Milvus 实例，以适应您的应用场景。</p>

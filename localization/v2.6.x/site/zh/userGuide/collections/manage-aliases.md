@@ -18,8 +18,9 @@ summary: Milvus 提供别名管理功能。本页演示了创建、列出、更�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 提供别名管理功能。本页演示了创建、列出、更改和删除别名的程序。</p>
-<h2 id="Overview" class="common-anchor-header">别名概述<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>在 Milvus 中，别名是一个 Collection 的二级可变名称。使用别名提供了一个抽象层，使您可以在不修改应用程序代码的情况下动态切换 Collections。这对于生产环境中的无缝数据更新、A/B 测试和其他操作符特别有用。</p>
+<p>本页演示了如何创建、列出、重新分配和删除 Collections 别名。</p>
+<h2 id="Why-Use-an-Alias" class="common-anchor-header">为什么使用别名？<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,8 +35,20 @@ summary: Milvus 提供别名管理功能。本页演示了创建、列出、更�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以为您的 Collections 创建别名。一个集合可以有多个别名，但集合不能共享一个别名。</p>
-<p>在收到针对某个 Collection 的请求时，Milvus 会根据提供的名称定位该 Collection。如果所提供名称的 Collection 不存在，Milvus 会继续定位所提供名称的别名。你可以使用 Collections 别名来调整代码，以适应不同的情况。</p>
+    </button></h2><p>使用别名的主要好处是将客户端应用程序与特定的物理 Collections 名称分离。</p>
+<p>想象一下，你有一个实时应用程序，它查询一个名为<code translate="no">prod_data</code> 的 Collections。当您需要更新底层数据时，可以在不中断服务的情况下执行更新。工作流程如下</p>
+<ol>
+<li><strong>创建一个新 Collection</strong>：创建一个新的 Collections，例如<code translate="no">prod_data_v2</code> 。</li>
+<li><strong>准备数据</strong>：在<code translate="no">prod_data_v2</code> 中加载新数据并编制索引。</li>
+<li><strong>切换别名</strong>：一旦新的 Collections 准备就绪，原子式地将旧 Collections 的别名<code translate="no">prod_data</code> 重新分配给<code translate="no">prod_data_v2</code> 。</li>
+</ol>
+<p>您的应用程序将继续向别名<code translate="no">prod_data</code> 发送请求，不会出现停机。这种机制可以实现无缝更新，并简化向量搜索服务的蓝绿部署等操作符。</p>
+<p><strong>别名的关键属性：</strong></p>
+<ul>
+<li>一个 Collection 可以有多个别名。</li>
+<li>一个别名一次只能指向一个 Collections。</li>
+<li>处理请求时，Milvus 会首先检查是否存在具有所提供名称的 Collection。如果不存在，它就会检查该名称是否是某个 Collection 的别名。</li>
+</ul>
 <h2 id="Create-Alias" class="common-anchor-header">创建别名<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,7 +64,7 @@ summary: Milvus 提供别名管理功能。本页演示了创建、列出、更�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下代码片段演示了如何为 Collection 创建别名。</p>
+    </button></h2><p>下面的代码片段演示了如何为 Collection 创建别名。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

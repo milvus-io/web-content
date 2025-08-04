@@ -5,7 +5,6 @@ summary: >-
   يحدد المخطط بنية بيانات المجموعة. قبل إنشاء مجموعة، تحتاج إلى وضع تصميم
   لمخططها. تساعدك هذه الصفحة على فهم مخطط المجموعة وتصميم مثال للمخطط بنفسك.
 ---
-
 <h1 id="Schema-Explained​" class="common-anchor-header">شرح المخطط<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +43,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>تصميم المخطط</span> </span></p>
-<p>يتضمن تصميم نموذج البيانات لنظام البحث تحليل احتياجات العمل وتجريد المعلومات في نموذج بيانات معبّر عن المخطط. على سبيل المثال، يجب "فهرسة" البحث في جزء من النص من خلال تحويل السلسلة الحرفية إلى متجه من خلال "التضمين" وتمكين البحث في المتجه. بالإضافة إلى هذا الشرط الأساسي، قد يكون من الضروري تخزين خصائص أخرى مثل الطابع الزمني للنشر والمؤلف. تسمح هذه البيانات الوصفية بتنقيح عمليات البحث الدلالية من خلال التصفية، وإرجاع النصوص المنشورة بعد تاريخ محدد أو من قبل مؤلف معين فقط. يمكنك أيضًا استرداد هذه المقاييس مع النص الرئيسي لعرض نتيجة البحث في التطبيق. يجب تعيين مُعرِّف فريد لكل منها لتنظيم هذه الأجزاء النصية، معبراً عنه كعدد صحيح أو سلسلة. هذه العناصر ضرورية لتحقيق منطق بحث متطور.</p>
+<p>يتضمن تصميم نموذج البيانات لنظام البحث تحليل احتياجات العمل وتجريد المعلومات في نموذج بيانات معبّر عن المخطط. على سبيل المثال، يجب "فهرسة" البحث في جزء من النص عن طريق تحويل السلسلة الحرفية إلى متجه من خلال "التضمين" وتمكين البحث في المتجه. بالإضافة إلى هذا الشرط الأساسي، قد يكون من الضروري تخزين خصائص أخرى مثل الطابع الزمني للنشر والمؤلف. تسمح هذه البيانات الوصفية بتنقيح عمليات البحث الدلالية من خلال التصفية، وإرجاع النصوص المنشورة بعد تاريخ محدد أو من قبل مؤلف معين فقط. يمكنك أيضًا استرداد هذه المقاييس مع النص الرئيسي لعرض نتيجة البحث في التطبيق. يجب تعيين مُعرِّف فريد لكل منها لتنظيم هذه الأجزاء النصية، معبراً عنه كعدد صحيح أو سلسلة. هذه العناصر ضرورية لتحقيق منطق بحث متطور.</p>
 <p>راجع <a href="/docs/ar/v2.5.x/schema-hands-on.md">التدريب العملي على تصميم المخطط</a> لمعرفة كيفية إنشاء مخطط جيد التصميم.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">إنشاء مخطط<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +68,6 @@ summary: >-
 schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
 ​
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();​
@@ -106,34 +104,27 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,​
     datatype=DataType.INT64,​
-    <span class="hljs-comment"># highlight-start​</span>
-    is_primary=<span class="hljs-literal">True</span>,​
-    auto_id=<span class="hljs-literal">False</span>,​
-    <span class="hljs-comment"># highlight-end​</span>
+<span class="highlighted-comment-line">    is_primary=<span class="hljs-literal">True</span>,​</span>
+<span class="highlighted-comment-line">    auto_id=<span class="hljs-literal">False</span>,​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
 schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)​
         .dataType(DataType.Int64)​
-        <span class="hljs-comment">// highlight-start​</span>
-        .isPrimaryKey(<span class="hljs-literal">true</span>)​
-        .autoID(<span class="hljs-literal">false</span>)​
-        <span class="hljs-comment">// highlight-end​</span>
+<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)​</span>
+<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,​
-    <span class="hljs-comment">// highlight-start​</span>
-    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,​
-    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>​
-    <span class="hljs-comment">// highlight-end​</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,​</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -175,25 +166,21 @@ export schema='{​
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,​
     datatype=DataType.FLOAT_VECTOR,​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    dim=<span class="hljs-number">5</span>​
+<span class="highlighted-wrapper-line">    dim=<span class="hljs-number">5</span>​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
         .dataType(DataType.FloatVector)​
-        <span class="hljs-comment">// highlight-next-line​</span>
-        .dimension(<span class="hljs-number">5</span>)​
+<span class="highlighted-wrapper-line">        .dimension(<span class="hljs-number">5</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,​
-    <span class="hljs-comment">// highlight-next-line​</span>
-    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>​
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -214,7 +201,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>تشير المعلمة <code translate="no">dim</code> في مقتطفات التعليمات البرمجية أعلاه إلى بُعدية التضمينات المتجهة التي سيتم الاحتفاظ بها في الحقل المتجه. تشير القيمة <code translate="no">FLOAT_VECTOR</code> إلى أن حقل المتجه يحتوي على قائمة من الأرقام العائمة 32 بت، والتي تستخدم عادةً لتمثيل مضادات الجذر، بالإضافة إلى ذلك، يدعم ميلفوس أيضًا الأنواع التالية من تضمينات المتجهات.</p>
+<p>تشير المعلمة <code translate="no">dim</code> في مقتطفات التعليمات البرمجية أعلاه إلى بُعدية التضمينات المتجهة التي سيتم الاحتفاظ بها في الحقل المتجه. تشير القيمة <code translate="no">FLOAT_VECTOR</code> إلى أن حقل المتجه يحتوي على قائمة من الأعداد العائمة 32 بت، والتي تستخدم عادةً لتمثيل مضادات الجذر، بالإضافة إلى ذلك، يدعم ميلفوس أيضًا الأنواع التالية من تضمينات المتجهات.</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>يحتوي الحقل المتجه من هذا النوع على قائمة من الأعداد العائمة نصف الدقة 16 بت، وعادةً ما ينطبق على سيناريوهات التعلم العميق المقيد بالذاكرة أو الحوسبة القائمة على وحدة معالجة الرسومات.</p></li>
@@ -240,32 +227,28 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في الحالات الشائعة، يمكنك استخدام الحقول القياسية لتخزين البيانات الوصفية للتضمينات المتجهة المخزنة في Milvus، وإجراء عمليات بحث الشبكة النانوية مع تصفية البيانات الوصفية لتحسين صحة نتائج البحث. يدعم Milvus أنواع حقول قياسية متعددة، بما في ذلك <strong>VarChar</strong> و <strong>Boolean</strong> و <strong>Int</strong> و Float و <strong>Double</strong> و <strong>Array</strong> و JSON.</p>
+    </button></h2><p>في الحالات الشائعة، يمكنك استخدام الحقول العددية لتخزين البيانات الوصفية للتضمينات المتجهة المخزنة في Milvus، وإجراء عمليات بحث الشبكة النانوية مع تصفية البيانات الوصفية لتحسين صحة نتائج البحث. يدعم Milvus أنواع حقول قياسية متعددة، بما في ذلك <strong>VarChar</strong> و <strong>Boolean</strong> و <strong>Int</strong> و Float و <strong>Double</strong> و <strong>Array</strong> و JSON.</p>
 <h3 id="Add-String-Fields​" class="common-anchor-header">إضافة حقول سلسلة</h3><p>في Milvus، يمكنك استخدام حقول VarChar لتخزين السلاسل. لمعرفة المزيد عن حقل VarChar، راجع <a href="/docs/ar/v2.5.x/string.md">حقل السلسلة</a>.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,​
     datatype=DataType.VARCHAR,​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    max_length=<span class="hljs-number">512</span>​
+<span class="highlighted-wrapper-line">    max_length=<span class="hljs-number">512</span>​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
         .dataType(DataType.VarChar)​
-        <span class="hljs-comment">// highlight-next-line​</span>
-        .maxLength(<span class="hljs-number">512</span>)​
+<span class="highlighted-wrapper-line">        .maxLength(<span class="hljs-number">512</span>)​</span>
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,​
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,​
-    <span class="hljs-comment">// highlight-next-line​</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>​
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>​</span>
 });​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -287,7 +270,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-Number-Fields​" class="common-anchor-header">إضافة حقول أرقام</h3><p>أنواع الأرقام التي يدعمها Milvus هي <code translate="no">Int8</code> و <code translate="no">Int16</code> و و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code>. لمعرفة المزيد عن حقول الأرقام، راجع <a href="/docs/ar/v2.5.x/number.md">حقل الأرقام</a>.</p>
+<h3 id="Add-Number-Fields​" class="common-anchor-header">إضافة حقول أرقام</h3><p>أنواع الأرقام التي يدعمها ميلفوس هي <code translate="no">Int8</code> و <code translate="no">Int16</code> و و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code>. لمعرفة المزيد عن حقول الأرقام، راجع <a href="/docs/ar/v2.5.x/number.md">حقل الأرقام</a>.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -296,7 +279,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
         .dataType(DataType.Int64)​
@@ -334,7 +316,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
         .dataType(DataType.Bool)​
@@ -373,7 +354,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
         .dataType(DataType.JSON)​
@@ -416,7 +396,6 @@ export schema=&quot;{​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
         .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
         .dataType(DataType.Array)​

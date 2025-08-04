@@ -72,7 +72,7 @@ Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00
 <h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">إعداد مجموعة ميلفوس والفهرس</h3><p>سنقوم بإعداد مجموعة Milvus وإنشاء مؤشرات لحقول المتجهات.</p>
 <div class="alert alert-info">
 <ul>
-<li>يعد تعيين الفهرس كملف محلي، على سبيل المثال "./milvus.db"، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>يعد إعداد الفهرس كملف محلي، على سبيل المثال "./milvus.db"، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، على سبيل المثال أكثر من مليون ناقل، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">Docker أو Kubernetes</a>. في هذا الإعداد، يُرجى استخدام uri الخادم، على سبيل المثال http://localhost:19530، كـ uri الخاص بك.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، قم بتعديل uri والرمز المميز، اللذين يتوافقان مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">نقطة النهاية العامة ومفتاح واجهة برمجة التطبيقات</a> في Zilliz Cloud.</li>
 </ul>
@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -142,7 +142,7 @@ query_embeddings = ef([query])
 </code></pre>
 <h3 id="Run-the-Search" class="common-anchor-header">قم بتشغيل البحث</h3><p>سنقوم أولاً بإعداد بعض الوظائف المفيدة لتشغيل البحث:</p>
 <ul>
-<li><code translate="no">dense_search</code>: البحث فقط عبر حقل متجه كثيف</li>
+<li><code translate="no">dense_search</code>: البحث عبر حقل متجه كثيف فقط</li>
 <li><code translate="no">sparse_search</code>: البحث عبر حقل متجه متناثر فقط</li>
 <li><code translate="no">hybrid_search</code>: البحث عبر كلا الحقلين المتجهين الكثيف والمتجه مع إعادة ترتيب مرجحة</li>
 </ul>

@@ -277,7 +277,7 @@ title: Catatan Rilis
 <p>Kami sangat senang mengumumkan Milvus 2.5.9, yang membawa peningkatan kinerja untuk statistik kunci JSON, kemampuan pengindeksan yang lebih baik, dan beberapa perbaikan bug penting yang meningkatkan stabilitas dan penanganan data. Kami mendorong Anda untuk meng-upgrade atau mencoba versi ini, dan seperti biasa, umpan balik Anda sangat kami hargai karena kami terus menyempurnakan Milvus.</p>
 <h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
 <li>Mendukung normalisasi skor lompatan untuk perangkingan ulang berbobot<a href="https://github.com/milvus-io/milvus/pull/40905">(#40905</a>)</li>
-<li>Meningkatkan performa pembuatan statistik kunci JSON dengan menambahkan dokumen secara berkelompok<a href="https://github.com/milvus-io/milvus/pull/40898">(#40898</a>)</li>
+<li>Meningkatkan kinerja pembuatan statistik kunci JSON dengan menambahkan dokumen secara berkelompok<a href="https://github.com/milvus-io/milvus/pull/40898">(#40898</a>)</li>
 <li>Gunakan <code translate="no">int32</code> saat membuat indeks larik untuk tipe elemen <code translate="no">int8</code>/<code translate="no">int16</code> <a href="https://github.com/milvus-io/milvus/pull/41186">(#41186</a>)</li>
 <li>Menyelaraskan hasil pencarian brute-force dengan perilaku indeks JSON untuk ekspresi <code translate="no">exists</code> <a href="https://github.com/milvus-io/milvus/pull/41056">(#41056</a>)</li>
 </ul>
@@ -840,7 +840,7 @@ title: Catatan Rilis
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Peningkatan</h3><h4 id="Deletion-Optimization" class="common-anchor-header">Optimalisasi Penghapusan</h4><p>Meningkatkan kecepatan dan mengurangi penggunaan memori untuk penghapusan berskala besar dengan mengoptimalkan penggunaan kunci dan manajemen memori.</p>
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">Peningkatan Ketergantungan</h4><p>Peningkatan ke ETCD 3.5.16 dan Pulsar 3.0.7 LTS, memperbaiki CVE yang ada dan meningkatkan keamanan. Catatan: Upgrade ke Pulsar 3.x tidak kompatibel dengan versi 2.x sebelumnya.</p>
-<p>Untuk pengguna yang sudah memiliki penerapan Milvus yang berfungsi, Anda perlu mengupgrade komponen ETCD dan Pulsar sebelum dapat menggunakan fitur dan fungsi baru. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/upgrade-pulsar-v3.md">Meningkatkan Pulsar dari 2.x ke 3.x</a></p>
+<p>Untuk pengguna yang sudah memiliki penerapan Milvus yang berfungsi, Anda perlu meng-upgrade komponen ETCD dan Pulsar sebelum dapat menggunakan fitur dan fungsi baru. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/upgrade-pulsar-v3.md">Meningkatkan Pulsar dari 2.x ke 3.x</a></p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">Penyimpanan Lokal V2</h4><p>Memperkenalkan format file lokal baru di Milvus 2.5, meningkatkan efisiensi pemuatan dan kueri untuk data skalar, mengurangi overhead memori, dan meletakkan dasar untuk pengoptimalan di masa mendatang.</p>
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">Pengoptimalan Penguraian Ekspresi</h4><p>Penguraian ekspresi yang lebih baik dengan mengimplementasikan caching untuk ekspresi yang diulang, meningkatkan ANTLR, dan mengoptimalkan kinerja klausa <code translate="no">NOT IN</code>.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Peningkatan Kinerja Konkurensi DDL</h4><p>Mengoptimalkan kinerja konkurensi operasi Data Definition Language (DDL).</p>

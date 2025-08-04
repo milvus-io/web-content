@@ -75,7 +75,7 @@ summary: Imparare a configurare queryCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Valore di commutazione per controllare se bilanciare automaticamente l'uso della memoria tra i nodi di interrogazione, distribuendo uniformemente le operazioni di caricamento e rilascio dei segmenti.      </td>
+      <td>        Valore di commutazione per controllare se bilanciare automaticamente l'uso della memoria tra i nodi di query distribuendo uniformemente le operazioni di caricamento e rilascio dei segmenti.      </td>
       <td>vero</td>
     </tr>
   </tbody>
@@ -133,7 +133,7 @@ summary: Imparare a configurare queryCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        bilanciatore automatico utilizzato per i segmenti sui queryNode      </td>
+      <td>        bilanciatore automatico usato per i segmenti sui queryNode      </td>
       <td>Bilanciatore basato sul punteggio</td>
     </tr>
   </tbody>
@@ -802,7 +802,7 @@ summary: Imparare a configurare queryCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        100 ms, il timeout dell'rpc di verifica dello stato di salute del nodo di query     </td>
+      <td>        100 ms, il timeout di check health rpc al nodo di query     </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -1121,7 +1121,7 @@ summary: Imparare a configurare queryCoord per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        5m, intervallo massimo di aggiornamento dello stato di caricamento della raccolta per il controllo della salute      </td>
+      <td>        5m, intervallo massimo di aggiornamento dello stato di caricamento della raccolta per il controllo dello stato di salute      </td>
       <td>5</td>
     </tr>
   </tbody>

@@ -342,7 +342,7 @@ summary: Saiba como configurar o mq para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        tempo de espera de repetição do registo em segundos      </td>
+      <td>        tempo de espera de repetição de registo em segundos      </td>
       <td>3</td>
     </tr>
   </tbody>

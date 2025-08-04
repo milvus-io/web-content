@@ -54,7 +54,7 @@ summary: >-
 <li><p><strong>طول ثابت:</strong> يظل طول المتجه ثابتًا بغض النظر عن طول النص الأصلي، مما يجعل الفهرسة والاسترجاع أسهل.</p></li>
 <li><p><strong>بسيط وبديهي:</strong> يعكس مباشرةً وجود الكلمات الرئيسية، مما يجعله مناسبًا لبعض مهام الاسترجاع المتخصصة.</p></li>
 </ul>
-<p>يمكن إنشاء المتجهات الثنائية من خلال طرق مختلفة. في معالجة النصوص، يمكن استخدام المفردات المحددة مسبقًا لتعيين البتات المقابلة بناءً على وجود الكلمات. في معالجة الصور، يمكن لخوارزميات التجزئة الإدراكية (مثل <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) توليد ميزات ثنائية للصور. في تطبيقات التعلّم الآلي، يمكن تحويل مخرجات النماذج إلى ثنائية للحصول على تمثيلات متجهات ثنائية.</p>
+<p>يمكن إنشاء المتجهات الثنائية من خلال طرق مختلفة. في معالجة النصوص، يمكن استخدام المفردات المحددة مسبقًا لتعيين البتات المقابلة بناءً على وجود الكلمات. بالنسبة لمعالجة الصور، يمكن لخوارزميات التجزئة الإدراكية (مثل <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) توليد ميزات ثنائية للصور. في تطبيقات التعلّم الآلي، يمكن تحويل مخرجات النماذج إلى ثنائية للحصول على تمثيلات متجهات ثنائية.</p>
 <p>بعد تحويلها إلى متجهات ثنائية، يمكن تخزين البيانات في ميلفوس للإدارة واسترجاع المتجهات. يوضح الرسم البياني أدناه العملية الأساسية.</p>
 <p>
   
@@ -242,9 +242,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>في المثال أعلاه، يتم إنشاء فهرس باسم <code translate="no">binary_vector_index</code> للحقل <code translate="no">binary_vector</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. تم تعيين <code translate="no">metric_type</code> على <code translate="no">HAMMING</code> ، مما يشير إلى استخدام مسافة هامينج لقياس التشابه.</p>
-<p>يوفر Milvus أنواعًا مختلفة من الفهارس للحصول على تجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل منحنى تعلم البحث المتجه. هناك الكثير من أنواع الفهارس المتاحة لتختار من بينها. لمزيد من التفاصيل، راجع xxx.</p>
+<p>يوفر Milvus أنواعًا مختلفة من الفهارس للحصول على تجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل منحنى تعلم البحث المتجه. هناك الكثير من أنواع الفهارس المتاحة لتختار من بينها. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
 <p>بالإضافة إلى ذلك، يدعم ميلفوس مقاييس تشابه أخرى للمتجهات الثنائية. لمزيد من المعلومات، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجهات الثنائية والفهرس، قم بإنشاء مجموعة تحتوي على متجهات ثنائية. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
+<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجه الثنائي والفهرس، قم بإنشاء مجموعة تحتوي على متجهات ثنائية. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -393,7 +393,7 @@ client.<span class="hljs-title function_">insert</span>({
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Perform-similarity-search" class="common-anchor-header">إجراء بحث التشابه</h3><p>البحث عن التشابه هو أحد الميزات الأساسية في ميلفوس، مما يسمح لك بالعثور بسرعة على البيانات الأكثر تشابهًا مع متجه الاستعلام بناءً على المسافة بين المتجهات. لإجراء بحث تشابه باستخدام متجهات ثنائية، قم بإعداد متجه الاستعلام ومعلمات البحث، ثم قم باستدعاء الطريقة <code translate="no">search</code>.</p>
-<p>أثناء عمليات البحث، يجب أيضًا توفير المتجهات الثنائية في شكل مصفوفة بايت. تأكد من أن بُعد متجه الاستعلام يطابق البعد المحدد عند تحديد <code translate="no">dim</code> وأن كل 8 قيم منطقية يتم تحويلها إلى بايت واحد.</p>
+<p>أثناء عمليات البحث، يجب أيضًا توفير المتجهات الثنائية في شكل مصفوفة بايت. تأكد من أن أبعاد متجه الاستعلام تتطابق مع البعد المحدد عند تحديد <code translate="no">dim</code> وأن كل 8 قيم منطقية يتم تحويلها إلى بايت واحد.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

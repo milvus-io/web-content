@@ -78,11 +78,41 @@ tei_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,                 <span class="hljs-comment"># Specifies TEI as the service provider</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text for relevance evaluation</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># Your TEI service URL</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>                     <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;truncate&quot;</span>: <span class="hljs-literal">True</span>,                <span class="hljs-comment"># Optional: Truncate the inputs that are longer than the maximum supported size</span>
+        <span class="hljs-string">&quot;truncation_direction&quot;</span>: <span class="hljs-string">&quot;Right&quot;</span>,    <span class="hljs-comment"># Optional: Direction to truncate the inputs</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Applicazione alla ricerca vettoriale standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">Parametri specifici di TEI Ranker</h3><p>I seguenti parametri sono specifici del ranker TEI:</p>
+<table>
+   <tr>
+     <th><p>Parametro</p></th>
+     <th><p>Richiesto?</p></th>
+     <th><p>Descrizione</p></th>
+     <th><p>Valore / Esempio</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncate</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Se troncare o meno gli input che superano la lunghezza massima della sequenza. Se <code translate="no">False</code>, gli input lunghi generano errori.</p></td>
+     <td><p><code translate="no">True</code> oppure <code translate="no">False</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncation_direction</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Direzione da cui troncare quando l'input è troppo lungo:</p>
+<ul>
+<li><p><code translate="no">"Right"</code> (predefinito):  I token vengono rimossi dalla fine della sequenza finché non viene soddisfatta la dimensione massima supportata.</p></li>
+<li><p><code translate="no">"Left"</code>: I token vengono rimossi dall'inizio della sequenza.</p></li>
+</ul></td>
+     <td><p><code translate="no">"Right"</code> o <code translate="no">"Left"</code></p></td>
+   </tr>
+</table>
+<div class="alert note">
+<p>Per i parametri generali condivisi da tutti i classificatori di modelli (ad esempio, <code translate="no">provider</code>, <code translate="no">queries</code>), fare riferimento a <a href="/docs/it/model-ranker-overview.md#Create-a-model-ranker">Creare un classificatore di modelli</a>.</p>
+</div>
+<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Applicare alla ricerca vettoriale standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -99,14 +129,14 @@ tei_ranker = Function(
       </svg>
     </button></h2><p>Per applicare TEI Ranker a una ricerca vettoriale standard:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
-results = milvus_client.search(
+results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],  <span class="hljs-comment"># Search queries</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                         <span class="hljs-comment"># Apply tei reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Applicare alla ricerca ibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
@@ -144,7 +174,7 @@ sparse_search = AnnSearchRequest(
 )
 
 <span class="hljs-comment"># Execute hybrid search with vLLM reranking</span>
-hybrid_results = milvus_client.hybrid_search(
+hybrid_results = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                        <span class="hljs-comment"># Apply tei reranking to combined results</span></span>

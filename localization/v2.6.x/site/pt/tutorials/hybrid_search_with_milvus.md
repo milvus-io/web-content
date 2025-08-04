@@ -23,11 +23,11 @@ title: Pesquisa híbrida com Milvus
     </button></h1><p>Se quiser experimentar o efeito final deste tutorial, pode ir diretamente para https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>Neste tutorial, vamos demonstrar como efetuar uma pesquisa híbrida com <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">o modelo BGE-M3</a>. O modelo BGE-M3 pode converter texto em vectores densos e esparsos. O Milvus suporta o armazenamento de ambos os tipos de vectores numa única coleção, permitindo uma pesquisa híbrida que aumenta a relevância dos resultados.</p>
-<p>Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
+<p>O Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
 <ul>
 <li>Recuperação Densa: Utiliza o contexto semântico para entender o significado por trás das consultas.</li>
 <li>Recuperação esparsa: Dá ênfase à correspondência de palavras-chave para encontrar resultados com base em termos específicos, equivalente à pesquisa de texto completo.</li>
-<li>Recuperação híbrida: Combina as abordagens Densa e Esparsa, capturando todo o contexto e palavras-chave específicas para obter resultados de pesquisa abrangentes.</li>
+<li>Recuperação híbrida: Combina as abordagens Densa e Esparsa, capturando o contexto completo e palavras-chave específicas para resultados de pesquisa abrangentes.</li>
 </ul>
 <p>Ao integrar estes métodos, a Pesquisa Híbrida Milvus equilibra as semelhanças semânticas e lexicais, melhorando a relevância geral dos resultados da pesquisa. Este bloco de notas irá percorrer o processo de configuração e utilização destas estratégias de recuperação, realçando a sua eficácia em vários cenários de pesquisa.</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependências e ambiente</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
@@ -72,7 +72,7 @@ Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00
 <h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Configurar a coleção e o índice Milvus</h3><p>Vamos configurar a coleção Milvus e criar índices para os campos vectoriais.</p>
 <div class="alert alert-info">
 <ul>
-<li>Definir o uri como um ficheiro local, por exemplo, "./milvus.db", é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Definir o uri como um ficheiro local, por exemplo "./milvus.db", é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo, http://localhost:19530, como o seu uri.</li>
 <li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste o uri e o token, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">chave API</a> no Zilliz Cloud.</li>
 </ul>
@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -143,7 +143,7 @@ query_embeddings = ef([query])
 <h3 id="Run-the-Search" class="common-anchor-header">Executar a pesquisa</h3><p>Vamos primeiro preparar algumas funções úteis para executar a pesquisa:</p>
 <ul>
 <li><code translate="no">dense_search</code>: apenas pesquisa no campo vetorial denso</li>
-<li><code translate="no">sparse_search</code>: pesquisar apenas no campo vetorial esparso</li>
+<li><code translate="no">sparse_search</code>: pesquisa apenas no campo vetorial esparso</li>
 <li><code translate="no">hybrid_search</code>: pesquisar em campos densos e vectoriais com um reranker ponderado</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (

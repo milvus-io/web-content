@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
 <p>有關使用 Docker 或其他方法部署 TEI 的詳細說明，請參閱<a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">Hugging Face Text Embeddings Inference 官方文件</a>。</p>
 <p>部署完成後，請記下您的 TEI 服務端點 (例如：<code translate="no">http://localhost:8080</code>)，因為您<a href="/docs/zh-hant/hugging-face-tei.md#Use-embedding-function-">在 Milvus 中使用 TEI 功能</a>時會需要它。</p>
 <h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm Chart 部署 (整合)</h3><p>對於 Kubernetes 環境，Milvus 透過其 Helm 圖表提供整合式部署選項。這簡化了在 Milvus 旁邊部署和設定 TEI 的流程。</p>
-<p>若要在您的 Milvus Helm 部署中啟用 TEI，請</p>
+<p>若要在 Milvus Helm 部署中啟用 TEI，請</p>
 <ol>
 <li><p>設定<strong>values.yaml</strong>以啟用 TEI：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">tei:</span>
@@ -86,7 +86,7 @@ beta: Milvus 2.6.x
 helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -n &lt;your-milvus-namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
 <p><div class="alert note"></p>
-<p>使用 Helm 圖表部署時，TEI 服務將可在您的 Kubernetes 叢集中存取，網址為<code translate="no">http://my-release-milvus-tei:80</code> (使用您的發行版名稱)。在 TEI 功能組態中使用此作為您的端點。</p>
+<p>使用 Helm 圖表部署時，TEI 服務將可在您的 Kubernetes 群集中存取，網址為<code translate="no">http://my-release-milvus-tei:80</code> (使用您的發行版名稱)。在 TEI 功能組態中使用此作為您的端點。</p>
 <p></div></p></li>
 </ol>
 <h2 id="Configuration-in-Milvus" class="common-anchor-header">在 Milvus 中進行組態<button data-href="#Configuration-in-Milvus" class="anchor-icon" translate="no">
@@ -117,7 +117,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
-      <span class="hljs-attr">openai:</span>
+      <span class="hljs-attr">tei:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">tei_key</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enabled by default. no action required.</span>
 <button class="copy-code-btn"></button></code></pre></li>
@@ -254,4 +254,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>設定嵌入功能之後，請參閱<a href="/docs/zh-hant/embedding-function-overview.md">功能概述</a>，以取得有關索引設定、資料插入範例和語意搜尋作業的其他指引。</p>
+    </button></h2><p>設定嵌入功能之後，請參閱<a href="/docs/zh-hant/embedding-function-overview.md">功能概述</a>，以獲得關於索引設定、資料插入範例和語意搜尋作業的其他指引。</p>

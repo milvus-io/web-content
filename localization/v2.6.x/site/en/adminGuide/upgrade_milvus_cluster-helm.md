@@ -25,7 +25,7 @@ title: Upgrade Milvus Cluster with Helm Chart
       </svg>
     </button></h1><p>This guide describes how to upgrade your Milvus cluster with Milvus Helm charts.</p>
 <div class="alert note">
-<p>Upgrading from Milvus 2.5.x (or earlier versions) to 2.6.0-rc1 involves significant architectural changes that make this upgrade <strong>irreversible</strong>. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, <strong>you cannot roll back to a previous version once the upgrade is completed</strong>. For details on the architectural changes introduced in 2.6.0-rc1, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
+<p>Upgrading from Milvus 2.5.x (or earlier versions) to 2.6.0 involves significant architectural changes that make this upgrade <strong>irreversible</strong>. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, <strong>you cannot roll back to a previous version once the upgrade is completed</strong>. For details on the architectural changes introduced in 2.6.0, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,10 +111,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>You can choose the upgrade path for your Milvus as follows:</p>
-<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.6.0-rc1.</div>
+<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.6.0.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Upgrade Milvus using Helm</a> for an upgrade from a minor release before v2.2.3 to v2.6.0-rc1.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrate the metadata</a> before the upgrade from Milvus v2.1.x to v2.6.0-rc1.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Upgrade Milvus using Helm</a> for an upgrade from a minor release before v2.2.3 to v2.6.0.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrate the metadata</a> before the upgrade from Milvus v2.1.x to v2.6.0.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Conduct a rolling upgrade<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -148,8 +148,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operation</td><td><code translate="no">update</code></td><td>False</td></tr>
 </tbody>
 </table>
-<p>Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.6.0-rc1.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0-rc1 -w &#x27;milvusdb/milvus:v2.6.0-rc1&#x27;
+<p>Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.6.0.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0 -w &#x27;milvusdb/milvus:v2.6.0&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -176,7 +176,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>To upgrade Milvus from a minor release before v2.2.3 to the latest, run the following commands:</p>
 <pre><code translate="no" class="language-shell">helm repo update zilliztech
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.2.53 # use the helm chart version here
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=5.0.0 # use the helm chart version here
 <button class="copy-code-btn"></button></code></pre>
 <p>Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to <a href="#Check-the-Milvus-version">Check the Milvus version</a>.</p>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">Migrate the metadata<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">

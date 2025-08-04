@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Upsert 操作结合了更新和插入数据的操作。Milvus 通过检查主键是否存在来决定执行更新还是插入操作。本节将介绍如何 Upsert 实体，以及在不同情况下 Upsert 操作的具体行为。</p>
+    </button></h1><p><code translate="no">upsert</code> 操作符为在 Collections 中插入或更新实体提供了一种便捷的方法。它通过检查是否存在主键来智能地处理数据：如果主键已经存在，则更新相应的实体；否则，插入一个新实体。这使得<code translate="no">upsert</code> 成为在不确定实体是否已存在或需要避免创建重复条目的情况下管理数据的推荐方法。</p>
 <div class="alert note">
-<p>如果在创建 Collections 后动态添加新字段，并且在上载实体时没有为这些字段指定值，Milvus 会自动用其定义的默认值填充这些字段，如果没有设置默认值，则用 NULL 填充。有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>
+<p>如果在创建 Collections 后动态添加新字段，并且在上载实体时没有指定这些字段的值，Milvus 会自动用定义的默认值填充这些字段，如果没有设置默认值，则填充 NULL。有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概览<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"

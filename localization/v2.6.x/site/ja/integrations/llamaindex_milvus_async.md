@@ -109,7 +109,7 @@ DIM = <span class="hljs-number">768</span>
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
     )
 
@@ -130,7 +130,7 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 41a6f99c-489f-49ff-9821-14e2561140eb
 </code></pre>
-<p>Hugging Face埋め込みモデルをローカルでインスタンス化する。ローカルモデルを使用することで、非同期データ挿入中にAPIレート制限に達するリスクを回避できます。同時APIリクエストはすぐに加算され、パブリックAPIの予算を使い果たしてしまうからです。しかし、レート制限が高い場合は、代わりにリモートモデルサービスを使用することもできます。</p>
+<p>Hugging Face埋め込みモデルをローカルにインスタンス化する。ローカルモデルを使用することで、非同期データ挿入中にAPIレート制限に達するリスクを回避できます。同時APIリクエストはすぐに加算され、パブリックAPIの予算を使い果たしてしまうからです。しかし、レート制限が高い場合は、代わりにリモートモデルサービスを使用することもできます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbedding
 
 
@@ -222,7 +222,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
 <p>イベントループを取得する。</p>
 <pre><code translate="no" class="language-python">loop = asyncio.get_event_loop()
 <button class="copy-code-btn"></button></code></pre>
-<p>ベクトルストアに文書を非同期に追加する。</p>
+<p>非同期にベクトルストアに文書を追加する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> add_counts:
 
     <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">measure_async_add</span>():

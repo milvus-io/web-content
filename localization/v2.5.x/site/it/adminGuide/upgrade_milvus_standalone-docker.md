@@ -56,7 +56,7 @@ title: Aggiornamento di Milvus Standalone con Docker Compose
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">Migrare i metadati<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
+<h2 id="Migrate-the-metadata" class="common-anchor-header">Migrazione dei metadati<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,7 +126,7 @@ docker compose up -d
 </ul></li>
 <li>Se siete pronti a distribuire il vostro cluster su cloud:<ul>
 <li>Imparare a <a href="/docs/it/v2.5.x/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
-<li>Imparare a distribuire <a href="/docs/it/v2.5.x/gcp.md">un cluster Milvus su GCP con Kubernetes</a></li>
+<li>Imparare a distribuire <a href="/docs/it/v2.5.x/gcp.md">il cluster Milvus su GCP con Kubernetes</a></li>
 <li>Imparare a <a href="/docs/it/v2.5.x/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 </ul>

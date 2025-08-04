@@ -29,7 +29,7 @@ summary: >-
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>이 튜토리얼에서는 <a href="https://milvus.io/">Milvus와</a> 함께 <a href="https://www.llamaindex.ai/">LlamaIndex를</a> 사용하여 RAG용 비동기 문서 처리 파이프라인을 구축하는 방법을 설명합니다. LlamaIndex는 문서를 처리하고 Milvus와 같은 벡터 DB에 저장하는 방법을 제공합니다. LlamaIndex의 비동기 API와 Milvus Python 클라이언트 라이브러리를 활용하면 파이프라인의 처리량을 늘려 대량의 데이터를 효율적으로 처리하고 색인할 수 있습니다.</p>
-<p>이 튜토리얼에서는 먼저 비동기 메서드를 사용하여 높은 수준에서 LlamaIndex 및 Milvus로 RAG를 구축하는 방법을 소개한 다음, 낮은 수준의 메서드 사용과 동기 및 비동기의 성능 비교에 대해 소개합니다.</p>
+<p>이 튜토리얼에서는 먼저 비동기 메서드를 사용하여 높은 수준에서 LlamaIndex와 Milvus로 RAG를 구축하는 방법을 소개한 다음, 낮은 수준의 메서드 사용과 동기식과 비동기식의 성능 비교에 대해 소개합니다.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,7 +111,7 @@ DIM = <span class="hljs-number">768</span>
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
     )
 
@@ -132,7 +132,7 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 41a6f99c-489f-49ff-9821-14e2561140eb
 </code></pre>
-<p>포옹하는 얼굴 임베딩 모델을 로컬로 인스턴스화합니다. 로컬 모델을 사용하면 동시 API 요청이 빠르게 합산되어 공용 API의 예산이 소진될 수 있으므로 비동기 데이터 삽입 중에 API 속도 제한에 도달할 위험을 피할 수 있습니다. 그러나 속도 제한이 높은 경우 원격 모델 서비스를 대신 사용할 수 있습니다.</p>
+<p>포옹하는 얼굴 임베딩 모델을 로컬로 인스턴스화합니다. 로컬 모델을 사용하면 동시 API 요청이 빠르게 합산되어 퍼블릭 API의 예산이 소진될 수 있으므로 비동기 데이터 삽입 중에 API 속도 제한에 도달할 위험을 피할 수 있습니다. 그러나 속도 제한이 높은 경우 원격 모델 서비스를 대신 사용할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbedding
 
 

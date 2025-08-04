@@ -37,7 +37,7 @@ title: إدارة مجموعات الموارد
       </svg>
     </button></h2><p>يمكن أن تحتوي مجموعة الموارد على عدة أو كل عقد الاستعلام في مجموعة Milvus. يمكنك تحديد الطريقة التي تريد بها تخصيص عقد الاستعلام بين مجموعات الموارد بناءً على ما هو الأكثر منطقية بالنسبة لك. على سبيل المثال، في سيناريو متعدد المجموعات، يمكنك تخصيص عدد مناسب من عقد الاستعلام لكل مجموعة موارد وتحميل المجموعات في مجموعة موارد مختلفة، بحيث تكون العمليات داخل كل مجموعة مستقلة فعليًا عن تلك الموجودة في المجموعات الأخرى.</p>
 <p>لاحظ أن مثيل Milvus يحتفظ بمجموعة موارد افتراضية لاحتواء جميع عقد الاستعلام عند بدء التشغيل ويسميها <strong>__default_resource_group</strong>.</p>
-<p>بدءًا من الإصدار 2.4.1، يوفر Milvus واجهة برمجة تطبيقات مجموعة الموارد التوضيحية، بينما تم إهمال واجهة برمجة تطبيقات مجموعة الموارد القديمة. تُمكّن واجهة برمجة التطبيقات التوضيحية الجديدة المستخدمين من تحقيق الخصوصية في البيئات السحابية الأصلية بشكل أسهل.</p>
+<p>بدءًا من الإصدار 2.4.1، يوفر Milvus واجهة برمجة تطبيقات مجموعة الموارد التوضيحية، بينما تم إهمال واجهة برمجة تطبيقات مجموعة الموارد القديمة. تُمكِّن واجهة برمجة التطبيقات التوضيحية الجديدة المستخدمين من تحقيق الخصوصية في بيئات السحابة الأصلية بشكل أسهل.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">مفاهيم مجموعة الموارد<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -213,7 +213,7 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
+<p>لمزيد من التفاصيل، يُرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق المجموعة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -295,7 +295,7 @@ milvus_client.update_resource_groups({
 scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>توسيع نطاق المجموعة إلى الداخل</p>
+<li><p>توسيع نطاق الكتلة في</p>
 <p>وبالمثل، يمكننا إنشاء قواعد توسيع نطاق في التي تعطي الأولوية لاختيار QueryNodes من مجموعة الموارد <strong>_pending_nodes</strong>. يمكن الحصول على هذه المعلومات من خلال واجهة برمجة التطبيقات <code translate="no">describe_resource_group</code>. تحقيق هدف التوسع في مجموعة الموارد المحددة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({

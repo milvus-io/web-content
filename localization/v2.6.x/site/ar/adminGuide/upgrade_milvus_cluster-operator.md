@@ -23,8 +23,8 @@ title: ترقية مجموعة ميلفوس العنقودية باستخدام 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يصف هذا الدليل كيفية ترقية مجموعة Milvus العنقودية الخاصة بك مع مشغل Milvus.</p>
-<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">ترقية مشغل ميلفوس الخاص بك<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
+    </button></h1><p>يصف هذا الدليل كيفية ترقية مجموعة Milvus العنقودية الخاصة بك باستخدام مشغل Milvus.</p>
+<h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,17 +39,52 @@ title: ترقية مجموعة ميلفوس العنقودية باستخدام 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قم بتشغيل الأمر التالي لترقية إصدار مشغل Milvus الخاص بك إلى الإصدار v1.2.0.</p>
+    </button></h2><p>اعتبارًا من Milvus 2.6.0، تم دمج المنسقين المنفصلين القدامى (<code translate="no">dataCoord</code> ، <code translate="no">queryCoord</code> ، و <code translate="no">indexCoord</code>) في منسق واحد <code translate="no">mixCoord</code>. قبل الترقية، تأكد من أن مواصفات CRD الخاصة بك تستخدم <code translate="no">mixCoord</code> بدلاً من مكونات المنسق المنفصلة.</p>
+<p>إذا كنت تستخدم المنسقين المنفصلين، قم بتعديل مواصفاتك:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">mixCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># set to 1 or more</span>
+    <span class="hljs-attr">dataCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+    <span class="hljs-attr">queryCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+    <span class="hljs-attr">indexCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">قم بترقية مشغل ميلفوس الخاص بك<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>قم بتشغيل الأمر التالي لترقية إصدار مشغل Milvus الخاص بك إلى الإصدار v1.3.0.</p>
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بمجرد أن تقوم بترقية مشغل ميلفوس الخاص بك إلى أحدث إصدار، يكون لديك الخيارات التالية:</p>
+<p>بمجرد أن تقوم بترقية مشغل Milvus الخاص بك إلى أحدث إصدار، يكون لديك الخيارات التالية:</p>
 <ul>
-<li>لترقية ميلفوس من الإصدار 2.2.3 أو الإصدارات الأحدث إلى الإصدار 2.5.12، يمكنك <a href="#Conduct-a-rolling-upgrade">إجراء ترقية متجددة</a>.</li>
-<li>لترقية ميلفوس من إصدار ثانوي قبل الإصدار 2.2.3 إلى 2.5.12، يُنصح بترقية ميلفوس <a href="#Upgrade-Milvus-by-changing-its-image">عن طريق تغيير إصدار الصورة الخاص به</a>.</li>
-<li>لترقية Milvus من الإصدار 2.1.x إلى الإصدار 2.5.12، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل الترقية الفعلية.</li>
+<li>لترقية ميلفوس من الإصدار 2.2.3، يمكنك <a href="#Conduct-a-rolling-upgrade">إجراء ترقية متجددة</a>.</li>
+<li>لترقية Milvus من إصدار ثانوي قبل الإصدار 2.2.3 إلى الإصدار 2.6.0، يُنصح بترقية Milvus <a href="#Upgrade-Milvus-by-changing-its-image">عن طريق تغيير إصدار الصورة الخاص به</a>.</li>
+<li>لترقية Milvus من الإصدار 2.1.x إلى الإصدار 2.6.0، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل الترقية الفعلية.</li>
 </ul>
+<blockquote>
+<p><strong>ملاحظة</strong>: يوصى بشدة بترقية إصدار ثانوي واحد في كل مرة، واستخدام أحدث إصدار مستقر من هذا الإصدار الثانوي. على سبيل المثال، إذا كنت تقوم بالترقية من الإصدار 2.4.x إلى الإصدار 2.6.x، فيجب عليك أولاً الترقية إلى الإصدار 2.4.x الأحدث، ثم إلى الإصدار 2.5.x الأحدث، وأخيرًا إلى الإصدار 2.6.x. يضمن ذلك استخدام أحدث إصدار مستقر لكل إصدار ثانوي، والذي من المرجح أن يكون متوافقًا مع بياناتك وتكويناتك الحالية.</p>
+</blockquote>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">إجراء ترقية متجددة<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,8 +100,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>منذ الإصدار Milvus 2.2.3، يمكنك تكوين منسقي Milvus للعمل في وضع الاستعداد النشط وتمكين ميزة الترقية المتجددة لهم، بحيث يمكن لـ Milvus الاستجابة للطلبات الواردة أثناء ترقيات المنسق. في الإصدارات السابقة، يجب إزالة المنسقين ثم إنشاؤهم أثناء الترقية، مما قد يؤدي إلى تعطل معين للخدمة.</p>
-<p>استنادًا إلى إمكانيات التحديث المتجدد التي توفرها Kubernetes، يفرض مشغل Milvus تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
+    </button></h2><p>منذ الإصدار 2.2.3 من ميلفوس 2.2.3، يمكنك تكوين منسقي ميلفوس للعمل في وضع الاستعداد النشط وتمكين ميزة الترقية المتجددة لهم، بحيث يمكن لـ Milvus الاستجابة للطلبات الواردة أثناء ترقيات المنسق. في الإصدارات السابقة، يجب إزالة المنسقين ثم إنشاؤهم أثناء الترقية، مما قد يؤدي إلى تعطل معين للخدمة.</p>
+<p>استنادًا إلى إمكانات التحديث المتجدد التي توفرها Kubernetes، يفرض مشغل Milvus تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
 <p>يتم تعطيل ميزة الترقية المتجددة بشكل افتراضي. تحتاج إلى تمكينها بشكل صريح من خلال ملف تهيئة.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -76,7 +111,10 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+    <span class="hljs-comment"># Milvus Operator recognizes the image tag as a semantic version, and decides what to do based on the version.</span>
+    <span class="hljs-comment"># So in case you&#x27;re using a non-sermantic verison image tag, you may also need to set the `version` field so that Milvus Operator can recognize the version correctly</span>
+    <span class="hljs-attr">version:</span> <span class="hljs-string">v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>في ملف التكوين أعلاه، اضبط <code translate="no">spec.components.enableRollingUpdate</code> على <code translate="no">true</code> واضبط <code translate="no">spec.components.image</code> على إصدار Milvus المطلوب.</p>
 <p>بشكل افتراضي، يقوم Milvus بإجراء ترقية متجددة للمنسقين بطريقة مرتبة، حيث يقوم باستبدال صور حجرة المنسق واحدة تلو الأخرى. لتقليل وقت الترقية، ضع في اعتبارك تعيين <code translate="no">spec.components.imageUpdateMode</code> إلى <code translate="no">all</code> بحيث يستبدل ميلفوس جميع صور الكبسولات في نفس الوقت.</p>
@@ -88,7 +126,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">all</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك تعيين <code translate="no">spec.components.imageUpdateMode</code> إلى <code translate="no">rollingDowngrade</code> لجعل Milvus يستبدل صور جراب المنسق بإصدار أقل.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -128,7 +166,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
   <span class="hljs-attr">components:</span>
-   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>ثم قم بتشغيل ما يلي لتنفيذ الترقية:</p>
 <pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
@@ -148,8 +186,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>منذ الإصدار Milvus 2.2.0، أصبحت البيانات الوصفية غير متوافقة مع تلك الموجودة في الإصدارات السابقة. تفترض مقتطفات الأمثلة التالية ترقية من Milvus 2.1.4 إلى Milvus 2.5.12.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. إنشاء ملف <code translate="no">.yaml</code> لترحيل البيانات الوصفية</h3><p>قم بإنشاء ملف ترحيل البيانات الوصفية. وفيما يلي مثال على ذلك. تحتاج إلى تحديد <code translate="no">name</code> و <code translate="no">sourceVersion</code> و <code translate="no">targetVersion</code> في ملف التكوين. يقوم المثال التالي بتعيين <code translate="no">name</code> إلى <code translate="no">my-release-upgrade</code> و <code translate="no">sourceVersion</code> إلى <code translate="no">v2.1.4</code> و <code translate="no">targetVersion</code> إلى <code translate="no">v2.5.12</code>. هذا يعني أنه ستتم ترقية مجموعة ميلفوس من الإصدار 2.1.4 إلى الإصدار 2.5.12.</p>
+    </button></h2><p>منذ الإصدار Milvus 2.2.0، أصبحت البيانات الوصفية غير متوافقة مع تلك الموجودة في الإصدارات السابقة. تفترض مقتطفات الأمثلة التالية ترقية من Milvus 2.1.4 إلى Milvus 2.6.0.</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. إنشاء ملف <code translate="no">.yaml</code> لترحيل البيانات الوصفية</h3><p>قم بإنشاء ملف ترحيل البيانات الوصفية. وفيما يلي مثال على ذلك. تحتاج إلى تحديد <code translate="no">name</code> و <code translate="no">sourceVersion</code> و <code translate="no">targetVersion</code> في ملف التكوين. يقوم المثال التالي بتعيين <code translate="no">name</code> إلى <code translate="no">my-release-upgrade</code> و <code translate="no">sourceVersion</code> إلى <code translate="no">v2.1.4</code> و <code translate="no">targetVersion</code> إلى <code translate="no">v2.6.0</code>. هذا يعني أنه ستتم ترقية مجموعة Milvus من الإصدار 2.1.4 إلى الإصدار 2.6.0.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
 <span class="hljs-attr">metadata:</span>
@@ -159,9 +197,9 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
     <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.5.12&quot;</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.6.0&quot;</span>
   <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.5.12&quot;</span>
+  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.6.0&quot;</span>
   <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
   <span class="hljs-comment"># operation: upgrade</span>
   <span class="hljs-comment"># rollbackIfFailed: true</span>

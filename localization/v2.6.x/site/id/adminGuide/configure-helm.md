@@ -39,7 +39,7 @@ Pada rilis saat ini, semua parameter hanya berlaku setelah Milvus dimulai ulang.
         ></path>
       </svg>
     </button></h2><p>Anda dapat mengkonfigurasi Milvus dengan file konfigurasi <code translate="no">values.yaml</code>.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">Mengunduh file konfigurasi</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Unduh</a> <code translate="no">values.yaml</code> secara langsung atau dengan perintah berikut.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">Mengunduh file konfigurasi</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Unduh</a> <code translate="no">values.yaml</code> secara langsung atau dengan perintah berikut.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Memodifikasi berkas konfigurasi</h3><p>Konfigurasikan instance Milvus Anda agar sesuai dengan skenario aplikasi Anda dengan menyesuaikan parameter yang sesuai di <code translate="no">values.yaml</code>.</p>

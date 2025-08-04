@@ -118,7 +118,7 @@ summary: Streaming Service 是 Milvus 內部串流系統模組的概念，以 Wr
       </svg>
     </button></h2><p><strong>Query Delegator</strong>在每個串流節點上執行，負責在單一分片上執行<strong>增量查詢</strong>。它會產生查詢計劃、將計劃轉送至相關的查詢節點，並匯總結果。</p>
 <p>此外，查詢委託器負責將<strong>Delete 作業</strong>廣播給其他查詢節點。</p>
-<p>查詢委託器總是與 WAL 元件共存於同一個串流節點上。但如果集合設定為多重複製，則會在其他串流節點上部署<strong>N-1 個委</strong>託器。</p>
+<p>查詢委託器總是與 WAL 元件共存於同一個串流節點上。但如果集合設定為多重複製，則會在其他串流節點上部署<strong>N-1 個</strong>Delegator。</p>
 <h2 id="WAL-Lifetime-and-Wait-for-Ready" class="common-anchor-header">WAL 壽命與等待就緒<button data-href="#WAL-Lifetime-and-Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

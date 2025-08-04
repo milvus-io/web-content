@@ -62,7 +62,7 @@ summary: >-
 <p>Der Parameter <code translate="no">search_list_size</code> bestimmt die Breite des Graphenverfeinerungsprozesses. Eine höhere <code translate="no">search_list_size</code> erweitert die Suche nach Nachbarn während der Konstruktion und kann die endgültige Genauigkeit verbessern, erhöht aber die Zeit für die Indexerstellung.</p></li>
 </ul></li>
 </ol>
-<p>Weitere Informationen zur Parametereinstellung finden Sie unter <a href="/docs/de/diskann.md#diskann-params">DISKANN-Parameter</a>.</p>
+<p>Weitere Informationen zur Parametereinstellung finden Sie unter <a href="/docs/de/diskann.md#DISKANN-params">DISKANN-Parameter</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN verwendet <strong>PQ</strong>, um hochdimensionale Vektoren in kleinere Darstellungen<strong>(PQ-Codes</strong>) zu komprimieren, die im Speicher für schnelle Näherungsabstandsberechnungen gespeichert werden.</p>
 <p>Der Parameter <code translate="no">pq_code_budget_gb_ratio</code> verwaltet den Speicherbedarf für die Speicherung dieser PQ-Codes. Er stellt ein Verhältnis zwischen der Gesamtgröße der Vektoren (in Gigabyte) und dem für die Speicherung der PQ-Codes zugewiesenen Platz dar. Sie können das tatsächliche PQ-Code-Budget (in Gigabyte) mit dieser Formel berechnen:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -149,62 +149,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die DISKANN-Parameter können mit zwei primären Methoden konfiguriert werden:</p>
-<ul>
-<li><p><strong>Milvus-Konfigurationsdatei:</strong> Passen Sie die DISKANN-Parameter über die Milvus-Konfigurationsdatei an. Diese Methode ist für die Einstellung allgemeiner Konfigurationsoptionen für Ihre Milvus-Instanz geeignet.</p></li>
-<li><p><strong>Milvus SDK:</strong> Feinabstimmung der DISKANN-Parameter mit Hilfe des Milvus SDK während der Indexerstellung oder Suchvorgänge. Dies ermöglicht eine detailliertere Steuerung und dynamische Parameteranpassungen auf der Grundlage spezifischer Anwendungsfälle.</p></li>
-</ul>
-<div class="alert note">
-<p>Die vom SDK vorgenommene Konfiguration setzt alle in der Konfigurationsdatei definierten Einstellungen außer Kraft und bietet somit Flexibilität und Kontrolle für spezifische Anwendungen und Datensätze.</p>
-</div>
-<h3 id="Milvus-configuration-file" class="common-anchor-header">Milvus-Konfigurationsdatei</h3><p>Hier ein Beispiel für die Einstellung der DISKANN-Parameter in der Datei <code translate="no">milvus.yaml</code>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
-  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># When enable this configuration, the index parameters defined following will be automatically populated as index parameters, without requiring user input.</span>
-  <span class="hljs-attr">DISKANN:</span>
-    <span class="hljs-attr">build:</span>
-      <span class="hljs-attr">max_degree:</span> <span class="hljs-number">56</span> <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
-      <span class="hljs-attr">pq_code_budget_gb_ratio:</span> <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
-      <span class="hljs-attr">search_cache_budget_gb_ratio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
-      <span class="hljs-attr">search_list_size:</span> <span class="hljs-number">100</span> <span class="hljs-comment"># Size of the candidate list during building graph</span>
-    <span class="hljs-attr">search:</span>
-      <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
+    </button></h2><p>DISKANN-bezogene Parameter können über Ihre Milvus-Konfigurationsdatei (<code translate="no">milvus.yaml</code>) konfiguriert werden:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">DiskIndex:</span>
+    <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>  <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
+    <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>  <span class="hljs-comment"># Size of the candidate list during building graph</span>
+    <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>  <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
+    <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
+    <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="SDK-configuration" class="common-anchor-header">SDK-Konfiguration</h3><p>Hier ein Beispiel für die Einstellung von DISKANN-Parametern mit Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">Erstellen von</h4><p>Um einen <code translate="no">IVF_FLAT</code> -Index für ein Vektorfeld in Milvus zu erstellen, verwenden Sie die Methode <code translate="no">add_index()</code> und geben Sie die Parameter <code translate="no">index_type</code>, <code translate="no">metric_type</code> und zusätzliche Parameter für den Index an.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-<span class="hljs-comment"># Prepare index building params</span>
-index_params = MilvusClient.prepare_index_params()
-
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;DISKANN&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;max_degree&quot;</span>: <span class="hljs-number">56</span>, <span class="hljs-comment"># Maximum number of connections (edges) each data point can have</span>
-        <span class="hljs-string">&quot;search_list_size&quot;</span>: <span class="hljs-number">100</span>,
-        <span class="hljs-string">&quot;search_cache_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.10</span>, <span class="hljs-comment"># Amount of memory allocated for caching frequently accessed parts of the graph</span>
-        <span class="hljs-string">&quot;pq_code_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data</span>
-    } <span class="hljs-comment"># Index building params</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Sobald die Index-Parameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Index-Parameter in der Methode <code translate="no">create_collection</code> übergeben. Einzelheiten finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
-<h4 id="Search" class="common-anchor-header">Suche</h4><p>Sobald der Index erstellt und die Entitäten eingefügt sind, können Sie Ähnlichkeitssuchen im Index durchführen.</p>
-<pre><code translate="no" class="language-python">search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {
-        <span class="hljs-string">&quot;beam_width_ratio&quot;</span>: <span class="hljs-number">4.0</span>, <span class="hljs-comment"># degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</span>
-    }
-}
-
-res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
-)
-<button class="copy-code-btn"></button></code></pre>
+<p>Einzelheiten zu den Parameterbeschreibungen finden Sie unter <a href="/docs/de/diskann.md#DISKANN-params">DISKANN params</a>.</p>
 <h2 id="DISKANN-params" class="common-anchor-header">DISKANN-Parameter<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -220,7 +175,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Feinabstimmung der DISKANN-Parameter ermöglicht es Ihnen, das Verhalten von DISKANN an Ihren spezifischen Datensatz und Ihre Suchlast anzupassen und das richtige Gleichgewicht zwischen Geschwindigkeit, Genauigkeit und Speichernutzung zu finden.</p>
+    </button></h2><p>Die Feinabstimmung der DISKANN-Parameter ermöglicht es Ihnen, das Verhalten von DISKANN an Ihren spezifischen Datensatz und Ihre Suchlast anzupassen und das richtige Gleichgewicht zwischen Geschwindigkeit, Genauigkeit und Speicherverbrauch zu finden.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>Diese Parameter beeinflussen, wie der DISKANN-Index aufgebaut wird. Die Anpassung dieser Parameter kann die Indexgröße, die Erstellungszeit und die Suchqualität beeinflussen.</p>
 <table>
    <tr>
@@ -232,7 +187,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code translate="no">max_degree</code></p></td>
+     <td><p><code translate="no">MaxDegree</code></p></td>
      <td><p>Steuert die maximale Anzahl von Verbindungen (Kanten), die jeder Datenpunkt im Vamana-Diagramm haben kann.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 512]</p>
 <p><strong>Standardwert</strong>: <code translate="no">56</code></p></td>
@@ -241,16 +196,15 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>Bestimmt die Anzahl der Nachbarschaftskandidaten, die für jeden Datenpunkt bei der Erstellung des Diagramms berücksichtigt werden.</p></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p>Während der Indexerstellung definiert dieser Parameter die Größe des Kandidatenpools, der bei der Suche nach den nächsten Nachbarn für jeden Knoten verwendet wird. Für jeden Knoten, der dem Graphen hinzugefügt wird, führt der Algorithmus eine Liste mit den <code translate="no">search_list_size</code> besten bisher gefundenen Kandidaten. Die Suche nach Nachbarn wird beendet, wenn diese Liste nicht mehr verbessert werden kann. Aus diesem endgültigen Kandidatenpool werden die besten <code translate="no">max_degree</code> Knoten ausgewählt, um die endgültigen Kanten zu bilden.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Standardwert</strong>: <code translate="no">100</code></p></td>
-     <td><p>Größere Werte führen zu umfangreicheren Graphen, was die Suchqualität verbessern kann, aber auch die Erstellungszeit erhöht. 
- In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [K, 10K].</p></td>
+     <td><p>Ein größerer <code translate="no">search_list_size</code> erhöht die Wahrscheinlichkeit, die wahren nächsten Nachbarn für jeden Knoten zu finden, was zu einem qualitativ hochwertigeren Graphen und einer besseren Suchleistung (Recall) führen kann. Dies hat jedoch den Nachteil, dass die Indexerstellung deutlich länger dauert. Er sollte immer auf einen Wert größer oder gleich <code translate="no">max_degree</code> gesetzt werden.</p></td>
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">SearchCacheBudgetGBRatio</code></p></td>
      <td><p>Steuert die Menge an Speicher, die für die Zwischenspeicherung häufig aufgerufener Teile des Graphen während des Indexaufbaus zugewiesen wird.</p></td>
      <td><p><strong>Typ</strong>: Float <strong>Bereich</strong>: [0.0, 0.3)</p>
 <p><strong>Standardwert</strong>: <code translate="no">0.10</code></p></td>
@@ -258,7 +212,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>PQ</p></td>
-     <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">PQCodeBudgetGBRatio</code></p></td>
      <td><p>Steuert die Größe der PQ-Codes (komprimierte Darstellungen von Datenpunkten) im Vergleich zur Größe der unkomprimierten Daten.</p></td>
      <td><p><strong>Typ</strong>: Float <strong>Bereich</strong>: (0.0, 0.25]</p>
 <p><strong>Standardwert</strong>: <code translate="no">0.125</code></p></td>
@@ -277,10 +231,18 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code translate="no">beam_width_ratio</code></p></td>
+     <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>Steuert den Grad der Parallelität während der Suche, indem die maximale Anzahl der parallelen Festplatten-E/A-Anforderungen im Verhältnis zur Anzahl der verfügbaren CPU-Kerne festgelegt wird.</p></td>
      <td><p><strong>Typ</strong>: Float <strong>Bereich</strong>: [1, max(128 / CPU-Anzahl, 16)]</p>
 <p><strong>Standardwert</strong>: <code translate="no">4.0</code></p></td>
      <td><p>Höhere Werte erhöhen die Parallelität, was die Suche auf Systemen mit leistungsstarken CPUs und SSDs beschleunigen kann. Ein zu hoher Wert kann jedoch zu übermäßiger Ressourcenkonkurrenz führen. In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [1.0, 4.0].</p></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p>Während eines Suchvorgangs bestimmt dieser Parameter die Größe des Kandidatenpools, den der Algorithmus beim Durchlaufen des Graphen beibehält. Ein größerer Wert erhöht die Wahrscheinlichkeit, dass die wahren nächsten Nachbarn gefunden werden (höhere Trefferquote), erhöht aber auch die Suchlatenz.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>int_max</em>]</p>
+<p><strong>Standardwert</strong>: <code translate="no">100</code></p></td>
+     <td><p>Um ein gutes Gleichgewicht zwischen Leistung und Genauigkeit zu erreichen, wird empfohlen, diesen Wert gleich oder etwas größer als die Anzahl der abzurufenden Ergebnisse (top_k) zu setzen.</p></td>
    </tr>
 </table>

@@ -21,6 +21,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p><code translate="no">standard</code> 분석기는 Milvus의 기본 분석기로, 분석기를 지정하지 않으면 텍스트 필드에 자동으로 적용됩니다. 문법 기반 토큰화를 사용하므로 대부분의 언어에 효과적입니다.</p>
+<div class="alert note">
+<p><code translate="no">standard</code> 분석기는 단어 경계에 공백, 구두점 등의 구분 기호에 의존하는 언어에 적합합니다. 그러나 중국어, 일본어, 한국어와 같은 언어는 사전 기반 토큰화가 필요합니다. 이러한 경우에는 다음과 같은 언어 전용 분석기를 사용하거나 <a href="/docs/ko/chinese-analyzer.md"><code translate="no">chinese</code></a> 와 같은 언어 전용 분석기 또는 특수 토큰화 도구가 포함된 사용자 정의 분석기( <a href="/docs/ko/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a>) 및 필터를 사용하는 것이 정확한 토큰화와 더 나은 검색 결과를 보장하기 위해 적극 권장됩니다.</p>
+</div>
 <h2 id="Definition" class="common-anchor-header">정의<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">standard</code> 분석기는 다음으로 구성됩니다:</p>
 <ul>
-<li><p><strong>토큰화 도구</strong>: <code translate="no">standard</code> 토큰화 도구를 사용하여 문법 규칙에 따라 텍스트를 개별 단어 단위로 분할합니다. 자세한 내용은 <a href="/docs/ko/standard-tokenizer.md">표준을</a> 참조하세요.</p></li>
+<li><p><strong>토큰화 도구</strong>: <code translate="no">standard</code> 토큰화기를 사용하여 문법 규칙에 따라 텍스트를 개별 단어 단위로 분할합니다. 자세한 내용은 <a href="/docs/ko/standard-tokenizer.md">표준을</a> 참조하세요.</p></li>
 <li><p><strong>필터</strong>: <code translate="no">lowercase</code><a href="/docs/ko/lowercase-filter.md"> 필터를</a> 사용하여 모든 토큰을 소문자로 변환하여 대소문자를 구분하지 않고 검색할 수 있도록 합니다. 자세한 내용은 다음을 참조하세요.</p></li>
 </ul>
 <p><code translate="no">standard</code> 분석기의 기능은 다음 사용자 지정 분석기 구성과 동일합니다:</p>
@@ -212,7 +215,33 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

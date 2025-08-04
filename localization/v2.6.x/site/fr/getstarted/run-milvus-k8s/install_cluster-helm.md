@@ -114,10 +114,45 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
         ></path>
       </svg>
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Déployer un cluster Milvus</h3><p>Une fois que vous avez installé la carte Helm, vous pouvez démarrer Milvus sur Kubernetes. Cette section vous guidera à travers les étapes de démarrage de Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install my-release milvus/milvus</span>
+<ul>
+<li><p>Pour déployer une instance Milvus en mode autonome, exécutez la commande suivante :</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
+  --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+  <div class="alert note">
+<p>À partir de Milvus 2.6.x, les changements d'architecture suivants ont été apportés en mode autonome :</p>
+<ul>
+<li>La file d'attente de messages (MQ) par défaut est <strong>Woodpecker</strong>.</li>
+<li>Le composant <strong>Streaming Node</strong> est introduit et activé par défaut.</li>
+</ul>
+<p>Pour plus de détails, voir la <a href="/docs/fr/architecture_overview.md">présentation de l'architecture</a>.</p>
+  </div>
+</li>
+<li><p>Pour déployer une instance Milvus en mode cluster, exécutez la commande suivante :</p>
+<p>Vous pouvez utiliser <code translate="no">--set</code> pour installer le cluster Milvus avec des configurations personnalisées. La commande suivante définit <code translate="no">streaming.enabled</code> sur <code translate="no">true</code> pour activer le service de streaming et définit <code translate="no">indexNode.enabled</code> sur <code translate="no">false</code> pour désactiver le service d'indexation. Dans ce cas, le nœud de streaming sera responsable de toutes les tâches de traitement des données et d'indexation.</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
+<button class="copy-code-btn"></button></code></pre>
+  <div class="alert note">
+<p>A partir de Milvus 2.6.x, les modifications suivantes ont été apportées à l'architecture en mode cluster :</p>
+<ul>
+<li>Le MQ par défaut est toujours <strong>Pulsar</strong>.</li>
+<li>Le composant <strong>Streaming Node</strong> est introduit et activé par défaut.</li>
+<li>Le <strong>nœud d'index</strong> et le <strong>nœud de données</strong> sont fusionnés en un seul composant <strong>nœud de données</strong>.</li>
+</ul>
+<p>Pour plus de détails, reportez-vous à l'<a href="/docs/fr/architecture_overview.md">aperçu de l'architecture</a>.</p>
+  </div>
+</li>
+</ul>
 <p>Dans la commande ci-dessus, <code translate="no">my-release</code> est le nom de la version et <code translate="no">milvus/milvus</code> est le référentiel graphique installé localement. Pour utiliser un nom différent, remplacez <code translate="no">my-release</code> par celui qui vous convient.</p>
-<p>La commande ci-dessus déploie un cluster Milvus avec ses composants et dépendances en utilisant les configurations par défaut. Pour personnaliser ces paramètres, nous vous recommandons d'utiliser l'<a href="https://milvus.io/tools/sizing">outil de dimensionnement Milvus</a> pour ajuster les configurations en fonction de la taille réelle de vos données, puis de télécharger le fichier YAML correspondant. Pour en savoir plus sur les paramètres de configuration, reportez-vous à la <a href="https://milvus.io/docs/system_configuration.md">liste de contrôle des configurations du système Milvus</a>.</p>
+<p>Les commandes ci-dessus déploient une instance Milvus avec ses composants et dépendances en utilisant les configurations par défaut. Pour personnaliser ces paramètres, nous vous recommandons d'utiliser l'<a href="https://milvus.io/tools/sizing">outil de dimensionnement Milvus</a> pour ajuster les configurations en fonction de la taille réelle de vos données, puis de télécharger le fichier YAML correspondant. Pour en savoir plus sur les paramètres de configuration, reportez-vous à la <a href="https://milvus.io/docs/system_configuration.md">liste de contrôle des configurations du système Milvus</a>.</p>
 <div class="alert note">
   <ul>
     <li>Le nom de la version ne doit contenir que des lettres, des chiffres et des tirets. Les points ne sont pas autorisés dans le nom de la version.</li>
@@ -167,6 +202,43 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>En option, vous pouvez utiliser <code translate="no">:19530</code> au lieu de <code translate="no">27017:19530</code> dans la commande ci-dessus pour permettre à <code translate="no">kubectl</code> d'allouer un port local pour vous afin que vous n'ayez pas à gérer les conflits de port.</p>
 <p>Par défaut, le port-forwarding de kubectl n'écoute que sur <code translate="no">localhost</code>. Utilisez l'indicateur <code translate="no">address</code> si vous souhaitez que Milvus écoute sur l'adresse IP sélectionnée ou sur toutes les adresses IP. La commande suivante fait écouter port-forward sur toutes les adresses IP de la machine hôte.</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facultatif) Mise à jour des configurations Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Vous pouvez mettre à jour les configurations de votre cluster Milvus en modifiant le fichier <code translate="no">values.yaml</code> et en l'appliquant à nouveau.</p>
+<ol>
+<li>Créez un fichier <code translate="no">values.yaml</code> avec les configurations souhaitées.</li>
+</ol>
+<p>La procédure suivante suppose que vous souhaitez activer <code translate="no">proxy.http</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    proxy:
+      http:
+        enabled: true
+</span><button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Appliquer le fichier <code translate="no">values.yaml</code>.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Vérifiez les configurations mises à jour.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm get values my-release
+<button class="copy-code-btn"></button></code></pre>
+<p>La sortie doit montrer les configurations mises à jour.</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Accès à l'interface Web de Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

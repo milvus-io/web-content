@@ -160,7 +160,7 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 <span class="hljs-comment"># After a while, succeeded in moving 1 node(s) from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Caricare collezioni e partizioni in un gruppo di risorse.</p>
-<p>Una volta che ci sono nodi di query in un gruppo di risorse, è possibile caricare collezioni in questo gruppo di risorse. Il seguente snippet presuppone che esista già una raccolta denominata <code translate="no">demo</code>.</p>
+<p>Una volta che ci sono nodi di query in un gruppo di risorse, è possibile caricare collezioni in questo gruppo di risorse. Il seguente snippet presuppone che esista già una raccolta chiamata <code translate="no">demo</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
 collection_name = <span class="hljs-string">&quot;demo&quot;</span>
@@ -180,7 +180,7 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 <span class="hljs-comment"># Use the load method of a collection to load one of its partition</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
-<p>Si noti che <code translate="no">_resource_groups</code> è un parametro opzionale e lasciandolo non specificato Milvus caricherà le repliche sui nodi della query nel gruppo di risorse predefinito.</p>
+<p>Si noti che <code translate="no">_resource_groups</code> è un parametro opzionale, e lasciandolo non specificato Milvus caricherà le repliche sui nodi di query nel gruppo di risorse predefinito.</p>
 <p>Per fare in modo che Milus carichi ogni replica di una collezione in un gruppo di risorse separato, assicurarsi che il numero di gruppi di risorse sia uguale al numero di repliche.</p></li>
 <li><p>Trasferire le repliche tra i gruppi di risorse.</p>
 <p>Milvus utilizza <a href="/docs/it/v2.5.x/replica.md">le repliche</a> per ottenere il bilanciamento del carico tra i <a href="/docs/it/v2.5.x/glossary.md#Segment">segmenti</a> distribuiti su diversi nodi di interrogazione. È possibile spostare alcune repliche di una collezione da un gruppo di risorse a un altro come segue:</p>
@@ -328,8 +328,8 @@ scale_to(<span class="hljs-number">4</span>)
         ></path>
       </svg>
     </button></h2><ul>
-<li>Le repliche di una singola collezione e i gruppi di risorse hanno una relazione N a N.</li>
-<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti uniformemente tra le repliche, assicurando che la differenza nel numero di QueryNode di ciascuna replica non superi 1.</li>
+<li>Le repliche di una singola raccolta e i gruppi di risorse hanno una relazione N a N.</li>
+<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti uniformemente tra le repliche, assicurando che la differenza nel numero di QueryNode di ogni replica non superi 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

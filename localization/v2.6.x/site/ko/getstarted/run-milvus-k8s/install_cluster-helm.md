@@ -113,11 +113,46 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. 밀버스 클러스터 배포</h3><p>헬름 차트를 설치했으면, 쿠버네티스에서 밀버스를 시작할 수 있다. 이 섹션에서는 Milvus를 시작하는 단계를 안내합니다.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install my-release milvus/milvus</span>
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. 밀버스 클러스터 배포</h3><p>헬름 차트를 설치했으면, 쿠버네티스에서 밀버스를 시작할 수 있다. 이 섹션에서는 Milvus를 시작하는 단계를 안내한다.</p>
+<ul>
+<li><p>독립 실행형 모드에서 Milvus 인스턴스를 배포하려면 다음 명령을 실행합니다:</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
+  --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령에서 <code translate="no">my-release</code> 은 릴리스 이름이고 <code translate="no">milvus/milvus</code> 은 로컬로 설치된 차트 리포지토리입니다. 다른 이름을 사용하려면 <code translate="no">my-release</code> 을 원하는 이름으로 바꾸세요.</p>
-<p>위의 명령은 기본 구성을 사용하여 구성 요소 및 종속성과 함께 Milvus 클러스터를 배포합니다. 이러한 설정을 사용자 지정하려면 <a href="https://milvus.io/tools/sizing">Milvus 크기</a> 조정 <a href="https://milvus.io/tools/sizing">도구를</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 다음 해당 YAML 파일을 다운로드하는 것이 좋습니다. 구성 매개변수에 대해 자세히 알아보려면 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하세요.</p>
+  <div class="alert note">
+<p>Milvus 2.6.x부터 독립 실행형 모드에서 다음과 같은 아키텍처가 변경되었습니다:</p>
+<ul>
+<li>기본 메시지 큐(MQ)는 <strong>Woodpecker입니다</strong>.</li>
+<li><strong>스트리밍 노드</strong> 구성 요소가 도입되어 기본적으로 활성화됩니다.</li>
+</ul>
+<p>자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요를</a> 참조하세요.</p>
+  </div>
+</li>
+<li><p>클러스터 모드에서 Milvus 인스턴스를 배포하려면 다음 명령을 실행하세요:</p>
+<p><code translate="no">--set</code> 을 사용하여 사용자 지정 구성으로 Milvus 클러스터를 설치할 수 있습니다. 다음 명령은 <code translate="no">streaming.enabled</code> 을 <code translate="no">true</code> 으로 설정하여 스트리밍 서비스를 활성화하고 <code translate="no">indexNode.enabled</code> 을 <code translate="no">false</code> 으로 설정하여 인덱스 서비스를 비활성화합니다. 이 경우 스트리밍 노드가 모든 데이터 처리 및 인덱싱 작업을 담당하게 됩니다.</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
+<button class="copy-code-btn"></button></code></pre>
+  <div class="alert note">
+<p>Milvus 2.6.x부터 클러스터 모드에서 다음과 같은 아키텍처가 변경되었습니다:</p>
+<ul>
+<li>기본 MQ는 여전히 <strong>Pulsar입니다</strong>.</li>
+<li><strong>스트리밍 노드</strong> 구성 요소가 도입되어 기본적으로 활성화됩니다.</li>
+<li><strong>인덱스 노</strong> 드와 <strong>데이터 노드가</strong> 단일 <strong>데이터 노드</strong> 구성 요소로 병합됩니다.</li>
+</ul>
+<p>자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요를</a> 참조하세요.</p>
+  </div>
+</li>
+</ul>
+<p>위 명령에서 <code translate="no">my-release</code> 은 릴리스 이름이고 <code translate="no">milvus/milvus</code> 은 로컬에 설치된 차트 저장소입니다. 다른 이름을 사용하려면 <code translate="no">my-release</code> 을 적절한 이름으로 바꾸세요.</p>
+<p>위의 명령은 기본 구성을 사용하여 구성 요소 및 종속성과 함께 Milvus 인스턴스를 배포합니다. 이러한 설정을 사용자 지정하려면 <a href="https://milvus.io/tools/sizing">Milvus 크기</a> 조정 <a href="https://milvus.io/tools/sizing">도구를</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 다음 해당 YAML 파일을 다운로드하는 것이 좋습니다. 구성 매개변수에 대해 자세히 알아보려면 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하세요.</p>
 <div class="alert note">
   <ul>
     <li>릴리스 이름에는 문자, 숫자 및 대시만 포함해야 합니다. 릴리스 이름에는 점을 사용할 수 없습니다.</li>
@@ -157,7 +192,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>출력 결과는 Milvus 인스턴스가 기본 포트 <strong>19530에서</strong> 서비스하고 있음을 보여줍니다.</p>
+<p>출력은 Milvus 인스턴스가 기본 포트 <strong>19530에서</strong> 서비스하고 있음을 보여줍니다.</p>
 <div class="alert note">
 <p>독립 실행형 모드로 Milvus를 배포한 경우, 파드 이름을 <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 에서 <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 으로 변경합니다.</p>
 </div>
@@ -167,7 +202,44 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>선택적으로, 위의 명령에서 <code translate="no">27017:19530</code> 대신 <code translate="no">:19530</code> 을 사용하여 <code translate="no">kubectl</code> 이 로컬 포트를 할당하도록 하여 포트 충돌을 관리할 필요가 없도록 할 수 있다.</p>
 <p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기한다. 밀버스가 선택한 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용한다. 다음 명령은 호스트 머신의 모든 IP 주소에서 포트 포워딩을 수신 대기하도록 한다.</p>
-<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Milvus WebUI에 액세스<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(선택 사항) Milvus 구성 업데이트하기<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">values.yaml</code> 파일을 편집한 후 다시 적용하여 Milvus 클러스터의 구성을 업데이트할 수 있습니다.</p>
+<ol>
+<li>원하는 구성으로 <code translate="no">values.yaml</code> 파일을 만듭니다.</li>
+</ol>
+<p>다음은 <code translate="no">proxy.http</code> 을 활성화한다고 가정합니다.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    proxy:
+      http:
+        enabled: true
+</span><button class="copy-code-btn"></button></code></pre>
+<ol>
+<li><code translate="no">values.yaml</code> 파일을 적용합니다.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>업데이트된 구성을 확인합니다.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm get values my-release
+<button class="copy-code-btn"></button></code></pre>
+<p>출력에 업데이트된 구성이 표시되어야 합니다.</p>
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Milvus WebUI 액세스<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

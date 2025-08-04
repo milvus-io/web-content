@@ -246,7 +246,7 @@ summary: Milvus共通の設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        ミリ秒。これは、Bounded Consistencyの場合にリクエスト到着時間を 引く必要がある間隔(ミリ秒単位)を表す。      </td>
+      <td>        ミリ秒。これは、Bounded Consistencyの場合にリクエスト到着時間を 引く必要がある間隔(ミリ秒)を表す。      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -425,7 +425,7 @@ summary: Milvus共通の設定方法をご紹介します。
   </thead>
   <tbody>
     <tr>
-      <td>        認証が有効な場合に、rootユーザがロールをバインドすべきかどうか。      </td>
+      <td>        認証が有効な場合に、rootユーザがロールをバインドするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>

@@ -518,9 +518,13 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>作成するコレクションにプロパティを設定して、サービスに適合させることができます。適用可能なプロパティは以下の通りです。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">シャード番号の設定</h3><p>シャードはコレクションの水平スライスです。各シャードはデータ入力チャネルに対応します。すべてのコレクションには、デフォルトでシャードがあります。予想されるスループットとコレクションに挿入するデータ量に基づいて、コ レクションを作成するときに適切なシャード数を設定できます。</p>
-<p>一般的なケースでは、予想されるスループットが500 MB/s増加するたびに、または挿入するデータ量が100 GB増加するたびに、シャード数を1つ増やすことを検討してください。この提案は私たち自身の経験に基づいており、アプリケーションのシナリオに完全に適合するとは限りません。ご自身のニーズに合わせてこの数値を調整することもできますし、デフォルト値を使用することもできます。</p>
-<p>以下のコード・スニペットは、コレクション作成時にシャード数を設定する方法を示しています。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">シャード番号の設定</h3><p>シャードはコレクションの水平スライスで、各シャードはデータ入力チャネルに対応します。デフォルトでは、すべてのコレクションに1つのシャードがあります。データ量とワークロードに合わせて、コレクションを作成するときにシャードの数を指定で きます。</p>
+<p>一般的なガイドラインとして、シャードの数を設定するときは以下を考慮してください：</p>
+<ul>
+<li><strong>データサイズ：</strong>一般的なプラクティスは、2億エンティティごとに1つのシャードを持つことです。総データ・サイズに基づいて見積もることもできます。たとえば、挿入する予定のデータ100GBごとにシャードを1つ追加します。</li>
+<li><strong>ストリームノードの使用率：</strong>Milvusインスタンスに複数のストリームノードがある場合、複数のシャードの使用を推奨します。これにより、データ挿入の作業負荷が利用可能なすべてのストリームノードに分散され、一部のノードがアイドル状態になる一方で他のノードが過負荷になるのを防ぐことができます。</li>
+</ul>
+<p>次のコード・スニペットは、コレクションの作成時にシャード番号を設定する方法を示しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
@@ -621,7 +625,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定</h3><p>コレクション内のデータを特定の期間ドロップする必要がある場合は、TTL（Time-To-Live）を秒単位で設定することを検討してください。TTLがタイムアウトすると、Milvusはコレクション内のエンティティを削除します。削除は非同期で行われるため、削除が完了するまで検索やクエリが可能です。</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">コレクションTTLの設定</h3><p>コレクション内のデータを特定の期間ドロップする必要がある場合、そのTTL（Time-To-Live）を秒単位で設定することを検討してください。TTLがタイムアウトすると、Milvusはコレクション内のエンティティを削除します。削除は非同期で行われるため、削除が完了するまで検索やクエリが可能です。</p>
 <p>以下のコードスニペットでは、TTLを1日（86400秒）に設定しています。TTLは最低でも数日に設定することをお勧めします。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

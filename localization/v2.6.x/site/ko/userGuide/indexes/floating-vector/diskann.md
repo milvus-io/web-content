@@ -58,7 +58,7 @@ summary: >-
 <p><code translate="no">search_list_size</code> 매개변수는 그래프 세분화 프로세스의 폭을 결정합니다. <code translate="no">search_list_size</code> 값이 높을수록 구성 중 이웃 검색이 확장되어 최종 정확도가 향상되지만 인덱스 구축 시간이 늘어납니다.</p></li>
 </ul></li>
 </ol>
-<p>매개변수 조정에 대해 자세히 알아보려면 <a href="/docs/ko/diskann.md#diskann-params">DISKANN 매개변수를</a> 참조하세요.</p>
+<p>매개변수 조정에 대해 자세히 알아보려면 <a href="/docs/ko/diskann.md#DISKANN-params">DISKANN 매개변수를</a> 참조하세요.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>DISKANN은 <strong>PQ를</strong> 사용하여 고차원 벡터를 더 작은 표현<strong>(PQ 코드)</strong>으로 압축하고, 이를 메모리에 저장하여 대략적인 거리를 빠르게 계산합니다.</p>
 <p><code translate="no">pq_code_budget_gb_ratio</code> 매개변수는 이러한 PQ 코드를 저장하는 전용 메모리 공간을 관리합니다. 이 값은 벡터의 총 크기(기가바이트)와 PQ 코드 저장을 위해 할당된 공간 사이의 비율을 나타냅니다. 다음 공식을 사용하여 실제 PQ 코드 예산(기가바이트)을 계산할 수 있습니다:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -145,63 +145,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN 매개변수는 두 가지 주요 방법을 사용해 구성할 수 있습니다:</p>
-<ul>
-<li><p>Milvus 구성<strong>파일:</strong> Milvus 구성 파일을 통해 DISKANN 매개변수를 조정합니다. 이 방법은 Milvus 인스턴스에 대한 일반적인 구성 옵션을 설정하는 데 적합합니다.</p></li>
-<li><p><strong>Milvus SDK:</strong> 인덱스 생성 또는 검색 작업 중에 Milvus SDK를 사용하여 DISKANN 매개변수를 미세 조정합니다. 이를 통해 특정 사용 사례에 따라 보다 세분화된 제어와 동적 매개변수 조정이 가능합니다.</p></li>
-</ul>
-<div class="alert note">
-<p>SDK로 설정한 구성은 구성 파일에 정의된 모든 설정을 재정의하여 특정 애플리케이션과 데이터 세트에 대한 유연성과 제어 기능을 제공합니다.</p>
-</div>
-<h3 id="Milvus-configuration-file" class="common-anchor-header">Milvus 구성 파일</h3><p>다음은 <code translate="no">milvus.yaml</code> 파일 내에서 DISKANN 매개변수를 설정하는 방법의 예시입니다:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
-  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># When enable this configuration, the index parameters defined following will be automatically populated as index parameters, without requiring user input.</span>
-  <span class="hljs-attr">DISKANN:</span>
-    <span class="hljs-attr">build:</span>
-      <span class="hljs-attr">max_degree:</span> <span class="hljs-number">56</span> <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
-      <span class="hljs-attr">pq_code_budget_gb_ratio:</span> <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
-      <span class="hljs-attr">search_cache_budget_gb_ratio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
-      <span class="hljs-attr">search_list_size:</span> <span class="hljs-number">100</span> <span class="hljs-comment"># Size of the candidate list during building graph</span>
-    <span class="hljs-attr">search:</span>
-      <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
+    </button></h2><p>DISKANN 관련 매개변수는 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해 구성할 수 있습니다:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">DiskIndex:</span>
+    <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>  <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
+    <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>  <span class="hljs-comment"># Size of the candidate list during building graph</span>
+    <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>  <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
+    <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
+    <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="SDK-configuration" class="common-anchor-header">SDK 구성</h3><p>다음은 Milvus SDK를 사용하여 DISKANN 매개변수를 설정하는 방법의 예시입니다.</p>
-<h4 id="Build" class="common-anchor-header">빌드</h4><p>Milvus의 벡터 필드에 <code translate="no">IVF_FLAT</code> 인덱스를 구축하려면 <code translate="no">add_index()</code> 방법을 사용하여 <code translate="no">index_type</code>, <code translate="no">metric_type</code> 및 인덱스에 대한 추가 파라미터를 지정합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-<span class="hljs-comment"># Prepare index building params</span>
-index_params = MilvusClient.prepare_index_params()
-
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;DISKANN&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;max_degree&quot;</span>: <span class="hljs-number">56</span>, <span class="hljs-comment"># Maximum number of connections (edges) each data point can have</span>
-        <span class="hljs-string">&quot;search_list_size&quot;</span>: <span class="hljs-number">100</span>,
-        <span class="hljs-string">&quot;search_cache_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.10</span>, <span class="hljs-comment"># Amount of memory allocated for caching frequently accessed parts of the graph</span>
-        <span class="hljs-string">&quot;pq_code_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data</span>
-    } <span class="hljs-comment"># Index building params</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>인덱스 파라미터가 구성되면 <code translate="no">create_index()</code> 메서드를 직접 사용하거나 <code translate="no">create_collection</code> 메서드에서 인덱스 파라미터를 전달하여 인덱스를 생성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/create-collection.md">컬렉션 만들기를</a> 참조하세요.</p>
-<h4 id="Search" class="common-anchor-header">검색</h4><p>인덱스가 생성되고 엔티티가 삽입되면 인덱스에서 유사도 검색을 수행할 수 있습니다.</p>
-<pre><code translate="no" class="language-python">search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {
-        <span class="hljs-string">&quot;beam_width_ratio&quot;</span>: <span class="hljs-number">4.0</span>, <span class="hljs-comment"># degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</span>
-    }
-}
-
-res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="DISKANN-params" class="common-anchor-header">DISKANN 매개변수<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
+<p>매개변수 설명에 대한 자세한 내용은 <a href="/docs/ko/diskann.md#DISKANN-params">DISKANN</a> 매개변수를 참조하세요.</p>
+<h2 id="DISKANN-params" class="common-anchor-header">DISKANN 파라미터<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,7 +183,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code translate="no">max_degree</code></p></td>
+     <td><p><code translate="no">MaxDegree</code></p></td>
      <td><p>Vamana 그래프에서 각 데이터 포인트가 가질 수 있는 최대 연결 수(에지)를 제어합니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, 512]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">56</code></p></td>
@@ -237,16 +192,15 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>그래프를 작성하는 동안 각 데이터 포인트에 대해 고려할 후보 이웃의 수를 결정합니다.</p></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p>인덱스 구성 중에 이 파라미터는 각 노드에 대해 가장 가까운 이웃을 검색할 때 사용되는 후보 풀의 크기를 정의합니다. 그래프에 추가되는 모든 노드에 대해 알고리즘은 지금까지 발견된 <code translate="no">search_list_size</code> 최상의 후보 목록을 유지합니다. 이 목록을 더 이상 개선할 수 없는 경우 이웃 검색이 중지됩니다. 이 최종 후보 풀에서 상위 <code translate="no">max_degree</code> 노드가 선택되어 최종 에지를 형성합니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">100</code></p></td>
-     <td><p>값이 클수록 더 포괄적인 그래프가 생성되어 검색 품질이 향상될 수 있지만 작성 시간도 늘어납니다. 
- 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [K, 10K].</p></td>
+     <td><p><code translate="no">search_list_size</code> 이 클수록 각 노드에 대해 실제 가장 가까운 이웃을 찾을 가능성이 높아져 그래프 품질이 높아지고 검색 성능(리콜)이 향상될 수 있습니다. 하지만 인덱스 빌드 시간이 상당히 길어지는 대가가 따릅니다. 항상 <code translate="no">max_degree</code> 보다 크거나 같은 값으로 설정해야 합니다.</p></td>
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">SearchCacheBudgetGBRatio</code></p></td>
      <td><p>인덱스 구성 중에 그래프에서 자주 액세스하는 부분을 캐싱하기 위해 할당되는 메모리 양을 제어합니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: [0.0, 0.3)</p>
 <p><strong>기본값입니다</strong>: <code translate="no">0.10</code></p></td>
@@ -254,11 +208,11 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>PQ</p></td>
-     <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">PQCodeBudgetGBRatio</code></p></td>
      <td><p>압축되지 않은 데이터의 크기와 비교하여 PQ 코드(데이터 포인트의 압축된 표현)의 크기를 제어합니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: (0.0, 0.25]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>비율이 높을수록 PQ 코드에 더 많은 메모리를 할당하여 원본 벡터에 대한 더 많은 정보를 효과적으로 저장함으로써 더 정확한 검색 결과를 얻을 수 있습니다. 하지만 더 많은 메모리가 필요하므로 대규모 데이터 세트를 처리할 수 있는 용량이 제한됩니다. 비율이 낮을수록 메모리 사용량은 줄어들지만 더 작은 PQ 코드가 더 적은 정보를 보유하므로 정확도가 떨어질 가능성이 있습니다. 이 접근 방식은 메모리 제약이 우려되는 시나리오에 적합하며 잠재적으로 더 큰 데이터 세트의 색인화를 가능하게 합니다.</p>
+     <td><p>비율이 높을수록 PQ 코드에 더 많은 메모리를 할당하여 원본 벡터에 대한 더 많은 정보를 효과적으로 저장함으로써 더 정확한 검색 결과를 얻을 수 있습니다. 하지만 더 많은 메모리가 필요하므로 대규모 데이터 세트를 처리할 수 있는 용량이 제한됩니다. 비율이 낮으면 메모리 사용량이 줄어들지만, 더 작은 PQ 코드가 더 적은 정보를 보유하므로 정확도가 떨어질 수 있습니다. 이 접근 방식은 메모리 제약이 우려되는 시나리오에 적합하며 잠재적으로 더 큰 데이터 세트의 색인화를 가능하게 합니다.</p>
 <p>대부분의 경우 다음 범위 내에서 값을 설정하는 것이 좋습니다: [0.0625, 0.25].</p></td>
    </tr>
 </table>
@@ -273,10 +227,18 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code translate="no">beam_width_ratio</code></p></td>
+     <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>사용 가능한 CPU 코어 수에 비례하여 병렬 디스크 I/O 요청의 최대 수를 결정하여 검색 중 병렬 처리 정도를 제어합니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: [1, 최대(128 / CPU 수, 16)]]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">4.0</code></p></td>
      <td><p>값이 높을수록 병렬 처리가 증가하여 강력한 CPU 및 SSD를 사용하는 시스템에서 검색 속도가 빨라질 수 있습니다. 그러나 너무 높게 설정하면 과도한 리소스 경합이 발생할 수 있습니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1.0, 4.0].</p></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p>검색 작업 중에 이 매개변수는 알고리즘이 그래프를 탐색할 때 유지하는 후보 풀의 크기를 결정합니다. 값이 클수록 실제 가장 가까운 이웃을 찾을 확률이 높아지지만(리콜률이 높아짐) 검색 지연 시간도 증가합니다.</p></td>
+     <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
+<p><strong>기본값입니다</strong>: <code translate="no">100</code></p></td>
+     <td><p>성능과 정확도 간의 균형을 맞추려면 이 값을 검색하려는 결과 수(top_k)와 같거나 약간 큰 값으로 설정하는 것이 좋습니다.</p></td>
    </tr>
 </table>

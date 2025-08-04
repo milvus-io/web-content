@@ -45,6 +45,7 @@ summary: >-
 <li><p><strong>Range Filters</strong>: <code translate="no">IN</code> and <code translate="no">LIKE</code> help match specific value ranges or sets.</p></li>
 <li><p><strong>Arithmetic Operators</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, and <code translate="no">**</code> are used for calculations involving numeric fields.</p></li>
 <li><p><strong>Logical Operators</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code> combine multiple conditions into complex expressions.</p></li>
+<li><p><strong>IS NULL and IS NOT NULL Operators</strong>: The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to <a href="/docs/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Basic Operators</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Example: Filtering by Color</h3><p>To find entities with primary colors (red, green, or blue) in a scalar field <code translate="no">color</code>, use the following filter expression:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
@@ -135,55 +136,3 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p>For more details, refer to <a href="/docs/keyword-match.md">Text Match</a>.</p>
 <h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>The <strong>PHRASE_MATCH</strong> operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.</p>
 <p>For more details, refer to <a href="/docs/phrase-match.md">Phrase Match</a>.</p>
-<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">Random sampling operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Random sampling allows you to extract a subset of data samples from a collection at the segment level, making it ideal for exploring and processing massive datasets. This feature is valuable for these use cases:</p>
-<ul>
-<li><p><strong>Quick data preview</strong>: It returns representative sample data with minimal resource usage, which allows you to quickly grasp the overall structure and content of large vector datasets.</p></li>
-<li><p><strong>Combined filtering</strong>: When performing multi-criteria filtering (e.g., selecting documents by attributes), combining it with random sampling enables quick statistical summaries and previews on the filtered results.</p></li>
-<li><p><strong>Resource saving in large-scale data processing</strong>: For very large datasets, aggregating and analyzing full data can be resource-intensive. Random sampling reduces the processing load by lowering the amount of data handled.</p></li>
-</ul>
-<p>Use the following syntax for random sampling:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li><code translate="no">float</code><strong>:</strong> A sampling factor in the range (0, 1), excluding the boundaries. For example, <code translate="no">RANDOM_SAMPLE(0.001)</code> selects approximately 0.1% of the results.</li>
-</ul>
-<div class="alert note">
-<p>The <code translate="no">RANDOM_SAMPLE</code> expression is case-insensitive. You can use either <code translate="no">RANDOM_SAMPLE</code> or <code translate="no">random_sample</code>.</p>
-</div>
-<h3 id="Combine-with-other-filters" class="common-anchor-header">Combine with other filters</h3><p>The random sampling operator must be combined with other filtering expressions using logical <code translate="no">AND</code>. For example:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Here, Milvus first applies the condition <code translate="no">color = 'red'</code> and then performs random sampling on the result set.</p>
-<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">Example: Random sampling without an additional filter</h3><p>In this example, the query samples a random subset (approximately 1%) of the entire data in the specified collection:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">Example: Combined filtering with random sampling</h3><p>In this example, the query first filters documents based on a specific attribute (in this case, documents where <code translate="no">color</code> equals <code translate="no">'red'</code>). After filtering, the random sampling operator is applied to return roughly 0.1% of the filtered results:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>

@@ -57,7 +57,7 @@ title: Überblick über die Milvus-Bereitstellungsoptionen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone ist ein Servereinsatz auf einer einzigen Maschine. Alle Komponenten von Milvus Standalone sind in ein einziges <a href="https://milvus.io/docs/install_standalone-docker.md">Docker-Image</a> gepackt, was die Bereitstellung erleichtert. Wenn Sie eine produktive Arbeitslast haben, aber nicht Kubernetes verwenden möchten, ist die Ausführung von Milvus Standalone auf einem einzelnen Rechner mit ausreichend Speicher eine gute Option. Außerdem unterstützt Milvus Standalone hohe Verfügbarkeit durch Master-Slave-Replikation.</p>
+    </button></h2><p>Milvus Standalone ist ein Servereinsatz auf einer einzigen Maschine. Alle Komponenten von Milvus Standalone sind in ein einziges <a href="https://milvus.io/docs/install_standalone-docker.md">Docker-Image</a> gepackt, was die Bereitstellung erleichtert. Wenn Sie eine produktive Arbeitslast haben, aber nicht Kubernetes verwenden möchten, ist die Ausführung von Milvus Standalone auf einem einzelnen Rechner mit ausreichend Speicher eine gute Option.</p>
 <h2 id="Milvus-Distributed" class="common-anchor-header">Milvus Verteilt<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ title: Überblick über die Milvus-Bereitstellungsoptionen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Wahl des Bereitstellungsmodus hängt in der Regel von der Entwicklungsphase Ihrer Anwendung ab:</p>
+    </button></h2><p>Die Auswahl eines Bereitstellungsmodus hängt in der Regel vom Entwicklungsstadium Ihrer Anwendung ab:</p>
 <ul>
 <li><p><strong>Für schnelles Prototyping</strong></p>
 <p>Wenn Sie schnell etwas als Prototyp oder zu Lernzwecken erstellen möchten, wie z. B. Retrieval Augmented Generation (RAG)-Demos, KI-Chatbots, multimodale Suche, ist Milvus Lite selbst oder eine Kombination aus Milvus Lite und Milvus Standalone geeignet. Sie können Milvus Lite in Notebooks für Rapid Prototyping verwenden und verschiedene Ansätze wie z. B. verschiedene Chunking-Strategien in RAG erkunden. Möglicherweise möchten Sie die mit Milvus Lite erstellte Anwendung in einem kleinen Produktionsmaßstab einsetzen, um echte Benutzer zu bedienen oder die Idee an größeren Datensätzen zu validieren, z. B. an mehr als ein paar Millionen Vektoren. Milvus Standalone ist dafür geeignet. Die Anwendungslogik für Milvus Lite kann weiterhin gemeinsam genutzt werden, da alle Milvus-Implementierungen dieselbe clientseitige API haben. Die in Milvus Lite gespeicherten Daten können auch mit einem Befehlszeilentool auf Milvus Standalone portiert werden.</p></li>
@@ -104,7 +104,7 @@ title: Überblick über die Milvus-Bereitstellungsoptionen
 <ul>
 <li><strong>Milvus Lite</strong> wird für kleinere Datensätze mit bis zu einigen Millionen Vektoren empfohlen.</li>
 <li><strong>Milvus Standalone</strong> ist für mittelgroße Datensätze geeignet, die bis zu 100 Millionen Vektoren umfassen.</li>
-<li><strong>Milvus Distributed</strong> ist für große Bereitstellungen konzipiert und kann Datensätze von 100 Millionen bis zu zehn Milliarden Vektoren verarbeiten.</li>
+<li><strong>Milvus Distributed</strong> ist für große Bereitstellungen konzipiert und kann Datensätze von 100 Millionen bis zu mehreren Milliarden Vektoren verarbeiten.</li>
 </ul>
 <p>
   

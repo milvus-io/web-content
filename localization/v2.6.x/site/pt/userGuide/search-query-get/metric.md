@@ -22,8 +22,8 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>As métricas de semelhança são utilizadas para medir as semelhanças entre vectores. A escolha de uma métrica de distância apropriada ajuda a melhorar significativamente o desempenho da classificação e do agrupamento.</p>
-<p>Atualmente, o Milvus suporta estes tipos de métricas de semelhança: Distância euclidiana (<code translate="no">L2</code>), Inner Product (<code translate="no">IP</code>), Cosine Similarity (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, e <code translate="no">BM25</code> (especificamente concebido para pesquisa de texto completo em vectores esparsos).</p>
-<p>A tabela abaixo resume o mapeamento entre os diferentes tipos de campos e os tipos de métricas correspondentes.</p>
+<p>Atualmente, o Milvus suporta estes tipos de métricas de semelhança: Distância euclidiana (<code translate="no">L2</code>), Inner Product (<code translate="no">IP</code>), Cosine Similarity (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, e <code translate="no">BM25</code> (especificamente concebida para pesquisa de texto completo em vectores esparsos).</p>
+<p>A tabela abaixo resume o mapeamento entre os diferentes tipos de campo e os tipos de métricas correspondentes.</p>
 <table>
    <tr>
      <th><p>Tipo de campo</p></th>
@@ -50,6 +50,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>Não é necessário especificar a dimensão.</p></td>
      <td><p><code translate="no">IP</code>, <code translate="no">BM25</code> (utilizado apenas para pesquisa de texto integral)</p></td>
@@ -58,7 +64,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -96,8 +102,13 @@ summary: >-
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>Estima a similaridade Jaccard a partir dos bits da assinatura MinHash; distância menor = mais similar</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>Um valor mais pequeno indica uma maior semelhança.</p></td>
+     <td><p>Um valor menor indica uma maior similaridade.</p></td>
      <td><p>[0, dim(vetor)]</p></td>
    </tr>
    <tr>
@@ -186,7 +197,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/cosine-similarity.png" alt="Cosine Similarity" class="doc-image" id="cosine-similarity" />
-   </span> <span class="img-wrapper"> <span>Semelhança de cosseno</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Similaridade de cosseno</span> </span></p>
 <p>A semelhança de cosseno está sempre no intervalo <strong>[-1, 1]</strong>. Por exemplo, dois vectores proporcionais têm uma semelhança de cosseno de <strong>1</strong>, dois vectores ortogonais têm uma semelhança de <strong>0</strong> e dois vectores opostos têm uma semelhança de <strong>-1</strong>. Quanto maior for o cosseno, menor é o ângulo entre os dois vectores, indicando que estes dois vectores são mais semelhantes entre si.</p>
 <p>Subtraindo a sua semelhança de cosseno de 1, obtém-se a distância de cosseno entre dois vectores.</p>
 <h2 id="JACCARD-distance" class="common-anchor-header">Distância JACCARD<button data-href="#JACCARD-distance" class="anchor-icon" translate="no">
@@ -204,7 +215,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O coeficiente de semelhança JACCARD mede a semelhança entre dois conjuntos de amostras e é definido como a cardinalidade da intersecção dos conjuntos definidos dividida pela cardinalidade da união dos mesmos. Só pode ser aplicado a conjuntos de amostras finitos.</p>
+    </button></h2><p>O coeficiente de distância JACCARD mede a semelhança entre dois conjuntos de amostras e é definido como a cardinalidade da intersecção dos conjuntos definidos dividida pela cardinalidade da união dos mesmos. Só pode ser aplicado a conjuntos de amostras finitos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -214,6 +225,39 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula da distância JACCARD</span> </span></p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) é um tipo de métrica utilizado para uma pesquisa de semelhança eficiente e aproximada em grandes conjuntos - como conjuntos de palavras de documentos, conjuntos de etiquetas de utilizadores ou conjuntos de k-mer genómicos. Em vez de comparar diretamente conjuntos brutos, o MHJACCARD compara <strong>assinaturas MinHash</strong>, que são representações compactas concebidas para estimar eficientemente a semelhança Jaccard.</p>
+<p>Esta abordagem é significativamente mais rápida do que calcular a semelhança Jaccard exacta e é especialmente útil em cenários de grande escala ou de elevada dimensão.</p>
+<p><strong>Tipo de vetor aplicável</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>Vetor de assinatura MinHash, em que cada vetor armazena uma assinatura MinHash. Cada elemento corresponde ao valor de hash mínimo sob uma das funções de hash independentes aplicadas ao conjunto original.</li>
+</ul>
+<p><strong>Definição de distância</strong></p>
+<p>MHJACCARD mede quantas posições em duas assinaturas MinHash coincidem. Quanto maior for o rácio de correspondência, mais semelhantes são os conjuntos subjacentes.</p>
+<p>Milvus relata:</p>
+<ul>
+<li><strong>Distância = 1 - similaridade estimada (rácio de correspondência)</strong></li>
+</ul>
+<p>O valor da distância varia de 0 a 1:</p>
+<ul>
+<li><p><strong>0</strong> significa que as assinaturas MinHash são idênticas (similaridade estimada de Jaccard = 1)</p></li>
+<li><p><strong>1</strong> significa que não há correspondências em nenhuma posição (similaridade estimada de Jaccard = 0)</p></li>
+</ul>
+<p>Para obter informações sobre pormenores técnicos, consulte <a href="/docs/pt/minhash-lsh.md">MINHASH_LSH</a>.</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">Distância HAMMING<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,7 +273,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A distância HAMMING mede cadeias de dados binárias. A distância entre duas cadeias de dados de igual comprimento é o número de posições de bits em que os bits são diferentes.</p>
+    </button></h2><p>A distância HAMMING mede cadeias de dados binárias. A distância entre duas cadeias de caracteres de igual comprimento é o número de posições de bits em que os bits são diferentes.</p>
 <p>Por exemplo, suponhamos que existem duas cadeias de caracteres, 1101 1001 e 1001 1101.</p>
 <p>11011001 ⊕ 10011101 = 01000100. Uma vez que isto contém dois 1s, a distância HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity" class="common-anchor-header">Similaridade BM25<button data-href="#BM25-similarity" class="anchor-icon" translate="no">

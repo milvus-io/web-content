@@ -232,7 +232,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -298,7 +298,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.offset</code></p></td>
      <td><p>無</p></td>
-     <td><p>在<code translate="no">origin</code> 周圍建立一個「無衰退區域」，讓項目保持滿分 (衰退分數 = 1.0)。在<code translate="no">origin</code> 這個範圍內的項目保持最大相關性。</p></td>
+     <td><p>在<code translate="no">origin</code> 周圍建立「無衰退區域」，讓項目保持滿分（衰退分數 = 1.0）。在<code translate="no">origin</code> 這個範圍內的項目保持最大相關性。</p></td>
      <td><ul>
 <li>對於時間：以秒為單位的週期 (例如：<code translate="no">24 * 60 * 60</code> 為 1 天)</li>
 <li>對於距離：公尺 (例如：<code translate="no">500</code> 代表 500 公尺)</li>
@@ -320,7 +320,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">套用至混合搜尋</h3><p>衰減排序器也可以應用於結合多向量場的混合搜尋作業：</p>

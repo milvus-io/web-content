@@ -23,7 +23,7 @@ title: Valutazione con Arize Pheonix
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_phoenix.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_phoenix.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Questa guida mostra come utilizzare <a href="https://phoenix.arize.com/">Arize Pheonix</a> per valutare una pipeline Retrieval-Augmented Generation (RAG) costruita su <a href="https://milvus.io/">Milvus</a>.</p>
-<p>Il sistema RAG combina un sistema di recupero con un modello generativo per generare nuovo testo sulla base di un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
+<p>Il sistema RAG combina un sistema di reperimento con un modello generativo per generare nuovo testo sulla base di un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
 <p>Arize Pheonix è un framework che aiuta a valutare le pipeline RAG. Esistono strumenti e framework che aiutano a costruire queste pipeline, ma valutarle e quantificarne le prestazioni può essere difficile. È qui che entra in gioco Arize Pheonix.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +123,7 @@ title: Valutazione con Arize Pheonix
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -462,7 +462,7 @@ results_df.head()
       <td>[Copertura del codice] Prima di inviare il pull ...</td>
       <td>Prima di eseguire la copertura del codice, bisogna assicurarsi ...</td>
       <td>Prima di eseguire la copertura del codice, si dovrebbe fare ...</td>
-      <td>[Copertura del codice Prima di inviare il pull ...</td>
+      <td>[Prima di inviare il pull ...</td>
       <td>[Prima di inviare il pull...</td>
       <td>fattuale</td>
       <td>Il testo di riferimento specifica che prima di...</td>

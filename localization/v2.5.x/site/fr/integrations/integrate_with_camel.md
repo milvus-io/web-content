@@ -83,7 +83,7 @@ response = requests.get(url)
 <p>Pour configurer l'intégration d'OpenAI, nous devons configurer <code translate="no">OPENAI_API_KEY</code> comme indiqué ci-dessous.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Importer et définir l'instance d'intégration :</p>
+<p>Importez et définissez l'instance d'intégration :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.embeddings <span class="hljs-keyword">import</span> OpenAIEmbedding
 
 embedding_instance = OpenAIEmbedding()
@@ -169,7 +169,7 @@ vector_retriever = VectorRetriever(
 <li>Définir l'url distante et la clé api pour Milvus</li>
 <li>Donner une requête</li>
 </ul>
-<p>Le pipeline Auto RAG créera des collections pour les chemins d'entrée de contenu donnés, le nom de la collection sera défini automatiquement en fonction du nom du chemin d'entrée de contenu, si la collection existe, elle sera récupérée directement.</p>
+<p>Le pipeline Auto RAG créera des collections pour les chemins d'entrée de contenu donnés, le nom de la collection sera défini automatiquement sur la base du nom du chemin d'entrée de contenu, si la collection existe, elle sera récupérée directement.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 

@@ -196,21 +196,27 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>はい</p></td>
+     <td><p>モデルベース・リランキング関数の設定を含む辞書。利用可能なパラメータ（キー）は、プロバイダ（<code translate="no">tei</code> または<code translate="no">vllm</code> ）によって異なる。詳 し く は<a href="/docs/ja/vllm-ranker.md">vLLM Ranker</a>または<a href="/docs/ja/tei-ranker.md">TEI Ranker</a>を参照。</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>はい</p></td>
-     <td><p>モデルの再ランキングを有効にするには、<code translate="no">"model"</code> に設定する必要があります。</p></td>
+     <td><p>モデル・リランキングを有効にするには、<code translate="no">"model"</code> に設定する必要がある。</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
-     <td><p>はい</p></td>
-     <td><p>リランキングに使用するモデルサービスプロバイダ。</p></td>
+     <td><p>Yes</p></td>
+     <td><p>リランキングに使用するモデル・サービス・プロバイダ。</p></td>
      <td><p><code translate="no">"tei"</code> または<code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>リランキングモデルが関連性スコアの算出に使用するクエリ文字列のリスト。 クエリ文字列の数は、検索操作のクエリ数と正確に一致する必要があります (テキストの代わりにクエリベクタを使用する場合も同様)。</p></td>
+     <td><p>リランキングモデルが関連性スコアを計算するために使用するクエリ文字列のリスト。 クエリ文字列の数は、検索操作のクエリの数と正確に一致する必要があります（テキストの代わりにクエリベクタを使用する場合でも）。</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>
@@ -235,7 +241,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用</h3><p>モデル・ランカーは複数のベクトル・フィールドを組み合わせたハイブリッド検索にも適用できます：</p>

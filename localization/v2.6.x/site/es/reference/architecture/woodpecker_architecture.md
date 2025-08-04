@@ -92,18 +92,18 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Woodpecker ofrece dos modos de despliegue para adaptarse a sus necesidades específicas:</p>
-<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer: ligero y sin mantenimiento.</h3><p>El modo MemoryBuffer proporciona una opción de despliegue sencilla y ligera en la que Woodpecker almacena temporalmente en memoria las escrituras entrantes y las descarga periódicamente en un servicio de almacenamiento de objetos en la nube. Los metadatos se gestionan mediante <strong>etcd</strong> para garantizar la coherencia y la coordinación. Este modo es el más adecuado para cargas de trabajo de lotes pesados en implementaciones a pequeña escala o entornos de producción que priorizan la simplicidad sobre el rendimiento, especialmente cuando la baja latencia de escritura no es crítica.</p>
+<h3 id="MemoryBuffer---Lightweight-and-maintenance-free" class="common-anchor-header">MemoryBuffer: ligero y sin mantenimiento.</h3><p>El modo MemoryBuffer ofrece una opción de despliegue sencilla y ligera en la que el cliente integrado de Woodpecker almacena temporalmente en memoria las escrituras entrantes y las descarga periódicamente en un servicio de almacenamiento de objetos en la nube. En este modo, el búfer de memoria está integrado directamente en el cliente, lo que permite un procesamiento por lotes eficiente antes de enviarlos a S3. Los metadatos se gestionan mediante <strong>etcd</strong> para garantizar la coherencia y la coordinación. Este modo es el más adecuado para cargas de trabajo de lotes pesados en despliegues a pequeña escala o entornos de producción que priorizan la simplicidad sobre el rendimiento, especialmente cuando la baja latencia de escritura no es crítica. La latencia de escritura en este modo suele estar entre 200 y 500 ms.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
    </span> <span class="img-wrapper"> <span>despliegue del modo de memoria woodpecker</span> </span></p>
-<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Optimizado para baja latencia y alta durabilidad</h3><p>El modo QuorumBuffer está diseñado para cargas de trabajo de lectura/escritura sensibles a la latencia y de alta frecuencia que requieren tanto capacidad de respuesta en tiempo real como una fuerte tolerancia a fallos. En este modo, el Woodpecker funciona como un búfer de escritura de alta velocidad con escrituras de quórum de tres réplicas, lo que garantiza una gran coherencia y alta disponibilidad.</p>
-<p>Una escritura se considera correcta cuando se replica en al menos dos de los tres nodos, y normalmente se completa en milisegundos de un solo dígito, tras lo cual los datos se vuelcan de forma asíncrona al almacenamiento de objetos en la nube para una durabilidad a largo plazo. Esta arquitectura minimiza el estado en el nodo, elimina la necesidad de grandes volúmenes de disco locales y evita las complejas reparaciones antientropía que suelen requerir los sistemas tradicionales basados en quórum.</p>
+<h3 id="QuorumBuffer---Optimized-for-low-latency-high-durability" class="common-anchor-header">QuorumBuffer - Optimizado para baja latencia y alta durabilidad</h3><p>El modo QuorumBuffer está diseñado para cargas de trabajo de lectura/escritura sensibles a la latencia y de alta frecuencia que requieren tanto capacidad de respuesta en tiempo real como una fuerte tolerancia a fallos. En este modo, el cliente de Woodpecker interactúa con un sistema de quórum de tres réplicas para proporcionar un almacenamiento en búfer de escritura de alta velocidad, garantizando una fuerte consistencia y alta disponibilidad a través del consenso distribuido.</p>
+<p>Se considera que una escritura se ha realizado correctamente cuando el cliente replica los datos en al menos dos de los tres nodos de quórum, lo que normalmente se completa en milisegundos de un solo dígito, tras lo cual los datos se vuelcan de forma asíncrona al almacenamiento de objetos en la nube para una durabilidad a largo plazo. Esta arquitectura minimiza el estado en el nodo, elimina la necesidad de grandes volúmenes de disco local y evita las complejas reparaciones antientropía que suelen requerir los sistemas tradicionales basados en quórum.</p>
 <p>El resultado es una capa WAL racionalizada y robusta, ideal para entornos de producción de misión crítica en los que la coherencia, la disponibilidad y la recuperación rápida son esenciales.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_memorybuffer_mode_deployment.png" alt="woodpecker memory mode deployment" class="doc-image" id="woodpecker-memory-mode-deployment" />
-   </span> <span class="img-wrapper"> <span>despliegue del modo de memoria woodpecker</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/woodpecker_quorumbuffer_mode_deployment.png" alt="woodpecker quorum mode deployment" class="doc-image" id="woodpecker-quorum-mode-deployment" />
+   </span> <span class="img-wrapper"> <span>despliegue del modo de quórum de woodpecker</span> </span></p>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Pruebas de rendimiento<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,90 +157,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La arquitectura nativa de la nube de Woodpecker agiliza la implantación, reduce el mantenimiento y mejora la fiabilidad.</p>
-<h3 id="Simplified-infrastructure-management" class="common-anchor-header">Gestión simplificada de la infraestructura</h3><ul>
-<li><strong>Sin gestión del almacenamiento local:</strong> Elimina la necesidad de gestionar volúmenes de disco, RAID o fallos de disco.</li>
-<li><strong>Menor dependencia del hardware:</strong> Elimina la configuración y supervisión del hardware; la durabilidad y disponibilidad son gestionadas por el almacenamiento de objetos en la nube.</li>
-<li><strong>Planificación simplificada de la capacidad:</strong> El almacenamiento se escala automáticamente con el almacenamiento de objetos en la nube, lo que elimina la necesidad de realizar previsiones manuales.</li>
+    </button></h2><p>La arquitectura nativa de la nube de Woodpecker ofrece importantes ventajas operativas:</p>
+<ul>
+<li><strong>Cero gestión del almacenamiento local</strong>: Elimina la gestión de volúmenes de disco, la configuración RAID y los fallos de hardware.</li>
+<li><strong>Escalado automático</strong>: El almacenamiento se escala con el almacenamiento de objetos en la nube sin necesidad de planificar la capacidad.</li>
+<li><strong>Rentabilidad</strong>: Almacenamiento de pago por uso con niveles y compresión automáticos</li>
+<li><strong>Alta disponibilidad</strong>: Aprovecha la durabilidad de 11 nueves de los proveedores de nube con recuperación rápida</li>
+<li><strong>Despliegue simplificado</strong>: Dos modos de despliegue (MemoryBuffer/QuorumBuffer) que se adaptan a diferentes necesidades operativas</li>
+<li><strong>Facilidad de desarrollo</strong>: Configuración más rápida del entorno y arquitectura coherente en todos los entornos</li>
 </ul>
-<h3 id="Simplified-deployment" class="common-anchor-header">Despliegue simplificado</h3><ul>
-<li><strong>Modo MemoryBuffer:</strong> Utiliza recursos mínimos y se integra con el almacenamiento en la nube, ideal para el desarrollo y la producción a pequeña escala.</li>
-<li><strong>Modo QuorumBuffer:</strong> Proporciona fiabilidad de nivel empresarial sin la complejidad del almacenamiento distribuido tradicional.</li>
-</ul>
-<h2 id="Cost-efficiency-and-resource-optimization" class="common-anchor-header">Rentabilidad y optimización de recursos<button data-href="#Cost-efficiency-and-resource-optimization" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><strong>Menor uso de memoria:</strong> El almacenamiento en búfer eficiente reduce los requisitos de memoria en comparación con los corredores tradicionales.</li>
-<li><strong>Escalado elástico:</strong> El almacenamiento en la nube de pago por uso elimina el sobreaprovisionamiento.</li>
-<li><strong>Reducción de los gastos generales de infraestructura:</strong> Menos componentes significan menores costes de despliegue y mantenimiento.</li>
-</ul>
-<h3 id="Storage-cost-advantages" class="common-anchor-header">Ventajas de costes de almacenamiento</h3><ul>
-<li><strong>Almacenamiento por niveles:</strong> Migra automáticamente los datos a niveles de almacenamiento en nube rentables para su conservación a largo plazo.</li>
-<li><strong>Compresión y deduplicación:</strong> Las funciones integradas reducen los costes de almacenamiento sin esfuerzo operativo adicional.</li>
-<li><strong>Sin sobrecarga de replicación:</strong> La durabilidad es gestionada por el almacenamiento en la nube, eliminando la necesidad de gestión manual de réplicas.</li>
-</ul>
-<h2 id="High-availability-and-disaster-recovery" class="common-anchor-header">Alta disponibilidad y recuperación ante desastres<button data-href="#High-availability-and-disaster-recovery" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Simplified-fault-tolerance" class="common-anchor-header">Tolerancia a fallos simplificada</h3><ul>
-<li><strong>Durabilidad nativa de la nube:</strong> Aprovecha las garantías de durabilidad de 11 nueves (99,999999999%) de los proveedores de la nube.</li>
-<li><strong>Recuperación rápida:</strong> El estado local mínimo permite la sustitución rápida de nodos y la recuperación de clústeres.</li>
-<li><strong>Resistencia entre regiones:</strong> Admite la replicación entre regiones mediante funciones de almacenamiento en la nube.</li>
-</ul>
-<h3 id="Operational-resilience" class="common-anchor-header">Resistencia operativa</h3><ul>
-<li><strong>Menos puntos únicos de fallo:</strong> La reducción del número de componentes disminuye el riesgo de fallos.</li>
-<li><strong>Conmutación automática por error:</strong> La redundancia del almacenamiento en la nube simplifica la conmutación por error.</li>
-<li><strong>Copias de seguridad simplificadas:</strong> El almacenamiento en la nube integrado proporciona copias de seguridad y versiones automáticas.</li>
-</ul>
-<h2 id="Development-and-operational-experience" class="common-anchor-header">Experiencia operativa y de desarrollo<button data-href="#Development-and-operational-experience" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="Improved-development-workflow" class="common-anchor-header">Flujo de trabajo de desarrollo mejorado</h3><ul>
-<li><strong>Configuración más rápida del entorno:</strong> Las dependencias mínimas aceleran el desarrollo y las pruebas.</li>
-<li><strong>Arquitectura coherente:</strong> Diseño uniforme en desarrollo, staging y producción.</li>
-<li><strong>Integración nativa en la nube:</strong> Compatibilidad perfecta con servicios en la nube y orquestación de contenedores.</li>
-</ul>
-<h3 id="Enhanced-production-operations" class="common-anchor-header">Operaciones de producción mejoradas</h3><ul>
-<li><strong>Rendimiento predecible:</strong> Resultados coherentes en todas las escalas y configuraciones de despliegue.</li>
-<li><strong>Actualizaciones simplificadas:</strong> El diseño sin estado permite actualizaciones continuas con un tiempo de inactividad mínimo.</li>
-<li><strong>Previsibilidad de recursos:</strong> Uso de recursos más estable en comparación con los agentes de mensajes tradicionales.</li>
-</ul>
-<p>Estas ventajas operativas son revolucionarias para las bases de datos vectoriales que soportan cargas de trabajo de misión crítica de GAR, agentes de IA y búsquedas de baja latencia. La transición de las complejas pilas de intermediarios de mensajes a la arquitectura simplificada de Woodpecker no solo aumenta el rendimiento, sino que también reduce significativamente la carga operativa de los equipos de desarrollo e infraestructura.</p>
-<p>A medida que la infraestructura de nube sigue evolucionando con innovaciones como S3 Express One Zone, la arquitectura de Woodpecker permite a las organizaciones beneficiarse automáticamente de estos avances sin necesidad de grandes cambios operativos o rediseños del sistema.</p>
+<p>Estas ventajas hacen que Woodpecker sea especialmente valioso para RAG de misión crítica, agentes de IA y cargas de trabajo de búsqueda de baja latencia en las que la simplicidad operativa es tan importante como el rendimiento.</p>

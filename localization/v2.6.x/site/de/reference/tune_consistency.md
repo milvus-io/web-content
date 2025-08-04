@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus ist ein System, das Speicherung und Berechnung voneinander trennt. In diesem System sind <strong>DataNodes</strong> für die Persistenz der Daten verantwortlich und speichern sie schließlich in einem verteilten Objektspeicher wie MinIO/S3. <strong>QueryNodes</strong> übernehmen Berechnungsaufgaben wie die Suche. Diese Aufgaben umfassen sowohl die Verarbeitung von <strong>Stapeldaten</strong> als auch von <strong>Streaming-Daten</strong>. Einfach ausgedrückt, kann man unter Stapeldaten Daten verstehen, die bereits im Objektspeicher gespeichert wurden, während sich Streaming-Daten auf Daten beziehen, die noch nicht im Objektspeicher gespeichert wurden. Aufgrund der Netzwerklatenz verfügen die QueryNodes oft nicht über die aktuellsten Streaming-Daten. Ohne zusätzliche Sicherheitsvorkehrungen kann die Durchführung einer Suche direkt auf Streaming-Daten zum Verlust zahlreicher unbestätigter Datenpunkte führen, was die Genauigkeit der Suchergebnisse beeinträchtigt.</p>
-<p>Milvus Commercial Edition ist ein System, das Speicherung und Berechnung voneinander trennt. In diesem System sind die DataNodes für die Persistenz der Daten verantwortlich und speichern sie schließlich in einem verteilten Objektspeicher wie MinIO/S3. QueryNodes übernehmen Berechnungsaufgaben wie die Suche. Diese Aufgaben umfassen sowohl die Verarbeitung von Stapeldaten als auch von Streaming-Daten. Einfach ausgedrückt, kann man unter Stapeldaten Daten verstehen, die bereits im Objektspeicher gespeichert wurden, während sich Streaming-Daten auf Daten beziehen, die noch nicht im Objektspeicher gespeichert wurden. Aufgrund der Netzwerklatenz verfügen die QueryNodes oft nicht über die aktuellsten Streaming-Daten. Ohne zusätzliche Sicherheitsvorkehrungen kann die direkte Durchführung einer Suche in Streaming-Daten zum Verlust vieler unbestätigter Datenpunkte führen, was die Genauigkeit der Suchergebnisse beeinträchtigt.</p>
+<p>Milvus Commercial Edition ist ein System, das Speicherung und Berechnung voneinander trennt. In diesem System sind die DataNodes für die Persistenz der Daten verantwortlich und speichern sie schließlich in einem verteilten Objektspeicher wie MinIO/S3. QueryNodes übernehmen Berechnungsaufgaben wie die Suche. Diese Aufgaben umfassen sowohl die Verarbeitung von Stapeldaten als auch von Streaming-Daten. Einfach ausgedrückt, kann man unter Stapeldaten Daten verstehen, die bereits im Objektspeicher gespeichert wurden, während sich Streaming-Daten auf Daten beziehen, die noch nicht im Objektspeicher gespeichert wurden. Aufgrund der Netzwerklatenz verfügen die QueryNodes oft nicht über die aktuellsten Streaming-Daten. Ohne zusätzliche Sicherheitsvorkehrungen kann die direkte Durchführung einer Suche auf Streaming-Daten zum Verlust vieler unbestätigter Datenpunkte führen, was die Genauigkeit der Suchergebnisse beeinträchtigt.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/batch-data-and-streaming-data.png" alt="Batch Data And Streaming Data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -85,13 +85,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Sie können verschiedene Konsistenzstufen festlegen, wenn Sie eine Sammlung erstellen sowie Suchen und Abfragen durchführen.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Festlegen der Konsistenzstufe bei der Erstellung einer Sammlung</h3><p>Beim Erstellen einer Sammlung können Sie die Konsistenzstufe für die Suchen und Abfragen innerhalb der Sammlung festlegen. Im folgenden Codebeispiel wird die Konsistenzstufe auf <strong>"Stark"</strong> gesetzt.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Festlegen der Konsistenzstufe bei der Erstellung einer Sammlung</h3><p>Beim Erstellen einer Sammlung können Sie die Konsistenzstufe für die Suchvorgänge und Abfragen innerhalb der Sammlung festlegen. Im folgenden Codebeispiel wird die Konsistenzstufe auf <strong>"Stark"</strong> gesetzt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-<span class="highlighted-wrapper-line">    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,</span>
+<span class="highlighted-wrapper-line">    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
@@ -153,7 +153,7 @@ curl --request POST \
 <p>Mögliche Werte für den Parameter <code translate="no">consistency_level</code> sind <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, und <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Konsistenzstufe in der Suche festlegen</h3><p>Sie können jederzeit die Konsistenzstufe für eine bestimmte Suche ändern. Das folgende Codebeispiel setzt die Konsistenzstufe zurück auf " <strong>Bounded"</strong>. Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">Klartext</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
@@ -172,15 +172,15 @@ curl --request POST \
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    &quot;my_collection&quot;, // collectionName
-    3,               // limit
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
 ).WithConsistencyLevel(entity.ClBounded).
-    WithANNSField(&quot;vector&quot;))
-if err != nil {
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -199,7 +199,7 @@ if err != nil {
 <p>Dieser Parameter ist auch bei hybriden Suchen und dem Such-Iterator verfügbar. Mögliche Werte für den Parameter <code translate="no">consistency_level</code> sind <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, und <code translate="no">Session</code>.</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Konsistenzstufe in der Abfrage festlegen</h3><p>Sie können jederzeit die Konsistenzstufe für eine bestimmte Suche ändern. Das folgende Codebeispiel setzt die Konsistenzstufe auf den Wert <strong>Eventually</strong>. Die Einstellung gilt nur für die aktuelle Suchanfrage.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">Klartext</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,
@@ -218,14 +218,25 @@ if err != nil {
         
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(&quot;my_collection&quot;).
-    WithFilter(&quot;color like \&quot;red%\&quot;&quot;).
-    WithOutputFields(&quot;vector&quot;, &quot;color&quot;).
-    WithLimit(3).
+<pre><code translate="no" class="language-go">resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>).
+    WithLimit(<span class="hljs-number">3</span>).
     WithConsistencyLevel(entity.ClEventually))
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;filter&quot;: &quot;color like \&quot;red_%\&quot;&quot;,
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;,
+    &quot;limit&quot;: 3
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Dieser Parameter ist auch im Abfrage-Iterator verfügbar. Mögliche Werte für den Parameter <code translate="no">consistency_level</code> sind <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, und <code translate="no">Session</code>.</p>

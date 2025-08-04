@@ -5,7 +5,6 @@ related_key: configure
 summary: Konfigurasikan Milvus dengan Helm Charts.
 title: Mengkonfigurasi Milvus dengan Helm Charts
 ---
-
 <h1 id="Configure-Milvus-with-Helm-Charts" class="common-anchor-header">Mengkonfigurasi Milvus dengan Helm Charts<button data-href="#Configure-Milvus-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +40,7 @@ Pada rilis saat ini, semua parameter hanya berlaku setelah Milvus dimulai ulang.
       </svg>
     </button></h2><p>Anda dapat mengkonfigurasi Milvus dengan file konfigurasi <code translate="no">values.yaml</code>.</p>
 <h3 id="Download-a-configuration-file" class="common-anchor-header">Mengunduh file konfigurasi</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Unduh</a> <code translate="no">values.yaml</code> secara langsung atau dengan perintah berikut.</p>
-<pre><code translate="no">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Memodifikasi berkas konfigurasi</h3><p>Konfigurasikan instance Milvus Anda agar sesuai dengan skenario aplikasi Anda dengan menyesuaikan parameter yang sesuai di <code translate="no">values.yaml</code>.</p>
 <p>Secara khusus, cari <code translate="no">extraConfigFiles</code> di <code translate="no">values.yaml</code> dan masukkan konfigurasi Anda di bagian ini sebagai berikut:</p>
@@ -49,14 +48,14 @@ Pada rilis saat ini, semua parameter hanya berlaku setelah Milvus dimulai ulang.
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
 <span class="hljs-comment"># Please follow the config structure in the milvus.yaml</span>
 <span class="hljs-comment"># at https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># Note: this config will be the top priority which will override the config</span>
+<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> this config will be the top priority which will override the config</span>
 <span class="hljs-comment"># in the image and helm chart.</span>
-extraConfigFiles:
-  user.yaml: |+
-    <span class="hljs-comment">#    For example to set the graceful time for query nodes</span>
-    <span class="hljs-comment">#    queryNodes:</span>
-    <span class="hljs-comment">#      gracefulTime: 10</span>
-<button class="copy-code-btn"></button></code></pre>
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    #    For example to set the graceful time for query nodes
+    #    queryNodes:
+    #      gracefulTime: 10
+</span><button class="copy-code-btn"></button></code></pre>
 <p>Periksa tautan berikut untuk informasi lebih lanjut tentang setiap parameter.</p>
 <p>Diurutkan berdasarkan:</p>
 <div class="filter">
@@ -198,7 +197,7 @@ extraConfigFiles:
 </div>
 <p>Untuk parameter lain yang khusus untuk instalasi Kubernetes, Lihat <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Konfigurasi Diagram Helm Milvus</a>.</p>
 <h3 id="Start-Milvus" class="common-anchor-header">Memulai Milvus</h3><p>Setelah selesai memodifikasi berkas konfigurasi, Anda dapat memulai Milvus dengan berkas tersebut.</p>
-<pre><code translate="no">$ helm upgrade my-release milvus/milvus -f values.yaml
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">Mengkonfigurasi Milvus melalui baris perintah<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,11 +216,11 @@ extraConfigFiles:
       </svg>
     </button></h2><p>Sebagai alternatif, Anda dapat mengupgrade konfigurasi Milvus secara langsung dengan perintah Helm.</p>
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">Memeriksa parameter yang dapat dikonfigurasi</h3><p>Sebelum melakukan upgrade, Anda dapat memeriksa parameter yang dapat dikonfigurasi dengan grafik Helm.</p>
-<pre><code translate="no">$ helm show values milvus/milvus
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Start-Milvus" class="common-anchor-header">Memulai Milvus</h3><p>Konfigurasikan dan mulai Milvus dengan menambahkan <code translate="no">--values</code> atau <code translate="no">--set</code> pada perintah untuk upgrade.</p>
-<pre><code translate="no"><span class="hljs-comment"># For instance, upgrade the Milvus cluster with compaction disabled</span>
-$ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span>
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

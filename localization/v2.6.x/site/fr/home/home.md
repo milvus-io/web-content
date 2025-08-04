@@ -68,10 +68,10 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
   <p>Utiliser</p>
 <ul>
 <li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
-<li><a href="/docs/fr/insert-update-delete.md">Insérer, extraire et supprimer</a></li>
-<li><a href="/docs/fr/index-vector-fields.md">Indexation des champs vectoriels</a></li>
-<li><a href="/docs/fr/single-vector-search.md">Recherche sur un seul vecteur</a></li>
-<li><a href="/docs/fr/get-and-scalar-query.md">Requête Get &amp; Scalar</a></li>
+<li><a href="/docs/fr/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
+<li><a href="/docs/fr/single-vector-search.md">Recherche d'un seul vecteur</a></li>
+<li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
+<li><a href="/docs/fr/get-and-scalar-query.md">Requête de type "Get" et "Scalar</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -89,7 +89,7 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
 <ul>
 <li><a href="/docs/fr/system_configuration.md">Configuration du système</a></li>
 <li><a href="/docs/fr/architecture_overview.md">Présentation de l'architecture</a></li>
-<li><a href="/docs/fr/index.md">Index vectoriel</a></li>
+<li><a href="/docs/fr/index-explained.md">Explication de l'index</a></li>
 <li><a href="/docs/fr/metric.md">Mesures de similarité</a></li>
 <li><a href="/docs/fr/glossary.md">Glossaire</a></li>
 </ul>
@@ -111,12 +111,12 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Nov 2024 - Sortie de Milvus 2.5.0</em></p>
+    </button></h2><p><em>Juin 2025 - Sortie de Milvus 2.6.0</em></p>
 <ul>
-<li>Ajout d'indications sur la manière d'<a href="/docs/fr/full-text-search.md">effectuer une recherche en texte intégral</a>.</li>
-<li>Ajout d'indications sur la manière d'<a href="/docs/fr/keyword-match.md">effectuer une correspondance de texte</a>.</li>
-<li>Ajout d'indications sur la manière d'<a href="/docs/fr/nullable-and-default.md">activer les valeurs nullables et les valeurs par défaut</a>.</li>
-<li>Ajout de descriptions des <a href="/docs/fr/analyzer-overview.md">analyseurs</a>.</li>
-<li>Ajout de descriptions des <a href="/docs/fr/bitmap.md">index bitmap</a>.</li>
+<li>Ajout de conseils sur l'<a href="/docs/fr/embedding-function-overview.md">utilisation de la fonction d'intégration</a>.</li>
+<li>Ajout d'indications sur l'<a href="/docs/fr/decay-ranker-overview.md">utilisation du classificateur de décroissance</a>.</li>
+<li>Ajout d'indications sur la manière d'<a href="/docs/fr/add-fields-to-an-existing-collection.md">ajouter des champs à une collection existante</a>.</li>
+<li>Ajout d'indications sur la manière d'<a href="/docs/fr/phrase-match.md">effectuer une correspondance de phrases</a>.</li>
+<li>Ajout de descriptions de l'<a href="/docs/fr/ivf-rabitq.md">index IVF_RABITQ</a>.</li>
 </ul>
 </div>

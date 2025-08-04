@@ -75,7 +75,7 @@ summary: Saiba como configurar o queryCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Altera o valor para controlar se é necessário equilibrar automaticamente o uso da memória entre os nós de consulta, distribuindo as operações de carregamento e liberação de segmentos uniformemente.      </td>
+      <td>        Altera o valor para controlar se deve balancear automaticamente o uso de memória entre os nós de consulta, distribuindo as operações de carregamento e liberação de segmentos uniformemente.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -744,7 +744,7 @@ summary: Saiba como configurar o queryCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        o valor do atraso para o aviso de relatório do querycoord quando o último heatbeat é demasiado antigo, em milissegundos      </td>
+      <td>        o valor do atraso para o aviso do relatório do querycoord quando o último heatbeat é demasiado antigo, em milissegundos      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -976,7 +976,7 @@ summary: Saiba como configurar o queryCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        segundos. forçar paragem do nó sem paragem graciosa      </td>
+      <td>        segundos. forçar a paragem do nó sem paragem graciosa      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -1150,7 +1150,7 @@ summary: Saiba como configurar o queryCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        a duração do segmento de exclusão de condutas limpas utilizado para filtrar dados inválidos, em segundos      </td>
+      <td>        a duração do segmento de exclusão de condutas limpas que é utilizado para filtrar dados inválidos, em segundos      </td>
       <td>60</td>
     </tr>
   </tbody>

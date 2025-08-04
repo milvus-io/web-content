@@ -24,6 +24,38 @@ title: 使用 Milvus Operator 升级 Milvus 群集
         ></path>
       </svg>
     </button></h1><p>本指南介绍如何使用 Milvus Operator 升级 Milvus 群集。</p>
+<h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>从 Milvus 2.6.0 起，传统的独立协调器 (<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code>) 已合并为一个<code translate="no">mixCoord</code> 。升级前，请确保您的 CRD 规范使用<code translate="no">mixCoord</code> ，而不是单个协调器组件。</p>
+<p>如果您正在使用独立协调器，请修改您的规范：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">mixCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># set to 1 or more</span>
+    <span class="hljs-attr">dataCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+    <span class="hljs-attr">queryCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+    <span class="hljs-attr">indexCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">升级您的 Milvus 操作符<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,17 +71,20 @@ title: 使用 Milvus Operator 升级 Milvus 群集
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>运行以下命令将您的 Milvus 操作符版本升级到 v1.2.0。</p>
+    </button></h2><p>运行以下命令将您的 Milvus 操作符版本升级到 v1.3.0。</p>
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>将您的 Milvus 操作符升级到最新版本后，您有以下选择：</p>
 <ul>
-<li>要将 Milvus 从版本 2.2.3 或更高<a href="#Conduct-a-rolling-upgrade">版本升级</a>到 2.5.12，可以<a href="#Conduct-a-rolling-upgrade">进行滚动升级</a>。</li>
-<li>要将 Milvus 从 v2.2.3 之前的次版本升级到 2.5.12，建议你<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像版本来升级 Milvus</a>。</li>
-<li>要将 Milvus 从 v2.1.x 升级到 2.5.12，需要在实际升级前<a href="#Migrate-the-metadata">迁移元数据</a>。</li>
+<li>要从版本 2.2.3 升级 Milvus，可以<a href="#Conduct-a-rolling-upgrade">进行滚动升级</a>。</li>
+<li>要将 Milvus 从 v2.2.3 之前的次版本升级到 2.6.0，建议你<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像版本来升级 Milvus</a>。</li>
+<li>要将 Milvus 从 v2.1.x 升级到 2.6.0，需要在实际升级前<a href="#Migrate-the-metadata">迁移元数据</a>。</li>
 </ul>
+<blockquote>
+<p><strong>注意</strong>：强烈建议一次升级一个次要版本，并使用该次要版本的最新稳定版本。例如，如果要从 v2.4.x 升级到 v2.6.x，应首先升级到最新的 v2.4.x，然后升级到最新的 v2.5.x，最后升级到 v2.6.x。这样可以确保使用每个次版本的最新稳定版本，更有可能与现有数据和配置兼容。</p>
+</blockquote>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">进行滚动升级<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +100,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 2.2.3 起，你可以将 Milvus 协调器配置为主动待机模式工作，并为它们启用滚动升级功能，这样 Milvus 就能在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定的停机时间。</p>
+    </button></h2><p>自 Milvus 2.2.3 起，您可以将 Milvus 协调器配置为主动待机模式工作，并为它们启用滚动升级功能，这样 Milvus 就可以在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定的停机时间。</p>
 <p>基于 Kubernetes 提供的滚动更新功能，Milvus 操作符会根据部署的依赖关系强制执行有序更新。此外，Milvus 还实施了一种机制，确保其组件在升级期间与依赖于它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
 <p>滚动升级功能默认为禁用。你需要通过配置文件明确启用它。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -76,7 +111,10 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+    <span class="hljs-comment"># Milvus Operator recognizes the image tag as a semantic version, and decides what to do based on the version.</span>
+    <span class="hljs-comment"># So in case you&#x27;re using a non-sermantic verison image tag, you may also need to set the `version` field so that Milvus Operator can recognize the version correctly</span>
+    <span class="hljs-attr">version:</span> <span class="hljs-string">v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述配置文件中，将<code translate="no">spec.components.enableRollingUpdate</code> 设置为<code translate="no">true</code> ，将<code translate="no">spec.components.image</code> 设置为所需的 Milvus 版本。</p>
 <p>默认情况下，Milvus 会以有序方式对协调器执行滚动升级，即逐个替换协调器 pod 映像。要缩短升级时间，可以考虑将<code translate="no">spec.components.imageUpdateMode</code> 设置为<code translate="no">all</code> ，这样 Milvus 就会同时替换所有 pod 映像。</p>
@@ -88,7 +126,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">all</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>可以将<code translate="no">spec.components.imageUpdateMode</code> 设置为<code translate="no">rollingDowngrade</code> ，让 Milvus 用较低的版本替换协调器 pod 映像。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -128,7 +166,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
   <span class="hljs-attr">components:</span>
-   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>然后运行以下命令执行升级：</p>
 <pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
@@ -148,8 +186,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 2.2.0 起，元数据与以前版本的元数据不兼容。以下示例片段假定从 Milvus 2.1.4 升级到 Milvus 2.5.12。</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1.创建用于元数据迁移的<code translate="no">.yaml</code> 文件</h3><p>创建元数据迁移文件。下面是一个示例。需要在配置文件中指定<code translate="no">name</code> 、<code translate="no">sourceVersion</code> 和<code translate="no">targetVersion</code> 。下面的示例将<code translate="no">name</code> 设置为<code translate="no">my-release-upgrade</code> ，将<code translate="no">sourceVersion</code> 设置为<code translate="no">v2.1.4</code> ，将<code translate="no">targetVersion</code> 设置为<code translate="no">v2.5.12</code> 。这意味着您的 Milvus 群集将从 v2.1.4 升级到 v2.5.12。</p>
+    </button></h2><p>自 Milvus 2.2.0 起，元数据与以前版本的元数据不兼容。以下示例片段假定从 Milvus 2.1.4 升级到 Milvus 2.6.0。</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1.创建用于元数据迁移的<code translate="no">.yaml</code> 文件</h3><p>创建元数据迁移文件。下面是一个示例。需要在配置文件中指定<code translate="no">name</code> 、<code translate="no">sourceVersion</code> 和<code translate="no">targetVersion</code> 。下面的示例将<code translate="no">name</code> 设置为<code translate="no">my-release-upgrade</code> ，将<code translate="no">sourceVersion</code> 设置为<code translate="no">v2.1.4</code> ，将<code translate="no">targetVersion</code> 设置为<code translate="no">v2.6.0</code> 。这意味着您的 Milvus 群集将从 v2.1.4 升级到 v2.6.0。</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
 <span class="hljs-attr">metadata:</span>
@@ -159,9 +197,9 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
     <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.5.12&quot;</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.6.0&quot;</span>
   <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.5.12&quot;</span>
+  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.6.0&quot;</span>
   <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
   <span class="hljs-comment"># operation: upgrade</span>
   <span class="hljs-comment"># rollbackIfFailed: true</span>

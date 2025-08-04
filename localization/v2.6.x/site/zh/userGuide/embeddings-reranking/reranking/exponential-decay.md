@@ -46,7 +46,7 @@ beta: Milvus 2.6.x
 <table>
    <tr>
      <th><p>使用案例</p></th>
-     <th><p>示例</p></th>
+     <th><p>实例</p></th>
      <th><p>为什么指数效果好</p></th>
    </tr>
    <tr>
@@ -74,7 +74,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>用户希望最近或附近的项目在搜索结果中占主导地位</p></li>
 <li><p>较旧或较远的项目如果特别相关，仍应可被发现</p></li>
-<li><p>相关性下降应该是前负荷的（开始时较陡，之后较缓）</p></li>
+<li><p>相关性下降应该是前负荷的（开始时较陡峭，之后较缓慢）</p></li>
 </ul>
 <h2 id="Sharp-drop-off-principle" class="common-anchor-header">急剧下降原则<button data-href="#Sharp-drop-off-principle" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,7 +99,7 @@ beta: Milvus 2.6.x
 <p>上图显示了指数衰减对数字新闻平台中新闻文章排名的影响：</p>
 <ul>
 <li><p><code translate="no">origin</code> (当前时间）：当前时刻，相关性达到最大值（1.0）。</p></li>
-<li><p><code translate="no">offset</code> (3小时）：突发新闻窗口"--在过去 3 小时内发布的所有新闻都保持满分相关性（1.0），确保最近的新闻不会因为微小的时间差而受到不必要的惩罚。</p></li>
+<li><p><code translate="no">offset</code> (3小时）：突发新闻窗口"--所有在过去 3 小时内发布的新闻都保持满分相关性（1.0），确保最近的新闻不会因为微小的时间差而受到不必要的惩罚。</p></li>
 <li><p><code translate="no">decay</code> (0.5):尺度距离上的得分--该参数控制得分随时间减少的幅度。</p></li>
 <li><p><code translate="no">scale</code> (24小时）：相关性下降到衰减值的时间段--24 小时前的新闻相关性得分减半 (0.5)。</p></li>
 </ul>
@@ -149,7 +149,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>指数衰减可应用于 Milvus 中的标准向量搜索和混合搜索操作符。下面是实现这一功能的关键代码片段。</p>
 <div class="alert note">
-<p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collections，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅《<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">衰减排名器教程》</a>。</p>
+<p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collection，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅《<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">衰减排名器教程》</a>。</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">创建衰减排名器</h3><p>用数字字段（本例中为<code translate="no">publish_time</code> ）设置好 Collections 后，创建指数衰减排序器：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
@@ -179,7 +179,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;publish_time&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索</h3><p>衰减排序器还可以应用于结合多个向量场的混合搜索操作：</p>

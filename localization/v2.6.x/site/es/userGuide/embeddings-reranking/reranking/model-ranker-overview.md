@@ -203,9 +203,15 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Sí</p></td>
+     <td><p>Diccionario que contiene la configuración de la función de reordenación basada en modelos. Los parámetros disponibles (claves) varían en función del proveedor (<code translate="no">tei</code> o <code translate="no">vllm</code>). Consulte <a href="/docs/es/vllm-ranker.md">vLLM Ranker</a> o <a href="/docs/es/tei-ranker.md">TEI Ranker</a> para obtener más detalles.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Sí</p></td>
-     <td><p>Debe establecerse en <code translate="no">"model"</code> para habilitar la reordenación de modelos.</p></td>
+     <td><p>Debe establecerse en <code translate="no">"model"</code> para activar la reordenación basada en modelos.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -242,7 +248,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar a la búsqueda híbrida</h3><p>Los clasificadores de modelos también pueden aplicarse a las operaciones de búsqueda híbrida que combinan varios campos vectoriales:</p>

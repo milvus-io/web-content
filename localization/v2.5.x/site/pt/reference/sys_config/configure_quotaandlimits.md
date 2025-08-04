@@ -148,7 +148,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        duração do tempo de espera da repetição quando a taxa de envio de dados da atribuição falhou, em milissegundos      </td>
+      <td>        duração do tempo de espera da repetição quando a taxa de transmissão de dados da atribuição falhou, em milissegundos      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -385,7 +385,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Número máximo de solicitações DDL relacionadas à partição por segundo.</li>      
-        <li>Definir este item como 10 indica que o Milvus não processa mais de 10 pedidos relacionados com a partição por segundo, incluindo pedidos de criação de partições, pedidos de eliminação de partições, pedidos de carregamento de partições e pedidos de libertação de partições.</li>      
+        <li>Definir este item como 10 indica que o Milvus não processa mais do que 10 pedidos relacionados com a partição por segundo, incluindo pedidos de criação de partições, pedidos de eliminação de partições, pedidos de carregamento de partições e pedidos de libertação de partições.</li>      
         <li>Para usar essa configuração, defina quotaAndLimits.ddl.enabled como true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -504,7 +504,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Número máximo de pedidos relacionados com o índice por segundo.</li>      
-        <li>Definir este item como 10 indica que o Milvus não processa mais de 10 pedidos relacionados com a partição por segundo, incluindo pedidos de criação de índices e pedidos de eliminação de índices.</li>      
+        <li>Definir este item como 10 indica que o Milvus não processa mais do que 10 pedidos relacionados com a partição por segundo, incluindo pedidos de criação de índices e pedidos de eliminação de índices.</li>      
         <li>Para utilizar esta definição, defina quotaAndLimits.indexRate.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -743,7 +743,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        qps do nível db, predefinição sem limite, taxa para compactação manual      </td>
+      <td>        qps do nível db, predefinição sem limite, taxa para manualCompaction      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1102,7 +1102,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Taxa máxima de eliminação de dados por segundo.</li>      
-        <li>Definir este item como 0,1 indica que o Milvus só permite a eliminação de dados de qualquer coleção a uma velocidade de 0,1 MB/s.</li>      
+        <li>Definir este item como 0,1 indica que o Milvus só permite a eliminação de dados de qualquer coleção a uma taxa de 0,1 MB/s.</li>      
         <li>Para usar esta configuração, defina quotaAndLimits.dml.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -1369,7 +1369,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Número máximo de vectores a pesquisar por coleção e por segundo.</li>      
-        <li>Definir este item para 100 indica que o Milvus apenas permite a pesquisa de 100 vectores por segundo por coleção, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
+        <li>Definir este item para 100 indica que o Milvus só permite a pesquisa de 100 vectores por segundo por coleção, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
         <li>Para utilizar esta definição, defina quotaAndLimits.dql.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -2026,7 +2026,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        comutador para ativar a quota de contagem de linhas da memória intermédia de eliminação      </td>
+      <td>        ativar a quota de contagem de linhas da memória intermédia de eliminação      </td>
       <td>falso</td>
     </tr>
   </tbody>

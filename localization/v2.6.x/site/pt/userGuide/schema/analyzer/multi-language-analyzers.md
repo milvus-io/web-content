@@ -28,7 +28,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Quando o Milvus realiza análise de texto, ele normalmente aplica um único analisador em todo o campo de texto de uma coleção. Se esse analisador for optimizado para o inglês, tem dificuldades em lidar com as regras de tokenização e stemming muito diferentes exigidas por outras línguas, como o chinês, o espanhol ou o francês, o que resulta numa taxa de recuperação mais baixa. Por exemplo, uma pesquisa para a palavra espanhola <em>"teléfono"</em> (que significa <em>"telefone")</em> faria tropeçar um analisador centrado no inglês: pode omitir o acento e não aplicar qualquer stemming específico do espanhol, fazendo com que os resultados relevantes sejam ignorados.</p>
+    </button></h1><p>Quando o Milvus realiza análise de texto, ele normalmente aplica um único analisador em todo o campo de texto de uma coleção. Se esse analisador estiver optimizado para o inglês, tem dificuldades em lidar com as regras de tokenização e stemming muito diferentes exigidas por outras línguas, como o chinês, o espanhol ou o francês, o que resulta numa taxa de recuperação mais baixa. Por exemplo, uma pesquisa para a palavra espanhola <em>"teléfono"</em> (que significa <em>"telefone")</em> faria tropeçar um analisador centrado no inglês: pode omitir o acento e não aplicar qualquer stemming específico do espanhol, fazendo com que os resultados relevantes sejam ignorados.</p>
 <p>Os analisadores multilingues resolvem este problema, permitindo-lhe configurar vários analisadores para um campo de texto numa única coleção. Desta forma, pode armazenar documentos multilingues num campo de texto, e o Milvus analisa o texto de acordo com as regras linguísticas adequadas a cada documento.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O diagrama seguinte mostra o fluxo de trabalho da configuração e utilização de analisadores multilingues no Milvus:</p>
+    </button></h2><p>O diagrama seguinte mostra o fluxo de trabalho da configuração e utilização de analisadores multilingues em Milvus:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multi-language-analyzers-workflow.png" alt="Multi Language Analyzers Workflow" class="doc-image" id="multi-language-analyzers-workflow" />
@@ -209,7 +209,7 @@ analyzerParams.put(<span class="hljs-string">&quot;alias&quot;</span>, <span cla
    <tr>
      <td><p><code translate="no">analyzers</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Lista todos os analisadores específicos da língua que o Milvus pode utilizar para processar texto. Cada analisador em <code translate="no">analyzers</code> segue o seguinte formato: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
+     <td><p>Lista todos os analisadores específicos de cada língua que o Milvus pode utilizar para processar texto. Cada analisador em <code translate="no">analyzers</code> segue o seguinte formato: <code translate="no">&lt;analyzer_name&gt;: &lt;analyzer_params&gt;</code>.</p></td>
      <td><ul>
 <li>Definir cada analisador com a sintaxe padrão <code translate="no">analyzer_params</code> (ver <a href="/docs/pt/analyzer-overview.md#Analyzer-types">Visão geral do analisador</a>).</li>
 <li>Adicione uma entrada cuja chave seja <code translate="no">default</code>; o Milvus recorre a este analisador sempre que o valor armazenado em <code translate="no">by_field</code> não corresponda a qualquer outro nome de analisador.</li>
@@ -556,7 +556,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
   }
 ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O índice melhora o desempenho da pesquisa organizando vetores esparsos para cálculos eficientes de similaridade do BM25.</p>
+<p>O índice melhora o desempenho da pesquisa, organizando vetores esparsos para cálculos eficientes de similaridade do BM25.</p>
 <h3 id="Create-the-collection" class="common-anchor-header">Criar a coleção</h3><p>Esta etapa final de criação reúne todas as suas configurações anteriores:</p>
 <ul>
 <li><p><code translate="no">collection_name=&quot;multilang_demo&quot;</code> nomeia sua coleção para referência futura.</p></li>
@@ -785,7 +785,7 @@ curl --request POST \
 <li><p>Lê o campo <code translate="no">language</code> de cada documento</p></li>
 <li><p>Aplica o analisador correspondente ao campo <code translate="no">text</code> </p></li>
 <li><p>Gera uma representação vetorial esparsa através da função BM25</p></li>
-<li><p>Armazena tanto o texto original como o vetor esparso gerado</p></li>
+<li><p>Armazena o texto original e o vetor esparso gerado</p></li>
 </ol>
 <div class="alert note">
 <p>Não é necessário fornecer o vetor esparso diretamente; a função BM25 gera-o automaticamente com base no seu texto e no analisador especificado.</p>
@@ -827,7 +827,7 @@ english_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display English search results</span>
@@ -873,7 +873,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display English search results</span>
@@ -927,7 +927,7 @@ curl --request POST \
     &quot;drop_ratio_search&quot;: &quot;0&quot;  
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Use-Chinese-analyzer" class="common-anchor-header">Usar o analisador chinês</h3><p>Este exemplo demonstra a mudança para o analisador chinês (usando seu alias <code translate="no">&quot;cn&quot;</code>) para texto de consulta diferente. Todos os outros parâmetros permanecem os mesmos, mas agora o texto da consulta é processado usando regras de tokenização específicas do chinês.</p>
@@ -942,7 +942,7 @@ chinese_results = client.search(
     search_params=search_params,      <span class="hljs-comment"># Search configuration</span>
     limit=<span class="hljs-number">3</span>,                      <span class="hljs-comment"># Max results to return</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],  <span class="hljs-comment"># Fields to include in the output</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,       <span class="hljs-comment"># Data‑consistency guarantee</span>
 )
 
 <span class="hljs-comment"># Display Chinese search results</span>
@@ -985,7 +985,7 @@ searchResults = searchResp.getSearchResults();
   },
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>],
-  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,
 });
 
 <span class="hljs-comment">// Display Chinese search results</span>
@@ -1035,6 +1035,6 @@ curl --request POST \
     &quot;analyzer_name&quot;: &quot;cn&quot;
   },
   &quot;outputFields&quot;: [&quot;text&quot;, &quot;language&quot;],
-  &quot;consistencyLevel&quot;: &quot;Strong&quot;
+  &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

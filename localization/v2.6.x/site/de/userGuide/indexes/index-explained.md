@@ -51,12 +51,31 @@ summary: >-
      <th><p>Anwendbare Indextypen</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>BFLOAT16_VECTOR</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>FLAT</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BINÄR_VECTOR</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>SPARSE_FLOAT_VECTOR</p></td>
@@ -64,18 +83,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED (Empfohlen)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED (Empfohlen)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (Empfohlen)</li><li>INVERTED</li></ul></td>
+     <td><ul>
+<li>BITMAP (Empfohlen)</li>
+<li>INVERTED</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>INVERTED</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>INVERTED</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>INVERTED</p></td>
    </tr>
    <tr>
@@ -149,7 +186,7 @@ summary: >-
       </svg>
     </button></h2><p>Bei der Bewertung der Leistung ist es von entscheidender Bedeutung, ein Gleichgewicht zwischen <strong>Erstellungszeit</strong>, <strong>Abfrage pro Sekunde (QPS)</strong> und <strong>Wiederfindungsrate</strong> herzustellen. Die allgemeinen Regeln lauten wie folgt:</p>
 <ul>
-<li><p><strong>Graphenbasierte Indexarten</strong> übertreffen in der Regel <strong>IVF-Varianten</strong> in Bezug auf die <strong>QPS</strong>.</p></li>
+<li><p><strong>Graphenbasierte Indextypen</strong> übertreffen in der Regel die <strong>IVF-Varianten</strong> in Bezug auf die <strong>QPS</strong>.</p></li>
 <li><p><strong>IVF-Varianten</strong> eignen sich besonders für Szenarien mit <strong>einem großen TopK (z. B. über 2.000)</strong>.</p></li>
 <li><p><strong>PQ</strong> bietet typischerweise eine bessere Wiederauffindungsrate bei ähnlichen Kompressionsraten im Vergleich zu <strong>SQ</strong>, obwohl letztere eine schnellere Leistung bietet.</p></li>
 <li><p>Die Verwendung von Festplatten für einen Teil des Index (wie bei <strong>DiskANN</strong>) hilft bei der Verwaltung großer Datenmengen, führt aber auch zu potenziellen IOPS-Engpässen.</p></li>
@@ -163,19 +200,19 @@ summary: >-
 <div class="alert note">
 <p>Mmap ist nicht immer die Lösung. Wenn sich die meisten Ihrer Daten auf der Festplatte befinden, bietet DiskANN eine bessere Latenzzeit.</p>
 </div>
-<h3 id="Recall" class="common-anchor-header">Rückruf</h3><p>Beim Recall handelt es sich in der Regel um das Filterverhältnis, das sich auf die Daten bezieht, die vor der Suche herausgefiltert werden. Beim Recall ist Folgendes zu beachten:</p>
+<h3 id="Recall" class="common-anchor-header">Rückruf</h3><p>Beim Recall handelt es sich in der Regel um das Filterverhältnis, das sich auf die Daten bezieht, die vor der Suche herausgefiltert werden. Bei der Ermittlung des Rückrufs ist Folgendes zu beachten:</p>
 <ul>
 <li><p>Wenn das Filterverhältnis weniger als 85 % beträgt, sind graphbasierte Indextypen besser als IVF-Varianten.</p></li>
 <li><p>Liegt das Filterverhältnis zwischen 85% und 95%, sollten IVF-Varianten verwendet werden.</p></li>
 <li><p>Bei einem Filterverhältnis von über 98% sollten Sie Brute-Force (FLAT) verwenden, um die genauesten Suchergebnisse zu erhalten.</p></li>
 </ul>
 <div class="alert note">
-<p>Die oben genannten Punkte sind nicht immer korrekt. Es ist ratsam, den Abruf mit verschiedenen Indexarten abzustimmen, um festzustellen, welche Indexart am besten funktioniert.</p>
+<p>Die oben genannten Punkte sind nicht immer richtig. Es ist ratsam, den Abruf mit verschiedenen Indexarten abzustimmen, um festzustellen, welche Indexart am besten funktioniert.</p>
 </div>
 <h3 id="Performance" class="common-anchor-header">Leistung</h3><p>Die Leistung einer Suche bezieht sich in der Regel auf das Top-K, das sich auf die Anzahl der Datensätze bezieht, die die Suche zurückgibt. Wenn es um die Leistung geht, ist Folgendes zu beachten:</p>
 <ul>
 <li><p>Bei einer Suche mit einem kleinen Top-K (z.B. 2.000), die eine hohe Recall-Rate erfordert, sind graphbasierte Indextypen besser als IVF-Varianten.</p></li>
-<li><p>Für eine Suche mit einem großen Top-K (im Vergleich zur Gesamtzahl der Vektoreinbettungen) sind IVF-Varianten die bessere Wahl als graphbasierte Indextypen.</p></li>
+<li><p>Bei einer Suche mit einem großen Top-K (im Vergleich zur Gesamtzahl der Vektoreinbettungen) sind IVF-Varianten die bessere Wahl als graphbasierte Indextypen.</p></li>
 <li><p>Für eine Suche mit einem mittleren Top-K und einem hohen Filterverhältnis sind IVF-Varianten die bessere Wahl.</p></li>
 </ul>
 <h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Entscheidungsmatrix: Auswahl des am besten geeigneten Indextyps</h3><p>Die folgende Tabelle ist eine Entscheidungsmatrix, auf die Sie sich bei der Wahl eines geeigneten Indextyps beziehen können.</p>
@@ -203,7 +240,7 @@ summary: >-
    <tr>
      <td><p>Hohes Filterverhältnis (&gt;95%)</p></td>
      <td><p>Brute-Force (FLAT)</p></td>
-     <td><p>Vermeidet Index-Overhead für kleine Kandidatengruppen.</p></td>
+     <td><p>Vermeidet Index-Overhead für kleine Kandidatenmengen.</p></td>
    </tr>
    <tr>
      <td><p>Große <code translate="no">k</code> (≥1% des Datensatzes)</p></td>
@@ -247,7 +284,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Berechnen Sie die durch die Quantisierung verursachte Kompression.</strong></p>
-<p>IVF-Varianten verwenden in der Regel PQ und SQ8, und der Speicherverbrauch kann wie folgt geschätzt werden:</p>
+<p>IVF-Varianten verwenden in der Regel PQ und SQ8, und der Speicherbedarf kann wie folgt geschätzt werden:</p>
 <ul>
 <li><p>Verwendung von PQ mit 8 Unterquantisierern</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8.0 MB
@@ -305,7 +342,7 @@ summary: >-
 <p>Die Quantisierung reduziert die Vektorgröße. Beispielsweise führt die Verwendung von PQ mit 8 Unterquantisierern (8 Byte pro Vektor) zu einer drastischen Kompression. Der von den komprimierten Vektoreinbettungen verbrauchte Speicher kann wie folgt berechnet werden:</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
-<p>Im Vergleich zu den unkomprimierten Vektoreinbettungen wird eine 64-fache Komprimierungsrate erreicht, und der vom Index-Typ <strong>HNSWPQ</strong> verwendete Gesamtspeicher beträgt <strong>128 MB (Graph) + 8 MB (komprimierter Vektor) = 136 MB</strong>.</p></li>
+<p>Im Vergleich zu den unkomprimierten Vektoreinbettungen wird eine 64-fache Komprimierungsrate erreicht, und der Gesamtspeicherverbrauch des Index-Typs <strong>HNSWPQ</strong> würde <strong>128 MB (Graph) + 8 MB (komprimierter Vektor) = 136 MB</strong> betragen.</p></li>
 <li><p><strong>Berechnen Sie den Verfeinerungs-Overhead.</strong></p>
 <p>Bei der Verfeinerung, z. B. bei der Neueinordnung mit Rohvektoren, werden vorübergehend hochpräzise Daten in den Speicher geladen. Für eine Suche, die die 10 besten Ergebnisse mit einer Expansionsrate von 5 abruft, kann der Verfeinerungs-Overhead wie folgt geschätzt werden:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates

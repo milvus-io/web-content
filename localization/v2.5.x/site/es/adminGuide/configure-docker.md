@@ -156,7 +156,7 @@ En la versión actual, todos los parámetros tienen efecto sólo después de rei
     </td>
   </tr>
   <tr>
-    <td>Cuota y límites</td>
+    <td>Cuotas y límites</td>
     <td>
         <ul>
             <li><a href="/docs/es/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>

@@ -66,7 +66,7 @@ title: 管理資源群組
 <li><strong>limits</strong>屬性指定資源群組的最大限制。</li>
 <li><strong>transfer_from</strong>和<strong>transfer_to 屬性</strong>分別描述資源群組最好從哪些資源群組取得資源，以及將資源轉移到哪些資源群組。</li>
 </ul>
-<p>一旦資源群組的配置發生變化，Milvus 會根據新的配置盡可能調整當前查詢節點的資源，確保所有資源群組最終都能滿足以下條件：</p>
+<p>一旦資源群組的組態改變，Milvus 會根據新的組態儘可能調整目前的查詢節點資源，確保所有資源群組最終都符合下列條件：</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>下列情況除外：</p>
 <ul>
@@ -90,7 +90,7 @@ title: 管理資源群組
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本頁面的所有程式碼範例都在 PyMilvus 2.5.10 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
+<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.0 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
 </div>
 <ol>
 <li><p>建立資源群組</p>

@@ -66,8 +66,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>Desde Milvus 2.2.3, puede configurar los coordinadores de Milvus para que funcionen en modo activo-espera y activar la función de actualización continua para ellos, de modo que Milvus pueda responder a las solicitudes entrantes durante las actualizaciones de los coordinadores. En versiones anteriores, los coordinadores debían eliminarse y luego crearse durante una actualización, lo que podía introducir cierto tiempo de inactividad del servicio.</p>
-<p>Basándose en las capacidades de actualización continua proporcionadas por Kubernetes, el operador Milvus aplica una actualización ordenada de los despliegues en función de sus dependencias. Además, Milvus implementa un mecanismo para garantizar que sus componentes sigan siendo compatibles con aquellos que dependen de ellos durante la actualización, lo que reduce significativamente el posible tiempo de inactividad del servicio.</p>
-<p>La función de actualización continua está desactivada por defecto. Es necesario habilitarla explícitamente a través de un fichero de configuración.</p>
+<p>Basándose en las capacidades de actualización continua proporcionadas por Kubernetes, el operador Milvus aplica una actualización ordenada de los despliegues según sus dependencias. Además, Milvus implementa un mecanismo para garantizar que sus componentes sigan siendo compatibles con aquellos que dependen de ellos durante la actualización, lo que reduce significativamente el posible tiempo de inactividad del servicio.</p>
+<p>La función de actualización continua está desactivada por defecto. Es necesario habilitarla explícitamente a través de un archivo de configuración.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

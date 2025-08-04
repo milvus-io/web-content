@@ -59,7 +59,7 @@ title: Построение RAG с помощью Milvus и Unstructured
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Подготовьте клиенты Milvus и OpenAI</h3><p>Вы можете использовать клиент Milvus для создания коллекции Milvus и вставки в нее данных.</p>
+<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Подготовка клиентов Milvus и OpenAI</h3><p>Вы можете использовать клиент Milvus для создания коллекции Milvus и вставки в нее данных.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -141,7 +141,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,
 )
 
 milvus_client.load_collection(collection_name=collection_name)

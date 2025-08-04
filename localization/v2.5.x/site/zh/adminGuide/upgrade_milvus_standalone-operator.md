@@ -170,7 +170,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-comment"># backupPVC: &quot;&quot;</span>
   <span class="hljs-comment"># maxRetry: 3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2.应用新配置</h3><p>运行以下命令应用新配置。</p>
+<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2.2. 应用新配置</h3><p>运行以下命令应用新配置。</p>
 <pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/<span class="hljs-built_in">config</span>/samples/milvusupgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3.3. 检查元数据迁移状态</h3><p>运行以下命令检查元数据迁移的状态。</p>

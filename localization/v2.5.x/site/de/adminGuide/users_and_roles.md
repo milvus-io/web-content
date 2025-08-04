@@ -251,7 +251,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">Rollen auflisten</h3><p>Nachdem Sie mehrere Rollen erstellt haben, können Sie alle vorhandenen Rollen auflisten und ansehen.</p>
+<h3 id="List-roles" class="common-anchor-header">Rollen auflisten</h3><p>Nachdem Sie mehrere Rollen erstellt haben, können Sie alle vorhandenen Rollen auflisten und einsehen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

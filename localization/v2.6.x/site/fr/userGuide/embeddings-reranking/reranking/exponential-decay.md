@@ -111,7 +111,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">decay</code> (0.5) : Le score à la distance de l'échelle - ce paramètre contrôle l'ampleur de la diminution des scores avec le temps.</p></li>
 <li><p><code translate="no">scale</code> (24 heures) : Période à partir de laquelle la pertinence tombe à la valeur de décroissance - les articles d'actualité datant d'exactement 24 heures voient leur score de pertinence divisé par deux (0,5).</p></li>
 </ul>
-<p>Comme le montre la courbe, la pertinence des articles datant de plus de 24 heures continue de diminuer sans jamais atteindre zéro. Même les articles datant de plusieurs jours conservent une pertinence minimale, ce qui permet à des informations importantes mais plus anciennes d'apparaître dans votre fil d'actualité (bien qu'elles soient moins bien classées).</p>
+<p>Comme le montre la courbe, la pertinence des articles datant de plus de 24 heures continue de diminuer sans jamais atteindre zéro. Même les articles datant de plusieurs jours conservent une pertinence minimale, ce qui permet à des informations importantes mais plus anciennes d'apparaître dans votre fil d'actualité (même si elles sont moins bien classées).</p>
 <p>Ce comportement reproduit le fonctionnement habituel de la pertinence des actualités : les articles très récents dominent largement, mais des articles plus anciens importants peuvent encore percer s'ils sont exceptionnellement pertinents par rapport aux centres d'intérêt de l'utilisateur.</p>
 <h2 id="Formula" class="common-anchor-header">Formule<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -187,7 +187,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;publish_time&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de décroissance peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>

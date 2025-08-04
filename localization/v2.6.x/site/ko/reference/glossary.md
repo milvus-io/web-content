@@ -144,7 +144,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 <a href="https://milvus.io/docs/glossary.md#PChannel">PC채널과</a> <a href="https://milvus.io/docs/glossary.md#VChannel">V채널이라는</a> 두 가지 유형의 채널을 활용합니다. 각 PC채널은 로그 저장을 위한 주제에 해당하며, 각 V채널은 컬렉션의 샤드에 해당합니다.</p>
+    </button></h2><p>Milvus는 스트리밍 서비스 아키텍처의 일부로 <a href="#pchannel">PC채널과</a> <a href="#vchannel">V채널이라는</a> 두 가지 유형의 채널을 활용합니다. 각 PC채널은 <a href="/docs/ko/woodpecker_architecture.md">우드페커가</a> 관리하는 WAL 스트림에 해당하며, 각 V채널은 컬렉션의 샤드에 해당합니다. 스트리밍 서비스는 이러한 채널을 관리하여 데이터 일관성과 장애 복구를 보장합니다.</p>
 <h2 id="Collection" class="common-anchor-header">컬렉션<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,22 +338,8 @@ title: 용어
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere는</a> Milvus의 핵심 벡터 실행 엔진으로, Faiss, Hnswlib, Annoy 등 여러 벡터 유사도 검색 라이브러리가 통합되어 있습니다. 또한 Knowhere는 이기종 컴퓨팅을 지원하도록 설계되었습니다. 인덱스 구축과 검색 요청을 실행할 하드웨어(CPU 또는 GPU)를 제어합니다. 이것이 바로 작업을 실행할 위치를 파악한다는 의미에서 Knowhere라는 이름이 붙여진 이유입니다.</p>
-<h2 id="Log-broker" class="common-anchor-header">로그 브로커<button data-href="#Log-broker" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><a href="https://milvus.io/docs/four_layers.md#Log-broker">로그 브로커는</a> 재생을 지원하는 게시-구독 시스템입니다. 데이터 지속성 스트리밍, 안정적인 비동기 쿼리 실행, 이벤트 알림, 쿼리 결과 반환을 담당합니다. 또한 워커 노드가 시스템 장애로부터 복구될 때 증분 데이터의 무결성을 보장합니다.</p>
+<!-- ## Log broker
+<p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">로그 스냅샷<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -369,39 +355,11 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>로그 스냅샷은 Milvus의 데이터에 대한 업데이트 및 변경 사항을 기록하고 처리하는 세그먼트의 작은 단위인 바이너리 로그입니다. 세그먼트의 데이터는 여러 빈로그에 유지됩니다. Milvus에는 세 가지 유형의 빈로그가 있습니다: InsertBinlog, DeleteBinlog, DDLBinlog. 자세한 내용은 <a href="https://milvus.io/docs/four_layers.md#Meta-storage">메타 저장소를</a> 참조하세요.</p>
-<h2 id="Log-subscriber" class="common-anchor-header">로그 구독자<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>로그 구독자는 로그 시퀀스를 구독하여 로컬 데이터를 업데이트하고 읽기 전용 사본의 형태로 서비스를 제공합니다.</p>
-<h2 id="Message-storage" class="common-anchor-header">메시지 저장소<button data-href="#Message-storage" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>메시지 저장소는 Milvus의 로그 저장소 엔진입니다. Milvus는 메시지 저장소로 Kafka 또는 Pulsa를 지원합니다. 자세한 내용은 <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">메시지 저장소 구성을</a> 참조하세요.</p>
+    </button></h2><p>로그 스냅샷은 바이너리 로그로, Milvus의 데이터에 대한 업데이트와 변경 사항을 기록하고 처리하는 세그먼트의 작은 단위입니다. 세그먼트의 데이터는 여러 빈로그에 유지됩니다. Milvus에는 세 가지 유형의 빈로그가 있습니다: InsertBinlog, DeleteBinlog, DDLBinlog. 자세한 내용은 <a href="https://milvus.io/docs/four_layers.md#Meta-storage">메타 저장소를</a> 참조하세요.</p>
+<!-- ## Log subscriber
+<p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. --></p>
+<!-- ## Message storage
+<p>Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Configure Message Storage</a>. --></p>
 <h2 id="Metric-type" class="common-anchor-header">메트릭 유형<button data-href="#Metric-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -417,7 +375,23 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>유사도 메트릭 유형은 벡터 간의 유사도를 측정하는 데 사용됩니다. 현재 Milvus는 유클리드 거리(L2), 내적 곱(IP), 코사인 유사도(COSINE) 및 이진 메트릭 유형을 지원합니다. 시나리오에 따라 가장 적합한 메트릭 유형을 선택할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/metric.md">유사성 메트릭을</a> 참조하세요.</p>
+    </button></h2><p>유사성 메트릭 유형은 벡터 간의 유사성을 측정하는 데 사용됩니다. 현재 Milvus는 유클리드 거리(L2), 내적 곱(IP), 코사인 유사도(COSINE) 및 이진 메트릭 유형을 지원합니다. 시나리오에 따라 가장 적합한 메트릭 유형을 선택할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/metric.md">유사성 메트릭을</a> 참조하세요.</p>
+<h2 id="MemoryBuffer" class="common-anchor-header">MemoryBuffer<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>MemoryBuffer는 메모리에 들어오는 쓰기를 일시적으로 버퍼링하고 주기적으로 클라우드 객체 스토리지로 플러시하는 Woodpecker의 경량 배포 모드입니다. 이 모드는 성능보다 단순성을 우선시하는 소규모 배포 또는 프로덕션 환경의 일괄 처리량이 많은 워크로드에 가장 적합합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,7 +407,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>메모리 매핑 파일을 사용하면 파일 콘텐츠를 메모리에 직접 매핑하여 데이터를 효율적으로 처리할 수 있습니다. 메모리가 제한되어 있어 모든 데이터를 로드할 수 없는 경우에 특히 유용합니다. 이 기법을 사용하면 데이터 용량을 늘리고 어느 정도 성능을 유지할 수 있습니다. 그러나 데이터가 메모리 용량을 크게 초과하는 경우 검색 및 쿼리 속도가 크게 저하될 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/mmap.md">MMap 지원 데이터 저장소를</a> 참조하세요.</p>
+    </button></h2><p>메모리 매핑 파일은 파일 콘텐츠를 메모리에 직접 매핑하여 효율적인 데이터 처리를 가능하게 합니다. 메모리가 제한되어 있어 모든 데이터를 로드할 수 없는 경우에 특히 유용합니다. 이 기술을 사용하면 데이터 용량을 늘리고 성능을 어느 정도 유지할 수 있습니다. 그러나 데이터가 메모리 용량을 크게 초과하는 경우 검색 및 쿼리 속도가 크게 저하될 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/mmap.md">MMap 지원 데이터 저장소를</a> 참조하세요.</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvus 백업<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -593,7 +567,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PC채널은 물리적 채널을 의미합니다. 각 PC채널은 로그 저장소의 주제에 해당합니다. 기본적으로 Milvus 클러스터가 시작될 때 데이터 삽입, 삭제, 업데이트를 기록하는 로그를 저장하기 위해 16개의 PC채널 그룹이 할당됩니다. 자세한 내용은 <a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">메시지 채널 관련 구성을</a> 참조하세요.</p>
+    </button></h2><p>PC채널은 물리적 채널을 의미합니다. 각 PChannel은 우드페커에서 관리하는 WAL 스트림에 해당합니다. 기본적으로 Milvus 클러스터가 시작될 때 데이터 삽입, 삭제 및 업데이트를 기록하는 로그를 저장하기 위해 PC채널 그룹이 할당됩니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -609,7 +583,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PyMilvus는 Milvus의 Python SDK입니다. 소스 코드는 오픈 소스이며 <a href="https://github.com/milvus-io/pymilvus">GitHub에서</a> 호스팅됩니다. MilvusClient(새 버전의 Python SDK) 또는 오리지널 ORM 모듈을 선택하여 Milvus와 유연하게 대화할 수 있습니다.</p>
+    </button></h2><p>PyMilvus는 Milvus의 Python SDK입니다. 소스 코드는 오픈 소스이며 <a href="https://github.com/milvus-io/pymilvus">GitHub에서</a> 호스팅됩니다. MilvusClient(새 버전의 Python SDK) 또는 오리지널 ORM 모듈을 선택하여 Milvus와 유연하게 통신할 수 있습니다.</p>
 <h2 id="Query" class="common-anchor-header">쿼리<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -625,7 +599,23 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query는</a> 지정된 부울 표현식을 필터로 사용하여 스칼라 필터링을 수행하는 API입니다. 자세한 내용은 가져오기 <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">및 스칼라 쿼리를</a> 참조하세요.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query는</a> 지정된 부울 표현식을 필터로 사용하여 스칼라 필터링을 수행하는 API입니다. 자세한 내용은 <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">쿼리 및 스칼라 쿼리를</a> 참조하세요.</p>
+<h2 id="QuorumBuffer" class="common-anchor-header">쿼럼 버퍼<button data-href="#QuorumBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>쿼럼버퍼는 실시간 응답성과 강력한 내결함성이 모두 필요한 지연 시간에 민감하고 빈도가 높은 읽기/쓰기 워크로드를 위해 설계된 Woodpecker의 배포 모드입니다. 3개의 복제본 쿼럼 쓰기를 통해 고속 쓰기 버퍼로 작동하여 강력한 일관성과 고가용성을 보장합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
 <h2 id="Range-search" class="common-anchor-header">범위 검색<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -690,7 +680,7 @@ title: 용어
         ></path>
       </svg>
     </button></h2><p>세그먼트는 삽입된 데이터를 저장하기 위해 자동으로 생성되는 데이터 파일입니다. 컬렉션에는 여러 세그먼트가 포함될 수 있으며, 각 세그먼트에는 수많은 엔티티가 포함될 수 있습니다. 벡터 유사도 검색 중에 Milvus는 각 세그먼트를 검사하여 검색 결과를 컴파일합니다.</p>
-<p>세그먼트에는 성장하는 세그먼트와 봉인된 세그먼트의 두 가지 유형이 있습니다. 성장하는 세그먼트는 특정 임계값이나 시간 제한에 도달할 때까지 계속해서 새로운 데이터를 수집하고 그 이후에는 봉인됩니다. 일단 봉인된 세그먼트는 더 이상 새 데이터를 받지 않고 오브젝트 스토리지로 전송됩니다. 한편, 들어오는 데이터는 새로 생성되는 세그먼트로 라우팅됩니다. 성장 중인 세그먼트에서 봉인된 세그먼트로의 전환은 미리 정의된 엔티티 제한에 도달하거나 성장 상태의 최대 허용 기간을 초과하면 트리거됩니다. 자세한 내용은 <a href="https://milvus.io/docs/replica.md#Design-Details">디자인 세부 정보를</a> 참조하세요.</p>
+<p>세그먼트에는 성장하는 세그먼트와 봉인된 세그먼트의 두 가지 유형이 있습니다. 성장하는 세그먼트는 특정 임계값이나 시간 제한에 도달할 때까지 계속해서 새로운 데이터를 수집하고, 그 후에는 봉인됩니다. 일단 봉인된 세그먼트는 더 이상 새 데이터를 받지 않고 오브젝트 스토리지로 전송됩니다. 한편, 들어오는 데이터는 새로 생성되는 세그먼트로 라우팅됩니다. 성장 중인 세그먼트에서 봉인된 세그먼트로의 전환은 미리 정의된 엔티티 제한에 도달하거나 성장 상태의 최대 허용 기간을 초과하면 트리거됩니다. 자세한 내용은 <a href="https://milvus.io/docs/replica.md#Design-Details">디자인 세부 정보를</a> 참조하세요.</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">스파크-밀버스 커넥터<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -740,6 +730,22 @@ title: 용어
         ></path>
       </svg>
     </button></h2><p>희소 벡터는 대부분의 요소가 0이고 0이 아닌 요소 하나만 특정 단어의 존재를 나타내는 벡터 임베딩을 사용하여 단어 또는 구문을 나타냅니다. SPLADEv2와 같은 스파스 벡터 모델은 도메인 외 지식 검색, 키워드 인식 및 해석 가능성에서 밀도 모델보다 성능이 뛰어납니다. 자세한 내용은 <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">스파스 벡터를</a> 참조하세요.</p>
+<h2 id="Streaming-Service" class="common-anchor-header">스트리밍 서비스<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>스트리밍 서비스는 다양한 스트리밍 관련 기능을 지원하기 위해 WAL(Write-Ahead Log)을 중심으로 구축된 Milvus 내부 스트리밍 시스템 모듈의 개념입니다. 여기에는 스트리밍 데이터 수집/구독, 클러스터 상태의 장애 복구, 스트리밍 데이터를 히스토리 데이터로 변환, 데이터 쿼리 증가 등이 포함됩니다. 이 서비스는 스트리밍 코디네이터, 스트리밍 노드 클러스터, 스트리밍 클라이언트 구성 요소로 구성되어 있습니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">비정형 데이터<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -755,7 +761,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이미지, 비디오, 오디오, 자연어 등 비정형 데이터는 미리 정의된 모델이나 조직 방식을 따르지 않는 정보입니다. 이 데이터 유형은 전 세계 데이터의 약 80%를 차지하며, 다양한 인공지능(AI) 및 머신러닝 모델을 사용하여 벡터로 변환할 수 있습니다.</p>
+    </button></h2><p>이미지, 동영상, 오디오, 자연어 등 비정형 데이터는 미리 정의된 모델이나 조직 방식을 따르지 않는 정보입니다. 이 데이터 유형은 전 세계 데이터의 약 80%를 차지하며, 다양한 인공지능(AI) 및 머신러닝 모델을 사용하여 벡터로 변환할 수 있습니다.</p>
 <h2 id="VChannel" class="common-anchor-header">VChannel<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -771,7 +777,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">V채널은</a> 논리적 채널을 의미합니다. 각 V채널은 컬렉션의 샤드를 나타냅니다. 각 컬렉션에는 데이터 삽입, 삭제, 업데이트를 기록하기 위한 V채널 그룹이 할당됩니다. V채널은 논리적으로 분리되어 있지만 물리적으로 리소스를 공유합니다.</p>
+    </button></h2><p>V채널은 가상 채널을 의미합니다. 각 V채널은 컬렉션의 샤드를 나타냅니다. 각 컬렉션에는 데이터 삽입, 삭제, 업데이트를 기록하기 위한 V채널 그룹이 할당됩니다. V채널은 논리적으로 분리되어 있지만 스트리밍 서비스를 통해 물리적으로 리소스를 공유합니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
 <h2 id="Vector" class="common-anchor-header">벡터<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -787,7 +793,39 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>임베딩 벡터는 이메일, IoT 센서 데이터, Instagram 사진, 단백질 구조 등과 같은 비정형 데이터의 기능 추상화입니다. 수학적으로 임베딩 벡터는 부동소수점 숫자 또는 바이너리의 배열입니다. 최신 임베딩 기술은 비정형 데이터를 임베딩 벡터로 변환하는 데 사용됩니다. 밀버스는 2.4.0 버전부터 밀도 벡터와 스파스 벡터를 모두 지원합니다.</p>
+    </button></h2><p>임베딩 벡터는 이메일, IoT 센서 데이터, 인스타그램 사진, 단백질 구조 등과 같은 비정형 데이터의 기능 추상화입니다. 수학적으로 임베딩 벡터는 부동소수점 숫자 또는 바이너리의 배열입니다. 최신 임베딩 기술은 비정형 데이터를 임베딩 벡터로 변환하는 데 사용됩니다. 밀버스는 2.4.0부터 밀도 벡터와 스파스 벡터를 모두 지원합니다.</p>
+<h2 id="WAL-Storage" class="common-anchor-header">WAL 저장<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>WAL(Write-Ahead Log) 스토리지는 분산 시스템에서 데이터 내구성과 일관성을 위한 기초입니다. 변경 사항이 커밋되기 전에 먼저 로그에 기록되므로 장애 발생 시 중단된 지점에서 정확히 복구할 수 있습니다. Milvus는 메모리버퍼와 쿼럼버퍼 모드를 모두 지원하는 Woodpecker를 WAL 스토리지 시스템으로 사용합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">우드페커 아키텍처를</a> 참조하세요.</p>
+<h2 id="Woodpecker" class="common-anchor-header">우드페커<button data-href="#Woodpecker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>우드페커는 Milvus 2.6의 클라우드 네이티브 WAL 시스템으로, 카프카와 펄서를 대체합니다. 제로 디스크 아키텍처와 두 가지 배포 모드(MemoryBuffer와 쿼럼버퍼)를 통해 높은 처리량, 낮은 운영 오버헤드, 오브젝트 스토리지에 대한 원활한 확장성을 제공합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
 <h2 id="Zilliz-Cloud" class="common-anchor-header">질리즈 클라우드<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

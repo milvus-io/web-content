@@ -72,7 +72,7 @@ beta: Milvus 2.6.x
      <td><p>경험 관련성에 대한 균형 잡힌 평가</p></td>
    </tr>
 </table>
-<p>가혹한 페널티나 엄격한 컷오프 없이 자연스럽게 관련성이 감소하는 느낌이 필요한 애플리케이션이라면 가우스 감쇠가 최선의 선택일 수 있습니다.</p>
+<p>가혹한 페널티나 엄격한 컷오프 없이 자연스럽게 관련성이 감소하는 느낌이 필요한 애플리케이션이라면 가우시안 감쇠가 최선의 선택일 수 있습니다.</p>
 <h2 id="Bell-curve-principle" class="common-anchor-header">벨 커브 원리<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +97,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><code translate="no">origin</code> (0km): 관련성이 최대(1.0)인 현재 위치.</p></li>
 <li><p><code translate="no">offset</code> (±300 m): 사용자 주변의 '만점 영역'으로, 300m 이내의 모든 레스토랑이 관련성 점수 최대치(1.0)를 유지하여 아주 가까운 옵션이 작은 거리 차이로 인해 불필요하게 불이익을 받지 않도록 합니다.</p></li>
-<li><p><code translate="no">scale</code> (±2km): 관련성이 감쇠 값으로 떨어지는 거리 - 정확히 2km 떨어진 레스토랑의 관련성 점수가 절반(0.5)으로 떨어집니다.</p></li>
+<li><p><code translate="no">scale</code> (±2km): 정확히 2km 떨어진 레스토랑의 관련성 점수가 절반(0.5)으로 떨어지는 거리로, 관련성이 감쇠 값으로 떨어집니다.</p></li>
 <li><p><code translate="no">decay</code> (0.5): 척도 거리에서의 점수 - 이 매개변수는 기본적으로 거리에 따라 점수가 얼마나 빨리 감소하는지를 제어합니다.</p></li>
 </ul>
 <p>곡선에서 볼 수 있듯이 2km를 초과하는 레스토랑은 관련성이 계속 감소하지만 0에 도달하지는 않습니다. 4~5km 떨어진 레스토랑도 최소한의 관련성은 유지되므로, 비록 순위는 낮지만 훌륭하지만 멀리 떨어져 있는 레스토랑도 여전히 결과에 표시될 수 있습니다.</p>
@@ -176,7 +176,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],  <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 연산에도 디케이 랭커를 적용할 수 있습니다:</p>

@@ -396,7 +396,7 @@ summary: Apprenez à configurer Common pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        mot de passe par défaut pour l'utilisateur root. La longueur maximale est de 72 caractères, et les guillemets doubles sont obligatoires.      </td>
+      <td>        mot de passe par défaut pour l'utilisateur root. La longueur maximale est de 72 caractères et les guillemets doubles sont obligatoires.      </td>
       <td>Milvus</td>
     </tr>
   </tbody>
@@ -802,7 +802,7 @@ summary: Apprenez à configurer Common pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        si les statistiques sont collectées pour les verrous de métriques      </td>
+      <td>        si la collecte de statistiques pour les verrous de métriques      </td>
       <td>faux</td>
     </tr>
   </tbody>

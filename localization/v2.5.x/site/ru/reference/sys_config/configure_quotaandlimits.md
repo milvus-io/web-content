@@ -444,7 +444,7 @@ summary: 'Узнайте, как настроить quotaAndLimits для Milvus
   </thead>
   <tbody>
     <tr>
-      <td>        qps уровня db, по умолчанию без ограничений, скорость для CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
+      <td>        qps уровня базы данных, по умолчанию без ограничений, скорость для CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1248,7 +1248,7 @@ summary: 'Узнайте, как настроить quotaAndLimits для Milvus
   </thead>
   <tbody>
     <tr>
-      <td>        МБ/с, по умолчанию нет ограничений, пока не поддерживается. TODO: ограничить скорость загрузки разделов (partition bulkLoad rate)     </td>
+      <td>        МБ/с, по умолчанию нет ограничений, пока не поддерживается. TODO: ограничение скорости загрузки разделов (partition bulkLoad rate)     </td>
       <td>-1</td>
     </tr>
   </tbody>

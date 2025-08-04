@@ -517,9 +517,13 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>您可以為要建立的集合設定屬性，使其適合您的服務。適用的屬性如下。</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">設定分片編號</h3><p>Shard 是集合的水平切片。每個分片對應一個資料輸入通道。每個集合預設都有一個分片。您可以在建立資料集時，根據預期的吞吐量和要插入資料集的資料量，設定適當的分片數量。</p>
-<p>在一般情況下，每當預期吞吐量增加 500 MB/秒或要插入的資料量增加 100 GB 時，就考慮增加一個分區。此建議是基於我們自己的經驗，可能不完全符合您的應用程式情境。您可以調整此數字以符合自己的需求，或直接使用預設值。</p>
-<p>以下程式碼片段示範如何在建立集合時設定 Shard 編號。</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">設定分片編號</h3><p>Shard 是集合的水平切片，每個 Shard 對應一個資料輸入通道。預設情況下，每個集合都有一個分片。您可以在建立集合時指定分片的數量，以更適合您的資料量和工作負載。</p>
+<p>作為一般指引，設定分片數量時請考慮下列事項：</p>
+<ul>
+<li><strong>資料大小：</strong>常見的做法是每 2 億個實體設一個分片。您也可以根據總資料大小進行估算，例如，為計劃插入的每 100 GB 資料增加一個分區。</li>
+<li><strong>流節點利用率：</strong>如果您的 Milvus 實例有多個串流節點，建議使用多個分塊。這可確保資料插入工作負荷分佈在所有可用的串流節點上，避免某些串流節點閒置而其他串流節點負荷過重。</li>
+</ul>
+<p>以下程式碼片段示範如何在建立集合時設定分片編號。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>

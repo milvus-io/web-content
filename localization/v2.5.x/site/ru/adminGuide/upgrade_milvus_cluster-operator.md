@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: 'Узнайте, как обновить кластер Milvus с помощью Milvus Operator.'
+summary: Learn how to upgrade Milvus cluster with Milvus Operator.
 title: Обновление кластера Milvus с помощью Milvus Operator
 ---
 <div class="tab-wrapper"><a href="/docs/ru/v2.5.x/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/ru/v2.5.x/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>

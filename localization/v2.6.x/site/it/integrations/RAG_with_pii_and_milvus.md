@@ -84,7 +84,7 @@ Another user joined the conversation on topic of international volunteering oppo
 
 openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
-<p>Definiamo una funzione per generare embeddings di testo utilizzando il client OpenAI. Utilizziamo il modello <code translate="no">text-embedding-3-small</code> come esempio.</p>
+<p>Definiamo una funzione per generare embedding di testo utilizzando il client OpenAI. Utilizziamo il modello <code translate="no">text-embedding-3-small</code> come esempio.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
@@ -140,7 +140,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>Si interviene sulle righe di testo mascherate, si creano le incorporazioni e si inseriscono i dati in Milvus.</p>

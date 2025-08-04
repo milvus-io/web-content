@@ -29,7 +29,7 @@ summary: >-
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background: url('https://milvus.io/docs/v2.6.x/assets/hearing.png') no-repeat center center;
     background-size: contain;
     cursor: pointer;
     margin-left: 4px;
@@ -106,9 +106,9 @@ summary: >-
 <p>밀버스의 클라우드 네이티브 고도로 분리된 시스템 아키텍처는 데이터 증가에 따라 시스템을 지속적으로 확장할 수 있도록 보장합니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus_architecture_2_6.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>밀버스의 고도로 분리된 시스템 아키텍처</span> </span></p>
-<p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화할 수 있는 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
+<p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화된 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus가 지원하는 검색 유형<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,26 +157,30 @@ summary: >-
 <li><a href="https://milvus.io/api-reference/go/v2.4.x/About.md">Go SDK</a> (공식)</li>
 <li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">Java SDK</a> (공식)</li>
 <li><a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.js</a> (JavaScript) SDK(공식)</li>
-<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (Microsoft 제공)</li>
+<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (Microsoft에서 제공)</li>
+<li>C++ SDK(개발 중)</li>
+<li>Rust SDK(개발 중)</li>
 </ul>
-<h3 id="Advanced-Data-Types" class="common-anchor-header">고급 데이터 유형</h3><p>기본 데이터 유형 외에도 Milvus는 다양한 고급 데이터 유형과 각각의 적용 가능한 거리 메트릭을 지원합니다.</p>
+<h3 id="Advanced-Data-Types" class="common-anchor-header">고급 데이터 유형</h3><p>Milvus는 기본 데이터 유형 외에도 다양한 고급 데이터 유형과 각각의 적용 가능한 거리 메트릭을 지원합니다.</p>
 <ul>
 <li><a href="/docs/ko/sparse_vector.md">스파스 벡터</a></li>
 <li><a href="/docs/ko/index-vector-fields.md">바이너리 벡터</a></li>
 <li><a href="/docs/ko/use-json-fields.md">JSON 지원</a></li>
 <li><a href="/docs/ko/array_data_type.md">배열 지원</a></li>
-<li><a href="/docs/ko/metric.md">거리 메트릭</a></li>
+<li>텍스트(개발 중)</li>
+<li>지리적 위치(개발 중)</li>
 </ul>
-<h3 id="Acceleration" class="common-anchor-header">가속</h3><ul>
-<li><p>검색 알고리즘 Milvus는 조정 가능한 인덱싱 및 검색 알고리즘 세트를 지원합니다. 자세한 내용은 <a href="/docs/ko/index.md">인메모리 인덱스</a>, <a href="/docs/ko/disk_index.md">온디스크 인덱스</a> 및 <a href="/docs/ko/gpu_index.md">GPU 인덱스를</a> 참조하세요.</p></li>
-<li><p>파티션 및 파티션 키 파티션은 Milvus 컬렉션의 하위 구분입니다. 검색 성능 향상을 위해 스칼라 필드를 파티션 키로 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/manage-partitions.md">파티션 관리</a> 및 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
-<li><p>조정 가능한 일관성 모델 일관성은 주어진 시간에 데이터를 쓰거나 읽을 때 모든 Milvus 노드 또는 복제본이 동일한 데이터 보기를 갖도록 보장합니다. Milvus에서 ANN 검색을 수행할 때 일관성 수준을 쉽게 조정할 수 있습니다. 자세한 내용은 <a href="/docs/ko/consistency.md">일관성을</a> 참조하세요.</p></li>
-<li><p>대용량 데이터 가져오기 데이터를 하나씩 삽입하는 대신 대량의 데이터를 Milvus로 가져오려면, 대용량 데이터 가져오기 도구를 사용하는 것을 고려해 보세요. 자세한 내용은 <a href="/docs/ko/prepare-source-data.md">소스 데이터 준비</a> 및 <a href="/docs/ko/import-data.md">데이터 가져오기를</a> 참조하세요.</p></li>
-<li><p>멀티테넌시 지원 Milvus는 파티션 키, 클러스터링 키 등 멀티테넌시 시나리오를 지향하는 많은 기능을 구현했습니다. 자세한 내용은 <a href="/docs/ko/multi_tenancy.md">멀티테넌시 전략을</a> 참조하세요.</p></li>
-</ul>
-<h3 id="Security-and-Authorization" class="common-anchor-header">보안 및 권한 부여</h3><ul>
-<li><p>조정 가능한 일관성 모델 일관성은 주어진 시간에 데이터를 쓰거나 읽을 때 모든 Milvus 노드 또는 복제본이 동일한 데이터 보기를 갖도록 보장합니다. Milvus에서 ANN 검색을 수행할 때 일관성 수준을 쉽게 조정할 수 있습니다. 자세한 내용은 <a href="/docs/ko/consistency.md">일관성을</a> 참조하세요.</p></li>
-<li><p>데이터 격리 및 리소스 제어 멀티 테넌시 시나리오의 경우, 데이터 격리는 기본적인 보안 요구 사항입니다. Milvus는 보안 문제를 해결하기 위해 여러 가지 기능을 구현합니다. 자세한 내용은 <a href="/docs/ko/resource_group.md">리소스 그룹</a> 및 <a href="/docs/ko/clustering-compaction.md">클러스터링 압축</a> <a href="/docs/ko/resource_group.md">관리를</a> 참조하세요.</p></li>
+<h3 id="Why-Milvus" class="common-anchor-header">왜 밀버스인가?</h3><ul>
+<li><p><strong>규모에 맞는 고성능 및 고가용성</strong></p>
+<p>Milvus는 <a href="/docs/ko/data_processing.md#Data-query">컴퓨팅과</a> <a href="/docs/ko/data_processing.md#Data-insertion">스토리지를</a> 분리하는 <a href="/docs/ko/architecture_overview.md">분산 아키텍처를</a> 갖추고 있습니다. Milvus는 수평적으로 확장하고 다양한 트래픽 패턴에 적응할 수 있으며, 읽기가 많은 워크로드에는 쿼리 노드를, 쓰기가 많은 워크로드에는 데이터 노드를 독립적으로 늘려 최적의 성능을 달성할 수 있습니다. K8의 상태 비저장 마이크로서비스는 장애 발생 시 <a href="/docs/ko/coordinator_ha.md#Coordinator-HA">신속한 복구가</a> 가능하여 고가용성을 보장합니다. <a href="/docs/ko/replica.md">복제본</a> 지원은 여러 쿼리 노드에 데이터 세그먼트를 로드하여 내결함성과 처리량을 더욱 향상시킵니다. 성능 비교는 <a href="https://zilliz.com/vector-database-benchmark-tool">벤치마크를</a> 참조하세요.</p></li>
+<li><p><strong>다양한 벡터 인덱스 유형 및 하드웨어 가속 지원</strong></p>
+<p>Milvus는 시스템과 코어 벡터 검색 엔진을 분리하여, <a href="/docs/ko/index-explained.md">양자화 기반</a> 변형과 <a href="/docs/ko/mmap.md">mmap을</a> 통해 HNSW, IVF, FLAT(무차별 대입), SCANN, DiskANN 등 다양한 시나리오에 최적화된 모든 주요 벡터 인덱스 유형을 지원할 수 있습니다. Milvus는 <a href="/docs/ko/boolean.md">메타데이터 필터링</a> 및 <a href="/docs/ko/range-search.md">범위 검색과</a> 같은 고급 기능을 위해 벡터 검색을 최적화합니다. 또한, Milvus는 하드웨어 가속을 구현하여 벡터 검색 성능을 향상시키고 NVIDIA의 <a href="/docs/ko/gpu-cagra.md">CAGRA와</a> 같은 GPU 인덱싱을 지원합니다.</p></li>
+<li><p><strong>유연한 멀티 테넌시 및 핫/콜드 스토리지</strong></p>
+<p>Milvus는 데이터베이스, 컬렉션, 파티션 또는 파티션 키 수준에서 격리를 통해 <a href="/docs/ko/multi_tenancy.md#Multi-tenancy-strategies">멀티 테넌시를</a> 지원합니다. 유연한 전략을 통해 단일 클러스터가 수백에서 수백만 개의 테넌트를 처리할 수 있으며, 최적화된 검색 성능과 유연한 액세스 제어를 보장합니다. Milvus는 핫/콜드 스토리지를 통해 비용 효율성을 높입니다. 자주 액세스하는 핫 데이터는 메모리나 SSD에 저장해 성능을 향상시키고, 액세스 빈도가 낮은 콜드 데이터는 느리고 비용 효율적인 스토리지에 보관할 수 있습니다. 이 메커니즘은 중요한 작업의 성능을 높게 유지하면서 비용을 크게 절감할 수 있습니다.</p></li>
+<li><p><strong>전체 텍스트 검색 및 하이브리드 검색을 위한 스파스 벡터</strong></p>
+<p>밀도 벡터를 통한 시맨틱 검색 외에도 Milvus는 기본적으로 BM25를 통한 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색과</a> SPLADE 및 BGE-M3와 같은 학습된 스파스 임베딩도 지원합니다. 사용자는 스파스 벡터와 밀도 벡터를 동일한 컬렉션에 저장하고, 여러 검색 요청의 결과 순위를 재조정하는 함수를 정의할 수 있습니다. <a href="/docs/ko/full_text_search_with_milvus.md">시맨틱 검색 + 전체 텍스트 검색을 사용한 하이브리드 검색의</a> 예를 참조하세요.</p></li>
+<li><p><strong>데이터 보안 및 세분화된 액세스 제어</strong></p>
+<p>Milvus는 <a href="/docs/ko/authenticate.md">필수 사용자 인증</a>, <a href="/docs/ko/tls.md">TLS 암호화</a>, <a href="/docs/ko/rbac.md">역할 기반 액세스 제어(RBAC)</a>를 구현하여 데이터 보안을 보장합니다. 사용자 인증은 유효한 자격 증명을 가진 승인된 사용자만 데이터베이스에 액세스할 수 있도록 보장하며, TLS 암호화는 네트워크 내의 모든 통신을 보호합니다. 또한 RBAC는 역할에 따라 사용자에게 특정 권한을 할당하여 세분화된 액세스 제어가 가능합니다. 이러한 기능을 통해 Milvus는 엔터프라이즈 애플리케이션을 위한 강력하고 안전한 선택으로, 무단 액세스 및 잠재적인 침해로부터 민감한 데이터를 보호합니다.</p></li>
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">AI 통합</h3><ul>
 <li><p>임베딩 모델 통합 임베딩 모델은 비정형 데이터를 고차원 데이터 공간에서 숫자 표현으로 변환하여 Milvus에 저장할 수 있도록 합니다. 현재 Python SDK인 PyMilvus는 여러 임베딩 모델을 통합하여 데이터를 벡터 임베딩으로 빠르게 준비할 수 있도록 지원합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md">임베딩 개요를</a> 참조하세요.</p></li>

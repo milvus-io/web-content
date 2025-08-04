@@ -26,7 +26,7 @@ summary: 流媒体服务是 Milvus 内部流媒体系统模块的一个概念，
 <ul>
 <li><p><strong>流协调器</strong>：协调器节点中的逻辑组件。它使用 Etcd 进行服务发现，以找到可用的流节点，并负责将 WAL 与相应的流节点绑定。它还负责注册服务，以公开 WAL 分布拓扑，让流客户端知道给定 WAL 的相应流节点。</p></li>
 <li><p><strong>流节点集群</strong>：负责所有流处理任务（如 WAL 附加、状态恢复、数据增长查询）的流工作节点集群。</p></li>
-<li><p><strong>流客户端</strong>：Milvus 内部开发的客户端，封装了服务发现和就绪检查等基本功能。它用于启动消息写入和订阅等操作。</p></li>
+<li><p><strong>流客户端</strong>Milvus 内部开发的客户端，封装了服务发现和就绪检查等基本功能。它用于启动消息写入和订阅等操作。</p></li>
 </ul>
 <h2 id="Message" class="common-anchor-header">信息<button data-href="#Message" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,7 +119,7 @@ summary: 流媒体服务是 Milvus 内部流媒体系统模块的一个概念，
     </button></h2><p><strong>查询委托器</strong>在每个流节点上运行，负责在单个分片上执行<strong>增量查询</strong>。它生成查询计划，将其转发给相关的查询节点，并汇总查询结果。</p>
 <p>此外，查询委托器还负责向其他查询节点广播<strong>删除操作</strong>。</p>
 <p>查询委托器总是与 WAL 组件共存于同一个流节点上。但如果 Collections 配置了多副本，那么其他流节点上将部署<strong>N-1 个</strong>委托器。</p>
-<h2 id="WAL-Lifetime-and-Wait-for-Ready" class="common-anchor-header">WAL 生命周期和等待就绪<button data-href="#WAL-Lifetime-and-Wait-for-Ready" class="anchor-icon" translate="no">
+<h2 id="WAL-Lifetime-and-Wait-for-Ready" class="common-anchor-header">WAL 寿命和等待就绪<button data-href="#WAL-Lifetime-and-Wait-for-Ready" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

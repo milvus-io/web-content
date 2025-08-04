@@ -148,7 +148,7 @@ summary: 'Erfahren Sie, wie Sie quotaAndLimits für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Wartezeit für Wiederholungsversuche bei fehlgeschlagenem Löschen der Vorwärtsdaten, in Millisekunden      </td>
+      <td>        Wartezeit für Wiederholungsversuche bei fehlgeschlagenem Löschen von Vorwärtsdaten, in Millisekunden      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -682,7 +682,7 @@ summary: 'Erfahren Sie, wie Sie quotaAndLimits für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Ob die manuelle Drosselung von Verdichtungsanfragen aktiviert ist.      </td>
+      <td>        Angabe, ob die manuelle Drosselung von Verdichtungsanfragen aktiviert ist.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -2202,7 +2202,7 @@ summary: 'Erfahren Sie, wie Sie quotaAndLimits für Milvus konfigurieren.'
     <tr>
       <td>
         <li>forceDeny false bedeutet, dass dql-Anfragen erlaubt sind (außer bei einigen</li>      
-        <li>Bedingungen, wie z.B. Sammlung wurde gelöscht), true bedeutet, dass alle dql-Anfragen immer abgelehnt werden.</li>      </td>
+        <li>bestimmten Bedingungen, wie z.B. Sammlung wurde gelöscht), true bedeutet, dass alle dql-Anfragen immer abgelehnt werden.</li>      </td>
       <td>false</td>
     </tr>
   </tbody>

@@ -41,7 +41,12 @@ summary: >-
       </svg>
     </button></h2><p>Il Time-to-Live (TTL) è comunemente usato nei database per scenari in cui i dati devono rimanere validi o accessibili solo per un certo periodo dopo qualsiasi inserimento o modifica. Poi, i dati possono essere rimossi automaticamente.</p>
 <p>Ad esempio, se i dati vengono inseriti quotidianamente ma è necessario conservare i record solo per 14 giorni, è possibile configurare Milvus per rimuovere automaticamente i dati più vecchi impostando il TTL della raccolta a <strong>14 × 24 × 3600 = 1209600</strong> secondi. In questo modo si garantisce che nella raccolta rimangano solo i dati più recenti di 14 giorni.</p>
-<p>La proprietà TTL di una raccolta Milvus è specificata come un numero intero in secondi. Una volta impostata, tutti i dati che superano il TTL vengono automaticamente eliminati dalla raccolta.</p>
+<div class="alert note">
+<p>Le entità scadute non appariranno nei risultati delle ricerche o delle query. Tuttavia, possono rimanere nell'archivio fino alla successiva compattazione dei dati, che dovrebbe essere effettuata entro le 24 ore successive.</p>
+<p>È possibile controllare quando attivare la compattazione dei dati impostando la voce di configurazione <code translate="no">dataCoord.compaction.expiry.tolerance</code> nel file di configurazione di Milvus.</p>
+<p>Il valore predefinito di questa voce di configurazione è <code translate="no">-1</code>, che indica che si applica l'intervallo di compattazione dei dati esistente. Tuttavia, se si modifica il suo valore in un numero intero positivo, come <code translate="no">12</code>, la compattazione dei dati verrà attivata il numero di ore specificato dopo che le entità sono scadute.</p>
+</div>
+<p>La proprietà TTL in una raccolta Milvus è specificata come un numero intero in secondi. Una volta impostata, tutti i dati che superano il loro TTL vengono automaticamente eliminati dalla raccolta.</p>
 <p>Poiché il processo di cancellazione è asincrono, i dati potrebbero non essere rimossi dai risultati della ricerca esattamente una volta trascorso il TTL specificato. Al contrario, potrebbe esserci un ritardo, poiché la rimozione dipende dai processi di garbage collection (GC) e di compattazione, che avvengono a intervalli non deterministici.</p>
 <h2 id="Set-TTL" class="common-anchor-header">Impostare il TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -181,7 +186,7 @@ client.alterCollection(alterCollectionReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se si decide di mantenere i dati in una raccolta a tempo indeterminato, si può semplicemente eliminare l'impostazione TTL da quella raccolta.</p>
+    </button></h2><p>Se si decide di mantenere i dati in una collezione a tempo indeterminato, si può semplicemente eliminare l'impostazione TTL da quella collezione.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(

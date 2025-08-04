@@ -744,7 +744,7 @@ summary: Découvrez comment configurer queryCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        la valeur du délai pour l'avertissement du rapport querycoord lorsque le dernier battement de chaleur est trop ancien, en millisecondes      </td>
+      <td>        la valeur du délai pour l'avertissement du rapport de querycoord lorsque le dernier battement de chaleur est trop ancien, en millisecondes      </td>
       <td>5000</td>
     </tr>
   </tbody>

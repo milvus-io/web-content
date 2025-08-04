@@ -23,6 +23,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>Der Tokenizer <code translate="no">lindera</code> führt eine wörterbuchbasierte morphologische Analyse durch. Er ist eine gute Wahl für Sprachen - wie Japanisch, Koreanisch und Chinesisch - deren Wörter nicht durch Leerzeichen getrennt sind.</p>
+<div class="alert note">
+<p>Der <code translate="no">lindera</code> Tokenizer bewahrt Satzzeichen als separate Token in der Ausgabe. Zum Beispiel wird <code translate="no">&quot;こんにちは！&quot;</code> zu <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. Um diese eigenständigen Interpunktionszeichen zu entfernen, verwenden Sie den <a href="/docs/de/removepunct-filter.md"><code translate="no">removepunct</code></a> Filter.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um den <code translate="no">lindera</code> tokenizer zu verwenden, müssen Sie eine speziell kompilierte Milvus-Version verwenden. Alle Wörterbücher müssen während der Kompilierung explizit aktiviert werden, um verwendet werden zu können.</p>
+    </button></h2><p>Um den <code translate="no">lindera</code> Tokenizer zu verwenden, müssen Sie eine speziell kompilierte Milvus-Version verwenden. Alle Wörterbücher müssen während der Kompilierung explizit aktiviert werden, um verwendet werden zu können.</p>
 <p>Um bestimmte Wörterbücher zu aktivieren, fügen Sie sie in den Kompilierungsbefehl ein:</p>
 <pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
 <button class="copy-code-btn"></button></code></pre>
@@ -66,7 +69,7 @@ beta: Milvus 2.5.11+
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }
@@ -102,7 +105,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 </ul></td>
    </tr>
 </table>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispiel für die Verwendung</a>.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Weitere Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Anwendungsbeispiele</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

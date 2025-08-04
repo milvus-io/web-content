@@ -88,7 +88,7 @@ title: Milvus Java SDK 설치
       </svg>
     </button></h2><p>Milvus Java SDK를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p>Milvus의 기본 동작을 학습합니다:</p>
+<li><p>Milvus의 기본 작업을 학습합니다:</p>
 <ul>
 <li><a href="/docs/ko/v2.5.x/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/v2.5.x/manage-partitions.md">파티션 관리</a></li>

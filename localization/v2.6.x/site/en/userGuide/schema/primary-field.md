@@ -40,6 +40,12 @@ summary: >-
     </button></h2><p>In a collection, the primary key of each entity should be globally unique. When adding the primary field, you need to explicitly set its data type to <strong>VARCHAR</strong> or <strong>INT64</strong>. Setting its data type to <strong>INT64</strong> indicates that the primary keys should be an integer similar to <code translate="no">12345</code>; Setting its data type to <strong>VARCHAR</strong> indicates that the primary keys should be a string similar to <code translate="no">my_entity_1234</code>.</p>
 <p>You can also enable <strong>AutoID</strong> to make Milvus automatically allocate primary keys for incoming entities. Once you have enabled <strong>AutoID</strong> in your collection, do not include primary keys when inserting entities.</p>
 <p>The primary field in a collection does not have a default value and cannot be null.</p>
+<div class="alert note">
+<ul>
+<li>A standard <code translate="no">insert</code> operation with a primary key that already exists in the collection will not overwrite the old entry. Instead, it will create a new, separate entity with the same primary key. This can lead to unexpected search results and data redundancy.</li>
+<li>If your use case involves updating existing data or you suspect that the data you are inserting may already exist, it is highly recommended to use the upsert operation. The upsert operation will intelligently update the entity if the primary key exists, or insert a new one if it does not. For more details, refer to <a href="/docs/upsert-entities.md">Upsert Entities</a>.</li>
+</ul>
+</div>
 <h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">Use Int64 Primary Keys<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

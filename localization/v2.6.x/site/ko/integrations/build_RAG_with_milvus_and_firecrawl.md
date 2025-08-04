@@ -28,7 +28,7 @@ title: Milvus와 Firecrawl로 RAG 구축하기
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://www.firecrawl.dev/">Firecrawl은</a> 개발자가 모든 웹사이트에서 스크랩한 깨끗한 데이터로 AI 애플리케이션을 구축할 수 있도록 지원합니다. 고급 스크래핑, 크롤링 및 데이터 추출 기능을 갖춘 Firecrawl은 웹사이트 콘텐츠를 깔끔한 마크다운 또는 구조화된 데이터로 변환하여 다운스트림 AI 워크플로우를 위한 프로세스를 간소화합니다.</p>
-<p>이 튜토리얼에서는 Milvus와 Firecrawl을 사용하여 검색 증강 생성(RAG) 파이프라인을 구축하는 방법을 보여드립니다. 이 파이프라인은 웹 데이터 스크래핑을 위한 Firecrawl, 벡터 스토리지를 위한 Milvus, 인사이트가 있는 문맥 인식 응답을 생성하기 위한 OpenAI를 통합합니다.</p>
+<p>이 튜토리얼에서는 Milvus와 Firecrawl을 사용하여 검색 증강 생성(RAG) 파이프라인을 구축하는 방법을 보여드립니다. 이 파이프라인은 웹 데이터 스크래핑을 위한 Firecrawl, 벡터 스토리지를 위한 Milvus, 인사이트가 있는 상황 인식 응답을 생성하기 위한 OpenAI를 통합합니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,7 +184,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

@@ -40,6 +40,12 @@ summary: >-
     </button></h2><p>في المجموعة، يجب أن يكون المفتاح الأساسي لكل كيان فريدًا عالميًا. عند إضافة الحقل الأساسي، تحتاج إلى تعيين نوع بياناته صراحةً إلى <strong>VARCHAR</strong> أو <strong>INT64</strong>. يشير تعيين نوع بياناته إلى <strong>INT64</strong> إلى أن المفاتيح الأساسية يجب أن تكون عددًا صحيحًا مشابهًا لـ <code translate="no">12345</code> ؛ يشير تعيين نوع بياناته إلى <strong>VARCHAR</strong> إلى أن المفاتيح الأساسية يجب أن تكون سلسلة مشابهة لـ <code translate="no">my_entity_1234</code>.</p>
 <p>يمكنك أيضًا تمكين <strong>AutoID</strong> لجعل Milvus يخصص المفاتيح الأساسية تلقائيًا للكيانات الواردة. بمجرد تمكين <strong>AutoID</strong> في مجموعتك، لا تقم بتضمين المفاتيح الأساسية عند إدراج الكيانات.</p>
 <p>لا يحتوي الحقل الأساسي في المجموعة على قيمة افتراضية ولا يمكن أن يكون فارغًا.</p>
+<div class="alert note">
+<ul>
+<li>لن تقوم عملية <code translate="no">insert</code> القياسية مع مفتاح أساسي موجود بالفعل في المجموعة بالكتابة فوق الإدخال القديم. وبدلاً من ذلك، فإنها ستنشئ كيانًا جديدًا منفصلاً بنفس المفتاح الأساسي. يمكن أن يؤدي ذلك إلى نتائج بحث غير متوقعة وتكرار البيانات.</li>
+<li>إذا كانت حالة الاستخدام الخاصة بك تتضمن تحديث البيانات الموجودة أو إذا كنت تشك في أن البيانات التي تقوم بإدراجها قد تكون موجودة بالفعل، فمن المستحسن بشدة استخدام عملية upsert. ستعمل عملية upsert على تحديث الكيان بذكاء إذا كان المفتاح الأساسي موجودًا، أو إدراج مفتاح جديد إذا لم يكن موجودًا. لمزيد من التفاصيل، ارجع إلى <a href="/docs/ar/upsert-entities.md">Upsert Entities</a>.</li>
+</ul>
+</div>
 <h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">استخدام المفاتيح الأساسية Int64<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +61,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام المفاتيح الأساسية من نوع Int64، تحتاج إلى تعيين <code translate="no">datatype</code> إلى <code translate="no">DataType.INT64</code> وتعيين <code translate="no">is_primary</code> إلى <code translate="no">true</code>. إذا كنت تحتاج أيضًا إلى تخصيص ميلفوس للمفاتيح الأساسية للكيانات الواردة، فقم أيضًا بتعيين <code translate="no">auto_id</code> إلى <code translate="no">true</code>.</p>
+    </button></h2><p>لاستخدام المفاتيح الأساسية من نوع Int64، تحتاج إلى تعيين <code translate="no">datatype</code> إلى <code translate="no">DataType.INT64</code> وتعيين <code translate="no">is_primary</code> إلى <code translate="no">true</code>. إذا كنت تحتاج أيضًا إلى أن يخصص ميلفوس المفاتيح الأساسية للكيانات الواردة، فقم أيضًا بتعيين <code translate="no">auto_id</code> إلى <code translate="no">true</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType

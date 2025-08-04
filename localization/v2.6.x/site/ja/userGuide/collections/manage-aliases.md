@@ -18,8 +18,9 @@ summary: Milvusにはエイリアス管理機能があります。このペー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusにはエイリアス管理機能があります。このページでは、エイリアスの作成、一覧表示、変更、削除の手順を説明します。</p>
-<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusでは、エイリアスとはコレクションの二次的で変更可能な名前です。エイリアスを使用することで、抽象化されたレイヤーを提供し、アプリケーションコードを変更することなくコレクションを動的に切り替えることができます。これは、シームレスなデータ更新、A/Bテスト、その他の運用タスクのための実運用環境で特に有用です。</p>
+<p>このページでは、コレクションエイリアスの作成、一覧表示、再割り当て、削除の方法を示します。</p>
+<h2 id="Why-Use-an-Alias" class="common-anchor-header">エイリアスを使用する理由<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,8 +35,20 @@ summary: Milvusにはエイリアス管理機能があります。このペー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションにエイリアスを作成できます。コレクションは複数のエイリアスを持つことができますが、コレクションはエイリアスを共有できません。</p>
-<p>コレクションに対するリクエストを受け取ると、Milvusは指定された名前に基づいてコレクションを検索します。指定された名前のコレクションが存在しない場合、Milvusはエイリアスとして指定された名前を探し続けます。コレクションエイリアスを使用することで、コードをさまざまなシナリオに適応させることができます。</p>
+    </button></h2><p>エイリアスを使用する主な利点は、クライアントアプリケーションを特定の物理的なコレクション名から切り離すことです。</p>
+<p><code translate="no">prod_data</code> という名前のコレクションをクエリするライブアプリケーションがあるとします。基礎となるデータを更新する必要がある場合、サービスを中断することなく更新を実行できます。ワークフローは次のようになります：</p>
+<ol>
+<li><strong>新しいコレクションを作成</strong>します：新しいコレクションの作成: 新しいコレクションを作成します。例えば、<code translate="no">prod_data_v2</code> 。</li>
+<li><strong>データを準備する</strong>：<code translate="no">prod_data_v2</code> に新しいデータをロードし、インデックスを作成します。</li>
+<li><strong>エイリアスを切り替える</strong>：新しいコレクションがサービスできるようになったら、エイリアス<code translate="no">prod_data</code> を古いコレクションから<code translate="no">prod_data_v2</code> にアトミックに再割り当てします。</li>
+</ol>
+<p>アプリケーションはエイリアス<code translate="no">prod_data</code> へのリクエストを送信し続け、ダウンタイムはゼロになります。このメカニズムはシームレスなアップデートを可能にし、ベクター検索サービスのブルーグリーンデプロイメントのようなオペレーションを簡素化します。</p>
+<p><strong>エイリアスの主な特性</strong></p>
+<ul>
+<li>コレクションは複数のエイリアスを持つことができる。</li>
+<li>エイリアスは一度に一つのコレクションのみを指すことができます。</li>
+<li>リクエストを処理する際、Milvusはまず指定された名前のコレクションが存在するかどうかをチェックします。存在しない場合、その名前がコレクションのエイリアスであるかどうかをチェックします。</li>
+</ul>
 <h2 id="Create-Alias" class="common-anchor-header">エイリアスの作成<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,7 +64,7 @@ summary: Milvusにはエイリアス管理機能があります。このペー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次のコード・スニペットは、コレクションのエイリアスを作成する方法を示しています。</p>
+    </button></h2><p>以下のコードスニペットは、コレクションのエイリアスを作成する方法を示しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -214,7 +227,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次のコード・スニペットは、特定のコレクションに割り当てられているエイリアスを一覧表示する手順を示しています。</p>
+    </button></h2><p>次のコードスニペットは、特定のコレクションに割り当てられているエイリアスをリストする手順を示します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>

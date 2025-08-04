@@ -60,7 +60,7 @@ summary: 為了簡化授予權限的程序，建議您將多個權限合併為�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>為了易於使用，Milvus 在集合、資料庫和實例層面上提供了共 9 個內建的權限：COLL_RO、COLL_RW、COLL_ADMIN、DB_RO、DB_RW、DB_Admin、Cluster_RO、Cluster_RW 及 Cluster_Admin。</p>
+    </button></h2><p>為了易於使用，Milvus 在集合、資料庫和實例層面上提供了共 9 個內建的權限：COLL_RO、COLL_RW、COLL_ADMIN、DB_RO、DB_RW、DB_Admin、Cluster_RO、Cluster_RW 和 Cluster_Admin。</p>
 <div class="alert note">
 <p>這三層內建的權限群組沒有階級關係。在實體層級設定權限群組，並不會自動設定該實體下所有資料庫和資料集的權限。資料庫和資料集層級的權限需要手動設定。</p>
 </div>
@@ -267,13 +267,13 @@ summary: 為了簡化授予權限的程序，建議您將多個權限合併為�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>建立集合</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>建立資料庫</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>丟棄收藏集</p></td>
+     <td><p>丟棄收藏</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>

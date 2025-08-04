@@ -23,6 +23,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>The <code translate="no">lindera</code> tokenizer performs dictionary-based morphological analysis. It is a good choice for languages—such as Japanese, Korean, and Chinese—whose words are not separated by spaces.</p>
+<div class="alert note">
+<p>The <code translate="no">lindera</code> tokenizer preserves punctuation marks as separate tokens in the output. For example, <code translate="no">&quot;こんにちは！&quot;</code> becomes <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. To remove these standalone punctuation tokens, use the <a href="/docs/removepunct-filter.md"><code translate="no">removepunct</code></a> filter.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +72,7 @@ beta: Milvus 2.5.11+
 </div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }

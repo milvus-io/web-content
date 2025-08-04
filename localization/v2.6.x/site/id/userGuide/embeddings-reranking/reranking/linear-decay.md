@@ -112,7 +112,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (10 hari): Periode waktu di mana relevansi turun ke nilai peluruhan-peristiwa yang berjarak 10 hari lagi akan memiliki skor relevansinya berkurang setengahnya (0,5).</p></li>
 </ul>
 <p>Seperti yang Anda lihat dari kurva garis lurus, peristiwa yang berjarak lebih dari 16 hari memiliki relevansi nol dan tidak akan muncul di hasil pencarian sama sekali. Hal ini menciptakan batas yang jelas yang memastikan pengguna hanya melihat acara mendatang yang relevan dalam rentang waktu tertentu.</p>
-<p>Perilaku ini mencerminkan cara kerja perencanaan acara pada umumnya - acara yang akan segera berlangsung adalah yang paling relevan, acara dalam beberapa minggu ke depan semakin tidak penting, dan acara yang terlalu jauh di masa depan (atau sudah lewat) tidak akan muncul sama sekali.</p>
+<p>Perilaku ini mencerminkan cara kerja perencanaan acara pada umumnya-acara yang akan segera berlangsung adalah yang paling relevan, acara dalam beberapa minggu ke depan semakin tidak penting, dan acara yang terlalu jauh di masa depan (atau sudah lewat) tidak akan muncul sama sekali.</p>
 <h2 id="Formula" class="common-anchor-header">Rumus<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,7 +191,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Terapkan ke pencarian hibrida</h3><p>Pemeringkat peluruhan juga dapat diterapkan pada operasi pencarian hibrida yang menggabungkan beberapa bidang vektor:</p>

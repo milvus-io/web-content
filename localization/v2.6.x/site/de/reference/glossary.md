@@ -144,7 +144,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus verwendet zwei Arten von Kanälen, <a href="https://milvus.io/docs/glossary.md#PChannel">PChannel</a> und <a href="https://milvus.io/docs/glossary.md#VChannel">VChannel</a>. Jeder PChannel entspricht einem Topic für die Protokollspeicherung, während jeder VChannel einem Shard in einer Sammlung entspricht.</p>
+    </button></h2><p>Milvus verwendet zwei Arten von Kanälen, <a href="#pchannel">PChannel</a> und <a href="#vchannel">VChannel</a>, als Teil seiner Streaming-Service-Architektur. Jeder PChannel entspricht einem von <a href="/docs/de/woodpecker_architecture.md">Woodpecker</a> verwalteten WAL-Stream, während jeder VChannel einem Shard in einer Sammlung entspricht. Der Streaming Service verwaltet diese Kanäle, um die Datenkonsistenz und die Fehlerbehebung zu gewährleisten.</p>
 <h2 id="Collection" class="common-anchor-header">Sammlung<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus ist eine Sammlung das Äquivalent zu einer Tabelle in einem relationalen Datenbankmanagementsystem (RDBMS). Sammlungen sind wichtige logische Objekte, die zum Speichern und Verwalten von Entitäten verwendet werden. Weitere Informationen finden Sie unter <a href="/docs/de/manage-collections.md">Verwalten von Sammlungen</a>.</p>
+    </button></h2><p>In Milvus ist eine Sammlung das Äquivalent zu einer Tabelle in einem relationalen Datenbankmanagementsystem (RDBMS). Sammlungen sind wichtige logische Objekte, die zum Speichern und Verwalten von Entitäten verwendet werden. Weitere Informationen finden Sie unter <a href="/docs/de/manage-collections.md">Verwalten von Collections</a>.</p>
 <h2 id="Dependency" class="common-anchor-header">Abhängigkeiten<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +289,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybride Suche</a> ist eine API für die hybride Suche seit Milvus 2.4.0. Sie können mehrere Vektorfelder durchsuchen und diese fusionieren. Eine Vektorsuche, die mit der Filterung von Skalarfeldern kombiniert ist, wird als "gefilterte Suche" bezeichnet. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p>
+    </button></h2><p>Die<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybride Suche</a> ist eine API für die hybride Suche seit Milvus 2.4.0. Sie können mehrere Vektorfelder durchsuchen und diese fusionieren. Eine Vektorsuche, die mit der Filterung von Skalarfeldern kombiniert wird, wird als "gefilterte Suche" bezeichnet. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p>
 <h2 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,22 +338,8 @@ title: Terminologie
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> ist die zentrale Vektorausführungsmaschine von Milvus, die mehrere Bibliotheken für die Suche nach Vektorähnlichkeit enthält, darunter Faiss, Hnswlib und Annoy. Knowhere ist auch für die Unterstützung von heterogenem Computing ausgelegt. Sie steuert, auf welcher Hardware (CPU oder GPU) die Indexerstellung und Suchanfragen ausgeführt werden sollen. Daher kommt auch der Name Knowhere - Knowhere weiß, wo die Operationen ausgeführt werden sollen.</p>
-<h2 id="Log-broker" class="common-anchor-header">Log-Broker<button data-href="#Log-broker" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Der <a href="https://milvus.io/docs/four_layers.md#Log-broker">Log-Broker</a> ist ein Publish-Subscribe-System, das Playback unterstützt. Er ist verantwortlich für die Persistenz von Streaming-Daten, die Ausführung zuverlässiger asynchroner Abfragen, die Benachrichtigung über Ereignisse und die Rückgabe von Abfrageergebnissen. Er gewährleistet auch die Integrität der inkrementellen Daten, wenn sich die Arbeitsknoten von einem Systemausfall erholen.</p>
+<!-- ## Log broker
+<p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">Log-Snapshot<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -370,39 +356,11 @@ title: Terminologie
         ></path>
       </svg>
     </button></h2><p>Ein Log-Snapshot ist ein binäres Protokoll, eine kleinere Einheit in einem Segment, das die Aktualisierungen und Änderungen von Daten in Milvus aufzeichnet und verarbeitet. Die Daten eines Segments werden in mehreren binlogs gespeichert. Es gibt drei Arten von Binlogs in Milvus: InsertBinlog, DeleteBinlog und DDLBinlog. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/four_layers.md#Meta-storage">Metaspeicher</a>.</p>
-<h2 id="Log-subscriber" class="common-anchor-header">Log-Abonnent<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Log Subscriber abonnieren die Log-Sequenz, um die lokalen Daten zu aktualisieren und Dienste in Form von Nur-Lese-Kopien bereitzustellen.</p>
-<h2 id="Message-storage" class="common-anchor-header">Meldungsspeicher<button data-href="#Message-storage" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Der Nachrichtenspeicher ist die Protokollspeicher-Engine von Milvus. Milvus unterstützt Kafka oder Pulsa als Nachrichtenspeicher. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Konfigurieren des Nachrichtenspeichers</a>.</p>
-<h2 id="Metric-type" class="common-anchor-header">Metrik-Typ<button data-href="#Metric-type" class="anchor-icon" translate="no">
+<!-- ## Log subscriber
+<p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. --></p>
+<!-- ## Message storage
+<p>Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Configure Message Storage</a>. --></p>
+<h2 id="Metric-type" class="common-anchor-header">Metrische Typen<button data-href="#Metric-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -418,6 +376,22 @@ title: Terminologie
         ></path>
       </svg>
     </button></h2><p>Ähnlichkeitsmetriken werden verwendet, um Ähnlichkeiten zwischen Vektoren zu messen. Derzeit unterstützt Milvus den euklidischen Abstand (L2), das innere Produkt (IP), die Cosinus-Ähnlichkeit (COSINE) und binäre metrische Typen. Sie können den für Ihr Szenario am besten geeigneten metrischen Typ wählen. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/metric.md">Ähnlichkeitsmetriken</a>.</p>
+<h2 id="MemoryBuffer" class="common-anchor-header">MemoryBuffer<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>MemoryBuffer ist ein leichtgewichtiger Bereitstellungsmodus von Woodpecker, der eingehende Schreibvorgänge vorübergehend im Speicher puffert und in regelmäßigen Abständen in den Cloud-Objektspeicher flusht. Dieser Modus eignet sich am besten für Batch-lastige Workloads in kleineren Bereitstellungen oder Produktionsumgebungen, bei denen Einfachheit vor Leistung geht. Weitere Informationen finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker-Architektur</a>.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,7 +407,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Memory-mapped-Dateien ermöglichen eine effiziente Datenverarbeitung, indem sie den Dateiinhalt direkt im Speicher abbilden. Dies ist besonders nützlich, wenn der Speicherplatz begrenzt und das Laden aller Daten nicht möglich ist. Diese Technik kann die Datenkapazität erhöhen und die Leistung bis zu einem gewissen Grad aufrechterhalten. Wenn die Daten jedoch die Speicherkapazität bei weitem überschreiten, können die Such- und Abfragegeschwindigkeiten erheblich sinken. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/mmap.md">MMap-aktivierte Datenspeicherung</a>.</p>
+    </button></h2><p>Memory-mapped-Dateien ermöglichen eine effiziente Datenverarbeitung, indem sie den Dateiinhalt direkt im Speicher abbilden. Dies ist besonders nützlich, wenn der Speicher begrenzt ist und das Laden aller Daten nicht möglich ist. Diese Technik kann die Datenkapazität erhöhen und die Leistung bis zu einem gewissen Grad aufrechterhalten. Wenn die Daten jedoch die Speicherkapazität bei weitem überschreiten, können die Such- und Abfragegeschwindigkeiten erheblich sinken. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/mmap.md">MMap-aktivierte Datenspeicherung</a>.</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvus-Sicherung<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -593,7 +567,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannel steht für physischer Kanal. Jeder PChannel entspricht einem Thema für die Protokollspeicherung. Standardmäßig wird eine Gruppe von 16 PChannels zugewiesen, um Protokolle zu speichern, die das Einfügen, Löschen und Aktualisieren von Daten aufzeichnen, wenn der Milvus-Cluster gestartet wird. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">Konfigurationen für Nachrichtenkanäle</a>.</p>
+    </button></h2><p>PChannel steht für physischer Kanal. Jeder PChannel entspricht einem von Woodpecker verwalteten WAL-Stream. Standardmäßig wird eine Gruppe von PChannels zugewiesen, um Protokolle zu speichern, die das Einfügen, Löschen und Aktualisieren von Daten aufzeichnen, wenn der Milvus-Cluster gestartet wird. Weitere Informationen finden Sie unter <a href="/docs/de/streaming_service.md">Streaming Service</a>.</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -609,7 +583,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PyMilvus ist ein Python-SDK von Milvus. Sein Quellcode ist Open Source und wird auf <a href="https://github.com/milvus-io/pymilvus">GitHub</a> gehostet. Sie haben die Möglichkeit, MilvusClient (neue Version des Python-SDKs) oder das ursprüngliche ORM-Modul zu wählen, um mit Milvus zu kommunizieren.</p>
+    </button></h2><p>PyMilvus ist ein Python-SDK von Milvus. Sein Quellcode ist Open Source und wird auf <a href="https://github.com/milvus-io/pymilvus">GitHub</a> gehostet. Sie haben die Möglichkeit, MilvusClient (neue Version des Python-SDK) oder das ursprüngliche ORM-Modul für die Kommunikation mit Milvus zu wählen.</p>
 <h2 id="Query" class="common-anchor-header">Abfrage<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -626,6 +600,22 @@ title: Terminologie
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a> ist eine API, die eine skalare Filterung mit einem angegebenen booleschen Ausdruck als Filter durchführt. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get &amp; Scalar Query</a>.</p>
+<h2 id="QuorumBuffer" class="common-anchor-header">QuorumBuffer<button data-href="#QuorumBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>QuorumBuffer ist ein Bereitstellungsmodus von Woodpecker, der für latenzempfindliche, hochfrequente Lese-/Schreib-Workloads entwickelt wurde, die sowohl Reaktionsfähigkeit in Echtzeit als auch hohe Fehlertoleranz erfordern. Er fungiert als Hochgeschwindigkeits-Schreibpuffer mit drei Quorum-Schreibvorgängen, die eine starke Konsistenz und hohe Verfügbarkeit gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker-Architektur</a>.</p>
 <h2 id="Range-search" class="common-anchor-header">Bereichssuche<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -641,7 +631,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Bereichssuche ermöglicht es Ihnen, Vektoren zu finden, die innerhalb eines bestimmten Abstands zu Ihrem Suchvektor liegen. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/single-vector-search.md#Range-search">Bereichssuche</a>.</p>
+    </button></h2><p>Mit der Bereichssuche können Sie Vektoren finden, die innerhalb eines bestimmten Abstands zu Ihrem Suchvektor liegen. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/single-vector-search.md#Range-search">Bereichssuche</a>.</p>
 <h2 id="Schema" class="common-anchor-header">Schema<button data-href="#Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -657,7 +647,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das Schema ist die Metainformation, die den Datentyp und die Dateneigenschaften definiert. Jede Sammlung hat ihr eigenes Sammlungsschema, in dem alle Felder einer Sammlung, die automatische ID (Primärschlüssel), die Zuordnungsaktivierung und die Sammlungsbeschreibung definiert sind. Feldschemata sind ebenfalls in Sammlungsschemata enthalten, die den Namen, den Datentyp und andere Eigenschaften eines Felds definieren. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/schema.md#Manage-Schema">Schema verwalten</a>.</p>
+    </button></h2><p>Das Schema ist die Metainformation, die den Datentyp und die Dateneigenschaften definiert. Jede Sammlung hat ihr eigenes Sammlungsschema, das alle Felder einer Sammlung, die automatische ID (Primärschlüssel), die Zuweisungsaktivierung und die Sammlungsbeschreibung definiert. Feldschemata sind ebenfalls in Sammlungsschemata enthalten, die den Namen, den Datentyp und andere Eigenschaften eines Felds definieren. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/schema.md#Manage-Schema">Schema verwalten</a>.</p>
 <h2 id="Search" class="common-anchor-header">Suche<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -689,7 +679,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein Segment ist eine automatisch erstellte Datendatei, die eingefügte Daten speichert. Eine Sammlung kann mehrere Segmente enthalten, und jedes Segment kann zahlreiche Entitäten enthalten. Während einer vektoriellen Ähnlichkeitssuche untersucht Milvus jedes Segment, um die Suchergebnisse zusammenzustellen.</p>
+    </button></h2><p>Ein Segment ist eine automatisch erstellte Datendatei, die eingefügte Daten speichert. Eine Sammlung kann mehrere Segmente enthalten, und jedes Segment kann zahlreiche Entitäten enthalten. Während einer Vektorähnlichkeitssuche untersucht Milvus jedes Segment, um die Suchergebnisse zusammenzustellen.</p>
 <p>Es gibt zwei Arten von Segmenten: wachsende und versiegelte. Ein wachsendes Segment sammelt so lange neue Daten, bis es einen bestimmten Schwellenwert oder ein Zeitlimit erreicht hat und dann versiegelt wird. Danach wird es versiegelt. Sobald ein Segment versiegelt ist, nimmt es keine neuen Daten mehr an und wird in den Objektspeicher übertragen. In der Zwischenzeit werden die eingehenden Daten an ein neues wachsendes Segment weitergeleitet. Der Übergang von einem wachsenden zu einem versiegelten Segment wird entweder durch Erreichen der vordefinierten Entitätsgrenze oder durch Überschreiten der maximal zulässigen Dauer im wachsenden Zustand ausgelöst. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/replica.md#Design-Details">Design Details</a>.</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">Spark-Milvus-Konnektor<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -706,7 +696,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der<a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus-Connector</a> bietet eine nahtlose Integration zwischen Apache Spark und Milvus und kombiniert die Datenverarbeitungs- und ML-Funktionen von Apache Spark mit der Vektordatenspeicherung und den Suchfunktionen von Milvus.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector</a> bietet eine nahtlose Integration zwischen Apache Spark und Milvus und kombiniert die Datenverarbeitungs- und Machine Learning (ML)-Funktionen von Apache Spark mit der Vektordatenspeicherung und den Suchfunktionen von Milvus.</p>
 <h2 id="Shard" class="common-anchor-header">Shard<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -740,6 +730,22 @@ title: Terminologie
         ></path>
       </svg>
     </button></h2><p>Sparsame Vektoren stellen Wörter oder Phrasen mithilfe von Vektoreinbettungen dar, bei denen die meisten Elemente Null sind und nur ein Element, das nicht Null ist, das Vorhandensein eines bestimmten Wortes anzeigt. Modelle mit spärlichen Vektoren, wie SPLADEv2, übertreffen dichte Modelle bei der Suche nach Wissen außerhalb der Domäne, der Kenntnis von Schlüsselwörtern und der Interpretierbarkeit. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Sparse Vectors</a>.</p>
+<h2 id="Streaming-Service" class="common-anchor-header">Streaming-Dienst<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Der Streaming Service ist ein Konzept für das interne Streaming-Systemmodul von Milvus, das auf dem Write-Ahead Log (WAL) aufbaut, um verschiedene Streaming-bezogene Funktionen zu unterstützen. Dazu gehören die Aufnahme/Abonnierung von Streaming-Daten, die Wiederherstellung des Cluster-Zustands im Fehlerfall, die Umwandlung von Streaming-Daten in historische Daten und die Abfrage wachsender Daten. Der Dienst besteht aus den Komponenten Streaming Coordinator, Streaming Node Cluster und Streaming Client. Weitere Informationen finden Sie unter <a href="/docs/de/streaming_service.md">Streaming Service</a>.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">Unstrukturierte Daten<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -755,8 +761,8 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unstrukturierte Daten, einschließlich Bilder, Video, Audio und natürliche Sprache, sind Informationen, die keinem vordefinierten Modell oder einer Organisationsform folgen. Dieser Datentyp macht etwa 80 % der weltweiten Daten aus und kann mit verschiedenen Modellen der künstlichen Intelligenz (KI) und ML in Vektoren umgewandelt werden.</p>
-<h2 id="VChannel" class="common-anchor-header">VKanal<button data-href="#VChannel" class="anchor-icon" translate="no">
+    </button></h2><p>Unstrukturierte Daten, einschließlich Bilder, Video, Audio und natürliche Sprache, sind Informationen, die keinem vordefinierten Modell oder einer vordefinierten Art der Organisation folgen. Dieser Datentyp macht etwa 80 % der weltweiten Daten aus und kann mit verschiedenen Modellen der künstlichen Intelligenz (KI) und ML in Vektoren umgewandelt werden.</p>
+<h2 id="VChannel" class="common-anchor-header">VChannel<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -771,7 +777,7 @@ title: Terminologie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannel</a> steht für logischer Kanal. Jeder VChannel stellt einen Splitter in einer Sammlung dar. Jeder Sammlung wird eine Gruppe von VChannels zugewiesen, um das Einfügen, Löschen und Aktualisieren von Daten aufzuzeichnen. VChannels sind logisch getrennt, teilen sich aber physisch Ressourcen.</p>
+    </button></h2><p>VChannel steht für virtueller Kanal. Jeder VChannel stellt einen Splitter in einer Sammlung dar. Jeder Sammlung wird eine Gruppe von VChannels zugewiesen, um das Einfügen, Löschen und Aktualisieren von Daten aufzuzeichnen. VChannels sind logisch getrennt, teilen sich aber physisch Ressourcen durch den Streaming-Dienst. Weitere Informationen finden Sie unter <a href="/docs/de/streaming_service.md">Streaming Service</a>.</p>
 <h2 id="Vector" class="common-anchor-header">Vektor<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -788,7 +794,39 @@ title: Terminologie
         ></path>
       </svg>
     </button></h2><p>Ein Einbettungsvektor ist eine Merkmalsabstraktion von unstrukturierten Daten wie E-Mails, IoT-Sensordaten, Instagram-Fotos, Proteinstrukturen und mehr. Mathematisch gesehen ist ein Einbettungsvektor ein Array aus Gleitkommazahlen oder Binärwerten. Moderne Einbettungstechniken werden verwendet, um unstrukturierte Daten in Einbettungsvektoren umzuwandeln. Milvus unterstützt seit Version 2.4.0 sowohl dichte als auch spärliche Vektoren.</p>
-<h2 id="Zilliz-Cloud" class="common-anchor-header">Zilliz-Wolke<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
+<h2 id="WAL-Storage" class="common-anchor-header">WAL-Speicher<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Die WAL-Speicherung (Write-Ahead Log) ist die Grundlage für die Haltbarkeit und Konsistenz von Daten in verteilten Systemen. Bevor eine Änderung übertragen wird, wird sie zunächst in einem Protokoll aufgezeichnet, um sicherzustellen, dass Sie im Falle eines Fehlers genau da weitermachen können, wo Sie aufgehört haben. Milvus verwendet Woodpecker als WAL-Speichersystem, das sowohl den MemoryBuffer- als auch den QuorumBuffer-Modus unterstützt. Weitere Informationen finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker-Architektur</a>.</p>
+<h2 id="Woodpecker" class="common-anchor-header">Woodpecker<button data-href="#Woodpecker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Woodpecker ist ein Cloud-natives WAL-System in Milvus 2.6, das Kafka und Pulsar ablöst. Mit einer Zero-Disk-Architektur und zwei Bereitstellungsmodi (MemoryBuffer und QuorumBuffer) bietet es einen hohen Durchsatz, einen geringen Betriebsaufwand und eine nahtlose Skalierbarkeit auf Objektspeicher. Weitere Informationen finden Sie unter <a href="/docs/de/woodpecker_architecture.md">Woodpecker-Architektur</a>.</p>
+<h2 id="Zilliz-Cloud" class="common-anchor-header">Zilliz Cloud<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

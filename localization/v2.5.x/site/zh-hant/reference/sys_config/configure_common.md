@@ -513,7 +513,7 @@ summary: 學習如何為 Milvus 設定共用。
   <tbody>
     <tr>
       <td>        群集層級讀寫權限      </td>
-      <td>資料庫列表,選擇所有權,選擇使用者,描述資源群組,資源群組列表,權限群組清單,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+      <td>資料庫清單,選擇所有權,選擇使用者,描述資源群組,資源群組清單,權限群組清單,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups...</td>
     </tr>
   </tbody>
 </table>
@@ -1066,7 +1066,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        將 pk 應用於 bloom filter 時的批次大小      </td>
+      <td>        將 pk 應用於 Bloom filter 時的批次大小      </td>
       <td>1000</td>
     </tr>
   </tbody>

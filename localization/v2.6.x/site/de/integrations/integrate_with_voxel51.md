@@ -19,7 +19,7 @@ title: Bildverarbeitungssuchen mit Milvus und FiftyOne durchführen
         ></path>
       </svg>
     </button></h1><p><a href="https://docs.voxel51.com/">FiftyOne</a> ist ein Open-Source-Werkzeug zur Erstellung hochwertiger Datensätze und Computer Vision Modelle. Dieser Leitfaden hilft Ihnen, die Ähnlichkeitssuche von Milvus in FiftyOne zu integrieren, so dass Sie Ihre eigenen Datensätze durchsuchen können.</p>
-<p>FiftyOne stellt eine API zur Verfügung, um Milvus-Sammlungen zu erstellen, Vektoren hochzuladen und Ähnlichkeitsabfragen durchzuführen, sowohl <a href="https://docs.voxel51.com/integrations/milvus.html#milvus-query">programmatisch</a> in Python als auch per Point-and-Click in der App. Die Demonstration auf dieser Seite konzentriert sich auf die programmatische Integration.</p>
+<p>FiftyOne stellt eine API zur Verfügung, um Milvus-Sammlungen zu erstellen, Vektoren hochzuladen und Ähnlichkeitsabfragen auszuführen, sowohl <a href="https://docs.voxel51.com/integrations/milvus.html#milvus-query">programmatisch</a> in Python als auch per Point-and-Click in der App. Die Demonstration auf dieser Seite konzentriert sich auf die programmatische Integration.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -281,7 +281,7 @@ milvus_index = fob.compute_similarity(
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Verwalten von Brain-Läufen<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">
@@ -321,10 +321,10 @@ dataset.list_brain_runs(
 <span class="hljs-built_in">print</span>(info)
 <button class="copy-code-btn"></button></code></pre>
 <p>Verwenden Sie <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.load_brain_results"><code translate="no">load_brain_results()</code></a> laden Sie die <a href="https://docs.voxel51.com/api/fiftyone.brain.similarity.html#fiftyone.brain.similarity.SimilarityIndex"><code translate="no">SimilarityIndex</code></a> Instanz für einen Brain-Lauf.</p>
-<p>Sie können mit <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.rename_brain_run"><code translate="no">rename_brain_run()</code></a> können Sie den Gehirnschlüssel umbenennen, der mit einem bestehenden Ähnlichkeits-Ergebnislauf verbunden ist:</p>
+<p>Sie können mit <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.rename_brain_run"><code translate="no">rename_brain_run()</code></a> können Sie den Gehirnschlüssel umbenennen, der mit einem bestehenden Ähnlichkeits-Ergebnislauf verknüpft ist:</p>
 <pre><code translate="no" class="language-python">dataset.rename_brain_run(brain_key, new_brain_key)
 <button class="copy-code-btn"></button></code></pre>
-<p>Schließlich können Sie mit <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.delete_brain_run"><code translate="no">delete_brain_run()</code></a> können Sie einen Gehirnlauf löschen:</p>
+<p>Schließlich können Sie mit <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.delete_brain_run"><code translate="no">delete_brain_run()</code></a> können Sie einen Brain-Lauf löschen:</p>
 <pre><code translate="no" class="language-python">dataset.delete_brain_run(brain_key)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

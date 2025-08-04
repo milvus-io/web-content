@@ -93,7 +93,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>デフォルトのメトリックタイプとして内積距離を使用する。距離タイプの詳細については、<a href="https://milvus.io/docs/metric.md?tab=floating">類似度メトリクスのページを</a>参照してください。</p>
@@ -153,7 +153,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     </button></h2><p>このセクションでは、ArmベースのCPU上で<code translate="no">llama.cpp</code> サービスを構築し、起動します。</p>
 <h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1モデルとllama.cpp</h3><p>Meta社の<a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8Bモデルは</a>、Llama 3.1モデルファミリーに属し、研究および商用目的で自由に使用できます。このモデルを使用する前に、Llamaの<a href="https://llama.meta.com/llama-downloads/">ウェブサイトに</a>アクセスし、フォームに記入してアクセスをリクエストしてください。</p>
 <p><a href="https://github.com/ggerganov/llama.cpp">llama.cppは</a>オープンソースのC/C++プロジェクトで、ローカルでもクラウドでも、様々なハードウェア上で効率的なLLM推論を可能にします。<code translate="no">llama.cpp</code> を使えば、Llama 3.1モデルを簡単にホストすることができます。</p>
-<h3 id="Download-and-build-llamacpp" class="common-anchor-header">llama.cppをダウンロードしてビルドする</h3><p>以下のコマンドを実行して、llama.cppをソースからビルドするのに必要なmake、cmake、gcc、g++、その他の必須ツールをインストールする：</p>
+<h3 id="Download-and-build-llamacpp" class="common-anchor-header">llama.cppをダウンロードしてビルドする。</h3><p>以下のコマンドを実行して、llama.cppをソースからビルドするのに必要なmake、cmake、gcc、g++、その他の必須ツールをインストールする：</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
 $ <span class="hljs-built_in">sudo</span> apt install gcc g++ -y
 $ <span class="hljs-built_in">sudo</span> apt install build-essential -y

@@ -42,10 +42,10 @@ summary: >-
       </svg>
     </button></h2><p>يجمع<strong>DISKANN</strong> بين تقنيتين رئيسيتين للبحث المتجه الفعال:</p>
 <ul>
-<li><p><strong>الرسم البياني Vamana Graph</strong> - فهرس <strong>قائم على القرص</strong> <strong>قائم على الرسم البياني</strong> يربط بين نقاط البيانات (أو المتجهات) للتنقل الفعال أثناء البحث.</p></li>
-<li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>في الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
+<li><p><strong>الرسم البياني Vamana Graph</strong> - فهرس <strong>قائم على القرص</strong> <strong>قائم على الرسم البياني</strong> يربط نقاط البيانات (أو المتجهات) للتنقل الفعال أثناء البحث.</p></li>
+<li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>داخل الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">بناء الفهرس</h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات بيانات كبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
+<h3 id="Index-construction" class="common-anchor-header">بناء الفهرس</h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات البيانات الكبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
 <p>يوضح الشكل التالي كيف يتم بناء الرسم البياني لـ Vamana.</p>
 <p>
   
@@ -61,7 +61,7 @@ summary: >-
 <p>تحدد المعلمة <code translate="no">search_list_size</code> اتساع عملية تنقيح الرسم البياني. يؤدي ارتفاع <code translate="no">search_list_size</code> إلى توسيع نطاق البحث عن الجيران أثناء الإنشاء ويمكن أن يحسّن الدقة النهائية، ولكنه يزيد من وقت بناء الفهرس.</p></li>
 </ul></li>
 </ol>
-<p>لمعرفة المزيد حول ضبط <a href="/docs/ar/diskann.md#diskann-params">البارامترات، راجع بارامترات DISKANN</a>.</p>
+<p>لمعرفة المزيد حول ضبط <a href="/docs/ar/diskann.md#DISKANN-params">البارامترات، راجع بارامترات DISKANN</a>.</p>
 <h4 id="PQ" class="common-anchor-header">PQ</h4><p>يستخدم DISKANN <strong>PQ</strong> لضغط المتجهات عالية الأبعاد إلى تمثيلات أصغر<strong>(رموز PQ</strong>)، والتي يتم تخزينها في الذاكرة لإجراء حسابات المسافة التقريبية السريعة.</p>
 <p>تدير المعلمة <code translate="no">pq_code_budget_gb_ratio</code> بصمة الذاكرة المخصصة لتخزين رموز PQ هذه. وهي تمثل النسبة بين الحجم الإجمالي للمتجهات (بالجيجابايت) والمساحة المخصصة لتخزين رموز PQ. يمكنك حساب ميزانية رمز PQ الفعلية (بالجيجابايت) باستخدام هذه الصيغة:</p>
 <pre><code translate="no" class="language-plaintext">PQ Code Budget (GB) = vec_field_size_gb * pq_code_budget_gb_ratio
@@ -148,63 +148,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن تكوين معلمات DISKANN باستخدام طريقتين أساسيتين:</p>
-<ul>
-<li><p><strong>ملف تكوين Milvus:</strong> ضبط معلمات DISKANN من خلال ملف تكوين Milvus. هذه الطريقة مناسبة لتعيين خيارات التكوين العامة لمثيل Milvus الخاص بك.</p></li>
-<li><p><strong>Milvus SDK:</strong> قم بضبط معلمات DISKANN بدقة باستخدام Milvus SDK أثناء إنشاء الفهرس أو عمليات البحث. يتيح ذلك المزيد من التحكم الدقيق وتعديلات المعلمات الديناميكية بناءً على حالات استخدام محددة.</p></li>
-</ul>
-<div class="alert note">
-<p>يتجاوز التكوين الذي يتم إجراؤه بواسطة SDK أي إعدادات محددة في ملف التكوين، مما يوفر المرونة والتحكم لتطبيقات ومجموعات بيانات محددة.</p>
-</div>
-<h3 id="Milvus-configuration-file" class="common-anchor-header">ملف تكوين Milvus</h3><p>فيما يلي مثال على كيفية تعيين معلمات DISKANN في ملف <code translate="no">milvus.yaml</code>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">knowhere:</span>
-  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># When enable this configuration, the index parameters defined following will be automatically populated as index parameters, without requiring user input.</span>
-  <span class="hljs-attr">DISKANN:</span>
-    <span class="hljs-attr">build:</span>
-      <span class="hljs-attr">max_degree:</span> <span class="hljs-number">56</span> <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
-      <span class="hljs-attr">pq_code_budget_gb_ratio:</span> <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
-      <span class="hljs-attr">search_cache_budget_gb_ratio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
-      <span class="hljs-attr">search_list_size:</span> <span class="hljs-number">100</span> <span class="hljs-comment"># Size of the candidate list during building graph</span>
-    <span class="hljs-attr">search:</span>
-      <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
+    </button></h2><p>يمكن تكوين المعلمات المتعلقة بـ DISKANN من خلال ملف تكوين Milvus (<code translate="no">milvus.yaml</code>):</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">DiskIndex:</span>
+    <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>  <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
+    <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>  <span class="hljs-comment"># Size of the candidate list during building graph</span>
+    <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>  <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
+    <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
+    <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="SDK-configuration" class="common-anchor-header">تكوين SDK</h3><p>فيما يلي مثال على كيفية تعيين معلمات DISKANN باستخدام Milvus SDK.</p>
-<h4 id="Build" class="common-anchor-header">إنشاء</h4><p>لإنشاء فهرس <code translate="no">IVF_FLAT</code> على حقل متجه في ملف ميلفوس، استخدم الطريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> والمعلمات الإضافية للفهرس.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-<span class="hljs-comment"># Prepare index building params</span>
-index_params = MilvusClient.prepare_index_params()
-
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;DISKANN&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-    params={
-        <span class="hljs-string">&quot;max_degree&quot;</span>: <span class="hljs-number">56</span>, <span class="hljs-comment"># Maximum number of connections (edges) each data point can have</span>
-        <span class="hljs-string">&quot;search_list_size&quot;</span>: <span class="hljs-number">100</span>,
-        <span class="hljs-string">&quot;search_cache_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.10</span>, <span class="hljs-comment"># Amount of memory allocated for caching frequently accessed parts of the graph</span>
-        <span class="hljs-string">&quot;pq_code_budget_gb_ratio&quot;</span>: <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data</span>
-    } <span class="hljs-comment"># Index building params</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>وبمجرد تكوين معلمات الفهرس، يمكنك إنشاء الفهرس باستخدام الأسلوب <code translate="no">create_index()</code> مباشرةً أو تمرير بارامترات الفهرس في الأسلوب <code translate="no">create_collection</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/create-collection.md">إنشاء مجموعة</a>.</p>
-<h4 id="Search" class="common-anchor-header">البحث</h4><p>بمجرد إنشاء الفهرس وإدراج الكيانات، يمكنك إجراء عمليات بحث التشابه على الفهرس.</p>
-<pre><code translate="no" class="language-python">search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {
-        <span class="hljs-string">&quot;beam_width_ratio&quot;</span>: <span class="hljs-number">4.0</span>, <span class="hljs-comment"># degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</span>
-    }
-}
-
-res = MilvusClient.search(
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
-    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
-    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="DISKANN-params" class="common-anchor-header">بارامزات DISKANN<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
+<p>للحصول على تفاصيل حول أوصاف المعلمات، راجع <a href="/docs/ar/diskann.md#DISKANN-params">بارامز DISKANN</a>.</p>
+<h2 id="DISKANN-params" class="common-anchor-header">بارامترات DISKANN<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -219,7 +174,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يسمح لك الضبط الدقيق لمعلمات DISKKANN بتكييف سلوكها مع مجموعة البيانات الخاصة بك وعبء عمل البحث، وتحقيق التوازن الصحيح بين السرعة والدقة واستخدام الذاكرة.</p>
+    </button></h2><p>يسمح لك الضبط الدقيق لمعلمات DISKANN بتكييف سلوكها مع مجموعة البيانات الخاصة بك وعبء عمل البحث، وتحقيق التوازن الصحيح بين السرعة والدقة واستخدام الذاكرة.</p>
 <h3 id="Index-building-params" class="common-anchor-header">بارامترات بناء الفهرس</h3><p>تؤثر هذه المعلمات على كيفية إنشاء فهرس DISKANN. يمكن أن يؤثر تعديلها على حجم الفهرس ووقت الإنشاء وجودة البحث.</p>
 <table>
    <tr>
@@ -231,7 +186,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>فامانا</p></td>
-     <td><p><code translate="no">max_degree</code></p></td>
+     <td><p><code translate="no">MaxDegree</code></p></td>
      <td><p>يتحكم في الحد الأقصى لعدد الاتصالات (الحواف) التي يمكن أن تحتويها كل نقطة بيانات في الرسم البياني فامانا.</p></td>
      <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1, 512]</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">56</code></p></td>
@@ -240,16 +195,15 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_list_size</code></p></td>
-     <td><p>يحدد عدد الجيران المرشحين الذين تم أخذهم في الاعتبار لكل نقطة بيانات أثناء إنشاء الرسم البياني.</p></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p>أثناء إنشاء الفهرس، تحدد هذه المعلمة حجم مجموعة المرشحين المستخدمة عند البحث عن أقرب الجيران لكل عقدة. لكل عقدة تتم إضافتها إلى الرسم البياني، تحتفظ الخوارزمية بقائمة بأفضل <code translate="no">search_list_size</code> المرشحين الذين تم العثور عليهم حتى الآن. يتوقف البحث عن الجيران عندما لا يمكن تحسين هذه القائمة. من مجموعة المرشحين النهائيين هذه، يتم اختيار أفضل <code translate="no">max_degree</code> عقدة لتكوين الحواف النهائية.</p></td>
      <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">100</code></p></td>
-     <td><p>تؤدي القيم الأكبر إلى رسوم بيانية أكثر شمولاً، مما قد يحسن من جودة البحث ولكن أيضًا يزيد من وقت الإنشاء. 
- في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [K, 10K].</p></td>
+     <td><p>تزيد القيمة الأكبر <code translate="no">search_list_size</code> من احتمالية العثور على أقرب الجيران الحقيقيين لكل عقدة، مما قد يؤدي إلى رسم بياني أعلى جودة وأداء بحث أفضل (استرجاع). ومع ذلك، يأتي ذلك على حساب وقت إنشاء فهرس أطول بكثير. يجب تعيينه دائمًا على قيمة أكبر من أو تساوي <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">SearchCacheBudgetGBRatio</code></p></td>
      <td><p>يتحكم في مقدار الذاكرة المخصصة للتخزين المؤقت للأجزاء التي يتم الوصول إليها بشكل متكرر من الرسم البياني أثناء إنشاء الفهرس.</p></td>
      <td><p><strong>النوع</strong>: عائم <strong>المدى</strong>: [0.0, 0.3)</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">0.10</code></p></td>
@@ -257,7 +211,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>PQ</p></td>
-     <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
+     <td><p><code translate="no">PQCodeBudgetGBRatio</code></p></td>
      <td><p>يتحكم في حجم رموز PQ (تمثيلات مضغوطة لنقاط البيانات) مقارنة بحجم البيانات غير المضغوطة.</p></td>
      <td><p><strong>النوع</strong>: عائم <strong>النطاق</strong>: (0.0، 0.25]</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">0.125</code></p></td>
@@ -276,10 +230,18 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p>فامانا</p></td>
-     <td><p><code translate="no">beam_width_ratio</code></p></td>
-     <td><p>يتحكم في درجة التوازي أثناء البحث من خلال تحديد الحد الأقصى لعدد طلبات الإدخال/الإخراج المتوازي للقرص بالنسبة لعدد أنوية وحدة المعالجة المركزية المتوفرة.</p></td>
+     <td><p><code translate="no">BeamWidthRatio</code></p></td>
+     <td><p>يتحكم في درجة التوازي أثناء البحث عن طريق تحديد الحد الأقصى لعدد طلبات الإدخال/الإخراج المتوازي للقرص بالنسبة لعدد أنوية وحدة المعالجة المركزية المتوفرة.</p></td>
      <td><p><strong>النوع</strong>: <strong>نطاق</strong> عائم: [1، الحد الأقصى (128/رقم وحدة المعالجة المركزية، 16)]</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">4.0</code></p></td>
      <td><p>تعمل القيم الأعلى على زيادة التوازي، مما قد يؤدي إلى تسريع البحث على الأنظمة ذات وحدات المعالجة المركزية القوية ومحركات أقراص الحالة الصلبة. ومع ذلك، قد يؤدي تعيينها أعلى من اللازم إلى تنافس مفرط على الموارد. في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [1.0, 4.0].</p></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p>أثناء عملية البحث، تحدد هذه المعلمة حجم مخزن التخزين المرشح الذي تحتفظ به الخوارزمية أثناء اجتيازها للرسم البياني. تزيد القيمة الأكبر من فرص العثور على الجيران الأقرب الحقيقيين (استدعاء أعلى) ولكنها تزيد أيضًا من زمن انتقال البحث.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p>
+<p><strong>القيمة الافتراضية</strong>: <code translate="no">100</code></p></td>
+     <td><p>للحصول على توازن جيد بين الأداء والدقة، يوصى بتعيين هذه القيمة لتكون مساوية لعدد النتائج التي تريد استرجاعها (top_k) أو أكبر قليلاً من عدد النتائج التي تريد استرجاعها.</p></td>
    </tr>
 </table>

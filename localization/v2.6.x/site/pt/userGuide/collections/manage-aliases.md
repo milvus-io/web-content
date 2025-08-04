@@ -1,11 +1,11 @@
 ---
 id: manage-aliases.md
-title: Gerir aliases
+title: Gerir os aliases
 summary: >-
   O Milvus fornece recursos de gerenciamento de aliases. Esta página demonstra
   os procedimentos para criar, listar, alterar e eliminar aliases.
 ---
-<h1 id="Manage-Aliases" class="common-anchor-header">Gerir aliases<button data-href="#Manage-Aliases" class="anchor-icon" translate="no">
+<h1 id="Manage-Aliases" class="common-anchor-header">Gerir os aliases<button data-href="#Manage-Aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus fornece capacidades de gestão de aliases. Esta página demonstra os procedimentos para criar, listar, alterar e eliminar aliases.</p>
-<h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>No Milvus, um alias é um nome secundário e mutável para uma coleção. A utilização de aliases fornece uma camada de abstração que lhe permite alternar dinamicamente entre colecções sem modificar o código da sua aplicação. Isso é particularmente útil em ambientes de produção para atualizações de dados contínuas, testes A/B e outras tarefas operacionais.</p>
+<p>Esta página demonstra como criar, listar, reatribuir e soltar aliases de coleção.</p>
+<h2 id="Why-Use-an-Alias" class="common-anchor-header">Por que usar um alias?<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +37,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível criar aliases para as suas colecções. Uma coleção pode ter vários aliases, mas as colecções não podem partilhar um alias.</p>
-<p>Ao receber um pedido para uma coleção, o Milvus localiza a coleção com base no nome fornecido. Se a coleção com o nome fornecido não existir, o Milvus continua a localizar o nome fornecido como um alias. Pode utilizar aliases de colecções para adaptar o seu código a diferentes cenários.</p>
+    </button></h2><p>A principal vantagem de usar um alias é desacoplar o aplicativo cliente de um nome de coleção físico específico.</p>
+<p>Imagine que você tem um aplicativo ativo que consulta uma coleção chamada <code translate="no">prod_data</code>. Quando precisar de atualizar os dados subjacentes, pode efetuar a atualização sem qualquer interrupção do serviço. O fluxo de trabalho seria:</p>
+<ol>
+<li><strong>Criar uma nova coleção</strong>: Crie uma nova coleção, por exemplo, <code translate="no">prod_data_v2</code>.</li>
+<li><strong>Preparar dados</strong>: Carregar e indexar os novos dados em <code translate="no">prod_data_v2</code>.</li>
+<li><strong>Trocar o alias</strong>: Quando a nova coleção estiver pronta para o serviço, reatribua atomicamente o alias <code translate="no">prod_data</code> da coleção antiga para <code translate="no">prod_data_v2</code>.</li>
+</ol>
+<p>A sua aplicação continua a enviar pedidos para o alias <code translate="no">prod_data</code>, sem qualquer tempo de inatividade. Esse mecanismo permite atualizações contínuas e simplifica operações como implantações blue-green para seu serviço de pesquisa vetorial.</p>
+<p><strong>Principais propriedades dos aliases:</strong></p>
+<ul>
+<li>Uma coleção pode ter vários aliases.</li>
+<li>Um alias só pode apontar para uma coleção de cada vez.</li>
+<li>Ao processar um pedido, Milvus verifica primeiro se existe uma coleção com o nome fornecido. Se não existir, verifica então se o nome é um alias para uma coleção.</li>
+</ul>
 <h2 id="Create-Alias" class="common-anchor-header">Criar alias<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -216,7 +229,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O trecho de código a seguir demonstra o procedimento para listar os aliases alocados a uma coleção específica.</p>
+    </button></h2><p>O seguinte trecho de código demonstra o procedimento para listar os aliases alocados a uma coleção específica.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>

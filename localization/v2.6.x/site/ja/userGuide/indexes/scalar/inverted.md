@@ -2,7 +2,7 @@
 id: inverted.md
 title: 反転
 summary: >-
-  MilvusのINVERTEDインデックスは、スカラーフィールドと構造化JSONフィールドの両方に対するフィルタクエリを高速化するように設計されています。用語とそれを含むドキュメントまたはレコードを対応付けることにより、インバーテッドインデックスは総当たり検索と比較してクエリのパフォーマンスを大幅に向上させます。
+  データに対して頻繁にフィルタクエリを実行する必要がある場合、転置インデックスによりクエリのパフォーマンスを劇的に向上させることができます。Milvusは、すべての文書をスキャンする代わりに、転置インデックスを使用して、フィルタ条件に一致する正確なレコードを迅速に検索します。
 ---
 <h1 id="INVERTED" class="common-anchor-header">反転<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusの<code translate="no">INVERTED</code> インデックスは、スカラーフィールドと構造化JSONフィールドの両方に対するフィルタクエリを高速化するように設計されています。用語とそれを含むドキュメントまたはレコードを対応付けることにより、インバーテッドインデックスは総当たり検索と比較してクエリのパフォーマンスを大幅に向上させます。</p>
-<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>データに対して頻繁にフィルタクエリを実行する必要がある場合、<code translate="no">INVERTED</code> インデックスはクエリパフォーマンスを劇的に向上させます。Milvusは全ての文書をスキャンする代わりに、転置インデックスを使用し、フィルタ条件に一致する正確なレコードを素早く探し出します。</p>
+<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">転置インデックスを使用する場合<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,23 +35,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/quickwit-oss/tantivy">Tantivyを</a>搭載したmilvusは、特にテキストデータに対するフィルタクエリを高速化するために転置インデックスを実装しています。その仕組みは以下の通りです：</p>
-<ol>
-<li><p><strong>データをトークン化</strong>します：Milvusは、生のデータ（この例では2つの文章）を受け取ります：</p>
+    </button></h2><p>INVERTEDインデックスは以下のような場合に使用します：</p>
 <ul>
-<li><p><strong>「Milvusはクラウドネイティブのベクトルデータベースです。</strong></p></li>
-<li><p><strong>「Milvusはパフォーマンスに優れています。</strong></p></li>
+<li><p><strong>特定の値でフィルタリング</strong>する：フィールドが特定の値に等しいすべてのレコードを検索します（例：<code translate="no">category == &quot;electronics&quot;</code> ）。</p></li>
+<li><p><strong>テキストコンテンツのフィルタリング</strong>：<code translate="no">VARCHAR</code> フィールドを効率的に検索する。</p></li>
+<li><p><strong>JSONフィールド値のクエリー</strong>：JSON構造内の特定のキーにフィルターをかける</p></li>
 </ul>
-<p>そして、それらをユニークな単語に分割します（例：<em>Milvus</em>,<em>is</em>,<em>cloud-native</em>,<em>vector</em>,<em>database</em>,<em>very</em>,<em>good</em>,<em>at</em>,<em>performance</em>）。</p></li>
-<li><p><strong>用語辞書を構築する</strong>：これらのユニークな単語は、<strong>用語辞書と</strong>呼ばれるソートされたリストに格納されます。この辞書により、Milvusは単語が存在するかどうかを素早くチェックし、インデックス内の位置を特定することができる。</p></li>
-<li><p><strong>転置リストを作成する</strong>：用語辞書の各単語について、Milvusはその単語を含む文書を示す<strong>転置リストを</strong>保持します。例えば、<strong>"Milvus "は</strong>両方の文章に登場するので、その転置リストは両方の文書IDを指す。</p></li>
+<p><strong>パフォーマンス上の利点</strong>: INVERTED インデックスは、コレクション全体のスキャンを不要にすることで、大規模なデータセットのクエリ時間を数秒から数ミリ秒に短縮することができます。</p>
+<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTEDインデックスの仕組み<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvusは<a href="https://github.com/quickwit-oss/tantivy">Tantivyを</a>使用してインバーテッドインデックスを実装しています。以下はそのプロセスである：</p>
+<ol>
+<li><p><strong>トークン化</strong>：Milvusはデータを検索可能な用語に分解します。</p></li>
+<li><p><strong>用語辞書</strong>：すべてのユニークな用語の並べ替えリストを作成します。</p></li>
+<li><p><strong>転置リスト</strong>：各用語をそれを含む文書にマッピング</p></li>
 </ol>
+<p>例えば、次の2つの文章があるとする：</p>
+<ul>
+<li><p><strong>"Milvusはクラウドネイティブのベクトルデータベースである"</strong></p></li>
+<li><p><strong>「Milvusはパフォーマンスに優れている</strong></p></li>
+</ul>
+<p>転置インデックスでは、<strong>"Milvus"</strong>→<strong>[文書0, 文書1]</strong>、<strong>"cloud-native"</strong>→<strong>[文書0]</strong>、<strong>"performance"</strong>→<strong>[文書1]</strong>のような用語がマッピングされる。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted.png" alt="Inverted" class="doc-image" id="inverted" />
-   </span> <span class="img-wrapper"> <span>反転リスト</span> </span></p>
-<p>辞書はソートされているので、用語ベースのフィルタリングを効率的に処理することができる。Milvusはすべての文書をスキャンする代わりに、辞書で用語を検索し、その転置リストを取得するだけで、大規模なデータセットでの検索やフィルタリングを大幅に高速化できる。</p>
-<h2 id="Index-a-regular-scalar-field" class="common-anchor-header">通常のスカラーフィールドのインデックス<button data-href="#Index-a-regular-scalar-field" class="anchor-icon" translate="no">
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
+   </span> <span class="img-wrapper"> <span>転置インデックス</span> </span></p>
+<p>用語でフィルタリングすると、Milvusはその用語を辞書で検索し、一致するすべての文書を瞬時に取得します。</p>
+<p>INVERTEDインデックスはすべてのスカラーフィールド型をサポートします：<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong>、<strong>ARRAY</strong>です。ただし、JSONフィールドにインデックスを作成する際のインデックス・パラメータは、通常のスカラー・フィールドとは若干異なります。</p>
+<h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">JSON以外のフィールドにインデックスを作成する<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,123 +90,65 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>ARRAYの</strong>ようなスカラーフィールドの場合、転置インデックスの作成は簡単です。<code translate="no">index_type</code> パラメータを<code translate="no">&quot;INVERTED&quot;</code> に設定して、<code translate="no">create_index()</code> メソッドを使用します。</p>
+    </button></h2><p>JSON以外のフィールドにインデックスを作成するには、以下の手順に従います：</p>
+<ol>
+<li><p>インデックス・パラメータを準備する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>) <span class="hljs-comment"># Replace with your server address</span>
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+<span class="hljs-comment"># Create an empty index parameter object</span>
+index_params = client.prepare_index_params()
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><code translate="no">INVERTED</code> インデックスを追加する：</p>
+<pre><code translate="no" class="language-python">index_params.add_index(
+    field_name=<span class="hljs-string">&quot;category&quot;</span>,           <span class="hljs-comment"># Name of the field to index</span>
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,          <span class="hljs-comment"># Specify INVERTED index type</span></span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span>     <span class="hljs-comment"># Give your index a name</span>
+)
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>インデックスを作成する：</p>
+<pre><code translate="no" class="language-python">client.create_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Replace with your collection name</span>
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<h2 id="Create-indexes-on-JSON-fields--Milvus-2511+" class="common-anchor-header">JSONフィールドにインデックスを作成する<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Create-indexes-on-JSON-fields--Milvus-2511+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>JSONフィールド内の特定のパスにINVERTEDインデックスを作成することもできます。これには、JSONパスとデータ型を指定する追加のパラメータが必要です：</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Build index params</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;scalar_field_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Type of index to be created</span>
-    index_name=<span class="hljs-string">&quot;inverted_index&quot;</span> <span class="hljs-comment"># Name of the index to be created</span>
+    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,                    <span class="hljs-comment"># JSON field name</span>
+<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,</span>
+    index_name=<span class="hljs-string">&quot;metadata_category_index&quot;</span>,
+<span class="highlighted-comment-line">    params={</span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>,    <span class="hljs-comment"># Path to the JSON key</span></span>
+<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>              <span class="hljs-comment"># Data type to cast to during indexing</span></span>
+<span class="highlighted-comment-line">    }</span>
 )
 
+<span class="hljs-comment"># Create index</span>
 client.create_index(
-    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Specify the collection name</span>
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Replace with your collection name</span>
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-JSON-field" class="common-anchor-header">JSONフィールドのインデックス<button data-href="#Index-a-JSON-field" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>MilvusはJSONフィールドにインデックス機能を拡張し、単一のカラム内に格納されたネストされたデータや構造化されたデータを効率的にフィルタリングできるようにしました。スカラーフィールドとは異なり、JSONフィールドにインデックスを作成する場合、2つのパラメータを追加で指定する必要があります：</p>
-<ul>
-<li><p><code translate="no">json_path</code><strong>:</strong>インデックスを作成するネストされたキーを指定します。</p></li>
-<li><p><code translate="no">json_cast_type</code><strong>:</strong>抽出されたJSON値がキャストされるデータ型（例えば、<code translate="no">&quot;varchar&quot;</code> 、<code translate="no">&quot;double&quot;</code> 、<code translate="no">&quot;bool&quot;</code> ）を定義します。</p></li>
-</ul>
-<p>例えば、以下の構造を持つ<code translate="no">metadata</code> というJSONフィールドを考える：</p>
-<pre><code translate="no" class="language-plaintext">{
-  &quot;metadata&quot;: {
-    &quot;product_info&quot;: {
-      &quot;category&quot;: &quot;electronics&quot;,
-      &quot;brand&quot;: &quot;BrandA&quot;
-    },
-    &quot;price&quot;: 99.99,
-    &quot;in_stock&quot;: true,
-    &quot;tags&quot;: [&quot;summer_sale&quot;, &quot;clearance&quot;]
-  }
-}
-<button class="copy-code-btn"></button></code></pre>
-<p>特定のJSONパスに転置インデックスを作成するには、以下の方法を使用できます：</p>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
-
-<span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string.</span>
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,         <span class="hljs-comment"># JSON field name</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,         <span class="hljs-comment"># Specify the inverted index type</span>
-    index_name=<span class="hljs-string">&quot;json_index_1&quot;</span>,      <span class="hljs-comment"># Custom name for this JSON index</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;]&quot;</span>,  <span class="hljs-comment"># Path to the &#x27;category&#x27; key</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>   <span class="hljs-comment"># Cast the value as a string</span>
-    }
-)
-
-<span class="hljs-comment"># Example 2: Index the &#x27;price&#x27; key as a numeric type (double).</span>
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,         <span class="hljs-comment"># JSON field name</span>
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
-    index_name=<span class="hljs-string">&quot;json_index_2&quot;</span>,      <span class="hljs-comment"># Custom name for this JSON index</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>,  <span class="hljs-comment"># Path to the &#x27;price&#x27; key</span>
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;double&quot;</span>           <span class="hljs-comment"># Cast the value as a double</span>
-    }
-)
-
-<button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>パラメータ</p></th>
-     <th><p>説明</p></th>
-     <th><p>値の例</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">field_name</code></p></td>
-     <td><p>スキーマ内のJSONフィールドの名前。</p></td>
-     <td><p><code translate="no">"metadata"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">index_type</code></p></td>
-     <td><p>作成するインデックス・タイプ。現在、JSON パスのインデックス作成でサポートされているのは<code translate="no">INVERTED</code> のみです。</p></td>
-     <td><p><code translate="no">"INVERTED"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">index_name</code></p></td>
-     <td><p>(オプション) カスタム・インデックス名。同じ JSON フィールドに複数のインデックスを作成する場合は、異なる名前を指定します。</p></td>
-     <td><p><code translate="no">"json_index_1"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>インデックスを作成する JSON パスを指定します。ネストしたキー、配列の位置、またはその両方を対象とすることができます (例:<code translate="no">metadata["product_info"]["category"]</code> または<code translate="no">metadata["tags"][0]</code>)。 パスが見つからない場合、または配列要素が特定の行に存在しない場合、インデックス作成中にその行は単にスキップされ、エラーは発生しません。</p></td>
-     <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Milvusがインデックスを作成する際に、抽出されたJSON値をキャストするデータ型。有効な値</p>
-<ul>
-<li><p><code translate="no">"bool"</code> または<code translate="no">"BOOL"</code></p></li>
-<li><p><code translate="no">"double"</code> または<code translate="no">"DOUBLE"</code></p></li>
-<li><p><code translate="no">"varchar"</code> または<code translate="no">"VARCHAR"</code></p>
-<p><strong>注意</strong>: 整数値の場合、Milvusは内部的にインデックスにdoubleを使用します。2^53以上の大きな整数は精度を失います。(型の不一致により)キャストに失敗した場合、エラーは発生せず、その行の値はインデックス化されません。</p></li>
-</ul></td>
-     <td><p><code translate="no">"varchar"</code></p></td>
-   </tr>
-</table>
-<h2 id="Considerations-on-JSON-indexing" class="common-anchor-header">JSONインデックスに関する考察<button data-href="#Considerations-on-JSON-indexing" class="anchor-icon" translate="no">
+<p>サポートされているパス、データ型、制限など、JSONフィールド・インデックスの詳細については、「<a href="/docs/ja/use-json-fields.md">JSONフィールド</a>」を参照してください。</p>
+<h2 id="Best-practices" class="common-anchor-header">ベストプラクティス<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -198,22 +164,27 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>フィルタリングロジック</strong>：</p>
-<ul>
-<li><p><strong>double 型のインデックス (</strong><code translate="no">json_cast_type=&quot;double&quot;</code><strong>) を作成した</strong>場合、numeric 型のフィルタ条件のみがそのインデックスを使用できます。フィルタでダブルインデックスと数値以外の条件が比較された場合、Milvusは総当たり検索にフォールバックします。</p></li>
-<li><p><strong>varchar型インデックス(</strong><code translate="no">json_cast_type=&quot;varchar&quot;</code><strong>)を作成した</strong>場合、文字列型フィルタ条件のみがインデックスを使用できます。そうでない場合、Milvusは総当り検索に戻ります。</p></li>
-<li><p><strong>ブール型</strong>インデックスもvarchar型インデックスと同様の動作をします。</p></li>
-</ul></li>
-<li><p><strong>条件式</strong>：</p>
-<ul>
-<li><code translate="no">json[&quot;field&quot;] in [value1, value2, …]</code> を使用することができます。しかし、このインデックスはそのパスの下に格納されたスカラー値に対してのみ機能します。<code translate="no">json[&quot;field&quot;]</code> が配列の場合、クエリはブルートフォースに戻ります（配列型インデックスはまだサポートされていません）。</li>
-</ul></li>
-<li><p><strong>数値精度</strong>：</p>
-<ul>
-<li>内部的には、Milvusは全ての数値フィールドをdoubleとしてインデックスを作成します。数値が<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2532</mn></msup></mrow><annotation encoding="application/x-tex">^{</annotation><mrow><msup><mn>53}</mn></msup></mrow></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53を</span></span></span></span></span></span></span></span></span></span></span></span>超えると精度が落ち、範囲外の値に対するクエリは正確にマッチしない可能性があります。</li>
-</ul></li>
-<li><p><strong>データの完全性</strong>：</p>
-<ul>
-<li>Milvusは指定されたキャスティングを超えるJSONキーの解析や変換を行いません。ソースデータに一貫性がない場合（例えば、<code translate="no">&quot;k&quot;</code> キーに文字列を格納する行と数値を格納する行がある）、インデックスが作成されない行があります。</li>
-</ul></li>
+<li><p><strong>データのロード後にインデックスを作成</strong>する：パフォーマンスを向上させるために、すでにデータを含むコレクションにインデックスを作成します。</p></li>
+<li><p><strong>説明的なインデックス名を使用する</strong>：フィールドと目的を明確に示す名前を選択する</p></li>
+<li><p><strong>インデックスのパフォーマンスを監視する</strong>：インデックス作成前と作成後のクエリパフォーマンスをチェックする</p></li>
+<li><p><strong>クエリのパターンを考慮する</strong>：頻繁にフィルタリングするフィールドにインデックスを作成する</p></li>
+</ul>
+<h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><a href="/docs/ja/index-explained.md">他のインデックスタイプについて</a>学ぶ</p></li>
+<li><p>JSON インデックスの高度なシナリオについては、<a href="/docs/ja/use-json-fields.md#Index-values-inside-the-JSON-field">JSON フィールドインデックスを</a>参照してください。</p></li>
 </ul>

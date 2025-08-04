@@ -31,7 +31,7 @@ summary: >-
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background: url('https://milvus.io/docs/v2.6.x/assets/hearing.png') no-repeat center center;
     background-size: contain;
     cursor: pointer;
     margin-left: 4px;
@@ -65,7 +65,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Données non structurées, embeddings et Milvus</span> </span></p>
 <p>Milvus propose trois modes de déploiement, couvrant un large éventail d'échelles de données, du prototypage local dans les blocs-notes Jupyter aux clusters Kubernetes massifs gérant des dizaines de milliards de vecteurs :</p>
 <ul>
-<li>Milvus Lite est une bibliothèque Python qui peut être facilement intégrée dans vos applications. En tant que version allégée de Milvus, elle est idéale pour le prototypage rapide dans les blocs-notes Jupyter ou l'exécution sur des dispositifs périphériques avec des ressources limitées. En <a href="/docs/fr/milvus_lite.md">savoir plus</a>.</li>
+<li>Milvus Lite est une bibliothèque Python qui peut être facilement intégrée dans vos applications. En tant que version légère de Milvus, elle est idéale pour le prototypage rapide dans les blocs-notes Jupyter ou l'exécution sur des dispositifs périphériques avec des ressources limitées. En <a href="/docs/fr/milvus_lite.md">savoir plus</a>.</li>
 <li>Milvus Standalone est un déploiement de serveur sur une seule machine, avec tous les composants regroupés dans une image Docker unique pour un déploiement pratique. <a href="/docs/fr/install_standalone-docker.md">En savoir plus</a>.</li>
 <li>Milvus Distributed peut être déployé sur des clusters Kubernetes, avec une architecture cloud-native conçue pour des scénarios à l'échelle du milliard, voire plus. Cette architecture garantit la redondance des composants critiques. <a href="/docs/fr/install_cluster-milvusoperator.md">En savoir plus</a>.</li>
 </ul>
@@ -108,7 +108,7 @@ summary: >-
 <p>L'architecture de système hautement découplée et native pour l'informatique en nuage de Milvus garantit que le système peut s'étendre continuellement au fur et à mesure que les données augmentent :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus_architecture_2_6.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Architecture système hautement découplée de Milvus</span> </span></p>
 <p>Milvus lui-même est entièrement sans état, de sorte qu'il peut être facilement mis à l'échelle à l'aide de Kubernetes ou de clouds publics. En outre, les composants de Milvus sont bien découplés, les trois tâches les plus critiques - recherche, insertion de données et indexation/compactage - étant conçues comme des processus facilement parallélisables, avec une logique complexe séparée. Cela garantit que le nœud de requête, le nœud de données et le nœud d'index correspondants peuvent évoluer de manière indépendante, optimisant ainsi les performances et la rentabilité.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Types de recherches prises en charge par Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
@@ -160,29 +160,33 @@ summary: >-
 <li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">SDK Java</a> (officiel)</li>
 <li>SDK<a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.j</a> s (JavaScript) (officiel)</li>
 <li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (contribué par Microsoft)</li>
+<li>SDK C++ (en cours de développement)</li>
+<li>SDK Rust (en cours de développement)</li>
 </ul>
 <h3 id="Advanced-Data-Types" class="common-anchor-header">Types de données avancés</h3><p>Outre les types de données primitifs, Milvus prend en charge divers types de données avancés et leurs métriques de distance respectives.</p>
 <ul>
 <li><a href="/docs/fr/sparse_vector.md">Vecteurs épars</a></li>
 <li><a href="/docs/fr/index-vector-fields.md">Vecteurs binaires</a></li>
-<li><a href="/docs/fr/use-json-fields.md">Prise en charge JSON</a></li>
+<li><a href="/docs/fr/use-json-fields.md">Support JSON</a></li>
 <li><a href="/docs/fr/array_data_type.md">Prise en charge des tableaux</a></li>
-<li><a href="/docs/fr/metric.md">Mesures de distance</a></li>
+<li>Texte (en cours de développement)</li>
+<li>Géolocalisation (en cours de développement)</li>
 </ul>
-<h3 id="Acceleration" class="common-anchor-header">Accélération</h3><ul>
-<li><p>Algorithmes de recherche Milvus prend en charge un ensemble d'algorithmes d'indexation et de recherche paramétrables. Pour plus de détails, voir <a href="/docs/fr/index.md">Index en mémoire</a>, <a href="/docs/fr/disk_index.md">Index sur disque</a> et <a href="/docs/fr/gpu_index.md">Index GPU</a>.</p></li>
-<li><p>Partitions et clés de partition Les partitions sont des sous-divisions d'une collection Milvus. Vous pouvez choisir un champ scalaire comme clé de partition pour améliorer les performances de recherche. Pour plus de détails, voir <a href="/docs/fr/manage-partitions.md">Gérer les partitions</a> et <a href="/docs/fr/use-partition-key.md">Utiliser la clé de partition</a>.</p></li>
-<li><p>Modèle de cohérence réglable La cohérence garantit que chaque nœud ou réplica Milvus a la même vue des données lorsqu'il écrit ou lit des données à un moment donné. Vous pouvez facilement régler le niveau de cohérence lorsque vous effectuez des recherches ANN dans Milvus. Pour plus de détails, voir <a href="/docs/fr/consistency.md">Cohérence</a>.</p></li>
-<li><p>Importation de données à haut débit Pour importer un grand volume de données dans Milvus au lieu de les insérer l'une après l'autre, envisagez d'utiliser nos outils d'importation de données à haut débit. Pour plus de détails, voir <a href="/docs/fr/prepare-source-data.md">Préparer les données sources</a> et <a href="/docs/fr/import-data.md">Importer les données</a>.</p></li>
-<li><p>Prise en charge de la multi-tenance Milvus a mis en œuvre de nombreuses fonctionnalités orientées vers les scénarios de multi-tenance, y compris la clé de partition, la clé de clustering, etc. Pour plus de détails, voir <a href="/docs/fr/multi_tenancy.md">Stratégies multi-tenant</a>.</p></li>
-</ul>
-<h3 id="Security-and-Authorization" class="common-anchor-header">Sécurité et autorisation</h3><ul>
-<li><p>Modèle de cohérence ajustable La cohérence garantit que chaque nœud ou réplica Milvus a la même vue des données lorsqu'il écrit ou lit des données à un moment donné. Vous pouvez facilement régler le niveau de cohérence lorsque vous effectuez des recherches ANN dans Milvus. Pour plus de détails, voir <a href="/docs/fr/consistency.md">Cohérence</a>.</p></li>
-<li><p>Isolation des données et contrôle des ressources Dans les scénarios de multi-location, l'isolation des données est l'exigence de base en matière de sécurité. Milvus met en œuvre plusieurs fonctionnalités pour résoudre vos problèmes de sécurité. Pour plus de détails, voir <a href="/docs/fr/resource_group.md">Gestion des groupes de ressources</a> et <a href="/docs/fr/clustering-compaction.md">Compaction du clustering</a>.</p></li>
+<h3 id="Why-Milvus" class="common-anchor-header">Pourquoi Milvus ?</h3><ul>
+<li><p><strong>Haute performance à l'échelle et haute disponibilité</strong></p>
+<p>Milvus présente une <a href="/docs/fr/architecture_overview.md">architecture distribuée</a> qui sépare le <a href="/docs/fr/data_processing.md#Data-query">calcul</a> et le <a href="/docs/fr/data_processing.md#Data-insertion">stockage</a>. Milvus peut évoluer horizontalement et s'adapter à divers modèles de trafic, en atteignant des performances optimales en augmentant indépendamment les nœuds de requêtes pour les charges de travail lourdes en lecture et les nœuds de données pour les charges de travail lourdes en écriture. Les microservices sans état sur K8s permettent une <a href="/docs/fr/coordinator_ha.md#Coordinator-HA">reprise rapide</a> en cas de défaillance, ce qui garantit une haute disponibilité. La prise en charge des <a href="/docs/fr/replica.md">répliques</a> améliore encore la tolérance aux pannes et le débit en chargeant des segments de données sur plusieurs nœuds d'interrogation. Voir le <a href="https://zilliz.com/vector-database-benchmark-tool">benchmark</a> pour une comparaison des performances.</p></li>
+<li><p><strong>Prise en charge de divers types d'index vectoriels et accélération matérielle</strong></p>
+<p>Milvus sépare le système et le moteur de recherche vectorielle principal, ce qui lui permet de prendre en charge tous les principaux types d'index vectoriels optimisés pour différents scénarios, notamment HNSW, IVF, FLAT (force brute), SCANN et DiskANN, avec des variations <a href="/docs/fr/index-explained.md">basées sur la quantification</a> et <a href="/docs/fr/mmap.md">mmap</a>. Milvus optimise la recherche vectorielle pour des fonctions avancées telles que le <a href="/docs/fr/boolean.md">filtrage des métadonnées</a> et la <a href="/docs/fr/range-search.md">recherche par plage</a>. En outre, Milvus met en œuvre l'accélération matérielle pour améliorer les performances de la recherche vectorielle et prend en charge l'indexation GPU, telle que <a href="/docs/fr/gpu-cagra.md">CAGRA</a> de NVIDIA.</p></li>
+<li><p><strong>Multi-tenance flexible et stockage à chaud/à froid</strong></p>
+<p>Milvus prend en charge la <a href="/docs/fr/multi_tenancy.md#Multi-tenancy-strategies">multi-tenance</a> grâce à l'isolation au niveau de la base de données, de la collection, de la partition ou de la clé de partition. Les stratégies flexibles permettent à un cluster unique de gérer des centaines, voire des millions de locataires, et garantissent également des performances de recherche optimisées et un contrôle d'accès flexible. Milvus améliore la rentabilité grâce au stockage à chaud/froid. Les données chaudes fréquemment consultées peuvent être stockées en mémoire ou sur des disques SSD pour de meilleures performances, tandis que les données froides moins consultées sont conservées sur un stockage plus lent et plus économique. Ce mécanisme permet de réduire considérablement les coûts tout en maintenant des performances élevées pour les tâches critiques.</p></li>
+<li><p><strong>Vecteur clairsemé pour la recherche en texte intégral et la recherche hybride</strong></p>
+<p>Outre la recherche sémantique par vecteur dense, Milvus prend également en charge en mode natif la <a href="/docs/fr/full-text-search.md">recherche plein texte</a> avec BM25 ainsi que l'intégration éparse apprise telle que SPLADE et BGE-M3. Les utilisateurs peuvent stocker les vecteurs épars et les vecteurs denses dans la même collection et définir des fonctions pour classer les résultats de plusieurs requêtes de recherche. Voir des exemples de <a href="/docs/fr/full_text_search_with_milvus.md">recherche hybride avec recherche sémantique + recherche en texte intégral</a>.</p></li>
+<li><p><strong>Sécurité des données et contrôle d'accès à grain fin</strong></p>
+<p>Milvus garantit la sécurité des données en mettant en œuvre l'<a href="/docs/fr/authenticate.md">authentification obligatoire des utilisateurs</a>, le <a href="/docs/fr/tls.md">cryptage TLS</a> et le <a href="/docs/fr/rbac.md">contrôle d'accès basé sur les rôles (RBAC)</a>. L'authentification des utilisateurs garantit que seuls les utilisateurs autorisés disposant d'informations d'identification valides peuvent accéder à la base de données, tandis que le cryptage TLS sécurise toutes les communications au sein du réseau. En outre, le RBAC permet un contrôle d'accès précis en attribuant des autorisations spécifiques aux utilisateurs en fonction de leur rôle. Ces fonctionnalités font de Milvus un choix robuste et sécurisé pour les applications d'entreprise, protégeant les données sensibles contre les accès non autorisés et les violations potentielles.</p></li>
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">Intégrations AI</h3><ul>
 <li><p>Intégrations de modèles d'intégration Les modèles d'intégration convertissent les données non structurées en leur représentation numérique dans un espace de données à haute dimension afin que vous puissiez les stocker dans Milvus. Actuellement, PyMilvus, le SDK Python, intègre plusieurs modèles d'intégration afin que vous puissiez rapidement préparer vos données en intégrations vectorielles. Pour plus de détails, voir <a href="/docs/fr/embeddings.md">Vue d'ensemble de l'intégration</a>.</p></li>
-<li><p>Intégrations de modèles de reclassement Dans le domaine de la recherche d'informations et de l'IA générative, un reclasseur est un outil essentiel qui optimise l'ordre des résultats des recherches initiales. PyMilvus intègre également plusieurs modèles de reclassement afin d'optimiser l'ordre des résultats renvoyés par les recherches initiales. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/rerankers-overview.md">Vue d'ensemble des modèles de reclassement</a>.</p></li>
+<li><p>Intégrations de modèles de reranking Dans le domaine de la recherche d'informations et de l'IA générative, un reranker est un outil essentiel qui optimise l'ordre des résultats des recherches initiales. PyMilvus intègre également plusieurs modèles de reclassement afin d'optimiser l'ordre des résultats renvoyés par les recherches initiales. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/rerankers-overview.md">Vue d'ensemble des modèles de reclassement</a>.</p></li>
 <li><p>LangChain et autres intégrations d'outils d'IA À l'ère de la GenAI, les outils tels que LangChain suscitent beaucoup d'attention de la part des développeurs d'applications. En tant que composant de base, Milvus sert généralement de magasin de vecteurs dans ces outils. Pour savoir comment intégrer Milvus dans vos outils d'IA préférés, reportez-vous à nos <a href="/docs/fr/integrate_with_openai.md">intégrations</a> et <a href="/docs/fr/build-rag-with-milvus.md">tutoriels</a>.</p></li>
 </ul>
 <h3 id="Tools-and-Ecosystem" class="common-anchor-header">Outils et écosystème</h3><ul>

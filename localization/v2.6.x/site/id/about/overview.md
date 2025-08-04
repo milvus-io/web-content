@@ -31,7 +31,7 @@ summary: >-
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background: url('https://milvus.io/docs/v2.6.x/assets/hearing.png') no-repeat center center;
     background-size: contain;
     cursor: pointer;
     margin-left: 4px;
@@ -108,7 +108,7 @@ summary: >-
 <p>Arsitektur sistem Milvus yang cloud-native dan sangat terpisah memastikan bahwa sistem dapat terus berkembang seiring dengan pertumbuhan data:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus_architecture_2_6.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Arsitektur sistem yang sangat terpisah dari Milvus</span> </span></p>
 <p>Milvus sendiri sepenuhnya tidak memiliki status sehingga dapat dengan mudah diskalakan dengan bantuan Kubernetes atau cloud publik. Selain itu, komponen-komponen Milvus dipisahkan dengan baik, dengan tiga tugas yang paling penting-pencarian, penyisipan data, dan pengindeksan/pemadatan-dirancang sebagai proses yang mudah diparalelkan, dengan logika yang rumit yang dipisahkan. Hal ini memastikan bahwa simpul kueri, simpul data, dan simpul indeks yang sesuai dapat menskalakan naik dan turun secara independen, mengoptimalkan kinerja dan efisiensi biaya.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Jenis Pencarian yang Didukung oleh Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
@@ -160,6 +160,8 @@ summary: >-
 <li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">Java SDK</a> (resmi)</li>
 <li><a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.js</a> (JavaScript) SDK (resmi)</li>
 <li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (dikontribusikan oleh Microsoft)</li>
+<li>C++ SDK (dalam pengembangan)</li>
+<li>Rust SDK (dalam pengembangan)</li>
 </ul>
 <h3 id="Advanced-Data-Types" class="common-anchor-header">Tipe Data Tingkat Lanjut</h3><p>Selain tipe data primitif, Milvus mendukung berbagai tipe data tingkat lanjut dan metrik jarak yang dapat diterapkan.</p>
 <ul>
@@ -167,21 +169,23 @@ summary: >-
 <li><a href="/docs/id/index-vector-fields.md">Vektor Biner</a></li>
 <li><a href="/docs/id/use-json-fields.md">Dukungan JSON</a></li>
 <li><a href="/docs/id/array_data_type.md">Dukungan Larik</a></li>
-<li><a href="/docs/id/metric.md">Metrik Jarak</a></li>
+<li>Teks (dalam pengembangan)</li>
+<li>Geolokasi (dalam pengembangan)</li>
 </ul>
-<h3 id="Acceleration" class="common-anchor-header">Akselerasi</h3><ul>
-<li><p>Algoritme Pencarian Milvus mendukung serangkaian pengindeksan yang dapat disesuaikan dan algoritme pencarian. Untuk detailnya, lihat <a href="/docs/id/index.md">Indeks Dalam Memori</a>, <a href="/docs/id/disk_index.md">Indeks Pada Disk</a>, dan <a href="/docs/id/gpu_index.md">Indeks GPU</a>.</p></li>
-<li><p>Partisi dan Kunci Partisi Partisi adalah sub-divisi dari koleksi Milvus. Anda dapat memilih bidang skalar sebagai kunci partisi untuk performa pencarian yang lebih baik. Untuk detailnya, lihat <a href="/docs/id/manage-partitions.md">Mengelola Partisi</a> dan <a href="/docs/id/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p></li>
-<li><p>Model Konsistensi yang Dapat Disetel Konsistensi memastikan setiap simpul atau replika Milvus memiliki tampilan data yang sama ketika menulis atau membaca data pada waktu tertentu. Anda dapat dengan mudah menyetel tingkat konsistensi ketika melakukan pencarian ANN di Milvus. Untuk detailnya, lihat <a href="/docs/id/consistency.md">Konsistensi</a>.</p></li>
-<li><p>Impor Data Throughput Tinggi Untuk mengimpor data dalam jumlah besar ke dalam Milvus daripada memasukkannya satu per satu, pertimbangkan untuk menggunakan alat impor data throughput tinggi. Untuk detailnya, lihat <a href="/docs/id/prepare-source-data.md">Menyiapkan Data Sumber</a> dan <a href="/docs/id/import-data.md">Mengimpor Data</a>.</p></li>
-<li><p>Dukungan Multi-tenancy Milvus telah mengimplementasikan banyak fitur yang berorientasi pada skenario multi-tenancy, termasuk Partition Key, Clustering Key, dan banyak lagi. Untuk detailnya, lihat <a href="/docs/id/multi_tenancy.md">Strategi Multi-tenancy</a>.</p></li>
-</ul>
-<h3 id="Security-and-Authorization" class="common-anchor-header">Keamanan dan Otorisasi</h3><ul>
-<li><p>Model Konsistensi yang Dapat Disetel Konsistensi memastikan setiap node atau replika Milvus memiliki tampilan data yang sama saat menulis atau membaca data pada waktu tertentu. Anda dapat dengan mudah menyetel tingkat konsistensi saat melakukan pencarian ANN di Milvus. Untuk detailnya, lihat <a href="/docs/id/consistency.md">Konsistensi</a>.</p></li>
-<li><p>Isolasi Data dan Kontrol Sumber Daya Untuk skenario multi-tenancy, isolasi data adalah persyaratan keamanan dasar. Milvus mengimplementasikan beberapa fitur untuk menyelesaikan masalah keamanan Anda. Untuk detailnya, lihat <a href="/docs/id/resource_group.md">Mengelola Grup Sumber Daya</a> dan <a href="/docs/id/clustering-compaction.md">Pemadatan Clustering</a>.</p></li>
+<h3 id="Why-Milvus" class="common-anchor-header">Mengapa Milvus?</h3><ul>
+<li><p><strong>Performa Tinggi dalam Skala Besar dan Ketersediaan Tinggi</strong></p>
+<p>Milvus memiliki <a href="/docs/id/architecture_overview.md">arsitektur terdistribusi</a> yang memisahkan <a href="/docs/id/data_processing.md#Data-query">komputasi</a> dan <a href="/docs/id/data_processing.md#Data-insertion">penyimpanan</a>. Milvus dapat mengukur dan beradaptasi secara horizontal dengan pola lalu lintas yang beragam, mencapai kinerja optimal dengan meningkatkan node kueri secara independen untuk beban kerja yang berat untuk membaca dan node data untuk beban kerja yang berat untuk menulis. Layanan mikro tanpa kewarganegaraan pada K8 memungkinkan <a href="/docs/id/coordinator_ha.md#Coordinator-HA">pemulihan cepat</a> dari kegagalan, memastikan ketersediaan yang tinggi. Dukungan untuk <a href="/docs/id/replica.md">replika</a> semakin meningkatkan toleransi kesalahan dan throughput dengan memuat segmen data pada beberapa node kueri. Lihat <a href="https://zilliz.com/vector-database-benchmark-tool">tolok ukur</a> untuk perbandingan kinerja.</p></li>
+<li><p><strong>Dukungan untuk Berbagai Jenis Indeks Vektor dan Akselerasi Perangkat Keras</strong></p>
+<p>Milvus memisahkan sistem dan mesin pencari vektor inti, sehingga dapat mendukung semua jenis indeks vektor utama yang dioptimalkan untuk berbagai skenario, termasuk HNSW, IVF, FLAT (brute-force), SCANN, dan DiskANN, dengan variasi <a href="/docs/id/index-explained.md">berbasis kuantisasi</a> dan <a href="/docs/id/mmap.md">mmap</a>. Milvus mengoptimalkan pencarian vektor untuk fitur-fitur canggih seperti <a href="/docs/id/boolean.md">pemfilteran metadata</a> dan <a href="/docs/id/range-search.md">pencarian rentang</a>. Selain itu, Milvus mengimplementasikan akselerasi perangkat keras untuk meningkatkan kinerja pencarian vektor dan mendukung pengindeksan GPU, seperti <a href="/docs/id/gpu-cagra.md">CAGRA</a> dari NVIDIA.</p></li>
+<li><p><strong>Multi-tenancy yang Fleksibel dan Penyimpanan Panas/Dingin</strong></p>
+<p>Milvus mendukung <a href="/docs/id/multi_tenancy.md#Multi-tenancy-strategies">multi-tenancy</a> melalui isolasi pada tingkat database, koleksi, partisi, atau kunci partisi. Strategi yang fleksibel memungkinkan satu cluster untuk menangani ratusan hingga jutaan penyewa, juga memastikan kinerja pencarian yang dioptimalkan dan kontrol akses yang fleksibel. Milvus meningkatkan efektivitas biaya dengan penyimpanan panas/dingin. Data panas yang sering diakses dapat disimpan dalam memori atau SSD untuk performa yang lebih baik, sementara data dingin yang jarang diakses disimpan pada penyimpanan yang lebih lambat dan hemat biaya. Mekanisme ini dapat mengurangi biaya secara signifikan sekaligus mempertahankan kinerja tinggi untuk tugas-tugas penting.</p></li>
+<li><p><strong>Vektor Jarang untuk Pencarian Teks Lengkap dan Pencarian Hibrida</strong></p>
+<p>Selain pencarian semantik melalui vektor padat, Milvus juga secara native mendukung <a href="/docs/id/full-text-search.md">pencarian teks lengkap</a> dengan BM25 serta penyematan jarang yang dipelajari seperti SPLADE dan BGE-M3. Pengguna dapat menyimpan vektor jarang dan vektor padat dalam koleksi yang sama, dan mendefinisikan fungsi untuk memberi peringkat ulang hasil dari beberapa permintaan pencarian. Lihat contoh <a href="/docs/id/full_text_search_with_milvus.md">Pencarian Hibrida dengan pencarian semantik + pencarian teks lengkap</a>.</p></li>
+<li><p><strong>Keamanan Data dan Kontrol Akses yang Baik</strong></p>
+<p>Milvus memastikan keamanan data dengan menerapkan <a href="/docs/id/authenticate.md">otentikasi pengguna wajib</a>, <a href="/docs/id/tls.md">enkripsi TLS</a>, dan <a href="/docs/id/rbac.md">Kontrol Akses Berbasis Peran (RBAC)</a>. Otentikasi pengguna memastikan bahwa hanya pengguna yang berwenang dengan kredensial yang valid yang dapat mengakses basis data, sementara enkripsi TLS mengamankan semua komunikasi dalam jaringan. Selain itu, RBAC memungkinkan kontrol akses yang lebih baik dengan memberikan izin khusus kepada pengguna berdasarkan peran mereka. Fitur-fitur ini menjadikan Milvus pilihan yang kuat dan aman untuk aplikasi perusahaan, melindungi data sensitif dari akses yang tidak sah dan potensi pelanggaran.</p></li>
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">Integrasi AI</h3><ul>
-<li><p>Integrasi Model Penyematan Model Penyematan mengubah data yang tidak terstruktur menjadi representasi numerik dalam ruang data berdimensi tinggi sehingga Anda dapat menyimpannya di Milvus. Saat ini, PyMilvus, Python SDK, mengintegrasikan beberapa model embedding sehingga Anda dapat dengan cepat menyiapkan data Anda ke dalam embedding vektor. Untuk detailnya, lihat <a href="/docs/id/embeddings.md">Ikhtisar Penyematan</a>.</p></li>
+<li><p>Integrasi Model Embedding Model Embedding mengubah data yang tidak terstruktur menjadi representasi numerik dalam ruang data berdimensi tinggi sehingga Anda dapat menyimpannya di Milvus. Saat ini, PyMilvus, Python SDK, mengintegrasikan beberapa model embedding sehingga Anda dapat dengan cepat menyiapkan data Anda ke dalam embedding vektor. Untuk detailnya, lihat <a href="/docs/id/embeddings.md">Ikhtisar Penyematan</a>.</p></li>
 <li><p>Integrasi Model Perangkingan Dalam ranah pencarian informasi dan AI generatif, perangking ulang adalah alat penting yang mengoptimalkan urutan hasil dari pencarian awal. PyMilvus juga mengintegrasikan beberapa model perangkingan ulang untuk mengoptimalkan urutan hasil yang dikembalikan dari pencarian awal. Untuk detailnya, lihat <a href="/docs/id/rerankers-overview.md">Ikhtisar Perangking</a>.</p></li>
 <li><p>LangChain dan Integrasi Alat AI lainnya Di era GenAI, alat, seperti LangChain, mendapatkan banyak perhatian dari para pengembang aplikasi. Sebagai komponen inti, Milvus biasanya berfungsi sebagai penyimpan vektor dalam alat tersebut. Untuk mempelajari cara mengintegrasikan Milvus ke dalam alat AI favorit Anda, lihat <a href="/docs/id/integrate_with_openai.md">Integrasi</a> dan <a href="/docs/id/build-rag-with-milvus.md">Tutorial</a> kami.</p></li>
 </ul>
@@ -191,6 +195,6 @@ summary: >-
 <li><p>Integrasi Promethus &amp; Grafana Prometheus adalah perangkat pemantauan dan peringatan sistem sumber terbuka untuk Kubernetes. Grafana adalah tumpukan visualisasi sumber terbuka yang dapat terhubung dengan semua sumber data. Anda dapat menggunakan Promethus &amp; Grafana sebagai penyedia layanan pemantauan untuk memantau kinerja Milvus yang didistribusikan secara visual. Untuk detailnya, lihat Menerapkan <a href="/docs/id/monitor.md">Layanan Pemantauan</a>.</p></li>
 <li><p>Cadangan Milvus Cadangan Milvus adalah alat yang memungkinkan pengguna untuk mencadangkan dan memulihkan data Milvus. Alat ini menyediakan CLI dan API untuk menyesuaikan diri dengan skenario aplikasi yang berbeda. Untuk detailnya, lihat <a href="/docs/id/milvus_backup_overview.md">Cadangan Milvus</a>.</p></li>
 <li><p>Milvus Capture Data Change (CDC) Milvus-CDC dapat menangkap dan menyinkronkan data tambahan dalam instance Milvus dan memastikan keandalan data bisnis dengan mentransfernya dengan mulus antara instance sumber dan target, sehingga memudahkan pencadangan tambahan dan pemulihan bencana. Untuk detailnya, lihat <a href="/docs/id/milvus-cdc-overview.md">Milvus CDC</a>.</p></li>
-<li><p>Konektor Milvus Milvus telah merencanakan satu set konektor bagi Anda untuk mengintegrasikan Milvus dengan alat pihak ketiga, seperti Apache Spark. Saat ini, Anda dapat menggunakan Konektor Spark kami untuk memasukkan data Milvus Anda ke Apache Spark untuk pemrosesan pembelajaran mesin. Untuk detailnya, lihat <a href="/docs/id/integrate_with_spark.md">Konektor Spark-Milvus</a>.</p></li>
+<li><p>Konektor Milvus Milvus telah merencanakan seperangkat konektor bagi Anda untuk mengintegrasikan Milvus dengan alat pihak ketiga, seperti Apache Spark. Saat ini, Anda dapat menggunakan Konektor Spark kami untuk memasukkan data Milvus Anda ke Apache Spark untuk pemrosesan pembelajaran mesin. Untuk detailnya, lihat <a href="/docs/id/integrate_with_spark.md">Konektor Spark-Milvus</a>.</p></li>
 <li><p>Layanan Transmisi Vektor (VTS) Milvus menyediakan seperangkat alat bagi Anda untuk mentransfer data Anda antara instance Milvus dan sekumpulan sumber data, termasuk klaster Zilliz, Elasticsearch, Postgres (PgVector), dan instance Milvus lainnya. Untuk detailnya, lihat <a href="https://github.com/zilliztech/vts">VTS</a>.</p></li>
 </ul>

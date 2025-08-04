@@ -67,7 +67,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">임베딩 모델 준비하기</h3><p>클라이언트를 초기화하여 임베딩 모델을 준비합니다. 실리콘플로우에서는 OpenAI 스타일의 API를 지원하며, 약간의 조정을 통해 동일한 API를 사용하여 임베딩 모델과 LLM을 호출할 수 있습니다.</p>
+<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">임베딩 모델 준비</h3><p>클라이언트를 초기화하여 임베딩 모델을 준비합니다. 실리콘플로우에서는 OpenAI 스타일의 API를 지원하며, 약간의 조정을 통해 동일한 API를 사용하여 임베딩 모델과 LLM을 호출할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 siliconflow_client = OpenAI(
@@ -130,7 +130,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>텍스트 줄을 반복하여 임베딩을 만든 다음 데이터를 Milvus에 삽입합니다.</p>

@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Hugging Face <a href="https://huggingface.co/docs/text-embeddings-inference/en/index">Text Embeddings Inference (TEI)</a> ist ein leistungsstarker Inferenzserver, der speziell für Texteinbettungsmodelle entwickelt wurde. Diese Anleitung erklärt, wie man Hugging Face TEI mit Milvus zur effizienten Erzeugung von Texteinbettungen verwendet.</p>
+    </button></h1><p>Hugging Face <a href="https://huggingface.co/docs/text-embeddings-inference/en/index">Text Embeddings Inference (TEI)</a> ist ein leistungsstarker Inferenzserver, der speziell für Texteinbettungsmodelle entwickelt wurde. Dieser Leitfaden erklärt, wie man Hugging Face TEI mit Milvus zur effizienten Erzeugung von Texteinbettungen verwendet.</p>
 <p>TEI funktioniert mit vielen Texteinbettungsmodellen aus dem Hugging Face Hub, darunter:</p>
 <ul>
 <li><p>BAAI/bge-*-Reihe</p></li>
@@ -53,7 +53,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Bevor Sie Milvus mit der TEI-Funktion konfigurieren können, müssen Sie einen laufenden TEI-Dienst haben. Milvus unterstützt zwei Ansätze für den TEI-Einsatz:</p>
 <h3 id="Standard-deployment-external" class="common-anchor-header">Standard-Einsatz (extern)</h3><p>Sie können TEI als eigenständigen Dienst mit den offiziellen Methoden von Hugging Face bereitstellen. Dieser Ansatz bietet Ihnen maximale Flexibilität und Kontrolle über Ihren TEI-Dienst.</p>
 <p>Detaillierte Anweisungen zur Bereitstellung von TEI mit Docker oder anderen Methoden finden Sie in der <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour#deploy">offiziellen Dokumentation von Hugging Face Text Embeddings Inference</a>.</p>
-<p>Notieren Sie sich nach der Bereitstellung den Endpunkt Ihres TEI-Dienstes (z. B. <code translate="no">http://localhost:8080</code>), da Sie ihn für die <a href="/docs/de/hugging-face-tei.md#Use-embedding-function-">Verwendung der TEI-Funktion in Milvus</a> benötigen.</p>
+<p>Notieren Sie sich nach der Bereitstellung den Endpunkt Ihres TEI-Dienstes (z. B. <code translate="no">http://localhost:8080</code>), da Sie ihn bei der <a href="/docs/de/hugging-face-tei.md#Use-embedding-function-">Verwendung der TEI-Funktion in Milvus</a> benötigen.</p>
 <h3 id="Milvus-Helm-Chart-deployment-integrated" class="common-anchor-header">Milvus Helm Chart-Bereitstellung (integriert)</h3><p>Für Kubernetes-Umgebungen bietet Milvus eine integrierte Bereitstellungsoption über sein Helm Chart. Dies vereinfacht den Prozess, indem TEI zusammen mit Milvus bereitgestellt und konfiguriert wird.</p>
 <p>So aktivieren Sie TEI in Ihrer Milvus Helm-Bereitstellung:</p>
 <ol>
@@ -119,7 +119,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
-      <span class="hljs-attr">openai:</span>
+      <span class="hljs-attr">tei:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">tei_key</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enabled by default. no action required.</span>
 <button class="copy-code-btn"></button></code></pre></li>
@@ -226,7 +226,7 @@ schema.add_function(text_embedding_function)
      <td><p><code translate="no">prompt_name</code></p></td>
      <td><p>Nein</p></td>
      <td><p>(Erweitert) Gibt einen Schlüssel im Prompt-Wörterbuch der Satzumwandler-Konfiguration an. Wird für bestimmte Modelle verwendet, die bestimmte Prompt-Formate erfordern. Die TEI-Unterstützung kann eingeschränkt sein und hängt von der Konfiguration des Modells auf dem Hub ab.</p></td>
-     <td><p>"dein_prompt_schlüssel"</p></td>
+     <td><p>"ihr_prompt_schlüssel"</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">ingestion_prompt</code></p></td>

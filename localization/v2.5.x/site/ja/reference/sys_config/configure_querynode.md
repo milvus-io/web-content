@@ -250,7 +250,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        中間インデックスの並列構築とCPU数の比率      </td>
+      <td>        中間インデックス構築の並列処理とCPU数の比率      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -308,7 +308,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        Knowhere 強い一貫性スコア計算ロジックを有効にする      </td>
+      <td>        Knowhere の強い一貫性スコア計算ロジックを有効にする      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -635,7 +635,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
     <tr>
       <td>
         <li>メモリ・マッピング(mmap)を有効にして、増大する生データの処理を最適化する。 </li>      
-        <li>この機能を有効にすると、新しく追加されたり変更されたりしたデータに関連するメモリのオーバーヘッドが大幅に削減されます。 </li>      
+        <li>この機能を有効にすると、新しく追加されたり変更されたりしたデータに関連するメモリ・オーバーヘッドが大幅に削減されます。 </li>      
         <li>しかし、この最適化は、影響を受けるデータ・セグメントに対するクエリ・レイテンシをわずかに減少させるという代償を伴うかもしれません。</li>      </td>
       <td>偽</td>
     </tr>
@@ -694,7 +694,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        mmap チャンクマネージャーで使用するディスクのパーセンテージ      </td>
+      <td>        mmap チャンクマネージャーで使用されるディスクのパーセンテージ      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -1112,7 +1112,7 @@ summary: MilvusのqueryNodeの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        デリゲータ・レベル・ゼロ削除フォワード・ポリシー、可能なオプション["FilterByBF", "RemoteLoad"] デリゲータ・レベル・ゼロ削除フォワード・ポリシー。      </td>
+      <td>        デリゲータ・レベル・ゼロ削除フォワード・ポリシー、可能なオプション["FilterByBF", "RemoteLoad"]。      </td>
       <td>FilterByBF</td>
     </tr>
   </tbody>

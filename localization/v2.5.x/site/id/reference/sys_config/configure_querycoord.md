@@ -4,7 +4,7 @@ related_key: configure
 group: system_configuration.md
 summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
 ---
-<h1 id="queryCoord-related-Configurations" class="common-anchor-header">queryCoord-related Configurations<button data-href="#queryCoord-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="queryCoord-related-Configurations" class="common-anchor-header">Konfigurasi terkait queryCoord<button data-href="#queryCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of queryCoord, used to manage topology and load balancing for the query nodes, and handoff from growing segments to sealed segments.</p>
+    </button></h1><p>Konfigurasi terkait queryCoord, digunakan untuk mengelola topologi dan penyeimbangan beban untuk node kueri, dan handoff dari segmen yang sedang tumbuh ke segmen yang disegel.</p>
 <h2 id="queryCoordautoHandoff" class="common-anchor-header"><code translate="no">queryCoord.autoHandoff</code><button data-href="#queryCoordautoHandoff" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,16 +38,16 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.autoHandoff">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Switch value to control if to automatically replace a growing segment with the corresponding indexed sealed segment when the growing segment reaches the sealing threshold.</li>      
-        <li>If this parameter is set false, Milvus simply searches the growing segments with brute force.</li>      </td>
-      <td>true</td>
+        <li>Nilai sakelar untuk mengontrol apakah akan secara otomatis mengganti segmen yang sedang tumbuh dengan segmen tersegel terindeks yang sesuai saat segmen yang sedang tumbuh mencapai ambang batas penyegelan.</li>      
+        <li>Jika parameter ini disetel salah, Milvus hanya akan mencari segmen yang sedang tumbuh dengan brute force.</li>      </td>
+      <td>benar</td>
     </tr>
   </tbody>
 </table>
@@ -69,13 +69,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.autoBalance">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Switch value to control if to automatically balance the memory usage among query nodes by distributing segment loading and releasing operations evenly.      </td>
+      <td>        Ganti nilai untuk mengontrol apakah akan menyeimbangkan penggunaan memori secara otomatis di antara node kueri dengan mendistribusikan operasi pemuatan dan pelepasan segmen secara merata.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -98,14 +98,14 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.autoBalanceChannel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable auto balance channel      </td>
-      <td>true</td>
+      <td>        Mengaktifkan saluran keseimbangan otomatis      </td>
+      <td>benar</td>
     </tr>
   </tbody>
 </table>
@@ -127,14 +127,14 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.balancer">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        auto balancer used for segments on queryNodes      </td>
-      <td>ScoreBasedBalancer</td>
+      <td>        penyeimbang otomatis yang digunakan untuk segmen pada queryNode      </td>
+      <td>Penyeimbang Berbasis Skor</td>
     </tr>
   </tbody>
 </table>
@@ -156,13 +156,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.globalRowCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the weight used when balancing segments among queryNodes      </td>
+      <td>        bobot yang digunakan saat menyeimbangkan segmen di antara queryNodes      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -185,13 +185,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.scoreUnbalanceTolerationFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the least value for unbalanced extent between from and to nodes when doing balance      </td>
+      <td>        nilai terkecil untuk tingkat ketidakseimbangan antara dari dan ke node saat melakukan keseimbangan      </td>
       <td>0.05</td>
     </tr>
   </tbody>
@@ -214,13 +214,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.reverseUnBalanceTolerationFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the largest value for unbalanced extent between from and to nodes after doing balance      </td>
+      <td>        nilai terbesar untuk ketidakseimbangan antara dari dan ke node setelah melakukan penyeimbangan      </td>
       <td>1.3</td>
     </tr>
   </tbody>
@@ -243,13 +243,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.overloadedMemoryThresholdPercentage">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Keterangan</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The threshold of memory usage (in percentage) in a query node to trigger the sealed segment balancing.      </td>
+      <td>        Ambang batas penggunaan memori (dalam persentase) dalam node kueri untuk memicu penyeimbangan segmen tertutup.      </td>
       <td>90</td>
     </tr>
   </tbody>
@@ -272,13 +272,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.balanceIntervalSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval at which query coord balances the memory usage among query nodes.      </td>
+      <td>        Interval saat koordinat kueri menyeimbangkan penggunaan memori di antara node kueri.      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -301,13 +301,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.memoryUsageMaxDifferencePercentage">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The threshold of memory usage difference (in percentage) between any two query nodes to trigger the sealed segment balancing.      </td>
+      <td>        Ambang batas perbedaan penggunaan memori (dalam persentase) antara dua node kueri untuk memicu penyeimbangan segmen tertutup.      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -330,13 +330,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.rowCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the row count weight used when balancing segments among queryNodes      </td>
+      <td>        bobot jumlah baris yang digunakan saat menyeimbangkan segmen di antara queryNode      </td>
       <td>0.4</td>
     </tr>
   </tbody>
@@ -359,13 +359,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.segmentCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the segment count weight used when balancing segments among queryNodes      </td>
+      <td>        bobot jumlah segmen yang digunakan saat menyeimbangkan segmen di antara queryNode      </td>
       <td>0.4</td>
     </tr>
   </tbody>
@@ -388,13 +388,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.globalSegmentCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the segment count weight used when balancing segments among queryNodes      </td>
+      <td>        bobot jumlah segmen yang digunakan saat menyeimbangkan segmen di antara queryNode      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -417,15 +417,15 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.collectionChannelCountFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>the channel count weight used when balancing channels among queryNodes, </li>      
-        <li>        A higher value reduces the likelihood of assigning channels from the same collection to the same QueryNode. Set to 1 to disable this feature.</li>      </td>
+        <li>bobot jumlah saluran yang digunakan saat menyeimbangkan saluran di antara queryNode, </li>      
+        <li>        Nilai yang lebih tinggi mengurangi kemungkinan menetapkan saluran dari koleksi yang sama ke QueryNode yang sama. Atur ke 1 untuk menonaktifkan fitur ini.</li>      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -448,13 +448,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.segmentCountMaxSteps">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segment count based plan generator max steps      </td>
+      <td>        langkah maksimum generator rencana berbasis jumlah segmen      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -477,13 +477,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.rowCountMaxSteps">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segment count based plan generator max steps      </td>
+      <td>        langkah maksimum generator rencana berdasarkan jumlah segmen      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -506,13 +506,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.randomMaxSteps">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segment count based plan generator max steps      </td>
+      <td>        langkah maksimum generator rencana berdasarkan jumlah segmen      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -535,13 +535,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.growingRowCountWeight">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the memory weight of growing segment row count      </td>
+      <td>        bobot memori dari jumlah baris segmen yang bertambah      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -564,13 +564,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.delegatorMemoryOverloadFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the factor of delegator overloaded memory      </td>
+      <td>        faktor memori delegator yang kelebihan beban     </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -593,13 +593,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.balanceCostThreshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the threshold of balance cost, if the difference of cluster's cost after executing the balance plan is less than this value, the plan will not be executed      </td>
+      <td>        ambang batas biaya keseimbangan, jika selisih biaya cluster setelah mengeksekusi rencana keseimbangan kurang dari nilai ini, rencana tidak akan dieksekusi      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -622,13 +622,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.channelTaskTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        1 minute      </td>
+      <td>        1 menit     </td>
       <td>60000</td>
     </tr>
   </tbody>
@@ -651,13 +651,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.segmentTaskTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        2 minute      </td>
+      <td>        2 menit     </td>
       <td>120000</td>
     </tr>
   </tbody>
@@ -680,13 +680,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.heartbeatAvailableInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        10s, Only QueryNodes which fetched heartbeats within the duration are available      </td>
+      <td>        10s, Hanya QueryNode yang mengambil detak jantung dalam durasi tersebut yang tersedia      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -709,13 +709,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.distRequestTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the request timeout for querycoord fetching data distribution from querynodes, in milliseconds      </td>
+      <td>        batas waktu permintaan untuk querycoord yang mengambil distribusi data dari querynode, dalam milidetik      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -738,13 +738,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.heatbeatWarningLag">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the lag value for querycoord report warning when last heatbeat is too old, in milliseconds      </td>
+      <td>        nilai jeda untuk peringatan laporan querycoord ketika heatbeat terakhir terlalu lama, dalam milidetik      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -767,13 +767,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.checkHealthInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        3s, the interval when query coord try to check health of query node      </td>
+      <td>        3s, interval ketika koordin kueri mencoba memeriksa kesehatan simpul kueri     </td>
       <td>3000</td>
     </tr>
   </tbody>
@@ -796,13 +796,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.checkHealthRPCTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        100ms, the timeout of check health rpc to query node      </td>
+      <td>        100ms, batas waktu untuk memeriksa kesehatan rpc ke node kueri     </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -825,13 +825,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.brokerTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        5000ms, querycoord broker rpc timeout      </td>
+      <td>        5000ms, batas waktu rpc broker querycoord      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -854,13 +854,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.collectionRecoverTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if collection recover times reach the limit during loading state, release it      </td>
+      <td>        jika waktu pemulihan koleksi mencapai batas selama status pemuatan, lepaskan      </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -883,13 +883,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.observerTaskParallel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the parallel observer dispatcher task number      </td>
+      <td>        nomor tugas dispatcher pengamat paralel      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -912,13 +912,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.checkAutoBalanceConfigInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval of check auto balance config      </td>
+      <td>        interval pemeriksaan konfigurasi keseimbangan otomatis      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -941,13 +941,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.checkNodeSessionInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval(in seconds) of check querynode cluster session      </td>
+      <td>        interval (dalam detik) pemeriksaan sesi klaster kueri simpul      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -970,13 +970,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. force stop node without graceful stop      </td>
+      <td>        detik. paksa hentikan simpul tanpa penghentian secara halus     </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -999,14 +999,14 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.enableStoppingBalance">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether enable stopping balance      </td>
-      <td>true</td>
+      <td>        apakah mengaktifkan penghentian saldo     </td>
+      <td>benar</td>
     </tr>
   </tbody>
 </table>
@@ -1028,13 +1028,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.channelExclusiveNodeFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the least node number for enable channel's exclusive mode      </td>
+      <td>        nomor simpul paling sedikit untuk mengaktifkan mode eksklusif saluran      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -1057,13 +1057,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.collectionObserverInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval of collection observer      </td>
+      <td>        interval pengamat pengumpulan      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -1086,13 +1086,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.checkExecutedFlagInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the interval of check executed flag to force to pull dist      </td>
+      <td>        interval pemeriksaan yang dieksekusi flag untuk memaksa menarik dist    </td>
       <td>100</td>
     </tr>
   </tbody>
@@ -1115,13 +1115,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.updateCollectionLoadStatusInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        5m, max interval of updating collection loaded status for check health      </td>
+      <td>        5m, interval maksimum untuk memperbarui status koleksi yang dimuat untuk memeriksa kesehatan      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -1144,13 +1144,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.cleanExcludeSegmentInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the time duration of clean pipeline exclude segment which used for filter invalid data, in seconds      </td>
+      <td>        durasi waktu untuk membersihkan pipa mengecualikan segmen yang digunakan untuk menyaring data yang tidak valid, dalam detik     </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1173,13 +1173,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of queryCoord. If not specified, use the first unicastable address      </td>
+      <td>        Alamat TCP/IP dari queryCoord. Jika tidak ditentukan, gunakan alamat pertama yang dapat di-unicast      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1202,13 +1202,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of queryCoord      </td>
+      <td>        Port TCP dari queryCoord      </td>
       <td>19531</td>
     </tr>
   </tbody>
@@ -1231,13 +1231,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryCoord can send, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh queryCoord, satuan: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1260,13 +1260,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryCoord can receive, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh queryCoord, satuan: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1289,13 +1289,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryCoord can send, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat dikirim oleh klien di queryCoord, satuan: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1318,13 +1318,13 @@ summary: Pelajari cara mengonfigurasi queryCoord untuk Milvus.
     </button></h2><table id="queryCoord.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryCoord can receive, unit: byte      </td>
+      <td>        Ukuran maksimum setiap permintaan RPC yang dapat diterima oleh klien di queryCoord, satuan: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>

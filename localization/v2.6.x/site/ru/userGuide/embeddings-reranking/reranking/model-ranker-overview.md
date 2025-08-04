@@ -74,7 +74,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Поиск кандидатов</strong>: Система определяет начальный набор документов-кандидатов на основе векторного сходства</p></li>
 <li><p><strong>Оценка модели</strong>: Функция ранжирования моделей обрабатывает пары запрос-документ:</p>
 <ul>
-<li><p>Отправляет исходный запрос и документы-кандидаты на внешний модельный сервис</p></li>
+<li><p>Отправляет исходный запрос и документы-кандидаты на внешний модельный сервис.</p></li>
 <li><p>Языковая модель оценивает семантическую релевантность между запросом и каждым документом</p></li>
 <li><p>Каждый документ получает оценку релевантности, основанную на семантическом понимании</p></li>
 </ul></li>
@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>Коллекция Milvus с полем <code translate="no">VARCHAR</code>, содержащим текст для ранжирования.</p></li>
 <li><p>Работающий внешний сервис моделей (vLLM или TEI), доступный вашему экземпляру Milvus</p></li>
-<li><p>Соответствующее сетевое соединение между Milvus и выбранным вами сервисом моделирования.</p></li>
+<li><p>Соответствующее сетевое соединение между Milvus и выбранным вами сервисом моделей.</p></li>
 </ul>
 <p>Ранжирование моделей легко интегрируется как со стандартным векторным поиском, так и с гибридными поисковыми операциями. Реализация заключается в создании объекта Function, определяющего конфигурацию ранжирования, и передаче его операциям поиска.</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">Создание ранжировщика моделей</h3><p>Чтобы реализовать ранжирование моделей, сначала определите объект Function с соответствующей конфигурацией:</p>
@@ -202,15 +202,21 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Да</p></td>
+     <td><p>Словарь, содержащий конфигурацию для функции ранжирования на основе модели. Доступные параметры (ключи) зависят от поставщика (<code translate="no">tei</code> или <code translate="no">vllm</code>). Дополнительные сведения см. в <a href="/docs/ru/vllm-ranker.md">vLLM Ranker</a> или <a href="/docs/ru/tei-ranker.md">TEI Ranker</a>.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Должно быть установлено значение <code translate="no">"model"</code> для включения повторного ранжирования моделей.</p></td>
+     <td><p>Должно быть установлено значение <code translate="no">"model"</code>, чтобы включить ранжирование по модели.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Поставщик услуг модели, который будет использоваться для повторного ранжирования.</p></td>
+     <td><p>Поставщик услуг модели, используемый для повторного ранжирования.</p></td>
      <td><p><code translate="no">"tei"</code> или <code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
@@ -241,7 +247,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Применить к гибридному поиску</h3><p>Ранжирование моделей можно также применять в гибридных поисковых операциях, объединяющих несколько векторных полей:</p>

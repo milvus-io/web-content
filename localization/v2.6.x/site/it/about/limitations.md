@@ -83,7 +83,6 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 </thead>
 <tbody>
 <tr><td>Raccolta</td><td>65,536</td></tr>
-<tr><td>Connessione / proxy</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Numero di risorse in una raccolta<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
@@ -103,7 +102,7 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Risorse</th><th>Limite</th></tr>
+<tr><th>Risorsa</th><th>Limite</th></tr>
 </thead>
 <tbody>
 <tr><td>Partizione</td><td>1,024</td></tr>
@@ -250,7 +249,7 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 <tr><td>Ricerca di base con recupero dei dati grezzi</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td></tr>
 <tr><td>Ricerca di base con paginazione</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td></tr>
 <tr><td>Ricerca filtrata</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
-<tr><td>Ricerca nel raggio d'azione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td><td>Si</td></tr>
+<tr><td>Ricerca nel raggio d'azione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Si</td><td>Si</td><td>Si</td></tr>
 <tr><td>Ricerca per raggruppamento</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>No</td><td>Sì</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>No</td><td>No</td></tr>
 <tr><td>Ricerca con iteratore</td><td>Sì</td><td>Sì</td><td>Si</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td><td>Si</td></tr>
 <tr><td>Ricerca ibrida</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì (solo RRFRanker)</td><td>Sì</td><td>Sì</td></tr>

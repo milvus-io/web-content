@@ -27,9 +27,9 @@ title: Pesquisa de texto integral com Milvus e Haystack
         ></path>
       </svg>
     </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">A pesquisa de texto integral</a> é um método tradicional de recuperação de documentos através da correspondência de palavras-chave ou frases específicas no texto. Classifica os resultados com base em pontuações de relevância calculadas a partir de factores como a frequência de termos. Enquanto a pesquisa semântica é melhor na compreensão do significado e do contexto, a pesquisa em texto integral é excelente na correspondência exacta de palavras-chave, o que a torna um complemento útil da pesquisa semântica. O algoritmo BM25 é amplamente utilizado para a classificação na pesquisa de texto integral e desempenha um papel fundamental na Retrieval-Augmented Generation (RAG).</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">O Milvus 2.5</a> introduz capacidades nativas de pesquisa de texto integral utilizando o BM25. Esta abordagem converte o texto em vectores esparsos que representam as pontuações BM25. Pode simplesmente introduzir texto em bruto e o Milvus irá gerar e armazenar automaticamente os vectores esparsos, sem necessidade de geração manual de incorporação esparsa.</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">O Milvus 2.5</a> introduz capacidades nativas de pesquisa de texto integral utilizando o BM25. Esta abordagem converte o texto em vectores esparsos que representam as pontuações BM25. Pode simplesmente introduzir o texto em bruto e o Milvus gera e armazena automaticamente os vectores esparsos, sem necessidade de geração manual de incorporação esparsa.</p>
 <p><a href="https://haystack.deepset.ai/">O Haystack</a> suporta agora esta funcionalidade do Milvus, facilitando a adição da pesquisa de texto completo às aplicações RAG. Pode combinar a pesquisa de texto completo com a pesquisa semântica de vectores densos para uma abordagem híbrida que beneficia tanto da compreensão semântica como da precisão da correspondência de palavras-chave. Esta combinação melhora a precisão da pesquisa e fornece melhores resultados aos utilizadores.</p>
-<p>Este tutorial demonstra como implementar a pesquisa de texto completo e híbrida na sua aplicação utilizando o Haystack e o Milvus.</p>
+<p>Este tutorial demonstra como implementar a pesquisa de texto completo e a pesquisa híbrida na sua aplicação utilizando o Haystack e o Milvus.</p>
 <p>Para utilizar o armazenamento de vectores do Milvus, especifique o seu servidor Milvus <code translate="no">URI</code> (e opcionalmente com o <code translate="no">TOKEN</code>). Para iniciar um servidor Milvus, pode configurar um servidor Milvus seguindo o <a href="https://milvus.io/docs/install-overview.md">guia de instalação do Milvus</a> ou simplesmente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">experimentar o Zilliz Cloud</a>(Milvus totalmente gerido) gratuitamente.</p>
 <div class="alert note">
 <ul>
@@ -85,7 +85,7 @@ documents = [
     Document(content=<span class="hljs-string">&quot;Charlie likes white dogs&quot;</span>, meta={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>A integração da pesquisa em texto integral num sistema RAG equilibra a pesquisa semântica com a recuperação precisa e previsível baseada em palavras-chave. Também pode optar por utilizar apenas a pesquisa de texto integral, embora seja recomendável combinar a pesquisa de texto integral com a pesquisa semântica para obter melhores resultados de pesquisa. Aqui, para efeitos de demonstração, mostraremos apenas a pesquisa de texto integral e a pesquisa híbrida.</p>
+<p>A integração da pesquisa de texto integral num sistema RAG equilibra a pesquisa semântica com a recuperação precisa e previsível baseada em palavras-chave. Também pode optar por utilizar apenas a pesquisa de texto integral, embora seja recomendável combinar a pesquisa de texto integral com a pesquisa semântica para obter melhores resultados de pesquisa. Aqui, para efeitos de demonstração, mostraremos apenas a pesquisa de texto integral e a pesquisa híbrida.</p>
 <h2 id="BM25-search-without-embedding" class="common-anchor-header">Pesquisa BM25 sem incorporação<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,7 +115,7 @@ document_store = MilvusDocumentStore(
             output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
     drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old collection if it exists and recreate it.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -174,7 +174,7 @@ retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span 
             output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`).</span>
     drop_old=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Drop the old collection and recreate it.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -271,7 +271,7 @@ document_store = MilvusDocumentStore(
             enable_match=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Whether to enable match.</span>
         )
     ],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 

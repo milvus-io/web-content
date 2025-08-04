@@ -27,13 +27,13 @@ title: 产品常见问题
 <p>插入数据（包括向量数据、标量数据和特定于 Collections 的 Schema）以增量日志的形式存储在持久存储中。Milvus 支持多种对象存储后端，包括<a href="https://min.io/">MinIO</a>、<a href="https://aws.amazon.com/s3/?nc1=h_ls">AWS S3</a>、<a href="https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes">谷歌云存储</a>（GCS）、<a href="https://azure.microsoft.com/en-us/products/storage/blobs">Azure Blob 存储</a>、<a href="https://www.alibabacloud.com/product/object-storage-service">阿里云 OSS</a> 和<a href="https://www.tencentcloud.com/products/cos">腾讯云对象存储</a>（COS）。</p>
 <p>元数据在 Milvus 内部生成。每个 Milvus 模块都有自己的元数据，这些元数据存储在 etcd 中。</p>
 <h4 id="Why-is-there-no-vector-data-in-etcd" class="common-anchor-header">为什么 etcd 中没有向量数据？</h4><p>etcd 存储 Milvus 模块元数据；MinIO 存储实体。</p>
-<h4 id="Does-Milvus-support-inserting-and-searching-data-simultaneously" class="common-anchor-header">Milvus 支持同时插入和搜索数据吗？</h4><p>是的。插入操作和查询操作由两个相互独立的模块处理。从客户端的角度来看，当插入的数据进入消息队列时，插入操作符就完成了。但是，插入的数据在加载到查询节点之前是不可查询的。如果数据段的大小没有达到建立索引的阈值（默认为 512 MB），Milvus 就会采用暴力搜索，查询性能可能会降低。</p>
+<h4 id="Does-Milvus-support-inserting-and-searching-data-simultaneously" class="common-anchor-header">Milvus 支持同时插入和搜索数据吗？</h4><p>是的。插入操作和查询操作由两个相互独立的模块处理。从客户端的角度来看，当插入的数据进入消息队列时，插入操作符就完成了。但是，插入的数据在加载到查询节点之前是不可查询的。对于具有增量数据的增长数据段，Milvus 会自动建立临时索引，以确保高效的搜索性能，即使数据段大小未达到索引建立阈值（计算公式为<code translate="no">dataCoord.segment.maxSize</code> ×<code translate="no">dataCoord.segment.sealProportion</code> ）。你可以通过<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440">Milvus 配置文件</a>中的配置参数<code translate="no">queryNode.segcore.interimIndex.enableIndex</code> 来控制这种行为--将其设置为<code translate="no">true</code> 可启用临时索引（默认），而将其设置为<code translate="no">false</code> 则会禁用临时索引。</p>
 <h4 id="Can-vectors-with-duplicate-primary-keys-be-inserted-into-Milvus" class="common-anchor-header">能否在 Milvus 中插入主键重复的向量？</h4><p>可以。Milvus 不检查向量主键是否重复。</p>
-<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">当插入具有重复主键的向量时，Milvus 是否将其视为更新操作？</h4><p>Milvus目前不支持更新操作，也不检查实体主键是否重复。你有责任确保实体主键是唯一的，如果不是唯一的，Milvus 可能包含多个主键重复的实体。</p>
+<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">当插入主键重复的向量时，Milvus 是否将其视为更新操作？</h4><p>Milvus目前不支持更新操作，也不检查实体主键是否重复。你有责任确保实体主键是唯一的，如果不是唯一的，Milvus 可能包含多个主键重复的实体。</p>
 <p>如果出现这种情况，查询时将返回哪个数据副本仍是未知行为。这一限制将在今后的版本中修复。</p>
 <h4 id="What-is-the-maximum-length-of-self-defined-entity-primary-keys" class="common-anchor-header">自定义实体主键的最大长度是多少？</h4><p>实体主键必须是非负 64 位整数。</p>
 <h4 id="What-is-the-maximum-amount-of-data-that-can-be-added-per-insert-operation" class="common-anchor-header">每次插入操作可添加的最大数据量是多少？</h4><p>插入操作的大小不得超过 1,024 MB。这是 gRPC 规定的限制。</p>
-<h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果为搜索指定了分区，Milvus 只搜索指定的分区。</p>
+<h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果指定了搜索的分区，Milvus 只搜索指定的分区。</p>
 <h4 id="Does-Milvus-need-to-load-the-entire-collection-when-partitions-are-specified-for-a-search" class="common-anchor-header">为搜索指定分区时，Milvus 是否需要加载整个 Collections？</h4><p>这取决于搜索需要哪些数据。搜索前必须加载搜索结果中可能显示的所有分区。</p>
 <ul>
 <li>例如，如果只想搜索特定分区，则不需要加载所有分区。调用<code translate="no">load_partition()</code> 加载目标分区，<em>然后</em>在<code translate="no">search()</code> 方法调用中指定分区。</li>
@@ -45,7 +45,7 @@ title: 产品常见问题
 <p>当向量总数近似等于 nlist 时，IVF_FLAT 和 FLAT 在计算要求和搜索性能上几乎没有距离。但是，当向量数量超过 nlist 的 2 倍或更多时，IVF_FLAT 就开始显示出性能优势。</p>
 <p>更多信息，请参阅<a href="/docs/zh/index.md">向量索引</a>。</p>
 <h4 id="How-does-Milvus-flush-data" class="common-anchor-header">Milvus 如何刷新数据？</h4><p>当插入的数据被摄取到消息队列时，Milvus 返回成功。但是，数据尚未刷新到磁盘。然后，Milvus 的数据节点会将消息队列中的数据作为增量日志写入持久存储。如果调用<code translate="no">flush()</code> ，数据节点就会被迫立即将消息队列中的所有数据写入持久化存储。</p>
-<h4 id="What-is-normalization-Why-is-normalization-needed" class="common-anchor-header">什么是规范化？为什么需要规范化？</h4><p>归一化指的是转换向量使其法等于 1 的过程。如果使用内积来计算向量的相似性，则必须对向量进行归一化。归一化后，内积等于余弦相似度。</p>
+<h4 id="What-is-normalization-Why-is-normalization-needed" class="common-anchor-header">什么是规范化？为什么需要规范化？</h4><p>归一化指的是转换向量使其法等于 1 的过程。如果使用内积计算向量相似性，则必须对向量进行归一化。归一化后，内积等于余弦相似度。</p>
 <p>更多信息，请参见<a href="https://en.wikipedia.org/wiki/Unit_vector">维基百科</a>。</p>
 <h4 id="Why-do-Euclidean-distance-L2-and-inner-product-IP-return-different-results" class="common-anchor-header">为什么欧氏距离（L2）和内积（IP）返回的结果不同？</h4><p>对于归一化向量，欧氏距离（L2）在数学上等同于内积（IP）。如果这些相似性度量返回不同的结果，请检查您的向量是否归一化</p>
 <h4 id="Is-there-a-limit-to-the-total-number-of-collections-and-partitions-in-Milvus" class="common-anchor-header">Milvus 中的 Collections 和分区总数有限制吗？</h4><p>有。您最多可以在 Milvus 实例中创建 65,535 个集合。计算现有集合数量时，Milvus 会计算所有包含分片和分区的集合。</p>
@@ -65,11 +65,11 @@ title: 产品常见问题
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">为什么相应的 Collections 被删除后，MinIO 中的数据仍会保留？</h4><p>MinIO 中的数据被设计为保留一段时间，以方便数据回滚。</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">Milvus 是否支持 Pulsar 以外的消息引擎？</h4><p>支持。Milvus 2.1.0 支持 Kafka。</p>
 <h4 id="Whats-the-difference-between-a-search-and-a-query" class="common-anchor-header">搜索和查询有什么区别？</h4><p>在 Milvus 中，向量相似性搜索根据相似性计算和向量索引加速检索向量。与向量相似性搜索不同，向量查询是通过基于布尔表达式的标量过滤来检索向量的。布尔表达式会对标量字段或主键字段进行过滤，并检索所有符合过滤条件的结果。在查询中，既不涉及相似度指标，也不涉及向量索引。</p>
-<h4 id="Why-does-a-float-vector-value-have-a-precision-of-7-decimal-digits-in-Milvus" class="common-anchor-header">为什么在 Milvus 中，浮点向量值的精度是小数点后 7 位？</h4><p>Milvus 支持将向量存储为 Float32 数组。Float32 值的精度为小数点后 7 位。即使是 Float64 值，例如 1.3476964684980388，Milvus 也将其存储为 1.347696。因此，当你从 Milvus 获取这样一个向量时，Float64 值的精度就会丢失。</p>
+<h4 id="Why-does-a-float-vector-value-have-a-precision-of-7-decimal-digits-in-Milvus" class="common-anchor-header">为什么在 Milvus 中，浮点向量值的精度是小数点后 7 位？</h4><p>Milvus 支持将向量存储为 Float32 数组。Float32 值的精度为小数点后 7 位。即使是 Float64 值，如 1.3476964684980388，Milvus 也将其存储为 1.347696。因此，当你从 Milvus 获取这样一个向量时，Float64 值的精度就会丢失。</p>
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvus 如何处理向量数据类型和精度？</h4><p>Milvus 支持二进制、Float32、Float16 和 BFloat16 向量类型。</p>
 <ul>
 <li>二进制向量：将二进制数据存储为 0 和 1 的序列，用于图像处理和信息检索。</li>
-<li>Float32 向量：默认存储精度约为小数点后 7 位。即使是 Float64 值，也是以 Float32 精度存储的，因此在检索时可能会丢失精度。</li>
+<li>Float32 向量：默认存储精度约为小数点后 7 位。即使是 Float64 值也是以 Float32 精度存储的，这可能会导致检索时的精度损失。</li>
 <li>Float16 和 BFloat16 向量：可降低精度和内存使用量。Float16 适用于带宽和存储有限的应用，而 BFloat16 则兼顾了范围和效率，常用于深度学习，在不显著影响精度的情况下降低计算要求。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支持为标量或向量场指定默认值？</h4><p>目前，Milvus 2.4.x 不支持为标量或向量场指定默认值。该功能计划在未来版本中推出。</p>
@@ -114,7 +114,7 @@ value_set = <span class="hljs-built_in">set</span>()
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">使用动态字段有什么限制？例如，是否有大小限制、修改方法或索引限制？</h4><p>动态字段在内部使用 JSON 字段表示，大小限制为 65,536 字节。它们支持向上插入修改，允许您添加或更新字段。不过，从 Milvus 2.5.1 开始，动态字段不支持索引。未来版本将支持为 JSON 添加索引。</p>
 <h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">Milvus 支持 Schema 更改吗？</h4><p>从 Milvus 2.5.0 版开始，模式更改仅限于特定的修改，如调整<code translate="no">mmap</code> 参数等属性。用户还可以修改 varchar 字段的<code translate="no">max_length</code> 和数组字段的<code translate="no">max_capacity</code> 。不过，计划在今后的版本中实现在模式中添加或删除字段的功能，增强 Milvus 内模式管理的灵活性。</p>
-<h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">修改 VarChar 的 max_length 是否需要重新组织数据？</h4><p>不需要，修改 VarChar 字段的<code translate="no">max_length</code> 不需要进行数据重组，如压缩或重组。这一调整主要是更新插入字段的新数据的验证标准，现有数据不受影响。因此，这一更改被认为是轻量级的，不会给系统带来显著的开销。</p>
+<h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">修改 VarChar 的 max_length 是否需要重新组织数据？</h4><p>不需要，修改 VarChar 字段的<code translate="no">max_length</code> 不需要进行数据重组，如压缩或重组。这一调整主要是更新插入字段的任何新数据的验证标准，现有数据不受影响。因此，这一更改被认为是轻量级的，不会给系统带来显著的开销。</p>
 <h4 id="Still-have-questions" class="common-anchor-header">仍有问题？</h4><p>您可以</p>
 <ul>
 <li>在 GitHub 上查看<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。欢迎提出问题、分享想法并帮助其他用户。</li>

@@ -41,7 +41,7 @@ title: ローカルでMilvus Liteを動かす
 <li>ラップトップ</li>
 <li>エッジデバイス</li>
 </ul>
-<p>Milvus LiteはMilvus StandaloneおよびDistributedと同じAPIを共有し、ベクトルデータの永続化と管理、ベクトルCRUD操作、スパースおよびデンスベクトル検索、メタデータフィルタリング、マルチベクトルおよびhybrid_searchなど、ほとんどの機能をカバーしています。これらを組み合わせることで、エッジデバイスからクラウド上のクラスタまで、さまざまなタイプの環境にわたって一貫したエクスペリエンスを提供し、さまざまな規模のユースケースにフィットします。同じクライアント側のコードで、ラップトップやJupyter Notebook上のMilvus Lite、Dockerコンテナ上のMilvus Standalone、または本番環境で数十億のベクターに対応する大規模なKubernetesクラスタ上のMilvus DistributedでGenAIアプリを実行することができます。</p>
+<p>Milvus LiteはMilvus StandaloneおよびDistributedと同じAPIを共有し、ベクトルデータの永続化と管理、ベクトルCRUD操作、スパースおよびデンスベクトル検索、メタデータフィルタリング、マルチベクトルおよびhybrid_searchなど、ほとんどの機能をカバーしています。これらの機能を組み合わせることで、エッジデバイスからクラウド上のクラスタまで、さまざまなタイプの環境にわたって一貫したエクスペリエンスを提供し、さまざまな規模のユースケースにフィットします。同じクライアント側のコードで、ラップトップやJupyter Notebook上のMilvus Lite、Dockerコンテナ上のMilvus Standalone、または本番環境で数十億のベクターに対応する大規模なKubernetesクラスタ上のMilvus DistributedでGenAIアプリを実行することができます。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -328,7 +328,7 @@ res = client.delete(
 <h3 id="Vector-Index-Types" class="common-anchor-header">ベクトルインデックス型</h3><p>Milvus Liteは<a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>インデックスタイプのみをサポートしています。コレクションで指定されたインデックスタイプに関係なく、FLATタイプを使用します。</p>
 <h3 id="Search-Features" class="common-anchor-header">検索機能</h3><p>Milvus Liteはスパースベクトル、マルチベクトル、ハイブリッド検索をサポートしています。</p>
 <h3 id="Partition" class="common-anchor-header">パーティション</h3><p>Milvus Liteはパーティションおよびパーティション関連メソッドをサポートしていません。</p>
-<h3 id="Users--Roles" class="common-anchor-header">ユーザとロール</h3><p>Milvus Liteはユーザとロールおよび関連するメソッドをサポートしていません。</p>
+<h3 id="Users--Roles" class="common-anchor-header">ユーザとロール</h3><p>Milvus Liteはユーザとロールおよび関連メソッドをサポートしていません。</p>
 <h3 id="Alias" class="common-anchor-header">エイリアス</h3><p>Milvus Liteはエイリアスおよびエイリアス関連メソッドに対応しておりません。</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Milvus Liteからのデータ移行について<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"

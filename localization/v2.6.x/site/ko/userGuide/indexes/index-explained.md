@@ -46,12 +46,31 @@ summary: >-
      <th><p>적용 가능한 인덱스 유형</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
-     <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>BFLOAT16_VECTOR</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>FLAT</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BINARY_VECTOR</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>SPARSE_FLOAT_VECTOR</p></td>
@@ -59,18 +78,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED(권장)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED(권장)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP(권장)</li><li>INVERTED</li></ul></td>
+     <td><ul>
+<li>BITMAP(권장)</li>
+<li>INVERTED</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>INVERTED</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>INVERTED</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>INVERTED</p></td>
    </tr>
    <tr>
@@ -112,7 +149,7 @@ summary: >-
 <h3 id="Data-structure" class="common-anchor-header">데이터 구조</h3><p>데이터 구조는 인덱스의 기본 계층을 형성합니다. 일반적인 유형은 다음과 같습니다:</p>
 <ul>
 <li><p><strong>반전 파일(IVF)</strong></p>
-<p>IVF 계열 인덱스 유형은 Milvus가 중심 기반 파티셔닝을 통해 벡터를 버킷으로 클러스터링할 수 있게 해줍니다. 일반적으로 버킷 중심이 쿼리 벡터에 가까우면 버킷에 있는 모든 벡터가 쿼리 벡터에 가까울 가능성이 높다고 가정하는 것이 안전합니다. 이 전제를 바탕으로 Milvus는 전체 데이터 세트를 검사하는 대신 중심이 쿼리 벡터에 가까운 버킷의 벡터 임베딩만 스캔합니다. 이 전략은 허용 가능한 정확도를 유지하면서 계산 비용을 줄여줍니다.</p>
+<p>IVF 계열 인덱스 유형은 Milvus가 중심 기반 파티셔닝을 통해 벡터를 버킷으로 클러스터링할 수 있게 해줍니다. 일반적으로 버킷 중심이 쿼리 벡터에 가까우면 버킷에 있는 모든 벡터가 쿼리 벡터에 가까울 가능성이 높다고 가정하는 것이 안전합니다. 이 전제를 바탕으로 Milvus는 전체 데이터 세트를 검사하지 않고 중심이 쿼리 벡터에 가까운 버킷의 벡터 임베딩만 스캔합니다. 이 전략은 허용 가능한 정확도를 유지하면서 계산 비용을 줄여줍니다.</p>
 <p>이러한 유형의 인덱스 데이터 구조는 빠른 처리량이 필요한 대규모 데이터 세트에 이상적입니다.</p></li>
 <li><p><strong>그래프 기반 구조</strong></p>
 <p>계층적 탐색 가능한 작은 세계<a href="https://arxiv.org/abs/1603.09320">(HNSW)</a>와 같은 벡터 검색을 위한 그래프 기반 데이터 구조는 각 벡터가 가장 가까운 이웃에 연결되는 계층형 그래프를 구성합니다. 쿼리는 거친 상위 계층에서 시작하여 하위 계층으로 전환하면서 이 계층 구조를 탐색하므로 로그 시간 검색의 복잡성을 효율적으로 처리할 수 있습니다.</p>

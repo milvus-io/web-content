@@ -27,7 +27,7 @@ title: 使用 Milvus 和 Gemini 构建 RAG
         ></path>
       </svg>
     </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini API</a>和<a href="https://ai.google.dev/aistudio">Google AI Studio</a>可帮助您开始使用 Google 的最新模型，并将您的想法转化为可扩展的应用程序。Gemini 可让您访问<code translate="no">Gemini-2.0-Flash</code> 、<code translate="no">Gemini-2.0-Pro</code> 等强大的语言模型，以及用于文本生成、文档处理、视觉、音频分析等任务的其他版本。通过 API，您可以输入包含数百万个标记的长语境，针对特定任务对模型进行微调，生成 JSON 等结构化输出，并利用语义检索和代码执行等功能。</p>
-<p>在本教程中，我们将向您展示如何使用 Milvus 和 Gemini 构建 RAG（检索-增强生成）管道。我们将使用 Gemini 模型根据给定查询生成响应，并用从 Milvus 检索到的相关信息进行增强。</p>
+<p>在本教程中，我们将向您展示如何使用 Milvus 和 Gemini 构建 RAG（检索-增强生成）管道。我们将使用 Gemini 模型根据给定查询生成响应，并使用从 Milvus 检索到的相关信息进行增强。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,7 +120,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <div class="alert note">
 <p>至于<code translate="no">MilvusClient</code> 的参数：</p>
 <ul>
-<li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，这是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
+<li>将<code translate="no">uri</code> 设置为本地文件，例如<code translate="no">./milvus.db</code> ，这是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
 <li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
@@ -135,7 +135,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><p>遍历文本行，创建 Embeddings，然后将数据插入 Milvus。</p>

@@ -92,7 +92,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我們使用內乘距離作為預設的度量類型。如需更多關於距離類型的資訊，您可以參考<a href="https://milvus.io/docs/metric.md?tab=floating">相似度量頁面</a></p>
@@ -101,7 +101,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>我們從資料夾<code translate="no">milvus_docs/en/faq</code> 載入所有 markdown 檔案。對於每個文件，我們只需簡單地使用「#」來分隔文件中的內容，這樣就可以大致分隔出 markdown 文件中每個主要部分的內容。</p>
+<p>我們從資料夾<code translate="no">milvus_docs/en/faq</code> 載入所有 markdown 檔案。對於每個文件，我們只需簡單地使用「#」來分隔文件中的內容，這樣就可以大致分隔出 markdown 檔案中每個主要部分的內容。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -151,7 +151,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
       </svg>
     </button></h2><p>在本節中，我們將在 Arm-based CPU 上建立並啟動<code translate="no">llama.cpp</code> 服務。</p>
 <h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 模型與 llama.cpp</h3><p>Meta 的<a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8B 模型</a>屬於 Llama 3.1 模型系列，可免費用於研究與商業用途。在使用該模型之前，請造訪 Llama<a href="https://llama.meta.com/llama-downloads/">網站</a>並填寫表格以申請存取權限。</p>
-<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>是一個開放原始碼的 C/C++ 專案，可在各種硬體上實現高效率的 LLM 推論 - 包括本機和雲端。您可以使用<code translate="no">llama.cpp</code> 方便地託管 Llama 3.1 模型。</p>
+<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>是一個開放原始碼的 C/C++ 專案，可在各種硬體上實現有效的 LLM 推論 - 包括本機和雲端。您可以使用<code translate="no">llama.cpp</code> 方便地託管 Llama 3.1 模型。</p>
 <h3 id="Download-and-build-llamacpp" class="common-anchor-header">下載並建立 llama.cpp</h3><p>執行下列指令以安裝 make、cmake、gcc、g++ 及其他從原始碼建立 llama.cpp 所需的基本工具：</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
 $ <span class="hljs-built_in">sudo</span> apt install gcc g++ -y
@@ -179,7 +179,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <p>現在您可以使用 huggingface cli 下載模型：</p>
 <pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 <button class="copy-code-btn"></button></code></pre>
-<p>由 llama.cpp 團隊推出的 GGUF 模型格式，使用壓縮和量化將權值精確度降低為 4 位元整數，大幅降低計算和記憶體需求，使 Arm CPU 有效運用於 LLM 推論。</p>
+<p>由 llama.cpp 團隊推出的 GGUF 模型格式，使用壓縮與量化的方式，將權值精確度降低為 4 位元整數，大幅降低計算與記憶體需求，讓 Arm CPU 有效運用於 LLM 推論。</p>
 <h3 id="Re-quantize-the-model-weights" class="common-anchor-header">重新量化模型權值</h3><p>要重新量化，請執行</p>
 <pre><code translate="no" class="language-bash">$ ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 <button class="copy-code-btn"></button></code></pre>

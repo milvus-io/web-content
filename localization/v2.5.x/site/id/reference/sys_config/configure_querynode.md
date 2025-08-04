@@ -991,7 +991,7 @@ summary: Pelajari cara mengonfigurasi queryNode untuk Milvus.
     <tr>
       <td>
         <li>fifo Antrian FIFO yang mendukung jadwal.</li>      
-        <li>user-task-polling:</li>      
+        <li>polling-tugas-pengguna:</li>      
         <li>    Tugas pengguna akan disurvei satu per satu dan dijadwalkan.</li>      
         <li>    Penjadwalan adil berdasarkan perincian tugas.</li>      
         <li>    Kebijakan ini didasarkan pada nama pengguna untuk otentikasi.</li>      

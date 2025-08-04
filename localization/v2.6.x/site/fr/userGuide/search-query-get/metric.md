@@ -51,6 +51,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>Il n'est pas nécessaire de préciser la dimension.</p></td>
      <td><p><code translate="no">IP</code> <code translate="no">BM25</code> (utilisé uniquement pour la recherche en texte intégral)</p></td>
@@ -59,7 +65,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -94,6 +100,11 @@ summary: >-
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>Une valeur plus petite indique une plus grande similarité.</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>Estime la similarité de Jaccard à partir des bits de la signature MinHash ; plus la distance est petite, plus la similarité est grande.</p></td>
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
@@ -155,7 +166,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Formule IP</span> </span></p>
 <p>Le produit intérieur est plus utile si vous devez comparer des données non normalisées ou si vous vous intéressez à la magnitude et à l'angle.</p>
 <div class="alert note">
-<p>Si vous utilisez le produit intérieur pour calculer les similarités entre les embeddings, vous devez normaliser vos embeddings. Après la normalisation, le produit intérieur est égal à la similarité en cosinus.</p>
+<p>Si vous utilisez le produit intérieur pour calculer les similarités entre les embeddings, vous devez normaliser vos embeddings. Après la normalisation, le produit intérieur est égal à la similarité cosinusoïdale.</p>
 </div>
 <p>Supposons que X' soit normalisé à partir de l'intégration X :</p>
 <p>
@@ -190,7 +201,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Similitude en cosinus</span> </span></p>
 <p>La similitude en cosinus est toujours comprise dans l'intervalle <strong>[-1, 1]</strong>. Par exemple, deux vecteurs proportionnels ont un cosinus de <strong>1</strong>, deux vecteurs orthogonaux ont un cosinus de <strong>0</strong> et deux vecteurs opposés ont un cosinus de <strong>-1</strong>. Plus le cosinus est grand, plus l'angle entre les deux vecteurs est petit, ce qui indique que ces deux vecteurs sont plus semblables l'un à l'autre.</p>
 <p>En soustrayant leur cosinus de 1, on obtient la distance en cosinus entre deux vecteurs.</p>
-<h2 id="JACCARD-distance" class="common-anchor-header">Distance JACCARD<button data-href="#JACCARD-distance" class="anchor-icon" translate="no">
+<h2 id="JACCARD-distance" class="common-anchor-header">Distance de JACCARD<button data-href="#JACCARD-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,7 +216,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le coefficient de similarité JACCARD mesure la similarité entre deux ensembles d'échantillons et est défini comme la cardinalité de l'intersection des ensembles définis divisée par la cardinalité de leur union. Il ne peut être appliqué qu'à des ensembles d'échantillons finis.</p>
+    </button></h2><p>Le coefficient de distance JACCARD mesure la similarité entre deux ensembles d'échantillons et est défini comme la cardinalité de l'intersection des ensembles définis divisée par la cardinalité de leur union. Il ne peut être appliqué qu'à des ensembles d'échantillons finis.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -214,7 +225,40 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
-   </span> <span class="img-wrapper"> <span>Formule de la distance de JACCARD</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Formule de la distance JACCARD</span> </span></p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) est un type de métrique utilisé pour une recherche de similarité efficace et approximative sur de grands ensembles, tels que des ensembles de mots de documents, des ensembles d'étiquettes d'utilisateurs ou des ensembles de k-mer génomiques. Au lieu de comparer directement les ensembles bruts, MHJACCARD compare les <strong>signatures MinHash</strong>, qui sont des représentations compactes conçues pour estimer efficacement la similarité de Jaccard.</p>
+<p>Cette approche est nettement plus rapide que le calcul de la similarité Jaccard exacte et est particulièrement utile dans les scénarios à grande échelle ou à haute dimension.</p>
+<p><strong>Type de vecteur applicable</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>Les vecteurs de type MinHash sont des vecteurs de données, où chaque vecteur stocke une signature MinHash. Chaque élément correspond à la valeur de hachage minimale sous l'une des fonctions de hachage indépendantes appliquées à l'ensemble d'origine.</li>
+</ul>
+<p><strong>Définition de la distance</strong></p>
+<p>MHJACCARD mesure le nombre de positions qui correspondent dans deux signatures MinHash. Plus le taux de correspondance est élevé, plus les ensembles sous-jacents sont similaires.</p>
+<p>Milvus rapporte :</p>
+<ul>
+<li><strong>Distance = 1 - similarité estimée (taux de correspondance)</strong></li>
+</ul>
+<p>La valeur de la distance est comprise entre 0 et 1 :</p>
+<ul>
+<li><p><strong>0</strong> signifie que les signatures MinHash sont identiques (similarité Jaccard estimée = 1)</p></li>
+<li><p><strong>1</strong> signifie qu'il n'y a aucune correspondance à aucune position (similarité Jaccard estimée = 0).</p></li>
+</ul>
+<p>Pour plus d'informations sur les détails techniques, voir <a href="/docs/fr/minhash-lsh.md">MINHASH_LSH</a>.</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">Distance de HAMMING<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

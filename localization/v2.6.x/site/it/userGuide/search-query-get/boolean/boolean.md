@@ -46,6 +46,7 @@ summary: >-
 <li><p><strong>Filtri di intervallo</strong>: <code translate="no">IN</code> e <code translate="no">LIKE</code> aiutano a soddisfare intervalli o insiemi di valori specifici.</p></li>
 <li><p><strong>Operatori aritmetici</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code> e <code translate="no">**</code> sono utilizzati per i calcoli che coinvolgono i campi numerici.</p></li>
 <li><p><strong>Operatori logici</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, e <code translate="no">NOT</code> combinano più condizioni in espressioni complesse.</p></li>
+<li><p><strong>Operatori IS NULL e IS NOT NULL</strong>: Gli operatori <code translate="no">IS NULL</code> e <code translate="no">IS NOT NULL</code> sono usati per filtrare i campi in base al fatto che contengano o meno un valore nullo (assenza di dati). Per maggiori dettagli, consultare la sezione <a href="/docs/it/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Operatori di base</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Esempio: Filtro per colore</h3><p>Per trovare entità con colori primari (rosso, verde o blu) in un campo scalare <code translate="no">color</code>, utilizzare la seguente espressione di filtro:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
@@ -72,7 +73,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando si effettua il filtraggio utilizzando i caratteri CJK, l'elaborazione può essere più complessa a causa dei set di caratteri più grandi e delle differenze di codifica. Ciò può comportare un rallentamento delle prestazioni, soprattutto con l'operatore <code translate="no">IN</code>.</p>
+    </button></h2><p>Quando si effettua il filtraggio utilizzando i caratteri CJK, l'elaborazione può essere più complessa a causa dei set di caratteri più grandi e delle differenze di codifica. Questo può comportare un rallentamento delle prestazioni, soprattutto con l'operatore <code translate="no">IN</code>.</p>
 <p>Milvus introduce la templatura delle espressioni di filtro per ottimizzare le prestazioni quando si lavora con i caratteri CJK. Separando i valori dinamici dall'espressione del filtro, il motore di query gestisce in modo più efficiente l'inserimento dei parametri.</p>
 <h3 id="Example" class="common-anchor-header">Esempio</h3><p>Per trovare persone di età superiore ai 25 anni che vivono a "北京" (Pechino) o "上海" (Shanghai), utilizzare la seguente espressione modello:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
@@ -136,55 +137,3 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p>Per maggiori dettagli, fare riferimento a <a href="/docs/it/keyword-match.md">Corrispondenza di testo</a>.</p>
 <h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operatore<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>L'operatore <strong>PHRASE_MATCH</strong> consente di recuperare con precisione i documenti in base alle corrispondenze esatte tra le frasi, considerando sia l'ordine che l'adiacenza dei termini della query.</p>
 <p>Per maggiori dettagli, consultare <a href="/docs/it/phrase-match.md">Phrase Match</a>.</p>
-<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">Operatore di campionamento casuale<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Il campionamento casuale consente di estrarre un sottoinsieme di campioni di dati da una raccolta a livello di segmento, il che lo rende ideale per l'esplorazione e l'elaborazione di enormi insiemi di dati. Questa funzione è preziosa per questi casi d'uso:</p>
-<ul>
-<li><p><strong>Anteprima rapida dei dati</strong>: Restituisce dati campione rappresentativi con un utilizzo minimo di risorse, consentendo di cogliere rapidamente la struttura complessiva e il contenuto di grandi insiemi di dati vettoriali.</p></li>
-<li><p><strong>Filtraggio combinato</strong>: Quando si esegue un filtraggio multi-criterio (ad esempio, la selezione dei documenti in base agli attributi), la combinazione con il campionamento casuale consente di ottenere rapidamente sintesi statistiche e anteprime dei risultati filtrati.</p></li>
-<li><p><strong>Risparmio di risorse nell'elaborazione di dati su larga scala</strong>: Per gli insiemi di dati molto grandi, l'aggregazione e l'analisi di tutti i dati può richiedere un notevole dispendio di risorse. Il campionamento casuale riduce il carico di elaborazione diminuendo la quantità di dati gestiti.</p></li>
-</ul>
-<p>Per il campionamento casuale, utilizzare la seguente sintassi:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li><code translate="no">float</code><strong>:</strong> Un fattore di campionamento nell'intervallo (0, 1), esclusi i limiti. Ad esempio, <code translate="no">RANDOM_SAMPLE(0.001)</code> seleziona circa lo 0,1% dei risultati.</li>
-</ul>
-<div class="alert note">
-<p>L'espressione <code translate="no">RANDOM_SAMPLE</code> non fa distinzione tra maiuscole e minuscole. È possibile utilizzare <code translate="no">RANDOM_SAMPLE</code> o <code translate="no">random_sample</code>.</p>
-</div>
-<h3 id="Combine-with-other-filters" class="common-anchor-header">Combinazione con altri filtri</h3><p>L'operatore di campionamento casuale deve essere combinato con altre espressioni di filtraggio utilizzando la logica <code translate="no">AND</code>. Ad esempio:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>In questo caso, Milvus applica prima la condizione <code translate="no">color = 'red'</code> e poi esegue un campionamento casuale sull'insieme dei risultati.</p>
-<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">Esempio: Campionamento casuale senza filtro aggiuntivo</h3><p>In questo esempio, la query campiona un sottoinsieme casuale (circa l'1%) di tutti i dati della raccolta specificata:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">Esempio: Filtraggio combinato con campionamento casuale</h3><p>In questo esempio, la query filtra prima i documenti in base a un attributo specifico (in questo caso, i documenti in cui <code translate="no">color</code> è uguale a <code translate="no">'red'</code>). Dopo il filtraggio, viene applicato l'operatore di campionamento casuale per restituire circa lo 0,1% dei risultati filtrati:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>

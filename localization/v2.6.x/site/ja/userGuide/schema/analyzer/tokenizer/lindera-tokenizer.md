@@ -20,6 +20,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p><code translate="no">lindera</code> トークナイザーは辞書ベースの形態素解析を行います。日本語、韓国語、中国語など、単語がスペースで区切られていない言語に適しています。</p>
+<div class="alert note">
+<p><code translate="no">lindera</code> トークナイザは、出力において句読点を別のトークンとして保持します。たとえば、<code translate="no">&quot;こんにちは！&quot;</code> は<code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code> になります。これらの独立した句読点トークンを削除するには <a href="/docs/ja/removepunct-filter.md"><code translate="no">removepunct</code></a>フィルタを使用してください。</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +66,7 @@ beta: Milvus 2.5.11+
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }

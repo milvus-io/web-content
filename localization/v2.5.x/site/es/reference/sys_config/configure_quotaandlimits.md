@@ -743,7 +743,7 @@ summary: Aprenda a configurar quotaAndLimits para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        qps de nivel db, por defecto sin límite, tasa para manualCompaction      </td>
+      <td>        qps de nivel db, por defecto sin límite, tasa para compactación manual      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -772,7 +772,7 @@ summary: Aprenda a configurar quotaAndLimits para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Si está habilitada la limitación de peticiones DML.      </td>
+      <td>        Si está habilitado el estrangulamiento de peticiones DML.      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -2171,7 +2171,7 @@ summary: Aprenda a configurar quotaAndLimits para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        borrar cuota de tamaño de buffer, nivel de agua alto    </td>
+      <td>        borrar cuota de tamaño de búfer, nivel de agua alto    </td>
       <td>268435456</td>
     </tr>
   </tbody>

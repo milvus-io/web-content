@@ -657,7 +657,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Keistimewaan hanya-baca tingkat koleksi      </td>
+      <td>        Hak istimewa hanya-baca tingkat koleksi      </td>
       <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAlias</td>
     </tr>
   </tbody>
@@ -744,7 +744,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        nilai ttl saat sesi memberikan sewa untuk mendaftarkan layanan      </td>
+      <td>        Nilai ttl saat sesi memberikan sewa untuk mendaftarkan layanan      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -860,7 +860,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        milidetik minimum untuk durasi pencetakan dalam tingkat peringatan      </td>
+      <td>        milidetik minimum untuk durasi pencetakan dalam level peringatan      </td>
       <td>1000</td>
     </tr>
   </tbody>

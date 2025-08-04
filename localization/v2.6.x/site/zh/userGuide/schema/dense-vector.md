@@ -222,10 +222,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>存储向量，其每个维度的单个元素均为 8 位整数（int8），每个元素的范围为 -128 至 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。</p></td>
+     <td><p>存储向量，其每个维度的单个元素均为 8 位整数（int8），每个元素的范围为 -128 至 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。<br><strong>注意</strong>：此向量类型仅支持 HNSW 索引。</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">为向量场设置索引参数</h3><p>为了加速语义搜索，必须为向量场创建索引。索引可以大大提高大规模向量数据的检索效率。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">为向量字段设置索引参数</h3><p>为了加速语义搜索，必须为向量字段创建索引。索引可以大大提高大规模向量数据的检索效率。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()

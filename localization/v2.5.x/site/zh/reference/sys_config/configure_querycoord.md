@@ -278,7 +278,7 @@ summary: 了解如何为 Milvus 配置 queryCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        查询协调平衡查询节点内存使用量的时间间隔。      </td>
+      <td>        query coord 平衡各查询节点内存使用量的时间间隔。      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -599,7 +599,7 @@ summary: 了解如何为 Milvus 配置 queryCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        平衡成本阈值，如果执行平衡计划后群组成本的差值小于此值，则不执行该计划      </td>
+      <td>        平衡成本阈值，如果执行平衡计划后群组成本的差额小于此值，则不执行该计划      </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -715,7 +715,7 @@ summary: 了解如何为 Milvus 配置 queryCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        querycoord 从查询节点获取数据分发的请求超时，毫秒数      </td>
+      <td>        querycoord 从查询节点获取数据分布的请求超时，毫秒数      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -773,7 +773,7 @@ summary: 了解如何为 Milvus 配置 queryCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        3s，查询协调器尝试检查查询节点健康状况的时间间隔      </td>
+      <td>        3 秒，Query coord 尝试检查查询节点健康状况的时间间隔      </td>
       <td>3000</td>
     </tr>
   </tbody>

@@ -29,7 +29,7 @@ title: Construire RAG avec Milvus et Crawl4AI
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_crawl4ai.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://crawl4ai.com/mkdocs/">Crawl4AI</a> permet aux LLM d'effectuer des recherches sur le web à une vitesse fulgurante et de manière à ce qu'elles soient compatibles avec l'intelligence artificielle. Open-source et optimisé pour RAG, il simplifie le scraping avec une extraction avancée et des performances en temps réel.</p>
+<p><a href="https://crawl4ai.com/mkdocs/">Crawl4AI</a> permet aux LLM d'effectuer des recherches sur le web à une vitesse fulgurante et de manière à ce qu'elles soient compatibles avec l'IA. Open-source et optimisé pour RAG, il simplifie le scraping avec une extraction avancée et des performances en temps réel.</p>
 <p>Dans ce tutoriel, nous allons vous montrer comment construire un pipeline de Génération Assistée par Récupération (RAG) en utilisant Milvus et Crawl4AI. Le pipeline intègre Crawl4AI pour l'exploration des données Web, Milvus pour le stockage vectoriel et OpenAI pour générer des réponses perspicaces et contextuelles.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -196,7 +196,7 @@ INFO:numexpr.utils:NumExpr defaulting to 8 threads.
 <div class="alert note">
 <p>Comme pour l'argument de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li><p>Définir <code translate="no">uri</code> comme fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</p></li>
+<li><p>Définir <code translate="no">uri</code> comme un fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</p></li>
 <li><p>Si vous avez des données à grande échelle, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Dans cette configuration, veuillez utiliser l'uri du serveur, par exemple<code translate="no">http://localhost:19530</code>, comme votre <code translate="no">uri</code>.</p></li>
 <li><p>Si vous souhaitez utiliser <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service cloud entièrement géré pour Milvus, ajustez les adresses <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">point de terminaison public et à la clé Api</a> dans Zilliz Cloud.</p></li>
 </ul>
@@ -211,7 +211,7 @@ INFO:numexpr.utils:NumExpr defaulting to 8 threads.
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Insérer les données</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

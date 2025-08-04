@@ -5,12 +5,12 @@ summary: >-
   La décroissance gaussienne, également connue sous le nom de décroissance
   normale, crée l'ajustement le plus naturel de vos résultats de recherche. À
   l'instar de la vision humaine qui s'estompe progressivement avec la distance,
-  la décroissance gaussienne crée une courbe lisse en forme de cloche qui réduit
-  doucement la pertinence au fur et à mesure que les éléments s'éloignent de
-  votre point idéal. Cette approche est idéale lorsque vous souhaitez une
-  décroissance équilibrée qui ne pénalise pas durement les éléments situés juste
-  en dehors de votre plage préférée, mais qui réduit tout de même de manière
-  significative la pertinence des éléments éloignés.
+  la décroissance gaussienne crée une courbe lisse, en forme de cloche, qui
+  réduit doucement la pertinence à mesure que les éléments s'éloignent de votre
+  point idéal. Cette approche est idéale lorsque vous souhaitez une décroissance
+  équilibrée qui ne pénalise pas durement les éléments situés juste en dehors de
+  votre plage préférée, mais qui réduit tout de même de manière significative la
+  pertinence des éléments éloignés.
 beta: Milvus 2.6.x
 ---
 <h1 id="Gaussian-Decay" class="common-anchor-header">Décroissance gaussienne<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">
@@ -182,7 +182,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],  <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de décroissance peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>

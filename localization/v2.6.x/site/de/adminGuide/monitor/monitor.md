@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>Metriken sind Indikatoren, die Informationen über den Betriebsstatus Ihres Systems liefern. Mit Metriken können Sie beispielsweise nachvollziehen, wie viel Arbeitsspeicher oder CPU-Ressourcen von einem Datenknoten in Milvus verbraucht werden. Wenn Sie die Leistung und den Status der Komponenten in Ihrem Milvus-Cluster kennen, sind Sie gut informiert und können daher bessere Entscheidungen treffen und die Ressourcenzuweisung rechtzeitig anpassen.</p>
 <p>Im Allgemeinen werden die Metriken in einer Zeitseriendatenbank (TSDB) wie <a href="https://prometheus.io/">Prometheus</a> gespeichert und mit einem Zeitstempel versehen. Bei der Überwachung von Milvus-Diensten können Sie Prometheus verwenden, um Daten von Endpunkten zu beziehen, die von Exporteuren festgelegt wurden. Prometheus exportiert dann die Metriken der einzelnen Milvus-Komponenten unter <code translate="no">http://&lt;component-host&gt;:9091/metrics</code>.</p>
 <p>Es kann jedoch sein, dass Sie mehrere Repliken für eine Komponente haben, was die manuelle Konfiguration von Prometheus zu kompliziert macht. Daher können Sie <a href="https://github.com/prometheus-operator/prometheus-operator">Prometheus Operator</a>, eine Erweiterung für Kubernetes, für die automatisierte und effektive Verwaltung von Prometheus-Überwachungsinstanzen verwenden. Die Verwendung von Prometheus Operator erspart Ihnen das manuelle Hinzufügen von metrischen Zielen und Dienstanbietern.</p>
-<p>Mit der benutzerdefinierten Ressourcendefinition (CRD) von ServiceMonitor können Sie deklarativ festlegen, wie eine dynamische Gruppe von Diensten überwacht wird. Sie ermöglicht auch die Auswahl der zu überwachenden Dienste mit der gewünschten Konfiguration unter Verwendung von Labels. Mit Prometheus Operator können Sie Konventionen einführen, die festlegen, wie Metriken offengelegt werden. Neue Dienste können automatisch gemäß der von Ihnen festgelegten Konvention entdeckt werden, ohne dass eine manuelle Neukonfiguration erforderlich ist.</p>
+<p>Mit der benutzerdefinierten Ressourcendefinition (CRD) von ServiceMonitor können Sie deklarativ festlegen, wie eine dynamische Gruppe von Diensten überwacht wird. Sie ermöglicht auch die Auswahl der zu überwachenden Dienste mit der gewünschten Konfiguration unter Verwendung von Labels. Mit Prometheus Operator können Sie Konventionen einführen, die festlegen, wie Metriken dargestellt werden. Neue Dienste können automatisch gemäß der von Ihnen festgelegten Konvention erkannt werden, ohne dass eine manuelle Neukonfiguration erforderlich ist.</p>
 <p>Die folgende Abbildung veranschaulicht den Prometheus-Workflow.</p>
 <p>
   
@@ -98,15 +98,47 @@ Die standardmäßige prometheus-k8s-Clusterrole kann die Metriken von milvus nic
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Aktivieren Sie den ServiceMonitor</h3><p>Der ServiceMonitor ist für Milvus Helm standardmäßig nicht aktiviert. Nach der Installation des Prometheus Operator im Kubernetes-Cluster können Sie ihn durch Hinzufügen des Parameters <code translate="no">metrics.serviceMonitor.enabled=true</code> aktivieren.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values</span>
-<button class="copy-code-btn"></button></code></pre>
+<h4 id="With-Helm" class="common-anchor-header">Mit Helm</h4><p>Sie können den ServiceMonitor aktivieren, indem Sie den Parameter <code translate="no">metrics.serviceMonitor.enabled=true</code> wie folgt setzen, wenn Sie Milvus Helm chart installiert haben.</p>
+<pre><code translate="no">```
+$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
+```
+</code></pre>
 <p>Wenn die Installation abgeschlossen ist, verwenden Sie <code translate="no">kubectl</code>, um die ServiceMonitor-Ressource zu überprüfen.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h4 id="With-Milvus-Operator" class="common-anchor-header">Mit Milvus Operator</h4><p>Sie können den ServiceMonitor wie folgt aktivieren, wenn Sie Milvus mit dem Milvus Operator installiert haben.</p>
+<ol>
+<li><p>Führen Sie den folgenden Befehl aus, um die benutzerdefinierte MIlvus-Ressource zu bearbeiten. Der folgende Befehl geht davon aus, dass die benutzerdefinierte Ressource den Namen <code translate="no">my-release</code> trägt.</p>
+<pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Ändern Sie das Feld <code translate="no">spec.components.disableMetrics</code> in <code translate="no">false</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Speichern Sie und beenden Sie den Editor.</p></li>
+<li><p>Warten Sie, bis der Operator die Änderungen abgeglichen hat. Sie können den Status der benutzerdefinierten Milvus-Ressource überprüfen, indem Sie den folgenden Befehl ausführen.</p>
+<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> milvus my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span> <span class="hljs-operator">-</span>o yaml
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<p>Das Feld <code translate="no">status.components.metrics.serviceMonitor.enabled</code> sollte <code translate="no">true</code> lauten.</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3. Prüfen Sie die Metriken</h3><p>Nachdem Sie den ServiceMonitor aktiviert haben, können Sie das Prometheus-Dashboard unter <code translate="no">http://localhost:9090/</code> aufrufen.</p>
+<p>Klicken Sie auf die Registerkarte <code translate="no">Status</code> und dann auf <code translate="no">Targets</code>. Sie sollten die Ziele der Milvus-Komponenten sehen.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_targets.png" alt="Prometheus_targets" class="doc-image" id="prometheus_targets" />
+   </span> <span class="img-wrapper"> <span>Prometheus_Ziele</span> </span></p>
+<p>Klicken Sie auf die Registerkarte <code translate="no">Graph</code> und geben Sie den Ausdruck <code translate="no">up{job=&quot;default/my-release&quot;}</code> in das Eingabefeld für den Ausdruck ein. Sie sollten die Metriken der Milvus-Komponenten sehen.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
+   </span> <span class="img-wrapper"> <span>Prometheus_Grafik</span> </span></p>
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. Prüfen Sie den ServiceMonitor</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Wie geht es weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Der nächste Schritt<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -123,11 +155,11 @@ Die standardmäßige prometheus-k8s-Clusterrole kann die Metriken von milvus nic
       </svg>
     </button></h2><ul>
 <li>Wenn Sie Überwachungsdienste für den Milvus-Cluster implementiert haben, möchten Sie vielleicht auch lernen, wie das geht:<ul>
-<li><a href="/docs/de/visualize.md">Visualisieren von Milvus-Metriken in Grafana</a></li>
-<li><a href="/docs/de/alert.md">Einen Alert für Milvus-Dienste erstellen</a></li>
+<li><a href="/docs/de/visualize.md">Visualisierung von Milvus-Metriken in Grafana</a></li>
+<li><a href="/docs/de/alert.md">Einen Alert für Milvus Services erstellen</a></li>
 <li>Ihre <a href="/docs/de/allocate.md">Ressourcenzuweisung</a> anpassen</li>
 </ul></li>
-<li>Wenn Sie nach Informationen zur Skalierung eines Milvus-Clusters suchen:<ul>
+<li>Wenn Sie nach Informationen über die Skalierung eines Milvus-Clusters suchen:<ul>
 <li>Lernen Sie <a href="/docs/de/scaleout.md">einen Milvus-Cluster</a> zu <a href="/docs/de/scaleout.md">skalieren</a></li>
 </ul></li>
 <li>Wenn Sie an einem Upgrade der Milvus-Version interessiert sind,<ul>

@@ -8,8 +8,8 @@ summary: >-
   الكثيفة على المزيد من المعلومات على نفس مستوى الأبعاد، حيث يحتوي كل بُعد على
   قيم ذات معنى. يمكن لهذا التمثيل التقاط أنماط وعلاقات معقدة بشكل فعال، مما يسهل
   تحليل البيانات ومعالجتها في مساحات عالية الأبعاد. عادةً ما تحتوي المتجهات
-  الكثيفة على عدد ثابت من الأبعاد، يتراوح بين بضع عشرات إلى عدة مئات أو حتى
-  آلاف، اعتمادًا على التطبيق والمتطلبات المحددة.
+  الكثيفة على عدد ثابت من الأبعاد، يتراوح بين بضع عشرات إلى عدة مئات أو حتى آلاف
+  الأبعاد، اعتمادًا على التطبيق والمتطلبات المحددة.
 ---
 <h1 id="Dense-Vector" class="common-anchor-header">المتجهات الكثيفة<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -229,10 +229,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>يخزِّن المتجهات التي تكون عناصرها الفردية في كل بُعد عبارة عن أعداد صحيحة 8 بت (int8)، بحيث يتراوح كل عنصر من -128 إلى 127. تم تصميم INT8_VECTOR لنماذج التعلّم العميق المكمّلة (مثل ResNet وEfficientNet)، حيث يقلل INT8_VECTOR من حجم النموذج ويسرّع الاستدلال بأقل خسارة في الدقة.</p></td>
+     <td><p>يخزِّن المتجهات التي تكون عناصرها الفردية في كل بُعد عبارة عن أعداد صحيحة 8 بت (int8)، بحيث يتراوح كل عنصر من -128 إلى 127. تم تصميم INT8_VECTOR لنماذج التعلم العميق الكمي (مثل ResNet وEfficientNet)، وهو مصمم لنماذج التعلم العميق الكمي (مثل: ResNet وEfficientNet)، حيث يقلل من حجم النموذج ويسرّع الاستدلال بأقل خسارة في الدقة.<br><strong>ملاحظة</strong>: هذا النوع من المتجهات مدعوم فقط لفهارس HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجهات</h3><p>لتسريع عمليات البحث الدلالي، يجب إنشاء فهرس للحقل المتجه. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجه</h3><p>لتسريع عمليات البحث الدلالي، يجب إنشاء فهرس للحقل المتجه. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -494,4 +494,4 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول معلمات البحث عن التشابه، راجع <a href="/docs/ar/single-vector-search.md">بحث التشابه الأساسي</a>.</p>
+<p>للمزيد من المعلومات حول معلمات البحث عن التشابه، راجع <a href="/docs/ar/single-vector-search.md">بحث التشابه الأساسي</a>.</p>

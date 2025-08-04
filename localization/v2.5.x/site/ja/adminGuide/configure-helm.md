@@ -5,7 +5,6 @@ related_key: configure
 summary: MilvusをHelmチャートで設定する。
 title: HelmチャートでMilvusを設定する
 ---
-
 <h1 id="Configure-Milvus-with-Helm-Charts" class="common-anchor-header">HelmチャートでMilvusを設定する<button data-href="#Configure-Milvus-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +40,7 @@ title: HelmチャートでMilvusを設定する
       </svg>
     </button></h2><p>設定ファイル<code translate="no">values.yaml</code> を使用してMilvusを設定することができます。</p>
 <h3 id="Download-a-configuration-file" class="common-anchor-header">設定ファイルのダウンロード</h3><p><code translate="no">values.yaml</code> を直接<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">ダウンロード</a>するか、以下のコマンドでダウンロードします。</p>
-<pre><code translate="no">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">設定ファイルの変更</h3><p><code translate="no">values.yaml</code> の対応するパラメータを調整することにより、アプリケーションのシナリオに合わせてMilvusインスタンスを設定します。</p>
 <p>具体的には、<code translate="no">values.yaml</code> の<code translate="no">extraConfigFiles</code> を検索し、以下のようにこのセクションに設定を記述します：</p>
@@ -49,14 +48,14 @@ title: HelmチャートでMilvusを設定する
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
 <span class="hljs-comment"># Please follow the config structure in the milvus.yaml</span>
 <span class="hljs-comment"># at https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># Note: this config will be the top priority which will override the config</span>
+<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> this config will be the top priority which will override the config</span>
 <span class="hljs-comment"># in the image and helm chart.</span>
-extraConfigFiles:
-  user.yaml: |+
-    <span class="hljs-comment">#    For example to set the graceful time for query nodes</span>
-    <span class="hljs-comment">#    queryNodes:</span>
-    <span class="hljs-comment">#      gracefulTime: 10</span>
-<button class="copy-code-btn"></button></code></pre>
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    #    For example to set the graceful time for query nodes
+    #    queryNodes:
+    #      gracefulTime: 10
+</span><button class="copy-code-btn"></button></code></pre>
 <p>各パラメータの詳細については、以下のリンクを参照してください。</p>
 <p>並べ替え</p>
 <div class="filter">
@@ -198,7 +197,7 @@ extraConfigFiles:
 </div>
 <p>その他、Kubernetesのインストールに特化したパラメータについては、<a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configurationを</a>参照してください。</p>
 <h3 id="Start-Milvus" class="common-anchor-header">Milvusの起動</h3><p>設定ファイルの修正が完了したら、そのファイルを使ってMilvusを起動します。</p>
-<pre><code translate="no">$ helm upgrade my-release milvus/milvus -f values.yaml
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">コマンドラインによるMilvusの設定<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,11 +216,11 @@ extraConfigFiles:
       </svg>
     </button></h2><p>また、HelmコマンドでMilvusの設定を直接アップグレードすることもできます。</p>
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">設定可能パラメータの確認</h3><p>アップグレードの前に、Helmチャートで設定可能なパラメータを確認することができます。</p>
-<pre><code translate="no">$ helm show values milvus/milvus
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Start-Milvus" class="common-anchor-header">Milvusの起動</h3><p>アップグレード用コマンドに<code translate="no">--values</code> または<code translate="no">--set</code> を追加して、Milvus を設定・起動します。</p>
-<pre><code translate="no"><span class="hljs-comment"># For instance, upgrade the Milvus cluster with compaction disabled</span>
-$ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span>
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

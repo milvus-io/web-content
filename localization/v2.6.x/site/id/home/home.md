@@ -9,7 +9,7 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
-    <h2 class="promotion-title">Coba Managed Milvus Secara Gratis!</h2>
+    <h2 class="promotion-title">Coba Managed Milvus Gratis!</h2>
     <p class="promotion-desc">Zilliz Cloud tidak merepotkan, didukung oleh Milvus dan 10x lebih cepat.</p>
   </div>
   <div class="cta-wrapper">
@@ -69,15 +69,15 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
 <ul>
 <li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah, dan Menghapus</a></li>
-<li><a href="/docs/id/index-vector-fields.md">Bidang Vektor Indeks</a></li>
 <li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 <li><a href="/docs/id/get-and-scalar-query.md">Dapatkan &amp; Kueri Skalar</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Menyebarkan</p>
 <ul>
-<li><a href="/docs/id/configure-docker.md">Mengkonfigurasi Milvus</a></li>
+<li><a href="/docs/id/configure-docker.md">Mengonfigurasi Milvus</a></li>
 <li><a href="/docs/id/deploy_s3.md">Kelola Ketergantungan</a></li>
 <li><a href="/docs/id/eks.md">Menerapkan di Awan</a></li>
 <li><a href="/docs/id/scaleout.md">Menetapkan Skala Cluster Milvus</a></li>
@@ -89,7 +89,7 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
 <ul>
 <li><a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a></li>
 <li><a href="/docs/id/architecture_overview.md">Gambaran Umum Arsitektur</a></li>
-<li><a href="/docs/id/index.md">Indeks Vektor</a></li>
+<li><a href="/docs/id/index-explained.md">Penjelasan Indeks</a></li>
 <li><a href="/docs/id/metric.md">Metrik Kemiripan</a></li>
 <li><a href="/docs/id/glossary.md">Daftar Istilah</a></li>
 </ul>
@@ -111,12 +111,12 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Nov 2024 - Rilis Milvus 2.5.0</em></p>
+    </button></h2><p><em>Juni 2025 - Rilis Milvus 2.6.0</em></p>
 <ul>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/full-text-search.md">melakukan pencarian teks lengkap</a>.</li>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/keyword-match.md">melakukan pencocokan teks</a>.</li>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/nullable-and-default.md">mengaktifkan nilai yang dapat dibatalkan dan nilai default</a>.</li>
-<li>Menambahkan deskripsi <a href="/docs/id/analyzer-overview.md">analisa</a>.</li>
-<li>Menambahkan deskripsi <a href="/docs/id/bitmap.md">indeks bitmap</a>.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/embedding-function-overview.md">menggunakan fungsi penyematan</a>.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/decay-ranker-overview.md">menggunakan pemeringkat peluruhan</a>.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/add-fields-to-an-existing-collection.md">menambahkan bidang ke koleksi yang sudah ada.</a></li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/phrase-match.md">melakukan pencocokan frasa</a>.</li>
+<li>Menambahkan deskripsi <a href="/docs/id/ivf-rabitq.md">indeks IVF_RABITQ</a>.</li>
 </ul>
 </div>

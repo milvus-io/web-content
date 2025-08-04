@@ -39,11 +39,11 @@ title: 使用 Helm Charts 配置 Milvus
         ></path>
       </svg>
     </button></h2><p>您可以使用配置文件<code translate="no">values.yaml</code> 來配置 Milvus。</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">下載配置檔</h3><p>直接<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">下載</a> <code translate="no">values.yaml</code> 或使用以下命令。</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">下載配置檔</h3><p>直接<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">下載</a> <code translate="no">values.yaml</code> 或使用以下命令。</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">修改配置文件</h3><p>通過調整<code translate="no">values.yaml</code> 中的相應參數，配置您的 Milvus 實例，以適應您的應用場景。</p>
-<p>具體來說，在<code translate="no">values.yaml</code> 中搜尋<code translate="no">extraConfigFiles</code> ，並將您的配置放入此部分，如下所示：</p>
+<p>具體來說，在<code translate="no">values.yaml</code> 中搜索<code translate="no">extraConfigFiles</code> ，並將您的配置放入此部分，如下所示：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Extra configs for milvus.yaml</span>
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
 <span class="hljs-comment"># Please follow the config structure in the milvus.yaml</span>
@@ -218,7 +218,7 @@ title: 使用 Helm Charts 配置 Milvus
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">檢查可配置的參數</h3><p>在升級之前，你可以用 Helm 圖表檢查可配置的參數。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Start-Milvus" class="common-anchor-header">啟動 Milvus</h3><p>在升級的指令中加入<code translate="no">--values</code> 或<code translate="no">--set</code> ，配置並啟動 Milvus。</p>
+<h3 id="Start-Milvus" class="common-anchor-header">啟動 Milvus</h3><p>在升級指令中加入<code translate="no">--values</code> 或<code translate="no">--set</code> ，設定並啟動 Milvus。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>

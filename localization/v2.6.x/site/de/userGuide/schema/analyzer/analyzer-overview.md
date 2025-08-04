@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>In der Textverarbeitung ist ein <strong>Analyzer</strong> eine entscheidende Komponente, die Rohtext in ein strukturiertes, durchsuchbares Format umwandelt. Jeder Analyzer besteht in der Regel aus zwei Kernelementen: <strong>Tokenizer</strong> und <strong>Filter</strong>. Gemeinsam wandeln sie den Eingabetext in Token um, verfeinern diese Token und bereiten sie für eine effiziente Indizierung und Suche vor.</p>
-<p>In Milvus werden die Analyzer während der Erstellung der Sammlung konfiguriert, wenn Sie <code translate="no">VARCHAR</code> Felder zum Schema der Sammlung hinzufügen. Die von einem Analyzer erzeugten Token können zum Aufbau eines Indexes für den Schlüsselwortabgleich verwendet oder in Sparse Embeddings für die Volltextsuche konvertiert werden. Weitere Informationen finden Sie unter <a href="/docs/de/keyword-match.md">Textabgleich</a> oder <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
+<p>In Milvus werden die Analyzer während der Erstellung der Sammlung konfiguriert, wenn Sie <code translate="no">VARCHAR</code> Felder zum Schema der Sammlung hinzufügen. Die von einem Analyzer erzeugten Token können zum Aufbau eines Indexes für den Schlüsselwortabgleich verwendet oder in Sparse Embeddings für die Volltextsuche konvertiert werden. Weitere Informationen finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>, <a href="/docs/de/phrase-match.md">Phrasenabgleich</a> oder <a href="/docs/de/keyword-match.md">Textabgleich</a>.</p>
 <div class="alert note">
 <p>Die Verwendung von Analyzern kann die Leistung beeinträchtigen:</p>
 <ul>
@@ -81,9 +81,12 @@ summary: >-
 <li><p><strong>Benutzerdefinierter Analyzer</strong>: Für anspruchsvollere Anforderungen können Sie mit benutzerdefinierten Analysatoren Ihre eigene Konfiguration definieren, indem Sie sowohl den Tokenizer als auch null oder mehr Filter angeben. Dieser Grad der Anpassung ist besonders nützlich für spezielle Anwendungsfälle, bei denen eine genaue Kontrolle über die Textverarbeitung erforderlich ist.</p></li>
 </ul>
 <div class="alert note">
-<p>Wenn Sie bei der Erstellung der Sammlung die Konfiguration des Analysators weglassen, verwendet Milvus standardmäßig den <code translate="no">standard</code> Analysator für die gesamte Textverarbeitung. Weitere Informationen finden Sie unter <a href="/docs/de/standard-analyzer.md">Standard</a>.</p>
+<ul>
+<li>Wenn Sie bei der Erstellung der Sammlung keine Analysator-Konfigurationen vornehmen, verwendet Milvus standardmäßig den <code translate="no">standard</code> Analysator für die gesamte Textverarbeitung. Weitere Informationen finden Sie unter <a href="/docs/de/standard-analyzer.md">Standard-Analysator</a>.</li>
+<li>Um eine optimale Such- und Abfrageleistung zu erzielen, wählen Sie einen Analyzer, der der Sprache Ihrer Textdaten entspricht. Der <code translate="no">standard</code> Analyzer ist zwar vielseitig, aber für Sprachen mit einzigartigen grammatikalischen Strukturen wie Chinesisch, Japanisch oder Koreanisch ist er möglicherweise nicht die beste Wahl. In solchen Fällen sollten Sie einen sprachspezifischen Analyzer wie <a href="/docs/de/chinese-analyzer.md"><code translate="no">chinese</code></a> oder benutzerdefinierte Analysatoren mit spezialisierten Tokenizern (wie z. B. <a href="/docs/de/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/de/icu-tokenizer.md"><code translate="no">icu</code></a>) und Filtern wird dringend empfohlen, um eine genaue Tokenisierung und bessere Suchergebnisse zu gewährleisten.</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Eingebauter Analysator</h3><p>Eingebaute Analysatoren in Milvus sind mit spezifischen Tokenizern und Filtern vorkonfiguriert, so dass Sie sie sofort verwenden können, ohne diese Komponenten selbst definieren zu müssen. Jeder eingebaute Analyzer dient als Vorlage, die einen voreingestellten Tokenizer und Filter mit optionalen Parametern zur Anpassung enthält.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Eingebauter Analyzer</h3><p>Eingebaute Analysatoren in Milvus sind mit spezifischen Tokenizern und Filtern vorkonfiguriert, so dass Sie sie sofort verwenden können, ohne diese Komponenten selbst definieren zu müssen. Jeder eingebaute Analyzer dient als Vorlage, die einen voreingestellten Tokenizer und Filter mit optionalen Parametern zur Anpassung enthält.</p>
 <p>Um zum Beispiel den eingebauten Analyzer <code translate="no">standard</code> zu verwenden, geben Sie einfach seinen Namen <code translate="no">standard</code> als <code translate="no">type</code> an und fügen optional zusätzliche Konfigurationen hinzu, die für diesen Analyzer-Typ spezifisch sind, wie <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -757,3 +760,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">Wie geht es weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Nachdem Sie einen Analyzer konfiguriert haben, können Sie die von Milvus bereitgestellten Textabfragefunktionen integrieren. Für Details:</p>
+<ul>
+<li><p><a href="/docs/de/full-text-search.md">Volltextsuche</a></p></li>
+<li><p><a href="/docs/de/keyword-match.md">Text-Abgleich</a></p></li>
+<li><p><a href="/docs/de/phrase-match.md">Phrase Match</a></p></li>
+</ul>

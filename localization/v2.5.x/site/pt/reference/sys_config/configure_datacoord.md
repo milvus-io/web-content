@@ -275,7 +275,7 @@ summary: Saiba como configurar o dataCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        A proporção mínima para datacoord.segment.maxSize para selar um segmento. datacoord.segment.maxSize e datacoord.segment.sealProportion juntos determinam se um segmento pode ser selado.      </td>
+      <td>        A proporção mínima de datacoord.segment.maxSize para selar um segmento. datacoord.segment.maxSize e datacoord.segment.sealProportion juntos determinam se um segmento pode ser selado.      </td>
       <td>0.12</td>
     </tr>
   </tbody>
@@ -1397,7 +1397,7 @@ summary: Saiba como configurar o dataCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        número mínimo de centróides no comboio Kmeans      </td>
+      <td>        Número mínimo de centróides no comboio Kmeans      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -1977,7 +1977,7 @@ summary: Saiba como configurar o dataCoord para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        O intervalo para verificar a importação, medido em segundos, é definido como uma frequência baixa para o verificador de importação.      </td>
+      <td>        O intervalo para verificar a importação, medido em segundos, está definido para uma frequência baixa para o verificador de importação.      </td>
       <td>120</td>
     </tr>
   </tbody>

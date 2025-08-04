@@ -83,7 +83,6 @@ summary: Pelajari tentang batasan-batasan saat menggunakan Milvus.
 </thead>
 <tbody>
 <tr><td>Koleksi</td><td>65,536</td></tr>
-<tr><td>Koneksi / proxy</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Jumlah sumber daya dalam koleksi<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
@@ -103,7 +102,7 @@ summary: Pelajari tentang batasan-batasan saat menggunakan Milvus.
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>Sumber daya</th><th>Batas</th></tr>
+<tr><th>Sumber Daya</th><th>Batas</th></tr>
 </thead>
 <tbody>
 <tr><td>Partisi</td><td>1,024</td></tr>

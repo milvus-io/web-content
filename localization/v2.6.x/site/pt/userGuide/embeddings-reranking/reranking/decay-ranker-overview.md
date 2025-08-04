@@ -68,7 +68,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>A classificação decrescente melhora a pesquisa vetorial tradicional ao incorporar factores numéricos como o tempo ou a distância geográfica no processo de classificação. O processo completo segue as seguintes etapas:</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Etapa 1: Calcular as pontuações de semelhança normalizadas</h3><p>Primeiro, o Milvus calcula e normaliza as pontuações de similaridade dos vectores para garantir uma comparação consistente:</p>
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Fase 1: Calcular as pontuações de semelhança normalizadas</h3><p>Primeiro, o Milvus calcula e normaliza as pontuações de similaridade dos vectores para garantir uma comparação consistente:</p>
 <ul>
 <li><p>Para as métricas de distância <strong>L2</strong> e <strong>JACCARD</strong> (em que valores mais baixos indicam maior semelhança):</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
@@ -85,7 +85,7 @@ beta: Milvus 2.6.x
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Etapa 3: Calcular as pontuações finais</h3><p>Finalmente, o Milvus combina a pontuação de similaridade normalizada e a pontuação de decaimento para produzir a pontuação de classificação final:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>Nos casos de pesquisa híbrida (combinando vários campos vectoriais), o Milvus utiliza a pontuação máxima de similaridade normalizada entre os pedidos de pesquisa:</p>
+<p>Nos casos de pesquisa híbrida (combinando múltiplos campos vectoriais), Milvus utiliza a pontuação máxima de similaridade normalizada entre os pedidos de pesquisa:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Por exemplo, se um artigo de investigação tiver uma pontuação de 0,82 na similaridade vetorial e 0,91 na recuperação de texto com base no BM25 numa pesquisa híbrida, o Milvus utiliza 0,91 como pontuação de similaridade de base antes de aplicar o fator de decaimento.</p>
@@ -142,7 +142,7 @@ beta: Milvus 2.6.x
 </table>
 <p>Sem o decay reranking, o Documento B teria a classificação mais elevada com base na semelhança vetorial pura (0,92). No entanto, com a classificação decrescente aplicada:</p>
 <ul>
-<li><p>O artigo C salta para a posição #1, apesar da similaridade média, porque é muito recente (publicado ontem)</p></li>
+<li><p>O artigo C salta para a posição #1 apesar da similaridade média porque é muito recente (publicado ontem)</p></li>
 <li><p>O artigo B desce para a posição #3, apesar da excelente semelhança, porque é relativamente antigo</p></li>
 <li><p>O artigo D utiliza a distância L2 (em que quanto menor for, melhor), pelo que a sua pontuação é normalizada de 1,2 para 0,76 antes de aplicar a desclassificação</p></li>
 </ul>
@@ -183,7 +183,7 @@ beta: Milvus 2.6.x
      <td><p>Exponencial (<code translate="no">exp</code>)</p></td>
      <td><p>Diminui rapidamente no início, mas mantém uma cauda longa</p></td>
      <td><ul>
-<li><p>Feeds de notícias, onde a atualidade é fundamental</p></li>
+<li><p>Feeds de notícias em que a atualidade é fundamental</p></li>
 <li><p>Redes sociais onde o conteúdo fresco deve dominar</p></li>
 <li><p>Quando a proximidade é fortemente preferida, mas os itens excecionalmente distantes devem permanecer visíveis</p></li>
 </ul></td>
@@ -236,7 +236,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -324,7 +324,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida</h3><p>Os classificadores de decaimento também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vectoriais:</p>

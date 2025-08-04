@@ -1,6 +1,6 @@
 ---
 id: upsert-entities.md
-title: Entità Upsert
+title: Inserimento di entità
 summary: >-
   L'operazione Upsert combina le azioni di aggiornamento e inserimento dei dati.
   Milvus determina se eseguire un'operazione di aggiornamento o di inserimento
@@ -8,7 +8,7 @@ summary: >-
   come effettuare l'Upsert di un'entità e il comportamento specifico
   dell'operazione Upsert in diversi scenari.
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Entità Upsert<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">Inserimento di entità<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'operazione Upsert combina le azioni di aggiornamento e inserimento dei dati. Milvus determina se eseguire un'operazione di aggiornamento o di inserimento controllando se la chiave primaria esiste. Questa sezione illustra come effettuare l'Upsert di un'entità e i comportamenti specifici dell'operazione Upsert in diversi scenari.</p>
+    </button></h1><p>L'operazione <code translate="no">upsert</code> fornisce un modo conveniente per inserire o aggiornare entità in una collezione. Gestisce in modo intelligente i dati controllando l'esistenza di una chiave primaria: se la chiave esiste già, l'entità corrispondente viene aggiornata; altrimenti, viene inserita una nuova entità. Questo rende <code translate="no">upsert</code> il metodo consigliato per gestire i dati quando non si è sicuri che un'entità esista già o quando si vuole evitare di creare voci duplicate.</p>
 <div class="alert note">
-<p>Se si aggiungono dinamicamente nuovi campi dopo la creazione della collezione e non si specificano i valori per questi campi durante l'operazione di upsert, Milvus li popola automaticamente con i valori predefiniti o con NULL se non sono stati impostati. Per ulteriori informazioni, consultare <a href="/docs/it/add-fields-to-an-existing-collection.md">Aggiungi campi a una raccolta esistente</a>.</p>
+<p>Se si aggiungono dinamicamente nuovi campi dopo la creazione della collezione e non si specificano i valori per questi campi durante l'upserting delle entità, Milvus li popola automaticamente con i valori predefiniti o con NULL se non sono stati impostati. Per ulteriori informazioni, consultare <a href="/docs/it/add-fields-to-an-existing-collection.md">Aggiungi campi a una raccolta esistente</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -277,7 +277,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È anche possibile inserire entità in una partizione specificata. I seguenti frammenti di codice presuppongono che nella collezione sia presente una partizione denominata <strong>PartitionA</strong>.</p>
+    </button></h2><p>È anche possibile inserire entità in una partizione specificata. I seguenti frammenti di codice ipotizzano che nella collezione sia presente una partizione denominata <strong>PartitionA</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[

@@ -114,10 +114,45 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
         ></path>
       </svg>
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 集群</h3><p>安裝 Helm 圖表後，您就可以在 Kubernetes 上啟動 Milvus。本節將引導您完成啟動 Milvus 的步驟。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install my-release milvus/milvus</span>
+<ul>
+<li><p>若要以獨立模式部署 Milvus 實例，請執行下列指令：</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
+  --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述指令中，<code translate="no">my-release</code> 是發行版名稱，而<code translate="no">milvus/milvus</code> 是本機安裝的圖表儲存庫。若要使用其他名稱，請將<code translate="no">my-release</code> 替換為您認為合適的名稱。</p>
-<p>上面的命令使用預設配置部署 Milvus 叢集及其元件和相依性。要自訂這些設定，我們建議您使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>調整<a href="https://milvus.io/tools/sizing">工具</a>，根據您的實際資料大小調整配置，然後下載相應的 YAML 檔案。要瞭解有關配置參數的更多資訊，請參閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>。</p>
+  <div class="alert note">
+<p>從 Milvus 2.6.x 開始，獨立模式中的架構變更如下：</p>
+<ul>
+<li>預設訊息佇列 (MQ) 為<strong>Woodpecker</strong>。</li>
+<li>引進<strong>Streaming Node</strong>元件，並預設啟用。</li>
+</ul>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>。</p>
+  </div>
+</li>
+<li><p>若要在群集模式下部署 Milvus 實例，請執行下列指令：</p>
+<p>您可以使用<code translate="no">--set</code> 安裝具有自訂組態的 Milvus 叢集。以下指令會將<code translate="no">streaming.enabled</code> 設為<code translate="no">true</code> 以啟用串流服務，並將<code translate="no">indexNode.enabled</code> 設為<code translate="no">false</code> 以停用索引服務。在這種情況下，串流節點會負責所有資料處理和索引工作。</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
+<button class="copy-code-btn"></button></code></pre>
+  <div class="alert note">
+<p>從 Milvus 2.6.x 開始，群集模式的架構變更如下：</p>
+<ul>
+<li>預設 MQ 仍為<strong>Pulsar</strong>。</li>
+<li>引入<strong>Streaming Node</strong>元件，並預設啟用。</li>
+<li><strong>索引節點 (Index Node</strong>) 和<strong>資料節點 (Data Node</strong>) 合併為<strong>單一資料節點 (Data Node</strong>) 元件。</li>
+</ul>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>。</p>
+  </div>
+</li>
+</ul>
+<p>在上述指令中，<code translate="no">my-release</code> 是發行版名稱，而<code translate="no">milvus/milvus</code> 是本機安裝的圖表儲存庫。若要使用不同的名稱，請將<code translate="no">my-release</code> 替換成您認為合適的名稱。</p>
+<p>上述命令使用預設配置部署 Milvus 實例及其元件和相依性。要自訂這些設定，我們建議您使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>調整<a href="https://milvus.io/tools/sizing">工具</a>，根據您的實際資料大小調整配置，然後下載相應的 YAML 檔案。要瞭解有關配置參數的更多資訊，請參閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>。</p>
 <div class="alert note">
   <ul>
     <li>版本名稱只能包含字母、數字和破折號。版本名稱中不允許使用點。</li>
@@ -166,7 +201,44 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以選擇在上述指令中使用<code translate="no">:19530</code> 而不是<code translate="no">27017:19530</code> ，讓<code translate="no">kubectl</code> 替您分配一個本機連接埠，這樣您就不必管理連接埠衝突。</p>
-<p>預設情況下，kubectl 的連接埠轉發只會在<code translate="no">localhost</code> 上監聽。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。以下指令會使 port-forward 在主機上的所有 IP 位址上聆聽。</p>
+<p>預設情況下，kubectl 的連接埠轉發只會在<code translate="no">localhost</code> 上監聽。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。下列指令會使 port-forward 聆聽主機上所有的 IP 位址。</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(可選）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>您可以透過編輯<code translate="no">values.yaml</code> 檔案更新 Milvus 叢集的配置，然後再套用一次。</p>
+<ol>
+<li>建立具有所需配置的<code translate="no">values.yaml</code> 檔案。</li>
+</ol>
+<p>以下假設您要啟用<code translate="no">proxy.http</code> 。</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    proxy:
+      http:
+        enabled: true
+</span><button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>套用<code translate="no">values.yaml</code> 檔案。</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>檢查更新的組態。</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm get values my-release
+<button class="copy-code-btn"></button></code></pre>
+<p>輸出應顯示更新的組態。</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">存取 Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

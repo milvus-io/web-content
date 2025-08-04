@@ -191,7 +191,7 @@ summary: 學習如何為 Milvus 設定 queryCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        進行平衡時，from 節點和 to 節點間不平衡範圍的最小值      </td>
+      <td>        進行平衡時，from 節點與 to 節點間不平衡範圍的最小值      </td>
       <td>0.05</td>
     </tr>
   </tbody>
@@ -1179,7 +1179,7 @@ summary: 學習如何為 Milvus 設定 queryCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        queryCoord 的 TCP/IP 位址。如果未指定，則使用第一個可單點傳送的位址。      </td>
+      <td>        queryCoord 的 TCP/IP 位址。若未指定，則使用第一個可單點傳送的位址。      </td>
       <td></td>
     </tr>
   </tbody>

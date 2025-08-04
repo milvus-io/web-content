@@ -41,7 +41,12 @@ summary: >-
       </svg>
     </button></h2><p>Time-to-Live (TTL) biasanya digunakan dalam database untuk skenario di mana data hanya boleh tetap valid atau dapat diakses selama periode tertentu setelah penyisipan atau modifikasi. Kemudian, data tersebut dapat dihapus secara otomatis.</p>
 <p>Misalnya, jika Anda memasukkan data setiap hari namun hanya perlu menyimpan catatan selama 14 hari, Anda dapat mengonfigurasi Milvus untuk secara otomatis menghapus data yang lebih lama dari itu dengan mengatur TTL koleksi ke <strong>14 × 24 × 3600 = 1209600</strong> detik. Hal ini memastikan bahwa hanya data 14 hari terakhir yang masih ada di dalam koleksi.</p>
-<p>Properti TTL dalam koleksi Milvus ditetapkan sebagai bilangan bulat dalam detik. Setelah ditetapkan, setiap data yang melampaui TTL-nya akan secara otomatis dihapus dari koleksi.</p>
+<div class="alert note">
+<p>Entitas yang kedaluwarsa tidak akan muncul dalam hasil pencarian atau kueri apa pun. Namun, entitas tersebut dapat tetap berada di penyimpanan hingga pemadatan data berikutnya, yang harus dilakukan dalam 24 jam ke depan.</p>
+<p>Anda dapat mengontrol kapan waktu pemadatan data dengan mengatur item konfigurasi <code translate="no">dataCoord.compaction.expiry.tolerance</code> dalam file konfigurasi Milvus Anda.</p>
+<p>Item konfigurasi ini secara default bernilai <code translate="no">-1</code>, yang mengindikasikan bahwa interval pemadatan data yang ada berlaku. Namun, ketika Anda mengubah nilainya menjadi bilangan bulat positif, seperti <code translate="no">12</code>, pemadatan data akan dipicu pada jumlah jam yang ditentukan setelah entitas menjadi kadaluarsa.</p>
+</div>
+<p>Properti TTL dalam koleksi Milvus ditetapkan sebagai bilangan bulat dalam hitungan detik. Setelah ditetapkan, setiap data yang melampaui TTL akan secara otomatis dihapus dari koleksi.</p>
 <p>Karena proses penghapusan bersifat asinkron, data mungkin tidak akan dihapus dari hasil pencarian tepat setelah TTL yang ditentukan berlalu. Sebaliknya, mungkin ada penundaan, karena penghapusan tergantung pada pengumpulan sampah (GC) dan proses pemadatan, yang terjadi pada interval non-deterministik.</p>
 <h2 id="Set-TTL" class="common-anchor-header">Mengatur TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"

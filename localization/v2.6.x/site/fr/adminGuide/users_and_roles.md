@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Après l'initialisation d'une instance Milvus, un utilisateur racine est automatiquement généré pour l'authentification lors de la première connexion à Milvus. Le nom d'utilisateur de l'utilisateur racine est <code translate="no">root</code> et le mot de passe est <code translate="no">Milvus</code>. Le rôle par défaut de l'utilisateur racine est <code translate="no">admin</code>, qui a accès à toutes les ressources. Pour garantir la sécurité des données, veuillez conserver les informations d'identification de l'utilisateur racine afin d'éviter tout accès non autorisé.</p>
-<p>Pour les opérations quotidiennes, nous recommandons de créer des utilisateurs plutôt que d'utiliser l'utilisateur racine.</p>
+<p>Pour les opérations quotidiennes, nous recommandons de créer des utilisateurs au lieu d'utiliser l'utilisateur racine.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Créer un utilisateur</h3><p>L'exemple suivant montre comment créer un utilisateur avec le nom d'utilisateur <code translate="no">user_1</code> et le mot de passe <code translate="no">P@ssw0rd</code>. Le nom d'utilisateur et le mot de passe de l'utilisateur doivent respecter les règles suivantes :</p>
 <ul>
 <li><p>Nom d'utilisateur : doit commencer par une lettre et ne peut inclure que des lettres majuscules ou minuscules, des chiffres et des traits de soulignement.</p></li>
@@ -276,6 +276,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Voici un exemple de sortie. <code translate="no">admin</code> est le rôle par défaut dans Milvus. <code translate="no">role_a</code> est le nouveau rôle qui vient d'être créé.</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]
+<p>Voici un exemple de résultat. <code translate="no">admin</code> est le rôle par défaut dans Milvus. <code translate="no">role_a</code> est le nouveau rôle qui vient d'être créé.</p>
+<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
 <button class="copy-code-btn"></button></code></pre>

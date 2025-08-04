@@ -210,10 +210,12 @@ schema.addField(AddFieldReq.builder()
 <p>这种类型的向量场保存一个 16 位半精度浮点数列表，通常适用于内存或带宽受限的深度学习或基于 GPU 的计算场景。</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>这种类型的向量字段保存 16 位浮点数列表，精度有所降低，但指数范围与 Float32 相同。这种类型的数据常用于深度学习场景，因为它能在不明显影响精度的情况下减少内存使用量。</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>这种类型的向量字段存储由 8 位有符号整数（int8）组成的向量，每个分量的范围为-128 到 127。它专为量化深度学习架构（如 ResNet 和 EfficientNet）量身定做，可大幅缩小模型大小，提高推理速度，同时只造成极小的精度损失。<strong>注</strong>：该向量类型仅支持 HNSW 索引。</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
-<p>这种类型的向量场保存着一个 0 和 1 的列表。它们是图像处理和信息检索场景中表示数据的紧凑特征。</p></li>
+<p>这种类型的向量场保存着一个 0 和 1 的列表。在图像处理和信息检索场景中，它们是表示数据的紧凑特征。</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>这种类型的向量场可保存非零数字及其序列号列表，用于表示稀疏向量嵌入。</p></li>
+<p>该类型的向量场可保存非零数字及其序列号列表，用于表示稀疏向量嵌入。</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields" class="common-anchor-header">添加标量字段<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>密なベクトルは、機械学習やデータ分析で広く使われている数値データ表現である。実数の配列で構成され、要素のほとんどまたはすべてが0でない。密なベクトルは疎なベクトルと比較して、各次元が意味のある値を保持しているため、同じ次元レベルでより多くの情報を含んでいます。この表現は、複雑なパターンや関係を効果的に捉えることができ、高次元空間でのデータの分析や処理を容易にします。密なベクトルは通常、特定のアプリケーションや要件に応じて、数十から数百、あるいは数千の固定された次元数を持つ。</p>
+    </button></h1><p>密なベクトルは、機械学習やデータ分析で広く使われている数値データ表現である。実数の配列で構成され、要素のほとんどまたはすべてが0でない。密なベクトルは疎なベクトルと比較して、各次元が意味のある値を保持しているため、同じ次元レベルでより多くの情報を含んでいます。この表現は、複雑なパターンや関係を効果的に捉えることができ、高次元空間でのデータの分析や処理を容易にします。密なベクトルは通常、特定のアプリケーションや要件に応じて、数十から数百、あるいは数千まで、一定の次元数を持つ。</p>
 <p>密なベクトルは主に、セマンティック検索や推薦システムなど、データのセマンティクスを理解する必要があるシナリオで使用される。セマンティック検索では、密なベクトルはクエリとドキュメント間の根本的なつながりを捕捉するのに役立ち、検索結果の関連性を向上させます。推薦システムでは、ユーザとアイテムの類似性を識別するのに役立ち、よりパーソナライズされた提案を提供します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>密なベクトルは、画像の場合はCNNモデル（<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNetや</a> <a href="https://pytorch.org/vision/stable/models/vgg.html">VGGの</a>ような）、テキストの場合は言語モデル（<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERTや</a> <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vecの</a>ような）など、さまざまな<a href="https://en.wikipedia.org/wiki/Embedding">埋め込み</a>モデルを使用して生成することができます。これらのモデルは生データを高次元空間のポイントに変換し、データの意味的特徴を捉えます。さらにMilvusは、Embeddingsで詳述されているように、ユーザが高密度ベクトルを生成し処理するのに役立つ便利なメソッドを提供しています。</p>
+<p>密なベクトルは、画像の場合はCNNモデル（<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>、<a href="https://pytorch.org/vision/stable/models/vgg.html">VGGなど</a>）、テキストの場合は言語モデル（<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>、<a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vecなど</a>）など、さまざまな<a href="https://en.wikipedia.org/wiki/Embedding">埋め込み</a>モデルを使用して生成することができます。これらのモデルは生データを高次元空間のポイントに変換し、データの意味的特徴を捉えます。さらにMilvusは、Embeddingsで詳述されているように、ユーザが高密度ベクトルを生成し処理するのに役立つ便利なメソッドを提供しています。</p>
 <p>一度ベクトル化されたデータはMilvusに保存され、管理やベクトル検索に利用することができます。下図は基本的なプロセスを示しています。</p>
 <p>
   
@@ -222,10 +222,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>各次元の各要素が8ビット整数（int8）であるベクトルを格納し、各要素の範囲は-128～127である。量子化された深層学習モデル（ResNet、EfficientNetなど）用に設計されたINT8_VECTORは、最小限の精度損失でモデルサイズを縮小し、推論を高速化します。</p></td>
+     <td><p>各次元の各要素が8ビット整数（int8）であるベクトルを格納し、各要素の範囲は-128～127である。量子化された深層学習モデル（ResNet、EfficientNetなど）用に設計されたINT8_VECTORは、最小限の精度損失でモデルサイズを縮小し、推論を高速化します。<br><strong>注</strong>：このベクトル型はHNSWインデックスでのみサポートされます。</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトルフィールドにインデックスパラメータを設定</h3><p>セマンティック検索を高速化するには、ベクトルフィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトルデータの検索効率を大幅に向上させることができる。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトルフィールドのインデックスパラメタの設定</h3><p>セマンティック検索を高速化するために、ベクトルフィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトルデータの検索効率を大幅に向上させることができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()

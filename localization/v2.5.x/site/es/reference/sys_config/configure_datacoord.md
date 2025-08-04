@@ -304,7 +304,7 @@ summary: Aprenda a configurar dataCoord para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        relación de fluctuación de la proporción de sellado del segmento, valor por defecto 0.1(10%), si la proporción de sellado es del 12%, con fluctuación=0.1, la relación aplicada será de 10.8~12%.      </td>
+      <td>        proporción de sellado del segmento, valor por defecto 0.1(10%), si la proporción de sellado es 12%, con jitter=0.1, la proporción aplicada será 10.8~12%.      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -1716,7 +1716,7 @@ summary: Aprenda a configurar dataCoord para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        archivo huérfano (archivo en oss pero que no ha sido registrado en meta) en el almacenamiento de objetos intervalo de escaneo de recolección de basura en horas     </td>
+      <td>        archivo huérfano (archivo en oss pero que no ha sido registrado en meta) en almacenamiento de objetos intervalo de escaneo de recolección de basura en horas     </td>
       <td>168</td>
     </tr>
   </tbody>

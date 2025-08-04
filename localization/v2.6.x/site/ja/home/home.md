@@ -69,8 +69,8 @@ Milvusドキュメントへようこそ！</h1></p>
 <ul>
 <li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
 <li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/index-vector-fields.md">インデックス・ベクトル・フィールド</a></li>
 <li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 <li><a href="/docs/ja/get-and-scalar-query.md">取得とスカラークエリー</a></li>
 </ul>
 </div>
@@ -80,7 +80,7 @@ Milvusドキュメントへようこそ！</h1></p>
 <li><a href="/docs/ja/configure-docker.md">Milvusの設定</a></li>
 <li><a href="/docs/ja/deploy_s3.md">依存関係の管理</a></li>
 <li><a href="/docs/ja/eks.md">クラウドへのデプロイ</a></li>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスターのスケール</a></li>
+<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
 <li><a href="/docs/ja/monitor_overview.md">監視とアラート</a></li>
 </ul>
 </div>
@@ -89,7 +89,7 @@ Milvusドキュメントへようこそ！</h1></p>
 <ul>
 <li><a href="/docs/ja/system_configuration.md">システム構成</a></li>
 <li><a href="/docs/ja/architecture_overview.md">アーキテクチャの概要</a></li>
-<li><a href="/docs/ja/index.md">ベクトルインデックス</a></li>
+<li><a href="/docs/ja/index-explained.md">インデックスの説明</a></li>
 <li><a href="/docs/ja/metric.md">類似性メトリクス</a></li>
 <li><a href="/docs/ja/glossary.md">用語集</a></li>
 </ul>
@@ -111,12 +111,12 @@ Milvusドキュメントへようこそ！</h1></p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>2024年11月 - Milvus 2.5.0リリース</em></p>
+    </button></h2><p><em>2025年6月 - Milvus 2.6.0リリース</em></p>
 <ul>
-<li><a href="/docs/ja/full-text-search.md">全文検索の</a>ガイダンスを追加しました。</li>
-<li><a href="/docs/ja/keyword-match.md">テキストマッチの</a>方法に関するガイダンスを追加しました。</li>
-<li><a href="/docs/ja/nullable-and-default.md">NULL値およびデフォルト値の有効</a>化方法に関するガイダンスを追加しました。</li>
-<li><a href="/docs/ja/analyzer-overview.md">アナライザーの</a>説明を追加。</li>
-<li><a href="/docs/ja/bitmap.md">ビットマップインデックスの</a>説明を追加。</li>
+<li><a href="/docs/ja/embedding-function-overview.md">埋め込み関数の使用</a>方法を追加しました。</li>
+<li><a href="/docs/ja/decay-ranker-overview.md">ディケイランカーの</a>使い方に関するガイダンスを追加。</li>
+<li><a href="/docs/ja/add-fields-to-an-existing-collection.md">既存のコレクションにフィールドを追加</a>する方法に関するガイダンスを追加しました。</li>
+<li><a href="/docs/ja/phrase-match.md">フレーズ一致の実行</a>方法に関するガイダンスを追加した。</li>
+<li><a href="/docs/ja/ivf-rabitq.md">IVF_RABITQインデックスの</a>説明を追加した。</li>
 </ul>
 </div>

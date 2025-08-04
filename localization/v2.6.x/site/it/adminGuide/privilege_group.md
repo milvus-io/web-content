@@ -270,8 +270,8 @@ summary: >-
    </tr>
    <tr>
      <td><p>CreaCollezione</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
@@ -461,7 +461,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>È possibile creare un gruppo di privilegi e quindi aggiungere privilegi al gruppo di privilegi.</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">Creare un gruppo di privilegi</h3><p>L'esempio seguente mostra come creare un gruppo di privilegi denominato <code translate="no">privilege_group_1</code>.</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">Creare un gruppo di privilegi</h3><p>L'esempio seguente mostra come creare un gruppo di privilegi chiamato <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

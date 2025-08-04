@@ -20,10 +20,10 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>従来のベクトル検索では、結果は純粋にベクトルの類似性によってランク付けされる。しかし、実世界のアプリケーションでは、コンテンツが本当に関連性があるかどうかは、意味的な類似性だけではないことが多い。</p>
+    </button></h1><p>従来のベクトル検索では、結果は純粋にベクトルの類似性によってランク付けされる。しかし、実世界のアプリケーションでは、コンテンツを本当に関連性のあるものにするかどうかは、意味的な類似性以上に左右されることが多い。</p>
 <p>日常的なシナリオを考えてみよう：</p>
 <ul>
-<li><p>昨日の記事が3年前の類似記事よりも上位にランクされるべきニュース検索</p></li>
+<li><p>昨日の記事が3年前の類似記事よりも上位に表示されるべきニュース検索</p></li>
 <li><p>車で30分かかる店よりも、5分以内の店を優先するレストラン検索。</p></li>
 <li><p>検索クエリとの類似度が多少低くても、トレンド商品を上位に表示するEコマース・プラットフォーム</p></li>
 </ul>
@@ -233,7 +233,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -308,11 +308,11 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p><code translate="no">scale</code> 距離におけるスコア値で、曲線の急峻さを制御する。値が低いほど急峻な減少カーブを描き、値が高いほど緩やかな減少カーブを描く。 0 から 1 の間でなければならない。</p></td>
+     <td><p><code translate="no">scale</code> 距離におけるスコア値で、曲線の急勾配を制御する。値が低いほど急峻な減少カーブを描き、値が高いほど緩やかな減少カーブを描く。 0 から 1 の間でなければならない。</p></td>
      <td><p><code translate="no">0.5</code> (デフォルト)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル探索に適用</h3><p>減衰ランカーを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用することができます：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル探索に適用</h3><p>ディケイランカーを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用することができます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
@@ -321,7 +321,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用</h3><p>ディケイランカーは複数のベクトルフィールドを組み合わせたハイブリッド検索にも適用できます：</p>

@@ -197,7 +197,7 @@ summary: Imparate a configurare mq per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Lunghezza del buffer del client consumer MQ  </td>
+      <td>        Lunghezza buffer del client consumer MQ  </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -226,7 +226,7 @@ summary: Imparate a configurare mq per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        l'intervallo di tempo (in secondi) in cui il dispatcher controlla se unire o meno    </td>
+      <td>        l'intervallo di tempo (in secondi) in cui il dispatcher controlla se unire o meno i dati    </td>
       <td>1</td>
     </tr>
   </tbody>

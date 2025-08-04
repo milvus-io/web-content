@@ -44,7 +44,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo in cui il nodo di query pubblica le informazioni statistiche del nodo, tra cui lo stato del segmento, l'uso della cpu, l'uso della memoria, lo stato di salute, ecc. Unità: ms.      </td>
+      <td>        L'intervallo in cui il nodo di query pubblica le informazioni sulle statistiche del nodo, tra cui lo stato del segmento, l'uso della cpu, l'uso della memoria, lo stato di salute, ecc. Unità: ms.      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1083,7 +1083,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Attività massima in sospeso per utente nello scheduler      </td>
+      <td>        Attività massima in attesa per utente nello scheduler      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -1373,7 +1373,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Indirizzo TCP/IP del queryNode. Se non viene specificato, viene usato il primo indirizzo non ciclabile.      </td>
+      <td>        Indirizzo TCP/IP del queryNode. Se non viene specificato, viene utilizzato il primo indirizzo non ciclabile.      </td>
       <td></td>
     </tr>
   </tbody>

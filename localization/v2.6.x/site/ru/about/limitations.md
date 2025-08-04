@@ -83,7 +83,6 @@ summary: Узнайте об ограничениях при использов�
 </thead>
 <tbody>
 <tr><td>Коллекция</td><td>65,536</td></tr>
-<tr><td>Подключение / прокси</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Количество ресурсов в коллекции<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">

@@ -2,7 +2,7 @@
 id: quickstart_with_attu.md
 summary: >-
   AttuはMilvusのためのオールインワンのオープンソース管理ツールです。直感的なグラフィカルユーザインタフェース(GUI)を備えており、データベースを簡単に操作することができます。数回クリックするだけで、クラスタステータスの可視化、メタデータの管理、データクエリの実行などが可能です。
-title: 質問応答システム
+title: Attuのクイックスタート - MilvusのウェブUI
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Attuデスクトップのクイックスタート<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,7 +155,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
@@ -171,7 +171,7 @@ doc_embeddings = embedding_model.encode_documents(text_lines)
 client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 データとスキーマの可視化</h3><p>Attuのインターフェースを使用して、データスキーマと挿入されたエンティティを視覚化できます。スキーマは、<code translate="no">Int64</code> 型の<code translate="no">id</code> フィールドと、<code translate="no">FloatVector(768)</code> 型の<code translate="no">vector</code> フィールドと、<code translate="no">Inner Product (IP)</code> メトリックを含む、定義されたフィールドを表示します。コレクションには<strong>72のエンティティが</strong>ロードされています。</p>
+<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 データとスキーマの可視化</h3><p>Attuのインターフェースを使用して、データスキーマと挿入されたエンティティを視覚化することができます。スキーマは、<code translate="no">Int64</code> 型の<code translate="no">id</code> フィールドと、<code translate="no">FloatVector(768)</code> 型の<code translate="no">vector</code> フィールドと、<code translate="no">Inner Product (IP)</code> メトリックを含む、定義されたフィールドを表示します。コレクションには<strong>72のエンティティが</strong>ロードされています。</p>
 <p>さらに、ID、ベクトル埋め込み、テキスト・コンテンツなどのメタデータを格納するダイナミック・フィールドなど、挿入されたデータを見ることができる。このインターフェースは、指定された条件やダイナミック・フィールドに基づくフィルタリングやクエリをサポートしている。</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
@@ -192,7 +192,7 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Attu は、データの関係を視覚化し、探索するための強力なインターフェイスを提供します。挿入されたデータポイントとその類似関係を調べるには、以下の手順に従います：</p>
+    </button></h2><p>Attuは、データの関係を視覚化し探索するための強力なインターフェイスを提供します。挿入されたデータポイントとその類似関係を調べるには、以下の手順に従います：</p>
 <h3 id="51-Perform-a-Search" class="common-anchor-header">5.1<strong>検索の実行</strong></h3><p>Attu の<strong>Vector Search</strong>タブに移動します。</p>
 <ol>
 <li>テストクエリを作成するには、<strong>Generate Random Data</strong>ボタンをクリックします。</li>
@@ -234,5 +234,5 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>AttuはMilvusに保存されたベクトルデータの管理と可視化を簡素化します。データ挿入からクエリ実行、インタラクティブな探索まで、複雑なベクトル検索タスクを処理するための直感的なインターフェイスを提供します。動的スキーマサポート、グラフィカルな検索ビジュアライゼーション、柔軟なクエリフィルタなどの機能により、Attuは大規模なデータセットを効果的に分析することができます。</p>
-<p>Attuの視覚的な探索ツールを活用することで、ユーザはデータをよりよく理解し、隠れた関係を特定し、データ駆動型の意思決定を行うことができます。Attuとmilvusを利用して、今すぐデータセットの分析を始めましょう！</p>
+<p>Attuの視覚的な探索ツールを活用することで、ユーザはデータをより良く理解し、隠れた関係を特定し、データ駆動型の意思決定を行うことができます。Attuとmilvusを利用して、今すぐデータセットの分析を始めましょう！</p>
 <hr>

@@ -1,6 +1,6 @@
 ---
 id: upsert-entities.md
-title: Entités Upsert
+title: Insérer des entités
 summary: >-
   L'opération Upsert combine les actions de mise à jour et d'insertion de
   données. Milvus détermine s'il faut effectuer une opération de mise à jour ou
@@ -8,7 +8,7 @@ summary: >-
   procédure d'insertion d'une entité et les comportements spécifiques de
   l'opération d'insertion dans différents scénarios.
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">Entités Upsert<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">Insérer des entités<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'opération Upsert combine les actions de mise à jour et d'insertion de données. Milvus détermine s'il faut effectuer une opération de mise à jour ou d'insertion en vérifiant si la clé primaire existe. Cette section présente la procédure d'insertion d'une entité et les comportements spécifiques de l'opération d'insertion dans différents scénarios.</p>
+    </button></h1><p>L'opération <code translate="no">upsert</code> est un moyen pratique d'insérer ou de mettre à jour des entités dans une collection. Elle traite intelligemment les données en vérifiant l'existence d'une clé primaire : si la clé existe déjà, l'entité correspondante est mise à jour ; sinon, une nouvelle entité est insérée. C'est pourquoi <code translate="no">upsert</code> est la méthode recommandée pour gérer les données lorsque vous n'êtes pas sûr qu'une entité existe déjà ou lorsque vous devez éviter de créer des entrées en double.</p>
 <div class="alert note">
-<p>Si vous ajoutez dynamiquement de nouveaux champs après la création de la collection et que vous ne spécifiez pas de valeurs pour ces champs lors du transfert ascendant des entités, Milvus les remplit automatiquement avec leurs valeurs par défaut définies ou avec NULL si les valeurs par défaut ne sont pas définies. Pour plus de détails, voir <a href="/docs/fr/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p>
+<p>Si vous ajoutez dynamiquement de nouveaux champs après la création de la collection et que vous ne spécifiez pas de valeurs pour ces champs lors de l'insertion d'entités, Milvus les remplit automatiquement avec leurs valeurs par défaut définies ou avec NULL si les valeurs par défaut ne sont pas définies. Pour plus de détails, voir <a href="/docs/fr/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"

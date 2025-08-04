@@ -6,7 +6,7 @@ summary: >-
   RBAC. È possibile iniziare creando utenti e ruoli, quindi assegnare privilegi
   o gruppi di privilegi ai ruoli e infine gestire il controllo degli accessi
   assegnando ruoli agli utenti. Questo metodo garantisce l'efficienza e la
-  sicurezza della gestione degli accessi. Questa pagina spiega come creare
+  sicurezza della gestione degli accessi. Questa pagina illustra come creare
   utenti e ruoli in Milvus.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Creare utenti e ruoli<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dopo l'inizializzazione di un'istanza Milvus, viene generato automaticamente un utente root per l'autenticazione quando ci si connette a Milvus per la prima volta. Il nome utente dell'utente root è <code translate="no">root</code> e la password è <code translate="no">Milvus</code>. Il ruolo predefinito dell'utente root è <code translate="no">admin</code>, che ha accesso a tutte le risorse. Per garantire la sicurezza dei dati, si consiglia di conservare le credenziali dell'utente root per evitare accessi non autorizzati.</p>
-<p>Per le operazioni quotidiane, si consiglia di creare degli utenti invece di utilizzare l'utente root.</p>
+<p>Per le operazioni quotidiane, si consiglia di creare degli utenti invece di usare l'utente root.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Creare un utente</h3><p>L'esempio seguente mostra come creare un utente con il nome utente <code translate="no">user_1</code> e la password <code translate="no">P@ssw0rd</code>. Il nome utente e la password dell'utente devono seguire queste regole:</p>
 <ul>
 <li><p>Nome utente: deve iniziare con una lettera e può includere solo lettere maiuscole o minuscole, numeri e trattini bassi.</p></li>
@@ -215,7 +215,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fornisce un ruolo integrato chiamato <code translate="no">admin</code>, che è un ruolo di amministratore che può accedere alle risorse di tutte le istanze e ha privilegi per tutte le operazioni. Per una gestione più precisa degli accessi e una maggiore sicurezza dei dati, si consiglia di creare ruoli personalizzati in base alle proprie esigenze.</p>
+    </button></h2><p>Milvus fornisce un ruolo integrato chiamato <code translate="no">admin</code>, che è un ruolo di amministratore che può accedere alle risorse di tutte le istanze e ha privilegi per tutte le operazioni. Per una gestione degli accessi più precisa e una maggiore sicurezza dei dati, si consiglia di creare ruoli personalizzati in base alle proprie esigenze.</p>
 <h3 id="Create-a-role" class="common-anchor-header">Creare un ruolo</h3><p>L'esempio seguente mostra come creare un ruolo chiamato <code translate="no">role_a</code>.</p>
 <p>Il nome del ruolo deve seguire la seguente regola:</p>
 <ul>

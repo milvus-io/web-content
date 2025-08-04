@@ -50,6 +50,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>Non è necessario specificare la dimensione.</p></td>
      <td><p><code translate="no">IP</code>, <code translate="no">BM25</code> (utilizzato solo per la ricerca full text)</p></td>
@@ -58,7 +64,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -96,13 +102,18 @@ summary: >-
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>Stima la somiglianza di Jaccard dai bit della firma MinHash; distanza minore = maggiore somiglianza.</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Un valore minore indica una maggiore somiglianza.</p></td>
      <td><p>[0, dim(vettore)]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BM25</code></p></td>
-     <td><p>Attribuisce un punteggio alla rilevanza in base alla frequenza dei termini, alla frequenza inversa dei documenti e alla normalizzazione dei documenti.</p></td>
+     <td><p>Attribuisce un punteggio alla rilevanza in base alla frequenza dei termini, alla frequenza dei documenti invertiti e alla normalizzazione dei documenti.</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
@@ -204,7 +215,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il coefficiente di somiglianza JACCARD misura la somiglianza tra due insiemi di campioni ed è definito come la cardinalità dell'intersezione degli insiemi definiti divisa per la cardinalità dell'unione degli stessi. Può essere applicato solo a insiemi di campioni finiti.</p>
+    </button></h2><p>Il coefficiente di distanza JACCARD misura la somiglianza tra due insiemi di campioni ed è definito come la cardinalità dell'intersezione degli insiemi definiti divisa per la cardinalità dell'unione degli stessi. Può essere applicato solo a insiemi di campioni finiti.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -214,6 +225,39 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Formula della distanza JACCARD</span> </span></p>
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) è un tipo di metrica utilizzata per la ricerca efficiente e approssimativa della somiglianza su insiemi di grandi dimensioni, come gli insiemi di parole dei documenti, gli insiemi di tag degli utenti o gli insiemi di k-mer genomici. Invece di confrontare direttamente gli insiemi grezzi, MHJACCARD confronta le <strong>firme MinHash</strong>, che sono rappresentazioni compatte progettate per stimare in modo efficiente la somiglianza di Jaccard.</p>
+<p>Questo approccio è significativamente più veloce del calcolo della somiglianza di Jaccard esatta ed è particolarmente utile in scenari su larga scala o ad alta dimensionalità.</p>
+<p><strong>Tipo di vettore applicabile</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>dove ogni vettore memorizza una firma MinHash. Ogni elemento corrisponde al valore minimo di hash secondo una delle funzioni hash indipendenti applicate all'insieme originale.</li>
+</ul>
+<p><strong>Definizione di distanza</strong></p>
+<p>MHJACCARD misura il numero di posizioni corrispondenti in due firme MinHash. Più alto è il rapporto di corrispondenza, più simili sono gli insiemi sottostanti.</p>
+<p>Milvus riporta:</p>
+<ul>
+<li><strong>Distanza = 1 - somiglianza stimata (rapporto di corrispondenza).</strong></li>
+</ul>
+<p>Il valore della distanza varia da 0 a 1:</p>
+<ul>
+<li><p><strong>0</strong> significa che le firme MinHash sono identiche (somiglianza Jaccard stimata = 1)</p></li>
+<li><p><strong>1</strong> significa che non ci sono corrispondenze in nessuna posizione (somiglianza di Jaccard stimata = 0).</p></li>
+</ul>
+<p>Per informazioni sui dettagli tecnici, consultare <a href="/docs/it/minhash-lsh.md">MINHASH_LSH</a>.</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">Distanza HAMMING<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -230,8 +274,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>La distanza HAMMING misura stringhe di dati binari. La distanza tra due stringhe di uguale lunghezza è il numero di posizioni di bit in cui i bit sono diversi.</p>
-<p>Ad esempio, supponiamo che esistano due stringhe, 1101 1001 e 1001 1101.</p>
-<p>11011001 ⊕ 10011101 = 01000100. Poiché contiene due 1, la distanza di HAMMING, d (11011001, 10011101) = 2.</p>
+<p>Ad esempio, si supponga che esistano due stringhe, 1101 1001 e 1001 1101.</p>
+<p>11011001 ⊕ 10011101 = 01000100. Dato che contiene due 1, la distanza HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity" class="common-anchor-header">Similitudine BM25<button data-href="#BM25-similarity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

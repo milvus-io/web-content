@@ -41,7 +41,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Milvus에서 vLLM Ranker를 구현하기 전에 다음이 필요합니다:</p>
 <ul>
 <li><p>재랭크할 텍스트가 포함된 <code translate="no">VARCHAR</code> 필드가 있는 Milvus 컬렉션</p></li>
-<li><p>재랭크 기능이 있는 실행 중인 TEI 서비스. TEI 서비스 설정에 대한 자세한 지침은 <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">공식 TEI 문서를</a> 참조하세요.</p></li>
+<li><p>순위 재조정 기능이 있는 실행 중인 TEI 서비스. TEI 서비스 설정에 대한 자세한 지침은 <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">공식 TEI 문서를</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">TEI 랭커 기능 만들기<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,11 +76,41 @@ tei_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,                 <span class="hljs-comment"># Specifies TEI as the service provider</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text for relevance evaluation</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># Your TEI service URL</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>                     <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;truncate&quot;</span>: <span class="hljs-literal">True</span>,                <span class="hljs-comment"># Optional: Truncate the inputs that are longer than the maximum supported size</span>
+        <span class="hljs-string">&quot;truncation_direction&quot;</span>: <span class="hljs-string">&quot;Right&quot;</span>,    <span class="hljs-comment"># Optional: Direction to truncate the inputs</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">TEI 랭커 관련 파라미터</h3><p>다음 매개 변수는 TEI 랭커에 특정한 매개 변수입니다:</p>
+<table>
+   <tr>
+     <th><p>파라미터</p></th>
+     <th><p>필수?</p></th>
+     <th><p>설명</p></th>
+     <th><p>값/예시</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncate</code></p></td>
+     <td><p>No</p></td>
+     <td><p>최대 시퀀스 길이를 초과하는 입력을 잘라낼지 여부입니다. <code translate="no">False</code> 인 경우 긴 입력은 오류를 발생시킵니다.</p></td>
+     <td><p><code translate="no">True</code> 또는 <code translate="no">False</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">truncation_direction</code></p></td>
+     <td><p>아니요</p></td>
+     <td><p>입력이 너무 길 때 잘라낼 방향입니다:</p>
+<ul>
+<li><p><code translate="no">"Right"</code> (기본값)입니다:  지원되는 최대 크기가 일치할 때까지 토큰이 시퀀스 끝에서 제거됩니다.</p></li>
+<li><p><code translate="no">"Left"</code>: 토큰이 시퀀스의 시작부터 제거됩니다.</p></li>
+</ul></td>
+     <td><p><code translate="no">"Right"</code> 또는 <code translate="no">"Left"</code></p></td>
+   </tr>
+</table>
+<div class="alert note">
+<p>모든 모델 랭커에서 공유되는 일반 파라미터(예: <code translate="no">provider</code>, <code translate="no">queries</code>)는 <a href="/docs/ko/model-ranker-overview.md#Create-a-model-ranker">모델 랭커 만들기를</a> 참조하세요.</p>
+</div>
+<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,14 +127,14 @@ tei_ranker = Function(
       </svg>
     </button></h2><p>표준 벡터 검색에 TEI 랭커를 적용하려면 다음과 같이 하세요:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
-results = milvus_client.search(
+results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],  <span class="hljs-comment"># Search queries</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                         <span class="hljs-comment"># Apply tei reranking</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
@@ -142,7 +172,7 @@ sparse_search = AnnSearchRequest(
 )
 
 <span class="hljs-comment"># Execute hybrid search with vLLM reranking</span>
-hybrid_results = milvus_client.hybrid_search(
+hybrid_results = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                        <span class="hljs-comment"># Apply tei reranking to combined results</span></span>

@@ -270,8 +270,8 @@ summary: >-
    </tr>
    <tr>
      <td><p>CreateCollection</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
@@ -530,7 +530,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Entfernen von Privilegien aus einer Privilegiengruppe</h3><p>Das folgende Beispiel demonstriert, wie man das Privileg <code translate="no">PrivilegeRestoreRBAC</code> aus der Privilegiengruppe <code translate="no">privilege_group_1</code> entfernt.</p>
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">Entfernen von Privilegien aus einer Privilegiengruppe</h3><p>Das folgende Beispiel zeigt, wie man das Privileg <code translate="no">PrivilegeRestoreRBAC</code> aus der Privilegiengruppe <code translate="no">privilege_group_1</code> entfernt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

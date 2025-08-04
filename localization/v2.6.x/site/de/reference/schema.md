@@ -212,6 +212,8 @@ schema.addField(AddFieldReq.builder()
 <p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen mit halber Genauigkeit und wird in der Regel für Deep-Learning-Szenarien mit eingeschränktem Speicher oder eingeschränkter Bandbreite oder für GPU-basiertes Computing verwendet.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen, die eine geringere Genauigkeit, aber denselben Exponentenbereich wie Float32 haben. Dieser Datentyp wird häufig in Deep-Learning-Szenarien verwendet, da er die Speichernutzung reduziert, ohne die Genauigkeit wesentlich zu beeinträchtigen.</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>Ein Vektorfeld dieses Typs speichert Vektoren, die aus 8-Bit-Ganzzahlen mit Vorzeichen (int8) bestehen, wobei jede Komponente zwischen -128 und 127 liegt. Speziell für quantisierte Deep-Learning-Architekturen wie ResNet und EfficientNet entwickelt, verringert es die Modellgröße erheblich und steigert die Inferenzgeschwindigkeit, während nur minimale Präzisionsverluste auftreten. <strong>Hinweis</strong>: Dieser Vektortyp wird nur für HNSW-Indizes unterstützt.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>Ein Vektorfeld dieses Typs enthält eine Liste von 0en und 1en. Sie dienen als kompakte Merkmale zur Darstellung von Daten in Bildverarbeitungs- und Informationsabfrageszenarien.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>

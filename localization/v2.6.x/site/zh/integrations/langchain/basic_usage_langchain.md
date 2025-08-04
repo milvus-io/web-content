@@ -37,7 +37,7 @@ title: 将 Milvus 用作向量存储库
     </button></h2><p>您需要安装<code translate="no">langchain-milvus</code> 和<code translate="no">pip install -qU langchain-milvus</code> 才能使用此集成。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU  langchain_milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>最新版本的 pymilvus 自带本地向量数据库 Milvus Lite，适合原型开发。如果你有大规模数据，比如超过一百万个文档，我们建议你在<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker 或 kubernetes</a> 上设置一个性能更强的 Milvus 服务器。</p>
+<p>最新版本的 pymilvus 自带本地向量数据库 Milvus Lite，适合原型开发。如果你有大规模数据，比如超过一百万个文档，我们建议你在<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。</p>
 <h2 id="Initialization" class="common-anchor-header">初始化<button data-href="#Initialization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,7 +68,7 @@ vector_store = Milvus(
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">使用 Milvus Collections 对数据进行分隔</h3><p>你可以在同一个 Milvus 实例中将不同的无关文档存储在不同的 Collections 中，以保持上下文的一致性。</p>
+<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">用 Milvus Collections 对数据进行分隔</h3><p>你可以在同一个 Milvus 实例中将不同的无关文档存储在不同的 Collections 中，以保持上下文的一致性。</p>
 <p>下面是如何创建一个新的向量文档存储 Collections：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
@@ -209,6 +209,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
     <span class="hljs-string">&quot;LangChain provides abstractions to make working with LLMs easy&quot;</span>,
     k=<span class="hljs-number">2</span>,
     expr=<span class="hljs-string">&#x27;source == &quot;tweet&quot;&#x27;</span>,
+    <span class="hljs-comment"># param=...  # Search params for the index type</span>
 )
 <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
@@ -263,7 +264,7 @@ vectorstore = Milvus.from_documents(
     docs,
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
-    drop_old=<span class="hljs-literal">False</span>,
+    <span class="hljs-comment"># drop_old=True,</span>
     partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
 )
 <button class="copy-code-btn"></button></code></pre>

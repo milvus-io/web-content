@@ -50,6 +50,12 @@ summary: >-
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code></p></td>
      <td><p>Размерность указывать не нужно.</p></td>
      <td><p><code translate="no">IP</code>, <code translate="no">BM25</code> (используется только для полнотекстового поиска)</p></td>
@@ -58,7 +64,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
@@ -93,6 +99,11 @@ summary: >-
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>Меньшее значение указывает на большее сходство.</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>Оценивает сходство по Жаккарду на основе битов подписи MinHash; меньшее расстояние = большее сходство</p></td>
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
@@ -204,7 +215,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Коэффициент сходства JACCARD измеряет сходство между двумя выборочными совокупностями и определяется как кардинальность пересечения заданных совокупностей, деленная на кардинальность их объединения. Он может быть применен только к конечным выборочным совокупностям.</p>
+    </button></h2><p>Коэффициент расстояния JACCARD измеряет сходство между двумя выборочными совокупностями и определяется как кардинальность пересечения заданных совокупностей, деленная на кардинальность их объединения. Он может быть применен только к конечным выборочным совокупностям.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -214,7 +225,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>Формула расстояния JACCARD</span> </span></p>
-<h2 id="HAMMING-distance" class="common-anchor-header">Расстояние Хамминга<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,7 +240,40 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Расстояние Хамминга измеряет бинарные строки данных. Расстояние между двумя строками одинаковой длины - это количество битовых позиций, в которых биты различаются.</p>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) - это метрика, используемая для эффективного, приблизительного поиска сходства в больших наборах, таких как наборы слов документов, наборы тегов пользователей или наборы геномных к-меров. Вместо того чтобы сравнивать исходные наборы напрямую, MHJACCARD сравнивает <strong>сигнатуры MinHash</strong>, которые являются компактными представлениями, разработанными для эффективной оценки сходства по Жаккарду.</p>
+<p>Этот подход значительно быстрее, чем вычисление точного сходства по Жаккарду, и особенно полезен в крупномасштабных или высокоразмерных сценариях.</p>
+<p><strong>Применяемый тип вектора</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>, где каждый вектор хранит подпись MinHash. Каждый элемент соответствует минимальному хэш-значению по одной из независимых хэш-функций, примененных к исходному множеству.</li>
+</ul>
+<p><strong>Определение расстояния</strong></p>
+<p>MHJACCARD измеряет, сколько позиций в двух подписях MinHash совпадает. Чем выше коэффициент совпадения, тем более похожи исходные наборы.</p>
+<p>Milvus сообщает:</p>
+<ul>
+<li><strong>Расстояние = 1 - оценка сходства (коэффициент совпадения).</strong></li>
+</ul>
+<p>Значение расстояния варьируется от 0 до 1:</p>
+<ul>
+<li><p><strong>0</strong> означает, что сигнатуры MinHash идентичны (оценочное сходство по Жаккарду = 1).</p></li>
+<li><p><strong>1</strong> означает, что совпадений нет ни в одной позиции (расчетное сходство по Жаккарду = 0).</p></li>
+</ul>
+<p>Для получения информации о технических деталях обратитесь к разделу <a href="/docs/ru/minhash-lsh.md">MINHASH_LSH</a>.</p>
+<h2 id="HAMMING-distance" class="common-anchor-header">Расстояние HAMMING<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Расстояние HAMMING измеряет бинарные строки данных. Расстояние между двумя строками одинаковой длины - это количество битовых позиций, в которых биты различаются.</p>
 <p>Например, пусть есть две строки, 1101 1001 и 1001 1101.</p>
 <p>11011001 ⊕ 10011101 = 01000100. Поскольку они содержат две 1, расстояние HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity" class="common-anchor-header">Сходство BM25<button data-href="#BM25-similarity" class="anchor-icon" translate="no">

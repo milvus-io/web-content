@@ -5,7 +5,6 @@ related_key: configure
 summary: Настройте Milvus с помощью Helm Charts.
 title: Настройка Milvus с помощью Helm Charts
 ---
-
 <h1 id="Configure-Milvus-with-Helm-Charts" class="common-anchor-header">Настройка Milvus с помощью Helm Charts<button data-href="#Configure-Milvus-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,22 +40,22 @@ title: Настройка Milvus с помощью Helm Charts
       </svg>
     </button></h2><p>Вы можете настроить Milvus с помощью файла конфигурации <code translate="no">values.yaml</code>.</p>
 <h3 id="Download-a-configuration-file" class="common-anchor-header">Загрузить файл конфигурации</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Загрузите файл</a> <code translate="no">values.yaml</code> напрямую или с помощью следующей команды.</p>
-<pre><code translate="no">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Modify-the-configuration-file" class="common-anchor-header">Изменение файла конфигурации</h3><p>Настройте экземпляр Milvus в соответствии с вашими сценариями применения, изменив соответствующие параметры в файле <code translate="no">values.yaml</code>.</p>
+<h3 id="Modify-the-configuration-file" class="common-anchor-header">Изменение файла конфигурации</h3><p>Настройте экземпляр Milvus в соответствии с вашими сценариями применения, изменив соответствующие параметры в <code translate="no">values.yaml</code>.</p>
 <p>В частности, найдите <code translate="no">extraConfigFiles</code> в <code translate="no">values.yaml</code> и поместите свои конфигурации в этот раздел следующим образом:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Extra configs for milvus.yaml</span>
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
 <span class="hljs-comment"># Please follow the config structure in the milvus.yaml</span>
 <span class="hljs-comment"># at https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># Note: this config will be the top priority which will override the config</span>
+<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> this config will be the top priority which will override the config</span>
 <span class="hljs-comment"># in the image and helm chart.</span>
-extraConfigFiles:
-  user.yaml: |+
-    <span class="hljs-comment">#    For example to set the graceful time for query nodes</span>
-    <span class="hljs-comment">#    queryNodes:</span>
-    <span class="hljs-comment">#      gracefulTime: 10</span>
-<button class="copy-code-btn"></button></code></pre>
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    #    For example to set the graceful time for query nodes
+    #    queryNodes:
+    #      gracefulTime: 10
+</span><button class="copy-code-btn"></button></code></pre>
 <p>Дополнительные сведения о каждом параметре см. в следующих ссылках.</p>
 <p>Отсортировано по:</p>
 <div class="filter">
@@ -198,7 +197,7 @@ extraConfigFiles:
 </div>
 <p>Другие параметры, специфичные для установки Kubernetes, см. в разделе <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Конфигурация Milvus Helm Chart</a>.</p>
 <h3 id="Start-Milvus" class="common-anchor-header">Запуск Milvus</h3><p>Закончив модификацию файла конфигурации, вы можете запустить Milvus с помощью этого файла.</p>
-<pre><code translate="no">$ helm upgrade my-release milvus/milvus -f values.yaml
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">Настройка Milvus через командную строку<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,11 +216,11 @@ extraConfigFiles:
       </svg>
     </button></h2><p>Кроме того, вы можете обновить конфигурацию Milvus непосредственно с помощью команды Helm.</p>
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">Проверка настраиваемых параметров</h3><p>Перед обновлением можно проверить настраиваемые параметры с помощью диаграмм Helm.</p>
-<pre><code translate="no">$ helm show values milvus/milvus
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Start-Milvus" class="common-anchor-header">Запуск Milvus</h3><p>Настройте и запустите Milvus, добавив <code translate="no">--values</code> или <code translate="no">--set</code> в команду обновления.</p>
-<pre><code translate="no"><span class="hljs-comment"># For instance, upgrade the Milvus cluster with compaction disabled</span>
-$ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span>
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -83,10 +83,9 @@ summary: 了解使用 Milvus 時的限制。
 </thead>
 <tbody>
 <tr><td>集合</td><td>65,536</td></tr>
-<tr><td>連線 / 代理</td><td>65,536</td></tr>
 </tbody>
 </table>
-<h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">集合中的資源數量<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
+<h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">合集中的資源數量<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

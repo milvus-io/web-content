@@ -4,7 +4,7 @@ title: Vektor Biner
 summary: >-
   Vektor biner adalah bentuk khusus representasi data yang mengubah vektor
   floating-point berdimensi tinggi tradisional menjadi vektor biner yang hanya
-  berisi 0 dan 1. Transformasi ini tidak hanya memampatkan ukuran vektor tetapi
+  berisi 0 dan 1. Transformasi ini tidak hanya memadatkan ukuran vektor tetapi
   juga mengurangi biaya penyimpanan dan komputasi dengan tetap mempertahankan
   informasi semantik. Ketika ketepatan untuk fitur yang tidak penting tidak
   diperlukan, vektor biner dapat secara efektif mempertahankan sebagian besar
@@ -243,7 +243,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada contoh di atas, indeks bernama <code translate="no">binary_vector_index</code> dibuat untuk bidang <code translate="no">binary_vector</code>, menggunakan jenis indeks <code translate="no">AUTOINDEX</code>. <code translate="no">metric_type</code> disetel ke <code translate="no">HAMMING</code>, yang menunjukkan bahwa jarak Hamming digunakan untuk pengukuran kemiripan.</p>
-<p>Milvus menyediakan berbagai jenis indeks untuk pengalaman pencarian vektor yang lebih baik. AUTOINDEX adalah jenis indeks khusus yang dirancang untuk memperlancar kurva pembelajaran pencarian vektor. Ada banyak jenis indeks yang tersedia untuk Anda pilih. Untuk detailnya, lihat xxx.</p>
+<p>Milvus menyediakan berbagai jenis indeks untuk pengalaman pencarian vektor yang lebih baik. AUTOINDEX adalah jenis indeks khusus yang dirancang untuk memperlancar kurva pembelajaran pencarian vektor. Ada banyak jenis indeks yang tersedia untuk Anda pilih. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks.</a></p>
 <p>Selain itu, Milvus mendukung metrik kemiripan lainnya untuk vektor biner. Untuk informasi lebih lanjut, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Membuat koleksi</h3><p>Setelah pengaturan vektor biner dan indeks selesai, buatlah sebuah koleksi yang berisi vektor-vektor biner. Contoh di bawah ini menggunakan metode <code translate="no">create_collection</code> untuk membuat koleksi bernama <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">

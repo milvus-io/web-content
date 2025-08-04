@@ -93,7 +93,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
         ></path>
       </svg>
     </button></h2><p>Docling은 다양한 문서 형식을 통합된 표현(Docling 문서)으로 구문 분석할 수 있으며, 이를 다양한 출력 형식으로 내보낼 수 있습니다. 지원되는 입력 및 출력 형식의 전체 목록은 <a href="https://docling-project.github.io/docling/usage/supported_formats/">공식 문서를</a> 참조하세요.</p>
-<p>이 튜토리얼에서는 마크다운 파일<a href="https://milvus.io/docs/overview.md">(소스)</a>을 입력으로 사용하겠습니다. 다운스트림 RAG 작업에 적합한 구조화된 계층적 청크를 생성하기 위해 Docling에서 제공하는 계층적 <strong>청커를</strong> 사용하여 문서를 처리할 것입니다.</p>
+<p>이 튜토리얼에서는 마크다운 파일<a href="https://milvus.io/docs/overview.md">(소스)</a>을 입력으로 사용하겠습니다. 다운스트림 RAG 작업에 적합한 구조화된 계층적 청크를 생성하기 위해 Docling에서 제공하는 계층적 <strong>청커를</strong> 사용하여 문서를 처리하겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> docling.document_converter <span class="hljs-keyword">import</span> DocumentConverter
 <span class="hljs-keyword">from</span> docling_core.transforms.chunker <span class="hljs-keyword">import</span> HierarchicalChunker
 
@@ -164,7 +164,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

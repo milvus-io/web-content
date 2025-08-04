@@ -39,7 +39,7 @@ title: تكوين Milvus مع مخططات Helm Charts
         ></path>
       </svg>
     </button></h2><p>يمكنك تكوين Milvus باستخدام ملف تكوين <code translate="no">values.yaml</code>.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">تنزيل ملف التكوين</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">قم بتنزيل</a> <code translate="no">values.yaml</code> مباشرة أو باستخدام الأمر التالي.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">تنزيل ملف التكوين</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">قم بتنزيل</a> <code translate="no">values.yaml</code> مباشرة أو باستخدام الأمر التالي.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">تعديل ملف التكوين</h3><p>قم بتهيئة مثيل ميلفوس الخاص بك ليناسب سيناريوهات تطبيقك من خلال تعديل المعلمات المقابلة في <code translate="no">values.yaml</code>.</p>
@@ -238,7 +238,7 @@ title: تكوين Milvus مع مخططات Helm Charts
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>إذا كنت ترغب في معرفة كيفية مراقبة خدمات ملفوس وإنشاء التنبيهات:</p>
+<li><p>إذا كنت تريد معرفة كيفية مراقبة خدمات ملفوس وإنشاء التنبيهات:</p>
 <ul>
 <li>تعلم <a href="/docs/ar/monitor.md">مراقبة Milvus باستخدام مشغل Prometheus على Kubernetes</a></li>
 <li>تعلم <a href="/docs/ar/visualize.md">تصور مقاييس ميلفوس في غرافانا</a>.</li>

@@ -20,11 +20,11 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>在文字處理中，<strong>分析器</strong>是將原始文字轉換成結構化、可搜尋格式的重要元件。每個分析器通常包含兩個核心元件：<strong>標記器</strong>和<strong>過濾</strong> <strong>器</strong>。它們共同將輸入文字轉換為標記，精煉這些標記，並為有效的索引和檢索做好準備。</p>
-<p>在 Milvus 中，當您將<code translate="no">VARCHAR</code> 欄位新增至集合模式時，分析器會在集合建立時設定。分析器產生的標記可用於建立關鍵字比對索引，或轉換成稀疏內嵌以進行全文檢索。如需詳細資訊，請參閱<a href="/docs/zh-hant/keyword-match.md">文字匹配</a>或<a href="/docs/zh-hant/full-text-search.md">全文搜尋</a>。</p>
+<p>在 Milvus 中，當您將<code translate="no">VARCHAR</code> 欄位新增至集合模式時，分析器會在集合建立時設定。分析器產生的標記可用於建立關鍵字比對索引，或轉換成稀疏嵌入（sparse embeddings）用於全文檢索。如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文本搜尋</a>、<a href="/docs/zh-hant/phrase-match.md">片語匹配</a>或<a href="/docs/zh-hant/keyword-match.md">文字匹配</a>。</p>
 <div class="alert note">
 <p>使用分析器可能會影響效能：</p>
 <ul>
-<li><p><strong>全文本搜尋：</strong>對於全文本搜尋，<strong>DataNode</strong>和<strong>QueryNode</strong>通道消耗資料的速度較慢，因為它們必須等待標記化完成。因此，新擷取的資料需要較長時間才能可供搜尋。</p></li>
+<li><p><strong>全文檢索：</strong>對於全文本搜尋，<strong>DataNode</strong>和<strong>QueryNode</strong>通道消耗資料的速度較慢，因為它們必須等待標記化完成。因此，新擷取的資料需要較長時間才能供搜尋使用。</p></li>
 <li><p><strong>關鍵字匹配：</strong>對於關鍵字匹配，建立索引的速度也較慢，因為在建立索引之前，必須先完成標記化。</p></li>
 </ul>
 </div>
@@ -77,9 +77,12 @@ summary: >-
 <li><p><strong>自訂分析器</strong>：對於更進階的需求，自訂分析器可讓您透過指定標記器和零個或多個過濾器來定義您自己的組態。這種層級的自訂對於需要精確控制文字處理的專門用例特別有用。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在建立集合時省略了分析器設定，Milvus 預設會使用<code translate="no">standard</code> 分析器來處理所有文字。詳情請參閱<a href="/docs/zh-hant/standard-analyzer.md">標準</a>。</p>
+<ul>
+<li>如果您在建立集合時省略了分析器設定，Milvus 預設會使用<code translate="no">standard</code> 分析器來處理所有文字。如需詳細資訊，請參閱<a href="/docs/zh-hant/standard-analyzer.md">標準分析器</a>。</li>
+<li>為了獲得最佳的搜尋與查詢效能，請選擇符合您文字資料語言的分析器。例如，雖然<code translate="no">standard</code> 分析器用途廣泛，但對於具有獨特語法結構的語言 (例如中文、日文或韓文) 而言，它可能不是最佳選擇。在這種情況下，使用特定語言的分析器，例如 <a href="/docs/zh-hant/chinese-analyzer.md"><code translate="no">chinese</code></a>或具有專門標記器的自訂分析器 (例如 <a href="/docs/zh-hant/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/zh-hant/icu-tokenizer.md"><code translate="no">icu</code></a>) 和過濾器，以確保正確的標記化和更好的搜尋結果。</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">內建分析器</h3><p>Milvus 的內建分析器預先設定了特定的 tokenizer 和過濾器，讓您可以立即使用，而不需要自己定義這些元件。每個內建分析器都是一個範本，包含預設的標記器和篩選器，以及可選的自訂參數。</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">內建分析器</h3><p>Milvus 的內建分析器預先設定了特定的標記化器和過濾器，讓您可以立即使用，而不需要自己定義這些元件。每個內建分析器都是一個範本，包含預設的標記器和篩選器，以及可選的自訂參數。</p>
 <p>例如，若要使用<code translate="no">standard</code> 內建分析器，只需指定其名稱<code translate="no">standard</code> 為<code translate="no">type</code> ，並可選擇包含此分析器類型特有的額外配置，例如<code translate="no">stop_words</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -488,7 +491,7 @@ result, err := client.RunAnalyzer(ctx, option)
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>設定並驗證自訂分析器：</strong></p>
 <ul>
-<li><p><strong>配置：</strong>定義一個自訂分析器，使用標準的 tokenizer 以及內建的小寫篩選器和自訂的 token 長度及停止字篩選器。</p></li>
+<li><p><strong>配置：</strong>定義一個自訂分析器，使用標準的 tokenizer 以及內建的小寫篩選器和自訂的 token 長度與停止字篩選器。</p></li>
 <li><p><strong>驗證：</strong>使用<code translate="no">run_analyzer</code> 確保自訂組態按照預期處理文字。</p></li>
 </ul>
 <p><div class="multipleCode">
@@ -753,3 +756,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>配置分析器之後，您可以整合 Milvus 提供的文字檢索功能。如需詳細資訊：</p>
+<ul>
+<li><p><a href="/docs/zh-hant/full-text-search.md">全文檢索</a></p></li>
+<li><p><a href="/docs/zh-hant/keyword-match.md">文字匹配</a></p></li>
+<li><p><a href="/docs/zh-hant/phrase-match.md">詞組匹配</a></p></li>
+</ul>

@@ -62,7 +62,7 @@ title: Eseguire Milvus Lite a livello locale
 <li>Ubuntu &gt;= 20.04 (x86_64 e arm64)</li>
 <li>MacOS &gt;= 11.0 (Apple Silicon M1/M2 e x86_64)</li>
 </ul>
-<p>Si noti che Milvus Lite è adatto solo per casi di ricerca vettoriale su piccola scala. Per i casi di utilizzo su larga scala, si consiglia di utilizzare <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> o <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Si può anche considerare Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>Si noti che Milvus Lite è adatto solo per casi di ricerca vettoriale su piccola scala. Per i casi di utilizzo su larga scala, si consiglia di utilizzare <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> o <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Si può anche prendere in considerazione Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configurazione di Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -326,7 +326,7 @@ res = client.delete(
 </tbody>
 </table>
 <h3 id="Vector-Index-Types" class="common-anchor-header">Tipi di indici vettoriali</h3><p>Milvus Lite supporta solo il tipo di indice <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Utilizza il tipo FLAT indipendentemente dal tipo di indice specificato nella raccolta.</p>
-<h3 id="Search-Features" class="common-anchor-header">Caratteristiche della ricerca</h3><p>Milvus Lite supporta le funzioni Sparse Vector, Multi-vector e Hybrid Search.</p>
+<h3 id="Search-Features" class="common-anchor-header">Caratteristiche di ricerca</h3><p>Milvus Lite supporta le funzioni Sparse Vector, Multi-vector e Hybrid Search.</p>
 <h3 id="Partition" class="common-anchor-header">Partizione</h3><p>Milvus Lite non supporta le partizioni e i metodi relativi alle partizioni.</p>
 <h3 id="Users--Roles" class="common-anchor-header">Utenti e ruoli</h3><p>Milvus Lite non supporta utenti e ruoli e i relativi metodi.</p>
 <h3 id="Alias" class="common-anchor-header">Alias</h3><p>Milvus Lite non supporta gli alias e i metodi relativi agli alias.</p>

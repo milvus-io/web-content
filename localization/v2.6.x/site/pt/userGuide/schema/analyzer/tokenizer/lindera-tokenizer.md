@@ -22,7 +22,10 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O tokenizador <code translate="no">lindera</code> executa análise morfológica baseada em dicionário. É uma boa escolha para idiomas - como japonês, coreano e chinês - cujas palavras não são separadas por espaços.</p>
+    </button></h1><p>O tokenizador <code translate="no">lindera</code> executa análise morfológica baseada em dicionário. É uma boa opção para idiomas - como japonês, coreano e chinês - cujas palavras não são separadas por espaços.</p>
+<div class="alert note">
+<p>O tokenizador <code translate="no">lindera</code> preserva os sinais de pontuação como tokens separados na saída. Por exemplo, <code translate="no">&quot;こんにちは！&quot;</code> torna-se <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. Para remover esses tokens de pontuação independentes, use o filtro <a href="/docs/pt/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +42,7 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h2><p>Para usar o tokenizador <code translate="no">lindera</code>, é necessário usar uma versão especialmente compilada do Milvus. Todos os dicionários devem ser explicitamente habilitados durante a compilação para serem usados.</p>
-<p>Para habilitar dicionários específicos, inclua-os no comando de compilação:</p>
+<p>Para ativar dicionários específicos, inclua-os no comando de compilação:</p>
 <pre><code translate="no"><span class="hljs-built_in">make</span> milvus TANTIVY_FEATURES=lindera-ipadic,lindera-ko-dic
 <button class="copy-code-btn"></button></code></pre>
 <p>A lista completa de dicionários disponíveis é: <code translate="no">lindera-ipadic</code>, <code translate="no">lindera-ipadic-neologd</code>, <code translate="no">lindera-unidic</code>, <code translate="no">lindera-ko-dic</code>, <code translate="no">lindera-cc-cedict</code>.</p>
@@ -66,7 +69,7 @@ beta: Milvus 2.5.11+
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }

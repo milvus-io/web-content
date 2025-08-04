@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>傳統的向量搜尋純粹是透過數學相似性來排列結果，也就是向量在高維空間中的匹配程度。這種方法雖然有效率，但往往會忽略真正的語意相關性。考慮搜尋<strong>「資料庫最佳優化實務」：</strong>您可能會收到高向量相似度的文件，這些文件會經常提到這些詞彙，但實際上卻沒有提供可行的優化策略。</p>
-<p>Model Ranker 整合了先進的語言模型，能夠理解查詢與文件之間的語義關係，從而改變 Milvus 的搜尋方式。它不只依賴向量相似度，還會評估內容的意義和上下文，以提供更智慧、更相關的搜尋結果。</p>
+<p>Model Ranker 整合了先進的語言模型，能夠理解查詢與文件之間的語義關係，從而改變 Milvus 的搜尋方式。它不只依賴向量相似度，還會評估內容意義和上下文，以提供更智慧、更相關的搜尋結果。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -197,15 +197,21 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>是</p></td>
+     <td><p>包含基於模型的重排函數設定的辭典。可用參數 (鍵) 依提供者 (<code translate="no">tei</code> 或<code translate="no">vllm</code>) 而異。詳情請參閱<a href="/docs/zh-hant/vllm-ranker.md">vLLM Ranker</a>或<a href="/docs/zh-hant/tei-ranker.md">TEI Ranker</a>。</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>是</p></td>
-     <td><p>必須設定為<code translate="no">"model"</code> 才能啟用模型重排。</p></td>
+     <td><p>必須設定為<code translate="no">"model"</code> 才能啟用模型重排功能。</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>是</p></td>
-     <td><p>用於重排的模型服務提供者。</p></td>
+     <td><p>用於重新排序的模型服務提供者。</p></td>
      <td><p><code translate="no">"tei"</code> 或<code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
@@ -236,7 +242,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">套用至混合搜尋</h3><p>模型排序器也可以應用於結合多向量場的混合搜尋作業：</p>

@@ -96,7 +96,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">الكاتب بالجملة</a> هي أداة معالجة البيانات التي توفرها حزم تطوير البرمجيات Milvus SDKs (مثل PyMilvus وJava SDK)، وهي مصممة لتحويل مجموعات البيانات الأولية إلى تنسيق متوافق مع Milvus لاستيرادها بكفاءة.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">الكاتب بالجملة</a> هي أداة معالجة البيانات التي توفرها حزم تطوير البرمجيات Milvus SDKs (مثل PyMilvus وJava SDK)، وهي مصممة لتحويل مجموعات البيانات الخام إلى تنسيق متوافق مع Milvus لاستيرادها بكفاءة.</p>
 <h2 id="Bulk-Insert" class="common-anchor-header">الإدراج بالجملة<button data-href="#Bulk-Insert" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +144,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يستخدم Milvus نوعين من القنوات، <a href="https://milvus.io/docs/glossary.md#PChannel">قناة PC</a> وقناة <a href="https://milvus.io/docs/glossary.md#VChannel">V</a>. تتوافق كل قناة PChannel مع موضوع لتخزين السجل، بينما تتوافق كل قناة VChannel مع جزء في مجموعة.</p>
+    </button></h2><p>تستخدم ميلفوس نوعين من القنوات، <a href="#pchannel">قناة PC</a> وقناة <a href="#vchannel">V،</a> كجزء من بنية خدمة البث. تتوافق كل قناة PChannel مع دفق WAL تديره <a href="/docs/ar/woodpecker_architecture.md">Woodpecker،</a> بينما تتوافق كل قناة VChannel مع جزء في مجموعة. تدير خدمة التدفق هذه القنوات لضمان اتساق البيانات واستعادة البيانات من الأخطاء.</p>
 <h2 id="Collection" class="common-anchor-header">المجموعة<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>التبعية هي برنامج يعتمد عليه برنامج آخر للعمل. وتتضمن تبعيات ميلفوس etcd (تخزين البيانات الوصفية)، وMinIO أو S3 (تخزين الكائنات)، وPulsar (إدارة سجلات اللقطات). لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies">إدارة التبعيات</a>.</p>
+    </button></h2><p>التبعية هي برنامج يعتمد عليه برنامج آخر للعمل. وتتضمن تبعيات ميلفوس etcd (تخزين البيانات الوصفية) وMinIO أو S3 (تخزين الكائنات) وPulsar (إدارة سجلات اللقطات). لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies">إدارة التبعيات</a>.</p>
 <h2 id="Dynamic-schema" class="common-anchor-header">المخطط الديناميكي<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ title: المصطلحات
         ></path>
       </svg>
     </button></h2><p>يتكون الكيان من مجموعة من الحقول التي تمثل كائنات العالم الحقيقي. يتم تمثيل كل كيان في ميلفوس بمفتاح أساسي فريد.</p>
-<p>يمكنك تخصيص المفاتيح الأساسية. إذا لم تقم بالتكوين يدوياً، يقوم Milvus تلقائياً بتعيين المفتاح الأساسي للكيانات. إذا اخترت تخصيص المفتاح الأساسي، لاحظ أن Milvus لا يدعم إلغاء تكرار المفتاح الأساسي في الوقت الحالي. لذلك، يمكن أن تكون هناك مفاتيح أساسية مكررة في نفس المجموعة. لمزيد من المعلومات، راجع <a href="/docs/ar/insert-update-delete.md#Insert-entities">إدراج الكيانات</a>.</p>
+<p>يمكنك تخصيص المفاتيح الأساسية. إذا لم تقم بالتكوين يدويًا، يقوم Milvus تلقائيًا بتعيين المفتاح الأساسي للكيانات. إذا اخترت تخصيص المفتاح الأساسي، لاحظ أن Milvus لا يدعم إلغاء تكرار المفتاح الأساسي في الوقت الحالي. لذلك، يمكن أن تكون هناك مفاتيح أساسية مكررة في نفس المجموعة. لمزيد من المعلومات، راجع <a href="/docs/ar/insert-update-delete.md#Insert-entities">إدراج الكيانات</a>.</p>
 <h2 id="Field" class="common-anchor-header">الحقل<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,22 +338,8 @@ title: المصطلحات
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">نوهير</a> هو محرك التنفيذ المتجه الأساسي ل Milvus والذي يتضمن العديد من مكتبات البحث عن التشابه المتجه بما في ذلك Faiss و Hnswlib و Annoy. تم تصميم Knowhere أيضًا لدعم الحوسبة غير المتجانسة. فهو يتحكم في الأجهزة (وحدة المعالجة المركزية أو وحدة معالجة الرسومات) لتنفيذ طلبات بناء الفهرس والبحث. هكذا حصل نوير على اسمه - معرفة مكان تنفيذ العمليات.</p>
-<h2 id="Log-broker" class="common-anchor-header">وسيط السجل<button data-href="#Log-broker" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>وسيط <a href="https://milvus.io/docs/four_layers.md#Log-broker">السجل</a> هو نظام نشر-اشتراك يدعم التشغيل. وهو مسؤول عن استمرارية البيانات المتدفقة، وتنفيذ الاستعلامات غير المتزامنة الموثوقة، والإخطار بالأحداث، وإرجاع نتائج الاستعلام. كما يضمن سلامة البيانات الإضافية عند تعافي العقد العاملة من تعطل النظام.</p>
+<!-- ## Log broker
+<p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">لقطة السجل<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -369,39 +355,11 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لقطة السجل هي عبارة عن سجل ثنائي، وهو عبارة عن وحدة أصغر في المقطع الذي يسجل ويعالج التحديثات والتغييرات التي تم إجراؤها على البيانات في ميلفوس. يتم الاحتفاظ بالبيانات من مقطع في سجلات ثنائية متعددة. هناك ثلاثة أنواع من السجلات الثنائية في ميلفوس: إدراج سجلات ثنائية وحذف سجلات ثنائية وحذف سجلات ثنائية. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/four_layers.md#Meta-storage">تخزين التعريف</a>.</p>
-<h2 id="Log-subscriber" class="common-anchor-header">مشتركو السجل<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>يشترك مشتركو السجل في تسلسل السجل لتحديث البيانات المحلية وتوفير الخدمات في شكل نسخ للقراءة فقط.</p>
-<h2 id="Message-storage" class="common-anchor-header">تخزين الرسائل<button data-href="#Message-storage" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>تخزين الرسائل هو محرك تخزين السجل في ملفوس. يدعم Milvus Kafka أو Pulsa كمخزن للرسائل. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">تكوين تخزين الرسائل</a>.</p>
+    </button></h2><p>لقطة السجل هي عبارة عن سجل ثنائي، وهو عبارة عن وحدة أصغر في المقطع الذي يسجل ويعالج التحديثات والتغييرات التي تم إجراؤها على البيانات في ملفوس. يتم تخزين البيانات من مقطع ما في سجلات ثنائية متعددة. هناك ثلاثة أنواع من السجلات الثنائية في ميلفوس: إدراج سجلات ثنائية وحذف سجلات ثنائية وحذف سجلات ثنائية. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/four_layers.md#Meta-storage">التخزين الوصفي</a>.</p>
+<!-- ## Log subscriber
+<p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. --></p>
+<!-- ## Message storage
+<p>Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Configure Message Storage</a>. --></p>
 <h2 id="Metric-type" class="common-anchor-header">نوع القياس<button data-href="#Metric-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -417,7 +375,23 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تُستخدم أنواع مقاييس التشابه لقياس أوجه التشابه بين المتجهات. يدعم ميلفوس حاليًا المسافة الإقليدية (L2)، والمنتج الداخلي (IP)، والتشابه في جيب التمام (COSINE)، وأنواع المقاييس الثنائية. يمكنك اختيار نوع المقياس الأنسب بناءً على السيناريو الخاص بك. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/metric.md">مقاييس التشابه</a>.</p>
+    </button></h2><p>تُستخدم أنواع مقاييس التشابه لقياس أوجه التشابه بين المتجهات. يدعم ميلفوس حاليًا المسافة الإقليدية (L2)، والضرب الداخلي (IP)، والتشابه في جيب التمام (COSINE)، وأنواع المقاييس الثنائية. يمكنك اختيار نوع المقياس الأنسب بناءً على السيناريو الخاص بك. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/metric.md">مقاييس التشابه</a>.</p>
+<h2 id="MemoryBuffer" class="common-anchor-header">MemoryBuffer<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>MemoryBuffer هو وضع نشر خفيف الوزن لنقار الخشب يقوم بتخزين الكتابات الواردة مؤقتًا في الذاكرة ويقوم بمسحها بشكل دوري إلى مخزن الكائنات السحابية. هذا الوضع هو الأنسب لأحمال العمل ذات الدُفعات الثقيلة في عمليات النشر على نطاق أصغر أو بيئات الإنتاج التي تعطي الأولوية للبساطة على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/woodpecker_architecture.md">بنية Woodpecker</a>.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,7 +407,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعمل الملفات المعينة بالذاكرة على تمكين معالجة البيانات بكفاءة من خلال تعيين محتويات الملف مباشرةً في الذاكرة. وهذا مفيد بشكل خاص عندما تكون الذاكرة محدودة ويكون تحميل جميع البيانات غير ممكن. يمكن لهذه التقنية تعزيز سعة البيانات والحفاظ على الأداء إلى حد ما. ومع ذلك، إذا تجاوزت البيانات سعة الذاكرة بشكل كبير، فقد تنخفض سرعات البحث والاستعلام بشكل كبير. لمزيد من المعلومات، ارجع إلى <a href="https://milvus.io/docs/mmap.md">تخزين البيانات الممكّنة لـ MM-ap</a>.</p>
+    </button></h2><p>تعمل الملفات المعينة بالذاكرة على تمكين معالجة البيانات بكفاءة من خلال تعيين محتويات الملف مباشرةً في الذاكرة. وهذا مفيد بشكل خاص عندما تكون الذاكرة محدودة وتحميل جميع البيانات غير ممكن. يمكن لهذه التقنية تعزيز سعة البيانات والحفاظ على الأداء إلى حد ما. ومع ذلك، إذا تجاوزت البيانات سعة الذاكرة بشكل كبير، فقد تنخفض سرعات البحث والاستعلام بشكل كبير. لمزيد من المعلومات، ارجع إلى <a href="https://milvus.io/docs/mmap.md">تخزين البيانات الممكّنة لـ MM-ap</a>.</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">ميلفوس النسخ الاحتياطي<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -593,7 +567,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يرمز PChannel إلى القناة الفعلية. تتوافق كل قناة PChannel مع موضوع لتخزين السجل. بشكل افتراضي، سيتم تعيين مجموعة مكونة من 16 قناة PChannels لتخزين السجلات التي تسجل إدراج البيانات وحذفها وتحديثها عند بدء تشغيل مجموعة Milvus. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">التكوينات المتعلقة بقناة الرسائل</a>.</p>
+    </button></h2><p>يرمز PChannel إلى القناة الفعلية. تتوافق كل قناة PChannel مع دفق WAL تتم إدارته بواسطة Woodpecker. بشكل افتراضي، سيتم تعيين مجموعة من قنوات PChannels لتخزين السجلات التي تسجل إدخال البيانات وحذفها وتحديثها عند بدء تشغيل مجموعة Milvus. لمزيد من المعلومات، راجع <a href="/docs/ar/streaming_service.md">خدمة الدفق</a>.</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -625,7 +599,23 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">الاستعلام</a> هو واجهة برمجة تطبيقات تجري تصفية عددية بتعبير منطقي محدد كمرشح. لمزيد من المعلومات، ارجع إلى <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">الحصول على استعلام است</a>علام <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">عددي</a>.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">الاستعلام</a> هو واجهة برمجة تطبيقات تجري تصفية عددية بتعبير منطقي محدد كمرشح. لمزيد من المعلومات، ارجع إلى <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">الحصول على استعلام الاستعلام العددي</a>.</p>
+<h2 id="QuorumBuffer" class="common-anchor-header">QuorumBuffer<button data-href="#QuorumBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>QuorumBuffer هو وضع نشر من Woodpecker مصمم لأحمال عمل القراءة/الكتابة الحساسة لوقت الاستجابة وعالية التردد التي تتطلب استجابة في الوقت الحقيقي وتحملاً قوياً للأخطاء. وهو يعمل كمخزن مؤقت عالي السرعة للكتابة مع ثلاث نسخ للكتابة النصابية، مما يضمن اتساقًا قويًا وتوافرًا عاليًا. لمزيد من المعلومات، راجع <a href="/docs/ar/woodpecker_architecture.md">Woodpecker Architecture</a>.</p>
 <h2 id="Range-search" class="common-anchor-header">بحث النطاق<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -641,7 +631,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يسمح لك بحث النطاق بالعثور على المتجهات التي تقع ضمن مسافة محددة من متجه البحث. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/single-vector-search.md#Range-search">بحث النطاق</a>.</p>
+    </button></h2><p>يسمح لك البحث عن النطاق بالعثور على المتجهات التي تقع ضمن مسافة محددة من متجه البحث. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/single-vector-search.md#Range-search">بحث النطاق</a>.</p>
 <h2 id="Schema" class="common-anchor-header">المخطط<button data-href="#Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -689,7 +679,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>المقطع عبارة عن ملف بيانات يتم إنشاؤه تلقائيًا ويخزن البيانات المدرجة. قد تحتوي المجموعة على عدة مقاطع، ويمكن أن يحتوي كل مقطع على العديد من الكيانات. أثناء البحث عن التشابه المتجه، يفحص ميلفوس كل مقطع لتجميع نتائج البحث.</p>
+    </button></h2><p>المقطع عبارة عن ملف بيانات يتم إنشاؤه تلقائيًا يخزن البيانات المدرجة. قد تحتوي المجموعة على عدة مقاطع، ويمكن أن يحتوي كل مقطع على العديد من الكيانات. أثناء البحث عن تشابه المتجهات، يفحص ميلفوس كل مقطع لتجميع نتائج البحث.</p>
 <p>هناك نوعان من المقاطع: المقاطع المتنامية والمختومة. يستمر المقطع المتنامي في جمع بيانات جديدة حتى يصل إلى حد معين أو حد زمني محدد، وبعد ذلك يصبح مغلقًا. بمجرد إغلاقه، لا يقبل المقطع بعد ذلك بيانات جديدة ويتم نقله إلى مخزن الكائنات. في هذه الأثناء، يتم توجيه البيانات الواردة إلى مقطع متزايد جديد. يتم تشغيل الانتقال من شريحة متنامية إلى شريحة مختومة إما عن طريق الوصول إلى حد الكيان المحدد مسبقًا أو عن طريق تجاوز الحد الأقصى للمدة المسموح بها في حالة النمو. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/replica.md#Design-Details">تفاصيل التصميم</a>.</p>
 <h2 id="Spark-Milvus-Connector" class="common-anchor-header">موصل Spark-Milvus Connector<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -706,7 +696,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر<a href="https://github.com/zilliztech/spark-milvus">موصل Spark-Milvus Connector</a> تكاملاً سلساً بين Apache Spark و Milvus، حيث يجمع بين ميزات معالجة البيانات والتعلم الآلي (ML) في Apache Spark مع قدرات تخزين البيانات المتجهة وإمكانيات البحث في Milvus.</p>
+    </button></h2><p>يوفر<a href="https://github.com/zilliztech/spark-milvus">موصل Spark-Milvus Connector</a> تكاملاً سلساً بين Apache Spark و Milvus، ويجمع بين ميزات معالجة البيانات والتعلم الآلي (ML) في Apache Spark مع قدرات تخزين البيانات المتجهة وإمكانيات البحث في Milvus.</p>
 <h2 id="Shard" class="common-anchor-header">شارد<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -740,6 +730,22 @@ title: المصطلحات
         ></path>
       </svg>
     </button></h2><p>تمثل المتجهات المتفرقة الكلمات أو العبارات باستخدام تضمينات المتجهات حيث تكون معظم العناصر صفرية، مع وجود عنصر واحد فقط غير صفري يشير إلى وجود كلمة معينة. تتفوق نماذج المتجهات المتناثرة، مثل SPLADEv2، على النماذج الكثيفة في البحث عن المعرفة خارج النطاق، والوعي بالكلمات الرئيسية، وقابلية التفسير. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">المتجهات المتفرقة</a>.</p>
+<h2 id="Streaming-Service" class="common-anchor-header">خدمة البث<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>خدمة التدفق هي مفهوم لوحدة نظام التدفق الداخلي في ميلفوس المبنية حول سجل الكتابة الأمامية (WAL) لدعم مختلف الوظائف المتعلقة بالبث. وتشمل هذه الوظائف استيعاب/اشتراك البيانات المتدفقة، واسترداد الأخطاء لحالة المجموعة، وتحويل البيانات المتدفقة إلى بيانات تاريخية، والاستعلامات المتزايدة للبيانات. تتألف الخدمة من مكونات منسق البث، ومجموعة عقدة البث ومكونات عميل البث. لمزيد من المعلومات، راجع <a href="/docs/ar/streaming_service.md">خدمة تدفق البيانات</a>.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">البيانات غير المهيكلة<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -755,8 +761,8 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>البيانات غير المهيكلة، بما في ذلك الصور والفيديو والصوت واللغة الطبيعية، هي معلومات لا تتبع نموذجًا أو طريقة تنظيم محددة مسبقًا. يمثل هذا النوع من البيانات حوالي 80% من البيانات في العالم، ويمكن تحويلها إلى متجهات باستخدام نماذج الذكاء الاصطناعي والتعلم الآلي المختلفة.</p>
-<h2 id="VChannel" class="common-anchor-header">القناة المنطقية<button data-href="#VChannel" class="anchor-icon" translate="no">
+    </button></h2><p>البيانات غير المهيكلة، بما في ذلك الصور والفيديو والصوت واللغة الطبيعية، هي معلومات لا تتبع نموذجًا أو طريقة تنظيم محددة مسبقًا. ويمثل هذا النوع من البيانات حوالي 80% من البيانات في العالم، ويمكن تحويلها إلى متجهات باستخدام نماذج الذكاء الاصطناعي (AI) والتعلم الآلي المختلفة.</p>
+<h2 id="VChannel" class="common-anchor-header">القناة الافتراضية<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -771,7 +777,7 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يرمز<a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannel</a> إلى القناة المنطقية. تمثل كل قناة VChannel جزءًا في مجموعة. سيتم تعيين مجموعة من قنوات VChannel لكل مجموعة لتسجيل إدراج البيانات وحذفها وتحديثها. قنوات VChannel منفصلة منطقيًا ولكنها تشترك فعليًا في الموارد.</p>
+    </button></h2><p>يرمز VChannel إلى القناة الافتراضية. تمثل كل قناة VChannel جزءًا في مجموعة. سيتم تعيين مجموعة من القنوات الافتراضية VChannel لكل مجموعة لتسجيل إدراج البيانات وحذفها وتحديثها. تكون قنوات VChannels منفصلة منطقيًا ولكنها تشترك فعليًا في الموارد من خلال خدمة البث. لمزيد من المعلومات، راجع <a href="/docs/ar/streaming_service.md">خدمة البث</a>.</p>
 <h2 id="Vector" class="common-anchor-header">المتجه<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -787,8 +793,40 @@ title: المصطلحات
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>متجه التضمين هو تجريد ميزة للبيانات غير المهيكلة، مثل رسائل البريد الإلكتروني، وبيانات مستشعر إنترنت الأشياء، وصور إنستغرام، وبنى البروتين، وغيرها. من الناحية الرياضية، متجه التضمين هو عبارة عن مصفوفة من الأرقام ذات الفاصلة العائمة أو الثنائيات. تُستخدم تقنيات التضمين الحديثة لتحويل البيانات غير المنظمة إلى متجهات تضمين. يدعم ميلفوس كلاً من المتجهات الكثيفة والمتناثرة منذ الإصدار 2.4.0.</p>
-<h2 id="Zilliz-Cloud" class="common-anchor-header">سحابة زيليز<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
+    </button></h2><p>متجه التضمين هو تجريد ميزة للبيانات غير المهيكلة، مثل رسائل البريد الإلكتروني، وبيانات مستشعر إنترنت الأشياء، وصور Instagram، وبنى البروتين، وغيرها. من الناحية الرياضية، متجه التضمين هو عبارة عن مصفوفة من الأرقام ذات الفاصلة العائمة أو الثنائيات. تُستخدم تقنيات التضمين الحديثة لتحويل البيانات غير المنظمة إلى متجهات تضمين. يدعم ميلفوس كلاً من المتجهات الكثيفة والمتناثرة منذ الإصدار 2.4.0.</p>
+<h2 id="WAL-Storage" class="common-anchor-header">تخزين WAL<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>تخزين سجل الكتابة المسبق (WAL) هو أساس متانة البيانات واتساقها في الأنظمة الموزعة. قبل إجراء أي تغيير، يتم تسجيله أولاً في السجل - مما يضمن أنه في حالة حدوث عطل، يمكنك استرداد البيانات من حيث توقفت بالضبط. يستخدم ميلفوس Woodpecker كنظام تخزين WAL الخاص به، والذي يدعم وضعي MemoryBuffer و QuumorBuffer. لمزيد من المعلومات، راجع <a href="/docs/ar/woodpecker_architecture.md">بنية Woodpecker</a>.</p>
+<h2 id="Woodpecker" class="common-anchor-header">نقار الخشب<button data-href="#Woodpecker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Woodpecker هو نظام WAL سحابي أصلي في Milvus 2.6 يحل محل Kafka وPulsar. مع بنية خالية من الأقراص ونمطين للنشر (MemoryBuffer و QuorumBuffer)، فإنه يوفر إنتاجية عالية ونفقات تشغيلية منخفضة وقابلية توسع سلسة على تخزين الكائنات. لمزيد من المعلومات، راجع <a href="/docs/ar/woodpecker_architecture.md">بنية Woodpecker</a>.</p>
+<h2 id="Zilliz-Cloud" class="common-anchor-header">زيليز كلاود<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

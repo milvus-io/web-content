@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>二进制向量是一种特殊的数据表示形式，它将传统的高维浮点向量转换为只包含 0 和 1 的二进制向量。这种转换不仅压缩了向量的大小，还降低了存储和计算成本，同时保留了语义信息。当对非关键特征的精度要求不高时，二进制向量可以有效保持原始浮点向量的大部分完整性和实用性。</p>
+    </button></h1><p>二进制向量是一种特殊的数据表示形式，它将传统的高维浮点向量转换成只包含 0 和 1 的二进制向量。这种转换不仅压缩了向量的大小，还降低了存储和计算成本，同时保留了语义信息。当对非关键特征的精度要求不高时，二进制向量可以有效保持原始浮点向量的大部分完整性和实用性。</p>
 <p>二进制向量有着广泛的应用，尤其是在计算效率和存储优化至关重要的情况下。在搜索引擎或推荐系统等大规模人工智能系统中，实时处理海量数据是关键所在。通过减小向量的大小，二进制向量有助于降低延迟和计算成本，而不会明显牺牲准确性。此外，二进制向量在移动设备和嵌入式系统等资源受限的环境中也很有用，因为在这些环境中，内存和处理能力都很有限。通过使用二进制向量，可以在这些受限环境中实现复杂的人工智能功能，同时保持高性能。</p>
 <h2 id="Overview" class="common-anchor-header">二进制矢量概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ summary: >-
 <li><p><strong>高效存储：</strong>每个维度只需 1 位存储空间，大大减少了存储空间。</p></li>
 <li><p><strong>快速计算：</strong>使用 XOR 等位运算可以快速计算向量间的相似性。</p></li>
 <li><p><strong>固定长度：</strong>无论原始文本的长度如何，向量的长度保持不变，从而使索引和检索更加容易。</p></li>
-<li><p><strong>简单直观：</strong>直接反映关键词的存在，适合某些专业检索任务。</p></li>
+<li><p><strong>简单直观：</strong>直接反映关键字的存在，适合某些专门的检索任务。</p></li>
 </ul>
 <p>二进制向量可以通过各种方法生成。在文本处理中，可以使用预定义的词汇表，根据词的存在设置相应的位。在图像处理中，感知哈希算法（如<a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>）可以生成图像的二进制特征。在机器学习应用中，可对模型输出进行二进制化，以获得二进制向量表示。</p>
 <p>二进制向量化后，数据可以存储在 Milvus 中，以便进行管理和向量检索。下图显示了基本流程。</p>
@@ -238,9 +238,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的示例中，使用<code translate="no">AUTOINDEX</code> 索引类型为<code translate="no">binary_vector</code> 字段创建了名为<code translate="no">binary_vector_index</code> 的索引。<code translate="no">metric_type</code> 设置为<code translate="no">HAMMING</code> ，表示使用汉明距离进行相似性测量。</p>
-<p>Milvus 提供多种索引类型，以获得更好的向量搜索体验。AUTOINDEX 是一种特殊的索引类型，旨在平滑向量搜索的学习曲线。有很多索引类型可供您选择。详情请参阅 xxx。</p>
+<p>Milvus 提供多种索引类型，以获得更好的向量搜索体验。AUTOINDEX 是一种特殊的索引类型，旨在平滑向量搜索的学习曲线。有很多索引类型供你选择。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引说明</a>。</p>
 <p>此外，Milvus 还支持二进制向量的其他相似度度量。更多信息，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p>
-<h3 id="Create-collection" class="common-anchor-header">创建 Collections</h3><p>二进制向量和索引设置完成后，创建一个包含二进制向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的 Collection。</p>
+<h3 id="Create-collection" class="common-anchor-header">创建 Collections</h3><p>二进制向量和索引设置完成后，创建一个包含二进制向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(

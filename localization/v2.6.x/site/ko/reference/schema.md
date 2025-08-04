@@ -209,11 +209,13 @@ schema.addField(AddFieldReq.builder()
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>이 유형의 벡터 필드는 16비트 반정밀도 부동 소수점 목록을 보유하며 일반적으로 메모리 또는 대역폭이 제한된 딥 러닝 또는 GPU 기반 컴퓨팅 시나리오에 적용됩니다.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
-<p>이 유형의 벡터 필드에는 정밀도는 떨어지지만 지수 범위는 Float32와 동일한 16비트 부동 소수점 숫자 목록이 들어 있습니다. 이 유형의 데이터는 정확도에 큰 영향을 주지 않으면서 메모리 사용량을 줄이기 때문에 딥러닝 시나리오에서 일반적으로 사용됩니다.</p></li>
+<p>이 유형의 벡터 필드에는 정밀도는 떨어지지만 지수 범위는 Float32와 동일한 16비트 부동 소수점 숫자 목록이 들어 있습니다. 이 유형의 데이터는 정확도에 큰 영향을 주지 않으면서 메모리 사용량을 줄여주기 때문에 딥 러닝 시나리오에서 일반적으로 사용됩니다.</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>이 유형의 벡터 필드는 8비트 부호 있는 정수(int8)로 구성된 벡터를 저장하며, 각 구성 요소의 범위는 -128에서 127 사이입니다. ResNet 및 EfficientNet과 같은 양자화된 딥 러닝 아키텍처에 맞게 조정되어 모델 크기를 크게 줄이고 추론 속도를 높이는 동시에 최소한의 정밀도 손실만 발생시킵니다. <strong>참고</strong>: 이 벡터 유형은 HNSW 인덱스에만 지원됩니다.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>이 유형의 벡터 필드에는 0과 1의 목록이 들어 있습니다. 이미지 처리 및 정보 검색 시나리오에서 데이터를 표현하기 위한 간결한 기능으로 사용됩니다.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>이 유형의 벡터 필드에는 0이 아닌 숫자의 목록과 그 시퀀스 번호가 저장되어 희소 벡터 임베딩을 나타냅니다.</p></li>
+<p>이 유형의 벡터 필드는 희소 벡터 임베딩을 나타내기 위해 0이 아닌 숫자와 그 시퀀스 번호의 목록을 보유합니다.</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields" class="common-anchor-header">스칼라 필드 추가<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"

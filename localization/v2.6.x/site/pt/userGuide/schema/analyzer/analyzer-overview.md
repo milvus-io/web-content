@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>No processamento de texto, um <strong>analisador</strong> é um componente crucial que converte o texto em bruto num formato estruturado e pesquisável. Cada analisador é normalmente composto por dois elementos principais: <strong>tokenizador</strong> e <strong>filtro</strong>. Juntos, eles transformam o texto de entrada em tokens, refinam esses tokens e preparam-nos para uma indexação e recuperação eficientes.</p>
-<p>No Milvus, os analisadores são configurados durante a criação da coleção quando se adicionam os campos <code translate="no">VARCHAR</code> ao esquema da coleção. Os símbolos produzidos por um analisador podem ser utilizados para construir um índice para correspondência de palavras-chave ou convertidos em embeddings esparsos para pesquisa de texto completo. Para obter mais informações, consulte <a href="/docs/pt/keyword-match.md">Correspondência de texto</a> ou <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
+<p>No Milvus, os analisadores são configurados durante a criação da coleção quando se adicionam os campos <code translate="no">VARCHAR</code> ao esquema da coleção. Os símbolos produzidos por um analisador podem ser utilizados para construir um índice para correspondência de palavras-chave ou convertidos em embeddings esparsos para pesquisa de texto completo. Para obter mais informações, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>, <a href="/docs/pt/phrase-match.md">Correspondência de frases</a> ou <a href="/docs/pt/keyword-match.md">Correspondência de texto</a>.</p>
 <div class="alert note">
 <p>A utilização de analisadores pode afetar o desempenho:</p>
 <ul>
@@ -81,9 +81,12 @@ summary: >-
 <li><p><strong>Analisador personalizado</strong>: Para requisitos mais avançados, os analisadores personalizados permitem-lhe definir a sua própria configuração, especificando o tokenizador e zero ou mais filtros. Este nível de personalização é especialmente útil para casos de utilização especializados em que é necessário um controlo preciso do processamento de texto.</p></li>
 </ul>
 <div class="alert note">
-<p>Se omitir as configurações do analisador durante a criação da coleção, o Milvus utiliza por defeito o analisador <code translate="no">standard</code> para todo o processamento de texto. Para obter detalhes, consulte <a href="/docs/pt/standard-analyzer.md">Padrão</a>.</p>
+<ul>
+<li>Se omitir as configurações do analisador durante a criação da coleção, o Milvus utiliza por defeito o analisador <code translate="no">standard</code> para todo o processamento de texto. Para obter detalhes, consulte <a href="/docs/pt/standard-analyzer.md">Analisador padrão</a>.</li>
+<li>Para obter o melhor desempenho de pesquisa e consulta, escolha um analisador que corresponda ao idioma dos seus dados de texto. Por exemplo, embora o analisador <code translate="no">standard</code> seja versátil, ele pode não ser a melhor opção para idiomas com estruturas gramaticais exclusivas, como chinês, japonês ou coreano. Nesses casos, a utilização de um analisador específico do idioma, como o <a href="/docs/pt/chinese-analyzer.md"><code translate="no">chinese</code></a> ou analisadores personalizados com tokenizadores especializados (como <a href="/docs/pt/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/pt/icu-tokenizer.md"><code translate="no">icu</code></a>) e filtros é altamente recomendado para garantir uma tokenização precisa e melhores resultados de pesquisa.</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Analisador incorporado</h3><p>Os analisadores incorporados no Milvus são pré-configurados com tokenizadores e filtros específicos, permitindo a sua utilização imediata sem necessidade de definir estes componentes. Cada analisador integrado serve como um modelo que inclui um tokenizador e filtros predefinidos, com parâmetros opcionais para personalização.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Analisador incorporado</h3><p>Os analisadores incorporados no Milvus são pré-configurados com tokenizadores e filtros específicos, permitindo-lhe usá-los imediatamente sem precisar de definir estes componentes. Cada analisador incorporado serve como um modelo que inclui um tokenizador e filtros predefinidos, com parâmetros opcionais para personalização.</p>
 <p>Por exemplo, para usar o analisador interno <code translate="no">standard</code>, basta especificar seu nome <code translate="no">standard</code> como <code translate="no">type</code> e, opcionalmente, incluir configurações extras específicas para esse tipo de analisador, como <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -286,7 +289,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
        &quot;filter&quot;:  [&quot;lowercase&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Filtros personalizados</strong>: Os filtros personalizados permitem configurações especializadas. É possível definir um filtro personalizado escolhendo um tipo de filtro válido (<code translate="no">filter.type</code>) e adicionando configurações específicas para cada tipo de filtro. Exemplos de tipos de filtro que suportam personalização:</p>
+<li><p><strong>Filtros personalizados</strong>: Os filtros personalizados permitem configurações especializadas. É possível definir um filtro personalizado escolhendo um tipo de filtro válido (<code translate="no">filter.type</code>) e adicionando configurações específicas para cada tipo de filtro. Exemplos de tipos de filtro que suportam a personalização:</p>
 <ul>
 <li><p><code translate="no">stop</code>: Remove palavras comuns especificadas, definindo uma lista de palavras de paragem (por exemplo, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Para mais informações, consulte <a href="/docs/pt/stop-filter.md">Parar</a>.</p></li>
 <li><p><code translate="no">length</code>: Exclui tokens com base em critérios de comprimento, como a definição de um comprimento máximo de token. Para obter detalhes, consulte <a href="/docs/pt/length-filter.md">Comprimento</a>.</p></li>
@@ -757,3 +760,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Depois de configurar um analisador, pode integrá-lo com as funcionalidades de recuperação de texto fornecidas pelo Milvus. Para mais informações:</p>
+<ul>
+<li><p><a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a></p></li>
+<li><p><a href="/docs/pt/keyword-match.md">Correspondência de texto</a></p></li>
+<li><p><a href="/docs/pt/phrase-match.md">Correspondência de frases</a></p></li>
+</ul>

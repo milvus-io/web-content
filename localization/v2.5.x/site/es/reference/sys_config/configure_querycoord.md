@@ -686,7 +686,7 @@ summary: Aprenda a configurar queryCoord para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        10s, Sólo están disponibles los QueryNodes que obtuvieron latidos dentro de la duración      </td>
+      <td>        10s, Sólo están disponibles los QueryNodes que obtuvieron latidos dentro de esa duración      </td>
       <td>10000</td>
     </tr>
   </tbody>

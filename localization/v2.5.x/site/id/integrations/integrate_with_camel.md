@@ -24,7 +24,7 @@ title: Retrieval-Augmented Generation (RAG) dengan Milvus dan Camel
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Panduan ini mendemonstrasikan cara membangun sistem Retrieval-Augmented Generation (RAG) dengan menggunakan CAMEL dan Milvus.</p>
 <p>Sistem RAG menggabungkan sistem pengambilan dengan model generatif untuk menghasilkan teks baru berdasarkan perintah yang diberikan. Sistem ini pertama-tama mengambil dokumen yang relevan dari korpus menggunakan Milvus, dan kemudian menggunakan model generatif untuk menghasilkan teks baru berdasarkan dokumen yang diambil.</p>
-<p><a href="https://www.camel-ai.org/">CAMEL</a> adalah sebuah kerangka kerja multi-agen. <a href="https://milvus.io/">Milvus</a> adalah basis data vektor sumber terbuka paling canggih di dunia, yang dibangun untuk mendukung pencarian kemiripan dan aplikasi AI.</p>
+<p><a href="https://www.camel-ai.org/">CAMEL</a> adalah sebuah kerangka kerja multi-agen. <a href="https://milvus.io/">Milvus</a> adalah basis data vektor sumber terbuka paling canggih di dunia, yang dibuat untuk mendukung pencarian kemiripan dan aplikasi AI.</p>
 <p>Dalam buku catatan ini, kami menunjukkan penggunaan CAMEL Retrieve Module dengan cara yang disesuaikan dan cara otomatis. Kami juga akan menunjukkan cara menggabungkan <code translate="no">AutoRetriever</code> dengan <code translate="no">ChatAgent</code>, dan selanjutnya menggabungkan <code translate="no">AutoRetriever</code> dengan <code translate="no">RolePlaying</code> dengan menggunakan <code translate="no">Function Calling</code>.</p>
 <p>Termasuk 4 bagian utama:</p>
 <ul>
@@ -165,7 +165,7 @@ vector_retriever = VectorRetriever(
     </button></h2><p>Pada bagian ini kita akan menjalankan <code translate="no">AutoRetriever</code> dengan pengaturan default. Ini menggunakan <code translate="no">OpenAIEmbedding</code> sebagai model penyematan default dan <code translate="no">Milvus</code> sebagai penyimpanan vektor default.</p>
 <p>Yang perlu Anda lakukan adalah:</p>
 <ul>
-<li>Tetapkan jalur input konten, yang dapat berupa jalur lokal atau url jarak jauh</li>
+<li>Tetapkan jalur masukan konten, yang dapat berupa jalur lokal atau url jarak jauh</li>
 <li>Tetapkan url jarak jauh dan kunci api untuk Milvus</li>
 <li>Berikan kueri</li>
 </ul>

@@ -24,7 +24,7 @@ title: Обновление автономного Milvus с помощью Dock
         ></path>
       </svg>
     </button></h1><p>В этой теме описывается, как обновить Milvus с помощью Docker Compose.</p>
-<p>В обычных случаях вы можете <a href="#Upgrade-Milvus-by-changing-its-image">обновить Milvus, изменив его образ</a>. Однако перед обновлением с v2.1.x до v2.5.12 необходимо <a href="#Migrate-the-metadata">перенести метаданные</a>.</p>
+<p>В обычных случаях вы можете <a href="#Upgrade-Milvus-by-changing-its-image">обновить Milvus, изменив его образ</a>. Однако перед обновлением с v2.1.x до v2.6.0 необходимо <a href="#Migrate-the-metadata">перенести метаданные</a>.</p>
 <div class="alter note">
 <p>По соображениям безопасности Milvus обновляет свой MinIO до RELEASE.2023-03-20T20-16-18Z с выходом v2.2.5. Перед любым обновлением с предыдущих выпусков Milvus Standalone, установленных с помощью Docker Compose, необходимо создать развертывание MinIO с одним узлом и одним диском и перенести существующие настройки и содержимое MinIO в новое развертывание. Подробности см. в <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">этом руководстве</a>.</p>
 </div>
@@ -49,7 +49,7 @@ title: Обновление автономного Milvus с помощью Dock
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Для выполнения обновления выполните следующие команды.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.12</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.0</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>

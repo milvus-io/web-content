@@ -37,7 +37,7 @@ title: Gerenciar grupos de recursos
       </svg>
     </button></h2><p>Um grupo de recursos pode conter vários ou todos os nós de consulta em um cluster Milvus. O usuário decide como deseja alocar os nós de consulta entre os grupos de recursos com base no que faz mais sentido para ele. Por exemplo, num cenário de várias colecções, pode atribuir um número adequado de nós de consulta a cada grupo de recursos e carregar colecções em diferentes grupos de recursos, de modo a que as operações dentro de cada coleção sejam fisicamente independentes das de outras colecções.</p>
 <p>Note-se que uma instância do Milvus mantém um grupo de recursos predefinido para conter todos os nós de consulta no arranque e dá-lhe o nome de <strong>__default_resource_group</strong>.</p>
-<p>A partir da versão 2.4.1, o Milvus fornece uma API declarativa de grupo de recursos, enquanto a antiga API de grupo de recursos foi descontinuada. A nova API declarativa permite aos utilizadores alcançar a idempotência, para facilitar o desenvolvimento secundário em ambientes cloud-native.</p>
+<p>A partir da versão 2.4.1, Milvus fornece uma API declarativa de grupo de recursos, enquanto a antiga API de grupo de recursos foi descontinuada. A nova API declarativa permite aos utilizadores alcançar a idempotência, para facilitar o desenvolvimento secundário em ambientes cloud-native.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Conceitos de grupo de recursos<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +70,7 @@ title: Gerenciar grupos de recursos
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>Exceto nos seguintes casos:</p>
 <ul>
-<li>Quando o número de QueryNodes no cluster do Milvus é insuficiente, ou seja, <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, haverá sempre grupos de recursos sem QueryNodes suficientes.</li>
+<li>Quando o número de QueryNodes no cluster Milvus é insuficiente, ou seja, <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, haverá sempre grupos de recursos sem QueryNodes suficientes.</li>
 <li>Quando o número de QueryNodes no cluster Milvus é excessivo, i.e., <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, os QueryNodes redundantes serão sempre colocados primeiro no <strong>__default_resource_group</strong>.</li>
 </ul>
 <p>Naturalmente, se o número de QueryNodes no cluster mudar, o Milvus tentará continuamente ajustar-se para satisfazer as condições finais. Por conseguinte, pode aplicar primeiro as alterações de configuração do grupo de recursos e, em seguida, efetuar o escalonamento do QueryNode.</p>
@@ -90,7 +90,7 @@ title: Gerenciar grupos de recursos
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Todos os exemplos de código nesta página estão no PyMilvus 2.5.10. Atualize sua instalação do PyMilvus antes de executá-los.</p>
+<p>Todos os exemplos de código nesta página estão no PyMilvus 2.6.0. Atualize sua instalação do PyMilvus antes de executá-los.</p>
 </div>
 <ol>
 <li><p>Criar um grupo de recursos.</p>
@@ -231,7 +231,7 @@ except Exception:
       </svg>
     </button></h2><p>Atualmente, o Milvus não pode ser escalado de forma independente em ambientes nativos da nuvem. No entanto, ao usar a <strong>API Declarative Resource Group</strong> em conjunto com a orquestração de contêineres, o Milvus pode facilmente obter o isolamento e o gerenciamento de recursos para QueryNodes. Aqui está uma boa prática para gerenciar QueryNodes em um ambiente de nuvem:</p>
 <ol>
-<li><p>Por padrão, o Milvus cria um <strong>__default_resource_group</strong>. Este grupo de recursos não pode ser eliminado e serve igualmente de grupo de recursos de carregamento por defeito para todas as colecções e os QueryNodes redundantes são-lhe sempre atribuídos. Por conseguinte, podemos criar um grupo de recursos pendentes para manter os recursos QueryNode não utilizados, impedindo que os recursos QueryNode sejam ocupados pelo grupo <strong>__default_resource_group</strong>.</p>
+<li><p>Por padrão, o Milvus cria um <strong>__default_resource_group</strong>. Este grupo de recursos não pode ser eliminado e serve igualmente de grupo de recursos de carregamento por defeito para todas as colecções e os QueryNodes redundantes são-lhe sempre atribuídos. Por conseguinte, podemos criar um grupo de recursos pendentes para manter os recursos QueryNode não utilizados, impedindo que os recursos QueryNode sejam ocupados pelo <strong>__default_resource_group</strong>.</p>
 <p>Além disso, se aplicarmos rigorosamente a restrição <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, podemos controlar com precisão a atribuição de QueryNodes no cluster. Vamos assumir que existe atualmente apenas um QueryNode no cluster e inicializar o cluster. Aqui está um exemplo de configuração:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 

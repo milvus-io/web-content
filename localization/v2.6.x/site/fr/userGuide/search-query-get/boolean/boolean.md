@@ -47,8 +47,9 @@ summary: >-
 <li><p><strong>Filtres de plage</strong>: <code translate="no">IN</code> et <code translate="no">LIKE</code> permettent de faire correspondre des plages ou des ensembles de valeurs spécifiques.</p></li>
 <li><p><strong>Opérateurs arithmétiques</strong>: <code translate="no">+</code> Les opérateurs arithmétiques, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code> et <code translate="no">**</code> sont utilisés pour les calculs impliquant des champs numériques.</p></li>
 <li><p><strong>Opérateurs logiques</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, et <code translate="no">NOT</code> combinent plusieurs conditions dans des expressions complexes.</p></li>
+<li><p><strong>Opérateurs IS NULL et IS NOT NULL</strong>: Les opérateurs <code translate="no">IS NULL</code> et <code translate="no">IS NOT NULL</code> sont utilisés pour filtrer les champs selon qu'ils contiennent ou non une valeur nulle (absence de données). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Opérateurs de base</a>.</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Exemple : Filtrage par couleur</h3><p>Pour trouver des entités de couleur primaire (rouge, vert ou bleu) dans un champ scalaire <code translate="no">color</code>, utilisez l'expression de filtrage suivante :</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">Exemple : Filtrage par couleur</h3><p>Pour trouver des entités ayant des couleurs primaires (rouge, vert ou bleu) dans un champ scalaire <code translate="no">color</code>, utilisez l'expression de filtrage suivante :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Exemple : Filtrage des champs JSON</h3><p>Milvus permet de référencer des clés dans des champs JSON. Par exemple, si vous avez un champ JSON <code translate="no">product</code> avec les clés <code translate="no">price</code> et <code translate="no">model</code>, et que vous voulez trouver des produits avec un modèle spécifique et un prix inférieur à 1 850, utilisez l'expression de filtre suivante :</p>
@@ -75,7 +76,7 @@ summary: >-
       </svg>
     </button></h2><p>Lors d'un filtrage utilisant des caractères CJK, le traitement peut être plus complexe en raison des jeux de caractères plus importants et des différences d'encodage. Cela peut entraîner des performances plus lentes, en particulier avec l'opérateur <code translate="no">IN</code>.</p>
 <p>Milvus introduit un modèle d'expression de filtre pour optimiser les performances lors de l'utilisation de caractères CJK. En séparant les valeurs dynamiques de l'expression de filtre, le moteur de requête traite l'insertion de paramètres plus efficacement.</p>
-<h3 id="Example" class="common-anchor-header">Exemple</h3><p>Pour trouver les personnes de plus de 25 ans vivant à "北京" (Pékin) ou à "上海" (Shanghai), utilisez le modèle d'expression suivant :</p>
+<h3 id="Example" class="common-anchor-header">Exemple</h3><p>Pour trouver les personnes âgées de plus de 25 ans vivant à "北京" (Pékin) ou "上海" (Shanghai), utilisez le modèle d'expression suivant :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour améliorer les performances, utilisez cette variante avec des paramètres :</p>
@@ -128,64 +129,12 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour plus de détails sur les opérateurs de tableau, voir <a href="/docs/fr/array-operators.md">Opérateurs de</a> tableau.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">Opérateurs spécifiques aux champs VARCHAR</h3><p>Milvus fournit des opérateurs spécialisés pour les recherches textuelles précises sur les champs VARCHAR :</p>
-<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> opérateur</h4><p>L'opérateur <code translate="no">TEXT_MATCH</code> permet une recherche précise de documents basée sur des termes d'interrogation spécifiques. Il est particulièrement utile pour les recherches filtrées qui combinent des filtres scalaires avec des recherches de similarité vectorielle. Contrairement aux recherches sémantiques, la correspondance textuelle se concentre sur les occurrences exactes des termes.</p>
+<h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> opérateur</h4><p>L'opérateur <code translate="no">TEXT_MATCH</code> permet une recherche précise de documents sur la base de termes d'interrogation spécifiques. Il est particulièrement utile pour les recherches filtrées qui combinent des filtres scalaires avec des recherches de similarité vectorielle. Contrairement aux recherches sémantiques, la correspondance textuelle se concentre sur les occurrences exactes des termes.</p>
 <p>Milvus utilise Tantivy pour prendre en charge l'indexation inversée et la recherche textuelle basée sur les termes. Le processus implique</p>
 <ol>
 <li><p><strong>Analyseur</strong>: Tokenise et traite le texte d'entrée.</p></li>
 <li><p><strong>Indexation</strong>: Création d'un index inversé mettant en correspondance des tokens uniques avec des documents.</p></li>
 </ol>
 <p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/keyword-match.md">Correspondance de texte</a>.</p>
-<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> opérateur<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>L'opérateur <strong>PHRASE_MATCH</strong> permet d'extraire avec précision des documents sur la base de correspondances exactes de phrases, en tenant compte à la fois de l'ordre et de l'adjacence des termes de la requête.</p>
+<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> opérateur<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>L'opérateur <strong>PHRASE_MATCH</strong> permet d'extraire avec précision des documents sur la base de correspondances exactes de phrases, en tenant compte de l'ordre et de l'adjacence des termes de la requête.</p>
 <p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/phrase-match.md">Correspondance de phrases</a>.</p>
-<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">Opérateur d'échantillonnage aléatoire<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>L'échantillonnage aléatoire vous permet d'extraire un sous-ensemble d'échantillons de données d'une collection au niveau du segment, ce qui le rend idéal pour l'exploration et le traitement d'ensembles de données massifs. Cette fonctionnalité est précieuse pour les cas d'utilisation suivants :</p>
-<ul>
-<li><p><strong>Aperçu rapide des données</strong>: Elle renvoie des échantillons de données représentatifs avec une utilisation minimale des ressources, ce qui vous permet d'appréhender rapidement la structure globale et le contenu de grands ensembles de données vectorielles.</p></li>
-<li><p><strong>Filtrage combiné</strong>: Lors d'un filtrage multicritère (par exemple, sélection de documents par attributs), la combinaison avec l'échantillonnage aléatoire permet d'obtenir rapidement des résumés statistiques et des aperçus des résultats filtrés.</p></li>
-<li><p><strong>Économie de ressources dans le traitement de données à grande échelle</strong>: Pour les très grands ensembles de données, l'agrégation et l'analyse des données complètes peuvent être gourmandes en ressources. L'échantillonnage aléatoire réduit la charge de traitement en diminuant la quantité de données manipulées.</p></li>
-</ul>
-<p>Utilisez la syntaxe suivante pour l'échantillonnage aléatoire :</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li><code translate="no">float</code><strong>:</strong> Un facteur d'échantillonnage dans l'intervalle (0, 1), à l'exclusion des limites. Par exemple, <code translate="no">RANDOM_SAMPLE(0.001)</code> sélectionne environ 0,1 % des résultats.</li>
-</ul>
-<div class="alert note">
-<p>L'expression <code translate="no">RANDOM_SAMPLE</code> n'est pas sensible à la casse. Vous pouvez utiliser <code translate="no">RANDOM_SAMPLE</code> ou <code translate="no">random_sample</code>.</p>
-</div>
-<h3 id="Combine-with-other-filters" class="common-anchor-header">Combinaison avec d'autres filtres</h3><p>L'opérateur d'échantillonnage aléatoire doit être combiné avec d'autres expressions de filtrage à l'aide de l'expression logique <code translate="no">AND</code>. Par exemple :</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Ici, Milvus applique d'abord la condition <code translate="no">color = 'red'</code> et effectue ensuite un échantillonnage aléatoire sur l'ensemble des résultats.</p>
-<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">Exemple : Échantillonnage aléatoire sans filtre supplémentaire</h3><p>Dans cet exemple, la requête échantillonne un sous-ensemble aléatoire (environ 1 %) de l'ensemble des données de la collection spécifiée :</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">Exemple : Filtrage combiné à un échantillonnage aléatoire</h3><p>Dans cet exemple, la requête filtre d'abord les documents sur la base d'un attribut spécifique (dans ce cas, les documents où <code translate="no">color</code> est égal à <code translate="no">'red'</code>). Après le filtrage, l'opérateur d'échantillonnage aléatoire est appliqué pour renvoyer environ 0,1 % des résultats filtrés :</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>

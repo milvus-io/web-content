@@ -2,9 +2,9 @@
 id: hugging-face-tei.md
 title: عناق الوجه TEICompatible with Milvus 2.6.x
 summary: >-
-  يُعدّ Hugging Face Inclusioning Text Embedddings Inference (TEI) خادم استدلال
-  عالي الأداء مصمم خصيصًا لنماذج تضمين النصوص. يشرح هذا الدليل كيفية استخدام
-  Hugging Face TEI مع Milvus لتوليد تضمين النص بكفاءة.
+  يُعدّ Hugging Face Inclusion Inclusion Inclusioning Text Embeddings (TEI) خادم
+  استدلال عالي الأداء مصمم خصيصًا لنماذج تضمين النصوص. يشرح هذا الدليل كيفية
+  استخدام Hugging Face TEI مع Milvus لتوليد تضمين النص بكفاءة.
 beta: Milvus 2.6.x
 ---
 <h1 id="Hugging-Face-TEI" class="common-anchor-header">عناق الوجه TEI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Hugging-Face-TEI" class="anchor-icon" translate="no">
@@ -25,7 +25,7 @@ beta: Milvus 2.6.x
     </button></h1><p>إن Hugging Face <a href="https://huggingface.co/docs/text-embeddings-inference/en/index">Inclusion Inclusion Inclusion (TEI)</a> هو خادم استدلال عالي الأداء مصمم خصيصًا لنماذج تضمين النصوص. يشرح هذا الدليل كيفية استخدام Hugging Face TEI مع Milvus لتوليد تضمين نصي فعال.</p>
 <p>تعمل TEI مع العديد من نماذج تضمين النصوص من Hugging Face Hub، بما في ذلك:</p>
 <ul>
-<li><p>سلسلة BAAI/bge-*</p></li>
+<li><p>سلسلة BAAI/Bge-*</p></li>
 <li><p>سلسلة محولات الجملة/*</p></li>
 <li><p>نماذج E5</p></li>
 <li><p>نماذج GTE</p></li>
@@ -118,7 +118,7 @@ helm upgrade my-release milvus/milvus -f values.yaml --reset-then-reuse-values -
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
-      <span class="hljs-attr">openai:</span>
+      <span class="hljs-attr">tei:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">tei_key</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enabled by default. no action required.</span>
 <button class="copy-code-btn"></button></code></pre></li>
@@ -160,7 +160,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to exactly match the TEI model&#x27;s output dimension</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل متجه محدد بشكل صريح.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل المتجه المحدد صراحة.</p>
 <p>يضيف المثال أدناه وحدة الدالة (<code translate="no">tei_func</code>) التي تقوم بتحويل الحقل القياسي <code translate="no">&quot;document&quot;</code> إلى تضمينات، وتخزين المتجهات الناتجة في الحقل المتجه <code translate="no">&quot;dense_vector&quot;</code> المحدد مسبقًا.</p>
 <p>بمجرد تعريف دالة التضمين الخاصة بك، قم بإضافتها إلى مخطط مجموعتك. هذا يوجه ميلفوس لاستخدام دالة التضمين المحددة لمعالجة التضمينات وتخزينها من بياناتك النصية.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define TEI embedding function</span>

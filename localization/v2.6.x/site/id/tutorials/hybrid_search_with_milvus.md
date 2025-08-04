@@ -26,7 +26,7 @@ title: Pencarian Hibrida dengan Milvus
 <p>Milvus mendukung metode pencarian Dense, Sparse, dan Hybrid:</p>
 <ul>
 <li>Pengambilan Padat: Memanfaatkan konteks semantik untuk memahami makna di balik kueri.</li>
-<li>Pencarian Jarang: Menekankan pencocokan kata kunci untuk menemukan hasil berdasarkan istilah tertentu, setara dengan pencarian teks lengkap.</li>
+<li>Pencarian Jarang (Sparse Retrieval): Menekankan pencocokan kata kunci untuk menemukan hasil berdasarkan istilah tertentu, setara dengan pencarian teks lengkap.</li>
 <li>Pencarian Hibrida: Menggabungkan pendekatan Dense dan Sparse, menangkap konteks lengkap dan kata kunci spesifik untuk hasil pencarian yang komprehensif.</li>
 </ul>
 <p>Dengan mengintegrasikan metode-metode ini, Pencarian Hibrida Milvus menyeimbangkan kemiripan semantik dan leksikal, sehingga meningkatkan relevansi hasil pencarian secara keseluruhan. Buku catatan ini akan memandu Anda melalui proses pengaturan dan penggunaan strategi pencarian ini, menyoroti keefektifannya dalam berbagai skenario pencarian.</p>
@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -140,7 +140,7 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">Jalankan Pencarian</h3><p>Pertama-tama kita akan menyiapkan beberapa fungsi yang berguna untuk menjalankan pencarian:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">Jalankan Pencarian</h3><p>Pertama-tama kami akan menyiapkan beberapa fungsi yang berguna untuk menjalankan pencarian:</p>
 <ul>
 <li><code translate="no">dense_search</code>: hanya mencari di bidang vektor yang padat</li>
 <li><code translate="no">sparse_search</code>: hanya mencari di bidang vektor yang jarang</li>
@@ -298,7 +298,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Apa itu<span style='color:red'> pemrograman</span> Java<span style='color:red'>?</span><span style='color:red'> Bagaimana Cara</span> Belajar Bahasa Pemrograman Java?</p>
 <p>Apa cara terbaik<span style='color:red'> untuk mulai belajar</span> robotika<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> cara kita mempersiapkan diri untuk UPSC<span style='color:red'>?</span></p>
-<p><span style='color:red'>Bagaimana cara</span> membuat fisika<span style='color:red'> menjadi</span> mudah dipelajari<span style='color:red'>?</span></p>
+<p><span style='color:red'>Bagaimana cara</span> membuat fisika mudah dipelajari<span style='color:red'>?</span></p>
 <p>Apa cara terbaik<span style='color:red'> untuk</span> belajar bahasa Prancis<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> saya bisa belajar berbicara bahasa Inggris<span style='color:red'> dengan</span> lancar<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> saya bisa belajar keamanan komputer<span style='color:red'>?</span></p>

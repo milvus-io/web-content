@@ -198,6 +198,12 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>예</p></td>
+     <td><p>모델 기반 재랭킹 함수에 대한 구성이 포함된 딕셔너리입니다. 사용 가능한 매개 변수(키)는 제공업체에 따라 다릅니다(<code translate="no">tei</code> 또는 <code translate="no">vllm</code>). 자세한 내용은 <a href="/docs/ko/vllm-ranker.md">vLLM 랭커</a> 또는 <a href="/docs/ko/tei-ranker.md">TEI 랭커를</a> 참조하세요.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>예</p></td>
      <td><p>모델 재랭킹을 사용하려면 <code translate="no">"model"</code> 으로 설정해야 합니다.</p></td>
@@ -206,7 +212,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>예</p></td>
-     <td><p>재랭크에 사용할 모델 서비스 제공업체입니다.</p></td>
+     <td><p>재랭킹에 사용할 모델 서비스 제공업체입니다.</p></td>
      <td><p><code translate="no">"tei"</code> 또는 <code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
@@ -237,7 +243,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 작업에도 모델 랭커를 적용할 수 있습니다:</p>

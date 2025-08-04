@@ -5,7 +5,6 @@ related_key: configure
 summary: تكوين ميلفوس مع مخططات هيلم.
 title: تكوين Milvus مع مخططات Helm Charts
 ---
-
 <h1 id="Configure-Milvus-with-Helm-Charts" class="common-anchor-header">تكوين Milvus مع مخططات Helm Charts<button data-href="#Configure-Milvus-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +40,7 @@ title: تكوين Milvus مع مخططات Helm Charts
       </svg>
     </button></h2><p>يمكنك تكوين Milvus باستخدام ملف تكوين <code translate="no">values.yaml</code>.</p>
 <h3 id="Download-a-configuration-file" class="common-anchor-header">تنزيل ملف التكوين</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">قم بتنزيل</a> <code translate="no">values.yaml</code> مباشرة أو باستخدام الأمر التالي.</p>
-<pre><code translate="no">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">تعديل ملف التكوين</h3><p>قم بتهيئة مثيل ميلفوس الخاص بك ليناسب سيناريوهات تطبيقك من خلال تعديل المعلمات المقابلة في <code translate="no">values.yaml</code>.</p>
 <p>على وجه التحديد، ابحث عن <code translate="no">extraConfigFiles</code> في <code translate="no">values.yaml</code> وضع التكوينات الخاصة بك في هذا القسم على النحو التالي:</p>
@@ -49,14 +48,14 @@ title: تكوين Milvus مع مخططات Helm Charts
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
 <span class="hljs-comment"># Please follow the config structure in the milvus.yaml</span>
 <span class="hljs-comment"># at https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># Note: this config will be the top priority which will override the config</span>
+<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> this config will be the top priority which will override the config</span>
 <span class="hljs-comment"># in the image and helm chart.</span>
-extraConfigFiles:
-  user.yaml: |+
-    <span class="hljs-comment">#    For example to set the graceful time for query nodes</span>
-    <span class="hljs-comment">#    queryNodes:</span>
-    <span class="hljs-comment">#      gracefulTime: 10</span>
-<button class="copy-code-btn"></button></code></pre>
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    #    For example to set the graceful time for query nodes
+    #    queryNodes:
+    #      gracefulTime: 10
+</span><button class="copy-code-btn"></button></code></pre>
 <p>راجع الروابط التالية لمزيد من المعلومات حول كل معلمة.</p>
 <p>مرتبة حسب:</p>
 <div class="filter">
@@ -198,7 +197,7 @@ extraConfigFiles:
 </div>
 <p>للاطلاع على معلمات أخرى خاصة بتثبيت Kubernetes، راجع <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">تكوين مخطط Milvus Helm البياني</a>.</p>
 <h3 id="Start-Milvus" class="common-anchor-header">بدء تشغيل ميلفوس</h3><p>بعد الانتهاء من تعديل ملف التكوين، يمكنك بعد ذلك بدء تشغيل ملف Milvus بالملف.</p>
-<pre><code translate="no">$ helm upgrade my-release milvus/milvus -f values.yaml
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">تكوين ميلفوس عبر سطر الأوامر<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,11 +216,11 @@ extraConfigFiles:
       </svg>
     </button></h2><p>بدلاً من ذلك، يمكنك ترقية تكوينات ميلفوس مباشرةً باستخدام أمر Helm.</p>
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">تحقق من المعلمات القابلة للتكوين</h3><p>قبل الترقية، يمكنك التحقق من المعلمات القابلة للتكوين باستخدام مخططات Helm.</p>
-<pre><code translate="no">$ helm show values milvus/milvus
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Start-Milvus" class="common-anchor-header">بدء تشغيل ميلفوس</h3><p>قم بتكوين وبدء تشغيل Milvus عن طريق إضافة <code translate="no">--values</code> أو <code translate="no">--set</code> في الأمر الخاص بالترقية.</p>
-<pre><code translate="no"><span class="hljs-comment"># For instance, upgrade the Milvus cluster with compaction disabled</span>
-$ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span>
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,7 +238,7 @@ $ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span>
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>إذا كنت ترغب في معرفة كيفية مراقبة خدمات ملفوس وإنشاء التنبيهات:</p>
+<li><p>إذا كنت تريد معرفة كيفية مراقبة خدمات ملفوس وإنشاء التنبيهات:</p>
 <ul>
 <li>تعلم <a href="/docs/ar/v2.5.x/monitor.md">مراقبة Milvus باستخدام مشغل Prometheus على Kubernetes</a></li>
 <li>تعلم <a href="/docs/ar/v2.5.x/visualize.md">تصور مقاييس ميلفوس في غرافانا</a>.</li>

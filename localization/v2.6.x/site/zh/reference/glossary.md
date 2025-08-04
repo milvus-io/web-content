@@ -144,7 +144,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 使用两种类型的通道：<a href="https://milvus.io/docs/glossary.md#PChannel">PC</a>通道和<a href="https://milvus.io/docs/glossary.md#VChannel">V 通道</a>。每个 PC 通道对应一个日志存储主题，而每个 V 通道对应一个 Collections 中的一个分片。</p>
+    </button></h2><p>Milvus 采用两种类型的通道，即<a href="#pchannel">PC</a>通道和<a href="#vchannel">V 通道</a>，作为其流媒体服务架构的一部分。每个 PChannel 对应一个由<a href="/docs/zh/woodpecker_architecture.md">Woodpecker</a> 管理的 WAL 流，而每个 VChannel 对应一个 Collections 中的一个分片。流服务管理这些通道，以确保数据一致性和故障恢复。</p>
 <h2 id="Collection" class="common-anchor-header">Collections<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +160,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，集合相当于关系数据库管理系统（RDBMS）中的表。Collections 是用于存储和管理实体的主要逻辑对象。更多信息，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p>
+    </button></h2><p>在 Milvus 中，Collection 相当于关系数据库管理系统（RDBMS）中的表。Collections 是用于存储和管理实体的主要逻辑对象。更多信息，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p>
 <h2 id="Dependency" class="common-anchor-header">依赖程序<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,22 +338,8 @@ title: 术语
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a>是 Milvus 的核心向量执行引擎，它集成了多个向量相似性搜索库，包括 Faiss、Hnswlib 和 Annoy。Knowhere 还旨在支持异构计算。它可以控制在哪个硬件（CPU 或 GPU）上执行索引构建和搜索请求。这就是 Knowhere 名字的由来--知道在哪里执行操作符。</p>
-<h2 id="Log-broker" class="common-anchor-header">日志代理<button data-href="#Log-broker" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><a href="https://milvus.io/docs/four_layers.md#Log-broker">日志代理</a>是一个支持回放的发布-订阅系统。它负责流式数据持久化、执行可靠的异步查询、事件通知和返回查询结果。当工作节点从系统故障中恢复时，它还能确保增量数据的完整性。</p>
+<!-- ## Log broker
+<p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. --></p>
 <h2 id="Log-snapshot" class="common-anchor-header">日志快照<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -369,39 +355,11 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>日志快照是二进制日志，是段中较小的单元，记录并处理 Milvus 中数据的更新和更改。段中的数据会在多个二进制日志中持久化。Milvus 中有三种二进制日志：InsertBinlog、DeleteBinlog 和 DDLBinlog。有关详细信息，请参阅<a href="https://milvus.io/docs/four_layers.md#Meta-storage">元存储</a>。</p>
-<h2 id="Log-subscriber" class="common-anchor-header">日志订阅者<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>日志订阅者订阅日志序列以更新本地数据，并以只读副本的形式提供服务。</p>
-<h2 id="Message-storage" class="common-anchor-header">消息存储<button data-href="#Message-storage" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>消息存储是 Milvus 的日志存储引擎。Milvus 支持 Kafka 或 Pulsa 作为消息存储。有关详细信息，请参阅<a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">配置消息存储</a>。</p>
+    </button></h2><p>日志快照是二进制日志，是段中较小的单元，记录并处理 Milvus 中数据的更新和更改。段中的数据会被持久保存在多个二进制日志中。Milvus 中有三种二进制日志：InsertBinlog、DeleteBinlog 和 DDLBinlog。更多信息，请参阅<a href="https://milvus.io/docs/four_layers.md#Meta-storage">元存储</a>。</p>
+<!-- ## Log subscriber
+<p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies. --></p>
+<!-- ## Message storage
+<p>Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Configure Message Storage</a>. --></p>
 <h2 id="Metric-type" class="common-anchor-header">度量类型<button data-href="#Metric-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -417,7 +375,23 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>相似度度量类型用于度量向量之间的相似度。目前，Milvus 支持欧氏距离（L2）、内积（IP）、余弦相似度（COSINE）和二元度量类型。你可以根据你的情况选择最合适的度量类型。更多信息，请参阅 "<a href="https://milvus.io/docs/metric.md">相似度量</a>"。</p>
+    </button></h2><p>相似度度量类型用于度量向量之间的相似度。目前，Milvus 支持欧氏距离（L2）、内积（IP）、余弦相似度（COSINE）和二元度量类型。你可以根据你的情况选择最合适的度量类型。更多信息，请参阅 "<a href="https://milvus.io/docs/metric.md">相似度量"</a>。</p>
+<h2 id="MemoryBuffer" class="common-anchor-header">内存缓冲器<button data-href="#MemoryBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>MemoryBuffer 是啄木鸟的一种轻量级部署模式，它可以在内存中临时缓冲写入的内容，并定期将其刷新到云对象存储中。该模式最适合小规模部署中的批量繁重工作负载，或优先考虑简单性而不是性能的生产环境。有关详细信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker 架构</a>。</p>
 <h2 id="Mmap" class="common-anchor-header">内存映射<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,7 +407,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>内存映射文件可将文件内容直接映射到内存中，从而实现高效的数据处理。当内存有限且无法加载所有数据时，这种方法尤其有用。这种技术可以提高数据容量，并在一定程度上保持性能。但是，如果数据大大超出内存容量，搜索和查询速度就会大大降低。有关详细信息，请参阅<a href="https://milvus.io/docs/mmap.md">启用 MMap 的数据存储</a>。</p>
+    </button></h2><p>内存映射文件可将文件内容直接映射到内存中，从而实现高效的数据处理。这在内存有限而又无法加载所有数据时特别有用。这种技术可以提高数据容量，并在一定程度上保持性能。但是，如果数据大大超出内存容量，搜索和查询速度就会大大降低。有关详细信息，请参阅<a href="https://milvus.io/docs/mmap.md">启用 MMap 的数据存储</a>。</p>
 <h2 id="Milvus-Backup" class="common-anchor-header">Milvus 备份<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -545,7 +519,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 自 2.4.0 起支持在一个 Collections 中使用多个向量字段。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
+    </button></h2><p>Milvus 自 2.4.0 起支持在一个 Collections 中使用多个向量场。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
 <h2 id="Partition" class="common-anchor-header">分区<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -577,7 +551,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>字段的 Partition Key 属性可根据实体的 Partition Key 值将实体隔离成不同的分区。这种分组可确保将共享相同键值的实体存储在一起，这样就可以让系统在通过分区键字段过滤的查询过程中绕过无关的分区，从而加快搜索操作。更多信息，请参阅<a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">使用分区关键字</a>。</p>
+    </button></h2><p>字段的 Partition Key 属性可根据实体的 Partition Key 值将实体隔离成不同的分区。这种分组可确保将共享相同键值的实体存储在一起，这样可以在通过分区键字段过滤的查询过程中，让系统绕过无关的分区，从而加快搜索操作。更多信息，请参阅<a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">使用分区关键字</a>。</p>
 <h2 id="PChannel" class="common-anchor-header">PC 通道<button data-href="#PChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -593,7 +567,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannel 表示物理通道。每个 PC 通道对应一个日志存储主题。默认情况下，当 Milvus 集群启动时，将分配一组 16 个 PChannels 用于存储记录数据插入、删除和更新的日志。有关详细信息，请参阅 "<a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">消息通道相关配置</a>"。</p>
+    </button></h2><p>PChannel 表示物理通道。每个 PChannel 对应一个由啄木鸟管理的 WAL 流。默认情况下，当 Milvus 集群启动时，将分配一组 PChannels 来存储记录数据插入、删除和更新的日志。有关详细信息，请参阅<a href="/docs/zh/streaming_service.md">流服务</a>。</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -625,7 +599,23 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">查询</a>（<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a>）是一种以指定的布尔表达式作为过滤器进行标量过滤的 API。更多信息，请参阅<a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">获取与标量查询</a>。</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">查询</a>（<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a>）是一种以指定的布尔表达式作为过滤器进行标量过滤的 API。更多信息，请参阅<a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get &amp; Scalar Query</a>。</p>
+<h2 id="QuorumBuffer" class="common-anchor-header">QuorumBuffer<button data-href="#QuorumBuffer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>QuorumBuffer 是啄木鸟的一种部署模式，专为对延迟敏感、需要实时响应能力和强大容错能力的高频读/写工作负载而设计。它作为一个高速写缓冲区，具有三重法定人数写入功能，可确保较强的一致性和高可用性。如需了解更多信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">啄木鸟架构</a>。</p>
 <h2 id="Range-search" class="common-anchor-header">范围搜索<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -641,7 +631,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>通过范围搜索，可以找到与搜索向量相距一定距离的向量。更多信息，请参阅<a href="https://milvus.io/docs/single-vector-search.md#Range-search">范围搜索</a>。</p>
+    </button></h2><p>通过范围搜索，可以找到与搜索向量保持一定距离的向量。更多信息，请参阅<a href="https://milvus.io/docs/single-vector-search.md#Range-search">范围搜索</a>。</p>
 <h2 id="Schema" class="common-anchor-header">模式<button data-href="#Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -740,6 +730,22 @@ title: 术语
         ></path>
       </svg>
     </button></h2><p>稀疏向量使用向量 Embeddings 表示单词或短语，其中大部分元素为零，只有一个非零元素表示存在特定单词。稀疏向量模型（如 SPLADEv2）在域外知识搜索、关键词感知和可解释性方面优于密集模型。更多信息，请参阅<a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">稀疏向量</a>。</p>
+<h2 id="Streaming-Service" class="common-anchor-header">流服务<button data-href="#Streaming-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>流服务是 Milvus 内部流系统模块的一个概念，围绕前向写日志（WAL）构建，以支持各种流相关功能。这些功能包括流式数据摄取/订阅、集群状态故障恢复、将流式数据转换为历史数据以及增长数据查询。该服务由流协调器、流节点集群和流客户端组件组成。更多信息，请参阅<a href="/docs/zh/streaming_service.md">流服务</a>。</p>
 <h2 id="Unstructured-data" class="common-anchor-header">非结构化数据<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -755,7 +761,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>非结构化数据包括图像、视频、音频和自然语言，是不遵循预定义模型或组织方式的信息。这种数据类型约占全球数据的 80%，可以使用各种人工智能（AI）和 ML 模型转换成向量。</p>
+    </button></h2><p>非结构化数据包括图像、视频、音频和自然语言，是不遵循预定义模型或组织方式的信息。这种数据类型约占全球数据的 80%，可使用各种人工智能（AI）和 ML 模型转换成向量。</p>
 <h2 id="VChannel" class="common-anchor-header">VChannel<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -771,7 +777,7 @@ title: 术语
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannel</a>是逻辑通道的缩写。每个 VChannel 代表一个 Collections 中的一个分片。每个 Collections 会分配一组 VChannels，用于记录数据的插入、删除和更新。VChannels 在逻辑上是分开的，但在物理上共享资源。</p>
+    </button></h2><p>VChannel 代表虚拟通道。每个 VChannel 代表一个 Collections 中的一个分片。每个 Collections 会分配一组 VChannels，用于记录数据的插入、删除和更新。VChannels 在逻辑上是分开的，但通过流服务在物理上共享资源。有关详细信息，请参阅<a href="/docs/zh/streaming_service.md">流服务</a>。</p>
 <h2 id="Vector" class="common-anchor-header">向量<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -788,6 +794,38 @@ title: 术语
         ></path>
       </svg>
     </button></h2><p>嵌入向量是对电子邮件、物联网传感器数据、Instagram 照片、蛋白质结构等非结构化数据的特征抽象。从数学角度讲，嵌入向量是浮点数或二进制数组。现代嵌入技术用于将非结构化数据转换为嵌入向量。Milvus 自 2.4.0 起支持密集向量和稀疏向量。</p>
+<h2 id="WAL-Storage" class="common-anchor-header">WAL 存储<button data-href="#WAL-Storage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>先写日志（WAL）存储是分布式系统中数据持久性和一致性的基础。在提交任何更改之前，首先要将其记录在日志中，以确保在发生故障时，可以准确恢复到之前的位置。Milvus 使用 Woodpecker 作为 WAL 存储系统，它支持 MemoryBuffer 和 QuorumBuffer 两种模式。更多信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">Woodpecker 架构</a>。</p>
+<h2 id="Woodpecker" class="common-anchor-header">啄木鸟<button data-href="#Woodpecker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Woodpecker 是 Milvus 2.6 中的云原生 WAL 系统，取代了 Kafka 和 Pulsar。它采用零磁盘架构和两种部署模式（MemoryBuffer 和 QuorumBuffer），可在对象存储上提供高吞吐量、低操作符开销和无缝可扩展性。更多信息，请参阅<a href="/docs/zh/woodpecker_architecture.md">啄木鸟架构</a>。</p>
 <h2 id="Zilliz-Cloud" class="common-anchor-header">Zilliz Cloud<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

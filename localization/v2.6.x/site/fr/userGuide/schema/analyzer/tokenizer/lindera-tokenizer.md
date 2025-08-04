@@ -23,6 +23,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p>Le tokenizer <code translate="no">lindera</code> effectue une analyse morphologique basée sur le dictionnaire. C'est un bon choix pour les langues telles que le japonais, le coréen et le chinois, dont les mots ne sont pas séparés par des espaces.</p>
+<div class="alert note">
+<p>Le tokenizer <code translate="no">lindera</code> préserve les signes de ponctuation en tant que jetons distincts dans le résultat. Par exemple, <code translate="no">&quot;こんにちは！&quot;</code> devient <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. Pour supprimer ces jetons de ponctuation autonomes, utilisez le filtre <a href="/docs/fr/removepunct-filter.md"><code translate="no">removepunct</code></a> pour supprimer ces jetons de ponctuation autonomes.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +69,7 @@ beta: Milvus 2.5.11+
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }

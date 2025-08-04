@@ -20,8 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus provides alias management capabilities. This page demonstrates the procedures to create, list, alter, and drop aliases.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>In Milvus, an alias is a secondary, mutable name for a collection. Using aliases provides a layer of abstraction that allows you to dynamically switch between collections without modifying your application code. This is particularly useful in production environments for seamless data updates, A/B testing, and other operational tasks.</p>
+<p>This page demonstrates how to create, list, reassign, and drop collection aliases.</p>
+<h2 id="Why-Use-an-Alias" class="common-anchor-header">Why Use an Alias?<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +37,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create aliases for your collections. A collection can have several aliases, but collections cannot share an alias.</p>
-<p>Upon receiving a request against a collection, Milvus locates the collection based on the provided name. If the collection by the provided name does not exist, Milvus continues locating the provided name as an alias. You can use collection aliases to adapt your code to different scenarios.</p>
+    </button></h2><p>The primary benefit of using an alias is to decouple your client application from a specific, physical collection name.</p>
+<p>Imagine you have a live application that queries a collection named <code translate="no">prod_data</code>. When you need to update the underlying data, you can perform the update without any service interruption. The workflow would be:</p>
+<ol>
+<li><strong>Create a New Collection</strong>: Create a new collection, for instance, <code translate="no">prod_data_v2</code>.</li>
+<li><strong>Prepare Data</strong>: Load and index the new data in <code translate="no">prod_data_v2</code>.</li>
+<li><strong>Switch the Alias</strong>: Once the new collection is ready for service, atomically reassign the alias <code translate="no">prod_data</code> from the old collection to <code translate="no">prod_data_v2</code>.</li>
+</ol>
+<p>Your application continues to send requests to the alias <code translate="no">prod_data</code>, experiencing zero downtime. This mechanism enables seamless updates and simplifies operations like blue-green deployments for your vector search service.</p>
+<p><strong>Key Properties of Aliases:</strong></p>
+<ul>
+<li>A collection can have multiple aliases.</li>
+<li>An alias can only point to one collection at a time.</li>
+<li>When processing a request, Milvus first checks if a collection with the provided name exists. If not, it then checks if the name is an alias for a collection.</li>
+</ul>
 <h2 id="Create-Alias" class="common-anchor-header">Create Alias<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

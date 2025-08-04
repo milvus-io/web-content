@@ -6,7 +6,7 @@ summary: >-
   mentah menjadi format yang terstruktur dan dapat dicari. Setiap penganalisis
   biasanya terdiri dari dua elemen inti: tokenizer dan filter. Bersama-sama,
   keduanya mengubah teks masukan menjadi token, menyempurnakan token ini, dan
-  menyiapkannya untuk pengindeksan dan pengambilan yang efisien.
+  mempersiapkannya untuk pengindeksan dan pengambilan yang efisien.
 ---
 <h1 id="Analyzer-Overview" class="common-anchor-header">Gambaran Umum Penganalisis<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Dalam pemrosesan teks, <strong>penganalisis</strong> adalah komponen penting yang mengubah teks mentah menjadi format yang terstruktur dan dapat dicari. Setiap penganalisis biasanya terdiri dari dua elemen inti: <strong>tokenizer</strong> dan <strong>filter</strong>. Bersama-sama, mereka mengubah teks input menjadi token, menyempurnakan token ini, dan mempersiapkannya untuk pengindeksan dan pengambilan yang efisien.</p>
-<p>Di Milvus, penganalisis dikonfigurasikan selama pembuatan koleksi ketika Anda menambahkan bidang <code translate="no">VARCHAR</code> ke skema koleksi. Token yang dihasilkan oleh penganalisis dapat digunakan untuk membangun indeks untuk pencocokan kata kunci atau diubah menjadi sematan jarang untuk pencarian teks lengkap. Untuk informasi lebih lanjut, lihat <a href="/docs/id/keyword-match.md">Pencocokan Teks</a> atau <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
+<p>Di Milvus, penganalisis dikonfigurasikan selama pembuatan koleksi ketika Anda menambahkan bidang <code translate="no">VARCHAR</code> ke skema koleksi. Token yang dihasilkan oleh penganalisis dapat digunakan untuk membuat indeks untuk pencocokan kata kunci atau diubah menjadi sematan jarang untuk pencarian teks lengkap. Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>, Pencocokan <a href="/docs/id/phrase-match.md">Frasa</a>, atau <a href="/docs/id/keyword-match.md">Pencocokan Teks</a>.</p>
 <div class="alert note">
 <p>Penggunaan penganalisis dapat memengaruhi kinerja:</p>
 <ul>
@@ -81,9 +81,12 @@ summary: >-
 <li><p><strong>Penganalisis khusus</strong>: Untuk kebutuhan yang lebih canggih, penganalisis khusus memungkinkan Anda untuk menentukan konfigurasi Anda sendiri dengan menentukan tokenizer dan nol atau lebih filter. Tingkat kustomisasi ini sangat berguna untuk kasus penggunaan khusus yang membutuhkan kontrol yang tepat atas pemrosesan teks.</p></li>
 </ul>
 <div class="alert note">
-<p>Jika Anda menghilangkan konfigurasi penganalisis selama pembuatan koleksi, Milvus menggunakan penganalisis <code translate="no">standard</code> untuk semua pemrosesan teks secara default. Untuk detailnya, lihat <a href="/docs/id/standard-analyzer.md">Standar</a>.</p>
+<ul>
+<li>Jika Anda menghilangkan konfigurasi penganalisis selama pembuatan koleksi, Milvus menggunakan penganalisis <code translate="no">standard</code> untuk semua pemrosesan teks secara default. Untuk detailnya, lihat <a href="/docs/id/standard-analyzer.md">Penganalisis Standar</a>.</li>
+<li>Untuk kinerja pencarian dan kueri yang optimal, pilih penganalisis yang sesuai dengan bahasa data teks Anda. Misalnya, meskipun penganalisis <code translate="no">standard</code> serbaguna, namun mungkin bukan pilihan terbaik untuk bahasa dengan struktur tata bahasa yang unik, seperti bahasa Mandarin, Jepang, atau Korea. Dalam kasus seperti itu, gunakan penganalisis khusus bahasa seperti <a href="/docs/id/chinese-analyzer.md"><code translate="no">chinese</code></a> atau penganalisis khusus dengan tokenizer khusus (seperti <a href="/docs/id/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/id/icu-tokenizer.md"><code translate="no">icu</code></a>) dan filter sangat disarankan untuk memastikan tokenisasi yang akurat dan hasil pencarian yang lebih baik.</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Penganalisis bawaan</h3><p>Penganalisis bawaan di Milvus telah dikonfigurasi sebelumnya dengan tokenizer dan filter tertentu, sehingga Anda dapat langsung menggunakannya tanpa perlu mendefinisikan komponen-komponen ini sendiri. Setiap penganalisis bawaan berfungsi sebagai templat yang mencakup tokenizer dan filter yang telah ditetapkan sebelumnya, dengan parameter opsional untuk penyesuaian.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Penganalisis bawaan</h3><p>Penganalisis bawaan di Milvus telah dikonfigurasikan sebelumnya dengan tokenizer dan filter tertentu, sehingga Anda dapat langsung menggunakannya tanpa perlu mendefinisikan sendiri komponen-komponen ini. Setiap penganalisis bawaan berfungsi sebagai templat yang mencakup tokenizer dan filter yang telah ditetapkan sebelumnya, dengan parameter opsional untuk penyesuaian.</p>
 <p>Sebagai contoh, untuk menggunakan penganalisis bawaan <code translate="no">standard</code>, cukup tentukan namanya <code translate="no">standard</code> sebagai <code translate="no">type</code> dan secara opsional menyertakan konfigurasi tambahan yang spesifik untuk jenis penganalisis ini, seperti <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -256,7 +259,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <li><p><strong>Filter bawaan</strong>: Telah dikonfigurasi sebelumnya oleh Milvus, yang membutuhkan pengaturan minimal. Anda dapat menggunakan filter ini secara langsung dengan menentukan namanya. Filter di bawah ini adalah filter bawaan untuk penggunaan langsung:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Mengonversi teks menjadi huruf kecil, memastikan pencocokan yang tidak peka huruf. Untuk detailnya, lihat <a href="/docs/id/lowercase-filter.md">Huruf Kecil</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi ekuivalen ASCII, menyederhanakan penanganan teks multibahasa. Untuk rinciannya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding (Pelipatan ASCII</a>).</p></li>
+<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi ekuivalen ASCII, menyederhanakan penanganan teks multibahasa. Untuk detailnya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding (Pelipatan ASCII</a>).</p></li>
 <li><p><code translate="no">alphanumonly</code>: Mempertahankan hanya karakter alfanumerik dengan menghapus karakter lainnya. Untuk rinciannya, lihat <a href="/docs/id/alphanumonly-filter.md">Hanya alfanumerik</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: Menghapus token yang berisi karakter apa pun selain karakter Cina, huruf Inggris, atau angka. Untuk detailnya, lihat <a href="/docs/id/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 <li><p><code translate="no">cncharonly</code>: Menghapus token yang berisi karakter non-Cina. Untuk detailnya, lihat <a href="/docs/id/cncharonly-filter.md">Cncharonly</a>.</p></li>
@@ -757,3 +760,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Setelah mengonfigurasi penganalisis, Anda dapat mengintegrasikannya dengan fitur pengambilan teks yang disediakan oleh Milvus. Untuk detailnya:</p>
+<ul>
+<li><p><a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a></p></li>
+<li><p><a href="/docs/id/keyword-match.md">Pencocokan Teks</a></p></li>
+<li><p><a href="/docs/id/phrase-match.md">Pencocokan Frasa</a></p></li>
+</ul>

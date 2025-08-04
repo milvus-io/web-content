@@ -10,7 +10,7 @@ id: home.md
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">Попробуйте управляемый Milvus бесплатно!</h2>
-    <p class="promotion-desc">Zilliz Cloud - это отсутствие лишних хлопот, работа с Milvus и 10-кратная скорость.</p>
+    <p class="promotion-desc">Zilliz Cloud не требует особых усилий, работает на базе Milvus и в 10 раз быстрее.</p>
   </div>
   <div class="cta-wrapper">
    <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a></div>
@@ -39,7 +39,7 @@ id: home.md
 <div class="start_card_container">
   
    <a href="/docs/ru/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ru/quickstart.md"> <p class="link-btn">Быстрый запуск</p> </a><p>Узнайте, как быстро запустить Milvus с помощью примера кода.</p>
+   </a> <a href="/docs/ru/quickstart.md"> <p class="link-btn">Быстрый запуск</p> </a><p>Узнайте, как быстро запустить Milvus с помощью примеров кода.</p>
 </div>
 <div class="start_card_container">
   
@@ -69,8 +69,8 @@ id: home.md
 <ul>
 <li><a href="/docs/ru/manage-collections.md">Управление коллекциями</a></li>
 <li><a href="/docs/ru/insert-update-delete.md">Вставка, апсерт и удаление</a></li>
-<li><a href="/docs/ru/index-vector-fields.md">Индексирование векторных полей</a></li>
 <li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
 <li><a href="/docs/ru/get-and-scalar-query.md">Получение и скалярный запрос</a></li>
 </ul>
 </div>
@@ -89,7 +89,7 @@ id: home.md
 <ul>
 <li><a href="/docs/ru/system_configuration.md">Конфигурация системы</a></li>
 <li><a href="/docs/ru/architecture_overview.md">Обзор архитектуры</a></li>
-<li><a href="/docs/ru/index.md">Векторный индекс</a></li>
+<li><a href="/docs/ru/index-explained.md">Объяснение индекса</a></li>
 <li><a href="/docs/ru/metric.md">Метрики сходства</a></li>
 <li><a href="/docs/ru/glossary.md">Глоссарий</a></li>
 </ul>
@@ -111,12 +111,12 @@ id: home.md
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Ноябрь 2024 - Выпуск Milvus 2.5.0</em></p>
+    </button></h2><p><em>Июнь 2025 года - выпуск Milvus 2.6.0</em></p>
 <ul>
-<li>Добавлено руководство по <a href="/docs/ru/full-text-search.md">проведению полнотекстового поиска</a>.</li>
-<li>Добавлено руководство по <a href="/docs/ru/keyword-match.md">проведению текстового поиска</a>.</li>
-<li>Добавлено руководство по <a href="/docs/ru/nullable-and-default.md">включению нулевых значений и значений по умолчанию</a>.</li>
-<li>Добавлены описания <a href="/docs/ru/analyzer-overview.md">анализаторов</a>.</li>
-<li>Добавлены описания <a href="/docs/ru/bitmap.md">растровых индексов</a>.</li>
+<li>Добавлено руководство по <a href="/docs/ru/embedding-function-overview.md">использованию функции встраивания</a>.</li>
+<li>Добавлено руководство по <a href="/docs/ru/decay-ranker-overview.md">использованию ранжировщика распада</a>.</li>
+<li>Добавлено руководство по <a href="/docs/ru/add-fields-to-an-existing-collection.md">добавлению полей в существующую коллекцию</a>.</li>
+<li>Добавлено руководство по <a href="/docs/ru/phrase-match.md">выполнению поиска по фразе</a>.</li>
+<li>Добавлено описание <a href="/docs/ru/ivf-rabitq.md">индекса IVF_RABITQ</a>.</li>
 </ul>
 </div>

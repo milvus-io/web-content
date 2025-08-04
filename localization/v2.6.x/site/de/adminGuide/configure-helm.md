@@ -39,7 +39,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
         ></path>
       </svg>
     </button></h2><p>Sie können Milvus mit einer Konfigurationsdatei <code translate="no">values.yaml</code> konfigurieren.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">Herunterladen einer Konfigurationsdatei</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Laden Sie</a> <code translate="no">values.yaml</code> direkt oder mit dem folgenden Befehl<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">herunter</a>.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">Herunterladen einer Konfigurationsdatei</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Laden Sie</a> <code translate="no">values.yaml</code> direkt oder mit dem folgenden Befehl<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">herunter</a>.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Ändern Sie die Konfigurationsdatei</h3><p>Konfigurieren Sie Ihre Milvus-Instanz so, dass sie Ihren Anwendungsszenarien entspricht, indem Sie die entsprechenden Parameter in <code translate="no">values.yaml</code> anpassen.</p>
@@ -195,7 +195,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
 </tbody>
 </table>
 </div>
-<p>Weitere Parameter speziell für die Kubernetes-Installation finden Sie unter <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configuration</a>.</p>
+<p>Weitere Parameter, die speziell für die Kubernetes-Installation gelten, finden Sie unter <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configuration</a>.</p>
 <h3 id="Start-Milvus" class="common-anchor-header">Milvus starten</h3><p>Nachdem Sie die Konfigurationsdatei angepasst haben, können Sie Milvus mit dieser Datei starten.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>

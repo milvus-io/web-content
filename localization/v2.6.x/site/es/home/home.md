@@ -69,8 +69,8 @@ Aquí aprenderá qué es Milvus y cómo instalar, utilizar y desplegar Milvus pa
 <ul>
 <li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
 <li><a href="/docs/es/insert-update-delete.md">Insertar, volver a insertar y eliminar</a></li>
-<li><a href="/docs/es/index-vector-fields.md">Índice de campos vectoriales</a></li>
-<li><a href="/docs/es/single-vector-search.md">Búsqueda en un solo vector</a></li>
+<li><a href="/docs/es/single-vector-search.md">Búsqueda monovectorial</a></li>
+<li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 <li><a href="/docs/es/get-and-scalar-query.md">Consulta Get &amp; Scalar</a></li>
 </ul>
 </div>
@@ -89,7 +89,7 @@ Aquí aprenderá qué es Milvus y cómo instalar, utilizar y desplegar Milvus pa
 <ul>
 <li><a href="/docs/es/system_configuration.md">Configuración del sistema</a></li>
 <li><a href="/docs/es/architecture_overview.md">Visión general de la arquitectura</a></li>
-<li><a href="/docs/es/index.md">Índice vectorial</a></li>
+<li><a href="/docs/es/index-explained.md">Explicación del índice</a></li>
 <li><a href="/docs/es/metric.md">Métricas de similitud</a></li>
 <li><a href="/docs/es/glossary.md">Glosario</a></li>
 </ul>
@@ -111,12 +111,12 @@ Aquí aprenderá qué es Milvus y cómo instalar, utilizar y desplegar Milvus pa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Nov 2024 - Lanzamiento de Milvus 2.5.0</em></p>
+    </button></h2><p><em>Junio de 2025 - Lanzamiento de Milvus 2.6.0</em></p>
 <ul>
-<li>Añadida guía sobre cómo <a href="/docs/es/full-text-search.md">realizar búsquedas de texto completo</a>.</li>
-<li>Se ha añadido una guía sobre cómo <a href="/docs/es/keyword-match.md">realizar una coincidencia de texto</a>.</li>
-<li>Añadida guía sobre cómo <a href="/docs/es/nullable-and-default.md">habilitar valores nulos y por defecto</a>.</li>
-<li>Se han añadido descripciones de <a href="/docs/es/analyzer-overview.md">los analizadores</a>.</li>
-<li>Añadidas descripciones de los <a href="/docs/es/bitmap.md">índices de mapa de bits</a>.</li>
+<li>Añadida guía sobre cómo <a href="/docs/es/embedding-function-overview.md">utilizar la función de incrustación</a>.</li>
+<li>Se ha añadido una guía sobre cómo <a href="/docs/es/decay-ranker-overview.md">utilizar el decay ranker</a>.</li>
+<li>Añadida guía sobre cómo <a href="/docs/es/add-fields-to-an-existing-collection.md">añadir campos a una colección existente</a>.</li>
+<li>Añadida una guía sobre cómo <a href="/docs/es/phrase-match.md">realizar la concordancia de frases</a>.</li>
+<li>Se han añadido descripciones del <a href="/docs/es/ivf-rabitq.md">índice IVF_RABITQ</a>.</li>
 </ul>
 </div>

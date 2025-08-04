@@ -83,7 +83,6 @@ summary: 了解使用 Milvus 时的限制。
 </thead>
 <tbody>
 <tr><td>Collections</td><td>65,536</td></tr>
-<tr><td>连接/代理</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Collections 中的资源数量<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">

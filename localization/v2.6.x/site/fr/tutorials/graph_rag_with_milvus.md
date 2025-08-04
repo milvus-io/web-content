@@ -18,9 +18,13 @@ title: Graphique RAG avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>L'application généralisée de grands modèles de langage souligne l'importance d'améliorer la précision et la pertinence de leurs réponses. La génération améliorée par récupération (RAG) améliore les modèles avec des bases de connaissances externes, fournissant plus d'informations contextuelles et atténuant les problèmes tels que l'hallucination et les connaissances insuffisantes. Toutefois, le fait de s'appuyer uniquement sur des paradigmes RAG simples a ses limites, en particulier lorsqu'il s'agit de relations complexes entre entités et de questions à sauts multiples, pour lesquelles le modèle a souvent du mal à fournir des réponses précises.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>L'application généralisée de grands modèles de langage souligne l'importance d'améliorer la précision et la pertinence de leurs réponses. La génération améliorée par récupération (RAG) améliore les modèles avec des bases de connaissances externes, fournissant plus d'informations contextuelles et atténuant les problèmes tels que l'hallucination et les connaissances insuffisantes. Toutefois, le fait de s'appuyer uniquement sur des paradigmes RAG simples a ses limites, en particulier lorsqu'il s'agit de relations complexes entre entités et de questions à sauts multiples, pour lesquelles le modèle a souvent du mal à fournir des réponses exactes.</p>
 <p>L'introduction de graphes de connaissances (KG) dans le système RAG offre une nouvelle solution. Les KG présentent les entités et leurs relations de manière structurée, en fournissant des informations de recherche plus précises et en aidant le RAG à mieux gérer les tâches complexes de réponse aux questions. KG-RAG en est encore à ses débuts, et il n'y a pas de consensus sur la manière d'extraire efficacement des entités et des relations à partir de KG ou sur la manière d'intégrer la recherche de similarité vectorielle avec des structures de graphe.</p>
 <p>Dans ce carnet, nous présentons une approche simple mais puissante pour améliorer considérablement les performances de ce scénario. Il s'agit d'un paradigme RAG simple avec récupération multi-voies puis reranking, mais il met en œuvre le Graph RAG de manière logique et atteint des performances de pointe dans le traitement des questions multi-sauts. Voyons comment il est mis en œuvre.</p>
 <p>
@@ -202,7 +206,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 

@@ -177,7 +177,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        リミッターによる複雑な前方データの削除チェックの有無      </td>
+      <td>        リミッターによる前方データの複合削除チェックの有無      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -833,7 +833,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s、デフォルトは制限なし      </td>
+      <td>        MB/s, デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1190,7 +1190,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s、デフォルトは制限なし。TODO: dbのバルクロードレートを制限する      </td>
+      <td>        MB/s、デフォルトは制限なし、未サポート。TODO: dbのバルクロードレートを制限する      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1338,7 +1338,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        vps（1秒あたりのベクター数）、デフォルトは制限なし      </td>
+      <td>        vps (1秒あたりのベクター数)、デフォルトは制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1369,7 +1369,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
     <tr>
       <td>
         <li>コレクションごとに毎秒検索するベクターの最大数。</li>      
-        <li>この項目を 100 に設定すると、Milvus は、100 個のベクターが 1 回の検索ですべて検索されるか、複数の検索に分散されるかに関係なく、コレクションごとに 1 秒あたり 100 個のベクターしか検索できなくなります。</li>      
+        <li>この項目を 100 に設定すると、Milvus は、100 個のベクターがすべて 1 回の検索に含まれるか、複数の検索に分散されるかに関係なく、コレクションごとに 1 秒あたり 100 個のベクターしか検索できないことを示します。</li>      
         <li>この設定を使用するには、同時にquotaAndLimits.dql.enabledをtrueに設定してください。</li>      </td>
       <td>-1</td>
     </tr>
@@ -1431,7 +1431,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
       <td>
         <li>1秒あたりの最大クエリー数。</li>      
         <li>この項目を100に設定すると、Milvusは毎秒100クエリしか許可しないことを示します。</li>      
-        <li>この設定を使用するには、同時にquotaAndLimits.dql.enabledをtrueに設定します。</li>      </td>
+        <li>この設定を使用するには、同時にquotaAndLimits.dql.enabledをtrueに設定してください。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1675,7 +1675,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1]、データノードのmemoryHighWaterLevel      </td>
+      <td>        (0, 1]、データノード内のmemoryHighWaterLevel      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1763,8 +1763,8 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>成長セグメントのサイズがLow Watermarkより小さい場合は、何もしない。</li>      
-        <li>成長しているセグメントのサイズが低いウォーターマークを超えた場合、dmlレートは低下する、</li>      
+        <li>成長セグメントのサイズがLow Watermarkより小さい場合は何もしない。</li>      
+        <li>成長しているセグメントのサイズが低い透かしを超えた場合、dmlのレートは低下する、</li>      
         <li>ただし、minRateRatio * dmlRateを下回ることはない。</li>      </td>
       <td>false</td>
     </tr>
@@ -2055,7 +2055,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        バッファ行数クォータの削除、低水位      </td>
+      <td>        バッファ行数クォータ削除、低水位      </td>
       <td>32768</td>
     </tr>
   </tbody>

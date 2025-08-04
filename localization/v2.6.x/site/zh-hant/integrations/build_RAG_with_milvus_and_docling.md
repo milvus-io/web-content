@@ -92,7 +92,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
         ></path>
       </svg>
     </button></h2><p>Docling 可以將各種文件格式解析成統一的表示法 (Docling Document)，然後輸出成不同的輸出格式。關於支援的輸入和輸出格式的完整清單，請參閱<a href="https://docling-project.github.io/docling/usage/supported_formats/">官方說明文件</a>。</p>
-<p>在本教程中，我們將使用 Markdown 檔案<a href="https://milvus.io/docs/overview.md">(原始碼</a>) 作為輸入。我們將使用 Docling 提供的<strong>HierarchicalChunker</strong>來處理文件，以產生適合下游 RAG 任務的結構化、層次化分块。</p>
+<p>在本教程中，我們將使用 Markdown 檔案<a href="https://milvus.io/docs/overview.md">(原始碼</a>) 作為輸入。我們將使用 Docling 提供的<strong>HierarchicalChunker</strong>來處理該文件，以產生結構化、分層式、適合下游 RAG 任務的區塊。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> docling.document_converter <span class="hljs-keyword">import</span> DocumentConverter
 <span class="hljs-keyword">from</span> docling_core.transforms.chunker <span class="hljs-keyword">import</span> HierarchicalChunker
 
@@ -163,7 +163,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

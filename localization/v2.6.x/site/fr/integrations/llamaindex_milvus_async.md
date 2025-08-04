@@ -4,11 +4,11 @@ title: Construire RAG avec LlamaIndex et Milvus Async API
 related_key: LlamaIndex
 summary: >-
   Ce tutoriel montre comment utiliser LlamaIndex avec Milvus pour construire un
-  pipeline de traitement de documents asynchrone pour RAG. LlamaIndex fournit un
-  moyen de traiter les documents et de les stocker dans une base de données
-  vectorielle comme Milvus. En exploitant l'API asynchrone de LlamaIndex et la
-  bibliothèque client Python de Milvus, nous pouvons augmenter le débit du
-  pipeline pour traiter et indexer efficacement de grands volumes de données.
+  pipeline de traitement de documents asynchrone pour RAG. LlamaIndex permet de
+  traiter des documents et de les stocker dans une base de données vectorielle
+  comme Milvus. En exploitant l'API asynchrone de LlamaIndex et la bibliothèque
+  client Python de Milvus, nous pouvons augmenter le débit du pipeline pour
+  traiter et indexer efficacement de grands volumes de données.
 ---
 <h1 id="RAG-with-Milvus-and-LlamaIndex-Async-API" class="common-anchor-header">RAG avec Milvus et LlamaIndex Async API<button data-href="#RAG-with-Milvus-and-LlamaIndex-Async-API" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,7 +114,7 @@ DIM = <span class="hljs-number">768</span>
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
     )
 
@@ -227,7 +227,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
 <p>Obtenir la boucle d'événements.</p>
 <pre><code translate="no" class="language-python">loop = asyncio.get_event_loop()
 <button class="copy-code-btn"></button></code></pre>
-<p>Ajout asynchrone de documents au magasin vectoriel.</p>
+<p>Ajouter de manière asynchrone des documents au magasin vectoriel.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> add_counts:
 
     <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">measure_async_add</span>():

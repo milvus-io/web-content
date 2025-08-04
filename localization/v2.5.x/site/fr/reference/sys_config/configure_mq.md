@@ -284,7 +284,7 @@ summary: Apprenez à configurer mq pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Valeur par défaut : "3", le délai (en secondes) pendant lequel la cible envoie msgPack      </td>
+      <td>        Valeur par défaut : "3", délai (en secondes) pendant lequel la cible envoie msgPack      </td>
       <td>3</td>
     </tr>
   </tbody>

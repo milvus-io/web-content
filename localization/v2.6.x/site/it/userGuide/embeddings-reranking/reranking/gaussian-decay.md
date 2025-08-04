@@ -77,7 +77,7 @@ beta: Milvus 2.6.x
      <td><p>Valutazione equilibrata della rilevanza dell'esperienza</p></td>
    </tr>
 </table>
-<p>Se la vostra applicazione richiede una sensazione naturale di rilevanza decrescente, senza penalizzazioni severe o limiti rigidi, il decadimento gaussiano è probabilmente la scelta migliore.</p>
+<p>Se la vostra applicazione richiede una sensazione naturale di rilevanza decrescente, senza penalizzazioni severe o cutoff rigidi, il decadimento gaussiano è probabilmente la scelta migliore.</p>
 <h2 id="Bell-curve-principle" class="common-anchor-header">Principio della curva a campana<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,7 +181,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],  <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Applica alla ricerca ibrida</h3><p>I ranker di decadimento possono essere applicati anche alle operazioni di ricerca ibrida che combinano più campi vettoriali:</p>

@@ -346,7 +346,7 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>所有儲存於 Milvus Lite 的資料都可以輕鬆匯出並載入其他類型的 Milvus 部署，例如 Docker 上的 Milvus Standalone、K8s 上的 Milvus Distributed 或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的完全管理式 Milvus。</p>
-<p>Milvus Lite 提供一個命令列工具，可以將資料轉換成 json 檔案，並將其匯入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Milvus 的完全管理雲端服務)。milvus-lite 指令會與 milvus-lite python 套件一起安裝。</p>
+<p>Milvus Lite 提供一個命令列工具，可以將資料轉存為 json 檔案，並將其匯入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Milvus 的完全管理雲端服務)。milvus-lite 指令會與 milvus-lite python 套件一起安裝。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
 pip install -U &quot;pymilvus[bulk_writer]&quot;
 

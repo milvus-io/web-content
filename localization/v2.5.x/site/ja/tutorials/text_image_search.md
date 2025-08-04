@@ -27,7 +27,7 @@ title: Milvusによるテキスト画像検索
         ></path>
       </svg>
     </button></h1><p>Text-to-image検索は、ユーザが自然言語のテキスト記述を使って画像を検索できる高度な技術です。これは、事前に訓練されたマルチモーダルモデルを活用し、テキストと画像の両方を共有された意味空間の埋め込みに変換し、類似性に基づいた比較を可能にします。</p>
-<p>このチュートリアルでは、OpenAIのCLIP(Contrastive Language-Image Pretraining)モデルとmilvusを使って、テキストベースの画像検索を実装する方法を探ります。CLIPを用いて画像埋め込みを生成し、Milvusに保存し、効率的な類似検索を行います。</p>
+<p>このチュートリアルでは、OpenAIのCLIP(Contrastive Language-Image Pretraining)モデルとmilvusを使って、テキストベースの画像検索を実装する方法を探ります。CLIPで画像埋め込みを生成し、Milvusに保存し、効率的な類似検索を行います。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ title: Milvusによるテキスト画像検索
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install git+https://github.com/openai/CLIP.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、<strong>ランタイムを再起動</strong>する必要があるかもしれません (インターフェースの上部にある "Runtime "メニューに移動し、ドロップダウンメニューから "Restart session "を選択してください)。</p>
+<p>Google Colabを使用している場合、<strong>ランタイムを再起動</strong>する必要があるかもしれません(インターフェースの上部にある "Runtime "メニューに移動し、ドロップダウンメニューから "Restart session "を選択してください)。</p>
 </div>
 <h3 id="Download-example-data" class="common-anchor-header">サンプルデータのダウンロード</h3><p><a href="https://www.image-net.org">ImageNet</a>データセットのサブセット（100クラス、各クラス10画像）をサンプル画像として使います。以下のコマンドでサンプルデータをダウンロードし、ローカルフォルダ<code translate="no">./images_folder</code> に展開します：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>

@@ -5,7 +5,7 @@ summary: >-
   dotato di un'interfaccia grafica intuitiva (GUI) che consente di interagire
   facilmente con i database. Con pochi clic, è possibile visualizzare lo stato
   del cluster, gestire i metadati, eseguire query sui dati e molto altro ancora.
-title: Sistema di risposta alle domande
+title: Avvio rapido con Attu - l'interfaccia web di Milvus
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Avvio rapido con Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -158,7 +158,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
@@ -215,7 +215,7 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
 </p>
 <hr>
-<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>Espansione del grafico</strong></h3><p>Fare doppio clic su qualsiasi nodo dei risultati per espanderne le connessioni. Questa azione rivela ulteriori relazioni tra il nodo selezionato e altri punti dati della raccolta, creando un <strong>grafo della conoscenza più ampio e interconnesso</strong>.</p>
+<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>Espansione del grafico</strong></h3><p>Fare doppio clic su qualsiasi nodo dei risultati per espanderne le connessioni. Questa azione rivela ulteriori relazioni tra il nodo selezionato e altri punti di dati della raccolta, creando un <strong>grafo della conoscenza più ampio e interconnesso</strong>.</p>
 <p>Questa vista espansa consente un'esplorazione più approfondita del modo in cui i punti di dati sono correlati, in base alla somiglianza vettoriale.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">

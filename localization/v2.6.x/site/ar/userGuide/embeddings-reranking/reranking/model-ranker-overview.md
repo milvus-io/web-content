@@ -201,15 +201,21 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>نعم</p></td>
+     <td><p>قاموس يحتوي على تكوين لدالة إعادة الترتيب المستندة إلى النموذج. تختلف المعلمات (المفاتيح) المتاحة حسب الموفر (<code translate="no">tei</code> أو <code translate="no">vllm</code>). ارجع إلى <a href="/docs/ar/vllm-ranker.md">vLLM Ranker</a> أو <a href="/docs/ar/tei-ranker.md">TEI Ranker</a> لمزيد من التفاصيل.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يجب تعيينه إلى <code translate="no">"model"</code> لتمكين إعادة ترتيب النماذج.</p></td>
+     <td><p>يجب ضبطها على <code translate="no">"model"</code> لتمكين إعادة ترتيب النماذج.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>مزود خدمة النموذج المراد استخدامه لإعادة الترتيب.</p></td>
+     <td><p>موفر خدمة النموذج المراد استخدامه لإعادة الترتيب.</p></td>
      <td><p><code translate="no">"tei"</code> أو <code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
@@ -240,7 +246,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث المختلط</h3><p>يمكن أيضًا تطبيق مصنفات النموذج على عمليات البحث المختلط التي تجمع بين حقول متجهات متعددة:</p>

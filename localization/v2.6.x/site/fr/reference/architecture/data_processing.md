@@ -34,23 +34,28 @@ title: Traitement des données
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez spécifier un certain nombre de taches pour chaque collection dans Milvus, chaque tache correspondant à un canal virtuel<em>(vchannel</em>). Comme le montre la figure suivante, Milvus attribue à chaque canal virtuel du courtier en journaux un canal physique<em>(pchannel</em>). Toute demande d'insertion/suppression entrante est acheminée vers les unités de stockage en fonction de la valeur de hachage de la clé primaire.</p>
-<p>La validation des demandes DML est transférée au proxy car Milvus n'a pas de transactions compliquées. Le proxy demande un horodatage pour chaque demande d'insertion/suppression à TSO (Timestamp Oracle), qui est le module d'horodatage hébergé par le coordinateur racine. L'ancien horodatage étant remplacé par le nouveau, les horodatages sont utilisés pour déterminer la séquence des demandes de données en cours de traitement. Le proxy récupère les informations par lots à partir de la coordonnée des données, y compris les segments des entités et les clés primaires, afin d'augmenter le débit global et d'éviter de surcharger le nœud central.</p>
+    </button></h2><p>Vous pouvez choisir le nombre d'unités de stockage qu'une collection utilise dans Milvus - chaque unité de stockage correspond à un canal virtuel<em>(vchannel</em>). Comme illustré ci-dessous, Milvus affecte ensuite chaque <em>vchannel</em> à un canal physique<em>(pchannel</em>), et chaque <em>pchannel</em> est lié à un nœud de streaming spécifique.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/pvchannel_wal.png" alt="VChannel PChannel and StreamingNode" class="doc-image" id="vchannel-pchannel-and-streamingnode" />
+   </span> <span class="img-wrapper"> <span>VChannel PChannel et StreamingNode</span> </span></p>
+<p>Après la vérification des données, le proxy divise le message écrit en plusieurs paquets de données (shards) conformément aux règles d'acheminement des shards spécifiées.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_1.png" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Canaux 1</span> </span></p>
-<p>Les opérations DML (langage de manipulation de données) et DDL (langage de définition de données) sont toutes deux écrites dans la séquence d'enregistrement, mais les opérations DDL ne se voient attribuer qu'un seul canal en raison de leur faible fréquence d'apparition.</p>
+<p>Les données écrites d'un groupe<em>(vchannel</em>) sont ensuite envoyées au nœud de diffusion correspondant de <em>pchannel</em>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
-   </span> <span class="img-wrapper"> <span>Canaux 2</span> </span></p>
-<p>Les<em>canaux</em> sont gérés dans les nœuds sous-jacents du courtier en journaux. Chaque canal est physiquement indivisible et disponible pour n'importe quel nœud, mais un seul. Lorsque le taux d'ingestion des données atteint un goulot d'étranglement, il faut tenir compte de deux éléments : D'une part, le nœud du log broker est surchargé et doit être redimensionné et, d'autre part, il y a suffisamment de shards pour assurer l'équilibre de la charge pour chaque nœud.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
-   </span> <span class="img-wrapper"> <span>Séquence d'écriture du journal</span> </span></p>
-<p>Le diagramme ci-dessus présente les quatre composants impliqués dans le processus d'écriture d'une séquence de journaux : le proxy, le courtier en journaux, le nœud de données et le stockage d'objets. Le processus comprend quatre tâches : la validation des requêtes DML, la publication et l'abonnement de la séquence de journaux, la conversion du journal en continu en instantanés de journaux et la persistance des instantanés de journaux. Les quatre tâches sont découplées les unes des autres afin de s'assurer que chaque tâche est traitée par le type de nœud correspondant. Les nœuds de même type sont mis sur un pied d'égalité et peuvent être dimensionnés de manière élastique et indépendante pour s'adapter à différentes charges de données, en particulier les données en continu massives et très fluctuantes.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/written_data_flow.png" alt="write flow" class="doc-image" id="write-flow" />
+   </span> <span class="img-wrapper"> <span>flux d'écriture</span> </span></p>
+<p>Le nœud de diffusion en continu attribue un Oracle d'horodatage (TSO) à chaque paquet de données afin d'établir un ordre total des opérations. Il effectue des contrôles de cohérence sur la charge utile avant de l'écrire dans le journal d'écriture (WAL) sous-jacent. Même en cas de panne, le nœud de streaming peut rejouer le WAL pour récupérer toutes les opérations en attente.</p>
+<p>Pendant ce temps, le nœud de streaming découpe également de manière asynchrone les entrées WAL validées en segments distincts. Il existe deux types de segments :</p>
+<ul>
+<li><strong>Segment croissant</strong>: toutes les données qui n'ont pas encore été transférées dans le stockage d'objets.</li>
+<li><strong>Segment scellé</strong>: toutes les données ont été persistées dans le stockage d'objets, les données du segment scellé sont immuables.</li>
+</ul>
+<p>La transition d'un segment croissant à un segment scellé est appelée "flush". Le nœud de streaming déclenche un flush dès qu'il a ingéré et écrit toutes les entrées WAL disponibles pour ce segment, c'est-à-dire lorsqu'il n'y a plus d'enregistrements en attente dans le journal d'écriture sous-jacent, ce qui permet de finaliser le segment et d'en optimiser la lecture.</p>
 <h2 id="Index-building" class="common-anchor-header">Construction de l'index<button data-href="#Index-building" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,12 +71,12 @@ title: Traitement des données
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'élaboration de l'index est effectuée par le nœud d'index. Pour éviter la création fréquente d'index lors des mises à jour de données, une collection dans Milvus est divisée en segments, chacun ayant son propre index.</p>
+    </button></h2><p>La construction de l'index est effectuée par le nœud de données. Pour éviter la création fréquente d'index lors des mises à jour de données, une collection dans Milvus est divisée en segments, chacun ayant son propre index.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/index_building.png" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Construction d'index</span> </span></p>
-<p>Milvus prend en charge la construction d'index pour chaque champ vectoriel, champ scalaire et champ primaire. L'entrée et la sortie de la construction d'index s'engagent avec le stockage d'objets : Le nœud d'indexation charge les instantanés de journal à indexer à partir d'un segment (qui se trouve dans le stockage d'objets) dans la mémoire, désérialise les données et métadonnées correspondantes pour construire l'index, sérialise l'index lorsque la construction de l'index est terminée, et le réécrit dans le stockage d'objets.</p>
+<p>Milvus prend en charge la construction d'index pour chaque champ vectoriel, champ scalaire et champ primaire. L'entrée et la sortie de la construction d'index s'engagent avec le stockage d'objets : Le nœud de données charge les instantanés de journal à indexer à partir d'un segment (qui se trouve dans le stockage d'objets) dans la mémoire, désérialise les données et métadonnées correspondantes pour construire l'index, sérialise l'index lorsque la construction de l'index est terminée et le réécrit dans le stockage d'objets.</p>
 <p>La construction d'un index implique principalement des opérations sur les vecteurs et les matrices et nécessite donc beaucoup de calculs et de mémoire. Les vecteurs ne peuvent pas être indexés efficacement avec les index arborescents traditionnels en raison de leur nature hautement dimensionnelle, mais peuvent l'être avec des techniques plus abouties dans ce domaine, telles que les index basés sur les grappes ou les graphes. Quel que soit son type, la construction d'un index implique des calculs itératifs massifs pour les vecteurs à grande échelle, tels que Kmeans ou graph traverse.</p>
 <p>Contrairement à l'indexation des données scalaires, la construction d'un index vectoriel doit tirer pleinement parti de l'accélération SIMD (instruction unique, données multiples). Milvus prend en charge de manière innée les jeux d'instructions SIMD, par exemple SSE, AVX2 et AVX512. Compte tenu de la nature "hoquetante" et gourmande en ressources de la construction d'index vectoriels, l'élasticité revêt une importance cruciale pour Milvus en termes économiques. Les prochaines versions de Milvus exploreront davantage l'informatique hétérogène et l'informatique sans serveur afin de réduire les coûts connexes.</p>
 <p>En outre, Milvus prend également en charge le filtrage scalaire et l'interrogation de champs primaires. Il dispose d'index intégrés pour améliorer l'efficacité des requêtes, par exemple les index du filtre de Bloom, les index de hachage, les index arborescents et les index inversés, et prévoit d'introduire davantage d'index externes, par exemple les index bitmap et les index bruts.</p>
@@ -95,14 +100,17 @@ title: Traitement des données
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Requête de données</span> </span></p>
-<p>Dans Milvus, une collection est divisée en plusieurs segments et les nœuds d'interrogation chargent les index par segment. Lorsqu'une demande de recherche arrive, elle est diffusée à tous les nœuds d'interrogation pour une recherche simultanée. Chaque nœud élague alors les segments locaux, recherche les vecteurs répondant aux critères, réduit et renvoie les résultats de la recherche.</p>
-<p>Les nœuds d'interrogation sont indépendants les uns des autres dans une requête de données. Chaque nœud n'est responsable que de deux tâches : charger ou libérer des segments en suivant les instructions de la coordonnatrice de la requête ; effectuer une recherche dans les segments locaux. Le proxy est chargé de réduire les résultats de recherche de chaque nœud de requête et de renvoyer les résultats finaux au client.</p>
+<p>Dans Milvus, une collection est divisée en plusieurs segments ; le nœud de diffusion en continu charge les segments croissants et conserve les données en temps réel, tandis que les nœuds d'interrogation chargent les segments scellés.</p>
+<p>Lorsqu'une demande de requête/recherche arrive, le proxy la diffuse à tous les nœuds de diffusion en continu responsables des segments correspondants pour une recherche simultanée.</p>
+<p>Lorsqu'une demande de recherche arrive, le proxy demande simultanément aux nœuds de diffusion en continu qui détiennent les fichiers correspondants d'exécuter la recherche.</p>
+<p>Chaque nœud de diffusion génère un plan d'interrogation, recherche ses données croissantes locales et contacte simultanément les nœuds d'interrogation distants pour récupérer les résultats historiques, puis les agrège en un seul résultat.</p>
+<p>Enfin, le proxy recueille tous les résultats des nuées, les fusionne en un résultat final et le renvoie au client.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/handoff.png" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Transfert</span> </span></p>
-<p>Il existe deux types de segments : les segments croissants (pour les données incrémentielles) et les segments scellés (pour les données historiques). Les nœuds d'interrogation s'abonnent à vchannel pour recevoir les mises à jour récentes (données incrémentielles) sous forme de segments croissants. Lorsqu'un segment croissant atteint un seuil prédéfini, la coordination des données le scelle et la construction de l'index commence. Ensuite, une opération de <em>transfert</em> initiée par la coordonnatrice des requêtes transforme les données incrémentielles en données historiques. La coordination des requêtes répartit les segments scellés de manière égale entre tous les nœuds de requêtes en fonction de l'utilisation de la mémoire, de la surcharge de l'unité centrale et du nombre de segments.</p>
-<h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<p>Lorsque le segment croissant d'un nœud de streaming est transféré dans un segment scellé, ou lorsqu'un nœud de données achève un compactage, le coordinateur lance une opération de transfert pour convertir ces données croissantes en données historiques. Le coordinateur répartit ensuite uniformément les segments scellés entre tous les nœuds de requête, en équilibrant l'utilisation de la mémoire, les frais généraux de l'unité centrale et le nombre de segments, et libère tout segment redondant.</p>
+<h2 id="Whats-next" class="common-anchor-header">Et maintenant ?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

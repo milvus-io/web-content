@@ -41,7 +41,12 @@ summary: >-
       </svg>
     </button></h2><p>La durée de vie (TTL) est couramment utilisée dans les bases de données pour les scénarios dans lesquels les données ne doivent rester valides ou accessibles que pendant une certaine période après toute insertion ou modification. Ensuite, les données peuvent être automatiquement supprimées.</p>
 <p>Par exemple, si vous ingérez des données quotidiennement mais que vous ne devez conserver les enregistrements que pendant 14 jours, vous pouvez configurer Milvus pour qu'il supprime automatiquement toutes les données plus anciennes en définissant le TTL de la collection sur <strong>14 × 24 × 3600 = 1209600</strong> secondes. Cela garantit que seules les données les plus récentes (14 jours) restent dans la collection.</p>
-<p>La propriété TTL d'une collection Milvus est spécifiée sous la forme d'un nombre entier en secondes. Une fois définie, toute donnée qui dépasse son TTL sera automatiquement supprimée de la collection.</p>
+<div class="alert note">
+<p>Les entités expirées n'apparaîtront pas dans les résultats des recherches ou des requêtes. Cependant, elles peuvent rester dans le stockage jusqu'au compactage des données suivant, qui devrait être effectué dans les prochaines 24 heures.</p>
+<p>Vous pouvez contrôler le moment du déclenchement du compactage des données en définissant l'élément de configuration <code translate="no">dataCoord.compaction.expiry.tolerance</code> dans votre fichier de configuration Milvus.</p>
+<p>Cet élément de configuration a pour valeur par défaut <code translate="no">-1</code>, ce qui indique que l'intervalle de compactage des données existant s'applique. Toutefois, lorsque vous modifiez sa valeur en un nombre entier positif, comme <code translate="no">12</code>, le compactage des données sera déclenché le nombre d'heures spécifié après l'expiration de toute entité.</p>
+</div>
+<p>La propriété TTL d'une collection Milvus est spécifiée sous la forme d'un nombre entier en secondes. Une fois définie, toute donnée qui dépasse son TTL est automatiquement supprimée de la collection.</p>
 <p>Le processus de suppression étant asynchrone, il se peut que les données ne soient pas supprimées des résultats de recherche exactement une fois que le TTL spécifié s'est écoulé. Au contraire, il peut y avoir un retard, car la suppression dépend des processus de collecte des déchets (garbage collection, GC) et de compactage, qui se produisent à des intervalles non déterminés.</p>
 <h2 id="Set-TTL" class="common-anchor-header">Définir le TTL<button data-href="#Set-TTL" class="anchor-icon" translate="no">
       <svg translate="no"

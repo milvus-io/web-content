@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>索引是建立在数据之上的附加结构。其内部结构取决于所使用的近似近邻搜索算法。索引可以加快搜索速度，但在搜索过程中会产生额外的预处理时间、空间和 RAM。此外，使用索引通常会降低召回率（虽然影响可以忽略不计，但仍然很重要）。因此，本文将解释如何最大限度地减少使用索引的成本，同时最大限度地提高索引的效益。</p>
-<h2 id="Overview" class="common-anchor-header">概览<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,31 +44,68 @@ summary: >-
      <th><p>适用索引类型</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>bfloat16_vector</p></li></ul></td>
-     <td><ul><li><p>平面</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>bfloat16_vector</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>平面</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>二进制向量</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>稀疏浮点矢量</p></td>
      <td><p>稀疏反转索引</p></td>
    </tr>
    <tr>
-     <td><p>变量</p></td>
-     <td><ul><li><p>反转（推荐）</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><p>VARCHAR</p></td>
+     <td><ul>
+<li><p>反转（推荐）</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP（推荐）</li><li>反转</li></ul></td>
+     <td><ul>
+<li>BITMAP（推荐）</li>
+<li>反转</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>反转</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>反转</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>反转</p></td>
    </tr>
    <tr>
@@ -119,7 +156,7 @@ summary: >-
 <h3 id="Quantization" class="common-anchor-header">量化</h3><p>量化通过更粗略的表示来减少内存占用和计算成本：</p>
 <ul>
 <li><p><strong>标量量化</strong>（如<strong>SQ8</strong>）使 Milvus 能够将每个向量维度压缩为单字节（8 位），与 32 位浮点数相比，内存使用量减少了 75%，同时保持了合理的精度。</p></li>
-<li><p><strong>乘积量化</strong><strong>（PQ</strong>）使 Milvus 能够将向量分割成子向量，并使用基于编码本的聚类对其进行编码。这可以实现更高的压缩率（例如 4-32 倍），但代价是召回率略有降低，因此适用于内存受限的环境。</p></li>
+<li><p><strong>乘积量化</strong><strong>（PQ</strong>）使 Milvus 能够将向量分割成子向量，并使用基于编码本的聚类进行编码。这可以实现更高的压缩率（例如 4-32 倍），但代价是召回率略有降低，因此适用于内存受限的环境。</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">精炼器</h3><p>量化本身就是有损的。为了保持召回率，量化始终会产生比所需数量更多的前 K 个候选结果，这使得精炼器可以使用更高的精度从这些候选结果中进一步选择前 K 个结果，从而提高召回率。</p>
 <p>例如，FP32 精炼器通过使用 FP32 精度而不是量化值重新计算距离，对量化返回的候选搜索结果进行操作符操作。</p>
@@ -149,12 +186,12 @@ summary: >-
 </ul>
 <h3 id="Capacity" class="common-anchor-header">容量</h3><p>容量通常涉及数据大小与可用 RAM 之间的关系。在处理容量问题时，请考虑以下几点：</p>
 <ul>
-<li><p>如果有四分之一的原始数据适合存储在内存中，则应考虑使用延迟稳定的 DiskANN。</p></li>
+<li><p>如果有四分之一的原始数据可以存储在内存中，那么可以考虑使用 DiskANN，因为其延迟稳定。</p></li>
 <li><p>如果所有原始数据都适合在内存中存储，则应考虑基于内存的索引类型和 mmap。</p></li>
 <li><p>您可以使用量化应用索引类型和 mmap 来换取最大容量的准确性。</p></li>
 </ul>
 <div class="alert note">
-<p>mmap 并不总是解决方案。当大部分数据在磁盘上时，DiskANN 可以提供更好的延迟。</p>
+<p>毫米映射并不总是解决方案。当大部分数据在磁盘上时，DiskANN 可以提供更好的延迟。</p>
 </div>
 <h3 id="Recall" class="common-anchor-header">召回率</h3><p>召回率通常涉及过滤率，即搜索前过滤掉的数据。在处理召回问题时，应考虑以下几点：</p>
 <ul>
@@ -240,7 +277,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>计算量化带来的压缩。</strong></p>
-<p>IVF 变体通常使用 PQ 和 SQ8，内存使用量可按下式估算：</p>
+<p>IVF 变体通常使用 PQ 和 SQ8，内存用量可按下式估算：</p>
 <ul>
 <li><p>使用带有 8 个子量化器的 PQ</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8.0 MB
@@ -305,7 +342,7 @@ summary: >-
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Other-considerations" class="common-anchor-header">其他考虑因素</h3><p>IVF 和基于图的索引可通过量化优化内存使用，而内存映射文件（mmap）和 DiskANN 则可解决数据集超出可用随机存取内存（RAM）的情况。</p>
+<h3 id="Other-considerations" class="common-anchor-header">其他考虑因素</h3><p>IVF 和基于图的索引可以通过量化来优化内存使用，而内存映射文件（mmap）和 DiskANN 则可以解决数据集超出可用随机存取内存（RAM）的问题。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是一种基于 Vamana 图的索引，它将数据点连接起来，以便在搜索过程中高效导航，同时应用 PQ 来减小向量的大小，并能快速计算向量之间的近似距离。</p>
 <p>Vamana 图存储在磁盘上，这使得 DiskANN 能够处理那些内存无法容纳的大型数据集。这对十亿点数据集尤其有用。</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">内存映射文件 (mmap)</h4><p>内存映射（Mmap）可实现对磁盘上大型文件的直接内存访问，从而允许 Milvus 在内存和硬盘中同时存储索引和数据。这种方法可根据访问频率减少 I/O 调用的开销，有助于优化 I/O 操作，从而在不对搜索性能造成重大影响的情况下扩大 Collections 的存储容量。</p>

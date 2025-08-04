@@ -216,7 +216,7 @@ Retrieved Context:
         ></path>
       </svg>
     </button></h2><p>In diesem Abschnitt zeigen wir, wie man <code translate="no">AutoRetriever</code> mit einem <code translate="no">ChatAgent</code> kombiniert.</p>
-<p>Legen wir eine Agentenfunktion fest, in dieser Funktion können wir die Antwort erhalten, indem wir eine Abfrage an diesen Agenten stellen.</p>
+<p>In dieser Funktion können wir die Antwort erhalten, indem wir eine Abfrage an diesen Agenten stellen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> RoleType

@@ -2,7 +2,7 @@
 id: schema.md
 title: スキーマの説明
 summary: >-
-  スキーマはコレクションのデータ構造を定義する。コレクションを作成する前に、スキーマの設計を行う必要があります。このページでは、コレクションのスキーマを理解し、自分でスキーマの例を設計するのに役立ちます。
+  スキーマはコレクションのデータ構造を定義する。コレクションを作成する前に、スキーマの設計を行う必要があります。このページは、コレクションのスキーマを理解し、自分でスキーマの例を設計するのに役立ちます。
 ---
 <h1 id="Schema-Explained" class="common-anchor-header">スキーマの説明<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>スキーマ設計の解剖</span> </span></p>
-<p>検索システムのデータモデル設計には、ビジネスニーズを分析し、情報をスキーマで表現されたデータモデルに抽象化することが含まれます。例えば、テキストの一部を検索するには、リテラル文字列を「埋め込み」によってベクトルに変換し、ベクトル検索を可能にすることで「インデックス化」しなければならない。この必須要件以外にも、出版物のタイムスタンプや著者などのプロパティを格納することが必要な場合がある。このメタデータにより、フィルタリングによってセマンティック検索を絞り込むことができ、特定の日付以降に出版されたテキストや、特定の著者によるテキストだけを返すことができる。アプリケーションで検索結果をレンダリングするために、メインテキストと一緒にこれらのスカラーを取得することもできます。これらのテキスト片を整理するために、それぞれに整数または文字列で表される一意の識別子を割り当てる必要があります。これらの要素は洗練された検索ロジックを実現するために不可欠です。</p>
+<p>検索システムのデータモデル設計には、ビジネスニーズを分析し、情報をスキーマで表現されたデータモデルに抽象化することが含まれます。例えば、テキストの一部を検索するには、リテラル文字列を「埋め込み」によってベクトルに変換し、ベクトル検索を可能にすることで「インデックス化」しなければならない。この必須要件以外にも、出版物のタイムスタンプや著者などのプロパティを格納することが必要な場合がある。このメタデータにより、フィルタリングによってセマンティック検索を絞り込むことができ、特定の日付以降に出版されたテキストや、特定の著者によるテキストだけを返すことができる。アプリケーションで検索結果をレンダリングするために、メインテキストとともにこれらのスカラーを取得することもできます。これらのテキスト片を整理するために、それぞれに整数または文字列で表される一意の識別子を割り当てる必要があります。これらの要素は洗練された検索ロジックを実現するために不可欠です。</p>
 <p><a href="/docs/ja/schema-hands-on.md">スキーマ設計ハンズオンを</a>参照して、よく設計されたスキーマの作り方を把握してください。</p>
 <h2 id="Create-Schema" class="common-anchor-header">スキーマの作成<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -143,8 +143,8 @@ schema.addField(AddFieldReq.builder()
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>フィールドを追加する際、<code translate="no">is_primary</code> プロパティを<code translate="no">True</code> に設定することで、フィールドをプライマリ・フィールドとして明示的に明示することができる。プライマリ・フィールドはデフォルトで<strong>Int64</strong>値を受け入れる。この場合、プライマリ・フィールドの値は<code translate="no">12345</code> と同様の整数でなければなりません。プライマリ・フィールドに<strong>VarChar</strong>値を使用する場合は、<code translate="no">my_entity_1234</code> と同様の文字列でなければなりません。</p>
-<p>また、<code translate="no">autoId</code> プロパティを<code translate="no">True</code> に設定すると、データ挿入時に Zilliz Cloud が自動的にプライマリフィールドの値を割り当てるようになります。</p>
+<p>フィールドを追加するとき、そのフィールドの<code translate="no">is_primary</code> プロパティを<code translate="no">True</code> に設定することで、フィールドを明示的にプライマリ・フィールドとして明確にすることができる。プライマリ・フィールドはデフォルトで<strong>Int64</strong>値を受け入れる。この場合、プライマリ・フィールドの値は<code translate="no">12345</code> と同様の整数でなければなりません。プライマリ・フィールドに<strong>VarChar</strong>値を使用する場合は、<code translate="no">my_entity_1234</code> と同様の文字列でなければなりません。</p>
+<p>また、<code translate="no">autoId</code> プロパティを<code translate="no">True</code> に設定すると、データ挿入時に Zilliz Cloud が自動的にプライマリフィールド値を割り当てるようになります。</p>
 <p>詳しくは、<a href="/docs/ja/primary-field.md">プライマリフィールドとAutoIdを</a>参照してください。</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">ベクターフィールドの追加<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,8 +209,10 @@ schema.addField(AddFieldReq.builder()
 <p>このタイプのベクトルフィールドは、16ビットの半精度浮動小数点数のリストを保持し、通常、メモリや帯域幅が制限されたディープラーニングやGPUベースのコンピューティングシナリオに適用されます。</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>この型のベクトル・フィールドは、16ビット浮動小数点数のリストを保持し、精度は低下するが、指数範囲はFloat32と同じである。このタイプのデータは、精度に大きな影響を与えることなくメモリ使用量を削減できるため、ディープラーニングのシナリオでよく使用されます。</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>このタイプのベクトル・フィールドは、8ビットの符号付き整数（int8）で構成されるベクトルを格納し、各成分の範囲は-128～127である。ResNetやEfficientNetのような量子化されたディープラーニング・アーキテクチャ用に調整されており、モデルサイズを大幅に縮小し、推論速度を向上させる。<strong>注</strong>：このベクトル型はHNSWインデックスでのみサポートされている。</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
-<p>このタイプのベクトル・フィールドは、0と1のリストを保持する。画像処理や情報検索のシナリオでデータを表現するためのコンパクトな特徴として機能する。</p></li>
+<p>この型のベクトル・フィールドは0と1のリストを保持する。画像処理や情報検索の場面でデータを表現するためのコンパクトな特徴として機能する。</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
 <p>この型のベクトル・フィールドは、非ゼロ数のリストとそのシーケンス番号を保持し、スパースなベクトル埋め込みを表現する。</p></li>
 </ul>

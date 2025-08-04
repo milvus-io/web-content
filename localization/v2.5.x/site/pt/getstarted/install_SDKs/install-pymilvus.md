@@ -100,7 +100,7 @@ Recomenda-se a instalação de uma versão do PyMilvus que corresponda à versã
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/v2.5.x/manage-collections.md">Gerir colecções</a></li>
-<li><a href="/docs/pt/v2.5.x/manage-partitions.md">Gerenciar partições</a></li>
+<li><a href="/docs/pt/v2.5.x/manage-partitions.md">Gerir partições</a></li>
 <li><a href="/docs/pt/v2.5.x/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
 <li><a href="/docs/pt/v2.5.x/single-vector-search.md">Pesquisa de um único vetor</a></li>
 <li><a href="/docs/pt/v2.5.x/multi-vector-search.md">Pesquisa híbrida</a></li>

@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 提供強大的篩選功能，使您能夠精確查詢資料。篩選表達式允許您針對特定的標量欄位，使用不同的條件精煉搜尋結果。本指南解釋如何在 Milvus 中使用篩選表達式，並以查詢操作為主。您也可以在搜尋和刪除請求中套用這些篩選條件。</p>
+    </button></h1><p>Milvus 提供強大的篩選功能，使您能夠精確地查詢資料。篩選表達式允許您針對特定的標量欄位，使用不同的條件精煉搜尋結果。本指南解釋如何在 Milvus 中使用篩選表達式，並以查詢操作為主。您也可以在搜尋和刪除請求中套用這些篩選條件。</p>
 <h2 id="Basic-operators" class="common-anchor-header">基本運算符號<button data-href="#Basic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,12 +41,13 @@ summary: >-
 <li><p><strong>比較運算符</strong>：<code translate="no">==</code>,<code translate="no">!=</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;=</code>, 和<code translate="no">&lt;=</code> 允許基於數值或文字欄位進行篩選。</p></li>
 <li><p><strong>範圍篩選器</strong>：<code translate="no">IN</code> 和<code translate="no">LIKE</code> 有助於匹配特定的值範圍或集合。</p></li>
 <li><p><strong>算術運算符</strong>：<code translate="no">+</code>,<code translate="no">-</code>,<code translate="no">*</code>,<code translate="no">/</code>,<code translate="no">%</code>, 和<code translate="no">**</code> 用於涉及數字字段的計算。</p></li>
-<li><p><strong>邏輯運算符號</strong>：<code translate="no">AND</code>,<code translate="no">OR</code>, 和<code translate="no">NOT</code> 將多個條件結合成複雜的表達式。</p></li>
+<li><p><strong>邏輯運算符號</strong>：<code translate="no">AND</code>,<code translate="no">OR</code>, 和<code translate="no">NOT</code> 將多個條件結合為複雜的表達式。</p></li>
+<li><p><strong>IS NULL 和 IS NOT NULL 運算符</strong>：<code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> 運算符用於根據欄位是否包含空值（沒有資料）來篩選欄位。如需詳細資訊，請參閱<a href="/docs/zh-hant/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">基本運算符號</a>。</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color" class="common-anchor-header">範例：依顏色篩選</h3><p>若要在標量欄位<code translate="no">color</code> 中找出具有三原色 (紅、綠或藍) 的實體，請使用下列篩選表達式：</p>
+<h3 id="Example-Filtering-by-Color" class="common-anchor-header">範例：依顏色篩選</h3><p>若要在標量欄位<code translate="no">color</code> 中找出具有三原色（紅色、綠色或藍色）的實體，請使用下列篩選表達式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">範例篩選 JSON 欄位</h3><p>Milvus 允許在 JSON 欄位中參考鍵。例如，如果您有一個 JSON 欄位<code translate="no">product</code> ，其鍵為<code translate="no">price</code> 和<code translate="no">model</code> ，並希望找到具有特定型號和價格低於 1,850 的產品，請使用此過濾表達式：</p>
+<h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">範例：篩選 JSON 欄位</h3><p>Milvus 允許在 JSON 欄位中參考鍵。例如，如果您有一個 JSON 欄位<code translate="no">product</code> ，其鍵為<code translate="no">price</code> 和<code translate="no">model</code> ，並希望找到具有特定型號和價格低於 1,850 的產品，請使用此過濾表達式：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-Array-Fields" class="common-anchor-header">範例：篩選陣列欄位</h3><p>如果您有一個陣列欄位<code translate="no">history_temperatures</code> ，其中包含天文台自 2000 年以來所報告的平均溫度記錄，並且想要找出 2009 年（第 10 次記錄）溫度超過 23°C 的天文台，請使用此表達式：</p>
@@ -132,55 +133,3 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/keyword-match.md">文字匹配</a>。</p>
 <h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> 運算符號<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p><strong>PHRASE_MATCH</strong>運算子可根據精確的詞組匹配來精確擷取文件，並同時考慮查詢詞的順序和相鄰性。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/phrase-match.md">短語匹配</a>。</p>
-<h2 id="Random-sampling-operator--Milvus-26x" class="common-anchor-header">隨機抽樣操作員<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-sampling-operator--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>隨機抽樣可讓您從段層級的資料集中抽取資料樣本的子集，非常適合探索和處理大量資料集。此功能對於這些使用個案非常有價值：</p>
-<ul>
-<li><p><strong>快速資料預覽</strong>：它能以最少的資源使用量傳回有代表性的樣本資料，讓您快速掌握大型向量資料集的整體結構與內容。</p></li>
-<li><p><strong>組合篩選</strong>：在執行多條件篩選 (例如依據屬性選擇文件) 時，結合隨機抽樣可快速對篩選結果進行統計摘要與預覽。</p></li>
-<li><p><strong>大規模資料處理的資源節省</strong>：對於非常大的資料集，彙集和分析完整的資料可能會耗費大量資源。隨機抽樣可降低處理的資料量，從而減少處理負載。</p></li>
-</ul>
-<p>使用下列語法進行隨機抽樣：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = RANDOM_SAMPLE(<span class="hljs-built_in">float</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li><code translate="no">float</code><strong>:</strong>範圍 (0, 1) 內的取樣因子，不包括邊界。例如，<code translate="no">RANDOM_SAMPLE(0.001)</code> 選取約 0.1% 的結果。</li>
-</ul>
-<div class="alert note">
-<p><code translate="no">RANDOM_SAMPLE</code> 表達式不區分大小寫。您可以使用<code translate="no">RANDOM_SAMPLE</code> 或<code translate="no">random_sample</code> 。</p>
-</div>
-<h3 id="Combine-with-other-filters" class="common-anchor-header">與其他篩選器結合</h3><p>隨機抽樣運算符號必須使用邏輯<code translate="no">AND</code> 與其他篩選表達式結合。舉例來說：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>在此，Milvus 首先套用條件<code translate="no">color = 'red'</code> ，然後對結果集執行隨機抽樣。</p>
-<h3 id="Example-Random-sampling-without-an-additional-filter" class="common-anchor-header">範例：無附加篩選條件的隨機抽樣</h3><p>在這個範例中，查詢會從指定集合的全部資料中隨機抽取一個子集（約 1%）：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Combined-filtering-with-random-sampling" class="common-anchor-header">範例：結合篩選與隨機抽樣</h3><p>在此範例中，查詢首先根據特定屬性篩選文件 (在此範例中，<code translate="no">color</code> 等於<code translate="no">'red'</code> 的文件)。過濾之後，應用隨機抽樣運算子來傳回約 0.1% 的過濾結果：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;color = &#x27;red&#x27; and RANDOM_SAMPLE(0.001)&quot;</span>
-
-result = MilvusClient.query(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>

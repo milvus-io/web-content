@@ -130,7 +130,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        頻道管理員檢查 dml 頻道平衡狀態的間隔時間      </td>
+      <td>        頻道管理員檢查 dml 頻道平衡狀態的時間間隔      </td>
       <td>360</td>
     </tr>
   </tbody>
@@ -875,7 +875,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        觸發混合壓實的時間間隔 (以秒為單位)      </td>
+      <td>        觸發混合壓實的時間間隔 (秒)     </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1542,7 +1542,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        當索引程序未設定記憶體大小時，以乘數估計索引資料的記憶體大小。      </td>
+      <td>        當索引程序未設定記憶體大小時，用乘數估計索引資料的記憶體大小。      </td>
       <td>2</td>
     </tr>
   </tbody>
@@ -2180,7 +2180,7 @@ summary: 了解如何為 Milvus 設定 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        混合壓實作業的插槽使用量。      </td>
+      <td>        L0 壓實作業的插槽使用量。      </td>
       <td>8</td>
     </tr>
   </tbody>

@@ -37,7 +37,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvusインスタンスの初期化後、Milvusへの初回接続時に認証用のルートユーザが自動生成されます。ルートユーザのユーザ名は<code translate="no">root</code> で、パスワードは<code translate="no">Milvus</code> です。ルートユーザのデフォルトロールは<code translate="no">admin</code> で、すべてのリソースにアクセスできます。データの安全性を確保するため、不正アクセスを防止するためにルートユーザの認証情報を安全に管理してください。</p>
 <p>日常的な運用では、ルート・ユーザーを使用する代わりに、ユーザーを作成することをお勧めします。</p>
-<h3 id="Create-a-user" class="common-anchor-header">ユーザーの作成</h3><p>以下の例では、ユーザー名<code translate="no">user_1</code> 、パスワード<code translate="no">P@ssw0rd</code> でユーザーを作成する方法を示しています。ユーザーのユーザー名とパスワードは、以下の規則に従わなければなりません：</p>
+<h3 id="Create-a-user" class="common-anchor-header">ユーザーの作成</h3><p>以下の例では、ユーザー名<code translate="no">user_1</code> 、パスワード<code translate="no">P@ssw0rd</code> でユーザーを作成する方法を示しています。ユーザーのユーザー名とパスワードは、以下の規則に従う必要があります：</p>
 <ul>
 <li><p>ユーザー名：文字で始まり、大文字または小文字、数字、アンダースコアのみを含む。</p></li>
 <li><p>パスワード：8～64文字で、大文字、小文字、数字、特殊文字のうち3つを含むこと。</p></li>
@@ -272,5 +272,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>以下は出力例です。<code translate="no">admin</code> はmilvusのデフォルトのロールです。<code translate="no">role_a</code> は作成されたばかりの新しいロールです。</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]
+<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
 <button class="copy-code-btn"></button></code></pre>

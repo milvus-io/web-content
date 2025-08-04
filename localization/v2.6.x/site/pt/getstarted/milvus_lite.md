@@ -103,7 +103,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
 <button class="copy-code-btn"></button></code></pre>
 <p>Depois de executar o trecho de código acima, um arquivo de banco de dados chamado <strong>milvus_demo.db</strong> será gerado na pasta atual.</p>
 <blockquote>
-<p><strong><em>NOTA:</em></strong> Note que a mesma API também se aplica ao Milvus Standalone, Milvus Distributed e Zilliz Cloud, a única diferença é substituir o nome do ficheiro local pelo endpoint do servidor remoto e credenciais, por exemplo<code translate="no">client = MilvusClient(uri=&quot;http://localhost:19530&quot;, token=&quot;username:password&quot;)</code>.</p>
+<p><strong><em>NOTA:</em></strong> Note que a mesma API também se aplica ao Milvus Standalone, ao Milvus Distributed e ao Zilliz Cloud, a única diferença é substituir o nome do ficheiro local pelo endpoint do servidor remoto e pelas credenciais, por exemplo,<code translate="no">client = MilvusClient(uri=&quot;http://localhost:19530&quot;, token=&quot;username:password&quot;)</code>.</p>
 </blockquote>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -300,7 +300,7 @@ res = client.delete(
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a></td><td>A obtenção do estado do carregamento não é suportada.</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>Não é suportado o carregamento dos dados não carregados de uma coleção carregada.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>Não é possível carregar os dados não carregados de uma coleção carregada.</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md">close()</a></td><td>Y</td></tr>
 </tbody>
 </table>
@@ -398,8 +398,8 @@ optional arguments:
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
-<li><p>Implantar seu cluster Milvus em nuvens:</p>
+<li><p><a href="/docs/pt/scaleout.md">Escalar o cluster do Milvus</a>.</p></li>
+<li><p>Implante seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>

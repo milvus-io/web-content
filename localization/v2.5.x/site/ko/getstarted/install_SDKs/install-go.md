@@ -5,7 +5,6 @@ related_key: SDK
 summary: Milvus의 GO SDK를 설치하는 방법을 알아보세요.
 title: Milvus Go SDK 설치하기
 ---
-
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Milvus Go SDK 설치하기<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +54,7 @@ title: Milvus Go SDK 설치하기
         ></path>
       </svg>
     </button></h2><p><code translate="no">go get</code> 를 통해 Milvus GO SDK 및 종속 요소를 설치하세요.</p>
-<pre><code translate="no" class="language-bash">$ <span class="hljs-keyword">go</span> get -u github.com/milvus-io/milvus-sdk-<span class="hljs-keyword">go</span>/v2
+<pre><code translate="no" class="language-bash">$ go get -u github.com/milvus-io/milvus-sdk-go/v2
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

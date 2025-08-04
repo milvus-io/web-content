@@ -2,7 +2,7 @@
 id: metric.md
 title: メトリクスの種類
 summary: >-
-  類似度メトリクスは、ベクトル間の類似性を測定するために使用される。適切な距離メトリックを選択することで、分類やクラスタリングの性能を大幅に向上させることができる。
+  類似度メトリクスは、ベクトル間の類似度を測定するために使用される。適切な距離メトリックを選択することで、分類やクラスタリングの性能を大幅に向上させることができる。
 ---
 <h1 id="Metric-Types" class="common-anchor-header">メトリクスの種類<button data-href="#Metric-Types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,6 +44,12 @@ summary: >-
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>2-32,768</p></td>
+     <td><p><code translate="no">COSINE</code>,<code translate="no">L2</code> 、<code translate="no">IP</code></p></td>
+     <td><p><code translate="no">COSINE</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">INT8_VECTOR</code></p></td>
+     <td><p>2-32,768</p></td>
      <td><p><code translate="no">COSINE</code> <code translate="no">L2</code> 、<code translate="no">IP</code></p></td>
      <td><p><code translate="no">COSINE</code></p></td>
    </tr>
@@ -56,14 +62,14 @@ summary: >-
    <tr>
      <td><p><code translate="no">BINARY_VECTOR</code></p></td>
      <td><p>8-32,768*8</p></td>
-     <td><p><code translate="no">HAMMING</code>,<code translate="no">JACCARD</code></p></td>
+     <td><p><code translate="no">HAMMING</code> <code translate="no">JACCARD</code> 、<code translate="no">MHJACCARD</code></p></td>
      <td><p><code translate="no">HAMMING</code></p></td>
    </tr>
 </table>
 <div class="alert note">
 <ul>
-<li><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code> 型のベクトル・フィールドについては、全文検索を実行する場合にのみ<code translate="no">BM25</code> メトリック型を使用する。詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p></li>
-<li><p><code translate="no">BINARY_VECTOR</code> 型のベクトル・フィールドの場合、次元値 (<code translate="no">dim</code>) は 8 の倍数でなければなりません。</p></li>
+<li><p><code translate="no">SPARSE\_FLOAT\_VECTOR</code> 型のベクトル・フィールドについては、全文検索を行う場合にのみ<code translate="no">BM25</code> メトリック型を使用する。詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p></li>
+<li><p><code translate="no">BINARY_VECTOR</code> 型のベ ク ト ル ・ フ ィ ール ド の場合、 次元値 （<code translate="no">dim</code> ） は 8 の倍数でなければな り ません。</p></li>
 </ul>
 </div>
 <p>以下の表は、サポー ト さ れてい る すべての メ ト リ ッ ク タ イ プの類似度距離値の特徴 と 、 その値域をまとめた も のです。</p>
@@ -94,13 +100,18 @@ summary: >-
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">MHJACCARD</code></p></td>
+     <td><p>MinHash署名のビットからJaccard類似度を推定します。</p></td>
+     <td><p>[0, 1]</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>値が小さいほど類似度が高いことを示す。</p></td>
      <td><p>[0, dim(ベクトル)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BM25</code></p></td>
-     <td><p>項頻度、逆文書頻度、文書正規化に基づいて関連性をスコア化する。</p></td>
+     <td><p>用語頻度、反転文書頻度、文書正規化に基づいて関連性をスコア化する。</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
@@ -187,7 +198,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>コサイン類似度</span> </span></p>
 <p>余弦類似度は常に区間<strong>[-1, 1]</strong>にある。例えば、2つの比例ベクトルは<strong>1の</strong>余弦類似度を持ち、2つの直交ベクトルは<strong>0の</strong>類似度を持ち、2つの反対ベクトルは<strong>-</strong>1の類似度を持ちます。余弦が大きいほど、2つのベクトル間の角度が小さくなり、これらの2つのベクトルが互いに似ていることを示します。</p>
 <p>2つのベクトルの余弦類似度を1から引くことで、2つのベクトル間の余弦距離を求めることができます。</p>
-<h2 id="JACCARD-distance" class="common-anchor-header">JACCARD 距離<button data-href="#JACCARD-distance" class="anchor-icon" translate="no">
+<h2 id="JACCARD-distance" class="common-anchor-header">JACCARD距離<button data-href="#JACCARD-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -202,7 +213,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JACCARD類似度係数は，2つの標本集合間の類似度を測定し，定義された集合の交点のカーディナリティをそれらの和のカーディナリティで割ったものとして定義される．有限の標本集合にのみ適用できる．</p>
+    </button></h2><p>JACCARD距離係数は，2つの標本集合間の類似度を測定し，定義された集合の交点のカーディナリティをそれらの和のカーディナリティで割ったものとして定義される．これは有限の標本集合にのみ適用できる．</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-similarity-coefficient-formula.png" alt="JACCARD Similarity Coefficient Formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
@@ -212,7 +223,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/JACCARD-distance-formula.png" alt="JACCARD Distance Formula" class="doc-image" id="jaccard-distance-formula" />
    </span> <span class="img-wrapper"> <span>JACCARD 距離の公式</span> </span></p>
-<h2 id="HAMMING-distance" class="common-anchor-header">HAMMING距離<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
+<h2 id="MHJACCARD" class="common-anchor-header">MHJACCARD<button data-href="#MHJACCARD" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -227,7 +238,40 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HAMMING 距離はバイナリ・データ文字列を測定する．同じ長さの2つの文字列間の距離は、ビットが異なるビット位置の数である。</p>
+    </button></h2><p><strong>MinHash Jaccard</strong>(<code translate="no">MHJACCARD</code>) は、文書単語集合、ユーザータグ集合、ゲノムk-mer集合など、大規模な集合に対する効率的な近似類似検索に使用されるメトリックタイプである。MHJACCARDは、生の集合を直接比較する代わりに、Jaccard類似度を効率的に推定するために設計されたコンパクトな表現である<strong>MinHashシグネチャを</strong>比較する。</p>
+<p>このアプローチは、正確なJaccard類似度を計算するよりも大幅に高速であり、大規模または高次元のシナリオで特に有用である。</p>
+<p><strong>適用可能なベクトル型</strong></p>
+<ul>
+<li><code translate="no">BINARY_VECTOR</code>各ベクトルはMinHash署名を格納する。各要素は、元の集合に適用される独立したハッシュ関数の1つの下での最小ハッシュ値に対応する。</li>
+</ul>
+<p><strong>距離の定義</strong></p>
+<p>MHJACCARDは、2つのMinHash署名の何番目の位置が一致するかを測定します。一致率が高いほど、基礎となる集合がより類似していることを示す。</p>
+<p>milvusは次のように報告します：</p>
+<ul>
+<li><strong>距離 = 1 - 推定類似度（一致率）</strong></li>
+</ul>
+<p>距離値の範囲は0～1です：</p>
+<ul>
+<li><p><strong>0は</strong>、MinHash署名が同一であることを意味します（推定Jaccard類似度=1）。</p></li>
+<li><p><strong>1は</strong>、どの位置でも一致しないことを意味します（推定Jaccard類似度= 0）。</p></li>
+</ul>
+<p>技術的な詳細については、<a href="/docs/ja/minhash-lsh.md">MINHASH_LSHを</a>参照のこと。</p>
+<h2 id="HAMMING-distance" class="common-anchor-header">ハミング距離<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>HAMMING距離はバイナリデータの文字列を測定する。同じ長さの2つの文字列間の距離は、ビットが異なるビット位置の数である。</p>
 <p>例えば、1101 1001 と 1001 1101 という2つの文字列があるとする。</p>
 <p>11011001 ⊕ 10011101 = 01000100.これには2つの1が含まれるため、ハミング距離d (11011001, 10011101) = 2となる。</p>
 <h2 id="BM25-similarity" class="common-anchor-header">BM25類似度<button data-href="#BM25-similarity" class="anchor-icon" translate="no">

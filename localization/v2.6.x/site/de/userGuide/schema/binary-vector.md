@@ -244,7 +244,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Im obigen Beispiel wird ein Index mit dem Namen <code translate="no">binary_vector_index</code> für das Feld <code translate="no">binary_vector</code> erstellt, wobei der Indextyp <code translate="no">AUTOINDEX</code> verwendet wird. <code translate="no">metric_type</code> ist auf <code translate="no">HAMMING</code> gesetzt, was anzeigt, dass die Hamming-Distanz für die Ähnlichkeitsmessung verwendet wird.</p>
-<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Einzelheiten finden Sie unter xxx.</p>
+<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Einzelheiten finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
 <p>Außerdem unterstützt Milvus andere Ähnlichkeitsmetriken für binäre Vektoren. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Metrik-Typen</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für binäre Vektoren und Indizes abgeschlossen sind, erstellen Sie eine Sammlung, die binäre Vektoren enthält. Das folgende Beispiel verwendet die Methode <code translate="no">create_collection</code>, um eine Sammlung mit dem Namen <code translate="no">my_collection</code> zu erstellen.</p>
 <div class="multipleCode">

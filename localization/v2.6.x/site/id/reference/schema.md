@@ -211,10 +211,12 @@ schema.addField(AddFieldReq.builder()
 <p>Bidang vektor jenis ini menyimpan daftar angka mengambang setengah presisi 16-bit dan biasanya berlaku untuk skenario pembelajaran mendalam atau komputasi berbasis GPU yang dibatasi memori atau bandwidth.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>Bidang vektor jenis ini menyimpan daftar angka floating-point 16-bit yang memiliki presisi lebih rendah namun memiliki rentang eksponen yang sama dengan Float32. Jenis data ini biasanya digunakan dalam skenario pembelajaran mendalam, karena mengurangi penggunaan memori tanpa memengaruhi akurasi secara signifikan.</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>Bidang vektor jenis ini menyimpan vektor yang terdiri dari bilangan bulat bertanda 8-bit (int8), dengan setiap komponen berkisar antara -128 hingga 127. Didesain untuk arsitektur pembelajaran mendalam yang terkuantisasi-seperti ResNet dan EfficientNet-secara substansial mengecilkan ukuran model dan meningkatkan kecepatan inferensi, namun dengan kehilangan presisi yang minimal. <strong>Catatan</strong>: Jenis vektor ini hanya didukung untuk indeks HNSW.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>Bidang vektor jenis ini menyimpan daftar 0 dan 1. Mereka berfungsi sebagai fitur ringkas untuk merepresentasikan data dalam pemrosesan gambar dan skenario pengambilan informasi.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>Bidang vektor jenis ini menyimpan daftar angka bukan nol dan nomor urutnya untuk mewakili penyematan vektor yang jarang.</p></li>
+<p>Bidang vektor jenis ini menyimpan daftar angka bukan nol dan nomor urutnya untuk merepresentasikan penyematan vektor yang jarang.</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields" class="common-anchor-header">Menambahkan Bidang Skalar<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"

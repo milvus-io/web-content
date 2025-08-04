@@ -929,7 +929,7 @@ summary: Aprenda a configurar queryNode para Milvus.
       <td>
         <li>maxReadConcurrentRatio es el ratio de concurrencia de la tarea de lectura (tarea de búsqueda y tarea de consulta).</li>      
         <li>La concurrencia de lectura máxima sería el valor de hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
-        <li>Por defecto es 2.0, lo que significa que la concurrencia máxima de lectura sería el valor de hardware.GetCPUNum * 2.</li>      
+        <li>Por defecto es 2.0, lo que significa que la concurrencia de lectura máxima sería el valor de hardware.GetCPUNum * 2.</li>      
         <li>La concurrencia máxima de lectura debe ser mayor o igual que 1, y menor o igual que hardware.GetCPUNum * 100.</li>      
         <li>(0, 100]</li>      </td>
       <td>1</td>
@@ -1136,7 +1136,7 @@ summary: Aprenda a configurar queryNode para Milvus.
   <thead>
     <tr>
       <th class="width80">Descripción</th>
-      <th class="width20">Valor predeterminado</th> 
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
@@ -1286,7 +1286,7 @@ summary: Aprenda a configurar queryNode para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Devuelve el tamaño máximo del lote    </td>
+      <td>        devuelve el tamaño máximo del lote de la consulta de flujo     </td>
       <td>134217728</td>
     </tr>
   </tbody>

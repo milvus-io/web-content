@@ -3,7 +3,7 @@ id: quickstart_with_attu.md
 summary: >-
   Attu 是 Milvus 的多合一、開放源碼管理工具。它具有直觀的圖形化使用者介面
   (GUI)，讓您輕鬆與資料庫互動。只需幾下點擊，您就可以直觀查看群集狀態、管理元資料、執行資料查詢等。
-title: 問題回答系統
+title: 快速開始使用 Attu - Milvus 的 Web UI
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">快速開始使用 Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ title: 問題回答系統
 <li>點擊 「連接 」訪問您的數據庫。</li>
 </ol>
 <blockquote>
-<p>您也可以在<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上連接完全管理的 Milvus。只需將<code translate="no">Milvus Address</code> 和<code translate="no">token</code> 設定為 Zilliz Cloud 實例的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint 和 API key</a>。</p>
+<p>您也可以在<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上連接完全管理的 Milvus。只需將<code translate="no">Milvus Address</code> 和<code translate="no">token</code> 設定為 Zilliz Cloud 實例的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端點和 API 金鑰</a>。</p>
 </blockquote>
 <ol start="4">
 <li>按一下以存取您的資料庫。</li>
@@ -156,7 +156,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>

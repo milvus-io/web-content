@@ -48,7 +48,7 @@ title: Generazione Aumentata del Recupero (RAG) con Milvus e Camel
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per prima cosa carichiamo il documento CAMEL da https://arxiv.org/pdf/2303.17760.pdf. Questi saranno i nostri dati di esempio locali.</p>
+    </button></h2><p>Carichiamo innanzitutto il documento CAMEL da https://arxiv.org/pdf/2303.17760.pdf. Questi saranno i nostri dati di esempio locali.</p>
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -79,7 +79,7 @@ response = requests.get(url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questa sezione imposteremo la nostra pipeline RAG personalizzata; prenderemo come esempio <code translate="no">VectorRetriever</code>. Impostiamo <code translate="no">OpenAIEmbedding</code> come modello di embedding e <code translate="no">MilvusStorage</code> come archivio.</p>
+    </button></h2><p>In questa sezione imposteremo la nostra pipeline RAG personalizzata, prendendo come esempio <code translate="no">VectorRetriever</code>. Impostiamo <code translate="no">OpenAIEmbedding</code> come modello di embedding e <code translate="no">MilvusStorage</code> come archivio.</p>
 <p>Per impostare l'embedding di OpenAI, dobbiamo impostare <code translate="no">OPENAI_API_KEY</code> come segue.</p>
 <pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -166,7 +166,7 @@ vector_retriever = VectorRetriever(
 <p>Le operazioni da eseguire sono le seguenti:</p>
 <ul>
 <li>Impostare i percorsi di input del contenuto, che possono essere percorsi locali o URL remoti.</li>
-<li>Impostare l'URL remoto e la chiave api per Milvus</li>
+<li>Impostare l'url remoto e la chiave api per Milvus</li>
 <li>Fornire una query</li>
 </ul>
 <p>La pipeline Auto RAG creerà collezioni per i percorsi di input del contenuto dati, il nome della collezione sarà impostato automaticamente in base al nome del percorso di input del contenuto, se la collezione esiste, effettuerà direttamente il recupero.</p>

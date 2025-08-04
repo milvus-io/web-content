@@ -134,7 +134,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
       <td>
         <li>Se deve criar um índice temporário para segmentos crescentes e segmentos selados ainda não indexados, melhorando o desempenho da pesquisa.</li>      
         <li>O Milvus acabará por selar e indexar todos os segmentos, mas a ativação desta opção optimiza o desempenho da pesquisa para consultas imediatas após a inserção de dados.</li>      
-        <li>O padrão é true, indicando que Milvus cria um índice temporário para segmentos crescentes e os segmentos selados que não são indexados nas pesquisas.</li>      </td>
+        <li>O padrão é true, indicando que o Milvus cria um índice temporário para os segmentos crescentes e os segmentos selados que não são indexados nas pesquisas.</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -457,7 +457,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
         <li>opções: async, sync, disable. </li>      
         <li>Especifica a necessidade de aquecimento do cache de pedaços. </li>      
         <li>1. Se definido como "sync" ou "async", os dados vectoriais originais serão carregados de forma síncrona/assíncrona na </li>      
-        <li>cache de pedaços durante o processo de carregamento. Esta abordagem tem o potencial de reduzir substancialmente a latência de consulta/pesquisa</li>      
+        <li>cache de bloco durante o processo de carregamento. Esta abordagem tem o potencial de reduzir substancialmente a latência de consulta/pesquisa</li>      
         <li>durante um período específico após o carregamento, embora acompanhada de um aumento simultâneo da utilização do disco;</li>      
         <li>2. Se definido como "disable" (desativar), os dados vectoriais originais só serão carregados para a cache de blocos durante a pesquisa/consulta.</li>      </td>
       <td>desativar</td>
@@ -636,7 +636,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
       <td>
         <li>Ativar o mapeamento de memória (mmap) para otimizar o tratamento de dados brutos em crescimento. </li>      
         <li>Ao ativar esse recurso, a sobrecarga de memória associada aos dados recém-adicionados ou modificados será significativamente minimizada. </li>      
-        <li>No entanto, essa otimização pode vir ao custo de uma ligeira diminuição na latência de consulta para os segmentos de dados afetados.</li>      </td>
+        <li>No entanto, esta otimização pode ter como custo uma ligeira diminuição da latência de consulta para os segmentos de dados afectados.</li>      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -1025,7 +1025,7 @@ summary: Saiba como configurar o queryNode para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Controla o tempo (muitos segundos) que a fila retém desde que a fila está vazia     </td>
+      <td>        Controla quanto tempo (muitos segundos) a fila retém desde que a fila está vazia     </td>
       <td>60</td>
     </tr>
   </tbody>

@@ -217,14 +217,14 @@
             "children": []
           },
           {
-            "label": "ストレージ／コンピューティング",
-            "id": "four_layers.md",
+            "label": "主要コンポーネント",
+            "id": "main_components.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "主要コンポーネント",
-            "id": "main_components.md",
+            "label": "ストリーミング・サービス",
+            "id": "streaming_service.md",
             "order": 2,
             "children": []
           },
@@ -279,21 +279,15 @@
         "children": []
       },
       {
-        "label": "一貫性レベル",
-        "id": "tune_consistency.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "インメモリーレプリカ",
         "id": "replica.md",
-        "order": 9,
+        "order": 8,
         "children": []
       },
       {
         "label": "用語解説",
         "id": "glossary.md",
-        "order": 10,
+        "order": 9,
         "children": []
       }
     ]
@@ -352,21 +346,27 @@
             "children": []
           },
           {
+            "label": "一貫性レベルの設定",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
             "label": "パーティションの管理",
             "id": "manage-partitions.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "エイリアスの管理",
             "id": "manage-aliases.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "ドロップ・コレクション",
             "id": "drop-collection.md",
-            "order": 9,
+            "order": 10,
             "children": []
           }
         ]
@@ -712,6 +712,12 @@
                 "id": "diskann.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "スキャン",
+                "id": "scann.md",
+                "order": 10,
+                "children": []
               }
             ]
           },
@@ -731,6 +737,12 @@
                 "label": "BIN_FLAT",
                 "id": "bin-flat.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -883,6 +895,12 @@
                 "label": "配列演算子",
                 "id": "array-operators.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "ランダム・サンプリング",
+                "id": "random-sampling.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -1082,6 +1100,26 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      {
+        "label": "ストレージの最適化",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "mmapを使用する",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "クラスタリング・コンパクション",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
           }
         ]
       }
@@ -1340,7 +1378,7 @@
             ]
           },
           {
-            "label": "Use Pulsar with Milvus",
+            "label": "Milvusでパルサーを使う",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1374,15 +1412,21 @@
             "children": []
           },
           {
+            "label": "スケール・スタンドアロン",
+            "id": "scale-standalone.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "HPAによるスケール",
             "id": "hpa.md",
-            "order": 1,
+            "order": 2,
             "children": []
           },
           {
             "label": "規模の依存",
             "id": "scale-dependencies.md",
-            "order": 2,
+            "order": 3,
             "children": []
           }
         ]
@@ -1479,7 +1523,7 @@
             ]
           },
           {
-            "label": "Trace",
+            "label": "トレース",
             "id": "trace",
             "order": 3,
             "isMenu": true,
@@ -1503,26 +1547,6 @@
             "label": "リソースグループの管理",
             "id": "resource_group.md",
             "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "ストレージの最適化",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "mmapを使用する",
-            "id": "mmap.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "クラスタリング・コンパクション",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -1797,7 +1821,7 @@
         "label": "モデル",
         "id": "models",
         "isMenu": true,
-        "order": 4,
+        "order": 9,
         "children": [
           {
             "label": "埋め込み",
@@ -1936,6 +1960,12 @@
             ]
           }
         ]
+      },
+      {
+        "label": "SDKコードヘルパー（MCP）",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 10,
+        "children": []
       }
     ]
   },
@@ -1983,6 +2013,12 @@
                 "label": "全文検索",
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "非同期検索",
+                "id": "langchain_milvus_async.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -2285,12 +2321,6 @@
             "label": "花火",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
-            "children": []
-          },
-          {
-            "label": "レプトン",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
             "children": []
           },
           {

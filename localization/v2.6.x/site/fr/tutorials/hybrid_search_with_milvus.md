@@ -69,7 +69,7 @@ docs_embeddings = ef(docs)
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
-<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Mise en place de la collection et de l'index Milvus</h3><p>Nous allons configurer la collection Milvus et créer des index pour les champs de vecteurs.</p>
+<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Configuration de la collection et de l'index Milvus</h3><p>Nous allons configurer la collection Milvus et créer des index pour les champs de vecteurs.</p>
 <div class="alert alert-info">
 <ul>
 <li>Définir l'uri comme un fichier local, par exemple "./milvus.db", est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
@@ -108,7 +108,7 @@ schema = CollectionSchema(fields)
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
@@ -308,7 +308,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Comment</span> créer un nouveau terminal et un nouvel interpréteur de commandes sous Linux en utilisant la<span style='color:red'> programmation</span> C<span style='color:red'>?</span></p>
 <p><span style='color:red'>Comment</span> créer un nouveau shell dans un nouveau terminal en utilisant la<span style='color:red'> programmation</span> C (terminal Linux)<span style='color:red'>?</span></p>
 <p>Quelle est la meilleure entreprise<span style='color:red'> à démarrer</span> à Hyderabad<span style='color:red'>?</span></p>
-<p>Quelle est la meilleure façon de<span style='color:red'> démarrer</span> une entreprise à Hyderabad<span style='color:red'>?</span></p>
+<p>Quelle est la meilleure façon de<span style='color:red'> démarrer une</span> entreprise à Hyderabad<span style='color:red'>?</span></p>
 <p>Quelles sont les mathématiques dont un débutant a besoin<span style='color:red'> pour</span> comprendre les algorithmes de<span style='color:red'> programmation</span> informatique<span style='color:red'>?</span> Quels sont les livres sur les algorithmes qui conviennent à un débutant complet<span style='color:red'>?</span></p>
 <p><span style='color:red'>Comment</span> faire en sorte que la vie vous convienne et qu'elle cesse de vous <span style='color:red'>maltraiter</span> mentalement et émotionnellement<span style='color:red'>?</span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide</h3><p>Pour savoir comment démarrer une démonstration en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus">'exemple d'application.</a></p>

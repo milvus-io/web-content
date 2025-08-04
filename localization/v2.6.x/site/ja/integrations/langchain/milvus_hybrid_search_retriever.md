@@ -18,7 +18,7 @@ title: Milvusハイブリッド検索レトリバー
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ハイブリッド検索は異なる検索パラダイムの長所を組み合わせ、検索精度とロバスト性を高めます。密なベクトル検索と疎なベクトル検索、そして複数の密なベクトル検索ストラテジーの組み合わせの両方の機能を活用し、多様なクエリに対する包括的で正確な検索を保証します。</p>
+    </button></h1><p>ハイブリッド検索は異なる検索パラダイムの長所を組み合わせ、検索精度とロバスト性を高めます。密なベクトル検索と疎なベクトル検索、そして複数の密なベクトル検索ストラテジーの組み合わせの両方の機能を活用し、多様なクエリに対して包括的で正確な検索を保証します。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
@@ -62,7 +62,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>テーマやジャンルごとに分類された架空のストーリーをまとめたサンプルドキュメントを用意する。</p>
+<p>テーマやジャンルごとに分類された架空のストーリーの要約であるサンプルドキュメントをいくつか用意する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
@@ -136,7 +136,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -146,7 +146,7 @@ vectorstore = Milvus.from_documents(
 </ul>
 </div>
 <p>上記のコードでは、<code translate="no">BM25BuiltInFunction</code> のインスタンスを定義し、<code translate="no">Milvus</code> オブジェクトに渡しています。<code translate="no">BM25BuiltInFunction</code> は、Milvus の <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a>の軽量ラッパークラスです。密＋疎ハイブリッド検索Milvusベクトルストアのインスタンスを初期化するために<code translate="no">OpenAIEmbeddings</code> 。</p>
-<p><code translate="no">BM25BuiltInFunction</code> Milvusはコーパスやトレーニングをクライアントに渡す必要がなく、Milvusサーバ側で自動的に処理されるため、ユーザは語彙やコーパスを気にする必要がない。さらに、ユーザーは<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">アナライザーを</a>カスタマイズして、BM25にカスタムテキスト処理を実装することもできる。</p>
+<p><code translate="no">BM25BuiltInFunction</code> Milvusでは、クライアントがコーパスやトレーニングを渡す必要がなく、Milvusサーバ側で自動的に処理されるため、ユーザは語彙やコーパスを気にする必要がない。さらに、ユーザーは<a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">アナライザーを</a>カスタマイズして、BM25にカスタムテキスト処理を実装することもできる。</p>
 <p><code translate="no">BM25BuiltInFunction</code> の詳細については<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Full-Text-Searchと</a> <a href="https://milvus.io/docs/full_text_search_with_langchain.md">LangChainとmilvusを使った全文検索を</a>ご参照ください。</p>
 <h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">オプション2：高密度でカスタマイズされたLangChainスパース埋め込みを使う</h3><p><code translate="no">langchain_milvus.utils.sparse</code> から<code translate="no">BaseSparseEmbedding</code> クラスを継承し、<code translate="no">embed_query</code> と<code translate="no">embed_documents</code> メソッドを実装することで、スパース埋め込み処理をカスタマイズすることができます。これにより、項頻度統計(<a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25など</a>)やニューラルネットワーク(<a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADEなど</a>)に基づくスパース埋め込み方法をカスタマイズすることができます。</p>
 <p>以下に例を示します：</p>
@@ -195,7 +195,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -232,7 +232,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -240,7 +240,7 @@ vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
-<p>この例では、3つのベクトル場があります。その中で、<code translate="no">sparse</code> は<code translate="no">BM25BuiltInFunction</code> の出力フィールドとして使用され、他の2つ、<code translate="no">dense1</code> と<code translate="no">dense2</code> は、2つの<code translate="no">OpenAIEmbeddings</code> モデルの出力フィールドとして自動的に割り当てられる（順番に基づく）。</p>
+<p>この例では、3つのベクトル場があります。その中で、<code translate="no">sparse</code> は<code translate="no">BM25BuiltInFunction</code> の出力フィールドとして使用され、他の2つ、<code translate="no">dense1</code> と<code translate="no">dense2</code> は、（順番に基づき）2つの<code translate="no">OpenAIEmbeddings</code> モデルの出力フィールドとして自動的に割り当てられる。</p>
 <h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">マルチ・ベクトル・フィールドのインデックス・パラメータの指定</h3><p>デフォルトでは、各ベクトル・フィールドのインデックス・タイプは、埋め込みまたは組み込み関数のタイプによって自動的に決定されます。しかし、検索性能を最適化するために、各ベクトル・フィールドのインデックス・タイプを指定することもできます。</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
@@ -264,7 +264,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -285,7 +285,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -358,7 +358,7 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>

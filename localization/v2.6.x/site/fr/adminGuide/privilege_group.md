@@ -189,7 +189,7 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>Insert</p></td>
+     <td><p>Insérer</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -269,9 +269,9 @@ summary: >-
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>CreateCollection</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>Créer une collection</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>

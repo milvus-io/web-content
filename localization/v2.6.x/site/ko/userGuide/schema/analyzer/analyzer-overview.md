@@ -21,12 +21,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>텍스트 처리에서 <strong>분석기는</strong> 원시 텍스트를 구조화되고 검색 가능한 형식으로 변환하는 중요한 구성 요소입니다. 각 분석기는 일반적으로 <strong>토큰화기와</strong> <strong>필터라는</strong> 두 가지 핵심 요소로 구성됩니다. 이들은 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및 검색을 위해 준비합니다.</p>
-<p>Milvus에서 분석기는 컬렉션 스키마에 <code translate="no">VARCHAR</code> 필드를 추가할 때 컬렉션 생성 중에 구성됩니다. 분석기가 생성한 토큰은 키워드 매칭을 위한 인덱스를 구축하는 데 사용하거나 전체 텍스트 검색을 위해 스파스 임베딩으로 변환할 수 있습니다. 자세한 내용은 <a href="/docs/ko/keyword-match.md">텍스트 검색</a> 또는 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
+    </button></h1><p>텍스트 처리에서 <strong>분석기는</strong> 원시 텍스트를 구조화된 검색 가능한 형식으로 변환하는 중요한 구성 요소입니다. 각 분석기는 일반적으로 <strong>토큰화기와</strong> <strong>필터라는</strong> 두 가지 핵심 요소로 구성됩니다. 이들은 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및 검색을 위해 준비합니다.</p>
+<p>Milvus에서 분석기는 컬렉션 스키마에 <code translate="no">VARCHAR</code> 필드를 추가할 때 컬렉션 생성 중에 구성됩니다. 분석기가 생성한 토큰은 키워드 매칭을 위한 인덱스를 구축하는 데 사용하거나 전체 텍스트 검색을 위해 스파스 임베딩으로 변환할 수 있습니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a>, <a href="/docs/ko/phrase-match.md">구문</a> <a href="/docs/ko/full-text-search.md">검색</a> 또는 <a href="/docs/ko/keyword-match.md">텍스트 검색을</a> 참조하세요.</p>
 <div class="alert note">
 <p>분석기를 사용하면 성능에 영향을 미칠 수 있습니다:</p>
 <ul>
-<li><p><strong>전체 텍스트 검색:</strong> 전체 텍스트 검색의 경우, 토큰화가 완료될 때까지 기다려야 하기 때문에 <strong>DataNode</strong> 및 <strong>QueryNode</strong> 채널은 데이터를 더 느리게 소비합니다. 따라서 새로 수집된 데이터를 검색에 사용할 수 있게 되는 데 시간이 더 오래 걸립니다.</p></li>
+<li><p><strong>전체 텍스트 검색:</strong> 전체 텍스트 검색의 경우 토큰화가 완료될 때까지 기다려야 하므로 <strong>DataNode</strong> 및 <strong>QueryNode</strong> 채널은 데이터를 더 느리게 소비합니다. 따라서 새로 수집된 데이터를 검색에 사용할 수 있게 되는 데 시간이 더 오래 걸립니다.</p></li>
 <li><p><strong>키워드 일치:</strong> 키워드 매칭의 경우, 인덱스를 구축하기 전에 토큰화가 완료되어야 하므로 인덱스 생성도 더 느려집니다.</p></li>
 </ul>
 </div>
@@ -79,9 +79,12 @@ summary: >-
 <li><p><strong>사용자 정의 분석기</strong>: 보다 고급 요구 사항이 필요한 경우, 사용자 정의 분석기를 사용하면 토큰화 도구와 0개 이상의 필터를 모두 지정하여 자신만의 구성을 정의할 수 있습니다. 이 수준의 사용자 지정은 텍스트 처리에 대한 정밀한 제어가 필요한 특수한 사용 사례에 특히 유용합니다.</p></li>
 </ul>
 <div class="alert note">
-<p>수집 생성 중에 분석기 구성을 생략하는 경우, Milvus는 기본적으로 모든 텍스트 처리에 <code translate="no">standard</code> 분석기를 사용합니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준을</a> 참조하세요.</p>
+<ul>
+<li>수집 생성 중에 분석기 구성을 생략하는 경우, Milvus는 기본적으로 모든 텍스트 처리에 <code translate="no">standard</code> 분석기를 사용합니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 참조하세요.</li>
+<li>최적의 검색 및 쿼리 성능을 위해 텍스트 데이터의 언어와 일치하는 분석기를 선택하세요. 예를 들어, <code translate="no">standard</code> 분석기는 다목적이지만 중국어, 일본어 또는 한국어와 같이 고유한 문법 구조를 가진 언어에는 적합하지 않을 수 있습니다. 이러한 경우 다음과 같은 언어 전용 분석기를 사용하거나 <a href="/docs/ko/chinese-analyzer.md"><code translate="no">chinese</code></a> 와 같은 언어 전용 분석기 또는 특수 토큰화 도구가 포함된 사용자 정의 분석기( <a href="/docs/ko/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a>) 및 필터를 사용하는 것이 정확한 토큰화와 더 나은 검색 결과를 보장하기 위해 적극 권장됩니다.</li>
+</ul>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">기본 제공 분석기</h3><p>Milvus의 기본 제공 분석기는 특정 토큰화기 및 필터로 미리 구성되어 있으므로 이러한 구성 요소를 직접 정의할 필요 없이 즉시 사용할 수 있습니다. 각 기본 제공 분석기는 사전 설정된 토큰화 도구와 필터가 포함된 템플릿 역할을 하며, 사용자 지정을 위한 선택적 매개변수를 제공합니다.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">기본 제공 분석기</h3><p>Milvus의 기본 제공 분석기는 특정 토큰화 도구와 필터로 미리 구성되어 있으므로 이러한 구성 요소를 직접 정의할 필요 없이 바로 사용할 수 있습니다. 각 기본 제공 분석기는 사전 설정된 토큰화 도구와 필터가 포함된 템플릿 역할을 하며, 사용자 지정을 위한 선택적 매개변수를 제공합니다.</p>
 <p>예를 들어 <code translate="no">standard</code> 기본 제공 분석기를 사용하려면 <code translate="no">standard</code> 이름을 <code translate="no">type</code> 로 지정하고 선택적으로 이 분석기 유형에 특정한 추가 구성(예: <code translate="no">stop_words</code>)을 포함하면 됩니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -755,3 +758,24 @@ err = client.CreateCollection(ctx,
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>분석기를 구성한 후에는 Milvus에서 제공하는 텍스트 검색 기능과 통합할 수 있습니다. 자세한 내용을 참조하세요:</p>
+<ul>
+<li><p><a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a></p></li>
+<li><p><a href="/docs/ko/keyword-match.md">텍스트 일치</a></p></li>
+<li><p><a href="/docs/ko/phrase-match.md">구문 일치</a></p></li>
+</ul>

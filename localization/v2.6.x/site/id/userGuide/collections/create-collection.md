@@ -520,8 +520,12 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Anda dapat mengatur properti untuk koleksi yang akan dibuat agar sesuai dengan layanan Anda. Properti yang berlaku adalah sebagai berikut.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Tetapkan Nomor Pecahan</h3><p>Pecahan adalah irisan horizontal dari sebuah koleksi. Setiap pecahan berhubungan dengan saluran input data. Setiap koleksi memiliki pecahan secara default. Anda dapat mengatur jumlah pecahan yang sesuai saat membuat koleksi berdasarkan keluaran yang diharapkan dan volume data yang akan dimasukkan ke dalam koleksi.</p>
-<p>Dalam kasus yang umum, pertimbangkan untuk meningkatkan jumlah pecahan sebanyak satu setiap kali throughput yang diharapkan meningkat sebesar 500 MB/detik atau volume data yang akan disisipkan meningkat sebesar 100 GB. Saran ini didasarkan pada pengalaman kami sendiri dan mungkin tidak sepenuhnya sesuai dengan skenario aplikasi Anda. Anda dapat menyetel angka ini agar sesuai dengan kebutuhan Anda sendiri atau menggunakan nilai default.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Tetapkan Nomor Pecahan</h3><p>Pecahan adalah irisan horizontal dari sebuah koleksi, dan setiap pecahan berhubungan dengan saluran masukan data. Secara default, setiap koleksi memiliki satu pecahan. Anda dapat menentukan jumlah pecahan saat membuat koleksi agar lebih sesuai dengan volume data dan beban kerja Anda.</p>
+<p>Sebagai panduan umum, pertimbangkan hal berikut saat mengatur jumlah pecahan:</p>
+<ul>
+<li><strong>Ukuran data:</strong> Praktik yang umum dilakukan adalah memiliki satu pecahan untuk setiap 200 juta entitas. Anda juga dapat memperkirakan berdasarkan ukuran data total, misalnya, menambahkan satu pecahan untuk setiap 100 GB data yang Anda rencanakan untuk dimasukkan.</li>
+<li><strong>Pemanfaatan simpul aliran:</strong> Jika instans Milvus Anda memiliki beberapa stream node, disarankan untuk menggunakan beberapa shard. Hal ini memastikan bahwa beban kerja penyisipan data didistribusikan ke seluruh stream node yang tersedia, mencegah beberapa node menganggur sementara yang lain kelebihan beban.</li>
+</ul>
 <p>Cuplikan kode berikut ini menunjukkan cara mengatur nomor pecahan ketika Anda membuat koleksi.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

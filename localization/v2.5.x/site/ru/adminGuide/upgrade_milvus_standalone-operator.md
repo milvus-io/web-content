@@ -173,7 +173,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Примените новую конфигурацию</h3><p>Выполните следующую команду, чтобы применить новую конфигурацию.</p>
 <pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/<span class="hljs-built_in">config</span>/samples/milvusupgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Проверьте состояние миграции метаданных</h3><p>Выполните следующую команду, чтобы проверить состояние миграции метаданных.</p>
+<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Проверьте состояние миграции метаданных</h3><p>Выполните следующую команду, чтобы проверить статус миграции метаданных.</p>
 <pre><code translate="no">kubectl <span class="hljs-keyword">describe</span> milvus <span class="hljs-keyword">release</span><span class="hljs-operator">-</span>name
 <button class="copy-code-btn"></button></code></pre>
 <p>Статус <code translate="no">ready</code> в выводе означает, что миграция метаданных прошла успешно.</p>

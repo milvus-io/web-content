@@ -96,7 +96,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">origin</code> (0公里）：您的当前位置，相关性最大 (1.0)。</p></li>
 <li><p><code translate="no">offset</code> (±300 m):您周围的 "满分区"--300 米内的所有餐厅都保持满分（1.0），确保附近的餐厅不会因为微小的距离差异而受到不必要的惩罚。</p></li>
 <li><p><code translate="no">scale</code> (±2公里）：相关性下降到衰减值的距离--2 公里外的餐厅相关性得分减半（0.5）。</p></li>
-<li><p><code translate="no">decay</code> (0.5):刻度距离上的分数--该参数主要控制分数随距离减小的速度。</p></li>
+<li><p><code translate="no">decay</code> (0.5):刻度距离上的得分--该参数主要控制得分随距离减小的速度。</p></li>
 </ul>
 <p>从曲线上可以看出，超过 2 公里的餐厅相关性会继续降低，但不会完全归零。即使是 4-5 公里以外的餐厅，也能保持最低限度的相关性，使优秀但距离较远的餐厅仍能出现在您的搜索结果中（尽管排名较低）。</p>
 <p>这种行为模仿了人们对距离相关性的自然思维方式--附近的地方是首选，但我们愿意去更远的地方寻找特别的选择。</p>
@@ -174,7 +174,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],  <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索</h3><p>衰减排序器还可以应用于结合多个向量场的混合搜索操作符：</p>

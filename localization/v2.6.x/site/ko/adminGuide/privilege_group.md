@@ -67,7 +67,7 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
 <p>다음 표에서는 각 기본 제공 권한 그룹에 포함된 권한에 대해 설명합니다.</p>
 <h3 id="Collection-level" class="common-anchor-header">컬렉션 수준</h3><ul>
 <li><p><strong>CollectionReadOnly(COLL_RO</strong>): 컬렉션 데이터를 읽을 수 있는 권한이 포함됩니다.</p></li>
-<li><p><strong>CollectionReadWrite(COLL_RW</strong>): 컬렉션 데이터를 읽고 쓸 수 있는 권한이 포함됩니다.</p></li>
+<li><p><strong>CollectionReadWrite(COLL_RW</strong>): 컬렉션 데이터를 읽고 쓸 수 있는 권한 포함</p></li>
 <li><p><strong>CollectionAdmin(COLL_ADMIN)</strong>: 컬렉션 데이터를 읽고 쓸 수 있는 권한과 컬렉션을 관리할 수 있는 권한을 포함합니다.</p></li>
 </ul>
 <p>아래 표에는 컬렉션 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나열되어 있습니다:</p>
@@ -268,8 +268,8 @@ summary: 권한을 부여하는 프로세스를 간소화하려면 여러 권한
    </tr>
    <tr>
      <td><p>CreateCollection</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>

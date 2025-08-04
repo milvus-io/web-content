@@ -6,7 +6,7 @@ summary: >-
   permite interagir facilmente com as suas bases de dados. Com apenas alguns
   cliques, pode visualizar o estado do seu cluster, gerir metadados, efetuar
   consultas de dados e muito mais.
-title: Sistema de resposta a perguntas
+title: Início rápido com o Attu - a interface Web do Milvus
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Início rápido com o Attu Desktop<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -113,7 +113,7 @@ title: Sistema de resposta a perguntas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Preparar os dados</h3><p>Utilizamos as páginas de FAQ da <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentação do Milvus 2.4.x</a> como conjunto de dados para este exemplo.</p>
+    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Preparar os dados</h3><p>Usamos as páginas de FAQ da <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentação do Milvus 2.4.x</a> como conjunto de dados para este exemplo.</p>
 <h4 id="Download-and-Extract-Data" class="common-anchor-header">Download e extração de dados:</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
@@ -159,7 +159,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
@@ -197,7 +197,7 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>O Attu fornece uma interface poderosa para visualizar e explorar relações de dados. Para examinar os pontos de dados inseridos e suas relações de similaridade, siga estas etapas:</p>
-<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>Realizar uma pesquisa</strong></h3><p>Navegue até a guia <strong>Pesquisa de vetor</strong> no Attu.</p>
+<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>Realizar uma pesquisa</strong></h3><p>Navegue até a guia <strong>Pesquisa de Vetor</strong> no Attu.</p>
 <ol>
 <li>Clique no botão <strong>Gerar dados aleatórios</strong> para criar consultas de teste.</li>
 <li>Clique em <strong>Pesquisar</strong> para obter resultados com base nos dados gerados.</li>

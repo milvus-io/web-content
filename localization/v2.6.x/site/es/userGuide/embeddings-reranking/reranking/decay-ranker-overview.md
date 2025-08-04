@@ -32,7 +32,7 @@ beta: Milvus 2.6.x
 <li><p>Una plataforma de comercio electrónico que potencie los productos de moda aunque sean ligeramente menos similares a la consulta de búsqueda.</p></li>
 </ul>
 <p>Todos estos escenarios comparten una necesidad común: equilibrar la similitud vectorial con otros factores numéricos como el tiempo, la distancia o la popularidad.</p>
-<p>Los clasificadores de decrecimiento de Milvus responden a esta necesidad ajustando las clasificaciones de búsqueda en función de los valores de los campos numéricos. Le permiten equilibrar la similitud vectorial con la "frescura", la "proximidad" u otras propiedades numéricas de sus datos, creando experiencias de búsqueda más intuitivas y contextualmente relevantes.</p>
+<p>Los clasificadores de decrecimiento de Milvus responden a esta necesidad ajustando las clasificaciones de búsqueda en función de los valores de los campos numéricos. Le permiten equilibrar la similitud vectorial con la "frescura", la "cercanía" u otras propiedades numéricas de sus datos, creando experiencias de búsqueda más intuitivas y contextualmente relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,7 +178,7 @@ beta: Milvus 2.6.x
 <li><p>Aplicaciones en las que los usuarios tienen un sentido intuitivo de la distancia</p></li>
 <li><p>Cuando una distancia moderada no debería penalizar gravemente los resultados</p></li>
 </ul></td>
-     <td><p>En una búsqueda de restaurantes, los locales de calidad situados a 3 km siguen siendo localizables, aunque con una clasificación inferior a las opciones cercanas</p></td>
+     <td><p>En una búsqueda de restaurantes, los locales de calidad situados a 3 km de distancia siguen siendo localizables, aunque con una clasificación inferior a las opciones cercanas</p></td>
    </tr>
    <tr>
      <td><p>Exponencial (<code translate="no">exp</code>)</p></td>
@@ -237,7 +237,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -325,7 +325,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar a la búsqueda híbrida</h3><p>Los decay rankers también pueden aplicarse a operaciones de búsqueda híbrida que combinan múltiples campos vectoriales:</p>

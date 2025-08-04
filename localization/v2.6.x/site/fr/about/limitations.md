@@ -46,7 +46,7 @@ summary: Apprenez à connaître les limites de l'utilisation de Milvus.
 <tr><td>Partition</td><td>255 caractères</td></tr>
 </tbody>
 </table>
-<h2 id="Naming-rules" class="common-anchor-header">Règles d'attribution des noms<button data-href="#Naming-rules" class="anchor-icon" translate="no">
+<h2 id="Naming-rules" class="common-anchor-header">Règles de dénomination<button data-href="#Naming-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +83,6 @@ summary: Apprenez à connaître les limites de l'utilisation de Milvus.
 </thead>
 <tbody>
 <tr><td>Collection</td><td>65,536</td></tr>
-<tr><td>Connexion / proxy</td><td>65,536</td></tr>
 </tbody>
 </table>
 <h2 id="Number-of-resources-in-a-collection" class="common-anchor-header">Nombre de ressources dans une collection<button data-href="#Number-of-resources-in-a-collection" class="anchor-icon" translate="no">

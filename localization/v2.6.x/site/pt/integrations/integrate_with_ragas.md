@@ -27,7 +27,7 @@ title: Avaliação com Ragas
         ></path>
       </svg>
     </button></h1><p>Este guia demonstra como utilizar o Ragas para avaliar um pipeline Retrieval-Augmented Generation (RAG) baseado no <a href="https://milvus.io/">Milvus</a>.</p>
-<p>O sistema RAG combina um sistema de recuperação com um modelo generativo para gerar novo texto com base num determinado pedido. O sistema começa por recuperar documentos relevantes de um corpus utilizando o Milvus e, em seguida, utiliza um modelo generativo para gerar novo texto com base nos documentos recuperados.</p>
+<p>O sistema RAG combina um sistema de recuperação com um modelo generativo para gerar um novo texto com base num determinado pedido. O sistema começa por recuperar documentos relevantes de um corpus utilizando o Milvus e, em seguida, utiliza um modelo generativo para gerar novo texto com base nos documentos recuperados.</p>
 <p><a href="https://docs.ragas.io/en/latest/index.html#">O Ragas</a> é um quadro que ajuda a avaliar as condutas RAG. Existem ferramentas e estruturas que ajudam a construir estas condutas, mas avaliá-las e quantificar o seu desempenho pode ser difícil. É aqui que entra o Ragas (Avaliação RAG).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +127,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -304,13 +304,13 @@ df
     <tr>
       <th>1</th>
       <td>Qual é a linguagem de programação usada para escrever...</td>
-      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos do Mil...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>O que deve ser garantido antes de executar a cobertura de...</td>
+      <td>O que deve ser assegurado antes de executar a cobertura de...</td>
       <td>[Cobertura de código\n\nAntes de submeter o seu pull ...</td>
       <td>Antes de executar a cobertura de código, deve ser...</td>
       <td>Antes de executar a cobertura de código, deve ser ...</td>

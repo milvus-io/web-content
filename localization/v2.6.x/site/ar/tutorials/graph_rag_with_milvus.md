@@ -18,10 +18,14 @@ title: الرسم البياني RAG مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <p>يُبرز التطبيق الواسع النطاق للنماذج اللغوية الكبيرة أهمية تحسين دقة وملاءمة استجاباتها. يعمل التوليد المعزّز للاسترجاع (RAG) على تعزيز النماذج بقواعد معرفية خارجية، مما يوفر المزيد من المعلومات السياقية ويخفف من مشاكل مثل الهلوسة والمعرفة غير الكافية. ومع ذلك، فإن الاعتماد فقط على نماذج RAG البسيطة له حدوده، خاصةً عند التعامل مع علاقات الكيانات المعقدة والأسئلة متعددة القفزات، حيث غالبًا ما يكافح النموذج لتقديم إجابات دقيقة.</p>
-<p>يوفر إدخال الرسوم البيانية المعرفية (KGs) في نظام RAG حلاً جديدًا. تقدم KGs الكيانات وعلاقاتها بطريقة منظمة، مما يوفر معلومات استرجاع أكثر دقة ويساعد RAG على التعامل بشكل أفضل مع مهام الإجابة عن الأسئلة المعقدة. لا يزال نظام KG-RAG في مراحله المبكرة، ولا يوجد إجماع على كيفية استرجاع الكيانات والعلاقات من KGs بشكل فعال أو كيفية دمج البحث عن التشابه المتجه مع هياكل الرسم البياني.</p>
+<p>يوفر إدخال الرسوم البيانية المعرفية (KGs) في نظام RAG حلاً جديدًا. تقدم KGs الكيانات وعلاقاتها بطريقة منظمة، مما يوفر معلومات استرجاع أكثر دقة ويساعد RAG على التعامل بشكل أفضل مع مهام الإجابة عن الأسئلة المعقدة. لا يزال نظام KG-RAG في مراحله المبكرة، ولا يوجد إجماع حول كيفية استرجاع الكيانات والعلاقات من KGs بشكل فعال أو كيفية دمج البحث عن التشابه المتجه مع هياكل الرسم البياني.</p>
 <p>في هذا الدفتر، نقدم في هذا الدفتر نهجًا بسيطًا ولكنه قوي لتحسين أداء هذا السيناريو بشكل كبير. وهو عبارة عن نموذج RAG بسيط مع استرجاع متعدد الاتجاهات ثم إعادة ترتيبها، ولكنه يطبق RAG Graph RAG منطقيًا، ويحقق أداءً متطورًا في التعامل مع الأسئلة متعددة القفزات. دعونا نرى كيف يتم تنفيذه.</p>
 <p>
   <span class="img-wrapper">
@@ -77,7 +81,7 @@ llm = ChatOpenAI(
 embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>بالنسبة للعوامل في MilvusClient:</p>
+<p>بالنسبة للوسيطات في MilvusClient:</p>
 <ul>
 <li>تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث أنها تستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
@@ -166,7 +170,7 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
 <li>الكيان هو الفاعل أو المفعول به في الثلاثية، لذلك نستخرجها مباشرةً من الثلاثيات.</li>
 <li>نقوم هنا ببناء مفهوم العلاقة من خلال الربط المباشر بين الفاعل والمصدر والمفعول به والمفعول به مع وضع مسافة بينهما.</li>
 </ul>
-<p>نقوم أيضًا بإعداد إملاء لتحويل معرف الكيان إلى معرف العلاقة، وإملاء آخر لتحويل معرف العلاقة إلى معرف المقطع لاستخدامه لاحقًا.</p>
+<p>نقوم أيضًا بإعداد إملاء لتعيين معرف الكيان إلى معرف العلاقة، وإملاء آخر لتعيين معرف العلاقة إلى معرف المقطع لاستخدامه لاحقًا.</p>
 <pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
 relationid_2_passageids = defaultdict(<span class="hljs-built_in">list</span>)
 
@@ -192,7 +196,7 @@ passages = []
             )
         relationid_2_passageids[relations.index(relation)].append(passage_id)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Insertion" class="common-anchor-header">إدراج البيانات</h3><p>إنشاء مجموعات ميلفوس للكيان والعلاقة والممر. يتم استخدام مجموعة الكيانات ومجموعة العلاقات كمجموعات رئيسية لبناء الرسم البياني في طريقتنا، بينما يتم استخدام مجموعة الممرات كمقارنة استرجاع RAG الساذجة أو لغرض مساعد.</p>
+<h3 id="Data-Insertion" class="common-anchor-header">إدراج البيانات</h3><p>إنشاء مجموعات ميلفوس للكيان والعلاقة والممر. يتم استخدام مجموعة الكيانات ومجموعة العلاقات كمجموعات رئيسية لبناء الرسم البياني في طريقتنا، بينما يتم استخدام مجموعة المقاطع كمقارنة استرجاع RAG الساذجة أو لغرض مساعد.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
 
 
@@ -202,7 +206,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -506,4 +510,4 @@ Answer from naive RAG: I don't know. The retrieved context does not provide info
 
 Answer from our method: The son of Euler's teacher, Daniel Bernoulli, made major contributions to fluid dynamics, probability, and statistics. He is most famous for Bernoulli’s principle, which describes the behavior of fluid flow and is fundamental to the understanding of aerodynamics.
 </code></pre>
-<p>كما نرى أن المقاطع التي تم استرجاعها من طريقة RAG الساذجة أخطأت في استرجاع مقطع أساسي صحيح مما أدى إلى إجابة خاطئة. أما المقاطع المسترجعة من طريقتنا فهي صحيحة، وتساعد في الحصول على إجابة دقيقة للسؤال.</p>
+<p>كما نرى أن المقاطع التي تم استرجاعها من طريقة RAG الساذجة أخطأت في استرجاع مقطع أساسي صحيح، مما أدى إلى إجابة خاطئة. أما المقاطع المسترجعة من طريقتنا فهي صحيحة، وتساعد في الحصول على إجابة دقيقة للسؤال.</p>

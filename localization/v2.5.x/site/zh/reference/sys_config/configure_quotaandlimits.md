@@ -89,7 +89,7 @@ summary: 了解如何为 Milvus 配置 quotaAndLimits。
     <tr>
       <td>
         <li>quotaCenterCollectInterval 是 quotaCenter</li>      
-        <li>收集代理、查询群集和数据群集指标的时间间隔。</li>      
+        <li>从代理、查询群集和数据群集收集指标的时间间隔。</li>      
         <li>秒，（0 ~ 65536）</li>      </td>
       <td>3</td>
     </tr>
@@ -894,7 +894,7 @@ summary: 了解如何为 Milvus 配置 quotaAndLimits。
   </thead>
   <tbody>
     <tr>
-      <td>        MB/秒，默认无限制      </td>
+      <td>        MB/s，默认无限制      </td>
       <td>-1</td>
     </tr>
   </tbody>

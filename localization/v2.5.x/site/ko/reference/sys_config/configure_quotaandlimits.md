@@ -88,7 +88,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   <tbody>
     <tr>
       <td>
-        <li>쿼터 센터 수집 간격은 쿼터 센터가</li>      
+        <li>쿼터 센터 수집 간격은 쿼터 센터에서</li>      
         <li>가 프록시, 쿼리 클러스터 및 데이터 클러스터에서 메트릭을 수집하는 시간 간격입니다.</li>      
         <li>초, (0 ~ 65536)</li>      </td>
       <td>3</td>
@@ -119,7 +119,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        속도 제한에서 순방향 데이터 할당 삭제 실패 시 재시도 시간      </td>
+      <td>        속도 제한에서 순방향 데이터 할당 삭제가 실패한 경우 재시도 시간      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -415,7 +415,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        DB 수준의 쿼터, 기본값 제한 없음, CreateCollection, DropCollection, LoadCollection, ReleaseCollection의 속도      </td>
+      <td>        DB 수준의 쿼터, 기본값 제한 없음, CreateCollection, DropCollection, LoadCollection, ReleaseCollection에 대한 속도      </td>
       <td>-1</td>
     </tr>
   </tbody>

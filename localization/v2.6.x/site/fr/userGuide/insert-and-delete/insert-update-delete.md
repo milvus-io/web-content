@@ -25,6 +25,11 @@ summary: >-
     </button></h1><p>Les entités d'une collection sont des enregistrements de données qui partagent le même ensemble de champs. Les valeurs des champs de chaque enregistrement de données forment une entité. Cette page explique comment insérer des entités dans une collection.</p>
 <div class="alert note">
 <p>Si vous ajoutez dynamiquement de nouveaux champs après la création de la collection et que vous ne spécifiez pas de valeurs pour ces champs lors de l'insertion d'entités, Milvus les remplit automatiquement avec leurs valeurs par défaut définies ou avec NULL si les valeurs par défaut ne sont pas définies. Pour plus de détails, voir <a href="/docs/fr/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p>
+<div class="alert note">
+<ul>
+<li><p><strong>Champs ajoutés après la création de la collection</strong>: Si vous ajoutez de nouveaux champs à une collection après sa création et que vous ne spécifiez pas de valeurs lors de l'insertion, Milvus les remplit automatiquement avec les valeurs par défaut définies ou NULL si aucune valeur par défaut n'est définie. Pour plus de détails, voir <a href="/docs/fr/add-fields-to-an-existing-collection.md">Ajouter des champs à une collection existante</a>.</p></li>
+<li><p><strong>Gestion des doublons</strong>: L'opération standard <code translate="no">insert</code> ne vérifie pas les doublons de clés primaires. L'insertion de données avec une clé primaire existante crée une nouvelle entité avec la même clé, ce qui entraîne une duplication des données et des problèmes d'application potentiels. Pour mettre à jour des entités existantes ou éviter les doublons, utilisez plutôt l'opération <strong><code translate="no">upsert</code></strong> pour mettre à jour les entités existantes ou éviter les doublons. Pour plus d'informations, reportez-vous à l'<a href="/docs/fr/upsert-entities.md">opération Upsert Entities</a>.</p></li>
+</ul>
 </div>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"

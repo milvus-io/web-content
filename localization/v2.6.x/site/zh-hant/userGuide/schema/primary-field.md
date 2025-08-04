@@ -36,7 +36,13 @@ summary: 主字段唯一識別一個實體。本頁介紹如何新增兩種不�
       </svg>
     </button></h2><p>在一個集合中，每個實體的主鍵應該是全局唯一的。當新增主字段時，你需要明確地設定它的資料類型為<strong>VARCHAR</strong>或<strong>INT64</strong>。將其資料類型設定為<strong>INT64</strong>表示主索引鍵應該是類似<code translate="no">12345</code> 的整數；將其資料類型設定為<strong>VARCHAR</strong>表示主索引鍵應該是類似<code translate="no">my_entity_1234</code> 的字串。</p>
 <p>你也可以啟用<strong>AutoID</strong>來使 Milvus 自動為傳入的實體分配主鍵。一旦你在你的集合中啟用了<strong>AutoID</strong>，在插入實體時不要包含主鍵。</p>
-<p>集合中的主欄位沒有預設值，也不能為空。</p>
+<p>集合中的主字段沒有預設值，也不能為空。</p>
+<div class="alert note">
+<ul>
+<li>使用集合中已存在的主索引鍵的標準<code translate="no">insert</code> 作業，不會覆蓋舊的項目。相反，它會以相同的主索引鍵建立一個新的、獨立的實體。這可能會導致意想不到的搜尋結果和資料冗餘。</li>
+<li>如果您的用例涉及更新現有資料，或您懷疑要插入的資料可能已經存在，則強烈建議使用 upsert 作業。如果主鍵存在，upsert 操作會智能地更新實體，如果不存在，則插入新的實體。如需詳細資訊，請參閱上<a href="/docs/zh-hant/upsert-entities.md">插入實體</a>。</li>
+</ul>
+</div>
 <h2 id="Use-Int64-Primary-Keys" class="common-anchor-header">使用 Int64 主鍵<button data-href="#Use-Int64-Primary-Keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +58,7 @@ summary: 主字段唯一識別一個實體。本頁介紹如何新增兩種不�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用 Int64 類型的主鍵，您需要設定<code translate="no">datatype</code> 為<code translate="no">DataType.INT64</code> ，並設定<code translate="no">is_primary</code> 為<code translate="no">true</code> 。如果您也需要 Milvus 為進入的實體分配主鍵，也請設定<code translate="no">auto_id</code> 為<code translate="no">true</code> 。</p>
+    </button></h2><p>要使用 Int64 類型的主鍵，你需要設定<code translate="no">datatype</code> 為<code translate="no">DataType.INT64</code> ，並設定<code translate="no">is_primary</code> 為<code translate="no">true</code> 。如果你也需要 Milvus 為進入的實體分配主鍵，也設定<code translate="no">auto_id</code> 為<code translate="no">true</code> 。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType

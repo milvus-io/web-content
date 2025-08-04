@@ -4,7 +4,7 @@ summary: >-
   Attu는 Milvus를 위한 올인원 오픈소스 관리 도구입니다. 직관적인 그래픽 사용자 인터페이스(GUI)를 갖추고 있어 데이터베이스와 쉽게
   상호 작용할 수 있습니다. 몇 번의 클릭만으로 클러스터 상태를 시각화하고, 메타데이터를 관리하고, 데이터 쿼리를 수행하는 등의 작업을 수행할
   수 있습니다.
-title: 질문 답변 시스템
+title: Attu로 빠르게 시작하기 - Milvus의 웹 UI
 ---
 <h1 id="Quick-Start-with-Attu-Desktop" class="common-anchor-header">Attu 데스크톱 빠른 시작<button data-href="#Quick-Start-with-Attu-Desktop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,7 +157,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>

@@ -126,7 +126,7 @@ docker compose up -d
 </ul></li>
 <li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法を参照してください：<ul>
 <li><a href="/docs/ja/v2.5.x/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/v2.5.x/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.5.x/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
 <li><a href="/docs/ja/v2.5.x/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>
 </ul>

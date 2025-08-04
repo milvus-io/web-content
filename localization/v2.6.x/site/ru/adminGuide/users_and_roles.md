@@ -219,7 +219,7 @@ client.list_users()
 <h3 id="Create-a-role" class="common-anchor-header">Создание роли</h3><p>В следующем примере показано, как создать роль с именем <code translate="no">role_a</code>.</p>
 <p>Имя роли должно соответствовать следующему правилу:</p>
 <ul>
-<li>Оно должно начинаться с буквы и может содержать только заглавные или строчные буквы, цифры и символы подчеркивания.</li>
+<li>Оно должно начинаться с буквы и может содержать только прописные или строчные буквы, цифры и символы подчеркивания.</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -277,5 +277,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Ниже приведен пример вывода. <code translate="no">admin</code> - это роль по умолчанию в Milvus. <code translate="no">role_a</code> - это новая роль, которая только что была создана.</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]
+<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
 <button class="copy-code-btn"></button></code></pre>

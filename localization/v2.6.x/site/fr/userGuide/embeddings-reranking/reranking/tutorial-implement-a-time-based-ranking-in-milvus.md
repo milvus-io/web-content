@@ -188,7 +188,7 @@ milvus_client.create_collection(
     collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Step-4-Prepare-sample-data" class="common-anchor-header">Étape 4 : Préparer les données d'échantillon<button data-href="#Step-4-Prepare-sample-data" class="anchor-icon" translate="no">
@@ -447,7 +447,7 @@ standard_results = milvus_client.search(
     anns_field=<span class="hljs-string">&quot;dense&quot;</span>,
     limit=<span class="hljs-number">7</span>,  <span class="hljs-comment"># Get all our articles</span>
     output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 print_search_results(standard_results, <span class="hljs-string">&quot;SEARCH RESULTS WITHOUT DECAY RANKING&quot;</span>)
 
@@ -465,7 +465,7 @@ gaussian_results = milvus_client.search(
     limit=<span class="hljs-number">7</span>,
     output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
     ranker=gaussian_ranker,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 print_search_results(gaussian_results, <span class="hljs-string">&quot;SEARCH RESULTS WITH GAUSSIAN DECAY RANKING&quot;</span>)
 
@@ -477,7 +477,7 @@ exponential_results = milvus_client.search(
     limit=<span class="hljs-number">7</span>,
     output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
     ranker=exponential_ranker,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 print_search_results(exponential_results, <span class="hljs-string">&quot;SEARCH RESULTS WITH EXPONENTIAL DECAY RANKING&quot;</span>)
 
@@ -489,7 +489,7 @@ linear_results = milvus_client.search(
     limit=<span class="hljs-number">7</span>,
     output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
     ranker=linear_ranker,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 print_search_results(linear_results, <span class="hljs-string">&quot;SEARCH RESULTS WITH LINEAR DECAY RANKING&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -823,7 +823,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
         limit=<span class="hljs-number">7</span>,
         output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
         ranker=scaled_ranker,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
     )
     
     print_search_results(scale_results, <span class="hljs-string">f&quot;SEARCH WITH GAUSSIAN DECAY (SCALE = <span class="hljs-subst">{scale_days}</span> DAYS)&quot;</span>)
@@ -944,7 +944,7 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
         limit=<span class="hljs-number">4</span>,
         output_fields=[<span class="hljs-string">&quot;headline&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;publish_date&quot;</span>],
         ranker=gaussian_ranker,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
     )
     print_search_results(test_results, <span class="hljs-string">f&quot;TOP 4 RESULTS FOR &#x27;<span class="hljs-subst">{test_query}</span>&#x27;&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -1028,6 +1028,6 @@ print_search_results(hybrid_exponential_results, <span class="hljs-string">&quot
 <li><p>les listes de produits de commerce électronique</p></li>
 <li><p>les flux de contenu des médias sociaux</p></li>
 <li><p>les bases de connaissances et les systèmes de documentation</p></li>
-<li><p>les dépôts de documents de recherche.</p></li>
+<li><p>les référentiels de documents de recherche.</p></li>
 </ul>
 <p>En comprenant les mathématiques qui sous-tendent les fonctions de décroissance et en expérimentant différents paramètres, vous pouvez affiner votre système de recherche afin d'obtenir l'équilibre optimal entre pertinence et fraîcheur pour votre cas d'utilisation spécifique.</p>

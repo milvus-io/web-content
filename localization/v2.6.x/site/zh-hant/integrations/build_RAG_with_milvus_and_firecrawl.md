@@ -2,7 +2,7 @@
 id: build_RAG_with_milvus_and_firecrawl.md
 summary: >-
   在本教程中，我們將教您如何使用 Milvus 和 Firecrawl 建立一個 Retrieval-Augmented Generation (RAG)
-  管道。此管道整合了 Firecrawl (用於網路資料搜刮)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。
+  管道。這個管道整合了 Firecrawl (用於網路資料搜刮)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。
 title: 使用 Milvus 和 Firecrawl 建立 RAG
 ---
 <h1 id="Building-RAG-with-Milvus-and-Firecrawl" class="common-anchor-header">使用 Milvus 和 Firecrawl 建立 RAG<button data-href="#Building-RAG-with-Milvus-and-Firecrawl" class="anchor-icon" translate="no">
@@ -183,7 +183,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

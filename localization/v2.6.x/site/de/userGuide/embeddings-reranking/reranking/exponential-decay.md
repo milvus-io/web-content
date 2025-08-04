@@ -112,7 +112,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (24 Stunden): Der Zeitraum, in dem die Relevanz auf den Abklingwert fällt - bei Nachrichten, die genau 24 Stunden alt sind, wird die Relevanzbewertung halbiert (0,5).</p></li>
 </ul>
 <p>Wie Sie der Kurve entnehmen können, sinkt die Relevanz von Nachrichten, die älter als 24 Stunden sind, weiter, erreicht aber nie ganz den Wert Null. Selbst Artikel, die mehrere Tage alt sind, behalten eine minimale Relevanz, so dass wichtige, aber ältere Nachrichten immer noch in Ihrem Feed erscheinen (wenn auch in einem niedrigeren Ranking).</p>
-<p>Dieses Verhalten ahmt nach, wie die Relevanz von Nachrichten typischerweise funktioniert - sehr aktuelle Nachrichten dominieren stark, aber wichtige ältere Nachrichten können immer noch durchbrechen, wenn sie für die Interessen des Nutzers außergewöhnlich relevant sind.</p>
+<p>Dieses Verhalten ahmt nach, wie die Relevanz von Nachrichten in der Regel funktioniert - sehr aktuelle Nachrichten dominieren stark, aber wichtige ältere Nachrichten können immer noch durchbrechen, wenn sie für die Interessen des Nutzers außergewöhnlich relevant sind.</p>
 <h2 id="Formula" class="common-anchor-header">Formel<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -187,7 +187,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;publish_time&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf hybride Suche anwenden</h3><p>Decay Rankers können auch auf hybride Suchoperationen angewendet werden, die mehrere Vektorfelder kombinieren:</p>

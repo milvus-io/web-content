@@ -208,10 +208,12 @@ schema.addField(AddFieldReq.builder()
 <p>此類型的向量欄位會保存 16 位半精度浮點數的清單，通常適用於記憶體或頻寬受限的深度學習或基於 GPU 的運算情境。</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>此類型的向量欄位會存放 16 位元浮點數的清單，這些浮點數的精確度降低，但指數範圍與 Float32 相同。這種類型的資料常用於深度學習情境，因為它可以減少記憶體使用量，卻不會顯著影響精確度。</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>此類型的向量欄位會儲存由 8 位元有符號整數 (int8) 組成的向量，每個元件的範圍為 -128 到 127。它專為量化深度學習架構 (例如 ResNet 和 EfficientNet) 量身打造，可大幅縮小模型大小並提升推論速度，同時只會造成極小的精確度損失。<strong>注意</strong>：此向量類型僅支援 HNSW 索引。</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
-<p>此類型的向量欄位會存放 0 和 1 的清單。在影像處理和資訊檢索的情境中，它們是表示資料的精簡特徵。</p></li>
+<p>此類型的向量欄位持有 0 和 1 的清單。在影像處理和資訊檢索的情況下，它們可作為表示資料的精簡特徵。</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>此類型的向量欄位會存放非零數字清單及其序列號，以表示稀疏向量內嵌。</p></li>
+<p>此類型的向量欄位可保存非零數字清單及其序列號，以表示稀疏向量內嵌。</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields" class="common-anchor-header">新增標量欄位<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,7 +230,7 @@ schema.addField(AddFieldReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在常見的情況下，您可以使用標量欄位來儲存 Milvus 所儲存的向量內嵌的元資料，並利用元資料過濾功能來進行 ANN 搜尋，以提高搜尋結果的正確性。Zilliz Cloud 支援多種標量欄位類型，包括<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、<strong>Float</strong>、<strong>Double</strong>、<strong>Array</strong> 及<strong>JSON</strong>。</p>
+    </button></h2><p>在一般情況下，您可以使用標量欄位來儲存 Milvus 所儲存的向量內嵌的元資料，並利用元資料過濾功能來進行 ANN 搜尋，以提高搜尋結果的正確性。Zilliz Cloud 支援多種標量欄位類型，包括<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、<strong>Float</strong>、<strong>Double</strong>、<strong>Array</strong> 及<strong>JSON</strong>。</p>
 <h3 id="Add-String-Fields" class="common-anchor-header">新增字串欄位</h3><p>在 Milvus 中，您可以使用 VarChar 欄位來儲存字串。關於 VarChar 欄位的更多資訊，請參考<a href="/docs/zh-hant/string.md">String Field</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

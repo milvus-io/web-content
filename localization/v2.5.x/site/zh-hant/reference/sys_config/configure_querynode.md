@@ -250,7 +250,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        建立臨時索引與 CPU 數量並行匹配的比率      </td>
+      <td>        建立臨時索引與 CPU 數量平行匹配的比率      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -810,7 +810,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        等待延遲載入請求資源的重試間隔 (毫秒)，預設為 2 秒   </td>
+      <td>        等待延遲載入請求資源的重試間隔 (以毫秒為單位)，預設為 2 秒   </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -1054,7 +1054,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        使用 user-task-polling 策略時，啟用交叉使用者群組。(如果使用者的任務不能相互合併，請停用)      </td>
+      <td>        使用 user-task-polling 策略時，啟用交叉使用者群組。(如果使用者的任務不能互相合併，請停用)      </td>
       <td>假</td>
     </tr>
   </tbody>

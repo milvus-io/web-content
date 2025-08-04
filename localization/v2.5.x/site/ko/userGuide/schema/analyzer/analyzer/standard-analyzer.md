@@ -5,7 +5,6 @@ summary: >-
   표준 분석기는 Milvus의 기본 분석기로, 분석기를 지정하지 않으면 텍스트 필드에 자동으로 적용됩니다. 문법 기반 토큰화를 사용하므로
   대부분의 언어에 효과적입니다.
 ---
-
 <h1 id="Standard-Analyzer" class="common-anchor-header">표준 분석기<button data-href="#Standard-Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +191,6 @@ sample_text = <span class="hljs-string">&quot;The Milvus vector database is buil
 result = client.run_analyzer(sample_text, analyzer_params)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;

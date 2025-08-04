@@ -1155,7 +1155,7 @@ summary: Pelajari cara mengonfigurasi kuotaAndLimits untuk Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.max">
   <thead>
     <tr>
-      <th class="width80">Keterangan</th>
+      <th class="width80">Deskripsi</th>
       <th class="width20">Nilai Default</th> 
     </tr>
   </thead>

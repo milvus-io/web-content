@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pencarian vektor tradisional memberi peringkat hasil murni berdasarkan kemiripan matematis-seberapa dekat vektor cocok dalam ruang dimensi tinggi. Meskipun efisien, pendekatan ini sering kali melewatkan relevansi semantik yang sebenarnya. Pertimbangkan untuk mencari <strong>"praktik terbaik untuk pengoptimalan basis data":</strong> Anda mungkin menerima dokumen dengan kemiripan vektor yang tinggi yang sering menyebutkan istilah-istilah ini, tetapi tidak benar-benar memberikan strategi pengoptimalan yang dapat ditindaklanjuti.</p>
+    </button></h1><p>Pencarian vektor tradisional memberi peringkat hasil murni berdasarkan kemiripan matematis-seberapa dekat vektor cocok dalam ruang dimensi tinggi. Meskipun efisien, pendekatan ini sering kali melewatkan relevansi semantik yang sebenarnya. Pertimbangkan untuk mencari <strong>"praktik terbaik untuk pengoptimalan basis data":</strong> Anda mungkin menerima dokumen dengan kemiripan vektor yang tinggi yang sering menyebutkan istilah-istilah ini, tetapi tidak memberikan strategi pengoptimalan yang dapat ditindaklanjuti.</p>
 <p>Model Ranker mengubah pencarian Milvus dengan mengintegrasikan model bahasa tingkat lanjut yang memahami hubungan semantik antara kueri dan dokumen. Alih-alih hanya mengandalkan kemiripan vektor, model ini mengevaluasi makna dan konteks konten untuk memberikan hasil yang lebih cerdas dan relevan.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,6 +202,12 @@ model_ranker = Function(
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
+     <td><p><code translate="no">params</code></p></td>
+     <td><p>Ya</p></td>
+     <td><p>Kamus yang berisi konfigurasi untuk fungsi pemeringkatan ulang berbasis model. Parameter yang tersedia (kunci) bervariasi tergantung pada penyedia (<code translate="no">tei</code> atau <code translate="no">vllm</code>). Lihat <a href="/docs/id/vllm-ranker.md">vLLM Ranker</a> atau <a href="/docs/id/tei-ranker.md">TEI Ranker</a> untuk detail lebih lanjut.</p></td>
+     <td><p>{...}</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Ya</p></td>
      <td><p>Harus diatur ke <code translate="no">"model"</code> untuk mengaktifkan pemeringkatan ulang model.</p></td>
@@ -241,7 +247,7 @@ results = client.search(
     <span class="hljs-built_in">limit</span>=10,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Menerapkan ke pencarian hibrida</h3><p>Pemeringkat model juga dapat diterapkan pada operasi pencarian hibrida yang menggabungkan beberapa bidang vektor:</p>

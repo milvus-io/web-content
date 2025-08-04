@@ -304,7 +304,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Rapport de gigue de la proportion de scellement du segment, valeur par défaut 0,1(10%), si la proportion de scellement est de 12%, avec gigue=0,1, le rapport appliqué sera de 10,8~12%.      </td>
+      <td>        Rapport de gigue de la proportion de scellement du segment, valeur par défaut 0.1(10%), si la proportion de scellement est de 12%, avec gigue=0.1, le rapport appliqué sera de 10.8~12%.      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -475,7 +475,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </button></h2><table id="dataCoord.segment.maxBinlogFileNumber">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
@@ -635,7 +635,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        si la mise à jour automatique de l'index des segments vers la version du moteur d'indexation est nécessaire      </td>
+      <td>        si la mise à jour automatique de l'index du segment vers la version du moteur d'indexation est nécessaire      </td>
       <td>faux</td>
     </tr>
   </tbody>
@@ -1687,7 +1687,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        nombre de goroutines simultanées pour supprimer les objets s3 abandonnés      </td>
+      <td>        nombre de goroutines concurrentes pour supprimer les objets s3 abandonnés      </td>
       <td>32</td>
     </tr>
   </tbody>

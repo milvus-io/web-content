@@ -18,11 +18,15 @@ title: График RAG с помощью Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <p>Широкое применение больших языковых моделей подчеркивает важность повышения точности и релевантности их ответов. Технология Retrieval-Augmented Generation (RAG) расширяет модели за счет внешних баз знаний, предоставляя больше контекстной информации и смягчая такие проблемы, как галлюцинации и недостаточные знания. Однако опора исключительно на простые парадигмы RAG имеет свои ограничения, особенно при работе со сложными отношениями между сущностями и многоходовыми вопросами, когда модель часто не может дать точный ответ.</p>
 <p>Внедрение графов знаний (ГЗ) в систему RAG предлагает новое решение. Графы знаний представляют сущности и их отношения в структурированном виде, предоставляя более точную поисковую информацию и помогая RAG лучше справляться со сложными задачами ответа на вопросы. KG-RAG все еще находится на ранней стадии развития, и пока нет единого мнения о том, как эффективно извлекать сущности и отношения из KG или как интегрировать векторный поиск сходства с графовыми структурами.</p>
-<p>В этой тетради мы представляем простой, но мощный подход, позволяющий значительно улучшить производительность этого сценария. Это простая парадигма RAG с многоходовым поиском и последующим ранжированием, но она логически реализует Graph RAG и достигает современной производительности при обработке многоходовых вопросов. Давайте посмотрим, как это реализовано.</p>
+<p>В этой тетради мы представляем простой, но мощный подход, позволяющий значительно улучшить производительность этого сценария. Это простая парадигма RAG с многоходовым поиском и последующим ранжированием, но она логически реализует Graph RAG и достигает самой современной производительности при обработке многоходовых вопросов. Давайте посмотрим, как это реализовано.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
@@ -99,7 +103,7 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Подготовка данных</h3><p>В качестве примера мы будем использовать нано-набор данных, в котором представлены отношения между семейством Бернулли и Эйлера. Наноданные содержат 4 отрывка и набор соответствующих триплетов, где каждый триплет содержит субъект, предикат и объект. На практике вы можете использовать любой подход для извлечения триплетов из вашего собственного корпуса.</p>
+    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Подготовка данных</h3><p>В качестве примера мы будем использовать нано-набор данных, в котором представлены отношения между семейством Бернулли и Эйлера. Наноданные содержат 4 отрывка и набор соответствующих триплетов, где каждый триплет содержит субъект, предикат и объект. На практике вы можете использовать любой подход для извлечения триплетов из своего собственного корпуса.</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -202,7 +206,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 

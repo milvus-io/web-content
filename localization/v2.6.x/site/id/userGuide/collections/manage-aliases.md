@@ -1,11 +1,11 @@
 ---
 id: manage-aliases.md
-title: Kelola Alias
+title: Mengelola Alias
 summary: >-
   Milvus menyediakan kemampuan manajemen alias. Halaman ini mendemonstrasikan
   prosedur untuk membuat, mendaftarkan, mengubah, dan menghapus alias.
 ---
-<h1 id="Manage-Aliases" class="common-anchor-header">Kelola Alias<button data-href="#Manage-Aliases" class="anchor-icon" translate="no">
+<h1 id="Manage-Aliases" class="common-anchor-header">Mengelola Alias<button data-href="#Manage-Aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus menyediakan kemampuan manajemen alias. Halaman ini mendemonstrasikan prosedur untuk membuat, mendaftarkan, mengubah, dan menghapus alias.</p>
-<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Di Milvus, alias adalah nama sekunder yang dapat diubah untuk sebuah koleksi. Menggunakan alias menyediakan lapisan abstraksi yang memungkinkan Anda untuk secara dinamis beralih di antara koleksi tanpa mengubah kode aplikasi Anda. Hal ini sangat berguna dalam lingkungan produksi untuk pembaruan data yang mulus, pengujian A/B, dan tugas operasional lainnya.</p>
+<p>Halaman ini mendemonstrasikan cara membuat, membuat daftar, menetapkan ulang, dan menghapus alias koleksi.</p>
+<h2 id="Why-Use-an-Alias" class="common-anchor-header">Mengapa Menggunakan Alias?<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +37,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat membuat alias untuk koleksi Anda. Sebuah koleksi dapat memiliki beberapa alias, namun koleksi tidak dapat berbagi alias.</p>
-<p>Setelah menerima permintaan terhadap sebuah koleksi, Milvus akan mencari lokasi koleksi berdasarkan nama yang diberikan. Jika koleksi dengan nama yang diberikan tidak ada, Milvus akan terus mencari nama yang diberikan sebagai nama alias. Anda dapat menggunakan alias koleksi untuk menyesuaikan kode Anda dengan skenario yang berbeda.</p>
+    </button></h2><p>Manfaat utama menggunakan alias adalah untuk memisahkan aplikasi klien Anda dari nama koleksi fisik tertentu.</p>
+<p>Bayangkan Anda memiliki aplikasi langsung yang menanyakan koleksi bernama <code translate="no">prod_data</code>. Ketika Anda perlu memperbarui data yang mendasarinya, Anda dapat melakukan pembaruan tanpa gangguan layanan apa pun. Alur kerjanya adalah:</p>
+<ol>
+<li><strong>Buat Koleksi Baru</strong>: Buat koleksi baru, misalnya, <code translate="no">prod_data_v2</code>.</li>
+<li><strong>Siapkan Data</strong>: Memuat dan mengindeks data baru di <code translate="no">prod_data_v2</code>.</li>
+<li><strong>Ganti Alias</strong>: Setelah koleksi baru siap untuk dilayani, alihkan alias <code translate="no">prod_data</code> secara atomis dari koleksi lama ke <code translate="no">prod_data_v2</code>.</li>
+</ol>
+<p>Aplikasi Anda terus mengirim permintaan ke alias <code translate="no">prod_data</code>, tanpa mengalami waktu henti. Mekanisme ini memungkinkan pembaruan tanpa hambatan dan menyederhanakan operasi seperti penerapan biru-hijau untuk layanan pencarian vektor Anda.</p>
+<p><strong>Properti Utama Alias:</strong></p>
+<ul>
+<li>Sebuah koleksi dapat memiliki beberapa alias.</li>
+<li>Sebuah alias hanya dapat menunjuk ke satu koleksi pada satu waktu.</li>
+<li>Ketika memproses sebuah permintaan, Milvus pertama-tama memeriksa apakah koleksi dengan nama yang diberikan ada. Jika tidak, Milvus akan memeriksa apakah nama tersebut merupakan alias untuk sebuah koleksi.</li>
+</ul>
 <h2 id="Create-Alias" class="common-anchor-header">Membuat Alias<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -216,7 +229,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Potongan kode berikut ini mendemonstrasikan prosedur untuk membuat daftar alias yang dialokasikan ke koleksi tertentu.</p>
+    </button></h2><p>Potongan kode berikut ini menunjukkan prosedur untuk membuat daftar alias yang dialokasikan ke koleksi tertentu.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>

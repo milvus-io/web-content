@@ -24,7 +24,7 @@ title: Milvus 및 Fireworks AI로 RAG 구축하기
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://fireworks.ai/">Fireworks AI는</a> 업계 최고의 속도와 모델 실행 및 커스터마이징을 위한 생산 준비성을 제공하는 생성형 AI 추론 플랫폼입니다. Fireworks AI는 서버리스 모델, 온디맨드 배포, 미세 조정 기능 등 다양한 생성형 AI 서비스를 제공합니다. 대규모 언어 모델(LLM) 및 임베딩 모델을 포함한 다양한 AI 모델을 배포할 수 있는 포괄적인 환경을 제공합니다. Fireworks AI는 수많은 모델을 통합하여 사용자가 대규모 인프라 설정 없이도 이러한 리소스에 쉽게 액세스하고 활용할 수 있도록 지원합니다.</p>
+<p><a href="https://fireworks.ai/">Fireworks AI는</a> 업계 최고의 속도와 모델 실행 및 커스터마이징을 위한 생산 준비성을 제공하는 생성형 AI 추론 플랫폼입니다. Fireworks AI는 서버리스 모델, 온디맨드 배포, 미세 조정 기능 등 다양한 생성형 AI 서비스를 제공합니다. 대규모 언어 모델(LLM) 및 임베딩 모델을 포함한 다양한 AI 모델을 배포할 수 있는 포괄적인 환경을 제공합니다. Fireworks AI는 수많은 모델을 통합하여 사용자가 광범위한 인프라 설정 없이도 이러한 리소스에 쉽게 액세스하고 활용할 수 있도록 지원합니다.</p>
 <p>이 튜토리얼에서는 Milvus와 Fireworks AI를 사용하여 RAG(검색 증강 생성) 파이프라인을 구축하는 방법을 보여드립니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비 사항<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,7 +133,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>텍스트 줄을 반복하여 임베딩을 만든 다음 데이터를 Milvus에 삽입합니다.</p>

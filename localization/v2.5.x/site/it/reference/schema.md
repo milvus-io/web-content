@@ -7,7 +7,6 @@ summary: >-
   comprendere lo schema delle raccolte e a progettare un esempio di schema per
   conto proprio.
 ---
-
 <h1 id="Schema-Explained" class="common-anchor-header">Schema spiegato<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +45,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomia della progettazione dello schema</span> </span></p>
-<p>La progettazione del modello di dati di un sistema di ricerca comporta l'analisi delle esigenze aziendali e l'astrazione delle informazioni in un modello di dati espresso in forma di schema. Ad esempio, la ricerca di un testo deve essere "indicizzata" convertendo la stringa letterale in un vettore attraverso l'"embedding" e consentendo la ricerca vettoriale. Oltre a questo requisito essenziale, può essere necessario memorizzare altre proprietà, come la data di pubblicazione e l'autore. Questi metadati consentono di affinare le ricerche semantiche attraverso un filtro, restituendo solo i testi pubblicati dopo una data specifica o da un particolare autore. È anche possibile recuperare questi scalari con il testo principale per rendere il risultato della ricerca nell'applicazione. A ciascuno di essi deve essere assegnato un identificatore unico per organizzare questi pezzi di testo, espresso come un numero intero o una stringa. Questi elementi sono essenziali per ottenere una logica di ricerca sofisticata.</p>
+<p>La progettazione del modello di dati di un sistema di ricerca comporta l'analisi delle esigenze aziendali e l'astrazione delle informazioni in un modello di dati espresso in forma di schema. Ad esempio, la ricerca di un testo deve essere "indicizzata" convertendo la stringa letterale in un vettore attraverso l'"embedding" e consentendo la ricerca vettoriale. Oltre a questo requisito essenziale, può essere necessario memorizzare altre proprietà, come la data di pubblicazione e l'autore. Questi metadati consentono di affinare le ricerche semantiche attraverso un filtro, restituendo solo i testi pubblicati dopo una data specifica o da un particolare autore. È anche possibile recuperare questi scalari con il testo principale per rendere il risultato della ricerca nell'applicazione. A ciascuno di essi deve essere assegnato un identificatore univoco per organizzare questi pezzi di testo, espresso come un numero intero o una stringa. Questi elementi sono essenziali per ottenere una logica di ricerca sofisticata.</p>
 <p>Fare riferimento a <a href="/docs/it/v2.5.x/schema-hands-on.md">Schema Design Hands-On</a> per capire come creare uno schema ben progettato.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Creare uno schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +69,6 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
@@ -108,40 +106,31 @@ schema := entity.NewSchema()
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
     datatype=DataType.INT64,
-    <span class="hljs-comment"># highlight-start</span>
-    is_primary=<span class="hljs-literal">True</span>,
-    auto_id=<span class="hljs-literal">False</span>,
-    <span class="hljs-comment"># highlight-end</span>
+<span class="highlighted-comment-line">    is_primary=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">    auto_id=<span class="hljs-literal">False</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; 
 
 schema.addField(AddFieldReq.builder()
-.fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
-.dataType(DataType.Int64)
-<span class="hljs-comment">// highlight-start</span>
-.isPrimaryKey(<span class="hljs-literal">true</span>)
-.autoID(<span class="hljs-literal">false</span>)
-<span class="hljs-comment">// highlight-end</span>
-.build());
+        .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
+        .dataType(DataType.Int64)
+<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)</span>
+<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)</span>
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
-    <span class="hljs-comment">// highlight-start</span>
-    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span></span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
-    <span class="hljs-comment">// highlight-start</span>
-    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
-    WithIsAutoID(<span class="hljs-literal">false</span>),
-    <span class="hljs-comment">// highlight-end</span>
+<span class="highlighted-comment-line">    WithIsPrimaryKey(<span class="hljs-literal">true</span>).</span>
+<span class="highlighted-comment-line">    WithIsAutoID(<span class="hljs-literal">false</span>),</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{
@@ -181,28 +170,24 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
     datatype=DataType.FLOAT_VECTOR,
-    <span class="hljs-comment"># highlight-next-line</span>
-    dim=<span class="hljs-number">5</span>
+<span class="highlighted-wrapper-line">    dim=<span class="hljs-number">5</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)
         .dataType(DataType.FloatVector)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .dimension(<span class="hljs-number">5</span>)
+<span class="highlighted-wrapper-line">        .dimension(<span class="hljs-number">5</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span></span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
     WithDataType(entity.FieldTypeFloatVector).
-    <span class="hljs-comment">// highlight-next-line</span>
-    WithDim(<span class="hljs-number">5</span>),
+<span class="highlighted-wrapper-line">    WithDim(<span class="hljs-number">5</span>),</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
@@ -214,15 +199,14 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<p>Il parametro <code translate="no">dim</code> nei frammenti di codice sopra riportati indica la dimensionalità degli embeddings vettoriali da contenere nel campo vettoriale. Il valore <code translate="no">FLOAT_VECTOR</code> indica che il campo vettoriale contiene una lista di numeri fluttuanti a 32 bit, solitamente utilizzati per rappresentare gli antilogaritmi:</p>
+<p>Il parametro <code translate="no">dim</code> nei frammenti di codice sopra riportati indica la dimensionalità degli embeddings vettoriali da contenere nel campo vettoriale. Il valore <code translate="no">FLOAT_VECTOR</code> indica che il campo vettoriale contiene un elenco di numeri fluttuanti a 32 bit, solitamente utilizzati per rappresentare gli antilogaritmi:</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>Un campo vettoriale di questo tipo contiene un elenco di numeri flottanti a mezza precisione a 16 bit e di solito si applica a scenari di deep learning o di calcolo basato su GPU con limitazioni di memoria o di larghezza di banda.</p></li>
@@ -255,22 +239,19 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
     datatype=DataType.VARCHAR,
-    <span class="hljs-comment"># highlight-next-line</span>
-    max_length=<span class="hljs-number">512</span>
+<span class="highlighted-wrapper-line">    max_length=<span class="hljs-number">512</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
         .dataType(DataType.VarChar)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .maxLength(<span class="hljs-number">512</span>)
+<span class="highlighted-wrapper-line">        .maxLength(<span class="hljs-number">512</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
-    <span class="hljs-comment">// highlight-next-line</span>
-    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span></span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
@@ -287,15 +268,14 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h3 id="Add-Number-Fields" class="common-anchor-header">Aggiungere campi numerici</h3><p>I tipi di numeri supportati da Milvus sono <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> e <code translate="no">Double</code>. Per ulteriori informazioni sui campi numerici, consultare <a href="/docs/it/v2.5.x/number.md">Campo numerico</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -324,16 +304,15 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h3 id="Add-Boolean-Fields" class="common-anchor-header">Aggiungere campi booleani</h3><p>Milvus supporta i campi booleani. I seguenti frammenti di codice mostrano come aggiungere un campo booleano.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -362,17 +341,16 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h3 id="Add-JSON-fields" class="common-anchor-header">Aggiungere campi JSON</h3><p>Un campo JSON di solito memorizza dati JSON semistrutturati. Per maggiori informazioni sui campi JSON, fare riferimento a <a href="/docs/it/v2.5.x/use-json-fields.md">Campo JSON</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -401,18 +379,17 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>,
-<span class="hljs-variable">$jsonField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h3 id="Add-Array-Fields" class="common-anchor-header">Aggiungere campi array</h3><p>Un campo array memorizza un elenco di elementi. I tipi di dati di tutti gli elementi di un campo array devono essere gli stessi. Per ulteriori informazioni sui campi array, consultare <a href="/docs/it/v2.5.x/array_data_type.md">Campo array</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -457,15 +434,15 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>,
-<span class="hljs-variable">$jsonField</span>,
-<span class="hljs-variable">$arrayField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>,
+        <span class="hljs-variable">$arrayField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

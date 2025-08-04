@@ -39,7 +39,7 @@ Na versão atual, todos os parâmetros só têm efeito após o reinício do Milv
         ></path>
       </svg>
     </button></h2><p>É possível configurar o Milvus com um ficheiro de configuração <code translate="no">values.yaml</code>.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">Descarregar um ficheiro de configuração</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Descarregar</a> <code translate="no">values.yaml</code> diretamente ou com o seguinte comando.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">Descarregar um ficheiro de configuração</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Descarregar</a> <code translate="no">values.yaml</code> diretamente ou com o seguinte comando.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Modificar o ficheiro de configuração</h3><p>Configure a sua instância Milvus de acordo com os cenários da sua aplicação, ajustando os parâmetros correspondentes em <code translate="no">values.yaml</code>.</p>
@@ -241,7 +241,7 @@ Na versão atual, todos os parâmetros só têm efeito após o reinício do Milv
 <li><p>Se quiser saber como monitorizar os serviços do Milvus e criar alertas:</p>
 <ul>
 <li>Saiba como <a href="/docs/pt/monitor.md">monitorar o Milvus com o Prometheus Operator no Kubernetes</a></li>
-<li>Saiba <a href="/docs/pt/visualize.md">como visualizar as métricas do Milvus no Grafana</a>.</li>
+<li>Aprenda <a href="/docs/pt/visualize.md">a visualizar as métricas do Milvus no Grafana</a>.</li>
 </ul></li>
 <li><p>Se você estiver procurando instruções sobre como alocar recursos:</p>
 <ul>

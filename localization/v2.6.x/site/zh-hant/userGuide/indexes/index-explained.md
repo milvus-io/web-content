@@ -3,7 +3,7 @@ id: index-explained.md
 title: 索引說明
 summary: >-
   索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和
-  RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍然很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。
+  RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍很重要）。因此，本文將解釋如何將使用索引的成本降至最低，同時將好處最大化。
 ---
 <h1 id="Index-Explained" class="common-anchor-header">索引說明<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和 RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍然很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。</p>
+    </button></h1><p>索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和 RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,12 +44,31 @@ summary: >-
      <th><p>適用的索引類型</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>bfloat16_vector</p></li></ul></td>
-     <td><ul><li><p>平面</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>bfloat16_vector</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>平面</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BINARY_VECTOR</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>稀疏浮點向量</p></td>
@@ -57,18 +76,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED (建議使用)</p></li><li><p>BITMAP</p></li><li><p>Trie</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED (建議使用)</p></li>
+<li><p>BITMAP</p></li>
+<li><p>Trie</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>BOOL</p></td>
-     <td><ul><li>BITMAP (建議)</li><li>反轉</li></ul></td>
+     <td><ul>
+<li>BITMAP (建議)</li>
+<li>反轉</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>反轉</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>反轉</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>反轉</p></td>
    </tr>
    <tr>
@@ -106,7 +143,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>向量索引剖析</span> </span></p>
-<p>在建立索引時，Milvus 會結合所選的資料結構和量化方法，以決定最佳的<strong>擴充率</strong>。在查詢時，系統會擷取<code translate="no">topK × expansion rate</code> 候選向量，應用精煉器以更高的精確度重新計算距離，最後傳回最精確的<code translate="no">topK</code> 結果。這種混合方法將資源密集的精煉限制在經過篩選的候選向量子集中，從而在速度和精確度之間取得平衡。</p>
+<p>在建立索引時，Milvus 會結合所選的資料結構和量化方法，以決定最佳的<strong>擴充率</strong>。在查詢時，系統會檢索<code translate="no">topK × expansion rate</code> 候選向量，應用精煉器以更高的精確度重新計算距離，最後傳回最精確的<code translate="no">topK</code> 結果。這種混合方法將資源密集的精煉限制在經過篩選的候選向量子集中，從而在速度和精確度之間取得平衡。</p>
 <h3 id="Data-structure" class="common-anchor-header">資料結構</h3><p>資料結構形成索引的基礎層。常見的類型包括</p>
 <ul>
 <li><p><strong>反向檔案 (IVF)</strong></p>
@@ -154,7 +191,7 @@ summary: >-
 <li><p>您可以使用量化應用的索引類型和 mmap，以精確度換取最大容量。</p></li>
 </ul>
 <div class="alert note">
-<p>mmap 並不總是解決方案。當您的大部分資料都在磁碟上時，DiskANN 可以提供更好的延遲。</p>
+<p>mmap 不一定是解決方案。當您的大部分資料都在磁碟上時，DiskANN 可以提供更好的延遲。</p>
 </div>
 <h3 id="Recall" class="common-anchor-header">召回率</h3><p>召回率通常涉及篩選比率，也就是在搜尋之前篩選出來的資料。在處理召回率時，請考慮以下幾點：</p>
 <ul>
@@ -165,13 +202,13 @@ summary: >-
 <div class="alert note">
 <p>上述項目不一定正確。建議您使用不同的索引類型調整召回，以確定哪一種索引類型有效。</p>
 </div>
-<h3 id="Performance" class="common-anchor-header">效能</h3><p>搜尋的效能通常涉及 top-K，它是指搜尋回傳的記錄數量。在處理效能時，請考慮以下幾點：</p>
+<h3 id="Performance" class="common-anchor-header">效能</h3><p>搜尋的效能通常涉及 top-K，它是指搜尋返回的記錄數量。在處理效能時，請考慮以下幾點：</p>
 <ul>
 <li><p>對於 top-K 數量較小 (例如 2,000)、召回率要求較高的搜尋，以圖為基礎的索引類型會比 IVF 變異優勝。</p></li>
 <li><p>對於 top-K 較大（與向量嵌入的總數相比）的搜尋，IVF 變體是比基於圖的索引類型更好的選擇。</p></li>
 <li><p>對於具有中等大小 top-K 和高過濾率的搜尋，IVF 變異是更好的選擇。</p></li>
 </ul>
-<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">決策矩陣：選擇最適合的索引類型</h3><p>下表為決策矩陣，供您在選擇適當索引類型時參考。</p>
+<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">決策矩陣：選擇最適當的索引類型</h3><p>下表為決策矩陣，供您在選擇適當索引類型時參考。</p>
 <table>
    <tr>
      <th><p>場景</p></th>
@@ -227,7 +264,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>本節重點在於計算特定索引類型的記憶體消耗，並包含許多技術細節。如果本節與您的興趣不符，您可以放心跳過。</p>
 </div>
-<p>索引的記憶體消耗量受其資料結構、透過量化的壓縮率，以及使用中的精煉器所影響。一般而言，基於圖表的索引通常會因為圖表的結構（例如<strong>HNSW</strong>）而佔用較多記憶體，這通常意味著每個向量的空間開銷較大。相較之下，IVF 及其變體則更節省記憶體，因為適用的每向量空間開銷較少。然而，<strong>DiskANN</strong>等先進技術允許索引的一部分（例如圖形或精煉器）駐留在磁碟上，以減少記憶體負載，同時維持效能。</p>
+<p>索引的記憶體消耗量受其資料結構、透過量化的壓縮率，以及使用中的精煉器所影響。一般而言，基於圖表的索引通常會因為圖表的結構（例如<strong>HNSW</strong>）而佔用較高的記憶體，這通常意味著明顯的單位向量空間開銷。相較之下，IVF 及其變體則更節省記憶體，因為適用的每向量空間開銷較少。然而，<strong>DiskANN</strong>等先進技術允許索引的一部分（例如圖形或精煉器）駐留在磁碟上，以減少記憶體負載，同時維持效能。</p>
 <p>具體來說，索引的記憶體使用量可以如下計算：</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">IVF 索引記憶體使用量</h3><p>IVF 索引透過將資料分割成群組，在記憶體效率與搜尋效能之間取得平衡。以下是使用 IVF 變異索引的 100 萬個 128 維向量所使用的記憶體明細。</p>
 <ol>
@@ -295,7 +332,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>當您使用 HNSW 為 100 萬個 128 維向量嵌入建立索引時，使用的總記憶體為<strong>128 MB (圖形) + 512 MB (向量) = 640 MB</strong>。</p></li>
 <li><p><strong>計算量化所造成的壓縮。</strong></p>
-<p>量化可減少向量大小。例如，使用具有 8 個子量化器的 PQ（每個向量 8 位元組）會導致大幅壓縮。經壓縮的向量嵌入所消耗的記憶體可計算如下：</p>
+<p>量化可減少向量大小。例如，使用具有 8 個子量化器的 PQ（每個向量 8 位元組）會導致大幅壓縮。經壓縮的向量嵌入所消耗的記憶體可以如下計算：</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
 <p>與原始向量嵌入相比，這可達到 64 倍的壓縮率，而<strong>HNSWPQ</strong>索引類型使用的總記憶體為<strong>128 MB (圖形) + 8 MB (壓縮向量) = 136 MB</strong>。</p></li>
@@ -305,8 +342,8 @@ summary: >-
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Other-considerations" class="common-anchor-header">其他注意事項</h3><p>IVF 和基於圖表的索引會透過量化來最佳化記憶體的使用，而記憶體映射檔案 (mmap) 和 DiskANN 則會處理資料集超出可用隨機存取記憶體 (RAM) 的情況。</p>
+<h3 id="Other-considerations" class="common-anchor-header">其他注意事項</h3><p>IVF 和基於圖的索引會透過量化來最佳化記憶體的使用，而記憶體映射檔案 (mmap) 和 DiskANN 則會處理資料集超出可用隨機存取記憶體 (RAM) 的情況。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是基於 Vamana 圖形的索引，可連結資料點，以便在搜尋過程中有效導航，同時應用 PQ 來縮小向量的大小，並快速計算向量之間的近似距離。</p>
 <p>Vamana 圖形儲存在磁碟上，這使得 DiskANN 可以處理大型資料集，否則這些資料集會太大，無法放入記憶體中。這對十億點的資料集特別有用。</p>
-<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">記憶體映射檔案 (mmap)</h4><p>記憶體映射 (Mmap) 可直接存取磁碟上的大型檔案，讓 Milvus 在記憶體和硬碟中同時儲存索引和資料。此方法可根據存取頻率減少 I/O 呼叫的開銷，有助於最佳化 I/O 作業，從而擴大資料集的儲存容量，且不會顯著影響搜尋效能。</p>
+<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">記憶體映射檔案 (mmap)</h4><p>記憶體映射 (Mmap) 可直接存取磁碟上的大型檔案，讓 Milvus 在記憶體和硬碟中同時儲存索引和資料。此方法可根據存取頻率降低 I/O 呼叫的開銷，有助於最佳化 I/O 作業，從而擴大資料集的儲存容量，且不會顯著影響搜尋效能。</p>
 <p>具體來說，您可以設定 Milvus 對某些欄位的原始資料進行記憶體映射，而不是將其完全載入記憶體。如此一來，您就可以直接取得欄位的記憶體存取權，而不必擔心記憶體問題，並擴大資料集的容量。</p>

@@ -43,12 +43,31 @@ summary: >-
      <th><p>適用可能なインデックス・タイプ</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BLOAT16_VECTOR</p></li></ul></td>
-     <td><ul><li><p>フラット</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
+     <td><ul>
+<li><p>FLOAT_VECTOR</p></li>
+<li><p>FLOAT16_VECTOR</p></li>
+<li><p>BLOAT16_VECTOR</p></li>
+<li><p>INT8_VECTOR</p></li>
+</ul></td>
+     <td><ul>
+<li><p>フラット</p></li>
+<li><p>IVF_FLAT</p></li>
+<li><p>IVF_SQ8</p></li>
+<li><p>IVF_PQ</p></li>
+<li><p>IVF_RABITQ</p></li>
+<li><p>GPU_IVF_FLAT</p></li>
+<li><p>GPU_IVF_PQ</p></li>
+<li><p>HNSW</p></li>
+<li><p>DISKANN</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>バイナリベクトル</p></td>
-     <td><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
+     <td><ul>
+<li><p>BIN_FLAT</p></li>
+<li><p>BIN_IVF_FLAT</p></li>
+<li><p>MINHASH_LSH</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>スパースフロートベクトル</p></td>
@@ -56,18 +75,36 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul><li><p>INVERTED（再推奨）</p></li><li><p>ビットマップ</p></li><li><p>トライ</p></li></ul></td>
+     <td><ul>
+<li><p>INVERTED（再推奨）</p></li>
+<li><p>ビットマップ</p></li>
+<li><p>トライ</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>論理</p></td>
-     <td><ul><li>BITMAP（推奨）</li><li>INVERTED</li></ul></td>
+     <td><ul>
+<li>BITMAP（推奨）</li>
+<li>INVERTED</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
-     <td><ul><li>INVERTED</li><li>STL_SORT</li></ul></td>
+     <td><ul>
+<li><p>INT8</p></li>
+<li><p>INT16</p></li>
+<li><p>INT32</p></li>
+<li><p>INT64</p></li>
+</ul></td>
+     <td><ul>
+<li>INVERTED</li>
+<li>STL_SORT</li>
+</ul></td>
    </tr>
    <tr>
-     <td><ul><li>FLOAT</li><li>DOUBLE</li></ul></td>
+     <td><ul>
+<li>FLOAT</li>
+<li>DOUBLE</li>
+</ul></td>
      <td><p>INVERTED</p></td>
    </tr>
    <tr>
@@ -83,7 +120,7 @@ summary: >-
      <td><p>INVERTED</p></td>
    </tr>
 </table>
-<p>この記事では、適切なベクトル・インデックスの選択方法に焦点を当てます。スカラー・フィールドでは、常に推奨されるインデックス・タイプを使用できます。</p>
+<p>この記事では、適切なベクトル・インデックスの選択方法を中心に説明します。スカラー・フィールドでは、常に推奨されるインデックス・タイプを使用できます。</p>
 <p>ベクトル検索に適切なインデックス型を選択することは、パフォーマンスやリソース使用量に大きな影響を与えます。ベクトルフィールドのインデックスタイプを選択する際には、基礎となるデータ構造、メモリ使用量、パフォーマンス要件など、さまざまな要因を考慮することが不可欠です。</p>
 <h2 id="Vector-Index-anatomy" class="common-anchor-header">ベクトル・インデックスの解剖<button data-href="#Vector-Index-anatomy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -149,7 +186,7 @@ summary: >-
 <h3 id="Capacity" class="common-anchor-header">容量</h3><p>容量は通常、データサイズと利用可能なRAMの関係を含む。容量を扱う場合、次のように考える：</p>
 <ul>
 <li><p>生データの4分の1がメモリに収まるなら、安定したレイテンシーを持つDiskANNを検討する。</p></li>
-<li><p>生データの4分の1がメモリに収まるなら、安定したレイテンシを持つDiskANNを検討する。生データがすべてメモリに収まるなら、メモリベースのインデックスタイプとmmapを検討する。</p></li>
+<li><p>生データの4分の1がメモリに収まるなら、安定したレイテンシーを持つDiskANNを検討する。生データがすべてメモリに収まるなら、メモリベースのインデックスタイプとmmapを検討する。</p></li>
 <li><p>量子化を適用したインデックスタイプとmmapを使用することで、精度と最大容量を交換することができます。</p></li>
 </ul>
 <div class="alert note">
@@ -168,7 +205,7 @@ summary: >-
 <ul>
 <li><p>高い想起率を必要とする小さなトップK（例えば2,000）の検索では、グラフベースのインデックスタイプはIVFバリアントよりも優れている。</p></li>
 <li><p>ベクトル埋め込み総数と比較して）大きなトップKを持つ検索では、グラフベースのインデックスタイプよりもIVFバリアントが良い選択となる。</p></li>
-<li><p>中程度のtop-Kと高いフィルタ比を持つ検索では、IVF variantsの方が良い選択となる。</p></li>
+<li><p>top-Kが中程度でフィルタ比率が高い検索では、IVF変種がより良い選択となる。</p></li>
 </ul>
 <h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">決定マトリクス最適なインデックスタイプの選択</h3><p>以下の表は、適切なインデックスタイプを選択する際に参照する決定マトリクスです。</p>
 <table>
@@ -307,5 +344,5 @@ summary: >-
 <h3 id="Other-considerations" class="common-anchor-header">その他の考慮点</h3><p>IVFとグラフベースのインデックスが量子化によってメモリ使用量を最適化するのに対して、メモリマップファイル（mmap）とDiskANNは、データセットが利用可能なランダムアクセスメモリ（RAM）を超えるシナリオに対応します。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN は Vamana グラフ ベースのインデックスで、検索中にデータ ポイントを効率的にナビゲートできるように接続する一方、PQ を適用してベクトル サイズを縮小し、ベクトル間の近似距離計算を迅速に行うことができます。</p>
 <p>Vamana グラフはディスク上に保存されるため、DiskANN はメモリに収まらないような大きなデータセットも扱うことができます。これは特に10億ポイントのデータセットに有効です。</p>
-<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">メモリ マップ ファイル (mmap)</h4><p>メモリマッピング(Mmap)は、ディスク上の大きなファイルへの直接メモリアクセスを可能にし、Milvusがメモリとハードディスクの両方にインデックスとデータを格納することを可能にします。このアプローチは、アクセス頻度に基づくI/Oコールのオーバーヘッドを削減することでI/Oオペレーションを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張します。</p>
+<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">メモリ マップ ファイル (mmap)</h4><p>メモリマッピング(Mmap)により、ディスク上の大容量ファイルへの直接メモリアクセスが可能になり、Milvusはインデックスとデータをメモリとハードディスクの両方に格納することができます。このアプローチは、アクセス頻度に基づくI/Oコールのオーバーヘッドを削減することでI/Oオペレーションを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張します。</p>
 <p>具体的には、Milvusは特定のフィールドの生データを完全にメモリにロードするのではなく、メモリマップするように設定することができます。こうすることで、メモリの問題を心配することなくフィールドに直接メモリアクセスすることができ、コレクション容量を拡張することができます。</p>

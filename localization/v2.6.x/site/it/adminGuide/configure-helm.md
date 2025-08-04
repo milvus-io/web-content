@@ -39,7 +39,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
         ></path>
       </svg>
     </button></h2><p>È possibile configurare Milvus con un file di configurazione <code translate="no">values.yaml</code>.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">Scaricare un file di configurazione</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Scaricare</a> <code translate="no">values.yaml</code> direttamente o con il seguente comando.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">Scaricare un file di configurazione</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Scaricare</a> <code translate="no">values.yaml</code> direttamente o con il seguente comando.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Modificare il file di configurazione</h3><p>Configurate la vostra istanza di Milvus per adattarla ai vostri scenari applicativi regolando i parametri corrispondenti in <code translate="no">values.yaml</code>.</p>
@@ -59,7 +59,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
 <p>Per ulteriori informazioni su ciascun parametro, consultare i seguenti link.</p>
 <p>Ordinati per:</p>
 <div class="filter">
-<a href="#component">Componenti o dipendenze</a> <a href="#purpose">Scopo della configurazione</a> </div>
+<a href="#component">Componenti o dipendenze</a> <a href="#purpose">Scopi della configurazione</a> </div>
 <div class="filter-component table-wrapper">
 <table id="component">
 <thead>

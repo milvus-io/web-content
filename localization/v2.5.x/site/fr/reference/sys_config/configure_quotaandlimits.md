@@ -148,7 +148,7 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        durée d'attente de la tentative en cas d'échec de la suppression de l'allocation des données à l'avance, en millisecondes      </td>
+      <td>        durée d'attente de la tentative en cas d'échec de la suppression de l'allocation de données à l'avance, en millisecondes      </td>
       <td>1000</td>
     </tr>
   </tbody>

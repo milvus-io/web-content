@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>Eine E-Commerce-Plattform, die trendige Produkte anpreist, auch wenn sie der Suchanfrage weniger ähnlich sind</p></li>
 </ul>
 <p>Alle diese Szenarien haben eine gemeinsame Anforderung: Abwägung der Vektorähnlichkeit mit anderen numerischen Faktoren wie Zeit, Entfernung oder Popularität.</p>
-<p>Die Decay Ranker in Milvus gehen auf dieses Bedürfnis ein, indem sie Suchrankings basierend auf numerischen Feldwerten anpassen. Sie ermöglichen es Ihnen, die Vektorähnlichkeit mit "Frische", "Nähe" oder anderen numerischen Eigenschaften Ihrer Daten auszugleichen und so intuitivere und kontextuell relevante Sucherlebnisse zu schaffen.</p>
+<p>Die Decay Ranker in Milvus gehen auf dieses Bedürfnis ein, indem sie Suchrankings basierend auf numerischen Feldwerten anpassen. Sie ermöglichen es Ihnen, die Vektorähnlichkeit mit "Frische", "Nähe" oder anderen numerischen Eigenschaften Ihrer Daten auszugleichen und so intuitivere und kontextbezogene Sucherlebnisse zu schaffen.</p>
 <h2 id="Limits" class="common-anchor-header">Begrenzungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Bevor Sie Abklingfunktionen verwenden, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempel, Entfernungen usw.) erstellen, die für Abklingberechnungen verwendet werden sollen. Vollständige Arbeitsbeispiele, einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneinfügung, finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Zeitbasiertes Ranking in Milvus implementieren</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Um ein Decay-Ranking zu implementieren, definieren Sie zunächst ein <code translate="no">Function</code> Objekt mit der entsprechenden Konfiguration:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen Sie einen Decay Ranker</h3><p>Um das Decay-Ranking zu implementieren, definieren Sie zunächst ein <code translate="no">Function</code> Objekt mit der entsprechenden Konfiguration:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
@@ -236,7 +236,7 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_timestamp,    <span class="hljs-comment"># Reference point (current time)</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
         <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
         <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
@@ -272,7 +272,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Gibt die zu verwendende Ranking-Methode an. Muss auf <code translate="no">"decay"</code> gesetzt werden, um die Funktion "decay ranking" zu aktivieren.</p></td>
+     <td><p>Gibt die zu verwendende Ranking-Methode an. Muss auf <code translate="no">"decay"</code> gesetzt werden, um die Decay-Ranking-Funktionalität zu aktivieren.</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
@@ -311,7 +311,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>Keine</p></td>
-     <td><p>Punktwert bei der Entfernung <code translate="no">scale</code>, steuert die Steilheit der Kurve. Niedrigere Werte erzeugen steilere Abstiegskurven, höhere Werte erzeugen allmählichere Abstiegskurven. Muss zwischen 0 und 1 liegen.</p></td>
+     <td><p>Punktwert bei der Entfernung <code translate="no">scale</code>, steuert die Steilheit der Kurve. Niedrigere Werte erzeugen steilere Abstiegskurven; höhere Werte erzeugen allmählichere Abstiegskurven. Muss zwischen 0 und 1 liegen.</p></td>
      <td><p><code translate="no">0.5</code> (Voreinstellung)</p></td>
    </tr>
 </table>
@@ -324,7 +324,7 @@ results = milvus_client.search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf Hybridsuche anwenden</h3><p>Decay Ranker können auch auf hybride Suchoperationen angewendet werden, die mehrere Vektorfelder kombinieren:</p>

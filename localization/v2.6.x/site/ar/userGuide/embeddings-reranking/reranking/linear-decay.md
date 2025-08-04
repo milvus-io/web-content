@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
 <p>على عكس دوال الاضمحلال الأخرى:</p>
 <ul>
 <li><p>يتبع الاضمحلال الغاوسي منحنى جرس يقترب تدريجيًا من الصفر ولكنه لا يصل أبدًا إلى الصفر</p></li>
-<li><p>يحافظ الاضمحلال الأسي على ذيل طويل ذي صلة بالحد الأدنى يمتد إلى أجل غير مسمى</p></li>
+<li><p>يحافظ الاضمحلال الأسي على ذيل طويل من الحد الأدنى من الأهمية يمتد إلى أجل غير مسمى</p></li>
 </ul>
 <p>ينشئ الاضمحلال الخطي بشكل فريد نقطة نهاية محددة، مما يجعله فعالاً بشكل خاص للتطبيقات ذات الحدود الطبيعية أو المواعيد النهائية.</p>
 <h2 id="When-to-use-linear-decay" class="common-anchor-header">متى تستخدم التضاؤل الخطي<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>قوائم الأحداث</p></td>
      <td><p>منصات تذاكر الحفلات الموسيقية</p></td>
-     <td><p>يضع حداً فاصلاً واضحاً للأحداث في المستقبل البعيد جداً</p></td>
+     <td><p>يضع حداً فاصلاً واضحاً للفعاليات في المستقبل البعيد جداً</p></td>
    </tr>
    <tr>
      <td><p>العروض محدودة الوقت</p></td>
@@ -106,7 +106,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><code translate="no">origin</code> (التاريخ الحالي): اللحظة الحالية، حيث تكون الملاءمة في أقصى حد لها (1.0).</p></li>
 <li><p><code translate="no">offset</code> (يوم واحد): "نافذة "الأحداث الفورية" - جميع الأحداث التي تحدث خلال اليوم التالي تحافظ على درجات الملاءمة الكاملة (1.0)، مما يضمن عدم معاقبة الأحداث الوشيكة جدًا بسبب الاختلافات الزمنية الطفيفة.</p></li>
-<li><p><code translate="no">decay</code> (0.5): الدرجة على مسافة المقياس-يتحكم هذا المتغير في معدل انخفاض الملاءمة.</p></li>
+<li><p><code translate="no">decay</code> (0.5): الدرجة في مسافة المقياس-يتحكم هذا المتغير في معدل انخفاض الملاءمة.</p></li>
 <li><p><code translate="no">scale</code> (10 أيام): الفترة الزمنية التي تنخفض عندها الملاءمة إلى قيمة الاضمحلال-الأحداث التي تبعد 10 أيام تنخفض درجات الملاءمة إلى النصف (0.5).</p></li>
 </ul>
 <p>كما ترى من منحنى الخط المستقيم، فإن الأحداث التي تبعد 16 يومًا تقريبًا تكون أهميتها صفرًا تمامًا ولن تظهر في نتائج البحث على الإطلاق. يؤدي هذا إلى إنشاء حدود واضحة تضمن أن يرى المستخدمون الأحداث القادمة ذات الصلة فقط ضمن نافذة زمنية محددة.</p>
@@ -134,7 +134,7 @@ beta: Milvus 2.6.x
 <ol>
 <li><p>Calculate how far the field value is from the origin: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> ∣fieldvaluedoc−origin∣|fieldvalue_{doc} - origin|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">∣fieldvalue</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">doc​</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">origin∣</span></span></span></span></p></li>
 <li><p>اطرح الإزاحة (إن وجدت) ولكن لا تنخفض أبدًا إلى ما دون الصفر: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>الحد الأقصى</mi><mo stretchy="false">(</mo><mo separator="true">0،</mo><mi>المسافة-</mi><mi>الإزاحة</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\الحد الأقصى <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(0، المسافة- الإزاحة)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">الحد الأقص</span></span><span class="base"><span class="mord mathnormal">ى (0،</span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="base"><span class="mord mathnormal"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal">المسافة</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="base"><span class="mord mathnormal"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="base"><span class="mord mathnormal"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"> <span class="strut" style="height:1em;vertical-align:-0.25em;"></span> <span class="mord mathnormal">الإزاحة</span><span class="mclose">)</span></span></span></span></p></li>
-<li><p>حدد البارامتر <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s من قيم المقياس والتضاؤل.</p></li>
+<li><p>حدد المعلمة <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s من قيم المقياس والتضاؤل.</p></li>
 <li><p>اطرح المسافة المعدلة من <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s واقسم على <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s</p></li>
 <li><p>تأكد من أن النتيجة لا تنخفض أبدًا إلى ما دون الصفر: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ماكس</mi><mo stretchy="false">(</mo><mo separator="true">النتيجة،</mo></mrow></semantics></math></span></span> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\ ماكس <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(النتيجة، 0)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">ماكس</span><span class="mopen">(</span><span class="mpunct">النتيجة،</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span></span> 0 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose">)</span></span></span></span></p></li>
 </ol>
@@ -189,7 +189,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث الهجين</h3><p>يمكن أيضًا تطبيق مصنفات الاضمحلال على عمليات البحث المختلط التي تجمع بين حقول متجهات متعددة:</p>

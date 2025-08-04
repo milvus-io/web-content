@@ -40,7 +40,7 @@ title: Aperçu des options de déploiement de Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> est une bibliothèque Python qui peut être importée dans vos applications. En tant que version légère de Milvus, elle est idéale pour le prototypage rapide dans les blocs-notes Jupyter ou l'exécution sur des appareils intelligents avec des ressources limitées. Milvus Lite prend en charge les mêmes API que les autres déploiements Milvus. Le code côté client interagissant avec Milvus Lite peut également fonctionner avec les instances Milvus dans d'autres modes de déploiement.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> est une bibliothèque Python qui peut être importée dans vos applications. En tant que version légère de Milvus, elle est idéale pour le prototypage rapide dans les blocs-notes Jupyter ou l'exécution sur des appareils intelligents disposant de ressources limitées. Milvus Lite prend en charge les mêmes API que les autres déploiements Milvus. Le code côté client interagissant avec Milvus Lite peut également fonctionner avec les instances Milvus dans d'autres modes de déploiement.</p>
 <p>Pour intégrer Milvus Lite dans vos applications, exécutez <code translate="no">pip install pymilvus</code> pour l'installer et utilisez l'instruction <code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> pour instancier une base de données vectorielle avec un fichier local qui conserve toutes vos données. Pour plus de détails, voir <a href="https://milvus.io/docs/milvus_lite.md">Exécuter Milvus Lite</a>.</p>
 <h2 id="Milvus-Standalone" class="common-anchor-header">Milvus Standalone<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ title: Aperçu des options de déploiement de Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone est un déploiement de serveur sur une seule machine. Tous les composants de Milvus Standalone sont regroupés dans une seule <a href="https://milvus.io/docs/install_standalone-docker.md">image Docker</a>, ce qui facilite le déploiement. Si vous avez une charge de travail de production mais préférez ne pas utiliser Kubernetes, l'exécution de Milvus Standalone sur une seule machine avec suffisamment de mémoire est une bonne option. En outre, Milvus Standalone prend en charge la haute disponibilité via la réplication maître-esclave.</p>
+    </button></h2><p>Milvus Standalone est un déploiement de serveur sur une seule machine. Tous les composants de Milvus Standalone sont regroupés dans une seule <a href="https://milvus.io/docs/install_standalone-docker.md">image Docker</a>, ce qui facilite le déploiement. Si vous avez une charge de travail de production mais préférez ne pas utiliser Kubernetes, l'exécution de Milvus Standalone sur une seule machine avec suffisamment de mémoire est une bonne option.</p>
 <h2 id="Milvus-Distributed" class="common-anchor-header">Milvus Distribué<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ title: Aperçu des options de déploiement de Milvus
 <ul>
 <li><strong>Milvus Lite</strong> est recommandé pour les petits ensembles de données, jusqu'à quelques millions de vecteurs.</li>
 <li><strong>Milvus Standalone</strong> convient aux ensembles de données de taille moyenne, jusqu'à 100 millions de vecteurs.</li>
-<li><strong>Milvus Distributed</strong> est conçu pour les déploiements à grande échelle, capable de traiter des ensembles de données de 100 millions à des dizaines de milliards de vecteurs.</li>
+<li>Milvus<strong>Distributed</strong> est conçu pour les déploiements à grande échelle, capable de traiter des ensembles de données de 100 millions à des dizaines de milliards de vecteurs.</li>
 </ul>
 <p>
   

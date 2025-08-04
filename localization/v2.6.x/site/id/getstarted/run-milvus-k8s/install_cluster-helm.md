@@ -114,10 +114,45 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
         ></path>
       </svg>
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Menerapkan sebuah cluster Milvus</h3><p>Setelah Anda menginstal bagan Helm, Anda dapat memulai Milvus di Kubernetes. Bagian ini akan memandu Anda melalui langkah-langkah untuk memulai Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install my-release milvus/milvus</span>
+<ul>
+<li><p>Untuk menggunakan instans Milvus dalam mode mandiri, jalankan perintah berikut:</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
+  --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada perintah di atas, <code translate="no">my-release</code> adalah nama rilis, dan <code translate="no">milvus/milvus</code> adalah repositori bagan yang terinstal secara lokal. Untuk menggunakan nama yang berbeda, ganti <code translate="no">my-release</code> dengan nama yang Anda inginkan.</p>
-<p>Perintah di atas men-deploy sebuah cluster Milvus dengan komponen dan dependensinya menggunakan konfigurasi default. Untuk menyesuaikan pengaturan ini, kami sarankan Anda menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk menyesuaikan konfigurasi berdasarkan ukuran data Anda yang sebenarnya, lalu mengunduh berkas YAML yang sesuai. Untuk mempelajari lebih lanjut tentang parameter konfigurasi, lihat <a href="https://milvus.io/docs/system_configuration.md">Daftar Periksa Konfigurasi Sistem Milvus.</a></p>
+  <div class="alert note">
+<p>Mulai dari Milvus 2.6.x, perubahan arsitektur berikut ini telah dibuat dalam mode mandiri:</p>
+<ul>
+<li>Antrian pesan (MQ) default adalah <strong>Woodpecker</strong>.</li>
+<li>Komponen <strong>Streaming Node</strong> diperkenalkan dan diaktifkan secara default.</li>
+</ul>
+<p>Untuk detailnya, lihat <a href="/docs/id/architecture_overview.md">Tinjauan Arsitektur.</a></p>
+  </div>
+</li>
+<li><p>Untuk menggunakan instans Milvus dalam mode cluster, jalankan perintah berikut:</p>
+<p>Anda dapat menggunakan <code translate="no">--set</code> untuk menginstal cluster Milvus dengan konfigurasi khusus. Perintah berikut ini mengatur <code translate="no">streaming.enabled</code> ke <code translate="no">true</code> untuk mengaktifkan layanan streaming dan mengatur <code translate="no">indexNode.enabled</code> ke <code translate="no">false</code> untuk menonaktifkan layanan indeks. Dalam hal ini, simpul streaming akan bertanggung jawab atas semua tugas pemrosesan data dan pengindeksan.</p>
+<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
+<button class="copy-code-btn"></button></code></pre>
+  <div class="alert note">
+<p>Mulai dari Milvus 2.6.x, perubahan arsitektur berikut ini telah dibuat dalam mode cluster:</p>
+<ul>
+<li>MQ default masih menggunakan <strong>Pulsar</strong>.</li>
+<li>Komponen <strong>Streaming Node</strong> diperkenalkan dan diaktifkan secara default.</li>
+<li><strong>Index Node</strong> dan <strong>Data Node</strong> digabungkan menjadi satu komponen <strong>Data Node</strong>.</li>
+</ul>
+<p>Untuk detailnya, lihat <a href="/docs/id/architecture_overview.md">Tinjauan Arsitektur.</a></p>
+  </div>
+</li>
+</ul>
+<p>Pada perintah di atas, <code translate="no">my-release</code> adalah nama rilis, dan <code translate="no">milvus/milvus</code> adalah repositori grafik yang terinstal secara lokal. Untuk menggunakan nama yang berbeda, ganti <code translate="no">my-release</code> dengan nama yang Anda inginkan.</p>
+<p>Perintah-perintah di atas menggunakan instance Milvus dengan komponen dan dependensinya menggunakan konfigurasi default. Untuk menyesuaikan pengaturan ini, kami sarankan Anda menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk menyesuaikan konfigurasi berdasarkan ukuran data Anda yang sebenarnya dan kemudian mengunduh file YAML yang sesuai. Untuk mempelajari lebih lanjut tentang parameter konfigurasi, lihat <a href="https://milvus.io/docs/system_configuration.md">Daftar Periksa Konfigurasi Sistem Milvus.</a></p>
 <div class="alert note">
   <ul>
     <li>Nama rilis hanya boleh terdiri dari huruf, angka, dan tanda hubung. Titik tidak diperbolehkan dalam nama rilis.</li>
@@ -167,6 +202,43 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Secara opsional, Anda dapat menggunakan <code translate="no">:19530</code> dan bukan <code translate="no">27017:19530</code> pada perintah di atas untuk membiarkan <code translate="no">kubectl</code> mengalokasikan porta lokal untuk Anda sehingga Anda tidak perlu mengelola konflik porta.</p>
 <p>Secara default, penerusan porta kubectl hanya mendengarkan <code translate="no">localhost</code>. Gunakan flag <code translate="no">address</code> jika Anda ingin Milvus mendengarkan pada alamat IP yang dipilih atau semua alamat IP. Perintah berikut ini membuat port-forward mendengarkan semua alamat IP pada mesin host.</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opsional) Memperbarui konfigurasi Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Anda dapat memperbarui konfigurasi cluster Milvus Anda dengan mengedit berkas <code translate="no">values.yaml</code> dan menerapkannya lagi.</p>
+<ol>
+<li>Buat berkas <code translate="no">values.yaml</code> dengan konfigurasi yang diinginkan.</li>
+</ol>
+<p>Berikut ini mengasumsikan bahwa Anda ingin mengaktifkan <code translate="no">proxy.http</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    proxy:
+      http:
+        enabled: true
+</span><button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Terapkan berkas <code translate="no">values.yaml</code>.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Periksa konfigurasi yang diperbarui.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm get values my-release
+<button class="copy-code-btn"></button></code></pre>
+<p>Output seharusnya menunjukkan konfigurasi yang telah diperbarui.</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Mengakses Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -34,7 +34,7 @@ beta: Milvus 2.6.x
 <li><p>O decaimento gaussiano cria um declínio mais gradual, em forma de sino</p></li>
 <li><p>O decaimento linear diminui a uma taxa constante até atingir exatamente zero</p></li>
 </ul>
-<p>O decaimento exponencial "antecipa" a penalização de forma única, aplicando a maior parte da redução de relevância numa fase inicial, mantendo uma cauda longa de relevância mínima mas não nula.</p>
+<p>O decaimento exponencial "antecipa" a penalização de forma única, aplicando a maior parte da redução de relevância numa fase inicial e mantendo uma cauda longa de relevância mínima mas não nula.</p>
 <h2 id="When-to-use-exponential-decay" class="common-anchor-header">Quando utilizar o decaimento exponencial<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -187,7 +187,7 @@ result = milvus_client.search(
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;publish_time&quot;</span>], <span class="hljs-comment"># Fields to return</span>
 <span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida</h3><p>Os classificadores de decaimento também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vectoriais:</p>

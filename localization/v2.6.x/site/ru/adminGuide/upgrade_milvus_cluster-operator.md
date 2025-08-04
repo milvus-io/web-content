@@ -24,6 +24,38 @@ title: Обновление кластера Milvus с помощью Milvus Ope
         ></path>
       </svg>
     </button></h1><p>В этом руководстве описано, как обновить кластер Milvus с помощью Milvus Operator.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Начиная с Milvus 2.6.0, старые отдельные координаторы (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) были объединены в один <code translate="no">mixCoord</code>. Перед обновлением убедитесь, что в вашей спецификации CRD используется <code translate="no">mixCoord</code>, а не отдельные компоненты координаторов.</p>
+<p>Если вы используете отдельные координаторы, измените свою спецификацию:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">mixCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># set to 1 or more</span>
+    <span class="hljs-attr">dataCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+    <span class="hljs-attr">queryCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+    <span class="hljs-attr">indexCoord:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">Обновление оператора Milvus<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,18 +71,21 @@ title: Обновление кластера Milvus с помощью Milvus Ope
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Выполните следующую команду, чтобы обновить версию вашего Milvus Operator до v1.2.0.</p>
+    </button></h2><p>Выполните следующую команду, чтобы обновить версию вашего оператора Milvus до v1.3.0.</p>
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>После обновления оператора Milvus до последней версии у вас будут следующие возможности:</p>
+<p>После обновления оператора Milvus до последней версии у вас есть следующие возможности:</p>
 <ul>
-<li>Чтобы обновить Milvus с версии 2.2.3 или более поздних выпусков до версии 2.5.12, вы можете <a href="#Conduct-a-rolling-upgrade">провести скользящее обновление</a>.</li>
-<li>Чтобы обновить Milvus с минорного выпуска до v2.2.3 до 2.5.12, рекомендуется <a href="#Upgrade-Milvus-by-changing-its-image">обновить Milvus, изменив версию образа</a>.</li>
-<li>Чтобы обновить Milvus с v2.1.x до 2.5.12, необходимо <a href="#Migrate-the-metadata">перенести метаданные</a> до фактического обновления.</li>
+<li>Чтобы обновить Milvus с версии v2.2.3, вы можете <a href="#Conduct-a-rolling-upgrade">провести скользящее обновление</a>.</li>
+<li>Чтобы обновить Milvus с минорного выпуска до v2.2.3 до 2.6.0, рекомендуется <a href="#Upgrade-Milvus-by-changing-its-image">обновить Milvus, изменив версию образа</a>.</li>
+<li>Чтобы обновить Milvus с версии 2.1.x до 2.6.0, необходимо <a href="#Migrate-the-metadata">перенести метаданные</a> до фактического обновления.</li>
 </ul>
-<h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Проведение скользящего обновления<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
+<blockquote>
+<p><strong>Примечание</strong>: Настоятельно рекомендуется обновлять по одной минорной версии за раз и использовать последний стабильный релиз этой минорной версии. Например, если вы переходите с v2.4.x на v2.6.x, сначала следует обновить последнюю версию v2.4.x, затем последнюю v2.5.x и, наконец, v2.6.x. Это гарантирует, что вы используете последний стабильный выпуск каждой минорной версии, который с большей вероятностью будет совместим с существующими данными и конфигурациями.</p>
+</blockquote>
+<h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Проведите скользящее обновление<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +111,10 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+    <span class="hljs-comment"># Milvus Operator recognizes the image tag as a semantic version, and decides what to do based on the version.</span>
+    <span class="hljs-comment"># So in case you&#x27;re using a non-sermantic verison image tag, you may also need to set the `version` field so that Milvus Operator can recognize the version correctly</span>
+    <span class="hljs-attr">version:</span> <span class="hljs-string">v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>В приведенном выше файле конфигурации установите <code translate="no">spec.components.enableRollingUpdate</code> на <code translate="no">true</code> и установите <code translate="no">spec.components.image</code> на нужную версию Milvus.</p>
 <p>По умолчанию Milvus выполняет обновление координаторов в упорядоченном порядке, заменяя образы капсул координаторов один за другим. Чтобы сократить время обновления, установите <code translate="no">spec.components.imageUpdateMode</code> на <code translate="no">all</code>, чтобы Milvus заменял все образы стручков одновременно.</p>
@@ -88,7 +126,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">all</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете установить <code translate="no">spec.components.imageUpdateMode</code> на <code translate="no">rollingDowngrade</code>, чтобы Milvus заменял образы координаторов более низкой версией.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -128,7 +166,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
   <span class="hljs-attr">components:</span>
-   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Затем выполните следующие действия, чтобы выполнить обновление:</p>
 <pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
@@ -148,8 +186,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Начиная с Milvus 2.2.0, метаданные несовместимы с метаданными предыдущих выпусков. Следующие фрагменты примеров предполагают обновление с Milvus 2.1.4 до Milvus 2.5.12.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Создание файла <code translate="no">.yaml</code> для миграции метаданных</h3><p>Создайте файл миграции метаданных. Ниже приведен пример. В файле конфигурации необходимо указать <code translate="no">name</code>, <code translate="no">sourceVersion</code> и <code translate="no">targetVersion</code>. Следующий пример устанавливает <code translate="no">name</code> в <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> в <code translate="no">v2.1.4</code>, а <code translate="no">targetVersion</code> в <code translate="no">v2.5.12</code>. Это означает, что ваш кластер Milvus будет обновлен с версии 2.1.4 до версии 2.5.12.</p>
+    </button></h2><p>Начиная с Milvus 2.2.0, метаданные несовместимы с метаданными предыдущих выпусков. Следующие фрагменты примеров предполагают обновление с Milvus 2.1.4 до Milvus 2.6.0.</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Создание файла <code translate="no">.yaml</code> для миграции метаданных</h3><p>Создайте файл миграции метаданных. Ниже приведен пример. В файле конфигурации необходимо указать <code translate="no">name</code>, <code translate="no">sourceVersion</code> и <code translate="no">targetVersion</code>. Следующий пример устанавливает <code translate="no">name</code> в <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> в <code translate="no">v2.1.4</code>, а <code translate="no">targetVersion</code> в <code translate="no">v2.6.0</code>. Это означает, что ваш кластер Milvus будет обновлен с версии 2.1.4 до версии 2.6.0.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
 <span class="hljs-attr">metadata:</span>
@@ -159,9 +197,9 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
     <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.5.12&quot;</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.6.0&quot;</span>
   <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.5.12&quot;</span>
+  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.6.0&quot;</span>
   <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
   <span class="hljs-comment"># operation: upgrade</span>
   <span class="hljs-comment"># rollbackIfFailed: true</span>

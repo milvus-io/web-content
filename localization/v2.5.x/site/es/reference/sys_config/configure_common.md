@@ -629,7 +629,7 @@ summary: Aprenda a configurar común para Milvus.
   <tbody>
     <tr>
       <td>        Privilegios de administrador a nivel de base de datos     </td>
-      <td>MostrarColecciones,DescribirBaseDeDatos,AlterarBaseDeDatos,CrearColección,EliminarColección</td>
+      <td>MostrarColecciones,DescribirBaseDeDatos,AlterarBaseDeDatos,CrearColección,SoltarColección</td>
     </tr>
   </tbody>
 </table>

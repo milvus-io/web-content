@@ -220,7 +220,7 @@ summary: MilvusのqueryCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        バランスをとった後の、from-to ノード間のアンバランスな範囲の最大値      </td>
+      <td>        バランスを取った後の、from-to ノード間のアンバランスな範囲の最大値      </td>
       <td>1.3</td>
     </tr>
   </tbody>
@@ -744,7 +744,7 @@ summary: MilvusのqueryCoordの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        最後のヒートビートが古すぎる場合のquerycoordレポート警告のラグ値、ミリ秒単位      </td>
+      <td>        最後のヒートビートが古すぎる場合のquerycoordレポート警告のラグ値（ミリ秒単位      </td>
       <td>5000</td>
     </tr>
   </tbody>

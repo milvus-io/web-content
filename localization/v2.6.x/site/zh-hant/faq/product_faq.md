@@ -27,9 +27,9 @@ title: 產品常見問題
 <p>插入的資料，包括向量資料、標量資料和特定於集合的模式，會以增量日誌的方式儲存於持久性儲存空間。Milvus 支援多種物件儲存後端，包括<a href="https://min.io/">MinIO</a>、<a href="https://aws.amazon.com/s3/?nc1=h_ls">AWS S3</a>、<a href="https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes">Google Cloud Storage</a>(GCS)、<a href="https://azure.microsoft.com/en-us/products/storage/blobs">Azure Blob Storage</a>、<a href="https://www.alibabacloud.com/product/object-storage-service">阿里雲 OSS</a> <a href="https://www.tencentcloud.com/products/cos">及騰訊 Cloud Object Storage</a>(COS)。</p>
 <p>Metadata 在 Milvus 內產生。每個 Milvus 模組都有自己的元資料，並儲存在 etcd 中。</p>
 <h4 id="Why-is-there-no-vector-data-in-etcd" class="common-anchor-header">為什麼 etcd 中沒有向量資料？</h4><p>etcd 儲存 Milvus 模組元資料；MinIO 儲存實體。</p>
-<h4 id="Does-Milvus-support-inserting-and-searching-data-simultaneously" class="common-anchor-header">Milvus 支援同時插入和查詢資料嗎？</h4><p>是的。插入作業和查詢作業由兩個獨立的模組處理，它們是相互獨立的。從客戶端的角度來看，當插入的資料進入訊息佇列時，插入作業就完成了。但是，插入的資料在載入查詢節點之前是無法查詢的。如果區段大小未達到建立索引的臨界值 (預設為 512 MB)，Milvus 就會採用暴力搜尋，而查詢效能可能會降低。</p>
-<h4 id="Can-vectors-with-duplicate-primary-keys-be-inserted-into-Milvus" class="common-anchor-header">有重複主鍵的向量可以插入 Milvus 嗎？</h4><p>可以。Milvus 不檢查向量的主鍵是否重複。</p>
-<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">當插入具有重複主鍵的向量時，Milvus 是否將其視為更新操作？</h4><p>Milvus 目前不支持更新操作，也不檢查實體主鍵是否重複。您有責任確保實體的主索引鍵是唯一的，如果它們不是唯一的，Milvus 可能包含多個具有重複主索引鍵的實體。</p>
+<h4 id="Does-Milvus-support-inserting-and-searching-data-simultaneously" class="common-anchor-header">Milvus 支援同時插入和查詢資料嗎？</h4><p>是的。插入作業和查詢作業由兩個獨立的模組處理，它們是相互獨立的。從客戶端的角度來看，當插入的資料進入訊息佇列時，插入作業就完成了。但是，插入的資料在載入查詢節點之前是無法查詢的。對於具有增量資料的成長區段，Milvus 會自動建立臨時索引，以確保有效率的搜尋效能，即使區段大小未達到索引建立臨界值 (計算方式為<code translate="no">dataCoord.segment.maxSize</code> ×<code translate="no">dataCoord.segment.sealProportion</code>)。您可以透過<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440">Milvus 設定檔</a>中的設定參數<code translate="no">queryNode.segcore.interimIndex.enableIndex</code> 控制此行為 - 設定為<code translate="no">true</code> 會啟用臨時索引（預設），而設定為<code translate="no">false</code> 則會停用。</p>
+<h4 id="Can-vectors-with-duplicate-primary-keys-be-inserted-into-Milvus" class="common-anchor-header">主鍵重複的向量可以插入 Milvus 嗎？</h4><p>可以。Milvus 不會檢查向量的主索引鍵是否重複。</p>
+<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">當插入有重複主鍵的向量時，Milvus 會把它當作更新操作嗎？</h4><p>Milvus 目前不支持更新操作，也不檢查實體主鍵是否重複。您有責任確保實體的主索引鍵是唯一的，如果它們不是唯一的，Milvus 可能包含多個具有重複主索引鍵的實體。</p>
 <p>如果發生這種情況，查詢時將返回哪個資料副本仍是未知行為。此限制將在未來的版本中修復。</p>
 <h4 id="What-is-the-maximum-length-of-self-defined-entity-primary-keys" class="common-anchor-header">自定義實體主鍵的最大長度是多少？</h4><p>實體主鍵必須是非負 64 位元整數。</p>
 <h4 id="What-is-the-maximum-amount-of-data-that-can-be-added-per-insert-operation" class="common-anchor-header">每次插入操作可新增的最大資料量是多少？</h4><p>插入操作的大小不得超過 1,024 MB。這是 gRPC 施加的限制。</p>
@@ -60,7 +60,7 @@ title: 產品常見問題
 <h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 支援 Apple M1 CPU 嗎？</h4><p>目前的 Milvus 版本不直接支援蘋果 M1 CPU。Milvus 2.3 之後，Milvus 提供 ARM64 架構的 Docker 映像檔。</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus 的主鍵欄位支援哪些資料類型？</h4><p>在目前的版本中，Milvus 支援 INT64 和字串。</p>
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus 是否可擴充？</h4><p>是的，您可以透過 Kubernetes 上的 Helm Chart 部署多個節點的 Milvus 集群。更多說明，請參考<a href="/docs/zh-hant/scaleout.md">Scale Guide</a>。</p>
-<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什麼是 Growing segment 和 sealed segment？</h4><p>當有搜尋要求時，Milvus 會同時搜尋增量資料和歷史資料。增量資料是最近的更新，它們儲存在成長中的區段中，在它們達到要持久化到物件儲存的臨界值之前，這些區段會在記憶體中緩衝，並為它們建立更有效率的索引；而歷史資料是一段時間前的更新。歷史資料則是前一陣子的更新，它們位於已持久化到物件儲存空間的封存區段中。增量資料和歷史資料共同構成搜尋的整個資料集。這樣的設計使得任何輸入到 Milvus 的資料都可以立即搜尋。對於 Milvus Distributed 而言，有更多複雜的因素決定剛擷取的記錄何時可以顯示在搜尋結果中。了解更多關於<a href="https://milvus.io/docs/consistency.md">一致性層級</a>的細節。</p>
+<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什麼是 Growing segment 和 sealed segment？</h4><p>當有搜尋要求時，Milvus 會同時搜尋增量資料和歷史資料。增量資料是最近的更新，它們會儲存在成長中的區段，在它們達到要持久化到物件儲存的臨界值之前，這些區段會在記憶體中緩衝，並為它們建立更有效率的索引；而歷史資料是一段時間前的更新。歷史資料則是前一陣子的更新，它們位於已持久化到物件儲存空間的封存區段中。增量資料和歷史資料共同構成搜尋的整個資料集。這樣的設計使得任何輸入到 Milvus 的資料都可以立即搜尋。對於 Milvus Distributed 而言，有更多複雜的因素決定剛擷取的記錄何時可以顯示在搜尋結果中。了解更多關於<a href="https://milvus.io/docs/consistency.md">一致性層級</a>的細節。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvus 是否可用於並發搜尋？</h4><p>是的。對於同一個資料集的查詢，Milvus 可以同時搜尋增量和歷史資料。但是，對不同集合的查詢是串聯進行的。而歷史資料可能是一個極為龐大的資料集，在歷史資料上的搜尋相對地更耗費時間，基本上是串聯進行的。</p>
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">為什麼 MinIO 中的資料在相對應的資料集被刪除後仍會保留？</h4><p>MinIO 中的資料被設計成保留一段時間，以方便資料回滾。</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">Milvus 支援 Pulsar 以外的訊息引擎嗎？</h4><p>是的。Milvus 2.1.0 支援 Kafka。</p>
@@ -70,7 +70,7 @@ title: 產品常見問題
 <ul>
 <li>二進位向量：以 0 和 1 的序列儲存二進位資料，用於影像處理和資訊檢索。</li>
 <li>Float32 向量：預設的儲存精確度約為十進位的 7 位數。即使是 Float64 值，也是以 Float32 精度儲存，可能會在檢索時造成精確度的損失。</li>
-<li>Float16 和 BFloat16 向量：提供較低的精確度和記憶體使用量。Float16 適用於頻寬和儲存空間有限的應用程式，而 BFloat16 則平衡範圍和效率，常用於深度學習，以降低計算需求，而不會顯著影響精確度。</li>
+<li>Float16 和 BFloat16 向量：提供較低的精確度和記憶體使用量。Float16 適用於頻寬和儲存空間有限的應用程式，而 BFloat16 則平衡了範圍和效率，常用於深度學習，以降低計算需求，而不會顯著影響精確度。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支援指定標量或向量欄位的預設值？</h4><p>目前，Milvus 2.4.x 不支援指定標量或向量欄位的預設值。此功能將在未來的版本中提供。</p>
 <h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">在 Milvus 中刪除資料後，儲存空間會立即釋放嗎？</h4><p>不，當您在 Milvus 刪除資料時，儲存空間不會立即釋放。雖然刪除資料會將實體標記為 「邏輯上已刪除」，但實際空間可能不會立即釋放。原因如下：</p>

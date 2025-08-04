@@ -20,6 +20,9 @@ beta: Milvus 2.5.11+
         ></path>
       </svg>
     </button></h1><p><code translate="no">lindera</code> 토큰화 도구는 사전 기반의 형태소 분석을 수행합니다. 일본어, 한국어, 중국어와 같이 단어가 공백으로 구분되지 않는 언어에 적합합니다.</p>
+<div class="alert note">
+<p><code translate="no">lindera</code> 토큰화 도구는 출력에서 구두점을 별도의 토큰으로 보존합니다. 예를 들어 <code translate="no">&quot;こんにちは！&quot;</code> 은 <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code> 이 됩니다. 이러한 독립형 구두점 토큰을 제거하려면 <a href="/docs/ko/removepunct-filter.md"><code translate="no">removepunct</code></a> 필터를 사용합니다.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +66,7 @@ beta: Milvus 2.5.11+
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>，
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
       <span class="hljs-string">&quot;dict_kind&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>
     }
 }

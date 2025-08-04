@@ -206,12 +206,14 @@ schema.addField(AddFieldReq.builder()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il parametro <code translate="no">dim</code> nei frammenti di codice sopra riportati indica la dimensionalità degli embeddings vettoriali da contenere nel campo vettoriale. Il valore <code translate="no">FLOAT_VECTOR</code> indica che il campo vettoriale contiene un elenco di numeri fluttuanti a 32 bit, solitamente utilizzati per rappresentare gli antilogaritmi:</p>
+<p>Il parametro <code translate="no">dim</code> nei frammenti di codice sopra riportati indica la dimensionalità degli embeddings vettoriali da contenere nel campo vettoriale. Il valore <code translate="no">FLOAT_VECTOR</code> indica che il campo vettoriale contiene una lista di numeri fluttuanti a 32 bit, solitamente utilizzati per rappresentare gli antilogaritmi:</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>Un campo vettoriale di questo tipo contiene un elenco di numeri flottanti a mezza precisione a 16 bit e di solito si applica a scenari di deep learning o di calcolo basato su GPU con limitazioni di memoria o di larghezza di banda.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>Un campo vettore di questo tipo contiene un elenco di numeri in virgola mobile a 16 bit con precisione ridotta ma con lo stesso intervallo di esponenti di Float32. Questo tipo di dati è comunemente usato in scenari di deep learning, in quanto riduce l'uso della memoria senza incidere significativamente sulla precisione.</p></li>
+<li><p><code translate="no">- INT8_VECTOR</code></p>
+<p>Un campo vettoriale di questo tipo memorizza vettori composti da numeri interi firmati a 8 bit (int8), con ogni componente che va da -128 a 127. Pensato per le architetture di deep learning quantizzate, come ResNet ed EfficientNet, riduce sostanzialmente le dimensioni del modello e aumenta la velocità di inferenza, con una perdita di precisione minima. <strong>Nota</strong>: questo tipo di vettore è supportato solo per gli indici HNSW.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>Un campo vettoriale di questo tipo contiene un elenco di 0 e 1. Servono come caratteristiche compatte per rappresentare i dati in scenari di elaborazione delle immagini e di recupero delle informazioni.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>

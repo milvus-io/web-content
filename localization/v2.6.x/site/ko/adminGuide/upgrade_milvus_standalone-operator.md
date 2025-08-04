@@ -39,18 +39,21 @@ title: Milvus 오퍼레이터로 Milvus 스탠드얼론 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 명령어를 실행하여 Milvus 운영자 버전을 v1.2.0으로 업그레이드합니다.</p>
+    </button></h2><p>다음 명령어를 실행하여 Milvus 운영자 버전을 v1.3.0으로 업그레이드합니다.</p>
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 운영자를 최신 버전으로 업그레이드한 후에는 다음과 같은 옵션을 선택할 수 있습니다:</p>
 <ul>
-<li>Milvus를 v2.2.3 이상 릴리스에서 2.5.12로 업그레이드하려면 <a href="#Conduct-a-rolling-upgrade">롤링 업그레이드를 수행하면</a> 됩니다.</li>
-<li>v2.2.3 이전 마이너 릴리스에서 2.5.12로 업그레이드하려면 <a href="#Upgrade-Milvus-by-changing-its-image">이미지 버전을 변경하여 Mil</a>vus를 업그레이드하는 것이 좋습니다.</li>
-<li>Milvus를 v2.1.x에서 2.5.12로 업그레이드하려면 실제 업그레이드 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</li>
+<li>Milvus를 v2.2.3에서 업그레이드하려면 <a href="#Conduct-a-rolling-upgrade">롤링 업그레이드를 수행하면</a> 됩니다.</li>
+<li>v2.2.3 이전 마이너 릴리스에서 2.6.0으로 업그레이드하려면 <a href="#Upgrade-Milvus-by-changing-its-image">이미지 버전을 변경하여 Mil</a>vus를 업그레이드하는 것이 좋습니다.</li>
+<li>Milvus를 v2.1.x에서 2.6.0으로 업그레이드하려면 실제 업그레이드 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</li>
 </ul>
-<h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">롤링 업그레이드 수행<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
+<blockquote>
+<p><strong>참고</strong>: 한 번에 하나의 부 버전을 업그레이드하고 해당 부 버전의 최신 안정 릴리스를 사용하는 것이 좋습니다. 예를 들어 v2.4.x에서 v2.6.x로 업그레이드하는 경우 먼저 최신 v2.4.x로 업그레이드한 다음 최신 v2.5.x로, 마지막으로 v2.6.x로 업그레이드해야 기존 데이터 및 구성과 호환될 가능성이 높은 각 부 버전의 최신 안정 릴리스를 사용할 수 있습니다.</p>
+</blockquote>
+<h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">롤링 업그레이드 실시<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +79,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>위의 구성 파일에서 <code translate="no">spec.components.enableRollingUpdate</code> 을 <code translate="no">true</code> 으로 설정하고 <code translate="no">spec.components.image</code> 을 원하는 Milvus 버전으로 설정합니다.</p>
 <p>기본적으로 Milvus는 코디네이터에 대해 순차적으로 롤링 업그레이드를 수행하여 코디네이터 포드 이미지를 차례로 교체합니다. 업그레이드 시간을 줄이려면 <code translate="no">spec.components.imageUpdateMode</code> 을 <code translate="no">all</code> 으로 설정하여 Milvus가 모든 포드 이미지를 동시에 교체하도록 하세요.</p>
@@ -88,7 +91,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-attr">components:</span>
     <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">all</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">spec.components.imageUpdateMode</code> 을 <code translate="no">rollingDowngrade</code> 으로 설정하여 Milvus가 코디네이터 파드 이미지를 하위 버전으로 대체하도록 할 수 있습니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -130,7 +133,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
   <span class="hljs-attr">components:</span>
-   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.12</span>
+   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>그런 다음 다음을 실행하여 업그레이드를 수행합니다:</p>
 <pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge
@@ -150,8 +153,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.2.0부터는 메타데이터가 이전 릴리즈의 메타데이터와 호환되지 않습니다. 다음 예제 코드 조각은 Milvus 2.1.4에서 Milvus v2.5.12로 업그레이드하는 경우를 가정합니다.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. 메타데이터 마이그레이션을 위한 <code translate="no">.yaml</code> 파일 만들기</h3><p>메타데이터 마이그레이션 파일을 만듭니다. 다음은 예시입니다. 구성 파일에 <code translate="no">name</code>, <code translate="no">sourceVersion</code>, <code translate="no">targetVersion</code> 을 지정해야 합니다. 다음 예에서는 <code translate="no">name</code> 을 <code translate="no">my-release-upgrade</code> 으로 , <code translate="no">sourceVersion</code> 을 <code translate="no">v2.1.4</code> 으로 , <code translate="no">targetVersion</code> 을 <code translate="no">v2.5.12</code> 으로 설정합니다. 즉, Milvus 인스턴스가 v2.1.4에서 v2.5.12로 업그레이드됩니다.</p>
+    </button></h2><p>Milvus 2.2.0부터는 메타데이터가 이전 릴리즈의 메타데이터와 호환되지 않습니다. 다음 예제 코드 조각은 Milvus 2.1.4에서 Milvus v2.6.0으로 업그레이드하는 경우를 가정합니다.</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. 메타데이터 마이그레이션을 위한 <code translate="no">.yaml</code> 파일 만들기</h3><p>메타데이터 마이그레이션 파일을 만듭니다. 다음은 예시입니다. 설정 파일에 <code translate="no">name</code>, <code translate="no">sourceVersion</code>, <code translate="no">targetVersion</code> 을 지정해야 합니다. 다음 예에서는 <code translate="no">name</code> 을 <code translate="no">my-release-upgrade</code> 으로 , <code translate="no">sourceVersion</code> 을 <code translate="no">v2.1.4</code> 으로 , <code translate="no">targetVersion</code> 을 <code translate="no">v2.6.0</code> 으로 설정합니다. 즉, Milvus 인스턴스가 v2.1.4에서 v2.6.0으로 업그레이드됩니다.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
 <span class="hljs-attr">metadata:</span>
@@ -161,9 +164,9 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
     <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.5.12&quot;</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.6.0&quot;</span>
   <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.5.12&quot;</span>
+  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.6.0&quot;</span>
   <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
   <span class="hljs-comment"># operation: upgrade</span>
   <span class="hljs-comment"># rollbackIfFailed: true</span>

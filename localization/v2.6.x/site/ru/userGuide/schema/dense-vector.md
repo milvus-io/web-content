@@ -54,7 +54,7 @@ summary: >-
 <ul>
 <li><p><strong>Многомерное представление:</strong> Каждая точка представляет собой концептуальный объект (например, <strong>Milvus</strong>, <strong>векторную базу данных</strong>, <strong>поисковую систему</strong> и т. д.), положение которого определяется значениями его размерностей.</p></li>
 <li><p><strong>Семантические отношения:</strong> Расстояния между точками отражают семантическое сходство между концептами. Более близкие точки указывают на концепции, которые более семантически связаны.</p></li>
-<li><p><strong>Эффект кластеризации:</strong> Связанные понятия (такие как <strong>Milvus</strong>, <strong>векторная база данных</strong> и <strong>поисковая система</strong>) располагаются близко друг к другу в пространстве, образуя семантический кластер.</p></li>
+<li><p><strong>Эффект кластеризации:</strong> Связанные понятия (например, <strong>Milvus</strong>, <strong>векторная база данных</strong> и <strong>поисковая система</strong>) располагаются близко друг к другу в пространстве, образуя семантический кластер.</p></li>
 </ul>
 <p>Ниже приведен пример реального плотного вектора, представляющего текст <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
@@ -231,10 +231,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Хранит векторы, отдельные элементы которых в каждом измерении являются 8-битными целыми числами (int8), причем каждый элемент находится в диапазоне от -128 до 127. Разработанный для квантованных моделей глубокого обучения (например, ResNet, EfficientNet), INT8_VECTOR уменьшает размер модели и ускоряет вывод с минимальной потерей точности.</p></td>
+     <td><p>Хранит векторы, отдельные элементы которых в каждом измерении являются 8-битными целыми числами (int8), причем каждый элемент находится в диапазоне от -128 до 127. Разработанный для квантованных моделей глубокого обучения (например, ResNet, EfficientNet), INT8_VECTOR уменьшает размер модели и ускоряет вывод с минимальной потерей точности.<br><strong>Примечание</strong>: Этот тип вектора поддерживается только для индексов HNSW.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Установка индексных параметров для векторного поля</h3><p>Чтобы ускорить семантический поиск, необходимо создать индекс для векторного поля. Индексирование может значительно повысить эффективность поиска по крупномасштабным векторным данным.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Установка параметров индекса для векторного поля</h3><p>Чтобы ускорить семантический поиск, необходимо создать индекс для векторного поля. Индексирование может значительно повысить эффективность поиска по крупномасштабным векторным данным.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -335,7 +335,7 @@ client.createCollection(requestCreate);
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>После создания коллекции используйте метод <code translate="no">insert</code> для добавления данных, содержащих плотные векторы. Убедитесь, что размерность вставляемых плотных векторов соответствует значению <code translate="no">dim</code>, заданному при добавлении поля плотных векторов.</p>
+<h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>После создания коллекции используйте метод <code translate="no">insert</code> для добавления данных, содержащих плотные векторы. Убедитесь, что размерность вставляемых плотных векторов соответствует значению <code translate="no">dim</code>, определенному при добавлении поля плотных векторов.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [

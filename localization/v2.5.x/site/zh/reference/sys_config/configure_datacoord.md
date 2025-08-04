@@ -246,7 +246,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        有磁盘索引的 Collections 的最大数据段大小（MB      </td>
+      <td>        具有磁盘索引的 Collections 的最大分段大小（MB      </td>
       <td>2048</td>
     </tr>
   </tbody>
@@ -304,7 +304,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        分段密封比例抖动率，默认值 0.1（10%），如果密封比例为 12%，抖动率=0.1，则实际应用比例为 10.8~12      </td>
+      <td>        段密封比例抖动率，默认值 0.1（10%），如果密封比例为 12%，抖动率=0.1，则实际应用比例为 10.8~12      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -725,7 +725,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   <tbody>
     <tr>
       <td>
-        <li>控制是否启用自动分段压缩的开关值，在此过程中，data coord 会在后台定位并合并可压缩的分段。</li>      
+        <li>控制是否启用自动分段压缩的开关值，在此过程中 Data coord 会在后台定位并合并可压缩的分段。</li>      
         <li>此配置仅在 dataCoord.enableCompaction 设置为 true 时生效。</li>      </td>
       <td>true</td>
     </tr>
@@ -1600,7 +1600,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        数据协调器执行垃圾收集的时间间隔，单位：秒。      </td>
+      <td>        Data coord 执行垃圾收集的时间间隔，单位：秒。      </td>
       <td>3600</td>
     </tr>
   </tbody>
@@ -2180,7 +2180,7 @@ summary: 了解如何为 Milvus 配置 dataCoord。
   </thead>
   <tbody>
     <tr>
-      <td>        L0 压实任务的插槽使用量。      </td>
+      <td>        L0 压实作业的插槽使用量。      </td>
       <td>8</td>
     </tr>
   </tbody>

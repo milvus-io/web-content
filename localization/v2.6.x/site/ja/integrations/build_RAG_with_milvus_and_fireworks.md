@@ -26,7 +26,7 @@ title: MilvusとFireworks AIでRAGを構築する
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://fireworks.ai/">Fireworks AIは</a>、生成AI推論プラットフォームであり、業界をリードするスピードと、モデルの実行とカスタマイズのためのプロダクションレディネスを提供します。 Fireworks AIは、サーバーレスモデル、オンデマンドデプロイメント、微調整機能を含む、様々な生成AIサービスを提供します。大規模言語モデル（LLM）やエンベッディングモデルなど、さまざまなAIモデルをデプロイするための包括的な環境を提供する。Fireworks AIは多数のモデルを集約しているため、ユーザーは大規模なインフラを構築することなく、これらのリソースに簡単にアクセスして利用することができます。</p>
+<p><a href="https://fireworks.ai/">Fireworks AIは</a>、生成AI推論プラットフォームであり、業界をリードするスピードと、モデルの実行とカスタマイズのためのプロダクションレディネスを提供します。 Fireworks AIは、サーバーレスモデル、オンデマンドデプロイメント、微調整機能を含む、様々な生成AIサービスを提供します。大規模言語モデル（LLM）やエンベッディングモデルなど、さまざまなAIモデルをデプロイするための包括的な環境を提供する。Fireworks AIは多数のモデルを集約しているため、ユーザーは大規模なインフラストラクチャを構築することなく、これらのリソースに簡単にアクセスして利用することができます。</p>
 <p>このチュートリアルでは、MilvusとFireworks AIを使ってRAG（Retrieval-Augmented Generation）パイプラインを構築する方法をご紹介します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,7 +135,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>

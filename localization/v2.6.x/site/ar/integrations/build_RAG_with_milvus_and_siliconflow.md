@@ -27,7 +27,7 @@ title: بناء RAG مع Milvus و SiliconFlow
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>تلتزم شركة<a href="https://siliconflow.cn/">SiliconFlow</a> ببناء منصة ذكاء اصطناعي قابلة للتطوير وموحدة وعالية الأداء للذكاء الاصطناعي. SiliconCloud هي إحدى العروض الرئيسية من SiliconFlow، والتي توصف بأنها منصة نموذج كخدمة (MaaS). وهي توفر بيئة شاملة لنشر نماذج الذكاء الاصطناعي المختلفة، بما في ذلك النماذج اللغوية الكبيرة ونماذج التضمين. تجمع سيليكون كلاود العديد من النماذج مفتوحة المصدر، مما يتيح للمستخدمين الوصول إلى هذه الموارد والاستفادة منها بسهولة دون الحاجة إلى إعداد بنية تحتية واسعة النطاق.</p>
-<p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب RAG (استرجاع-توليد معزز) باستخدام Milvus و SiliconFlow.</p>
+<p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية بناء خط أنابيب RAG (استرجاع-توليد معزز) باستخدام Milvus و SiliconFlow.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,7 +132,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>قم بتكرار الأسطر النصية وإنشاء التضمينات، ثم أدخل البيانات في ميلفوس.</p>

@@ -102,7 +102,7 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Zeilenzahl, durch die Segcore ein Segment in Chunks unterteilt.      </td>
+      <td>        Zeilenzahl, mit der Segcore ein Segment in Chunks unterteilt.      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -221,7 +221,7 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        zusätzlicher Speicherbedarf für den Aufbau des Zwischenindex      </td>
+      <td>        zusätzlicher Speicherbedarf für den Aufbau eines Zwischenindex      </td>
       <td>1.15</td>
     </tr>
   </tbody>
@@ -1054,7 +1054,7 @@ summary: 'Erfahren Sie, wie Sie queryNode für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Aktiviert die benutzerübergreifende Gruppierung bei der Verwendung der Richtlinie für die Abfrage von Benutzeraufgaben. (Deaktivieren Sie es, wenn die Aufgaben der Benutzer nicht zusammengeführt werden können)      </td>
+      <td>        Aktiviert die benutzerübergreifende Gruppierung bei Verwendung der Richtlinie für die Abfrage von Benutzeraufgaben. (Deaktivieren Sie es, wenn die Aufgaben der Benutzer nicht zusammengeführt werden können)      </td>
       <td>falsch</td>
     </tr>
   </tbody>

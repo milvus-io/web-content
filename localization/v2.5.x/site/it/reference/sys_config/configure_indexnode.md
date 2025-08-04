@@ -130,7 +130,7 @@ summary: Scoprite come configurare indexNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione massima di ogni richiesta RPC che l'indexNode può inviare, unità: byte    </td>
+      <td>        Dimensione massima di ciascuna richiesta RPC che l'indexNode può inviare, unità: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>

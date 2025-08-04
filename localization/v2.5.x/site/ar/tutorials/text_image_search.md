@@ -5,7 +5,7 @@ summary: >-
   الصور المستند إلى النصوص باستخدام نموذج CLIP (التدريب المسبق على لغة
   التباين-الصور المتباينة) من OpenAI و Milvus. سنقوم بإنشاء تضمينات للصور
   باستخدام CLIP، وتخزينها في Milvus، وإجراء عمليات بحث فعالة عن التشابه.
-title: البحث من نص إلى صورة باستخدام ميلفوس
+title: البحث من نص إلى صورة مع ميلفوس
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -13,7 +13,7 @@ title: البحث من نص إلى صورة باستخدام ميلفوس
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">البحث من نص إلى صورة باستخدام ميلفوس<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">البحث من نص إلى صورة مع ميلفوس<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,7 +92,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
 <li><code translate="no">encode_image(image_path)</code>: معالجة الصور وترميزها إلى متجهات ميزات</li>
 <li><code translate="no">encode_text(text)</code>: ترميز الاستعلامات النصية إلى متجهات ميزات</li>
 </ul>
-<p>تعمل كلتا الدالتين على تطبيع ميزات الإخراج لضمان اتساق المقارنات من خلال تحويل المتجهات إلى وحدة الطول، وهو أمر ضروري لحسابات دقيقة لتشابه جيب التمام.</p>
+<p>تعمل كلتا الدالتين على تطبيع ميزات الإخراج لضمان اتساق المقارنات عن طريق تحويل المتجهات إلى وحدة الطول، وهو أمر ضروري لحسابات دقيقة لتشابه جيب التمام.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> clip
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
