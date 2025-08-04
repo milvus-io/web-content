@@ -16,7 +16,7 @@ This guide describes how to upgrade your Milvus cluster with Milvus Helm charts.
 
 <div class="alert note">
 
-Upgrading from Milvus 2.5.x (or earlier versions) to 2.6.0-rc1 involves significant architectural changes that make this upgrade **irreversible**. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, **you cannot roll back to a previous version once the upgrade is completed**. For details on the architectural changes introduced in 2.6.0-rc1, refer to [Milvus Architecture Overview](architecture_overview.md).
+Upgrading from Milvus 2.5.x (or earlier versions) to 2.6.0 involves significant architectural changes that make this upgrade **irreversible**. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, **you cannot roll back to a previous version once the upgrade is completed**. For details on the architectural changes introduced in 2.6.0, refer to [Milvus Architecture Overview](architecture_overview.md).
 
 </div>
 
@@ -91,11 +91,11 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 
 You can choose the upgrade path for your Milvus as follows:
 
-<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.6.0-rc1.</div>
+<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.6.0.</div>
 
-- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.6.0-rc1.
+- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.6.0.
 
-- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.6.0-rc1.
+- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.6.0.
 
 <div style="display: none;">
     
@@ -117,10 +117,10 @@ The script applies only to the upgrade of Milvus installed with Helm. The follow
 | `w`          | New Milvus image tag                                      | `milvusdb/milvus:v2.2.3`         | True                    |
 | `o`          | Operation                                                 | `update`                         | False                   |
 
-Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.6.0-rc1.
+Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.6.0.
 
 ```shell
-sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0-rc1 -w 'milvusdb/milvus:v2.6.0-rc1'
+sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0 -w 'milvusdb/milvus:v2.6.0'
 ```
 
 <div class="alert note">
@@ -139,7 +139,7 @@ To upgrade Milvus from a minor release before v2.2.3 to the latest, run the foll
 
 ```shell
 helm repo update zilliztech
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.2.53 # use the helm chart version here
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=5.0.0 # use the helm chart version here
 ```
 
 Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).
