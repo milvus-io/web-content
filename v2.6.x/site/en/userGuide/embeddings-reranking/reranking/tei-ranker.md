@@ -97,7 +97,7 @@ results = client.search(
     output_fields=["document"],                  # Include text field for reranking
     #  highlight-next-line
     ranker=tei_ranker,                         # Apply tei reranking
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 ```
 

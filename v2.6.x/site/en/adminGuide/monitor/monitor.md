@@ -66,11 +66,61 @@ $ kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000
 
 The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter `metrics.serviceMonitor.enabled=true`.
 
-```
-$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
-```
+#### With Helm
+
+You can enable the ServiceMonitor by setting the parameter `metrics.serviceMonitor.enabled=true` as follows if you have installed Milvus Helm chart.
+
+    ```
+    $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
+    ```
 
 When the installation completes, use `kubectl` to check the ServiceMonitor resource.
+
+#### With Milvus Operator
+
+You can enable the ServiceMonitor as follows if you have installed Milvus using the Milvus Operator.
+
+1. Run the following command to edit the MIlvus custom resource. The following command assumes that the custom resource is named `my-release`.
+
+    ```
+    $ kubectl edit milvus my-release
+    ```
+
+2. Edit the `spec.components.disableMetrics` field to `false`.
+
+    ```yaml
+    ...
+    spec:
+      components:
+        disableMetrics: false # set to true to disable metrics
+    ...
+    ```
+
+3. Save and exit the editor.
+
+4. Wait for the operator to reconcile the changes. You can check the status of the Milvus custom resource by running the following command.
+
+    ```
+    $ kubectl get milvus my-release -o yaml
+    ```
+
+The `status.components.metrics.serviceMonitor.enabled` field should be `true`.
+
+### 3. Check the metrics
+
+After enabling the ServiceMonitor, you can access the Prometheus dashboard at `http://localhost:9090/`.
+
+Click on the `Status` tab and then `Targets`. You should see the targets of the Milvus components.
+
+![Prometheus_targets](../../../../assets/prometheus_targets.png "The Prometheus targets.")
+
+Click on the `Graph` tab and enter the expression `up{job="default/my-release"}` in the expression input box. You should see the metrics of the Milvus components.
+
+![Prometheus_graph](../../../../assets/prometheus_graph.png "The Prometheus graph.")
+
+### 4. Check the ServiceMonitor
+
+
 
 ```
 $ kubectl get servicemonitor

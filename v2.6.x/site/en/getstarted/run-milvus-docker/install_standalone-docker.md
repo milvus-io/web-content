@@ -46,6 +46,24 @@ After running the installation script:
 
 You can access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
 
+## (Optional) Update Milvus configurations
+
+You can modify the Milvus configurations in the **user.yaml** file in the current folder. For example, to change the `proxy.healthCheckTimeout` to `1000` ms, you can modify the file as follows:
+
+```shell
+cat << EOF > user.yaml
+# Extra config to override default milvus.yaml
+proxy:
+  healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
+EOF
+```
+
+Then restart the service as follows:
+
+```shell
+$ bash standalone_embed.sh restart
+```
+
 ## Stop and delete Milvus
 
 You can stop and delete this container as follows

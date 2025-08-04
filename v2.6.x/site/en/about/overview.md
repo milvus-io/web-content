@@ -15,7 +15,7 @@ summary: Milvus is a high-performance, highly scalable vector database that runs
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background: url('https://milvus.io/docs/v2.6.x/assets/hearing.png') no-repeat center center;
     background-size: contain;
     cursor: pointer;
     margin-left: 4px;
@@ -66,7 +66,7 @@ In 2022, Milvus supported billion-scale vectors, and in 2023, it scaled up to te
 
 Milvus's cloud-native and highly decoupled system architecture ensures that the system can continuously expand as data grows:
 
-![Highly decoupled system architecture of Milvus](../../../assets/highly-decoupled-architecture.png)
+![Highly decoupled system architecture of Milvus](../../../assets/milvus_architecture_2_6.png)
 
 Milvus itself is fully stateless so it can be easily scaled with the help of Kubernetes or public clouds. In addition, Milvus components are well decoupled, with the three most critical tasks—search, data insertion, and indexing/compaction—designed as easily parallelized processes, with complex logic separated out. This ensures that the corresponding query node, data node, and index node can scale both up and out independently, optimizing performance and cost efficiency.
 
@@ -95,6 +95,8 @@ In addition to the key search features mentioned above, Milvus also provides a s
 - [Java SDK](https://milvus.io/api-reference/java/v2.4.x/About.md) (official)
 - [Node.js](https://milvus.io/api-reference/node/v2.4.x/About.md) (JavaScript) SDK (official)
 - [C#](https://milvus.io/api-reference/csharp/v2.2.x/About.md) (contributed by Microsoft)
+- C++ SDK (under development)
+- Rust SDK (under development)
 
 ### Advanced Data Types
 
@@ -104,32 +106,30 @@ In addition to primitive data types, Milvus supports various advanced data types
 - [Binary Vectors](index-vector-fields.md)
 - [JSON Support](use-json-fields.md)
 - [Array Support](array_data_type.md)
-- [Distance Metrics](metric.md)
+- Text (under development)
+- Geolocation (under development)
 
-### Acceleration
+### Why Milvus?
 
-- Search Algorithms
-  Milvus supports a set of tunable indexing and search algorithms. For details, see [In-memory Index](index.md), [On-disk Index](disk_index.md), and [GPU Index](gpu_index.md).
+- **High Performance at Scale and High Availability**
 
-- Partitions and Partition Keys
-  Partitions are sub-divisions of a Milvus collection. You can choose a scalar field as the partition key for better search performance. For details, see [Manage Partitions](manage-partitions.md) and [Use Partition Key](use-partition-key.md).
+  Milvus features a [distributed architecture](architecture_overview.md) that separates [compute](data_processing.md#Data-query) and [storage](data_processing.md#Data-insertion). Milvus can horizontally scale and adapt to diverse traffic patterns, achieving optimal performance by independently increasing query nodes for read-heavy workload and data node for write-heavy workload. The stateless microservices on K8s allow [quick recovery](coordinator_ha.md#Coordinator-HA) from failure, ensuring high availability. The support for [replicas](replica.md) further enhances fault tolerance and throughput by loading data segments on multiple query nodes. See [benchmark](https://zilliz.com/vector-database-benchmark-tool) for performance comparison.
 
-- Tunable Consistency Model
-  Consistency ensures every Milvus node or replica has the same view of data when writing or reading data at a given time. You can easily tune the consistency level when conducting ANN searches in Milvus. For details, see [Consistency](consistency.md).
+- **Support for Various Vector Index Types and Hardware Acceleration**
 
-- High-throughput Data Import
-  To import a large volume of data into Milvus instead of inserting them one after another, consider using our high-throughput data import tools. For details, refer to [Prepare Source Data](prepare-source-data.md) and [Import Data](import-data.md).
+  Milvus separates the system and core vector search engine, allowing it to support all major vector index types that are optimized for different scenarios, including HNSW, IVF, FLAT (brute-force), SCANN, and DiskANN, with [quantization-based](index-explained.md) variations and [mmap](mmap.md). Milvus optimizes vector search for advanced features such as [metadata filtering](boolean.md) and [range search](range-search.md). Additionally, Milvus implements hardware acceleration to enhance vector search performance and supports GPU indexing, such as NVIDIA's [CAGRA](gpu-cagra.md).
 
-- Multi-tenancy Support
-  Milvus has implemented a lot of features oriented to multi-tenancy scenarios, including Partition Key, Clustering Key, and more. For details, see [Multi-tenancy Strategies](multi_tenancy.md).
+- **Flexible Multi-tenancy and Hot/Cold Storage**
 
-### Security and Authorization
+  Milvus supports [multi-tenancy](multi_tenancy.md#Multi-tenancy-strategies) through isolation at database, collection, partition, or partition key level. The flexible strategies allow a single cluster to handle hundreds to millions of tenants, also ensures optimized search performance and flexible access control. Milvus enhances cost-effectiveness with hot/cold storage. Frequently accessed hot data can be stored in memory or on SSDs for better performance, while less-accessed cold data is kept on slower, cost-effective storage. This mechanism can significantly reduce costs while maintaining high performance for critical tasks.
 
-- Tunable Consistency Model
-  Consistency ensures every Milvus node or replica has the same view of data when writing or reading data at a given time. You can easily tune the consistency level when conducting ANN searches in Milvus. For details, see [Consistency](consistency.md).
+- **Sparse Vector for Full Text Search and Hybrid Search**
 
-- Data Isolation and Resource Control
-  For multi-tenancy scenarios, data isolation is the basic security requirement. Milvus implements several features to resolve your security concerns. For details, see [Manage Resource Groups](resource_group.md) and [Clustering Compaction](clustering-compaction.md).
+  In addition to semantic search through dense vector, Milvus also natively supports [full text search](full-text-search.md) with BM25 as well as learned sparse embedding such as SPLADE and BGE-M3. Users can store sparse vector and dense vector in the same collection, and define functions to rerank results from multiple search requests. See examples of [Hybrid Search with semantic search + full text search](full_text_search_with_milvus.md).
+
+- **Data Security and Fine-grain Access Control**
+
+  Milvus ensures data security by implementing [mandatory user authentication](authenticate.md), [TLS encryption](tls.md), and [Role-Based Access Control (RBAC)](rbac.md). User authentication ensures that only authorized users with valid credentials can access the database, while TLS encryption secures all communications within the network. Additionally, RBAC allows for fine-grained access control by assigning specific permissions to users based on their roles. These features make Milvus a robust and secure choice for enterprise applications, protecting sensitive data from unauthorized access and potential breaches. 
 
 ### AI Integrations
 

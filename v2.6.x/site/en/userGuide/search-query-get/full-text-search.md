@@ -358,17 +358,26 @@ index_params.add_index(
 ```java
 import io.milvus.v2.common.IndexParam;
 
+Map<String,Object> params = new HashMap<>();
+fvParams.put("inverted_index_algo", "DAAT_MAXSCORE");
+fvParams.put("bm25_k1", 1.2);
+fvParams.put("bm25_b", 0.75);
+
 List<IndexParam> indexes = new ArrayList<>();
 indexes.add(IndexParam.builder()
         .fieldName("sparse")
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.BM25)
+        .extraParams(params)
         .build());    
 ```
 
 ```go
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse",
     index.NewAutoIndex(entity.MetricType(entity.BM25)))
+    .WithExtraParam("inverted_index_algo", "DAAT_MAXSCORE")
+    .WithExtraParam("bm25_k1", 1.2)
+    .WithExtraParam("bm25_b", 0.75)
 ```
 
 ```javascript
@@ -376,7 +385,12 @@ const index_params = [
   {
     field_name: "sparse",
     metric_type: "BM25",
-    index_type: "AUTOINDEX",
+    index_type: "SPARSE_INVERTED_INDEX",
+    params: {
+        "inverted_index_algo": "DAAT_MAXSCORE",
+        "bm25_k1": 1.2,
+        "bm25_b": 0.75
+    }
   },
 ];
 ```
@@ -386,7 +400,12 @@ export indexParams='[
         {
             "fieldName": "sparse",
             "metricType": "BM25",
-            "indexType": "AUTOINDEX"
+            "indexType": "AUTOINDEX",
+            "params":{
+               "inverted_index_algo": "DAAT_MAXSCORE",
+               "bm25_k1": 1.2,
+               "bm25_b": 0.75
+            }
         }
     ]'
 ```

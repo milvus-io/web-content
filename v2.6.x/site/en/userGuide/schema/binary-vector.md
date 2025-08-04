@@ -246,7 +246,7 @@ export indexParams='[
 
 In the example above, an index named `binary_vector_index` is created for the `binary_vector` field, using the `AUTOINDEX` index type. The `metric_type` is set to `HAMMING`, indicating that Hamming distance is used for similarity measurement.
 
-Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.
+Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to [Index Explained](index-explained.md).
 
 Additionally, Milvus supports other similarity metrics for binary vectors. For more information, refer to [Metric Types](metric.md).
 

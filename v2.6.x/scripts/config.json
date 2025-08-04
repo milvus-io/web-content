@@ -369,6 +369,56 @@
                         "token": "Kc3Cweq1AhAmMGbrVgRcTlTKnUf",
                         "type": "board",
                         "alt_text": "data-model-anatomy"
+                    },
+                    {
+                        "token": "AF0fbMmXVoCJwrxCPR3c0fZMnwf",
+                        "type": "image",
+                        "alt_text": "inverted-index"
+                    },
+                    {
+                        "token": "CCzEwT7uchMqI6bsxRJcK1qenEh",
+                        "type": "board",
+                        "alt_text": "minhash-workflow"
+                    },
+                    {
+                        "token": "E1dewMnqshua0ib7aHmcL10lnIe",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-1"
+                    },
+                    {
+                        "token": "PhSMwS74rh25oybv9Docmfionze",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-2"
+                    },
+                    {
+                        "token": "RfmMwNkIvhlUFSb11alcP8fqnmf",
+                        "type": "board",
+                        "alt_text": "lsh-workflow-3"
+                    },
+                    {
+                        "token": "O0jWb6cbwoXcfox5iWxcWI6Dn8b",
+                        "type": "image",
+                        "alt_text": "code-helper-enabled"
+                    },
+                    {
+                        "token": "TnCybwPveoYMFlx5TZZc4ilRnDs",
+                        "type": "image",
+                        "alt_text": "code-helper-disabled"
+                    },
+                    {
+                        "token": "CzVgbjBstouIBIxA8xxcwot2nlb",
+                        "type": "image",
+                        "alt_text": "cursor-mcp-settings"
+                    },
+                    {
+                        "token": "Q8KqbLpT6oVcztxu76UcTV6TnNh",
+                        "type": "image",
+                        "alt_text": "cherry-studio-mcp-settings"
+                    },
+                    {
+                        "token": "K2NgbMhGdopLbvxSb2JcHcfBnWb",
+                        "type": "image",
+                        "alt_text": "scann"
                     }
                 ]
             }

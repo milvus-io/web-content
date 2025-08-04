@@ -6,7 +6,7 @@ summary: "The Upsert operation combines the actions of updating and inserting da
 
 # Upsert Entities
 
-The Upsert operation combines the actions of updating and inserting data. Milvus determines whether to perform an update or an insert operation by checking if the primary key exists. This section will introduce how to Upsert an Entity and the specific behaviors of the Upsert operation in different scenarios.
+The `upsert` operation provides a convenient way to insert or update entities in a collection. It intelligently handles data by checking for the existence of a primary key: if the key already exists, the corresponding entity is updated; otherwise, a new entity is inserted. This makes `upsert` the recommended method for managing data when you are unsure if an entity already exists or when you need to avoid creating duplicate entries.
 
 <div class="alert note">
 

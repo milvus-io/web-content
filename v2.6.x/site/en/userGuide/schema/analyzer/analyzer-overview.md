@@ -8,7 +8,7 @@ summary: "In text processing, an analyzer is a crucial component that converts r
 
 In text processing, an **analyzer** is a crucial component that converts raw text into a structured, searchable format. Each analyzer typically consists of two core elements: **tokenizer** and **filter**. Together, they transform input text into tokens, refine these tokens, and prepare them for efficient indexing and retrieval.
 
-In Milvus, analyzers are configured during collection creation when you add `VARCHAR` fields to the collection schema. Tokens produced by an analyzer can be used to build an index for keyword matching or converted into sparse embeddings for full text search. For more information, refer to [Text Match](keyword-match.md) or [Full Text Search](full-text-search.md).
+In Milvus, analyzers are configured during collection creation when you add `VARCHAR` fields to the collection schema. Tokens produced by an analyzer can be used to build an index for keyword matching or converted into sparse embeddings for full text search. For more information, refer to  [Full Text Search](full-text-search.md), [Phrase Match](phrase-match.md), or [Text Match](keyword-match.md).
 
 <div class="alert note">
 
@@ -48,7 +48,8 @@ Milvus provides two types of analyzers to meet different text processing needs:
 
 <div class="alert note">
 
-If you omit analyzer configurations during collection creation, Milvus uses the `standard` analyzer for all text processing by default. For details, refer to [Standard](standard-analyzer.md).
+- If you omit analyzer configurations during collection creation, Milvus uses the `standard` analyzer for all text processing by default. For details, refer to [Standard Analyzer](standard-analyzer.md). 
+- For optimal search and query performance, choose an analyzer that matches the language of your text data. For instance, while the `standard` analyzer is versatile, it may not be the best choice for languages with unique grammatical structures, such as Chinese, Japanese, or Korean. In such cases, using a language-specific analyzer like [`chinese`](chinese-analyzer.md) or custom analyzers with specialized tokenizers (such as [`lindera`](lindera-tokenizer.md), [`icu`](icu-tokenizer.md)) and filters is highly recommended to ensure accurate tokenization and better search results.
 
 </div>
 
@@ -934,3 +935,14 @@ if err != nil {
 ```bash
 # restful
 ```
+
+## What's next
+
+After configuring an analyzer, you can integrate with text retrieval features provided by Milvus. For details:
+
+- [Full Text Search](full-text-search.md)
+
+- [Text Match](keyword-match.md)
+
+- [Phrase Match](phrase-match.md)
+

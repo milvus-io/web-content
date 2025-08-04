@@ -46,11 +46,11 @@ The arms and legs. Worker nodes are dumb executors that follow instructions from
 
 ### Streaming node
 
-Streaming node serves as the shard-level "mini-brain", providing shard-level consistency guarantees and fault recovery based on underlying WAL Storage. Meanwhile, Streaming Node is also responsible for growing data querying and generating query plans. Additionally, it also handles the conversion of growing data into sealed(historical) data.
+Streaming Node serves as the shard-level "mini-brain", providing shard-level consistency guarantees and fault recovery based on underlying WAL Storage. Meanwhile, Streaming Node is also responsible for growing data querying and generating query plans. Additionally, it also handles the conversion of growing data into sealed (historical) data.
 
 ### Query node
 
-Query node loads the historical data from object storage, and provides the Historical data querying.
+Query node loads the historical data from object storage, and provides the historical data querying.
 
 ### Data node
 
@@ -90,10 +90,10 @@ Milvus APIs are categorized by their function and follow specific paths through 
 
 1. Client sends a search request via SDK/RESTful API
 2. Load Balancer routes request to available Proxy in Access Layer
-3. Proxy forwards request to Coordinator for routing decisions
-4. Coordinator directs request to appropriate Query Nodes in Batch Worker Node
-5. Query Nodes load sealed segments from Object Storage as needed
-6. Search results are returned through the same path back to client
+3. Proxy uses routing cache to determine target nodes; contacts Coordinator only if cache is unavailable
+4. Proxy forwards request to appropriate Streaming Nodes, which then coordinate with Query Nodes for sealed data search while executing growing data search locally
+5. Query Nodes load sealed segments from Object Storage as needed and perform segment-level search
+6. Search results undergo multi-level reduction: Query Nodes reduce results across multiple segments, Streaming Nodes reduce results from Query Nodes, and Proxy reduces results from all Streaming Nodes before returning to client
 
 ### Example Data Flow: Data Insertion
 
@@ -102,7 +102,8 @@ Milvus APIs are categorized by their function and follow specific paths through 
 3. Streaming Node logs operation to WAL Storage for durability
 4. Data is processed in real-time and made available for queries
 5. When segments reach capacity, Streaming Node triggers conversion to sealed segments
-6. Data Node handles compaction and index building, storing results in Object Storage
+6. Data Node handles compaction and builds indexes on top of the sealed segments, storing results in Object Storage
+7. Query Nodes load the newly built indexes and replace the corresponding growing data
 
 ## What's Next
 

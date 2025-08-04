@@ -279,21 +279,15 @@
         "children": []
       },
       {
-        "label": "Consistency Level",
-        "id": "tune_consistency.md",
-        "order": 8,
-        "children": []
-      },
-      {
         "label": "In-memory Replica",
         "id": "replica.md",
-        "order": 9,
+        "order": 8,
         "children": []
       },
       {
         "label": "Terminology",
         "id": "glossary.md",
-        "order": 10,
+        "order": 9,
         "children": []
       }
     ]
@@ -352,21 +346,27 @@
             "children": []
           },
           {
+            "label": "Set Consistency Level",
+            "id": "tune_consistency.md",
+            "order": 7,
+            "children": []
+          },
+          {
             "label": "Manage Partitions",
             "id": "manage-partitions.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Manage Aliases",
             "id": "manage-aliases.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Drop Collection",
             "id": "drop-collection.md",
-            "order": 9,
+            "order": 10,
             "children": []
           }
         ]
@@ -712,6 +712,12 @@
                 "id": "diskann.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "SCANN",
+                "id": "scann.md",
+                "order": 10,
+                "children": []
               }
             ]
           },
@@ -731,6 +737,12 @@
                 "label": "BIN_FLAT",
                 "id": "bin-flat.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "MINHASH_LSH",
+                "id": "minhash-lsh.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -883,6 +895,12 @@
                 "label": "Array Operators",
                 "id": "array-operators.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Random Sampling",
+                "id": "random-sampling.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -1082,6 +1100,26 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      {
+        "label": "Storage Optimization",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Use mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Clustering Compaction",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
           }
         ]
       }
@@ -1374,15 +1412,21 @@
             "children": []
           },
           {
+            "label": "Scale Standalone",
+            "id": "scale-standalone.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Scale with HPA",
             "id": "hpa.md",
-            "order": 1,
+            "order": 2,
             "children": []
           },
           {
             "label": "Scale Dependencies",
             "id": "scale-dependencies.md",
-            "order": 2,
+            "order": 3,
             "children": []
           }
         ]
@@ -1484,26 +1528,6 @@
             "label": "Manage Resource Groups",
             "id": "resource_group.md",
             "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Storage Optimization",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Use mmap",
-            "id": "mmap.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Clustering Compaction",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -1778,7 +1802,7 @@
         "label": "Models",
         "id": "models",
         "isMenu": true,
-        "order": 4,
+        "order": 9,
         "children": [
           {
             "label": "Embeddings",
@@ -1917,6 +1941,12 @@
             ]
           }
         ]
+      },
+      {
+        "label": "SDK Code Helper (MCP)",
+        "id": "milvus-sdk-helper-mcp.md",
+        "order": 10,
+        "children": []
       }
     ]
   },
@@ -1964,6 +1994,12 @@
                 "label": "Full-text Search",
                 "id": "full_text_search_with_langchain.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Asynchronous Search",
+                "id": "langchain_milvus_async.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -2266,12 +2302,6 @@
             "label": "Fireworks",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
-            "children": []
-          },
-          {
-            "label": "Lepton",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
             "children": []
           },
           {

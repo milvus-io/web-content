@@ -98,6 +98,8 @@ Once you have installed the Helm chart, you can start Milvus on Kubernetes. This
 
 - To deploy a Milvus instance in cluster mode, run the following command:
 
+  You can use `--set` to install the Milvus cluster with custom configurations. The following command sets `streaming.enabled` to `true` to enable the streaming service and set `indexNode.enabled` to `false` to disable the index service. In this case, the streaming node will be responsible for all data processing and indexing tasks.
+
   ```bash
   helm install my-release milvus/milvus \
     --set image.all.tag=v2.6.0-rc1 \
@@ -194,6 +196,37 @@ Forwarding from 127.0.0.1:27017 -> 19530
 Optionally, you can use `:19530` instead of `27017:19530` in the above command to let `kubectl` allocate a local port for you so that you don't have to manage port conflicts.
 
 By default, kubectl's port-forwarding only listens on `localhost`. Use the `address` flag if you want Milvus to listen on the selected or all IP addresses. The following command makes port-forward listen on all IP addresses on the host machine.
+
+
+## (Optional) Update Milvus configurations
+
+You can update the configurations of your Milvus cluster by editing the `values.yaml` file and applying it again.
+
+1. Create a `values.yaml` file with the desired configurations.
+
+  The following assumes that you want to enable `proxy.http`.
+
+  ```yaml
+  extraConfigFiles:
+    user.yaml: |+
+      proxy:
+        http:
+          enabled: true
+  ```
+
+1. Apply the `values.yaml` file.
+
+  ```shell
+  helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+  ```
+
+1. Check the updated configurations.
+
+  ```shell
+  helm get values my-release
+  ```
+
+  The output should show the updated configurations.
 
 ## Access Milvus WebUI
 

@@ -20,7 +20,7 @@ You can configure Milvus with a configuration file `values.yaml`.
 
 ### Download a configuration file
 
-[Download](https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml) `values.yaml` directly or with the following command.
+[Download](https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml) `values.yaml` directly or with the following command.
 
 ```
 $ wget https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml

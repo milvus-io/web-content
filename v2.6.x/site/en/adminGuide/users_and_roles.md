@@ -337,7 +337,7 @@ curl --request POST \
 
 Below is an example output. `admin` is the default role in Milvus. `role_a` is the new role that is just created.
 
-```bash
+```
 ['admin', 'role_a']
 ```
 

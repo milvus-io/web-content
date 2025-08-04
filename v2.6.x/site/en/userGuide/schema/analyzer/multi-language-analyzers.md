@@ -871,7 +871,7 @@ english_results = client.search(
     search_params=search_params,      # Search configuration
     limit=3,                      # Max results to return
     output_fields=["text", "language"],  # Fields to include in the output
-    consistency_level="Strong",       # Data‑consistency guarantee
+    consistency_level="Bounded",       # Data‑consistency guarantee
 )
 
 # Display English search results
@@ -921,7 +921,7 @@ const english_results = await client.search({
   },
   limit: 3,
   output_fields: ["text", "language"],
-  consistency_level: "Strong",
+  consistency_level: "Bounded",
 });
 
 // Display English search results
@@ -979,7 +979,7 @@ curl --request POST \
     "drop_ratio_search": "0"  
   },
   "outputFields": ["text", "language"],
-  "consistencyLevel": "Strong"
+  "consistencyLevel": "Bounded"
 }'
 ```
 
@@ -1005,7 +1005,7 @@ chinese_results = client.search(
     search_params=search_params,      # Search configuration
     limit=3,                      # Max results to return
     output_fields=["text", "language"],  # Fields to include in the output
-    consistency_level="Strong",       # Data‑consistency guarantee
+    consistency_level="Bounded",       # Data‑consistency guarantee
 )
 
 # Display Chinese search results
@@ -1052,7 +1052,7 @@ const cn_results = await client.search({
   },
   limit: 3,
   output_fields: ["text", "language"],
-  consistency_level: "Strong",
+  consistency_level: "Bounded",
 });
 
 // Display Chinese search results
@@ -1106,7 +1106,7 @@ curl --request POST \
     "analyzer_name": "cn"
   },
   "outputFields": ["text", "language"],
-  "consistencyLevel": "Strong"
+  "consistencyLevel": "Bounded"
 }'
 ```
 

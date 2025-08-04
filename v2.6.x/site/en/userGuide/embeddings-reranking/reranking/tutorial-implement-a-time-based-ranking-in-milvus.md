@@ -119,7 +119,7 @@ milvus_client.create_collection(
     collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 ```
 
@@ -336,7 +336,7 @@ standard_results = milvus_client.search(
     anns_field="dense",
     limit=7,  # Get all our articles
     output_fields=["headline", "content", "publish_date"],
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 print_search_results(standard_results, "SEARCH RESULTS WITHOUT DECAY RANKING")
 
@@ -354,7 +354,7 @@ gaussian_results = milvus_client.search(
     limit=7,
     output_fields=["headline", "content", "publish_date"],
     ranker=gaussian_ranker,
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 print_search_results(gaussian_results, "SEARCH RESULTS WITH GAUSSIAN DECAY RANKING")
 
@@ -366,7 +366,7 @@ exponential_results = milvus_client.search(
     limit=7,
     output_fields=["headline", "content", "publish_date"],
     ranker=exponential_ranker,
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 print_search_results(exponential_results, "SEARCH RESULTS WITH EXPONENTIAL DECAY RANKING")
 
@@ -378,7 +378,7 @@ linear_results = milvus_client.search(
     limit=7,
     output_fields=["headline", "content", "publish_date"],
     ranker=linear_ranker,
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 print_search_results(linear_results, "SEARCH RESULTS WITH LINEAR DECAY RANKING")
 ```
@@ -691,7 +691,7 @@ for scale_days in [7, 14, 30]:
         limit=7,
         output_fields=["headline", "content", "publish_date"],
         ranker=scaled_ranker,
-        consistency_level="Strong"
+        consistency_level="Bounded"
     )
     
     print_search_results(scale_results, f"SEARCH WITH GAUSSIAN DECAY (SCALE = {scale_days} DAYS)")
@@ -805,7 +805,7 @@ for test_query in ["machine learning", "neural networks", "ethics in AI"]:
         limit=4,
         output_fields=["headline", "content", "publish_date"],
         ranker=gaussian_ranker,
-        consistency_level="Strong"
+        consistency_level="Bounded"
     )
     print_search_results(test_results, f"TOP 4 RESULTS FOR '{test_query}'")
 ```

@@ -252,7 +252,7 @@ milvus_index = fob.compute_similarity(
     brain_key="milvus_index",
     collection_name="your_collection",
     metric="dotproduct",
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
 )
 ```
 

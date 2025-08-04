@@ -26,7 +26,6 @@ The name of a resource such the collection name, partition name, or index name c
 | Resource      | Limit |
 | ----------- | ----------- |
 | Collection     | 65,536       |
-| Connection / proxy   | 65,536        |
 
 ## Number of resources in a collection
 

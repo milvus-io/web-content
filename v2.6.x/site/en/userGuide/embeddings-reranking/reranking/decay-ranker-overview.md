@@ -316,7 +316,7 @@ results = milvus_client.search(
     output_fields=["document", "timestamp"],  # Include the decay field in outputs to see values
     #  highlight-next-line
     ranker=decay_ranker,                      # Apply the decay ranker here
-    consistency_level="Strong"
+    consistency_level="Bounded"
 )
 ```
 

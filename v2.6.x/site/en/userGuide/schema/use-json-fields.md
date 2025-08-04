@@ -1,593 +1,287 @@
 ---
 id: use-json-fields.md
 title: "JSON Field"
-summary: "A JSON field is a scalar field that stores additional information along with vector embeddings, in key-value pairs. Here's an example of how data is stored in JSON format:"
+summary: "Milvus allows you to store and index structured data within a single field using the JSON data type. This enables flexible schemas with nested attributes while still allowing efficient filtering via JSON path indexing."
 ---
 
 # JSON Field
 
-A [JSON](https://en.wikipedia.org/wiki/JSON) field is a scalar field that stores additional information along with vector embeddings, in key-value pairs. Here's an example of how data is stored in JSON format:
+Milvus allows you to store and index structured data within a single field using the `JSON` data type. This enables flexible schemas with nested attributes while still allowing efficient filtering via JSON path indexing.
 
-```python
+## What is a JSON field?
+
+A JSON field is a schema-defined field in Milvus that stores structured key-value data. The values can include strings, numbers, booleans, arrays, or deeply nested objects.
+
+Here’s an example of what a JSON field might look like in a document:
+
+```json
 {
   "metadata": {
-    "product_info": {
-      "category": "electronics",
-      "brand": "BrandA"
-    },
-    "price": 99.99,
+    "category": "electronics",
+    "brand": "BrandA",
     "in_stock": true,
-    "tags": ["summer_sale", "clearance"]
+    "price": 99.99,
+    "string_price": "99.99",
+    "tags": ["clearance", "summer_sale"],
+    "supplier": {
+      "name": "SupplierX",
+      "country": "USA",
+      "contact": {
+        "email": "support@supplierx.com",
+        "phone": "+1-800-555-0199"
+      }
+    }
   }
 }
 ```
 
-## Limits
+In this example:
 
-- **Field Size**: JSON fields are limited to 65,536 bytes in size.
+- `metadata` is the JSON field defined in the schema.
 
-- **Nested Dictionaries**: Any nested dictionaries within JSON field values are treated as plain strings for storage.
+- You can store flat values (e.g. `category`, `in_stock`), arrays (`tags`), and nested objects (`supplier`).
 
-- **Default Values**: JSON fields do not support default values. However, you can set the `nullable` attribute to `True` to allow null values. For details, refer to [Nullable & Default](nullable-and-default.md).
+## Define a JSON field in the schema
 
-- **Type Matching**: If a JSON field’s key value is an integer or float, it can only be compared (via expression filters) with another numeric key of the same type.
+To use a JSON field, explicitly define it in the collection schema by specifying the `DataType` as `JSON`.
 
-- **Naming**: When naming JSON keys, it is recommended to use only letters, numbers, and underscores. Using other characters may cause issues when filtering or searching.
+The example below creates a collection with its schema containing these fields:
 
-- **String Handling**: Milvus stores string values in JSON fields as entered, without semantic conversion. For example:
+- The primary key (`product_id`)
 
-    - `'a"b'`, `"a'b"`, `'a\\'b'`, and `"a\\"b"` are stored exactly as they are.
+- A `vector` field (mandatory for each collection)
 
-    - `'a'b'` and `"a"b"` are considered invalid.
-
-- **JSON Indexing**: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to [Considerations on JSON indexing](use-json-fields.md#Considerations-on-JSON-indexing).
-
-## Add JSON field
-
-To add this JSON field `metadata` to your collection schema, use `DataType.JSON`. The example below defines a JSON field `metadata` that allows null values:
+- A `metadata` field of type `JSON`, which can store structured data like flat values, arrays, or nested objects
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
-# Import necessary libraries
 from pymilvus import MilvusClient, DataType
 
-# Define server address
-SERVER_ADDR = "http://localhost:19530"
+client = MilvusClient(uri="http://localhost:19530")
 
-# Create a MilvusClient instance
-client = MilvusClient(uri=SERVER_ADDR)
+# Create schema with a JSON field
+schema = client.create_schema(auto_id=False, enable_dynamic_field=True)
 
-# Define the collection schema
-schema = client.create_schema(
-    auto_id=False,
-    enable_dynamic_fields=True,
+schema.add_field(field_name="product_id", datatype=DataType.INT64, is_primary=True)
+schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=5)
+# highlight-next-line
+schema.add_field(field_name="metadata", datatype=DataType.JSON, nullable=True)  # JSON field that allows null values
+
+client.create_collection(
+    collection_name="product_catalog",
+    schema=schema
 )
-
-# Add a JSON field that supports null values
-schema.add_field(field_name="metadata", datatype=DataType.JSON, nullable=True)
-schema.add_field(field_name="pk", datatype=DataType.INT64, is_primary=True)
-schema.add_field(field_name="embedding", datatype=DataType.FLOAT_VECTOR, dim=3)
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-
-import io.milvus.v2.common.DataType;
-import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.client.*;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.AddFieldReq;
 
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+ConnectConfig config = ConnectConfig.builder()
         .uri("http://localhost:19530")
-        .build());
-        
-CreateCollectionReq.CollectionSchema schema = client.createSchema();
-schema.setEnableDynamicField(true);
+        .build();
+MilvusClientV2 client = new MilvusClientV2(config);
 
+CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder()
+        .enableDynamicField(true)
+        .build();
+        
+schema.addField(AddFieldReq.builder()
+        .fieldName("product_id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(Boolean.TRUE)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("vector")
+        .dataType(DataType.FloatVector)
+        .dimension(5)
+        .build());
 schema.addField(AddFieldReq.builder()
         .fieldName("metadata")
         .dataType(DataType.JSON)
         .isNullable(true)
         .build());
+        
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+        .collectionName("product_catalog")
+        .collectionSchema(schema)
+        .build();
+client.createCollection(requestCreate);
+```
 
-schema.addField(AddFieldReq.builder()
-        .fieldName("pk")
-        .dataType(DataType.Int64)
-        .isPrimaryKey(true)
-        .build());
+```javascript
+import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
 
-schema.addField(AddFieldReq.builder()
-        .fieldName("embedding")
-        .dataType(DataType.FloatVector)
-        .dimension(3)
-        .build());
+const client = new MilvusClient({
+  address: 'localhost:19530'
+});
+
+// Create collection
+await client.createCollection({
+collection_name: "product_catalog",
+fields: [
+  {
+    name: "product_id",
+    data_type: DataType.Int64,
+    is_primary_key: true,
+    autoID: false
+  },
+  {
+    name: "vector",
+    data_type: DataType.FloatVector,
+    dim: 5
+  },
+  {
+    name: "metadata",
+    data_type: DataType.JSON,
+    nullable: true  // JSON field that allows null values
+  }
+],
+enable_dynamic_field: true
+});
+
 ```
 
 ```go
 import (
     "context"
-    "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
     "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
     "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "localhost:19530"
-
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
+    Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle error
+    return err
 }
-defer client.Close(ctx)
 
-schema := entity.NewSchema()
+schema := entity.NewSchema().WithDynamicFieldEnabled(true)
 schema.WithField(entity.NewField().
-    WithName("pk").
+    WithName("product_id").pk
     WithDataType(entity.FieldTypeInt64).
-    WithIsAutoID(true),
+    WithIsPrimaryKey(true),
 ).WithField(entity.NewField().
-    WithName("embedding").
+    WithName("vector").
     WithDataType(entity.FieldTypeFloatVector).
-    WithDim(3),
+    WithDim(5),
 ).WithField(entity.NewField().
     WithName("metadata").
-    WithDataType(entity.FieldTypeJSON),
-)
-```
-
-```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-const schema = [
-  {
-    name: "metadata",
-    data_type: DataType.JSON,
-  },
-  {
-    name: "pk",
-    data_type: DataType.Int64,
-    is_primary_key: true,
-  },
-  {
-    name: "embedding",
-    data_type: DataType.FloatVector,
-    dim: 3,
-  },
-];
-```
-
-```bash
-export jsonField='{
-    "fieldName": "metadata",
-    "dataType": "JSON"
-}'
-
-export pkField='{
-    "fieldName": "pk",
-    "dataType": "Int64",
-    "isPrimary": true
-}'
-
-export vectorField='{
-    "fieldName": "embedding",
-    "dataType": "FloatVector",
-    "elementTypeParams": {
-        "dim": 3
-    }
-}'
-
-export schema="{
-    \"autoID\": false,
-    \"enableDynamicField\": true,
-    \"fields\": [
-        $jsonField,
-        $pkField,
-        $vectorField
-    ]
-}"
-```
-
-<div class="alert note">
-
-- Set `enable_dynamic_fields=True` if you need to insert additional, undefined fields in the future.
-
-- Use `nullable=True` to allow missing or null JSON objects.
-
-</div>
-
-## Set index params
-
-Indexing helps Milvus quickly filter or search across large volumes of data. In Milvus, indexing is:
-
-- **Mandatory** for vector fields (to efficiently run similarity searches).
-
-- **Optional** for JSON fields (to speed up scalar filters on specific JSON paths).
-
-### Index a JSON field | Milvus 2.5.10+
-
-By default, JSON fields are not indexed, so any filter queries (e.g., `metadata["price"] < 100`) must scan all rows. If you want to accelerate queries on specific paths within the `metadata` field, you can create an **inverted index** on each path you care about.
-
-In this example, we will create two indexes on different paths inside the JSON field `metadata`:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-index_params = client.prepare_index_params()
-
-# Example 1: Index the 'category' key inside 'product_info' as a string
-index_params.add_index(
-    field_name="metadata", # JSON field name to index
-    index_type="INVERTED", # Index type. Set to INVERTED
-    index_name="json_index_1", # Index name
-    params={
-        "json_path": "metadata[\"product_info\"][\"category\"]", # Path in JSON field to index
-        "json_cast_type": "varchar" # Data type that the extracted JSON values will be cast to
-    }
+    WithDataType(entity.FieldTypeJSON).
+    WithNullable(true),
 )
 
-# Example 2: Index 'price' as a numeric type (double)
-index_params.add_index(
-    field_name="metadata",
-    index_type="INVERTED",
-    index_name="json_index_2",
-    params={
-        "json_path": "metadata[\"price\"]",
-        "json_cast_type": "double"
-    }
-)
-```
-
-```java
-import io.milvus.v2.common.IndexParam;
-
-List<IndexParam> indexes = new ArrayList<>();
-
-Map<String,Object> extraParams_1 = new HashMap<>();
-extraParams_1.put("json_path", "metadata[\"product_info\"][\"category\"]");
-extraParams_1.put("json_cast_type", "varchar");
-indexes.add(IndexParam.builder()
-        .fieldName("metadata")
-        .indexName("json_index_1")
-        .indexType(IndexParam.IndexType.INVERTED)
-        .extraParams(extraParams_1)
-        .build());
-
-Map<String,Object> extraParams_2 = new HashMap<>();
-extraParams_2.put("json_path", "metadata[\"price\"]");
-extraParams_2.put("json_cast_type", "double");
-indexes.add(IndexParam.builder()
-        .fieldName("metadata")
-        .indexName("json_index_2")
-        .indexType(IndexParam.IndexType.INVERTED)
-        .extraParams(extraParams_2)
-        .build());
-```
-
-```go
-jsonIndex1 := index.NewJSONPathIndex(index.Inverted, "varchar", `metadata["product_info"]["category"]`)
-jsonIndex2 := index.NewJSONPathIndex(index.Inverted, "double", `metadata["price"]`)
-indexOpt1 := milvusclient.NewCreateIndexOption("my_collection", "metadata", jsonIndex1)
-indexOpt2 := milvusclient.NewCreateIndexOption("my_collection", "metadata", jsonIndex2)
-```
-
-```javascript
-const indexParams = [
-    {
-        field_name: "metadata",
-        index_type: "INVERTED",
-        index_name: "json_index_1",
-        params: {
-            json_path: "metadata[\"product_info\"][\"category\"]",
-            json_cast_type: "varchar"
-        }
-    },
-    {
-        field_name: "metadata",
-        index_type: "INVERTED",
-        index_name: "json_index_2",
-        params: {
-            json_path: "metadata[\"price\"]",
-            json_cast_type: "double"
-        }
-    }
-]
-
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("product_catalog", schema))
+if err != nil {
+    return err
+}
 ```
 
 ```bash
 # restful
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "collectionName": "my_collection",
-    "indexParams": [
-        {
-            "fieldName": "metadata",
-            "indexName": "json_index_1",
-            "indexType": "INVERTED",
-            "params": {
-                "json_path": "metadata[\"product_info\"][\"category\"]",
-                "json_cast_type": "varchar"
-            }
-        }
-    ]
+export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="http://localhost:19530"
+
+# 字段定义
+export productIdField='{
+  "fieldName": "product_id",
+  "dataType": "Int64",
+  "isPrimary": true,
+  "autoID": false
 }'
 
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "collectionName": "my_collection",
-    "indexParams": [
-        {
-            "fieldName": "metadata",
-            "indexName": "json_index_2",
-            "indexType": "INVERTED",
-            "params": {
-                "json_path": "metadata[\"price\"]",
-                "json_cast_type": "double"
-            }
-        }
-    ]
+export vectorField='{
+  "fieldName": "vector",
+  "dataType": "FloatVector",
+  "typeParams": {
+    "dim": 5
+  }
 }'
-```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Example Value</p></th>
-   </tr>
-   <tr>
-     <td><p><code>field_name</code></p></td>
-     <td><p>Name of the JSON field in your schema.</p></td>
-     <td><p><code>"metadata"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>index_type</code></p></td>
-     <td><p>Index type to create; currently only <code>INVERTED</code> is supported for JSON path indexing.</p></td>
-     <td><p><code>"INVERTED"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>index_name</code></p></td>
-     <td><p>(Optional) A custom index name. Specify different names if you create multiple indexes on the same JSON field.</p></td>
-     <td><p><code>"json_index_1"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>params.json_path</code></p></td>
-     <td><p>Specifies which JSON path to index. You can target nested keys, array positions, or both (e.g., <code>metadata["product_info"]["category"]</code> or <code>metadata["tags"][0]</code>).
- If the path is missing or the array element does not exist for a particular row, that row is simply skipped during indexing, and no error is thrown.</p></td>
-     <td><p><code>"metadata[\"product_info\"][\"category\"]"</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p>
-<ul>
-<li><code>"bool"</code> or <code>"BOOL"</code></li>
-<li><code>"double"</code> or <code>"DOUBLE"</code></li>
-<li><code>"varchar"</code> or <code>"VARCHAR"</code>
-<strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If type casting fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</li>
-</ul></td>
-     <td><p><code>"varchar"</code></p></td>
-   </tr>
-</table>
+export metadataField='{
+  "fieldName": "metadata",
+  "dataType": "JSON",
+  "isNullable": true
+}'
 
-#### Considerations on JSON indexing
+# 构造 schema
+export schema="{
+  \"autoID\": false,
+  \"enableDynamicField\": true,
+  \"fields\": [
+    $productIdField,
+    $vectorField,
+    $metadataField
+  ]
+}"
 
-- **Filtering logic**:
-
-    - If you **create a double-type index** (`json_cast_type="double"`), only numeric-type filter conditions can use the index. If the filter compares a double index to a non-numeric condition, Milvus falls back to brute force search.
-
-    - If you **create a varchar-type index** (`json_cast_type="varchar"`), only string-type filter conditions can use the index. Otherwise, Milvus falls back to brute force.
-
-    - **Boolean** indexing behaves similarly to varchar-type.
-
-- **Term expressions**:
-
-    - You can use `json["field"] in [value1, value2, …]`. However, the index works only for scalar values stored under that path. If `json["field"]` is an array, the query falls back to brute force (array-type indexing is not yet supported).
-
-- **Numeric precision**:
-
-    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds $2^{53}$, it loses precision, and queries on those out-of-range values may not match exactly.
-
-- **Data integrity**:
-
-    - Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key `"k"` while others store a number), some rows will not be indexed.
-
-### Index a vector field
-
-The following example creates an index on the vector field `embedding`, using the `AUTOINDEX` index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to [Index Explained](index-explained.md).
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-# Set index params
-
-# Index `embedding` with AUTOINDEX and specify similarity metric type
-index_params.add_index(
-    field_name="embedding",
-    index_name="vector_index",
-    index_type="AUTOINDEX",  # Use automatic indexing to simplify complex index settings
-    metric_type="COSINE"  # Specify similarity metric type, options include L2, COSINE, or IP
-)
-```
-
-```java
-import io.milvus.v2.common.IndexParam;
-import java.util.*;
-
-indexes.add(IndexParam.builder()
-        .fieldName("embedding")
-        .indexName("vector_index")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.COSINE)
-        .build());
-```
-
-```go
-vectorIndex := index.NewAutoIndex(entity.COSINE)
-indexOpt := milvusclient.NewCreateIndexOption("my_collection", "embedding", vectorIndex)
-```
-
-```javascript
-indexParams.push({
-    index_name: 'embedding_index',
-    field_name: 'embedding',
-    index_name: 'vector_index',
-    metricType: MetricType.CONSINE,
-    index_type: IndexType.AUTOINDEX,
-));
-```
-
-```bash
-export indexParams='[
-        {
-            "fieldName": "embedding",
-            "indexName": "vector_index",
-            "metricType": "COSINE",
-            "indexType": "AUTOINDEX"
-        }
-    ]'
-```
-
-## Create collection
-
-Once the schema and index are defined, create a collection that includes the JSON field.
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-client.create_collection(
-    collection_name="my_collection",
-    schema=schema,
-    index_params=index_params
-)
-```
-
-```java
-CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("my_collection")
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
-client.createCollection(requestCreate);
-```
-
-```go
-err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_collection", schema).
-    WithIndexOptions(indexOpt1, indexOpt2, indexOpt))
-if err != nil {
-    fmt.Println(err.Error())
-    // handler err
-}
-```
-
-```javascript
-await client.create_collection({
-    collection_name: "my_collection",
-    schema: schema,
-    index_params: indexParams
-});
-```
-
-```bash
+# 创建集合
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
--d "{
-    \"collectionName\": \"my_collection\",
-    \"schema\": $schema,
-    \"indexParams\": $indexParams
+--data "{
+  \"collectionName\": \"product_catalog\",
+  \"schema\": $schema
 }"
+
 ```
 
-## Insert data
+<div class="alert note">
 
-After creating the collection, insert entities that match the schema.
+You can also enable the dynamic field feature to store undeclared fields flexibly, but it's not required for JSON fields to function. For more information, refer to [Dynamic Field](enable-dynamic-field.md).
+
+</div>
+
+## Insert entities with JSON data
+
+Once the collection is created, insert entities that contain structured JSON objects in the `metadata` JSON field.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
-# Sample data
-data = [
+entities = [
     {
+        "product_id": 1,
+        "vector": [0.1, 0.2, 0.3, 0.4, 0.5],
         "metadata": {
-            "product_info": {"category": "electronics", "brand": "BrandA"},
-            "price": 99.99,
+            "category": "electronics",
+            "brand": "BrandA",
             "in_stock": True,
-            "tags": ["summer_sale"]
-        },
-        "pk": 1,
-        "embedding": [0.12, 0.34, 0.56]
-    },
-    {
-        "metadata": None,  # Entire JSON object is null
-        "pk": 2,
-        "embedding": [0.56, 0.78, 0.90]
-    },
-    {
-        # JSON field is completely missing
-        "pk": 3,
-        "embedding": [0.91, 0.18, 0.23]
-    },
-    {
-        # Some sub-keys are null
-        "metadata": {
-            "product_info": {"category": None, "brand": "BrandB"},
-            "price": 59.99,
-            "in_stock": None
-        },
-        "pk": 4,
-        "embedding": [0.56, 0.38, 0.21]
+            "price": 99.99,
+            "string_price": "99.99",
+            "tags": ["clearance", "summer_sale"],
+            "supplier": {
+                "name": "SupplierX",
+                "country": "USA",
+                "contact": {
+                    "email": "support@supplierx.com",
+                    "phone": "+1-800-555-0199"
+                }
+            }
+        }
     }
 ]
 
-client.insert(
-    collection_name="my_collection",
-    data=data
-)
+client.insert(collection_name="product_catalog", data=entities)
 ```
 
 ```java
@@ -595,451 +289,657 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import io.milvus.v2.service.vector.request.InsertReq;
-import io.milvus.v2.service.vector.response.InsertResp;
 
-List<JsonObject> rows = new ArrayList<>();
 Gson gson = new Gson();
-rows.add(gson.fromJson("{\"metadata\":{\"product_info\":{\"category\":\"electronics\",\"brand\":\"BrandA\"},\"price\":99.99,\"in_stock\":True,\"tags\":[\"summer_sale\"]},\"pk\":1,\"embedding\":[0.12,0.34,0.56]}", JsonObject.class));
-rows.add(gson.fromJson("{\"metadata\":null,\"pk\":2,\"embedding\":[0.56,0.78,0.90]}", JsonObject.class));
-rows.add(gson.fromJson("{\"pk\":3,\"embedding\":[0.91,0.18,0.23]}", JsonObject.class));
-rows.add(gson.fromJson("{\"metadata\":{\"product_info\":{\"category\":null,\"brand\":\"BrandB\"},\"price\":59.99,\"in_stock\":null},\"pk\":4,\"embedding\":[0.56,0.38,0.21]}", JsonObject.class));
+JsonObject row = new JsonObject();
+row.addProperty("product_id", 1);
+row.add("vector", gson.toJsonTree(Arrays.asList(0.1, 0.2, 0.3, 0.4, 0.5)));
 
-InsertResp insertR = client.insert(InsertReq.builder()
-        .collectionName("my_collection")
-        .data(rows)
+JsonObject metadata = new JsonObject();
+metadata.addProperty("category", "electronics");
+metadata.addProperty("brand", "BrandA");
+metadata.addProperty("in_stock", true);
+metadata.addProperty("price", 99.99);
+metadata.addProperty("string_price", "99.99");
+metadata.add("tags", gson.toJsonTree(Arrays.asList("clearance", "summer_sale")));
+
+JsonObject supplier = new JsonObject();
+supplier.addProperty("name", "SupplierX");
+supplier.addProperty("country", "USA");
+
+JsonObject contact = new JsonObject();
+contact.addProperty("email", "support@supplierx.com");
+contact.addProperty("phone", "+1-800-555-0199");
+
+supplier.add("contact", contact);
+metadata.add("supplier", supplier);
+row.add("metadata", metadata);
+
+client.insert(InsertReq.builder()
+        .collectionName("product_catalog")
+        .data(Collections.singletonList(row))
         .build());
 ```
 
+```javascript
+const entities = [
+    {
+        "product_id": 1,
+        "vector": [0.1, 0.2, 0.3, 0.4, 0.5],
+        "metadata": {
+            "category": "electronics",
+            "brand": "BrandA",
+            "in_stock": True,
+            "price": 99.99,
+            "string_price": "99.99",
+            "tags": ["clearance", "summer_sale"],
+            "supplier": {
+                "name": "SupplierX",
+                "country": "USA",
+                "contact": {
+                    "email": "support@supplierx.com",
+                    "phone": "+1-800-555-0199"
+                }
+            }
+        }
+    }
+]
+
+await client.insert({
+    collection_name: "product_catalog", 
+    data: entities
+});
+```
+
 ```go
-_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
-    WithInt64Column("pk", []int64{1, 2, 3, 4}).
-    WithFloatVectorColumn("embedding", 3, [][]float32{
-        {0.12, 0.34, 0.56},
-        {0.56, 0.78, 0.90},
-        {0.91, 0.18, 0.23},
-        {0.56, 0.38, 0.21},
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("product_catalog").
+    WithInt64Column("product_id", []int64{1}).
+    WithFloatVectorColumn("vector", 5, [][]float32{
+        {0.1, 0.2, 0.3, 0.4, 0.5},
     }).WithColumns(
     column.NewColumnJSONBytes("metadata", [][]byte{
         []byte(`{
-    "product_info": {"category": "electronics", "brand": "BrandA"},
-    "price": 99.99,
-    "in_stock": True,
-    "tags": ["summer_sale"]
-}`),
-        []byte(`null`),
-        []byte(`null`),
-        []byte(`"metadata": {
-    "product_info": {"category": None, "brand": "BrandB"},
-    "price": 59.99,
-    "in_stock": None
-}`),
+            "category": "electronics",
+            "brand": "BrandA",
+            "in_stock": True,
+            "price": 99.99,
+            "string_price": "99.99",
+            "tags": ["clearance", "summer_sale"],
+            "supplier": {
+                "name": "SupplierX",
+                "country": "USA",
+                "contact": {
+                    "email": "support@supplierx.com",
+                    "phone": "+1-800-555-0199"
+                }
+            }
+        }`),
     }),
 ))
 if err != nil {
-    fmt.Println(err.Error())
-    // handle err
+    return err
 }
-```
-
-```javascript
-const data = [
-    {
-        "metadata": {
-            "product_info": {"category": "electronics", "brand": "BrandA"},
-            "price": 99.99,
-            "in_stock": True,
-            "tags": ["summer_sale"]
-        },
-        "pk": 1,
-        "embedding": [0.12, 0.34, 0.56]
-    },
-    {
-        "metadata": None,  # Entire JSON object is null
-        "pk": 2,
-        "embedding": [0.56, 0.78, 0.90]
-    },
-    {
-        # JSON field is completely missing
-        "pk": 3,
-        "embedding": [0.91, 0.18, 0.23]
-    },
-    {
-        # Some sub-keys are null
-        "metadata": {
-            "product_info": {"category": None, "brand": "BrandB"},
-            "price": 59.99,
-            "in_stock": None
-        },
-        "pk": 4,
-        "embedding": [0.56, 0.38, 0.21]
-    }
-];
-
-await client.insert({
-    collection_name: "my_collection",
-    data: data
-});
-```
-
-```bash
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
---data '{
-    "data": [
-        {
-             "metadata":  {
-                   "product_info": {"category": "electronics", "brand": "BrandA"},
-                  "price":  99.99,
-                   "in_stock":  true,
-                  "tags": ["summer_sale"]
-              }, 
-             "varchar_field2": "High quality product", 
-             "pk": 1, 
-             "embedding": [0.1, 0.2, 0.3]
-          },
-          {
-              "metadata": null,
-              "pk": 2,
-              "embedding": [0.56, 0.78, 0.90]
-          },
-         {
-               "pk": 3,
-               "embedding": [0.91, 0.18, 0.23]
-         },
-        {
-              "metadata": {
-                     "product_info": {"category": null, "brand": "BrandB"},
-                     "price": 59.99,
-                     "in_stock": null
-               },
-              "pk": 4,
-              "embedding": [0.56, 0.38, 0.21]
-         }
-    ],
-    "collectionName": "my_collection"
-}'
-```
-
-## Query with filter expressions
-
-After inserting entities, use the `query` method to retrieve entities that match the specified filter expressions.
-
-<div class="alert note">
-
-For JSON fields that allow null values, the field will be treated as null if the entire JSON object is missing or set to `None`. For more information, refer to [JSON Fields with Null Values](basic-operators.md#JSON-Fields-with-Null-Values).
-
-</div>
-
-To retrieve entities where `metadata` is not null:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-# Query to filter out records with null metadata
-
-filter = 'metadata is not null'
-
-res = client.query(
-    collection_name="my_collection",
-    filter=filter,
-    output_fields=["metadata", "pk"]
-)
-
-# Expected result:
-# Rows with pk=1 and pk=4 have valid, non-null metadata.
-# Rows with pk=2 (metadata=None) and pk=3 (no metadata key) are excluded.
-
-print(res)
-
-# Output:
-# data: [
-#     "{'metadata': {'product_info': {'category': 'electronics', 'brand': 'BrandA'}, 'price': 99.99, 'in_stock': True, 'tags': ['summer_sale']}, 'pk': 1}",
-#     "{'metadata': {'product_info': {'category': None, 'brand': 'BrandB'}, 'price': 59.99, 'in_stock': None}, 'pk': 4}"
-# ]
-```
-
-```java
-import io.milvus.v2.service.vector.request.QueryReq;
-import io.milvus.v2.service.vector.response.QueryResp;
-
-String filter = "metadata is not null";
-QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_collection")
-        .filter(filter)
-        .outputFields(Arrays.asList("metadata", "pk"))
-        .build());
-
-System.out.println(resp.getQueryResults());
-
-// Output
-//
-// [
-//    QueryResp.QueryResult(entity={metadata={"product_info":{"category":"electronics","brand":"BrandA"},"price":99.99,"in_stock":true,"tags":["summer_sale"]}, pk=1}),
-//    QueryResp.QueryResult(entity={metadata={"product_info":{"category":null,"brand":"BrandB"},"price":59.99,"in_stock":null}, pk=4})
-// ]
-```
-
-```go
-filter := "metadata is not null"
-rs, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
-    WithFilter(filter).
-    WithOutputFields("metadata", "pk"))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-
-fmt.Println("pk", rs.GetColumn("pk").FieldData().GetScalars())
-fmt.Println("metadata", rs.GetColumn("metadata").FieldData().GetScalars())
-```
-
-```javascript
-await client.query({
-    collection_name: 'my_scalar_collection',
-    filter: 'metadata["category"] == "electronics" and metadata["price"] < 150',
-    output_fields: ['metadata']
-});
-```
-
-```bash
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "collectionName": "my_collection",
-    "filter": "metadata is not null",
-    "outputFields": ["metadata", "pk"]
-}'
-
-#{"code":0,"cost":0,"data":[{"metadata":"{\"product_info\": {\"category\": \"electronics\", \"brand\": \"BrandA\"}, \"price\": 99.99, \"in_stock\": true, \"tags\": [\"summer_sale\"]}","pk":1},{"metadata":"","pk":2},{"metadata":"","pk":3},{"metadata":"{\"product_info\": {\"category\": null, \"brand\": \"BrandB\"}, \"price\": 59.99, \"in_stock\": null}","pk":4}]}
-```
-
-To retrieve entities where `metadata["product_info"]["category"]` is `"electronics"`:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-filter = 'metadata["product_info"]["category"] == "electronics"'
-
-res = client.query(
-    collection_name="my_collection",
-    filter=filter,
-    output_fields=["metadata", "pk"]
-)
-
-# Expected result:
-# - Only pk=1 has "category": "electronics".
-# - pk=4 has "category": None, so it doesn't match.
-# - pk=2 and pk=3 have no valid metadata.
-
-print(res)
-
-# Output:
-# data: [
-#     "{'pk': 1, 'metadata': {'product_info': {'category': 'electronics', 'brand': 'BrandA'}, 'price': 99.99, 'in_stock': True, 'tags': ['summer_sale']}}"
-# ]
-```
-
-```java
-String filter = "metadata[\"product_info\"][\"category\"] == \"electronics\"";
-
-QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_collection")
-        .filter(filter)
-        .outputFields(Arrays.asList("metadata", "pk"))
-        .build());
-
-System.out.println(resp.getQueryResults());
-
-// Output
-// [QueryResp.QueryResult(entity={metadata={"product_info":{"category":"electronics","brand":"BrandA"},"price":99.99,"in_stock":true,"tags":["summer_sale"]}, pk=1})]
-```
-
-```go
-filter = `metadata["product_info"]["category"] == "electronics"`
-rs, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
-    WithFilter(filter).
-    WithOutputFields("metadata", "pk"))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-
-fmt.Println("pk", rs.GetColumn("pk").FieldData().GetScalars())
-fmt.Println("metadata", rs.GetColumn("metadata").FieldData().GetScalars())
-```
-
-```javascript
-const filter = 'metadata["category"] == "electronics"';
-const res = await client.query({
-    collection_name: "my_collection",
-    filter: filter,
-    output_fields: ["metadata", "pk"]
-});
-
-// Example output:
-// {
-//.  data: [
-//      {'pk': 1, 'metadata': {'category': 'electronics', 'price': 99.99, 'brand': 'BrandA'}}
-// ]
-// }
 ```
 
 ```bash
 # restful
+export TOKEN="root:Milvus"
+export CLUSTER_ENDPOINT="http://localhost:19530"
+
+export entities='[
+  {
+    "product_id": 1,
+    "vector": [0.1, 0.2, 0.3, 0.4, 0.5],
+    "metadata": {
+      "category": "electronics",
+      "brand": "BrandA",
+      "in_stock": true,
+      "price": 99.99,
+      "string_price": "99.99",
+      "tags": ["clearance", "summer_sale"],
+      "supplier": {
+        "name": "SupplierX",
+        "country": "USA",
+        "contact": {
+          "email": "support@supplierx.com",
+          "phone": "+1-800-555-0199"
+        }
+      }
+    }
+  }
+]'
+
 curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/product_catalog/insert" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
--d '{
-  "collectionName": "my_collection",
-  "filter": "metadata[\"product_info\"][\"category\"] == \"electronics\"",
-  "outputFields": ["metadata", "pk"]
-}'
+--data "{
+  \"data\": $entities
+}"
 
-#{"code":0,"cost":0,"data":[{"metadata":"{\"product_info\": {\"category\": \"electronics\", \"brand\": \"BrandA\"}, \"price\": 99.99, \"in_stock\": true, \"tags\": [\"summer_sale\"]}","pk":1}]}
 ```
 
-## Vector search with filter expressions
+## Index values inside the JSON field | Milvus 2.5.11+
 
-In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:
+To accelerate scalar filtering on JSON fields, Milvus supports indexing JSON fields using **JSON path indexing**. This allows you to filter by keys or nested values inside a JSON object without scanning the entire field.
+
+<div class="alert note">
+
+Indexing JSON fields is **optional**. You can still query or filter by JSON paths without an index, but it may result in slower performance due to brute-force search.
+
+</div>
+
+### JSON path indexing syntax
+
+To create a JSON path index, specify:
+
+- **JSON path** (`json_path`): The path to the key or nested field within your JSON object that you want to index.
+
+    - Example: `metadata["category"]`
+
+        This defines where the indexing engine should look inside the JSON structure.
+
+- **JSON cast type** (`json_cast_type`): The data type that Milvus should use when interpreting and indexing the value at the specified path.
+
+    - This type must match the actual data type of the field being indexed. If you want to convert the data type to another during indexing, consider [using a cast function](use-json-fields.md#Use-JSON-cast-functions-for-type-conversion).
+
+    - For a complete list, see [below](use-json-fields.md#Supported-JSON-cast-types).
+
+#### Supported JSON cast types
+
+Cast types are case-insensitive. The following types are supported:
+
+<table>
+   <tr>
+     <th><p>Cast Type</p></th>
+     <th><p>Description</p></th>
+     <th><p>Example JSON Value</p></th>
+   </tr>
+   <tr>
+     <td><p><code>bool</code></p></td>
+     <td><p>Boolean value</p></td>
+     <td><p><code>true</code>, <code>false</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>double</code></p></td>
+     <td><p>Numeric value (integer or float)</p></td>
+     <td><p><code>42</code>, <code>99.99</code>, <code>-15.5</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>varchar</code></p></td>
+     <td><p>String value</p></td>
+     <td><p><code>"electronics"</code>, <code>"BrandA"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>array_bool</code></p></td>
+     <td><p>Array of booleans</p></td>
+     <td><p><code>[true, false, true]</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>array_double</code></p></td>
+     <td><p>Array of numbers</p></td>
+     <td><p><code>[1.2, 3.14, 42]</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>array_varchar</code></p></td>
+     <td><p>Array of strings</p></td>
+     <td><p><code>["tag1", "tag2", "tag3"]</code></p></td>
+   </tr>
+</table>
+
+<div class="alert note">
+
+Arrays should contain elements of the same type for optimal indexing. For more information, refer to [Array Field](array_data_type.md).
+
+</div>
+
+#### Example: Create JSON path indexes
+
+Using the `metadata` JSON structure from our introduction, here are examples of how to create indexes on different JSON paths:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
 ```python
-filter = 'metadata["product_info"]["brand"] == "BrandA"'
+# Index the category field as a string
+index_params = client.prepare_index_params()
 
-res = client.search(
-    collection_name="my_collection",
-    data=[[0.3, -0.6, 0.1]],
-    limit=5,
-    search_params={"params": {"nprobe": 10}},
-    output_fields=["metadata"],
-    filter=filter
+index_params.add_index(
+    field_name="metadata",
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
+    index_name="category_index",  # Unique index name
+    # highlight-start
+    params={
+        "json_path": "metadata[\"category\"]", # Path to the JSON key to be indexed
+        "json_cast_type": "varchar" # Data cast type
+    }
+    # highlight-end
 )
 
-# Expected result:
-# - Only pk=1 has "brand": "BrandA" in metadata["product_info"].
-# - pk=4 has "brand": "BrandB".
-# - pk=2 and pk=3 have no valid metadata.
-# Hence, only pk=1 matches the filter.
-
-print(res)
-
-# Output:
-# data: [
-#     "[{'id': 1, 'distance': -0.2479381263256073, 'entity': {'metadata': {'product_info': {'category': 'electronics', 'brand': 'BrandA'}, 'price': 99.99, 'in_stock': True, 'tags': ['summer_sale']}}}]"
-# ]
+# Index the tags array as string array
+index_params.add_index(
+    field_name="metadata",
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
+    index_name="tags_array_index", # Unique index name
+    # highlight-start
+    params={
+        "json_path": "metadata[\"tags\"]", # Path to the JSON key to be indexed
+        "json_cast_type": "array_varchar" # Data cast type
+    }
+    # highlight-end
+)
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.SearchReq;
-import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.common.IndexParam;
 
-String filter = "metadata[\"product_info\"][\"brand\"] == \"BrandA\"";
-
-SearchResp resp = client.search(SearchReq.builder()
-        .collectionName("my_collection")
-        .annsField("embedding")
-        .data(Collections.singletonList(new FloatVec(new float[]{0.3f, -0.6f, 0.1f})))
-        .topK(5)
-        .outputFields(Collections.singletonList("metadata"))
-        .filter(filter)
+Map<String,Object> extraParams1 = new HashMap<>();
+extraParams1.put("json_path", "metadata[\"category\"]");
+extraParams1.put("json_cast_type", "varchar");
+indexParams.add(IndexParam.builder()
+        .fieldName("metadata")
+        .indexName("category_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams1)
         .build());
 
-System.out.println(resp.getSearchResults());
+Map<String,Object> extraParams2 = new HashMap<>();
+extraParams2.put("json_path", "metadata[\"tags\"]");
+extraParams2.put("json_cast_type", "array_varchar");
+indexParams.add(IndexParam.builder()
+        .fieldName("metadata")
+        .indexName("tags_array_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams2)
+        .build());
+```
 
-// Output
-//
-// [
-//   [
-//     SearchResp.SearchResult(entity={metadata={"product_info":{"category":"electronics","brand":"BrandA"},"price":99.99,"in_stock":true,"tags":["summer_sale"]}}, score=-0.24793813, id=1)
-//   ]
-// ]
+```javascript
+const indexParams = [
+  {
+    collection_name: "product_catalog",
+    field_name: "metadata",
+    index_name: "category_index",
+    index_type: "AUTOINDEX", // Can also use "INVERTED" for JSON path indexing
+    extra_params: {
+      json_path: 'metadata["category"]',
+      json_cast_type: "varchar",
+    },
+  },
+  {
+    collection_name: "product_catalog",
+    field_name: "metadata",
+    index_name: "tags_array_index",
+    index_type: "AUTOINDEX", // Can also use "INVERTED" for JSON path indexing
+    extra_params: {
+      json_path: 'metadata["tags"]',
+      json_cast_type: "array_varchar",
+    },
+  },
+];
 
 ```
 
 ```go
-queryVector := []float32{0.3, -0.6, -0.1}
-filter = "metadata[\"product_info\"][\"brand\"] == \"BrandA\""
+import (
+    "github.com/milvus-io/milvus/client/v2/index"
+)
 
-annParam := index.NewCustomAnnParam()
-annParam.WithExtraParam("nprobe", 10)
-resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    "my_collection", // collectionName
-    5,               // limit
-    []entity.Vector{entity.FloatVector(queryVector)},
-).WithANNSField("embedding").
-    WithFilter(filter).
-    WithOutputFields("metadata").
-    WithAnnParam(annParam))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
+jsonIndex1 := index.NewJSONPathIndex(index.AUTOINDEX, "varchar", `metadata["category"]`)
+    .WithIndexName("category_index")
+jsonIndex2 := index.NewJSONPathIndex(index.AUTOINDEX, "array_varchar", `metadata["tags"]`)
+    .WithIndexName("tags_array_index")
 
-for _, resultSet := range resultSets {
-    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
-    fmt.Println("Scores: ", resultSet.Scores)
-    fmt.Println("metadata", resultSet.GetColumn("metadata").FieldData().GetScalars())
-}
-```
-
-```javascript
-await client.search({
-    collection_name: 'my_collection',
-    data: [0.3, -0.6, 0.1],
-    limit: 5,
-    output_fields: ['metadata'],
-    filter: 'metadata["category"] == "electronics" and metadata["price"] < 150',
-});
+indexOpt1 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex1)
+indexOpt2 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex2)
 ```
 
 ```bash
-
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-  "collectionName": "my_collection",
-  "data": [
-    [0.3, -0.6, 0.1]
-  ],
-  "annsField": "embedding",
-  "limit": 5,
-  "searchParams": {
-    "params": {
-      "nprobe": 10
-    }
-  },
-  "outputFields": ["metadata"],
-  "filter": "metadata[\"product_info\"][\"brand\"] == \"BrandA\""
+# restful
+export categoryIndex='{
+  "fieldName": "metadata",
+  "indexName": "category_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata[\\\"category\\\"]",
+    "json_cast_type": "varchar"
+  }
 }'
 
-##{"code":0,"cost":0,"data":[{"metadata":"{\"product_info\": {\"category\": \"electronics\", \"brand\": \"BrandA\"}, \"price\": 99.99, \"in_stock\": true, \"tags\": [\"summer_sale\"]}","pk":1}]}
+export tagsArrayIndex='{
+  "fieldName": "metadata",
+  "indexName": "tags_array_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata[\\\"tags\\\"]",
+    "json_cast_type": "array_varchar"
+  }
+}'
 ```
 
-Additionally, Milvus supports advanced JSON filtering operators such as `JSON_CONTAINS`, `JSON_CONTAINS_ALL`, and `JSON_CONTAINS_ANY`, which can further enhance query capabilities. For more details, refer to [JSON Operators](json-operators.md).
+### Use JSON cast functions for type conversion | Milvus 2.5.14+
 
+If your JSON field key contains values in an incorrect format (e.g., numbers stored as strings), you can use cast functions to convert values during indexing.
+
+#### Supported cast functions
+
+Cast functions are case-insensitive. The following types are supported:
+
+<table>
+   <tr>
+     <th><p>Cast Function</p></th>
+     <th><p>Converts From → To</p></th>
+     <th><p>Use Case</p></th>
+   </tr>
+   <tr>
+     <td><p><code>"STRING_TO_DOUBLE"</code></p></td>
+     <td><p>String → Numeric (double)</p></td>
+     <td><p>Convert <code>"99.99"</code> to <code>99.99</code></p></td>
+   </tr>
+</table>
+
+#### Example: Cast string numbers to double
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Convert string numbers to double for indexing
+index_params.add_index(
+    field_name="metadata",
+    # highlight-next-line
+    index_type="AUTOINDEX", # Must be set to AUTOINDEX or INVERTED for JSON path indexing
+    index_name="string_to_double_index", # Unique index name
+    params={
+        "json_path": "metadata[\"string_price\"]", # Path to the JSON key to be indexed
+        "json_cast_type": "double", # Data cast type
+        # highlight-next-line
+        "json_cast_function": "STRING_TO_DOUBLE" # Cast function; case insensitive
+    }
+)
+```
+
+```java
+Map<String,Object> extraParams3 = new HashMap<>();
+extraParams3.put("json_path", "metadata[\"string_price\"]");
+extraParams3.put("json_cast_type", "double");
+extraParams3.put("json_cast_function", "STRING_TO_DOUBLE");
+indexParams.add(IndexParam.builder()
+        .fieldName("metadata")
+        .indexName("string_to_double_index")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams3)
+        .build());
+```
+
+```javascript
+indexParams.push({
+  collection_name: "product_catalog",
+  field_name: "metadata",
+  index_name: "string_to_double_index",
+  index_type: "AUTOINDEX", // Can also use "INVERTED"
+  extra_params: {
+    json_path: 'metadata["string_price"]',
+    json_cast_type: "double",
+    json_cast_function: "STRING_TO_DOUBLE", // Case insensitive
+  },
+});
+
+```
+
+```go
+jsonIndex3 := index.NewJSONPathIndex(index.AUTOINDEX, "double", `metadata["string_price"]`)
+                    .WithIndexName("string_to_double_index")
+
+indexOpt3 := milvusclient.NewCreateIndexOption("product_catalog", "metadata", jsonIndex3)
+
+```
+
+```bash
+# restful
+export stringToDoubleIndex='{
+  "fieldName": "metadata",
+  "indexName": "string_to_double_index",
+  "params": {
+    "index_type": "AUTOINDEX",
+    "json_path": "metadata[\\\"string_price\\\"]",
+    "json_cast_type": "double",
+    "json_cast_function": "STRING_TO_DOUBLE"
+  }
+}'
+```
+
+<div class="alert note">
+
+- The `json_cast_type` parameter is mandatory and must be the same as the cast function's output type.
+
+- If conversion fails (e.g., non-numeric string), the value is skipped and not indexed.
+
+</div>
+
+### Apply indexes to the collection
+
+After defining the index parameters, you can apply them to the collection using `create_index()`:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.create_index(
+    collection_name="product_catalog",
+    index_params=index_params
+)
+```
+
+```java
+import io.milvus.v2.service.index.request.CreateIndexReq;
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName("product_catalog")
+        .indexParams(indexParams)
+        .build());
+```
+
+```javascript
+await client.createIndex(indexParams)
+```
+
+```go
+indexTask1, err := client.CreateIndex(ctx, indexOpt1)
+if err != nil {
+    return err
+}
+indexTask2, err := client.CreateIndex(ctx, indexOpt2)
+if err != nil {
+    return err
+}
+indexTask3, err := client.CreateIndex(ctx, indexOpt3)
+if err != nil {
+    return err
+}
+```
+
+```bash
+# restful
+export indexParams="[
+  $categoryIndex,
+  $tagsArrayIndex,
+  $stringToDoubleIndex
+]"
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data "{
+  \"collectionName\": \"product_catalog\",
+  \"indexParams\": $indexParams
+}"
+```
+
+## Filter by JSON field values
+
+After inserting and indexing JSON fields, you can filter on them using standard filter expressions with JSON path syntax.
+
+For example:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+filter = 'metadata["category"] == "electronics"'
+filter = 'metadata["price"] > 50'
+filter = 'json_contains(metadata["tags"], "featured")'
+```
+
+```java
+String filter = 'metadata["category"] == "electronics"';
+String filter = 'metadata["price"] > 50';
+String filter = 'json_contains(metadata["tags"], "featured")';
+```
+
+```javascript
+let filter = 'metadata["category"] == "electronics"'
+let filter = 'metadata["price"] > 50'
+let filter = 'json_contains(metadata["tags"], "featured")'
+```
+
+```go
+filter := 'metadata["category"] == "electronics"'
+filter := 'metadata["price"] > 50'
+filter := 'json_contains(metadata["tags"], "featured")'
+```
+
+```bash
+# restful
+export filterCategory='metadata["category"] == "electronics"'
+export filterPrice='metadata["price"] > 50'
+export filterTags='json_contains(metadata["tags"], "featured")'
+```
+
+To use these expressions in a search or query, make sure:
+
+- You have created an index on each vector field.
+
+- The collection is loaded into memory.
+
+For a full list of supported operators and expressions, refer to [JSON Operators](json-operators.md).
+
+## Pull it all together
+
+By now, you’ve learned how to define, insert, and optionally index structured values inside a JSON field.
+
+To complete the workflow in a real-world application, you’ll also need to:
+
+- **Create an index on your vector fields** (mandatory for each vector field in a collection)  
+
+    Refer to [Set Index Parameters](create-collection.md#Optional-Set-Index-Parameters)
+
+- **Load the collection**
+
+    Refer to [Load & Release](load-and-release.md)
+
+- **Search or query using JSON path filters**  
+
+    Refer to [Filtered Search](filtered-search.md) and [JSON Operators](json-operators.md)
+
+## FAQ
+
+### What are the differences between a JSON field and the dynamic field?
+
+- **JSON field** is schema-defined. You must explicitly declare the field in the schema.
+
+- **Dynamic field** is a hidden JSON object (`$meta`) that automatically stores any field not defined in the schema.
+
+Both support nested structures and JSON path indexing, but dynamic fields are more suitable for optional or evolving data structures.
+
+Refer to [Dynamic Field](enable-dynamic-field.md) for details.
+
+### Are there any limitations on the size of a JSON field?
+
+Yes. Each JSON field is limited to 65,536 bytes.
+
+### Does a JSON field support setting a default value?
+
+No, JSON fields do not support default values. However, you can set `nullable=True` when defining the field to allow empty entries.
+
+Refer to [Nullable & Default](nullable-and-default.md) for details.
+
+### Are there any naming conventions for JSON field keys?
+
+Yes, to ensure compatibility with queries and indexing:
+
+- Use only letters, numbers, and underscores in JSON keys.
+
+- Avoid using special characters, spaces, or dots (`.`, `/`, etc.).
+
+- Incompatible keys may cause parsing issues in filter expressions.
+
+### How does Milvus handle string values in JSON fields?
+
+Milvus stores string values exactly as they appear in the JSON input—without semantic transformation. Improperly quoted strings may result in errors during parsing.
+
+**Examples of valid strings**:
+
+```plaintext
+"a\"b", "a'b", "a\\b"
+```
+
+**Examples of invalid strings**:
+
+```plaintext
+'a"b', 'a\'b'
+```
+
+### What filtering logic does Milvus use for indexed JSON paths?
+
+- **Numeric Indexing**:
+
+    If an index is created with `json_cast_type="double"`, only numeric filter conditions (e.g., `>`, `<`, `== 42`) will leverage the index. Non-numeric conditions may fall back to a brute-force scan.
+
+- **String Indexing**:
+
+    If an index uses `json_cast_type="varchar"`, only string filter conditions will benefit from the index; other types may fall back to a brute-force scan.
+
+- **Boolean Indexing**:
+
+    Boolean indexing behaves similarly to string indexing, with index usage only when the condition strictly matches true or false.
+
+### What about numeric precision when indexing JSON fields?
+
+Milvus stores all indexed numeric values as doubles.
+
+If a numeric value exceeds **2^53**, it may lose precision. This loss of precision can result in filter queries not matching out-of-range values exactly.
+
+### Can I create multiple indexes on the same JSON path with different cast types?
+
+No, each JSON path supports **only one index**. You must choose a single `json_cast_type` that matches your data. Creating multiple indexes on the same path with different cast types is not supported.
+
+### What if values on a JSON path have inconsistent types?
+
+Inconsistent types across entities can lead to **partial indexing**. For example, if `metadata["price"]` is stored as both a number (`99.99`) and a string (`"99.99"`), and the index is defined with `json_cast_type="double"`, only the numeric values will be indexed. The string-form entries will be skipped and not appear in filter results.
+
+### Can I use filters with a different type than the indexed cast type?
+
+If your filter expression uses a different type than the index's `json_cast_type`, the system will **not use the index**, and may fall back to a slower brute-force scan—if the data allows. For best performance, always align your filter expression with the cast type of the index.

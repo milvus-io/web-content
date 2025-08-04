@@ -9,6 +9,12 @@ beta: Milvus 2.5.11+
 
 The `lindera` tokenizer performs dictionary-based morphological analysis. It is a good choice for languages—such as Japanese, Korean, and Chinese—whose words are not separated by spaces.
 
+<div class="alert note">
+
+The `lindera` tokenizer preserves punctuation marks as separate tokens in the output. For example, `"こんにちは！"` becomes `["こんにちは", "！"]`. To remove these standalone punctuation tokens, use the [`removepunct`](removepunct-filter.md) filter.
+
+</div>
+
 ## Prerequisites
 
 To use the `lindera` tokenizer, you need to use a specially compiled Milvus version. All dictionaries must be explicitly enabled during compilation to be used.
@@ -40,7 +46,7 @@ To configure an analyzer using the `lindera` tokenizer, set `tokenizer.type` to 
 ```python
 analyzer_params = {
     "tokenizer": {
-      "type": "lindera"，
+      "type": "lindera",
       "dict_kind": "ipadic"
     }
 }

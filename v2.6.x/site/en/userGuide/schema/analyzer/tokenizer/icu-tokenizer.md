@@ -9,6 +9,12 @@ beta: Milvus 2.5.11+
 
 The `icu` tokenizer is built on the [Internationalization Components of Unicode](http://site.icu-project.org/) (ICU) open‑source project, which provides key tools for software internationalization. By using ICU's word‑break algorithm, the tokenizer can accurately split text into words across the majority of the world’s languages.
 
+<div class="alert note">
+
+The `icu` tokenizer preserves punctuation marks and spaces as separate tokens in the output. For example, `"Привет! Как дела?"` becomes `["Привет", "!", " ", "Как", " ", "дела", "?"]`. To remove these standalone punctuation tokens, use the [`removepunct`](removepunct-filter.md) filter.
+
+</div>
+
 ## Configuration
 
 To configure an analyzer using the `icu` tokenizer, set `tokenizer` to `icu` in `analyzer_params`.
@@ -169,7 +175,33 @@ List<RunAnalyzerResp.AnalyzerResult> results = resp.getResults();
 ```
 
 ```go
-// go
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+bs, _ := json.Marshal(analyzerParams)
+texts := []string{"Привет! Как дела?"}
+option := milvusclient.NewRunAnalyzerOption(texts).
+    WithAnalyzerParams(string(bs))
+
+result, err := client.RunAnalyzer(ctx, option)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash

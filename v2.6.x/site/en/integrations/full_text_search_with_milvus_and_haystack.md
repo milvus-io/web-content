@@ -106,7 +106,7 @@ document_store = MilvusDocumentStore(
             output_field_names="sparse_vector",
         )
     ],
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`).
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`).
     drop_old=True,  # Drop the old collection if it exists and recreate it.
 )
 ```
@@ -179,7 +179,7 @@ document_store = MilvusDocumentStore(
             output_field_names="sparse_vector",
         )
     ],
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`).
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`).
     drop_old=True,  # Drop the old collection and recreate it.
 )
 ```
@@ -295,7 +295,7 @@ document_store = MilvusDocumentStore(
             enable_match=True,  # Whether to enable match.
         )
     ],
-    consistency_level="Strong",
+    consistency_level="Bounded",
     drop_old=True,
 )
 

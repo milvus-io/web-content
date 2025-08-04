@@ -20,6 +20,8 @@ Milvus supports several basic operators for filtering data:
 
 - **Logical Operators**: `AND`, `OR`, and `NOT` combine multiple conditions into complex expressions.
 
+- **IS NULL and IS NOT NULL Operators**: The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to [Basic Operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators).
+
 ### Example: Filtering by Color
 
 To find entities with primary colors (red, green, or blue) in a scalar field `color`, use the following filter expression:
@@ -151,66 +153,4 @@ For more details, refer to [Text Match](keyword-match.md).
 The **PHRASE_MATCH** operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.
 
 For more details, refer to [Phrase Match](phrase-match.md).
-
-## Random sampling operator | Milvus 2.6.x
-
-Random sampling allows you to extract a subset of data samples from a collection at the segment level, making it ideal for exploring and processing massive datasets. This feature is valuable for these use cases:
-
-- **Quick data preview**: It returns representative sample data with minimal resource usage, which allows you to quickly grasp the overall structure and content of large vector datasets.
-
-- **Combined filtering**: When performing multi-criteria filtering (e.g., selecting documents by attributes), combining it with random sampling enables quick statistical summaries and previews on the filtered results.
-
-- **Resource saving in large-scale data processing**: For very large datasets, aggregating and analyzing full data can be resource-intensive. Random sampling reduces the processing load by lowering the amount of data handled.
-
-Use the following syntax for random sampling:
-
-```python
-filter = RANDOM_SAMPLE(float)
-```
-
-- `float`**:** A sampling factor in the range (0, 1), excluding the boundaries. For example, `RANDOM_SAMPLE(0.001)` selects approximately 0.1% of the results.
-
-<div class="alert note">
-
-The `RANDOM_SAMPLE` expression is case-insensitive. You can use either `RANDOM_SAMPLE` or `random_sample`.
-
-</div>
-
-### Combine with other filters
-
-The random sampling operator must be combined with other filtering expressions using logical `AND`. For example:
-
-```python
-filter = "color = 'red' and RANDOM_SAMPLE(0.001)"
-```
-
-Here, Milvus first applies the condition `color = 'red'` and then performs random sampling on the result set.
-
-### Example: Random sampling without an additional filter
-
-In this example, the query samples a random subset (approximately 1%) of the entire data in the specified collection:
-
-```python
-filter = "RANDOM_SAMPLE(0.01)"
-
-result = MilvusClient.query(
-    collection_name="YOUR_COLLECTION_NAME",
-    filter=filter, 
-    output_fields=["id"]
-)
-```
-
-### Example: Combined filtering with random sampling
-
-In this example, the query first filters documents based on a specific attribute (in this case, documents where `color` equals `'red'`). After filtering, the random sampling operator is applied to return roughly 0.1% of the filtered results:
-
-```python
-filter = "color = 'red' and RANDOM_SAMPLE(0.001)"
-
-result = MilvusClient.query(
-    collection_name="YOUR_COLLECTION_NAME",
-    filter=filter, 
-    output_fields=["id"]
-)
-```
 

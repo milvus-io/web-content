@@ -286,8 +286,8 @@ You can alter the properties of an existing database as follows. The following e
 
 ```python
 client.alter_database_properties(
-    db_name: "my_database_1",
-    properties: {
+    db_name="my_database_1",
+    properties={
         "database.max.collections": 10
     }
 )
@@ -345,8 +345,8 @@ You can also reset a database property by dropping it as follows. The following 
 
 ```python
 client.drop_database_properties(
-    db_name: "my_database_1",
-    property_keys: [
+    db_name="my_database_1",
+    property_keys=[
         "database.max.collections"
     ]
 )
@@ -490,4 +490,15 @@ curl --request POST \
     "dbName": "my_database"
 }'
 ```
+
+## FAQ
+
+### How do I manage permissions for a database?
+
+Milvus uses Role-Based Access Control (RBAC) to manage permissions. You can create roles with specific privileges and assign them to users, thus controlling their access to different databases. For more details, refer to the [RBAC documentation](rbac.md).
+
+### Are there any quota limitations for a database?
+
+Yes, Milvus allows you to set quota limitations for a database, such as the maximum number of collections. For a comprehensive list of limitations, please refer to the [Milvus Limits documentation](limitations.md).
+
 

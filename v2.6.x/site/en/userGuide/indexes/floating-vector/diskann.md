@@ -38,7 +38,7 @@ The following figure shows how a Vamana graph is constructed.
 
         The `search_list_size` parameter determines the breadth of the graph refinement process. A higher `search_list_size` extends the search for neighbors during construction and can improve final accuracy, but increases index-building time.
 
-To learn more about parameter tuning, refer to [DISKANN params](diskann.md#diskann-params).
+To learn more about parameter tuning, refer to [DISKANN params](diskann.md#DISKANN-params).
 
 #### PQ
 
@@ -120,84 +120,20 @@ Once you've made these changes, restart your Milvus instance for the settings to
 
 ## Configure DISKANN
 
-DISKANN parameters can be configured using two primary methods:
-
-- **Milvus Configuration File:** Adjust DISKANN parameters through the Milvus configuration file. This method is suitable for setting general configuration options for your Milvus instance.
-
-- **Milvus SDK:** Fine-tune DISKANN parameters using the Milvus SDK during index creation or search operations. This allows for more granular control and dynamic parameter adjustments based on specific use cases.
-
-<div class="alert note">
-
-The configuration made by the SDK overrides any settings defined in the configuration file, offering flexibility and control for specific applications and data sets.
-
-</div>
-
-### Milvus configuration file
-
-Here's an example of how to set DISKANN parameters within the `milvus.yaml` file:
+DISKANN-related parameters can be configured via your Milvus configuration file (`milvus.yaml`):
 
 ```yaml
-knowhere:
-  enable: true # When enable this configuration, the index parameters defined following will be automatically populated as index parameters, without requiring user input.
-  DISKANN:
-    build:
-      max_degree: 56 # Maximum degree of the Vamana graph
-      pq_code_budget_gb_ratio: 0.125 # Size limit on the PQ code (compared with raw data)
-      search_cache_budget_gb_ratio: 0.1 # Ratio of cached node numbers to raw data
-      search_list_size: 100 # Size of the candidate list during building graph
-    search:
-      beam_width_ratio: 4 # Ratio between the maximum number of IO requests per search iteration and CPU number
+# milvus.yaml
+common:
+  DiskIndex:
+    MaxDegree: 56  # Maximum degree of the Vamana graph
+    SearchListSize: 100  # Size of the candidate list during building graph
+    PQCodeBudgetGBRatio: 0.125  # Size limit on the PQ code (compared with raw data)
+    SearchCacheBudgetGBRatio: 0.1 # Ratio of cached node numbers to raw data
+    BeamWidthRatio: 4 # Ratio between the maximum number of IO requests per search iteration and CPU number
 ```
 
-### SDK configuration
-
-Here's an example of how to set DISKANN parameters using Milvus SDK.
-
-#### Build
-
-To build an `IVF_FLAT` index on a vector field in Milvus, use the `add_index()` method, specifying the `index_type`, `metric_type`, and additional parameters for the index.
-
-```python
-from pymilvus import MilvusClient
-
-# Prepare index building params
-index_params = MilvusClient.prepare_index_params()
-
-index_params.add_index(
-    field_name="your_vector_field_name", # Name of the vector field to be indexed
-    index_type="DISKANN", # Type of the index to create
-    index_name="vector_index", # Name of the index to create
-    metric_type="L2", # Metric type used to measure similarity
-    params={
-        "max_degree": 56, # Maximum number of connections (edges) each data point can have
-        "search_list_size": 100,
-        "search_cache_budget_gb_ratio": 0.10, # Amount of memory allocated for caching frequently accessed parts of the graph
-        "pq_code_budget_gb_ratio": 0.125 # Size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data
-    } # Index building params
-)
-```
-
-Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
-
-#### Search
-
-Once the index is built and entities are inserted, you can perform similarity searches on the index.
-
-```python
-search_params = {
-    "params": {
-        "beam_width_ratio": 4.0, # degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.
-    }
-}
-
-res = MilvusClient.search(
-    collection_name="your_collection_name", # Collection name
-    anns_field="vector_field",  # Vector field name
-    data=[[0.1, 0.2, 0.3, 0.4, 0.5]],  # Query vector
-    limit=3,  # TopK results to return
-    search_params=search_params
-)
-```
+For details on parameter descriptions, refer to [DISKANN params](diskann.md#DISKANN-params).
 
 ## DISKANN params
 
@@ -217,7 +153,7 @@ These parameters influence how the DISKANN index is constructed. Adjusting them 
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code>max_degree</code></p></td>
+     <td><p><code>MaxDegree</code></p></td>
      <td><p>Controls the maximum number of connections (edges) each data point can have in the Vamana graph.</p></td>
      <td><p><strong>Type</strong>: Integer
  <strong>Range</strong>: [1, 512]</p>
@@ -227,17 +163,16 @@ These parameters influence how the DISKANN index is constructed. Adjusting them 
    </tr>
    <tr>
      <td></td>
-     <td><p><code>search_list_size</code></p></td>
-     <td><p>Determines the number of candidate neighbors considered for each data point during graph construction.</p></td>
+     <td><p><code>SearchListSize</code></p></td>
+     <td><p>During index construction, this parameter defines the size of the candidate pool used when searching for the nearest neighbors for each node. For every node being added to the graph, the algorithm maintains a list of the <code>search_list_size</code> best candidates found so far. The search for neighbors stops when this list can no longer be improved. From this final candidate pool, the top <code>max_degree</code> nodes are selected to form the final edges.</p></td>
      <td><p><strong>Type</strong>: Integer
  <strong>Range</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Default value</strong>: <code>100</code></p></td>
-     <td><p>Larger values lead to more comprehensive graphs, potentially improving search quality but also increasing build time. 
- In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
+     <td><p>A larger <code>search_list_size</code> increases the likelihood of finding the true nearest neighbors for each node, which can lead to a higher-quality graph and better search performance (recall). However, this comes at the cost of a significantly longer index build time. It should always be set to a value greater than or equal to <code>max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
-     <td><p><code>search_cache_budget_gb_ratio</code></p></td>
+     <td><p><code>SearchCacheBudgetGBRatio</code></p></td>
      <td><p>Controls the amount of memory allocated for caching frequently accessed parts of the graph during index construction.</p></td>
      <td><p><strong>Type</strong>: Float
  <strong>Range</strong>: [0.0, 0.3)</p>
@@ -247,7 +182,7 @@ These parameters influence how the DISKANN index is constructed. Adjusting them 
    </tr>
    <tr>
      <td><p>PQ</p></td>
-     <td><p><code>pq_code_budget_gb_ratio</code></p></td>
+     <td><p><code>PQCodeBudgetGBRatio</code></p></td>
      <td><p>Controls the size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data.</p></td>
      <td><p><strong>Type</strong>: Float
  <strong>Range</strong>: (0.0, 0.25]</p>
@@ -272,13 +207,22 @@ These parameters influence how DISKANN performs searches. Adjusting them can imp
    </tr>
    <tr>
      <td><p>Vamana</p></td>
-     <td><p><code>beam_width_ratio</code></p></td>
+     <td><p><code>BeamWidthRatio</code></p></td>
      <td><p>Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests relative to the number of available CPU cores.</p></td>
      <td><p><strong>Type</strong>: Float
  <strong>Range</strong>: [1, max(128 / CPU number, 16)]</p>
 <p><strong>Default value</strong>: <code>4.0</code></p></td>
      <td><p>Higher values increase parallelism, which can speed up search on systems with powerful CPUs and SSDs. However, setting it too high might lead to excessive resource contention.
  In most cases, we recommend you set a value within this range: [1.0, 4.0].</p></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td><p><code>SearchListSize</code></p></td>
+     <td><p>During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency.</p></td>
+     <td><p><strong>Type</strong>: Integer
+ <strong>Range</strong>: [1, <em>int_max</em>]</p>
+<p><strong>Default value</strong>: <code>100</code></p></td>
+     <td><p>For a good balance between performance and accuracy, it is recommended to set this value to be equal to or slightly larger than the number of results you want to retrieve (top_k).</p></td>
    </tr>
 </table>
 
