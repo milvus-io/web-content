@@ -54,14 +54,14 @@ title: 헬름으로 Milvus 클러스터 설치
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">헬름 CLI를 설치한다</a>.</p></li>
-<li><p><a href="/docs/ko/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">K8s 클러스터를 생성한다</a>.</p></li>
+<li><p><a href="/docs/ko/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">K8s 클러스터를 생성한다</a>.</p></li>
 <li><p><a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">스토리지클래스를</a> 설치한다. 설치된 StorageClass는 아래와 같이 확인할 수 있다.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>설치 전 <a href="/docs/ko/v2.6.x/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
+<li><p>설치 전 <a href="/docs/ko/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
 <li><p>밀버스를 설치하기 전에 <a href="https://milvus.io/tools/sizing">밀버스 사이징 툴을</a> 사용하여 데이터 크기에 따라 하드웨어 요구 사항을 추정하는 것을 권장합니다. 이렇게 하면 Milvus 설치를 위한 최적의 성능과 리소스 할당을 보장하는 데 도움이 됩니다.</p></li>
 </ul>
 <div class="alert note">
@@ -130,10 +130,11 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <li>기본 메시지 큐(MQ)는 <strong>Woodpecker입니다</strong>.</li>
 <li><strong>스트리밍 노드</strong> 구성 요소가 도입되어 기본적으로 활성화됩니다.</li>
 </ul>
-<p>자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">아키텍처 개요를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요를</a> 참조하세요.</p>
   </div>
 </li>
 <li><p>클러스터 모드에서 Milvus 인스턴스를 배포하려면 다음 명령을 실행하세요:</p>
+<p><code translate="no">--set</code> 을 사용하여 사용자 지정 구성으로 Milvus 클러스터를 설치할 수 있습니다. 다음 명령은 <code translate="no">streaming.enabled</code> 을 <code translate="no">true</code> 으로 설정하여 스트리밍 서비스를 활성화하고 <code translate="no">indexNode.enabled</code> 을 <code translate="no">false</code> 으로 설정하여 인덱스 서비스를 비활성화합니다. 이 경우 스트리밍 노드가 모든 데이터 처리 및 인덱싱 작업을 담당하게 됩니다.</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0-rc1 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -146,7 +147,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <li><strong>스트리밍 노드</strong> 구성 요소가 도입되어 기본적으로 활성화됩니다.</li>
 <li><strong>인덱스 노</strong> 드와 <strong>데이터 노드가</strong> 단일 <strong>데이터 노드</strong> 구성 요소로 병합됩니다.</li>
 </ul>
-<p>자세한 내용은 <a href="/docs/ko/v2.6.x/architecture_overview.md">아키텍처 개요를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요를</a> 참조하세요.</p>
   </div>
 </li>
 </ul>
@@ -156,7 +157,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
   <ul>
     <li>릴리스 이름에는 문자, 숫자 및 대시만 포함해야 합니다. 릴리스 이름에는 점을 사용할 수 없습니다.</li>
     <li>기본 명령줄은 헬름과 함께 Milvus를 설치하는 동안 클러스터 버전의 Milvus를 설치합니다. Milvus를 독립형으로 설치할 때는 추가 설정이 필요하다.</li>
-    <li><a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">쿠버네티스의 더 이상 사용되지 않는 API 마이그레이션 가이드에</a> 따르면, v1.25부터 파드장애예산 <b>정책/v1beta1</b> API 버전은 더 이상 제공되지 않는다. 대신 <b>정책/v1</b> API 버전을 사용하도록 매니페스트와 API 클라이언트를 마이그레이션하는 것이 좋다. <br/>쿠버네티스 v1.25 이상에서 여전히 <b>정책/v1beta1</b> 버전의 파드디스럽션예산 API 버전을 사용하는 사용자를 위한 해결 방법으로, 대신 다음 명령을 실행하여 밀버스를 설치할 수 있다:<br/>. <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+    <li><a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">쿠버네티스의 더 이상 사용되지 않는 API 마이그레이션 가이드에</a> 따르면, v1.25 버전부터 파드장애예산 <b>정책/v1beta1</b> API 버전은 더 이상 제공되지 않는다. 대신 <b>정책/v1</b> API 버전을 사용하도록 매니페스트와 API 클라이언트를 마이그레이션하는 것이 좋다. <br/>쿠버네티스 v1.25 이상에서 여전히 파드디스럽션버짓의 <b>정책/v1beta1</b> API 버전을 사용하는 사용자를 위한 해결 방법으로, 다음 명령을 실행하여 밀버스를 설치할 수 있다:<br/>. <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>자세한 내용은 <a href="https://artifacthub.io/packages/helm/milvus/milvus">밀버스 헬름 차트와</a> <a href="https://helm.sh/docs/">헬름을</a> 참고한다.</li>
   </ul>
 </div>
@@ -185,7 +186,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-0</span>                    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-operator">-</span>metadata<span class="hljs-number">-98</span>zbr       <span class="hljs-number">0</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>   Completed  <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus WebUI( <code translate="no">http://127.0.0.1:9091/webui/</code> )에 접속하여 Milvus 인스턴스에 대해 자세히 알아볼 수도 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>
+<p>Milvus WebUI( <code translate="no">http://127.0.0.1:9091/webui/</code> )에 접속하여 Milvus 인스턴스에 대해 자세히 알아볼 수도 있습니다. 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Milvus에 로컬 포트 포워딩</h3><p>다음 명령을 실행하여 Milvus 클러스터가 서비스하는 포트를 확인합니다.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
@@ -201,7 +202,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>선택적으로, 위의 명령에서 <code translate="no">27017:19530</code> 대신 <code translate="no">:19530</code> 을 사용하여 <code translate="no">kubectl</code> 이 로컬 포트를 할당하도록 하여 포트 충돌을 관리할 필요가 없도록 할 수 있다.</p>
 <p>기본적으로 kubectl의 포트 포워딩은 <code translate="no">localhost</code> 에서만 수신 대기한다. 밀버스가 선택한 또는 모든 IP 주소에서 수신 대기하도록 하려면 <code translate="no">address</code> 플래그를 사용한다. 다음 명령은 호스트 머신의 모든 IP 주소에서 포트 포워딩을 수신 대기하도록 한다.</p>
-<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Milvus WebUI에 액세스<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(선택 사항) Milvus 구성 업데이트하기<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -216,7 +217,44 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 기본 제공 GUI 도구와 함께 제공됩니다. Milvus Web UI는 간단하고 직관적인 인터페이스로 시스템 관찰성을 향상시킵니다. Milvus Web UI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계 및 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하고, 자세한 Milvus 구성을 나열할 수 있습니다. 밀버스 웹 UI에 대한 자세한 내용은 밀버스 <a href="/docs/ko/v2.6.x/milvus-webui.md">웹 UI를</a> 참조하세요.</p>
+    </button></h2><p><code translate="no">values.yaml</code> 파일을 편집한 후 다시 적용하여 Milvus 클러스터의 구성을 업데이트할 수 있습니다.</p>
+<ol>
+<li>원하는 구성으로 <code translate="no">values.yaml</code> 파일을 만듭니다.</li>
+</ol>
+<p>다음은 <code translate="no">proxy.http</code> 을 활성화한다고 가정합니다.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    proxy:
+      http:
+        enabled: true
+</span><button class="copy-code-btn"></button></code></pre>
+<ol>
+<li><code translate="no">values.yaml</code> 파일을 적용합니다.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>업데이트된 구성을 확인합니다.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm get values my-release
+<button class="copy-code-btn"></button></code></pre>
+<p>출력에 업데이트된 구성이 표시되어야 합니다.</p>
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Milvus WebUI 액세스<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus는 브라우저를 통해 액세스할 수 있는 Milvus WebUI라는 기본 제공 GUI 도구와 함께 제공됩니다. Milvus Web UI는 간단하고 직관적인 인터페이스로 시스템 관찰성을 향상시킵니다. Milvus Web UI를 사용하여 Milvus의 구성 요소 및 종속성에 대한 통계 및 메트릭을 관찰하고, 데이터베이스 및 수집 세부 정보를 확인하고, 자세한 Milvus 구성을 나열할 수 있습니다. 밀버스 웹 UI에 대한 자세한 내용은 밀버스 <a href="/docs/ko/milvus-webui.md">웹 UI를</a> 참조하세요.</p>
 <p>Milvus 웹 UI에 액세스할 수 있도록 하려면 프록시 포드를 로컬 포트로 포트 포워딩해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -317,27 +355,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Docker에 Milvus를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p><a href="/docs/ko/v2.6.x/quickstart.md">Hello Milvus를</a> 확인하여 Milvus의 기능을 살펴봅니다.</p></li>
+<li><p><a href="/docs/ko/quickstart.md">Hello Milvus를</a> 확인하여 Milvus의 기능을 살펴봅니다.</p></li>
 <li><p>Milvus의 기본 작동에 대해 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/manage_databases.md">데이터베이스 관리</a></li>
-<li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/v2.6.x/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
-<li><a href="/docs/ko/v2.6.x/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
+<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p><a href="/docs/ko/v2.6.x/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
-<li><p><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
+<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
+<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
 <li><p>Milvus 클러스터를 클라우드에 배포하세요:</p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ko/v2.6.x/gcp.md">구글 클라우드</a></li>
-<li><a href="/docs/ko/v2.6.x/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ko/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
+<li><a href="/docs/ko/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/v2.6.x/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
-<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/v2.6.x/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
-<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/v2.6.x/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
+<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/v2.6.x/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링하기</a>.</p></li>
 </ul>

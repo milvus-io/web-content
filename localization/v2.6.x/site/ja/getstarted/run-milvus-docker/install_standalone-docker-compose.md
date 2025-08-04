@@ -89,7 +89,42 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>また、Milvus WebUI（<code translate="no">http://127.0.0.1:9091/webui/</code> ）にもアクセスし、Milvusインスタンスの詳細を確認することができる。詳しくは<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご参照ください。</p>
+<p>また、Milvus WebUI（<code translate="no">http://127.0.0.1:9091/webui/</code> ）にもアクセスし、Milvusインスタンスの詳細を確認することができる。詳細は<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご参照ください。</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション) Milvus設定の更新<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>お客様のニーズに合わせてMilvusの設定を更新するには、<code translate="no">milvus-standalone</code> コンテナ内の<code translate="no">/milvus/configs/user.yaml</code> ファイルを変更する必要があります。</p>
+<ol>
+<li><code translate="no">milvus-standalone</code> コンテナにアクセスします。</li>
+</ol>
+<pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>デフォルトの構成を上書きするための追加構成を追加します。以下では、デフォルトの<code translate="no">proxy.healthCheckTimeout</code> を上書きする必要があることを想定しています。該当する構成項目については、「<a href="/docs/ja/system_configuration.md">システム構成</a>」を参照。</li>
+</ol>
+<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
+proxy:
+  healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
+EOF
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li><code translate="no">milvus-standalone</code> コンテナを再起動し、変更を適用する。</li>
+</ol>
+<pre><code translate="no" class="language-shell">docker restart milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvusの停止と削除<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +140,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下の手順でコンテナを停止・削除することができます。</p>
+    </button></h2><p>以下の手順で、このコンテナを停止および削除できる。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
 <span class="hljs-meta prompt_">
@@ -127,7 +162,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DockerにMilvusをインストールしました：</p>
+    </button></h2><p>DockerにMilvusをインストールしたら、次のことができます：</p>
 <ul>
 <li><p><a href="/docs/ja/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
 <li><p>Milvusの基本操作を学ぶ：</p>

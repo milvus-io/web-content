@@ -18,7 +18,7 @@ title: ローカルでMilvus Liteを動かす
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このページでは、Milvus Liteを使ってローカルでMilvusを実行する方法を説明します。Milvus Liteは<a href="https://github.com/milvus-io/milvus">Milvusの</a>軽量版です。<a href="https://github.com/milvus-io/milvus">Milvusは</a>オープンソースのベクトルデータベースで、ベクトル埋め込みと類似性検索によりAIアプリケーションを強化します。</p>
+    </button></h1><p>このページでは、Milvus Liteを使ってローカルでMilvusを実行する方法を説明します。Milvus Liteは<a href="https://github.com/milvus-io/milvus">Milvusの</a>軽量版です。<a href="https://github.com/milvus-io/milvus">Milvusは</a>オープンソースのベクトルデータベースであり、ベクトル埋め込みと類似性検索によってAIアプリケーションを強化します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -328,7 +328,7 @@ res = client.delete(
 <h3 id="Vector-Index-Types" class="common-anchor-header">ベクトルインデックス型</h3><p>Milvus Liteは<a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>インデックスタイプのみをサポートしています。コレクションで指定されたインデックスタイプに関係なく、FLATタイプを使用します。</p>
 <h3 id="Search-Features" class="common-anchor-header">検索機能</h3><p>Milvus Liteはスパースベクトル、マルチベクトル、ハイブリッド検索をサポートしています。</p>
 <h3 id="Partition" class="common-anchor-header">パーティション</h3><p>Milvus Liteはパーティションおよびパーティション関連メソッドをサポートしていません。</p>
-<h3 id="Users--Roles" class="common-anchor-header">ユーザとロール</h3><p>Milvus Liteはユーザとロールおよび関連するメソッドをサポートしていません。</p>
+<h3 id="Users--Roles" class="common-anchor-header">ユーザとロール</h3><p>Milvus Liteはユーザとロールおよび関連メソッドをサポートしていません。</p>
 <h3 id="Alias" class="common-anchor-header">エイリアス</h3><p>Milvus Liteはエイリアスおよびエイリアス関連メソッドに対応しておりません。</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Milvus Liteからのデータ移行について<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
 <li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
-<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご覧ください。</p></li>
+<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

@@ -90,7 +90,42 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>È anche possibile accedere alla Milvus WebUI all'indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per saperne di più sulla propria istanza Milvus. Per ulteriori informazioni, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>.</p>
-<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Arresto e cancellazione di Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornare le configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Per aggiornare la configurazione di Milvus in base alle proprie esigenze, è necessario modificare il file <code translate="no">/milvus/configs/user.yaml</code> all'interno del contenitore <code translate="no">milvus-standalone</code>.</p>
+<ol>
+<li>Accedere al contenitore <code translate="no">milvus-standalone</code>.</li>
+</ol>
+<pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Aggiungete altre configurazioni per sovrascrivere quelle predefinite. Di seguito si ipotizza che sia necessario sovrascrivere quelle predefinite di <code translate="no">proxy.healthCheckTimeout</code>. Per le voci di configurazione applicabili, fare riferimento a <a href="/docs/it/system_configuration.md">Configurazione del sistema</a>.</li>
+</ol>
+<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
+proxy:
+  healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
+EOF
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Riavviare il contenitore <code translate="no">milvus-standalone</code> per applicare le modifiche.</li>
+</ol>
+<pre><code translate="no" class="language-shell">docker restart milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Arresto ed eliminazione di Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

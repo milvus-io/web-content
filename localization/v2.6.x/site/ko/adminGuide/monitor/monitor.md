@@ -96,10 +96,42 @@ summary: Prometheus를 사용하여 Milvus 클러스터에 대한 모니터링 �
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. ServiceMonitor 활성화</h3><p>서비스 모니터는 기본적으로 밀버스 헬름에 대해 활성화되어 있지 않습니다. 쿠버네티스 클러스터에 프로메테우스 오퍼레이터를 설치한 후, 파라미터 <code translate="no">metrics.serviceMonitor.enabled=true</code> 를 추가하여 활성화할 수 있다.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values</span>
-<button class="copy-code-btn"></button></code></pre>
+<h4 id="With-Helm" class="common-anchor-header">헬름 사용</h4><p>밀버스 헬름 차트를 설치한 경우 다음과 같이 <code translate="no">metrics.serviceMonitor.enabled=true</code> 파라미터를 설정하여 서비스 모니터를 활성화할 수 있습니다.</p>
+<pre><code translate="no">```
+$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
+```
+</code></pre>
 <p>설치가 완료되면 <code translate="no">kubectl</code> 를 사용하여 ServiceMonitor 리소스를 확인합니다.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h4 id="With-Milvus-Operator" class="common-anchor-header">밀버스 오퍼레이터 사용</h4><p>밀버스 오퍼레이터를 사용하여 밀버스를 설치한 경우 다음과 같이 서비스모니터를 활성화할 수 있습니다.</p>
+<ol>
+<li><p>다음 명령어를 실행하여 Milvus 사용자 정의 리소스를 편집합니다. 다음 명령은 사용자 정의 리소스의 이름이 <code translate="no">my-release</code> 이라고 가정합니다.</p>
+<pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><code translate="no">spec.components.disableMetrics</code> 필드를 <code translate="no">false</code> 으로 편집합니다.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>편집기를 저장하고 종료합니다.</p></li>
+<li><p>운영자가 변경 사항을 조정할 때까지 기다립니다. 다음 명령을 실행하여 Milvus 사용자 지정 리소스의 상태를 확인할 수 있습니다.</p>
+<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> milvus my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span> <span class="hljs-operator">-</span>o yaml
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<p><code translate="no">status.components.metrics.serviceMonitor.enabled</code> 필드는 <code translate="no">true</code> 이어야 합니다.</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3. 메트릭 확인</h3><p>ServiceMonitor를 활성화한 후 Prometheus 대시보드( <code translate="no">http://localhost:9090/</code>)에 액세스할 수 있습니다.</p>
+<p><code translate="no">Status</code> 탭을 클릭한 다음 <code translate="no">Targets</code> 을 클릭합니다. Milvus 컴포넌트의 타겟이 표시되어야 합니다.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_targets.png" alt="Prometheus_targets" class="doc-image" id="prometheus_targets" />
+   </span> <span class="img-wrapper"> <span>Prometheus_targets</span> </span></p>
+<p><code translate="no">Graph</code> 탭을 클릭하고 표현식 입력 상자에 <code translate="no">up{job=&quot;default/my-release&quot;}</code> 표현식을 입력합니다. Milvus 컴포넌트의 메트릭이 표시되어야 합니다.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
+   </span> <span class="img-wrapper"> <span>Prometheus_graph</span> </span></p>
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. 서비스 모니터 확인</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s
@@ -120,9 +152,9 @@ summary: Prometheus를 사용하여 Milvus 클러스터에 대한 모니터링 �
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus 클러스터에 대한 모니터링 서비스를 배포한 경우 다음 방법을 배울 수도 있습니다:<ul>
+<li>Milvus 클러스터에 대한 모니터링 서비스를 배포한 경우 다음을 학습할 수도 있습니다:<ul>
 <li><a href="/docs/ko/visualize.md">Grafana에서 Milvus 메트릭 시각화하기</a></li>
-<li><a href="/docs/ko/alert.md">Milvus 서비스에 대한 알림 만들기</a></li>
+<li><a href="/docs/ko/alert.md">Milvus 서비스에 대한 알림 생성하기</a></li>
 <li><a href="/docs/ko/allocate.md">리소스 할당</a> 조정하기</li>
 </ul></li>
 <li>Milvus 클러스터를 확장하는 방법에 대한 정보를 찾고 계신다면 이 도움말을 참조하세요:<ul>

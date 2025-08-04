@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Метрики - это индикаторы, предоставляющие информацию о состоянии работы вашей системы. Например, с помощью метрик вы можете понять, сколько памяти или ресурсов процессора потребляет узел данных в Milvus. Знание производительности и состояния компонентов вашего кластера Milvus позволяет вам быть хорошо информированным, а значит, принимать более правильные решения и своевременно корректировать распределение ресурсов.</p>
+    </button></h2><p>Метрики - это индикаторы, предоставляющие информацию о состоянии работы вашей системы. Например, с помощью метрик можно понять, сколько памяти или ресурсов процессора потребляет узел данных в Milvus. Знание производительности и состояния компонентов вашего кластера Milvus позволяет вам быть хорошо информированным, а значит, принимать более правильные решения и своевременно корректировать распределение ресурсов.</p>
 <p>Обычно метрики хранятся в базе данных временных рядов (TSDB), например <a href="https://prometheus.io/">в Prometheus</a>, и метрики записываются с меткой времени. В случае мониторинга служб Milvus вы можете использовать Prometheus для получения данных из конечных точек, установленных экспортерами. Затем Prometheus экспортирует метрики каждого компонента Milvus по адресу <code translate="no">http://&lt;component-host&gt;:9091/metrics</code>.</p>
 <p>Однако у вас может быть несколько реплик для одного компонента, что делает ручную настройку Prometheus слишком сложной. Поэтому вы можете использовать <a href="https://github.com/prometheus-operator/prometheus-operator">Prometheus Operator</a>, расширение для Kubernetes, для автоматического и эффективного управления экземплярами мониторинга Prometheus. Использование Prometheus Operator избавит вас от необходимости вручную добавлять метрические цели и поставщиков услуг.</p>
 <p>ServiceMonitor Custom Resource Definition (CRD) позволяет декларативно определить, как отслеживается динамический набор сервисов. Оно также позволяет выбирать сервисы для мониторинга с нужной конфигурацией с помощью выбора меток. С помощью Prometheus Operator можно ввести соглашения, определяющие способ отображения метрик. Новые службы могут быть автоматически обнаружены в соответствии с установленными соглашениями без необходимости ручной перенастройки.</p>
@@ -97,11 +97,43 @@ summary: >-
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Включите ServiceMonitor</h3><p>По умолчанию ServiceMonitor не включен в Milvus Helm. После установки Prometheus Operator в кластере Kubernetes вы можете включить его, добавив параметр <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values</span>
-<button class="copy-code-btn"></button></code></pre>
+<h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Включите ServiceMonitor</h3><p>По умолчанию ServiceMonitor не включен в Milvus Helm. После установки Prometheus Operator в кластер Kubernetes вы можете включить его, добавив параметр <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
+<h4 id="With-Helm" class="common-anchor-header">С Helm</h4><p>Вы можете включить ServiceMonitor, задав параметр <code translate="no">metrics.serviceMonitor.enabled=true</code> следующим образом, если вы установили диаграмму Milvus Helm.</p>
+<pre><code translate="no">```
+$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
+```
+</code></pre>
 <p>Когда установка завершится, используйте <code translate="no">kubectl</code> для проверки ресурса ServiceMonitor.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h4 id="With-Milvus-Operator" class="common-anchor-header">С помощью Milvus Operator</h4><p>Вы можете включить ServiceMonitor следующим образом, если вы установили Milvus с помощью Milvus Operator.</p>
+<ol>
+<li><p>Выполните следующую команду для редактирования пользовательского ресурса MIlvus. Следующая команда предполагает, что пользовательский ресурс имеет имя <code translate="no">my-release</code>.</p>
+<pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Отредактируйте поле <code translate="no">spec.components.disableMetrics</code> на <code translate="no">false</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Сохраните и выйдите из редактора.</p></li>
+<li><p>Дождитесь, пока оператор выполнит согласование изменений. Вы можете проверить состояние пользовательского ресурса Milvus, выполнив следующую команду.</p>
+<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> milvus my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span> <span class="hljs-operator">-</span>o yaml
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<p>Поле <code translate="no">status.components.metrics.serviceMonitor.enabled</code> должно иметь значение <code translate="no">true</code>.</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3. Проверьте метрики</h3><p>После включения ServiceMonitor вы можете получить доступ к приборной панели Prometheus по адресу <code translate="no">http://localhost:9090/</code>.</p>
+<p>Перейдите на вкладку <code translate="no">Status</code>, а затем <code translate="no">Targets</code>. Вы должны увидеть цели компонентов Milvus.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_targets.png" alt="Prometheus_targets" class="doc-image" id="prometheus_targets" />
+   </span> <span class="img-wrapper"> <span>Prometheus_targets</span> </span></p>
+<p>Перейдите на вкладку <code translate="no">Graph</code> и введите выражение <code translate="no">up{job=&quot;default/my-release&quot;}</code> в поле ввода выражения. Вы должны увидеть метрики компонентов Milvus.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
+   </span> <span class="img-wrapper"> <span>Prometheus_graph</span> </span></p>
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. Проверьте ServiceMonitor</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s

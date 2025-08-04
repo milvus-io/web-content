@@ -39,7 +39,7 @@ title: Exécution locale de Milvus Lite
 <ul>
 <li>Jupyter Notebook / Google Colab</li>
 <li>Ordinateurs portables</li>
-<li>Périphériques Edge</li>
+<li>Appareils Edge</li>
 </ul>
 <p>Milvus Lite partage la même API que Milvus Standalone et Distributed, et couvre la plupart des fonctionnalités telles que la persistance et la gestion des données vectorielles, les opérations CRUD vectorielles, la recherche vectorielle dense et éparse, le filtrage des métadonnées, la recherche multi-vectorielle et hybride. Ensemble, ils offrent une expérience cohérente dans différents types d'environnements, des appareils périphériques aux clusters dans le nuage, en s'adaptant à des cas d'utilisation de différentes tailles. Avec le même code côté client, vous pouvez exécuter des applications GenAI avec Milvus Lite sur un ordinateur portable ou un bloc-notes Jupyter, ou Milvus Standalone sur un conteneur Docker, ou Milvus Distributed sur un cluster Kubernetes à grande échelle desservant des milliards de vecteurs en production.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -362,7 +362,7 @@ optional arguments:
                         collection that need to be dumped
   -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
-<p>L'exemple suivant extrait toutes les données de la collection <code translate="no">demo_collection</code> stockées dans <code translate="no">./milvus_demo.db</code> (fichier de base de données Milvus Lite).</p>
+<p>L'exemple suivant exporte toutes les données de la collection <code translate="no">demo_collection</code> stockées dans <code translate="no">./milvus_demo.db</code> (fichier de base de données Milvus Lite).</p>
 <p>Pour exporter des données :</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
 <span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>

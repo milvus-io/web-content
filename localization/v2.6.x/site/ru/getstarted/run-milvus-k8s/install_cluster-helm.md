@@ -54,14 +54,14 @@ title: Установите кластер Milvus с помощью Helm
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">Установите Helm CLI</a>.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Создайте кластер K8s</a>.</p></li>
+<li><p><a href="/docs/ru/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Создайте кластер K8s</a>.</p></li>
 <li><p>Установите <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>. Проверить установленный StorageClass можно следующим образом.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Перед установкой проверьте <a href="/docs/ru/v2.6.x/prerequisite-helm.md">требования к аппаратному и программному обеспечению</a>.</p></li>
+<li><p>Перед установкой проверьте <a href="/docs/ru/prerequisite-helm.md">требования к аппаратному и программному обеспечению</a>.</p></li>
 <li><p>Перед установкой Milvus рекомендуется использовать <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> для оценки требований к оборудованию в зависимости от объема данных. Это поможет обеспечить оптимальную производительность и распределение ресурсов при установке Milvus.</p></li>
 </ul>
 <div class="alert note">
@@ -130,23 +130,24 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <li>Очередь сообщений (MQ) по умолчанию - <strong>Woodpecker</strong>.</li>
 <li>Появился компонент <strong>Streaming Node</strong>, который включен по умолчанию.</li>
 </ul>
-<p>Подробности см. в разделе " <a href="/docs/ru/v2.6.x/architecture_overview.md">Обзор архитектуры"</a>.</p>
+<p>Подробности см. в разделе " <a href="/docs/ru/architecture_overview.md">Обзор архитектуры"</a>.</p>
   </div>
 </li>
 <li><p>Чтобы развернуть экземпляр Milvus в режиме кластера, выполните следующую команду:</p>
+<p>Вы можете использовать <code translate="no">--set</code> для установки кластера Milvus с пользовательскими конфигурациями. Следующая команда устанавливает <code translate="no">streaming.enabled</code> на <code translate="no">true</code>, чтобы включить службу потокового вещания, и устанавливает <code translate="no">indexNode.enabled</code> на <code translate="no">false</code>, чтобы отключить службу индексов. В этом случае узел потоковой передачи будет отвечать за все задачи по обработке данных и индексированию.</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0-rc1 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
   <div class="alert note">
-<p>Начиная с Milvus 2.6.x, в кластерном режиме были сделаны следующие изменения в архитектуре:</p>
+<p>Начиная с Milvus 2.6.x, в кластерном режиме были внесены следующие изменения в архитектуру:</p>
 <ul>
-<li>MQ по умолчанию по-прежнему является <strong>Pulsar</strong>.</li>
-<li>Компонент <strong>Streaming Node</strong> представлен и включен по умолчанию.</li>
+<li>По умолчанию по-прежнему используется MQ <strong>Pulsar</strong>.</li>
+<li>Появился компонент <strong>Streaming Node</strong>, который включен по умолчанию.</li>
 <li><strong>Узлы Index Node</strong> и <strong>Data Node</strong> объединены в один компонент <strong>Data Node</strong>.</li>
 </ul>
-<p>Подробности см. в разделе " <a href="/docs/ru/v2.6.x/architecture_overview.md">Обзор архитектуры"</a>.</p>
+<p>Подробности см. в разделе " <a href="/docs/ru/architecture_overview.md">Обзор архитектуры"</a>.</p>
   </div>
 </li>
 </ul>
@@ -185,7 +186,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-0</span>                    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-operator">-</span>metadata<span class="hljs-number">-98</span>zbr       <span class="hljs-number">0</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>   Completed  <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы также можете получить доступ к Milvus WebUI по адресу <code translate="no">http://127.0.0.1:9091/webui/</code>, чтобы узнать больше о вашем экземпляре Milvus. Для получения подробной информации см. раздел <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Вы также можете получить доступ к Milvus WebUI по адресу <code translate="no">http://127.0.0.1:9091/webui/</code>, чтобы узнать больше о вашем экземпляре Milvus. Для получения подробной информации см. раздел <a href="/docs/ru/milvus-webui.md">Milvus WebUI</a>.</p>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Перенаправление локального порта в Milvus</h3><p>Выполните следующую команду, чтобы узнать порт, на котором работает ваш кластер Milvus.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
@@ -200,7 +201,44 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>По желанию вы можете использовать <code translate="no">:19530</code> вместо <code translate="no">27017:19530</code> в приведенной выше команде, чтобы <code translate="no">kubectl</code> выделил локальный порт для вас, и вам не пришлось бы управлять конфликтами портов.</p>
-<p>По умолчанию переадресация портов в kubectl прослушивает только <code translate="no">localhost</code>. Используйте флаг <code translate="no">address</code>, если хотите, чтобы Milvus слушал выбранный или все IP-адреса. Следующая команда заставляет port-forward слушать все IP-адреса на хост-машине.</p>
+<p>По умолчанию переадресация портов в kubectl прослушивает только <code translate="no">localhost</code>. Используйте флаг <code translate="no">address</code>, если хотите, чтобы Milvus слушал выбранный или все IP-адреса. Следующая команда заставляет port-forward прослушивать все IP-адреса на хост-машине.</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Необязательно) Обновление конфигураций Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Вы можете обновить конфигурацию кластера Milvus, отредактировав файл <code translate="no">values.yaml</code> и применив его снова.</p>
+<ol>
+<li>Создайте файл <code translate="no">values.yaml</code> с нужными конфигурациями.</li>
+</ol>
+<p>Ниже предполагается, что вы хотите включить <code translate="no">proxy.http</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    proxy:
+      http:
+        enabled: true
+</span><button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Примените файл <code translate="no">values.yaml</code>.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>Проверьте обновленные конфигурации.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm get values my-release
+<button class="copy-code-btn"></button></code></pre>
+<p>В выводе должны отображаться обновленные конфигурации.</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Доступ к Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -216,7 +254,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus поставляется со встроенным GUI-инструментом Milvus WebUI, доступ к которому можно получить через браузер. Milvus Web UI улучшает наблюдаемость системы благодаря простому и интуитивно понятному интерфейсу. С помощью Milvus Web UI можно просматривать статистику и метрики компонентов и зависимостей Milvus, проверять детали баз данных и коллекций, а также выводить список подробных конфигураций Milvus. Подробные сведения о Milvus Web UI см. в разделе <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI.</a></p>
+    </button></h2><p>Milvus поставляется со встроенным GUI-инструментом Milvus WebUI, доступ к которому можно получить через браузер. Milvus Web UI улучшает наблюдаемость системы благодаря простому и интуитивно понятному интерфейсу. С помощью Milvus Web UI можно просматривать статистику и метрики компонентов и зависимостей Milvus, проверять детали баз данных и коллекций, а также выводить список подробных конфигураций Milvus. Подробные сведения о Milvus Web UI см. в разделе <a href="/docs/ru/milvus-webui.md">Milvus WebUI.</a></p>
 <p>Чтобы включить доступ к Milvus Web UI, вам нужно перенаправить порт прокси-под на локальный порт.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -297,7 +335,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Выполните следующую команду, чтобы удалить Milvus.</p>
+    </button></h2><p>Выполните следующую команду для удаления Milvus.</p>
 <pre><code translate="no" class="language-bash">$ helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -317,27 +355,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Установив Milvus в Docker, вы можете:</p>
 <ul>
-<li><p>Проверить <a href="/docs/ru/v2.6.x/quickstart.md">Hello Milvus</a>, чтобы узнать, на что способен Milvus.</p></li>
+<li><p>Проверить <a href="/docs/ru/quickstart.md">Hello Milvus</a>, чтобы узнать, на что способен Milvus.</p></li>
 <li><p>Изучить основные операции Milvus:</p>
 <ul>
-<li><a href="/docs/ru/v2.6.x/manage_databases.md">Управлять базами данных</a></li>
-<li><a href="/docs/ru/v2.6.x/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/v2.6.x/manage-partitions.md">Управлять разделами</a></li>
-<li><a href="/docs/ru/v2.6.x/insert-update-delete.md">Вставка, вставка и удаление</a></li>
-<li><a href="/docs/ru/v2.6.x/single-vector-search.md">Одновекторный поиск</a></li>
-<li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>
+<li><a href="/docs/ru/manage_databases.md">Управлять базами данных</a></li>
+<li><a href="/docs/ru/manage-collections.md">Управлять коллекциями</a></li>
+<li><a href="/docs/ru/manage-partitions.md">Управлять разделами</a></li>
+<li><a href="/docs/ru/insert-update-delete.md">Вставка, вставка и удаление</a></li>
+<li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
-<li><p><a href="/docs/ru/v2.6.x/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/scaleout.md">Масштабирование кластера Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/upgrade_milvus_cluster-helm.md">Обновление Milvus с помощью Helm Chart</a>.</p></li>
+<li><p><a href="/docs/ru/scaleout.md">Масштабирование кластера Milvus</a>.</p></li>
 <li><p>Развертывание кластера Milvus в облаках:</p>
 <ul>
-<li><a href="/docs/ru/v2.6.x/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ru/v2.6.x/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/ru/v2.6.x/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ru/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ru/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/ru/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Изучите <a href="/docs/ru/v2.6.x/milvus-webui.md">Milvus WebUI</a>, интуитивно понятный веб-интерфейс для наблюдения и управления Milvus.</p></li>
-<li><p>Изучите <a href="/docs/ru/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, инструмент с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
-<li><p>Изучите <a href="/docs/ru/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, инструмент с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
+<li><p>Изучите <a href="/docs/ru/milvus-webui.md">Milvus WebUI</a>, интуитивно понятный веб-интерфейс для наблюдения и управления Milvus.</p></li>
+<li><p>Изучите <a href="/docs/ru/milvus_backup_overview.md">Milvus Backup</a>, инструмент с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
+<li><p>Изучите <a href="/docs/ru/birdwatcher_overview.md">Birdwatcher</a>, инструмент с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
 <li><p>Изучите <a href="https://github.com/zilliztech/attu">Attu</a>, инструмент с открытым исходным кодом GUI для интуитивного управления Milvus.</p></li>
-<li><p><a href="/docs/ru/v2.6.x/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
+<li><p><a href="/docs/ru/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

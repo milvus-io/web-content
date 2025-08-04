@@ -53,14 +53,14 @@ title: Milvus Operatorを使用してMilvusクラスタをインストールし�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ja/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">K8sクラスタを作成</a>します。</p></li>
+<li><p><a href="/docs/ja/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">K8sクラスタを作成</a>します。</p></li>
 <li><p><a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClassを</a>インストールします。インストールされたStorageClassは以下の手順で確認できます。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>インストール前に<a href="/docs/ja/v2.6.x/prerequisite-helm.md">ハードウェアとソフトウェアの要件を</a>確認します。</p></li>
+<li><p>インストール前に<a href="/docs/ja/prerequisite-helm.md">ハードウェアとソフトウェアの要件を</a>確認します。</p></li>
 <li><p>Milvusをインストールする前に、<a href="https://milvus.io/tools/sizing">Milvus Sizing Toolを</a>使用して、データサイズに基づいてハードウェア要件を見積もることをお勧めします。これにより、Milvusのインストールに最適なパフォーマンスとリソースを確保することができます。</p></li>
 </ul>
 <div class="alert note">
@@ -234,7 +234,41 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>これで、転送されたポートを使ってMilvusに接続できるようになります。</p>
+<p>これで、転送されたポートを使用してMilvusに接続できるようになります。</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(オプション）Milvus設定の更新<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>YAMLファイルを編集して再度適用することで、Milvusクラスタの設定を更新することができます。</p>
+<ol>
+<li>以下のコマンドを実行してYAMLファイルを編集します。</li>
+</ol>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl edit milvus my-release</span>
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>YAMLファイルの設定を更新します。以下は、<code translate="no">proxy.healthCheckTimout</code> パラメータを<code translate="no">1000</code> msに更新することを想定しています。</li>
+</ol>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Add the corresponding user parameters under the `spec.config` node.</span>
+<span class="hljs-comment"># For the default configuration, see https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
+<span class="hljs-comment"># To update `proxy.healthCheckTimout` parameter to `1000` ms, do as follows:</span>
+<span class="hljs-attr">config:</span>
+  <span class="hljs-attr">proxy:</span>
+    <span class="hljs-attr">healthCheckTimeout:</span> <span class="hljs-number">1000</span>
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>変更を保存してエディタを終了します。変更は自動的にMilvusクラスタに適用されます。</li>
+</ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Milvus WebUIへのアクセス<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,7 +284,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusにはMilvus WebUIというGUIツールが組み込まれており、ブラウザからアクセスすることができます。Milvus WebUIは、シンプルで直感的なインターフェースにより、システムの監視性を向上させます。Milvus Web UIを使用することで、Milvusのコンポーネントや依存関係の統計やメトリクスの観察、データベースやコレクションの詳細の確認、Milvusの詳細な設定の一覧などを行うことができます。Milvus Web UIの詳細については、<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUIを</a>参照してください。</p>
+    </button></h2><p>MilvusにはMilvus WebUIというGUIツールが組み込まれており、ブラウザからアクセスすることができます。Milvus WebUIはシンプルで直感的なインターフェースにより、システムの観測性を向上させます。Milvus Web UIを使用することで、Milvusのコンポーネントや依存関係の統計やメトリクスの観察、データベースやコレクションの詳細の確認、Milvusの詳細な設定の一覧などを行うことができます。Milvus Web UIの詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>参照してください。</p>
 <p>Milvus Web UIへのアクセスを有効にするには、プロキシポッドをローカルポートにポートフォワードする必要があります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -321,27 +355,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>DockerにMilvusをインストールしました：</p>
 <ul>
-<li><p><a href="/docs/ja/v2.6.x/quickstart.md">Hello Milvusで</a>Milvusができることを確認する。</p></li>
+<li><p><a href="/docs/ja/quickstart.md">Hello Milvusで</a>Milvusができることを確認する。</p></li>
 <li><p>Milvusの基本操作を学ぶ：</p>
 <ul>
-<li><a href="/docs/ja/v2.6.x/manage_databases.md">データベースの管理</a></li>
-<li><a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/v2.6.x/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/v2.6.x/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
+<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
-<li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
+<li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
+<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
 <li><p>Milvuクラスタをクラウドにデプロイする：</p>
 <ul>
-<li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/ja/v2.6.x/gcp.md">Googleクラウド</a></li>
-<li><a href="/docs/ja/v2.6.x/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>
+<li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/v2.6.x/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/v2.6.x/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
-<li><p><a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/v2.6.x/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p><a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>：Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール。</p></li>
+<li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
+<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
-<li><p><a href="/docs/ja/v2.6.x/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
+<li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

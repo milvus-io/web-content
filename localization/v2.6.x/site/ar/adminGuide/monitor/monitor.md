@@ -98,10 +98,42 @@ summary: >-
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. تمكين ServiceMonitor</h3><p>لا يتم تمكين ServiceMonitor لـ Milvus Helm افتراضيًا. بعد تثبيت مشغل Prometheus في مجموعة Kubernetes، يمكنك تمكينه عن طريق إضافة المعلمة <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values</span>
-<button class="copy-code-btn"></button></code></pre>
+<h4 id="With-Helm" class="common-anchor-header">مع Helm</h4><p>يمكنك تمكين ServiceMonitor عن طريق تعيين المعلمة <code translate="no">metrics.serviceMonitor.enabled=true</code> كما يلي إذا كنت قد قمت بتثبيت مخطط Milvus Helm.</p>
+<pre><code translate="no">```
+$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
+```
+</code></pre>
 <p>عند اكتمال التثبيت، استخدم <code translate="no">kubectl</code> للتحقق من مورد ServiceMonitor.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h4 id="With-Milvus-Operator" class="common-anchor-header">مع مشغل Milvus Helm</h4><p>يمكنك تمكين ServiceMonitor على النحو التالي إذا كنت قد قمت بتثبيت ملفوس باستخدام مشغل ملفوس.</p>
+<ol>
+<li><p>قم بتشغيل الأمر التالي لتحرير مورد ميلفوس المخصص. يفترض الأمر التالي أن المورد المخصص اسمه <code translate="no">my-release</code>.</p>
+<pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>قم بتحرير الحقل <code translate="no">spec.components.disableMetrics</code> إلى <code translate="no">false</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>احفظ واخرج من المحرر.</p></li>
+<li><p>انتظر حتى يقوم المُشغِّل بتسوية التغييرات. يمكنك التحقق من حالة المورد المخصص ميلفوس عن طريق تشغيل الأمر التالي.</p>
+<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> milvus my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span> <span class="hljs-operator">-</span>o yaml
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<p>يجب أن يكون الحقل <code translate="no">status.components.metrics.serviceMonitor.enabled</code> هو <code translate="no">true</code>.</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3. تحقق من المقاييس</h3><p>بعد تمكين ServiceMonitor، يمكنك الوصول إلى لوحة تحكم بروميثيوس على <code translate="no">http://localhost:9090/</code>.</p>
+<p>انقر على علامة التبويب <code translate="no">Status</code> ثم <code translate="no">Targets</code>. يجب أن ترى أهداف مكونات ميلفوس.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_targets.png" alt="Prometheus_targets" class="doc-image" id="prometheus_targets" />
+   </span> <span class="img-wrapper"> <span>Prometheus_targets</span> </span></p>
+<p>انقر على علامة التبويب <code translate="no">Graph</code> وأدخل التعبير <code translate="no">up{job=&quot;default/my-release&quot;}</code> في مربع إدخال التعبير. يجب أن ترى مقاييس مكونات ملفوس.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
+   </span> <span class="img-wrapper"> <span>بروميثيوس_رسم بياني</span> </span></p>
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. تحقق من ServiceMonitor</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s
@@ -122,9 +154,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>إذا قمت بنشر خدمات المراقبة لمجموعة ميلفوس العنقودية، فقد ترغب أيضًا في تعلم<ul>
-<li><a href="/docs/ar/visualize.md">تصور مقاييس ميلفوس في غرافانا</a></li>
-<li><a href="/docs/ar/alert.md">إنشاء تنبيه لخدمات ملفوس</a></li>
+<li>إذا كنت قد قمت بنشر خدمات المراقبة لمجموعة ميلفوس العنقودية، فقد ترغب أيضًا في تعلم<ul>
+<li><a href="/docs/ar/visualize.md">تصوّر مقاييس ميلفوس في غرافانا</a></li>
+<li><a href="/docs/ar/alert.md">إنشاء تنبيه لخدمات ميلفوس</a></li>
 <li>ضبط <a href="/docs/ar/allocate.md">تخصيص الموارد</a> الخاصة بك</li>
 </ul></li>
 <li>إذا كنت تبحث عن معلومات حول كيفية توسيع نطاق مجموعة Milvus:<ul>

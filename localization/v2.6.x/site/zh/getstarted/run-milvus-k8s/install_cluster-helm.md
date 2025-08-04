@@ -54,14 +54,14 @@ title: 使用 Helm 安装 Milvus 群集
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">安装 Helm CLI</a>。</p></li>
-<li><p><a href="/docs/zh/v2.6.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">创建 K8s 集群</a>。</p></li>
+<li><p><a href="/docs/zh/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">创建 K8s 集群</a>。</p></li>
 <li><p>安装<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。您可以按以下步骤检查已安装的 StorageClass。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>安装前检查<a href="/docs/zh/v2.6.x/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
+<li><p>安装前检查<a href="/docs/zh/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
 <li><p>安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 大小工具</a>，根据数据大小估算硬件需求。这有助于确保 Milvus 安装的最佳性能和资源分配。</p></li>
 </ul>
 <div class="alert note">
@@ -130,23 +130,24 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <li>默认消息队列 (MQ) 为<strong>Woodpecker</strong>。</li>
 <li>引入<strong>流节点（Streaming Node</strong>）组件并默认启用。</li>
 </ul>
-<p>有关详情，请参阅<a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a>。</p>
+<p>有关详情，请参阅<a href="/docs/zh/architecture_overview.md">架构概述</a>。</p>
   </div>
 </li>
 <li><p>要在集群模式下部署 Milvus 实例，请运行以下命令：</p>
+<p>您可以使用<code translate="no">--set</code> 以自定义配置安装 Milvus 群集。以下命令将<code translate="no">streaming.enabled</code> 设置为<code translate="no">true</code> 以启用流服务，将<code translate="no">indexNode.enabled</code> 设置为<code translate="no">false</code> 以禁用索引服务。在这种情况下，流节点将负责所有数据处理和索引任务。</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0-rc1 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
   <div class="alert note">
-<p>从 Milvus 2.6.x 开始，群集模式下的架构有以下变化：</p>
+<p>从 Milvus 2.6.x 开始，集群模式下的架构发生了以下变化：</p>
 <ul>
 <li>默认 MQ 仍为<strong>Pulsar</strong>。</li>
-<li>引入了<strong>流节点（Streaming Node</strong>）组件，并在默认情况下启用。</li>
+<li>引入<strong>流节点（Streaming Node</strong>）组件并默认启用。</li>
 <li><strong>索引节点</strong>和<strong>数据节点</strong>合并为一个<strong>数据节点</strong>组件。</li>
 </ul>
-<p>有关详情，请参阅<a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a>。</p>
+<p>有关详情，请参阅<a href="/docs/zh/architecture_overview.md">架构概述</a>。</p>
   </div>
 </li>
 </ul>
@@ -156,7 +157,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
   <ul>
     <li>版本名称只能包含字母、数字和破折号。版本名称中不允许使用点。</li>
     <li>在使用 Helm 安装 Milvus 时，默认命令行会安装群集版本的 Milvus。独立安装 Milvus 时需要进一步设置。</li>
-    <li>根据<a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">Kubernetes 过时的 API 迁移指南</a>，自 v1.25 起，PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本不再提供服务。建议迁移清单和 API 客户端，改用<b>policy/v1</b>API 版本。<br/>对于仍在 Kubernetes v1.25 及更高版本上使用 PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本的用户，作为一种变通方法，您可以运行以下命令来安装 Milvus：<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+    <li>根据<a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">Kubernetes 过时的 API 迁移指南</a>，从 v1.25 起，PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本不再提供服务。建议迁移清单和 API 客户端，改用<b>policy/v1</b>API 版本。<br/>对于仍在 Kubernetes v1.25 及更高版本上使用 PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本的用户，作为一种变通方法，您可以运行以下命令来安装 Milvus：<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>更多信息请参见<a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a>和<a href="https://helm.sh/docs/">Helm</a>。</li>
   </ul>
 </div>
@@ -185,7 +186,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-0</span>                    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-operator">-</span>metadata<span class="hljs-number">-98</span>zbr       <span class="hljs-number">0</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>   Completed  <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以访问 Milvus WebUI（网址：<code translate="no">http://127.0.0.1:9091/webui/</code> ），了解有关 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>您还可以访问 Milvus WebUI（网址：<code translate="no">http://127.0.0.1:9091/webui/</code> ），了解有关 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3.将本地端口转发给 Milvus</h3><p>运行以下命令获取 Milvus 集群的服务端口。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
@@ -200,7 +201,44 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>可以选择在上述命令中使用<code translate="no">:19530</code> 而不是<code translate="no">27017:19530</code> ，让<code translate="no">kubectl</code> 为你分配一个本地端口，这样你就不必管理端口冲突了。</p>
-<p>默认情况下，kubectl 的端口转发只监听<code translate="no">localhost</code> 。如果想让 Milvus 监听所选或所有 IP 地址，请使用<code translate="no">address</code> 标志。以下命令将使端口转发监听主机上的所有 IP 地址。</p>
+<p>默认情况下，kubectl 的端口转发只监听<code translate="no">localhost</code> 。如果想让 Milvus 监听所选或所有 IP 地址，请使用<code translate="no">address</code> 标志。下面的命令使端口转发监听主机上的所有 IP 地址。</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>你可以通过编辑<code translate="no">values.yaml</code> 文件并再次应用来更新 Milvus 集群的配置。</p>
+<ol>
+<li>创建一个包含所需配置的<code translate="no">values.yaml</code> 文件。</li>
+</ol>
+<p>以下假设您要启用<code translate="no">proxy.http</code> 。</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    proxy:
+      http:
+        enabled: true
+</span><button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>应用<code translate="no">values.yaml</code> 文件。</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>检查更新的配置。</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm get values my-release
+<button class="copy-code-btn"></button></code></pre>
+<p>输出应显示更新的配置。</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">访问 Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -216,7 +254,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 有一个内置的 GUI 工具，称为 Milvus WebUI，可以通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
+    </button></h2><p>Milvus 随附一个名为 Milvus WebUI 的内置 GUI 工具，可通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>要启用对 Milvus Web UI 的访问，需要将代理 pod 的端口转发到本地端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -248,7 +286,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>要更改 Milvus 配置，请下载 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a>模板，将所需设置放入其中，然后使用<code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code> 渲染相应的清单。</li>
 </ul>
 </div>
-<h3 id="2-Download-image-pulling-script" class="common-anchor-header">2.下载图像拉取脚本</h3><p>图像提取脚本是用 Python 开发的。您应在<code translate="no">requirement.txt</code> 文件中下载该脚本及其依赖项。</p>
+<h3 id="2-Download-image-pulling-script" class="common-anchor-header">2.下载图像拉取脚本</h3><p>图像提取脚本是用 Python 开发的。您应在<code translate="no">requirement.txt</code> 文件中下载脚本及其依赖项。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -317,27 +355,27 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>在 Docker 中安装 Milvus 后，你可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh/v2.6.x/quickstart.md">Hello Milvus</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/quickstart.md">Hello Milvus</a>，了解 Milvus 的功能。</p></li>
 <li><p>了解 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/v2.6.x/manage_databases.md">管理数据库</a></li>
-<li><a href="/docs/zh/v2.6.x/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/v2.6.x/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/v2.6.x/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/v2.6.x/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/v2.6.x/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/v2.6.x/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
 <li><p>在云上部署你的 Milvus 集群：</p>
 <ul>
-<li><a href="/docs/zh/v2.6.x/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/v2.6.x/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/v2.6.x/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
-<li><p>探索<a href="/docs/zh/v2.6.x/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
-<li><p><a href="/docs/zh/v2.6.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

@@ -63,7 +63,7 @@ title: Docker에서 Milvus 실행하기(Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>독립 실행형 배포 모드에서 <a href="https://milvus.io/docs/milvus_backup_overview.md">백업을</a> 사용하려면 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a> 배포 방법을 사용하는 것이 좋습니다.</p>
+<p>독립형 배포 모드에서 <a href="https://milvus.io/docs/milvus_backup_overview.md">백업을</a> 사용하려면 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a> 배포 방법을 사용하는 것이 좋습니다.</p>
 <p>이미지를 가져오는 데 문제가 발생하면 <a href="mailto:community@zilliz.com">community@zilliz.com</a> 으로 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p>
 </div>
 <p>설치 스크립트를 실행한 후</p>
@@ -74,6 +74,31 @@ title: Docker에서 Milvus 실행하기(Linux)
 <li>Milvus 데이터 볼륨은 현재 폴더의 <strong>volumes/milvus에</strong> 매핑됩니다.</li>
 </ul>
 <p>Milvus WebUI( <code translate="no">http://127.0.0.1:9091/webui/</code> )에 액세스하여 Milvus 인스턴스에 대해 자세히 알아볼 수 있습니다. 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(선택 사항) Milvus 구성 업데이트하기<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>현재 폴더의 <strong>user.yaml</strong> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어 <code translate="no">proxy.healthCheckTimeout</code> 를 <code translate="no">1000</code> ms로 변경하려면 다음과 같이 파일을 수정하면 됩니다:</p>
+<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
+proxy:
+  healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
+EOF
+<button class="copy-code-btn"></button></code></pre>
+<p>그런 다음 다음과 같이 서비스를 다시 시작합니다:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvus 중지 및 삭제<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +114,7 @@ title: Docker에서 Milvus 실행하기(Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음과 같이 이 컨테이너를 중지 및 삭제할 수 있습니다.</p>
+    </button></h2><p>다음과 같이 이 컨테이너를 중지하고 삭제할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
 <span class="hljs-meta prompt_">

@@ -98,10 +98,42 @@ O clusterrole padrão prometheus-k8s não pode capturar as métricas do milvus, 
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Habilitar o ServiceMonitor</h3><p>O ServiceMonitor não está habilitado para o Milvus Helm por padrão. Depois de instalar o Operador do Prometheus no cluster do Kubernetes, você pode habilitá-lo adicionando o parâmetro <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Quando a instalação for concluída, use <code translate="no">kubectl</code> para verificar o recurso ServiceMonitor.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h4 id="With-Helm" class="common-anchor-header">Com o Helm</h4><p>Pode ativar o ServiceMonitor definindo o parâmetro <code translate="no">metrics.serviceMonitor.enabled=true</code> da seguinte forma se tiver instalado o Milvus Helm chart.</p>
+<pre><code translate="no">```
+$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
+```
+</code></pre>
+<p>Quando a instalação estiver concluída, utilize <code translate="no">kubectl</code> para verificar o recurso ServiceMonitor.</p>
+<h4 id="With-Milvus-Operator" class="common-anchor-header">Com o Milvus Operator</h4><p>Pode ativar o ServiceMonitor da seguinte forma se tiver instalado o Milvus utilizando o Milvus Operator.</p>
+<ol>
+<li><p>Execute o seguinte comando para editar o recurso personalizado do MIlvus. O comando a seguir assume que o recurso personalizado tem o nome <code translate="no">my-release</code>.</p>
+<pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Edite o campo <code translate="no">spec.components.disableMetrics</code> para <code translate="no">false</code>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Salve e saia do editor.</p></li>
+<li><p>Aguarde até que o operador reconcilie as alterações. Pode verificar o estado do recurso personalizado Milvus executando o seguinte comando.</p>
+<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> milvus my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span> <span class="hljs-operator">-</span>o yaml
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<p>O campo <code translate="no">status.components.metrics.serviceMonitor.enabled</code> deve ser <code translate="no">true</code>.</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3. Verificar as métricas</h3><p>Depois de ativar o ServiceMonitor, pode aceder ao painel de controlo do Prometheus em <code translate="no">http://localhost:9090/</code>.</p>
+<p>Clique na guia <code translate="no">Status</code> e, em seguida, em <code translate="no">Targets</code>. Deverá ver os alvos dos componentes do Milvus.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_targets.png" alt="Prometheus_targets" class="doc-image" id="prometheus_targets" />
+   </span> <span class="img-wrapper"> <span>Alvos do Prometheus</span> </span></p>
+<p>Clique no separador <code translate="no">Graph</code> e introduza a expressão <code translate="no">up{job=&quot;default/my-release&quot;}</code> na caixa de introdução de expressões. Deverá ver as métricas dos componentes do Milvus.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
+   </span> <span class="img-wrapper"> <span>Prometheus_graph</span> </span></p>
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. Verifique o ServiceMonitor</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s

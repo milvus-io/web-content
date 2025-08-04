@@ -62,7 +62,7 @@ title: Eseguire Milvus Lite a livello locale
 <li>Ubuntu &gt;= 20.04 (x86_64 e arm64)</li>
 <li>MacOS &gt;= 11.0 (Apple Silicon M1/M2 e x86_64)</li>
 </ul>
-<p>Si noti che Milvus Lite è adatto solo per casi di ricerca vettoriale su piccola scala. Per i casi di utilizzo su larga scala, si consiglia di utilizzare <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> o <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Si può anche considerare Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>Si noti che Milvus Lite è adatto solo per casi di ricerca vettoriale su piccola scala. Per i casi di utilizzo su larga scala, si consiglia di utilizzare <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> o <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Si può anche prendere in considerazione Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configurazione di Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -89,7 +89,42 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>你还可以访问 Milvus WebUI，网址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。详情请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>你还可以访问 Milvus WebUI，网址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>要根据需要更新 Milvus 配置，需要修改<code translate="no">milvus-standalone</code> 容器中的<code translate="no">/milvus/configs/user.yaml</code> 文件。</p>
+<ol>
+<li>访问<code translate="no">milvus-standalone</code> 容器。</li>
+</ol>
+<pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>添加额外配置以覆盖默认配置。 以下假设您需要覆盖默认的<code translate="no">proxy.healthCheckTimeout</code> 。有关适用的配置项，请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</li>
+</ol>
+<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
+proxy:
+  healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
+EOF
+<button class="copy-code-btn"></button></code></pre>
+<ol>
+<li>重新启动<code translate="no">milvus-standalone</code> 容器以应用更改。</li>
+</ol>
+<pre><code translate="no" class="language-shell">docker restart milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止和删除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +140,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以按以下步骤停止和删除此容器</p>
+    </button></h2><p>您可以按如下步骤停止和删除此容器</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
 <span class="hljs-meta prompt_">
