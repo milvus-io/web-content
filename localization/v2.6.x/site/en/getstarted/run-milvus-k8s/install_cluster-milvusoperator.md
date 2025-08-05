@@ -252,7 +252,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>You can view and update the configurations of your Milvus cluster by calling the <code translate="no">patch</code> command as follows:</p>
 <ol>
-<li><p>Run the following command to view the would be configurations.</p>
+<li><p>Run the following command to preview the would-be configurations.</p>
 <p>The following asummes that you want to update the <code translate="no">spec.components.disableMetric</code> parameter to <code translate="no">false</code> ms.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
