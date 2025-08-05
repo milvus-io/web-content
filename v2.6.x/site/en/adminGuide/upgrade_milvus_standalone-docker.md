@@ -22,7 +22,7 @@ Due to security concerns, Milvus upgrades its MinIO to RELEASE.2023-03-20T20-16-
 
 </div>
 
-## Upgrade Milvus by changing its image
+## Upgrade process
 
 In normal cases, you can upgrade Milvus as follows:
 
@@ -38,52 +38,6 @@ In normal cases, you can upgrade Milvus as follows:
 2. Run the following commands to perform the upgrade.
 
     ```shell
-    docker compose down
-    docker compose up -d
-    ```
-
-## Migrate the metadata
-
-1. Stop all Milvus components.
-
-    ```
-    docker stop <milvus-component-docker-container-name>
-    ```
-
-2. Prepare the configuration file `migration.yaml` for meta migration.
-
-    ```yaml
-    # migration.yaml
-    cmd:
-      # Option: run/backup/rollback
-      type: run
-      runWithBackup: true
-    config:
-      sourceVersion: 2.1.4   # Specify your milvus version
-      targetVersion: 2.6.0
-      backupFilePath: /tmp/migration.bak
-    metastore:
-      type: etcd
-    etcd:
-      endpoints:
-        - milvus-etcd:2379  # Use the etcd container name
-      rootPath: by-dev # The root path where data is stored in etcd
-      metaSubPath: meta
-      kvSubPath: kv
-    ```
-
-3. Run the migration container.
-
-    ```
-    # Suppose your docker-compose run with the default milvus network,
-    # and you put migration.yaml in the same directory with docker-compose.yaml.
-    docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
-    ```
-
-4. Start Milvus components again with the new Milvus image.
-
-    ```shell
-    // Run the following only after update the milvus image tag in the docker-compose.yaml
     docker compose down
     docker compose up -d
     ```

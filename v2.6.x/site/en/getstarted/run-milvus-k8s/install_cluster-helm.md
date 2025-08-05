@@ -40,22 +40,13 @@ If you encounter any issues pulling the image, contact us at <a href="mailto:com
 
 Before installing Milvus Helm Charts, you need to add Milvus Helm repository.
 
-```
-$ helm repo add milvus https://zilliztech.github.io/milvus-helm/
+```bash
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 ```
 
 <div class="alert note">
 
-The Milvus Helm Charts repo at `https://github.com/milvus-io/milvus-helm` has been archived and you can get further updates from `https://github.com/zilliztech/milvus-helm` as follows:
-
-```shell
-helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
-helm repo update
-# upgrade existing helm release
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
-```
-
-The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
+The Milvus Helm Charts repo at `https://github.com/milvus-io/milvus-helm` has been archived. We now use the new repository at `https://github.com/zilliztech/milvus-helm`. The archived repo is still available for charts up to 4.0.31, but use the new repo for later releases.
 
 </div>
 
@@ -71,77 +62,91 @@ You can always run this command to fetch the latest Milvus Helm charts.
 
 ### 1. Deploy a Milvus cluster
 
-Once you have installed the Helm chart, you can start Milvus on Kubernetes. This section will guide you through the steps to starting Milvus.
+Once you have installed the Helm chart, you can start Milvus on Kubernetes. This section guides you through deploying a Milvus cluster.
 
-- To deploy a Milvus instance in standalone mode, run the following command:
+<div class="alert note" id="standalone-deployment-note">
 
-  ```bash
-  helm install my-release milvus/milvus \
-    --set image.all.tag=v2.6.0 \
-    --set cluster.enabled=false \
-    --set pulsarv3.enabled=false \
-    --set standalone.messageQueue=woodpecker \
-    --set woodpecker.enabled=true \
-    --set streaming.enabled=true
-  ```
+<strong>Need standalone deployment instead?</strong>
 
-  <div class="alert note">
+If you prefer to deploy Milvus in standalone mode (single node) for development or testing, use this command:
 
-  Starting from Milvus 2.6.x, the following architecture changes have been made in standalone mode:
+```bash
+helm install my-release zilliztech/milvus \
+  --set image.all.tag=v2.6.0 \
+  --set cluster.enabled=false \
+  --set pulsarv3.enabled=false \
+  --set standalone.messageQueue=woodpecker \
+  --set woodpecker.enabled=true \
+  --set streaming.enabled=true
+```
 
-  - The default message queue (MQ) is **Woodpecker**.
-  - The **Streaming Node** component is introduced and enabled by default.
+**Note**: Standalone mode uses Woodpecker as the default message queue and enables the Streaming Node component. For details, refer to the [Architecture Overview](architecture_overview.md).
 
-  For details, refer to the [Architecture Overview](architecture_overview.md).
+</div>
 
-  </div>
+**Deploy Milvus cluster:**
 
-- To deploy a Milvus instance in cluster mode, run the following command:
+The following command deploys a Milvus cluster with optimized settings for v2.6.0:
 
-  You can use `--set` to install the Milvus cluster with custom configurations. The following command sets `streaming.enabled` to `true` to enable the streaming service and set `indexNode.enabled` to `false` to disable the index service. In this case, the streaming node will be responsible for all data processing and indexing tasks.
+```bash
+helm install my-release zilliztech/milvus \
+  --set image.all.tag=v2.6.0 \
+  --set streaming.enabled=true \
+  --set indexNode.enabled=false
+```
 
-  ```bash
-  helm install my-release milvus/milvus \
-    --set image.all.tag=v2.6.0 \
-    --set streaming.enabled=true \
-    --set indexNode.enabled=false
-  ```
-
-  <div class="alert note">
-
-  Starting from Milvus 2.6.x, the following architecture changes have been made in cluster mode:
-
-  - The default MQ is still **Pulsar**.
-  - The **Streaming Node** component is introduced and enabled by default.
-  - The **Index Node** and **Data Node** are merged into a single **Data Node** component.
-
-  For details, refer to the [Architecture Overview](architecture_overview.md).
-
-  </div>
-
-In the above command, `my-release` is the release name, and `milvus/milvus` is the locally installed chart repository. To use a different name, replace `my-release` with the one you see fit.
-
-The commands above deploy a Milvus instance with its components and dependencies using default configurations. To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
+**What this command does:**
+- Enables the new **Streaming Node** component for improved performance
+- Disables the legacy **Index Node** (functionality is now handled by Data Node)
 
 <div class="alert note">
-  <ul>
-    <li>The release name should only contain letters, numbers and dashes. Dots are not allowed in the release name.</li>
-    <li>The default command line installs cluster version of Milvus while installing Milvus with Helm. Further setting is needed while installing Milvus standalone.</li>
-    <li>According to the <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">deprecated API migration guide of Kubernetes</a>, the <b>policy/v1beta1</b> API version of PodDisruptionBudget is no longer served as of v1.25. You are suggested to migrate manifests and API clients to use the <b>policy/v1</b> API version instead. <br/>As a workaround for users who still use the <b>policy/v1beta1</b> API version of PodDisruptionBudget on Kubernetes v1.25 and later, you can instead run the following command to install Milvus:<br/>
-    <code>helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
-    <li>See <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> and <a href="https://helm.sh/docs/">Helm</a> for more information.</li>
-  </ul>
+
+**Architecture Changes in Milvus 2.6.x:**
+
+- **Message Queue**: Uses **Pulsar** by default (same as previous versions)
+- **New Component**: **Streaming Node** is introduced and enabled by default  
+- **Merged Components**: **Index Node** and **Data Node** are combined into a single **Data Node**
+
+For complete architecture details, refer to the [Architecture Overview](architecture_overview.md).
+
+</div>
+
+**Command parameters:**
+- `my-release`: Your deployment name (use letters, numbers, and dashes only)
+- `zilliztech/milvus`: The Helm chart repository
+
+**Next steps:**
+The command above deploys Milvus with default configurations. For production use:
+- Use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to optimize settings based on your data size
+- Review [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md) for advanced configuration options
+
+<div class="alert note">
+
+**Important notes:**
+
+- **Release naming**: Use only letters, numbers, and dashes (no dots allowed)
+- **Kubernetes v1.25+**: If you encounter PodDisruptionBudget issues, use this workaround:
+  ```bash
+  helm install my-release zilliztech/milvus \
+    --set pulsar.bookkeeper.pdb.usePolicy=false \
+    --set pulsar.broker.pdb.usePolicy=false \
+    --set pulsar.proxy.pdb.usePolicy=false \
+    --set pulsar.zookeeper.pdb.usePolicy=false
+  ```
+
+For more information, see [Milvus Helm Chart](https://artifacthub.io/packages/helm/milvus/milvus) and [Helm documentation](https://helm.sh/docs/).
+
 </div>
 
 ### 2. Check Milvus cluster status
 
-Run the following command to check the status of all pods in your Milvus cluster.
+Verify that your deployment is successful by checking the pod status:
 
-```
-$ kubectl get pods
+```bash
+kubectl get pods
 ```
 
-Once all pods are running, the output of the above command should be similar to the following:
+**Wait for all pods to show "Running" status.** With the v2.6.0 configuration, you should see pods similar to:
 
 ```
 NAME                                             READY  STATUS   RESTARTS  AGE
@@ -149,10 +154,10 @@ my-release-etcd-0                                1/1    Running   0        3m23s
 my-release-etcd-1                                1/1    Running   0        3m23s
 my-release-etcd-2                                1/1    Running   0        3m23s
 my-release-milvus-datanode-68cb87dcbd-4khpm      1/1    Running   0        3m23s
-my-release-milvus-indexnode-5c5f7b5bd9-l8hjg     1/1    Running   0        3m24s
 my-release-milvus-mixcoord-7fb9488465-dmbbj      1/1    Running   0        3m23s
 my-release-milvus-proxy-6bd7f5587-ds2xv          1/1    Running   0        3m24s
 my-release-milvus-querynode-5cd8fff495-k6gtg     1/1    Running   0        3m24s
+my-release-milvus-streaming-node-xxxxxxxxx       1/1    Running   0        3m24s
 my-release-minio-0                               1/1    Running   0        3m23s
 my-release-minio-1                               1/1    Running   0        3m23s
 my-release-minio-2                               1/1    Running   0        3m23s
@@ -166,36 +171,45 @@ my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 ```
 
-You can also access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
+**Key components to verify:**
+- **Milvus components**: `mixcoord`, `datanode`, `querynode`, `proxy`, `streaming-node`
+- **Dependencies**: `etcd` (metadata), `minio` (object storage), `pulsar` (message queue)
 
-### 3. Forward a local port to Milvus
+You can also access the **Milvus WebUI** at `http://127.0.0.1:9091/webui/` once port forwarding is set up (see next step). For details, refer to [Milvus WebUI](milvus-webui.md).
 
-Run the following command to get the port at which your Milvus cluster serves.
+### 3. Connect to Milvus
+
+To connect to your Milvus cluster from outside Kubernetes, you need to set up port forwarding.
+
+**Set up port forwarding:**
 
 ```bash
-$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
-='{{(index (index .spec.containers 0).ports 0).containerPort}}{{"\n"}}'
-19530
+kubectl port-forward service/my-release-milvus 27017:19530
 ```
 
-The output shows that the Milvus instance serves at the default port **19530**.
-
-<div class="alert note">
-
-If you have deployed Milvus in standalone mode, change the pod name from `my-release-milvus-proxy-xxxxxxxxxx-xxxxx` to `my-release-milvus-xxxxxxxxxx-xxxxx`.
-
-</div>
-
-Then, run the following command to forward a local port to the port at which Milvus serves.
-
-```bash
-$ kubectl port-forward service/my-release-milvus 27017:19530
+This command forwards your local port `27017` to Milvus port `19530`. You should see:
+```
 Forwarding from 127.0.0.1:27017 -> 19530
 ```
 
-Optionally, you can use `:19530` instead of `27017:19530` in the above command to let `kubectl` allocate a local port for you so that you don't have to manage port conflicts.
+**Connection details:**
+- **Local connection**: `localhost:27017` 
+- **Milvus default port**: `19530`
 
-By default, kubectl's port-forwarding only listens on `localhost`. Use the `address` flag if you want Milvus to listen on the selected or all IP addresses. The following command makes port-forward listen on all IP addresses on the host machine.
+<div class="alert note">
+
+**Options for port forwarding:**
+
+- **Auto-assign local port**: Use `:19530` instead of `27017:19530` to let kubectl choose an available port
+- **Listen on all interfaces**: Add `--address 0.0.0.0` to allow connections from other machines:
+  ```bash
+  kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+  ```
+- **Standalone deployment**: If using standalone mode, the service name remains the same
+
+</div>
+
+**Keep this terminal open** while using Milvus. You can now connect to Milvus using any Milvus SDK at `localhost:27017`.
 
 
 ## (Optional) Update Milvus configurations
@@ -217,7 +231,7 @@ You can update the configurations of your Milvus cluster by editing the `values.
 1. Apply the `values.yaml` file.
 
   ```shell
-  helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+  helm upgrade my-release zilliztech/milvus --namespace my-namespace -f values.yaml
   ```
 
 1. Check the updated configurations.
@@ -250,15 +264,15 @@ If you are in a network-restricted environment, follow the procedure in this sec
 Run the following command to get the Milvus manifest.
 
 ```shell
-$ helm template my-release milvus/milvus > milvus_manifest.yaml
+$ helm template my-release zilliztech/milvus > milvus_manifest.yaml
 ```
 
 The above command renders chart templates for a Milvus cluster and saves the output to a manifest file named `milvus_manifest.yaml`. Using this manifest, you can install a Milvus cluster with its components and dependencies in separate pods.
 
 <div class="alert note">
 
-- To install a Milvus instance in the standalone mode where all Milvus components are contained within a single pod, you should run `helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus > milvus_manifest.yaml` instead to render chart templates for a Milvus instance in a standalone mode.
-- To change Milvus configurations, download the [`value.yaml`](https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml) template, place your desired settings in it, and use `helm template -f values.yaml my-release milvus/milvus > milvus_manifest.yaml` to render the manifest accordingly.
+- To install a Milvus instance in the standalone mode where all Milvus components are contained within a single pod, you should run `helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus > milvus_manifest.yaml` instead to render chart templates for a Milvus instance in a standalone mode.
+- To change Milvus configurations, download the [`value.yaml`](https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml) template, place your desired settings in it, and use `helm template -f values.yaml my-release zilliztech/milvus > milvus_manifest.yaml` to render the manifest accordingly.
 
 </div>
 

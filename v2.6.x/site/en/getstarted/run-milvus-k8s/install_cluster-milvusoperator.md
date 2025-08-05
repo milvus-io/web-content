@@ -40,12 +40,12 @@ If you encounter any issues pulling the image, contact us at <a href="mailto:com
 
 Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When custom resources are defined, you can use K8s APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
 
-You can install Milvus Operator in either of the following ways:
+<div class="filter">
+  <a href="#helm">Helm</a>
+  <a href="#kubectl">Kubectl</a>
+</div>
 
-- [With Helm](#Install-with-Helm)
-- [With kubectl](#Install-with-kubectl)
-
-### Install with Helm
+<div class="filter-helm">
 
 Run the following command to install Milvus Operator with Helm.
 
@@ -74,8 +74,6 @@ More samples can be found in https://github.com/zilliztech/milvus-operator/tree/
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 ```
 
-<div class="alert note">
-
 If you have installed Milvus Operator before, upgrade it using the following command:
 
 ```shell
@@ -87,7 +85,7 @@ helm upgrade milvus-operator \
 
 </div>
 
-### Install with kubectl
+<div class="filter-kubectl">
 
 Run the following command to install Milvus Operator with `kubectl`.
 
@@ -123,6 +121,8 @@ NAME                               READY   STATUS    RESTARTS   AGE
 milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 ```
 
+</div>
+
 ## Deploy Milvus
 
 ### 1. Deploy a Milvus cluster
@@ -142,7 +142,7 @@ The command above deploys a Milvus cluster with its components and dependencies 
 
 </div>
 
-#### 2. Check Milvus cluster status
+### 2. Check Milvus cluster status
 
 Run the following command to check Milvus cluster status
 

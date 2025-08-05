@@ -97,11 +97,8 @@ helm upgrade my-release zilliztech/milvus \
 Wait for the upgrade to complete:
 
 ```bash
-# Monitor the upgrade progress  
-kubectl get pods -l app.kubernetes.io/name=milvus -w
-
 # Verify all pods are ready
-kubectl get pods -l app.kubernetes.io/name=milvus
+kubectl get pods
 ```
 
 ### Step 3: Upgrade to v2.6.0
@@ -123,7 +120,7 @@ Confirm your cluster is running the new version:
 
 ```bash
 # Check pod status
-kubectl get pods -l app.kubernetes.io/name=milvus
+kubectl get pods
 
 # Verify Helm release
 helm list
