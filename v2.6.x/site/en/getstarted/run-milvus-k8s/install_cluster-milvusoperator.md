@@ -242,29 +242,26 @@ Now, you can connect to Milvus using the forwarded port.
 
 ## (Optional) Update Milvus configurations
 
-You can update the configurations of your Milvus cluster by editing the YAML file and applying it again.
+You can view and update the configurations of your Milvus cluster by calling the `patch` command as follows:
 
-1. Run the following command to edit the YAML file.
+1. Run the following command to view the would be configurations.
+
+    The following asummes that you want to update the `spec.components.disableMetric` parameter to `false` ms.
 
     ```shell
-    $ kubectl edit milvus my-release
-    ```
-
-1. Update the configurations in the YAML file.
-   The following asummes that you want to update the `proxy.healthCheckTimout` parameter to `1000` ms.
-
-    ```yaml
-    # Add the corresponding user parameters under the `spec.config` node.
-    # For the default configuration, see https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml
-    # To update `proxy.healthCheckTimout` parameter to `1000` ms, do as follows:
-    config:
-      proxy:
-        healthCheckTimeout: 1000
+    $ kubectl patch milvus my-release --type='merge'\
+      -p '{"spec":{"components":{"disableMetric":false}}}' \
+      --dry-run=client -o yaml
     ```
 
     For applicable configuration items, refer to [System Configuration](system_configuration.md).
 
-1. Save the changes and exit the editor. The changes will be applied to the Milvus cluster automatically.
+1. Update the configurations.
+
+    ```shell
+    $ kubectl patch milvus my-release --type='merge'\
+      -p '{"spec":{"components":{"disableMetric":false}}}' 
+    ```
 
 ## Access Milvus WebUI
 
