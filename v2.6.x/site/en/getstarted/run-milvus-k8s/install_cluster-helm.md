@@ -69,7 +69,6 @@ Once you have installed the Helm chart, you can start Milvus on Kubernetes. This
 <strong>Need standalone deployment instead?</strong>
 
 If you prefer to deploy Milvus in standalone mode (single node) for development or testing, use this command:
-
 ```bash
 helm install my-release zilliztech/milvus \
   --set image.all.tag=v2.6.0 \
@@ -110,10 +109,6 @@ helm install my-release zilliztech/milvus \
 For complete architecture details, refer to the [Architecture Overview](architecture_overview.md).
 
 </div>
-
-**Command parameters:**
-- `my-release`: Your deployment name (use letters, numbers, and dashes only)
-- `zilliztech/milvus`: The Helm chart repository
 
 **Next steps:**
 The command above deploys Milvus with default configurations. For production use:
@@ -170,10 +165,6 @@ my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 ```
-
-**Key components to verify:**
-- **Milvus components**: `mixcoord`, `datanode`, `querynode`, `proxy`, `streaming-node`
-- **Dependencies**: `etcd` (metadata), `minio` (object storage), `pulsar` (message queue)
 
 You can also access the **Milvus WebUI** at `http://127.0.0.1:9091/webui/` once port forwarding is set up (see next step). For details, refer to [Milvus WebUI](milvus-webui.md).
 

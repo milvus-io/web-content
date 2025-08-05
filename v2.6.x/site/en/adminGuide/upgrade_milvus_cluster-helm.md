@@ -18,15 +18,7 @@ This guide describes how to upgrade your Milvus cluster from v2.5.x to v2.6.0 us
 
 ### What's new in v2.6.0
 
-Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:
-
-- **Coordinator consolidation**: Legacy separate coordinators (`dataCoordinator`, `queryCoordinator`, `indexCoordinator`) have been consolidated into a single `mixCoordinator`
-- **New components**: Introduction of Streaming Node and other new components  
-- **Component removal**: Certain legacy components including `indexNode` have been removed
-
-<div class="alert note">
-This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed. For details on architectural changes, refer to <a href="architecture_overview.md">Milvus Architecture Overview</a>.
-</div>
+As of Milvus 2.6.0, the legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`. This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
 
 ### Requirements
 
@@ -121,9 +113,6 @@ Confirm your cluster is running the new version:
 ```bash
 # Check pod status
 kubectl get pods
-
-# Verify Helm release
-helm list
 ```
 
 For additional support, consult the [Milvus documentation](https://milvus.io/docs) or [community forum](https://github.com/milvus-io/milvus/discussions).
