@@ -99,7 +99,7 @@ EOF
 <p>Then restart the service as follows:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For applicable configuration items, refer to System Configuration.</p>
+<p>For applicable configuration items, refer to <a href="/docs/system_configuration.md">System Configuration</a>.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Stop and delete Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
