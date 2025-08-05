@@ -108,11 +108,8 @@ The Milvus Helm Charts repo at <code translate="no">https://milvus-io.github.io/
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <p>Wait for the upgrade to complete:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Monitor the upgrade progress  </span>
-kubectl get pods -l app.kubernetes.io/name=milvus -w
-
-<span class="hljs-comment"># Verify all pods are ready</span>
-kubectl get pods -l app.kubernetes.io/name=milvus
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
+kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Upgrade-to-v260" class="common-anchor-header">Step 3: Upgrade to v2.6.0</h3><p>Once v2.5.16 is running successfully with <code translate="no">mixCoordinator</code>, upgrade to v2.6.0:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
@@ -139,7 +136,7 @@ kubectl get pods -l app.kubernetes.io/name=milvus
       </svg>
     </button></h2><p>Confirm your cluster is running the new version:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
-kubectl get pods -l app.kubernetes.io/name=milvus
+kubectl get pods
 
 <span class="hljs-comment"># Verify Helm release</span>
 helm list

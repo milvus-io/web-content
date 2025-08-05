@@ -44,8 +44,9 @@ title: Upgrade Milvus Standalone with Helm Chart
 <li><strong>New components</strong>: Introduction of Streaming Node and other new components</li>
 <li><strong>Component optimizations</strong>: Enhanced performance and streamlined architecture</li>
 </ul>
+<p>This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 <div class="alert note">
-This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed. For details on architectural changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.
+This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed.
 </div>
 <h3 id="Requirements" class="common-anchor-header">Requirements</h3><p><strong>System requirements:</strong></p>
 <ul>
@@ -84,21 +85,21 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <div class="alert note">
 The Milvus Helm Charts repo at <code translate="no">https://milvus-io.github.io/milvus-helm/</code> has been archived. Use the new repo <code translate="no">https://zilliztech.github.io/milvus-helm/</code> for chart versions 4.0.31 and later.
 </div>
-<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">Step 2: Upgrade to v2.5.16</h3><p>Upgrade your Milvus standalone to v2.5.16:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus \
+<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">Step 2: Upgrade to v2.5.16</h3><div class="alert-note">
+<p>Skip this step if your standalone deployment is already running v2.5.16 or higher.</p>
+</div>
+<p>Upgrade your Milvus standalone to v2.5.16:</p>
+<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
   --reset-then-reuse-values \
   --version=5.0.0
 <button class="copy-code-btn"></button></code></pre>
 <p>Wait for the upgrade to complete:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Monitor the upgrade progress</span>
-kubectl get pods -w
-
-<span class="hljs-comment"># Verify all pods are ready</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Upgrade-to-v260" class="common-anchor-header">Step 3: Upgrade to v2.6.0</h3><p>Once v2.5.16 is running successfully, upgrade to v2.6.0:</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus \
+<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.0&quot;</span> \
   --reset-then-reuse-values \
   --version=5.0.0
@@ -120,9 +121,6 @@ kubectl get pods
       </svg>
     </button></h2><p>Confirm your standalone deployment is running the new version:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
-kubectl get pods -l app.kubernetes.io/name=milvus
-
-<span class="hljs-comment"># Verify Helm release</span>
-helm list
+kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>For additional support, consult the <a href="https://milvus.io/docs">Milvus documentation</a> or <a href="https://github.com/milvus-io/milvus/discussions">community forum</a>.</p>
