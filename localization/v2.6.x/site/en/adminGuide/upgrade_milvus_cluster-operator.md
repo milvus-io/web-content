@@ -96,10 +96,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
 <button class="copy-code-btn"></button></code></pre>
 <p>Wait for completion:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Monitor the upgrade progress</span>
-kubectl get pods -w
-
-<span class="hljs-comment"># Verify all pods are ready</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="23-Upgrade-to-v260" class="common-anchor-header">2.3 Upgrade to v2.6.0</h4><p>Once v2.5.16 is running successfully with <code translate="no">mixCoord</code>, upgrade to v2.6.0:</p>

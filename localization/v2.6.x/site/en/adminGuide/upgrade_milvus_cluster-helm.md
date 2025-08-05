@@ -39,15 +39,7 @@ title: Upgrade Milvus Cluster with Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">What’s new in v2.6.0</h3><p>Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:</p>
-<ul>
-<li><strong>Coordinator consolidation</strong>: Legacy separate coordinators (<code translate="no">dataCoordinator</code>, <code translate="no">queryCoordinator</code>, <code translate="no">indexCoordinator</code>) have been consolidated into a single <code translate="no">mixCoordinator</code></li>
-<li><strong>New components</strong>: Introduction of Streaming Node and other new components</li>
-<li><strong>Component removal</strong>: Certain legacy components including <code translate="no">indexNode</code> have been removed</li>
-</ul>
-<div class="alert note">
-This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed. For details on architectural changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.
-</div>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">What’s new in v2.6.0</h3><p>As of Milvus 2.6.0, the legacy separate coordinators (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) have been consolidated into a single <code translate="no">mixCoord</code>. This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Requirements</h3><p><strong>System requirements:</strong></p>
 <ul>
 <li>Helm version >= 3.14.0</li>
@@ -137,8 +129,5 @@ kubectl get pods
     </button></h2><p>Confirm your cluster is running the new version:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
 kubectl get pods
-
-<span class="hljs-comment"># Verify Helm release</span>
-helm list
 <button class="copy-code-btn"></button></code></pre>
 <p>For additional support, consult the <a href="https://milvus.io/docs">Milvus documentation</a> or <a href="https://github.com/milvus-io/milvus/discussions">community forum</a>.</p>

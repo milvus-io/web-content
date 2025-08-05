@@ -142,11 +142,6 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </ul>
 <p>For complete architecture details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
 </div>
-<p><strong>Command parameters:</strong></p>
-<ul>
-<li><code translate="no">my-release</code>: Your deployment name (use letters, numbers, and dashes only)</li>
-<li><code translate="no">zilliztech/milvus</code>: The Helm chart repository</li>
-</ul>
 <p><strong>Next steps:</strong>
 The command above deploys Milvus with default configurations. For production use:</p>
 <ul>
@@ -192,11 +187,6 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-0</span>                    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-operator">-</span>metadata<span class="hljs-number">-98</span>zbr       <span class="hljs-number">0</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>   Completed  <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Key components to verify:</strong></p>
-<ul>
-<li><strong>Milvus components</strong>: <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
-<li><strong>Dependencies</strong>: <code translate="no">etcd</code> (metadata), <code translate="no">minio</code> (object storage), <code translate="no">pulsar</code> (message queue)</li>
-</ul>
 <p>You can also access the <strong>Milvus WebUI</strong> at <code translate="no">http://127.0.0.1:9091/webui/</code> once port forwarding is set up (see next step). For details, refer to <a href="/docs/milvus-webui.md">Milvus WebUI</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Connect to Milvus</h3><p>To connect to your Milvus cluster from outside Kubernetes, you need to set up port forwarding.</p>
 <p><strong>Set up port forwarding:</strong></p>
