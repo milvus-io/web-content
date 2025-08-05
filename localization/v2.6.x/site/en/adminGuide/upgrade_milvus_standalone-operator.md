@@ -39,7 +39,13 @@ title: Upgrade Milvus Standalone with Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">What’s new in v2.6.0</h3><p>As of Milvus 2.6.0, the legacy separate coordinators (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) have been consolidated into a single <code translate="no">mixCoord</code>. This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">What’s new in v2.6.0</h3><p>Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:</p>
+<ul>
+<li><strong>Coordinator consolidation</strong>: Legacy separate coordinators (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) have been consolidated into a single <code translate="no">mixCoord</code></li>
+<li><strong>New components</strong>: Introduction of Streaming Node for enhanced data processing</li>
+<li><strong>Component removal</strong>: <code translate="no">dataNode</code> and <code translate="no">indexNode</code> have been removed and consolidated</li>
+</ul>
+<p>This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Requirements</h3><p><strong>System requirements:</strong></p>
 <ul>
 <li>Kubernetes cluster with Milvus standalone deployed via Milvus Operator</li>
@@ -49,6 +55,7 @@ title: Upgrade Milvus Standalone with Milvus Operator
 <p><strong>Compatibility requirements:</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 is <strong>not compatible</strong> with v2.6.0. Direct upgrades from release candidates are not supported.</li>
+<li>If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">this community guide</a> for migration assistance.</li>
 <li>You <strong>must</strong> upgrade to v2.5.16 before upgrading to v2.6.0.</li>
 </ul>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade process<button data-href="#Upgrade-process" class="anchor-icon" translate="no">

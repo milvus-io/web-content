@@ -122,28 +122,39 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Note</strong>: Standalone mode uses Woodpecker as the default message queue and enables the Streaming Node component. For details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
 </div>
 <p><strong>Deploy Milvus cluster:</strong></p>
-<p>The following command deploys a Milvus cluster with optimized settings for v2.6.0:</p>
+<p>The following command deploys a Milvus cluster with optimized settings for v2.6.0, using WoodPecker as the recommended message queue:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>What this command does:</strong></p>
 <ul>
+<li>Uses <strong>WoodPecker</strong> as the message queue (recommended for reduced maintenance)</li>
 <li>Enables the new <strong>Streaming Node</strong> component for improved performance</li>
 <li>Disables the legacy <strong>Index Node</strong> (functionality is now handled by Data Node)</li>
+<li>Disables Pulsar to use WoodPecker instead</li>
 </ul>
 <div class="alert note">
 <p><strong>Architecture Changes in Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Message Queue</strong>: Uses <strong>Pulsar</strong> by default (same as previous versions)</li>
+<li><strong>Message Queue</strong>: <strong>WoodPecker</strong> is now recommended (reduces infrastructure maintenance compared to Pulsar)</li>
 <li><strong>New Component</strong>: <strong>Streaming Node</strong> is introduced and enabled by default</li>
 <li><strong>Merged Components</strong>: <strong>Index Node</strong> and <strong>Data Node</strong> are combined into a single <strong>Data Node</strong></li>
 </ul>
 <p>For complete architecture details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
 </div>
+<p><strong>Alternative Message Queue Options:</strong></p>
+<p>If you prefer to use <strong>Pulsar</strong> (traditional choice) instead of WoodPecker:</p>
+<pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
+<button class="copy-code-btn"></button></code></pre>
 <p><strong>Next steps:</strong>
-The command above deploys Milvus with default configurations. For production use:</p>
+The command above deploys Milvus with recommended configurations. For production use:</p>
 <ul>
 <li>Use the <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to optimize settings based on your data size</li>
 <li>Review <a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklist</a> for advanced configuration options</li>
@@ -187,6 +198,11 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-0</span>                    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-operator">-</span>metadata<span class="hljs-number">-98</span>zbr       <span class="hljs-number">0</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>   Completed  <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 <button class="copy-code-btn"></button></code></pre>
+<p><strong>Key components to verify:</strong></p>
+<ul>
+<li><strong>Milvus components</strong>: <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
+<li><strong>Dependencies</strong>: <code translate="no">etcd</code> (metadata), <code translate="no">minio</code> (object storage), <code translate="no">pulsar</code> (message queue)</li>
+</ul>
 <p>You can also access the <strong>Milvus WebUI</strong> at <code translate="no">http://127.0.0.1:9091/webui/</code> once port forwarding is set up (see next step). For details, refer to <a href="/docs/milvus-webui.md">Milvus WebUI</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Connect to Milvus</h3><p>To connect to your Milvus cluster from outside Kubernetes, you need to set up port forwarding.</p>
 <p><strong>Set up port forwarding:</strong></p>
@@ -228,8 +244,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
       </svg>
     </button></h2><p>You can update the configurations of your Milvus cluster by editing the <code translate="no">values.yaml</code> file and applying it again.</p>
 <ol>
-<li>Create a <code translate="no">values.yaml</code> file with the desired configurations.</li>
-</ol>
+<li><p>Create a <code translate="no">values.yaml</code> file with the desired configurations.</p>
 <p>The following assumes that you want to enable <code translate="no">proxy.http</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -237,17 +252,17 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
       http:
         enabled: true
 </span><button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Apply the <code translate="no">values.yaml</code> file.</li>
+<p>For applicable configuration items, refer to <a href="/docs/system_configuration.md">System Configuration</a>.</p></li>
+<li><p>Apply the <code translate="no">values.yaml</code> file.</p></li>
 </ol>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus --namespace my-namespace -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <ol>
-<li>Check the updated configurations.</li>
-</ol>
+<li><p>Check the updated configurations.</p>
 <pre><code translate="no" class="language-shell">helm get values my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>The output should show the updated configurations.</p>
+<p>The output should show the updated configurations.</p></li>
+</ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Access Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
