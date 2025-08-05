@@ -64,7 +64,7 @@ Then restart the service as follows:
 $ bash standalone_embed.sh restart
 ```
 
-For applicable configuration items, refer to System Configuration.
+For applicable configuration items, refer to [System Configuration](system_configuration.md).
 
 ## Stop and delete Milvus
 
