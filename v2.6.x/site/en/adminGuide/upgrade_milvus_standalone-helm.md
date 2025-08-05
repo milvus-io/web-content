@@ -19,7 +19,13 @@ This guide describes how to upgrade your Milvus standalone deployment from v2.5.
 
 ### What's new in v2.6.0
 
-As of Milvus 2.6.0, the legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`. This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
+Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:
+
+- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
+- **New components**: Introduction of Streaming Node for enhanced data processing
+- **Component removal**: `dataNode` and `indexNode` have been removed and consolidated
+
+This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
 
 ### Requirements
 
@@ -30,6 +36,7 @@ As of Milvus 2.6.0, the legacy separate coordinators (`dataCoord`, `queryCoord`,
 
 **Compatibility requirements:**
 - Milvus v2.6.0-rc1 is **not compatible** with v2.6.0. Direct upgrades from release candidates are not supported.
+- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
 - You **must** upgrade to v2.5.16 before upgrading to v2.6.0.
 
 <div class="alert note">
@@ -45,12 +52,19 @@ First, upgrade your Milvus Helm chart to version 5.0.0:
 ```bash
 helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update zilliztech
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 ```
 
 <div class="alert note">
 The Milvus Helm Charts repo at <code>https://milvus-io.github.io/milvus-helm/</code> has been archived. Use the new repo <code>https://zilliztech.github.io/milvus-helm/</code> for chart versions 4.0.31 and later.
 </div>
+
+To check Helm chart version compatibility with Milvus versions:
+
+```bash
+helm search repo zilliztech/milvus --versions
+```
+
+This guide assumes you are installing the latest version. If you need to install a specific version, specify the `--version` parameter accordingly.
 
 ### Step 2: Upgrade to v2.5.16
 
@@ -66,7 +80,7 @@ Upgrade your Milvus standalone to v2.5.16:
 helm upgrade my-release zilliztech/milvus \
   --set image.all.tag="v2.5.16" \
   --reset-then-reuse-values \
-  --version=5.0.0
+  --version=4.2.58
 ```
 
 Wait for the upgrade to complete:

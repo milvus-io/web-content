@@ -33,6 +33,13 @@ Creating milvus-standalone ... done
 
 <div class="alert note">
 
+**What's new in v2.6.0:**
+- **Enhanced Architecture**: Features the new Streaming Node and optimized components
+- **Updated Dependencies**: Includes the latest MinIO and etcd versions
+- **Improved Configuration**: Optimized settings for better performance
+
+Always download the latest Docker Compose configuration to ensure compatibility with v2.6.0 features.
+
 - If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If this is the case, you are advised to migrate to Docker Compose V2 due to the notes on [this page](https://docs.docker.com/compose/).
 
 - If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
@@ -66,26 +73,26 @@ To update Milvus configuration to suit your needs, you need to modify the `/milv
 
 1. Access the `milvus-standalone` container.
 
-  ```shell
-  docker exec -it milvus-standalone bash
-  ```
+    ```shell
+    docker exec -it milvus-standalone bash
+    ```
 
 1. Add extra configurations to override the default ones. 
   The following assumes that you need to override the default `proxy.healthCheckTimeout`. For applicable configuration items, refer to [System Configuration](system_configuration.md).
 
-  ```shell
-  cat << EOF > /milvus/configs/user.yaml
-  # Extra config to override default milvus.yaml
-  proxy:
-    healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
-  EOF
-  ```
+    ```shell
+    cat << EOF > /milvus/configs/user.yaml
+    # Extra config to override default milvus.yaml
+    proxy:
+      healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
+    EOF
+    ```
 
 1. Restart the `milvus-standalone` container to apply the changes.
 
-  ```shell
-  docker restart milvus-standalone
-  ```
+    ```shell
+    docker restart milvus-standalone
+    ```
 
 ## Stop and delete Milvus
 

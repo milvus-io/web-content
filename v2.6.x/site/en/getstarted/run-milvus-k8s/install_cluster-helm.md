@@ -69,6 +69,7 @@ Once you have installed the Helm chart, you can start Milvus on Kubernetes. This
 <strong>Need standalone deployment instead?</strong>
 
 If you prefer to deploy Milvus in standalone mode (single node) for development or testing, use this command:
+
 ```bash
 helm install my-release zilliztech/milvus \
   --set image.all.tag=v2.6.0 \
@@ -85,7 +86,38 @@ helm install my-release zilliztech/milvus \
 
 **Deploy Milvus cluster:**
 
-The following command deploys a Milvus cluster with optimized settings for v2.6.0:
+The following command deploys a Milvus cluster with optimized settings for v2.6.0, using WoodPecker as the recommended message queue:
+
+```bash
+helm install my-release zilliztech/milvus \
+  --set image.all.tag=v2.6.0 \
+  --set pulsarv3.enabled=false \
+  --set woodpecker.enabled=true \
+  --set streaming.enabled=true \
+  --set indexNode.enabled=false
+```
+
+**What this command does:**
+- Uses **WoodPecker** as the message queue (recommended for reduced maintenance)
+- Enables the new **Streaming Node** component for improved performance
+- Disables the legacy **Index Node** (functionality is now handled by Data Node)
+- Disables Pulsar to use WoodPecker instead
+
+<div class="alert note">
+
+**Architecture Changes in Milvus 2.6.x:**
+
+- **Message Queue**: **WoodPecker** is now recommended (reduces infrastructure maintenance compared to Pulsar)
+- **New Component**: **Streaming Node** is introduced and enabled by default  
+- **Merged Components**: **Index Node** and **Data Node** are combined into a single **Data Node**
+
+For complete architecture details, refer to the [Architecture Overview](architecture_overview.md).
+
+</div>
+
+**Alternative Message Queue Options:**
+
+If you prefer to use **Pulsar** (traditional choice) instead of WoodPecker:
 
 ```bash
 helm install my-release zilliztech/milvus \
@@ -94,24 +126,8 @@ helm install my-release zilliztech/milvus \
   --set indexNode.enabled=false
 ```
 
-**What this command does:**
-- Enables the new **Streaming Node** component for improved performance
-- Disables the legacy **Index Node** (functionality is now handled by Data Node)
-
-<div class="alert note">
-
-**Architecture Changes in Milvus 2.6.x:**
-
-- **Message Queue**: Uses **Pulsar** by default (same as previous versions)
-- **New Component**: **Streaming Node** is introduced and enabled by default  
-- **Merged Components**: **Index Node** and **Data Node** are combined into a single **Data Node**
-
-For complete architecture details, refer to the [Architecture Overview](architecture_overview.md).
-
-</div>
-
 **Next steps:**
-The command above deploys Milvus with default configurations. For production use:
+The command above deploys Milvus with recommended configurations. For production use:
 - Use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to optimize settings based on your data size
 - Review [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md) for advanced configuration options
 
@@ -166,6 +182,10 @@ my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 ```
 
+**Key components to verify:**
+- **Milvus components**: `mixcoord`, `datanode`, `querynode`, `proxy`, `streaming-node`
+- **Dependencies**: `etcd` (metadata), `minio` (object storage), `pulsar` (message queue)
+
 You can also access the **Milvus WebUI** at `http://127.0.0.1:9091/webui/` once port forwarding is set up (see next step). For details, refer to [Milvus WebUI](milvus-webui.md).
 
 ### 3. Connect to Milvus
@@ -205,19 +225,21 @@ Forwarding from 127.0.0.1:27017 -> 19530
 
 ## (Optional) Update Milvus configurations
 
-You can update the configurations of your Milvus cluster by editing the `values.yaml` file and applying it again.
+You can update the configurations of your Milvus cluster by editing the `values.yaml` file and applying it again. 
 
 1. Create a `values.yaml` file with the desired configurations.
 
-  The following assumes that you want to enable `proxy.http`.
+    The following assumes that you want to enable `proxy.http`.
 
-  ```yaml
-  extraConfigFiles:
-    user.yaml: |+
-      proxy:
-        http:
-          enabled: true
-  ```
+    ```yaml
+    extraConfigFiles:
+      user.yaml: |+
+        proxy:
+          http:
+            enabled: true
+    ```
+
+    For applicable configuration items, refer to [System Configuration](system_configuration.md).
 
 1. Apply the `values.yaml` file.
 
@@ -227,11 +249,11 @@ You can update the configurations of your Milvus cluster by editing the `values.
 
 1. Check the updated configurations.
 
-  ```shell
-  helm get values my-release
-  ```
+    ```shell
+    helm get values my-release
+    ```
 
-  The output should show the updated configurations.
+    The output should show the updated configurations.
 
 ## Access Milvus WebUI
 

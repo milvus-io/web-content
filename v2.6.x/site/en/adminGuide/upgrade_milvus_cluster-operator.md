@@ -18,7 +18,13 @@ This guide describes how to upgrade your Milvus cluster from v2.5.x to v2.6.0 us
 
 ### What's new in v2.6.0
 
-As of Milvus 2.6.0, the legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`. This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
+Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:
+
+- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
+- **New components**: Introduction of Streaming Node for enhanced data processing
+- **Component removal**: `dataNode` and `indexNode` have been removed and consolidated
+
+This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
 
 ### Requirements
 
@@ -29,6 +35,7 @@ As of Milvus 2.6.0, the legacy separate coordinators (`dataCoord`, `queryCoord`,
 
 **Compatibility requirements:**
 - Milvus v2.6.0-rc1 is **not compatible** with v2.6.0. Direct upgrades from release candidates are not supported.
+- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
 - You **must** upgrade to v2.5.16 with `mixCoord` enabled before upgrading to v2.6.0.
 
 ## Upgrade process
@@ -59,7 +66,7 @@ Check if your cluster already uses `mixCoord`:
 kubectl get pods
 ```
 
-Look for pods with names like `<release-name>-milvus-mixcoord-*`. If you see separate coordinator pods (`datacoord`, `querycoord`, `indexcoord`) instead, you need to enable `mixCoord` in the next step.
+If you see separate coordinator pods (`datacoord`, `querycoord`, `indexcoord`) instead, you need to enable `mixCoord` in the next step.
 
 #### 2.2 Upgrade to v2.5.16 with mixCoord
 
