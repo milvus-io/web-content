@@ -244,7 +244,7 @@ Now, you can connect to Milvus using the forwarded port.
 
 You can view and update the configurations of your Milvus cluster by calling the `patch` command as follows:
 
-1. Run the following command to view the would be configurations.
+1. Run the following command to preview the would-be configurations.
 
     The following asummes that you want to update the `spec.components.disableMetric` parameter to `false` ms.
 
