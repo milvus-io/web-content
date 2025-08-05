@@ -252,14 +252,11 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>You can update the configurations of your Milvus cluster by editing the YAML file and applying it again.</p>
 <ol>
-<li>Run the following command to edit the YAML file.</li>
-</ol>
+<li><p>Run the following command to edit the YAML file.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl edit milvus my-release</span>
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Update the configurations in the YAML file.
-The following asummes that you want to update the <code translate="no">proxy.healthCheckTimout</code> parameter to <code translate="no">1000</code> ms.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Update the configurations in the YAML file.
+The following asummes that you want to update the <code translate="no">proxy.healthCheckTimout</code> parameter to <code translate="no">1000</code> ms.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Add the corresponding user parameters under the `spec.config` node.</span>
 <span class="hljs-comment"># For the default configuration, see https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
 <span class="hljs-comment"># To update `proxy.healthCheckTimout` parameter to `1000` ms, do as follows:</span>
@@ -267,8 +264,8 @@ The following asummes that you want to update the <code translate="no">proxy.hea
   <span class="hljs-attr">proxy:</span>
     <span class="hljs-attr">healthCheckTimeout:</span> <span class="hljs-number">1000</span>
 <button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Save the changes and exit the editor. The changes will be applied to the Milvus cluster automatically.</li>
+<p>For applicable configuration items, refer to <a href="/docs/system_configuration.md">System Configuration</a>.</p></li>
+<li><p>Save the changes and exit the editor. The changes will be applied to the Milvus cluster automatically.</p></li>
 </ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Access Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"

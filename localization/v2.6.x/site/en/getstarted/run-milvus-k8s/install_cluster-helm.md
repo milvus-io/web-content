@@ -220,8 +220,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
       </svg>
     </button></h2><p>You can update the configurations of your Milvus cluster by editing the <code translate="no">values.yaml</code> file and applying it again.</p>
 <ol>
-<li>Create a <code translate="no">values.yaml</code> file with the desired configurations.</li>
-</ol>
+<li><p>Create a <code translate="no">values.yaml</code> file with the desired configurations.</p>
 <p>The following assumes that you want to enable <code translate="no">proxy.http</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -229,17 +228,15 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
       http:
         enabled: true
 </span><button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Apply the <code translate="no">values.yaml</code> file.</li>
-</ol>
+<p>For applicable configuration items, refer to <a href="/docs/system_configuration.md">System Configuration</a>.</p></li>
+<li><p>Apply the <code translate="no">values.yaml</code> file.</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Check the updated configurations.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Check the updated configurations.</p>
 <pre><code translate="no" class="language-shell">helm get values my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>The output should show the updated configurations.</p>
+<p>The output should show the updated configurations.</p></li>
+</ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Access Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
