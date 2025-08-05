@@ -200,33 +200,35 @@ By default, kubectl's port-forwarding only listens on `localhost`. Use the `addr
 
 ## (Optional) Update Milvus configurations
 
-You can update the configurations of your Milvus cluster by editing the `values.yaml` file and applying it again.
+You can update the configurations of your Milvus cluster by editing the `values.yaml` file and applying it again. 
 
 1. Create a `values.yaml` file with the desired configurations.
 
-  The following assumes that you want to enable `proxy.http`.
+    The following assumes that you want to enable `proxy.http`.
 
-  ```yaml
-  extraConfigFiles:
-    user.yaml: |+
-      proxy:
-        http:
-          enabled: true
-  ```
+    ```yaml
+    extraConfigFiles:
+      user.yaml: |+
+        proxy:
+          http:
+            enabled: true
+    ```
+
+    For applicable configuration items, refer to [System Configuration](system_configuration.md).
 
 1. Apply the `values.yaml` file.
 
-  ```shell
-  helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
-  ```
+    ```shell
+    helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+    ```
 
 1. Check the updated configurations.
 
-  ```shell
-  helm get values my-release
-  ```
+    ```shell
+    helm get values my-release
+    ```
 
-  The output should show the updated configurations.
+    The output should show the updated configurations.
 
 ## Access Milvus WebUI
 

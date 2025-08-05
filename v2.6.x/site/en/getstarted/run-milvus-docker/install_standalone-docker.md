@@ -64,6 +64,8 @@ Then restart the service as follows:
 $ bash standalone_embed.sh restart
 ```
 
+For applicable configuration items, refer to System Configuration.
+
 ## Stop and delete Milvus
 
 You can stop and delete this container as follows
