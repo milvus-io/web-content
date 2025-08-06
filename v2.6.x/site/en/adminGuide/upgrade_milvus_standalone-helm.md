@@ -23,7 +23,7 @@ Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:
 
 - **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
 - **New components**: Introduction of Streaming Node for enhanced data processing
-- **Component removal**: `dataNode` and `indexNode` have been removed and consolidated
+- **Component removal**: `indexNode` removed and consolidated
 
 This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
 
