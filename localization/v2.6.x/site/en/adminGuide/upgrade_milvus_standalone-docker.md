@@ -59,7 +59,7 @@ This upgrade is <strong>irreversible</strong>. You cannot roll back to a previou
 <li>You <strong>must</strong> upgrade to v2.5.16 before upgrading to v2.6.0.</li>
 </ul>
 <div class="alter note">
-<p>Due to security concerns, Milvus upgrades its MinIO to RELEASE.2023-03-20T20-16-18Z with the release of v2.2.5. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">this guide</a>.</p>
+<p>Due to security concerns, Milvus upgrades its MinIO to RELEASE.2024-12-18T13-15-44Z with the release of v2.6.0. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">this guide</a>.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade process<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,35 +76,34 @@ This upgrade is <strong>irreversible</strong>. You cannot roll back to a previou
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Download-updated-Docker-Compose-files" class="common-anchor-header">Step 1: Download updated Docker Compose files</h3><p>Before upgrading, download the latest Docker Compose configuration files:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Download the latest docker-compose.yaml</span>
-wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yaml
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-Always download the latest configuration files to ensure compatibility with the new version and access to new features.
-</div>
-<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">Step 2: Upgrade to v2.5.16</h3><div class="alert-note">
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">Step 1: Upgrade to v2.5.16</h3><div class="alert note">
 <p>Skip this step if your standalone deployment is already running v2.5.16 or higher.</p>
 </div>
 <ol>
-<li><p>Update the Milvus image tag in your <code translate="no">docker-compose.yaml</code> to v2.5.16:</p>
+<li><p>Edit your existing <code translate="no">docker-compose.yaml</code> file and update the Milvus image tag to v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Apply the upgrade:</p>
+<li><p>Apply the upgrade to v2.5.16:</p>
 <pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Verify the upgrade:</p>
+<li><p>Verify the v2.5.16 upgrade:</p>
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Upgrade-to-v260" class="common-anchor-header">Step 3: Upgrade to v2.6.0</h3><p>Once v2.5.16 is running successfully, upgrade to v2.6.0:</p>
+<h3 id="Step-2-Upgrade-to-v260" class="common-anchor-header">Step 2: Upgrade to v2.6.0</h3><p>Once v2.5.16 is running successfully, upgrade to v2.6.0:</p>
 <ol>
-<li><p>Update the Milvus image tag in your <code translate="no">docker-compose.yaml</code>:</p>
+<li><p>Edit your existing <code translate="no">docker-compose.yaml</code> file and update both the Milvus and MinIO image tags:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">minio/minio:RELEASE.2024-12-18T13-15-44Z</span>
+
+<span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
