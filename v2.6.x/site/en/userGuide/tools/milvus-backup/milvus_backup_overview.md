@@ -25,6 +25,18 @@ Milvus Backup reads collection metadata and segments from the source Milvus inst
 
 To restore from a backup, Milvus Backup creates a new collection in the target Milvus instance based on the collection metadata and segment information in the backup. It then copies the backup data from the backup root path to the root path of the target instance.
 
+## Compatibility matrix
+
+The following table lists the backup and restore compatibilities between different Milvus versions since Milvus Backup v0.5.7.
+
+| Backup ↓ / Restore → | Milvus v2.2.x | Milvus v2.3.x | Milvus v2.4.x | Milvus v2.5.x |
+| --------------------- | ------------- | ------------- | ------------- | ------------- |
+| Milvus v2.2.x         | No            | No            | Yes           | Yes           |
+| Milvus v2.3.x    | No            | No            | Yes           | Yes           |
+| Milvus v2.4.x    | No            | No            | Yes           | Yes           |
+| Milvus v2.5.x    | No            | No            | No            | Yes           |
+
+
 ## Latest release
 
-- [v0.4.15](https://github.com/zilliztech/milvus-backup/releases/tag/v0.4.15)
+- [v0.5.7](https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7)
