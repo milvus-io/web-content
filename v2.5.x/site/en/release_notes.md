@@ -8,6 +8,43 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.16
+
+Release date: August 6, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.16          | 2.5.14            | 2.5.12              | 2.5.11           |
+
+We're excited to announce Milvus 2.5.16! This version enhances your experience by fixing a series of functionality bugs and improving user experiences. It also delivers a range of general performance and stability enhancements, while resolving numerous bugs to ensure a more robust system. We encourage you to upgrade to 2.5.16 and explore these latest updates!
+
+### Improvements
+
+- Removed collection name validation from `DescribeCollection` ([#43300](https://github.com/milvus-io/milvus/pull/43300)).
+- Unlinked mmap file when chunk and index are destructed ([#43546](https://github.com/milvus-io/milvus/pull/43546)).
+- Used set element for string term type ([#43393](https://github.com/milvus-io/milvus/pull/43393)).
+- Upgraded Go version to 1.24.4 to fix CVEs ([#43467](https://github.com/milvus-io/milvus/pull/43467)).
+- Only downloaded necessary fields during clustering analyze phase ([#43362](https://github.com/milvus-io/milvus/pull/43362)).
+- Updated Lindera version ([#43457](https://github.com/milvus-io/milvus/pull/43457)).
+- Optimized channel node balancing for uneven QueryNode distribution ([#43423](https://github.com/milvus-io/milvus/pull/43423)).
+
+### Bug fixes
+
+- Fixed hybrid search to support offset param in RESTful API ([#43721](https://github.com/milvus-io/milvus/pull/43721)).
+- Fixed Jieba tokenizer panic when dict word was empty string ([#43718](https://github.com/milvus-io/milvus/pull/43718)).
+- Fixed span raw data retrieval for variable length data type ([#43703](https://github.com/milvus-io/milvus/pull/43703)).
+- Incremented offset for invalid data rows in JSON key stats inverted index ([#43688](https://github.com/milvus-io/milvus/pull/43688)).
+- Fixed load config changes failure after restart ([#43555](https://github.com/milvus-io/milvus/pull/43555)).
+- Fixed pk in [..] skip next batch when using multi-chunk segment ([#43619](https://github.com/milvus-io/milvus/pull/43619)).
+- Skipped loading non-existent L0 segments to prevent load blocking ([#43576](https://github.com/milvus-io/milvus/pull/43576)).
+- Cleaned privilege cache after loading policy in `InitPolicyInfo` ([#43643](https://github.com/milvus-io/milvus/pull/43643)).
+- Set status when error is not empty ([#43404](https://github.com/milvus-io/milvus/pull/43404)).
+- Returned ID by default ([#43596](https://github.com/milvus-io/milvus/pull/43596)).
+- Fixed string views retrieval failure due to chunk bound empty loop ([#43482](https://github.com/milvus-io/milvus/pull/43482)).
+- Ignored 2.6 proxy to avoid timetick lag ([#43519](https://github.com/milvus-io/milvus/pull/43519)).
+- Ensured task execution order by using a priority queue ([#43272](https://github.com/milvus-io/milvus/pull/43272)).
+- Refined judgement for batch views ([#43479](https://github.com/milvus-io/milvus/pull/43479)).
+
 ## v2.5.15
 
 Release date: July 23, 2025
