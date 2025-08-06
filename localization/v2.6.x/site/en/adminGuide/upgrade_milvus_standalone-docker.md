@@ -41,12 +41,11 @@ title: Upgrade Milvus Standalone with Docker Compose
       </svg>
     </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">What’s new in v2.6.0</h3><p>Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:</p>
 <ul>
+<li><strong>Coordinator consolidation</strong>: Legacy separate coordinators (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) have been consolidated into a single <code translate="no">mixCoord</code></li>
 <li><strong>New components</strong>: Introduction of Streaming Node for enhanced data processing</li>
-<li><strong>Component optimizations</strong>: Enhanced performance and streamlined architecture</li>
+<li><strong>Component removal</strong>: <code translate="no">dataNode</code> and <code translate="no">indexNode</code> have been removed and consolidated</li>
 </ul>
-<div class="alert note">
-This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.
-</div>
+<p>This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Requirements</h3><p><strong>System requirements:</strong></p>
 <ul>
 <li>Docker and Docker Compose installed</li>
