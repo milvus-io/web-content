@@ -19,6 +19,56 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2516" class="common-anchor-header">v2.5.16<button data-href="#v2516" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: August 6, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.16</td><td>2.5.14</td><td>2.5.12</td><td>2.5.11</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce Milvus 2.5.16! This version enhances your experience by fixing a series of functionality bugs and improving user experiences. It also delivers a range of general performance and stability enhancements, while resolving numerous bugs to ensure a more robust system. We encourage you to upgrade to 2.5.16 and explore these latest updates!</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Removed collection name validation from <code translate="no">DescribeCollection</code> (<a href="https://github.com/milvus-io/milvus/pull/43300">#43300</a>).</li>
+<li>Unlinked mmap file when chunk and index are destructed (<a href="https://github.com/milvus-io/milvus/pull/43546">#43546</a>).</li>
+<li>Used set element for string term type (<a href="https://github.com/milvus-io/milvus/pull/43393">#43393</a>).</li>
+<li>Upgraded Go version to 1.24.4 to fix CVEs (<a href="https://github.com/milvus-io/milvus/pull/43467">#43467</a>).</li>
+<li>Only downloaded necessary fields during clustering analyze phase (<a href="https://github.com/milvus-io/milvus/pull/43362">#43362</a>).</li>
+<li>Updated Lindera version (<a href="https://github.com/milvus-io/milvus/pull/43457">#43457</a>).</li>
+<li>Optimized channel node balancing for uneven QueryNode distribution (<a href="https://github.com/milvus-io/milvus/pull/43423">#43423</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed hybrid search to support offset param in RESTful API (<a href="https://github.com/milvus-io/milvus/pull/43721">#43721</a>).</li>
+<li>Fixed Jieba tokenizer panic when dict word was empty string (<a href="https://github.com/milvus-io/milvus/pull/43718">#43718</a>).</li>
+<li>Fixed span raw data retrieval for variable length data type (<a href="https://github.com/milvus-io/milvus/pull/43703">#43703</a>).</li>
+<li>Incremented offset for invalid data rows in JSON key stats inverted index (<a href="https://github.com/milvus-io/milvus/pull/43688">#43688</a>).</li>
+<li>Fixed load config changes failure after restart (<a href="https://github.com/milvus-io/milvus/pull/43555">#43555</a>).</li>
+<li>Fixed pk in […] skip next batch when using multi-chunk segment (<a href="https://github.com/milvus-io/milvus/pull/43619">#43619</a>).</li>
+<li>Skipped loading non-existent L0 segments to prevent load blocking (<a href="https://github.com/milvus-io/milvus/pull/43576">#43576</a>).</li>
+<li>Cleaned privilege cache after loading policy in <code translate="no">InitPolicyInfo</code> (<a href="https://github.com/milvus-io/milvus/pull/43643">#43643</a>).</li>
+<li>Set status when error is not empty (<a href="https://github.com/milvus-io/milvus/pull/43404">#43404</a>).</li>
+<li>Returned ID by default (<a href="https://github.com/milvus-io/milvus/pull/43596">#43596</a>).</li>
+<li>Fixed string views retrieval failure due to chunk bound empty loop (<a href="https://github.com/milvus-io/milvus/pull/43482">#43482</a>).</li>
+<li>Ignored 2.6 proxy to avoid timetick lag (<a href="https://github.com/milvus-io/milvus/pull/43519">#43519</a>).</li>
+<li>Ensured task execution order by using a priority queue (<a href="https://github.com/milvus-io/milvus/pull/43272">#43272</a>).</li>
+<li>Refined judgement for batch views (<a href="https://github.com/milvus-io/milvus/pull/43479">#43479</a>).</li>
+</ul>
 <h2 id="v2515" class="common-anchor-header">v2.5.15<button data-href="#v2515" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
