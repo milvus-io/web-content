@@ -40,62 +40,55 @@ This upgrade is <strong>irreversible</strong>. You cannot roll back to a previou
 
 <div class="alter note">
 
-Due to security concerns, Milvus upgrades its MinIO to RELEASE.2023-03-20T20-16-18Z with the release of v2.2.5. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to [this guide](https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2).
+Due to security concerns, Milvus upgrades its MinIO to RELEASE.2024-12-18T13-15-44Z with the release of v2.6.0. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to [this guide](https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2).
 
 </div>
 
 ## Upgrade process
 
-### Step 1: Download updated Docker Compose files
-
-Before upgrading, download the latest Docker Compose configuration files:
-
-```bash
-# Download the latest docker-compose.yaml
-wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yaml
-```
+### Step 1: Upgrade to v2.5.16
 
 <div class="alert note">
-Always download the latest configuration files to ensure compatibility with the new version and access to new features.
-</div>
-
-### Step 2: Upgrade to v2.5.16
-
-<div class="alert-note">
 
 Skip this step if your standalone deployment is already running v2.5.16 or higher.
 
 </div>
 
-1. Update the Milvus image tag in your `docker-compose.yaml` to v2.5.16:
+1. Edit your existing `docker-compose.yaml` file and update the Milvus image tag to v2.5.16:
 
     ```yaml
     ...
     standalone:
       container_name: milvus-standalone
       image: milvusdb/milvus:v2.5.16
+    ...
     ```
 
-2. Apply the upgrade:
+2. Apply the upgrade to v2.5.16:
 
     ```bash
     docker compose down
     docker compose up -d
     ```
 
-3. Verify the upgrade:
+3. Verify the v2.5.16 upgrade:
 
     ```bash
     docker compose ps
     ```
 
-### Step 3: Upgrade to v2.6.0
+### Step 2: Upgrade to v2.6.0
 
 Once v2.5.16 is running successfully, upgrade to v2.6.0:
 
-1. Update the Milvus image tag in your `docker-compose.yaml`:
+1. Edit your existing `docker-compose.yaml` file and update both the Milvus and MinIO image tags:
 
     ```yaml
+    ...
+    minio:
+      container_name: milvus-minio
+      image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+
     ...
     standalone:
       container_name: milvus-standalone
