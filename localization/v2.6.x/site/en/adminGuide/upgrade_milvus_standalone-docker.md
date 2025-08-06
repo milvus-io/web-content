@@ -43,7 +43,7 @@ title: Upgrade Milvus Standalone with Docker Compose
 <ul>
 <li><strong>Coordinator consolidation</strong>: Legacy separate coordinators (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) have been consolidated into a single <code translate="no">mixCoord</code></li>
 <li><strong>New components</strong>: Introduction of Streaming Node for enhanced data processing</li>
-<li><strong>Component removal</strong>: <code translate="no">dataNode</code> and <code translate="no">indexNode</code> have been removed and consolidated</li>
+<li><strong>Component removal</strong>: <code translate="no">indexNode</code> removed and consolidated</li>
 </ul>
 <p>This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Requirements</h3><p><strong>System requirements:</strong></p>
