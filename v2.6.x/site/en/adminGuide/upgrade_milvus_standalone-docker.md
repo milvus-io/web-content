@@ -20,12 +20,11 @@ This guide describes how to upgrade your Milvus standalone deployment from v2.5.
 
 Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:
 
+- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
 - **New components**: Introduction of Streaming Node for enhanced data processing
-- **Component optimizations**: Enhanced performance and streamlined architecture
+- **Component removal**: `dataNode` and `indexNode` have been removed and consolidated
 
-<div class="alert note">
-This upgrade is <strong>irreversible</strong>. You cannot roll back to a previous version once the upgrade is completed. For more information on architecture changes, refer to <a href="architecture_overview.md">Milvus Architecture Overview</a>.
-</div>
+This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
 
 ### Requirements
 
