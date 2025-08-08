@@ -1432,6 +1432,25 @@
         ]
       },
       {
+        "label": "Upgrade",
+        "id": "upgrade_milvus",
+        "order": 7,
+        "children": [
+          {
+            "label": "Upgrade Milvus Cluster",
+            "id": "upgrade_milvus_cluster-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Upgrade Milvus Standalone",
+            "id": "upgrade_milvus_standalone-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Monitoring, Alerts & Logs",
         "id": "monitor_alert_log",
         "order": 8,

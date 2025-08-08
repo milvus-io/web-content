@@ -12,81 +12,106 @@ title: Upgrade Milvus Standalone with Docker Compose
 
 # Upgrade Milvus Standalone with Docker Compose
 
-This topic describes how to upgrade your Milvus using Docker Compose. 
+This guide describes how to upgrade your Milvus standalone deployment from v2.5.x to v2.6.0 using Docker Compose.
 
-In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.6.0-rc1.
+## Before you start
+
+### What's new in v2.6.0
+
+Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:
+
+- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
+- **New components**: Introduction of Streaming Node for enhanced data processing
+- **Component removal**: `indexNode` removed and consolidated
+
+This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
+
+### Requirements
+
+**System requirements:**
+- Docker and Docker Compose installed
+- Milvus standalone deployed via Docker Compose
+
+**Compatibility requirements:**
+- Milvus v2.6.0-rc1 is **not compatible** with v2.6.0. Direct upgrades from release candidates are not supported.
+- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
+- You **must** upgrade to v2.5.16 or later before upgrading to v2.6.0.
 
 <div class="alter note">
 
-Due to security concerns, Milvus upgrades its MinIO to RELEASE.2023-03-20T20-16-18Z with the release of v2.2.5. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to [this guide](https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2).
+Due to security concerns, Milvus upgrades its MinIO to RELEASE.2024-12-18T13-15-44Z with the release of v2.6.0. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to [this guide](https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2).
 
 </div>
 
-## Upgrade Milvus by changing its image
+## Upgrade process
 
-In normal cases, you can upgrade Milvus as follows:
+### Step 1: Upgrade to v2.5.16
 
-1. Change the Milvus image tag in `docker-compose.yaml`.
+<div class="alert note">
+
+Skip this step if your standalone deployment is already running v2.5.16 or higher.
+
+</div>
+
+1. Edit your existing `docker-compose.yaml` file and update the Milvus image tag to v2.5.16:
 
     ```yaml
     ...
     standalone:
       container_name: milvus-standalone
-      image: milvusdb/milvus:v2.6.0-rc1
+      image: milvusdb/milvus:v2.5.16
+    ...
     ```
 
-2. Run the following commands to perform the upgrade.
+2. Apply the upgrade to v2.5.16:
 
-    ```shell
+    ```bash
     docker compose down
     docker compose up -d
     ```
 
-## Migrate the metadata
+3. Verify the v2.5.16 upgrade:
 
-1. Stop all Milvus components.
-
-    ```
-    docker stop <milvus-component-docker-container-name>
+    ```bash
+    docker compose ps
     ```
 
-2. Prepare the configuration file `migration.yaml` for meta migration.
+### Step 2: Upgrade to v2.6.0
+
+Once v2.5.16 is running successfully, upgrade to v2.6.0:
+
+1. Edit your existing `docker-compose.yaml` file and update both the Milvus and MinIO image tags:
 
     ```yaml
-    # migration.yaml
-    cmd:
-      # Option: run/backup/rollback
-      type: run
-      runWithBackup: true
-    config:
-      sourceVersion: 2.1.4   # Specify your milvus version
-      targetVersion: 2.6.0-rc1
-      backupFilePath: /tmp/migration.bak
-    metastore:
-      type: etcd
-    etcd:
-      endpoints:
-        - milvus-etcd:2379  # Use the etcd container name
-      rootPath: by-dev # The root path where data is stored in etcd
-      metaSubPath: meta
-      kvSubPath: kv
+    ...
+    minio:
+      container_name: milvus-minio
+      image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+
+    ...
+    standalone:
+      container_name: milvus-standalone
+      image: milvusdb/milvus:v2.6.0
     ```
 
-3. Run the migration container.
+2. Apply the final upgrade:
 
-    ```
-    # Suppose your docker-compose run with the default milvus network,
-    # and you put migration.yaml in the same directory with docker-compose.yaml.
-    docker run --rm -it --network milvus -v $(pwd)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
-    ```
-
-4. Start Milvus components again with the new Milvus image.
-
-    ```shell
-    // Run the following only after update the milvus image tag in the docker-compose.yaml
+    ```bash
     docker compose down
     docker compose up -d
     ```
+
+## Verify the upgrade
+
+Confirm your standalone deployment is running the new version:
+
+```bash
+# Check container status
+docker compose ps
+
+# Check Milvus version
+docker compose logs standalone | grep "version"
+```
 
 ## What's next
 - You might also want to learn how to:

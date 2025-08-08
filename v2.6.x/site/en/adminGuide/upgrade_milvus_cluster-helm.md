@@ -12,261 +12,124 @@ title: Upgrade Milvus Cluster with Helm Chart
 
 # Upgrade Milvus Cluster with Helm Chart
 
-This guide describes how to upgrade your Milvus cluster with Milvus Helm charts. 
+This guide describes how to upgrade your Milvus cluster from v2.5.x to v2.6.0 using Helm Chart.
 
-<div class="alert note">
+## Before you start
 
-Upgrading from Milvus 2.5.x (or earlier versions) to 2.6.0-rc1 involves significant architectural changes that make this upgrade **irreversible**. Due to the introduction of new components (such as Woodpecker and Streaming Node) and removal of certain components, **you cannot roll back to a previous version once the upgrade is completed**. For details on the architectural changes introduced in 2.6.0-rc1, refer to [Milvus Architecture Overview](architecture_overview.md).
+### What's new in v2.6.0
 
-</div>
+Upgrading from Milvus 2.5.x to 2.6.0 involves significant architectural changes:
 
-## Prerequisites
+- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
+- **New components**: Introduction of Streaming Node for enhanced data processing
+- **Component removal**: `indexNode` removed and consolidated
+
+This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
+
+### Requirements
+
+**System requirements:**
 - Helm version >= 3.14.0
 - Kubernetes version >= 1.20.0
+- Milvus cluster deployed via Helm Chart
+
+**Compatibility requirements:**
+- Milvus v2.6.0-rc1 is **not compatible** with v2.6.0. Direct upgrades from release candidates are not supported.
+- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
+- You **must** upgrade to v2.5.16 or later with `mixCoordinator` enabled before upgrading to v2.6.0.
 
 <div class="alert note">
-
-Since Milvus-Helm chart version 4.2.21, we introduced pulsar-v3.x chart as dependency. For backward compatibility, please upgrade your helm to v3.14 or later version, and be sure to add the `--reset-then-reuse-values` option whenever you use `helm upgrade`.
-
+Since Milvus Helm chart version 4.2.21, we introduced pulsar-v3.x chart as dependency. For backward compatibility, please upgrade your Helm to v3.14 or later version, and be sure to add the <code>--reset-then-reuse-values</code> option whenever you use <code>helm upgrade</code>.
 </div>
 
-## Check Milvus Helm Chart
+## Upgrade process
 
-Run the following commands to check new Milvus versions. 
+### Step 1: Upgrade Helm Chart
 
-```
-$ helm repo update zilliztech
-$ helm search repo zilliztech/milvus --versions
-```
+First, upgrade your Milvus Helm chart to version 5.0.0:
 
-<div class="alert note">
-
-The Milvus Helm Charts repo at `https://milvus-io.github.io/milvus-helm/` has been archived and you can get further updates from `https://zilliztech.github.io/milvus-helm/` as follows:
-
-```shell
+```bash
 helm repo add zilliztech https://zilliztech.github.io/milvus-helm
-helm repo update
-# upgrade existing helm release
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
-```
-
-The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
-
-</div>
-
-```                                       
-NAME                    CHART VERSION   APP VERSION             DESCRIPTION                                       
-zilliztech/milvus       4.1.34          2.4.5                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.33          2.4.4                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.32          2.4.3                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.31          2.4.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.30          2.4.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.29          2.4.0                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.24          2.3.11                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.23          2.3.10                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.22          2.3.10                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.21          2.3.10                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.20          2.3.10                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.18          2.3.10                  Milvus is an open-source vector database built ... 
-zilliztech/milvus       4.1.18          2.3.9                   Milvus is an open-source vector database built ...                                       
-zilliztech/milvus       4.1.17          2.3.8                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.16          2.3.7                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.15          2.3.5                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.14          2.3.6                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.13          2.3.5                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.12          2.3.5                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.11          2.3.4                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.10          2.3.3                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.9           2.3.3                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.8           2.3.2                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.7           2.3.2                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.6           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.5           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.4           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.3           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.2           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.1           2.3.0                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
-```
-
-You can choose the upgrade path for your Milvus as follows:
-
-<div style="display: none;">- [Conduct a rolling upgrade](#conduct-a-rolling-upgrade) from Milvus v2.2.3 and later releases to v2.6.0-rc1.</div>
-
-- [Upgrade Milvus using Helm](#Upgrade-Milvus-using-Helm) for an upgrade from a minor release before v2.2.3 to v2.6.0-rc1.
-
-- [Migrate the metadata](#Migrate-the-metadata) before the upgrade from Milvus v2.1.x to v2.6.0-rc1.
-
-<div style="display: none;">
-    
-## Conduct a rolling upgrade
-
-Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-standby mode and enable the rolling upgrade feature for them, so that Milvus can respond to incoming requests during the coordinator upgrades. In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
-
-Rolling upgrades requires coordinators to work in active-standby mode. You can use [the script](https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh) we provide to configure the coordinators to work in active-standby mode and start the rolling upgrade.
-
-Based on the rolling update capabilities provided by Kubernetes, the above script enforces an ordered update of the deployments according to their dependencies. In addition, Milvus implements a mechanism to ensure that its components remain compatible with those depending on them during the upgrade, significantly reducing potential service downtime.
-
-The script applies only to the upgrade of Milvus installed with Helm. The following table lists the command flags available in the scripts.
-
-| Parameters   | Description                                               | Default value                    | Required                |
-| ------------ | ----------------------------------------------------------| -------------------------------- | ----------------------- |
-| `i`          | Milvus instance name                                      | `None`                           | True                    |
-| `n`          | Namespace that Milvus is installed in                     | `default`                        | False                   |
-| `t`          | Target Milvus version                                     | `None`                           | True                    |
-| `w`          | New Milvus image tag                                      | `milvusdb/milvus:v2.2.3`         | True                    |
-| `o`          | Operation                                                 | `update`                         | False                   |
-
-Once you have ensured that all deployments in your Milvus instance are in their normal status. You can run the following command to upgrade the Milvus instance to 2.6.0-rc1.
-
-```shell
-sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0-rc1 -w 'milvusdb/milvus:v2.6.0-rc1'
+helm repo update zilliztech
 ```
 
 <div class="alert note">
-
-1. The script hard-codes the upgrade order of the deployments and cannot be changed.
-2. The script uses `kubectl patch` to update the deployments and `kubectl rollout status` to watch their status.
-3. The script uses `kubectl patch` to update the `app.kubernetes.io/version` label of the deployments to the one specified after the `-t` flag in the command.
-
-</div>
-    
+The Milvus Helm Charts repo at <code>https://milvus-io.github.io/milvus-helm/</code> has been archived. Use the new repo <code>https://zilliztech.github.io/milvus-helm/</code> for chart versions 4.0.31 and later.
 </div>
 
-## Upgrade Milvus using Helm
+To check Helm chart version compatibility with Milvus versions:
 
-To upgrade Milvus from a minor release before v2.2.3 to the latest, run the following commands:
-
-```shell
-helm repo update zilliztech
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.2.53 # use the helm chart version here
+```bash
+helm search repo zilliztech/milvus --versions
 ```
 
-Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).
+This guide assumes you are installing the latest version. If you need to install a specific version, specify the `--version` parameter accordingly.
 
-## Migrate the metadata
+### Step 2: Upgrade to v2.5.16 with mixCoordinator
 
-Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus 2.2.0.
+Check if your cluster currently uses separate coordinators:
 
-### 1. Check the Milvus version
-
-Run `$ helm list` to check your Milvus app version. You can see the `APP VERSION` is 2.1.4. 
-
-```
-NAME             	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION    
-new-release      	default  	1       	2022-11-21 15:41:25.51539 +0800 CST    	deployed	milvus-3.2.18	2.1.4 
+```bash
+kubectl get pods
 ```
 
-### 2. Check the running pods
+If you see separate coordinator pods (`datacoord`, `querycoord`, `indexcoord`), upgrade to v2.5.16 and enable `mixCoordinator`:
 
-Run `$ kubectl get pods` to check the running pods. You can see the following output.
-
-```
-NAME                                             READY   STATUS      RESTARTS   AGE
-my-release-etcd-0                               1/1     Running     0          21m
-my-release-etcd-1                               1/1     Running     0          21m
-my-release-etcd-2                               1/1     Running     0          21m
-my-release-milvus-datacoord-664c58798d-fl75s    1/1     Running     0          21m
-my-release-milvus-datanode-5f75686c55-xfg2r     1/1     Running     0          21m
-my-release-milvus-indexcoord-5f98b97589-2l48r   1/1     Running     0          21m
-my-release-milvus-indexnode-857b4ddf98-vmd75    1/1     Running     0          21m
-my-release-milvus-proxy-6c548f787f-scspp        1/1     Running     0          21m
-my-release-milvus-querycoord-c454f44cd-dwmwq    1/1     Running     0          21m
-my-release-milvus-querynode-76bb4946d-lbrz6     1/1     Running     0          21m
-my-release-milvus-rootcoord-7764c5b686-62msm    1/1     Running     0          21m
-my-release-minio-0                              1/1     Running     0          21m
-my-release-minio-1                              1/1     Running     0          21m
-my-release-minio-2                              1/1     Running     0          21m
-my-release-minio-3                              1/1     Running     0          21m
-my-release-pulsar-bookie-0                      1/1     Running     0          21m
-my-release-pulsar-bookie-1                      1/1     Running     0          21m
-my-release-pulsar-bookie-2                      1/1     Running     0          21m
-my-release-pulsar-bookie-init-tjxpj             0/1     Completed   0          21m
-my-release-pulsar-broker-0                      1/1     Running     0          21m
-my-release-pulsar-proxy-0                       1/1     Running     0          21m
-my-release-pulsar-pulsar-init-c8vvc             0/1     Completed   0          21m
-my-release-pulsar-recovery-0                    1/1     Running     0          21m
-my-release-pulsar-zookeeper-0                   1/1     Running     0          21m
-my-release-pulsar-zookeeper-1                   1/1     Running     0          20m
-my-release-pulsar-zookeeper-2                   1/1     Running     0          20m
+```bash
+helm upgrade my-release zilliztech/milvus \
+  --set image.all.tag="v2.5.16" \
+  --set mixCoordinator.enabled=true \
+  --set rootCoordinator.enabled=false \
+  --set indexCoordinator.enabled=false \
+  --set queryCoordinator.enabled=false \
+  --set dataCoordinator.enabled=false \
+  --reset-then-reuse-values \
+  --version=4.2.58
 ```
 
-### 3. Check the image tag
+<div class="alert-note">
 
-Check the image tag for the pod `my-release-milvus-proxy-6c548f787f-scspp`. You can see the release of your Milvus cluster is v2.1.4.
+If your cluster already uses `mixCoordinator`, simply upgrade the image:
 
-```shell
-$ kubectl get pods my-release-milvus-proxy-6c548f787f-scspp -o=jsonpath='{$.spec.containers[0].image}'
-# milvusdb/milvus:v2.1.4
+```bash
+helm upgrade my-release zilliztech/milvus \
+  --set image.all.tag="v2.5.16" \
+  --reset-then-reuse-values \
+  --version=4.2.58
 ```
 
-### 4. Migrate the metadata
+</div>
 
-A major change in Milvus 2.2 is the metadata structure of segment indexes. Therefore, you need to use Helm to migrate the metadata while upgrading Milvus from v2.1.x to v2.2.0. Here is [a script](https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh) for you to safely migrate your metadata.
+Wait for the upgrade to complete:
 
-This script only applies to Milvus installed on a K8s cluster. Roll back to the previous version with the rollback operation first if an error occurs during the process.
+```bash
+# Verify all pods are ready
+kubectl get pods
+```
 
-The following table lists the operations you can do for meta migration.
+### Step 3: Upgrade to v2.6.0
 
-| Parameters   | Description                                                      | Default value                    | Required                |
-| ------------ | ---------------------------------------------------------------- | ---------------------------- | ----------------------- |
-| `i`          | The Milvus instance name.                                 | `None`                         | True                    |
-| `n`          | The namespace that Milvus is installed in.                | `default`                      | False                   |
-| `s`          | The source Milvus version.                                | `None`                         | True                    |
-| `t`          | The target Milvus version.                               | `None`                         | True                    |
-| `r`          | The root path of Milvus meta.                             | `by-dev`                       | False                   |
-| `w`          | The new Milvus image tag.                                 | `milvusdb/milvus:v2.2.0`       | False                   |
-| `m`          | The meta migration image tag.                             | `milvusdb/meta-migration:v2.2.0`       | False                   |
-| `o`          | The meta migration operation.                             | `migrate`                      | False                   |
-| `d`          | Whether to delete migration pod after the migration is completed.          | `false`                        | False                   |
-| `c`          | The storage class for meta migration pvc.                 | `default storage class`          | False                   |
-| `e`          | The etcd enpoint used by milvus.              | `etcd svc installed with milvus` | False                   |
+Once v2.5.16 is running successfully with `mixCoordinator`, upgrade to v2.6.0:
 
-#### 1. Migrate the metadata
+```bash
+helm upgrade my-release zilliztech/milvus \
+  --set image.all.tag="v2.6.0" \
+  --set streaming.enabled=true \
+  --set indexNode.enabled=false \
+  --reset-then-reuse-values \
+  --version=5.0.0
+```
 
-1. Download the [migration script](https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh).
-2. Stop the Milvus components. Any live session in the Milvus etcd can cause a migration failure.
-3. Create a backup for the Milvus metadata.
-4. Migrate the Milvus metadata.
-5. Start Milvus components with a new image.
+## Verify the upgrade
 
-#### 2. Upgrade Milvus from v2.1.x to 2.2.0
+Confirm your cluster is running the new version:
 
-The following commands assume that you upgrade Milvus from v2.1.4 to 2.2.0. Change them to the versions that fit your needs.
+```bash
+# Check pod status
+kubectl get pods
 
-1. Specify Milvus instance name, source Milvus version, and target Milvus version.
+# Verify Helm release
+helm list
+```
 
-    ```
-    ./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
-    ```
-
-2. Specify the namespace with `-n` if your Milvus is not installed in the default K8s namespace.
-
-    ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0
-    ```
-
-3. Specify the root path with `-r` if your Milvus is installed with the custom `rootpath`.
-
-    ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev
-    ```
-
-4. Specify the image tag with `-w` if your Milvus is installed with a custom `image`.
-
-    ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -w milvusdb/milvus:v2.2.0
-    ```
-
-5. Set `-d true` if you want to automatically remove the migration pod after the migration is completed.
-
-    ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -w milvusdb/milvus:v2.2.0 -d true
-    ```
-
-6. Rollback and migrate again if the migration fails.
-
-    ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.4
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o migrate -w milvusdb/milvus:v2.2.0
-    ```
+For additional support, consult the [Milvus documentation](https://milvus.io/docs) or [community forum](https://github.com/milvus-io/milvus/discussions).

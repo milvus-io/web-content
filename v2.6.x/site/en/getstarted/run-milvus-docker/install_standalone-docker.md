@@ -31,6 +31,13 @@ $ bash standalone_embed.sh start
 
 <div class="alert note">
 
+**What's new in v2.6.0:**
+- **Streaming Node**: Enhanced data processing capabilities
+- **WoodPecker MQ**: Improved message queue with reduced maintenance overhead
+- **Optimized Architecture**: Consolidated components for better performance
+
+Always download the latest script to ensure you get the most recent configurations and architecture improvements.
+
 If you want to use [Backup](https://milvus.io/docs/milvus_backup_overview.md) in standalone deployment mode, it is recommended to use the [Docker Compose](https://milvus.io/docs/install_standalone-docker-compose.md) deployment method.
 
 If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
@@ -66,6 +73,27 @@ $ bash standalone_embed.sh restart
 
 For applicable configuration items, refer to [System Configuration](system_configuration.md).
 
+## Upgrade Milvus
+
+You can upgrade to the latest version of Milvus using the built-in upgrade command. This automatically downloads the latest configuration and Milvus image:
+
+```shell
+# Upgrade Milvus to the latest version
+$ bash standalone_embed.sh upgrade
+```
+
+<div class="alert note">
+
+The upgrade command automatically:
+- Downloads the latest installation script with updated configurations
+- Pulls the latest Milvus Docker image
+- Restarts the container with the new version
+- Preserves your existing data and configurations
+
+This is the recommended way to upgrade your Milvus standalone deployment.
+
+</div>
+
 ## Stop and delete Milvus
 
 You can stop and delete this container as follows
@@ -76,12 +104,6 @@ $ bash standalone_embed.sh stop
 
 # Delete Milvus data
 $ bash standalone_embed.sh delete
-```
-You can upgrade the latest version Milvus as follows
-
-```shell
-# upgrade Milvus
-$ bash standalone_embed.sh upgrade
 ```
 
 ## What's next

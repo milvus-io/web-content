@@ -8,6 +8,65 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.0
+
+Release date: August 6, 2025
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.6.0          | 2.6.0             | 2.6.0               | 2.6.1            | 2.6.0          |
+
+Milvus 2.6.0 is officially released! Building upon the architectural foundation laid in [2.6.0-rc1](#v260-rc1), this production-ready version addresses numerous stability and performance issues while introducing powerful new capabilities including Storage Format V2, advanced JSON processing, and enhanced search features. With extensive bug fixes and optimizations based on community feedback during the RC phase, Milvus 2.6.0 is ready for you to explore and adopt.
+
+<div class="alert warning">
+
+Direct upgrade from pre-2.6.0 versions is not supported due to architectural changes. Please follow our <a href="upgrade_milvus_cluster-operator.md">upgrade guide</a>.
+
+</div>
+
+### What's new in 2.6.0 (since RC)
+
+#### Optimized storage format v2
+
+To address the challenges of mixed scalar and vector data storage, especially point lookups on unstructured data, Milvus 2.6 introduces Storage Format V2. This new adaptive columnar storage format adopts a "narrow column merging + wide column independence" layout strategy, fundamentally solving the performance bottlenecks when handling point lookups and small-batch retrievals in vector databases.
+
+The new format now supports efficient random access without I/O amplification and achieves up to 100x performance gains compared to the vanilla Parquet format adopted previously, making it ideal for AI workloads requiring both analytical processing and precise vector retrieval. Additionally, it can reduce file count by up to 98% for typical workloads. Memory consumption for major compaction is reduced by 300%, and I/O operations are optimized by up to 80% for reads and more than 600% for writes.
+
+#### JSON flat index (beta)
+
+Milvus 2.6 introduces JSON Flat Index to handle highly dynamic JSON schemas. Unlike JSON Path Index which requires pre-declaring specific paths and their expected types, JSON Flat Index automatically discovers and indexes all nested structures under a given path. When indexing a JSON field, it recursively flattens the entire subtree, creating inverted index entries for every path-value pair it encounters, regardless of depth or type.
+This automatic flattening makes JSON Flat Index ideal for evolving schemas where new fields appear without warning. For instance, if you index a "metadata" field, the system will automatically handle new nested fields like "metadata.version2.features.experimental" as they appear in incoming data, without requiring new index configuration.
+
+### Core 2.6.0 features recall
+
+<div class="alert note">
+
+For detailed information about architecture changes and features introduced in 2.6.0-RC, see <a href="#v260-rc1">2.6.0-rc1 Release Note</a>.
+
+</div>
+
+#### Architecture simplification
+
+- Streaming Node (GA) - Centralized WAL management
+- Native WAL with Woodpecker - Removed Kafka/Pulsar dependency
+- Unified coordinators (MixCoord); Merged IndexNode and DataNode - Reduced component complexity
+
+#### Search & analytics
+
+- RaBitQ 1-bit quantization with high recall
+- Phrase matching
+- MinHash LSH for deduplication
+- Time-aware ranking functions
+
+#### Developer experience
+
+- Embedding functions for "data-in, data-out" workflow
+- Online schema evolution
+- INT8 vector support
+- Enhanced tokenizers for global language support
+- Cache layer with lazy loading - Process datasets larger than memory
+
+
 ## v2.6.0-rc1
 
 Release date: June 18, 2025
