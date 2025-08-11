@@ -1,8 +1,10 @@
 {
   "milvus_release_version": "2.6.0",
   "milvus_release_tag": "2.6.0",
-  "milvus_deb_name": "milvus_2.2.0-1_amd64",
-  "milvus_rpm_name": "milvus-2.2.0-1.el7.x86_64",
+  "milvus_deb_amd64": "milvus_2.6.0-1_amd64.deb",
+  "milvus_rpm_amd64": "milvus_2.6.0-1_amd64.rpm",
+  "milvus_deb_arm64": "milvus_2.6.0-1_arm64.deb",
+  "milvus_rpm_arm64": "milvus_2.6.0-1_arm64.rpm",
   "milvus_python_sdk_version": "2.4.x",
   "milvus_python_sdk_real_version": "2.6.0",
   "milvus_node_sdk_version": "2.4.x",

@@ -1,14 +1,14 @@
 ---
 id: prerequisite-docker.md
-label: Docker requirements
-related_key: Docker
-summary: Learn the necessary preparations before installing Milvus with Docker Compose.
-title: Requirements for Installing Milvus with Docker Compose
+label: Standalone requirements
+related_key: Standalone
+summary: Learn the necessary preparations before installing Milvus Standalone.
+title: Requirements for Installing Milvus Standalone
 ---
 
-# Requirements for Installing Milvus with Docker Compose
+# Requirements for Installing Milvus Standalone
 
-Before installing a Milvus instance, check your hardware and software to see if they meet the requirements.
+Before installing a Milvus Standalone instance, check your hardware and software to see if they meet the requirements.
 
 ## Hardware requirements
 
