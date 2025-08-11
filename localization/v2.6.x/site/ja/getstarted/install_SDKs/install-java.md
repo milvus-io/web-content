@@ -63,13 +63,13 @@ title: Milvus Java SDKのインストール
 <pre><code translate="no" class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.milvus<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>milvus-sdk-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.6.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.6.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.6.0&#x27;</span>
+<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.6.1&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +90,11 @@ title: Milvus Java SDKのインストール
 <ul>
 <li><p>Milvusの基本操作を学びます：</p>
 <ul>
-<li><a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/v2.6.x/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/v2.6.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/v2.6.x/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
 <li><p><a href="/api-reference/java/v2.4.x/About.md">MilvusのJava APIリファレンスを</a>見る</p></li>
 </ul>

@@ -83,21 +83,15 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
         ></path>
       </svg>
     </button></h2><p>在安裝 Milvus Helm Charts 之前，您需要新增 Milvus Helm repository。</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>位於<code translate="no">https://github.com/milvus-io/milvus-helm</code> 的 Milvus Helm Charts repo 已經歸檔，您可以從<code translate="no">https://github.com/zilliztech/milvus-helm</code> 取得進一步的更新，如下所示：</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
-helm repo update
-<span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
-<button class="copy-code-btn"></button></code></pre>
-<p>存檔的 repo 仍可使用於 4.0.31 之前的圖表。對於之後的版本，請使用新的 repo。</p>
+<p>位於<code translate="no">https://github.com/milvus-io/milvus-helm</code> 的 Milvus Helm Charts repo 已經歸檔。我們現在使用新的套件庫<code translate="no">https://github.com/zilliztech/milvus-helm</code> 。存檔的 repo 仍可用於 4.0.31 之前的圖表，但對於之後的版本，請使用新的 repo。</p>
 </div>
-<p>然後從儲存庫取得 Milvus 圖表，如下所示：</p>
+<p>然後如下從儲存庫取得 Milvus 圖表：</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以隨時執行這個指令來取得最新的 Milvus Helm 圖表。</p>
+<p>您可以隨時執行這個指令來取得最新的 Milvus Helm 海圖。</p>
 <h2 id="Online-install" class="common-anchor-header">線上安裝<button data-href="#Online-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,67 +107,83 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 集群</h3><p>安裝 Helm 圖表後，您就可以在 Kubernetes 上啟動 Milvus。本節將引導您完成啟動 Milvus 的步驟。</p>
-<ul>
-<li><p>若要以獨立模式部署 Milvus 實例，請執行下列指令：</p>
-<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0-rc1 \
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 集群</h3><p>安裝 Helm 圖表後，您就可以在 Kubernetes 上啟動 Milvus。本節將引導您部署 Milvus 叢集。</p>
+<div class="alert note" id="standalone-deployment-note">
+<p><strong>需要獨立部署來代替？</strong></p>
+<p>如果您喜歡以獨立模式 (單一節點) 部署 Milvus 以進行開發或測試，請使用此指令：</p>
+<pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-  <div class="alert note">
-<p>從 Milvus 2.6.x 開始，獨立模式中的架構變更如下：</p>
-<ul>
-<li>預設訊息佇列 (MQ) 為<strong>Woodpecker</strong>。</li>
-<li>引進<strong>Streaming Node</strong>元件，並預設啟用。</li>
-</ul>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>。</p>
-  </div>
-</li>
-<li><p>若要在群集模式下部署 Milvus 實例，請執行下列指令：</p>
-<p>您可以使用<code translate="no">--set</code> 安裝具有自訂組態的 Milvus 叢集。以下指令會將<code translate="no">streaming.enabled</code> 設為<code translate="no">true</code> 以啟用串流服務，並將<code translate="no">indexNode.enabled</code> 設為<code translate="no">false</code> 以停用索引服務。在這種情況下，串流節點會負責所有資料處理和索引工作。</p>
-<pre><code translate="no" class="language-bash">helm install my-release milvus/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0-rc1 \
+<p><strong>注意</strong>：單機模式使用 Woodpecker 作為預設訊息佇列，並啟用 Streaming Node 元件。如需詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>。</p>
+</div>
+<p><strong>部署 Milvus 集群：</strong></p>
+<p>以下指令會部署一個具有 v2.6.0 最佳化設定的 Milvus 叢集，並使用 WoodPecker 作為建議的訊息佇列：</p>
+<pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-  <div class="alert note">
-<p>從 Milvus 2.6.x 開始，群集模式的架構變更如下：</p>
+<p><strong>此指令的作用：</strong></p>
 <ul>
-<li>預設 MQ 仍為<strong>Pulsar</strong>。</li>
-<li>引入<strong>Streaming Node</strong>元件，並預設啟用。</li>
-<li><strong>索引節點 (Index Node</strong>) 和<strong>資料節點 (Data Node</strong>) 合併為<strong>單一資料節點 (Data Node</strong>) 元件。</li>
+<li>使用<strong>WoodPecker</strong>作為訊息佇列 (建議使用以減少維護)</li>
+<li>啟用新的<strong>Streaming Node</strong>元件以改善效能</li>
+<li>停用傳統的<strong>索引節點</strong>(功能現在由資料節點處理)</li>
+<li>停用 Pulsar，改用 WoodPecker</li>
 </ul>
-<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>。</p>
-  </div>
-</li>
-</ul>
-<p>在上述指令中，<code translate="no">my-release</code> 是發行版名稱，而<code translate="no">milvus/milvus</code> 是本機安裝的圖表儲存庫。若要使用不同的名稱，請將<code translate="no">my-release</code> 替換成您認為合適的名稱。</p>
-<p>上述命令使用預設配置部署 Milvus 實例及其元件和相依性。要自訂這些設定，我們建議您使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>調整<a href="https://milvus.io/tools/sizing">工具</a>，根據您的實際資料大小調整配置，然後下載相應的 YAML 檔案。要瞭解有關配置參數的更多資訊，請參閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>。</p>
 <div class="alert note">
-  <ul>
-    <li>版本名稱只能包含字母、數字和破折號。版本名稱中不允許使用點。</li>
-    <li>使用 Helm 安裝 Milvus 時，預設命令列會安裝群集版本的 Milvus。獨立安裝 Milvus 時需要進一步設定。</li>
-    <li>根據<a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">Kubernetes 的廢棄 API 移轉指南</a>，PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本自 v1.25 起不再提供服務。建議您遷移艙單和 API 用戶端，改用<b>policy/v1</b>API 版本。<br/>對於仍在 Kubernetes v1.25 及更新版本上使用 PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本的使用者，作為變通方案，您可以執行下列指令來安裝 Milvus：<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
-    <li>請參閱<a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a>和<a href="https://helm.sh/docs/">Helm</a>以取得更多資訊。</li>
-  </ul>
+<p><strong>Milvus 2.6.x 的架構變更</strong></p>
+<ul>
+<li><strong>訊息佇列</strong>：現在推薦使用<strong>WoodPecker</strong>(與 Pulsar 相比，減少了基礎架構的維護)</li>
+<li><strong>新元件</strong>：引入<strong>串流節點</strong>，並預設啟用</li>
+<li><strong>合併元件</strong>：<strong>索引節點</strong>和<strong>資料節點合</strong>併為<strong>單一資料節點</strong></li>
+</ul>
+<p>如需完整的架構詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>。</p>
 </div>
-<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2.檢查 Milvus 群集狀態</h3><p>執行下列指令來檢查 Milvus 叢集中所有 Pod 的狀態。</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> pods
+<p><strong>替代訊息佇列選項：</strong></p>
+<p>如果您偏好使用<strong>Pulsar</strong>(傳統選擇) 而非 WoodPecker：</p>
+<pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>一旦所有 pod 都在運行，上述命令的輸出應該與下面相似：</p>
+<p><strong>接下來的步驟：</strong>上面的指令以建議的配置部署 Milvus。用於生產使用：</p>
+<ul>
+<li>使用<a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>根據您的資料大小優化設定</li>
+<li>檢閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>，瞭解進階配置選項</li>
+</ul>
+<div class="alert note">
+<p><strong>重要注意事項</strong></p>
+<ul>
+<li><strong>版本命名</strong>：僅使用字母、數字和破折號 (不允許點)</li>
+<li><strong>Kubernetes v1.25+</strong>: 如果遇到 PodDisruptionBudget 問題，請使用此變通方 法：<pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
+  --<span class="hljs-built_in">set</span> pulsar.bookkeeper.pdb.usePolicy=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> pulsar.broker.pdb.usePolicy=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> pulsar.proxy.pdb.usePolicy=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">set</span> pulsar.zookeeper.pdb.usePolicy=<span class="hljs-literal">false</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
+<p>如需詳細資訊，請參閱<a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a>和<a href="https://helm.sh/docs/">Helm 文件</a>。</p>
+</div>
+<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2.檢查 Milvus 群集狀態</h3><p>透過檢查 Pod 狀態來驗證您的部署是否成功：</p>
+<pre><code translate="no" class="language-bash">kubectl get pods
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>等待所有 Pod 都顯示「Running」狀態。</strong>在 v2.6.0 設定下，您應該會看到類似的 Pod：</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-2</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>datanode<span class="hljs-number">-68</span>cb87dcbd<span class="hljs-number">-4</span>khpm      <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
-my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>indexnode<span class="hljs-number">-5</span>c5f7b5bd9<span class="hljs-operator">-</span>l8hjg     <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>mixcoord<span class="hljs-number">-7</span>fb9488465<span class="hljs-operator">-</span>dmbbj      <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy<span class="hljs-number">-6</span>bd7f5587<span class="hljs-operator">-</span>ds2xv          <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>querynode<span class="hljs-number">-5</span>cd8fff495<span class="hljs-operator">-</span>k6gtg     <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
+my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>streaming<span class="hljs-operator">-</span>node<span class="hljs-operator">-</span>xxxxxxxxx       <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>minio<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>minio<span class="hljs-number">-1</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>minio<span class="hljs-number">-2</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -186,22 +196,34 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-0</span>                    <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-operator">-</span>metadata<span class="hljs-number">-98</span>zbr       <span class="hljs-number">0</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>   Completed  <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m24s
 <button class="copy-code-btn"></button></code></pre>
-<p>您也可以存取 Milvus WebUI，網址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，以瞭解更多關於您的 Milvus 實例的資訊。詳情請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3.將本機連接埠轉送至 Milvus</h3><p>執行下列指令，取得 Milvus 叢集服務的連接埠。</p>
-<pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
-=<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
-19530
+<p><strong>需要驗證的關鍵元件：</strong></p>
+<ul>
+<li><strong>Milvus 元件</strong>：<code translate="no">mixcoord</code>,<code translate="no">datanode</code>,<code translate="no">querynode</code>,<code translate="no">proxy</code> 、<code translate="no">streaming-node</code></li>
+<li><strong>依賴項目</strong>：<code translate="no">etcd</code> (元資料)、<code translate="no">minio</code> (物件儲存)、<code translate="no">pulsar</code> (訊息佇列)</li>
+</ul>
+<p>一旦設定好連接埠轉址，您也可以在<code translate="no">http://127.0.0.1:9091/webui/</code> 存取<strong>Milvus WebUI</strong>(請參閱下一步)。詳情請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
+<h3 id="3-Connect-to-Milvus" class="common-anchor-header">3.連接至 Milvus</h3><p>若要從 Kubernetes 外部連線到您的 Milvus 叢集，您需要設定連接埠轉送。</p>
+<p><strong>設定連接埠轉址：</strong></p>
+<pre><code translate="no" class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre>
-<p>輸出顯示 Milvus 實例在預設的<strong>19530</strong> 連接埠提供服務。</p>
+<p>此指令會將您的本機連接埠<code translate="no">27017</code> 轉送至 Milvus 連接埠<code translate="no">19530</code> 。您應該會看到</p>
+<pre><code translate="no"><span class="hljs-attribute">Forwarding</span> from <span class="hljs-number">127.0.0.1:27017</span> -&gt; <span class="hljs-number">19530</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>連線詳細資訊：</strong></p>
+<ul>
+<li><strong>本地連線</strong>：<code translate="no">localhost:27017</code></li>
+<li><strong>Milvus 預設連接埠</strong>：<code translate="no">19530</code></li>
+</ul>
 <div class="alert note">
-<p>如果您以獨立模式部署 Milvus，請將 Pod 名稱從<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 改為<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 。</p>
+<p><strong>連接埠轉址的選項：</strong></p>
+<ul>
+<li><strong>自動指定本機連接埠</strong>：使用<code translate="no">:19530</code> 而非<code translate="no">27017:19530</code> 讓 kubectl 選擇可用的連接埠</li>
+<li><strong>在所有介面上聆聽</strong>：新增<code translate="no">--address 0.0.0.0</code> 以允許其他機器的連線：<pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+<button class="copy-code-btn"></button></code></pre></li>
+<li><strong>獨立部署</strong>：如果使用獨立模式，服務名稱保持不變</li>
+</ul>
 </div>
-<p>然後執行下列指令，將本機連接埠轉寄到 Milvus 服務的連接埠。</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus 27017:19530
-Forwarding from 127.0.0.1:27017 -&gt; 19530
-<button class="copy-code-btn"></button></code></pre>
-<p>您可以選擇在上述指令中使用<code translate="no">:19530</code> 而不是<code translate="no">27017:19530</code> ，讓<code translate="no">kubectl</code> 替您分配一個本機連接埠，這樣您就不必管理連接埠衝突。</p>
-<p>預設情況下，kubectl 的連接埠轉發只會在<code translate="no">localhost</code> 上監聽。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。下列指令會使 port-forward 聆聽主機上所有的 IP 位址。</p>
+<p>使用 Milvus 時，<strong>保持開啟此終端機</strong>。現在您可以使用任何 Milvus SDK 連線到 Milvus，網址是<code translate="no">localhost:27017</code> 。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(可選）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,10 +239,9 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以透過編輯<code translate="no">values.yaml</code> 檔案更新 Milvus 叢集的配置，然後再套用一次。</p>
+    </button></h2><p>您可以透過編輯<code translate="no">values.yaml</code> 檔案更新 Milvus 叢集的配置，並再次套用。</p>
 <ol>
-<li>建立具有所需配置的<code translate="no">values.yaml</code> 檔案。</li>
-</ol>
+<li><p>建立具有所需配置的<code translate="no">values.yaml</code> 檔案。</p>
 <p>以下假設您要啟用<code translate="no">proxy.http</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -228,17 +249,17 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
       http:
         enabled: true
 </span><button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>套用<code translate="no">values.yaml</code> 檔案。</li>
+<p>有關適用的組態項目，請參閱<a href="/docs/zh-hant/system_configuration.md">系統組態</a>。</p></li>
+<li><p>套用<code translate="no">values.yaml</code> 檔案。</p></li>
 </ol>
-<pre><code translate="no" class="language-shell">helm upgrade my-release milvus/milvus --namespace my-namespace -f values.yaml
+<pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus --namespace my-namespace -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <ol>
-<li>檢查更新的組態。</li>
-</ol>
+<li><p>檢查更新的組態。</p>
 <pre><code translate="no" class="language-shell">helm get values my-release
 <button class="copy-code-btn"></button></code></pre>
-<p>輸出應顯示更新的組態。</p>
+<p>輸出應顯示更新的組態。</p></li>
+</ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">存取 Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -277,13 +298,13 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>如果您處在網路受限的環境，請依照本節的步驟啟動 Milvus 叢集。</p>
 <h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1.取得 Milvus 清單</h3><p>執行下列命令取得 Milvus 清單。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release milvus/milvus &gt; milvus_manifest.yaml</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release zilliztech/milvus &gt; milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>上述命令會渲染 Milvus 叢集的圖表模板，並將輸出保存到一個名為<code translate="no">milvus_manifest.yaml</code> 的艙單檔案中。使用此清單，您可以在獨立的 Pod 中安裝 Milvus 叢集及其元件和相依性。</p>
 <div class="alert note">
 <ul>
-<li>若要在單機模式下安裝 Milvus 實例，即所有 Milvus 元件都包含在單一 pod 中，您應該執行<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> 來渲染單機模式下 Milvus 實例的圖表模板。</li>
-<li>要變更 Milvus 配置，下載 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a>範本，將您所需的設定放入其中，並使用<code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code> 來渲染相應的艙單。</li>
+<li>若要在單機模式下安裝 Milvus 實例，即所有 Milvus 元件都包含在單一 pod 中，您應該執行<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> 來渲染單機模式下 Milvus 實例的圖表模板。</li>
+<li>要變更 Milvus 配置，下載 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a>範本，將您所需的設定放入其中，並使用<code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> 來渲染相應的艙單。</li>
 </ul>
 </div>
 <h3 id="2-Download-image-pulling-script" class="common-anchor-header">2.下載影像拉取腳本</h3><p>image-pulling script 是用 Python 開發的。您應該在<code translate="no">requirement.txt</code> 檔案中下載腳本及其相依性。</p>

@@ -19,7 +19,7 @@ title: 리소스 그룹 관리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus에서는 리소스 그룹을 사용하여 특정 쿼리 노드를 다른 쿼리 노드로부터 물리적으로 격리할 수 있습니다. 이 가이드에서는 사용자 정의 리소스 그룹을 생성하고 관리하는 방법과 그룹 간에 노드를 전송하는 방법을 안내합니다.</p>
+    </button></h1><p>Milvus에서는 리소스 그룹을 사용하여 특정 쿼리 노드를 다른 쿼리 노드로부터 물리적으로 격리할 수 있습니다. 이 가이드에서는 사용자 정의 리소스 그룹을 생성 및 관리하고 그룹 간에 노드를 전송하는 방법을 안내합니다.</p>
 <h2 id="What-is-a-resource-group" class="common-anchor-header">리소스 그룹이란?<button data-href="#What-is-a-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: 리소스 그룹 관리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>리소스 그룹은 Milvus 클러스터의 쿼리 노드 중 일부 또는 전부를 보유할 수 있습니다. 리소스 그룹 간에 쿼리 노드를 할당하는 방법은 가장 적합한 것을 기준으로 결정합니다. 예를 들어, 다중 컬렉션 시나리오에서는 각 리소스 그룹에 적절한 수의 쿼리 노드를 할당하고 컬렉션을 다른 리소스 그룹에 로드하여 각 컬렉션 내의 작업이 다른 컬렉션의 작업과 물리적으로 독립적으로 이루어지도록 할 수 있습니다.</p>
+    </button></h2><p>리소스 그룹은 Milvus 클러스터의 쿼리 노드 중 일부 또는 전부를 보유할 수 있습니다. 리소스 그룹 간에 쿼리 노드를 할당하는 방법은 사용자에게 가장 적합한 방법을 기준으로 결정합니다. 예를 들어, 다중 컬렉션 시나리오에서는 각 리소스 그룹에 적절한 수의 쿼리 노드를 할당하고 컬렉션을 다른 리소스 그룹에 로드하여 각 컬렉션 내의 작업이 다른 컬렉션의 작업과 물리적으로 독립적으로 이루어지도록 할 수 있습니다.</p>
 <p>Milvus 인스턴스는 시작할 때 모든 쿼리 노드를 보유하기 위해 기본 리소스 그룹을 유지하며, 그 이름은 <strong>__default_resource_group입니다</strong>.</p>
 <p>버전 2.4.1부터 Milvus는 선언적 리소스 그룹 API를 제공하며, 이전 리소스 그룹 API는 더 이상 사용되지 않습니다. 새로운 선언적 API를 통해 사용자는 클라우드 네이티브 환경에서 더 쉽게 보조 개발을 수행할 수 있습니다.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">리소스 그룹의 개념<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ title: 리소스 그룹 관리
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>이 페이지의 모든 코드 샘플은 PyMilvus 2.6.0b0 버전입니다. 실행하기 전에 PyMilvus 설치를 업그레이드하세요.</p>
+<p>이 페이지의 모든 코드 샘플은 PyMilvus 2.6.0 버전입니다. 실행하기 전에 PyMilvus 설치를 업그레이드하세요.</p>
 </div>
 <ol>
 <li><p>리소스 그룹을 생성합니다.</p>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p><code translate="no">_resource_groups</code> 은 선택적 매개변수이며, 이 매개변수를 지정하지 않으면 Milvus가 기본 리소스 그룹의 쿼리 노드에 복제본을 로드하도록 합니다.</p>
 <p>Milus가 컬렉션의 각 복제본을 별도의 리소스 그룹에 로드하도록 하려면 리소스 그룹의 수가 복제본 수와 같은지 확인하세요.</p></li>
 <li><p>리소스 그룹 간에 복제본을 전송합니다.</p>
-<p>Milus는 <a href="/docs/ko/v2.6.x/replica.md">복제본을</a> 사용하여 여러 쿼리 노드에 분산된 <a href="/docs/ko/v2.6.x/glossary.md#Segment">세그먼트</a> 간에 로드 밸런싱을 달성합니다. 다음과 같이 컬렉션의 특정 복제본을 한 리소스 그룹에서 다른 리소스 그룹으로 이동할 수 있습니다:</p>
+<p>Milus는 <a href="/docs/ko/replica.md">복제본을</a> 사용하여 여러 쿼리 노드에 분산된 <a href="/docs/ko/glossary.md#Segment">세그먼트</a> 간에 로드 밸런싱을 달성합니다. 다음과 같이 컬렉션의 특정 복제본을 한 리소스 그룹에서 다른 리소스 그룹으로 이동할 수 있습니다:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -329,7 +329,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>단일 컬렉션의 복제본과 리소스 그룹은 N 대 N 관계를 갖습니다.</li>
-<li>단일 컬렉션의 여러 복제본이 하나의 리소스 그룹에 로드되면 해당 리소스 그룹의 쿼리 노드가 복제본 간에 균등하게 분산되어 각 복제본의 쿼리 노드 수의 차이가 1을 초과하지 않도록 합니다.</li>
+<li>단일 컬렉션의 여러 복제본이 하나의 리소스 그룹에 로드되면 해당 리소스 그룹의 쿼리 노드가 복제본 간에 균등하게 분산되어 각 복제본이 보유한 쿼리 노드 수의 차이가 1을 초과하지 않도록 보장합니다.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>멀티테넌트 Milvus 인스턴스를 배포하려면 다음을 따르세요:</p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/rbac.md">RBAC 활성화</a></li>
-<li><a href="/docs/ko/v2.6.x/users_and_roles.md">사용자 및 역할</a></li>
+<li><a href="/docs/ko/rbac.md">RBAC 활성화</a></li>
+<li><a href="/docs/ko/users_and_roles.md">사용자 및 역할</a></li>
 </ul>

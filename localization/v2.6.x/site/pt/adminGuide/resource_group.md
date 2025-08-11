@@ -37,7 +37,7 @@ title: Gerenciar grupos de recursos
       </svg>
     </button></h2><p>Um grupo de recursos pode conter vários ou todos os nós de consulta em um cluster Milvus. O usuário decide como deseja alocar os nós de consulta entre os grupos de recursos com base no que faz mais sentido para ele. Por exemplo, num cenário de várias colecções, pode atribuir um número adequado de nós de consulta a cada grupo de recursos e carregar colecções em diferentes grupos de recursos, de modo a que as operações dentro de cada coleção sejam fisicamente independentes das de outras colecções.</p>
 <p>Note-se que uma instância do Milvus mantém um grupo de recursos predefinido para conter todos os nós de consulta no arranque e dá-lhe o nome de <strong>__default_resource_group</strong>.</p>
-<p>A partir da versão 2.4.1, o Milvus fornece uma API declarativa de grupo de recursos, enquanto a antiga API de grupo de recursos foi descontinuada. A nova API declarativa permite aos utilizadores alcançar a idempotência, para facilitar o desenvolvimento secundário em ambientes cloud-native.</p>
+<p>A partir da versão 2.4.1, Milvus fornece uma API declarativa de grupo de recursos, enquanto a antiga API de grupo de recursos foi descontinuada. A nova API declarativa permite aos utilizadores alcançar a idempotência, para facilitar o desenvolvimento secundário em ambientes cloud-native.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Conceitos de grupo de recursos<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ title: Gerenciar grupos de recursos
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Todos os exemplos de código nesta página estão no PyMilvus 2.6.0b0. Atualize sua instalação do PyMilvus antes de executá-los.</p>
+<p>Todos os exemplos de código nesta página estão no PyMilvus 2.6.0. Atualize sua instalação do PyMilvus antes de executá-los.</p>
 </div>
 <ol>
 <li><p>Criar um grupo de recursos.</p>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>Observe que <code translate="no">_resource_groups</code> é um parâmetro opcional e, se ele não for especificado, o Milvus carregará as réplicas nos nós de consulta no grupo de recursos padrão.</p>
 <p>Para que o Milus carregue cada réplica de uma coleção em um grupo de recursos separado, certifique-se de que o número de grupos de recursos seja igual ao número de réplicas.</p></li>
 <li><p>Transferir réplicas entre grupos de recursos.</p>
-<p>O Milvus usa <a href="/docs/pt/v2.6.x/replica.md">réplicas</a> para obter o balanceamento de carga entre <a href="/docs/pt/v2.6.x/glossary.md#Segment">segmentos</a> distribuídos em vários nós de consulta. É possível mover determinadas réplicas de uma coleção de um grupo de recursos para outro da seguinte forma:</p>
+<p>O Milvus usa <a href="/docs/pt/replica.md">réplicas</a> para obter o balanceamento de carga entre <a href="/docs/pt/glossary.md#Segment">segmentos</a> distribuídos em vários nós de consulta. É possível mover determinadas réplicas de uma coleção de um grupo de recursos para outro da seguinte forma:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -231,7 +231,7 @@ except Exception:
       </svg>
     </button></h2><p>Atualmente, o Milvus não pode ser escalado de forma independente em ambientes nativos da nuvem. No entanto, ao usar a <strong>API Declarative Resource Group</strong> em conjunto com a orquestração de contêineres, o Milvus pode facilmente obter o isolamento e o gerenciamento de recursos para QueryNodes. Aqui está uma boa prática para gerenciar QueryNodes em um ambiente de nuvem:</p>
 <ol>
-<li><p>Por padrão, o Milvus cria um <strong>__default_resource_group</strong>. Este grupo de recursos não pode ser eliminado e serve igualmente de grupo de recursos de carregamento por defeito para todas as colecções e os QueryNodes redundantes são-lhe sempre atribuídos. Por conseguinte, podemos criar um grupo de recursos pendentes para manter os recursos QueryNode não utilizados, impedindo que os recursos QueryNode sejam ocupados pelo <strong>__default_resource_group</strong>.</p>
+<li><p>Por padrão, o Milvus cria um <strong>__default_resource_group</strong>. Este grupo de recursos não pode ser eliminado e serve igualmente de grupo de recursos de carregamento por defeito para todas as colecções e os QueryNodes redundantes são-lhe sempre atribuídos. Por conseguinte, podemos criar um grupo de recursos pendentes para manter os recursos QueryNode não utilizados, impedindo que os recursos QueryNode sejam ocupados pelo grupo <strong>__default_resource_group</strong>.</p>
 <p>Além disso, se aplicarmos rigorosamente a restrição <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, podemos controlar com precisão a atribuição de QueryNodes no cluster. Vamos assumir que existe atualmente apenas um QueryNode no cluster e inicializar o cluster. Aqui está um exemplo de configuração:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Para implementar uma instância Milvus multi-tenant, leia o seguinte:</p>
 <ul>
-<li><a href="/docs/pt/v2.6.x/rbac.md">Habilitar RBAC</a></li>
-<li><a href="/docs/pt/v2.6.x/users_and_roles.md">Utilizadores e funções</a></li>
+<li><a href="/docs/pt/rbac.md">Habilitar RBAC</a></li>
+<li><a href="/docs/pt/users_and_roles.md">Utilizadores e funções</a></li>
 </ul>

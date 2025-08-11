@@ -5,10 +5,10 @@ order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Milvus 운영자를 통해 Milvus 스탠드얼론 업그레이드 방법을 알아보세요.
-title: Milvus 오퍼레이터로 Milvus 스탠드얼론 업그레이드하기
+title: Milvus Operator로 Milvus 스탠드얼론 업그레이드하기
 ---
-<div class="tab-wrapper"><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-operator.md" class='active '>밀버스</a><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>컴포즈</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Milvus 오퍼레이터로 Milvus 스탠드얼론 업그레이드하기<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
+<div class="tab-wrapper"><a href="/docs/ko/upgrade_milvus_standalone-operator.md" class='active '>밀버스</a><a href="/docs/ko/upgrade_milvus_standalone-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/upgrade_milvus_standalone-docker.md" class=''>컴포즈</a></div>
+<h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Milvus Operator로 Milvus 스탠드얼론 업그레이드하기<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ title: Milvus 오퍼레이터로 Milvus 스탠드얼론 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드는 Milvus 오퍼레이터로 Milvus 스탠드얼론을 업그레이드하는 방법을 설명합니다.</p>
-<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">Milvus 오퍼레이터 업그레이드<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
+    </button></h1><p>이 가이드는 Milvus Operator를 사용하여 Milvus 독립 실행형 배포를 v2.5.x에서 v2.6.0으로 업그레이드하는 방법을 설명합니다.</p>
+<h2 id="Before-you-start" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,21 +39,26 @@ title: Milvus 오퍼레이터로 Milvus 스탠드얼론 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 명령을 실행하여 Milvus 오퍼레이터의 버전을 v1.3.0-rc1-hotfix로 업그레이드합니다.</p>
-<pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
-helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
-helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Milvus 운영자를 최신 버전으로 업그레이드한 후에는 다음과 같은 선택 사항이 있습니다:</p>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">v2.6.0의 새로운 기능</h3><p>Milvus 2.5.x에서 2.6.0으로 업그레이드하려면 아키텍처가 크게 변경됩니다:</p>
 <ul>
-<li>Milvus를 v2.2.3에서 업그레이드하려면 <a href="#Conduct-a-rolling-upgrade">롤링 업그레이드를 수행하면</a> 됩니다.</li>
-<li>v2.2.3 이전 부 릴리스에서 2.6.0-rc1로 Milvus를 업그레이드하려면 <a href="#Upgrade-Milvus-by-changing-its-image">이미지 버전을 변경하여 Milvus를 업그레이드하는</a> 것이 좋습니다.</li>
-<li>Milvus를 v2.1.x에서 2.6.0-rc1로 업그레이드하려면 실제 업그레이드 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</li>
+<li><strong>코디네이터 통합</strong>: 기존의 개별 코디네이터 (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>)가 단일 코디네이터로 통합되었습니다. <code translate="no">mixCoord</code></li>
+<li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
+<li><strong>구성 요소 제거</strong>: <code translate="no">indexNode</code> 제거 및 통합</li>
 </ul>
-<blockquote>
-<p><strong>참고</strong>: 한 번에 하나의 부 버전을 업그레이드하고 해당 부 버전의 최신 안정 릴리스를 사용하는 것이 좋습니다. 예를 들어 v2.4.x에서 v2.6.x로 업그레이드하는 경우 먼저 최신 v2.4.x로 업그레이드한 다음 최신 v2.5.x로, 마지막으로 v2.6.x로 업그레이드해야 기존 데이터 및 구성과 호환될 가능성이 높은 각 부 버전의 최신 안정 릴리스를 사용할 수 있습니다.</p>
-</blockquote>
-<h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">롤링 업그레이드 실시<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
+<p>이 업그레이드 프로세스는 새로운 아키텍처로의 적절한 마이그레이션을 보장합니다. 아키텍처 변경에 대한 자세한 내용은 <a href="/docs/ko/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하세요.</p>
+<h3 id="Requirements" class="common-anchor-header">요구 사항</h3><p><strong>시스템 요구 사항:</strong></p>
+<ul>
+<li>Milvus Operator를 통해 배포된 Milvus 독립형이 포함된 Kubernetes 클러스터.</li>
+<li><code translate="no">kubectl</code> 클러스터에 액세스하도록 구성된</li>
+<li>헬름 3.x 설치</li>
+</ul>
+<p><strong>호환성 요구 사항:</strong></p>
+<ul>
+<li>Milvus v2.6.0-rc1은 v2.6.0과 <strong>호환되지 않는다</strong>. 릴리스 후보에서 직접 업그레이드는 지원되지 않는다.</li>
+<li>현재 v2.6.0-rc1을 실행 중이며 데이터를 보존해야 하는 경우 <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">이 커뮤니티 가이드에서</a> 마이그레이션 지원을 참조하세요.</li>
+<li>v2.6.0으로 업그레이드하기 전에 v2.5.16 이상으로 <strong>업그레이드해야</strong> 합니다.</li>
+</ul>
+<h2 id="Upgrade-process" class="common-anchor-header">업그레이드 프로세스<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,46 +73,47 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.2.3부터는 Milvus 코디네이터가 활성-대기 모드에서 작동하도록 구성하고 롤링 업그레이드 기능을 활성화하여 코디네이터 업그레이드 중에 들어오는 요청에 응답할 수 있도록 할 수 있습니다. 이전 릴리스에서는 업그레이드 중에 코디네이터를 제거했다가 다시 생성해야 하므로 서비스 다운타임이 발생할 수 있습니다.</p>
-<p>Milvus 운영자는 Kubernetes에서 제공하는 롤링 업데이트 기능을 기반으로 종속성에 따라 배포를 순서대로 업데이트합니다. 또한 Milvus는 업그레이드 중에 구성 요소가 종속된 구성 요소와 호환성을 유지하도록 보장하는 메커니즘을 구현하여 잠재적인 서비스 중단 시간을 크게 줄입니다.</p>
-<p>롤링 업그레이드 기능은 기본적으로 비활성화되어 있습니다. 구성 파일을 통해 명시적으로 활성화해야 합니다.</p>
+    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">1단계: Milvus 운영자 업그레이드</h3><p>먼저 Milvus 운영자를 v1.3.0으로 업그레이드합니다:</p>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
+helm repo update zilliztech-milvus-operator
+helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
+<button class="copy-code-btn"></button></code></pre>
+<p>운영자 업그레이드를 확인합니다:</p>
+<pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">2단계: Milvus 스탠드얼론 업그레이드하기</h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 v2.5.16으로 업그레이드하기</h4><div class="alert-note">
+<p>독립 실행형 배포가 이미 v2.5.16 이상을 실행 중인 경우 이 단계를 건너뛰세요.</p>
+</div>
+<p>구성 파일 <code translate="no">milvusupgrade.yaml</code> 을 생성하여 v2.5.16으로 업그레이드합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 구성 파일에서 <code translate="no">spec.components.enableRollingUpdate</code> 을 <code translate="no">true</code> 으로 설정하고 <code translate="no">spec.components.image</code> 을 원하는 Milvus 버전으로 설정합니다.</p>
-<p>기본적으로 Milvus는 코디네이터에 대해 순차적으로 롤링 업그레이드를 수행하여 코디네이터 포드 이미지를 차례로 교체합니다. 업그레이드 시간을 줄이려면 <code translate="no">spec.components.imageUpdateMode</code> 을 <code translate="no">all</code> 으로 설정하여 Milvus가 모든 포드 이미지를 동시에 교체하도록 하세요.</p>
+<p>구성을 적용합니다:</p>
+<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
+<button class="copy-code-btn"></button></code></pre>
+<p>완료될 때까지 기다립니다:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
+kubectl get pods
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="22-Upgrade-to-v260" class="common-anchor-header">2.2 v2.6.0으로 업그레이드하기</h4><p>v2.5.16이 성공적으로 실행되면 v2.6.0으로 업그레이드하세요:</p>
+<p>구성 파일을 업데이트합니다(이 예에서는<code translate="no">milvusupgrade.yaml</code> ):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">all</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">spec.components.imageUpdateMode</code> 을 <code translate="no">rollingDowngrade</code> 으로 설정하여 Milvus가 코디네이터 파드 이미지를 하위 버전으로 대체하도록 할 수 있습니다.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingDowngrade</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:&lt;some-older-version&gt;</span>
+<p>최종 업그레이드를 적용합니다:</p>
+<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 구성을 YAML 파일(예: <code translate="no">milvusupgrade.yaml</code>)로 저장하고 다음과 같이 이 구성 파일을 Milvus 인스턴스에 패치합니다:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">이미지를 변경하여 Milvus 업그레이드<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">업그레이드 확인<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,63 +128,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>일반적인 경우에는 이미지를 변경하여 Milvus를 최신 버전으로 간단히 업데이트할 수 있습니다. 그러나 이러한 방식으로 Milvus를 업그레이드할 경우 일정 시간 동안 다운타임이 발생한다는 점에 유의하세요.</p>
-<p>다음과 같이 구성 파일을 작성하고 <strong>milvusupgrade.yaml로</strong> 저장합니다:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-    <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-<span class="hljs-attr">labels:</span>
-    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-comment"># Omit other fields ...</span>
-  <span class="hljs-attr">components:</span>
-   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
+    </button></h2><p>독립 실행형 배포에서 새 버전이 실행되고 있는지 확인합니다:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
+kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음을 실행하여 업그레이드를 수행합니다:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">메타데이터 마이그레이션<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus 2.2.0부터는 메타데이터가 이전 릴리즈의 메타데이터와 호환되지 않습니다. 다음 예제 코드 조각은 Milvus 2.1.4에서 Milvus v2.6.0-rc1로 업그레이드하는 경우를 가정합니다.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. 메타데이터 마이그레이션을 위한 <code translate="no">.yaml</code> 파일 만들기</h3><p>메타데이터 마이그레이션 파일을 만듭니다. 다음은 예시입니다. 설정 파일에 <code translate="no">name</code>, <code translate="no">sourceVersion</code>, <code translate="no">targetVersion</code> 을 지정해야 합니다. 다음 예에서는 <code translate="no">name</code> 을 <code translate="no">my-release-upgrade</code> 으로 , <code translate="no">sourceVersion</code> 을 <code translate="no">v2.1.4</code> 으로 , <code translate="no">targetVersion</code> 을 <code translate="no">v2.6.0-rc1</code> 으로 설정합니다. 즉, Milvus 인스턴스가 v2.1.4에서 v2.6.0-rc1로 업그레이드됩니다.</p>
-<pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-upgrade</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">milvus:</span>
-    <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
-    <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.6.0-rc1&quot;</span>
-  <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.6.0-rc1&quot;</span>
-  <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
-  <span class="hljs-comment"># operation: upgrade</span>
-  <span class="hljs-comment"># rollbackIfFailed: true</span>
-  <span class="hljs-comment"># backupPVC: &quot;&quot;</span>
-  <span class="hljs-comment"># maxRetry: 3</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. 새 구성 적용</h3><p>다음 명령을 실행하여 새 구성을 적용합니다.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/<span class="hljs-built_in">config</span>/samples/milvusupgrade.yaml
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. 메타데이터 마이그레이션 상태 확인</h3><p>다음 명령을 실행하여 메타데이터 마이그레이션 상태를 확인합니다.</p>
-<pre><code translate="no">kubectl <span class="hljs-keyword">describe</span> milvus <span class="hljs-keyword">release</span><span class="hljs-operator">-</span>name
-<button class="copy-code-btn"></button></code></pre>
-<p>출력에 <code translate="no">ready</code> 상태가 표시되면 메타데이터 마이그레이션이 성공했음을 의미합니다.</p>
-<p>또는 <code translate="no">kubectl get pod</code> 을 실행하여 모든 파드를 확인할 수도 있습니다. 모든 파드가 <code translate="no">ready</code> 이면 메타데이터 마이그레이션이 성공한 것입니다.</p>
-<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4. 삭제 <code translate="no">my-release-upgrade</code></h3><p>업그레이드가 성공하면 YAML 파일에서 <code translate="no">my-release-upgrade</code> 을 삭제합니다.</p>
+<p>추가 지원이 필요한 경우 <a href="https://milvus.io/docs">Milvus 설명서</a> 또는 <a href="https://github.com/milvus-io/milvus/discussions">커뮤니티 포럼을</a> 참조하세요.</p>

@@ -5,10 +5,10 @@ order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Saiba como atualizar o Milvus standalone com o Milvus operator.
-title: Atualizar o Milvus Standalone com o Milvus Operator
+title: Atualização do Milvus Standalone com o Milvus Operator
 ---
-<div class="tab-wrapper"><a href="/docs/pt/v2.6.x/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/pt/v2.6.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/pt/v2.6.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Atualizar o Milvus Standalone com o Milvus Operator<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
+<div class="tab-wrapper"><a href="/docs/pt/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/pt/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/pt/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
+<h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Atualização do Milvus Standalone com o Milvus Operator<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como atualizar o seu Milvus standalone com o Milvus Operator.</p>
-<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">Atualize seu Milvus Operator<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
+    </button></h1><p>Este guia descreve como atualizar a implementação autónoma do Milvus da versão 2.5.x para a versão 2.6.0 utilizando o Milvus Operator.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Antes de começar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,21 +39,26 @@ title: Atualizar o Milvus Standalone com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Execute o seguinte comando para atualizar a versão do seu Milvus Operator para v1.3.0-rc1-hotfix.</p>
-<pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
-helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
-helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Depois de ter atualizado o seu operador Milvus para a versão mais recente, tem as seguintes opções:</p>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">O que há de novo na v2.6.0</h3><p>A atualização do Milvus 2.5.x para o 2.6.0 envolve mudanças significativas na arquitetura:</p>
 <ul>
-<li>Para atualizar o Milvus a partir da versão 2.2.3, pode <a href="#Conduct-a-rolling-upgrade">efetuar uma atualização contínua</a>.</li>
-<li>Para atualizar o Milvus de uma versão secundária anterior à v2.2.3 para a 2.6.0-rc1, é aconselhável <a href="#Upgrade-Milvus-by-changing-its-image">atualizar o Milvus alterando a sua versão de imagem</a>.</li>
-<li>Para atualizar o Milvus da v2.1.x para a 2.6.0-rc1, é necessário <a href="#Migrate-the-metadata">migrar os metadados</a> antes da atualização propriamente dita.</li>
+<li><strong>Consolidação de coordenadores</strong>: Os coordenadores separados (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) foram consolidados num único <code translate="no">mixCoord</code></li>
+<li><strong>Novos componentes</strong>: Introdução do Streaming Node para um melhor processamento de dados</li>
+<li><strong>Remoção de componentes</strong>: <code translate="no">indexNode</code> removido e consolidado</li>
 </ul>
-<blockquote>
-<p><strong>Nota</strong>: É altamente recomendável atualizar uma versão secundária de cada vez e utilizar a última versão estável dessa versão secundária. Por exemplo, se estiver a atualizar da v2.4.x para a v2.6.x, deve primeiro atualizar para a v2.4.x mais recente, depois para a v2.5.x mais recente e, por fim, para a v2.6.x. Isto garante que está a utilizar a última versão estável de cada versão secundária, que é mais provável que seja compatível com os dados e configurações existentes.</p>
-</blockquote>
-<h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar uma atualização contínua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
+<p>Este processo de atualização assegura a migração adequada para a nova arquitetura. Para obter mais informações sobre as alterações à arquitetura, consulte a <a href="/docs/pt/architecture_overview.md">Descrição geral da arquitetura do Milvus</a>.</p>
+<h3 id="Requirements" class="common-anchor-header">Requisitos</h3><p><strong>Requisitos do sistema:</strong></p>
+<ul>
+<li>Cluster Kubernetes com Milvus autónomo implantado através do Milvus Operator</li>
+<li><code translate="no">kubectl</code> configurado para aceder ao seu cluster</li>
+<li>Helm 3.x instalado</li>
+</ul>
+<p><strong>Requisitos de compatibilidade:</strong></p>
+<ul>
+<li>O Milvus v2.6.0-rc1 <strong>não</strong> é <strong>compatível</strong> com a v2.6.0. Não são suportadas actualizações diretas a partir de versões candidatas.</li>
+<li>Se estiver a executar atualmente a v2.6.0-rc1 e precisar de preservar os seus dados, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">este guia da comunidade</a> para obter assistência na migração.</li>
+<li>É <strong>necessário</strong> atualizar para a versão 2.5.16 ou posterior antes de atualizar para a versão 2.6.0.</li>
+</ul>
+<h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,46 +73,47 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Desde a versão 2.2.3 do Milvus, é possível configurar os coordenadores do Milvus para trabalharem em modo de espera ativa e ativar a funcionalidade de atualização contínua, para que o Milvus possa responder aos pedidos recebidos durante as actualizações dos coordenadores. Nas versões anteriores, os coordenadores devem ser removidos e depois criados durante uma atualização, o que pode provocar um certo tempo de inatividade do serviço.</p>
-<p>Com base nas capacidades de atualização contínua fornecidas pela Kubernetes, o operador do Milvus impõe uma atualização ordenada das implementações de acordo com as suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que dependem deles durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
-<p>A funcionalidade de atualização contínua está desactivada por defeito. É necessário activá-la explicitamente através de um ficheiro de configuração.</p>
+    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Passo 1: Atualização do Milvus Operator</h3><p>Em primeiro lugar, actualize o seu Milvus Operator para a v1.3.0:</p>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
+helm repo update zilliztech-milvus-operator
+helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
+<button class="copy-code-btn"></button></code></pre>
+<p>Verificar a atualização do operador:</p>
+<pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">Passo 2: Atualização do seu Milvus standalone</h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 Atualização para a v2.5.16</h4><div class="alert-note">
+<p>Ignore este passo se a sua instalação autónoma já estiver a executar a versão 2.5.16 ou superior.</p>
+</div>
+<p>Crie um ficheiro de configuração <code translate="no">milvusupgrade.yaml</code> para atualizar para a v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste ficheiro de configuração acima, defina <code translate="no">spec.components.enableRollingUpdate</code> para <code translate="no">true</code> e defina <code translate="no">spec.components.image</code> para a versão desejada do Milvus.</p>
-<p>Por predefinição, o Milvus efectua uma atualização contínua para os coordenadores de forma ordenada, substituindo as imagens do pod do coordenador uma após a outra. Para reduzir o tempo de atualização, considere definir <code translate="no">spec.components.imageUpdateMode</code> como <code translate="no">all</code> para que o Milvus substitua todas as imagens de pod ao mesmo tempo.</p>
+<p>Aplicar a configuração:</p>
+<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
+<button class="copy-code-btn"></button></code></pre>
+<p>Aguarde a conclusão:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
+kubectl get pods
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="22-Upgrade-to-v260" class="common-anchor-header">2.2 Atualização para a v2.6.0</h4><p>Quando a v2.5.16 estiver a funcionar com êxito, actualize para a v2.6.0:</p>
+<p>Actualize o seu ficheiro de configuração (<code translate="no">milvusupgrade.yaml</code> neste exemplo):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">all</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Você pode definir <code translate="no">spec.components.imageUpdateMode</code> como <code translate="no">rollingDowngrade</code> para que o Milvus substitua as imagens do pod coordenador por uma versão inferior.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingDowngrade</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:&lt;some-older-version&gt;</span>
+<p>Aplicar a atualização final:</p>
+<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
 <button class="copy-code-btn"></button></code></pre>
-<p>Em seguida, salve sua configuração como um arquivo YAML (por exemplo, <code translate="no">milvusupgrade.yaml</code>) e faça o patch desse arquivo de configuração para sua instância do Milvus da seguinte forma:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Atualizar o Milvus alterando sua imagem<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Verificar a atualização<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,63 +128,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em casos normais, pode simplesmente atualizar o seu Milvus para a versão mais recente alterando a sua imagem. No entanto, tenha em atenção que haverá um certo tempo de inatividade ao atualizar o Milvus desta forma.</p>
-<p>Crie um ficheiro de configuração da seguinte forma e guarde-o como <strong>milvusupgrade.yaml</strong>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-    <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-<span class="hljs-attr">labels:</span>
-    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-comment"># Omit other fields ...</span>
-  <span class="hljs-attr">components:</span>
-   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
+    </button></h2><p>Confirme se a sua implementação autónoma está a executar a nova versão:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
+kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Em seguida, execute o seguinte para realizar a atualização:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">Migrar os metadados<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Desde o Milvus 2.2.0, os metadados são incompatíveis com os das versões anteriores. Os seguintes exemplos assumem uma atualização do Milvus 2.1.4 para o Milvus v2.6.0-rc1.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Criar um ficheiro <code translate="no">.yaml</code> para migração de metadados</h3><p>Crie um ficheiro de migração de metadados. Segue-se um exemplo. É necessário especificar <code translate="no">name</code>, <code translate="no">sourceVersion</code> e <code translate="no">targetVersion</code> no ficheiro de configuração. O exemplo seguinte define <code translate="no">name</code> para <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> para <code translate="no">v2.1.4</code>, e <code translate="no">targetVersion</code> para <code translate="no">v2.6.0-rc1</code>. Isto significa que a sua instância Milvus será actualizada da v2.1.4 para a v2.6.0-rc1.</p>
-<pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-upgrade</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">milvus:</span>
-    <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
-    <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.6.0-rc1&quot;</span>
-  <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.6.0-rc1&quot;</span>
-  <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
-  <span class="hljs-comment"># operation: upgrade</span>
-  <span class="hljs-comment"># rollbackIfFailed: true</span>
-  <span class="hljs-comment"># backupPVC: &quot;&quot;</span>
-  <span class="hljs-comment"># maxRetry: 3</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Aplicar a nova configuração</h3><p>Execute o seguinte comando para aplicar a nova configuração.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/<span class="hljs-built_in">config</span>/samples/milvusupgrade.yaml
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Verificar o estado da migração de metadados</h3><p>Execute o seguinte comando para verificar o estado da migração de metadados.</p>
-<pre><code translate="no">kubectl <span class="hljs-keyword">describe</span> milvus <span class="hljs-keyword">release</span><span class="hljs-operator">-</span>name
-<button class="copy-code-btn"></button></code></pre>
-<p>O estado de <code translate="no">ready</code> na saída significa que a migração de metadados foi bem sucedida.</p>
-<p>Ou pode também executar <code translate="no">kubectl get pod</code> para verificar todos os pods. Se todos os pods forem <code translate="no">ready</code>, a migração de metadados será bem-sucedida.</p>
-<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4. Eliminar <code translate="no">my-release-upgrade</code></h3><p>Quando a atualização for bem sucedida, elimine <code translate="no">my-release-upgrade</code> no ficheiro YAML.</p>
+<p>Para obter suporte adicional, consulte a <a href="https://milvus.io/docs">documentação do Milvus</a> ou o <a href="https://github.com/milvus-io/milvus/discussions">fórum da comunidade</a>.</p>

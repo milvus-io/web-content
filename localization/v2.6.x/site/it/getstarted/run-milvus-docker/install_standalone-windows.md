@@ -56,7 +56,7 @@ title: Eseguire Milvus in Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fornisce uno script di installazione per installarlo come contenitore Docker. Una volta installato Docker Desktop su Microsoft Windows, si può accedere alla CLI di Docker da PowerShell o dal Prompt dei comandi di Windows in modalità <strong>amministratore</strong> e da WSL 2. </p>
+    </button></h2><p>Milvus fornisce uno script di installazione per installarlo come contenitore Docker. Dopo aver installato Docker Desktop su Microsoft Windows, è possibile accedere alla CLI di Docker da PowerShell o dal Prompt dei comandi di Windows in modalità <strong>amministratore</strong> e da WSL 2. </p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Da PowerShell o dal Prompt dei comandi di Windows</h3><p>Se avete più familiarità con PowerShell o il Prompt dei comandi di Windows, il prompt dei comandi è il seguente.</p>
 <ol>
 <li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il pulsante destro del mouse e selezionando <strong>Esegui come amministratore</strong>.</p></li>
@@ -74,7 +74,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <p>Dopo aver eseguito lo script di installazione.</p>
 <ul>
 <li><p>È stato avviato un contenitore Docker chiamato <strong>milvus-standalone</strong> sulla porta <strong>19530</strong>.</p></li>
-<li><p>Un embed etcd è installato insieme a Milvus nello stesso contenitore e serve alla porta <strong>2379</strong>. Il suo file di configurazione è mappato su <strong>embedEtcd.yaml</strong> nella cartella corrente.</p></li>
+<li><p>Un embed etcd è stato installato insieme a Milvus nello stesso contenitore e serve alla porta <strong>2379</strong>. Il suo file di configurazione è mappato su <strong>embedEtcd.yaml</strong> nella cartella corrente.</p></li>
 <li><p>Il volume di dati di Milvus è mappato su <strong>volumes/milvus</strong> nella cartella corrente.</p></li>
 </ul>
 <p>È possibile utilizzare i seguenti comandi per gestire il contenitore Milvus e i dati memorizzati.</p>
@@ -144,7 +144,7 @@ Delete successfully.​
 <li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il pulsante destro del mouse e selezionando <strong>Esegui come amministratore</strong>.</p></li>
 <li><p>Eseguite i seguenti comandi in PowerShell o nel Prompt dei comandi di Windows per scaricare il file di configurazione di Docker Compose per Milvus Standalone e avviare Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -153,14 +153,14 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>A seconda della connessione di rete, il download delle immagini per l'installazione di Milvus potrebbe richiedere un po' di tempo. Una volta che i contenitori denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, si può notare che</p>
+<p>A seconda della connessione di rete, il download delle immagini per l'installazione di Milvus potrebbe richiedere un po' di tempo. Una volta che i contenitori denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, si può osservare che</p>
 <ul>
 <li><p>Il contenitore <strong>milvus-etcd</strong> non espone alcuna porta all'host e mappa i suoi dati nei <strong>volumi/etcd</strong> della cartella corrente.</p></li>
 <li><p>Il contenitore <strong>milvus-minio</strong> serve le porte <strong>9090</strong> e <strong>9091</strong> localmente con le credenziali di autenticazione predefinite e mappa i suoi dati su <strong>volumi/minio</strong> nella cartella corrente.</p></li>
 <li><p>Il contenitore <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i suoi dati su <strong>volumi/milvus</strong> nella cartella corrente.</p></li>
 </ul></li>
 </ol>
-<p>È inoltre possibile richiamare la versione Linux dei comandi di Docker Compose se si dispone di WSL 2.</p>
+<p>È anche possibile richiamare la versione Linux dei comandi di Docker Compose se si dispone di WSL 2.</p>
 <h3 id="From-WSL-2​" class="common-anchor-header">Da WSL 2</h3><p>La procedura è simile a quella dell'uso di Docker Compose per installare Milvus nei sistemi Linux.</p>
 <ol>
 <li><p>Avviare WSL 2.</p>
@@ -170,7 +170,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Scaricare il file di configurazione di Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Avviare Milvus.</p>

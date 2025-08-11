@@ -112,7 +112,7 @@ Start successfully.​
 To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>你可以使用以下命令来管理 Milvus 容器和存储的数据。</p>
+<p>你可以使用以下命令管理 Milvus 容器和存储的数据。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Stop Milvus​</span>
 $ bash standalone_embed.sh stop​
 Stop successfully.​
@@ -144,7 +144,7 @@ Delete successfully.​
 <li><p>在管理员模式下右击并选择<strong>以管理员身份运行</strong>，打开 Docker Desktop。</p></li>
 <li><p>在 PowerShell 或 Windows 命令提示符中运行以下命令，为 Milvus Standalone 下载 Docker Compose 配置文件并启动 Milvus。</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -170,7 +170,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下载 Milvus 配置文件。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>启动 Milvus。</p>

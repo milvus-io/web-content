@@ -92,21 +92,27 @@
                 "children": []
               },
               {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 1,
+                "children": []
+              },
+              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "Docker 桌面（Windows）",
                 "id": "install_standalone-windows.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               }
             ]
@@ -1432,6 +1438,25 @@
         ]
       },
       {
+        "label": "升级",
+        "id": "upgrade_milvus",
+        "order": 7,
+        "children": [
+          {
+            "label": "升级 Milvus 集群",
+            "id": "upgrade_milvus_cluster-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "升级 Milvus Standalone",
+            "id": "upgrade_milvus_standalone-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "监控、警报和日志",
         "id": "monitor_alert_log",
         "order": 8,
@@ -1624,7 +1649,7 @@
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [

@@ -57,7 +57,7 @@ title: Executar o Milvus com o Docker Compose (Linux)
       </svg>
     </button></h2><p>O Milvus fornece um arquivo de configuração do Docker Compose no repositório do Milvus. Para instalar o Milvus usando o Docker Compose, basta executar</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,8 +67,15 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>O que há de novo na v2.6.0:</strong></p>
 <ul>
-<li><p>Se não conseguir executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se este for o caso, é aconselhável migrar para o Docker Compose V2 devido às notas nesta <a href="https://docs.docker.com/compose/">página</a>.</p></li>
+<li><strong>Arquitetura aprimorada</strong>: Apresenta o novo nó de streaming e componentes otimizados</li>
+<li><strong>Dependências atualizadas</strong>: Inclui as versões mais recentes do MinIO e do etcd</li>
+<li><strong>Configuração aprimorada</strong>: Configurações otimizadas para melhor desempenho</li>
+</ul>
+<p>Sempre baixe a configuração mais recente do Docker Compose para garantir a compatibilidade com os recursos da v2.6.0.</p>
+<ul>
+<li><p>Se você não conseguiu executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se este for o caso, é aconselhável migrar para o Docker Compose V2 devido às notas nesta <a href="https://docs.docker.com/compose/">página</a>.</p></li>
 <li><p>Se tiver algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o apoio necessário.</p></li>
 </ul>
 </div>
@@ -107,24 +114,20 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Para atualizar a configuração do Milvus de acordo com as suas necessidades, é necessário modificar o ficheiro <code translate="no">/milvus/configs/user.yaml</code> no contentor <code translate="no">milvus-standalone</code>.</p>
 <ol>
-<li>Aceda ao contentor <code translate="no">milvus-standalone</code>.</li>
-</ol>
+<li><p>Aceda ao contentor <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Adicione configurações adicionais para substituir as configurações padrão. A seguir, presume-se que você precisa substituir a configuração padrão <code translate="no">proxy.healthCheckTimeout</code>. Para obter os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">Configuração do sistema</a>.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Adicione configurações adicionais para substituir as configurações padrão. A seguir, presume-se que você precisa substituir a configuração padrão <code translate="no">proxy.healthCheckTimeout</code>. Para obter os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">Configuração do sistema</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Reinicie o contentor <code translate="no">milvus-standalone</code> para aplicar as alterações.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Reinicie o contentor <code translate="no">milvus-standalone</code> para aplicar as alterações.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
-<button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Parar e eliminar o Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,8 +178,8 @@ EOF
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
-<li><p>Implantar seu cluster Milvus em nuvens:</p>
+<li><p><a href="/docs/pt/scaleout.md">Escalar o cluster do Milvus</a>.</p></li>
+<li><p>Implante seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>
@@ -185,6 +188,6 @@ EOF
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore o <a href="https://github.com/zilliztech/attu">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

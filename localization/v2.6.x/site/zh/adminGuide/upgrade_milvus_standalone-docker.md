@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: 了解如何使用 Docker Compose 升级 Milvus Standalone。
 title: 使用 Docker Compose 升级 Milvus 单机版
 ---
-<div class="tab-wrapper"><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升级 Milvus 单机版<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,12 +23,8 @@ title: 使用 Docker Compose 升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题介绍如何使用 Docker Compose 升级 Milvus。</p>
-<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.6.0-rc1 之前，你需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
-<div class="alter note">
-<p>出于安全考虑，Milvus 在发布 v2.2.5 时将其 MinIO 升级到 RELEASE.2023-03-20T20-16-18Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
-</div>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">通过更改映像升级 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+    </button></h1><p>本指南介绍如何使用 Docker Compose 将 Milvus Standalone 部署从 v2.5.x 升级到 v2.6.0。</p>
+<h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,20 +39,80 @@ title: 使用 Docker Compose 升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在正常情况下，可以按以下方法升级 Milvus：</p>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">v2.6.0 的新功能</h3><p>从 Milvus 2.5.x 升级到 2.6.0 涉及重大架构变更：</p>
+<ul>
+<li><strong>协调器合并</strong>：传统的独立协调器（<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code> ）已合并为单一协调器。<code translate="no">mixCoord</code></li>
+<li><strong>新组件</strong>：引入流节点，增强数据处理能力</li>
+<li><strong>删除组件</strong>：删除并合并<code translate="no">indexNode</code> </li>
+</ul>
+<p>此升级过程可确保向新架构的适当迁移。有关架构变化的更多信息，请参阅<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>。</p>
+<h3 id="Requirements" class="common-anchor-header">系统要求</h3><p><strong>系统要求：</strong></p>
+<ul>
+<li>已安装 Docker 和 Docker Compose</li>
+<li>通过 Docker Compose 部署 Milvus 单机版</li>
+</ul>
+<p><strong>兼容性要求：</strong></p>
+<ul>
+<li>Milvus v2.6.0-rc1 与 v2.6.0<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
+<li>如果您当前正在运行 v2.6.0-rc1，并需要保留数据，请参考<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">本社区指南</a>以获取迁移帮助。</li>
+<li>在升级到 v2.6.0 之前<strong>，必须</strong>升级到 v2.5.16 或更高版本。</li>
+</ul>
+<div class="alter note">
+<p>出于安全考虑，Milvus 在发布 v2.6.0 时将 MinIO 升级到 RELEASE.2024-12-18T13-15-44Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
+</div>
+<h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">第 1 步：升级到版本 2.5.16</h3><div class="alert note">
+<p>如果您的独立部署已在运行 v2.5.16 或更高版本，请跳过此步骤。</p>
+</div>
 <ol>
-<li><p>在<code translate="no">docker-compose.yaml</code> 中更改 Milvus 映像标记。</p>
+<li><p>编辑现有的<code translate="no">docker-compose.yaml</code> 文件，将 Milvus 映像标记更新为 v2.5.16：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0-rc1</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>运行以下命令执行升级。</p>
-<pre><code translate="no" class="language-shell">docker compose down
+<li><p>应用升级到 v2.5.16：</p>
+<pre><code translate="no" class="language-bash">docker compose down
+docker compose up -d
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>验证 v2.5.16 升级：</p>
+<pre><code translate="no" class="language-bash">docker compose ps
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<h3 id="Step-2-Upgrade-to-v260" class="common-anchor-header">步骤 2：升级至 v2.6.0</h3><p>v2.5.16 成功运行后，升级到 v2.6.0：</p>
+<ol>
+<li><p>编辑现有的<code translate="no">docker-compose.yaml</code> 文件，更新 Milvus 和 MinIO 图像标签：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">minio/minio:RELEASE.2024-12-18T13-15-44Z</span>
+
+<span class="hljs-string">...</span>
+<span class="hljs-attr">standalone:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>应用最终升级：</p>
+<pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">迁移元数据<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">验证升级<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,40 +127,13 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ol>
-<li><p>停止所有 Milvus 组件。</p>
-<pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>为元迁移准备配置文件<code translate="no">migration.yaml</code> 。</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
-<span class="hljs-attr">cmd:</span>
-  <span class="hljs-comment"># Option: run/backup/rollback</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">run</span>
-  <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
-<span class="hljs-attr">config:</span>
-  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.0</span><span class="hljs-string">-rc1</span>
-  <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
-<span class="hljs-attr">metastore:</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
-<span class="hljs-attr">etcd:</span>
-  <span class="hljs-attr">endpoints:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">milvus-etcd:2379</span>  <span class="hljs-comment"># Use the etcd container name</span>
-  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">by-dev</span> <span class="hljs-comment"># The root path where data is stored in etcd</span>
-  <span class="hljs-attr">metaSubPath:</span> <span class="hljs-string">meta</span>
-  <span class="hljs-attr">kvSubPath:</span> <span class="hljs-string">kv</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>运行迁移容器。</p>
-<pre><code translate="no"><span class="hljs-comment"># Suppose your docker-compose run with the default milvus network,</span>
-<span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
-docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>使用新的 Milvus 映像重新启动 Milvus 组件。</p>
-<pre><code translate="no" class="language-shell">// Run the following only after update the milvus image tag in the docker-compose.yaml
-docker compose down
-docker compose up -d
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
+    </button></h2><p>确认独立部署正在运行新版本：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check container status</span>
+docker compose ps
+
+<span class="hljs-comment"># Check Milvus version</span>
+docker compose logs standalone | grep <span class="hljs-string">&quot;version&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,11 +151,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>你可能还想了解如何<ul>
-<li><a href="/docs/zh/v2.6.x/scaleout.md">扩展 Milvus 集群</a></li>
+<li><a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a></li>
 </ul></li>
-<li>如果你准备在云上部署集群，请学习如何在亚马逊 Eclipse 上部署 Milvus：<ul>
-<li>了解如何<a href="/docs/zh/v2.6.x/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
-<li>学习如何<a href="/docs/zh/v2.6.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
-<li>了解如何<a href="/docs/zh/v2.6.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
+<li>如果你准备在云上部署你的集群：<ul>
+<li>了解如何<a href="/docs/zh/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
+<li>学习如何<a href="/docs/zh/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
+<li>了解如何<a href="/docs/zh/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>
 </ul></li>
 </ul>

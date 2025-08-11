@@ -82,18 +82,16 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
         ></path>
       </svg>
     </button></h2><p>밀버스 오퍼레이터는 <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">쿠버네티스 커스텀 리</a>소스 위에 밀버스 클러스터 커스텀 리소스를 정의합니다. 사용자 정의 리소스가 정의되면, 선언적 방식으로 K8s API를 사용하고 Milvus 배포 스택을 관리하여 확장성과 고가용성을 보장할 수 있습니다.</p>
-<p>다음 중 한 가지 방법으로 Milvus Operator를 설치할 수 있습니다:</p>
-<ul>
-<li><a href="#Install-with-Helm">헬름 사용</a></li>
-<li><a href="#Install-with-kubectl">kubectl 사용</a></li>
-</ul>
-<h3 id="Install-with-Helm" class="common-anchor-header">헬름으로 설치</h3><p>다음 명령어를 실행하여 헬름으로 Milvus Operator를 설치합니다.</p>
+<div class="filter">
+ <a href="#helm">헬름</a> <a href="#kubectl">쿠벡틀</a></div>
+<div class="filter-helm">
+<p>다음 명령을 실행하여 헬름으로 Milvus Operator를 설치합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1-hotfix/milvus-operator-1.3.0-rc1-hotfix.tgz</span>
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>설치 프로세스가 끝나면 다음과 유사한 출력을 확인할 수 있습니다.</p>
+<p>설치 프로세스가 끝나면 다음과 유사한 출력이 표시됩니다.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -108,15 +106,15 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>이전에 밀버스 오퍼레이터를 설치한 적이 있다면 다음 명령어를 사용하여 업그레이드한다:</p>
+<p>이전에 밀버스 오퍼레이터를 설치한 적이 있다면, 다음 명령어를 사용하여 업그레이드하세요:</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0-rc1-hotfix/milvus-operator-1.3.0-rc1-hotfix.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Install-with-kubectl" class="common-anchor-header">kubectl로 설치</h3><p>다음 명령어를 실행하여 <code translate="no">kubectl</code> 으로 밀버스 오퍼레이터를 설치한다.</p>
+<div class="filter-kubectl">
+<p>다음 명령어를 실행하여 Milvus Operator를 설치합니다. <code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>설치 프로세스가 끝나면 다음과 유사한 출력이 표시됩니다.</p>
@@ -141,6 +139,7 @@ deployment.apps/milvus-operator-controller-manager created
 NAME                               READY   STATUS    RESTARTS   AGE
 milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <button class="copy-code-btn"></button></code></pre>
+</div>
 <h2 id="Deploy-Milvus" class="common-anchor-header">Milvus 배포<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,16 +156,23 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
         ></path>
       </svg>
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Milvus 클러스터 배포</h3><p>Milvus Operator 파드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령은 기본 구성을 사용하여 별도의 파드에 구성 요소 및 종속 요소와 함께 Milvus 클러스터를 배포합니다. 이러한 설정을 사용자 정의하려면 <a href="https://milvus.io/tools/sizing">Milvus 크기</a> 조정 <a href="https://milvus.io/tools/sizing">도구를</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 다음 해당 YAML 파일을 다운로드하는 것이 좋습니다. 구성 매개변수에 대해 자세히 알아보려면 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하세요.</p>
+<p>위의 명령은 메시지 큐로 <strong>WoodPecker</strong> (v2.6.0에 권장됨)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
+<p><strong>이 배포의 아키텍처 하이라이트는 다음과 같습니다:</strong></p>
+<ul>
+<li><strong>메시지 큐</strong>: WoodPecker 사용(인프라 유지 관리 감소)</li>
+<li><strong>스트리밍 노드</strong>: 향상된 데이터 처리를 위해 사용 가능</li>
+<li><strong>믹스 코디네이터</strong>: 코디네이터 구성 요소를 통합하여 효율성 향상</li>
+</ul>
+<p>이러한 설정을 사용자 지정하려면 <a href="https://milvus.io/tools/sizing">Milvus 크기</a> 조정 <a href="https://milvus.io/tools/sizing">도구를</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 다음 해당 YAML 파일을 다운로드하는 것이 좋습니다. 구성 매개변수에 대해 자세히 알아보려면 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하세요.</p>
 <div class="alert note">
 <ul>
 <li>릴리스 이름에는 문자, 숫자 및 대시만 포함해야 합니다. 릴리스 이름에는 점을 사용할 수 없습니다.</li>
 <li>모든 구성 요소가 단일 포드 내에 포함된 독립 실행형 모드로 Milvus 인스턴스를 배포할 수도 있습니다. 이렇게 하려면 위의 명령에서 구성 파일 URL을 다음과 같이 변경합니다. <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
-<h4 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvus 클러스터 상태 확인</h4><p>다음 명령어를 실행하여 Milvus 클러스터 상태를 확인합니다.</p>
+<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Milvus 클러스터 상태 확인</h3><p>다음 명령어를 실행하여 Milvus 클러스터 상태를 확인합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 클러스터가 준비되면 위 명령의 출력은 다음과 비슷해야 합니다. <code translate="no">status.status</code> 필드가 <code translate="no">Unhealthy</code> 으로 유지되면 Milvus 클러스터가 아직 생성 중입니다.</p>
@@ -176,21 +182,21 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <span class="hljs-string">...</span>
 <span class="hljs-attr">status:</span>
   <span class="hljs-attr">conditions:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T05:59:41Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">StorageReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">StorageReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T06:06:23Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">Pulsar</span> <span class="hljs-string">is</span> <span class="hljs-string">ready</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">PulsarReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">PulsarReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T05:59:41Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">Etcd</span> <span class="hljs-string">endpoints</span> <span class="hljs-string">is</span> <span class="hljs-string">healthy</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">EtcdReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">EtcdReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T06:12:36Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">All</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">components</span> <span class="hljs-string">are</span> <span class="hljs-string">healthy</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">MilvusClusterHealthy</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
@@ -250,24 +256,19 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>YAML 파일을 편집하고 다시 적용하여 Milvus 클러스터의 구성을 업데이트할 수 있습니다.</p>
+    </button></h2><p>다음과 같이 <code translate="no">patch</code> 명령을 호출하여 Milvus 클러스터의 구성을 보고 업데이트할 수 있습니다:</p>
 <ol>
-<li>다음 명령을 실행하여 YAML 파일을 편집합니다.</li>
-</ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl edit milvus my-release</span>
+<li><p>다음 명령을 실행하여 변경될 구성을 미리 봅니다.</p>
+<p>다음 명령은 <code translate="no">spec.components.disableMetric</code> 매개 변수를 <code translate="no">false</code> ms로 업데이트할 것을 의미합니다.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
+  -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
+  --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>YAML 파일에서 구성을 업데이트합니다. <code translate="no">proxy.healthCheckTimout</code> 파라미터를 <code translate="no">1000</code> ms로 업데이트할 것을 다음과 같이 요약합니다.</li>
-</ol>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Add the corresponding user parameters under the `spec.config` node.</span>
-<span class="hljs-comment"># For the default configuration, see https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># To update `proxy.healthCheckTimout` parameter to `1000` ms, do as follows:</span>
-<span class="hljs-attr">config:</span>
-  <span class="hljs-attr">proxy:</span>
-    <span class="hljs-attr">healthCheckTimeout:</span> <span class="hljs-number">1000</span>
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>변경 사항을 저장하고 편집기를 종료합니다. 변경 사항이 Milvus 클러스터에 자동으로 적용됩니다.</li>
+<p>해당 구성 항목은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p></li>
+<li><p>구성을 업데이트합니다.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
+  -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
+<button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Milvus WebUI 액세스<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -336,7 +337,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">헬름으로 제거</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm -n milvus-operator uninstall milvus-operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectl로 제거</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0-rc1-hotfix/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectl로 제거</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -377,5 +378,5 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
 <li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링하기</a>.</p></li>
 </ul>

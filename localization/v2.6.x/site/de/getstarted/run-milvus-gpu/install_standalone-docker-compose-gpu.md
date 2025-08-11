@@ -38,7 +38,7 @@ title: Milvus mit GPU-Unterstützung mit Docker Compose starten
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Installieren Sie Docker</a>.</li>
-<li><a href="/docs/de/v2.6.x/prerequisite-gpu.md">Prüfen Sie</a> vor der Installation<a href="/docs/de/v2.6.x/prerequisite-gpu.md">die Anforderungen an Hardware und Software</a>.</li>
+<li><a href="/docs/de/prerequisite-gpu.md">Prüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-gpu.md">die Anforderungen an Hardware und Software</a>.</li>
 </ul>
 <div class="alert note">
 <p>Wenn Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> und beschreiben Sie das Problem, damit wir Ihnen den nötigen Support bieten können.</p>
@@ -59,8 +59,8 @@ title: Milvus mit GPU-Unterstützung mit Docker Compose starten
         ></path>
       </svg>
     </button></h2><p>Um Milvus mit GPU-Unterstützung mit Docker Compose zu installieren, führen Sie die folgenden Schritte aus.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Herunterladen und Konfigurieren der YAML-Datei</h3><p>Laden Sie  herunter <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.0-rc1/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie als docker-compose.yml manuell oder mit dem folgenden Befehl.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0-rc1/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Herunterladen und Konfigurieren der YAML-Datei</h3><p>Laden Sie  herunter <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie als docker-compose.yml manuell oder mit dem folgenden Befehl.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie müssen einige Änderungen an den Umgebungsvariablen des eigenständigen Dienstes in der YAML-Datei wie folgt vornehmen:</p>
 <ul>
@@ -110,7 +110,7 @@ Creating milvus-standalone ... done
 <li>Der <strong>milvus-standalone-Container</strong> bedient lokal die Ports <strong>19530</strong> mit den Standardeinstellungen und ordnet seine Daten den <strong>Volumes/milvus</strong> im aktuellen Ordner zu.</li>
 </ul></li>
 </ul>
-<p>Mit folgendem Befehl können Sie überprüfen, ob die Container laufen und in Betrieb sind:</p>
+<p>Mit folgendem Befehl können Sie überprüfen, ob die Container funktionieren und laufen:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -119,7 +119,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können auch auf die Milvus-WebUI unter <code translate="no">http://127.0.0.1:9091/webui/</code> zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Sie können auch auf die Milvus-WebUI unter <code translate="no">http://127.0.0.1:9091/webui/</code> zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Einzelheiten finden Sie unter <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Wenn Sie Milvus in der Datei docker-compose.yml mehrere GPU-Geräte zugewiesen haben, können Sie angeben, welches GPU-Gerät sichtbar oder zur Verwendung verfügbar ist.</p>
 <p>Machen Sie das GPU-Gerät <code translate="no">0</code> für Milvus sichtbar:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
@@ -197,28 +197,28 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Prüfen Sie <a href="/docs/de/v2.6.x/quickstart.md">Quickstart</a>, um zu sehen, was Milvus alles kann.</p></li>
-<li><p>Prüfen Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, um mehr über die Milvus-Instanz zu erfahren.</p></li>
-<li><p>Lernen Sie die Grundfunktionen von Milvus kennen:</p>
+<li><p>Prüfen Sie <a href="/docs/de/quickstart.md">Quickstart</a>, um zu sehen, was Milvus alles kann.</p></li>
+<li><p>Prüfen Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, um mehr über die Milvus-Instanz zu erfahren.</p></li>
+<li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
-<li><a href="/docs/de/v2.6.x/manage_databases.md">Datenbanken verwalten</a></li>
-<li><a href="/docs/de/v2.6.x/manage-collections.md">Sammlungen verwalten</a></li>
-<li><a href="/docs/de/v2.6.x/manage-partitions.md">Partitionen verwalten</a></li>
-<li><a href="/docs/de/v2.6.x/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
-<li><a href="/docs/de/v2.6.x/single-vector-search.md">Ein-Vektor-Suche</a></li>
-<li><a href="/docs/de/v2.6.x/multi-vector-search.md">Hybride Suche</a></li>
+<li><a href="/docs/de/manage_databases.md">Datenbanken verwalten</a></li>
+<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
-<li><p><a href="/docs/de/v2.6.x/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
-<li><p><a href="/docs/de/v2.6.x/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
+<li><p><a href="/docs/de/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
+<li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
 <li><p>Verteilen Sie Ihren Milvus-Cluster auf Clouds:</p>
 <ul>
-<li><a href="/docs/de/v2.6.x/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/de/v2.6.x/gcp.md">Google Wolke</a></li>
-<li><a href="/docs/de/v2.6.x/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/de/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/de/gcp.md">Google Wolke</a></li>
+<li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
-<li><p>Erkunden Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
+<li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
+<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für intuitives Milvus-Management.</p></li>
-<li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
+<li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

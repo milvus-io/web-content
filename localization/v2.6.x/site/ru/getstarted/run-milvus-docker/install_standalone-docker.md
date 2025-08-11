@@ -63,8 +63,15 @@ title: Запуск Milvus в Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>Что нового в версии 2.6.0:</strong></p>
+<ul>
+<li><strong>Streaming Node</strong>: Расширенные возможности обработки данных</li>
+<li><strong>WoodPecker MQ</strong>: улучшенная очередь сообщений с меньшими затратами на обслуживание</li>
+<li><strong>Оптимизированная архитектура</strong>: Консолидированные компоненты для повышения производительности</li>
+</ul>
+<p>Всегда загружайте последнюю версию сценария, чтобы убедиться, что вы получите самые последние конфигурации и улучшения архитектуры.</p>
 <p>Если вы хотите использовать <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> в режиме автономного развертывания, рекомендуется использовать метод развертывания <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Если у вас возникнут проблемы с извлечением образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, подробно описав проблему, и мы окажем вам необходимую поддержку.</p>
+<p>Если у вас возникнут проблемы с развертыванием образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, подробно описав проблему, и мы предоставим вам необходимую поддержку.</p>
 </div>
 <p>После запуска сценария установки:</p>
 <ul>
@@ -99,6 +106,36 @@ EOF
 <p>Затем перезапустите службу следующим образом:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Применимые элементы конфигурации см. в разделе <a href="/docs/ru/system_configuration.md">Конфигурация системы</a>.</p>
+<h2 id="Upgrade-Milvus" class="common-anchor-header">Обновление Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Вы можете обновить Milvus до последней версии с помощью встроенной команды обновления. При этом автоматически загружается последняя конфигурация и образ Milvus:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Команда обновления автоматически:</p>
+<ul>
+<li>Загружает последний сценарий установки с обновленными конфигурациями</li>
+<li>Извлекает последний образ Milvus Docker</li>
+<li>Перезапускает контейнер с новой версией</li>
+<li>Сохранение существующих данных и конфигураций</li>
+</ul>
+<p>Это рекомендуемый способ обновления автономного развертывания Milvus.</p>
+</div>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Остановка и удаление Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,16 +151,12 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Остановить и удалить этот контейнер можно следующим образом.</p>
+    </button></h2><p>Остановить и удалить этот контейнер можно следующим образом</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Delete Milvus data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Обновить последнюю версию Milvus можно следующим образом.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade Milvus</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

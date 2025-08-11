@@ -57,7 +57,7 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Untuk menginstal Milvus menggunakan Docker Compose, cukup jalankan</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,6 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>Apa yang baru di v2.6.0:</strong></p>
+<ul>
+<li><strong>Arsitektur yang disempurnakan</strong>: Menampilkan Streaming Node baru dan komponen yang dioptimalkan</li>
+<li><strong>Ketergantungan yang diperbarui</strong>: Termasuk versi MinIO dan etcd terbaru</li>
+<li><strong>Konfigurasi yang ditingkatkan</strong>: Pengaturan yang dioptimalkan untuk kinerja yang lebih baik</li>
+</ul>
+<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur v2.6.0.</p>
 <ul>
 <li><p>Jika Anda gagal menjalankan perintah di atas, periksa apakah sistem Anda telah menginstal Docker Compose V1. Jika demikian, Anda disarankan untuk bermigrasi ke Docker Compose V2 sesuai dengan catatan di <a href="https://docs.docker.com/compose/">halaman ini</a>.</p></li>
 <li><p>Jika Anda mengalami masalah dalam menarik citra, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail tentang masalahnya, dan kami akan memberikan dukungan yang diperlukan.</p></li>
@@ -107,24 +114,20 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Untuk memperbarui konfigurasi Milvus agar sesuai dengan kebutuhan Anda, Anda perlu memodifikasi berkas <code translate="no">/milvus/configs/user.yaml</code> di dalam kontainer <code translate="no">milvus-standalone</code>.</p>
 <ol>
-<li>Akses kontainer <code translate="no">milvus-standalone</code>.</li>
-</ol>
+<li><p>Akses kontainer <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Tambahkan konfigurasi tambahan untuk mengganti konfigurasi default. Berikut ini mengasumsikan bahwa Anda perlu mengganti <code translate="no">proxy.healthCheckTimeout</code> default. Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a>.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Tambahkan konfigurasi tambahan untuk mengganti konfigurasi default. Berikut ini mengasumsikan bahwa Anda perlu mengganti <code translate="no">proxy.healthCheckTimeout</code> default. Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Mulai ulang kontainer <code translate="no">milvus-standalone</code> untuk menerapkan perubahan.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Mulai ulang kontainer <code translate="no">milvus-standalone</code> untuk menerapkan perubahan.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
-<button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Menghentikan dan menghapus Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

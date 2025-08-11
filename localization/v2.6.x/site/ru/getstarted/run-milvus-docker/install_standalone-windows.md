@@ -146,7 +146,7 @@ Delete successfully.​
 <li><p>Откройте Docker Desktop в режиме администратора, щелкнув правой кнопкой мыши и выбрав пункт <strong>"Запуск от имени администратора"</strong>.</p></li>
 <li><p>Выполните следующие команды в PowerShell или Windows Command Prompt, чтобы загрузить файл конфигурации Docker Compose для Milvus Standalone и запустить Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -172,7 +172,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Загрузите файл конфигурации Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Запустите Milvus.</p>
@@ -224,7 +224,7 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>Проверьте, запущен ли демон Docker Daemon.</p>
-<p>Необходимо перейти в каталог установки Docker Desktop и выполнить команду <code translate="no">.\DockerCli.exe -SwitchDaemon</code>, чтобы запустить Docker Daemon.</p>
+<p>Необходимо перейти в каталог установки Docker Desktop и выполнить команду <code translate="no">.\DockerCli.exe -SwitchDaemon</code> для запуска Docker Daemon.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​

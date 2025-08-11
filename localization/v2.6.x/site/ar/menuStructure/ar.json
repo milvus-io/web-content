@@ -92,21 +92,27 @@
                 "children": []
               },
               {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 1,
+                "children": []
+              },
+              {
                 "label": "دوكر (لينكس)",
                 "id": "install_standalone-docker.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "تكوين Docker Compose (لينكس)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "سطح المكتب Docker Desktop (ويندوز)",
                 "id": "install_standalone-windows.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               }
             ]
@@ -1010,7 +1016,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه TEI",
+                "label": "عناق الوجه المعانق TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1427,6 +1433,25 @@
             "label": "تبعيات المقياس",
             "id": "scale-dependencies.md",
             "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "الترقية",
+        "id": "upgrade_milvus",
+        "order": 7,
+        "children": [
+          {
+            "label": "ترقية مجموعة ميلفوس العنقودية",
+            "id": "upgrade_milvus_cluster-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ترقية ميلفوس ستاندالون",
+            "id": "upgrade_milvus_standalone-operator.md",
+            "order": 1,
             "children": []
           }
         ]

@@ -19,6 +19,56 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.5.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v2516" class="common-anchor-header">v2.5.16<button data-href="#v2516" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2025년 8월 6일</p>
+<table>
+<thead>
+<tr><th>Milvus 버전</th><th>Python SDK 버전</th><th>Node.js SDK 버전</th><th>Java SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.16</td><td>2.5.14</td><td>2.5.12</td><td>2.5.11</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.16을 발표하게 되어 기쁩니다! 이번 버전은 일련의 기능 버그를 수정하고 사용자 경험을 개선하여 사용 환경을 향상시켰습니다. 또한 다양한 일반 성능 및 안정성 향상과 함께 수많은 버그를 해결하여 더욱 견고한 시스템을 보장합니다. 2.5.16으로 업그레이드하여 최신 업데이트를 살펴보세요!</p>
+<h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
+<li><code translate="no">DescribeCollection</code> <a href="https://github.com/milvus-io/milvus/pull/43300">(#43300</a>)에서 컬렉션 이름 유효성 검사를 제거했습니다.</li>
+<li>청크와 인덱스가 삭제될 때 연결 해제된 mmap 파일<a href="https://github.com/milvus-io/milvus/pull/43546">(#43546</a>).</li>
+<li>문자열 용어 유형에 집합 요소 사용<a href="https://github.com/milvus-io/milvus/pull/43393">(#43393</a>).</li>
+<li>Go 버전을 1.24.4로 업그레이드하여 CVE 수정<a href="https://github.com/milvus-io/milvus/pull/43467">(#43467</a>).</li>
+<li>클러스터링 분석 단계에서 필요한 필드만 다운로드<a href="https://github.com/milvus-io/milvus/pull/43362">(#43362</a>).</li>
+<li>Lindera 버전 업데이트<a href="https://github.com/milvus-io/milvus/pull/43457">(#43457</a>).</li>
+<li>불균일한 쿼리 노드 분포에 대한 채널 노드 밸런싱 최적화<a href="https://github.com/milvus-io/milvus/pull/43423">(#43423</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
+<li>하이브리드 검색이 RESTful API에서 오프셋 매개변수를 지원하도록 수정되었습니다<a href="https://github.com/milvus-io/milvus/pull/43721">(#43721</a>).</li>
+<li>딕셔너리 단어가 빈 문자열일 때 Jieba 토큰화기의 패닉을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43718">(#43718</a>).</li>
+<li>가변 길이 데이터 유형에 대한 스팬 원시 데이터 검색을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43703">(#43703</a>).</li>
+<li>JSON 키 통계 반전 인덱스에서 유효하지 않은 데이터 행에 대한 오프셋이 증가했습니다<a href="https://github.com/milvus-io/milvus/pull/43688">(#43688</a>).</li>
+<li>재시작 후 로드 구성 변경 실패 수정<a href="https://github.com/milvus-io/milvus/pull/43555">(#43555</a>).</li>
+<li>다중 청크 세그먼트 사용 시 [...]에서 다음 배치 건너뛰기를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/43619">(#43619</a>).</li>
+<li>로드 차단을 방지하기 위해 존재하지 않는 L0 세그먼트 로드를 건너뛰었습니다<a href="https://github.com/milvus-io/milvus/pull/43576">(#43576</a>).</li>
+<li><code translate="no">InitPolicyInfo</code> 에서 정책을 로드한 후 권한 캐시 정리<a href="https://github.com/milvus-io/milvus/pull/43643">(#43643)</a>.</li>
+<li>오류가 비어 있지 않을 때 상태 설정<a href="https://github.com/milvus-io/milvus/pull/43404">(#43404</a>).</li>
+<li>기본적으로 ID 반환<a href="https://github.com/milvus-io/milvus/pull/43596">(#43596</a>).</li>
+<li>청크 바운드 빈 루프로 인한 문자열 보기 검색 실패 수정<a href="https://github.com/milvus-io/milvus/pull/43482">(#43482</a>).</li>
+<li>시간 지연을 방지하기 위해 2.6 프록시를 무시했습니다<a href="https://github.com/milvus-io/milvus/pull/43519">(#43519</a>).</li>
+<li>우선순위 대기열을 사용하여 작업 실행 순서 보장<a href="https://github.com/milvus-io/milvus/pull/43272">(#43272</a>).</li>
+<li>배치 보기에 대한 판단을 개선했습니다<a href="https://github.com/milvus-io/milvus/pull/43479">(#43479</a>).</li>
+</ul>
 <h2 id="v2515" class="common-anchor-header">v2.5.15<button data-href="#v2515" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +93,7 @@ title: 릴리스 노트
 <tr><td>2.5.15</td><td>2.5.14</td><td>2.5.12</td><td>2.5.11</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.15를 발표하게 되어 기쁩니다! 이 버전은 수집 이름이 변경될 때 메타데이터를 심각하게 손상시켜 데이터 손실을 유발할 수 있는 버그를 포함하여 일련의 기능 버그를 수정하여 사용자 경험을 향상시킵니다. 또한 다양한 일반 성능 및 안정성 향상과 함께 수많은 버그를 해결하여 더욱 견고한 시스템을 보장합니다. <strong>특히 현재 2.5.14를 사용 중이라면 2.5.15로 업그레이드하여 최신 업데이트를 살펴보세요!</strong></p>
+<p>Milvus 2.5.15를 발표하게 되어 기쁩니다! 이번 버전에서는 수집 이름이 변경될 때 메타데이터를 심각하게 손상시켜 데이터 손실을 유발할 수 있는 버그를 포함하여 여러 가지 기능 버그를 수정하여 사용자 경험을 향상시켰습니다. 또한 다양한 일반 성능 및 안정성 향상과 함께 수많은 버그를 해결하여 더욱 견고한 시스템을 보장합니다. <strong>특히 현재 2.5.14를 사용 중이라면 2.5.15로 업그레이드하여 최신 업데이트를 살펴보세요!</strong></p>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
 <li>스파스 벡터 무차별 대입 버그<a href="https://github.com/milvus-io/milvus/pull/43398">(#43398</a>)를 수정하기 위해 Knowhere 버전이 업데이트되었습니다.</li>
 <li>txn 제한이 있는 메타 저장을 구현했습니다<a href="https://github.com/milvus-io/milvus/pull/43287">(#43287</a>).</li>
@@ -621,7 +671,7 @@ title: 릴리스 노트
 <tr><td>2.5.5</td><td>2.5.4</td><td>2.5.5</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.5는 단일 클러스터가 지원할 수 있는 컬렉션과 파티션의 수를 크게 개선했습니다. 이제 10,000개의 컬렉션과 100,000개의 파티션으로 Milvus를 실행하는 것이 완전히 가능해졌습니다. 또한 이번 릴리스에서는 일치 통계 누락과 다단계 쿼리에서의 교착 상태 문제를 비롯한 몇 가지 중요한 버그가 해결되었습니다. 또한, 수많은 통합 가시성 및 보안 개선 사항도 포함되어 있습니다. Milvus 2.5.x를 실행 중인 모든 사용자는 가능한 한 빨리 업그레이드할 것을 강력히 권장합니다.</p>
+<p>Milvus 2.5.5는 단일 클러스터가 지원할 수 있는 컬렉션과 파티션의 수를 크게 개선했습니다. 이제 10,000개의 컬렉션과 100,000개의 파티션으로 Milvus를 실행하는 것이 완전히 가능해졌습니다. 또한, 이번 릴리스에서는 일치 통계 누락과 다단계 쿼리에서의 교착 상태 문제 등 몇 가지 중요한 버그가 해결되었습니다. 또한, 수많은 통합 가시성 및 보안 개선 사항도 포함되어 있습니다. Milvus 2.5.x를 실행 중인 모든 사용자는 가능한 한 빨리 업그레이드할 것을 강력히 권장합니다.</p>
 <h3 id="Dependency-Upgrade" class="common-anchor-header">종속성 업그레이드</h3><p>ETCD 3.5.18로 업그레이드하여 몇 가지 CVE를 수정했습니다.</p>
 <ul>
 <li>[2.5] 래프트를 CUV로 업데이트<a href="https://github.com/milvus-io/milvus/pull/39221">(#39221)</a></li>
@@ -671,7 +721,7 @@ title: 릴리스 노트
 </ul>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><h4 id="Observability" class="common-anchor-header">관찰 가능성</h4><ul>
 <li>원시 데이터 검색을 위한 모니터 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/40155">(#40155</a>).</li>
-<li>[2.5] get 벡터 지연 시간 메트릭 추가 및 요청 제한 오류 메시지 개선<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
+<li>[2.5] get 벡터 지연 시간 메트릭 추가 및 요청 제한 오류 메시지 개선<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>).</li>
 <li>[2.5] 프록시 대기열에 대한 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/40071">(#40071</a>)</li>
 <li>더 많은 메트릭 데이터 노출<a href="https://github.com/milvus-io/milvus/pull/39466">(#39466</a>)</li>
 <li>[2.5] 구문 분석 표현식에 대한 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/39716">(#39716</a>)</li>
@@ -941,7 +991,7 @@ title: 릴리스 노트
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">Faiss 기반 HNSW SQ/PQ/PRQ</h4><p>Faiss 커뮤니티와의 긴밀한 협력을 통해 Faiss의 HNSW 알고리즘은 기능과 성능 모두에서 상당한 개선을 이루었습니다. 안정성과 유지보수성을 고려하여 Milvus 2.5는 HNSW에 대한 지원을 hnswlib에서 Faiss로 공식적으로 마이그레이션했습니다.</p>
 <p>Milvus 2.5는 Faiss를 기반으로 다양한 시나리오의 요구 사항을 충족하기 위해 HNSW에서 여러 양자화 방법을 지원합니다: SQ(스칼라 퀀타이저), PQ(제품 퀀타이저), PRQ(제품 잔여 퀀타이저)가 그것입니다. SQ와 PQ가 더 일반적으로 사용되는데, SQ는 쿼리 성능과 빌드 속도가 우수하고, PQ는 동일한 압축률에서 더 나은 리콜을 제공합니다. 많은 벡터 데이터베이스는 일반적으로 SQ 양자화의 간단한 형태인 이진 양자화를 사용합니다.</p>
 <p>PRQ는 PQ와 AQ(애디티브 퀀타이저)의 융합입니다. PQ와 비교했을 때, 특히 높은 압축률에서 더 나은 리콜을 제공하기 위해 더 긴 빌드 시간이 필요하며, 이진 압축이라고 합니다.</p>
-<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">클러스터링 압축(베타)</h4><p>Milvus 2.5에는 대규모 컬렉션에서 검색을 가속화하고 비용을 절감하기 위해 클러스터링 압축이 도입되었습니다. 스칼라 필드를 클러스터링 키로 지정하면 데이터를 범위별로 재분배하여 저장과 검색을 최적화할 수 있습니다. 글로벌 인덱스처럼 작동하는 이 기능은 클러스터링 메타데이터를 기반으로 쿼리 중에 데이터를 효율적으로 정리하여 스칼라 필터를 적용할 때 검색 성능을 향상시킬 수 있습니다.</p>
+<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">클러스터링 압축(베타)</h4><p>Milvus 2.5에는 대규모 컬렉션에서 검색을 가속화하고 비용을 절감하기 위해 클러스터링 압축이 도입되었습니다. 스칼라 필드를 클러스터링 키로 지정하면 데이터를 범위별로 재분배하여 저장 및 검색을 최적화할 수 있습니다. 글로벌 인덱스처럼 작동하는 이 기능은 클러스터링 메타데이터를 기반으로 쿼리 중에 데이터를 효율적으로 정리하여 스칼라 필터를 적용할 때 검색 성능을 향상시킬 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/v2.5.x/clustering-compaction.md">클러스터링 압축을</a> 참조하세요.</p>
 <h3 id="Other-Features" class="common-anchor-header">기타 기능</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">스트리밍 노드(베타)</h4><p>Milvus 2.5에는 미리 쓰기 로깅(WAL) 서비스를 제공하는 스트리밍 노드라는 새로운 구성 요소가 도입되었습니다. 이를 통해 Milvus는 채널 읽기 및 쓰기 전후에 합의를 달성하여 새로운 특징, 기능 및 최적화를 실현할 수 있습니다. 이 기능은 Milvus 2.5에서는 기본적으로 비활성화되어 있으며 3.0 버전에서 공식적으로 제공될 예정입니다.</p>
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6 지원</h4><p>Milvus는 이제 IPv6를 지원하여 네트워크 연결성과 호환성을 확장합니다.</p>

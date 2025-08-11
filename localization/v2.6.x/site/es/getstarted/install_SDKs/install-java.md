@@ -63,13 +63,13 @@ title: Instalar Milvus Java SDK
 <pre><code translate="no" class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.milvus<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>milvus-sdk-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.6.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.6.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.6.0&#x27;</span>
+<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.6.1&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">A continuación<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +90,11 @@ title: Instalar Milvus Java SDK
 <ul>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
-<li><a href="/docs/es/v2.6.x/manage-collections.md">Gestionar colecciones</a></li>
-<li><a href="/docs/es/v2.6.x/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/v2.6.x/insert-update-delete.md">Insertar, sobreinsertar y eliminar</a></li>
-<li><a href="/docs/es/v2.6.x/single-vector-search.md">Búsqueda de un solo vector</a></li>
-<li><a href="/docs/es/v2.6.x/multi-vector-search.md">Búsqueda híbrida</a></li>
+<li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
+<li><a href="/docs/es/manage-partitions.md">Gestionar particiones</a></li>
+<li><a href="/docs/es/insert-update-delete.md">Insertar, sobreinsertar y eliminar</a></li>
+<li><a href="/docs/es/single-vector-search.md">Búsqueda de un solo vector</a></li>
+<li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
 <li><p>Explorar <a href="/api-reference/java/v2.4.x/About.md">la referencia API Java de Milvus</a></p></li>
 </ul>

@@ -57,7 +57,7 @@ title: 使用 Docker Compose 執行 Milvus (Linux)
       </svg>
     </button></h2><p>Milvus 在 Milvus 套件庫中提供 Docker Compose 配置檔案。要使用 Docker Compose 安裝 Milvus，只要執行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,8 +67,15 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>v2.6.0 的新功能：</strong></p>
 <ul>
-<li><p>如果您執行上述指令失敗，請檢查您的系統是否已安裝 Docker Compose V1。如果是這種情況，建議您根據<a href="https://docs.docker.com/compose/">本頁面</a>的注意事項，轉移到 Docker Compose V2。</p></li>
+<li><strong>增強的架構</strong>：具有新的 Streaming 節點和最佳化的元件。</li>
+<li><strong>更新的相依性</strong>：包含最新的 MinIO 和 etcd 版本</li>
+<li><strong>改進的設定</strong>：最佳化設定以獲得更佳效能</li>
+</ul>
+<p>請務必下載最新的 Docker Compose 配置，以確保與 v2.6.0 功能相容。</p>
+<ul>
+<li><p>如果您執行上述指令失敗，請檢查您的系統是否已安裝 Docker Compose V1。如果是這種情況，建議您根據<a href="https://docs.docker.com/compose/">本頁面</a>的注意事項遷移至 Docker Compose V2。</p></li>
 <li><p>如果您在拉取映像時遇到任何問題，請與我們聯絡<a href="mailto:community@zilliz.com">community@zilliz.com</a>，並提供問題的詳細資訊，我們會為您提供必要的支援。</p></li>
 </ul>
 </div>
@@ -107,24 +114,20 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>要更新 Milvus 配置以滿足您的需求，您需要修改<code translate="no">milvus-standalone</code> 容器內的<code translate="no">/milvus/configs/user.yaml</code> 檔案。</p>
 <ol>
-<li>存取<code translate="no">milvus-standalone</code> 容器。</li>
-</ol>
+<li><p>存取<code translate="no">milvus-standalone</code> 容器。</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>新增額外的配置以覆寫預設配置。以下假設您需要覆寫預設的<code translate="no">proxy.healthCheckTimeout</code> 。有關適用的組態項目，請參閱<a href="/docs/zh-hant/system_configuration.md">系統組態</a>。</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>新增額外的配置以覆寫預設配置。以下假設您需要覆寫預設的<code translate="no">proxy.healthCheckTimeout</code> 。有關適用的組態項目，請參閱<a href="/docs/zh-hant/system_configuration.md">系統組態</a>。</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>重新啟動<code translate="no">milvus-standalone</code> 容器以套用變更。</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>重新啟動<code translate="no">milvus-standalone</code> 容器以套用變更。</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
-<button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止和刪除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +178,7 @@ EOF
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
 <li><p><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴充您的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh-hant/scaleout.md">擴充你的 Milvus 集群</a>。</p></li>
 <li><p>在雲端部署您的 Milvus 叢集：</p>
 <ul>
 <li><a href="/docs/zh-hant/eks.md">亞馬遜 EKS</a></li>

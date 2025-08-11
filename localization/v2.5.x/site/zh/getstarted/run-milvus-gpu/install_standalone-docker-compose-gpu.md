@@ -59,8 +59,8 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
         ></path>
       </svg>
     </button></h2><p>要使用 Docker Compose 安装支持 GPU 的 Milvus，请按照以下步骤操作。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下载并配置 YAML 文件</h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.15/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>并手动保存为 docker-compose.yml，或使用以下命令。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.15/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下载并配置 YAML 文件</h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.16/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>并手动保存为 docker-compose.yml，或使用以下命令。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.16/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要对 YAML 文件中单机服务的环境变量做如下修改：</p>
 <ul>
@@ -149,7 +149,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 启动并运行后，可以通过修改<code translate="no">milvus.yaml</code> 文件中的<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 设置来定制内存池。</p>
+    </button></h2><p>Milvus 启动并运行后，您可以通过修改<code translate="no">milvus.yaml</code> 文件中的<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 设置来定制内存池。</p>
 <div class="alert note">
 <p><code translate="no">milvus.yaml</code> 文件位于 Milvus 容器内的<code translate="no">/milvus/configs/</code> 目录中。</p>
 </div>

@@ -57,7 +57,7 @@ title: Ejecutar Milvus con Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus proporciona un archivo de configuración Docker Compose en el repositorio Milvus. Para instalar Milvus utilizando Docker Compose, simplemente ejecute</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,6 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>Novedades en v2.6.0:</strong></p>
+<ul>
+<li><strong>Arquitectura mejorada</strong>: Presenta el nuevo Nodo Streaming y componentes optimizados.</li>
+<li><strong>Dependencias actualizadas</strong>: Incluye las últimas versiones de MinIO y etcd</li>
+<li><strong>Configuración mejorada</strong>: Configuración optimizada para un mejor rendimiento</li>
+</ul>
+<p>Descargue siempre la última configuración de Docker Compose para garantizar la compatibilidad con las funciones de la versión 2.6.0.</p>
 <ul>
 <li><p>Si no puede ejecutar el comando anterior, compruebe si su sistema tiene instalado Docker Compose V1. Si este es el caso, se le aconseja migrar a Docker Compose V2 debido a las notas en <a href="https://docs.docker.com/compose/">esta página</a>.</p></li>
 <li><p>Si encuentra algún problema al arrancar la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con detalles sobre el problema, y le proporcionaremos el soporte necesario.</p></li>
@@ -107,24 +114,20 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Para actualizar la configuración de Milvus para adaptarla a sus necesidades, debe modificar el archivo <code translate="no">/milvus/configs/user.yaml</code> dentro del contenedor <code translate="no">milvus-standalone</code>.</p>
 <ol>
-<li>Acceda al contenedor <code translate="no">milvus-standalone</code>.</li>
-</ol>
+<li><p>Acceda al contenedor <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Añada configuraciones adicionales para anular las predeterminadas. A continuación se asume que necesita anular la configuración predeterminada <code translate="no">proxy.healthCheckTimeout</code>. Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/system_configuration.md">Configuración del sistema</a>.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Añada configuraciones adicionales para anular las predeterminadas. A continuación se asume que necesita anular la configuración predeterminada <code translate="no">proxy.healthCheckTimeout</code>. Para conocer los elementos de configuración aplicables, consulte <a href="/docs/es/system_configuration.md">Configuración del sistema</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Reinicie el contenedor <code translate="no">milvus-standalone</code> para aplicar los cambios.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Reinicie el contenedor <code translate="no">milvus-standalone</code> para aplicar los cambios.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
-<button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Detener y eliminar Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +150,7 @@ EOF
 # </span><span class="language-bash">Delete service data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">A continuación<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

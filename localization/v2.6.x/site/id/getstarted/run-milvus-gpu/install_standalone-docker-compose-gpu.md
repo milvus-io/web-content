@@ -38,7 +38,7 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Instal Docker</a>.</li>
-<li><a href="/docs/id/v2.6.x/prerequisite-gpu.md">Periksa persyaratan perangkat keras dan perangkat lunak</a> sebelum melakukan instalasi.</li>
+<li><a href="/docs/id/prerequisite-gpu.md">Periksa persyaratan perangkat keras dan perangkat lunak</a> sebelum melakukan instalasi.</li>
 </ul>
 <div class="alert note">
 <p>Jika Anda mengalami masalah dalam menarik citra, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail tentang masalahnya, dan kami akan memberi Anda dukungan yang diperlukan.</p>
@@ -59,8 +59,8 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
         ></path>
       </svg>
     </button></h2><p>Untuk menginstall Milvus dengan dukungan GPU menggunakan Docker Compose, ikuti langkah-langkah berikut.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Unduh dan konfigurasikan berkas YAML</h3><p>Unduh <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.0-rc1/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> dan simpan sebagai docker-compose.yml secara manual, atau dengan perintah berikut.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0-rc1/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Unduh dan konfigurasikan berkas YAML</h3><p>Unduh <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> dan simpan sebagai docker-compose.yml secara manual, atau dengan perintah berikut.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda perlu membuat beberapa perubahan pada variabel lingkungan dari layanan mandiri dalam berkas YAML sebagai berikut:</p>
 <ul>
@@ -119,7 +119,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda juga dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instans Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Anda juga dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instans Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Jika Anda telah menetapkan beberapa perangkat GPU ke Milvus di docker-compose.yml, Anda dapat menentukan perangkat GPU mana yang terlihat atau tersedia untuk digunakan.</p>
 <p>Membuat perangkat GPU <code translate="no">0</code> terlihat oleh Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
@@ -197,28 +197,28 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>Setelah menginstal Milvus di Docker, Anda dapat:</p>
 <ul>
-<li><p>Memeriksa <a href="/docs/id/v2.6.x/quickstart.md">Mulai Cepat</a> untuk melihat apa yang dapat dilakukan Milvus.</p></li>
-<li><p>Memeriksa <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a> untuk mempelajari lebih lanjut tentang instans Milvus.</p></li>
+<li><p>Memeriksa <a href="/docs/id/quickstart.md">Mulai Cepat</a> untuk melihat apa yang dapat dilakukan Milvus.</p></li>
+<li><p>Memeriksa <a href="/docs/id/milvus-webui.md">Milvus WebUI</a> untuk mempelajari lebih lanjut tentang instans Milvus.</p></li>
 <li><p>Mempelajari operasi dasar Milvus:</p>
 <ul>
-<li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
-<li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
-<li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
-<li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
+<li><a href="/docs/id/manage_databases.md">Mengelola Basis Data</a></li>
+<li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
+<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
+<li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
+<li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/id/v2.6.x/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
-<li><p>Mengatur<a href="/docs/id/v2.6.x/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
+<li><p><a href="/docs/id/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
+<li><p>Mengatur<a href="/docs/id/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
 <li><p>Menerapkan cluster Milvu Anda di awan:</p>
 <ul>
-<li><a href="/docs/id/v2.6.x/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/id/v2.6.x/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/id/v2.6.x/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/id/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/id/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/id/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pengamatan dan manajemen Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pengamatan dan manajemen Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk manajemen Milvus yang intuitif.</p></li>
-<li><p><a href="/docs/id/v2.6.x/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
+<li><p><a href="/docs/id/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

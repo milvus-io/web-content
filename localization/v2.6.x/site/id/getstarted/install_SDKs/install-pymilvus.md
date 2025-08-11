@@ -59,8 +59,8 @@ title: Menginstal Milvus Python SDK
       </svg>
     </button></h2><p>PyMilvus tersedia di <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
-Direkomendasikan untuk menginstal versi PyMilvus yang sesuai dengan versi server Milvus yang Anda instal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/release_notes.md">Catatan Rilis</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">0b0</span>
+Direkomendasikan untuk menginstal versi PyMilvus yang sesuai dengan versi server Milvus yang Anda instal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/release_notes.md">Catatan Rilis</a>.</div>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifikasi instalasi<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,11 +99,11 @@ Direkomendasikan untuk menginstal versi PyMilvus yang sesuai dengan versi server
 <ul>
 <li><p>Mempelajari operasi dasar Milvus:</p>
 <ul>
-<li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
-<li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
-<li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
+<li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
+<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
+<li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
+<li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
 <li><p>Jelajahi <a href="/api-reference/pymilvus/v2.4.x/About.md">referensi API PyMilvus</a></p></li>
 </ul>

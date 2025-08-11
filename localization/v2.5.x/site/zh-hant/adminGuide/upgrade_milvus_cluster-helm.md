@@ -23,7 +23,7 @@ title: 使用 Helm 圖表升級 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南描述如何使用 Milvus Helm 圖表升級你的 Milvus 叢集。</p>
+    </button></h1><p>本指南描述如何使用 Milvus Helm 圖表升級你的 Milvus 集群。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以為您的 Milvus 選擇升級路徑，如下所示：</p>
-<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.15。</div>
+<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.16。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.15。</p></li>
-<li><p>在從 Milvus v2.1.x 升級到 v2.5.15 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.16。</p></li>
+<li><p>在從 Milvus v2.1.x 升級到 v2.5.16 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">進行滾動升級<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -129,7 +129,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 2.2.3 起，您可以設定 Milvus 協調器工作在主動待命模式，並啟用它們的滾動升級功能，以便 Milvus 能在協調器升級期間回應傳入的請求。在之前的版本中，協調器需要在升級過程中移除然後再創建，這可能會導致服務出現一定的停機時間。</p>
+    </button></h2><p>自 Milvus 2.2.3 起，您可以設定 Milvus 協調器工作在主動待命模式，並啟用它們的滾動升級功能，以便 Milvus 可以在協調器升級期間回應傳入的請求。在之前的版本中，協調器需要在升級過程中移除然後再創建，這可能會導致服務出現一定的停機時間。</p>
 <p>滾動升級需要協調器在主動待命模式下工作。您可以使用我們提供的<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">腳本</a>，設定協調器在主動待命模式下工作，並開始滾動升級。</p>
 <p>基於 Kubernetes 提供的滾動更新功能，上述腳本會根據部署的依賴關係強制執行有序更新。此外，Milvus 實作了一套機制，以確保其元件在升級期間仍能與那些依賴它們的元件相容，大幅減少潛在的服務停機時間。</p>
 <p>該腳本只適用於與 Helm 一起安裝的 Milvus 的升級。下表列出了腳本中可用的命令旗標。</p>
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.15。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.15 -w &#x27;milvusdb/milvus:v2.5.15&#x27;
+<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.16。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.16 -w &#x27;milvusdb/milvus:v2.5.16&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

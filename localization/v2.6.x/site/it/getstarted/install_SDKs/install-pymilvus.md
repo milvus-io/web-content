@@ -59,8 +59,8 @@ title: Installare l'SDK Milvus Python
       </svg>
     </button></h2><p>PyMilvus è disponibile nell'<a href="https://pypi.org/project/pymilvus/">indice dei pacchetti Python</a>.</p>
 <div class="alert note">
-Si raccomanda di installare una versione di PyMilvus che corrisponda alla versione del server Milvus installato. Per ulteriori informazioni, vedere le <a href="/docs/it/v2.6.x/release_notes.md">Note di rilascio</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">0b0</span>
+Si raccomanda di installare una versione di PyMilvus che corrisponda alla versione del server Milvus installato. Per ulteriori informazioni, vedere le <a href="/docs/it/release_notes.md">Note di rilascio</a>.</div>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifica dell'installazione<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,11 +99,11 @@ Si raccomanda di installare una versione di PyMilvus che corrisponda alla versio
 <ul>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
-<li><a href="/docs/it/v2.6.x/manage-collections.md">Gestire le collezioni</a></li>
-<li><a href="/docs/it/v2.6.x/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/v2.6.x/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
-<li><a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca a vettore singolo</a></li>
-<li><a href="/docs/it/v2.6.x/multi-vector-search.md">Ricerca ibrida</a></li>
+<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
+<li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
+<li><a href="/docs/it/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
+<li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
+<li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
 <li><p>Esplora il <a href="/api-reference/pymilvus/v2.4.x/About.md">riferimento API di PyMilvus</a></p></li>
 </ul>

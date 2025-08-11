@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以按以下方式选择 Milvus 的升级路径：</p>
-<div style="display: none;">- 进行滚动升级](#conduct-a-rolling-upgrade) 从 Milvus v2.2.3 及以后的版本升级到 v2.5.15。</div>
+<div style="display: none;">- 进行滚动升级](#conduct-a-rolling-upgrade) 从 Milvus v2.2.3 及以后的版本升级到 v2.5.16。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升级 Milvus</a>，从 v2.2.3 之前的次版本升级到 v2.5.15。</p></li>
-<li><p>在从 Milvus v2.1.x 升级到 v2.5.15 之前<a href="#Migrate-the-metadata">迁移元数据</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升级 Milvus</a>，从 v2.2.3 之前的次版本升级到 v2.5.16。</p></li>
+<li><p>在从 Milvus v2.1.x 升级到 v2.5.16 之前<a href="#Migrate-the-metadata">迁移元数据</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">进行滚动升级<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>自 Milvus 2.2.3 起，您可以将 Milvus 协调器配置为主动待机模式工作，并为它们启用滚动升级功能，这样 Milvus 就可以在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定的停机时间。</p>
 <p>滚动升级要求协调程序以活动-待机模式工作。您可以使用我们提供的<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">脚本</a>将协调程序配置为活动-待机模式，然后开始滚动升级。</p>
-<p>基于 Kubernetes 提供的滚动更新功能，上述脚本会根据部署的依赖关系对部署进行有序更新。此外，Milvus 还实现了一种机制，确保其组件在升级期间与依赖它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
+<p>基于 Kubernetes 提供的滚动更新功能，上述脚本会根据部署的依赖关系对部署进行有序更新。此外，Milvus 还实现了一种机制，确保其组件在升级过程中与依赖它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
 <p>该脚本仅适用于升级与 Helm 一起安装的 Milvus。下表列出了脚本中可用的命令标志。</p>
 <table>
 <thead>
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作符</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>确保 Milvus 实例中的所有部署都处于正常状态后。就可以运行以下命令将 Milvus 实例升级到 2.5.15。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.15 -w &#x27;milvusdb/milvus:v2.5.15&#x27;
+<p>确保 Milvus 实例中的所有部署都处于正常状态后。可以运行以下命令将 Milvus 实例升级到 2.5.16。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.16 -w &#x27;milvusdb/milvus:v2.5.16&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -229,8 +229,8 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods my-release-milvus-proxy-6c548f787f-scspp -o=jsonpath=<span class="hljs-string">&#x27;{$.spec.containers[0].image}&#x27;</span></span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">milvusdb/milvus:v2.1.4</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="4-Migrate-the-metadata" class="common-anchor-header">4.迁移元数据</h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 下面是<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>，供你安全迁移元数据。</p>
-<p>此脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
+<h3 id="4-Migrate-the-metadata" class="common-anchor-header">4.迁移元数据</h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 这里有<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>供你安全迁移元数据。</p>
+<p>该脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
 <p>下表列出了元数据迁移的操作符。</p>
 <table>
 <thead>

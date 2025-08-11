@@ -57,7 +57,7 @@ title: Docker Compose로 Milvus 실행하기(Linux)
       </svg>
     </button></h2><p>Milvus는 Milvus 리포지토리에 Docker Compose 구성 파일을 제공합니다. Docker Compose를 사용하여 Milvus를 설치하려면 다음을 실행하세요.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,8 +67,15 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>v2.6.0의 새로운 기능:</strong></p>
 <ul>
-<li><p>위 명령이 실행되지 않는 경우 시스템에 Docker Compose V1이 설치되어 있는지 확인하시기 바랍니다. <a href="https://docs.docker.com/compose/">이 경우 이 페이지의</a> 참고 사항에 따라 Docker Compose V2로 마이그레이션하는 것이 좋습니다.</p></li>
+<li><strong>향상된 아키텍처</strong>: 새로운 스트리밍 노드와 최적화된 컴포넌트가 특징입니다.</li>
+<li><strong>업데이트된 종속성</strong>: 최신 MinIO 및 etcd 버전 포함</li>
+<li><strong>개선된 구성</strong>: 성능 향상을 위한 최적화된 설정</li>
+</ul>
+<p>v2.6.0 기능과의 호환성을 보장하기 위해 항상 최신 Docker Compose 구성을 다운로드하세요.</p>
+<ul>
+<li><p>위 명령이 실행되지 않는 경우 시스템에 Docker Compose V1이 설치되어 있는지 확인하세요. <a href="https://docs.docker.com/compose/">이 경우 이 페이지의</a> 참고 사항에 따라 Docker Compose V2로 마이그레이션하는 것이 좋습니다.</p></li>
 <li><p>이미지를 가져오는 데 문제가 발생하면 <a href="mailto:community@zilliz.com">community@zilliz.com</a> 으로 문의해 주시면 필요한 지원을 제공해 드리겠습니다.</p></li>
 </ul>
 </div>
@@ -107,24 +114,20 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Milvus 구성을 필요에 맞게 업데이트하려면 <code translate="no">milvus-standalone</code> 컨테이너 내에서 <code translate="no">/milvus/configs/user.yaml</code> 파일을 수정해야 합니다.</p>
 <ol>
-<li><code translate="no">milvus-standalone</code> 컨테이너에 액세스합니다.</li>
-</ol>
+<li><p><code translate="no">milvus-standalone</code> 컨테이너에 액세스합니다.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>기본 구성을 재정의할 추가 구성을 추가합니다. 다음은 기본값 <code translate="no">proxy.healthCheckTimeout</code> 을 재정의해야 한다고 가정합니다. 적용 가능한 구성 항목은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>기본 구성을 재정의할 추가 구성을 추가합니다. 다음은 기본값 <code translate="no">proxy.healthCheckTimeout</code> 을 재정의해야 한다고 가정합니다. 적용 가능한 구성 항목은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li><code translate="no">milvus-standalone</code> 컨테이너를 다시 시작하여 변경 사항을 적용합니다.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><code translate="no">milvus-standalone</code> 컨테이너를 다시 시작하여 변경 사항을 적용합니다.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
-<button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvus 중지 및 삭제<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
