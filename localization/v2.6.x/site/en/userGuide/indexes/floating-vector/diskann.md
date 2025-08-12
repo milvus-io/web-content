@@ -151,7 +151,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN-related parameters can be configured via your Milvus configuration file (<code translate="no">milvus.yaml</code>):</p>
+    </button></h2><p>DISKANN-related parameters can only be configured via your Milvus configuration file (<code translate="no">milvus.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -179,6 +179,9 @@ summary: >-
       </svg>
     </button></h2><p>Fine-tuning DISKANN’s parameters allows you to tailor its behavior to your specific dataset and search workload, striking the right balance between speed, accuracy, and memory usage.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Index building params</h3><p>These parameters influence how the DISKANN index is constructed. Adjusting them can affect the index size, build time, and search quality.</p>
+<div class="alert note">
+<p>All the index building params in the list below can only be configured via your Milvus configuration file (<code translate="no">milvus.yaml</code>)</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -229,6 +232,10 @@ summary: >-
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params</h3><p>These parameters influence how DISKANN performs searches. Adjusting them can impact search speed, latency, and resource usage.</p>
+<div class="alert note">
+<p>The <code translate="no">BeamWidthRatio</code> in the list below can only be configured via your Milvus configuration file (<code translate="no">milvus.yaml</code>)</p>
+<p>The <code translate="no">search_list</code> in the list below can only be configured in the search params in SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -249,7 +256,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency.</p></td>
      <td><p><strong>Type</strong>: Integer
  <strong>Range</strong>: [1, <em>int_max</em>]</p>
