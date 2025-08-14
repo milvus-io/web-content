@@ -35,7 +35,7 @@ Milvus Java SDK is an open-source project and its source code is hosted on [GitH
     </tr>
     <tr>
         <td>2.5.x</td>
-        <td>2.5.9</td>
+        <td>2.5.12</td>
     </tr>
 </table>
 
@@ -49,20 +49,20 @@ You can use **[Apache Maven](https://maven.apache.org/install.html)** or **[Grad
  <dependency>
      <groupId>io.milvus</groupId>
      <artifactId>milvus-sdk-java</artifactId>
-     <version>2.5.9</version>
+     <version>2.5.12</version>
  </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java:2.5.9'
+implementation 'io.milvus:milvus-sdk-java:2.5.12'
 ```
 
 - Gradle/Kotlin
 
 ```sql
-implementation("io.milvus:milvus-sdk-java:2.5.2")
+implementation("io.milvus:milvus-sdk-java:2.5.12")
 ```
 
 Since v2.5.2, Milvus Java SDK has been split into two packages: **milvus-sdk-java** and **milvus-sdk-java-bulkwriter**. If you do not need BulkWriter, ignore the **milvus-sdk-java-bulkwriter** package. To use BulkWriter, import the **milvus-sdk-java-bulkwriter** as follows:
@@ -71,20 +71,20 @@ Since v2.5.2, Milvus Java SDK has been split into two packages: **milvus-sdk-jav
  <dependency>
      <groupId>io.milvus</groupId>
      <artifactId>milvus-sdk-java-bulkwriter</artifactId>
-     <version>2.5.9</version>
+     <version>2.5.12</version>
  </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java-bulkwriter:2.5.9'
+implementation 'io.milvus:milvus-sdk-java-bulkwriter:2.5.12'
 ```
 
 - Gradle/Kotlin
 
 ```sql
-implementation("io.milvus:milvus-sdk-java-bulkwriter:2.5.9")
+implementation("io.milvus:milvus-sdk-java-bulkwriter:2.5.12")
 ```
 
 ## **Contributing**
