@@ -244,7 +244,7 @@ context = "\n".join(
 )
 ```
 
-Define system and user prompts for the Lanage Model. This prompt is assembled with the retrieved documents from Milvus.
+Define system and user prompts for the Language Model. This prompt is assembled with the retrieved documents from Milvus.
 
 
 ```python
