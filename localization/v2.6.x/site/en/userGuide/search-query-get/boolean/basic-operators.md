@@ -91,6 +91,9 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>This is useful when you want to check for membership in a list of values.</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Example 2: Using <code translate="no">LIKE</code> for Pattern Matching</h3><p>The <code translate="no">LIKE</code> operator is used for pattern matching in string fields. It can match substrings in different positions within the text: as a <strong>prefix</strong>, <strong>infix</strong>, or <strong>suffix</strong>. The <code translate="no">LIKE</code> operator uses the <code translate="no">%</code> symbol as a wildcard, which can match any number of characters (including zero).</p>
+<div class="alert note">
+<p>In most cases, <strong>infix</strong> or <strong>suffix</strong> matching is significantly slower than prefix matching. Use them with caution if performance is critical.</p>
+</div>
 <h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Prefix Match (Starts With)</h3><p>To perform a <strong>prefix</strong> match, where the string starts with a given pattern, you can place the pattern at the beginning and use <code translate="no">%</code> to match any characters following it. For example, to find all products whose <code translate="no">name</code> starts with "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
