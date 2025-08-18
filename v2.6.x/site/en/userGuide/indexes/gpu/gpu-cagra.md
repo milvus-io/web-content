@@ -24,8 +24,8 @@ index_params.add_index(
     index_name="vector_index", # Name of the index to create
     metric_type="L2", # Metric type used to measure similarity
     params={
-        "intermediate_graph_degree": 32, # Affects recall and build time by determining the graph’s degree before pruning
-        "graph_degree": 64, # Affets search performance and recall by setting the graph’s degree after pruning
+        "intermediate_graph_degree": 64, # Affects recall and build time by determining the graph’s degree before pruning
+        "graph_degree": 32, # Affets search performance and recall by setting the graph’s degree after pruning
         "build_algo": "IVF_PQ", # Selects the graph generation algorithm before pruning
         "cache_dataset_on_device": "true", # Decides whether to cache the original dataset in GPU memory
         "adapt_for_cpu": "false", # Decides whether to use GPU for index-building and CPU for search
