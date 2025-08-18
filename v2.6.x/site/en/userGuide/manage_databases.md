@@ -248,7 +248,7 @@ The following table lists possible database properties.
    <tr>
      <td><p><code>database.resource_groups</code></p></td>
      <td><p>string</p></td>
-     <td><p>The names of the resource groups associated with the specified database in a common-separated list.</p></td>
+     <td><p>The names of the resource groups associated with the specified database in a comma-separated list.</p></td>
    </tr>
    <tr>
      <td><p><code>database.diskQuota.mb</code></p></td>
