@@ -98,6 +98,12 @@ This is useful when you want to check for membership in a list of values.
 
 The `LIKE` operator is used for pattern matching in string fields. It can match substrings in different positions within the text: as a **prefix**, **infix**, or **suffix**. The `LIKE` operator uses the `%` symbol as a wildcard, which can match any number of characters (including zero).
 
+<div class="alert note">
+
+In most cases, <strong>infix</strong> or <strong>suffix</strong> matching is significantly slower than prefix matching. Use them with caution if performance is critical.
+
+</div>
+
 ### Prefix Match (Starts With)
 
 To perform a **prefix** match, where the string starts with a given pattern, you can place the pattern at the beginning and use `%` to match any characters following it. For example, to find all products whose `name` starts with "Prod":
