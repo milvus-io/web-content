@@ -43,9 +43,9 @@ summary: >-
     </button></h2><p>يجمع<strong>DISKANN</strong> بين تقنيتين رئيسيتين للبحث المتجه الفعال:</p>
 <ul>
 <li><p><strong>الرسم البياني Vamana Graph</strong> - فهرس <strong>قائم على القرص</strong> <strong>قائم على الرسم البياني</strong> يربط نقاط البيانات (أو المتجهات) للتنقل الفعال أثناء البحث.</p></li>
-<li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>في الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
+<li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>داخل الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">بناء الفهرس</h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات بيانات كبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
+<h3 id="Index-construction" class="common-anchor-header">بناء الفهرس</h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات البيانات الكبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
 <p>يوضح الشكل التالي كيف يتم بناء الرسم البياني لـ Vamana.</p>
 <p>
   
@@ -148,7 +148,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن تكوين المعلمات المتعلقة بـ DISKANN من خلال ملف تكوين Milvus (<code translate="no">milvus.yaml</code>):</p>
+    </button></h2><p>لا يمكن تكوين المعلمات المتعلقة بـ DISKANN إلا من خلال ملف تكوين Milvus (<code translate="no">milvus.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -175,7 +175,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يسمح لك الضبط الدقيق لمعلمات DISKANN بتكييف سلوكها مع مجموعة البيانات الخاصة بك وعبء عمل البحث، وتحقيق التوازن الصحيح بين السرعة والدقة واستخدام الذاكرة.</p>
-<h3 id="Index-building-params" class="common-anchor-header">بارامترات بناء الفهرس</h3><p>تؤثر هذه المعلمات على كيفية إنشاء فهرس DISKANN. يمكن أن يؤثر تعديلها على حجم الفهرس ووقت الإنشاء وجودة البحث.</p>
+<h3 id="Index-building-params" class="common-anchor-header">بارامترات بناء الفهرس</h3><p>تؤثر هذه المعلمات على كيفية إنشاء فهرس DISKANN. يمكن أن يؤثر تعديلها على حجم الفهرس ووقت إنشائه وجودة البحث.</p>
+<div class="alert note">
+<p>لا يمكن تكوين جميع بارامترات بناء الفهرس في القائمة أدناه إلا من خلال ملف تكوين ملف Milvus (<code translate="no">milvus.yaml</code>)</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -220,6 +223,10 @@ summary: >-
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>تؤثر هذه المعلمات على كيفية إجراء DISKANN لعمليات البحث. يمكن أن يؤثر ضبطها على سرعة البحث، والكمون واستخدام الموارد.</p>
+<div class="alert note">
+<p>لا يمكن تكوين <code translate="no">BeamWidthRatio</code> في القائمة أدناه إلا عبر ملف تكوين Milvus الخاص بك (<code translate="no">milvus.yaml</code>)</p>
+<p>لا يمكن تكوين <code translate="no">search_list</code> في القائمة أدناه إلا في باراميات البحث في SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -238,7 +245,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>أثناء عملية البحث، تحدد هذه المعلمة حجم مخزن التخزين المرشح الذي تحتفظ به الخوارزمية أثناء اجتيازها للرسم البياني. تزيد القيمة الأكبر من فرص العثور على الجيران الأقرب الحقيقيين (استدعاء أعلى) ولكنها تزيد أيضًا من زمن انتقال البحث.</p></td>
      <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">100</code></p></td>

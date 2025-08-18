@@ -43,8 +43,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Значения по умолчанию</strong>: Поля ARRAY не поддерживают значения по умолчанию. Однако вы можете установить атрибут <code translate="no">nullable</code> на <code translate="no">True</code>, чтобы разрешить нулевые значения. Подробности см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Тип данных</strong>: Все элементы поля Array должны иметь одинаковый тип данных, указанный в атрибуте <code translate="no">element_type</code>. Если вы установили <code translate="no">element_type</code> на <code translate="no">VARCHAR</code>, вы также должны установить <code translate="no">max_length</code> для элементов массива.</p></li>
-<li><p><strong>Емкость массива</strong>: Количество элементов в поле массива должно быть меньше или равно максимальной емкости, определенной при создании массива, как указано на <code translate="no">max_capacity</code>. Значение должно быть целым числом в диапазоне от <strong>1</strong> до <strong>4096</strong>.</p></li>
+<li><p><strong>Тип данных:</strong> Все элементы в поле ARRAY должны иметь один и тот же тип данных, который определяется параметром <code translate="no">element_type</code>. Если для параметра <code translate="no">element_type</code> установлено значение <code translate="no">VARCHAR</code>, необходимо также указать <code translate="no">max_length</code> для элементов массива. Параметр <code translate="no">element_type</code> принимает любой скалярный тип данных, поддерживаемый Milvus, за исключением <code translate="no">JSON</code>.</p></li>
+<li><p><strong>Емкость массива</strong>: Количество элементов в поле ARRAY должно быть меньше или равно максимальной емкости, определенной при создании массива, как указано на <code translate="no">max_capacity</code>. Значение должно быть целым числом в диапазоне от <strong>1</strong> до <strong>4096</strong>.</p></li>
 <li><p><strong>Работа со строками</strong>: Строковые значения в полях массива хранятся как есть, без семантического экранирования или преобразования. Например, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> и <code translate="no">&quot;a\&quot;b&quot;</code> хранятся как введенные, а <code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недопустимыми значениями.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Добавление поля ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -65,15 +65,15 @@ summary: >-
     </button></h2><p>Чтобы использовать ARRAY-поля Milvus, определите соответствующий тип поля при создании схемы коллекции. Этот процесс включает в себя:</p>
 <ol>
 <li><p>Установка <code translate="no">datatype</code> в поддерживаемый тип данных Array, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Использование параметра <code translate="no">element_type</code> для указания типа данных элементов массива. Это может быть любой скалярный тип данных, поддерживаемый Milvus, например <code translate="no">VARCHAR</code> или <code translate="no">INT64</code>. Все элементы в одном массиве должны иметь одинаковый тип данных.</p></li>
-<li><p>Использование параметра <code translate="no">max_capacity</code> для определения максимальной емкости массива, т. е. максимального количества элементов, которые он может содержать.</p></li>
+<li><p>Использование параметра <code translate="no">element_type</code> для указания типа данных элементов в массиве. Все элементы в одном массиве должны иметь одинаковый тип данных.</p></li>
+<li><p>С помощью параметра <code translate="no">max_capacity</code> задайте максимальную емкость массива, то есть максимальное количество элементов, которые он может содержать.</p></li>
 </ol>
 <p>Вот как определить схему коллекции, включающую поля ARRAY:</p>
 <div class="alert note">
 <p>Если при определении схемы задать параметр <code translate="no">enable_dynamic_fields=True</code>, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может увеличить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#http">HTTP</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -212,7 +212,7 @@ schema.WithField(entity.NewField().
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-http">export arrayField1='{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField1=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;tags&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;VarChar&quot;,
@@ -220,41 +220,41 @@ schema.WithField(entity.NewField().
         &quot;max_capacity&quot;: 10,
         &quot;max_length&quot;: 65535
     }
-}'
+}&#x27;</span>
 
-export arrayField2='{
+<span class="hljs-built_in">export</span> arrayField2=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;ratings&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;Int64&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;max_capacity&quot;: 5
     }
-}'
+}&#x27;</span>
 
-export pkField='{
+<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
     &quot;dataType&quot;: &quot;Int64&quot;,
     &quot;isPrimary&quot;: true
-}'
+}&#x27;</span>
 
-export vectorField='{
+<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;embedding&quot;,
     &quot;dataType&quot;: &quot;FloatVector&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;dim&quot;: 3
     }
-}'
+}&#x27;</span>
 
-export schema=&quot;{
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: false,
     \&quot;fields\&quot;: [
-        $arrayField1,
-        $arrayField2,
-        $pkField,
-        $vectorField
+        <span class="hljs-variable">$arrayField1</span>,
+        <span class="hljs-variable">$arrayField2</span>,
+        <span class="hljs-variable">$pkField</span>,
+        <span class="hljs-variable">$vectorField</span>
     ]
-}&quot;
-</code></pre>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-index-params" class="common-anchor-header">Установка параметров индекса<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

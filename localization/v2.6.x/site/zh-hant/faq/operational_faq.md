@@ -18,8 +18,46 @@ title: 操作常見問題
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">如果我從 Docker Hub 拉取 Milvus Docker 映像失敗怎麼辦？</h4><p>如果您從 Docker Hub 拉取 Milvus Docker image 失敗，請嘗試加入其他註冊表鏡像。</p>
-<p>中國大陸的使用者可以在<strong>/etc.docker/daemon.json</strong> 的 registry-mirrors array 中加入網址 "https://registry.docker-cn.com"。</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">什麼是 QueryNode 委託器，它的責任是什麼？</h4><p>當集合載入時，QueryNode 會訂閱來自訊息佇列的插入和刪除訊息的 DML 通道。訂閱這些通道的 QueryNode（稱為委託者）負責：</p>
+<ul>
+<li>管理因持續插入而需要額外記憶體的增加區段。</li>
+<li>接收刪除訊息，並將訊息傳送給持有相關區段的其他 QueryNode。</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">如何辨識集合的委託節點？</h4><p>使用 Birdwatcher。</p>
+<p><a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">按此</a>安裝 Birdwatcher，然後執行以下指令：</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">如果查詢節點記憶體使用不平衡，可以調整哪些參數？</h4><p>有時候，查詢節點的記憶體用量會有所不同，因為有些作為委託人的節點會使用較多的 RAM。如果委託人的記憶體較多，請調整 queryCoord.delegatorMemoryOverloadFactor，以將封存的區段卸載到其他節點，並降低 RAM 使用量。</p>
+<ul>
+<li>預設值為 0.1。</li>
+<li>增加此值 (例如，增加到 0.3 或更高) 會使系統從超載的 delegator 卸載更多封存區段到其他 QueryNodes，幫助平衡記憶體使用。您也可以嘗試將值增加到 1，這表示不會在 delegator 節點中載入封存區段。</li>
+</ul>
+<p>如果您不想重新啟動群集，您可以使用 birdwatcher 修改 milvus 配置：</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">如何設定集合的 shard_num？</h4><p>最佳的做法是，對於維度為 768 的向量集合，建議每 ~1 億向量至少使用 1 個 shard。對於大量寫入的使用情況，每 ~1 億向量使用 4 個 shard。</p>
+<p>例如，如果您有 1 億向量，請使用 1-4 個分片。如果您有 5 億向量，請使用 5-10 個磁碟分割。</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">如果我從 Docker Hub 拉取 Milvus Docker 映像失敗怎麼辦？</h4><p>如果您從 Docker Hub 拉取 Milvus Docker image 失敗，請嘗試新增其他註冊表鏡像。</p>
+<p>中國大陸的使用者可以在<strong>/etc.docker/daemon.json</strong> 的 registry-mirrors<strong> 陣列</strong>中加入網址 "https://registry.docker-cn.com"。</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
@@ -31,7 +69,7 @@ title: 操作常見問題
 <p>對於 HNSW 索引，ef 參數決定圖搜尋的寬度。增加 ef 會增加在圖表上搜尋的點數量和召回率，但會降低查詢效能。</p>
 <p>如需詳細資訊，請參閱<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">向量索引</a>。</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">為什麼我對配置檔案的變更沒有生效？</h4><p>Milvus 不支援在執行時修改組態檔案。您必須重新啟動 Milvus Docker，配置檔案的變更才會生效。</p>
-<h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">我如何知道 Milvus 是否成功啟動？</h4><p>如果 Milvus 是使用 Docker Compose 啟動的，請執行<code translate="no">docker ps</code> 觀察有多少 Docker 容器正在執行，並檢查 Milvus 服務是否正確啟動。</p>
+<h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">我如何知道 Milvus 是否成功啟動？</h4><p>如果 Milvus 是使用 Docker Compose 啟動，請執行<code translate="no">docker ps</code> 觀察有多少 Docker 容器正在執行，並檢查 Milvus 服務是否正確啟動。</p>
 <p>對於 Milvus 獨立版本，您應該至少可以觀察到三個執行中的 Docker 容器，其中一個是 Milvus 服務，另外兩個是 etcd 管理和儲存服務。如需詳細資訊，請參閱<a href="/docs/zh-hant/install_standalone-docker.md">安裝 Milvus standalone</a>。</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">為什麼日誌檔中的時間與系統時間不同？</h4><p>時間不同通常是因為主機不使用 Coordinated Universal Time (UTC)。</p>
 <p>Docker 映像中的日誌檔案預設使用 UTC。如果您的主機不使用 UTC，可能會發生這個問題。</p>
@@ -45,7 +83,7 @@ title: 操作常見問題
 <p>執行 lscpu 指令檢查您的 CPU 是否支援上述 SIMD 指令集：</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>lscpu |<span class="hljs-params"> grep -e sse4_2 -e avx -e avx2 -e avx512
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">為什麼 Milvus 在啟動時返回<code translate="no">illegal instruction</code> ？</h4><p>Milvus 要求您的 CPU 支援 SIMD 指令集：SSE4.2、AVX、AVX2 或 AVX512。CPU 必須至少支援其中之一，以確保 Milvus 正常運作。在啟動時返回<code translate="no">illegal instruction</code> 錯誤，表示您的 CPU 不支援上述四個指令集中的任何一個。</p>
+<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">為什麼 Milvus 在啟動時返回<code translate="no">illegal instruction</code> ？</h4><p>Milvus 要求您的 CPU 支援 SIMD 指令集：SSE4.2、AVX、AVX2 或 AVX512。CPU 必須至少支援其中之一，以確保 Milvus 正常運作。在啟動時返回<code translate="no">illegal instruction</code> 錯誤，表示您的 CPU 不支援上述四種指令集中的任何一種。</p>
 <p>請參閱<a href="/docs/zh-hant/prerequisite-docker.md">CPU 對 SIMD 指令集的支援</a>。</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">我可以在 Windows 上安裝 Milvus 嗎？</h4><p>可以，您可以從原始碼或二進位套件編譯在 Windows 上安裝 Milvus。</p>
 <p>請參閱<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">在 Windows 上執行 Milvus</a>了解如何在 Windows 上安裝 Milvus。</p>
@@ -89,7 +127,7 @@ title: 操作常見問題
 <p>要了解並處理這些錯誤：</p>
 <ul>
 <li>瞭解<code translate="no">len(str)</code> 在 Python 中代表字元數，而不是以位元組表示的大小。</li>
-<li>對於以字串為基礎的資料類型，例如 VARCHAR 和 JSON，使用<code translate="no">len(bytes(str, encoding='utf-8'))</code> 來決定實際大小 (位元組)，這也是 Milvus 使用 "max-length" 的原因。</li>
+<li>對於以字串為基礎的資料類型，例如 VARCHAR 和 JSON，使用<code translate="no">len(bytes(str, encoding='utf-8'))</code> 來決定實際大小（以位元組為單位元組），也就是 Milvus 使用的 "max-length"。</li>
 </ul>
 <p>Python 中的範例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>

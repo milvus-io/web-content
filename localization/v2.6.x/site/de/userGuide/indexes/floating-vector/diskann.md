@@ -53,7 +53,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann.png" alt="Diskann" class="doc-image" id="diskann" />
    </span> <span class="img-wrapper"> <span>Diskann</span> </span></p>
 <ol>
-<li><p><strong>Anfängliche zufällige Verbindungen:</strong> Jeder Datenpunkt (Vektor) wird als ein Knoten im Graphen dargestellt. Diese Knoten werden anfangs zufällig miteinander verbunden und bilden ein dichtes Netz. Normalerweise hat ein Knoten zu Beginn etwa 500 Kanten (oder Verbindungen), um eine breite Konnektivität zu gewährleisten.</p></li>
+<li><p><strong>Anfängliche zufällige Verbindungen:</strong> Jeder Datenpunkt (Vektor) wird als ein Knoten im Graphen dargestellt. Diese Knoten werden anfangs zufällig miteinander verbunden und bilden ein dichtes Netz. Normalerweise hat ein Knoten zu Beginn etwa 500 Kanten (oder Verbindungen), um eine breite Konnektivität zu erreichen.</p></li>
 <li><p><strong>Verfeinerung für mehr Effizienz:</strong> Der anfängliche Zufallsgraph wird einem Optimierungsprozess unterzogen, um ihn für die Suche effizienter zu machen. Dies umfasst zwei wichtige Schritte:</p>
 <ul>
 <li><p><strong>Ausschneiden überflüssiger Kanten:</strong> Der Algorithmus verwirft unnötige Verbindungen auf der Grundlage der Entfernungen zwischen den Knoten. Bei diesem Schritt werden Kanten höherer Qualität bevorzugt.</p>
@@ -84,10 +84,10 @@ summary: >-
 <li><p><strong>Auswahl von Knoten für eine genaue Abstandsberechnung:</strong> Aus den Näherungsergebnissen wird eine Teilmenge der vielversprechendsten Nachbarn (grüne Kreise in der Abbildung) für eine genaue Abstandsberechnung anhand ihrer ursprünglichen, nicht komprimierten Vektoren ausgewählt. Dazu müssen die Daten von der Festplatte gelesen werden, was sehr zeitaufwändig sein kann. DISKANN verwendet zwei Parameter, um dieses empfindliche Gleichgewicht zwischen Genauigkeit und Geschwindigkeit zu steuern:</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>: Ein Verhältnis, das die Breite der Suche steuert und bestimmt, wie viele Nachbarschaftskandidaten parallel ausgewählt werden, um ihre Nachbarn zu untersuchen. Ein größeres <code translate="no">beam_width_ratio</code> führt zu einer breiteren Suche, was zu einer höheren Genauigkeit führen kann, aber auch die Rechenkosten und die Festplatten-E/A erhöht. Die Breite des Suchstrahls, d. h. die Anzahl der ausgewählten Knoten, wird anhand der folgenden Formel bestimmt: <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>: Der Anteil des Speichers, der für die Zwischenspeicherung häufig aufgerufener Festplattendaten zugewiesen wird. Diese Zwischenspeicherung trägt dazu bei, die Festplatten-E/A zu minimieren, wodurch wiederholte Suchvorgänge schneller durchgeführt werden können, da sich die Daten bereits im Speicher befinden.</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>: Der Anteil des Speichers, der für die Zwischenspeicherung häufig abgerufener Festplattendaten zugewiesen wird. Diese Zwischenspeicherung trägt dazu bei, die Festplatten-E/A zu minimieren, wodurch wiederholte Suchvorgänge schneller durchgeführt werden können, da sich die Daten bereits im Speicher befinden.</p></li>
 </ul>
 <p>Weitere Informationen zur Parametereinstellung finden Sie unter <a href="/docs/de/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN-Konfigurationen</a>.</p></li>
-<li><p><strong>Iterative Erkundung:</strong> Die Suche verfeinert iterativ die Menge der Kandidaten, indem sie wiederholt ungefähre Auswertungen (unter Verwendung von PQ) durchführt, gefolgt von präzisen Prüfungen (unter Verwendung der Originalvektoren von der Festplatte), bis eine ausreichende Anzahl von Nachbarn gefunden wurde.</p></li>
+<li><p><strong>Iterative Erkundung:</strong> Die Suche verfeinert iterativ die Menge der Kandidaten, indem sie wiederholt ungefähre Bewertungen (unter Verwendung von PQ) durchführt, gefolgt von präzisen Prüfungen (unter Verwendung der Originalvektoren von der Festplatte), bis eine ausreichende Anzahl von Nachbarn gefunden wurde.</p></li>
 </ol>
 <h2 id="Enable-DISKANN-in-Milvus" class="common-anchor-header">Aktivieren von DISKANN in Milvus<button data-href="#Enable-DISKANN-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -104,7 +104,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Standardmäßig ist <strong>DISKANN</strong> in Milvus deaktiviert, um der Geschwindigkeit von In-Memory-Indizes für Datensätze, die bequem in den RAM passen, den Vorrang zu geben. Wenn Sie jedoch mit großen Datenmengen arbeiten oder die Skalierbarkeit von <strong>DISKANN</strong> und die SSD-Optimierung nutzen möchten, können Sie es einfach aktivieren.</p>
+    </button></h2><p>Standardmäßig ist <strong>DISKANN</strong> in Milvus deaktiviert, um der Geschwindigkeit von In-Memory-Indizes für Datensätze, die bequem in den RAM passen, den Vorrang zu geben. Wenn Sie jedoch mit großen Datensätzen arbeiten oder die Skalierbarkeit von <strong>DISKANN</strong> und die SSD-Optimierung nutzen möchten, können Sie DISKANN problemlos aktivieren.</p>
 <p>Hier erfahren Sie, wie Sie DISKANN in Milvus aktivieren können:</p>
 <ol>
 <li><p><strong>Aktualisieren Sie die Milvus-Konfigurationsdatei</strong></p>
@@ -149,7 +149,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN-bezogene Parameter können über Ihre Milvus-Konfigurationsdatei (<code translate="no">milvus.yaml</code>) konfiguriert werden:</p>
+    </button></h2><p>DISKANN-bezogene Parameter können nur über Ihre Milvus-Konfigurationsdatei (<code translate="no">milvus.yaml</code>) konfiguriert werden:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -177,6 +177,9 @@ summary: >-
       </svg>
     </button></h2><p>Die Feinabstimmung der DISKANN-Parameter ermöglicht es Ihnen, das Verhalten von DISKANN an Ihren spezifischen Datensatz und Ihre Suchlast anzupassen und das richtige Gleichgewicht zwischen Geschwindigkeit, Genauigkeit und Speicherverbrauch zu finden.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>Diese Parameter beeinflussen, wie der DISKANN-Index aufgebaut wird. Eine Anpassung dieser Parameter kann die Indexgröße, die Erstellungszeit und die Suchqualität beeinflussen.</p>
+<div class="alert note">
+<p>Alle Indexaufbau-Parameter in der folgenden Liste können nur über Ihre Milvus-Konfigurationsdatei (<code translate="no">milvus.yaml</code>) konfiguriert werden.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -220,7 +223,11 @@ summary: >-
 <p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: (0,0625, 0,25)</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>Diese Parameter beeinflussen, wie DISKANN die Suche durchführt. Ihre Einstellung kann sich auf die Suchgeschwindigkeit, die Latenzzeit und die Ressourcennutzung auswirken.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>Diese Parameter beeinflussen, wie DISKANN die Suche durchführt. Eine Anpassung dieser Parameter kann sich auf die Suchgeschwindigkeit, die Latenzzeit und die Ressourcennutzung auswirken.</p>
+<div class="alert note">
+<p>Die <code translate="no">BeamWidthRatio</code> in der folgenden Liste können nur über Ihre Milvus-Konfigurationsdatei (<code translate="no">milvus.yaml</code>) konfiguriert werden.</p>
+<p>Die <code translate="no">search_list</code> in der Liste unten können nur in den Suchparametern im SDK konfiguriert werden.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -239,7 +246,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>Während eines Suchvorgangs bestimmt dieser Parameter die Größe des Kandidatenpools, den der Algorithmus beim Durchlaufen des Graphen beibehält. Ein größerer Wert erhöht die Wahrscheinlichkeit, dass die wahren nächsten Nachbarn gefunden werden (höhere Trefferquote), erhöht aber auch die Suchlatenz.</p></td>
      <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Standardwert</strong>: <code translate="no">100</code></p></td>

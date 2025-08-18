@@ -87,7 +87,10 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>當您要檢查一個值清單中的成員身分時，這就很有用。</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">範例 2：使用<code translate="no">LIKE</code> 進行模式匹配</h3><p><code translate="no">LIKE</code> 運算符號用於字串欄位中的模式匹配。它可以匹配文本中不同位置的子串：<strong>前綴</strong>、<strong>後綴</strong>或<strong>後綴</strong>。<code translate="no">LIKE</code> 運算符號使用<code translate="no">%</code> 符號作為通配符，可以匹配任何數量的字元（包括 0）。</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">範例 2：使用<code translate="no">LIKE</code> 進行模式匹配</h3><p><code translate="no">LIKE</code> 運算符號用於字串欄位中的模式匹配。它可以匹配文本中不同位置的子串：<strong>前綴</strong>、<strong>後綴</strong>或<strong>後綴</strong>。<code translate="no">LIKE</code> 運算符號使用<code translate="no">%</code> 符號作為通配符，可以匹配任何數量的字元（包括零）。</p>
+<div class="alert note">
+<p>在大多數情況下，<strong>下綴</strong> <strong>或後綴</strong>匹配會比前綴匹配慢很多。如果性能非常重要，請謹慎使用。</p>
+</div>
 <h3 id="Prefix-Match-Starts-With" class="common-anchor-header">前綴匹配（從開始）</h3><p>若要執行<strong>前綴</strong>匹配，即字串以指定的模式開始，您可以將模式放在開頭，並使用<code translate="no">%</code> 來匹配其後的任何字元。例如，搜尋<code translate="no">name</code> 以「Prod」開頭的所有產品：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -124,7 +127,7 @@ summary: >-
 <li><p><code translate="no">%</code> (模乘)</p></li>
 <li><p><code translate="no">**</code> (幂级数)</p></li>
 </ul>
-<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">範例 1：使用模數 (<code translate="no">%</code>)</h3><p>找出<code translate="no">id</code> 是偶數（即能被 2 整除）的實數：</p>
+<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">範例 1：使用模數 (<code translate="no">%</code>)</h3><p>尋找<code translate="no">id</code> 是偶數（即能被 2 整除）的實體：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">例 2：使用幂级数 (<code translate="no">**</code>)</h3><p>尋找<code translate="no">price</code> 升為 2 的幂大於 1000 的實體：</p>

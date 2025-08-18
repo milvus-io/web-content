@@ -91,7 +91,10 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>Это полезно, когда нужно проверить принадлежность к списку значений.</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Пример 2: Использование <code translate="no">LIKE</code> для сопоставления с образцом</h3><p>Оператор <code translate="no">LIKE</code> используется для поиска шаблонов в строковых полях. Он может сопоставлять подстроки в различных позициях в тексте: в качестве <strong>префикса</strong>, <strong>инфикса</strong> или <strong>суффикса</strong>. Оператор <code translate="no">LIKE</code> использует символ <code translate="no">%</code> в качестве подстановочного знака, который может соответствовать любому количеству символов (включая ноль).</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Префиксное совпадение (начинается с)</h3><p>Чтобы выполнить <strong>префиксное</strong> совпадение, при котором строка начинается с заданного шаблона, можно поместить шаблон в начало и использовать <code translate="no">%</code> для совпадения всех символов, следующих за ним. Например, чтобы найти все продукты, чье <code translate="no">name</code> начинается с "Prod":</p>
+<div class="alert note">
+<p>В большинстве случаев <strong>инфиксное</strong> или <strong>суффиксное</strong> сопоставление значительно медленнее префиксного. Используйте их с осторожностью, если производительность очень важна.</p>
+</div>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Префиксное совпадение (начинается с)</h3><p>Чтобы выполнить <strong>префиксное</strong> соответствие, когда строка начинается с заданного шаблона, можно поместить шаблон в начало и использовать <code translate="no">%</code> для соответствия всем символам, следующим за ним. Например, чтобы найти все продукты, чье <code translate="no">name</code> начинается с "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>В этом случае будет найден любой продукт, название которого начинается с "Prod", например "Product A", "Product B" и т. д.</p>
@@ -127,7 +130,7 @@ summary: >-
 <li><p><code translate="no">%</code> (Модуль)</p></li>
 <li><p><code translate="no">**</code> (Экспоненция)</p></li>
 </ul>
-<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Пример 1: Использование модуля (<code translate="no">%</code>)</h3><p>Нахождение сущностей, в которых <code translate="no">id</code> является четным числом (т.е. кратным 2):</p>
+<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Пример 1: Использование модуля (<code translate="no">%</code>)</h3><p>Нахождение сущностей, для которых <code translate="no">id</code> является четным числом (т.е. кратным 2):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">Пример 2: Использование экспоненции (<code translate="no">**</code>)</h3><p>Для поиска сущностей, в которых <code translate="no">price</code>, возведенное в степень 2, больше 1000:</p>

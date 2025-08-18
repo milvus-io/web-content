@@ -259,7 +259,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">database.resource_groups</code></p></td>
      <td><p>문자열</p></td>
-     <td><p>지정된 데이터베이스와 연결된 리소스 그룹의 이름을 쉼표로 구분한 목록입니다.</p></td>
+     <td><p>쉼표로 구분된 목록으로 지정된 데이터베이스와 연결된 리소스 그룹의 이름입니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.diskQuota.mb</code></p></td>

@@ -42,7 +42,6 @@ summary: >-
 <li><p>기본 필드를 제외한 스칼라 필드만 기본값 및 null 가능 속성을 지원합니다.</p></li>
 <li><p>JSON 및 배열 필드는 기본값을 지원하지 않습니다.</p></li>
 <li><p>기본값 또는 null 가능 속성은 컬렉션 생성 중에만 구성할 수 있으며 이후에는 수정할 수 없습니다.</p></li>
-<li><p>nullable 속성이 활성화된 스칼라 필드는 그룹화 검색에서 <code translate="no">group_by_field</code> 으로 사용할 수 없습니다. 검색 그룹화에 대한 자세한 내용은 <a href="/docs/ko/grouping-search.md">검색 그룹화를</a> 참조하세요.</p></li>
 <li><p>nullable로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키에 대한 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
 <li><p>nullable 속성이 활성화된 스칼라 필드에 인덱스를 생성할 때 null 값은 인덱스에서 제외됩니다.</p></li>
 <li><p><strong>JSON 및 배열 필드</strong>: <code translate="no">IS NULL</code> 또는 <code translate="no">IS NOT NULL</code> 연산자를 사용하여 JSON 또는 ARRAY 필드를 필터링하는 경우, 이러한 연산자는 열 수준에서 작동하므로 전체 JSON 객체 또는 배열이 null인지 여부만 평가합니다. 예를 들어 JSON 객체 내부의 키가 null인 경우 <code translate="no">IS NULL</code> 필터에서는 해당 키가 인식되지 않습니다. 자세한 내용은 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하세요.</p></li>
@@ -1107,6 +1106,6 @@ curl --request POST \
      <td><p>Null</p></td>
      <td><p>없음/무효</p></td>
      <td><p>오류를 던짐</p></td>
-     <td><p>필드입니다: <code translate="no">username</code> 기본값: null</p><p>사용자 입력: null</p><p>결과: 작업 거부, 시스템에서 오류 발생</p></td>
+     <td><p>필드: <code translate="no">username</code> 기본값: null</p><p>사용자 입력: null</p><p>결과: 작업 거부, 시스템에서 오류 발생</p></td>
    </tr>
 </table>

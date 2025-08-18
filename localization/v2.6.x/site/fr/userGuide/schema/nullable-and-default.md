@@ -45,8 +45,7 @@ summary: >-
     </button></h2><ul>
 <li><p>Seuls les champs scalaires, à l'exception du champ primaire, prennent en charge les valeurs par défaut et l'attribut nullable.</p></li>
 <li><p>Les champs JSON et les tableaux ne prennent pas en charge les valeurs par défaut.</p></li>
-<li><p>Les valeurs par défaut ou l'attribut nullable ne peuvent être configurés que lors de la création de la collection et ne peuvent pas être modifiés par la suite.</p></li>
-<li><p>Les champs scalaires dont l'attribut nullable est activé ne peuvent pas être utilisés en tant que <code translate="no">group_by_field</code> dans la recherche groupée. Pour plus d'informations sur la recherche par regroupement, voir <a href="/docs/fr/grouping-search.md">Recherche par regroupement</a>.</p></li>
+<li><p>Les valeurs par défaut ou l'attribut nullable ne peuvent être configurés que lors de la création de la collection et ne peuvent être modifiés par la suite.</p></li>
 <li><p>Les champs marqués comme nullables ne peuvent pas être utilisés comme clés de partition. Pour plus d'informations sur les clés de partition, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utiliser une clé de partition</a>.</p></li>
 <li><p>Lors de la création d'un index sur un champ scalaire dont l'attribut nullable est activé, les valeurs nulles seront exclues de l'index.</p></li>
 <li><p><strong>Champs JSON et ARRAY</strong>: Lorsque vous utilisez les opérateurs <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code> pour filtrer les champs JSON ou ARRAY, ces opérateurs fonctionnent au niveau de la colonne, ce qui signifie qu'ils évaluent uniquement si l'ensemble de l'objet JSON ou du tableau est nul. Par exemple, si une clé à l'intérieur d'un objet JSON est nulle, elle ne sera pas reconnue par le filtre <code translate="no">IS NULL</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/basic-operators.md">Opérateurs de base</a>.</p></li>

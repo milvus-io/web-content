@@ -1,7 +1,7 @@
 ---
 id: array_data_type.md
 title: 配列フィールド
-summary: ARRAYフィールドは、同じデータ型の要素の順序付きセットを格納します。ARRAYフィールドがどのようにデータを格納するかの例を以下に示す：
+summary: ARRAYフィールドは、同じデータ型の要素の順序付けられたセットを格納します。ARRAYフィールドがどのようにデータを格納するかの例を以下に示す：
 ---
 <h1 id="Array-Field" class="common-anchor-header">配列フィールド<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,9 +41,9 @@ summary: ARRAYフィールドは、同じデータ型の要素の順序付きセ
       </svg>
     </button></h2><ul>
 <li><p><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。しかし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、ヌル値を許容することができます。詳細は<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Defaultを</a>参照してください。</p></li>
-<li><p><strong>データ型</strong>：データ型：配列フィールドの全要素は、<code translate="no">element_type</code> で指定されるように、同じデータ型を持つ必要があります。<code translate="no">element_type</code> を<code translate="no">VARCHAR</code> に設定した場合、配列要素にも<code translate="no">max_length</code> を設定する必要があります。</p></li>
-<li><p><strong>配列の容量</strong>：Arrayフィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、Arrayの作成時に定義された最大容量以下でなければならない。この値は1から<strong>4096の</strong>範囲内の整数でなければならない。</p></li>
-<li><p><strong>文字列の処理</strong>：Arrayフィールドの文字列値は、セマンティック・エスケープや変換を行わず、そのまま格納される。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納され、<code translate="no">'a'b'</code> 、<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされる。</p></li>
+<li><p><strong>データ型：</strong>データ型：ARRAYフィールドの全要素は、<code translate="no">element_type</code> パラメータで定義される同じデータ型を共有しなければなりません。<code translate="no">element_type</code> が<code translate="no">VARCHAR</code> に設定されている場合、配列要素には<code translate="no">max_length</code> も指定する必要がある。<code translate="no">element_type</code> はmilvusがサポートするスカラーデータ型であれば、<code translate="no">JSON</code> を除いて、どのようなデータ型でも受け付けます。</p></li>
+<li><p><strong>配列の容量</strong>：ARRAYフィールドの要素数は、<code translate="no">max_capacity</code> で指定された、Arrayの作成時に定義された最大容量以下でなければなりません。この値は1から<strong>4096の</strong>範囲内の整数でなければならない。</p></li>
+<li><p><strong>文字列の取り扱い</strong>：Arrayフィールドの文字列値は、セマンティック・エスケープや変換を行わず、そのまま格納される。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納され、<code translate="no">'a'b'</code> 、<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされる。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAYフィールドの追加<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,15 +63,15 @@ summary: ARRAYフィールドは、同じデータ型の要素の順序付きセ
     </button></h2><p>MilvusでARRAYフィールドを使用するには、コレクションスキーマの作成時に関連するフィールドタイプを定義します。このプロセスには以下が含まれます：</p>
 <ol>
 <li><p><code translate="no">datatype</code> をサポートされている配列データ型、<code translate="no">ARRAY</code> に設定します。</p></li>
-<li><p><code translate="no">element_type</code> パラメータを使用して、配列内の要素のデータ型を指定します。これは、Milvusがサポートするスカラーデータ型であれば、<code translate="no">VARCHAR</code> や<code translate="no">INT64</code> のようなデータ型でもかまいません。同じArray内の要素はすべて同じデータ型でなければなりません。</p></li>
+<li><p><code translate="no">element_type</code> パラメータを使用して、配列内の要素のデータ型を指定します。同じ配列内のすべての要素は、同じデータ型でなければなりません。</p></li>
 <li><p><code translate="no">max_capacity</code> パラメータを使用して、配列の最大容量、つまり格納できる要素の最大数を定義します。</p></li>
 </ol>
-<p>ここでは、ARRAYフィールドを含むコレクションスキーマを定義する方法を説明します：</p>
+<p>ここでは、ARRAYフィールドを含むコレクションスキーマを定義する方法を示します：</p>
 <div class="alert note">
-<p>スキーマを定義する際に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusはあらかじめ定義されていないスカラーフィールドを挿入することができます。ただし、この場合、クエリおよび管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>
+<p>スキーマを定義する際に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusはあらかじめ定義されていないスカラーフィールドを挿入することができます。ただし、この場合、クエリおよび管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細は<a href="/docs/ja/enable-dynamic-field.md">Dynamic Field</a> を参照してください。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#http">HTTP</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -210,7 +210,7 @@ schema.WithField(entity.NewField().
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-http">export arrayField1='{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField1=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;tags&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;VarChar&quot;,
@@ -218,41 +218,41 @@ schema.WithField(entity.NewField().
         &quot;max_capacity&quot;: 10,
         &quot;max_length&quot;: 65535
     }
-}'
+}&#x27;</span>
 
-export arrayField2='{
+<span class="hljs-built_in">export</span> arrayField2=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;ratings&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;Int64&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;max_capacity&quot;: 5
     }
-}'
+}&#x27;</span>
 
-export pkField='{
+<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
     &quot;dataType&quot;: &quot;Int64&quot;,
     &quot;isPrimary&quot;: true
-}'
+}&#x27;</span>
 
-export vectorField='{
+<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;embedding&quot;,
     &quot;dataType&quot;: &quot;FloatVector&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;dim&quot;: 3
     }
-}'
+}&#x27;</span>
 
-export schema=&quot;{
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: false,
     \&quot;fields\&quot;: [
-        $arrayField1,
-        $arrayField2,
-        $pkField,
-        $vectorField
+        <span class="hljs-variable">$arrayField1</span>,
+        <span class="hljs-variable">$arrayField2</span>,
+        <span class="hljs-variable">$pkField</span>,
+        <span class="hljs-variable">$vectorField</span>
     ]
-}&quot;
-</code></pre>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-index-params" class="common-anchor-header">インデックス・パラメータの設定<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -268,7 +268,7 @@ export schema=&quot;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
+    </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。Milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
 <p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> と ARRAY フィールド<code translate="no">tags</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細については、「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」を参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

@@ -50,8 +50,8 @@ index_params.add_index(
     index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
     metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
     params={
-        <span class="hljs-string">&quot;intermediate_graph_degree&quot;</span>: <span class="hljs-number">32</span>, <span class="hljs-comment"># Affects recall and build time by determining the graph’s degree before pruning</span>
-        <span class="hljs-string">&quot;graph_degree&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Affets search performance and recall by setting the graph’s degree after pruning</span>
+        <span class="hljs-string">&quot;intermediate_graph_degree&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Affects recall and build time by determining the graph’s degree before pruning</span>
+        <span class="hljs-string">&quot;graph_degree&quot;</span>: <span class="hljs-number">32</span>, <span class="hljs-comment"># Affets search performance and recall by setting the graph’s degree after pruning</span>
         <span class="hljs-string">&quot;build_algo&quot;</span>: <span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Selects the graph generation algorithm before pruning</span>
         <span class="hljs-string">&quot;cache_dataset_on_device&quot;</span>: <span class="hljs-string">&quot;true&quot;</span>, <span class="hljs-comment"># Decides whether to cache the original dataset in GPU memory</span>
         <span class="hljs-string">&quot;adapt_for_cpu&quot;</span>: <span class="hljs-string">&quot;false&quot;</span>, <span class="hljs-comment"># Decides whether to use GPU for index-building and CPU for search</span>
@@ -153,7 +153,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll. Die Einstellung dieses Parameters auf <code translate="no">"true"</code> erfordert das Vorhandensein des Parameters <code translate="no">ef</code> in den Suchanfragen.</p></td>
+     <td><p>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll. Wenn dieser Parameter auf <code translate="no">"true"</code> gesetzt wird, muss der Parameter <code translate="no">ef</code> in den Suchanfragen vorhanden sein.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
@@ -186,7 +186,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Legt den Kompromiss zwischen Abfragezeit und -genauigkeit fest. Ein höherer Wert <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche. Dieser Parameter ist obligatorisch, wenn Sie <code translate="no">adapt_for_cpu</code> auf <code translate="no">true</code> setzen, wenn Sie den Index erstellen.</p></td>
+     <td><p>Gibt den Kompromiss zwischen Abfragezeit und -genauigkeit an. Ein höherer Wert <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche. Dieser Parameter ist obligatorisch, wenn Sie <code translate="no">adapt_for_cpu</code> auf <code translate="no">true</code> setzen, wenn Sie den Index erstellen.</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

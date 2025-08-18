@@ -20,7 +20,45 @@ title: FAQ opérationnelle
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Que faire si je ne parviens pas à extraire l'image Docker Milvus de Docker Hub ?</h4><p>Si vous n'avez pas réussi à extraire l'image Docker Milvus de Docker Hub, essayez d'ajouter d'autres miroirs de registre.</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">Qu'est-ce qu'un délégateur QueryNode et quelles sont ses responsabilités ?</h4><p>Lorsqu'une collection est chargée, un QueryNode s'abonne aux canaux DML pour les messages d'insertion et de suppression provenant de la file d'attente des messages. Le QueryNode qui s'abonne à ces canaux, connu sous le nom de délégué, est responsable de ce qui suit :</p>
+<ul>
+<li>de gérer les segments croissants qui nécessitent une mémoire supplémentaire en raison des insertions en cours.</li>
+<li>Recevoir les messages de suppression et les transmettre à d'autres nœuds de requête qui détiennent les segments concernés.</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">Comment identifier les nœuds délégateurs d'une collection ?</h4><p>Utilisez Birdwatcher.</p>
+<p>Installez Birdwatcher en suivant <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">ce lien</a>, puis exécutez la commande suivante :</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">Quels paramètres peuvent être ajustés si l'utilisation de la mémoire du nœud de requête est déséquilibrée ?</h4><p>Parfois, la mémoire des nœuds de requête varie parce que certains d'entre eux agissent comme des délégateurs en utilisant plus de RAM. Si la mémoire d'un délégateur est élevée, ajustez le paramètre queryCoord.delegatorMemoryOverloadFactor pour décharger les segments scellés sur d'autres nœuds et réduire l'utilisation de la mémoire vive.</p>
+<ul>
+<li>La valeur par défaut est 0,1.</li>
+<li>Si vous augmentez cette valeur (par exemple, jusqu'à 0,3 ou plus), le système déchargera davantage de segments scellés du délégateur surchargé vers d'autres nœuds de requête, ce qui contribuera à équilibrer l'utilisation de la mémoire. Vous pouvez également essayer d'augmenter la valeur jusqu'à 1, ce qui signifie qu'aucun segment scellé ne sera chargé dans les nœuds délégateurs.</li>
+</ul>
+<p>Si vous ne voulez pas redémarrer le cluster, vous pouvez modifier la configuration de milvus avec birdwatcher :</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">Comment définir le shard_num pour une collection ?</h4><p>Comme meilleure pratique, pour une collection avec des vecteurs de dimension 768, il est recommandé d'utiliser au moins 1 shard pour ~100 millions de vecteurs. Dans le cas d'une utilisation intensive en écriture, il est recommandé d'utiliser 4 shards pour ~100 millions de vecteurs.</p>
+<p>Par exemple, si vous avez 100 millions de vecteurs, utilisez de 1 à 4 tiroirs. Si vous avez 500 millions de vecteurs, utilisez 5 à 10 cartes.</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Que se passe-t-il si je ne parviens pas à extraire l'image Docker Milvus de Docker Hub ?</h4><p>Si vous n'avez pas réussi à extraire l'image Docker Milvus de Docker Hub, essayez d'ajouter d'autres miroirs de registre.</p>
 <p>Les utilisateurs de Chine continentale peuvent ajouter l'URL "https://registry.docker-cn.com" au tableau registry-mirrors dans <strong>/etc.docker/daemon.json</strong>.</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
@@ -55,7 +93,7 @@ title: FAQ opérationnelle
 <pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Puis-je déployer Milvus lorsque je suis déconnecté d'Internet ?</h4><p>Oui, vous pouvez installer Milvus dans un environnement hors ligne. Voir <a href="/docs/fr/install_offline-helm.md">Installer Milvus hors ligne</a> pour plus d'informations.</p>
-<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Où puis-je trouver les journaux générés par Milvus ?</h4><p>Le journal Milvus est imprimé sur stout (sortie standard) et stderr (erreur standard) par défaut, mais nous recommandons vivement de rediriger votre journal vers un volume persistant en production. Pour ce faire, mettez à jour <code translate="no">log.file.rootPath</code> dans <strong>milvus.yaml</strong>. Et si vous déployez Milvus avec le diagramme <code translate="no">milvus-helm</code>, vous devez également activer la persistance du journal via <code translate="no">--set log.persistence.enabled=true</code>.</p>
+<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Où puis-je trouver les journaux générés par Milvus ?</h4><p>Le journal Milvus est imprimé sur stout (sortie standard) et stderr (erreur standard) par défaut, mais nous vous recommandons vivement de rediriger votre journal vers un volume persistant en production. Pour ce faire, mettez à jour <code translate="no">log.file.rootPath</code> dans <strong>milvus.yaml</strong>. Et si vous déployez Milvus avec le diagramme <code translate="no">milvus-helm</code>, vous devez également activer la persistance du journal via <code translate="no">--set log.persistence.enabled=true</code>.</p>
 <p>Si vous n'avez pas modifié la configuration, l'utilisation de kubectl logs <pod-name> ou de docker logs CONTAINER peut également vous aider à trouver le journal.</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">Puis-je créer un index pour un segment avant d'y insérer des données ?</h4><p>Oui, vous pouvez le faire. Mais nous recommandons d'insérer les données par lots, chacun ne devant pas dépasser 256 Mo, avant d'indexer chaque segment.</p>
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">Puis-je partager une instance etcd entre plusieurs instances Milvus ?</h4><p>Oui, vous pouvez partager une instance etcd entre plusieurs instances Milvus. Pour ce faire, vous devez modifier <code translate="no">etcd.rootPath</code> en une valeur distincte pour chaque instance Milvus dans les fichiers de configuration de chacune d'entre elles avant de les démarrer.</p>

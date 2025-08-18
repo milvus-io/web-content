@@ -90,8 +90,11 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Questo è utile quando si vuole verificare l'appartenenza a un elenco di valori.</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Esempio 2: Uso di <code translate="no">LIKE</code> per la corrispondenza dei modelli</h3><p>L'operatore <code translate="no">LIKE</code> è utilizzato per la corrispondenza di modelli nei campi stringa. Può corrispondere a sottostringhe in diverse posizioni all'interno del testo: come <strong>prefisso</strong>, <strong>infisso</strong> o <strong>suffisso</strong>. L'operatore <code translate="no">LIKE</code> utilizza il simbolo <code translate="no">%</code> come carattere jolly, che può corrispondere a qualsiasi numero di caratteri (incluso zero).</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Corrispondenza di prefisso (inizia con)</h3><p>Per eseguire una corrispondenza di <strong>prefisso</strong>, in cui la stringa inizia con un determinato schema, è possibile posizionare lo schema all'inizio e utilizzare <code translate="no">%</code> per abbinare tutti i caratteri che lo seguono. Ad esempio, per trovare tutti i prodotti il cui <code translate="no">name</code> inizia con "Prod":</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Esempio 2: Uso di <code translate="no">LIKE</code> per la corrispondenza dei modelli</h3><p>L'operatore <code translate="no">LIKE</code> è utilizzato per la corrispondenza di modelli nei campi stringa. Può corrispondere a sottostringhe in diverse posizioni all'interno del testo: come <strong>prefisso</strong>, <strong>infisso</strong> o <strong>suffisso</strong>. L'operatore <code translate="no">LIKE</code> utilizza il simbolo <code translate="no">%</code> come carattere jolly, che può corrispondere a qualsiasi numero di caratteri (compreso lo zero).</p>
+<div class="alert note">
+<p>Nella maggior parte dei casi, la corrispondenza <strong>infisso</strong> o <strong>suffisso</strong> è significativamente più lenta della corrispondenza prefisso. Usateli con cautela se le prestazioni sono critiche.</p>
+</div>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Corrispondenza per prefisso (inizia con)</h3><p>Per eseguire una corrispondenza <strong>per prefisso</strong>, in cui la stringa inizia con un determinato modello, è possibile posizionare il modello all'inizio e utilizzare <code translate="no">%</code> per abbinare tutti i caratteri che lo seguono. Ad esempio, per trovare tutti i prodotti il cui <code translate="no">name</code> inizia con "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Questo corrisponderà a tutti i prodotti il cui nome inizia con "Prod", come "Product A", "Product B", ecc.</p>
@@ -188,7 +191,7 @@ summary: >-
 </div>
 <h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Campi scalari regolari con valori nulli</h3><p>Milvus consente di filtrare i campi scalari regolari, come stringhe o numeri, con valori nulli.</p>
 <div class="alert note">
-<p>Una stringa vuota <code translate="no">&quot;&quot;</code> non viene trattata come un valore nullo per il campo <code translate="no">VARCHAR</code>.</p>
+<p>Una stringa vuota <code translate="no">&quot;&quot;</code> non viene trattata come un valore nullo per un campo <code translate="no">VARCHAR</code>.</p>
 </div>
 <p>Per recuperare le entità in cui il campo <code translate="no">description</code> è nullo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
@@ -299,7 +302,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Suggerimenti sull'uso degli operatori di base con campi JSON e ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Suggerimenti per l'uso degli operatori di base con campi JSON e ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

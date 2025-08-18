@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p><strong>DISKANN</strong>結合了高效向量搜尋的兩項關鍵技術：</p>
 <ul>
-<li><p><strong>Vamana 圖形</strong>-<strong>以磁碟為基礎</strong>、<strong>以圖形為</strong> <strong>基</strong>礎的索引，可連結資料點（或向量）以在搜尋過程中有效導航。</p></li>
+<li><p><strong>Vamana 圖形</strong>-<strong>以磁碟為基礎</strong>、<strong>以圖形為</strong> <strong>基</strong>礎的索引，可連結資料點（或向量）以在搜尋過程中進行有效率的導航。</p></li>
 <li><p><strong>Product Quantization (PQ)</strong>- 縮小向量大小的<strong>記憶體內</strong>壓縮方法，可快速計算向量間的近似距離。</p></li>
 </ul>
 <h3 id="Index-construction" class="common-anchor-header">索引建構</h3><h4 id="Vamana-graph" class="common-anchor-header">Vamana 圖形</h4><p>Vamana 圖是 DISKANN 基於磁碟策略的核心。它可以處理非常大的資料集，因為它不需要在建立期間或之後完全駐留在記憶體中。</p>
@@ -129,7 +129,7 @@ summary: >-
 <li><p>透過在兩種節點類型中將資料掛載到 NVMe SSD 上，您可以確保搜尋和索引作業的快速讀寫速度。</p></li>
 </ul></li>
 </ul>
-<p>完成這些變更後，請重新啟動您的 Milvus 實例，讓設定生效。現在，Milvus 將利用 DISKANN 的功能來處理大型資料集，提供高效率且可擴充的向量搜尋。</p>
+<p>完成這些變更後，請重新啟動您的 Milvus 實例，讓設定生效。現在，Milvus 將利用 DISKANN 的功能來處理大型資料集，提供有效率且可擴充的向量搜尋。</p>
 <h2 id="Configure-DISKANN" class="common-anchor-header">設定 DISKANN<button data-href="#Configure-DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,7 +145,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN 相關參數可以透過 Milvus 配置檔 (<code translate="no">milvus.yaml</code>) 設定：</p>
+    </button></h2><p>DISKANN 相關參數只能透過 Milvus 配置檔 (<code translate="no">milvus.yaml</code>) 設定：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -171,8 +171,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>微調 DISKANN 的參數可讓您根據特定的資料集和搜尋工作量調整其行為，在速度、準確性和記憶體使用量之間取得適當的平衡。</p>
+    </button></h2><p>微調 DISKANN 的參數可讓您根據特定資料集和搜尋工作負載調整其行為，在速度、準確性和記憶體使用量之間取得適當的平衡。</p>
 <h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>這些參數會影響 DISKANN 索引的建構方式。調整這些參數會影響索引大小、建立時間和搜尋品質。</p>
+<div class="alert note">
+<p>以下清單中的所有索引建立參數，只能透過您的 Milvus 配置檔 (<code translate="no">milvus.yaml</code>) 來設定。</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -182,7 +185,7 @@ summary: >-
      <th><p>調整建議</p></th>
    </tr>
    <tr>
-     <td><p>連線數</p></td>
+     <td><p>邊</p></td>
      <td><p><code translate="no">MaxDegree</code></p></td>
      <td><p>控制每個資料點在 Vamana 圖形中的最大連線（邊）數。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 512]</p>
@@ -216,7 +219,11 @@ summary: >-
 <p>在大多數情況下，我們建議您在此範圍內設定值：(0.0625, 0.25] 。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>這些參數會影響 DISKANN 執行搜尋的方式。調整這些參數會影響搜尋速度、延遲和資源使用。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>這些參數會影響 DISKANN 執行搜尋的方式。調整它們會影響搜尋速度、延遲和資源使用。</p>
+<div class="alert note">
+<p>下面清單中的<code translate="no">BeamWidthRatio</code> 只能透過您的 Milvus 配置檔 (<code translate="no">milvus.yaml</code>) 來設定。</p>
+<p>以下清單中的<code translate="no">search_list</code> 只能在 SDK 的搜尋參數中設定。</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -226,7 +233,7 @@ summary: >-
      <th><p>調整建議</p></th>
    </tr>
    <tr>
-     <td><p>並行</p></td>
+     <td><p>Vamana</p></td>
      <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>透過決定相對於可用 CPU 核心數的最大平行磁碟 I/O 請求數，控制搜尋期間的平行程度。</p></td>
      <td><p><strong>類型</strong>：浮動<strong>範圍</strong>：[1，max(128 / CPU 數目，16)</p>
@@ -235,7 +242,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>在搜尋作業期間，此參數會決定演算法在遍歷圖時所維護的候選池大小。較大的值會增加找到真正近鄰的機會 (較高的召回率)，但也會增加搜尋延遲。</p></td>
      <td><p><strong>類型</strong>：整<strong>數</strong>整數<strong>範圍</strong>：[1、<em>int_max］</em></p>
 <p><strong>預設值</strong>：<code translate="no">100</code></p></td>

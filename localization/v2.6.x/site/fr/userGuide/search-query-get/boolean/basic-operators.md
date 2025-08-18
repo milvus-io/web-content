@@ -92,6 +92,9 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>C'est utile lorsque vous souhaitez vérifier l'appartenance à une liste de valeurs.</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Exemple 2 : utilisation de <code translate="no">LIKE</code> pour la recherche de motifs</h3><p>L'opérateur <code translate="no">LIKE</code> est utilisé pour la recherche de motifs dans les champs de type chaîne de caractères. Il peut faire correspondre des sous-chaînes à différentes positions dans le texte : en tant que <strong>préfixe</strong>, <strong>infixe</strong> ou <strong>suffixe</strong>. L'opérateur <code translate="no">LIKE</code> utilise le symbole <code translate="no">%</code> comme caractère de remplacement, qui peut correspondre à n'importe quel nombre de caractères (y compris zéro).</p>
+<div class="alert note">
+<p>Dans la plupart des cas, la correspondance <strong>infixe</strong> ou <strong>suffixe</strong> est nettement plus lente que la correspondance préfixe. Utilisez-les avec précaution si les performances sont critiques.</p>
+</div>
 <h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Correspondance de préfixes (commence par)</h3><p>Pour effectuer une recherche par <strong>préfixe</strong>, où la chaîne commence par un motif donné, vous pouvez placer le motif au début et utiliser <code translate="no">%</code> pour rechercher tous les caractères qui le suivent. Par exemple, pour trouver tous les produits dont le site <code translate="no">name</code> commence par "Prod" :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

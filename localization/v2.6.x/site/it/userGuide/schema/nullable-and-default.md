@@ -7,8 +7,8 @@ summary: >-
   come nullable=True, è possibile ignorare il campo durante l'inserimento dei
   dati, oppure impostarlo direttamente su un valore nullo, e il sistema lo
   tratterà come nullo senza causare errori. Quando un campo ha un valore
-  predefinito, il sistema lo applica automaticamente se non viene specificato
-  alcun dato per il campo durante l'inserimento.
+  predefinito, il sistema lo applica automaticamente se non vengono specificati
+  dati per il campo durante l'inserimento.
 ---
 <h1 id="Nullable--Default" class="common-anchor-header">Nullable e Default<button data-href="#Nullable--Default" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,10 +46,9 @@ summary: >-
 <li><p>Solo i campi scalari, escluso il campo primario, supportano i valori predefiniti e l'attributo nullable.</p></li>
 <li><p>I campi JSON e Array non supportano i valori predefiniti.</p></li>
 <li><p>I valori predefiniti o l'attributo nullable possono essere configurati solo durante la creazione della collezione e non possono essere modificati in seguito.</p></li>
-<li><p>I campi scalari con l'attributo nullable abilitato non possono essere usati come <code translate="no">group_by_field</code> nella ricerca per raggruppamento. Per ulteriori informazioni sulla ricerca per raggruppamento, consultare la sezione <a href="/docs/it/grouping-search.md">Ricerca per raggruppamento</a>.</p></li>
-<li><p>I campi contrassegnati come nullable non possono essere usati come chiavi di partizione. Per ulteriori informazioni sulle chiavi di partizione, vedere <a href="/docs/it/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
+<li><p>I campi contrassegnati come nullable non possono essere usati come chiavi di partizione. Per ulteriori informazioni sulle chiavi di partizione, consultare la sezione <a href="/docs/it/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
 <li><p>Quando si crea un indice su un campo scalare con l'attributo nullable abilitato, i valori nulli saranno esclusi dall'indice.</p></li>
-<li><p><strong>Campi JSON e ARRAY</strong>: Quando si usano gli operatori <code translate="no">IS NULL</code> o <code translate="no">IS NOT NULL</code> per filtrare i campi JSON o ARRAY, questi operatori lavorano a livello di colonna, il che significa che valutano solo se l'intero oggetto JSON o array è nullo. Ad esempio, se una chiave all'interno di un oggetto JSON è nulla, non verrà riconosciuta dal filtro <code translate="no">IS NULL</code>. Per ulteriori informazioni, consultare <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p></li>
+<li><p><strong>Campi JSON e ARRAY</strong>: Quando si usano gli operatori <code translate="no">IS NULL</code> o <code translate="no">IS NOT NULL</code> per filtrare i campi JSON o ARRAY, questi operatori lavorano a livello di colonna, il che significa che valutano solo se l'intero oggetto JSON o array è nullo. Ad esempio, se una chiave all'interno di un oggetto JSON è nulla, non verrà riconosciuta dal filtro <code translate="no">IS NULL</code>. Per ulteriori informazioni, consultare gli <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Attributo Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -490,7 +489,7 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
 <button class="copy-code-btn"></button></code></pre>
 <p>Per restituire entità con valori <code translate="no">null</code>, eseguire una query senza alcuna condizione di filtraggio scalare come segue:</p>
 <div class="alert note">
-<p>Il metodo <code translate="no">query</code>, se usato senza condizioni di filtro, recupera tutte le entità dell'insieme, comprese quelle con valori nulli. Per limitare il numero di entità restituite, è necessario specificare il parametro <code translate="no">limit</code>.</p>
+<p>Il metodo <code translate="no">query</code>, se usato senza condizioni di filtraggio, recupera tutte le entità dell'insieme, comprese quelle con valori nulli. Per limitare il numero di entità restituite, è necessario specificare il parametro <code translate="no">limit</code>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

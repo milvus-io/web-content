@@ -41,8 +41,7 @@ summary: >-
 <li><p>只有標量欄位 (不包括主要欄位) 支援預設值和 nullable 屬性。</p></li>
 <li><p>JSON 和陣列欄位不支援預設值。</p></li>
 <li><p>預設值或 nullable 屬性只能在建立集合時設定，之後就無法修改。</p></li>
-<li><p>啟用 nullable 屬性的標量欄位無法在群組搜尋中用作<code translate="no">group_by_field</code> 。有關群組搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/grouping-search.md">群組搜尋</a>。</p></li>
-<li><p>標記為 nullable 的欄位不能用作分割區金鑰。有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金</a>鑰。</p></li>
+<li><p>標記為 nullable 的欄位不能用作分割鍵。有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金</a>鑰。</p></li>
 <li><p>在啟用 nullable 屬性的標量欄位上建立索引時，索引將排除 null 值。</p></li>
 <li><p><strong>JSON 和 ARRAY 欄位</strong>：使用<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 運算符號篩選 JSON 或 ARRAY 欄位時，這些運算符號會在欄位層級運作，這表示它們只會評估整個 JSON 物件或陣列是否為空。例如，如果 JSON 物件中的一個 key 為空，則<code translate="no">IS NULL</code> 過濾器將不會識別該 key。如需詳細資訊，請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>。</p></li>
 </ul>

@@ -2,7 +2,7 @@
 id: diskann.md
 title: DISKANN
 summary: >-
-  データセットに数十億から数兆のベクトルが含まれるような大規模なシナリオでは、標準的なインメモリインデクシング手法（HNSW、IVF_FLATなど）では、メモリの制限により検索速度が追いつかないことがよくあります。DISKANNは、データセットサイズが利用可能なRAMを超える場合でも、高い検索精度と速度を維持することで、これらの課題に対処するディスクベースのアプローチを提供します。
+  データセットに数十億から数兆のベクトルが含まれるような大規模なシナリオでは、標準的なインメモリインデクシング手法（HNSW、IVF_FLATなど）は、メモリの制限により、しばしば追いつくことができません。DISKANNは、データセットサイズが利用可能なRAMを超える場合でも、高い検索精度と速度を維持することで、これらの課題に対処するディスクベースのアプローチを提供します。
 ---
 <h1 id="DISKANN" class="common-anchor-header">DISKANN<button data-href="#DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +38,7 @@ summary: >-
     </button></h2><p><strong>DISKANNは</strong>、効率的なベクトル探索のための2つの主要な技術を組み合わせています：</p>
 <ul>
 <li><p><strong>Vamana Graph</strong>-<strong>ディスクベースの</strong> <strong>グラフベースの</strong>インデックスで、検索時に効率的なナビゲーションを行うためにデータポイント（またはベクトル）を連結します。</p></li>
-<li><p><strong>積の量子化（PQ）</strong>- ベクトルのサイズを縮小し、ベクトル間の近似距離の計算を迅速に行う<strong>メモリ内</strong>圧縮手法。</p></li>
+<li><p><strong>積量子化（PQ）</strong>- ベクトルのサイズを縮小し、ベクトル間の近似距離計算を迅速に行うための<strong>メモリ内</strong>圧縮手法。</p></li>
 </ul>
 <h3 id="Index-construction" class="common-anchor-header">インデックス構築</h3><h4 id="Vamana-graph" class="common-anchor-header">バマナグラフ</h4><p>VamanaグラフはDISKANNのディスクベース戦略の中心です。構築中も構築後も完全にメモリに常駐する必要がないため、非常に大きなデータセットを扱うことができます。</p>
 <p>次の図は、Vamanaグラフの構築方法を示しています。</p>
@@ -51,7 +51,7 @@ summary: >-
 <li><p><strong>効率化のための洗練：</strong>初期のランダム・グラフは、検索効率を高めるために最適化プロセスを経ます。これには2つの重要なステップがある：</p>
 <ul>
 <li><p><strong>冗長なエッジの刈り込み：</strong>冗長なエッジの刈り込み：このアルゴリズムは、ノード間の距離に基づいて不要な接続を削除します。このステップは、より質の高いエッジを優先する。</p>
-<p><code translate="no">max_degree</code> パラメータは、ノードあたりの最大エッジ数を制限します。<code translate="no">max_degree</code> が高いほどグラフが密になり、より関連性の高い近傍を発見できる可能性がある（より高い想起）が、メモリ使用量と検索時間が増加する。</p></li>
+<p><code translate="no">max_degree</code> パラメータは、ノードあたりの最大エッジ数を制限します。<code translate="no">max_degree</code> を高くすると、グラフが密になり、より関連性の高い近傍を発見できる可能性があるが（より高い想起）、メモリ使用量と検索時間が増加する。</p></li>
 <li><p><strong>戦略的ショートカットの追加：</strong>Vamanaは長距離エッジを導入し、ベクトル空間内で離れたデータポイント同士を接続する。これらのショートカットにより、検索はグラフを素早く飛び越え、中間ノードを迂回し、ナビゲーションを大幅に高速化する。</p>
 <p><code translate="no">search_list_size</code> パラメータは、グラフ精密化処理の幅を決定する。<code translate="no">search_list_size</code> を高くすると、構築中の近傍探索が拡張され、最終的な精度が向上しますが、インデックス構築時間が長くなります。</p></li>
 </ul></li>
@@ -143,7 +143,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN関連のパラメータは、Milvusの設定ファイル(<code translate="no">milvus.yaml</code>)から設定することができます：</p>
+    </button></h2><p>DISKANN関連のパラメータは、Milvusの設定ファイル(<code translate="no">milvus.yaml</code>)でのみ設定することができます：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -169,15 +169,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN のパラメータを微調整することで、特定のデータセットや検索ワークロードに合わせて DISKANN の動作を調整し、速度、精度、メモリ使用量の適切なバランスをとることができます。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>これらのパラメータは、DISKANNインデックスがどのように構築されるかに影響します。これらのパラメータを調整することで、インデックスサイズ、構築時間、検索品質に影響を与えることができます。</p>
+    </button></h2><p>DISKANN のパラメータを微調整することで、特定のデータセットや検索ワークロードに合わせて、速度、精度、メモリ使用量の適切なバランスをとりながら、DISKANN の動作を調整することができます。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>これらのパラメータは、DISKANNインデックスがどのように構築されるかに影響します。これらを調整することで、インデックスのサイズ、構築時間、検索品質に影響を与えることができます。</p>
+<div class="alert note">
+<p>以下のリストにある全てのインデックス構築パラメータは、Milvus設定ファイル(<code translate="no">milvus.yaml</code>)によってのみ設定することができます。</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>パラメータ</p></th>
      <th><p>説明</p></th>
      <th><p>値の範囲</p></th>
-     <th><p>チューニングの提案</p></th>
+     <th><p>チューニングサジェスチョン</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
@@ -214,27 +217,31 @@ summary: >-
 <p>ほとんどの場合、この範囲内の値を設定することを推奨する: (0.0625, 0.25])</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>これらのパラメータはDISKANNがどのように検索を行うかに影響します。これらを調整することで、検索速度、待ち時間、リソースの使用量に影響を与えることができます。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>これらのパラメータはDISKANNがどのように検索を行うかに影響します。これらのパラメータを調整することで、検索速度、待ち時間、リソースの使用量に影響を与えることができます。</p>
+<div class="alert note">
+<p>以下のリストの<code translate="no">BeamWidthRatio</code> は、Milvus設定ファイル(<code translate="no">milvus.yaml</code>)によってのみ設定可能です。</p>
+<p>下記リストの<code translate="no">search_list</code> はSDKの検索パラメータでのみ設定可能です。</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>パラメータ</p></th>
      <th><p>説明</p></th>
      <th><p>値の範囲</p></th>
-     <th><p>チューニングの提案</p></th>
+     <th><p>チューニング案</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
      <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>利用可能なCPUコア数に対する並列ディスクI/Oリクエストの最大数を決定することにより、検索中の並列性の程度を制御する。</p></td>
-     <td><p><strong>タイプ</strong>Float<strong>レンジ</strong>：[1, max(128 / CPU数, 16)] です。</p>
+     <td><p><strong>タイプ</strong>Float<strong>レンジ</strong>：[1, max(128 / CPU数, 16)] を指定する。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">4.0</code></p></td>
      <td><p>値を高くすると並列性が高まり、強力な CPU と SSD を持つシステムでの検索を高速化できる。ほとんどの場合、この範囲内の値を設定することを推奨する：[1.0, 4.0].</p></td>
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
-     <td><p>検索操作中、このパラメータは、アルゴリズムがグラフをトラバースする際に維持する候補プールのサイズを決定します。値を大きくすると、真の最近傍を見つける可能性が高くなりますが（より高いリコール）、検索の待ち時間も長くなります。</p></td>
+     <td><p><code translate="no">search_list</code></p></td>
+     <td><p>検索操作中、このパラメータは、アルゴリズムがグラフを横断する際に維持する候補プールのサイズを決定します。値を大きくすると、真の最近傍を見つける可能性が高くなりますが（より高いリコール）、検索の待ち時間も長くなります。</p></td>
      <td><p><strong>タイプ</strong>整数<strong>：</strong>[1,<em>int_max］</em></p>
 <p><strong>デフォルト値</strong>：<code translate="no">100</code></p></td>
      <td><p>パフォーマンスと精度のバランスをとるために、この値は検索したい結果の数(top_k)と等しいか、少し大きく設定することを推奨する。</p></td>

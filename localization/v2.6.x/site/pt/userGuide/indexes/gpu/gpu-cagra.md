@@ -50,8 +50,8 @@ index_params.add_index(
     index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
     metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
     params={
-        <span class="hljs-string">&quot;intermediate_graph_degree&quot;</span>: <span class="hljs-number">32</span>, <span class="hljs-comment"># Affects recall and build time by determining the graph’s degree before pruning</span>
-        <span class="hljs-string">&quot;graph_degree&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Affets search performance and recall by setting the graph’s degree after pruning</span>
+        <span class="hljs-string">&quot;intermediate_graph_degree&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Affects recall and build time by determining the graph’s degree before pruning</span>
+        <span class="hljs-string">&quot;graph_degree&quot;</span>: <span class="hljs-number">32</span>, <span class="hljs-comment"># Affets search performance and recall by setting the graph’s degree after pruning</span>
         <span class="hljs-string">&quot;build_algo&quot;</span>: <span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Selects the graph generation algorithm before pruning</span>
         <span class="hljs-string">&quot;cache_dataset_on_device&quot;</span>: <span class="hljs-string">&quot;true&quot;</span>, <span class="hljs-comment"># Decides whether to cache the original dataset in GPU memory</span>
         <span class="hljs-string">&quot;adapt_for_cpu&quot;</span>: <span class="hljs-string">&quot;false&quot;</span>, <span class="hljs-comment"># Decides whether to use GPU for index-building and CPU for search</span>
@@ -146,8 +146,8 @@ res = MilvusClient.search(
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
      <td><p>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</p>
 <ul>
-<li><p><code translate="no">"true"</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação ao refinar os resultados da pesquisa.</p></li>
-<li><p><code translate="no">"false"</code>: Não coloca em cache o conjunto de dados original para economizar memória da GPU.</p></li>
+<li><p><code translate="no">"true"</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação, refinando os resultados da pesquisa.</p></li>
+<li><p><code translate="no">"false"</code>: Não armazena em cache o conjunto de dados original para economizar memória da GPU.</p></li>
 </ul></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
@@ -171,7 +171,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">search_width</code></p></td>
-     <td><p>Especifica o número de pontos de entrada no gráfico CAGRA durante a pesquisa. Aumentar este valor pode melhorar a recordação, mas pode afetar o desempenho da pesquisa (por exemplo, 1, 2, 4, 8, 16, 32).</p></td>
+     <td><p>Especifica o número de pontos de entrada no gráfico CAGRA durante a pesquisa. Aumentar este valor pode aumentar a recordação, mas pode afetar o desempenho da pesquisa (por exemplo, 1, 2, 4, 8, 16, 32).</p></td>
      <td><p>Vazio</p></td>
    </tr>
    <tr>

@@ -149,7 +149,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les paramètres liés à DISKANN peuvent être configurés via votre fichier de configuration Milvus (<code translate="no">milvus.yaml</code>) :</p>
+    </button></h2><p>Les paramètres relatifs à DISKANN ne peuvent être configurés que via votre fichier de configuration Milvus (<code translate="no">milvus.yaml</code>) :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -176,12 +176,15 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Le réglage fin des paramètres de DISKANN vous permet d'adapter son comportement à votre ensemble de données spécifique et à votre charge de travail de recherche, en trouvant le bon équilibre entre la vitesse, la précision et l'utilisation de la mémoire.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Ces paramètres influencent la façon dont l'index DISKANN est construit. Leur réglage peut affecter la taille de l'index, le temps de construction et la qualité de la recherche.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Ces paramètres influencent la façon dont l'index DISKANN est construit. Leur ajustement peut affecter la taille de l'index, le temps de construction et la qualité de la recherche.</p>
+<div class="alert note">
+<p>Tous les paramètres de construction d'index de la liste ci-dessous ne peuvent être configurés que dans le fichier de configuration de Milvus (<code translate="no">milvus.yaml</code>).</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>Paramètre</p></th>
-     <th><p>Description de l'index</p></th>
+     <th><p>Description du paramètre</p></th>
      <th><p>Plage de valeurs</p></th>
      <th><p>Suggestion de réglage</p></th>
    </tr>
@@ -216,16 +219,20 @@ summary: >-
      <td><p>Contrôle la taille des codes PQ (représentations compressées des points de données) par rapport à la taille des données non compressées.</p></td>
      <td><p><strong>Type</strong>: Flottant <strong>Plage</strong>: (0,0, 0,25)</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>Un ratio plus élevé permet d'obtenir des résultats de recherche plus précis en allouant une plus grande proportion de la mémoire aux codes PQ, ce qui permet de stocker plus d'informations sur les vecteurs originaux. Un ratio plus faible réduit l'utilisation de la mémoire, mais sacrifie potentiellement la précision, car les codes PQ plus petits conservent moins d'informations. Cette approche convient aux scénarios dans lesquels les contraintes de mémoire sont un problème, et permet potentiellement l'indexation d'ensembles de données plus importants.</p>
+     <td><p>Un ratio plus élevé permet d'obtenir des résultats de recherche plus précis en allouant une plus grande proportion de la mémoire aux codes PQ, ce qui permet de stocker davantage d'informations sur les vecteurs d'origine. Un ratio plus faible réduit l'utilisation de la mémoire, mais sacrifie potentiellement la précision, car les codes PQ plus petits conservent moins d'informations. Cette approche convient aux scénarios dans lesquels les contraintes de mémoire sont importantes, et permet éventuellement d'indexer des ensembles de données plus importants.</p>
 <p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : (0.0625, 0.25)</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Ces paramètres influencent la manière dont DISKANN effectue les recherches. Leur réglage peut avoir un impact sur la vitesse de recherche, la latence et l'utilisation des ressources.</p>
+<div class="alert note">
+<p>Le paramètre <code translate="no">BeamWidthRatio</code> de la liste ci-dessous ne peut être configuré que via votre fichier de configuration Milvus (<code translate="no">milvus.yaml</code>).</p>
+<p>Les <code translate="no">search_list</code> de la liste ci-dessous ne peuvent être configurés que dans les paramètres de recherche du SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>Paramètre</p></th>
-     <th><p>Description</p></th>
+     <th><p>Paramètre Description</p></th>
      <th><p>Plage de valeurs</p></th>
      <th><p>Suggestion de réglage</p></th>
    </tr>
@@ -239,7 +246,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>Au cours d'une opération de recherche, ce paramètre détermine la taille du groupe de candidats que l'algorithme maintient lorsqu'il parcourt le graphe. Une valeur plus élevée augmente les chances de trouver les vrais voisins les plus proches (rappel plus élevé), mais augmente également la latence de la recherche.</p></td>
      <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">100</code></p></td>

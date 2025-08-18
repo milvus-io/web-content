@@ -88,7 +88,10 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이 방법은 값 목록에서 멤버십 여부를 확인하려는 경우에 유용합니다.</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">예 2: 패턴 일치에 <code translate="no">LIKE</code> 사용</h3><p><code translate="no">LIKE</code> 연산자는 문자열 필드에서 패턴 일치에 사용됩니다. 이 연산자는 텍스트 내에서 <strong>접두사</strong>, <strong>접두사</strong> 또는 <strong>접미사</strong> 등 다양한 위치의 하위 문자열을 일치시킬 수 있습니다. <code translate="no">LIKE</code> 연산자는 <code translate="no">%</code> 기호를 와일드카드로 사용하며, 0을 포함하여 원하는 수의 문자를 일치시킬 수 있습니다.</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">예 2: 패턴 일치에 <code translate="no">LIKE</code> 사용</h3><p><code translate="no">LIKE</code> 연산자는 문자열 필드에서 패턴 일치에 사용됩니다. 이 연산자는 텍스트 내에서 <strong>접두사</strong>, <strong>접두사</strong> 또는 <strong>접미사</strong> 등 다양한 위치의 하위 문자열을 일치시킬 수 있습니다. <code translate="no">LIKE</code> 연산자는 <code translate="no">%</code> 기호를 와일드카드로 사용하며, 0을 포함하여 원하는 수의 문자와 일치시킬 수 있습니다.</p>
+<div class="alert note">
+<p>대부분의 경우 <strong>접두사</strong> 또는 <strong>접미사</strong> 일치는 접두사 일치보다 훨씬 느립니다. 성능이 중요한 경우에는 주의해서 사용하세요.</p>
+</div>
 <h3 id="Prefix-Match-Starts-With" class="common-anchor-header">접두사 일치(다음으로 시작)</h3><p>문자열이 지정된 패턴으로 시작하는 <strong>접두사</strong> 일치를 수행하려면 패턴을 처음에 배치하고 <code translate="no">%</code> 을 사용하여 그 뒤에 오는 모든 문자를 일치시킬 수 있습니다. 예를 들어 <code translate="no">name</code> 가 "Prod"로 시작하는 모든 제품을 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -125,10 +128,10 @@ summary: >-
 <li><p><code translate="no">%</code> (모듈러스)</p></li>
 <li><p><code translate="no">**</code> (지수)</p></li>
 </ul>
-<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">예 1: 모듈러스 사용(<code translate="no">%</code>)</h3><p><code translate="no">id</code> 이 짝수(즉, 2로 나눌 수 있는)인 엔티티를 찾습니다:</p>
+<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">예 1: 모듈러스 사용(<code translate="no">%</code>)</h3><p><code translate="no">id</code> 가 짝수(즉, 2로 나눌 수 있는)인 엔티티를 찾습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">예 2: 지수 사용(<code translate="no">**</code>)</h3><p><code translate="no">price</code> 를 2의 거듭 제곱한 값이 1000보다 큰 엔터티를 찾으려면:</p>
+<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">예 2: 지수 사용 (<code translate="no">**</code>)</h3><p><code translate="no">price</code> 를 2의 거듭 제곱한 값이 1000보다 큰 엔터티를 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Logical-Operators" class="common-anchor-header">논리 연산자<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
@@ -287,7 +290,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>예 2: <code translate="no">tags</code> 이 null이 아닌 엔티티 검색하기</strong></p>
+<p><strong>예 2: <code translate="no">tags</code> 가 null이 아닌 엔티티 검색하기</strong></p>
 <p><code translate="no">tags</code> 필드가 null이 아닌 엔티티를 검색하려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 

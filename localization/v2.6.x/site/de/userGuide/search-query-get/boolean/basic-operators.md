@@ -92,7 +92,10 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>Dies ist nützlich, wenn Sie die Zugehörigkeit zu einer Liste von Werten prüfen wollen.</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Beispiel 2: Verwendung von <code translate="no">LIKE</code> für Mustervergleiche</h3><p>Der Operator <code translate="no">LIKE</code> wird für den Mustervergleich in Zeichenkettenfeldern verwendet. Er kann Teilzeichenfolgen an verschiedenen Positionen im Text entsprechen: als <strong>Präfix</strong>, <strong>Infix</strong> oder <strong>Suffix</strong>. Der Operator <code translate="no">LIKE</code> verwendet das Symbol <code translate="no">%</code> als Platzhalter, der mit einer beliebigen Anzahl von Zeichen (einschließlich Null) übereinstimmen kann.</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Präfix-Übereinstimmung (Beginnt mit)</h3><p>Um eine <strong>Präfixübereinstimmung</strong> durchzuführen, bei der die Zeichenfolge mit einem bestimmten Muster beginnt, können Sie das Muster an den Anfang stellen und <code translate="no">%</code> verwenden, um alle darauf folgenden Zeichen abzugleichen. Beispiel: Sie möchten alle Produkte finden, deren <code translate="no">name</code> mit "Prod" beginnt:</p>
+<div class="alert note">
+<p>In den meisten Fällen ist der <strong>Infix-</strong> oder <strong>Suffix-Abgleich</strong> deutlich langsamer als der Präfix-Abgleich. Verwenden Sie sie mit Vorsicht, wenn die Leistung entscheidend ist.</p>
+</div>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Präfix-Abgleich (beginnt mit)</h3><p>Um einen <strong>Präfix-Abgleich</strong> durchzuführen, bei dem die Zeichenfolge mit einem bestimmten Muster beginnt, können Sie das Muster an den Anfang stellen und <code translate="no">%</code> verwenden, um alle nachfolgenden Zeichen abzugleichen. Beispiel: Sie möchten alle Produkte finden, deren <code translate="no">name</code> mit "Prod" beginnt:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Dies entspricht allen Produkten, deren Name mit "Prod" beginnt, z. B. "Produkt A", "Produkt B" usw.</p>
@@ -300,7 +303,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Tipps zur Verwendung grundlegender Operatoren mit JSON- und ARRAY-Feldern<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">Tipps zur Verwendung von Basis-Operatoren mit JSON- und ARRAY-Feldern<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -145,7 +145,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN 관련 매개변수는 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해 구성할 수 있습니다:</p>
+    </button></h2><p>DISKANN 관련 매개변수는 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해서만 구성할 수 있습니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -155,8 +155,8 @@ summary: >-
     <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
     <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>매개변수 설명에 대한 자세한 내용은 <a href="/docs/ko/diskann.md#DISKANN-params">DISKANN</a> 매개변수를 참조하세요.</p>
-<h2 id="DISKANN-params" class="common-anchor-header">DISKANN 파라미터<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
+<p>매개변수 설명에 대한 자세한 내용은 <a href="/docs/ko/diskann.md#DISKANN-params">DISKANN 매개</a>변수를 참조하세요.</p>
+<h2 id="DISKANN-params" class="common-anchor-header">DISKANN 매개변수<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,7 +172,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>DISKANN의 매개변수를 미세 조정하면 특정 데이터 세트와 검색 워크로드에 맞게 동작을 조정하여 속도, 정확도, 메모리 사용량 간에 적절한 균형을 맞출 수 있습니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">색인 구축 매개변수</h3><p>이러한 매개변수는 DISKANN 인덱스가 구성되는 방식에 영향을 줍니다. 이 매개변수를 조정하면 인덱스 크기, 구축 시간, 검색 품질에 영향을 줄 수 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">색인 구축 매개변수</h3><p>이러한 매개변수는 DISKANN 인덱스가 구성되는 방식에 영향을 줍니다. 이 매개변수를 조정하면 인덱스 크기, 구축 시간, 검색 품질에 영향을 미칠 수 있습니다.</p>
+<div class="alert note">
+<p>아래 목록에 있는 모든 인덱스 구축 매개변수는 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해서만 구성할 수 있습니다.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -193,7 +196,7 @@ summary: >-
    <tr>
      <td></td>
      <td><p><code translate="no">SearchListSize</code></p></td>
-     <td><p>인덱스 구축 중에 이 파라미터는 각 노드에 대해 가장 가까운 이웃을 검색할 때 사용되는 후보 풀의 크기를 정의합니다. 그래프에 추가되는 모든 노드에 대해 알고리즘은 지금까지 발견된 <code translate="no">search_list_size</code> 최상의 후보 목록을 유지합니다. 이 목록을 더 이상 개선할 수 없는 경우 이웃 검색이 중지됩니다. 이 최종 후보 풀에서 상위 <code translate="no">max_degree</code> 노드가 선택되어 최종 에지를 형성합니다.</p></td>
+     <td><p>인덱스 구성 중에 이 파라미터는 각 노드에 대해 가장 가까운 이웃을 검색할 때 사용되는 후보 풀의 크기를 정의합니다. 그래프에 추가되는 모든 노드에 대해 알고리즘은 지금까지 발견된 <code translate="no">search_list_size</code> 최상의 후보 목록을 유지합니다. 이 목록을 더 이상 개선할 수 없는 경우 이웃 검색이 중지됩니다. 이 최종 후보 풀에서 상위 <code translate="no">max_degree</code> 노드가 선택되어 최종 에지를 형성합니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">100</code></p></td>
      <td><p><code translate="no">search_list_size</code> 이 클수록 각 노드에 대해 실제 가장 가까운 이웃을 찾을 가능성이 높아져 그래프 품질이 높아지고 검색 성능(리콜)이 향상될 수 있습니다. 하지만 인덱스 빌드 시간이 상당히 길어지는 대가가 따릅니다. 항상 <code translate="no">max_degree</code> 보다 크거나 같은 값으로 설정해야 합니다.</p></td>
@@ -212,18 +215,22 @@ summary: >-
      <td><p>압축되지 않은 데이터의 크기와 비교하여 PQ 코드(데이터 포인트의 압축된 표현)의 크기를 제어합니다.</p></td>
      <td><p><strong>유형</strong>: 실수 <strong>범위</strong>: (0.0, 0.25]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">0.125</code></p></td>
-     <td><p>비율이 높을수록 PQ 코드에 더 많은 메모리를 할당하여 원본 벡터에 대한 더 많은 정보를 효과적으로 저장함으로써 더 정확한 검색 결과를 얻을 수 있습니다. 하지만 더 많은 메모리가 필요하므로 대규모 데이터 세트를 처리할 수 있는 용량이 제한됩니다. 비율이 낮을수록 메모리 사용량은 줄어들지만 더 작은 PQ 코드가 더 적은 정보를 보유하므로 정확도가 떨어질 가능성이 있습니다. 이 접근 방식은 메모리 제약이 우려되는 시나리오에 적합하며 잠재적으로 더 큰 데이터 세트의 색인화를 가능하게 합니다.</p>
+     <td><p>비율이 높을수록 PQ 코드에 더 많은 메모리를 할당하여 원본 벡터에 대한 더 많은 정보를 효과적으로 저장함으로써 더 정확한 검색 결과를 얻을 수 있습니다. 하지만 더 많은 메모리가 필요하므로 대규모 데이터 세트를 처리할 수 있는 용량이 제한됩니다. 비율이 낮으면 메모리 사용량이 줄어들지만, 더 작은 PQ 코드가 더 적은 정보를 보유하므로 정확도가 떨어질 수 있습니다. 이 접근 방식은 메모리 제약이 우려되는 시나리오에 적합하며 잠재적으로 더 큰 데이터 세트의 색인화를 가능하게 합니다.</p>
 <p>대부분의 경우 다음 범위 내에서 값을 설정하는 것이 좋습니다: [0.0625, 0.25].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수</h3><p>이러한 매개변수는 DISKANN이 검색을 수행하는 방식에 영향을 줍니다. 이 매개변수를 조정하면 검색 속도, 지연 시간 및 리소스 사용량에 영향을 줄 수 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수</h3><p>이러한 매개변수는 DISKANN이 검색을 수행하는 방식에 영향을 줍니다. 이를 조정하면 검색 속도, 지연 시간 및 리소스 사용량에 영향을 줄 수 있습니다.</p>
+<div class="alert note">
+<p>아래 목록의 <code translate="no">BeamWidthRatio</code> 은 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해서만 구성할 수 있습니다.</p>
+<p>아래 목록의 <code translate="no">search_list</code> 은 SDK의 검색 매개변수에서만 구성할 수 있습니다.</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>파라미터</p></th>
      <th><p>설명</p></th>
      <th><p>값 범위</p></th>
-     <th><p>조정 제안</p></th>
+     <th><p>튜닝 제안</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
@@ -235,7 +242,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>검색 작업 중에 이 매개변수는 알고리즘이 그래프를 탐색할 때 유지하는 후보 풀의 크기를 결정합니다. 값이 클수록 실제 가장 가까운 이웃을 찾을 확률이 높아지지만(리콜률이 높아짐) 검색 지연 시간도 증가합니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">100</code></p></td>

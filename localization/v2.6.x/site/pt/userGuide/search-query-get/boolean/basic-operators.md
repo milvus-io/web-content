@@ -90,12 +90,15 @@ summary: >-
 <h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Exemplo 1: Usando <code translate="no">IN</code> para corresponder a vários valores</h3><p>Se você quiser encontrar todas as entidades onde o <code translate="no">color</code> é "vermelho", "verde" ou "azul":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Isso é útil quando se deseja verificar a associação em uma lista de valores.</p>
+<p>Isso é útil quando você deseja verificar a associação em uma lista de valores.</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Exemplo 2: Usando <code translate="no">LIKE</code> para correspondência de padrão</h3><p>O operador <code translate="no">LIKE</code> é utilizado para correspondência de padrões em campos de cadeia de caracteres. Ele pode corresponder substrings em diferentes posições dentro do texto: como um <strong>prefixo</strong>, <strong>infixo</strong> ou <strong>sufixo</strong>. O operador <code translate="no">LIKE</code> utiliza o símbolo <code translate="no">%</code> como um wildcard, que pode corresponder a qualquer número de caracteres (incluindo zero).</p>
+<div class="alert note">
+<p>Na maioria dos casos, a correspondência de <strong>infixo</strong> ou <strong>sufixo</strong> é significativamente mais lenta do que a correspondência de prefixo. Use-os com cuidado se o desempenho for crítico.</p>
+</div>
 <h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Correspondência de prefixo (começa com)</h3><p>Para efetuar uma correspondência <strong>de prefixo</strong>, em que a cadeia de caracteres começa com um determinado padrão, pode colocar o padrão no início e utilizar <code translate="no">%</code> para corresponder a quaisquer caracteres a seguir. Por exemplo, para encontrar todos os produtos cujo <code translate="no">name</code> comece por "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Isto irá corresponder a qualquer produto cujo nome comece por "Prod", como "Produto A", "Produto B", etc.</p>
+<p>Isto fará corresponder qualquer produto cujo nome comece por "Prod", como "Produto A", "Produto B", etc.</p>
 <h3 id="Suffix-Match-Ends-With" class="common-anchor-header">Correspondência de sufixo (termina com)</h3><p>Para uma correspondência <strong>de sufixo</strong>, em que a cadeia de caracteres termina com um determinado padrão, coloque o símbolo <code translate="no">%</code> no início do padrão. Por exemplo, para encontrar todos os produtos cujo <code translate="no">name</code> termina com "XYZ":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -194,7 +197,7 @@ summary: >-
 <p>Para recuperar entidades onde o campo <code translate="no">description</code> é nulo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para recuperar entidades em que o campo <code translate="no">description</code> não é nulo:</p>
+<p>Para recuperar entidades onde o campo <code translate="no">description</code> não é nulo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para recuperar entidades em que o campo <code translate="no">description</code> não é nulo e o campo <code translate="no">price</code> é superior a 10:</p>

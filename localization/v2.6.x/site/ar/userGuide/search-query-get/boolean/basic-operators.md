@@ -48,7 +48,7 @@ summary: >-
 <li><p><code translate="no">&gt;=</code> (أكبر من أو يساوي)</p></li>
 <li><p><code translate="no">&lt;=</code> (أقل من أو يساوي)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">مثال 1: التصفية باستخدام يساوي إلى (<code translate="no">==</code>)</h3><p>افترض أن لديك حقلًا باسم <code translate="no">status</code> وتريد العثور على جميع الكيانات التي يكون فيها <code translate="no">status</code> "نشط". يمكنك استخدام عامل المساواة <code translate="no">==</code>:</p>
+<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">مثال 1: التصفية باستخدام Equal To (<code translate="no">==</code>)</h3><p>افترض أن لديك حقلًا باسم <code translate="no">status</code> وتريد العثور على جميع الكيانات التي يكون فيها <code translate="no">status</code> "نشط". يمكنك استخدام عامل المساواة <code translate="no">==</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">مثال 2: التصفية باستخدام لا يساوي (<code translate="no">!=</code>)</h3><p>للعثور على الكيانات حيث <code translate="no">status</code> ليس "غير نشط":</p>
@@ -84,14 +84,17 @@ summary: >-
     </button></h2><p>تساعد عوامل المدى في تصفية البيانات بناءً على مجموعات أو نطاقات محددة من القيم.</p>
 <h3 id="Supported-Range-Operators" class="common-anchor-header">معاملات النطاق المدعومة:</h3><ul>
 <li><p><code translate="no">IN</code>: تستخدم لمطابقة القيم ضمن مجموعة أو نطاق محدد.</p></li>
-<li><p><code translate="no">LIKE</code>: يُستخدم لمطابقة نمط (غالبًا للحقول النصية).</p></li>
+<li><p><code translate="no">LIKE</code>: يُستخدم لمطابقة نمط (في الغالب للحقول النصية).</p></li>
 </ul>
 <h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">مثال 1: استخدام <code translate="no">IN</code> لمطابقة قيم متعددة</h3><p>إذا كنت تريد العثور على جميع الكيانات التي يكون فيها <code translate="no">color</code> إما "أحمر" أو "أخضر" أو "أزرق":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يكون هذا مفيدًا عندما تريد التحقق من العضوية في قائمة من القيم.</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">مثال 2: استخدام <code translate="no">LIKE</code> لمطابقة الأنماط</h3><p>يُستخدم المشغل <code translate="no">LIKE</code> لمطابقة الأنماط في حقول السلاسل. يمكنه مطابقة السلاسل الفرعية في مواضع مختلفة داخل النص: <strong>كبادئة</strong> أو <strong>لاحقة</strong> أو <strong>لاحقة</strong>. يستخدم المشغل <code translate="no">LIKE</code> الرمز <code translate="no">%</code> كحرف بدل، والذي يمكن أن يطابق أي عدد من الأحرف (بما في ذلك الصفر).</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">مطابقة البادئة (يبدأ بـ)</h3><p>لإجراء مطابقة <strong>البادئة،</strong> حيث تبدأ السلسلة بنمط معين، يمكنك وضع النمط في البداية واستخدام <code translate="no">%</code> لمطابقة أي أحرف تليه. على سبيل المثال، للعثور على جميع المنتجات التي يبدأ اسمها <code translate="no">name</code> بـ "Prod":</p>
+<div class="alert note">
+<p>في معظم الحالات، تكون مطابقة <strong>اللواحق</strong> أو <strong>اللواحق</strong> أبطأ بكثير من مطابقة البادئة. استخدمها بحذر إذا كان الأداء حرجًا.</p>
+</div>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">مطابقة البادئة (يبدأ ب)</h3><p>لإجراء مطابقة <strong>البادئة،</strong> حيث تبدأ السلسلة بنمط معين، يمكنك وضع النمط في البداية واستخدام <code translate="no">%</code> لمطابقة أي أحرف تليه. على سبيل المثال، للعثور على جميع المنتجات التي يبدأ اسمها <code translate="no">name</code> بـ "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>سوف يطابق هذا أي منتج يبدأ اسمه بـ "Prod"، مثل "المنتج أ"، "المنتج ب"، إلخ.</p>
@@ -240,7 +243,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>مثال 2: استرداد الكيانات حيث <code translate="no">metadata</code> ليس فارغًا</strong></p>
+<p><strong>مثال 2: استرجاع الكيانات حيث <code translate="no">metadata</code> ليس فارغًا</strong></p>
 <p>للعثور على الكيانات التي يكون فيها الحقل <code translate="no">metadata</code> غير فارغ:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 

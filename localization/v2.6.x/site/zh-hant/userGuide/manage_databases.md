@@ -257,7 +257,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">database.resource_groups</code></p></td>
      <td><p>字串</p></td>
-     <td><p>與指定資料庫關聯的資源群組的名稱，以共同分隔的清單顯示。</p></td>
+     <td><p>與指定資料庫關聯的資源群組的名稱，以逗號分隔的清單。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.diskQuota.mb</code></p></td>

@@ -18,7 +18,45 @@ title: الأسئلة الشائعة التشغيلية
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">ماذا لو فشلت في سحب صورة Milvus Docker من Docker Hub؟</h4><p>في حال فشلت في سحب صورة Milvus Docker من Docker Hub، حاول إضافة مرايا سجل أخرى.</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">ما هو مفوض عقدة الاستعلام، وما هي مسؤولياته؟</h4><p>عند تحميل مجموعة، تشترك عقدة الاستعلام في قنوات DML لرسائل الإدراج والحذف القادمة من قائمة انتظار الرسائل. تكون عقدة الاستعلام التي تشترك في هذه القنوات، والمعروفة باسم المفوض، مسؤولة عن:</p>
+<ul>
+<li>إدارة المقاطع المتزايدة التي تتطلب ذاكرة إضافية بسبب عمليات الإدراج المستمرة.</li>
+<li>تلقي رسائل الحذف وتمريرها إلى عقد الاستعلام الأخرى التي تحتوي على المقاطع ذات الصلة.</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">كيفية تحديد العقد المفوض لمجموعة ما؟</h4><p>استخدم Birdwatcher.</p>
+<p>قم بتثبيت Birdwatcher بعد <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">ذلك،</a> ثم قم بتشغيل الأمر التالي:</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">ما هي المعلمات التي يمكن تعديلها إذا كان استخدام ذاكرة عقدة الاستعلام غير متوازن؟</h4><p>في بعض الأحيان، تتفاوت ذاكرة عقدة الاستعلام لأن بعضها يعمل كمفوضين باستخدام ذاكرة وصول عشوائي أكبر. إذا كانت ذاكرة أحد المفوضين عالية، قم بضبط queryCoord.delegatorMemoryOverloadOverloadFactor لإلغاء تحميل المقاطع المختومة إلى عقد أخرى وتقليل استخدام ذاكرة الوصول العشوائي.</p>
+<ul>
+<li>القيمة الافتراضية هي 0.1.</li>
+<li>ستؤدي زيادة هذه القيمة (على سبيل المثال، إلى 0.3 أو أعلى) إلى قيام النظام بإلغاء تحميل المزيد من المقاطع المختومة من المفوض المحمل فوق طاقته إلى عقد استعلام أخرى، مما يساعد على موازنة استخدام الذاكرة. ويمكنك أيضًا محاولة زيادة القيمة إلى 1، مما يعني أنه لن يتم تحميل أي مقاطع مختومة في عقد المفوض.</li>
+</ul>
+<p>إذا كنت لا ترغب في إعادة تشغيل المجموعة، يمكنك تعديل تهيئة ميلفوس باستخدام مراقب الطيور:</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">كيفية تعيين shard_num لمجموعة؟</h4><p>كأفضل ممارسة، بالنسبة لمجموعة ذات متجهات ذات أبعاد 768، يوصى باستخدام جزء واحد على الأقل لكل 100 مليون متجه تقريبًا. بالنسبة لحالة استخدام الكتابة الثقيلة، استخدم 4 أجزاء لكل 100 مليون ناقل تقريبًا.</p>
+<p>على سبيل المثال، إذا كان لديك 100 مليون متجه، استخدم 1-4 أجزاء. إذا كان لديك 500 مليون متجه، استخدم 5-10 شظايا.</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">ماذا لو فشلت في سحب صورة Milvus Docker من Docker Hub؟</h4><p>إذا فشلت في سحب صورة Milvus Docker من Docker Hub، حاول إضافة مرايا تسجيل أخرى.</p>
 <p>يمكن للمستخدمين من البر الرئيسي للصين إضافة عنوان URL "https://registry.docker-cn.com" إلى مصفوفة مرايا السجل في <strong>/etc.docker/daemon.json</strong>.</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
@@ -59,7 +97,7 @@ title: الأسئلة الشائعة التشغيلية
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">هل يمكنني مشاركة مثيل إلخd بين عدة مثيلات ميلفوس؟</h4><p>نعم، يمكنك مشاركة مثيل إلخd بين عدة مثيلات Milvus. للقيام بذلك، تحتاج إلى تغيير <code translate="no">etcd.rootPath</code> إلى قيمة منفصلة لكل مثيل من مثيلات Milvus في ملفات التكوين لكل منها قبل بدء تشغيلها.</p>
 <h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">هل يمكنني مشاركة مثيل Pulsar بين مثيلات Milvus متعددة؟</h4><p>نعم، يمكنك مشاركة مثيل Pulsar بين مثيلات Milvus متعددة. للقيام بذلك، يمكنك</p>
 <ul>
-<li>إذا تم تمكين الإيجارات المتعددة على مثيل Pulsar الخاص بك، ففكر في تخصيص مستأجر منفصل أو مساحة اسم منفصلة لكل مثيل Milvus. وللقيام بذلك، تحتاج إلى تغيير <code translate="no">pulsar.tenant</code> أو <code translate="no">pulsar.namespace</code> في ملفات التكوين الخاصة بمثيلات Milvus الخاصة بك إلى قيمة فريدة لكل منها قبل بدء تشغيلها.</li>
+<li>إذا تم تمكين الإيجار المتعدد على مثيل Pulsar الخاص بك، ففكر في تخصيص مستأجر منفصل أو مساحة اسم منفصلة لكل مثيل Milvus. وللقيام بذلك، تحتاج إلى تغيير <code translate="no">pulsar.tenant</code> أو <code translate="no">pulsar.namespace</code> في ملفات التكوين الخاصة بمثيلات Milvus الخاصة بك إلى قيمة فريدة لكل منها قبل بدء تشغيلها.</li>
 <li>إذا كنت لا تخطط لتمكين الإيجار المتعدد على مثيل Pulsar الخاص بك، ففكر في تغيير <code translate="no">msgChannel.chanNamePrefix.cluster</code> في ملفات التكوين الخاصة بمثيلات Milvus إلى قيمة فريدة لكل منها قبل بدء تشغيلها.</li>
 </ul>
 <h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">هل يمكنني مشاركة مثيل MinIO بين مثيلات Milvus متعددة؟</h4><p>نعم، يمكنك مشاركة مثيل MinIO بين مثيلات Milvus متعددة. للقيام بذلك، تحتاج إلى تغيير <code translate="no">minio.rootPath</code> إلى قيمة فريدة لكل مثيل من مثيلات Milvus في ملفات التكوين لكل منها قبل بدء تشغيلها.</p>
@@ -67,14 +105,14 @@ title: الأسئلة الشائعة التشغيلية
 <p>يمكنك ترقية PyMilvus باستخدام الأمر التالي:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">لماذا أحصل على نتائج أقل من <code translate="no">limit</code> التي قمت بتعيينها في البحث/الاستعلام الخاص بي؟</h4><p>هناك عدة أسباب قد تجعلك تتلقى نتائج أقل من <code translate="no">limit</code> الذي حددته:</p>
+<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">لماذا أحصل على نتائج أقل من <code translate="no">limit</code> التي قمت بتعيينها في البحث/الاستعلام الخاص بي؟</h4><p>هناك العديد من الأسباب التي قد تجعلك تتلقى نتائج أقل من <code translate="no">limit</code> الذي حددته:</p>
 <ul>
 <li><p><strong>بيانات محدودة</strong>: قد لا تحتوي المجموعة على كيانات كافية لاستيفاء الحد الذي طلبته. إذا كان العدد الإجمالي للكيانات في المجموعة أقل من الحد، فستتلقى بطبيعة الحال نتائج أقل.</p></li>
 <li><p><strong>تكرار المفاتيح الأساسية</strong>: يعطي ميلفوس الأولوية لكيانات محددة عند مواجهة مفاتيح أساسية مكررة أثناء البحث. يختلف هذا السلوك بناءً على نوع البحث:</p></li>
 <li><p><strong>استعلام (مطابقة تامة)</strong>: يقوم Milvus بتحديد أحدث كيان بمفتاح PK المطابق. البحث عن المفاتيح الأساسية: يقوم Milvus بتحديد الكيان الذي يتمتع بأعلى درجة تشابه، حتى إذا كانت الكيانات تشترك في نفس PK. يمكن أن يؤدي هذا التحديد للأولويات إلى نتائج فريدة أقل من الحد الأقصى إذا كانت مجموعتك تحتوي على العديد من المفاتيح الأساسية المكررة.</p></li>
 <li><p><strong>عدم كفاية التطابقات</strong>: قد تكون تعبيرات تصفية البحث الخاصة بك صارمة للغاية، مما يؤدي إلى عدد أقل من الكيانات التي تستوفي حد التشابه. إذا كانت الشروط التي تم تعيينها للبحث مقيدة للغاية، فلن يتطابق عدد كافٍ من الكيانات، مما يؤدي إلى نتائج أقل من المتوقع.</p></li>
 </ul>
-<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. ما سبب هذا الخطأ وكيف يمكن حله؟</h4><p>يحدث هذا الخطأ عند محاولة استخدام برنامج Milvus Lite على نظام أساسي يعمل بنظام ويندوز. تم تصميم Milvus Lite بشكل أساسي لبيئات Linux وقد لا يكون لديه دعم أصلي لنظام Windows.</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. ما سبب هذا الخطأ وكيف يمكن حله؟</h4><p>يحدث هذا الخطأ عند محاولة استخدام Milvus Lite على نظام أساسي يعمل بنظام ويندوز. تم تصميم Milvus Lite بشكل أساسي لبيئات Linux وقد لا يكون لديه دعم أصلي لنظام Windows.</p>
 <p>الحل هو استخدام بيئة Linux:</p>
 <ul>
 <li>استخدم نظام تشغيل يستند إلى لينكس أو جهاز افتراضي لتشغيل ميلفوس لايت.</li>

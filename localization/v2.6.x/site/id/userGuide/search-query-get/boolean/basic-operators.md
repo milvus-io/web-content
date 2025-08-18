@@ -92,6 +92,9 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>Ini berguna ketika Anda ingin memeriksa keanggotaan dalam daftar nilai.</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Contoh 2: Menggunakan <code translate="no">LIKE</code> untuk Pencocokan Pola</h3><p>Operator <code translate="no">LIKE</code> digunakan untuk pencocokan pola dalam bidang string. Operator ini dapat mencocokkan substring di berbagai posisi dalam teks: sebagai <strong>awalan</strong>, akhiran, atau <strong>akhiran</strong>. Operator <code translate="no">LIKE</code> menggunakan simbol <code translate="no">%</code> sebagai wildcard, yang dapat mencocokkan sejumlah karakter (termasuk nol).</p>
+<div class="alert note">
+<p>Dalam banyak kasus, pencocokan <strong>infiks</strong> atau <strong>sufiks</strong> secara signifikan lebih lambat daripada pencocokan awalan. Gunakan dengan hati-hati jika kinerja sangat penting.</p>
+</div>
 <h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Pencocokan Awalan (Dimulai dengan)</h3><p>Untuk melakukan pencocokan <strong>awalan</strong>, di mana string dimulai dengan pola tertentu, Anda dapat menempatkan pola di awal dan menggunakan <code translate="no">%</code> untuk mencocokkan karakter apa pun yang mengikutinya. Misalnya, untuk menemukan semua produk yang <code translate="no">name</code> -nya dimulai dengan "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -208,7 +211,7 @@ summary: >-
 <div class="alert note">
 <p>Jika beberapa elemen dalam objek JSON bernilai null (misalnya kunci individual), bidang tersebut masih dianggap non-null. Sebagai contoh, <code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> tidak dianggap sebagai null, meskipun key <code translate="no">category</code> adalah null.</p>
 </div>
-<p>Untuk mengilustrasikan lebih lanjut bagaimana Milvus menangani field JSON dengan nilai null, perhatikan contoh data berikut ini dengan field JSON <code translate="no">metadata</code>:</p>
+<p>Untuk mengilustrasikan lebih lanjut bagaimana Milvus menangani field JSON dengan nilai null, pertimbangkan contoh data berikut ini dengan field JSON <code translate="no">metadata</code>:</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},

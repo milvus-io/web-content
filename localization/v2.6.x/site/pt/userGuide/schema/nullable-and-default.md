@@ -25,8 +25,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus permite-lhe definir o atributo <code translate="no">nullable</code> e os valores por defeito para os campos escalares, exceto para o campo primário. Para os campos marcados como <code translate="no">nullable=True</code>, pode ignorar o campo ao inserir dados ou defini-lo diretamente como um valor nulo, e o sistema tratá-lo-á como nulo sem causar um erro. Quando um campo tem um valor por defeito, o sistema aplica automaticamente esse valor se não forem especificados dados para o campo durante a inserção.</p>
-<p>Os atributos de valor por defeito e nullable simplificam a migração de dados de outros sistemas de base de dados para o Milvus, permitindo o tratamento de conjuntos de dados com valores nulos e preservando as definições de valor por defeito. Ao criar uma coleção, pode também ativar a opção nullable ou definir valores por defeito para campos onde os valores podem ser incertos.</p>
+    </button></h1><p>O Milvus permite-lhe definir o atributo <code translate="no">nullable</code> e os valores por defeito para os campos escalares, exceto o campo primário. Para os campos marcados como <code translate="no">nullable=True</code>, pode ignorar o campo ao inserir dados ou defini-lo diretamente como um valor nulo, e o sistema tratá-lo-á como nulo sem causar um erro. Quando um campo tem um valor por defeito, o sistema aplica automaticamente esse valor se não forem especificados dados para o campo durante a inserção.</p>
+<p>Os atributos default value e nullable simplificam a migração de dados de outros sistemas de base de dados para o Milvus, permitindo o tratamento de conjuntos de dados com valores nulos e preservando as definições de valores default. Ao criar uma coleção, pode também ativar a opção nullable ou definir valores por defeito para campos onde os valores podem ser incertos.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,9 +46,8 @@ summary: >-
 <li><p>Apenas os campos escalares, excluindo o campo primário, suportam valores predefinidos e o atributo nullable.</p></li>
 <li><p>Os campos JSON e Matriz não suportam valores padrão.</p></li>
 <li><p>Os valores predefinidos ou o atributo nullable só podem ser configurados durante a criação da coleção e não podem ser modificados posteriormente.</p></li>
-<li><p>Os campos escalares com o atributo anulável ativado não podem ser usados como <code translate="no">group_by_field</code> na Pesquisa de agrupamento. Para obter mais informações sobre a pesquisa de agrupamento, consulte <a href="/docs/pt/grouping-search.md">Pesquisa de agrupamento</a>.</p></li>
-<li><p>Os campos marcados como anuláveis não podem ser usados como chaves de partição. Para obter mais informações sobre chaves de partição, consulte <a href="/docs/pt/use-partition-key.md">Usar chave de partição</a>.</p></li>
-<li><p>Ao criar um índice num campo escalar com o atributo anulável ativado, os valores nulos serão excluídos do índice.</p></li>
+<li><p>Os campos marcados como anuláveis não podem ser utilizados como chaves de partição. Para obter mais informações sobre chaves de partição, consulte <a href="/docs/pt/use-partition-key.md">Usar chave de partição</a>.</p></li>
+<li><p>Ao criar um índice em um campo escalar com o atributo anulável ativado, os valores nulos serão excluídos do índice.</p></li>
 <li><p><strong>Campos JSON e ARRAY</strong>: Ao utilizar os operadores <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code> para filtrar campos JSON ou ARRAY, estes operadores funcionam ao nível da coluna, o que indica que apenas avaliam se todo o objeto ou matriz JSON é nulo. Por exemplo, se uma chave dentro de um objeto JSON for nula, não será reconhecida pelo filtro <code translate="no">IS NULL</code>. Para obter mais informações, consulte <a href="/docs/pt/basic-operators.md">Operadores básicos</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Atributo Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">

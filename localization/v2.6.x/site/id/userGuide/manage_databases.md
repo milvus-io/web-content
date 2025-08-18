@@ -260,12 +260,12 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">database.resource_groups</code></p></td>
      <td><p>string</p></td>
-     <td><p>Nama-nama grup sumber daya yang terkait dengan basis data yang ditentukan dalam daftar yang dipisahkan secara umum.</p></td>
+     <td><p>Nama-nama grup sumber daya yang terkait dengan basis data yang ditentukan dalam daftar yang dipisahkan dengan koma.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.diskQuota.mb</code></p></td>
      <td><p>integer</p></td>
-     <td><p>Ukuran maksimum ruang disk untuk database yang ditentukan, dalam megabyte (MB).</p></td>
+     <td><p>Ukuran maksimum ruang disk untuk basis data yang ditentukan, dalam megabyte (MB).</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.max.collections</code></p></td>

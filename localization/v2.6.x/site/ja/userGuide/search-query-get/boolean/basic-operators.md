@@ -86,8 +86,11 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>これは、値のリストに含まれるかどうかを調べたいときに便利です。</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">例 2:<code translate="no">LIKE</code> を使ったパターンマッチング</h3><p><code translate="no">LIKE</code> 演算子は文字列フィールドのパターンマッチングに使われます。この演算子は、<strong>プレフィックス</strong>、<strong>インフィックス</strong>、<strong>サフィックスなど</strong>、テキスト内のさまざまな位置の部分文字列にマッチさせることができます。<code translate="no">LIKE</code> 演算子は<code translate="no">%</code> シンボルをワイルドカードとして使い、任意の文字数（ゼロを含む）にマッチさせることができます。</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">プレフィックスマッチ（Starts With）</h3><p>文字列が指定したパターンで始まるような<strong>プレフィックス</strong>マッチを行うには、パターンを先頭に置き、<code translate="no">%</code> を使って、それに続く文字にマッチさせることができます。たとえば、<code translate="no">name</code> が "Prod" で始まるすべての製品を検索する場合：</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">例 2:<code translate="no">LIKE</code> を使ったパターンマッチング</h3><p><code translate="no">LIKE</code> 演算子は文字列フィールドのパターンマッチングに使われます。この演算子は、<strong>プレフィックス</strong>、<strong>インフィックス</strong>、<strong>サフィックスなど</strong>、テキスト内のさまざまな位置の部分文字列にマッチさせることができます。<code translate="no">LIKE</code> 演算子は<code translate="no">%</code> シンボルをワイルドカードとして使い、 任意の数の文字（ゼロを含む）にマッチさせることができます。</p>
+<div class="alert note">
+<p>ほとんどの場合、<strong>接尾辞</strong>マッチングや<strong>接尾辞</strong>マッチングは接頭辞マッチングよりも大幅に遅くなります。パフォーマンスを重視する場合は注意して使用してください。</p>
+</div>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">プレフィックスマッチ (Starts With)</h3><p>文字列が指定したパターンで始まるような<strong>プレフィックス</strong>マッチを行うには、 パターンを先頭に置き、<code translate="no">%</code> を使ってそれに続く文字にマッチさせます。たとえば、<code translate="no">name</code> が "Prod" で始まるすべての製品を検索する場合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>これは、"Product A"、"Product B "など、商品名が "Prod "で始まるすべての商品にマッチします。</p>
@@ -203,7 +206,7 @@ summary: >-
 <div class="alert note">
 <p>JSONオブジェクト内の一部の要素（個々のキーなど）がNULLの場合でも、フィールドは非NULLとみなされる。例えば、<code translate="no">category</code> のキーがNULLであっても、<code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> はNULLとして扱われない。</p>
 </div>
-<p>MilvusがNULL値を持つJSONフィールドをどのように扱うかをさらに説明するために、次のJSONフィールド<code translate="no">metadata</code> を持つサンプルデータを考えてみましょう：</p>
+<p>MilvusがNULL値を持つJSONフィールドをどのように扱うかをさらに説明するために、JSONフィールド<code translate="no">metadata</code> を持つ以下のサンプルデータを考えてみましょう：</p>
 <pre><code translate="no" class="language-python">data = [
   {
       <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
@@ -246,7 +249,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">NULL値を持つARRAYフィールド</h3><p>MilvusではNULL値を含むARRAYフィールドのフィルタリングが可能です。ARRAYフィールドは以下の方法でNULLとして扱われます：</p>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">NULL値を持つARRAYフィールド</h3><p>Milvusでは、NULL値を含むARRAYフィールドのフィルタリングが可能です。ARRAYフィールドは以下の方法でNULLとして扱われます：</p>
 <ul>
 <li><p>例えば、<code translate="no">&quot;tags&quot;: None</code> のように、ARRAYフィールド全体が明示的にNone（Null）に設定されている場合。</p></li>
 <li><p>ARRAYフィールドがエンティティから完全に欠落している。</p></li>

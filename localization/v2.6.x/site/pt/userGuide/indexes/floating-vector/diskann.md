@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Em cenários de grande escala, onde os conjuntos de dados podem incluir biliões ou mesmo triliões de vectores, os métodos de indexação padrão na memória (por exemplo, <a href="/docs/pt/hnsw.md">HNSW</a>, <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>) muitas vezes não conseguem acompanhar o ritmo devido a limitações de memória. <strong>O DISKANN</strong> oferece uma abordagem baseada em disco que aborda esses desafios, mantendo alta precisão e velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.</p>
+    </button></h1><p>Em cenários de grande escala, onde os conjuntos de dados podem incluir biliões ou mesmo triliões de vectores, os métodos padrão de indexação na memória (por exemplo, <a href="/docs/pt/hnsw.md">HNSW</a>, <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>) muitas vezes não conseguem acompanhar o ritmo devido a limitações de memória. <strong>O DISKANN</strong> oferece uma abordagem baseada em disco que aborda esses desafios, mantendo alta precisão e velocidade de pesquisa quando o tamanho do conjunto de dados excede a RAM disponível.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>O DISKANN</strong> combina duas técnicas-chave para uma pesquisa vetorial eficiente:</p>
+    </button></h2><p><strong>O DISKANN</strong> combina duas técnicas fundamentais para uma pesquisa vetorial eficiente:</p>
 <ul>
 <li><p><strong>Gráfico Vamana</strong> - Um índice <strong>baseado em disco</strong> e <strong>em gráficos</strong> que liga pontos de dados (ou vectores) para uma navegação eficiente durante a pesquisa.</p></li>
 <li><p><strong>Quantização de produtos (PQ)</strong> - Um método de compressão <strong>na memória</strong> que reduz o tamanho dos vectores, permitindo cálculos rápidos de distância aproximada entre vectores.</p></li>
@@ -103,7 +103,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Por padrão, <strong>DISKANN</strong> é desativado no Milvus para priorizar a velocidade dos índices na memória para conjuntos de dados que cabem confortavelmente na RAM. No entanto, se estiver a trabalhar com conjuntos de dados enormes ou quiser tirar partido da escalabilidade do <strong>DISKANN</strong> e da otimização de SSD, pode activá-lo facilmente.</p>
+    </button></h2><p>Por padrão, <strong>DISKANN</strong> é desativado no Milvus para priorizar a velocidade dos índices na memória para conjuntos de dados que cabem confortavelmente na RAM. No entanto, se estiver a trabalhar com conjuntos de dados maciços ou quiser tirar partido da escalabilidade do <strong>DISKANN</strong> e da otimização de SSD, pode activá-lo facilmente.</p>
 <p>Veja como habilitar o DISKANN no Milvus:</p>
 <ol>
 <li><p><strong>Atualizar o arquivo de configuração do Milvus</strong></p>
@@ -116,7 +116,7 @@ summary: >-
 </ol></li>
 <li><p><strong>Otimizar o armazenamento para DISKANN</strong></p></li>
 </ol>
-<p>Para garantir o melhor desempenho com o DISKANN, é recomendável armazenar seus dados do Milvus em um SSD NVMe rápido. Veja como fazer isso para implantações do Milvus Standalone e do Cluster:</p>
+<p>Para garantir o melhor desempenho com o DISKANN, é recomendável armazenar os dados do Milvus num SSD NVMe rápido. Veja como fazer isso para implantações do Milvus Standalone e do Cluster:</p>
 <ul>
 <li><p><strong>Milvus Standalone</strong></p>
 <ul>
@@ -148,7 +148,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os parâmetros relacionados com DISKANN podem ser configurados através do seu ficheiro de configuração do Milvus (<code translate="no">milvus.yaml</code>):</p>
+    </button></h2><p>Os parâmetros relacionados com DISKANN só podem ser configurados através do seu ficheiro de configuração do Milvus (<code translate="no">milvus.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -158,7 +158,7 @@ summary: >-
     <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.1</span> <span class="hljs-comment"># Ratio of cached node numbers to raw data</span>
     <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para mais pormenores sobre as descrições dos parâmetros, consulte <a href="/docs/pt/diskann.md#DISKANN-params">Parâmetros DISKANN</a>.</p>
+<p>Para obter detalhes sobre as descrições dos parâmetros, consulte <a href="/docs/pt/diskann.md#DISKANN-params">Parâmetros DISKANN</a>.</p>
 <h2 id="DISKANN-params" class="common-anchor-header">Parâmetros DISKANN<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,13 +175,16 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>O ajuste fino dos parâmetros do DISKANN permite-lhe adaptar o seu comportamento ao seu conjunto de dados específico e à carga de trabalho de pesquisa, atingindo o equilíbrio correto entre velocidade, precisão e utilização de memória.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de criação de índices</h3><p>Estes parâmetros influenciam a forma como o índice DISKANN é construído. O ajuste dos mesmos pode afetar o tamanho do índice, o tempo de construção e a qualidade da pesquisa.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de criação de índices</h3><p>Estes parâmetros influenciam a forma como o índice DISKANN é construído. Ajustá-los pode afetar o tamanho do índice, o tempo de construção e a qualidade da pesquisa.</p>
+<div class="alert note">
+<p>Todos os parâmetros de construção de índices na lista abaixo só podem ser configurados através do seu ficheiro de configuração Milvus (<code translate="no">milvus.yaml</code>)</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>Parâmetro</p></th>
      <th><p>Descrição</p></th>
-     <th><p>Intervalo de valores</p></th>
+     <th><p>Valor Intervalo</p></th>
      <th><p>Sugestão de ajuste</p></th>
    </tr>
    <tr>
@@ -199,7 +202,7 @@ summary: >-
      <td><p>Durante a construção do índice, este parâmetro define o tamanho do conjunto de candidatos usado na pesquisa dos vizinhos mais próximos de cada nó. Para cada nó que está sendo adicionado ao gráfico, o algoritmo mantém uma lista dos <code translate="no">search_list_size</code> melhores candidatos encontrados até o momento. A procura de vizinhos pára quando esta lista já não pode ser melhorada. A partir deste conjunto final de candidatos, os <code translate="no">max_degree</code> melhores nós são selecionados para formar as arestas finais.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Range</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valor predefinido</strong>: <code translate="no">100</code></p></td>
-     <td><p>Um <code translate="no">search_list_size</code> maior aumenta a probabilidade de encontrar os verdadeiros vizinhos mais próximos para cada nó, o que pode levar a um gráfico de maior qualidade e a um melhor desempenho de pesquisa (recuperação). No entanto, isto tem o custo de um tempo de construção do índice significativamente mais longo. Deve ser sempre definido para um valor maior ou igual a <code translate="no">max_degree</code>.</p></td>
+     <td><p>Um <code translate="no">search_list_size</code> maior aumenta a probabilidade de encontrar os verdadeiros vizinhos mais próximos de cada nó, o que pode levar a um gráfico de maior qualidade e a um melhor desempenho de pesquisa (recuperação). No entanto, isto tem o custo de um tempo de construção do índice significativamente mais longo. Deve ser sempre definido para um valor maior ou igual a <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -219,12 +222,16 @@ summary: >-
 <p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: (0,0625, 0,25]</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>Estes parâmetros influenciam a forma como o DISKANN efectua as pesquisas. O seu ajuste pode afetar a velocidade de pesquisa, a latência e a utilização de recursos.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>Estes parâmetros influenciam a forma como o DISKANN efectua as pesquisas. Ajustá-los pode afetar a velocidade da pesquisa, a latência e o uso de recursos.</p>
+<div class="alert note">
+<p>O <code translate="no">BeamWidthRatio</code> na lista abaixo só pode ser configurado através do seu ficheiro de configuração Milvus (<code translate="no">milvus.yaml</code>)</p>
+<p>O <code translate="no">search_list</code> na lista abaixo só pode ser configurado nos parâmetros de pesquisa no SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>Parâmetro</p></th>
-     <th><p>Descrição</p></th>
+     <th><p>Descrição do parâmetro</p></th>
      <th><p>Intervalo de valores</p></th>
      <th><p>Sugestão de ajuste</p></th>
    </tr>
@@ -238,7 +245,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>Durante uma operação de pesquisa, esse parâmetro determina o tamanho do pool de candidatos que o algoritmo mantém à medida que percorre o gráfico. Um valor maior aumenta as hipóteses de encontrar os verdadeiros vizinhos mais próximos (maior recuperação), mas também aumenta a latência da pesquisa.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valor predefinido</strong>: <code translate="no">100</code></p></td>

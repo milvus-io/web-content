@@ -64,7 +64,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">Menyiapkan Model Penyematan</h3><p>Kita menginisialisasi klien OpenAI untuk menyiapkan model penyematan.</p>
+<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">Mempersiapkan Model Penyematan</h3><p>Kita menginisialisasi klien OpenAI untuk menyiapkan model penyematan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 openai_client = OpenAI()
@@ -178,7 +178,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Mari kita lihat hasil pencarian dari kueri</p>
+<p>Mari kita lihat hasil pencarian dari kueri tersebut</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
@@ -201,12 +201,12 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Gunakan LLM untuk mendapatkan respons RAG</h3><p>Ubah dokumen yang diambil menjadi format string.</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Gunakan LLM untuk mendapatkan respons RAG</h3><p>Ubah dokumen yang diambil ke dalam format string.</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Tentukan perintah sistem dan pengguna untuk Model Lanage. Perintah ini dirangkai dengan dokumen yang diambil dari Milvus.</p>
+<p>Tentukan perintah sistem dan pengguna untuk Model Bahasa. Perintah ini dirangkai dengan dokumen yang diambil dari Milvus.</p>
 <pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>

@@ -148,7 +148,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Parameter terkait DISKANN dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>):</p>
+    </button></h2><p>Parameter terkait DISKANN hanya dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -174,8 +174,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Menyempurnakan parameter DISKANN memungkinkan Anda menyesuaikan perilakunya dengan set data spesifik dan beban kerja pencarian Anda, mencapai keseimbangan yang tepat antara kecepatan, akurasi, dan penggunaan memori.</p>
+    </button></h2><p>Menyempurnakan parameter DISKANN memungkinkan Anda menyesuaikan perilakunya dengan kumpulan data spesifik dan beban kerja pencarian Anda, mencapai keseimbangan yang tepat antara kecepatan, akurasi, dan penggunaan memori.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Parameter pembuatan indeks</h3><p>Parameter-parameter ini mempengaruhi bagaimana indeks DISKANN dibangun. Menyesuaikannya dapat memengaruhi ukuran indeks, waktu pembuatan, dan kualitas pencarian.</p>
+<div class="alert note">
+<p>Semua parameter pembangun indeks dalam daftar di bawah ini hanya dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>)</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -190,7 +193,7 @@ summary: >-
      <td><p>Mengontrol jumlah maksimum koneksi (sisi) yang dapat dimiliki setiap titik data dalam grafik Vamana.</p></td>
      <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, 512]</p>
 <p><strong>Nilai default</strong>: <code translate="no">56</code></p></td>
-     <td><p>Nilai yang lebih tinggi akan membuat grafik yang lebih padat, berpotensi meningkatkan pemanggilan kembali (menemukan hasil yang lebih relevan) tetapi juga meningkatkan penggunaan memori dan waktu pembuatan. 
+     <td><p>Nilai yang lebih tinggi akan membuat grafik yang lebih padat, berpotensi meningkatkan pemanggilan (menemukan hasil yang lebih relevan) tetapi juga meningkatkan penggunaan memori dan waktu pembuatan. 
  Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [10, 100].</p></td>
    </tr>
    <tr>
@@ -219,7 +222,11 @@ summary: >-
 <p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: (0,0625, 0,25]</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Parameter ini memengaruhi cara DISKANN melakukan pencarian. Menyesuaikan parameter ini dapat memengaruhi kecepatan pencarian, latensi, dan penggunaan sumber daya.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Parameter ini memengaruhi cara DISKANN melakukan pencarian. Menyesuaikan parameter ini dapat mempengaruhi kecepatan pencarian, latensi, dan penggunaan sumber daya.</p>
+<div class="alert note">
+<p><code translate="no">BeamWidthRatio</code> dalam daftar di bawah ini hanya dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>)</p>
+<p><code translate="no">search_list</code> dalam daftar di bawah ini hanya dapat dikonfigurasi dalam parameter pencarian di SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -238,7 +245,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>Selama operasi pencarian, parameter ini menentukan ukuran kumpulan kandidat yang dipertahankan oleh algoritme saat melintasi grafik. Nilai yang lebih besar meningkatkan peluang menemukan tetangga terdekat yang sebenarnya (recall yang lebih tinggi) tetapi juga meningkatkan latensi pencarian.</p></td>
      <td><p><strong>Jenis</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>

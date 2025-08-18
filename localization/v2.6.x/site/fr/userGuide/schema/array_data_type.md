@@ -42,9 +42,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Valeurs par défaut</strong>: Les champs ARRAY ne prennent pas en charge les valeurs par défaut. Toutefois, vous pouvez attribuer la valeur <code translate="no">True</code> à l'attribut <code translate="no">nullable</code> pour autoriser les valeurs nulles. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/nullable-and-default.md">Valeurs nulles et valeurs par défaut</a>.</p></li>
-<li><p><strong>Type de données</strong>: Tous les éléments d'un champ de type tableau doivent avoir le même type de données, tel que spécifié par l'attribut <code translate="no">element_type</code>. Si vous avez défini les attributs <code translate="no">element_type</code> et <code translate="no">VARCHAR</code>, vous devez également définir l'attribut <code translate="no">max_length</code> pour les éléments du tableau.</p></li>
-<li><p><strong>Capacité du tableau</strong>: Le nombre d'éléments d'un champ de tableau doit être inférieur ou égal à la capacité maximale définie lors de la création du tableau, comme spécifié par <code translate="no">max_capacity</code>. La valeur doit être un nombre entier compris entre <strong>1</strong> et <strong>4096</strong>.</p></li>
+<li><p><strong>Valeurs par défaut</strong>: Les champs ARRAY ne prennent pas en charge les valeurs par défaut. Toutefois, vous pouvez attribuer la valeur <code translate="no">True</code> à l'attribut <code translate="no">nullable</code> pour autoriser les valeurs nulles. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
+<li><p><strong>Type de données :</strong> Tous les éléments d'un champ ARRAY doivent partager le même type de données, défini par le paramètre <code translate="no">element_type</code>. Lorsque <code translate="no">element_type</code> est défini sur <code translate="no">VARCHAR</code>, vous devez également spécifier <code translate="no">max_length</code> pour les éléments du tableau. Le paramètre <code translate="no">element_type</code> accepte tout type de données scalaires pris en charge par Milvus, à l'exception de <code translate="no">JSON</code>.</p></li>
+<li><p><strong>Capacité du tableau</strong>: Le nombre d'éléments d'un champ ARRAY doit être inférieur ou égal à la capacité maximale définie lors de la création du tableau, comme spécifié par <code translate="no">max_capacity</code>. La valeur doit être un nombre entier compris entre <strong>1</strong> et <strong>4096</strong>.</p></li>
 <li><p><strong>Traitement des chaînes de caractères</strong>: Les valeurs des chaînes de caractères dans les champs des tableaux sont stockées telles quelles, sans échappement sémantique ni conversion. Par exemple, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, et <code translate="no">&quot;a\&quot;b&quot;</code> sont enregistrées telles qu'elles ont été saisies, tandis que <code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérées comme des valeurs non valides.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Ajout d'un champ ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -65,15 +65,15 @@ summary: >-
     </button></h2><p>Pour utiliser les champs ARRAY dans Milvus, il faut définir le type de champ correspondant lors de la création du schéma de collection. Ce processus comprend</p>
 <ol>
 <li><p>Définir <code translate="no">datatype</code> comme étant le type de données ARRAY pris en charge, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Utiliser le paramètre <code translate="no">element_type</code> pour spécifier le type de données des éléments du tableau. Il peut s'agir de n'importe quel type de données scalaires pris en charge par Milvus, comme <code translate="no">VARCHAR</code> ou <code translate="no">INT64</code>. Tous les éléments d'un même tableau doivent être du même type de données.</p></li>
-<li><p>Utiliser le paramètre <code translate="no">max_capacity</code> pour définir la capacité maximale du tableau, c'est-à-dire le nombre maximal d'éléments qu'il peut contenir.</p></li>
+<li><p>Utiliser le paramètre <code translate="no">element_type</code> pour spécifier le type de données des éléments du tableau. Tous les éléments d'un même tableau doivent être du même type de données.</p></li>
+<li><p>Le paramètre <code translate="no">max_capacity</code> permet de définir la capacité maximale du tableau, c'est-à-dire le nombre maximal d'éléments qu'il peut contenir.</p></li>
 </ol>
 <p>Voici comment définir un schéma de collection qui inclut des champs ARRAY :</p>
 <div class="alert note">
 <p>Si vous définissez <code translate="no">enable_dynamic_fields=True</code> lors de la définition du schéma, Milvus vous permet d'insérer des champs scalaires qui n'ont pas été définis à l'avance. Toutefois, cela peut augmenter la complexité des requêtes et de la gestion, ce qui peut avoir un impact sur les performances. Pour plus d'informations, voir <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#http">HTTP</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -212,7 +212,7 @@ schema.WithField(entity.NewField().
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-http">export arrayField1='{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField1=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;tags&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;VarChar&quot;,
@@ -220,42 +220,42 @@ schema.WithField(entity.NewField().
         &quot;max_capacity&quot;: 10,
         &quot;max_length&quot;: 65535
     }
-}'
+}&#x27;</span>
 
-export arrayField2='{
+<span class="hljs-built_in">export</span> arrayField2=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;ratings&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;Int64&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;max_capacity&quot;: 5
     }
-}'
+}&#x27;</span>
 
-export pkField='{
+<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
     &quot;dataType&quot;: &quot;Int64&quot;,
     &quot;isPrimary&quot;: true
-}'
+}&#x27;</span>
 
-export vectorField='{
+<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;embedding&quot;,
     &quot;dataType&quot;: &quot;FloatVector&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;dim&quot;: 3
     }
-}'
+}&#x27;</span>
 
-export schema=&quot;{
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: false,
     \&quot;fields\&quot;: [
-        $arrayField1,
-        $arrayField2,
-        $pkField,
-        $vectorField
+        <span class="hljs-variable">$arrayField1</span>,
+        <span class="hljs-variable">$arrayField2</span>,
+        <span class="hljs-variable">$pkField</span>,
+        <span class="hljs-variable">$vectorField</span>
     ]
-}&quot;
-</code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Paramètres d'indexation<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Set-index-params" class="common-anchor-header">Définir les paramètres d'indexation<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

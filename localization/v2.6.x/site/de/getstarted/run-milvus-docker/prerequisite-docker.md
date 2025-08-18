@@ -1,13 +1,13 @@
 ---
 id: prerequisite-docker.md
-label: Docker requirements
-related_key: Docker
+label: Standalone requirements
+related_key: Standalone
 summary: >-
-  Lernen Sie die notwendigen Vorbereitungen für die Installation von Milvus mit
-  Docker Compose.
-title: Anforderungen für die Installation von Milvus mit Docker Compose
+  Lernen Sie die notwendigen Vorbereitungen vor der Installation von Milvus
+  Standalone kennen.
+title: Voraussetzungen für die Installation von Milvus Standalone
 ---
-<h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">Anforderungen für die Installation von Milvus mit Docker Compose<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Requirements-for-Installing-Milvus-Standalone" class="common-anchor-header">Voraussetzungen für die Installation von Milvus Standalone<button data-href="#Requirements-for-Installing-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ title: Anforderungen für die Installation von Milvus mit Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Überprüfen Sie vor der Installation einer Milvus-Instanz, ob Ihre Hardware und Software die Anforderungen erfüllt.</p>
+    </button></h1><p>Bevor Sie eine Milvus Standalone-Instanz installieren, überprüfen Sie, ob Ihre Hardware und Software den Anforderungen entspricht.</p>
 <h2 id="Hardware-requirements" class="common-anchor-header">Hardware-Anforderungen<button data-href="#Hardware-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +69,7 @@ title: Anforderungen für die Installation von Milvus mit Docker Compose
 <tr><th>Betriebssytem</th><th>Software</th><th>Hinweis</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 oder höher</td><td>Docker-Schreibtisch</td><td>Stellen Sie die virtuelle Maschine (VM) von Docker so ein, dass sie mindestens 2 virtuelle CPUs (vCPUs) und 8 GB Anfangsspeicher verwendet. Andernfalls kann die Installation fehlschlagen. <br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/mac/install/">Installieren von Docker Desktop auf Mac</a>.</td></tr>
+<tr><td>macOS 10.14 oder höher</td><td>Docker-Schreibtisch</td><td>Stellen Sie die virtuelle Maschine (VM) von Docker so ein, dass sie mindestens 2 virtuelle CPUs (vCPUs) und 8 GB anfänglichen Speicher verwendet. Andernfalls kann die Installation fehlschlagen. <br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/mac/install/">Installieren von Docker Desktop auf Mac</a>.</td></tr>
 <tr><td>Linux-Plattformen</td><td><ul><li>Docker 19.03 oder höher</li><li>Docker Compose 1.25.1 oder höher</li></ul></td><td>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/engine/install/">Docker-Engine installieren</a> und <a href="https://docs.docker.com/compose/install/">Docker Compose installieren</a>.</td></tr>
 <tr><td>Windows mit aktivierter WSL 2</td><td>Docker-Arbeitsplatz</td><td>Wir empfehlen, Quellcode und andere Daten, die in Linux-Containern gebunden sind, im Linux-Dateisystem statt im Windows-Dateisystem zu speichern.<br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Installieren von Docker Desktop unter Windows mit WSL 2-Backend</a>.</td></tr>
 </tbody>

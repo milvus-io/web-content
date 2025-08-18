@@ -88,7 +88,10 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>当您要检查值列表中的成员资格时，这很有用。</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">例 2：使用<code translate="no">LIKE</code> 进行模式匹配</h3><p><code translate="no">LIKE</code> 操作符用于字符串字段中的模式匹配。它可以匹配文本中不同位置的子串：<strong>前缀</strong>、<strong>后缀</strong>或<strong>后缀</strong>。<code translate="no">LIKE</code> 操作符使用<code translate="no">%</code> 符号作为通配符，可以匹配任意数量的字符（包括 0）。</p>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">前缀匹配（从开始）</h3><p>要执行<strong>前缀</strong>匹配，即字符串以给定的模式开始，可以将模式放在开头，然后使用<code translate="no">%</code> 匹配其后的任何字符。例如，要查找<code translate="no">name</code> 以 "Prod "开头的所有产品：</p>
+<div class="alert note">
+<p>在大多数情况下，<strong>下缀</strong>或<strong>后缀</strong>匹配要比前缀匹配慢得多。如果对性能要求很高，请谨慎使用。</p>
+</div>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">前缀匹配（从开始）</h3><p>要执行<strong>前缀</strong>匹配（字符串以给定模式开始），可以将模式放在开头，然后使用<code translate="no">%</code> 匹配其后的任何字符。例如，要查找<code translate="no">name</code> 以 "Prod "开头的所有产品：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>这将匹配名称以 "Prod "开头的任何产品，如 "Product A"、"Product B "等。</p>
@@ -202,7 +205,7 @@ summary: >-
 <li><p>实体中完全没有 JSON 字段。</p></li>
 </ul>
 <div class="alert note">
-<p>如果 JSON 对象中的某些元素为空（如单个键），则字段仍被视为非空。例如，尽管<code translate="no">category</code> 关键字为空，但<code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> 不会被视为空字段。</p>
+<p>如果 JSON 对象中的某些元素（如单个键）为空，则字段仍被视为非空。例如，尽管<code translate="no">category</code> 关键字为空，但<code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> 不会被视为空字段。</p>
 </div>
 <p>为进一步说明 Milvus 如何处理带有空值的 JSON 字段，请考虑以下带有 JSON 字段<code translate="no">metadata</code> 的示例数据：</p>
 <pre><code translate="no" class="language-python">data = [
@@ -296,7 +299,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">在 JSON 和 ARRAY 字段中使用基本操作符的提示<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="common-anchor-header">使用 JSON 和 ARRAY 字段的基本操作符提示<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

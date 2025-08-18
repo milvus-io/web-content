@@ -260,7 +260,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">database.resource_groups</code></p></td>
      <td><p>string</p></td>
-     <td><p>Имена групп ресурсов, связанных с указанной базой данных, в виде списка с общим разделением.</p></td>
+     <td><p>Имена групп ресурсов, связанных с указанной базой данных, в виде списка, разделенного запятыми.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.diskQuota.mb</code></p></td>
@@ -269,7 +269,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">database.max.collections</code></p></td>
-     <td><p>integer</p></td>
+     <td><p>целое число</p></td>
      <td><p>Максимальное количество коллекций, допустимое в указанной базе данных.</p></td>
    </tr>
    <tr>

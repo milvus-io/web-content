@@ -57,13 +57,13 @@ title: Installation autonome de Milvus avec un paquetage RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez télécharger le paquetage RPM/DEB correspondant à l'architecture de votre système à partir de la [page des versions de Milvus] (https://github.com/milvus-io/milvus/releases/tag/v{{ var.milvus_release_version }}).</p>
+    </button></h2><p>Vous pouvez télécharger le paquetage RPM/DEB correspondant à l'architecture de votre système à partir de la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.0">page Milvus Releases</a>.</p>
 <ul>
-<li>Pour x86_64/amd64, téléchargez le paquet <strong>{{ var.milvus_deb_amd64 }}</strong> ou <strong>{{ var.milvus_rpm_amd64 }}</strong>.</li>
-<li>Pour ARM64, téléchargez le paquet <strong>{{ var.milvus_deb_arm64 }}</strong> ou <strong>{{ var.milvus_rpm_arm64 }}</strong>.</li>
+<li>Pour x86_64/amd64, téléchargez le paquet <strong>milvus_2.6.0-1_amd64.deb</strong> ou <strong>milvus_2.6.0-1_amd64.rpm</strong>.</li>
+<li>Pour ARM64, téléchargez le paquet <strong>milvus_2.6.0-1_arm64.deb</strong> ou <strong>milvus_2.6.0-1_arm64.rpm</strong>.</li>
 </ul>
 <p>La commande suivante suppose que vous allez exécuter Milvus Standalone sur une machine x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v{{ var.milvus_release_version }}/{{ var.milvus_rpm_amd64 }} -O {{ var.milvus_rpm_amd64 }}
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus_2.6.0-1_amd64.rpm -O milvus_2.6.0-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Installation du paquetage RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
