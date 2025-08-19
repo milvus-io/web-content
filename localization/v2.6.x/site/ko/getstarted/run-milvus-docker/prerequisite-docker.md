@@ -79,7 +79,7 @@ title: Milvus Standalone 설치 요구 사항
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td><a href="#Additional-disk-requirements">추가 디스크 요구 사항을</a> 참조하세요.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>

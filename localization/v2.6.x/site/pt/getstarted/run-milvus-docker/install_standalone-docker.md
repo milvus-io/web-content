@@ -66,11 +66,11 @@ title: Executar o Milvus no Docker (Linux)
 <p><strong>O que há de novo na v2.6.0:</strong></p>
 <ul>
 <li><strong>Nó de streaming</strong>: Recursos aprimorados de processamento de dados</li>
-<li><strong>WoodPecker MQ</strong>: Fila de mensagens aprimorada com sobrecarga de manutenção reduzida</li>
+<li><strong>Woodpecker MQ</strong>: Fila de mensagens aprimorada com sobrecarga de manutenção reduzida, consulte <a href="/docs/pt/use-woodpecker.md">Usar o Woodpecker</a> para obter detalhes</li>
 <li><strong>Arquitetura otimizada</strong>: Componentes consolidados para melhor desempenho</li>
 </ul>
-<p>Descarregue sempre o script mais recente para garantir que obtém as configurações e melhorias de arquitetura mais recentes.</p>
-<p>Se pretender utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">o Backup</a> no modo de implementação autónomo, recomenda-se a utilização do método de implementação <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Faça sempre o download do script mais recente para garantir que você obtenha as configurações e os aprimoramentos de arquitetura mais recentes.</p>
+<p>Se você quiser usar <a href="https://milvus.io/docs/milvus_backup_overview.md">o Backup</a> no modo de implantação autônomo, é recomendável usar o método de implantação <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Se tiver algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o suporte necessário.</p>
 </div>
 <p>Depois de executar o script de instalação:</p>
@@ -186,7 +186,7 @@ EOF
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Escalar o cluster do Milvus</a>.</p></li>
+<li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
 <li><p>Implantar seu cluster Milvu em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
@@ -196,6 +196,6 @@ EOF
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore o <a href="https://github.com/zilliztech/attu">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

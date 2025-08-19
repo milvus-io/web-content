@@ -1632,6 +1632,12 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
+      },
+      {
+        "label": "ウッドペッカー",
+        "id": "use-woodpecker.md",
+        "order": 13,
+        "children": []
       }
     ]
   },
@@ -1884,7 +1890,7 @@
                 "children": []
               },
               {
-                "label": "インストラクター",
+                "label": "講師",
                 "id": "embed-with-instructor.md",
                 "order": 9,
                 "children": []

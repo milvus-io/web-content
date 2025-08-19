@@ -79,7 +79,7 @@ title: متطلبات تثبيت مثيل Milvus Standalone
 </thead>
 <tbody>
 <tr><td>إلخd</td><td>3.5.0</td><td>انظر <a href="#Additional-disk-requirements">متطلبات القرص الإضافية</a>.</td></tr>
-<tr><td>مينيو</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>مينيو</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>بولسار</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>

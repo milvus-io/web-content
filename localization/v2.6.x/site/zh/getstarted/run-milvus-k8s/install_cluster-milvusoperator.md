@@ -3,7 +3,7 @@ id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
 summary: 了解如何使用 Milvus 操作符在 Kubernetes 上安装 Milvus 集群
-title: 使用 Milvus 操作符安装 Milvus 群集
+title: 使用 Milvus Operator 安装 Milvus 群集
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 在 Kubernetes 中运行 Milvus<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -158,10 +158,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 群集</h3><p>一旦运行了 Milvus Operator pod，就可以按如下方式部署 Milvus 群集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述命令部署的是以<strong>WoodPecker</strong>作为消息队列（推荐用于 v2.6.0）和包括流节点在内的所有新架构组件的 Milvus 集群。</p>
+<p>上面的命令部署的是以<strong>Woodpecker</strong>作为消息队列（推荐用于 v2.6.0）和包括流节点在内的所有新架构组件的 Milvus 群集。</p>
 <p><strong>此部署中的架构要点：</strong></p>
 <ul>
-<li><strong>消息队列</strong>：使用 WoodPecker（减少基础设施维护）</li>
+<li><strong>消息队列</strong>：<a href="/docs/zh/use-woodpecker.md">使用 Woodpecker</a>（减少基础设施维护）</li>
 <li><strong>流节点</strong>：为增强数据处理功能而启用</li>
 <li><strong>混合协调器</strong>：合并协调器组件，提高效率</li>
 </ul>

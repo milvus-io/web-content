@@ -79,11 +79,11 @@ title: Milvus Standaloneのインストール要件
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td><a href="#Additional-disk-requirements">追加ディスク要件を</a>参照。</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>パルサー</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Additional-disk-requirements" class="common-anchor-header">追加ディスク要件</h3><p>ディスク性能はetcdにとって極めて重要です。ローカルのNVMe SSDを使用することを強く推奨します。ディスクの応答が遅くなると、頻繁にクラスタが選出され、最終的にetcdサービスが低下する可能性があります。</p>
+<h3 id="Additional-disk-requirements" class="common-anchor-header">追加ディスク要件</h3><p>ディスク性能はetcdにとって極めて重要です。ローカルのNVMe SSDを使用することを強く推奨します。ディスクの応答が遅くなると、クラスタ選出が頻繁に発生し、最終的にetcdサービスを劣化させる可能性があります。</p>
 <p>ディスクが適格かどうかをテストするには、<a href="https://github.com/axboe/fio">fioを</a>使用します。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest

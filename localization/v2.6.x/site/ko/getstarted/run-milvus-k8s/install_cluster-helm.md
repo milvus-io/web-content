@@ -61,7 +61,7 @@ title: 헬름으로 Milvus 클러스터 설치
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>설치 전 <a href="/docs/ko/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
+<li><p>설치하기 전에 <a href="/docs/ko/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
 <li><p>밀버스를 설치하기 전에 <a href="https://milvus.io/tools/sizing">밀버스 사이징 툴을</a> 사용하여 데이터 크기에 따라 하드웨어 요구 사항을 추정하는 것을 권장합니다. 이렇게 하면 Milvus 설치를 위한 최적의 성능과 리소스 할당을 보장하는 데 도움이 됩니다.</p></li>
 </ul>
 <div class="alert note">
@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>참고</strong>: 독립 실행형 모드는 기본 메시지 큐로 딱따구리를 사용하며 스트리밍 노드 구성 요소를 활성화합니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요를</a> 참조하세요.</p>
+<p><strong>참고</strong>: 독립 실행형 모드는 기본 메시지 큐로 딱따구리를 사용하며 스트리밍 노드 구성 요소를 활성화합니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요</a> 및 <a href="/docs/ko/use-woodpecker.md">딱따구리 사용하기를</a> 참조하세요.</p>
 </div>
 <p><strong>Milvus 클러스터 배포:</strong></p>
-<p>다음 명령은 WoodPecker를 권장 메시지 큐로 사용하여 v2.6.0에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
+<p>다음 명령은 Woodpecker를 권장 메시지 큐로 사용하여 v2.6.0에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>이 명령이 수행하는 작업</strong></p>
 <ul>
-<li><strong>WoodPecker를</strong> 메시지 큐로 사용합니다(유지보수 감소를 위해 권장).</li>
+<li>메시지 큐로 <strong>Woodpecker를</strong> 사용합니다(유지보수 감소를 위해 권장).</li>
 <li>성능 향상을 위해 새로운 <strong>스트리밍 노드</strong> 구성 요소를 활성화합니다.</li>
 <li>레거시 <strong>인덱스 노드를</strong> 비활성화합니다(이제 데이터 노드에서 기능을 처리합니다).</li>
-<li>Pulsar를 비활성화하여 대신 WoodPecker 사용</li>
+<li>Pulsar를 비활성화하고 대신 Woodpecker를 사용합니다.</li>
 </ul>
 <div class="alert note">
 <p><strong>Milvus 2.6.x의 아키텍처 변경 사항:</strong></p>
 <ul>
-<li><strong>메시지 큐</strong>: 이제 <strong>WoodPecker가</strong> 권장됩니다(Pulsar에 비해 인프라 유지보수 감소).</li>
+<li><strong>메시지 큐</strong>: 이제 <strong>Woodpecker가</strong> 권장됩니다(Pulsar에 비해 인프라 유지보수 감소).</li>
 <li><strong>새로운 컴포넌트</strong>: <strong>스트리밍 노드가</strong> 도입되어 기본적으로 활성화됩니다.</li>
 <li><strong>병합된 구성 요소</strong>: <strong>인덱스 노</strong> 드와 <strong>데이터 노드가</strong> 단일 <strong>데이터 노드로</strong> 통합되었습니다.</li>
 </ul>
 <p>전체 아키텍처에 대한 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요를</a> 참조하세요.</p>
 </div>
 <p><strong>대체 메시지 큐 옵션:</strong></p>
-<p>WoodPecker 대신 <strong>Pulsar</strong> (기존 선택 사항)를 사용하는 것을 선호하는 경우:</p>
+<p>우드페커 대신 <strong>Pulsar</strong> (기존 선택 사항)를 사용하려는 경우:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

@@ -107,7 +107,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Разверните кластер Milvus</h3><p>После установки диаграммы Helm вы можете запустить Milvus на Kubernetes. В этом разделе мы расскажем вам, как развернуть кластер Milvus.</p>
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Разверните кластер Milvus</h3><p>После установки диаграммы Helm вы можете запустить Milvus на Kubernetes. В этом разделе мы расскажем вам о развертывании кластера Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>Вам нужно автономное развертывание?</strong></p>
 <p>Если вы предпочитаете развернуть Milvus в автономном режиме (на одном узле) для разработки или тестирования, используйте эту команду:</p>
@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Примечание</strong>: Автономный режим использует Woodpecker в качестве очереди сообщений по умолчанию и включает компонент Streaming Node. Подробности см. в разделе <a href="/docs/ru/architecture_overview.md">Обзор архитектуры</a>.</p>
+<p><strong>Примечание</strong>: Автономный режим использует Woodpecker в качестве очереди сообщений по умолчанию и включает компонент Streaming Node. Подробнее см. в разделах <a href="/docs/ru/architecture_overview.md">Обзор архитектуры</a> и <a href="/docs/ru/use-woodpecker.md">Использование Woodpecker</a>.</p>
 </div>
-<p><strong>Развернуть кластер Milvus:</strong></p>
-<p>Следующая команда развертывает кластер Milvus с оптимизированными настройками для версии 2.6.0, используя WoodPecker в качестве рекомендуемой очереди сообщений:</p>
+<p><strong>Развертывание кластера Milvus:</strong></p>
+<p>Следующая команда развертывает кластер Milvus с оптимизированными настройками для версии 2.6.0, используя Woodpecker в качестве рекомендуемой очереди сообщений:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Что делает эта команда:</strong></p>
 <ul>
-<li>Использует <strong>WoodPecker</strong> в качестве очереди сообщений (рекомендуется для снижения затрат на обслуживание)</li>
+<li>Использует <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для снижения затрат на обслуживание).</li>
 <li>Включает новый компонент <strong>Streaming Node</strong> для повышения производительности</li>
-<li>Отключает устаревший компонент <strong>Index Node</strong> (функциональность теперь выполняет Data Node)</li>
-<li>Отключает Pulsar, чтобы использовать вместо него WoodPecker</li>
+<li>Отключает устаревший компонент <strong>Index Node</strong> (функциональность теперь выполняется компонентом Data Node)</li>
+<li>Отключает Pulsar, чтобы использовать вместо него Woodpecker</li>
 </ul>
 <div class="alert note">
 <p><strong>Изменения архитектуры в Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Очередь сообщений</strong>: Теперь рекомендуется использовать <strong>WoodPecker</strong> (сокращает обслуживание инфраструктуры по сравнению с Pulsar)</li>
+<li><strong>Очередь сообщений</strong>: Теперь рекомендуется использовать <strong>Woodpecker</strong> (сокращает обслуживание инфраструктуры по сравнению с Pulsar)</li>
 <li><strong>Новый компонент</strong>: <strong>Streaming Node</strong> представлен и включен по умолчанию</li>
 <li><strong>Объединенные компоненты</strong>: <strong>Index Node</strong> и <strong>Data Node</strong> объединены в один <strong>Data Node</strong>.</li>
 </ul>
 <p>Полную информацию об архитектуре см. в разделе " <a href="/docs/ru/architecture_overview.md">Обзор архитектуры"</a>.</p>
 </div>
 <p><strong>Альтернативные варианты очереди сообщений:</strong></p>
-<p>Если вы предпочитаете использовать <strong>Pulsar</strong> (традиционный выбор) вместо WoodPecker:</p>
+<p>Если вы предпочитаете использовать <strong>Pulsar</strong> (традиционный вариант) вместо Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

@@ -5,7 +5,7 @@ related_key: Kubernetes
 summary: Scoprite come installare il cluster Milvus su Kubernetes.
 title: Installare il cluster Milvus con Helm
 ---
-<h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Eseguire Milvus in Kubernetes con Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Avviare Milvus in Kubernetes con Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Nota</strong>: la modalità standalone utilizza Woodpecker come coda di messaggi predefinita e abilita il componente Streaming Node. Per i dettagli, consultare la <a href="/docs/it/architecture_overview.md">Panoramica dell'architettura</a>.</p>
+<p><strong>Nota</strong>: la modalità standalone utilizza Woodpecker come coda di messaggi predefinita e abilita il componente Streaming Node. Per i dettagli, fate riferimento alla <a href="/docs/it/architecture_overview.md">Panoramica dell'architettura</a> e all'<a href="/docs/it/use-woodpecker.md">uso di Woodpecker</a>.</p>
 </div>
 <p><strong>Distribuire il cluster Milvus:</strong></p>
-<p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione 2.6.0, utilizzando WoodPecker come coda di messaggi consigliata:</p>
+<p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione 2.6.0, utilizzando Woodpecker come coda di messaggi consigliata:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Cosa fa questo comando:</strong></p>
 <ul>
-<li>Utilizza <strong>WoodPecker</strong> come coda di messaggi (consigliato per ridurre la manutenzione).</li>
+<li>Utilizza <strong>Woodpecker</strong> come coda di messaggi (consigliato per ridurre la manutenzione).</li>
 <li>Abilita il nuovo componente <strong>Streaming Node</strong> per migliorare le prestazioni.</li>
 <li>Disabilita il vecchio <strong>Index Node</strong> (la funzionalità è ora gestita dal Data Node).</li>
-<li>Disabilita Pulsar per utilizzare invece WoodPecker.</li>
+<li>Disabilita Pulsar per utilizzare invece Woodpecker.</li>
 </ul>
 <div class="alert note">
 <p><strong>Modifiche all'architettura in Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Coda dei messaggi</strong>: <strong>WoodPecker</strong> è ora raccomandato (riduce la manutenzione dell'infrastruttura rispetto a Pulsar).</li>
+<li><strong>Coda dei messaggi</strong>: <strong>Woodpecker</strong> è ora raccomandato (riduce la manutenzione dell'infrastruttura rispetto a Pulsar)</li>
 <li><strong>Nuovo componente</strong>: Il <strong>nodo di streaming</strong> è stato introdotto e abilitato per impostazione predefinita.</li>
 <li><strong>Componenti fusi</strong>: <strong>Index Node</strong> e <strong>Data Node</strong> sono stati combinati in un unico <strong>Data Node</strong>.</li>
 </ul>
 <p>Per i dettagli completi sull'architettura, consultare la <a href="/docs/it/architecture_overview.md">Panoramica dell'architettura</a>.</p>
 </div>
 <p><strong>Opzioni alternative per la coda dei messaggi:</strong></p>
-<p>Se si preferisce usare <strong>Pulsar</strong> (scelta tradizionale) invece di WoodPecker:</p>
+<p>Se si preferisce usare <strong>Pulsar</strong> (scelta tradizionale) invece di Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -156,7 +156,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Passi successivi:</strong>Il comando sopra riportato distribuisce Milvus con le configurazioni consigliate. Per l'uso in produzione:</p>
 <ul>
 <li>Usare lo <a href="https://milvus.io/tools/sizing">strumento di dimensionamento di Milvus</a> per ottimizzare le impostazioni in base alle dimensioni dei dati.</li>
-<li>Rivedere la <a href="https://milvus.io/docs/system_configuration.md">lista di controllo delle configurazioni del sistema Milvus</a> per le opzioni di configurazione avanzate.</li>
+<li>Rivedere la <a href="https://milvus.io/docs/system_configuration.md">lista di controllo delle configurazioni di sistema di Milvus</a> per le opzioni di configurazione avanzate</li>
 </ul>
 <div class="alert note">
 <p><strong>Note importanti:</strong></p>

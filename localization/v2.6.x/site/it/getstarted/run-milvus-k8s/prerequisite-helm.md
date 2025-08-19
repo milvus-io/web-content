@@ -79,7 +79,7 @@ title: Requisiti per l'esecuzione di Milvus su Kubernetes
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Vedere i <a href="#Additional-disk-requirements">requisiti aggiuntivi del disco</a>.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>

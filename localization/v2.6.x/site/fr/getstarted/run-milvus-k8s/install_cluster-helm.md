@@ -65,7 +65,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><p>Avant d'installer Milvus, il est recommandé d'utiliser l'<a href="https://milvus.io/tools/sizing">outil de dimensionnement Milvus</a> pour estimer la configuration matérielle requise en fonction de la taille de vos données. Cela permet de garantir des performances et une allocation de ressources optimales pour l'installation de Milvus.</p></li>
 </ul>
 <div class="alert note">
-<p>Si vous rencontrez des problèmes en tirant l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en décrivant le problème et nous vous fournirons l'assistance nécessaire.</p>
+<p>Si vous rencontrez des problèmes en tirant l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en détaillant le problème, et nous vous fournirons l'assistance nécessaire.</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Installation de Milvus Helm Chart<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Remarque</strong>: Le mode autonome utilise Woodpecker comme file d'attente de messages par défaut et active le composant Streaming Node. Pour plus de détails, reportez-vous à la <a href="/docs/fr/architecture_overview.md">présentation de l'architecture</a>.</p>
+<p><strong>Remarque</strong>: Le mode autonome utilise Woodpecker comme file d'attente de messages par défaut et active le composant Streaming Node. Pour plus d'informations, reportez-vous aux sections <a href="/docs/fr/architecture_overview.md">Présentation de l'architecture</a> et <a href="/docs/fr/use-woodpecker.md">Utiliser Woodpecker</a>.</p>
 </div>
 <p><strong>Déployer un cluster Milvus :</strong></p>
-<p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 2.6.0, en utilisant WoodPecker comme file d'attente de messages recommandée :</p>
+<p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 2.6.0, en utilisant Woodpecker comme file d'attente de messages recommandée :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Ce que fait cette commande :</strong></p>
 <ul>
-<li>Utilise <strong>WoodPecker</strong> comme file d'attente de messages (recommandé pour réduire la maintenance).</li>
+<li>Utilise <strong>Woodpecker</strong> comme file d'attente de messages (recommandé pour réduire la maintenance).</li>
 <li>Active le nouveau composant <strong>Streaming Node</strong> pour améliorer les performances.</li>
 <li>Désactive l'ancien <strong>nœud d'index</strong> (la fonctionnalité est désormais gérée par le nœud de données).</li>
-<li>Désactive Pulsar pour utiliser WoodPecker à la place.</li>
+<li>Désactive Pulsar pour utiliser Woodpecker à la place.</li>
 </ul>
 <div class="alert note">
 <p><strong>Modifications de l'architecture dans Milvus 2.6.x :</strong></p>
 <ul>
-<li><strong>File d'attente des messages</strong>: <strong>WoodPecker</strong> est désormais recommandé (réduit la maintenance de l'infrastructure par rapport à Pulsar).</li>
+<li><strong>File d'attente des messages</strong>: <strong>Woodpecker</strong> est désormais recommandé (réduit la maintenance de l'infrastructure par rapport à Pulsar).</li>
 <li><strong>Nouveau composant</strong>: Le <strong>nœud de streaming</strong> est introduit et activé par défaut.</li>
 <li><strong>Composants fusionnés</strong>: Le <strong>nœud d'index</strong> et le <strong>nœud de données</strong> sont combinés en un seul <strong>nœud de données.</strong></li>
 </ul>
 <p>Pour plus de détails sur l'architecture, voir l'<a href="/docs/fr/architecture_overview.md">aperçu de l'architecture</a>.</p>
 </div>
 <p><strong>Autres options de file d'attente de messages :</strong></p>
-<p>Si vous préférez utiliser <strong>Pulsar</strong> (choix traditionnel) au lieu de WoodPecker :</p>
+<p>Si vous préférez utiliser <strong>Pulsar</strong> (choix traditionnel) au lieu de Woodpecker :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

@@ -158,14 +158,14 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 集群</h3><p>一旦 Milvus Operator pod 運行，您就可以按以下方式部署 Milvus 叢集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的命令部署了一個以<strong>WoodPecker</strong>作為訊息佇列（建議使用 v2.6.0）的 Milvus 叢集，以及包括 Streaming Node 在內的所有新架構元件。</p>
+<p>上面的指令會部署一個 Milvus 叢集，以<strong>Woodpecker</strong>作為訊息佇列 (建議用於 v2.6.0)，以及所有新的架構元件，包括 Streaming Node。</p>
 <p><strong>此部署中的架構重點：</strong></p>
 <ul>
-<li><strong>訊息佇列</strong>：使用 WoodPecker (減少基礎架構維護)</li>
+<li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>(減少基礎架構維護)</li>
 <li><strong>串流節點</strong>：啟用增強資料處理</li>
 <li><strong>混合協調器</strong>：整合協調器元件以提高效率</li>
 </ul>
-<p>要自訂這些設定，我們建議您使用<a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>，根據您的實際資料大小調整配置，然後下載相應的 YAML 檔案。要瞭解有關配置參數的更多資訊，請參閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>。</p>
+<p>要自訂這些設定，我們建議您使用<a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>，根據實際資料大小調整配置，然後下載相應的 YAML 檔案。要瞭解有關配置參數的更多資訊，請參閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>。</p>
 <div class="alert note">
 <ul>
 <li>版本名稱只能包含字母、數字和破折號。發行版名稱中不允許點。</li>

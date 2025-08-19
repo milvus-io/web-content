@@ -66,17 +66,17 @@ title: DockerでMilvusを起動する(Linux)
 <p><strong>v2.6.0の新機能</strong></p>
 <ul>
 <li><strong>ストリーミングノード</strong>：データ処理機能の強化</li>
-<li><strong>WoodPecker MQ</strong>: メンテナンスのオーバーヘッドを削減したメッセージキューの改良</li>
+<li><a href="/docs/ja/use-woodpecker.md">Woodpecker</a><strong>MQ</strong>: メンテナンスのオーバーヘッドを削減した改良版メッセージキュー。</li>
 <li><strong>最適化されたアーキテクチャ</strong>：パフォーマンス向上のためのコンポーネントの統合</li>
 </ul>
-<p>常に最新のスクリプトをダウンロードし、最新の設定とアーキテクチャの改善をご確認ください。</p>
+<p>常に最新のスクリプトをダウンロードし、最新の設定とアーキテクチャの改善を確認してください。</p>
 <p>スタンドアロンデプロイメントモードで<a href="https://milvus.io/docs/milvus_backup_overview.md">Backupを</a>使用する場合は、<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>デプロイメントメソッドを使用することをお勧めします。</p>
 <p>イメージのプル時に問題が発生した場合は、<a href="mailto:community@zilliz.com">community@zilliz.com</a>まで問題の詳細をご連絡ください。</p>
 </div>
 <p>インストールスクリプトの実行後</p>
 <ul>
 <li>milvus という名前の docker コンテナがポート<strong>19530</strong> で開始されました。</li>
-<li>milvusと一緒にembed etcdが同じコンテナにインストールされ、ポート<strong>2379で</strong>サービスを提供しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマップされています。</li>
+<li>milvusと一緒にembed etcdが同じコンテナにインストールされ、ポート<strong>2379で</strong>サービスを提供しています。その設定ファイルはカレントフォルダ内の<strong>embedEtcd.yamlに</strong>マッピングされています。</li>
 <li>Milvusのデフォルト設定を変更するには、カレントフォルダ内の<strong>user.yaml</strong>ファイルに設定を追加し、サービスを再起動します。</li>
 <li>Milvusデータボリュームはカレントフォルダ内の<strong>volumes/milvusに</strong>マッピングされます。</li>
 </ul>

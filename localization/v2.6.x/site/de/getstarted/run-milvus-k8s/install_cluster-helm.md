@@ -61,11 +61,11 @@ title: Milvus-Cluster mit Helm installieren
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Überprüfen Sie vor der Installation <a href="/docs/de/prerequisite-helm.md">die Hardware- und Softwareanforderungen</a>.</p></li>
+<li><p>Überprüfen Sie vor der Installation <a href="/docs/de/prerequisite-helm.md">die Hardware- und Software-Anforderungen</a>.</p></li>
 <li><p>Es wird empfohlen, vor der Installation von Milvus das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardware-Anforderungen auf der Grundlage Ihrer Datengröße abzuschätzen. Dies hilft, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation zu gewährleisten.</p></li>
 </ul>
 <div class="alert note">
-<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen die notwendige Unterstützung bieten können.</p>
+<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie uns das Problem.</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Milvus Helm Chart installieren<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Hinweis</strong>: Der Standalone-Modus verwendet Woodpecker als Standard-Nachrichtenwarteschlange und aktiviert die Komponente Streaming Node. Einzelheiten finden Sie in der <a href="/docs/de/architecture_overview.md">Architekturübersicht</a>.</p>
+<p><strong>Hinweis</strong>: Der Standalone-Modus verwendet Woodpecker als Standard-Nachrichtenwarteschlange und aktiviert die Komponente Streaming Node. Weitere Informationen finden Sie in der <a href="/docs/de/architecture_overview.md">Architekturübersicht</a> und unter <a href="/docs/de/use-woodpecker.md">Verwendung von Woodpecker</a>.</p>
 </div>
 <p><strong>Milvus-Cluster bereitstellen:</strong></p>
-<p>Mit dem folgenden Befehl wird ein Milvus-Cluster mit optimierten Einstellungen für v2.6.0 bereitgestellt, wobei WoodPecker als empfohlene Nachrichtenwarteschlange verwendet wird:</p>
+<p>Mit dem folgenden Befehl wird ein Milvus-Cluster mit optimierten Einstellungen für v2.6.0 bereitgestellt, wobei Woodpecker als empfohlene Nachrichtenwarteschlange verwendet wird:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Was dieser Befehl bewirkt:</strong></p>
 <ul>
-<li>Verwendet <strong>WoodPecker</strong> als Nachrichtenwarteschlange (empfohlen für geringeren Wartungsaufwand)</li>
-<li>Aktiviert die neue Komponente <strong>Streaming Node</strong> für verbesserte Leistung</li>
+<li>Verwendet <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für geringeren Wartungsaufwand)</li>
+<li>Aktiviert die neue Komponente <strong>Streaming Node</strong> für eine verbesserte Leistung</li>
 <li>Deaktiviert den alten <strong>Index-Knoten</strong> (die Funktionalität wird jetzt von Data Node übernommen)</li>
-<li>Deaktiviert Pulsar und verwendet stattdessen WoodPecker</li>
+<li>Deaktiviert Pulsar und verwendet stattdessen Woodpecker</li>
 </ul>
 <div class="alert note">
 <p><strong>Änderungen der Architektur in Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Nachrichten-Warteschlange</strong>: <strong>WoodPecker</strong> wird nun empfohlen (reduziert den Wartungsaufwand der Infrastruktur im Vergleich zu Pulsar)</li>
+<li><strong>Nachrichten-Warteschlange</strong>: <strong>Woodpecker</strong> wird jetzt empfohlen (reduziert die Wartung der Infrastruktur im Vergleich zu Pulsar)</li>
 <li><strong>Neue Komponente</strong>: <strong>Streaming Node</strong> wurde eingeführt und ist standardmäßig aktiviert</li>
 <li><strong>Verschmolzene Komponenten</strong>: <strong>Indexknoten</strong> und <strong>Datenknoten</strong> werden zu einem einzigen <strong>Datenknoten</strong> zusammengefasst</li>
 </ul>
 <p>Vollständige Details zur Architektur finden Sie in der <a href="/docs/de/architecture_overview.md">Architekturübersicht</a>.</p>
 </div>
 <p><strong>Alternative Nachrichtenwarteschlangen-Optionen:</strong></p>
-<p>Wenn Sie anstelle von WoodPecker lieber <strong>Pulsar</strong> (die traditionelle Wahl) verwenden möchten:</p>
+<p>Wenn Sie anstelle von Woodpecker lieber <strong>Pulsar</strong> (die traditionelle Wahl) verwenden möchten:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

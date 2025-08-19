@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>注意</strong>：單機模式使用 Woodpecker 作為預設訊息佇列，並啟用 Streaming Node 元件。如需詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>。</p>
+<p><strong>注意</strong>：單機模式使用 Woodpecker 作為預設訊息佇列，並啟用 Streaming Node 元件。詳情請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>和<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>。</p>
 </div>
-<p><strong>部署 Milvus 集群：</strong></p>
-<p>以下指令會部署一個具有 v2.6.0 最佳化設定的 Milvus 叢集，並使用 WoodPecker 作為建議的訊息佇列：</p>
+<p><strong>部署 Milvus 群集：</strong></p>
+<p>以下指令使用 Woodpecker 作為建議的訊息佇列，以 v2.6.0 的最佳化設定部署 Milvus 叢集：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,28 +132,28 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>此指令的作用：</strong></p>
 <ul>
-<li>使用<strong>WoodPecker</strong>作為訊息佇列 (建議使用以減少維護)</li>
-<li>啟用新的<strong>Streaming Node</strong>元件以改善效能</li>
+<li>使用<strong>Woodpecker</strong>作為訊息佇列 (建議使用以減少維護)</li>
+<li>啟用新的<strong>Streaming Node</strong>元件，以改善效能</li>
 <li>停用傳統的<strong>索引節點</strong>(功能現在由資料節點處理)</li>
-<li>停用 Pulsar，改用 WoodPecker</li>
+<li>停用 Pulsar，改用 Woodpecker</li>
 </ul>
 <div class="alert note">
 <p><strong>Milvus 2.6.x 的架構變更</strong></p>
 <ul>
-<li><strong>訊息佇列</strong>：現在推薦使用<strong>WoodPecker</strong>(與 Pulsar 相比，減少了基礎架構的維護)</li>
+<li><strong>訊息佇列</strong>：現在建議使用<strong>Woodpecker</strong>(相較於 Pulsar 可減少基礎架構的維護)</li>
 <li><strong>新元件</strong>：引入<strong>串流節點</strong>，並預設啟用</li>
 <li><strong>合併元件</strong>：<strong>索引節點</strong>和<strong>資料節點合</strong>併為<strong>單一資料節點</strong></li>
 </ul>
 <p>如需完整的架構詳細資訊，請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>。</p>
 </div>
 <p><strong>替代訊息佇列選項：</strong></p>
-<p>如果您偏好使用<strong>Pulsar</strong>(傳統選擇) 而非 WoodPecker：</p>
+<p>如果您偏好使用<strong>Pulsar</strong>(傳統選擇) 而非 Woodpecker：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>接下來的步驟：</strong>上面的指令以建議的配置部署 Milvus。用於生產使用：</p>
+<p><strong>接下來的步驟：</strong>上面的指令以建議的配置部署 Milvus。對於生產使用：</p>
 <ul>
 <li>使用<a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>根據您的資料大小優化設定</li>
 <li>檢閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>，瞭解進階配置選項</li>

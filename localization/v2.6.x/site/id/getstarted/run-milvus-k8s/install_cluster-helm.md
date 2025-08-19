@@ -107,7 +107,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Menerapkan cluster Milvus</h3><p>Setelah Anda menginstal bagan Helm, Anda dapat memulai Milvus di Kubernetes. Bagian ini memandu Anda dalam men-deploy cluster Milvus.</p>
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Menerapkan sebuah cluster Milvus</h3><p>Setelah Anda menginstal bagan Helm, Anda dapat memulai Milvus di Kubernetes. Bagian ini memandu Anda dalam men-deploy cluster Milvus.</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>Perlu penerapan mandiri?</strong></p>
 <p>Jika Anda lebih suka menggunakan Milvus dalam mode mandiri (simpul tunggal) untuk pengembangan atau pengujian, gunakan perintah ini:</p>
@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Catatan</strong>: Mode mandiri menggunakan Woodpecker sebagai antrean pesan default dan mengaktifkan komponen Streaming Node. Untuk detailnya, lihat <a href="/docs/id/architecture_overview.md">Tinjauan Arsitektur</a>.</p>
+<p><strong>Catatan</strong>: Mode mandiri menggunakan Woodpecker sebagai antrean pesan default dan mengaktifkan komponen Streaming Node. Untuk detailnya, lihat <a href="/docs/id/architecture_overview.md">Gambaran Umum Arsitektur</a> dan <a href="/docs/id/use-woodpecker.md">Gunakan Woodpecker</a>.</p>
 </div>
 <p><strong>Menyebarkan cluster Milvus:</strong></p>
-<p>Perintah berikut ini men-deploy cluster Milvus dengan pengaturan yang dioptimalkan untuk v2.6.0, menggunakan WoodPecker sebagai antrean pesan yang direkomendasikan:</p>
+<p>Perintah berikut ini menyebarkan cluster Milvus dengan pengaturan yang dioptimalkan untuk v2.6.0, menggunakan Woodpecker sebagai antrean pesan yang direkomendasikan:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Apa yang dilakukan perintah ini:</strong></p>
 <ul>
-<li>Menggunakan <strong>WoodPecker</strong> sebagai antrean pesan (disarankan untuk mengurangi pemeliharaan)</li>
+<li>Menggunakan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk mengurangi pemeliharaan)</li>
 <li>Mengaktifkan komponen <strong>Streaming Node</strong> baru untuk meningkatkan kinerja</li>
 <li>Menonaktifkan <strong>Index Node</strong> yang lama (fungsionalitasnya sekarang ditangani oleh Data Node)</li>
-<li>Menonaktifkan Pulsar untuk menggunakan WoodPecker sebagai gantinya</li>
+<li>Menonaktifkan Pulsar untuk menggunakan Woodpecker sebagai gantinya</li>
 </ul>
 <div class="alert note">
 <p><strong>Perubahan Arsitektur di Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Antrian Pesan</strong>: <strong>WoodPecker</strong> sekarang direkomendasikan (mengurangi pemeliharaan infrastruktur dibandingkan dengan Pulsar)</li>
+<li><strong>Antrian Pesan</strong>: <strong>Woodpecker</strong> sekarang direkomendasikan (mengurangi pemeliharaan infrastruktur dibandingkan dengan Pulsar)</li>
 <li><strong>Komponen Baru</strong>: <strong>Streaming Node</strong> diperkenalkan dan diaktifkan secara default</li>
 <li><strong>Penggabungan Komponen</strong>: <strong>Index Node</strong> dan <strong>Data Node</strong> digabungkan menjadi satu <strong>Data Node</strong></li>
 </ul>
 <p>Untuk detail arsitektur lengkap, lihat <a href="/docs/id/architecture_overview.md">Ikhtisar Arsitektur.</a></p>
 </div>
 <p><strong>Opsi Antrian Pesan Alternatif:</strong></p>
-<p>Jika Anda lebih suka menggunakan <strong>Pulsar</strong> (pilihan tradisional) daripada WoodPecker:</p>
+<p>Jika Anda lebih suka menggunakan <strong>Pulsar</strong> (pilihan tradisional) daripada Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

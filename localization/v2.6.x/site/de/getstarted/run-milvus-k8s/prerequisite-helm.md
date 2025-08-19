@@ -81,11 +81,11 @@ title: Anforderungen für den Betrieb von Milvus auf Kubernetes
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Siehe <a href="#Additional-disk-requirements">zusätzliche Festplattenanforderungen</a>.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Additional-disk-requirements" class="common-anchor-header">Zusätzliche Anforderungen an die Festplatte</h3><p>Die Festplattenleistung ist entscheidend für etcd. Es wird dringend empfohlen, dass Sie lokale NVMe-SSDs verwenden. Eine langsamere Festplattenreaktion kann zu häufigen Clusterwahlen führen, die schließlich den etcd-Dienst beeinträchtigen.</p>
+<h3 id="Additional-disk-requirements" class="common-anchor-header">Zusätzliche Festplattenanforderungen</h3><p>Die Festplattenleistung ist entscheidend für etcd. Es wird dringend empfohlen, dass Sie lokale NVMe-SSDs verwenden. Eine langsamere Festplattenreaktion kann zu häufigen Clusterwahlen führen, die schließlich den etcd-Dienst beeinträchtigen.</p>
 <p>Um zu testen, ob Ihre Festplatte geeignet ist, verwenden Sie <a href="https://github.com/axboe/fio">fio</a>.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest

@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>注意</strong>：独立模式使用 Woodpecker 作为默认消息队列，并启用流节点组件。有关详情，请参阅<a href="/docs/zh/architecture_overview.md">架构概述</a>。</p>
+<p><strong>注意</strong>：独立模式使用 Woodpecker 作为默认消息队列，并启用流节点组件。有关详情，请参阅<a href="/docs/zh/architecture_overview.md">架构概述</a>和<a href="/docs/zh/use-woodpecker.md">使用 Woodpecker</a>。</p>
 </div>
 <p><strong>部署 Milvus 集群：</strong></p>
-<p>下面的命令将使用 WoodPecker 作为推荐的消息队列，以针对 v2.6.0 的优化设置部署 Milvus 群集：</p>
+<p>以下命令使用 Woodpecker 作为推荐的消息队列，以针对 v2.6.0 的优化设置部署 Milvus 群集：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>此命令的作用：</strong></p>
 <ul>
-<li>使用<strong>WoodPecker</strong>作为消息队列（建议使用，以减少维护工作）</li>
+<li>使用<strong>Woodpecker</strong>作为消息队列（建议使用，以减少维护工作）</li>
 <li>启用新的<strong>流节点</strong>组件以提高性能</li>
 <li>禁用传统的<strong>索引节点</strong>（其功能现在由数据节点处理）</li>
-<li>禁用 Pulsar，改用 WoodPecker</li>
+<li>禁用 Pulsar，改用 Woodpecker</li>
 </ul>
 <div class="alert note">
 <p><strong>Milvus 2.6.x 中的架构变更：</strong></p>
 <ul>
-<li><strong>消息队列</strong>：现在推荐使用<strong>WoodPecker</strong>（与 Pulsar 相比，减少了基础设施维护工作）</li>
+<li><strong>消息队列</strong>：现在推荐使用<strong>Woodpecker</strong>（与 Pulsar 相比，减少了基础设施维护工作）</li>
 <li><strong>新组件</strong>：引入<strong>流节点</strong>并默认启用</li>
 <li><strong>合并组件</strong>：<strong>索引节点</strong>和<strong>数据节点</strong>合并为一个<strong>数据节点</strong></li>
 </ul>
 <p>有关完整架构的详细信息，请参阅<a href="/docs/zh/architecture_overview.md">架构概述</a>。</p>
 </div>
 <p><strong>其他消息队列选项：</strong></p>
-<p>如果你更喜欢使用<strong>Pulsar</strong>（传统选择）而不是 WoodPecker：</p>
+<p>如果你更喜欢使用<strong>Pulsar</strong>（传统选择）而不是 Woodpecker：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

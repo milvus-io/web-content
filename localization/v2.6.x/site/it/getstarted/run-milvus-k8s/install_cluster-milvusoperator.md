@@ -160,14 +160,14 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Distribuire un cluster Milvus</h3><p>Una volta che il pod Milvus Operator è in esecuzione, è possibile distribuire un cluster Milvus come segue.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il comando precedente distribuisce un cluster Milvus con <strong>WoodPecker</strong> come coda di messaggi (consigliato per la versione 2.6.0) e tutti i nuovi componenti architettonici, compreso lo Streaming Node.</p>
-<p><strong>I punti salienti dell'architettura in questa installazione:</strong></p>
+<p>Il comando precedente distribuisce un cluster Milvus con <strong>Woodpecker</strong> come coda di messaggi (consigliato per la versione 2.6.0) e tutti i nuovi componenti architettonici, compreso lo Streaming Node.</p>
+<p><strong>I punti salienti dell'architettura in questa distribuzione:</strong></p>
 <ul>
-<li><strong>Coda dei messaggi</strong>: Utilizza WoodPecker (riduce la manutenzione dell'infrastruttura).</li>
+<li><strong>Coda dei messaggi</strong>: <a href="/docs/it/use-woodpecker.md">Utilizza Woodpecker</a> (riduce la manutenzione dell'infrastruttura).</li>
 <li><strong>Nodo di streaming</strong>: Abilitato per una migliore elaborazione dei dati</li>
-<li><strong>Mix Coordinator</strong>: Componenti del coordinatore consolidati per una maggiore efficienza</li>
+<li><strong>Coordinatore misto</strong>: Componenti del coordinatore consolidati per una maggiore efficienza</li>
 </ul>
-<p>Per personalizzare queste impostazioni, si consiglia di utilizzare <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> per regolare le configurazioni in base alle dimensioni effettive dei dati e quindi scaricare il file YAML corrispondente. Per saperne di più sui parametri di configurazione, consultare la <a href="https://milvus.io/docs/system_configuration.md">lista di controllo delle configurazioni del sistema Milvus</a>.</p>
+<p>Per personalizzare queste impostazioni, si consiglia di utilizzare lo <a href="https://milvus.io/tools/sizing">strumento di dimensionamento di Milvus</a> per regolare le configurazioni in base alle dimensioni effettive dei dati e quindi scaricare il file YAML corrispondente. Per saperne di più sui parametri di configurazione, consultare la <a href="https://milvus.io/docs/system_configuration.md">lista di controllo delle configurazioni del sistema Milvus</a>.</p>
 <div class="alert note">
 <ul>
 <li>Il nome della release deve contenere solo lettere, numeri e trattini. I punti non sono ammessi nel nome della release.</li>

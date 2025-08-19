@@ -85,7 +85,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="filter">
  <a href="#helm">Helm</a> <a href="#kubectl">Kubectl</a></div>
 <div class="filter-helm">
-<p>以下のコマンドを実行して、HelmでMilvus Operatorをインストールします。</p>
+<p>以下のコマンドを実行して、Milvus OperatorをHelmでインストールします。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
@@ -158,12 +158,12 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.Milvusクラスタのデプロイ</h3><p>Milvus Operatorポッドが起動したら、次のようにMilvusクラスタをデプロイできます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上のコマンドは、メッセージキューとして<strong>WoodPecker</strong>(v2.6.0で推奨)、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスタをデプロイします。</p>
+<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>(v2.6.0で推奨)、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスタをデプロイします。</p>
 <p><strong>このデプロイにおけるアーキテクチャのハイライト</strong></p>
 <ul>
-<li><strong>メッセージキュー</strong>：WoodPeckerを使用（インフラメンテナンスの軽減）</li>
-<li><strong>ストリーミング・ノード</strong>データ処理の強化</li>
-<li><strong>ミックス・コーディネーター</strong>コーディネータコンポーネントの統合による効率化</li>
+<li><strong>メッセージキュー</strong>：<a href="/docs/ja/use-woodpecker.md">Woodpeckerを使用</a>（インフラメンテナンスの軽減）</li>
+<li><strong>ストリーミング・ノード</strong>：データ処理の強化</li>
+<li><strong>ミックス・コーディネーター</strong>：コーディネータコンポーネントの統合による効率化</li>
 </ul>
 <p>これらの設定をカスタマイズするには、<a href="https://milvus.io/tools/sizing">Milvus Sizing Toolを</a>使用して実際のデータサイズに基づいて設定を調整し、対応するYAMLファイルをダウンロードすることをお勧めします。コンフィギュレーションパラメータの詳細については、<a href="https://milvus.io/docs/system_configuration.md">Milvusシステムコンフィギュレーションチェックリストを</a>ご参照ください。</p>
 <div class="alert note">

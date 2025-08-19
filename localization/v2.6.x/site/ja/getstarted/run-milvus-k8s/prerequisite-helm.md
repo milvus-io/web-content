@@ -79,16 +79,16 @@ title: Kubernetes上でMilvusを稼働させるための要件
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td><a href="#Additional-disk-requirements">追加ディスク要件を</a>参照。</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>パルサー</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Additional-disk-requirements" class="common-anchor-header">追加ディスク要件</h3><p>ディスク性能はetcdにとって極めて重要です。ローカルのNVMe SSDを使用することを強くお勧めします。ディスクの応答が遅くなると、頻繁にクラスタ選挙が発生し、最終的にetcdサービスを劣化させる可能性があります。</p>
+<h3 id="Additional-disk-requirements" class="common-anchor-header">追加ディスク要件</h3><p>ディスク性能はetcdにとって極めて重要です。ローカルのNVMe SSDを使用することを強く推奨します。ディスクの応答が遅くなると、クラスタ選挙が頻繁に発生し、最終的にetcdサービスが劣化する可能性があります。</p>
 <p>ディスクが適格かどうかをテストするには、<a href="https://github.com/axboe/fio">fioを</a>使用します。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>理想的には、ディスクのIOPSが500以上、fsyncのレイテンシが99パーセンタイルで10ms以下である必要があります。より詳細な要件については etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">Docs を</a>お読みください。</p>
+<p>理想的には、ディスクが500 IOPSを超え、99パーセンタイルのfsyncレイテンシが10ms以下である必要があります。より詳細な要件については etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">Docs を</a>お読みください。</p>
 <h2 id="FAQs" class="common-anchor-header">よくある質問<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

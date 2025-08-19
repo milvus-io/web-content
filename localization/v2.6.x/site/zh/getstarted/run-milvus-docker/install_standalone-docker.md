@@ -66,10 +66,10 @@ title: 在 Docker 中运行 Milvus (Linux)
 <p><strong>版本 2.6.0 的新功能：</strong></p>
 <ul>
 <li><strong>流节点</strong>增强数据处理能力</li>
-<li><strong>WoodPecker MQ</strong>：改进的消息队列，减少了维护开销</li>
+<li><strong>啄木鸟 MQ</strong>：改进了消息队列，减少了维护开销，详情请参见<a href="/docs/zh/use-woodpecker.md">使用啄木鸟</a></li>
 <li><strong>优化架构</strong>：整合组件，提高性能</li>
 </ul>
-<p>请始终下载最新的脚本，以确保您获得最新的配置和架构改进。</p>
+<p>请始终下载最新脚本，以确保获得最新配置和架构改进。</p>
 <p>如果要在独立部署模式下使用<a href="https://milvus.io/docs/milvus_backup_overview.md">备份</a>，建议使用<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>部署方法。</p>
 <p>如果在拉取镜像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
 </div>

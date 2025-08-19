@@ -66,11 +66,11 @@ title: 在 Docker 中執行 Milvus (Linux)
 <p><strong>v2.6.0 的新增功能：</strong></p>
 <ul>
 <li><strong>串流節點</strong>：增強資料處理能力</li>
-<li><strong>WoodPecker MQ</strong>：改進的訊息佇列，降低維護開銷</li>
-<li><strong>優化的架構</strong>：整合元件以獲得更好的效能</li>
+<li><strong>Woodpecker MQ</strong>：改進的訊息佇列，降低維護開銷，詳情請參閱<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a></li>
+<li><strong>優化的架構</strong>：整合元件以獲得更佳效能</li>
 </ul>
-<p>請務必下載最新的腳本，以確保您獲得最新的組態和架構改進。</p>
-<p>如果您要在單機部署模式下使用<a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a>，建議使用<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>部署方法。</p>
+<p>務必下載最新的腳本，以確保您獲得最新的配置和架構改進。</p>
+<p>如果您要在獨立部署模式下使用<a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a>，建議使用<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>部署方法。</p>
 <p>如果您在拉取映像時遇到任何問題，請透過<a href="mailto:community@zilliz.com">community@zilliz.com</a>與我們聯絡，並提供問題的詳細資訊，我們將為您提供必要的支援。</p>
 </div>
 <p>執行安裝腳本之後</p>

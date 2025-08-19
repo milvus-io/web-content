@@ -160,10 +160,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Deploy a Milvus cluster</h3><p>Once the Milvus Operator pod is running, you can deploy a Milvus cluster as follows.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The command above deploys a Milvus cluster with <strong>WoodPecker</strong> as the message queue (recommended for v2.6.0) and all new architectural components including the Streaming Node.</p>
+<p>The command above deploys a Milvus cluster with <strong>Woodpecker</strong> as the message queue (recommended for v2.6.0) and all new architectural components including the Streaming Node.</p>
 <p><strong>Architecture highlights in this deployment:</strong></p>
 <ul>
-<li><strong>Message Queue</strong>: Uses WoodPecker (reduces infrastructure maintenance)</li>
+<li><strong>Message Queue</strong>: <a href="/docs/use-woodpecker.md">Uses Woodpecker</a> (reduces infrastructure maintenance)</li>
 <li><strong>Streaming Node</strong>: Enabled for enhanced data processing</li>
 <li><strong>Mix Coordinator</strong>: Consolidated coordinator components for improved efficiency</li>
 </ul>

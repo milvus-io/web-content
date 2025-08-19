@@ -66,7 +66,7 @@ title: تشغيل Milvus في Docker (لينكس)
 <p><strong>ما الجديد في الإصدار 2.6.0:</strong></p>
 <ul>
 <li><strong>عقدة التدفق</strong>: قدرات معالجة البيانات المحسّنة</li>
-<li><strong>WoodPecker MQ</strong>: قائمة انتظار محسّنة للرسائل مع تقليل نفقات الصيانة</li>
+<li><strong>نقار الخشب MQ</strong>: قائمة انتظار محسّنة للرسائل مع تقليل نفقات الصيانة، انظر <a href="/docs/ar/use-woodpecker.md">استخدام نقار الخشب</a> للحصول على التفاصيل</li>
 <li><strong>بنية محسّنة</strong>: مكونات مدمجة لأداء أفضل</li>
 </ul>
 <p>قم دائمًا بتنزيل أحدث برنامج نصي لضمان حصولك على أحدث التكوينات والتحسينات في البنية.</p>
@@ -181,7 +181,7 @@ EOF
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
 <li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
@@ -197,5 +197,5 @@ EOF
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

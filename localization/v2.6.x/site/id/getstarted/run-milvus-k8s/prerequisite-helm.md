@@ -79,7 +79,7 @@ title: Persyaratan untuk menjalankan Milvus di Kubernetes
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Lihat <a href="#Additional-disk-requirements">persyaratan disk tambahan</a>.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
@@ -144,5 +144,5 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <li><a href="/docs/id/install_cluster-milvusoperator.md">Menjalankan Milvus di Kubernet dengan Operator Milvus</a></li>
 <li><a href="/docs/id/install_cluster-helm.md">Menjalankan Milvus di Kubernet dengan Helm</a></li>
 </ul></li>
-<li><p>Lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a> untuk parameter yang dapat Anda atur saat menginstal Milvus.</p></li>
+<li><p>Lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a> untuk parameter yang dapat Anda tetapkan saat menginstal Milvus.</p></li>
 </ul>

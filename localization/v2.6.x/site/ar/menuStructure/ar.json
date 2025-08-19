@@ -80,7 +80,7 @@
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس مستقل",
+            "label": "تشغيل ميلفوس ستاندالون",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -1016,7 +1016,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه المعانق TEI",
+                "label": "عناق الوجه TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1631,6 +1631,12 @@
         "label": "ميلفوس ويب يويو (Milvus WebUI)",
         "id": "milvus-webui.md",
         "order": "12",
+        "children": []
+      },
+      {
+        "label": "نقار الخشب",
+        "id": "use-woodpecker.md",
+        "order": 13,
         "children": []
       }
     ]

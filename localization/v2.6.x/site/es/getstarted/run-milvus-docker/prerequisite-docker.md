@@ -41,7 +41,7 @@ title: Requisitos para instalar Milvus Standalone
 <tr><th>Componente</th><th>Requisito</th><th>Recomendación</th><th>Nota</th></tr>
 </thead>
 <tbody>
-<tr><td>CPU</td><td><ul><li>CPU Intel 2nd Gen Core o superior</li><li>Silicio Apple</li></ul></td><td><ul><li>Independiente: 4 núcleos o más</li><li>Clúster: 8 núcleos o más</li></ul></td><td></td></tr>
+<tr><td>CPU</td><td><ul><li>CPU Intel Core de 2ª generación o superior</li><li>Silicio Apple</li></ul></td><td><ul><li>Independiente: 4 núcleos o más</li><li>Clúster: 8 núcleos o más</li></ul></td><td></td></tr>
 <tr><td>Conjunto de instrucciones de la CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>La búsqueda de similitud vectorial y la creación de índices en Milvus requieren que la CPU soporte conjuntos de extensiones SIMD (instrucción única, datos múltiples). Asegúrese de que la CPU soporta al menos una de las extensiones SIMD listadas. Consulte <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPUs con AVX</a> para obtener más información.</td></tr>
 <tr><td>RAM</td><td><ul><li>Independiente: 8G</li><li>Clúster: 32G</li></ul></td><td><ul><li>Independiente: 16G</li><li>Clúster: 128G</li></ul></td><td>El tamaño de la RAM depende del volumen de datos.</td></tr>
 <tr><td>Disco duro</td><td>SSD SATA 3.0 o superior</td><td>SSD NVMe o superior</td><td>El tamaño del disco duro depende del volumen de datos.</td></tr>
@@ -69,7 +69,7 @@ title: Requisitos para instalar Milvus Standalone
 <tbody>
 <tr><td>macOS 10.14 o posterior</td><td>Escritorio Docker</td><td>Configure la máquina virtual (VM) de Docker para que utilice un mínimo de 2 CPU virtuales (vCPU) y 8 GB de memoria inicial. De lo contrario, la instalación podría fallar. <br/>Consulte <a href="https://docs.docker.com/desktop/mac/install/">Instalar Docker Desktop en Mac</a> para obtener más información.</td></tr>
 <tr><td>Plataformas Linux</td><td><ul><li>Docker 19.03 o posterior</li><li>Docker Compose 1.25.1 o posterior</li></ul></td><td>Consulte <a href="https://docs.docker.com/engine/install/">Instalar Docker Engine</a> e <a href="https://docs.docker.com/compose/install/">Instalar Docker Comp</a> ose para obtener más información.</td></tr>
-<tr><td>Windows con WSL 2 habilitado</td><td>Escritorio Docker</td><td>Recomendamos que almacene el código fuente y otros datos montados en contenedores Linux en el sistema de archivos Linux en lugar del sistema de archivos Windows.<br/>Consulte <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Instalar Docker Desktop en Windows con WSL 2 backend</a> para obtener más información.</td></tr>
+<tr><td>Windows con WSL 2 habilitado</td><td>Escritorio Docker</td><td>Le recomendamos que almacene el código fuente y otros datos montados en contenedores Linux en el sistema de archivos Linux en lugar del sistema de archivos Windows.<br/>Consulte <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Instalar Docker Desktop en Windows con WSL 2 backend</a> para obtener más información.</td></tr>
 </tbody>
 </table>
 <p>Las siguientes dependencias se obtendrán y configurarán automáticamente cuando Milvus Standalone se instale utilizando el script Docker, o la configuración Docker Compose:</p>
@@ -79,7 +79,7 @@ title: Requisitos para instalar Milvus Standalone
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Consulte <a href="#Additional-disk-requirements">los requisitos de disco adicionales</a>.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>

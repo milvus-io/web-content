@@ -66,7 +66,7 @@ title: Docker에서 Milvus 실행하기(Linux)
 <p><strong>v2.6.0의 새로운 기능:</strong></p>
 <ul>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리 기능</li>
-<li><strong>WoodPecker MQ</strong>: 유지 관리 오버헤드를 줄이면서 메시지 대기열 개선</li>
+<li><strong>Woodpecker MQ</strong>: 유지 관리 오버헤드가 줄어든 메시지 큐 개선, 자세한 내용은 <a href="/docs/ko/use-woodpecker.md">Woodpecker 사용</a> 참조</li>
 <li><strong>최적화된 아키텍처</strong>: 더 나은 성능을 위한 통합된 구성 요소</li>
 </ul>
 <p>항상 최신 스크립트를 다운로드하여 최신 구성 및 아키텍처 개선 사항을 적용하세요.</p>

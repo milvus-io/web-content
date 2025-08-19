@@ -79,7 +79,7 @@ title: 在 Kubernetes 上執行 Milvus 的需求
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>請參閱<a href="#Additional-disk-requirements">其他磁碟需求</a>。</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>脈動星</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>

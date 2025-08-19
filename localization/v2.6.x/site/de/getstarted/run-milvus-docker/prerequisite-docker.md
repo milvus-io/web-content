@@ -69,23 +69,23 @@ title: Voraussetzungen für die Installation von Milvus Standalone
 <tr><th>Betriebssytem</th><th>Software</th><th>Hinweis</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 oder höher</td><td>Docker-Schreibtisch</td><td>Stellen Sie die virtuelle Maschine (VM) von Docker so ein, dass sie mindestens 2 virtuelle CPUs (vCPUs) und 8 GB anfänglichen Speicher verwendet. Andernfalls kann die Installation fehlschlagen. <br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/mac/install/">Installieren von Docker Desktop auf Mac</a>.</td></tr>
+<tr><td>macOS 10.14 oder höher</td><td>Docker-Schreibtisch</td><td>Stellen Sie die virtuelle Maschine (VM) von Docker so ein, dass sie mindestens 2 virtuelle CPUs (vCPUs) und 8 GB Anfangsspeicher verwendet. Andernfalls kann die Installation fehlschlagen. <br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/mac/install/">Installieren von Docker Desktop auf Mac</a>.</td></tr>
 <tr><td>Linux-Plattformen</td><td><ul><li>Docker 19.03 oder höher</li><li>Docker Compose 1.25.1 oder höher</li></ul></td><td>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/engine/install/">Docker-Engine installieren</a> und <a href="https://docs.docker.com/compose/install/">Docker Compose installieren</a>.</td></tr>
 <tr><td>Windows mit aktivierter WSL 2</td><td>Docker-Arbeitsplatz</td><td>Wir empfehlen, Quellcode und andere Daten, die in Linux-Containern gebunden sind, im Linux-Dateisystem statt im Windows-Dateisystem zu speichern.<br/>Weitere Informationen finden Sie unter <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Installieren von Docker Desktop unter Windows mit WSL 2-Backend</a>.</td></tr>
 </tbody>
 </table>
-<p>Die folgenden Abhängigkeiten werden automatisch beschafft und konfiguriert, wenn Milvus Standalone mithilfe des Docker-Skripts oder der Docker Compose-Konfiguration installiert wird:</p>
+<p>Die folgenden Abhängigkeiten werden automatisch beschafft und konfiguriert, wenn Milvus Standalone mit dem Docker-Skript oder der Docker Compose-Konfiguration installiert wird:</p>
 <table>
 <thead>
 <tr><th>Software</th><th>Version</th><th>Hinweis</th></tr>
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Siehe <a href="#Additional-disk-requirements">zusätzliche Festplattenanforderungen</a>.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Additional-disk-requirements" class="common-anchor-header">Zusätzliche Anforderungen an die Festplatte</h3><p>Die Festplattenleistung ist entscheidend für etcd. Es wird dringend empfohlen, dass Sie lokale NVMe-SSDs verwenden. Langsame Festplattenreaktionen können zu häufigen Clusterwahlen führen, die schließlich den etcd-Dienst beeinträchtigen.</p>
+<h3 id="Additional-disk-requirements" class="common-anchor-header">Zusätzliche Festplattenanforderungen</h3><p>Die Festplattenleistung ist entscheidend für etcd. Es wird dringend empfohlen, dass Sie lokale NVMe-SSDs verwenden. Langsame Festplattenreaktionen können zu häufigen Clusterwahlen führen, die schließlich den etcd-Dienst beeinträchtigen.</p>
 <p>Um zu testen, ob Ihre Festplatte geeignet ist, verwenden Sie <a href="https://github.com/axboe/fio">fio</a>.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest

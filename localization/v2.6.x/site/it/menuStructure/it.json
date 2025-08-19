@@ -1122,7 +1122,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1631,6 +1631,12 @@
         "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "12",
+        "children": []
+      },
+      {
+        "label": "Picchio",
+        "id": "use-woodpecker.md",
+        "order": 13,
         "children": []
       }
     ]
@@ -2589,7 +2595,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

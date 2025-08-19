@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Nota</strong>: O modo autônomo usa o Woodpecker como a fila de mensagens padrão e ativa o componente Streaming Node. Para obter detalhes, consulte a <a href="/docs/pt/architecture_overview.md">Visão geral da arquitetura</a>.</p>
+<p><strong>Nota</strong>: O modo autônomo usa o Woodpecker como a fila de mensagens padrão e ativa o componente Streaming Node. Para obter detalhes, consulte <a href="/docs/pt/architecture_overview.md">Visão geral da arquitetura</a> e <a href="/docs/pt/use-woodpecker.md">Usar o Woodpecker</a>.</p>
 </div>
 <p><strong>Implantar o cluster do Milvus:</strong></p>
-<p>O comando a seguir implanta um cluster do Milvus com configurações otimizadas para a versão 2.6.0, usando o WoodPecker como a fila de mensagens recomendada:</p>
+<p>O comando a seguir implanta um cluster do Milvus com configurações otimizadas para a versão 2.6.0, usando o Woodpecker como a fila de mensagens recomendada:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>O que este comando faz:</strong></p>
 <ul>
-<li>Usa <strong>WoodPecker</strong> como a fila de mensagens (recomendado para manutenção reduzida)</li>
+<li>Usa <strong>o Woodpecker</strong> como a fila de mensagens (recomendado para manutenção reduzida)</li>
 <li>Habilita o novo componente <strong>Streaming Node</strong> para melhorar o desempenho</li>
-<li>Desabilita o antigo Nó <strong>de Índice</strong> (a funcionalidade agora é tratada pelo Nó de Dados)</li>
-<li>Desabilita o Pulsar para usar o WoodPecker</li>
+<li>Desabilita o antigo <strong>Nó de Índice</strong> (a funcionalidade agora é tratada pelo Nó de Dados)</li>
+<li>Desabilita o Pulsar para usar o Woodpecker</li>
 </ul>
 <div class="alert note">
-<p><strong>Mudanças na arquitetura do Milvus 2.6.x:</strong></p>
+<p><strong>Alterações na arquitetura do Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Fila de Mensagens</strong>: <strong>O WoodPecker</strong> é agora recomendado (reduz a manutenção da infraestrutura em comparação com o Pulsar)</li>
-<li><strong>Novo componente</strong>: <strong>Streaming Node</strong> é introduzido e ativado por padrão</li>
-<li><strong>Componentes mesclados</strong>: O <strong>nó de índice</strong> e o <strong>nó de dados</strong> são combinados em um único <strong>nó de dados</strong></li>
+<li><strong>Fila de Mensagens</strong>: <strong>O Woodpecker</strong> é agora recomendado (reduz a manutenção da infraestrutura em comparação com o Pulsar)</li>
+<li><strong>Novo componente</strong>: <strong>Streaming Node</strong> é introduzido e ativado por defeito</li>
+<li><strong>Componentes mesclados</strong>: O <strong>nó de índice</strong> e <strong>o nó de dados</strong> são combinados em um único <strong>nó de dados</strong></li>
 </ul>
 <p>Para obter detalhes completos da arquitetura, consulte a <a href="/docs/pt/architecture_overview.md">Visão geral da arquitetura</a>.</p>
 </div>
 <p><strong>Opções alternativas de fila de mensagens:</strong></p>
-<p>Se preferir usar <strong>o Pulsar</strong> (escolha tradicional) em vez do WoodPecker:</p>
+<p>Se preferir usar <strong>o Pulsar</strong> (escolha tradicional) em vez do Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -280,7 +280,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
-<p>Agora, pode aceder à Milvus Web UI em <code translate="no">http://localhost:27018</code>.</p>
+<p>Agora, pode aceder à UI Web do Milvus em <code translate="no">http://localhost:27018</code>.</p>
 <h2 id="Offline-install" class="common-anchor-header">Instalação offline<button data-href="#Offline-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

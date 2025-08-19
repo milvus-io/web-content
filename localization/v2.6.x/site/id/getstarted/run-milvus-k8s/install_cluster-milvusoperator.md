@@ -23,7 +23,7 @@ title: Instal Milvus Cluster dengan Operator Milvus
         ></path>
       </svg>
     </button></h1><p>Halaman ini mengilustrasikan cara memulai instans Milvus di Kubernetes menggunakan <a href="https://github.com/zilliztech/milvus-operator">Milvus Operator</a>.</p>
-<h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Gambaran umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -160,10 +160,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Menyebarkan cluster Milvus</h3><p>Setelah pod Milvus Operator berjalan, Anda dapat men-deploy cluster Milvus sebagai berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas men-deploy cluster Milvus dengan <strong>WoodPecker</strong> sebagai antrean pesan (disarankan untuk v2.6.0) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
+<p>Perintah di atas men-deploy cluster Milvus dengan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk v2.6.0) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
 <p><strong>Sorotan arsitektur dalam penerapan ini:</strong></p>
 <ul>
-<li><strong>Antrian Pesan</strong>: Menggunakan WoodPecker (mengurangi pemeliharaan infrastruktur)</li>
+<li><strong>Antrian Pesan</strong>: <a href="/docs/id/use-woodpecker.md">Menggunakan Woodpecker</a> (mengurangi pemeliharaan infrastruktur)</li>
 <li><strong>Streaming Node</strong>: Diaktifkan untuk pemrosesan data yang ditingkatkan</li>
 <li><strong>Koordinator Campuran</strong>: Komponen koordinator yang terkonsolidasi untuk meningkatkan efisiensi</li>
 </ul>

@@ -71,7 +71,7 @@ title: Requisiti per l'installazione di Milvus Standalone
 <tbody>
 <tr><td>macOS 10.14 o successivo</td><td>Desktop Docker</td><td>Impostare la macchina virtuale (VM) Docker in modo che utilizzi almeno 2 CPU virtuali (vCPU) e 8 GB di memoria iniziale. In caso contrario, l'installazione potrebbe fallire. <br/>Per ulteriori informazioni, vedere <a href="https://docs.docker.com/desktop/mac/install/">Installazione di Docker Desktop su Mac</a>.</td></tr>
 <tr><td>Piattaforme Linux</td><td><ul><li>Docker 19.03 o successivo</li><li>Docker Compose 1.25.1 o successivo</li></ul></td><td>Per ulteriori informazioni, vedere <a href="https://docs.docker.com/engine/install/">Installazione di Docker Engine</a> e <a href="https://docs.docker.com/compose/install/">Installazione di Docker Compose</a>.</td></tr>
-<tr><td>Windows con WSL 2 abilitato</td><td>Desktop Docker</td><td>Si consiglia di memorizzare il codice sorgente e gli altri dati montati in contenitori Linux nel file system di Linux anziché in quello di Windows.<br/>Per ulteriori informazioni, vedere <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Installazione di Docker Desktop su Windows con backend WSL 2</a>.</td></tr>
+<tr><td>Windows con WSL 2 abilitato</td><td>Desktop Docker</td><td>Si consiglia di memorizzare il codice sorgente e gli altri dati montati in container Linux nel file system di Linux anziché in quello di Windows.<br/>Per ulteriori informazioni, vedere <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Installare Docker Desktop su Windows con backend WSL 2</a>.</td></tr>
 </tbody>
 </table>
 <p>Le seguenti dipendenze vengono ottenute e configurate automaticamente quando Milvus Standalone viene installato utilizzando lo script Docker o la configurazione di Docker Compose:</p>
@@ -81,7 +81,7 @@ title: Requisiti per l'installazione di Milvus Standalone
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Vedere i <a href="#Additional-disk-requirements">requisiti aggiuntivi del disco</a>.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>

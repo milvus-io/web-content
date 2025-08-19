@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Note</strong>: Standalone mode uses Woodpecker as the default message queue and enables the Streaming Node component. For details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
+<p><strong>Note</strong>: Standalone mode uses Woodpecker as the default message queue and enables the Streaming Node component. For details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a> and <a href="/docs/use-woodpecker.md">Use Woodpecker</a>.</p>
 </div>
 <p><strong>Deploy Milvus cluster:</strong></p>
-<p>The following command deploys a Milvus cluster with optimized settings for v2.6.0, using WoodPecker as the recommended message queue:</p>
+<p>The following command deploys a Milvus cluster with optimized settings for v2.6.0, using Woodpecker as the recommended message queue:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,22 +132,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>What this command does:</strong></p>
 <ul>
-<li>Uses <strong>WoodPecker</strong> as the message queue (recommended for reduced maintenance)</li>
+<li>Uses <strong>Woodpecker</strong> as the message queue (recommended for reduced maintenance)</li>
 <li>Enables the new <strong>Streaming Node</strong> component for improved performance</li>
 <li>Disables the legacy <strong>Index Node</strong> (functionality is now handled by Data Node)</li>
-<li>Disables Pulsar to use WoodPecker instead</li>
+<li>Disables Pulsar to use Woodpecker instead</li>
 </ul>
 <div class="alert note">
 <p><strong>Architecture Changes in Milvus 2.6.x:</strong></p>
 <ul>
-<li><strong>Message Queue</strong>: <strong>WoodPecker</strong> is now recommended (reduces infrastructure maintenance compared to Pulsar)</li>
+<li><strong>Message Queue</strong>: <strong>Woodpecker</strong> is now recommended (reduces infrastructure maintenance compared to Pulsar)</li>
 <li><strong>New Component</strong>: <strong>Streaming Node</strong> is introduced and enabled by default</li>
 <li><strong>Merged Components</strong>: <strong>Index Node</strong> and <strong>Data Node</strong> are combined into a single <strong>Data Node</strong></li>
 </ul>
 <p>For complete architecture details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
 </div>
 <p><strong>Alternative Message Queue Options:</strong></p>
-<p>If you prefer to use <strong>Pulsar</strong> (traditional choice) instead of WoodPecker:</p>
+<p>If you prefer to use <strong>Pulsar</strong> (traditional choice) instead of Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \

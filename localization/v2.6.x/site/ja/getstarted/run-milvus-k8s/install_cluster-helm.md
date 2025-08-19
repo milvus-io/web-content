@@ -119,10 +119,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>注</strong>: スタンドアロンモードでは、Woodpeckerをデフォルトのメッセージキューとして使用し、Streaming Nodeコンポーネントを有効にします。詳細については、<a href="/docs/ja/architecture_overview.md">アーキテクチャの</a>概要を参照してください。</p>
+<p><strong>注</strong>: スタンドアロンモードでは、Woodpeckerをデフォルトのメッセージキューとして使用し、Streaming Nodeコンポーネントを有効にします。詳細については、<a href="/docs/ja/architecture_overview.md">アーキテクチャの概要と</a> <a href="/docs/ja/use-woodpecker.md">Woodpeckerの使用を</a>参照してください。</p>
 </div>
 <p><strong>Milvusクラスタをデプロイします：</strong></p>
-<p>以下のコマンドは、推奨メッセージキューとしてWoodPeckerを使用し、v2.6.0用に最適化された設定でMilvusクラスタをデプロイします：</p>
+<p>以下のコマンドは、推奨メッセージキューとしてWoodpeckerを使用し、v2.6.0用に最適化された設定でMilvusクラスタをデプロイします：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
@@ -132,30 +132,30 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>このコマンドが行うこと</strong></p>
 <ul>
-<li>メッセージキューとして<strong>WoodPeckerを</strong>使用します。</li>
-<li>新しい<strong>Streaming Node</strong>コンポーネントを有効にし、パフォーマンスを向上させます。</li>
-<li>従来の<strong>インデックス・ノードを</strong>無効にします。</li>
-<li>Pulsarを無効にし、代わりにWoodPeckerを使用します。</li>
+<li>メッセージキューとして<strong>Woodpeckerを</strong>使用します。</li>
+<li>新しい<strong>ストリーミング・ノード・コンポーネントを</strong>有効にし、パフォーマンスを向上させます。</li>
+<li><strong>レガシー・インデックス・ノードを</strong>無効にします。</li>
+<li>Pulsarを無効にし、代わりにWoodpeckerを使用します。</li>
 </ul>
 <div class="alert note">
 <p><strong>Milvus 2.6.xにおけるアーキテクチャの変更点：</strong></p>
 <ul>
-<li><strong>メッセージ・キュー</strong>：<strong>WoodPeckerが</strong>推奨されるようになりました。</li>
+<li><strong>メッセージ・キュー</strong>：<strong>Woodpeckerが</strong>推奨されるようになりました。</li>
 <li><strong>新しいコンポーネント</strong>：<strong>ストリーミング・ノードが</strong>導入され、デフォルトで有効になりました。</li>
 <li><strong>コンポーネントの統合</strong>：<strong>インデックス・ノードと</strong> <strong>データ・ノードが</strong>1つの<strong>データ・ノードに</strong>統合されました。</li>
 </ul>
 <p>アーキテクチャの詳細については、<a href="/docs/ja/architecture_overview.md">アーキテクチャの概要を</a>ご覧ください。</p>
 </div>
 <p><strong>代替メッセージ・キュー・オプション：</strong></p>
-<p>WoodPeckerの代わりに<strong>Pulsar</strong>（従来の選択肢）を使いたい場合：</p>
+<p>Woodpeckerの代わりに<strong>Pulsar</strong>（従来の選択肢）を使いたい場合：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
   --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>次のステップ：</strong>上記のコマンドは、推奨構成でMilvusをデプロイします。本番環境で使用する場合</p>
+<p><strong>次のステップ：</strong>上記のコマンドは、推奨構成でMilvusをデプロイします。本番用には</p>
 <ul>
-<li><a href="https://milvus.io/tools/sizing">Milvusサイジング・ツールを</a>使用して、データ・サイズに基づいて設定を最適化します。</li>
+<li><a href="https://milvus.io/tools/sizing">Milvus Sizing Toolを</a>使用して、データサイズに基づいた設定を最適化します。</li>
 <li>高度な設定オプションについては、<a href="https://milvus.io/docs/system_configuration.md">Milvusシステム設定チェックリストを</a>ご参照ください。</li>
 </ul>
 <div class="alert note">
@@ -396,7 +396,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p><a href="/docs/ja/birdwatcher_overview.md">Birdwatcher</a>：Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール。</p></li>
+<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

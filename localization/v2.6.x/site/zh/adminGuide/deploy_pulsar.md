@@ -62,7 +62,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于 K8s 上的 Milvus 群集，可以在启动 Milvus 的同一命令中配置 Pulsar。或者，你也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Pulsar。</p>
+    </button></h2><p>对于 K8s 上的 Milvus 集群，可以在启动 Milvus 的同一命令中配置 Pulsar。或者，你也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Pulsar。</p>
 <p>有关如何使用 Helm 配置 Milvus 的详情，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>。有关 Pulsar 相关配置项的详情，请参阅<a href="/docs/zh/configure_pulsar.md">Pulsar 相关配置</a>。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
 <li>在<code translate="no">values.yaml</code> 文件中配置<code translate="no">externalConfigFiles</code> 部分。</li>
@@ -82,6 +82,68 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">使用 Helm 配置啄木鸟<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>对于 K8s 上的 Milvus 集群，可以在启动 Milvus 的同一命令中配置啄木鸟。或者，也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Woodpecker。</p>
+<p>有关如何使用 Helm<a href="/docs/zh/configure-helm.md">配置</a> Milvus 的详情，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>。有关 Woodpecker 相关配置项的详情，请参阅<a href="/docs/zh/use-woodpecker.md">woodpecker 相关配置</a>。</p>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
+<li>在<code translate="no">values.yaml</code> 文件中配置<code translate="no">externalConfigFiles</code> 部分。</li>
+</ol>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    woodpecker:
+      meta:
+        type: etcd # The Type of the metadata provider. currently only support etcd.
+        prefix: woodpecker # The Prefix of the metadata provider. default is woodpecker.
+      client:
+        segmentAppend:
+          queueSize: 10000 # The size of the queue for pending messages to be sent of each log.
+          maxRetries: 3 # Maximum number of retries for segment append operations.
+        segmentRollingPolicy:
+          maxSize: 256M # Maximum size of a segment.
+          maxInterval: 10m # Maximum interval between two segments, default is 10 minutes.
+          maxBlocks: 1000 # Maximum number of blocks in a segment
+        auditor:
+          maxInterval: 10s # Maximum interval between two auditing operations, default is 10 seconds.
+      logstore:
+        segmentSyncPolicy:
+          maxInterval: 200ms # Maximum interval between two sync operations, default is 200 milliseconds.
+          maxIntervalForLocalStorage: 10ms # Maximum interval between two sync operations local storage backend, default is 10 milliseconds.
+          maxBytes: 256M # Maximum size of write buffer in bytes.
+          maxEntries: 10000 # Maximum entries number of write buffer.
+          maxFlushRetries: 5 # Maximum size of write buffer in bytes.
+          retryInterval: 1000ms # Maximum interval between two retries. default is 1000 milliseconds.
+          maxFlushSize: 2M # Maximum size of a fragment in bytes to flush.
+          maxFlushThreads: 32 # Maximum number of threads to flush data
+        segmentCompactionPolicy:
+          maxSize: 2M # The maximum size of the merged files.
+          maxParallelUploads: 4 # The maximum number of parallel upload threads for compaction.
+          maxParallelReads: 8 # The maximum number of parallel read threads for compaction.
+        segmentReadPolicy:
+          maxBatchSize: 16M # Maximum size of a batch in bytes.
+          maxFetchThreads: 32 # Maximum number of threads to fetch data.
+      storage:
+        type: minio # The Type of the storage provider. Valid values: [minio, local]
+        rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
+</span><button class="copy-code-btn"></button></code></pre>
+<ol start="2">
+<li>配置完前面的部分并保存<code translate="no">values.yaml</code> 文件后，运行以下命令安装使用 Woodpecker 配置的 Milvus。</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka-with-Helm" class="common-anchor-header">使用 Helm 配置 Kafka<button data-href="#Configure-Kafka-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +159,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于 K8s 上的 Milvus 集群，你可以在启动 Milvus 的同一命令中配置 Kafka。或者，你也可以在启动 Milvus 之前，使用 /charts/milvus 路径下<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中的<code translate="no">values.yml</code> 文件配置 Kafka。</p>
+    </button></h2><p>对于 K8s 上的 Milvus 集群，可以在启动 Milvus 的同一命令中配置 Kafka。或者，你也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">Milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Kafka。</p>
 <p>有关如何使用 Helm<a href="/docs/zh/configure-helm.md">配置</a> Milvus 的详情，请参阅《<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>》。有关 Pulsar 相关配置项的详情，请参阅<a href="/docs/zh/configure_pulsar.md">Pulsar 相关配置</a>。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
 <li>如果要使用 Kafka 作为消息存储系统，请配置<code translate="no">values.yaml</code> 文件中的<code translate="no">externalConfigFiles</code> 部分。</li>
@@ -215,7 +277,7 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
 <div class="alert note">
 <p><strong>在 RocksMQ 和 NATS 之间做选择？</strong></p>
 <p>RockMQ 使用 CGO 与 RocksDB 交互并自行管理内存，而 Milvus 安装中嵌入的纯 Go NATS 则将内存管理委托给 Go 的垃圾收集器（GC）。</p>
-<p>在数据包小于 64 kb 的情况下，RocksDB 在内存使用率、CPU 使用率和响应时间方面都更胜一筹。另一方面，如果数据包大于 64 kb，NATS 则会在内存充足和 GC 调度理想的情况下，在响应时间方面表现出色。</p>
+<p>在数据包小于 64 kb 的情况下，RocksDB 在内存使用率、CPU 使用率和响应时间方面都更胜一筹。另一方面，如果数据包大于 64 kb，则 NATS 在内存充足和 GC 调度理想的情况下，在响应时间方面更胜一筹。</p>
 <p>目前，我们建议您仅在实验中使用 NATS。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">

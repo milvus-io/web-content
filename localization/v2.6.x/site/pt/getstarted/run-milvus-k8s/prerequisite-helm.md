@@ -64,7 +64,7 @@ title: Requisitos para executar o Milvus no Kubernetes
       </svg>
     </button></h2><p>Recomenda-se que execute o cluster Kubernetes em plataformas Linux.</p>
 <p>kubectl é a ferramenta de linha de comando para o Kubernetes. Use uma versão do kubectl que esteja dentro de uma diferença de versão menor do seu cluster. Usar a versão mais recente do kubectl ajuda a evitar problemas imprevistos.</p>
-<p>O minikube é necessário ao executar o cluster Kubernetes localmente. O minikube requer o Docker como uma dependência. Certifique-se de que instala o Docker antes de instalar o Milvus utilizando o Helm. Consulte <a href="https://docs.docker.com/get-docker">Obter o Docker</a> para obter mais informações.</p>
+<p>minikube é necessário ao executar o cluster Kubernetes localmente. minikube requer o Docker como uma dependência. Certifique-se de que instala o Docker antes de instalar o Milvus utilizando o Helm. Consulte <a href="https://docs.docker.com/get-docker">Obter o Docker</a> para obter mais informações.</p>
 <table>
 <thead>
 <tr><th>Sistema operativo</th><th>Software</th><th>Nota</th></tr>
@@ -79,7 +79,7 @@ title: Requisitos para executar o Milvus no Kubernetes
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>Consulte <a href="#Additional-disk-requirements">os requisitos de disco adicionais</a>.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
@@ -106,7 +106,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Como posso iniciar um cluster do K8s localmente para fins de teste?</h3><p>Você pode usar ferramentas como <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a> e <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> para configurar rapidamente um cluster Kubernetes localmente. O procedimento a seguir usa o minikube como exemplo.</p>
 <ol>
-<li>Descarregar o minikube</li>
+<li>Baixar o minikube</li>
 </ol>
 <p>Aceda à página <a href="https://minikube.sigs.k8s.io/docs/start/">Get Started</a>, verifique se cumpre as condições listadas na secção <strong>What you'll need</strong>, clique nos botões que descrevem a sua plataforma de destino e copie os comandos para transferir e instalar o binário.</p>
 <ol start="2">
@@ -144,5 +144,5 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <li><a href="/docs/pt/install_cluster-milvusoperator.md">Executar o Milvus em Kubernetes com o Milvus Operator</a></li>
 <li><a href="/docs/pt/install_cluster-helm.md">Executar o Milvus no Kubernetes com o Helm</a></li>
 </ul></li>
-<li><p>Veja <a href="/docs/pt/system_configuration.md">Configuração do Sistema</a> para parâmetros que pode definir durante a instalação do Milvus.</p></li>
+<li><p>Consulte <a href="/docs/pt/system_configuration.md">Configuração do sistema</a> para obter os parâmetros que pode definir durante a instalação do Milvus.</p></li>
 </ul>
