@@ -5,17 +5,18 @@ related_key: Woodpecker
 summary: Learn how to enable woodpecker as the WAL in milvus.
 beta: Milvus 2.6.x
 ---
-## Use Woodpecker (Milvus v2.6.x)
+
+# Use Woodpecker
 
 This guide explains how to enable and use Woodpecker as the Write-Ahead Log (WAL) in Milvus 2.6.x. Woodpecker is a cloud‑native WAL designed for object storage, offering high throughput, low operational overhead, and seamless scalability. For architecture and benchmark details, see [Woodpecker](woodpecker_architecture.md).
 
-### Overview
+## Overview
 
 - Starting from Milvus 2.6, Woodpecker is an optional WAL that provides ordered writes and recovery as the logging service.
 - As a message queue choice, it behaves similarly to Pulsar/Kafka and can be enabled via configuration.
 - Two storage backends are supported: local file system (`local`) and object storage (`minio`/S3-compatible).
 
-### Quick start
+## Quick start
 
 To enable Woodpecker, set the MQ type to Woodpecker:
 
@@ -26,7 +27,7 @@ mq:
 
 Note: Switching `mq.type` for a running cluster is an upgrade operation. Follow the upgrade procedure carefully and validate on a fresh cluster before switching production.
 
-### Configuration
+## Configuration
 
 Below is the complete Woodpecker configuration block (edit `milvus.yaml` or override in `user.yaml`):
 
@@ -81,7 +82,7 @@ Key notes:
   - **type**: `minio` for MinIO/S3‑compatible object storage (MinIO/S3/GCS/OSS, etc.); `local` for local/shared file systems.
   - **rootPath**: Root path for the storage backend (effective for `local`; with `minio`, paths are dictated by bucket/prefix).
 
-### Deployment modes
+## Deployment modes
 
 Milvus supports both Standalone and Cluster modes. Woodpecker storage backend support matrix:
 
