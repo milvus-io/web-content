@@ -56,7 +56,7 @@ export const getRehypeImagePlugin = (version) => () => {
  */
 export const rehypeAnchorHeadingPlugin = () => {
   const commonHeadings = ["h1", "h2", "h3", "h4", "h5", "h6"];
-  const specialHeadings = ["h1", "h2"];
+  const specialHeadings = ["h1", "h2", "h3"];
 
   const anchorIcon = {
     type: "element",
