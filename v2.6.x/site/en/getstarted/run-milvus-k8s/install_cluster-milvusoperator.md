@@ -133,10 +133,10 @@ Once the Milvus Operator pod is running, you can deploy a Milvus cluster as foll
 $ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 ```
 
-The command above deploys a Milvus cluster with **WoodPecker** as the message queue (recommended for v2.6.0) and all new architectural components including the Streaming Node. 
+The command above deploys a Milvus cluster with **Woodpecker** as the message queue (recommended for v2.6.0) and all new architectural components including the Streaming Node. 
 
 **Architecture highlights in this deployment:**
-- **Message Queue**: Uses WoodPecker (reduces infrastructure maintenance)
+- **Message Queue**: [Uses Woodpecker](use-woodpecker.md) (reduces infrastructure maintenance)
 - **Streaming Node**: Enabled for enhanced data processing
 - **Mix Coordinator**: Consolidated coordinator components for improved efficiency
 

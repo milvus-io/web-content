@@ -31,7 +31,7 @@ The following dependencies will be obtained and configured automatically when Mi
 | Software | Version                       | Note |
 | -------- | ----------------------------- | ---- |
 | etcd     | 3.5.0                         |  See [additional disk requirements](#Additional-disk-requirements). |
-| MinIO    |  RELEASE.2023-03-20T20-16-18Z | |
+| MinIO    |  RELEASE.2024-12-18T13-15-44Z | |
 | Pulsar   | 2.8.2                         | |
 
 ### Additional disk requirements

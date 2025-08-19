@@ -80,13 +80,13 @@ helm install my-release zilliztech/milvus \
   --set streaming.enabled=true
 ```
 
-**Note**: Standalone mode uses Woodpecker as the default message queue and enables the Streaming Node component. For details, refer to the [Architecture Overview](architecture_overview.md).
+**Note**: Standalone mode uses Woodpecker as the default message queue and enables the Streaming Node component. For details, refer to the [Architecture Overview](architecture_overview.md) and [Use Woodpecker](use-woodpecker.md).
 
 </div>
 
 **Deploy Milvus cluster:**
 
-The following command deploys a Milvus cluster with optimized settings for v2.6.0, using WoodPecker as the recommended message queue:
+The following command deploys a Milvus cluster with optimized settings for v2.6.0, using Woodpecker as the recommended message queue:
 
 ```bash
 helm install my-release zilliztech/milvus \
@@ -98,16 +98,16 @@ helm install my-release zilliztech/milvus \
 ```
 
 **What this command does:**
-- Uses **WoodPecker** as the message queue (recommended for reduced maintenance)
+- Uses **Woodpecker** as the message queue (recommended for reduced maintenance)
 - Enables the new **Streaming Node** component for improved performance
 - Disables the legacy **Index Node** (functionality is now handled by Data Node)
-- Disables Pulsar to use WoodPecker instead
+- Disables Pulsar to use Woodpecker instead
 
 <div class="alert note">
 
 **Architecture Changes in Milvus 2.6.x:**
 
-- **Message Queue**: **WoodPecker** is now recommended (reduces infrastructure maintenance compared to Pulsar)
+- **Message Queue**: **Woodpecker** is now recommended (reduces infrastructure maintenance compared to Pulsar)
 - **New Component**: **Streaming Node** is introduced and enabled by default  
 - **Merged Components**: **Index Node** and **Data Node** are combined into a single **Data Node**
 
@@ -117,7 +117,7 @@ For complete architecture details, refer to the [Architecture Overview](architec
 
 **Alternative Message Queue Options:**
 
-If you prefer to use **Pulsar** (traditional choice) instead of WoodPecker:
+If you prefer to use **Pulsar** (traditional choice) instead of Woodpecker:
 
 ```bash
 helm install my-release zilliztech/milvus \
