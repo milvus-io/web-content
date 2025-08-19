@@ -1,8 +1,9 @@
 ---
 id: use-woodpecker.md
-title: Use Woodpecker (Milvus v2.6.x)
+title: Use Woodpecker
 related_key: Woodpecker
 summary: Learn how to enable woodpecker as the WAL in milvus.
+beta: Milvus 2.6.x
 ---
 ## Use Woodpecker (Milvus v2.6.x)
 
