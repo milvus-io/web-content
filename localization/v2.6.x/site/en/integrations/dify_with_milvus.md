@@ -40,10 +40,40 @@ title: Deploying Dify with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Clone-the-Repository" class="common-anchor-header">Clone the Repository</h3><p>Clone the Dify source code to your local machine:</p>
+    </button></h2><h3 id="Clone-the-Repository" class="common-anchor-header">Clone the Repository<button data-href="#Clone-the-Repository" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Clone the Dify source code to your local machine:</p>
 <pre><code translate="no" class="language-shell">git clone https://github.com/langgenius/dify.git
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Environment-Configuration" class="common-anchor-header">Prepare Environment Configuration</h3><p>Navigate to the Docker directory in the Dify source code</p>
+<h3 id="Prepare-Environment-Configuration" class="common-anchor-header">Prepare Environment Configuration<button data-href="#Prepare-Environment-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Navigate to the Docker directory in the Dify source code</p>
 <pre><code translate="no" class="language-shell">cd dify/docker
 <button class="copy-code-btn"></button></code></pre>
 <p>Copy the environment configuration file</p>
@@ -81,7 +111,22 @@ title: Deploying Dify with Milvus
         ></path>
       </svg>
     </button></h2><p>This option runs Milvus containers alongside Dify on your local machine using Docker Compose.</p>
-<h3 id="Configure-Environment-Variables" class="common-anchor-header">Configure Environment Variables</h3><p>Edit the <code translate="no">.env</code> file with the following Milvus configuration:</p>
+<h3 id="Configure-Environment-Variables" class="common-anchor-header">Configure Environment Variables<button data-href="#Configure-Environment-Variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Edit the <code translate="no">.env</code> file with the following Milvus configuration:</p>
 <pre><code translate="no">VECTOR_STORE=milvus
 MILVUS_URI=http://host.docker.internal:19530
 MILVUS_TOKEN=
@@ -92,7 +137,22 @@ MILVUS_TOKEN=
 <li><code translate="no">MILVUS_TOKEN</code> can be left empty for local Milvus deployments.</li>
 </ul>
 </div>
-<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Start the Docker Containers</h3><p>Start the containers with the <code translate="no">milvus</code> profile to include Milvus services:</p>
+<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Start the Docker Containers<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Start the containers with the <code translate="no">milvus</code> profile to include Milvus services:</p>
 <pre><code translate="no" class="language-shell">docker compose --profile milvus up -d
 <button class="copy-code-btn"></button></code></pre>
 <p>This command will start the Dify service along with the <code translate="no">milvus-standalone</code>, <code translate="no">etcd</code>, and <code translate="no">minio</code> containers.</p>
@@ -112,7 +172,22 @@ MILVUS_TOKEN=
         ></path>
       </svg>
     </button></h2><p>This option connects Dify to a managed Milvus service on Zilliz Cloud.</p>
-<h3 id="Configure-Environment-Variables" class="common-anchor-header">Configure Environment Variables</h3><p>Edit the <code translate="no">.env</code> file with your Zilliz Cloud connection details:</p>
+<h3 id="Configure-Environment-Variables" class="common-anchor-header">Configure Environment Variables<button data-href="#Configure-Environment-Variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Edit the <code translate="no">.env</code> file with your Zilliz Cloud connection details:</p>
 <pre><code translate="no"><span class="hljs-attr">VECTOR_STORE</span>=milvus
 <span class="hljs-attr">MILVUS_URI</span>=YOUR_ZILLIZ_CLOUD_ENDPOINT
 <span class="hljs-attr">MILVUS_TOKEN</span>=YOUR_ZILLIZ_CLOUD_API_KEY
@@ -123,7 +198,22 @@ MILVUS_TOKEN=
 <li>Replace <code translate="no">YOUR_ZILLIZ_CLOUD_API_KEY</code> with your <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">API key</a> from Zilliz Cloud.</li>
 </ul>
 </div>
-<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Start the Docker Containers</h3><p>Start only the Dify containers without the Milvus profile:</p>
+<h3 id="Start-the-Docker-Containers" class="common-anchor-header">Start the Docker Containers<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Start only the Dify containers without the Milvus profile:</p>
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Accessing-Dify" class="common-anchor-header">Accessing Dify<button data-href="#Accessing-Dify" class="anchor-icon" translate="no">
@@ -141,7 +231,22 @@ MILVUS_TOKEN=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Log-in-to-Dify" class="common-anchor-header">Log in to Dify</h3><p>Open your browser and go to the Dify installation page, and you can set your admin account here:
+    </button></h2><h3 id="Log-in-to-Dify" class="common-anchor-header">Log in to Dify<button data-href="#Log-in-to-Dify" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Open your browser and go to the Dify installation page, and you can set your admin account here:
 <code translate="no">http://localhost/install</code> ,
 And then log in the main Dify page for further usage.</p>
 <p>For further usage and guidance, please refer to the <a href="https://docs.dify.ai/">Dify documentation</a>.</p>
