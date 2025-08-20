@@ -52,8 +52,38 @@ title: Bitset
         ></path>
       </svg>
     </button></h2><p>Bitset is a simple yet powerful mechanism that helps Milvus perform attribute filtering, data deletion, and query with Time Travel.</p>
-<h3 id="Attribute-filtering" class="common-anchor-header">Attribute filtering</h3><p>As bitsets contain only two possible values, they are perfect for storing results of <a href="https://milvus.io/docs/v2.1.x/hybridsearch.md">attribute filtering</a>. Data that meet the requirement of a given attribute filter are marked with <code translate="no">1</code>.</p>
-<h3 id="Data-deletion" class="common-anchor-header">Data deletion</h3><p>Bitsets serve as a compact way to store information about whether a row in a segment is deleted. Deleted entities are marked with <code translate="no">1</code> in the corresponding bitset, which <a href="https://milvus.io/blog/deleting-data-in-milvus.md">will not be computed</a> during a search or query.</p>
+<h3 id="Attribute-filtering" class="common-anchor-header">Attribute filtering<button data-href="#Attribute-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>As bitsets contain only two possible values, they are perfect for storing results of <a href="https://milvus.io/docs/v2.1.x/hybridsearch.md">attribute filtering</a>. Data that meet the requirement of a given attribute filter are marked with <code translate="no">1</code>.</p>
+<h3 id="Data-deletion" class="common-anchor-header">Data deletion<button data-href="#Data-deletion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bitsets serve as a compact way to store information about whether a row in a segment is deleted. Deleted entities are marked with <code translate="no">1</code> in the corresponding bitset, which <a href="https://milvus.io/blog/deleting-data-in-milvus.md">will not be computed</a> during a search or query.</p>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +112,22 @@ title: Bitset
     <span>Order of DML events</span>
   </span>
 </p>
-<h3 id="Case-one" class="common-anchor-header">Case one</h3><p>In this case, a user sets <code translate="no">time_travel</code> as 150, which means that the user conducts a query on data that satisfy <code translate="no">ts = 150</code>. The bitset generation process is illustrated by Figure 1.</p>
+<h3 id="Case-one" class="common-anchor-header">Case one<button data-href="#Case-one" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In this case, a user sets <code translate="no">time_travel</code> as 150, which means that the user conducts a query on data that satisfy <code translate="no">ts = 150</code>. The bitset generation process is illustrated by Figure 1.</p>
 <p>During the initial filtering stage, the <code translate="no">filter_bitset</code> should be <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>, where entities [1, 3, 5, 7] are marked as <code translate="no">1</code> because they are valid filtering results.</p>
 <p>However, entities [4, 5, 6, 7] were not inserted to the vector database when <code translate="no">ts</code> equals 150. Therefore, these four entities should be marked as 0 regardless of the filtering condition. Now the bitset result should be <code translate="no">[1, 0, 1, 0, 0, 0, 0, 0]</code>.</p>
 <p>As discussed in <a href="#data-deletion">Data deletion</a>, entities that are marked with <code translate="no">1</code> are ignored during a search or query. The bitset result now needs to be flipped in order to be combined with the deletion bitmap, which gives us <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>.</p>
@@ -94,7 +139,22 @@ title: Bitset
     <span>Figure 1. Search with Time Travel = 150.</span>
   </span>
 </p>
-<h3 id="Case-two" class="common-anchor-header">Case two</h3><p>In this case, the user sets <code translate="no">time_travel</code> as 250. The bitset generation process is illustrated by Figure 2.</p>
+<h3 id="Case-two" class="common-anchor-header">Case two<button data-href="#Case-two" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In this case, the user sets <code translate="no">time_travel</code> as 250. The bitset generation process is illustrated by Figure 2.</p>
 <p>Like in case one, the initial <code translate="no">filter_bitset</code> is <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>.</p>
 <p>All entities are in the vector database when <code translate="no">ts</code> = 250. Therefore, the <code translate="no">filter_bitset</code> stays the same when we factor in the timestamp. Again, we need to flip the result and get <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
 <p>As for the deletion bitset <code translate="no">del_bitset</code>, the initial value is <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>. However, entities 7 and 8 were not deleted until <code translate="no">ts</code> is 300. Therefore, when <code translate="no">ts</code> is 250, entities 7 and 8 are still valid. As a result, the <code translate="no">del_bitset</code> after Time Travel is <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.</p>
@@ -105,7 +165,22 @@ title: Bitset
     <span>Figure 2. Search with Time Travel = 250.</span>
   </span>
 </p>
-<h3 id="Case-three" class="common-anchor-header">Case three</h3><p>In this case, the user sets <code translate="no">time_travel</code> as 350. The bitset generation process is illustrated by Figure 3.</p>
+<h3 id="Case-three" class="common-anchor-header">Case three<button data-href="#Case-three" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In this case, the user sets <code translate="no">time_travel</code> as 350. The bitset generation process is illustrated by Figure 3.</p>
 <p>As with previous cases, the initial <code translate="no">filter_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
 <p>All entities are in the vector database when <code translate="no">ts</code>= 350. Therefore, the final, flipped <code translate="no">filter_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>, the same as in case two.</p>
 <p>As for the deletion bitset <code translate="no">del_bitset</code>, since entities 7 and 8 have already been deleted when <code translate="no">ts = 350</code>, therefore, the result of <code translate="no">del_bitset</code> is <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>.</p>

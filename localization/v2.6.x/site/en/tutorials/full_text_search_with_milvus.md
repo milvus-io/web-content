@@ -61,12 +61,42 @@ title: Full Text Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-PyMilvus" class="common-anchor-header">Install PyMilvus</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus -U</span>
+    </button></h2><h3 id="Install-PyMilvus" class="common-anchor-header">Install PyMilvus<button data-href="#Install-PyMilvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus -U</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
 </div>
-<h3 id="Set-OpenAI-API-Key" class="common-anchor-header">Set OpenAI API Key</h3><p>We will use the models from OpenAI for creating vector embeddings and generation response. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<h3 id="Set-OpenAI-API-Key" class="common-anchor-header">Set OpenAI API Key<button data-href="#Set-OpenAI-API-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>We will use the models from OpenAI for creating vector embeddings and generation response. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -128,12 +158,42 @@ client = MilvusClient(uri=uri)
         ></path>
       </svg>
     </button></h2><p>Setting up a collection for full-text search requires several configuration steps. Let’s go through them one by one.</p>
-<h3 id="Text-Analysis-Configuration" class="common-anchor-header">Text Analysis Configuration</h3><p>For full-text search, we define how text should be processed. Analyzers are essential in full-text search by breaking sentences into tokens and performing lexical analysis like stemming and stop word removal. Here we simply define an analyzer.</p>
+<h3 id="Text-Analysis-Configuration" class="common-anchor-header">Text Analysis Configuration<button data-href="#Text-Analysis-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>For full-text search, we define how text should be processed. Analyzers are essential in full-text search by breaking sentences into tokens and performing lexical analysis like stemming and stop word removal. Here we simply define an analyzer.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define tokenizer parameters for text analysis</span>
 analyzer_params = {<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
 <p>For more concept details about analyzer, please refer to the <a href="https://milvus.io/docs/analyzer-overview.md">analyzer documentation</a>.</p>
-<h3 id="Collection-Schema-and-BM25-Function" class="common-anchor-header">Collection Schema and BM25 Function</h3><p>Now we define the schema with fields for primary key, text content, sparse vectors (for full-text search), dense vectors (for semantic search), and metadata. We also configure the BM25 function for full-text search.</p>
+<h3 id="Collection-Schema-and-BM25-Function" class="common-anchor-header">Collection Schema and BM25 Function<button data-href="#Collection-Schema-and-BM25-Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Now we define the schema with fields for primary key, text content, sparse vectors (for full-text search), dense vectors (for semantic search), and metadata. We also configure the BM25 function for full-text search.</p>
 <p>The BM25 function automatically converts text content into sparse vectors, allowing Milvus to handle the complexity of full-text search without requiring manual sparse embedding generation.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create schema</span>
 schema = MilvusClient.create_schema()
@@ -173,7 +233,22 @@ schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 100}, 'is_primary': True, 'auto_id': True}, {'name': 'content', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase']}}}, {'name': 'sparse_vector', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}, {'name': 'dense_vector', 'description': '', 'type': &lt;DataType.FLOAT_VECTOR: 101&gt;, 'params': {'dim': 1536}}, {'name': 'metadata', 'description': '', 'type': &lt;DataType.JSON: 23&gt;}], 'enable_dynamic_field': False, 'functions': [{'name': 'bm25', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['content'], 'output_field_names': ['sparse_vector'], 'params': {}}]}
 </code></pre>
-<h3 id="Indexing-and-Collection-Creation" class="common-anchor-header">Indexing and Collection Creation</h3><p>To optimize search performance, we create indexes for both sparse and dense vector fields, then create the collection in Milvus.</p>
+<h3 id="Indexing-and-Collection-Creation" class="common-anchor-header">Indexing and Collection Creation<button data-href="#Indexing-and-Collection-Creation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>To optimize search performance, we create indexes for both sparse and dense vector fields, then create the collection in Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define indexes</span>
 index_params = MilvusClient.prepare_index_params()
 index_params.add_index(
@@ -278,7 +353,22 @@ client.insert(collection_name, entities)
         ></path>
       </svg>
     </button></h2><p>You can flexibly use the <code translate="no">search()</code> or <code translate="no">hybrid_search()</code> methods to implement full-text search (sparse), semantic search (dense), and hybrid search to lead to more robust and accurate search results.</p>
-<h3 id="Full-Text-Search" class="common-anchor-header">Full-Text Search</h3><p>Sparse search leverages the BM25 algorithm to find documents containing specific keywords or phrases. This traditional search method excels at precise term matching and is particularly effective when users know exactly what they’re looking for.</p>
+<h3 id="Full-Text-Search" class="common-anchor-header">Full-Text Search<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sparse search leverages the BM25 algorithm to find documents containing specific keywords or phrases. This traditional search method excels at precise term matching and is particularly effective when users know exactly what they’re looking for.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for keyword search</span>
 query = <span class="hljs-string">&quot;full-text search keywords&quot;</span>
 
@@ -304,7 +394,22 @@ sparse_results = results[<span class="hljs-number">0</span>]
 2. Score: 0.1836, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
 3. Score: 0.1335, Content: Milvus is a vector database built for embedding similarity search and AI applications.
 </code></pre>
-<h3 id="Semantic-Search" class="common-anchor-header">Semantic Search</h3><p>Dense search uses vector embeddings to find documents with similar meaning, even if they don’t share the exact same keywords. This approach helps understand context and semantics, making it ideal for more natural language queries.</p>
+<h3 id="Semantic-Search" class="common-anchor-header">Semantic Search<button data-href="#Semantic-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dense search uses vector embeddings to find documents with similar meaning, even if they don’t share the exact same keywords. This approach helps understand context and semantics, making it ideal for more natural language queries.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for semantic search</span>
 query = <span class="hljs-string">&quot;How does Milvus help with similarity search?&quot;</span>
 
@@ -333,7 +438,22 @@ dense_results = results[<span class="hljs-number">0</span>]
 2. Score: 0.6501, Content: Full-text search in Milvus allows you to search using keywords and phrases.
 3. Score: 0.4371, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
 </code></pre>
-<h3 id="Hybrid-Search" class="common-anchor-header">Hybrid Search</h3><p>Hybrid search combines both full-text search and semantic dense retrieval. This balanced approach improves search accuracy and robustness by leveraging the strengths of both methods.</p>
+<h3 id="Hybrid-Search" class="common-anchor-header">Hybrid Search<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Hybrid search combines both full-text search and semantic dense retrieval. This balanced approach improves search accuracy and robustness by leveraging the strengths of both methods.</p>
 <p>Hybrid search is especially valuable in Retrieval-Augmented Generation (RAG) applications, where both semantic understanding and precise keyword matching contribute to better retrieval results.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for hybrid search</span>
 query = <span class="hljs-string">&quot;what is hybrid search&quot;</span>
