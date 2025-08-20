@@ -81,7 +81,22 @@ title: Building a RAG System Using Langflow with Milvus
     <span>astraDB</span>
   </span>
 </p>
-<h3 id="Steps-to-replace-astraDB-with-Milvus" class="common-anchor-header">Steps to replace astraDB with Milvus:</h3><ol>
+<h3 id="Steps-to-replace-astraDB-with-Milvus" class="common-anchor-header">Steps to replace astraDB with Milvus:<button data-href="#Steps-to-replace-astraDB-with-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Remove existing cards of Vector Store. Click on two AstraDB cards marked red in the above image, and press <strong>backspace</strong> to delete them.</li>
 <li>Click on the <strong>Vector Store</strong> option in the sidebar, chose Milvus and drag it into the canvas. Do this twice as we need 2 Milvus cards, one for storing the file processing workflow and one for search workflow.</li>
 <li>Link the Milvus Modules to the rest of the components. See the image below for reference.</li>
@@ -93,7 +108,22 @@ title: Building a RAG System Using Langflow with Milvus
     <span>Milvus Structure demo</span>
   </span>
 </p>
-<h3 id="Embed-knowledge-into-the-RAG-system" class="common-anchor-header">Embed knowledge into the RAG system</h3><ol>
+<h3 id="Embed-knowledge-into-the-RAG-system" class="common-anchor-header">Embed knowledge into the RAG system<button data-href="#Embed-knowledge-into-the-RAG-system" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Upload a file as LLM’s knowledge base through the file module on the bottom left. Here we uploaded a file containing a brief introduction to Milvus</li>
 <li>Run the inserting workflow by pressing the run botton on the Milvus module on the bottom right. This will insert the knowledge to the Milvus vector store</li>
 <li>Test whether the knowledge is in memory. Open playground and ask anything related to the file you uploaded.</li>

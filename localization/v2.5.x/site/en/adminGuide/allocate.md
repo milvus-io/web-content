@@ -63,7 +63,22 @@ Using Helm to upgrade resources will cause the running pods to perform rolling u
 <li><a href="/docs/v2.5.x/allocate.md#Allocate-resources-with-commands">Use the commands</a></li>
 <li><a href="/docs/v2.5.x/allocate.md#Allocate-resources-by-setting-configuration-file">Set the parameters in the <code translate="no">YAML</code> file</a></li>
 </ul>
-<h3 id="Allocate-resources-with-commands" class="common-anchor-header">Allocate resources with commands</h3><p>You need to set the resource variables for each Milvus component if you use <code translate="no">--set</code> to update the resource configurations.</p>
+<h3 id="Allocate-resources-with-commands" class="common-anchor-header">Allocate resources with commands<button data-href="#Allocate-resources-with-commands" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>You need to set the resource variables for each Milvus component if you use <code translate="no">--set</code> to update the resource configurations.</p>
 <div class="filter">
 <a href="#standalone">Milvus standalone</a> <a href="#cluster">Milvus cluster</a>
 </div>
@@ -75,7 +90,22 @@ Using Helm to upgrade resources will cause the running pods to perform rolling u
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">Allocate resources by setting configuration file</h3><p>You can also allocate CPU and memory resources by specifying the parameters <code translate="no">resources.requests</code> and <code translate="no">resources.limits</code> in the <code translate="no">resources.yaml</code> file.</p>
+<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">Allocate resources by setting configuration file<button data-href="#Allocate-resources-by-setting-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>You can also allocate CPU and memory resources by specifying the parameters <code translate="no">resources.requests</code> and <code translate="no">resources.limits</code> in the <code translate="no">resources.yaml</code> file.</p>
 <pre><code translate="no" class="language-Yaml"><span class="hljs-attr">dataNode:</span>
   <span class="hljs-attr">resources:</span>
     <span class="hljs-attr">limits:</span>
