@@ -27,14 +27,14 @@ Run the following command to install Milvus Java SDK.
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java</artifactId>
-    <version>2.5.11</version>
+    <version>2.5.12</version>
 </dependency>
 ```
 
 - Gradle/Grails
 
 ```
-implementation 'io.milvus:milvus-sdk-java:2.5.11'
+implementation 'io.milvus:milvus-sdk-java:2.5.12'
 ```
 
 ## What's next
