@@ -8,6 +8,35 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.17
+
+Release date: August 21, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.17          | 2.5.14            | 2.5.12              | 2.5.11           |
+
+We're excited to announce Milvus 2.5.17! This release delivers critical performance enhancements and stability improvements. We strongly encourage all users to upgrade to benefit from these optimizations.
+
+### Improvements
+
+- Enabled ARM SVE acceleration for bitset operations ([#43928](https://github.com/milvus-io/milvus/pull/43928))
+- Reduced frequent etcd calls in ShowCollections and DescribeCollections operations ([#43903](https://github.com/milvus-io/milvus/pull/43903))
+- Added write rate limiting for disk file writer ([#43856](https://github.com/milvus-io/milvus/pull/43856))
+- Supported skipping TSafe checks for better performance in specific scenarios ([#43886](https://github.com/milvus-io/milvus/pull/43886))
+- Adjusted import task concurrency based on CPU count ([#43817](https://github.com/milvus-io/milvus/pull/43817))
+- Refined error messages for better troubleshooting ([#43860](https://github.com/milvus-io/milvus/pull/43860), [#43836](https://github.com/milvus-io/milvus/pull/43836))
+- Reduced buffer size to prevent OOM issues during import ([#43757](https://github.com/milvus-io/milvus/pull/43757))
+- Added disk file writer with direct I/O support ([#43692](https://github.com/milvus-io/milvus/pull/43692))
+
+### Bug fixes
+
+- Fixed L0 segment loading delegator selection in QueryCoord ([#43795](https://github.com/milvus-io/milvus/pull/43795))
+- Fixed incorrect null offset calculation for JSON path index ([#43823](https://github.com/milvus-io/milvus/pull/43823))
+- Added segment lock for LoadTextIndex and LoadJsonKeyIndex operations ([#43815](https://github.com/milvus-io/milvus/pull/43815))
+- Fixed delete consumer concurrency read-write bug ([#43855](https://github.com/milvus-io/milvus/pull/43855))
+- Used proto.Equal for accurate field default value comparison ([#43832](https://github.com/milvus-io/milvus/pull/43832))
+
 ## v2.5.16
 
 Release date: August 6, 2025
