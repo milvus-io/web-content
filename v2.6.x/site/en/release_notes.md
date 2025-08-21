@@ -159,7 +159,7 @@ For more information, refer to [Decay Ranker Overview](decay-ranker-overview.md)
 
 #### Add Field for Online Schema Evolution 
 
-To provide greater schema flexibility, Milvus 2.6 now supports adding a new scalar or vector field to an existing collection's schema online. This avoids the need to create a new collection and perform a disruptive data migration when application requirements change.   
+To provide greater schema flexibility, Milvus 2.6 now supports adding a new scalar field to an existing collection's schema online. This avoids the need to create a new collection and perform a disruptive data migration when application requirements change.   
 
 For more information, refer to [Add Fields to an Existing Collection](add-fields-to-an-existing-collection.md).
 
