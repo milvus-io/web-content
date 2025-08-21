@@ -19,6 +19,78 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2517" class="common-anchor-header">v2.5.17<button data-href="#v2517" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: August 21, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.17</td><td>2.5.14</td><td>2.5.12</td><td>2.5.11</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce Milvus 2.5.17! This release delivers critical performance enhancements and stability improvements. We strongly encourage all users to upgrade to benefit from these optimizations.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Enabled ARM SVE acceleration for bitset operations (<a href="https://github.com/milvus-io/milvus/pull/43928">#43928</a>)</li>
+<li>Reduced frequent etcd calls in ShowCollections and DescribeCollections operations (<a href="https://github.com/milvus-io/milvus/pull/43903">#43903</a>)</li>
+<li>Added write rate limiting for disk file writer (<a href="https://github.com/milvus-io/milvus/pull/43856">#43856</a>)</li>
+<li>Supported skipping TSafe checks for better performance in specific scenarios (<a href="https://github.com/milvus-io/milvus/pull/43886">#43886</a>)</li>
+<li>Adjusted import task concurrency based on CPU count (<a href="https://github.com/milvus-io/milvus/pull/43817">#43817</a>)</li>
+<li>Refined error messages for better troubleshooting (<a href="https://github.com/milvus-io/milvus/pull/43860">#43860</a>, <a href="https://github.com/milvus-io/milvus/pull/43836">#43836</a>)</li>
+<li>Reduced buffer size to prevent OOM issues during import (<a href="https://github.com/milvus-io/milvus/pull/43757">#43757</a>)</li>
+<li>Added disk file writer with direct I/O support (<a href="https://github.com/milvus-io/milvus/pull/43692">#43692</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed L0 segment loading delegator selection in QueryCoord (<a href="https://github.com/milvus-io/milvus/pull/43795">#43795</a>)</li>
+<li>Fixed incorrect null offset calculation for JSON path index (<a href="https://github.com/milvus-io/milvus/pull/43823">#43823</a>)</li>
+<li>Added segment lock for LoadTextIndex and LoadJsonKeyIndex operations (<a href="https://github.com/milvus-io/milvus/pull/43815">#43815</a>)</li>
+<li>Fixed delete consumer concurrency read-write bug (<a href="https://github.com/milvus-io/milvus/pull/43855">#43855</a>)</li>
+<li>Used proto.Equal for accurate field default value comparison (<a href="https://github.com/milvus-io/milvus/pull/43832">#43832</a>)</li>
+</ul>
 <h2 id="v2516" class="common-anchor-header">v2.5.16<button data-href="#v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
