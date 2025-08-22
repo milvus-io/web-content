@@ -15,30 +15,7 @@ In this guide, you will learn how to:
 - Query logs using Grafana.
 
 For reference, [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent) will be deprecated.
-So we instead introduce Alloy, which has been officially suggested by Grafana Labs as the new agent.
-
-# Introduction
-
-Before diving into how to build a logging system with Milvus, we’d like to first introduce the mechanisms of the logging system being used.
-Broadly speaking, there are two main structures you can apply. 
-Please note that the mechanism to be introduced can be applied regardless of whether the [log functionality](https://milvus.io/docs/configure_log.md) in Milvus is enabled.
-
-## 1. Using host volumes of kubernetes worker node
-
-kubernetes worker nodes periodically write stream logs generated from pods scheduled on those nodes to a specific path in the node’s file system as files with a `.log` extension, we will leverage this feature.
-Next, we will deploy Alloy, which acts as an agent, as a DaemonSet on the worker nodes.
-This Alloy will share the path where the log files are stored on the worker nodes via a host volume.
-As a result, the log files from the Milvus pods will be visible inside the Alloy pod, and Alloy will read these files and send them to Loki.
-
-![Logging with k8s worker node host volume](../../../../assets/monitoring/logging_HostVolume.png "logging with host volume sharing.")
-
-## 2. Using kubernetes API server
-
-kubernetes API server is one of the control plane components. Alloy doesn't necessarily need to be deployed as a DaemonSet. It works well as a Deployment.
-Instead, Alloy must request to kubernetes API server for fetching stream logs of milvus pods and get them.
-Finally, Alloy will send the stream logs to Loki.
-
-![Logging with k8s API Server](../../../../assets/monitoring/logging_K8sApi.png "logging with k8s api server.")
+So we introduce Alloy, which has been officially suggested by Grafana Labs as the new agent to collect Kubernetes logs and forward them to Loki.
 
 ## Prerequisites
 
@@ -107,12 +84,13 @@ helm install --values loki.yaml loki grafana/loki -n loki
 
 ## Deploy Alloy
 
-You can configure alloy and deploy alloy based on Helm chart. Refer to the official Alloy [documentation](https://grafana.com/docs/alloy/latest/set-up/install/) for more installation options.
-We will show you Alloy [configuration](https://grafana.com/docs/alloy/latest/configure/).
 
-### Create Alloy Configuration
-#### 1. Using host volumes of kubernetes worker node
-`alloy.yaml`:
+We will show you Alloy [Configuration](https://grafana.com/docs/alloy/latest/configure/).
+
+### 1. Create Alloy Configuration
+
+We will use the following `alloy.yaml` to collect logs of all Kubernetes pods & send them to Loki via loki-gateway:
+
 ```yaml
 alloy:
   enableReporting: false
@@ -120,64 +98,81 @@ alloy:
   configMap:
     create: true
     content: |-
-      loki.write "remote_loki" {
+      loki.write "default" {
         endpoint {
-          url       = "http://loki-gateway/loki/api/v1/push"
-        }
-      }
-      
-      loki.source.file "milvus_logs" {
-        targets = local.file_match.milvus_log_files.targets
-        forward_to = [loki.write.remote_loki.receiver]
-      }
-      
-      local.file_match "milvus_log_files" {
-        path_targets = [
-          {"__path__" = "/your/worker/node/var/log/pods/milvus_milvus-*/**/*.log"},
-        ]
-      }
-  # mount to pods with host volume
-  mounts:
-    extra:
-      - name: log-pods
-        mountPath: /host/var/log/pods
-        readOnly: true
-controller:
-  type: 'daemonset'
-  # make volume that use host volume in worker node
-  volumes:
-    extra:
-      - name: log-pods
-        hostPath:
-          path: /var/log/pods
-```
-
-#### 2. Using kubernetes API server
-`alloy.yaml`:
-```yaml
-alloy:
-  enableReporting: false
-  resources: {}
-  configMap:
-    create: true
-    content: |-
-      loki.write "remote_loki" {
-        endpoint {
-          url       = "http://loki-gateway/loki/api/v1/push"
+          url = "http://loki-gateway/loki/api/v1/push"
         }
       }
 
-      discovery.kubernetes "milvus_pod" {
+      discovery.kubernetes "pod" {
         role = "pod"
       }
 
-      loki.source.kubernetes "milvus_pod_logs" {
-        targets = discovery.kubernetes.milvus_pod.output
-        forward_to = [loki.write.remote_loki.receiver]
+      loki.source.kubernetes "pod_logs" {
+        targets    = discovery.relabel.pod_logs.output
+        forward_to = [loki.write.default.receiver]
+      }
+
+      // Rewrite the label set to make log query easier
+      discovery.relabel "pod_logs" {
+        targets = discovery.kubernetes.pod.targets
+        rule {
+          source_labels = ["__meta_kubernetes_namespace"]
+          action = "replace"
+          target_label = "namespace"
+        }
+
+        // "pod" <- "__meta_kubernetes_pod_name"
+        rule {
+          source_labels = ["__meta_kubernetes_pod_name"]
+          action = "replace"
+          target_label = "pod"
+        }
+
+        // "container" <- "__meta_kubernetes_pod_container_name"
+        rule {
+          source_labels = ["__meta_kubernetes_pod_container_name"]
+          action = "replace"
+          target_label = "container"
+        }
+
+        // "app" <- "__meta_kubernetes_pod_label_app_kubernetes_io_name"
+        rule {
+          source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
+          action = "replace"
+          target_label = "app"
+        }
+
+        // "job" <- "__meta_kubernetes_namespace", "__meta_kubernetes_pod_container_name"
+        rule {
+          source_labels = ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_container_name"]
+          action = "replace"
+          target_label = "job"
+          separator = "/"
+          replacement = "$1"
+        }
+
+        // L"__path__" <- "__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"
+        rule {
+          source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+          action = "replace"
+          target_label = "__path__"
+          separator = "/"
+          replacement = "/var/log/pods/*$1/*.log"
+        }
+
+        // "container_runtime" <- "__meta_kubernetes_pod_container_id"
+        rule {
+          source_labels = ["__meta_kubernetes_pod_container_id"]
+          action = "replace"
+          target_label = "container_runtime"
+          regex = "^(\\S+):\\/\\/.+$"
+          replacement = "$1"
+        }
       }
 ```
 
-### Install Alloy
+### 2. Install Alloy
 
 ```shell
 helm install --values alloy.yaml alloy grafana/alloy -n loki
