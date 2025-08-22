@@ -28,74 +28,7 @@ summary: >-
 <li>Query logs using Grafana.</li>
 </ul>
 <p>For reference, <a href="https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent">Promtail</a> will be deprecated.
-So we instead introduce Alloy, which has been officially suggested by Grafana Labs as the new agent.</p>
-<h1 id="Introduction" class="common-anchor-header">Introduction<button data-href="#Introduction" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h1><p>Before diving into how to build a logging system with Milvus, we’d like to first introduce the mechanisms of the logging system being used.
-Broadly speaking, there are two main structures you can apply.
-Please note that the mechanism to be introduced can be applied regardless of whether the <a href="https://milvus.io/docs/configure_log.md">log functionality</a> in Milvus is enabled.</p>
-<h2 id="1-Using-host-volumes-of-kubernetes-worker-node" class="common-anchor-header">1. Using host volumes of kubernetes worker node<button data-href="#1-Using-host-volumes-of-kubernetes-worker-node" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>kubernetes worker nodes periodically write stream logs generated from pods scheduled on those nodes to a specific path in the node’s file system as files with a <code translate="no">.log</code> extension, we will leverage this feature.
-Next, we will deploy Alloy, which acts as an agent, as a DaemonSet on the worker nodes.
-This Alloy will share the path where the log files are stored on the worker nodes via a host volume.
-As a result, the log files from the Milvus pods will be visible inside the Alloy pod, and Alloy will read these files and send them to Loki.</p>
-<p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/monitoring/logging_HostVolume.png" alt="Logging with k8s worker node host volume" class="doc-image" id="logging-with-k8s-worker-node-host-volume" />
-    <span>Logging with k8s worker node host volume</span>
-  </span>
-</p>
-<h2 id="2-Using-kubernetes-API-server" class="common-anchor-header">2. Using kubernetes API server<button data-href="#2-Using-kubernetes-API-server" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>kubernetes API server is one of the control plane components. Alloy doesn’t necessarily need to be deployed as a DaemonSet. It works well as a Deployment.
-Instead, Alloy must request to kubernetes API server for fetching stream logs of milvus pods and get them.
-Finally, Alloy will send the stream logs to Loki.</p>
-<p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/monitoring/logging_K8sApi.png" alt="Logging with k8s API Server" class="doc-image" id="logging-with-k8s-api-server" />
-    <span>Logging with k8s API Server</span>
-  </span>
-</p>
+So we introduce Alloy, which has been officially suggested by Grafana Labs as the new agent to collect Kubernetes logs and forward them to Loki.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,9 +162,8 @@ helm install --values loki.yaml loki grafana/loki -n loki
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can configure alloy and deploy alloy based on Helm chart. Refer to the official Alloy <a href="https://grafana.com/docs/alloy/latest/set-up/install/">documentation</a> for more installation options.
-We will show you Alloy <a href="https://grafana.com/docs/alloy/latest/configure/">configuration</a>.</p>
-<h3 id="Create-Alloy-Configuration" class="common-anchor-header">Create Alloy Configuration<button data-href="#Create-Alloy-Configuration" class="anchor-icon" translate="no">
+    </button></h2><p>We will show you Alloy <a href="https://grafana.com/docs/alloy/latest/configure/">Configuration</a>.</p>
+<h3 id="1-Create-Alloy-Configuration" class="common-anchor-header">1. Create Alloy Configuration<button data-href="#1-Create-Alloy-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,67 +178,87 @@ We will show you Alloy <a href="https://grafana.com/docs/alloy/latest/configure/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="1-Using-host-volumes-of-kubernetes-worker-node" class="common-anchor-header">1. Using host volumes of kubernetes worker node</h4><p><code translate="no">alloy.yaml</code>:</p>
+    </button></h3><p>We will use the following <code translate="no">alloy.yaml</code> to collect logs of all Kubernetes pods & send them to Loki via loki-gateway:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">alloy:</span>
   <span class="hljs-attr">enableReporting:</span> <span class="hljs-literal">false</span>
   <span class="hljs-attr">resources:</span> {}
   <span class="hljs-attr">configMap:</span>
     <span class="hljs-attr">create:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">content:</span> <span class="hljs-string">|-
-      loki.write &quot;remote_loki&quot; {
+      loki.write &quot;default&quot; {
         endpoint {
-          url       = &quot;http://loki-gateway/loki/api/v1/push&quot;
-        }
-      }
-</span>      
-      <span class="hljs-string">loki.source.file</span> <span class="hljs-string">&quot;milvus_logs&quot;</span> {
-        <span class="hljs-string">targets</span> <span class="hljs-string">=</span> <span class="hljs-string">local.file_match.milvus_log_files.targets</span>
-        <span class="hljs-string">forward_to</span> <span class="hljs-string">=</span> [<span class="hljs-string">loki.write.remote_loki.receiver</span>]
-      }
-      
-      <span class="hljs-string">local.file_match</span> <span class="hljs-string">&quot;milvus_log_files&quot;</span> {
-        <span class="hljs-string">path_targets</span> <span class="hljs-string">=</span> [
-          {<span class="hljs-string">&quot;__path__&quot;</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;/your/worker/node/var/log/pods/milvus_milvus-*/**/*.log&quot;</span>},
-        ]
-      }
-  <span class="hljs-comment"># mount to pods with host volume</span>
-  <span class="hljs-attr">mounts:</span>
-    <span class="hljs-attr">extra:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">log-pods</span>
-        <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/host/var/log/pods</span>
-        <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
-<span class="hljs-attr">controller:</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">&#x27;daemonset&#x27;</span>
-  <span class="hljs-comment"># make volume that use host volume in worker node</span>
-  <span class="hljs-attr">volumes:</span>
-    <span class="hljs-attr">extra:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">log-pods</span>
-        <span class="hljs-attr">hostPath:</span>
-          <span class="hljs-attr">path:</span> <span class="hljs-string">/var/log/pods</span>
-<button class="copy-code-btn"></button></code></pre>
-<h4 id="2-Using-kubernetes-API-server" class="common-anchor-header">2. Using kubernetes API server</h4><p><code translate="no">alloy.yaml</code>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">alloy:</span>
-  <span class="hljs-attr">enableReporting:</span> <span class="hljs-literal">false</span>
-  <span class="hljs-attr">resources:</span> {}
-  <span class="hljs-attr">configMap:</span>
-    <span class="hljs-attr">create:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">content:</span> <span class="hljs-string">|-
-      loki.write &quot;remote_loki&quot; {
-        endpoint {
-          url       = &quot;http://loki-gateway/loki/api/v1/push&quot;
+          url = &quot;http://loki-gateway/loki/api/v1/push&quot;
         }
       }
 </span>
-      <span class="hljs-string">discovery.kubernetes</span> <span class="hljs-string">&quot;milvus_pod&quot;</span> {
+      <span class="hljs-string">discovery.kubernetes</span> <span class="hljs-string">&quot;pod&quot;</span> {
         <span class="hljs-string">role</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;pod&quot;</span>
       }
 
-      <span class="hljs-string">loki.source.kubernetes</span> <span class="hljs-string">&quot;milvus_pod_logs&quot;</span> {
-        <span class="hljs-string">targets</span> <span class="hljs-string">=</span> <span class="hljs-string">discovery.kubernetes.milvus_pod.output</span>
-        <span class="hljs-string">forward_to</span> <span class="hljs-string">=</span> [<span class="hljs-string">loki.write.remote_loki.receiver</span>]
+      <span class="hljs-string">loki.source.kubernetes</span> <span class="hljs-string">&quot;pod_logs&quot;</span> {
+        <span class="hljs-string">targets</span>    <span class="hljs-string">=</span> <span class="hljs-string">discovery.relabel.pod_logs.output</span>
+        <span class="hljs-string">forward_to</span> <span class="hljs-string">=</span> [<span class="hljs-string">loki.write.default.receiver</span>]
+      }
+
+      <span class="hljs-string">//</span> <span class="hljs-string">Rewrite</span> <span class="hljs-string">the</span> <span class="hljs-string">label</span> <span class="hljs-string">set</span> <span class="hljs-string">to</span> <span class="hljs-string">make</span> <span class="hljs-string">log</span> <span class="hljs-string">query</span> <span class="hljs-string">easier</span>
+      <span class="hljs-string">discovery.relabel</span> <span class="hljs-string">&quot;pod_logs&quot;</span> {
+        <span class="hljs-string">targets</span> <span class="hljs-string">=</span> <span class="hljs-string">discovery.kubernetes.pod.targets</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_namespace&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;namespace&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;pod&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;pod&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;container&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;container&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;app&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_label_app_kubernetes_io_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_label_app_kubernetes_io_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;app&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;job&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_namespace&quot;</span>, <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_namespace&quot;</span>, <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;job&quot;</span>
+          <span class="hljs-string">separator</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;/&quot;</span>
+          <span class="hljs-string">replacement</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;$1&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">L&quot;__path__&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_uid&quot;</span>, <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_uid&quot;</span>, <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;__path__&quot;</span>
+          <span class="hljs-string">separator</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;/&quot;</span>
+          <span class="hljs-string">replacement</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;/var/log/pods/*$1/*.log&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;container_runtime&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_container_id&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_container_id&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;container_runtime&quot;</span>
+          <span class="hljs-string">regex</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;^(\\S+):\\/\\/.+$&quot;</span>
+          <span class="hljs-string">replacement</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;$1&quot;</span>
+        }
       }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-Alloy" class="common-anchor-header">Install Alloy<button data-href="#Install-Alloy" class="anchor-icon" translate="no">
+<h3 id="2-Install-Alloy" class="common-anchor-header">2. Install Alloy<button data-href="#2-Install-Alloy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
