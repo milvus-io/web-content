@@ -1,10 +1,11 @@
 ---
 id: use-woodpecker.md
-title: 딱따구리 사용(Milvus v2.6.x)
+title: 딱따구리 사용Compatible with Milvus 2.6.x
 related_key: Woodpecker
 summary: 밀버스에서 딱따구리를 WAL로 활성화하는 방법을 알아보세요.
+beta: Milvus 2.6.x
 ---
-<h2 id="Use-Woodpecker-Milvus-v26x" class="common-anchor-header">딱따구리 사용(Milvus v2.6.x)<button data-href="#Use-Woodpecker-Milvus-v26x" class="anchor-icon" translate="no">
+<h1 id="Use-Woodpecker" class="common-anchor-header">딱따구리 사용<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Use-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,18 +20,63 @@ summary: 밀버스에서 딱따구리를 WAL로 활성화하는 방법을 알아
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 가이드에서는 Milvus 2.6.x에서 Woodpecker를 미리 쓰기 로그(WAL)로 활성화하고 사용하는 방법을 설명합니다. Woodpecker는 개체 스토리지용으로 설계된 클라우드 네이티브 WAL로, 높은 처리량, 낮은 운영 오버헤드, 원활한 확장성을 제공합니다. 아키텍처 및 벤치마크에 대한 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">Woodpecker를</a> 참조하세요.</p>
-<h3 id="Overview" class="common-anchor-header">개요</h3><ul>
-<li>Milvus 2.6부터 추가된 Woodpecker는 로깅 서비스로서 순서대로 쓰기 및 복구 기능을 제공하는 선택적 WAL입니다.</li>
+    </button></h1><p>이 가이드에서는 Milvus 2.6.x에서 Woodpecker를 미리 쓰기 로그(WAL)로 활성화하고 사용하는 방법을 설명합니다. Woodpecker는 개체 스토리지용으로 설계된 클라우드 네이티브 WAL로, 높은 처리량, 낮은 운영 오버헤드, 원활한 확장성을 제공합니다. 아키텍처 및 벤치마크에 대한 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">Woodpecker를</a> 참조하세요.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Milvus 2.6부터 추가된 Woodpecker는 로깅 서비스로서 정렬 쓰기 및 복구 기능을 제공하는 선택적 WAL입니다.</li>
 <li>메시지 큐 선택 사항으로, Pulsar/Kafka와 유사하게 작동하며 구성을 통해 활성화할 수 있습니다.</li>
 <li>로컬 파일 시스템(<code translate="no">local</code>)과 객체 스토리지(<code translate="no">minio</code>/S3 호환)의 두 가지 스토리지 백엔드가 지원됩니다.</li>
 </ul>
-<h3 id="Quick-start" class="common-anchor-header">빠른 시작</h3><p>딱따구리를 활성화하려면 MQ 유형을 딱따구리로 설정합니다:</p>
+<h2 id="Quick-start" class="common-anchor-header">빠른 시작<button data-href="#Quick-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>딱따구리를 활성화하려면 MQ 유형을 딱따구리로 설정합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">woodpecker</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>참고: 실행 중인 클러스터에 대해 <code translate="no">mq.type</code> 로 전환하는 것은 업그레이드 작업입니다. 프로덕션을 전환하기 전에 업그레이드 절차를 주의 깊게 따르고 새 클러스터에서 유효성을 검사하세요.</p>
-<h3 id="Configuration" class="common-anchor-header">구성</h3><p>아래는 전체 Woodpecker 구성 블록입니다( <code translate="no">milvus.yaml</code> 수정 또는 <code translate="no">user.yaml</code> 에서 재정의):</p>
+<h2 id="Configuration" class="common-anchor-header">구성<button data-href="#Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>아래는 전체 Woodpecker 구성 블록입니다( <code translate="no">milvus.yaml</code> 수정 또는 <code translate="no">user.yaml</code> 에서 재정의):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of woodpecker, used to manage Milvus logs of recent mutation operations, output streaming log, and provide embedded log sequential read and write.</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">meta:</span>
@@ -88,7 +134,22 @@ summary: 밀버스에서 딱따구리를 WAL로 활성화하는 방법을 알아
 <li><strong>rootPath</strong>: 스토리지 백엔드의 루트 경로( <code translate="no">local</code>, <code translate="no">minio</code> 의 경우 버킷/접두사에 따라 경로가 지정됨).</li>
 </ul></li>
 </ul>
-<h3 id="Deployment-modes" class="common-anchor-header">배포 모드</h3><p>Milvus는 독립형과 클러스터 모드를 모두 지원합니다. 딱따구리 스토리지 백엔드 지원 매트릭스:</p>
+<h2 id="Deployment-modes" class="common-anchor-header">배포 모드<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus는 독립형과 클러스터 모드를 모두 지원합니다. 딱따구리 스토리지 백엔드 지원 매트릭스:</p>
 <table>
 <thead>
 <tr><th></th><th><code translate="no">storage.type=local</code></th><th><code translate="no">storage.type=minio</code></th></tr>
@@ -118,7 +179,22 @@ summary: 밀버스에서 딱따구리를 WAL로 활성화하는 방법을 알아
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">쿠버네티스에서 밀버스 클러스터에 딱따구리 활성화(밀버스 오퍼레이터, 스토리지=미니오)</h3><p><a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터를</a> 설치한 후, 공식 샘플을 사용하여 Woodpecker를 활성화한 밀버스 클러스터를 시작하세요:</p>
+    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">쿠버네티스에서 밀버스 클러스터에 딱따구리 활성화(밀버스 오퍼레이터, 스토리지=미니오)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터를</a> 설치한 후, 공식 샘플을 사용하여 Woodpecker를 활성화한 밀버스 클러스터를 시작하세요:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
@@ -145,7 +221,22 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <pre><code translate="no" class="language-bash">kubectl delete milvus my-release
 <button class="copy-code-btn"></button></code></pre>
 <p>Woodpecker 매개변수를 조정해야 하는 경우 <a href="/docs/ko/deploy_pulsar.md">메시지 저장소 구성에</a> 설명된 설정을 따르세요.</p>
-<h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">쿠버네티스(헬름 차트, 저장소=미니오)에서 Milvus 클러스터에 Woodpecker 활성화하기</h3><p>먼저 <a href="/docs/ko/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행에</a> 설명된 대로 밀버스 헬름 차트를 추가하고 업데이트합니다.</p>
+<h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">쿠버네티스(헬름 차트, 저장소=미니오)에서 Milvus 클러스터에 Woodpecker 활성화하기<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>먼저 <a href="/docs/ko/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행에</a> 설명된 대로 밀버스 헬름 차트를 추가하고 업데이트합니다.</p>
 <p>그런 다음 다음 예제 중 하나를 사용하여 배포합니다:</p>
 <p>- 클러스터 배포(우드페커 및 스트리밍 노드를 활성화한 권장 설정):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
@@ -165,7 +256,22 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>배포 후 문서에 따라 포트 포워딩하고 연결합니다. Woodpecker 매개변수를 조정하려면 <a href="/docs/ko/deploy_pulsar.md">메시지 저장소 구성에</a> 설명된 설정을 따르세요.</p>
-<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker에서 Milvus 독립 실행형(저장소=로컬)에 대해 Woodpecker 사용 설정</h3><p><a href="/docs/ko/install_standalone-docker.md">Docker에서 Milvus 실행을</a> 따릅니다. 예시:</p>
+<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Docker에서 Milvus 독립 실행형(저장소=로컬)에 대해 Woodpecker 사용 설정<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="/docs/ko/install_standalone-docker.md">Docker에서 Milvus 실행을</a> 따릅니다. 예시:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
@@ -182,7 +288,22 @@ EOF
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
 <p>Woodpecker 설정을 추가로 변경하려면 <code translate="no">user.yaml</code> 을 업데이트하고 <code translate="no">bash standalone_embed.sh restart</code> 을 실행합니다.</p>
-<h3 id="Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="common-anchor-header">도커 컴포즈(저장소=minio)를 사용하여 Milvus Standalone용 Woodpecker 활성화(저장소=minio)</h3><p><a href="/docs/ko/install_standalone-docker-compose.md">Docker Compose로 Milvus 실행을</a> 따릅니다. 예시:</p>
+<h3 id="Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="common-anchor-header">도커 컴포즈(저장소=minio)를 사용하여 Milvus Standalone용 Woodpecker 활성화(저장소=minio)<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="/docs/ko/install_standalone-docker-compose.md">Docker Compose로 Milvus 실행을</a> 따릅니다. 예시:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
 wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
@@ -220,7 +341,7 @@ docker restart milvus-standalone
     </button></h2><p><a href="/docs/ko/woodpecker_architecture.md">우드펙커의</a> 벤치마크 및 백엔드 제한에 따라 다음 측면에서 엔드투엔드 쓰기 처리량을 최적화하세요:</p>
 <ul>
 <li>스토리지 측면<ul>
-<li><strong>오브젝트 스토리지(미니오/S3 호환)</strong>: 동시성 및 오브젝트 크기를 늘립니다(작은 오브젝트는 피하세요). 네트워크 및 버킷 대역폭 제한을 주의하세요. SSD의 단일 MinIO 노드는 로컬에서 약 100MB/s로 제한되는 경우가 많으며, 단일 EC2~S3는 GB/s에 도달할 수 있습니다.</li>
+<li><strong>오브젝트 스토리지(미니오/S3 호환)</strong>: 동시성 및 오브젝트 크기를 늘립니다(작은 오브젝트는 피하세요). 네트워크 및 버킷 대역폭 제한에 주의하세요. SSD의 단일 MinIO 노드는 로컬에서 약 100MB/s로 제한되는 경우가 많으며, 단일 EC2~S3는 GB/s에 도달할 수 있습니다.</li>
 <li><strong>로컬/공유 파일 시스템(로컬)</strong>: NVMe/고속 디스크를 선호합니다. FS가 작은 쓰기와 fsync 대기 시간을 잘 처리하는지 확인하세요.</li>
 </ul></li>
 <li>딱따구리 노브<ul>

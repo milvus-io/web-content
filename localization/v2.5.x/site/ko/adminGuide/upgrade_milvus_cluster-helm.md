@@ -44,7 +44,7 @@ title: 헬름 차트로 Milvus 클러스터 업그레이드하기
 <li>쿠버네티스 버전 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>밀버스-헬름 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속 요소로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가해야 한다.</p>
+<p>Milvus-Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가해야 한다.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">밀버스 헬름 차트 확인<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus의 업그레이드 경로는 다음과 같이 선택할 수 있습니다:</p>
-<div style="display: none;">- 밀버스 v2.2.3 이상 릴리스에서 v2.5.16으로 [롤링 업그레이드 수행](#conduct-a-rolling-upgrade).</div>
+<div style="display: none;">- 밀버스 v2.2.3 이상 릴리스에서 v2.5.17로 [롤링 업그레이드 수행](#conduct-a-rolling-upgrade).</div>
 <ul>
-<li><p>v2.2.3 이전 마이너 릴리스에서 v2.5.16으로 업그레이드하려면<a href="#Upgrade-Milvus-using-Helm">헬름을 사용하여 Milvus를 업그레이드</a> 한다.</p></li>
-<li><p>Milvus v2.1.x에서 v2.5.16으로 업그레이드하기 전에<a href="#Migrate-the-metadata">메타데이터를 마이그레이션한다</a>.</p></li>
+<li><p>v2.2.3 이전 마이너 릴리스에서 v2.5.17로 업그레이드하려면<a href="#Upgrade-Milvus-using-Helm">헬름을 사용하여 Milvus를 업그레이드</a> 한다.</p></li>
+<li><p>Milvus v2.1.x에서 v2.5.17로 업그레이드하기 전에<a href="#Migrate-the-metadata">메타데이터를 마이그레이션한다</a>.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">롤링 업그레이드 수행<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>작동</td><td><code translate="no">update</code></td><td>False</td></tr>
 </tbody>
 </table>
-<p>Milvus 인스턴스의 모든 배포가 정상 상태에 있는지 확인했습니다. 다음 명령을 실행하여 Milvus 인스턴스를 2.5.16으로 업그레이드할 수 있습니다.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.16 -w &#x27;milvusdb/milvus:v2.5.16&#x27;
+<p>Milvus 인스턴스의 모든 배포가 정상 상태에 있는지 확인했습니다. 다음 명령을 실행하여 Milvus 인스턴스를 2.5.17로 업그레이드할 수 있습니다.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.17 -w &#x27;milvusdb/milvus:v2.5.17&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -192,11 +192,41 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.
         ></path>
       </svg>
     </button></h2><p>Milvus 2.2.0부터는 메타데이터가 이전 릴리즈의 메타데이터와 호환되지 않는다. 다음 예제 코드 조각은 Milvus 2.1.4에서 Milvus 2.2.0으로 업그레이드하는 것을 가정한다.</p>
-<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1. Milvus 버전 확인</h3><p><code translate="no">$ helm list</code> 을 실행하여 Milvus 앱 버전을 확인합니다. <code translate="no">APP VERSION</code> 이 2.1.4임을 확인할 수 있습니다.</p>
+<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1. Milvus 버전 확인<button data-href="#1-Check-the-Milvus-version" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">$ helm list</code> 을 실행하여 Milvus 앱 버전을 확인합니다. <code translate="no">APP VERSION</code> 이 2.1.4임을 확인할 수 있습니다.</p>
 <pre><code translate="no">NAME                NAMESPACE   REVISION    UPDATED                                 STATUS      CHART           APP VERSION    
 <span class="hljs-keyword">new</span><span class="hljs-operator">-</span><span class="hljs-keyword">release</span>         <span class="hljs-keyword">default</span>     <span class="hljs-number">1</span>           <span class="hljs-number">2022</span><span class="hljs-number">-11</span><span class="hljs-number">-21</span> <span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">25.51539</span> <span class="hljs-operator">+</span><span class="hljs-number">0800</span> CST     deployed    milvus<span class="hljs-number">-3.2</span><span class="hljs-number">.18</span>   <span class="hljs-number">2.1</span><span class="hljs-number">.4</span> 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Check-the-running-pods" class="common-anchor-header">2. 실행 중인 포드 확인</h3><p><code translate="no">$ kubectl get pods</code> 을 실행하여 실행 중인 파드를 확인합니다. 다음과 같은 출력을 확인할 수 있습니다.</p>
+<h3 id="2-Check-the-running-pods" class="common-anchor-header">2. 실행 중인 포드 확인<button data-href="#2-Check-the-running-pods" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">$ kubectl get pods</code> 을 실행하여 실행 중인 파드를 확인합니다. 다음과 같은 출력을 확인할 수 있습니다.</p>
 <pre><code translate="no">NAME                                             READY   STATUS      RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-number">21</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-number">21</span>m
@@ -225,11 +255,41 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-1</span>                   <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-number">20</span>m
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>pulsar<span class="hljs-operator">-</span>zookeeper<span class="hljs-number">-2</span>                   <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-number">20</span>m
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-image-tag" class="common-anchor-header">3. 이미지 태그 확인</h3><p>파드의 이미지 태그를 확인합니다 <code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code>. Milvus 클러스터의 릴리즈가 v2.1.4임을 확인할 수 있습니다.</p>
+<h3 id="3-Check-the-image-tag" class="common-anchor-header">3. 이미지 태그 확인<button data-href="#3-Check-the-image-tag" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>파드의 이미지 태그를 확인합니다 <code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code>. Milvus 클러스터의 릴리즈가 v2.1.4임을 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods my-release-milvus-proxy-6c548f787f-scspp -o=jsonpath=<span class="hljs-string">&#x27;{$.spec.containers[0].image}&#x27;</span></span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">milvusdb/milvus:v2.1.4</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="4-Migrate-the-metadata" class="common-anchor-header">4. 메타데이터 마이그레이션</h3><p>Milvus 2.2의 주요 변경 사항은 세그먼트 인덱스의 메타데이터 구조입니다. 따라서 Milvus를 v2.1.x에서 v2.2.0으로 업그레이드하는 동안 헬름을 사용하여 메타데이터를 마이그레이션해야 한다. 다음은 메타데이터를 안전하게 마이그레이션하기 위한 <a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">스크립트이다</a>.</p>
+<h3 id="4-Migrate-the-metadata" class="common-anchor-header">4. 메타데이터 마이그레이션<button data-href="#4-Migrate-the-metadata" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 2.2의 주요 변경 사항은 세그먼트 인덱스의 메타데이터 구조입니다. 따라서 Milvus를 v2.1.x에서 v2.2.0으로 업그레이드하는 동안 헬름을 사용하여 메타데이터를 마이그레이션해야 한다. 다음은 메타데이터를 안전하게 마이그레이션하기 위한 <a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">스크립트이다</a>.</p>
 <p>이 스크립트는 K8s 클러스터에 설치된 Milvus에만 적용됩니다. 프로세스 중에 오류가 발생하면 먼저 롤백 작업을 통해 이전 버전으로 롤백하세요.</p>
 <p>다음 표에는 메타 마이그레이션을 위해 수행할 수 있는 작업이 나열되어 있습니다.</p>
 <table>
@@ -259,7 +319,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ol>
 <h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Milvus를 v2.1.x에서 2.2.0으로 업그레이드합니다.</h4><p>다음 명령은 Milvus를 v2.1.4에서 2.2.0으로 업그레이드한다고 가정합니다. 필요에 맞는 버전으로 변경하세요.</p>
 <ol>
-<li><p>밀버스 인스턴스 이름, 소스 밀버스 버전, 대상 밀버스 버전을 지정합니다.</p>
+<li><p>Milvus 인스턴스 이름, 소스 Milvus 버전, 대상 Milvus 버전을 지정합니다.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus가 기본 K8s 네임스페이스에 설치되지 않은 경우 <code translate="no">-n</code> 로 네임스페이스를 지정합니다.</p>

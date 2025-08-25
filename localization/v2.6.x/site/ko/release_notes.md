@@ -47,10 +47,40 @@ title: 릴리스 노트
 <div class="alert warning">
 <p>아키텍처 변경으로 인해 2.6.0 이전 버전에서 직접 업그레이드는 지원되지 않습니다. <a href="/docs/ko/upgrade_milvus_cluster-operator.md">업그레이드 가이드를</a> 참조하세요.</p>
 </div>
-<h3 id="Whats-new-in-260-since-RC" class="common-anchor-header">2.6.0의 새로운 기능(RC 이후)</h3><h4 id="Optimized-storage-format-v2" class="common-anchor-header">최적화된 스토리지 형식 v2</h4><p>혼합 스칼라 및 벡터 데이터 저장, 특히 비정형 데이터의 포인트 조회 문제를 해결하기 위해 Milvus 2.6에서는 저장 형식 V2를 도입했습니다. 이 새로운 적응형 컬럼형 저장 포맷은 "좁은 컬럼 병합 + 넓은 컬럼 독립" 레이아웃 전략을 채택하여 벡터 데이터베이스에서 포인트 조회와 소량 검색을 처리할 때 발생하는 성능 병목 현상을 근본적으로 해결합니다.</p>
+<h3 id="Whats-new-in-260-since-RC" class="common-anchor-header">2.6.0의 새로운 기능(RC 이후)<button data-href="#Whats-new-in-260-since-RC" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Optimized-storage-format-v2" class="common-anchor-header">최적화된 스토리지 형식 v2</h4><p>혼합 스칼라 및 벡터 데이터 저장, 특히 비정형 데이터의 포인트 조회 문제를 해결하기 위해 Milvus 2.6에서는 저장 형식 V2를 도입했습니다. 이 새로운 적응형 컬럼형 저장 포맷은 "좁은 컬럼 병합 + 넓은 컬럼 독립" 레이아웃 전략을 채택하여 벡터 데이터베이스에서 포인트 조회와 소량 검색을 처리할 때 발생하는 성능 병목 현상을 근본적으로 해결합니다.</p>
 <p>이제 새로운 포맷은 I/O 증폭 없이 효율적인 랜덤 액세스를 지원하며 이전에 채택된 바닐라 Parquet 포맷에 비해 최대 100배의 성능 향상을 달성하여 분석 처리와 정밀한 벡터 검색을 모두 필요로 하는 AI 워크로드에 이상적입니다. 또한 일반적인 워크로드의 경우 파일 수를 최대 98%까지 줄일 수 있습니다. 주요 압축을 위한 메모리 소비는 300%까지 줄어들고, 읽기 작업은 최대 80%, 쓰기 작업은 600% 이상 최적화됩니다.</p>
 <h4 id="JSON-flat-index-beta" class="common-anchor-header">JSON 플랫 인덱스(베타)</h4><p>Milvus 2.6은 매우 동적인 JSON 스키마를 처리하기 위해 JSON 플랫 인덱스를 도입했습니다. 특정 경로와 예상 유형을 미리 선언해야 하는 JSON 경로 인덱스와 달리, JSON 플랫 인덱스는 주어진 경로 아래 중첩된 모든 구조를 자동으로 찾아서 색인합니다. JSON 필드를 색인할 때, 전체 하위 트리를 재귀적으로 평탄화하여 깊이나 유형에 관계없이 발생하는 모든 경로-값 쌍에 대해 반전된 색인 항목을 생성합니다. 이러한 자동 평탄화 기능은 새로운 필드가 경고 없이 나타나는 진화하는 스키마에 이상적인 JSON 플랫 인덱스를 만들어 줍니다. 예를 들어, '메타데이터' 필드를 색인하는 경우, 시스템은 새로운 색인 구성 없이도 들어오는 데이터에 나타나는 'metadata.version2.features.experimental'과 같은 새로운 중첩 필드를 자동으로 처리합니다.</p>
-<h3 id="Core-260-features-recall" class="common-anchor-header">핵심 2.6.0 기능 리콜</h3><div class="alert note">
+<h3 id="Core-260-features-recall" class="common-anchor-header">핵심 2.6.0 기능 리콜<button data-href="#Core-260-features-recall" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="alert note">
 <p>2.6.0-RC에 도입된 아키텍처 변경 사항 및 기능에 대한 자세한 내용은 <a href="#v260-rc1">2.6.0-rc1 릴리즈 노트를</a> 참조하세요.</p>
 </div>
 <h4 id="Architecture-simplification" class="common-anchor-header">아키텍처 간소화</h4><ul>
@@ -99,13 +129,43 @@ title: 릴리스 노트
 <div class="alert note">
 <p>이 버전은 Milvus 2.6.0의 사전 릴리스 버전입니다. 최신 기능을 사용해 보려면 이 버전을 새로 배포하여 설치하세요. Milvus v2.5.x 이하에서 2.6.0-rc1로 업그레이드하는 것은 지원되지 않습니다.</p>
 </div>
-<h3 id="Architecture-Changes" class="common-anchor-header">아키텍처 변경 사항</h3><p>2.6부터 Milvus는 성능, 확장성 및 사용 편의성을 개선하기 위한 중요한 아키텍처 변경 사항을 도입했습니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하세요.</p>
+<h3 id="Architecture-Changes" class="common-anchor-header">아키텍처 변경 사항<button data-href="#Architecture-Changes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>2.6부터 Milvus는 성능, 확장성 및 사용 편의성을 개선하기 위한 중요한 아키텍처 변경 사항을 도입했습니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하세요.</p>
 <h4 id="Streaming-Node-GA" class="common-anchor-header">스트리밍 노드(GA)</h4><p>이전 버전에서는 스트리밍 데이터가 프록시에 의해 WAL에 쓰여지고 쿼리노드와 데이터노드에 의해 읽혀졌습니다. 이 아키텍처는 쓰기 측에서 합의를 달성하기 어려웠고 읽기 측에서 복잡한 로직이 필요했습니다. 또한 쿼리 위임자가 쿼리 노드에 위치하여 확장성을 저해했습니다. Milvus 2.5.0에서는 2.6.0 버전에서 GA가 되는 스트리밍 노드가 도입되었습니다. 이 구성 요소는 이제 모든 샤드 수준의 WAL 읽기/쓰기 작업을 담당하며 쿼리 위임자 역할도 수행하여 앞서 언급한 문제를 해결하고 새로운 최적화를 가능하게 합니다.</p>
 <p><strong>중요 업그레이드 공지</strong>: 스트리밍 노드는 아키텍처가 크게 변경되었으므로 이전 버전에서 Milvus 2.6.0-rc1로 직접 업그레이드하는 것은 지원되지 않습니다.</p>
 <h4 id="Woodpecker-Native-WAL" class="common-anchor-header">딱따구리 네이티브 WAL</h4><p>Milvus는 이전에 WAL을 위해 Kafka 또는 Pulsar와 같은 외부 시스템에 의존했습니다. 이러한 시스템은 기능적으로는 훌륭했지만, 특히 중소규모 배포의 경우 상당한 운영 복잡성과 리소스 오버헤드를 추가했습니다. Milvus 2.6에서는 이러한 시스템이 특수 목적의 클라우드 네이티브 WAL 시스템인 Woodpecker로 대체됩니다. 우드페커는 오브젝트 스토리지용으로 설계되어 로컬 및 오브젝트 스토리지 기반 제로 디스크 모드를 모두 지원하며, 운영을 간소화하는 동시에 성능과 확장성을 개선합니다.</p>
 <h4 id="DataNode-and-IndexNode-Merge" class="common-anchor-header">데이터노드와 인덱스노드 병합</h4><p>Milvus 2.6에서는 압축, 대량 가져오기, 통계 수집, 인덱스 구축과 같은 작업이 이제 통합된 스케줄러로 관리됩니다. 이전에 데이터 노드에서 처리하던 데이터 지속성 기능이 스트리밍 노드로 옮겨졌습니다. 배포와 유지 관리를 간소화하기 위해 IndexNode와 DataNode가 단일 DataNode 구성 요소로 병합되었습니다. 이제 이 통합 노드가 이러한 모든 중요한 작업을 실행하여 운영 복잡성을 줄이고 리소스 활용을 최적화합니다.</p>
 <h4 id="Coordinator-Merge-into-MixCoord" class="common-anchor-header">코디네이터를 MixCoord로 병합</h4><p>별도의 RootCoord, QueryCoord, DataCoord 모듈을 사용한 이전 설계에서는 모듈 간 통신에 복잡성이 발생했습니다. 시스템 설계를 단순화하기 위해 이러한 구성 요소는 MixCoord라는 단일 통합 코디네이터로 병합되었습니다. 이러한 통합은 네트워크 기반 통신을 내부 함수 호출로 대체하여 분산 프로그래밍의 복잡성을 줄여 시스템 운영의 효율성을 높이고 개발 및 유지보수를 간소화합니다.</p>
-<h3 id="Key-Features" class="common-anchor-header">주요 기능</h3><h4 id="RaBitQ-1-bit-Quantization" class="common-anchor-header">RaBitQ 1비트 양자화</h4><p>대규모 데이터 세트를 처리하기 위해 1비트 양자화는 리소스 활용률과 검색 성능을 향상시키는 데 효과적인 기술입니다. 하지만 기존 방식은 회상률에 부정적인 영향을 미칠 수 있습니다. Milvus 2.6에서는 원 연구 저자와의 협력을 통해 1비트 압축의 리소스 및 성능 이점을 제공하면서 높은 검색 정확도를 유지하는 1비트 양자화 솔루션인 RaBitQ를 도입했습니다.</p>
+<h3 id="Key-Features" class="common-anchor-header">주요 기능<button data-href="#Key-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="RaBitQ-1-bit-Quantization" class="common-anchor-header">RaBitQ 1비트 양자화</h4><p>대규모 데이터 세트를 처리하기 위해 1비트 양자화는 리소스 활용률과 검색 성능을 향상시키는 데 효과적인 기술입니다. 하지만 기존 방식은 회상률에 부정적인 영향을 미칠 수 있습니다. Milvus 2.6에서는 원 연구 저자와의 협력을 통해 1비트 압축의 리소스 및 성능 이점을 제공하면서 높은 검색 정확도를 유지하는 1비트 양자화 솔루션인 RaBitQ를 도입했습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/ivf-rabitq.md">IVF_RABITQ를</a> 참조하세요.</p>
 <h4 id="JSON-Capability-Enhancement" class="common-anchor-header">JSON 기능 향상</h4><p>Milvus 2.6은 다음과 같은 개선 사항으로 JSON 데이터 유형에 대한 지원을 강화했습니다:</p>
 <ul>
@@ -131,7 +191,7 @@ title: 릴리스 노트
 <h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">MinHash LSH 인덱스(베타)</h4><p>모델 훈련에서 데이터 중복 제거의 필요성을 해결하기 위해 Milvus 2.6에서는 MINHASH_LSH 인덱스에 대한 지원이 추가되었습니다. 이 기능은 중복에 가까운 문서를 식별하기 위해 문서 간의 Jaccard 유사성을 추정하는 계산 효율적이고 확장 가능한 방법을 제공합니다. 사용자는 전처리 과정에서 텍스트 문서에 대한 MinHash 서명을 생성하고 Milvus의 MINHASH_LSH 인덱스를 사용하여 대규모 데이터 세트에서 유사한 콘텐츠를 효율적으로 찾아 데이터 정리 및 모델 품질을 개선할 수 있습니다.</p>
 <h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">시간 인식 감쇠 함수</h4><p>Milvus 2.6은 시간이 지남에 따라 정보 값이 변하는 시나리오를 해결하기 위해 시간 인식 감쇠 함수를 도입했습니다. 결과 순위 재조정 중에 사용자는 타임스탬프 필드를 기반으로 지수, 가우스 또는 선형 감쇠 함수를 적용하여 문서의 관련성 점수를 조정할 수 있습니다. 이렇게 하면 뉴스 피드, 이커머스, AI 에이전트의 메모리와 같은 애플리케이션에서 중요한 최신 콘텐츠에 우선순위를 부여할 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/decay-ranker-overview.md">감쇠 랭커 개요를</a> 참조하세요.</p>
-<h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">온라인 스키마 진화를 위한 필드 추가</h4><p>스키마 유연성을 높이기 위해 Milvus 2.6은 이제 온라인에서 기존 컬렉션의 스키마에 새로운 스칼라 또는 벡터 필드를 추가할 수 있도록 지원합니다. 따라서 애플리케이션 요구 사항이 변경될 때 새 컬렉션을 생성하고 중단 없는 데이터 마이그레이션을 수행할 필요가 없습니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드 추가하기를</a> 참조하세요.</p>
-<h4 id="INT8-Vector-Support" class="common-anchor-header">INT8 벡터 지원</h4><p>8비트 정수 임베딩을 생성하는 양자화된 모델의 사용이 증가함에 따라 Milvus 2.6에서는 INT8 벡터에 대한 기본 데이터 유형 지원이 추가되었습니다. 이를 통해 사용자는 양자화 해제 없이 이러한 벡터를 직접 수집할 수 있어 계산, 네트워크 대역폭, 스토리지 비용을 절감할 수 있습니다. 이 기능은 처음에 HNSW 계열 인덱스에 대해 지원됩니다.</p>
+<h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">온라인 스키마 진화를 위한 필드 추가</h4><p>스키마 유연성을 높이기 위해 Milvus 2.6은 이제 온라인에서 기존 컬렉션의 스키마에 새로운 스칼라 필드를 추가할 수 있도록 지원합니다. 이렇게 하면 애플리케이션 요구 사항이 변경될 때 새 컬렉션을 생성하고 중단 없는 데이터 마이그레이션을 수행할 필요가 없습니다.</p>
+<p>자세한 내용은 <a href="/docs/ko/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드 추가를</a> 참조하세요.</p>
+<h4 id="INT8-Vector-Support" class="common-anchor-header">INT8 벡터 지원</h4><p>8비트 정수 임베딩을 생성하는 양자화된 모델의 사용이 증가함에 따라 Milvus 2.6에서는 INT8 벡터에 대한 기본 데이터 유형 지원이 추가되었습니다. 이를 통해 사용자는 양자화 해제 없이 이러한 벡터를 직접 수집할 수 있으므로 계산, 네트워크 대역폭, 스토리지 비용을 절감할 수 있습니다. 이 기능은 처음에 HNSW 계열 인덱스에 대해 지원됩니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터를</a> 참조하세요.</p>

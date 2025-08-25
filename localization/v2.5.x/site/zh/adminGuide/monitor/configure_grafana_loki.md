@@ -3,7 +3,6 @@ id: configure_grafana_loki.md
 title: 配置 Grafana Loki
 summary: 本主题介绍如何使用 Loki 收集日志，并使用 Grafana 查询 Milvus 集群的日志。
 ---
-
 <h1 id="Configure-Grafana-Loki" class="common-anchor-header">配置 Grafana Loki<button data-href="#Configure-Grafana-Loki" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -26,6 +25,7 @@ summary: 本主题介绍如何使用 Loki 收集日志，并使用 Grafana 查�
 <li>为 Loki 配置对象存储。</li>
 <li>使用 Grafana 查询日志。</li>
 </ul>
+<p>作为参考，<a href="https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent">Promtail</a>将被弃用，因此我们引入 Alloy，它已被 Grafana Labs 正式推荐为收集 Kubernetes 日志并将其转发给 Loki 的新代理。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,46 +61,7 @@ summary: 本主题介绍如何使用 Loki 收集日志，并使用 Grafana 查�
         ></path>
       </svg>
     </button></h2><p>Loki 是受 Prometheus 启发而开发的日志聚合系统。使用 Helm 部署 Loki，从 Milvus 集群收集日志。</p>
-<h3 id="1-Add-Grafanas-Helm-Chart-Repository" class="common-anchor-header">1.添加 Grafana 的 Helm 图表存储库</h3><p>将 Grafana 的图表存储库添加到 Helm 并更新：</p>
-<pre><code translate="no">helm repo <span class="hljs-keyword">add</span> grafana https:<span class="hljs-comment">//grafana.github.io/helm-charts</span>
-helm repo update
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Configure-Object-Storage-for-Loki" class="common-anchor-header">2.为 Loki 配置对象存储</h3><p>从以下存储选项中选择一个，并创建<code translate="no">loki.yaml</code> 配置文件：</p>
-<ul>
-<li><p>选项 1：使用 MinIO 存储</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki</span>:
-  <span class="hljs-attr">commonConfig</span>:
-    <span class="hljs-attr">replication_factor</span>: <span class="hljs-number">1</span>
-  <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
-
-<span class="hljs-attr">minio</span>:
-<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
-<button class="copy-code-btn"></button></code></pre></li>
-
-<li><p>选项 2：使用 AWS S3 存储</p>
-<p>在以下示例中，用自己的 S3 访问密钥和 ID 替换<code translate="no">&lt;accessKey&gt;</code> 和<code translate="no">&lt;keyId&gt;</code> ，用 S3 端点替换<code translate="no">s3.endpoint</code> ，用 S3 区域替换<code translate="no">s3.region</code> 。</p>
-<pre><code translate="no" class="language-yaml">loki:
-  commonConfig:
-    replication_factor: 1
-  auth_enabled: <span class="hljs-literal">false</span>
-  storage:
-    bucketNames:
-      chunks: loki-chunks
-      ruler: loki-ruler
-      admin: loki-admin
-    <span class="hljs-built_in">type</span>: <span class="hljs-string">&#x27;s3&#x27;</span>
-    s3:
-      endpoint: s3.us-west-2.amazonaws.com
-      region: us-west-2
-      secretAccessKey: &lt;accessKey&gt;
-      accessKeyId: &lt;keyId&gt;
-<button class="copy-code-btn"></button></code></pre></li>
-</ul>
-<h3 id="3-Install-Loki" class="common-anchor-header">3.安装 Loki</h3><p>运行以下命令安装 Loki：</p>
-<pre><code translate="no" class="language-shell">kubectl create ns loki
-helm install --values loki.yaml loki grafana/loki -n loki
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-Promtail" class="common-anchor-header">部署 Promtail<button data-href="#Deploy-Promtail" class="anchor-icon" translate="no">
+<h3 id="1-Add-Grafanas-Helm-Chart-Repository" class="common-anchor-header">1.添加 Grafana 的 Helm 图表存储库<button data-href="#1-Add-Grafanas-Helm-Chart-Repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,14 +76,201 @@ helm install --values loki.yaml loki grafana/loki -n loki
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Promtail 是 Loki 的日志 Collections 代理。它从 Milvus pod 中读取日志并将其发送到 Loki。</p>
-<h3 id="1-Create-Promtail-Configuration" class="common-anchor-header">1.创建 Promtail 配置</h3><p>创建<code translate="no">promtail.yaml</code> 配置文件：</p>
-<pre><code translate="no" class="language-yaml">config:
-  clients:
-    - url: http://loki-gateway/loki/api/v1/push
+    </button></h3><p>将 Grafana 的图表存储库添加到 Helm 并更新：</p>
+<pre><code translate="no">helm repo <span class="hljs-keyword">add</span> grafana https:<span class="hljs-comment">//grafana.github.io/helm-charts</span>
+helm repo update
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Install-Promtail" class="common-anchor-header">2.安装 Promtail</h3><p>使用 Helm 安装 Promtail：</p>
-<pre><code translate="no" class="language-shell">helm install  --values promtail.yaml promtail grafana/promtail -n loki
+<h3 id="2-Configure-Object-Storage-for-Loki" class="common-anchor-header">2.为 Loki 配置对象存储<button data-href="#2-Configure-Object-Storage-for-Loki" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>从以下存储选项中选择一个，并创建<code translate="no">loki.yaml</code> 配置文件：</p>
+<ul>
+<li><p>选项 1：使用 MinIO 存储</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki:</span>
+  <span class="hljs-attr">commonConfig:</span>
+    <span class="hljs-attr">replication_factor:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">auth_enabled:</span> <span class="hljs-literal">false</span>
+
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>选项 2：使用 AWS S3 存储</p>
+<p>在以下示例中，用自己的 S3 访问密钥和 ID 替换<code translate="no">&lt;accessKey&gt;</code> 和<code translate="no">&lt;keyId&gt;</code> ，用 S3 端点替换<code translate="no">s3.endpoint</code> ，用 S3 区域替换<code translate="no">s3.region</code> 。</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki:</span>
+  <span class="hljs-attr">commonConfig:</span>
+    <span class="hljs-attr">replication_factor:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">auth_enabled:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">storage:</span>
+    <span class="hljs-attr">bucketNames:</span>
+      <span class="hljs-attr">chunks:</span> <span class="hljs-string">loki-chunks</span>
+      <span class="hljs-attr">ruler:</span> <span class="hljs-string">loki-ruler</span>
+      <span class="hljs-attr">admin:</span> <span class="hljs-string">loki-admin</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">&#x27;s3&#x27;</span>
+    <span class="hljs-attr">s3:</span>
+      <span class="hljs-attr">endpoint:</span> <span class="hljs-string">s3.us-west-2.amazonaws.com</span>
+      <span class="hljs-attr">region:</span> <span class="hljs-string">us-west-2</span>
+      <span class="hljs-attr">secretAccessKey:</span> <span class="hljs-string">&lt;accessKey&gt;</span>
+      <span class="hljs-attr">accessKeyId:</span> <span class="hljs-string">&lt;keyId&gt;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
+<h3 id="3-Install-Loki" class="common-anchor-header">3.安装 Loki<button data-href="#3-Install-Loki" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行以下命令安装 Loki：</p>
+<pre><code translate="no" class="language-shell">kubectl create ns loki
+helm install --values loki.yaml loki grafana/loki -n loki
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Deploy-Alloy" class="common-anchor-header">部署 Alloy<button data-href="#Deploy-Alloy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>我们将向您展示 Alloy<a href="https://grafana.com/docs/alloy/latest/configure/">配置</a>。</p>
+<h3 id="1-Create-Alloy-Configuration" class="common-anchor-header">1.创建 Alloy 配置<button data-href="#1-Create-Alloy-Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我们将使用以下<code translate="no">alloy.yaml</code> 收集所有 Kubernetes pod 的日志，并通过 loki-gateway 发送给 Loki：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">alloy:</span>
+  <span class="hljs-attr">enableReporting:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">resources:</span> {}
+  <span class="hljs-attr">configMap:</span>
+    <span class="hljs-attr">create:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">content:</span> <span class="hljs-string">|-
+      loki.write &quot;default&quot; {
+        endpoint {
+          url = &quot;http://loki-gateway/loki/api/v1/push&quot;
+        }
+      }
+</span>
+      <span class="hljs-string">discovery.kubernetes</span> <span class="hljs-string">&quot;pod&quot;</span> {
+        <span class="hljs-string">role</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;pod&quot;</span>
+      }
+
+      <span class="hljs-string">loki.source.kubernetes</span> <span class="hljs-string">&quot;pod_logs&quot;</span> {
+        <span class="hljs-string">targets</span>    <span class="hljs-string">=</span> <span class="hljs-string">discovery.relabel.pod_logs.output</span>
+        <span class="hljs-string">forward_to</span> <span class="hljs-string">=</span> [<span class="hljs-string">loki.write.default.receiver</span>]
+      }
+
+      <span class="hljs-string">//</span> <span class="hljs-string">Rewrite</span> <span class="hljs-string">the</span> <span class="hljs-string">label</span> <span class="hljs-string">set</span> <span class="hljs-string">to</span> <span class="hljs-string">make</span> <span class="hljs-string">log</span> <span class="hljs-string">query</span> <span class="hljs-string">easier</span>
+      <span class="hljs-string">discovery.relabel</span> <span class="hljs-string">&quot;pod_logs&quot;</span> {
+        <span class="hljs-string">targets</span> <span class="hljs-string">=</span> <span class="hljs-string">discovery.kubernetes.pod.targets</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_namespace&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;namespace&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;pod&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;pod&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;container&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;container&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;app&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_label_app_kubernetes_io_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_label_app_kubernetes_io_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;app&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;job&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_namespace&quot;</span>, <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_namespace&quot;</span>, <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;job&quot;</span>
+          <span class="hljs-string">separator</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;/&quot;</span>
+          <span class="hljs-string">replacement</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;$1&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">L&quot;__path__&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_uid&quot;</span>, <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_uid&quot;</span>, <span class="hljs-string">&quot;__meta_kubernetes_pod_container_name&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;__path__&quot;</span>
+          <span class="hljs-string">separator</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;/&quot;</span>
+          <span class="hljs-string">replacement</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;/var/log/pods/*$1/*.log&quot;</span>
+        }
+
+        <span class="hljs-string">//</span> <span class="hljs-string">&quot;container_runtime&quot;</span> <span class="hljs-string">&lt;-</span> <span class="hljs-string">&quot;__meta_kubernetes_pod_container_id&quot;</span>
+        <span class="hljs-string">rule</span> {
+          <span class="hljs-string">source_labels</span> <span class="hljs-string">=</span> [<span class="hljs-string">&quot;__meta_kubernetes_pod_container_id&quot;</span>]
+          <span class="hljs-string">action</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;replace&quot;</span>
+          <span class="hljs-string">target_label</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;container_runtime&quot;</span>
+          <span class="hljs-string">regex</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;^(\\S+):\\/\\/.+$&quot;</span>
+          <span class="hljs-string">replacement</span> <span class="hljs-string">=</span> <span class="hljs-string">&quot;$1&quot;</span>
+        }
+      }
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="2-Install-Alloy" class="common-anchor-header">2.安装 Alloy<button data-href="#2-Install-Alloy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">helm install  --values promtail.yaml promtail grafana/promtail -n loki
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Query-Logs-with-Grafana" class="common-anchor-header">使用 Grafana 查询日志<button data-href="#Query-Logs-with-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,19 +287,49 @@ helm install --values loki.yaml loki grafana/loki -n loki
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>部署 Grafana 并配置它连接到 Loki 以查询日志。</p>
-<h3 id="1-Deploy-Grafana" class="common-anchor-header">1.部署 Grafana</h3><p>使用以下命令安装 Grafana：</p>
+    </button></h2><p>部署 Grafana 并将其配置为连接到 Loki 以查询日志。</p>
+<h3 id="1-Deploy-Grafana" class="common-anchor-header">1.部署 Grafana<button data-href="#1-Deploy-Grafana" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用以下命令安装 Grafana：</p>
 <pre><code translate="no" class="language-shell">kubectl create ns monitoring
 helm install my-grafana grafana/grafana --namespace monitoring
 <button class="copy-code-btn"></button></code></pre>
 <p>在访问 Grafana 之前，您需要获取<code translate="no">admin</code> 密码：</p>
-<pre><code translate="no" class="language-shell">kubectl get secret --namespace monitoring my-grafana -o jsonpath=<span class="hljs-string">&quot;{.data.admin-password}&quot;</span> | <span class="hljs-built_in">base64</span> --decode ; <span class="hljs-built_in">echo</span>
+<pre><code translate="no" class="language-shell">kubectl get secret --namespace monitoring my-grafana -o jsonpath=&quot;{.data.admin-password}&quot; | base64 --decode ; echo
 <button class="copy-code-btn"></button></code></pre>
 <p>然后，将 Grafana 端口转发到本地计算机：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">POD_NAME</span>=$(kubectl get pods --namespace monitoring -l <span class="hljs-string">&quot;app.kubernetes.io/name=grafana,app.kubernetes.io/instance=my-grafana&quot;</span> -o jsonpath=<span class="hljs-string">&quot;{.items[0].metadata.name}&quot;</span>)
-kubectl --namespace monitoring port-forward $POD_NAME <span class="hljs-number">3000</span>
+<pre><code translate="no" class="language-shell">export POD_NAME=$(kubectl get pods --namespace monitoring -l &quot;app.kubernetes.io/name=grafana,app.kubernetes.io/instance=my-grafana&quot; -o jsonpath=&quot;{.items[0].metadata.name}&quot;)
+kubectl --namespace monitoring port-forward $POD_NAME 3000
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Add-Loki-as-a-Data-Source-in-Grafana" class="common-anchor-header">2.在 Grafana 中将 Loki 添加为数据源</h3><p>Grafana 运行后，您需要将 Loki 添加为查询日志的数据源。</p>
+<h3 id="2-Add-Loki-as-a-Data-Source-in-Grafana" class="common-anchor-header">2.在 Grafana 中将 Loki 添加为数据源<button data-href="#2-Add-Loki-as-a-Data-Source-in-Grafana" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Grafana 运行后，您需要将 Loki 添加为查询日志的数据源。</p>
 <ol>
 <li>打开网络浏览器并导航至<code translate="no">127.0.0.1:3000</code> 。使用之前获得的用户名<code translate="no">admin</code> 和密码登录。</li>
 <li>在左侧菜单中选择<strong>连接</strong>&gt;<strong>添加新连接</strong>。</li>
@@ -162,7 +340,22 @@ kubectl --namespace monitoring port-forward $POD_NAME <span class="hljs-number">
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>数据源</span> </span></p>
-<h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3.查询 Milvus 日志</h3><p>将 Loki 添加为数据源后，在 Grafana 中查询 Milvus 日志：</p>
+<h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3.查询 Milvus 日志<button data-href="#3-Query-Milvus-Logs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>将 Loki 添加为数据源后，在 Grafana 中查询 Milvus 日志：</p>
 <ol>
 <li>在左侧菜单中单击 "<strong>探索"</strong>。</li>
 <li>在页面左上角，选择 loki 数据源。</li>

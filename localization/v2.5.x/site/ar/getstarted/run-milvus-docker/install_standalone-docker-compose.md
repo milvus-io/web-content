@@ -57,7 +57,7 @@ title: تشغيل Milvus باستخدام Docker Compose (لينكس)
       </svg>
     </button></h2><p>يوفر Milvus ملف تكوين Docker Compose في مستودع Milvus. لتثبيت Milvus باستخدام Docker Compose، قم فقط بتشغيل</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.16/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.17/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -135,7 +135,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><a href="/docs/ar/v2.5.x/manage_databases.md">إدارة قواعد البيانات</a></li>
 <li><a href="/docs/ar/v2.5.x/manage-collections.md">إدارة المجموعات</a></li>
 <li><a href="/docs/ar/v2.5.x/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
+<li><a href="/docs/ar/v2.5.x/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
 <li><a href="/docs/ar/v2.5.x/single-vector-search.md">البحث في متجه واحد</a></li>
 <li><a href="/docs/ar/v2.5.x/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>

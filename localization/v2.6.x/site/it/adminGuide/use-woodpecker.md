@@ -1,10 +1,11 @@
 ---
 id: use-woodpecker.md
-title: Utilizzare Woodpecker (Milvus v2.6.x)
+title: Utilizzare WoodpeckerCompatible with Milvus 2.6.x
 related_key: Woodpecker
 summary: Imparare ad abilitare il picchio come WAL in milvus.
+beta: Milvus 2.6.x
 ---
-<h2 id="Use-Woodpecker-Milvus-v26x" class="common-anchor-header">Utilizzare Woodpecker (Milvus v2.6.x)<button data-href="#Use-Woodpecker-Milvus-v26x" class="anchor-icon" translate="no">
+<h1 id="Use-Woodpecker" class="common-anchor-header">Utilizzare Woodpecker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Use-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,18 +20,63 @@ summary: Imparare ad abilitare il picchio come WAL in milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Questa guida spiega come abilitare e utilizzare Woodpecker come Write-Ahead Log (WAL) in Milvus 2.6.x. Woodpecker è un WAL cloud-native progettato per l'archiviazione di oggetti, che offre un elevato throughput, un basso overhead operativo e una scalabilità continua. Per i dettagli sull'architettura e sui benchmark, vedere <a href="/docs/it/woodpecker_architecture.md">Woodpecker</a>.</p>
-<h3 id="Overview" class="common-anchor-header">Panoramica</h3><ul>
+    </button></h1><p>Questa guida spiega come abilitare e utilizzare Woodpecker come Write-Ahead Log (WAL) in Milvus 2.6.x. Woodpecker è un WAL cloud-native progettato per l'archiviazione di oggetti, che offre un elevato throughput, un basso overhead operativo e una scalabilità continua. Per i dettagli sull'architettura e sui benchmark, vedere <a href="/docs/it/woodpecker_architecture.md">Woodpecker</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
 <li>A partire da Milvus 2.6, Woodpecker è un WAL opzionale che fornisce scritture ordinate e recupero come servizio di log.</li>
 <li>Come coda di messaggi, si comporta in modo simile a Pulsar/Kafka e può essere abilitato tramite configurazione.</li>
 <li>Sono supportati due backend di archiviazione: file system locale (<code translate="no">local</code>) e archiviazione di oggetti (<code translate="no">minio</code>/S3-compatibile).</li>
 </ul>
-<h3 id="Quick-start" class="common-anchor-header">Avvio rapido</h3><p>Per abilitare Woodpecker, impostare il tipo di MQ su Woodpecker:</p>
+<h2 id="Quick-start" class="common-anchor-header">Avvio rapido<button data-href="#Quick-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Per abilitare Woodpecker, impostare il tipo di MQ su Woodpecker:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">woodpecker</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Nota: Il passaggio a <code translate="no">mq.type</code> per un cluster in esecuzione è un'operazione di aggiornamento. Seguire attentamente la procedura di aggiornamento e convalidarla su un cluster nuovo prima di passare alla produzione.</p>
-<h3 id="Configuration" class="common-anchor-header">Configurazione</h3><p>Di seguito è riportato il blocco di configurazione completo di Woodpecker (modificare <code translate="no">milvus.yaml</code> o sovrascrivere in <code translate="no">user.yaml</code>):</p>
+<h2 id="Configuration" class="common-anchor-header">Configurazione<button data-href="#Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Di seguito è riportato il blocco di configurazione completo di Woodpecker (modificare <code translate="no">milvus.yaml</code> o sovrascrivere in <code translate="no">user.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of woodpecker, used to manage Milvus logs of recent mutation operations, output streaming log, and provide embedded log sequential read and write.</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">meta:</span>
@@ -88,7 +134,22 @@ summary: Imparare ad abilitare il picchio come WAL in milvus.
 <li><strong>rootPath</strong>: Percorso di root per il backend di archiviazione (efficace per <code translate="no">local</code>; con <code translate="no">minio</code>, i percorsi sono dettati da bucket/prefisso).</li>
 </ul></li>
 </ul>
-<h3 id="Deployment-modes" class="common-anchor-header">Modalità di distribuzione</h3><p>Milvus supporta le modalità Standalone e Cluster. Matrice di supporto del backend di archiviazione Woodpecker:</p>
+<h2 id="Deployment-modes" class="common-anchor-header">Modalità di distribuzione<button data-href="#Deployment-modes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus supporta le modalità Standalone e Cluster. Matrice di supporto del backend di archiviazione Woodpecker:</p>
 <table>
 <thead>
 <tr><th></th><th><code translate="no">storage.type=local</code></th><th><code translate="no">storage.type=minio</code></th></tr>
@@ -118,7 +179,22 @@ summary: Imparare ad abilitare il picchio come WAL in milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Abilitare Woodpecker per un cluster Milvus su Kubernetes (Milvus Operator, storage=minio)</h3><p>Dopo aver installato <a href="/docs/it/install_cluster-milvusoperator.md">Milvus Operator</a>, avviare un cluster Milvus con Woodpecker abilitato usando l'esempio ufficiale:</p>
+    </button></h2><h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="common-anchor-header">Abilitare Woodpecker per un cluster Milvus su Kubernetes (Milvus Operator, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Milvus-Operator-storageminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dopo aver installato <a href="/docs/it/install_cluster-milvusoperator.md">Milvus Operator</a>, avviare un cluster Milvus con Woodpecker abilitato usando l'esempio ufficiale:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
 
 <button class="copy-code-btn"></button></code></pre>
@@ -145,7 +221,22 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <pre><code translate="no" class="language-bash">kubectl delete milvus my-release
 <button class="copy-code-btn"></button></code></pre>
 <p>Se è necessario regolare i parametri di Woodpecker, seguire le impostazioni descritte in <a href="/docs/it/deploy_pulsar.md">message storage config</a>.</p>
-<h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">Abilitare Woodpecker per un cluster Milvus su Kubernetes (Helm Chart, storage=minio)</h3><p>Per prima cosa aggiungere e aggiornare il grafico di Milvus Helm come descritto in <a href="/docs/it/install_cluster-helm.md">Eseguire Milvus in Kubernetes con Helm</a>.</p>
+<h3 id="Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="common-anchor-header">Abilitare Woodpecker per un cluster Milvus su Kubernetes (Helm Chart, storage=minio)<button data-href="#Enable-Woodpecker-for-a-Milvus-Cluster-on-Kubernetes-Helm-Chart-storageminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per prima cosa aggiungere e aggiornare il grafico di Milvus Helm come descritto in <a href="/docs/it/install_cluster-helm.md">Eseguire Milvus in Kubernetes con Helm</a>.</p>
 <p>Quindi eseguire il deploy con uno dei seguenti esempi:</p>
 <p>- Distribuzione in cluster (impostazioni consigliate con Woodpecker e Streaming Node abilitati):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
@@ -165,7 +256,22 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Dopo la distribuzione, seguire la documentazione per il port-forward e la connessione. Per regolare i parametri di Woodpecker, seguire le impostazioni descritte in <a href="/docs/it/deploy_pulsar.md">message storage config</a>.</p>
-<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Abilitare Woodpecker per Milvus Standalone in Docker (storage=locale)</h3><p>Seguire <a href="/docs/it/install_standalone-docker.md">Eseguire Milvus in Docker</a>. Esempio:</p>
+<h3 id="Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="common-anchor-header">Abilitare Woodpecker per Milvus Standalone in Docker (storage=locale)<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-in-Docker-storagelocal" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Seguire <a href="/docs/it/install_standalone-docker.md">Eseguire Milvus in Docker</a>. Esempio:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
@@ -182,7 +288,22 @@ EOF
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
 <p>Per modificare ulteriormente le impostazioni di Woodpecker, aggiornare <code translate="no">user.yaml</code> ed eseguire <code translate="no">bash standalone_embed.sh restart</code>.</p>
-<h3 id="Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="common-anchor-header">Abilitare Woodpecker per Milvus Standalone con Docker Compose (storage=minio)</h3><p>Seguire <a href="/docs/it/install_standalone-docker-compose.md">Eseguire Milvus con Docker Compose</a>. Esempio:</p>
+<h3 id="Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="common-anchor-header">Abilitare Woodpecker per Milvus Standalone con Docker Compose (storage=minio)<button data-href="#Enable-Woodpecker-for-Milvus-Standalone-with-Docker-Compose-storageminio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Seguire <a href="/docs/it/install_standalone-docker-compose.md">Eseguire Milvus con Docker Compose</a>. Esempio:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
 wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
@@ -226,11 +347,11 @@ docker restart milvus-standalone
 <li>Manopole Woodpecker<ul>
 <li>Aumentate <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> e <code translate="no">maxFlushThreads</code> per avere flush più grandi e un maggiore parallelismo.</li>
 <li>Regolate <code translate="no">maxInterval</code> in base alle caratteristiche del supporto (scambiate la latenza con il throughput con un'aggregazione più lunga).</li>
-<li>Per l'archiviazione degli oggetti, considerare di aumentare <code translate="no">segmentRollingPolicy.maxSize</code> per ridurre gli scambi di segmento.</li>
+<li>Per l'archiviazione degli oggetti, considerare l'aumento di <code translate="no">segmentRollingPolicy.maxSize</code> per ridurre gli scambi di segmento.</li>
 </ul></li>
 <li>Lato client/applicazione<ul>
 <li>Usare batch di dimensioni maggiori e un numero maggiore di scrittori/clienti simultanei.</li>
-<li>Controllare la tempistica di aggiornamento e creazione dell'indice (batch up prima dell'attivazione) per evitare frequenti scritture di piccole dimensioni.</li>
+<li>Controllare la tempistica di aggiornamento e creazione dell'indice (batch up prima dell'attivazione) per evitare frequenti piccole scritture.</li>
 </ul></li>
 </ul>
 <p>Dimostrazione dell'inserimento in batch</p>
