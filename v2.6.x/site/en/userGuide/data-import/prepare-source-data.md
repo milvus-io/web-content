@@ -645,7 +645,7 @@ try {
 
 Possible folder structures are as follows:
 
-```bash
+```
 # JSON
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
