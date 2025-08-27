@@ -621,7 +621,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>BulkWriter</strong> génère un UUID, crée un sous-dossier utilisant l'UUID dans le répertoire de sortie fourni et place tous les fichiers générés dans le sous-dossier. <a href="https://assets.zilliz.com/bulk_writer.zip">Cliquez ici</a> pour télécharger l'exemple de données préparé.</p>
 <p>Les structures de dossier possibles sont les suivantes :</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 

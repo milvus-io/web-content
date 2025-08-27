@@ -621,7 +621,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>BulkWriter</strong> генерирует UUID, создает вложенную папку с UUID в предоставленном каталоге вывода и помещает все сгенерированные файлы в эту вложенную папку. <a href="https://assets.zilliz.com/bulk_writer.zip">Щелкните здесь</a>, чтобы загрузить готовый пример данных.</p>
 <p>Возможные структуры папок следующие:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 
