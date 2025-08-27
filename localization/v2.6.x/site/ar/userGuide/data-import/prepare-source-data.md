@@ -621,7 +621,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p>ينشئ<strong>BulkWriter BulkWriter</strong> معرّف UUID، وينشئ مجلدًا فرعيًا باستخدام معرّف UUID في دليل الإخراج المُقدَّم، ويضع جميع الملفات التي تم إنشاؤها في المجلد الفرعي. <a href="https://assets.zilliz.com/bulk_writer.zip">انقر هنا</a> لتنزيل نموذج البيانات المعد.</p>
 <p>هياكل المجلدات الممكنة هي كما يلي:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 

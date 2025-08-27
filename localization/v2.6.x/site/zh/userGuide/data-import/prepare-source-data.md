@@ -619,7 +619,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>BulkWriter</strong>会生成一个 UUID，在提供的输出目录中使用 UUID 创建一个子文件夹，并将所有生成的文件放入该子文件夹中。<a href="https://assets.zilliz.com/bulk_writer.zip">单击此处</a>下载准备好的示例数据。</p>
 <p>可能的文件夹结构如下</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 

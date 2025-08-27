@@ -619,7 +619,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>BulkWriterは</strong>UUIDを生成し、提供された出力ディレクトリにUUIDを使用したサブフォルダを作成し、生成されたすべてのファイルをサブフォルダに配置します。用意されているサンプルデータのダウンロードは<a href="https://assets.zilliz.com/bulk_writer.zip">こちら</a></p>
 <p>可能なフォルダ構造は以下の通りです：</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 

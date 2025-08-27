@@ -621,7 +621,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>BulkWriter</strong> menghasilkan UUID, membuat sub-folder menggunakan UUID di direktori output yang disediakan, dan menempatkan semua file yang dihasilkan di sub-folder. <a href="https://assets.zilliz.com/bulk_writer.zip">Klik di sini</a> untuk mengunduh data sampel yang telah disiapkan.</p>
 <p>Struktur folder yang mungkin adalah sebagai berikut:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 
