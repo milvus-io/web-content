@@ -52,6 +52,8 @@ import "github.com/milvus-io/milvus/client/v2/milvusclient"
  if err != nil {
  	// handle error
  }
+ // Don't forget to close the connection:
+ defer cli.Close(ctx)
 
  // Do your work with milvus client
 ```
