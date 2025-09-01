@@ -150,7 +150,7 @@ Set a default timeout on the client connection:
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530", timeout=1000) # If not set, the timeout is default to 10s
+client = MilvusClient(uri="http://localhost:19530", timeout=1000) # If not set, the timeout defaults to 10s
 ```
 
 ```java
