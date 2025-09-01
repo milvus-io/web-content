@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus 서버에 연결",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },

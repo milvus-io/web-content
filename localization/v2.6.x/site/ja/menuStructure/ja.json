@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvusサーバーへの接続",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -419,7 +425,7 @@
             "children": []
           },
           {
-            "label": "番号フィールド",
+            "label": "数字フィールド",
             "id": "number.md",
             "order": 6,
             "children": []

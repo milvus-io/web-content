@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Подключение к серверу Milvus",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },

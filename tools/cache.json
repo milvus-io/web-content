@@ -879,7 +879,7 @@
     "v2.6.x/site/en/userGuide/collections/set-collection-ttl.md": "2025-06-30T08:40:47.420Z",
     "v2.6.x/site/en/userGuide/collections/view-collections.md": "2025-06-12T06:11:49.362Z",
     "v2.6.x/site/en/userGuide/data-import/import-data.md": "2025-06-12T06:11:51.642Z",
-    "v2.6.x/site/en/userGuide/data-import/prepare-source-data.md": "2025-06-12T06:11:53.342Z",
+    "v2.6.x/site/en/userGuide/data-import/prepare-source-data.md": "2025-09-01T02:27:18.513Z",
     "v2.6.x/site/en/userGuide/embeddings-reranking/embedding-function/azure-openai.md": "2025-06-12T10:45:50.233Z",
     "v2.6.x/site/en/userGuide/embeddings-reranking/embedding-function/bedrock.md": "2025-06-12T10:46:07.044Z",
     "v2.6.x/site/en/userGuide/embeddings-reranking/embedding-function/cohere.md": "2025-06-12T10:46:20.608Z",
@@ -1001,7 +1001,7 @@
     "v2.6.x/site/en/userGuide/tools/milvus-cdc/manage-cdc-tasks.md": "2025-06-12T06:15:04.254Z",
     "v2.6.x/site/en/userGuide/tools/milvus-cdc/milvus-cdc-overview.md": "2025-06-12T06:15:05.639Z",
     "v2.6.x/site/en/userGuide/tools/milvus-webui.md": "2025-06-12T06:15:07.664Z",
-    "v2.6.x/site/en/menuStructure/en.json": "2025-08-19T02:18:10.966Z",
+    "v2.6.x/site/en/menuStructure/en.json": "2025-09-01T02:44:53.780Z",
     "v2.6.x/site/en/reference/architecture/streaming_service.md": "2025-06-23T08:40:52.156Z",
     "v2.6.x/site/en/adminGuide/scale-standalone.md": "2025-07-02T07:32:10.597Z",
     "v2.6.x/site/en/integrations/langchain/langchain_milvus_async.md": "2025-07-14T08:50:28.212Z",
@@ -1010,6 +1010,7 @@
     "v2.6.x/site/en/userGuide/tools/milvus-sdk-helper-mcp.md": "2025-07-17T08:18:24.733Z",
     "v2.6.x/site/en/userGuide/indexes/floating-vector/scann.md": "2025-07-17T08:17:38.095Z",
     "v2.6.x/site/en/getstarted/run-milvus-docker/install_standalone-binary.md": "2025-08-18T08:44:14.264Z",
-    "v2.6.x/site/en/adminGuide/use-woodpecker.md": "2025-08-25T08:50:11.657Z"
+    "v2.6.x/site/en/adminGuide/use-woodpecker.md": "2025-08-25T08:50:11.657Z",
+    "v2.6.x/site/en/getstarted/connect-to-milvus-server.md": "2025-09-01T02:27:03.355Z"
   }
 }

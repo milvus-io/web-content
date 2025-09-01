@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Ligar ao servidor Milvus",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },

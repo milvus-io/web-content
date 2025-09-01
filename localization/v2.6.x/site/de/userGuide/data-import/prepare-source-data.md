@@ -227,7 +227,22 @@ schema.verify()
 <li><strong>RemoteBulkWriter</strong>: Führt dieselbe Aufgabe wie der LocalBulkWriter aus, überträgt die konvertierten Datendateien jedoch zusätzlich in einen angegebenen Remote Object Storage Bucket.</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong> unterscheidet sich von <strong>LocalBulkWriter</strong> dadurch, dass <strong>RemoteBulkWriter</strong> die konvertierten Datendateien in einen Zielobjektspeicherbereich überträgt.</p>
-<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">LocalBulkWriter einrichten</h3><p>Ein <strong>LocalBulkWriter</strong> fügt Zeilen aus dem Quelldatensatz an und überträgt sie in eine lokale Datei des angegebenen Formats.</p>
+<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">LocalBulkWriter einrichten<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ein <strong>LocalBulkWriter</strong> fügt Zeilen aus dem Quelldatensatz an und überträgt sie in eine lokale Datei des angegebenen Formats.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
@@ -274,7 +289,22 @@ writer = LocalBulkWriter(
 </ul>
 <p>Einzelheiten zu den Parametereinstellungen finden Sie unter LocalBulkWriter in der SDK-Referenz.</p>
 </div>
-<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">RemoteBulkWriter einrichten</h3><p>Anstatt angehängte Daten in eine lokale Datei zu übertragen, überträgt ein <strong>RemoteBulkWriter</strong> sie in einen entfernten Bucket. Daher sollten Sie ein <strong>ConnectParam-Objekt</strong> einrichten, bevor Sie einen <strong>RemoteBulkWriter</strong> erstellen.</p>
+<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">RemoteBulkWriter einrichten<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anstatt angehängte Daten in eine lokale Datei zu übertragen, überträgt ein <strong>RemoteBulkWriter</strong> sie in einen entfernten Bucket. Daher sollten Sie ein <strong>ConnectParam-Objekt</strong> einrichten, bevor Sie einen <strong>RemoteBulkWriter</strong> erstellen.</p>
 <div class="multipleCode">
  <a href="#java">Python-Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
@@ -619,7 +649,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>BulkWriter</strong> generiert eine UUID, erstellt einen Unterordner mit der UUID im angegebenen Ausgabeverzeichnis und legt alle generierten Dateien in diesem Unterordner ab. <a href="https://assets.zilliz.com/bulk_writer.zip">Klicken Sie hier</a>, um die vorbereiteten Beispieldaten herunterzuladen.</p>
+<p><strong>BulkWriter</strong> generiert eine UUID, erstellt einen Unterordner unter Verwendung der UUID im angegebenen Ausgabeverzeichnis und legt alle generierten Dateien in diesem Unterordner ab. <a href="https://assets.zilliz.com/bulk_writer.zip">Klicken Sie hier</a>, um die vorbereiteten Beispieldaten herunterzuladen.</p>
 <p>Mögliche Ordnerstrukturen sind wie folgt:</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

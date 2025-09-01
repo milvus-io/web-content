@@ -80,7 +80,7 @@
             "children": []
           },
           {
-            "label": "Exécuter Milvus en mode autonome",
+            "label": "Run Milvus Standalone",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Connexion au serveur Milvus",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },

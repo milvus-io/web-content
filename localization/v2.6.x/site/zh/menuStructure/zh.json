@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "连接 Milvus 服务器",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -1655,7 +1661,7 @@
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1684,7 +1690,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和还原",
+                "label": "在一个实例中进行备份和恢复",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

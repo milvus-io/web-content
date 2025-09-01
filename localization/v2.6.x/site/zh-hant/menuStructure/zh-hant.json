@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "連接至 Milvus 伺服器",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -2330,7 +2336,7 @@
             "children": []
           },
           {
-            "label": "煙花",
+            "label": "煙火",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
             "children": []

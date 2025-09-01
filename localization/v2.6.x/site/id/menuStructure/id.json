@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Hubungkan ke Server Milvus",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -874,7 +880,7 @@
             "order": 6,
             "children": [
               {
-                "label": "Penjelasan Penyaringan",
+                "label": "Penjelasan Pemfilteran",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []

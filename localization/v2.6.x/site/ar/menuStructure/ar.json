@@ -201,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "الاتصال بخادم ميلفوس",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -1016,7 +1022,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه TEI",
+                "label": "عناق الوجه المعانق TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
