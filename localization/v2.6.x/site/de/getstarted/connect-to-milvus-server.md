@@ -39,7 +39,7 @@ summary: >-
     </button></h2><ul>
 <li><p>Das SDK Ihrer Sprache ist installiert. Einzelheiten finden Sie unter <a href="/docs/de/install-pymilvus.md">Python SDK</a>, <a href="/docs/de/install-java.md">Java SDK</a>, <a href="/docs/de/install-go.md">Go SDK</a> oder <a href="/docs/de/install-node.md">Nodejs SDK</a>.</p></li>
 <li><p>Eine Milvus-Serveradresse (für den lokalen Standard: <code translate="no">http://localhost:19530</code>, Proxy-Port <strong>19530</strong>).</p></li>
-<li><p>Wenn <a href="/docs/de/authenticate.md">die Authentifizierung aktiviert ist</a>, geben Sie entweder ein <strong>Token</strong> oder einen <strong>Benutzernamen und ein Passwort</strong> an. Ein Token kann <code translate="no">username:password</code> sein (z. B. <code translate="no">root:Milvus</code>). Weitere Informationen finden Sie unter <a href="/docs/de/authenticate.md">Authentifizierung des Benutzerzugangs</a> und <a href="/docs/de/users_and_roles.md">Erstellen von Benutzern und Rollen</a>.</p></li>
+<li><p>Wenn <a href="/docs/de/authenticate.md">die Authentifizierung aktiviert ist</a>, geben Sie entweder ein <strong>Token</strong> oder einen <strong>Benutzernamen und ein Passwort</strong> an. Ein Token kann <code translate="no">username:password</code> sein (z. B. <code translate="no">root:Milvus</code>). Weitere Informationen finden Sie unter <a href="/docs/de/authenticate.md">Authentifizierung des Benutzerzugriffs</a> und <a href="/docs/de/users_and_roles.md">Erstellen von Benutzern und Rollen</a>.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Verbindung über URI (Authentifizierung deaktiviert)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -169,7 +169,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, timeout=<span class="hljs-number">1000</span>) <span class="hljs-comment"># If not set, the timeout is default to 10s</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, timeout=<span class="hljs-number">1000</span>) <span class="hljs-comment"># If not set, the timeout defaults to 10s</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;

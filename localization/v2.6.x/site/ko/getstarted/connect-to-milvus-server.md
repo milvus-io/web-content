@@ -145,7 +145,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>토큰 형식은 <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 입니다. 문서에는 <code translate="no">root:Milvus</code> 이 기본 자격 증명으로 명시되어 있으며 <a href="/docs/ko/users_and_roles.md">사용자 및 역할 만들기</a> 가이드에서 사용자 관리에 대해 다루고 있습니다.</p>
+<p>토큰 형식은 <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 입니다. 문서에는 <code translate="no">root:Milvus</code> 이 기본 자격 증명으로 명시되어 있으며, <a href="/docs/ko/users_and_roles.md">사용자 및 역할 만들기</a> 가이드에서 사용자 관리에 대해 다루고 있습니다.</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">시간 제한 설정<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -167,7 +167,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, timeout=<span class="hljs-number">1000</span>) <span class="hljs-comment"># If not set, the timeout is default to 10s</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, timeout=<span class="hljs-number">1000</span>) <span class="hljs-comment"># If not set, the timeout defaults to 10s</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
