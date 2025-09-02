@@ -32,7 +32,7 @@ beta: Milvus 2.6.x
 </ul>
 <p>These scenarios all share a common need: balancing vector similarity with other numeric factors like time, distance, or popularity.</p>
 <p>Decay rankers in Milvus address this need by adjusting search rankings based on numeric field values. They allow you to balance vector similarity with “freshness,” “nearness,” or other numeric properties of your data, creating more intuitive and contextually relevant search experiences.</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Usage-notes" class="common-anchor-header">Usage notes<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -51,6 +51,12 @@ beta: Milvus 2.6.x
 <li><p>Decay ranking cannot be used with grouping searches.</p></li>
 <li><p>The field used for decay ranking must be numeric (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, or <code translate="no">DOUBLE</code>).</p></li>
 <li><p>Each decay ranker can only use one numeric field.</p></li>
+<li><p><strong>Time unit consistency</strong>: When using time-based decay ranking, the units for <code translate="no">origin</code>, <code translate="no">scale</code>, and <code translate="no">offset</code> parameters must match the units used in your collection data:</p>
+<ul>
+<li>If your collection stores timestamps in <strong>seconds</strong>, use seconds for all parameters</li>
+<li>If your collection stores timestamps in <strong>milliseconds</strong>, use milliseconds for all parameters</li>
+<li>If your collection stores timestamps in <strong>microseconds</strong>, use microseconds for all parameters</li>
+</ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -264,7 +270,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><a href="/docs/gaussian-decay.md">Gaussian Decay</a></p></li>
 <li><p><a href="/docs/exponential-decay.md">Exponential Decay</a></p></li>
-<li><p><a href="/docs/exponential-decay.md">Exponential Decay</a></p></li>
+<li><p><a href="/docs/linear-decay.md">Linear Decay</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Implementation example<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -304,6 +310,7 @@ beta: Milvus 2.6.x
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 decay_ranker = Function(
     name=<span class="hljs-string">&quot;time_decay&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;timestamp&quot;</span>],    <span class="hljs-comment"># Numeric field to use for decay</span>
@@ -311,9 +318,9 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point (seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds (must match collection data unit)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone (must match collection data unit)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
     }
 )
@@ -362,27 +369,27 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Reference point from which decay score is calculated. Items at this value receive maximum relevance scores.</p></td>
+     <td><p>Reference point from which decay score is calculated. Items at this value receive maximum relevance scores. For time-based decay, the time unit must match your collection data.</p></td>
      <td><ul>
 <li>For timestamps: current time (e.g., <code translate="no">int(time.time())</code>)</li>
 <li>For geolocation: user's current coordinates</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.scale</code></p></td>
+          <td><p><code translate="no">params.scale</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Distance or time at which relevance drops to the <code translate="no">decay</code> value. Controls how quickly relevance declines.
- Larger values create a more gradual decline in relevance; smaller values create a steeper decline.</p></td>
+     <td><p>Distance or time at which relevance drops to the <code translate="no">decay</code> value. Controls how quickly relevance declines. For time-based decay, the time unit must match your collection data.
+Larger values create a more gradual decline in relevance; smaller values create a steeper decline.</p></td>
      <td><ul>
 <li>For time: period in seconds (e.g., <code translate="no">7 * 24 * 60 * 60</code> for 7 days)</li>
 <li>For distance: meters (e.g., <code translate="no">5000</code> for 5km)</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.offset</code></p></td>
+          <td><p><code translate="no">params.offset</code></p></td>
      <td><p>No</p></td>
      <td><p>Creates a "no-decay zone" around the <code translate="no">origin</code> where items maintain full scores (decay score = 1.0).
- Items within this range of the <code translate="no">origin</code> maintain maximum relevance.</p></td>
+Items within this range of the <code translate="no">origin</code> maintain maximum relevance. For time-based decay, the time unit must match your collection data.</p></td>
      <td><ul>
 <li>For time: period in seconds (e.g., <code translate="no">24 * 60 * 60</code> for 1 day)</li>
 <li>For distance: meters (e.g., <code translate="no">500</code> for 500m)</li>
