@@ -61,6 +61,12 @@ Choose exponential decay when:
 
 Exponential decay creates a curve that drops quickly at first, then gradually flattens into a long tail that approaches but never reaches zero. This mathematical pattern appears frequently in natural phenomena like radioactive decay, population decline, and information relevance over time.
 
+<div class="alert note">
+
+All time parameters (`origin`, `offset`, `scale`) must use the same unit as the collection data. If your collection stores timestamps in a different unit (milliseconds, microseconds), adjust all parameters accordingly.
+
+</div>
+
 ![Exp Decay](../../../../../assets/exp-decay.png)
 
 The graph above shows how exponential decay would affect news article rankings in a digital news platform:
@@ -117,11 +123,18 @@ Before using decay functions, you must first create a collection with appropriat
 
 After your collection is set up with a numeric field (in this example, `publish_time`), create an exponential decay ranker:
 
+<div class="alert note">
+
+**Time unit consistency**: When using time-based decay, ensure that `origin`, `scale`, and `offset` parameters use the same time unit as your collection data. If your collection stores timestamps in seconds, use seconds for all parameters. If it uses milliseconds, use milliseconds for all parameters.
+
+</div>
+
 ```python
 from pymilvus import Function, FunctionType
 import datetime
 
 # Create an exponential decay ranker for news recency
+# Note: All time parameters must use the same unit as your collection data
 ranker = Function(
     name="news_recency",                  # Function identifier
     input_field_names=["publish_time"],   # Numeric field to use
@@ -129,10 +142,10 @@ ranker = Function(
     params={
         "reranker": "decay",              # Specify decay reranker
         "function": "exp",                # Choose exponential decay
-        "origin": int(datetime.datetime.now().timestamp()),  # Current time
-        "offset": 3 * 60 * 60,            # 3 hour breaking news window
+        "origin": int(datetime.datetime.now().timestamp()),  # Current time (seconds, matching collection data)
+        "offset": 3 * 60 * 60,            # 3 hour breaking news window (seconds)
         "decay": 0.5,                     # Half score at scale distance
-        "scale": 24 * 60 * 60             # 24 hours (1 day)
+        "scale": 24 * 60 * 60             # 24 hours (in seconds, matching collection data)
     }
 )
 ```
