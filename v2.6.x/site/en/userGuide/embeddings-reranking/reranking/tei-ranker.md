@@ -7,9 +7,7 @@ beta: Milvus 2.6.x
 
 # TEI Ranker
 
-The TEI Ranker leverages the [Text Embedding Inference (TEI)](tei-ranker.md) service from Hugging Face to enhance search relevance through semantic reranking. It represents an advanced approach to search result ordering that goes beyond traditional vector similarity.
-
-Compared to [vLLM Ranker](vllm-ranker.md), TEI Ranker offers straightforward integration with Hugging Face's ecosystem and pre-trained reranking models, making it ideal for applications where ease of deployment and maintenance are priorities.
+The TEI Ranker leverages the [Text Embedding Inference (TEI)](https://huggingface.co/docs/text-embeddings-inference/index) service from Hugging Face to enhance search relevance through semantic reranking. It represents an advanced approach to search result ordering that goes beyond traditional vector similarity.
 
 ## Prerequisites
 
@@ -22,6 +20,14 @@ Before implementing vLLM Ranker in Milvus, ensure you have:
 ## Create a TEI ranker function
 
 To use TEI Ranker in your Milvus application, create a Function object that specifies how the reranking should operate. This function will be passed to Milvus search operations to enhance result ranking.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import MilvusClient, Function, FunctionType
@@ -41,11 +47,27 @@ tei_ranker = Function(
         "provider": "tei",                 # Specifies TEI as the service provider
         "queries": ["renewable energy developments"],  # Query text for relevance evaluation
         "endpoint": "http://localhost:8080",  # Your TEI service URL
-        "maxBatch": 32,                    # Optional: batch size for processing (default: 32)
+        "max_client_batch_size": 32,                    # Optional: batch size for processing (default: 32)
         "truncate": True,                # Optional: Truncate the inputs that are longer than the maximum supported size
         "truncation_direction": "Right",    # Optional: Direction to truncate the inputs
     }
 )
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
 ### TEI ranker-specific parameters
@@ -58,6 +80,36 @@ The following parameters are specific to the TEI ranker:
      <th><p>Required?</p></th>
      <th><p>Description</p></th>
      <th><p>Value / Example</p></th>
+   </tr>
+   <tr>
+     <td><p><code>reranker</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Must be set to <code>"model"</code> to enable model reranking.</p></td>
+     <td><p><code>"model"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>provider</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>The model service provider to use for reranking.</p></td>
+     <td><p><code>"tei"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>queries</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>List of query strings used by the rerank model to calculate relevance scores. The number of query strings must match exactly the number of queries in your search operation (even when using query vectors instead of text), otherwise an error will be reported.</p></td>
+     <td><p><em>["search query"]</em></p></td>
+   </tr>
+   <tr>
+     <td><p><code>endpoint</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Your TEI service URL.</p></td>
+     <td><p><code>"http://localhost:8080"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>max_client_batch_size</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Since model services may not process all data at once, this sets the batch size for accessing the model service in multiple requests.</p></td>
+     <td><p><code>32</code> (default)</p></td>
    </tr>
    <tr>
      <td><p><code>truncate</code></p></td>
@@ -87,6 +139,14 @@ For general parameters shared across all model rankers (e.g., `provider`, `queri
 
 To apply TEI Ranker to a standard vector search:
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 # Execute search with vLLM reranking
 results = client.search(
@@ -101,9 +161,33 @@ results = client.search(
 )
 ```
 
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ## Apply to hybrid search
 
 TEI Ranker can also be used with hybrid search to combine dense and sparse retrieval methods:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import AnnSearchRequest
@@ -134,3 +218,20 @@ hybrid_results = client.hybrid_search(
     output_fields=["document"]
 )
 ```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+

@@ -76,6 +76,39 @@ Milvus supports the following model service providers for reranking, each with d
 </ul></td>
      <td><p>Content management system needing efficient reranking capabilities with standard requirements</p></td>
    </tr>
+   <tr>
+     <td><p>Cohere</p></td>
+     <td><p>Enterprise applications prioritizing reliability and ease of integration</p></td>
+     <td><ul>
+<li><p>Enterprise-grade reliability and scalability</p></li>
+<li><p>Managed service with no infrastructure maintenance</p></li>
+<li><p>Multilingual reranking capabilities</p></li>
+<li><p>Built-in rate limiting and error handling</p></li>
+</ul></td>
+     <td><p>E-commerce platform requiring high-availability search with consistent API performance and multilingual product catalogs</p></td>
+   </tr>
+   <tr>
+     <td><p>Voyage AI</p></td>
+     <td><p>RAG applications with specific performance and context requirements</p></td>
+     <td><ul>
+<li><p>Models specifically trained for reranking tasks</p></li>
+<li><p>Granular truncation controls for diverse document lengths</p></li>
+<li><p>Optimized inference for production workloads</p></li>
+<li><p>Multiple model variants (rerank-2, rerank-lite, etc.)</p></li>
+</ul></td>
+     <td><p>Research database with varying document lengths requiring fine-tuned performance control and specialized semantic understanding</p></td>
+   </tr>
+   <tr>
+     <td><p>SiliconFlow</p></td>
+     <td><p>Applications processing long documents with cost-effectiveness priorities</p></td>
+     <td><ul>
+<li><p>Advanced document chunking with configurable overlap</p></li>
+<li><p>Chunk-based scoring (highest-scoring chunk represents document)</p></li>
+<li><p>Support for diverse reranking models</p></li>
+<li><p>Cost-effective with standard and pro model variants</p></li>
+</ul></td>
+     <td><p>Technical documentation search system processing lengthy manuals and papers that need intelligent segmentation and overlap control</p></td>
+   </tr>
 </table>
 
 For detailed information about implementation of each model service, refer to the dedicated documentation:
@@ -84,13 +117,19 @@ For detailed information about implementation of each model service, refer to th
 
 - [TEI Ranker](tei-ranker.md)
 
+- [Cohere Ranker](cohere-ranker.md)
+
+- [Voyage AI Ranker](voyage-ai-ranker.md)
+
+- [SiliconFlow Ranker](siliconflow-ranker.md)
+
 ## Implementation
 
 Before implementing Model Ranker, ensure you have:
 
 - A Milvus collection with a `VARCHAR` field containing the text to be reranked
 
-- A running external model service (vLLM or TEI) accessible to your Milvus instance
+- A running external model service accessible to your Milvus instance
 
 - Appropriate network connectivity between Milvus and your chosen model service
 
@@ -98,7 +137,15 @@ Model rankers integrate seamlessly with both standard vector search and hybrid s
 
 ### Create a model ranker
 
-To implement model reranking, first define a Function object with the appropriate configuration:
+To implement model reranking, first define a Function object with the appropriate configuration. In this example, we uses the TEI as the service provider:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import MilvusClient, Function, FunctionType
@@ -115,12 +162,28 @@ model_ranker = Function(
     function_type=FunctionType.RERANK,  # Must be set to RERANK
     params={
         "reranker": "model",  # Specify model reranker. Must be "model"
-        "provider": "tei",  # Choose provider: "tei" or "vllm"
+        "provider": "tei",  # Choose provider: "tei", "vllm", etc.
         "queries": ["machine learning for time series"],  # Query text
         "endpoint": "http://model-service:8080",  # Model service endpoint
         # "maxBatch": 32  # Optional: batch size for processing
     }
 )
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
 <table>
@@ -153,7 +216,7 @@ model_ranker = Function(
    <tr>
      <td><p><code>params</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>A dictionary containing configuration for the model-based reranking function. The available parameters (keys) vary depending on the provider (<code>tei</code> or <code>vllm</code>). Refer to <a href="vllm-ranker.md">vLLM Ranker</a> or <a href="tei-ranker.md">TEI Ranker</a> for more details.</p></td>
+     <td><p>A dictionary containing configuration for the model-based reranking function. The available parameters (keys) vary depending on the service provider.</p></td>
      <td><p>{…}</p></td>
    </tr>
    <tr>
@@ -166,14 +229,14 @@ model_ranker = Function(
      <td><p><code>params.provider</code></p></td>
      <td><p>Yes</p></td>
      <td><p>The model service provider to use for reranking.</p></td>
-     <td><p><code>"tei"</code> or <code>"vllm"</code></p></td>
+     <td><p><code>"tei"</code></p></td>
    </tr>
    <tr>
      <td><p><code>params.queries</code></p></td>
      <td><p>Yes</p></td>
      <td><p>List of query strings used by the reranking model to calculate relevance scores.
  The number of query strings must match exactly the number of queries in your search operation (even when using query vectors instead of text), otherwise an error will be reported.</p></td>
-     <td><p><code>["search query"]</code></p></td>
+     <td><p><em>["search query"]</em></p></td>
    </tr>
    <tr>
      <td><p><code>params.endpoint</code></p></td>
@@ -182,7 +245,7 @@ model_ranker = Function(
      <td><p><code>"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
-     <td><p><code>maxBatch</code></p></td>
+     <td><p><code>max_client_batch_size</code></p></td>
      <td><p>No</p></td>
      <td><p>Maximum number of documents to process in a single batch. Larger values increase throughput but require more memory.</p></td>
      <td><p><code>32</code> (default)</p></td>
@@ -192,6 +255,14 @@ model_ranker = Function(
 ### Apply to standard vector search
 
 After defining your model ranker, you can apply it during search operations by passing it to the ranker parameter:
+
+<div class="multipleCode">
+    <a href="#bash">cURL</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```bash
 # Use the model ranker in standard vector search
@@ -207,9 +278,33 @@ results = client.search(
 )
 ```
 
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ### Apply to hybrid search
 
 Model rankers can also be applied to hybrid search operations that combine multiple vector fields:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import AnnSearchRequest
@@ -238,5 +333,21 @@ hybrid_results = client.hybrid_search(
     limit=10,
     output_fields=["document"]
 )
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
