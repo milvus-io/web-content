@@ -1108,6 +1108,24 @@
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
+                  },
+                  {
+                    "label": "Clasificador Cohere",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Clasificador Voyage AI",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "Clasificador SiliconFlow",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               }

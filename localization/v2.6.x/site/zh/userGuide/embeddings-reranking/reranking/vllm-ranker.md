@@ -20,14 +20,13 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>vLLM Ranker 利用<a href="https://docs.vllm.ai/en/latest/index.html">vLLM</a>推论框架，通过语义重新排序来提高搜索相关性。它代表了一种超越传统向量相似性的先进搜索结果排序方法。</p>
-<p>vLLM Ranker 对于精确度和上下文至关重要的应用尤其有价值，例如</p>
+<p>vLLM Ranker 对于精确度和上下文至关重要的应用特别有价值，例如</p>
 <ul>
 <li><p>需要深入理解概念的技术文档搜索</p></li>
 <li><p>语义关系超过关键词匹配的研究数据库</p></li>
 <li><p>需要将用户问题与相关解决方案相匹配的客户支持系统</p></li>
 <li><p>必须了解产品属性和用户意图的电子商务搜索</p></li>
 </ul>
-<p>与<a href="/docs/zh/tei-ranker.md">TEI Ranker</a> 相比，vLLM Ranker 在模型选择和定制方面具有更大的灵活性，因此非常适合专业或复杂的搜索应用，在这些应用中，额外的配置选项可带来显著的优势。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +63,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>成功的响应应返回按相关性得分排序的文档，类似于 OpenAI rerankers API 响应。</p>
+<p>成功的响应应返回按相关性得分排序的文档，类似于 OpenAI rerankers API 的响应。</p>
 <p>有关更多服务器参数和选项，请参阅<a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">vLLM OpenAI Compatible Server 文档</a>。</p></li>
 </ul>
 <h2 id="Create-a-vLLM-ranker-function" class="common-anchor-header">创建 vLLM Ranker 函数<button data-href="#Create-a-vLLM-ranker-function" class="anchor-icon" translate="no">
@@ -82,7 +81,9 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在你的 Milvus 应用程序中使用 vLLM Ranker，请创建一个 Function 对象，指定 Reranking 的操作符。此函数将传递给 Milvus 搜索操作，以增强结果排名。</p>
+    </button></h2><p>要在 Milvus 应用程序中使用 vLLM Ranker，请创建一个 Function 对象，指定 Reranking 的操作符。该函数将传递给 Milvus 搜索操作符，以增强结果排名。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -100,12 +101,35 @@ vllm_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;vllm&quot;</span>,         <span class="hljs-comment"># Specifies vLLM service</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># vLLM service address</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">64</span>,              <span class="hljs-comment"># Optional: batch size</span>
+        <span class="hljs-string">&quot;max_client_batch_size&quot;</span>: <span class="hljs-number">32</span>,              <span class="hljs-comment"># Optional: batch size</span>
         <span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>: <span class="hljs-number">256</span>,  <span class="hljs-comment"># Optional: Use last 256 tokens</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">vLLM 排序器专用参数</h3><p>以下参数是 vLLM 排序器的特定参数：</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">vLLM 排序器专用参数<button data-href="#vLLM-ranker-specific-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下参数是 vLLM 排序器的特定参数：</p>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -114,9 +138,39 @@ vllm_ranker = Function(
      <th><p>值/示例</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">reranker</code></p></td>
+     <td><p>是</p></td>
+     <td><p>必须设置为<code translate="no">"model"</code> 才能启用模型重排。</p></td>
+     <td><p><code translate="no">"model"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">provider</code></p></td>
+     <td><p>是</p></td>
+     <td><p>用于重排的模型服务提供商。</p></td>
+     <td><p><code translate="no">"vllm"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queries</code></p></td>
+     <td><p>是</p></td>
+     <td><p>Rerankers 模型用于计算相关性得分的查询字符串列表。查询字符串的数量必须与搜索操作中的查询数量完全匹配（即使使用查询向量代替文本），否则将报错。</p></td>
+     <td><p><em>["搜索查询"]</em></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">endpoint</code></p></td>
+     <td><p>是</p></td>
+     <td><p>您的 vLLM 服务地址。</p></td>
+     <td><p><code translate="no">"http://localhost:8080"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
+     <td><p>否</p></td>
+     <td><p>由于模型服务可能无法一次性处理所有数据，因此此处设置了在多个请求中访问模型服务的批量大小。</p></td>
+     <td><p><code translate="no">32</code> (默认值）</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">truncate_prompt_tokens</code></p></td>
      <td><p>无</p></td>
-     <td><p>如果设置为整数<em>k</em>，将只使用提示符中的最后<em>k 个</em>字节（即左截断）。默认为无（即不截断）。</p></td>
+     <td><p>如果设置为整数<em>k</em>，将只使用提示符中的最后<em>k 个</em>标记（即左截断）。默认为无（即不截断）。</p></td>
      <td><p><code translate="no">256</code></p></td>
    </tr>
 </table>
@@ -139,6 +193,8 @@ vllm_ranker = Function(
         ></path>
       </svg>
     </button></h2><p>将 vLLM Ranker 应用于标准向量搜索：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -149,6 +205,14 @@ results = client.search(
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -165,7 +229,9 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>vLLM Ranker 还可以与混合检索一起使用，将密集检索和稀疏检索方法结合起来：</p>
+    </button></h2><p>vLLM Ranker 还可以与混合搜索一起使用，将密集检索和稀疏检索方法结合起来：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Configure dense vector search</span>
@@ -192,4 +258,12 @@ hybrid_results = client.hybrid_search(
 <span class="highlighted-wrapper-line">    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span></span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -5,9 +5,9 @@ summary: >-
   A pesquisa vetorial tradicional classifica os resultados puramente por
   semelhança matemática - o grau de correspondência dos vectores no espaço de
   alta dimensão. Apesar de eficiente, esta abordagem muitas vezes não tem
-  verdadeira relevância semântica. Considere a pesquisa por "melhores práticas
+  verdadeira relevância semântica. Considere a pesquisa de "melhores práticas
   para otimização de bases de dados": poderá receber documentos com elevada
-  semelhança vetorial que mencionam estes termos frequentemente, mas que não
+  semelhança vetorial que mencionam frequentemente estes termos, mas que não
   fornecem estratégias de otimização acionáveis.
 beta: Milvus 2.6.x
 ---
@@ -126,11 +126,47 @@ beta: Milvus 2.6.x
 </ul></td>
      <td><p>Sistema de gestão de conteúdos que necessita de capacidades de reanálise eficientes com requisitos padrão</p></td>
    </tr>
+   <tr>
+     <td><p>Coesão</p></td>
+     <td><p>Aplicações empresariais que dão prioridade à fiabilidade e à facilidade de integração</p></td>
+     <td><ul>
+<li><p>Fiabilidade e escalabilidade de nível empresarial</p></li>
+<li><p>Serviço gerido sem manutenção da infraestrutura</p></li>
+<li><p>Recursos de reanálise em vários idiomas</p></li>
+<li><p>Limitação de taxa e tratamento de erros incorporados</p></li>
+</ul></td>
+     <td><p>Plataforma de comércio eletrónico que requer pesquisa de alta disponibilidade com desempenho consistente da API e catálogos de produtos multilingues</p></td>
+   </tr>
+   <tr>
+     <td><p>IA do Voyage</p></td>
+     <td><p>Aplicações RAG com requisitos específicos de desempenho e contexto</p></td>
+     <td><ul>
+<li><p>Modelos especificamente treinados para tarefas de reranking</p></li>
+<li><p>Controlos de truncagem granular para diversos comprimentos de documentos</p></li>
+<li><p>Inferência optimizada para cargas de trabalho de produção</p></li>
+<li><p>Múltiplas variantes de modelos (rerank-2, rerank-lite, etc.)</p></li>
+</ul></td>
+     <td><p>Base de dados de investigação com diferentes comprimentos de documentos que requerem um controlo de desempenho afinado e uma compreensão semântica especializada</p></td>
+   </tr>
+   <tr>
+     <td><p>SiliconFlow</p></td>
+     <td><p>Aplicações que processam documentos longos com prioridades de rentabilidade</p></td>
+     <td><ul>
+<li><p>Classificação avançada de documentos em pedaços com sobreposição configurável</p></li>
+<li><p>Pontuação baseada em pedaços (o pedaço com maior pontuação representa o documento)</p></li>
+<li><p>Suporte para diversos modelos de reranking</p></li>
+<li><p>Rentável com variantes de modelo padrão e profissional</p></li>
+</ul></td>
+     <td><p>Sistema de pesquisa de documentação técnica que processa manuais e documentos extensos que necessitam de segmentação inteligente e controlo de sobreposição</p></td>
+   </tr>
 </table>
-<p>Para obter informações detalhadas sobre a implementação de cada modelo de serviço, consulte a documentação específica:</p>
+<p>Para obter informações detalhadas sobre a implementação de cada serviço de modelo, consulte a documentação dedicada:</p>
 <ul>
 <li><p><a href="/docs/pt/vllm-ranker.md">vLLM Ranker</a></p></li>
 <li><p><a href="/docs/pt/tei-ranker.md">Classificador TEI</a></p></li>
+<li><p><a href="/docs/pt/cohere-ranker.md">Classificador Cohere</a></p></li>
+<li><p><a href="/docs/pt/voyage-ai-ranker.md">Classificador Voyage AI</a></p></li>
+<li><p><a href="/docs/pt/siliconflow-ranker.md">Classificador SiliconFlow</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementação<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -147,14 +183,31 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de implementar o Model Ranker, certifique-se de que tem:</p>
+    </button></h2><p>Antes de implementar o Model Ranker, certifique-se de que tem</p>
 <ul>
 <li><p>Uma coleção Milvus com um campo <code translate="no">VARCHAR</code> que contém o texto a ser classificado</p></li>
-<li><p>Um serviço de modelo externo em execução (vLLM ou TEI) acessível à sua instância Milvus</p></li>
-<li><p>Conectividade de rede apropriada entre Milvus e o serviço de modelo escolhido</p></li>
+<li><p>Um serviço de modelo externo em execução acessível à sua instância Milvus</p></li>
+<li><p>Conectividade de rede adequada entre o Milvus e o serviço de modelo escolhido</p></li>
 </ul>
-<p>Os classificadores de modelos integram-se perfeitamente nas operações de pesquisa vetorial padrão e de pesquisa híbrida. A implementação implica a criação de um objeto Function que define a sua configuração de reanálise e a sua transmissão às operações de pesquisa.</p>
-<h3 id="Create-a-model-ranker" class="common-anchor-header">Criar um classificador de modelos</h3><p>Para implementar a reclassificação de modelos, comece por definir um objeto Function com a configuração adequada:</p>
+<p>Os classificadores de modelos integram-se perfeitamente nas operações de pesquisa vetorial padrão e de pesquisa híbrida. A implementação envolve a criação de um objeto Function que define a sua configuração de classificação e a sua transmissão às operações de pesquisa.</p>
+<h3 id="Create-a-model-ranker" class="common-anchor-header">Criar um classificador de modelos<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para implementar a reclassificação de modelos, comece por definir um objeto Function com a configuração adequada. Neste exemplo, usamos o TEI como provedor de serviços:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -169,12 +222,20 @@ model_ranker = Function(
     function_type=FunctionType.RERANK,  <span class="hljs-comment"># Must be set to RERANK</span>
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;model&quot;</span>,  <span class="hljs-comment"># Specify model reranker. Must be &quot;model&quot;</span>
-        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot; or &quot;vllm&quot;</span>
+        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>,  <span class="hljs-comment"># Model service endpoint</span>
         <span class="hljs-comment"># &quot;maxBatch&quot;: 32  # Optional: batch size for processing</span>
     }
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -204,26 +265,26 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Um dicionário que contém a configuração da função de reordenação baseada em modelos. Os parâmetros disponíveis (chaves) variam de acordo com o provedor (<code translate="no">tei</code> ou <code translate="no">vllm</code>). Consulte <a href="/docs/pt/vllm-ranker.md">vLLM Ranker</a> ou <a href="/docs/pt/tei-ranker.md">TEI Ranker</a> para obter mais detalhes.</p></td>
+     <td><p>Um dicionário que contém a configuração para a função de reordenação baseada em modelos. Os parâmetros disponíveis (chaves) variam consoante o fornecedor de serviços.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Tem de ser definido como <code translate="no">"model"</code> para ativar a reclassificação do modelo.</p></td>
+     <td><p>Deve ser definido para <code translate="no">"model"</code> para ativar a reclassificação de modelos.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>O provedor de serviços de modelo a ser usado para reranking.</p></td>
-     <td><p><code translate="no">"tei"</code> ou <code translate="no">"vllm"</code></p></td>
+     <td><p>O fornecedor de serviços de modelos a utilizar para a reclassificação.</p></td>
+     <td><p><code translate="no">"tei"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Lista de cadeias de consulta utilizadas pelo modelo de reclassificação para calcular as pontuações de relevância. O número de cadeias de consulta tem de corresponder exatamente ao número de consultas na sua operação de pesquisa (mesmo quando utiliza vectores de consulta em vez de texto), caso contrário será comunicado um erro.</p></td>
-     <td><p><code translate="no">["search query"]</code></p></td>
+     <td><p>O número de cadeias de consulta deve corresponder exatamente ao número de consultas na sua operação de pesquisa (mesmo quando utiliza vectores de consulta em vez de texto), caso contrário será comunicado um erro.</p></td>
+     <td><p><em>["consulta de pesquisa"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
@@ -232,13 +293,30 @@ model_ranker = Function(
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">maxBatch</code></p></td>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Não</p></td>
-     <td><p>Número máximo de documentos a processar num único lote. Valores maiores aumentam a taxa de transferência, mas exigem mais memória.</p></td>
+     <td><p>Número máximo de documentos a processar num único lote. Valores maiores aumentam o rendimento, mas exigem mais memória.</p></td>
      <td><p><code translate="no">32</code> (predefinição)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa de vetor padrão</h3><p>Depois de definir o classificador de modelos, é possível aplicá-lo durante as operações de pesquisa, passando-o para o parâmetro classificador:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa de vetor padrão<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de definir seu classificador de modelo, é possível aplicá-lo durante as operações de pesquisa, passando-o para o parâmetro classificador:</p>
+<div class="multipleCode">
+   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
@@ -250,7 +328,32 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida</h3><p>Os classificadores de modelos também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vetoriais:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Os classificadores de modelos também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vetoriais:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
@@ -276,4 +379,12 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

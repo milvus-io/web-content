@@ -25,13 +25,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يؤدي التضاؤل الأسي إلى انخفاض أولي حاد يتبعه ذيل طويل في نتائج بحثك. مثل دورة الأخبار العاجلة حيث تتضاءل الأهمية بسرعة في البداية ولكن بعض القصص تحتفظ بأهميتها بمرور الوقت، يطبق التضاؤل الأسي عقوبة حادة على العناصر التي تقع خارج النطاق المثالي مع الحفاظ على العناصر البعيدة قابلة للاكتشاف. هذا النهج مثالي عندما ترغب في إعطاء الأولوية للقرب أو الحداثة بشكل كبير ولكنك لا تريد التخلص تمامًا من الخيارات البعيدة.</p>
+    </button></h1><p>يؤدي التضاؤل الأسي إلى انخفاض أولي حاد يتبعه ذيل طويل في نتائج بحثك. مثل دورة الأخبار العاجلة حيث تتضاءل الأهمية بسرعة في البداية ولكن بعض القصص تحتفظ بأهميتها مع مرور الوقت، يطبق التضاؤل الأسي عقوبة حادة على العناصر التي تقع خارج النطاق المثالي مع الحفاظ على العناصر البعيدة قابلة للاكتشاف. هذا النهج مثالي عندما ترغب في إعطاء الأولوية للقرب أو الحداثة بشكل كبير ولكنك لا تريد التخلص تمامًا من الخيارات البعيدة.</p>
 <p>على عكس دوال الاضمحلال الأخرى:</p>
 <ul>
 <li><p>يخلق التضاؤل الغاوسي انخفاضًا تدريجيًا على شكل جرس</p></li>
 <li><p>يتناقص التضاؤل الخطي بمعدل ثابت حتى يصل إلى الصفر تمامًا</p></li>
 </ul>
-<p>يعمل التضاؤل الأسي بشكل فريد على "تحميل العقوبة مقدمًا"، مما يؤدي إلى تطبيق معظم تخفيض الصلة في وقت مبكر مع الحفاظ على ذيل طويل من الصلة الدنيا ولكن غير الصفرية.</p>
+<p>يعمل التضاؤل الأسي بشكل فريد على "تحميل العقوبة أماميًا"، مما يؤدي إلى تطبيق معظم تخفيض الصلة في وقت مبكر مع الحفاظ على ذيل طويل من الصلة الدنيا ولكن غير الصفرية.</p>
 <h2 id="When-to-use-exponential-decay" class="common-anchor-header">متى تستخدم التضاؤل الأسي<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>موجز الأخبار</p></td>
      <td><p>بوابات الأخبار العاجلة</p></td>
-     <td><p>تقلل بسرعة من أهمية الأخبار القديمة مع الاستمرار في عرض الأخبار المهمة من أيام مضت</p></td>
+     <td><p>يقلل بسرعة من أهمية الأخبار القديمة مع الاستمرار في عرض الأخبار المهمة من أيام مضت</p></td>
    </tr>
    <tr>
      <td><p>الجداول الزمنية لوسائل التواصل الاجتماعي</p></td>
@@ -67,7 +67,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>أنظمة التنبيهات</p></td>
      <td><p>تحديد أولويات التنبيهات</p></td>
-     <td><p>إنشاء تنبيهات عاجلة للتنبيهات الحديثة مع الحفاظ على وضوح التنبيهات المهمة</p></td>
+     <td><p>إنشاء تنبيهات عاجلة للتنبيهات الحديثة مع الحفاظ على رؤية التنبيهات المهمة</p></td>
    </tr>
    <tr>
      <td><p>التنزيلات السريعة</p></td>
@@ -96,20 +96,23 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ينشئ التضاؤل الأسي منحنى ينخفض بسرعة في البداية، ثم يتسطح تدريجياً إلى ذيل طويل يقترب من الصفر ولكنه لا يصل إلى الصفر أبداً. يظهر هذا النمط الرياضي بشكل متكرر في الظواهر الطبيعية مثل الاضمحلال الإشعاعي، وانخفاض عدد السكان، وأهمية المعلومات مع مرور الوقت.</p>
+    </button></h2><p>ينشئ التضاؤل الأسي منحنى ينخفض بسرعة في البداية، ثم يتسطح تدريجياً إلى ذيل طويل يقترب من الصفر ولكنه لا يصل إلى الصفر أبداً. يظهر هذا النمط الرياضي بشكل متكرر في الظواهر الطبيعية مثل الاضمحلال الإشعاعي، وانخفاض عدد السكان، وأهمية المعلومات بمرور الوقت.</p>
+<div class="alert note">
+<p>يجب أن تستخدم جميع معلمات الوقت (<code translate="no">origin</code> ، <code translate="no">offset</code> ، <code translate="no">scale</code>) نفس وحدة بيانات المجموعة. إذا كانت المجموعة الخاصة بك تخزن الطوابع الزمنية بوحدة مختلفة (ميلي ثانية، ميكروثانية)، فاضبط جميع المعلمات وفقًا لذلك.</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/exp-decay.png" alt="Exp Decay" class="doc-image" id="exp-decay" />
-   </span> <span class="img-wrapper"> <span>الاضمحلال الأسي</span> </span></p>
+   </span> <span class="img-wrapper"> <span>التضاؤل الأسي</span> </span></p>
 <p>يوضح الرسم البياني أعلاه كيف سيؤثر الاضمحلال الأسي على تصنيفات المقالات الإخبارية في منصة إخبارية رقمية:</p>
 <ul>
-<li><p><code translate="no">origin</code> (الوقت الحالي): اللحظة الحالية، حيث تكون الأهمية في أقصى درجاتها (1.0).</p></li>
+<li><p><code translate="no">origin</code> (الوقت الحالي): اللحظة الحالية، حيث تكون الأهمية في حدها الأقصى (1.0).</p></li>
 <li><p><code translate="no">offset</code> (3 ساعات): "نافذة "الأخبار العاجلة" - جميع الأخبار المنشورة خلال الساعات الثلاث الأخيرة تحافظ على درجات الملاءمة الكاملة (1.0)، مما يضمن عدم معاقبة الأخبار الحديثة جدًا دون داعٍ بسبب الاختلافات الزمنية الطفيفة.</p></li>
 <li><p><code translate="no">decay</code> (0.5): الدرجة في مسافة المقياس - يتحكم هذا المتغير في مدى انخفاض الدرجات بشكل كبير مع مرور الوقت.</p></li>
 <li><p><code translate="no">scale</code> (24 ساعة): الفترة الزمنية التي تنخفض عندها الأهمية إلى قيمة الاضمحلال-المقالات الإخبارية التي مضى عليها 24 ساعة بالضبط تنخفض درجاتها إلى النصف (0.5).</p></li>
 </ul>
 <p>كما ترون من المنحنى، تستمر المقالات الإخبارية التي مضى عليها أكثر من 24 ساعة في الانخفاض في الأهمية ولكنها لا تصل إلى الصفر تمامًا. حتى القصص التي تعود إلى عدة أيام مضت تحتفظ بالحد الأدنى من الملاءمة، مما يسمح للأخبار المهمة ولكن الأقدم لا تزال تظهر في خلاصتك (وإن كان ترتيبها أقل).</p>
-<p>يحاكي هذا السلوك كيفية عمل ملاءمة الأخبار عادةً - تهيمن القصص الحديثة جدًا بقوة، ولكن لا يزال بإمكان القصص الأقدم المهمة أن تبرز إذا كانت ذات صلة استثنائية باهتمامات المستخدم.</p>
+<p>هذا السلوك يحاكي كيفية عمل ملاءمة الأخبار عادةً - تهيمن القصص الحديثة جدًا بقوة، ولكن لا يزال بإمكان القصص الأقدم المهمة أن تبرز إذا كانت ذات صلة استثنائية باهتمامات المستخدم.</p>
 <h2 id="Formula" class="common-anchor-header">المعادلة<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +137,7 @@ beta: Milvus 2.6.x
 <li><p>Calculate how far the field value is from the origin: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> ∣fieldvaluedoc−origin∣|fieldvalue_{doc} - origin|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">∣fieldvalue</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">doc​</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">origin∣</span></span></span></span>.</p></li>
 <li><p>اطرح الإزاحة (إن وجدت) ولكن لا تنخفض أبدًا إلى ما دون الصفر: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>الحد الأقصى</mi><mo stretchy="false">(</mo><mo separator="true">0،</mo><mi>المسافة -</mi><mi>الإزاحة</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\الحد الأقصى <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(0، المسافة - الإزاحة)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">الحد الأ</span><span class="mop"></span><span class="mbin">قص</span></span><span class="base"><span class="mord mathnormal">ى (0،</span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="base"><span class="mord mathnormal"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal">المسافة </span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="base"><span class="mord mathnormal"> </span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="base"><span class="mord mathnormal"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"> <span class="strut" style="height:1em;vertical-align:-0.25em;"></span> <span class="mord mathnormal">الإزاحة</span><span class="mclose">)</span></span></span></span>.</p></li>
 <li><p>اضرب في <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ</annotation></semantics></math></span></span>\lambda <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ،</span></span></span></span> والذي يتم حسابه من معلمات المقياس والتضاؤل.</p></li>
-<li><p>خذ الأس، الذي يعطيك قيمة بين 0 و1: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo stretchy="false">(</mo></mrow></semantics></math></span></span>λ <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>⋅⋅⋅value</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\ exp <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(\lambda \</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal" style="margin-right:0.03588em;">cdot value)</span></span></span></span><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathnormal" style="margin-right:0.03588em;"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal" style="margin-right:0.03588em;">exp(λ</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="base"><span class="mord mathnormal" style="margin-right:0.03588em;"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal" style="margin-right:0.03588em;">⋅⋅</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="base"><span class="mord mathnormal" style="margin-right:0.03588em;"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"> <span class="strut" style="height:1em;vertical-align:-0.25em;"></span> <span class="mord mathnormal">القيمة</span><span class="mclose">)</span></span></span></span>.</p></li>
+<li><p>خذ الأس، والذي يمنحك قيمة بين 0 و1: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo stretchy="false">(</mo></mrow></semantics></math></span></span>λ <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>⋅⋅⋅value</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\ exp <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(\lambda \cdot</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal">value)</span></span></span></span><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathnormal"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal">exp(</span></span><span class="base"><span class="mord mathnormal">λ</span></span><span class="base"><span class="mclose"></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="base"><span class="mclose"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"> ⋅⋅⋅</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="base"><span class="mclose"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mclose"> القيمة )</span></span></span></span>.</p></li>
 </ol>
 <p>يح <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal">وّل حساب λ \lambda</span><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">\lambda λ</span></span></span></span> حساب معامِلات المقياس والتضاؤل إلى معامِل المعدل للدالة الأسية. تؤدي قيمة <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ</annotation></semantics></math></span></span> \lambda <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span> الأكثر سالبة إلى انخفاض أولي أكثر حدة.</p>
 <h2 id="Use-exponential-decay" class="common-anchor-header">استخدام التضاؤل الأسي<button data-href="#Use-exponential-decay" class="anchor-icon" translate="no">
@@ -154,13 +157,32 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>يمكن تطبيق الاضمحلال الأسي على كل من عمليات البحث المتجه القياسية وعمليات البحث الهجين في ميلفوس. فيما يلي مقتطفات التعليمات البرمجية الرئيسية لتطبيق هذه الميزة.</p>
 <div class="alert note">
-<p>قبل استخدام دوال التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة، وتعريف المخطط، وإدراج البيانات، راجع <a href="/docs/ar/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي لمصنف التضاؤل</a>.</p>
+<p>قبل استخدام دالات التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة، وتعريف المخطط، وإدراج البيانات، راجع <a href="/docs/ar/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي لمصنف التضاؤل</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">إنشاء مصنف اضمحلال</h3><p>بعد إعداد المجموعة الخاصة بك مع حقل رقمي (في هذا المثال، <code translate="no">publish_time</code>)، قم بإنشاء مصنف تضاؤل أسي:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">إنشاء مصنف اضمحلال<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إعداد مجموعتك بحقل رقمي (في هذا المثال، <code translate="no">publish_time</code>)، قم بإنشاء مصنف تضاؤل أسي:</p>
+<div class="alert note">
+<p><strong>تناسق الوحدة الزمنية</strong>: عند استخدام الاضمحلال المستند إلى الوقت، تأكد من أن المعلمات <code translate="no">origin</code> و <code translate="no">scale</code> و <code translate="no">offset</code> تستخدم نفس الوحدة الزمنية التي تستخدمها بيانات مجموعتك. إذا كانت مجموعتك تخزن الطوابع الزمنية بالثواني، فاستخدم الثواني لجميع المعلمات. إذا كانت تستخدم المللي ثانية، فاستخدم المللي ثانية لجميع المعلمات.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-comment"># Create an exponential decay ranker for news recency</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;news_recency&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;publish_time&quot;</span>],   <span class="hljs-comment"># Numeric field to use</span>
@@ -168,14 +190,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;exp&quot;</span>,                <span class="hljs-comment"># Choose exponential decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (1 day)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">تطبيقه على البحث المتجه القياسي</h3><p>بعد تحديد مصنف التضاؤل الخاص بك، يمكنك تطبيقه أثناء عمليات البحث عن طريق تمريره إلى المعلمة <code translate="no">ranker</code>:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">تنطبق على البحث المتجه القياسي<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد تحديد مصنف التضاؤل الخاص بك، يمكنك تطبيقه أثناء عمليات البحث عن طريق تمريره إلى المعلمة <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -187,7 +224,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث الهجين</h3><p>يمكن أيضًا تطبيق مصنفات التضاؤل على عمليات البحث المختلطة التي تجمع بين عدة حقول متجهة:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث المختلط<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكن أيضًا تطبيق مصنفات التضاؤل على عمليات البحث المختلط التي تجمع بين حقول متجهات متعددة:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

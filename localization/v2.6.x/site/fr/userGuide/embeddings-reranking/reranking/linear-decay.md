@@ -34,7 +34,7 @@ beta: Milvus 2.6.x
 <li><p>La désintégration gaussienne suit une courbe en cloche qui se rapproche progressivement de zéro sans jamais l'atteindre</p></li>
 <li><p>La décroissance exponentielle maintient une longue queue de pertinence minimale qui s'étend indéfiniment.</p></li>
 </ul>
-<p>La décroissance linéaire crée un point final unique, ce qui la rend particulièrement efficace pour les applications comportant des limites naturelles ou des échéances.</p>
+<p>La décroissance linéaire crée uniquement un point final définitif, ce qui la rend particulièrement efficace pour les applications comportant des limites naturelles ou des délais.</p>
 <h2 id="When-to-use-linear-decay" class="common-anchor-header">Quand utiliser la décroissance linéaire ?<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +80,7 @@ beta: Milvus 2.6.x
 </table>
 <p>Choisissez la décroissance linéaire lorsque :</p>
 <ul>
-<li><p>Votre application a une limite naturelle, un délai ou un seuil.</p></li>
+<li><p>Votre application a une limite naturelle, une date limite ou un seuil.</p></li>
 <li><p>Les éléments dépassant un certain seuil doivent être complètement exclus des résultats.</p></li>
 <li><p>Vous avez besoin d'un taux prévisible et cohérent de déclin de la pertinence.</p></li>
 <li><p>Les utilisateurs doivent voir une démarcation claire entre les éléments pertinents et ceux qui ne le sont pas.</p></li>
@@ -100,14 +100,17 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La décroissance linéaire crée une baisse en ligne droite qui diminue à un taux constant jusqu'à atteindre exactement zéro. Ce modèle apparaît dans de nombreux scénarios quotidiens tels que les comptes à rebours, l'épuisement des stocks et l'approche d'échéances où la pertinence a un point d'expiration clair.</p>
+    </button></h2><p>La décroissance linéaire crée une baisse en ligne droite qui diminue à un taux constant jusqu'à atteindre exactement zéro. Ce modèle apparaît dans de nombreux scénarios quotidiens tels que les comptes à rebours, l'épuisement des stocks et l'approche des échéances, où la pertinence a un point d'expiration clair.</p>
+<div class="alert note">
+<p>Tous les paramètres temporels (<code translate="no">origin</code>, <code translate="no">offset</code>, <code translate="no">scale</code>) doivent utiliser la même unité que les données de la collection. Si votre collection stocke des horodatages dans une unité différente (millisecondes, microsecondes), ajustez tous les paramètres en conséquence.</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
    </span> <span class="img-wrapper"> <span>Décroissance linéaire</span> </span></p>
 <p>Le graphique ci-dessus montre comment la décroissance linéaire affecte les listes d'événements sur une plateforme de billetterie :</p>
 <ul>
-<li><p><code translate="no">origin</code> (date actuelle) : Le moment présent, où la pertinence est à son maximum (1.0).</p></li>
+<li><p><code translate="no">origin</code> (date actuelle) : Le moment présent, où la pertinence est maximale (1.0).</p></li>
 <li><p><code translate="no">offset</code> (1 jour) : La "fenêtre des événements immédiats" - tous les événements se déroulant le jour suivant conservent leur score de pertinence maximal (1,0), ce qui garantit que les événements très imminents ne sont pas pénalisés par de légers décalages temporels.</p></li>
 <li><p><code translate="no">decay</code> (0.5) : Le score à la distance de l'échelle - ce paramètre contrôle le taux de déclin de la pertinence.</p></li>
 <li><p><code translate="no">scale</code> (10 jours) : Le délai à partir duquel la pertinence tombe à la valeur de décroissance - les événements situés à 10 jours de distance voient leur score de pertinence divisé par deux (0,5).</p></li>
@@ -161,7 +164,25 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Avant d'utiliser les fonctions de décroissance, vous devez d'abord créer une collection avec les champs numériques appropriés (comme les horodatages, les distances, etc.) qui seront utilisés pour les calculs de décroissance. Pour des exemples de travail complets comprenant la configuration de la collection, la définition du schéma et l'insertion de données, reportez-vous au <a href="/docs/fr/tutorial-implement-a-time-based-ranking-in-milvus.md">didacticiel sur</a> le <a href="/docs/fr/tutorial-implement-a-time-based-ranking-in-milvus.md">classificateur de décroissance</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Créer un classificateur de décroissance</h3><p>Une fois votre collection configurée avec un champ numérique (dans cet exemple, <code translate="no">event_date</code> comme secondes à partir de maintenant), créez un classificateur de décroissance linéaire :</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Créer un classificateur de décroissance<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Une fois que votre collection est configurée avec un champ numérique (dans cet exemple, <code translate="no">event_date</code> comme secondes à partir de maintenant), créez un classificateur de décroissance linéaire :</p>
+<div class="alert note">
+<p><strong>Cohérence des unités de temps</strong>: Lorsque vous utilisez la décroissance basée sur le temps, assurez-vous que les paramètres <code translate="no">origin</code>, <code translate="no">scale</code> et <code translate="no">offset</code> utilisent la même unité de temps que les données de votre collection. Si votre collection stocke des horodatages en secondes, utilisez les secondes pour tous les paramètres. Si elle utilise des millisecondes, utilisez des millisecondes pour tous les paramètres.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 
@@ -169,6 +190,7 @@ beta: Milvus 2.6.x
 current_time = <span class="hljs-built_in">int</span>(time.time())
 
 <span class="hljs-comment"># Create a linear decay ranker for event listings</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;event_relevance&quot;</span>,               <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;event_date&quot;</span>],     <span class="hljs-comment"># Numeric field to use</span>
@@ -176,14 +198,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;linear&quot;</span>,             <span class="hljs-comment"># Choose linear decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Appliquer à la recherche vectorielle standard</h3><p>Après avoir défini votre classificateur de décroissance, vous pouvez l'appliquer pendant les opérations de recherche en le passant au paramètre <code translate="no">ranker</code>:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Appliquer à la recherche vectorielle standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Après avoir défini votre classificateur de décroissance, vous pouvez l'appliquer lors des opérations de recherche en le passant au paramètre <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -195,7 +232,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de décroissance peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Les classificateurs de décroissance peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

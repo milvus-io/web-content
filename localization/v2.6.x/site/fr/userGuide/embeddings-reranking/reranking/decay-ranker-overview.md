@@ -33,7 +33,7 @@ beta: Milvus 2.6.x
 </ul>
 <p>Ces scénarios ont tous un besoin commun : équilibrer la similarité vectorielle avec d'autres facteurs numériques tels que le temps, la distance ou la popularité.</p>
 <p>Les classeurs de décroissance de Milvus répondent à ce besoin en ajustant les classements de recherche sur la base des valeurs des champs numériques. Ils vous permettent d'équilibrer la similarité vectorielle avec la "fraîcheur", la "proximité" ou d'autres propriétés numériques de vos données, créant ainsi des expériences de recherche plus intuitives et contextuellement pertinentes.</p>
-<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Usage-notes" class="common-anchor-header">Notes d'utilisation<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,6 +52,12 @@ beta: Milvus 2.6.x
 <li><p>Le classement par décroissance ne peut pas être utilisé avec les recherches par regroupement.</p></li>
 <li><p>Le champ utilisé pour le classement par ordre de décroissance doit être numérique (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, ou <code translate="no">DOUBLE</code>).</p></li>
 <li><p>Chaque classificateur ne peut utiliser qu'un seul champ numérique.</p></li>
+<li><p><strong>Cohérence des unités de temps</strong>: Lorsque vous utilisez un classement par ordre de décroissance basé sur le temps, les unités des paramètres <code translate="no">origin</code>, <code translate="no">scale</code> et <code translate="no">offset</code> doivent correspondre aux unités utilisées dans les données de votre collection :</p>
+<ul>
+<li>Si votre collection stocke les horodatages en <strong>secondes</strong>, utilisez les secondes pour tous les paramètres.</li>
+<li>Si votre collection stocke les horodatages en <strong>millisecondes</strong>, utilisez les millisecondes pour tous les paramètres.</li>
+<li>Si votre collection stocke des horodatages en <strong>microsecondes</strong>, utilisez les microsecondes pour tous les paramètres.</li>
+</ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Fonctionnement<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +75,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Le classement par décroissance améliore la recherche vectorielle traditionnelle en incorporant des facteurs numériques tels que le temps ou la distance géographique dans le processus de classement. L'ensemble du processus suit les étapes suivantes :</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Étape 1 : Calcul des scores de similarité normalisés</h3><p>Tout d'abord, Milvus calcule et normalise les scores de similarité des vecteurs afin de garantir une comparaison cohérente :</p>
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Étape 1 : Calcul des scores de similarité normalisés<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tout d'abord, Milvus calcule et normalise les scores de similarité des vecteurs afin de garantir une comparaison cohérente :</p>
 <ul>
 <li><p>Pour les mesures de distance <strong>L2</strong> et <strong>JACCARD</strong> (où des valeurs plus faibles indiquent une plus grande similarité) :</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
@@ -77,20 +98,65 @@ beta: Milvus 2.6.x
 <p>Les distances sont transformées en scores de similarité compris entre 0 et 1, la valeur la plus élevée étant la meilleure.</p></li>
 <li><p>Pour les mesures <strong>IP</strong>, <strong>COSINE</strong> et <strong>BM25</strong> (où des scores plus élevés indiquent déjà de meilleures correspondances) : Les scores sont utilisés directement sans normalisation.</p></li>
 </ul>
-<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">Étape 2 : Calcul des scores de dégradation</h3><p>Ensuite, Milvus calcule un score de désintégration basé sur la valeur de champ numérique (comme l'horodatage ou la distance) à l'aide du classificateur de désintégration sélectionné :</p>
+<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">Étape 2 : Calcul des scores de dégradation<button data-href="#Stage-2-Calculate-decay-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ensuite, Milvus calcule un score de désintégration basé sur la valeur de champ numérique (comme l'horodatage ou la distance) à l'aide du classificateur de désintégration sélectionné :</p>
 <ul>
 <li><p>Chaque classificateur de désintégration transforme les valeurs numériques brutes en scores de pertinence normalisés compris entre 0 et 1</p></li>
 <li><p>Le score de décroissance représente le degré de pertinence d'un élément en fonction de sa "distance" par rapport au point idéal.</p></li>
 </ul>
 <p>La formule de calcul spécifique varie en fonction du type de classificateur de décroissance. Pour plus de détails sur le calcul d'un score de décroissance, reportez-vous aux pages consacrées à la <a href="/docs/fr/gaussian-decay.md#Formula">décroissance gaussienne</a>, à la <a href="/docs/fr/exponential-decay.md#Formula">décroissance exponentielle</a> et à la <a href="/docs/fr/linear-decay.md#Formula">décroissance linéaire</a>.</p>
-<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Étape 3 : Calcul des scores finaux</h3><p>Enfin, Milvus combine le score de similarité normalisé et le score de décroissance pour produire le score de classement final :</p>
+<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Étape 3 : Calcul des scores finaux<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Enfin, Milvus combine le score de similarité normalisé et le score de décroissance pour produire le score de classement final :</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>En cas de recherche hybride (combinaison de plusieurs champs vectoriels), Milvus prend le score de similarité normalisé maximal parmi les requêtes de recherche :</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Par exemple, si un document de recherche obtient un score de 0,82 pour la similarité vectorielle et un score de 0,91 pour la recherche de texte basée sur BM25 dans une recherche hybride, Milvus utilise 0,91 comme score de similarité de base avant d'appliquer le facteur de décroissance.</p>
-<h3 id="Decay-ranking-in-action" class="common-anchor-header">Le classement par décroissance en action</h3><p>Voyons le classement par décroissance dans un scénario pratique : la recherche de <strong>"documents de recherche sur l'IA"</strong> avec une décroissance basée sur le temps :</p>
+<h3 id="Decay-ranking-in-action" class="common-anchor-header">Le classement par décroissance en action<button data-href="#Decay-ranking-in-action" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voyons le classement par décroissance dans un scénario pratique : la recherche de <strong>"documents de recherche sur l'IA"</strong> avec une décroissance basée sur le temps :</p>
 <div class="alert note">
 <p>Dans cet exemple, les scores de décroissance reflètent la manière dont la pertinence diminue avec le temps - les articles plus récents obtiennent des scores plus proches de 1,0, tandis que les articles plus anciens obtiennent des scores plus faibles. Ces valeurs sont calculées à l'aide d'un classificateur de décroissance spécifique. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choisir le bon classificateur de décroissance</a>.</p>
 </div>
@@ -205,7 +271,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><a href="/docs/fr/gaussian-decay.md">Décroissance gaussienne</a></p></li>
 <li><p><a href="/docs/fr/exponential-decay.md">Décroissance exponentielle</a></p></li>
-<li><p><a href="/docs/fr/exponential-decay.md">Décroissance exponentielle</a></p></li>
+<li><p><a href="/docs/fr/linear-decay.md">Décroissance linéaire</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Exemple de mise en œuvre<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -226,10 +292,26 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Avant d'utiliser les fonctions de décroissance, vous devez d'abord créer une collection avec les champs numériques appropriés (comme les horodatages, les distances, etc.) qui seront utilisés pour les calculs de décroissance. Pour des exemples de travail complets comprenant la configuration de la collection, la définition du schéma et l'insertion de données, reportez-vous au <a href="/docs/fr/tutorial-implement-a-time-based-ranking-in-milvus.md">didacticiel : Mise en œuvre du classement basé sur le temps dans Milvus</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Création d'un classeur de décroissance</h3><p>Pour mettre en œuvre le classement par décroissance, il faut d'abord définir un objet <code translate="no">Function</code> avec la configuration appropriée :</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Création d'un classeur de décroissance<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour mettre en œuvre le classement par décroissance, il faut d'abord définir un objet <code translate="no">Function</code> avec la configuration appropriée :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 decay_ranker = Function(
     name=<span class="hljs-string">&quot;time_decay&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;timestamp&quot;</span>],    <span class="hljs-comment"># Numeric field to use for decay</span>
@@ -237,9 +319,9 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point (seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds (must match collection data unit)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone (must match collection data unit)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
     }
 )
@@ -285,28 +367,28 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Point de référence à partir duquel le score de décroissance est calculé. Les éléments ayant cette valeur reçoivent des scores de pertinence maximums.</p></td>
+     <td><p>Point de référence à partir duquel le score de décroissance est calculé. Les éléments situés à cette valeur reçoivent des scores de pertinence maximums. Pour la désintégration basée sur le temps, l'unité de temps doit correspondre à vos données de collecte.</p></td>
      <td><ul>
 <li>Pour les horodatages : l'heure actuelle (par exemple, <code translate="no">int(time.time())</code>).</li>
-<li>Pour la géolocalisation : les coordonnées actuelles de l'utilisateur</li>
+<li>Pour la géolocalisation : les coordonnées actuelles de l'utilisateur.</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.scale</code></p></td>
+          <td><p><code translate="no">params.scale</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Distance ou temps à partir duquel la pertinence chute jusqu'à la valeur <code translate="no">decay</code>. Des valeurs plus élevées entraînent une baisse plus progressive de la pertinence ; des valeurs plus faibles entraînent une baisse plus marquée.</p></td>
+     <td><p>Distance ou temps à partir duquel la pertinence chute jusqu'à la valeur <code translate="no">decay</code>. Contrôle la vitesse à laquelle la pertinence diminue. Dans le cas d'une diminution basée sur le temps, l'unité de temps doit correspondre à vos données de collecte. Les valeurs les plus élevées entraînent une diminution plus progressive de la pertinence ; les valeurs les plus faibles entraînent une diminution plus importante.</p></td>
      <td><ul>
 <li>Pour le temps : période en secondes (par exemple, <code translate="no">7 * 24 * 60 * 60</code> pendant 7 jours).</li>
 <li>Pour la distance : mètres (par exemple, <code translate="no">5000</code> pour 5 km).</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.offset</code></p></td>
+          <td><p><code translate="no">params.offset</code></p></td>
      <td><p>Non</p></td>
-     <td><p>Crée une "zone de non-décroissance" autour de <code translate="no">origin</code> où les éléments conservent un score complet (score de décroissance = 1,0). Les éléments situés dans cette zone de <code translate="no">origin</code> conservent une pertinence maximale.</p></td>
+     <td><p>Crée une "zone de non-décroissance" autour de <code translate="no">origin</code> où les éléments conservent un score complet (score de décroissance = 1,0). Les éléments situés dans cette zone de <code translate="no">origin</code> conservent une pertinence maximale. Pour la désintégration basée sur le temps, l'unité de temps doit correspondre à vos données de collecte.</p></td>
      <td><ul>
-<li>Pour le temps : période en secondes (par exemple, <code translate="no">24 * 60 * 60</code> pour 1 jour)</li>
-<li>Pour la distance : mètres (par exemple, <code translate="no">500</code> pour 500m)</li>
+<li>Pour le temps : période en secondes (par exemple, <code translate="no">24 * 60 * 60</code> pour 1 jour).</li>
+<li>Pour la distance : mètres (par exemple, <code translate="no">500</code> pour 500 m).</li>
 </ul></td>
    </tr>
    <tr>
@@ -316,7 +398,22 @@ decay_ranker = Function(
      <td><p><code translate="no">0.5</code> (par défaut)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Appliquer à la recherche vectorielle standard</h3><p>Après avoir défini votre classificateur de décroissance, vous pouvez l'appliquer lors des opérations de recherche en le transmettant au paramètre <code translate="no">ranker</code>:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Appliquer à la recherche vectorielle standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Après avoir défini votre classificateur de décroissance, vous pouvez l'appliquer lors des opérations de recherche en le transmettant au paramètre <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
@@ -328,7 +425,22 @@ results = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de décroissance peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Les classificateurs de décroissance peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>

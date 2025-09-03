@@ -6,7 +6,7 @@ summary: >-
   von einem langen Schwanz in Ihren Suchergebnissen. Ähnlich wie bei einem
   Nachrichtenzyklus, bei dem die Relevanz zunächst rapide abnimmt, einige
   Meldungen aber im Laufe der Zeit ihre Bedeutung behalten, werden durch den
-  exponentiellen Verfall Artikel, die knapp außerhalb des idealen Bereichs
+  exponentiellen Verfall Artikel, die knapp außerhalb Ihres idealen Bereichs
   liegen, stark benachteiligt, während weiter entfernte Artikel weiterhin
   auffindbar bleiben. Dieser Ansatz ist ideal, wenn Sie der Nähe oder Aktualität
   einen hohen Stellenwert einräumen, aber weiter entfernte Optionen nicht
@@ -35,7 +35,7 @@ beta: Milvus 2.6.x
 <li><p>Lineares Abklingen nimmt mit einer konstanten Rate ab, bis es genau Null erreicht</p></li>
 </ul>
 <p>Exponentielles Abklingen sorgt dafür, dass der größte Teil der Relevanzreduzierung früh einsetzt, während ein langer Schwanz minimaler, aber von Null verschiedener Relevanz erhalten bleibt.</p>
-<h2 id="When-to-use-exponential-decay" class="common-anchor-header">Wann sollte man exponentiellen Zerfall verwenden?<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
+<h2 id="When-to-use-exponential-decay" class="common-anchor-header">Wann wird exponentieller Zerfall verwendet?<button data-href="#When-to-use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,11 +100,14 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Der exponentielle Zerfall erzeugt eine Kurve, die zunächst schnell abfällt und dann allmählich zu einem langen Schwanz abflacht, der sich dem Wert Null nähert, ihn aber nie erreicht. Dieses mathematische Muster tritt häufig bei natürlichen Phänomenen wie dem radioaktiven Zerfall, dem Bevölkerungsrückgang und der Bedeutung von Informationen im Laufe der Zeit auf.</p>
+<div class="alert note">
+<p>Alle Zeitparameter (<code translate="no">origin</code>, <code translate="no">offset</code>, <code translate="no">scale</code>) müssen die gleiche Einheit wie die Daten der Sammlung verwenden. Wenn Ihre Sammlung Zeitstempel in einer anderen Einheit (Millisekunden, Mikrosekunden) speichert, passen Sie alle Parameter entsprechend an.</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/exp-decay.png" alt="Exp Decay" class="doc-image" id="exp-decay" />
-   </span> <span class="img-wrapper"> <span>Exp-Zerfall</span> </span></p>
-<p>Das obige Diagramm zeigt, wie sich der exponentielle Zerfall auf die Rangfolge von Nachrichtenartikeln auf einer digitalen Nachrichtenplattform auswirken würde:</p>
+   </span> <span class="img-wrapper"> <span>Exp-Abklingung</span> </span></p>
+<p>Das obige Diagramm zeigt, wie sich der exponentielle Verfall auf das Ranking von Nachrichtenartikeln auf einer digitalen Nachrichtenplattform auswirken würde:</p>
 <ul>
 <li><p><code translate="no">origin</code> (aktueller Zeitpunkt): Der gegenwärtige Moment, in dem die Relevanz am höchsten ist (1,0).</p></li>
 <li><p><code translate="no">offset</code> (3 Stunden): Das "Eilmeldung-Fenster" - alle innerhalb der letzten drei Stunden veröffentlichten Artikel behalten ihre volle Relevanz (1,0), wodurch sichergestellt wird, dass sehr aktuelle Nachrichten nicht unnötigerweise wegen geringer Zeitunterschiede benachteiligt werden.</p></li>
@@ -112,7 +115,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (24 Stunden): Der Zeitraum, in dem die Relevanz auf den Abklingwert fällt - bei Nachrichten, die genau 24 Stunden alt sind, wird die Relevanzbewertung halbiert (0,5).</p></li>
 </ul>
 <p>Wie Sie der Kurve entnehmen können, sinkt die Relevanz von Nachrichten, die älter als 24 Stunden sind, weiter, erreicht aber nie ganz den Wert Null. Selbst Artikel, die mehrere Tage alt sind, behalten eine minimale Relevanz, so dass wichtige, aber ältere Nachrichten immer noch in Ihrem Feed erscheinen (wenn auch in einem niedrigeren Ranking).</p>
-<p>Dieses Verhalten ahmt nach, wie die Relevanz von Nachrichten typischerweise funktioniert - sehr aktuelle Nachrichten dominieren stark, aber wichtige ältere Nachrichten können immer noch durchbrechen, wenn sie für die Interessen des Nutzers außergewöhnlich relevant sind.</p>
+<p>Dieses Verhalten ahmt nach, wie die Relevanz von Nachrichten in der Regel funktioniert - sehr aktuelle Nachrichten dominieren stark, aber wichtige ältere Nachrichten können immer noch durchbrechen, wenn sie für die Interessen des Nutzers außergewöhnlich relevant sind.</p>
 <h2 id="Formula" class="common-anchor-header">Formel<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,7 +140,7 @@ beta: Milvus 2.6.x
 <li><p>Berechnen Sie, wie weit der Feldwert vom Ursprung entfernt ist: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣fieldvaluedoc-origin∣|fieldvalue_{doc}</mi></mrow><annotation encoding="application/x-tex">- origin|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">∣fieldvalue</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">doc</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">origin</span><span class="mord">∣.</span></span></span></span></p></li>
 <li><p>Subtrahieren Sie den Versatz (falls vorhanden), aber gehen Sie nie unter Null: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>max</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>Abstand-Versatz</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\max <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(0, Abstand - Versatz)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">Abstand</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Versatz</span><span class="mclose">)</span></span></span></span>.</p></li>
 <li><p>Multiplizieren Sie mit <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span>, das aus Ihren Skalen- und Abklingparametern berechnet wird.</p></li>
-<li><p>Nehmen Sie den Exponenten, der Ihnen einen Wert zwischen 0 und 1 liefert: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo stretchy="false">(</mo><mi>λ⋅Wert</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\exp <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(\lambda \cdot-Wert)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Wert</span><span class="mclose">)</span></span></span></span>.</p></li>
+<li><p>Nehmen Sie den Exponenten, der Ihnen einen Wert zwischen 0 und 1 liefert: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo stretchy="false">(</mo><mi>λ⋅Wert</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\exp <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(\lambda \cdot Wert)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Wert</span><span class="mclose">)</span></span></span></span>.</p></li>
 </ol>
 <p>Die Berechnung von <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span> wandelt Ihre Skalen- und Zerfallsparameter in den Ratenparameter für die Exponentialfunktion um. Ein negativerer <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span> erzeugt einen steileren Anfangsabfall.</p>
 <h2 id="Use-exponential-decay" class="common-anchor-header">Exponentielles Abklingen verwenden<button data-href="#Use-exponential-decay" class="anchor-icon" translate="no">
@@ -159,11 +162,30 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Bevor Sie Abklingfunktionen verwenden, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempel, Entfernungen usw.) erstellen, die für Abklingberechnungen verwendet werden. Vollständige Arbeitsbeispiele, einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneinfügung, finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker Tutorial</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen eines Decay Rankers</h3><p>Nachdem Ihre Sammlung mit einem numerischen Feld (in diesem Beispiel <code translate="no">publish_time</code>) eingerichtet wurde, erstellen Sie einen exponentiellen Decay Ranker:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen eines Decay Rankers<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nachdem Ihre Sammlung mit einem numerischen Feld (in diesem Beispiel <code translate="no">publish_time</code>) eingerichtet wurde, erstellen Sie eine exponentielle Zerfallsrangliste:</p>
+<div class="alert note">
+<p><strong>Konsistenz der Zeiteinheit</strong>: Wenn Sie einen zeitbasierten Zerfall verwenden, stellen Sie sicher, dass die Parameter <code translate="no">origin</code>, <code translate="no">scale</code> und <code translate="no">offset</code> dieselbe Zeiteinheit verwenden wie Ihre Sammlungsdaten. Wenn Ihre Sammlung Zeitstempel in Sekunden speichert, verwenden Sie Sekunden für alle Parameter. Wenn sie Millisekunden verwendet, verwenden Sie Millisekunden für alle Parameter.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-comment"># Create an exponential decay ranker for news recency</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;news_recency&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;publish_time&quot;</span>],   <span class="hljs-comment"># Numeric field to use</span>
@@ -171,14 +193,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;exp&quot;</span>,                <span class="hljs-comment"># Choose exponential decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (1 day)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf Standard-Vektorsuche anwenden</h3><p>Nachdem Sie Ihren Decay Ranker definiert haben, können Sie ihn bei Suchvorgängen anwenden, indem Sie ihn an den Parameter <code translate="no">ranker</code> übergeben:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf die Standard-Vektorsuche anwenden<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nachdem Sie Ihren Decay Ranker definiert haben, können Sie ihn bei Suchvorgängen anwenden, indem Sie ihn an den Parameter <code translate="no">ranker</code> übergeben:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -190,7 +227,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf hybride Suche anwenden</h3><p>Decay Rankers können auch auf hybride Suchoperationen angewendet werden, die mehrere Vektorfelder kombinieren:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf hybride Suche anwenden<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Decay Ranker können auch auf hybride Suchoperationen angewendet werden, die mehrere Vektorfelder kombinieren:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

@@ -3,7 +3,7 @@ id: linear-decay.md
 title: 線性衰減Compatible with Milvus 2.6.x
 summary: >-
   線性衰減 (Linear Decutation)
-  會在搜尋結果中創造一個直線下降，終點為絕對的零點。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束為止，線性遞減會隨著項目離開您的理想點而穩定地降低相關性，直到它們完全消失為止。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超過某個界限的項目完全被排除在結果之外。
+  會在搜尋結果中產生直線下降，並以絕對零點為終點。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束為止，線性遞減會隨著項目離開您的理想點而穩定地降低相關性，直到它們完全消失為止。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超出特定界線的項目完全被排除在結果之外。
 beta: Milvus 2.6.x
 ---
 <h1 id="Linear-Decay" class="common-anchor-header">線性衰減<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Linear-Decay" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>線性衰減 (Linear Decay) 在您的搜尋結果中創造了一個以絕對零點為終點的直線下降。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束，線性衰減在項目離開您的理想點時，應用可預測的、穩定的相關性減弱，直到它們完全消失。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超出某個邊界的項目完全被排除在結果之外。</p>
+    </button></h1><p>線性衰減 (Linear Decay) 在您的搜尋結果中創造了一個以絕對零點為終點的直線下降。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束，線性衰減在項目離開您的理想點時，應用可預測的、穩定的相關性減弱，直到它們完全消失。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超過某個邊界的項目完全被排除在結果之外。</p>
 <p>與其他衰減函數不同：</p>
 <ul>
 <li><p>高斯衰減遵循逐漸接近但永遠不會達到零的鐘形曲線</p></li>
@@ -94,19 +94,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>線性衰退會產生直線下降，以固定的速率遞減，直到完全為零。這種模式出現在許多日常情境中，例如倒數計時器、庫存耗盡以及相關性有明確到期點的截止日期臨近。</p>
+<div class="alert note">
+<p>所有時間參數 (<code translate="no">origin</code>,<code translate="no">offset</code>,<code translate="no">scale</code>) 必須使用與集合資料相同的單位。如果您的收集以不同的單位 (毫秒、微秒) 儲存時間戳記，請相應調整所有參數。</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
    </span> <span class="img-wrapper"> <span>線性衰減</span> </span></p>
 <p>上圖顯示線性衰減如何影響票務平台上的活動清單：</p>
 <ul>
-<li><p><code translate="no">origin</code> (當前日期）：當下，相關性處於最大值 (1.0)。</p></li>
-<li><p><code translate="no">offset</code> (1 天)：即時事件視窗」- 所有在隔天內發生的事件都會維持完整的相關性評分 (1.0)，以確保即將發生的事件不會因為微小的時間差異而受到懲罰。</p></li>
+<li><p><code translate="no">origin</code> (當前日期）：當下，相關性達到最大值 (1.0)。</p></li>
+<li><p><code translate="no">offset</code> (1 天)：即時事件視窗」- 所有在隔天內發生的事件都會維持完整的相關性評分 (1.0)，確保即將發生的事件不會因為微小的時間差異而受到懲罰。</p></li>
 <li><p><code translate="no">decay</code> (0.5):刻度距離的分數 - 此參數控制相關性的下降速度。</p></li>
 <li><p><code translate="no">scale</code> (10 天)：相關性下降到衰減值的時間段 - 距離 10 天的事件，其相關性分數會減半 (0.5)。</p></li>
 </ul>
-<p>從直線曲線可以看出，距離約 16 天以上的事件相關性完全為零，完全不會出現在搜尋結果中。這創造了一個明確的界限，確保使用者只能在定義的時間視窗內看到相關的即將發生事件。</p>
-<p>此行為反映了活動規劃的典型運作方式 - 近期的活動最為相關，未來幾週內的活動重要性遞減，而太遠的未來活動 (或已過去的活動) 則完全不該出現。</p>
+<p>從直線曲線可以看出，距離約 16 天以上的事件相關性完全為零，完全不會出現在搜尋結果中。這創造了一個明確的界限，確保使用者只能在定義的時間視窗內看到相關的即將發生的事件。</p>
+<p>此行為反映了活動規劃的典型運作方式 - 近期的活動最為相關，未來幾週內的活動重要性遞減，而太遠的未來活動 (或已過去的活動) 則完全不應該出現。</p>
 <h2 id="Formula" class="common-anchor-header">計算公式<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,7 +157,25 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>在使用衰減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於衰減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker Tutorial</a>。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>在您的資料集中設定了數值欄位 (在本範例中，<code translate="no">event_date</code> ，即從現在開始的秒數)，請建立線性衰減排名器：</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在您的資料集中設定了數值欄位 (在本範例中，<code translate="no">event_date</code> ，即從現在開始的秒數)，請建立一個線性衰減排名器：</p>
+<div class="alert note">
+<p><strong>時間單位一致性</strong>：當使用以時間為基礎的遞減時，請確保<code translate="no">origin</code>,<code translate="no">scale</code>, 和<code translate="no">offset</code> 參數與您的收集資料使用相同的時間單位。如果您的資料集以秒為單位儲存時間戳記，則所有參數都使用秒。如果使用毫秒，則所有參數都使用毫秒。</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 
@@ -162,6 +183,7 @@ beta: Milvus 2.6.x
 current_time = <span class="hljs-built_in">int</span>(time.time())
 
 <span class="hljs-comment"># Create a linear decay ranker for event listings</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;event_relevance&quot;</span>,               <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;event_date&quot;</span>],     <span class="hljs-comment"># Numeric field to use</span>
@@ -169,14 +191,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;linear&quot;</span>,             <span class="hljs-comment"># Choose linear decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">套用到標準向量搜尋</h3><p>定義衰落排序器之後，您可以將它傳給<code translate="no">ranker</code> 參數，在搜尋操作中應用它：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">套用至標準向量搜尋<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定義衰減排位器之後，您可以在搜尋作業時將它套用到<code translate="no">ranker</code> 參數：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -188,7 +225,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">應用於混合搜尋</h3><p>衰減排序器也可以應用於結合多向量場的混合搜尋作業：</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">套用至混合搜尋<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>衰減排序器也可應用於結合多向量場的混合搜尋作業：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

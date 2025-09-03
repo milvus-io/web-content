@@ -1078,7 +1078,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutorial: Implementare una classifica basata sul tempo in Milvus",
+                    "label": "Tutorial: Implementare la classificazione basata sul tempo in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1107,6 +1107,24 @@
                     "label": "Classificatore TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Cohere Ranker",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Voyage AI Ranker",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "SiliconFlow Ranker",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
                     "children": []
                   }
                 ]
@@ -2648,7 +2666,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

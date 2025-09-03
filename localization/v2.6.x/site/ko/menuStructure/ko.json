@@ -1108,6 +1108,24 @@
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
+                  },
+                  {
+                    "label": "코히어 랭커",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Voyage AI 랭커",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "실리콘플로우 랭커",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               }

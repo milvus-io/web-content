@@ -19,6 +19,109 @@ title: 版本说明
         ></path>
       </svg>
     </button></h1><p>了解 Milvus 的新功能！本页总结了每个版本的新功能、改进、已知问题和错误修复。您可以在本部分找到 v2.6.0 之后每个版本的发布说明。我们建议您定期访问此页面以了解更新信息。</p>
+<h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>发布日期：2025 年 9 月 3 日</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 版本</th><th style="text-align:left">Python SDK 版本</th><th style="text-align:left">Node.js SDK 版本</th><th style="text-align:left">Java SDK 版本</th><th style="text-align:left">Go SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>我们很高兴地宣布 Milvus 2.6.1 正式发布！该版本以之前版本的主要架构进步为基础，提供了专注于生产稳定性、性能和操作符稳健性的关键增强功能。该版本解决了关键的社区反馈问题，并加强了系统的大规模部署能力。我们强烈建议所有用户进行升级，以便从更稳定、性能更强和更可靠的系统中获益。</p>
+<h3 id="Improvements" class="common-anchor-header">改进<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>远程存储支持 POSIX 兼容文件系统<a href="https://github.com/milvus-io/milvus/pull/43944">（#43944）</a></li>
+<li>引入基于模型的 Rerankers<a href="https://github.com/milvus-io/milvus/pull/43270">（#43270）</a></li>
+<li>优化了主键字段比较表达式的性能<a href="https://github.com/milvus-io/milvus/pull/43154">（#43154）</a></li>
+<li>直接从发布列表中收集 doc_id，以加速文本匹配<a href="https://github.com/milvus-io/milvus/pull/43899">(#43899</a>)</li>
+<li>通过将多个 != 条件转换为单个 NOT IN 子句来优化查询性能<a href="https://github.com/milvus-io/milvus/pull/43690">(#43690</a>)</li>
+<li>在段加载过程中加强缓存层的资源管理<a href="https://github.com/milvus-io/milvus/pull/43846">(#43846</a>)</li>
+<li>改进数据加载期间临时索引的内存估算<a href="https://github.com/milvus-io/milvus/pull/44104">(#44104</a>)</li>
+<li>使临时索引的构建比率可配置<a href="https://github.com/milvus-io/milvus/pull/43939">（#43939）</a></li>
+<li>为磁盘写入器添加可配置的写入速率限制<a href="https://github.com/milvus-io/milvus/pull/43912">（#43912）</a></li>
+<li>现在无需重启 Milvus 服务即可动态更新 SegCore 参数<a href="https://github.com/milvus-io/milvus/pull/43231">(#43231</a>)</li>
+<li>添加统一的 gRPC 延迟指标以提高可观察性<a href="https://github.com/milvus-io/milvus/pull/44089">（#44089）</a></li>
+<li>在 gRPC 标头中包含客户端请求时间戳，以简化调试<a href="https://github.com/milvus-io/milvus/pull/44059">(#44059</a>)</li>
+<li>支持 segcore 的跟踪日志级别<a href="https://github.com/milvus-io/milvus/pull/44003">(#44003</a>)</li>
+<li>添加了一个可配置开关，用于调整一致性保证以提高可用性<a href="https://github.com/milvus-io/milvus/pull/43874">（#43874）</a></li>
+<li>实施稳健的重新观察机制，以处理 etcd 连接失败<a href="https://github.com/milvus-io/milvus/pull/43829">(#43829</a>)</li>
+<li>改进内部节点健康检查逻辑<a href="https://github.com/milvus-io/milvus/pull/43768">(#43768</a>)</li>
+<li>优化列出 Collections 时的元数据访问<a href="https://github.com/milvus-io/milvus/pull/43902">(#43902</a>)</li>
+<li>将 Pulsar 客户端升级至 v0.15.1 正式版并添加更多日志记录<a href="https://github.com/milvus-io/milvus/pull/43913">（#43913）</a></li>
+<li>将 aws-sdk 从 1.9.234 升级到 1.11.352<a href="https://github.com/milvus-io/milvus/pull/43916">(#43916</a>)</li>
+<li>支持行情组件的动态间隔更新<a href="https://github.com/milvus-io/milvus/pull/43865">(#43865</a>)</li>
+<li>改进比特集操作中 ARM SVE 指令集的自动检测<a href="https://github.com/milvus-io/milvus/pull/43833">(#43833</a>)</li>
+<li>改进文本或短语匹配失败时的错误信息<a href="https://github.com/milvus-io/milvus/pull/43366">(#43366</a>)</li>
+<li>改进向量维度不匹配时的错误信息<a href="https://github.com/milvus-io/milvus/pull/43835">(#43835</a>)</li>
+<li>改进了对象存储不可用时追加超时的错误报告<a href="https://github.com/milvus-io/milvus/pull/43926">(#43926</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">错误修复<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>修复了 Parquet 文件导入时可能出现的内存不足 (OOM) 问题<a href="https://github.com/milvus-io/milvus/pull/43756">(#43756</a>)</li>
+<li>修复了备用节点在租约到期时无法恢复的问题<a href="https://github.com/milvus-io/milvus/pull/44112">（#44112）</a></li>
+<li>正确处理压缩重试状态<a href="https://github.com/milvus-io/milvus/pull/44119">(#44119</a>)</li>
+<li>修复了连续读取请求与索引加载之间可能导致索引无法加载的死锁问题<a href="https://github.com/milvus-io/milvus/pull/43937">(#43937</a>)</li>
+<li>修复了在高并发情况下可能导致数据删除失败的错误<a href="https://github.com/milvus-io/milvus/pull/43831">(#43831</a>)</li>
+<li>修复了加载文本和 JSON 索引时可能出现的竞赛条件<a href="https://github.com/milvus-io/milvus/pull/43811">(#43811</a>)</li>
+<li>修复了重新启动 QueryCoord 后可能出现的节点状态不一致问题<a href="https://github.com/milvus-io/milvus/pull/43941">(#43941</a>)</li>
+<li>确保在重启后正确清理 "脏 "查询节点<a href="https://github.com/milvus-io/milvus/pull/43909">(#43909</a>)</li>
+<li>修复了一个问题，即对于具有非空有效载荷的请求，未正确处理重试状态<a href="https://github.com/milvus-io/milvus/pull/44068">(#44068</a>)</li>
+<li>修复了批量写入器 v2 未使用正确桶名的问题<a href="https://github.com/milvus-io/milvus/pull/44083">(#44083</a>)</li>
+<li>通过从 RESTful get_configs 端点隐藏敏感项目来增强安全性<a href="https://github.com/milvus-io/milvus/pull/44057">(#44057</a>)</li>
+<li>确保啄木鸟的对象上传在超时重试期间是等效的<a href="https://github.com/milvus-io/milvus/pull/43947">（#43947）</a></li>
+<li>禁止从 Parquet 文件导入数组字段中的空元素<a href="https://github.com/milvus-io/milvus/pull/43964">(#43964</a>)</li>
+<li>修复了创建 Collections 别名后代理缓存未失效的错误<a href="https://github.com/milvus-io/milvus/pull/43854">(#43854</a>)</li>
+<li>改进了流节点的内部服务发现机制<a href="https://github.com/milvus-io/milvus/pull/44033">（#44033）</a></li>
+<li>修正了资源组逻辑，以正确过滤流节点<a href="https://github.com/milvus-io/milvus/pull/43984">（#43984）</a></li>
+<li>为度量添加数据库名称标签，以防止在多数据库环境中发生命名冲突<a href="https://github.com/milvus-io/milvus/pull/43808">(#43808</a>)</li>
+<li>修复内部任务状态处理中的逻辑错误<a href="https://github.com/milvus-io/milvus/pull/43777">(#43777</a>)</li>
+<li>优化了内部指标的初始化时序，以避免潜在的恐慌<a href="https://github.com/milvus-io/milvus/pull/43773">(#43773</a>)</li>
+<li>修复了内部 HTTP 服务器中一个罕见的潜在崩溃问题<a href="https://github.com/milvus-io/milvus/pull/43799">(#43799</a>)</li>
+</ul>
 <h2 id="v260" class="common-anchor-header">v2.6.0<button data-href="#v260" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

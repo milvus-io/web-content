@@ -98,12 +98,15 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Экспоненциальный спад создает кривую, которая сначала быстро падает, а затем постепенно сглаживается в длинный хвост, который приближается, но никогда не достигает нуля. Эта математическая модель часто встречается в таких природных явлениях, как радиоактивный распад, сокращение численности населения и актуальность информации с течением времени.</p>
+    </button></h2><p>Экспоненциальный спад создает кривую, которая сначала быстро падает, а затем постепенно сглаживается в длинный хвост, который приближается, но никогда не достигает нуля. Эта математическая закономерность часто проявляется в таких природных явлениях, как радиоактивный распад, сокращение численности населения и актуальность информации с течением времени.</p>
+<div class="alert note">
+<p>Все временные параметры (<code translate="no">origin</code>, <code translate="no">offset</code>, <code translate="no">scale</code>) должны использовать ту же единицу измерения, что и данные коллекции. Если в вашей коллекции хранятся временные метки в других единицах (миллисекунды, микросекунды), настройте все параметры соответствующим образом.</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/exp-decay.png" alt="Exp Decay" class="doc-image" id="exp-decay" />
    </span> <span class="img-wrapper"> <span>Экспоненциальный распад</span> </span></p>
-<p>На графике выше показано, как экспоненциальный распад повлияет на рейтинг новостных статей на цифровой новостной платформе:</p>
+<p>На графике выше показано, как экспоненциальный распад влияет на рейтинг новостных статей на цифровой новостной платформе:</p>
 <ul>
 <li><p><code translate="no">origin</code> (текущее время): Текущий момент, когда актуальность максимальна (1.0).</p></li>
 <li><p><code translate="no">offset</code> (3 часа): "окно срочных новостей" - все статьи, опубликованные в течение последних 3 часов, сохраняют полный балл релевантности (1,0), гарантируя, что самые свежие новости не будут подвергаться ненужному наказанию за незначительную разницу во времени.</p></li>
@@ -111,7 +114,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (24 часа): Временной промежуток, когда релевантность падает до значения распада - у новостей, которым ровно 24 часа, оценка релевантности снижается вдвое (0,5).</p></li>
 </ul>
 <p>Как видно из кривой, релевантность статей старше 24 часов продолжает снижаться, но так и не достигает нуля. Даже новости, опубликованные несколько дней назад, сохраняют минимальную релевантность, что позволяет важным, но старым новостям по-прежнему появляться в вашей ленте (хотя и с более низким рейтингом).</p>
-<p>Такое поведение имитирует то, как обычно работает релевантность новостей - очень свежие истории сильно доминируют, но значимые старые истории все же могут пробиться вперед, если они исключительно релевантны интересам пользователя.</p>
+<p>Такое поведение имитирует то, как обычно работает релевантность новостей - очень свежие истории сильно доминируют, но значимые старые истории все равно могут вырваться вперед, если они исключительно релевантны интересам пользователя.</p>
 <h2 id="Formula" class="common-anchor-header">Формула<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,11 +161,30 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Прежде чем использовать функции затухания, необходимо создать коллекцию с соответствующими числовыми полями (например, временными метками, расстояниями и т. д.), которые будут использоваться для вычислений затухания. Полные рабочие примеры, включающие настройку коллекции, определение схемы и вставку данных, см. в разделе <a href="/docs/ru/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker Tutorial</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Создание ранжировщика распада</h3><p>После того как коллекция будет настроена с числовым полем (в данном примере <code translate="no">publish_time</code>), создайте ранжировщик экспоненциального распада:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Создание ранжировщика распада<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После того как коллекция будет настроена с числовым полем (в данном примере <code translate="no">publish_time</code>), создайте ранжировщик экспоненциального распада:</p>
+<div class="alert note">
+<p><strong>Согласованность единиц времени</strong>: При использовании распада на основе времени убедитесь, что параметры <code translate="no">origin</code>, <code translate="no">scale</code> и <code translate="no">offset</code> используют ту же единицу времени, что и данные коллекции. Если коллекция хранит временные метки в секундах, используйте секунды для всех параметров. Если она использует миллисекунды, используйте миллисекунды для всех параметров.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-comment"># Create an exponential decay ranker for news recency</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;news_recency&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;publish_time&quot;</span>],   <span class="hljs-comment"># Numeric field to use</span>
@@ -170,14 +192,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;exp&quot;</span>,                <span class="hljs-comment"># Choose exponential decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (1 day)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Применить к стандартному векторному поиску</h3><p>Определив ранжировщик распада, вы можете применить его при поиске, передав параметр <code translate="no">ranker</code>:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Применение к стандартному векторному поиску<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Определив ранжировщик распада, вы можете применить его в операциях поиска, передав параметр <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -189,7 +226,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Применить к гибридному поиску</h3><p>Ранжировщики распада также можно применять в операциях гибридного поиска, которые объединяют несколько векторных полей:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Применить к гибридному поиску<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ранжировщики распада также можно применять в гибридных поисковых операциях, которые объединяют несколько векторных полей:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

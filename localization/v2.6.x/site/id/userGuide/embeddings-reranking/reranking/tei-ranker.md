@@ -23,8 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TEI Ranker memanfaatkan layanan <a href="/docs/id/tei-ranker.md">Text Embedding Inference (TEI</a> ) dari Hugging Face untuk meningkatkan relevansi penelusuran melalui pemeringkatan semantik. Ini merupakan pendekatan canggih untuk pengurutan hasil pencarian yang melampaui kesamaan vektor tradisional.</p>
-<p>Dibandingkan dengan <a href="/docs/id/vllm-ranker.md">vLLM Ranker</a>, TEI Ranker menawarkan integrasi langsung dengan ekosistem Hugging Face dan model pemeringkatan ulang yang telah dilatih sebelumnya, sehingga ideal untuk aplikasi yang mengutamakan kemudahan penerapan dan pemeliharaan.</p>
+    </button></h1><p>TEI Ranker memanfaatkan layanan <a href="https://huggingface.co/docs/text-embeddings-inference/index">Text Embedding Inference (TEI</a> ) dari Hugging Face untuk meningkatkan relevansi penelusuran melalui pemeringkatan semantik. Ini merupakan pendekatan canggih untuk pengurutan hasil pencarian yang melampaui kesamaan vektor tradisional.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +39,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebelum menerapkan vLLM Ranker di Milvus, pastikan Anda memiliki:</p>
+    </button></h2><p>Sebelum mengimplementasikan vLLM Ranker di Milvus, pastikan Anda memiliki:</p>
 <ul>
 <li><p>Koleksi Milvus dengan bidang <code translate="no">VARCHAR</code> yang berisi teks yang akan diperingkat ulang</p></li>
 <li><p>Layanan TEI yang sedang berjalan dengan kemampuan pemeringkatan ulang. Untuk petunjuk terperinci tentang menyiapkan layanan TEI, lihat <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">dokumentasi resmi TEI</a>.</p></li>
@@ -61,6 +60,8 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Untuk menggunakan TEI Ranker di aplikasi Milvus Anda, buatlah sebuah objek Function yang menentukan bagaimana pemeringkatan ulang harus beroperasi. Fungsi ini akan diteruskan ke operasi pencarian Milvus untuk meningkatkan peringkat hasil.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -78,13 +79,36 @@ tei_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,                 <span class="hljs-comment"># Specifies TEI as the service provider</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text for relevance evaluation</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># Your TEI service URL</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;max_client_batch_size&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
         <span class="hljs-string">&quot;truncate&quot;</span>: <span class="hljs-literal">True</span>,                <span class="hljs-comment"># Optional: Truncate the inputs that are longer than the maximum supported size</span>
         <span class="hljs-string">&quot;truncation_direction&quot;</span>: <span class="hljs-string">&quot;Right&quot;</span>,    <span class="hljs-comment"># Optional: Direction to truncate the inputs</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">Parameter khusus pemeringkat TEI</h3><p>Parameter berikut ini khusus untuk pemeringkat TEI:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">Parameter khusus pemeringkat TEI<button data-href="#TEI-ranker-specific-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Parameter berikut ini khusus untuk pemeringkat TEI:</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -93,9 +117,39 @@ tei_ranker = Function(
      <th><p>Nilai / Contoh</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">reranker</code></p></td>
+     <td><p>Ya</p></td>
+     <td><p>Harus diatur ke <code translate="no">"model"</code> untuk mengaktifkan pemeringkatan ulang model.</p></td>
+     <td><p><code translate="no">"model"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">provider</code></p></td>
+     <td><p>Ya</p></td>
+     <td><p>Penyedia layanan model yang akan digunakan untuk pemeringkatan ulang.</p></td>
+     <td><p><code translate="no">"tei"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queries</code></p></td>
+     <td><p>Ya</p></td>
+     <td><p>Daftar string kueri yang digunakan oleh model pemeringkatan ulang untuk menghitung skor relevansi. Jumlah string kueri harus sama persis dengan jumlah kueri dalam operasi pencarian Anda (bahkan saat menggunakan vektor kueri, bukan teks), jika tidak, kesalahan akan dilaporkan.</p></td>
+     <td><p><em>["kueri penelusuran"]</em></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">endpoint</code></p></td>
+     <td><p>Ya</p></td>
+     <td><p>URL layanan TEI Anda.</p></td>
+     <td><p><code translate="no">"http://localhost:8080"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
+     <td><p>Tidak</p></td>
+     <td><p>Karena layanan model tidak dapat memproses semua data sekaligus, ini menetapkan ukuran batch untuk mengakses layanan model dalam beberapa permintaan.</p></td>
+     <td><p><code translate="no">32</code> (default)</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">truncate</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Apakah akan memotong input yang melebihi panjang urutan maksimum. Jika <code translate="no">False</code>, input yang panjang akan menimbulkan kesalahan.</p></td>
+     <td><p>Apakah akan memotong input yang melebihi panjang urutan maksimal. Jika <code translate="no">False</code>, input yang panjang akan menimbulkan kesalahan.</p></td>
      <td><p><code translate="no">True</code> atau <code translate="no">False</code></p></td>
    </tr>
    <tr>
@@ -128,6 +182,8 @@ tei_ranker = Function(
         ></path>
       </svg>
     </button></h2><p>Untuk menerapkan TEI Ranker ke pencarian vektor standar:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -139,7 +195,15 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-hybrid-search" class="common-anchor-header">Terapkan ke pencarian hibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Apply-to-hybrid-search" class="common-anchor-header">Menerapkan ke pencarian hibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,6 +219,8 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><p>TEI Ranker juga dapat digunakan dengan pencarian hibrida untuk menggabungkan metode pencarian padat dan jarang:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Configure dense vector search</span>
@@ -181,4 +247,12 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -19,6 +19,109 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.6.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2025년 9월 3일</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.6.1의 출시를 발표하게 되어 기쁩니다! 이 버전은 이전 릴리스의 주요 아키텍처 개선 사항을 기반으로 제작 안정성, 성능 및 운영 견고성에 중점을 둔 중요한 개선 사항을 제공합니다. 이번 릴리스는 주요 커뮤니티 피드백을 반영하고 대규모 배포를 위한 시스템을 강화했습니다. 모든 사용자가 업그레이드하여 더욱 안정적이고 성능이 뛰어나며 신뢰할 수 있는 시스템의 혜택을 누리시기 바랍니다.</p>
+<h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>원격 저장소를 위한 POSIX 호환 파일 시스템 지원<a href="https://github.com/milvus-io/milvus/pull/43944">(#43944</a>)</li>
+<li>모델 기반 재랭커 도입<a href="https://github.com/milvus-io/milvus/pull/43270">(#43270</a>)</li>
+<li>기본 키 필드에 대한 비교 표현식의 성능 최적화<a href="https://github.com/milvus-io/milvus/pull/43154">(#43154</a>)</li>
+<li>텍스트 일치 속도를 높이기 위해 게시 목록에서 직접 doc_id를 수집<a href="https://github.com/milvus-io/milvus/pull/43899">(#43899</a>).</li>
+<li>여러 개의 != 조건을 하나의 NOT IN 절로 변환하여 쿼리 성능 최적화<a href="https://github.com/milvus-io/milvus/pull/43690">(#43690</a>)</li>
+<li>세그먼트 로딩 중 캐싱 계층의 리소스 관리 개선<a href="https://github.com/milvus-io/milvus/pull/43846">(#43846</a>)</li>
+<li>데이터 로드 중 중간 인덱스에 대한 메모리 추정 개선<a href="https://github.com/milvus-io/milvus/pull/44104">(#44104</a>)</li>
+<li>중간 인덱스의 빌드 비율을 구성 가능하게 함<a href="https://github.com/milvus-io/milvus/pull/43939">(#43939</a>).</li>
+<li>디스크 쓰기기에 구성 가능한 쓰기 속도 제한을 추가합니다<a href="https://github.com/milvus-io/milvus/pull/43912">(#43912</a>).</li>
+<li>이제 Milvus 서비스를 다시 시작하지 않고도 SegCore 매개변수를 동적으로 업데이트할 수 있습니다<a href="https://github.com/milvus-io/milvus/pull/43231">(#43231</a>).</li>
+<li>통합 gRPC 지연 시간 메트릭을 추가하여 통합 가시성 향상<a href="https://github.com/milvus-io/milvus/pull/44089">(#44089</a>).</li>
+<li>디버깅을 간소화하기 위해 클라이언트 요청 타임스탬프를 gRPC 헤더에 포함<a href="https://github.com/milvus-io/milvus/pull/44059">(#44059</a>).</li>
+<li>세그코어에 대한 추적 로그 수준 지원<a href="https://github.com/milvus-io/milvus/pull/44003">(#44003</a>)</li>
+<li>가용성 향상을 위해 일관성 보장을 조정하는 구성 가능한 스위치 추가<a href="https://github.com/milvus-io/milvus/pull/43874">(#43874</a>).</li>
+<li>etcd 연결 실패를 처리하기 위한 강력한 재감시 메커니즘 구현<a href="https://github.com/milvus-io/milvus/pull/43829">(#43829</a>).</li>
+<li>내부 노드 상태 확인 로직 개선<a href="https://github.com/milvus-io/milvus/pull/43768">(#43768</a>)</li>
+<li>컬렉션을 나열할 때 메타데이터 액세스 최적화<a href="https://github.com/milvus-io/milvus/pull/43902">(#43902</a>)</li>
+<li>Pulsar 클라이언트를 v0.15.1 공식 버전으로 업그레이드하고 더 많은 로깅 추가<a href="https://github.com/milvus-io/milvus/pull/43913">(#43913</a>)</li>
+<li>aws-sdk를 1.9.234에서 1.11.352로 업그레이드<a href="https://github.com/milvus-io/milvus/pull/43916">(#43916</a>).</li>
+<li>티커 구성 요소에 대한 동적 간격 업데이트 지원<a href="https://github.com/milvus-io/milvus/pull/43865">(#43865</a>)</li>
+<li>비트 세트 연산을 위한 ARM SVE 명령어 세트의 자동 감지 기능 개선<a href="https://github.com/milvus-io/milvus/pull/43833">(#43833</a>)</li>
+<li>텍스트 또는 구문 일치 실패 시 오류 메시지 개선<a href="https://github.com/milvus-io/milvus/pull/43366">(#43366</a>)</li>
+<li>벡터 차원 불일치에 대한 오류 메시지 개선<a href="https://github.com/milvus-io/milvus/pull/43835">(#43835</a>)</li>
+<li>객체 저장소를 사용할 수 없을 때 추가 시간 초과에 대한 오류 보고를 개선합니다<a href="https://github.com/milvus-io/milvus/pull/43926">(#43926</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Parquet 파일 임포트 중 잠재적인 메모리 부족(OOM) 문제 수정<a href="https://github.com/milvus-io/milvus/pull/43756">(#43756</a>)</li>
+<li>대기 노드의 임대가 만료된 경우 복구할 수 없는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/44112">(#44112</a>).</li>
+<li>압축 재시도 상태를 올바르게 처리합니다<a href="https://github.com/milvus-io/milvus/pull/44119">(#44119</a>).</li>
+<li>인덱스 로딩을 방해할 수 있는 연속 읽기 요청과 인덱스 로딩 사이의 잠재적인 교착 상태 수정<a href="https://github.com/milvus-io/milvus/pull/43937">(#43937</a>).</li>
+<li>동시성이 높은 시나리오에서 데이터 삭제가 실패할 수 있는 버그를 수정합니다<a href="https://github.com/milvus-io/milvus/pull/43831">(#43831</a>).</li>
+<li>텍스트 및 JSON 인덱스 로드 시 잠재적인 경쟁 조건 수정<a href="https://github.com/milvus-io/milvus/pull/43811">(#43811</a>).</li>
+<li>쿼리코드 재시작 후 발생할 수 있는 노드 상태 불일치 문제 수정<a href="https://github.com/milvus-io/milvus/pull/43941">(#43941</a>).</li>
+<li>재시작 후 "더티" 쿼리 노드가 제대로 정리되도록 합니다<a href="https://github.com/milvus-io/milvus/pull/43909">(#43909</a>).</li>
+<li>페이로드가 비어 있지 않은 요청에 대해 재시도 상태가 올바르게 처리되지 않던 문제 수정<a href="https://github.com/milvus-io/milvus/pull/44068">(#44068</a>).</li>
+<li>벌크 라이터 v2가 올바른 버킷 이름을 사용하지 않는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/44083">(#44083</a>).</li>
+<li>RESTful get_configs 엔드포인트에서 민감한 항목을 숨겨 보안을 강화<a href="https://github.com/milvus-io/milvus/pull/44057">(#44057</a>).</li>
+<li>시간 초과 재시도 중 딱따구리에 대한 오브젝트 업로드가 무효화되도록 보장<a href="https://github.com/milvus-io/milvus/pull/43947">(#43947</a>).</li>
+<li>Parquet 파일에서 배열 필드의 null 요소를 가져오는 것을 허용하지 않음<a href="https://github.com/milvus-io/milvus/pull/43964">(#43964</a>).</li>
+<li>컬렉션 별칭을 생성한 후 프록시 캐시가 무효화되지 않는 버그 수정<a href="https://github.com/milvus-io/milvus/pull/43854">(#43854</a>).</li>
+<li>스트리밍 노드에 대한 내부 서비스 검색 메커니즘 개선<a href="https://github.com/milvus-io/milvus/pull/44033">(#44033</a>).</li>
+<li>리소스 그룹 로직이 스트리밍 노드를 올바르게 필터링하도록 수정<a href="https://github.com/milvus-io/milvus/pull/43984">(#43984</a>).</li>
+<li>다중 데이터베이스 환경에서 이름 충돌을 방지하기 위해 메트릭에 databaseName 레이블을 추가합니다<a href="https://github.com/milvus-io/milvus/pull/43808">(#43808</a>).</li>
+<li>내부 작업 상태 처리의 논리 오류 수정<a href="https://github.com/milvus-io/milvus/pull/43777">(#43777</a>)</li>
+<li>잠재적인 패닉을 방지하기 위해 내부 메트릭의 초기화 타이밍을 최적화<a href="https://github.com/milvus-io/milvus/pull/43773">(#43773</a>).</li>
+<li>내부 HTTP 서버에서 드물게 발생할 수 있는 잠재적 충돌 수정<a href="https://github.com/milvus-io/milvus/pull/43799">(#43799</a>)</li>
+</ul>
 <h2 id="v260" class="common-anchor-header">v2.6.0<button data-href="#v260" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,9 +248,9 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h3><p>2.6부터 Milvus는 성능, 확장성 및 사용 편의성을 개선하기 위한 중요한 아키텍처 변경 사항을 도입했습니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하세요.</p>
-<h4 id="Streaming-Node-GA" class="common-anchor-header">스트리밍 노드(GA)</h4><p>이전 버전에서는 스트리밍 데이터가 프록시에 의해 WAL에 쓰여지고 쿼리노드와 데이터노드에 의해 읽혀졌습니다. 이 아키텍처는 쓰기 측에서 합의를 달성하기 어려웠고 읽기 측에서 복잡한 로직이 필요했습니다. 또한 쿼리 위임자가 쿼리 노드에 위치하여 확장성을 저해했습니다. Milvus 2.5.0에서는 2.6.0 버전에서 GA가 되는 스트리밍 노드가 도입되었습니다. 이 구성 요소는 이제 모든 샤드 수준의 WAL 읽기/쓰기 작업을 담당하며 쿼리 위임자 역할도 수행하여 앞서 언급한 문제를 해결하고 새로운 최적화를 가능하게 합니다.</p>
+<h4 id="Streaming-Node-GA" class="common-anchor-header">스트리밍 노드(GA)</h4><p>이전 버전에서는 스트리밍 데이터가 프록시에 의해 WAL에 쓰여지고 쿼리 노드와 데이터 노드에 의해 읽혀졌습니다. 이 아키텍처는 쓰기 측에서 합의를 달성하기 어려웠고 읽기 측에서 복잡한 로직이 필요했습니다. 또한 쿼리 위임자가 쿼리 노드에 위치하여 확장성을 저해했습니다. Milvus 2.5.0에서는 2.6.0 버전에서 GA가 되는 스트리밍 노드가 도입되었습니다. 이 구성 요소는 이제 모든 샤드 수준의 WAL 읽기/쓰기 작업을 담당하며 쿼리 위임자 역할도 수행하여 앞서 언급한 문제를 해결하고 새로운 최적화를 가능하게 합니다.</p>
 <p><strong>중요 업그레이드 공지</strong>: 스트리밍 노드는 아키텍처가 크게 변경되었으므로 이전 버전에서 Milvus 2.6.0-rc1로 직접 업그레이드하는 것은 지원되지 않습니다.</p>
-<h4 id="Woodpecker-Native-WAL" class="common-anchor-header">딱따구리 네이티브 WAL</h4><p>Milvus는 이전에 WAL을 위해 Kafka 또는 Pulsar와 같은 외부 시스템에 의존했습니다. 이러한 시스템은 기능적으로는 훌륭했지만, 특히 중소규모 배포의 경우 상당한 운영 복잡성과 리소스 오버헤드를 추가했습니다. Milvus 2.6에서는 이러한 시스템이 특수 목적의 클라우드 네이티브 WAL 시스템인 Woodpecker로 대체됩니다. 우드페커는 오브젝트 스토리지용으로 설계되어 로컬 및 오브젝트 스토리지 기반 제로 디스크 모드를 모두 지원하며, 운영을 간소화하는 동시에 성능과 확장성을 개선합니다.</p>
+<h4 id="Woodpecker-Native-WAL" class="common-anchor-header">딱따구리 네이티브 WAL</h4><p>Milvus는 이전에 WAL을 위해 Kafka 또는 Pulsar와 같은 외부 시스템에 의존했습니다. 이러한 시스템은 기능적으로는 훌륭했지만, 특히 중소규모 배포의 경우 상당한 운영 복잡성과 리소스 오버헤드가 추가되었습니다. Milvus 2.6에서는 이러한 시스템이 특수 목적의 클라우드 네이티브 WAL 시스템인 Woodpecker로 대체됩니다. 우드페커는 오브젝트 스토리지용으로 설계되어 로컬 및 오브젝트 스토리지 기반 제로 디스크 모드를 모두 지원하며, 운영을 간소화하는 동시에 성능과 확장성을 개선합니다.</p>
 <h4 id="DataNode-and-IndexNode-Merge" class="common-anchor-header">데이터노드와 인덱스노드 병합</h4><p>Milvus 2.6에서는 압축, 대량 가져오기, 통계 수집, 인덱스 구축과 같은 작업이 이제 통합된 스케줄러로 관리됩니다. 이전에 데이터 노드에서 처리하던 데이터 지속성 기능이 스트리밍 노드로 옮겨졌습니다. 배포와 유지 관리를 간소화하기 위해 IndexNode와 DataNode가 단일 DataNode 구성 요소로 병합되었습니다. 이제 이 통합 노드가 이러한 모든 중요한 작업을 실행하여 운영 복잡성을 줄이고 리소스 활용을 최적화합니다.</p>
 <h4 id="Coordinator-Merge-into-MixCoord" class="common-anchor-header">코디네이터를 MixCoord로 병합</h4><p>별도의 RootCoord, QueryCoord, DataCoord 모듈을 사용한 이전 설계에서는 모듈 간 통신에 복잡성이 발생했습니다. 시스템 설계를 단순화하기 위해 이러한 구성 요소는 MixCoord라는 단일 통합 코디네이터로 병합되었습니다. 이러한 통합은 네트워크 기반 통신을 내부 함수 호출로 대체하여 분산 프로그래밍의 복잡성을 줄여 시스템 운영의 효율성을 높이고 개발 및 유지보수를 간소화합니다.</p>
 <h3 id="Key-Features" class="common-anchor-header">주요 기능<button data-href="#Key-Features" class="anchor-icon" translate="no">
@@ -193,5 +296,5 @@ title: 릴리스 노트
 <p>자세한 내용은 <a href="/docs/ko/decay-ranker-overview.md">감쇠 랭커 개요를</a> 참조하세요.</p>
 <h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">온라인 스키마 진화를 위한 필드 추가</h4><p>스키마 유연성을 높이기 위해 Milvus 2.6은 이제 온라인에서 기존 컬렉션의 스키마에 새로운 스칼라 필드를 추가할 수 있도록 지원합니다. 이렇게 하면 애플리케이션 요구 사항이 변경될 때 새 컬렉션을 생성하고 중단 없는 데이터 마이그레이션을 수행할 필요가 없습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드 추가를</a> 참조하세요.</p>
-<h4 id="INT8-Vector-Support" class="common-anchor-header">INT8 벡터 지원</h4><p>8비트 정수 임베딩을 생성하는 양자화된 모델의 사용이 증가함에 따라 Milvus 2.6에서는 INT8 벡터에 대한 기본 데이터 유형 지원이 추가되었습니다. 이를 통해 사용자는 양자화 해제 없이 이러한 벡터를 직접 수집할 수 있으므로 계산, 네트워크 대역폭, 스토리지 비용을 절감할 수 있습니다. 이 기능은 처음에 HNSW 계열 인덱스에 대해 지원됩니다.</p>
+<h4 id="INT8-Vector-Support" class="common-anchor-header">INT8 벡터 지원</h4><p>8비트 정수 임베딩을 생성하는 양자화된 모델의 사용이 증가함에 따라 Milvus 2.6에서는 INT8 벡터에 대한 기본 데이터 유형 지원이 추가되었습니다. 이를 통해 사용자는 양자화 해제 없이 이러한 벡터를 직접 수집할 수 있어 계산, 네트워크 대역폭, 스토리지 비용을 절감할 수 있습니다. 이 기능은 처음에 HNSW 계열 인덱스에 대해 지원됩니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터를</a> 참조하세요.</p>

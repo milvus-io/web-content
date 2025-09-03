@@ -1022,7 +1022,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه المعانق TEI",
+                "label": "عناق الوجه TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1107,6 +1107,24 @@
                     "label": "مصنف TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "كوهير رانكر",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "مُصنِّف الذكاء الاصطناعي للرحلات",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "مصنف تدفق السيليكون",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
                     "children": []
                   }
                 ]

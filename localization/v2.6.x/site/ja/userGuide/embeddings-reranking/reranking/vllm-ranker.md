@@ -21,15 +21,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>vLLM Rankerは、<a href="https://docs.vllm.ai/en/latest/index.html">vLLM</a>推論フレームワークを活用し、セマンティック・リランキングによって検索結果の関連性を高めます。これは、従来のベクトル類似性を超える、検索結果の順序付けへの高度なアプローチです。</p>
+    </button></h1><p>vLLM Rankerは、<a href="https://docs.vllm.ai/en/latest/index.html">vLLM</a>推論フレームワークを活用し、セマンティック・リランキングによって検索結果の関連性を高めます。vLLM Rankerは、従来のベクトル類似度を超える、検索結果の順序付けのための高度なアプローチです。</p>
 <p>vLLM Rankerは、以下のような精度と文脈が重要なアプリケーションに特に有効です：</p>
 <ul>
 <li><p>概念の深い理解を必要とする技術文書検索</p></li>
 <li><p>意味的関係がキーワードのマッチングを凌駕する研究用データベース</p></li>
-<li><p>ユーザーの問題と関連するソリューションをマッチングする必要のあるカスタマーサポートシステム</p></li>
+<li><p>ユーザーの問題と適切な解決策をマッチングさせる必要のあるカスタマーサポートシステム</p></li>
 <li><p>商品属性とユーザーの意図を理解する必要があるEコマース検索</p></li>
 </ul>
-<p>vLLM Rankerは、<a href="/docs/ja/tei-ranker.md">TEI Rankerと</a>比較して、モデルの選択とカスタマイズの柔軟性が高く、追加設定オプションが大きなメリットをもたらす、特殊で複雑な検索アプリケーションに最適です。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +44,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusにvLLM Rankerを導入する前に、以下を確認してください：</p>
+    </button></h2><p>MilvusにvLLMランカーを実装する前に、以下を確認してください：</p>
 <ul>
 <li><p>Milvusコレクションに<code translate="no">VARCHAR</code> 、ランク付けされるテキストが含まれていること。</p></li>
 <li><p>リランキング機能を持つ実行中のvLLMサービス。vLLM サービスのセットアップに関する詳細な手順については、<a href="https://docs.vllm.ai/en/latest/getting_started/installation.html">vLLM の公式ドキュメントを</a>参照してください。vLLMサービスの可用性を確認する：</p>
@@ -85,6 +84,8 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
         ></path>
       </svg>
     </button></h2><p>milvusアプリケーションでvLLMランカーを使用するには、再ランクの動作方法を指定するFunctionオブジェクトを作成します。この関数はMilvusの検索操作に渡され、結果のランキングを向上させます。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -102,12 +103,35 @@ vllm_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;vllm&quot;</span>,         <span class="hljs-comment"># Specifies vLLM service</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># vLLM service address</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">64</span>,              <span class="hljs-comment"># Optional: batch size</span>
+        <span class="hljs-string">&quot;max_client_batch_size&quot;</span>: <span class="hljs-number">32</span>,              <span class="hljs-comment"># Optional: batch size</span>
         <span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>: <span class="hljs-number">256</span>,  <span class="hljs-comment"># Optional: Use last 256 tokens</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">vLLM ランカー固有のパラメータ</h3><p>以下のパラメータは vLLM ランカー固有のものです：</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">vLLMランカー固有のパラメータ<button data-href="#vLLM-ranker-specific-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のパラメータはvLLMランカー固有のものです：</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -116,9 +140,39 @@ vllm_ranker = Function(
      <th><p>値 / 例</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">reranker</code></p></td>
+     <td><p>必須</p></td>
+     <td><p>モデルの再ランキングを有効にするには、<code translate="no">"model"</code> に設定する必要がある。</p></td>
+     <td><p><code translate="no">"model"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">provider</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>リランキングに使用するモデルサービスプロバイダ。</p></td>
+     <td><p><code translate="no">"vllm"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queries</code></p></td>
+     <td><p>はい</p></td>
+     <td><p>リランクモデルが関連性スコアの算出に使用するクエリ文字列のリスト。クエリ文字列の数は、検索操作のクエリの数と正確に一致する必要があります (テキストの代わりにクエリベクトルを使用する場合も同様)。</p></td>
+     <td><p><em>[検索クエリ］</em></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">endpoint</code></p></td>
+     <td><p>はい</p></td>
+     <td><p>vLLMサービスのアドレス。</p></td>
+     <td><p><code translate="no">"http://localhost:8080"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
+     <td><p>いいえ</p></td>
+     <td><p>モデルサービスは一度にすべてのデータを処理しない場合があるため、複数のリクエストでモデルサービスにアクセスする際のバッチサイズを設定します。</p></td>
+     <td><p><code translate="no">32</code> (デフォルト)</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">truncate_prompt_tokens</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>整数<em>kに</em>設定すると、プロンプトの最後の<em>k個の</em>トークンのみを使用する (つまり、左の切り捨て)。デフォルトはNone（切り捨てなし）。</p></td>
+     <td><p>整数<em>k</em> に設定すると、プロンプトの最後の<em>k 個の</em>トークンのみを使用します (つまり、左の切り捨て)。デフォルトはNone(切り捨てなし)。</p></td>
      <td><p><code translate="no">256</code></p></td>
    </tr>
 </table>
@@ -140,7 +194,9 @@ vllm_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>vLLM ランカーを標準的なベクトル検索に適用する：</p>
+    </button></h2><p>vLLM ランカーを標準的なベクトル探索に適用する：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -151,6 +207,14 @@ results = client.search(
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索への適用<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -168,6 +232,8 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><p>vLLM Rankerは、密検索と疎検索を組み合わせるハイブリッド検索にも使用できる：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Configure dense vector search</span>
@@ -194,4 +260,12 @@ hybrid_results = client.hybrid_search(
 <span class="highlighted-wrapper-line">    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span></span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -19,6 +19,109 @@ title: 發佈筆記
         ></path>
       </svg>
     </button></h1><p>瞭解 Milvus 的新功能！本頁總結了每個版本的新功能、改進、已知問題和錯誤修正。您可以在本節中找到 v2.6.0 以後每個版本的發行說明。我們建議您定期造訪此頁面以瞭解更新資訊。</p>
+<h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>發行日期：2025 年 9 月 3 日</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 版本</th><th style="text-align:left">Python SDK 版本</th><th style="text-align:left">Node.js SDK 版本</th><th style="text-align:left">Java SDK 版本</th><th style="text-align:left">Go SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>我們很高興地宣佈 Milvus 2.6.1 正式發行！此版本以先前版本的主要架構進步為基礎，提供了專注於生產穩定性、效能和操作穩健性的重要增強功能。此版本回應了主要的社群回饋，並強化了系統的大規模部署。我們強烈鼓勵所有使用者升級，從更穩定、效能更佳且更可靠的系統中獲益。</p>
+<h3 id="Improvements" class="common-anchor-header">改進<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>遠端儲存支援 POSIX 相容的檔案系統<a href="https://github.com/milvus-io/milvus/pull/43944">(#43944</a>)</li>
+<li>引入基於模型的重定向器<a href="https://github.com/milvus-io/milvus/pull/43270">(#43270</a>)</li>
+<li>優化主鍵欄位的比較表達式效能<a href="https://github.com/milvus-io/milvus/pull/43154">(#43154</a>)</li>
+<li>直接從發佈清單中收集 doc_id 以加速文字匹配<a href="https://github.com/milvus-io/milvus/pull/43899">(#43899</a>)</li>
+<li>將多個 != 條件轉換為單個 NOT IN 子句，以優化查詢效能<a href="https://github.com/milvus-io/milvus/pull/43690">(#43690</a>)</li>
+<li>增強段載入期間快取層的資源管理<a href="https://github.com/milvus-io/milvus/pull/43846">(#43846</a>)</li>
+<li>改善資料載入期間臨時索引的記憶體估算<a href="https://github.com/milvus-io/milvus/pull/44104">(#44104</a>)</li>
+<li>可設定臨時索引的建立比率<a href="https://github.com/milvus-io/milvus/pull/43939">(#43939</a>)</li>
+<li>為磁碟寫入器新增可設定的寫入速率限制<a href="https://github.com/milvus-io/milvus/pull/43912">(#43912</a>)</li>
+<li>現在可以動態更新 SegCore 參數，而無需重新啟動 Milvus 服務<a href="https://github.com/milvus-io/milvus/pull/43231">(#43231</a>)</li>
+<li>新增統一的 gRPC 延遲指標，以提供更好的可觀察性<a href="https://github.com/milvus-io/milvus/pull/44089">(#44089</a>)</li>
+<li>在 gRPC 標頭中包含用戶端請求時間戳，以簡化除錯<a href="https://github.com/milvus-io/milvus/pull/44059">(#44059</a>)</li>
+<li>支援 segcore 的追蹤日誌層級<a href="https://github.com/milvus-io/milvus/pull/44003">(#44003</a>)</li>
+<li>新增可設定的開關，調整一致性保證以提高可用性<a href="https://github.com/milvus-io/milvus/pull/43874">(#43874</a>)</li>
+<li>實施健全的重新觀察機制，以處理 etcd 連線故障<a href="https://github.com/milvus-io/milvus/pull/43829">(#43829</a>)</li>
+<li>改進內部節點健康檢查邏輯<a href="https://github.com/milvus-io/milvus/pull/43768">(#43768</a>)</li>
+<li>優化列出集合時的元資料存取<a href="https://github.com/milvus-io/milvus/pull/43902">(#43902</a>)</li>
+<li>將 Pulsar 客戶端升級至 v0.15.1 正式版，並新增更多記錄<a href="https://github.com/milvus-io/milvus/pull/43913">(#43913</a>)</li>
+<li>將 aws-sdk 從 1.9.234 升級至 1.11.352<a href="https://github.com/milvus-io/milvus/pull/43916">(#43916</a>)</li>
+<li>支援 ticker 元件的動態間隔更新<a href="https://github.com/milvus-io/milvus/pull/43865">(#43865</a>)</li>
+<li>改善自動偵測位元組操作的 ARM SVE 指令集<a href="https://github.com/milvus-io/milvus/pull/43833">(#43833</a>)</li>
+<li>改進文本或短語匹配失敗時的錯誤資訊<a href="https://github.com/milvus-io/milvus/pull/43366">(#43366</a>)</li>
+<li>改進向量尺寸不匹配時的錯誤訊息<a href="https://github.com/milvus-io/milvus/pull/43835">(#43835</a>)</li>
+<li>當物件儲存空間不可用時，改善追加超時的錯誤回報<a href="https://github.com/milvus-io/milvus/pull/43926">(#43926</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">錯誤修正<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>修正 Parquet 檔案匯入時可能發生的記憶體用完 (OOM) 問題<a href="https://github.com/milvus-io/milvus/pull/43756">(#43756</a>)</li>
+<li>修正待命節點在租約到期時無法復原的問題<a href="https://github.com/milvus-io/milvus/pull/44112">(#44112</a>)</li>
+<li>正確處理壓縮重試狀態<a href="https://github.com/milvus-io/milvus/pull/44119">(#44119</a>)</li>
+<li>修正了連續讀取請求與索引載入之間的潛在死鎖，該死鎖可能會阻止索引載入<a href="https://github.com/milvus-io/milvus/pull/43937">(#43937</a>)</li>
+<li>修正了在高併發情況下可能導致資料刪除失敗的錯誤<a href="https://github.com/milvus-io/milvus/pull/43831">(#43831</a>)</li>
+<li>修正了載入文字和 JSON 索引時的潛在競爭條件<a href="https://github.com/milvus-io/milvus/pull/43811">(#43811</a>)</li>
+<li>修正在重新啟動 QueryCoord 後可能發生的節點狀態不一致問題<a href="https://github.com/milvus-io/milvus/pull/43941">(#43941</a>)</li>
+<li>確保「髒」的 QueryNode 在重新啟動後會被正確清理<a href="https://github.com/milvus-io/milvus/pull/43909">(#43909</a>)</li>
+<li>修正了一個問題，在此問題中，對於具有非空有效載荷的請求，重試狀態未被正確處理<a href="https://github.com/milvus-io/milvus/pull/44068">(#44068</a>)</li>
+<li>修正 bulk writer v2 未使用正確 bucket 名稱的問題<a href="https://github.com/milvus-io/milvus/pull/44083">(#44083</a>)</li>
+<li>從 RESTful get_configs 端點隱藏敏感項目，以加強安全性<a href="https://github.com/milvus-io/milvus/pull/44057">(#44057</a>)</li>
+<li>確保 woodpecker 的物件上傳在超時重試期間是等效的<a href="https://github.com/milvus-io/milvus/pull/43947">(#43947</a>)</li>
+<li>禁止從 Parquet 檔案匯入陣列欄位的空元素<a href="https://github.com/milvus-io/milvus/pull/43964">(#43964</a>)</li>
+<li>修正了一個錯誤，在建立集合別名後，代理快取並未失效<a href="https://github.com/milvus-io/milvus/pull/43854">(#43854</a>)</li>
+<li>改善串流節點的內部服務發現機制<a href="https://github.com/milvus-io/milvus/pull/44033">(#44033</a>)</li>
+<li>修正資源群組邏輯，以正確過濾串流節點<a href="https://github.com/milvus-io/milvus/pull/43984">(#43984</a>)</li>
+<li>新增資料庫名稱<a href="https://github.com/milvus-io/milvus/pull/43808">(</a>databaseName) 標籤至指標，以防止多資料庫環境中的命名衝突<a href="https://github.com/milvus-io/milvus/pull/43808">(#43808</a>)</li>
+<li>修正內部任務狀態處理的邏輯錯誤<a href="https://github.com/milvus-io/milvus/pull/43777">(#43777</a>)</li>
+<li>優化內部指標的初始化時序，以避免潛在的恐慌<a href="https://github.com/milvus-io/milvus/pull/43773">(#43773</a>)</li>
+<li>修正內部 HTTP 伺服器罕見的潛在當機問題<a href="https://github.com/milvus-io/milvus/pull/43799">(#43799</a>)</li>
+</ul>
 <h2 id="v260" class="common-anchor-header">v2.6.0<button data-href="#v260" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +167,7 @@ title: 發佈筆記
       </svg>
     </button></h3><h4 id="Optimized-storage-format-v2" class="common-anchor-header">最佳化儲存格式 v2</h4><p>為了解決混合標量與向量資料儲存的挑戰，特別是非結構化資料的點查詢，Milvus 2.6 推出儲存格式 V2。這種新的自適應列式儲存格式採用「窄列合併 + 寬列獨立」的佈局策略，從根本上解決了向量資料庫中處理點查詢和小批量檢索時的效能瓶頸。</p>
 <p>新格式現在可支援無 I/O 放大的高效隨機存取，與之前採用的 vanilla Parquet 格式相比，效能可提升 100 倍，非常適合需要分析處理和精確向量檢索的 AI 工作負載。此外，對於典型的工作負載，它可將檔案數量減少高達 98%。主要壓縮的記憶體消耗可減少 300%，I/O 作業的讀取最佳化高達 80%，寫入最佳化超過 600%。</p>
-<h4 id="JSON-flat-index-beta" class="common-anchor-header">JSON 平面索引 (beta)</h4><p>Milvus 2.6 引入 JSON Flat Index 來處理高度動態的 JSON 結構。JSON Path Index 需要預先聲明特定路徑及其預期類型，與此不同，JSON Flat Index 會自動發現指定路徑下的所有巢狀結構並編製索引。在為 JSON 欄位建立索引時，它會遞迴地將整個子樹扁平化，為遇到的每個路徑-值對創建倒置索引項目，而不考慮深度或類型。 這種自動扁平化的方式使 JSON Flat Index 非常適合用於不斷演化的模式，在這種模式中，新欄位的出現毫無預兆。例如，如果您為一個「metadata」欄位建立索引，系統會自動處理新的巢狀欄位，例如「metadata.version2.features.experimental」，因為它們會出現在傳入的資料中，而不需要新的索引設定。</p>
+<h4 id="JSON-flat-index-beta" class="common-anchor-header">JSON 平面索引 (beta)</h4><p>Milvus 2.6 引入 JSON Flat Index 來處理高度動態的 JSON 結構。JSON Path Index 需要預先聲明特定路徑及其預期類型，與此不同，JSON Flat Index 會自動發現特定路徑下的所有巢狀結構並編製索引。在為 JSON 欄位建立索引時，它會遞迴地將整個子樹扁平化，為遇到的每個路徑-值對創建倒置索引項目，而不考慮深度或類型。 這種自動扁平化的方式使 JSON Flat Index 非常適合用於不斷演化的模式，在這種模式中，新欄位的出現毫無預兆。例如，如果您為一個「metadata」欄位建立索引，系統會自動處理新的巢狀欄位，例如「metadata.version2.features.experimental」，因為它們會出現在傳入的資料中，而不需要新的索引設定。</p>
 <h3 id="Core-260-features-recall" class="common-anchor-header">核心 2.6.0 功能回顧<button data-href="#Core-260-features-recall" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +228,7 @@ title: 發佈筆記
 <tr><td style="text-align:center">2.6.0-rc1</td><td style="text-align:center">2.6.0b0</td><td style="text-align:center">2.6.0-rc1</td><td style="text-align:center">2.6.0</td><td style="text-align:center">2.6.0-rc.1</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.6.0-rc1 引入了簡化的雲原生架構，旨在透過降低部署複雜度來提高運作效率、資源利用率和總擁有成本。此版本新增的功能著重於效能、搜尋與開發。主要功能包括可提升效能的高精度 1 位元量化 (RaBitQ) 與動態快取層、使用 MinHash 進行近乎重複的偵測、進階搜尋的精準短語比對，以及自動嵌入功能與線上模式修改，以提升開發人員的使用經驗。</p>
+<p>Milvus 2.6.0-rc1 引入了簡化的雲原生架構，旨在透過降低部署複雜度來提高運作效率、資源利用率和總擁有成本。此版本新增的功能著重於效能、搜尋與開發。主要功能包括可提升效能的高精度 1 位元量化 (RaBitQ) 與動態快取記憶體層級、使用 MinHash 進行近乎重複的偵測、進階搜尋的精準短語比對，以及自動嵌入功能與線上模式修改，以提升開發人員的使用經驗。</p>
 <div class="alert note">
 <p>這是 Milvus 2.6.0 的預發佈版本。若要試用最新功能，請安裝此版本作為全新部署。不支援從 Milvus v2.5.x 或更早版本升級至 2.6.0-rc1。</p>
 </div>
@@ -188,7 +291,7 @@ title: 發佈筆記
 <li>Slop (選用)：一個可調整的參數，允許少量的詞彙間隔，以實現模糊短語匹配。</li>
 </ul>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/phrase-match.md">短語匹配</a>。</p>
-<h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">MinHash LSH 索引 (Beta)</h4><p>為解決模型訓練中重複資料刪除的需求，Milvus 2.6 新增 MINHASH_LSH 索引的支援。此功能提供了一種計算效率高且可擴充的方法，用來估計文件間的 Jaccard 相似性，以辨識近乎重複的文件。使用者可以在預處理時為文字文件產生 MinHash 簽章，並在 Milvus 中使用 MINHASH_LSH 索引來有效率地在大型資料集中尋找相似的內容，改善資料清理與模型品質。</p>
+<h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">MinHash LSH 索引 (Beta)</h4><p>為解決模型訓練中重複資料刪除的需求，Milvus 2.6 新增 MINHASH_LSH 索引的支援。此功能提供了一種計算效率高且可擴充的方法，用來估計文件之間的 Jaccard 相似性，以辨識近乎重複的文件。使用者可以在預處理時為文字文件產生 MinHash 簽章，並在 Milvus 中使用 MINHASH_LSH 索引來有效率地在大型資料集中尋找相似的內容，改善資料清理與模型品質。</p>
 <h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">時間感知衰減函數</h4><p>Milvus 2.6 引入了時間感知衰減函數，以應對資訊價值隨時間變化的情況。在結果重新排序時，使用者可以根據時間戳欄位套用指數、高斯或線性衰減函數，以調整文件的相關性得分。這可確保較近期的內容能獲得優先排序，這對於新聞饋送、電子商務和 AI 代理的記憶體等應用程式來說至關重要。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/decay-ranker-overview.md">Decay Ranker 概觀</a>。</p>
 <h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">新增線上模式演進欄位</h4><p>為了提供更高的模式彈性，Milvus 2.6 現在支援線上新增標量欄位到現有資料集的模式。這避免了在應用程式需求改變時，需要建立新的資料集和執行擾亂性的資料遷移。</p>

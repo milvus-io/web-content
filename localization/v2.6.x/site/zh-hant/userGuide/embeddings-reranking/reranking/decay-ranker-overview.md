@@ -19,16 +19,16 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在傳統的向量搜尋中，搜尋結果的排序純粹取決於向量的相似性-向量在數學空間中的匹配程度。但在現實世界的應用中，內容是否真正相關往往不只取決於語意相似度。</p>
+    </button></h1><p>在傳統的向量搜尋中，搜尋結果的排序純粹取決於向量的相似度-向量在數學空間中的匹配程度。但在現實世界的應用中，內容是否真正相關往往不只取決於語意相似度。</p>
 <p>請考慮這些日常情境：</p>
 <ul>
 <li><p>在新聞搜尋中，昨天的文章應該比三年前的類似文章排名更高</p></li>
-<li><p>餐廳搜尋器會優先搜尋 5 分鐘車程內的餐廳，而非 30 分鐘車程內的餐廳</p></li>
+<li><p>餐廳搜尋器會優先搜尋 5 分鐘路程內的餐廳，而不是需要開車 30 分鐘的餐廳</p></li>
 <li><p>一個電子商務平台，能提升趨勢商品的排名，即使這些商品與搜尋查詢的相似度稍低。</p></li>
 </ul>
 <p>這些情境都有一個共同的需求：平衡向量相似度與其他數值因素，例如時間、距離或知名度。</p>
 <p>Milvus 的 Decay rankers 可根據數值字段值調整搜尋排名，從而滿足此需求。它們可讓您平衡向量相似性與資料的「新鮮度」、「接近度」或其他數值屬性，創造更直覺且與上下文相關的搜尋體驗。</p>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Usage-notes" class="common-anchor-header">使用注意事項<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,7 +46,13 @@ beta: Milvus 2.6.x
     </button></h2><ul>
 <li><p>衰減排名不能用於群組搜尋。</p></li>
 <li><p>用於衰減排名的欄位必須是數值 (<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">FLOAT</code>, 或<code translate="no">DOUBLE</code>)。</p></li>
-<li><p>每個衰減排名只能使用一個數字欄位。</p></li>
+<li><p>每個衰減排名只能使用一個數值欄位。</p></li>
+<li><p><strong>時間單位一致性</strong>：當使用以時間為基礎的衰減排名時，<code translate="no">origin</code>,<code translate="no">scale</code>, 和<code translate="no">offset</code> 參數的單位必須與您的收集資料中使用的單位相符：</p>
+<ul>
+<li>如果您的資料集以<strong>秒</strong>為單位儲存時間戳記，請對所有參數使用秒。</li>
+<li>如果您的資料集以<strong>毫秒</strong>為單位儲存時間戳記，則所有參數都使用毫秒。</li>
+<li>如果您的集合以<strong>微秒</strong>為單位儲存時間戳記，則所有參數均使用微秒。</li>
+</ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">如何運作<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,8 +69,23 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>衰減排序將時間或地理距離等數字因素納入排序過程中，從而增強了傳統的向量搜尋。整個過程遵循以下幾個階段：</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">階段 1：計算標準化的相似性分數</h3><p>首先，Milvus 會計算向量相似性分數並加以規範化，以確保比較結果一致：</p>
+    </button></h2><p>衰減排序將時間或地理距離等數字因素納入排序過程中，增強了傳統向量搜尋的功能。整個過程遵循以下幾個階段</p>
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">階段 1：計算標準化的相似性分數<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>首先，Milvus 會計算向量相似性分數並加以規範化，以確保比較結果一致：</p>
 <ul>
 <li><p>對於<strong>L2</strong>和<strong>JACCARD</strong>距離指標 (較低的值表示較高的相似性)：</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
@@ -72,20 +93,65 @@ beta: Milvus 2.6.x
 <p>這將距離轉換成 0-1 之間的相似性分數，越高越好。</p></li>
 <li><p>對於<strong>IP</strong>、<strong>COSINE</strong> 和<strong>BM25</strong>公制 (分數越高表示匹配度越高)：直接使用分數，無需標準化。</p></li>
 </ul>
-<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">第二階段：計算衰減分數</h3><p>接下來，Milvus 會根據數值字段值 (如時間戳記或距離)，使用您選擇的衰減排名器計算衰減得分：</p>
+<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">第二階段：計算衰減分數<button data-href="#Stage-2-Calculate-decay-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>接下來，Milvus 會根據數值字段值 (如時間戳記或距離)，使用您選擇的衰減排名器計算衰減得分：</p>
 <ul>
 <li><p>每個衰減排名器將原始數值轉換為 0-1 之間的規範化相關性分數。</p></li>
-<li><p>衰減分數代表項目依據其與理想點的「距離」的相關程度</p></li>
+<li><p>衰減分數會根據項目與理想點的「距離」來表示其相關程度</p></li>
 </ul>
 <p>具體的計算公式根據衰減排名器類型而有所不同。有關如何計算衰減分數的詳細資訊，請參閱<a href="/docs/zh-hant/gaussian-decay.md#Formula">高斯衰減</a>、<a href="/docs/zh-hant/exponential-decay.md#Formula">指數衰減</a>、<a href="/docs/zh-hant/linear-decay.md#Formula">線性衰減的</a>專用頁面。</p>
-<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">第三階段：計算最終得分</h3><p>最後，Milvus 結合規範化的相似度得分和衰減得分，產生最終的排名得分：</p>
+<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">第三階段：計算最終得分<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>最後，Milvus 結合規範化的相似度得分和衰減得分，產生最終的排名得分：</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>在混合搜尋 (結合多向量領域) 的情況下，Milvus 取搜尋請求中最大的歸一化相似度得分：</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>例如，在混合搜尋中，如果一篇研究論文的向量相似度得分為 0.82，而以 BM25 為基礎的文字檢索得分為 0.91，Milvus 會先使用 0.91 作為基本相似度得分，然後再套用衰減因子。</p>
-<h3 id="Decay-ranking-in-action" class="common-anchor-header">衰減排序的實際應用</h3><p>讓我們來看看衰減排序在實際情境中的應用-以時間為基礎的衰減來搜尋<strong>「AI 研究論文」</strong>：</p>
+<h3 id="Decay-ranking-in-action" class="common-anchor-header">衰減排序的實際應用<button data-href="#Decay-ranking-in-action" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>讓我們來看看衰減排序在實際情境中的應用-以時間為基礎的衰減來搜尋<strong>「AI 研究論文」</strong>：</p>
 <div class="alert note">
 <p>在這個範例中，衰減分數反映出相關性會隨著時間遞減-較新的論文會得到較接近 1.0 的分數，較舊的論文則會得到較低的分數。這些值是使用特定的衰減排名器計算出來的。如需詳細資訊，請參閱<a href="/docs/zh-hant/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>。</p>
 </div>
@@ -138,7 +204,7 @@ beta: Milvus 2.6.x
 </table>
 <p>如果不進行衰變重排，根據純向量相似度 (0.92) 計算，論文 B 的排名最高。但是，如果使用衰減重排：</p>
 <ul>
-<li><p>儘管相似度中等，論文 C 躍升至第 1 位，因為它是最近發表的論文 (昨天發表)</p></li>
+<li><p>儘管相似度中等，論文 C 躍升至第 1 位，因為它是最近發表的論文 (昨天發表)。</p></li>
 <li><p>儘管相似性極佳，論文 B 卻因為相對較舊而降到第 3 位。</p></li>
 <li><p>論文 D 使用 L2 距離 (越低越好)，因此在應用衰減之前，其分數從 1.2 正態化為 0.76。</p></li>
 </ul>
@@ -200,7 +266,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><a href="/docs/zh-hant/gaussian-decay.md">高斯衰減</a></p></li>
 <li><p><a href="/docs/zh-hant/exponential-decay.md">指數衰減</a></p></li>
-<li><p><a href="/docs/zh-hant/exponential-decay.md">指數衰減</a></p></li>
+<li><p><a href="/docs/zh-hant/linear-decay.md">線性衰減</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">實施範例<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,14 +283,30 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>衰減排名器可以應用於 Milvus 中的標準向量搜索和混合搜索操作。以下是實現此功能的主要程式碼片段。</p>
+    </button></h2><p>衰減排名器可以應用在 Milvus 的標準向量搜尋和混合搜尋運算。以下是實現此功能的主要程式碼片段。</p>
 <div class="alert note">
-<p>在使用遞減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於遞減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">教學：在 Milvus 中實施以時間為基礎的排名</a>。</p>
+<p>在使用衰減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於衰減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">教學：在 Milvus 中實施以時間為基礎的排名</a>。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>要實現衰變排名，首先要定義一個具有適當配置的<code translate="no">Function</code> 物件：</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要實現衰變排名，首先要定義一個具有適當配置的<code translate="no">Function</code> 物件：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 decay_ranker = Function(
     name=<span class="hljs-string">&quot;time_decay&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;timestamp&quot;</span>],    <span class="hljs-comment"># Numeric field to use for decay</span>
@@ -232,9 +314,9 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point (seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds (must match collection data unit)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone (must match collection data unit)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
     }
 )
@@ -280,38 +362,53 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>是</p></td>
-     <td><p>計算衰減分數的參考點。處於此值的項目可獲得最大相關性得分。</p></td>
+     <td><p>計算衰減分數的參考點。處於此值的項目可獲得最大相關性得分。對於以時間為基礎的衰減，時間單位必須符合您的收集資料。</p></td>
      <td><ul>
-<li>對於時間戳記：當前時間 (例如：<code translate="no">int(time.time())</code>)</li>
+<li>對於時間戳記：目前時間 (例如：<code translate="no">int(time.time())</code>)</li>
 <li>對於地理位置：使用者目前的座標</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.scale</code></p></td>
+          <td><p><code translate="no">params.scale</code></p></td>
      <td><p>是</p></td>
-     <td><p>相關性下降到<code translate="no">decay</code> 值的距離或時間。控制關聯性下降的速度，數值越大，關聯性下降的速度越慢；值越小，關聯性下降的速度越快。</p></td>
+     <td><p>相關性下降到<code translate="no">decay</code> 值的距離或時間。控制相關性下降的速度。對於以時間為基礎的遞減，時間單位必須與您的收集資料相符。 值越大，相關性遞減的速度越慢；值越小，相關性遞減的速度越快。</p></td>
      <td><ul>
-<li>時間：以秒為單位的週期 (例如：<code translate="no">7 * 24 * 60 * 60</code> 為 7 天)</li>
-<li>對於距離：公尺 (例如：<code translate="no">5000</code> 表示 5 公里)</li>
+<li>對於時間：以秒為單位的週期（例如<code translate="no">7 * 24 * 60 * 60</code> 為 7 天）</li>
+<li>對於距離： 公尺 (例如：<code translate="no">5000</code> 代表 5 公里)</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.offset</code></p></td>
+          <td><p><code translate="no">params.offset</code></p></td>
      <td><p>無</p></td>
-     <td><p>在<code translate="no">origin</code> 周圍建立一個「無衰退區域」，讓項目保持滿分 (衰退分數 = 1.0)。在<code translate="no">origin</code> 這個範圍內的項目保持最大相關性。</p></td>
+     <td><p>在<code translate="no">origin</code> 周圍建立一個「無衰減區域」，讓項目保持滿分 (衰減分數 = 1.0)。在<code translate="no">origin</code> 這個範圍內的項目保持最大相關性。對於以時間為基礎的衰減，時間單位必須符合您的收集資料。</p></td>
      <td><ul>
 <li>對於時間：以秒為單位的週期 (例如：<code translate="no">24 * 60 * 60</code> 為 1 天)</li>
-<li>對於距離：公尺 (例如：<code translate="no">500</code> 代表 500 公尺)</li>
+<li>對於距離：公尺 (例如：<code translate="no">500</code> 表示 500 公尺)</li>
 </ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>無</p></td>
-     <td><p><code translate="no">scale</code> 距離的分數值，控制曲線的陡度。較低的值會產生較陡的下降曲線；較高的值會產生較漸進的下降曲線。 必須介於 0 和 1 之間。</p></td>
+     <td><p><code translate="no">scale</code> 距離的分數值，控制曲線的陡度。較低的值會產生較陡的下降曲線；較高的值則會產生較漸進的下降曲線。 必須介於 0 和 1 之間。</p></td>
      <td><p><code translate="no">0.5</code> (預設值)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">套用至標準向量搜尋</h3><p>定義衰退排序器之後，您可以將它傳給<code translate="no">ranker</code> 參數，在搜尋作業時套用：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">套用至標準向量搜尋<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定義衰退排序器之後，您可以將它傳給<code translate="no">ranker</code> 參數，在搜尋作業時套用：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
@@ -323,7 +420,22 @@ results = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">套用至混合搜尋</h3><p>衰減排序器也可以應用於結合多向量場的混合搜尋作業：</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">套用至混合搜尋<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>衰減排序器也可以應用於結合多向量場的混合搜尋作業：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>

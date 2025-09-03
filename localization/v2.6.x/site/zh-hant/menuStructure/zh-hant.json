@@ -1108,6 +1108,24 @@
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
+                  },
+                  {
+                    "label": "Cohere Ranker",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Voyage AI Ranker",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "SiliconFlow 排行榜",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               }
@@ -2336,7 +2354,7 @@
             "children": []
           },
           {
-            "label": "煙火",
+            "label": "煙花",
             "id": "build_RAG_with_milvus_and_fireworks.md",
             "order": 2,
             "children": []

@@ -18,7 +18,110 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Scoprite le novità di Milvus! Questa pagina riassume le nuove funzionalità, i miglioramenti, i problemi noti e le correzioni di bug di ogni versione. In questa sezione è possibile trovare le note di rilascio per ogni versione rilasciata dopo la v2.6.0. Si consiglia di visitare regolarmente questa pagina per conoscere gli aggiornamenti.</p>
+    </button></h1><p>Scoprite le novità di Milvus! Questa pagina riassume le nuove funzionalità, i miglioramenti, i problemi noti e le correzioni di bug di ogni versione. In questa sezione è possibile trovare le note di rilascio per ogni versione successiva alla v2.6.0. Si consiglia di visitare regolarmente questa pagina per conoscere gli aggiornamenti.</p>
+<h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Data di rilascio: 3 settembre 2025</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Versione di Milvus</th><th style="text-align:left">Versione dell'SDK Python</th><th style="text-align:left">Versione dell'SDK Node.js</th><th style="text-align:left">Versione dell'SDK Java</th><th style="text-align:left">Versione dell'SDK Go</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Siamo entusiasti di annunciare il rilascio di Milvus 2.6.1! Questa versione si basa sui principali progressi architetturali delle versioni precedenti, apportando miglioramenti critici incentrati sulla stabilità della produzione, sulle prestazioni e sulla robustezza operativa. Questa versione risponde ai principali feedback della comunità e rafforza il sistema per le distribuzioni su larga scala. Incoraggiamo vivamente tutti gli utenti a eseguire l'aggiornamento per beneficiare di un sistema più stabile, performante e affidabile.</p>
+<h3 id="Improvements" class="common-anchor-header">Miglioramenti<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Supporta i file system POSIX-compatibili per l'archiviazione remota<a href="https://github.com/milvus-io/milvus/pull/43944">(#43944</a>).</li>
+<li>Introduce i reranker basati su modelli (<a href="https://github.com/milvus-io/milvus/pull/43270">#43270</a>)</li>
+<li>Ottimizza le prestazioni delle espressioni di confronto sui campi chiave primaria (<a href="https://github.com/milvus-io/milvus/pull/43154">#43154</a>)</li>
+<li>Raccoglie il doc_id dall'elenco dei post direttamente per accelerare le corrispondenze testuali<a href="https://github.com/milvus-io/milvus/pull/43899">(#43899</a>)</li>
+<li>Ottimizza le prestazioni delle query convertendo più condizioni != in una singola clausola NOT IN (<a href="https://github.com/milvus-io/milvus/pull/43690">#43690</a>)</li>
+<li>Migliora la gestione delle risorse per il livello di cache durante il caricamento dei segmenti<a href="https://github.com/milvus-io/milvus/pull/43846">(#43846</a>)</li>
+<li>Migliora la stima della memoria per gli indici intermedi durante il caricamento dei dati<a href="https://github.com/milvus-io/milvus/pull/44104">(#44104</a>)</li>
+<li>Rende configurabile il rapporto di costruzione per gli indici intermedi<a href="https://github.com/milvus-io/milvus/pull/43939">(#43939</a>)</li>
+<li>Aggiunge un limite di velocità di scrittura configurabile al masterizzatore di dischi<a href="https://github.com/milvus-io/milvus/pull/43912">(#43912</a>)</li>
+<li>I parametri di SegCore possono ora essere aggiornati dinamicamente senza riavviare il servizio Milvus<a href="https://github.com/milvus-io/milvus/pull/43231">(#43231</a>)</li>
+<li>Aggiunge metriche di latenza gRPC unificate per una migliore osservabilità<a href="https://github.com/milvus-io/milvus/pull/44089">(#44089</a>)</li>
+<li>Include i timestamp delle richieste client nelle intestazioni gRPC per semplificare il debug (<a href="https://github.com/milvus-io/milvus/pull/44059">#44059</a>)</li>
+<li>Supporta il livello di trace log per segcore<a href="https://github.com/milvus-io/milvus/pull/44003">(#44003</a>)</li>
+<li>Aggiunge un interruttore configurabile per regolare le garanzie di coerenza per una maggiore disponibilità (<a href="https://github.com/milvus-io/milvus/pull/43874">#43874</a>)</li>
+<li>Implementa un robusto meccanismo di rewatch per gestire i fallimenti delle connessioni etcd<a href="https://github.com/milvus-io/milvus/pull/43829">(#43829</a>)</li>
+<li>Migliora la logica interna di controllo dello stato di salute dei nodi<a href="https://github.com/milvus-io/milvus/pull/43768">(#43768</a>)</li>
+<li>Ottimizza l'accesso ai metadati quando si elencano le raccolte<a href="https://github.com/milvus-io/milvus/pull/43902">(#43902</a>)</li>
+<li>Aggiorna il client Pulsar alla versione ufficiale v0.15.1 e aggiunge più log (<a href="https://github.com/milvus-io/milvus/pull/43913">#43913</a>)</li>
+<li>Aggiorna aws-sdk da 1.9.234 a 1.11.352<a href="https://github.com/milvus-io/milvus/pull/43916">(#43916</a>)</li>
+<li>Supporta gli aggiornamenti dinamici degli intervalli per i componenti dei ticker (<a href="https://github.com/milvus-io/milvus/pull/43865">#43865</a>)</li>
+<li>Migliora il rilevamento automatico dei set di istruzioni ARM SVE per le operazioni bitset (<a href="https://github.com/milvus-io/milvus/pull/43833">#43833</a>)</li>
+<li>Migliora il messaggio di errore quando una corrispondenza di testo o di frase fallisce<a href="https://github.com/milvus-io/milvus/pull/43366">(#43366</a>)</li>
+<li>Migliora il messaggio di errore in caso di mancata corrispondenza delle dimensioni del vettore (<a href="https://github.com/milvus-io/milvus/pull/43835">#43835</a>)</li>
+<li>Migliora la segnalazione degli errori per i timeout di append quando l'archivio oggetti non è disponibile<a href="https://github.com/milvus-io/milvus/pull/43926">(#43926</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Corregge un potenziale problema di Out-Of-Memory (OOM) durante le importazioni di file Parquet (<a href="https://github.com/milvus-io/milvus/pull/43756">#43756</a>)</li>
+<li>Corregge un problema per cui i nodi in standby non potevano ripristinarsi se il loro lease scadeva (<a href="https://github.com/milvus-io/milvus/pull/44112">#44112</a>)</li>
+<li>Gestisce correttamente lo stato di retry della compattazione (<a href="https://github.com/milvus-io/milvus/pull/44119">#44119</a>)</li>
+<li>Corregge un potenziale deadlock tra le richieste di lettura continua e il caricamento degli indici che poteva impedire il caricamento degli indici<a href="https://github.com/milvus-io/milvus/pull/43937">(#43937</a>)</li>
+<li>Corregge un bug che poteva far fallire le cancellazioni di dati in scenari ad alta liquidità (<a href="https://github.com/milvus-io/milvus/pull/43831">#43831</a>)</li>
+<li>Corregge una potenziale condizione di gara durante il caricamento di indici di testo e JSON<a href="https://github.com/milvus-io/milvus/pull/43811">(#43811</a>)</li>
+<li>Corregge un'incoerenza dello stato del nodo che potrebbe verificarsi dopo un riavvio di QueryCoord<a href="https://github.com/milvus-io/milvus/pull/43941">(#43941</a>)</li>
+<li>Assicura che un QueryNode "sporco" venga ripulito correttamente dopo un riavvio<a href="https://github.com/milvus-io/milvus/pull/43909">(#43909</a>)</li>
+<li>Corregge un problema per cui lo stato di retry non veniva gestito correttamente per le richieste con payload non vuoto<a href="https://github.com/milvus-io/milvus/pull/44068">(#44068</a>)</li>
+<li>Corregge un problema per cui il bulk writer v2 non usava il nome corretto del bucket (<a href="https://github.com/milvus-io/milvus/pull/44083">#44083</a>)</li>
+<li>Migliora la sicurezza nascondendo gli elementi sensibili dall'endpoint RESTful get_configs (<a href="https://github.com/milvus-io/milvus/pull/44057">#44057</a>)</li>
+<li>Assicura che i caricamenti di oggetti per woodpecker siano idempotenti durante i tentativi di timeout (<a href="https://github.com/milvus-io/milvus/pull/43947">#43947</a>)</li>
+<li>Disabilita l'importazione di elementi nulli in campi array da file Parquet<a href="https://github.com/milvus-io/milvus/pull/43964">(#43964</a>)</li>
+<li>Corregge un bug per cui la cache del proxy non veniva invalidata dopo la creazione di un alias di raccolta (<a href="https://github.com/milvus-io/milvus/pull/43854">#43854</a>)</li>
+<li>Migliora il meccanismo interno di scoperta dei servizi per i nodi di streaming<a href="https://github.com/milvus-io/milvus/pull/44033">(#44033</a>)</li>
+<li>Corregge la logica dei gruppi di risorse per filtrare correttamente i nodi di streaming<a href="https://github.com/milvus-io/milvus/pull/43984">(#43984</a>)</li>
+<li>Aggiunge l'etichetta databaseName alle metriche per evitare conflitti di denominazione in ambienti multi-database<a href="https://github.com/milvus-io/milvus/pull/43808">(#43808</a>)</li>
+<li>Corregge un errore logico nella gestione dello stato interno dei task (<a href="https://github.com/milvus-io/milvus/pull/43777">#43777</a>)</li>
+<li>Ottimizza i tempi di inizializzazione delle metriche interne per evitare un potenziale panico<a href="https://github.com/milvus-io/milvus/pull/43773">(#43773</a>)</li>
+<li>Corregge un raro potenziale crash nel server HTTP interno<a href="https://github.com/milvus-io/milvus/pull/43799">(#43799</a>)</li>
+</ul>
 <h2 id="v260" class="common-anchor-header">v2.6.0<button data-href="#v260" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,8 +251,8 @@ title: Note di rilascio
 <h4 id="Streaming-Node-GA" class="common-anchor-header">Nodo di streaming (GA)</h4><p>Nelle versioni precedenti, i dati in streaming venivano scritti nel WAL dal Proxy e letti dal QueryNode e dal DataNode. Questa architettura rendeva difficile ottenere il consenso in scrittura e richiedeva una logica complessa in lettura. Inoltre, il delegatore di query si trovava nel QueryNode, il che ostacolava la scalabilità. Milvus 2.5.0 ha introdotto lo Streaming Node, che nella versione 2.6.0 diventa GA. Questo componente è ora responsabile di tutte le operazioni di lettura/scrittura WAL a livello di shard e funge anche da delegatore di query, risolvendo i problemi sopra citati e consentendo nuove ottimizzazioni.</p>
 <p><strong>Avviso importante per l'aggiornamento</strong>: Streaming Node rappresenta un cambiamento architettonico significativo, pertanto non è possibile effettuare un aggiornamento diretto a Milvus 2.6.0-rc1 da versioni precedenti.</p>
 <h4 id="Woodpecker-Native-WAL" class="common-anchor-header">WAL nativo Woodpecker</h4><p>In precedenza Milvus si affidava a sistemi esterni come Kafka o Pulsar per il suo WAL. Pur essendo funzionali, questi sistemi aggiungevano una notevole complessità operativa e un sovraccarico di risorse, in particolare per le distribuzioni di piccole e medie dimensioni. In Milvus 2.6, questi sistemi sono stati sostituiti da Woodpecker, un sistema WAL cloud-native appositamente costruito. Woodpecker è progettato per l'archiviazione a oggetti e supporta sia la modalità zero-disk locale che quella basata sull'archiviazione a oggetti, semplificando le operazioni e migliorando le prestazioni e la scalabilità.</p>
-<h4 id="DataNode-and-IndexNode-Merge" class="common-anchor-header">Fusione di DataNode e IndexNode</h4><p>In Milvus 2.6, attività come la compattazione, l'importazione massiva, la raccolta di statistiche e la creazione di indici sono ora gestite da uno scheduler unificato. La funzione di persistenza dei dati, precedentemente gestita dal DataNode, è stata spostata allo Streaming Node. Per semplificare la distribuzione e la manutenzione, l'IndexNode e il DataNode sono stati fusi in un unico componente DataNode. Questo nodo consolidato esegue ora tutti questi compiti critici, riducendo la complessità operativa e ottimizzando l'utilizzo delle risorse.</p>
-<h4 id="Coordinator-Merge-into-MixCoord" class="common-anchor-header">Fusione del coordinatore in MixCoord</h4><p>Il progetto precedente con i moduli RootCoord, QueryCoord e DataCoord separati introduceva complessità nella comunicazione tra i moduli. Per semplificare la progettazione del sistema, questi componenti sono stati fusi in un unico coordinatore unificato, chiamato MixCoord. Questo consolidamento riduce la complessità della programmazione distribuita, sostituendo la comunicazione basata sulla rete con chiamate a funzioni interne, con il risultato di un funzionamento più efficiente del sistema e di una semplificazione dello sviluppo e della manutenzione.</p>
+<h4 id="DataNode-and-IndexNode-Merge" class="common-anchor-header">Fusione di DataNode e IndexNode</h4><p>In Milvus 2.6, attività come la compattazione, l'importazione massiva, la raccolta di statistiche e la creazione di indici sono ora gestite da uno scheduler unificato. La funzione di persistenza dei dati, precedentemente gestita dal DataNode, è stata trasferita allo Streaming Node. Per semplificare la distribuzione e la manutenzione, l'IndexNode e il DataNode sono stati fusi in un unico componente DataNode. Questo nodo consolidato esegue ora tutti questi compiti critici, riducendo la complessità operativa e ottimizzando l'utilizzo delle risorse.</p>
+<h4 id="Coordinator-Merge-into-MixCoord" class="common-anchor-header">Fusione del coordinatore in MixCoord</h4><p>Il progetto precedente con i moduli RootCoord, QueryCoord e DataCoord separati introduceva complessità nella comunicazione tra i moduli. Per semplificare la progettazione del sistema, questi componenti sono stati fusi in un unico coordinatore unificato, chiamato MixCoord. Questo consolidamento riduce la complessità della programmazione distribuita, sostituendo la comunicazione basata sulla rete con chiamate di funzioni interne, con il risultato di un funzionamento più efficiente del sistema e di una semplificazione dello sviluppo e della manutenzione.</p>
 <h3 id="Key-Features" class="common-anchor-header">Caratteristiche principali<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,13 +275,13 @@ title: Note di rilascio
 <li><strong>Prestazioni</strong>: L'indicizzazione dei percorsi JSON è ora ufficialmente supportata, consentendo la creazione di indici invertiti su percorsi specifici all'interno di oggetti JSON (ad esempio, <code translate="no">meta.user.location</code>). Questo evita la scansione completa degli oggetti e migliora la latenza delle query con filtri complessi.</li>
 <li><strong>Funzionalità</strong>: Per supportare logiche di filtraggio più complesse, questa release aggiunge il supporto alle funzioni <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_EXISTS</code>, <code translate="no">IS NULL</code> e <code translate="no">CAST</code>. In prospettiva, il nostro lavoro sul supporto JSON continua. Siamo entusiasti di anticipare che le prossime versioni ufficiali presenteranno funzionalità ancora più potenti, come la <strong>triturazione di JSON</strong> e un <strong>indice JSON FLAT</strong>, progettato per migliorare drasticamente le prestazioni dei dati JSON altamente annidati.</li>
 </ul>
-<h4 id="AnalyzerTokenizer-Function-Enhancement" class="common-anchor-header">Miglioramento delle funzioni dell'analizzatore/tokenizzatore</h4><p>Questa versione migliora significativamente le capacità di elaborazione del testo con diversi aggiornamenti dell'Analizzatore e del Tokenizzatore:</p>
+<h4 id="AnalyzerTokenizer-Function-Enhancement" class="common-anchor-header">Miglioramento delle funzioni dell'analizzatore e del tokenizzatore</h4><p>Questa versione migliora significativamente le capacità di elaborazione del testo con diversi aggiornamenti dell'Analizzatore e del Tokenizzatore:</p>
 <ul>
 <li>È disponibile una nuova sintassi di <a href="/docs/it/analyzer-overview.md#Example-use">Run Analyzer</a> per convalidare le configurazioni del tokenizer.</li>
 <li>Il <a href="/docs/it/lindera-tokenizer.md">tokenizer Lindera</a> è integrato per migliorare il supporto delle lingue asiatiche come il giapponese e il coreano.</li>
 <li>È ora supportata la selezione del tokenizer a livello di riga, con il <a href="/docs/it/icu-tokenizer.md">tokenizer</a> generale <a href="/docs/it/icu-tokenizer.md">ICU</a> disponibile come ripiego per gli scenari multilingue.</li>
 </ul>
-<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Data-in, Data-Out con le funzioni di incorporamento</h4><p>Milvus 2.6 introduce la funzionalità "Data-in, Data-Out" che semplifica lo sviluppo di applicazioni di IA integrandosi direttamente con modelli di embedding di terze parti (ad esempio, OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Gli utenti possono ora inserire e interrogare dati di testo grezzi e Milvus chiamerà automaticamente il servizio di modello specificato per convertire il testo in vettori in tempo reale. Questo elimina la necessità di una pipeline di conversione vettoriale separata.</p>
+<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Data-in, Data-Out con funzioni di incorporamento</h4><p>Milvus 2.6 introduce la funzionalità "Data-in, Data-Out" che semplifica lo sviluppo di applicazioni di intelligenza artificiale integrandosi direttamente con modelli di incorporamento di terze parti (ad esempio, OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Gli utenti possono ora inserire e interrogare dati di testo grezzi e Milvus chiamerà automaticamente il servizio di modello specificato per convertire il testo in vettori in tempo reale. Questo elimina la necessità di una pipeline di conversione vettoriale separata.</p>
 <p>Per ulteriori informazioni, consultare la <a href="/docs/it/embedding-function-overview.md">Panoramica della funzione di incorporamento</a>.</p>
 <h4 id="Phrase-Match" class="common-anchor-header">Corrispondenza di frase</h4><p>Phrase Match è una funzione di ricerca di testo che restituisce risultati solo quando la sequenza esatta di parole in una query appare consecutivamente e nell'ordine corretto all'interno di un documento.</p>
 <p><strong>Caratteristiche principali</strong>:</p>

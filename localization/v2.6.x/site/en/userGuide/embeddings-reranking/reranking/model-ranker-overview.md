@@ -127,11 +127,47 @@ beta: Milvus 2.6.x
 </ul></td>
      <td><p>Content management system needing efficient reranking capabilities with standard requirements</p></td>
    </tr>
+   <tr>
+     <td><p>Cohere</p></td>
+     <td><p>Enterprise applications prioritizing reliability and ease of integration</p></td>
+     <td><ul>
+<li><p>Enterprise-grade reliability and scalability</p></li>
+<li><p>Managed service with no infrastructure maintenance</p></li>
+<li><p>Multilingual reranking capabilities</p></li>
+<li><p>Built-in rate limiting and error handling</p></li>
+</ul></td>
+     <td><p>E-commerce platform requiring high-availability search with consistent API performance and multilingual product catalogs</p></td>
+   </tr>
+   <tr>
+     <td><p>Voyage AI</p></td>
+     <td><p>RAG applications with specific performance and context requirements</p></td>
+     <td><ul>
+<li><p>Models specifically trained for reranking tasks</p></li>
+<li><p>Granular truncation controls for diverse document lengths</p></li>
+<li><p>Optimized inference for production workloads</p></li>
+<li><p>Multiple model variants (rerank-2, rerank-lite, etc.)</p></li>
+</ul></td>
+     <td><p>Research database with varying document lengths requiring fine-tuned performance control and specialized semantic understanding</p></td>
+   </tr>
+   <tr>
+     <td><p>SiliconFlow</p></td>
+     <td><p>Applications processing long documents with cost-effectiveness priorities</p></td>
+     <td><ul>
+<li><p>Advanced document chunking with configurable overlap</p></li>
+<li><p>Chunk-based scoring (highest-scoring chunk represents document)</p></li>
+<li><p>Support for diverse reranking models</p></li>
+<li><p>Cost-effective with standard and pro model variants</p></li>
+</ul></td>
+     <td><p>Technical documentation search system processing lengthy manuals and papers that need intelligent segmentation and overlap control</p></td>
+   </tr>
 </table>
 <p>For detailed information about implementation of each model service, refer to the dedicated documentation:</p>
 <ul>
 <li><p><a href="/docs/vllm-ranker.md">vLLM Ranker</a></p></li>
 <li><p><a href="/docs/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/cohere-ranker.md">Cohere Ranker</a></p></li>
+<li><p><a href="/docs/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
+<li><p><a href="/docs/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +187,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Before implementing Model Ranker, ensure you have:</p>
 <ul>
 <li><p>A Milvus collection with a <code translate="no">VARCHAR</code> field containing the text to be reranked</p></li>
-<li><p>A running external model service (vLLM or TEI) accessible to your Milvus instance</p></li>
+<li><p>A running external model service accessible to your Milvus instance</p></li>
 <li><p>Appropriate network connectivity between Milvus and your chosen model service</p></li>
 </ul>
 <p>Model rankers integrate seamlessly with both standard vector search and hybrid search operations. The implementation involves creating a Function object that defines your reranking configuration and passing it to search operations.</p>
@@ -170,7 +206,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>To implement model reranking, first define a Function object with the appropriate configuration:</p>
+    </button></h3><p>To implement model reranking, first define a Function object with the appropriate configuration. In this example, we uses the TEI as the service provider:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -185,12 +228,20 @@ model_ranker = Function(
     function_type=FunctionType.RERANK,  <span class="hljs-comment"># Must be set to RERANK</span>
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;model&quot;</span>,  <span class="hljs-comment"># Specify model reranker. Must be &quot;model&quot;</span>
-        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot; or &quot;vllm&quot;</span>
+        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>,  <span class="hljs-comment"># Model service endpoint</span>
         <span class="hljs-comment"># &quot;maxBatch&quot;: 32  # Optional: batch size for processing</span>
     }
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -222,7 +273,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>A dictionary containing configuration for the model-based reranking function. The available parameters (keys) vary depending on the provider (<code translate="no">tei</code> or <code translate="no">vllm</code>). Refer to <a href="/docs/vllm-ranker.md">vLLM Ranker</a> or <a href="/docs/tei-ranker.md">TEI Ranker</a> for more details.</p></td>
+     <td><p>A dictionary containing configuration for the model-based reranking function. The available parameters (keys) vary depending on the service provider.</p></td>
      <td><p>{…}</p></td>
    </tr>
    <tr>
@@ -235,14 +286,14 @@ model_ranker = Function(
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Yes</p></td>
      <td><p>The model service provider to use for reranking.</p></td>
-     <td><p><code translate="no">"tei"</code> or <code translate="no">"vllm"</code></p></td>
+     <td><p><code translate="no">"tei"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Yes</p></td>
      <td><p>List of query strings used by the reranking model to calculate relevance scores.
  The number of query strings must match exactly the number of queries in your search operation (even when using query vectors instead of text), otherwise an error will be reported.</p></td>
-     <td><p><code translate="no">["search query"]</code></p></td>
+     <td><p><em>["search query"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
@@ -251,7 +302,7 @@ model_ranker = Function(
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">maxBatch</code></p></td>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>No</p></td>
      <td><p>Maximum number of documents to process in a single batch. Larger values increase throughput but require more memory.</p></td>
      <td><p><code translate="no">32</code> (default)</p></td>
@@ -273,6 +324,13 @@ model_ranker = Function(
         ></path>
       </svg>
     </button></h3><p>After defining your model ranker, you can apply it during search operations by passing it to the ranker parameter:</p>
+<div class="multipleCode">
+    <a href="#bash">cURL</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
@@ -283,6 +341,14 @@ results = client.search(
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Apply to hybrid search<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -300,6 +366,13 @@ results = client.search(
         ></path>
       </svg>
     </button></h3><p>Model rankers can also be applied to hybrid search operations that combine multiple vector fields:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
@@ -325,4 +398,12 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

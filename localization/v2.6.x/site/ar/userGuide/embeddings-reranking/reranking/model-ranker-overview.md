@@ -69,7 +69,7 @@ beta: Milvus 2.6.x
    </span> <span class="img-wrapper"> <span>نظرة عامة على مصنف النماذج</span> </span></p>
 <ol>
 <li><p><strong>الاستعلام الأولي</strong>: يرسل التطبيق الخاص بك استعلامًا إلى ملفوس</p></li>
-<li><p><strong>البحث المتجه</strong>: يقوم Milvus بإجراء بحث متجه قياسي لتحديد المستندات المرشحة</p></li>
+<li><p><strong>البحث المتجه</strong>: يقوم ميلفوس بإجراء بحث متجه قياسي لتحديد المستندات المرشحة</p></li>
 <li><p><strong>استرجاع المستندات المرشحة</strong>: يحدد النظام المجموعة الأولية من المستندات المرشحة بناءً على تشابه المتجهات.</p></li>
 <li><p><strong>تقييم النموذج</strong>: تقوم وظيفة مصنف النماذج بمعالجة أزواج الاستعلام والمستندات:</p>
 <ul>
@@ -125,11 +125,47 @@ beta: Milvus 2.6.x
 </ul></td>
      <td><p>نظام إدارة محتوى يحتاج إلى إمكانات إعادة ترتيب فعالة مع متطلبات قياسية</p></td>
    </tr>
+   <tr>
+     <td><p>الاتساق</p></td>
+     <td><p>التطبيقات المؤسسية التي تعطي الأولوية للموثوقية وسهولة التكامل</p></td>
+     <td><ul>
+<li><p>الموثوقية وقابلية التوسع على مستوى المؤسسات</p></li>
+<li><p>خدمة مُدارة بدون صيانة للبنية التحتية</p></li>
+<li><p>قدرات إعادة ترتيب متعددة اللغات</p></li>
+<li><p>تحديد المعدل المدمج ومعالجة الأخطاء</p></li>
+</ul></td>
+     <td><p>منصة تجارة إلكترونية تتطلب بحثًا عالي التوافر مع أداء متسق لواجهة برمجة التطبيقات وكتالوجات منتجات متعددة اللغات</p></td>
+   </tr>
+   <tr>
+     <td><p>رحلة الذكاء الاصطناعي</p></td>
+     <td><p>تطبيقات RAG ذات متطلبات أداء وسياق محددين</p></td>
+     <td><ul>
+<li><p>نماذج مدربة خصيصًا لمهام إعادة الترتيب</p></li>
+<li><p>ضوابط اقتطاع دقيقة لأطوال المستندات المتنوعة</p></li>
+<li><p>الاستدلال الأمثل لأعباء عمل الإنتاج</p></li>
+<li><p>متغيرات متعددة للنماذج (إعادة الترتيب 2، إعادة الترتيب المخففة، إلخ)</p></li>
+</ul></td>
+     <td><p>قاعدة بيانات بحثية ذات أطوال مستندات متفاوتة تتطلب تحكمًا دقيقًا في الأداء وفهمًا دلاليًا متخصصًا</p></td>
+   </tr>
+   <tr>
+     <td><p>سيليكون فلو</p></td>
+     <td><p>تطبيقات معالجة المستندات الطويلة ذات الأولويات الفعالة من حيث التكلفة</p></td>
+     <td><ul>
+<li><p>تقطيع متقدم للوثائق مع تداخل قابل للتكوين</p></li>
+<li><p>تسجيل النقاط القائم على القطع (تمثل القطع الأعلى نقاطًا المستند)</p></li>
+<li><p>دعم نماذج إعادة الترتيب المتنوعة</p></li>
+<li><p>فعالة من حيث التكلفة مع متغيرات النموذج القياسي والمحترف</p></li>
+</ul></td>
+     <td><p>يعالج نظام البحث في الوثائق الفنية الكتيبات والأوراق المطولة التي تحتاج إلى تجزئة ذكية وتحكم ذكي في التداخل</p></td>
+   </tr>
 </table>
 <p>للحصول على معلومات مفصلة حول تنفيذ كل خدمة نموذجية، راجع الوثائق المخصصة:</p>
 <ul>
-<li><p><a href="/docs/ar/vllm-ranker.md">vLLM Ranker</a></p></li>
+<li><p><a href="/docs/ar/vllm-ranker.md">مصنف vLLM</a></p></li>
 <li><p><a href="/docs/ar/tei-ranker.md">مصنف TEI</a></p></li>
+<li><p><a href="/docs/ar/cohere-ranker.md">مصنف Cohere</a></p></li>
+<li><p><a href="/docs/ar/voyage-ai-ranker.md">مصنف Voyage AI</a></p></li>
+<li><p><a href="/docs/ar/siliconflow-ranker.md">مصنف سيليكون فلو</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">التنفيذ<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,14 +182,31 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل تنفيذ مصنف النماذج، تأكد من أن لديك:</p>
+    </button></h2><p>قبل تنفيذ نموذج مصنف النموذج، تأكد من أن لديك:</p>
 <ul>
-<li><p>مجموعة Milvus مع حقل <code translate="no">VARCHAR</code> يحتوي على النص المراد إعادة تصنيفه</p></li>
-<li><p>خدمة نموذج خارجي قيد التشغيل (vLLM أو TEI) يمكن الوصول إليها من خلال مثيل Milvus الخاص بك</p></li>
-<li><p>اتصال شبكي مناسب بين ميلفوس وخدمة النموذج الذي اخترته</p></li>
+<li><p>مجموعة ميلفوس مع حقل <code translate="no">VARCHAR</code> يحتوي على النص المراد إعادة تصنيفه</p></li>
+<li><p>خدمة نموذج خارجي قيد التشغيل يمكن الوصول إليها من خلال مثيل ميلفوس الخاص بك</p></li>
+<li><p>اتصال شبكة مناسب بين ميلفوس وخدمة النموذج الذي اخترته</p></li>
 </ul>
 <p>تتكامل مصنفات النماذج بسلاسة مع كل من عمليات البحث المتجه القياسية وعمليات البحث المختلطة. يتضمن التنفيذ إنشاء كائن وظيفة يحدد تكوين إعادة الترتيب الخاص بك وتمريره إلى عمليات البحث.</p>
-<h3 id="Create-a-model-ranker" class="common-anchor-header">إنشاء مصنف نموذج</h3><p>لتنفيذ إعادة ترتيب النماذج، قم أولاً بتعريف كائن دالة مع التكوين المناسب:</p>
+<h3 id="Create-a-model-ranker" class="common-anchor-header">إنشاء مصنف نموذج<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتنفيذ إعادة ترتيب النماذج، قم أولاً بتعريف كائن دالة مع التكوين المناسب. في هذا المثال، نستخدم TEI كمزود خدمة:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -168,12 +221,20 @@ model_ranker = Function(
     function_type=FunctionType.RERANK,  <span class="hljs-comment"># Must be set to RERANK</span>
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;model&quot;</span>,  <span class="hljs-comment"># Specify model reranker. Must be &quot;model&quot;</span>
-        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot; or &quot;vllm&quot;</span>
+        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>,  <span class="hljs-comment"># Model service endpoint</span>
         <span class="hljs-comment"># &quot;maxBatch&quot;: 32  # Optional: batch size for processing</span>
     }
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -203,26 +264,26 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>قاموس يحتوي على تكوين لدالة إعادة الترتيب المستندة إلى النموذج. تختلف المعلمات (المفاتيح) المتاحة حسب الموفر (<code translate="no">tei</code> أو <code translate="no">vllm</code>). ارجع إلى <a href="/docs/ar/vllm-ranker.md">vLLM Ranker</a> أو <a href="/docs/ar/tei-ranker.md">TEI Ranker</a> لمزيد من التفاصيل.</p></td>
+     <td><p>قاموس يحتوي على تكوين لدالة إعادة الترتيب المستندة إلى النموذج. تختلف المعلمات (المفاتيح) المتاحة اعتماداً على موفر الخدمة.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يجب ضبطها على <code translate="no">"model"</code> لتمكين إعادة ترتيب النماذج.</p></td>
+     <td><p>يجب ضبطه على <code translate="no">"model"</code> لتمكين إعادة ترتيب النماذج.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>نعم</p></td>
      <td><p>موفر خدمة النموذج المراد استخدامه لإعادة الترتيب.</p></td>
-     <td><p><code translate="no">"tei"</code> أو <code translate="no">"vllm"</code></p></td>
+     <td><p><code translate="no">"tei"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>نعم</p></td>
      <td><p>قائمة بسلاسل الاستعلامات التي يستخدمها نموذج إعادة الترتيب لحساب درجات الملاءمة. يجب أن يتطابق عدد سلاسل الاستعلامات مع عدد الاستعلامات في عملية البحث (حتى عند استخدام ناقلات الاستعلامات بدلاً من النص)، وإلا سيتم الإبلاغ عن خطأ.</p></td>
-     <td><p><code translate="no">["search query"]</code></p></td>
+     <td><p><em>["استعلام البحث"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
@@ -231,13 +292,30 @@ model_ranker = Function(
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">maxBatch</code></p></td>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>لا</p></td>
      <td><p>الحد الأقصى لعدد المستندات المطلوب معالجتها في دفعة واحدة. تزيد القيم الأكبر من الإنتاجية ولكنها تتطلب المزيد من الذاكرة.</p></td>
      <td><p><code translate="no">32</code> (افتراضي)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">تطبيقه على البحث المتجه القياسي</h3><p>بعد تحديد مصنف النموذج الخاص بك، يمكنك تطبيقه أثناء عمليات البحث عن طريق تمريره إلى معلمة المصنف:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">تطبيقه على البحث المتجه القياسي<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد تحديد مصنف النموذج الخاص بك، يمكنك تطبيقه أثناء عمليات البحث عن طريق تمريره إلى معلمة المصنف:</p>
+<div class="multipleCode">
+   <a href="#bash">cURL</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
@@ -249,7 +327,32 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث المختلط</h3><p>يمكن أيضًا تطبيق مصنفات النموذج على عمليات البحث المختلط التي تجمع بين حقول متجهات متعددة:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث الهجين<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكن أيضًا تطبيق مصنفات النموذج على عمليات البحث المختلطة التي تجمع بين حقول متجهات متعددة:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
@@ -275,4 +378,12 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

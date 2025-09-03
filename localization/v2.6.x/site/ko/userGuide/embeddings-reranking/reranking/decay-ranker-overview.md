@@ -30,7 +30,7 @@ beta: Milvus 2.6.x
 </ul>
 <p>이러한 시나리오는 모두 벡터 유사성과 시간, 거리 또는 인기도와 같은 다른 수치적 요소의 균형을 맞추는 공통된 요구 사항을 공유합니다.</p>
 <p>Milvus의 디케이 랭커는 숫자 필드 값을 기반으로 검색 순위를 조정하여 이러한 요구를 해결합니다. 이를 통해 벡터 유사도와 '최신성', '근접성' 또는 데이터의 다른 숫자 속성의 균형을 맞춰 보다 직관적이고 맥락에 맞는 검색 환경을 만들 수 있습니다.</p>
-<h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Usage-notes" class="common-anchor-header">사용 참고 사항<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,9 +46,15 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>그룹 검색에는 감쇠 순위를 사용할 수 없습니다.</p></li>
-<li><p>디케이 랭킹에 사용되는 필드는 숫자(<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)여야 합니다.</p></li>
-<li><p>각 감쇠 순위는 하나의 숫자 필드만 사용할 수 있습니다.</p></li>
+<li><p>그룹화 검색에는 감쇠 순위를 사용할 수 없습니다.</p></li>
+<li><p>감쇠 순위에 사용되는 필드는 숫자(<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)여야 합니다.</p></li>
+<li><p>각 붕괴 순위는 하나의 숫자 필드만 사용할 수 있습니다.</p></li>
+<li><p><strong>시간 단위 일관성</strong>: 시간 기반 감쇠 순위를 사용하는 경우 <code translate="no">origin</code>, <code translate="no">scale</code>, <code translate="no">offset</code> 매개변수의 단위는 수집 데이터에 사용된 단위와 일치해야 합니다:</p>
+<ul>
+<li>컬렉션에서 타임스탬프를 <strong>초</strong> 단위로 저장하는 경우 모든 매개변수에 초를 사용합니다.</li>
+<li>컬렉션에서 타임스탬프를 <strong>밀리초</strong> 단위로 저장하는 경우 모든 매개변수에 밀리초를 사용합니다.</li>
+<li>컬렉션이 타임스탬프를 <strong>마이크로초</strong> 단위로 저장하는 경우, 모든 매개변수에 마이크로초를 사용합니다.</li>
+</ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">작동 방식<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,29 +71,89 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>감쇠 순위는 시간이나 지리적 거리와 같은 숫자 요소를 순위 프로세스에 통합하여 기존 벡터 검색을 향상시킵니다. 전체 프로세스는 다음 단계를 따릅니다:</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">1단계: 정규화된 유사도 점수 계산</h3><p>먼저, Milvus는 일관된 비교를 위해 벡터 유사도 점수를 계산하고 정규화합니다:</p>
+    </button></h2><p>디케이 랭킹은 시간이나 지리적 거리와 같은 숫자 요소를 랭킹 프로세스에 통합하여 기존의 벡터 검색을 향상시킵니다. 전체 프로세스는 다음 단계를 따릅니다:</p>
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">1단계: 정규화된 유사도 점수 계산<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>먼저, Milvus는 일관된 비교를 위해 벡터 유사도 점수를 계산하고 정규화합니다:</p>
 <ul>
-<li><p><strong>L2</strong> 및 <strong>JACCARD</strong> 거리 메트릭(값이 낮을수록 유사성이 높음을 나타냄)의 경우:</p>
+<li><p><strong>L2</strong> 및 <strong>JACCARD</strong> 거리 메트릭의 경우(값이 낮을수록 유사성이 높음을 나타냄):</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
 <button class="copy-code-btn"></button></code></pre>
 <p>거리를 0-1 사이의 유사도 점수로 변환하며, 점수가 높을수록 더 좋습니다.</p></li>
 <li><p><strong>IP</strong>, <strong>COSINE</strong> 및 <strong>BM25</strong> 메트릭(점수가 높을수록 더 잘 일치함을 의미)의 경우: 점수는 정규화 없이 바로 사용됩니다.</p></li>
 </ul>
-<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">2단계: 부패 점수 계산하기</h3><p>다음으로 Milvus는 선택한 감쇠 순위자를 사용하여 숫자 필드 값(예: 타임스탬프 또는 거리)을 기반으로 감쇠 점수를 계산합니다:</p>
+<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">2단계: 부패 점수 계산하기<button data-href="#Stage-2-Calculate-decay-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음으로 Milvus는 선택한 감쇠 순위자를 사용하여 숫자 필드 값(예: 타임스탬프 또는 거리)을 기반으로 감쇠 점수를 계산합니다:</p>
 <ul>
 <li><p>각 감쇠 순위자는 원시 숫자 값을 0-1 사이의 정규화된 관련성 점수로 변환합니다.</p></li>
 <li><p>감쇠 점수는 이상적인 지점과의 '거리'를 기준으로 항목이 얼마나 관련성이 있는지를 나타냅니다.</p></li>
 </ul>
-<p>구체적인 계산 공식은 감쇠 랭커 유형에 따라 다릅니다. 감쇠 점수를 계산하는 방법에 대한 자세한 내용은 <a href="/docs/ko/gaussian-decay.md#Formula">가우스 감쇠</a>, <a href="/docs/ko/exponential-decay.md#Formula">지수 감쇠</a>, <a href="/docs/ko/linear-decay.md#Formula">선형 감쇠</a> 전용 페이지를 참조하세요.</p>
-<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">3단계: 최종 점수 계산</h3><p>마지막으로 Milvus는 정규화된 유사도 점수와 감쇠 점수를 결합하여 최종 순위 점수를 산출합니다:</p>
+<p>구체적인 계산 공식은 감쇠 랭커 유형에 따라 다릅니다. 감쇠 점수를 계산하는 방법에 대한 자세한 내용은 <a href="/docs/ko/gaussian-decay.md#Formula">가우스 감쇠</a>, <a href="/docs/ko/exponential-decay.md#Formula">지수 감쇠</a>, <a href="/docs/ko/linear-decay.md#Formula">선형 감</a>쇠 전용 페이지를 참조하세요.</p>
+<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">3단계: 최종 점수 계산<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>마지막으로 Milvus는 정규화된 유사도 점수와 감쇠 점수를 결합하여 최종 순위 점수를 산출합니다:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>하이브리드 검색(여러 벡터 필드를 결합)의 경우, Milvus는 검색 요청 중 정규화된 최대 유사도 점수를 취합니다:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>예를 들어, 하이브리드 검색에서 연구 논문이 벡터 유사성에서 0.82점, BM25 기반 텍스트 검색에서 0.91점을 받은 경우, Milvus는 0.91점을 기본 유사성 점수로 사용한 후 감쇠 계수를 적용합니다.</p>
-<h3 id="Decay-ranking-in-action" class="common-anchor-header">실제 감쇠 순위</h3><p>시간 기반 감쇠를 사용하여 <strong>'AI 연구 논문'을</strong> 검색하는 실제 시나리오에서 감쇠 순위가 어떻게 적용되는지 살펴봅시다:</p>
+<h3 id="Decay-ranking-in-action" class="common-anchor-header">실제 감쇠 순위<button data-href="#Decay-ranking-in-action" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>시간 기반 감쇠를 사용하여 <strong>'AI 연구 논문'을</strong> 검색하는 실제 시나리오에서 감쇠 순위가 어떻게 적용되는지 살펴봅시다:</p>
 <div class="alert note">
 <p>이 예에서 감쇠 점수는 시간이 지남에 따라 관련성이 감소하는 방식을 반영하며, 최신 논문은 1.0에 가까운 점수를 받고 오래된 논문은 더 낮은 점수를 받습니다. 이 값은 특정 감쇠 순위자를 사용하여 계산됩니다. 자세한 내용은 <a href="/docs/ko/decay-ranker-overview.md#Choose-the-right-decay-ranker">올바른 감쇠 순위 선택하기를</a> 참조하세요.</p>
 </div>
@@ -202,7 +268,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><a href="/docs/ko/gaussian-decay.md">가우스 감쇠</a></p></li>
 <li><p><a href="/docs/ko/exponential-decay.md">지수 감쇠</a></p></li>
-<li><p><a href="/docs/ko/exponential-decay.md">지수 감쇠</a></p></li>
+<li><p><a href="/docs/ko/linear-decay.md">선형 감쇠</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">구현 예시<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,10 +289,26 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>감쇠 함수를 사용하기 전에 먼저 감쇠 계산에 사용할 적절한 숫자 필드(타임스탬프, 거리 등)가 포함된 컬렉션을 만들어야 합니다. 컬렉션 설정, 스키마 정의 및 데이터 삽입을 포함한 전체 작업 예제는 <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">튜토리얼을</a> 참조하세요: <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">밀버스에서 시간 기반 랭킹 구현하기를</a> 참조하세요.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">감쇠 순위 생성하기</h3><p>감쇠 순위를 구현하려면 먼저 적절한 구성으로 <code translate="no">Function</code> 객체를 정의합니다:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">감쇠 순위 생성하기<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>감쇠 순위를 구현하려면 먼저 적절한 구성으로 <code translate="no">Function</code> 객체를 정의합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 decay_ranker = Function(
     name=<span class="hljs-string">&quot;time_decay&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;timestamp&quot;</span>],    <span class="hljs-comment"># Numeric field to use for decay</span>
@@ -234,9 +316,9 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point (seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds (must match collection data unit)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone (must match collection data unit)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
     }
 )
@@ -282,28 +364,28 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>예</p></td>
-     <td><p>감쇠 점수를 계산하는 기준점입니다. 이 값에 있는 항목은 최대 관련성 점수를 받습니다.</p></td>
+     <td><p>감쇠 점수를 계산하는 기준점입니다. 이 값에 있는 항목은 최대 연관성 점수를 받습니다. 시간 기반 감쇠의 경우 시간 단위가 수집 데이터와 일치해야 합니다.</p></td>
      <td><ul>
 <li>타임스탬프의 경우: 현재 시간(예: <code translate="no">int(time.time())</code>)</li>
 <li>지리적 위치의 경우: 사용자의 현재 좌표</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.scale</code></p></td>
+          <td><p><code translate="no">params.scale</code></p></td>
      <td><p>예</p></td>
-     <td><p>관련성이 <code translate="no">decay</code> 값으로 떨어지는 거리 또는 시간. 관련성 감소 속도를 제어합니다. 값이 클수록 관련성이 점진적으로 감소하고 값이 작을수록 가파르게 감소합니다.</p></td>
+     <td><p>관련성이 <code translate="no">decay</code> 값으로 떨어지는 거리 또는 시간. 관련성 감소 속도를 제어합니다. 시간 기반 쇠퇴의 경우 시간 단위가 수집 데이터와 일치해야 합니다. 값이 클수록 관련성이 점진적으로 감소하고 값이 작을수록 더 가파르게 감소합니다.</p></td>
      <td><ul>
-<li>시간: 기간(초)(예: 7일 동안 <code translate="no">7 * 24 * 60 * 60</code> )</li>
-<li>거리: 미터(예: 5km의 경우 <code translate="no">5000</code> )</li>
+<li>시간의 경우: 기간(초)(예: 7일 동안 <code translate="no">7 * 24 * 60 * 60</code> )</li>
+<li>거리의 경우: 미터(예: 5km의 경우 <code translate="no">5000</code> )</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.offset</code></p></td>
+          <td><p><code translate="no">params.offset</code></p></td>
      <td><p>No</p></td>
-     <td><p>항목이 만점을 유지하는 <code translate="no">origin</code> 주위에 "감쇠 금지 영역"을 만듭니다(감쇠 점수 = 1.0). 이 범위( <code translate="no">origin</code> ) 내의 항목은 최대 관련성을 유지합니다.</p></td>
+     <td><p>항목이 만점을 유지하는 <code translate="no">origin</code> 주변에 "감쇠 없음 영역"을 만듭니다(감쇠 점수 = 1.0). 이 범위( <code translate="no">origin</code> ) 내의 항목은 최대 관련성을 유지합니다. 시간 기반 감쇠의 경우 시간 단위가 수집 데이터와 일치해야 합니다.</p></td>
      <td><ul>
-<li>시간의 경우: 기간(초)(예: 1일 동안 <code translate="no">24 * 60 * 60</code> )</li>
-<li>거리: 미터(예: 500m의 경우 <code translate="no">500</code> )</li>
+<li>시간의 경우: 기간(초)(예: 1일의 경우 <code translate="no">24 * 60 * 60</code> )</li>
+<li>거리의 경우: 미터(예: 500m의 경우 <code translate="no">500</code> )</li>
 </ul></td>
    </tr>
    <tr>
@@ -313,7 +395,22 @@ decay_ranker = Function(
      <td><p><code translate="no">0.5</code> (기본값)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용</h3><p>감쇠 순위자를 정의한 후 <code translate="no">ranker</code> 파라미터에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>감쇠 순위자를 정의한 후 <code translate="no">ranker</code> 파라미터에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
@@ -325,7 +422,22 @@ results = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 작업에도 디케이 랭커를 적용할 수 있습니다:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 작업에도 디케이 랭커를 적용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
