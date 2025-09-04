@@ -18,9 +18,9 @@ The `standard` analyzer is suitable for languages that rely on separators (such 
 
 The `standard` analyzer consists of:
 
-- **Tokenizer**: Uses the `standard` tokenizer to split text into discrete word units based on grammar rules. For more information, refer to [Standard](standard-tokenizer.md).
+- **Tokenizer**: Uses the `standard` tokenizer to split text into discrete word units based on grammar rules. For more information, refer to [Standard Tokenizer](standard-tokenizer.md).
 
-- **Filter**: Uses the `lowercase`[ filter](lowercase-filter.md) to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to
+- **Filter**: Uses the `lowercase` filter to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to [Lowercase](lowercase-filter.md).
 
 The functionality of the `standard` analyzer is equivalent to the following custom analyzer configuration:
 
@@ -204,7 +204,7 @@ analyzerParams='{
 }'
 ```
 
-### Verification using `run_analyzer` | Milvus 2.5.11+
+### Verification using `run_analyzer`
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -219,7 +219,10 @@ from pymilvus import (
     MilvusClient,
 )
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
 
 # Sample text to analyze
 sample_text = "The Milvus vector database is built for scale!"
@@ -237,6 +240,7 @@ import io.milvus.v2.service.vector.response.RunAnalyzerResp;
 
 ConnectConfig config = ConnectConfig.builder()
         .uri("http://localhost:19530")
+        .token("root:Milvus")
         .build();
 MilvusClientV2 client = new MilvusClientV2(config);
 

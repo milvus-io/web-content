@@ -94,7 +94,7 @@ analyzerParams='{
 
 <div class="alert note">
 
-For simpler setup, you may choose to use the `standard` [analyzer](standard-analyzer.md), which combines the `standard` tokenizer with the `lowercase`[ filter](lowercase-filter.md).
+For simpler setup, you may choose to use the [`standard`](standard-analyzer.md) [analyzer](standard-analyzer.md), which combines the `standard` tokenizer with the [`lowercase`](lowercase-filter.md)[ filter](lowercase-filter.md).
 
 </div>
 
@@ -139,7 +139,7 @@ analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"lowerc
 # restful
 ```
 
-### Verification using `run_analyzer` | Milvus 2.5.11+
+### Verification using `run_analyzer`
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -154,7 +154,10 @@ from pymilvus import (
     MilvusClient,
 )
 
-client = MilvusClient(uri="http://localhost:19530")
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
 
 # Sample text to analyze
 sample_text = "The Milvus vector database is built for scale!"
@@ -172,6 +175,7 @@ import io.milvus.v2.service.vector.response.RunAnalyzerResp;
 
 ConnectConfig config = ConnectConfig.builder()
         .uri("http://localhost:19530")
+        .token("root:Milvus")
         .build();
 MilvusClientV2 client = new MilvusClientV2(config);
 

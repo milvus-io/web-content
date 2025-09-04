@@ -103,8 +103,9 @@ class MilvusDocsGen extends larkDocWriter {
         
         console.log(`Fetching the source ...`)
         this.page_blocks = await this.__fetch_doc_blocks(page_token);
+        this.page_blocks = await this.__get_reference_syncd_blocks(this.page_blocks);
         if (!this.page_blocks) console.log("Failed to fetch the source") && process.exit(1);
-        
+
         console.log(`Generating the front matters ...`)
         let page = this.page_blocks.find(block => block.block_type === 1)
         if (page && page.children) {
@@ -166,7 +167,7 @@ class MilvusDocsGen extends larkDocWriter {
         const code = block.code
         const code_block_groups = this.__locate_all_code_block_groups(blocks);
         const first_code_block_in_groups = code_block_groups.map(group => group[0]);
-        
+
         let lang = code.style.language ? this.code_langs[code['style']['language']] : 'plaintext'
         let elements = (await Promise.all(code['elements'].map( async x => {
             return await this.__text_run(x, code['elements'], true)
@@ -503,7 +504,64 @@ class MilvusDocsGen extends larkDocWriter {
         }))
     }
 
+    async __get_reference_syncd_blocks(blocks) {
+        const replacements = [];
+        let append_blocks = [];
+
+        if (!blocks) throw new Error("No blocks provided");
+        
+        for (let block of blocks) {
+            if (block.block_type === 50 && block.reference_synced) {
+                const { source_document_id, source_block_id } = block.reference_synced
+                const source_blocks = await this.__fetch_doc_blocks(source_document_id);
+                const source_block = source_blocks.find(b => b.block_id == source_block_id)
+                if (source_block) {
+                    const block_id = block.block_id
+                    const parent_id = block.parent_id
+                    // replace reference_synced block with actual block
+                    Object.keys(block).forEach(key => delete block[key])
+                    Object.keys(source_block).forEach(key => block[key] = source_block[key])
+                    block.parent_id = parent_id
+                    // append child blocks from source document
+                    for (let child of block.children) {
+                        append_blocks.push(source_blocks.find(b => b.block_id == child))
+                    }
+
+                    replacements.push({
+                        parent_id,
+                        reference_block_id: block_id,
+                        source_block_id: source_block_id,
+                    })
+
+                    // save source document if not already saved
+                    console.log(`6. Fetched referenced_synced block ${source_document_id} - ${source_block_id}`)
+                }               
+            }
+
+            if (append_blocks.length > 0) {
+                console.log(`7. Appending ${append_blocks.length} blocks to the current document`)
+                blocks = blocks.concat(append_blocks)
+            }
+
+            if (replacements.length > 0) {
+                for (let replacement of replacements) {
+                    const parent = blocks.find(b => b.block_id == replacement.parent_id)
+                    if (parent) {
+                        const index = parent.children.findIndex(child => child == replacement.reference_block_id)
+                        if (index !== -1) {
+                            parent.children[index] = replacement.source_block_id
+                        }
+                    }
+                }
+                console.log(`8. Replaced ${replacements.length} reference_synced blocks in the current document`)
+            } 
+        }
+
+        return blocks;
+    } 
+
     async __fetch_doc_blocks(document_id, page_token=null, blocks=[]) {
+        console.log(document_id)
         const token = await this.tokenFetcher.token()
         let document_token = document_id
 
@@ -568,6 +626,8 @@ class MilvusDocsGen extends larkDocWriter {
                 const timeout = headers['x-ogw-ratelimit-reset']
                 await this.__wait(timeout * 1000)
                 return await this.__convert_wiki_token(page_token)
+            } else {
+                return page_token;
             }
         } else {
             return obj_token;
