@@ -42,8 +42,8 @@ summary: >-
       </svg>
     </button></h2><p>The <code translate="no">standard</code> analyzer consists of:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">standard</code> tokenizer to split text into discrete word units based on grammar rules. For more information, refer to <a href="/docs/standard-tokenizer.md">Standard</a>.</p></li>
-<li><p><strong>Filter</strong>: Uses the <code translate="no">lowercase</code><a href="/docs/lowercase-filter.md"> filter</a> to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to</p></li>
+<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">standard</code> tokenizer to split text into discrete word units based on grammar rules. For more information, refer to <a href="/docs/standard-tokenizer.md">Standard Tokenizer</a>.</p></li>
+<li><p><strong>Filter</strong>: Uses the <code translate="no">lowercase</code> filter to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to <a href="/docs/lowercase-filter.md">Lowercase</a>.</p></li>
 </ul>
 <p>The functionality of the <code translate="no">standard</code> analyzer is equivalent to the following custom analyzer configuration:</p>
 <div class="multipleCode">
@@ -215,7 +215,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer--Milvus-2511+" class="common-anchor-header">Verification using <code translate="no">run_analyzer</code><span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Verification-using-runanalyzer--Milvus-2511+" class="anchor-icon" translate="no">
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verification using <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -241,7 +241,10 @@ analyzerParams=<span class="hljs-string">&#x27;{
     MilvusClient,
 )
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 
 <span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>
@@ -257,6 +260,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build();
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
 
