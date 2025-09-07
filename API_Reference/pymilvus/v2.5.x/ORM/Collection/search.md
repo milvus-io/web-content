@@ -152,7 +152,6 @@ A **SearchResult** object that contains a list of **Hits** objects.
     │           ├── id
     │           ├── distance
     │           ├── score
-    │           ├── vector
     │           └── get()
     ```
 
@@ -181,10 +180,6 @@ A **SearchResult** object that contains a list of **Hits** objects.
         - **score** (*float*)
 
             An alias to **distance**.
-
-        - **vector** (*list[float]*)   
-
-            The vector field of a hit entity.
 
         - **get(*field_name: str*)**
 
@@ -268,10 +263,10 @@ for hits in res:
         # Get distance
         hit.distance # hit.score
         
-        # Get vector
+        # Get vector in output field by vector field name as attribite
         hit.vector
         
-        # Get output field
+        # Get vector by name in output field
         hit.get("vector")
         
 ```
