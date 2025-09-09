@@ -52,7 +52,7 @@ Milvus supports  sparse vector input with the following formats:
     # Second vector: indices [3, 100] with values [0.8, 0.1]
     indices = [[27, 100, 5369], [3, 100]]
     values = [[0.5, 0.3, 0.6], [0.8, 0.1]]
-    sparse_vectors = [csr_matrix((values, ([0]*len(idx), idx)), shape=(1, 5369+1)) for idx, vals in zip(indices, values)]
+    sparse_vectors = [csr_matrix((vals, ([0]*len(idx), idx)), shape=(1, 5369+1)) for idx, vals in zip(indices, values)]
     ```
 
 - **List of Tuple Iterables (e.g. `[(dimension_index, value)]`)**
