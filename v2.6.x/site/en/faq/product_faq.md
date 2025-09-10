@@ -248,5 +248,5 @@ No, modifying the `max_length` for a VarChar field does not necessitate data reo
 You can:
 
 - Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. You're welcome to raise questions, share ideas, and help others.
-- Join our [Slack community](https://slack.milvus.io/) to find support and engage with our open-source community.
+- Join our [Discord channel](https://discord.com/invite/8uyFbECzPX) to find support and engage with our open-source community.
 

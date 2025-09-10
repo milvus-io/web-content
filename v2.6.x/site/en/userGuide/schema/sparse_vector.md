@@ -330,11 +330,15 @@ export indexParams='[
 
 This example uses the `SPARSE_INVERTED_INDEX` index type with `IP` as the metric. For more details, see the following resources:
 
+- [SPARSE_INVERTED_INDEX](sparse-inverted-index.md): Explained index and its parameters
+
 - [Metric Types](metric.md): Supported metric types for different field types
+
+- [Full Text Search](full-text-search.md): A detailed tutorial on full-text search
 
 ## Create Collection
 
-Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the `create_collection` method to create a collection named `my_collection`.
+Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the [`create_collection`](create-collection.md) method to create a collection named `my_collection`.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -418,6 +422,7 @@ data = [
     {
         "text": "information retrieval focuses on finding relevant information in large datasets.",
         "sparse_vector": {10: 0.1, 200: 0.7, 1000: 0.9}
+    }
 ]
 
 client.insert(
@@ -613,6 +618,7 @@ res = client.search(
     limit=3,
     output_fields=["pk"],
     search_params=search_params,
+    consistency_level="Strong"
 )
 
 print(res)
@@ -632,6 +638,7 @@ SearchResp searchR = client.search(SearchReq.builder()
         .data(Collections.singletonList(queryData))
         .annsField("sparse_vector")
         .searchParams(searchParams)
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .topK(3)
         .outputFields(Collections.singletonList("pk"))
         .build());
@@ -649,7 +656,8 @@ await client.search({
     data: queryData,
     limit: 3,
     output_fields: ['pk'],
-    params: searchParams
+    params: searchParams,
+    consistency_level: "Strong"
 });
 ```
 
@@ -680,6 +688,10 @@ for _, resultSet := range resultSets {
 ```
 
 ```bash
+export params='{
+    "consistencyLevel": "Strong"
+}'
+
 curl --request POST \
 --url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
 --header "Authorization: Bearer ${TOKEN}" \
@@ -690,7 +702,8 @@ curl --request POST \
     "annsField": "sparse_vector",
     "limit": 3,
     "searchParams": $searchParams,
-    "outputFields": ["pk"]
+    "outputFields": ["pk"],
+    "params": $params
 }'
 
 ## {"code":0,"cost":0,"data":[{"distance":0.63,"id":"453577185629572535","pk":"453577185629572535"},{"distance":0.1,"id":"453577185629572534","pk":"453577185629572534"}]}
