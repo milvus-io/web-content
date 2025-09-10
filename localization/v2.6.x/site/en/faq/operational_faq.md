@@ -145,5 +145,5 @@ This prioritization can result in fewer unique results than the limit if your co
 <h4 id="Still-have-questions" class="common-anchor-header">Still have questions?</h4><p>You can:</p>
 <ul>
 <li>Check out <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> on GitHub. Feel free to ask questions, share ideas, and help others.</li>
-<li>Join our <a href="https://discuss.milvus.io/">Milvus Forum</a> or <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> to find support and engage with our open-source community.</li>
+<li>Join our <a href="https://discuss.milvus.io/">Milvus Forum</a> or <a href="https://discord.com/invite/8uyFbECzPX">Discord channel</a> to find support and engage with our open-source community.</li>
 </ul>
