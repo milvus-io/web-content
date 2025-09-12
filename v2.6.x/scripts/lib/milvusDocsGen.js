@@ -678,7 +678,7 @@ class MilvusDocsGen extends larkDocWriter {
         // Find the title corresponding to the hash tag
         const matchingSection = sectionTitles.find(section => section.block_id === hashTag);
         if (!matchingSection) {
-            console.log(`No matching section found for hash tag: ${hashTag}`);
+            console.log(`No matching section found for hash tag: ${hashTag}. The doc ID is ${docId}`);
             return hashTag; // Return the original hash tag if no match is found
         }
 
