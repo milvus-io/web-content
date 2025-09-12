@@ -84,7 +84,7 @@ title: Install Milvus Standalone with RPM/DEB Package
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>For DEB-based systems (such as Ubuntu and Debian), use the <code translate="no">apt</code> command to install the package.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Start Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
