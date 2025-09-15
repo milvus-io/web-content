@@ -142,8 +142,8 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>. ¿Qué causa esto y cómo puede solucionarse?</h4><p>Este error indica que está intentando conectarse a Milvus Lite utilizando una versión anterior de pymilvus que no lo soporta. Para solucionarlo, actualice su instalación de pymilvus al menos a la versión 2.4.2. Esta versión soporta la conexión a Milvus Lite. Para actualizar, utilice el siguiente comando:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Still-have-questions" class="common-anchor-header">¿Todavía tiene preguntas?</h4><p>Puede hacerlo:</p>
+<h4 id="Still-have-questions" class="common-anchor-header">¿Aún tiene preguntas?</h4><p>Puede hacerlo:</p>
 <ul>
 <li>Eche un vistazo a <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> en GitHub. Siéntase libre de hacer preguntas, compartir ideas y ayudar a otros.</li>
-<li>Únete a nuestro <a href="https://discuss.milvus.io/">Foro Milvus</a> o <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar apoyo y participar con nuestra comunidad de código abierto.</li>
+<li>Únete a nuestro <a href="https://discuss.milvus.io/">Foro Milvus</a> o <a href="https://discord.com/invite/8uyFbECzPX">canal Discord</a> para encontrar apoyo y participar con nuestra comunidad de código abierto.</li>
 </ul>

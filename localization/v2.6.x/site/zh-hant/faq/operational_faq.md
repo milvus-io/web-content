@@ -42,12 +42,12 @@ Node(s) querynode
         ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
         ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">如果查詢節點記憶體使用不平衡，可以調整哪些參數？</h4><p>有時候，查詢節點的記憶體用量會有所不同，因為有些作為委託人的節點會使用較多的 RAM。如果委託人的記憶體較多，請調整 queryCoord.delegatorMemoryOverloadFactor，以將封存的區段卸載到其他節點，並降低 RAM 使用量。</p>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">如果查詢節點記憶體使用不平衡，可以調整哪些參數？</h4><p>有時候，查詢節點的記憶體用量會有所不同，因為有些節點作為委託人會使用較多的 RAM。如果委託人的記憶體較多，請調整 queryCoord.delegatorMemoryOverloadFactor，以將封存的區段卸載到其他節點，並降低 RAM 使用量。</p>
 <ul>
 <li>預設值為 0.1。</li>
 <li>增加此值 (例如，增加到 0.3 或更高) 會使系統從超載的 delegator 卸載更多封存區段到其他 QueryNodes，幫助平衡記憶體使用。您也可以嘗試將值增加到 1，這表示不會在 delegator 節點中載入封存區段。</li>
 </ul>
-<p>如果您不想重新啟動群集，您可以使用 birdwatcher 修改 milvus 配置：</p>
+<p>如果您不想重新啟動集群，您可以使用 birdwatcher 修改 milvus 配置：</p>
 <pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
 Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
 
@@ -57,7 +57,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">如何設定集合的 shard_num？</h4><p>最佳的做法是，對於維度為 768 的向量集合，建議每 ~1 億向量至少使用 1 個 shard。對於大量寫入的使用情況，每 ~1 億向量使用 4 個 shard。</p>
 <p>例如，如果您有 1 億向量，請使用 1-4 個分片。如果您有 5 億向量，請使用 5-10 個磁碟分割。</p>
 <h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">如果我從 Docker Hub 拉取 Milvus Docker 映像失敗怎麼辦？</h4><p>如果您從 Docker Hub 拉取 Milvus Docker image 失敗，請嘗試新增其他註冊表鏡像。</p>
-<p>中國大陸的使用者可以在<strong>/etc.docker/daemon.json</strong> 的 registry-mirrors<strong> 陣列</strong>中加入網址 "https://registry.docker-cn.com"。</p>
+<p>中國大陸的使用者可以在<strong>/etc.docker/daemon.json</strong> 的 registry-mirrors array 中加入網址 "https://registry.docker-cn.com"。</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
@@ -143,5 +143,5 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Still-have-questions" class="common-anchor-header">還有問題嗎？</h4><p>您可以</p>
 <ul>
 <li>查看 GitHub 上的<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。隨時提出問題、分享想法並幫助他人。</li>
-<li>加入我們的<a href="https://discuss.milvus.io/">Milvus 論壇</a>或<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 頻道</a>，尋找支援並參與我們的開放原始碼社群。</li>
+<li>加入我們的<a href="https://discuss.milvus.io/">Milvus 論壇</a>或<a href="https://discord.com/invite/8uyFbECzPX">Discord 頻道</a>，尋找支援並參與我們的開放原始碼社群。</li>
 </ul>

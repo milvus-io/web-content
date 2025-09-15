@@ -57,8 +57,8 @@ title: تثبيت برنامج Milvus Standalone مع حزمة RPM/DEB
       </svg>
     </button></h2><p>يمكنك تنزيل حزمة RPM/DEB وفقاً لبنية نظامك من <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.0">صفحة إصدارات Milvus</a>.</p>
 <ul>
-<li>بالنسبة ل x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.0-1_amd64.deb</strong> أو حزمة <strong>milvus_2.6.0-1_amd64.rpm.</strong> </li>
-<li>بالنسبة ل ARM64، قم بتنزيل حزمة <strong>milvus_2.6.0.0-1_arm64.deb</strong> أو حزمة <strong>milvus_2.6.0-1_arm64.rpm.</strong> </li>
+<li>بالنسبة إلى x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.0-1_amd64.deb</strong> أو حزمة <strong>milvus_2.6.0-1_amd64.rpm.</strong> </li>
+<li>بالنسبة إلى ARM64، قم بتنزيل حزمة <strong>milvus_2.6.0.0-1_arm64.deb</strong> أو حزمة <strong>milvus_2.6.0-1_arm64.rpm.</strong> </li>
 </ul>
 <p>يفترض الأمر التالي أنك ستقوم بتشغيل Milvus Standalone على جهاز x86_64/amd64.</p>
 <pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus_2.6.0-1_amd64.rpm -O milvus_2.6.0-1_amd64.rpm
@@ -84,7 +84,7 @@ title: تثبيت برنامج Milvus Standalone مع حزمة RPM/DEB
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>بالنسبة للأنظمة المستندة إلى DEB (مثل Ubuntu و Debian)، استخدم الأمر <code translate="no">apt</code> لتثبيت الحزمة.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">ابدأ تشغيل ميلفوس Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -197,7 +197,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
 <li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
+<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>

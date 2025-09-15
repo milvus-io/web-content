@@ -23,7 +23,7 @@ title: الأسئلة الشائعة التشغيلية
 <li>إدارة المقاطع المتزايدة التي تتطلب ذاكرة إضافية بسبب عمليات الإدراج المستمرة.</li>
 <li>تلقي رسائل الحذف وتمريرها إلى عقد الاستعلام الأخرى التي تحتوي على المقاطع ذات الصلة.</li>
 </ul>
-<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">كيفية تحديد العقد المفوض لمجموعة ما؟</h4><p>استخدم Birdwatcher.</p>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">كيف يمكن تحديد العقد المفوض لمجموعة ما؟</h4><p>استخدم Birdwatcher.</p>
 <p>قم بتثبيت Birdwatcher بعد <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">ذلك،</a> ثم قم بتشغيل الأمر التالي:</p>
 <pre><code translate="no" class="language-shell">./birdwatcher
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
@@ -65,7 +65,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">هل Docker هو الطريقة الوحيدة لتثبيت وتشغيل Milvus؟</h4><p>Docker هي طريقة فعالة لنشر Milvus، ولكنها ليست الطريقة الوحيدة. يمكنك أيضاً نشر ميلفوس من التعليمات البرمجية المصدرية. يتطلب ذلك Ubuntu (18.04 أو أعلى) أو CentOS (7 أو أعلى). انظر <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">بناء ميلفوس من التعليمات البرمجية المصدرية</a> لمزيد من المعلومات.</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">ما هي العوامل الرئيسية التي تؤثر على الاستدعاء؟</h4><p>يتأثر الاستدعاء بشكل رئيسي بنوع الفهرس ومعلمات البحث.</p>
 <p>بالنسبة للفهرس المسطح، يأخذ Milvus مسحًا شاملًا داخل المجموعة، مع إرجاع 100%.</p>
-<p>بالنسبة لفهارس IVF، تحدد معلمة nprobe نطاق البحث داخل المجموعة. تؤدي زيادة nprobe إلى زيادة نسبة المتجهات التي يتم البحث عنها واسترجاعها، ولكنها تقلل من أداء الاستعلام.</p>
+<p>بالنسبة لفهارس IVF، تحدد معلمة nprobe نطاق البحث داخل المجموعة. تؤدي زيادة nprobe إلى زيادة نسبة المتجهات التي يتم البحث فيها واسترجاعها، ولكنها تقلل من أداء الاستعلام.</p>
 <p>بالنسبة لفهرس HNSW، تحدد المعلمة ef نطاق البحث في الرسم البياني. تؤدي زيادة ef إلى زيادة عدد النقاط التي يتم البحث عنها في الرسم البياني والاستدعاء، ولكنها تقلل من أداء الاستعلام.</p>
 <p>لمزيد من المعلومات، راجع <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">فهرسة المتجهات</a>.</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">لماذا لم تدخل التغييرات التي أجريتها على ملفات التكوين حيز التنفيذ؟</h4><p>لا يدعم Milvus التعديل على ملفات التكوين أثناء وقت التشغيل. يجب إعادة تشغيل Milvus Docker حتى تدخل تغييرات ملفات التكوين حيز التنفيذ.</p>
@@ -73,7 +73,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>بالنسبة لـ Milvus المستقلة، يجب أن تكون قادرًا على مراقبة ثلاث حاويات Docker قيد التشغيل على الأقل، إحداها خدمة Milvus والاثنتان الأخريان هما خدمة إدارة وتخزين إلخd. لمزيد من المعلومات، راجع <a href="/docs/ar/install_standalone-docker.md">تثبيت ميلفوس Standalone</a>.</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">لماذا يختلف الوقت في ملفات السجل عن وقت النظام؟</h4><p>يرجع اختلاف الوقت عادةً إلى حقيقة أن الجهاز المضيف لا يستخدم التوقيت العالمي المنسق (UTC).</p>
 <p>تستخدم ملفات السجل داخل صورة Docker التوقيت العالمي المنسق (UTC) بشكل افتراضي. إذا كان جهازك المضيف لا يستخدم التوقيت العالمي المنسق، فقد تحدث هذه المشكلة.</p>
-<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">كيف أعرف ما إذا كانت وحدة المعالجة المركزية الخاصة بي تدعم Milvus؟</h4><p>تعتمد عمليات الحوسبة الخاصة ب Milvus على دعم وحدة المعالجة المركزية لمجموعة تعليمات تمديد SIMD (تعليمات أحادية التعليمات ومتعددة البيانات). يعد دعم وحدة المعالجة المركزية الخاصة بك لمجموعة تعليمات تمديد SIMD أمرًا بالغ الأهمية لبناء الفهرس والبحث عن تشابه المتجهات داخل Milvus. تأكد من أن وحدة المعالجة المركزية لديك تدعم واحدة على الأقل من مجموعات تعليمات SIMD التالية:</p>
+<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">كيف أعرف ما إذا كانت وحدة المعالجة المركزية الخاصة بي تدعم Milvus؟</h4><p>تعتمد عمليات الحوسبة الخاصة ب Milvus على دعم وحدة المعالجة المركزية لمجموعة تعليمات تمديد SIMD (تعليمات أحادية ومتعددة البيانات). يعد دعم وحدة المعالجة المركزية الخاصة بك لمجموعة تعليمات تمديد SIMD أمرًا بالغ الأهمية لبناء الفهرس والبحث عن تشابه المتجهات داخل Milvus. تأكد من أن وحدة المعالجة المركزية لديك تدعم واحدة على الأقل من مجموعات تعليمات SIMD التالية:</p>
 <ul>
 <li>SSE4.2</li>
 <li>AVX</li>
@@ -105,14 +105,14 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>يمكنك ترقية PyMilvus باستخدام الأمر التالي:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">لماذا أحصل على نتائج أقل من <code translate="no">limit</code> التي قمت بتعيينها في البحث/الاستعلام الخاص بي؟</h4><p>هناك العديد من الأسباب التي قد تجعلك تتلقى نتائج أقل من <code translate="no">limit</code> الذي حددته:</p>
+<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">لماذا أحصل على نتائج أقل من <code translate="no">limit</code> التي قمت بتعيينها في البحث/الاستعلام الخاص بي؟</h4><p>هناك عدة أسباب قد تجعلك تتلقى نتائج أقل من <code translate="no">limit</code> الذي حددته:</p>
 <ul>
 <li><p><strong>بيانات محدودة</strong>: قد لا تحتوي المجموعة على كيانات كافية لاستيفاء الحد الذي طلبته. إذا كان العدد الإجمالي للكيانات في المجموعة أقل من الحد، فستتلقى بطبيعة الحال نتائج أقل.</p></li>
 <li><p><strong>تكرار المفاتيح الأساسية</strong>: يعطي ميلفوس الأولوية لكيانات محددة عند مواجهة مفاتيح أساسية مكررة أثناء البحث. يختلف هذا السلوك بناءً على نوع البحث:</p></li>
 <li><p><strong>استعلام (مطابقة تامة)</strong>: يقوم Milvus بتحديد أحدث كيان بمفتاح PK المطابق. البحث عن المفاتيح الأساسية: يقوم Milvus بتحديد الكيان الذي يتمتع بأعلى درجة تشابه، حتى إذا كانت الكيانات تشترك في نفس PK. يمكن أن يؤدي هذا التحديد للأولويات إلى نتائج فريدة أقل من الحد الأقصى إذا كانت مجموعتك تحتوي على العديد من المفاتيح الأساسية المكررة.</p></li>
 <li><p><strong>عدم كفاية التطابقات</strong>: قد تكون تعبيرات تصفية البحث الخاصة بك صارمة للغاية، مما يؤدي إلى عدد أقل من الكيانات التي تستوفي حد التشابه. إذا كانت الشروط التي تم تعيينها للبحث مقيدة للغاية، فلن يتطابق عدد كافٍ من الكيانات، مما يؤدي إلى نتائج أقل من المتوقع.</p></li>
 </ul>
-<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. ما سبب هذا الخطأ وكيف يمكن حله؟</h4><p>يحدث هذا الخطأ عند محاولة استخدام Milvus Lite على نظام أساسي يعمل بنظام ويندوز. تم تصميم Milvus Lite بشكل أساسي لبيئات Linux وقد لا يكون لديه دعم أصلي لنظام Windows.</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. ما سبب هذا الخطأ وكيف يمكن حله؟</h4><p>يحدث هذا الخطأ عند محاولة استخدام برنامج Milvus Lite على نظام أساسي يعمل بنظام ويندوز. تم تصميم Milvus Lite بشكل أساسي لبيئات Linux وقد لا يكون لديه دعم أصلي لنظام Windows.</p>
 <p>الحل هو استخدام بيئة Linux:</p>
 <ul>
 <li>استخدم نظام تشغيل يستند إلى لينكس أو جهاز افتراضي لتشغيل ميلفوس لايت.</li>
@@ -143,5 +143,5 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Still-have-questions" class="common-anchor-header">هل لا تزال لديك أسئلة؟</h4><p>يمكنك ذلك:</p>
 <ul>
 <li>الاطلاع على <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> على GitHub. لا تتردد في طرح الأسئلة ومشاركة الأفكار ومساعدة الآخرين.</li>
-<li>انضم إلى <a href="https://discuss.milvus.io/">منتدى Milvus</a> أو <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">قناة Slack</a> للحصول على الدعم والتفاعل مع مجتمعنا مفتوح المصدر.</li>
+<li>انضم إلى <a href="https://discuss.milvus.io/">منتدى Milvus</a> أو <a href="https://discord.com/invite/8uyFbECzPX">قناة Discord</a> للحصول على الدعم والتفاعل مع مجتمعنا مفتوح المصدر.</li>
 </ul>

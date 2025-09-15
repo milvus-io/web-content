@@ -85,7 +85,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>Jalankan perintah lscpu untuk memeriksa apakah CPU Anda mendukung set instruksi SIMD yang disebutkan di atas:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>lscpu |<span class="hljs-params"> grep -e sse4_2 -e avx -e avx2 -e avx512
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Mengapa Milvus mengembalikan <code translate="no">illegal instruction</code> selama startup?</h4><p>Milvus membutuhkan CPU Anda untuk mendukung set instruksi SIMD: SSE4.2, AVX, AVX2, atau AVX512. CPU harus mendukung setidaknya salah satu dari ini untuk memastikan bahwa Milvus beroperasi secara normal. Kesalahan <code translate="no">illegal instruction</code> yang dikembalikan saat startup menunjukkan bahwa CPU Anda tidak mendukung salah satu dari empat set instruksi di atas.</p>
+<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Mengapa Milvus mengembalikan <code translate="no">illegal instruction</code> saat startup?</h4><p>Milvus membutuhkan CPU Anda untuk mendukung set instruksi SIMD: SSE4.2, AVX, AVX2, atau AVX512. CPU harus mendukung setidaknya salah satu dari ini untuk memastikan bahwa Milvus beroperasi secara normal. Kesalahan <code translate="no">illegal instruction</code> yang dikembalikan selama startup menunjukkan bahwa CPU Anda tidak mendukung salah satu dari empat set instruksi di atas.</p>
 <p>Lihat <a href="/docs/id/prerequisite-docker.md">dukungan CPU untuk Set Instruksi SIMD</a>.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Dapatkah saya menginstal Milvus pada Windows?</h4><p>Ya, Anda dapat menginstall Milvus pada Windows baik dengan meng-compile dari kode sumber atau dari paket biner.</p>
 <p>Lihat Menjalankan <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Milvus pada Windows</a> untuk mempelajari cara menginstal Milvus pada Windows.</p>
@@ -145,5 +145,5 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Still-have-questions" class="common-anchor-header">Masih memiliki pertanyaan?</h4><p>Tentu saja bisa:</p>
 <ul>
 <li>Lihat <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> di GitHub. Jangan ragu untuk mengajukan pertanyaan, berbagi ide, dan membantu orang lain.</li>
-<li>Bergabunglah dengan <a href="https://discuss.milvus.io/">Forum Milvus</a> atau <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Saluran Slack</a> untuk mendapatkan dukungan dan terlibat dengan komunitas sumber terbuka kami.</li>
+<li>Bergabunglah dengan <a href="https://discuss.milvus.io/">Forum Milvus</a> atau <a href="https://discord.com/invite/8uyFbECzPX">saluran Discord</a> kami untuk mendapatkan dukungan dan terlibat dengan komunitas sumber terbuka kami.</li>
 </ul>

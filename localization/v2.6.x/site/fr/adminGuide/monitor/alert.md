@@ -71,14 +71,59 @@ summary: Découvrez comment créer une alerte pour les services Milvus dans Graf
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ce guide prend l'exemple de la création d'une alerte sur l'utilisation de la mémoire des composants Milvus. Pour créer d'autres types d'alertes, veuillez adapter vos commandes en conséquence. Si vous rencontrez des problèmes au cours du processus, n'hésitez pas à poser des questions dans le <a href="https://discuss.milvus.io/">forum Milvus</a> ou à lancer une discussion sur <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Conditions préalables</h3><p>Ce tutoriel suppose que vous avez installé et configuré Grafana. Si ce n'est pas le cas, nous vous recommandons de lire le <a href="/docs/fr/monitor.md">guide de surveillance</a>.</p>
-<h3 id="1-Add-a-new-query" class="common-anchor-header">1. Ajouter une nouvelle requête</h3><p>Pour ajouter une alerte sur l'utilisation de la mémoire des composants Milvus, modifiez le panneau Mémoire. Ensuite, ajoutez une nouvelle requête avec la métrique : <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
+    </button></h2><p>Ce guide prend l'exemple de la création d'une alerte sur l'utilisation de la mémoire des composants Milvus. Pour créer d'autres types d'alertes, veuillez adapter vos commandes en conséquence. Si vous rencontrez des problèmes au cours du processus, n'hésitez pas à poser des questions dans le <a href="https://discuss.milvus.io/">forum Milvus</a> ou à lancer une discussion sur <a href="https://discord.com/invite/8uyFbECzPX">Discord</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ce tutoriel suppose que vous avez installé et configuré Grafana. Si ce n'est pas le cas, nous vous recommandons de lire le <a href="/docs/fr/monitor.md">guide de surveillance</a>.</p>
+<h3 id="1-Add-a-new-query" class="common-anchor-header">1. Ajouter une nouvelle requête<button data-href="#1-Add-a-new-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour ajouter une alerte sur l'utilisation de la mémoire des composants Milvus, modifiez le panneau Mémoire. Ensuite, ajoutez une nouvelle requête avec la métrique : <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Alert_metric</span> </span></p>
-<h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Sauvegarder le tableau de bord</h3><p>Sauvegarder le tableau de bord et attendre quelques minutes pour voir apparaître l'alerte.</p>
+<h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Sauvegarder le tableau de bord<button data-href="#2-Save-the-dashboard" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sauvegarder le tableau de bord et attendre quelques minutes pour voir apparaître l'alerte.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
@@ -88,7 +133,22 @@ summary: Découvrez comment créer une alerte pour les services Milvus dans Graf
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Requête_alerte</span> </span></p>
-<h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Ajouter des notifications d'alerte</h3><p>Pour recevoir des notifications d'alerte, ajoutez un "canal de notification". Ensuite, spécifiez le canal dans le champ "Envoyer à".</p>
+<h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Ajouter des notifications d'alerte<button data-href="#3-Add-alert-notifications" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour recevoir des notifications d'alerte, ajoutez un "canal de notification". Ensuite, spécifiez le canal dans le champ "Envoyer à".</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
@@ -98,7 +158,7 @@ summary: Découvrez comment créer une alerte pour les services Milvus dans Graf
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>Message de notification</span> </span></p>
-<p>Pour supprimer une alerte, allez dans le panneau "Alerte" et cliquez sur le bouton de suppression.</p>
+<p>Pour supprimer une alerte, allez dans le panneau "Alerte" et cliquez sur le bouton "Supprimer".</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />

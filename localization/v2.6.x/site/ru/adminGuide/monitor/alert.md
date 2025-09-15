@@ -71,14 +71,59 @@ summary: 'Узнайте, как создать оповещение для се
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В данном руководстве рассматривается пример создания оповещения об использовании памяти компонентами Milvus. Для создания других типов оповещений, пожалуйста, настройте свои команды соответствующим образом. Если в процессе работы у вас возникнут какие-либо проблемы, не стесняйтесь спрашивать на <a href="https://discuss.milvus.io/">форуме Milvus</a> или начинать обсуждение в <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Предварительные условия</h3><p>В этом руководстве предполагается, что у вас установлена и настроена Grafana. Если нет, рекомендуем прочитать <a href="/docs/ru/monitor.md">руководство по мониторингу</a>.</p>
-<h3 id="1-Add-a-new-query" class="common-anchor-header">1. Добавьте новый запрос</h3><p>Чтобы добавить оповещение об использовании памяти компонентами Milvus, отредактируйте панель Memory. Затем добавьте новый запрос с метрикой: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
+    </button></h2><p>В данном руководстве рассматривается пример создания оповещения об использовании памяти компонентами Milvus. Для создания других типов оповещений, пожалуйста, настройте свои команды соответствующим образом. Если в процессе работы у вас возникнут какие-либо проблемы, не стесняйтесь спрашивать на <a href="https://discuss.milvus.io/">форуме Milvus</a> или начинать обсуждение в <a href="https://discord.com/invite/8uyFbECzPX">Discord</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В этом руководстве предполагается, что у вас установлена и настроена Grafana. Если нет, рекомендуем прочитать <a href="/docs/ru/monitor.md">руководство по мониторингу</a>.</p>
+<h3 id="1-Add-a-new-query" class="common-anchor-header">1. Добавьте новый запрос<button data-href="#1-Add-a-new-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы добавить оповещение об использовании памяти компонентами Milvus, отредактируйте панель Memory. Затем добавьте новый запрос с метрикой: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Alert_metric</span> </span></p>
-<h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Сохраните приборную панель</h3><p>Сохраните приборную панель и подождите несколько минут, чтобы увидеть оповещение.</p>
+<h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Сохраните приборную панель<button data-href="#2-Save-the-dashboard" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Сохраните приборную панель и подождите несколько минут, чтобы увидеть оповещение.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
@@ -88,7 +133,22 @@ summary: 'Узнайте, как создать оповещение для се
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Запрос_оповещения</span> </span></p>
-<h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Добавление уведомлений о тревоге</h3><p>Чтобы получать уведомления о тревогах, добавьте "канал уведомлений". Затем укажите канал в поле "Отправить на".</p>
+<h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Добавление уведомлений о тревоге<button data-href="#3-Add-alert-notifications" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы получать уведомления о тревогах, добавьте "канал уведомлений". Затем укажите канал в поле "Отправить на".</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />

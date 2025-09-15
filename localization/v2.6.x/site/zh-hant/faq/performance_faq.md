@@ -20,7 +20,7 @@ title: 效能常見問題
       </svg>
     </button></h1><h4 id="How-to-set-nlist-and-nprobe-for-IVF-indexes" class="common-anchor-header">如何為 IVF 索引設定<code translate="no">nlist</code> 和<code translate="no">nprobe</code> ？</h4><p>設定<code translate="no">nlist</code> 需視情況而定。根據經驗，<code translate="no">nlist</code> 的建議值是<code translate="no">4 × sqrt(n)</code> ，其中<code translate="no">n</code> 是段中實體的總數。</p>
 <p>每個區段的大小由<code translate="no">datacoord.segment.maxSize</code> 參數決定，預設值為 512 MB。網段 n 中的實體總數可以用<code translate="no">datacoord.segment.maxSize</code> 除以每個實體的大小來估計。</p>
-<p><code translate="no">nprobe</code> 的設定是針對資料集和情境而定，並涉及準確性和查詢效能之間的權衡。我們建議透過反覆的實驗找出理想的值。</p>
+<p><code translate="no">nprobe</code> 的設定是針對資料集和情境而定，並涉及準確性和查詢效能之間的權衡。我們建議透過反覆實驗找出理想值。</p>
 <p>以下圖表是在 sift50m 資料集和 IVF_SQ8 索引上執行測試的結果，其中比較了不同<code translate="no">nlist</code>/<code translate="no">nprobe</code> 對的召回率和查詢效能。</p>
 <p>
   
@@ -45,5 +45,5 @@ title: 效能常見問題
 <h4 id="Still-have-questions" class="common-anchor-header">還有問題嗎？</h4><p>您可以</p>
 <ul>
 <li>在 GitHub 上查看<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。隨時提出問題、分享想法並幫助他人。</li>
-<li>加入我們的<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 頻道</a>，尋找支援並參與我們的開放原始碼社群。</li>
+<li>加入我們的<a href="https://discord.com/invite/8uyFbECzPX">Discord 頻道</a>，尋找支援並參與我們的開放原始碼社群。</li>
 </ul>

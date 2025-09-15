@@ -45,7 +45,7 @@ Node(s) querynode
 <h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">쿼리 노드 메모리 사용량이 불균형한 경우 어떤 매개 변수를 조정할 수 있나요?</h4><p>일부 쿼리 노드가 더 많은 RAM을 사용하는 델리게이터 역할을 하기 때문에 쿼리 노드 메모리가 달라지는 경우가 있습니다. 위임자의 메모리가 많은 경우 queryCoord.delegatorMemoryOverloadFactor를 조정하여 봉인된 세그먼트를 다른 노드로 오프로드하고 RAM 사용량을 줄이세요.</p>
 <ul>
 <li>기본값은 0.1입니다.</li>
-<li>이 값을 높이면(예: 0.3 이상으로) 시스템이 과부하된 델리게이터에서 다른 쿼리 노드로 더 많은 봉인된 세그먼트를 오프로드하여 메모리 사용량의 균형을 맞추는 데 도움이 됩니다. 또한 값을 1까지 늘려서 델리게이터 노드에 봉인된 세그먼트가 로드되지 않도록 할 수도 있습니다.</li>
+<li>이 값을 높이면(예: 0.3 이상으로) 시스템이 과부하가 걸린 델리게이터에서 다른 쿼리 노드로 더 많은 봉인된 세그먼트를 오프로드하여 메모리 사용량의 균형을 맞추는 데 도움이 됩니다. 또한 값을 1까지 늘려서 델리게이터 노드에 봉인된 세그먼트가 로드되지 않도록 할 수도 있습니다.</li>
 </ul>
 <p>클러스터를 다시 시작하고 싶지 않다면, birdwatcher로 밀버스 구성을 수정할 수 있습니다:</p>
 <pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
@@ -65,7 +65,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Milvus를 설치 및 실행하는 유일한 방법은 Docker인가요?</h4><p>Docker는 Milvus를 배포하는 효율적인 방법이지만 유일한 방법은 아닙니다. 소스 코드에서 Milvus를 배포할 수도 있습니다. 이를 위해서는 Ubuntu(18.04 이상) 또는 CentOS(7 이상)가 필요합니다. 자세한 내용은 <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">소스 코드에서 Milvus 빌드하기를</a> 참조하세요.</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">리콜에 영향을 미치는 주요 요인은 무엇인가요?</h4><p>리콜은 주로 인덱스 유형과 검색 매개변수에 의해 영향을 받습니다.</p>
 <p>FLAT 인덱스의 경우, Milvus는 컬렉션 내에서 전수 스캔을 수행하며 100% 리턴합니다.</p>
-<p>IVF 인덱스의 경우, nprobe 매개변수는 컬렉션 내에서 검색 범위를 결정합니다. nprobe를 늘리면 검색되는 벡터와 리콜되는 벡터의 비율이 증가하지만 쿼리 성능이 저하됩니다.</p>
+<p>IVF 인덱스의 경우, nprobe 매개변수는 컬렉션 내에서 검색 범위를 결정합니다. nprobe를 늘리면 검색되는 벡터의 비율과 리콜이 증가하지만 쿼리 성능이 저하됩니다.</p>
 <p>HNSW 인덱스의 경우, ef 매개변수는 그래프 검색의 폭을 결정합니다. ef를 높이면 그래프에서 검색되는 점의 수와 리콜이 증가하지만 쿼리 성능이 저하됩니다.</p>
 <p>자세한 내용은 <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">벡터 인덱싱을</a> 참조하세요.</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">구성 파일에 대한 변경 사항이 적용되지 않는 이유는 무엇인가요?</h4><p>Milvus는 런타임 중에 구성 파일 수정을 지원하지 않습니다. 구성 파일 변경 사항을 적용하려면 Milvus Docker를 다시 시작해야 합니다.</p>
@@ -91,9 +91,9 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">인터넷 연결이 끊긴 상태에서도 Milvus를 배포할 수 있나요?</h4><p>예. 오프라인 환경에서도 Milvus를 설치할 수 있습니다. 자세한 내용은 <a href="/docs/ko/install_offline-helm.md">Milvus 오프라인 설치를</a> 참조하세요.</p>
-<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvus에서 생성된 로그는 어디에서 찾을 수 있나요?</h4><p>Milvus 로그는 기본적으로 stout(표준 출력) 및 stderr(표준 오류)로 인쇄되지만, 프로덕션 환경에서 로그를 영구 볼륨으로 리디렉션하는 것을 적극 권장합니다. 이렇게 하려면 <strong>milvus.yaml에서</strong> <code translate="no">log.file.rootPath</code> 을 업데이트하세요. 또한 <code translate="no">milvus-helm</code> 차트와 함께 Milvus를 배포하는 경우, <code translate="no">--set log.persistence.enabled=true</code> 을 통해 로그 지속성을 먼저 활성화해야 합니다.</p>
+<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvus에서 생성된 로그는 어디에서 찾을 수 있나요?</h4><p>Milvus 로그는 기본적으로 stout(표준 출력) 및 stderr(표준 오류)로 인쇄되지만, 운영 환경에서는 로그를 영구 볼륨으로 리디렉션할 것을 적극 권장합니다. 이렇게 하려면 <strong>milvus.yaml에서</strong> <code translate="no">log.file.rootPath</code> 을 업데이트하세요. 또한 <code translate="no">milvus-helm</code> 차트와 함께 Milvus를 배포하는 경우, <code translate="no">--set log.persistence.enabled=true</code> 을 통해 로그 지속성을 먼저 활성화해야 합니다.</p>
 <p>구성을 변경하지 않은 경우, kubectl 로그 <pod-name> 또는 docker 로그 CONTAINER를 사용하는 것도 로그를 찾는 데 도움이 될 수 있습니다.</p>
-<h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">세그먼트에 데이터를 삽입하기 전에 세그먼트에 대한 인덱스를 생성할 수 있나요?</h4><p>예, 가능합니다. 그러나 각 세그먼트를 색인하기 전에 데이터를 일괄적으로 삽입하는 것이 좋으며, 각 데이터는 256MB를 넘지 않아야 합니다.</p>
+<h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">세그먼트에 데이터를 삽입하기 전에 세그먼트에 대한 인덱스를 생성할 수 있나요?</h4><p>예, 가능합니다. 하지만 각 세그먼트를 인덱싱하기 전에 데이터를 일괄적으로 삽입하는 것이 좋으며, 각 데이터는 256MB를 초과하지 않아야 합니다.</p>
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">여러 Milvus 인스턴스 간에 etcd 인스턴스를 공유할 수 있나요?</h4><p>예, 여러 Milvus 인스턴스 간에 etcd 인스턴스를 공유할 수 있습니다. 이렇게 하려면 시작하기 전에 각 Milvus 인스턴스의 구성 파일에서 <code translate="no">etcd.rootPath</code> 을 각 인스턴스마다 별도의 값으로 변경해야 합니다.</p>
 <h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">여러 Milvus 인스턴스 간에 Pulsar 인스턴스를 공유할 수 있나요?</h4><p>예, 여러 Milvus 인스턴스 간에 Pulsar 인스턴스를 공유할 수 있습니다. 공유하려면 다음과 같이 하세요.</p>
 <ul>
@@ -109,7 +109,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <ul>
 <li><p><strong>제한된 데이터</strong>: 컬렉션에 요청한 제한을 충족할 만큼 충분한 엔티티가 없을 수 있습니다. 컬렉션의 총 엔티티 수가 한도보다 적으면 당연히 더 적은 수의 결과를 받게 됩니다.</p></li>
 <li><p><strong>중복된 기본 키</strong>: Milvus는 검색 중에 중복된 기본 키를 발견하면 특정 엔티티에 우선순위를 둡니다. 이 동작은 검색 유형에 따라 달라집니다:</p></li>
-<li><p><strong>쿼리(정확히 일치)</strong>: Milvus는 일치하는 PK가 있는 최신 엔티티를 선택합니다. ANN 검색: Milvus는 엔티티가 동일한 PK를 공유하더라도 유사성 점수가 가장 높은 엔티티를 선택합니다. 컬렉션에 중복된 기본 키가 많은 경우 이 우선 순위 지정으로 인해 제한보다 적은 수의 고유한 결과가 나올 수 있습니다.</p></li>
+<li><p><strong>쿼리(정확히 일치)</strong>: Milvus는 일치하는 PK가 있는 최신 엔티티를 선택합니다. ANN 검색: Milvus는 엔티티가 동일한 PK를 공유하더라도 유사도 점수가 가장 높은 엔티티를 선택합니다. 컬렉션에 중복된 기본 키가 많은 경우 이 우선 순위 지정으로 인해 제한보다 더 적은 수의 고유한 결과가 나올 수 있습니다.</p></li>
 <li><p><strong>불충분한 일치</strong>: 검색 필터링 표현식이 너무 엄격하여 유사성 임계값을 충족하는 엔티티 수가 적을 수 있습니다. 검색에 설정된 조건이 너무 제한적이면 일치하는 엔티티가 충분하지 않아 예상보다 적은 수의 결과가 나옵니다.</p></li>
 </ul>
 <h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. 이 오류의 원인은 무엇이며 어떻게 해결할 수 있나요?</h4><p>이 오류는 Windows 플랫폼에서 Milvus Lite를 사용하려고 할 때 발생합니다. Milvus Lite는 주로 Linux 환경을 위해 설계되었으며 Windows에 대한 기본 지원이 없을 수 있습니다.</p>
@@ -137,11 +137,11 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>. 이 오류의 원인은 무엇이며 어떻게 해결할 수 있나요?</h4><p>이 오류는 밀버스 라이트를 지원하지 않는 이전 버전의 pymilvus를 사용하여 밀버스 라이트에 연결하려고 시도하고 있음을 나타냅니다. 이 문제를 해결하려면 pymilvus 설치를 버전 2.4.2 이상으로 업그레이드하세요. 이 버전은 Milvus Lite에 대한 연결을 지원합니다. 업그레이드하려면 다음 명령을 사용하세요:</p>
+<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>. 이 오류의 원인은 무엇이며 어떻게 해결할 수 있나요?</h4><p>이 오류는 밀버스 라이트를 지원하지 않는 이전 버전의 pymilvus를 사용하여 밀버스 라이트에 연결하려고 시도하고 있음을 나타냅니다. 이 문제를 해결하려면 pymilvus 설치를 최소 버전 2.4.2로 업그레이드하세요. 이 버전은 Milvus Lite에 대한 연결을 지원합니다. 업그레이드하려면 다음 명령을 사용하세요:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">아직 질문이 있으신가요?</h4><p>그럴 수 있습니다:</p>
 <ul>
 <li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 자유롭게 질문하고, 아이디어를 공유하고, 다른 사람들을 도와주세요.</li>
-<li><a href="https://discuss.milvus.io/">Milvus 포럼</a> 또는 <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 채널에</a> 가입하여 지원을 찾고 오픈 소스 커뮤니티에 참여하세요.</li>
+<li><a href="https://discuss.milvus.io/">Milvus 포럼</a> 또는 <a href="https://discord.com/invite/8uyFbECzPX">Discord 채널에</a> 가입하여 지원을 찾고 오픈소스 커뮤니티에 참여하세요.</li>
 </ul>

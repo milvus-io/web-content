@@ -19,7 +19,7 @@ title: 성능 FAQ
         ></path>
       </svg>
     </button></h1><h4 id="How-to-set-nlist-and-nprobe-for-IVF-indexes" class="common-anchor-header">IVF 인덱스에 <code translate="no">nlist</code> 및 <code translate="no">nprobe</code> 을 설정하는 방법은 무엇인가요?</h4><p><code translate="no">nlist</code> 설정은 시나리오에 따라 다릅니다. 일반적으로 <code translate="no">nlist</code> 의 권장 값은 <code translate="no">4 × sqrt(n)</code> 이며, 여기서 <code translate="no">n</code> 는 세그먼트의 총 엔티티 수입니다.</p>
-<p>각 세그먼트의 크기는 <code translate="no">datacoord.segment.maxSize</code> 매개변수에 의해 결정되며, 기본적으로 512MB로 설정됩니다. 세그먼트 n의 총 엔티티 수는 <code translate="no">datacoord.segment.maxSize</code> 을 각 엔티티의 크기로 나누면 추정할 수 있습니다.</p>
+<p>각 세그먼트의 크기는 <code translate="no">datacoord.segment.maxSize</code> 매개변수에 의해 결정되며, 기본적으로 512MB로 설정되어 있습니다. 세그먼트 n의 총 엔티티 수는 <code translate="no">datacoord.segment.maxSize</code> 을 각 엔티티의 크기로 나누면 추정할 수 있습니다.</p>
 <p><code translate="no">nprobe</code> 설정은 데이터 세트 및 시나리오에 따라 다르며 정확도와 쿼리 성능 간의 절충이 필요합니다. 반복적인 실험을 통해 이상적인 값을 찾는 것이 좋습니다.</p>
 <p>다음 차트는 서로 다른 <code translate="no">nlist</code>/<code translate="no">nprobe</code> 쌍의 리콜 및 쿼리 성능을 비교하는 sift50m 데이터 세트와 IVF_SQ8 인덱스에서 실행한 테스트의 결과입니다.</p>
 <p>
@@ -45,5 +45,5 @@ title: 성능 FAQ
 <h4 id="Still-have-questions" class="common-anchor-header">아직 질문이 있으신가요?</h4><p>그럴 수 있습니다:</p>
 <ul>
 <li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 자유롭게 질문하고, 아이디어를 공유하고, 다른 사람들을 도와주세요.</li>
-<li><a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 채널에</a> 가입하여 지원을 찾고 오픈 소스 커뮤니티에 참여하세요.</li>
+<li><a href="https://discord.com/invite/8uyFbECzPX">Discord 채널에</a> 가입하여 지원을 받고 오픈 소스 커뮤니티에 참여하세요.</li>
 </ul>

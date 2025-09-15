@@ -92,23 +92,83 @@ title: Risoluzione dei problemi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. pod etcd in attesa</h3><p>Il cluster etcd utilizza pvc per impostazione predefinita. StorageClass deve essere preconfigurato per il cluster Kubernetes.</p>
-<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. Arresto del pod etcd</h3><p>Quando un pod etcd si blocca con <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, è possibile accedere a questo pod ed eliminare il file <code translate="no">/bitnami/etcd/data/member_id</code>.</p>
-<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Più pod continuano ad andare in crash mentre <code translate="no">etcd-0</code> è ancora in esecuzione</h3><p>È possibile eseguire il codice seguente se più pod continuano ad andare in crash mentre <code translate="no">etcd-0</code> è ancora in esecuzione.</p>
+    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. pod etcd in attesa<button data-href="#1-etcd-pod-pending" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il cluster etcd utilizza pvc per impostazione predefinita. StorageClass deve essere preconfigurato per il cluster Kubernetes.</p>
+<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. Arresto del pod etcd<button data-href="#2-etcd-pod-crash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando un pod etcd si blocca con <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, è possibile accedere a questo pod ed eliminare il file <code translate="no">/bitnami/etcd/data/member_id</code>.</p>
+<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Più pod continuano ad andare in crash mentre <code translate="no">etcd-0</code> è ancora in esecuzione<button data-href="#3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile eseguire il codice seguente se più pod continuano ad andare in crash mentre <code translate="no">etcd-0</code> è ancora in esecuzione.</p>
 <pre><code translate="no">kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-operator">-</span>sts<span class="hljs-operator">&gt;</span> <span class="hljs-comment">--replicas=1</span>
 # <span class="hljs-keyword">delete</span> the pvc <span class="hljs-keyword">for</span> etcd<span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> etcd<span class="hljs-number">-2</span>
 kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-operator">-</span>sts<span class="hljs-operator">&gt;</span> <span class="hljs-comment">--replicas=3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="4-All-pods-crash" class="common-anchor-header">4. Tutti i pod si bloccano</h3><p>Quando tutti i pod si bloccano, provate a copiare il file <code translate="no">/bitnami/etcd/data/member/snap/db</code>. Usate <code translate="no">https://github.com/etcd-io/bbolt</code> per modificare i dati del database.</p>
-<p>Tutti i metadati di Milvus sono conservati nel bucket <code translate="no">key</code>. Eseguire il backup dei dati in questo bucket ed eseguire i seguenti comandi. Si noti che i dati del prefisso nel file <code translate="no">by-dev/meta/session</code> non richiedono un backup.</p>
+<h3 id="4-All-pods-crash" class="common-anchor-header">4. Tutti i pod si bloccano<button data-href="#4-All-pods-crash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando tutti i pod si bloccano, provate a copiare il file <code translate="no">/bitnami/etcd/data/member/snap/db</code>. Usate <code translate="no">https://github.com/etcd-io/bbolt</code> per modificare i dati del database.</p>
+<p>Tutti i metadati di Milvus sono conservati nel secchio <code translate="no">key</code>. Eseguire il backup dei dati in questo bucket ed eseguire i seguenti comandi. Si noti che i dati del prefisso nel file <code translate="no">by-dev/meta/session</code> non richiedono un backup.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">0</span>
 <span class="hljs-comment"># delete the pvc for etcd-0, etcd-1, etcd-2</span>
 kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">1</span>
 <span class="hljs-comment"># restore the backup data</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><br/></p>
-<p>Se avete bisogno di aiuto per risolvere un problema, non esitate a farlo:</p>
+<p>Se avete bisogno di aiuto per risolvere un problema, sentitevi liberi di farlo:</p>
 <ul>
-<li>Iscriversi al nostro <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canale Slack</a> e richiedere il supporto del team Milvus.</li>
+<li>Unirsi al nostro <a href="https://discord.com/invite/8uyFbECzPX">canale Discord</a> e chiedere il supporto del team Milvus.</li>
 <li><a href="https://github.com/milvus-io/milvus/issues/new/choose">Presentare un problema</a> su GitHub che includa i dettagli del problema.</li>
 </ul>

@@ -20,7 +20,7 @@ title: 製品に関するFAQ
       </svg>
     </button></h1><h4 id="How-much-does-Milvus-cost" class="common-anchor-header">Milvusの価格はいくらですか？</h4><p>Milvusは100%無償のオープンソースプロジェクトです。</p>
 <p>Milvusを使用する際は、<a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0を</a>遵守してください。</p>
-<p>Milvusの開発元であるZilliz社では、分散インスタンスの構築や保守が不要なお客様向けに、完全マネージド型のクラウドプラットフォームも提供しております。<a href="https://zilliz.com/cloud">Zilliz Cloudは</a>自動的にデータの信頼性を維持し、ユーザーは使用した分だけ支払うことができる。</p>
+<p>Milvusの開発元であるZilliz社では、分散インスタンスの構築や保守が不要なお客様向けに、完全マネージド型のクラウドプラットフォームも提供しております。<a href="https://zilliz.com/cloud">Zilliz Cloudは</a>データの信頼性を自動的に維持し、ユーザーは使用した分だけ支払うことができる。</p>
 <h4 id="Does-Milvus-support-non-x86-architectures" class="common-anchor-header">Milvusはx86以外のアーキテクチャに対応していますか？</h4><p>Milvusはx86以外のプラットフォームにはインストール、実行できません。</p>
 <p>Milvusを実行するには、CPUが以下の命令セットのいずれかをサポートしている必要があります: SSE4.2、AVX、AVX2、AVX512。これらはすべてx86専用のSIMD命令セットです。</p>
 <h4 id="Where-does-Milvus-store-data" class="common-anchor-header">Milvusはどこにデータを格納するのですか？</h4><p>Milvusでは、挿入データとメタデータの2種類のデータを扱います。</p>
@@ -65,7 +65,7 @@ title: 製品に関するFAQ
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">対応するコレクションが削除された後も、MinIOのデータが残るのはなぜですか？</h4><p>MinIOのデータは、データのロールバックの便宜のため、一定期間残るように設計されています。</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">MilvusはPulsar以外のメッセージ・エンジンをサポートしていますか？</h4><p>はい。Milvus 2.1.0ではKafkaがサポートされています。</p>
 <h4 id="Whats-the-difference-between-a-search-and-a-query" class="common-anchor-header">検索とクエリの違いは何ですか？</h4><p>Milvusでは、ベクトル類似度検索は類似度計算とベクトル・インデックス加速に基づいてベクトルを検索します。ベクトル類似性検索とは異なり、ベクトル検索はブーリアン式に基づくスカラーフィルタリングによってベクトルを検索します。ブーリアン式はスカラーフィールドまたは主キーフィールドをフィルタリングし、フィルタに一致するすべての結果を取得します。クエリでは、類似度メトリクスもベクトル・インデックスも関与しません。</p>
-<h4 id="Why-does-a-float-vector-value-have-a-precision-of-7-decimal-digits-in-Milvus" class="common-anchor-header">なぜmilvusではfloatベクトル値の精度が小数点以下7桁なのですか？</h4><p>MilvusはベクトルをFloat32配列として格納することをサポートしています。Float32の値の精度は小数点以下7桁です。1.3476964684980388のようなFloat64の値であっても、Milvusは1.347696として格納します。したがって、このようなベクトルをMilvusから取り出すと、Float64の値の精度は失われてしまいます。</p>
+<h4 id="Why-does-a-float-vector-value-have-a-precision-of-7-decimal-digits-in-Milvus" class="common-anchor-header">なぜMilvusではfloatベクトル値の精度が小数点以下7桁なのですか？</h4><p>MilvusはベクトルをFloat32配列として格納することをサポートしています。Float32の値の精度は小数点以下7桁です。1.3476964684980388のようなFloat64の値であっても、Milvusは1.347696として格納します。したがって、このようなベクトルをMilvusから取り出すと、Float64の値の精度は失われてしまいます。</p>
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvusではベクトルのデータ型と精度をどのように扱っているのですか？</h4><p>MilvusはBinary、Float32、Float16、BFloat16のベクトル型をサポートしています。</p>
 <ul>
 <li>バイナリベクタ：0と1のシーケンスとしてバイナリデータを格納し、画像処理や情報検索に使用されます。</li>
@@ -75,11 +75,11 @@ title: 製品に関するFAQ
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvusはスカラーフィールドやベクトルフィールドのデフォルト値の指定に対応していますか？</h4><p>現在のところ、Milvus 2.4.xではスカラーフィールドやベクトルフィールドのデフォルト値を指定することはできません。この機能は将来のリリースを予定しています。</p>
 <h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">Milvusでデータを削除した後、すぐに保存領域は解放されますか？</h4><p>いいえ。Milvusでデータを削除しても、すぐにストレージ領域が解放されるわけではありません。データを削除するとエンティティは「論理的に削除された」ことになりますが、実際の容量はすぐに解放されない場合があります。その理由は以下の通りです：</p>
 <ul>
-<li><strong>コンパクション</strong>：Milvusはバックグラウンドで自動的にデータを圧縮します。このプロセスは、より小さなデータセグメントをより大きなデータセグメントに統合し、論理的に削除されたデータ（削除マークが付けられたエンティティ）やTTL（Time-To-Live）を超えたデータを削除します。ただし、コンパクションは新しいセグメントを作成する一方で、古いセグメントには "Dropped "というマークを付ける。</li>
+<li><strong>コンパクション</strong>：Milvusはバックグラウンドで自動的にデータを圧縮します。このプロセスは、より小さなデータセグメントをより大きなデータセグメントに統合し、論理的に削除されたデータ（削除マークが付けられたエンティティ）やTTL（Time-To-Live）を超えたデータを削除します。ただし、コンパクションは新しいセグメントを作成する一方で、古いセグメントには "Dropped "とマークを付ける。</li>
 <li><strong>ガベージコレクション</strong>：ガベージコレクション (GC) と呼ばれる別プロセスが、定期的に "Dropped" セグメントを削除する。これにより、ストレージの効率的な使用が保証されますが、削除とスペースの再利用の間に若干の遅延が生じる可能性があります。</li>
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">挿入、削除、またはアップサートされたデータを、フラッシュを待たずに操作直後に見ることはできますか？</h4><p>Milvusでは、ストレージとコンピュートの分離アーキテクチャを採用しているため、データの可視性はフラッシュ操作に直接関係しません。一貫性レベルを使用してデータの可読性を管理することができます。</p>
-<p>一貫性レベルを選択する際には、一貫性とパフォーマンスのトレードオフを考慮してください。即時の可視性が必要な操作には、"Strong "一貫性レベルを使用する。書き込みを高速に行うには、一貫性を弱くすることを優先する（データはすぐには見えないかもしれない）。詳細については、「<a href="/docs/ja/consistency.md">一貫性</a>」を参照してください。</p>
+<p>一貫性レベルを選択する際には、一貫性とパフォーマンスのトレードオフを考慮してください。即時の可視性が必要な操作には、"Strong "一貫性レベルを使用する。書き込みを高速に行うには、一貫性を弱くすることを優先します（データはすぐには見えないかもしれません）。詳細については、「<a href="/docs/ja/consistency.md">一貫性</a>」を参照してください。</p>
 <h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">パーティション・キー機能を有効にした後、milvusのデフォルト値<code translate="no">num_partitions</code> 。</h4><p>パーティションキー機能を有効にすると、Milvusの<code translate="no">num_partitions</code> のデフォルト値は<code translate="no">16</code> に設定されます。このデフォルト値は安定性とパフォーマンス上の理由から選択されています。<code translate="no">create_collection</code> 関数で指定することにより、必要に応じて<code translate="no">num_partitions</code> の値を調整することができます。</p>
 <h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">スカラーフィルタリング式の長さの上限はありますか？</h4><p>はい、スカラー・フィルタリング式の最大長は、<code translate="no">milvus.yaml</code> 設定ファイルで定義される RPC 転送制限によって制約されます。具体的には、この制限はプロキシ・セクションの<code translate="no">serverMaxRecvSize</code> パラメータによって設定されます：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
@@ -117,6 +117,6 @@ value_set = <span class="hljs-built_in">set</span>()
 <h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">VarCharのmax_lengthを変更する場合、データの再編成が必要ですか?</h4><p>いいえ、VarCharフィールドの<code translate="no">max_length</code> を変更しても、圧縮や再編成などのデータ再編成は必要ありません。この調整では主に、フィールドに挿入される新しいデータの検証基準が更新され、既存のデータは影響を受けません。その結果、この変更は軽量とみなされ、システムに大きなオーバーヘッドを課しません。</p>
 <h4 id="Still-have-questions" class="common-anchor-header">まだ質問がありますか？</h4><p>できます：</p>
 <ul>
-<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。質問を投げかけたり、アイデアを共有したり、他の人を助けたりすることができます。</li>
-<li><a href="https://slack.milvus.io/">Slackのコミュニティに</a>参加し、オープンソースコミュニティに参加してください。</li>
+<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。質問をしたり、アイデアを共有したり、他の人を助けたりすることができます。</li>
+<li>私たちの<a href="https://discord.com/invite/8uyFbECzPX">Discordチャンネルに</a>参加して、サポートを見つけたり、私たちのオープンソースコミュニティに参加してください。</li>
 </ul>

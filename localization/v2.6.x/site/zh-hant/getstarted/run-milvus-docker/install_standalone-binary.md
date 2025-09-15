@@ -84,7 +84,7 @@ title: 使用 RPM/DEB 套件安裝 Milvus 單機版
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>對於以 DEB 為基礎的系統 (例如 Ubuntu 和 Debian)，請使用<code translate="no">apt</code> 指令來安裝套件。</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">啟動 Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">

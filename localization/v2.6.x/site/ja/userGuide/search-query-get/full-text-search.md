@@ -42,7 +42,7 @@ summary: >-
     </button></h2><p>全文検索は、手作業による埋め込みを不要にすることで、テキストベースの検索プロセスを簡素化します。この機能は、次のようなワークフローで動作します：</p>
 <ol>
 <li><p><strong>テキスト入力</strong>：テキスト入力： 生のテキスト文書を挿入するか、クエリーテキストを提供します。</p></li>
-<li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/analyzer-overview.md">アナライザーを使って</a>、入力テキストを検索可能な個々の用語にトークン化します。</p></li>
+<li><p><strong>テキスト分析</strong>：Milvusは<a href="/docs/ja/analyzer-overview.md">アナライザーを</a>使用して、入力テキストを検索可能な個々の用語にトークン化します。</p></li>
 <li><p><strong>関数処理</strong>：組み込み関数がトークン化された用語を受け取り、スパースベクトル表現に変換します。</p></li>
 <li><p><strong>コレクションストア</strong>：Milvusは効率的な検索のために、これらのスパース埋め込みをコレクションに保存する。</p></li>
 <li><p><strong>BM25スコアリング</strong>：検索中、MilvusはBM25アルゴリズムを適用して保存された文書のスコアを計算し、クエリテキストとの関連性に基づいてマッチした結果をランク付けします。</p></li>
@@ -78,7 +78,22 @@ summary: >-
 <li><p>生のテキスト文書を格納する<code translate="no">VARCHAR</code> フィールド。<code translate="no">enable_analyzer</code> 属性は<code translate="no">True</code> に設定されている。これにより、milvus はテキストを特定の用語にトークン化し、機能処理を行うことができる。</p></li>
 <li><p>Milvusが<code translate="no">VARCHAR</code> フィールド用に自動生成するスパース埋め込みを格納するために予約された<code translate="no">SPARSE_FLOAT_VECTOR</code> フィールド。</p></li>
 </ul>
-<h3 id="Define-the-collection-schema" class="common-anchor-header">コレクションスキーマの定義</h3><p>まず、スキーマを作成し、必要なフィールドを追加する：</p>
+<h3 id="Define-the-collection-schema" class="common-anchor-header">コレクションスキーマの定義<button data-href="#Define-the-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>まず、スキーマを作成し、必要なフィールドを追加する：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
@@ -209,8 +224,8 @@ schema.WithField(entity.NewField().
 <p>この構成では</p>
 <ul>
 <li><p><code translate="no">id</code>: は主キーとして機能し、<code translate="no">auto_id=True</code> で自動的に生成される。</p></li>
-<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はテキスト保存用のMilvus文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvus はテキスト分析に<code translate="no">standard</code><a href="/docs/ja/standard-analyzer.md"> アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/analyzer-overview.md">解析器の概要を</a>参照してください。</p></li>
-<li><p><code translate="no">sparse</code>: 全文検索操作のために内部で生成されたスパース埋め込みを格納するために予約されたベクトルフィールドです。データ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> でなければならない。</p></li>
+<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はテキスト保存用のMilvus文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvusはテキスト分析に <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ja/standard-analyzer.md"> アナライザを</a>使用します。別のアナライザを設定するには、<a href="/docs/ja/analyzer-overview.md">アナライザの概要を</a>参照してください。</p></li>
+<li><p><code translate="no">sparse</code>全文検索操作のために内部で生成されたスパース埋め込みを格納するために予約されたベクトルフィールド。データ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> でなければならない。</p></li>
 </ul>
 <p>次に、テキストをスパース・ベクトル表現に変換する関数を定義し、スキーマに追加します：</p>
 <div class="multipleCode">
@@ -294,7 +309,7 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>関数の名前。この関数は、<code translate="no">text</code> フィールドの生のテキストを、<code translate="no">sparse</code> フィールドに格納される検索可能なベクトルに変換します。</p></td>
+     <td><p>関数の名前。この関数は、<code translate="no">text</code> フィールドの生テキストを、<code translate="no">sparse</code> フィールドに格納される検索可能なベクトルに変換します。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
@@ -312,7 +327,22 @@ schema.WithFunction(function)
 <div class="alert note">
 <p>テキストからスパース・ベクトルへの変換が必要な複数の<code translate="no">VARCHAR</code> フィールドを持つコレクションの場合は、コレクション・スキーマに個別の関数を追加し、各関数が一意の名前と<code translate="no">output_field_names</code> 値を持つようにします。</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">インデックスの構成</h3><p>必要なフィールドと組み込み関数でスキーマを定義した後、コレクションのインデックスを設定します。このプロセスを簡略化するために、<code translate="no">AUTOINDEX</code> を<code translate="no">index_type</code> として使用します。このオプションにより、milvus はデータの構造に基づいて最適なインデックスタイプを選択し、設定することができます。</p>
+<h3 id="Configure-the-index" class="common-anchor-header">インデックスの構成<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>必要なフィールドと組み込み関数でスキーマを定義した後、コレクションのインデックスを設定します。このプロセスを簡略化するために、<code translate="no">AUTOINDEX</code> を<code translate="no">index_type</code> として使用します。このオプションにより、milvus はデータの構造に基づいて最適なインデックスタイプを選択し、設定することができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -333,9 +363,9 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-fvParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
-fvParams.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
-fvParams.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+params.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+params.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
@@ -400,12 +430,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p>
-<ul>
-<li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト)：MaxScore アルゴ リ ズ ム を使用 し た最適化 さ れた DAAT （Document-at-a-Time） ク エ リ 処理。MaxScoreは、高い<em>k</em>値や多くの用語を含むクエリに対して、影響が最小になりそうな用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li>
-<li><p><code translate="no">"DAAT_WAND"</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDは<em>k</em>値が小さいクエリや短いクエリではスキップがより効率的である。</p></li>
-<li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバルコレクションパラメータ（avgdl）の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li>
-</ul></td>
+     <td><p>インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト)：MaxScore アルゴ リ ズ ム を使用 し た最適化 さ れた DAAT （Document-at-a-Time） ク エ リ 処理。MaxScoreは、高い<em>k</em>値や多くの用語を含むクエリに対して、影響が最小になりそうな用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDは<em>k</em>値が小さいクエリや短いクエリではスキップがより効率的である。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバルコレクションパラメータ（avgdl）の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -416,7 +441,22 @@ indexes.add(IndexParam.builder()
      <td><p>文書の長さを正規化する程度を制御する。一般的に0から1の間の値が使用され、一般的なデフォルト値は0.75程度です。1の値は長さの正規化を行わないことを意味し、0の値は完全な正規化を意味する。</p></td>
    </tr>
 </table>
-<h3 id="Create-the-collection" class="common-anchor-header">コレクションの作成</h3><p>定義したスキーマとインデックス・パラメータを使用して、コレクションを作成する。</p>
+<h3 id="Create-the-collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定義したスキーマとインデックス・パラメータを使用して、コレクションを作成する。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -638,8 +678,12 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
      <td><p>検索時に無視する重要度の低い用語の割合。詳細は<a href="/docs/ja/sparse_vector.md">スパース・ベクターを</a>参照。</p></td>
    </tr>
    <tr>
+     <td></td>
+     <td></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>自然言語による生のクエリテキスト。milvusはBM25関数を使用して、テキストクエリを自動的にスパースベクトルに変換します。</p></td>
+     <td><p>自然言語による生のクエリテキスト。MilvusはBM25関数を使用して、テキストクエリを自動的にスパースベクトルに変換します。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
@@ -669,7 +713,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">BM25 関数で生成されたスパース・ベクトルを全文検索で出力したりアクセスしたりできますか？</h3><p>いいえ、BM25関数で生成されたスパース・ベクトルは、全文検索で直接アクセスしたり出力したりすることはできません。詳細は以下の通りです：</p>
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">BM25 関数で生成されたスパース・ベクトルを全文検索で出力したりアクセスしたりできますか？<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>いいえ、BM25関数で生成されたスパース・ベクトルは、全文検索で直接アクセスしたり出力したりすることはできません。詳細は以下の通りです：</p>
 <ul>
 <li><p>BM25関数は、ランキングと検索のために内部でスパースベクトルを生成します。</p></li>
 <li><p>これらのベクトルはスパースフィールドに格納されますが、全文検索に含めることはできません。<code translate="no">output_fields</code></p></li>
@@ -696,7 +755,22 @@ client.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">スパース・ベクトル・フィールドにアクセスできないのに、なぜ定義する必要があるのですか？</h3><p>スパース・ベクター・フィールドは、ユーザーが直接操作しないデータベース・インデックスと同様に、内部検索インデックスとして機能します。</p>
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">スパース・ベクトル・フィールドにアクセスできないのに、なぜ定義する必要があるのですか？<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>スパース・ベクター・フィールドは、ユーザーが直接操作しないデータベース・インデックスと同様に、内部検索インデックスとして機能します。</p>
 <p><strong>設計上の理由</strong></p>
 <ul>
 <li><p>懸念の分離：ユーザはテキスト（入出力）を扱い、milvusはベクトル（内部処理）を扱う。</p></li>
@@ -708,4 +782,4 @@ client.search(
 <li><p>全文検索の代わりに手動でスパースベクトル操作を使用</p></li>
 <li><p>カスタムスパースベクトルワークフロー用に個別のコレクションを作成できます。</p></li>
 </ul>
-<p>詳細については、<a href="/docs/ja/sparse_vector.md">スパースベクトルを</a>参照してください。</p>
+<p>詳細については、<a href="/docs/ja/sparse_vector.md">スパース・ベクターを</a>参照してください。</p>

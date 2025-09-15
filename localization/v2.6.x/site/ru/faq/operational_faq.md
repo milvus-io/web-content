@@ -105,7 +105,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>Обновить PyMilvus можно с помощью следующей команды:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">Почему я получаю меньше результатов, чем <code translate="no">limit</code>, которые я задал в своем поиске/запросе?</h4><p>Есть несколько причин, по которым вы можете получить меньше результатов, чем заданный вами <code translate="no">limit</code>:</p>
+<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">Почему я получаю меньше результатов, чем <code translate="no">limit</code>, которые я задал в своем поиске/запросе?</h4><p>Есть несколько причин, по которым вы можете получить меньше результатов, чем указанный вами <code translate="no">limit</code>:</p>
 <ul>
 <li><p><strong>Ограниченные данные</strong>: В коллекции может быть недостаточно сущностей, чтобы выполнить запрошенный вами лимит. Если общее количество сущностей в коллекции меньше установленного лимита, вы, естественно, получите меньше результатов.</p></li>
 <li><p><strong>Дублирование первичных ключей</strong>: Milvus отдает приоритет определенным сущностям, когда во время поиска встречаются дубликаты первичных ключей. Это поведение зависит от типа поиска:</p></li>
@@ -143,5 +143,5 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Still-have-questions" class="common-anchor-header">У вас остались вопросы?</h4><p>Вы можете:</p>
 <ul>
 <li>Ознакомиться с <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> на GitHub. Не стесняйтесь задавать вопросы, делиться идеями и помогать другим.</li>
-<li>Присоединяйтесь к нашему <a href="https://discuss.milvus.io/">форуму Milvus</a> или <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">каналу Slack</a>, чтобы получить поддержку и взаимодействовать с нашим сообществом разработчиков с открытым исходным кодом.</li>
+<li>Присоединяйтесь к нашему <a href="https://discuss.milvus.io/">форуму Milvus</a> или <a href="https://discord.com/invite/8uyFbECzPX">каналу Discord</a>, чтобы найти поддержку и принять участие в работе нашего сообщества разработчиков с открытым исходным кодом.</li>
 </ul>

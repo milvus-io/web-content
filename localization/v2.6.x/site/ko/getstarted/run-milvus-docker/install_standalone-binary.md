@@ -84,7 +84,7 @@ title: RPM/DEB 패키지로 Milvus 스탠드얼론 설치하기
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>DEB 기반 시스템(예: 우분투 및 데비안)의 경우 <code translate="no">apt</code> 명령어를 사용하여 패키지를 설치합니다.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Milvus 스탠드얼론 시작<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">

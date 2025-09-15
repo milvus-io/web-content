@@ -18,7 +18,7 @@ title: 문제 해결
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지에는 Milvus를 실행할 때 발생할 수 있는 일반적인 문제와 가능한 문제 해결 팁이 나열되어 있습니다. 이 페이지의 문제는 다음 범주로 분류됩니다:</p>
+    </button></h1><p>이 페이지에는 Milvus를 실행할 때 발생할 수 있는 일반적인 문제와 가능한 문제 해결 팁이 나열되어 있습니다. 이 페이지의 문제는 다음과 같은 범주로 분류됩니다:</p>
 <ul>
 <li><a href="#boot_issues">부팅 문제</a></li>
 <li><a href="#runtime_issues">런타임 문제</a></li>
@@ -90,14 +90,74 @@ title: 문제 해결
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. etcd 포드 보류 중</h3><p>etcd 클러스터는 기본적으로 pvc를 사용합니다. 쿠버네티스 클러스터에 대해 스토리지클래스를 미리 구성해야 한다.</p>
-<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. etcd 파드 크래시</h3><p>etcd 파드가 <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code> 에서 충돌하는 경우, 이 파드에 로그인하여 <code translate="no">/bitnami/etcd/data/member_id</code> 파일을 삭제할 수 있습니다.</p>
-<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. <code translate="no">etcd-0</code> 가 계속 실행되는 동안 여러 파드가 계속 충돌하는 경우</h3><p><code translate="no">etcd-0</code> 이 계속 실행되는 동안 여러 파드가 계속 충돌하는 경우 다음 코드를 실행할 수 있습니다.</p>
+    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. etcd 포드 보류 중<button data-href="#1-etcd-pod-pending" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>etcd 클러스터는 기본적으로 pvc를 사용합니다. 쿠버네티스 클러스터에 대해 스토리지클래스를 미리 구성해야 한다.</p>
+<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. etcd 파드 크래시<button data-href="#2-etcd-pod-crash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>etcd 파드가 <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code> 에서 충돌하면 이 파드에 로그인하여 <code translate="no">/bitnami/etcd/data/member_id</code> 파일을 삭제할 수 있습니다.</p>
+<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. <code translate="no">etcd-0</code> 가 계속 실행되는 동안 여러 파드가 계속 충돌하는 경우<button data-href="#3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">etcd-0</code> 이 계속 실행되는 동안 여러 파드가 계속 충돌하는 경우 다음 코드를 실행할 수 있습니다.</p>
 <pre><code translate="no">kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-operator">-</span>sts<span class="hljs-operator">&gt;</span> <span class="hljs-comment">--replicas=1</span>
 # <span class="hljs-keyword">delete</span> the pvc <span class="hljs-keyword">for</span> etcd<span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> etcd<span class="hljs-number">-2</span>
 kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-operator">-</span>sts<span class="hljs-operator">&gt;</span> <span class="hljs-comment">--replicas=3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="4-All-pods-crash" class="common-anchor-header">4. 모든 파드가 크래시됨</h3><p>모든 파드가 충돌하는 경우, <code translate="no">/bitnami/etcd/data/member/snap/db</code> 파일을 복사해 보세요. <code translate="no">https://github.com/etcd-io/bbolt</code> 을 사용하여 데이터베이스 데이터를 수정합니다.</p>
+<h3 id="4-All-pods-crash" class="common-anchor-header">4. 모든 파드가 크래시됨<button data-href="#4-All-pods-crash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>모든 파드가 충돌하는 경우, <code translate="no">/bitnami/etcd/data/member/snap/db</code> 파일을 복사해 보세요. <code translate="no">https://github.com/etcd-io/bbolt</code> 을 사용하여 데이터베이스 데이터를 수정합니다.</p>
 <p>모든 Milvus 메타데이터는 <code translate="no">key</code> 버킷에 보관됩니다. 이 버킷의 데이터를 백업하고 다음 명령을 실행합니다. <code translate="no">by-dev/meta/session</code> 파일의 접두사 데이터는 백업할 필요가 없다는 점에 유의하세요.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">0</span>
 <span class="hljs-comment"># delete the pvc for etcd-0, etcd-1, etcd-2</span>
@@ -105,8 +165,8 @@ kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">
 <span class="hljs-comment"># restore the backup data</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><br/></p>
-<p>문제 해결에 도움이 필요하면 언제든지 문의하세요:</p>
+<p>문제 해결에 도움이 필요하시면 언제든지 문의해 주세요:</p>
 <ul>
-<li><a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 채널에</a> 가입하여 Milvus 팀의 지원을 요청하세요.</li>
+<li><a href="https://discord.com/invite/8uyFbECzPX">Discord 채널에</a> 가입하여 Milvus 팀의 지원을 요청하세요.</li>
 <li>문제에 대한 세부 정보가 포함된<a href="https://github.com/milvus-io/milvus/issues/new/choose">이슈를</a> GitHub에 제출하세요.</li>
 </ul>

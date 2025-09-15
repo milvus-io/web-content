@@ -86,7 +86,7 @@ title: Menginstal Milvus Standalone dengan Paket RPM/DEB
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk sistem berbasis DEB (seperti Ubuntu dan Debian), gunakan perintah <code translate="no">apt</code> untuk menginstal paket.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Memulai Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">

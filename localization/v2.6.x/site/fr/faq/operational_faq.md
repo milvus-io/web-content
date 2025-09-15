@@ -22,7 +22,7 @@ title: FAQ opérationnelle
       </svg>
     </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">Qu'est-ce qu'un délégateur QueryNode et quelles sont ses responsabilités ?</h4><p>Lorsqu'une collection est chargée, un QueryNode s'abonne aux canaux DML pour les messages d'insertion et de suppression provenant de la file d'attente des messages. Le QueryNode qui s'abonne à ces canaux, connu sous le nom de délégué, est responsable de ce qui suit :</p>
 <ul>
-<li>de gérer les segments croissants qui nécessitent une mémoire supplémentaire en raison des insertions en cours.</li>
+<li>gérer les segments croissants qui nécessitent de la mémoire supplémentaire en raison des insertions en cours</li>
 <li>Recevoir les messages de suppression et les transmettre à d'autres nœuds de requête qui détiennent les segments concernés.</li>
 </ul>
 <h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">Comment identifier les nœuds délégateurs d'une collection ?</h4><p>Utilisez Birdwatcher.</p>
@@ -145,5 +145,5 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Still-have-questions" class="common-anchor-header">Vous avez encore des questions ?</h4><p>Vous pouvez le faire :</p>
 <ul>
 <li>Consulter <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> sur GitHub. N'hésitez pas à poser des questions, à partager des idées et à aider les autres.</li>
-<li>Rejoignez notre <a href="https://discuss.milvus.io/">forum Milvus</a> ou notre <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canal Slack</a> pour obtenir de l'aide et vous engager avec notre communauté open-source.</li>
+<li>Rejoignez notre <a href="https://discuss.milvus.io/">forum Milvus</a> ou notre <a href="https://discord.com/invite/8uyFbECzPX">canal Discord</a> pour obtenir de l'aide et participer à notre communauté open-source.</li>
 </ul>

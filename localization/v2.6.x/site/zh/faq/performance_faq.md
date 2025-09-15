@@ -45,5 +45,5 @@ title: 性能常见问题
 <h4 id="Still-have-questions" class="common-anchor-header">还有问题？</h4><p>你可以</p>
 <ul>
 <li>在 GitHub 上查看<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。随时提问、分享想法并帮助其他用户。</li>
-<li>加入我们的<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 频道</a>，寻求支持并与我们的开源社区互动。</li>
+<li>加入我们的<a href="https://discord.com/invite/8uyFbECzPX">Discord 频道</a>，寻求支持并与我们的开源社区互动。</li>
 </ul>

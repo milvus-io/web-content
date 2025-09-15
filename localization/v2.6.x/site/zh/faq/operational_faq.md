@@ -54,7 +54,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 # Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
 <span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">如何为 Collections 设置 shard_num？</h4><p>作为最佳实践，对于向量维度为 768 的 Collections，建议每 ~1 亿个向量至少使用 1 个 shard。对于重写使用情况，每 ~1 亿向量使用 4 个分区。</p>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">如何为 Collections 设置 shard_num？</h4><p>最佳做法是，对于向量维度为 768 的 Collections，建议每 ~1 亿个向量至少使用 1 个 shard。对于重写使用情况，每 ~1 亿向量使用 4 个分区。</p>
 <p>例如，如果有 1 亿向量，则使用 1-4 个碎片。如果有 5 亿向量，则使用 5-10 个碎片。</p>
 <h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">如果从 Docker Hub 拉取 Milvus Docker 镜像失败怎么办？</h4><p>如果从 Docker Hub 拉取 Milvus Docker 镜像失败，请尝试添加其他注册镜像。</p>
 <p>中国大陆的用户可以在<strong>/etc.docker/daemon.json</strong> 中的 registry-mirrors 数组中添加网址 "https://registry.docker-cn.com"。</p>
@@ -98,10 +98,10 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">能否在多个 Milvus 实例之间共享一个 Pulsar 实例？</h4><p>可以，你可以在多个 Milvus 实例之间共享一个 Pulsar 实例。为此，你可以</p>
 <ul>
 <li>如果在你的 Pulsar 实例上启用了多租户，考虑为每个 Milvus 实例分配一个单独的租户或命名空间。为此，你需要在启动 Milvus 实例之前，将其配置文件中的<code translate="no">pulsar.tenant</code> 或<code translate="no">pulsar.namespace</code> 改为每个实例的唯一值。</li>
-<li>如果不打算在 Pulsar 实例上启用多租户功能，可以考虑在启动 Milvus 实例之前，将其配置文件中的<code translate="no">msgChannel.chanNamePrefix.cluster</code> 更改为每个实例的唯一值。</li>
+<li>如果不打算在 Pulsar 实例上启用多租户功能，可考虑在启动 Milvus 实例之前，将其配置文件中的<code translate="no">msgChannel.chanNamePrefix.cluster</code> 更改为每个实例的唯一值。</li>
 </ul>
 <h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">我可以在多个 Milvus 实例之间共享一个 MinIO 实例吗？</h4><p>可以，您可以在多个 Milvus 实例之间共享一个 MinIO 实例。为此，您需要在启动每个 Milvus 实例之前，在每个实例的配置文件中将<code translate="no">minio.rootPath</code> 更改为唯一值。</p>
-<h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">如何处理<code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code> 错误信息？</h4><p>错误信息<code translate="no">Illegal uri [example.db]</code> 表明你正在尝试使用早期版本的 PyMilvus 连接 Milvus Lite，而早期版本的 PyMilvus 不支持这种连接类型。要解决这个问题，请将你的 PyMilvus 安装升级到至少 2.4.2 版本，其中包括对连接 Milvus Lite 的支持。</p>
+<h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">如何处理<code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code> 错误信息？</h4><p>错误信息<code translate="no">Illegal uri [example.db]</code> 表明你正在尝试使用早期版本的 PyMilvus 连接 Milvus Lite，该版本不支持这种连接类型。要解决这个问题，请将你的 PyMilvus 安装升级到至少 2.4.2 版本，其中包括对连接 Milvus Lite 的支持。</p>
 <p>您可以使用以下命令升级 PyMilvus：</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
@@ -112,7 +112,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <li><p><strong>查询（精确匹配）</strong>：Milvus 选择具有匹配 PK 的最新实体。 ANN 搜索：Milvus 会选择相似度得分最高的实体，即使实体共享相同的 PK。 如果您的 Collections 有很多重复的主键，这种优先级可能会导致唯一结果少于限制。</p></li>
 <li><p><strong>匹配不足</strong>：您的搜索过滤表达式可能过于严格，导致符合相似性阈值的实体较少。如果为搜索设置的条件限制性太强，匹配的实体就不够多，导致结果比预期的少。</p></li>
 </ul>
-<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.什么原因导致这种情况，如何解决？</h4><p>当您尝试在 Windows 平台上使用 Milvus Lite 时，会出现此错误。Milvus Lite 主要为 Linux 环境设计，可能不支持 Windows。</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.什么原因导致这种情况，如何解决？</h4><p>当你试图在 Windows 平台上使用 Milvus Lite 时，就会出现这个错误。Milvus Lite 主要为 Linux 环境设计，可能不支持 Windows。</p>
 <p>解决办法是使用 Linux 环境：</p>
 <ul>
 <li>使用基于 Linux 的操作系统或虚拟机来运行 Milvus Lite。</li>
@@ -143,5 +143,5 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="Still-have-questions" class="common-anchor-header">仍有问题？</h4><p>你可以</p>
 <ul>
 <li>查看 GitHub 上的<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。随时提问、分享想法并帮助其他用户。</li>
-<li>加入我们的<a href="https://discuss.milvus.io/">Milvus 论坛</a>或<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 频道</a>，寻求支持并参与我们的开源社区。</li>
+<li>加入我们的<a href="https://discuss.milvus.io/">Milvus 论坛</a>或<a href="https://discord.com/invite/8uyFbECzPX">Discord 频道</a>，寻求支持并参与我们的开源社区。</li>
 </ul>

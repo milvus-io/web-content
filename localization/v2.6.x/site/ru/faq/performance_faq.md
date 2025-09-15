@@ -30,7 +30,7 @@ title: FAQ по производительности
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
    </span> <span class="img-wrapper"> <span>Тест на точность</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>Тест на производительность</span> </span></p>
 <h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">Почему на небольших наборах данных запросы иногда выполняются дольше?</h4><p>Операции запроса выполняются на сегментах. Индексы сокращают время, необходимое для запроса сегмента. Если сегмент не проиндексирован, Milvus прибегает к грубому поиску по исходным данным, что резко увеличивает время запроса.</p>
-<p>Таким образом, запрос к небольшому набору данных (коллекции) обычно занимает больше времени, поскольку индекс не был создан. Это происходит потому, что размеры ее сегментов не достигли порога построения индекса, установленного на <code translate="no">rootCoord.minSegmentSizeToEnableindex</code>. Вызовите <code translate="no">create_index()</code>, чтобы заставить Milvus индексировать сегменты, которые достигли порога, но еще не были автоматически проиндексированы, что значительно повысит производительность запросов.</p>
+<p>Поэтому обычно запрос к небольшому набору данных (коллекции) занимает больше времени, так как индекс не создан. Это происходит потому, что размеры ее сегментов не достигли порога построения индекса, установленного на <code translate="no">rootCoord.minSegmentSizeToEnableindex</code>. Вызовите <code translate="no">create_index()</code>, чтобы заставить Milvus индексировать сегменты, которые достигли порога, но еще не были автоматически проиндексированы, что значительно повысит производительность запросов.</p>
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">Какие факторы влияют на использование процессора?</h4><p>Использование ЦП увеличивается, когда Milvus строит индексы или выполняет запросы. В целом построение индексов требует больших затрат ЦП, за исключением использования Annoy, который работает в один поток.</p>
 <p>При выполнении запросов на использование ЦП влияют <code translate="no">nq</code> и <code translate="no">nprobe</code>. Когда <code translate="no">nq</code> и <code translate="no">nprobe</code> невелики, параллелизм незначителен и загрузка процессора остается низкой.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">Влияет ли одновременная вставка данных и поиск на производительность запросов?</h4><p>Операции вставки не требуют больших затрат ЦП. Однако, поскольку новые сегменты могут не достигнуть порога для построения индекса, Milvus прибегает к поиску методом грубой силы, что значительно влияет на производительность запроса.</p>
@@ -38,7 +38,7 @@ title: FAQ по производительности
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">Может ли индексирование поля VARCHAR повысить скорость удаления?</h4><p>Индексирование поля VARCHAR может ускорить операции "Удаление по выражению", но только при определенных условиях:</p>
 <ul>
 <li><strong>ИНВЕРТИРОВАННЫЙ индекс</strong>: Этот индекс помогает при использовании <code translate="no">IN</code> или <code translate="no">==</code> выражений для полей VARCHAR, не являющихся первичными ключами.</li>
-<li><strong>Тройной индекс</strong>: Этот индекс помогает при префиксных запросах (например, <code translate="no">LIKE prefix%</code>) на непервичных полях VARCHAR.</li>
+<li><strong>Тройной индекс</strong>: Этот индекс помогает при использовании префиксных запросов (например, <code translate="no">LIKE prefix%</code>) для непервичных полей VARCHAR.</li>
 </ul>
 <p>Однако индексирование поля VARCHAR не ускоряет работу:</p>
 <ul>
@@ -48,5 +48,5 @@ title: FAQ по производительности
 <h4 id="Still-have-questions" class="common-anchor-header">У вас остались вопросы?</h4><p>Вы можете:</p>
 <ul>
 <li>Проверить <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> на GitHub. Не стесняйтесь задавать вопросы, делиться идеями и помогать другим.</li>
-<li>Присоединяйтесь к нашему <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">каналу Slack</a>, чтобы найти поддержку и взаимодействовать с нашим сообществом разработчиков с открытым исходным кодом.</li>
+<li>Присоединяйтесь к нашему <a href="https://discord.com/invite/8uyFbECzPX">каналу Discord</a>, чтобы найти поддержку и пообщаться с нашим сообществом разработчиков с открытым исходным кодом.</li>
 </ul>

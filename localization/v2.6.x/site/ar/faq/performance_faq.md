@@ -27,13 +27,13 @@ title: الأسئلة الشائعة حول الأداء
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
- </span> <span class="img-wrapper"> <span>   اختبار الدقة</span> <img translate="no" src="/docs/v2.6.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" />اختبار الأداء <span>اختبار الأداء</span> </span></p>
+   </span> <span class="img-wrapper"> <span>اختبار الدقة</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>اختبار الأداء</span> <span>اختبار الأداء</span> </span></p>
 <h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">لماذا تستغرق الاستعلامات أحيانًا وقتًا أطول على مجموعات البيانات الأصغر؟</h4><p>تُجرى عمليات الاستعلام على شرائح. تقلل الفهارس من الوقت الذي يستغرقه الاستعلام عن مقطع ما. إذا لم تتم فهرسة مقطع ما، يلجأ برنامج Milvus إلى البحث بالقوة الغاشمة على البيانات الخام - مما يزيد من وقت الاستعلام بشكل كبير.</p>
 <p>لذلك، عادةً ما يستغرق الاستعلام عن مجموعة بيانات صغيرة (مجموعة) وقتًا أطول لأنه لم يتم إنشاء فهرس لها. ويرجع ذلك إلى عدم وصول أحجام شرائحه إلى عتبة بناء الفهرس التي حددها <code translate="no">rootCoord.minSegmentSizeToEnableindex</code>. اتصل بـ <code translate="no">create_index()</code> لإجبار ميلفوس على فهرسة المقاطع التي وصلت إلى العتبة ولكن لم تتم فهرستها تلقائيًا بعد، مما يحسن أداء الاستعلام بشكل كبير.</p>
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">ما هي العوامل التي تؤثر على استخدام وحدة المعالجة المركزية؟</h4><p>يزداد استخدام وحدة المعالجة المركزية عندما يقوم ميلفوس ببناء الفهارس أو تشغيل الاستعلامات. بشكل عام، يكون إنشاء الفهرس مكثفًا لوحدة المعالجة المركزية إلا عند استخدام Annoy، الذي يعمل على مؤشر ترابط واحد.</p>
 <p>عند تشغيل الاستعلامات، يتأثر استخدام وحدة المعالجة المركزية <code translate="no">nq</code> و <code translate="no">nprobe</code>. عندما يكون <code translate="no">nq</code> و <code translate="no">nprobe</code> صغيرًا، يكون التزامن منخفضًا ويظل استخدام وحدة المعالجة المركزية منخفضًا.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">هل يؤثر إدراج البيانات والبحث في نفس الوقت على أداء الاستعلام؟</h4><p>عمليات الإدراج ليست كثيفة الاستخدام لوحدة المعالجة المركزية. ومع ذلك، نظرًا لأن المقاطع الجديدة قد لا تصل إلى الحد الأدنى لبناء الفهرس، يلجأ ميلفوس إلى البحث بالقوة الغاشمة - مما يؤثر بشكل كبير على أداء الاستعلام.</p>
-<p>تحدد المعلمة <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> عتبة بناء الفهرس للمقطع، ويتم تعيينها إلى 1024 صفًا افتراضيًا. راجع <a href="/docs/ar/system_configuration.md">تكوين النظام</a> لمزيد من المعلومات.</p>
+<p>تحدد المعلمة <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> عتبة بناء الفهرس للمقطع، ويتم تعيينها إلى 1024 صفًا بشكل افتراضي. راجع <a href="/docs/ar/system_configuration.md">تكوين النظام</a> لمزيد من المعلومات.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">هل يمكن أن تؤدي فهرسة حقل VARCHAR إلى تحسين سرعة الحذف؟</h4><p>يمكن أن تؤدي فهرسة حقل VARCHAR إلى تسريع عمليات "الحذف حسب التعبير"، ولكن في ظل ظروف معينة فقط:</p>
 <ul>
 <li><strong>الفهرس المقلوب</strong>: يساعد هذا الفهرس في فهرسة <code translate="no">IN</code> أو <code translate="no">==</code> التعبيرات على حقول VARCHAR غير الأساسية.</li>
@@ -47,5 +47,5 @@ title: الأسئلة الشائعة حول الأداء
 <h4 id="Still-have-questions" class="common-anchor-header">هل لا تزال لديك أسئلة؟</h4><p>يمكنك ذلك:</p>
 <ul>
 <li>الاطلاع على <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> على GitHub. لا تتردد في طرح الأسئلة ومشاركة الأفكار ومساعدة الآخرين.</li>
-<li>انضم إلى <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">قناة Slack</a> الخاصة بنا للحصول على الدعم والتفاعل مع مجتمعنا مفتوح المصدر.</li>
+<li>انضم إلى <a href="https://discord.com/invite/8uyFbECzPX">قناة Discord</a> الخاصة بنا للحصول على الدعم والتفاعل مع مجتمعنا مفتوح المصدر.</li>
 </ul>

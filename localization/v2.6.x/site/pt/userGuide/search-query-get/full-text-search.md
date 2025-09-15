@@ -86,7 +86,22 @@ summary: >-
 <li><p>Um campo <code translate="no">VARCHAR</code> que armazena documentos de texto em bruto, com o atributo <code translate="no">enable_analyzer</code> definido como <code translate="no">True</code>. Isto permite que o Milvus tokenize o texto em termos específicos para processamento de funções.</p></li>
 <li><p>Um campo <code translate="no">SPARSE_FLOAT_VECTOR</code> reservado para armazenar embeddings esparsos que o Milvus irá gerar automaticamente para o campo <code translate="no">VARCHAR</code>.</p></li>
 </ul>
-<h3 id="Define-the-collection-schema" class="common-anchor-header">Definir o esquema da coleção</h3><p>Primeiro, crie o esquema e adicione os campos necessários:</p>
+<h3 id="Define-the-collection-schema" class="common-anchor-header">Definir o esquema da coleção<button data-href="#Define-the-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Primeiro, crie o esquema e adicione os campos necessários:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
@@ -217,8 +232,8 @@ schema.WithField(entity.NewField().
 <p>Nesta configuração,</p>
 <ul>
 <li><p><code translate="no">id</code>: serve como chave primária e é gerado automaticamente com <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: armazena os seus dados de texto em bruto para operações de pesquisa de texto completo. O tipo de dados tem de ser <code translate="no">VARCHAR</code>, uma vez que <code translate="no">VARCHAR</code> é o tipo de dados de cadeia de caracteres do Milvus para armazenamento de texto. Defina <code translate="no">enable_analyzer=True</code> para permitir que o Milvus tokenize o texto. Por defeito, o Milvus utiliza o<a href="/docs/pt/standard-analyzer.md"> analisador</a> <code translate="no">standard</code><a href="/docs/pt/standard-analyzer.md"></a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
-<li><p><code translate="no">sparse</code>Campo vetorial: um campo vetorial reservado para armazenar as incorporações esparsas geradas internamente para operações de pesquisa de texto completo. O tipo de dados tem de ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">text</code>: armazena os seus dados de texto em bruto para operações de pesquisa de texto completo. O tipo de dados tem de ser <code translate="no">VARCHAR</code>, uma vez que <code translate="no">VARCHAR</code> é o tipo de dados de cadeia de caracteres do Milvus para armazenamento de texto. Defina <code translate="no">enable_analyzer=True</code> para permitir que o Milvus tokenize o texto. Por defeito, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md"><code translate="no">standard</code></a> para análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
+<li><p><code translate="no">sparse</code>Campo vetorial: um campo vetorial reservado para armazenar os embeddings esparsos gerados internamente para operações de pesquisa de texto completo. O tipo de dados tem de ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Agora, defina uma função que converta o seu texto em representações vectoriais esparsas e, em seguida, adicione-a ao esquema:</p>
 <div class="multipleCode">
@@ -320,7 +335,22 @@ schema.WithFunction(function)
 <div class="alert note">
 <p>Para colecções com vários campos <code translate="no">VARCHAR</code> que requerem conversão de texto em vetor esparso, adicione funções separadas ao esquema de coleção, assegurando que cada função tem um nome único e um valor <code translate="no">output_field_names</code>.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">Configurar o índice</h3><p>Depois de definir o esquema com os campos necessários e a função incorporada, configure o índice para a sua coleção. Para simplificar este processo, utilize <code translate="no">AUTOINDEX</code> como <code translate="no">index_type</code>, uma opção que permite ao Milvus escolher e configurar o tipo de índice mais adequado com base na estrutura dos seus dados.</p>
+<h3 id="Configure-the-index" class="common-anchor-header">Configurar o índice<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de definir o esquema com os campos necessários e a função incorporada, configure o índice para a sua coleção. Para simplificar este processo, utilize <code translate="no">AUTOINDEX</code> como <code translate="no">index_type</code>, uma opção que permite ao Milvus escolher e configurar o tipo de índice mais adequado com base na estrutura dos seus dados.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -341,9 +371,9 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-fvParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
-fvParams.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
-fvParams.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+params.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+params.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
@@ -408,12 +438,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>O algoritmo utilizado para construir e consultar o índice. Valores válidos:</p>
-<ul>
-<li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li>
-<li><p><code translate="no">"DAAT_WAND"</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso torna o WAND mais eficiente para consultas com valores <em>k</em> pequenos ou consultas curtas, em que pular é mais viável.</p></li>
-<li><p><code translate="no">"TAAT_NAIVE"</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente das alterações ao parâmetro de coleção global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li>
-</ul></td>
+     <td><p>O algoritmo utilizado para construir e consultar o índice. Valores válidos:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores <em>k</em> elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso faz com que o WAND seja mais eficiente para consultas com valores <em>k</em> pequenos ou consultas curtas, em que a omissão é mais viável.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente das alterações ao parâmetro de coleção global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -424,7 +449,22 @@ indexes.add(IndexParam.builder()
      <td><p>Controla a extensão em que o comprimento do documento é normalizado. Normalmente, são usados valores entre 0 e 1, com um padrão comum em torno de 0,75. Um valor de 1 significa nenhuma normalização de comprimento, enquanto um valor de 0 significa normalização completa.</p></td>
    </tr>
 </table>
-<h3 id="Create-the-collection" class="common-anchor-header">Criar a coleção</h3><p>Agora crie a coleção usando o esquema e os parâmetros de índice definidos.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Criar a coleção<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Agora crie a coleção usando o esquema e os parâmetros de índice definidos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -646,8 +686,12 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
      <td><p>Proporção de termos de baixa importância a ignorar durante a pesquisa. Para obter detalhes, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p></td>
    </tr>
    <tr>
+     <td></td>
+     <td></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>Texto bruto da consulta em linguagem natural. Milvus converte automaticamente a sua consulta de texto em vectores esparsos utilizando a função BM25 - <strong>não for</strong> neça vectores pré-computados.</p></td>
+     <td><p>Texto bruto da consulta em linguagem natural. Milvus converte automaticamente a sua consulta de texto em vectores esparsos utilizando a função BM25 - não forneça vectores pré-computados.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
@@ -655,7 +699,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
-     <td><p>Lista de nomes de campos a devolver nos resultados da pesquisa. Suporta todos os campos <strong>, exceto o campo do vetor esparso</strong> que contém as incorporações geradas por BM25. Os campos de saída comuns incluem o campo de chave primária (por exemplo, <code translate="no">id</code>) e o campo de texto original (por exemplo, <code translate="no">text</code>). Para obter mais informações, consulte Perguntas <a href="/docs/pt/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">frequentes</a>.</p></td>
+     <td><p>Lista de nomes de campos a devolver nos resultados da pesquisa. Suporta todos os campos <strong>, exceto o campo de vetor esparso</strong> que contém as incorporações geradas por BM25. Os campos de saída comuns incluem o campo de chave primária (por exemplo, <code translate="no">id</code>) e o campo de texto original (por exemplo, <code translate="no">text</code>). Para obter mais informações, consulte Perguntas <a href="/docs/pt/full-text-search.md#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search">frequentes</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">limit</code></p></td>
@@ -677,7 +721,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">Posso produzir ou aceder aos vectores esparsos gerados pela função BM25 na pesquisa de texto integral?</h3><p>Não, os vectores esparsos gerados pela função BM25 não são diretamente acessíveis ou produzíveis na pesquisa de texto integral. Eis os pormenores:</p>
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">Posso produzir ou aceder aos vectores esparsos gerados pela função BM25 na pesquisa de texto integral?<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Não, os vectores esparsos gerados pela função BM25 não são diretamente acessíveis ou produzíveis na pesquisa de texto integral. Eis os pormenores:</p>
 <ul>
 <li><p>A função BM25 gera internamente vectores esparsos para classificação e recuperação</p></li>
 <li><p>Estes vectores são armazenados no campo esparso, mas não podem ser incluídos em <code translate="no">output_fields</code></p></li>
@@ -704,7 +763,22 @@ client.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Por que razão tenho de definir um campo de vetor esparso se não lhe posso aceder?</h3><p>O campo de vetor esparso serve como um índice de pesquisa interno, semelhante aos índices de bases de dados com os quais os utilizadores não interagem diretamente.</p>
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Por que razão tenho de definir um campo de vetor esparso se não lhe posso aceder?<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O campo de vetor esparso serve como um índice de pesquisa interno, semelhante aos índices de bases de dados com os quais os utilizadores não interagem diretamente.</p>
 <p><strong>Justificativa do projeto</strong>:</p>
 <ul>
 <li><p>Separação de preocupações: O utilizador trabalha com texto (entrada/saída), o Milvus lida com vectores (processamento interno)</p></li>

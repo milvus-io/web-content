@@ -84,7 +84,7 @@ title: RPM/DEBパッケージによるMilvusスタンドアロンのインスト
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>DEBベースのシステム（UbuntuやDebianなど）の場合、<code translate="no">apt</code> コマンドを使用してパッケージをインストールしてください。</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Milvus Standaloneの起動<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">

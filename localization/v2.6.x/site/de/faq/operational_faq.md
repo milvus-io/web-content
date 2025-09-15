@@ -23,7 +23,7 @@ title: Häufig gestellte Fragen zum Betrieb
 <li>Verwaltung zunehmender Segmente, die aufgrund laufender Einfügungen zusätzlichen Speicher benötigen.</li>
 <li>Empfang von Löschnachrichten und deren Weitergabe an andere QueryNodes, die die entsprechenden Segmente halten.</li>
 </ul>
-<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">Wie kann man Delegator-Knoten für eine Sammlung identifizieren?</h4><p>Verwenden Sie Birdwatcher.</p>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">Wie identifiziert man Delegator-Knoten für eine Sammlung?</h4><p>Verwenden Sie Birdwatcher.</p>
 <p>Installieren Sie Birdwatcher wie <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">folgt</a> und führen Sie dann den folgenden Befehl aus:</p>
 <pre><code translate="no" class="language-shell">./birdwatcher
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
@@ -45,7 +45,7 @@ Node(s) querynode
 <h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">Welche Parameter können angepasst werden, wenn der Abfrageknoten-Speicher unausgeglichen ist?</h4><p>Manchmal variiert der Abfrageknotenspeicher, weil einige als Delegatoren agieren und mehr RAM benötigen. Wenn der Speicher eines Delegators hoch ist, passen Sie queryCoord.delegatorMemoryOverloadFactor an, um versiegelte Segmente auf andere Knoten auszulagern und die RAM-Nutzung zu reduzieren.</p>
 <ul>
 <li>Der Standardwert ist 0.1.</li>
-<li>Eine Erhöhung dieses Wertes (z. B. auf 0,3 oder höher) führt dazu, dass das System mehr versiegelte Segmente vom überlasteten Delegator auf andere QueryNodes auslagert, wodurch die Speichernutzung ausgeglichen wird. Sie können auch versuchen, den Wert auf 1 zu erhöhen, was bedeutet, dass keine versiegelten Segmente in den Delegator-Knoten geladen werden.</li>
+<li>Eine Erhöhung dieses Wertes (z.B. auf 0,3 oder höher) bewirkt, dass das System mehr versiegelte Segmente vom überlasteten Delegator auf andere QueryNodes auslagert und so die Speichernutzung ausgleicht. Sie können auch versuchen, den Wert auf 1 zu erhöhen, was bedeutet, dass keine versiegelten Segmente in den Delegator-Knoten geladen werden.</li>
 </ul>
 <p>Wenn Sie den Cluster nicht neu starten wollen, können Sie die Konfiguration von milvus mit birdwatcher ändern:</p>
 <pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
@@ -72,7 +72,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">Woher weiß ich, ob Milvus erfolgreich gestartet wurde?</h4><p>Wenn Milvus unter Verwendung von Docker Compose gestartet wurde, führen Sie <code translate="no">docker ps</code> aus, um zu beobachten, wie viele Docker-Container ausgeführt werden, und um zu überprüfen, ob die Milvus-Dienste korrekt gestartet wurden.</p>
 <p>Bei Milvus standalone sollten Sie mindestens drei laufende Docker-Container beobachten können, von denen einer der Milvus-Dienst und die beiden anderen der etcd-Verwaltungs- und Speicherdienst sind. Weitere Informationen finden Sie unter <a href="/docs/de/install_standalone-docker.md">Installieren von Milvus Standalone</a>.</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">Warum weicht die Zeit in den Protokolldateien von der Systemzeit ab?</h4><p>Der Zeitunterschied ist in der Regel darauf zurückzuführen, dass der Host-Rechner nicht die Coordinated Universal Time (UTC) verwendet.</p>
-<p>Die Protokolldateien im Docker-Image verwenden standardmäßig die UTC-Zeit. Wenn Ihr Host-Rechner nicht UTC verwendet, kann dieses Problem auftreten.</p>
+<p>Die Protokolldateien im Docker-Abbild verwenden standardmäßig die UTC-Zeit. Wenn Ihr Host-Rechner nicht UTC verwendet, kann dieses Problem auftreten.</p>
 <h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">Woher weiß ich, ob meine CPU Milvus unterstützt?</h4><p>Die Rechenoperationen von Milvus hängen von der Unterstützung der CPU für den SIMD (Single Instruction, Multiple Data) Erweiterungsbefehlssatz ab. Ob Ihre CPU den SIMD-Erweiterungsbefehlssatz unterstützt, ist entscheidend für die Indexerstellung und die Vektorähnlichkeitssuche in Milvus. Stellen Sie sicher, dass Ihre CPU mindestens einen der folgenden SIMD-Befehlssätze unterstützt:</p>
 <ul>
 <li>SSE4.2</li>
@@ -127,7 +127,7 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <p>Um diese Fehler zu verstehen und zu beheben:</p>
 <ul>
 <li>Verstehen Sie, dass <code translate="no">len(str)</code> in Python die Anzahl der Zeichen angibt, nicht die Größe in Bytes.</li>
-<li>Für String-basierte Datentypen wie VARCHAR und JSON verwenden Sie <code translate="no">len(bytes(str, encoding='utf-8'))</code>, um die tatsächliche Größe in Bytes zu bestimmen, die Milvus für "max-length" verwendet.</li>
+<li>Für String-basierte Datentypen wie VARCHAR und JSON verwenden Sie <code translate="no">len(bytes(str, encoding='utf-8'))</code>, um die tatsächliche Größe in Bytes zu bestimmen, was Milvus für "max-length" verwendet.</li>
 </ul>
 <p>Beispiel in Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
@@ -142,6 +142,6 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Haben Sie noch Fragen?</h4><p>Sie können:</p>
 <ul>
-<li>Schauen Sie sich <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> auf GitHub an. Stellen Sie Fragen, tauschen Sie Ideen aus und helfen Sie anderen.</li>
-<li>Treten Sie unserem <a href="https://discuss.milvus.io/">Milvus Forum</a> oder <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> bei, um Unterstützung zu erhalten und sich mit unserer Open-Source-Community auszutauschen.</li>
+<li>Schauen Sie sich <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> auf GitHub an. Hier können Sie Fragen stellen, Ideen austauschen und anderen helfen.</li>
+<li>Treten Sie unserem <a href="https://discuss.milvus.io/">Milvus-Forum</a> oder <a href="https://discord.com/invite/8uyFbECzPX">Discord-Kanal</a> bei, um Unterstützung zu erhalten und sich mit unserer Open-Source-Community auszutauschen.</li>
 </ul>

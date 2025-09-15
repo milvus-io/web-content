@@ -142,6 +142,6 @@ Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">conne
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">まだ質問がありますか?</h4><p>可能です：</p>
 <ul>
-<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。質問をしたり、アイデアを共有したり、他の人を助けたりすることができます。</li>
-<li><a href="https://discuss.milvus.io/">Milvusフォーラムや</a> <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slackチャンネルに</a>参加して、オープンソースコミュニティに参加してください。</li>
+<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。自由に質問したり、アイデアを共有したり、他の人を助けたりしてください。</li>
+<li><a href="https://discuss.milvus.io/">Milvusフォーラムや</a> <a href="https://discord.com/invite/8uyFbECzPX">Discordチャンネルに</a>参加して、オープンソースコミュニティに参加してください。</li>
 </ul>

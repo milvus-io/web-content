@@ -38,7 +38,7 @@ title: 제품 FAQ
 <ul>
 <li>예를 들어 특정 파티션만 검색하려는 경우 모든 파티션을 로드할 필요는 없습니다. <code translate="no">load_partition()</code> 을 호출하여 원하는 파티션을 로드한 <em>다음</em> <code translate="no">search()</code> 메서드 호출에서 파티션을 지정합니다.</li>
 <li>모든 파티션을 검색하려면 <code translate="no">load_collection()</code> 을 호출하여 모든 파티션을 포함한 전체 컬렉션을 로드합니다.</li>
-<li>검색 전에 컬렉션 또는 특정 파티션을 로드하지 못하면 Milvus는 오류를 반환합니다.</li>
+<li>검색하기 전에 컬렉션 또는 특정 파티션을 로드하지 못하면 Milvus는 오류를 반환합니다.</li>
 </ul>
 <h4 id="Can-indexes-be-created-after-inserting-vectors" class="common-anchor-header">벡터를 삽입한 후 인덱스를 생성할 수 있나요?</h4><p>예. 이전에 <code translate="no">create_index()</code> 에 의해 컬렉션에 대한 인덱스가 생성된 경우, Milvus는 이후에 삽입된 벡터에 대한 인덱스를 자동으로 생성합니다. 그러나 새로 삽입된 벡터가 전체 세그먼트를 채우고 새로 생성된 인덱스 파일이 이전 인덱스 파일과 분리될 때까지 Milvus는 인덱스를 생성하지 않습니다.</p>
 <h4 id="How-are-the-FLAT-and-IVFFLAT-indexes-different" class="common-anchor-header">FLAT 인덱스와 IVF_FLAT 인덱스는 어떻게 다른가요?</h4><p>IVF_FLAT 인덱스는 벡터 공간을 목록 클러스터로 나눕니다. 기본 목록 값인 16,384에서 Milvus는 대상 벡터와 모든 16,384개 클러스터의 중심점 사이의 거리를 비교하여 가장 가까운 프로브 클러스터를 반환합니다. 그런 다음 Milvus는 대상 벡터와 선택한 클러스터의 벡터 사이의 거리를 비교하여 가장 가까운 벡터를 얻습니다. IVF_FLAT과 달리 FLAT은 대상 벡터와 다른 모든 벡터 사이의 거리를 직접 비교합니다.</p>
@@ -70,7 +70,7 @@ title: 제품 FAQ
 <ul>
 <li>바이너리 벡터: 이진 데이터는 이미지 처리와 정보 검색에 사용되는 0과 1의 시퀀스로 저장합니다.</li>
 <li>Float32 벡터: 소수점 이하 7자리 정도의 정밀도를 가진 기본 저장소입니다. Float64 값도 Float32 정밀도로 저장되므로 검색 시 정밀도 손실이 발생할 수 있습니다.</li>
-<li>Float16 및 BFloat16 벡터: 정밀도와 메모리 사용량이 감소합니다. Float16은 대역폭과 저장 공간이 제한된 애플리케이션에 적합하며, BFloat16은 정확도에 큰 영향을 주지 않으면서 계산 요구 사항을 줄이기 위해 딥 러닝에서 일반적으로 사용되는 범위와 효율성의 균형을 맞추는 데 적합합니다.</li>
+<li>Float16 및 BFloat16 벡터: 정밀도와 메모리 사용량이 감소합니다. Float16은 대역폭과 스토리지가 제한된 애플리케이션에 적합하며, BFloat16은 정확도에 큰 영향을 주지 않으면서 계산 요구 사항을 줄이기 위해 딥 러닝에서 일반적으로 사용되는 범위와 효율성의 균형을 맞추는 데 적합합니다.</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus는 스칼라 또는 벡터 필드에 대한 기본값 지정을 지원하나요?</h4><p>현재 Milvus 2.4.x는 스칼라 또는 벡터 필드에 대한 기본값 지정을 지원하지 않습니다. 이 기능은 향후 릴리스에 추가될 예정입니다.</p>
 <h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">Milvus에서 데이터를 삭제하면 저장 공간이 바로 해제되나요?</h4><p>아니요, Milvus에서 데이터를 삭제하면 저장 공간이 즉시 해제되지 않습니다. 데이터를 삭제하면 엔티티가 '논리적으로 삭제됨'으로 표시되지만 실제 공간은 즉시 해제되지 않을 수 있습니다. 그 이유는 다음과 같습니다:</p>
@@ -78,7 +78,7 @@ title: 제품 FAQ
 <li><strong>압축</strong>: Milvus는 백그라운드에서 데이터를 자동으로 압축합니다. 이 프로세스는 작은 데이터 세그먼트를 큰 데이터 세그먼트로 병합하고 논리적으로 삭제된 데이터(삭제 표시된 엔티티) 또는 TTL(Time-To-Live)을 초과한 데이터를 제거합니다. 그러나 압축은 새 세그먼트를 생성하는 동시에 이전 세그먼트를 "삭제됨"으로 표시합니다.</li>
 <li><strong>가비지 컬렉션</strong>: 가비지 컬렉션(GC)이라는 별도의 프로세스가 주기적으로 이러한 '삭제된' 세그먼트를 제거하여 해당 세그먼트가 차지하고 있던 스토리지 공간을 확보합니다. 이렇게 하면 저장 공간을 효율적으로 사용할 수 있지만 삭제와 공간 확보 사이에 약간의 지연이 발생할 수 있습니다.</li>
 </ul>
-<h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">플러시를 기다리지 않고 작업 후 즉시 삽입, 삭제 또는 업서트된 데이터를 볼 수 있나요?</h4><p>예. Milvus에서는 스토리지-컴퓨팅 분리 아키텍처로 인해 데이터 가시성이 플러시 작업과 직접적으로 연계되어 있지 않습니다. 일관성 수준을 사용하여 데이터 가독성을 관리할 수 있습니다.</p>
+<h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">플러시를 기다리지 않고 작업 후 즉시 삽입, 삭제 또는 업서트된 데이터를 볼 수 있나요?</h4><p>예. Milvus에서는 스토리지-컴퓨팅 분리 아키텍처로 인해 데이터 가시성이 플러시 작업과 직접 연결되지 않습니다. 일관성 수준을 사용하여 데이터 가독성을 관리할 수 있습니다.</p>
 <p>일관성 수준을 선택할 때는 일관성과 성능 간의 장단점을 고려하세요. 즉각적인 가시성이 필요한 작업의 경우 '강력' 일관성 수준을 사용하세요. 더 빠른 쓰기를 원한다면 약한 일관성(데이터가 즉시 표시되지 않을 수 있음)을 우선순위로 정하세요. 자세한 내용은 <a href="/docs/ko/consistency.md">일관성을</a> 참조하세요.</p>
 <h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">파티션 키 기능을 활성화한 후 Milvus에서 <code translate="no">num_partitions</code> 의 기본값은 무엇이며 그 이유는 무엇인가요?</h4><p>파티션 키 기능이 활성화되면 Milvus에서 <code translate="no">num_partitions</code> 의 기본값은 <code translate="no">16</code> 으로 설정됩니다. 이 기본값은 안정성 및 성능상의 이유로 선택됩니다. 필요에 따라 <code translate="no">create_collection</code> 함수에서 <code translate="no">num_partitions</code> 값을 지정하여 조정할 수 있습니다.</p>
 <h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">스칼라 필터링 표현식의 최대 길이 제한이 있나요?</h4><p>예. 스칼라 필터링 표현식의 최대 길이는 <code translate="no">milvus.yaml</code> 구성 파일에 정의된 RPC 전송 제한에 의해 제한됩니다. 특히 이 제한은 프록시 섹션 아래의 <code translate="no">serverMaxRecvSize</code> 매개변수에 의해 설정됩니다:</p>
@@ -118,5 +118,5 @@ value_set = <span class="hljs-built_in">set</span>()
 <h4 id="Still-have-questions" class="common-anchor-header">아직 질문이 있으신가요?</h4><p>문의하세요:</p>
 <ul>
 <li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 질문을 제기하고, 아이디어를 공유하고, 다른 사람들을 도울 수 있습니다.</li>
-<li><a href="https://slack.milvus.io/">Slack 커뮤니티에</a> 가입하여 지원을 찾고 오픈 소스 커뮤니티에 참여하세요.</li>
+<li><a href="https://discord.com/invite/8uyFbECzPX">Discord 채널에</a> 가입하여 지원을 찾고 오픈소스 커뮤니티에 참여하세요.</li>
 </ul>

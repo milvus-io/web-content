@@ -43,7 +43,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>تمثيل المتجهات المتفرقة</span> </span></p>
-<p>من خلال الترميز والتسجيل، يمكن تمثيل المستندات كمتجهات كيس من الكلمات، حيث يتوافق كل بُعد مع كلمة معينة في المفردات. فقط الكلمات الموجودة في المستند لها قيم غير صفرية، مما يؤدي إلى إنشاء تمثيل متجه متناثر. يمكن إنشاء متجهات متفرقة باستخدام طريقتين:</p>
+<p>مع الترميز والتسجيل، يمكن تمثيل المستندات كمتجهات كيس من الكلمات، حيث يتوافق كل بُعد مع كلمة معينة في المفردات. فقط الكلمات الموجودة في المستند لها قيم غير صفرية، مما يؤدي إلى إنشاء تمثيل متجه متناثر. يمكن إنشاء متجهات متفرقة باستخدام طريقتين:</p>
 <ul>
 <li><p><strong>التقنيات الإحصائية التقليدية،</strong> مثل <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (تردد المصطلح-تردد المستند العكسي) و <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> (أفضل 25 مطابقة)، حيث تقوم بتعيين أوزان للكلمات بناءً على تكرارها وأهميتها عبر مجموعة من المستندات. تقوم هذه الطرق بحساب إحصائيات بسيطة كدرجات لكل بُعد، والتي تمثل رمزًا مميزًا.  يوفر Milvus <strong>بحثًا</strong> مدمجًا في <strong>النص الكامل</strong> باستخدام طريقة BM25، والتي تقوم تلقائيًا بتحويل النص تلقائيًا إلى متجهات متناثرة، مما يلغي الحاجة إلى المعالجة اليدوية المسبقة. هذا الأسلوب مثالي للبحث القائم على الكلمات الرئيسية، حيث تكون الدقة والمطابقة التامة مهمة. راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a> لمزيد من المعلومات.</p></li>
 <li><p><strong>نماذج التضمين العصبي المتناثر</strong> هي طرق مكتسبة لتوليد تمثيلات متناثرة من خلال التدريب على مجموعات بيانات كبيرة. وهي عادةً ما تكون نماذج تعلُّم عميقة ذات بنية تحويلية، قادرة على توسيع المصطلحات وتقييمها بناءً على السياق الدلالي. تدعم Milvus أيضًا التضمينات المتفرقة التي يتم إنشاؤها خارجيًا من نماذج مثل <a href="https://arxiv.org/abs/2109.10086">SPLADE</a>. راجع <a href="/docs/ar/embeddings.md#Embedding-Overview">التضمينات</a> للحصول على التفاصيل.</include></p></li>
@@ -71,7 +71,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في الأقسام التالية، نوضح في الأقسام التالية كيفية تخزين المتجهات من نماذج التضمين المتناثرة المستفادة مثل SPLADE. إذا كنت تبحث عن شيء مكمّل للبحث الدلالي القائم على المتجهات الكثيفة، فإننا نوصي <a href="/docs/ar/full-text-search.md">بالبحث عن النص الكامل</a> مع BM25 على SPLADE من أجل البساطة. إذا كنت قد أجريت تقييمًا للجودة وخصصت لاستخدام SPLADE، يمكنك الرجوع إلى <a href="/docs/ar/embeddings.md#Embedding-Overview">Embeddings</a> حول كيفية توليد متجهات متفرقة باستخدام SPLADE.</p>
+    </button></h2><p>في الأقسام التالية، نوضح في الأقسام التالية كيفية تخزين المتجهات من نماذج التضمين المتناثرة المستفادة مثل SPLADE. إذا كنت تبحث عن شيء مكمّل للبحث الدلالي القائم على المتجهات الكثيفة، فإننا نوصي <a href="/docs/ar/full-text-search.md">بالبحث عن النص الكامل</a> مع BM25 على SPLADE من أجل البساطة. إذا كنت قد أجريت تقييمًا للجودة وخصصت استخدام SPLADE، يمكنك الرجوع إلى <a href="/docs/ar/embeddings.md#Embedding-Overview">Embeddings</a> حول كيفية توليد متجهات متفرقة باستخدام SPLADE.</p>
 <p>يدعم ميلفوس مدخلات المتجهات المتفرقة بالتنسيقات التالية:</p>
 <ul>
 <li><p><strong>قائمة القواميس (بتنسيق <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -85,7 +85,7 @@ sparse_vectors = [{<span class="hljs-number">27</span>: <span class="hljs-number
 <span class="hljs-comment"># Second vector: indices [3, 100] with values [0.8, 0.1]</span>
 indices = [[<span class="hljs-number">27</span>, <span class="hljs-number">100</span>, <span class="hljs-number">5369</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">100</span>]]
 values = [[<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.1</span>]]
-sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
+sparse_vectors = [csr_matrix((vals, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>قائمة المتجهات المتفرقة (على سبيل المثال <code translate="no">[(dimension_index, value)]</code>)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a list of iterables (e.g. tuples)</span>
@@ -111,7 +111,22 @@ sparse_vector = [
         ></path>
       </svg>
     </button></h2><p>قبل إنشاء مجموعة، تحتاج إلى تحديد مخطط المجموعة، الذي يحدد الحقول واختياريًا دالة لتحويل حقل نصي إلى تمثيل متجه متناثر مطابق.</p>
-<h3 id="Add-fields" class="common-anchor-header">إضافة حقول</h3><p>لاستخدام المتجهات المتفرقة في ميلفوس، تحتاج إلى إنشاء مجموعة بمخطط يتضمن الحقول التالية:</p>
+<h3 id="Add-fields" class="common-anchor-header">إضافة حقول<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لاستخدام المتجهات المتفرقة في ميلفوس، تحتاج إلى إنشاء مجموعة بمخطط يتضمن الحقول التالية:</p>
 <ul>
 <li><p>حقل <code translate="no">SPARSE_FLOAT_VECTOR</code> مخصص لتخزين المتجهات المتناثرة، إما أن يتم إنشاؤه تلقائيًا من حقل <code translate="no">VARCHAR</code> أو يتم توفيره مباشرة في بيانات الإدخال.</p></li>
 <li><p>عادة، يتم أيضًا تخزين النص الخام الذي يمثله المتجه المتناثر في المجموعة. يمكنك استخدام حقل <code translate="no">VARCHAR</code> لتخزين النص الخام.</p></li>
@@ -342,9 +357,11 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>يستخدم هذا المثال نوع الفهرس <code translate="no">SPARSE_INVERTED_INDEX</code> مع <code translate="no">IP</code> كمقياس. لمزيد من التفاصيل، راجع المصادر التالية:</p>
+<p>يستخدم هذا المثال نوع الفهرس <code translate="no">SPARSE_INVERTED_INDEX</code> مع <code translate="no">IP</code> كمقياس. لمزيد من التفاصيل، راجع الموارد التالية:</p>
 <ul>
-<li><a href="/docs/ar/metric.md">أنواع المقاييس</a>: أنواع المقاييس المدعومة لأنواع الحقول المختلفة</li>
+<li><p><a href="/docs/ar/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: شرح الفهرس ومعلماته</p></li>
+<li><p><a href="/docs/ar/metric.md">أنواع المقاييس</a>: أنواع المقاييس المدعومة لأنواع الحقول المختلفة</p></li>
+<li><p><a href="/docs/ar/full-text-search.md">البحث في النص الكامل</a>: برنامج تعليمي مفصل حول البحث في النص الكامل</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -361,7 +378,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد اكتمال إعدادات المتجهات المتفرقة والفهرس، يمكنك إنشاء مجموعة تحتوي على متجهات متفرقة. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
+    </button></h2><p>بمجرد اكتمال إعدادات المتجهات المتفرقة والفهرس، يمكنك إنشاء مجموعة تحتوي على متجهات متفرقة. يستخدم المثال أدناه طريقة <a href="/docs/ar/create-collection.md"><code translate="no">create_collection</code></a> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -433,6 +450,7 @@ client.createCollection(requestCreate);
     {
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>,
         <span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}
+    }
 ]
 
 client.insert(
@@ -607,6 +625,7 @@ queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32<
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;pk&quot;</span>],
     search_params=search_params,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -624,6 +643,7 @@ queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32<
         .data(Collections.singletonList(queryData))
         .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
         .searchParams(searchParams)
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .topK(<span class="hljs-number">3</span>)
         .outputFields(Collections.singletonList(<span class="hljs-string">&quot;pk&quot;</span>))
         .build());
@@ -639,7 +659,8 @@ System.out.println(searchR.getSearchResults());
     <span class="hljs-attr">data</span>: queryData,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
-    <span class="hljs-attr">params</span>: searchParams
+    <span class="hljs-attr">params</span>: searchParams,
+    <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
@@ -666,7 +687,11 @@ System.out.println(searchR.getSearchResults());
 <span class="hljs-comment">//   Pks:  string_data:{data:&quot;457270974427187705&quot;  data:&quot;457270974427187704&quot;}</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+    &quot;consistencyLevel&quot;: &quot;Strong&quot;
+}&#x27;</span>
+
+curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -676,7 +701,8 @@ System.out.println(searchR.getSearchResults());
     &quot;annsField&quot;: &quot;sparse_vector&quot;,
     &quot;limit&quot;: 3,
     &quot;searchParams&quot;: $searchParams,
-    &quot;outputFields&quot;: [&quot;pk&quot;]
+    &quot;outputFields&quot;: [&quot;pk&quot;],
+    &quot;params&quot;: $params
 }&#x27;</span>
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>

@@ -35,14 +35,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>稀疏向量是一种特殊的高维向量，其中大部分元素为零，只有少数维度具有非零值。如下图所示，稠密向量通常表示为连续数组，其中每个位置都有一个值（例如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其维度的索引，通常以<code translate="no">{ index: value}</code> 的键值对表示（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。</p>
+    </button></h2><p>稀疏向量是一种特殊的高维向量，其中大部分元素为零，只有少数维度的值不为零。如下图所示，稠密向量通常表示为连续数组，其中每个位置都有一个值（例如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其维度的索引，通常以<code translate="no">{ index: value}</code> 的键值对表示（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/sparse-vector-representation.png" alt="Sparse Vector Representation" class="doc-image" id="sparse-vector-representation" />
    </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
 <p>通过标记化和评分，文档可以表示为词袋向量，其中每个维度对应词汇表中的一个特定单词。只有文档中出现的单词才有非零值，从而形成稀疏向量表示法。稀疏向量可通过两种方法生成：</p>
 <ul>
-<li><p><strong>传统的统计技术</strong>，如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（词频-反向文档频率）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（最佳匹配 25），根据词在语料库中的频率和重要性为词分配权重。这些方法将简单的统计数据计算为每个维度的分数，而每个维度代表一个标记。  Milvus 利用 BM25 方法提供内置的<strong>全文搜索</strong>功能，该方法可自动将文本转换为稀疏向量，无需进行人工预处理。这种方法非常适合基于关键字的搜索，在这种搜索中，精确度和精确匹配非常重要。更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p></li>
+<li><p><strong>传统的统计技术</strong>，如<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（词频-反向文档频率）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>（最佳匹配 25），根据词在语料库中的频率和重要性为词分配权重。这些方法将简单的统计数据计算为每个维度的分数，而每个维度代表一个标记。  Milvus 利用 BM25 方法提供内置的<strong>全文搜索</strong>功能，可自动将文本转换为稀疏向量，无需人工预处理。这种方法非常适合基于关键字的搜索，在这种搜索中，精确度和精确匹配非常重要。更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p></li>
 <li><p><strong>神经稀疏嵌入模型</strong>是通过在大型数据集上训练生成稀疏表示的学习方法。它们通常是具有 Transformer 架构的深度学习模型，能够根据语义上下文对术语进行扩展和权衡。Milvus 还支持由<a href="https://arxiv.org/abs/2109.10086">SPLADE</a> 等模型外部生成的稀疏嵌入。详情请参阅<a href="/docs/zh/embeddings.md#Embedding-Overview">Embeddings</a>。</include></p></li>
 </ul>
 <p>稀疏向量和原文可以存储在 Milvus 中，以便高效检索。下图概述了整个流程。</p>
@@ -82,7 +82,7 @@ sparse_vectors = [{<span class="hljs-number">27</span>: <span class="hljs-number
 <span class="hljs-comment"># Second vector: indices [3, 100] with values [0.8, 0.1]</span>
 indices = [[<span class="hljs-number">27</span>, <span class="hljs-number">100</span>, <span class="hljs-number">5369</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">100</span>]]
 values = [[<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.1</span>]]
-sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
+sparse_vectors = [csr_matrix((vals, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>元组迭代列表（如<code translate="no">[(dimension_index, value)]</code>)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a list of iterables (e.g. tuples)</span>
@@ -108,7 +108,22 @@ sparse_vector = [
         ></path>
       </svg>
     </button></h2><p>创建 Collections 之前，需要指定 Collections Schema，其中定义字段，并可选择将文本字段转换为相应稀疏向量表示的函数。</p>
-<h3 id="Add-fields" class="common-anchor-header">添加字段</h3><p>要在 Milvus 中使用稀疏向量，需要创建一个模式包括以下字段的 Collections：</p>
+<h3 id="Add-fields" class="common-anchor-header">添加字段<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要在 Milvus 中使用稀疏向量，需要创建一个模式包括以下字段的 Collections：</p>
 <ul>
 <li><p>一个<code translate="no">SPARSE_FLOAT_VECTOR</code> 字段，预留用于存储稀疏向量，可以从<code translate="no">VARCHAR</code> 字段自动生成，也可以直接在输入数据中提供。</p></li>
 <li><p>通常，稀疏向量所代表的原始文本也会存储在 Collections 中。您可以使用<code translate="no">VARCHAR</code> 字段来存储原始文本。</p></li>
@@ -341,7 +356,9 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <button class="copy-code-btn"></button></code></pre>
 <p>本示例使用<code translate="no">SPARSE_INVERTED_INDEX</code> 索引类型和<code translate="no">IP</code> 作为度量。有关详细信息，请参阅以下资源：</p>
 <ul>
-<li><a href="/docs/zh/metric.md">度量类型</a>：不同字段类型支持的度量类型</li>
+<li><p><a href="/docs/zh/sparse-inverted-index.md">SPARSE_INVERTED_INDEX</a>: 已解释的索引及其参数</p></li>
+<li><p><a href="/docs/zh/metric.md">度量类型</a>：不同字段类型支持的度量类型</p></li>
+<li><p><a href="/docs/zh/full-text-search.md">全文搜索</a>：全文搜索的详细教程</p></li>
 </ul>
 <h2 id="Create-Collection" class="common-anchor-header">创建 Collections<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -358,7 +375,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>完成稀疏向量和索引设置后，就可以创建包含稀疏向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_collection</code> 的集合。</p>
+    </button></h2><p>完成稀疏向量和索引设置后，就可以创建包含稀疏向量的 Collections。下面的示例使用 <a href="/docs/zh/create-collection.md"><code translate="no">create_collection</code></a>方法创建一个名为<code translate="no">my_collection</code> 的 Collection。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -419,7 +436,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您必须为创建 Collections 时定义的所有字段提供数据，自动生成的字段除外（例如启用了<code translate="no">auto_id</code> 的主键）。如果使用内置的 BM25 函数自动生成稀疏向量，则在插入数据时也应省略稀疏向量字段。</p>
+    </button></h2><p>必须为创建 Collections 时定义的所有字段提供数据，自动生成的字段除外（例如启用了<code translate="no">auto_id</code> 的主键）。如果使用内置的 BM25 函数自动生成稀疏向量，则在插入数据时也应省略稀疏向量字段。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -430,6 +447,7 @@ client.createCollection(requestCreate);
     {
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>,
         <span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}
+    }
 ]
 
 client.insert(
@@ -604,6 +622,7 @@ queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32<
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;pk&quot;</span>],
     search_params=search_params,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -621,6 +640,7 @@ queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32<
         .data(Collections.singletonList(queryData))
         .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
         .searchParams(searchParams)
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .topK(<span class="hljs-number">3</span>)
         .outputFields(Collections.singletonList(<span class="hljs-string">&quot;pk&quot;</span>))
         .build());
@@ -636,7 +656,8 @@ System.out.println(searchR.getSearchResults());
     <span class="hljs-attr">data</span>: queryData,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
-    <span class="hljs-attr">params</span>: searchParams
+    <span class="hljs-attr">params</span>: searchParams,
+    <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
@@ -663,7 +684,11 @@ System.out.println(searchR.getSearchResults());
 <span class="hljs-comment">//   Pks:  string_data:{data:&quot;457270974427187705&quot;  data:&quot;457270974427187704&quot;}</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+    &quot;consistencyLevel&quot;: &quot;Strong&quot;
+}&#x27;</span>
+
+curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -673,7 +698,8 @@ System.out.println(searchR.getSearchResults());
     &quot;annsField&quot;: &quot;sparse_vector&quot;,
     &quot;limit&quot;: 3,
     &quot;searchParams&quot;: $searchParams,
-    &quot;outputFields&quot;: [&quot;pk&quot;]
+    &quot;outputFields&quot;: [&quot;pk&quot;],
+    &quot;params&quot;: $params
 }&#x27;</span>
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}</span>

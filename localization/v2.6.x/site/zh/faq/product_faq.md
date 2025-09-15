@@ -33,7 +33,7 @@ title: 产品常见问题
 <p>如果出现这种情况，查询时将返回哪个数据副本仍是未知行为。这一限制将在今后的版本中修复。</p>
 <h4 id="What-is-the-maximum-length-of-self-defined-entity-primary-keys" class="common-anchor-header">自定义实体主键的最大长度是多少？</h4><p>实体主键必须是非负 64 位整数。</p>
 <h4 id="What-is-the-maximum-amount-of-data-that-can-be-added-per-insert-operation" class="common-anchor-header">每次插入操作可添加的最大数据量是多少？</h4><p>插入操作的大小不得超过 1,024 MB。这是 gRPC 规定的限制。</p>
-<h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果为搜索指定了分区，Milvus 只搜索指定的分区。</p>
+<h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果指定了搜索的分区，Milvus 只搜索指定的分区。</p>
 <h4 id="Does-Milvus-need-to-load-the-entire-collection-when-partitions-are-specified-for-a-search" class="common-anchor-header">为搜索指定分区时，Milvus 是否需要加载整个 Collections？</h4><p>这取决于搜索需要哪些数据。搜索前必须加载搜索结果中可能显示的所有分区。</p>
 <ul>
 <li>例如，如果只想搜索特定分区，则不需要加载所有分区。调用<code translate="no">load_partition()</code> 加载目标分区，<em>然后</em>在<code translate="no">search()</code> 方法调用中指定分区。</li>
@@ -69,7 +69,7 @@ title: 产品常见问题
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvus 如何处理向量数据类型和精度？</h4><p>Milvus 支持二进制、Float32、Float16 和 BFloat16 向量类型。</p>
 <ul>
 <li>二进制向量：将二进制数据存储为 0 和 1 的序列，用于图像处理和信息检索。</li>
-<li>Float32 向量：默认存储精度约为十进制 7 位数。即使是 Float64 值也是以 Float32 精度存储的，这可能会导致检索时的精度损失。</li>
+<li>Float32 向量：默认存储精度约为小数点后 7 位。即使是 Float64 值，也是以 Float32 精度存储的，因此在检索时可能会丢失精度。</li>
 <li>Float16 和 BFloat16 向量：可降低精度和内存使用量。Float16 适用于带宽和存储有限的应用，而 BFloat16 则兼顾了范围和效率，常用于深度学习，在不显著影响精度的情况下降低计算要求。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支持为标量或向量场指定默认值？</h4><p>目前，Milvus 2.4.x 不支持为标量或向量场指定默认值。该功能计划在未来版本中推出。</p>
@@ -118,5 +118,5 @@ value_set = <span class="hljs-built_in">set</span>()
 <h4 id="Still-have-questions" class="common-anchor-header">仍有问题？</h4><p>您可以</p>
 <ul>
 <li>在 GitHub 上查看<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。欢迎提出问题、分享想法并帮助其他用户。</li>
-<li>加入我们的<a href="https://slack.milvus.io/">Slack 社区</a>，寻求支持并参与我们的开源社区。</li>
+<li>加入我们的<a href="https://discord.com/invite/8uyFbECzPX">Discord 频道</a>，寻求支持并与我们的开源社区互动。</li>
 </ul>
